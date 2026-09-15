@@ -1385,7 +1385,7 @@
     "new_c": 1
   },
   "reader_products_refresh": {
-    "completed_at": "2026-09-15T07:27:57Z",
+    "completed_at": "2026-09-15T08:09:48Z",
     "matrix": true,
     "risks_opportunities": true,
     "external_shocks": true,
@@ -93679,7 +93679,7 @@
       "first_seen": "2026-09-06T13:37Z",
       "new_this_scan": false,
       "retrace_status": "unchanged",
-      "retrace_at": "2026-09-15T07:27:57Z"
+      "retrace_at": "2026-09-15T08:09:48Z"
     }
   ],
   "external_shock_watch": [],
@@ -94225,16 +94225,16 @@
     "high_order_candidates_dormant": 3,
     "high_order_candidates_new_this_run": 11,
     "high_order_candidates_updated_this_run": 4,
-    "active_corpus_total": 570,
-    "active_strand_a": 302,
+    "active_corpus_total": 568,
+    "active_strand_a": 300,
     "active_strand_b": 120,
     "active_strand_c": 148,
-    "deep_scan_v2_verified": 591,
-    "deep_scan_v2_pending": 86,
-    "historical_deep_scan_v2_verified": 64,
-    "historical_deep_scan_v2_pending": 618,
-    "historical_active_a_context": 470,
-    "inactive_drop": 104,
+    "deep_scan_v2_verified": 601,
+    "deep_scan_v2_pending": 76,
+    "historical_deep_scan_v2_verified": 101,
+    "historical_deep_scan_v2_pending": 603,
+    "historical_active_a_context": 491,
+    "inactive_drop": 106,
     "inactive_unverifiable": 3,
     "inactive_manual_verification": 0,
     "inactive_duplicates": 1,
@@ -94722,10 +94722,10 @@
   },
   "shock_inference": {
     "profile_version": "23.3-context-weighted-shocks-v3",
-    "evaluated_at": "2026-09-15T07:27:57Z",
-    "new_count": 1,
-    "updated_count": 2,
-    "unchanged_count": 8,
+    "evaluated_at": "2026-09-15T08:09:48Z",
+    "new_count": 0,
+    "updated_count": 3,
+    "unchanged_count": 7,
     "dynamic_shocks": [
       {
         "id": "emergent:infrastructure:security_reclassification",
@@ -94910,7 +94910,7 @@
           },
           {
             "identity": "url:https://doi.org/10.1093/scipol/scae054",
-            "row": "H074",
+            "row": "H082",
             "strand": "H",
             "role": "Historical structural context",
             "evidence_role": "historical",
@@ -94934,7 +94934,7 @@
           },
           {
             "identity": "url:https://www.vr.se/english/mandates/international-work/responsibility-within-horizon-europe/horizon-europes-work-programme-for-research-infrastructure.html",
-            "row": "H071",
+            "row": "H079",
             "strand": "H",
             "role": "Historical structural context",
             "evidence_role": "historical",
@@ -94973,13 +94973,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-12T07:30Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
         "fingerprint": "d81e27f3148ee694",
         "new_this_scan": false,
-        "updated_this_scan": true,
-        "status": "updated",
-        "retrace_status": "rebuilt",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "updated_this_scan": false,
+        "status": "unchanged",
+        "retrace_status": "unchanged",
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "emergent:quantum:security_reclassification",
@@ -95128,34 +95128,36 @@
             "a_context_evidence": []
           },
           {
-            "identity": "url:https://defence-industry-space.ec.europa.eu/eu-space/research-development-and-innovation/quantum-technologies_en",
-            "row": "H323",
+            "identity": "url:https://www.gmfus.org/sites/default/files/2026-07/entangled%20interests%20in%20quantum%20technology.pdf",
+            "row": "H023",
             "strand": "H",
             "role": "Historical coupling context",
             "evidence_role": "historical",
             "analytical_weight": 0.45,
-            "title": "Quantum Technologies",
-            "source": "European Commission — ec.europa.eu",
-            "date": "2020-01-01",
-            "link": "https://defence-industry-space.ec.europa.eu/eu-space/research-development-and-innovation/quantum-technologies_en",
-            "quality": 83,
+            "title": "Entangled Interests in Quantum Technology",
+            "source": "German Marshall Fund of the United States",
+            "date": "2026-01-01",
+            "link": "https://www.gmfus.org/sites/default/files/2026-07/Entangled%20Interests%20in%20Quantum%20Technology.pdf",
+            "quality": 89,
             "new_this_scan": false,
-            "core_message": "More on Quantum Technologies Quantum Gravimetry Since the first quantum revolution in the early twentieth century, a whole range of applications in the field of scientific research but also in our daily life has emerged; laser, electronics, satellite-based positioning, medical imagery, etc.",
+            "core_message": "July 2026 Entangled Interests in Quantum Technology The United States, Japan, and Europe should align on innovation and economic security.",
             "geo_evidence": [
-              "dual-use",
-              "strategic dependencies"
+              "geopolit",
+              "economic security",
+              "technological sovereignty",
+              "derisk"
             ],
             "ri_evidence": [
-              "horizon europe",
-              "r&d",
-              "technological capabilities",
-              "quantum + research"
+              "research funding",
+              "innovation ecosystem",
+              "research and development",
+              "deep tech"
             ],
             "a_context_evidence": []
           },
           {
             "identity": "url:https://ufm.dk/media/mcwh4uik/strategy-for-quantum-technology.pdf",
-            "row": "H177",
+            "row": "H191",
             "strand": "H",
             "role": "Historical structural context",
             "evidence_role": "historical",
@@ -95180,7 +95182,7 @@
           },
           {
             "identity": "url:https://www.vttresearch.com/en/news-and-ideas/new-finnish-quantum-institute-brings-together-top-expertise-research-and",
-            "row": "H273",
+            "row": "H289",
             "strand": "H",
             "role": "Historical structural context",
             "evidence_role": "historical",
@@ -95282,7 +95284,7 @@
         "primary_source_count": 3,
         "pressure_source_count": 25,
         "coupling_count": 4,
-        "context_coupling_count": 1,
+        "context_coupling_count": 2,
         "weak_signal_context_count": 2,
         "historical_context_count": 3,
         "context_weight_total": 1.95,
@@ -95293,13 +95295,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-06T20:05Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
-        "fingerprint": "93afec96e1b013a4",
+        "last_updated_at": "2026-09-15T08:09:48Z",
+        "fingerprint": "5db05e7620c36354",
         "new_this_scan": false,
-        "updated_this_scan": false,
-        "status": "unchanged",
-        "retrace_status": "unchanged",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "updated_this_scan": true,
+        "status": "updated",
+        "retrace_status": "rebuilt",
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "emergent:ip:acquisition",
@@ -95467,7 +95469,7 @@
           },
           {
             "identity": "url:https://cset.georgetown.edu/wp-content/uploads/cset-tracking-ai-investment.pdf",
-            "row": "H319",
+            "row": "H335",
             "strand": "H",
             "role": "Historical coupling context",
             "evidence_role": "historical",
@@ -95495,7 +95497,7 @@
           },
           {
             "identity": "url:https://doi.org/10.1016/j.techfore.2018.05.002",
-            "row": "H387",
+            "row": "H407",
             "strand": "H",
             "role": "Historical structural context",
             "evidence_role": "historical",
@@ -95515,7 +95517,7 @@
           },
           {
             "identity": "url:https://doi.org/10.1007/s10961-025-10222-w",
-            "row": "H051",
+            "row": "H057",
             "strand": "H",
             "role": "Historical structural context",
             "evidence_role": "historical",
@@ -95526,12 +95528,9 @@
             "link": "https://doi.org/10.1007/s10961-025-10222-w",
             "quality": 92,
             "new_this_scan": false,
-            "core_message": "Abstract Publicly funded business incubators serve as critical intermediaries in technology transfer ecosystems, yet their effectiveness is often constrained by bureaucratic requirements stemming from their government support.",
+            "core_message": "Incubator selection and coaching practices are associated with differences in attracting venture-capital and angel investment.",
             "geo_evidence": [],
-            "ri_evidence": [
-              "innovation policy",
-              "technology transfer"
-            ],
+            "ri_evidence": [],
             "a_context_evidence": []
           }
         ],
@@ -95552,13 +95551,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-13T22:20:43Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
         "fingerprint": "ceb1ec7a881a5777",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "emergent:startups:security_reclassification",
@@ -95573,7 +95572,7 @@
           "Separate primary retained evidence shows a live mechanism for a sudden security reclassification.",
           "Primary evidence contains 3 direct capability × pressure coupling record(s).",
           "3 recent weak-signal item(s) point in the same direction; each is capped at 30% of a primary evidence item and none satisfies a primary threshold.",
-          "2 historical Strand-A item(s) provide structural context; they cannot serve as the current trigger.",
+          "3 historical Strand-A item(s) provide structural context; they cannot serve as the current trigger.",
           "The scenario becomes a shock only if the response is slower than the disruption."
         ],
         "conditions": [
@@ -95618,7 +95617,7 @@
           },
           {
             "identity": "url:https://ellis.eu/publication/2007-do-theories-of-syntactic-processing-difficulty-scale-up-to-naturally-o",
-            "row": "A298",
+            "row": "A296",
             "strand": "A",
             "role": "Primary evidence",
             "evidence_role": "primary",
@@ -95732,8 +95731,36 @@
             "a_context_evidence": []
           },
           {
+            "identity": "url:https://www.gmfus.org/sites/default/files/2026-07/entangled%20interests%20in%20quantum%20technology.pdf",
+            "row": "H023",
+            "strand": "H",
+            "role": "Historical coupling context",
+            "evidence_role": "historical",
+            "analytical_weight": 0.45,
+            "title": "Entangled Interests in Quantum Technology",
+            "source": "German Marshall Fund of the United States",
+            "date": "2026-01-01",
+            "link": "https://www.gmfus.org/sites/default/files/2026-07/Entangled%20Interests%20in%20Quantum%20Technology.pdf",
+            "quality": 89,
+            "new_this_scan": false,
+            "core_message": "July 2026 Entangled Interests in Quantum Technology The United States, Japan, and Europe should align on innovation and economic security.",
+            "geo_evidence": [
+              "geopolit",
+              "economic security",
+              "technological sovereignty",
+              "derisk"
+            ],
+            "ri_evidence": [
+              "research funding",
+              "innovation ecosystem",
+              "research and development",
+              "deep tech"
+            ],
+            "a_context_evidence": []
+          },
+          {
             "identity": "url:https://www.vinnova.se/en/p/preparation-for-an-application-to-the-horizon-europe-eic-accelerator-programme",
-            "row": "H087",
+            "row": "H095",
             "strand": "H",
             "role": "Historical structural context",
             "evidence_role": "historical",
@@ -95754,7 +95781,7 @@
           },
           {
             "identity": "url:https://eic.ec.europa.eu/document/download/7c4fe037-bc9c-4cfb-be3e-69ab566e8ccd_en?filename=eic_esg_policy_board_recommendation_nov2024.pdf",
-            "row": "H157",
+            "row": "H171",
             "strand": "H",
             "role": "Historical structural context",
             "evidence_role": "historical",
@@ -95986,10 +96013,10 @@
         "primary_source_count": 3,
         "pressure_source_count": 25,
         "coupling_count": 3,
-        "context_coupling_count": 1,
+        "context_coupling_count": 2,
         "weak_signal_context_count": 3,
-        "historical_context_count": 2,
-        "context_weight_total": 1.8,
+        "historical_context_count": 3,
+        "context_weight_total": 2.25,
         "context_score_bonus": 5.0,
         "official_trigger_present": true,
         "best_quality": 98,
@@ -95997,13 +96024,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-14T00:04:04Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
-        "fingerprint": "7481931ea7519a68",
+        "last_updated_at": "2026-09-15T08:09:48Z",
+        "fingerprint": "6577b124357a2b37",
         "new_this_scan": false,
-        "updated_this_scan": false,
-        "status": "unchanged",
-        "retrace_status": "unchanged",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "updated_this_scan": true,
+        "status": "updated",
+        "retrace_status": "rebuilt",
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "emergent:funding:security_reclassification",
@@ -96189,7 +96216,7 @@
           },
           {
             "identity": "url:https://www.aka.fi/en/about-the-rcf/whats-new/blog2/2025/considering-research-security-is-part-of-responsible-research-funding",
-            "row": "H107",
+            "row": "H115",
             "strand": "H",
             "role": "Historical coupling context",
             "evidence_role": "historical",
@@ -96216,7 +96243,7 @@
           },
           {
             "identity": "url:https://www.earto.eu/earto-inputs-on-healthcare-research-and-innovation-for-the-next-strategic-plan-of-horizon-europe-2025-2027",
-            "row": "H103",
+            "row": "H111",
             "strand": "H",
             "role": "Historical structural context",
             "evidence_role": "historical",
@@ -96428,7 +96455,7 @@
         "primary_source_count": 3,
         "pressure_source_count": 25,
         "coupling_count": 9,
-        "context_coupling_count": 3,
+        "context_coupling_count": 5,
         "weak_signal_context_count": 3,
         "historical_context_count": 2,
         "context_weight_total": 1.8,
@@ -96439,13 +96466,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-06T20:05Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
         "fingerprint": "6276ea81e595269e",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
-        "retrace_status": "rebuilt",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_status": "unchanged",
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "emergent:collaboration:security_reclassification",
@@ -96613,7 +96640,7 @@
           },
           {
             "identity": "url:https://www.aka.fi/en/about-the-rcf/whats-new/blog2/2025/considering-research-security-is-part-of-responsible-research-funding",
-            "row": "H107",
+            "row": "H115",
             "strand": "H",
             "role": "Historical coupling context",
             "evidence_role": "historical",
@@ -96640,7 +96667,7 @@
           },
           {
             "identity": "url:https://doi.org/10.1093/scipol/scae054",
-            "row": "H074",
+            "row": "H082",
             "strand": "H",
             "role": "Historical structural context",
             "evidence_role": "historical",
@@ -96664,7 +96691,7 @@
           },
           {
             "identity": "url:https://doi.org/10.1093/scipol/scae012",
-            "row": "H122",
+            "row": "H133",
             "strand": "H",
             "role": "Historical structural context",
             "evidence_role": "historical",
@@ -96874,7 +96901,7 @@
         "primary_source_count": 3,
         "pressure_source_count": 25,
         "coupling_count": 8,
-        "context_coupling_count": 4,
+        "context_coupling_count": 7,
         "weak_signal_context_count": 3,
         "historical_context_count": 3,
         "context_weight_total": 2.25,
@@ -96885,287 +96912,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-06T20:05Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
         "fingerprint": "a4539dd64b6b4f5f",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-15T07:27:57Z"
-      },
-      {
-        "id": "emergent:biotech:data_access",
-        "asset_id": "biotech",
-        "pressure_id": "data_access",
-        "title": "A cross-border data restriction breaks Europe’s biotechnology and clinical research",
-        "plainly": "Europe relies on biotechnology and clinical research. Separate primary evidence shows that a cross-border data-access restriction can change access quickly. Recent weak signals and historical material may strengthen the context, but neither can establish the shock on its own.",
-        "second_order": "Projects may keep their grants and institutions but still lose time, access or usable capacity while a replacement is found.",
-        "why_easy_to_miss": "The hypothesis appears when durable European capability evidence and a separately evidenced external pressure are read as one chain; low-weight current signals and history are then used only as context.",
-        "reasoning": [
-          "Primary retained evidence shows European reliance on or expansion of biotechnology and clinical research.",
-          "Separate primary retained evidence shows a live mechanism for a cross-border data-access restriction.",
-          "Primary evidence contains 1 direct capability × pressure coupling record(s).",
-          "2 recent weak-signal item(s) point in the same direction; each is capped at 30% of a primary evidence item and none satisfies a primary threshold.",
-          "2 historical Strand-A item(s) provide structural context; they cannot serve as the current trigger.",
-          "The scenario becomes a shock only if the response is slower than the disruption."
-        ],
-        "conditions": [
-          "Europe materially depends on biotechnology and clinical research for current or planned work.",
-          "A cross-border data-access restriction reaches the supplier, service, partner or rule that the European capability depends on.",
-          "Europe cannot substitute, reroute or absorb the change before projects begin losing usable capacity."
-        ],
-        "case_against": [
-          "Only one primary retained record currently links the European capability directly to the outside pressure.",
-          "The primary direct connection is concentrated in one source, so independent confirmation is still weak.",
-          "The primary corpus contains 1 strong sign(s) of substitution, resilience or policy response that could absorb the shock.",
-          "Recent media/weak-signal corroboration is intentionally down-weighted and cannot substitute for primary evidence.",
-          "The scenario still depends on the disruption arriving faster than Europe can respond."
-        ],
-        "prevention_actions": [
-          "Keep compliant European data and trial routes available when an outside provider or jurisdiction is blocked.",
-          "Build enough cross-border European capacity that one country or provider is not indispensable.",
-          "Keep a compliant European route for essential research data and analysis."
-        ],
-        "watch_for": [
-          "A provider or government restricts cross-border access to data used by European research.",
-          "Projects stop pooling or analysing data that previously moved across borders."
-        ],
-        "net_assessment": "Plausible, but important parts of the primary trigger or connection still need confirmation.",
-        "inference_score": 88,
-        "support": [
-          {
-            "identity": "url:https://doi.org/10.12688/openreseurope.23459.2",
-            "row": "A108",
-            "strand": "A",
-            "role": "Primary coupling evidence",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "A sustainable platform for federated health data access, AI innovation, and regulatory acceptance in alignment with the European Health Data Space principles",
-            "source": "Open Research Europe",
-            "date": "2026-08-26",
-            "link": "https://doi.org/10.12688/openreseurope.23459.2",
-            "quality": 88,
-            "new_this_scan": false,
-            "core_message": "The project presents a modular, standards-based federated platform using privacy-by-design analytics, with lung cancer as its demonstrator, and aims at regulatory and health technology assessment acceptance of real-world evidence.",
-            "geo_evidence": [],
-            "ri_evidence": [],
-            "a_context_evidence": []
-          },
-          {
-            "identity": "url:https://www.sitra.fi/wp-content/uploads/2026/06/valo_the-nordic-model_interim-report.pdf",
-            "row": "A253",
-            "strand": "A",
-            "role": "Primary evidence",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "The Nordic model for collaboration on health data: insights from an evolving process - Sitra",
-            "source": "Sitra — Finnish Innovation Fund",
-            "date": "2026-06-03",
-            "link": "https://www.sitra.fi/wp-content/uploads/2026/06/VALO_The-Nordic-model_Interim-Report.pdf",
-            "quality": 98,
-            "new_this_scan": false,
-            "core_message": "Translating these advantages into effective cross- border collaboration has nonetheless proven difficult.",
-            "geo_evidence": [],
-            "ri_evidence": [
-              "research and innovation",
-              "research collaboration"
-            ],
-            "a_context_evidence": [
-              "international_coordination",
-              "research collaboration",
-              "cross-border",
-              "reliance"
-            ]
-          },
-          {
-            "identity": "url:https://doi.org/10.1093/ckj/sfag257",
-            "row": "A179",
-            "strand": "A",
-            "role": "European capability: biotechnology and clinical research",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "Coordinated clinical trial networks in nephrology: strengthening research infrastructure and improving trial delivery",
-            "source": "Clinical Kidney Journal",
-            "date": "2026-08-06",
-            "link": "https://doi.org/10.1093/ckj/sfag257",
-            "quality": 92,
-            "new_this_scan": false,
-            "core_message": "A coordinated national network can streamline feasibility, contracting and site outreach, with promising early delivery experience.",
-            "geo_evidence": [],
-            "ri_evidence": [],
-            "a_context_evidence": []
-          },
-          {
-            "identity": "url:https://www.eit.europa.eu/our-activities/knowledge-centre",
-            "row": "A286",
-            "strand": "A",
-            "role": "External mechanism: a cross-border data-access restriction",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "Welcome to our Knowledge Centre",
-            "source": "European Institute of Innovation and Technology",
-            "date": "2026-09-14",
-            "link": "https://www.eit.europa.eu/our-activities/knowledge-centre",
-            "quality": 98,
-            "new_this_scan": false,
-            "core_message": "Discover how the EIT, Europe’s largest innovation ecosystem, is shaping the future.",
-            "geo_evidence": [
-              "data sovereignty"
-            ],
-            "ri_evidence": [
-              "innovation ecosystem",
-              "artificial intelligence + innovation"
-            ],
-            "a_context_evidence": [
-              "technology position / dependency",
-              "data sovereignty",
-              "eit",
-              "EU"
-            ]
-          },
-          {
-            "identity": "url:https://news.google.com/rss/articles/cbmitafbvv95cuxqnmnwvdbflu5vwdjlevu1t2nju1q1wmnlavvhdejjbwrmvxzlngh0q1bxn2u1ynzlbzdvuut0betlb2hwdm5ernh3qxbktwcwsexyv2yxvuhswemts2zrsvpgqv9ycxl5bwyxnkjir0drsxndbg4tohotr3lregtrc1a5mdleylnnbmfjbdzta2vfwxzjalhhnezwzhpgmkf4ry1kvgpqxzlkafc1m1nxt2pkyzc?oc=5",
-            "row": "C095",
-            "strand": "C",
-            "role": "Recent weak-signal context",
-            "evidence_role": "weak_signal",
-            "analytical_weight": 0.3,
-            "title": "Horizon Europe needs tailored biotech funding, report says",
-            "source": "Science|Business",
-            "date": "2026-09-08",
-            "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQNmNwVDBfLU5VWDJLeVU1T2NjU1Q1WmNlaVVHdEJJbWRmVXZLNGh0Q1BXN2U1YnZlbzdvUUt0bEtlb2hwdm5ERnh3QXBKTWcwSExYV2YxVUhSWEMtS2ZrSVpGQV9YcXl5bWYxNkJiR0dRSXNDbG4tOHotR3lreGtrc1A5MDlEYlNNbmFJbDZTa2VfWXZjalhHNEZWZHpGMkF4Ry1kVGpqXzlkaFc1M1NXT2pKYzc?oc=5",
-            "quality": 90,
-            "new_this_scan": false,
-            "core_message": "The reported analysis finds current Horizon-style instruments fit biotech development poorly and recommends more tailored support.",
-            "geo_evidence": [],
-            "ri_evidence": [],
-            "a_context_evidence": []
-          },
-          {
-            "identity": "url:https://news.google.com/rss/articles/cbmizafbvv95cuxqvfz1ekloq1g2b3fjblbedhnvr2uzedhqae0xu2tvsenqohjosdzpowetmdbkx3zudwl2nghmumnmblpmm1rpa0zvbdjktkvdee5lnmnwvnvjchy2ze9beux0rtdsounszvj0z0vubgntck1jz3j0oed6ahjmvnznefjrnurotzjjnhflwjnuovhkq2vmdggzvzu4ulp2ews1twyyv3jonzzoyxo0tetmzxu5n1rnaxzlyxbcsg51t3pxrwg0ujrvbuc0chq?oc=5",
-            "row": "C137",
-            "strand": "C",
-            "role": "Recent weak-signal context",
-            "evidence_role": "weak_signal",
-            "analytical_weight": 0.3,
-            "title": "EU governments set to address biotech and economic security",
-            "source": "Research Professional News",
-            "date": "2026-07-28T07:00Z",
-            "link": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQVFZ1ekloQ1g2b3FJblBEdHNvR2UzeDhQaE0xU2tVSENqOHJOSDZPOWEtMDBKX3ZUdWl2NGhmUmNMblpMM1Rpa0ZvbDJKTkVDeE5LNmNwVnVJcHY2ZE9BeUx0RTdSOUNsZVJ0Z0VubGNTck1JZ3J0OEd6aHJmVnZneFJrNUROTzJjNHFLWjNuOVhKQ2VmdGgzVzU4Ulp2eWs1TWYyV3JoNzZoYXo0TEtMZXU5N1RNaXZLYXBCSG51T3pxRWg0UjRvbUc0cHQ?oc=5",
-            "quality": 90,
-            "new_this_scan": false,
-            "core_message": "EU governments set to address biotech and economic security.",
-            "geo_evidence": [],
-            "ri_evidence": [],
-            "a_context_evidence": []
-          },
-          {
-            "identity": "url:https://publications.jrc.ec.europa.eu/repository/handle/jrc139415",
-            "row": "H114",
-            "strand": "H",
-            "role": "Historical structural context",
-            "evidence_role": "historical",
-            "analytical_weight": 0.45,
-            "title": "Emerging Biotechnologies in Europe: Foresight for Policy",
-            "source": "JRC Publications Repository",
-            "date": "2024-12-02",
-            "link": "https://publications.jrc.ec.europa.eu/repository/handle/JRC139415",
-            "quality": 92,
-            "new_this_scan": false,
-            "core_message": "The European Union (EU) is at an important point for developing its industrial biotechnology (IB) sector, as emerging biotechnologies advances merge with traditional industry.",
-            "geo_evidence": [],
-            "ri_evidence": [
-              "research infrastructure",
-              "biotechnology + research",
-              "biotech + research",
-              "biotech + innovation"
-            ],
-            "a_context_evidence": []
-          },
-          {
-            "identity": "url:https://allea.org/wp-content/uploads/2020/10/allea_gen_editing_crop_2020.pdf",
-            "row": "H297",
-            "strand": "H",
-            "role": "Historical structural context",
-            "evidence_role": "historical",
-            "analytical_weight": 0.45,
-            "title": "Academies’ report reviews debate on genome editing for crop improvement - ALLEA",
-            "source": "ALLEA",
-            "date": "2020-10-29",
-            "link": "https://allea.org/wp-content/uploads/2020/10/ALLEA_Gen_Editing_Crop_2020.pdf",
-            "quality": 92,
-            "new_this_scan": false,
-            "core_message": "Genome Editing for Crop Improvement ALLEA Symposium Report | October 2020 Published in Berlin by ALLEA - All European Academies October 2020 Lead authors Dr.",
-            "geo_evidence": [],
-            "ri_evidence": [
-              "research and development",
-              "biotech + innovative"
-            ],
-            "a_context_evidence": []
-          }
-        ],
-        "against": [
-          {
-            "identity": "url:https://doi.org/10.1111/bioe.70159",
-            "row": "A264",
-            "strand": "A",
-            "role": "Primary evidence that could absorb or prevent the shock",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "The Role of Social Value in Data‐Intensive Health Research",
-            "source": "Bioethics",
-            "date": "2026-07-16",
-            "link": "https://doi.org/10.1111/bioe.70159",
-            "quality": 92,
-            "new_this_scan": false,
-            "core_message": "Social value cannot by itself justify lowering consent standards; that move requires meaningful involvement and control for data contributors.",
-            "geo_evidence": [],
-            "ri_evidence": [],
-            "a_context_evidence": []
-          }
-        ],
-        "prevention_evidence": [
-          {
-            "identity": "url:https://doi.org/10.1111/bioe.70159",
-            "row": "A264",
-            "strand": "A",
-            "role": "Primary evidence that could absorb or prevent the shock",
-            "evidence_role": "primary",
-            "analytical_weight": 1.0,
-            "title": "The Role of Social Value in Data‐Intensive Health Research",
-            "source": "Bioethics",
-            "date": "2026-07-16",
-            "link": "https://doi.org/10.1111/bioe.70159",
-            "quality": 92,
-            "new_this_scan": false,
-            "core_message": "Social value cannot by itself justify lowering consent standards; that move requires meaningful involvement and control for data contributors.",
-            "geo_evidence": [],
-            "ri_evidence": [],
-            "a_context_evidence": []
-          }
-        ],
-        "source_count": 4,
-        "primary_source_count": 4,
-        "pressure_source_count": 2,
-        "coupling_count": 1,
-        "context_coupling_count": 0,
-        "weak_signal_context_count": 2,
-        "historical_context_count": 2,
-        "context_weight_total": 1.5,
-        "context_score_bonus": 4.1,
-        "official_trigger_present": true,
-        "best_quality": 98,
-        "average_quality": 94,
-        "fresh_coupling": false,
-        "fresh_context": false,
-        "first_inferred_at": "2026-09-15T05:22:05Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
-        "fingerprint": "845ddd404fbf052d",
-        "new_this_scan": false,
-        "updated_this_scan": false,
-        "status": "unchanged",
-        "retrace_status": "unchanged",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "emergent:space:security_reclassification",
@@ -97334,7 +97087,7 @@
           },
           {
             "identity": "url:https://ufm.dk/media/brvab5uc/strategy-for-space-research-and-innovation.pdf",
-            "row": "H118",
+            "row": "H128",
             "strand": "H",
             "role": "Historical structural context",
             "evidence_role": "historical",
@@ -97357,7 +97110,7 @@
           },
           {
             "identity": "url:https://doi.org/10.1007/s11192-016-2053-8",
-            "row": "H433",
+            "row": "H454",
             "strand": "H",
             "role": "Historical structural context",
             "evidence_role": "historical",
@@ -97394,13 +97147,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-14T11:40:16Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
         "fingerprint": "636da9d47567afd6",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "emergent:biotech:security_reclassification",
@@ -97473,18 +97226,10 @@
             "link": "https://www.sitra.fi/wp-content/uploads/2026/06/VALO_The-Nordic-model_Interim-Report.pdf",
             "quality": 98,
             "new_this_scan": false,
-            "core_message": "Translating these advantages into effective cross- border collaboration has nonetheless proven difficult.",
+            "core_message": "The report identifies governance and coordination practices for building interoperable Nordic health-data collaboration.",
             "geo_evidence": [],
-            "ri_evidence": [
-              "research and innovation",
-              "research collaboration"
-            ],
-            "a_context_evidence": [
-              "international_coordination",
-              "research collaboration",
-              "cross-border",
-              "reliance"
-            ]
+            "ri_evidence": [],
+            "a_context_evidence": []
           },
           {
             "identity": "url:https://doi.org/10.1093/ckj/sfag257",
@@ -97577,8 +97322,26 @@
             "a_context_evidence": []
           },
           {
+            "identity": "url:https://www.iss.europa.eu/publications/commentary/new-transatlantic-trade-and-tech-agenda-economic-security-standards-can",
+            "row": "H086",
+            "strand": "H",
+            "role": "Historical structural context",
+            "evidence_role": "historical",
+            "analytical_weight": 0.45,
+            "title": "A new transatlantic trade and tech agenda: economic security standards can address the EU’s and Washington’s concerns about China",
+            "source": "EU Institute for Security Studies",
+            "date": "2025-01-20",
+            "link": "https://www.iss.europa.eu/publications/commentary/new-transatlantic-trade-and-tech-agenda-economic-security-standards-can",
+            "quality": 100,
+            "new_this_scan": false,
+            "core_message": "Common standards could align selected economic-security tools while preserving European interests and limiting uncontrolled decoupling.",
+            "geo_evidence": [],
+            "ri_evidence": [],
+            "a_context_evidence": []
+          },
+          {
             "identity": "url:https://merics.org/en/comment/three-franco-german-priorities-europes-china-policy-economic-security-proactive-innovation",
-            "row": "H226",
+            "row": "H240",
             "strand": "H",
             "role": "Historical structural context",
             "evidence_role": "historical",
@@ -97600,24 +97363,6 @@
               "research and innovation",
               "technology transfer"
             ],
-            "a_context_evidence": []
-          },
-          {
-            "identity": "url:https://op.europa.eu/o/opportal-service/download-handler?identifier=7348956d-1389-11f1-8870-01aa75ed71a1&format=pdf&language=en&productionsystem=cellar&part=",
-            "row": "H004",
-            "strand": "H",
-            "role": "Historical structural context",
-            "evidence_role": "historical",
-            "analytical_weight": 0.45,
-            "title": "Research security monitor 2025 - Publications Office of the EU",
-            "source": "EU Publications Office",
-            "date": "2026-02-27",
-            "link": "https://op.europa.eu/o/opportal-service/download-handler?identifier=7348956d-1389-11f1-8870-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
-            "quality": 96,
-            "new_this_scan": false,
-            "core_message": "The monitor maps current policy approaches and highlights uneven capacity and continuing implementation needs.",
-            "geo_evidence": [],
-            "ri_evidence": [],
             "a_context_evidence": []
           }
         ],
@@ -97712,13 +97457,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-09T12:05Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
-        "fingerprint": "b1af7e4d7a2ddb13",
+        "last_updated_at": "2026-09-15T08:09:48Z",
+        "fingerprint": "964bd40f9f7604c8",
         "new_this_scan": false,
-        "updated_this_scan": false,
-        "status": "unchanged",
-        "retrace_status": "unchanged",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "updated_this_scan": true,
+        "status": "updated",
+        "retrace_status": "rebuilt",
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "emergent:quantum:conflict",
@@ -97762,7 +97507,7 @@
         "support": [
           {
             "identity": "url:https://defence-industry-space.ec.europa.eu/eu115-million-programme-agile-and-rapid-defence-innovation-agile-2026-03-26_en",
-            "row": "A296",
+            "row": "A294",
             "strand": "A",
             "role": "Primary coupling evidence",
             "evidence_role": "primary",
@@ -97870,7 +97615,7 @@
           },
           {
             "identity": "url:https://ufm.dk/media/mcwh4uik/strategy-for-quantum-technology.pdf",
-            "row": "H177",
+            "row": "H191",
             "strand": "H",
             "role": "Historical structural context",
             "evidence_role": "historical",
@@ -97895,7 +97640,7 @@
           },
           {
             "identity": "url:https://www.vttresearch.com/en/news-and-ideas/new-finnish-quantum-institute-brings-together-top-expertise-research-and",
-            "row": "H273",
+            "row": "H289",
             "strand": "H",
             "role": "Historical structural context",
             "evidence_role": "historical",
@@ -98008,13 +97753,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
         "fingerprint": "1900aefc69113159",
-        "new_this_scan": true,
+        "new_this_scan": false,
         "updated_this_scan": false,
-        "status": "new",
-        "retrace_status": "newly_inferred",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "status": "unchanged",
+        "retrace_status": "unchanged",
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "emergent:open_science:conflict",
@@ -98112,7 +97857,7 @@
           },
           {
             "identity": "url:https://defence-industry-space.ec.europa.eu/eu115-million-programme-agile-and-rapid-defence-innovation-agile-2026-03-26_en",
-            "row": "A296",
+            "row": "A294",
             "strand": "A",
             "role": "External mechanism: an armed-conflict escalation",
             "evidence_role": "primary",
@@ -98166,7 +97911,7 @@
           },
           {
             "identity": "url:https://era.gv.at/open-positions/seconded-national-expert-policy-officer-european-open-science-cloud-and-fair-data-services-rtd-a-4",
-            "row": "H101",
+            "row": "H109",
             "strand": "H",
             "role": "Historical structural context",
             "evidence_role": "historical",
@@ -98227,7 +97972,7 @@
           },
           {
             "identity": "url:https://erc.europa.eu/news-events/magazine-article/world-data-few-hands",
-            "row": "A292",
+            "row": "A290",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -98319,7 +98064,7 @@
           },
           {
             "identity": "url:https://erc.europa.eu/news-events/magazine-article/world-data-few-hands",
-            "row": "A292",
+            "row": "A290",
             "strand": "A",
             "role": "Primary evidence that could absorb or prevent the shock",
             "evidence_role": "primary",
@@ -98405,22 +98150,22 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-14T00:04:04Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
         "fingerprint": "85caed37144bc86d",
         "new_this_scan": false,
-        "updated_this_scan": true,
-        "status": "updated",
-        "retrace_status": "rebuilt",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "updated_this_scan": false,
+        "status": "unchanged",
+        "retrace_status": "unchanged",
+        "retrace_at": "2026-09-15T08:09:48Z"
       }
     ]
   },
   "high_order_inference": {
     "profile_version": "v23.5-generative-trends-level45",
-    "evaluated_at": "2026-09-15T07:27:57Z",
+    "evaluated_at": "2026-09-15T08:09:48Z",
     "new_count": 0,
     "updated_count": 0,
-    "qualified_count": 12,
+    "qualified_count": 11,
     "watch_count": 18,
     "dormant_count": 0,
     "trigger_summary": {
@@ -98447,8 +98192,7 @@
       "trend": [
         "l45:opposing_movements_accelerate_govern:accelerate-govern-compute-ai",
         "l45:opposing_movements_collaborate_derisk:collaborate-derisk-research-security",
-        "l45:opposing_movements_accelerate_govern:accelerate-govern-startups-scaleup",
-        "l45:opposing_movements_open_protect:open-protect-openness"
+        "l45:opposing_movements_accelerate_govern:accelerate-govern-startups-scaleup"
       ]
     },
     "candidate_search_policy": "Only missing-link and falsifier searches are fed back. No candidate bypasses normal A/B/C admission.",
@@ -98615,9 +98359,9 @@
         ],
         "touched_this_scan": false,
         "reader_eligible": true,
-        "historical_records": 16,
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
+        "historical_records": 15,
+        "first_seen_at": "2026-09-15T08:09:48Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
         "fingerprint": "7da2922d94d8462c",
         "new_this_scan": false,
         "updated_this_scan": false,
@@ -98625,8 +98369,8 @@
         "missed_detection_scans": 0,
         "reader_title": "Europe keeps pursuing technological sovereignty/strategic autonomy without a settled way to measure whether it is succeeding.",
         "reader_summary": "The pattern is repeated invocation of the goal alongside sparse, fragmented or contested measurement.",
-        "retrace_status": "rebuilt",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_status": "unchanged",
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "l45:opposing_movements_accelerate_govern:accelerate-govern-compute-ai",
@@ -98647,26 +98391,14 @@
           "right_movement"
         ],
         "missing_links": [],
-        "primary_records": 28,
-        "primary_sources": 27,
+        "primary_records": 26,
+        "primary_sources": 25,
         "context_records": 0,
         "counter_records": 0,
         "denial_tested": true,
         "counter_penalty": 0,
         "synthesis_across_records": true,
         "support": [
-          {
-            "identity": "url:https://doi.org/10.1177/09717218261480257",
-            "role": "Acceleration movement",
-            "strand": "A",
-            "title": "AI Adoption, Structural Constraints and Inclusive Growth: Evidence from Greece",
-            "source": "Science, Technology and Society",
-            "date": "2026-09-13",
-            "link": "https://doi.org/10.1177/09717218261480257",
-            "quality": 89,
-            "new_this_scan": true,
-            "analytical_weight": 1.0
-          },
           {
             "identity": "url:https://ecipe.org/publications/copyright-trap/#_ftnref9",
             "role": "Acceleration movement",
@@ -98776,14 +98508,14 @@
             "analytical_weight": 1.0
           },
           {
-            "identity": "url:https://www.eit.europa.eu/our-activities/knowledge-centre",
-            "role": "Governance movement",
+            "identity": "url:https://www.interface-eu.org/publications/download/public-compute-applied-ai-startups",
+            "role": "Acceleration movement",
             "strand": "A",
-            "title": "Welcome to our Knowledge Centre",
-            "source": "European Institute of Innovation and Technology",
-            "date": "2026-09-14",
-            "link": "https://www.eit.europa.eu/our-activities/knowledge-centre",
-            "quality": 96,
+            "title": "Making Public Compute Work for Applied AI Startups",
+            "source": "Interface Europe",
+            "date": "2026-07-01",
+            "link": "https://www.interface-eu.org/publications/download/public-compute-applied-ai-startups",
+            "quality": 89,
             "new_this_scan": false,
             "analytical_weight": 1.0
           },
@@ -98894,6 +98626,18 @@
             "quality": 89,
             "new_this_scan": false,
             "analytical_weight": 1.0
+          },
+          {
+            "identity": "url:http://arxiv.org/abs/2603.22912",
+            "role": "Governance movement",
+            "strand": "A",
+            "title": "From the AI Act to a European AI Agency: Completing the Union's Regulatory Architecture",
+            "source": "Croatian Yearbook of European Law & Policy",
+            "date": "2025-12-29",
+            "link": "http://arxiv.org/abs/2603.22912",
+            "quality": 82,
+            "new_this_scan": false,
+            "analytical_weight": 1.0
           }
         ],
         "context": [],
@@ -98906,7 +98650,7 @@
           "Europe research innovation AI/compute deployment waits for settled standards",
           "Europe research innovation AI/compute governance no longer affects deployment pace"
         ],
-        "touched_this_scan": true,
+        "touched_this_scan": false,
         "reader_eligible": true,
         "generic_grammar": true,
         "reader_title": "Accelerating AI/compute while governing ai/compute.",
@@ -98920,34 +98664,34 @@
           "right_role": "Governance movement",
           "left_plain": "Investment, deployment or scale pressure is increasing around AI/compute.",
           "right_plain": "Standards, governance, testing or safeguards are also being built around AI/compute.",
-          "left_pull": 61,
-          "right_pull": 39,
-          "raw_left_pull": 61,
-          "raw_right_pull": 39,
+          "left_pull": 62,
+          "right_pull": 38,
+          "raw_left_pull": 62,
+          "raw_right_pull": 38,
           "left_range": [
-            61,
-            61
+            62,
+            62
           ],
           "right_range": [
-            39,
-            39
+            38,
+            38
           ],
-          "left_actions": 17,
-          "right_actions": 11,
-          "left_sources": 17,
-          "right_sources": 11,
-          "left_adjusted_points": 17.0,
-          "right_adjusted_points": 11.0
+          "left_actions": 16,
+          "right_actions": 10,
+          "left_sources": 16,
+          "right_sources": 10,
+          "left_adjusted_points": 16.0,
+          "right_adjusted_points": 10.0
         },
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
-        "fingerprint": "a239556a403ea0a9",
+        "first_seen_at": "2026-09-15T08:09:48Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
+        "fingerprint": "12d1f3794e303d8d",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
-        "retrace_status": "unchanged",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_status": "rebuilt",
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "l45:opposing_movements_collaborate_derisk:collaborate-derisk-research-security",
@@ -99176,15 +98920,15 @@
           "left_adjusted_points": 2.5,
           "right_adjusted_points": 15.25
         },
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
+        "first_seen_at": "2026-09-15T08:09:48Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
         "fingerprint": "2667059ab52cfca5",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "l45:opposing_movements_accelerate_govern:accelerate-govern-startups-scaleup",
@@ -99413,15 +99157,15 @@
           "left_adjusted_points": 11.5,
           "right_adjusted_points": 2.5
         },
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
+        "first_seen_at": "2026-09-15T08:09:48Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
         "fingerprint": "f96c0a0b80412dce",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "l45:opposing_movements_accelerate_govern:accelerate-govern-funding-programme",
@@ -99698,216 +99442,15 @@
           "left_adjusted_points": 5.25,
           "right_adjusted_points": 10.375
         },
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
+        "first_seen_at": "2026-09-15T08:09:48Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
         "fingerprint": "b252990ab86648b0",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-15T07:27:57Z"
-      },
-      {
-        "id": "l45:opposing_movements_open_protect:open-protect-openness",
-        "grammar_id": "opposing_movements_open_protect",
-        "product": "trend",
-        "inferential_distance": 4,
-        "topic_key": "openness",
-        "topic_label": "openness",
-        "status": "qualified",
-        "score": 94,
-        "primary_role_coverage": 1.0,
-        "required_roles": [
-          "left_movement",
-          "right_movement"
-        ],
-        "covered_roles": [
-          "left_movement",
-          "right_movement"
-        ],
-        "missing_links": [],
-        "primary_records": 10,
-        "primary_sources": 10,
-        "context_records": 0,
-        "counter_records": 0,
-        "denial_tested": true,
-        "counter_penalty": 0,
-        "synthesis_across_records": true,
-        "support": [
-          {
-            "identity": "url:https://allea.org/wp-content/uploads/2026/06/joint-statement-on-open-science-1.pdf",
-            "role": "Opening movement",
-            "strand": "A",
-            "title": "Joint Statement on Open Science: Open Science as a pillar for strengthening the European Research Area",
-            "source": "ALLEA",
-            "date": "2026-05-13",
-            "link": "https://allea.org/wp-content/uploads/2026/06/Joint-statement-on-Open-Science-1.pdf",
-            "quality": 96,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
-          {
-            "identity": "url:https://www.rathenau.nl/en/knowledge-and-innovation-transitions/challenge-driven-knowledge-and-innovation-policy/geopolitics-science-policy",
-            "role": "Opening movement",
-            "strand": "A",
-            "title": "Geopolitics in Science Policy: Dilemmas for the mobilisation of research",
-            "source": "Rathenau Instituut",
-            "date": "2026-05-04",
-            "link": "https://www.rathenau.nl/en/knowledge-and-innovation-transitions/challenge-driven-knowledge-and-innovation-policy/geopolitics-science-policy",
-            "quality": 96,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
-          {
-            "identity": "url:https://erc.europa.eu/news-events/magazine-article/world-data-few-hands",
-            "role": "Opening movement",
-            "strand": "A",
-            "title": "A world of data in a few hands",
-            "source": "European Research Council",
-            "date": "2026-04-29",
-            "link": "https://erc.europa.eu/news-events/magazine-article/world-data-few-hands",
-            "quality": 96,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
-          {
-            "identity": "url:https://www.cost.eu/publication/cost-annual-report-2025",
-            "role": "Opening movement",
-            "strand": "A",
-            "title": "COST Annual Report 2025",
-            "source": "COST Association",
-            "date": "2026-03-31",
-            "link": "https://www.cost.eu/publication/cost-annual-report-2025/",
-            "quality": 96,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
-          {
-            "identity": "url:https://doi.org/10.1057/s41307-026-00465-z",
-            "role": "Opening movement",
-            "strand": "A",
-            "title": "The Neo-Academic Cold War: Political Traumas and Transnational Paranoia",
-            "source": "Higher Education Policy",
-            "date": "2026-08-10",
-            "link": "https://doi.org/10.1057/s41307-026-00465-z",
-            "quality": 89,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
-          {
-            "identity": "url:https://doi.org/10.1016/j.telpol.2026.103222",
-            "role": "Opening movement",
-            "strand": "A",
-            "title": "Enabling the EU's digital Sovereignty: A Europe-level quantum internet as the key infrastructure for a European digital polity",
-            "source": "Telecommunications Policy",
-            "date": "2026-04-20",
-            "link": "https://doi.org/10.1016/j.telpol.2026.103222",
-            "quality": 89,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
-          {
-            "identity": "url:https://doi.org/10.1093/scipol/scag021",
-            "role": "Opening movement",
-            "strand": "A",
-            "title": "Structured content analysis of open access book policies: European university and research funder approaches",
-            "source": "Science and Public Policy",
-            "date": "2026-03-26",
-            "link": "https://doi.org/10.1093/scipol/scag021",
-            "quality": 89,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
-          {
-            "identity": "url:https://era.gv.at/news-items/the-guild-urges-safeguards-as-fp10-opens-to-dual-use-research",
-            "role": "Protection movement",
-            "strand": "A",
-            "title": "The Guild urges safeguards as FP10 opens to dual-use research",
-            "source": "ERA Portal Austria",
-            "date": "2026-07-01",
-            "link": "https://era.gv.at/news-items/the-guild-urges-safeguards-as-fp10-opens-to-dual-use-research/",
-            "quality": 96,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
-          {
-            "identity": "url:https://cepr.org/system/files/publication-files/306781-the_financeability_of_europe_s_strategic_ambitions.pdf",
-            "role": "Protection movement",
-            "strand": "A",
-            "title": "The Financeability of Europe's Strategic Ambitions",
-            "source": "VoxEU / CEPR",
-            "date": "2026-09-10",
-            "link": "https://cepr.org/system/files/publication-files/306781-the_financeability_of_europe_s_strategic_ambitions.pdf",
-            "quality": 89,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
-          {
-            "identity": "url:https://doi.org/10.1002/cep4.70033",
-            "role": "Protection movement",
-            "strand": "A",
-            "title": "Norm Transformation in EU Research Security: A Pragmatist Approach",
-            "source": "Contemporary European Politics",
-            "date": "2026-03-18",
-            "link": "https://doi.org/10.1002/cep4.70033",
-            "quality": 89,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          }
-        ],
-        "context": [],
-        "against": [],
-        "support_queries": [
-          "Europe research innovation openness open access sharing action",
-          "Europe research innovation openness security safeguard dual use action"
-        ],
-        "falsifier_queries": [
-          "Europe research innovation openness common rule removes openness security tradeoff",
-          "Europe research innovation openness evidence safeguards do not constrain access"
-        ],
-        "touched_this_scan": false,
-        "reader_eligible": true,
-        "generic_grammar": true,
-        "reader_title": "Opening openness while protecting openness.",
-        "reader_summary": "Current primary evidence shows simultaneous pressure to widen access and to add security or dual-use safeguards around the same European R&I object.",
-        "trend_balance": {
-          "family": "open_protect",
-          "object_key": "openness",
-          "left_title": "Opening openness",
-          "right_title": "Protecting openness",
-          "left_role": "Opening movement",
-          "right_role": "Protection movement",
-          "left_plain": "Access, sharing or openness is being widened around openness.",
-          "right_plain": "Security, dual-use or control conditions are tightening around openness.",
-          "left_pull": 70,
-          "right_pull": 30,
-          "raw_left_pull": 70,
-          "raw_right_pull": 30,
-          "left_range": [
-            70,
-            70
-          ],
-          "right_range": [
-            30,
-            30
-          ],
-          "left_actions": 7,
-          "right_actions": 3,
-          "left_sources": 7,
-          "right_sources": 3,
-          "left_adjusted_points": 7.0,
-          "right_adjusted_points": 3.0
-        },
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
-        "fingerprint": "5fc195ea3412eaf5",
-        "new_this_scan": false,
-        "updated_this_scan": false,
-        "lifecycle": "seeded",
-        "missed_detection_scans": 0,
-        "retrace_status": "unchanged",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "l45:omitted_dependency_chain:compute-ai-materials-energy",
@@ -99941,18 +99484,6 @@
         "synthesis_across_records": true,
         "support": [
           {
-            "identity": "url:https://doi.org/10.1177/09717218261480257",
-            "role": "commitment",
-            "strand": "A",
-            "title": "AI Adoption, Structural Constraints and Inclusive Growth: Evidence from Greece",
-            "source": "Science, Technology and Society",
-            "date": "2026-09-13",
-            "link": "https://doi.org/10.1177/09717218261480257",
-            "quality": 89,
-            "new_this_scan": true,
-            "analytical_weight": 1.0
-          },
-          {
             "identity": "url:https://www.interface-eu.org/publications/download/germany-case-study",
             "role": "commitment",
             "strand": "A",
@@ -99972,6 +99503,18 @@
             "source": "Kortowski Przegląd Prawniczy",
             "date": "2026-08-27",
             "link": "https://doi.org/10.31648/kpp.12912",
+            "quality": 89,
+            "new_this_scan": false,
+            "analytical_weight": 1.0
+          },
+          {
+            "identity": "url:https://doi.org/10.12688/openreseurope.23459.2",
+            "role": "commitment",
+            "strand": "A",
+            "title": "A sustainable platform for federated health data access, AI innovation, and regulatory acceptance in alignment with the European Health Data Space principles",
+            "source": "Open Research Europe",
+            "date": "2026-08-26",
+            "link": "https://doi.org/10.12688/openreseurope.23459.2",
             "quality": 89,
             "new_this_scan": false,
             "analytical_weight": 1.0
@@ -99999,18 +99542,6 @@
             "quality": 89,
             "new_this_scan": false,
             "analytical_weight": 1.0
-          },
-          {
-            "identity": "url:https://doi.org/10.12688/openreseurope.23459.2",
-            "role": "propagation",
-            "strand": "A",
-            "title": "A sustainable platform for federated health data access, AI innovation, and regulatory acceptance in alignment with the European Health Data Space principles",
-            "source": "Open Research Europe",
-            "date": "2026-08-26",
-            "link": "https://doi.org/10.12688/openreseurope.23459.2",
-            "quality": 89,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
           }
         ],
         "context": [
@@ -100020,7 +99551,7 @@
             "strand": "C",
             "title": "Finland-based AI factory to support researchers from all fields",
             "source": "Science|Business",
-            "date": "2026-09-14",
+            "date": "2026-09-15",
             "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQQW1aaEFxU1RLeFNpWnpjaHhZQV93RnRwazBkMFNoUktldGY3VlhXSkwtOF9TeVVqV082MU51YlRQVFZ1YXBSUEhSMy1oUHdSN29MOUUxaGdIakpTX0M3dGQzRWpHdnl0WmZDelFicHA1OGlybGtTMjAtbURUbGZsOEtJSEYwMVFHT2V3YjRYX0Z5TGNuZHU1WlFTVy1sMW1qYkVudGNEQ1NVdnU1UEE?oc=5",
             "quality": 82,
             "new_this_scan": true,
@@ -100101,15 +99632,15 @@
         "generic_grammar": true,
         "reader_title": "A hidden energy/materials dependency could transmit a shock into European AI/compute.",
         "reader_summary": "The candidate exists only because primary evidence explicitly connects the asset to the dependency, separately establishes a disruption route, and shows a mechanism by which effects could spread beyond one isolated case.",
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
-        "fingerprint": "5098c728b0e03100",
+        "first_seen_at": "2026-09-15T08:09:48Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
+        "fingerprint": "12250460a4f88953",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
-        "retrace_status": "unchanged",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_status": "rebuilt",
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:infrastructure-speed-vs-safeguard",
@@ -100222,7 +99753,7 @@
             "strand": "C",
             "title": "Finland-based AI factory to support researchers from all fields",
             "source": "Science|Business",
-            "date": "2026-09-14",
+            "date": "2026-09-15",
             "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQQW1aaEFxU1RLeFNpWnpjaHhZQV93RnRwazBkMFNoUktldGY3VlhXSkwtOF9TeVVqV082MU51YlRQVFZ1YXBSUEhSMy1oUHdSN29MOUUxaGdIakpTX0M3dGQzRWpHdnl0WmZDelFicHA1OGlybGtTMjAtbURUbGZsOEtJSEYwMVFHT2V3YjRYX0Z5TGNuZHU1WlFTVy1sMW1qYkVudGNEQ1NVdnU1UEE?oc=5",
             "quality": 82,
             "new_this_scan": true,
@@ -100303,15 +99834,15 @@
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on research infrastructure may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
+        "first_seen_at": "2026-09-15T08:09:48Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
         "fingerprint": "fe4a825f26df9b82",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "l45:latent_substitute_channel:generic-eureka",
@@ -100474,7 +100005,7 @@
             "strand": "C",
             "title": "Finland-based AI factory to support researchers from all fields",
             "source": "Science|Business",
-            "date": "2026-09-14",
+            "date": "2026-09-15",
             "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQQW1aaEFxU1RLeFNpWnpjaHhZQV93RnRwazBkMFNoUktldGY3VlhXSkwtOF9TeVVqV082MU51YlRQVFZ1YXBSUEhSMy1oUHdSN29MOUUxaGdIakpTX0M3dGQzRWpHdnl0WmZDelFicHA1OGlybGtTMjAtbURUbGZsOEtJSEYwMVFHT2V3YjRYX0Z5TGNuZHU1WlFTVy1sMW1qYkVudGNEQ1NVdnU1UEE?oc=5",
             "quality": 82,
             "new_this_scan": true,
@@ -100554,15 +100085,15 @@
         "generic_grammar": true,
         "reader_title": "EUREKA may already be an overlooked channel for a problem another European R&I instrument has not resolved.",
         "reader_summary": "The opportunity is retained only when the unresolved need, the adjacent structure, a live route into an independently evidenced receiving instrument, and a real precedent are all present.",
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
+        "first_seen_at": "2026-09-15T08:09:48Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
         "fingerprint": "6c6636344ae5af31",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
-        "retrace_status": "rebuilt",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_status": "unchanged",
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "l45:latent_substitute_channel:generic-business-finland",
@@ -100701,7 +100232,7 @@
             "strand": "C",
             "title": "Finland-based AI factory to support researchers from all fields",
             "source": "Science|Business",
-            "date": "2026-09-14",
+            "date": "2026-09-15",
             "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQQW1aaEFxU1RLeFNpWnpjaHhZQV93RnRwazBkMFNoUktldGY3VlhXSkwtOF9TeVVqV082MU51YlRQVFZ1YXBSUEhSMy1oUHdSN29MOUUxaGdIakpTX0M3dGQzRWpHdnl0WmZDelFicHA1OGlybGtTMjAtbURUbGZsOEtJSEYwMVFHT2V3YjRYX0Z5TGNuZHU1WlFTVy1sMW1qYkVudGNEQ1NVdnU1UEE?oc=5",
             "quality": 82,
             "new_this_scan": true,
@@ -100781,15 +100312,15 @@
         "generic_grammar": true,
         "reader_title": "Business Finland may already be an overlooked channel for a problem another European R&I instrument has not resolved.",
         "reader_summary": "The opportunity is retained only when the unresolved need, the adjacent structure, a live route into an independently evidenced receiving instrument, and a real precedent are all present.",
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
+        "first_seen_at": "2026-09-15T08:09:48Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
         "fingerprint": "7daabeae0b9e48c3",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
-        "retrace_status": "rebuilt",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_status": "unchanged",
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "l45:practice_precedes_doctrine:generic-standards-testing",
@@ -101006,15 +100537,15 @@
         "generic_grammar": true,
         "reader_title": "Formal policy around standards/testing may be codifying a practice that was already operating.",
         "reader_summary": "The sequence, not topic similarity, is the finding: dated primary evidence places practice before doctrine, and the later framework explicitly names the earlier instrument while separate evidence shows that practice had real effects.",
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
+        "first_seen_at": "2026-09-15T08:09:48Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
         "fingerprint": "d668e05580af5d4c",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "l45:practice_precedes_doctrine:generic-funding-programme",
@@ -101219,15 +100750,15 @@
         "generic_grammar": true,
         "reader_title": "Formal policy around research funding/programmes may be codifying a practice that was already operating.",
         "reader_summary": "The sequence, not topic similarity, is the finding: dated primary evidence places practice before doctrine, and the later framework explicitly names the earlier instrument while separate evidence shows that practice had real effects.",
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
+        "first_seen_at": "2026-09-15T08:09:48Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
         "fingerprint": "8e8e6afc3ed3cfcf",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "l45:comparative_advantage_bottleneck:generic-compute-ai",
@@ -101366,7 +100897,7 @@
             "strand": "C",
             "title": "Finland-based AI factory to support researchers from all fields",
             "source": "Science|Business",
-            "date": "2026-09-14",
+            "date": "2026-09-15",
             "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQQW1aaEFxU1RLeFNpWnpjaHhZQV93RnRwazBkMFNoUktldGY3VlhXSkwtOF9TeVVqV082MU51YlRQVFZ1YXBSUEhSMy1oUHdSN29MOUUxaGdIakpTX0M3dGQzRWpHdnl0WmZDelFicHA1OGlybGtTMjAtbURUbGZsOEtJSEYwMVFHT2V3YjRYX0Z5TGNuZHU1WlFTVy1sMW1qYkVudGNEQ1NVdnU1UEE?oc=5",
             "quality": 82,
             "new_this_scan": true,
@@ -101446,15 +100977,15 @@
         "generic_grammar": true,
         "reader_title": "Europe may have an underused advantage in AI/compute if a tractable bottleneck is the real constraint.",
         "reader_summary": "This opportunity is retained only when separate evidence shows a current weakness, an asset Europe already possesses, a fixable bottleneck around that asset, and measurable payoff evidence.",
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
+        "first_seen_at": "2026-09-15T08:09:48Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
         "fingerprint": "62cdbb9d593ec5bc",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "l45:comparative_advantage_bottleneck:generic-infrastructure",
@@ -101569,7 +101100,7 @@
             "strand": "C",
             "title": "Finland-based AI factory to support researchers from all fields",
             "source": "Science|Business",
-            "date": "2026-09-14",
+            "date": "2026-09-15",
             "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQQW1aaEFxU1RLeFNpWnpjaHhZQV93RnRwazBkMFNoUktldGY3VlhXSkwtOF9TeVVqV082MU51YlRQVFZ1YXBSUEhSMy1oUHdSN29MOUUxaGdIakpTX0M3dGQzRWpHdnl0WmZDelFicHA1OGlybGtTMjAtbURUbGZsOEtJSEYwMVFHT2V3YjRYX0Z5TGNuZHU1WlFTVy1sMW1qYkVudGNEQ1NVdnU1UEE?oc=5",
             "quality": 82,
             "new_this_scan": true,
@@ -101649,15 +101180,15 @@
         "generic_grammar": true,
         "reader_title": "Europe may have an underused advantage in research infrastructure if a tractable bottleneck is the real constraint.",
         "reader_summary": "This opportunity is retained only when separate evidence shows a current weakness, an asset Europe already possesses, a fixable bottleneck around that asset, and measurable payoff evidence.",
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
+        "first_seen_at": "2026-09-15T08:09:48Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
         "fingerprint": "24d52502a00b5394",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:funding-programme-speed-vs-safeguard",
@@ -101864,15 +101395,15 @@
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on research funding/programmes may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
+        "first_seen_at": "2026-09-15T08:09:48Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
         "fingerprint": "46eaf9e093a734af",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
-        "retrace_status": "rebuilt",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_status": "unchanged",
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:infrastructure-openness-vs-security",
@@ -102022,7 +101553,7 @@
             "strand": "C",
             "title": "Finland-based AI factory to support researchers from all fields",
             "source": "Science|Business",
-            "date": "2026-09-14",
+            "date": "2026-09-15",
             "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQQW1aaEFxU1RLeFNpWnpjaHhZQV93RnRwazBkMFNoUktldGY3VlhXSkwtOF9TeVVqV082MU51YlRQVFZ1YXBSUEhSMy1oUHdSN29MOUUxaGdIakpTX0M3dGQzRWpHdnl0WmZDelFicHA1OGlybGtTMjAtbURUbGZsOEtJSEYwMVFHT2V3YjRYX0Z5TGNuZHU1WlFTVy1sMW1qYkVudGNEQ1NVdnU1UEE?oc=5",
             "quality": 82,
             "new_this_scan": true,
@@ -102103,15 +101634,15 @@
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on research infrastructure may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
+        "first_seen_at": "2026-09-15T08:09:48Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
         "fingerprint": "0b7495a5a12cb588",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:collaboration-diplomacy-openness-vs-security",
@@ -102146,18 +101677,6 @@
         "synthesis_across_records": true,
         "support": [
           {
-            "identity": "url:https://www.sitra.fi/wp-content/uploads/2026/06/valo_the-nordic-model_interim-report.pdf",
-            "role": "criterion_a",
-            "strand": "A",
-            "title": "The Nordic model for collaboration on health data: insights from an evolving process - Sitra",
-            "source": "Sitra — Finnish Innovation Fund",
-            "date": "2026-06-03",
-            "link": "https://www.sitra.fi/wp-content/uploads/2026/06/VALO_The-Nordic-model_Interim-Report.pdf",
-            "quality": 96,
-            "new_this_scan": true,
-            "analytical_weight": 1.0
-          },
-          {
             "identity": "url:https://era.gv.at/news-items/science-europe-supports-new-instrument-for-collaborative-bottom-up-research-in-fp10",
             "role": "criterion_a",
             "strand": "A",
@@ -102178,6 +101697,18 @@
             "date": "2026-04-29",
             "link": "https://erc.europa.eu/news-events/magazine-article/world-data-few-hands",
             "quality": 96,
+            "new_this_scan": false,
+            "analytical_weight": 1.0
+          },
+          {
+            "identity": "url:https://doi.org/10.1098/rsos.260721",
+            "role": "criterion_a",
+            "strand": "A",
+            "title": "Can science diplomacy help safeguard science as a global public good? Reflections on strategy, data and people",
+            "source": "Royal Society Open Science",
+            "date": "2026-08-12",
+            "link": "https://doi.org/10.1098/rsos.260721",
+            "quality": 89,
             "new_this_scan": false,
             "analytical_weight": 1.0
           },
@@ -102337,20 +101868,20 @@
           "Europe research innovation openness and security in science diplomacy/collaboration integrated guidance common balancing rule",
           "Europe research innovation openness and security in science diplomacy/collaboration single rule resolves conflict"
         ],
-        "touched_this_scan": true,
+        "touched_this_scan": false,
         "reader_eligible": false,
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on science diplomacy/collaboration may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
-        "fingerprint": "3ef1fe07555ef8aa",
+        "first_seen_at": "2026-09-15T08:09:48Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
+        "fingerprint": "885424dc8b882208",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
-        "retrace_status": "unchanged",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_status": "rebuilt",
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "l45:practice_precedes_doctrine:generic-compute-ai",
@@ -102377,7 +101908,7 @@
           "doctrine_names_existing_tool"
         ],
         "primary_records": 13,
-        "primary_sources": 11,
+        "primary_sources": 12,
         "context_records": 6,
         "counter_records": 0,
         "denial_tested": true,
@@ -102433,18 +101964,6 @@
             "analytical_weight": 1.0
           },
           {
-            "identity": "url:https://ecipe.org/publications/own-resources-for-the-eu-online-gambling",
-            "role": "practice_has_effect",
-            "strand": "A",
-            "title": "Research Areas",
-            "source": "ECIPE",
-            "date": "2026-09-01",
-            "link": "https://ecipe.org/publications/own-resources-for-the-eu-online-gambling/",
-            "quality": 96,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
-          {
             "identity": "url:https://ecipe.org/publications/copyright-trap/#_ftnref9",
             "role": "practice_has_effect",
             "strand": "A",
@@ -102467,6 +101986,18 @@
             "quality": 89,
             "new_this_scan": false,
             "analytical_weight": 1.0
+          },
+          {
+            "identity": "url:https://doi.org/10.12688/openreseurope.23459.2",
+            "role": "practice_has_effect",
+            "strand": "A",
+            "title": "A sustainable platform for federated health data access, AI innovation, and regulatory acceptance in alignment with the European Health Data Space principles",
+            "source": "Open Research Europe",
+            "date": "2026-08-26",
+            "link": "https://doi.org/10.12688/openreseurope.23459.2",
+            "quality": 89,
+            "new_this_scan": false,
+            "analytical_weight": 1.0
           }
         ],
         "context": [
@@ -102476,7 +102007,7 @@
             "strand": "C",
             "title": "Finland-based AI factory to support researchers from all fields",
             "source": "Science|Business",
-            "date": "2026-09-14",
+            "date": "2026-09-15",
             "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQQW1aaEFxU1RLeFNpWnpjaHhZQV93RnRwazBkMFNoUktldGY3VlhXSkwtOF9TeVVqV082MU51YlRQVFZ1YXBSUEhSMy1oUHdSN29MOUUxaGdIakpTX0M3dGQzRWpHdnl0WmZDelFicHA1OGlybGtTMjAtbURUbGZsOEtJSEYwMVFHT2V3YjRYX0Z5TGNuZHU1WlFTVy1sMW1qYkVudGNEQ1NVdnU1UEE?oc=5",
             "quality": 82,
             "new_this_scan": true,
@@ -102556,15 +102087,15 @@
         "generic_grammar": true,
         "reader_title": "Formal policy around AI/compute may be codifying a practice that was already operating.",
         "reader_summary": "The sequence, not topic similarity, is the finding: dated primary evidence places practice before doctrine, and the later framework explicitly names the earlier instrument while separate evidence shows that practice had real effects.",
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
-        "fingerprint": "0c589481a7cbd92b",
+        "first_seen_at": "2026-09-15T08:09:48Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
+        "fingerprint": "6844169398916378",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
-        "retrace_status": "unchanged",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_status": "rebuilt",
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "l45:practice_precedes_doctrine:generic-infrastructure",
@@ -102659,6 +102190,18 @@
             "analytical_weight": 1.0
           },
           {
+            "identity": "url:https://www.sitra.fi/wp-content/uploads/2026/06/valo_the-nordic-model_interim-report.pdf",
+            "role": "practice_has_effect",
+            "strand": "A",
+            "title": "The Nordic model for collaboration on health data: insights from an evolving process - Sitra",
+            "source": "Sitra — Finnish Innovation Fund",
+            "date": "2026-06-03",
+            "link": "https://www.sitra.fi/wp-content/uploads/2026/06/VALO_The-Nordic-model_Interim-Report.pdf",
+            "quality": 96,
+            "new_this_scan": true,
+            "analytical_weight": 1.0
+          },
+          {
             "identity": "url:https://www.iss.europa.eu/sites/default/files/2026-07/2026-07%20autonomy%20through%20partnerships.pdf",
             "role": "practice_has_effect",
             "strand": "A",
@@ -102681,18 +102224,6 @@
             "quality": 96,
             "new_this_scan": false,
             "analytical_weight": 1.0
-          },
-          {
-            "identity": "url:https://doi.org/10.1007/s41781-026-00184-5",
-            "role": "practice_has_effect",
-            "strand": "A",
-            "title": "Designing a Pan-African Research Infrastructure for Digital Sciences: DIGITAfrica Vision, Blueprint Methodology, and Roadmap",
-            "source": "EPJ Research Infrastructures",
-            "date": "2026-09-04",
-            "link": "https://doi.org/10.1007/s41781-026-00184-5",
-            "quality": 89,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
           }
         ],
         "context": [
@@ -102702,7 +102233,7 @@
             "strand": "C",
             "title": "Finland-based AI factory to support researchers from all fields",
             "source": "Science|Business",
-            "date": "2026-09-14",
+            "date": "2026-09-15",
             "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQQW1aaEFxU1RLeFNpWnpjaHhZQV93RnRwazBkMFNoUktldGY3VlhXSkwtOF9TeVVqV082MU51YlRQVFZ1YXBSUEhSMy1oUHdSN29MOUUxaGdIakpTX0M3dGQzRWpHdnl0WmZDelFicHA1OGlybGtTMjAtbURUbGZsOEtJSEYwMVFHT2V3YjRYX0Z5TGNuZHU1WlFTVy1sMW1qYkVudGNEQ1NVdnU1UEE?oc=5",
             "quality": 82,
             "new_this_scan": true,
@@ -102782,217 +102313,15 @@
         "generic_grammar": true,
         "reader_title": "Formal policy around research infrastructure may be codifying a practice that was already operating.",
         "reader_summary": "The sequence, not topic similarity, is the finding: dated primary evidence places practice before doctrine, and the later framework explicitly names the earlier instrument while separate evidence shows that practice had real effects.",
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
-        "fingerprint": "fbad52429ab67b92",
+        "first_seen_at": "2026-09-15T08:09:48Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
+        "fingerprint": "4bc49c11ddab1217",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
-        "retrace_status": "unchanged",
-        "retrace_at": "2026-09-15T07:27:57Z"
-      },
-      {
-        "id": "l45:practice_precedes_doctrine:generic-talent",
-        "grammar_id": "practice_precedes_doctrine",
-        "product": "continuity",
-        "inferential_distance": 4,
-        "topic_key": "generic:talent",
-        "topic_label": "research talent",
-        "status": "watch",
-        "score": 85,
-        "primary_role_coverage": 0.75,
-        "required_roles": [
-          "formal_doctrine",
-          "earlier_practice",
-          "doctrine_names_existing_tool",
-          "practice_has_effect"
-        ],
-        "covered_roles": [
-          "formal_doctrine",
-          "earlier_practice",
-          "practice_has_effect"
-        ],
-        "missing_links": [
-          "doctrine_names_existing_tool"
-        ],
-        "primary_records": 6,
-        "primary_sources": 5,
-        "context_records": 6,
-        "counter_records": 0,
-        "denial_tested": true,
-        "counter_penalty": 0,
-        "synthesis_across_records": true,
-        "support": [
-          {
-            "identity": "url:https://erc.europa.eu/news-events/magazine-article/world-data-few-hands",
-            "role": "formal_doctrine",
-            "strand": "A",
-            "title": "A world of data in a few hands",
-            "source": "European Research Council",
-            "date": "2026-04-29",
-            "link": "https://erc.europa.eu/news-events/magazine-article/world-data-few-hands",
-            "quality": 96,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
-          {
-            "identity": "url:https://era.gv.at/news-items/cesaer-presents-report-on-how-industrial-doctorates-strengthen-research-industry-pipelines",
-            "role": "earlier_practice",
-            "strand": "A",
-            "title": "CESAER presents report on how industrial doctorates strengthen research-industry pipelines",
-            "source": "ERA Portal Austria",
-            "date": "2026-03-31",
-            "link": "https://era.gv.at/news-items/cesaer-presents-report-on-how-industrial-doctorates-strengthen-research-industry-pipelines/",
-            "quality": 96,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
-          {
-            "identity": "url:https://www.cesaer.org/publications/input-note-research-security-as-a-collective-responsibility-empowering-universities-enabling-europe",
-            "role": "earlier_practice",
-            "strand": "A",
-            "title": "Research security as a collective responsibility: empowering universities, enabling Europe",
-            "source": "CESAER",
-            "date": "2025-10-27",
-            "link": "https://www.cesaer.org/publications/input-note-research-security-as-a-collective-responsibility-empowering-universities-enabling-europe/",
-            "quality": 96,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
-          {
-            "identity": "url:https://www.cesaer.org/publications/report-research-careers-a-critical-choice-for-europe",
-            "role": "earlier_practice",
-            "strand": "A",
-            "title": "Report 'Research careers: A critical choice for Europe'",
-            "source": "CESAER",
-            "date": "2024-12-11",
-            "link": "https://www.cesaer.org/publications/report-research-careers-a-critical-choice-for-europe/",
-            "quality": 96,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
-          {
-            "identity": "url:https://ecipe.org/publications/own-resources-for-the-eu-online-gambling",
-            "role": "practice_has_effect",
-            "strand": "A",
-            "title": "Research Areas",
-            "source": "ECIPE",
-            "date": "2026-09-01",
-            "link": "https://ecipe.org/publications/own-resources-for-the-eu-online-gambling/",
-            "quality": 96,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
-          {
-            "identity": "url:https://arxiv.org/abs/2606.03362",
-            "role": "practice_has_effect",
-            "strand": "A",
-            "title": "Emerging and established topics in drone research: Citation impact and knowledge flows across China, the United States, the EU, Ukraine, and Russia (2020-2025)",
-            "source": "arXiv",
-            "date": "2026-06-02",
-            "link": "https://arxiv.org/abs/2606.03362",
-            "quality": 78,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          }
-        ],
-        "context": [
-          {
-            "identity": "url:https://marie-sklodowska-curie-actions.ec.europa.eu/actions/choose-europe-for-science",
-            "role": "Context only",
-            "strand": "C",
-            "title": "Choose Europe for Science",
-            "source": "Marie Skłodowska-Curie Actions",
-            "date": "2026-08-10",
-            "link": "https://marie-sklodowska-curie-actions.ec.europa.eu/actions/choose-europe-for-science",
-            "quality": 96,
-            "new_this_scan": false,
-            "analytical_weight": 0.3
-          },
-          {
-            "identity": "url:https://era.gv.at/news-items/european-research-ministers-discuss-how-to-maximise-ri-contribution-to-improve-europes-competitiveness-security-and-prosperity",
-            "role": "Context only",
-            "strand": "C",
-            "title": "European Research Ministers discuss how to maximise R&I contribution to improve Europe’s competitiveness, security and prosperity",
-            "source": "ERA Portal Austria",
-            "date": "2026-07-21",
-            "link": "https://era.gv.at/news-items/european-research-ministers-discuss-how-to-maximise-ri-contribution-to-improve-europes-competitiveness-security-and-prosperity/",
-            "quality": 96,
-            "new_this_scan": false,
-            "analytical_weight": 0.3
-          },
-          {
-            "identity": "url:https://era.gv.at/news-items/commissioner-zaharieva-leads-dialogue-on-how-to-attract-and-retain-research-talent-in-europe",
-            "role": "Context only",
-            "strand": "C",
-            "title": "Commissioner Zaharieva leads dialogue on how to attract and retain research talent in Europe",
-            "source": "ERA Portal Austria",
-            "date": "2026-07-13",
-            "link": "https://era.gv.at/news-items/commissioner-zaharieva-leads-dialogue-on-how-to-attract-and-retain-research-talent-in-europe/",
-            "quality": 96,
-            "new_this_scan": false,
-            "analytical_weight": 0.3
-          },
-          {
-            "identity": "url:https://era.gv.at/news-items/era-forum-focuses-on-era-act-talent-attraction-and-era-policy-agenda-implementation",
-            "role": "Context only",
-            "strand": "C",
-            "title": "ERA Forum focuses on ERA Act, talent attraction and ERA Policy Agenda implementation",
-            "source": "ERA Portal Austria",
-            "date": "2026-06-11",
-            "link": "https://era.gv.at/news-items/era-forum-focuses-on-era-act-talent-attraction-and-era-policy-agenda-implementation/",
-            "quality": 96,
-            "new_this_scan": false,
-            "analytical_weight": 0.3
-          },
-          {
-            "identity": "url:https://era.gv.at/news-items/new-scoreboard-shows-success-of-european-startup-policies",
-            "role": "Context only",
-            "strand": "C",
-            "title": "New scoreboard shows success of European startup policies",
-            "source": "ERA Portal Austria",
-            "date": "2026-06-01",
-            "link": "https://era.gv.at/news-items/new-scoreboard-shows-success-of-european-startup-policies/",
-            "quality": 96,
-            "new_this_scan": false,
-            "analytical_weight": 0.3
-          },
-          {
-            "identity": "url:https://era.gv.at/news-items/eu-and-vietnam-deepen-cooperation-in-science-and-innovation",
-            "role": "Context only",
-            "strand": "C",
-            "title": "EU and Vietnam deepen cooperation in science, technology and innovation",
-            "source": "ERA Portal Austria",
-            "date": "2026-05-27",
-            "link": "https://era.gv.at/news-items/eu-and-vietnam-deepen-cooperation-in-science-and-innovation/",
-            "quality": 96,
-            "new_this_scan": false,
-            "analytical_weight": 0.3
-          }
-        ],
-        "against": [],
-        "support_queries": [
-          "Europe research innovation research talent practice timeline before formal framework",
-          "Europe research innovation research talent framework names existing instrument tool"
-        ],
-        "falsifier_queries": [
-          "Europe research innovation research talent framework created new instrument no prior practice"
-        ],
-        "touched_this_scan": false,
-        "reader_eligible": false,
-        "generic_grammar": true,
-        "reader_title": "Formal policy around research talent may be codifying a practice that was already operating.",
-        "reader_summary": "The sequence, not topic similarity, is the finding: dated primary evidence places practice before doctrine, and the later framework explicitly names the earlier instrument while separate evidence shows that practice had real effects.",
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
-        "fingerprint": "8e2851362b2248a7",
-        "new_this_scan": false,
-        "updated_this_scan": false,
-        "lifecycle": "seeded",
-        "missed_detection_scans": 0,
-        "retrace_status": "unchanged",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_status": "rebuilt",
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "l45:practice_precedes_doctrine:generic-startups-scaleup",
@@ -103210,15 +102539,15 @@
         "generic_grammar": true,
         "reader_title": "Formal policy around startups/scale-up may be codifying a practice that was already operating.",
         "reader_summary": "The sequence, not topic similarity, is the finding: dated primary evidence places practice before doctrine, and the later framework explicitly names the earlier instrument while separate evidence shows that practice had real effects.",
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
+        "first_seen_at": "2026-09-15T08:09:48Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
         "fingerprint": "a119cc292aa4fcc0",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
-        "retrace_status": "rebuilt",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_status": "unchanged",
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:standards-testing-openness-vs-security",
@@ -103401,15 +102730,15 @@
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on standards/testing may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
+        "first_seen_at": "2026-09-15T08:09:48Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
         "fingerprint": "d2ca790e9243a2fe",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "l45:success_metric_blind_spot:generic-retention-talent",
@@ -103433,26 +102762,14 @@
         "missing_links": [
           "measurement_blind_spot"
         ],
-        "primary_records": 10,
-        "primary_sources": 8,
+        "primary_records": 9,
+        "primary_sources": 7,
         "context_records": 6,
         "counter_records": 0,
         "denial_tested": true,
         "counter_penalty": 0,
         "synthesis_across_records": true,
         "support": [
-          {
-            "identity": "url:https://doi.org/10.1177/09717218261480257",
-            "role": "success_condition",
-            "strand": "A",
-            "title": "AI Adoption, Structural Constraints and Inclusive Growth: Evidence from Greece",
-            "source": "Science, Technology and Society",
-            "date": "2026-09-13",
-            "link": "https://doi.org/10.1177/09717218261480257",
-            "quality": 89,
-            "new_this_scan": true,
-            "analytical_weight": 1.0
-          },
           {
             "identity": "url:https://era.gv.at/news-items/the-guild-urges-safeguards-as-fp10-opens-to-dual-use-research",
             "role": "success_condition",
@@ -103474,6 +102791,18 @@
             "date": "2026-06-29",
             "link": "https://www.cesaer.org/publications/marie-sklodowska-curie-actions-research-talent-is-europes-strategic-advantage/",
             "quality": 96,
+            "new_this_scan": false,
+            "analytical_weight": 1.0
+          },
+          {
+            "identity": "url:https://www.interface-eu.org/publications/download/germany-case-study",
+            "role": "success_condition",
+            "strand": "A",
+            "title": "Germany’s AI Divide",
+            "source": "Interface Europe",
+            "date": "2026-09-02",
+            "link": "https://www.interface-eu.org/publications/download/germany-case-study",
+            "quality": 89,
             "new_this_scan": false,
             "analytical_weight": 1.0
           },
@@ -103572,20 +102901,20 @@
         "falsifier_queries": [
           "Europe research innovation retention in research talent operational outcome metric follow up evaluation"
         ],
-        "touched_this_scan": true,
+        "touched_this_scan": false,
         "reader_eligible": false,
         "generic_grammar": true,
         "reader_title": "Europe may be measuring delivery before it can measure the retention in research talent outcome it actually wants.",
         "reader_summary": "The risk appears only when primary evidence distinguishes the stated success condition from the activity being funded and separately documents a missing or still-proposed outcome measure.",
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
-        "fingerprint": "367a7d21c0e013a1",
+        "first_seen_at": "2026-09-15T08:09:48Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
+        "fingerprint": "94b874a4cc7c6488",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
-        "retrace_status": "unchanged",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_status": "rebuilt",
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "l45:success_metric_blind_spot:generic-widening-participation-funding-programme",
@@ -103753,15 +103082,15 @@
         "generic_grammar": true,
         "reader_title": "Europe may be measuring delivery before it can measure the widening participation in research funding/programmes outcome it actually wants.",
         "reader_summary": "The risk appears only when primary evidence distinguishes the stated success condition from the activity being funded and separately documents a missing or still-proposed outcome measure.",
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
+        "first_seen_at": "2026-09-15T08:09:48Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
         "fingerprint": "833e92556b1dff01",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "l45:success_metric_blind_spot:generic-resilience-chips",
@@ -103917,15 +103246,15 @@
         "generic_grammar": true,
         "reader_title": "Europe may be measuring delivery before it can measure the resilience in semiconductors outcome it actually wants.",
         "reader_summary": "The risk appears only when primary evidence distinguishes the stated success condition from the activity being funded and separately documents a missing or still-proposed outcome measure.",
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
+        "first_seen_at": "2026-09-15T08:09:48Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
         "fingerprint": "7db1811da1be9014",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "l45:goal_measurement_gap:competitiveness",
@@ -103958,18 +103287,6 @@
         "synthesis_across_records": true,
         "support": [
           {
-            "identity": "url:https://ecipe.org/publications/own-resources-for-the-eu-online-gambling",
-            "role": "repeated_invocation",
-            "strand": "A",
-            "title": "Research Areas",
-            "source": "ECIPE",
-            "date": "2026-09-01",
-            "link": "https://ecipe.org/publications/own-resources-for-the-eu-online-gambling/",
-            "quality": 96,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
-          {
             "identity": "url:https://merics.org/en/report/germany-mutual-benefit-existential-competition-china",
             "role": "repeated_invocation",
             "strand": "A",
@@ -103989,6 +103306,18 @@
             "source": "ALLEA",
             "date": "2026-06-29",
             "link": "https://allea.org/wp-content/uploads/2026/07/msca-statement-june-2026_final.pdf",
+            "quality": 96,
+            "new_this_scan": false,
+            "analytical_weight": 1.0
+          },
+          {
+            "identity": "url:https://era.gv.at/news-items/council-agrees-its-position-on-horizon-europe-2028-2034",
+            "role": "repeated_invocation",
+            "strand": "A",
+            "title": "Council agrees its position on Horizon Europe 2028-2034",
+            "source": "ERA Portal Austria",
+            "date": "2026-06-29",
+            "link": "https://era.gv.at/news-items/council-agrees-its-position-on-horizon-europe-2028-2034/",
             "quality": 96,
             "new_this_scan": false,
             "analytical_weight": 1.0
@@ -104078,10 +103407,10 @@
         ],
         "touched_this_scan": false,
         "reader_eligible": false,
-        "historical_records": 10,
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
-        "fingerprint": "86eb9f2e5b984dca",
+        "historical_records": 12,
+        "first_seen_at": "2026-09-15T08:09:48Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
+        "fingerprint": "64094c3063900365",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
@@ -104089,7 +103418,7 @@
         "reader_title": "Europe keeps pursuing competitiveness without a settled way to measure whether it is succeeding.",
         "reader_summary": "The pattern is repeated invocation of the goal alongside sparse, fragmented or contested measurement.",
         "retrace_status": "rebuilt",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "l45:goal_measurement_gap:openness",
@@ -104242,9 +103571,9 @@
         ],
         "touched_this_scan": false,
         "reader_eligible": false,
-        "historical_records": 16,
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
+        "historical_records": 17,
+        "first_seen_at": "2026-09-15T08:09:48Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
         "fingerprint": "e78b89bea73e0677",
         "new_this_scan": false,
         "updated_this_scan": false,
@@ -104252,8 +103581,8 @@
         "missed_detection_scans": 0,
         "reader_title": "Europe keeps pursuing openness without a settled way to measure whether it is succeeding.",
         "reader_summary": "The pattern is repeated invocation of the goal alongside sparse, fragmented or contested measurement.",
-        "retrace_status": "rebuilt",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_status": "unchanged",
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:funding-programme-openness-vs-security",
@@ -104460,15 +103789,349 @@
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on research funding/programmes may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
+        "first_seen_at": "2026-09-15T08:09:48Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
         "fingerprint": "b7feccec7737a0c5",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_at": "2026-09-15T08:09:48Z"
+      },
+      {
+        "id": "l45:practice_precedes_doctrine:generic-talent",
+        "grammar_id": "practice_precedes_doctrine",
+        "product": "continuity",
+        "inferential_distance": 4,
+        "topic_key": "generic:talent",
+        "topic_label": "research talent",
+        "status": "watch",
+        "score": 80,
+        "primary_role_coverage": 0.75,
+        "required_roles": [
+          "formal_doctrine",
+          "earlier_practice",
+          "doctrine_names_existing_tool",
+          "practice_has_effect"
+        ],
+        "covered_roles": [
+          "formal_doctrine",
+          "earlier_practice",
+          "practice_has_effect"
+        ],
+        "missing_links": [
+          "doctrine_names_existing_tool"
+        ],
+        "primary_records": 5,
+        "primary_sources": 4,
+        "context_records": 6,
+        "counter_records": 0,
+        "denial_tested": true,
+        "counter_penalty": 0,
+        "synthesis_across_records": true,
+        "support": [
+          {
+            "identity": "url:https://erc.europa.eu/news-events/magazine-article/world-data-few-hands",
+            "role": "formal_doctrine",
+            "strand": "A",
+            "title": "A world of data in a few hands",
+            "source": "European Research Council",
+            "date": "2026-04-29",
+            "link": "https://erc.europa.eu/news-events/magazine-article/world-data-few-hands",
+            "quality": 96,
+            "new_this_scan": false,
+            "analytical_weight": 1.0
+          },
+          {
+            "identity": "url:https://era.gv.at/news-items/cesaer-presents-report-on-how-industrial-doctorates-strengthen-research-industry-pipelines",
+            "role": "earlier_practice",
+            "strand": "A",
+            "title": "CESAER presents report on how industrial doctorates strengthen research-industry pipelines",
+            "source": "ERA Portal Austria",
+            "date": "2026-03-31",
+            "link": "https://era.gv.at/news-items/cesaer-presents-report-on-how-industrial-doctorates-strengthen-research-industry-pipelines/",
+            "quality": 96,
+            "new_this_scan": false,
+            "analytical_weight": 1.0
+          },
+          {
+            "identity": "url:https://www.cesaer.org/publications/input-note-research-security-as-a-collective-responsibility-empowering-universities-enabling-europe",
+            "role": "earlier_practice",
+            "strand": "A",
+            "title": "Research security as a collective responsibility: empowering universities, enabling Europe",
+            "source": "CESAER",
+            "date": "2025-10-27",
+            "link": "https://www.cesaer.org/publications/input-note-research-security-as-a-collective-responsibility-empowering-universities-enabling-europe/",
+            "quality": 96,
+            "new_this_scan": false,
+            "analytical_weight": 1.0
+          },
+          {
+            "identity": "url:https://www.cesaer.org/publications/report-research-careers-a-critical-choice-for-europe",
+            "role": "earlier_practice",
+            "strand": "A",
+            "title": "Report 'Research careers: A critical choice for Europe'",
+            "source": "CESAER",
+            "date": "2024-12-11",
+            "link": "https://www.cesaer.org/publications/report-research-careers-a-critical-choice-for-europe/",
+            "quality": 96,
+            "new_this_scan": false,
+            "analytical_weight": 1.0
+          },
+          {
+            "identity": "url:https://arxiv.org/abs/2606.03362",
+            "role": "practice_has_effect",
+            "strand": "A",
+            "title": "Emerging and established topics in drone research: Citation impact and knowledge flows across China, the United States, the EU, Ukraine, and Russia (2020-2025)",
+            "source": "arXiv",
+            "date": "2026-06-02",
+            "link": "https://arxiv.org/abs/2606.03362",
+            "quality": 78,
+            "new_this_scan": false,
+            "analytical_weight": 1.0
+          }
+        ],
+        "context": [
+          {
+            "identity": "url:https://news.google.com/rss/articles/cbmirgfbvv95cuxqqw1aaefxu1rlefnpwnpjahhzqv93rnrwazbkmfnouktldgy3vlhxskwtof9tevvqv082mu51ylrqvfz1yxbsuehsmy1ouhdsn29mouuxagdiakptx0m3dgqzrwphdnl0wmzdelficha1oglybgttmjatburubgzsoetjseywmvfht2v3yjryx0z5tgnuzhu1wlftvy1smw1qykvudgneq1nvdnu1uee?oc=5",
+            "role": "Context only",
+            "strand": "C",
+            "title": "Finland-based AI factory to support researchers from all fields",
+            "source": "Science|Business",
+            "date": "2026-09-15",
+            "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQQW1aaEFxU1RLeFNpWnpjaHhZQV93RnRwazBkMFNoUktldGY3VlhXSkwtOF9TeVVqV082MU51YlRQVFZ1YXBSUEhSMy1oUHdSN29MOUUxaGdIakpTX0M3dGQzRWpHdnl0WmZDelFicHA1OGlybGtTMjAtbURUbGZsOEtJSEYwMVFHT2V3YjRYX0Z5TGNuZHU1WlFTVy1sMW1qYkVudGNEQ1NVdnU1UEE?oc=5",
+            "quality": 82,
+            "new_this_scan": true,
+            "analytical_weight": 0.3
+          },
+          {
+            "identity": "url:https://marie-sklodowska-curie-actions.ec.europa.eu/actions/choose-europe-for-science",
+            "role": "Context only",
+            "strand": "C",
+            "title": "Choose Europe for Science",
+            "source": "Marie Skłodowska-Curie Actions",
+            "date": "2026-08-10",
+            "link": "https://marie-sklodowska-curie-actions.ec.europa.eu/actions/choose-europe-for-science",
+            "quality": 96,
+            "new_this_scan": false,
+            "analytical_weight": 0.3
+          },
+          {
+            "identity": "url:https://era.gv.at/news-items/european-research-ministers-discuss-how-to-maximise-ri-contribution-to-improve-europes-competitiveness-security-and-prosperity",
+            "role": "Context only",
+            "strand": "C",
+            "title": "European Research Ministers discuss how to maximise R&I contribution to improve Europe’s competitiveness, security and prosperity",
+            "source": "ERA Portal Austria",
+            "date": "2026-07-21",
+            "link": "https://era.gv.at/news-items/european-research-ministers-discuss-how-to-maximise-ri-contribution-to-improve-europes-competitiveness-security-and-prosperity/",
+            "quality": 96,
+            "new_this_scan": false,
+            "analytical_weight": 0.3
+          },
+          {
+            "identity": "url:https://era.gv.at/news-items/commissioner-zaharieva-leads-dialogue-on-how-to-attract-and-retain-research-talent-in-europe",
+            "role": "Context only",
+            "strand": "C",
+            "title": "Commissioner Zaharieva leads dialogue on how to attract and retain research talent in Europe",
+            "source": "ERA Portal Austria",
+            "date": "2026-07-13",
+            "link": "https://era.gv.at/news-items/commissioner-zaharieva-leads-dialogue-on-how-to-attract-and-retain-research-talent-in-europe/",
+            "quality": 96,
+            "new_this_scan": false,
+            "analytical_weight": 0.3
+          },
+          {
+            "identity": "url:https://era.gv.at/news-items/era-forum-focuses-on-era-act-talent-attraction-and-era-policy-agenda-implementation",
+            "role": "Context only",
+            "strand": "C",
+            "title": "ERA Forum focuses on ERA Act, talent attraction and ERA Policy Agenda implementation",
+            "source": "ERA Portal Austria",
+            "date": "2026-06-11",
+            "link": "https://era.gv.at/news-items/era-forum-focuses-on-era-act-talent-attraction-and-era-policy-agenda-implementation/",
+            "quality": 96,
+            "new_this_scan": false,
+            "analytical_weight": 0.3
+          },
+          {
+            "identity": "url:https://era.gv.at/news-items/new-scoreboard-shows-success-of-european-startup-policies",
+            "role": "Context only",
+            "strand": "C",
+            "title": "New scoreboard shows success of European startup policies",
+            "source": "ERA Portal Austria",
+            "date": "2026-06-01",
+            "link": "https://era.gv.at/news-items/new-scoreboard-shows-success-of-european-startup-policies/",
+            "quality": 96,
+            "new_this_scan": false,
+            "analytical_weight": 0.3
+          }
+        ],
+        "against": [],
+        "support_queries": [
+          "Europe research innovation research talent practice timeline before formal framework",
+          "Europe research innovation research talent framework names existing instrument tool"
+        ],
+        "falsifier_queries": [
+          "Europe research innovation research talent framework created new instrument no prior practice"
+        ],
+        "touched_this_scan": true,
+        "reader_eligible": false,
+        "generic_grammar": true,
+        "reader_title": "Formal policy around research talent may be codifying a practice that was already operating.",
+        "reader_summary": "The sequence, not topic similarity, is the finding: dated primary evidence places practice before doctrine, and the later framework explicitly names the earlier instrument while separate evidence shows that practice had real effects.",
+        "first_seen_at": "2026-09-15T08:09:48Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
+        "fingerprint": "59f1a0910486af89",
+        "new_this_scan": false,
+        "updated_this_scan": false,
+        "lifecycle": "seeded",
+        "missed_detection_scans": 0,
+        "retrace_status": "rebuilt",
+        "retrace_at": "2026-09-15T08:09:48Z"
+      },
+      {
+        "id": "l45:comparative_advantage_bottleneck:generic-health-data",
+        "grammar_id": "comparative_advantage_bottleneck",
+        "product": "opportunity",
+        "inferential_distance": 4,
+        "topic_key": "generic:health_data",
+        "topic_label": "health data",
+        "status": "watch",
+        "score": 79,
+        "primary_role_coverage": 0.8,
+        "required_roles": [
+          "comparative_weakness",
+          "existing_asset",
+          "asset_bottleneck_bridge",
+          "binding_fixable_bottleneck",
+          "payoff_evidence"
+        ],
+        "covered_roles": [
+          "existing_asset",
+          "asset_bottleneck_bridge",
+          "binding_fixable_bottleneck",
+          "payoff_evidence"
+        ],
+        "missing_links": [
+          "comparative_weakness"
+        ],
+        "primary_records": 5,
+        "primary_sources": 5,
+        "context_records": 2,
+        "counter_records": 0,
+        "denial_tested": true,
+        "counter_penalty": 0,
+        "synthesis_across_records": false,
+        "support": [
+          {
+            "identity": "url:https://doi.org/10.12688/openreseurope.23459.2",
+            "role": "existing_asset",
+            "strand": "A",
+            "title": "A sustainable platform for federated health data access, AI innovation, and regulatory acceptance in alignment with the European Health Data Space principles",
+            "source": "Open Research Europe",
+            "date": "2026-08-26",
+            "link": "https://doi.org/10.12688/openreseurope.23459.2",
+            "quality": 89,
+            "new_this_scan": false,
+            "analytical_weight": 1.0
+          },
+          {
+            "identity": "url:https://doi.org/10.1111/vox.70340",
+            "role": "existing_asset",
+            "strand": "A",
+            "title": "Opportunities for vein‐to‐vein datasets from a blood establishment perspective: Towards a ‘Pan‐European Transfusion Research InfrAstructure ’",
+            "source": "Vox Sanguinis",
+            "date": "2026-08-18",
+            "link": "https://doi.org/10.1111/vox.70340",
+            "quality": 89,
+            "new_this_scan": false,
+            "analytical_weight": 1.0
+          },
+          {
+            "identity": "url:https://www.sitra.fi/wp-content/uploads/2026/06/valo_the-nordic-model_interim-report.pdf",
+            "role": "binding_fixable_bottleneck",
+            "strand": "A",
+            "title": "The Nordic model for collaboration on health data: insights from an evolving process - Sitra",
+            "source": "Sitra — Finnish Innovation Fund",
+            "date": "2026-06-03",
+            "link": "https://www.sitra.fi/wp-content/uploads/2026/06/VALO_The-Nordic-model_Interim-Report.pdf",
+            "quality": 96,
+            "new_this_scan": true,
+            "analytical_weight": 1.0
+          },
+          {
+            "identity": "url:https://doi.org/10.1177/19475535261432944",
+            "role": "binding_fixable_bottleneck",
+            "strand": "A",
+            "title": "Implementing Sweden’s Biobank Act (2023:38): Insights and Lessons for International Collaboration in Health Research",
+            "source": "Biopreservation and Biobanking",
+            "date": "2026-05-01",
+            "link": "https://doi.org/10.1177/19475535261432944",
+            "quality": 89,
+            "new_this_scan": false,
+            "analytical_weight": 1.0
+          },
+          {
+            "identity": "url:https://doi.org/10.1186/s12889-026-27676-8",
+            "role": "payoff_evidence",
+            "strand": "A",
+            "title": "Health AI research capacity and equity-adjusted patient value in 27 European Union countries: an ecological panel study, 2011–2024",
+            "source": "BMC Public Health",
+            "date": "2026-05-07",
+            "link": "https://doi.org/10.1186/s12889-026-27676-8",
+            "quality": 89,
+            "new_this_scan": false,
+            "analytical_weight": 1.0
+          }
+        ],
+        "context": [
+          {
+            "identity": "url:https://news.google.com/rss/articles/cbmi0gfbvv95cuxqr2vtztjjcl9fyw90rgw2aljpuehus0r6qknyyxjidnznzhnws0hawmpeel9iui1tsulfbkdhbu83ntbqemd3avzix0zmuufur09faunprzdbq0m5zv9ismpstgzqx29ktvjwb3rdvfdvrvy3dvo5ohdqsm9yqujfqxh0uwxwbwf6ugvzrmtrykrcdgrxsw1mrnbqeunashvjvwowcglayvjflxbusfy2wnphwi1uwk5srng0eupsrmdrrujfci16ufdgbwwxnkpklxc?oc=5",
+            "role": "Context only",
+            "strand": "C",
+            "title": "China's Pony.ai unveils latest robotruck model as it targets European sales",
+            "source": "Reuters",
+            "date": "2026-09-14",
+            "link": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxQR2VTZTJjcl9FYW90RGw2alJpUEhuS0R6QkNyYXJIdnZnZHNWS0haWmpEel9iUi1TSUlfbkdhbU83NTBqemd3aVZiX0ZmUUFUR09faUNpRzdBQ0M5ZV9ISmpSTGZqX29kTVJwb3RDVFdvRVY3dVo5OHdqSm9YQUJFQXh0UWxwbWF6UGVZRmtRYkRCdGRxSW1MRnBqeUNaSHVjVWowcGlaYVJfLXBUSFY2WnpHWi1uWk5SRng0eUpSRmdrRUJFci16UFdGbWwxNkpkLXc?oc=5",
+            "quality": 82,
+            "new_this_scan": false,
+            "analytical_weight": 0.3
+          },
+          {
+            "identity": "url:https://news.google.com/rss/articles/cbmivafbvv95cuxprwvkq1i1dzb2wm10zmloy0d5bw9pnepssnvtt0v5bhu0sxnsmneyy1c0v2nmvnhzsm1qz0jxz1dsahbdnkjmrxdzawvaeks5ekhrovf0sju3cgq5vwrpc1nprfd2umtyrtjpzwvlamfvrjv0wmrnwk04uw13uucwznlgnflorzd2cfuxz056ukrjcejaekzsmfm3mjremhpzcwqybwvptgzksgzgogncqnv3bfowz3dxexl2bw?oc=5",
+            "role": "Context only",
+            "strand": "C",
+            "title": "EU's cybersecurity agency granted access to Mythos 5 AI model, Commission says",
+            "source": "Reuters",
+            "date": "2026-09-10",
+            "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPRWVkQ1I1dzB2Wm10ZmloY0d5bW9PNEpSSnVTT0V5bHU0SXNsMnEyY1c0V2NmVnhzSm1qZ0JXZ1dsaHBDNkJmRXdzaWVaeks5ekhROVF0SjU3cGQ5VWRPc1NPRFd2UmtYRTJPZWVLamFvRjV0WmRnWk04UW13UUcwZnlGNFlORzd2cFUxZ056UkRJcEJaekZSMFM3MjREMHpzcWQybWVpTGZkSGZGOGNCQnV3bFowZ3dxeXl2bw?oc=5",
+            "quality": 82,
+            "new_this_scan": false,
+            "analytical_weight": 0.3
+          }
+        ],
+        "against": [],
+        "support_queries": [
+          "Europe research innovation health data existing European asset bottleneck payoff evidence",
+          "Europe research innovation health data low cost interoperability cataloguing coordination"
+        ],
+        "falsifier_queries": [
+          "Europe research innovation health data asset not distinctive bottleneck expensive no measurable payoff"
+        ],
+        "touched_this_scan": true,
+        "reader_eligible": false,
+        "generic_grammar": true,
+        "reader_title": "Europe may have an underused advantage in health data if a tractable bottleneck is the real constraint.",
+        "reader_summary": "This opportunity is retained only when separate evidence shows a current weakness, an asset Europe already possesses, a fixable bottleneck around that asset, and measurable payoff evidence.",
+        "first_seen_at": "2026-09-15T08:09:48Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
+        "fingerprint": "6a8babc279eed26d",
+        "new_this_scan": false,
+        "updated_this_scan": false,
+        "lifecycle": "seeded",
+        "missed_detection_scans": 0,
+        "retrace_status": "rebuilt",
+        "retrace_at": "2026-09-15T08:09:48Z"
       },
       {
         "id": "l45:goal_measurement_gap:research-security",
@@ -104599,13 +104262,13 @@
             "analytical_weight": 0.45
           },
           {
-            "identity": "url:https://www.aka.fi/en/about-the-rcf/whats-new/blog2/2025/considering-research-security-is-part-of-responsible-research-funding",
+            "identity": "url:https://www.iss.europa.eu/publications/commentary/new-transatlantic-trade-and-tech-agenda-economic-security-standards-can",
             "role": "Context only",
             "strand": "H",
-            "title": "Considering research security is part of responsible research funding",
-            "source": "Research Council of Finland",
-            "date": "2025-01-01",
-            "link": "https://www.aka.fi/en/about-the-rcf/whats-new/blog2/2025/considering-research-security-is-part-of-responsible-research-funding/",
+            "title": "A new transatlantic trade and tech agenda: economic security standards can address the EU’s and Washington’s concerns about China",
+            "source": "EU Institute for Security Studies",
+            "date": "2025-01-20",
+            "link": "https://www.iss.europa.eu/publications/commentary/new-transatlantic-trade-and-tech-agenda-economic-security-standards-can",
             "quality": 82,
             "new_this_scan": false,
             "analytical_weight": 0.45
@@ -104621,10 +104284,10 @@
         ],
         "touched_this_scan": false,
         "reader_eligible": false,
-        "historical_records": 3,
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
-        "fingerprint": "f486ca5c29cd468a",
+        "historical_records": 5,
+        "first_seen_at": "2026-09-15T08:09:48Z",
+        "last_updated_at": "2026-09-15T08:09:48Z",
+        "fingerprint": "4f2949db0cac8ce8",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
@@ -104632,145 +104295,13 @@
         "reader_title": "Europe keeps pursuing research security without a settled way to measure whether it is succeeding.",
         "reader_summary": "The pattern is repeated invocation of the goal alongside sparse, fragmented or contested measurement.",
         "retrace_status": "rebuilt",
-        "retrace_at": "2026-09-15T07:27:57Z"
-      },
-      {
-        "id": "l45:comparative_advantage_bottleneck:generic-health-data",
-        "grammar_id": "comparative_advantage_bottleneck",
-        "product": "opportunity",
-        "inferential_distance": 4,
-        "topic_key": "generic:health_data",
-        "topic_label": "health data",
-        "status": "watch",
-        "score": 74,
-        "primary_role_coverage": 0.8,
-        "required_roles": [
-          "comparative_weakness",
-          "existing_asset",
-          "asset_bottleneck_bridge",
-          "binding_fixable_bottleneck",
-          "payoff_evidence"
-        ],
-        "covered_roles": [
-          "existing_asset",
-          "asset_bottleneck_bridge",
-          "binding_fixable_bottleneck",
-          "payoff_evidence"
-        ],
-        "missing_links": [
-          "comparative_weakness"
-        ],
-        "primary_records": 4,
-        "primary_sources": 4,
-        "context_records": 2,
-        "counter_records": 0,
-        "denial_tested": true,
-        "counter_penalty": 0,
-        "synthesis_across_records": false,
-        "support": [
-          {
-            "identity": "url:https://doi.org/10.12688/openreseurope.23459.2",
-            "role": "existing_asset",
-            "strand": "A",
-            "title": "A sustainable platform for federated health data access, AI innovation, and regulatory acceptance in alignment with the European Health Data Space principles",
-            "source": "Open Research Europe",
-            "date": "2026-08-26",
-            "link": "https://doi.org/10.12688/openreseurope.23459.2",
-            "quality": 89,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
-          {
-            "identity": "url:https://doi.org/10.1111/vox.70340",
-            "role": "existing_asset",
-            "strand": "A",
-            "title": "Opportunities for vein‐to‐vein datasets from a blood establishment perspective: Towards a ‘Pan‐European Transfusion Research InfrAstructure ’",
-            "source": "Vox Sanguinis",
-            "date": "2026-08-18",
-            "link": "https://doi.org/10.1111/vox.70340",
-            "quality": 89,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
-          {
-            "identity": "url:https://doi.org/10.1177/19475535261432944",
-            "role": "binding_fixable_bottleneck",
-            "strand": "A",
-            "title": "Implementing Sweden’s Biobank Act (2023:38): Insights and Lessons for International Collaboration in Health Research",
-            "source": "Biopreservation and Biobanking",
-            "date": "2026-05-01",
-            "link": "https://doi.org/10.1177/19475535261432944",
-            "quality": 89,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          },
-          {
-            "identity": "url:https://doi.org/10.1186/s12889-026-27676-8",
-            "role": "payoff_evidence",
-            "strand": "A",
-            "title": "Health AI research capacity and equity-adjusted patient value in 27 European Union countries: an ecological panel study, 2011–2024",
-            "source": "BMC Public Health",
-            "date": "2026-05-07",
-            "link": "https://doi.org/10.1186/s12889-026-27676-8",
-            "quality": 89,
-            "new_this_scan": false,
-            "analytical_weight": 1.0
-          }
-        ],
-        "context": [
-          {
-            "identity": "url:https://news.google.com/rss/articles/cbmi0gfbvv95cuxqr2vtztjjcl9fyw90rgw2aljpuehus0r6qknyyxjidnznzhnws0hawmpeel9iui1tsulfbkdhbu83ntbqemd3avzix0zmuufur09faunprzdbq0m5zv9ismpstgzqx29ktvjwb3rdvfdvrvy3dvo5ohdqsm9yqujfqxh0uwxwbwf6ugvzrmtrykrcdgrxsw1mrnbqeunashvjvwowcglayvjflxbusfy2wnphwi1uwk5srng0eupsrmdrrujfci16ufdgbwwxnkpklxc?oc=5",
-            "role": "Context only",
-            "strand": "C",
-            "title": "China's Pony.ai unveils latest robotruck model as it targets European sales",
-            "source": "Reuters",
-            "date": "2026-09-14",
-            "link": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxQR2VTZTJjcl9FYW90RGw2alJpUEhuS0R6QkNyYXJIdnZnZHNWS0haWmpEel9iUi1TSUlfbkdhbU83NTBqemd3aVZiX0ZmUUFUR09faUNpRzdBQ0M5ZV9ISmpSTGZqX29kTVJwb3RDVFdvRVY3dVo5OHdqSm9YQUJFQXh0UWxwbWF6UGVZRmtRYkRCdGRxSW1MRnBqeUNaSHVjVWowcGlaYVJfLXBUSFY2WnpHWi1uWk5SRng0eUpSRmdrRUJFci16UFdGbWwxNkpkLXc?oc=5",
-            "quality": 82,
-            "new_this_scan": false,
-            "analytical_weight": 0.3
-          },
-          {
-            "identity": "url:https://news.google.com/rss/articles/cbmivafbvv95cuxprwvkq1i1dzb2wm10zmloy0d5bw9pnepssnvtt0v5bhu0sxnsmneyy1c0v2nmvnhzsm1qz0jxz1dsahbdnkjmrxdzawvaeks5ekhrovf0sju3cgq5vwrpc1nprfd2umtyrtjpzwvlamfvrjv0wmrnwk04uw13uucwznlgnflorzd2cfuxz056ukrjcejaekzsmfm3mjremhpzcwqybwvptgzksgzgogncqnv3bfowz3dxexl2bw?oc=5",
-            "role": "Context only",
-            "strand": "C",
-            "title": "EU's cybersecurity agency granted access to Mythos 5 AI model, Commission says",
-            "source": "Reuters",
-            "date": "2026-09-10",
-            "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPRWVkQ1I1dzB2Wm10ZmloY0d5bW9PNEpSSnVTT0V5bHU0SXNsMnEyY1c0V2NmVnhzSm1qZ0JXZ1dsaHBDNkJmRXdzaWVaeks5ekhROVF0SjU3cGQ5VWRPc1NPRFd2UmtYRTJPZWVLamFvRjV0WmRnWk04UW13UUcwZnlGNFlORzd2cFUxZ056UkRJcEJaekZSMFM3MjREMHpzcWQybWVpTGZkSGZGOGNCQnV3bFowZ3dxeXl2bw?oc=5",
-            "quality": 82,
-            "new_this_scan": false,
-            "analytical_weight": 0.3
-          }
-        ],
-        "against": [],
-        "support_queries": [
-          "Europe research innovation health data existing European asset bottleneck payoff evidence",
-          "Europe research innovation health data low cost interoperability cataloguing coordination"
-        ],
-        "falsifier_queries": [
-          "Europe research innovation health data asset not distinctive bottleneck expensive no measurable payoff"
-        ],
-        "touched_this_scan": false,
-        "reader_eligible": false,
-        "generic_grammar": true,
-        "reader_title": "Europe may have an underused advantage in health data if a tractable bottleneck is the real constraint.",
-        "reader_summary": "This opportunity is retained only when separate evidence shows a current weakness, an asset Europe already possesses, a fixable bottleneck around that asset, and measurable payoff evidence.",
-        "first_seen_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-15T07:27:57Z",
-        "fingerprint": "4988bcf171cda37c",
-        "new_this_scan": false,
-        "updated_this_scan": false,
-        "lifecycle": "seeded",
-        "missed_detection_scans": 0,
-        "retrace_status": "unchanged",
-        "retrace_at": "2026-09-15T07:27:57Z"
+        "retrace_at": "2026-09-15T08:09:48Z"
       }
     ]
   },
   "downstream_archive": {
     "profile_version": "v1.0-current-downstream-rules",
-    "updated_at": "2026-09-15T07:27:57Z",
+    "updated_at": "2026-09-15T08:09:48Z",
     "objects": [
       {
         "kind": "high_order",
@@ -107111,27 +106642,518 @@
           "first_seen": "2026-09-08T12:05Z",
           "new_this_scan": false
         }
+      },
+      {
+        "kind": "high_order",
+        "id": "l45:opposing_movements_open_protect:open-protect-openness",
+        "title": "Opening openness while protecting openness.",
+        "retrace_status": "retired",
+        "retired_at": "2026-09-15T08:09:48Z",
+        "reason": "Current cleaned evidence no longer satisfies the repository's current construction threshold for this downstream object.",
+        "previous_object": {
+          "id": "l45:opposing_movements_open_protect:open-protect-openness",
+          "grammar_id": "opposing_movements_open_protect",
+          "product": "trend",
+          "inferential_distance": 4,
+          "topic_key": "openness",
+          "topic_label": "openness",
+          "status": "qualified",
+          "score": 94,
+          "primary_role_coverage": 1.0,
+          "required_roles": [
+            "left_movement",
+            "right_movement"
+          ],
+          "covered_roles": [
+            "left_movement",
+            "right_movement"
+          ],
+          "missing_links": [],
+          "primary_records": 10,
+          "primary_sources": 10,
+          "context_records": 0,
+          "counter_records": 0,
+          "denial_tested": true,
+          "counter_penalty": 0,
+          "synthesis_across_records": true,
+          "support": [
+            {
+              "identity": "url:https://allea.org/wp-content/uploads/2026/06/joint-statement-on-open-science-1.pdf",
+              "role": "Opening movement",
+              "strand": "A",
+              "title": "Joint Statement on Open Science: Open Science as a pillar for strengthening the European Research Area",
+              "source": "ALLEA",
+              "date": "2026-05-13",
+              "link": "https://allea.org/wp-content/uploads/2026/06/Joint-statement-on-Open-Science-1.pdf",
+              "quality": 96,
+              "new_this_scan": false,
+              "analytical_weight": 1.0
+            },
+            {
+              "identity": "url:https://www.rathenau.nl/en/knowledge-and-innovation-transitions/challenge-driven-knowledge-and-innovation-policy/geopolitics-science-policy",
+              "role": "Opening movement",
+              "strand": "A",
+              "title": "Geopolitics in Science Policy: Dilemmas for the mobilisation of research",
+              "source": "Rathenau Instituut",
+              "date": "2026-05-04",
+              "link": "https://www.rathenau.nl/en/knowledge-and-innovation-transitions/challenge-driven-knowledge-and-innovation-policy/geopolitics-science-policy",
+              "quality": 96,
+              "new_this_scan": false,
+              "analytical_weight": 1.0
+            },
+            {
+              "identity": "url:https://erc.europa.eu/news-events/magazine-article/world-data-few-hands",
+              "role": "Opening movement",
+              "strand": "A",
+              "title": "A world of data in a few hands",
+              "source": "European Research Council",
+              "date": "2026-04-29",
+              "link": "https://erc.europa.eu/news-events/magazine-article/world-data-few-hands",
+              "quality": 96,
+              "new_this_scan": false,
+              "analytical_weight": 1.0
+            },
+            {
+              "identity": "url:https://www.cost.eu/publication/cost-annual-report-2025",
+              "role": "Opening movement",
+              "strand": "A",
+              "title": "COST Annual Report 2025",
+              "source": "COST Association",
+              "date": "2026-03-31",
+              "link": "https://www.cost.eu/publication/cost-annual-report-2025/",
+              "quality": 96,
+              "new_this_scan": false,
+              "analytical_weight": 1.0
+            },
+            {
+              "identity": "url:https://doi.org/10.1057/s41307-026-00465-z",
+              "role": "Opening movement",
+              "strand": "A",
+              "title": "The Neo-Academic Cold War: Political Traumas and Transnational Paranoia",
+              "source": "Higher Education Policy",
+              "date": "2026-08-10",
+              "link": "https://doi.org/10.1057/s41307-026-00465-z",
+              "quality": 89,
+              "new_this_scan": false,
+              "analytical_weight": 1.0
+            },
+            {
+              "identity": "url:https://doi.org/10.1016/j.telpol.2026.103222",
+              "role": "Opening movement",
+              "strand": "A",
+              "title": "Enabling the EU's digital Sovereignty: A Europe-level quantum internet as the key infrastructure for a European digital polity",
+              "source": "Telecommunications Policy",
+              "date": "2026-04-20",
+              "link": "https://doi.org/10.1016/j.telpol.2026.103222",
+              "quality": 89,
+              "new_this_scan": false,
+              "analytical_weight": 1.0
+            },
+            {
+              "identity": "url:https://doi.org/10.1093/scipol/scag021",
+              "role": "Opening movement",
+              "strand": "A",
+              "title": "Structured content analysis of open access book policies: European university and research funder approaches",
+              "source": "Science and Public Policy",
+              "date": "2026-03-26",
+              "link": "https://doi.org/10.1093/scipol/scag021",
+              "quality": 89,
+              "new_this_scan": false,
+              "analytical_weight": 1.0
+            },
+            {
+              "identity": "url:https://era.gv.at/news-items/the-guild-urges-safeguards-as-fp10-opens-to-dual-use-research",
+              "role": "Protection movement",
+              "strand": "A",
+              "title": "The Guild urges safeguards as FP10 opens to dual-use research",
+              "source": "ERA Portal Austria",
+              "date": "2026-07-01",
+              "link": "https://era.gv.at/news-items/the-guild-urges-safeguards-as-fp10-opens-to-dual-use-research/",
+              "quality": 96,
+              "new_this_scan": false,
+              "analytical_weight": 1.0
+            },
+            {
+              "identity": "url:https://cepr.org/system/files/publication-files/306781-the_financeability_of_europe_s_strategic_ambitions.pdf",
+              "role": "Protection movement",
+              "strand": "A",
+              "title": "The Financeability of Europe's Strategic Ambitions",
+              "source": "VoxEU / CEPR",
+              "date": "2026-09-10",
+              "link": "https://cepr.org/system/files/publication-files/306781-the_financeability_of_europe_s_strategic_ambitions.pdf",
+              "quality": 89,
+              "new_this_scan": false,
+              "analytical_weight": 1.0
+            },
+            {
+              "identity": "url:https://doi.org/10.1002/cep4.70033",
+              "role": "Protection movement",
+              "strand": "A",
+              "title": "Norm Transformation in EU Research Security: A Pragmatist Approach",
+              "source": "Contemporary European Politics",
+              "date": "2026-03-18",
+              "link": "https://doi.org/10.1002/cep4.70033",
+              "quality": 89,
+              "new_this_scan": false,
+              "analytical_weight": 1.0
+            }
+          ],
+          "context": [],
+          "against": [],
+          "support_queries": [
+            "Europe research innovation openness open access sharing action",
+            "Europe research innovation openness security safeguard dual use action"
+          ],
+          "falsifier_queries": [
+            "Europe research innovation openness common rule removes openness security tradeoff",
+            "Europe research innovation openness evidence safeguards do not constrain access"
+          ],
+          "touched_this_scan": false,
+          "reader_eligible": true,
+          "generic_grammar": true,
+          "reader_title": "Opening openness while protecting openness.",
+          "reader_summary": "Current primary evidence shows simultaneous pressure to widen access and to add security or dual-use safeguards around the same European R&I object.",
+          "trend_balance": {
+            "family": "open_protect",
+            "object_key": "openness",
+            "left_title": "Opening openness",
+            "right_title": "Protecting openness",
+            "left_role": "Opening movement",
+            "right_role": "Protection movement",
+            "left_plain": "Access, sharing or openness is being widened around openness.",
+            "right_plain": "Security, dual-use or control conditions are tightening around openness.",
+            "left_pull": 70,
+            "right_pull": 30,
+            "raw_left_pull": 70,
+            "raw_right_pull": 30,
+            "left_range": [
+              70,
+              70
+            ],
+            "right_range": [
+              30,
+              30
+            ],
+            "left_actions": 7,
+            "right_actions": 3,
+            "left_sources": 7,
+            "right_sources": 3,
+            "left_adjusted_points": 7.0,
+            "right_adjusted_points": 3.0
+          },
+          "first_seen_at": "2026-09-15T07:27:57Z",
+          "last_updated_at": "2026-09-15T07:27:57Z",
+          "fingerprint": "5fc195ea3412eaf5",
+          "new_this_scan": false,
+          "updated_this_scan": false,
+          "lifecycle": "seeded",
+          "missed_detection_scans": 0,
+          "retrace_status": "unchanged",
+          "retrace_at": "2026-09-15T07:27:57Z"
+        }
+      },
+      {
+        "kind": "shock",
+        "id": "emergent:biotech:data_access",
+        "title": "A cross-border data restriction breaks Europe’s biotechnology and clinical research",
+        "retrace_status": "retired",
+        "retired_at": "2026-09-15T08:09:48Z",
+        "reason": "Current cleaned evidence no longer satisfies the repository's current construction threshold for this downstream object.",
+        "previous_object": {
+          "id": "emergent:biotech:data_access",
+          "asset_id": "biotech",
+          "pressure_id": "data_access",
+          "title": "A cross-border data restriction breaks Europe’s biotechnology and clinical research",
+          "plainly": "Europe relies on biotechnology and clinical research. Separate primary evidence shows that a cross-border data-access restriction can change access quickly. Recent weak signals and historical material may strengthen the context, but neither can establish the shock on its own.",
+          "second_order": "Projects may keep their grants and institutions but still lose time, access or usable capacity while a replacement is found.",
+          "why_easy_to_miss": "The hypothesis appears when durable European capability evidence and a separately evidenced external pressure are read as one chain; low-weight current signals and history are then used only as context.",
+          "reasoning": [
+            "Primary retained evidence shows European reliance on or expansion of biotechnology and clinical research.",
+            "Separate primary retained evidence shows a live mechanism for a cross-border data-access restriction.",
+            "Primary evidence contains 1 direct capability × pressure coupling record(s).",
+            "2 recent weak-signal item(s) point in the same direction; each is capped at 30% of a primary evidence item and none satisfies a primary threshold.",
+            "2 historical Strand-A item(s) provide structural context; they cannot serve as the current trigger.",
+            "The scenario becomes a shock only if the response is slower than the disruption."
+          ],
+          "conditions": [
+            "Europe materially depends on biotechnology and clinical research for current or planned work.",
+            "A cross-border data-access restriction reaches the supplier, service, partner or rule that the European capability depends on.",
+            "Europe cannot substitute, reroute or absorb the change before projects begin losing usable capacity."
+          ],
+          "case_against": [
+            "Only one primary retained record currently links the European capability directly to the outside pressure.",
+            "The primary direct connection is concentrated in one source, so independent confirmation is still weak.",
+            "The primary corpus contains 1 strong sign(s) of substitution, resilience or policy response that could absorb the shock.",
+            "Recent media/weak-signal corroboration is intentionally down-weighted and cannot substitute for primary evidence.",
+            "The scenario still depends on the disruption arriving faster than Europe can respond."
+          ],
+          "prevention_actions": [
+            "Keep compliant European data and trial routes available when an outside provider or jurisdiction is blocked.",
+            "Build enough cross-border European capacity that one country or provider is not indispensable.",
+            "Keep a compliant European route for essential research data and analysis."
+          ],
+          "watch_for": [
+            "A provider or government restricts cross-border access to data used by European research.",
+            "Projects stop pooling or analysing data that previously moved across borders."
+          ],
+          "net_assessment": "Plausible, but important parts of the primary trigger or connection still need confirmation.",
+          "inference_score": 88,
+          "support": [
+            {
+              "identity": "url:https://doi.org/10.12688/openreseurope.23459.2",
+              "row": "A108",
+              "strand": "A",
+              "role": "Primary coupling evidence",
+              "evidence_role": "primary",
+              "analytical_weight": 1.0,
+              "title": "A sustainable platform for federated health data access, AI innovation, and regulatory acceptance in alignment with the European Health Data Space principles",
+              "source": "Open Research Europe",
+              "date": "2026-08-26",
+              "link": "https://doi.org/10.12688/openreseurope.23459.2",
+              "quality": 88,
+              "new_this_scan": false,
+              "core_message": "The project presents a modular, standards-based federated platform using privacy-by-design analytics, with lung cancer as its demonstrator, and aims at regulatory and health technology assessment acceptance of real-world evidence.",
+              "geo_evidence": [],
+              "ri_evidence": [],
+              "a_context_evidence": []
+            },
+            {
+              "identity": "url:https://www.sitra.fi/wp-content/uploads/2026/06/valo_the-nordic-model_interim-report.pdf",
+              "row": "A253",
+              "strand": "A",
+              "role": "Primary evidence",
+              "evidence_role": "primary",
+              "analytical_weight": 1.0,
+              "title": "The Nordic model for collaboration on health data: insights from an evolving process - Sitra",
+              "source": "Sitra — Finnish Innovation Fund",
+              "date": "2026-06-03",
+              "link": "https://www.sitra.fi/wp-content/uploads/2026/06/VALO_The-Nordic-model_Interim-Report.pdf",
+              "quality": 98,
+              "new_this_scan": false,
+              "core_message": "Translating these advantages into effective cross- border collaboration has nonetheless proven difficult.",
+              "geo_evidence": [],
+              "ri_evidence": [
+                "research and innovation",
+                "research collaboration"
+              ],
+              "a_context_evidence": [
+                "international_coordination",
+                "research collaboration",
+                "cross-border",
+                "reliance"
+              ]
+            },
+            {
+              "identity": "url:https://doi.org/10.1093/ckj/sfag257",
+              "row": "A179",
+              "strand": "A",
+              "role": "European capability: biotechnology and clinical research",
+              "evidence_role": "primary",
+              "analytical_weight": 1.0,
+              "title": "Coordinated clinical trial networks in nephrology: strengthening research infrastructure and improving trial delivery",
+              "source": "Clinical Kidney Journal",
+              "date": "2026-08-06",
+              "link": "https://doi.org/10.1093/ckj/sfag257",
+              "quality": 92,
+              "new_this_scan": false,
+              "core_message": "A coordinated national network can streamline feasibility, contracting and site outreach, with promising early delivery experience.",
+              "geo_evidence": [],
+              "ri_evidence": [],
+              "a_context_evidence": []
+            },
+            {
+              "identity": "url:https://www.eit.europa.eu/our-activities/knowledge-centre",
+              "row": "A286",
+              "strand": "A",
+              "role": "External mechanism: a cross-border data-access restriction",
+              "evidence_role": "primary",
+              "analytical_weight": 1.0,
+              "title": "Welcome to our Knowledge Centre",
+              "source": "European Institute of Innovation and Technology",
+              "date": "2026-09-14",
+              "link": "https://www.eit.europa.eu/our-activities/knowledge-centre",
+              "quality": 98,
+              "new_this_scan": false,
+              "core_message": "Discover how the EIT, Europe’s largest innovation ecosystem, is shaping the future.",
+              "geo_evidence": [
+                "data sovereignty"
+              ],
+              "ri_evidence": [
+                "innovation ecosystem",
+                "artificial intelligence + innovation"
+              ],
+              "a_context_evidence": [
+                "technology position / dependency",
+                "data sovereignty",
+                "eit",
+                "EU"
+              ]
+            },
+            {
+              "identity": "url:https://news.google.com/rss/articles/cbmitafbvv95cuxqnmnwvdbflu5vwdjlevu1t2nju1q1wmnlavvhdejjbwrmvxzlngh0q1bxn2u1ynzlbzdvuut0betlb2hwdm5ernh3qxbktwcwsexyv2yxvuhswemts2zrsvpgqv9ycxl5bwyxnkjir0drsxndbg4tohotr3lregtrc1a5mdleylnnbmfjbdzta2vfwxzjalhhnezwzhpgmkf4ry1kvgpqxzlkafc1m1nxt2pkyzc?oc=5",
+              "row": "C095",
+              "strand": "C",
+              "role": "Recent weak-signal context",
+              "evidence_role": "weak_signal",
+              "analytical_weight": 0.3,
+              "title": "Horizon Europe needs tailored biotech funding, report says",
+              "source": "Science|Business",
+              "date": "2026-09-08",
+              "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQNmNwVDBfLU5VWDJLeVU1T2NjU1Q1WmNlaVVHdEJJbWRmVXZLNGh0Q1BXN2U1YnZlbzdvUUt0bEtlb2hwdm5ERnh3QXBKTWcwSExYV2YxVUhSWEMtS2ZrSVpGQV9YcXl5bWYxNkJiR0dRSXNDbG4tOHotR3lreGtrc1A5MDlEYlNNbmFJbDZTa2VfWXZjalhHNEZWZHpGMkF4Ry1kVGpqXzlkaFc1M1NXT2pKYzc?oc=5",
+              "quality": 90,
+              "new_this_scan": false,
+              "core_message": "The reported analysis finds current Horizon-style instruments fit biotech development poorly and recommends more tailored support.",
+              "geo_evidence": [],
+              "ri_evidence": [],
+              "a_context_evidence": []
+            },
+            {
+              "identity": "url:https://news.google.com/rss/articles/cbmizafbvv95cuxqvfz1ekloq1g2b3fjblbedhnvr2uzedhqae0xu2tvsenqohjosdzpowetmdbkx3zudwl2nghmumnmblpmm1rpa0zvbdjktkvdee5lnmnwvnvjchy2ze9beux0rtdsounszvj0z0vubgntck1jz3j0oed6ahjmvnznefjrnurotzjjnhflwjnuovhkq2vmdggzvzu4ulp2ews1twyyv3jonzzoyxo0tetmzxu5n1rnaxzlyxbcsg51t3pxrwg0ujrvbuc0chq?oc=5",
+              "row": "C137",
+              "strand": "C",
+              "role": "Recent weak-signal context",
+              "evidence_role": "weak_signal",
+              "analytical_weight": 0.3,
+              "title": "EU governments set to address biotech and economic security",
+              "source": "Research Professional News",
+              "date": "2026-07-28T07:00Z",
+              "link": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQVFZ1ekloQ1g2b3FJblBEdHNvR2UzeDhQaE0xU2tVSENqOHJOSDZPOWEtMDBKX3ZUdWl2NGhmUmNMblpMM1Rpa0ZvbDJKTkVDeE5LNmNwVnVJcHY2ZE9BeUx0RTdSOUNsZVJ0Z0VubGNTck1JZ3J0OEd6aHJmVnZneFJrNUROTzJjNHFLWjNuOVhKQ2VmdGgzVzU4Ulp2eWs1TWYyV3JoNzZoYXo0TEtMZXU5N1RNaXZLYXBCSG51T3pxRWg0UjRvbUc0cHQ?oc=5",
+              "quality": 90,
+              "new_this_scan": false,
+              "core_message": "EU governments set to address biotech and economic security.",
+              "geo_evidence": [],
+              "ri_evidence": [],
+              "a_context_evidence": []
+            },
+            {
+              "identity": "url:https://publications.jrc.ec.europa.eu/repository/handle/jrc139415",
+              "row": "H114",
+              "strand": "H",
+              "role": "Historical structural context",
+              "evidence_role": "historical",
+              "analytical_weight": 0.45,
+              "title": "Emerging Biotechnologies in Europe: Foresight for Policy",
+              "source": "JRC Publications Repository",
+              "date": "2024-12-02",
+              "link": "https://publications.jrc.ec.europa.eu/repository/handle/JRC139415",
+              "quality": 92,
+              "new_this_scan": false,
+              "core_message": "The European Union (EU) is at an important point for developing its industrial biotechnology (IB) sector, as emerging biotechnologies advances merge with traditional industry.",
+              "geo_evidence": [],
+              "ri_evidence": [
+                "research infrastructure",
+                "biotechnology + research",
+                "biotech + research",
+                "biotech + innovation"
+              ],
+              "a_context_evidence": []
+            },
+            {
+              "identity": "url:https://allea.org/wp-content/uploads/2020/10/allea_gen_editing_crop_2020.pdf",
+              "row": "H297",
+              "strand": "H",
+              "role": "Historical structural context",
+              "evidence_role": "historical",
+              "analytical_weight": 0.45,
+              "title": "Academies’ report reviews debate on genome editing for crop improvement - ALLEA",
+              "source": "ALLEA",
+              "date": "2020-10-29",
+              "link": "https://allea.org/wp-content/uploads/2020/10/ALLEA_Gen_Editing_Crop_2020.pdf",
+              "quality": 92,
+              "new_this_scan": false,
+              "core_message": "Genome Editing for Crop Improvement ALLEA Symposium Report | October 2020 Published in Berlin by ALLEA - All European Academies October 2020 Lead authors Dr.",
+              "geo_evidence": [],
+              "ri_evidence": [
+                "research and development",
+                "biotech + innovative"
+              ],
+              "a_context_evidence": []
+            }
+          ],
+          "against": [
+            {
+              "identity": "url:https://doi.org/10.1111/bioe.70159",
+              "row": "A264",
+              "strand": "A",
+              "role": "Primary evidence that could absorb or prevent the shock",
+              "evidence_role": "primary",
+              "analytical_weight": 1.0,
+              "title": "The Role of Social Value in Data‐Intensive Health Research",
+              "source": "Bioethics",
+              "date": "2026-07-16",
+              "link": "https://doi.org/10.1111/bioe.70159",
+              "quality": 92,
+              "new_this_scan": false,
+              "core_message": "Social value cannot by itself justify lowering consent standards; that move requires meaningful involvement and control for data contributors.",
+              "geo_evidence": [],
+              "ri_evidence": [],
+              "a_context_evidence": []
+            }
+          ],
+          "prevention_evidence": [
+            {
+              "identity": "url:https://doi.org/10.1111/bioe.70159",
+              "row": "A264",
+              "strand": "A",
+              "role": "Primary evidence that could absorb or prevent the shock",
+              "evidence_role": "primary",
+              "analytical_weight": 1.0,
+              "title": "The Role of Social Value in Data‐Intensive Health Research",
+              "source": "Bioethics",
+              "date": "2026-07-16",
+              "link": "https://doi.org/10.1111/bioe.70159",
+              "quality": 92,
+              "new_this_scan": false,
+              "core_message": "Social value cannot by itself justify lowering consent standards; that move requires meaningful involvement and control for data contributors.",
+              "geo_evidence": [],
+              "ri_evidence": [],
+              "a_context_evidence": []
+            }
+          ],
+          "source_count": 4,
+          "primary_source_count": 4,
+          "pressure_source_count": 2,
+          "coupling_count": 1,
+          "context_coupling_count": 0,
+          "weak_signal_context_count": 2,
+          "historical_context_count": 2,
+          "context_weight_total": 1.5,
+          "context_score_bonus": 4.1,
+          "official_trigger_present": true,
+          "best_quality": 98,
+          "average_quality": 94,
+          "fresh_coupling": false,
+          "fresh_context": false,
+          "first_inferred_at": "2026-09-15T05:22:05Z",
+          "last_updated_at": "2026-09-15T07:27:57Z",
+          "fingerprint": "845ddd404fbf052d",
+          "new_this_scan": false,
+          "updated_this_scan": false,
+          "status": "unchanged",
+          "retrace_status": "unchanged",
+          "retrace_at": "2026-09-15T07:27:57Z"
+        }
       }
     ]
   },
   "downstream_retrace": {
     "tool_version": "v1.0-current-downstream-rules",
-    "completed_at": "2026-09-15T07:27:57Z",
+    "completed_at": "2026-09-15T08:09:48Z",
     "source_revalidation_report": "",
     "diagnostics": {
       "derived_objects_checked": 51,
-      "unchanged": 38,
-      "rebuilt": 11,
+      "unchanged": 35,
+      "rebuilt": 13,
       "materially_rewritten": 0,
-      "newly_inferred": 2,
-      "retired": 0,
-      "stale_evidence_references_before": 4,
-      "stale_evidence_references_removed": 4,
+      "newly_inferred": 0,
+      "retired": 3,
+      "stale_evidence_references_before": 5,
+      "stale_evidence_references_removed": 5,
       "orphan_references_remaining": 0,
-      "active_evidence_reference_occurrences_checked": 527,
+      "active_evidence_reference_occurrences_checked": 507,
       "shock_support_chains_changed_after_a_removal": 0,
-      "active_dynamic_shocks": 11,
-      "active_high_order_candidates": 30,
+      "active_dynamic_shocks": 10,
+      "active_high_order_candidates": 29,
       "active_strategic_pathways": 1,
       "active_possible_external_shocks": 0,
       "standalone_matrix_objects": 0,
@@ -107142,7 +107164,7 @@
   },
   "active_corpus": {
     "profile": "radar-active-corpus-v1",
-    "rebuilt_at": "2026-09-15T07:27:57Z",
+    "rebuilt_at": "2026-09-15T08:09:48Z",
     "raw_counts": {
       "strand_a": 420,
       "strand_b": 133,
@@ -107150,18 +107172,18 @@
       "frontier_evidence": 0
     },
     "active_counts": {
-      "strand_a": 302,
+      "strand_a": 300,
       "strand_b": 120,
       "strand_c": 148,
       "frontier_evidence": 0
     },
     "raw_total": 684,
-    "active_total": 570,
+    "active_total": 568,
     "decision_counts": {
-      "provisional": 87,
-      "keep": 468,
+      "provisional": 77,
+      "keep": 476,
       "review": 21,
-      "drop": 104,
+      "drop": 106,
       "drop_unverifiable": 3,
       "duplicate": 1,
       "needs_manual_verification": 0
@@ -107170,14 +107192,14 @@
     "missing_state_is": "provisional_active",
     "deep_scan_v2": {
       "total_records": 677,
-      "v2_verified": 591,
-      "v2_pending": 86
+      "v2_verified": 601,
+      "v2_pending": 76
     },
     "historical_deep_scan_v2": {
-      "total_records": 682,
-      "v2_verified": 64,
-      "v2_pending": 618,
-      "active_a_context": 470
+      "total_records": 704,
+      "v2_verified": 101,
+      "v2_pending": 603,
+      "active_a_context": 491
     },
     "derived_reasoning_uses_active_corpus": true,
     "metadata_corrections_applied_to_active_view": true,

@@ -6,30 +6,30 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **655** (Main **591** + Historical **64**)
-- Automatic queue still needing V2 verification: **657** (Main **39** + Historical **618**)
-- Currently assigned to workers: **96** (Main **15** + Historical **81**)
-- Bounded access-recovery retries still eligible: **24**
+- Authoritative V2 verified: **702** (Main **601** + Historical **101**)
+- Automatic queue still needing V2 verification: **632** (Main **29** + Historical **603**)
+- Currently assigned to workers: **84** (Main **7** + Historical **77**)
+- Bounded access-recovery retries still eligible: **22**
 - Hands-on verification needed: **47**
-- Automatic queue pending and not yet assigned: **561**
+- Automatic queue pending and not yet assigned: **548**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260915T073043Z-6066443b3f05`
-- Assigned unresolved records: **48**
-  1. `link:https://doi.org/10.1163/15691497-20263013` — EU–LAC Relations in the Context of NATO Geopolitics — recovery attempt 2/3
-  2. `historical:id:d0081e9c63e0bc65` — Innovation research
-  3. `historical:id:f0bc4536d8236e14` — Beyond the Ban: TikTok and the Politics of Digital Sovereignty in the EU and US
-  4. `historical:id:177223d347cbd601` — The role of leading companies in artificial intelligence applications
-  5. `historical:id:1ebcb0a957b2d582` — University Positioning in AI Policies: Comparative Insights From National Policies and Non‐State Actor Influences in China, the European Union, India, Russia, and the United States
-  6. `historical:id:6f732980699970d4` — Global Research Initiative launched to advance Open Science through evidence-based approach - ESF
-  7. `historical:id:7715e1b6ca6216f6` — Privacy company: EU advances data dialogue | Rathenau Instituut
-  8. `historical:id:49c23295e4ca683c` — Beyond disclosure – or why the EU’s green strategy is coming apart – CEPS
-  - … plus 40 more in the package manifest
+- Current package: `worker-a-20260915T081004Z-f53d80648e06`
+- Assigned unresolved records: **36**
+  1. `historical:id:243bf801c8e55486` — Finland, what is our promise for future generations? | Demos Helsinki
+  2. `historical:id:eb494ea5df2c2054` — Making Public Compute Work for Applied AI Startups
+  3. `historical:id:2f44fbce5985454d` — Entangled Interests in Quantum Technology
+  4. `historical:id:831bab1388d1920a` — ERA Portal Austria – Initiative 3.2. Strengthen Research Security
+  5. `historical:id:d9c8cece773b118c` — ERA Portal Austria – Global Approach to R&I
+  6. `historical:id:2ba96b7aa2d6b6c5` — Artificial Intelligence
+  7. `historical:id:19ee1b329e56b795` — AI Systems, Markets & Governance
+  8. `historical:id:f8230f693a65f032` — Response and Resilience: Government Strategies for Securing Subsea Infrastructure in Europe and Asia - HCSS
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260915T073056Z-19a75c529a13`
+- Current package: `worker-b-20260915T081017Z-19a75c529a13`
 - Assigned unresolved records: **48**
   1. `historical:id:0cbacdd5f61aadae` — Innovation policy transformed?
   2. `historical:id:2eba5e4388711eda` — Is Europe ready to lead the fusion energy race? - Fusion for Energy
