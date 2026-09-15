@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-15T12:19:18Z",
+  "generated_at": "2026-09-15T13:36:59Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -56180,6 +56180,67 @@
       "reader_text_model": "user-provided-llm-subscription",
       "reader_text_written_at": "2026-09-15T12:19:18Z",
       "deep_scan_package_id": "worker-a-20260915T112419Z-c19ab9b1c63a"
+    },
+    "historical:id:a5fa11dce889a06d": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "08fadcad",
+      "identity_hash": "48ef8d61e308d5c5",
+      "reader_title": "Organisational similarity drives which European universities collaborate on research",
+      "reader_what": "Doctoral programme capacity is the most stable predictor of European university research ties",
+      "reader_why": "Identifies a lever European funders can use to reduce research fragmentation",
+      "reader_more": "The authors model two collaboration networks among European universities, one built from joint projects and one from co-authored publications, in physical sciences and engineering and in life sciences over 2011-2016. They use exponential random graph models, a statistical technique for networks that tests which organisational attributes predict a tie while controlling for geography. Research capability, measured by the size of doctoral programmes, is the clearest and most stable predictor both of forming ties at all and of choosing similar partners. The authors argue funders should treat doctoral capacity as a strategic instrument rather than a by-product.",
+      "deep_analysis": {
+        "work_kind": "empirical study",
+        "research_question": "Which organisational factors shape research collaboration networks among European universities?",
+        "main_finding": "Research capability proxied by doctoral programme size most consistently predicts tie formation and homophily in European university collaboration networks.",
+        "method_or_basis": "Exponential random graph models on project and publication networks, two research domains, 2011-2016, controlling for spatial proximity.",
+        "qualification": "Observational network data for 2011-2016 only; associations, not demonstrated causal effects of policy.",
+        "radar_relevance": "Directly evidences how European research capacity is distributed and why collaboration concentrates, relevant to fragmentation and ERA policy.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "GET https://doi.org/10.1007/s10734-023-01109-6 -> HTTP 200, 72460 chars of page text extracted"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref api.crossref.org/works/10.1007/s10734-023-01109-6 returned 'Organizational factors affecting higher education collaboration networ' in Higher Education, issued 2023-10-25"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://doi.org/10.1007/s10734-023-01109-6",
+            "title": "Organizational factors affecting higher education collaboration networks: evidence from Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Supplied DOI resolved to the Springer article page carrying abstract, full metadata and article body sections; Crossref confirmed authors and journal."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Empirical network study of collaboration among European universities, directly about EU research-policy fragmentation."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-15T13:36:59Z",
+      "deep_scan_package_id": "worker-a-20260915T122550Z-01e0307e23a4"
     }
   }
 }

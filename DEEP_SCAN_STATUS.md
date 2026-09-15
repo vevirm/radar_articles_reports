@@ -6,30 +6,30 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **762** (Main **605** + Historical **157**)
-- Automatic queue still needing V2 verification: **571** (Main **24** + Historical **547**)
-- Currently assigned to workers: **120** (Main **10** + Historical **110**)
-- Bounded access-recovery retries still eligible: **16**
+- Authoritative V2 verified: **763** (Main **605** + Historical **158**)
+- Automatic queue still needing V2 verification: **570** (Main **24** + Historical **546**)
+- Currently assigned to workers: **118** (Main **10** + Historical **108**)
+- Bounded access-recovery retries still eligible: **17**
 - Hands-on verification needed: **48**
-- Automatic queue pending and not yet assigned: **451**
+- Automatic queue pending and not yet assigned: **452**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260915T122550Z-01e0307e23a4`
-- Assigned unresolved records: **60**
-  1. `historical:id:3c0bd4298a48a861` — Achieving European Union strategic autonomy: circularity in critical raw materials value chains
-  2. `historical:id:a5fa11dce889a06d` — Organizational factors affecting higher education collaboration networks: evidence from Europe
-  3. `historical:id:1305a3174c34b1b9` — Operation regulation: Strengthening Latin America’s AI governance – European Council on Foreign Relations
-  4. `historical:id:dc297ea0893bebfc` — Europe must end its quantum technology research with China
-  5. `historical:id:1342a320214f9882` — ESF Annual Report 2023 - ESF
-  6. `historical:id:ef8019b3cabe30ac` — The geopolitics of technology standards: historical context for US, EU and Chinese approaches
-  7. `historical:id:9525508d34966bb2` — Game of Brains: Examining Researcher Brain Gain and Brain Drain and Research University Policy
-  8. `historical:id:2c6a970a0f7fe791` — Digital sovereignty - Rhetoric and reality
-  - … plus 52 more in the package manifest
+- Current package: `worker-a-20260915T133811Z-5a7ccdade7b5`
+- Assigned unresolved records: **58**
+  1. `historical:id:1305a3174c34b1b9` — Operation regulation: Strengthening Latin America’s AI governance – European Council on Foreign Relations
+  2. `historical:id:dc297ea0893bebfc` — Europe must end its quantum technology research with China
+  3. `historical:id:1342a320214f9882` — ESF Annual Report 2023 - ESF
+  4. `historical:id:ef8019b3cabe30ac` — The geopolitics of technology standards: historical context for US, EU and Chinese approaches
+  5. `historical:id:9525508d34966bb2` — Game of Brains: Examining Researcher Brain Gain and Brain Drain and Research University Policy
+  6. `historical:id:2c6a970a0f7fe791` — Digital sovereignty - Rhetoric and reality
+  7. `historical:id:9039171272bbcba2` — Academic Symposium Highlights Path Forward for European Research Collaboration - ALLEA
+  8. `historical:id:7861df71d1d5614f` — Horizon Europe 'Health' - Implementation research for management of multiple long-term conditions in the context of non-communicable diseases (GACD)
+  - … plus 50 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260915T122603Z-fab36a28f3ae`
+- Current package: `worker-b-20260915T133832Z-fab36a28f3ae`
 - Assigned unresolved records: **60**
   1. `historical:id:83e847fd87a5d988` — Open social innovation: A systematic literature review and future research agenda
   2. `historical:id:54a0ed573cfd4e70` — Academic freedom is becoming part of Europe's competitive offer to global researchers as well as a condition for reliable knowledge production.

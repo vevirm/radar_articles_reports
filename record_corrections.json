@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-09-15T12:19:18Z",
+  "updated_at": "2026-09-15T13:36:59Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -4306,6 +4306,21 @@
       ],
       "updated_at": "2026-09-15T12:19:18Z",
       "deep_scan_package_id": "worker-a-20260915T112419Z-c19ab9b1c63a"
+    },
+    "historical:id:a5fa11dce889a06d": {
+      "fields": {
+        "date": "2023-10-25"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Crossref records first publication (online) on 2023-10-25; the stored 2024-07-01 is the print issue date, not first publication.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://doi.org/10.1007/s10734-023-01109-6"
+      ],
+      "updated_at": "2026-09-15T13:36:59Z",
+      "deep_scan_package_id": "worker-a-20260915T122550Z-01e0307e23a4"
     }
   }
 }
