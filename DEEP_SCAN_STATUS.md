@@ -6,30 +6,30 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **715** (Main **602** + Historical **113**)
-- Automatic queue still needing V2 verification: **619** (Main **28** + Historical **591**)
-- Currently assigned to workers: **96** (Main **8** + Historical **88**)
-- Bounded access-recovery retries still eligible: **22**
-- Hands-on verification needed: **47**
-- Automatic queue pending and not yet assigned: **523**
+- Authoritative V2 verified: **762** (Main **605** + Historical **157**)
+- Automatic queue still needing V2 verification: **571** (Main **24** + Historical **547**)
+- Currently assigned to workers: **84** (Main **7** + Historical **77**)
+- Bounded access-recovery retries still eligible: **19**
+- Hands-on verification needed: **48**
+- Automatic queue pending and not yet assigned: **487**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260915T121744Z-c19ab9b1c63a`
-- Assigned unresolved records: **48**
-  1. `historical:id:243bf801c8e55486` — Finland, what is our promise for future generations? | Demos Helsinki
-  2. `historical:id:eb494ea5df2c2054` — Making Public Compute Work for Applied AI Startups
-  3. `historical:id:2f44fbce5985454d` — Entangled Interests in Quantum Technology
-  4. `historical:id:831bab1388d1920a` — ERA Portal Austria – Initiative 3.2. Strengthen Research Security
-  5. `historical:id:d9c8cece773b118c` — ERA Portal Austria – Global Approach to R&I
-  6. `historical:id:2ba96b7aa2d6b6c5` — Artificial Intelligence
-  7. `historical:id:19ee1b329e56b795` — AI Systems, Markets & Governance
-  8. `historical:id:f8230f693a65f032` — Response and Resilience: Government Strategies for Securing Subsea Infrastructure in Europe and Asia - HCSS
-  - … plus 40 more in the package manifest
+- Current package: `worker-a-20260915T122029Z-e5138adad59f`
+- Assigned unresolved records: **36**
+  1. `historical:id:3c0bd4298a48a861` — Achieving European Union strategic autonomy: circularity in critical raw materials value chains
+  2. `historical:id:a5fa11dce889a06d` — Organizational factors affecting higher education collaboration networks: evidence from Europe
+  3. `historical:id:1305a3174c34b1b9` — Operation regulation: Strengthening Latin America’s AI governance – European Council on Foreign Relations
+  4. `historical:id:dc297ea0893bebfc` — Europe must end its quantum technology research with China
+  5. `historical:id:1342a320214f9882` — ESF Annual Report 2023 - ESF
+  6. `historical:id:ef8019b3cabe30ac` — The geopolitics of technology standards: historical context for US, EU and Chinese approaches
+  7. `historical:id:9525508d34966bb2` — Game of Brains: Examining Researcher Brain Gain and Brain Drain and Research University Policy
+  8. `historical:id:2c6a970a0f7fe791` — Digital sovereignty - Rhetoric and reality
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260915T121759Z-098f032d5d55`
+- Current package: `worker-b-20260915T122041Z-098f032d5d55`
 - Assigned unresolved records: **48**
   1. `historical:id:83e847fd87a5d988` — Open social innovation: A systematic literature review and future research agenda
   2. `historical:id:54a0ed573cfd4e70` — Academic freedom is becoming part of Europe's competitive offer to global researchers as well as a condition for reliable knowledge production.
@@ -92,3 +92,4 @@ These works no longer consume automatic Deep Scan slots. Their identity is belie
 - `link:https://doi.org/10.1002/ev.20602` — **Expanding foresight practitioner excellence: Assessment of practitioner evaluation capacity** — attempts: legacy terminal — New Directions for Evaluation — 2024-07-29 — Identity is verified, but accessible evidence remained abstract/metadata-level after all six recovery steps; a defensible Strand B judgement would require substantive text. — https://doi.org/10.1002/ev.20602
 - `link:https://doi.org/10.1002/ev.20605` — **Bridging foresight and evaluation: A bridge worth building** — attempts: legacy terminal — New Directions for Evaluation — 2024-07-26 — Identity is verified, but accessible evidence remained abstract/metadata-level after all six recovery steps; a defensible Strand B judgement would require substantive text. — https://doi.org/10.1002/ev.20605
 - `link:https://doi.org/10.1108/fs-11-2021-0228` — **Iran’s approach to energy policy towards 2040: a participatory scenario method** — attempts: legacy terminal — foresight — 2023-03-03 — Identity is verified, but accessible evidence remained abstract/metadata-level after all six recovery steps; a defensible Strand B judgement would require substantive text. — https://doi.org/10.1108/fs-11-2021-0228
+- `link:https://doi.org/10.1163/15691497-20263013` — **EU–LAC Relations in the Context of NATO Geopolitics** — attempts: 3/3 — Perspectives on Global Development and Technology — 2026-08-07 — The article identity is verified, but no substantive primary or legitimate repository text was accessible after all six recovery steps. — https://doi.org/10.1163/15691497-20263013
