@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-admission-v1",
-  "updated_at": "2026-09-15T13:36:59Z",
+  "updated_at": "2026-09-15T13:39:52Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "decision": "drop",
@@ -8742,6 +8742,18 @@
       "updated_at": "2026-09-15T13:36:59Z",
       "deep_scan_package_id": "worker-a-20260915T122550Z-01e0307e23a4",
       "verification_note": "Supplied DOI resolved to the Springer article page carrying abstract, full metadata and article body sections; Crossref confirmed authors and journal.",
+      "duplicate_of": ""
+    },
+    "historical:id:83e847fd87a5d988": {
+      "decision": "keep",
+      "target_strand": "B",
+      "reason_code": "B_REUSABLE_METHOD",
+      "reason": "Systematic review that synthesises a fragmented field into a proposed systems-based framework, not merely a literature summary.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "updated_at": "2026-09-15T13:39:52Z",
+      "deep_scan_package_id": "worker-b-20260915T122603Z-fab36a28f3ae",
+      "verification_note": "Publisher access blocked throughout. OpenAIRE returned the indexed repository record with the full abstract, which together with Crossref establishes identity and supports a scope judgement without full text.",
       "duplicate_of": ""
     }
   }

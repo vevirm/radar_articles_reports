@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-15T13:36:59Z",
+  "generated_at": "2026-09-15T13:39:52Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -56241,6 +56241,93 @@
       "reader_text_model": "user-provided-llm-subscription",
       "reader_text_written_at": "2026-09-15T13:36:59Z",
       "deep_scan_package_id": "worker-a-20260915T122550Z-01e0307e23a4"
+    },
+    "historical:id:83e847fd87a5d988": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "d45e8deb",
+      "identity_hash": "53a57620361ed0f0",
+      "reader_title": "A systems framework for open social innovation research",
+      "reader_what": "A review of 115 studies yields a systems-based framework bridging fragmented definitions",
+      "reader_why": "Gives researchers a common structure for an otherwise incoherent field",
+      "reader_more": "Open social innovation has attracted attention as a collaborative approach to societal challenges, but the field is fragmented, with divergent definitions, methods and theoretical underpinnings across disciplines. Using bibliometric and multi-level content analysis of 115 studies, the authors map the intellectual structure and synthesise antecedents, processes, relationships and outcomes, then propose a systems-based framework bridging conceptual and practical divides. Unlike earlier reviews focused on particular initiatives such as Living Labs or on a single level of analysis, this one integrates dispersed knowledge and sets a thematic agenda for multi-level research.",
+      "deep_analysis": {
+        "work_kind": "systematic review with framework development",
+        "research_question": "How can fragmented open social innovation research be integrated into a coherent framework?",
+        "main_finding": "A systems-based framework integrating antecedents, processes, relationships and outcomes bridges the conceptual divides across 115 open social innovation studies.",
+        "method_or_basis": "Bibliometric and multi-level content analysis of 115 studies, producing an integrative framework and research agenda.",
+        "qualification": "A synthesis framework, proposed rather than empirically tested; judgement rests on the recovered abstract.",
+        "radar_relevance": "Strand B fit: a transferable analytical framework and evidence-synthesis contribution, geography-independent.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "GET https://doi.org/10.1016/j.techfore.2025.124160 returned HTTP 200 with only an anti-bot interstitial and no article text"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "resolved 10.1016/j.techfore.2025.124160 via api.crossref.org/works/10.1016/j.techfore.2025.124160: 'Open social innovation: A systematic literature review and future', Technological Forecasting and Social Cha, issued 2025-7 — identity confirmed, but Crossref carries no full text"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failure",
+            "note": "exact-title search \"Open social innovation: A systematic literature review and future research agenda\" surfaced only blocked publisher pages and unrelated general-reference results; no accessible copy appeared"
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failure",
+            "note": "searched Open social innovation: A systematic literature review and future rese Pacheco 2025; results repeated the same blocked publisher record and surfaced no author copy, accepted manuscript or repository deposit"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "OpenAIRE (api.openaire.eu/search/publications?doi=10.1016/j.techfore.2025.124160) returned the indexed European repository record for this work, carrying the full abstract (990 chars), title and authorship, which matched Crossref. Publisher full text remained blocked, but this is a substantive matching primary record."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "identity and substantive content confirmed through the OpenAIRE-indexed repository record and Crossref metadata in combination; no further legitimate full-text route was available"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_record_via_openaire",
+            "url": "https://doi.org/10.1016/j.techfore.2025.124160",
+            "title": "Open social innovation: A systematic literature review and future research agenda Open social innovation : a systematic literature review and future r",
+            "evidence_used": true
+          },
+          {
+            "kind": "crossref_metadata",
+            "url": "https://api.crossref.org/works/10.1016/j.techfore.2025.124160",
+            "title": "Crossref record confirming outlet and date",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Publisher access blocked throughout. OpenAIRE returned the indexed repository record with the full abstract, which together with Crossref establishes identity and supports a scope judgement without full text."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Systematic review that synthesises a fragmented field into a proposed systems-based framework, not merely a literature summary."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-15T13:39:52Z",
+      "deep_scan_package_id": "worker-b-20260915T122603Z-fab36a28f3ae"
     }
   }
 }

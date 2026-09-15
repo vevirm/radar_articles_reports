@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **763** (Main **605** + Historical **158**)
-- Automatic queue still needing V2 verification: **570** (Main **24** + Historical **546**)
-- Currently assigned to workers: **118** (Main **10** + Historical **108**)
+- Authoritative V2 verified: **764** (Main **605** + Historical **159**)
+- Automatic queue still needing V2 verification: **569** (Main **24** + Historical **545**)
+- Currently assigned to workers: **117** (Main **10** + Historical **107**)
 - Bounded access-recovery retries still eligible: **17**
 - Hands-on verification needed: **48**
 - Automatic queue pending and not yet assigned: **452**
@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260915T133811Z-5a7ccdade7b5`
+- Current package: `worker-a-20260915T134103Z-5a7ccdade7b5`
 - Assigned unresolved records: **58**
   1. `historical:id:1305a3174c34b1b9` — Operation regulation: Strengthening Latin America’s AI governance – European Council on Foreign Relations
   2. `historical:id:dc297ea0893bebfc` — Europe must end its quantum technology research with China
@@ -29,17 +29,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 50 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260915T133832Z-fab36a28f3ae`
-- Assigned unresolved records: **60**
-  1. `historical:id:83e847fd87a5d988` — Open social innovation: A systematic literature review and future research agenda
-  2. `historical:id:54a0ed573cfd4e70` — Academic freedom is becoming part of Europe's competitive offer to global researchers as well as a condition for reliable knowledge production.
-  3. `historical:id:343e7eac09fe6ffb` — 2025 Ideas Lab report – CEPS
-  4. `historical:id:54443cacb8afbf99` — Using Horizon Scanning to Build Policy Resilience: Case of Waste Crime
-  5. `link:https://doi.org/10.1177/19467567261450218` — Change Progression Scenario Method: A Systematic Literature Review of Applications — recovery attempt 2/3
-  6. `historical:id:ed3f534de03d821a` — Determinants of the career pathways of doctorate holders: Evidence from eight European universities
-  7. `historical:id:429ce155fd37117b` — Synthesising knowledge on forest resilience with CLEANFOREST
-  8. `historical:id:679ed030cf8b33ea` — Horizon Europe’s work programme for research infrastructure
-  - … plus 52 more in the package manifest
+- Current package: `worker-b-20260915T134119Z-d417f3359068`
+- Assigned unresolved records: **59**
+  1. `historical:id:54a0ed573cfd4e70` — Academic freedom is becoming part of Europe's competitive offer to global researchers as well as a condition for reliable knowledge production.
+  2. `historical:id:343e7eac09fe6ffb` — 2025 Ideas Lab report – CEPS
+  3. `historical:id:54443cacb8afbf99` — Using Horizon Scanning to Build Policy Resilience: Case of Waste Crime
+  4. `link:https://doi.org/10.1177/19467567261450218` — Change Progression Scenario Method: A Systematic Literature Review of Applications — recovery attempt 2/3
+  5. `historical:id:ed3f534de03d821a` — Determinants of the career pathways of doctorate holders: Evidence from eight European universities
+  6. `historical:id:429ce155fd37117b` — Synthesising knowledge on forest resilience with CLEANFOREST
+  7. `historical:id:679ed030cf8b33ea` — Horizon Europe’s work programme for research infrastructure
+  8. `historical:id:032d048c2196c5d0` — Coopetitive Technological Sovereignty: A Strategy to Reconcile International Collaboration with Knowledge and Economic Security
+  - … plus 51 more in the package manifest
 
 ## Hands-on verification needed
 
