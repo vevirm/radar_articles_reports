@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-15T08:09:22Z",
+  "generated_at": "2026-09-15T08:11:51Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -17083,27 +17083,99 @@
       ]
     },
     "link:https://doi.org/10.1016/j.jer.2026.07.022": {
-      "profile": "deep-reader-offline-v1",
+      "profile": "deep-reader-v2-authoritative",
       "strand": "strand_b",
+      "corpus_scope": "main",
       "source_hash": "4fc775c4",
-      "reader_title": "Method for locating where reciprocity breaks down in China-Germany research cooperation",
-      "reader_what": "Proposes a structured expert-judgement framework that pinpoints where bilateral research cooperation becomes unbalanced.",
-      "reader_why": "Offers a way to diagnose asymmetry in European research partnerships with China.",
-      "reader_more": "The authors note that recalibrating EU-China relations has increased demand for systematic ways to assess joint innovation initiatives, but that existing tools treat reciprocity as a single composite property and cannot show where imbalance arises. They build a framework operationalised through a Delphi expert-consultation stage, an analytic hierarchy process for weighting, and fuzzy evaluation for uncertain judgements, using a bilaterally balanced panel of twelve experts. It is examined on two China-Germany cases: the Sino-German Center for Research Promotion, a funding agency mechanism, and the Sino-German College at Tongji University, a university institution. The package preserved only the abstract, so the case results are not captured.",
+      "identity_hash": "04b4579cd8197074",
       "deep_analysis": {
-        "work_kind": "methodological proposal with illustrative cases",
-        "research_question": "How bilateral reciprocity in international innovation cooperation can be measured in a way that locates specific imbalances.",
-        "main_finding": "A Delphi, analytic hierarchy process and fuzzy evaluation framework is proposed to disaggregate reciprocity and identify where bilateral cooperation becomes asymmetric, demonstrated on two Sino-German institutions.",
-        "method_or_basis": "Stored publisher abstract in the package",
-        "qualification": "The evidence is a twelve-expert panel and two illustrative cases; the framework outputs are judgements, not measured outcomes.",
-        "radar_relevance": "Supplies assessment methods for research security and reciprocity in EU cooperation with China.",
-        "confidence": "medium",
-        "why_supported": true
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "The job carries no supplied URL; the stored final_url is linkinghub.elsevier.com/retrieve/pii/S2307187726003573 and the package captured zero characters of text from it. The PII itself is the only identifier the scanner holds."
+          },
+          {
+            "step": "doi",
+            "outcome": "failed",
+            "note": "I searched the DOI string 10.1016/j.jer.2026.07.022. No Crossref-derived record, publisher page, index entry or citation for it surfaced."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failed",
+            "note": "I searched the exact title 'Evaluating bilateral reciprocity in Sino-German innovation cooperation: A Delphi-AHP-Fuzzy framework' in quotes. Zero matching records returned; results were unrelated Delphi-AHP and Sino-German cooperation papers."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failed",
+            "note": "I searched the title together with the named authors Huan Wang and Aleksei Iushin and the 2026 date. No record of this article or of this author combination in this journal appeared."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "The Journal of Engineering Research exists as an Elsevier title (Scopus source 21100293700, Netherlands) and is an engineering journal covering civil, mechanical, industrial, electrical, computer, chemical, petroleum, aerospace and architectural engineering. Its ScienceDirect listing shows no such article, and no preprint, SSRN or institutional repository copy was found."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "I searched the Elsevier PII S2307187726003573 directly. It is not indexed anywhere. No distinctive phrase from the stored legacy abstract, such as the Sino-German Center for Research Promotion case pairing, returns this work."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "After all six steps the claimed work cannot be substantiated. The journal is real but the article is absent from every index, the publisher listing, and all citation trails. A caveat belongs on the record: a July 2026 article could in principle be poorly indexed, so absence is not proof of non-existence. Note also that the legacy V1 deep scan wrote confident reader prose for this record from a stored abstract alone, which is exactly the contamination this pass exists to catch."
+      },
+      "admission": {
+        "decision": "drop_unverifiable",
+        "target_strand": "A",
+        "reason_code": "UNVERIFIABLE_AFTER_LADDER",
+        "reason": "Six retrieval steps produced no evidence that this article exists. The DOI, the Elsevier PII, the exact title and the title-plus-authors combination all return nothing, and the journal's own listing does not contain it."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:49Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-15T08:11:51Z",
+      "deep_scan_package_id": "worker-b-20260915T073056Z-19a75c529a13",
+      "legacy_versions": [
+        {
+          "profile": "deep-reader-offline-v1",
+          "strand": "strand_b",
+          "source_hash": "4fc775c4",
+          "reader_title": "Method for locating where reciprocity breaks down in China-Germany research cooperation",
+          "reader_what": "Proposes a structured expert-judgement framework that pinpoints where bilateral research cooperation becomes unbalanced.",
+          "reader_why": "Offers a way to diagnose asymmetry in European research partnerships with China.",
+          "reader_more": "The authors note that recalibrating EU-China relations has increased demand for systematic ways to assess joint innovation initiatives, but that existing tools treat reciprocity as a single composite property and cannot show where imbalance arises. They build a framework operationalised through a Delphi expert-consultation stage, an analytic hierarchy process for weighting, and fuzzy evaluation for uncertain judgements, using a bilaterally balanced panel of twelve experts. It is examined on two China-Germany cases: the Sino-German Center for Research Promotion, a funding agency mechanism, and the Sino-German College at Tongji University, a university institution. The package preserved only the abstract, so the case results are not captured.",
+          "deep_analysis": {
+            "work_kind": "methodological proposal with illustrative cases",
+            "research_question": "How bilateral reciprocity in international innovation cooperation can be measured in a way that locates specific imbalances.",
+            "main_finding": "A Delphi, analytic hierarchy process and fuzzy evaluation framework is proposed to disaggregate reciprocity and identify where bilateral cooperation becomes asymmetric, demonstrated on two Sino-German institutions.",
+            "method_or_basis": "Stored publisher abstract in the package",
+            "qualification": "The evidence is a twelve-expert panel and two illustrative cases; the framework outputs are judgements, not measured outcomes.",
+            "radar_relevance": "Supplies assessment methods for research security and reciprocity in EU cooperation with China.",
+            "confidence": "medium",
+            "why_supported": true
+          },
+          "deep_read_mode": "offline_llm_package",
+          "reader_text_model": "user-provided-llm-subscription",
+          "reader_text_written_at": "2026-09-13T12:57:49Z",
+          "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+        }
+      ]
     },
     "link:https://fusionforenergy.europa.eu/wp-content/uploads/2026/07/F4E_Observatory-Global_Fusion_Energy_Trends_1st_Edition.pdf": {
       "profile": "deep-reader-v2-authoritative",
@@ -52520,6 +52592,457 @@
       "reader_text_model": "user-provided-llm-subscription",
       "reader_text_written_at": "2026-09-15T08:09:22Z",
       "deep_scan_package_id": "worker-a-20260915T073043Z-6066443b3f05"
+    },
+    "historical:id:0cbacdd5f61aadae": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "2741633f",
+      "identity_hash": "e45180f3e1b9cee3",
+      "reader_title": "OECD text analysis finds innovation strategies now dominated by societal goals",
+      "reader_what": "Societal-impact goals make up over 40% of topics in 24 countries' innovation strategies.",
+      "reader_why": "Shows innovation policy priorities have moved measurably away from growth-only objectives.",
+      "reader_more": "The paper applies natural language processing to the text of science, technology and innovation strategies from 24 OECD countries. Topics tied to societal impact account for more than 40% of strategy content, roughly double the share of traditional growth and competitiveness goals. Green transition is the largest single driver at 18.6%, followed by social and regional inclusion at 9.9% and digitalisation at 9.5%, while newer approaches appear as joint governance at 5.4% and policy agility at 5.2%. The measure captures what strategies say, not what governments spend or achieve.",
+      "deep_analysis": {
+        "work_kind": "policy-analysis working paper",
+        "research_question": "Have the stated goals of national innovation strategies shifted from growth and competitiveness towards societal challenges?",
+        "main_finding": "Across 24 OECD countries, societal-impact goals occupy over 40% of strategy content, more than double the share of traditional objectives.",
+        "method_or_basis": "Natural language processing and topic modelling applied to a corpus of national STI strategy documents.",
+        "qualification": "I assessed this from the official abstract and headline figures only; full text was not legitimately reachable, so method detail is unverified.",
+        "radar_relevance": "Relevant to how European research-policy priorities are framed, but the study is OECD-wide rather than European, and the technique appears to be an application of existing NLP methods.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "I opened https://doi.org/10.1787/5ee60cb5-en myself; it redirects to the OECD publication page innovation-policy-transformed_5ee60cb5-en.html, which served the official abstract and headline figures. The scanner's stored 403 was a bot block."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1787/5ee60cb5-en carries OECD Publishing metadata naming STI Working Papers No. 2025/21 and publication date 2025-06-29; the PDF cover adds internal reference DSTI/STP/TIP(2023)10/REV1/FINAL."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "I searched the exact title in quotes; results returned the OECD page, the OECD-hosted PDF path and the RePEc record oec/stiaaa/2025-21-en, all with matching authors."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Title plus Einhoff, Paunov and 2025 confirmed the working-paper series number against Paunov's RePEc author page listing."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "I attempted to fetch the OECD-hosted full PDF at /content/dam/oecd/.../5ee60cb5-en.pdf; the site returned ROBOTS_DISALLOWED. RePEc's record states no downloadable copy is known. No other repository deposit located."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "The OECD STI Outlook 2025 chapter on expanding the benefits of STI investment cites this paper and reproduces its 18.6% and 9.9% figures, independently corroborating the findings."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_publication_page",
+            "url": "https://www.oecd.org/en/publications/innovation-policy-transformed_5ee60cb5-en.html",
+            "title": "Innovation policy transformed?: Unveiling a new paradigm through natural language processing",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_citing_document",
+            "url": "https://www.oecd.org/en/publications/2025/10/oecd-science-technology-and-innovation-outlook-2025_bae3698d/full-report/expanding-the-benefits-of-investments-in-science-technology-and-innovation_65c4ca1c.html",
+            "title": "OECD STI Outlook 2025, citing chapter",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity fully confirmed as OECD STI Working Paper 2025/21. I could not obtain full text: the OECD PDF is robots-disallowed and no repository copy exists. Decision rests on the official OECD publication page plus an OECD document reproducing the paper's results."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "B",
+        "reason_code": "B_METHOD_CONTRIBUTION_UNCLEAR",
+        "reason": "The paper offers a quantitative text-based measurement of policy goals across 24 OECD strategies, but the NLP topic-modelling technique is applied rather than newly developed, and European relevance is a property of the sample rather than the subject. Admission under B or A genuinely needs human judgement, and I could not reach full text to settle it."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-15T08:11:50Z",
+      "deep_scan_package_id": "worker-b-20260915T073056Z-19a75c529a13"
+    },
+    "historical:id:2eba5e4388711eda": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "8397192d",
+      "identity_hash": "0a0a9478b7df9b94",
+      "reader_title": "EU fusion agency report on what Europe needs to lead commercial fusion",
+      "reader_what": "Industry and laboratory participants identify supply-chain, technology and skills gaps blocking European commercial fusion.",
+      "reader_why": "Feeds directly into the European Commission's forthcoming European fusion strategy.",
+      "reader_more": "Fusion for Energy convened more than 200 representatives from EU policy, industry, SMEs, start-ups and fusion laboratories in Barcelona on 12-13 June 2025. The report gathers their conclusions on European supply-chain readiness, gaps in technology and skills, and the emergence of fusion start-ups, set against Europe's energy import dependence. It is explicitly positioned as input to the Commission's call for evidence for a European fusion strategy. It records participants' recommendations rather than agency commitments or measured outcomes.",
+      "deep_analysis": {
+        "work_kind": "official stakeholder consultation report",
+        "research_question": "",
+        "main_finding": "European fusion stakeholders identify supply-chain readiness, technology gaps and skills shortages as the main constraints on Europe reaching commercial fusion power.",
+        "method_or_basis": "Structured roundtable discussions among 200+ participants, summarised by the issuing agency.",
+        "qualification": "Recommendations and stakeholder opinion, not measured findings; the European fusion strategy it feeds was still pending.",
+        "radar_relevance": "Direct evidence on European industrial and research capability in a strategic technology and on how EU fusion policy is being shaped.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package pipeline retrieved the F4E PDF at fusionforenergy.europa.eu/wp-content/uploads/2025/09/RDT_2025_Takeaways_Digital.pdf and stored 15353 characters of extracted PDF text; I re-read that stored extraction in full for this assessment. I did not re-fetch the page myself. The document self-identifies on its cover and in Director Marc Lachaise's foreword as the F4E Roundtable 2025 key-takeaways report."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "F4E corporate report; no DOI is assigned to this publication and none is claimed in the scanner record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://fusionforenergy.europa.eu/wp-content/uploads/2025/09/RDT_2025_Takeaways_Digital.pdf",
+            "title": "F4E Roundtable 2025 - Key Takeaways: How can Europe harness the potential of fusion energy?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The supplied URL is the primary document itself and the package captured its text. Identity is established from the document's own cover and foreword, not from scanner metadata."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Official output of the EU fusion agency summarising industry, SME and laboratory input on European fusion supply chain, technology and skills gaps, explicitly positioned as input to the European Commission's call for evidence for a European fusion strategy."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-15T08:11:51Z",
+      "deep_scan_package_id": "worker-b-20260915T073056Z-19a75c529a13"
+    },
+    "historical:id:a1caad833e320939": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "397090c9",
+      "identity_hash": "62e7c3a7c30c1811",
+      "reader_title": "Think tank urges EU to avoid digital protectionism in cloud and AI rules",
+      "reader_what": "Submission argues procurement reform and lower barriers, not Buy European rules, would raise cloud competitiveness.",
+      "reader_why": "Feeds a live consultation shaping the Cloud and AI Development Act.",
+      "reader_more": "The Center for Data Innovation responded to the Commission consultation preparing the Cloud and AI Development Act and an EU-wide cloud policy for public administrations. It accepts the Commission's concerns about EU computing capacity and the weakness of EU-based cloud providers. Its two recommendations are to make innovation a mandatory qualitative criterion in public tenders while keeping markets open, and to remove barriers facing cloud service providers. It argues against origin-based preference while distinguishing allied from non-allied suppliers. This is advocacy from a declared position, not independent evaluation.",
+      "deep_analysis": {
+        "work_kind": "policy consultation response",
+        "research_question": "",
+        "main_finding": "The submission contends that procurement reform and open markets, rather than Buy European preferences, are the route to EU cloud and AI competitiveness.",
+        "method_or_basis": "Policy argument referencing the Commission's consultation and the authors' prior procurement and cloud-market work.",
+        "qualification": "Advocacy by an organisation with a stated pro-open-market position; no empirical testing of its claims is presented.",
+        "radar_relevance": "Directly concerns EU digital industrial capability, computing capacity and a forthcoming EU legislative instrument.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package pipeline retrieved itif.org/publications/2025/06/06/comments-european-commission-regarding-future-cloud-ai-policies-in-the-eu/ and stored 9669 characters of page text; I re-read that stored extraction in full for this assessment. I did not re-fetch the page myself. The text states the submission is by the Center for Data Innovation, which it describes as part of ITIF."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Think-tank consultation response to a Commission call for evidence; no DOI is assigned and none is claimed."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://itif.org/publications/2025/06/06/comments-european-commission-regarding-future-cloud-ai-policies-in-the-eu/",
+            "title": "Comments to the European Commission Regarding Future Cloud and AI Policies in the EU",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Authorship corrected from the document's own text rather than the scanner's guess: the submitting body is the Center for Data Innovation, a part of ITIF."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Substantive submission to a live European Commission consultation preparing the Cloud and AI Development Act, making specific recommendations on EU procurement criteria, Buy European provisions and barriers facing cloud providers."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-15T08:11:51Z",
+      "deep_scan_package_id": "worker-b-20260915T073056Z-19a75c529a13"
+    },
+    "historical:id:51dcd3865a919c34": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "ac5d5242",
+      "identity_hash": "c75c62104eebde64",
+      "reader_title": "EU and US defence AI adoption diverge because of institutions, not technology",
+      "reader_what": "Fragmented EU absorption versus concentrated US investment creates European technological dependency in defence AI.",
+      "reader_why": "Dependency in defence AI constrains European strategic autonomy in a critical technology.",
+      "reader_more": "The paper compares how AI is taken up in EU and US defence institutions, using Fountain's technology enactment framework alongside Horowitz's adoption-capacity theory. It finds the EU absorbs AI in a fragmented way that preserves member state autonomy, while the US appropriates it competitively through a capability-first approach with concentrated investment. The author argues these differences follow from institutional logics rather than any gap in technological capability, and that large disparities in financial intensity produce dependencies which initiatives such as the European Defence White Paper Readiness 2030 aim to address. Organisational capital, not funding alone, is identified as decisive.",
+      "deep_analysis": {
+        "work_kind": "comparative institutional case study",
+        "research_question": "How do institutional structures and organisational factors shape AI adoption in the EU and US defence sectors?",
+        "main_finding": "Divergent EU and US defence AI pathways reflect embedded institutional logics rather than technological differences, producing European dependency.",
+        "method_or_basis": "Comparative case study of EU and US defence institutions, framed by technology enactment and adoption-capacity theory.",
+        "qualification": "Interpretive comparative analysis; dependency and autonomy effects are argued from institutional evidence rather than measured.",
+        "radar_relevance": "Concerns European technological sovereignty, defence-industrial capability and governance of a critical technology.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package pipeline retrieved link.springer.com/article/10.1007/s43508-025-00115-x and stored 18002 characters of article page text; I re-read that stored extraction in full for this assessment. I did not re-fetch the page myself."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "I searched DOI 10.1007/s43508-025-00115-x and its Springer record; it confirms sole author Emanuele Parisini and identifies the journal as Global Public Policy and Governance. The scanner's 'Governance' is a different journal and is wrong."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s43508-025-00115-x",
+            "title": "Governing artificial intelligence in the defence sector: a comparative analysis of EU and US institutions",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "I independently verified the journal because the scanner's source field looked like a guess; it was. Journal corrected to Global Public Policy and Governance on Springer's own record."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Comparative institutional study of AI adoption in EU and US defence, bearing directly on European strategic autonomy and technological dependency in a critical technology."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-15T08:11:51Z",
+      "deep_scan_package_id": "worker-b-20260915T073056Z-19a75c529a13"
+    },
+    "historical:id:dc404fbc8322a47e": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "00d14fd9",
+      "identity_hash": "bf6770df12dd364f",
+      "reader_title": "Start-ups and scale-ups lead AI and robot adoption among European SMEs",
+      "reader_what": "AI and robot adoption is linked to all innovation types, with different roles in manufacturing and services.",
+      "reader_why": "Identifies which European firms close the digital gap and what conditions help them.",
+      "reader_more": "Using the Flash Eurobarometer 486 survey of SMEs, start-ups and scale-ups, the authors examine what drives European SMEs to adopt artificial intelligence and robots and how adoption relates to innovation. Start-ups and scale-ups emerge as the most likely adopters and the most innovative firms. Internal factors such as internationalisation and firm size matter, as do external ones such as available digital skills and infrastructure. A two-stage approach links adoption to product, process, organisational and marketing innovation, though the technologies play narrower roles in manufacturing than in services. The results are associations from survey data, not established causal effects.",
+      "deep_analysis": {
+        "work_kind": "empirical econometric study",
+        "research_question": "What drives European SMEs to adopt AI and robots, and how does adoption relate to different innovation outcomes?",
+        "main_finding": "Start-ups and scale-ups are the most likely adopters of AI and robots and the most innovative, with adoption associated with all four innovation types.",
+        "method_or_basis": "Two-stage econometric analysis of Flash Eurobarometer 486 survey responses from European SMEs.",
+        "qualification": "Cross-sectional survey associations; the paper does not establish that adoption causes innovation.",
+        "radar_relevance": "Direct evidence on European firm-level technology adoption and the EU's digital distance from the technological frontier.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package pipeline retrieved link.springer.com/article/10.1007/s11187-025-01017-2 and stored 22784 characters of article page text including abstract and plain-language summary; I re-read that stored extraction in full for this assessment. I did not re-fetch the page myself."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1007/s11187-025-01017-2 confirms Small Business Economics as the journal and the three named authors, matching the scanner record; no correction needed here."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s11187-025-01017-2",
+            "title": "AI, robots and innovation in European SMEs",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "I checked the DOI independently because two neighbouring records had fabricated-looking journal names; this one is correct as stored."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Empirical study of AI and robot adoption across European SMEs using EU survey data, addressing the digital gap between the EU and the technological frontier."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-15T08:11:51Z",
+      "deep_scan_package_id": "worker-b-20260915T073056Z-19a75c529a13"
+    },
+    "historical:id:115bc8de51dc78e6": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "UNCLASSIFIED",
+      "corpus_scope": "historical",
+      "source_hash": "d0c91cc5",
+      "identity_hash": "0053bd20e4690e4f",
+      "reader_title": "MERICS podcast episode page on China chips, security and investment in Europe",
+      "reader_what": "Episode blurb previews a discussion of US-China chip escalation and rising Chinese investment in Europe.",
+      "reader_more": "The page advertises an episode of the German-language MERICS podcast China in 25. The blurb says the hosts discuss a new escalation between the US and China over high-performance chips and artificial intelligence, China's national security white paper and arms exports, and Chinese investment in Europe rising for the first time in years. It links to the separate MERICS and Rhodium Group report on Chinese FDI in Europe and to other MERICS outputs. No transcript is published and the page carries no analysis of its own.",
+      "deep_analysis": {
+        "work_kind": "podcast episode landing page",
+        "research_question": "",
+        "main_finding": "No independent finding; the page summarises a podcast conversation and links to other MERICS publications.",
+        "method_or_basis": "Episode description supplied by the publisher.",
+        "qualification": "The substantive evidence referenced sits in separate MERICS and Rhodium Group publications, not in this object.",
+        "radar_relevance": "Fails the substantive threshold: vocabulary matches Radar interests but the page is a listing.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package pipeline retrieved merics.org/en/podcast/china-25-ai-chips-national-security-and-chinese-investments-europe and stored 2262 characters of page text; I re-read that stored extraction in full for this assessment. I did not re-fetch the page myself. The stored text is an episode blurb plus a list of links to other MERICS outputs; there is no transcript."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "MERICS podcast episode page; episode pages carry no DOI and none is claimed in the scanner record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_page",
+            "url": "https://merics.org/en/podcast/china-25-ai-chips-national-security-and-chinese-investments-europe",
+            "title": "China in 25: AI chips, national security and Chinese investments in Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The captured page is the whole object, so the evidence is complete even though it is thin: this is an episode listing, not a work."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "",
+        "reason_code": "C_GENERIC_LISTING_PAGE",
+        "reason": "The linked object is a German-language podcast episode page carrying a short description and a link list. It reports no finding, decision or method of its own, and the MERICS research it points to is separate work that would need its own record."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-15T08:11:51Z",
+      "deep_scan_package_id": "worker-b-20260915T073056Z-19a75c529a13"
+    },
+    "historical:id:efa3509ae696b3a0": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "90a82884",
+      "identity_hash": "a1e800a4d7f25739",
+      "reader_title": "HaDEA call notice for support to the GloPID-R research funder network",
+      "reader_what": "Announces a Horizon Europe health call topic for secretariat support to an infectious-disease research funder collaboration.",
+      "reader_more": "HaDEA published call topic HORIZON-HLTH-2025-01-DISEASE-05 under Horizon Europe's Health cluster. The notice lists the outcomes proposals should contribute to: an efficient secretariat supporting international research funders during pandemics or severe epidemics, a tested framework for rapid research response covering areas such as data sharing, social science and clinical trial networks, and better awareness of GloPID-R members' activities. Applicants are directed to the Funding and Tenders Portal. This is a standard call listing, not a decision or finding.",
+      "deep_analysis": {
+        "work_kind": "funding call announcement",
+        "research_question": "",
+        "main_finding": "No finding; the page states expected outcomes for a single call topic.",
+        "method_or_basis": "Official programme text reproduced by the implementing agency.",
+        "qualification": "Intentions for a call not yet awarded; nothing describes results.",
+        "radar_relevance": "Generic programme listing; does not meet the substantive threshold despite matching vocabulary.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package pipeline retrieved hadea.ec.europa.eu/calls-proposals/support-functioning-global-research-collaboration-infectious-disease-preparedness-glopid-r_en and stored 1223 characters of page text; I re-read that stored extraction in full for this assessment. I did not re-fetch the page myself. The stored text is the complete notice: a one-line announcement plus the topic's expected outcomes."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Horizon Europe call topic HORIZON-HLTH-2025-01-DISEASE-05 is an administrative call notice; DOIs are not minted for call topics."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_page",
+            "url": "https://hadea.ec.europa.eu/calls-proposals/support-functioning-global-research-collaboration-infectious-disease-preparedness-glopid-r_en",
+            "title": "Support for the functioning of the Global Research Collaboration for Infectious Disease Preparedness (GloPID-R)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The captured page is the entire object, so evidence is complete: it is a call announcement."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "",
+        "reason_code": "C_PROGRAMME_CALL_LISTING",
+        "reason": "A routine call-for-proposals announcement listing expected outcomes for one Horizon Europe health topic. It records no policy decision, award, programme change or research finding."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-15T08:11:51Z",
+      "deep_scan_package_id": "worker-b-20260915T073056Z-19a75c529a13"
     }
   }
 }

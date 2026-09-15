@@ -6,17 +6,17 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **702** (Main **601** + Historical **101**)
-- Automatic queue still needing V2 verification: **632** (Main **29** + Historical **603**)
-- Currently assigned to workers: **84** (Main **7** + Historical **77**)
-- Bounded access-recovery retries still eligible: **22**
+- Authoritative V2 verified: **710** (Main **602** + Historical **108**)
+- Automatic queue still needing V2 verification: **624** (Main **28** + Historical **596**)
+- Currently assigned to workers: **75** (Main **6** + Historical **69**)
+- Bounded access-recovery retries still eligible: **23**
 - Hands-on verification needed: **47**
-- Automatic queue pending and not yet assigned: **548**
+- Automatic queue pending and not yet assigned: **549**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260915T081004Z-f53d80648e06`
+- Current package: `worker-a-20260915T081256Z-f53d80648e06`
 - Assigned unresolved records: **36**
   1. `historical:id:243bf801c8e55486` — Finland, what is our promise for future generations? | Demos Helsinki
   2. `historical:id:eb494ea5df2c2054` — Making Public Compute Work for Applied AI Startups
@@ -29,17 +29,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260915T081017Z-19a75c529a13`
-- Assigned unresolved records: **48**
-  1. `historical:id:0cbacdd5f61aadae` — Innovation policy transformed?
-  2. `historical:id:2eba5e4388711eda` — Is Europe ready to lead the fusion energy race? - Fusion for Energy
-  3. `historical:id:a1caad833e320939` — Comments to the European Commission Regarding Future Cloud and AI Policies in the EU
-  4. `historical:id:540b859dbd556d25` — The Global AI Dilemma: Balancing Innovation and Safety in the European Union, the United States, and China
-  5. `historical:id:51dcd3865a919c34` — Governing artificial intelligence in the defence sector: a comparative analysis of EU and US institutions
-  6. `historical:id:dc404fbc8322a47e` — AI, robots and innovation in European SMEs
-  7. `historical:id:115bc8de51dc78e6` — China in 25: AI chips, national security and Chinese investments in Europe
-  8. `link:https://doi.org/10.1016/j.jer.2026.07.022` — Evaluating bilateral reciprocity in Sino-German innovation cooperation: A Delphi-AHP-Fuzzy framework — recovery attempt 2/3
-  - … plus 40 more in the package manifest
+- Current package: `worker-b-20260915T081313Z-298ca60b0a42`
+- Assigned unresolved records: **39**
+  1. `historical:id:ba7ba1569b43cc11` — Perspectives of sustainable development of cluster organizations through internationalization and dual use
+  2. `historical:id:5f02392522b6f284` — US research-policy instability created an observable opportunity for Europe to attract mobile scientific talent.
+  3. `historical:id:11336e60bf244ee8` — European partnership fostering a European Research Area (ERA) for health research (Phase 2)
+  4. `historical:id:239d06722b9a7640` — ECDC charts future path for public health resilience through strategic foresight
+  5. `historical:id:3359c91b80e85844` — International mobility boosts scientific careers: a synthetic control analysis of Brazilian researchers
+  6. `historical:id:195b1f4f3088486d` — Choose Europe for Science explicitly links brain drain to career precarity and tests longer employment horizons as a talent-retention instrument.
+  7. `historical:id:83e847fd87a5d988` — Open social innovation: A systematic literature review and future research agenda
+  8. `historical:id:54a0ed573cfd4e70` — Academic freedom is becoming part of Europe's competitive offer to global researchers as well as a condition for reliable knowledge production.
+  - … plus 31 more in the package manifest
 
 ## Hands-on verification needed
 

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-09-15T08:09:22Z",
+  "updated_at": "2026-09-15T08:11:51Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -3493,6 +3493,127 @@
       ],
       "updated_at": "2026-09-15T08:09:22Z",
       "deep_scan_package_id": "worker-a-20260915T073043Z-6066443b3f05"
+    },
+    "historical:id:0cbacdd5f61aadae": {
+      "fields": {
+        "title": "Innovation policy transformed?: Unveiling a new paradigm through natural language processing",
+        "type": "working paper"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The OECD publication page gives the full subtitled title and identifies the work as OECD Science, Technology and Industry Working Paper No. 2025/21; the scanner stored a truncated title and no type. Stored tier is unsupported by verified provenance.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.oecd.org/en/publications/innovation-policy-transformed_5ee60cb5-en.html",
+        "https://www.oecd.org/en/publications/2025/10/oecd-science-technology-and-innovation-outlook-2025_bae3698d/full-report/expanding-the-benefits-of-investments-in-science-technology-and-innovation_65c4ca1c.html"
+      ],
+      "updated_at": "2026-09-15T08:11:50Z",
+      "deep_scan_package_id": "worker-b-20260915T073056Z-19a75c529a13"
+    },
+    "historical:id:2eba5e4388711eda": {
+      "fields": {
+        "title": "F4E Roundtable 2025 - Key Takeaways: How can Europe harness the potential of fusion energy?",
+        "type": "report"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The document's cover and foreword give this title; the scanner stored a web headline instead. Tier is not supported by bibliographic evidence.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://fusionforenergy.europa.eu/wp-content/uploads/2025/09/RDT_2025_Takeaways_Digital.pdf"
+      ],
+      "updated_at": "2026-09-15T08:11:51Z",
+      "deep_scan_package_id": "worker-b-20260915T073056Z-19a75c529a13"
+    },
+    "historical:id:a1caad833e320939": {
+      "fields": {
+        "source": "Center for Data Innovation (Information Technology and Innovation Foundation)",
+        "type": "consultation response"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The document states it is submitted by the Center for Data Innovation, part of ITIF; the scanner recorded only the parent organisation. Tier is not evidenced.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://itif.org/publications/2025/06/06/comments-european-commission-regarding-future-cloud-ai-policies-in-the-eu/"
+      ],
+      "updated_at": "2026-09-15T08:11:51Z",
+      "deep_scan_package_id": "worker-b-20260915T073056Z-19a75c529a13"
+    },
+    "historical:id:51dcd3865a919c34": {
+      "fields": {
+        "source": "Global Public Policy and Governance"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Springer's record for DOI 10.1007/s43508-025-00115-x gives the journal as Global Public Policy and Governance; 'Governance' is a different journal and was a scanner guess.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://link.springer.com/article/10.1007/s43508-025-00115-x"
+      ],
+      "updated_at": "2026-09-15T08:11:51Z",
+      "deep_scan_package_id": "worker-b-20260915T073056Z-19a75c529a13"
+    },
+    "historical:id:dc404fbc8322a47e": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored source tier is not supported by the bibliographic evidence recovered and should be recomputed from verified provenance.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://link.springer.com/article/10.1007/s11187-025-01017-2"
+      ],
+      "updated_at": "2026-09-15T08:11:51Z",
+      "deep_scan_package_id": "worker-b-20260915T073056Z-19a75c529a13"
+    },
+    "historical:id:115bc8de51dc78e6": {
+      "fields": {
+        "type": "podcast episode page"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The supplied URL is an episode landing page, not a report or analysis; recording it as a substantive publication overstates what the object is.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://merics.org/en/podcast/china-25-ai-chips-national-security-and-chinese-investments-europe"
+      ],
+      "updated_at": "2026-09-15T08:11:51Z",
+      "deep_scan_package_id": "worker-b-20260915T073056Z-19a75c529a13"
+    },
+    "historical:id:efa3509ae696b3a0": {
+      "fields": {
+        "type": "funding call announcement"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The page is a call notice from HaDEA, not a publication; the stored type and tier overstate it.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://hadea.ec.europa.eu/calls-proposals/support-functioning-global-research-collaboration-infectious-disease-preparedness-glopid-r_en"
+      ],
+      "updated_at": "2026-09-15T08:11:51Z",
+      "deep_scan_package_id": "worker-b-20260915T073056Z-19a75c529a13"
     }
   }
 }

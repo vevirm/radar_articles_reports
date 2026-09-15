@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-admission-v1",
-  "updated_at": "2026-09-15T08:09:22Z",
+  "updated_at": "2026-09-15T08:11:51Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "decision": "drop",
@@ -7998,6 +7998,102 @@
       "updated_at": "2026-09-15T08:09:22Z",
       "deep_scan_package_id": "worker-a-20260915T073043Z-6066443b3f05",
       "verification_note": "Bibliographic identity was matched to the substantive source used for the admission decision; scanner metadata was corrected only where authoritative evidence demonstrated an error.",
+      "duplicate_of": ""
+    },
+    "historical:id:0cbacdd5f61aadae": {
+      "decision": "review",
+      "target_strand": "B",
+      "reason_code": "B_METHOD_CONTRIBUTION_UNCLEAR",
+      "reason": "The paper offers a quantitative text-based measurement of policy goals across 24 OECD strategies, but the NLP topic-modelling technique is applied rather than newly developed, and European relevance is a property of the sample rather than the subject. Admission under B or A genuinely needs human judgement, and I could not reach full text to settle it.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "updated_at": "2026-09-15T08:11:50Z",
+      "deep_scan_package_id": "worker-b-20260915T073056Z-19a75c529a13",
+      "verification_note": "Identity fully confirmed as OECD STI Working Paper 2025/21. I could not obtain full text: the OECD PDF is robots-disallowed and no repository copy exists. Decision rests on the official OECD publication page plus an OECD document reproducing the paper's results.",
+      "duplicate_of": ""
+    },
+    "historical:id:2eba5e4388711eda": {
+      "decision": "keep",
+      "target_strand": "A",
+      "reason_code": "A_SUBSTANTIVE_EU_RI",
+      "reason": "Official output of the EU fusion agency summarising industry, SME and laboratory input on European fusion supply chain, technology and skills gaps, explicitly positioned as input to the European Commission's call for evidence for a European fusion strategy.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "updated_at": "2026-09-15T08:11:51Z",
+      "deep_scan_package_id": "worker-b-20260915T073056Z-19a75c529a13",
+      "verification_note": "The supplied URL is the primary document itself and the package captured its text. Identity is established from the document's own cover and foreword, not from scanner metadata.",
+      "duplicate_of": ""
+    },
+    "historical:id:a1caad833e320939": {
+      "decision": "keep",
+      "target_strand": "A",
+      "reason_code": "A_SUBSTANTIVE_EU_RI",
+      "reason": "Substantive submission to a live European Commission consultation preparing the Cloud and AI Development Act, making specific recommendations on EU procurement criteria, Buy European provisions and barriers facing cloud providers.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "updated_at": "2026-09-15T08:11:51Z",
+      "deep_scan_package_id": "worker-b-20260915T073056Z-19a75c529a13",
+      "verification_note": "Authorship corrected from the document's own text rather than the scanner's guess: the submitting body is the Center for Data Innovation, a part of ITIF.",
+      "duplicate_of": ""
+    },
+    "historical:id:51dcd3865a919c34": {
+      "decision": "keep",
+      "target_strand": "A",
+      "reason_code": "A_SUBSTANTIVE_EU_RI",
+      "reason": "Comparative institutional study of AI adoption in EU and US defence, bearing directly on European strategic autonomy and technological dependency in a critical technology.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "updated_at": "2026-09-15T08:11:51Z",
+      "deep_scan_package_id": "worker-b-20260915T073056Z-19a75c529a13",
+      "verification_note": "I independently verified the journal because the scanner's source field looked like a guess; it was. Journal corrected to Global Public Policy and Governance on Springer's own record.",
+      "duplicate_of": ""
+    },
+    "historical:id:dc404fbc8322a47e": {
+      "decision": "keep",
+      "target_strand": "A",
+      "reason_code": "A_SUBSTANTIVE_EU_RI",
+      "reason": "Empirical study of AI and robot adoption across European SMEs using EU survey data, addressing the digital gap between the EU and the technological frontier.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "updated_at": "2026-09-15T08:11:51Z",
+      "deep_scan_package_id": "worker-b-20260915T073056Z-19a75c529a13",
+      "verification_note": "I checked the DOI independently because two neighbouring records had fabricated-looking journal names; this one is correct as stored.",
+      "duplicate_of": ""
+    },
+    "historical:id:115bc8de51dc78e6": {
+      "decision": "drop",
+      "target_strand": "",
+      "reason_code": "C_GENERIC_LISTING_PAGE",
+      "reason": "The linked object is a German-language podcast episode page carrying a short description and a link list. It reports no finding, decision or method of its own, and the MERICS research it points to is separate work that would need its own record.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "updated_at": "2026-09-15T08:11:51Z",
+      "deep_scan_package_id": "worker-b-20260915T073056Z-19a75c529a13",
+      "verification_note": "The captured page is the whole object, so the evidence is complete even though it is thin: this is an episode listing, not a work.",
+      "duplicate_of": ""
+    },
+    "link:https://doi.org/10.1016/j.jer.2026.07.022": {
+      "decision": "drop_unverifiable",
+      "target_strand": "A",
+      "reason_code": "UNVERIFIABLE_AFTER_LADDER",
+      "reason": "Six retrieval steps produced no evidence that this article exists. The DOI, the Elsevier PII, the exact title and the title-plus-authors combination all return nothing, and the journal's own listing does not contain it.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-15T08:11:51Z",
+      "deep_scan_package_id": "worker-b-20260915T073056Z-19a75c529a13",
+      "verification_note": "After all six steps the claimed work cannot be substantiated. The journal is real but the article is absent from every index, the publisher listing, and all citation trails. A caveat belongs on the record: a July 2026 article could in principle be poorly indexed, so absence is not proof of non-existence. Note also that the legacy V1 deep scan wrote confident reader prose for this record from a stored abstract alone, which is exactly the contamination this pass exists to catch.",
+      "duplicate_of": ""
+    },
+    "historical:id:efa3509ae696b3a0": {
+      "decision": "drop",
+      "target_strand": "",
+      "reason_code": "C_PROGRAMME_CALL_LISTING",
+      "reason": "A routine call-for-proposals announcement listing expected outcomes for one Horizon Europe health topic. It records no policy decision, award, programme change or research finding.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "updated_at": "2026-09-15T08:11:51Z",
+      "deep_scan_package_id": "worker-b-20260915T073056Z-19a75c529a13",
+      "verification_note": "The captured page is the entire object, so evidence is complete: it is a call announcement.",
       "duplicate_of": ""
     }
   }
