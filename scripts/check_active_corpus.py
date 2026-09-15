@@ -11,7 +11,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from scripts.active_corpus import (
-    RAW_COLLECTIONS, build_active_document, load_admission, load_corrections,
+    RAW_COLLECTIONS, build_active_document, is_active_decision, load_admission, load_corrections,
     load_reader, record_key, validate_sidecars,
 )
 
@@ -57,6 +57,8 @@ def main() -> int:
     table = reader.get("records", {}) if isinstance(reader.get("records"), dict) else {}
     for key, state in admission.get("records", {}).items():
         if not isinstance(state, dict) or state.get("source") != "deep_scan_v2":
+            continue
+        if not is_active_decision(state.get("decision")):
             continue
         entry = table.get(key)
         if not isinstance(entry, dict) or entry.get("profile") != "deep-reader-v2-authoritative":
