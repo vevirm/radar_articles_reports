@@ -8,16 +8,16 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 
 - Authoritative V2 verified: **762** (Main **605** + Historical **157**)
 - Automatic queue still needing V2 verification: **571** (Main **24** + Historical **547**)
-- Currently assigned to workers: **84** (Main **7** + Historical **77**)
-- Bounded access-recovery retries still eligible: **19**
+- Currently assigned to workers: **120** (Main **10** + Historical **110**)
+- Bounded access-recovery retries still eligible: **16**
 - Hands-on verification needed: **48**
-- Automatic queue pending and not yet assigned: **487**
+- Automatic queue pending and not yet assigned: **451**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260915T122029Z-e5138adad59f`
-- Assigned unresolved records: **36**
+- Current package: `worker-a-20260915T122550Z-01e0307e23a4`
+- Assigned unresolved records: **60**
   1. `historical:id:3c0bd4298a48a861` — Achieving European Union strategic autonomy: circularity in critical raw materials value chains
   2. `historical:id:a5fa11dce889a06d` — Organizational factors affecting higher education collaboration networks: evidence from Europe
   3. `historical:id:1305a3174c34b1b9` — Operation regulation: Strengthening Latin America’s AI governance – European Council on Foreign Relations
@@ -26,11 +26,11 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:ef8019b3cabe30ac` — The geopolitics of technology standards: historical context for US, EU and Chinese approaches
   7. `historical:id:9525508d34966bb2` — Game of Brains: Examining Researcher Brain Gain and Brain Drain and Research University Policy
   8. `historical:id:2c6a970a0f7fe791` — Digital sovereignty - Rhetoric and reality
-  - … plus 28 more in the package manifest
+  - … plus 52 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260915T122041Z-098f032d5d55`
-- Assigned unresolved records: **48**
+- Current package: `worker-b-20260915T122603Z-fab36a28f3ae`
+- Assigned unresolved records: **60**
   1. `historical:id:83e847fd87a5d988` — Open social innovation: A systematic literature review and future research agenda
   2. `historical:id:54a0ed573cfd4e70` — Academic freedom is becoming part of Europe's competitive offer to global researchers as well as a condition for reliable knowledge production.
   3. `historical:id:343e7eac09fe6ffb` — 2025 Ideas Lab report – CEPS
@@ -39,7 +39,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:ed3f534de03d821a` — Determinants of the career pathways of doctorate holders: Evidence from eight European universities
   7. `historical:id:429ce155fd37117b` — Synthesising knowledge on forest resilience with CLEANFOREST
   8. `historical:id:679ed030cf8b33ea` — Horizon Europe’s work programme for research infrastructure
-  - … plus 40 more in the package manifest
+  - … plus 52 more in the package manifest
 
 ## Hands-on verification needed
 
