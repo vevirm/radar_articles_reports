@@ -6,30 +6,30 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **593** (Main **551** + Historical **42**)
-- Automatic queue still needing V2 verification: **719** (Main **79** + Historical **640**)
-- Currently assigned to workers: **96** (Main **57** + Historical **39**)
+- Authoritative V2 verified: **614** (Main **552** + Historical **62**)
+- Automatic queue still needing V2 verification: **698** (Main **78** + Historical **620**)
+- Currently assigned to workers: **84** (Main **56** + Historical **28**)
 - Bounded access-recovery retries still eligible: **22**
 - Hands-on verification needed: **47**
-- Automatic queue pending and not yet assigned: **623**
+- Automatic queue pending and not yet assigned: **614**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260915T063708Z-2e349306b131`
-- Assigned unresolved records: **48**
-  1. `historical:id:4e14023de0ebff88` — ALLEA Calls for Global Defence of International Research Collaboration and Academic Freedom - ALLEA
-  2. `historical:id:a160fb878146aa7a` — AI supported research using UKRI social science data (invite only)
-  3. `historical:id:575b7f9cacd393fb` — A renewed foundation for a long-term UK-EU partnership in education, research and innovation | Coimbra
-  4. `historical:id:e0421acdd7a70ead` — A Hundred and Fifty Shades of Green: A Foresight-Driven Playbook for Sustainable Innovation Governance
-  5. `historical:id:9cf1b0662691399c` — War economy vs European Silicon Valley? The EU's competing sociotechnical imaginaries of defence innovation and industry
-  6. `historical:id:02bbba7239f18a9e` — A comparative analysis of artificial intelligence regulation in ASEAN and the European Union
-  7. `historical:id:573837b47ba87045` — Digital Sovereignty and the EU's Identity Between Technological Innovation and European Values
-  8. `historical:id:9e8d80840981296b` — Open science in democracy research: the research infrastructure “Monitoring Electoral Democracy” (MEDem)
-  - … plus 40 more in the package manifest
+- Current package: `worker-a-20260915T070430Z-7522df957484`
+- Assigned unresolved records: **36**
+  1. `link:https://doi.org/10.1163/15691497-20263013` — EU–LAC Relations in the Context of NATO Geopolitics — recovery attempt 2/3
+  2. `historical:id:d0081e9c63e0bc65` — Innovation research
+  3. `historical:id:f0bc4536d8236e14` — Beyond the Ban: TikTok and the Politics of Digital Sovereignty in the EU and US
+  4. `historical:id:177223d347cbd601` — The role of leading companies in artificial intelligence applications
+  5. `historical:id:1ebcb0a957b2d582` — University Positioning in AI Policies: Comparative Insights From National Policies and Non‐State Actor Influences in China, the European Union, India, Russia, and the United States
+  6. `historical:id:6f732980699970d4` — Global Research Initiative launched to advance Open Science through evidence-based approach - ESF
+  7. `historical:id:7715e1b6ca6216f6` — Privacy company: EU advances data dialogue | Rathenau Instituut
+  8. `historical:id:49c23295e4ca683c` — Beyond disclosure – or why the EU’s green strategy is coming apart – CEPS
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260915T063725Z-0e4acd783ae4`
+- Current package: `worker-b-20260915T070447Z-0e4acd783ae4`
 - Assigned unresolved records: **48**
   1. `link:https://doi.org/10.1016/j.engfor.2026.09.002` — Can EU-27 achieve the decarbonization target in the energy sector? A scenario analysis based on extended STIRPAT model
   2. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxPTk90T2tNUUk5eTMwRDFXSUVrN0hQTjA0d0ZLZFIwTnNqaHV0WE5XcF9aSE1zX29UYUtjY2RaOS1DQlpDclN1LUtOLUg3d0VIZjRhZkxTUkkyQ0dGVGtEazJyTkVwN3JDc2d3TmhEZzU1Z0lXRGtGUnY2MEZ6OUFENkg5TjM?oc=5` — Macron shoots for the moon with pitch to Europe’s struggling space sector
