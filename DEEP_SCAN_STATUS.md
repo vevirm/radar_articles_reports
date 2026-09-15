@@ -7,17 +7,17 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **593** (Main **551** + Historical **42**)
-- Automatic queue still needing V2 verification: **678** (Main **71** + Historical **607**)
-- Currently assigned to workers: **84** (Main **49** + Historical **35**)
+- Automatic queue still needing V2 verification: **719** (Main **79** + Historical **640**)
+- Currently assigned to workers: **96** (Main **57** + Historical **39**)
 - Bounded access-recovery retries still eligible: **22**
 - Hands-on verification needed: **47**
-- Automatic queue pending and not yet assigned: **594**
+- Automatic queue pending and not yet assigned: **623**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260914T124246Z-b6b92e3b7d86`
-- Assigned unresolved records: **36**
+- Current package: `worker-a-20260915T063708Z-2e349306b131`
+- Assigned unresolved records: **48**
   1. `historical:id:4e14023de0ebff88` — ALLEA Calls for Global Defence of International Research Collaboration and Academic Freedom - ALLEA
   2. `historical:id:a160fb878146aa7a` — AI supported research using UKRI social science data (invite only)
   3. `historical:id:575b7f9cacd393fb` — A renewed foundation for a long-term UK-EU partnership in education, research and innovation | Coimbra
@@ -26,10 +26,10 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:02bbba7239f18a9e` — A comparative analysis of artificial intelligence regulation in ASEAN and the European Union
   7. `historical:id:573837b47ba87045` — Digital Sovereignty and the EU's Identity Between Technological Innovation and European Values
   8. `historical:id:9e8d80840981296b` — Open science in democracy research: the research infrastructure “Monitoring Electoral Democracy” (MEDem)
-  - … plus 28 more in the package manifest
+  - … plus 40 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260914T124303Z-0e4acd783ae4`
+- Current package: `worker-b-20260915T063725Z-0e4acd783ae4`
 - Assigned unresolved records: **48**
   1. `link:https://doi.org/10.1016/j.engfor.2026.09.002` — Can EU-27 achieve the decarbonization target in the energy sector? A scenario analysis based on extended STIRPAT model
   2. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxPTk90T2tNUUk5eTMwRDFXSUVrN0hQTjA0d0ZLZFIwTnNqaHV0WE5XcF9aSE1zX29UYUtjY2RaOS1DQlpDclN1LUtOLUg3d0VIZjRhZkxTUkkyQ0dGVGtEazJyTkVwN3JDc2d3TmhEZzU1Z0lXRGtGUnY2MEZ6OUFENkg5TjM?oc=5` — Macron shoots for the moon with pitch to Europe’s struggling space sector
