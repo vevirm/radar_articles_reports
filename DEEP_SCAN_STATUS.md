@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260915T134103Z-5a7ccdade7b5`
+- Current package: `worker-a-20260915T134941Z-5a7ccdade7b5`
 - Assigned unresolved records: **58**
   1. `historical:id:1305a3174c34b1b9` — Operation regulation: Strengthening Latin America’s AI governance – European Council on Foreign Relations
   2. `historical:id:dc297ea0893bebfc` — Europe must end its quantum technology research with China
@@ -29,7 +29,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 50 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260915T134119Z-d417f3359068`
+- Current package: `worker-b-20260915T134956Z-d417f3359068`
 - Assigned unresolved records: **59**
   1. `historical:id:54a0ed573cfd4e70` — Academic freedom is becoming part of Europe's competitive offer to global researchers as well as a condition for reliable knowledge production.
   2. `historical:id:343e7eac09fe6ffb` — 2025 Ideas Lab report – CEPS
