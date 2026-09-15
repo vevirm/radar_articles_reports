@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260915T112419Z-c19ab9b1c63a`
+- Current package: `worker-a-20260915T121204Z-c19ab9b1c63a`
 - Assigned unresolved records: **48**
   1. `historical:id:243bf801c8e55486` — Finland, what is our promise for future generations? | Demos Helsinki
   2. `historical:id:eb494ea5df2c2054` — Making Public Compute Work for Applied AI Startups
@@ -29,7 +29,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 40 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260915T112436Z-098f032d5d55`
+- Current package: `worker-b-20260915T121223Z-098f032d5d55`
 - Assigned unresolved records: **48**
   1. `historical:id:83e847fd87a5d988` — Open social innovation: A systematic literature review and future research agenda
   2. `historical:id:54a0ed573cfd4e70` — Academic freedom is becoming part of Europe's competitive offer to global researchers as well as a condition for reliable knowledge production.
