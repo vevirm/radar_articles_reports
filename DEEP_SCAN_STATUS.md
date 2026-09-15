@@ -8,16 +8,16 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 
 - Authoritative V2 verified: **710** (Main **602** + Historical **108**)
 - Automatic queue still needing V2 verification: **624** (Main **28** + Historical **596**)
-- Currently assigned to workers: **75** (Main **6** + Historical **69**)
-- Bounded access-recovery retries still eligible: **23**
+- Currently assigned to workers: **96** (Main **8** + Historical **88**)
+- Bounded access-recovery retries still eligible: **21**
 - Hands-on verification needed: **47**
-- Automatic queue pending and not yet assigned: **549**
+- Automatic queue pending and not yet assigned: **528**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260915T081256Z-f53d80648e06`
-- Assigned unresolved records: **36**
+- Current package: `worker-a-20260915T081510Z-c19ab9b1c63a`
+- Assigned unresolved records: **48**
   1. `historical:id:243bf801c8e55486` — Finland, what is our promise for future generations? | Demos Helsinki
   2. `historical:id:eb494ea5df2c2054` — Making Public Compute Work for Applied AI Startups
   3. `historical:id:2f44fbce5985454d` — Entangled Interests in Quantum Technology
@@ -26,11 +26,11 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:2ba96b7aa2d6b6c5` — Artificial Intelligence
   7. `historical:id:19ee1b329e56b795` — AI Systems, Markets & Governance
   8. `historical:id:f8230f693a65f032` — Response and Resilience: Government Strategies for Securing Subsea Infrastructure in Europe and Asia - HCSS
-  - … plus 28 more in the package manifest
+  - … plus 40 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260915T081313Z-298ca60b0a42`
-- Assigned unresolved records: **39**
+- Current package: `worker-b-20260915T081524Z-0fb08e4ed02a`
+- Assigned unresolved records: **48**
   1. `historical:id:ba7ba1569b43cc11` — Perspectives of sustainable development of cluster organizations through internationalization and dual use
   2. `historical:id:5f02392522b6f284` — US research-policy instability created an observable opportunity for Europe to attract mobile scientific talent.
   3. `historical:id:11336e60bf244ee8` — European partnership fostering a European Research Area (ERA) for health research (Phase 2)
@@ -39,7 +39,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:195b1f4f3088486d` — Choose Europe for Science explicitly links brain drain to career precarity and tests longer employment horizons as a talent-retention instrument.
   7. `historical:id:83e847fd87a5d988` — Open social innovation: A systematic literature review and future research agenda
   8. `historical:id:54a0ed573cfd4e70` — Academic freedom is becoming part of Europe's competitive offer to global researchers as well as a condition for reliable knowledge production.
-  - … plus 31 more in the package manifest
+  - … plus 40 more in the package manifest
 
 ## Hands-on verification needed
 
