@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-09-15T07:03:36Z",
+  "updated_at": "2026-09-15T07:27:22Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -3084,6 +3084,129 @@
       ],
       "updated_at": "2026-09-15T07:03:35Z",
       "deep_scan_package_id": "worker-a-20260915T063708Z-2e349306b131"
+    },
+    "link:https://news.google.com/rss/articles/CBMiwwFBVV95cUxNb24zeXZudlVZZ19nQU1GRjRtR0VZd3RFdy1OdTNtZEY3YkRkLXU1bFU4Ulh1bS0ybDR1N2lhM0F1VjhVc0IzUmg5aE5ZWW5ZTGVVa25GVkl5UkRzYW1LM2xGNURvTlM3cFFoak5sNVpDVk1GNGNjOVJKYjkzMV93ZEpRRTR2ZzM2dEt5Skk3Q3BvVmJiRDFsSnNLQWRfa2dFUGNLRDF4eGpFM25tX0VzUGpjMFl2ZnNOdUtrbU5UNFlTSDg?oc=5": {
+      "fields": {
+        "date": "2026-07-09"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The scanner recorded 2026-09-07, which is the date the item was picked up in the news feed. The publisher's own canonical URL path is /business/2026/07/09/ and the article page states published 09/07/2026, giving a true publication date of 9 July 2026. The same day-month pattern checks out against two other Euronews records in this package whose URL dates and scanner dates agree.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://www.euronews.com/business/2026/07/09/cerebras-targets-europe-with-multibillion-dollar-ai-expansion-challenging-nvidia"
+      ],
+      "updated_at": "2026-09-15T07:27:20Z",
+      "deep_scan_package_id": "worker-b-20260915T063725Z-0e4acd783ae4"
+    },
+    "link:https://news.google.com/rss/articles/CBMiyAFBVV95cUxOTnYxRkVxQ21LelVXTl9BUmRLWnRHUTZxZms1V3ZwQ3p5Nld1M2pOWjF2dnpyTlVJSjlTZzZBdU5TUW5COW5TbmhweGMwdXRmUzBKdEhpZ04yenZGeEdYS1k0M29KUC16ZERkaUZIbEdNUndkc2NpdUZWaHdMbXRkWko0QmttV0tpVW41UURiQ1N2N3BVV2pjU1hpUTBMT0xxbU52azJvb3NJdDJzek1YZ0phbGtLckJpazdSUEZtdnBuM0FNMXUyOQ?oc=5": {
+      "fields": {
+        "date": "2026-06-09"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The scanner recorded 2026-09-06, which is the news-feed pickup date. The publisher's canonical URL path is /business/2026/06/09/, the page states published 09/06/2026, and the article's own content refers to the flotation being scheduled for Friday 12 June, confirming a true publication date of 9 June 2026.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://www.euronews.com/business/2026/06/09/spacex-ipo-how-european-retail-investors-can-buy-shares-and-the-risks-to-be-aware-of"
+      ],
+      "updated_at": "2026-09-15T07:27:20Z",
+      "deep_scan_package_id": "worker-b-20260915T063725Z-0e4acd783ae4"
+    },
+    "link:https://ufm.dk/english/key-areas/research-and-innovation/research-and-innovation-system/": {
+      "fields": {
+        "type": "institutional web page"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The scanner recorded type 'research/policy paper'. The retrieved source is a standing descriptive page on the ministry's website listing the agents that carry out and finance Danish research. It contains no research question, method, findings or argument, so the type is corrected to institutional web page.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://ufm.dk/english/key-areas/research-and-innovation/research-and-innovation-system/"
+      ],
+      "updated_at": "2026-09-15T07:27:21Z",
+      "deep_scan_package_id": "worker-b-20260915T063725Z-0e4acd783ae4"
+    },
+    "link:https://www.vttresearch.com/en/ourservices/fusion-energy-research-and-services": {
+      "fields": {
+        "type": "institutional services page"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The scanner recorded type 'research/policy paper'. The retrieved source sits under vttresearch.com/en/ourservices/ and is addressed to prospective clients, setting out service propositions such as independent insight, access to expertise and accelerated entry into the fusion value chain. It presents no research question, method or findings, so the type is corrected to institutional services page.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://www.vttresearch.com/en/ourservices/fusion-energy-research-and-services"
+      ],
+      "updated_at": "2026-09-15T07:27:21Z",
+      "deep_scan_package_id": "worker-b-20260915T063725Z-0e4acd783ae4"
+    },
+    "link:https://era.gv.at/public/documents/5533/2026_09_September_RTD.E.1_VN.pdf": {
+      "fields": {
+        "source": "European Commission, Directorate-General for Human Resources and Security",
+        "type": "vacancy notice",
+        "date": "2026-06-11"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The document's own header shows it is issued by the European Commission Directorate-General for Human Resources and Security (reference HR.B.1.003, Brussels 11/06/2026) for a post in DG RTD Unit E1. ERA Portal Austria is only the host of the PDF, not the issuing body, so source is corrected. Type is corrected from 'institutional report' to vacancy notice, and the date from 2026-06-30 to the document's own issue date of 11 June 2026.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://era.gv.at/public/documents/5533/2026_09_September_RTD.E.1_VN.pdf"
+      ],
+      "updated_at": "2026-09-15T07:27:21Z",
+      "deep_scan_package_id": "worker-b-20260915T063725Z-0e4acd783ae4"
+    },
+    "link:https://merics.org/sites/default/files/2026-08/vives-discussion-paper-107-schindowski-zenglein-groenewegen-lau-dp-industrial-policy-and-technology-linkages-conceptualizing-chinas-approach-004.pdf": {
+      "fields": {
+        "authors": "Robin Schindowski, Jeroen Groenewegen-Lau, Max J. Zenglein",
+        "source": "KU Leuven VIVES (VIVES Discussion Paper No. 107)"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The scanner recorded the author as 'MERICS' and the source as 'MERICS'. The document's own title pages name three individual authors and identify it as VIVES Discussion Paper No. 107 from KU Leuven's VIVES centre; MERICS is the affiliation of one co-author and the host of the PDF, not the issuing series. Authors and source are corrected accordingly.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://merics.org/sites/default/files/2026-08/vives-discussion-paper-107-schindowski-zenglein-groenewegen-lau-dp-industrial-policy-and-technology-linkages-conceptualizing-chinas-approach-004.pdf"
+      ],
+      "updated_at": "2026-09-15T07:27:22Z",
+      "deep_scan_package_id": "worker-b-20260915T063725Z-0e4acd783ae4"
+    },
+    "link:https://doi.org/10.3389/ti.2026.16976": {
+      "fields": {
+        "authors": "Olivier Thaunat, Frank J. M. F. Dor, Umberto Cillo, Gabriel C. Oniscu, Ekaterine Berishvili"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Crossref gives the third author's forename in full as Umberto Cillo, where the scanner recorded the abbreviated form 'U Cillo'. Corrected to the authoritative publisher and Crossref form.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://www.frontierspartnerships.org/journals/transplant-international/articles/10.3389/ti.2026.16976/full"
+      ],
+      "updated_at": "2026-09-15T07:27:22Z",
+      "deep_scan_package_id": "worker-b-20260915T063725Z-0e4acd783ae4"
+    },
+    "historical:id:ebe02f08f915843c": {
+      "fields": {
+        "type": "call for expression of interest"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The document identifies itself as a call for expression of interest for a contract staff post (reference COR/CA/FGIV/15/26), published 08/05/2026 with a deadline of 27/05/2026. The scanner left type unset; it is recorded here as a recruitment document so downstream handling is not misled by the policy vocabulary in the job description.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.cor.europa.eu/sites/default/files/2026-05/call_for_expression_of_interest_cor-ca-ad5-15_26_0.pdf"
+      ],
+      "updated_at": "2026-09-15T07:27:22Z",
+      "deep_scan_package_id": "worker-b-20260915T063725Z-0e4acd783ae4"
     }
   }
 }
