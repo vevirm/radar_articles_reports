@@ -8,16 +8,16 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 
 - Authoritative V2 verified: **655** (Main **591** + Historical **64**)
 - Automatic queue still needing V2 verification: **657** (Main **39** + Historical **618**)
-- Currently assigned to workers: **72** (Main **13** + Historical **59**)
-- Bounded access-recovery retries still eligible: **26**
+- Currently assigned to workers: **96** (Main **15** + Historical **81**)
+- Bounded access-recovery retries still eligible: **24**
 - Hands-on verification needed: **47**
-- Automatic queue pending and not yet assigned: **585**
+- Automatic queue pending and not yet assigned: **561**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260915T072822Z-7522df957484`
-- Assigned unresolved records: **36**
+- Current package: `worker-a-20260915T073043Z-6066443b3f05`
+- Assigned unresolved records: **48**
   1. `link:https://doi.org/10.1163/15691497-20263013` — EU–LAC Relations in the Context of NATO Geopolitics — recovery attempt 2/3
   2. `historical:id:d0081e9c63e0bc65` — Innovation research
   3. `historical:id:f0bc4536d8236e14` — Beyond the Ban: TikTok and the Politics of Digital Sovereignty in the EU and US
@@ -26,11 +26,11 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:6f732980699970d4` — Global Research Initiative launched to advance Open Science through evidence-based approach - ESF
   7. `historical:id:7715e1b6ca6216f6` — Privacy company: EU advances data dialogue | Rathenau Instituut
   8. `historical:id:49c23295e4ca683c` — Beyond disclosure – or why the EU’s green strategy is coming apart – CEPS
-  - … plus 28 more in the package manifest
+  - … plus 40 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260915T072841Z-d4609a23218c`
-- Assigned unresolved records: **36**
+- Current package: `worker-b-20260915T073056Z-19a75c529a13`
+- Assigned unresolved records: **48**
   1. `historical:id:0cbacdd5f61aadae` — Innovation policy transformed?
   2. `historical:id:2eba5e4388711eda` — Is Europe ready to lead the fusion energy race? - Fusion for Energy
   3. `historical:id:a1caad833e320939` — Comments to the European Commission Regarding Future Cloud and AI Policies in the EU
@@ -39,7 +39,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:dc404fbc8322a47e` — AI, robots and innovation in European SMEs
   7. `historical:id:115bc8de51dc78e6` — China in 25: AI chips, national security and Chinese investments in Europe
   8. `link:https://doi.org/10.1016/j.jer.2026.07.022` — Evaluating bilateral reciprocity in Sino-German innovation cooperation: A Delphi-AHP-Fuzzy framework — recovery attempt 2/3
-  - … plus 28 more in the package manifest
+  - … plus 40 more in the package manifest
 
 ## Hands-on verification needed
 
