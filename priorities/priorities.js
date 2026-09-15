@@ -386,6 +386,31 @@
     return out;
   }
 
+  // Several independent records can support the same reader-facing pathway.  The page
+  // should show that as stronger support for one risk/opportunity, not as repeated cards
+  // with the same plain-language headline.  Keep the highest-ranked record as the lead
+  // and retain the others for the Evidence panel.
+  function consolidateReaderDuplicates(items){
+    const out=[],byKey=new Map();
+    for(const x of items){
+      const title=clean(plainPriorityTitle(x));
+      const key=`${clean(x?.kind)}|${norm(title)}`;
+      if(!key||key.endsWith('|')){out.push(x);continue}
+      const lead=byKey.get(key);
+      if(!lead){
+        const copy={...x,relatedPrimaryEvidence:[]};
+        byKey.set(key,copy);
+        out.push(copy);
+        continue;
+      }
+      lead.relatedPrimaryEvidence.push({
+        title:clean(x?.title||x?.coreMessage||title),source:clean(x?.source),date:clean(x?.date),link:clean(x?.link),
+        evidence:clean(x?.lensPassage||x?.abstract||x?.coreMessage||x?.title||''),qualityScore:Number(x?.qualityScore)||0,
+      });
+    }
+    return out;
+  }
+
   function rawEvidenceItems(data){
     const collections=[
       Array.isArray(data?.strategic_pathways)?data.strategic_pathways:[],
@@ -472,6 +497,8 @@
     const closedRisks=primaryRows.filter(x=>x.kind==='risk'&&clean(x.lens?.status)==='closed_into_shock');
     const allRisks=sortPathways([...primaryRows.filter(x=>x.kind==='risk'&&clean(x.lens?.status)!=='closed_into_shock').map(x=>attachWeakContext(x,contextRows)),...highOrderRows(data,'risk')]);
     const allOpportunities=sortPathways([...primaryRows.filter(x=>x.kind==='opportunity').map(x=>attachWeakContext(x,contextRows)),...highOrderRows(data,'opportunity')]);
+    const readerRisks=consolidateReaderDuplicates(allRisks);
+    const readerOpportunities=consolidateReaderDuplicates(allOpportunities);
     // Reader-level external-shock lenses are also primary-only.  The dedicated shock page
     // uses the stricter Python inference engine, where C/history are explicitly contextual.
     const externalShocks=sortPathways(primaryRows.filter(x=>x.kind==='external_shock'));
@@ -479,14 +506,16 @@
     const repositoryInterpreted=primaryRows.filter(x=>x.interpretationBasis==='repository_evidence_interpretation').length;
     const weakSignalContextUsed=[...allRisks,...allOpportunities].reduce((n,x)=>n+(x.weakSignalContext?.length||0),0);
     return {
-      risks:diversifiedTop(allRisks,limit,2),
-      opportunities:diversifiedTop(allOpportunities,limit,2),
+      risks:diversifiedTop(readerRisks,limit,2),
+      opportunities:diversifiedTop(readerOpportunities,limit,2),
       externalShocks,
       stats:{
         interpreted:allRisks.length+allOpportunities.length+externalShocks.length,
         sourceFiled,repositoryInterpreted,weakSignalContextUsed,
-        risks:allRisks.length,opportunities:allOpportunities.length,externalShocks:externalShocks.length,
-        closedRisks:closedRisks.length,shownRisks:Math.min(limit,allRisks.length),shownOpportunities:Math.min(limit,allOpportunities.length),
+        risks:readerRisks.length,opportunities:readerOpportunities.length,externalShocks:externalShocks.length,
+        rawRisks:allRisks.length,rawOpportunities:allOpportunities.length,
+        mergedRiskRecords:Math.max(0,allRisks.length-readerRisks.length),mergedOpportunityRecords:Math.max(0,allOpportunities.length-readerOpportunities.length),
+        closedRisks:closedRisks.length,shownRisks:Math.min(limit,readerRisks.length),shownOpportunities:Math.min(limit,readerOpportunities.length),
       }
     };
   }
@@ -574,5 +603,5 @@
 
   function simpleEvidenceText(x){return clean(x?.title||'')}
 
-  return {buildPriorityView,pathwayScore,diversifiedTop,simplePriorityText,plainPriorityTitle,plainPriorityExplanation,supportingEvidenceText,simpleEvidenceText,topicKey,lensRows,interpretLenses,evidenceText,evidenceParts,inferredLens,shockFamilies,primaryShockFamily,remedialOnlyRiskText};
+  return {buildPriorityView,pathwayScore,diversifiedTop,consolidateReaderDuplicates,simplePriorityText,plainPriorityTitle,plainPriorityExplanation,supportingEvidenceText,simpleEvidenceText,topicKey,lensRows,interpretLenses,evidenceText,evidenceParts,inferredLens,shockFamilies,primaryShockFamily,remedialOnlyRiskText};
 });
