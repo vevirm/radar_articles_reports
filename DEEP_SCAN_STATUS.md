@@ -6,30 +6,30 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **819** (Main **608** + Historical **211**)
-- Automatic queue still needing V2 verification: **540** (Main **38** + Historical **502**)
-- Currently assigned to workers: **120** (Main **24** + Historical **96**)
+- Authoritative V2 verified: **877** (Main **613** + Historical **264**)
+- Automatic queue still needing V2 verification: **484** (Main **33** + Historical **451**)
+- Currently assigned to workers: **96** (Main **20** + Historical **76**)
 - Bounded access-recovery retries still eligible: **30**
 - Hands-on verification needed: **48**
-- Automatic queue pending and not yet assigned: **420**
+- Automatic queue pending and not yet assigned: **388**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260916T073231Z-392292edffe8`
-- Assigned unresolved records: **60**
-  1. `historical:id:514d6ac2a62fe570` — From responsibility to risk: ethics in the Bermuda Triangle of EU research and innovation policy
-  2. `historical:id:4eaaf1dc179118e8` — Mission-oriented scenarios: a new method for urban foresight
-  3. `historical:id:417652754550e699` — Tectonic shifts in global science: US-China scientific competition and the Muslim-majority science systems in multipolar science
-  4. `historical:id:2b48865d90d5b99e` — Supporting Academic Women’s Careers: Male and Female Academics’ Perspectives at a Chinese Research University
-  5. `historical:id:68592e03bddf591d` — EU AI sovereignty: for whom, to what end, and to whose benefit?
-  6. `historical:id:be49d75778b309d8` — Governing Chinese technologies: TikTok, foreign interference, and technological sovereignty
-  7. `historical:id:17cf309467bd63b4` — EU Geoeconomic Power in the Clean Energy Transition
-  8. `historical:id:4dc700b14674adfc` — Towards a sustainable and responsible model for monitoring open science and research—analysis of the Finnish model for monitoring open science and research
-  - … plus 52 more in the package manifest
+- Current package: `worker-a-20260916T075346Z-f723a6a8536f`
+- Assigned unresolved records: **36**
+  1. `historical:id:e2b7e63a5a4e8e50` — Policyseminar 8. juni: Monitoring and Analyzing Research Careers for Informed Policy Making in the ERA
+  2. `historical:id:d7546fcf2d8d3250` — ERA Portal Austria – Seconded National Expert - Open Science Policy (RTD-A-4)
+  3. `link:https://doi.org/10.1080/09537325.2013.877129` — Mapping of scientific patenting: toward the development of ‘J-GLOBAL foresight’ — recovery attempt 3/3
+  4. `historical:id:b00054029c32ded1` — ERA Portal Austria – Policy Officer / Monitoring
+  5. `historical:id:d04896af05545563` — EARTO Answer to the EC Consultation on the past, present and future of the European Research & Innovation Framework Programmes 2014-2027 | EARTO
+  6. `historical:id:5a711e317ca43d84` — Digital Technologies: Inadequacy of the Higher Education and Innovation Ecosystem
+  7. `historical:id:200edf8954e2b904` — Assessment of open science in grant applications
+  8. `historical:id:0d02bbbd9d9dbbe1` — Identifying the implementation effect of technology transfer policy using system dynamics: a case study in Liaoning, China
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260916T073253Z-2e1daf27f534`
+- Current package: `worker-b-20260916T075359Z-2e1daf27f534`
 - Assigned unresolved records: **60**
   1. `link:https://www.nesta.org.uk/documents/230/measuring_innovation.pdf` — Measuring innovation policy briefing
   2. `link:https://publications.jrc.ec.europa.eu/repository/handle/JRC145507` — Tracking country innovation performance: The Innovation Output Indicator 2025
