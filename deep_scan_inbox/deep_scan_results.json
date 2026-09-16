@@ -1,0 +1,3636 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "package_id": "worker-a-20260916T081404Z-7f2127b37eb2",
+  "results": [
+    {
+      "record_key": "historical:id:e2b7e63a5a4e8e50",
+      "source_hash": "b55ae9fa",
+      "identity_hash": "229a05ae607f27e1",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://www.nifu.no/policyseminar-8-juni-monitoring-and-analyzing-research-careers-for-informed-policy-making-in-the-era/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://www.nifu.no/policyseminar-8-juni-monitoring-and-analyzing-research-careers-for-informed-policy-making-in-the-era/",
+            "title": "Policyseminar 8. juni: Monitoring and Analyzing Research Careers for Informed Policy Making in the ERA",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "NON_SUBSTANTIVE_PAGE",
+        "reason": "European research-policy context is explicit, but the claimed object is not substantive R&I evidence."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2023-06-01"
+        },
+        "unset": [],
+        "reason": "NIFU page is dated 1 June 2023."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Research-careers seminar announcement",
+      "reader_what": "NIFU announces a RISIS policy seminar on research careers and monitoring in the ERA.",
+      "reader_why": "",
+      "reader_more": "The page announces a hybrid seminar in Brussels and lists speakers and intended audiences. It does not itself report a research result, policy decision, or substantive analysis. The event page therefore does not meet the historical Strand A standard.",
+      "deep_analysis": {
+        "work_kind": "event announcement",
+        "research_question": "",
+        "main_finding": "A seminar on research careers was scheduled, with presentations on new empirical strategies and the DDC pilot dataset.",
+        "method_or_basis": "Official event landing page.",
+        "qualification": "The page describes an event rather than the underlying presented research.",
+        "radar_relevance": "European research-policy context is explicit, but the claimed object is not substantive R&I evidence.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:d7546fcf2d8d3250",
+      "source_hash": "b00f73f2",
+      "identity_hash": "a705f023bb711974",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://era.gv.at/open-positions/seconded-national-expert-open-science-policy-rtd-a-4/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://era.gv.at/open-positions/seconded-national-expert-open-science-policy-rtd-a-4/",
+            "title": "ERA Portal Austria – Seconded National Expert - Open Science Policy (RTD-A-4)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "NON_SUBSTANTIVE_PAGE",
+        "reason": "The subject is European R&I policy, but the claimed page is only a vacancy."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Open-science secondment vacancy",
+      "reader_what": "ERA Portal Austria advertises a Commission secondment for open-science policy work.",
+      "reader_why": "",
+      "reader_more": "The page is a recruitment notice for a Seconded National Expert position in the European Commission. Duties concern open-science policy, but the page contains no substantive policy development or research finding. It is therefore not historical Strand A evidence.",
+      "deep_analysis": {
+        "work_kind": "vacancy notice",
+        "research_question": "",
+        "main_finding": "A vacancy sought a Seconded National Expert to work on open-science policy.",
+        "method_or_basis": "Official vacancy page.",
+        "qualification": "Recruitment material is not a substantive research or policy output.",
+        "radar_relevance": "The subject is European R&I policy, but the claimed page is only a vacancy.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/09537325.2013.877129",
+      "source_hash": "431016a1",
+      "identity_hash": "2f830472071b854e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Resolved https://doi.org/10.1080/09537325.2013.877129 to the Taylor & Francis article identity; substantive text was not accessible."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1080/09537325.2013.877129 matched Mari Jibu, Technology Analysis & Strategic Management 26(4), 485-498; full text remained inaccessible."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search found the Taylor & Francis issue entry and J-GLOBAL author record, but no legitimate substantive copy of this exact 2014 article."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Search for the title + Mari Jibu + 2014 confirmed bibliographic identity; accessible results remained metadata/abstract-level."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "fail",
+            "note": "Checked Taylor & Francis, JST/J-GLOBAL and Japanese academic-index routes; found identity records and related earlier J-GLOBAL work, but not a substantive copy of this exact article."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "fail",
+            "note": "Bounded searches using DOI fragments, title fragments, author name, PDF and repository terms did not recover substantive text for the exact 2014 work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article_page",
+            "url": "https://www.tandfonline.com/toc/ctas20/26/4",
+            "title": "Mapping of scientific patenting: toward the development of ‘J-GLOBAL foresight’",
+            "evidence_used": false
+          },
+          {
+            "kind": "authoritative_index",
+            "url": "https://jglobal.jst.go.jp/en/detail?JGLOBAL_ID=200901066266005570",
+            "title": "Jibu Mari — J-GLOBAL researcher record",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Identity verified; substantive evidence was insufficient after the mandatory recovery ladder."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "B",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity is verified, but substantive evidence remained inaccessible after all six mandatory recovery steps; no admission judgement is made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "journal article",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "Substantive evidence inaccessible after mandatory recovery.",
+        "radar_relevance": "Admission unresolved because substantive evidence is access-limited.",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "historical:id:b00054029c32ded1",
+      "source_hash": "40ec3f6f",
+      "identity_hash": "45c9abcb9194a521",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://era.gv.at/open-positions/policy-officer-monitoring-eosc/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://era.gv.at/open-positions/policy-officer-monitoring-eosc/",
+            "title": "ERA Portal Austria – Policy Officer / Monitoring",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "NON_SUBSTANTIVE_PAGE",
+        "reason": "EOSC is European R&I infrastructure, but this claimed object is only a vacancy."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "EOSC monitoring vacancy",
+      "reader_what": "ERA Portal Austria advertises a policy officer role focused on EOSC monitoring.",
+      "reader_why": "",
+      "reader_more": "The page is a recruitment notice and describes responsibilities for monitoring the European Open Science Cloud. It does not itself provide a substantive research finding, policy decision, or analytical output. It therefore fails the historical Strand A threshold.",
+      "deep_analysis": {
+        "work_kind": "vacancy notice",
+        "research_question": "",
+        "main_finding": "A policy-officer vacancy covered EOSC monitoring and related coordination.",
+        "method_or_basis": "Official vacancy page.",
+        "qualification": "The page is recruitment material, not an R&I evidence product.",
+        "radar_relevance": "EOSC is European R&I infrastructure, but this claimed object is only a vacancy.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:d04896af05545563",
+      "source_hash": "3b7f9169",
+      "identity_hash": "c88536469cb828f0",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://www.earto.eu/earto-answer-to-the-ec-consultation-on-the-past-present-and-future-of-the-european-research-innovation-framework-programmes-2014-2027/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://www.earto.eu/earto-answer-to-the-ec-consultation-on-the-past-present-and-future-of-the-european-research-innovation-framework-programmes-2014-2027/",
+            "title": "EARTO Answer to the EC Consultation on the past, present and future of the European Research & Innovation Framework Programmes 2014-2027 | EARTO",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Directly concerns EU R&I framework-programme governance and research-technology organisations."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2023-02-10"
+        },
+        "unset": [],
+        "reason": "EARTO page is dated 10 February 2023."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "EARTO on EU framework programmes",
+      "reader_what": "EARTO evaluates EU R&I framework programmes and argues for changes to funding design and implementation.",
+      "reader_why": "Stable framework conditions affect how RTOs plan long-term research and technology investment.",
+      "reader_more": "EARTO’s consultation response assesses Horizon 2020, Horizon Europe and related framework-programme design from the perspective of research and technology organisations. It discusses budget stability, programme implementation and support for applied research and technology infrastructures. This is substantive historical evidence on European R&I governance.",
+      "deep_analysis": {
+        "work_kind": "policy consultation response",
+        "research_question": "How should past and future EU R&I framework programmes better support research and technology organisations?",
+        "main_finding": "The response argues for stronger, more stable framework conditions and programme design suited to RTO contributions and long-term R&I investment.",
+        "method_or_basis": "Organisational policy analysis drawing on RTO experience with EU framework programmes.",
+        "qualification": "It is an advocacy submission by EARTO, not an independent impact evaluation.",
+        "radar_relevance": "Directly concerns EU R&I framework-programme governance and research-technology organisations.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:5a711e317ca43d84",
+      "source_hash": "7ebd1a68",
+      "identity_hash": "7ecae7a9fff95002",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "fail",
+            "note": "Package retrieval of the Institut Montaigne URL returned 403."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this Institut Montaigne analysis."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the matching full Institut Montaigne article."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_text",
+            "url": "https://www.institutmontaigne.org/en/expressions/digital-technologies-inadequacy-higher-education-and-innovation-ecosystem",
+            "title": "Digital Technologies: Inadequacy of the Higher Education and Innovation Ecosystem",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Directly addresses European digital capability, R&D, universities and innovation ecosystems."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2023-01-20"
+        },
+        "unset": [],
+        "reason": "Institut Montaigne page is dated 20 January 2023."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Europe’s digital innovation ecosystem",
+      "reader_what": "The analysis links Europe’s digital weakness to higher-education, research, startup and scale-up ecosystem shortcomings.",
+      "reader_why": "Weak links between universities, research, startups and scale-up finance can constrain digital technology capacity.",
+      "reader_more": "Institut Montaigne analyses Europe’s digital-technology position with particular attention to France. It argues that higher education, research, entrepreneurship and scale-up financing are insufficiently connected for digital innovation. The article is useful historical context on European technology capability and innovation ecosystems.",
+      "deep_analysis": {
+        "work_kind": "policy analysis",
+        "research_question": "Why has Europe struggled to convert education and research strengths into digital technology scale?",
+        "main_finding": "The article argues that fragmented higher education and innovation ecosystems weaken Europe’s ability to create and scale digital firms.",
+        "method_or_basis": "Policy analysis synthesising institutional, investment and ecosystem evidence.",
+        "qualification": "The article is analytical commentary rather than a causal programme evaluation.",
+        "radar_relevance": "Directly addresses European digital capability, R&D, universities and innovation ecosystems.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:200edf8954e2b904",
+      "source_hash": "55a2230f",
+      "identity_hash": "e79d16bdede4bade",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://www.forskningsradet.no/en/financing/application-process/assessment-open-science/Download"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://www.forskningsradet.no/en/financing/application-process/assessment-open-science/Download",
+            "title": "Assessment of open science in grant applications",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "European research-funding governance and open-science incentives are central."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2022-11-17"
+        },
+        "unset": [],
+        "reason": "The Research Council material was published 17 November 2022 for use from 2023."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Open science in grant assessment",
+      "reader_what": "Norway’s Research Council explains how open-science practices enter grant assessment from 2023.",
+      "reader_why": "Embedding openness in evaluation changes incentives around data, software, reproducibility and research outputs.",
+      "reader_more": "The official guidance states that referees will assess open-science practice in Researcher Projects and Collaborative and Knowledge-building Projects. It explains expectations for FAIR data, early sharing, software and reproducibility, with exceptions including security and data protection. This is substantive research-funding governance evidence.",
+      "deep_analysis": {
+        "work_kind": "official funding guidance",
+        "research_question": "How will open-science practice be assessed in Research Council grant applications?",
+        "main_finding": "Open-science practices are integrated into impact assessment, with applicants expected to plan for reusable and verifiable research outputs where appropriate.",
+        "method_or_basis": "Official assessment guidance from the Research Council of Norway.",
+        "qualification": "The document describes assessment policy, not measured effects on applicant behaviour or research quality.",
+        "radar_relevance": "European research-funding governance and open-science incentives are central.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:0d02bbbd9d9dbbe1",
+      "source_hash": "820fd450",
+      "identity_hash": "7eeb926a15ffa64f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://link.springer.com/article/10.1007/s10961-022-09989-z"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://link.springer.com/article/10.1007/s10961-022-09989-z",
+            "title": "Identifying the implementation effect of technology transfer policy using system dynamics: a case study in Liaoning, China",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_GEOGRAPHY",
+        "reason": "The work is non-European and does not make a qualifying reusable-method contribution."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Technology-transfer policy in Liaoning",
+      "reader_what": "The study models technology-transfer policy implementation in Liaoning, China, using system dynamics.",
+      "reader_why": "",
+      "reader_more": "The article studies a Chinese provincial technology-transfer system and applies system dynamics to evaluate policy implementation. It does not contain a substantive European R&I focus. The system-dynamics approach is applied to the case rather than presented as a new reusable method, so it also does not qualify for Strand B.",
+      "deep_analysis": {
+        "work_kind": "empirical modelling study",
+        "research_question": "How do technology-transfer policies affect the Liaoning regional innovation system?",
+        "main_finding": "The model estimates policy effects within Liaoning’s technology-transfer system.",
+        "method_or_basis": "System-dynamics modelling and policy simulation for a Chinese regional case.",
+        "qualification": "Results are case-specific and model-dependent.",
+        "radar_relevance": "The work is non-European and does not make a qualifying reusable-method contribution.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:0240e1b9de58c17a",
+      "source_hash": "4d534135",
+      "identity_hash": "d5e3b548fd6dacbd",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI 10.6017/ijahe.v9i3.16045 resolved to the matching journal work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "The DOI matched the International Journal of African Higher Education article."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title recovery found the journal full-text page."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "journal_full_text",
+            "url": "https://ejournals.bc.edu/index.php/ijahe/article/view/16045",
+            "title": "Global South Research Collaboration: A Comparative Perspective",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_GEOGRAPHY",
+        "reason": "The work is relevant to global research collaboration but not substantively European."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "Global South Research Collaboration: A Comparative Perspective",
+          "source": "International Journal of African Higher Education"
+        },
+        "unset": [],
+        "reason": "The journal landing page gives the full title and journal name."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Global South research collaboration",
+      "reader_what": "The article compares South–South and South–North research collaboration from a Global South perspective.",
+      "reader_why": "",
+      "reader_more": "The recovered article is a comparative study of research collaboration involving Global South contexts. Europe is not the substantive object of analysis. It therefore does not meet the historical Strand A European-relevance requirement.",
+      "deep_analysis": {
+        "work_kind": "comparative research study",
+        "research_question": "How do Global South–South and South–North research collaborations differ?",
+        "main_finding": "The study compares collaboration patterns and experiences across Global South and North-linked research relationships.",
+        "method_or_basis": "Comparative analysis of international research collaboration.",
+        "qualification": "Its geographic and policy focus is not European R&I.",
+        "radar_relevance": "The work is relevant to global research collaboration but not substantively European.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:161ac51defb1d79e",
+      "source_hash": "9e7b0535",
+      "identity_hash": "085b1a44aa8f5c69",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://link.springer.com/article/10.1007/s10308-022-00652-8"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://link.springer.com/article/10.1007/s10308-022-00652-8",
+            "title": "Building resilient supply chains in uncertain times: a comparative study of EU and ASEAN approaches to supply chain resilience",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "EU industrial resilience and technology-related supply chains are a central case."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2022-11-12"
+        },
+        "unset": [],
+        "reason": "The journal version records online publication on 12 November 2022."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "EU and ASEAN supply-chain resilience",
+      "reader_what": "The study compares EU and ASEAN approaches to building resilient supply chains under uncertainty.",
+      "reader_why": "Resilience strategies combine diversification, strategic capacity, digitalisation and sustainability choices.",
+      "reader_more": "The article directly compares European Union and ASEAN supply-chain resilience approaches. It analyses strategic autonomy, digital transformation and sustainability in the EU alongside ASEAN responses. This gives substantive historical evidence on European industrial capability and supply-chain policy.",
+      "deep_analysis": {
+        "work_kind": "comparative policy study",
+        "research_question": "How do EU and ASEAN strategies for supply-chain resilience differ under uncertainty?",
+        "main_finding": "The comparison identifies distinct regional approaches to resilience, including the EU emphasis on strategic autonomy and green-digital transition.",
+        "method_or_basis": "Comparative qualitative policy analysis.",
+        "qualification": "It compares two regions rather than estimating causal policy effects.",
+        "radar_relevance": "EU industrial resilience and technology-related supply chains are a central case.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:e0d7e656eaca1886",
+      "source_hash": "a68fab7e",
+      "identity_hash": "41c5ad8f4e3ef991",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The DIIS page identified the underlying research output."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Recovered DOI 10.1080/14650045.2022.2131546 and matched title/authors."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Taylor & Francis full text and DIIS research-output metadata were recovered."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.tandfonline.com/doi/full/10.1080/14650045.2022.2131546",
+            "title": "Energy security innovation in the Baltic Sea Region: competing visions of technopolitical orders",
+            "evidence_used": true
+          },
+          {
+            "kind": "institutional_record",
+            "url": "https://research.diis.dk/en/publications/energy-security-innovation-in-the-baltic-sea-region-competing-vis/",
+            "title": "DIIS research output record",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "European energy technology and security innovation are the article’s core subject."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "Energy security innovation in the Baltic Sea Region: competing visions of technopolitical orders",
+          "authors": "Trine Villumsen Berling; Izabela Surwillo; Veronika Slakaityte",
+          "source": "Geopolitics",
+          "date": "2022-10-19",
+          "type": "peer-reviewed article"
+        },
+        "unset": [],
+        "reason": "DIIS research-output metadata and the journal article identify the underlying publication and its online date."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Baltic energy-security innovation",
+      "reader_what": "The article compares competing visions of energy-security innovation in Poland and Lithuania.",
+      "reader_why": "Technology choices embed different political and security visions for regional energy systems.",
+      "reader_more": "The recovered journal article examines energy-security innovation in the Baltic Sea region through Poland and Lithuania. It analyses how technology and infrastructure choices express competing technopolitical orders. This is substantive European technology, energy-security and innovation evidence.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed article",
+        "research_question": "How do competing technopolitical visions shape energy-security innovation in the Baltic Sea region?",
+        "main_finding": "Poland and Lithuania pursue energy-security innovation through differing technological and political visions.",
+        "method_or_basis": "Comparative qualitative analysis of energy policy, technology and security.",
+        "qualification": "The study focuses on selected Baltic cases rather than all European energy systems.",
+        "radar_relevance": "European energy technology and security innovation are the article’s core subject.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:5804b88ca705964f",
+      "source_hash": "19798712",
+      "identity_hash": "3c67d84fe0a306ea",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI 10.1080/09662839.2022.2127317 matched the European Security article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "The DOI led to matching open full text at Taylor & Francis."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.tandfonline.com/doi/full/10.1080/09662839.2022.2127317",
+            "title": "D reams Lab: assembling knowledge security in Sino-Dutch research collaborations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Directly concerns European university collaboration, AI research and knowledge security."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Knowledge security in Sino-Dutch research",
+      "reader_what": "A Dutch AI collaboration case shows how universities assemble governance around knowledge-security risks.",
+      "reader_why": "Research-security controls emerge through practical governance of funding, transfer, censorship and dual-use concerns.",
+      "reader_more": "The article studies the D reams Lab, a Sino-Dutch research collaboration involving AI and Huawei funding. It examines how actors identify and govern risks such as unwanted knowledge transfer, espionage, censorship and dual use. This is direct European research-security evidence.",
+      "deep_analysis": {
+        "work_kind": "qualitative case study",
+        "research_question": "How is knowledge security assembled in a Sino-Dutch university research collaboration?",
+        "main_finding": "Knowledge-security governance emerges through negotiated practices around collaboration, funding, transfer and dual-use concerns.",
+        "method_or_basis": "Qualitative case study of a Dutch research collaboration.",
+        "qualification": "One case cannot establish how all European institutions manage research-security risks.",
+        "radar_relevance": "Directly concerns European university collaboration, AI research and knowledge security.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:8442aa3a929e26a2",
+      "source_hash": "e6aedb7e",
+      "identity_hash": "129520861946e615",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://www.eeas.europa.eu/delegations/united-states-america/future-transatlantic-finance-eu-us-cooperation-digital-sustainable-finance_en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://www.eeas.europa.eu/delegations/united-states-america/future-transatlantic-finance-eu-us-cooperation-digital-sustainable-finance_en",
+            "title": "The Future of Transatlantic Finance: The EU-U.S. Cooperation on Digital & Sustainable Finance",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "",
+        "reason_code": "NON_SUBSTANTIVE_PAGE",
+        "reason": "Digital policy is mentioned, but the claimed object is not substantive R&I work."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Transatlantic finance event notice",
+      "reader_what": "The EEAS page announces an event on EU-US digital and sustainable finance cooperation.",
+      "reader_why": "",
+      "reader_more": "The claimed page is an event invitation and programme notice. Although its topic includes EU-US digital finance cooperation, it does not itself report substantive R&I evidence, a policy decision or an analytical finding. It therefore does not qualify as historical Strand A or B evidence.",
+      "deep_analysis": {
+        "work_kind": "event announcement",
+        "research_question": "",
+        "main_finding": "An EEAS event was organised around transatlantic digital and sustainable finance cooperation.",
+        "method_or_basis": "Official event notice.",
+        "qualification": "The page is promotional/event material rather than substantive analysis.",
+        "radar_relevance": "Digital policy is mentioned, but the claimed object is not substantive R&I work.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:e51245bb0a015e7d",
+      "source_hash": "0238d77a",
+      "identity_hash": "e3f5541cad4b6cc5",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://www.esf.org/wp-content/uploads/2025/09/ESF_annual_report_2021_compressed.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://www.esf.org/wp-content/uploads/2025/09/ESF_annual_report_2021_compressed.pdf",
+            "title": "ESF Annual Report 2021 - ESF",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Direct evidence on European research evaluation, programme management and research infrastructure."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "ESF science operations in 2021",
+      "reader_what": "ESF reports grant evaluation, research-network hosting and management of EU-funded research projects in 2021.",
+      "reader_why": "Operational evidence shows how European research organisations support proposal evaluation, networks and collaborative programmes.",
+      "reader_more": "The annual report documents ESF-Science Connect activities across research-quality assessment, grant evaluation, scientific structures, EU project coordination and programme management. It includes quantified activity and examples of funded research programmes. This is substantive historical context on European research infrastructure and governance.",
+      "deep_analysis": {
+        "work_kind": "annual report",
+        "research_question": "What research-support and programme-management activities did ESF-Science Connect conduct in 2021?",
+        "main_finding": "ESF reports thousands of proposal assessments, hosted scientific structures and participation in multiple EU-funded projects.",
+        "method_or_basis": "Official annual reporting with operational statistics and programme descriptions.",
+        "qualification": "Institutional self-reporting does not independently evaluate the impact of those activities.",
+        "radar_relevance": "Direct evidence on European research evaluation, programme management and research infrastructure.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:5d071cebe2c615fd",
+      "source_hash": "457ae801",
+      "identity_hash": "b864f733dca7daef",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://link.springer.com/article/10.1007/s10734-022-00931-8"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://link.springer.com/article/10.1007/s10734-022-00931-8",
+            "title": "Reconceptualising international academic mobility in the global knowledge system: towards a new research agenda",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_GEOGRAPHY",
+        "reason": "It does not meet substantive European relevance or Strand B method novelty."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "International academic mobility framework",
+      "reader_what": "The article reconceptualises academic mobility within a global knowledge system and proposes a research agenda.",
+      "reader_why": "",
+      "reader_more": "The article addresses international academic mobility at a global level and develops a conceptual research agenda. Europe is not the substantive object of analysis, and the conceptual framework is specific to the topic rather than a qualifying general-purpose reusable method. It therefore falls outside A and B.",
+      "deep_analysis": {
+        "work_kind": "conceptual review",
+        "research_question": "How should international academic mobility be reconceptualised within the global knowledge system?",
+        "main_finding": "The authors propose a broader research agenda for studying mobility through global knowledge-system relationships.",
+        "method_or_basis": "Conceptual synthesis and literature-based framework development.",
+        "qualification": "The contribution is global and topic-specific rather than European or a reusable analytical method.",
+        "radar_relevance": "It does not meet substantive European relevance or Strand B method novelty.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:de84c12bdb12d694",
+      "source_hash": "fd555dd4",
+      "identity_hash": "14d0136bd1437fdd",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://link.springer.com/article/10.1007/s10961-022-09946-w"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://link.springer.com/article/10.1007/s10961-022-09946-w",
+            "title": "Industrial funding and university technology transfer: the moderating role of intellectual property rights enforcement",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_GEOGRAPHY",
+        "reason": "No substantive European focus or qualifying method contribution is established."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Industrial funding and technology transfer",
+      "reader_what": "The study tests how intellectual-property enforcement moderates industrial funding effects on university technology transfer.",
+      "reader_why": "",
+      "reader_more": "The article empirically studies university technology transfer and industrial funding outside a substantive European R&I frame. Its statistical design applies established methods rather than introducing a reusable methodological innovation. It therefore does not qualify for A or B.",
+      "deep_analysis": {
+        "work_kind": "empirical econometric study",
+        "research_question": "How does intellectual-property-rights enforcement moderate the relationship between industrial funding and university technology transfer?",
+        "main_finding": "The study reports conditional relationships between funding, IPR enforcement and university technology-transfer outcomes.",
+        "method_or_basis": "Econometric analysis of university-level data.",
+        "qualification": "The findings are context-specific and observational.",
+        "radar_relevance": "No substantive European focus or qualifying method contribution is established.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:88885362f734d808",
+      "source_hash": "9539b3c9",
+      "identity_hash": "502988f702a1eba5",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://ecfr.eu/article/chinas-wolf-warriors-and-feminist-foreign-policy-a-german-approach/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://ecfr.eu/article/chinas-wolf-warriors-and-feminist-foreign-policy-a-german-approach/",
+            "title": "China’s wolf warriors and feminist foreign policy: A German approach – European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "",
+        "reason_code": "NO_SUBSTANTIVE_RI",
+        "reason": "The work falls outside the Radar’s R&I and methods criteria."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "German policy toward China",
+      "reader_what": "The commentary discusses Germany’s China policy through diplomacy and feminist foreign-policy debates.",
+      "reader_why": "",
+      "reader_more": "The ECFR article is foreign-policy commentary centered on Germany and China. It does not contain a substantive research, innovation, science, technology or industrial-capability analysis meeting historical Strand A, and it does not contribute a reusable method.",
+      "deep_analysis": {
+        "work_kind": "policy commentary",
+        "research_question": "",
+        "main_finding": "The article discusses German foreign-policy choices toward China.",
+        "method_or_basis": "Expert policy commentary.",
+        "qualification": "R&I is not a substantive analytical focus.",
+        "radar_relevance": "The work falls outside the Radar’s R&I and methods criteria.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:67e4b2156b0cbaf5",
+      "source_hash": "a614444d",
+      "identity_hash": "03b1046fc220824e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI 10.1002/ffo2.141 resolved to the Wiley article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Wiley provided matching full text, including the method and case sections."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://onlinelibrary.wiley.com/doi/full/10.1002/ffo2.141",
+            "title": "Computer-aided scenario design using participatory backcasting",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "A new reusable scenario-design procedure squarely fits Strand B."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "Futures & Foresight Science",
+          "type": "peer-reviewed article"
+        },
+        "unset": [],
+        "reason": "The Wiley publisher page identifies the journal as Futures & Foresight Science."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Computer-aided participatory backcasting",
+      "reader_what": "The paper develops a five-step method combining participatory backcasting with computational scenario visualisation.",
+      "reader_why": "Visualising scenario logic makes assumptions, intermediate outputs and pathways easier to inspect and reuse.",
+      "reader_more": "The authors develop a computer-aided backcasting method that combines workshops with the 3S simulator. The five-step procedure structures problem definition, goals, measures, verification and conclusions, and the Toyama case demonstrates how it supports transparent and reusable scenario design. This is a clear transferable foresight-method contribution.",
+      "deep_analysis": {
+        "work_kind": "method-development study",
+        "research_question": "How can computational assistance make participatory backcasting scenarios more transparent, verifiable and reusable?",
+        "main_finding": "A hybrid workshop-and-computation procedure structures backcasting scenarios and visualises their logical relationships.",
+        "method_or_basis": "Method development plus a participatory case demonstration in Toyama, Japan.",
+        "qualification": "The method is demonstrated in one municipal case; broader performance requires further applications.",
+        "radar_relevance": "A new reusable scenario-design procedure squarely fits Strand B.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:8522c16518f4a39d",
+      "source_hash": "c658a647",
+      "identity_hash": "55b364b92b77370c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI 10.1016/j.technovation.2022.102623 matched the Technovation article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "ScienceDirect provided the matching article and substantive text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0166497222001705",
+            "title": "Artificial intelligence in innovation research",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "NO_REUSABLE_METHOD",
+        "reason": "It does not make the reusable methodological contribution required for Strand B."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "AI innovation literature review",
+      "reader_what": "The study reviews AI-in-innovation research and proposes a topic-specific conceptual framework and agenda.",
+      "reader_why": "",
+      "reader_more": "The article conducts a systematic review and bibliometric synthesis of AI research in innovation studies. Its main contribution is a domain-specific conceptual framework and research agenda, while the review methods themselves are established rather than newly or materially improved. It therefore does not meet Strand B.",
+      "deep_analysis": {
+        "work_kind": "systematic literature review",
+        "research_question": "What themes and gaps characterise research on artificial intelligence in innovation?",
+        "main_finding": "The review organises the literature into a conceptual framework and future research agenda.",
+        "method_or_basis": "Systematic review and bibliometric analysis of published literature.",
+        "qualification": "The methodological procedures are established and the framework is topic-specific.",
+        "radar_relevance": "It does not make the reusable methodological contribution required for Strand B.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:d0da4842f39bdbb5",
+      "source_hash": "9736afaa",
+      "identity_hash": "f47f79f2191e62d3",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://ecfr.eu/article/arm-for-the-storm-germanys-new-security-strategy/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://ecfr.eu/article/arm-for-the-storm-germanys-new-security-strategy/",
+            "title": "Arm for the storm: Germany’s new security strategy – European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "",
+        "reason_code": "NO_SUBSTANTIVE_RI",
+        "reason": "No qualifying R&I or method contribution is established."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Germany’s security strategy",
+      "reader_what": "The ECFR article discusses Germany’s emerging national security strategy and defence posture.",
+      "reader_why": "",
+      "reader_more": "The article is principally security and foreign-policy commentary. Research, innovation and technology capability are not developed as a substantive analytical object, and no reusable method is contributed. It therefore falls outside the historical A/B criteria.",
+      "deep_analysis": {
+        "work_kind": "policy commentary",
+        "research_question": "",
+        "main_finding": "The article assesses Germany’s security-strategy debate and changing defence posture.",
+        "method_or_basis": "Expert policy analysis.",
+        "qualification": "Its focus is national security policy rather than R&I.",
+        "radar_relevance": "No qualifying R&I or method contribution is established.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:6d21ff3a8feb72cb",
+      "source_hash": "6fefd3e7",
+      "identity_hash": "13065bb3318936a6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://www.rathenau.nl/sites/default/files/2022-08/Rathenau_Instituut_Annual_report_2021.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://www.rathenau.nl/sites/default/files/2022-08/Rathenau_Instituut_Annual_report_2021.pdf",
+            "title": "Annual Report 2021 | Rathenau Instituut",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The documented work directly concerns European science systems and technology governance."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Rathenau science and technology context",
+      "reader_what": "Rathenau reports 2021 work on digital society, research systems, science indicators and technology governance.",
+      "reader_why": "The report consolidates evidence on Dutch and European science, innovation investment and technology-society issues.",
+      "reader_more": "The annual report summarises substantive Rathenau studies on robust science and knowledge ecosystems, science investment, public engagement, digital society and emerging technologies. It records research outputs and figures rather than only corporate administration. This makes it useful historical European R&I context.",
+      "deep_analysis": {
+        "work_kind": "annual report",
+        "research_question": "What science, technology and knowledge-system issues did Rathenau investigate in 2021?",
+        "main_finding": "The report brings together evidence on science funding, research ecosystems, public engagement and technology governance in the Netherlands and Europe.",
+        "method_or_basis": "Official institutional reporting summarising completed research and indicators.",
+        "qualification": "It is a portfolio-level report; individual findings rely on the underlying studies it summarises.",
+        "radar_relevance": "The documented work directly concerns European science systems and technology governance.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:778274c1342a7396",
+      "source_hash": "9847ea0e",
+      "identity_hash": "e2f002df019723b7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI 10.1080/23299460.2022.2094071 matched the Journal of Responsible Innovation article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Publisher full text was recovered."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.tandfonline.com/doi/full/10.1080/23299460.2022.2094071",
+            "title": "Experimentation, learning, and dialogue",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Directly concerns governance and security of EU-funded research."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "RRI governance for dual-use research",
+      "reader_what": "The paper develops and documents an RRI-inspired governance approach for dual-use concerns in the Human Brain Project.",
+      "reader_why": "Iterative experimentation and dialogue can embed dual-use governance within large research programmes.",
+      "reader_more": "Using experience from the EU-funded Human Brain Project, the article explains how responsible research and innovation practices were adapted to dual-use concerns. It emphasises experimentation, learning and dialogue rather than a one-off compliance process. This is substantive European research-security and governance evidence.",
+      "deep_analysis": {
+        "work_kind": "governance case study",
+        "research_question": "How can responsible research and innovation practices address dual-use concerns in a large research programme?",
+        "main_finding": "An iterative RRI approach can institutionalise dual-use governance through experimentation, learning and stakeholder dialogue.",
+        "method_or_basis": "Reflexive analysis of governance practice in the Human Brain Project.",
+        "qualification": "The evidence comes from one large European research programme.",
+        "radar_relevance": "Directly concerns governance and security of EU-funded research.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:75b4f77164f6cea7",
+      "source_hash": "3a6c39cb",
+      "identity_hash": "2a6a018e80858697",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://link.springer.com/article/10.1186/s40309-022-00206-6"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://link.springer.com/article/10.1186/s40309-022-00206-6",
+            "title": "Radical Technology Inquirer: a methodology for holistic, transparent and participatory technology foresight",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "It is an explicit transferable foresight methodology and fits Strand B."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "European Journal of Futures Research",
+          "type": "peer-reviewed article"
+        },
+        "unset": [],
+        "reason": "The DOI resolves to European Journal of Futures Research."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Radical Technology Inquirer method",
+      "reader_what": "RTI combines horizon scanning, value networks, anticipated technologies, crowdsourcing and stakeholder evaluation for long-term foresight.",
+      "reader_why": "Combining transparent evidence collection with participatory evaluation supports traceable technology-foresight choices.",
+      "reader_more": "The paper introduces and motivates the RTI 2018 methodology for anticipating technological breakthroughs and cross-sectoral impacts. It combines systematic science-and-technology news collection, 20 global value-producing networks, 100 anticipated radical technologies and continuous stakeholder evaluation. This is a reusable foresight method.",
+      "deep_analysis": {
+        "work_kind": "methodology paper",
+        "research_question": "How can long-term technology foresight be made more holistic, transparent and participatory?",
+        "main_finding": "RTI integrates structured horizon scanning, technology-opportunity mapping and participatory evaluation in a reusable foresight process.",
+        "method_or_basis": "Method design grounded in prior RTI versions, systematic scanning and stakeholder participation.",
+        "qualification": "The framework’s usefulness depends on the quality of inputs and expert/crowd judgements.",
+        "radar_relevance": "It is an explicit transferable foresight methodology and fits Strand B.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:b78dda748bf3e9cd",
+      "source_hash": "48a92eab",
+      "identity_hash": "124cb3b3cda4fb2e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI 10.1080/09662839.2022.2103370 matched the European Security article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Taylor & Francis open full text was recovered."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.tandfonline.com/doi/full/10.1080/09662839.2022.2103370",
+            "title": "The EU’s hegemonic imaginaries",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "EU technological capability, R&I and civil-military innovation are central empirical fields."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "EU technological sovereignty imaginaries",
+      "reader_what": "The article traces how strategic-autonomy language moved from defence into EU technology, digital and dual-use innovation policy.",
+      "reader_why": "Security framing can reshape priorities and institutions across civil, defence and digital innovation policy.",
+      "reader_more": "The article analyses how strategic autonomy and technological sovereignty are articulated across EU defence, technology and digital policy. It examines critical technologies, civil-military R&I and European Commission initiatives through interpretive content analysis. This is substantive European technology and R&I governance evidence.",
+      "deep_analysis": {
+        "work_kind": "policy discourse analysis",
+        "research_question": "How do strategic-autonomy and sovereignty concepts travel across EU defence, technology and digital policy?",
+        "main_finding": "The concepts help connect security priorities with EU civil-military innovation, critical-technology and digital policy agendas.",
+        "method_or_basis": "Interpretive content analysis using sociotechnical-imaginaries and discourse theory.",
+        "qualification": "The study analyses framing and policy meaning, not the effectiveness of resulting initiatives.",
+        "radar_relevance": "EU technological capability, R&I and civil-military innovation are central empirical fields.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:bd94eeb474acfd66",
+      "source_hash": "7d82a99d",
+      "identity_hash": "cd1c348d560b54ff",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI 10.1080/17487870.2021.1952412 resolved to the matching Journal of Economic Policy Reform article, but substantive full text was not accessible."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI metadata matched Muscio, Ciffolilli and Lopolito; accessible publisher content remained abstract-level."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search found the publisher record and University of Foggia record, both without accessible substantive text."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Title + Muscio/Ciffolilli/Lopolito + 2022 confirmed the same publication and pages 322-343."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "fail",
+            "note": "Checked Taylor & Francis, University of Foggia repository and author/publication pages; no legitimate full or substantive manuscript was available."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "fail",
+            "note": "Bounded DOI/title/PDF/repository searches recovered only metadata, abstract and citation records, insufficient for a substantive decision."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article_page",
+            "url": "https://www.tandfonline.com/doi/abs/10.1080/17487870.2021.1952412",
+            "title": "Technological diversity in collaborative projects",
+            "evidence_used": false
+          },
+          {
+            "kind": "institutional_record",
+            "url": "https://fair.unifg.it/handle/11369/422209",
+            "title": "University of Foggia record",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Identity verified; substantive evidence was insufficient after the mandatory recovery ladder."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity is verified, but substantive evidence remained inaccessible after all six mandatory recovery steps; no admission judgement is made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "journal article",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "Substantive evidence inaccessible after mandatory recovery.",
+        "radar_relevance": "Admission unresolved because substantive evidence is access-limited.",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.compind.2022.103835",
+      "source_hash": "5c23ebc2",
+      "identity_hash": "fcade46121da3a48",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The ScienceDirect URL matched the GAN technology-roadmapping article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1016/j.compind.2022.103835 matched and substantive publisher text was available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0166361522002317",
+            "title": "Developing a data-driven technology roadmapping method using GAN",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "A new transferable technology-roadmapping technique directly qualifies for Strand B."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "GAN-based technology roadmapping",
+      "reader_what": "The paper develops an automated technology-roadmapping method using a generative adversarial network.",
+      "reader_why": "Automated generation can extend roadmapping from expert-led mapping toward scalable data-driven exploration.",
+      "reader_more": "The article proposes a data-driven roadmapping method that uses a generative adversarial network to generate and structure technology-development pathways. It demonstrates the approach on renewable-energy data. The core contribution is methodological and transferable across technology domains.",
+      "deep_analysis": {
+        "work_kind": "method-development study",
+        "research_question": "Can generative adversarial networks support automated, data-driven technology roadmapping?",
+        "main_finding": "A GAN-based procedure is proposed for generating technology-roadmap pathways from data rather than relying only on expert construction.",
+        "method_or_basis": "Deep-learning method development and empirical demonstration on technology data.",
+        "qualification": "Performance and interpretability depend on training data and model design.",
+        "radar_relevance": "A new transferable technology-roadmapping technique directly qualifies for Strand B.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:c59a93c4812edd4b",
+      "source_hash": "959dff24",
+      "identity_hash": "4040efa6ef556035",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI 10.1080/09662839.2022.2101886 matched the European Security article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Matching substantive publisher text was recovered."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.tandfonline.com/doi/full/10.1080/09662839.2022.2101886",
+            "title": "Formatting European security integration through database interoperability",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "European digital infrastructure and technological governance are the central object."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Interoperability and EU security integration",
+      "reader_what": "The article shows how database interoperability helps format European security integration through data infrastructures and practices.",
+      "reader_why": "Technical infrastructure can shape institutional integration by standardising data flows, categories and operational relationships.",
+      "reader_more": "The paper examines EU security database interoperability as a sociotechnical process rather than a neutral technical upgrade. It identifies mechanisms through which data infrastructures format European security integration. This is substantive evidence on European digital infrastructure, governance and security technology.",
+      "deep_analysis": {
+        "work_kind": "sociotechnical policy study",
+        "research_question": "How does database interoperability shape European security integration?",
+        "main_finding": "Interoperability infrastructures actively format integration through technical standards, data relations and operational practices.",
+        "method_or_basis": "Qualitative sociotechnical analysis of EU security databases and interoperability policy.",
+        "qualification": "The analysis concerns security infrastructure rather than R&D performance itself.",
+        "radar_relevance": "European digital infrastructure and technological governance are the central object.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:8d29deab1789e46f",
+      "source_hash": "8460e9db",
+      "identity_hash": "e9d5cbd6d80aacfb",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI 10.1080/09662839.2022.2101887 matched the European Security introduction."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "The DOI matched title/authors."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "A matching institutional full-text record was recovered from UCLouvain."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "institutional_full_text",
+            "url": "https://research.dial.uclouvain.be/entities/publication/8d4e811d-387e-4049-8ef0-286187dd110f",
+            "title": "Digital/sovereignty and European security integration: an introduction",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "It directly addresses European digital infrastructure and technological sovereignty."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Digital sovereignty and EU security",
+      "reader_what": "The introduction frames digital sovereignty as a material and political issue in European security integration.",
+      "reader_why": "Digital infrastructures and sovereignty claims jointly shape how European security authority is organised.",
+      "reader_more": "This introduction synthesises research on digital sovereignty and European security integration, focusing on infrastructures, digital tools and governance. It provides a substantive framing of how digital systems affect European security authority. This is useful historical context on European technological sovereignty.",
+      "deep_analysis": {
+        "work_kind": "scholarly introduction",
+        "research_question": "How should digital sovereignty be understood in relation to European security integration?",
+        "main_finding": "The authors argue that digital infrastructures and sovereignty claims are constitutive of contemporary European security integration.",
+        "method_or_basis": "Conceptual synthesis introducing a peer-reviewed special issue.",
+        "qualification": "As an introduction, it synthesises rather than independently tests one empirical hypothesis.",
+        "radar_relevance": "It directly addresses European digital infrastructure and technological sovereignty.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "historical:id:414bc22d02f41efd",
+      "source_hash": "8b3cedbf",
+      "identity_hash": "3ed5e7f86f750f96",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI 10.1080/09662839.2022.2102896 matched the European Security article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Matching publisher article content was recovered."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.tandfonline.com/doi/full/10.1080/09662839.2022.2102896",
+            "title": "Digital sovereignty and taking back control",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "EU cybersecurity, innovation capacity and digital infrastructure dependence are central."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "EU cybersecurity and digital sovereignty",
+      "reader_what": "The article links EU digital-sovereignty policy to dependence on foreign infrastructure, innovation capacity and cybersecurity.",
+      "reader_why": "Reducing infrastructural dependence requires industrial and innovation capability alongside regulation.",
+      "reader_more": "The article analyses the EU shift from regulatory capitalism toward a more interventionist digital-sovereignty approach in cybersecurity. It connects competitiveness, innovation capacity, foreign infrastructure dependence and security. This is substantive European technology and industrial-capability evidence.",
+      "deep_analysis": {
+        "work_kind": "policy analysis",
+        "research_question": "How is EU digital-sovereignty policy changing the Union’s cybersecurity and market-governance approach?",
+        "main_finding": "The EU increasingly combines regulation with efforts to recover control over digital infrastructure and technological production.",
+        "method_or_basis": "Qualitative policy and legal analysis.",
+        "qualification": "The work analyses policy direction rather than measuring outcomes of sovereignty initiatives.",
+        "radar_relevance": "EU cybersecurity, innovation capacity and digital infrastructure dependence are central.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:d53a1dafae13ae00",
+      "source_hash": "30173651",
+      "identity_hash": "1a37d625f0506f3c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI 10.1080/09662839.2022.2101885 matched the European Security article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Matching publisher article content was recovered."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.tandfonline.com/doi/full/10.1080/09662839.2022.2101885",
+            "title": "Artificial intelligence and EU security",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Directly concerns EU AI capability, security and technological dependence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "AI and EU digital sovereignty",
+      "reader_what": "The article questions whether EU AI policy can deliver digital sovereignty without stronger technological capability.",
+      "reader_why": "Regulatory power alone may not overcome dependence where underlying AI infrastructure and production capacity remain external.",
+      "reader_more": "The paper analyses AI in EU security and the promise of digital sovereignty. It distinguishes regulatory ambitions from material technological capacity and dependency. This is substantive historical evidence on European AI capability, security and technology sovereignty.",
+      "deep_analysis": {
+        "work_kind": "policy analysis",
+        "research_question": "Can EU artificial-intelligence policy deliver the technological sovereignty claimed in security debates?",
+        "main_finding": "The article argues that sovereignty claims can overstate what regulation achieves when technological dependencies persist.",
+        "method_or_basis": "Qualitative analysis of EU AI, security and digital-sovereignty policy.",
+        "qualification": "The argument is interpretive and does not quantify policy effects.",
+        "radar_relevance": "Directly concerns EU AI capability, security and technological dependence.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:c1a1b2348ebe547d",
+      "source_hash": "6e5a8357",
+      "identity_hash": "4c678b3a45ba1511",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI 10.1111/hequ.12405 matched the Wiley article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Wiley metadata matched title/authors and Higher Education Quarterly."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "UCL Discovery provided an open matching full manuscript."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://discovery.ucl.ac.uk/id/eprint/10151194/",
+            "title": "Academic freedom in the re-imagined post-Humboldtian Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Academic freedom is a structural condition for European research and higher-education systems."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "Higher Education Quarterly",
+          "date": "2022-07-03",
+          "type": "peer-reviewed editorial"
+        },
+        "unset": [],
+        "reason": "Wiley and UCL identify the outlet as Higher Education Quarterly and first publication as 3 July 2022."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Academic freedom in contemporary Europe",
+      "reader_what": "The editorial synthesises evidence on academic-freedom pressures in European higher education, especially Central and Eastern Europe.",
+      "reader_why": "Academic governance and national pressures affect the conditions under which European research institutions operate.",
+      "reader_more": "The recovered open manuscript introduces a special issue on academic freedom in Europe, predominantly Central and Eastern Europe. It situates empirical studies within changing higher-education governance and national interests. This is substantive context on European research-system conditions.",
+      "deep_analysis": {
+        "work_kind": "scholarly editorial",
+        "research_question": "How should academic freedom be reconceptualised in contemporary European higher-education systems?",
+        "main_finding": "The authors argue that post-Humboldtian European systems require renewed attention to academic freedom under changing institutional and national pressures.",
+        "method_or_basis": "Conceptual synthesis of a special issue and its empirical contributions.",
+        "qualification": "It is an editorial synthesis rather than a standalone comparative dataset.",
+        "radar_relevance": "Academic freedom is a structural condition for European research and higher-education systems.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "historical:id:6fd83b080f26617a",
+      "source_hash": "d56ce701",
+      "identity_hash": "2cecf78379e1c5f3",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI 10.1016/j.technovation.2022.102553 matched the Technovation article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "ScienceDirect matched title and article number."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Tampere University repository provided the matching full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://trepo.tuni.fi/handle/10024/223122",
+            "title": "Towards a new model of EU-China innovation cooperation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "EU-China innovation networks and policy are the direct empirical focus."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "EU-China co-innovation networks",
+      "reader_what": "The paper proposes a model linking university collaboration to transnational university-industry innovation networks between the EU and China.",
+      "reader_why": "University ties can bridge institutional gaps and help firms form cross-border co-innovation networks.",
+      "reader_more": "The article integrates social-network and institutional theory and uses interviews with 18 actors to examine EU-China innovation cooperation. It develops a model of transnational university-industry co-innovation networks. This is directly substantive European innovation-collaboration evidence.",
+      "deep_analysis": {
+        "work_kind": "theory-building empirical study",
+        "research_question": "How can international university collaboration enable EU-China industry co-innovation?",
+        "main_finding": "University collaboration can bridge institutional and network gaps that otherwise impede transnational firm innovation cooperation.",
+        "method_or_basis": "Integrated theoretical framework plus interviews with 18 EU-China innovation actors.",
+        "qualification": "The interview sample is limited and focused on a particular cooperation setting.",
+        "radar_relevance": "EU-China innovation networks and policy are the direct empirical focus.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:b44e8936666c0516",
+      "source_hash": "8d91ebea",
+      "identity_hash": "80a39386978f6067",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://link.springer.com/article/10.1007/s11192-022-04394-7"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://link.springer.com/article/10.1007/s11192-022-04394-7",
+            "title": "Research networks and the initial placement of PhD holders in academia: evidence from social science fields",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "",
+        "reason_code": "OUT_OF_SCOPE_GEOGRAPHY",
+        "reason": "No substantive European relevance or new method is established."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "PhD networks and academic placement",
+      "reader_what": "The study examines how research networks relate to first academic placement among social-science PhD holders in China.",
+      "reader_why": "",
+      "reader_more": "The article is an empirical study of doctoral networks and academic placement in a non-European setting. It does not establish a substantive European R&I connection, and its network analysis applies existing methods rather than introducing a reusable methodological contribution. It therefore fails A and B.",
+      "deep_analysis": {
+        "work_kind": "empirical network study",
+        "research_question": "How do research-network positions relate to initial academic placement among social-science PhD holders?",
+        "main_finding": "Network characteristics are associated with early academic placement outcomes in the studied cohort.",
+        "method_or_basis": "Social-network and placement analysis.",
+        "qualification": "The study population and institutional context are not European.",
+        "radar_relevance": "No substantive European relevance or new method is established.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:5b639d46e0ba8d47",
+      "source_hash": "53bb9fbe",
+      "identity_hash": "17d6ece700c78701",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI 10.1002/ffo2.118 matched the Futures & Foresight Science article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Wiley metadata matched the article."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Strathprints provided the accepted author manuscript."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://strathprints.strath.ac.uk/78986/",
+            "title": "A critical evaluation of 42 large-scale science and technology foresight Delphi surveys",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "B",
+        "reason_code": "BORDERLINE_METHOD_CONTRIBUTION",
+        "reason": "Potential Strand B value is real, but method-novelty threshold needs human judgement."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "Futures & Foresight Science",
+          "date": "2022-01-15",
+          "type": "peer-reviewed article"
+        },
+        "unset": [],
+        "reason": "Wiley and the Strathclyde manuscript record identify the journal and first-publication date."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Evaluating large Delphi foresight surveys",
+      "reader_what": "The study applies a six-step Delphi framework to 42 large foresight surveys and derives design recommendations.",
+      "reader_why": "The evaluation identifies recurring design weaknesses that can inform future large-scale Delphi practice.",
+      "reader_more": "The authors use a previously developed six-step defensibility framework to evaluate 42 large-scale science and technology foresight Delphi surveys. They identify recurring problems in feedback, rationale elicitation and reporting, then give design recommendations. The evidence is strong, but whether applying an existing framework plus recommendations constitutes a materially improved reusable method is genuinely borderline.",
+      "deep_analysis": {
+        "work_kind": "method-evaluation study",
+        "research_question": "Do large-scale technology-foresight Delphi surveys meet defensible Delphi-process standards, and how should they improve?",
+        "main_finding": "The evaluation finds recurring weaknesses in numerical feedback, rationale elicitation and reporting, and recommends design improvements.",
+        "method_or_basis": "Detailed analysis of two exemplars plus content analysis of 42 surveys using an existing six-step framework.",
+        "qualification": "The paper applies an existing framework; its methodological novelty lies mainly in evaluation and recommendations.",
+        "radar_relevance": "Potential Strand B value is real, but method-novelty threshold needs human judgement.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:f5e1ba6fb395fc79",
+      "source_hash": "8c25831a",
+      "identity_hash": "efe18c7e146feed5",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://hadea.ec.europa.eu/calls-proposals/horizon-europe-cancer-research-calls_en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://hadea.ec.europa.eu/calls-proposals/horizon-europe-cancer-research-calls_en",
+            "title": "Horizon Europe Cancer Research calls",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "NON_SUBSTANTIVE_PAGE",
+        "reason": "The page is European R&I administration, but not a substantive historical work."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Horizon Europe cancer call listing",
+      "reader_what": "The HaDEA page lists Horizon Europe Cancer Mission research calls and funding topics.",
+      "reader_why": "",
+      "reader_more": "The page is a funding-call listing and navigation page for Cancer Mission topics. It identifies real European funding opportunities but does not itself provide a substantive research finding, evaluation or analytical policy output. Under the historical A standard it is too thin to retain as evidence.",
+      "deep_analysis": {
+        "work_kind": "funding-call listing",
+        "research_question": "",
+        "main_finding": "HaDEA lists Horizon Europe cancer-research call topics and application links.",
+        "method_or_basis": "Official programme/call page.",
+        "qualification": "It describes funding opportunities rather than substantive evidence about R&I outcomes or policy performance.",
+        "radar_relevance": "The page is European R&I administration, but not a substantive historical work.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:3edd5756dffe7edd",
+      "source_hash": "8e243964",
+      "identity_hash": "a14b5eb0002789a6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI 10.1177/10245294221097066 matched the Competition & Change article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "SAGE full text was recovered."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://journals.sagepub.com/doi/full/10.1177/10245294221097066",
+            "title": "Producing and using artificial intelligence: What can Europe learn from Siemens’s experience?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Directly informs European AI production, industrial capability and technological autonomy."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Siemens and Europe’s AI capability",
+      "reader_what": "The study traces Siemens AI production and use to assess European strengths, dependencies and technology-autonomy challenges.",
+      "reader_why": "Industrial AI capability depends on both sector-specific knowledge and access to computing, cloud and platform infrastructure.",
+      "reader_more": "The article analyses Siemens patents, publications and technological networks to examine how a major European industrial firm produces and uses AI. It connects the evidence to Europe’s technological autonomy and dependence on large digital-platform providers. This is substantive European industrial and AI capability evidence.",
+      "deep_analysis": {
+        "work_kind": "empirical innovation study",
+        "research_question": "What does Siemens’s AI trajectory reveal about European industrial AI capability and technological dependence?",
+        "main_finding": "Siemens developed sector-specific AI capabilities while remaining exposed to external digital and cloud infrastructure dependencies.",
+        "method_or_basis": "Longitudinal patent, publication, network and lexical analysis.",
+        "qualification": "A single large firm is informative but not representative of all European industry.",
+        "radar_relevance": "Directly informs European AI production, industrial capability and technological autonomy.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:92b1b3c3f80c75d8",
+      "source_hash": "7d1ff1bb",
+      "identity_hash": "991254128b675f4f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://www.clean-hydrogen.europa.eu/document/download/90455d96-d646-4539-b1e8-b46af67994f1_en?filename=Specific%20JU%20KPIs%20Methodology.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://www.clean-hydrogen.europa.eu/document/download/90455d96-d646-4539-b1e8-b46af67994f1_en?filename=Specific%20JU%20KPIs%20Methodology.pdf",
+            "title": "Strategy Map and Key Performance Indicators",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Directly concerns monitoring of a European clean-hydrogen R&I partnership."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "Methodology for Clean Hydrogen JU Specific KPIs",
+          "date": "2024-07-25",
+          "type": "methodology document"
+        },
+        "unset": [],
+        "reason": "The supplied official PDF identifies itself as the KPI methodology updated 25 July 2024."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Clean Hydrogen JU KPI methodology",
+      "reader_what": "The document defines indicators for budgets, technology progress, sustainability, deployment and outcomes in the Clean Hydrogen JU.",
+      "reader_why": "A structured KPI system links programme resources and projects to technology-progress and policy outcomes.",
+      "reader_more": "The recovered PDF is a 2024 methodology document for Clean Hydrogen JU-specific KPIs, not a 2022 generic strategy-map page. It specifies calculations, baselines and targets for funding, technology readiness, critical materials, lifecycle assessment and technology cost indicators. This is substantive European R&I programme-monitoring methodology and policy evidence.",
+      "deep_analysis": {
+        "work_kind": "official methodology document",
+        "research_question": "How will the Clean Hydrogen JU measure resources, activities, outcomes and technology progress?",
+        "main_finding": "The document operationalises programme objectives through defined KPIs, formulas, baselines and targets.",
+        "method_or_basis": "Official indicator methodology tied to the JU strategic research and innovation agenda.",
+        "qualification": "Some indicators are qualitative or depend on project-reported data and expert assessment.",
+        "radar_relevance": "Directly concerns monitoring of a European clean-hydrogen R&I partnership.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1177/1035719x221120296",
+      "source_hash": "e1bd6895",
+      "identity_hash": "44cbacb5d02f27cf",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI 10.1177/1035719X221120296 resolved to the SAGE item and established it is Emily Montgomery’s four-page book review; full text was restricted."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI metadata matched Evaluation Journal of Australasia 22(4), pages 285-288; substantive review text was inaccessible."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the SAGE record, which remained access-controlled."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Title + Emily Montgomery + 2022 confirmed the same review and underlying 2018 Simonse book."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "fail",
+            "note": "Searched SAGE, author/institutional routes and legitimate repositories; no substantive copy of Montgomery’s review was recovered."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "fail",
+            "note": "Bounded DOI/title/PDF searches found metadata, an issue editorial describing the review, and the underlying book, but not the claimed review text; related works were not substituted."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article_page",
+            "url": "https://journals.sagepub.com/doi/10.1177/1035719X221120296",
+            "title": "Design roadmapping: Guidebook for future foresight techniques",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Identity verified; substantive evidence was insufficient after the mandatory recovery ladder."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "B",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity is verified, but substantive evidence remained inaccessible after all six mandatory recovery steps; no admission judgement is made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "book review",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "Substantive evidence inaccessible after mandatory recovery.",
+        "radar_relevance": "Admission unresolved because substantive evidence is access-limited.",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "historical:id:e9fad76c3c4f3c20",
+      "source_hash": "ad7140e2",
+      "identity_hash": "633981edf229431b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://merics.org/en/comment/china-risks-damaging-science-ties-forging-own-path-research-ethics"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://merics.org/en/comment/china-risks-damaging-science-ties-forging-own-path-research-ethics",
+            "title": "China risks damaging science ties by forging own path on research ethics",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_GEOGRAPHY",
+        "reason": "The work does not provide a substantive European R&I focus."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "China’s research-ethics path",
+      "reader_what": "The commentary discusses China’s research-ethics governance and possible effects on international science ties.",
+      "reader_why": "",
+      "reader_more": "The MERICS commentary is centered on Chinese research-ethics developments. Europe appears mainly as a comparison and as a possible affected partner, rather than being a substantive European R&I object. It therefore does not satisfy the historical Strand A rule.",
+      "deep_analysis": {
+        "work_kind": "policy commentary",
+        "research_question": "",
+        "main_finding": "The article argues that China’s research-ethics direction could complicate international scientific collaboration.",
+        "method_or_basis": "Expert commentary drawing on policy and research-ethics developments.",
+        "qualification": "European references are secondary to the China-focused analysis.",
+        "radar_relevance": "The work does not provide a substantive European R&I focus.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:ca40393a56a044ea",
+      "source_hash": "620e1c9c",
+      "identity_hash": "bfa37954b8b502cd",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI 10.1080/14650045.2022.2050070 matched the Geopolitics forum article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Taylor & Francis provided open full text; TU Eindhoven also confirmed a final published version."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.tandfonline.com/doi/full/10.1080/14650045.2022.2050070",
+            "title": "Contested Spatialities of Digital Sovereignty",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A substantial EU case directly concerns digital infrastructure and technological sovereignty."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Digital sovereignty across the EU and Russia",
+      "reader_what": "The forum compares digital-sovereignty discourses and infrastructures, including a substantive EU case.",
+      "reader_why": "Sovereignty claims materialise through data regulation, infrastructure programmes and platform governance.",
+      "reader_more": "The open-access forum analyses digital sovereignty through political geography, law, computer science and ethics. Its case studies include the EU and Russia, and the introduction explicitly examines European strategic autonomy, digital infrastructures and cross-border data governance. The EU is a substantive empirical case rather than a passing comparator.",
+      "deep_analysis": {
+        "work_kind": "interdisciplinary forum article",
+        "research_question": "How are digital-sovereignty discourses and practices produced across different political and technological contexts?",
+        "main_finding": "EU and Russian cases show both parallels and major differences in how sovereignty is pursued through data, infrastructure and regulation.",
+        "method_or_basis": "Comparative interdisciplinary analysis of policy, infrastructure and digital-governance cases.",
+        "qualification": "The forum spans multiple contexts and contributions rather than one uniform empirical design.",
+        "radar_relevance": "A substantial EU case directly concerns digital infrastructure and technological sovereignty.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:355e0e848ab7679d",
+      "source_hash": "fd547f85",
+      "identity_hash": "0994f05a28452149",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://kluwerlawonline.com/journalarticle/European+Foreign+Affairs+Review/27.Special%20Issue/EERR2022015"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://kluwerlawonline.com/journalarticle/European+Foreign+Affairs+Review/27.Special%20Issue/EERR2022015",
+            "title": "EU Strategic Autonomy and the Perceived Challenge of China: Can Critical Hubs Be De-weaponized?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Directly addresses EU critical technology infrastructure and strategic capability."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "EU strategic autonomy and critical hubs",
+      "reader_what": "The article examines how Chinese investment in critical infrastructure challenges EU strategic-autonomy policy.",
+      "reader_why": "Screening, 5G governance and infrastructure policy are used to reduce strategic dependencies in critical hubs.",
+      "reader_more": "The study focuses on EU strategic autonomy in relation to Chinese involvement in critical maritime and digital infrastructure. It examines investment screening, 5G and related policy instruments. This is substantive European technology-security and industrial-capability evidence.",
+      "deep_analysis": {
+        "work_kind": "policy and legal analysis",
+        "research_question": "How does the EU respond to perceived strategic vulnerabilities created by Chinese involvement in critical hubs?",
+        "main_finding": "EU instruments increasingly address investment, infrastructure and 5G dependencies as strategic-autonomy concerns.",
+        "method_or_basis": "Qualitative analysis of EU policy, legal instruments and critical-infrastructure cases.",
+        "qualification": "The work examines policy responses rather than quantitatively measuring resilience outcomes.",
+        "radar_relevance": "Directly addresses EU critical technology infrastructure and strategic capability.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:c9086e471d0f606c",
+      "source_hash": "ea363ad7",
+      "identity_hash": "193a737d205203a5",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://ecfr.eu/article/alignment-or-isolation-hungarys-foreign-policy-after-its-parliamentary-election/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://ecfr.eu/article/alignment-or-isolation-hungarys-foreign-policy-after-its-parliamentary-election/",
+            "title": "Alignment or isolation: Hungary’s foreign policy after its parliamentary election – European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "",
+        "reason_code": "NO_SUBSTANTIVE_RI",
+        "reason": "No qualifying R&I or methods relevance is established."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Hungary after the 2022 election",
+      "reader_what": "The commentary analyses Hungary’s foreign-policy alignment after its parliamentary election.",
+      "reader_why": "",
+      "reader_more": "The ECFR article is centered on Hungarian foreign policy and relations with European and external actors. It does not substantively analyse research, innovation, science, technology or industrial capability, and it contributes no reusable method. It falls outside A/B.",
+      "deep_analysis": {
+        "work_kind": "policy commentary",
+        "research_question": "",
+        "main_finding": "The article discusses Hungary’s post-election foreign-policy positioning.",
+        "method_or_basis": "Expert policy commentary.",
+        "qualification": "R&I is not a substantive subject.",
+        "radar_relevance": "No qualifying R&I or methods relevance is established.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:ec28c16147975331",
+      "source_hash": "de2ff553",
+      "identity_hash": "19001b65f33e5ebe",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://link.springer.com/article/10.1007/s11192-022-04351-4"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://link.springer.com/article/10.1007/s11192-022-04351-4",
+            "title": "Return migration of German-affiliated researchers: analyzing departure and return by gender, cohort, and discipline using Scopus bibliometric data 1996–2020",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Directly concerns European research workforce mobility and retention."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Return migration of Germany-affiliated researchers",
+      "reader_what": "The study tracks departures and returns of Germany-affiliated researchers across gender, cohort and discipline using Scopus data.",
+      "reader_why": "Bibliometric career traces reveal how researcher mobility differs across groups and fields.",
+      "reader_more": "Using publication affiliations from Scopus, the study analyses departure and return migration among Germany-affiliated researchers from 1996 to 2020. It provides European research-workforce evidence by gender, cohort and discipline. This is directly relevant to research careers and mobility.",
+      "deep_analysis": {
+        "work_kind": "bibliometric mobility study",
+        "research_question": "How do departure and return patterns differ among Germany-affiliated researchers by gender, cohort and discipline?",
+        "main_finding": "The study identifies systematic variation in researcher return patterns across demographic and disciplinary groups.",
+        "method_or_basis": "Longitudinal bibliometric tracking using Scopus affiliation histories.",
+        "qualification": "Publication affiliations imperfectly capture physical mobility and career status.",
+        "radar_relevance": "Directly concerns European research workforce mobility and retention.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:98855e46395ef70f",
+      "source_hash": "56896100",
+      "identity_hash": "d9b7b85379cc6d89",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://www.rathenau.nl/sites/default/files/2022-03/Research_programmes_with_a_mission_Rathenau_Instituut.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://www.rathenau.nl/sites/default/files/2022-03/Research_programmes_with_a_mission_Rathenau_Instituut.pdf",
+            "title": "Research programmes with a mission | Rathenau Instituut",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Directly concerns European research-programme design and mission-oriented R&I policy."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Designing mission-oriented research programmes",
+      "reader_what": "Rathenau identifies requirements and building blocks for research programmes organised around societal missions.",
+      "reader_why": "Mission programmes need clear problem framing, learning, coordination and portfolio governance rather than only project selection.",
+      "reader_more": "The report studies challenge-driven and mission-oriented research programmes through desk research, examples and stakeholder discussion. It identifies design requirements and programme building blocks relevant to Dutch and European R&I governance. This is substantive historical research-policy evidence.",
+      "deep_analysis": {
+        "work_kind": "policy research report",
+        "research_question": "What conditions and design choices make mission-oriented research programmes workable?",
+        "main_finding": "The report identifies governance, learning, coordination and portfolio-design requirements for mission-oriented research funding.",
+        "method_or_basis": "Desk research, comparative examples and stakeholder workshop evidence.",
+        "qualification": "Recommendations are design guidance rather than causal estimates of programme impact.",
+        "radar_relevance": "Directly concerns European research-programme design and mission-oriented R&I policy.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:1d1e5768c3939c14",
+      "source_hash": "16de2b4a",
+      "identity_hash": "53e0734f6ddc8198",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://merics.org/en/comment/three-franco-german-priorities-europes-china-policy-economic-security-proactive-innovation"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://merics.org/en/comment/three-franco-german-priorities-europes-china-policy-economic-security-proactive-innovation",
+            "title": "Three Franco-German priorities for Europe’s China policy: economic security, proactive innovation and coordination on Asia-Pacific",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "European innovation capability and research/technology security are central components."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Franco-German innovation priorities on China",
+      "reader_what": "The analysis links European China policy to economic security, industrial innovation and technology-transfer controls.",
+      "reader_why": "Industrial policy and research-security measures are treated as complementary responses to technology dependence and transfer risks.",
+      "reader_more": "The article sets out Franco-German priorities that include proactive European industrial and innovation policy, technology-export controls and attention to scientific exchange. Its R&I and technology-security content is substantive rather than incidental. It is useful historical context on European innovation and economic-security policy.",
+      "deep_analysis": {
+        "work_kind": "policy analysis",
+        "research_question": "Which Franco-German priorities should shape Europe’s China policy in economic security and innovation?",
+        "main_finding": "The authors emphasise coordinated industrial innovation policy, economic-security tools and controls around sensitive technology and research links.",
+        "method_or_basis": "Expert policy analysis of European-China economic and technology relations.",
+        "qualification": "It is a policy argument, not an impact evaluation of the proposed measures.",
+        "radar_relevance": "European innovation capability and research/technology security are central components.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:635e9b7356a5a322",
+      "source_hash": "badb931b",
+      "identity_hash": "5d7972c0236aaabb",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://ecfr.eu/article/the-fight-for-europes-digital-future/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://ecfr.eu/article/the-fight-for-europes-digital-future/",
+            "title": "The fight for Europe’s digital future – European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "European AI, digital industry, standards and cybersecurity are substantive R&I-related topics."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Europe’s digital industrial capacity",
+      "reader_what": "The article examines EU AI, standards, cybersecurity, investment and industrial policy as parts of Europe’s digital strategy.",
+      "reader_why": "Regulation has greater strategic effect when paired with investment and domestic technology capability.",
+      "reader_more": "The ECFR analysis discusses Europe’s digital future through AI regulation, cybersecurity, standards, industrial policy and technology investment. It treats technological capacity and sovereignty as central European strategic issues. This is substantive historical context on European digital capability.",
+      "deep_analysis": {
+        "work_kind": "policy analysis",
+        "research_question": "How can Europe combine regulation, investment and industrial policy to shape its digital future?",
+        "main_finding": "The article argues that European digital strategy must pair rules and standards with stronger technological and industrial capacity.",
+        "method_or_basis": "Expert policy analysis drawing on EU digital initiatives and technology-market conditions.",
+        "qualification": "It is normative policy analysis rather than causal evaluation.",
+        "radar_relevance": "European AI, digital industry, standards and cybersecurity are substantive R&I-related topics.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:d891849ce5fd5705",
+      "source_hash": "f6ed10ca",
+      "identity_hash": "acbbbab7bb1269c1",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://link.springer.com/article/10.1007/s11948-022-00364-7"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://link.springer.com/article/10.1007/s11948-022-00364-7",
+            "title": "Dual-Use and Trustworthy? A Mixed Methods Analysis of AI Diffusion Between Civilian and Defense R&D",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Directly concerns European dual-use AI R&D and research-security governance."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Civil-defence diffusion of AI R&D",
+      "reader_what": "The study maps patent-citation links between civilian and defence AI R&D in Germany and Europe.",
+      "reader_why": "Observed citation flows test whether dual-use AI knowledge moves between civilian and defence innovation systems.",
+      "reader_more": "The article uses mixed methods and patent-citation networks to study AI diffusion between civilian and defence R&D. Its European and German evidence addresses dual-use innovation, trustworthy AI and civil-military technology links. This is substantive research-security and technology-capability evidence.",
+      "deep_analysis": {
+        "work_kind": "mixed-methods empirical study",
+        "research_question": "How does AI knowledge diffuse between civilian and defence R&D, and what does that imply for dual-use governance?",
+        "main_finding": "Patent and qualitative evidence reveal structured links between civilian and defence AI innovation rather than a simple one-way flow.",
+        "method_or_basis": "Patent-citation network analysis combined with qualitative interpretation.",
+        "qualification": "Patent citations capture only part of knowledge diffusion and may miss informal transfer.",
+        "radar_relevance": "Directly concerns European dual-use AI R&D and research-security governance.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:2cf7aa046a928f8d",
+      "source_hash": "71654027",
+      "identity_hash": "0dae12cae09d6ad3",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://merics.org/en/merics-briefs/china-russia-research-cooperation-eu-africa-summit"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://merics.org/en/merics-briefs/china-russia-research-cooperation-eu-africa-summit",
+            "title": "China-Russia + Research cooperation + EU-Africa Summit",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Its research-security and semiconductor sections are substantively European R&I evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "MERICS brief on research security and chips",
+      "reader_what": "The brief includes substantive analysis of European research cooperation risks and the EU Chips Act.",
+      "reader_why": "Research-security tools and semiconductor industrial policy respond to different forms of strategic technology dependence.",
+      "reader_more": "Although formatted as a multi-item MERICS brief, the page contains substantive sections on European research cooperation with China, foreign-interference safeguards and the EU Chips Act. Those sections provide concrete R&I and technology-policy analysis rather than mere links. It qualifies as historical Strand A context.",
+      "deep_analysis": {
+        "work_kind": "multi-topic policy brief",
+        "research_question": "What China-related developments were affecting European research cooperation, technology security and industrial policy in early 2022?",
+        "main_finding": "The brief identifies research-security concerns and assesses the EU Chips Act as a response to semiconductor dependence.",
+        "method_or_basis": "Expert analysis synthesising contemporaneous policy developments and institutional sources.",
+        "qualification": "The page bundles several topics and is not a single focused research study.",
+        "radar_relevance": "Its research-security and semiconductor sections are substantively European R&I evidence.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "historical:id:3c81b04686b94581",
+      "source_hash": "54246821",
+      "identity_hash": "ccfd4cb23c15545d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI 10.1080/09662839.2022.2028277 matched the European Security article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "The DOI matched title/authors."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "University of Groningen repository provided the final publisher version."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://research.rug.nl/en/publications/technology-transfer-and-defence-sector-dynamics-the-case-of-the-n/",
+            "title": "Technology transfer and defence sector dynamics: the case of the Netherlands",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Directly concerns European defence R&D, dual-use technology transfer and industrial capability."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Dutch defence technology transfer",
+      "reader_what": "Interviews show Dutch defence innovation is dominated by civilian-to-defence spin-ins rather than defence-to-civilian spin-offs.",
+      "reader_why": "Civilian IT and integrated innovation networks can be more important to defence capability than expected spillovers from military R&D.",
+      "reader_more": "The article uses 23 interviews with Dutch defence-sector representatives to examine technology transfer. It finds that spin-ins from civilian technology, especially IT, are more prominent than defence-to-civilian spin-offs. This is substantive European defence R&D and dual-use innovation evidence.",
+      "deep_analysis": {
+        "work_kind": "qualitative industry study",
+        "research_question": "How does technology move between civilian and defence sectors in the Netherlands?",
+        "main_finding": "Dutch defence innovation relies heavily on civilian-to-defence spin-ins, with limited evidence of the expected spin-off pattern.",
+        "method_or_basis": "Twenty-three interviews plus defence-industry and technology-transfer analysis.",
+        "qualification": "The Netherlands is one case and the evidence is interview-based.",
+        "radar_relevance": "Directly concerns European defence R&D, dual-use technology transfer and industrial capability.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "link:https://doi.org/10.1177/14680173261458310",
+      "source_hash": "1525d2e9",
+      "identity_hash": "cbd3d4b49c3e97c1",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI 10.1177/14680173261458310 resolved to the Journal of Social Work item and confirmed a book review; substantive text was access-controlled."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "The DOI matched Jennifer C. Chow’s review, first published 26 June 2026."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the SAGE table-of-contents and article record, but no substantive text."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Title + Jennifer C. Chow + 2026 confirmed the same Journal of Social Work review."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "fail",
+            "note": "Checked SAGE and author/repository routes; no legitimate full or substantive manuscript of the review was located."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "fail",
+            "note": "Bounded DOI/title/PDF/repository searches recovered the underlying Oxford book and metadata only; the underlying book was not substituted for the review."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article_page",
+            "url": "https://journals.sagepub.com/doi/10.1177/14680173261458310",
+            "title": "Book Review: Anticipatory Social Work",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Identity verified; substantive evidence was insufficient after the mandatory recovery ladder."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "B",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity is verified, but substantive evidence remained inaccessible after all six mandatory recovery steps; no admission judgement is made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "book review",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "Substantive evidence inaccessible after mandatory recovery.",
+        "radar_relevance": "Admission unresolved because substantive evidence is access-limited.",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "historical:id:0554eef124084cf0",
+      "source_hash": "242a407b",
+      "identity_hash": "10a18623dfe4ad6f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://link.springer.com/article/10.1007/s11192-021-04200-w"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://link.springer.com/article/10.1007/s11192-021-04200-w",
+            "title": "An evolving international research collaboration network: spatial and thematic developments in co-authored higher education research, 1998–2018",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "European collaboration patterns and EU funding are substantial empirical findings, not incidental mentions."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Europe in global research collaboration",
+      "reader_what": "The study maps two decades of higher-education coauthorships and finds Europe central to expanding international collaboration.",
+      "reader_why": "EU funding and dense intra-European ties are among the forces shaping collaboration structure.",
+      "reader_more": "Using 9,067 papers from 13 higher-education journals, the study maps international collaboration from 1998–2018. Europe is a major substantive result: European and North American production dominates the network, while intra-European collaboration grew alongside EU funding instruments. The work therefore provides meaningful European research-system context despite its global scope.",
+      "deep_analysis": {
+        "work_kind": "bibliometric network study",
+        "research_question": "How did international collaboration in higher-education research change spatially and thematically from 1998 to 2018?",
+        "main_finding": "Collaboration expanded substantially, but the global network remained uneven; Europe is a major hub with strong intra-regional growth.",
+        "method_or_basis": "Bibliometric topic identification and social-network analysis of 9,067 papers.",
+        "qualification": "The dataset covers 13 core journals and represents one research field, not all science.",
+        "radar_relevance": "European collaboration patterns and EU funding are substantial empirical findings, not incidental mentions.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:1bf082306ed7ac76",
+      "source_hash": "7af24fe4",
+      "identity_hash": "b126e1a80be13275",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://link.springer.com/article/10.1186/s40309-022-00188-5"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://link.springer.com/article/10.1186/s40309-022-00188-5",
+            "title": "Foresight: a new approach based on the Z-number cognitive map",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "A new reusable foresight and decision-analysis technique directly fits Strand B."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "European Journal of Futures Research",
+          "type": "peer-reviewed article"
+        },
+        "unset": [],
+        "reason": "The DOI resolves to European Journal of Futures Research."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Z-number cognitive-map foresight",
+      "reader_what": "The paper proposes a three-phase foresight framework integrating fuzzy cognitive maps with Z-numbers for uncertainty.",
+      "reader_why": "Z-numbers allow foresight maps to represent both an assessment and confidence in that assessment.",
+      "reader_more": "The authors propose a foresight framework with pre-foresight, foresight and post-foresight phases. Its distinctive contribution integrates Z-numbers with fuzzy cognitive maps to represent uncertainty and reliability in expert judgements. This is a transferable method contribution.",
+      "deep_analysis": {
+        "work_kind": "method-development study",
+        "research_question": "How can foresight represent uncertainty and ambiguity in expert cognitive maps more explicitly?",
+        "main_finding": "A Z-number cognitive-map framework is proposed to model both expert assessments and their reliability during foresight.",
+        "method_or_basis": "Method development combining fuzzy cognitive mapping, Z-numbers and expert elicitation.",
+        "qualification": "The framework’s performance depends on expert inputs and requires further validation across domains.",
+        "radar_relevance": "A new reusable foresight and decision-analysis technique directly fits Strand B.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:042c7faeacec267e",
+      "source_hash": "e3e5be32",
+      "identity_hash": "0f04fe2fcb831599",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://link.springer.com/chapter/10.1007/978-3-030-85690-8_2"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://link.springer.com/chapter/10.1007/978-3-030-85690-8_2",
+            "title": "Will European Research Area Ever Be a Reality?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "European research-area policy and research careers are its core subject."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "Higher Education and Research in the European Union (Springer Cham)",
+          "date": "2022-07-04",
+          "type": "book chapter"
+        },
+        "unset": [],
+        "reason": "Springer identifies the chapter in this edited book; the eBook was published 4 July 2022."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Progress toward the European Research Area",
+      "reader_what": "The chapter assesses ERA progress on research careers and mobility and identifies remaining barriers such as brain drain.",
+      "reader_why": "Researcher mobility and career conditions are core tests of whether a unified European research area functions in practice.",
+      "reader_more": "The chapter evaluates progress toward the European Research Area through research careers and mobility. It argues that open coordination produced advances but that unresolved issues remain, including brain drain, while the 2020 ERA policy renewed attention to researchers. This is direct European research-policy evidence.",
+      "deep_analysis": {
+        "work_kind": "book chapter",
+        "research_question": "How far has the European Research Area progressed, especially on research careers and mobility?",
+        "main_finding": "ERA integration advanced through coordination, but researcher-career and mobility barriers remained unresolved.",
+        "method_or_basis": "Policy analysis using ERA developments and research-career examples.",
+        "qualification": "The chapter is an analytical overview rather than a quantitative impact evaluation.",
+        "radar_relevance": "European research-area policy and research careers are its core subject.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:4e5f88f9db19c661",
+      "source_hash": "9444334a",
+      "identity_hash": "747dcf7efdb9d7a6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied EEN PDF URL resolved to the 2022-2025 impact report."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "The package supplied no DOI; the official report is identified by its EEN/EISMEA PDF and imprint."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search found the official EEN release page and full report."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://een.ec.europa.eu/system/files/documents/2026-04/EEN-Impact-Report-2022-2025_en_0.pdf",
+            "title": "Enterprise Europe Network Impact Report 2022-2025",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_landing_page",
+            "url": "https://een.ec.europa.eu/news/enterprise-europe-network-impact-report-2022-2025-out",
+            "title": "The Enterprise Europe Network Impact Report 2022-2025 is out!",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Directly concerns European SME innovation, finance, digitalisation and industrial ecosystems."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "Enterprise Europe Network Impact Report 2022-2025",
+          "source": "European Innovation Council and SMEs Executive Agency (EISMEA)",
+          "date": "2026-04-20",
+          "type": "impact report"
+        },
+        "unset": [],
+        "reason": "The official EEN page published 20 April 2026 links the report; the report imprint identifies EISMEA."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Enterprise Europe Network impact, 2022–2025",
+      "reader_what": "The report documents SME outcomes linked to Network support for innovation, funding, digitalisation, markets and sustainability.",
+      "reader_why": "Advisory networks can connect firms to finance, technology adoption and cross-border markets at European scale.",
+      "reader_more": "The recovered work is the 2026 Enterprise Europe Network Impact Report covering 2022–2025, not a 2022 publication. The official report presents outcome indicators on innovation, finance, internationalisation, digital transformation and sustainability among supported SMEs. This is substantive European innovation-policy and SME-capability evidence.",
+      "deep_analysis": {
+        "work_kind": "official impact report",
+        "research_question": "What outcomes did Enterprise Europe Network support report for SMEs during 2022–2025?",
+        "main_finding": "The report records high shares of supported firms reporting innovation, funding, market-entry, digital and sustainability outcomes.",
+        "method_or_basis": "Official impact reporting using Network monitoring and client outcome data.",
+        "qualification": "The report is programme-produced and the figures do not by themselves establish causal additionality.",
+        "radar_relevance": "Directly concerns European SME innovation, finance, digitalisation and industrial ecosystems.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:515414e0e9f19431",
+      "source_hash": "c025420c",
+      "identity_hash": "ed3f7595f4b65df7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://cset.georgetown.edu/wp-content/uploads/CSET-Sustaining-U.S.-Competitiveness-in-Semiconductor-Manufacturing-1.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://cset.georgetown.edu/wp-content/uploads/CSET-Sustaining-U.S.-Competitiveness-in-Semiconductor-Manufacturing-1.pdf",
+            "title": "Sustaining U.S. Competitiveness in Semiconductor Manufacturing | Center for Security and Emerging Technology",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_GEOGRAPHY",
+        "reason": "The work is technologically relevant but not substantively European and not a method contribution."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "US semiconductor manufacturing policy",
+      "reader_what": "The CSET report recommends how US CHIPS incentives should target semiconductor manufacturing capacity.",
+      "reader_why": "",
+      "reader_more": "The report is a detailed semiconductor industrial-policy analysis, but its object is United States manufacturing and national security. Europe is not the substantive policy population. It does not introduce a new reusable method, so it fails historical A/B admission despite topical relevance.",
+      "deep_analysis": {
+        "work_kind": "policy report",
+        "research_question": "How should US CHIPS incentives be allocated across semiconductor manufacturing categories?",
+        "main_finding": "The report prioritises US reshoring of leading-edge logic and assesses capacity risks across chip types.",
+        "method_or_basis": "Supply-chain and capacity analysis supporting US industrial-policy recommendations.",
+        "qualification": "The geographic and policy target is the United States.",
+        "radar_relevance": "The work is technologically relevant but not substantively European and not a method contribution.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:040133ff51add701",
+      "source_hash": "e0b9385b",
+      "identity_hash": "20411e30b8af4f45",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The Institut Montaigne URL matched the full analysis and was substantively accessible."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_text",
+            "url": "https://www.institutmontaigne.org/en/expressions/space-forgotten-battleground-ukraine-war",
+            "title": "Space: A Forgotten Battleground of the Ukraine war?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "European space R&I, industrial capability and technology dependence are substantive parts of the work."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Ukraine war and Europe’s space capability",
+      "reader_what": "The analysis shows how the war disrupted European space cooperation and sharpened questions of sovereignty and NewSpace capability.",
+      "reader_why": "Dependence on partners and private platforms becomes visible when conflict disrupts scientific missions, launch systems and communications.",
+      "reader_more": "Institut Montaigne examines the role of space technologies in the Ukraine war and then develops substantial implications for Europe. It discusses ExoMars disruption, European space sovereignty, private NewSpace actors and support for new industrial capabilities. This is substantive European technology and strategic-capability context.",
+      "deep_analysis": {
+        "work_kind": "expert technology-policy analysis",
+        "research_question": "How has the Ukraine war changed space geopolitics and what does that mean for European space capability?",
+        "main_finding": "The conflict accelerated fragmentation of space cooperation and exposed European dependencies while increasing pressure for sovereign capabilities.",
+        "method_or_basis": "Expert analysis of wartime space systems, international cooperation and European space policy.",
+        "qualification": "It is contemporaneous expert analysis, not a systematic evaluation of European space programmes.",
+        "radar_relevance": "European space R&I, industrial capability and technology dependence are substantive parts of the work.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:0daa494227f83487",
+      "source_hash": "0b97ae77",
+      "identity_hash": "d18f1a0babdfb56c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://www.interface-eu.org/publications/downloadPdf/roundtable-discussion-dutch-parliamentary-committee-economic-affairs-and-climate-policy"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://www.interface-eu.org/publications/downloadPdf/roundtable-discussion-dutch-parliamentary-committee-economic-affairs-and-climate-policy",
+            "title": "Roundtable Discussion at the Dutch Parliamentary Committee on Economic Affairs and Climate Policy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Directly concerns European semiconductor capability, resilience and industrial policy."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Dutch testimony on the EU Chips Act",
+      "reader_what": "The testimony argues Europe needs a broad semiconductor strategy covering mature nodes, compound semiconductors and supply-chain dependencies.",
+      "reader_why": "Resilience depends on materials, design, manufacturing diversity and international partnerships, not only advanced fabs.",
+      "reader_more": "The written evidence to the Dutch parliamentary committee provides detailed analysis of the EU Chips Act and semiconductor value chains. It distinguishes manufacturing technologies, European strengths and dependencies, and explains why more fabs alone do not create resilience. This is substantive European industrial and technology-policy evidence.",
+      "deep_analysis": {
+        "work_kind": "parliamentary written testimony",
+        "research_question": "What should European policymakers consider when evaluating the EU Chips Act and semiconductor resilience?",
+        "main_finding": "The testimony argues for technology-specific investment and international supply-chain strategy rather than a narrow focus on leading-edge fabs.",
+        "method_or_basis": "Expert evidence based on semiconductor value-chain analysis and industry structure.",
+        "qualification": "It is expert testimony and policy analysis, not a causal evaluation of the Chips Act.",
+        "radar_relevance": "Directly concerns European semiconductor capability, resilience and industrial policy.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:e8d5dc60cfbf45e6",
+      "source_hash": "7b71d4d4",
+      "identity_hash": "5d9686ace416b10f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://link.springer.com/chapter/10.1007/978-3-030-85690-8_3"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://link.springer.com/chapter/10.1007/978-3-030-85690-8_3",
+            "title": "Researchers and Mobility in the European Research Area",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "European research careers, mobility and ERA implementation are the central subject."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "Higher Education and Research in the European Union (Springer Cham)",
+          "date": "2022-07-04",
+          "type": "book chapter"
+        },
+        "unset": [],
+        "reason": "Springer identifies the chapter in this edited book; the eBook was published 4 July 2022."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Researcher mobility in the ERA",
+      "reader_what": "The chapter assesses ERA mobility policy, researcher incentives and remaining barriers to free circulation of research talent.",
+      "reader_why": "Career conditions and mobility incentives determine whether researchers can move across European institutions in practice.",
+      "reader_more": "The chapter analyses European Research Area policy through the Commission’s priorities and incentives affecting researchers. It reviews progress in free circulation and continuing career and mobility obstacles. This is direct historical evidence on European research-workforce policy.",
+      "deep_analysis": {
+        "work_kind": "book chapter",
+        "research_question": "How do ERA priorities and incentives shape researcher mobility and careers in Europe?",
+        "main_finding": "ERA policy advanced mobility, but practical and career-related barriers still limit full circulation of researchers.",
+        "method_or_basis": "Policy analysis of ERA priorities, implementation and researcher incentives.",
+        "qualification": "The chapter synthesises policy developments rather than estimating causal effects.",
+        "radar_relevance": "European research careers, mobility and ERA implementation are the central subject.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:1bdd1e356891e8b8",
+      "source_hash": "75247169",
+      "identity_hash": "d679732e06378a2e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://books.openedition.org/oep/16166"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://books.openedition.org/oep/16166",
+            "title": "Research Assessment and Open Science in a Diverse World",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_GEOGRAPHY",
+        "reason": "The work is valuable globally but European relevance is secondary under the package rule."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "OpenEdition Press",
+          "date": "2022-10-13",
+          "type": "conference proceedings chapter"
+        },
+        "unset": [],
+        "reason": "OpenEdition identifies the publisher and publication date in the OSEC 2022 proceedings."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Open science and unequal research assessment",
+      "reader_what": "The chapter examines global North-South inequalities in open science and research assessment, with Europe as one example.",
+      "reader_why": "",
+      "reader_more": "Fernanda Beigel’s conference chapter focuses on global inequalities, particularly Latin America and North-South asymmetries in open science and evaluation. European journals and infrastructures are discussed as examples, but Europe is not the substantive analytical population. It therefore does not meet the strict historical Strand A relevance rule.",
+      "deep_analysis": {
+        "work_kind": "conference chapter",
+        "research_question": "How can research assessment support open science without reproducing global inequalities?",
+        "main_finding": "The chapter argues that evaluation systems should recognise diverse missions, publishing circuits, languages and unequal infrastructure.",
+        "method_or_basis": "Conceptual and evidence-based conference analysis drawing heavily on Latin American and global open-science experience.",
+        "qualification": "European examples support a broader global argument rather than constituting the central case.",
+        "radar_relevance": "The work is valuable globally but European relevance is secondary under the package rule.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:1eac2a79b8ff83d6",
+      "source_hash": "48df7d1f",
+      "identity_hash": "1412077d045f1a36",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://books.openedition.org/oep/16172"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://books.openedition.org/oep/16172",
+            "title": "Open Science, Research Assessment and HSS (Humanities and Social Sciences)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Directly addresses European research assessment, open science and scholarly communication."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "OpenEdition Press",
+          "date": "2022-10-13",
+          "type": "conference proceedings chapter"
+        },
+        "unset": [],
+        "reason": "OpenEdition identifies the publisher and publication date in the OSEC 2022 proceedings."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "reader_title": "Multilingualism in European research assessment",
+      "reader_what": "The chapter shows how language bias in databases and evaluation can undervalue European SSH research.",
+      "reader_why": "Assessment systems shape incentives for publication language, affecting accessibility and recognition of locally relevant research.",
+      "reader_more": "The chapter uses evidence from seven and eight European countries to show how citation databases underrepresent multilingual SSH publishing. It links this to research-assessment reform and argues for multilingualism in European open science. This is direct European research-policy evidence.",
+      "deep_analysis": {
+        "work_kind": "conference chapter",
+        "research_question": "How should European open science and research assessment account for multilingual scholarship in the humanities and social sciences?",
+        "main_finding": "European SSH publication data show that English-centric indexing and evaluation can systematically undervalue multilingual research.",
+        "method_or_basis": "Synthesis of empirical studies on publication patterns across European countries and research-assessment systems.",
+        "qualification": "The chapter is an argumentative conference contribution, though it cites multi-country empirical evidence.",
+        "radar_relevance": "Directly addresses European research assessment, open science and scholarly communication.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    }
+  ]
+}
