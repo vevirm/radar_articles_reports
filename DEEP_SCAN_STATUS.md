@@ -6,17 +6,17 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **942** (Main **620** + Historical **322**)
-- Automatic queue still needing V2 verification: **418** (Main **25** + Historical **393**)
-- Currently assigned to workers: **96** (Main **17** + Historical **79**)
-- Bounded access-recovery retries still eligible: **25**
-- Hands-on verification needed: **49**
-- Automatic queue pending and not yet assigned: **322**
+- Authoritative V2 verified: **987** (Main **626** + Historical **361**)
+- Automatic queue still needing V2 verification: **370** (Main **16** + Historical **354**)
+- Currently assigned to workers: **72** (Main **6** + Historical **66**)
+- Bounded access-recovery retries still eligible: **33**
+- Hands-on verification needed: **52**
+- Automatic queue pending and not yet assigned: **298**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260916T090903Z-20ae8269d52b`
+- Current package: `worker-a-20260916T101405Z-20ae8269d52b`
 - Assigned unresolved records: **36**
   1. `historical:id:3796f8b3e4b68626` — European Chips Report
   2. `historical:id:f9d768e7fbd25b6d` — Europe's PhD pipeline is poorly aligned with the employment destinations and roles that actually absorb doctoral talent.
@@ -29,17 +29,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260916T090917Z-bbd7a21c44ad`
-- Assigned unresolved records: **60**
-  1. `link:https://doi.org/10.1007/s10308-026-00781-4` — Digital inclusion or digital illusion? AI, disability, and the politics of financial access in Indonesia
-  2. `link:https://doi.org/10.1038/s41598-026-50592-1` — From blur to blueprint: a fuzzy delphi methodology for evaluating early-stage emerging technologies—the case of end-of-life automotive traction battery disassembly
-  3. `link:https://news.google.com/rss/articles/CBMinwJBVV95cUxON0RvbDRibGNET2RISGY5ZFBWVWNrSjhEYzNUalhmOGVuem5OMUY0cU9qSG83blNtVEFlME54U3R0NzNxU1Y1S3ptTGhPVDJzTXRtVGpvdnF3emxNMlZ0Y3ZiMEZ1ZkpmZEZrUjRSRXJMY1FFa2Zqd3FqVW8zSjA4YUJ3UWZZa0FXYVBPbV9zX1cyYzBrZmNXQVpNM0JEbFROcU1iaTZfZlBjc2hXamRnb3JTMks3Z0ZfQmk2eUtBQnFQalJsXzlOMUROMnRJWGtrbjFfRlpNQ3Zma0xFNGdCZnM5MGRqREpZbEp2MTRsU0h5c1UzZXc0OW9PRHFPTHlLanZtRGZISWlFX3lJNTFOaU50UjBmRHJNRUZ6NFNPSQ?oc=5` — Open Access in the European Research Area: progress remains uneven as new report calls for more concerted action
-  4. `link:https://news.google.com/rss/articles/CBMiwgFBVV95cUxQTWhvb3cyWDU3RGNHSlZJdGdLWlVOQWJ2S1M3bTV6SlZHUFpOX2FjckdPWDdiYVU3NElIX1JjSGdZYXRtTk9XM0hDRVZGaldPOU5LOTJ1OEZsUkFHUDNBU2E1a2VhajdRYm1QdnoxQ21vWEZvbE5ndG5TTW5DbXVkOF9kdkYyZUN2WGdSNGJ3cTZYSVdhYjdZcU95VThQT21xRXM1QUZEX1l3MWFOUlFIWjgxejdEN04xTGp4MUpraFRRZw?oc=5` — European chip startup Axelera wins AI factory supply deals and launches second chip
-  5. `link:https://news.google.com/rss/articles/CBMilwFBVV95cUxOckFkZUFSdHNkTURBVWo1M3Q1Qk1hci1uSGZYUHUtMGFwcWw0ZVpDSnFKNGNqWHMxVkczU25YOTNYV0lza1FyUklNMUtON1BOVGJOdjJsY1prNm5CS3F4ajRVTXhJamI4Z2xBWHhJWTFJbk15cFIyU3R4b3psN2ZJSlZCUHNDdkVRdDVkLVlseUxkN1NGdXFn?oc=5` — Rethinking research security in Europe: From controls to capabilities
-  6. `link:https://doi.org/10.1080/07036337.2026.2714069` — Between digital sovereignty and trusted connectivity: tensions in EU external digital governance
-  7. `link:https://doi.org/10.1016/j.nanoen.2018.02.020` — Emerging nanogenerator technology in China: A review and forecast using integrating bibliometrics, patent analysis and technology roadmapping methods
-  8. `link:https://news.google.com/rss/articles/CBMikAFBVV95cUxQeUFFejhpN0N1YVlvbWZrWGtGMjhsSTY1Z2c5SURkeUUyRklHdGw5V040WFNBQVN6Yy1wdTlxaUhjMlA5STBvcC15aU00U201MURFWnB4OXFFV1MyVVZ6VjRqNl9ER0xIQmtianJCbDd2enlhb3c2ZkhTR1hzVURXY0VncmtWMHB2dnBvUDNQMjA?oc=5` — EU countries to discuss AI rules as Trump calls safety warnings a ‘hoax’
-  - … plus 52 more in the package manifest
+- Current package: `worker-b-20260916T101519Z-6fa72d2cc145`
+- Assigned unresolved records: **36**
+  1. `link:https://news.google.com/rss/articles/CBMi0gFBVV95cUxQOFdvOHBDZVJ6YmN4TEc2MHA1T1Y4MG5uMFk4ak5TRkloaVlMd3FxNUtEalRSUmV6WTdWOUo1UEgwUXpGbTM2RTllWHdlUlhVdng2bmNlTXpEQUFmcThzZnhYODNhUldOV2FzYWljdFJJY2FjMktqSTdhd1d6MUxqU1hqd3lkRm9hS20zblVyRlVkOGlXcDFCMzNJVFk4QnFKd2tlWmp0SHdtblZfRW9GcWliU2xubTRXNm9pYVNPRXp4R01DaFV0N1F4el9LQlBvc1E?oc=5` — Use of AI for biology ‘requires strategic coordination’ from EU — recovery attempt 3/3
+  2. `historical:id:ecb059a3a1456fc1` — Space technology transfers and their commercialisation
+  3. `historical:id:1bdf764da4a6a643` — Health Data Governance: Lessons Learned from the COVID-19 Pandemic in Europe, China, and the United States
+  4. `historical:id:2060919efa3c9656` — The drivers of SME innovation in the regions of the EU
+  5. `historical:id:3e5955db838edcd5` — Foresight and Roadmapping Methodology: Trends and Outlook
+  6. `historical:id:9f24ad8e448c1621` — ‘Policy experiments are important to provide controlled and transparent AI systems’ | Rathenau Instituut
+  7. `historical:id:ff5ab61c09605460` — Gamification of backcasting for sustainability: The development of the gameful backcasting framework (GAMEBACK)
+  8. `historical:id:49792dd77e9fc103` — Move or perish? Sticky mobilities in the Swiss academic context
+  - … plus 28 more in the package manifest
 
 ## Hands-on verification needed
 
@@ -94,3 +94,6 @@ These works no longer consume automatic Deep Scan slots. Their identity is belie
 - `link:https://doi.org/10.1108/fs-11-2021-0228` — **Iran’s approach to energy policy towards 2040: a participatory scenario method** — attempts: legacy terminal — foresight — 2023-03-03 — Identity is verified, but accessible evidence remained abstract/metadata-level after all six recovery steps; a defensible Strand B judgement would require substantive text. — https://doi.org/10.1108/fs-11-2021-0228
 - `link:https://doi.org/10.1163/15691497-20263013` — **EU–LAC Relations in the Context of NATO Geopolitics** — attempts: 3/3 — Perspectives on Global Development and Technology — 2026-08-07 — The article identity is verified, but no substantive primary or legitimate repository text was accessible after all six recovery steps. — https://doi.org/10.1163/15691497-20263013
 - `link:https://doi.org/10.1080/09537325.2013.877129` — **Mapping of scientific patenting: toward the development of ‘J-GLOBAL foresight’** — attempts: 3/3 — Technology Analysis & Strategic Management — 2014-03-04 — Identity is verified, but substantive/full-text evidence remained inaccessible after all six required recovery steps. — https://doi.org/10.1080/09537325.2013.877129
+- `link:https://doi.org/10.1177/19467567261450218` — **Change Progression Scenario Method: A Systematic Literature Review of Applications** — attempts: 3/3 — World Futures Review — 2026-05-07 — Identity verified but substantive evidence remained inaccessible after all six mandatory retrieval steps. — https://doi.org/10.1177/19467567261450218
+- `link:https://doi.org/10.1177/19467567261444949` — **Ecological Speculations-Narratives for Shifting Landscapes** — attempts: 3/3 — World Futures Review — 2026-04-19 — Identity verified but substantive evidence remained inaccessible after all six mandatory retrieval steps. — https://doi.org/10.1177/19467567261444949
+- `link:https://doi.org/10.1108/fs-03-2024-0052` — **Insights and influences: mapping the scientific contributors to global foresight policies** — attempts: 3/3 — foresight — 2024-12-18 — Identity verified but substantive evidence remained inaccessible after all six mandatory retrieval steps. — https://doi.org/10.1108/fs-03-2024-0052

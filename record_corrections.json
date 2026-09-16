@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-09-16T09:07:29Z",
+  "updated_at": "2026-09-16T10:13:06Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -5387,6 +5387,727 @@
       ],
       "updated_at": "2026-09-16T09:07:29Z",
       "deep_scan_package_id": "worker-a-20260916T084632Z-bc02df452405"
+    },
+    "link:https://doi.org/10.1038/s41598-026-50592-1": {
+      "fields": {
+        "source": "Scientific Reports"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The scanner recorded the authors' employer (Fraunhofer Society) as the source; Crossref and the article page show the work was published in Scientific Reports (Springer Nature).",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://www.nature.com/articles/s41598-026-50592-1"
+      ],
+      "updated_at": "2026-09-16T10:13:03Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "link:https://news.google.com/rss/articles/CBMinwJBVV95cUxON0RvbDRibGNET2RISGY5ZFBWVWNrSjhEYzNUalhmOGVuem5OMUY0cU9qSG83blNtVEFlME54U3R0NzNxU1Y1S3ptTGhPVDJzTXRtVGpvdnF3emxNMlZ0Y3ZiMEZ1ZkpmZEZrUjRSRXJMY1FFa2Zqd3FqVW8zSjA4YUJ3UWZZa0FXYVBPbV9zX1cyYzBrZmNXQVpNM0JEbFROcU1iaTZfZlBjc2hXamRnb3JTMks3Z0ZfQmk2eUtBQnFQalJsXzlOMUROMnRJWGtrbjFfRlpNQ3Zma0xFNGdCZnM5MGRqREpZbEp2MTRsU0h5c1UzZXc0OW9PRHFPTHlLanZtRGZISWlFX3lJNTFOaU50UjBmRHJNRUZ6NFNPSQ?oc=5": {
+      "fields": {
+        "title": "Open Access in the European Research Area: progress remains uneven as new report calls for more concerted action",
+        "source": "European Commission — Research and Innovation"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The stored record carried only the Google News wrapper and an aggregator label; the canonical item is a European Commission Research and Innovation news release.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/open-access-european-research-area-progress-remains-uneven-new-report-calls-more-concerted-action-2026-09-15_en"
+      ],
+      "updated_at": "2026-09-16T10:13:03Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "link:https://news.google.com/rss/articles/CBMiwgFBVV95cUxQTWhvb3cyWDU3RGNHSlZJdGdLWlVOQWJ2S1M3bTV6SlZHUFpOX2FjckdPWDdiYVU3NElIX1JjSGdZYXRtTk9XM0hDRVZGaldPOU5LOTJ1OEZsUkFHUDNBU2E1a2VhajdRYm1QdnoxQ21vWEZvbE5ndG5TTW5DbXVkOF9kdkYyZUN2WGdSNGJ3cTZYSVdhYjdZcU95VThQT21xRXM1QUZEX1l3MWFOUlFIWjgxejdEN04xTGp4MUpraFRRZw?oc=5": {
+      "fields": {
+        "title": "European chip startup Axelera wins AI factory supply deals and launches second chip",
+        "source": "Reuters"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The stored record held only the Google News wrapper; the underlying item is a Reuters wire story by Toby Sterling dated 2026-09-15.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://www.freedom969.com/business/european-chip-startup-axelera-wins-ai-factory-supply-deals-and-launches-second-chip"
+      ],
+      "updated_at": "2026-09-16T10:13:03Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "link:https://doi.org/10.1016/j.nanoen.2018.02.020": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored source_tier is not supported by bibliographic evidence; it is unset so ranking is recomputed from verified provenance. No other field required correction: title, authors, source and date were confirmed against the recovered source.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://www.sciencedirect.com/science/article/abs/pii/S2211285518300880"
+      ],
+      "updated_at": "2026-09-16T10:13:03Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "link:https://danmarksinnovationsfond.dk/wp-content/uploads/2026/08/Call-Strategic-Research-and-Innovation-Centres-in-Defence-Technology-1-1.pdf": {
+      "fields": {
+        "type": "funding call"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The scanner typed the document as an institutional report; the document is a competitive call for proposals with an application deadline and assessment criteria.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://danmarksinnovationsfond.dk/wp-content/uploads/2026/08/Call-Strategic-Research-and-Innovation-Centres-in-Defence-Technology-1-1.pdf"
+      ],
+      "updated_at": "2026-09-16T10:13:03Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:cf36a56cdc25a169": {
+      "fields": {
+        "date": "2026-04-21"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The scanner recorded 2026-01-01; the page's own datePublished metadata gives 21 April 2026.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.vttresearch.com/en/news-and-ideas/ai-powered-competency-path-carefully-evaluated-security-and-compliance"
+      ],
+      "updated_at": "2026-09-16T10:13:03Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:a236d398da562770": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored source_tier is not supported by bibliographic evidence; it is unset so ranking is recomputed from verified provenance. No other field required correction: title, authors, source and date were confirmed against the recovered source.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.sitra.fi/en/articles/new-nordic-model-accelerates-health-data-sharing-for-research-innovation-and-better-care/"
+      ],
+      "updated_at": "2026-09-16T10:13:03Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:3907f897d81fc6bd": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored source_tier is not supported by bibliographic evidence; it is unset so ranking is recomputed from verified provenance. No other field required correction: title, authors, source and date were confirmed against the recovered source.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.cnrs.fr/en/update/artificial-intelligence-g6s-recommendations"
+      ],
+      "updated_at": "2026-09-16T10:13:04Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:16b49f79cac882f5": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored source_tier is not supported by bibliographic evidence; it is unset so ranking is recomputed from verified provenance. No other field required correction: title, authors, source and date were confirmed against the recovered source.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.sitra.fi/en/articles/sitras-statement-on-finlands-cybersecurity-strategy/"
+      ],
+      "updated_at": "2026-09-16T10:13:04Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:9f3adb9c295cb7c4": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored source_tier is not supported by bibliographic evidence; it is unset so ranking is recomputed from verified provenance. No other field required correction: title, authors, source and date were confirmed against the recovered source.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.cnrs.fr/en/update/cnrs-aims-attract-ai-talent-tomorrow"
+      ],
+      "updated_at": "2026-09-16T10:13:04Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:2e8fa943a5ec6807": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored source_tier is not supported by bibliographic evidence; it is unset so ranking is recomputed from verified provenance. No other field required correction: title, authors, source and date were confirmed against the recovered source.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://link.springer.com/content/pdf/10.1007/s11192-024-04942-3.pdf"
+      ],
+      "updated_at": "2026-09-16T10:13:04Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:a8618bb56441d976": {
+      "fields": {
+        "source": "European Journal of Futures Research"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The scanner recorded the source as Futures; Crossref and the article show it was published in the European Journal of Futures Research.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://eujournalfuturesresearch.springeropen.com/counter/pdf/10.1186/s40309-023-00221-1"
+      ],
+      "updated_at": "2026-09-16T10:13:04Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:d4b2ba8d2e13da2d": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored source_tier is not supported by bibliographic evidence; it is unset so ranking is recomputed from verified provenance. No other field required correction: title, authors, source and date were confirmed against the recovered source.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://allea.org/allea-working-group-gathers-in-tirana-to-shape-future-of-european-research-area-and-fp10/"
+      ],
+      "updated_at": "2026-09-16T10:13:04Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:25280cd6bbd89aed": {
+      "fields": {
+        "date": "2023-11-28"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The scanner recorded 2023-10-01 from the issue cover date; OUP and Crossref give the online publication date as 28 November 2023 (issue dated October 2023).",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://academic.oup.com/rev/article/32/4/670/7453621"
+      ],
+      "updated_at": "2026-09-16T10:13:04Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:1433a47103cf1f39": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored source_tier is not supported by bibliographic evidence; it is unset so ranking is recomputed from verified provenance. No other field required correction: title, authors, source and date were confirmed against the recovered source.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://link.springer.com/content/pdf/10.1007/s13563-023-00394-y.pdf"
+      ],
+      "updated_at": "2026-09-16T10:13:04Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:1aadd70b6a2b5604": {
+      "fields": {
+        "title": "Strategy and action plan for greening public education and research infrastructure in Slovenia to 2030",
+        "source": "Government of the Republic of Slovenia",
+        "type": "national strategy"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The supplied URL is a European Commission project summary page; the underlying work is the strategy adopted by the Slovenian government on 23 August 2023, which is the authoritative document and issuing body.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.gov.si/assets/ministrstva/MVZI/Dokumenti/Investicije/SOIRI02030_23.8.2023.docx",
+        "https://www.gov.si/novice/2023-08-23-sprejeta-strategija-in-akcijski-nacrt-za-ozelenitev-izobrazevalne-in-raziskovalne-infrastrukture/"
+      ],
+      "updated_at": "2026-09-16T10:13:04Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:cf8c963f2b82f5c4": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored source_tier is not supported by bibliographic evidence; it is unset so ranking is recomputed from verified provenance. No other field required correction: title, authors, source and date were confirmed against the recovered source.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://link.springer.com/content/pdf/10.1007/s00146-023-01743-9.pdf"
+      ],
+      "updated_at": "2026-09-16T10:13:04Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:bf307f498e6c3d0a": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored source_tier is not supported by bibliographic evidence; it is unset so ranking is recomputed from verified provenance. No other field required correction: title, authors, source and date were confirmed against the recovered source.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://ecfr.eu/article/the-tech-standards-that-shape-the-future-how-europeans-should-respond-to-chinas-rising-influence/"
+      ],
+      "updated_at": "2026-09-16T10:13:04Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:3b345470a76939cf": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored source_tier is not supported by bibliographic evidence; it is unset so ranking is recomputed from verified provenance. No other field required correction: title, authors, source and date were confirmed against the recovered source.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://link.springer.com/content/pdf/10.1007/s11192-023-04746-x.pdf"
+      ],
+      "updated_at": "2026-09-16T10:13:04Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:bd9f713708e58cb3": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored source_tier is not supported by bibliographic evidence; it is unset so ranking is recomputed from verified provenance. No other field required correction: title, authors, source and date were confirmed against the recovered source.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.eeas.europa.eu/delegations/japan/chips-act-council-gives-its-final-approval_en"
+      ],
+      "updated_at": "2026-09-16T10:13:05Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:bc77a016daf24267": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored source_tier is not supported by bibliographic evidence; it is unset so ranking is recomputed from verified provenance. No other field required correction: title, authors, source and date were confirmed against the recovered source.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://demoshelsinki.fi/industrial-policy-governance/"
+      ],
+      "updated_at": "2026-09-16T10:13:05Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:11c523d755f8f2e8": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored source_tier is not supported by bibliographic evidence; it is unset so ranking is recomputed from verified provenance. No other field required correction: title, authors, source and date were confirmed against the recovered source.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10089826/fullTextXML"
+      ],
+      "updated_at": "2026-09-16T10:13:05Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:539f60b6ec0209b3": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored source_tier is not supported by bibliographic evidence; it is unset so ranking is recomputed from verified provenance. No other field required correction: title, authors, source and date were confirmed against the recovered source.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://link.springer.com/content/pdf/10.1007/s11192-023-04672-y.pdf"
+      ],
+      "updated_at": "2026-09-16T10:13:05Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:1b927cef6fb95689": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored source_tier is not supported by bibliographic evidence; it is unset so ranking is recomputed from verified provenance. No other field required correction: title, authors, source and date were confirmed against the recovered source.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://ecfr.eu/article/economic-peacefare-lessons-for-the-future-of-european-sanctions-strategy/"
+      ],
+      "updated_at": "2026-09-16T10:13:05Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:9572e3bbe5367f02": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored source_tier is not supported by bibliographic evidence; it is unset so ranking is recomputed from verified provenance. No other field required correction: title, authors, source and date were confirmed against the recovered source.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.sciencedirect.com/science/article/pii/S0016328723000575"
+      ],
+      "updated_at": "2026-09-16T10:13:05Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:1d6a73b044ef90f0": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored source_tier is not supported by bibliographic evidence; it is unset so ranking is recomputed from verified provenance. No other field required correction: title, authors, source and date were confirmed against the recovered source.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://ecfr.eu/article/alligator-arms-a-proactive-strategy-for-ukraines-military-support/"
+      ],
+      "updated_at": "2026-09-16T10:13:05Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:f7b185f3737af29b": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored source_tier is not supported by bibliographic evidence; it is unset so ranking is recomputed from verified provenance. No other field required correction: title, authors, source and date were confirmed against the recovered source.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://dspace.library.uu.nl/handle/1874/430702"
+      ],
+      "updated_at": "2026-09-16T10:13:05Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:fc6ca98d319c7597": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored source_tier is not supported by bibliographic evidence; it is unset so ranking is recomputed from verified provenance. No other field required correction: title, authors, source and date were confirmed against the recovered source.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://merics.org/en/comment/fragmenting-data-governance-europe-needs-strategy-live-china"
+      ],
+      "updated_at": "2026-09-16T10:13:05Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:f7f74521267508c2": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored source_tier is not supported by bibliographic evidence; it is unset so ranking is recomputed from verified provenance. No other field required correction: title, authors, source and date were confirmed against the recovered source.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://sts.univie.ac.at/fileadmin/user_upload/i_sts/Publikationen/Projekte/A_Rocket_to_Protect_Sociotechnical_Imaginaries_of_Strategic_Autonomy_in_Controversies_About_the_European_Rocket_Program.pdf"
+      ],
+      "updated_at": "2026-09-16T10:13:05Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:3861e94bb69c0102": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored source_tier is not supported by bibliographic evidence; it is unset so ranking is recomputed from verified provenance. No other field required correction: title, authors, source and date were confirmed against the recovered source.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://pure.hud.ac.uk/ws/files/59750207/Huggins_et_al_SPP_ORCA_VERSION.pdf"
+      ],
+      "updated_at": "2026-09-16T10:13:05Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:808d64c0dc03419c": {
+      "fields": {
+        "date": "2026-06",
+        "source": "European Commission — Research and Innovation"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The scanner recorded 2023-02-01, which is the project start date shown in the metadata panel; the success story page itself carries a June 2026 publication marker.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://projects.research-and-innovation.ec.europa.eu/en/projects/success-stories/all/how-video-games-are-helping-shape-climate-policy"
+      ],
+      "updated_at": "2026-09-16T10:13:05Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:e2d286d96287c80b": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored source_tier is not supported by bibliographic evidence; it is unset so ranking is recomputed from verified provenance. No other field required correction: title, authors, source and date were confirmed against the recovered source.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://hdl.handle.net/11250/3098967"
+      ],
+      "updated_at": "2026-09-16T10:13:06Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:bdda84a4bbd9b830": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored source_tier is not supported by bibliographic evidence; it is unset so ranking is recomputed from verified provenance. No other field required correction: title, authors, source and date were confirmed against the recovered source.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.aka.fi/en/about-the-rcf/whats-new/blog2/2023/the-role-of-water-in-the-bioeconomy--nordic-research-cooperation-at-its-finest/"
+      ],
+      "updated_at": "2026-09-16T10:13:06Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:57ad144fbe73445d": {
+      "fields": {
+        "title": "The Platformization of Science: Towards a Scientific Digital Platform Taxonomy",
+        "authors": "Victo Jose da Silva Neto; Tulio Chiarini",
+        "date": "2022-10-28"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The scanner had stored a sentence from the abstract as the title and left authors blank; Crossref and the article give the correct title, the two Brazilian authors and the 28 October 2022 online publication date.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://link.springer.com/content/pdf/10.1007/s11024-022-09477-6.pdf"
+      ],
+      "updated_at": "2026-09-16T10:13:06Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:24501ddf51838c49": {
+      "fields": {
+        "title": "Policy for promoting international cooperation 2023–2030",
+        "date": "2023-11-08",
+        "type": "policy document"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The scanner's stored title referred to a different item about scientific councils' 2023 funding cooperation; the supplied PDF is the Research Council of Finland's policy for promoting international cooperation 2023-2030, approved by its Board on 8 November 2023.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.aka.fi/globalassets/2-suomen-akatemian-toiminta/1-mita-teemme/6-kansainvalinen-toiminta/sa-kv-linjaus-en-final-valmis.pdf"
+      ],
+      "updated_at": "2026-09-16T10:13:06Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "link:https://doi.org/10.1016/j.dsp.2024.104571": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored source_tier is not supported by bibliographic evidence; it is unset so ranking is recomputed from verified provenance. No other field required correction: title, authors, source and date were confirmed against the recovered source.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://www.sciencedirect.com/science/article/abs/pii/S1051200424001969"
+      ],
+      "updated_at": "2026-09-16T10:13:06Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:7a9c84f38055c7ab": {
+      "fields": {
+        "date": "2023-11",
+        "authors": "Maciej Maryl; Marta Błaszczyńska; Ilaria Bonincontro; Beat Immenhauser; Szilvia Maróthy; Eveline Wandl-Vogt; Joris J. van Zundert; ALLEA Working Group E-Humanities"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The scanner recorded 2023-01-01 and no authors; the report's own citation page gives November 2023 and the full author list.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://allea.org/wp-content/uploads/2023/11/ALLEA-Report-Research-Assessment-in-E-Humanities.pdf"
+      ],
+      "updated_at": "2026-09-16T10:13:06Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:14a320eb829ad9a8": {
+      "fields": {
+        "date": "2023"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The page gives the programme duration as 2023 to 2031, confirming the start year the scanner recorded.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.cnrs.fr/en/our-research/france-2030/pepr/spintronics-spin"
+      ],
+      "updated_at": "2026-09-16T10:13:06Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:b7c37b8af80c7dbc": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored source_tier is not supported by bibliographic evidence; it is unset so ranking is recomputed from verified provenance. No other field required correction: title, authors, source and date were confirmed against the recovered source.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://institutdelors.eu/en/evenements/fr-euroquestions-63-economic-security-a-new-european-imperative/"
+      ],
+      "updated_at": "2026-09-16T10:13:06Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:41f9d2bf8fa4bf35": {
+      "fields": {
+        "date": "2024"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The scanner recorded 2023-01-01; the analysis covers 2023 filing data and internally references a March 2024 podcast, placing publication in 2024 as part of the Patent Index 2023 release.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.epo.org/en/about-us/statistics/patent-index-2023/insight-artificial-intelligence"
+      ],
+      "updated_at": "2026-09-16T10:13:06Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:f2e19764a3f6dcfc": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored source_tier is not supported by bibliographic evidence; it is unset so ranking is recomputed from verified provenance. No other field required correction: title, authors, source and date were confirmed against the recovered source.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.hybridcoe.fi/wp-content/uploads/2023/01/20230109-Hybrid-CoE-Working-Paper-21-Space-and-the-Ukraine-war-WEB.pdf"
+      ],
+      "updated_at": "2026-09-16T10:13:06Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:a63a69b9558d557d": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Stored source_tier is not supported by bibliographic evidence; it is unset so ranking is recomputed from verified provenance. No other field required correction: title, authors, source and date were confirmed against the recovered source.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.aka.fi/en/about-the-rcf/whats-new/blog2/2023/facilitating-international-cooperation-key-to-promoting-research-quality-and-renewal/"
+      ],
+      "updated_at": "2026-09-16T10:13:06Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:9cedb65448c031c4": {
+      "fields": {
+        "source": "OpenEdition Press — Proceedings of the Paris Open Science European Conference (OSEC 2022)",
+        "date": "2022"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The scanner attributed the work to Science Europe; the page shows it is a chapter in the OSEC 2022 proceedings published by OpenEdition Press, with the author affiliated to the Open University of Catalonia and presenting European University Association work.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://books.openedition.org/oep/16169"
+      ],
+      "updated_at": "2026-09-16T10:13:06Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:db267818db411837": {
+      "fields": {
+        "date": "2022"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The page gives the programme duration as 2022 to 2028, confirming the start year the scanner recorded.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.cnrs.fr/en/our-research/france-2030/pepr/quantum"
+      ],
+      "updated_at": "2026-09-16T10:13:06Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:ee4aeaded5d3f24d": {
+      "fields": {
+        "date": "2022-12-05"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The scanner recorded 2022-01-01; the statement itself is dated 5 December 2022.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.coimbra-group.eu/wp-content/uploads/Joint-statement_EIC-IP-provisions_5-December-2022.pdf"
+      ],
+      "updated_at": "2026-09-16T10:13:06Z",
+      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
     }
   }
 }
