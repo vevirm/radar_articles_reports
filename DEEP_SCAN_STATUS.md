@@ -7,17 +7,17 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **764** (Main **605** + Historical **159**)
-- Automatic queue still needing V2 verification: **569** (Main **24** + Historical **545**)
-- Currently assigned to workers: **117** (Main **10** + Historical **107**)
+- Automatic queue still needing V2 verification: **595** (Main **41** + Historical **554**)
+- Currently assigned to workers: **120** (Main **13** + Historical **107**)
 - Bounded access-recovery retries still eligible: **17**
 - Hands-on verification needed: **48**
-- Automatic queue pending and not yet assigned: **452**
+- Automatic queue pending and not yet assigned: **475**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260915T135230Z-5a7ccdade7b5`
-- Assigned unresolved records: **58**
+- Current package: `worker-a-20260916T065732Z-58dd85c32322`
+- Assigned unresolved records: **60**
   1. `historical:id:1305a3174c34b1b9` — Operation regulation: Strengthening Latin America’s AI governance – European Council on Foreign Relations
   2. `historical:id:dc297ea0893bebfc` — Europe must end its quantum technology research with China
   3. `historical:id:1342a320214f9882` — ESF Annual Report 2023 - ESF
@@ -26,11 +26,11 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:2c6a970a0f7fe791` — Digital sovereignty - Rhetoric and reality
   7. `historical:id:9039171272bbcba2` — Academic Symposium Highlights Path Forward for European Research Collaboration - ALLEA
   8. `historical:id:7861df71d1d5614f` — Horizon Europe 'Health' - Implementation research for management of multiple long-term conditions in the context of non-communicable diseases (GACD)
-  - … plus 50 more in the package manifest
+  - … plus 52 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260915T135246Z-d417f3359068`
-- Assigned unresolved records: **59**
+- Current package: `worker-b-20260916T065755Z-743ca1212cbd`
+- Assigned unresolved records: **60**
   1. `historical:id:54a0ed573cfd4e70` — Academic freedom is becoming part of Europe's competitive offer to global researchers as well as a condition for reliable knowledge production.
   2. `historical:id:343e7eac09fe6ffb` — 2025 Ideas Lab report – CEPS
   3. `historical:id:54443cacb8afbf99` — Using Horizon Scanning to Build Policy Resilience: Case of Waste Crime
@@ -39,7 +39,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:429ce155fd37117b` — Synthesising knowledge on forest resilience with CLEANFOREST
   7. `historical:id:679ed030cf8b33ea` — Horizon Europe’s work programme for research infrastructure
   8. `historical:id:032d048c2196c5d0` — Coopetitive Technological Sovereignty: A Strategy to Reconcile International Collaboration with Knowledge and Economic Security
-  - … plus 51 more in the package manifest
+  - … plus 52 more in the package manifest
 
 ## Hands-on verification needed
 
