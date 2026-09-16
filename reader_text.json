@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-16T17:57:31Z",
+  "generated_at": "2026-09-16T18:09:14Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -84550,6 +84550,575 @@
       "reader_text_model": "user-provided-llm-subscription",
       "reader_text_written_at": "2026-09-16T17:57:31Z",
       "deep_scan_package_id": "worker-a-20260916T173433Z-f8e5c76d61ae"
+    },
+    "historical:id:efee7b100f8750bc": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "ebc36bd1",
+      "identity_hash": "5959d3b67b97729a",
+      "reader_title": "EU technological research is less efficient than the world average",
+      "reader_what": "Citation-percentile analysis finds EU research on fast-evolving technologies less efficient than the world and the US.",
+      "reader_why": "It challenged the Commission's claim of EU research excellence, a premise behind the \"European paradox\".",
+      "reader_more": "The authors use the ep index, the ratio of top-1% to top-10% cited papers, as a measure of research efficiency. EU output on fast-evolving technological topics scored below the world average. The USA led the EU in both fast- and slow-evolving technologies. The authors argue EU policy rested on a wrong diagnosis of excellence.",
+      "deep_analysis": {
+        "work_kind": "bibliometric empirical study",
+        "research_question": "How efficient is EU technological research compared with other countries?",
+        "main_finding": "EU research on fast-evolving technologies is less efficient than the world average and well behind the USA.",
+        "method_or_basis": "Percentile-based citation analysis (ep index) of country papers in technological topics.",
+        "qualification": "Citation-based efficiency is a proxy for breakthrough potential, not a direct measure of innovation.",
+        "radar_relevance": "Historical evidence on EU research performance and the European paradox debate.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://doi.org/10.1016/j.joi.2018.06.009; HTTP 200, resolved to https://linkinghub.elsevier.com/retrieve/pii/S1751157718300701; ~13 chars of extractable text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref for 10.1016/j.joi.2018.06.009 matched title/authors: 'Technological research in the EU is less efficient than the world aver', Journal of Informetrics, journal-article, issued [[2018, 8]]. Unpaywall/OpenAlex queried for OA locations."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publisher page paywalled; found and read full author version on arXiv (1802.06633)."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://arxiv.org/pdf/1802.06633",
+            "title": "arXiv 1802.06633 author version",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and content checked against the recovered source(s)."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Bibliometric study showing EU technological research less efficient than world average and critiquing EU research policy."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-16T18:09:14Z",
+      "deep_scan_package_id": "worker-b-20260916T173450Z-cdb99e64487d"
+    },
+    "historical:id:c4a4150b9436bc16": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "d6384cea",
+      "identity_hash": "2d6bd9291a4a2318",
+      "reader_title": "A synthesised backcasting approach for planning smart sustainable cities",
+      "reader_what": "Compares forecasting with backcasting and synthesises backcasting methodologies into an approach for smart sustainable city strategy.",
+      "reader_more": "Backcasting starts from a desired future and works back to present-day steps. The paper reviews existing backcasting methodologies and their steps and guiding questions. It then proposes a synthesised approach for strategic smart sustainable city development. It is a conceptual methodology paper rather than an empirical test.",
+      "deep_analysis": {
+        "work_kind": "methodological review and synthesis",
+        "research_question": "How can backcasting be adapted for strategic smart sustainable city development?",
+        "main_finding": "A synthesised backcasting approach combining scholarly and planning traditions.",
+        "method_or_basis": "Comparative literature review of forecasting and backcasting methodologies.",
+        "qualification": "Conceptual; the synthesised approach is not empirically validated in the paper.",
+        "radar_relevance": "Reusable foresight/scenario method (strand B).",
+        "confidence": "medium",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://doi.org/10.1186/s40309-018-0142-z; HTTP 200, resolved to https://link.springer.com/article/10.1186/s40309-018-0142-z?error=cookies_not_supported&code=02820986-6d5a-4af6-ab49-856; ~142431 chars of extractable text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref for 10.1186/s40309-018-0142-z matched title/authors: 'Backcasting in futures studies: a synthesized scholarly and planning a', European Journal of Futures Research, journal-article, issued [[2018, 7, 27]]. Unpaywall/OpenAlex queried for OA locations."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/content/pdf/10.1186/s40309-018-0142-z.pdf",
+            "title": "European Journal of Futures Research 6:13",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and content checked against the recovered source(s)."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Reviews backcasting methodologies and synthesises a backcasting approach usable for strategic smart sustainable city planning."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-16T18:09:14Z",
+      "deep_scan_package_id": "worker-b-20260916T173450Z-cdb99e64487d"
+    },
+    "historical:id:1a40f4cc816a5ce6": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "811cd394",
+      "identity_hash": "3aca455b9efca011",
+      "reader_title": "A call for a European research agenda on the future health workforce",
+      "reader_what": "Proposes a Europe-focused research agenda on health workforce policy, linked to the European Public Health Association.",
+      "reader_more": "The authors argue existing data collection cannot close key knowledge gaps on the health workforce. They identify six objectives for health workforce policy in Europe. They call for health workforce research to be built as its own field. This requires dedicated research funding, education programmes and comparative methods.",
+      "deep_analysis": {
+        "work_kind": "research agenda / commentary",
+        "research_question": "What research is needed to build a future health workforce in Europe?",
+        "main_finding": "Europe needs a comprehensive health workforce research agenda with dedicated funding and comparative methods.",
+        "method_or_basis": "Expert synthesis linked to EUPHA Health Workforce Research section.",
+        "qualification": "Agenda-setting piece; no new empirical data.",
+        "radar_relevance": "European research agenda-setting and funding needs in a policy field.",
+        "confidence": "medium",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://doi.org/10.1186/s12961-018-0333-x; HTTP 200, resolved to https://link.springer.com/article/10.1186/s12961-018-0333-x?error=cookies_not_supported&code=28225917-5f02-4600-9e4f-39a; ~58984 chars of extractable text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref for 10.1186/s12961-018-0333-x matched title/authors: 'A call for action to establish a research agenda for building a future', Health Research Policy and Systems, journal-article, issued [[2018, 6, 20]]. Unpaywall/OpenAlex queried for OA locations."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/content/pdf/10.1186/s12961-018-0333-x.pdf",
+            "title": "Health Research Policy and Systems 16:52",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and content checked against the recovered source(s)."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Sets out a European research agenda for health workforce research, calling for dedicated research funding and comparative methodology."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-16T18:09:14Z",
+      "deep_scan_package_id": "worker-b-20260916T173450Z-cdb99e64487d"
+    },
+    "historical:id:cb338717157072fe": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "15e48b12",
+      "identity_hash": "fce5d0799fe05d95",
+      "reader_title": "Psychological barriers to corporate foresight in Russia",
+      "reader_what": "An expert panel identifies distrust of forecasting, avoided responsibility and cognitive biases as barriers to corporate foresight.",
+      "reader_more": "The article treats corporate foresight as collective reflection about a shared future. Expert polling lists common biases in foresight group work. It suggests ways to overcome these barriers. It applies existing concepts rather than offering a transferable new method.",
+      "deep_analysis": {
+        "work_kind": "conceptual article with expert poll",
+        "research_question": "What psychological factors hinder corporate foresight?",
+        "main_finding": "Organisational and cognitive barriers reduce corporate foresight effectiveness in Russia.",
+        "method_or_basis": "Expert panel and literature on cognitive biases.",
+        "qualification": "Russian corporate context; small expert poll.",
+        "radar_relevance": "Fails B: no reusable methodological contribution; not European R&I.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://doi.org/10.17323/2500-2597.2018.2.78.90; HTTP 200, resolved to https://foresight-journal.hse.ru/article/view/19393; ~20550 chars of extractable text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref for 10.17323/2500-2597.2018.2.78.90 matched title/authors: 'The Psychological Aspects of Corporate Foresight', Foresight and STI Governance, journal-article, issued [[2018, 6, 11]]. Unpaywall/OpenAlex queried for OA locations."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Journal PDF link 404; read full text via CyberLeninka repository copy listed by OpenAlex."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://cyberleninka.ru/article/n/the-psychological-aspects-of-corporate-foresight",
+            "title": "CyberLeninka copy of Foresight and STI Governance article",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and content checked against the recovered source(s)."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_NOT_REUSABLE_METHOD",
+        "reason": "Discusses psychological barriers to corporate foresight in Russia from an expert panel; no new or improved reusable method."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-16T18:09:14Z",
+      "deep_scan_package_id": "worker-b-20260916T173450Z-cdb99e64487d"
+    },
+    "historical:id:7e40471591772e5a": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "5026acc8",
+      "identity_hash": "ab482a584d385390",
+      "reader_title": "Diverse partnerships in EU-funded research projects do not boost innovation potential",
+      "reader_what": "Homogeneous partnerships in EC-funded projects show higher innovation potential than mixed SME–large company partnerships.",
+      "reader_why": "It informs how EU framework programme consortia might be composed for innovation outcomes.",
+      "reader_more": "The study looks at key organisations delivering innovations in EC-funded collaborative projects. Partnerships between similar organisations, such as two SMEs, had higher innovation potential. The role of universities was unclear. Project funding and duration did not affect innovation potential.",
+      "deep_analysis": {
+        "work_kind": "empirical econometric study",
+        "research_question": "How does organisational diversity affect innovation potential of EU-funded research projects?",
+        "main_finding": "Homogeneous partnerships have higher innovation potential; more key organisations lower it.",
+        "method_or_basis": "Analysis of innovations and participants in EC-funded collaborative research projects.",
+        "qualification": "Innovation potential is an assessed indicator, not market outcome.",
+        "radar_relevance": "Direct evidence on EU framework programme project performance.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://doi.org/10.1007/s10961-017-9624-6; HTTP 200, resolved to https://link.springer.com/article/10.1007/s10961-017-9624-6?error=cookies_not_supported&code=b7f8f6be-eccc-4a2d-bbb6-2d9; ~64779 chars of extractable text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref for 10.1007/s10961-017-9624-6 matched title/authors: 'Organizational diversity and innovation potential of EU-funded researc', The Journal of Technology Transfer, journal-article, issued [[2017, 9, 15]]. Unpaywall/OpenAlex queried for OA locations."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/content/pdf/10.1007/s10961-017-9624-6.pdf",
+            "title": "Journal of Technology Transfer open-access article",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and content checked against the recovered source(s)."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Analyses innovation potential of EC-funded collaborative research projects by partnership diversity."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-16T18:09:14Z",
+      "deep_scan_package_id": "worker-b-20260916T173450Z-cdb99e64487d"
+    },
+    "historical:id:c65677ab612378f0": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "1cb2b1ed",
+      "identity_hash": "98ad9dac4815737b",
+      "reader_title": "A framework for technology transfer between universities in different countries",
+      "reader_what": "Proposes three types of international university–university technology transfer and contrasts Western and Chinese entry paths.",
+      "reader_more": "The authors map three collaboration types onto strategic alliance forms: non-equity alliances, network alliances and joint ventures. They apply knowledge base, learning, absorptive capacity and trust to each type. Western universities are proposed to start informally, Chinese universities formally. The propositions are theoretical and untested.",
+      "deep_analysis": {
+        "work_kind": "conceptual framework",
+        "research_question": "How do universities initiate and develop international technology transfer collaborations?",
+        "main_finding": "Western and Chinese universities follow opposite entry modes and pathways.",
+        "method_or_basis": "Strategic management theory applied to university collaboration, with patent and publication trends.",
+        "qualification": "Propositions not empirically validated.",
+        "radar_relevance": "Transferable analytical framework (strand B); European link limited.",
+        "confidence": "medium",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://doi.org/10.1016/j.techfore.2018.05.002; HTTP 200, resolved to https://linkinghub.elsevier.com/retrieve/pii/S0040162518307418; ~13 chars of extractable text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref for 10.1016/j.techfore.2018.05.002 matched title/authors: 'International university-university technology transfer: Strategic man', Technological Forecasting and Social Change, journal-article, issued [[2018, 10]]. Unpaywall/OpenAlex queried for OA locations."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Direct curl blocked (403); exact-title search surfaced the ScienceDirect page, which was fetched in full."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0040162518307418",
+            "title": "TFSC open-access CC BY-NC-ND article",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and content checked against the recovered source(s)."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Builds a transferable strategic-management framework (three alliance types, propositions) for international university–university technology transfer."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-16T18:09:14Z",
+      "deep_scan_package_id": "worker-b-20260916T173450Z-cdb99e64487d"
+    },
+    "historical:id:06ceb84711973ee4": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "1d1db1a6",
+      "identity_hash": "3e7387af608f33b8",
+      "reader_title": "Dutch government investment in research and innovation, 2016–2022",
+      "reader_what": "Surveys Dutch government direct and tax-based support for R&D and innovation, plus regional and European funding.",
+      "reader_more": "TWIN tracks budgeted R&D and innovation appropriations and forecasts across Dutch ministries. It covers both direct funding and tax incentives. It also discusses regional and European sources of R&D funding. Figures are budget-based forecasts, not realised spending.",
+      "deep_analysis": {
+        "work_kind": "official statistical report",
+        "research_question": "How much does the Dutch government invest in R&D and innovation?",
+        "main_finding": "Presents trends in Dutch government R&D and innovation support for 2016–2022.",
+        "method_or_basis": "Ministry budget data collection and forecasts.",
+        "qualification": "Budgets and forecasts may differ from actual spending.",
+        "radar_relevance": "National European R&I investment context.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.rathenau.nl/sites/default/files/2018-05/TWIN%202016-2022_UK.pdf; HTTP 200, resolved to https://www.rathenau.nl/sites/default/files/2018-05/TWIN%202016-2022_UK.pdf; ~89245 chars of extractable text."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI: supplied URL is a web page/report without a DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_document",
+            "url": "https://www.rathenau.nl/sites/default/files/2018-05/TWIN%202016-2022_UK.pdf",
+            "title": "Rathenau Instituut TWIN 2016-2022",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and content checked against the recovered source(s)."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Official statistics on Dutch government R&D and innovation support 2016–2022, including European funding sources."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-16T18:09:14Z",
+      "deep_scan_package_id": "worker-b-20260916T173450Z-cdb99e64487d"
+    },
+    "historical:id:1427230a92077d48": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "UNCLASSIFIED",
+      "corpus_scope": "historical",
+      "source_hash": "72c94a66",
+      "identity_hash": "7935a307c9c2fd96",
+      "reader_title": "How EU countries tie university research funding to performance",
+      "reader_what": "EU Member States vary widely in performance-based research funding, from none to bibliometric formulas and peer review.",
+      "reader_why": "It supported mutual learning among Member States on designing research funding systems.",
+      "reader_more": "Performance-based research funding allocates institutional money using ex post assessment of research. The article classifies EU28 countries as having none, limited, bibliometric or peer-review systems. Each approach has costs and drawbacks. The authors say impact evidence is lacking, so no single best practice can be recommended.",
+      "deep_analysis": {
+        "work_kind": "comparative policy analysis",
+        "research_question": "How is performance-based research funding implemented across EU Member States?",
+        "main_finding": "Large variation in systems; no clear best model given missing impact evidence.",
+        "method_or_basis": "JRC RIO country reports, expert validation and PREF funding data.",
+        "qualification": "Classification as of 2014; systems change frequently.",
+        "radar_relevance": "Core European research funding policy evidence.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Opened https://doi.org/10.1093/scipol/scy041; HTTP 403, resolved to https://academic.oup.com/spp/article/46/1/105/5037253; ~18 chars of extractable text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref for 10.1093/scipol/scy041 matched title/authors: 'Performance-based research funding in EU Member States—a comparative a', Science and Public Policy, journal-article, issued [[2018, 6, 13]]. Unpaywall/OpenAlex queried for OA locations."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "OUP direct curl 403; exact-title search surfaced the OUP page, fetched in full."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://academic.oup.com/spp/article/46/1/105/5037253",
+            "title": "Science and Public Policy 46(1) CC BY",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and content checked against the recovered source(s)."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "First comprehensive comparison of performance-based research funding across EU Member States, by JRC authors."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-16T18:09:14Z",
+      "deep_scan_package_id": "worker-b-20260916T173450Z-cdb99e64487d"
+    },
+    "historical:id:7fdf2f228bc94ed2": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "600bd163",
+      "identity_hash": "9a47eae987c3d8ac",
+      "reader_title": "Why the Techniums innovation policy in Wales failed",
+      "reader_what": "The EU-funded Technium programme failed because it relied on supply-side support for innovation in a weaker region.",
+      "reader_why": "It warns that supply-side, property-led innovation spending in peripheral regions may not deliver growth.",
+      "reader_more": "Wales used EU structural funds in 2000–2006 to build Technium innovation centres. The study uses Welsh Government data and stakeholder interviews. It finds the supply-side approach did not generate the expected innovation. It questions such policies for peripheral regions.",
+      "deep_analysis": {
+        "work_kind": "policy case study",
+        "research_question": "Why did the Technium innovation programme fail?",
+        "main_finding": "A supply-side approach using EU funds failed to deliver innovation-led growth.",
+        "method_or_basis": "Government data and stakeholder interviews.",
+        "qualification": "Single-region case.",
+        "radar_relevance": "European regional innovation policy and structural funds.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Opened https://doi.org/10.1080/00343404.2018.1444272; HTTP 403, resolved to https://www.tandfonline.com/doi/full/10.1080/00343404.2018.1444272; ~18 chars of extractable text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref for 10.1080/00343404.2018.1444272 matched title/authors: 'From ‘Techniums’ to ‘emptiums’: the failure of a flagship innovation p', Regional Studies, journal-article, issued [[2018, 3, 21]]. Unpaywall/OpenAlex queried for OA locations."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "T&F page 403; read accepted manuscript in Glasgow eprints (Unpaywall location)."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "http://eprints.gla.ac.uk/188101/1/188101.pdf",
+            "title": "Glasgow accepted manuscript",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and content checked against the recovered source(s)."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Case study of the failed EU structural-fund-backed Technium innovation programme in Wales."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-16T18:09:14Z",
+      "deep_scan_package_id": "worker-b-20260916T173450Z-cdb99e64487d"
     }
   }
 }

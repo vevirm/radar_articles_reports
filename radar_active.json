@@ -1455,7 +1455,7 @@
     "new_c": 1
   },
   "reader_products_refresh": {
-    "completed_at": "2026-09-16T17:59:05Z",
+    "completed_at": "2026-09-16T18:10:08Z",
     "matrix": true,
     "risks_opportunities": true,
     "external_shocks": true,
@@ -95841,7 +95841,7 @@
       "first_seen": "2026-09-06T13:37Z",
       "new_this_scan": false,
       "retrace_status": "unchanged",
-      "retrace_at": "2026-09-16T17:59:05Z"
+      "retrace_at": "2026-09-16T18:10:08Z"
     }
   ],
   "external_shock_watch": [],
@@ -96377,16 +96377,16 @@
     "active_strand_a": 303,
     "active_strand_b": 111,
     "active_strand_c": 148,
-    "deep_scan_v2_verified": 635,
-    "deep_scan_v2_pending": 58,
-    "historical_deep_scan_v2_verified": 509,
-    "historical_deep_scan_v2_pending": 206,
-    "historical_active_a_context": 465,
+    "deep_scan_v2_verified": 637,
+    "deep_scan_v2_pending": 56,
+    "historical_deep_scan_v2_verified": 565,
+    "historical_deep_scan_v2_pending": 158,
+    "historical_active_a_context": 471,
     "inactive_drop": 114,
     "inactive_unverifiable": 9,
     "inactive_manual_verification": 8,
     "inactive_duplicates": 1,
-    "active_review": 22
+    "active_review": 23
   },
   "scan_diagnostics": {
     "source_warning_count": 51,
@@ -96984,10 +96984,10 @@
   },
   "shock_inference": {
     "profile_version": "23.3-context-weighted-shocks-v3",
-    "evaluated_at": "2026-09-16T17:59:05Z",
+    "evaluated_at": "2026-09-16T18:10:08Z",
     "new_count": 0,
-    "updated_count": 0,
-    "unchanged_count": 10,
+    "updated_count": 1,
+    "unchanged_count": 9,
     "dynamic_shocks": [
       {
         "id": "emergent:infrastructure:security_reclassification",
@@ -97224,13 +97224,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-12T07:30Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "7a39b4df5a32f5e9",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "emergent:quantum:security_reclassification",
@@ -97506,13 +97506,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-06T20:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "237b7e620c46295a",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "emergent:ip:acquisition",
@@ -97679,26 +97679,6 @@
             "a_context_evidence": []
           },
           {
-            "identity": "url:https://doi.org/10.1016/j.techfore.2018.05.002",
-            "row": "H385",
-            "strand": "H",
-            "role": "Historical structural context",
-            "evidence_role": "historical",
-            "analytical_weight": 0.45,
-            "title": "International university-university technology transfer: Strategic management framework",
-            "source": "Technological Forecasting and Social Change",
-            "date": "2018-05-18",
-            "link": "https://doi.org/10.1016/j.techfore.2018.05.002",
-            "quality": 97,
-            "new_this_scan": false,
-            "core_message": "International technology transfer between universities is an emerging phenomenon and contributes to the socio-economic development of regions and countries.",
-            "geo_evidence": [],
-            "ri_evidence": [
-              "technology transfer"
-            ],
-            "a_context_evidence": []
-          },
-          {
             "identity": "url:https://doi.org/10.1007/s10961-025-10222-w",
             "row": "H056",
             "strand": "H",
@@ -97715,6 +97695,24 @@
             "geo_evidence": [],
             "ri_evidence": [],
             "a_context_evidence": []
+          },
+          {
+            "identity": "url:https://doi.org/10.1016/j.enpol.2017.11.043",
+            "row": "H408",
+            "strand": "H",
+            "role": "Historical structural context",
+            "evidence_role": "historical",
+            "analytical_weight": 0.45,
+            "title": "Technology transfer in the hydropower industry: An analysis of Chinese dam developers’ undertakings in Europe and Latin America",
+            "source": "Energy Policy",
+            "date": "2017-11-29",
+            "link": "https://doi.org/10.1016/j.enpol.2017.11.043",
+            "quality": 90,
+            "new_this_scan": false,
+            "core_message": "The study finds relatively few undertakings and limited transfer, with European cases showing mutual exchange and specific drivers.",
+            "geo_evidence": [],
+            "ri_evidence": [],
+            "a_context_evidence": []
           }
         ],
         "against": [],
@@ -97727,20 +97725,20 @@
         "weak_signal_context_count": 2,
         "historical_context_count": 2,
         "context_weight_total": 1.5,
-        "context_score_bonus": 4.3,
+        "context_score_bonus": 4.2,
         "official_trigger_present": false,
         "best_quality": 98,
         "average_quality": 89,
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-13T22:20:43Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
-        "fingerprint": "d1ea986194182e40",
+        "last_updated_at": "2026-09-16T18:10:08Z",
+        "fingerprint": "521b9159fd784a1e",
         "new_this_scan": false,
-        "updated_this_scan": false,
-        "status": "unchanged",
-        "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "updated_this_scan": true,
+        "status": "updated",
+        "retrace_status": "rebuilt",
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "emergent:startups:security_reclassification",
@@ -98176,13 +98174,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-14T00:04:04Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "883a292544efead9",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "emergent:funding:security_reclassification",
@@ -98197,7 +98195,7 @@
           "Separate primary retained evidence shows a live mechanism for a sudden security reclassification.",
           "Primary evidence contains 9 direct capability × pressure coupling record(s).",
           "3 recent weak-signal item(s) point in the same direction; each is capped at 30% of a primary evidence item and none satisfies a primary threshold.",
-          "2 historical Strand-A item(s) provide structural context; they cannot serve as the current trigger.",
+          "3 historical Strand-A item(s) provide structural context; they cannot serve as the current trigger.",
           "The scenario becomes a shock only if the response is slower than the disruption."
         ],
         "conditions": [
@@ -98593,8 +98591,8 @@
         "coupling_count": 9,
         "context_coupling_count": 4,
         "weak_signal_context_count": 3,
-        "historical_context_count": 2,
-        "context_weight_total": 1.8,
+        "historical_context_count": 3,
+        "context_weight_total": 2.25,
         "context_score_bonus": 5.0,
         "official_trigger_present": true,
         "best_quality": 98,
@@ -98602,13 +98600,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-06T20:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
-        "fingerprint": "955da36a8aaaf00d",
+        "last_updated_at": "2026-09-16T18:10:08Z",
+        "fingerprint": "881ea713b925c19f",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "emergent:collaboration:security_reclassification",
@@ -99010,13 +99008,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-06T20:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "73865d4c26aeabd4",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "emergent:space:security_reclassification",
@@ -99240,13 +99238,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-14T11:40:16Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "52303e8ce8484864",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "emergent:biotech:security_reclassification",
@@ -99506,13 +99504,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-09T12:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "5016dc0cec574cbf",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "emergent:quantum:conflict",
@@ -99790,13 +99788,13 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-15T07:27:57Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "5e79bd7ef476df53",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "emergent:open_science:conflict",
@@ -100182,19 +100180,19 @@
         "fresh_coupling": false,
         "fresh_context": false,
         "first_inferred_at": "2026-09-14T00:04:04Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "cc5d41c8080c0791",
         "new_this_scan": false,
         "updated_this_scan": false,
         "status": "unchanged",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       }
     ]
   },
   "high_order_inference": {
     "profile_version": "v23.5-generative-trends-level45",
-    "evaluated_at": "2026-09-16T17:59:05Z",
+    "evaluated_at": "2026-09-16T18:10:08Z",
     "new_count": 0,
     "updated_count": 0,
     "qualified_count": 11,
@@ -100392,8 +100390,8 @@
         "touched_this_scan": false,
         "reader_eligible": true,
         "historical_records": 20,
-        "first_seen_at": "2026-09-16T17:59:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "first_seen_at": "2026-09-16T18:10:08Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "7da2922d94d8462c",
         "new_this_scan": false,
         "updated_this_scan": false,
@@ -100402,7 +100400,7 @@
         "reader_title": "Europe keeps pursuing technological sovereignty/strategic autonomy without a settled way to measure whether it is succeeding.",
         "reader_summary": "The pattern is repeated invocation of the goal alongside sparse, fragmented or contested measurement.",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "l45:opposing_movements_accelerate_govern:accelerate-govern-compute-ai",
@@ -100703,15 +100701,15 @@
           "left_adjusted_points": 16.0,
           "right_adjusted_points": 9.0
         },
-        "first_seen_at": "2026-09-16T17:59:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "first_seen_at": "2026-09-16T18:10:08Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "ed07cc158b8c6c86",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "l45:opposing_movements_collaborate_derisk:collaborate-derisk-research-security",
@@ -100940,15 +100938,15 @@
           "left_adjusted_points": 2.5,
           "right_adjusted_points": 15.25
         },
-        "first_seen_at": "2026-09-16T17:59:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "first_seen_at": "2026-09-16T18:10:08Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "2667059ab52cfca5",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "l45:opposing_movements_accelerate_govern:accelerate-govern-startups-scaleup",
@@ -101177,15 +101175,15 @@
           "left_adjusted_points": 12.5,
           "right_adjusted_points": 2.5
         },
-        "first_seen_at": "2026-09-16T17:59:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "first_seen_at": "2026-09-16T18:10:08Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "425e4cb4252fdcc2",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "l45:opposing_movements_accelerate_govern:accelerate-govern-funding-programme",
@@ -101474,15 +101472,15 @@
           "left_adjusted_points": 6.25,
           "right_adjusted_points": 10.375
         },
-        "first_seen_at": "2026-09-16T17:59:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "first_seen_at": "2026-09-16T18:10:08Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "59f0e04e2297bc71",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "l45:omitted_dependency_chain:compute-ai-materials-energy",
@@ -101664,15 +101662,15 @@
         "generic_grammar": true,
         "reader_title": "A hidden energy/materials dependency could transmit a shock into European AI/compute.",
         "reader_summary": "The candidate exists only because primary evidence explicitly connects the asset to the dependency, separately establishes a disruption route, and shows a mechanism by which effects could spread beyond one isolated case.",
-        "first_seen_at": "2026-09-16T17:59:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "first_seen_at": "2026-09-16T18:10:08Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "e00c0c9ad23c971a",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:infrastructure-speed-vs-safeguard",
@@ -101866,15 +101864,15 @@
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on research infrastructure may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-16T17:59:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "first_seen_at": "2026-09-16T18:10:08Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "e9924b46b0c59e03",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "l45:latent_substitute_channel:generic-eureka",
@@ -102117,15 +102115,15 @@
         "generic_grammar": true,
         "reader_title": "EUREKA may already be an overlooked channel for a problem another European R&I instrument has not resolved.",
         "reader_summary": "The opportunity is retained only when the unresolved need, the adjacent structure, a live route into an independently evidenced receiving instrument, and a real precedent are all present.",
-        "first_seen_at": "2026-09-16T17:59:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "first_seen_at": "2026-09-16T18:10:08Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "9fb13b2a9d3c5d64",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "l45:latent_substitute_channel:generic-business-finland",
@@ -102344,15 +102342,15 @@
         "generic_grammar": true,
         "reader_title": "Business Finland may already be an overlooked channel for a problem another European R&I instrument has not resolved.",
         "reader_summary": "The opportunity is retained only when the unresolved need, the adjacent structure, a live route into an independently evidenced receiving instrument, and a real precedent are all present.",
-        "first_seen_at": "2026-09-16T17:59:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "first_seen_at": "2026-09-16T18:10:08Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "fde694d2b801975f",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "l45:practice_precedes_doctrine:generic-standards-testing",
@@ -102557,15 +102555,15 @@
         "generic_grammar": true,
         "reader_title": "Formal policy around standards/testing may be codifying a practice that was already operating.",
         "reader_summary": "The sequence, not topic similarity, is the finding: dated primary evidence places practice before doctrine, and the later framework explicitly names the earlier instrument while separate evidence shows that practice had real effects.",
-        "first_seen_at": "2026-09-16T17:59:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "first_seen_at": "2026-09-16T18:10:08Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "b7829452541a817e",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "l45:practice_precedes_doctrine:generic-funding-programme",
@@ -102770,15 +102768,15 @@
         "generic_grammar": true,
         "reader_title": "Formal policy around research funding/programmes may be codifying a practice that was already operating.",
         "reader_summary": "The sequence, not topic similarity, is the finding: dated primary evidence places practice before doctrine, and the later framework explicitly names the earlier instrument while separate evidence shows that practice had real effects.",
-        "first_seen_at": "2026-09-16T17:59:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "first_seen_at": "2026-09-16T18:10:08Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "8e8e6afc3ed3cfcf",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "l45:comparative_advantage_bottleneck:generic-compute-ai",
@@ -102997,15 +102995,15 @@
         "generic_grammar": true,
         "reader_title": "Europe may have an underused advantage in AI/compute if a tractable bottleneck is the real constraint.",
         "reader_summary": "This opportunity is retained only when separate evidence shows a current weakness, an asset Europe already possesses, a fixable bottleneck around that asset, and measurable payoff evidence.",
-        "first_seen_at": "2026-09-16T17:59:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "first_seen_at": "2026-09-16T18:10:08Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "4df47356e97431e9",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "l45:comparative_advantage_bottleneck:generic-infrastructure",
@@ -103188,15 +103186,15 @@
         "generic_grammar": true,
         "reader_title": "Europe may have an underused advantage in research infrastructure if a tractable bottleneck is the real constraint.",
         "reader_summary": "This opportunity is retained only when separate evidence shows a current weakness, an asset Europe already possesses, a fixable bottleneck around that asset, and measurable payoff evidence.",
-        "first_seen_at": "2026-09-16T17:59:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "first_seen_at": "2026-09-16T18:10:08Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "d27b9479cceb7f52",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:funding-programme-speed-vs-safeguard",
@@ -103403,15 +103401,15 @@
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on research funding/programmes may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-16T17:59:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "first_seen_at": "2026-09-16T18:10:08Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "46eaf9e093a734af",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:infrastructure-openness-vs-security",
@@ -103642,15 +103640,15 @@
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on research infrastructure may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-16T17:59:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "first_seen_at": "2026-09-16T18:10:08Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "c2dab703f17a5e6b",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:collaboration-diplomacy-openness-vs-security",
@@ -103881,15 +103879,15 @@
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on science diplomacy/collaboration may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-16T17:59:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "first_seen_at": "2026-09-16T18:10:08Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "885424dc8b882208",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "l45:practice_precedes_doctrine:generic-compute-ai",
@@ -104095,15 +104093,15 @@
         "generic_grammar": true,
         "reader_title": "Formal policy around AI/compute may be codifying a practice that was already operating.",
         "reader_summary": "The sequence, not topic similarity, is the finding: dated primary evidence places practice before doctrine, and the later framework explicitly names the earlier instrument while separate evidence shows that practice had real effects.",
-        "first_seen_at": "2026-09-16T17:59:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "first_seen_at": "2026-09-16T18:10:08Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "c03cf4f33a610ce0",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "l45:practice_precedes_doctrine:generic-infrastructure",
@@ -104309,15 +104307,15 @@
         "generic_grammar": true,
         "reader_title": "Formal policy around research infrastructure may be codifying a practice that was already operating.",
         "reader_summary": "The sequence, not topic similarity, is the finding: dated primary evidence places practice before doctrine, and the later framework explicitly names the earlier instrument while separate evidence shows that practice had real effects.",
-        "first_seen_at": "2026-09-16T17:59:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "first_seen_at": "2026-09-16T18:10:08Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "b0ddc40995f47df4",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "l45:practice_precedes_doctrine:generic-talent",
@@ -104511,15 +104509,15 @@
         "generic_grammar": true,
         "reader_title": "Formal policy around research talent may be codifying a practice that was already operating.",
         "reader_summary": "The sequence, not topic similarity, is the finding: dated primary evidence places practice before doctrine, and the later framework explicitly names the earlier instrument while separate evidence shows that practice had real effects.",
-        "first_seen_at": "2026-09-16T17:59:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "first_seen_at": "2026-09-16T18:10:08Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "6483ef1dd127cf67",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "l45:practice_precedes_doctrine:generic-startups-scaleup",
@@ -104737,15 +104735,15 @@
         "generic_grammar": true,
         "reader_title": "Formal policy around startups/scale-up may be codifying a practice that was already operating.",
         "reader_summary": "The sequence, not topic similarity, is the finding: dated primary evidence places practice before doctrine, and the later framework explicitly names the earlier instrument while separate evidence shows that practice had real effects.",
-        "first_seen_at": "2026-09-16T17:59:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "first_seen_at": "2026-09-16T18:10:08Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "a119cc292aa4fcc0",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:standards-testing-openness-vs-security",
@@ -104928,15 +104926,15 @@
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on standards/testing may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-16T17:59:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "first_seen_at": "2026-09-16T18:10:08Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "d2ca790e9243a2fe",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "l45:success_metric_blind_spot:generic-retention-talent",
@@ -105104,15 +105102,15 @@
         "generic_grammar": true,
         "reader_title": "Europe may be measuring delivery before it can measure the retention in research talent outcome it actually wants.",
         "reader_summary": "The risk appears only when primary evidence distinguishes the stated success condition from the activity being funded and separately documents a missing or still-proposed outcome measure.",
-        "first_seen_at": "2026-09-16T17:59:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "first_seen_at": "2026-09-16T18:10:08Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "94b874a4cc7c6488",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "l45:success_metric_blind_spot:generic-widening-participation-funding-programme",
@@ -105280,15 +105278,15 @@
         "generic_grammar": true,
         "reader_title": "Europe may be measuring delivery before it can measure the widening participation in research funding/programmes outcome it actually wants.",
         "reader_summary": "The risk appears only when primary evidence distinguishes the stated success condition from the activity being funded and separately documents a missing or still-proposed outcome measure.",
-        "first_seen_at": "2026-09-16T17:59:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "first_seen_at": "2026-09-16T18:10:08Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "833e92556b1dff01",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "l45:success_metric_blind_spot:generic-resilience-chips",
@@ -105456,15 +105454,15 @@
         "generic_grammar": true,
         "reader_title": "Europe may be measuring delivery before it can measure the resilience in semiconductors outcome it actually wants.",
         "reader_summary": "The risk appears only when primary evidence distinguishes the stated success condition from the activity being funded and separately documents a missing or still-proposed outcome measure.",
-        "first_seen_at": "2026-09-16T17:59:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "first_seen_at": "2026-09-16T18:10:08Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "f8d839a0ac8a414c",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "l45:goal_measurement_gap:competitiveness",
@@ -105618,8 +105616,8 @@
         "touched_this_scan": false,
         "reader_eligible": false,
         "historical_records": 22,
-        "first_seen_at": "2026-09-16T17:59:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "first_seen_at": "2026-09-16T18:10:08Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "64094c3063900365",
         "new_this_scan": false,
         "updated_this_scan": false,
@@ -105628,7 +105626,7 @@
         "reader_title": "Europe keeps pursuing competitiveness without a settled way to measure whether it is succeeding.",
         "reader_summary": "The pattern is repeated invocation of the goal alongside sparse, fragmented or contested measurement.",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "l45:goal_measurement_gap:openness",
@@ -105782,8 +105780,8 @@
         "touched_this_scan": false,
         "reader_eligible": false,
         "historical_records": 25,
-        "first_seen_at": "2026-09-16T17:59:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "first_seen_at": "2026-09-16T18:10:08Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "5a7e7230ce0a1a0d",
         "new_this_scan": false,
         "updated_this_scan": false,
@@ -105792,7 +105790,7 @@
         "reader_title": "Europe keeps pursuing openness without a settled way to measure whether it is succeeding.",
         "reader_summary": "The pattern is repeated invocation of the goal alongside sparse, fragmented or contested measurement.",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "l45:conflicting_criteria_no_arbitration:funding-programme-openness-vs-security",
@@ -105999,15 +105997,15 @@
         "generic_grammar": true,
         "reader_title": "Two legitimate pulls on research funding/programmes may collide because their arbitration rule is missing.",
         "reader_summary": "The risk is not the existence of two goals; it is that both act on the same decision object while separate evidence shows missing reconciliation and uneven local implementation.",
-        "first_seen_at": "2026-09-16T17:59:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "first_seen_at": "2026-09-16T18:10:08Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "b7feccec7737a0c5",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "l45:comparative_advantage_bottleneck:generic-health-data",
@@ -106167,15 +106165,15 @@
         "generic_grammar": true,
         "reader_title": "Europe may have an underused advantage in health data if a tractable bottleneck is the real constraint.",
         "reader_summary": "This opportunity is retained only when separate evidence shows a current weakness, an asset Europe already possesses, a fixable bottleneck around that asset, and measurable payoff evidence.",
-        "first_seen_at": "2026-09-16T17:59:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "first_seen_at": "2026-09-16T18:10:08Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "6e3777d4f773b395",
         "new_this_scan": false,
         "updated_this_scan": false,
         "lifecycle": "seeded",
         "missed_detection_scans": 0,
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       },
       {
         "id": "l45:goal_measurement_gap:research-security",
@@ -106329,8 +106327,8 @@
         "touched_this_scan": false,
         "reader_eligible": false,
         "historical_records": 7,
-        "first_seen_at": "2026-09-16T17:59:05Z",
-        "last_updated_at": "2026-09-16T17:59:05Z",
+        "first_seen_at": "2026-09-16T18:10:08Z",
+        "last_updated_at": "2026-09-16T18:10:08Z",
         "fingerprint": "f486ca5c29cd468a",
         "new_this_scan": false,
         "updated_this_scan": false,
@@ -106339,13 +106337,13 @@
         "reader_title": "Europe keeps pursuing research security without a settled way to measure whether it is succeeding.",
         "reader_summary": "The pattern is repeated invocation of the goal alongside sparse, fragmented or contested measurement.",
         "retrace_status": "unchanged",
-        "retrace_at": "2026-09-16T17:59:05Z"
+        "retrace_at": "2026-09-16T18:10:08Z"
       }
     ]
   },
   "downstream_archive": {
     "profile_version": "v1.0-current-downstream-rules",
-    "updated_at": "2026-09-16T17:59:05Z",
+    "updated_at": "2026-09-16T18:10:08Z",
     "objects": [
       {
         "kind": "high_order",
@@ -108960,17 +108958,17 @@
   },
   "downstream_retrace": {
     "tool_version": "v1.0-current-downstream-rules",
-    "completed_at": "2026-09-16T17:59:05Z",
+    "completed_at": "2026-09-16T18:10:08Z",
     "source_revalidation_report": "",
     "diagnostics": {
       "derived_objects_checked": 48,
-      "unchanged": 48,
-      "rebuilt": 0,
+      "unchanged": 47,
+      "rebuilt": 1,
       "materially_rewritten": 0,
       "newly_inferred": 0,
       "retired": 0,
-      "stale_evidence_references_before": 0,
-      "stale_evidence_references_removed": 0,
+      "stale_evidence_references_before": 1,
+      "stale_evidence_references_removed": 1,
       "orphan_references_remaining": 0,
       "active_evidence_reference_occurrences_checked": 502,
       "shock_support_chains_changed_after_a_removal": 0,
@@ -109009,7 +109007,7 @@
     },
     "review_is_active": true,
     "missing_state_is": "provisional_active",
-    "rebuilt_at": "2026-09-16T17:59:05Z",
+    "rebuilt_at": "2026-09-16T18:10:08Z",
     "deep_scan_v2": {
       "total_records": 693,
       "v2_verified": 637,
@@ -109017,8 +109015,8 @@
     },
     "historical_deep_scan_v2": {
       "total_records": 723,
-      "v2_verified": 565,
-      "v2_pending": 158,
+      "v2_verified": 574,
+      "v2_pending": 149,
       "active_a_context": 471
     }
   },
@@ -133101,18 +133099,7 @@
       "source_merit_score": 86,
       "source_merit_label": "Historical top tier · Main A/B gate",
       "strand": "A",
-      "a_route": "eu-ri-system-relevance",
       "b_route": "",
-      "eu_evidence": [
-        "eu research",
-        "EU",
-        "europe",
-        "european"
-      ],
-      "ri_evidence": [
-        "research policy"
-      ],
-      "geo_evidence": [],
       "method_evidence": [],
       "topics": [
         "funding-governance",
@@ -133123,13 +133110,36 @@
         "Strategic foresight, economic security and long-term choices"
       ],
       "reader_point": "Redirecting",
-      "why_it_matters": "This bears on Europe's research and innovation position. It is useful history for judging which earlier pressures still matter now.",
+      "why_it_matters": "It challenged the Commission's claim of EU research excellence, a premise behind the \"European paradox\".",
       "matrix_dimension": "",
       "matrix_outcome": "",
       "matrix_basis": "",
       "discovery": "Crossref · European technological sovereignty research policy",
+      "reader_title": "EU technological research is less efficient than the world average",
+      "reader_what": "Citation-percentile analysis finds EU research on fast-evolving technologies less efficient than the world and the US.",
+      "reader_why": "It challenged the Commission's claim of EU research excellence, a premise behind the \"European paradox\".",
+      "reader_more": "The authors use the ep index, the ratio of top-1% to top-10% cited papers, as a measure of research efficiency. EU output on fast-evolving technological topics scored below the world average. The USA led the EU in both fast- and slow-evolving technologies. The authors argue EU policy rested on a wrong diagnosis of excellence.",
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-16T18:09:14Z",
+      "deep_analysis": {
+        "work_kind": "bibliometric empirical study",
+        "research_question": "How efficient is EU technological research compared with other countries?",
+        "main_finding": "EU research on fast-evolving technologies is less efficient than the world average and well behind the USA.",
+        "method_or_basis": "Percentile-based citation analysis (ep index) of country papers in technological topics.",
+        "qualification": "Citation-based efficiency is a proxy for breakthrough potential, not a direct measure of innovation.",
+        "radar_relevance": "Historical evidence on EU research performance and the European paradox debate.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "what": "Citation-percentile analysis finds EU research on fast-evolving technologies less efficient than the world and the US.",
+      "core_message": "EU research on fast-evolving technologies is less efficient than the world average and well behind the USA.",
+      "summary": "The authors use the ep index, the ratio of top-1% to top-10% cited papers, as a measure of research efficiency. EU output on fast-evolving technological topics scored below the world average. The USA led the EU in both fast- and slow-evolving technologies. The authors argue EU policy rested on a wrong diagnosis of excellence.",
+      "relevance_note": "Historical evidence on EU research performance and the European paradox debate.",
+      "deep_scan_authoritative": true,
+      "semantic_source": "deep_scan_v2",
       "historical_deep_scan_key": "historical:id:efee7b100f8750bc",
-      "historical_admission_status": "provisional"
+      "historical_admission_status": "keep"
     },
     {
       "id": "b90245216ee7b643",
@@ -133237,23 +133247,13 @@
       "url": "https://doi.org/10.1186/s12961-018-0333-x",
       "landing_page_url": "",
       "authors": "Ellen Kuhlmann; Ronald Batenburg; Matthias Wismar; Gilles Dussault; Claudia B. Maier; Irene A. Glinos; Natasha Azzopardi‐Muscat; Christine Bond; Viola Burau; Tiago Correia; Peter Groenewegen; Johan Hansen",
-      "source": "Research Policy",
+      "source": "Health Research Policy and Systems",
       "source_kind": "top_journal",
       "venue": "Health Research Policy and Systems",
       "publisher": "BioMed Central",
-      "source_merit_score": 90,
       "source_merit_label": "Historical top tier · Main A/B gate",
       "strand": "A",
-      "a_route": "eu-ri-system-relevance",
       "b_route": "",
-      "eu_evidence": [
-        "EU"
-      ],
-      "ri_evidence": [
-        "research funding",
-        "knowledge transfer"
-      ],
-      "geo_evidence": [],
       "method_evidence": [],
       "topics": [
         "talent",
@@ -133270,13 +133270,40 @@
         "Strategic foresight, economic security and long-term choices"
       ],
       "reader_point": "The importance of a sustainable health workforce is increasingly recognised. However, the building of a future health workforce that is responsive to diverse population needs and demographic and economic change remains insufficiently understood.",
-      "why_it_matters": "This bears on Europe's research and innovation position. It is useful history for judging which earlier pressures still matter now.",
       "matrix_dimension": "",
       "matrix_outcome": "",
       "matrix_basis": "",
       "discovery": "OpenAlex · horizon scanning methodology evaluation research innovation",
+      "metadata_corrected": true,
+      "metadata_corrected_fields": [
+        "source"
+      ],
+      "metadata_correction_reason": "Crossref and publisher PDF show the journal is Health Research Policy and Systems, not Research Policy.",
+      "metadata_correction_source": "deep_scan_v2",
+      "reader_title": "A call for a European research agenda on the future health workforce",
+      "reader_what": "Proposes a Europe-focused research agenda on health workforce policy, linked to the European Public Health Association.",
+      "reader_more": "The authors argue existing data collection cannot close key knowledge gaps on the health workforce. They identify six objectives for health workforce policy in Europe. They call for health workforce research to be built as its own field. This requires dedicated research funding, education programmes and comparative methods.",
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-16T18:09:14Z",
+      "deep_analysis": {
+        "work_kind": "research agenda / commentary",
+        "research_question": "What research is needed to build a future health workforce in Europe?",
+        "main_finding": "Europe needs a comprehensive health workforce research agenda with dedicated funding and comparative methods.",
+        "method_or_basis": "Expert synthesis linked to EUPHA Health Workforce Research section.",
+        "qualification": "Agenda-setting piece; no new empirical data.",
+        "radar_relevance": "European research agenda-setting and funding needs in a policy field.",
+        "confidence": "medium",
+        "why_supported": false
+      },
+      "what": "Proposes a Europe-focused research agenda on health workforce policy, linked to the European Public Health Association.",
+      "core_message": "Europe needs a comprehensive health workforce research agenda with dedicated funding and comparative methods.",
+      "summary": "The authors argue existing data collection cannot close key knowledge gaps on the health workforce. They identify six objectives for health workforce policy in Europe. They call for health workforce research to be built as its own field. This requires dedicated research funding, education programmes and comparative methods.",
+      "relevance_note": "European research agenda-setting and funding needs in a policy field.",
+      "deep_scan_authoritative": true,
+      "semantic_source": "deep_scan_v2",
       "historical_deep_scan_key": "historical:id:1a40f4cc816a5ce6",
-      "historical_admission_status": "provisional"
+      "historical_admission_status": "keep"
     },
     {
       "id": "7e40471591772e5a",
@@ -133293,19 +133320,7 @@
       "source_merit_score": 90,
       "source_merit_label": "Historical top tier · Main A/B gate",
       "strand": "A",
-      "a_route": "research-evidence",
       "b_route": "",
-      "eu_evidence": [
-        "EU"
-      ],
-      "ri_evidence": [
-        "r&d",
-        "innovation performance",
-        "technology development",
-        "technology transfer",
-        "research organization"
-      ],
-      "geo_evidence": [],
       "method_evidence": [],
       "topics": [
         "research-infrastructure",
@@ -133322,51 +133337,36 @@
         "Standards, regulation and technology governance"
       ],
       "reader_point": "Impact evaluations of collaborative research projects usually focus on private benefits of participants, e.g.",
-      "why_it_matters": "This bears on Europe's research and innovation position. It is useful history for judging which earlier pressures still matter now.",
+      "why_it_matters": "It informs how EU framework programme consortia might be composed for innovation outcomes.",
       "matrix_dimension": "",
       "matrix_outcome": "",
       "matrix_basis": "",
       "discovery": "Crossref · EU foresight research innovation strategic autonomy future technologies resilience",
+      "reader_title": "Diverse partnerships in EU-funded research projects do not boost innovation potential",
+      "reader_what": "Homogeneous partnerships in EC-funded projects show higher innovation potential than mixed SME–large company partnerships.",
+      "reader_why": "It informs how EU framework programme consortia might be composed for innovation outcomes.",
+      "reader_more": "The study looks at key organisations delivering innovations in EC-funded collaborative projects. Partnerships between similar organisations, such as two SMEs, had higher innovation potential. The role of universities was unclear. Project funding and duration did not affect innovation potential.",
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-16T18:09:14Z",
+      "deep_analysis": {
+        "work_kind": "empirical econometric study",
+        "research_question": "How does organisational diversity affect innovation potential of EU-funded research projects?",
+        "main_finding": "Homogeneous partnerships have higher innovation potential; more key organisations lower it.",
+        "method_or_basis": "Analysis of innovations and participants in EC-funded collaborative research projects.",
+        "qualification": "Innovation potential is an assessed indicator, not market outcome.",
+        "radar_relevance": "Direct evidence on EU framework programme project performance.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "what": "Homogeneous partnerships in EC-funded projects show higher innovation potential than mixed SME–large company partnerships.",
+      "core_message": "Homogeneous partnerships have higher innovation potential; more key organisations lower it.",
+      "summary": "The study looks at key organisations delivering innovations in EC-funded collaborative projects. Partnerships between similar organisations, such as two SMEs, had higher innovation potential. The role of universities was unclear. Project funding and duration did not affect innovation potential.",
+      "relevance_note": "Direct evidence on EU framework programme project performance.",
+      "deep_scan_authoritative": true,
+      "semantic_source": "deep_scan_v2",
       "historical_deep_scan_key": "historical:id:7e40471591772e5a",
-      "historical_admission_status": "provisional"
-    },
-    {
-      "id": "c65677ab612378f0",
-      "title": "International university-university technology transfer: Strategic management framework",
-      "date": "2018-05-18",
-      "year": 2018,
-      "url": "https://doi.org/10.1016/j.techfore.2018.05.002",
-      "authors": "Kevin De Moortel; Thomas Crispeels",
-      "source": "Technological Forecasting and Social Change",
-      "source_kind": "top_journal",
-      "venue": "Technological Forecasting and Social Change",
-      "publisher": "Elsevier BV",
-      "source_merit_score": 97,
-      "source_merit_label": "Historical top tier",
-      "topics": [
-        "technology-transfer",
-        "global-rivalry"
-      ],
-      "topic_labels": [
-        "Technology transfer, IP and export controls",
-        "EU-US-China R&I relations and technology competition"
-      ],
-      "reader_point": "International technology transfer between universities is an emerging phenomenon and contributes to the socio-economic development of regions and countries.",
-      "why_it_matters": "This bears on Europe's research and innovation position. It is useful history for judging which earlier pressures still matter now.",
-      "matrix_dimension": "",
-      "matrix_outcome": "",
-      "matrix_basis": "",
-      "discovery": "OpenAlex · EU US China science technology relations strategic competition research",
-      "strand": "A",
-      "a_route": "triangulated-strategic-context",
-      "eu_evidence": [
-        "europe"
-      ],
-      "ri_evidence": [
-        "technology transfer"
-      ],
-      "historical_deep_scan_key": "historical:id:c65677ab612378f0",
-      "historical_admission_status": "provisional"
+      "historical_admission_status": "keep"
     },
     {
       "id": "06ceb84711973ee4",
@@ -133375,7 +133375,7 @@
       "year": 2018,
       "url": "https://www.rathenau.nl/sites/default/files/2018-05/TWIN%202016-2022_UK.pdf",
       "landing_page_url": "https://www.rathenau.nl/en/werking-van-het-wetenschapssysteem/total-investment-research-and-innovation-twin-2016-2022",
-      "authors": "",
+      "authors": "Alexandra Vennekens; Jos de Jonge",
       "source": "Rathenau Instituut",
       "source_kind": "elite_institute",
       "venue": "Rathenau Instituut",
@@ -133383,22 +133383,7 @@
       "source_merit_score": 79,
       "source_merit_label": "Historical top tier · Main A/B gate",
       "strand": "A",
-      "a_route": "triangulated-strategic-context",
       "b_route": "",
-      "eu_evidence": [
-        "europe",
-        "european",
-        "dutch",
-        "EU"
-      ],
-      "ri_evidence": [
-        "research and innovation",
-        "research funding",
-        "r&d",
-        "research capacity",
-        "university research"
-      ],
-      "geo_evidence": [],
       "method_evidence": [],
       "topics": [
         "research-infrastructure",
@@ -133411,13 +133396,97 @@
         "R&I funding, governance and European capacity"
       ],
       "reader_point": "WWW.RATHENAU.NL • 2018 Total Investment in Research and Innovation (TWIN) 2016- 2022 Alexandra Vennekens and Jos de Jonge This report by the Rathenau Institute presents statistics on the national government’s direct financial and indirect tax-related support for Research & Development (R&D) and innovation in the 2016-2022 period…",
-      "why_it_matters": "This bears on the rules, funding and coordination that shape European research and innovation. It is useful history for judging whether the same weakness or exposure is still present now.",
       "matrix_dimension": "rules",
       "matrix_outcome": "D",
       "matrix_basis": "Source evidence: Funding for institutes of applied research (‘TO2 institutes’) will decline. c) Average revenue from the EU’s Horizon 2020 Framework Programme comes to almost € 650 million per annum until 2016 and may increase further.",
       "discovery": "direct source · Rathenau Instituut",
+      "metadata_corrected": true,
+      "metadata_corrected_fields": [
+        "authors"
+      ],
+      "metadata_correction_reason": "The report PDF names Alexandra Vennekens and Jos de Jonge as authors.",
+      "metadata_correction_source": "deep_scan_v2",
+      "reader_title": "Dutch government investment in research and innovation, 2016–2022",
+      "reader_what": "Surveys Dutch government direct and tax-based support for R&D and innovation, plus regional and European funding.",
+      "reader_more": "TWIN tracks budgeted R&D and innovation appropriations and forecasts across Dutch ministries. It covers both direct funding and tax incentives. It also discusses regional and European sources of R&D funding. Figures are budget-based forecasts, not realised spending.",
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-16T18:09:14Z",
+      "deep_analysis": {
+        "work_kind": "official statistical report",
+        "research_question": "How much does the Dutch government invest in R&D and innovation?",
+        "main_finding": "Presents trends in Dutch government R&D and innovation support for 2016–2022.",
+        "method_or_basis": "Ministry budget data collection and forecasts.",
+        "qualification": "Budgets and forecasts may differ from actual spending.",
+        "radar_relevance": "National European R&I investment context.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "what": "Surveys Dutch government direct and tax-based support for R&D and innovation, plus regional and European funding.",
+      "core_message": "Presents trends in Dutch government R&D and innovation support for 2016–2022.",
+      "summary": "TWIN tracks budgeted R&D and innovation appropriations and forecasts across Dutch ministries. It covers both direct funding and tax incentives. It also discusses regional and European sources of R&D funding. Figures are budget-based forecasts, not realised spending.",
+      "relevance_note": "National European R&I investment context.",
+      "deep_scan_authoritative": true,
+      "semantic_source": "deep_scan_v2",
       "historical_deep_scan_key": "historical:id:06ceb84711973ee4",
-      "historical_admission_status": "provisional"
+      "historical_admission_status": "keep"
+    },
+    {
+      "id": "1427230a92077d48",
+      "title": "Performance-based research funding in EU Member States—a comparative assessment",
+      "date": "2018-06-13",
+      "year": 2018,
+      "url": "https://doi.org/10.1093/scipol/scy041",
+      "authors": "Thomas Zacharewicz; Benedetto Lepori; Emanuela Reale; Koen Jonkers",
+      "source": "Science and Public Policy",
+      "source_kind": "top_journal",
+      "venue": "Science and Public Policy",
+      "publisher": "Oxford University Press",
+      "source_merit_score": 97,
+      "source_merit_label": "Historical top tier",
+      "topics": [
+        "funding-governance"
+      ],
+      "topic_labels": [
+        "R&I funding, governance and European capacity"
+      ],
+      "reader_point": "Performance-based research funding (PBRF), the allocation of institutional funding on the basis of ex post assessments of university research performance, has been implemented in a large number of EU Member States.",
+      "why_it_matters": "It supported mutual learning among Member States on designing research funding systems.",
+      "matrix_dimension": "rules",
+      "matrix_outcome": "A",
+      "matrix_basis": "Source evidence: Performance-based research funding in EU Member States—a comparative assessment.",
+      "discovery": "OpenAlex · Implementing interdisciplinarity in research-intensive universities",
+      "metadata_corrected": true,
+      "metadata_corrected_fields": [
+        "date"
+      ],
+      "metadata_correction_reason": "OUP page shows online publication 13 June 2018 (issue February 2019); scanner date 2018-04-23 is unsupported.",
+      "metadata_correction_source": "deep_scan_v2",
+      "reader_title": "How EU countries tie university research funding to performance",
+      "reader_what": "EU Member States vary widely in performance-based research funding, from none to bibliometric formulas and peer review.",
+      "reader_why": "It supported mutual learning among Member States on designing research funding systems.",
+      "reader_more": "Performance-based research funding allocates institutional money using ex post assessment of research. The article classifies EU28 countries as having none, limited, bibliometric or peer-review systems. Each approach has costs and drawbacks. The authors say impact evidence is lacking, so no single best practice can be recommended.",
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-16T18:09:14Z",
+      "deep_analysis": {
+        "work_kind": "comparative policy analysis",
+        "research_question": "How is performance-based research funding implemented across EU Member States?",
+        "main_finding": "Large variation in systems; no clear best model given missing impact evidence.",
+        "method_or_basis": "JRC RIO country reports, expert validation and PREF funding data.",
+        "qualification": "Classification as of 2014; systems change frequently.",
+        "radar_relevance": "Core European research funding policy evidence.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "what": "EU Member States vary widely in performance-based research funding, from none to bibliometric formulas and peer review.",
+      "core_message": "Large variation in systems; no clear best model given missing impact evidence.",
+      "summary": "Performance-based research funding allocates institutional money using ex post assessment of research. The article classifies EU28 countries as having none, limited, bibliometric or peer-review systems. Each approach has costs and drawbacks. The authors say impact evidence is lacking, so no single best practice can be recommended.",
+      "relevance_note": "Core European research funding policy evidence.",
+      "deep_scan_authoritative": true,
+      "semantic_source": "deep_scan_v2",
+      "historical_deep_scan_key": "historical:id:1427230a92077d48",
+      "historical_admission_status": "keep"
     },
     {
       "id": "7fdf2f228bc94ed2",
@@ -133434,16 +133503,7 @@
       "source_merit_score": 90,
       "source_merit_label": "Historical top tier · Main A/B gate",
       "strand": "A",
-      "a_route": "eu-ri-system-relevance",
       "b_route": "",
-      "eu_evidence": [
-        "european union"
-      ],
-      "ri_evidence": [
-        "innovation policy",
-        "research and development"
-      ],
-      "geo_evidence": [],
       "method_evidence": [],
       "topics": [
         "research-infrastructure"
@@ -133452,13 +133512,36 @@
         "Research infrastructure, data, space and quantum"
       ],
       "reader_point": "This paper examines the use of European Union Structural Funds to support the development of innovation policy within Wales during the period 2000–06.",
-      "why_it_matters": "This bears on Europe's research and innovation position. It is useful history for judging which earlier pressures still matter now.",
+      "why_it_matters": "It warns that supply-side, property-led innovation spending in peripheral regions may not deliver growth.",
       "matrix_dimension": "",
       "matrix_outcome": "",
       "matrix_basis": "",
       "discovery": "OpenAlex · EU innovation capacity dependency critical technologies",
+      "reader_title": "Why the Techniums innovation policy in Wales failed",
+      "reader_what": "The EU-funded Technium programme failed because it relied on supply-side support for innovation in a weaker region.",
+      "reader_why": "It warns that supply-side, property-led innovation spending in peripheral regions may not deliver growth.",
+      "reader_more": "Wales used EU structural funds in 2000–2006 to build Technium innovation centres. The study uses Welsh Government data and stakeholder interviews. It finds the supply-side approach did not generate the expected innovation. It questions such policies for peripheral regions.",
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-16T18:09:14Z",
+      "deep_analysis": {
+        "work_kind": "policy case study",
+        "research_question": "Why did the Technium innovation programme fail?",
+        "main_finding": "A supply-side approach using EU funds failed to deliver innovation-led growth.",
+        "method_or_basis": "Government data and stakeholder interviews.",
+        "qualification": "Single-region case.",
+        "radar_relevance": "European regional innovation policy and structural funds.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "what": "The EU-funded Technium programme failed because it relied on supply-side support for innovation in a weaker region.",
+      "core_message": "A supply-side approach using EU funds failed to deliver innovation-led growth.",
+      "summary": "Wales used EU structural funds in 2000–2006 to build Technium innovation centres. The study uses Welsh Government data and stakeholder interviews. It finds the supply-side approach did not generate the expected innovation. It questions such policies for peripheral regions.",
+      "relevance_note": "European regional innovation policy and structural funds.",
+      "deep_scan_authoritative": true,
+      "semantic_source": "deep_scan_v2",
       "historical_deep_scan_key": "historical:id:7fdf2f228bc94ed2",
-      "historical_admission_status": "provisional"
+      "historical_admission_status": "keep"
     },
     {
       "id": "068ceabb6181be45",

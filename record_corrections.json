@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-09-16T17:57:31Z",
+  "updated_at": "2026-09-16T18:09:14Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -8158,6 +8158,82 @@
       ],
       "updated_at": "2026-09-16T17:57:30Z",
       "deep_scan_package_id": "worker-a-20260916T173433Z-f8e5c76d61ae"
+    },
+    "historical:id:c4a4150b9436bc16": {
+      "fields": {
+        "source": "European Journal of Futures Research"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Crossref and the open-access PDF show the journal is European Journal of Futures Research, not Futures.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://link.springer.com/content/pdf/10.1186/s40309-018-0142-z.pdf"
+      ],
+      "updated_at": "2026-09-16T18:09:14Z",
+      "deep_scan_package_id": "worker-b-20260916T173450Z-cdb99e64487d"
+    },
+    "historical:id:1a40f4cc816a5ce6": {
+      "fields": {
+        "source": "Health Research Policy and Systems"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Crossref and publisher PDF show the journal is Health Research Policy and Systems, not Research Policy.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://link.springer.com/content/pdf/10.1186/s12961-018-0333-x.pdf"
+      ],
+      "updated_at": "2026-09-16T18:09:14Z",
+      "deep_scan_package_id": "worker-b-20260916T173450Z-cdb99e64487d"
+    },
+    "historical:id:cb338717157072fe": {
+      "fields": {
+        "source": "Foresight and STI Governance",
+        "authors": "Timofei Nestik"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Crossref lists the journal as Foresight and STI Governance and the author as Timofei Nestik.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://cyberleninka.ru/article/n/the-psychological-aspects-of-corporate-foresight"
+      ],
+      "updated_at": "2026-09-16T18:09:14Z",
+      "deep_scan_package_id": "worker-b-20260916T173450Z-cdb99e64487d"
+    },
+    "historical:id:06ceb84711973ee4": {
+      "fields": {
+        "authors": "Alexandra Vennekens; Jos de Jonge"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The report PDF names Alexandra Vennekens and Jos de Jonge as authors.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.rathenau.nl/sites/default/files/2018-05/TWIN%202016-2022_UK.pdf"
+      ],
+      "updated_at": "2026-09-16T18:09:14Z",
+      "deep_scan_package_id": "worker-b-20260916T173450Z-cdb99e64487d"
+    },
+    "historical:id:1427230a92077d48": {
+      "fields": {
+        "date": "2018-06-13"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "OUP page shows online publication 13 June 2018 (issue February 2019); scanner date 2018-04-23 is unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://academic.oup.com/spp/article/46/1/105/5037253"
+      ],
+      "updated_at": "2026-09-16T18:09:14Z",
+      "deep_scan_package_id": "worker-b-20260916T173450Z-cdb99e64487d"
     }
   }
 }

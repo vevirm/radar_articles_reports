@@ -6,17 +6,17 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1203** (Main **638** + Historical **565**)
-- Automatic queue still needing V2 verification: **159** (Main **1** + Historical **158**)
-- Currently assigned to workers: **96** (Main **1** + Historical **95**)
-- Bounded access-recovery retries still eligible: **37**
+- Authoritative V2 verified: **1212** (Main **638** + Historical **574**)
+- Automatic queue still needing V2 verification: **150** (Main **1** + Historical **149**)
+- Currently assigned to workers: **82** (Main **1** + Historical **81**)
+- Bounded access-recovery retries still eligible: **42**
 - Hands-on verification needed: **55**
-- Automatic queue pending and not yet assigned: **63**
+- Automatic queue pending and not yet assigned: **68**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260916T175943Z-e1a6d663f107`
+- Current package: `worker-a-20260916T181030Z-e1a6d663f107`
 - Assigned unresolved records: **36**
   1. `link:https://doi.org/10.1080/07036337.2026.2714069` — Between digital sovereignty and trusted connectivity: tensions in EU external digital governance — recovery attempt 3/3
   2. `historical:id:4e7f1f8a9e28de83` — The influence of proximity dimensions on international research collaboration: an analysis of European water projects
@@ -29,17 +29,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260916T175955Z-cdb99e64487d`
-- Assigned unresolved records: **60**
-  1. `historical:id:efee7b100f8750bc` — Technological research in the EU is less efficient than the world average. EU research policy risks Europeans’ future
-  2. `historical:id:b90245216ee7b643` — China’s emerging centrality in the contemporary international scientific collaboration network
-  3. `historical:id:c4a4150b9436bc16` — Backcasting in futures studies: a synthesized scholarly and planning approach to strategic smart sustainable city development
-  4. `historical:id:6cb00ecf3ea743e5` — Organizational changes towards a European academic field. A case study of frictions in the narratives of Europeanization at a German university from an institutional perspective
-  5. `historical:id:1a40f4cc816a5ce6` — A call for action to establish a research agenda for building a future health workforce in Europe
-  6. `historical:id:cb338717157072fe` — The Psychological Aspects of Corporate Foresight
-  7. `historical:id:7e40471591772e5a` — Organizational diversity and innovation potential of EU-funded research projects
-  8. `historical:id:c65677ab612378f0` — International university-university technology transfer: Strategic management framework
-  - … plus 52 more in the package manifest
+- Current package: `worker-b-20260916T181041Z-6fea1e0d0a0b`
+- Assigned unresolved records: **46**
+  1. `historical:id:efa8a9fe16c1dd26` — Scientific potential of European fully open access journals
+  2. `historical:id:710d045096ea6f29` — Foresight by online communities – The case of renewable energies
+  3. `historical:id:08cbe07f3dbd4a87` — Recent Personnel Reforms of Public Universities in China and in Italy: A Comparison
+  4. `historical:id:248f49edb3becb08` — The Evolving Role of the EU in Space-Related Security and Defence Research
+  5. `historical:id:68a98a6f7f431a4c` — The European Arms Industry, the European Commission and the Preparatory Action for Security Research: Business as Usual?
+  6. `historical:id:b4ea7b84e8c47191` — Tendencies and prospects of Russian-French scientific collaboration
+  7. `historical:id:67726cf80fe23fc9` — Sweden AI Strategy Report
+  8. `historical:id:0987b35b178e5609` — Policy on Open Science
+  - … plus 38 more in the package manifest
 
 ## Hands-on verification needed
 
