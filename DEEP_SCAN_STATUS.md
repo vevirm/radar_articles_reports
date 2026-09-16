@@ -8,16 +8,16 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 
 - Authoritative V2 verified: **881** (Main **617** + Historical **264**)
 - Automatic queue still needing V2 verification: **480** (Main **29** + Historical **451**)
-- Currently assigned to workers: **92** (Main **16** + Historical **76**)
-- Bounded access-recovery retries still eligible: **30**
+- Currently assigned to workers: **120** (Main **19** + Historical **101**)
+- Bounded access-recovery retries still eligible: **27**
 - Hands-on verification needed: **48**
-- Automatic queue pending and not yet assigned: **388**
+- Automatic queue pending and not yet assigned: **360**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260916T081241Z-f723a6a8536f`
-- Assigned unresolved records: **36**
+- Current package: `worker-a-20260916T081404Z-7f2127b37eb2`
+- Assigned unresolved records: **60**
   1. `historical:id:e2b7e63a5a4e8e50` — Policyseminar 8. juni: Monitoring and Analyzing Research Careers for Informed Policy Making in the ERA
   2. `historical:id:d7546fcf2d8d3250` — ERA Portal Austria – Seconded National Expert - Open Science Policy (RTD-A-4)
   3. `link:https://doi.org/10.1080/09537325.2013.877129` — Mapping of scientific patenting: toward the development of ‘J-GLOBAL foresight’ — recovery attempt 3/3
@@ -26,11 +26,11 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:5a711e317ca43d84` — Digital Technologies: Inadequacy of the Higher Education and Innovation Ecosystem
   7. `historical:id:200edf8954e2b904` — Assessment of open science in grant applications
   8. `historical:id:0d02bbbd9d9dbbe1` — Identifying the implementation effect of technology transfer policy using system dynamics: a case study in Liaoning, China
-  - … plus 28 more in the package manifest
+  - … plus 52 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260916T081254Z-61730d7d3c77`
-- Assigned unresolved records: **56**
+- Current package: `worker-b-20260916T081423Z-bbd7a21c44ad`
+- Assigned unresolved records: **60**
   1. `link:https://doi.org/10.1007/s10308-026-00781-4` — Digital inclusion or digital illusion? AI, disability, and the politics of financial access in Indonesia
   2. `link:https://doi.org/10.1038/s41598-026-50592-1` — From blur to blueprint: a fuzzy delphi methodology for evaluating early-stage emerging technologies—the case of end-of-life automotive traction battery disassembly
   3. `link:https://news.google.com/rss/articles/CBMinwJBVV95cUxON0RvbDRibGNET2RISGY5ZFBWVWNrSjhEYzNUalhmOGVuem5OMUY0cU9qSG83blNtVEFlME54U3R0NzNxU1Y1S3ptTGhPVDJzTXRtVGpvdnF3emxNMlZ0Y3ZiMEZ1ZkpmZEZrUjRSRXJMY1FFa2Zqd3FqVW8zSjA4YUJ3UWZZa0FXYVBPbV9zX1cyYzBrZmNXQVpNM0JEbFROcU1iaTZfZlBjc2hXamRnb3JTMks3Z0ZfQmk2eUtBQnFQalJsXzlOMUROMnRJWGtrbjFfRlpNQ3Zma0xFNGdCZnM5MGRqREpZbEp2MTRsU0h5c1UzZXc0OW9PRHFPTHlLanZtRGZISWlFX3lJNTFOaU50UjBmRHJNRUZ6NFNPSQ?oc=5` — Open Access in the European Research Area: progress remains uneven as new report calls for more concerted action
@@ -39,7 +39,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `link:https://doi.org/10.1080/07036337.2026.2714069` — Between digital sovereignty and trusted connectivity: tensions in EU external digital governance
   7. `link:https://doi.org/10.1016/j.nanoen.2018.02.020` — Emerging nanogenerator technology in China: A review and forecast using integrating bibliometrics, patent analysis and technology roadmapping methods
   8. `link:https://news.google.com/rss/articles/CBMikAFBVV95cUxQeUFFejhpN0N1YVlvbWZrWGtGMjhsSTY1Z2c5SURkeUUyRklHdGw5V040WFNBQVN6Yy1wdTlxaUhjMlA5STBvcC15aU00U201MURFWnB4OXFFV1MyVVZ6VjRqNl9ER0xIQmtianJCbDd2enlhb3c2ZkhTR1hzVURXY0VncmtWMHB2dnBvUDNQMjA?oc=5` — EU countries to discuss AI rules as Trump calls safety warnings a ‘hoax’
-  - … plus 48 more in the package manifest
+  - … plus 52 more in the package manifest
 
 ## Hands-on verification needed
 
