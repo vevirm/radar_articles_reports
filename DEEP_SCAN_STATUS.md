@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **764** (Main **605** + Historical **159**)
-- Automatic queue still needing V2 verification: **595** (Main **41** + Historical **554**)
-- Currently assigned to workers: **120** (Main **13** + Historical **107**)
+- Authoritative V2 verified: **776** (Main **606** + Historical **170**)
+- Automatic queue still needing V2 verification: **583** (Main **40** + Historical **543**)
+- Currently assigned to workers: **108** (Main **12** + Historical **96**)
 - Bounded access-recovery retries still eligible: **17**
 - Hands-on verification needed: **48**
 - Automatic queue pending and not yet assigned: **475**
@@ -16,20 +16,20 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260916T065732Z-58dd85c32322`
-- Assigned unresolved records: **60**
-  1. `historical:id:1305a3174c34b1b9` — Operation regulation: Strengthening Latin America’s AI governance – European Council on Foreign Relations
-  2. `historical:id:dc297ea0893bebfc` — Europe must end its quantum technology research with China
-  3. `historical:id:1342a320214f9882` — ESF Annual Report 2023 - ESF
-  4. `historical:id:ef8019b3cabe30ac` — The geopolitics of technology standards: historical context for US, EU and Chinese approaches
-  5. `historical:id:9525508d34966bb2` — Game of Brains: Examining Researcher Brain Gain and Brain Drain and Research University Policy
-  6. `historical:id:2c6a970a0f7fe791` — Digital sovereignty - Rhetoric and reality
-  7. `historical:id:9039171272bbcba2` — Academic Symposium Highlights Path Forward for European Research Collaboration - ALLEA
-  8. `historical:id:7861df71d1d5614f` — Horizon Europe 'Health' - Implementation research for management of multiple long-term conditions in the context of non-communicable diseases (GACD)
-  - … plus 52 more in the package manifest
+- Current package: `worker-a-20260916T072604Z-0b34267b291d`
+- Assigned unresolved records: **48**
+  1. `historical:id:514d6ac2a62fe570` — From responsibility to risk: ethics in the Bermuda Triangle of EU research and innovation policy
+  2. `historical:id:4eaaf1dc179118e8` — Mission-oriented scenarios: a new method for urban foresight
+  3. `historical:id:417652754550e699` — Tectonic shifts in global science: US-China scientific competition and the Muslim-majority science systems in multipolar science
+  4. `historical:id:2b48865d90d5b99e` — Supporting Academic Women’s Careers: Male and Female Academics’ Perspectives at a Chinese Research University
+  5. `historical:id:68592e03bddf591d` — EU AI sovereignty: for whom, to what end, and to whose benefit?
+  6. `historical:id:be49d75778b309d8` — Governing Chinese technologies: TikTok, foreign interference, and technological sovereignty
+  7. `historical:id:17cf309467bd63b4` — EU Geoeconomic Power in the Clean Energy Transition
+  8. `historical:id:4dc700b14674adfc` — Towards a sustainable and responsible model for monitoring open science and research—analysis of the Finnish model for monitoring open science and research
+  - … plus 40 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260916T065755Z-743ca1212cbd`
+- Current package: `worker-b-20260916T072622Z-743ca1212cbd`
 - Assigned unresolved records: **60**
   1. `historical:id:54a0ed573cfd4e70` — Academic freedom is becoming part of Europe's competitive offer to global researchers as well as a condition for reliable knowledge production.
   2. `historical:id:343e7eac09fe6ffb` — 2025 Ideas Lab report – CEPS
