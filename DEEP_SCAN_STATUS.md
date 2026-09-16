@@ -8,16 +8,16 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 
 - Authoritative V2 verified: **819** (Main **608** + Historical **211**)
 - Automatic queue still needing V2 verification: **540** (Main **38** + Historical **502**)
-- Currently assigned to workers: **84** (Main **23** + Historical **61**)
-- Bounded access-recovery retries still eligible: **31**
+- Currently assigned to workers: **120** (Main **24** + Historical **96**)
+- Bounded access-recovery retries still eligible: **30**
 - Hands-on verification needed: **48**
-- Automatic queue pending and not yet assigned: **456**
+- Automatic queue pending and not yet assigned: **420**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260916T072903Z-0b34267b291d`
-- Assigned unresolved records: **48**
+- Current package: `worker-a-20260916T073231Z-392292edffe8`
+- Assigned unresolved records: **60**
   1. `historical:id:514d6ac2a62fe570` — From responsibility to risk: ethics in the Bermuda Triangle of EU research and innovation policy
   2. `historical:id:4eaaf1dc179118e8` — Mission-oriented scenarios: a new method for urban foresight
   3. `historical:id:417652754550e699` — Tectonic shifts in global science: US-China scientific competition and the Muslim-majority science systems in multipolar science
@@ -26,11 +26,11 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:be49d75778b309d8` — Governing Chinese technologies: TikTok, foreign interference, and technological sovereignty
   7. `historical:id:17cf309467bd63b4` — EU Geoeconomic Power in the Clean Energy Transition
   8. `historical:id:4dc700b14674adfc` — Towards a sustainable and responsible model for monitoring open science and research—analysis of the Finnish model for monitoring open science and research
-  - … plus 40 more in the package manifest
+  - … plus 52 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260916T072916Z-ed576edf88ae`
-- Assigned unresolved records: **36**
+- Current package: `worker-b-20260916T073253Z-2e1daf27f534`
+- Assigned unresolved records: **60**
   1. `link:https://www.nesta.org.uk/documents/230/measuring_innovation.pdf` — Measuring innovation policy briefing
   2. `link:https://publications.jrc.ec.europa.eu/repository/handle/JRC145507` — Tracking country innovation performance: The Innovation Output Indicator 2025
   3. `link:https://www.nesta.org.uk/report/chinas-absorptive-state-innovation-and-research-in-china/#paragraph-275` — China's Absorptive State: Innovation and research in China
@@ -39,7 +39,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `link:https://doi.org/10.1038/s41598-026-50592-1` — From blur to blueprint: a fuzzy delphi methodology for evaluating early-stage emerging technologies—the case of end-of-life automotive traction battery disassembly
   7. `link:https://news.google.com/rss/articles/CBMinwJBVV95cUxON0RvbDRibGNET2RISGY5ZFBWVWNrSjhEYzNUalhmOGVuem5OMUY0cU9qSG83blNtVEFlME54U3R0NzNxU1Y1S3ptTGhPVDJzTXRtVGpvdnF3emxNMlZ0Y3ZiMEZ1ZkpmZEZrUjRSRXJMY1FFa2Zqd3FqVW8zSjA4YUJ3UWZZa0FXYVBPbV9zX1cyYzBrZmNXQVpNM0JEbFROcU1iaTZfZlBjc2hXamRnb3JTMks3Z0ZfQmk2eUtBQnFQalJsXzlOMUROMnRJWGtrbjFfRlpNQ3Zma0xFNGdCZnM5MGRqREpZbEp2MTRsU0h5c1UzZXc0OW9PRHFPTHlLanZtRGZISWlFX3lJNTFOaU50UjBmRHJNRUZ6NFNPSQ?oc=5` — Open Access in the European Research Area: progress remains uneven as new report calls for more concerted action
   8. `link:https://news.google.com/rss/articles/CBMiwgFBVV95cUxQTWhvb3cyWDU3RGNHSlZJdGdLWlVOQWJ2S1M3bTV6SlZHUFpOX2FjckdPWDdiYVU3NElIX1JjSGdZYXRtTk9XM0hDRVZGaldPOU5LOTJ1OEZsUkFHUDNBU2E1a2VhajdRYm1QdnoxQ21vWEZvbE5ndG5TTW5DbXVkOF9kdkYyZUN2WGdSNGJ3cTZYSVdhYjdZcU95VThQT21xRXM1QUZEX1l3MWFOUlFIWjgxejdEN04xTGp4MUpraFRRZw?oc=5` — European chip startup Axelera wins AI factory supply deals and launches second chip
-  - … plus 28 more in the package manifest
+  - … plus 52 more in the package manifest
 
 ## Hands-on verification needed
 
