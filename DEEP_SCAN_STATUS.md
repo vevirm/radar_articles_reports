@@ -6,17 +6,17 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1101** (Main **634** + Historical **467**)
-- Automatic queue still needing V2 verification: **256** (Main **8** + Historical **248**)
-- Currently assigned to workers: **96** (Main **8** + Historical **88**)
-- Bounded access-recovery retries still eligible: **32**
-- Hands-on verification needed: **52**
-- Automatic queue pending and not yet assigned: **160**
+- Authoritative V2 verified: **1145** (Main **636** + Historical **509**)
+- Automatic queue still needing V2 verification: **209** (Main **3** + Historical **206**)
+- Currently assigned to workers: **72** (Main **3** + Historical **69**)
+- Bounded access-recovery retries still eligible: **42**
+- Hands-on verification needed: **55**
+- Automatic queue pending and not yet assigned: **137**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260916T113832Z-0bcaf3af01f3`
+- Current package: `worker-a-20260916T115900Z-0bcaf3af01f3`
 - Assigned unresolved records: **36**
   1. `historical:id:aaeb140e8d09dc4f` — The US-EU Rivalry for Data Protection: Energy Sector Implications
   2. `historical:id:7c395c11e8b8e25a` — International Mobility, Joint Working and European Research
@@ -29,17 +29,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260916T113843Z-7e67cb37e8b4`
-- Assigned unresolved records: **60**
-  1. `link:https://doi.org/10.1016/j.engfor.2026.09.002` — Can EU-27 achieve the decarbonization target in the energy sector? A scenario analysis based on extended STIRPAT model — recovery attempt 3/3
-  2. `historical:id:a4ff9ac2ff0bc41c` — A chance for leadership: German foreign policy after the killing of Qassem Soleimani – European Council on Foreign Relations
-  3. `historical:id:44ea421fb2df2461` — Rebirth of Industrial Policy and an Agenda for the Twenty-First Century
-  4. `historical:id:186db557485885c3` — €450 million for Europe’s long-term frontier research: 185 scientists win European Research Council’s Advanced Grants
-  5. `historical:id:d1e0952afc2673c0` — When Technology Becomes Geopolitics: The EU’s Response to Cyber Threats
-  6. `historical:id:f21f1a8fba0db149` — Tracking AI Investment | Center for Security and Emerging Technology
-  7. `historical:id:00ee758dd329360d` — The EIC Fund updates investment guidelines with new definitions and investment scenarios
-  8. `historical:id:c4090dac8fa36e5a` — Spain AI Strategy Report
-  - … plus 52 more in the package manifest
+- Current package: `worker-b-20260916T115913Z-c019f389541c`
+- Assigned unresolved records: **36**
+  1. `historical:id:efee7b100f8750bc` — Technological research in the EU is less efficient than the world average. EU research policy risks Europeans’ future
+  2. `historical:id:b90245216ee7b643` — China’s emerging centrality in the contemporary international scientific collaboration network
+  3. `historical:id:c4a4150b9436bc16` — Backcasting in futures studies: a synthesized scholarly and planning approach to strategic smart sustainable city development
+  4. `historical:id:6cb00ecf3ea743e5` — Organizational changes towards a European academic field. A case study of frictions in the narratives of Europeanization at a German university from an institutional perspective
+  5. `historical:id:1a40f4cc816a5ce6` — A call for action to establish a research agenda for building a future health workforce in Europe
+  6. `historical:id:cb338717157072fe` — The Psychological Aspects of Corporate Foresight
+  7. `historical:id:7e40471591772e5a` — Organizational diversity and innovation potential of EU-funded research projects
+  8. `historical:id:c65677ab612378f0` — International university-university technology transfer: Strategic management framework
+  - … plus 28 more in the package manifest
 
 ## Hands-on verification needed
 
@@ -97,3 +97,6 @@ These works no longer consume automatic Deep Scan slots. Their identity is belie
 - `link:https://doi.org/10.1177/19467567261450218` — **Change Progression Scenario Method: A Systematic Literature Review of Applications** — attempts: 3/3 — World Futures Review — 2026-05-07 — Identity verified but substantive evidence remained inaccessible after all six mandatory retrieval steps. — https://doi.org/10.1177/19467567261450218
 - `link:https://doi.org/10.1177/19467567261444949` — **Ecological Speculations-Narratives for Shifting Landscapes** — attempts: 3/3 — World Futures Review — 2026-04-19 — Identity verified but substantive evidence remained inaccessible after all six mandatory retrieval steps. — https://doi.org/10.1177/19467567261444949
 - `link:https://doi.org/10.1108/fs-03-2024-0052` — **Insights and influences: mapping the scientific contributors to global foresight policies** — attempts: 3/3 — foresight — 2024-12-18 — Identity verified but substantive evidence remained inaccessible after all six mandatory retrieval steps. — https://doi.org/10.1108/fs-03-2024-0052
+- `link:https://doi.org/10.1016/j.engfor.2026.09.002` — **Can EU-27 achieve the decarbonization target in the energy sector? A scenario analysis based on extended STIRPAT model** — attempts: 3/3 — Energy Foresight — 2026-09-01 — Open-access article identity confirmed, but publisher blocks retrieval and no other copy exists; cannot verify content or R&I relevance. — https://doi.org/10.1016/j.engfor.2026.09.002
+- `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxOR3p4SXpZMVhsZk0yN3V0TDZXT3pnV1VaWkNrc2hOYXpaT3RDaGZzVUhZclRKMHVDbHNIMG5vQjFmY21GQk5lcDFhWlcxaHZZekVqQkk4Z28yU2FkeGNYbVB4eUFIZkwzQTFEMnZiOFdrdGdnWFZTNkxFeUNaWklSbVRTbHE?oc=5` — **Data centres drive Ireland to reopen nuclear power debate** — attempts: 3/3 — Financial Times — 2026-08-22T07:00Z — FT article identity confirmed via headline search, but primary text is paywalled; secondary reposts cannot substitute. — https://news.google.com/rss/articles/CBMihAFBVV95cUxOR3p4SXpZMVhsZk0yN3V0TDZXT3pnV1VaWkNrc2hOYXpaT3RDaGZzVUhZclRKMHVDbHNIMG5vQjFmY21GQk5lcDFhWlcxaHZZekVqQkk4Z28yU2FkeGNYbVB4eUFIZkwzQTFEMnZiOFdrdGdnWFZTNkxFeUNaWklSbVRTbHE?oc=5
+- `link:https://doi.org/10.1080/09662839.2026.2700193` — **Disruptive technology and the high-risk/high-gain logic: societal impacts of European rearmament** — attempts: 3/3 — European Security — 2026-07-03 — Open-access article identity confirmed but publisher blocks retrieval and no repository copy exists. — https://doi.org/10.1080/09662839.2026.2700193

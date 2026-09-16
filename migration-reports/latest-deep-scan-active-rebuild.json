@@ -1,6 +1,6 @@
 {
   "profile": "radar-active-corpus-rebuild-v1",
-  "completed_at": "2026-09-16T11:38:11Z",
+  "completed_at": "2026-09-16T11:58:21Z",
   "raw_counts": {
     "strand_a": 430,
     "strand_b": 135,
@@ -8,42 +8,42 @@
     "frontier_evidence": 0
   },
   "active_counts": {
-    "strand_a": 306,
+    "strand_a": 303,
     "strand_b": 111,
-    "strand_c": 150,
+    "strand_c": 148,
     "frontier_evidence": 0
   },
   "decision_counts": {
-    "provisional": 55,
+    "provisional": 50,
     "keep": 497,
     "review": 22,
-    "drop": 113,
-    "drop_unverifiable": 8,
+    "drop": 114,
+    "drop_unverifiable": 9,
     "duplicate": 1,
-    "needs_manual_verification": 5
+    "needs_manual_verification": 8
   },
   "deep_scan_v2": {
     "total_records": 693,
-    "v2_verified": 633,
-    "v2_pending": 60
+    "v2_verified": 635,
+    "v2_pending": 58
   },
   "historical_deep_scan_v2": {
     "total_records": 715,
-    "v2_verified": 467,
-    "v2_pending": 248,
-    "active_a_context": 472
+    "v2_verified": 509,
+    "v2_pending": 206,
+    "active_a_context": 465
   },
   "downstream_diagnostics": {
     "derived_objects_checked": 48,
-    "unchanged": 40,
-    "rebuilt": 8,
+    "unchanged": 44,
+    "rebuilt": 4,
     "materially_rewritten": 0,
     "newly_inferred": 0,
     "retired": 0,
-    "stale_evidence_references_before": 6,
-    "stale_evidence_references_removed": 6,
+    "stale_evidence_references_before": 3,
+    "stale_evidence_references_removed": 3,
     "orphan_references_remaining": 0,
-    "active_evidence_reference_occurrences_checked": 503,
+    "active_evidence_reference_occurrences_checked": 502,
     "shock_support_chains_changed_after_a_removal": 0,
     "active_dynamic_shocks": 10,
     "active_high_order_candidates": 29,
