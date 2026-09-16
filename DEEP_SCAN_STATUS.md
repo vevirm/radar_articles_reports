@@ -6,30 +6,30 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **883** (Main **617** + Historical **266**)
-- Automatic queue still needing V2 verification: **478** (Main **29** + Historical **449**)
-- Currently assigned to workers: **120** (Main **19** + Historical **101**)
-- Bounded access-recovery retries still eligible: **27**
-- Hands-on verification needed: **48**
-- Automatic queue pending and not yet assigned: **358**
+- Authoritative V2 verified: **942** (Main **620** + Historical **322**)
+- Automatic queue still needing V2 verification: **418** (Main **25** + Historical **393**)
+- Currently assigned to workers: **96** (Main **17** + Historical **79**)
+- Bounded access-recovery retries still eligible: **25**
+- Hands-on verification needed: **49**
+- Automatic queue pending and not yet assigned: **322**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260916T084632Z-bc02df452405`
-- Assigned unresolved records: **60**
-  1. `link:https://doi.org/10.1080/09537325.2013.877129` — Mapping of scientific patenting: toward the development of ‘J-GLOBAL foresight’ — recovery attempt 3/3
-  2. `historical:id:b00054029c32ded1` — ERA Portal Austria – Policy Officer / Monitoring
-  3. `historical:id:d04896af05545563` — EARTO Answer to the EC Consultation on the past, present and future of the European Research & Innovation Framework Programmes 2014-2027 | EARTO
-  4. `historical:id:5a711e317ca43d84` — Digital Technologies: Inadequacy of the Higher Education and Innovation Ecosystem
-  5. `historical:id:200edf8954e2b904` — Assessment of open science in grant applications
-  6. `historical:id:0d02bbbd9d9dbbe1` — Identifying the implementation effect of technology transfer policy using system dynamics: a case study in Liaoning, China
-  7. `historical:id:0240e1b9de58c17a` — Global South Research Collaboration
-  8. `historical:id:161ac51defb1d79e` — Building resilient supply chains in uncertain times: a comparative study of EU and ASEAN approaches to supply chain resilience
-  - … plus 52 more in the package manifest
+- Current package: `worker-a-20260916T090903Z-20ae8269d52b`
+- Assigned unresolved records: **36**
+  1. `historical:id:3796f8b3e4b68626` — European Chips Report
+  2. `historical:id:f9d768e7fbd25b6d` — Europe's PhD pipeline is poorly aligned with the employment destinations and roles that actually absorb doctoral talent.
+  3. `historical:id:3a0b1a9dbc9e9a04` — EU civil security market future-looking scenarios
+  4. `historical:id:42446380dbd6e084` — ERA Portal Austria – Seconded National Expert - R&I data strategy
+  5. `historical:id:f79677db9d968c09` — EARTO Paper on a New European Innovation Agenda | EARTO
+  6. `historical:id:747ad359fab5dd0d` — EARTO Analysis of Horizon Europe Pre-Draft AGA – Financial Aspects | EARTO
+  7. `historical:id:d5f26fe0b04812fb` — Digital Tech: Europe's Growing Gap in Eight Charts
+  8. `historical:id:53454aa24a5eb5d6` — Digital Industrial Policy for Europe
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260916T084652Z-bbd7a21c44ad`
+- Current package: `worker-b-20260916T090917Z-bbd7a21c44ad`
 - Assigned unresolved records: **60**
   1. `link:https://doi.org/10.1007/s10308-026-00781-4` — Digital inclusion or digital illusion? AI, disability, and the politics of financial access in Indonesia
   2. `link:https://doi.org/10.1038/s41598-026-50592-1` — From blur to blueprint: a fuzzy delphi methodology for evaluating early-stage emerging technologies—the case of end-of-life automotive traction battery disassembly
@@ -93,3 +93,4 @@ These works no longer consume automatic Deep Scan slots. Their identity is belie
 - `link:https://doi.org/10.1002/ev.20605` — **Bridging foresight and evaluation: A bridge worth building** — attempts: legacy terminal — New Directions for Evaluation — 2024-07-26 — Identity is verified, but accessible evidence remained abstract/metadata-level after all six recovery steps; a defensible Strand B judgement would require substantive text. — https://doi.org/10.1002/ev.20605
 - `link:https://doi.org/10.1108/fs-11-2021-0228` — **Iran’s approach to energy policy towards 2040: a participatory scenario method** — attempts: legacy terminal — foresight — 2023-03-03 — Identity is verified, but accessible evidence remained abstract/metadata-level after all six recovery steps; a defensible Strand B judgement would require substantive text. — https://doi.org/10.1108/fs-11-2021-0228
 - `link:https://doi.org/10.1163/15691497-20263013` — **EU–LAC Relations in the Context of NATO Geopolitics** — attempts: 3/3 — Perspectives on Global Development and Technology — 2026-08-07 — The article identity is verified, but no substantive primary or legitimate repository text was accessible after all six recovery steps. — https://doi.org/10.1163/15691497-20263013
+- `link:https://doi.org/10.1080/09537325.2013.877129` — **Mapping of scientific patenting: toward the development of ‘J-GLOBAL foresight’** — attempts: 3/3 — Technology Analysis & Strategic Management — 2014-03-04 — Identity is verified, but substantive/full-text evidence remained inaccessible after all six required recovery steps. — https://doi.org/10.1080/09537325.2013.877129
