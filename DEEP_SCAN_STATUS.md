@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **877** (Main **613** + Historical **264**)
-- Automatic queue still needing V2 verification: **484** (Main **33** + Historical **451**)
-- Currently assigned to workers: **96** (Main **20** + Historical **76**)
+- Authoritative V2 verified: **881** (Main **617** + Historical **264**)
+- Automatic queue still needing V2 verification: **480** (Main **29** + Historical **451**)
+- Currently assigned to workers: **92** (Main **16** + Historical **76**)
 - Bounded access-recovery retries still eligible: **30**
 - Hands-on verification needed: **48**
 - Automatic queue pending and not yet assigned: **388**
@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260916T075346Z-f723a6a8536f`
+- Current package: `worker-a-20260916T081241Z-f723a6a8536f`
 - Assigned unresolved records: **36**
   1. `historical:id:e2b7e63a5a4e8e50` — Policyseminar 8. juni: Monitoring and Analyzing Research Careers for Informed Policy Making in the ERA
   2. `historical:id:d7546fcf2d8d3250` — ERA Portal Austria – Seconded National Expert - Open Science Policy (RTD-A-4)
@@ -29,17 +29,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260916T075359Z-2e1daf27f534`
-- Assigned unresolved records: **60**
-  1. `link:https://www.nesta.org.uk/documents/230/measuring_innovation.pdf` — Measuring innovation policy briefing
-  2. `link:https://publications.jrc.ec.europa.eu/repository/handle/JRC145507` — Tracking country innovation performance: The Innovation Output Indicator 2025
-  3. `link:https://www.nesta.org.uk/report/chinas-absorptive-state-innovation-and-research-in-china/#paragraph-275` — China's Absorptive State: Innovation and research in China
-  4. `link:https://www.nesta.org.uk/documents/259/innovation_gap.pdf` — Innovation Gap policy briefing
-  5. `link:https://doi.org/10.1007/s10308-026-00781-4` — Digital inclusion or digital illusion? AI, disability, and the politics of financial access in Indonesia
-  6. `link:https://doi.org/10.1038/s41598-026-50592-1` — From blur to blueprint: a fuzzy delphi methodology for evaluating early-stage emerging technologies—the case of end-of-life automotive traction battery disassembly
-  7. `link:https://news.google.com/rss/articles/CBMinwJBVV95cUxON0RvbDRibGNET2RISGY5ZFBWVWNrSjhEYzNUalhmOGVuem5OMUY0cU9qSG83blNtVEFlME54U3R0NzNxU1Y1S3ptTGhPVDJzTXRtVGpvdnF3emxNMlZ0Y3ZiMEZ1ZkpmZEZrUjRSRXJMY1FFa2Zqd3FqVW8zSjA4YUJ3UWZZa0FXYVBPbV9zX1cyYzBrZmNXQVpNM0JEbFROcU1iaTZfZlBjc2hXamRnb3JTMks3Z0ZfQmk2eUtBQnFQalJsXzlOMUROMnRJWGtrbjFfRlpNQ3Zma0xFNGdCZnM5MGRqREpZbEp2MTRsU0h5c1UzZXc0OW9PRHFPTHlLanZtRGZISWlFX3lJNTFOaU50UjBmRHJNRUZ6NFNPSQ?oc=5` — Open Access in the European Research Area: progress remains uneven as new report calls for more concerted action
-  8. `link:https://news.google.com/rss/articles/CBMiwgFBVV95cUxQTWhvb3cyWDU3RGNHSlZJdGdLWlVOQWJ2S1M3bTV6SlZHUFpOX2FjckdPWDdiYVU3NElIX1JjSGdZYXRtTk9XM0hDRVZGaldPOU5LOTJ1OEZsUkFHUDNBU2E1a2VhajdRYm1QdnoxQ21vWEZvbE5ndG5TTW5DbXVkOF9kdkYyZUN2WGdSNGJ3cTZYSVdhYjdZcU95VThQT21xRXM1QUZEX1l3MWFOUlFIWjgxejdEN04xTGp4MUpraFRRZw?oc=5` — European chip startup Axelera wins AI factory supply deals and launches second chip
-  - … plus 52 more in the package manifest
+- Current package: `worker-b-20260916T081254Z-61730d7d3c77`
+- Assigned unresolved records: **56**
+  1. `link:https://doi.org/10.1007/s10308-026-00781-4` — Digital inclusion or digital illusion? AI, disability, and the politics of financial access in Indonesia
+  2. `link:https://doi.org/10.1038/s41598-026-50592-1` — From blur to blueprint: a fuzzy delphi methodology for evaluating early-stage emerging technologies—the case of end-of-life automotive traction battery disassembly
+  3. `link:https://news.google.com/rss/articles/CBMinwJBVV95cUxON0RvbDRibGNET2RISGY5ZFBWVWNrSjhEYzNUalhmOGVuem5OMUY0cU9qSG83blNtVEFlME54U3R0NzNxU1Y1S3ptTGhPVDJzTXRtVGpvdnF3emxNMlZ0Y3ZiMEZ1ZkpmZEZrUjRSRXJMY1FFa2Zqd3FqVW8zSjA4YUJ3UWZZa0FXYVBPbV9zX1cyYzBrZmNXQVpNM0JEbFROcU1iaTZfZlBjc2hXamRnb3JTMks3Z0ZfQmk2eUtBQnFQalJsXzlOMUROMnRJWGtrbjFfRlpNQ3Zma0xFNGdCZnM5MGRqREpZbEp2MTRsU0h5c1UzZXc0OW9PRHFPTHlLanZtRGZISWlFX3lJNTFOaU50UjBmRHJNRUZ6NFNPSQ?oc=5` — Open Access in the European Research Area: progress remains uneven as new report calls for more concerted action
+  4. `link:https://news.google.com/rss/articles/CBMiwgFBVV95cUxQTWhvb3cyWDU3RGNHSlZJdGdLWlVOQWJ2S1M3bTV6SlZHUFpOX2FjckdPWDdiYVU3NElIX1JjSGdZYXRtTk9XM0hDRVZGaldPOU5LOTJ1OEZsUkFHUDNBU2E1a2VhajdRYm1QdnoxQ21vWEZvbE5ndG5TTW5DbXVkOF9kdkYyZUN2WGdSNGJ3cTZYSVdhYjdZcU95VThQT21xRXM1QUZEX1l3MWFOUlFIWjgxejdEN04xTGp4MUpraFRRZw?oc=5` — European chip startup Axelera wins AI factory supply deals and launches second chip
+  5. `link:https://news.google.com/rss/articles/CBMilwFBVV95cUxOckFkZUFSdHNkTURBVWo1M3Q1Qk1hci1uSGZYUHUtMGFwcWw0ZVpDSnFKNGNqWHMxVkczU25YOTNYV0lza1FyUklNMUtON1BOVGJOdjJsY1prNm5CS3F4ajRVTXhJamI4Z2xBWHhJWTFJbk15cFIyU3R4b3psN2ZJSlZCUHNDdkVRdDVkLVlseUxkN1NGdXFn?oc=5` — Rethinking research security in Europe: From controls to capabilities
+  6. `link:https://doi.org/10.1080/07036337.2026.2714069` — Between digital sovereignty and trusted connectivity: tensions in EU external digital governance
+  7. `link:https://doi.org/10.1016/j.nanoen.2018.02.020` — Emerging nanogenerator technology in China: A review and forecast using integrating bibliometrics, patent analysis and technology roadmapping methods
+  8. `link:https://news.google.com/rss/articles/CBMikAFBVV95cUxQeUFFejhpN0N1YVlvbWZrWGtGMjhsSTY1Z2c5SURkeUUyRklHdGw5V040WFNBQVN6Yy1wdTlxaUhjMlA5STBvcC15aU00U201MURFWnB4OXFFV1MyVVZ6VjRqNl9ER0xIQmtianJCbDd2enlhb3c2ZkhTR1hzVURXY0VncmtWMHB2dnBvUDNQMjA?oc=5` — EU countries to discuss AI rules as Trump calls safety warnings a ‘hoax’
+  - … plus 48 more in the package manifest
 
 ## Hands-on verification needed
 

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-09-16T07:52:21Z",
+  "updated_at": "2026-09-16T08:11:14Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -4844,6 +4844,51 @@
       ],
       "updated_at": "2026-09-16T07:52:21Z",
       "deep_scan_package_id": "worker-a-20260916T073231Z-392292edffe8"
+    },
+    "link:https://www.nesta.org.uk/documents/230/measuring_innovation.pdf": {
+      "fields": {
+        "date": "2008-07"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "PDF masthead states 'MI/25 / Published: July 2008'; 2026-09-15 is the crawl date.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://media.nesta.org.uk/documents/measuring_innovation.pdf"
+      ],
+      "updated_at": "2026-09-16T08:11:14Z",
+      "deep_scan_package_id": "worker-b-20260916T073253Z-2e1daf27f534"
+    },
+    "link:https://www.nesta.org.uk/report/chinas-absorptive-state-innovation-and-research-in-china/#paragraph-275": {
+      "fields": {
+        "date": "2013"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Report content refers to China's recent leadership transition, uses data through 2012 and proposes 2016 as a future publication date for a UK strategy, so it was published around 2013, not 2026.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://www.nesta.org.uk/report/chinas-absorptive-state-innovation-and-research-in-china/"
+      ],
+      "updated_at": "2026-09-16T08:11:14Z",
+      "deep_scan_package_id": "worker-b-20260916T073253Z-2e1daf27f534"
+    },
+    "link:https://www.nesta.org.uk/documents/259/innovation_gap.pdf": {
+      "fields": {
+        "date": "2006-10"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "PDF states 'IG/02 / Published: October 2006'; 2026-09-15 is the crawl date.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://media.nesta.org.uk/documents/innovation_gap.pdf"
+      ],
+      "updated_at": "2026-09-16T08:11:14Z",
+      "deep_scan_package_id": "worker-b-20260916T073253Z-2e1daf27f534"
     }
   }
 }

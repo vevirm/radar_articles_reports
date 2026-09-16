@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-16T07:52:21Z",
+  "generated_at": "2026-09-16T08:11:14Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -63132,6 +63132,249 @@
       "reader_text_model": "user-provided-llm-subscription",
       "reader_text_written_at": "2026-09-16T07:52:21Z",
       "deep_scan_package_id": "worker-a-20260916T073231Z-392292edffe8"
+    },
+    "link:https://www.nesta.org.uk/documents/230/measuring_innovation.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "f1243462",
+      "identity_hash": "261ce05ae0d520fc",
+      "reader_title": "Nesta 2008: why traditional innovation metrics mislead UK innovation policy",
+      "reader_what": "Nesta argued R&D and patent metrics miss 'hidden innovation' in services, public sector and creative industries.",
+      "reader_why": "Metrics drive targets, so narrow indicators can steer innovation policy toward manufacturing-style R&D.",
+      "reader_more": "This 2008 briefing argues that standard indicators such as R&D spending, patents and science graduates reflect an outdated 'linear model' of innovation. It says they miss innovation in services, the public sector, creative industries and user-led innovation. Nesta used it to launch a two-year project to build a UK Innovation Index and a public call for ideas. It is historical context rather than a current development.",
+      "deep_analysis": {
+        "work_kind": "policy briefing",
+        "research_question": "How should innovation be measured so policy reflects the modern UK economy?",
+        "main_finding": "Traditional input metrics capture a linear, manufacturing model and miss hidden innovation; a new UK Innovation Index is needed.",
+        "method_or_basis": "Policy argument drawing on OECD indicators and NESTA research; announces the Innovation Index project and consultation.",
+        "qualification": "2008 document; proposals and project plans, not results; UK-specific.",
+        "radar_relevance": "Early European (UK) debate on innovation indicators that later fed composite innovation indices.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "nesta.org.uk/documents/230 redirects to media.nesta.org.uk/documents/measuring_innovation.pdf (HTTP 200, 4-page PDF 'Measuring Innovation', MI/25, Published July 2008)"
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI on the Nesta policy briefing; identity taken from the PDF masthead and publication code MI/25"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://media.nesta.org.uk/documents/measuring_innovation.pdf",
+            "title": "Measuring Innovation (NESTA Policy Briefing MI/25, July 2008)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Supplied PDF is the full NESTA briefing; scanner date 2026-09-15 is a crawl date, the document states Published: July 2008."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Full briefing on how UK innovation metrics shape innovation policy and launching NESTA's UK Innovation Index; substantive European (UK) research-and-innovation policy evidence, but dated 2008."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-16T08:11:14Z",
+      "deep_scan_package_id": "worker-b-20260916T073253Z-2e1daf27f534"
+    },
+    "link:https://publications.jrc.ec.europa.eu/repository/handle/JRC145507": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "b28fcf12",
+      "identity_hash": "96165fa28086e6a4",
+      "reader_title": "JRC's 2025 Innovation Output Indicator: EU gains, but key rivals keep pace",
+      "reader_what": "Sweden, Ireland and Germany lead the EU; the EU trails the US, Korea and Japan but beats China.",
+      "reader_why": "The indicator feeds DG RTD monitoring of Framework Programme objectives and complements the European Innovation Scoreboard.",
+      "reader_more": "The Innovation Output Indicator is a composite index the Commission has published since 2013 to track how far innovation reaches markets, creates knowledge-intensive jobs and builds technological capability. The 2025 edition covers 46 countries. EU performance has improved, but at a pace similar to or slower than some partners; China is narrowing the gap while US growth appears slower. A validation analysis finds strong correlation with innovation inputs and other composite indices.",
+      "deep_analysis": {
+        "work_kind": "official monitoring report",
+        "research_question": "How do EU Member States and major economies perform on innovation outputs?",
+        "main_finding": "EU27 improves but remains behind the US, South Korea and Japan; Romania, Bulgaria, Slovakia and Latvia rank lowest in the EU.",
+        "method_or_basis": "Composite indicator on patents, knowledge-intensive employment and trade, plus contextual and validation analyses.",
+        "qualification": "Composite rankings depend on indicator choice; correlations do not establish causes.",
+        "radar_relevance": "Core EU R&I performance monitoring evidence.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "JRC Publications Repository handle JRC145507 opened; record page with full executive-summary abstract for 'Tracking country innovation performance: The Innovation Output Indicator 2025'"
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI shown in the supplied record text; identity confirmed by JRC handle JRC145507, title and authors (Bello, Ravanos et al.)"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_repository_record",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC145507",
+            "title": "Tracking country innovation performance: The Innovation Output Indicator 2025 (JRC145507)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official JRC repository record with a detailed executive summary of results, rankings and validation analysis."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Official Commission/JRC monitoring report on EU and Member State innovation output performance tied to Framework Programme objectives; clearly substantive European R&I evidence."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-16T08:11:14Z",
+      "deep_scan_package_id": "worker-b-20260916T073253Z-2e1daf27f534"
+    },
+    "link:https://www.nesta.org.uk/report/chinas-absorptive-state-innovation-and-research-in-china/#paragraph-275": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "2edf7296",
+      "identity_hash": "7e5722d1429a5c1e",
+      "reader_title": "Nesta on China as an 'absorptive state' and UK research collaboration strategy",
+      "reader_what": "China excels at absorbing global knowledge; the UK should build a deliberate, long-term China R&I collaboration strategy.",
+      "reader_why": "The report found the UK had become China's second most prolific research co-author, raising strategic stakes for UK engagement.",
+      "reader_more": "Written with UK government partners, this report reviews how China's research and innovation system changed after 2006. It argues China is increasingly good at attracting and profiting from global knowledge, while research quality lags its rapid growth in volume. It recommends a new five-year UK strategy for China collaboration spanning research to commercialisation. Its risk discussion predates today's research-security debates.",
+      "deep_analysis": {
+        "work_kind": "institutional policy report",
+        "research_question": "How has China's innovation system changed and how should the UK engage?",
+        "main_finding": "China is an absorptive state; the UK should engage more deeply but strategically, with a dedicated long-term strategy.",
+        "method_or_basis": "Policy analysis, bibliometric co-authorship data and review of Chinese policy plans.",
+        "qualification": "Circa 2013; recommendations, not evaluated outcomes; UK perspective.",
+        "radar_relevance": "European national R&I strategy toward China; historical context for later research-security debates.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "nesta.org.uk/report/chinas-absorptive-state-innovation-and-research-in-china opened; long report page with key findings and recommendations (about 24k characters)"
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI for the Nesta report; identity from the Nesta report page title and named Nesta authors"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.nesta.org.uk/report/chinas-absorptive-state-innovation-and-research-in-china/",
+            "title": "China's Absorptive State: Innovation and research in China (Nesta)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantive Nesta report page. Scanner date 2026-09-15 is a crawl date; content (data to 2012, 2016 proposed as future strategy date, China's recent leadership transition) places publication in 2013."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "UK (European) research-and-innovation strategy report analysing China's innovation system and recommending a long-term UK-China R&I collaboration strategy; substantive research-policy and international cooperation evidence, historical in date."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-16T08:11:14Z",
+      "deep_scan_package_id": "worker-b-20260916T073253Z-2e1daf27f534"
+    },
+    "link:https://www.nesta.org.uk/documents/259/innovation_gap.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "c3d17fc2",
+      "identity_hash": "0774b04fae08615b",
+      "reader_title": "Nesta 2006: the UK's 'innovation gap' is partly a measurement problem",
+      "reader_what": "UK looks weak on R&D and patents, but those metrics miss much real innovation in services and elsewhere.",
+      "reader_more": "The briefing notes UK R&D intensity (1.9% of GDP in 2003) was well below the EU's Lisbon 3% target and that UK patenting trailed Germany and Japan. It argues this 'poor performance' partly reflects metrics that describe sector mix rather than innovation. It calls for a broad national innovation mission covering hidden innovation and intermediate skills. It is historical context.",
+      "deep_analysis": {
+        "work_kind": "policy briefing",
+        "research_question": "Does the UK really lag in innovation, and what should policy change?",
+        "main_finding": "Traditional metrics misrepresent UK innovation; policy should embrace hidden innovation and absorptive skills.",
+        "method_or_basis": "Policy argument using OECD and EU indicators.",
+        "qualification": "2006 document; advocacy rather than empirical evaluation.",
+        "radar_relevance": "European (UK) R&I policy debate on metrics and the Lisbon R&D target.",
+        "confidence": "medium",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "nesta.org.uk/documents/259 redirects to media.nesta.org.uk/documents/innovation_gap.pdf (policy briefing IG/02, 'Published: October 2006')"
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI for the NESTA briefing; identity from PDF title and publication code IG/02"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://media.nesta.org.uk/documents/innovation_gap.pdf",
+            "title": "The Innovation Gap: Why policy needs to reflect the reality of innovation in the UK (NESTA, October 2006)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full NESTA briefing PDF; scanner date is a crawl date, document states October 2006."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Full UK innovation-policy briefing comparing UK R&D performance with Lisbon targets and arguing for broader innovation policy; substantive European R&I policy evidence from 2006."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-16T08:11:14Z",
+      "deep_scan_package_id": "worker-b-20260916T073253Z-2e1daf27f534"
     }
   }
 }
