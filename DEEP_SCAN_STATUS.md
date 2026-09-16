@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260916T083247Z-fca86a6b0b16`
+- Current package: `worker-a-20260916T084419Z-fca86a6b0b16`
 - Assigned unresolved records: **58**
   1. `link:https://doi.org/10.1080/09537325.2013.877129` — Mapping of scientific patenting: toward the development of ‘J-GLOBAL foresight’ — recovery attempt 3/3
   2. `historical:id:b00054029c32ded1` — ERA Portal Austria – Policy Officer / Monitoring
@@ -29,7 +29,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 50 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260916T083307Z-bbd7a21c44ad`
+- Current package: `worker-b-20260916T084440Z-bbd7a21c44ad`
 - Assigned unresolved records: **60**
   1. `link:https://doi.org/10.1007/s10308-026-00781-4` — Digital inclusion or digital illusion? AI, disability, and the politics of financial access in Indonesia
   2. `link:https://doi.org/10.1038/s41598-026-50592-1` — From blur to blueprint: a fuzzy delphi methodology for evaluating early-stage emerging technologies—the case of end-of-life automotive traction battery disassembly
