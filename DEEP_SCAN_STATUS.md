@@ -7,17 +7,17 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **1145** (Main **636** + Historical **509**)
-- Automatic queue still needing V2 verification: **209** (Main **3** + Historical **206**)
-- Currently assigned to workers: **72** (Main **3** + Historical **69**)
-- Bounded access-recovery retries still eligible: **42**
+- Automatic queue still needing V2 verification: **217** (Main **3** + Historical **214**)
+- Currently assigned to workers: **120** (Main **3** + Historical **117**)
+- Bounded access-recovery retries still eligible: **38**
 - Hands-on verification needed: **55**
-- Automatic queue pending and not yet assigned: **137**
+- Automatic queue pending and not yet assigned: **97**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260916T115900Z-0bcaf3af01f3`
-- Assigned unresolved records: **36**
+- Current package: `worker-a-20260916T173433Z-f8e5c76d61ae`
+- Assigned unresolved records: **60**
   1. `historical:id:aaeb140e8d09dc4f` — The US-EU Rivalry for Data Protection: Energy Sector Implications
   2. `historical:id:7c395c11e8b8e25a` — International Mobility, Joint Working and European Research
   3. `historical:id:1403683ce0729403` — The Research Council International Advisory Board
@@ -26,11 +26,11 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:512c8174492ee3bc` — Netherlands AI Strategy Report
   7. `historical:id:20b0ef3a55bd295f` — Globalizing Technologies: Geopolitical Innovation in the U.S. Bioeconomy
   8. `historical:id:c41bdb57f19f94b3` — Estonia AI Strategy Report
-  - … plus 28 more in the package manifest
+  - … plus 52 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260916T115913Z-c019f389541c`
-- Assigned unresolved records: **36**
+- Current package: `worker-b-20260916T173450Z-cdb99e64487d`
+- Assigned unresolved records: **60**
   1. `historical:id:efee7b100f8750bc` — Technological research in the EU is less efficient than the world average. EU research policy risks Europeans’ future
   2. `historical:id:b90245216ee7b643` — China’s emerging centrality in the contemporary international scientific collaboration network
   3. `historical:id:c4a4150b9436bc16` — Backcasting in futures studies: a synthesized scholarly and planning approach to strategic smart sustainable city development
@@ -39,7 +39,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:cb338717157072fe` — The Psychological Aspects of Corporate Foresight
   7. `historical:id:7e40471591772e5a` — Organizational diversity and innovation potential of EU-funded research projects
   8. `historical:id:c65677ab612378f0` — International university-university technology transfer: Strategic management framework
-  - … plus 28 more in the package manifest
+  - … plus 52 more in the package manifest
 
 ## Hands-on verification needed
 
