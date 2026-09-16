@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260916T102144Z-f393501bbf73`
+- Current package: `worker-a-20260916T103116Z-f393501bbf73`
 - Assigned unresolved records: **60**
   1. `historical:id:3796f8b3e4b68626` — European Chips Report
   2. `historical:id:f9d768e7fbd25b6d` — Europe's PhD pipeline is poorly aligned with the employment destinations and roles that actually absorb doctoral talent.
@@ -29,7 +29,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 52 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260916T102205Z-d69fa410f5f1`
+- Current package: `worker-b-20260916T103241Z-d69fa410f5f1`
 - Assigned unresolved records: **60**
   1. `link:https://news.google.com/rss/articles/CBMi0gFBVV95cUxQOFdvOHBDZVJ6YmN4TEc2MHA1T1Y4MG5uMFk4ak5TRkloaVlMd3FxNUtEalRSUmV6WTdWOUo1UEgwUXpGbTM2RTllWHdlUlhVdng2bmNlTXpEQUFmcThzZnhYODNhUldOV2FzYWljdFJJY2FjMktqSTdhd1d6MUxqU1hqd3lkRm9hS20zblVyRlVkOGlXcDFCMzNJVFk4QnFKd2tlWmp0SHdtblZfRW9GcWliU2xubTRXNm9pYVNPRXp4R01DaFV0N1F4el9LQlBvc1E?oc=5` — Use of AI for biology ‘requires strategic coordination’ from EU — recovery attempt 3/3
   2. `historical:id:ecb059a3a1456fc1` — Space technology transfers and their commercialisation
