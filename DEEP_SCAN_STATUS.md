@@ -6,17 +6,17 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **776** (Main **606** + Historical **170**)
-- Automatic queue still needing V2 verification: **583** (Main **40** + Historical **543**)
-- Currently assigned to workers: **108** (Main **12** + Historical **96**)
-- Bounded access-recovery retries still eligible: **17**
+- Authoritative V2 verified: **819** (Main **608** + Historical **211**)
+- Automatic queue still needing V2 verification: **540** (Main **38** + Historical **502**)
+- Currently assigned to workers: **84** (Main **23** + Historical **61**)
+- Bounded access-recovery retries still eligible: **31**
 - Hands-on verification needed: **48**
-- Automatic queue pending and not yet assigned: **475**
+- Automatic queue pending and not yet assigned: **456**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260916T072604Z-0b34267b291d`
+- Current package: `worker-a-20260916T072903Z-0b34267b291d`
 - Assigned unresolved records: **48**
   1. `historical:id:514d6ac2a62fe570` — From responsibility to risk: ethics in the Bermuda Triangle of EU research and innovation policy
   2. `historical:id:4eaaf1dc179118e8` — Mission-oriented scenarios: a new method for urban foresight
@@ -29,17 +29,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 40 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260916T072622Z-743ca1212cbd`
-- Assigned unresolved records: **60**
-  1. `historical:id:54a0ed573cfd4e70` — Academic freedom is becoming part of Europe's competitive offer to global researchers as well as a condition for reliable knowledge production.
-  2. `historical:id:343e7eac09fe6ffb` — 2025 Ideas Lab report – CEPS
-  3. `historical:id:54443cacb8afbf99` — Using Horizon Scanning to Build Policy Resilience: Case of Waste Crime
-  4. `link:https://doi.org/10.1177/19467567261450218` — Change Progression Scenario Method: A Systematic Literature Review of Applications — recovery attempt 2/3
-  5. `historical:id:ed3f534de03d821a` — Determinants of the career pathways of doctorate holders: Evidence from eight European universities
-  6. `historical:id:429ce155fd37117b` — Synthesising knowledge on forest resilience with CLEANFOREST
-  7. `historical:id:679ed030cf8b33ea` — Horizon Europe’s work programme for research infrastructure
-  8. `historical:id:032d048c2196c5d0` — Coopetitive Technological Sovereignty: A Strategy to Reconcile International Collaboration with Knowledge and Economic Security
-  - … plus 52 more in the package manifest
+- Current package: `worker-b-20260916T072916Z-ed576edf88ae`
+- Assigned unresolved records: **36**
+  1. `link:https://www.nesta.org.uk/documents/230/measuring_innovation.pdf` — Measuring innovation policy briefing
+  2. `link:https://publications.jrc.ec.europa.eu/repository/handle/JRC145507` — Tracking country innovation performance: The Innovation Output Indicator 2025
+  3. `link:https://www.nesta.org.uk/report/chinas-absorptive-state-innovation-and-research-in-china/#paragraph-275` — China's Absorptive State: Innovation and research in China
+  4. `link:https://www.nesta.org.uk/documents/259/innovation_gap.pdf` — Innovation Gap policy briefing
+  5. `link:https://doi.org/10.1007/s10308-026-00781-4` — Digital inclusion or digital illusion? AI, disability, and the politics of financial access in Indonesia
+  6. `link:https://doi.org/10.1038/s41598-026-50592-1` — From blur to blueprint: a fuzzy delphi methodology for evaluating early-stage emerging technologies—the case of end-of-life automotive traction battery disassembly
+  7. `link:https://news.google.com/rss/articles/CBMinwJBVV95cUxON0RvbDRibGNET2RISGY5ZFBWVWNrSjhEYzNUalhmOGVuem5OMUY0cU9qSG83blNtVEFlME54U3R0NzNxU1Y1S3ptTGhPVDJzTXRtVGpvdnF3emxNMlZ0Y3ZiMEZ1ZkpmZEZrUjRSRXJMY1FFa2Zqd3FqVW8zSjA4YUJ3UWZZa0FXYVBPbV9zX1cyYzBrZmNXQVpNM0JEbFROcU1iaTZfZlBjc2hXamRnb3JTMks3Z0ZfQmk2eUtBQnFQalJsXzlOMUROMnRJWGtrbjFfRlpNQ3Zma0xFNGdCZnM5MGRqREpZbEp2MTRsU0h5c1UzZXc0OW9PRHFPTHlLanZtRGZISWlFX3lJNTFOaU50UjBmRHJNRUZ6NFNPSQ?oc=5` — Open Access in the European Research Area: progress remains uneven as new report calls for more concerted action
+  8. `link:https://news.google.com/rss/articles/CBMiwgFBVV95cUxQTWhvb3cyWDU3RGNHSlZJdGdLWlVOQWJ2S1M3bTV6SlZHUFpOX2FjckdPWDdiYVU3NElIX1JjSGdZYXRtTk9XM0hDRVZGaldPOU5LOTJ1OEZsUkFHUDNBU2E1a2VhajdRYm1QdnoxQ21vWEZvbE5ndG5TTW5DbXVkOF9kdkYyZUN2WGdSNGJ3cTZYSVdhYjdZcU95VThQT21xRXM1QUZEX1l3MWFOUlFIWjgxejdEN04xTGp4MUpraFRRZw?oc=5` — European chip startup Axelera wins AI factory supply deals and launches second chip
+  - … plus 28 more in the package manifest
 
 ## Hands-on verification needed
 
