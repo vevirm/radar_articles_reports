@@ -6,30 +6,30 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1145** (Main **636** + Historical **509**)
-- Automatic queue still needing V2 verification: **217** (Main **3** + Historical **214**)
-- Currently assigned to workers: **120** (Main **3** + Historical **117**)
-- Bounded access-recovery retries still eligible: **38**
+- Authoritative V2 verified: **1203** (Main **638** + Historical **565**)
+- Automatic queue still needing V2 verification: **159** (Main **1** + Historical **158**)
+- Currently assigned to workers: **96** (Main **1** + Historical **95**)
+- Bounded access-recovery retries still eligible: **37**
 - Hands-on verification needed: **55**
-- Automatic queue pending and not yet assigned: **97**
+- Automatic queue pending and not yet assigned: **63**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260916T173433Z-f8e5c76d61ae`
-- Assigned unresolved records: **60**
-  1. `historical:id:aaeb140e8d09dc4f` — The US-EU Rivalry for Data Protection: Energy Sector Implications
-  2. `historical:id:7c395c11e8b8e25a` — International Mobility, Joint Working and European Research
-  3. `historical:id:1403683ce0729403` — The Research Council International Advisory Board
-  4. `historical:id:c8a62d76fb707954` — Slovakia AI Strategy Report
-  5. `historical:id:beb88e4098f9473e` — Portugal AI Strategy Report
-  6. `historical:id:512c8174492ee3bc` — Netherlands AI Strategy Report
-  7. `historical:id:20b0ef3a55bd295f` — Globalizing Technologies: Geopolitical Innovation in the U.S. Bioeconomy
-  8. `historical:id:c41bdb57f19f94b3` — Estonia AI Strategy Report
-  - … plus 52 more in the package manifest
+- Current package: `worker-a-20260916T175943Z-e1a6d663f107`
+- Assigned unresolved records: **36**
+  1. `link:https://doi.org/10.1080/07036337.2026.2714069` — Between digital sovereignty and trusted connectivity: tensions in EU external digital governance — recovery attempt 3/3
+  2. `historical:id:4e7f1f8a9e28de83` — The influence of proximity dimensions on international research collaboration: an analysis of European water projects
+  3. `historical:id:9752588eb4fbfeb0` — Development trajectory and research themes of foresight
+  4. `historical:id:3d3276f54752b5cb` — Human centred science and technology—transdisciplinary foresight and co-creation as tools for active needs-based innovation governance
+  5. `historical:id:800efe9463fabc88` — Who gets Horizon 2020 research grants? Propensity to apply and probability to succeed in a two-step analysis
+  6. `historical:id:87deee3bc243dbc0` — Foresight in Scientific Method
+  7. `historical:id:442fdf3b585bc643` — The proof of the pudding: University responses to the European Research Council
+  8. `historical:id:2243410b01ac1335` — 50 years of space research in Europe: a bibliometric profile of the European Space Agency (ESA)
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260916T173450Z-cdb99e64487d`
+- Current package: `worker-b-20260916T175955Z-cdb99e64487d`
 - Assigned unresolved records: **60**
   1. `historical:id:efee7b100f8750bc` — Technological research in the EU is less efficient than the world average. EU research policy risks Europeans’ future
   2. `historical:id:b90245216ee7b643` — China’s emerging centrality in the contemporary international scientific collaboration network
