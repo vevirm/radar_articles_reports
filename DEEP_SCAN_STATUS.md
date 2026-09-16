@@ -8,16 +8,16 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 
 - Authoritative V2 verified: **987** (Main **626** + Historical **361**)
 - Automatic queue still needing V2 verification: **370** (Main **16** + Historical **354**)
-- Currently assigned to workers: **72** (Main **6** + Historical **66**)
-- Bounded access-recovery retries still eligible: **33**
+- Currently assigned to workers: **120** (Main **10** + Historical **110**)
+- Bounded access-recovery retries still eligible: **29**
 - Hands-on verification needed: **52**
-- Automatic queue pending and not yet assigned: **298**
+- Automatic queue pending and not yet assigned: **250**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260916T101405Z-20ae8269d52b`
-- Assigned unresolved records: **36**
+- Current package: `worker-a-20260916T101739Z-f393501bbf73`
+- Assigned unresolved records: **60**
   1. `historical:id:3796f8b3e4b68626` — European Chips Report
   2. `historical:id:f9d768e7fbd25b6d` — Europe's PhD pipeline is poorly aligned with the employment destinations and roles that actually absorb doctoral talent.
   3. `historical:id:3a0b1a9dbc9e9a04` — EU civil security market future-looking scenarios
@@ -26,11 +26,11 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:747ad359fab5dd0d` — EARTO Analysis of Horizon Europe Pre-Draft AGA – Financial Aspects | EARTO
   7. `historical:id:d5f26fe0b04812fb` — Digital Tech: Europe's Growing Gap in Eight Charts
   8. `historical:id:53454aa24a5eb5d6` — Digital Industrial Policy for Europe
-  - … plus 28 more in the package manifest
+  - … plus 52 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260916T101519Z-6fa72d2cc145`
-- Assigned unresolved records: **36**
+- Current package: `worker-b-20260916T101918Z-d69fa410f5f1`
+- Assigned unresolved records: **60**
   1. `link:https://news.google.com/rss/articles/CBMi0gFBVV95cUxQOFdvOHBDZVJ6YmN4TEc2MHA1T1Y4MG5uMFk4ak5TRkloaVlMd3FxNUtEalRSUmV6WTdWOUo1UEgwUXpGbTM2RTllWHdlUlhVdng2bmNlTXpEQUFmcThzZnhYODNhUldOV2FzYWljdFJJY2FjMktqSTdhd1d6MUxqU1hqd3lkRm9hS20zblVyRlVkOGlXcDFCMzNJVFk4QnFKd2tlWmp0SHdtblZfRW9GcWliU2xubTRXNm9pYVNPRXp4R01DaFV0N1F4el9LQlBvc1E?oc=5` — Use of AI for biology ‘requires strategic coordination’ from EU — recovery attempt 3/3
   2. `historical:id:ecb059a3a1456fc1` — Space technology transfers and their commercialisation
   3. `historical:id:1bdf764da4a6a643` — Health Data Governance: Lessons Learned from the COVID-19 Pandemic in Europe, China, and the United States
@@ -39,7 +39,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:9f24ad8e448c1621` — ‘Policy experiments are important to provide controlled and transparent AI systems’ | Rathenau Instituut
   7. `historical:id:ff5ab61c09605460` — Gamification of backcasting for sustainability: The development of the gameful backcasting framework (GAMEBACK)
   8. `historical:id:49792dd77e9fc103` — Move or perish? Sticky mobilities in the Swiss academic context
-  - … plus 28 more in the package manifest
+  - … plus 52 more in the package manifest
 
 ## Hands-on verification needed
 
