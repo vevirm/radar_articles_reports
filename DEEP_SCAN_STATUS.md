@@ -8,16 +8,16 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 
 - Authoritative V2 verified: **883** (Main **617** + Historical **266**)
 - Automatic queue still needing V2 verification: **478** (Main **29** + Historical **449**)
-- Currently assigned to workers: **118** (Main **19** + Historical **99**)
+- Currently assigned to workers: **120** (Main **19** + Historical **101**)
 - Bounded access-recovery retries still eligible: **27**
 - Hands-on verification needed: **48**
-- Automatic queue pending and not yet assigned: **360**
+- Automatic queue pending and not yet assigned: **358**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260916T084419Z-fca86a6b0b16`
-- Assigned unresolved records: **58**
+- Current package: `worker-a-20260916T084632Z-bc02df452405`
+- Assigned unresolved records: **60**
   1. `link:https://doi.org/10.1080/09537325.2013.877129` — Mapping of scientific patenting: toward the development of ‘J-GLOBAL foresight’ — recovery attempt 3/3
   2. `historical:id:b00054029c32ded1` — ERA Portal Austria – Policy Officer / Monitoring
   3. `historical:id:d04896af05545563` — EARTO Answer to the EC Consultation on the past, present and future of the European Research & Innovation Framework Programmes 2014-2027 | EARTO
@@ -26,10 +26,10 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:0d02bbbd9d9dbbe1` — Identifying the implementation effect of technology transfer policy using system dynamics: a case study in Liaoning, China
   7. `historical:id:0240e1b9de58c17a` — Global South Research Collaboration
   8. `historical:id:161ac51defb1d79e` — Building resilient supply chains in uncertain times: a comparative study of EU and ASEAN approaches to supply chain resilience
-  - … plus 50 more in the package manifest
+  - … plus 52 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260916T084440Z-bbd7a21c44ad`
+- Current package: `worker-b-20260916T084652Z-bbd7a21c44ad`
 - Assigned unresolved records: **60**
   1. `link:https://doi.org/10.1007/s10308-026-00781-4` — Digital inclusion or digital illusion? AI, disability, and the politics of financial access in Indonesia
   2. `link:https://doi.org/10.1038/s41598-026-50592-1` — From blur to blueprint: a fuzzy delphi methodology for evaluating early-stage emerging technologies—the case of end-of-life automotive traction battery disassembly
