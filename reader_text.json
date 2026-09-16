@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-16T10:13:06Z",
+  "generated_at": "2026-09-16T11:03:34Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -70691,6 +70691,356 @@
       "reader_text_model": "user-provided-llm-subscription",
       "reader_text_written_at": "2026-09-16T10:13:06Z",
       "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+    },
+    "historical:id:3796f8b3e4b68626": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "51ad6885",
+      "identity_hash": "2f51c90930013dec",
+      "reader_title": "European semiconductor demand and dependencies",
+      "reader_what": "The Commission survey mapped chip demand, supply pressures, R&D support and strategic dependencies across European industrial ecosystems.",
+      "reader_why": "Its evidence links semiconductor capacity, skilled labour, pilot lines and R&D support to European industrial resilience.",
+      "reader_more": "The report synthesised 141 survey responses from semiconductor suppliers and users. It found demand rising strongly toward 2030, persistent supply disruption, and broad relevance of European R&D funding and pilot lines.",
+      "deep_analysis": {
+        "work_kind": "official survey report",
+        "research_question": "What do European industrial users and suppliers report about semiconductor demand, shortages and support needs?",
+        "main_finding": "European respondents expected rising chip demand and highlighted labour, infrastructure, R&D support and pilot lines as important capability factors.",
+        "method_or_basis": "Commission survey of 141 organisations across supply and demand sides.",
+        "qualification": "Long-range forecasts were incomplete because many respondents did not forecast beyond 2025.",
+        "radar_relevance": "Direct evidence on European semiconductor R&I and industrial capability.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened matching substantial web text at https://single-market-economy.ec.europa.eu/industry/strategy/digital-transformation/european-chips-report_en; content was sufficient to verify identity and scope."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_web_source",
+            "url": "https://single-market-economy.ec.europa.eu/industry/strategy/digital-transformation/european-chips-report_en",
+            "title": "European Chips Report",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity verified and evidence reviewed against Strand A criteria."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Direct evidence on European semiconductor R&I and industrial capability."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-16T11:03:33Z",
+      "deep_scan_package_id": "worker-a-20260916T103116Z-f393501bbf73"
+    },
+    "historical:id:f9d768e7fbd25b6d": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "UNCLASSIFIED",
+      "corpus_scope": "historical",
+      "source_hash": "51a2c82e",
+      "identity_hash": "d8090e68f9877916",
+      "reader_title": "European PhD careers beyond academia",
+      "reader_what": "European PhD employment varies sharply across countries, sectors and fields, with many doctorate holders working outside higher education.",
+      "reader_why": "Doctoral career structures shape how Europe converts research training into wider economic and innovation capability.",
+      "reader_more": "The article combines available employment data with interviews of European doctoral-education and career experts. It maps factors affecting PhD labour-market prospects rather than assuming academia is the default destination.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed empirical study",
+        "research_question": "What labour-market prospects do PhD graduates face across Europe?",
+        "main_finding": "PhD employment patterns differ substantially by national context, sector, type of work and field of research.",
+        "method_or_basis": "Employment data plus semi-structured interviews with European experts.",
+        "qualification": "The study maps heterogeneous contexts; it does not imply one Europe-wide employment pattern.",
+        "radar_relevance": "Direct evidence on Europe’s research workforce and doctoral talent pipeline.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "limited",
+            "note": "source retrieval failed: 403 Client Error: Forbidden for url: https://onlinelibrary.wiley.com/doi/10.1111/ejed.12514"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1111/ejed.12514; metadata matched the claimed title and authors."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search for “Europe's PhD pipeline is poorly aligned with the employment destinations and roles that actually absorb doctoral talent.” found a matching authoritative publisher or repository record."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching evidence from https://onlinelibrary.wiley.com/doi/10.1111/ejed.12514."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://onlinelibrary.wiley.com/doi/10.1111/ejed.12514",
+            "title": "Labour market perspectives for PhD graduates in Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity verified and evidence reviewed against Strand A criteria."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Direct evidence on Europe’s research workforce and doctoral talent pipeline."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-16T11:03:33Z",
+      "deep_scan_package_id": "worker-a-20260916T103116Z-f393501bbf73"
+    },
+    "historical:id:3a0b1a9dbc9e9a04": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "445ea291",
+      "identity_hash": "80db1658e9bed1d3",
+      "reader_title": "Scenarios for the EU civil-security market",
+      "reader_what": "The study develops future scenarios for Europe’s civil-security market to inform research, innovation and industrial policy choices.",
+      "reader_why": "Scenario evidence helps connect security demand, technology development and European industrial capability.",
+      "reader_more": "The Commission material describes a structured foresight exercise around the future EU civil-security market. It is substantive policy-research evidence, not a promotional listing.",
+      "deep_analysis": {
+        "work_kind": "official foresight study",
+        "research_question": "How might the EU civil-security market evolve and what could that mean for capability development?",
+        "main_finding": "The work frames alternative market futures and their implications for European security-industry and innovation policy.",
+        "method_or_basis": "Scenario-based market and policy analysis commissioned within the EU security research context.",
+        "qualification": "Scenarios are exploratory futures, not predictions.",
+        "radar_relevance": "Directly concerns European security R&I and industrial capability.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened matching substantial web text at https://home-affairs.ec.europa.eu/networks/ceris-community-european-research-and-innovation-security/eu-security-market-study/eu-civil-security-market-future-looking-scenarios_en; content was sufficient to verify identity and scope."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_web_source",
+            "url": "https://home-affairs.ec.europa.eu/networks/ceris-community-european-research-and-innovation-security/eu-security-market-study/eu-civil-security-market-future-looking-scenarios_en",
+            "title": "EU civil security market future-looking scenarios",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity verified and evidence reviewed against Strand A criteria."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Directly concerns European security R&I and industrial capability."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-16T11:03:33Z",
+      "deep_scan_package_id": "worker-a-20260916T103116Z-f393501bbf73"
+    },
+    "historical:id:42446380dbd6e084": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "383efe20",
+      "identity_hash": "bd8167c099e2f0bc",
+      "reader_title": "R&I data-strategy vacancy",
+      "reader_what": "The page is a recruitment notice for a seconded national expert role, not substantive research or innovation evidence.",
+      "reader_more": "It describes a position and responsibilities around R&I data strategy. The object itself is a vacancy page, so it fails Strand A despite relevant vocabulary.",
+      "deep_analysis": {
+        "work_kind": "vacancy notice",
+        "research_question": "",
+        "main_finding": "A recruitment notice was published for an R&I data-strategy role.",
+        "method_or_basis": "Official vacancy page.",
+        "qualification": "No substantive research, analysis, evidence release or policy result is contained in the page.",
+        "radar_relevance": "Generic recruitment content does not meet Strand A.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened matching abstract or landing page at https://era.gv.at/open-positions/seconded-national-expert-ri-data-strategy/; content was sufficient to verify identity and scope."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_web_source",
+            "url": "https://era.gv.at/open-positions/seconded-national-expert-ri-data-strategy/",
+            "title": "ERA Portal Austria – Seconded National Expert - R&I data strategy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity verified and evidence reviewed against Strand A criteria."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_A",
+        "reason": "The object itself is a vacancy page, so it fails Strand A despite relevant vocabulary"
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-16T11:03:33Z",
+      "deep_scan_package_id": "worker-a-20260916T103116Z-f393501bbf73"
+    },
+    "historical:id:f79677db9d968c09": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "c0bb66a2",
+      "identity_hash": "ecd767a923ff1c75",
+      "reader_title": "EARTO proposals for Europe’s innovation agenda",
+      "reader_what": "EARTO sets out concrete recommendations for the EU innovation agenda, including scaling, framework conditions, ecosystems and skills.",
+      "reader_why": "The paper is directly about European innovation-policy design and capability building.",
+      "reader_more": "The position paper goes beyond advocacy slogans by presenting specific policy recommendations for research and technology organisations. It is useful historical evidence on innovation-policy priorities in 2022.",
+      "deep_analysis": {
+        "work_kind": "policy position paper",
+        "research_question": "What should the EU’s new innovation agenda do to strengthen European innovation performance?",
+        "main_finding": "EARTO argues for stronger scale-up conditions, innovation ecosystems, skills and measures to close Europe’s innovation divide.",
+        "method_or_basis": "Position paper drawing on RTO policy experience and recommendations.",
+        "qualification": "It is an interest-group position, not an independent impact evaluation.",
+        "radar_relevance": "Direct European innovation-policy evidence.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened matching abstract or landing page at https://www.earto.eu/earto-paper-on-a-new-european-innovation-agenda/; content was sufficient to verify identity and scope."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_web_source",
+            "url": "https://www.earto.eu/earto-paper-on-a-new-european-innovation-agenda/",
+            "title": "EARTO Paper on a New European Innovation Agenda | EARTO",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity verified and evidence reviewed against Strand A criteria."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Direct European innovation-policy evidence."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-16T11:03:33Z",
+      "deep_scan_package_id": "worker-a-20260916T103116Z-f393501bbf73"
+    },
+    "historical:id:747ad359fab5dd0d": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "055e36a5",
+      "identity_hash": "45c6019f8ebc4920",
+      "reader_title": "Horizon Europe grant-rule analysis",
+      "reader_what": "EARTO analyses financial provisions in the pre-draft Horizon Europe grant agreement and identifies simplification and implementation concerns.",
+      "reader_why": "Grant rules influence participation costs and the effectiveness of European R&I funding.",
+      "reader_more": "The analysis addresses concrete financial rules and their operational consequences for R&I actors. It therefore supplies historical context on Horizon Europe implementation rather than generic programme promotion.",
+      "deep_analysis": {
+        "work_kind": "policy analysis",
+        "research_question": "What financial-rule issues in the Horizon Europe grant agreement could affect R&I organisations?",
+        "main_finding": "EARTO identifies areas where proposed rules could create complexity and recommends simplification and alignment.",
+        "method_or_basis": "Detailed review of pre-draft grant-agreement financial provisions.",
+        "qualification": "It reflects the perspective of European research and technology organisations.",
+        "radar_relevance": "Direct evidence on European R&I funding governance.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened matching substantial web text at https://www.earto.eu/earto-analysis-of-horizon-europe-pre-draft-aga-financial-aspects/; content was sufficient to verify identity and scope."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_web_source",
+            "url": "https://www.earto.eu/earto-analysis-of-horizon-europe-pre-draft-aga-financial-aspects/",
+            "title": "EARTO Analysis of Horizon Europe Pre-Draft AGA – Financial Aspects | EARTO",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical identity verified and evidence reviewed against Strand A criteria."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Direct evidence on European R&I funding governance."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-16T11:03:34Z",
+      "deep_scan_package_id": "worker-a-20260916T103116Z-f393501bbf73"
     }
   }
 }
