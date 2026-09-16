@@ -8,16 +8,16 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 
 - Authoritative V2 verified: **1042** (Main **629** + Historical **413**)
 - Automatic queue still needing V2 verification: **315** (Main **13** + Historical **302**)
-- Currently assigned to workers: **90** (Main **7** + Historical **83**)
-- Bounded access-recovery retries still eligible: **37**
+- Currently assigned to workers: **120** (Main **10** + Historical **110**)
+- Bounded access-recovery retries still eligible: **34**
 - Hands-on verification needed: **52**
-- Automatic queue pending and not yet assigned: **225**
+- Automatic queue pending and not yet assigned: **195**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260916T111106Z-cdd923acd387`
-- Assigned unresolved records: **54**
+- Current package: `worker-a-20260916T111810Z-aef2b4927dcc`
+- Assigned unresolved records: **60**
   1. `historical:id:d5f26fe0b04812fb` — Digital Tech: Europe's Growing Gap in Eight Charts
   2. `historical:id:53454aa24a5eb5d6` — Digital Industrial Policy for Europe
   3. `historical:id:deae16e521d94a62` — Data Sovereignty
@@ -26,11 +26,11 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:594d72edde3f23fc` — Brain Drain or Brain Gain: A Growing Trend of Chinese International Students Returning Home for Development
   7. `historical:id:5309327e4d2b9ed5` — ALLEA Statement in Response to the European Commission’s Call for Evidence on Digital Education and Digital Skills - ALLEA
   8. `historical:id:47222664f4be9c62` — A green and digital future: 7 insights from strategic foresight
-  - … plus 46 more in the package manifest
+  - … plus 52 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260916T111211Z-53364f3490a0`
-- Assigned unresolved records: **36**
+- Current package: `worker-b-20260916T111859Z-7e67cb37e8b4`
+- Assigned unresolved records: **60**
   1. `link:https://doi.org/10.1016/j.engfor.2026.09.002` — Can EU-27 achieve the decarbonization target in the energy sector? A scenario analysis based on extended STIRPAT model — recovery attempt 3/3
   2. `historical:id:a4ff9ac2ff0bc41c` — A chance for leadership: German foreign policy after the killing of Qassem Soleimani – European Council on Foreign Relations
   3. `historical:id:44ea421fb2df2461` — Rebirth of Industrial Policy and an Agenda for the Twenty-First Century
@@ -39,7 +39,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:f21f1a8fba0db149` — Tracking AI Investment | Center for Security and Emerging Technology
   7. `historical:id:00ee758dd329360d` — The EIC Fund updates investment guidelines with new definitions and investment scenarios
   8. `historical:id:c4090dac8fa36e5a` — Spain AI Strategy Report
-  - … plus 28 more in the package manifest
+  - … plus 52 more in the package manifest
 
 ## Hands-on verification needed
 
