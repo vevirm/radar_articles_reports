@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-16T08:11:14Z",
+  "generated_at": "2026-09-16T08:31:18Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -63375,6 +63375,116 @@
       "reader_text_model": "user-provided-llm-subscription",
       "reader_text_written_at": "2026-09-16T08:11:14Z",
       "deep_scan_package_id": "worker-b-20260916T073253Z-2e1daf27f534"
+    },
+    "historical:id:e2b7e63a5a4e8e50": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "b55ae9fa",
+      "identity_hash": "229a05ae607f27e1",
+      "reader_title": "Research-careers seminar announcement",
+      "reader_what": "NIFU announces a RISIS policy seminar on research careers and monitoring in the ERA.",
+      "reader_more": "The page announces a hybrid seminar in Brussels and lists speakers and intended audiences. It does not itself report a research result, policy decision, or substantive analysis. The event page therefore does not meet the historical Strand A standard.",
+      "deep_analysis": {
+        "work_kind": "event announcement",
+        "research_question": "",
+        "main_finding": "A seminar on research careers was scheduled, with presentations on new empirical strategies and the DDC pilot dataset.",
+        "method_or_basis": "Official event landing page.",
+        "qualification": "The page describes an event rather than the underlying presented research.",
+        "radar_relevance": "European research-policy context is explicit, but the claimed object is not substantive R&I evidence.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://www.nifu.no/policyseminar-8-juni-monitoring-and-analyzing-research-careers-for-informed-policy-making-in-the-era/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://www.nifu.no/policyseminar-8-juni-monitoring-and-analyzing-research-careers-for-informed-policy-making-in-the-era/",
+            "title": "Policyseminar 8. juni: Monitoring and Analyzing Research Careers for Informed Policy Making in the ERA",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "NON_SUBSTANTIVE_PAGE",
+        "reason": "European research-policy context is explicit, but the claimed object is not substantive R&I evidence."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-16T08:31:18Z",
+      "deep_scan_package_id": "worker-a-20260916T081404Z-7f2127b37eb2"
+    },
+    "historical:id:d7546fcf2d8d3250": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "b00f73f2",
+      "identity_hash": "a705f023bb711974",
+      "reader_title": "Open-science secondment vacancy",
+      "reader_what": "ERA Portal Austria advertises a Commission secondment for open-science policy work.",
+      "reader_more": "The page is a recruitment notice for a Seconded National Expert position in the European Commission. Duties concern open-science policy, but the page contains no substantive policy development or research finding. It is therefore not historical Strand A evidence.",
+      "deep_analysis": {
+        "work_kind": "vacancy notice",
+        "research_question": "",
+        "main_finding": "A vacancy sought a Seconded National Expert to work on open-science policy.",
+        "method_or_basis": "Official vacancy page.",
+        "qualification": "Recruitment material is not a substantive research or policy output.",
+        "radar_relevance": "The subject is European R&I policy, but the claimed page is only a vacancy.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied primary/official source matched the claimed work and provided substantive evidence: https://era.gv.at/open-positions/seconded-national-expert-open-science-policy-rtd-a-4/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_primary_source",
+            "url": "https://era.gv.at/open-positions/seconded-national-expert-open-science-policy-rtd-a-4/",
+            "title": "ERA Portal Austria – Seconded National Expert - Open Science Policy (RTD-A-4)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity reconciled against the matching primary/official work; decision is based on the substantive source listed above."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "NON_SUBSTANTIVE_PAGE",
+        "reason": "The subject is European R&I policy, but the claimed page is only a vacancy."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence same-work duplicate is supplied or established within this lane."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-16T08:31:18Z",
+      "deep_scan_package_id": "worker-a-20260916T081404Z-7f2127b37eb2"
     }
   }
 }
