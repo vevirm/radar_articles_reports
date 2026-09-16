@@ -6,17 +6,17 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **993** (Main **626** + Historical **367**)
-- Automatic queue still needing V2 verification: **364** (Main **16** + Historical **348**)
-- Currently assigned to workers: **114** (Main **10** + Historical **104**)
-- Bounded access-recovery retries still eligible: **29**
+- Authoritative V2 verified: **1042** (Main **629** + Historical **413**)
+- Automatic queue still needing V2 verification: **315** (Main **13** + Historical **302**)
+- Currently assigned to workers: **90** (Main **7** + Historical **83**)
+- Bounded access-recovery retries still eligible: **37**
 - Hands-on verification needed: **52**
-- Automatic queue pending and not yet assigned: **250**
+- Automatic queue pending and not yet assigned: **225**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260916T110518Z-cdd923acd387`
+- Current package: `worker-a-20260916T111106Z-cdd923acd387`
 - Assigned unresolved records: **54**
   1. `historical:id:d5f26fe0b04812fb` — Digital Tech: Europe's Growing Gap in Eight Charts
   2. `historical:id:53454aa24a5eb5d6` — Digital Industrial Policy for Europe
@@ -29,17 +29,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 46 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260916T110623Z-d69fa410f5f1`
-- Assigned unresolved records: **60**
-  1. `link:https://news.google.com/rss/articles/CBMi0gFBVV95cUxQOFdvOHBDZVJ6YmN4TEc2MHA1T1Y4MG5uMFk4ak5TRkloaVlMd3FxNUtEalRSUmV6WTdWOUo1UEgwUXpGbTM2RTllWHdlUlhVdng2bmNlTXpEQUFmcThzZnhYODNhUldOV2FzYWljdFJJY2FjMktqSTdhd1d6MUxqU1hqd3lkRm9hS20zblVyRlVkOGlXcDFCMzNJVFk4QnFKd2tlWmp0SHdtblZfRW9GcWliU2xubTRXNm9pYVNPRXp4R01DaFV0N1F4el9LQlBvc1E?oc=5` — Use of AI for biology ‘requires strategic coordination’ from EU — recovery attempt 3/3
-  2. `historical:id:ecb059a3a1456fc1` — Space technology transfers and their commercialisation
-  3. `historical:id:1bdf764da4a6a643` — Health Data Governance: Lessons Learned from the COVID-19 Pandemic in Europe, China, and the United States
-  4. `historical:id:2060919efa3c9656` — The drivers of SME innovation in the regions of the EU
-  5. `historical:id:3e5955db838edcd5` — Foresight and Roadmapping Methodology: Trends and Outlook
-  6. `historical:id:9f24ad8e448c1621` — ‘Policy experiments are important to provide controlled and transparent AI systems’ | Rathenau Instituut
-  7. `historical:id:ff5ab61c09605460` — Gamification of backcasting for sustainability: The development of the gameful backcasting framework (GAMEBACK)
-  8. `historical:id:49792dd77e9fc103` — Move or perish? Sticky mobilities in the Swiss academic context
-  - … plus 52 more in the package manifest
+- Current package: `worker-b-20260916T111211Z-53364f3490a0`
+- Assigned unresolved records: **36**
+  1. `link:https://doi.org/10.1016/j.engfor.2026.09.002` — Can EU-27 achieve the decarbonization target in the energy sector? A scenario analysis based on extended STIRPAT model — recovery attempt 3/3
+  2. `historical:id:a4ff9ac2ff0bc41c` — A chance for leadership: German foreign policy after the killing of Qassem Soleimani – European Council on Foreign Relations
+  3. `historical:id:44ea421fb2df2461` — Rebirth of Industrial Policy and an Agenda for the Twenty-First Century
+  4. `historical:id:186db557485885c3` — €450 million for Europe’s long-term frontier research: 185 scientists win European Research Council’s Advanced Grants
+  5. `historical:id:d1e0952afc2673c0` — When Technology Becomes Geopolitics: The EU’s Response to Cyber Threats
+  6. `historical:id:f21f1a8fba0db149` — Tracking AI Investment | Center for Security and Emerging Technology
+  7. `historical:id:00ee758dd329360d` — The EIC Fund updates investment guidelines with new definitions and investment scenarios
+  8. `historical:id:c4090dac8fa36e5a` — Spain AI Strategy Report
+  - … plus 28 more in the package manifest
 
 ## Hands-on verification needed
 

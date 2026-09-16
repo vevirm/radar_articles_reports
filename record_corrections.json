@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-09-16T11:03:34Z",
+  "updated_at": "2026-09-16T11:09:15Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -6125,6 +6125,839 @@
       ],
       "updated_at": "2026-09-16T11:03:33Z",
       "deep_scan_package_id": "worker-a-20260916T103116Z-f393501bbf73"
+    },
+    "link:https://news.google.com/rss/articles/CBMi0gFBVV95cUxQOFdvOHBDZVJ6YmN4TEc2MHA1T1Y4MG5uMFk4ak5TRkloaVlMd3FxNUtEalRSUmV6WTdWOUo1UEgwUXpGbTM2RTllWHdlUlhVdng2bmNlTXpEQUFmcThzZnhYODNhUldOV2FzYWljdFJJY2FjMktqSTdhd1d6MUxqU1hqd3lkRm9hS20zblVyRlVkOGlXcDFCMzNJVFk4QnFKd2tlWmp0SHdtblZfRW9GcWliU2xubTRXNm9pYVNPRXp4R01DaFV0N1F4el9LQlBvc1E?oc=5": {
+      "fields": {
+        "source": "Research Professional News (reporting European Commission Joint Research Centre report JRC147549)"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Scanner named only the news outlet; the underlying work is a JRC report, and no tier is supported by the packaged evidence.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://joint-research-centre.ec.europa.eu/jrc-news-and-updates/biological-ai-models-new-paradigms-leverage-languages-life-2026-08-24_en",
+        "https://publications.jrc.ec.europa.eu/repository/bitstream/JRC147549/JRC147549_01.pdf"
+      ],
+      "updated_at": "2026-09-16T11:09:07Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:ecb059a3a1456fc1": {
+      "fields": {
+        "authors": "Mattia Olivari; Claire Jolly; Marit Undseth",
+        "type": "policy paper (OECD STI Policy Papers No. 116)"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Authorship and series confirmed from the report front matter; tier is not a bibliographic fact evidenced here.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.oecd.org/content/dam/oecd/en/publications/reports/2021/07/space-technology-transfers-and-their-commercialisation_270306c4/0e78ff9f-en.pdf"
+      ],
+      "updated_at": "2026-09-16T11:09:07Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:2060919efa3c9656": {
+      "fields": {
+        "date": "2021-11"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Crossref gives the issue date as November 2021 rather than the scanner's 1 July 2021; tier is not evidenced.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://researchonline.lse.ac.uk/id/eprint/112486/1/1_s2.0_S0048733321001177_main.pdf"
+      ],
+      "updated_at": "2026-09-16T11:09:07Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:3e5955db838edcd5": {
+      "fields": {
+        "source": "Foresight and STI Governance",
+        "type": "guest editorial"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Scanner recorded the journal as 'Foresight'; the article PDF and DOI record both give Foresight and STI Governance, and the piece is labelled a guest editorial.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://foresight-journal.hse.ru/article/download/19222/16739"
+      ],
+      "updated_at": "2026-09-16T11:09:07Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:9f24ad8e448c1621": {
+      "fields": {
+        "type": "blog interview"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The page is an interview in a blog series, not a research output; tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.rathenau.nl/en/digitalisation/policy-experiments-are-important-provide-controlled-and-transparent-ai-systems"
+      ],
+      "updated_at": "2026-09-16T11:09:07Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:ff5ab61c09605460": {
+      "fields": {},
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Tier is a scoring concept not supported by the recovered bibliographic evidence.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://resolver.tudelft.nl/uuid:103ddb3b-2a45-4cbb-a656-5bb1ac327161"
+      ],
+      "updated_at": "2026-09-16T11:09:08Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:49792dd77e9fc103": {
+      "fields": {
+        "date": "2021-05-29"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Online publication date confirmed; tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://link.springer.com/article/10.1007/s10734-021-00722-7"
+      ],
+      "updated_at": "2026-09-16T11:09:08Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:89b5ba0c24404067": {
+      "fields": {
+        "authors": "VTT Technical Research Centre of Finland"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Corporate authorship recorded from the release; tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.vttresearch.com/en/news-and-ideas/new-finnish-quantum-institute-brings-together-top-expertise-research-and"
+      ],
+      "updated_at": "2026-09-16T11:09:08Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:f1413793fad307b7": {
+      "fields": {
+        "type": "policy brief"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Item type confirmed from the EUISS publication series; tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.iss.europa.eu/publications/briefs/how-us-does-foresight"
+      ],
+      "updated_at": "2026-09-16T11:09:08Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:32df01e663cadae3": {
+      "fields": {
+        "type": "joint institutional statement"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Item type confirmed from the page; tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://fiia.fi/ajankohtaista/statement-by-european-research-institute-directors"
+      ],
+      "updated_at": "2026-09-16T11:09:08Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:facde00649b8e23f": {
+      "fields": {
+        "date": "2021-05"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Crossref gives the issue date as May 2021 rather than the scanner's 23 March 2021; tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://helda.helsinki.fi/server/api/core/bitstreams/ebfcb205-4c1d-46c9-900b-77817f1d259a/content"
+      ],
+      "updated_at": "2026-09-16T11:09:08Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:61ff5388c2287242": {
+      "fields": {
+        "type": "joint institutional statement"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Item type confirmed from the SWP page; tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.swp-berlin.org/presse/detail/statement-by-european-research-institute-directors"
+      ],
+      "updated_at": "2026-09-16T11:09:09Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:2bbc53545c7c1570": {
+      "fields": {
+        "source": "European Journal of Futures Research"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Scanner recorded the journal as 'Futures'; the article and DOI record give European Journal of Futures Research.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://link.springer.com/content/pdf/10.1186/s40309-021-00170-7.pdf"
+      ],
+      "updated_at": "2026-09-16T11:09:09Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:0334b18ddfc6f09e": {
+      "fields": {
+        "authors": "Paul Charon",
+        "date": "2021-03-11",
+        "type": "policy brief"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Author, date and item type taken from the EUISS brief page; tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.iss.europa.eu/publications/briefs/strategic-foresight-china"
+      ],
+      "updated_at": "2026-09-16T11:09:09Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:a182798c6a6e2f5e": {
+      "fields": {
+        "authors": "Brigitte Dekker; Anna-Lena Rhiem",
+        "type": "think-tank commentary"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Authors and item type taken from the article itself, which the scanner left blank; tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://merics.org/en/comment/rise-geoeconomics-and-need-resilient-european-semiconductor-industry"
+      ],
+      "updated_at": "2026-09-16T11:09:09Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:4d84b6731eb94a54": {
+      "fields": {
+        "authors": "Daniel Castro; Michael McLaughlin",
+        "type": "benchmarking report"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Authors and item type taken from the report page, which the scanner left blank; tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://itif.org/publications/2021/01/25/who-winning-ai-race-china-eu-or-united-states-2021-update/"
+      ],
+      "updated_at": "2026-09-16T11:09:09Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:bb54ad7d5b6df6f0": {
+      "fields": {
+        "type": "institutional programme page",
+        "date": "2021-02-22"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The page describes a body established under COM(2021) 70 of 22 February 2021 and is a standing description rather than a dated news item; tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://defence-industry-space.ec.europa.eu/eu-space/eu-observatory-critical-technologies_en"
+      ],
+      "updated_at": "2026-09-16T11:09:09Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:a0877d5514168df4": {
+      "fields": {
+        "authors": "Teija Lahti-Nuuttila; Riitta Maijala",
+        "type": "institutional blog post"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Authors and item type taken from the post itself; tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.aka.fi/en/about-the-rcf/whats-new/blog2/2021/cooperation-between-research-and-business-creates-a-positive-cycle/"
+      ],
+      "updated_at": "2026-09-16T11:09:09Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:44adb0f60df58766": {
+      "fields": {
+        "type": "conference event page",
+        "date": "2021-11-18"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The page announces a one-day IFRI conference held on 18 November 2021, not a 2021-01-01 study as the scanner recorded; tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.ifri.org/en/video-replay-space-and-quantum-technologies-what-strategies-and-industrial-models-europe"
+      ],
+      "updated_at": "2026-09-16T11:09:09Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:f1123b8dabf93ce4": {
+      "fields": {
+        "source": "European Commission, Joint Research Centre",
+        "date": "2021-02-10",
+        "type": "science for policy brief"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The document front matter identifies the JRC as issuing body with reference JRC124111 and the file is dated 10 February 2021; tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://ai-watch.ec.europa.eu/document/download/62831cde-3ed6-40da-b8ec-4d9c3c7e3f52_en?filename=policy_brief_public_sector_modernisation_for_eu_recovery_and_resilience_final_20210210.pdf"
+      ],
+      "updated_at": "2026-09-16T11:09:10Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:c740eb5f0afc24a3": {
+      "fields": {
+        "date": "2025-11",
+        "source": "Clean Hydrogen Joint Undertaking and European Commission, Joint Research Centre",
+        "title": "Programme Review Report 2025"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The report's own front matter dates the manuscript to November 2025 and names both co-authoring bodies, contradicting the scanner's 2021-01-01 date and single-body attribution.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.clean-hydrogen.europa.eu/document/download/33470293-31b2-4bcb-a9ce-8a2ae7890c90_en?filename=202502453_PDF_KJ0125166ENN_002.pdf"
+      ],
+      "updated_at": "2026-09-16T11:09:10Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:eeb20101de8f9378": {
+      "fields": {
+        "title": "Reducing the precarity of academic research careers",
+        "date": "2021-05-20",
+        "type": "policy paper (OECD STI Policy Papers No. 113)"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The scanner's title field held an interpretive claim about researcher mobility concentration rather than the work's title; the report's own citation gives the correct title, date and series.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.oecd.org/content/dam/oecd/en/publications/reports/2021/05/reducing-the-precarity-of-academic-research-careers_2d4e2194/0f8bd468-en.pdf"
+      ],
+      "updated_at": "2026-09-16T11:09:10Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:18d0eb3884db0d5e": {
+      "fields": {
+        "title": "Blockchain in Practice: Promoting Blockchain and DLTs in European SMEs",
+        "authors": "Ruben Peeters",
+        "date": "2021-06",
+        "source": "European Innovation Council and SMEs Executive Agency (EISMEA)"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Title, author, date and issuing agency all read from the report front matter, which the scanner rendered as an undated news-style headline.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://eismea.ec.europa.eu/document/download/45af4c18-f895-4d9e-90b1-4e86333a635f_en?filename=INNOSUP%20Blockchain%20in%20Practice.pdf"
+      ],
+      "updated_at": "2026-09-16T11:09:10Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:719e1c02b15eb979": {
+      "fields": {
+        "authors": "John Lee; Jan-Peter Kleinhans",
+        "date": "2021-06",
+        "type": "policy brief"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Authors, date and item type read from the report title page, which the scanner left blank or generic.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.interface-eu.org/publications/downloadPdf/mapping-chinas-semiconductor-ecosystem-global-context-strategic-dimensions-and"
+      ],
+      "updated_at": "2026-09-16T11:09:10Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:8544b75fe1bd8ffb": {
+      "fields": {
+        "date": "2021-12-06",
+        "type": "official announcement"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The announcement states the association agreement entered into force on 6 December 2021, not 2021-01-01 as the scanner recorded.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.eeas.europa.eu/delegations/israel/israel-joins-horizon-europe-research-innovation-programme_en"
+      ],
+      "updated_at": "2026-09-16T11:09:11Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:18494cf96a3c4c0a": {
+      "fields": {
+        "date": "2025-12-15",
+        "type": "institutional news article"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The article and its URL slug date it to 15 December 2025, not 2021-01-01 as the scanner recorded; tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://defence-industry-space.ec.europa.eu/ai-quantum-how-european-defence-fund-shapes-future-eu-defence-technologies-2025-12-15_en"
+      ],
+      "updated_at": "2026-09-16T11:09:11Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:8a79fa762b82b570": {
+      "fields": {
+        "source": "Europe in Changes: The Old Continent at a New Crossroads (Institute of International Politics and Economics, Belgrade)",
+        "type": "book chapter"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The work is a chapter in an edited volume, not an article in a journal called Security Studies as the scanner recorded.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "http://doi.fil.bg.ac.rs/pdf/eb_book/2021/iipe_euchanges/iipe_euchanges-2021-ch5.pdf"
+      ],
+      "updated_at": "2026-09-16T11:09:11Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:5bad4ad3d641413c": {
+      "fields": {
+        "date": "2020-08"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Crossref and the publisher give the August 2020 issue date matching the scanner; tier is not evidenced by the recovered sources.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.sciencedirect.com/science/article/abs/pii/S004016251930705X",
+        "https://publications.ait.ac.at/en/publications/sustainable-development-goals-in-the-research-and-innovation-poli/"
+      ],
+      "updated_at": "2026-09-16T11:09:11Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:1baa81f33b337660": {
+      "fields": {
+        "date": "2020-08"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Crossref confirms the August 2020 print issue; tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/S1062798720000095"
+      ],
+      "updated_at": "2026-09-16T11:09:11Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:47b13c01fddd5f5f": {
+      "fields": {
+        "authors": "OECD; Science Europe",
+        "type": "policy paper (OECD STI Policy Papers No. 91)",
+        "date": "2020-08-03"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Joint authorship, series number and date taken from the paper's own front matter and citation; tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://scienceeurope.org/media/cbchuqpj/se-oecd-policy-paper-optimising-the-operation-and-use-of-national-research-infrastructures-aug-2020.pdf"
+      ],
+      "updated_at": "2026-09-16T11:09:12Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:e61c1b496b195097": {
+      "fields": {
+        "date": "2020-08"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Crossref confirms the August 2020 issue; tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.mitpressjournals.org/doi/pdf/10.1162/qss_a_00077"
+      ],
+      "updated_at": "2026-09-16T11:09:12Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:80c27e8a2434fae6": {
+      "fields": {
+        "date": "2020-07-17",
+        "type": "podcast series listing"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The page is dated 17 July 2020 and is an episode index; tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.iss.europa.eu/activities/podcasts/euiss-foresight-podcast-china-miniseries"
+      ],
+      "updated_at": "2026-09-16T11:09:12Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:6c985e95a23d3d54": {
+      "fields": {
+        "type": "institutional explainer article"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Item type taken from the page; tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.rathenau.nl/en/how-science-system-works/mission-driven-innovation-policy-what-how-why"
+      ],
+      "updated_at": "2026-09-16T11:09:12Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:988194a217d38978": {
+      "fields": {
+        "date": "2020-06-26"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Online publication date confirmed by Crossref; the print issue is June 2021. Tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://link.springer.com/content/pdf/10.1007/s10961-020-09814-5.pdf"
+      ],
+      "updated_at": "2026-09-16T11:09:12Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:771f2e01db653f0f": {
+      "fields": {
+        "date": "2020-11"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Crossref gives the November 2020 issue date rather than the scanner's 20 June 2020; tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://dspace.library.uu.nl/server/api/core/bitstreams/a5f80c0f-c632-422a-a87d-85ceaf2d6adc/content"
+      ],
+      "updated_at": "2026-09-16T11:09:12Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:4b62262e359408c4": {
+      "fields": {
+        "source": "6th International Conference on Higher Education Advances (HEAd'20), Universitat Politecnica de Valencia",
+        "type": "conference paper",
+        "date": "2020-06-02"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The work is a conference proceedings paper, not a Higher Education journal article as the scanner recorded.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://ocs.editorial.upv.es/index.php/HEAD/HEAd20/paper/download/11030/5553"
+      ],
+      "updated_at": "2026-09-16T11:09:13Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:4d0bc227d7d533e1": {
+      "fields": {
+        "date": "2020-09"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Crossref confirms the September 2020 issue date rather than the scanner's 22 May 2020; tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://biblio.ugent.be/publication/8669733/file/8669735.pdf"
+      ],
+      "updated_at": "2026-09-16T11:09:13Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:8e900d3a8c950757": {
+      "fields": {
+        "type": "think-tank commentary"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Item type taken from the ECFR page; tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://ecfr.eu/article/commentary_israels_west_bank_annexation_preparing_eu_policy_for_the_day_aft/"
+      ],
+      "updated_at": "2026-09-16T11:09:13Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:8f641618baddd8df": {
+      "fields": {
+        "date": "2020-08"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Crossref confirms the August 2020 issue date rather than the scanner's 6 May 2020; tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://curis.ku.dk/ws/files/249951616/1_s2.0_S0040162520309112_main.pdf"
+      ],
+      "updated_at": "2026-09-16T11:09:13Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:93e21f800ef29f3e": {
+      "fields": {
+        "date": "2020-05"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Crossref confirms the May 2020 issue date matching the scanner; tier is not evidenced.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.sciencedirect.com/science/article/abs/pii/S0040162519302562"
+      ],
+      "updated_at": "2026-09-16T11:09:13Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:1f7ab04715dffe70": {
+      "fields": {
+        "source": "Studies in Higher Education",
+        "date": "2020-04-10"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The journal is Studies in Higher Education, not Higher Education as the scanner recorded; the online publication date is 10 April 2020.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://arxiv.org/pdf/2402.09407"
+      ],
+      "updated_at": "2026-09-16T11:09:14Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:318495d6bec22358": {
+      "fields": {
+        "type": "think-tank commentary"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Item type taken from the MERICS page; tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://merics.org/en/comment/chinas-industrial-policy-no-blueprint-europe"
+      ],
+      "updated_at": "2026-09-16T11:09:14Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:93b8c1136bc61839": {
+      "fields": {
+        "source": "Foresight and STI Governance",
+        "date": "2020-03-25"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Scanner recorded the journal as 'Foresight'; the article and DOI record give Foresight and STI Governance.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://foresight-journal.hse.ru/article/download/19345/16988"
+      ],
+      "updated_at": "2026-09-16T11:09:14Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:eb93040a5dc7fc1d": {
+      "fields": {
+        "type": "commissioned study"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Item type taken from the CEPS publication page; tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.ceps.eu/ceps-publications/study-to-gather-evidence-on-the-working-conditions-of-platform-workers/"
+      ],
+      "updated_at": "2026-09-16T11:09:14Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:179f06442ac36f2b": {
+      "fields": {
+        "authors": "Cornelis van Dorsser; Poonam Taneja",
+        "source": "foresight",
+        "date": "2020-03-09"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Crossref gives the full author name Poonam Taneja and the March 2020 date; tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://resolver.tudelft.nl/uuid:0b595ef8-e488-4300-8483-83878e0b7e35"
+      ],
+      "updated_at": "2026-09-16T11:09:14Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:852f66b557c01f71": {
+      "fields": {
+        "source": "Health Research Policy and Systems",
+        "date": "2020-02-13"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The journal is Health Research Policy and Systems, not Research Policy as the scanner recorded, and the article was published on 13 February 2020.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://health-policy-systems.biomedcentral.com/track/pdf/10.1186/s12961-020-0526-y",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7020561/"
+      ],
+      "updated_at": "2026-09-16T11:09:14Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
+    },
+    "historical:id:4a319afa05c35ada": {
+      "fields": {
+        "date": "2020-01-25"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Online publication date confirmed by Crossref; the print issue is April 2020. Tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://link.springer.com/content/pdf/10.1007/s11192-020-03351-6.pdf"
+      ],
+      "updated_at": "2026-09-16T11:09:15Z",
+      "deep_scan_package_id": "worker-b-20260916T103241Z-d69fa410f5f1"
     }
   }
 }
