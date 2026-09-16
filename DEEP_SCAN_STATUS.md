@@ -6,30 +6,30 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1042** (Main **629** + Historical **413**)
-- Automatic queue still needing V2 verification: **315** (Main **13** + Historical **302**)
-- Currently assigned to workers: **120** (Main **10** + Historical **110**)
-- Bounded access-recovery retries still eligible: **34**
+- Authoritative V2 verified: **1101** (Main **634** + Historical **467**)
+- Automatic queue still needing V2 verification: **256** (Main **8** + Historical **248**)
+- Currently assigned to workers: **96** (Main **8** + Historical **88**)
+- Bounded access-recovery retries still eligible: **32**
 - Hands-on verification needed: **52**
-- Automatic queue pending and not yet assigned: **195**
+- Automatic queue pending and not yet assigned: **160**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260916T111810Z-aef2b4927dcc`
-- Assigned unresolved records: **60**
-  1. `historical:id:d5f26fe0b04812fb` — Digital Tech: Europe's Growing Gap in Eight Charts
-  2. `historical:id:53454aa24a5eb5d6` — Digital Industrial Policy for Europe
-  3. `historical:id:deae16e521d94a62` — Data Sovereignty
-  4. `historical:id:a41eb5c3948e3918` — China Semiconductor Observatory - Baseline Report
-  5. `historical:id:5c11692c5ed9c392` — Bridging the Dutch and European Digital Sovereignty gap
-  6. `historical:id:594d72edde3f23fc` — Brain Drain or Brain Gain: A Growing Trend of Chinese International Students Returning Home for Development
-  7. `historical:id:5309327e4d2b9ed5` — ALLEA Statement in Response to the European Commission’s Call for Evidence on Digital Education and Digital Skills - ALLEA
-  8. `historical:id:47222664f4be9c62` — A green and digital future: 7 insights from strategic foresight
-  - … plus 52 more in the package manifest
+- Current package: `worker-a-20260916T113832Z-0bcaf3af01f3`
+- Assigned unresolved records: **36**
+  1. `historical:id:aaeb140e8d09dc4f` — The US-EU Rivalry for Data Protection: Energy Sector Implications
+  2. `historical:id:7c395c11e8b8e25a` — International Mobility, Joint Working and European Research
+  3. `historical:id:1403683ce0729403` — The Research Council International Advisory Board
+  4. `historical:id:c8a62d76fb707954` — Slovakia AI Strategy Report
+  5. `historical:id:beb88e4098f9473e` — Portugal AI Strategy Report
+  6. `historical:id:512c8174492ee3bc` — Netherlands AI Strategy Report
+  7. `historical:id:20b0ef3a55bd295f` — Globalizing Technologies: Geopolitical Innovation in the U.S. Bioeconomy
+  8. `historical:id:c41bdb57f19f94b3` — Estonia AI Strategy Report
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260916T111859Z-7e67cb37e8b4`
+- Current package: `worker-b-20260916T113843Z-7e67cb37e8b4`
 - Assigned unresolved records: **60**
   1. `link:https://doi.org/10.1016/j.engfor.2026.09.002` — Can EU-27 achieve the decarbonization target in the energy sector? A scenario analysis based on extended STIRPAT model — recovery attempt 3/3
   2. `historical:id:a4ff9ac2ff0bc41c` — A chance for leadership: German foreign policy after the killing of Qassem Soleimani – European Council on Foreign Relations
