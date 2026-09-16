@@ -1,0 +1,4158 @@
+{
+ "format": "radar-deep-scan-results-v2",
+ "package_id": "worker-b-20260916T111859Z-7e67cb37e8b4",
+ "results": [
+  {
+   "record_key": "link:https://doi.org/10.1016/j.engfor.2026.09.002",
+   "source_hash": "e646724d",
+   "identity_hash": "b4011d00c8aa9173",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "identity_only_after_recovery",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "failed",
+      "note": "https://doi.org/10.1016/j.engfor.2026.09.002 redirected to linkinghub.elsevier.com JS stub with no article text"
+     },
+     {
+      "step": "doi",
+      "outcome": "success",
+      "note": "Crossref 10.1016/j.engfor.2026.09.002: title/authors match, Energy Foresight, Sept 2026, CC BY 4.0; no abstract deposited"
+     },
+     {
+      "step": "exact_title",
+      "outcome": "failed",
+      "note": "Web search for exact title with 'STIRPAT' returned only unrelated EU decarbonisation papers"
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "failed",
+      "note": "Web search 'Energy Foresight 2026 EU-27 decarbonization extended STIRPAT ridge regression Taize Yu' found no copy"
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "failed",
+      "note": "Unpaywall API listed ScienceDirect OA PDF S2097720426000865/pdf; HTTP 403 bot block; Elsevier TDM API requires key (401)"
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "failed",
+      "note": "No preprint, repository or author copy located; prior V1 text was abstract-based"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "doi_metadata",
+      "url": "https://doi.org/10.1016/j.engfor.2026.09.002",
+      "title": "Crossref record",
+      "evidence_used": false
+     }
+    ],
+    "verification_note": "Identity verified; substantive text not legitimately accessible after all six steps."
+   },
+   "admission": {
+    "decision": "defer",
+    "target_strand": "A",
+    "reason_code": "EVIDENCE_ACCESS_LIMITED",
+    "reason": "Open-access article identity confirmed, but publisher blocks retrieval and no other copy exists; cannot verify content or R&I relevance."
+   },
+   "metadata_correction": {
+    "fields": {},
+    "unset": [],
+    "reason": ""
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "",
+   "reader_what": "",
+   "reader_why": "",
+   "reader_more": "",
+   "deep_analysis": {
+    "work_kind": "",
+    "research_question": "",
+    "main_finding": "",
+    "method_or_basis": "",
+    "qualification": "",
+    "radar_relevance": "",
+    "why_supported": false,
+    "confidence": "low"
+   }
+  },
+  {
+   "record_key": "historical:id:a4ff9ac2ff0bc41c",
+   "source_hash": "e837403c",
+   "identity_hash": "1eb58e5704a9e031",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "full_text_primary",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://ecfr.eu/article/commentary_a_chance_for_leadership_german_foreign_policy_after_soleimani/ opened (HTTP 200): full commentary by René Wildangel, 22 Jan 2020"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "publisher_full_text",
+      "url": "https://ecfr.eu/article/commentary_a_chance_for_leadership_german_foreign_policy_after_soleimani/",
+      "title": "A chance for leadership: German foreign policy after the killing of Qassem Soleimani",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "drop",
+    "target_strand": "",
+    "reason_code": "NOT_RI_SCOPE",
+    "reason": "ECFR commentary on German Iran/Iraq policy after Soleimani's killing; no research, innovation or technology content."
+   },
+   "metadata_correction": {
+    "fields": {
+     "authors": "René Wildangel"
+    },
+    "unset": [],
+    "reason": "ECFR page names René Wildangel as author."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "German foreign policy after Soleimani's killing",
+   "reader_what": "Germany must rethink how to de-escalate the Iran crisis and keep a role in Iraq.",
+   "reader_why": "",
+   "reader_more": "An ECFR commentary argues Berlin faces hard choices on the Iran nuclear deal and its Iraq military missions after the US killing of Qassem Soleimani. It is foreign-policy analysis with no research or innovation dimension.",
+   "deep_analysis": {
+    "work_kind": "policy commentary",
+    "research_question": "",
+    "main_finding": "Germany should use the crisis to raise its diplomatic profile while preserving the nuclear deal and Iraq commitments.",
+    "method_or_basis": "Author opinion drawing on news events.",
+    "qualification": "Opinion piece; no data.",
+    "radar_relevance": "Fails Strand A: no R&I, science or technology connection.",
+    "why_supported": false,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:44ea421fb2df2461",
+   "source_hash": "530843a7",
+   "identity_hash": "70f7bd8b05e4643a",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "full_text_primary",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://link.springer.com/article/10.1007/s10842-019-00322-3 opened (HTTP 200): open-access full article"
+     },
+     {
+      "step": "doi",
+      "outcome": "success",
+      "note": "Crossref record for 10.1007/s10842-019-00322-3 matched title/authors"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "publisher_full_text",
+      "url": "https://link.springer.com/article/10.1007/s10842-019-00322-3",
+      "title": "Rebirth of Industrial Policy and an Agenda for the Twenty-First Century",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "review",
+    "target_strand": "A",
+    "reason_code": "REVIEW_EU_RELEVANCE_PARTIAL",
+    "reason": "Substantive industrial-policy agenda paper with a real European strand (EU competition vs industrial policy, Chinese acquisitions), but framed globally; whether European relevance is substantive enough needs human judgement."
+   },
+   "metadata_correction": {
+    "fields": {
+     "type": "peer-reviewed article"
+    },
+    "unset": [],
+    "reason": "Crossref and Springer: journal article, J. Ind. Compet. Trade 20(2), online 6 Jan 2020."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "Why industrial policy is back, and what a modern version should look like",
+   "reader_what": "Industrial policy is returning worldwide and must become collaborative, service-inclusive and tied to social and environmental goals.",
+   "reader_why": "",
+   "reader_more": "Aiginger and Rodrik introduce a journal special issue on the revival of industrial policy. They trace the revival to China's rise, populism and climate goals. They argue future policy should be public-private collaboration rather than top-down sector picking. Europe features through tensions between EU competition rules and industrial ambitions, but the agenda is global.",
+   "deep_analysis": {
+    "work_kind": "journal editorial/agenda article",
+    "research_question": "What shape should industrial policy take amid political and technological disruption?",
+    "main_finding": "Industrial policy is back; it should be collaborative, broader than manufacturing and integrated with other policies.",
+    "method_or_basis": "Conceptual synthesis of literature and policy trends.",
+    "qualification": "Agenda-setting essay, not an empirical study; Europe is one of several contexts.",
+    "radar_relevance": "Relevant to European industrial-capability debates, but European focus is partial.",
+    "why_supported": false,
+    "confidence": "medium"
+   }
+  },
+  {
+   "record_key": "historical:id:186db557485885c3",
+   "source_hash": "81e8be84",
+   "identity_hash": "429a9244ad96ff90",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://www.eeas.europa.eu/delegations/china/%E2%82%AC450-million-europe%E2%80%99s-long-term-frontier-research opened (HTTP 200): full ERC press release republished by EU Delegation to China, page dated 01.04.2020"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_page",
+      "url": "https://www.eeas.europa.eu/delegations/china/%E2%82%AC450-million-europe%E2%80%99s-long-term-frontier-research",
+      "title": "€450 million for Europe's long-term frontier research",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "A",
+    "reason_code": "A_SUBSTANTIVE_EU_RI",
+    "reason": "Official announcement of ERC Advanced Grant results under Horizon 2020 with funding, host-country and gender statistics."
+   },
+   "metadata_correction": {
+    "fields": {
+     "date": "2020-04-01",
+     "source": "European Research Council (republished by EEAS Delegation to China)",
+     "type": "press release"
+    },
+    "unset": [],
+    "reason": "Page dated 01.04.2020; text is an ERC press release, not an EEAS publication."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "ERC awards €450 million to 185 senior researchers",
+   "reader_what": "185 ERC Advanced Grants worth €450 million were awarded; UK-hosted grants fell and women won about 21%.",
+   "reader_why": "Shows UK participation declining after Brexit and persistent gender imbalance in Europe's top frontier-research grants.",
+   "reader_more": "The European Research Council announced the 2019 Advanced Grants call results in spring 2020. 1,881 proposals competed and 185 were funded across 20 countries, led by Germany, the UK and France. Women submitted 19% of proposals and won nearly 21% of grants. The ERC president noted fewer UK-based winners, reflecting falling UK applications.",
+   "deep_analysis": {
+    "work_kind": "official funding announcement",
+    "research_question": "",
+    "main_finding": "185 Advanced Grants (€450m) awarded; 21% to women; UK-based grantees declined.",
+    "method_or_basis": "Official ERC call statistics.",
+    "qualification": "Announcement; grant outcomes are future research.",
+    "radar_relevance": "European frontier-research funding and talent distribution, historical context.",
+    "why_supported": true,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:d1e0952afc2673c0",
+   "source_hash": "3fd13766",
+   "identity_hash": "fc0d2f1cb34083ff",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "identity_only_after_recovery",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "partial",
+      "note": "https://link.springer.com/chapter/10.1007/978-3-030-48317-3_14 opened: abstract and reference list, chapter body behind purchase wall"
+     },
+     {
+      "step": "doi",
+      "outcome": "success",
+      "note": "Crossref 10.1007/978-3-030-48317-3_14: chapter in 'The European Union in International Affairs' (Springer 2020), pp. 213-233"
+     },
+     {
+      "step": "exact_title",
+      "outcome": "failed",
+      "note": "Unpaywall API for the DOI: closed, no OA location"
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "failed",
+      "note": "Crossref metadata for Eichhorn, Nedea, Trolle Smed 2020 lists no preprint relation"
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "failed",
+      "note": "No institutional repository copy identified via Unpaywall/Crossref"
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "failed",
+      "note": "Only abstract-level description of EU cyber instruments available; insufficient for admission"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "publisher_landing",
+      "url": "https://link.springer.com/chapter/10.1007/978-3-030-48317-3_14",
+      "title": "When Technology Becomes Geopolitics",
+      "evidence_used": false
+     }
+    ],
+    "verification_note": "Identity verified; substantive text not legitimately accessible after all six steps."
+   },
+   "admission": {
+    "decision": "defer",
+    "target_strand": "A",
+    "reason_code": "EVIDENCE_ACCESS_LIMITED",
+    "reason": "Book chapter identity confirmed; only abstract available, body paywalled."
+   },
+   "metadata_correction": {
+    "fields": {},
+    "unset": [],
+    "reason": ""
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "",
+   "reader_what": "",
+   "reader_why": "",
+   "reader_more": "",
+   "deep_analysis": {
+    "work_kind": "",
+    "research_question": "",
+    "main_finding": "",
+    "method_or_basis": "",
+    "qualification": "",
+    "radar_relevance": "",
+    "why_supported": false,
+    "confidence": "low"
+   }
+  },
+  {
+   "record_key": "historical:id:f21f1a8fba0db149",
+   "source_hash": "e2ff6eab",
+   "identity_hash": "61ec853802743590",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://cset.georgetown.edu/wp-content/uploads/CSET-Tracking-AI-Investment.pdf opened (HTTP 200): 74-page CSET report, September 2020"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "publisher_full_text",
+      "url": "https://cset.georgetown.edu/wp-content/uploads/CSET-Tracking-AI-Investment.pdf",
+      "title": "Tracking AI Investment: Initial Findings from the Private Markets",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "drop",
+    "target_strand": "",
+    "reason_code": "A_NOT_EUROPEAN",
+    "reason": "US-framed analysis of private AI investment; Europe mentioned only in passing and the keyword-based company classification is not a materially new reusable method."
+   },
+   "metadata_correction": {
+    "fields": {
+     "authors": "Zachary Arnold; Ilya Rahkovsky; Tina Huang",
+     "date": "2020-09",
+     "title": "Tracking AI Investment: Initial Findings from the Private Markets",
+     "type": "report"
+    },
+    "unset": [],
+    "reason": "Report cover gives title, authors and September 2020."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "Tracking private investment in AI companies",
+   "reader_what": "The US led private AI investment in 2019 with $25.2bn of nearly $40bn; China's market receded.",
+   "reader_why": "",
+   "reader_more": "CSET analyses equity investment in privately held AI firms using commercial deal databases. It finds US companies attracted 64% of disclosed 2019 value, while China's market fell back after 2017. The framing is US national security; Europe appears only briefly.",
+   "deep_analysis": {
+    "work_kind": "policy research report",
+    "research_question": "Where does private AI investment go and how is it changing?",
+    "main_finding": "US dominates private AI investment; China declined after 2017; other regions grew.",
+    "method_or_basis": "Crunchbase/Refinitiv deal data with keyword classification of AI firms.",
+    "qualification": "Disclosed deals only; estimates for undisclosed values.",
+    "radar_relevance": "Fails A (not European) and B (applies existing data classification).",
+    "why_supported": false,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:00ee758dd329360d",
+   "source_hash": "91c3dcd0",
+   "identity_hash": "c6b5643fbe6fb043",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://eic.ec.europa.eu/document/download/f2d3a62e-76c7-45ef-a6a8-39bb67a5774a_en opened (HTTP 200): 36-page PDF 'EIC Fund Investment Guidelines (Horizon Europe Compartment), Version: December 2023', © EU 2024"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_document",
+      "url": "https://eic.ec.europa.eu/document/download/f2d3a62e-76c7-45ef-a6a8-39bb67a5774a_en",
+      "title": "EIC Fund Investment Guidelines (Horizon Europe Compartment)",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "A",
+    "reason_code": "A_SUBSTANTIVE_EU_RI",
+    "reason": "Official EIC Fund investment guidelines setting how the EU's deep-tech equity instrument invests, co-invests and exits."
+   },
+   "metadata_correction": {
+    "fields": {
+     "date": "2023-12",
+     "source": "European Commission / EISMEA (European Innovation Council)",
+     "title": "EIC Fund Investment Guidelines (Horizon Europe Compartment), version December 2023",
+     "type": "official guidelines"
+    },
+    "unset": [],
+    "reason": "Document states version December 2023, © European Union 2024, doi 10.2826/219710; not 2020."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "How the EU's EIC Fund decides equity investments in startups",
+   "reader_what": "Updated guidelines define qualified co-investors, investment scenarios, follow-on investments and exits for the EIC Fund.",
+   "reader_why": "Sets the rules by which EU equity reaches deep-tech startups and how private co-investors are brought in.",
+   "reader_more": "The European Innovation Council Fund takes equity stakes in startups and SMEs selected under EIC calls. These December 2023 guidelines update earlier versions. Cases are assessed by an external fund manager, sorted into investment scenarios and require a Commission award decision setting the maximum amount. New clauses cover follow-on investments and exit strategies.",
+   "deep_analysis": {
+    "work_kind": "official investment guidelines",
+    "research_question": "",
+    "main_finding": "Defines EIC Fund investment process, co-investor definitions, scenarios, follow-ons and exits.",
+    "method_or_basis": "Official EISMEA/Commission document.",
+    "qualification": "Rules, not evidence of outcomes; later versions may exist.",
+    "radar_relevance": "EU innovation finance instrument for scale-ups.",
+    "why_supported": true,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:c4090dac8fa36e5a",
+   "source_hash": "72b27917",
+   "identity_hash": "5c9156a412a52d59",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://ai-watch.ec.europa.eu/countries/spain/spain-ai-strategy-report_en opened (HTTP 200): full AI Watch report on Spain, 'Last updated: 1 September 2021'"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_page",
+      "url": "https://ai-watch.ec.europa.eu/countries/spain/spain-ai-strategy-report_en",
+      "title": "Spain AI Strategy Report (AI Watch)",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "A",
+    "reason_code": "A_SUBSTANTIVE_EU_RI",
+    "reason": "JRC AI Watch country report analysing Spain's national AI strategy, including research, innovation, skills and infrastructure measures."
+   },
+   "metadata_correction": {
+    "fields": {
+     "date": "2021-09-01",
+     "source": "European Commission Joint Research Centre – AI Watch",
+     "type": "policy report"
+    },
+    "unset": [],
+    "reason": "Page shows 'Last updated: 1 September 2021' and covers strategies adopted 2020; 2020-01-01 was a placeholder."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "How Spain's national AI strategy plans to build research, skills and adoption",
+   "reader_what": "Spain's December 2020 AI strategy plans €600m public investment for 2021–2023 across talent, research, adoption and ethics.",
+   "reader_why": "Shows how a member state aligns national AI research, talent and infrastructure with EU AI policy.",
+   "reader_more": "The European Commission's AI Watch summarises Spain's national AI strategy. Spain plans EUR 600 million public investment for 2021–2023. It covers human capital, research and innovation, networking, regulation, data and computing infrastructure, and AI for climate and COVID-19. It describes planned measures; it does not evaluate results.",
+   "deep_analysis": {
+    "work_kind": "policy monitoring report",
+    "research_question": "",
+    "main_finding": "Spain's December 2020 AI strategy plans €600m public investment for 2021–2023 across talent, research, adoption and ethics.",
+    "method_or_basis": "Structured JRC/AI Watch review of the national strategy and related policy documents.",
+    "qualification": "Describes plans and announced measures, not implementation outcomes.",
+    "radar_relevance": "Member-state AI and R&I policy in the EU context.",
+    "why_supported": true,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:9e9f844f8ba49952",
+   "source_hash": "a37001a3",
+   "identity_hash": "c764c2852dab38d6",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://ai-watch.ec.europa.eu/countries/slovenia/slovenia-ai-strategy-report_en opened (HTTP 200): full AI Watch report on Slovenia, 'Last updated: 1 September 2021'"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_page",
+      "url": "https://ai-watch.ec.europa.eu/countries/slovenia/slovenia-ai-strategy-report_en",
+      "title": "Slovenia AI Strategy Report (AI Watch)",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "A",
+    "reason_code": "A_SUBSTANTIVE_EU_RI",
+    "reason": "JRC AI Watch country report analysing Slovenia's national AI strategy, including research, innovation, skills and infrastructure measures."
+   },
+   "metadata_correction": {
+    "fields": {
+     "date": "2021-09-01",
+     "source": "European Commission Joint Research Centre – AI Watch",
+     "type": "policy report"
+    },
+    "unset": [],
+    "reason": "Page shows 'Last updated: 1 September 2021' and covers strategies adopted 2020; 2020-01-01 was a placeholder."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "How Slovenia's national AI strategy plans to build research, skills and adoption",
+   "reader_what": "Slovenia's draft AI programme to 2025 earmarks €110m to strengthen AI research, industry capacity and infrastructure.",
+   "reader_why": "Shows how a member state aligns national AI research, talent and infrastructure with EU AI policy.",
+   "reader_more": "The European Commission's AI Watch summarises Slovenia's national AI strategy. Slovenia earmarks EUR 110 million to 2025. It covers human capital, research and innovation, networking, regulation, data and computing infrastructure, and AI for climate and COVID-19. It describes planned measures; it does not evaluate results.",
+   "deep_analysis": {
+    "work_kind": "policy monitoring report",
+    "research_question": "",
+    "main_finding": "Slovenia's draft AI programme to 2025 earmarks €110m to strengthen AI research, industry capacity and infrastructure.",
+    "method_or_basis": "Structured JRC/AI Watch review of the national strategy and related policy documents.",
+    "qualification": "Describes plans and announced measures, not implementation outcomes.",
+    "radar_relevance": "Member-state AI and R&I policy in the EU context.",
+    "why_supported": true,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:4504781eca8fcb9b",
+   "source_hash": "148e3c39",
+   "identity_hash": "88937cf23ced7109",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://defence-industry-space.ec.europa.eu/eu-space/research-development-and-innovation/quantum-technologies_en opened (HTTP 200): undated programme overview page (EuroQCI, quantum gravimetry, JRC reports)"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_page",
+      "url": "https://defence-industry-space.ec.europa.eu/eu-space/research-development-and-innovation/quantum-technologies_en",
+      "title": "Quantum Technologies – EU Space",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "drop",
+    "target_strand": "",
+    "reason_code": "GENERIC_PAGE",
+    "reason": "Undated evergreen DG DEFIS programme page on quantum for space; it describes ongoing aims and references the later Quantum Europe Strategy, so it is neither a research work nor a datable historical development."
+   },
+   "metadata_correction": {
+    "fields": {},
+    "unset": [],
+    "reason": ""
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "EU space programme page on quantum technologies",
+   "reader_what": "An undated Commission page outlines EuroQCI secure communication and quantum sensing plans for EU space.",
+   "reader_why": "",
+   "reader_more": "The page describes Commission aims for quantum communication (EuroQCI) and space quantum gravimetry, with links to JRC reports. It is continuously updated programme information with no date, so it cannot serve as 2020 historical evidence.",
+   "deep_analysis": {
+    "work_kind": "programme web page",
+    "research_question": "",
+    "main_finding": "Commission aims to develop quantum communication and sensing for EU space.",
+    "method_or_basis": "Institutional programme description.",
+    "qualification": "Undated; references documents from after 2020.",
+    "radar_relevance": "Fails: generic programme page, not datable historical evidence.",
+    "why_supported": false,
+    "confidence": "medium"
+   }
+  },
+  {
+   "record_key": "historical:id:c51718286d22910b",
+   "source_hash": "c640afcd",
+   "identity_hash": "29a69db3cf2fe6b8",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://www.tno.nl/en/newsroom/2020/10/position-paper-envisioning-european/ opened (HTTP 200); TNO news page dated 2020-10-23 linking the position paper PDF"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; TNO report 2020-R11357"
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "success",
+      "note": "Downloaded linked PDF https://publications.tno.nl/publication/34637221/FxLcYY/2020-R11357-JIIPPositionPaper.pdf (24 pages, June 2020)"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_page",
+      "url": "https://www.tno.nl/en/newsroom/2020/10/position-paper-envisioning-european/",
+      "title": "Position Paper: Envisioning a European Platform Economy",
+      "evidence_used": true
+     },
+     {
+      "kind": "official_document",
+      "url": "https://publications.tno.nl/publication/34637221/FxLcYY/2020-R11357-JIIPPositionPaper.pdf",
+      "title": "Policy Solutions for an Effective Platform Economy: The Battle that Europe Cannot Afford to Lose",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "A",
+    "reason_code": "A_SUBSTANTIVE_EU_RI",
+    "reason": "TNO page presenting a JIIP position paper (full PDF recovered) on EU policy for digital industrial B2B platforms and technological sovereignty."
+   },
+   "metadata_correction": {
+    "fields": {
+     "date": "2020-10-23",
+     "source": "TNO / Joint Institute for Innovation Policy (JIIP)",
+     "authors": "Claire Stolwijk; Tom van der Horst; Hanna Kuittinen; Heidi Korhonen; Riikka Virkkunen; Christian Hartmann; Matthijs Punter; Tjerk Timan; Amber Geurts; Jacqueline Allan; Chiara Tripepi",
+     "type": "position paper"
+    },
+    "unset": [],
+    "reason": "TNO page dated 23 Oct 2020; linked paper by JIIP partners led by TNO, authors listed on cover."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "European research institutes urge policy to win the industrial platform economy",
+   "reader_what": "JIIP argues Europe can lead digital industrial B2B platforms if it invests in enabling technologies, cloud and data governance.",
+   "reader_why": "Business-to-business platforms are presented as critical infrastructure where Europe, unlike consumer platforms, can still build strong positions.",
+   "reader_more": "Four European research and technology organisations, led by TNO, wrote this position paper. It says the US and China dominate consumer and social-media platforms, but industrial business-to-business platforms remain open. Recommendations include investing in AI, nanotechnology and quantum internet, a European cloud such as Gaia-X, decentralised data governance, a policy support facility and digital skills.",
+   "deep_analysis": {
+    "work_kind": "position paper",
+    "research_question": "How can Europe secure a strong position in industrial B2B platforms?",
+    "main_finding": "Digital industrial B2B platforms are critical infrastructure; targeted EU policy can make Europe a leader.",
+    "method_or_basis": "Stakeholder consultation and policy analysis by JIIP partners.",
+    "qualification": "Advocacy paper by RTOs; recommendations, not evaluated evidence.",
+    "radar_relevance": "European digital industrial capability and innovation policy.",
+    "why_supported": true,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:312875b5106a1948",
+   "source_hash": "6b9af723",
+   "identity_hash": "fcfc53e26820b8f6",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://ai-watch.ec.europa.eu/countries/poland/poland-ai-strategy-report_en opened (HTTP 200): full AI Watch report on Poland, 'Last updated: 1 September 2021'"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_page",
+      "url": "https://ai-watch.ec.europa.eu/countries/poland/poland-ai-strategy-report_en",
+      "title": "Poland AI Strategy Report (AI Watch)",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "A",
+    "reason_code": "A_SUBSTANTIVE_EU_RI",
+    "reason": "JRC AI Watch country report analysing Poland's national AI strategy, including research, innovation, skills and infrastructure measures."
+   },
+   "metadata_correction": {
+    "fields": {
+     "date": "2021-09-01",
+     "source": "European Commission Joint Research Centre – AI Watch",
+     "type": "policy report"
+    },
+    "unset": [],
+    "reason": "Page shows 'Last updated: 1 September 2021' and covers strategies adopted 2020; 2020-01-01 was a placeholder."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "How Poland's national AI strategy plans to build research, skills and adoption",
+   "reader_what": "Poland's December 2020 AI policy sets education reform, a virtual AI research institute, data sharing and governance bodies.",
+   "reader_why": "Shows how a member state aligns national AI research, talent and infrastructure with EU AI policy.",
+   "reader_more": "The European Commission's AI Watch summarises Poland's national AI strategy. Poland adopted its policy in December 2020 and plans a Virtual Research Institute for AI. It covers human capital, research and innovation, networking, regulation, data and computing infrastructure, and AI for climate and COVID-19. It describes planned measures; it does not evaluate results.",
+   "deep_analysis": {
+    "work_kind": "policy monitoring report",
+    "research_question": "",
+    "main_finding": "Poland's December 2020 AI policy sets education reform, a virtual AI research institute, data sharing and governance bodies.",
+    "method_or_basis": "Structured JRC/AI Watch review of the national strategy and related policy documents.",
+    "qualification": "Describes plans and announced measures, not implementation outcomes.",
+    "radar_relevance": "Member-state AI and R&I policy in the EU context.",
+    "why_supported": true,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:8093a3e1933a713a",
+   "source_hash": "cdf7654f",
+   "identity_hash": "4f2b8c5cc56578fe",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://www.eeas.europa.eu/delegations/japan/new-opportunities-japanese-talent-join-erc-research-teams-europe_en opened (HTTP 200): EU News 315/2020, dated 13.11.2020"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_page",
+      "url": "https://www.eeas.europa.eu/delegations/japan/new-opportunities-japanese-talent-join-erc-research-teams-europe_en",
+      "title": "New opportunities for Japanese talent to join ERC research teams in Europe",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "A",
+    "reason_code": "A_SUBSTANTIVE_EU_RI",
+    "reason": "Official announcement of a new ERC–AMED implementing arrangement enabling Japanese medical researchers to join ERC teams."
+   },
+   "metadata_correction": {
+    "fields": {
+     "date": "2020-11-13",
+     "source": "Delegation of the European Union to Japan (EEAS)",
+     "type": "press release"
+    },
+    "unset": [],
+    "reason": "Page dated 13.11.2020 (EU News 315/2020)."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "EU and Japan's medical research agency open ERC teams to Japanese researchers",
+   "reader_what": "A new ERC–AMED arrangement lets Japanese medical researchers temporarily join ERC-funded teams in Europe.",
+   "reader_why": "Part of the ERC's strategy to attract international talent to Europe through agreements with foreign funders.",
+   "reader_more": "The EU and the Japan Agency for Medical Research and Development signed an implementing arrangement in November 2020. AMED-backed researchers can make short or long visits to ERC grantee teams. It was the ERC's sixteenth such agreement and its third with a Japanese funder, after JSPS in 2015 and JST in 2018.",
+   "deep_analysis": {
+    "work_kind": "official announcement",
+    "research_question": "",
+    "main_finding": "ERC signed its third Japanese implementing arrangement, with AMED, for researcher visits.",
+    "method_or_basis": "Official EU delegation news release.",
+    "qualification": "Arrangement enables visits; no uptake data.",
+    "radar_relevance": "EU international research cooperation and talent circulation.",
+    "why_supported": true,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:a11556316ca5e98c",
+   "source_hash": "50fdfcdf",
+   "identity_hash": "b3cc1c76f5ea83c4",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "identity_only_after_recovery",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "partial",
+      "note": "https://link.springer.com/rwe/10.1007/978-94-017-8905-9_209 opened: definition and first introduction paragraphs only (preview)"
+     },
+     {
+      "step": "doi",
+      "outcome": "success",
+      "note": "Crossref 10.1007/978-94-017-8905-9_209: Goastellec, International Encyclopedia of Higher Education Systems and Institutions, pp. 1880-1885"
+     },
+     {
+      "step": "exact_title",
+      "outcome": "failed",
+      "note": "Unpaywall API for the DOI: closed access"
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "failed",
+      "note": "Crossref search on title + Goastellec returned only the Springer reference work"
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "failed",
+      "note": "No repository or author copy listed in Unpaywall/Crossref"
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "failed",
+      "note": "Preview (~760 words incl. navigation) too thin for substantive judgement"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "publisher_preview",
+      "url": "https://link.springer.com/rwe/10.1007/978-94-017-8905-9_209",
+      "title": "Internationalization of Higher Education Research and Careers, Europe",
+      "evidence_used": false
+     }
+    ],
+    "verification_note": "Identity verified; substantive text not legitimately accessible after all six steps."
+   },
+   "admission": {
+    "decision": "defer",
+    "target_strand": "A",
+    "reason_code": "EVIDENCE_ACCESS_LIMITED",
+    "reason": "Reference-work entry identity confirmed; only short preview accessible."
+   },
+   "metadata_correction": {
+    "fields": {},
+    "unset": [],
+    "reason": ""
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "",
+   "reader_what": "",
+   "reader_why": "",
+   "reader_more": "",
+   "deep_analysis": {
+    "work_kind": "",
+    "research_question": "",
+    "main_finding": "",
+    "method_or_basis": "",
+    "qualification": "",
+    "radar_relevance": "",
+    "why_supported": false,
+    "confidence": "low"
+   }
+  },
+  {
+   "record_key": "historical:id:fdc3147a7a85106b",
+   "source_hash": "a32bae3c",
+   "identity_hash": "32c12dffcbc6a2fa",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://erc.europa.eu/sites/default/files/press_release/files/ERC_highlight_Summer_Davos2014.pdf opened (HTTP 200): 3-page ERC highlight dated 10 September 2014"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_document",
+      "url": "https://erc.europa.eu/sites/default/files/press_release/files/ERC_highlight_Summer_Davos2014.pdf",
+      "title": "Highlight: 'Summer Davos' forum, China: ERC debates innovation with leading young talent",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "drop",
+    "target_strand": "",
+    "reason_code": "EVENT_PAGE",
+    "reason": "Short 2014 ERC highlight on participation in the WEF 'Summer Davos' meeting; promotional event notice with no substantive development."
+   },
+   "metadata_correction": {
+    "fields": {
+     "date": "2014-09-10",
+     "type": "press highlight"
+    },
+    "unset": [],
+    "reason": "PDF is dated 10 September 2014, not 2020."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "ERC takes part in the World Economic Forum's 'Summer Davos' in China",
+   "reader_what": "The ERC president and eleven grantees attended the 2014 Tianjin meeting to discuss innovation.",
+   "reader_why": "",
+   "reader_more": "A brief ERC communication announces participation in the World Economic Forum's Annual Meeting of the New Champions in Tianjin in September 2014. It is outreach publicity, not a policy decision or research output.",
+   "deep_analysis": {
+    "work_kind": "event highlight",
+    "research_question": "",
+    "main_finding": "ERC representatives and grantees attended Summer Davos 2014.",
+    "method_or_basis": "ERC communication.",
+    "qualification": "Promotional event notice.",
+    "radar_relevance": "Fails: event participation page without substantive development.",
+    "why_supported": false,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:19d3f4661d20784c",
+   "source_hash": "85d80321",
+   "identity_hash": "bfabfc2b954c4bb2",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "full_text_primary",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://www.swp-berlin.org/publikation/foresight-global-competition-for-health-care-workers-from-africa opened (HTTP 200): full SWP Comment 2020/C 64, 16.12.2020, doi:10.18449/2020C64"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "publisher_full_text",
+      "url": "https://www.swp-berlin.org/publikation/foresight-global-competition-for-health-care-workers-from-africa",
+      "title": "Foresight: Global Competition for Health Care Workers from Africa",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "drop",
+    "target_strand": "",
+    "reason_code": "NOT_RI_SCOPE",
+    "reason": "Fictional foresight scenario on Germany recruiting African nurses; health-workforce migration topic, not R&I, and it applies rather than develops a foresight method."
+   },
+   "metadata_correction": {
+    "fields": {
+     "date": "2020-12-16",
+     "authors": "Steffen Angenendt; Anne Koch; Melanie Müller",
+     "type": "policy commentary (foresight scenario)"
+    },
+    "unset": [],
+    "reason": "SWP page gives date 16.12.2020 and authors."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "Imagined scenario: Germany competes for African nurses",
+   "reader_what": "A fictional scenario depicts Germany negotiating a nurse training and recruitment deal with South Africa by 2024.",
+   "reader_why": "",
+   "reader_more": "SWP researchers write a fictional future in which nursing shortages push Germany into global competition for African health workers. The scenario explores negotiation obstacles and knock-on effects in South Africa and Zimbabwe. It concerns labour migration, not research or innovation.",
+   "deep_analysis": {
+    "work_kind": "foresight scenario commentary",
+    "research_question": "",
+    "main_finding": "Fictional scenario of competitive nurse recruitment from Africa.",
+    "method_or_basis": "Narrative foresight exercise.",
+    "qualification": "Explicitly fictional.",
+    "radar_relevance": "Fails A (not R&I) and B (no new method).",
+    "why_supported": false,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:2f32455bea32239c",
+   "source_hash": "26a28918",
+   "identity_hash": "7cfc7f3794eb1dbe",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://www.eeas.europa.eu/delegations/south-korea/european-unions-approach-artificial-intelligence-ai_en opened (HTTP 200): full EEAS page dated 25.02.2020"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_page",
+      "url": "https://www.eeas.europa.eu/delegations/south-korea/european-unions-approach-artificial-intelligence-ai_en",
+      "title": "European Union's Approach to Artificial Intelligence (AI)",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "A",
+    "reason_code": "A_SUBSTANTIVE_EU_RI",
+    "reason": "EU delegation summary of the Commission's February 2020 AI White Paper: ecosystem of excellence (research, skills, SMEs) and risk-based regulatory proposals."
+   },
+   "metadata_correction": {
+    "fields": {
+     "date": "2020-02-25",
+     "source": "Delegation of the European Union to the Republic of Korea (EEAS)",
+     "type": "policy summary"
+    },
+    "unset": [],
+    "reason": "Page dated 25.02.2020; it summarises the Commission White Paper on AI."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "The EU's 2020 plan for AI excellence and trust",
+   "reader_what": "The Commission proposed an AI 'ecosystem of excellence' plus risk-based rules with prior conformity checks for high-risk AI.",
+   "reader_why": "This White Paper framework later shaped EU AI investment and the risk-based approach of AI regulation.",
+   "reader_more": "This EU delegation page summarises the Commission's White Paper on Artificial Intelligence, open for consultation until May 2020. It proposes coordinated action with member states, research focus, skills, SME support and data and computing access. It also sets options for a risk-based legal framework, including prior conformity assessment for high-risk applications and voluntary labelling for others.",
+   "deep_analysis": {
+    "work_kind": "policy summary",
+    "research_question": "",
+    "main_finding": "Commission proposed combined AI excellence measures and risk-based regulation.",
+    "method_or_basis": "Official summary of the White Paper on AI.",
+    "qualification": "Consultation proposals, not adopted law at the time.",
+    "radar_relevance": "EU AI research, innovation and regulatory policy history.",
+    "why_supported": true,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "link:https://news.google.com/rss/articles/CBMihAFBVV95cUxOR3p4SXpZMVhsZk0yN3V0TDZXT3pnV1VaWkNrc2hOYXpaT3RDaGZzVUhZclRKMHVDbHNIMG5vQjFmY21GQk5lcDFhWlcxaHZZekVqQkk4Z28yU2FkeGNYbVB4eUFIZkwzQTFEMnZiOFdrdGdnWFZTNkxFeUNaWklSbVRTbHE?oc=5",
+   "source_hash": "307f7622",
+   "identity_hash": "f53e14300cc49e09",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "identity_only_after_recovery",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "failed",
+      "note": "Google News RSS redirect link returned only Google News boilerplate, not the article"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "news article without DOI"
+     },
+     {
+      "step": "exact_title",
+      "outcome": "success",
+      "note": "Search for exact headline found FT article dated 23 Aug 2026 (ft.com/content/d8279eab-023e-4403-8f0f-b0b64393dcbb) via quoting sites"
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "partial",
+      "note": "Secondary reposts (nuclear-news.net, Dealroom) quote opening lines; not primary evidence"
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "failed",
+      "note": "FT article is paywalled; no legitimate open copy"
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "failed",
+      "note": "No official Irish government document on reopening the nuclear debate located in bounded search"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "secondary_repost",
+      "url": "https://nuclear-news.net/2026/08/27/1-b1-data-centres-drive-ireland-to-reopen-nuclear-power-debate/",
+      "title": "Repost citing FT 23 Aug 2026",
+      "evidence_used": false
+     }
+    ],
+    "verification_note": "Identity verified; substantive text not legitimately accessible after all six steps."
+   },
+   "admission": {
+    "decision": "defer",
+    "target_strand": "C",
+    "reason_code": "EVIDENCE_ACCESS_LIMITED",
+    "reason": "FT article identity confirmed via headline search, but primary text is paywalled; secondary reposts cannot substitute."
+   },
+   "metadata_correction": {
+    "fields": {},
+    "unset": [],
+    "reason": ""
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "",
+   "reader_what": "",
+   "reader_why": "",
+   "reader_more": "",
+   "deep_analysis": {
+    "work_kind": "",
+    "research_question": "",
+    "main_finding": "",
+    "method_or_basis": "",
+    "qualification": "",
+    "radar_relevance": "",
+    "why_supported": false,
+    "confidence": "low"
+   }
+  },
+  {
+   "record_key": "historical:id:8b458b9e7a8a517b",
+   "source_hash": "37ef2bd0",
+   "identity_hash": "5db81cff40dc9ffe",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "full_text_primary",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://sk.sagepub.com/ency/edvol/the-sage-encyclopedia-of-higher-education/chpt/european-science-foundation opened (HTTP 200): entry by Jean-Claude Worms displayed through to 'See also' and websites"
+     },
+     {
+      "step": "doi",
+      "outcome": "success",
+      "note": "Crossref record for 10.4135/9781529714395.n654 matched title/authors"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "publisher_full_text",
+      "url": "https://sk.sagepub.com/ency/edvol/the-sage-encyclopedia-of-higher-education/chpt/european-science-foundation",
+      "title": "European Science Foundation – The SAGE Encyclopedia of Higher Education",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "A",
+    "reason_code": "A_SUBSTANTIVE_EU_RI",
+    "reason": "Encyclopedia entry on the European Science Foundation, a pan-European research coordination body, describing its role and transformation."
+   },
+   "metadata_correction": {
+    "fields": {
+     "authors": "Jean-Claude Worms",
+     "source": "The SAGE Encyclopedia of Higher Education (SAGE)",
+     "type": "encyclopedia entry"
+    },
+    "unset": [],
+    "reason": "SAGE Knowledge page: entry by Jean-Claude Worms in The SAGE Encyclopedia of Higher Education, not a journal 'Higher Education'."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "What the European Science Foundation was and how its role changed",
+   "reader_what": "Founded in 1974 to coordinate European research organisations, the ESF later shifted to practical support and evaluation services.",
+   "reader_why": "",
+   "reader_more": "The entry explains that the ESF was created in 1974 to coordinate European research funding and performing organisations and speak for European science. By 2000 it had 80 members from 30 countries. It later moved from agenda-setting to providing services such as independent proposal evaluation.",
+   "deep_analysis": {
+    "work_kind": "encyclopedia entry",
+    "research_question": "",
+    "main_finding": "ESF evolved from pan-European coordinator to service provider.",
+    "method_or_basis": "Reference entry by an ESF figure.",
+    "qualification": "Short descriptive entry.",
+    "radar_relevance": "Historical context on European research-coordination institutions.",
+    "why_supported": false,
+    "confidence": "medium"
+   }
+  },
+  {
+   "record_key": "historical:id:c3af0468330a0721",
+   "source_hash": "e1384161",
+   "identity_hash": "ec9e4f8fdd8c1f0f",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "substantive_primary_after_recovery",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "partial",
+      "note": "https://sk.sagepub.com/.../european-research-area opened (HTTP 200); about 780 words of Jens Jungblut's entry shown before truncation"
+     },
+     {
+      "step": "doi",
+      "outcome": "success",
+      "note": "10.4135/9781529714395.n186 resolves to the same SAGE Knowledge entry"
+     },
+     {
+      "step": "exact_title",
+      "outcome": "partial",
+      "note": "Unpaywall lookup for 10.4135/9781529714395.n186 returned closed access, no alternate copy"
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "failed",
+      "note": "Crossref/Unpaywall metadata for Jungblut entry in SAGE Encyclopedia of Higher Education (2020) listed no repository copy"
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "failed",
+      "note": "No open copy located beyond SAGE Knowledge preview"
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "partial",
+      "note": "Used visible SAGE entry text (definition, Lisbon Treaty basis, evolution) as substantive primary evidence"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "publisher_preview",
+      "url": "https://sk.sagepub.com/ency/edvol/the-sage-encyclopedia-of-higher-education/chpt/european-research-area",
+      "title": "European Research Area – The SAGE Encyclopedia of Higher Education",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "A",
+    "reason_code": "A_SUBSTANTIVE_EU_RI",
+    "reason": "Encyclopedia entry explaining the European Research Area's aims, legal basis and evolution; substantive visible portion supports admission."
+   },
+   "metadata_correction": {
+    "fields": {
+     "authors": "Jens Jungblut",
+     "source": "The SAGE Encyclopedia of Higher Education (SAGE)",
+     "type": "encyclopedia entry"
+    },
+    "unset": [],
+    "reason": "SAGE page: entry by Jens Jungblut in The SAGE Encyclopedia of Higher Education."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "What the European Research Area is and why it exists",
+   "reader_what": "The ERA aims to let researchers, knowledge and technology circulate freely and to harmonise research policy across Europe.",
+   "reader_why": "",
+   "reader_more": "The entry defines the European Research Area as a Commission, member-state and associated-country initiative to improve cross-border research cooperation. It notes its grounding in the Lisbon Treaty's goal of strengthening Europe's scientific and technological base. It traces how knowledge policies grew within European integration.",
+   "deep_analysis": {
+    "work_kind": "encyclopedia entry",
+    "research_question": "",
+    "main_finding": "ERA is a treaty-based EU initiative for free circulation of researchers and knowledge.",
+    "method_or_basis": "Reference entry; partly visible text.",
+    "qualification": "Full entry not accessible; judgement based on visible portion.",
+    "radar_relevance": "Historical context on core EU research policy.",
+    "why_supported": false,
+    "confidence": "medium"
+   }
+  },
+  {
+   "record_key": "historical:id:b74f7f610c12ea9a",
+   "source_hash": "37277ba2",
+   "identity_hash": "9b6e0c3fcd1711ee",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://www.acatech.de/publikation/european-perspectives-on-security-research/download-pdf/?lang=en opened (HTTP 200): 119-page acatech/Springer volume, 2011"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_document",
+      "url": "https://www.acatech.de/publikation/european-perspectives-on-security-research/download-pdf/?lang=en",
+      "title": "European Perspectives on Security Research",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "A",
+    "reason_code": "A_SUBSTANTIVE_EU_RI",
+    "reason": "acatech volume (ed. Klaus Thoma) examining European security research, its technologies and policy frameworks."
+   },
+   "metadata_correction": {
+    "fields": {
+     "date": "2011",
+     "authors": "Klaus Thoma (Ed.)",
+     "source": "acatech – National Academy of Science and Engineering / Springer",
+     "type": "edited report"
+    },
+    "unset": [],
+    "reason": "PDF imprint: Klaus Thoma (Ed.), acatech 2011, Springer, DOI 10.1007/978-3-642-18219-8."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "German academy volume on the future of European security research",
+   "reader_what": "Experts assess security research topics such as critical infrastructure resilience and how Europe should organise such research.",
+   "reader_why": "",
+   "reader_more": "acatech's 2011 volume collects contributions on European security research. Chapters cover areas including modelling of critical infrastructure failures such as power blackouts. It gives historical context for how Europe framed civil security research before later defence-research programmes.",
+   "deep_analysis": {
+    "work_kind": "edited academy report",
+    "research_question": "",
+    "main_finding": "Contributions map European security research needs and approaches.",
+    "method_or_basis": "Expert contributions, including modelling studies.",
+    "qualification": "2011 publication; historical.",
+    "radar_relevance": "European security research policy context.",
+    "why_supported": false,
+    "confidence": "medium"
+   }
+  },
+  {
+   "record_key": "historical:id:fc20081bb07bb125",
+   "source_hash": "df673ce7",
+   "identity_hash": "f0151b905fc462a8",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "identity_only_after_recovery",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "failed",
+      "note": "https://www.institutmontaigne.org/en/expressions/europe-versus-coronavirus-estonia-digital-technology-action returned HTTP 403"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "blog/expression piece without DOI"
+     },
+     {
+      "step": "exact_title",
+      "outcome": "success",
+      "note": "Web search for exact title returned the Institut Montaigne page (dated May 2020)"
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "partial",
+      "note": "Search snippet shows Estonian COVID-19 timeline and digital public services; snippets are not evidence"
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "failed",
+      "note": "web_fetch of the Institut Montaigne page blocked by bot detection"
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "failed",
+      "note": "Only a scraped third-party copy found; not legitimate primary evidence"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "search_result",
+      "url": "https://www.institutmontaigne.org/en/expressions/europe-versus-coronavirus-estonia-digital-technology-action",
+      "title": "Europe Versus Coronavirus - Estonia, Digital Technology in Action",
+      "evidence_used": false
+     }
+    ],
+    "verification_note": "Identity verified; substantive text not legitimately accessible after all six steps."
+   },
+   "admission": {
+    "decision": "defer",
+    "target_strand": "A",
+    "reason_code": "EVIDENCE_ACCESS_LIMITED",
+    "reason": "Identity confirmed but publisher blocks access; content cannot be read from a legitimate source."
+   },
+   "metadata_correction": {
+    "fields": {},
+    "unset": [],
+    "reason": ""
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "",
+   "reader_what": "",
+   "reader_why": "",
+   "reader_more": "",
+   "deep_analysis": {
+    "work_kind": "",
+    "research_question": "",
+    "main_finding": "",
+    "method_or_basis": "",
+    "qualification": "",
+    "radar_relevance": "",
+    "why_supported": false,
+    "confidence": "low"
+   }
+  },
+  {
+   "record_key": "historical:id:717022d6eea0787f",
+   "source_hash": "161f5a16",
+   "identity_hash": "7447f899942fcce9",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://energy.ec.europa.eu/data-and-analysis/energy-modelling/eu-reference-scenario-2020_en opened (HTTP 200): Commission page listing report, datasets and modelling framework"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_page",
+      "url": "https://energy.ec.europa.eu/data-and-analysis/energy-modelling/eu-reference-scenario-2020_en",
+      "title": "EU Reference Scenario 2020",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "drop",
+    "target_strand": "B",
+    "reason_code": "B_NO_REUSABLE_METHOD",
+    "reason": "Landing page for EU Reference Scenario 2020 outputs; applies existing PRIMES/GAINS/GLOBIOM models, so no new reusable method, and energy projections are not R&I."
+   },
+   "metadata_correction": {
+    "fields": {},
+    "unset": [],
+    "reason": ""
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "The EU's 2020 baseline energy, transport and emissions projections",
+   "reader_what": "The Commission's baseline projection under 2020 policies underpinned Green Deal impact assessments.",
+   "reader_why": "",
+   "reader_more": "The page presents the EU Reference Scenario 2020, a baseline projection built by E3-Modelling, IIASA and EuroCARE. It uses established models such as PRIMES and GAINS. It is an application of existing models, not a new method.",
+   "deep_analysis": {
+    "work_kind": "data/model output landing page",
+    "research_question": "",
+    "main_finding": "Baseline projection of energy, transport and emissions under 2020 policy.",
+    "method_or_basis": "PRIMES, PRIMES-TREMOVE, GAINS, GLOBIOM-G4M, CAPRI, GEM-E3, POLES-JRC.",
+    "qualification": "Projections conditional on assumptions.",
+    "radar_relevance": "Fails B: application of existing models.",
+    "why_supported": false,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:1ccf27e21fa92ed4",
+   "source_hash": "2053cff3",
+   "identity_hash": "6b94f6c9df54ab99",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "partial",
+      "note": "https://www.earto.eu/publication/earto-answer-to-the-ec-consultations-on-horizon-europe-interim-evaluation-horizon-2020-final-evaluation/ opened but showed only title and navigation"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; association position paper"
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "success",
+      "note": "EARTO site search found and downloaded https://www.earto.eu/wp-content/uploads/EARTO-Answer-to-the-EC-Consultations-on-Horizon-Europe-Interim-Evaluation-Horizon-2020-Final-Evaluation.pdf (2 pages, dated 26 July 2022)"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_document",
+      "url": "https://www.earto.eu/wp-content/uploads/EARTO-Answer-to-the-EC-Consultations-on-Horizon-Europe-Interim-Evaluation-Horizon-2020-Final-Evaluation.pdf",
+      "title": "EARTO Answer to the EC Consultations on Horizon Europe Interim Evaluation & Horizon 2020 Final Evaluation",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "A",
+    "reason_code": "A_SUBSTANTIVE_EU_RI",
+    "reason": "EARTO's position to the Commission on Horizon Europe's interim and Horizon 2020's final evaluation, flagging implementation problems."
+   },
+   "metadata_correction": {
+    "fields": {
+     "date": "2022-07-26",
+     "type": "position paper"
+    },
+    "unset": [],
+    "reason": "PDF is dated 26 July 2022, not 2020."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "Research organisations flag early Horizon Europe implementation problems",
+   "reader_what": "EARTO reported good early success rates but criticised missing grant rules and poor-quality evaluation reports.",
+   "reader_why": "",
+   "reader_more": "EARTO represents European research and technology organisations. In its 2022 consultation answer it notes RTOs' strong role in Framework Programmes and projects with more industry participation. Members found first Horizon Europe success rates better than expected. It flagged four issues, including the late annotated model grant agreement, weak evaluation summary reports and poor visibility of Commission mid-term review studies.",
+   "deep_analysis": {
+    "work_kind": "stakeholder position paper",
+    "research_question": "",
+    "main_finding": "Early Horizon Europe success rates acceptable; rules and evaluation quality need fixing.",
+    "method_or_basis": "Members' experiences collected by EARTO.",
+    "qualification": "Stakeholder view; limited data.",
+    "radar_relevance": "EU framework programme implementation and evaluation.",
+    "why_supported": false,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:6cbacf41fff101f8",
+   "source_hash": "02b32cf6",
+   "identity_hash": "b77d4995d3362afd",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://ai-watch.ec.europa.eu/countries/cyprus/cyprus-ai-strategy-report_en opened (HTTP 200): full AI Watch report on Cyprus, 'Last updated: 1 September 2021'"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_page",
+      "url": "https://ai-watch.ec.europa.eu/countries/cyprus/cyprus-ai-strategy-report_en",
+      "title": "Cyprus AI Strategy Report (AI Watch)",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "A",
+    "reason_code": "A_SUBSTANTIVE_EU_RI",
+    "reason": "JRC AI Watch country report analysing Cyprus's national AI strategy, including research, innovation, skills and infrastructure measures."
+   },
+   "metadata_correction": {
+    "fields": {
+     "date": "2021-09-01",
+     "source": "European Commission Joint Research Centre – AI Watch",
+     "type": "policy report"
+    },
+    "unset": [],
+    "reason": "Page shows 'Last updated: 1 September 2021' and covers strategies adopted 2020; 2020-01-01 was a placeholder."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "How Cyprus's national AI strategy plans to build research, skills and adoption",
+   "reader_what": "Cyprus's January 2020 AI strategy prioritises talent, an applied AI centre of excellence, public services and data spaces.",
+   "reader_why": "Shows how a member state aligns national AI research, talent and infrastructure with EU AI policy.",
+   "reader_more": "The European Commission's AI Watch summarises Cyprus's national AI strategy. Cyprus approved its strategy in January 2020. It covers human capital, research and innovation, networking, regulation, data and computing infrastructure, and AI for climate and COVID-19. It describes planned measures; it does not evaluate results.",
+   "deep_analysis": {
+    "work_kind": "policy monitoring report",
+    "research_question": "",
+    "main_finding": "Cyprus's January 2020 AI strategy prioritises talent, an applied AI centre of excellence, public services and data spaces.",
+    "method_or_basis": "Structured JRC/AI Watch review of the national strategy and related policy documents.",
+    "qualification": "Describes plans and announced measures, not implementation outcomes.",
+    "radar_relevance": "Member-state AI and R&I policy in the EU context.",
+    "why_supported": true,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:6b46e2522525757b",
+   "source_hash": "87e84f26",
+   "identity_hash": "437e3b7fe1a25b4a",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://www.cesaer.org/content/5-operations/2020/20200717-input-era-comm-consultation.pdf opened (HTTP 200): 2-page CESAER consultation answer dated 17 July 2020"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_document",
+      "url": "https://www.cesaer.org/content/5-operations/2020/20200717-input-era-comm-consultation.pdf",
+      "title": "Answer on consultation: Communication on the future of research and innovation and the ERA",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "A",
+    "reason_code": "A_SUBSTANTIVE_EU_RI",
+    "reason": "CESAER's formal input to the Commission consultation on the 2020 Communication on the future of R&I and the ERA."
+   },
+   "metadata_correction": {
+    "fields": {
+     "date": "2020-07-17",
+     "type": "consultation response"
+    },
+    "unset": [],
+    "reason": "Document dated 17 July 2020."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "Technology universities' input on the renewed European Research Area",
+   "reader_what": "CESAER asked that excellent science and its infrastructures be a core aim of the renewed ERA.",
+   "reader_why": "",
+   "reader_more": "CESAER, an association of European science and technology universities, answered the Commission's consultation for its 2020 ERA Communication. It stressed that excellent, investigator-led research and enabling infrastructures must be central ERA aims, alongside its positions on talent circulation and sustainable university funding.",
+   "deep_analysis": {
+    "work_kind": "consultation response",
+    "research_question": "",
+    "main_finding": "Excellent science should be a core objective of the renewed ERA.",
+    "method_or_basis": "Association position statement.",
+    "qualification": "Short advocacy input.",
+    "radar_relevance": "Historical stakeholder input into ERA renewal.",
+    "why_supported": false,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:18849e59b46e227e",
+   "source_hash": "f1016dfc",
+   "identity_hash": "48e44b6ac63cb383",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "partial",
+      "note": "https://health.ec.europa.eu/latest-updates/commission-steps-research-funding-2020-03-06_en opened; dated 6 March 2020, body only links press release IP/20/386"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; press release"
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "success",
+      "note": "Commission Press Corner API for IP/20/386 returned full release 'COVID-19: Commission steps up research funding and selects 17 projects'"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_page",
+      "url": "https://health.ec.europa.eu/latest-updates/commission-steps-research-funding-2020-03-06_en",
+      "title": "Commission steps up research funding",
+      "evidence_used": true
+     },
+     {
+      "kind": "official_document",
+      "url": "https://ec.europa.eu/commission/presscorner/detail/en/ip_20_386",
+      "title": "COVID-19: Commission steps up research funding and selects 17 projects in vaccine development, treatment and diagnostics",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "A",
+    "reason_code": "A_SUBSTANTIVE_EU_RI",
+    "reason": "Commission news (IP/20/386) scaling Horizon 2020 COVID-19 emergency research funding to €47.5m for 17 projects."
+   },
+   "metadata_correction": {
+    "fields": {
+     "date": "2020-03-06",
+     "type": "press release"
+    },
+    "unset": [],
+    "reason": "Page publication date 6 March 2020."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "EU adds €37.5 million for urgent COVID-19 research",
+   "reader_what": "Horizon 2020 emergency funding rose to €47.5 million, selecting 17 projects with 136 research teams.",
+   "reader_why": "An early example of the EU rapidly redeploying framework-programme money to a health emergency.",
+   "reader_more": "In March 2020 the Commission added €37.5 million to a €10 million January emergency call. The €47.5 million funded 17 projects involving 136 teams from the EU and beyond. Projects covered vaccines, rapid diagnostics, treatments and epidemiology and public-health preparedness.",
+   "deep_analysis": {
+    "work_kind": "official funding announcement",
+    "research_question": "",
+    "main_finding": "Emergency COVID-19 research funding scaled to €47.5m for 17 projects.",
+    "method_or_basis": "Commission press release.",
+    "qualification": "Grants still under negotiation at announcement.",
+    "radar_relevance": "EU R&I crisis response, historical context.",
+    "why_supported": true,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:504748a26b9ca0e4",
+   "source_hash": "f8608f97",
+   "identity_hash": "0e28936956467a9c",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://ai-watch.ec.europa.eu/countries/bulgaria/bulgaria-ai-strategy-report_en opened (HTTP 200): full AI Watch report on Bulgaria, 'Last updated: 1 September 2021'"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_page",
+      "url": "https://ai-watch.ec.europa.eu/countries/bulgaria/bulgaria-ai-strategy-report_en",
+      "title": "Bulgaria AI Strategy Report (AI Watch)",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "A",
+    "reason_code": "A_SUBSTANTIVE_EU_RI",
+    "reason": "JRC AI Watch country report analysing Bulgaria's national AI strategy, including research, innovation, skills and infrastructure measures."
+   },
+   "metadata_correction": {
+    "fields": {
+     "date": "2021-09-01",
+     "source": "European Commission Joint Research Centre – AI Watch",
+     "type": "policy report"
+    },
+    "unset": [],
+    "reason": "Page shows 'Last updated: 1 September 2021' and covers strategies adopted 2020; 2020-01-01 was a placeholder."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "How Bulgaria's national AI strategy plans to build research, skills and adoption",
+   "reader_what": "Bulgaria's AI concept to 2030 plans an AI research centre of excellence, skills reform and priority sectors.",
+   "reader_why": "Shows how a member state aligns national AI research, talent and infrastructure with EU AI policy.",
+   "reader_more": "The European Commission's AI Watch summarises Bulgaria's national AI strategy. Bulgaria published its AI concept to 2030 in December 2020. It covers human capital, research and innovation, networking, regulation, data and computing infrastructure, and AI for climate and COVID-19. It describes planned measures; it does not evaluate results.",
+   "deep_analysis": {
+    "work_kind": "policy monitoring report",
+    "research_question": "",
+    "main_finding": "Bulgaria's AI concept to 2030 plans an AI research centre of excellence, skills reform and priority sectors.",
+    "method_or_basis": "Structured JRC/AI Watch review of the national strategy and related policy documents.",
+    "qualification": "Describes plans and announced measures, not implementation outcomes.",
+    "radar_relevance": "Member-state AI and R&I policy in the EU context.",
+    "why_supported": true,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:5bd540eb173d9dbc",
+   "source_hash": "9bf93751",
+   "identity_hash": "ff72a08c27310663",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://cset.georgetown.edu/wp-content/uploads/CSET-Antitrust-and-Artificial-Intelligence.pdf opened (HTTP 200): 59-page CSET issue brief, May 2020"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "publisher_full_text",
+      "url": "https://cset.georgetown.edu/wp-content/uploads/CSET-Antitrust-and-Artificial-Intelligence.pdf",
+      "title": "Antitrust and Artificial Intelligence",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "drop",
+    "target_strand": "",
+    "reason_code": "A_NOT_EUROPEAN",
+    "reason": "CSET brief on how US antitrust break-ups might affect Pentagon AI access; US-only focus."
+   },
+   "metadata_correction": {
+    "fields": {
+     "date": "2020-05",
+     "authors": "Dakota Foster; Zachary Arnold",
+     "type": "issue brief"
+    },
+    "unset": [],
+    "reason": "Cover: May 2020, authors Dakota Foster and Zachary Arnold."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "Would breaking up Big Tech hurt the Pentagon's access to AI?",
+   "reader_what": "A framework examines how antitrust action could change US firms' incentives to innovate, sell to, and contain rivals in AI.",
+   "reader_why": "",
+   "reader_more": "CSET offers an initial framework for how breaking up large US technology companies might affect the Department of Defense's AI capabilities. Europe is essentially absent.",
+   "deep_analysis": {
+    "work_kind": "issue brief",
+    "research_question": "How would Big Tech break-ups affect Pentagon AI access?",
+    "main_finding": "Effects run through innovation, acquisition and containment channels.",
+    "method_or_basis": "Conceptual framework with literature.",
+    "qualification": "Exploratory US analysis.",
+    "radar_relevance": "Fails A: US-only.",
+    "why_supported": false,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "link:https://doi.org/10.1080/09662839.2026.2700193",
+   "source_hash": "11542769",
+   "identity_hash": "72e798f395f3c11b",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "identity_only_after_recovery",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "failed",
+      "note": "https://doi.org/10.1080/09662839.2026.2700193 redirected to tandfonline.com, HTTP 403"
+     },
+     {
+      "step": "doi",
+      "outcome": "success",
+      "note": "Crossref: Martins & Csernatoni, European Security, pp. 586-607, CC BY 4.0; no abstract deposited"
+     },
+     {
+      "step": "exact_title",
+      "outcome": "failed",
+      "note": "Web search for exact title found only related earlier Csernatoni/Martins works"
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "failed",
+      "note": "Search with authors and 'European rearmament' found no copy of this 2026 article"
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "failed",
+      "note": "Unpaywall API gave only publisher OA location; T&F PDF/XML endpoints returned 403"
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "failed",
+      "note": "No PRIO or institutional repository copy located"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "doi_metadata",
+      "url": "https://doi.org/10.1080/09662839.2026.2700193",
+      "title": "Crossref record",
+      "evidence_used": false
+     }
+    ],
+    "verification_note": "Identity verified; substantive text not legitimately accessible after all six steps."
+   },
+   "admission": {
+    "decision": "defer",
+    "target_strand": "A",
+    "reason_code": "EVIDENCE_ACCESS_LIMITED",
+    "reason": "Open-access article identity confirmed but publisher blocks retrieval and no repository copy exists."
+   },
+   "metadata_correction": {
+    "fields": {},
+    "unset": [],
+    "reason": ""
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "",
+   "reader_what": "",
+   "reader_why": "",
+   "reader_more": "",
+   "deep_analysis": {
+    "work_kind": "",
+    "research_question": "",
+    "main_finding": "",
+    "method_or_basis": "",
+    "qualification": "",
+    "radar_relevance": "",
+    "why_supported": false,
+    "confidence": "low"
+   }
+  },
+  {
+   "record_key": "historical:id:56e6d8d68851e8c2",
+   "source_hash": "f3fa1ff1",
+   "identity_hash": "7615f34e3f4726e6",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://www.awti.nl/documenten/2020/02/27/advisory-report-a-more-forceful-choice-for-key-technologies opened (HTTP 200): full English summary and recommendations, published 27 Feb 2020"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_page",
+      "url": "https://www.awti.nl/documenten/2020/02/27/advisory-report-a-more-forceful-choice-for-key-technologies",
+      "title": "Advisory report: A more forceful choice for key technologies",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "A",
+    "reason_code": "A_SUBSTANTIVE_EU_RI",
+    "reason": "Dutch STI advisory council report calling for an integrated, better-funded national key-technologies policy linked to European initiatives."
+   },
+   "metadata_correction": {
+    "fields": {
+     "date": "2020-02-27",
+     "source": "Adviesraad voor wetenschap, technologie en innovatie (AWTI)",
+     "type": "advisory report"
+    },
+    "unset": [],
+    "reason": "Page datePublished 2020-02-27."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "Dutch advisers urge bigger, more focused national bets on key technologies",
+   "reader_what": "AWTI recommends national key-technology programmes, a taskforce and €0.5–1 billion extra public investment yearly.",
+   "reader_why": "Argues fragmented generic funding leaves the Netherlands dependent on others' technology choices and weaker in European projects.",
+   "reader_more": "The Dutch Advisory Council for Science, Technology and Innovation says other countries invest earlier and more purposefully in key technologies such as AI, nanotechnology and photonics. It calls for an integrated approach weighing economic opportunity, societal challenges and public values. It recommends a portfolio of stakeholder-built national programmes selected by independent experts, a Key Technologies Taskforce within NWO, and €0.5–1 billion extra funding a year.",
+   "deep_analysis": {
+    "work_kind": "government advisory report",
+    "research_question": "What approach lets the Netherlands exploit key technologies while controlling risks?",
+    "main_finding": "An integrated, choice-driven and better-funded key-technology policy is needed.",
+    "method_or_basis": "Council analysis and consultation.",
+    "qualification": "Advice; not an evaluation.",
+    "radar_relevance": "Member-state technology sovereignty and R&I policy.",
+    "why_supported": true,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:fffab4780035d8c2",
+   "source_hash": "f495e108",
+   "identity_hash": "c63681d280f37306",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://www.eurohpc-ju.europa.eu/ai-and-hpc-enhancing-research-possibilities-2023-09-12_en opened (HTTP 200): full news feature, publication date 12 September 2023"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_page",
+      "url": "https://www.eurohpc-ju.europa.eu/ai-and-hpc-enhancing-research-possibilities-2023-09-12_en",
+      "title": "AI and HPC: Enhancing Research Possibilities",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "A",
+    "reason_code": "A_SUBSTANTIVE_EU_RI",
+    "reason": "EuroHPC JU feature reporting AI demand on EU supercomputers (120 of 700+ access applications AI-related, 42 on LLMs) and support schemes."
+   },
+   "metadata_correction": {
+    "fields": {
+     "date": "2023-09-12",
+     "type": "news feature"
+    },
+    "unset": [],
+    "reason": "Page publication date 12 September 2023, not 2020."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "AI projects surge on Europe's public supercomputers",
+   "reader_what": "Of over 700 EuroHPC access applications since 2021, 120 involved AI and 42 large language models.",
+   "reader_why": "Shows public EU computing infrastructure becoming a resource for AI research and SMEs.",
+   "reader_more": "EuroHPC Joint Undertaking reports that its supercomputers, online from April 2021, received more than 700 access applications, including 120 AI projects. National Competence Centres supported AI projects, and the FF4EuroHPC scheme funded 42 SME experiments, 19 using AI. Examples include poultry monitoring, maritime voice recognition and paediatric dosimetry.",
+   "deep_analysis": {
+    "work_kind": "institutional news feature",
+    "research_question": "",
+    "main_finding": "AI is a fast-growing share of EuroHPC usage.",
+    "method_or_basis": "EuroHPC JU application and project data.",
+    "qualification": "Self-reported institutional figures.",
+    "radar_relevance": "EU research infrastructure for AI.",
+    "why_supported": true,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:9ada6f07af6067f5",
+   "source_hash": "0b581cff",
+   "identity_hash": "94fef69559d50f1b",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://www.eeas.europa.eu/delegations/india/new-european-union-india-initiative-offer-opportunities-indian-top-talent-join-research-teams_en opened (HTTP 200): full release dated 28.10.2020"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_page",
+      "url": "https://www.eeas.europa.eu/delegations/india/new-european-union-india-initiative-offer-opportunities-indian-top-talent-join-research-teams_en",
+      "title": "A new European Union-India initiative to offer opportunities for Indian top talent",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "A",
+    "reason_code": "A_SUBSTANTIVE_EU_RI",
+    "reason": "Official announcement of the Commission–ICSSR implementing arrangement opening ERC teams to Indian social scientists."
+   },
+   "metadata_correction": {
+    "fields": {
+     "date": "2020-10-28",
+     "source": "Delegation of the European Union to India (EEAS)",
+     "type": "press release"
+    },
+    "unset": [],
+    "reason": "Release dated New Delhi, 28 October 2020."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "EU–India deal lets Indian social scientists join ERC teams",
+   "reader_what": "The Commission and ICSSR signed an arrangement for Indian social scientists to visit ERC-funded teams.",
+   "reader_why": "",
+   "reader_more": "Signed in October 2020, this is the ERC's second arrangement with an Indian funder, after SERB in 2017 for STEM. It extends cooperation to social sciences and humanities. Since 2007, 62 Indian nationals had won ERC grants.",
+   "deep_analysis": {
+    "work_kind": "official announcement",
+    "research_question": "",
+    "main_finding": "ERC–ICSSR arrangement for researcher visits.",
+    "method_or_basis": "Official EU delegation release.",
+    "qualification": "No uptake data.",
+    "radar_relevance": "EU international research cooperation.",
+    "why_supported": false,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:68170fba61fb15eb",
+   "source_hash": "cee3fc1b",
+   "identity_hash": "804c8ea4697a9afe",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://www.eurekanetwork.org/wp-content/uploads/2025/08/Annual-report-2020.pdf opened (HTTP 200): 26-page annual report 2020, © 2021 Eureka Association"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_document",
+      "url": "https://www.eurekanetwork.org/wp-content/uploads/2025/08/Annual-report-2020.pdf",
+      "title": "Eureka Annual report 2020",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "A",
+    "reason_code": "A_SUBSTANTIVE_EU_RI",
+    "reason": "EUREKA 2020 annual report on the intergovernmental R&D network's programmes (Eurostars, clusters, Globalstars) and COVID-19 response."
+   },
+   "metadata_correction": {
+    "fields": {
+     "date": "2021",
+     "source": "Eureka Association (EUREKA network)",
+     "type": "annual report"
+    },
+    "unset": [],
+    "reason": "Report © 2021 Eureka Association, covering 2020."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "EUREKA's 2020 review of international R&D cooperation",
+   "reader_what": "EUREKA reports continued funding of cross-border R&D projects in 2020, including early COVID-19-related calls.",
+   "reader_why": "",
+   "reader_more": "EUREKA is a network of national funders and the European Commission supporting international collaborative R&D in over 45 countries. Its 2020 report covers Eurostars, clusters, network projects, Globalstars, investment readiness and governance, and notes rapid dedicated funding for COVID-19 solutions.",
+   "deep_analysis": {
+    "work_kind": "annual report",
+    "research_question": "",
+    "main_finding": "EUREKA sustained cross-border R&D funding in 2020.",
+    "method_or_basis": "Organisational reporting.",
+    "qualification": "Self-reported.",
+    "radar_relevance": "European intergovernmental innovation cooperation.",
+    "why_supported": false,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:ad7fd852f57d44f0",
+   "source_hash": "ce27241c",
+   "identity_hash": "b9f37d15c7e3b308",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "full_text_primary",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://cset.georgetown.edu/article/mapping-the-terrain-ai-governance-and-the-future-of-power/ opened (HTTP 200): full article, published 17 Dec 2019"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "publisher_full_text",
+      "url": "https://cset.georgetown.edu/article/mapping-the-terrain-ai-governance-and-the-future-of-power/",
+      "title": "Mapping the terrain: AI governance and the future of power",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "drop",
+    "target_strand": "",
+    "reason_code": "A_NOT_EUROPEAN",
+    "reason": "CSET essay on AI governance scenarios centred on US–China power competition; no substantive European dimension."
+   },
+   "metadata_correction": {
+    "fields": {},
+    "unset": [],
+    "reason": ""
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "Four scenarios for AI and global power",
+   "reader_what": "AI governance must account for semiconductor chokepoints, open software and four US–China power scenarios.",
+   "reader_why": "",
+   "reader_more": "The essay compares AI governance with post-war nuclear control and sketches four worlds depending on US and Chinese progress in hardware, software and talent. Europe appears only via the Netherlands' chip-equipment role.",
+   "deep_analysis": {
+    "work_kind": "essay",
+    "research_question": "",
+    "main_finding": "AI governance needs flexible arrangements across multiple power configurations.",
+    "method_or_basis": "Conceptual scenario analysis.",
+    "qualification": "Speculative.",
+    "radar_relevance": "Fails A: US–China focus.",
+    "why_supported": false,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:f463caba09cb2007",
+   "source_hash": "cf776c30",
+   "identity_hash": "1c90d0608899edc2",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "identity_only_after_recovery",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "partial",
+      "note": "https://link.springer.com/article/10.1007/s11948-019-00167-3: abstract, funding (H2020 NUCLEUS) and references; body behind preview"
+     },
+     {
+      "step": "doi",
+      "outcome": "success",
+      "note": "Crossref 10.1007/s11948-019-00167-3: Schuijff & Dijkstra, Sci Eng Ethics 26:533-574"
+     },
+     {
+      "step": "exact_title",
+      "outcome": "success",
+      "note": "Search found University of Twente record listing final published PDF"
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "failed",
+      "note": "Europe PMC: PubMed record only, no PMC full text"
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "failed",
+      "note": "research.utwente.nl/files/161722887/... PDF blocked by bot detection (sandbox 403 and web_fetch)"
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "failed",
+      "note": "ResearchGate author upload returned HTTP 429"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "repository_record",
+      "url": "https://research.utwente.nl/en/publications/practices-of-responsible-research-and-innovation-a-review",
+      "title": "UT repository record",
+      "evidence_used": false
+     }
+    ],
+    "verification_note": "Identity verified; substantive text not legitimately accessible after all six steps."
+   },
+   "admission": {
+    "decision": "defer",
+    "target_strand": "A",
+    "reason_code": "EVIDENCE_ACCESS_LIMITED",
+    "reason": "Identity confirmed; legitimate full-text copies exist but were all blocked; abstract alone is insufficient."
+   },
+   "metadata_correction": {
+    "fields": {},
+    "unset": [],
+    "reason": ""
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "",
+   "reader_what": "",
+   "reader_why": "",
+   "reader_more": "",
+   "deep_analysis": {
+    "work_kind": "",
+    "research_question": "",
+    "main_finding": "",
+    "method_or_basis": "",
+    "qualification": "",
+    "radar_relevance": "",
+    "why_supported": false,
+    "confidence": "low"
+   }
+  },
+  {
+   "record_key": "historical:id:0fa9a045c44ef264",
+   "source_hash": "b534e323",
+   "identity_hash": "7f533c398b7dfa9f",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "identity_only_after_recovery",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "not_applicable",
+      "note": "no supplied URL in job; historical ID"
+     },
+     {
+      "step": "doi",
+      "outcome": "success",
+      "note": "Crossref 10.1177/1946756719862115: Panizzon & Barcellos, World Futures Review 11(4):331-350 (abstract only)"
+     },
+     {
+      "step": "exact_title",
+      "outcome": "failed",
+      "note": "Unpaywall API for 10.1177/1946756719862115: closed"
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "failed",
+      "note": "Crossref title+author query returned only the publisher version"
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "failed",
+      "note": "Publisher page journals.sagepub.com returned HTTP 403/paywall; no repository copy retrievable"
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "failed",
+      "note": "No accepted manuscript or institutional copy retrieved"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "doi_metadata",
+      "url": "https://doi.org/10.1177/1946756719862115",
+      "title": "Crossref record",
+      "evidence_used": false
+     }
+    ],
+    "verification_note": "Identity verified; substantive text not legitimately accessible after all six steps."
+   },
+   "admission": {
+    "decision": "defer",
+    "target_strand": "B",
+    "reason_code": "EVIDENCE_ACCESS_LIMITED",
+    "reason": "Identity confirmed via DOI metadata; substantive text not legitimately accessible."
+   },
+   "metadata_correction": {
+    "fields": {},
+    "unset": [],
+    "reason": ""
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "",
+   "reader_what": "",
+   "reader_why": "",
+   "reader_more": "",
+   "deep_analysis": {
+    "work_kind": "",
+    "research_question": "",
+    "main_finding": "",
+    "method_or_basis": "",
+    "qualification": "",
+    "radar_relevance": "",
+    "why_supported": false,
+    "confidence": "low"
+   }
+  },
+  {
+   "record_key": "historical:id:6e4ab6c02152e018",
+   "source_hash": "1055031f",
+   "identity_hash": "bbbd93549957ef5a",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "full_text_primary",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://ecfr.eu/article/commentary_farming_versus_foreign_policy_the_future_of_the_eu_budget/ opened (HTTP 200): full commentary by Susi Dennison, 22 Nov 2019"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "publisher_full_text",
+      "url": "https://ecfr.eu/article/commentary_farming_versus_foreign_policy_the_future_of_the_eu_budget/",
+      "title": "Farming versus foreign policy: The future of the EU budget",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "drop",
+    "target_strand": "",
+    "reason_code": "NOT_RI_SCOPE",
+    "reason": "ECFR commentary on MFF negotiations and funding for the EU's external action; no research or innovation content."
+   },
+   "metadata_correction": {
+    "fields": {
+     "authors": "Susi Dennison"
+    },
+    "unset": [],
+    "reason": "ECFR page names Susi Dennison as author."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "EU budget talks put farming ahead of foreign policy",
+   "reader_what": "Member states prioritise cohesion and farm funds over external action in 2021–2027 budget negotiations.",
+   "reader_why": "",
+   "reader_more": "ECFR survey evidence shows few member states strongly prioritise external aid, while most prioritise cohesion and agricultural funds. The piece is about the EU's global role, not research or innovation.",
+   "deep_analysis": {
+    "work_kind": "policy commentary",
+    "research_question": "",
+    "main_finding": "External-action spending risks losing out in MFF talks.",
+    "method_or_basis": "Author analysis with ECFR surveys.",
+    "qualification": "Opinion.",
+    "radar_relevance": "Fails A: no R&I connection.",
+    "why_supported": false,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:c4afcd47c4dfc922",
+   "source_hash": "adcea94d",
+   "identity_hash": "040e6c8d60bb81c6",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "identity_only_after_recovery",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "not_applicable",
+      "note": "no supplied URL in job; historical ID"
+     },
+     {
+      "step": "doi",
+      "outcome": "success",
+      "note": "Crossref 10.1093/scipol/scz056: Cao, Baas, Wagner, Jonkers, Science and Public Policy 47(2):172 (abstract only)"
+     },
+     {
+      "step": "exact_title",
+      "outcome": "failed",
+      "note": "Unpaywall API for 10.1093/scipol/scz056: OUP PDF listed but 403; SSRN 3395899 page 403"
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "failed",
+      "note": "Crossref title+author query returned only the publisher version"
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "failed",
+      "note": "Publisher page academic.oup.com returned HTTP 403/paywall; no repository copy retrievable"
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "failed",
+      "note": "No accepted manuscript or institutional copy retrieved"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "doi_metadata",
+      "url": "https://doi.org/10.1093/scipol/scz056",
+      "title": "Crossref record",
+      "evidence_used": false
+     }
+    ],
+    "verification_note": "Identity verified; substantive text not legitimately accessible after all six steps."
+   },
+   "admission": {
+    "decision": "defer",
+    "target_strand": "",
+    "reason_code": "EVIDENCE_ACCESS_LIMITED",
+    "reason": "Identity confirmed via DOI metadata; substantive text not legitimately accessible."
+   },
+   "metadata_correction": {
+    "fields": {},
+    "unset": [],
+    "reason": ""
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "",
+   "reader_what": "",
+   "reader_why": "",
+   "reader_more": "",
+   "deep_analysis": {
+    "work_kind": "",
+    "research_question": "",
+    "main_finding": "",
+    "method_or_basis": "",
+    "qualification": "",
+    "radar_relevance": "",
+    "why_supported": false,
+    "confidence": "low"
+   }
+  },
+  {
+   "record_key": "historical:id:c2f417202ea5f9f3",
+   "source_hash": "8bdf4f7f",
+   "identity_hash": "0b24398238c15790",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "identity_only_after_recovery",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "not_applicable",
+      "note": "no supplied URL in job; historical ID"
+     },
+     {
+      "step": "doi",
+      "outcome": "success",
+      "note": "Crossref 10.1093/scipol/scz029: Fitjar, Benneworth, Asheim, Science and Public Policy 46(5):772-783 (abstract only)"
+     },
+     {
+      "step": "exact_title",
+      "outcome": "failed",
+      "note": "Unpaywall API for 10.1093/scipol/scz029: OUP PDF 403; Brage/NVA handles gave no file"
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "failed",
+      "note": "Crossref title+author query returned only the publisher version"
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "failed",
+      "note": "Publisher page academic.oup.com returned HTTP 403/paywall; no repository copy retrievable"
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "failed",
+      "note": "No accepted manuscript or institutional copy retrieved"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "doi_metadata",
+      "url": "https://doi.org/10.1093/scipol/scz029",
+      "title": "Crossref record",
+      "evidence_used": false
+     }
+    ],
+    "verification_note": "Identity verified; substantive text not legitimately accessible after all six steps."
+   },
+   "admission": {
+    "decision": "defer",
+    "target_strand": "A",
+    "reason_code": "EVIDENCE_ACCESS_LIMITED",
+    "reason": "Identity confirmed via DOI metadata; substantive text not legitimately accessible."
+   },
+   "metadata_correction": {
+    "fields": {},
+    "unset": [],
+    "reason": ""
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "",
+   "reader_what": "",
+   "reader_why": "",
+   "reader_more": "",
+   "deep_analysis": {
+    "work_kind": "",
+    "research_question": "",
+    "main_finding": "",
+    "method_or_basis": "",
+    "qualification": "",
+    "radar_relevance": "",
+    "why_supported": false,
+    "confidence": "low"
+   }
+  },
+  {
+   "record_key": "historical:id:5eb080b0124703a1",
+   "source_hash": "69a03a55",
+   "identity_hash": "26191cbce2f2f68c",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "full_text_primary",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://www.ceps.eu/can-the-eus-arctic-policy-find-true-north/ opened (HTTP 200): full commentary by Adam Stępień and Andreas Raspotnik, 11 Sep 2019"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "publisher_full_text",
+      "url": "https://www.ceps.eu/can-the-eus-arctic-policy-find-true-north/",
+      "title": "Can the EU's Arctic policy find true north?",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "drop",
+    "target_strand": "",
+    "reason_code": "NOT_RI_SCOPE",
+    "reason": "CEPS commentary on EU Arctic policy strategy; research appears only incidentally."
+   },
+   "metadata_correction": {
+    "fields": {
+     "authors": "Adam Stępień; Andreas Raspotnik"
+    },
+    "unset": [],
+    "reason": "Author box on CEPS page."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "Should the EU adopt a real Arctic strategy?",
+   "reader_what": "The authors argue a grand EU Arctic strategy is unrealistic; modest European Arctic targets are better.",
+   "reader_why": "",
+   "reader_more": "The commentary finds EU Arctic policy too broad, marginal in Brussels and with limited leverage. It recommends a small set of sustainable development targets for the European Arctic. Research funding is mentioned only in passing.",
+   "deep_analysis": {
+    "work_kind": "policy commentary",
+    "research_question": "",
+    "main_finding": "A modest, European-Arctic-focused approach is more realistic than a grand strategy.",
+    "method_or_basis": "Expert analysis.",
+    "qualification": "Opinion.",
+    "radar_relevance": "Fails A: regional/foreign policy, not R&I.",
+    "why_supported": false,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:fb4873cc52f73677",
+   "source_hash": "84355531",
+   "identity_hash": "bcf56f21efa7c9cf",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "full_text_repository_copy",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "failed",
+      "note": "https://linkinghub.elsevier.com/retrieve/pii/S0959652619330550 returned only a JavaScript redirect stub"
+     },
+     {
+      "step": "doi",
+      "outcome": "success",
+      "note": "Crossref 10.1016/j.jclepro.2019.118185: Kushnir, Hansen, Vogl, Åhman, J. Clean. Prod. vol 242, Jan 2020"
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "success",
+      "note": "Unpaywall pointed to Lund University LUP; downloaded publisher's version PDF https://lup.lub.lu.se/search/files/69986713/1_s2.0_S0959652619330550_main.pdf (15 pages)"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "repository_full_text",
+      "url": "https://lup.lub.lu.se/search/files/69986713/1_s2.0_S0959652619330550_main.pdf",
+      "title": "Adopting hydrogen direct reduction for the Swedish steel industry: A technological innovation system (TIS) study",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "A",
+    "reason_code": "A_SUBSTANTIVE_EU_RI",
+    "reason": "Technological innovation system study of hydrogen direct reduction for Swedish steel, identifying drivers and blockages to industrial decarbonisation innovation."
+   },
+   "metadata_correction": {
+    "fields": {
+     "date": "2020-01"
+    },
+    "unset": [],
+    "reason": "Published in volume 242 (January 2020); 2019-09-11 was online-first date."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "What helps or blocks hydrogen-based steelmaking innovation in Sweden",
+   "reader_what": "A TIS analysis finds Sweden well placed for hydrogen direct reduction, but scale-up faces cost, infrastructure and policy hurdles.",
+   "reader_why": "Pinpoints system weaknesses that public policy must address for fossil-free steel demonstrations like HYBRIT to scale.",
+   "reader_more": "The study applies the technological innovation system framework to hydrogen direct reduction of iron ore in Sweden. It maps actors, networks and institutions around initiatives such as HYBRIT. It assesses system functions like knowledge development, legitimacy and resource mobilisation. It concludes that Swedish strengths are real but that investment risk, electricity and hydrogen infrastructure, and policy support are key constraints.",
+   "deep_analysis": {
+    "work_kind": "empirical case study",
+    "research_question": "What are the drivers and barriers for hydrogen direct reduction in Swedish steel?",
+    "main_finding": "Strong knowledge base but major scale-up barriers.",
+    "method_or_basis": "TIS functional analysis using documents and interviews.",
+    "qualification": "Single-country case; pre-commercial stage.",
+    "radar_relevance": "European industrial decarbonisation innovation capability.",
+    "why_supported": true,
+    "confidence": "medium"
+   }
+  },
+  {
+   "record_key": "historical:id:cdeb8ceb28cef4fd",
+   "source_hash": "2021a8ba",
+   "identity_hash": "c9104e9af3dc6f53",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "partial",
+      "note": "https://itif.org/publications/2019/08/19/who-winning-ai-race-china-eu-or-united-states/ opened; summary landing page only"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; think-tank report"
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "success",
+      "note": "Downloaded full report https://www2.datainnovation.org/2019-china-eu-us-ai.pdf (106 pages, Center for Data Innovation, August 2019)"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_document",
+      "url": "https://www2.datainnovation.org/2019-china-eu-us-ai.pdf",
+      "title": "Who Is Winning the AI Race: China, the EU or the United States?",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "A",
+    "reason_code": "A_SUBSTANTIVE_EU_RI",
+    "reason": "Full comparative report with the EU as one of three core subjects, scoring EU AI talent, research, development, adoption, data and hardware and giving EU recommendations."
+   },
+   "metadata_correction": {
+    "fields": {
+     "authors": "Daniel Castro; Michael McLaughlin; Eline Chivot",
+     "source": "Center for Data Innovation (ITIF)",
+     "type": "report"
+    },
+    "unset": [],
+    "reason": "Report cover and PDF metadata: Center for Data Innovation, authors listed."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "The EU trails the US and China in the 2019 AI race",
+   "reader_what": "On 100 points, the US scored 44.2, China 32.3 and the EU 23.5 across six AI metrics.",
+   "reader_why": "Identifies EU weaknesses in retaining talent, commercialising research, scaling firms and data rules.",
+   "reader_more": "The Center for Data Innovation compares China, the EU and the US on talent, research, development, adoption, data and hardware. The US leads four categories and China two; the EU leads none but is close in talent. Adjusted for workforce size, the EU moves ahead of China. It urges the EU to retain talent, move research into business, grow larger firms and reform data rules.",
+   "deep_analysis": {
+    "work_kind": "comparative policy report",
+    "research_question": "Who leads in AI among China, the EU and US?",
+    "main_finding": "US 44.2, China 32.3, EU 23.5; EU ahead of China per worker.",
+    "method_or_basis": "Composite of 30 metrics across six categories.",
+    "qualification": "Think-tank index; weighting choices matter.",
+    "radar_relevance": "European AI competitiveness.",
+    "why_supported": true,
+    "confidence": "medium"
+   }
+  },
+  {
+   "record_key": "historical:id:5815e2e734c08288",
+   "source_hash": "4821375b",
+   "identity_hash": "6edbaa9b1537433d",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "identity_only_after_recovery",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "failed",
+      "note": "https://kluwerlawonline.com/... opened: abstract only, subscription wall"
+     },
+     {
+      "step": "doi",
+      "outcome": "success",
+      "note": "Crossref 10.54648/eerr2019020: Prange-Gstöhl, European Foreign Affairs Review 24 Special Issue:81-98"
+     },
+     {
+      "step": "exact_title",
+      "outcome": "failed",
+      "note": "Unpaywall API for 10.54648/eerr2019020: closed"
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "failed",
+      "note": "Crossref title+author query returned only the publisher version"
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "failed",
+      "note": "Publisher page kluwerlawonline.com returned HTTP 403/paywall; no repository copy retrievable"
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "failed",
+      "note": "No accepted manuscript or institutional copy retrieved"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "doi_metadata",
+      "url": "https://doi.org/10.54648/eerr2019020",
+      "title": "Crossref record",
+      "evidence_used": false
+     }
+    ],
+    "verification_note": "Identity verified; substantive text not legitimately accessible after all six steps."
+   },
+   "admission": {
+    "decision": "defer",
+    "target_strand": "A",
+    "reason_code": "EVIDENCE_ACCESS_LIMITED",
+    "reason": "Identity confirmed via DOI metadata; substantive text not legitimately accessible."
+   },
+   "metadata_correction": {
+    "fields": {},
+    "unset": [],
+    "reason": ""
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "",
+   "reader_what": "",
+   "reader_why": "",
+   "reader_more": "",
+   "deep_analysis": {
+    "work_kind": "",
+    "research_question": "",
+    "main_finding": "",
+    "method_or_basis": "",
+    "qualification": "",
+    "radar_relevance": "",
+    "why_supported": false,
+    "confidence": "low"
+   }
+  },
+  {
+   "record_key": "historical:id:1191d6c094c06188",
+   "source_hash": "c1e5116b",
+   "identity_hash": "f3b7f698fadc25db",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://www.rathenau.nl/sites/default/files/2019-07/TWIN%202017-2023%20EN.pdf opened (HTTP 200): 36-page TWIN 2017-2023 report, July 2019"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_document",
+      "url": "https://www.rathenau.nl/sites/default/files/2019-07/TWIN%202017-2023%20EN.pdf",
+      "title": "Total Investment in Research and Innovation (TWIN) 2017-2023",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "A",
+    "reason_code": "A_SUBSTANTIVE_EU_RI",
+    "reason": "Rathenau Instituut facts & figures on total Dutch R&I investment, government R&D budgets, EU funding and international comparison."
+   },
+   "metadata_correction": {
+    "fields": {
+     "authors": "Alexandra Vennekens et al.",
+     "type": "statistical report"
+    },
+    "unset": [],
+    "reason": "PDF author metadata names Alexandra Vennekens."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "Dutch R&D spending lags its 2.5% of GDP target",
+   "reader_what": "Direct government R&D spending rises but trails economic growth, so the Netherlands falls further behind 2.5%.",
+   "reader_why": "",
+   "reader_more": "The Netherlands spent €14.7 billion on R&D in 2017. Government R&D budgets are rising more slowly than forecast GDP, widening the gap to the 2.5% target. Programme funding for applied research organisations was increasing for the first time since 2010, and Dutch researchers benefited from Horizon 2020.",
+   "deep_analysis": {
+    "work_kind": "statistical report",
+    "research_question": "",
+    "main_finding": "Dutch R&D intensity is falling behind target despite rising budgets.",
+    "method_or_basis": "Government budget and R&D statistics.",
+    "qualification": "Forecasts depend on budget plans.",
+    "radar_relevance": "Member-state R&D investment context.",
+    "why_supported": false,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:e64398987bf4dc73",
+   "source_hash": "9c8613ad",
+   "identity_hash": "c66b48de8f47311f",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "identity_only_after_recovery",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "not_applicable",
+      "note": "no supplied URL in job; historical ID"
+     },
+     {
+      "step": "doi",
+      "outcome": "success",
+      "note": "Crossref 10.4337/9781784715946.00025: Leišytė, chapter in Handbook on Science and Public Policy (Elgar 2019), no abstract"
+     },
+     {
+      "step": "exact_title",
+      "outcome": "failed",
+      "note": "Unpaywall API for 10.4337/9781784715946.00025: closed; elgaronline returned 405"
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "failed",
+      "note": "Crossref title+author query returned only the publisher version"
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "failed",
+      "note": "Publisher page elgaronline.com returned HTTP 403/paywall; no repository copy retrievable"
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "failed",
+      "note": "No accepted manuscript or institutional copy retrieved"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "doi_metadata",
+      "url": "https://doi.org/10.4337/9781784715946.00025",
+      "title": "Crossref record",
+      "evidence_used": false
+     }
+    ],
+    "verification_note": "Identity verified; substantive text not legitimately accessible after all six steps."
+   },
+   "admission": {
+    "decision": "defer",
+    "target_strand": "A",
+    "reason_code": "EVIDENCE_ACCESS_LIMITED",
+    "reason": "Identity confirmed via DOI metadata; substantive text not legitimately accessible."
+   },
+   "metadata_correction": {
+    "fields": {},
+    "unset": [],
+    "reason": ""
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "",
+   "reader_what": "",
+   "reader_why": "",
+   "reader_more": "",
+   "deep_analysis": {
+    "work_kind": "",
+    "research_question": "",
+    "main_finding": "",
+    "method_or_basis": "",
+    "qualification": "",
+    "radar_relevance": "",
+    "why_supported": false,
+    "confidence": "low"
+   }
+  },
+  {
+   "record_key": "historical:id:2f068ea22bdf186d",
+   "source_hash": "1c5d6437",
+   "identity_hash": "0171fc75e6612ace",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "full_text_primary",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://link.springer.com/article/10.1186/s40309-019-0156-1 opened (HTTP 200): open-access full article"
+     },
+     {
+      "step": "doi",
+      "outcome": "success",
+      "note": "Crossref record for 10.1186/s40309-019-0156-1 matched title/authors"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "publisher_full_text",
+      "url": "https://link.springer.com/article/10.1186/s40309-019-0156-1",
+      "title": "Innovation policy and international relations: directions for EU diplomacy",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "A",
+    "reason_code": "A_SUBSTANTIVE_EU_RI",
+    "reason": "Open-access analysis of innovation as a field of international relations with scenarios and directions for EU science and innovation diplomacy."
+   },
+   "metadata_correction": {
+    "fields": {
+     "source": "European Journal of Futures Research",
+     "type": "peer-reviewed article"
+    },
+    "unset": [],
+    "reason": "Crossref and Springer: published in European Journal of Futures Research, not Futures."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "Why innovation is becoming central to EU diplomacy",
+   "reader_what": "Innovation now shapes international competition and cooperation, so the EU needs a deliberate innovation diplomacy.",
+   "reader_why": "Shifts in global innovation, populism and geopolitics weaken open-cooperation assumptions behind EU R&I internationalisation.",
+   "reader_more": "Jos Leijten analyses how techno-economic changes redistribute innovative activity and strain global governance institutions. He outlines three near-future scenarios, starting with 'populism and protectionism'. He draws directions for how EU diplomacy should handle innovation, balancing collaboration and competition.",
+   "deep_analysis": {
+    "work_kind": "conceptual/foresight article",
+    "research_question": "How does innovation reshape international relations and EU diplomacy?",
+    "main_finding": "Innovation is a growing IR issue requiring strategic EU innovation diplomacy.",
+    "method_or_basis": "Literature synthesis and scenario building.",
+    "qualification": "Scenarios are illustrative.",
+    "radar_relevance": "EU research and innovation diplomacy.",
+    "why_supported": true,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "link:https://doi.org/10.1007/s10308-026-00781-4",
+   "source_hash": "cdf53229",
+   "identity_hash": "4bdfc1a2fe0e98f0",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "substantive_primary_after_recovery",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "partial",
+      "note": "https://link.springer.com/article/10.1007/s10308-026-00781-4 opened: full abstract, data statement and preview; body paywalled"
+     },
+     {
+      "step": "doi",
+      "outcome": "success",
+      "note": "Crossref 10.1007/s10308-026-00781-4: Wadipalapa et al., Asia Europe Journal, online 6 Jun 2026"
+     },
+     {
+      "step": "exact_title",
+      "outcome": "failed",
+      "note": "Unpaywall lookup for the DOI: closed access, no OA location"
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "failed",
+      "note": "Crossref bibliographic metadata lists no preprint or accepted-manuscript relation"
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "failed",
+      "note": "No institutional repository copy found via Unpaywall/Crossref"
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "partial",
+      "note": "Publisher abstract, fieldwork description (Jakarta, Banten, Yogyakarta, Jul–Oct 2024) used as substantive primary evidence of scope"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "publisher_abstract_preview",
+      "url": "https://link.springer.com/article/10.1007/s10308-026-00781-4",
+      "title": "Digital inclusion or digital illusion? AI, disability, and the politics of financial access in Indonesia",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "drop",
+    "target_strand": "A",
+    "reason_code": "A_NOT_EUROPEAN",
+    "reason": "Qualitative fieldwork study of AI-driven banking access for people with disabilities in Indonesia; Europe appears only as a comparative implication."
+   },
+   "metadata_correction": {
+    "fields": {},
+    "unset": [],
+    "reason": ""
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "AI banking and disability exclusion in Indonesia",
+   "reader_what": "Indonesian fieldwork shows accessibility in automated finance is rarely measured or audited and enforced only after complaints.",
+   "reader_why": "",
+   "reader_more": "The article uses qualitative fieldwork in three Indonesian provinces in 2024. It finds inclusion rules are poorly enforced where automated systems gatekeep banking for people with disabilities. Europe appears only in closing comparative implications.",
+   "deep_analysis": {
+    "work_kind": "qualitative empirical study",
+    "research_question": "How do AI-driven banking systems affect financial access for disabled people in Indonesia?",
+    "main_finding": "Weak measurement and complaint-driven enforcement leave disabled users excluded.",
+    "method_or_basis": "Qualitative fieldwork, Jul–Oct 2024.",
+    "qualification": "Full text paywalled; scope judged from publisher abstract and methods statement.",
+    "radar_relevance": "Fails A: not European.",
+    "why_supported": false,
+    "confidence": "medium"
+   }
+  },
+  {
+   "record_key": "historical:id:8584b17439bb6cd2",
+   "source_hash": "0b250d32",
+   "identity_hash": "6250684275a92cdd",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://www.iss.europa.eu/activities/events/artificial-intelligence-what-kind-strategic-enabler-eu-security-and-defence opened (HTTP 200): event report dated 12 June 2019"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_page",
+      "url": "https://www.iss.europa.eu/activities/events/artificial-intelligence-what-kind-strategic-enabler-eu-security-and-defence",
+      "title": "Artificial Intelligence: what kind of strategic enabler for EU security and defence?",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "drop",
+    "target_strand": "",
+    "reason_code": "EVENT_PAGE",
+    "reason": "Short EUISS event note on a June 2019 AI and defence conference; no substantive findings."
+   },
+   "metadata_correction": {
+    "fields": {
+     "date": "2019-06-12",
+     "type": "event page"
+    },
+    "unset": [],
+    "reason": "Page states the conference took place 12 June 2019."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "EUISS conference on AI in EU security and defence",
+   "reader_what": "About 70 participants discussed military AI interoperability, industrial sovereignty and ethics.",
+   "reader_why": "",
+   "reader_more": "EUISS co-organised a Brussels conference with Estonian and Finnish defence ministries. The page lists participants and topics only.",
+   "deep_analysis": {
+    "work_kind": "event page",
+    "research_question": "",
+    "main_finding": "Conference held on AI and EU defence.",
+    "method_or_basis": "Event notice.",
+    "qualification": "No substantive content.",
+    "radar_relevance": "Fails: event page.",
+    "why_supported": false,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:9d0da077bf121de2",
+   "source_hash": "afdef93a",
+   "identity_hash": "6e8a1207e94191f0",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "identity_only_after_recovery",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "failed",
+      "note": "https://www.tandfonline.com/doi/full/10.1080/10242694.2019.1571826 opened: purchase options only"
+     },
+     {
+      "step": "doi",
+      "outcome": "success",
+      "note": "Crossref 10.1080/10242694.2019.1571826: Uttley, book review, Defence and Peace Economics 30(4):505-507, no abstract"
+     },
+     {
+      "step": "exact_title",
+      "outcome": "failed",
+      "note": "Unpaywall API for 10.1080/10242694.2019.1571826: closed"
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "failed",
+      "note": "Crossref title+author query returned only the publisher version"
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "failed",
+      "note": "Publisher page tandfonline.com returned HTTP 403/paywall; no repository copy retrievable"
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "failed",
+      "note": "No accepted manuscript or institutional copy retrieved"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "doi_metadata",
+      "url": "https://doi.org/10.1080/10242694.2019.1571826",
+      "title": "Crossref record",
+      "evidence_used": false
+     }
+    ],
+    "verification_note": "Identity verified; substantive text not legitimately accessible after all six steps."
+   },
+   "admission": {
+    "decision": "defer",
+    "target_strand": "A",
+    "reason_code": "EVIDENCE_ACCESS_LIMITED",
+    "reason": "Identity confirmed via DOI metadata; substantive text not legitimately accessible."
+   },
+   "metadata_correction": {
+    "fields": {},
+    "unset": [],
+    "reason": ""
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "",
+   "reader_what": "",
+   "reader_why": "",
+   "reader_more": "",
+   "deep_analysis": {
+    "work_kind": "",
+    "research_question": "",
+    "main_finding": "",
+    "method_or_basis": "",
+    "qualification": "",
+    "radar_relevance": "",
+    "why_supported": false,
+    "confidence": "low"
+   }
+  },
+  {
+   "record_key": "historical:id:e79df3e55bbadc2c",
+   "source_hash": "4279028b",
+   "identity_hash": "57bcd495575f834d",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "identity_only_after_recovery",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "not_applicable",
+      "note": "no supplied URL in job; historical ID"
+     },
+     {
+      "step": "doi",
+      "outcome": "success",
+      "note": "Crossref 10.1002/ffo2.15: Rowland & Spaniol, Futures & Foresight Science 1(2), reply essay (abstract only)"
+     },
+     {
+      "step": "exact_title",
+      "outcome": "failed",
+      "note": "Unpaywall API for 10.1002/ffo2.15: listed Aarhus Pure record but no downloadable file; Wiley 403"
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "failed",
+      "note": "Crossref title+author query returned only the publisher version"
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "failed",
+      "note": "Publisher page onlinelibrary.wiley.com returned HTTP 403/paywall; no repository copy retrievable"
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "failed",
+      "note": "No accepted manuscript or institutional copy retrieved"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "doi_metadata",
+      "url": "https://doi.org/10.1002/ffo2.15",
+      "title": "Crossref record",
+      "evidence_used": false
+     }
+    ],
+    "verification_note": "Identity verified; substantive text not legitimately accessible after all six steps."
+   },
+   "admission": {
+    "decision": "defer",
+    "target_strand": "B",
+    "reason_code": "EVIDENCE_ACCESS_LIMITED",
+    "reason": "Identity confirmed via DOI metadata; substantive text not legitimately accessible."
+   },
+   "metadata_correction": {
+    "fields": {},
+    "unset": [],
+    "reason": ""
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "",
+   "reader_what": "",
+   "reader_why": "",
+   "reader_more": "",
+   "deep_analysis": {
+    "work_kind": "",
+    "research_question": "",
+    "main_finding": "",
+    "method_or_basis": "",
+    "qualification": "",
+    "radar_relevance": "",
+    "why_supported": false,
+    "confidence": "low"
+   }
+  },
+  {
+   "record_key": "historical:id:ec34e47a5a4cdcc0",
+   "source_hash": "b01dda43",
+   "identity_hash": "9aedfe025f98245d",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://www.iss.europa.eu/activities/events/security-implications-artificial-intelligence opened (HTTP 200): event note dated 11 April 2019"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_page",
+      "url": "https://www.iss.europa.eu/activities/events/security-implications-artificial-intelligence",
+      "title": "The security implications of Artificial Intelligence",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "drop",
+    "target_strand": "",
+    "reason_code": "EVENT_PAGE",
+    "reason": "Short EUISS note on an April 2019 PSC lunch debate on AI; no substantive findings."
+   },
+   "metadata_correction": {
+    "fields": {
+     "date": "2019-04-11",
+     "type": "event page"
+    },
+    "unset": [],
+    "reason": "Page states the event took place 11 April 2019."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "EUISS analyst briefs EU ambassadors on AI security",
+   "reader_what": "Daniel Fiott joined a Political and Security Committee debate on AI developments and defence implications.",
+   "reader_why": "",
+   "reader_more": "The page records a lunch debate with PSC ambassadors and experts on AI, defence, law and ethics. It gives no findings.",
+   "deep_analysis": {
+    "work_kind": "event page",
+    "research_question": "",
+    "main_finding": "Debate held.",
+    "method_or_basis": "Event notice.",
+    "qualification": "No substantive content.",
+    "radar_relevance": "Fails: event page.",
+    "why_supported": false,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:0c58427251824b53",
+   "source_hash": "e7d6c7de",
+   "identity_hash": "4be54ba3fcea4b2b",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "full_text_repository_copy",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "not_applicable",
+      "note": "no supplied URL in job; record key is historical ID"
+     },
+     {
+      "step": "doi",
+      "outcome": "success",
+      "note": "Crossref search found 10.1080/09654313.2019.1610727, European Planning Studies; T&F page returned 403"
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "success",
+      "note": "Unpaywall pointed to University of Trento IRIS; downloaded https://iris.unitn.it/bitstream/11572/239416/4/... (18-page published PDF)"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "repository_full_text",
+      "url": "https://iris.unitn.it/bitstream/11572/239416/4/Understanding%20processes%20of%20path%20renewal%20and%20creation%20in%20thick%20specialized%20regional%20innovation%20systems%20Evidence%20from%20two%20textile%20districts%20in%20Italy.pdf",
+      "title": "Understanding processes of path renewal and creation in thick specialized regional innovation systems",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "A",
+    "reason_code": "A_SUBSTANTIVE_EU_RI",
+    "reason": "Comparative study of path renewal in Italian and Swedish textile regional innovation systems and multilevel innovation policy."
+   },
+   "metadata_correction": {
+    "fields": {
+     "title": "Understanding processes of path renewal and creation in thick specialized regional innovation systems. Evidence from two textile districts in Italy and Sweden",
+     "authors": "Cristina Chaminade; Marco Bellandi; Monica Plechero; Erica Santini"
+    },
+    "unset": [],
+    "reason": "Published PDF gives full title ending 'in Italy and Sweden' and author spellings Chaminade and Erica Santini."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "How old textile districts in Italy and Sweden find new industrial paths",
+   "reader_what": "Prato and Borås show specialised regions can renew and create industrial paths, not just extend old ones.",
+   "reader_why": "Interaction between regional and national innovation systems and extra-regional networks shapes which transformation paths regions can take.",
+   "reader_more": "The paper studies two traditional textile districts, Prato in Italy and Borås in Sweden. It argues that specialised regional innovation systems contain several knowledge nuclei that, combined with outside networks, enable renewal and new paths. It highlights how national innovation-system conditions interact with regional dynamics.",
+   "deep_analysis": {
+    "work_kind": "comparative case study",
+    "research_question": "How do specialised RISs achieve path renewal and creation?",
+    "main_finding": "Specialised RISs can pursue path renewal and creation via knowledge nuclei and multilevel links.",
+    "method_or_basis": "Qualitative comparison of two districts.",
+    "qualification": "Two cases; limited generalisability.",
+    "radar_relevance": "European regional innovation policy.",
+    "why_supported": true,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:6619d190a24b4893",
+   "source_hash": "9ccd7d10",
+   "identity_hash": "67d3b05b12d0609a",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://www.ceps.eu/about-ceps/data-privacy-policy/ opened (HTTP 200): GDPR privacy notice for the CEPS website"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "official_page",
+      "url": "https://www.ceps.eu/about-ceps/data-privacy-policy/",
+      "title": "Data Privacy Policy – CEPS",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "drop",
+    "target_strand": "",
+    "reason_code": "GENERIC_PAGE",
+    "reason": "CEPS website data privacy policy; not a research work or development."
+   },
+   "metadata_correction": {
+    "fields": {
+     "type": "website policy page"
+    },
+    "unset": [],
+    "reason": "Page is a website privacy notice."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "CEPS website privacy policy",
+   "reader_what": "Describes how CEPS processes visitors' personal data under the GDPR.",
+   "reader_why": "",
+   "reader_more": "This is the think tank's website privacy notice. It has no research or policy-analysis content.",
+   "deep_analysis": {
+    "work_kind": "website policy page",
+    "research_question": "",
+    "main_finding": "Privacy notice.",
+    "method_or_basis": "Institutional page.",
+    "qualification": "Not a publication.",
+    "radar_relevance": "Fails: generic page.",
+    "why_supported": false,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:5dd5533594f180de",
+   "source_hash": "cecff3e7",
+   "identity_hash": "9d97f63ca1d61910",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "identity_only_after_recovery",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "not_applicable",
+      "note": "no supplied URL in job; historical ID"
+     },
+     {
+      "step": "doi",
+      "outcome": "success",
+      "note": "Crossref 10.1080/14702436.2019.1586435: Aly, book review, Defence Studies 19(2):205-206, no abstract"
+     },
+     {
+      "step": "exact_title",
+      "outcome": "failed",
+      "note": "Unpaywall API for 10.1080/14702436.2019.1586435: closed"
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "failed",
+      "note": "Crossref title+author query returned only the publisher version"
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "failed",
+      "note": "Publisher page tandfonline.com returned HTTP 403/paywall; no repository copy retrievable"
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "failed",
+      "note": "No accepted manuscript or institutional copy retrieved"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "doi_metadata",
+      "url": "https://doi.org/10.1080/14702436.2019.1586435",
+      "title": "Crossref record",
+      "evidence_used": false
+     }
+    ],
+    "verification_note": "Identity verified; substantive text not legitimately accessible after all six steps."
+   },
+   "admission": {
+    "decision": "defer",
+    "target_strand": "A",
+    "reason_code": "EVIDENCE_ACCESS_LIMITED",
+    "reason": "Identity confirmed via DOI metadata; substantive text not legitimately accessible."
+   },
+   "metadata_correction": {
+    "fields": {},
+    "unset": [],
+    "reason": ""
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "",
+   "reader_what": "",
+   "reader_why": "",
+   "reader_more": "",
+   "deep_analysis": {
+    "work_kind": "",
+    "research_question": "",
+    "main_finding": "",
+    "method_or_basis": "",
+    "qualification": "",
+    "radar_relevance": "",
+    "why_supported": false,
+    "confidence": "low"
+   }
+  },
+  {
+   "record_key": "historical:id:800580d3c6eec534",
+   "source_hash": "6a73af80",
+   "identity_hash": "81b7d6da8c2bfaa2",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "full_text_repository_copy",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "not_applicable",
+      "note": "no supplied URL in job; record key is historical ID"
+     },
+     {
+      "step": "doi",
+      "outcome": "success",
+      "note": "Crossref search found 10.1093/scipol/scy048 (SPP 46(2), online 17 Jul 2018); OUP page returned 403"
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "success",
+      "note": "Unpaywall pointed to Aarhus University Pure; downloaded accepted manuscript https://pure.au.dk/ws/files/163296142/Responsible_research_and_innovation_in_Europe_Accepted_manuscript_2019.pdf (25 pages)"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "repository_accepted_manuscript",
+      "url": "https://pure.au.dk/ws/files/163296142/Responsible_research_and_innovation_in_Europe_Accepted_manuscript_2019.pdf",
+      "title": "Responsible research and innovation in Europe: A cross-country comparative analysis",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "keep",
+    "target_strand": "A",
+    "reason_code": "A_SUBSTANTIVE_EU_RI",
+    "reason": "Indicator-based cross-country analysis of RRI across EU28 using MoRRI data, identifying 11 dimensions and four country clusters."
+   },
+   "metadata_correction": {
+    "fields": {},
+    "unset": [],
+    "reason": ""
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "Mapping how EU countries differ in responsible research and innovation",
+   "reader_what": "Factor analysis of MoRRI data finds 11 RRI dimensions and four distinct clusters among the 28 EU member states.",
+   "reader_why": "Shows RRI is practised very differently across Europe, informing comparative learning and monitoring.",
+   "reader_more": "The authors use indicators from the Commission-funded MoRRI monitoring study. Factor analysis identifies 11 empirically grounded dimensions of RRI, such as public engagement and gender equality. Cluster analysis on these indices groups EU28 countries into four RRI profiles. The paper calls this a low-resolution map useful for international learning.",
+   "deep_analysis": {
+    "work_kind": "quantitative comparative study",
+    "research_question": "How does RRI vary across European countries?",
+    "main_finding": "11 RRI dimensions; four country clusters.",
+    "method_or_basis": "Factor and cluster analysis of MoRRI indicators.",
+    "qualification": "Country-level indicators; low resolution.",
+    "radar_relevance": "European research-policy monitoring.",
+    "why_supported": true,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:508e28fbe8cde88b",
+   "source_hash": "34d4b9ed",
+   "identity_hash": "c73d80ac7f1ae9b5",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "official_full_document",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://www.sipri.org/sites/default/files/2019-03/sipri2019_bioplusx_1.pdf opened (HTTP 200): 56-page SIPRI report, March 2019"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "publisher_full_text",
+      "url": "https://www.sipri.org/sites/default/files/2019-03/sipri2019_bioplusx_1.pdf",
+      "title": "Bio Plus X: Arms Control and the Convergence of Biology and Emerging Technologies",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "drop",
+    "target_strand": "",
+    "reason_code": "A_NOT_EUROPEAN",
+    "reason": "SIPRI report on global biological arms control and emerging technologies; the EU appears as one regulatory actor rather than the subject."
+   },
+   "metadata_correction": {
+    "fields": {
+     "title": "Bio Plus X: Arms Control and the Convergence of Biology and Emerging Technologies",
+     "authors": "Kolja Brockmann; Sibylle Bauer; Vincent Boulanin",
+     "type": "report"
+    },
+    "unset": [],
+    "reason": "Report cover and metadata."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "Emerging technologies complicate control of biological weapons",
+   "reader_what": "Advances like AI, additive manufacturing and robotics converge with biology, challenging existing bioweapons controls.",
+   "reader_why": "",
+   "reader_more": "SIPRI examines how biotechnology convergence with other emerging technologies strains the Biological Weapons Convention and export controls, with global recommendations. The EU is referenced as one actor among states and regimes.",
+   "deep_analysis": {
+    "work_kind": "policy research report",
+    "research_question": "",
+    "main_finding": "Technology convergence challenges biological arms control.",
+    "method_or_basis": "Literature and regime analysis.",
+    "qualification": "Global scope.",
+    "radar_relevance": "Fails A: not substantively European.",
+    "why_supported": false,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:a6f1977963832312",
+   "source_hash": "08c0ed1e",
+   "identity_hash": "9d9cc3e4f61da44f",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "full_text_primary",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "success",
+      "note": "https://ecfr.eu/article/commentary_frances_strongman_strategy_in_the_sahel/ opened (HTTP 200): full commentary, 8 Mar 2019"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "no DOI; web page/report without DOI"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "publisher_full_text",
+      "url": "https://ecfr.eu/article/commentary_frances_strongman_strategy_in_the_sahel/",
+      "title": "France's strongman strategy in the Sahel",
+      "evidence_used": true
+     }
+    ],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "drop",
+    "target_strand": "",
+    "reason_code": "NOT_RI_SCOPE",
+    "reason": "ECFR commentary on French military support to Sahel and Libyan strongmen; no R&I content."
+   },
+   "metadata_correction": {
+    "fields": {
+     "authors": "Andrew Lebovich; Tarek Megerisi"
+    },
+    "unset": [],
+    "reason": "ECFR page authors."
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "France's reliance on strongmen in the Sahel",
+   "reader_what": "French backing for Chad's Déby and Libya's Haftar may inflame militancy long term.",
+   "reader_why": "",
+   "reader_more": "The commentary follows French airstrikes in Chad and argues reliance on authoritarian partners risks regional instability. It is security policy, not research or innovation.",
+   "deep_analysis": {
+    "work_kind": "policy commentary",
+    "research_question": "",
+    "main_finding": "Short-term security partnerships risk long-term instability.",
+    "method_or_basis": "Analysis of events.",
+    "qualification": "Opinion.",
+    "radar_relevance": "Fails A: no R&I.",
+    "why_supported": false,
+    "confidence": "high"
+   }
+  },
+  {
+   "record_key": "historical:id:edc62355b88d0d1b",
+   "source_hash": "a63deff5",
+   "identity_hash": "6639289275c2bfa7",
+   "verification": {
+    "identity_verified": true,
+    "evidence_depth": "identity_only_after_recovery",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "not_applicable",
+      "note": "no supplied URL in job; historical ID"
+     },
+     {
+      "step": "doi",
+      "outcome": "success",
+      "note": "Crossref 10.1111/jcms.12787: Martins & Küsters, JCMS 57(2):278-297 (abstract only)"
+     },
+     {
+      "step": "exact_title",
+      "outcome": "failed",
+      "note": "Unpaywall API for 10.1111/jcms.12787: DiVA (mau) record listed; DiVA returned HTTP 503 repeatedly; Wiley 403"
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "failed",
+      "note": "Crossref title+author query returned only the publisher version"
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "failed",
+      "note": "Publisher page onlinelibrary.wiley.com returned HTTP 403/paywall; no repository copy retrievable"
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "failed",
+      "note": "No accepted manuscript or institutional copy retrieved"
+     }
+    ],
+    "recovered_sources": [
+     {
+      "kind": "doi_metadata",
+      "url": "https://doi.org/10.1111/jcms.12787",
+      "title": "Crossref record",
+      "evidence_used": false
+     }
+    ],
+    "verification_note": "Identity verified; substantive text not legitimately accessible after all six steps."
+   },
+   "admission": {
+    "decision": "defer",
+    "target_strand": "A",
+    "reason_code": "EVIDENCE_ACCESS_LIMITED",
+    "reason": "Identity confirmed via DOI metadata; substantive text not legitimately accessible."
+   },
+   "metadata_correction": {
+    "fields": {},
+    "unset": [],
+    "reason": ""
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "",
+   "reader_what": "",
+   "reader_why": "",
+   "reader_more": "",
+   "deep_analysis": {
+    "work_kind": "",
+    "research_question": "",
+    "main_finding": "",
+    "method_or_basis": "",
+    "qualification": "",
+    "radar_relevance": "",
+    "why_supported": false,
+    "confidence": "low"
+   }
+  },
+  {
+   "record_key": "link:https://news.google.com/rss/articles/CBMilwFBVV95cUxOckFkZUFSdHNkTURBVWo1M3Q1Qk1hci1uSGZYUHUtMGFwcWw0ZVpDSnFKNGNqWHMxVkczU25YOTNYV0lza1FyUklNMUtON1BOVGJOdjJsY1prNm5CS3F4ajRVTXhJamI4Z2xBWHhJWTFJbk15cFIyU3R4b3psN2ZJSlZCUHNDdkVRdDVkLVlseUxkN1NGdXFn?oc=5",
+   "source_hash": "8f001be1",
+   "identity_hash": "bb0ac36af6bc6103",
+   "verification": {
+    "identity_verified": false,
+    "evidence_depth": "",
+    "retrieval_attempts": [
+     {
+      "step": "supplied_url",
+      "outcome": "failed",
+      "note": "Google News RSS link returned only Google News boilerplate text, no article"
+     },
+     {
+      "step": "doi",
+      "outcome": "not_applicable",
+      "note": "news article without DOI"
+     },
+     {
+      "step": "exact_title",
+      "outcome": "failed",
+      "note": "Web search for exact headline 'Rethinking research security in Europe' with 'controls to capabilities' found no matching article"
+     },
+     {
+      "step": "title_author_year",
+      "outcome": "failed",
+      "note": "Search with Science|Business returned other research-security events and news (Jul 2026 webinar, Oct 2025 ERA Act story), not this item"
+     },
+     {
+      "step": "official_publisher_or_repository",
+      "outcome": "failed",
+      "note": "sciencebusiness.net site search request returned HTTP 403"
+     },
+     {
+      "step": "broader_identity_search",
+      "outcome": "failed",
+      "note": "No other source cites this headline dated 15 Sep 2026"
+     }
+    ],
+    "recovered_sources": [],
+    "verification_note": "Identity and content checked against primary source(s) listed."
+   },
+   "admission": {
+    "decision": "drop_unverifiable",
+    "target_strand": "C",
+    "reason_code": "UNVERIFIABLE_WORK",
+    "reason": "Claimed Science|Business article could not be located or substantiated after all six steps; Google News link does not resolve to the article."
+   },
+   "metadata_correction": {
+    "fields": {},
+    "unset": [],
+    "reason": ""
+   },
+   "duplicate": {
+    "status": "unique",
+    "duplicate_of": "",
+    "reason": ""
+   },
+   "reader_title": "",
+   "reader_what": "",
+   "reader_why": "",
+   "reader_more": "",
+   "deep_analysis": {
+    "work_kind": "",
+    "research_question": "",
+    "main_finding": "",
+    "method_or_basis": "",
+    "qualification": "",
+    "radar_relevance": "",
+    "why_supported": false,
+    "confidence": "low"
+   }
+  }
+ ]
+}
