@@ -228,7 +228,7 @@ def build_distance_table(nodes: Iterable[dict[str, Any]]) -> dict[str, Any]:
 
 def distance_for(table: dict[str, Any], a: str, b: str) -> tuple[str, float, float | None]:
     if a == b:
-        return "familiar", 1.0, math.inf
+        return "familiar", 1.0, None
     x, y = sorted((a, b))
     for p in table.get("pairs", []):
         if p.get("a") == x and p.get("b") == y:
@@ -239,7 +239,7 @@ def distance_for(table: dict[str, Any], a: str, b: str) -> tuple[str, float, flo
 def distance_excluding_records(nodes: Iterable[dict[str, Any]], a: str, b: str, excluded_record_ids: set[str]) -> tuple[str, float, float | None]:
     """R-10 distance after removing the candidate chain's own records."""
     if a == b:
-        return "familiar", 1.0, math.inf
+        return "familiar", 1.0, None
     by_record: dict[str, set[str]] = defaultdict(set)
     for n in nodes:
         rid = clean(n.get("_record_id"))
@@ -875,7 +875,7 @@ def dependency_pathways(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any], 
             chain_record_ids = {clean(n.get("_record_id")) for n in support_nodes}
             if trigger:
                 chain_record_ids.add(clean(trigger.get("_record_id")))
-            dist, bonus, lift = distance_excluding_records(nodes, ccluster, dcluster, chain_record_ids) if ccluster and dcluster else ("familiar", 1.0, math.inf)
+            dist, bonus, lift = distance_excluding_records(nodes, ccluster, dcluster, chain_record_ids) if ccluster and dcluster else ("familiar", 1.0, None)
 
             strengths: dict[str, float] = {}
             role_corroboration: dict[str, dict[str, Any]] = {}
@@ -1086,7 +1086,7 @@ def conflicting_criteria(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any],
             a_cluster = primary_cluster(clean(criterion_a.get("object")), vocab)
             b_cluster = primary_cluster(clean(criterion_b.get("object")), vocab)
             support_record_ids = {clean(n.get("_record_id")) for n in support}
-            dist, bonus, lift = distance_excluding_records(nodes, a_cluster, b_cluster, support_record_ids) if a_cluster and b_cluster else ("familiar", 1.0, math.inf)
+            dist, bonus, lift = distance_excluding_records(nodes, a_cluster, b_cluster, support_record_ids) if a_cluster and b_cluster else ("familiar", 1.0, None)
             endpoint_a, endpoint_b = clean(criterion_a.get("object")), clean(criterion_b.get("object"))
             endpoint_joint = len({
                 clean(n.get("_record_id")) for n in nodes
@@ -1206,7 +1206,7 @@ def latent_channels(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any]) -> l
                 continue
             recs = {clean(n.get("_record_id")) for n in support}
             ca, cb = primary_cluster(endpoint_a, vocab), primary_cluster(endpoint_b, vocab)
-            dist, bonus, lift = distance_excluding_records(nodes, ca, cb, recs) if ca and cb else ("familiar",1.0,math.inf)
+            dist, bonus, lift = distance_excluding_records(nodes, ca, cb, recs) if ca and cb else ("familiar",1.0,None)
             strengths, corrob, scored = _role_bundle_score(roles, {"unresolved_need":.25,"existing_structure":.25,"live_connection":.25,"receiving_instrument":.15,"precedent":.10}, nodes, bonus)
             score = min(99, round(100 * scored)) if not missing else None
             floor_ok = all(strengths[r] >= .40 for r in roles if roles[r] and r != "precedent")
@@ -1255,7 +1255,7 @@ def anchor_demand_candidates(nodes: Iterable[dict[str, Any]], vocab: dict[str, A
             if len({clean(n.get("_record_id")) for n in support})<3 or _distinct_sources(support)<2: continue
             ea,eb=clean(commitment.get("object")),clean(payoff.get("object")); recs={clean(n.get("_record_id")) for n in support}
             ca,cb=primary_cluster(ea,vocab),primary_cluster(eb,vocab)
-            dist,bonus,lift=distance_excluding_records(nodes,ca,cb,recs) if ca and cb else ("familiar",1.0,math.inf)
+            dist,bonus,lift=distance_excluding_records(nodes,ca,cb,recs) if ca and cb else ("familiar",1.0,None)
             strengths,corrob,scored=_role_bundle_score(roles,{"commitment":.30,"payoff_evidence":.25,"protecting_instrument":.20,"conversion_condition":.15,"enabling_reform":.10},nodes,bonus,corroborate_roles={"commitment","payoff_evidence"})
             counters=[]
             for n in nodes:
@@ -1293,7 +1293,7 @@ def split_recurrence_candidates(nodes: Iterable[dict[str, Any]], vocab: dict[str
             a_strength=min(1.0,_role_strength(side_a,"side_a")*min(1.3,1+.1*max(0,_distinct_sources(arows)-1)))
             b_strength=min(1.0,_role_strength(side_b,"side_b")*min(1.3,1+.1*max(0,_distinct_sources(brows)-1)))
             recs={clean(side_a.get("_record_id")),clean(side_b.get("_record_id"))}
-            ca,cb=primary_cluster(a,vocab),primary_cluster(b,vocab); dist,bonus,lift=distance_excluding_records(nodes,ca,cb,recs) if ca and cb else ("familiar",1.0,math.inf)
+            ca,cb=primary_cluster(a,vocab),primary_cluster(b,vocab); dist,bonus,lift=distance_excluding_records(nodes,ca,cb,recs) if ca and cb else ("familiar",1.0,None)
             base=.35*hist_strength+.30*a_strength+.30*b_strength+.05
             score=min(90,max(0,round(100*base*bonus)))
             floor_ok=min(hist_strength,a_strength,b_strength)>=.40

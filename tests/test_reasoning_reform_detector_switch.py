@@ -258,3 +258,32 @@ def test_claim_support_uses_downstream_retrace_url_identity():
     }]
     cand = live.adapt_candidate(raw, nodes)
     assert cand["support"][0]["identity"] == "url:https://example.test/quantum-thing"
+
+
+def test_claim_candidate_json_is_strict_when_same_cluster_distance_is_unbounded():
+    import json
+    import math
+
+    raw = {
+        "level": 5,
+        "grammar_id": "conflicting_criteria",
+        "product": "risk",
+        "endpoint_objects": ["research.openness", "research.open_access"],
+        "roles": {},
+        "missing_roles": ["criterion_a"],
+        "score": 0,
+        "score_gate_passes": False,
+        "distance": "familiar",
+        "distance_lift": math.inf,
+        "distance_bonus": 1.0,
+    }
+    cand = live.adapt_candidate(raw, [])
+    assert cand["distance_lift"] is None
+    json.dumps(cand, allow_nan=False)
+
+
+def test_same_cluster_distance_uses_json_null_not_infinity():
+    from scripts.claim_reasoning_shadow import distance_for, distance_excluding_records
+
+    assert distance_for({"pairs": []}, "quantum", "quantum") == ("familiar", 1.0, None)
+    assert distance_excluding_records([], "quantum", "quantum", set()) == ("familiar", 1.0, None)

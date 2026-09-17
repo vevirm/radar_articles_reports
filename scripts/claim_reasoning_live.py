@@ -769,6 +769,21 @@ def _support_queries(c: dict[str, Any]) -> list[str]:
     return [clean(f"{base} {role} evidence Europe research innovation") for role in missing[:3] if base]
 
 
+def _finite_json_number(value: Any) -> float | int | None:
+    """Return only RFC-8259-safe numeric values for persisted Radar JSON."""
+    if value is None:
+        return None
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return None
+    if not math.isfinite(number):
+        return None
+    if isinstance(value, int) and not isinstance(value, bool):
+        return value
+    return number
+
+
 def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]]) -> dict[str, Any]:
     node_by_claim = {clean(n.get("claim_id")): n for n in nodes if clean(n.get("claim_id"))}
     support = _support_rows(c, node_by_claim)
@@ -799,8 +814,8 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]]) -> dict[
         "score": score,
         "wow_preliminary": c.get("wow_preliminary"),
         "distance_class": clean(c.get("distance")),
-        "distance_lift": c.get("distance_lift"),
-        "distance_bonus": c.get("distance_bonus"),
+        "distance_lift": _finite_json_number(c.get("distance_lift")),
+        "distance_bonus": _finite_json_number(c.get("distance_bonus")),
         "primary_role_coverage": round(len(covered) / max(1, len(required)), 3),
         "required_roles": required,
         "covered_roles": covered,
