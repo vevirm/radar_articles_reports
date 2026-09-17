@@ -69,14 +69,26 @@ class DownstreamRetraceTests(unittest.TestCase):
             self.assertGreaterEqual(primary_count, 4)
             self.assertGreaterEqual(int(shock.get('inference_score', 0)), dr.SHOCK_MIN_SCORE)
 
-    def test_high_order_primary_roles_are_not_closed_by_c_or_history(self):
+    def test_high_order_primary_roles_follow_claim_primary_semantics(self):
+        # R-09 after the reasoning reform: A/frontier claims are primary, and a
+        # Deep-Scan KEEP Strand-C claim may also be primary when it is verified
+        # event content (action/effect). Historical claims remain context only.
+        # `analytical_weight` on claim-native support is the R-21 role strength,
+        # not the old A-vs-C context weight.
         for candidate in self.rebuilt['high_order_inference']['candidates']:
+            if not candidate.get('claim_native'):
+                continue
             for ref in candidate.get('support', []):
-                self.assertEqual(ref.get('strand'), 'A')
-                self.assertAlmostEqual(float(ref.get('analytical_weight', 0)), 1.0)
+                self.assertIn(ref.get('strand'), {'A', 'C'})
+                self.assertNotEqual(ref.get('strand'), 'H')
+                self.assertTrue(ref.get('claim_primary'))
+                self.assertGreater(float(ref.get('analytical_weight', 0) or 0), 0.0)
+                if ref.get('strand') == 'C':
+                    self.assertNotEqual(str(ref.get('claim_origin') or ''), 'provisional')
+                    self.assertIn(str(ref.get('claim_kind') or ''), {'action', 'effect'})
             for ref in candidate.get('context', []):
                 self.assertIn(ref.get('strand'), {'C', 'H'})
-                self.assertLess(float(ref.get('analytical_weight', 1)), 1.0)
+                self.assertFalse(ref.get('claim_primary', False))
 
     def test_full_retrace_records_changes_without_requiring_new_or_retired_objects(self):
         # `newly_inferred` and `retired` are change counters, not invariants.

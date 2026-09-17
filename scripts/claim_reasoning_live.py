@@ -701,6 +701,10 @@ def _support_rows(c: dict[str, Any], node_by_claim: dict[str, dict[str, Any]]) -
             "quality": int(round(float(snap.get("merit", node.get("merit", 0)) or 0))),
             "new_this_scan": bool(node.get("_new_this_scan")),
             "analytical_weight": round(float(snap.get("strength", 0) or 0), 3),
+            "claim_primary": bool(node.get("_primary")),
+            "claim_context_weight": round(float(node.get("_context_weight", 1.0) or 0), 3),
+            "claim_origin": clean(node.get("origin")),
+            "claim_kind": clean(node.get("kind")),
             "object": clean(snap.get("object")),
         })
     # Level-2/3 candidates often store claim ids directly instead of role snapshots.
@@ -725,7 +729,12 @@ def _support_rows(c: dict[str, Any], node_by_claim: dict[str, dict[str, Any]]) -
             "title": clean(node.get("_title")), "source": clean(node.get("_source")),
             "date": clean(node.get("status_date")), "link": rk[5:] if rk.startswith("link:") else clean(node.get("_link")),
             "quality": int(round(float(node.get("merit", 0) or 0))), "new_this_scan": bool(node.get("_new_this_scan")),
-            "analytical_weight": round(float(node.get("_context_weight", 1.0) or 0), 3), "object": clean(node.get("object")),
+            "analytical_weight": round(float(node.get("_context_weight", 1.0) or 0), 3),
+            "claim_primary": bool(node.get("_primary")),
+            "claim_context_weight": round(float(node.get("_context_weight", 1.0) or 0), 3),
+            "claim_origin": clean(node.get("origin")),
+            "claim_kind": clean(node.get("kind")),
+            "object": clean(node.get("object")),
         })
     return snaps
 
