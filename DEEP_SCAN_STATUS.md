@@ -6,17 +6,17 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1272** (Main **644** + Historical **628**)
-- Automatic queue still needing V2 verification: **110** (Main **1** + Historical **109**)
-- Currently assigned to workers: **96** (Main **1** + Historical **95**)
-- Bounded access-recovery retries still eligible: **14**
+- Authoritative V2 verified: **1288** (Main **644** + Historical **644**)
+- Automatic queue still needing V2 verification: **94** (Main **1** + Historical **93**)
+- Currently assigned to workers: **76** (Main **1** + Historical **75**)
+- Bounded access-recovery retries still eligible: **18**
 - Hands-on verification needed: **55**
-- Automatic queue pending and not yet assigned: **14**
+- Automatic queue pending and not yet assigned: **18**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260917T065448Z-5d29b20d76c3`
+- Current package: `worker-a-20260917T070110Z-5d29b20d76c3`
 - Assigned unresolved records: **36**
   1. `link:https://doi.org/10.1016/j.bushor.2026.09.004` — From digital sovereignty to geographic intelligence: Mapping the hidden geography of digital value and control with the SCALE Framework — recovery attempt 2/3
   2. `historical:id:872fb7d6c16ec949` — Beyond checklists: toward an ethical-constructive technology assessment
@@ -29,17 +29,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260917T065510Z-cd63404e9a62`
-- Assigned unresolved records: **60**
-  1. `historical:id:710d045096ea6f29` — Foresight by online communities – The case of renewable energies
-  2. `historical:id:08cbe07f3dbd4a87` — Recent Personnel Reforms of Public Universities in China and in Italy: A Comparison
-  3. `historical:id:248f49edb3becb08` — The Evolving Role of the EU in Space-Related Security and Defence Research
-  4. `historical:id:68a98a6f7f431a4c` — The European Arms Industry, the European Commission and the Preparatory Action for Security Research: Business as Usual?
-  5. `historical:id:b4ea7b84e8c47191` — Tendencies and prospects of Russian-French scientific collaboration
-  6. `historical:id:67726cf80fe23fc9` — Sweden AI Strategy Report
-  7. `historical:id:0987b35b178e5609` — Policy on Open Science
-  8. `historical:id:f1fbca5e768b38d8` — Policy Entrepreneurship and Agenda Setting: Comparing and Contrasting the Origins of the European Research Programmes for Security and Defense
-  - … plus 52 more in the package manifest
+- Current package: `worker-b-20260917T070127Z-c1088ee0206d`
+- Assigned unresolved records: **40**
+  1. `historical:id:54a0ed573cfd4e70` — Academic freedom is becoming part of Europe's competitive offer to global researchers as well as a condition for reliable knowledge production. — recovery attempt 2/3
+  2. `historical:id:98e96e23a8b4f1f0` — Network structure of scientific collaborations between China and the EU member states
+  3. `historical:id:19c9f8c2cfcde1e7` — Understanding European Union Science Diplomacy
+  4. `historical:id:922a27831be9f4dd` — Science diplomacy: Investigating the perspective of scholars on politics–science collaboration in international affairs
+  5. `historical:id:213e2cf46ab28ca9` — Re-interpreting knowledge, expertise and EU governance: The cases of social policy and security research policy
+  6. `historical:id:eeecb62cc7e3d144` — Science Production in Germany, France, Belgium, and Luxembourg: Comparing the Contributions of Research Universities and Institutes to Science, Technology, Engineering, Mathematics, and Health
+  7. `historical:id:7b7948a4531eb32b` — The Arab Foresight Group
+  8. `historical:id:910dc68b07fcc3fd` — Risky business? The EU, China and dual-use technology
+  - … plus 32 more in the package manifest
 
 ## Hands-on verification needed
 
