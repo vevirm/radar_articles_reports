@@ -5285,13 +5285,15 @@
           "record_key": "link:https://www.aka.fi/en/from-research-to-society/responsible-science/research-security/",
           "claim_id": "c:725d3494535354ef:1",
           "object": "research_security.screening",
-          "secondary_objects": [],
+          "secondary_objects": [
+            "research.openness"
+          ],
           "actor": {
             "name": "Research Council of Finland",
             "class": "national_funder"
           },
-          "mechanism": "assesses",
-          "direction": "expands",
+          "mechanism": "requires",
+          "direction": "becomes_conditional",
           "status": "delivered",
           "status_date": "2026-08-19",
           "scope": {
@@ -6453,15 +6455,15 @@
             "name": "EuroHPC Joint Undertaking",
             "class": "eu_body"
           },
-          "mechanism": "assesses",
-          "direction": "unchanged",
-          "status": "delivered",
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "call_open",
           "status_date": "2026-08-13",
           "scope": {
             "level": "eu",
             "countries": []
           },
-          "kind": "diagnosis",
+          "kind": "action",
           "merit": 99,
           "qualification": "States intended outcomes of a call; no results, awards or evaluation are reported.",
           "text": "EuroHPC is funding experimental quantum pilot lines at TRL 4-6 to connect European quantum research with Chips JU industrial pilot lines.",
@@ -6566,15 +6568,15 @@
             "name": "EuroHPC Joint Undertaking",
             "class": "eu_body"
           },
-          "mechanism": "assesses",
+          "mechanism": "funds",
           "direction": "expands",
-          "status": "delivered",
+          "status": "call_open",
           "status_date": "2026-08-13",
           "scope": {
             "level": "eu",
             "countries": []
           },
-          "kind": "diagnosis",
+          "kind": "action",
           "merit": 99,
           "qualification": "Describes expected outcomes of a call; no awards or results are reported.",
           "text": "EuroHPC is funding a distributed, open-access European quantum testing and certification infrastructure at TRL 4-7.",
@@ -9975,13 +9977,16 @@
           "record_key": "link:https://doi.org/10.30525/2256-0742/2026-12-3-363-368",
           "claim_id": "c:710bb1ac49b92ba7:1",
           "object": "ai.governance",
-          "secondary_objects": [],
+          "secondary_objects": [
+            "finance.strategic_investment",
+            "digital.public_procurement"
+          ],
           "actor": {
             "name": "Study authors",
             "class": "university_group"
           },
-          "mechanism": "assesses",
-          "direction": "expands",
+          "mechanism": "requires",
+          "direction": "becomes_conditional",
           "status": "delivered",
           "status_date": "2026-07-31",
           "scope": {
@@ -10340,18 +10345,20 @@
           "object": "horizon.association",
           "secondary_objects": [],
           "actor": {
-            "name": "ERA Portal Austria",
-            "class": "other"
+            "name": "Japan",
+            "class": "third_country"
           },
-          "mechanism": "assesses",
+          "mechanism": "associates",
           "direction": "expands",
-          "status": "delivered",
+          "status": "in_force",
           "status_date": "2026-07-30",
           "scope": {
-            "level": "eu",
-            "countries": []
+            "level": "associated_country",
+            "countries": [
+              "Japan"
+            ]
           },
-          "kind": "diagnosis",
+          "kind": "action",
           "merit": 61,
           "qualification": "Records the fact of association; it says nothing about expected participation volumes, budget contribution or how cooperation will be prioritised in practice.",
           "text": "Japan's association to Horizon Europe took effect on 30 July 2026, granting Japanese participants equal-terms access and extending the programme to the largest-population associated country.",
@@ -14706,18 +14713,18 @@
           "object": "research.assessment",
           "secondary_objects": [],
           "actor": {
-            "name": "ERA Portal Austria",
-            "class": "other"
+            "name": "Science Europe",
+            "class": "ngo_thinktank"
           },
-          "mechanism": "assesses",
-          "direction": "becomes_contested",
+          "mechanism": "launches",
+          "direction": "expands",
           "status": "delivered",
           "status_date": "2026-07-21",
           "scope": {
             "level": "eu",
             "countries": []
           },
-          "kind": "diagnosis",
+          "kind": "action",
           "merit": 61,
           "qualification": "Announcement only; the guide's content is summarised at a high level and its effects are untested.",
           "text": "A practical implementation guide for responsible research assessment at research funding organisations was published.",
@@ -16086,13 +16093,15 @@
           "record_key": "link:https://doi.org/10.1007/s12027-026-00888-6",
           "claim_id": "c:8a41c07f0bb6b8a6:1",
           "object": "finance.digital_market_infrastructure",
-          "secondary_objects": [],
+          "secondary_objects": [
+            "digital.sovereignty"
+          ],
           "actor": {
             "name": "Study author",
             "class": "university_group"
           },
-          "mechanism": "assesses",
-          "direction": "contracts",
+          "mechanism": "requires",
+          "direction": "becomes_conditional",
           "status": "delivered",
           "status_date": "2026-07-07",
           "scope": {
@@ -17301,12 +17310,14 @@
           "record_key": "link:https://fiia.fi/wp-content/uploads/2026/06/RP6_The-EUs-need-for-a-new-growth-model.pdf",
           "claim_id": "c:fe8d36a3f7c2283e:1",
           "object": "industrial.competitiveness",
-          "secondary_objects": [],
+          "secondary_objects": [
+            "goal.strategic_autonomy"
+          ],
           "actor": {
             "name": "Finnish Institute of International Affairs",
             "class": "ngo_thinktank"
           },
-          "mechanism": "assesses",
+          "mechanism": "requires",
           "direction": "becomes_conditional",
           "status": "delivered",
           "status_date": "2026-06-06",
@@ -19514,12 +19525,14 @@
           "record_key": "link:https://doi.org/10.1111/bioe.70159",
           "claim_id": "c:713d541873723aa6:1",
           "object": "health.data_infrastructure",
-          "secondary_objects": [],
+          "secondary_objects": [
+            "digital.governance"
+          ],
           "actor": {
             "name": "Study authors",
             "class": "university_group"
           },
-          "mechanism": "assesses",
+          "mechanism": "requires",
           "direction": "becomes_conditional",
           "status": "delivered",
           "status_date": "2026-07-16",
@@ -21001,12 +21014,14 @@
           "record_key": "link:https://doi.org/10.1016/j.eist.2026.101171",
           "claim_id": "c:090b1d34977a4d93:1",
           "object": "innovation.system_performance",
-          "secondary_objects": [],
+          "secondary_objects": [
+            "research.system_governance"
+          ],
           "actor": {
             "name": "Study authors",
             "class": "university_group"
           },
-          "mechanism": "assesses",
+          "mechanism": "requires",
           "direction": "becomes_conditional",
           "status": "delivered",
           "status_date": "2026-07-08",
@@ -21969,7 +21984,7 @@
             "name": "The Agency presents an agenda of nine priority capability areas and",
             "class": "other"
           },
-          "mechanism": "assesses",
+          "mechanism": "requires",
           "direction": "becomes_conditional",
           "status": "delivered",
           "status_date": "2026-07-02",
@@ -24592,13 +24607,15 @@
           "record_key": "link:https://era.gv.at/news-items/esfri-eosc-task-force-publishes-report-on-eosc-and-research-infrastructures/",
           "claim_id": "c:b22b05afbc27f875:1",
           "object": "research.infrastructure_access",
-          "secondary_objects": [],
+          "secondary_objects": [
+            "research.infrastructure"
+          ],
           "actor": {
             "name": "The task force",
             "class": "other"
           },
-          "mechanism": "assesses",
-          "direction": "expands",
+          "mechanism": "requires",
+          "direction": "becomes_conditional",
           "status": "delivered",
           "status_date": "2026-06-25",
           "scope": {
@@ -29092,15 +29109,15 @@
             "name": "European Commission",
             "class": "eu_body"
           },
-          "mechanism": "assesses",
+          "mechanism": "proposes",
           "direction": "expands",
-          "status": "delivered",
+          "status": "proposed",
           "status_date": "2026-06-03",
           "scope": {
             "level": "eu",
             "countries": []
           },
-          "kind": "diagnosis",
+          "kind": "action",
           "merit": 99,
           "qualification": "A proposal at first reading; the repeal of Regulation (EU) 2023/1781 takes effect only if adopted.",
           "text": "The Commission proposes a new semiconductor regulation that would repeal and replace the 2023 Chips Act.",
@@ -29205,15 +29222,15 @@
             "name": "European Commission",
             "class": "eu_body"
           },
-          "mechanism": "assesses",
+          "mechanism": "proposes",
           "direction": "expands",
-          "status": "delivered",
+          "status": "proposed",
           "status_date": "2026-06-03",
           "scope": {
             "level": "eu",
             "countries": []
           },
-          "kind": "diagnosis",
+          "kind": "action",
           "merit": 99,
           "qualification": "A proposal at first reading; nothing in it is yet law, and the accompanying impact assessment is Commission staff analysis.",
           "text": "The Commission proposes a regulation creating a framework of measures to strengthen Europe's cloud and AI ecosystem.",
@@ -30153,15 +30170,15 @@
             "name": "EuroHPC Joint Undertaking",
             "class": "eu_body"
           },
-          "mechanism": "assesses",
-          "direction": "unchanged",
-          "status": "delivered",
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "call_open",
           "status_date": "2026-06-02",
           "scope": {
             "level": "eu",
             "countries": []
           },
-          "kind": "diagnosis",
+          "kind": "action",
           "merit": 99,
           "qualification": "Call objectives only; no selected proposals or standards outputs are reported.",
           "text": "EuroHPC is funding pre-normative European quantum standards work and stronger EU representation in international standards bodies.",
@@ -31929,12 +31946,14 @@
           "record_key": "link:https://doi.org/10.1093/scipol/scag028",
           "claim_id": "c:89e7529c2f4f3d35:1",
           "object": "research_security.screening",
-          "secondary_objects": [],
+          "secondary_objects": [
+            "research.system_governance"
+          ],
           "actor": {
             "name": "Study authors",
             "class": "university_group"
           },
-          "mechanism": "assesses",
+          "mechanism": "coordinates",
           "direction": "expands",
           "status": "delivered",
           "status_date": "2026-04-28",
@@ -40592,17 +40611,17 @@
           "secondary_objects": [],
           "actor": {
             "name": "European Union",
-            "class": "other"
+            "class": "eu_body"
           },
-          "mechanism": "assesses",
-          "direction": "unchanged",
-          "status": "delivered",
+          "mechanism": "collaborates",
+          "direction": "expands",
+          "status": "announced",
           "status_date": "2026-05-27",
           "scope": {
-            "level": "eu",
+            "level": "external",
             "countries": []
           },
-          "kind": "diagnosis",
+          "kind": "action",
           "merit": 61,
           "qualification": "A letter of intent is not a binding agreement; the expanded cooperation is an intention, not an outcome.",
           "text": "The EU and Vietnam signed a letter of intent to deepen science, technology and innovation cooperation.",
@@ -44087,13 +44106,15 @@
           "record_key": "link:https://ecipe.org/wp-content/uploads/2026/04/ECI_OccasionalPaper_04-2026_LY02.pdf",
           "claim_id": "c:e527148e15fa3cc1:1",
           "object": "goal.strategic_autonomy",
-          "secondary_objects": [],
+          "secondary_objects": [
+            "finance.strategic_investment"
+          ],
           "actor": {
             "name": "Study authors",
             "class": "university_group"
           },
-          "mechanism": "assesses",
-          "direction": "expands",
+          "mechanism": "restricts",
+          "direction": "contracts",
           "status": "delivered",
           "status_date": "2026-04-16",
           "scope": {
@@ -50036,14 +50057,16 @@
           "record_key": "link:https://news.google.com/rss/articles/CBMirgFBVV95cUxNcGlWeGFlRDRYZVowU2Y0Y0FJTlRmQW5ubjJwNGcxb3NsQnRBUVo5eWtMdnhoSlAzM0FKdlJHWkpJR2lxZUZHcWg5cFBqb1NxNm9Ma0MwR3AweEZpUEFTZ1JRZ3pjSDN6V2VOdE1nUjhBQU1PdlJ5Z29xSDloZHZOOExRbHotYVlRUDd0X2tpa2JVR3U1NTBHc3VhZkYzMDN4ZE9KWl9lZnFBZzkwZEE?oc=5",
           "claim_id": "c:d0f1705879fcbdd2:1",
           "object": "compute.private_investment",
-          "secondary_objects": [],
+          "secondary_objects": [
+            "datacentre.energy_supply"
+          ],
           "actor": {
             "name": "Google",
             "class": "company"
           },
-          "mechanism": "assesses",
+          "mechanism": "invests",
           "direction": "expands",
-          "status": "delivered",
+          "status": "announced",
           "status_date": "2026-09-09",
           "scope": {
             "level": "member_state",
@@ -50051,7 +50074,7 @@
               "Finland"
             ]
           },
-          "kind": "diagnosis",
+          "kind": "action",
           "merit": 54,
           "qualification": "Investment execution, new generation projects and final economic effects remain prospective.",
           "text": "Google announced a major new AI-compute investment and energy arrangement in Finland.",
@@ -56034,18 +56057,18 @@
           "object": "finance.venture_capital",
           "secondary_objects": [],
           "actor": {
-            "name": "Mistral AI",
+            "name": "Samsung-led investor group",
             "class": "company"
           },
-          "mechanism": "assesses",
-          "direction": "unchanged",
-          "status": "delivered",
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "announced",
           "status_date": "2026-09-08",
           "scope": {
             "level": "eu",
             "countries": []
           },
-          "kind": "diagnosis",
+          "kind": "action",
           "merit": 54,
           "qualification": "Private financing strengthens capacity but does not by itself guarantee technological or commercial outcomes.",
           "text": "Mistral AI announced a €3 billion funding round led by Samsung at a valuation above €20 billion.",
@@ -66736,12 +66759,14 @@
           "record_key": "link:https://cepr.org/system/files/publication-files/306781-the_financeability_of_europe_s_strategic_ambitions.pdf",
           "claim_id": "c:9343f86c05d29ff2:1",
           "object": "finance.strategic_investment",
-          "secondary_objects": [],
+          "secondary_objects": [
+            "goal.strategic_autonomy"
+          ],
           "actor": {
             "name": "CEPR research team",
             "class": "ngo_thinktank"
           },
-          "mechanism": "assesses",
+          "mechanism": "requires",
           "direction": "becomes_conditional",
           "status": "delivered",
           "status_date": "2026-09-10",
@@ -81905,13 +81930,15 @@
           "record_key": "link:https://www.cer.eu/sites/default/files/JG_pbrief_stock_markets_14.9.26.pdf",
           "claim_id": "c:84c89428c6b32a1e:1",
           "object": "finance.strategic_investment",
-          "secondary_objects": [],
+          "secondary_objects": [
+            "finance.digital_market_infrastructure"
+          ],
           "actor": {
             "name": "Bertelsmann Stiftung; Centre for European Reform; Jacques Delors Centre",
             "class": "ngo_thinktank"
           },
-          "mechanism": "assesses",
-          "direction": "contracts",
+          "mechanism": "requires",
+          "direction": "becomes_conditional",
           "status": "delivered",
           "status_date": "2026-09-15",
           "scope": {
@@ -127686,5 +127713,5 @@
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-09-17T19:09:31.935484+00:00"
+  "claims_updated_at": "2026-09-17T19:41:41.498193+00:00"
 }
