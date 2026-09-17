@@ -7,16 +7,16 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **1288** (Main **644** + Historical **644**)
-- Automatic queue still needing V2 verification: **94** (Main **1** + Historical **93**)
+- Automatic queue still needing V2 verification: **99** (Main **1** + Historical **98**)
 - Currently assigned to workers: **76** (Main **1** + Historical **75**)
 - Bounded access-recovery retries still eligible: **18**
 - Hands-on verification needed: **55**
-- Automatic queue pending and not yet assigned: **18**
+- Automatic queue pending and not yet assigned: **23**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260917T070110Z-5d29b20d76c3`
+- Current package: `worker-a-20260917T090649Z-5d29b20d76c3`
 - Assigned unresolved records: **36**
   1. `link:https://doi.org/10.1016/j.bushor.2026.09.004` — From digital sovereignty to geographic intelligence: Mapping the hidden geography of digital value and control with the SCALE Framework — recovery attempt 2/3
   2. `historical:id:872fb7d6c16ec949` — Beyond checklists: toward an ethical-constructive technology assessment
@@ -29,7 +29,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260917T070127Z-c1088ee0206d`
+- Current package: `worker-b-20260917T090704Z-c1088ee0206d`
 - Assigned unresolved records: **40**
   1. `historical:id:54a0ed573cfd4e70` — Academic freedom is becoming part of Europe's competitive offer to global researchers as well as a condition for reliable knowledge production. — recovery attempt 2/3
   2. `historical:id:98e96e23a8b4f1f0` — Network structure of scientific collaborations between China and the EU member states
