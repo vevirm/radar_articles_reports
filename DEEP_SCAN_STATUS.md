@@ -6,30 +6,27 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1357** (Main **649** + Historical **708**)
-- Automatic queue still needing V2 verification: **42** (Main **1** + Historical **41**)
-- Currently assigned to workers: **42** (Main **1** + Historical **41**)
+- Authoritative V2 verified: **1385** (Main **649** + Historical **736**)
+- Automatic queue still needing V2 verification: **12** (Main **1** + Historical **11**)
+- Currently assigned to workers: **12** (Main **1** + Historical **11**)
 - Bounded access-recovery retries still eligible: **0**
-- Hands-on verification needed: **60**
+- Hands-on verification needed: **62**
 - Automatic queue pending and not yet assigned: **0**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260917T154643Z-e4953dcbcec9`
-- Assigned unresolved records: **36**
-  1. `historical:id:1b548cd98970b985` — ERC participants at the 2019 Research Innovation days
-  2. `historical:id:3cecfeb44fddb1f7` — Controlling internet content in the EU: towards digital sovereignty — recovery attempt 3/3
-  3. `historical:id:b3c33b824538e7fe` — Cybersecurity Trends in the European Union: Regulatory Mercantilism and the Digitalisation of Geopolitics — recovery attempt 3/3
-  4. `historical:id:2a60f5849e5048b4` — Scientific collaborations between Latin America and Europe: an approach from science diplomacy towards international engagement — recovery attempt 3/3
-  5. `historical:id:3d100e8cee15e522` — Moving on to not fall behind? Technological sovereignty and the ‘geo-dirigiste’ turn in EU industrial policy — recovery attempt 3/3
-  6. `historical:id:bec6dbaab7568898` — Identifying interdisciplinary research in research projects — recovery attempt 3/3
-  7. `historical:id:e077e1381d2d93fd` — The Spectrum of Strategic Autonomy in EU Defence Supply Chains — recovery attempt 3/3
-  8. `historical:id:940d02bed62a022e` — Europe’s Economic Security and China: Where to Draw the Line — recovery attempt 3/3
-  - … plus 28 more in the package manifest
+- Current package: `worker-a-20260917T155105Z-a4c0425aaf5e`
+- Assigned unresolved records: **6**
+  1. `historical:id:0fa9a045c44ef264` — A Three-Level Evaluation Process of Cultural Readiness for Strategic Foresight Projects — recovery attempt 3/3
+  2. `historical:id:5815e2e734c08288` — The EUs Approach to Transatlantic Science and Research Relations: Between Laissez Faire and Science Diplomacy — recovery attempt 3/3
+  3. `historical:id:e64398987bf4dc73` — Gender in European research policy — recovery attempt 3/3
+  4. `historical:id:9d0da077bf121de2` — Review of ‘The Emergence of EU Defense Research Policy: From Innovation to Militarization’ — recovery attempt 3/3
+  5. `historical:id:5dd5533594f180de` — The emergence of EU defense research policy: from innovation to militarization, innovation, technology, and knowledge management — recovery attempt 3/3
+  6. `historical:id:068ceabb6181be45` — Innovation system foresight and systemic innovation for the overseas countries and territories — recovery attempt 3/3
 
 ### Worker B
-- Current package: `worker-b-20260917T154655Z-a2d59c8157d0`
+- Current package: `worker-b-20260917T155113Z-a2d59c8157d0`
 - Assigned unresolved records: **6**
   1. `historical:id:11a2b0b21715eb40` — Research security by roundtable: analysis of Germany’s committees for the ethics of security-relevant research
   2. `historical:id:a389794c702a37cf` — The implementation of research security policies in Germany: exploring policy narratives across governance levels
@@ -102,3 +99,5 @@ These works no longer consume automatic Deep Scan slots. Their identity is belie
 - `historical:id:ea172fb497c5e020` — **From strategic autonomy to strategic partnership: <scp>EU</scp>–India relations in health diplomacy** — attempts: 3/3 — Global Policy — 2024-11-01 — Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP. — https://doi.org/10.1111/1758-5899.13459
 - `historical:id:6212b03e377b75be` — **The paradox of semiconductors—EU governance between sovereignty and interdependence** — attempts: 3/3 — International Affairs — 2024-09-26 — Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP. — https://doi.org/10.1080/09557571.2024.2405915
 - `historical:id:40a66178c02fbfdc` — **Geopolitics and Science and Technology Cooperation in Argentina, Chile, and Colombia** — attempts: 3/3 — Science Diplomacy — 2024-08-14 — Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP. — https://doi.org/10.4018/979-8-3693-2746-3.ch006
+- `historical:id:429b7fb8a4fd8c00` — **Fumbling Toward Foresight** — attempts: 3/3 — Futures — 2020-12-01 — Identity is verified, but substantive matching evidence remained inaccessible or insufficient after all six mandatory recovery steps. — https://doi.org/10.1177/1946756720976713
+- `historical:id:b6502660dc2a056b` — **Russia’s energy in 2030: future trends and technology priorities** — attempts: 3/3 — Foresight — 2017-04-10 — Identity is verified, but substantive matching evidence remained inaccessible or insufficient after all six mandatory recovery steps. — https://doi.org/10.1108/fs-07-2016-0034
