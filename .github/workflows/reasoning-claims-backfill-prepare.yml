@@ -1,0 +1,90 @@
+name: Reasoning Reform — Prepare Claim Backfill
+
+on:
+  workflow_dispatch:
+    inputs:
+      max_records:
+        description: 'Maximum Deep-Scanned records to package this run'
+        required: false
+        default: '120'
+      batch_size:
+        description: 'Records per offline LLM batch (1–40)'
+        required: false
+        default: '20'
+
+permissions:
+  contents: read
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+
+jobs:
+  prepare-claim-backfill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out main
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Verify protected core before packaging
+        run: |
+          python scripts/check_reasoning_reform_core_freeze.py
+          python -m pytest -q tests/test_reasoning_reform_claim_schema.py tests/test_reasoning_reform_claim_backfill.py
+
+      - name: Prepare offline claim batches
+        shell: bash
+        env:
+          MAX_RECORDS: ${{ inputs.max_records }}
+          BATCH_SIZE: ${{ inputs.batch_size }}
+        run: |
+          set -euo pipefail
+          max_records="${MAX_RECORDS:-120}"
+          batch_size="${BATCH_SIZE:-20}"
+          if ! [[ "$max_records" =~ ^[0-9]+$ ]] || (( max_records < 1 || max_records > 400 )); then
+            echo '::error::max_records must be an integer from 1 to 400'
+            exit 1
+          fi
+          if ! [[ "$batch_size" =~ ^[0-9]+$ ]] || (( batch_size < 1 || batch_size > 40 )); then
+            echo '::error::batch_size must be an integer from 1 to 40'
+            exit 1
+          fi
+          rm -rf claim_backfill_out
+          python scripts/backfill_claims.py prepare \
+            --output-dir claim_backfill_out \
+            --max-records "$max_records" \
+            --batch-size "$batch_size"
+          python scripts/backfill_claims.py coverage | tee claim_backfill_out/coverage.json
+
+      - name: Upload claim backfill batches
+        uses: actions/upload-artifact@v4
+        with:
+          name: reasoning-claim-backfill-batches
+          path: claim_backfill_out/
+          if-no-files-found: error
+          retention-days: 21
+
+      - name: Next-step summary
+        shell: bash
+        run: |
+          cat >> "$GITHUB_STEP_SUMMARY" <<'EOF'
+          ## Claim backfill packages are ready
+
+          Download the **reasoning-claim-backfill-batches** artifact. Each ZIP is self-contained and uses only stored Deep Scan text — no browsing.
+
+          Give a ZIP to an LLM, follow `START_HERE.txt`, and return its `claims_backfill_results.json` into the repository folder `claim_backfill_inbox/`. The import workflow validates every claim before anything is saved.
+
+          This stage does **not** change scanner evidence, Deep Scan decisions, legacy reasoning, or the public site.
+          EOF
