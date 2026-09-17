@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-16T18:09:14Z",
+  "generated_at": "2026-09-17T06:27:31Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -85119,6 +85119,77 @@
       "reader_text_model": "user-provided-llm-subscription",
       "reader_text_written_at": "2026-09-16T18:09:14Z",
       "deep_scan_package_id": "worker-b-20260916T173450Z-cdb99e64487d"
+    },
+    "historical:id:efa8a9fe16c1dd26": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "db12e75c",
+      "identity_hash": "2278946af56e959e",
+      "reader_title": "European open-access journals: quality varies sharply by EU accession group",
+      "reader_what": "Older EU members host more top-quartile open-access journals; newer members and candidates cluster in lower quartiles.",
+      "reader_more": "The authors examined 1,201 Scopus-indexed fully open-access journals from European countries using quartiles, SJR and h-index. Countries were grouped into pre-1995 EU members, 2004–2013 entrants and candidate countries. Top-quartile journals dominate in the first group, while third-quartile journals make up over half in the others. Social sciences show the smallest gap between groups.",
+      "deep_analysis": {
+        "work_kind": "bibliometric study",
+        "research_question": "How strong are European fully open-access journals across country groups and fields?",
+        "main_finding": "Quality indicators of European open-access journals differ systematically by EU accession group and field.",
+        "method_or_basis": "Scopus journal indicators (quartile, SJR, h-index) for 1,201 journals; Eurostat researcher data.",
+        "qualification": "Descriptive indicators; 2015 data; journal-level rather than article-level quality.",
+        "radar_relevance": "Historical evidence on the East–West gap in European research publishing capacity.",
+        "confidence": "medium",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "doi.org link resolved to Springer article page: abstract, data notes (Scopus, Eurostat), country-group definitions and references; body paywalled."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Scientometrics 114, 1373-1394, online 2017-12-16; authors match. Unpaywall lists a submitted version."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search found the Institute of Economics Zagreb repository preprint (eizg:280) and CROSBI record 920663 with matching abstract."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_page",
+            "url": "https://link.springer.com/article/10.1007/s11192-017-2629-y",
+            "title": "Scientific potential of European fully open access journals",
+            "evidence_used": true
+          },
+          {
+            "kind": "repository_record",
+            "url": "https://repozitorij.eizg.hr/islandora/object/eizg:280/datastream/FILE0/view",
+            "title": "EIZG repository preprint",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity confirmed. Evidence: publisher page with abstract and data/country notes; repository preprint located but download blocked from this environment."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Bibliometric study of European fully open-access journals across EU member, newer-member and candidate country groups."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T06:27:31Z",
+      "deep_scan_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
     }
   }
 }
