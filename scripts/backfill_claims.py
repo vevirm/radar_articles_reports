@@ -63,7 +63,7 @@ Do not browse the web. Do not add facts from memory. Do not reinterpret admissio
 
 For each job in `claims_jobs.json`:
 
-1. Read only the supplied reader/deep-analysis text and metadata.
+1. Read only the supplied reader/deep-analysis text and `record_metadata`. The package is self-contained; do not look up missing details elsewhere.
 2. Return **1–3 claims**. The first is the main finding. A second is allowed for a
    distinct object–mechanism pair. A third is allowed only when a factual
    qualification/limit itself forms a useful claim.
@@ -79,8 +79,10 @@ For each job in `claims_jobs.json`:
    qualification when the qualification does not apply to that sentence.
 7. `text` is one factual sentence. Preserve proposal/negotiation/operating status;
    do not turn intentions into outcomes or diagnoses into effects.
-8. Historical jobs keep `era: historical`; current jobs keep `era: current`.
-9. Do not alter the top-level format or package_id.
+8. `status_date` must be supported by the package. Use a more precise event/status date when the stored text states one; otherwise use `record_metadata.date` as the documented-by date. Never invent a date.
+9. Strand B is the methods library (R-09). Its claims may be stored, but use a `methods.*` object when appropriate and set `attributes.world_reasoning` to false so methods cannot enter world-state reasoning.
+10. Historical jobs keep `era: historical`; current jobs keep `era: current`.
+11. Do not alter the top-level format or package_id.
 
 Write one file named `claims_backfill_results.json` with this shape:
 
@@ -263,7 +265,9 @@ def build_jobs(
     # "Current" means present in the authoritative active corpus now. Deep Scan
     # sidecars deliberately retain older verified records after rolling-window
     # retention; those stale sidecar entries must not be revived into reasoning.
-    active_current_keys = set(_active_map())
+    active_map = _active_map()
+    active_current_keys = set(active_map)
+    raw_current, raw_historical = _raw_maps()
     jobs: list[dict[str, Any]] = []
     for key, entry in table.items():
         if not isinstance(entry, dict) or entry.get("profile") != AUTHORITATIVE_PROFILE:
@@ -281,6 +285,7 @@ def build_jobs(
             continue
         if key not in merit_by_key:
             raise ValueError(f"No 0–100 merit score available for {key}")
+        source_row = (active_map.get(key) or raw_current.get(key) or {}) if era == "current" else (raw_historical.get(key) or {})
         job = {
             "record_key": key,
             "source_hash": clean(entry.get("source_hash")),
@@ -290,6 +295,14 @@ def build_jobs(
             "decision": decision,
             "decision_weight": DECISION_WEIGHT.get(decision, 0.35),
             "merit": merit_by_key[key],
+            "record_metadata": {
+                "title": clean(source_row.get("title")),
+                "source": clean(source_row.get("source")),
+                "authors": clean(source_row.get("authors")),
+                "date": clean(source_row.get("date")),
+                "type": clean(source_row.get("type")),
+                "link": clean(source_row.get("link")),
+            },
             "stored_text": _deep_text(entry),
         }
         job["job_hash"] = _job_hash(job)

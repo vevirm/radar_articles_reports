@@ -98,3 +98,13 @@ Use the repository's existing canonical record-key namespace, not the illustrati
 This keeps claims join-compatible with `scripts/deep_read_works.py` and
 `scripts/active_corpus.py`. A claims importer must reject `url:` rather than
 silently creating a second identity for the same record.
+
+## C-11 Corpus-driven vocabulary extension and methods isolation
+
+The small Appendix-B/example vocabulary is not broad enough to encode the live Deep Scan corpus without forcing unrelated records onto the same object. Vocabulary may therefore be extended by reviewed repository changes when a live backfill batch exposes a genuine missing object. Extensions must remain controlled, clustered and test-validated; runtime invention is still forbidden.
+
+`methods.*` objects belong to the `methods` cluster. They are storage claims for the Strand-B methods library and must never enter world-state graph expansion, trends, shocks, risks or opportunities. Backfill claims on `methods.*` set `attributes.world_reasoning = false`. The same flag is used for the occasional method-only record that was admitted outside Strand B.
+
+## C-12 Self-contained backfill dates
+
+A claim package must carry `record_metadata` from the repository record, including at least title, source, authors, date, type and link. `status_date` may use a more precise date stated in stored Deep Scan text; otherwise it uses `record_metadata.date` as the documented-by date. An extractor must not browse or invent a missing date.

@@ -129,6 +129,10 @@ def test_prepare_makes_self_contained_offline_zip(tmp_path):
         jobs = json.loads(zf.read("claims_jobs.json"))
         assert len(jobs["jobs"]) == 2
         assert all("stored_text" in j and "job_hash" in j for j in jobs["jobs"])
+        assert all("record_metadata" in j for j in jobs["jobs"])
+        assert all(j["record_metadata"].get("date") for j in jobs["jobs"])
+        assert "status_date" in instructions and "record_metadata.date" in instructions
+        assert "world_reasoning" in instructions
 
 
 def test_import_is_atomic_and_writes_only_valid_claims(tmp_path):
