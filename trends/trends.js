@@ -18,7 +18,7 @@
   const quality=x=>Math.max(0,Math.min(100,Number(ReaderRank?.scoreFor?.(x))||0));
   function rowText(x){return low([x.title,x.headline,x.what,x.reader_point,x.core_message,x.summary,x.relevance_note,x.why_it_matters,x.bridge_sentence,(x.geo_evidence||[]).join(' '),(x.ri_evidence||[]).join(' '),(x.topics||[]).join(' '),(x.topic_labels||[]).join(' '),x.source].join(' '))}
   function source(x){return clean(x?.source||x?.journal||x?.institution||x?.venue||'')}
-  function historyText(x){return low([x.title,x.reader_point,x.source].join(' '))}
+  function historyText(x){return low([x.title,x.reader_title,x.reader_point,x.reader_what,x.reader_more,x.core_message,x.summary,x.relevance_note,x.source].join(' '))}
   const HISTORY_EU=/\b(?:eu|europe|european|horizon|eurohpc|erc|eic|jrc|commission|member states)\b/i;
   const ACTOR=/\b(?:European Commission|European Innovation Council|European Research Council|European Investment Bank|EuroHPC|Council of the European Union|European Parliament|Joint Research Centre|JRC Publications Repository|ERA Portal|Marie Skłodowska-Curie Actions|Research Council of|Ministry|Agency for|Government of|Fusion for Energy)\b/i;
   const EU_POLICY_ACTOR=/\b(?:European Commission|European Innovation Council|European Research Council|EuroHPC|Council of the European Union|Joint Research Centre|JRC Publications Repository|ERA Portal|Marie Skłodowska-Curie Actions)\b/i;
@@ -42,6 +42,8 @@
       if(Number.isFinite(cutoff)&&cutoff>0&&d>=cutoff)return;
       const k=clean(x.url||x.link)||low(x.title||x.reader_point);
       if(k&&seen.has(k))return;if(k)seen.add(k);
+      const rw=Number(x.historical_reasoning_weight);
+      if(Number.isFinite(rw)&&rw<=0)return;
       out.push({...x,link:x.link||x.url||'',_row:`H${String(i+1).padStart(3,'0')}`,_strand:'H',_historical:true});
     });
     return out;
@@ -88,7 +90,10 @@
   }
   function historyScore(x){
     const merit=Math.max(0,Math.min(100,Number(x?.source_merit_score)||0));
-    return merit*10+dateValue(x.date)/1e12;
+    const trust=Number.isFinite(Number(x?.historical_reasoning_weight))?Math.max(0,Math.min(1,Number(x.historical_reasoning_weight))):0.35;
+    // Historical context never qualifies the current trend, but Deep-Scan-kept
+    // context should be chosen ahead of provisional/review material when both match.
+    return trust*100000+merit*10+dateValue(x.date)/1e12;
   }
   function pickHistory(rows,side,currentEvidence){
     const patterns=side.historyAny||[];
@@ -323,7 +328,13 @@
     return out.sort((a,b)=>b.support-a.support||Math.abs(50-a.left.pull)-Math.abs(50-b.left.pull)||a.id.localeCompare(b.id));
   }
   function stats(data,history){
-    return {current:currentCorpus(data).length,historical:historicalCorpus(history).length};
+    const hs=historicalCorpus(history);
+    return {
+      current:currentCorpus(data).length,historical:hs.length,
+      historicalAuthoritative:hs.filter(x=>x?.historical_reasoning_status==='authoritative').length,
+      historicalCautious:hs.filter(x=>x?.historical_reasoning_status&&x.historical_reasoning_status!=='authoritative').length,
+      historicalExcluded:Number(history?.reasoning_stats?.not_retained)||0
+    };
   }
   return {build,stats,pairs:PAIRS,reportingRole,quality,rowText,sideQualifies};
 });
