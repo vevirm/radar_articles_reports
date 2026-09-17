@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260917T055912Z-e78722385774`
+- Current package: `worker-a-20260917T062204Z-e78722385774`
 - Assigned unresolved records: **60**
   1. `link:https://doi.org/10.1080/07036337.2026.2714069` — Between digital sovereignty and trusted connectivity: tensions in EU external digital governance — recovery attempt 3/3
   2. `historical:id:4e7f1f8a9e28de83` — The influence of proximity dimensions on international research collaboration: an analysis of European water projects
@@ -29,7 +29,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 52 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260917T055927Z-a1d13e56b11d`
+- Current package: `worker-b-20260917T062219Z-a1d13e56b11d`
 - Assigned unresolved records: **60**
   1. `historical:id:efa8a9fe16c1dd26` — Scientific potential of European fully open access journals
   2. `historical:id:710d045096ea6f29` — Foresight by online communities – The case of renewable energies

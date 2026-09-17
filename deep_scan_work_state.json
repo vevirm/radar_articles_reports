@@ -1,10 +1,10 @@
 {
   "version": 1,
   "profile": "radar-deep-scan-work-state-v1",
-  "updated_at": "2026-09-17T05:59:40Z",
+  "updated_at": "2026-09-17T06:22:33Z",
   "lanes": {
     "A": {
-      "target_size": 60,
+      "target_size": 36,
       "assigned": [
         "link:https://doi.org/10.1080/07036337.2026.2714069",
         "historical:id:4e7f1f8a9e28de83",
@@ -67,9 +67,8 @@
         "historical:id:323cbb4a2e6b6169",
         "historical:id:c98cc7165b0c2ce2"
       ],
-      "current_package_id": "worker-a-20260917T055912Z-e78722385774",
+      "current_package_id": "worker-a-20260917T062204Z-e78722385774",
       "package_history": [
-        "worker-a-20260915T070430Z-7522df957484",
         "worker-a-20260915T072822Z-7522df957484",
         "worker-a-20260915T073043Z-6066443b3f05",
         "worker-a-20260915T081004Z-f53d80648e06",
@@ -108,11 +107,12 @@
         "worker-a-20260916T173433Z-f8e5c76d61ae",
         "worker-a-20260916T175943Z-e1a6d663f107",
         "worker-a-20260916T181030Z-e1a6d663f107",
-        "worker-a-20260917T055912Z-e78722385774"
+        "worker-a-20260917T055912Z-e78722385774",
+        "worker-a-20260917T062204Z-e78722385774"
       ]
     },
     "B": {
-      "target_size": 60,
+      "target_size": 36,
       "assigned": [
         "historical:id:efa8a9fe16c1dd26",
         "historical:id:710d045096ea6f29",
@@ -175,9 +175,8 @@
         "historical:id:7cc88d103c24b405",
         "historical:id:be7da706e6b0160d"
       ],
-      "current_package_id": "worker-b-20260917T055927Z-a1d13e56b11d",
+      "current_package_id": "worker-b-20260917T062219Z-a1d13e56b11d",
       "package_history": [
-        "worker-b-20260915T070447Z-0e4acd783ae4",
         "worker-b-20260915T072841Z-d4609a23218c",
         "worker-b-20260915T073056Z-19a75c529a13",
         "worker-b-20260915T081017Z-19a75c529a13",
@@ -216,7 +215,8 @@
         "worker-b-20260916T173450Z-cdb99e64487d",
         "worker-b-20260916T175955Z-cdb99e64487d",
         "worker-b-20260916T181041Z-6fea1e0d0a0b",
-        "worker-b-20260917T055927Z-a1d13e56b11d"
+        "worker-b-20260917T055927Z-a1d13e56b11d",
+        "worker-b-20260917T062219Z-a1d13e56b11d"
       ]
     }
   },
@@ -16164,7 +16164,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-15T07:28:41Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774",
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774",
       "recovery_attempts": 2,
       "last_recovery_at": "2026-09-16T18:09:14Z",
       "last_recovery_package_id": "worker-b-20260916T173450Z-cdb99e64487d",
@@ -16385,7 +16385,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-15T07:28:41Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d",
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d",
       "recovery_attempts": 1,
       "last_recovery_at": "2026-09-15T11:21:23Z",
       "last_recovery_package_id": "worker-b-20260915T081524Z-0fb08e4ed02a",
@@ -16563,7 +16563,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-15T07:28:41Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d",
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d",
       "recovery_attempts": 1,
       "last_recovery_at": "2026-09-16T07:27:54Z",
       "last_recovery_package_id": "worker-b-20260916T065755Z-743ca1212cbd",
@@ -17722,7 +17722,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-15T08:15:24Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d",
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d",
       "recovery_attempts": 1,
       "last_recovery_at": "2026-09-16T07:27:55Z",
       "last_recovery_package_id": "worker-b-20260916T065755Z-743ca1212cbd",
@@ -17847,7 +17847,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-15T08:15:24Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d",
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d",
       "recovery_attempts": 1,
       "last_recovery_at": "2026-09-16T07:27:56Z",
       "last_recovery_package_id": "worker-b-20260916T065755Z-743ca1212cbd",
@@ -17946,7 +17946,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-15T08:15:24Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774",
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774",
       "recovery_attempts": 1,
       "last_recovery_at": "2026-09-16T07:27:56Z",
       "last_recovery_package_id": "worker-b-20260916T065755Z-743ca1212cbd",
@@ -18058,7 +18058,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-15T08:15:24Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774",
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774",
       "recovery_attempts": 1,
       "last_recovery_at": "2026-09-16T07:27:56Z",
       "last_recovery_package_id": "worker-b-20260916T065755Z-743ca1212cbd",
@@ -18157,7 +18157,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-15T11:24:36Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d",
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d",
       "recovery_attempts": 1,
       "last_recovery_at": "2026-09-16T07:27:56Z",
       "last_recovery_package_id": "worker-b-20260916T065755Z-743ca1212cbd",
@@ -26517,7 +26517,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T11:59:13Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:710d045096ea6f29": {
       "title": "Foresight by online communities – The case of renewable energies",
@@ -26528,7 +26528,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T11:59:13Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:248f49edb3becb08": {
       "title": "The Evolving Role of the EU in Space-Related Security and Defence Research",
@@ -26539,7 +26539,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T11:59:13Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:68a98a6f7f431a4c": {
       "title": "The European Arms Industry, the European Commission and the Preparatory Action for Security Research: Business as Usual?",
@@ -26550,7 +26550,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T11:59:13Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:b4ea7b84e8c47191": {
       "title": "Tendencies and prospects of Russian-French scientific collaboration",
@@ -26561,7 +26561,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T11:59:13Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:67726cf80fe23fc9": {
       "title": "Sweden AI Strategy Report",
@@ -26572,7 +26572,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T11:59:13Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:0987b35b178e5609": {
       "title": "Policy on Open Science",
@@ -26583,7 +26583,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T11:59:13Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:f1fbca5e768b38d8": {
       "title": "Policy Entrepreneurship and Agenda Setting: Comparing and Contrasting the Origins of the European Research Programmes for Security and Defense",
@@ -26594,7 +26594,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T11:59:13Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:851428f6a463ec0c": {
       "title": "Plan S – European research funding organisations join forces to make open access mainstream",
@@ -26605,7 +26605,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T11:59:13Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:be82d6b49fbe3f89": {
       "title": "Network Analysis of EU-Funded R&D Collaboration in the European Security Research Programme: Actors and Industries",
@@ -26616,7 +26616,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T11:59:13Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:29211f1a05b5c8a4": {
       "title": "Militarization of European Border Security",
@@ -26627,7 +26627,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T11:59:13Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:68f32e9ef371557d": {
       "title": "How Andy Burnham can build a sovereign digital state, with Mallory Durran",
@@ -26638,7 +26638,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T11:59:13Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:ef177fec64355bc6": {
       "title": "Europe and the Digital Single Market: What Next ?",
@@ -26649,7 +26649,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T11:59:13Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:b7da5c0eddee6553": {
       "title": "EU Research and Technology Policy: Balancing Between the National and the EU Dimension",
@@ -26660,7 +26660,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T11:59:13Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:197d792c08cf0a33": {
       "title": "Digital Transformation",
@@ -26671,7 +26671,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T11:59:13Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:b1b6d4f1f5e244a3": {
       "title": "An unprecedented collective action for an unprecedented Research and Innovation European Framework Programme | Coimbra",
@@ -26682,7 +26682,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T11:59:13Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:30b6b0e1eac2d25a": {
       "title": "Agenda Research & Innovation | Coimbra",
@@ -26693,7 +26693,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T11:59:13Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:dc8b63397a940c63": {
       "title": "Developing and implementing circular economy business models in service-oriented technology companies",
@@ -26704,7 +26704,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T11:59:13Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:4c997e55857fde0c": {
       "title": "Reproducing “academic successors” or cultivating “versatile experts”: influences of doctoral training on career expectations of Chinese PhD students",
@@ -26871,7 +26871,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T17:34:50Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:19c9f8c2cfcde1e7": {
       "title": "Understanding European Union Science Diplomacy",
@@ -26882,7 +26882,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T17:34:50Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:922a27831be9f4dd": {
       "title": "Science diplomacy: Investigating the perspective of scholars on politics–science collaboration in international affairs",
@@ -26893,7 +26893,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T17:34:50Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:213e2cf46ab28ca9": {
       "title": "Re-interpreting knowledge, expertise and EU governance: The cases of social policy and security research policy",
@@ -26904,7 +26904,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T17:34:50Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:eeecb62cc7e3d144": {
       "title": "Science Production in Germany, France, Belgium, and Luxembourg: Comparing the Contributions of Research Universities and Institutes to Science, Technology, Engineering, Mathematics, and Health",
@@ -26915,7 +26915,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T17:34:50Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:7b7948a4531eb32b": {
       "title": "The Arab Foresight Group",
@@ -26926,7 +26926,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T17:34:50Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:74793cb4fc91fe51": {
       "title": "A common European export policy for defence and dual-use items?",
@@ -26937,7 +26937,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T17:34:50Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:681311f8e6ec428f": {
       "title": "RUFS 40_Military strategy and force structure in Kaliningrad_FOI Memo 6060.pdf",
@@ -26948,7 +26948,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T17:34:50Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:f6e2a594003c640d": {
       "title": "Big data and technology assessment: research topic or competitor?",
@@ -26959,7 +26959,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T17:34:50Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:2fc7ad9f1a39284e": {
       "title": "The Open Society and Its Enemies: An attack against CEU, academic freedom and the rule of law – CEPS",
@@ -26970,7 +26970,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T17:34:50Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:b6502660dc2a056b": {
       "title": "Russia’s energy in 2030: future trends and technology priorities",
@@ -26981,7 +26981,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T17:34:50Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:2081cb0becc89db2": {
       "title": "International mobility of researchers | Rathenau Instituut",
@@ -26992,7 +26992,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T17:34:50Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:96bbd9a9778e6a12": {
       "title": "Artificial Intelligence and the ‘Good Society’: the US, EU, and UK approach",
@@ -27003,7 +27003,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T17:34:50Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:d0939bfd36dd9c22": {
       "title": "Corporate Foresight in Multinational Business Strategies",
@@ -27014,7 +27014,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T17:34:50Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:584ba1c45550a082": {
       "title": "Nurture over nature: How do European universities support their collaboration with business?",
@@ -27025,7 +27025,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T17:34:50Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:78f86a2f67a7ae8b": {
       "title": "Europe: “Internationalists” and “Locals” in Research: Similar Productivity Patterns Across Europe",
@@ -27036,7 +27036,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T17:34:50Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:fb242dae95604730": {
       "title": "ERA Portal Austria – Seconded National Expert - Research Programme Experts in Particle Physics and Fundamental Quantum Physics",
@@ -27047,7 +27047,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T17:34:50Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:dbdcaae9bce57ebe": {
       "title": "Aeronautical Excellence Through European Strategic Partnerships",
@@ -27058,7 +27058,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T17:34:50Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:2a214f60be7069de": {
       "title": "Personal ties in university-industry linkages: a case-study from Argentina",
@@ -27069,7 +27069,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T17:34:50Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:dc302423afff77b3": {
       "title": "Shaping Portuguese science policy for the European horizon: The discourses of technological change",
@@ -27080,7 +27080,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T17:34:50Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:25b78de9bfcad30c": {
       "title": "Functional technology foresight. A novel methodology to identify emerging technologies",
@@ -27091,7 +27091,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T17:34:50Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:4e7f1f8a9e28de83": {
       "title": "The influence of proximity dimensions on international research collaboration: an analysis of European water projects",
@@ -27102,7 +27102,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:9752588eb4fbfeb0": {
       "title": "Development trajectory and research themes of foresight",
@@ -27113,7 +27113,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:3d3276f54752b5cb": {
       "title": "Human centred science and technology—transdisciplinary foresight and co-creation as tools for active needs-based innovation governance",
@@ -27124,7 +27124,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:800efe9463fabc88": {
       "title": "Who gets Horizon 2020 research grants? Propensity to apply and probability to succeed in a two-step analysis",
@@ -27135,7 +27135,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:87deee3bc243dbc0": {
       "title": "Foresight in Scientific Method",
@@ -27146,7 +27146,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:442fdf3b585bc643": {
       "title": "The proof of the pudding: University responses to the European Research Council",
@@ -27157,7 +27157,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:2243410b01ac1335": {
       "title": "50 years of space research in Europe: a bibliometric profile of the European Space Agency (ESA)",
@@ -27168,7 +27168,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:04526937a1320c7f": {
       "title": "Global food security: assessing trends in view of guiding future EU policies",
@@ -27179,7 +27179,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:68543f2b88cec758": {
       "title": "Foresight in cities: on the possibility of a “strategic urban intelligence”",
@@ -27190,7 +27190,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:6eadd326d752ef63": {
       "title": "Evaluating foresight in transnational research programming",
@@ -27201,7 +27201,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:82bee44fe7020740": {
       "title": "Research assessment using early citation information",
@@ -27212,7 +27212,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:e6e233fbb826d789": {
       "title": "A global call for action to include gender in research impact assessment",
@@ -27223,7 +27223,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:faf4948fcc4eba30": {
       "title": "Conceptions and expectations of research collaboration in the European social sciences: Research policies, institutional contexts and the autonomy of the scientific field",
@@ -27234,7 +27234,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:97e08ddbe17079f2": {
       "title": "A scenario-based roadmapping method for strategic planning and forecasting: A case study in a testing, inspection and certification company",
@@ -27245,7 +27245,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:498c392579297679": {
       "title": "Research and innovation as sources of renewed growth? EU policy responses to the crisis",
@@ -27256,7 +27256,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:5d66d00d3061cd22": {
       "title": "Foresight for regional policy: technological and regional fit",
@@ -27267,7 +27267,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:4b111bea783a8f86": {
       "title": "Scientometric research in Russia: impact of science policy changes",
@@ -27278,7 +27278,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:703da444a7fc15df": {
       "title": "Foresight and the third mission of universities: the case for innovation system foresight",
@@ -27289,7 +27289,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:b50983fcec965838": {
       "title": "The European research elite: a cross-national study of highly productive academics in 11 countries",
@@ -27300,7 +27300,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:4ca3a88cf553e488": {
       "title": "European Innovation Policy Concepts and the Governance of Innovation",
@@ -27311,7 +27311,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:d36b03aaee50ecee": {
       "title": "The Brexit weakens the European Research Area",
@@ -27322,7 +27322,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:eeffed5264afc93a": {
       "title": "EARTO Analysis of EC Regulation Proposal: Establishing Horizon Europe | EARTO",
@@ -27333,7 +27333,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:d8fc4952fd9d1bb2": {
       "title": "Coimbra Group research policy seminar | Coimbra",
@@ -27344,7 +27344,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:42433c8b350992fd": {
       "title": "Scientific collaboration between ‘old’ and ‘new’ member states: Did joining the European Union make a difference?",
@@ -27355,7 +27355,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:6d5c8a929d1b4a62": {
       "title": "How different forms of policy learning influence each other: case studies from Austrian innovation policy-making",
@@ -27366,7 +27366,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:fad8c7a8b620df0b": {
       "title": "FTA supporting effective priority setting in multi-lateral research programme cooperation: The case of EU–Russia S&T cooperation",
@@ -27377,7 +27377,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:12ae98e018e9647f": {
       "title": "Transport demand evolution in Europe – factors of change, scenarios and challenges",
@@ -27388,7 +27388,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:edf75d1d25e3fd51": {
       "title": "Creative destruction or mere niche support? Innovation policy mixes for sustainability transitions",
@@ -27399,7 +27399,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:51e22d5090c9c4bc": {
       "title": "Regional Knowledge Flows and Innovation Policy: A Dynamic Representation",
@@ -27410,7 +27410,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:46983b0a990a2aa8": {
       "title": "The patterns of venture capital investment in Europe",
@@ -27421,7 +27421,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-17T05:59:12Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:fc09dea84cb39d94": {
       "title": "A bibliometric analysis of Technology Centres",
@@ -27432,7 +27432,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-17T05:59:12Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:3c9da75a0e98156c": {
       "title": "A Sociotechnical Framework for Governing Climate Engineering",
@@ -27443,7 +27443,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-17T05:59:12Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:323cbb4a2e6b6169": {
       "title": "On activism of European researchers about science policy",
@@ -27454,7 +27454,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-17T05:59:12Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:c98cc7165b0c2ce2": {
       "title": "Innovating innovation policy: the emergence of ‘Responsible Research and Innovation’",
@@ -27465,7 +27465,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-17T05:59:12Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:53984e98fd3b7808": {
       "title": "Mobility of Scientists across Europe: The Role Played by European Research Funding",
@@ -27476,7 +27476,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-17T05:59:27Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:61f8c22387103608": {
       "title": "Collaboration strategies and effects on university research: evidence from Chinese universities",
@@ -27487,7 +27487,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-17T05:59:27Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:d262f4431df2cf65": {
       "title": "A strategic policy scenario analysis framework for the sustainable tourist development of peripheral small island areas – the case of Lefkada-Greece Island",
@@ -27498,7 +27498,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-17T05:59:27Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:8b518ec98cc8dd65": {
       "title": "International Academic Mobility: Towards a Concentration of the Minds in Europe",
@@ -27509,7 +27509,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-17T05:59:27Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:07822dd2ef9863a3": {
       "title": "Research Careers: Some Reflections from Europe",
@@ -27520,7 +27520,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-17T05:59:27Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:fdbf471c0cd726b8": {
       "title": "International mobility: Findings from a survey of researchers in the EU",
@@ -27531,7 +27531,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-17T05:59:27Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:7ab6a0f66af072c4": {
       "title": "Excellence in the knowledge-based economy: from scientific to research excellence",
@@ -27542,7 +27542,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-17T05:59:27Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:d9221660a4593e61": {
       "title": "Foresight, Competitive Intelligence and Business Analytics — Tools for Making Industrial Programmes More Efficient",
@@ -27553,7 +27553,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-17T05:59:27Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:cf49c1a2ebd60264": {
       "title": "Can strong foresight orientation make a nation successful? | Demos Helsinki",
@@ -27564,7 +27564,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-17T05:59:27Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:1611a3ed9c30c313": {
       "title": "International research visits and careers: An analysis of bioscience academics in Japan",
@@ -27575,7 +27575,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-17T05:59:27Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:7cc88d103c24b405": {
       "title": "International Academic Mobility: Towards a Concentration of the Minds in Europe. Research & Occasional Paper Series: CSHE.3.14.",
@@ -27586,7 +27586,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-17T05:59:27Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:be7da706e6b0160d": {
       "title": "Productivity in Europe and the United States | Rathenau Instituut",
@@ -27597,7 +27597,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-17T05:59:27Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:944f54fd268f3263": {
       "title": "Integrating Delphi methodology to some classical concepts of the Boston consulting group framework: arctic maritime technology BCG Delphi foresight—a pilot study from Finland",
@@ -28126,7 +28126,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T11:59:13Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:36ce934a2c4be58b": {
       "title": "The determinants of research performance in European universities: a large scale multilevel analysis",
@@ -28150,7 +28150,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T17:34:50Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:b4d8e8fa465b32a4": {
       "title": "EARTO Contribution to the Public Consultation on a Possible Successor to the Competitiveness and Innovation Framework Programme (CIP) | EARTO",
@@ -28161,7 +28161,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:1e67de41978f6317": {
       "title": "EARTO Answer to the EC Consultation on Horizon Europe Implementation Aspects | EARTO",
@@ -28172,7 +28172,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:a5916a82d781efc9": {
       "title": "EARTO Answer to EC Consultation on Horizon Europe Programme Strategic Planning | EARTO",
@@ -28183,7 +28183,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:243bf801c8e55486": {
       "title": "Finland, what is our promise for future generations? | Demos Helsinki",
@@ -28579,7 +28579,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T11:59:13Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "link:https://www.sitra.fi/wp-content/uploads/2026/06/The-Nordic-model-for-collaboration-on-health-data.pdf": {
       "title": "The Nordic model for collaboration on health data: insights from an evolving process - Sitra",
@@ -28922,7 +28922,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T07:29:16Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774",
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774",
       "recovery_attempts": 2,
       "last_recovery_at": "2026-09-16T17:57:22Z",
       "last_recovery_package_id": "worker-a-20260916T173433Z-f8e5c76d61ae",
@@ -29561,7 +29561,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T17:59:43Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:98ecfa38eb4d2174": {
       "title": "Cross-national variations in postdoc precarity: An inquiry into the role of career structures and research funding models",
@@ -29676,7 +29676,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-17T05:59:12Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "link:https://www.etsi.org/images/files/ETSIPositionPapers/ETSI-Position-Paper-No6.pdf": {
       "title": "ETSI’s Response to the European Commission’s Proposal for the Cybersecurity Act 2 - ETSI",
@@ -29687,7 +29687,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-17T05:59:12Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "link:https://doi.org/10.1016/j.bushor.2026.09.004": {
       "title": "From digital sovereignty to geographic intelligence: Mapping the hidden geography of digital value and control with the SCALE Framework",
@@ -29698,7 +29698,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-17T05:59:12Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "link:https://doi.org/10.1007/s11623-026-2234-4": {
       "title": "From concept to action: sovereignty criteria in a public procurement context",
@@ -29709,7 +29709,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-17T05:59:12Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "link:https://dgap.org/system/files/article_pdfs/DGAP%20Report_No-9_SEP-2026_20pp.pdf": {
       "title": "Armenia: Digital Transformation and Governance Gaps",
@@ -29720,7 +29720,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-17T05:59:12Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "link:https://news.google.com/rss/articles/CBMi0AFBVV95cUxOWVhiQXZtdndrejlpWFBfV1FnQU8xN0pjU180MVd0SE91WWNlWFpBYTF0dzJmdjI2RzZkSVlyTjBSdE1veVR4WEtRMlg0NDJnZ1FVdVFJSXg0LXg0ZjhINXJLYWNwMU8xdDFoTFVXc2Q3S3IyZkZEanBiWEtjdmtidmNteDJpaW9TdXFwNGkxUWd3N0NoeC1mUnhZekJmaGVGYjlfckdwUkw0ZUJrdUVSQ0pBcml0Y0VBN2YxaGRqRC05bzBHSThORUlJcmpDTlli?oc=5": {
       "title": "MEPs debate state of the EU: economy, security, climate, AI, social media",
@@ -29731,7 +29731,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-17T05:59:12Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:a0fadd83a1cbc220": {
       "title": "Commission publishes study supporting the Review of the Digital Decade Policy Programme",
@@ -29742,7 +29742,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-17T05:59:12Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:7b3ca3e78de6e6c7": {
       "title": "Aviation Data Repository for Research (ADRR)",
@@ -29753,7 +29753,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-17T05:59:12Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:a4d5aba1ae75fb0c": {
       "title": "PhD Researchers present key insights from European Forum Alpbach 2025",
@@ -29764,7 +29764,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-17T05:59:12Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:7c2a70fee91782f4": {
       "title": "Future forward: insights from industry representatives • Innovation beyond borders",
@@ -29775,7 +29775,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-17T05:59:12Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:9910bc034d2b258c": {
       "title": "Eureka and the European Union: From Hanover to a shared future • Innovation beyond borders",
@@ -29786,7 +29786,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-17T05:59:12Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:31e37b5a69612cb6": {
       "title": "China In Europe Research Network",
@@ -29797,7 +29797,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-17T05:59:12Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:389007b7e08c88d1": {
       "title": "Academic artisans in the research university",
@@ -29808,7 +29808,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-17T05:59:12Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:810a4d7609e874ba": {
       "title": "Evaluation of the Impact of the EU Structural Support on the Competitiveness of Lithuanian Economics",
@@ -29819,7 +29819,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-17T05:59:12Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:9c3a8280e3fa16da": {
       "title": "An integrated scenario-based robust planning approach for foresight and strategic management with application to energy industry",
@@ -29830,7 +29830,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-17T05:59:12Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:ae64b74c3f04692c": {
       "title": "Learning to use the future: developing foresight capabilities through scenario processes",
@@ -29841,7 +29841,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-17T05:59:12Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:bf323d73974ada88": {
       "title": "Designing a moving strategic foresight approach: ontological and methodological issues of scenario design",
@@ -29852,7 +29852,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-17T05:59:12Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:730da73d5169af82": {
       "title": "Tracing the flows of knowledge transfer: Latent dimensions and determinants of university–industry interactions in peripheral innovation systems",
@@ -29863,7 +29863,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-17T05:59:12Z",
-      "last_package_id": "worker-a-20260917T055912Z-e78722385774"
+      "last_package_id": "worker-a-20260917T062204Z-e78722385774"
     },
     "historical:id:547f950f827d4d18": {
       "title": "Counting quality? The Czech performance-based research funding system",
@@ -29874,7 +29874,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-17T05:59:27Z",
-      "last_package_id": "worker-b-20260917T055927Z-a1d13e56b11d"
+      "last_package_id": "worker-b-20260917T062219Z-a1d13e56b11d"
     },
     "historical:id:46e993866190a610": {
       "title": "Tender opportunities for research and innovation",
@@ -38469,6 +38469,138 @@
     "worker-b-20260917T055927Z-a1d13e56b11d": {
       "lane": "B",
       "created_at": "2026-09-17T05:59:40Z",
+      "record_keys": [
+        "historical:id:efa8a9fe16c1dd26",
+        "historical:id:710d045096ea6f29",
+        "historical:id:08cbe07f3dbd4a87",
+        "historical:id:248f49edb3becb08",
+        "historical:id:68a98a6f7f431a4c",
+        "historical:id:b4ea7b84e8c47191",
+        "historical:id:67726cf80fe23fc9",
+        "historical:id:0987b35b178e5609",
+        "historical:id:f1fbca5e768b38d8",
+        "historical:id:5f02392522b6f284",
+        "historical:id:851428f6a463ec0c",
+        "historical:id:be82d6b49fbe3f89",
+        "historical:id:29211f1a05b5c8a4",
+        "historical:id:4a0af82a0f2a2fbb",
+        "historical:id:68f32e9ef371557d",
+        "historical:id:ef177fec64355bc6",
+        "historical:id:b7da5c0eddee6553",
+        "historical:id:197d792c08cf0a33",
+        "historical:id:b1b6d4f1f5e244a3",
+        "historical:id:30b6b0e1eac2d25a",
+        "historical:id:dc8b63397a940c63",
+        "historical:id:54a0ed573cfd4e70",
+        "historical:id:98e96e23a8b4f1f0",
+        "historical:id:19c9f8c2cfcde1e7",
+        "historical:id:922a27831be9f4dd",
+        "historical:id:213e2cf46ab28ca9",
+        "historical:id:eeecb62cc7e3d144",
+        "historical:id:7b7948a4531eb32b",
+        "historical:id:910dc68b07fcc3fd",
+        "historical:id:74793cb4fc91fe51",
+        "historical:id:681311f8e6ec428f",
+        "historical:id:f6e2a594003c640d",
+        "historical:id:2fc7ad9f1a39284e",
+        "historical:id:ea172fb497c5e020",
+        "historical:id:b6502660dc2a056b",
+        "historical:id:2081cb0becc89db2",
+        "historical:id:96bbd9a9778e6a12",
+        "historical:id:d0939bfd36dd9c22",
+        "historical:id:584ba1c45550a082",
+        "historical:id:78f86a2f67a7ae8b",
+        "historical:id:fb242dae95604730",
+        "historical:id:dbdcaae9bce57ebe",
+        "historical:id:2a214f60be7069de",
+        "historical:id:dc302423afff77b3",
+        "historical:id:25b78de9bfcad30c",
+        "historical:id:6212b03e377b75be",
+        "historical:id:53984e98fd3b7808",
+        "historical:id:61f8c22387103608",
+        "historical:id:d262f4431df2cf65",
+        "historical:id:8b518ec98cc8dd65",
+        "historical:id:07822dd2ef9863a3",
+        "historical:id:fdbf471c0cd726b8",
+        "historical:id:7ab6a0f66af072c4",
+        "historical:id:40a66178c02fbfdc",
+        "historical:id:d9221660a4593e61",
+        "historical:id:547f950f827d4d18",
+        "historical:id:cf49c1a2ebd60264",
+        "historical:id:1611a3ed9c30c313",
+        "historical:id:7cc88d103c24b405",
+        "historical:id:be7da706e6b0160d"
+      ]
+    },
+    "worker-a-20260917T062204Z-e78722385774": {
+      "lane": "A",
+      "created_at": "2026-09-17T06:22:19Z",
+      "record_keys": [
+        "link:https://doi.org/10.1080/07036337.2026.2714069",
+        "historical:id:4e7f1f8a9e28de83",
+        "historical:id:9752588eb4fbfeb0",
+        "historical:id:3d3276f54752b5cb",
+        "historical:id:800efe9463fabc88",
+        "historical:id:87deee3bc243dbc0",
+        "historical:id:442fdf3b585bc643",
+        "historical:id:2243410b01ac1335",
+        "historical:id:04526937a1320c7f",
+        "historical:id:68543f2b88cec758",
+        "historical:id:82ee1180a17de5e9",
+        "historical:id:6eadd326d752ef63",
+        "historical:id:82bee44fe7020740",
+        "historical:id:e6e233fbb826d789",
+        "historical:id:faf4948fcc4eba30",
+        "historical:id:97e08ddbe17079f2",
+        "historical:id:498c392579297679",
+        "historical:id:5d66d00d3061cd22",
+        "historical:id:4b111bea783a8f86",
+        "historical:id:703da444a7fc15df",
+        "historical:id:b50983fcec965838",
+        "historical:id:4ca3a88cf553e488",
+        "historical:id:d36b03aaee50ecee",
+        "historical:id:50d118a3a332ccb5",
+        "historical:id:b4d8e8fa465b32a4",
+        "historical:id:1e67de41978f6317",
+        "historical:id:a5916a82d781efc9",
+        "historical:id:eeffed5264afc93a",
+        "historical:id:d8fc4952fd9d1bb2",
+        "historical:id:42433c8b350992fd",
+        "historical:id:6d5c8a929d1b4a62",
+        "historical:id:fad8c7a8b620df0b",
+        "historical:id:12ae98e018e9647f",
+        "historical:id:edf75d1d25e3fd51",
+        "historical:id:51e22d5090c9c4bc",
+        "historical:id:4cc162e03dcc03ea",
+        "link:https://doi.org/10.1007/s43681-026-01297-8",
+        "link:https://www.etsi.org/images/files/ETSIPositionPapers/ETSI-Position-Paper-No6.pdf",
+        "link:https://doi.org/10.1016/j.bushor.2026.09.004",
+        "link:https://doi.org/10.1007/s11623-026-2234-4",
+        "link:https://dgap.org/system/files/article_pdfs/DGAP%20Report_No-9_SEP-2026_20pp.pdf",
+        "link:https://news.google.com/rss/articles/CBMi0AFBVV95cUxOWVhiQXZtdndrejlpWFBfV1FnQU8xN0pjU180MVd0SE91WWNlWFpBYTF0dzJmdjI2RzZkSVlyTjBSdE1veVR4WEtRMlg0NDJnZ1FVdVFJSXg0LXg0ZjhINXJLYWNwMU8xdDFoTFVXc2Q3S3IyZkZEanBiWEtjdmtidmNteDJpaW9TdXFwNGkxUWd3N0NoeC1mUnhZekJmaGVGYjlfckdwUkw0ZUJrdUVSQ0pBcml0Y0VBN2YxaGRqRC05bzBHSThORUlJcmpDTlli?oc=5",
+        "historical:id:a0fadd83a1cbc220",
+        "historical:id:7b3ca3e78de6e6c7",
+        "historical:id:a4d5aba1ae75fb0c",
+        "historical:id:7c2a70fee91782f4",
+        "historical:id:9910bc034d2b258c",
+        "historical:id:31e37b5a69612cb6",
+        "historical:id:540b859dbd556d25",
+        "historical:id:389007b7e08c88d1",
+        "historical:id:810a4d7609e874ba",
+        "historical:id:9c3a8280e3fa16da",
+        "historical:id:ae64b74c3f04692c",
+        "historical:id:bf323d73974ada88",
+        "historical:id:46983b0a990a2aa8",
+        "historical:id:fc09dea84cb39d94",
+        "historical:id:730da73d5169af82",
+        "historical:id:3c9da75a0e98156c",
+        "historical:id:323cbb4a2e6b6169",
+        "historical:id:c98cc7165b0c2ce2"
+      ]
+    },
+    "worker-b-20260917T062219Z-a1d13e56b11d": {
+      "lane": "B",
+      "created_at": "2026-09-17T06:22:33Z",
       "record_keys": [
         "historical:id:efa8a9fe16c1dd26",
         "historical:id:710d045096ea6f29",
