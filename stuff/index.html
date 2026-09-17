@@ -14,17 +14,18 @@
 <header><div class="wrap top"><h1>Stuff</h1></div></header>
 <main class="wrap">
 <section class="download-card">
-  <div><h2>Everything the scanner knows about each publication</h2><p>The Excel opens on one row per publication or report. It includes every field currently stored by the scanner — source, authors, dates, links, summaries, evidence snippets, admission notes, provenance, Matrix fields, classifications, previous versions and other technical fields.</p></div>
+  <div><h2>Everything the scanner knows about each publication</h2><p>The Excel opens on one row per publication or report. It includes the current Radar plus every Historical scanner finding. Historical rows appear as soon as the Historical scanner finds them, then the same rows are updated with Deep Scan verification, admission and correction details. Authoritative historical material is clearly marked; pending or non-retained historical findings stay visible for audit.</p></div>
   <div><button id="downloadExcel" class="btn red" type="button">Download all publication data (.xlsx)</button><div class="note"><a href="source_merit_ranking.xlsx" download>Repository snapshot</a></div></div>
 </section>
 <section class="section"><h2>Other technical files</h2><div class="formats"><a class="btn secondary" href="radar_technical_grammar.xlsx" download>Scanner grammar</a><a class="btn secondary" href="eu_ri_radar_phrases_by_strand.xlsx" download>Search phrase rules</a><a class="btn secondary" href="../glossary/">Glossary</a></div></section>
 </main>
 <script src="../source_merit.js?v=17.19.25"></script>
-<script src="workbook.js?v=23.3"></script>
+<script src="workbook.js?v=23.4"></script>
 <script>
-let radarData=null;
-document.getElementById('downloadExcel').addEventListener('click',()=>{try{if(!radarData)throw new Error('Radar data is still loading');const bytes=globalThis.RadarStuffWorkbook?.buildXlsx?.(radarData,globalThis.RadarSourceMerit);if(!bytes)throw new Error('Workbook generator unavailable');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([bytes],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}));a.download='radar_all_publication_data.xlsx';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000)}catch(e){console.error('Excel generation failed',e);alert('The current Excel could not be generated. Try the repository snapshot link.')}});
-(async()=>{try{radarData=await RadarData.load('../radar.json','../radar_seed.json')}catch(e){console.error(e);document.getElementById('downloadExcel').disabled=true;document.getElementById('downloadExcel').textContent='Radar data unavailable'}})();
+let radarData=null,workbookExtras={historical:{items:[]},reader:{records:{}},admission:{records:{}},corrections:{records:{}}};
+async function fetchJsonMaybe(path,fallback){try{const r=await fetch(path+(path.includes('?')?'&':'?')+'ts='+Date.now(),{cache:'no-store'});return r.ok?await r.json():fallback}catch(_){return fallback}}
+document.getElementById('downloadExcel').addEventListener('click',()=>{try{if(!radarData)throw new Error('Radar data is still loading');const bytes=globalThis.RadarStuffWorkbook?.buildXlsx?.(radarData,globalThis.RadarSourceMerit,workbookExtras);if(!bytes)throw new Error('Workbook generator unavailable');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([bytes],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}));a.download='radar_all_publication_data.xlsx';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000)}catch(e){console.error('Excel generation failed',e);alert('The current Excel could not be generated. Try the repository snapshot link.')}});
+(async()=>{try{const [active,historical,reader,admission,corrections]=await Promise.all([RadarData.load('../radar.json','../radar_seed.json'),fetchJsonMaybe('../historical/historical.json',{items:[]}),fetchJsonMaybe('../reader_text.json',{records:{}}),fetchJsonMaybe('../admission_state.json',{records:{}}),fetchJsonMaybe('../record_corrections.json',{records:{}})]);radarData=active;workbookExtras={historical,reader,admission,corrections}}catch(e){console.error(e);document.getElementById('downloadExcel').disabled=true;document.getElementById('downloadExcel').textContent='Radar data unavailable'}})();
 </script>
 <script src="../site-shell.js?v=28"></script>
 </body></html>

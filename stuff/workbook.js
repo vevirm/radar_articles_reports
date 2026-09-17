@@ -69,6 +69,68 @@
     }
     return out;
   }
+  const HISTORICAL_DEEP_PROFILE='deep-reader-v2-authoritative';
+
+  function historicalRecordKey(x){
+    const id=clean(x?.id||x?.record_id||x?.fingerprint);
+    if(id)return `historical:id:${id}`;
+    const doi=clean(x?.doi).toLowerCase().replace(/^https?:\/\/(?:dx\.)?doi\.org\//,'');
+    if(doi)return `historical:doi:${doi}`;
+    const link=linkOf(x);
+    return link?`historical:link:${link}`:'';
+  }
+
+  function sidecarRecords(sidecar){
+    return sidecar&&typeof sidecar==='object'&&sidecar.records&&typeof sidecar.records==='object'?sidecar.records:{};
+  }
+
+  function historicalStatus(key,readerTable,admissionTable,correctionTable){
+    const reader=readerTable[key]&&typeof readerTable[key]==='object'?readerTable[key]:{};
+    const admission=admissionTable[key]&&typeof admissionTable[key]==='object'?admissionTable[key]:{};
+    const correction=correctionTable[key]&&typeof correctionTable[key]==='object'?correctionTable[key]:{};
+    const decision=clean(admission.decision||reader?.admission?.decision).toLowerCase();
+    const authoritativeScan=clean(reader.profile)===HISTORICAL_DEEP_PROFILE;
+    const authoritativeHistorical=authoritativeScan&&decision==='keep';
+    let deepStatus='Awaiting Deep Scan';
+    if(authoritativeHistorical)deepStatus='Authoritative — kept';
+    else if(authoritativeScan&&decision==='review')deepStatus='Deep Scan — review';
+    else if(authoritativeScan&&['drop','drop_unverifiable','duplicate','needs_manual_verification'].includes(decision))deepStatus='Deep Scan — not retained';
+    else if(authoritativeScan&&decision)deepStatus=`Deep Scan — ${decision}`;
+    else if(authoritativeScan)deepStatus='Deep Scan checked — decision pending';
+    else if(decision)deepStatus=`Deep Scan decision — ${decision}`;
+    else if(Object.keys(reader).length)deepStatus='Deep Scan data present — not authoritative';
+    const checkedAt=clean(admission.updated_at||reader.reader_text_written_at||correction.updated_at);
+    return {reader,admission,correction,decision,authoritativeScan,authoritativeHistorical,deepStatus,checkedAt};
+  }
+
+  function buildHistoricalTable(historical,readerSidecar={},admissionSidecar={},correctionSidecar={}){
+    const items=Array.isArray(historical?.items)?historical.items:[];
+    const readerTable=sidecarRecords(readerSidecar),admissionTable=sidecarRecords(admissionSidecar),correctionTable=sidecarRecords(correctionSidecar);
+    const scannerKeySet=new Set(),readerKeySet=new Set(),admissionKeySet=new Set(),correctionKeySet=new Set(),prepared=[];
+    for(const item of items){
+      if(!item||typeof item!=='object')continue;
+      const key=historicalRecordKey(item);
+      const scanner=flatten(item);
+      Object.keys(scanner).forEach(k=>scannerKeySet.add(k));
+      const state=historicalStatus(key,readerTable,admissionTable,correctionTable);
+      const reader=flatten(state.reader),admission=flatten(state.admission),correction=flatten(state.correction);
+      Object.keys(reader).forEach(k=>readerKeySet.add(k));
+      Object.keys(admission).forEach(k=>admissionKeySet.add(k));
+      Object.keys(correction).forEach(k=>correctionKeySet.add(k));
+      prepared.push({item,key,scanner,reader,admission,correction,state});
+    }
+    const scannerPriority=['id','title','date','year','source','authors','url','landing_page_url','source_kind','venue','publisher','source_merit_score','source_merit_label','strand','reader_point','why_it_matters','relevance','topics','topic_labels','eu_evidence','ri_evidence','geo_evidence','matrix_dimension','matrix_outcome','matrix_basis','discovery','manual_curated','new_this_scan'];
+    const ordered=(set,priority=[])=>[...priority.filter(k=>set.has(k)),...[...set].filter(k=>!priority.includes(k)).sort((a,b)=>a.localeCompare(b))];
+    const scannerKeys=ordered(scannerKeySet,scannerPriority),readerKeys=ordered(readerKeySet,['profile','reader_title','reader_what','reader_why','reader_more','deep_analysis.confidence','deep_analysis.main_finding','deep_analysis.method_or_basis','deep_analysis.qualification','verification.identity_verified','verification.evidence_depth','verification.verification_note','admission.decision','admission.reason_code','admission.reason','duplicate.status','duplicate.duplicate_of','deep_read_mode','reader_text_model','reader_text_written_at','deep_scan_package_id']),admissionKeys=ordered(admissionKeySet,['decision','target_strand','reason_code','reason','verification_note','duplicate_of','updated_at','deep_scan_package_id']),correctionKeys=ordered(correctionKeySet,['fields.title','fields.authors','fields.source','fields.date','fields.type','fields.text_mode','fields.source_text_mode','fields.event_status','unset','reason_code','reason','evidence','updated_at','deep_scan_package_id']);
+    const headers=['Historical record key','Historical scanner finding','Historical scanner status','Deep Scan status','Authoritative historical','Authoritative Deep Scan profile','Deep Scan decision','Deep Scan checked at',...scannerKeys.map(k=>`scanner.${k}`),...readerKeys.map(k=>`deep_scan.${k}`),...admissionKeys.map(k=>`admission.${k}`),...correctionKeys.map(k=>`correction.${k}`)];
+    const rows=prepared.map(({key,scanner,reader,admission,correction,state})=>[key,'yes','Survived historical scanner',state.deepStatus,state.authoritativeHistorical?'YES':'no',state.authoritativeScan?'yes':'no',state.decision,state.checkedAt,...scannerKeys.map(k=>scanner[k]||''),...readerKeys.map(k=>reader[k]||''),...admissionKeys.map(k=>admission[k]||''),...correctionKeys.map(k=>correction[k]||'')]);
+    const dateIndex=headers.indexOf('scanner.date'),titleIndex=headers.indexOf('scanner.title');
+    rows.sort((a,b)=>String(b[dateIndex]||'').localeCompare(String(a[dateIndex]||''))||String(a[titleIndex]||'').localeCompare(String(b[titleIndex]||'')));
+    const authoritativeCount=prepared.filter(x=>x.state.authoritativeHistorical).length;
+    const deepScannedCount=prepared.filter(x=>x.state.authoritativeScan).length;
+    return {headers,rows,authoritativeCount,deepScannedCount,total:prepared.length};
+  }
+
   function buildRawPublicationTable(data){
     const groups=dedupeGroups(data),keySet=new Set(),prepared=[];
     for(const g of groups){
@@ -153,40 +215,48 @@
     return 22;
   }
 
-  function buildXlsx(data,Merit){
+  function buildXlsx(data,Merit,extras={}){
     if(!Merit?.scoreFor||!Merit?.forItem||!Merit?.componentsFor)throw new Error('RadarSourceMerit unavailable');
     const raw=buildRawPublicationTable(data);
+    const historical=buildHistoricalTable(extras?.historical||{},extras?.reader||{},extras?.admission||{},extras?.corrections||{});
     const rows=buildRows(data,Merit);
     const shockRows=buildShockRows(data);
     const h1=['Rank','Score / 100','Band','Source title','Plain reader title','Date','Product','Plain finding','Why it matters','Plain explanation','Deep confidence','Deep read depth','Source','Authors','Authority / 55','Authority basis','EU relevance / 25','EU relevance basis','Evidence / 15','Evidence basis','Author transparency / 5','Type','EU relevance code','EU evidence','R&I evidence','Strategic evidence','Core message','Relevance / admission note','Matrix auto cell','Strategic classification','Discovery provenance','Source tier','First seen','Source link'];
     const b1=rows.map(r=>[r.rank,r.score,r.band,r.title,r.readerTitle,r.date,r.product,r.readerWhat,r.readerWhy,r.readerMore,r.deepConfidence,r.deepReadMode,r.source,r.authors,r.authorityPoints,r.authority,r.relevancePoints,r.relevance,r.evidencePoints,r.evidence,r.authorPoints,r.type,r.euRelevance,r.euEvidence,r.riEvidence,r.geoEvidence,r.core,r.note,r.matrix,r.strategic,r.provenance,r.sourceTier,r.firstSeen,r.link]);
     const widths=[8,11,16,42,38,12,16,42,42,58,16,20,27,32,12,28,15,31,12,28,18,24,18,28,28,28,42,48,20,22,24,20,20,42];
+    const historicalArchiveUpdated=clean(extras?.historical?.last_updated);
     const method=[
       ['WHAT THIS FILE IS','The technical data behind the Radar. Normal reader pages deliberately hide most of this.'],
-      ['All publication data','First sheet. One deduplicated publication/report per row. It contains scanner fields plus any currently valid Deep Scan reader fields for that publication. Nested fields use dot names; arrays and complex values are preserved as JSON. If the same publication has different stored values in different Radar products, both are retained with || between them.'],
-      ['Ranked sources','A smaller audit view. Plain reader title/finding/why/explanation appear first when a valid Deep Scan exists, followed by the 0–100 source-merit audit fields.'],
+      ['All publication data','Current live-Radar evidence only. One deduplicated publication/report per row. It contains scanner fields plus any currently valid Deep Scan reader fields for that publication. Nested fields use dot names; arrays and complex values are preserved as JSON. If the same publication has different stored values in different Radar products, both are retained with || between them.'],
+      ['Historical findings','Every finding that survived the Historical scanner is kept here, including records later reviewed or not retained by Deep Scan. Each row keeps the original scanner fields and joins the matching Deep Scan reader, admission and correction sidecars. “Authoritative historical = YES” means an authoritative Deep Scan profile plus a keep decision. Pending and non-kept records remain visible for audit.'],
+      ['Historical update lifecycle','A Historical scanner finding enters this workbook immediately. When Deep Scan later checks that same historical record key, the same row is regenerated with its Deep Scan decision, reader explanation, verification details and corrections. The raw historical archive remains unchanged.'],
+      ['Ranked sources','A smaller audit view of the current active Radar corpus. Plain reader title/finding/why/explanation appear first when a valid Deep Scan exists, followed by the 0–100 source-merit audit fields.'],
       ['Shock audit','Technical assumptions, counter-evidence, prevention actions and indicators behind inferred shocks.'],
       ['Current data state',`${clean(data?.run_completed_at||data?.last_updated)} · A=${(data?.strand_a||[]).length} · B=${(data?.strand_b||[]).length} · C=${(data?.strand_c||[]).length} · Strategic pathways=${(data?.strategic_pathways||[]).length}`],
-      ['Publication rows',`${raw.rows.length} deduplicated publication/report records`],
-      ['Publication fields',`${raw.headers.length-2} stored scanner fields exposed`],
-      ['Ranked rows',`${rows.length} deduplicated evidence records`],
+      ['Historical data state',`${historicalArchiveUpdated||'unknown'} · Historical scanner findings=${historical.total} · Deep Scanned=${historical.deepScannedCount} · Authoritative historical=${historical.authoritativeCount}`],
+      ['Publication rows',`${raw.rows.length} deduplicated current publication/report records`],
+      ['Publication fields',`${raw.headers.length-2} stored current scanner fields exposed`],
+      ['Historical rows',`${historical.rows.length} historical scanner records exposed`],
+      ['Historical fields',`${Math.max(0,historical.headers.length-8)} scanner + Deep Scan/admission/correction fields exposed, in addition to 8 status columns`],
+      ['Ranked rows',`${rows.length} deduplicated active evidence records`],
       ['Shock rows',`${shockRows.length} inferred shock records`]
     ];
     const shockHeaders=['Status','Inference score','Shock','Plain-language shock','Second-order effect','Conditions that must hold','Case against','What could prevent it','What to watch','Net assessment','Official trigger present','Evidence couplings','Evidence for','Prevention / counter evidence'];
     const shockWidths=[16,14,34,46,46,58,65,58,58,32,18,16,70,70];
     const styles=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><fonts count="2"><font><sz val="10"/><name val="Arial"/></font><font><b/><color rgb="FFFFFFFF"/><sz val="10"/><name val="Arial"/></font></fonts><fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FF111111"/><bgColor indexed="64"/></patternFill></fill></fills><borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="4"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFont="1" applyFill="1" applyAlignment="1"><alignment wrapText="1" vertical="center"/></xf><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0" applyAlignment="1"><alignment wrapText="1" vertical="top"/></xf><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0" applyAlignment="1"><alignment wrapText="1" vertical="top"/></xf></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>`;
     const files={
-      '[Content_Types].xml':`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/worksheets/sheet2.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/worksheets/sheet3.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/worksheets/sheet4.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>`,
+      '[Content_Types].xml':`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/worksheets/sheet2.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/worksheets/sheet3.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/worksheets/sheet4.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/worksheets/sheet5.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>`,
       '_rels/.rels':`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`,
-      'xl/workbook.xml':`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="All publication data" sheetId="1" r:id="rId1"/><sheet name="Ranked sources" sheetId="2" r:id="rId2"/><sheet name="Method" sheetId="3" r:id="rId3"/><sheet name="Shock audit" sheetId="4" r:id="rId4"/></sheets></workbook>`,
-      'xl/_rels/workbook.xml.rels':`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet2.xml"/><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet3.xml"/><Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet4.xml"/><Relationship Id="rId5" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`,
+      'xl/workbook.xml':`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="All publication data" sheetId="1" r:id="rId1"/><sheet name="Historical findings" sheetId="2" r:id="rId2"/><sheet name="Ranked sources" sheetId="3" r:id="rId3"/><sheet name="Method" sheetId="4" r:id="rId4"/><sheet name="Shock audit" sheetId="5" r:id="rId5"/></sheets></workbook>`,
+      'xl/_rels/workbook.xml.rels':`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet2.xml"/><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet3.xml"/><Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet4.xml"/><Relationship Id="rId5" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet5.xml"/><Relationship Id="rId6" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`,
       'xl/styles.xml':styles,
       'xl/worksheets/sheet1.xml':sheetXml(raw.headers,raw.rows,raw.headers.map(widthFor)),
-      'xl/worksheets/sheet2.xml':sheetXml(h1,b1,widths),
-      'xl/worksheets/sheet3.xml':sheetXml(['Field','Explanation'],method,[28,110]),
-      'xl/worksheets/sheet4.xml':sheetXml(shockHeaders,shockRows,shockWidths)
+      'xl/worksheets/sheet2.xml':sheetXml(historical.headers,historical.rows,historical.headers.map(widthFor)),
+      'xl/worksheets/sheet3.xml':sheetXml(h1,b1,widths),
+      'xl/worksheets/sheet4.xml':sheetXml(['Field','Explanation'],method,[28,110]),
+      'xl/worksheets/sheet5.xml':sheetXml(shockHeaders,shockRows,shockWidths)
     };
     return zip(files);
   }
-  return {buildRows,buildRawPublicationTable,buildShockRows,buildXlsx};
+  return {buildRows,buildRawPublicationTable,buildHistoricalTable,buildShockRows,buildXlsx};
 });
