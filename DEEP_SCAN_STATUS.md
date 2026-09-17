@@ -6,30 +6,30 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1213** (Main **638** + Historical **575**)
-- Automatic queue still needing V2 verification: **169** (Main **7** + Historical **162**)
-- Currently assigned to workers: **120** (Main **7** + Historical **113**)
-- Bounded access-recovery retries still eligible: **40**
+- Authoritative V2 verified: **1272** (Main **644** + Historical **628**)
+- Automatic queue still needing V2 verification: **110** (Main **1** + Historical **109**)
+- Currently assigned to workers: **96** (Main **1** + Historical **95**)
+- Bounded access-recovery retries still eligible: **14**
 - Hands-on verification needed: **55**
-- Automatic queue pending and not yet assigned: **49**
+- Automatic queue pending and not yet assigned: **14**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260917T063129Z-e78722385774`
-- Assigned unresolved records: **60**
-  1. `link:https://doi.org/10.1080/07036337.2026.2714069` — Between digital sovereignty and trusted connectivity: tensions in EU external digital governance — recovery attempt 3/3
-  2. `historical:id:4e7f1f8a9e28de83` — The influence of proximity dimensions on international research collaboration: an analysis of European water projects
-  3. `historical:id:9752588eb4fbfeb0` — Development trajectory and research themes of foresight
-  4. `historical:id:3d3276f54752b5cb` — Human centred science and technology—transdisciplinary foresight and co-creation as tools for active needs-based innovation governance
-  5. `historical:id:800efe9463fabc88` — Who gets Horizon 2020 research grants? Propensity to apply and probability to succeed in a two-step analysis
-  6. `historical:id:87deee3bc243dbc0` — Foresight in Scientific Method
-  7. `historical:id:442fdf3b585bc643` — The proof of the pudding: University responses to the European Research Council
-  8. `historical:id:2243410b01ac1335` — 50 years of space research in Europe: a bibliometric profile of the European Space Agency (ESA)
-  - … plus 52 more in the package manifest
+- Current package: `worker-a-20260917T065448Z-5d29b20d76c3`
+- Assigned unresolved records: **36**
+  1. `link:https://doi.org/10.1016/j.bushor.2026.09.004` — From digital sovereignty to geographic intelligence: Mapping the hidden geography of digital value and control with the SCALE Framework — recovery attempt 2/3
+  2. `historical:id:872fb7d6c16ec949` — Beyond checklists: toward an ethical-constructive technology assessment
+  3. `historical:id:803e0ea11a467579` — The Impact of Horizon 2020 on Innovation in Europe
+  4. `historical:id:46e993866190a610` — Tender opportunities for research and innovation
+  5. `historical:id:a5bcf5e5022e3984` — Strategies for Efficient Funding of Universities in Europe
+  6. `historical:id:781b72021bb0f82a` — Semiconductor Emission Explorer: Tracking Greenhouse Gas Emissions from Chip Production (2015-2023)
+  7. `historical:id:05acc7fcc9961965` — Public Perceptions of Science and Technology in Europe, China and India
+  8. `historical:id:06a6588c01bbee42` — Institutionalizing Ethical Debates in Science, Technology and Innovation Policy: A Comparison of Europe, India and China
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260917T063146Z-cd63404e9a62`
+- Current package: `worker-b-20260917T065510Z-cd63404e9a62`
 - Assigned unresolved records: **60**
   1. `historical:id:710d045096ea6f29` — Foresight by online communities – The case of renewable energies
   2. `historical:id:08cbe07f3dbd4a87` — Recent Personnel Reforms of Public Universities in China and in Italy: A Comparison
