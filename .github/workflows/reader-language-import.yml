@@ -1,0 +1,94 @@
+name: Reader Language — Import Returned Review
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'reader_language_inbox/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+
+concurrency:
+  group: ri-radar-reader-language
+  cancel-in-progress: false
+
+jobs:
+  import-reader-language:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out current main safely
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.12'
+
+      - name: Install local language-check dependencies
+        run: pip install --quiet -r requirements.txt
+
+      - name: Validate returned wording and update the presentation ledger
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/import_reader_language_results.py
+
+          unexpected="$(git diff --name-only -- . ':!reader_language/approved.json' ':!reader_language_inbox/**' || true)"
+          if [[ -n "$unexpected" ]]; then
+            echo '::error::Reader Language changed an unexpected file. Refusing to save.'
+            printf '%s\n' "$unexpected"
+            exit 1
+          fi
+
+      - name: Configure secure push authentication
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'radar-reader-language-importer'
+          git config user.email 'actions@github.com'
+          auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
+          git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${auth}"
+
+      - name: Save approved display wording
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add reader_language/approved.json reader_language_inbox
+          if git diff --cached --quiet; then
+            echo 'No Reader Language changes to commit.'
+            exit 0
+          fi
+          git commit -m 'Reader Language: import reviewed display wording'
+          git push origin HEAD:main
+
+      - name: Import summary
+        if: always()
+        shell: bash
+        run: |
+          cat >> "$GITHUB_STEP_SUMMARY" <<'EOF'
+          ## Reader Language import
+
+          Returned wording is accepted only when it still matches the exact current source-text fingerprint and passes the presentation safety checks. Approved text lives only in `reader_language/approved.json`.
+
+          The analytical source remains unchanged. If the underlying wording later changes, the old rewrite no longer matches and the page automatically falls back to the new original wording until that new text is reviewed.
+          EOF
+
+      - name: Remove temporary repository credential
+        if: always()
+        shell: bash
+        run: git config --local --unset-all http.https://github.com/.extraheader >/dev/null 2>&1 || true

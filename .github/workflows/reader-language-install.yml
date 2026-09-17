@@ -1,0 +1,145 @@
+name: INSTALL — Reader Language Safety Layer
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_install:
+        description: 'Type INSTALL to apply READER_LANGUAGE_PATCH_PAYLOAD.zip'
+        required: true
+        default: ''
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ri-radar-research-scanners
+  cancel-in-progress: false
+
+env:
+  PAYLOAD: READER_LANGUAGE_PATCH_PAYLOAD.zip
+  PYTHONDONTWRITEBYTECODE: '1'
+
+jobs:
+  install:
+    if: ${{ inputs.confirm_install == 'INSTALL' }}
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out current main safely
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Verify patch payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f "$PAYLOAD" || { echo "::error::$PAYLOAD is not in the repository root."; exit 1; }
+          unzip -t "$PAYLOAD" >/dev/null
+          tmp="$(mktemp -d)"
+          unzip -q "$PAYLOAD" -d "$tmp"
+          test -f "$tmp/reader_language.js"
+          test -f "$tmp/scripts/reader_language_common.py"
+          test -f "$tmp/READER_LANGUAGE_SETUP.md"
+          rm -rf "$tmp"
+          echo 'Reader Language payload is readable.'
+
+      - name: Apply presentation-only patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp -d)"
+          trap 'rm -rf "$tmp"' EXIT
+          unzip -q "$PAYLOAD" -d "$tmp"
+          rsync -a "$tmp/" ./
+          rm -f "$PAYLOAD"
+
+      - name: Validate the patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          pip install --quiet -r requirements.txt
+          python -m py_compile \
+            scripts/reader_language_common.py \
+            scripts/prepare_reader_language_package.py \
+            scripts/import_reader_language_results.py \
+            scripts/high_order_inference.py
+          node --check reader_language.js
+          node --check reader_style.js
+          node --check site-shell.js
+          node --check trends/trends.js
+          python -m unittest -v \
+            tests.test_reader_language_pipeline \
+            tests.test_trends_current_history \
+            tests.test_phenomena_and_structure \
+            tests.test_priorities_reader_dedup
+          rm -rf reader_language_install_check
+          python scripts/prepare_reader_language_package.py \
+            --output-dir reader_language_install_check --max-items 40 --mode flagged
+          cat reader_language_install_check/QUEUE_STATUS.txt
+          rm -rf reader_language_install_check
+
+      - name: Refuse changes outside the language patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          allowed='^(README.md|READER_LANGUAGE_SETUP.md|index.html|site-shell.js|reader_style.js|reader_language.js|reader_language/|reader_language_inbox/|scripts/(reader_language_common.py|prepare_reader_language_package.py|import_reader_language_results.py|high_order_inference.py)|trends/(index.html|trends.js)|phenomena/index.html|priorities/index.html|shocks/index.html|tests/test_reader_language_pipeline.py|READER_LANGUAGE_PATCH_PAYLOAD.zip)$'
+          bad="$(git status --porcelain | sed -E 's/^.. //' | grep -Ev "$allowed" || true)"
+          if [[ -n "$bad" ]]; then
+            echo '::error::Patch touched an unexpected file. Refusing to commit.'
+            printf '%s\n' "$bad"
+            exit 1
+          fi
+
+      - name: Configure secure push authentication
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'radar-reader-language-installer'
+          git config user.email 'actions@github.com'
+          auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
+          git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${auth}"
+
+      - name: Save the installed language layer
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -A -- \
+            README.md READER_LANGUAGE_SETUP.md index.html site-shell.js reader_style.js reader_language.js \
+            reader_language reader_language_inbox \
+            scripts/reader_language_common.py scripts/prepare_reader_language_package.py scripts/import_reader_language_results.py scripts/high_order_inference.py \
+            trends/index.html trends/trends.js phenomena/index.html priorities/index.html shocks/index.html tests/test_reader_language_pipeline.py \
+            READER_LANGUAGE_PATCH_PAYLOAD.zip
+          if git diff --cached --quiet; then
+            echo 'Reader Language patch is already installed.'
+            exit 0
+          fi
+          git commit -m 'Install Reader Language safety layer'
+          git push origin HEAD:main
+
+      - name: Installation summary
+        if: always()
+        shell: bash
+        run: |
+          cat >> "$GITHUB_STEP_SUMMARY" <<'EOF'
+          ## Reader Language installation
+
+          If this run is green, the presentation-only language layer is installed.
+
+          - No AI API or GitHub-to-LLM connection was added.
+          - Main Radar, Earlier Findings, Sources and Stuff/Excel are outside the language layer.
+          - Normal site publishing never waits for manual language review.
+          - To review wording later, run **Reader Language — Prepare Review Package** whenever you choose.
+          EOF
+
+      - name: Remove temporary repository credential
+        if: always()
+        shell: bash
+        run: git config --local --unset-all http.https://github.com/.extraheader >/dev/null 2>&1 || true

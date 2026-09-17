@@ -1,7 +1,20 @@
-name: Deep Scan V2 — Prepare Authoritative Package
+name: Reader Language — Prepare Review Package
 
 on:
   workflow_dispatch:
+    inputs:
+      max_items:
+        description: 'Maximum text items in this manual review package'
+        required: false
+        default: '40'
+      mode:
+        description: 'flagged = only suspicious/new wording; all-unreviewed = every new eligible text'
+        required: false
+        type: choice
+        options:
+          - flagged
+          - all-unreviewed
+        default: flagged
 
 permissions:
   contents: read
@@ -9,16 +22,10 @@ permissions:
 env:
   PYTHONDONTWRITEBYTECODE: '1'
 
-# Use the same lock as automatic scanners so the package sees a stable radar.json.
-concurrency:
-  group: ri-radar-research-scanners
-  cancel-in-progress: false
-
 jobs:
-  prepare-deep-scan-package:
+  prepare-reader-language:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
-
+    timeout-minutes: 15
     steps:
       - name: Check out current main
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
@@ -32,40 +39,51 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install source-reading dependencies
+      - name: Install local language-check dependencies
         run: pip install --quiet -r requirements.txt
 
-      - name: Build authoritative Deep Scan V2 package
+      - name: Run the GitHub prose checker and prepare a manual LLM package
+        shell: bash
+        env:
+          MAX_ITEMS: ${{ inputs.max_items }}
+          REVIEW_MODE: ${{ inputs.mode }}
         run: |
           set -euo pipefail
-          rm -rf deep_scan_out
-          python scripts/prepare_deep_scan_package.py --output-dir deep_scan_out --max-records 12 --batch-size 12
-          ls -lh deep_scan_out
+          n="${MAX_ITEMS:-40}"
+          if ! [[ "$n" =~ ^[0-9]+$ ]] || (( n < 1 || n > 120 )); then
+            echo '::error::max_items must be an integer from 1 to 120'
+            exit 1
+          fi
+          rm -rf reader_language_out
+          python scripts/prepare_reader_language_package.py \
+            --output-dir reader_language_out \
+            --max-items "$n" \
+            --mode "${REVIEW_MODE:-flagged}"
+          cat reader_language_out/QUEUE_STATUS.txt
 
-      - name: Upload package for download
+      - name: Upload package for manual LLM review
         uses: actions/upload-artifact@v4
         with:
-          name: deep-scan-package
-          path: deep_scan_out/
+          name: reader-language-package
+          path: reader_language_out/
           if-no-files-found: error
-          retention-days: 14
+          retention-days: 21
 
       - name: Explain the next step
         if: always()
         shell: bash
         run: |
           cat >> "$GITHUB_STEP_SUMMARY" <<'EOF'
-          ## Deep Scan V2 package
+          ## Reader Language package
 
-          No AI API was called and no AI API key is needed.
+          No AI API was called and no AI API key is needed. The site keeps publishing normally whether or not you process this package.
 
-          If a package was created:
-          1. Download the **deep-scan-package** artifact from this workflow run.
-          2. Give `deep_scan_package.zip` to a browsing-capable LLM subscription you already use.
-          3. Say: **Process this Deep Scan V2 package strictly according to INSTRUCTIONS.md. Go deeply, do not cherry-pick, exhaust the required recovery ladder for difficult records, and return the completed result file.**
-          4. Download the returned `deep_scan_results.json` (or ZIP containing it).
-          5. In this repository, open **deep_scan_inbox**, choose **Add file → Upload files**, upload the returned file, and commit it.
-          6. GitHub automatically validates and imports it. Only authoritative V2-completed works disappear from the next package. Existing V1 interpretations are intentionally queued once for V2 re-verification.
+          1. Download **reader-language-package** from this run.
+          2. Give `reader_language_package.zip` to the LLM you use manually.
+          3. Say: **Process this RADAR Reader Language package strictly according to INSTRUCTIONS.md and return reader_language_results.json.**
+          4. Download the returned `reader_language_results.json`.
+          5. In this repository open **reader_language_inbox**, choose **Add file → Upload files**, upload the returned file, and commit it to `main`.
+          6. GitHub automatically validates it and applies only safe, still-current display wording.
 
-          The package itself contains the full instructions for the LLM.
+          The checker only queues approved reader-facing analytical language. Main Radar evidence, Earlier Findings evidence, Sources, Stuff/Excel, Deep Scan decisions, scores, dates and links are outside this system.
           EOF
