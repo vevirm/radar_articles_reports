@@ -1,0 +1,60 @@
+{
+  "active_counts": {
+    "frontier_evidence": 0,
+    "strand_a": 309,
+    "strand_b": 112,
+    "strand_c": 149
+  },
+  "admission_decisions": {
+    "drop": 300,
+    "drop_unverifiable": 9,
+    "duplicate": 1,
+    "keep": 1043,
+    "needs_manual_verification": 15,
+    "review": 32
+  },
+  "captured_for_repository_version": "v25.1.0-evidence-linked-reader",
+  "data_hashes_for_reference_only": {
+    "admission_state.json": "9fab021e2787d77f534b3f0b87d4f8930c818764d9bf3270859d8899f4da9bb9",
+    "radar.json": "2267ad6aeb54f19e905b552bfc617bb23fb27365f1e2b4d131f5ef762ac46b83",
+    "radar_active.json": "678fab7003c2f18f2fdae6e6dbe06590ce1b00565e20f4040ace70a9f1ff1715",
+    "reader_text.json": "496cdca24ec3e9150b78ded9e41ae9c35a27b7e691a5d42c5fd4df64053a5d96"
+  },
+  "legacy_reasoning_hashes": {
+    "scripts/high_order_inference.py": "0b97d24442b82eea9bba1603ebb8d8ed165d314bf8a6a1a78ebef49af75e87d5",
+    "scripts/shock_inference.py": "c8d83410867b43ecbc1bffca01465791f4b97dfdc61da7e05f3d42fab35abb7d"
+  },
+  "profile": "radar-reasoning-reform-baseline-v1",
+  "protected_code_hashes": {
+    "active_boundary": {
+      "scripts/active_corpus.py": "cd733601d64fc877cf455a8ec5e5d157ba9c4d8206a0683d32893fb1cde8ce08",
+      "scripts/downstream_retrace.py": "19f9272969986e4adb78abf64c5716ae99fc9811807fec35d76f3325f77ce5bf",
+      "scripts/rebuild_active_radar.py": "3e77545a932113686237f43a23a2a0db5225902ee4e2ed31f2c8b19951829f4a"
+    },
+    "deep_scan_hard_core": {
+      "scripts/deep_read_works.py": "ce482f7cd4d21868a2eecaada2866473da1e7769e53038f58ffa52cd61d3e78c",
+      "scripts/import_deep_scan_results.py": "fcee60287091b9527a277858fd2c7e99245a0b1002415ae840fa02154caf30b6",
+      "scripts/prepare_deep_scan_package.py": "0a83a28c59ff221a6bce2ddf505637f51ecd2aa9d61979208d6b2a846727fc58"
+    },
+    "scanner_hard_core": {
+      "scripts/scan_radar.py": "c662a1561f0574ea599d9f685dff475fdbd2a7787daece9be1aa2da11d9a8587"
+    }
+  },
+  "raw_counts": {
+    "frontier_evidence": 0,
+    "strand_a": 439,
+    "strand_b": 136,
+    "strand_c": 138
+  },
+  "reader_profiles": {
+    "deep-reader-offline-v1": 23,
+    "deep-reader-v2-authoritative": 1385
+  },
+  "reader_records": 1408,
+  "smoke_suite": {
+    "baseline_result": "65 passed",
+    "command": "python scripts/run_reasoning_reform_smoke.py",
+    "note": "Full pytest collection was not used as the fast gate because at least one downstream-retrace integration test is intentionally long-running; the focused safety suite completes quickly and covers scanner/Deep Scan/active-boundary contracts."
+  },
+  "source_upload": "radar_articles_reports-main - 2026-09-17T191155.925.zip"
+}
