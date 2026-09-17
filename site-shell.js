@@ -73,4 +73,14 @@
   else host.insertBefore(intro,host.firstChild);
 
   document.querySelectorAll('header,.core-flow,.core-path,.site-guide,.minimum-read').forEach(el=>el.classList.add('legacy-site-furniture'));
+
+  // Reader Language is presentation-only. It is deliberately absent from Main Radar,
+  // Earlier Findings, Sources and Stuff/Excel. Approved rewrites are exact-text overlays
+  // and never touch stored evidence or analytical state.
+  if(!['radar','historical','literature','stuff'].includes(page.key)){
+    const language=document.createElement('script');
+    language.src=prefix+'reader_language.js?v=1';
+    language.defer=true;
+    document.head.appendChild(language);
+  }
 })();

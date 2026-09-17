@@ -114,7 +114,7 @@ function phenomenonExplanation(v){
 }
 function render(items){
   const el=document.getElementById('phenomena');
-  el.innerHTML=items.length?items.map(x=>`<li data-obviousness="${x.distance||2}"><div class="priority-meta">${x.group==='changing'?'Changing pattern':'Recurring pattern'}</div><strong>${esc(x.text)}</strong><p>${esc(phenomenonExplanation(x.text))}</p></li>`).join(''):'<li class="empty">Nothing is supported strongly enough to show yet. An ongoing phenomenon appears when current and earlier evidence establish a persistent or changing pattern across independent sources.</li>';
+  el.innerHTML=items.length?items.map(x=>`<li data-obviousness="${x.distance||2}"><div class="priority-meta">${x.group==='changing'?'Changing pattern':'Recurring pattern'}</div><strong>${esc(x.text)}</strong><p>${esc(phenomenonExplanation(x.text))}</p></li>`).join(''):'<li class="empty">No ongoing phenomenon is clear enough to show yet.</li>';
 }
 async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});return r.ok?await r.json():{}}catch(_){return {}}}
 (async()=>{
@@ -140,7 +140,7 @@ async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});ret
     const all=rankItems(unique([...changing,...returning]));
     const shown=all.slice(0,PHENOMENA_DISPLAY_LIMIT);
     const hs=history?.reasoning_stats||{};
-    document.getElementById('phenomenaSummary').textContent=`Showing ${shown.length} highest-ranked ongoing ${shown.length===1?'phenomenon':'phenomena'}${all.length>shown.length?` of ${all.length} supported`:' supported'}. Historical continuity uses ${hs.authoritative||0} Deep-Scan-kept findings as trusted context; provisional/review findings are discounted, and not-retained findings stay audit-only.`;
+    document.getElementById('phenomenaSummary').textContent=`Showing ${shown.length} highest-ranked ongoing ${shown.length===1?'phenomenon':'phenomena'}${all.length>shown.length?` of ${all.length}`:''}. Older verified findings help separate lasting patterns from one-off movement.`;
     render(shown);
   }catch(e){
     console.error(e);

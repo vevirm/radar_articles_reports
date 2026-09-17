@@ -59,5 +59,6 @@ if(sessionStorage.getItem('radarUnlocked')==='1')unlock();
 document.getElementById('gateForm').addEventListener('submit',async e=>{e.preventDefault();const input=document.getElementById('password');if(await sha256(input.value)===PASSWORD_HASH)unlock();else{document.getElementById('gateError').textContent='Wrong password';input.select()}});
 document.getElementById('lock').addEventListener('click',()=>{sessionStorage.removeItem('radarUnlocked');location.reload()});
 </script>
+<script src="reader_language.js?v=1"></script>
 </body>
 </html>

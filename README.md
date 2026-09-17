@@ -30,11 +30,24 @@ Records without V2 verification remain provisionally active, so the automatic sc
 - `scripts/rebuild_active_radar.py` — rebuilds active evidence and all derived reasoning from active evidence
 - `scripts/prepare_deep_scan_package.py` — prepares the next persistent Deep Scan V2 worker package; no model API and no direct LLM connection
 - `scripts/import_deep_scan_results.py` — validates/imports a `deep_scan_results.json` file only after the operator manually uploads it to `deep_scan_inbox/`
-- `.github/workflows/reader-language.yml` — manually prepare the next Deep Scan group if needed
-- `.github/workflows/deep-scan-import.yml` — automatically imports uploaded results and creates the next group
+- `.github/workflows/deep-scan-prepare-workers.yml` — manually reserve/prepare the next two persistent Deep Scan worker lanes
+- `.github/workflows/deep-scan-import.yml` — automatically imports uploaded Deep Scan results and refreshes the worker lanes
 - `.github/workflows/radar-v2-migration.yml` — one-time post-install initialization/validation + first V2 package
 
 See **`DEEP_SCAN_SETUP.md`** for the manual repo → operator → external LLM → operator → `deep_scan_inbox/` → import rotation.
+
+
+## Reader Language (manual, presentation-only)
+
+The optional Reader Language layer keeps public analytical pages clear without giving an LLM access to GitHub. A small local prose checker runs in GitHub Actions and queues only new/changed reader-facing wording that looks heavy, bureaucratic or too close to internal analysis language. Normal publishing never waits for this review.
+
+- `.github/workflows/reader-language.yml` — manually prepares a small Reader Language package; default mode includes only flagged, unreviewed wording
+- `scripts/prepare_reader_language_package.py` — deterministic local checker/package builder; no AI API
+- `reader_language_inbox/` — operator uploads the returned `reader_language_results.json` here
+- `.github/workflows/reader-language-import.yml` — validates the returned file and updates only `reader_language/approved.json`
+- `reader_language.js` — presentation-only exact-text overlay with fingerprint safety; stale rewrites stop matching automatically
+
+Main Radar evidence, Earlier Findings evidence, Sources, Stuff/Excel, scores, dates, links, Deep Scan decisions and analytical reasoning are outside this language layer. See **`READER_LANGUAGE_SETUP.md`** for the simple manual rotation.
 
 ## Evidence feedback and reader semantics
 

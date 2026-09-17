@@ -16,6 +16,11 @@ function capitaliseStart(v){
 // but common opaque abbreviations are expanded before a sentence is shown to readers.
 function expandSurfaceTerms(v){
   let s=clean(v);
+  // Some analytical labels are grammatically useful inside the engine but awkward as
+  // standalone reader headings. Fix those shapes before expanding individual jargon terms.
+  s=s.replace(/^de[- ]risking\s+(.+)$/i,'Reducing risks around $1');
+  s=s.replace(/^Partnership, association or cross-border cooperation is widening around (.+)\.$/i,'Cross-border cooperation on $1 is increasing.');
+  s=s.replace(/^Security, export-control or de[- ]risking conditions are tightening around (.+)\.$/i,'Security and export-control conditions around $1 are getting tighter.');
   const replacements=[
     [/\bHPC\b/g,'high-performance computing'],
     [/\bEuroHPC\b/g,'the European shared computing programme'],
@@ -63,7 +68,7 @@ function expandSurfaceTerms(v){
     [/\bpilot lines?\b/gi,'test production lines'],
     [/\btestbeds?\b/gi,'test facilities'],
     [/\bdeep[- ]tech\b/gi,'advanced technology'],
-    [/\bde[- ]risking\b/gi,'reducing strategic dependencies'],
+    [/\bde[- ]risking\b/gi,'risk-reduction'],
     [/\btechnology sovereignty\b/gi,'control over critical technology'],
     [/\bfrontier research\b/gi,'cutting-edge research'],
     [/\bscale[- ]ups?\b/gi,'growing technology firms'],

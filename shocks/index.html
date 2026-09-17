@@ -120,8 +120,8 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-shock-deta
   try{
     const data=await RadarData.load('../radar.json','../radar_seed.json');
     const all=collect(data),items=all.slice(0,SHOCK_DISPLAY_LIMIT);
-    document.getElementById('shockSummary').textContent=`Showing ${items.length} highest-ranked possible shock${items.length===1?'':'s'}${all.length>items.length?` of ${all.length} supported`:' supported'}.`;
-    el.innerHTML=items.length?items.map((x,i)=>`<li><strong>${esc(x.text)}</strong><p>${esc(x.explanation||shockExplanation(x.text))}</p>${shockDetailHtml(x,i)}</li>`).join(''):'<li class="empty">No external shock is currently supported strongly enough to show here yet. A shock would appear when current evidence supports a distinct disruption mechanism and its transmission into European R&amp;I.</li>';
+    document.getElementById('shockSummary').textContent=`Showing ${items.length} highest-ranked possible shock${items.length===1?'':'s'}${all.length>items.length?` of ${all.length}`:''}.`;
+    el.innerHTML=items.length?items.map((x,i)=>`<li><strong>${esc(x.text)}</strong><p>${esc(x.explanation||shockExplanation(x.text))}</p>${shockDetailHtml(x,i)}</li>`).join(''):'<li class="empty">No external shock is clear enough to show here yet.</li>';
   }catch(e){console.error(e);document.getElementById('shockSummary').textContent='Shock evidence is unavailable.';el.innerHTML='<li class="empty">Unavailable.</li>'}
 })();
 </script>

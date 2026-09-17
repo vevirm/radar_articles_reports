@@ -297,8 +297,8 @@
       const rightEvidence=support.filter(x=>clean(x?.role).startsWith(rightRole)).map(x=>({row:x}));
       if(leftEvidence.length<3||rightEvidence.length<3||Number(b.left_sources||0)<2||Number(b.right_sources||0)<2)return null;
       return {id:c.id,emergent:true,family:clean(b.family),objectKey:clean(b.object_key),support:Number(c.score)||0,
-        left:{title:clean(b.left_title||'Pull A'),plain:clean(b.left_plain||c.reader_summary||''),why:`${b.left_actions||0} qualifying current primary records from ${b.left_sources||0} sources; repeated-source evidence is discounted.`,pull:Math.round(lp),evidence:leftEvidence,history:[],sourceCount:Number(b.left_sources)||0},
-        right:{title:clean(b.right_title||'Pull B'),plain:clean(b.right_plain||c.reader_summary||''),why:`${b.right_actions||0} qualifying current primary records from ${b.right_sources||0} sources; this side is deliberately searched as the counter-force.`,pull:Math.round(rp),evidence:rightEvidence,history:[],sourceCount:Number(b.right_sources)||0},
+        left:{title:clean(b.left_title||'Pull A'),plain:clean(b.left_plain||c.reader_summary||''),why:'',pull:Math.round(lp),evidence:leftEvidence,history:[],sourceCount:Number(b.left_sources)||0},
+        right:{title:clean(b.right_title||'Pull B'),plain:clean(b.right_plain||c.reader_summary||''),why:'',pull:Math.round(rp),evidence:rightEvidence,history:[],sourceCount:Number(b.right_sources)||0},
         pullRange:{left:b.left_range||[],right:b.right_range||[]},
         actionStats:{leftActions:Number(b.left_actions)||0,rightActions:Number(b.right_actions)||0,leftSources:Number(b.left_sources)||0,rightSources:Number(b.right_sources)||0,rawLeft:Number(b.raw_left_pull),rawRight:Number(b.raw_right_pull)},
         currentEvidenceCount:Number(c.primary_records)||0,historicalContextCount:0};
