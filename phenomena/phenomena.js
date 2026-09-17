@@ -107,7 +107,13 @@
     const rows=[...(Array.isArray(data?.strand_a)?data.strand_a:[]),...(Array.isArray(data?.strand_c)?data.strand_c:[])];
     return rows.filter(x=>!boundary||dateOf(x)>=boundary);
   }
-  function historicalCorpus(history){return Array.isArray(history?.items)?history.items:[]}
+  function historicalWeight(row){
+    const n=Number(row?.historical_reasoning_weight);
+    return Number.isFinite(n)?Math.max(0,Math.min(1,n)):1;
+  }
+  function historicalCorpus(history){return (Array.isArray(history?.items)?history.items:[]).filter(x=>historicalWeight(x)>0)}
+  function historicalSupport(rows){return rows.reduce((a,x)=>a+historicalWeight(x),0)}
+  function authoritativeHistoricalCount(rows){return rows.filter(x=>!Object.prototype.hasOwnProperty.call(x||{},'historical_reasoning_status')||x?.historical_reasoning_status==='authoritative').length}
   function unique(rows){
     const seen=new Set(),out=[];
     for(const row of rows){
@@ -198,25 +204,31 @@
       const current=unique(currentRows.filter(x=>matchCurrent(x,p)));
       const historical=unique(historicalRows.filter(x=>matchHistorical(x,p)));
       const currentSources=sourceCount(current),historicalSources=sourceCount(historical);
-      if(current.length<3||currentSources<2||historical.length<2||historicalSources<2)continue;
-      qualified.push({p,current,historical,currentSources,historicalSources});
+      const historicalSupportUnits=historicalSupport(historical),authoritativeHistorical=authoritativeHistoricalCount(historical);
+      // Keep the original two-record/two-source continuity gate, but require at least
+      // one full unit of trusted historical support. Two merely provisional rows
+      // therefore cannot establish persistence on their own; several can still add
+      // cautious support, and a Deep-Scan-kept row counts fully.
+      if(current.length<3||currentSources<2||historical.length<2||historicalSources<2||historicalSupportUnits<1)continue;
+      qualified.push({p,current,historical,currentSources,historicalSources,historicalSupportUnits,authoritativeHistorical});
     }
     const hitCount=new Map();
     for(const q of qualified)for(const row of q.current)hitCount.set(row,(hitCount.get(row)||0)+1);
     for(const q of qualified){
-      const {p,current,historical,currentSources,historicalSources}=q;
+      const {p,current,historical,currentSources,historicalSources,historicalSupportUnits,authoritativeHistorical}=q;
       const dates=historical.map(dateOf).filter(Boolean).sort();
       const newest=current.map(dateOf).filter(Boolean).sort().slice(-1)[0]||'';
       const overlapRate=current.length?current.filter(row=>(hitCount.get(row)||0)>1).length/current.length:0;
-      const evidence=Math.log2(1+current.length)*2+Math.log2(1+historical.length)+Math.min(6,currentSources)+Math.min(6,historicalSources);
+      const evidence=Math.log2(1+current.length)*2+Math.log2(1+historicalSupportUnits)+Math.min(6,currentSources)+Math.min(6,historicalSources);
       const surprise=evidence*(1-0.55*overlapRate)*(p.autoDetected?1.12:1);
       const score=Math.round(surprise*10)/10;
-      out.push({...p,currentCount:current.length,currentSources,historicalCount:historical.length,historicalSources,firstSeen:dates[0]||'',latestSeen:newest,currentEvidence:evidenceSlice(current,4),historicalEvidence:evidenceSlice(historical,3,true),overlapRate,evidenceScore:evidence,score});
+      out.push({...p,currentCount:current.length,currentSources,historicalCount:historical.length,historicalSources,historicalSupport:Math.round(historicalSupportUnits*100)/100,authoritativeHistoricalCount:authoritativeHistorical,firstSeen:dates[0]||'',latestSeen:newest,currentEvidence:evidenceSlice(current,4),historicalEvidence:evidenceSlice(historical,3,true),overlapRate,evidenceScore:evidence,score});
     }
     return out.sort((a,b)=>b.score-a.score||b.currentSources-a.currentSources||a.title.localeCompare(b.title));
   }
   function stats(data,history){
-    return {current:currentCorpus(data,history).length,historical:historicalCorpus(history).length,cutoff:cutoff(history)};
+    const hs=historicalCorpus(history);
+    return {current:currentCorpus(data,history).length,historical:hs.length,historicalSupport:Math.round(historicalSupport(hs)*100)/100,authoritativeHistorical:authoritativeHistoricalCount(hs),cutoff:cutoff(history)};
   }
   return {build,stats,phenomena:PHENOMENA,currentCorpus,historicalCorpus,automaticDefinitions,mergeHistories};
 });

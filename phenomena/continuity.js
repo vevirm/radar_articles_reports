@@ -32,13 +32,13 @@
   }
   function analysisText(row){
     // Prefer validated phrase extractions and titles so broad summaries do not manufacture patterns.
-    const out=[row?.title,row?.headline,row?.reader_point];
+    const out=[row?.title,row?.headline,row?.reader_title,row?.reader_point,row?.reader_what,row?.core_message];
     for(const k of ['ri_evidence','geo_evidence'])if(Array.isArray(row?.[k]))out.push(...row[k]);
     // Strand C has different fields, so keep its concise evidence-bearing text.
     if(!Array.isArray(row?.ri_evidence)&&!Array.isArray(row?.geo_evidence))out.push(row?.anchor,row?.why_it_matters,row?.watch_theme);
     return norm(out.filter(Boolean).join(' '));
   }
-  function titleText(row){return norm(row?.title||row?.headline||row?.reader_point||'')}
+  function titleText(row){return norm(row?.reader_title||row?.title||row?.headline||row?.reader_point||'')}
   function hasTerm(text,term){const t=norm(term);return !!t&&(` ${text} `).includes(` ${t} `)}
   function cutoff(history){return clean(history?.cutoff_exclusive||history?.date_to||'')}
   function currentCorpus(data,history){
@@ -46,7 +46,12 @@
     const rows=[...(Array.isArray(data?.strand_a)?data.strand_a:[]),...(Array.isArray(data?.strand_c)?data.strand_c:[])];
     return rows.filter(x=>!boundary||dateOf(x)>=boundary);
   }
-  function historicalCorpus(history){return Array.isArray(history?.items)?history.items:[]}
+  function historicalWeight(row){
+    const n=Number(row?.historical_reasoning_weight);
+    return Number.isFinite(n)?Math.max(0,Math.min(1,n)):1;
+  }
+  function historicalCorpus(history){return (Array.isArray(history?.items)?history.items:[]).filter(x=>historicalWeight(x)>0)}
+  function authoritativeHistoricalCount(rows){return rows.filter(x=>!Object.prototype.hasOwnProperty.call(x||{},'historical_reasoning_status')||x?.historical_reasoning_status==='authoritative').length}
   function unique(rows){
     const seen=new Set(),out=[];
     for(const row of rows){
@@ -104,25 +109,29 @@
     return blocked;
   }
 
-  function pairSummary(topicSets,rows){
+  function pairSummary(topicSets,rows,weighted=false){
     const singles=new Map(),pairs=new Map();
+    let totalSupport=0;
     for(let i=0;i<topicSets.length;i++){
-      const ids=[...topicSets[i]].sort();
-      for(const id of ids)singles.set(id,(singles.get(id)||0)+1);
+      const ids=[...topicSets[i]].sort(),w=weighted?historicalWeight(rows[i]):1;
+      totalSupport+=w;
+      for(const id of ids)singles.set(id,(singles.get(id)||0)+w);
       for(let a=0;a<ids.length;a++)for(let b=a+1;b<ids.length;b++){
         const key=`${ids[a]}|${ids[b]}`;
         let p=pairs.get(key);
-        if(!p){p={key,a:ids[a],b:ids[b],rows:[],sources:new Set()};pairs.set(key,p)}
-        p.rows.push(rows[i]);p.sources.add(sourceOf(rows[i]));
+        if(!p){p={key,a:ids[a],b:ids[b],rows:[],sources:new Set(),support:0,authoritativeCount:0};pairs.set(key,p)}
+        p.rows.push(rows[i]);p.sources.add(sourceOf(rows[i]));p.support+=w;
+        if(!Object.prototype.hasOwnProperty.call(rows[i]||{},'historical_reasoning_status')||rows[i]?.historical_reasoning_status==='authoritative')p.authoritativeCount++;
       }
     }
-    const N=Math.max(1,rows.length);
+    const N=Math.max(1,weighted?totalSupport:rows.length);
     for(const p of pairs.values()){
       p.count=p.rows.length;p.sourceCount=p.sources.size;
+      if(!weighted)p.support=p.count;
       const ac=singles.get(p.a)||0,bc=singles.get(p.b)||0;
       p.aCount=ac;p.bCount=bc;
-      p.lift=ac&&bc?(p.count*N)/(ac*bc):0;
-      p.jaccard=(ac+bc-p.count)?p.count/(ac+bc-p.count):0;
+      p.lift=ac&&bc?(p.support*N)/(ac*bc):0;
+      p.jaccard=(ac+bc-p.support)?p.support/(ac+bc-p.support):0;
     }
     return {singles,pairs,N};
   }
@@ -147,20 +156,20 @@
   function displayScore(raw){return Math.round(clamp(raw*2.25,1,99))}
 
   function conjunctions(ctx,namedPhenomena){
-    const current=pairSummary(ctx.currentSets,ctx.currentRows),older=pairSummary(ctx.historicalSets,ctx.historicalRows);
+    const current=pairSummary(ctx.currentSets,ctx.currentRows),older=pairSummary(ctx.historicalSets,ctx.historicalRows,true);
     const blocked=namedPairBlocks(namedPhenomena),strong=[],candidates=[];
     for(const p of current.pairs.values()){
       const old=older.pairs.get(p.key);
       if(!old||blocked.has(p.key))continue;
       const ta=ctx.topicById.get(p.a),tb=ctx.topicById.get(p.b);
       if(!ta||!tb||sharedTerm(ta,tb))continue; // shared matcher can manufacture a false conjunction
-      if(p.count<3||p.sourceCount<3||old.count<2||old.sourceCount<2)continue;
+      if(p.count<3||p.sourceCount<3||old.count<2||old.sourceCount<2||old.support<1)continue;
       if(p.lift<1.12)continue;
       const gain=p.lift-old.lift;
       const strengthening=gain>=0.28&&p.lift>=1.35;
       const persistent=p.lift>=1.75&&old.lift>=1.3;
       if(!strengthening&&!persistent)continue;
-      const ev=evidenceScore(p.count,p.sourceCount,old.count,old.sourceCount);
+      const ev=evidenceScore(p.count,p.sourceCount,old.support,old.sourceCount);
       const raw=ev*(1+Math.min(1.4,Math.max(0,gain))*0.5)*(persistent?1.08:1.16);
       const top=topSourceShare(p.rows);
       const a=compactLabel(ta),b=compactLabel(tb);
@@ -174,7 +183,7 @@
         id:`conjunction-${p.key.replace('|','-')}`,kind:'conjunction',shape:strengthening?'Strengthening conjunction':'Conjunction',
         title:strengthening?`${a} is increasingly travelling with ${b}`:`${a} and ${b} keep arriving together`,
         claim,why:'The two issues have separate headings elsewhere. Their intersection may be the more important continuity.',caseAgainst:against,
-        currentCount:p.count,currentSources:p.sourceCount,historicalCount:old.count,historicalSources:old.sourceCount,
+        currentCount:p.count,currentSources:p.sourceCount,historicalCount:old.count,historicalSources:old.sourceCount,historicalSupport:Math.round(old.support*100)/100,authoritativeHistoricalCount:old.authoritativeCount,
         currentLift:p.lift,historicalLift:old.lift,liftGain:gain,score:displayScore(raw),
         topicIds:[p.a,p.b],topicLabels:[a,b],
         currentEvidence:evidenceSlice(p.rows,4),historicalEvidence:evidenceSlice(old.rows,3),
@@ -183,7 +192,9 @@
           {value:old.count,label:'older joint records'},{value:`${p.lift.toFixed(1)}×`,label:'current coupling lift'}
         ]
       };
-      const isStrong=p.count>=6&&p.sourceCount>=5&&old.sourceCount>=3&&(gain>=0.38||persistent);
+      // A provisional/review archive can surface a candidate, but a strong
+      // continuity finding needs at least one Deep-Scan-kept historical anchor.
+      const isStrong=p.count>=6&&p.sourceCount>=5&&old.sourceCount>=3&&old.authoritativeCount>=1&&(gain>=0.38||persistent);
       (isStrong?strong:candidates).push(item);
     }
     strong.sort((a,b)=>b.score-a.score||b.currentCount-a.currentCount);
@@ -298,10 +309,13 @@
     return output.sort((a,b)=>b.score-a.score);
   }
 
-  function termStats(rows,term){
+  function termStats(rows,term,weighted=false){
     const full=rows.filter(r=>hasTerm(analysisText(r),term));
     const titles=rows.filter(r=>hasTerm(titleText(r),term));
-    return {count:full.length,sources:sourceCount(full),share:rows.length?full.length/rows.length:0,titleCount:titles.length,titleShare:rows.length?titles.length/rows.length:0,rows:full};
+    const total=weighted?rows.reduce((a,r)=>a+historicalWeight(r),0):rows.length;
+    const support=weighted?full.reduce((a,r)=>a+historicalWeight(r),0):full.length;
+    const titleSupport=weighted?titles.reduce((a,r)=>a+historicalWeight(r),0):titles.length;
+    return {count:full.length,sources:sourceCount(full),support,share:total?support/total:0,titleCount:titles.length,titleSupport,titleShare:total?titleSupport/total:0,authoritativeCount:authoritativeHistoricalCount(full),rows:full};
   }
 
   function vocabularyShifts(ctx){
@@ -312,19 +326,19 @@
       const currentRows=ctx.currentRows.filter((_,i)=>ctx.currentSets[i].has(topic.id));
       const historicalRows=ctx.historicalRows.filter((_,i)=>ctx.historicalSets[i].has(topic.id));
       if(currentRows.length<8||historicalRows.length<6)continue;
-      const stats=new Map(terms.map(term=>[term,{term,cur:termStats(currentRows,term),old:termStats(historicalRows,term)}]));
+      const stats=new Map(terms.map(term=>[term,{term,cur:termStats(currentRows,term),old:termStats(historicalRows,term,true)}]));
       let best=null;
       for(const oldTerm of terms){
         const old=stats.get(oldTerm);
-        if(old.old.count<3||old.old.sources<3)continue;
+        if(old.old.count<3||old.old.sources<3||old.old.support<1)continue;
         for(const newTerm of terms){
           if(newTerm===oldTerm)continue;
           const neo=stats.get(newTerm);
           if(neo.cur.count<4||neo.cur.sources<4)continue;
-          const odds=((neo.cur.count+0.5)/(old.cur.count+0.5))/((neo.old.count+0.5)/(old.old.count+0.5));
+          const odds=((neo.cur.count+0.5)/(old.cur.count+0.5))/((neo.old.support+0.5)/(old.old.support+0.5));
           if(odds<2.6)continue;
-          const titleOdds=((neo.cur.titleCount+0.5)/(old.cur.titleCount+0.5))/((neo.old.titleCount+0.5)/(old.old.titleCount+0.5));
-          const evidence=evidenceScore(neo.cur.count,neo.cur.sources,old.old.count,old.old.sources);
+          const titleOdds=((neo.cur.titleCount+0.5)/(old.cur.titleCount+0.5))/((neo.old.titleSupport+0.5)/(old.old.titleSupport+0.5));
+          const evidence=evidenceScore(neo.cur.count,neo.cur.sources,old.old.support,old.old.sources);
           const raw=evidence*(1+Math.min(3.5,Math.max(0,log2(odds)))*0.22)*(titleOdds>=1.4?1.15:1);
           if(!best||raw>best.raw)best={old,neo,odds,titleOdds,raw};
         }
@@ -341,7 +355,7 @@
         caseAgainst:titleSupports
           ?'The title-only comparison points the same way, which reduces the text-depth bias. Source mix can still exaggerate the shift.'
           :'Historical text is thinner than current text. Treat this as a candidate until a title-only or manual check points the same way.',
-        currentCount:neo.cur.count,currentSources:neo.cur.sources,historicalCount:old.old.count,historicalSources:old.old.sources,
+        currentCount:neo.cur.count,currentSources:neo.cur.sources,historicalCount:old.old.count,historicalSources:old.old.sources,historicalSupport:Math.round(old.old.support*100)/100,authoritativeHistoricalCount:old.old.authoritativeCount,
         currentTerm:neo.term,historicalTerm:old.term,oddsRatio:odds,titleOdds,titleSupports,score:displayScore(raw),
         currentEvidence:evidenceSlice(neo.cur.rows,4),historicalEvidence:evidenceSlice(old.old.rows,3),
         metrics:[
@@ -349,7 +363,7 @@
           {value:neo.cur.count,label:`current “${pretty(neo.term)}” records`},{value:`${odds.toFixed(1)}×`,label:'relative vocabulary shift'}
         ]
       };
-      const isStrong=titleSupports&&old.old.sources>=3&&neo.cur.sources>=5&&odds>=3.0;
+      const isStrong=titleSupports&&old.old.sources>=3&&old.old.authoritativeCount>=1&&neo.cur.sources>=5&&odds>=3.0;
       (isStrong?strong:candidates).push(item);
     }
     strong.sort((a,b)=>b.score-a.score||b.currentSources-a.currentSources);

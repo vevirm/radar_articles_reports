@@ -22,8 +22,9 @@
     <ul id="phenomena" class="pattern-simple-list"><li class="empty">Loading</li></ul>
   </section>
 </main>
-<script src="phenomena.js?v=21.22"></script>
-<script src="continuity.js?v=21.22"></script>
+<script src="../historical/reasoning_context.js?v=1"></script>
+<script src="phenomena.js?v=21.23"></script>
+<script src="continuity.js?v=21.23"></script>
 <script>
 const clean=v=>String(v||'').replace(/\s+/g,' ').trim();
 const esc=v=>clean(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -118,12 +119,16 @@ function render(items){
 async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});return r.ok?await r.json():{}}catch(_){return {}}}
 (async()=>{
   try{
-    const [data,fileHistory,historyConfig]=await Promise.all([
+    const [data,fileHistory,historyConfig,admission,reader,corrections]=await Promise.all([
       RadarData.load('../radar.json','../radar_seed.json'),
       loadJson('../historical/historical.json'),
-      loadJson('../historical/config.json')
+      loadJson('../historical/config.json'),
+      loadJson('../admission_state.json'),
+      loadJson('../reader_text.json'),
+      loadJson('../record_corrections.json')
     ]);
-    const history=RadarPhenomena.mergeHistories(fileHistory,data?.historical_archive);
+    const mergedHistory=RadarPhenomena.mergeHistories(fileHistory,data?.historical_archive);
+    const history=RadarHistoricalReasoning.build(mergedHistory,admission,reader,corrections);
     const established=RadarPhenomena.build(data,history,historyConfig);
     const patterns=RadarContinuity.build(data,history,historyConfig,RadarPhenomena.phenomena);
     const hi=data?.high_order_inference&&typeof data.high_order_inference==='object'?data.high_order_inference:{};
@@ -134,7 +139,8 @@ async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});ret
     const returning=unique(established.filter(x=>!x.autoDetected).map(x=>({text:returningStatement(x),records:Number(x.currentCount)||0,sources:Number(x.currentSources)||0,distance:1,rankScore:Math.min(99,(Number(x.score)||0)*4),group:'returning'})));
     const all=rankItems(unique([...changing,...returning]));
     const shown=all.slice(0,PHENOMENA_DISPLAY_LIMIT);
-    document.getElementById('phenomenaSummary').textContent=`Showing ${shown.length} highest-ranked ongoing ${shown.length===1?'phenomenon':'phenomena'}${all.length>shown.length?` of ${all.length} supported`:' supported'}.`;
+    const hs=history?.reasoning_stats||{};
+    document.getElementById('phenomenaSummary').textContent=`Showing ${shown.length} highest-ranked ongoing ${shown.length===1?'phenomenon':'phenomena'}${all.length>shown.length?` of ${all.length} supported`:' supported'}. Historical continuity uses ${hs.authoritative||0} Deep-Scan-kept findings as trusted context; provisional/review findings are discounted, and not-retained findings stay audit-only.`;
     render(shown);
   }catch(e){
     console.error(e);
