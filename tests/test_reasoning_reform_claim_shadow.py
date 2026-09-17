@@ -7,6 +7,7 @@ from pathlib import Path
 from scripts.claim_reasoning_shadow import (
     build_distance_table,
     corroborated_claims,
+    conflicting_criteria,
     dependency_pathways,
     distance_for,
     flatten_claims,
@@ -142,10 +143,30 @@ def test_dependency_pathway_uses_exact_object_frontier_and_reports_hop():
 
 
 def test_conflicting_criteria_does_not_treat_delivered_generic_diagnosis_as_a_criterion():
-    from scripts.claim_reasoning_shadow import conflicting_criteria
     a=claim(key="id:a4",cid="c:a4:1",obj="research.infrastructure",mech="assesses",direction="expands",kind="diagnosis",status="delivered",merit=99)
     b=claim(key="id:b4",cid="c:b4:1",obj="research.infrastructure",mech="assesses",direction="contracts",kind="diagnosis",status="delivered",merit=99)
     g=claim(key="id:g4",cid="c:g4:1",obj="research.infrastructure",mech="assesses",direction="becomes_contested",kind="diagnosis",status="delivered",merit=99)
     d=claim(key="id:d4",cid="c:d4:1",obj="research.infrastructure",mech="assesses",direction="becomes_contested",kind="effect",status="delivered",merit=99)
     nodes=[_node(a,"A"),_node(b,"B"),_node(g,"C"),_node(d,"D")]
-    assert conflicting_criteria(nodes,build_distance_table(nodes)) == []
+    assert conflicting_criteria(nodes,VOCAB,build_distance_table(nodes)) == []
+
+
+def test_conflicting_criteria_can_join_distinct_endpoint_objects_through_shared_target():
+    # Mirrors the quantum worked shape: open testing infrastructure -> controlled
+    # equipment -> national export-control competence, with a national divergence
+    # branch reached through dual-use/research-security objects.
+    a=claim(key="id:qa",cid="c:qa:1",obj="quantum.testing_infrastructure",mech="funds",direction="expands",kind="action",status="call_open",merit=99,secondary=["quantum.equipment"])
+    b=claim(key="id:qb",cid="c:qb:1",obj="export_control.competence",mech="restricts",direction="becomes_conditional",kind="diagnosis",status="in_force",merit=68,secondary=["quantum.equipment","innovation.dual_use"])
+    gap=claim(key="id:qg",cid="c:qg:1",obj="export_control.competence",mech="assesses",direction="becomes_contested",kind="diagnosis",status="delivered",merit=82)
+    bridge=claim(key="id:qbr",cid="c:qbr:1",obj="innovation.dual_use",mech="assesses",direction="becomes_contested",kind="diagnosis",status="delivered",merit=77,secondary=["research_security.screening"])
+    div=claim(key="id:qd",cid="c:qd:1",obj="research_security.screening",mech="assesses",direction="becomes_contested",kind="diagnosis",status="delivered",merit=82)
+    nodes=[_node(a,"A"),_node(b,"B"),_node(gap,"C"),_node(bridge,"D"),_node(div,"E")]
+    out=conflicting_criteria(nodes,VOCAB,build_distance_table(nodes))
+    assert out
+    q=out[0]
+    assert q["criterion_a_object"]=="quantum.testing_infrastructure"
+    assert q["criterion_b_object"]=="export_control.competence"
+    assert q["roles"]["arbitration_gap"]["claim_id"]=="c:qg:1"
+    assert q["roles"]["divergence"]["claim_id"]=="c:qd:1"
+    assert q["score"] >= 70
+    assert q["publication_gate_passes"] is False
