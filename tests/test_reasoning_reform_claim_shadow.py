@@ -107,8 +107,10 @@ def test_opposing_movements_requires_three_records_and_two_sources_each_side():
 def test_dependency_pathway_is_shadow_only_even_when_score_gate_passes_or_nearly_passes():
     commitment=claim(key="id:co",cid="c:co:1",obj="compute.gigafactory",mech="builds",direction="expands",kind="action",status="operating",merit=99,secondary=["compute.private_investment"])
     coupling=claim(key="id:cu",cid="c:cu:1",obj="compute.private_investment",mech="requires",direction="becomes_conditional",kind="action",status="operating",merit=95,secondary=["datacentre.energy_supply"])
-    exposure=claim(key="id:ex",cid="c:ex:1",obj="datacentre.energy_supply",mech="restricts",direction="contracts",kind="diagnosis",status="operating",merit=95)
-    propagation=claim(key="id:pr",cid="c:pr:1",obj="compute.capacity",mech="assesses",direction="contracts",kind="effect",status="operating",merit=95,secondary=["datacentre.energy_supply"])
+    exposure=claim(key="id:ex",cid="c:ex:1",obj="compute.gigafactory",mech="assesses",direction="contracts",kind="diagnosis",status="operating",merit=95)
+    exposure["text"]="The capability is exposed to a concentrated, capacity-limited supply base."
+    propagation=claim(key="id:pr",cid="c:pr:1",obj="datacentre.energy_supply",mech="assesses",direction="contracts",kind="effect",status="operating",merit=95)
+    propagation["text"]="The disruption is spreading across multiple European sites."
     nodes=[_node(commitment,"S1"),_node(coupling,"S2"),_node(exposure,"S3"),_node(propagation,"S4")]
     table=build_distance_table(nodes)
     out=dependency_pathways(nodes,VOCAB,table)
@@ -132,8 +134,10 @@ def test_dependency_pathway_rejects_cluster_only_role_join_without_exact_object_
 def test_dependency_pathway_uses_exact_object_frontier_and_reports_hop():
     commitment=claim(key="id:co3",cid="c:co3:1",obj="compute.gigafactory",mech="builds",direction="expands",kind="action",status="operating",merit=99,secondary=["compute.private_investment"])
     coupling=claim(key="id:cu3",cid="c:cu3:1",obj="compute.private_investment",mech="requires",direction="becomes_conditional",kind="action",status="operating",merit=95,secondary=["datacentre.energy_supply"])
-    exposure=claim(key="id:ex3",cid="c:ex3:1",obj="datacentre.energy_supply",mech="restricts",direction="contracts",kind="diagnosis",status="operating",merit=95)
+    exposure=claim(key="id:ex3",cid="c:ex3:1",obj="compute.gigafactory",mech="assesses",direction="contracts",kind="diagnosis",status="operating",merit=95)
+    exposure["text"]="The capability is vulnerable because supply is limited and concentrated."
     propagation=claim(key="id:pr3",cid="c:pr3:1",obj="datacentre.energy_supply",mech="assesses",direction="contracts",kind="effect",status="operating",merit=95)
+    propagation["text"]="The disruption reaches multiple sites across Europe."
     nodes=[_node(commitment,"S1"),_node(coupling,"S2"),_node(exposure,"S3"),_node(propagation,"S4")]
     out=dependency_pathways(nodes,VOCAB,build_distance_table(nodes))
     assert out
@@ -158,7 +162,7 @@ def test_conflicting_criteria_can_join_distinct_endpoint_objects_through_shared_
     a=claim(key="id:qa",cid="c:qa:1",obj="quantum.testing_infrastructure",mech="funds",direction="expands",kind="action",status="call_open",merit=99,secondary=["quantum.equipment"])
     b=claim(key="id:qb",cid="c:qb:1",obj="export_control.competence",mech="restricts",direction="becomes_conditional",kind="diagnosis",status="in_force",merit=68,secondary=["quantum.equipment","innovation.dual_use"])
     gap=claim(key="id:qg",cid="c:qg:1",obj="export_control.competence",mech="assesses",direction="becomes_contested",kind="diagnosis",status="delivered",merit=82)
-    bridge=claim(key="id:qbr",cid="c:qbr:1",obj="innovation.dual_use",mech="assesses",direction="becomes_contested",kind="diagnosis",status="delivered",merit=77,secondary=["research_security.screening"])
+    bridge=claim(key="id:qbr",cid="c:qbr:1",obj="innovation.dual_use",mech="assesses",direction="unchanged",kind="diagnosis",status="delivered",merit=77,secondary=["research_security.screening"])
     div=claim(key="id:qd",cid="c:qd:1",obj="research_security.screening",mech="assesses",direction="becomes_contested",kind="diagnosis",status="delivered",merit=82)
     nodes=[_node(a,"A"),_node(b,"B"),_node(gap,"C"),_node(bridge,"D"),_node(div,"E")]
     out=conflicting_criteria(nodes,VOCAB,build_distance_table(nodes))
@@ -170,3 +174,60 @@ def test_conflicting_criteria_can_join_distinct_endpoint_objects_through_shared_
     assert q["roles"]["divergence"]["claim_id"]=="c:qd:1"
     assert q["score"] >= 70
     assert q["publication_gate_passes"] is False
+
+
+def test_dependency_roles_require_propagation_and_exposure_semantics_not_generic_negative_diagnoses():
+    commitment=claim(key="id:rco",cid="c:rco:1",obj="research.system_governance",mech="adopts",direction="expands",kind="action",status="adopted",merit=99,secondary=["goal.strategic_autonomy"])
+    coupling=claim(key="id:rcu",cid="c:rcu:1",obj="goal.strategic_autonomy",mech="requires",direction="becomes_conditional",kind="diagnosis",status="delivered",merit=90,secondary=["finance.strategic_investment"])
+    propagation=claim(key="id:rpr",cid="c:rpr:1",obj="finance.strategic_investment",mech="assesses",direction="contracts",kind="diagnosis",status="delivered",merit=90)
+    propagation["text"]="Investment conditions changed this year."  # no multi-site propagation evidence
+    exposure=claim(key="id:rex",cid="c:rex:1",obj="research.system_governance",mech="assesses",direction="becomes_contested",kind="diagnosis",status="delivered",merit=100)
+    exposure["text"]="A status review finds uneven uptake of laboratory methods."  # not scarcity/concentration/dependence
+    nodes=[_node(commitment,"S1"),_node(coupling,"S2"),_node(propagation,"S3"),_node(exposure,"S4")]
+    out=dependency_pathways(nodes,VOCAB,build_distance_table(nodes))
+    assert not any(x.get("score_gate_passes") for x in out)
+
+
+def test_dependency_worked_shape_allows_downstream_trigger_and_excludes_chain_records_from_distance():
+    commitment=claim(key="id:wco",cid="c:wco:1",obj="compute.public_procurement",mech="procures",direction="expands",kind="action",status="call_open",merit=99,secondary=["compute.gigafactory","compute.capacity"])
+    coupling=claim(key="id:wcu",cid="c:wcu:1",obj="compute.private_investment",mech="requires",direction="expands",kind="action",status="announced",merit=90,secondary=["datacentre.energy_supply","compute.capacity"])
+    propagation=claim(key="id:wpr",cid="c:wpr:1",obj="datacentre.energy_supply",mech="requires",direction="becomes_conditional",kind="effect",status="delivered",merit=90,secondary=["compute.private_investment","compute.capacity"])
+    propagation["text"]="European data-centre geography is changing across multiple locations because of power constraints."
+    exposure=claim(key="id:wex",cid="c:wex:1",obj="compute.capacity",mech="assesses",direction="contracts",kind="diagnosis",status="delivered",merit=100)
+    exposure["text"]="EU compute capacity is limited and geographically concentrated, with supplier dependence."
+    trigger=claim(key="id:wtr",cid="c:wtr:1",obj="datacentre.permitting",mech="regulates",direction="becomes_conditional",kind="action",status="proposed",merit=90,secondary=["datacentre.energy_supply","compute.private_investment"])
+    nodes=[_node(commitment,"S1"),_node(coupling,"S2"),_node(propagation,"S3"),_node(exposure,"S4"),_node(trigger,"S5")]
+    out=dependency_pathways(nodes,VOCAB,build_distance_table(nodes))
+    match=next(x for x in out if x["capability_object"]=="compute.public_procurement" and x["dependency_object"]=="datacentre.energy_supply")
+    assert match["product"]=="risk"
+    assert match["endpoint_objects"]==["compute.public_procurement","datacentre.permitting"]
+    assert match["trigger"]["claim_id"]=="c:wtr:1"
+    assert match["missing_roles"]==[]
+    assert match["distance"]=="distant"
+    assert match["endpoint_joint_outside_chain"]==0
+
+
+def test_delivered_analysis_is_not_a_risk_trigger():
+    commitment=claim(key="id:tco",cid="c:tco:1",obj="compute.gigafactory",mech="builds",direction="expands",kind="action",status="operating",merit=99,secondary=["compute.private_investment"])
+    coupling=claim(key="id:tcu",cid="c:tcu:1",obj="compute.private_investment",mech="requires",direction="becomes_conditional",kind="action",status="operating",merit=95,secondary=["datacentre.energy_supply"])
+    propagation=claim(key="id:tpr",cid="c:tpr:1",obj="datacentre.energy_supply",mech="requires",direction="becomes_conditional",kind="effect",status="delivered",merit=95)
+    propagation["text"]="Power constraints are spreading across multiple European sites."
+    exposure=claim(key="id:tex",cid="c:tex:1",obj="compute.gigafactory",mech="assesses",direction="contracts",kind="diagnosis",status="delivered",merit=95)
+    exposure["text"]="The buildout is exposed to a concentrated and capacity-limited supply base."
+    analytical=claim(key="id:tan",cid="c:tan:1",obj="datacentre.energy_supply",mech="restricts",direction="contracts",kind="diagnosis",status="delivered",merit=99)
+    nodes=[_node(commitment,"S1"),_node(coupling,"S2"),_node(propagation,"S3"),_node(exposure,"S4"),_node(analytical,"S5")]
+    out=dependency_pathways(nodes,VOCAB,build_distance_table(nodes))
+    assert out
+    assert all(x["product"]=="shock" for x in out if x["capability_object"]=="compute.gigafactory")
+
+
+def test_conflicting_criteria_divergence_must_bind_the_arbitration_branch():
+    a=claim(key="id:ca",cid="c:ca:1",obj="quantum.testing_infrastructure",mech="funds",direction="expands",kind="action",status="call_open",merit=99,secondary=["quantum.equipment"])
+    b=claim(key="id:cb",cid="c:cb:1",obj="export_control.competence",mech="restricts",direction="becomes_conditional",kind="diagnosis",status="in_force",merit=80,secondary=["quantum.equipment","innovation.dual_use"])
+    gap=claim(key="id:cg",cid="c:cg:1",obj="export_control.competence",mech="assesses",direction="becomes_contested",kind="diagnosis",status="delivered",merit=82,secondary=["research_security.screening"])
+    good=claim(key="id:cd",cid="c:cd:1",obj="research_security.screening",mech="assesses",direction="becomes_contested",kind="diagnosis",status="delivered",merit=80,secondary=["research.openness"])
+    bad=claim(key="id:cx",cid="c:cx:1",obj="research.openness",mech="assesses",direction="contracts",kind="diagnosis",status="delivered",merit=99)
+    nodes=[_node(a,"A"),_node(b,"B"),_node(gap,"C"),_node(good,"D"),_node(bad,"E")]
+    out=conflicting_criteria(nodes,VOCAB,build_distance_table(nodes))
+    assert out
+    assert out[0]["roles"]["divergence"]["claim_id"]=="c:cd:1"

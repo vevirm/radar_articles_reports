@@ -33,7 +33,7 @@ except ModuleNotFoundError:  # direct script execution from scripts/
     from claims_schema import date_precision, load_vocabulary, validate_claim  # type: ignore
     from rebuild_active_radar import _add_historical_context  # type: ignore
 
-PROFILE = "radar-claim-reasoning-shadow-v1.1-exact-object-frontier"
+PROFILE = "radar-claim-reasoning-shadow-v1.2-role-constrained-frontier"
 DECISION_WEIGHT = {"keep": 1.0, "review": 0.6, "needs_manual_verification": 0.35, "provisional": 0.35, "awaiting": 0.35}
 STATUS_WEIGHT = {
     "operating": 1.0, "in_force": 1.0, "adopted": 0.9, "announced": 0.8,
@@ -57,7 +57,7 @@ ROLE_KINDS: dict[str, set[str]] = {
     "conversion_condition": {"diagnosis", "effect"}, "enabling_reform": {"action"},
     "historical_relation": {"diagnosis", "effect"}, "side_a": {"action", "effect"},
     "side_b": {"action", "effect"}, "success_condition": {"action", "advocacy"},
-    "delivery_instrument": {"action"}, "measurement_blind_spot": {"diagnosis"},
+    "delivery_instrument": {"action"}, "measurement_blind_spot": {"diagnosis"}, "rule_scope": {"action", "diagnosis", "advocacy"},
 }
 ABSORBERS = {"substitutes", "diversifies", "adds_capacity", "harmonises", "exempts", "reconciles", "secures", "pre_clears"}
 RESTRICTION_MECHANISMS = {"restricts", "conditions", "excludes", "licenses", "regulates", "screens", "opposes"}
@@ -439,7 +439,62 @@ def _criterion_eligible(n: dict[str, Any]) -> bool:
     return kind == "diagnosis" and clean(n.get("status")) in {"adopted", "in_force", "operating"}
 
 
+def _semantic_text(n: dict[str, Any]) -> str:
+    return " ".join(clean(n.get(k)) for k in ("_title", "text", "_deep_main", "qualification") if clean(n.get(k))).lower()
+
+
+_PROPAGATION_CUE = re.compile(r"\b(?:spread(?:ing|s)?|across|multiple|several|more than one|regions?|sites?|locations?|geograph(?:y|ic|ically)|network(?:-wide)?|system(?:-wide)?|europe(?:an|-wide)?\s+(?:regions?|sites?|data centres?|facilities|markets))\b", re.I)
+_EXPOSURE_CUE = re.compile(r"\b(?:scarci(?:ty|ties)|shortage|bottleneck|limited|concentrat(?:ed|ion)|dependen(?:t|ce|cy)|single[- ]supplier|fragil(?:e|ity)|vulnerab(?:le|ility)|expos(?:ed|ure)|insufficient|capacity gap|supply gap|constraint|constrained|lack of|shortfall)\b", re.I)
+
+
+def _propagation_eligible(n: dict[str, Any], dependency_object: str) -> bool:
+    """R-32 propagation: the dependency disruption reaches more than one site/context."""
+    if not _touches(n, dependency_object):
+        return False
+    if clean(n.get("kind")) not in {"effect", "diagnosis"}:
+        return False
+    if clean(n.get("direction")) not in {"contracts", "becomes_conditional", "becomes_contested"}:
+        return False
+    return bool(_PROPAGATION_CUE.search(_semantic_text(n)))
+
+
+def _exposure_eligible(n: dict[str, Any], capability_objects: set[str]) -> bool:
+    """R-32 exposure: evidence of why the capability is vulnerable (scarcity/concentration/dependence)."""
+    if not (_claim_objects(n) & capability_objects):
+        return False
+    if clean(n.get("kind")) not in {"diagnosis", "effect"}:
+        return False
+    if clean(n.get("direction")) not in {"contracts", "becomes_conditional", "becomes_contested"}:
+        return False
+    return bool(_EXPOSURE_CUE.search(_semantic_text(n)))
+
+
+def _trigger_eligible(n: dict[str, Any]) -> bool:
+    """R-41: an evidenced event/proposal/rule, not a delivered analytical statement, turns a pathway into risk."""
+    if clean(n.get("mechanism")) not in RESTRICTION_MECHANISMS:
+        return False
+    status = clean(n.get("status"))
+    if status in {"abandoned", "lapsed", "delivered", ""}:
+        return False
+    kind = clean(n.get("kind"))
+    return kind == "action" or (kind == "diagnosis" and status in {"adopted", "in_force", "operating"})
+
+
+def _trigger_maturity_key(n: dict[str, Any]) -> tuple[int, float, str]:
+    return (STATUS_RANK.get(clean(n.get("status")), 0), float(n.get("merit", 0) or 0), clean(n.get("status_date")))
+
+
 def dependency_pathways(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any], distance: dict[str, Any]) -> list[dict[str, Any]]:
+    """Fit the R-32 dependency pathway over exact-object frontiers.
+
+    Stage 5C deliberately separates the four scored roles from the trigger. A
+    multi-object coupling names the dependency; propagation must show that same
+    dependency spreading across sites/contexts; exposure must describe a
+    vulnerability on the capability side; and a mature restriction anywhere on
+    the connected dependency branch becomes the trigger that classifies the
+    pathway as risk. This prevents generic diagnoses elsewhere in a broad
+    cluster from filling load-bearing roles.
+    """
     primary = [n for n in nodes if n.get("_primary") and clean(n.get("era")) == "current"]
     commitments = []
     for n in primary:
@@ -450,52 +505,60 @@ def dependency_pathways(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any], 
         }
         if clean(n.get("kind")) == "action" and clean(n.get("direction")) == "expands" and stake_classes & {"flagship", "capability", "budget", "rule"}:
             commitments.append(n)
+
     out: list[dict[str, Any]] = []
     for commitment in commitments:
         cap_obj = clean(commitment.get("object"))
         cap_objects = _claim_objects(commitment)
-        # Role binding uses the commitment object's primary cluster. Secondary-cluster
-        # tags are for distance/context, not a licence to treat every strategic-goal
-        # claim as the same capability.
         cap_primary_cluster = primary_cluster(cap_obj, vocab)
-        cap_clusters = {cap_primary_cluster} if cap_primary_cluster else set()
-        # R-31: discovery frontier is exact object overlap. Clusters score distance; they are not graph edges.
         frontier, hop_depths = _exact_object_frontier(primary, commitment, max_hops=3)
+
         coupling_options: list[tuple[dict[str, Any], str]] = []
         for n in frontier:
             objs = _claim_objects(n)
             if clean(n.get("mechanism")) not in COUPLING_MECHANISMS or len(objs) < 2:
                 continue
-            # A coupling must carry the capability itself, or an object in the
-            # capability's *primary* cluster, plus a distinct dependency object.
-            # This prevents secondary-cluster tags (e.g. sovereignty/strategy) from
-            # creating cross-domain chains by themselves.
+            # A coupling must carry an exact commitment-side object (or an
+            # object in the commitment's primary capability cluster) and a
+            # distinct object outside that capability cluster.
             cap_side = [o for o in objs if o in cap_objects or (cap_primary_cluster and primary_cluster(o, vocab) == cap_primary_cluster)]
             foreign = [o for o in objs if o not in cap_side and (not cap_primary_cluster or primary_cluster(o, vocab) != cap_primary_cluster)]
             if cap_side and foreign:
-                coupling_options.append((n, foreign[0]))
-        for coupling, dep_obj in sorted(coupling_options, key=lambda x: _role_strength(x[0], "coupling"), reverse=True)[:6]:
+                # Prefer a primary foreign object when possible: secondary
+                # objects are often context tags rather than the dependency.
+                primary_obj = clean(n.get("object"))
+                dep = primary_obj if primary_obj in foreign else sorted(foreign)[0]
+                coupling_options.append((n, dep))
+
+        for coupling, dep_obj in sorted(coupling_options, key=lambda x: _role_strength(x[0], "coupling"), reverse=True)[:8]:
             dep_clusters = object_clusters(dep_obj, vocab)
             if not dep_clusters:
                 continue
-            # Dependency roles must bind the exact dependency object; generic same-cluster material is context, not a link.
-            propagation_rows = [n for n in frontier if n is not coupling and _touches(n, dep_obj) and clean(n.get("kind")) in {"effect", "diagnosis"}]
-            exposure_rows = [
-                n for n in frontier if n is not coupling and clean(n.get("kind")) in {"diagnosis", "effect"}
-                and (
-                    (_touches(n, dep_obj) and (clean(n.get("direction")) in {"contracts", "becomes_conditional", "becomes_contested"} or clean(n.get("mechanism")) in RESTRICTION_MECHANISMS))
-                    or (cap_primary_cluster and any(primary_cluster(o, vocab) == cap_primary_cluster for o in _claim_objects(n)) and clean(n.get("direction")) in {"contracts", "becomes_conditional", "becomes_contested"})
-                )
-            ]
+
             used = {clean(commitment.get("claim_id")), clean(coupling.get("claim_id"))}
+            propagation_rows = [
+                n for n in frontier
+                if n is not coupling and clean(n.get("claim_id")) not in used and _propagation_eligible(n, dep_obj)
+            ]
             propagation = _best_excluding(propagation_rows, "propagation", used)
             if propagation:
                 used.add(clean(propagation.get("claim_id")))
+
+            # Exposure is about the capability's vulnerability, not simply any
+            # negative diagnosis on the dependency branch.
+            exposure_rows = [
+                n for n in frontier
+                if n is not coupling and clean(n.get("claim_id")) not in used and _exposure_eligible(n, cap_objects)
+            ]
             exposure = _best_excluding(exposure_rows, "exposure", used)
+            if exposure:
+                used.add(clean(exposure.get("claim_id")))
+
             role_nodes = {"commitment": commitment, "coupling": coupling, "propagation": propagation, "exposure": exposure}
             missing = [r for r, n in role_nodes.items() if n is None]
             if len(missing) > 1:
                 continue
+
             support_nodes = [n for n in role_nodes.values() if n]
             record_roles = Counter(clean(n.get("_record_id")) for n in support_nodes)
             if any(v > 2 for v in record_roles.values()):
@@ -504,67 +567,98 @@ def dependency_pathways(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any], 
                 continue
             if len({clean(n.get("_record_id")) for n in support_nodes}) < min(3, len(support_nodes)) or _distinct_sources(support_nodes) < 2:
                 continue
-            trigger = _best([n for n in frontier if _touches(n, dep_obj) and clean(n.get("mechanism")) in RESTRICTION_MECHANISMS and clean(n.get("status")) not in {"abandoned", "lapsed"}], "exposure")
-            ccluster = primary_cluster(cap_obj, vocab) or (sorted(cap_clusters)[0] if cap_clusters else "")
-            dcluster = primary_cluster(dep_obj, vocab) or sorted(dep_clusters)[0]
+
+            # The trigger can sit downstream of the coupling object (the worked
+            # compute fixture moves energy/siting into a permitting proposal).
+            # It must still be attached by an exact object carried by the
+            # coupling/propagation branch, and it must be a real proposal/rule/
+            # action rather than a delivered analytical statement.
+            dependency_branch_objects = set(_claim_objects(coupling))
+            if propagation:
+                dependency_branch_objects.update(_claim_objects(propagation))
+            trigger_rows = [
+                n for n in frontier
+                if clean(n.get("claim_id")) not in used
+                and _trigger_eligible(n)
+                and bool(_claim_objects(n) & dependency_branch_objects)
+            ]
+            trigger = max(trigger_rows, key=_trigger_maturity_key) if trigger_rows else None
+            product = "risk" if trigger else "shock"
+
+            # R-31 hop ceiling applies to every load-bearing role and to the
+            # trigger used to classify a risk.
+            role_depths = [hop_depths.get(clean(n.get("claim_id")), 0) for n in (coupling, propagation, exposure, trigger) if n]
+            max_hop = max(role_depths or [0])
+            if product == "risk" and max_hop > 2:
+                continue
+            if product == "shock" and max_hop > 3:
+                continue
+
+            ccluster = primary_cluster(cap_obj, vocab)
+            endpoint_b = clean(trigger.get("object")) if trigger else dep_obj
+            dcluster = primary_cluster(endpoint_b, vocab) or primary_cluster(dep_obj, vocab)
             chain_record_ids = {clean(n.get("_record_id")) for n in support_nodes}
             if trigger:
                 chain_record_ids.add(clean(trigger.get("_record_id")))
-            dist, bonus, lift = distance_excluding_records(nodes, ccluster, dcluster, chain_record_ids)
+            dist, bonus, lift = distance_excluding_records(nodes, ccluster, dcluster, chain_record_ids) if ccluster and dcluster else ("familiar", 1.0, math.inf)
+
             strengths = {r: (_role_strength(n, r) if n else 0.0) for r, n in role_nodes.items()}
             base = 0.35*strengths["commitment"] + 0.30*strengths["coupling"] + 0.20*strengths["propagation"] + 0.15*strengths["exposure"]
-            chain_objects = {cap_obj, dep_obj}
-            counters = [n for n in primary if clean(n.get("mechanism")) in ABSORBERS and any(_touches(n, o) for o in chain_objects)]
+            chain_objects = set().union(*(_claim_objects(n) for n in support_nodes))
+            if trigger:
+                chain_objects.update(_claim_objects(trigger))
+            counters = [n for n in primary if clean(n.get("mechanism")) in ABSORBERS and bool(chain_objects & _claim_objects(n))]
             penalty = min(12, 3 * len({clean(n.get("_record_id")) for n in counters}))
-            product = "risk" if trigger else "shock"
-            # R-31 hop ceiling: risk <=2, shock <=3.
-            coupling_hop = hop_depths.get(clean(coupling.get("claim_id")), 99)
-            if product == "risk" and coupling_hop > 2:
-                continue
-            if product == "shock" and coupling_hop > 3:
-                continue
             floor_ok = all(v >= 0.40 for r, v in strengths.items() if role_nodes[r] is not None)
             pathway_score = max(0, min(99, round(100 * base * bonus) - penalty))
+
             meta = (vocab.get("objects") or {}).get(cap_obj, {})
-            consequence = {"flagship":1.0,"capability":0.9,"rule":0.8,"budget":0.8}.get(meta.get("stake_class"),0.6)
+            # A commitment can inherit stake class from an explicit secondary
+            # object (e.g. public procurement -> gigafactory).
+            stake_classes = [
+                (vocab.get("objects") or {}).get(o, {}).get("stake_class")
+                for o in cap_objects if isinstance((vocab.get("objects") or {}).get(o, {}), dict)
+            ]
+            stake = next((x for x in ("flagship", "capability", "rule", "budget") if x in stake_classes), meta.get("stake_class"))
+            consequence = {"flagship":1.0,"capability":0.9,"rule":0.8,"budget":0.8}.get(stake,0.6)
             absorbers = [n for n in counters if clean(n.get("status")) not in {"abandoned", "lapsed"}]
-            if any(clean(n.get("status")) in {"operating", "in_force", "adopted"} for n in absorbers): speed = 0.6
-            elif absorbers: speed = 0.8
-            else: speed = 1.0
+            if any(clean(n.get("status")) in {"operating", "in_force", "adopted"} for n in absorbers):
+                speed = 0.6
+            elif absorbers:
+                speed = 0.8
+            else:
+                speed = 1.0
             shock_score = max(0, min(99, round(100 * base * consequence * speed) - penalty))
-            endpoint_b = clean(trigger.get("object")) if trigger else dep_obj
-            chain_record_ids_with_trigger = set(chain_record_ids)
-            if trigger:
-                chain_record_ids_with_trigger.add(clean(trigger.get("_record_id")))
+
             endpoint_joint = len({
                 clean(n.get("_record_id")) for n in nodes
-                if clean(n.get("era")) == "current" and clean(n.get("_record_id")) not in chain_record_ids_with_trigger
+                if clean(n.get("era")) == "current" and clean(n.get("_record_id")) not in chain_record_ids
                 and _touches(n, cap_obj) and _touches(n, endpoint_b)
             })
+            level = 5 if dist in {"distant", "neutral"} and endpoint_joint < 2 else 4
             wow = 5 if endpoint_joint == 0 and dist == "distant" else 4 if endpoint_joint <= 1 else 3 if endpoint_joint <= 5 else 2
             candidate_score = shock_score if product == "shock" else pathway_score
             threshold = 60 if product == "shock" else 80
             out.append({
-                "level": 5, "grammar_id": "dependency_pathway", "product": product,
+                "level": level, "grammar_id": "dependency_pathway", "product": product,
                 "capability_object": cap_obj, "dependency_object": dep_obj,
                 "distance": dist, "distance_lift": lift, "distance_bonus": bonus,
-                "frontier_mode": "exact_object_overlap", "coupling_hop": coupling_hop,
+                "frontier_mode": "exact_object_overlap", "coupling_hop": hop_depths.get(clean(coupling.get("claim_id"))), "max_role_hop": max_hop,
                 "endpoint_objects": [cap_obj, endpoint_b], "endpoint_joint_outside_chain": endpoint_joint,
-                "roles": {r: _snap(n, r) for r, n in role_nodes.items()}, "missing_roles": missing,
+                "roles": {r: _snap(n, r) for r, n in role_nodes.items()}, "trigger": _snap(trigger, "trigger"), "missing_roles": missing,
                 "counter_claim_ids": sorted({clean(n.get("claim_id")) for n in counters if clean(n.get("claim_id"))}),
                 "counter_penalty": penalty, "pathway_score": pathway_score, "shock_score": shock_score if product == "shock" else None,
                 "score": candidate_score, "floor_ok": floor_ok, "wow_preliminary": wow,
-                "score_gate_passes": not missing and floor_ok and candidate_score >= threshold,
+                "score_gate_passes": level == 5 and not missing and floor_ok and candidate_score >= threshold,
                 "publication_gate_passes": False,
                 "publication_gate_reason": "Shadow only: executed falsifier and oddity/watchability gates are not yet recorded by the live scanner.",
             })
-    best: dict[tuple[str,str,str], dict[str, Any]] = {}
+    best: dict[tuple[str,str,str,str], dict[str, Any]] = {}
     for c in out:
-        key=(c["product"],c["capability_object"],c["dependency_object"])
-        if key not in best or (c["score"], -len(c["missing_roles"])) > (best[key]["score"], -len(best[key]["missing_roles"])):
+        key=(c["product"],c["capability_object"],c["dependency_object"],c["endpoint_objects"][1])
+        if key not in best or (c["score_gate_passes"], c["score"], -len(c["missing_roles"])) > (best[key]["score_gate_passes"], best[key]["score"], -len(best[key]["missing_roles"])):
             best[key]=c
     return sorted(best.values(), key=lambda c: (c["score_gate_passes"], c["score"], c["wow_preliminary"]), reverse=True)[:80]
-
 
 def conflicting_criteria(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any], distance: dict[str, Any]) -> list[dict[str, Any]]:
     """Claim-native conflicting criteria over an exact-object frontier.
@@ -604,12 +698,29 @@ def conflicting_criteria(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any],
             # may not be pulled from an unrelated branch of the seed frontier.
             b_frontier, b_depths = _exact_object_frontier(primary, criterion_b, max_hops=2)
             excluded = {clean(x.get("claim_id")) for x in (criterion_a, criterion_b, arbitration) if x}
+            arbitration_objs = _claim_objects(arbitration)
             div_rows = [
                 n for n in b_frontier if clean(n.get("claim_id")) not in excluded
                 and clean(n.get("kind")) in {"effect", "diagnosis"}
                 and clean(n.get("direction")) in {"becomes_contested", "contracts", "becomes_conditional"}
             ]
-            divergence = _best_excluding(div_rows, "divergence", excluded)
+            # Prefer divergence that stays on the arbitration branch; then prefer
+            # an explicitly contested national/institutional balance and the
+            # shortest exact-object path. A generic downstream contraction in
+            # openness therefore cannot outrank a direct research-security
+            # comparison merely because it is newer.
+            divergence = max(
+                div_rows,
+                key=lambda n: (
+                    1 if bool(arbitration_objs & _claim_objects(n)) else 0,
+                    1 if clean(n.get("direction")) == "becomes_contested" else 0,
+                    -(b_depths.get(clean(n.get("claim_id")), 99)),
+                    _role_strength(n, "divergence"),
+                    float(n.get("merit", 0) or 0),
+                    clean(n.get("status_date")),
+                ),
+                default=None,
+            )
             roles = {"criterion_a": criterion_a, "criterion_b": criterion_b, "arbitration_gap": arbitration, "divergence": divergence}
             missing = [r for r,n in roles.items() if not n]
             if len(missing) > 1:
@@ -663,17 +774,18 @@ def claim_expressiveness(nodes: Iterable[dict[str, Any]]) -> dict[str, Any]:
     secondary = sum(1 for n in primary if n.get("secondary_objects"))
     relational = sum(1 for n in primary if clean(n.get("mechanism")) in COUPLING_MECHANISMS)
     c_primary = [n for n in primary if n.get("_collection") == "strand_c"]
-    action_cue = re.compile(r"\b(?:adopted|took effect|entered into force|enacted|opened|launched|proposes?|signed|establish(?:ed|ing)|fund(?:s|ed|ing)|awarded|selected|announced|approved|introduced|implemented|joined)\b", re.I)
-    suspicious_c_diagnosis = [n for n in current if n.get("_collection") == "strand_c" and clean(n.get("kind")) == "diagnosis" and action_cue.search(clean(n.get("_deep_main")))]
+    action_cue = re.compile(r"\b(?:adopted|took effect|entered into force|enacted|opened|launched|proposes?|signed|establish(?:ed|ing)|funds|funded (?:a|an|the|new|additional|programme|program|project|call|award)|awarded|selected|announced|approved|introduced|implemented|joined)\b", re.I)
+    suspicious_c_diagnosis = [n for n in c_primary if clean(n.get("kind")) == "diagnosis" and action_cue.search(clean(n.get("_deep_main")))]
     assesses_share = (mech.get("assesses", 0) / len(primary)) if primary else 0.0
     secondary_share = (secondary / len(primary)) if primary else 0.0
     warnings=[]
+    advisories=[]
     if assesses_share > 0.60:
-        warnings.append("More than 60% of current primary claims use mechanism=assesses; relation grammars may be under-expressed.")
+        advisories.append("Most current primary diagnoses use mechanism=assesses. This is acceptable for descriptive diagnoses, but relational diagnoses should continue to be enriched when Deep Scan states an explicit dependency or restriction.")
     if secondary_share < 0.10:
         warnings.append("Fewer than 10% of current primary claims carry secondary_objects; multi-object graph expansion may be sparse.")
     if len(suspicious_c_diagnosis) > 0:
-        warnings.append("Some Strand C diagnosis claims contain explicit event/action cues in the Deep Scan main finding and need semantic review before detector switch.")
+        warnings.append("Some primary Strand C diagnosis claims contain explicit event/action cues in the Deep Scan main finding and need semantic review before detector switch.")
     return {
         "current_claims": len(current), "current_primary_claims": len(primary),
         "primary_mechanisms_top": mech.most_common(12),
@@ -689,6 +801,7 @@ def claim_expressiveness(nodes: Iterable[dict[str, Any]]) -> dict[str, Any]:
         ],
         "ready_for_detector_switch": not warnings,
         "warnings": warnings,
+        "advisories": advisories,
     }
 
 def legacy_summary(raw: dict[str, Any]) -> dict[str, Any]:
@@ -750,7 +863,7 @@ def run_shadow(root: Path = ROOT, evaluated_at: str | None = None) -> dict[str, 
         "legacy_snapshot": legacy_summary(raw),
         "limitations": [
             "No shadow candidate is publishable until falsifier execution is recorded by candidate fingerprint.",
-            "Stage 5A tightens dependency discovery to R-31 exact-object frontiers and enforces distinct semantic roles for conflicting criteria. Remaining A-3 grammars are added before any detector switch.",
+            "Stage 5C constrains dependency and conflicting-criteria roles to their R-32 semantics. Remaining A-3 grammars are added before any detector switch.",
             "Trend pull is preliminary where explicit action-dedup/hostile-witness metadata are absent.",
         ],
     }
