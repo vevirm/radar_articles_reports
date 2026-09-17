@@ -219,3 +219,42 @@ def test_shock_post_cutover_failure_holds_claim_state_without_legacy(monkeypatch
     assert state["new_count"] == 0
     assert state["updated_count"] == 0
     assert state["dynamic_shocks"] == previous["dynamic_shocks"]
+
+
+def test_claim_support_uses_downstream_retrace_url_identity():
+    raw = {
+        "level": 5,
+        "grammar_id": "conflicting_criteria",
+        "product": "risk",
+        "endpoint_objects": ["quantum.testing_infrastructure", "export_control.competence"],
+        "roles": {
+            "criterion_a": {
+                "claim_id": "c:q:1",
+                "record_key": "link:https://example.test/Quantum-Thing/",
+                "object": "quantum.testing_infrastructure",
+                "status_date": "2026-08-13",
+                "merit": 99,
+                "source": "EuroHPC",
+                "title": "Quantum thing",
+                "strength": .792,
+            }
+        },
+        "missing_roles": ["criterion_b"],
+        "score": 0,
+        "score_gate_passes": False,
+        "wow_preliminary": 5,
+        "distance": "distant",
+        "distance_lift": 0.0,
+        "distance_bonus": 1.2,
+    }
+    nodes = [{
+        "claim_id": "c:q:1",
+        "record_key": "link:https://example.test/Quantum-Thing/",
+        "_link": "https://example.test/Quantum-Thing/",
+        "_collection": "strand_a",
+        "_title": "Quantum thing",
+        "_source": "EuroHPC",
+        "status_date": "2026-08-13",
+    }]
+    cand = live.adapt_candidate(raw, nodes)
+    assert cand["support"][0]["identity"] == "url:https://example.test/quantum-thing"

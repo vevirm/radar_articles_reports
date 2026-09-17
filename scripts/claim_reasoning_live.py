@@ -656,6 +656,29 @@ def _product_for(c: dict[str, Any]) -> str:
     return "continuity"
 
 
+def _canonical_support_identity(node: dict[str, Any], snap: dict[str, Any]) -> str:
+    """Return the downstream-retrace identity spelling for a claim support row.
+
+    The claim graph uses record_key values such as ``link:https://...`` internally,
+    while the existing downstream integrity checker indexes surviving evidence as
+    ``url:https://...`` (or a deterministic title/source/date fallback).  Live
+    claim-native candidates must store the latter so retrace can resolve every
+    support reference after the Stage-6 detector switch.
+    """
+    rk = clean(snap.get("record_key") or node.get("record_key"))
+    link = clean(node.get("_link"))
+    if not link and rk.startswith("link:"):
+        link = rk[5:]
+    if link:
+        return "url:" + link.lower().rstrip("/")
+    title = re.sub(r"[^a-z0-9]+", " ", _low(snap.get("title") or node.get("_title"))).strip()
+    source = re.sub(r"[^a-z0-9]+", " ", _low(snap.get("source") or node.get("_source"))).strip()
+    date = clean(snap.get("status_date") or node.get("status_date"))[:10]
+    if title or source or date:
+        return "title:" + hashlib.sha1(f"{title}|{source}|{date}".encode("utf-8")).hexdigest()[:20]
+    return rk or clean(snap.get("claim_id") or node.get("claim_id"))
+
+
 def _support_rows(c: dict[str, Any], node_by_claim: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
     snaps: list[dict[str, Any]] = []
     roles = c.get("roles") if isinstance(c.get("roles"), dict) else {}
@@ -665,9 +688,9 @@ def _support_rows(c: dict[str, Any], node_by_claim: dict[str, dict[str, Any]]) -
         cid = clean(snap.get("claim_id"))
         node = node_by_claim.get(cid, {})
         rk = clean(snap.get("record_key") or node.get("record_key"))
-        link = rk[5:] if rk.startswith("link:") else clean(node.get("_link"))
+        link = clean(node.get("_link")) or (rk[5:] if rk.startswith("link:") else "")
         snaps.append({
-            "identity": rk or cid,
+            "identity": _canonical_support_identity(node, snap),
             "claim_id": cid,
             "role": clean(role),
             "strand": clean(node.get("_collection")).replace("strand_", "").upper(),
@@ -697,7 +720,7 @@ def _support_rows(c: dict[str, Any], node_by_claim: dict[str, dict[str, Any]]) -
             continue
         rk = clean(node.get("record_key"))
         snaps.append({
-            "identity": rk or cid, "claim_id": cid, "role": "support",
+            "identity": _canonical_support_identity(node, {"claim_id": cid}), "claim_id": cid, "role": "support",
             "strand": clean(node.get("_collection")).replace("strand_", "").upper(),
             "title": clean(node.get("_title")), "source": clean(node.get("_source")),
             "date": clean(node.get("status_date")), "link": rk[5:] if rk.startswith("link:") else clean(node.get("_link")),
