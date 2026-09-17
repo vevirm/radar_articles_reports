@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-admission-v1",
-  "updated_at": "2026-09-17T11:56:13Z",
+  "updated_at": "2026-09-17T12:01:17Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "decision": "drop",
@@ -15799,6 +15799,66 @@
       "deep_scan_package_id": "worker-a-20260917T111401Z-9c77ac8c844d",
       "verification_note": "Identity verified via Crossref: Nature news feature 'US brain drain: the scientists seeking jobs abroad amid Trump's assault on research' (13 May 2025). Body is paywalled; only standfirst and one sentence accessible, insufficient to test the scanner claim about a European talent opportunity.",
       "recovery_attempts": 3
+    },
+    "historical:id:ea172fb497c5e020": {
+      "decision": "needs_manual_verification",
+      "target_strand": "",
+      "reason_code": "NEEDS_MANUAL_VERIFICATION",
+      "reason": "Identity is credible, but substantive evidence remained inaccessible after three validated Deep Scan recovery passes; excluded from active reasoning until hands-on verification supplies materially new access.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "updated_at": "2026-09-17T12:01:16Z",
+      "deep_scan_package_id": "worker-b-20260917T111410Z-93d5ce97efeb",
+      "verification_note": "Identity verified: Global Policy, November 2024 issue, Pattanshetty, Inamdar, Poojary, Kickbusch, Brand. Open access on Wiley but Wiley returns 403; Maastricht University CRIS page yields abstract and citation only, no file reachable. Second pass found no repository or author copy with retrievable text.",
+      "recovery_attempts": 3
+    },
+    "historical:id:6212b03e377b75be": {
+      "decision": "needs_manual_verification",
+      "target_strand": "",
+      "reason_code": "NEEDS_MANUAL_VERIFICATION",
+      "reason": "Identity is credible, but substantive evidence remained inaccessible after three validated Deep Scan recovery passes; excluded from active reasoning until hands-on verification supplies materially new access.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "updated_at": "2026-09-17T12:01:16Z",
+      "deep_scan_package_id": "worker-b-20260917T111410Z-93d5ce97efeb",
+      "verification_note": "Identity verified via Crossref: the journal is Cambridge Review of International Affairs (online 26 Sep 2024), not 'International Affairs' as the scanner states; sole author Linda Monsees. Open access on T&F, which blocks automated access (403).",
+      "recovery_attempts": 3
+    },
+    "historical:id:40a66178c02fbfdc": {
+      "decision": "needs_manual_verification",
+      "target_strand": "",
+      "reason_code": "NEEDS_MANUAL_VERIFICATION",
+      "reason": "Identity is credible, but substantive evidence remained inaccessible after three validated Deep Scan recovery passes; excluded from active reasoning until hands-on verification supplies materially new access.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "updated_at": "2026-09-17T12:01:16Z",
+      "deep_scan_package_id": "worker-b-20260917T111410Z-93d5ce97efeb",
+      "verification_note": "Identity verified: chapter in IGI Global 'Developments and Approaches in Science Diplomacy' (2024), Prieto, Vera, Guglielminotti. IGI resolver returned HTTP 429; the chapter is paywalled and no OA copy exists.",
+      "recovery_attempts": 3
+    },
+    "historical:id:b4ea7b84e8c47191": {
+      "decision": "keep",
+      "target_strand": "A",
+      "reason_code": "A_SUBSTANTIVE_EU_RI",
+      "reason": "Interview study of bilateral research collaboration between Russia and France (a leading European science system, including CNRS schemes), identifying drivers and barriers; genuine European international-R&I evidence, useful as pre-2022 historical context.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "updated_at": "2026-09-17T12:01:16Z",
+      "deep_scan_package_id": "worker-b-20260917T111410Z-93d5ce97efeb",
+      "verification_note": "Published version recovered via CORE (SSOAR deposit) after the publisher domain failed. Journal is the Russian 'Gosudarstvennaya sluzhba' (Public Administration), 20(1), 84-89, Gaidar Forum issue. Scanner authors field had a stray leading separator.",
+      "duplicate_of": ""
+    },
+    "historical:id:ef177fec64355bc6": {
+      "decision": "keep",
+      "target_strand": "A",
+      "reason_code": "A_SUBSTANTIVE_EU_RI",
+      "reason": "Argument on the conditions for European digital innovation capacity (capital, skills, clusters, enabling policy) beyond the Digital Single Market, including support for a European breakthrough-innovation agency; genuine European innovation-policy and tech-sovereignty context.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "updated_at": "2026-09-17T12:01:17Z",
+      "deep_scan_package_id": "worker-b-20260917T111410Z-93d5ce97efeb",
+      "verification_note": "Full article read. Scanner omitted the author and used placeholder date 2018-01-01.",
+      "duplicate_of": ""
     }
   }
 }

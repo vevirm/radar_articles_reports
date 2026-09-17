@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-09-17T11:56:13Z",
+  "updated_at": "2026-09-17T12:01:17Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -9412,6 +9412,43 @@
       ],
       "updated_at": "2026-09-17T11:56:13Z",
       "deep_scan_package_id": "worker-a-20260917T111401Z-9c77ac8c844d"
+    },
+    "historical:id:b4ea7b84e8c47191": {
+      "fields": {
+        "authors": "Irina Dezhina",
+        "source": "Gosudarstvennaya sluzhba (Public Administration)"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The SSOAR copy's citation gives sole author I. G. Dezhina and the journal Gosudarstvennaya sluzhba ('Public Administration'), 20(1), 2018.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://core.ac.uk/download/614001299.pdf"
+      ],
+      "updated_at": "2026-09-17T12:01:16Z",
+      "deep_scan_package_id": "worker-b-20260917T111410Z-93d5ce97efeb"
+    },
+    "historical:id:ef177fec64355bc6": {
+      "fields": {
+        "authors": "Gilles Babinet",
+        "date": "2018-01-15",
+        "type": "opinion article"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The publisher page names Gilles Babinet as author and is dated 15/01/2018.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://institutmontaigne.org/en/expressions/europe-and-digital-single-market-what-next"
+      ],
+      "updated_at": "2026-09-17T12:01:17Z",
+      "deep_scan_package_id": "worker-b-20260917T111410Z-93d5ce97efeb"
     }
   }
 }

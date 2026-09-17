@@ -6,18 +6,18 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1342** (Main **644** + Historical **698**)
-- Automatic queue still needing V2 verification: **43** (Main **0** + Historical **43**)
-- Currently assigned to workers: **43** (Main **0** + Historical **43**)
+- Authoritative V2 verified: **1344** (Main **644** + Historical **700**)
+- Automatic queue still needing V2 verification: **38** (Main **0** + Historical **38**)
+- Currently assigned to workers: **38** (Main **0** + Historical **38**)
 - Bounded access-recovery retries still eligible: **0**
-- Hands-on verification needed: **57**
+- Hands-on verification needed: **60**
 - Automatic queue pending and not yet assigned: **0**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260917T115849Z-c2247c760f8c`
-- Assigned unresolved records: **31**
+- Current package: `worker-a-20260917T120354Z-e4953dcbcec9`
+- Assigned unresolved records: **36**
   1. `historical:id:1b548cd98970b985` — ERC participants at the 2019 Research Innovation days
   2. `historical:id:3cecfeb44fddb1f7` — Controlling internet content in the EU: towards digital sovereignty — recovery attempt 3/3
   3. `historical:id:b3c33b824538e7fe` — Cybersecurity Trends in the European Union: Regulatory Mercantilism and the Digitalisation of Geopolitics — recovery attempt 3/3
@@ -26,20 +26,13 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:bec6dbaab7568898` — Identifying interdisciplinary research in research projects — recovery attempt 3/3
   7. `historical:id:e077e1381d2d93fd` — The Spectrum of Strategic Autonomy in EU Defence Supply Chains — recovery attempt 3/3
   8. `historical:id:940d02bed62a022e` — Europe’s Economic Security and China: Where to Draw the Line — recovery attempt 3/3
-  - … plus 23 more in the package manifest
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260917T115900Z-93d5ce97efeb`
-- Assigned unresolved records: **12**
-  1. `historical:id:ea172fb497c5e020` — From strategic autonomy to strategic partnership: <scp>EU</scp>–India relations in health diplomacy — recovery attempt 3/3
-  2. `historical:id:6212b03e377b75be` — The paradox of semiconductors—EU governance between sovereignty and interdependence — recovery attempt 3/3
-  3. `historical:id:40a66178c02fbfdc` — Geopolitics and Science and Technology Cooperation in Argentina, Chile, and Colombia — recovery attempt 3/3
-  4. `historical:id:b4ea7b84e8c47191` — Tendencies and prospects of Russian-French scientific collaboration — recovery attempt 2/3
-  5. `historical:id:4a0af82a0f2a2fbb` — In Space, 2018 Already Beats 2017 — recovery attempt 2/3
-  6. `historical:id:ef177fec64355bc6` — Europe and the Digital Single Market: What Next ? — recovery attempt 2/3
-  7. `historical:id:9359de208b9e0ce9` — China’s international research collaboration: evidence from a panel gravity model — recovery attempt 2/3
-  8. `historical:id:922a27831be9f4dd` — Science diplomacy: Investigating the perspective of scholars on politics–science collaboration in international affairs — recovery attempt 2/3
-  - … plus 4 more in the package manifest
+- Current package: `worker-b-20260917T120405Z-00ab8e8211b0`
+- Assigned unresolved records: **2**
+  1. `historical:id:dc302423afff77b3` — Shaping Portuguese science policy for the European horizon: The discourses of technological change — recovery attempt 3/3
+  2. `historical:id:61f8c22387103608` — Collaboration strategies and effects on university research: evidence from Chinese universities — recovery attempt 3/3
 
 ## Hands-on verification needed
 
@@ -102,3 +95,6 @@ These works no longer consume automatic Deep Scan slots. Their identity is belie
 - `link:https://doi.org/10.1080/09662839.2026.2700193` — **Disruptive technology and the high-risk/high-gain logic: societal impacts of European rearmament** — attempts: 3/3 — European Security — 2026-07-03 — Open-access article identity confirmed but publisher blocks retrieval and no repository copy exists. — https://doi.org/10.1080/09662839.2026.2700193
 - `historical:id:5f02392522b6f284` — **US research-policy instability created an observable opportunity for Europe to attract mobile scientific talent.** — attempts: 3/3 — Nature — 2025-05-13 — Paywalled news feature; accessible text is a one-line standfirst, insufficient for KEEP/REVIEW/DROP. — https://www.nature.com/articles/d41586-025-01489-y
 - `link:https://doi.org/10.1016/j.bushor.2026.09.004` — **From digital sovereignty to geographic intelligence: Mapping the hidden geography of digital value and control with the SCALE Framework** — attempts: 3/3 — Business Horizons — 2026-09-01 — Work exists (Crossref DOI 10.1016/j.bushor.2026.09.004) but no substantive text was accessible after all six steps, so European relevance of the SCALE Framework cannot be judged. — https://doi.org/10.1016/j.bushor.2026.09.004
+- `historical:id:ea172fb497c5e020` — **From strategic autonomy to strategic partnership: <scp>EU</scp>–India relations in health diplomacy** — attempts: 3/3 — Global Policy — 2024-11-01 — Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP. — https://doi.org/10.1111/1758-5899.13459
+- `historical:id:6212b03e377b75be` — **The paradox of semiconductors—EU governance between sovereignty and interdependence** — attempts: 3/3 — International Affairs — 2024-09-26 — Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP. — https://doi.org/10.1080/09557571.2024.2405915
+- `historical:id:40a66178c02fbfdc` — **Geopolitics and Science and Technology Cooperation in Argentina, Chile, and Colombia** — attempts: 3/3 — Science Diplomacy — 2024-08-14 — Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP. — https://doi.org/10.4018/979-8-3693-2746-3.ch006

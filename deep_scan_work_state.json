@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-deep-scan-work-state-v1",
-  "updated_at": "2026-09-17T11:59:10Z",
+  "updated_at": "2026-09-17T12:04:15Z",
   "lanes": {
     "A": {
       "target_size": 36,
@@ -36,11 +36,15 @@
         "historical:id:6cb00ecf3ea743e5",
         "historical:id:3f2d594e20ef5f2b",
         "historical:id:068ceabb6181be45",
-        "historical:id:216cf259e760105a"
+        "historical:id:216cf259e760105a",
+        "historical:id:4a0af82a0f2a2fbb",
+        "historical:id:9359de208b9e0ce9",
+        "historical:id:922a27831be9f4dd",
+        "historical:id:b6502660dc2a056b",
+        "historical:id:dbdcaae9bce57ebe"
       ],
-      "current_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "current_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "package_history": [
-        "worker-a-20260915T122029Z-e5138adad59f",
         "worker-a-20260915T122550Z-01e0307e23a4",
         "worker-a-20260915T133811Z-5a7ccdade7b5",
         "worker-a-20260915T134103Z-5a7ccdade7b5",
@@ -79,28 +83,18 @@
         "worker-a-20260917T110032Z-9c77ac8c844d",
         "worker-a-20260917T110536Z-9c77ac8c844d",
         "worker-a-20260917T111401Z-9c77ac8c844d",
-        "worker-a-20260917T115849Z-c2247c760f8c"
+        "worker-a-20260917T115849Z-c2247c760f8c",
+        "worker-a-20260917T120354Z-e4953dcbcec9"
       ]
     },
     "B": {
       "target_size": 36,
       "assigned": [
-        "historical:id:ea172fb497c5e020",
-        "historical:id:6212b03e377b75be",
-        "historical:id:40a66178c02fbfdc",
-        "historical:id:b4ea7b84e8c47191",
-        "historical:id:4a0af82a0f2a2fbb",
-        "historical:id:ef177fec64355bc6",
-        "historical:id:9359de208b9e0ce9",
-        "historical:id:922a27831be9f4dd",
-        "historical:id:b6502660dc2a056b",
-        "historical:id:dbdcaae9bce57ebe",
         "historical:id:dc302423afff77b3",
         "historical:id:61f8c22387103608"
       ],
-      "current_package_id": "worker-b-20260917T115900Z-93d5ce97efeb",
+      "current_package_id": "worker-b-20260917T120405Z-00ab8e8211b0",
       "package_history": [
-        "worker-b-20260915T122041Z-098f032d5d55",
         "worker-b-20260915T122603Z-fab36a28f3ae",
         "worker-b-20260915T133832Z-fab36a28f3ae",
         "worker-b-20260915T134119Z-d417f3359068",
@@ -139,7 +133,8 @@
         "worker-b-20260917T110044Z-c1088ee0206d",
         "worker-b-20260917T110547Z-93d5ce97efeb",
         "worker-b-20260917T111410Z-93d5ce97efeb",
-        "worker-b-20260917T115900Z-93d5ce97efeb"
+        "worker-b-20260917T115900Z-93d5ce97efeb",
+        "worker-b-20260917T120405Z-00ab8e8211b0"
       ]
     }
   },
@@ -17755,14 +17750,14 @@
       "date": "2024-11-01",
       "url": "https://doi.org/10.1111/1758-5899.13459",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "needs_manual_verification",
       "lane": "B",
       "assigned_at": "2026-09-15T08:15:24Z",
       "last_package_id": "worker-b-20260917T115900Z-93d5ce97efeb",
-      "recovery_attempts": 2,
-      "last_recovery_at": "2026-09-17T11:03:33Z",
-      "last_recovery_package_id": "worker-b-20260917T090704Z-c1088ee0206d",
-      "recovery_reason": "Identity verified; after all six recovery steps no legitimately accessible full or substantive primary text was obtained, so no admission judgement is made.",
+      "recovery_attempts": 3,
+      "last_recovery_at": "2026-09-17T12:01:16Z",
+      "last_recovery_package_id": "worker-b-20260917T111410Z-93d5ce97efeb",
+      "recovery_reason": "Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP.",
       "verification": {
         "identity_verified": true,
         "evidence_depth": "identity_only_after_recovery",
@@ -17770,36 +17765,43 @@
           {
             "step": "supplied_url",
             "outcome": "failed",
-            "note": "https://doi.org/10.1111/1758-5899.13459 -> onlinelibrary.wiley.com HTTP 403 Cloudflare challenge (scanner also recorded 403)."
+            "note": "https://doi.org/10.1111/1758-5899.13459 redirected to https://onlinelibrary.wiley.com/doi/10.1111/1758-5899.13459; publisher returned HTTP 403 to automated access, no text"
           },
           {
             "step": "doi",
             "outcome": "success",
-            "note": "Crossref: Pattanshetty, Inamdar, Poojary, Kickbusch, Brand, Global Policy, issued 2024-11; Semantic Scholar: CC BY-NC-ND hybrid OA."
+            "note": "Crossref api.crossref.org/works/10.1111/1758-5899.13459: journal-article in 'Global Policy', issued 2024-11, 5 author(s); title matches; no full text in record"
           },
           {
             "step": "exact_title",
             "outcome": "failed",
-            "note": "Crossref query.title returns this DOI as exact match."
+            "note": "CORE repository API search title:\"From strategic autonomy to strategic partnership: EU–India relations in health diplomacy\" (exact title in quotes): matching record(s) id 289541592 found but with no downloadable full text"
           },
           {
             "step": "title_author_year",
-            "outcome": "failed",
-            "note": "Crossref bibliographic query (title + Pattanshetty 2024) returns the same DOI; no alternative version."
+            "outcome": "partial",
+            "note": "Crossref query.bibliographic=title plus first-author surname: top hit 10.1111/1758-5899.13459 ('From strategic autonomy to strategic partnership: <scp>EU</s') confirms identity; no open-access link or alternative full-text version; other hits unrelated"
           },
           {
             "step": "official_publisher_or_repository",
             "outcome": "failed",
-            "note": "Maastricht University CRIS record fetched (abstract/metadata only, no file link); Wiley PDF blocked."
+            "note": "Unpaywall (2 OA location(s)) and OpenAlex location lists checked and every candidate opened: https://cris.maastrichtuniversity.nl/en/publications/38188335-886f-4051-b5c4-78d82b9b606c -> HTTP 200; no accessible full text"
           },
           {
             "step": "broader_identity_search",
             "outcome": "failed",
-            "note": "No preprint or other copy identified via Unpaywall/Semantic Scholar."
+            "note": "Deeper pass: web search with author name and 'pdf' found Manipal Impressions open-access archive record 9873 (metadata only, no download link on inspection), the Global Policy journal site summary with policy implications, and a vLex republication snippet; Maastricht CRIS author page lists the article as Open Access but exposes no file; Wiley CC BY version still blocked"
           }
         ],
-        "recovered_sources": [],
-        "verification_note": "Identity verified; OA publisher copy bot-blocked."
+        "recovered_sources": [
+          {
+            "kind": "crossref_metadata",
+            "url": "https://api.crossref.org/works/10.1111/1758-5899.13459",
+            "title": "From strategic autonomy to strategic partnership: EU–India relations in health diplomacy",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Identity verified: Global Policy, November 2024 issue, Pattanshetty, Inamdar, Poojary, Kickbusch, Brand. Open access on Wiley but Wiley returns 403; Maastricht University CRIS page yields abstract and citation only, no file reachable. Second pass found no repository or author copy with retrievable text."
       },
       "recovery_history": [
         {
@@ -17889,8 +17891,61 @@
             "recovered_sources": [],
             "verification_note": "Identity verified; OA publisher copy bot-blocked."
           }
+        },
+        {
+          "attempt": 3,
+          "package_id": "worker-b-20260917T111410Z-93d5ce97efeb",
+          "at": "2026-09-17T12:01:16Z",
+          "reason": "Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP.",
+          "verification": {
+            "identity_verified": true,
+            "evidence_depth": "identity_only_after_recovery",
+            "retrieval_attempts": [
+              {
+                "step": "supplied_url",
+                "outcome": "failed",
+                "note": "https://doi.org/10.1111/1758-5899.13459 redirected to https://onlinelibrary.wiley.com/doi/10.1111/1758-5899.13459; publisher returned HTTP 403 to automated access, no text"
+              },
+              {
+                "step": "doi",
+                "outcome": "success",
+                "note": "Crossref api.crossref.org/works/10.1111/1758-5899.13459: journal-article in 'Global Policy', issued 2024-11, 5 author(s); title matches; no full text in record"
+              },
+              {
+                "step": "exact_title",
+                "outcome": "failed",
+                "note": "CORE repository API search title:\"From strategic autonomy to strategic partnership: EU–India relations in health diplomacy\" (exact title in quotes): matching record(s) id 289541592 found but with no downloadable full text"
+              },
+              {
+                "step": "title_author_year",
+                "outcome": "partial",
+                "note": "Crossref query.bibliographic=title plus first-author surname: top hit 10.1111/1758-5899.13459 ('From strategic autonomy to strategic partnership: <scp>EU</s') confirms identity; no open-access link or alternative full-text version; other hits unrelated"
+              },
+              {
+                "step": "official_publisher_or_repository",
+                "outcome": "failed",
+                "note": "Unpaywall (2 OA location(s)) and OpenAlex location lists checked and every candidate opened: https://cris.maastrichtuniversity.nl/en/publications/38188335-886f-4051-b5c4-78d82b9b606c -> HTTP 200; no accessible full text"
+              },
+              {
+                "step": "broader_identity_search",
+                "outcome": "failed",
+                "note": "Deeper pass: web search with author name and 'pdf' found Manipal Impressions open-access archive record 9873 (metadata only, no download link on inspection), the Global Policy journal site summary with policy implications, and a vLex republication snippet; Maastricht CRIS author page lists the article as Open Access but exposes no file; Wiley CC BY version still blocked"
+              }
+            ],
+            "recovered_sources": [
+              {
+                "kind": "crossref_metadata",
+                "url": "https://api.crossref.org/works/10.1111/1758-5899.13459",
+                "title": "From strategic autonomy to strategic partnership: EU–India relations in health diplomacy",
+                "evidence_used": false
+              }
+            ],
+            "verification_note": "Identity verified: Global Policy, November 2024 issue, Pattanshetty, Inamdar, Poojary, Kickbusch, Brand. Open access on Wiley but Wiley returns 403; Maastricht University CRIS page yields abstract and citation only, no file reachable. Second pass found no repository or author copy with retrievable text."
+          }
         }
-      ]
+      ],
+      "manual_verification_since": "2026-09-17T12:01:16Z",
+      "manual_verification_reason": "Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP."
     },
     "historical:id:35b7726f3c33dbd3": {
       "title": "European Open Science Cloud - EOSC",
@@ -17924,14 +17979,14 @@
       "date": "2024-09-26",
       "url": "https://doi.org/10.1080/09557571.2024.2405915",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "needs_manual_verification",
       "lane": "B",
       "assigned_at": "2026-09-15T08:15:24Z",
       "last_package_id": "worker-b-20260917T115900Z-93d5ce97efeb",
-      "recovery_attempts": 2,
-      "last_recovery_at": "2026-09-17T11:03:34Z",
-      "last_recovery_package_id": "worker-b-20260917T090704Z-c1088ee0206d",
-      "recovery_reason": "Identity verified; after all six recovery steps no legitimately accessible full or substantive primary text was obtained, so no admission judgement is made.",
+      "recovery_attempts": 3,
+      "last_recovery_at": "2026-09-17T12:01:16Z",
+      "last_recovery_package_id": "worker-b-20260917T111410Z-93d5ce97efeb",
+      "recovery_reason": "Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP.",
       "verification": {
         "identity_verified": true,
         "evidence_depth": "identity_only_after_recovery",
@@ -17939,36 +17994,43 @@
           {
             "step": "supplied_url",
             "outcome": "failed",
-            "note": "https://doi.org/10.1080/09557571.2024.2405915 -> tandfonline.com HTTP 403 Cloudflare challenge (scanner also recorded 403)."
+            "note": "https://doi.org/10.1080/09557571.2024.2405915 redirected to https://www.tandfonline.com/doi/full/10.1080/09557571.2024.2405915; publisher returned HTTP 403 to automated access, no text"
           },
           {
             "step": "doi",
             "outcome": "success",
-            "note": "Crossref: Linda Monsees, Cambridge Review of International Affairs 38(1), online 2024-09-26; CC BY (Semantic Scholar). Scanner source \"International Affairs\" is wrong."
+            "note": "Crossref api.crossref.org/works/10.1080/09557571.2024.2405915: journal-article in 'Cambridge Review of International Affairs', issued 2024-9-26, 1 author(s); title matches; no full text in record"
           },
           {
             "step": "exact_title",
             "outcome": "failed",
-            "note": "Crossref query.title returns this DOI as exact match."
+            "note": "CORE repository API search title:\"The paradox of semiconductors—EU governance between sovereignty and interdependence\" (exact title in quotes): no matching record with a downloadable copy"
           },
           {
             "step": "title_author_year",
-            "outcome": "failed",
-            "note": "Crossref bibliographic query (title + Monsees 2024) returns the same DOI; no alternative version."
+            "outcome": "partial",
+            "note": "Crossref query.bibliographic=title plus first-author surname: top hit 10.1080/09557571.2024.2405915 ('The paradox of semiconductors—EU governance between sovereig') confirms identity; no open-access link or alternative full-text version; other hits unrelated"
           },
           {
             "step": "official_publisher_or_repository",
             "outcome": "failed",
-            "note": "Unpaywall/OpenAlex list only tandfonline PDF (403)."
+            "note": "Unpaywall (1 OA location(s)) and OpenAlex location lists checked and every candidate opened: https://www.tandfonline.com/doi/pdf/10.1080/09557571.2024.2405915?needAccess=true -> HTTP 403; no accessible full text"
           },
           {
             "step": "broader_identity_search",
             "outcome": "failed",
-            "note": "No repository or preprint copy identified."
+            "note": "Semantic Scholar DOI lookup (openAccessPdf: https://doi.org/10.1080/09557571.2024.2405915) and Europe PMC DOI search (no PMC full text) gave no further legitimate copy; CORE doi:\"10.1080/09557571.2024.2405915\" search likewise without downloadable text"
           }
         ],
-        "recovered_sources": [],
-        "verification_note": "Identity verified; OA article bot-blocked."
+        "recovered_sources": [
+          {
+            "kind": "crossref_metadata",
+            "url": "https://api.crossref.org/works/10.1080/09557571.2024.2405915",
+            "title": "The paradox of semiconductors—EU governance between sovereignty and interdependence",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Identity verified via Crossref: the journal is Cambridge Review of International Affairs (online 26 Sep 2024), not 'International Affairs' as the scanner states; sole author Linda Monsees. Open access on T&F, which blocks automated access (403)."
       },
       "recovery_history": [
         {
@@ -18058,8 +18120,61 @@
             "recovered_sources": [],
             "verification_note": "Identity verified; OA article bot-blocked."
           }
+        },
+        {
+          "attempt": 3,
+          "package_id": "worker-b-20260917T111410Z-93d5ce97efeb",
+          "at": "2026-09-17T12:01:16Z",
+          "reason": "Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP.",
+          "verification": {
+            "identity_verified": true,
+            "evidence_depth": "identity_only_after_recovery",
+            "retrieval_attempts": [
+              {
+                "step": "supplied_url",
+                "outcome": "failed",
+                "note": "https://doi.org/10.1080/09557571.2024.2405915 redirected to https://www.tandfonline.com/doi/full/10.1080/09557571.2024.2405915; publisher returned HTTP 403 to automated access, no text"
+              },
+              {
+                "step": "doi",
+                "outcome": "success",
+                "note": "Crossref api.crossref.org/works/10.1080/09557571.2024.2405915: journal-article in 'Cambridge Review of International Affairs', issued 2024-9-26, 1 author(s); title matches; no full text in record"
+              },
+              {
+                "step": "exact_title",
+                "outcome": "failed",
+                "note": "CORE repository API search title:\"The paradox of semiconductors—EU governance between sovereignty and interdependence\" (exact title in quotes): no matching record with a downloadable copy"
+              },
+              {
+                "step": "title_author_year",
+                "outcome": "partial",
+                "note": "Crossref query.bibliographic=title plus first-author surname: top hit 10.1080/09557571.2024.2405915 ('The paradox of semiconductors—EU governance between sovereig') confirms identity; no open-access link or alternative full-text version; other hits unrelated"
+              },
+              {
+                "step": "official_publisher_or_repository",
+                "outcome": "failed",
+                "note": "Unpaywall (1 OA location(s)) and OpenAlex location lists checked and every candidate opened: https://www.tandfonline.com/doi/pdf/10.1080/09557571.2024.2405915?needAccess=true -> HTTP 403; no accessible full text"
+              },
+              {
+                "step": "broader_identity_search",
+                "outcome": "failed",
+                "note": "Semantic Scholar DOI lookup (openAccessPdf: https://doi.org/10.1080/09557571.2024.2405915) and Europe PMC DOI search (no PMC full text) gave no further legitimate copy; CORE doi:\"10.1080/09557571.2024.2405915\" search likewise without downloadable text"
+              }
+            ],
+            "recovered_sources": [
+              {
+                "kind": "crossref_metadata",
+                "url": "https://api.crossref.org/works/10.1080/09557571.2024.2405915",
+                "title": "The paradox of semiconductors—EU governance between sovereignty and interdependence",
+                "evidence_used": false
+              }
+            ],
+            "verification_note": "Identity verified via Crossref: the journal is Cambridge Review of International Affairs (online 26 Sep 2024), not 'International Affairs' as the scanner states; sole author Linda Monsees. Open access on T&F, which blocks automated access (403)."
+          }
         }
-      ]
+      ],
+      "manual_verification_since": "2026-09-17T12:01:16Z",
+      "manual_verification_reason": "Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP."
     },
     "historical:id:50d118a3a332ccb5": {
       "title": "Competing ambitions regarding the global governance of artificial intelligence: China, the US , and the EU",
@@ -18282,51 +18397,58 @@
       "date": "2024-08-14",
       "url": "https://doi.org/10.4018/979-8-3693-2746-3.ch006",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "needs_manual_verification",
       "lane": "B",
       "assigned_at": "2026-09-15T11:24:36Z",
       "last_package_id": "worker-b-20260917T115900Z-93d5ce97efeb",
-      "recovery_attempts": 2,
-      "last_recovery_at": "2026-09-17T11:03:34Z",
-      "last_recovery_package_id": "worker-b-20260917T090704Z-c1088ee0206d",
-      "recovery_reason": "Identity verified; after all six recovery steps no legitimately accessible full or substantive primary text was obtained, so no admission judgement is made.",
+      "recovery_attempts": 3,
+      "last_recovery_at": "2026-09-17T12:01:16Z",
+      "last_recovery_package_id": "worker-b-20260917T111410Z-93d5ce97efeb",
+      "recovery_reason": "Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP.",
       "verification": {
         "identity_verified": true,
         "evidence_depth": "identity_only_after_recovery",
         "retrieval_attempts": [
           {
             "step": "supplied_url",
-            "outcome": "failed",
-            "note": "https://doi.org/10.4018/979-8-3693-2746-3.ch006 -> IGI Global; scanner recorded 429 Too Many Requests; chapter is paywalled."
+            "outcome": "partial",
+            "note": "https://doi.org/10.4018/979-8-3693-2746-3.ch006 resolved to https://services.igi-global.com/resolvedoi/resolve.aspx?doi=10.4018/979-8-3693-2746-3.ch006 (HTTP 429); page offers only the abstract/landing content ('preview of subscription content'), no full text"
           },
           {
             "step": "doi",
             "outcome": "success",
-            "note": "Crossref: Prieto, Vera, Guglielminotti, chapter in Developments and Approaches in Science Diplomacy (IGI Global), 2024-08-14."
+            "note": "Crossref api.crossref.org/works/10.4018/979-8-3693-2746-3.ch006: book-chapter in 'Developments and Approaches in Science Diplomacy', issued 2024-8-14, 3 author(s); title matches; no full text in record"
           },
           {
             "step": "exact_title",
             "outcome": "failed",
-            "note": "Crossref query.title returns this DOI as exact match."
+            "note": "CORE repository API search title:\"Geopolitics and Science and Technology Cooperation in Argentina, Chile, and Colombia\" (exact title in quotes): no matching record with a downloadable copy"
           },
           {
             "step": "title_author_year",
-            "outcome": "failed",
-            "note": "Crossref bibliographic query (title + Prieto 2024) returns the same DOI; no alternative version."
+            "outcome": "partial",
+            "note": "Crossref query.bibliographic=title plus first-author surname: top hit 10.4018/979-8-3693-2746-3.ch006 ('Geopolitics and Science and Technology Cooperation in Argent') confirms identity; no open-access link or alternative full-text version; other hits unrelated"
           },
           {
             "step": "official_publisher_or_repository",
             "outcome": "failed",
-            "note": "Unpaywall/OpenAlex closed; no repository."
+            "note": "Unpaywall (0 OA location(s)) and OpenAlex location lists checked and every candidate opened: none listed; no accessible full text"
           },
           {
             "step": "broader_identity_search",
             "outcome": "failed",
-            "note": "No author copy found via Semantic Scholar."
+            "note": "Semantic Scholar DOI lookup (openAccessPdf: none) and Europe PMC DOI search (no PMC full text) gave no further legitimate copy; CORE doi:\"10.4018/979-8-3693-2746-3.ch006\" search likewise without downloadable text"
           }
         ],
-        "recovered_sources": [],
-        "verification_note": "Identity verified (source is an IGI Global edited book); paywalled."
+        "recovered_sources": [
+          {
+            "kind": "crossref_metadata",
+            "url": "https://api.crossref.org/works/10.4018/979-8-3693-2746-3.ch006",
+            "title": "Geopolitics and Science and Technology Cooperation in Argentina, Chile, and Colombia",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Identity verified: chapter in IGI Global 'Developments and Approaches in Science Diplomacy' (2024), Prieto, Vera, Guglielminotti. IGI resolver returned HTTP 429; the chapter is paywalled and no OA copy exists."
       },
       "recovery_history": [
         {
@@ -18416,8 +18538,61 @@
             "recovered_sources": [],
             "verification_note": "Identity verified (source is an IGI Global edited book); paywalled."
           }
+        },
+        {
+          "attempt": 3,
+          "package_id": "worker-b-20260917T111410Z-93d5ce97efeb",
+          "at": "2026-09-17T12:01:16Z",
+          "reason": "Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP.",
+          "verification": {
+            "identity_verified": true,
+            "evidence_depth": "identity_only_after_recovery",
+            "retrieval_attempts": [
+              {
+                "step": "supplied_url",
+                "outcome": "partial",
+                "note": "https://doi.org/10.4018/979-8-3693-2746-3.ch006 resolved to https://services.igi-global.com/resolvedoi/resolve.aspx?doi=10.4018/979-8-3693-2746-3.ch006 (HTTP 429); page offers only the abstract/landing content ('preview of subscription content'), no full text"
+              },
+              {
+                "step": "doi",
+                "outcome": "success",
+                "note": "Crossref api.crossref.org/works/10.4018/979-8-3693-2746-3.ch006: book-chapter in 'Developments and Approaches in Science Diplomacy', issued 2024-8-14, 3 author(s); title matches; no full text in record"
+              },
+              {
+                "step": "exact_title",
+                "outcome": "failed",
+                "note": "CORE repository API search title:\"Geopolitics and Science and Technology Cooperation in Argentina, Chile, and Colombia\" (exact title in quotes): no matching record with a downloadable copy"
+              },
+              {
+                "step": "title_author_year",
+                "outcome": "partial",
+                "note": "Crossref query.bibliographic=title plus first-author surname: top hit 10.4018/979-8-3693-2746-3.ch006 ('Geopolitics and Science and Technology Cooperation in Argent') confirms identity; no open-access link or alternative full-text version; other hits unrelated"
+              },
+              {
+                "step": "official_publisher_or_repository",
+                "outcome": "failed",
+                "note": "Unpaywall (0 OA location(s)) and OpenAlex location lists checked and every candidate opened: none listed; no accessible full text"
+              },
+              {
+                "step": "broader_identity_search",
+                "outcome": "failed",
+                "note": "Semantic Scholar DOI lookup (openAccessPdf: none) and Europe PMC DOI search (no PMC full text) gave no further legitimate copy; CORE doi:\"10.4018/979-8-3693-2746-3.ch006\" search likewise without downloadable text"
+              }
+            ],
+            "recovered_sources": [
+              {
+                "kind": "crossref_metadata",
+                "url": "https://api.crossref.org/works/10.4018/979-8-3693-2746-3.ch006",
+                "title": "Geopolitics and Science and Technology Cooperation in Argentina, Chile, and Colombia",
+                "evidence_used": false
+              }
+            ],
+            "verification_note": "Identity verified: chapter in IGI Global 'Developments and Approaches in Science Diplomacy' (2024), Prieto, Vera, Guglielminotti. IGI resolver returned HTTP 429; the chapter is paywalled and no OA copy exists."
+          }
         }
-      ]
+      ],
+      "manual_verification_since": "2026-09-17T12:01:16Z",
+      "manual_verification_reason": "Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP."
     },
     "historical:id:fcf75bcc2f08bcb7": {
       "title": "Anhui leads in China's quantum research and policies",
@@ -18454,7 +18629,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-15T11:24:36Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 2,
       "last_recovery_at": "2026-09-17T10:57:58Z",
       "last_recovery_package_id": "worker-a-20260917T090649Z-5d29b20d76c3",
@@ -18610,7 +18785,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-15T11:24:36Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 2,
       "last_recovery_at": "2026-09-17T10:57:58Z",
       "last_recovery_package_id": "worker-a-20260917T090649Z-5d29b20d76c3",
@@ -20002,7 +20177,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T07:29:16Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 2,
       "last_recovery_at": "2026-09-17T10:57:59Z",
       "last_recovery_package_id": "worker-a-20260917T090649Z-5d29b20d76c3",
@@ -20145,7 +20320,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T07:29:16Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 2,
       "last_recovery_at": "2026-09-17T10:57:59Z",
       "last_recovery_package_id": "worker-a-20260917T090649Z-5d29b20d76c3",
@@ -20288,7 +20463,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T07:29:16Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 2,
       "last_recovery_at": "2026-09-17T10:57:59Z",
       "last_recovery_package_id": "worker-a-20260917T090649Z-5d29b20d76c3",
@@ -20717,7 +20892,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T07:32:53Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 2,
       "last_recovery_at": "2026-09-17T10:57:59Z",
       "last_recovery_package_id": "worker-a-20260917T090649Z-5d29b20d76c3",
@@ -21029,7 +21204,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T07:32:53Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 2,
       "last_recovery_at": "2026-09-17T10:57:59Z",
       "last_recovery_package_id": "worker-a-20260917T090649Z-5d29b20d76c3",
@@ -21172,7 +21347,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T07:32:53Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 2,
       "last_recovery_at": "2026-09-17T10:57:59Z",
       "last_recovery_package_id": "worker-a-20260917T090649Z-5d29b20d76c3",
@@ -22472,7 +22647,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T10:15:19Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 2,
       "last_recovery_at": "2026-09-17T10:57:59Z",
       "last_recovery_package_id": "worker-a-20260917T090649Z-5d29b20d76c3",
@@ -22885,7 +23060,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T10:15:19Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 2,
       "last_recovery_at": "2026-09-17T10:58:00Z",
       "last_recovery_package_id": "worker-a-20260917T090649Z-5d29b20d76c3",
@@ -23142,7 +23317,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T10:15:19Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 2,
       "last_recovery_at": "2026-09-17T10:58:00Z",
       "last_recovery_package_id": "worker-a-20260917T090649Z-5d29b20d76c3",
@@ -23620,7 +23795,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T10:17:39Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 2,
       "last_recovery_at": "2026-09-17T10:58:00Z",
       "last_recovery_package_id": "worker-a-20260917T090649Z-5d29b20d76c3",
@@ -24131,7 +24306,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T10:19:18Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 2,
       "last_recovery_at": "2026-09-17T10:58:00Z",
       "last_recovery_package_id": "worker-a-20260917T090649Z-5d29b20d76c3",
@@ -24443,7 +24618,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T11:12:11Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 2,
       "last_recovery_at": "2026-09-17T10:58:00Z",
       "last_recovery_package_id": "worker-a-20260917T090649Z-5d29b20d76c3",
@@ -24697,7 +24872,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T11:12:11Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 2,
       "last_recovery_at": "2026-09-17T10:58:00Z",
       "last_recovery_package_id": "worker-a-20260917T090649Z-5d29b20d76c3",
@@ -24912,7 +25087,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T11:12:11Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 2,
       "last_recovery_at": "2026-09-17T10:58:00Z",
       "last_recovery_package_id": "worker-a-20260917T090649Z-5d29b20d76c3",
@@ -25333,7 +25508,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T11:18:59Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 1,
       "last_recovery_at": "2026-09-16T11:56:54Z",
       "last_recovery_package_id": "worker-b-20260916T111859Z-7e67cb37e8b4",
@@ -25459,7 +25634,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T11:18:59Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 1,
       "last_recovery_at": "2026-09-16T11:56:54Z",
       "last_recovery_package_id": "worker-b-20260916T111859Z-7e67cb37e8b4",
@@ -25572,7 +25747,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T11:18:59Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 1,
       "last_recovery_at": "2026-09-16T11:56:54Z",
       "last_recovery_package_id": "worker-b-20260916T111859Z-7e67cb37e8b4",
@@ -25724,7 +25899,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T11:18:59Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 1,
       "last_recovery_at": "2026-09-16T11:56:55Z",
       "last_recovery_package_id": "worker-b-20260916T111859Z-7e67cb37e8b4",
@@ -25850,7 +26025,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T11:18:59Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 1,
       "last_recovery_at": "2026-09-16T11:56:55Z",
       "last_recovery_package_id": "worker-b-20260916T111859Z-7e67cb37e8b4",
@@ -25989,7 +26164,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T11:18:59Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 1,
       "last_recovery_at": "2026-09-16T11:56:55Z",
       "last_recovery_package_id": "worker-b-20260916T111859Z-7e67cb37e8b4",
@@ -26102,7 +26277,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T11:18:59Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 1,
       "last_recovery_at": "2026-09-16T11:56:55Z",
       "last_recovery_package_id": "worker-b-20260916T111859Z-7e67cb37e8b4",
@@ -26254,7 +26429,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T11:18:59Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 1,
       "last_recovery_at": "2026-09-16T11:56:55Z",
       "last_recovery_package_id": "worker-b-20260916T111859Z-7e67cb37e8b4",
@@ -26406,7 +26581,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T11:18:59Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 1,
       "last_recovery_at": "2026-09-16T11:56:56Z",
       "last_recovery_package_id": "worker-b-20260916T111859Z-7e67cb37e8b4",
@@ -26909,7 +27084,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T11:59:13Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 1,
       "last_recovery_at": "2026-09-16T18:09:14Z",
       "last_recovery_package_id": "worker-b-20260916T173450Z-cdb99e64487d",
@@ -27021,7 +27196,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T11:59:13Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 1,
       "last_recovery_at": "2026-09-16T18:09:14Z",
       "last_recovery_package_id": "worker-b-20260916T173450Z-cdb99e64487d",
@@ -27185,7 +27360,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T11:59:13Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 1,
       "last_recovery_at": "2026-09-16T18:09:14Z",
       "last_recovery_package_id": "worker-b-20260916T173450Z-cdb99e64487d",
@@ -27284,7 +27459,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-16T11:59:13Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 1,
       "last_recovery_at": "2026-09-16T18:09:14Z",
       "last_recovery_package_id": "worker-b-20260916T173450Z-cdb99e64487d",
@@ -27432,7 +27607,7 @@
       "date": "2018-01-01",
       "url": "https://doi.org/10.22394/2070-8378-2018-20-1-84-89",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "B",
       "assigned_at": "2026-09-16T11:59:13Z",
       "last_package_id": "worker-b-20260917T115900Z-93d5ce97efeb",
@@ -27523,7 +27698,9 @@
             "verification_note": "Identity verified (Crossref DOI; SSOAR deposit listing). Journal site DNS failed and SSOAR full text sits behind a bot challenge."
           }
         }
-      ]
+      ],
+      "verified_at": "2026-09-17T12:01:16Z",
+      "verified_package_id": "worker-b-20260917T111410Z-93d5ce97efeb"
     },
     "historical:id:67726cf80fe23fc9": {
       "title": "Sweden AI Strategy Report",
@@ -27622,7 +27799,7 @@
       "date": "2018-01-01",
       "url": "https://www.institutmontaigne.org/en/expressions/europe-and-digital-single-market-what-next",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "B",
       "assigned_at": "2026-09-16T11:59:13Z",
       "last_package_id": "worker-b-20260917T115900Z-93d5ce97efeb",
@@ -27713,7 +27890,9 @@
             "verification_note": "Identity verified via Institut Montaigne site listing; page body returns 403 to all retrieval routes."
           }
         }
-      ]
+      ],
+      "verified_at": "2026-09-17T12:01:17Z",
+      "verified_package_id": "worker-b-20260917T111410Z-93d5ce97efeb"
     },
     "historical:id:b7da5c0eddee6553": {
       "title": "EU Research and Technology Policy: Balancing Between the National and the EU Dimension",
@@ -27969,13 +28148,13 @@
       "url": "https://doi.org/10.1177/0963662515616552",
       "corpus_scope": "historical",
       "status": "assigned",
-      "lane": "B",
+      "lane": "A",
       "assigned_at": "2026-09-16T17:34:50Z",
-      "last_package_id": "worker-b-20260917T115900Z-93d5ce97efeb",
-      "recovery_attempts": 1,
-      "last_recovery_at": "2026-09-17T11:03:32Z",
-      "last_recovery_package_id": "worker-b-20260917T090704Z-c1088ee0206d",
-      "recovery_reason": "Identity verified; after all six recovery steps no legitimately accessible full or substantive primary text was obtained, so no admission judgement is made.",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
+      "recovery_attempts": 2,
+      "last_recovery_at": "2026-09-17T12:01:17Z",
+      "last_recovery_package_id": "worker-b-20260917T111410Z-93d5ce97efeb",
+      "recovery_reason": "Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP.",
       "verification": {
         "identity_verified": true,
         "evidence_depth": "identity_only_after_recovery",
@@ -27983,36 +28162,43 @@
           {
             "step": "supplied_url",
             "outcome": "failed",
-            "note": "https://doi.org/10.1177/0963662515616552 -> journals.sagepub.com HTTP 403 Cloudflare challenge (scanner also recorded 403)."
+            "note": "https://doi.org/10.1177/0963662515616552 redirected to https://journals.sagepub.com/doi/10.1177/0963662515616552; publisher returned HTTP 403 to automated access, no text"
           },
           {
             "step": "doi",
             "outcome": "success",
-            "note": "Crossref: Birte Fähnrich, Public Understanding of Science 26(6), online 2016-11-21, print 2017-08."
+            "note": "Crossref api.crossref.org/works/10.1177/0963662515616552: journal-article in 'Public Understanding of Science', issued 2016-11-21, 1 author(s); title matches; no full text in record"
           },
           {
             "step": "exact_title",
             "outcome": "failed",
-            "note": "Crossref query.title returns this DOI as exact match."
+            "note": "CORE repository API search title:\"Science diplomacy: Investigating the perspective of scholars on politics–science collaboration in international affairs\" (exact title in quotes): matching record(s) id 11325754 found but with no downloadable full text"
           },
           {
             "step": "title_author_year",
-            "outcome": "failed",
-            "note": "Crossref bibliographic query (title + Fähnrich 2017) returns the same DOI; no alternative version."
+            "outcome": "partial",
+            "note": "Crossref query.bibliographic=title plus first-author surname: top hit 10.1177/0963662515616552 ('Science diplomacy: Investigating the perspective of scholars') confirms identity; no open-access link or alternative full-text version; other hits unrelated"
           },
           {
             "step": "official_publisher_or_repository",
             "outcome": "failed",
-            "note": "Unpaywall/OpenAlex closed; PubMed 26721551 gives citation only; Europe PMC not open access."
+            "note": "Unpaywall (0 OA location(s)) and OpenAlex location lists checked and every candidate opened: https://pubmed.ncbi.nlm.nih.gov/26721551 -> HTTP 200; no accessible full text"
           },
           {
             "step": "broader_identity_search",
             "outcome": "failed",
-            "note": "Semantic Scholar marks closed; no author repository copy identified."
+            "note": "Semantic Scholar DOI lookup (openAccessPdf: none) and Europe PMC DOI search (no PMC full text) gave no further legitimate copy; CORE doi:\"10.1177/0963662515616552\" search likewise without downloadable text"
           }
         ],
-        "recovered_sources": [],
-        "verification_note": "Identity verified; paywalled."
+        "recovered_sources": [
+          {
+            "kind": "crossref_metadata",
+            "url": "https://api.crossref.org/works/10.1177/0963662515616552",
+            "title": "Science diplomacy: Investigating the perspective of scholars on politics–science collaboration in international affairs",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Identity verified: Public Understanding of Science 26(6) (online 21 Nov 2016, issue 2017), sole author Birte Fähnrich. SAGE 403; PubMed 26721551 gives only the abstract; no PMC copy."
       },
       "recovery_history": [
         {
@@ -28057,6 +28243,57 @@
             ],
             "recovered_sources": [],
             "verification_note": "Identity verified; paywalled."
+          }
+        },
+        {
+          "attempt": 2,
+          "package_id": "worker-b-20260917T111410Z-93d5ce97efeb",
+          "at": "2026-09-17T12:01:17Z",
+          "reason": "Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP.",
+          "verification": {
+            "identity_verified": true,
+            "evidence_depth": "identity_only_after_recovery",
+            "retrieval_attempts": [
+              {
+                "step": "supplied_url",
+                "outcome": "failed",
+                "note": "https://doi.org/10.1177/0963662515616552 redirected to https://journals.sagepub.com/doi/10.1177/0963662515616552; publisher returned HTTP 403 to automated access, no text"
+              },
+              {
+                "step": "doi",
+                "outcome": "success",
+                "note": "Crossref api.crossref.org/works/10.1177/0963662515616552: journal-article in 'Public Understanding of Science', issued 2016-11-21, 1 author(s); title matches; no full text in record"
+              },
+              {
+                "step": "exact_title",
+                "outcome": "failed",
+                "note": "CORE repository API search title:\"Science diplomacy: Investigating the perspective of scholars on politics–science collaboration in international affairs\" (exact title in quotes): matching record(s) id 11325754 found but with no downloadable full text"
+              },
+              {
+                "step": "title_author_year",
+                "outcome": "partial",
+                "note": "Crossref query.bibliographic=title plus first-author surname: top hit 10.1177/0963662515616552 ('Science diplomacy: Investigating the perspective of scholars') confirms identity; no open-access link or alternative full-text version; other hits unrelated"
+              },
+              {
+                "step": "official_publisher_or_repository",
+                "outcome": "failed",
+                "note": "Unpaywall (0 OA location(s)) and OpenAlex location lists checked and every candidate opened: https://pubmed.ncbi.nlm.nih.gov/26721551 -> HTTP 200; no accessible full text"
+              },
+              {
+                "step": "broader_identity_search",
+                "outcome": "failed",
+                "note": "Semantic Scholar DOI lookup (openAccessPdf: none) and Europe PMC DOI search (no PMC full text) gave no further legitimate copy; CORE doi:\"10.1177/0963662515616552\" search likewise without downloadable text"
+              }
+            ],
+            "recovered_sources": [
+              {
+                "kind": "crossref_metadata",
+                "url": "https://api.crossref.org/works/10.1177/0963662515616552",
+                "title": "Science diplomacy: Investigating the perspective of scholars on politics–science collaboration in international affairs",
+                "evidence_used": false
+              }
+            ],
+            "verification_note": "Identity verified: Public Understanding of Science 26(6) (online 21 Nov 2016, issue 2017), sole author Birte Fähnrich. SAGE 403; PubMed 26721551 gives only the abstract; no PMC copy."
           }
         }
       ]
@@ -28159,13 +28396,13 @@
       "url": "https://doi.org/10.1108/fs-07-2016-0034",
       "corpus_scope": "historical",
       "status": "assigned",
-      "lane": "B",
+      "lane": "A",
       "assigned_at": "2026-09-16T17:34:50Z",
-      "last_package_id": "worker-b-20260917T115900Z-93d5ce97efeb",
-      "recovery_attempts": 1,
-      "last_recovery_at": "2026-09-17T11:03:33Z",
-      "last_recovery_package_id": "worker-b-20260917T090704Z-c1088ee0206d",
-      "recovery_reason": "Identity verified; after all six recovery steps no legitimately accessible full or substantive primary text was obtained, so no admission judgement is made.",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
+      "recovery_attempts": 2,
+      "last_recovery_at": "2026-09-17T12:01:17Z",
+      "last_recovery_package_id": "worker-b-20260917T111410Z-93d5ce97efeb",
+      "recovery_reason": "Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP.",
       "verification": {
         "identity_verified": true,
         "evidence_depth": "identity_only_after_recovery",
@@ -28173,36 +28410,43 @@
           {
             "step": "supplied_url",
             "outcome": "failed",
-            "note": "https://doi.org/10.1108/fs-07-2016-0034 -> emerald.com HTTP 403 Cloudflare challenge (scanner also recorded 403)."
+            "note": "https://doi.org/10.1108/fs-07-2016-0034 redirected to https://www.emerald.com/fs/article/19/2/139-151/80965; publisher returned HTTP 403 to automated access, no text"
           },
           {
             "step": "doi",
             "outcome": "success",
-            "note": "Crossref: Liliana Proskuryakova, foresight (Emerald) 19(2), issued 2017-04-10."
+            "note": "Crossref api.crossref.org/works/10.1108/fs-07-2016-0034: journal-article in 'foresight', issued 2017-4-10, 1 author(s); title matches; no full text in record"
           },
           {
             "step": "exact_title",
             "outcome": "failed",
-            "note": "Crossref query.title returns this DOI as exact match; related distinct paper 10.1016/j.egypro.2015.07.550 not substituted."
+            "note": "CORE repository API search title:\"Russia’s energy in 2030: future trends and technology priorities\" (exact title in quotes): no matching record with a downloadable copy"
           },
           {
             "step": "title_author_year",
-            "outcome": "failed",
-            "note": "Crossref bibliographic query (title + Proskuryakova 2017) returns the same DOI; no alternative version."
+            "outcome": "partial",
+            "note": "Crossref query.bibliographic=title plus first-author surname: top hit 10.1108/fs-07-2016-0034 ('Russia’s energy in 2030: future trends and technology priori') confirms identity; no open-access link or alternative full-text version; other hits unrelated"
           },
           {
             "step": "official_publisher_or_repository",
             "outcome": "failed",
-            "note": "Unpaywall/OpenAlex closed; Semantic Scholar closed."
+            "note": "Unpaywall (0 OA location(s)) and OpenAlex location lists checked and every candidate opened: none listed; no accessible full text"
           },
           {
             "step": "broader_identity_search",
             "outcome": "failed",
-            "note": "Checked related HSE working papers surfaced by Crossref (SSRN 2809660, different title); no copy of this article."
+            "note": "Semantic Scholar DOI lookup (openAccessPdf: none) and Europe PMC DOI search (no PMC full text) gave no further legitimate copy; CORE doi:\"10.1108/fs-07-2016-0034\" search likewise without downloadable text"
           }
         ],
-        "recovered_sources": [],
-        "verification_note": "Identity verified; paywalled."
+        "recovered_sources": [
+          {
+            "kind": "crossref_metadata",
+            "url": "https://api.crossref.org/works/10.1108/fs-07-2016-0034",
+            "title": "Russia’s energy in 2030: future trends and technology priorities",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Identity verified: foresight (Emerald) 19(2) 2017, sole author Liliana Proskuryakova (HSE Moscow). Emerald 403; no OA copy."
       },
       "recovery_history": [
         {
@@ -28247,6 +28491,57 @@
             ],
             "recovered_sources": [],
             "verification_note": "Identity verified; paywalled."
+          }
+        },
+        {
+          "attempt": 2,
+          "package_id": "worker-b-20260917T111410Z-93d5ce97efeb",
+          "at": "2026-09-17T12:01:17Z",
+          "reason": "Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP.",
+          "verification": {
+            "identity_verified": true,
+            "evidence_depth": "identity_only_after_recovery",
+            "retrieval_attempts": [
+              {
+                "step": "supplied_url",
+                "outcome": "failed",
+                "note": "https://doi.org/10.1108/fs-07-2016-0034 redirected to https://www.emerald.com/fs/article/19/2/139-151/80965; publisher returned HTTP 403 to automated access, no text"
+              },
+              {
+                "step": "doi",
+                "outcome": "success",
+                "note": "Crossref api.crossref.org/works/10.1108/fs-07-2016-0034: journal-article in 'foresight', issued 2017-4-10, 1 author(s); title matches; no full text in record"
+              },
+              {
+                "step": "exact_title",
+                "outcome": "failed",
+                "note": "CORE repository API search title:\"Russia’s energy in 2030: future trends and technology priorities\" (exact title in quotes): no matching record with a downloadable copy"
+              },
+              {
+                "step": "title_author_year",
+                "outcome": "partial",
+                "note": "Crossref query.bibliographic=title plus first-author surname: top hit 10.1108/fs-07-2016-0034 ('Russia’s energy in 2030: future trends and technology priori') confirms identity; no open-access link or alternative full-text version; other hits unrelated"
+              },
+              {
+                "step": "official_publisher_or_repository",
+                "outcome": "failed",
+                "note": "Unpaywall (0 OA location(s)) and OpenAlex location lists checked and every candidate opened: none listed; no accessible full text"
+              },
+              {
+                "step": "broader_identity_search",
+                "outcome": "failed",
+                "note": "Semantic Scholar DOI lookup (openAccessPdf: none) and Europe PMC DOI search (no PMC full text) gave no further legitimate copy; CORE doi:\"10.1108/fs-07-2016-0034\" search likewise without downloadable text"
+              }
+            ],
+            "recovered_sources": [
+              {
+                "kind": "crossref_metadata",
+                "url": "https://api.crossref.org/works/10.1108/fs-07-2016-0034",
+                "title": "Russia’s energy in 2030: future trends and technology priorities",
+                "evidence_used": false
+              }
+            ],
+            "verification_note": "Identity verified: foresight (Emerald) 19(2) 2017, sole author Liliana Proskuryakova (HSE Moscow). Emerald 403; no OA copy."
           }
         }
       ]
@@ -28336,50 +28631,57 @@
       "url": "https://doi.org/10.1007/978-3-319-54112-9_8",
       "corpus_scope": "historical",
       "status": "assigned",
-      "lane": "B",
+      "lane": "A",
       "assigned_at": "2026-09-16T17:34:50Z",
-      "last_package_id": "worker-b-20260917T115900Z-93d5ce97efeb",
-      "recovery_attempts": 1,
-      "last_recovery_at": "2026-09-17T11:03:33Z",
-      "last_recovery_package_id": "worker-b-20260917T090704Z-c1088ee0206d",
-      "recovery_reason": "Identity verified; after all six recovery steps no legitimately accessible full or substantive primary text was obtained, so no admission judgement is made.",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
+      "recovery_attempts": 2,
+      "last_recovery_at": "2026-09-17T12:01:17Z",
+      "last_recovery_package_id": "worker-b-20260917T111410Z-93d5ce97efeb",
+      "recovery_reason": "Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP.",
       "verification": {
         "identity_verified": true,
         "evidence_depth": "identity_only_after_recovery",
         "retrieval_attempts": [
           {
             "step": "supplied_url",
-            "outcome": "failed",
-            "note": "https://doi.org/10.1007/978-3-319-54112-9_8 -> Springer chapter page: abstract and references only."
+            "outcome": "partial",
+            "note": "https://doi.org/10.1007/978-3-319-54112-9_8 resolved to https://link.springer.com/chapter/10.1007/978-3-319-54112-9_8 (HTTP 200); page offers only the abstract/landing content ('preview of subscription content'), no full text"
           },
           {
             "step": "doi",
             "outcome": "success",
-            "note": "Crossref: Claudia Dobre, chapter in Regional Studies on Economic Growth, Financial Economics and Management (Eurasian Studies in Business and Economics vol 7), Springer 2017."
+            "note": "Crossref api.crossref.org/works/10.1007/978-3-319-54112-9_8: book-chapter in 'Regional Studies on Economic Growth, Financial Economics and Management', issued 2017, 1 author(s); title matches; no full text in record"
           },
           {
             "step": "exact_title",
             "outcome": "failed",
-            "note": "Crossref query.title returns this DOI as exact match."
+            "note": "CORE repository API search title:\"Aeronautical Excellence Through European Strategic Partnerships\" (exact title in quotes): matching record(s) id 267272768 found but with no downloadable full text"
           },
           {
             "step": "title_author_year",
-            "outcome": "failed",
-            "note": "Crossref bibliographic query (title + Dobre 2017) returns the same DOI; no alternative version."
+            "outcome": "partial",
+            "note": "Crossref query.bibliographic=title plus first-author surname: top hit 10.1007/978-3-319-54112-9_8 ('Aeronautical Excellence Through European Strategic Partnersh') confirms identity; no open-access link or alternative full-text version; other hits unrelated"
           },
           {
             "step": "official_publisher_or_repository",
             "outcome": "failed",
-            "note": "Unpaywall/OpenAlex closed; Semantic Scholar closed."
+            "note": "Unpaywall (0 OA location(s)) and OpenAlex location lists checked and every candidate opened: none listed; no accessible full text"
           },
           {
             "step": "broader_identity_search",
             "outcome": "failed",
-            "note": "No conference-proceedings (EBES) or author copy identified."
+            "note": "Semantic Scholar DOI lookup (openAccessPdf: none) and Europe PMC DOI search (no PMC full text) gave no further legitimate copy; CORE doi:\"10.1007/978-3-319-54112-9_8\" search likewise without downloadable text"
           }
         ],
-        "recovered_sources": [],
-        "verification_note": "Identity verified (note: source is a Springer proceedings volume, not Regional Studies journal); paywalled."
+        "recovered_sources": [
+          {
+            "kind": "crossref_metadata",
+            "url": "https://api.crossref.org/works/10.1007/978-3-319-54112-9_8",
+            "title": "Aeronautical Excellence Through European Strategic Partnerships",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Identity verified: chapter in Springer 'Regional Studies on Economic Growth, Financial Economics and Management' (Eurasian Studies in Business and Economics series, 2017), sole author Claudia Dobre; not the journal Regional Studies. Only the chapter preview is accessible."
       },
       "recovery_history": [
         {
@@ -28425,6 +28727,57 @@
             "recovered_sources": [],
             "verification_note": "Identity verified (note: source is a Springer proceedings volume, not Regional Studies journal); paywalled."
           }
+        },
+        {
+          "attempt": 2,
+          "package_id": "worker-b-20260917T111410Z-93d5ce97efeb",
+          "at": "2026-09-17T12:01:17Z",
+          "reason": "Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP.",
+          "verification": {
+            "identity_verified": true,
+            "evidence_depth": "identity_only_after_recovery",
+            "retrieval_attempts": [
+              {
+                "step": "supplied_url",
+                "outcome": "partial",
+                "note": "https://doi.org/10.1007/978-3-319-54112-9_8 resolved to https://link.springer.com/chapter/10.1007/978-3-319-54112-9_8 (HTTP 200); page offers only the abstract/landing content ('preview of subscription content'), no full text"
+              },
+              {
+                "step": "doi",
+                "outcome": "success",
+                "note": "Crossref api.crossref.org/works/10.1007/978-3-319-54112-9_8: book-chapter in 'Regional Studies on Economic Growth, Financial Economics and Management', issued 2017, 1 author(s); title matches; no full text in record"
+              },
+              {
+                "step": "exact_title",
+                "outcome": "failed",
+                "note": "CORE repository API search title:\"Aeronautical Excellence Through European Strategic Partnerships\" (exact title in quotes): matching record(s) id 267272768 found but with no downloadable full text"
+              },
+              {
+                "step": "title_author_year",
+                "outcome": "partial",
+                "note": "Crossref query.bibliographic=title plus first-author surname: top hit 10.1007/978-3-319-54112-9_8 ('Aeronautical Excellence Through European Strategic Partnersh') confirms identity; no open-access link or alternative full-text version; other hits unrelated"
+              },
+              {
+                "step": "official_publisher_or_repository",
+                "outcome": "failed",
+                "note": "Unpaywall (0 OA location(s)) and OpenAlex location lists checked and every candidate opened: none listed; no accessible full text"
+              },
+              {
+                "step": "broader_identity_search",
+                "outcome": "failed",
+                "note": "Semantic Scholar DOI lookup (openAccessPdf: none) and Europe PMC DOI search (no PMC full text) gave no further legitimate copy; CORE doi:\"10.1007/978-3-319-54112-9_8\" search likewise without downloadable text"
+              }
+            ],
+            "recovered_sources": [
+              {
+                "kind": "crossref_metadata",
+                "url": "https://api.crossref.org/works/10.1007/978-3-319-54112-9_8",
+                "title": "Aeronautical Excellence Through European Strategic Partnerships",
+                "evidence_used": false
+              }
+            ],
+            "verification_note": "Identity verified: chapter in Springer 'Regional Studies on Economic Growth, Financial Economics and Management' (Eurasian Studies in Business and Economics series, 2017), sole author Claudia Dobre; not the journal Regional Studies. Only the chapter preview is accessible."
+          }
         }
       ]
     },
@@ -28450,48 +28803,55 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-16T17:34:50Z",
-      "last_package_id": "worker-b-20260917T115900Z-93d5ce97efeb",
-      "recovery_attempts": 1,
-      "last_recovery_at": "2026-09-17T11:03:33Z",
-      "last_recovery_package_id": "worker-b-20260917T090704Z-c1088ee0206d",
-      "recovery_reason": "Identity verified; after all six recovery steps no legitimately accessible full or substantive primary text was obtained, so no admission judgement is made.",
+      "last_package_id": "worker-b-20260917T120405Z-00ab8e8211b0",
+      "recovery_attempts": 2,
+      "last_recovery_at": "2026-09-17T12:01:17Z",
+      "last_recovery_package_id": "worker-b-20260917T111410Z-93d5ce97efeb",
+      "recovery_reason": "Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP.",
       "verification": {
         "identity_verified": true,
         "evidence_depth": "identity_only_after_recovery",
         "retrieval_attempts": [
           {
             "step": "supplied_url",
-            "outcome": "failed",
-            "note": "https://doi.org/10.1016/j.techfore.2015.09.014 -> ScienceDirect HTTP 403 Cloudflare challenge (scanner also recorded 403)."
+            "outcome": "partial",
+            "note": "https://doi.org/10.1016/j.techfore.2015.09.014 resolved to https://linkinghub.elsevier.com/retrieve/pii/S0040162515002760 (HTTP 200); page offers only the abstract/landing content ('preview of subscription content'), no full text"
           },
           {
             "step": "doi",
             "outcome": "success",
-            "note": "Crossref: Tiago Brandão, Technological Forecasting and Social Change 113 (2016-12); corrigendum 10.1016/j.techfore.2019.119890 exists."
+            "note": "Crossref api.crossref.org/works/10.1016/j.techfore.2015.09.014: journal-article in 'Technological Forecasting and Social Change', issued 2016-12, 1 author(s); title matches; no full text in record"
           },
           {
             "step": "exact_title",
             "outcome": "failed",
-            "note": "Crossref query.title returns this DOI and its corrigendum (not substituted)."
+            "note": "CORE repository API search title:\"Shaping Portuguese science policy for the European horizon: The discourses of technological change\" (exact title in quotes): no matching record with a downloadable copy"
           },
           {
             "step": "title_author_year",
-            "outcome": "failed",
-            "note": "Crossref bibliographic query (title + Brandão 2016) returns the same DOI; no alternative version."
+            "outcome": "partial",
+            "note": "Crossref query.bibliographic=title plus first-author surname: top hit 10.1016/j.techfore.2015.09.014 ('Shaping Portuguese science policy for the European horizon: ') confirms identity; no open-access link or alternative full-text version; other hits unrelated"
           },
           {
             "step": "official_publisher_or_repository",
             "outcome": "failed",
-            "note": "Unpaywall/OpenAlex closed; no repository copy."
+            "note": "Unpaywall (0 OA location(s)) and OpenAlex location lists checked and every candidate opened: http://www.sciencedirect.com/science/article/pii/S0040162515002760 -> HTTP 403; no accessible full text"
           },
           {
             "step": "broader_identity_search",
             "outcome": "failed",
-            "note": "No preprint in Semantic Scholar; no ISCTE/other repository copy identified."
+            "note": "Semantic Scholar DOI lookup (openAccessPdf: none) and Europe PMC DOI search (no PMC full text) gave no further legitimate copy; CORE doi:\"10.1016/j.techfore.2015.09.014\" search likewise without downloadable text"
           }
         ],
-        "recovered_sources": [],
-        "verification_note": "Identity verified; paywalled."
+        "recovered_sources": [
+          {
+            "kind": "crossref_metadata",
+            "url": "https://api.crossref.org/works/10.1016/j.techfore.2015.09.014",
+            "title": "Shaping Portuguese science policy for the European horizon: The discourses of technological change",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Identity verified: Technological Forecasting and Social Change 113 (Dec 2016), sole author Tiago Brandão; a 2019 corrigendum exists (10.1016/j.techfore.2019.119890). ScienceDirect returns 403; no OA copy."
       },
       "recovery_history": [
         {
@@ -28536,6 +28896,57 @@
             ],
             "recovered_sources": [],
             "verification_note": "Identity verified; paywalled."
+          }
+        },
+        {
+          "attempt": 2,
+          "package_id": "worker-b-20260917T111410Z-93d5ce97efeb",
+          "at": "2026-09-17T12:01:17Z",
+          "reason": "Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP.",
+          "verification": {
+            "identity_verified": true,
+            "evidence_depth": "identity_only_after_recovery",
+            "retrieval_attempts": [
+              {
+                "step": "supplied_url",
+                "outcome": "partial",
+                "note": "https://doi.org/10.1016/j.techfore.2015.09.014 resolved to https://linkinghub.elsevier.com/retrieve/pii/S0040162515002760 (HTTP 200); page offers only the abstract/landing content ('preview of subscription content'), no full text"
+              },
+              {
+                "step": "doi",
+                "outcome": "success",
+                "note": "Crossref api.crossref.org/works/10.1016/j.techfore.2015.09.014: journal-article in 'Technological Forecasting and Social Change', issued 2016-12, 1 author(s); title matches; no full text in record"
+              },
+              {
+                "step": "exact_title",
+                "outcome": "failed",
+                "note": "CORE repository API search title:\"Shaping Portuguese science policy for the European horizon: The discourses of technological change\" (exact title in quotes): no matching record with a downloadable copy"
+              },
+              {
+                "step": "title_author_year",
+                "outcome": "partial",
+                "note": "Crossref query.bibliographic=title plus first-author surname: top hit 10.1016/j.techfore.2015.09.014 ('Shaping Portuguese science policy for the European horizon: ') confirms identity; no open-access link or alternative full-text version; other hits unrelated"
+              },
+              {
+                "step": "official_publisher_or_repository",
+                "outcome": "failed",
+                "note": "Unpaywall (0 OA location(s)) and OpenAlex location lists checked and every candidate opened: http://www.sciencedirect.com/science/article/pii/S0040162515002760 -> HTTP 403; no accessible full text"
+              },
+              {
+                "step": "broader_identity_search",
+                "outcome": "failed",
+                "note": "Semantic Scholar DOI lookup (openAccessPdf: none) and Europe PMC DOI search (no PMC full text) gave no further legitimate copy; CORE doi:\"10.1016/j.techfore.2015.09.014\" search likewise without downloadable text"
+              }
+            ],
+            "recovered_sources": [
+              {
+                "kind": "crossref_metadata",
+                "url": "https://api.crossref.org/works/10.1016/j.techfore.2015.09.014",
+                "title": "Shaping Portuguese science policy for the European horizon: The discourses of technological change",
+                "evidence_used": false
+              }
+            ],
+            "verification_note": "Identity verified: Technological Forecasting and Social Change 113 (Dec 2016), sole author Tiago Brandão; a 2019 corrigendum exists (10.1016/j.techfore.2019.119890). ScienceDirect returns 403; no OA copy."
           }
         }
       ]
@@ -29017,48 +29428,55 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-17T05:59:27Z",
-      "last_package_id": "worker-b-20260917T115900Z-93d5ce97efeb",
-      "recovery_attempts": 1,
-      "last_recovery_at": "2026-09-17T11:03:34Z",
-      "last_recovery_package_id": "worker-b-20260917T090704Z-c1088ee0206d",
-      "recovery_reason": "Identity verified; after all six recovery steps no legitimately accessible full or substantive primary text was obtained, so no admission judgement is made.",
+      "last_package_id": "worker-b-20260917T120405Z-00ab8e8211b0",
+      "recovery_attempts": 2,
+      "last_recovery_at": "2026-09-17T12:01:17Z",
+      "last_recovery_package_id": "worker-b-20260917T111410Z-93d5ce97efeb",
+      "recovery_reason": "Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP.",
       "verification": {
         "identity_verified": true,
         "evidence_depth": "identity_only_after_recovery",
         "retrieval_attempts": [
           {
             "step": "supplied_url",
-            "outcome": "failed",
-            "note": "https://doi.org/10.1007/s11192-015-1552-3 -> Springer page: abstract, notes, references only."
+            "outcome": "partial",
+            "note": "https://doi.org/10.1007/s11192-015-1552-3 resolved to https://link.springer.com/article/10.1007/s11192-015-1552-3 (HTTP 200); page offers only the abstract/landing content ('preview of subscription content'), no full text"
           },
           {
             "step": "doi",
             "outcome": "success",
-            "note": "Crossref: Wang, Hu, Li, Li, Li, Scientometrics 103(2), online 2015-03-22."
+            "note": "Crossref api.crossref.org/works/10.1007/s11192-015-1552-3: journal-article in 'Scientometrics', issued 2015-3-22, 5 author(s); title matches; no full text in record"
           },
           {
             "step": "exact_title",
             "outcome": "failed",
-            "note": "Crossref query.title returns this DOI as exact match."
+            "note": "CORE repository API search title:\"Collaboration strategies and effects on university research: evidence from Chinese universities\" (exact title in quotes): no matching record with a downloadable copy"
           },
           {
             "step": "title_author_year",
-            "outcome": "failed",
-            "note": "Crossref bibliographic query (title + Wang 2015) returns the same DOI; no alternative version."
+            "outcome": "partial",
+            "note": "Crossref query.bibliographic=title plus first-author surname: top hit 10.1007/s11192-015-1552-3 ('Collaboration strategies and effects on university research:') confirms identity; no open-access link or alternative full-text version; other hits unrelated"
           },
           {
             "step": "official_publisher_or_repository",
             "outcome": "failed",
-            "note": "Unpaywall/OpenAlex closed; Semantic Scholar closed."
+            "note": "Unpaywall (0 OA location(s)) and OpenAlex location lists checked and every candidate opened: http://link.springer.com/10.1007/s11192-015-1552-3 -> HTTP 200; no accessible full text"
           },
           {
             "step": "broader_identity_search",
             "outcome": "failed",
-            "note": "No author copy found."
+            "note": "Semantic Scholar DOI lookup (openAccessPdf: none) and Europe PMC DOI search (no PMC full text) gave no further legitimate copy; CORE doi:\"10.1007/s11192-015-1552-3\" search likewise without downloadable text"
           }
         ],
-        "recovered_sources": [],
-        "verification_note": "Identity verified; paywalled. Abstract indicates Chinese-university evidence (likely fails A once read)."
+        "recovered_sources": [
+          {
+            "kind": "crossref_metadata",
+            "url": "https://api.crossref.org/works/10.1007/s11192-015-1552-3",
+            "title": "Collaboration strategies and effects on university research: evidence from Chinese universities",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Identity verified: Scientometrics 103 (online 22 Mar 2015), Wang, Hu, Li, Li, Li. Springer preview only. Study uses Chinese university data; European relevance doubtful but not decidable from the abstract."
       },
       "recovery_history": [
         {
@@ -29103,6 +29521,57 @@
             ],
             "recovered_sources": [],
             "verification_note": "Identity verified; paywalled. Abstract indicates Chinese-university evidence (likely fails A once read)."
+          }
+        },
+        {
+          "attempt": 2,
+          "package_id": "worker-b-20260917T111410Z-93d5ce97efeb",
+          "at": "2026-09-17T12:01:17Z",
+          "reason": "Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP.",
+          "verification": {
+            "identity_verified": true,
+            "evidence_depth": "identity_only_after_recovery",
+            "retrieval_attempts": [
+              {
+                "step": "supplied_url",
+                "outcome": "partial",
+                "note": "https://doi.org/10.1007/s11192-015-1552-3 resolved to https://link.springer.com/article/10.1007/s11192-015-1552-3 (HTTP 200); page offers only the abstract/landing content ('preview of subscription content'), no full text"
+              },
+              {
+                "step": "doi",
+                "outcome": "success",
+                "note": "Crossref api.crossref.org/works/10.1007/s11192-015-1552-3: journal-article in 'Scientometrics', issued 2015-3-22, 5 author(s); title matches; no full text in record"
+              },
+              {
+                "step": "exact_title",
+                "outcome": "failed",
+                "note": "CORE repository API search title:\"Collaboration strategies and effects on university research: evidence from Chinese universities\" (exact title in quotes): no matching record with a downloadable copy"
+              },
+              {
+                "step": "title_author_year",
+                "outcome": "partial",
+                "note": "Crossref query.bibliographic=title plus first-author surname: top hit 10.1007/s11192-015-1552-3 ('Collaboration strategies and effects on university research:') confirms identity; no open-access link or alternative full-text version; other hits unrelated"
+              },
+              {
+                "step": "official_publisher_or_repository",
+                "outcome": "failed",
+                "note": "Unpaywall (0 OA location(s)) and OpenAlex location lists checked and every candidate opened: http://link.springer.com/10.1007/s11192-015-1552-3 -> HTTP 200; no accessible full text"
+              },
+              {
+                "step": "broader_identity_search",
+                "outcome": "failed",
+                "note": "Semantic Scholar DOI lookup (openAccessPdf: none) and Europe PMC DOI search (no PMC full text) gave no further legitimate copy; CORE doi:\"10.1007/s11192-015-1552-3\" search likewise without downloadable text"
+              }
+            ],
+            "recovered_sources": [
+              {
+                "kind": "crossref_metadata",
+                "url": "https://api.crossref.org/works/10.1007/s11192-015-1552-3",
+                "title": "Collaboration strategies and effects on university research: evidence from Chinese universities",
+                "evidence_used": false
+              }
+            ],
+            "verification_note": "Identity verified: Scientometrics 103 (online 22 Mar 2015), Wang, Hu, Li, Li, Li. Springer preview only. Study uses Chinese university data; European relevance doubtful but not decidable from the abstract."
           }
         }
       ]
@@ -30281,13 +30750,13 @@
       "url": "https://www.institutmontaigne.org/en/expressions/space-2018-already-beats-2017",
       "corpus_scope": "historical",
       "status": "assigned",
-      "lane": "B",
+      "lane": "A",
       "assigned_at": "2026-09-16T11:59:13Z",
-      "last_package_id": "worker-b-20260917T115900Z-93d5ce97efeb",
-      "recovery_attempts": 1,
-      "last_recovery_at": "2026-09-17T06:58:43Z",
-      "last_recovery_package_id": "worker-b-20260917T063146Z-cd63404e9a62",
-      "recovery_reason": "Identity verified, but after all six recovery steps no legitimate substantive text was accessible; abstract-level material is insufficient for an admission decision.",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
+      "recovery_attempts": 2,
+      "last_recovery_at": "2026-09-17T12:01:16Z",
+      "last_recovery_package_id": "worker-b-20260917T111410Z-93d5ce97efeb",
+      "recovery_reason": "Identity corroborated only by archive captures; no substantive text accessible after all six steps.",
       "verification": {
         "identity_verified": true,
         "evidence_depth": "identity_only_after_recovery",
@@ -30295,36 +30764,36 @@
           {
             "step": "supplied_url",
             "outcome": "failed",
-            "note": "institutmontaigne.org/en/expressions/space-2018-already-beats-2017 returned HTTP 403 Forbidden with browser headers."
+            "note": "https://www.institutmontaigne.org/en/expressions/space-2018-already-beats-2017 returned HTTP 403 to the package fetcher and to this session's bash client"
           },
           {
             "step": "doi",
             "outcome": "not_applicable",
-            "note": "Think-tank web commentary; no DOI."
+            "note": "Institut Montaigne web article; no DOI exists"
           },
           {
             "step": "exact_title",
-            "outcome": "partial",
-            "note": "Exact-title search \"In Space, 2018 Already Beats 2017\" returned only the Institut Montaigne URL (identity confirmed, no text)."
+            "outcome": "failed",
+            "note": "Web search for institutmontaigne.org plus the quoted title 'In Space, 2018 Already Beats 2017' returned only unrelated Montaigne pages ('Notre ambition pour 2018', '2017, année charnière') and generic 2018 space retrospectives"
           },
           {
             "step": "title_author_year",
             "outcome": "failed",
-            "note": "Query \"Institut Montaigne space 2018 beats 2017 expressions\" returned no results."
+            "note": "Second web search adding year and topic words ('Institut Montaigne 2018 \"In Space\" beats 2017 European space launches blog') surfaced other Montaigne space publications (Espace : l'Europe contre-attaque ?, Dec 2017; Espace : le réveil de l'Europe ?, 2020) but not this article"
           },
           {
             "step": "official_publisher_or_repository",
-            "outcome": "failed",
-            "note": "Wayback snapshot 2025-02-15 exists but archived-content fetch is blocked by the network proxy (hostname_blocked); no other official copy."
+            "outcome": "partial",
+            "note": "Wayback Machine availability API for www.institutmontaigne.org/en/expressions/space-2018-already-beats-2017 returned a capture dated 2025-02-15, corroborating the page; downloading the archived HTML was refused by this environment's egress policy"
           },
           {
             "step": "broader_identity_search",
             "outcome": "failed",
-            "note": "Query site-style \"institutmontaigne.org \"2018 already beats 2017\" space\" returned nothing further; w23 mirror not found for this item."
+            "note": "Wayback availability checks on the publisher's alternative paths /en/blog/space-2018-already-beats-2017 (capture 2022-08-11) and /en/analysis/space-2018-already-beats-2017 (capture 2023-01-28) also exist, but their content is equally unreachable here; neither live variant appeared in either web search"
           }
         ],
         "recovered_sources": [],
-        "verification_note": "Identity verified via Institut Montaigne site listing in search results; page body returns 403 to all retrieval routes."
+        "verification_note": "Page existence corroborated by Wayback Machine captures of the exact URL, but no text could be read; author and exact date unknown (scanner date 2018-01-01 is a placeholder)."
       },
       "recovery_history": [
         {
@@ -30369,6 +30838,50 @@
             ],
             "recovered_sources": [],
             "verification_note": "Identity verified via Institut Montaigne site listing in search results; page body returns 403 to all retrieval routes."
+          }
+        },
+        {
+          "attempt": 2,
+          "package_id": "worker-b-20260917T111410Z-93d5ce97efeb",
+          "at": "2026-09-17T12:01:16Z",
+          "reason": "Identity corroborated only by archive captures; no substantive text accessible after all six steps.",
+          "verification": {
+            "identity_verified": true,
+            "evidence_depth": "identity_only_after_recovery",
+            "retrieval_attempts": [
+              {
+                "step": "supplied_url",
+                "outcome": "failed",
+                "note": "https://www.institutmontaigne.org/en/expressions/space-2018-already-beats-2017 returned HTTP 403 to the package fetcher and to this session's bash client"
+              },
+              {
+                "step": "doi",
+                "outcome": "not_applicable",
+                "note": "Institut Montaigne web article; no DOI exists"
+              },
+              {
+                "step": "exact_title",
+                "outcome": "failed",
+                "note": "Web search for institutmontaigne.org plus the quoted title 'In Space, 2018 Already Beats 2017' returned only unrelated Montaigne pages ('Notre ambition pour 2018', '2017, année charnière') and generic 2018 space retrospectives"
+              },
+              {
+                "step": "title_author_year",
+                "outcome": "failed",
+                "note": "Second web search adding year and topic words ('Institut Montaigne 2018 \"In Space\" beats 2017 European space launches blog') surfaced other Montaigne space publications (Espace : l'Europe contre-attaque ?, Dec 2017; Espace : le réveil de l'Europe ?, 2020) but not this article"
+              },
+              {
+                "step": "official_publisher_or_repository",
+                "outcome": "partial",
+                "note": "Wayback Machine availability API for www.institutmontaigne.org/en/expressions/space-2018-already-beats-2017 returned a capture dated 2025-02-15, corroborating the page; downloading the archived HTML was refused by this environment's egress policy"
+              },
+              {
+                "step": "broader_identity_search",
+                "outcome": "failed",
+                "note": "Wayback availability checks on the publisher's alternative paths /en/blog/space-2018-already-beats-2017 (capture 2022-08-11) and /en/analysis/space-2018-already-beats-2017 (capture 2023-01-28) also exist, but their content is equally unreachable here; neither live variant appeared in either web search"
+              }
+            ],
+            "recovered_sources": [],
+            "verification_note": "Page existence corroborated by Wayback Machine captures of the exact URL, but no text could be read; author and exact date unknown (scanner date 2018-01-01 is a placeholder)."
           }
         }
       ]
@@ -31215,13 +31728,13 @@
       "url": "https://doi.org/10.1007/s11192-017-2513-9",
       "corpus_scope": "historical",
       "status": "assigned",
-      "lane": "B",
+      "lane": "A",
       "assigned_at": "2026-09-16T17:34:33Z",
-      "last_package_id": "worker-b-20260917T115900Z-93d5ce97efeb",
-      "recovery_attempts": 1,
-      "last_recovery_at": "2026-09-16T17:57:29Z",
-      "last_recovery_package_id": "worker-a-20260916T173433Z-f8e5c76d61ae",
-      "recovery_reason": "Identity is sufficiently corroborated, but substantive evidence remained inaccessible after the complete mandatory recovery ladder.",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
+      "recovery_attempts": 2,
+      "last_recovery_at": "2026-09-17T12:01:17Z",
+      "last_recovery_package_id": "worker-b-20260917T111410Z-93d5ce97efeb",
+      "recovery_reason": "Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP.",
       "verification": {
         "identity_verified": true,
         "evidence_depth": "identity_only_after_recovery",
@@ -31229,49 +31742,43 @@
           {
             "step": "supplied_url",
             "outcome": "partial",
-            "note": "Supplied Springer page matched DOI 10.1007/s11192-017-2513-9 but exposed only an abstract/limited preview."
+            "note": "https://doi.org/10.1007/s11192-017-2513-9 resolved to https://link.springer.com/article/10.1007/s11192-017-2513-9 (HTTP 200); page offers only the abstract/landing content ('preview of subscription content'), no full text"
           },
           {
             "step": "doi",
             "outcome": "success",
-            "note": "DOI search confirmed the Scientometrics article, authors Cui Zhang and Jing Guo, volume 113(2), pages 1129–1139."
+            "note": "Crossref api.crossref.org/works/10.1007/s11192-017-2513-9: journal-article in 'Scientometrics', issued 2017-9-14, 2 author(s); title matches; no full text in record"
           },
           {
             "step": "exact_title",
-            "outcome": "partial",
-            "note": "Exact-title search found bibliographic and abstract records, including IDEAS and ResearchGate, but no legitimate full text."
+            "outcome": "failed",
+            "note": "CORE repository API search title:\"China’s international research collaboration: evidence from a panel gravity model\" (exact title in quotes): no matching record with a downloadable copy"
           },
           {
             "step": "title_author_year",
             "outcome": "partial",
-            "note": "Title + Zhang + Guo + 2017 searches confirmed the same article and Jinan University authorship, without a substantive manuscript."
+            "note": "Crossref query.bibliographic=title plus first-author surname: top hit 10.1007/s11192-017-2513-9 ('China’s international research collaboration: evidence from ') confirms identity; no open-access link or alternative full-text version; other hits unrelated"
           },
           {
             "step": "official_publisher_or_repository",
-            "outcome": "failure",
-            "note": "Searched Springer, author/university and repository surfaces; available records were abstract/bibliographic only and ResearchGate reported no full text."
+            "outcome": "failed",
+            "note": "Unpaywall (0 OA location(s)) and OpenAlex location lists checked and every candidate opened: http://link.springer.com/10.1007/s11192-017-2513-9 -> HTTP 200; no accessible full text"
           },
           {
             "step": "broader_identity_search",
-            "outcome": "failure",
-            "note": "Bounded searches using DOI fragments, author names and “panel gravity model” found citations/index records but no substantive accessible copy."
+            "outcome": "failed",
+            "note": "Semantic Scholar DOI lookup (openAccessPdf: none) and Europe PMC DOI search (no PMC full text) gave no further legitimate copy; CORE doi:\"10.1007/s11192-017-2513-9\" search likewise without downloadable text"
           }
         ],
         "recovered_sources": [
           {
-            "kind": "publisher_preview",
-            "url": "https://link.springer.com/article/10.1007/s11192-017-2513-9",
+            "kind": "crossref_metadata",
+            "url": "https://api.crossref.org/works/10.1007/s11192-017-2513-9",
             "title": "China’s international research collaboration: evidence from a panel gravity model",
-            "evidence_used": true
-          },
-          {
-            "kind": "bibliographic_record",
-            "url": "https://ideas.repec.org/a/spr/scient/v113y2017i2d10.1007_s11192-017-2513-9.html",
-            "title": "China’s international research collaboration: evidence from a panel gravity model",
-            "evidence_used": true
+            "evidence_used": false
           }
         ],
-        "verification_note": "The claimed Scientometrics article identity is verified, but the available publisher/index records remained abstract-level after the full recovery ladder."
+        "verification_note": "Identity verified: Scientometrics 113 (online 14 Sep 2017), Cui Zhang and Jing Guo. Springer page is a preview with abstract only. Study concerns determinants of China's international collaboration; European relevance doubtful but not decidable from the abstract."
       },
       "recovery_history": [
         {
@@ -31329,6 +31836,57 @@
               }
             ],
             "verification_note": "The claimed Scientometrics article identity is verified, but the available publisher/index records remained abstract-level after the full recovery ladder."
+          }
+        },
+        {
+          "attempt": 2,
+          "package_id": "worker-b-20260917T111410Z-93d5ce97efeb",
+          "at": "2026-09-17T12:01:17Z",
+          "reason": "Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP.",
+          "verification": {
+            "identity_verified": true,
+            "evidence_depth": "identity_only_after_recovery",
+            "retrieval_attempts": [
+              {
+                "step": "supplied_url",
+                "outcome": "partial",
+                "note": "https://doi.org/10.1007/s11192-017-2513-9 resolved to https://link.springer.com/article/10.1007/s11192-017-2513-9 (HTTP 200); page offers only the abstract/landing content ('preview of subscription content'), no full text"
+              },
+              {
+                "step": "doi",
+                "outcome": "success",
+                "note": "Crossref api.crossref.org/works/10.1007/s11192-017-2513-9: journal-article in 'Scientometrics', issued 2017-9-14, 2 author(s); title matches; no full text in record"
+              },
+              {
+                "step": "exact_title",
+                "outcome": "failed",
+                "note": "CORE repository API search title:\"China’s international research collaboration: evidence from a panel gravity model\" (exact title in quotes): no matching record with a downloadable copy"
+              },
+              {
+                "step": "title_author_year",
+                "outcome": "partial",
+                "note": "Crossref query.bibliographic=title plus first-author surname: top hit 10.1007/s11192-017-2513-9 ('China’s international research collaboration: evidence from ') confirms identity; no open-access link or alternative full-text version; other hits unrelated"
+              },
+              {
+                "step": "official_publisher_or_repository",
+                "outcome": "failed",
+                "note": "Unpaywall (0 OA location(s)) and OpenAlex location lists checked and every candidate opened: http://link.springer.com/10.1007/s11192-017-2513-9 -> HTTP 200; no accessible full text"
+              },
+              {
+                "step": "broader_identity_search",
+                "outcome": "failed",
+                "note": "Semantic Scholar DOI lookup (openAccessPdf: none) and Europe PMC DOI search (no PMC full text) gave no further legitimate copy; CORE doi:\"10.1007/s11192-017-2513-9\" search likewise without downloadable text"
+              }
+            ],
+            "recovered_sources": [
+              {
+                "kind": "crossref_metadata",
+                "url": "https://api.crossref.org/works/10.1007/s11192-017-2513-9",
+                "title": "China’s international research collaboration: evidence from a panel gravity model",
+                "evidence_used": false
+              }
+            ],
+            "verification_note": "Identity verified: Scientometrics 113 (online 14 Sep 2017), Cui Zhang and Jing Guo. Springer page is a preview with abstract only. Study concerns determinants of China's international collaboration; European relevance doubtful but not decidable from the abstract."
           }
         }
       ]
@@ -31975,7 +32533,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-17T11:00:32Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c",
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9",
       "recovery_attempts": 1,
       "last_recovery_at": "2026-09-17T11:56:13Z",
       "last_recovery_package_id": "worker-a-20260917T111401Z-9c77ac8c844d",
@@ -32088,7 +32646,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-17T11:00:32Z",
-      "last_package_id": "worker-a-20260917T115849Z-c2247c760f8c"
+      "last_package_id": "worker-a-20260917T120354Z-e4953dcbcec9"
     }
   },
   "packages": {
@@ -41677,6 +42235,56 @@
         "historical:id:922a27831be9f4dd",
         "historical:id:b6502660dc2a056b",
         "historical:id:dbdcaae9bce57ebe",
+        "historical:id:dc302423afff77b3",
+        "historical:id:61f8c22387103608"
+      ]
+    },
+    "worker-a-20260917T120354Z-e4953dcbcec9": {
+      "lane": "A",
+      "created_at": "2026-09-17T12:04:05Z",
+      "record_keys": [
+        "historical:id:1b548cd98970b985",
+        "historical:id:3cecfeb44fddb1f7",
+        "historical:id:b3c33b824538e7fe",
+        "historical:id:2a60f5849e5048b4",
+        "historical:id:3d100e8cee15e522",
+        "historical:id:bec6dbaab7568898",
+        "historical:id:e077e1381d2d93fd",
+        "historical:id:940d02bed62a022e",
+        "historical:id:7cb2970daee676f8",
+        "historical:id:1bdf764da4a6a643",
+        "historical:id:85f21f4a26df898f",
+        "historical:id:b35639568cd6af6e",
+        "historical:id:429b7fb8a4fd8c00",
+        "historical:id:3f23d85c6006fbd3",
+        "historical:id:d1e0952afc2673c0",
+        "historical:id:a11556316ca5e98c",
+        "historical:id:fc20081bb07bb125",
+        "historical:id:0fa9a045c44ef264",
+        "historical:id:c4afcd47c4dfc922",
+        "historical:id:c2f417202ea5f9f3",
+        "historical:id:5815e2e734c08288",
+        "historical:id:e64398987bf4dc73",
+        "historical:id:9d0da077bf121de2",
+        "historical:id:e79df3e55bbadc2c",
+        "historical:id:5dd5533594f180de",
+        "historical:id:edc62355b88d0d1b",
+        "historical:id:b90245216ee7b643",
+        "historical:id:6cb00ecf3ea743e5",
+        "historical:id:3f2d594e20ef5f2b",
+        "historical:id:068ceabb6181be45",
+        "historical:id:216cf259e760105a",
+        "historical:id:4a0af82a0f2a2fbb",
+        "historical:id:9359de208b9e0ce9",
+        "historical:id:922a27831be9f4dd",
+        "historical:id:b6502660dc2a056b",
+        "historical:id:dbdcaae9bce57ebe"
+      ]
+    },
+    "worker-b-20260917T120405Z-00ab8e8211b0": {
+      "lane": "B",
+      "created_at": "2026-09-17T12:04:15Z",
+      "record_keys": [
         "historical:id:dc302423afff77b3",
         "historical:id:61f8c22387103608"
       ]

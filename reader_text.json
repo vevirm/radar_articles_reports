@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-17T11:56:13Z",
+  "generated_at": "2026-09-17T12:01:17Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -93988,6 +93988,143 @@
       "reader_text_model": "user-provided-llm-subscription",
       "reader_text_written_at": "2026-09-17T11:56:13Z",
       "deep_scan_package_id": "worker-a-20260917T111401Z-9c77ac8c844d"
+    },
+    "historical:id:b4ea7b84e8c47191": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "3ab1375f",
+      "identity_hash": "bac9a087b13e273a",
+      "reader_title": "Russian-French research partnerships in 2018: stable but short of funding",
+      "reader_what": "Interviews with 39 scientists found official Russian-French collaboration schemes stable, but hampered by funding, logistics and Russian research regulation.",
+      "reader_why": "Sustained partnerships depended on intergovernmental schemes and student and postdoc exchanges building long-term links.",
+      "reader_more": "The author interviewed 15 Russian and 24 French researchers across natural and social sciences, selected by snowball sampling. Partners in official intergovernmental programmes wanted to continue and expand work. Main obstacles were limited funding, logistics and features of how Russian research is organised and regulated. Suggested remedies included more funding on both sides, better language skills and joint applied research. This predates the 2022 break in EU-Russia science ties.",
+      "deep_analysis": {
+        "work_kind": "qualitative interview study",
+        "research_question": "What are the state, motivations, barriers and prospects of Russian-French scientific collaboration?",
+        "main_finding": "Official collaboration schemes were stable with willingness to expand; funding shortages, logistics and Russian regulatory specifics were the main barriers.",
+        "method_or_basis": "39 semi-structured face-to-face interviews (15 Russian, 24 French researchers), snowball sampling; French fieldwork supported by the French Embassy in Moscow.",
+        "qualification": "Small non-random sample of mostly middle-aged or older researchers; short article; context overtaken by the 2022 suspension of cooperation.",
+        "radar_relevance": "Historical context on European (French) research diplomacy and collaboration with Russia before 2022.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.22394/2070-8378-2018-20-1-84-89 redirects to pa-journal.igsu.ru/articles/5939/, whose host did not resolve (DNS failure)"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.22394/2070-8378-2018-20-1-84-89: journal-article in 'Public Administration' (Gosudarstvennaya sluzhba), 2018, author Irina Dezhina"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "partial",
+            "note": "CORE API search title:\"Tendencies and prospects of Russian-French scientific collaboration\" matched CORE record 156948001 aggregated from SSOAR, with downloadUrl core.ac.uk/download/614001299.pdf"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Downloaded core.ac.uk/download/614001299.pdf: SSOAR deposit of the published version (CC BY-NC-ND), 7 pages, Russian text with English abstract and parallel English columns; read in full"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://core.ac.uk/download/614001299.pdf",
+            "title": "Tendencies and Prospects of Russian-French Scientific Collaboration (SSOAR published version via CORE)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Published version recovered via CORE (SSOAR deposit) after the publisher domain failed. Journal is the Russian 'Gosudarstvennaya sluzhba' (Public Administration), 20(1), 84-89, Gaidar Forum issue. Scanner authors field had a stray leading separator."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Interview study of bilateral research collaboration between Russia and France (a leading European science system, including CNRS schemes), identifying drivers and barriers; genuine European international-R&I evidence, useful as pre-2022 historical context."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T12:01:16Z",
+      "deep_scan_package_id": "worker-b-20260917T111410Z-93d5ce97efeb"
+    },
+    "historical:id:ef177fec64355bc6": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "a1003adf",
+      "identity_hash": "81217af852c63c32",
+      "reader_title": "A 2018 case that Europe's digital single market alone would not create tech champions",
+      "reader_what": "Babinet argued Europe also needed capital, digital skills, large clusters and enabling policy, noting 106 US unicorns versus 17 European.",
+      "reader_why": "He links dependence on foreign data-driven platforms to economic deficits and reduced state sovereignty, including in security.",
+      "reader_more": "Writing as the EU rolled out roaming, copyright and GDPR reforms, the author says a unified market is necessary but insufficient. Drawing on successful tech hubs, he identifies four pillars of digital ecosystems and credits US public policy, including Cold War defence research, for Silicon Valley's rise. He backs a proposed European agency for breakthrough innovation and argues regulation often protects national incumbents. It is an opinion piece with few data.",
+      "deep_analysis": {
+        "work_kind": "opinion article",
+        "research_question": "",
+        "main_finding": "The Digital Single Market must be complemented by capital, human capital, clusters and accommodating policies for Europe to build strong digital firms.",
+        "method_or_basis": "Expert argument drawing on comparison with international tech hubs and a few indicators (unicorn counts).",
+        "qualification": "Opinion with limited evidence; the four-pillar model is asserted, not tested.",
+        "radar_relevance": "Historical context on 2018 European debates about digital innovation capacity and a European breakthrough-innovation agency.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://www.institutmontaigne.org/en/expressions/europe-and-digital-single-market-what-next returned HTTP 403 to the package fetcher and to bash"
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Institut Montaigne blog article, no DOI"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Web search for the quoted title with 'Institut Montaigne' returned the article at institutmontaigne.org/en/expressions/... (no www) and /en/blog/...; the former was fetched in full: author Gilles Babinet, dated 15/01/2018"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_text",
+            "url": "https://institutmontaigne.org/en/expressions/europe-and-digital-single-market-what-next",
+            "title": "Europe and the Digital Single Market: What Next?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full article read. Scanner omitted the author and used placeholder date 2018-01-01."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Argument on the conditions for European digital innovation capacity (capital, skills, clusters, enabling policy) beyond the Digital Single Market, including support for a European breakthrough-innovation agency; genuine European innovation-policy and tech-sovereignty context."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T12:01:17Z",
+      "deep_scan_package_id": "worker-b-20260917T111410Z-93d5ce97efeb"
     }
   }
 }
