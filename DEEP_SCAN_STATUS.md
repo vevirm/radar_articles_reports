@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260917T110536Z-9c77ac8c844d`
+- Current package: `worker-a-20260917T111401Z-9c77ac8c844d`
 - Assigned unresolved records: **36**
   1. `historical:id:aadde2c8ca8c0e11` — Shaping Innovation: A Regional Perspective on Industrial PhD Programs in Italy
   2. `historical:id:3391d6827787322e` — Open radar groups: The integration of online communities into open foresight processes
@@ -29,7 +29,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260917T110547Z-93d5ce97efeb`
+- Current package: `worker-b-20260917T111410Z-93d5ce97efeb`
 - Assigned unresolved records: **12**
   1. `historical:id:ea172fb497c5e020` — From strategic autonomy to strategic partnership: <scp>EU</scp>–India relations in health diplomacy — recovery attempt 3/3
   2. `historical:id:6212b03e377b75be` — The paradox of semiconductors—EU governance between sovereignty and interdependence — recovery attempt 3/3
