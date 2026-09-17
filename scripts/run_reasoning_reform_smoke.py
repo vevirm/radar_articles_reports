@@ -20,6 +20,7 @@ TESTS = [
     "tests/test_reasoning_reform_claim_backfill.py",
     "tests/test_reasoning_reform_future_deep_scan_claims.py",
     "tests/test_reasoning_reform_claim_shadow.py",
+    "tests/test_reasoning_reform_detector_switch.py",
 ]
 
 

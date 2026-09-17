@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 import hashlib
 import json
 import re
@@ -1641,7 +1642,7 @@ def _fingerprint(c: dict[str, Any]) -> str:
     return hashlib.sha1(json.dumps(payload, sort_keys=True).encode("utf-8")).hexdigest()[:16]
 
 
-def refresh_high_order_inference(
+def _refresh_high_order_inference_legacy(
     data: dict[str, Any],
     previous_state: dict[str, Any] | None = None,
     completed_iso: str | None = None,
@@ -1750,10 +1751,76 @@ def refresh_high_order_inference(
     }
 
 
+def refresh_high_order_inference(
+    data: dict[str, Any],
+    previous_state: dict[str, Any] | None = None,
+    completed_iso: str | None = None,
+) -> dict[str, Any]:
+    """Stage-6 detector switch: claim-native by default, legacy only as fail-closed fallback.
+
+    The legacy grammar implementation remains in this module for rollback, historical
+    tests, and repositories whose authoritative claim layer is not ready.  Once the
+    claim authority/semantic gate passes, no regex detector in DETECTORS is called.
+    Reader publication IDs are deliberately frozen until Stage 7.
+    """
+    previous_state = previous_state if isinstance(previous_state, dict) else {}
+    try:
+        try:
+            from scripts.claim_reasoning_live import refresh_claim_high_order
+        except ModuleNotFoundError:
+            from claim_reasoning_live import refresh_claim_high_order  # type: ignore
+        live = refresh_claim_high_order(data, previous_state, completed_iso)
+        if isinstance(live, dict):
+            return live
+    except Exception as exc:
+        # Before the first successful cut-over, legacy is still the rollback path.
+        # After a claim-native state exists, fail *closed*: freeze that state rather
+        # than re-enter regex detection and accidentally create a new legacy finding.
+        if previous_state.get("detector_backend") == "claim_native":
+            hold = copy.deepcopy(previous_state)
+            hold["detector_backend"] = "claim_native_hold"
+            hold["claim_switch_error"] = type(exc).__name__
+            hold["publication_compatibility_lock"] = True
+            hold["new_count"] = 0
+            hold["updated_count"] = 0
+            hold["switch_hold"] = True
+            return hold
+        fallback = _refresh_high_order_inference_legacy(data, previous_state, completed_iso)
+        fallback["detector_backend"] = "legacy_pre_cutover_fallback"
+        fallback["claim_switch_error"] = type(exc).__name__
+        fallback["publication_compatibility_lock"] = True
+        return fallback
+    if previous_state.get("detector_backend") == "claim_native":
+        hold = copy.deepcopy(previous_state)
+        hold["detector_backend"] = "claim_native_hold"
+        hold["claim_switch_error"] = "claim_authority_gate_not_ready"
+        hold["publication_compatibility_lock"] = True
+        hold["new_count"] = 0
+        hold["updated_count"] = 0
+        hold["switch_hold"] = True
+        return hold
+    fallback = _refresh_high_order_inference_legacy(data, previous_state, completed_iso)
+    fallback["detector_backend"] = "legacy_pre_cutover_fallback"
+    fallback["claim_switch_error"] = "claim_authority_gate_not_ready"
+    fallback["publication_compatibility_lock"] = True
+    return fallback
+
+
 def feedback_queries(state: dict[str, Any] | None, limit: int = 8) -> list[str]:
     """Return a balanced support/falsifier query bank from unfinished candidates."""
     if not isinstance(state, dict):
         return []
+    if state.get("detector_backend") == "claim_native":
+        try:
+            try:
+                from scripts.claim_reasoning_live import claim_feedback_queries
+            except ModuleNotFoundError:
+                from claim_reasoning_live import claim_feedback_queries  # type: ignore
+            qs = claim_feedback_queries(state, limit)
+            if qs:
+                return qs
+        except Exception:
+            pass
     candidates = [c for c in state.get("candidates", []) if isinstance(c, dict) and c.get("status") in {"watch", "dormant", "qualified"}]
     candidates.sort(key=lambda c: (2 if c.get("status") == "watch" else 1 if c.get("status") == "dormant" else 0, int(c.get("score", 0))), reverse=True)
     support: list[str] = []

@@ -12,6 +12,7 @@ non-zero count.
 """
 from __future__ import annotations
 
+import copy
 import hashlib
 import json
 import re
@@ -695,7 +696,7 @@ def _fingerprint(c: dict[str, Any]) -> str:
     return hashlib.sha1(json.dumps(payload, sort_keys=True).encode("utf-8")).hexdigest()[:16]
 
 
-def refresh_shock_inference(
+def _refresh_shock_inference_legacy(
     data: dict[str, Any],
     previous_state: dict[str, Any] | None = None,
     completed_iso: str | None = None,
@@ -793,6 +794,57 @@ def refresh_shock_inference(
     }
 
 
+def refresh_shock_inference(
+    data: dict[str, Any],
+    previous_state: dict[str, Any] | None = None,
+    completed_iso: str | None = None,
+) -> dict[str, Any]:
+    """Stage-6 shock-detector switch to claim dependency pathways.
+
+    The reader-visible dynamic_shocks list is intentionally compatibility-frozen
+    until Stage 7.  Claim-native shock candidates drive downstream feedback, while
+    the legacy detector is used only when the authoritative claim gate is not ready.
+    """
+    previous_state = previous_state if isinstance(previous_state, dict) else {}
+    try:
+        try:
+            from scripts.claim_reasoning_live import refresh_claim_shocks
+        except ModuleNotFoundError:
+            from claim_reasoning_live import refresh_claim_shocks  # type: ignore
+        live = refresh_claim_shocks(data, previous_state, completed_iso)
+        if isinstance(live, dict):
+            return live
+    except Exception as exc:
+        if previous_state.get("detector_backend") == "claim_native":
+            hold = copy.deepcopy(previous_state)
+            hold["detector_backend"] = "claim_native_hold"
+            hold["claim_switch_error"] = type(exc).__name__
+            hold["publication_compatibility_lock"] = True
+            hold["new_count"] = 0
+            hold["updated_count"] = 0
+            hold["switch_hold"] = True
+            return hold
+        fallback = _refresh_shock_inference_legacy(data, previous_state, completed_iso)
+        fallback["detector_backend"] = "legacy_pre_cutover_fallback"
+        fallback["claim_switch_error"] = type(exc).__name__
+        fallback["publication_compatibility_lock"] = True
+        return fallback
+    if previous_state.get("detector_backend") == "claim_native":
+        hold = copy.deepcopy(previous_state)
+        hold["detector_backend"] = "claim_native_hold"
+        hold["claim_switch_error"] = "claim_authority_gate_not_ready"
+        hold["publication_compatibility_lock"] = True
+        hold["new_count"] = 0
+        hold["updated_count"] = 0
+        hold["switch_hold"] = True
+        return hold
+    fallback = _refresh_shock_inference_legacy(data, previous_state, completed_iso)
+    fallback["detector_backend"] = "legacy_pre_cutover_fallback"
+    fallback["claim_switch_error"] = "claim_authority_gate_not_ready"
+    fallback["publication_compatibility_lock"] = True
+    return fallback
+
+
 def feedback_queries(state: dict[str, Any] | None, limit: int = 6) -> list[str]:
     """Turn live shock hypotheses into bounded support *and* challenge searches.
 
@@ -803,6 +855,17 @@ def feedback_queries(state: dict[str, Any] | None, limit: int = 6) -> list[str]:
     """
     if not isinstance(state, dict):
         return []
+    if state.get("detector_backend") == "claim_native":
+        try:
+            try:
+                from scripts.claim_reasoning_live import claim_feedback_queries
+            except ModuleNotFoundError:
+                from claim_reasoning_live import claim_feedback_queries  # type: ignore
+            qs = claim_feedback_queries(state, limit)
+            if qs:
+                return qs
+        except Exception:
+            pass
     shocks = [x for x in state.get("dynamic_shocks", []) if isinstance(x, dict)]
     shocks.sort(
         key=lambda x: (int(x.get("inference_score", 0) or 0), _clean(x.get("last_updated_at"))),

@@ -145,12 +145,17 @@ def flatten_claims(active: dict[str, Any], vocab: dict[str, Any] | None = None) 
                 if not isinstance(claim, dict):
                     diag["invalid_claim_objects"] += 1
                     continue
+                # Strand B and explicitly world-disabled claims are outside the world
+                # reasoning graph by design. Their schema is validated by the claim
+                # import/validator pipeline; the reasoning flattener should exclude
+                # them before object-vocabulary checks so methods-only vocabulary does
+                # not leak into world reasoning.
+                if collection == "strand_b" or not _world_reasoning_allowed(claim):
+                    diag["methods_or_world_disabled"] += 1
+                    continue
                 errors = validate_claim(claim, vocab)
                 if errors:
                     diag["schema_invalid_claims"] += 1
-                    continue
-                if collection == "strand_b" or not _world_reasoning_allowed(claim):
-                    diag["methods_or_world_disabled"] += 1
                     continue
                 era = clean(claim.get("era"))
                 kind = clean(claim.get("kind"))
@@ -161,9 +166,12 @@ def flatten_claims(active: dict[str, Any], vocab: dict[str, Any] | None = None) 
                     primary = True
                     context_weight = 1.0
                 elif collection == "strand_c":
-                    # R-09: only KEEP event content from C is primary. Diagnosis and
-                    # advocacy remain context because they are interpretation, not event.
-                    primary = decision == "keep" and kind in {"action", "effect"}
+                    # R-09: only Deep-Scan KEEP event content from C is primary.
+                    # Provisional C claims remain context-only even when their sentence
+                    # looks like an action/effect; Deep Scan must verify event semantics
+                    # before they can fill a world-reasoning role.
+                    provisional = bool(claim.get("provisional")) or clean(claim.get("origin")) == "provisional"
+                    primary = (not provisional) and decision == "keep" and kind in {"action", "effect"}
                     context_weight = 1.0 if primary else 0.3
                 else:
                     primary = False
@@ -179,6 +187,7 @@ def flatten_claims(active: dict[str, Any], vocab: dict[str, Any] | None = None) 
                     "_decision": decision,
                     "_primary": primary,
                     "_context_weight": context_weight,
+                    "_new_this_scan": bool(row.get("new_this_scan")),
                     "_clusters": sorted(claim_clusters(claim, vocab)),
                 })
                 nodes.append(node)
@@ -1382,10 +1391,19 @@ def claim_expressiveness(nodes: Iterable[dict[str, Any]]) -> dict[str, Any]:
     }
 
 def legacy_summary(raw: dict[str, Any]) -> dict[str, Any]:
+    # Despite the historical function name, this is the persisted *live detector*
+    # snapshot.  Stage 6 uses these fields to prove that the detector backend
+    # actually switched while the publication compatibility lock stayed closed.
     state = raw.get("high_order_inference") if isinstance(raw.get("high_order_inference"), dict) else {}
     cs = [c for c in state.get("candidates", []) if isinstance(c, dict)]
     return {
         "profile_version": state.get("profile_version"),
+        "detector_backend": state.get("detector_backend", "legacy"),
+        "detector_switch_stage": state.get("detector_switch_stage"),
+        "publication_compatibility_lock": bool(state.get("publication_compatibility_lock", False)),
+        "claim_candidate_count": int(state.get("claim_candidate_count", 0) or 0),
+        "legacy_publication_carry_count": int(state.get("legacy_publication_carry_count", 0) or 0),
+        "claim_switch_error": state.get("claim_switch_error"),
         "candidate_count": len(cs),
         "by_status": dict(Counter(clean(c.get("status")) for c in cs)),
         "by_product": dict(Counter(clean(c.get("product")) for c in cs)),
@@ -1456,13 +1474,14 @@ def run_shadow(root: Path = ROOT, evaluated_at: str | None = None) -> dict[str, 
         "migration_gate": {
             "semantic_quality_ready": bool(expressiveness.get("ready_for_detector_switch")),
             "production_grammars_implemented": True,
-            "publication_lock_held": True,
-            "two_scan_observation_required": True,
-            "detector_switch_code_enabled": False,
+            "publication_lock_held": bool(legacy.get("publication_compatibility_lock", True)),
+            "two_scan_observation_required": clean(legacy.get("detector_backend")) != "claim_native",
+            "detector_switch_code_enabled": clean(legacy.get("detector_backend")) == "claim_native",
+            "live_detector_backend": clean(legacy.get("detector_backend")) or "legacy",
         },
         "limitations": [
-            "No shadow candidate is publishable until falsifier execution is recorded by candidate fingerprint.",
-            "Stage 5 implements the production grammar family in shadow; Stage 6 remains disabled until the required two-scan shadow observation is accepted.",
+            "No diagnostic shadow candidate is publishable until falsifier execution is recorded by candidate fingerprint.",
+            "Stage 6 may switch live detector generation to claims, but reader publication remains compatibility-locked until Stage 7.",
             "Trend pull is preliminary where explicit action-dedup/hostile-witness metadata are absent.",
         ],
     }
@@ -1475,9 +1494,9 @@ def summary_markdown(report: dict[str, Any]) -> str:
         f"Evaluated: {report['evaluated_at']}", "",
         "**This artifact is diagnostic only. It does not alter the public Radar.**", "",
         "## Claim layer", f"- Loaded world-reasoning claims: {d.get('claims_loaded',0)}", f"- Primary claims: {d.get('primary_claims',0)}", f"- Context claims: {d.get('context_claims',0)}", f"- Methods/world-disabled claims excluded: {d.get('methods_or_world_disabled',0)}", "",
-        "## Migration gate", f"- Semantic quality ready: {gate.get('semantic_quality_ready')}", f"- Production grammars implemented in shadow: {gate.get('production_grammars_implemented')}", f"- Publication lock held: {gate.get('publication_lock_held')}", f"- Two-scan observation still required: {gate.get('two_scan_observation_required')}", f"- Detector switch enabled: {gate.get('detector_switch_code_enabled')}", "",
+        "## Migration gate", f"- Semantic quality ready: {gate.get('semantic_quality_ready')}", f"- Production grammars implemented in shadow: {gate.get('production_grammars_implemented')}", f"- Live detector backend: {gate.get('live_detector_backend')}", f"- Publication lock held: {gate.get('publication_lock_held')}", f"- Two-scan observation still required: {gate.get('two_scan_observation_required')}", f"- Detector switch enabled: {gate.get('detector_switch_code_enabled')}", "",
         "## Claim-native shadow", f"- Level 2 corroborated claims: {c['level2']}", f"- Level 3 sequence/gap + era findings: {c['level3']}", f"- Level 4 opposing movements: {c['level4']}", f"- Dependency-pathway candidates: {c['dependency_pathway']}", f"- Conflicting-criteria candidates: {c['conflicting_criteria']}", f"- Latent-channel candidates: {c['latent_channel']}", f"- Anchor-demand candidates: {c['anchor_demand']}", f"- Split-recurrence candidates: {c['split_recurrence']}", f"- Era-conjunction findings: {c['era_conjunction']}", f"- Score gates passed: {c['score_gate_passes']}", f"- Publication gates passed: {c['publication_gate_passes']} (intentionally zero in Stage 5)", "",
-        "## Legacy diff", f"- Legacy candidates: {legacy.get('candidate_count',0)}", f"- Legacy status counts: `{json.dumps(legacy.get('by_status',{}), sort_keys=True)}`", f"- Grammar count delta: `{json.dumps(report.get('shadow_diff',{}).get('count_delta_by_grammar',{}), sort_keys=True)}`", "",
+        "## Live detector snapshot / diff", f"- Detector backend: {legacy.get('detector_backend','legacy')}", f"- Persisted candidates: {legacy.get('candidate_count',0)}", f"- Claim-native candidates: {legacy.get('claim_candidate_count',0)}", f"- Legacy publication carries: {legacy.get('legacy_publication_carry_count',0)}", f"- Persisted status counts: `{json.dumps(legacy.get('by_status',{}), sort_keys=True)}`", f"- Grammar count delta: `{json.dumps(report.get('shadow_diff',{}).get('count_delta_by_grammar',{}), sort_keys=True)}`", "",
         "## Safety", "- No scanner write", "- No Deep Scan decision change", "- No radar.json/radar_active.json write", "- No reader/publication switch", "",
     ]
     return "\n".join(lines)

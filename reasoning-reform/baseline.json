@@ -13,6 +13,40 @@
     "needs_manual_verification": 15,
     "review": 32
   },
+  "approved_migrations": [
+    {
+      "approved_files": [
+        "scripts/prepare_deep_scan_package.py",
+        "scripts/import_deep_scan_results.py",
+        "scripts/active_corpus.py"
+      ],
+      "purpose": "Extend Deep Scan output/import and active-view carriage for schema-validated claims; scanner and legacy reasoning unchanged.",
+      "stage": "stage4-future-deep-scan-claims"
+    },
+    {
+      "approved_files": [
+        "scripts/high_order_inference.py",
+        "scripts/shock_inference.py",
+        "scripts/claim_reasoning_shadow.py",
+        "scripts/claim_reasoning_live.py"
+      ],
+      "purpose": "Switch high-order and shock detector generation to the verified claim graph after two clean shadow scans; preserve publication compatibility lock and fail closed to legacy if claim authority is unavailable.",
+      "stage": "stage6-claim-detector-switch"
+    },
+    {
+      "approved_files": [
+        "scripts/high_order_inference.py",
+        "scripts/shock_inference.py",
+        "scripts/claim_reasoning_live.py",
+        "scripts/claim_reasoning_shadow.py",
+        "scripts/run_reasoning_reform_smoke.py",
+        "tests/test_reasoning_reform_detector_switch.py",
+        "reasoning-reform/STAGE6.md"
+      ],
+      "purpose": "Switch high-order and shock detector generation to the accepted claim-native backend while preserving scanner/Deep Scan authority and freezing reader publication IDs until Stage 7.",
+      "stage": "stage6-claim-native-detector-switch"
+    }
+  ],
   "captured_for_repository_version": "v25.1.0-evidence-linked-reader",
   "data_hashes_for_reference_only": {
     "admission_state.json": "9fab021e2787d77f534b3f0b87d4f8930c818764d9bf3270859d8899f4da9bb9",
@@ -21,8 +55,8 @@
     "reader_text.json": "496cdca24ec3e9150b78ded9e41ae9c35a27b7e691a5d42c5fd4df64053a5d96"
   },
   "legacy_reasoning_hashes": {
-    "scripts/high_order_inference.py": "0b97d24442b82eea9bba1603ebb8d8ed165d314bf8a6a1a78ebef49af75e87d5",
-    "scripts/shock_inference.py": "c8d83410867b43ecbc1bffca01465791f4b97dfdc61da7e05f3d42fab35abb7d"
+    "scripts/high_order_inference.py": "c3250fbcc4198273e64f9ad5838aa89e5b2ed7509d79c9d0d4855a863a21b24d",
+    "scripts/shock_inference.py": "26051ca071108d6ee77063bd7b5c1c715cf29038de575920932be1a2f58c0add"
   },
   "profile": "radar-reasoning-reform-baseline-v1",
   "protected_code_hashes": {
@@ -54,19 +88,15 @@
   "smoke_suite": {
     "baseline_result": "65 passed",
     "command": "python scripts/run_reasoning_reform_smoke.py",
-    "note": "Full pytest collection was not used as the fast gate because at least one downstream-retrace integration test is intentionally long-running; the focused safety suite completes quickly and covers scanner/Deep Scan/active-boundary contracts.",
-    "latest_stage4_result": "94 passed"
+    "latest_stage4_result": "94 passed",
+    "latest_stage6_result": "124 passed (34 + 31 + 59 grouped safety runs)",
+    "note": "Full pytest collection was not used as the fast gate because at least one downstream-retrace integration test is intentionally long-running; the focused safety suite completes quickly and covers scanner/Deep Scan/active-boundary contracts."
   },
   "source_upload": "radar_articles_reports-main - 2026-09-17T191155.925.zip",
-  "approved_migrations": [
-    {
-      "stage": "stage4-future-deep-scan-claims",
-      "purpose": "Extend Deep Scan output/import and active-view carriage for schema-validated claims; scanner and legacy reasoning unchanged.",
-      "approved_files": [
-        "scripts/prepare_deep_scan_package.py",
-        "scripts/import_deep_scan_results.py",
-        "scripts/active_corpus.py"
-      ]
-    }
-  ]
+  "stage6_detector_switch_hashes": {
+    "scripts/claim_reasoning_live.py": "b7b1e7a2c67250b2ecbfef3701b5717dfb6b9eb60c37b93e17591d79f7bad15d",
+    "scripts/claim_reasoning_shadow.py": "9ee5b0291028c6b2aeadb9ba4f230f333b430cd65c5cd537e49694c2385e0abf",
+    "scripts/high_order_inference.py": "776ce6d7fcf921afa94c03f78ffd4ae36de51ab031b56a5c4dcedbb740859046",
+    "scripts/shock_inference.py": "08ca326be0387db44a9378dc482a62ae8d1d6edad0ab44b3376d5a1cde436631"
+  }
 }
