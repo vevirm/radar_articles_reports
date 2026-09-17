@@ -1,0 +1,37 @@
+name: Reasoning Reform — Run Claim Shadow
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  shadow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install repository dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest
+      - name: Protect scanner and Deep Scan core
+        run: python scripts/check_reasoning_reform_core_freeze.py
+      - name: Run reasoning-reform safety suite
+        run: python scripts/run_reasoning_reform_smoke.py
+      - name: Build claim-native shadow artifact
+        run: |
+          mkdir -p claim-shadow
+          python scripts/claim_reasoning_shadow.py \
+            --output claim-shadow/claim-reasoning-shadow.json \
+            --summary claim-shadow/README.md
+      - name: Upload shadow report
+        uses: actions/upload-artifact@v4
+        with:
+          name: reasoning-claim-shadow
+          path: claim-shadow/
+          if-no-files-found: error
