@@ -6,17 +6,17 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1307** (Main **644** + Historical **663**)
-- Automatic queue still needing V2 verification: **80** (Main **1** + Historical **79**)
-- Currently assigned to workers: **76** (Main **1** + Historical **75**)
-- Bounded access-recovery retries still eligible: **4**
+- Authoritative V2 verified: **1339** (Main **644** + Historical **695**)
+- Automatic queue still needing V2 verification: **48** (Main **1** + Historical **47**)
+- Currently assigned to workers: **48** (Main **1** + Historical **47**)
+- Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **55**
-- Automatic queue pending and not yet assigned: **4**
+- Automatic queue pending and not yet assigned: **0**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260917T110032Z-9c77ac8c844d`
+- Current package: `worker-a-20260917T110536Z-9c77ac8c844d`
 - Assigned unresolved records: **36**
   1. `historical:id:aadde2c8ca8c0e11` — Shaping Innovation: A Regional Perspective on Industrial PhD Programs in Italy
   2. `historical:id:3391d6827787322e` — Open radar groups: The integration of online communities into open foresight processes
@@ -29,17 +29,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260917T110044Z-c1088ee0206d`
-- Assigned unresolved records: **40**
-  1. `historical:id:54a0ed573cfd4e70` — Academic freedom is becoming part of Europe's competitive offer to global researchers as well as a condition for reliable knowledge production. — recovery attempt 2/3
-  2. `historical:id:98e96e23a8b4f1f0` — Network structure of scientific collaborations between China and the EU member states
-  3. `historical:id:19c9f8c2cfcde1e7` — Understanding European Union Science Diplomacy
-  4. `historical:id:922a27831be9f4dd` — Science diplomacy: Investigating the perspective of scholars on politics–science collaboration in international affairs
-  5. `historical:id:213e2cf46ab28ca9` — Re-interpreting knowledge, expertise and EU governance: The cases of social policy and security research policy
-  6. `historical:id:eeecb62cc7e3d144` — Science Production in Germany, France, Belgium, and Luxembourg: Comparing the Contributions of Research Universities and Institutes to Science, Technology, Engineering, Mathematics, and Health
-  7. `historical:id:7b7948a4531eb32b` — The Arab Foresight Group
-  8. `historical:id:910dc68b07fcc3fd` — Risky business? The EU, China and dual-use technology
-  - … plus 32 more in the package manifest
+- Current package: `worker-b-20260917T110547Z-93d5ce97efeb`
+- Assigned unresolved records: **12**
+  1. `historical:id:ea172fb497c5e020` — From strategic autonomy to strategic partnership: <scp>EU</scp>–India relations in health diplomacy — recovery attempt 3/3
+  2. `historical:id:6212b03e377b75be` — The paradox of semiconductors—EU governance between sovereignty and interdependence — recovery attempt 3/3
+  3. `historical:id:40a66178c02fbfdc` — Geopolitics and Science and Technology Cooperation in Argentina, Chile, and Colombia — recovery attempt 3/3
+  4. `historical:id:b4ea7b84e8c47191` — Tendencies and prospects of Russian-French scientific collaboration — recovery attempt 2/3
+  5. `historical:id:4a0af82a0f2a2fbb` — In Space, 2018 Already Beats 2017 — recovery attempt 2/3
+  6. `historical:id:ef177fec64355bc6` — Europe and the Digital Single Market: What Next ? — recovery attempt 2/3
+  7. `historical:id:9359de208b9e0ce9` — China’s international research collaboration: evidence from a panel gravity model — recovery attempt 2/3
+  8. `historical:id:922a27831be9f4dd` — Science diplomacy: Investigating the perspective of scholars on politics–science collaboration in international affairs — recovery attempt 2/3
+  - … plus 4 more in the package manifest
 
 ## Hands-on verification needed
 

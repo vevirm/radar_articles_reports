@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-17T10:58:01Z",
+  "generated_at": "2026-09-17T11:03:36Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -91733,6 +91733,2074 @@
       "reader_text_model": "user-provided-llm-subscription",
       "reader_text_written_at": "2026-09-17T10:58:01Z",
       "deep_scan_package_id": "worker-a-20260917T090649Z-5d29b20d76c3"
+    },
+    "historical:id:54a0ed573cfd4e70": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "UNCLASSIFIED",
+      "corpus_scope": "historical",
+      "source_hash": "b12e04c2",
+      "identity_hash": "5498f2a1ce921629",
+      "reader_title": "European Parliament monitor examines how free academics really are across the EU",
+      "reader_what": "The 2024 monitor updates country measures and analyses de facto academic freedom in ten Member States, proposing EU policy options.",
+      "reader_why": "Concerns about eroding academic freedom inside the EU bear on research quality and Europe’s attractiveness to researchers.",
+      "reader_more": "The study for the European Parliament’s STOA panel, written by University of Oslo researchers, reviews existing academic freedom indices country by country and adds qualitative analysis of ten Member States using stakeholder and expert input. It notes there is no agreed definition or indicator set, making it hard to target protection. On that basis it proposes legislative and non-legislative EU options to promote academic freedom.",
+      "deep_analysis": {
+        "work_kind": "policy study / monitoring report",
+        "research_question": "What is the de facto state of academic freedom in EU Member States?",
+        "main_finding": "Legitimate concerns about de facto academic freedom exist in several Member States; lack of shared definitions hampers protection.",
+        "method_or_basis": "Review of academic freedom monitors plus qualitative country analyses with stakeholder and expert input.",
+        "qualification": "Qualitative and index-based; no single agreed measure.",
+        "radar_relevance": "EU research-policy framework conditions (academic freedom).",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "op.europa.eu publication page for \"Academic Freedom Monitor 2024. Part II\" (metadata and summary)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI given; EPRS reference PE 765.775."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Full PDF (~60,000 words) downloaded via op.europa.eu download handler (identifier 16fdd458-19a4-11f0-b1a3-01aa75ed71a1); summary, authorship and structure read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://op.europa.eu/en/publication-detail/-/publication/16fdd458-19a4-11f0-b1a3-01aa75ed71a1/language-en",
+            "title": "Academic Freedom Monitor 2024 Part II: Analysis of de facto state of academic freedom in the EU – Country overview",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Scanner title was an interpretive claim (\"competitive offer to global researchers\") not found as the work title and not verified as a finding. EPRS/STOA study, April 2025, authors Maassen, Jungblut, Martinsen, Øvrebø (University of Oslo)."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "European Parliament STOA study measuring de facto academic freedom across EU Member States with EU-level policy options."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:31Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:98e96e23a8b4f1f0": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "7b919da5",
+      "identity_hash": "a14024b65f28f66d",
+      "reader_title": "Newer EU members increasingly reshaped Europe’s science links with China",
+      "reader_what": "Co-authorship networks show middle- and low-capacity EU states, especially newer members, actively expanding scientific collaboration with China.",
+      "reader_why": "Shows how EU integration and China ties redistributed brokerage positions in Europe’s research collaboration network.",
+      "reader_more": "Using co-authored publications from 2000 to 2014, the authors map collaboration between China and the 28 EU member states and among those states. Links among lower-capacity countries strengthened markedly, and positional advantage measured by betweenness centrality spread from a few dominant nations to more countries. Belgium, Sweden and Denmark act as bridges connecting newer member states with China. The paper situates this within EU–China science and technology agreements.",
+      "deep_analysis": {
+        "work_kind": "bibliometric network analysis",
+        "research_question": "How did the collaboration network between China and EU member states change in 2000–2014?",
+        "main_finding": "Network centrality broadened; newer, lower-capacity EU states increasingly collaborated with China, often via bridging countries.",
+        "method_or_basis": "Co-authorship data and social network analysis (centrality measures).",
+        "qualification": "Publication co-authorship captures only one form of collaboration.",
+        "radar_relevance": "European research internationalisation and EU–China science relations.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://doi.org/10.1007/s11192-017-2488-6 -> Springer open-access article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Wang, Wang, Philipsen, Scientometrics 113:765-781, online 2017-08-21."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publisher PDF (~8,000 words) downloaded and read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/content/pdf/10.1007/s11192-017-2488-6.pdf",
+            "title": "Network structure of scientific collaborations between China and the EU member states",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full article read."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Co-authorship network analysis of EU28 member states’ scientific collaboration with China and among themselves, 2000–2014."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:32Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:19c9f8c2cfcde1e7": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "67641857",
+      "identity_hash": "c91b5b4793a32e7a",
+      "reader_title": "Why the EU does science diplomacy: market power and normative aims combined",
+      "reader_what": "EU science diplomacy mixes market-power goals like competitiveness with normative goals such as peace-building and sustainable development.",
+      "reader_why": "Clarifies motives behind the external dimension of EU research policy under Horizon 2020.",
+      "reader_more": "The authors analyse Commission communications, Council conclusions and commissioners’ speeches, identifying nine role conceptions for the EU in external science policy, and check them against actual initiatives such as SESAME. They find the EU reinforcing classic international S&T cooperation while developing genuine “science for diplomacy”. Some efforts leverage the EU’s market power in science for economic objectives; others, backed by the External Action Service, pursue a normative agenda.",
+      "deep_analysis": {
+        "work_kind": "qualitative policy discourse analysis",
+        "research_question": "What motivates the EU’s evolving science diplomacy?",
+        "main_finding": "EU science diplomacy reflects both market power Europe and normative power Europe logics.",
+        "method_or_basis": "Discourse analysis of EU documents and speeches using Holsti’s role conceptions, validated against EU actions.",
+        "qualification": "Based on official discourse to 2016; effects not measured.",
+        "radar_relevance": "External dimension of EU R&I policy and science diplomacy.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1111/jcms.12582 -> Wiley; HTTP 403 (scanner also 403)."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: López de San Román & Schunz, JCMS 56(2), online 2017-08-07, print 2018-03."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "LSE eprint 85573 link returned 404; KU Leuven Lirias author copy https://lirias.kuleuven.be/retrieve/c524246b-acde-4b48-85be-4e814dcda2fd (~9,000 words) downloaded and read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://lirias.kuleuven.be/retrieve/c524246b-acde-4b48-85be-4e814dcda2fd",
+            "title": "Understanding European Union Science Diplomacy (author manuscript)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Supplied URL blocked; matching work recovered at repository step (Lirias accepted manuscript)."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Discourse and behaviour analysis of EU science diplomacy and international S&T cooperation policy."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:32Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:213e2cf46ab28ca9": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "d124479d",
+      "identity_hash": "766eeeff520d7baa",
+      "reader_title": "Who shapes EU security research policy? Corporations’ practical knowledge gains privilege",
+      "reader_what": "Corporations used practical expertise to gain privileged positions in EU security research policy; social policy relied on academic networks.",
+      "reader_why": "Shows how the organisation of expertise tilts EU research programmes toward particular actors and interests.",
+      "reader_more": "Carmel compares two EU policy areas using the idea of “linked ecologies” of research, expertise and policymaking. In social policy, the social investment discourse spread via European social science, academic politicians and the open method of coordination. In security research policy, large European corporations leveraged practical know-how to secure a privileged discursive and political position across research, product development and EU policymaking. Knowledge production thus privileges particular versions of the EU.",
+      "deep_analysis": {
+        "work_kind": "qualitative comparative policy analysis",
+        "research_question": "How are knowledge and expertise articulated in EU governance?",
+        "main_finding": "Different knowledge ecologies privilege different actors; corporate practical knowledge dominated EU security research policy.",
+        "method_or_basis": "Interpretive analysis of policy documents and governance processes in two cases.",
+        "qualification": "Interpretive case comparison.",
+        "radar_relevance": "Governance of EU security research programmes.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1057/s41295-016-0079-1 -> Springer page, abstract/notes only."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Emma Carmel, Comparative European Politics 15(5), online 2016-10-24."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "University of Bath Pure alternate host https://purehost.bath.ac.uk/ws/files/153405198/Carmel_June_2016_CEPS_submission_copy_edited.docx (accepted manuscript) downloaded, converted and read (~10,300 words)."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://purehost.bath.ac.uk/ws/files/153405198/Carmel_June_2016_CEPS_submission_copy_edited.docx",
+            "title": "Re-interpreting knowledge, expertise and EU governance (accepted manuscript)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Previous defer overturned: accepted manuscript recovered."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Analyses how knowledge and expertise, including corporate influence in EU security research policy, shape EU governance."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:32Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:eeecb62cc7e3d144": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "3c41aefa",
+      "identity_hash": "590a567c5f409ede",
+      "reader_title": "How universities and institutes built science output in four European countries",
+      "reader_what": "Research universities drove most STEM and health publication growth in Germany, France, Belgium and Luxembourg, but institutional pathways differ.",
+      "reader_why": "Shows funding or country size alone does not explain scientific productivity; organisational structures matter.",
+      "reader_more": "Using a database of Science Citation Index articles from 1900 to 2010, the authors trace scientific production by organisational form in four neighbouring EU states. Neither R&D spending nor country size fully accounts for differences in productivity growth. Universities were the main producers, while France and Germany also developed large differentiated non-university institute sectors. Germany and Belgium had more institutionalised research universities than France and Luxembourg.",
+      "deep_analysis": {
+        "work_kind": "historical-comparative bibliometric study",
+        "research_question": "How did universities and research institutes contribute to science production in four EU countries?",
+        "main_finding": "Universities remain central producers; distinct national institutionalisation paths shape productivity beyond investment levels.",
+        "method_or_basis": "Neo-institutional analysis of SCIE publication data 1900–2010 by organisational form.",
+        "qualification": "Publication counts limited to indexed STEM and health journals.",
+        "radar_relevance": "Structure of European national research systems.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://doi.org/10.1007/s11024-017-9327-z -> Springer open-access article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Powell & Dusdal, Minerva 55:413-434, online 2017-07-10, CC BY."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publisher PDF (~9,600 words) downloaded and read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/content/pdf/10.1007/s11024-017-9327-z.pdf",
+            "title": "Science Production in Germany, France, Belgium, and Luxembourg",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full article read."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Long-run comparison of scientific output and organisational forms (universities vs research institutes) in four EU member states."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:32Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:7b7948a4531eb32b": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "UNCLASSIFIED",
+      "corpus_scope": "historical",
+      "source_hash": "8a7c017f",
+      "identity_hash": "8349d5f615d7ece4",
+      "deep_analysis": {
+        "work_kind": "event page",
+        "research_question": "",
+        "main_finding": "Describes three 2014 EUISS expert meetings leading to an Arab Futures scenarios report.",
+        "method_or_basis": "Direct reading of page.",
+        "qualification": "No analytic content.",
+        "radar_relevance": "Fails A and B.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://www.iss.europa.eu/activities/events/arab-foresight-group fetched: EUISS activity page describing three 2014 expert meetings and linking other briefs."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI; event page."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_web_page",
+            "url": "https://www.iss.europa.eu/activities/events/arab-foresight-group",
+            "title": "The Arab Foresight Group (EUISS activity page)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Page describes meetings held April–July 2014; scanner date 2017-05-18 is a crawl artefact."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "",
+        "reason_code": "EVENT_PAGE_NO_SUBSTANTIVE_WORK",
+        "reason": "Event/activity description of a MENA foresight expert group; no R&I content, no reusable method set out, and historical records cannot be C."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:32Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:910dc68b07fcc3fd": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "33aabde4",
+      "identity_hash": "e7d2815ebefd667b",
+      "reader_title": "An early warning that Europe lacked a policy on dual-use technology transfer to China",
+      "reader_what": "The paper urges a proactive EU policy on managing risks of transferring sensitive dual-use technologies to China.",
+      "reader_why": "Anticipates later EU research-security and export-control debates about protecting Europe’s technological lead.",
+      "reader_more": "Written for the EU Institute for Security Studies, the paper notes that European debate on China focused on intellectual property rather than on dual-use technologies usable militarily. Unlike the US, the EU had no overview of sensitive technology exports to China. Fragmented national export regimes and shrinking research investment put Europe’s technological lead at risk while firms sought Chinese revenues. It calls for a common understanding of economic, political and security risks.",
+      "deep_analysis": {
+        "work_kind": "policy analysis paper",
+        "research_question": "How should the EU manage risks of dual-use technology transfer to China?",
+        "main_finding": "EU dual-use policy toward China was fragmentary and needed a proactive common approach.",
+        "method_or_basis": "Policy analysis of export regimes, transatlantic concerns and China’s military-technological development.",
+        "qualification": "2009 perspective; recommendations not evaluated.",
+        "radar_relevance": "Historical research-security and technology-protection context for Europe.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "EUISS publication page https://www.iss.europa.eu/publications/occasional-papers/risky-business-eu-china-and-dual-use-technology gives full summary and links PDF op80.pdf."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "PDF https://www.iss.europa.eu/sites/default/files/EUISSFiles/op80.pdf retrieved (text layer partly font-encoded); page summary and PDF front matter used."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_web_page",
+            "url": "https://www.iss.europa.eu/publications/occasional-papers/risky-business-eu-china-and-dual-use-technology",
+            "title": "Risky business? The EU, China and dual-use technology (EUISS Occasional Paper 80)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "EUISS Occasional Paper 80 by May-Britt U. Stumbaum, 2009; scanner date 2017-05-18 is crawl artefact."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Analyses EU policy on sensitive dual-use technology transfer to China, fragmented export regimes and risk to EU technological lead: early research-security evidence."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:33Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:74793cb4fc91fe51": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "4ce8c2c2",
+      "identity_hash": "e507f0c104a485ff",
+      "reader_title": "Why Europe had no common export policy for arms and dual-use goods",
+      "reader_what": "Export controls split between Community dual-use rules and national arms policies, leaving Europe without a common export policy.",
+      "reader_why": "Explains institutional roots of fragmented European control over sensitive technologies still debated today.",
+      "reader_more": "Burkard Schmitt shows that arms and dual-use exports sit between Community commercial policy and member-state security policy. The dual-use regime was binding Community law based on mutual recognition, while the Code of Conduct on arms exports was only politically binding. Major arms-producing states created separate Letter of Intent rules for joint programmes. He expects gradual convergence and liberalisation of dual-use controls.",
+      "deep_analysis": {
+        "work_kind": "policy analysis paper",
+        "research_question": "Is a common European export policy for defence and dual-use items emerging?",
+        "main_finding": "No common policy existed in 2001; overlapping regimes suggested only gradual convergence.",
+        "method_or_basis": "Institutional and legal analysis of EC regulation, CFSP Code of Conduct and LoI framework.",
+        "qualification": "Pre-dates later recasts of the dual-use regulation.",
+        "radar_relevance": "Historical context for EU technology export control and defence-industrial governance.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "EUISS page https://www.iss.europa.eu/publications/occasional-papers/common-european-export-policy-defence-and-dual-use-items gives summary and PDF link occ025.pdf."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "PDF https://www.iss.europa.eu/sites/default/files/EUISSFiles/occ025.pdf (~13,600 words) downloaded and read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://www.iss.europa.eu/sites/default/files/EUISSFiles/occ025.pdf",
+            "title": "A common European export policy for defence and dual-use items? (Occasional Paper 25)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Institute for Security Studies of WEU Occasional Paper 25 by Burkard Schmitt, May 2001."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Analyses EU dual-use export control regime and defence-industrial export coordination, relevant to European technological/industrial capability governance."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:33Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:681311f8e6ec428f": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "a49f8d2c",
+      "identity_hash": "4e835f1dfdf161c8",
+      "deep_analysis": {
+        "work_kind": "defence briefing",
+        "research_question": "",
+        "main_finding": "Kaliningrad forces strengthened with offensive and nuclear-capable systems.",
+        "method_or_basis": "Open-source military analysis.",
+        "qualification": "Short briefing.",
+        "radar_relevance": "Fails A: security topic without R&I connection.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "FOI PDF RUFS-40 Military strategy and force structure in Kaliningrad (FOI Memo 6060) downloaded and read (~1,300 words)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://www.foi.se/download/18.7fd35d7f166c56ebe0bbfe7/1542369070079/RUFS-40_Military-strategy-and-force-structure-in-Kaliningrad_FOI-Memo-6060.pdf",
+            "title": "Russia’s Military Strategy and Force Structure in Kaliningrad",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Two-page FOI Russia Studies briefing by Fredrik Westerlund; cites developments to December 2016."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NO_RI_CONNECTION",
+        "reason": "Military posture analysis of Russian forces in Kaliningrad; no research, innovation, technology or research-policy content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:33Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:f6e2a594003c640d": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "a4c90735",
+      "identity_hash": "34e6dc004f4d937d",
+      "deep_analysis": {
+        "work_kind": "conceptual essay",
+        "research_question": "",
+        "main_finding": "Big Data both needs TA scrutiny and rivals TA in assessing public views and futures.",
+        "method_or_basis": "Conceptual argument drawing on TA and critical data studies.",
+        "qualification": "No operational method.",
+        "radar_relevance": "Fails B.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1080/23299460.2017.1360718 -> tandfonline 403."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Rieder & Simon, Journal of Responsible Innovation 4(2), issued 2017."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "ITU Copenhagen Pure preprint https://pure.itu.dk/ws/files/83026329/Rieder_Simon_2017_BigDataAndTechnologyAssessment_Preprint.pdf (~10,800 words) read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://pure.itu.dk/ws/files/83026329/Rieder_Simon_2017_BigDataAndTechnologyAssessment_Preprint.pdf",
+            "title": "Big Data and Technology Assessment: Research Topic or Competitor? (preprint)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Supplied URL blocked; work recovered at repository step."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_NO_REUSABLE_METHOD",
+        "reason": "Conceptual essay on Big Data as object of and competitor to technology assessment; offers no new or materially improved reusable method."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:33Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:2fc7ad9f1a39284e": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "UNCLASSIFIED",
+      "corpus_scope": "historical",
+      "source_hash": "32584f7e",
+      "identity_hash": "f03c82c8c6e875de",
+      "reader_title": "Hungary’s law against CEU as a test of EU academic freedom and rule of law",
+      "reader_what": "Hungary’s 2017 higher-education amendments targeted CEU, reflecting constitutional capture; the author urges stronger EU responses.",
+      "reader_why": "Shows how threats to a university within the EU raise European questions about academic freedom protection.",
+      "reader_more": "Petra Bárd examines amendments adopted on 4 April 2017 to Hungary’s higher-education act that were designed to force Central European University out. She explains why the law was tailored to CEU, how the government built political support, and places it in a wider pattern of weakened fundamental rights. She argues the EU’s tolerance of problem member states failed and rejects claims that Article 7 action would backfire.",
+      "deep_analysis": {
+        "work_kind": "legal-political policy paper",
+        "research_question": "What does the attack on CEU reveal and how should the EU respond?",
+        "main_finding": "The law selectively targeted CEU within broader constitutional capture; EU inaction had proved dysfunctional.",
+        "method_or_basis": "Legal analysis of the amendments and political context.",
+        "qualification": "Advocacy analysis written days after adoption.",
+        "radar_relevance": "Historical case on academic freedom as a European research-policy condition.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "CEPS page https://www.ceps.eu/ceps-publications/open-society-and-its-enemies-attack-against-ceu-academic-freedom-and-rule-law/ with abstract and download."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "PDF https://cdn.ceps.eu/wp-content/uploads/2017/04/PBard_Hungary%20and%20CEU.pdf (CEPS Policy Insights No 2017/14, ~8,800 words) read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://cdn.ceps.eu/wp-content/uploads/2017/04/PBard_Hungary%20and%20CEU.pdf",
+            "title": "The Open Society and Its Enemies: An attack against CEU, academic freedom and the rule of law",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "CEPS paper by Petra Bárd, April 2017."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Analysis of Hungary’s 2017 higher-education law targeting CEU as an academic freedom and rule-of-law crisis inside the EU, with proposed European responses."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:33Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:2081cb0becc89db2": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "a4405c6e",
+      "identity_hash": "cd78469708396871",
+      "reader_title": "Netherlands neither losing nor gaining researchers overall",
+      "reader_what": "Dutch researchers are highly mobile, but researcher inflow and outflow are balanced in numbers and quality.",
+      "reader_why": "Counters brain-drain fears with data, informing mobility policy in a small open European research system.",
+      "reader_more": "The Rathenau Instituut combined national and international data to track Dutch and foreign researcher mobility. Dutch researchers rank among the world’s most mobile, alongside Germany, Switzerland and the UK. The Netherlands experiences neither brain drain nor brain gain overall. Foreign nationals rose from 20% of Dutch university academic staff in 2005 to 33% in 2015, especially in engineering and science.",
+      "deep_analysis": {
+        "work_kind": "statistical factsheet",
+        "research_question": "Is the Netherlands experiencing brain drain or brain gain among researchers?",
+        "main_finding": "Researcher flows are balanced; academic staff are increasingly international.",
+        "method_or_basis": "Analysis of national staffing data and international bibliometric mobility tracking.",
+        "qualification": "Descriptive; quality measured via citation impact.",
+        "radar_relevance": "Evidence on researcher talent circulation in Europe.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Rathenau page https://www.rathenau.nl/en/werking-van-het-wetenschapssysteem/international-mobility-researchers with summary and PDF."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "PDF https://www.rathenau.nl/sites/default/files/2018-04/Internationale%20mobiliteit%20EN.pdf (~6,600 words) read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://www.rathenau.nl/sites/default/files/2018-04/Internationale%20mobiliteit%20EN.pdf",
+            "title": "International mobility of researchers (Facts & Figures)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Page cites Koier, Horlings, Scholten, de Jonge (March 2017), Facts & Figures 20."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Quantitative evidence on inflow and outflow of researchers for a European research system, addressing brain-drain concerns."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:33Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:96bbd9a9778e6a12": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "5dc609ae",
+      "identity_hash": "a63351c7ba8a8532",
+      "reader_title": "How the US, EU and UK first envisioned a “good AI society” in 2016",
+      "reader_what": "Comparing 2016 White House, European Parliament and UK Commons AI reports, authors find ethics covered but no long-term political vision.",
+      "reader_more": "In late 2016 the White House, the European Parliament and the UK House of Commons each published reports on preparing society for artificial intelligence. The authors compare how each treats a “good AI society”, the roles of government, industry and research, and weaknesses in recommendations. The reports handle ethical, social and economic topics adequately but lack an overarching political vision and long-term strategy. The notes show attention to AI research and development priorities and transparency. The authors propose a two-pronged approach.",
+      "deep_analysis": {
+        "work_kind": "comparative policy document analysis",
+        "research_question": "How do the US, EU and UK 2016 reports envision preparing society for AI?",
+        "main_finding": "All three address key ethical and socio-economic issues but lack a long-term political vision for a good AI society.",
+        "method_or_basis": "Comparative reading of three official reports; evidence here limited to abstract and endnotes.",
+        "qualification": "Body text not accessed; detailed recommendations not reported.",
+        "radar_relevance": "Early EU AI policy framing in transatlantic comparison.",
+        "confidence": "medium",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "https://doi.org/10.1007/s11948-017-9901-7 -> Springer page: abstract plus full set of substantive endnotes quoting the three reports; body paywalled."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Cath, Wachter, Mittelstadt, Taddeo, Floridi, Science and Engineering Ethics 24(2):505-528, online 2017-03-28."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "partial",
+            "note": "Web search for quoted title found PhilArchive record FLOAIA (abstract only via web fetch), SSRN version 2906249 (abstract) and bibliographic records."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Crossref bibliographic query returns the journal DOI and SSRN DOI 10.2139/ssrn.2906249."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "PhilArchive PDF https://philpapers.org/archive/FLOAIA.pdf 403 Cloudflare; SSRN papers page returned \"Content Blocked\" to automated access; not in PMC."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "Searched ora.ox.ac.uk / OII copies: only a different 2021 paper (Roberts et al., “Achieving a Good AI Society”) surfaced; not substituted."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_landing_with_notes",
+            "url": "https://link.springer.com/article/10.1007/s11948-017-9901-7",
+            "title": "Artificial Intelligence and the ‘Good Society’ — abstract and endnotes",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Previous defer changed: decision rests on abstract plus extensive endnotes quoting the White House/OSTP, European Parliament and UK reports; body text not recovered."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Comparative assessment in which the European Parliament’s 2016 AI/robotics report is a principal object, alongside US and UK, addressing AI R&D and governance roles."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:33Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:d0939bfd36dd9c22": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "ce3ff8b7",
+      "identity_hash": "9a04fada8710e53d",
+      "deep_analysis": {
+        "work_kind": "review / conceptual article",
+        "research_question": "",
+        "main_finding": "Corporate foresight fills gaps in MNC strategic planning under volatile conditions; practices share standard phases and methods.",
+        "method_or_basis": "Literature and company-practice review.",
+        "qualification": "Descriptive.",
+        "radar_relevance": "Fails B.",
+        "confidence": "medium",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "https://doi.org/10.17323/2500-2597.2017.1.9.22. (trailing dot) does not resolve in Crossref; scanner final URL foresight-journal.hse.ru/article/view/19336 is the matching article page."
+          },
+          {
+            "step": "doi",
+            "outcome": "failed",
+            "note": "DOI as stored returns 404 in Crossref/OpenAlex; Semantic Scholar maps it to an HSE PDF path that returns 404."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "OJS galley https://foresight-journal.hse.ru/article/download/19336/16970 (English PDF, 14 pages, ~11,200 words) downloaded and read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://foresight-journal.hse.ru/article/view/19336",
+            "title": "Corporate Foresight in Multinational Business Strategies",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching work recovered from journal OJS galley. Journal is Foresight and STI Governance (HSE), not Emerald’s foresight."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_NO_REUSABLE_METHOD",
+        "reason": "Reviews why multinationals adopt corporate foresight and describes common practices; synthesises existing approaches without a new or materially improved method."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:33Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:584ba1c45550a082": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "4c5fcb3b",
+      "identity_hash": "a04e9a8460d0265a",
+      "reader_title": "Top management commitment drives European universities’ collaboration with business",
+      "reader_what": "Survey of 2,157 managers in 33 European countries links strategic and operational support mechanisms to university–business cooperation.",
+      "reader_why": "Identifies organisational levers European universities can use to strengthen knowledge exchange with industry.",
+      "reader_more": "The study identifies mechanisms European higher education institutions use to foster cooperation with business, from strategies and top-management commitment to incentives, offices and staff. It relates them to seven cooperation activities, such as collaborative research, mobility and commercialisation. Most mechanisms are significantly associated with most activities; management support matters for all, and combining strategic with operational support works best.",
+      "deep_analysis": {
+        "work_kind": "quantitative survey study",
+        "research_question": "How are university–business cooperation support mechanisms related to cooperation activities in European HEIs?",
+        "main_finding": "Combined strategic and operational support, especially management commitment, is associated with more cooperation activities.",
+        "method_or_basis": "Survey of 2,157 HEI managers across 33 European countries; statistical association analysis.",
+        "qualification": "Cross-sectional self-reports; associations not causal.",
+        "radar_relevance": "European university–industry knowledge exchange.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1007/s10961-015-9451-6 -> Springer page, abstract and references only."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Galán-Muros, van der Sijde, Groenewegen, Baaken, Journal of Technology Transfer 42(1), online 2015-10-22."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "VU Amsterdam Pure alternate host https://research.vu.nl/ws/files/280281250/... (published version) downloaded and read (~11,200 words)."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://research.vu.nl/ws/files/280281250/Nurture_over_nature_How_do_European_universities_support_their_collaboration_with_business.pdf",
+            "title": "Nurture over nature: How do European universities support their collaboration with business?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Previous defer overturned: full article recovered."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Large survey of European higher-education managers on mechanisms supporting university–business cooperation."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:33Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:78f86a2f67a7ae8b": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "231571ed",
+      "identity_hash": "b99ac5b6ddacd13a",
+      "reader_title": "Internationally collaborating European academics publish about twice as much",
+      "reader_what": "Across eleven European countries, academics collaborating internationally published roughly twice as many articles as non-collaborating peers.",
+      "reader_more": "Marek Kwiek uses CAP and EUROAC surveys of the academic profession in 11 European countries. About two-thirds of academics report international research collaboration, with large differences by field and country. “Internationalists” published about twice as many articles as “locals”; the gap was larger in engineering and in physical sciences and mathematics. He cautions that causality may run either way.",
+      "deep_analysis": {
+        "work_kind": "short survey-based article",
+        "research_question": "Is international research collaboration associated with higher productivity across Europe?",
+        "main_finding": "Strong association between international collaboration and publication productivity across countries and fields.",
+        "method_or_basis": "Secondary analysis of CAP/EUROAC academic profession survey data, 11 European countries.",
+        "qualification": "Correlational; publication counts only.",
+        "radar_relevance": "Internationalisation and productivity of European academics.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "https://doi.org/10.1007/978-94-6351-161-2_71 -> Springer (SensePublishers) chapter page, abstract only."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: book chapter reprint in Understanding Higher Education Internationalization (2017), subtitle cites International Higher Education Special Issue 2015 No 83."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Crossref bibliographic query found original article 10.6017/ihe.2015.83.9076 in International Higher Education."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Original open-access galley https://ejournals.bc.edu/index.php/ihe/article/download/9076/8183 (IHE No 83, 2015) read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://ejournals.bc.edu/index.php/ihe/article/view/9076",
+            "title": "“Internationalists” and “Locals” in Research: Similar Productivity Patterns Across Europe (IHE 83)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Same text as the 2017 reprint chapter; original IHE article read."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Survey evidence from 11 European countries linking international research collaboration to academic productivity."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:33Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:fb242dae95604730": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "a3de8f02",
+      "identity_hash": "c0ac2d0e7861ce81",
+      "deep_analysis": {
+        "work_kind": "vacancy notice",
+        "research_question": "",
+        "main_finding": "Call for seconded national experts in particle and quantum physics.",
+        "method_or_basis": "Page read.",
+        "qualification": "None.",
+        "radar_relevance": "Fails A.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "ERA Portal Austria page for Seconded National Expert vacancy fetched; applications due 31 May 2017."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_web_page",
+            "url": "https://era.gv.at/open-positions/seconded-national-expert-research-programme-experts-in-particle-physics-and-fundamental-quantum-physics/",
+            "title": "Seconded National Expert vacancy notice",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recruitment notice only."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "VACANCY_NOTICE",
+        "reason": "Vacancy/recruitment notice with no substantive research or policy content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:33Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:2a214f60be7069de": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "048dc9a9",
+      "identity_hash": "a3831d4b8ec19677",
+      "deep_analysis": {
+        "work_kind": "empirical case study",
+        "research_question": "",
+        "main_finding": "Stronger personal ties lead to longer-term bidirectional interaction channels that benefit research organisations.",
+        "method_or_basis": "Survey of researchers at one Argentinian university; econometric analysis.",
+        "qualification": "Single case.",
+        "radar_relevance": "Fails A: non-European.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "https://doi.org/10.1007/s10961-016-9544-x -> Springer page: abstract, notes, references only."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Arza & Carattoli, Journal of Technology Transfer 42(4), online 2016-12-30."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "CONICET Digital repository PDF (handle 11336/40620, ~12,900 words) downloaded and read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://ri.conicet.gov.ar/handle/11336/40620",
+            "title": "Personal ties in university-industry linkages: a case-study from Argentina",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Author manuscript read."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NOT_EUROPEAN",
+        "reason": "Case study of an Argentinian university’s industry linkages with no European research or policy connection."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:33Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:25b78de9bfcad30c": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "d8196d5e",
+      "identity_hash": "3745dc0a03a9553b",
+      "reader_title": "Functional analysis plus text mining offers a cheaper way to spot emerging technologies",
+      "reader_what": "Authors propose “functional technology foresight”, mining patents and papers for what technologies do to detect emerging options.",
+      "reader_why": "Offers a transferable, lower-cost foresight method usable beyond large firms and agencies.",
+      "reader_more": "The method decomposes products and technologies into functions expressed as verb–noun pairs, then uses natural-language text mining on patents and scientific publications to extract them at scale. Expert domain knowledge refines vocabularies and interprets results. A biomedical case illustrates how it surfaces weak signals and possible unwanted consequences not explicit in patents. The authors argue it makes foresight affordable for small and medium-sized enterprises.",
+      "deep_analysis": {
+        "work_kind": "methodological article with case application",
+        "research_question": "Can functional analysis and text mining support affordable technology foresight?",
+        "main_finding": "A functional, text-mining-based pipeline can identify emerging technologies and side-effects from big documentary data.",
+        "method_or_basis": "Method design combining engineering functional analysis, NLP and expert input; biomedical illustration.",
+        "qualification": "Demonstrated on limited cases; validation is qualitative.",
+        "radar_relevance": "Reusable foresight/technology-identification method.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://doi.org/10.1007/s40309-016-0093-1 -> Springer open-access article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Apreda, Bonaccorsi, dell’Orletta, Fantoni, European Journal of Futures Research 4:13, online 2016-11-22, CC BY."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publisher PDF (~10,800 words) read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/content/pdf/10.1007/s40309-016-0093-1.pdf",
+            "title": "Functional technology foresight. A novel methodology to identify emerging technologies",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full article read; scanner journal \"Futures\" is wrong."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Proposes a new technology-foresight method combining functional analysis with text mining of patents and papers, designed to be affordable for SMEs."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:34Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:53984e98fd3b7808": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "173ec4a4",
+      "identity_hash": "9e16f831dfeded20",
+      "reader_title": "ERC grants reveal winners and losers among European research systems",
+      "reader_what": "ERC awards 2007–2013 favoured the UK and Netherlands; Italy’s weak results reflect low research funding, not low quality.",
+      "reader_why": "Competitive EU funding amplifies national investment differences and draws mobile scientists to well-funded systems.",
+      "reader_more": "Written by a former ERC panel member, the article reviews Starting, Consolidator and Advanced Grants across countries. The UK led in awards per capita, top host institutions, inward mobile grantees and net financial return relative to its EU budget contribution, followed by the Netherlands. Italy fared poorly. Comparing Italy with similar-sized countries, the authors attribute this to low research spending as a share of GDP.",
+      "deep_analysis": {
+        "work_kind": "short analytical article",
+        "research_question": "How does ERC funding relate to scientist mobility and national performance?",
+        "main_finding": "ERC success concentrates in well-funded systems; low national investment explains weak Italian performance.",
+        "method_or_basis": "Descriptive analysis of ERC grant statistics and national R&D spending.",
+        "qualification": "Author notes he is not a mobility specialist; descriptive.",
+        "radar_relevance": "European research funding and talent concentration.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Cambridge Core article page fetched."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Zecchina & Anfossi, European Review 23(S1):S89-S94, online 2015-04-02, CC BY."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publisher PDF (~2,400 words) read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.cambridge.org/core/journals/european-review/article/mobility-of-scientists-across-europe-the-role-played-by-european-research-funding/44CB4DF342FAD2B4279F80CA5B257BB2",
+            "title": "Mobility of Scientists across Europe: The Role Played by European Research Funding",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full short article read."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Analyses country distribution of ERC grants 2007–2013 and grantee mobility, with Italy case."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:34Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:d262f4431df2cf65": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "411d5244",
+      "identity_hash": "7aa5bc0888c9fe32",
+      "deep_analysis": {
+        "work_kind": "scenario planning case study",
+        "research_question": "",
+        "main_finding": "Stakeholders converge on breaking Lefkada’s mass-tourism trajectory toward sustainable alternatives.",
+        "method_or_basis": "SWOT, scenario building, multicriteria stakeholder evaluation.",
+        "qualification": "Single-region application.",
+        "radar_relevance": "Fails B.",
+        "confidence": "medium",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://doi.org/10.1007/s40309-015-0063-z -> Springer open-access article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Stratigea & Katsoni, European Journal of Futures Research 3:5, online 2015-04-18."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publisher PDF (~12,300 words) read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/content/pdf/10.1007/s40309-015-0063-z.pdf",
+            "title": "A strategic policy scenario analysis framework for the sustainable tourist development of peripheral small island areas",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full article read."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_APPLICATION_OF_EXISTING_METHOD",
+        "reason": "Combines standard scenario building and participatory multicriteria evaluation for tourism planning on Lefkada; an application rather than a materially new reusable method, outside R&I."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:34Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:8b518ec98cc8dd65": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "192ce426",
+      "identity_hash": "3847be7459731e03",
+      "reader_title": "Is Europe concentrating its research talent in a few hubs?",
+      "reader_what": "Growing R&D and skills disparities in Europe risk turning intended brain circulation into brain drain toward richer hubs.",
+      "reader_why": "Uneven national R&D investment after the crisis can concentrate talent, affecting cohesion and diversity of European research.",
+      "reader_more": "Van der Wende reviews rising international mobility of PhD students and postdocs and national talent-attraction policies. Mobility traditionally ran south-to-north and east-to-west globally; similar patterns now appear inside Europe as crisis-era disparities in R&D spending and skills grow. Over 90% of European mobility is intra-European. She asks whether concentration in a few hubs is unavoidable or desirable, weighing quality and competitiveness against diversity and the comprehensive research university.",
+      "deep_analysis": {
+        "work_kind": "analytical review article",
+        "research_question": "Is international academic mobility leading to concentration of talent in European hubs?",
+        "main_finding": "Intra-European disparities make brain drain toward hubs likely without countervailing policy.",
+        "method_or_basis": "Review of mobility statistics, rankings and policy literature.",
+        "qualification": "Largely argumentative; no causal estimation.",
+        "radar_relevance": "European researcher mobility and cohesion.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Cambridge Core article page fetched."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Marijk van der Wende, European Review 23(S1):S70-S88, online 2015-04-02, CC BY."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publisher PDF (~10,300 words) read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.cambridge.org/core/journals/european-review/article/international-academic-mobility-towards-a-concentration-of-the-minds-in-europe/2104E80DE15774CB79DC81C4C7BA8B1E",
+            "title": "International Academic Mobility: Towards a Concentration of the Minds in Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full article read. A closely related Berkeley CSHE working paper version (Feb 2015) is job B38; not the same publication."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Analyses intra-European academic mobility, R&D investment divergence and risk of brain drain toward hubs."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:34Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:07822dd2ef9863a3": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "42fc898c",
+      "identity_hash": "eda36e17e4a2e08b",
+      "reader_title": "European research careers and the limited rise of foreign researchers",
+      "reader_what": "Europe’s push for more researchers focuses on early careers, yet foreign research personnel in the EU rose only slightly.",
+      "reader_more": "Teichler and Schomburg discuss attention across Europe to the formative career period between graduation and senior appointment. Many graduates start in research but far fewer remain long term. Eurostat data suggest foreigners were 5.0% of trained research personnel in the EU in 2000 and 5.3% in 2005, with Germany rising from 5.1% to 6.4%. They note nationality data are becoming less informative as mobility grows.",
+      "deep_analysis": {
+        "work_kind": "short commentary article",
+        "research_question": "",
+        "main_finding": "European policy emphasises expanding and improving research careers, but international inflows grew modestly.",
+        "method_or_basis": "Commentary using Eurostat and mobility studies.",
+        "qualification": "Brief 2008 reflection.",
+        "radar_relevance": "Historical context on European research careers.",
+        "confidence": "medium",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "https://doi.org/10.6017/ihe.2008.52.8034 -> scanner recorded connection reset; retry resolved to Boston College ejournals."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Teichler & Schomburg, International Higher Education; DOI registered 2015-03-25 (DOI string shows 2008 issue 52)."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Galley https://ejournals.bc.edu/ojs/index.php/ihe/article/download/8034/7185 (issue pages) read; article on page 7-8."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://ejournals.bc.edu/index.php/ihe/article/view/8034",
+            "title": "Research Careers: Some Reflections from Europe (IHE No 52)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Short article by INCHER-Kassel authors in International Higher Education No 52 (2008); 2015 date is DOI registration."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Reflects on European research careers, early-career stages and foreign research personnel using Eurostat data."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:34Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:fdbf471c0cd726b8": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "cffd99d1",
+      "identity_hash": "43e4e4e2717b6f85",
+      "reader_title": "Most researchers in EU institutions have been internationally mobile at least once",
+      "reader_what": "Surveys find 57% of EU university researchers and 65% in research institutes have been internationally mobile during careers.",
+      "reader_why": "Earlier student and industry mobility predicts later mobility, informing EU policies on researcher careers.",
+      "reader_more": "The authors report the first systematic surveys of researchers in EU member-state universities and non-university research institutes. Short research visits were the most common form of mobility, but moving employer across countries was also frequent. Having studied abroad and having industry placement experience were good predictors of later international mobility. The paper argues mobility is framed both as a policy problem and goal in the EU.",
+      "deep_analysis": {
+        "work_kind": "survey-based empirical article",
+        "research_question": "What are the patterns and intensity of researcher mobility in the EU?",
+        "main_finding": "International mobility is widespread; prior student mobility predicts research-career mobility.",
+        "method_or_basis": "Large surveys of EU HEI and research-institute researchers (MORE2 study).",
+        "qualification": "Cross-sectional self-reported data.",
+        "radar_relevance": "Core evidence on European researcher mobility.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1093/scipol/scv006 -> academic.oup.com 403."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Børing, Flanagan, Gagliardi, Kaloudis, Karakasidou, Science and Public Policy, online 2015-03-25."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "University of Manchester accepted manuscript https://pure.manchester.ac.uk/ws/files/50942950/accepted_post_peer_review_authors_version.pdf (~12,200 words) read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://pure.manchester.ac.uk/ws/files/50942950/accepted_post_peer_review_authors_version.pdf",
+            "title": "International mobility: Findings from a survey of researchers in the EU (accepted manuscript)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Supplied URL blocked; recovered at repository step."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "First systematic EU-wide surveys of researcher mobility (MORE2) in universities and research institutes."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:34Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:7ab6a0f66af072c4": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "b58d337d",
+      "identity_hash": "a982d6d0f3a40252",
+      "reader_title": "How EU policy turned research excellence into a steerable, measurable target",
+      "reader_what": "EU policy shifted from excellence as peer-judged quality to breakthrough-oriented excellence measured by indicators and directly steered.",
+      "reader_why": "Indicator-based excellence changes how European research is funded and conducted.",
+      "reader_more": "The authors analyse EU policy documents from the 2000 Lisbon strategy to Europe 2020, culminating in the 2013 Composite Indicator for Scientific and Technological Research Excellence. Early on, excellence was a fuzzy quality embedded in researchers and revealed by peer review. Later it was defined more sharply as knowledge producing breakthroughs, and policymakers sought to steer and control it directly. They discuss implications for research policy and practice.",
+      "deep_analysis": {
+        "work_kind": "qualitative policy document analysis",
+        "research_question": "How has the EU’s understanding of research excellence evolved?",
+        "main_finding": "A shift from scientific to research excellence: measurable, breakthrough-focused and policy-steered.",
+        "method_or_basis": "Analysis of EU strategies, Council conclusions and indicator reports 2000–2014.",
+        "qualification": "Discourse analysis; impacts not measured.",
+        "radar_relevance": "EU research policy and evaluation concepts.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1080/21568235.2015.1015106 -> tandfonline HTTP 403 Cloudflare challenge."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Sørensen, Bloch, Young, European Journal of Higher Education 6(3), online 2015-03-16."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Aarhus University Pure alternate host https://pure.au.dk/ws/files/120801510/... (accepted manuscript) downloaded and read (~10,900 words)."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://pure.au.dk/ws/files/120801510/Excellence_in_the_knowledge_based_economy_Accepted_manuscript_2016.pdf",
+            "title": "Excellence in the knowledge-based economy: from scientific to research excellence (accepted manuscript)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Previous defer overturned: accepted manuscript recovered."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Traces the evolution of the EU’s concept of research excellence from Lisbon to Europe 2020 and the 2013 composite excellence indicator."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:34Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:d9221660a4593e61": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "34f60749",
+      "identity_hash": "98239aa54b1e92b8",
+      "reader_title": "Combining foresight, intelligence and analytics to steer industrial programmes",
+      "reader_what": "Authors propose integrating foresight, competitive intelligence and business analytics, with a dashboard to monitor industrial programmes.",
+      "reader_why": "Offers governments a transferable toolkit to reduce uncertainty in long-horizon technology and industrial policy.",
+      "reader_more": "Industrial programmes target products that may be obsolete by market launch. The authors argue foresight sets long-term direction, competitive intelligence confirms or updates it through current signals and industry profiling, and business analytics tracks programme use and performance. They propose a dashboard fed by open sources and government data so problems can be corrected early. Published as a “master class” piece.",
+      "deep_analysis": {
+        "work_kind": "methodological/framework article",
+        "research_question": "How can foresight, CI and analytics be combined to improve industrial programmes?",
+        "main_finding": "An integrated toolkit and monitoring dashboard can make industrial programmes more adaptive and efficient.",
+        "method_or_basis": "Framework development drawing on practitioner experience and literature; illustrative, not empirically tested.",
+        "qualification": "No systematic evaluation of the framework.",
+        "radar_relevance": "Reusable policy-intelligence framework (B).",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "https://doi.org/10.17323/1995-459x.2015.1.68.81 -> foresight-journal.hse.ru/article/view/19340 abstract page."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Calof, Richards, Smith, Foresight and STI Governance 9(1):68-81, 2015; listed PDF path returns 404."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "OJS galley https://foresight-journal.hse.ru/article/download/19340/16980 (English PDF, ~9,000 words) read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://foresight-journal.hse.ru/article/view/19340",
+            "title": "Foresight, Competitive Intelligence and Business Analytics — Tools for Making Industrial Programmes More Efficient",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full article read."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Sets out a transferable integrated framework linking foresight, competitive intelligence and business analytics, including a monitoring dashboard for industrial programmes."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:35Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:547f950f827d4d18": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "c9e98928",
+      "identity_hash": "433cf03ef1fce71f",
+      "reader_title": "Czech research funding by counting outputs proved destabilising",
+      "reader_what": "The Czech Evaluation Methodology allocated institutional research funding by purely quantitative output counts, creating instability and hidden politics.",
+      "reader_why": "A cautionary case for European countries designing performance-based research funding systems.",
+      "reader_more": "After post-communist restructuring, the Czech Republic introduced a performance-based system that counted publications, patents and prototypes to set institutional funding. Intended to depoliticise allocation, raise productivity and ensure accountability, it evolved into a mechanistic “coffee mill”. The authors find it introduced considerable instability and unpredictability, hampered strategic planning, and hid political decisions behind point values. They compare it with systems in the UK, Norway, Finland, Poland and elsewhere.",
+      "deep_analysis": {
+        "work_kind": "policy evaluation case study",
+        "research_question": "How did the Czech performance-based research funding system work and with what effects?",
+        "main_finding": "The purely quantitative system created instability and concealed political choices rather than depoliticising funding.",
+        "method_or_basis": "Document analysis, stakeholder interviews and data from an evaluation study begun in 2010.",
+        "qualification": "Authors were involved in related evaluation work; single-country case.",
+        "radar_relevance": "European research funding and evaluation design.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1093/reseval/rvu035 -> academic.oup.com HTTP 403 Cloudflare challenge."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Good, Vermeulen, Tiefenthaler, Arnold, Research Evaluation 24(2), online 2015-02-24."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "University of Edinburgh Pure alternate host https://www.pure.ed.ac.uk/ws/files/17859860/... downloaded and read (~10,300 words)."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://www.pure.ed.ac.uk/ws/files/17859860/Good_B._Vermeulen_N._Tiefenthaler_B._Arnold_E._2014_._Counting_Quality.pdf",
+            "title": "Counting quality? The Czech performance-based research funding system (author version)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Previous defer overturned: author version read."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Critical analysis of the Czech Republic’s metrics-based institutional research funding system in European comparison."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:35Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:cf49c1a2ebd60264": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "097bde72",
+      "identity_hash": "74b05e80c4d2bea8",
+      "deep_analysis": {
+        "work_kind": "blog post",
+        "research_question": "",
+        "main_finding": "Announces foresight system-building work with Tanzanian institutions, citing Finland as foresight-oriented.",
+        "method_or_basis": "Page read.",
+        "qualification": "Promotional.",
+        "radar_relevance": "Fails A and B.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Demos Helsinki post https://demoshelsinki.fi/can-strong-foresight-orientation-make-an-entire-nation-successful/ fetched and read (~800 words)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_web_page",
+            "url": "https://demoshelsinki.fi/can-strong-foresight-orientation-make-an-entire-nation-successful/",
+            "title": "Can strong foresight orientation make a nation successful?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Blog/news post announcing a Demos Helsinki foresight workshop with Tanzania’s COSTECH, citing Finland’s foresight institutions."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NEWS_POST_NO_SUBSTANTIVE_EVIDENCE",
+        "reason": "Promotional blog post about a workshop in Tanzania; anecdotal claims about Finnish foresight, no substantive European R&I analysis or reusable method."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:35Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:1611a3ed9c30c313": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "672b1bbf",
+      "identity_hash": "6b27d4aa3d42c9ed",
+      "deep_analysis": {
+        "work_kind": "econometric career study",
+        "research_question": "",
+        "main_finding": "International research visits shorten time to promotion by about a year for Japanese bioscience professors.",
+        "method_or_basis": "Career data for 370 professors; survival analysis.",
+        "qualification": "Single country and field.",
+        "radar_relevance": "Fails A: Japan-based evidence.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1093/scipol/scu084 -> academic.oup.com HTTP 403 Cloudflare challenge."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Lawson & Shibayama, Science and Public Policy 42(5), online 2015-02-11."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "University of Bath Pure alternate host https://purehost.bath.ac.uk/ws/files/159899761/Accepted_Version.pdf downloaded and read (~12,700 words)."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://purehost.bath.ac.uk/ws/files/159899761/Accepted_Version.pdf",
+            "title": "International research visits and careers (accepted manuscript)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Previous defer overturned: accepted manuscript read."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NOT_EUROPEAN",
+        "reason": "Empirical study of 370 bioscience professors in Japan; Europe appears only as a comparator context, so no substantive European R&I connection."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:35Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:7cc88d103c24b405": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "UNCLASSIFIED",
+      "corpus_scope": "historical",
+      "source_hash": "dc528d49",
+      "identity_hash": "4e0d18aaa3d94030",
+      "reader_title": "Working paper warns of brain drain within Europe’s research workforce",
+      "reader_what": "Europe’s researcher shortage and widening North–South divergence risk turning intra-European mobility into brain drain and gain.",
+      "reader_why": "Divergent R&D investment may concentrate researchers in limited regions, undermining balanced European research capacity.",
+      "reader_more": "This Berkeley working paper by Marijk van der Wende, a version of her European Review article, estimates Europe’s shortage at 800,000 to one million researchers. Skills imbalances and diverging capacity to invest in R&D, especially between North and South, fuel intra-European mobility. She questions whether further concentration in a few hubs is avoidable or desirable and stresses broader skills training.",
+      "deep_analysis": {
+        "work_kind": "working paper / analytical review",
+        "research_question": "Will intra-European flows of talent and R&D funding concentrate minds in few hubs?",
+        "main_finding": "Growing divergence makes concentration and brain drain within Europe likely.",
+        "method_or_basis": "Review of mobility, R&D and skills data and policy literature.",
+        "qualification": "Argumentative; overlaps substantially with the journal version.",
+        "radar_relevance": "European researcher mobility and cohesion.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "http://files.eric.ed.gov/fulltext/ED559383.pdf -> https redirect; PDF (~9,400 words) read."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI for this ERIC-hosted working paper."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://files.eric.ed.gov/fulltext/ED559383.pdf",
+            "title": "International Academic Mobility: Towards a Concentration of the Minds in Europe (CSHE.3.14)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "UC Berkeley CSHE Research & Occasional Paper CSHE.3.14, February 2015, Marijk van der Wende. Related to but distinct from European Review article (job B29); B29 is not among supplied duplicate candidates, so kept unique."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Working-paper analysis of intra-European researcher mobility, skills shortages and North–South divergence in R&D capacity."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:35Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:be7da706e6b0160d": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "UNCLASSIFIED",
+      "corpus_scope": "historical",
+      "source_hash": "8328532f",
+      "identity_hash": "7453ae8add3c5a6d",
+      "reader_title": "European technology assessment bodies compare productivity challenges and policy responses",
+      "reader_what": "EPTA members describe national productivity problems, technology trends like Industry 4.0, and research and innovation policy responses.",
+      "reader_why": "Frames the “second machine age” risk of jobless growth as a shared European R&I policy challenge.",
+      "reader_more": "The report, coordinated by the Norwegian Board of Technology for the European Parliamentary Technology Assessment network, opens with debates on digital technologies boosting productivity while threatening jobs, citing Frey and Osborne’s automation estimates. Country chapters, for example Austria and Catalonia, summarise productivity after the financial crisis, national research, technology and innovation strategies, and sector initiatives such as ICT and environmental technology. It aims to help nations exchange experiences.",
+      "deep_analysis": {
+        "work_kind": "comparative policy report",
+        "research_question": "What productivity challenges and technology policies do European countries and US states face?",
+        "main_finding": "Countries share post-crisis productivity worries and pursue varied RTI and digitalisation strategies.",
+        "method_or_basis": "Country contributions from EPTA member organisations.",
+        "qualification": "Descriptive compilation; uneven country depth.",
+        "radar_relevance": "Historical European RTI policy responses to productivity and digitalisation.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Rathenau page https://www.rathenau.nl/en/digitalisation/productivity-europe-and-united-states with introduction and PDF link."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI; ISBN 978-82-92447-72-7."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "PDF https://www.rathenau.nl/sites/default/files/EPTA-rapport-Productivity.pdf (~29,000 words; published Oslo, October 2014) read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://www.rathenau.nl/sites/default/files/EPTA-rapport-Productivity.pdf",
+            "title": "Productivity in Europe and the United States: Technology Trends and Policy Measures",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "EPTA (European Parliamentary Technology Assessment) network report published by the Norwegian Board of Technology, Oct 2014; Rathenau hosts it."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Country chapters from European parliamentary TA bodies on productivity challenges, technology trends and RTI policy responses."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:35Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:944f54fd268f3263": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "9b382b34",
+      "identity_hash": "ea075331e4eabfd7",
+      "reader_title": "Combining Delphi surveys with the BCG portfolio matrix for foresight",
+      "reader_what": "Authors show how Delphi expert rounds can feed Boston Consulting Group portfolio analysis for industrial and regional strategy.",
+      "reader_why": "Gives regions and firms a structured, reusable way to judge future portfolio positions under uncertainty.",
+      "reader_more": "The Delphi method gathers expert judgements over iterative, often anonymous rounds. The BCG matrix classifies products or activities by market share and growth, for example “cash cows”. The authors argue Delphi can supply forward-looking estimates for BCG portfolio positions, compare the methods’ strengths, and illustrate application with an Arctic marine cluster. They suggest cities and regions consider optimal “cash cow” flows for long-term development.",
+      "deep_analysis": {
+        "work_kind": "methodological article",
+        "research_question": "How can Delphi methodology be integrated with BCG portfolio analysis?",
+        "main_finding": "Delphi can strengthen BCG portfolio analysis by adding structured expert foresight.",
+        "method_or_basis": "Conceptual method integration with illustrative regional cluster application.",
+        "qualification": "Limited empirical validation.",
+        "radar_relevance": "Reusable foresight method (B).",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://doi.org/10.1007/s40309-014-0060-7 -> Springer open-access article."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref/Unpaywall: Myllylä & Kaivo-oja, European Journal of Futures Research 3:2 (2015), CC BY."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publisher PDF (~11,200 words) read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/content/pdf/10.1007/s40309-014-0060-7.pdf",
+            "title": "Integrating Delphi methodology to some classical concepts of the Boston consulting group framework",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full article read."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Proposes a transferable combination of Delphi expert elicitation with BCG portfolio matrix analysis for industrial and regional foresight."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:03:36Z",
+      "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
     }
   }
 }
