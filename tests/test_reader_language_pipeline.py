@@ -2,12 +2,15 @@ from __future__ import annotations
 
 import json
 import sys
+import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
 
+import reader_language_common  # noqa: E402
 from reader_language_common import collect_candidates, lint_reasons, numeric_tokens  # noqa: E402
 
 
@@ -25,7 +28,34 @@ class ReaderLanguagePipelineTests(unittest.TestCase):
         reasons = lint_reasons(text)
         self.assertIn('awkward phrase', reasons)
         self.assertIn('stacked abstractions', reasons)
-        by_source = {x['source']: x for x in collect_candidates()}
+
+        fixture = {
+            'high_order_inference': {
+                'candidates': [
+                    {
+                        'id': 'trend-reader-language-fixture',
+                        'reader_summary': text,
+                    }
+                ],
+                'publications': {
+                    'trend': ['trend-reader-language-fixture']
+                },
+            }
+        }
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            (root / 'radar.json').write_text(
+                json.dumps(fixture),
+                encoding='utf-8',
+            )
+
+            with patch.object(reader_language_common, 'ROOT', root):
+                by_source = {
+                    x['source']: x
+                    for x in collect_candidates()
+                }
+
         self.assertIn(text, by_source)
         self.assertEqual(by_source[text]['routes'], ['trends'])
 
