@@ -84,3 +84,17 @@ Do not implement provisional claims inside `scan_radar.py` during the initial mi
 ## C-09 Cut-over
 
 Reasoning v2 must run in shadow for at least two complete scans with diff reports. No reader surface may depend on v2 until the acceptance gate passes. Cut-over must be reversible without changing scanner evidence, Deep Scan state, or the active corpus.
+
+## C-10 Record-key namespace
+
+Use the repository's existing canonical record-key namespace, not the illustrative
+`url:` prefix in the prose specification:
+
+- current URL identity: `link:<url>`
+- current DOI identity: `doi:<doi>`
+- current fallback identity: `id:<id>`
+- historical identities: `historical:link:`, `historical:doi:`, or `historical:id:`
+
+This keeps claims join-compatible with `scripts/deep_read_works.py` and
+`scripts/active_corpus.py`. A claims importer must reject `url:` rather than
+silently creating a second identity for the same record.

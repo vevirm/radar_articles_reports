@@ -16,6 +16,7 @@ TESTS = [
     "tests/test_security_and_state_guards.py",
     "tests/test_reader_language_pipeline.py",
     "tests/test_reader_evidence_feedback.py",
+    "tests/test_reasoning_reform_claim_schema.py",
 ]
 
 
