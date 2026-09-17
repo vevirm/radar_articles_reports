@@ -2,12 +2,20 @@ name: Reasoning Reform — Run Claim Shadow
 
 on:
   workflow_dispatch:
+  workflow_run:
+    workflows:
+      - R&I Radar Scan
+      - R&I Radar Quick Scan — 6 min
+      - R&I Radar Quick Strand Scan — 10 min
+      - Deep Scan V2 — Import Returned Results
+    types: [completed]
 
 permissions:
   contents: read
 
 jobs:
   shadow:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -29,6 +37,11 @@ jobs:
           python scripts/claim_reasoning_shadow.py \
             --output claim-shadow/claim-reasoning-shadow.json \
             --summary claim-shadow/README.md
+          printf '%s\n' \
+            "event=${{ github.event_name }}" \
+            "upstream_workflow=${{ github.event.workflow_run.name }}" \
+            "upstream_run_id=${{ github.event.workflow_run.id }}" \
+            > claim-shadow/TRIGGER.txt
       - name: Upload shadow report
         uses: actions/upload-artifact@v4
         with:
