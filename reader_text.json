@@ -6563,7 +6563,9 @@
           "record_key": "link:https://www.eurohpc-ju.europa.eu/quantum-testing-infrastructure-quantum-technologies_en",
           "claim_id": "c:63bc313129ce6a3d:1",
           "object": "quantum.testing_infrastructure",
-          "secondary_objects": [],
+          "secondary_objects": [
+            "quantum.equipment"
+          ],
           "actor": {
             "name": "EuroHPC Joint Undertaking",
             "class": "eu_body"
@@ -10696,7 +10698,10 @@
           "record_key": "link:https://www.eurohpc-ju.europa.eu/eurohpc-joint-undertaking-launches-ai-gigafactories-call-2026-07-30_en",
           "claim_id": "c:9fe3c34f60d18f82:1",
           "object": "compute.public_procurement",
-          "secondary_objects": [],
+          "secondary_objects": [
+            "compute.gigafactory",
+            "compute.capacity"
+          ],
           "actor": {
             "name": "EuroHPC JU",
             "class": "eu_body"
@@ -17998,18 +18003,19 @@
         {
           "record_key": "link:https://doi.org/10.1007/s44464-026-00022-y",
           "claim_id": "c:1f96a4ae68dec0ac:1",
-          "object": "export_control.regulation",
+          "object": "export_control.competence",
           "secondary_objects": [
             "quantum.equipment",
-            "research.collaboration"
+            "export_control.regulation",
+            "innovation.dual_use"
           ],
           "actor": {
             "name": "Study author",
             "class": "university_group"
           },
-          "mechanism": "assesses",
+          "mechanism": "restricts",
           "direction": "becomes_conditional",
-          "status": "delivered",
+          "status": "in_force",
           "status_date": "2026-06-15",
           "scope": {
             "level": "eu",
@@ -21442,13 +21448,15 @@
           "record_key": "link:https://doi.org/10.1111/jcms.70140",
           "claim_id": "c:3a0dadd04d595915:1",
           "object": "export_control.competence",
-          "secondary_objects": [],
+          "secondary_objects": [
+            "research_security.screening"
+          ],
           "actor": {
             "name": "Study authors",
             "class": "university_group"
           },
           "mechanism": "assesses",
-          "direction": "expands",
+          "direction": "becomes_contested",
           "status": "delivered",
           "status_date": "2026-07-06",
           "scope": {
@@ -26270,13 +26278,15 @@
           "record_key": "link:https://doi.org/10.1080/09662839.2026.2680646",
           "claim_id": "c:b3d701f453d41c09:1",
           "object": "research_security.screening",
-          "secondary_objects": [],
+          "secondary_objects": [
+            "research.openness"
+          ],
           "actor": {
             "name": "Study authors",
             "class": "university_group"
           },
           "mechanism": "assesses",
-          "direction": "expands",
+          "direction": "becomes_conditional",
           "status": "delivered",
           "status_date": "2026-06-12",
           "scope": {
@@ -30972,13 +30982,15 @@
           "record_key": "link:https://doi.org/10.1093/scipol/scag056",
           "claim_id": "c:7f1d75e43f09deef:1",
           "object": "research_security.screening",
-          "secondary_objects": [],
+          "secondary_objects": [
+            "research.openness"
+          ],
           "actor": {
             "name": "Study authors",
             "class": "university_group"
           },
           "mechanism": "assesses",
-          "direction": "expands",
+          "direction": "becomes_contested",
           "status": "delivered",
           "status_date": "2026-06-08",
           "scope": {
@@ -36896,20 +36908,23 @@
           "record_key": "link:https://merics.org/en/comment/europes-research-dilemma-balancing-security-and-scientific-cooperation-china",
           "claim_id": "c:930ca7a446a91008:1",
           "object": "innovation.dual_use",
-          "secondary_objects": [],
+          "secondary_objects": [
+            "research_security.screening",
+            "research.openness"
+          ],
           "actor": {
             "name": "MERICS",
             "class": "ngo_thinktank"
           },
-          "mechanism": "advocates",
-          "direction": "unchanged",
+          "mechanism": "assesses",
+          "direction": "becomes_contested",
           "status": "delivered",
           "status_date": "2026-03-18",
           "scope": {
             "level": "eu",
             "countries": []
           },
-          "kind": "advocacy",
+          "kind": "diagnosis",
           "merit": 77,
           "qualification": "Analytical commentary, not a representative empirical study of European collaborations or security incidents.",
           "text": "European research organisations face growing difficulty separating beneficial cooperation from dual-use security risks, especially in technologically sensitive fields.",
@@ -49906,7 +49921,10 @@
           "record_key": "link:https://news.google.com/rss/articles/CBMizAFBVV95cUxOQUhBNXFscDg4QVlfbDFuT2IxYzFXRnNId0ZJXzA2YzlNNC1zMHVmcncxd0x2enBGQ3ZVRjFEX29pTGJoODdlcGxFb2NPQWFBUVotY0pqZ0VuWkczaV9MdTQybmtpWXdqNlBNMkxOanBleUhEVmh6OV9ISkc4Z0pJTk1nanZPb2FCc3hqdXE4TmN6RXdmbjl2ZzlQUmQ4MjBpd1pxSGxCS3hmd2g1NVNSZzJtVTY4TUdBMFFuVmhuYWNXQkhXTHZzZFQ1MkY?oc=5",
           "claim_id": "c:40d0d21353b8d1b6:1",
           "object": "datacentre.permitting",
-          "secondary_objects": [],
+          "secondary_objects": [
+            "datacentre.energy_supply",
+            "compute.private_investment"
+          ],
           "actor": {
             "name": "Finnish opposition parties",
             "class": "opposition_party"
@@ -50058,13 +50076,14 @@
           "claim_id": "c:d0f1705879fcbdd2:1",
           "object": "compute.private_investment",
           "secondary_objects": [
-            "datacentre.energy_supply"
+            "datacentre.energy_supply",
+            "compute.capacity"
           ],
           "actor": {
             "name": "Google",
             "class": "company"
           },
-          "mechanism": "invests",
+          "mechanism": "requires",
           "direction": "expands",
           "status": "announced",
           "status_date": "2026-09-09",
@@ -50301,12 +50320,15 @@
           "record_key": "link:https://news.google.com/rss/articles/CBMiogFBVV95cUxQbDdLQ0hZWDRyZ0xhVnVYZ3EyanNtODlsUERkaGxtc21CaUtYa3Zwd0xqbDY1RnVma3YyVkQwSDRzaHRVaGotRGNsRUN0XzR0WU9aZmFXeHdrSzVOMlVoZVZzZ2hYdk9SWjJCZTUtWmZBblNCTjlKSGtIMzdmTUd3VEIzQ2ZWQWVfZlpaei12S1lMNlFpUzJxc2tjNjB6TV9xT3c?oc=5",
           "claim_id": "c:f78bfd1d4449a9c2:1",
           "object": "datacentre.energy_supply",
-          "secondary_objects": [],
+          "secondary_objects": [
+            "compute.private_investment",
+            "compute.capacity"
+          ],
           "actor": {
             "name": "Study authors",
             "class": "university_group"
           },
-          "mechanism": "assesses",
+          "mechanism": "requires",
           "direction": "becomes_conditional",
           "status": "delivered",
           "status_date": "2026-08-19",
@@ -50314,7 +50336,7 @@
             "level": "eu",
             "countries": []
           },
-          "kind": "diagnosis",
+          "kind": "effect",
           "merit": 54,
           "qualification": "Market plans can change before projects are built, and the data describe location trends rather than completed capacity.",
           "text": "New market data show Europe’s AI data-centre geography changing in response to power and land constraints.",
@@ -127713,5 +127735,5 @@
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-09-17T19:41:41.498193+00:00"
+  "claims_updated_at": "2026-09-17T20:10:38.230713+00:00"
 }
