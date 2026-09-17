@@ -104,7 +104,7 @@ def test_opposing_movements_requires_three_records_and_two_sources_each_side():
 
 
 def test_dependency_pathway_is_shadow_only_even_when_score_gate_passes_or_nearly_passes():
-    commitment=claim(key="id:co",cid="c:co:1",obj="compute.gigafactory",mech="builds",direction="expands",kind="action",status="operating",merit=99)
+    commitment=claim(key="id:co",cid="c:co:1",obj="compute.gigafactory",mech="builds",direction="expands",kind="action",status="operating",merit=99,secondary=["compute.private_investment"])
     coupling=claim(key="id:cu",cid="c:cu:1",obj="compute.private_investment",mech="requires",direction="becomes_conditional",kind="action",status="operating",merit=95,secondary=["datacentre.energy_supply"])
     exposure=claim(key="id:ex",cid="c:ex:1",obj="datacentre.energy_supply",mech="restricts",direction="contracts",kind="diagnosis",status="operating",merit=95)
     propagation=claim(key="id:pr",cid="c:pr:1",obj="compute.capacity",mech="assesses",direction="contracts",kind="effect",status="operating",merit=95,secondary=["datacentre.energy_supply"])
@@ -114,3 +114,38 @@ def test_dependency_pathway_is_shadow_only_even_when_score_gate_passes_or_nearly
     assert out
     assert all(x["publication_gate_passes"] is False for x in out)
     assert all("falsifier" in x["publication_gate_reason"].lower() for x in out)
+
+
+def test_dependency_pathway_rejects_cluster_only_role_join_without_exact_object_path():
+    # Both sides sit in strategically adjacent clusters, but R-31 permits expansion only
+    # through exact object / secondary_object overlap. This must not form a pathway.
+    commitment=claim(key="id:co2",cid="c:co2:1",obj="digital.sovereignty",mech="adopts",direction="expands",kind="action",status="announced",merit=99,secondary=["compute.capacity"])
+    coupling=claim(key="id:cu2",cid="c:cu2:1",obj="goal.strategic_autonomy",mech="requires",direction="becomes_conditional",kind="diagnosis",status="delivered",merit=90,secondary=["finance.strategic_investment"])
+    exposure=claim(key="id:ex2",cid="c:ex2:1",obj="finance.strategic_investment",mech="restricts",direction="contracts",kind="diagnosis",status="delivered",merit=90)
+    propagation=claim(key="id:pr2",cid="c:pr2:1",obj="finance.strategic_investment",mech="assesses",direction="contracts",kind="effect",status="delivered",merit=90)
+    nodes=[_node(commitment,"S1"),_node(coupling,"S2"),_node(exposure,"S3"),_node(propagation,"S4")]
+    table=build_distance_table(nodes)
+    assert dependency_pathways(nodes,VOCAB,table) == []
+
+
+def test_dependency_pathway_uses_exact_object_frontier_and_reports_hop():
+    commitment=claim(key="id:co3",cid="c:co3:1",obj="compute.gigafactory",mech="builds",direction="expands",kind="action",status="operating",merit=99,secondary=["compute.private_investment"])
+    coupling=claim(key="id:cu3",cid="c:cu3:1",obj="compute.private_investment",mech="requires",direction="becomes_conditional",kind="action",status="operating",merit=95,secondary=["datacentre.energy_supply"])
+    exposure=claim(key="id:ex3",cid="c:ex3:1",obj="datacentre.energy_supply",mech="restricts",direction="contracts",kind="diagnosis",status="operating",merit=95)
+    propagation=claim(key="id:pr3",cid="c:pr3:1",obj="datacentre.energy_supply",mech="assesses",direction="contracts",kind="effect",status="operating",merit=95)
+    nodes=[_node(commitment,"S1"),_node(coupling,"S2"),_node(exposure,"S3"),_node(propagation,"S4")]
+    out=dependency_pathways(nodes,VOCAB,build_distance_table(nodes))
+    assert out
+    assert out[0]["frontier_mode"] == "exact_object_overlap"
+    assert out[0]["coupling_hop"] == 1
+    assert out[0]["dependency_object"] == "datacentre.energy_supply"
+
+
+def test_conflicting_criteria_does_not_treat_delivered_generic_diagnosis_as_a_criterion():
+    from scripts.claim_reasoning_shadow import conflicting_criteria
+    a=claim(key="id:a4",cid="c:a4:1",obj="research.infrastructure",mech="assesses",direction="expands",kind="diagnosis",status="delivered",merit=99)
+    b=claim(key="id:b4",cid="c:b4:1",obj="research.infrastructure",mech="assesses",direction="contracts",kind="diagnosis",status="delivered",merit=99)
+    g=claim(key="id:g4",cid="c:g4:1",obj="research.infrastructure",mech="assesses",direction="becomes_contested",kind="diagnosis",status="delivered",merit=99)
+    d=claim(key="id:d4",cid="c:d4:1",obj="research.infrastructure",mech="assesses",direction="becomes_contested",kind="effect",status="delivered",merit=99)
+    nodes=[_node(a,"A"),_node(b,"B"),_node(g,"C"),_node(d,"D")]
+    assert conflicting_criteria(nodes,build_distance_table(nodes)) == []
