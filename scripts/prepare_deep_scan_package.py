@@ -40,6 +40,9 @@ RESULT_FORMAT = "radar-deep-scan-results-v2"
 DEFAULT_BATCH_SIZE = 12
 DEFAULT_MAX_RECORDS = 12
 DEFAULT_WORKERS = 10
+ROOT = Path(__file__).resolve().parents[1]
+CLAIMS_VOCAB = ROOT / "claims_vocabulary.json"
+CLAIMS_FORMAT = "radar-claims-v1"
 
 INSTRUCTIONS = r"""# Radar Deep Scan V2 — authoritative verification instructions
 
@@ -177,6 +180,36 @@ Use `substantive_primary_after_recovery` only when full text could not legitimat
 mandatory retrieval ladder, but a substantive matching primary source still supports a defensible decision.
 `abstract_only`, `title_only`, snippets, scanner prose, and search-result text are never enough.
 
+## Structured claims for the reasoning layer
+
+For every `keep` or `review` result, also return **1–3 structured claim drafts** in `claims`.
+These claims are a machine-readable expression of the same verified Deep Scan finding; they do not
+change admission and they must not add facts that are absent from the recovered evidence.
+
+Use only vocabulary present in the supplied `claims_vocabulary.json`. Unknown objects, mechanisms,
+actor classes, statuses, directions, scopes or kinds cause the whole result to be rejected. The first
+claim is the main finding. A second claim is allowed only for a genuinely distinct object–mechanism
+pair. A third is allowed only when a factual qualification/limit itself forms a useful claim.
+
+Each claim draft must contain: `object`, `secondary_objects`, `actor` (`name`, `class`), `mechanism`,
+`direction`, `status`, `status_date`, `scope` (`level`, `countries`), `kind`, `qualification`, `text`,
+`confidence`, and optional `deadline`, `status_date_precision`, `attributes`. The importer owns and
+adds `record_key`, stable `claim_id`, the repository's 0–100 `merit`, `origin=deep_scan`, `era`, and
+`provisional=false`; do not invent those system fields.
+
+Date discipline is strict. `status_date` may be `YYYY-MM-DD`, `YYYY-MM`, or `YYYY` only when that
+precision is actually supported. For month/year precision add `status_date_precision: "month"` or
+`"year"`. Never invent a missing day or month. `deadline`, when present, must be a full `YYYY-MM-DD`.
+The first claim's `qualification` must reproduce `deep_analysis.qualification` exactly.
+
+Strand B is the methods library: its claims are stored for provenance but must include
+`attributes.world_reasoning=false`. For Strand C, factual event claims may be used as primary evidence;
+interpretive/forecast content should be a separate claim with `attributes.reasoning_role="context"` and
+`attributes.context_weight=0.3`. Historical claims keep their historical era automatically.
+
+For `drop`, `drop_unverifiable`, or `defer`, return `claims: []`. Do not preserve claims from an earlier
+interpretation when the current Deep Scan result does not support them.
+
 ## Required result structure
 
 Return exactly one UTF-8 file named `deep_scan_results.json` (or a ZIP containing it):
@@ -184,6 +217,7 @@ Return exactly one UTF-8 file named `deep_scan_results.json` (or a ZIP containin
 ```json
 {
   "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
   "package_id": "COPY EXACTLY FROM manifest.json",
   "results": [
     {
@@ -231,7 +265,23 @@ Return exactly one UTF-8 file named `deep_scan_results.json` (or a ZIP containin
         "radar_relevance": "specific verified Radar relevance, or why it fails",
         "why_supported": true,
         "confidence": "high"
-      }
+      },
+      "claims": [
+        {
+          "object": "from claims_vocabulary.json",
+          "secondary_objects": [],
+          "actor": {"name": "verified actor", "class": "from vocabulary"},
+          "mechanism": "from vocabulary",
+          "direction": "from vocabulary",
+          "status": "from vocabulary",
+          "status_date": "YYYY-MM-DD or supported partial date",
+          "scope": {"level": "from vocabulary", "countries": []},
+          "kind": "action/effect/diagnosis/advocacy",
+          "qualification": "copy Deep Scan qualification on claim 1",
+          "text": "one factual sentence",
+          "confidence": "high/medium/low"
+        }
+      ]
     }
   ]
 }
@@ -406,6 +456,7 @@ def build_job(row, ordinal: int, sidecar: dict[str, Any], dupes: dict[str, list[
                 "work_kind": "", "research_question": "", "main_finding": "", "method_or_basis": "",
                 "qualification": "", "radar_relevance": "", "why_supported": False, "confidence": "low",
             },
+            "claims": [],
         },
     }
 
@@ -571,10 +622,14 @@ def main() -> None:
             "main_pending_total": main_pending_total, "historical_pending_total": historical_pending_total,
             "works_in_package": len(jobs), "scope_counts": scope_counts, "queue_reasons": counts,
             "source_modes": source_modes, "possible_duplicate_records": len(dupes), "same_record_key_variant_groups": len(variants), "batch_size": batch_size,
-            "batches": batch_files, "instructions": "INSTRUCTIONS.md", "expected_result_filename": "deep_scan_results.json",
+            "batches": batch_files, "instructions": "INSTRUCTIONS.md", "claims_vocabulary": "claims_vocabulary.json",
+            "claims_format": CLAIMS_FORMAT, "expected_result_filename": "deep_scan_results.json",
         }
         (root / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-        (root / "RESULT_TEMPLATE.json").write_text(json.dumps({"format": RESULT_FORMAT, "package_id": pkg_id, "results": []}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        if not CLAIMS_VOCAB.exists():
+            raise FileNotFoundError(f"Claims vocabulary missing: {CLAIMS_VOCAB}")
+        shutil.copy2(CLAIMS_VOCAB, root / "claims_vocabulary.json")
+        (root / "RESULT_TEMPLATE.json").write_text(json.dumps({"format": RESULT_FORMAT, "claims_format": CLAIMS_FORMAT, "package_id": pkg_id, "results": []}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
         zip_path = args.output_dir / f"deep_scan_package_{pkg_id}.zip"
         with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=6) as zf:

@@ -9,8 +9,10 @@ from __future__ import annotations
 
 import argparse
 import copy
+import hashlib
 import json
 import re
+import subprocess
 import time
 import zipfile
 from pathlib import Path
@@ -30,6 +32,7 @@ try:
         mark_recovery_failure, mark_verified, prioritize_pending_keys, save_state, sync_verified,
         update_record_metadata,
     )
+    from scripts.claims_schema import load_vocabulary, validate_claims
 except ModuleNotFoundError:
     from active_corpus import (  # type: ignore
         DEFAULT_ADMISSION, DEFAULT_CORRECTIONS, SAFE_CORRECTION_FIELDS, SAFE_UNSET_FIELDS,
@@ -44,11 +47,15 @@ except ModuleNotFoundError:
         mark_recovery_failure, mark_verified, prioritize_pending_keys, save_state, sync_verified,
         update_record_metadata,
     )
+    from claims_schema import load_vocabulary, validate_claims  # type: ignore
 
 V1_FORMAT = "radar-deep-scan-results-v1"
 V2_FORMAT = "radar-deep-scan-results-v2"
 V1_PROFILE = "deep-reader-offline-v1"
 V2_PROFILE = "deep-reader-v2-authoritative"
+ROOT = Path(__file__).resolve().parents[1]
+CLAIMS_FORMAT = "radar-claims-v1"
+CLAIMS_VOCAB = ROOT / "claims_vocabulary.json"
 DECISIONS = {"keep", "drop", "review", "drop_unverifiable", "defer"}
 DUPLICATE_STATUSES = {"unique", "duplicate", "review"}
 TARGET_STRANDS = {"A", "B", "C"}
@@ -70,6 +77,114 @@ def utc_now() -> str:
     return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 
 
+def _claim_merit(row: dict[str, Any], correction: dict[str, Any] | None = None) -> int:
+    """Return the repository's existing Stuff 0–100 evidence score.
+
+    Merit is system-owned.  The browsing LLM never gets to invent or alter it.
+    Apply only safe Deep Scan metadata corrections before invoking the existing
+    JavaScript score helper, so the stored claim matches the corrected provenance.
+    """
+    scored = copy.deepcopy(row)
+    correction = correction if isinstance(correction, dict) else {}
+    fields = correction.get("fields") if isinstance(correction.get("fields"), dict) else {}
+    unset = correction.get("unset") if isinstance(correction.get("unset"), list) else []
+    for field, value in fields.items():
+        if field in SAFE_CORRECTION_FIELDS:
+            scored[field] = copy.deepcopy(value)
+    for field in unset:
+        if field in SAFE_UNSET_FIELDS:
+            scored.pop(field, None)
+    js = r"""
+const fs=require('fs');
+const Merit=require('./source_merit.js');
+const row=JSON.parse(fs.readFileSync(0,'utf8'));
+process.stdout.write(String(Merit.scoreFor(row)));
+"""
+    try:
+        proc = subprocess.run(
+            ["node", "-e", js], input=json.dumps(scored, ensure_ascii=False), text=True,
+            cwd=ROOT, capture_output=True, check=True, timeout=20,
+        )
+        value = int(round(float(proc.stdout.strip())))
+    except (OSError, ValueError, subprocess.SubprocessError) as exc:
+        raise ValueError(f"could not compute repository merit score: {exc}") from exc
+    return max(0, min(100, value))
+
+
+def _stable_claim_id(record_key_value: str, ordinal: int) -> str:
+    digest = hashlib.sha256(record_key_value.encode("utf-8")).hexdigest()[:16]
+    return f"c:{digest}:{ordinal}"
+
+
+def normalize_v2_claims(
+    raw: dict[str, Any], *, key: str, row: dict[str, Any], is_historical: bool,
+    strand: str, decision: str, qualification: str, claims_required: bool,
+) -> tuple[list[dict[str, Any]] | None, list[str]]:
+    """Validate a new-package claim draft and add system-owned fields.
+
+    Old in-flight Deep Scan packages (without claims_format) remain importable;
+    they return ``None`` here.  New packages fail closed on unknown vocabulary.
+    """
+    if not claims_required:
+        return None, []
+    drafts = raw.get("claims")
+    if drafts is None:
+        drafts = []
+    if not isinstance(drafts, list):
+        return [], ["claims must be a JSON list"]
+    if decision not in {"keep", "review"}:
+        return [], ([] if not drafts else [f"{decision} result must return claims: []"])
+    if not 1 <= len(drafts) <= 3:
+        return [], ["KEEP/REVIEW requires 1 to 3 structured claims"]
+
+    correction = raw.get("metadata_correction") if isinstance(raw.get("metadata_correction"), dict) else {}
+    try:
+        merit = _claim_merit(row, correction)
+    except ValueError as exc:
+        return [], [str(exc)]
+    era = "historical" if is_historical else "current"
+    normalized: list[dict[str, Any]] = []
+    problems: list[str] = []
+    for idx, draft in enumerate(drafts, 1):
+        if not isinstance(draft, dict):
+            problems.append(f"claims[{idx-1}] must be an object")
+            continue
+        claim = copy.deepcopy(draft)
+        # Reject conflicting system-owned fields if a model supplies them anyway,
+        # then overwrite with canonical repository values.
+        expected_system = {
+            "record_key": key, "merit": merit, "origin": "deep_scan",
+            "era": era, "provisional": False,
+        }
+        for field, expected in expected_system.items():
+            if field in claim and claim.get(field) != expected:
+                problems.append(f"claims[{idx-1}].{field} conflicts with system-owned value")
+        claim.update(expected_system)
+        claim["claim_id"] = _stable_claim_id(key, idx)
+        if idx == 1:
+            supplied_q = claim.get("qualification")
+            if supplied_q is not None and clean(supplied_q) != clean(qualification):
+                problems.append("claims[0].qualification must match deep_analysis.qualification")
+            claim["qualification"] = qualification
+        else:
+            claim.setdefault("qualification", "")
+        claim.setdefault("secondary_objects", [])
+        claim.setdefault("attributes", {})
+        strand_norm = clean(strand).lower()
+        if strand_norm == "b" or strand_norm.endswith("_b"):
+            attrs = claim.get("attributes") if isinstance(claim.get("attributes"), dict) else {}
+            if attrs.get("world_reasoning") is True:
+                problems.append(f"claims[{idx-1}] Strand B cannot set attributes.world_reasoning=true")
+            attrs["world_reasoning"] = False
+            claim["attributes"] = attrs
+        normalized.append(claim)
+
+    if not problems:
+        vocabulary = load_vocabulary(CLAIMS_VOCAB)
+        problems.extend(validate_claims(normalized, vocabulary))
+    return normalized, problems
+
+
 def parse_result_doc(raw: bytes, label: str) -> dict[str, Any]:
     try:
         obj = json.loads(raw.decode("utf-8"))
@@ -79,6 +194,9 @@ def parse_result_doc(raw: bytes, label: str) -> dict[str, Any]:
         raise ValueError(f"{label}: top level must be a JSON object")
     if obj.get("format") not in {V1_FORMAT, V2_FORMAT}:
         raise ValueError(f"{label}: format must be {V1_FORMAT!r} or {V2_FORMAT!r}")
+    claims_format = clean(obj.get("claims_format"))
+    if claims_format and claims_format != CLAIMS_FORMAT:
+        raise ValueError(f"{label}: unsupported claims_format {claims_format!r}")
     if not isinstance(obj.get("results"), list):
         raise ValueError(f"{label}: results must be a JSON list")
     return obj
@@ -377,6 +495,7 @@ def main() -> None:
         for label, result_doc in docs:
             file_had_valid_doc = True
             fmt = result_doc.get("format")
+            claims_required = fmt == V2_FORMAT and clean(result_doc.get("claims_format")) == CLAIMS_FORMAT
             package_id = clean(result_doc.get("package_id")) or "unknown-package"
             package_expected = expected_remaining_for_package(work_state, package_id, sidecar) if fmt == V2_FORMAT else None
             package_pos = 0
@@ -545,6 +664,17 @@ def main() -> None:
                         rejected_count += 1
                         continue
 
+                deep_ok = accepted.get("deep_analysis") if isinstance(accepted.get("deep_analysis"), dict) else {}
+                claims, claim_problems = normalize_v2_claims(
+                    raw, key=key, row=_row, is_historical=is_historical, strand=strand,
+                    decision=decision, qualification=clean(deep_ok.get("qualification")),
+                    claims_required=claims_required,
+                )
+                if claim_problems:
+                    print(f"REJECT {label} result {idx}: claim validation failed: {'; '.join(claim_problems)}")
+                    rejected_count += 1
+                    continue
+
                 now = utc_now()
                 previous = table.get(key) if isinstance(table.get(key), dict) else None
                 legacy_versions = []
@@ -562,6 +692,9 @@ def main() -> None:
                     "deep_read_mode": "offline_llm_package_v2", "reader_text_model": clean(raw.get("processor")) or "user-provided-llm-subscription",
                     "reader_text_written_at": now, "deep_scan_package_id": package_id,
                 }
+                if claims is not None:
+                    entry["claims"] = claims
+                    entry["claims_profile"] = CLAIMS_FORMAT
                 if legacy_versions:
                     entry["legacy_versions"] = legacy_versions
                 table[key] = entry
@@ -619,6 +752,9 @@ def main() -> None:
         sidecar["version"] = 3
         sidecar["profile"] = V2_PROFILE if accepted_v2 else sidecar.get("profile", V1_PROFILE)
         sidecar["generated_at"] = now
+        if accepted_v2:
+            sidecar["claims_profile"] = CLAIMS_FORMAT
+            sidecar["claims_updated_at"] = now
         admission_state["version"] = 1
         admission_state["profile"] = "radar-admission-v1"
         admission_state["updated_at"] = now

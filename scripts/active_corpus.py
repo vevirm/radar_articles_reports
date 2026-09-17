@@ -139,6 +139,14 @@ def apply_deep_semantics(row: dict[str, Any], reader_entry: dict[str, Any] | Non
     if profile not in AUTHORITATIVE_DEEP_PROFILES:
         return out
 
+    claims = reader_entry.get("claims")
+    if isinstance(claims, list) and claims:
+        out["claims"] = copy.deepcopy(claims)
+        out["claims_profile"] = clean(reader_entry.get("claims_profile")) or "radar-claims-v1"
+    else:
+        out.pop("claims", None)
+        out.pop("claims_profile", None)
+
     # V2 is authoritative for semantics. Remove scanner-hypothesis fields that can
     # otherwise keep feeding downstream reasoning even after the prose has been
     # replaced. Derived engines may reconstruct structured lenses from the verified
