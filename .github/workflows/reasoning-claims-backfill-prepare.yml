@@ -39,6 +39,9 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Install test dependency
+        run: python -m pip install --disable-pip-version-check pytest==9.0.2
+
       - name: Verify protected core before packaging
         run: |
           python scripts/check_reasoning_reform_core_freeze.py
