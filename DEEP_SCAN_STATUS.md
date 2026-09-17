@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1344** (Main **644** + Historical **700**)
-- Automatic queue still needing V2 verification: **50** (Main **6** + Historical **44**)
-- Currently assigned to workers: **50** (Main **6** + Historical **44**)
+- Authoritative V2 verified: **1357** (Main **649** + Historical **708**)
+- Automatic queue still needing V2 verification: **42** (Main **1** + Historical **41**)
+- Currently assigned to workers: **42** (Main **1** + Historical **41**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **60**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260917T145243Z-e4953dcbcec9`
+- Current package: `worker-a-20260917T154643Z-e4953dcbcec9`
 - Assigned unresolved records: **36**
   1. `historical:id:1b548cd98970b985` — ERC participants at the 2019 Research Innovation days
   2. `historical:id:3cecfeb44fddb1f7` — Controlling internet content in the EU: towards digital sovereignty — recovery attempt 3/3
@@ -29,17 +29,14 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260917T145251Z-20e73f1838e5`
-- Assigned unresolved records: **14**
-  1. `historical:id:dc302423afff77b3` — Shaping Portuguese science policy for the European horizon: The discourses of technological change — recovery attempt 3/3
-  2. `historical:id:61f8c22387103608` — Collaboration strategies and effects on university research: evidence from Chinese universities — recovery attempt 3/3
-  3. `link:https://doi.org/10.1007/s41125-026-00115-w` — EU Governance of Critical Infrastructure: Resilience and Artificial Intelligence as Policy Challenges
-  4. `link:https://allea.org/work-with-us/` — WORK WITH US
-  5. `link:https://defence-industry-space.ec.europa.eu/eu-ukraine-drone-alliance_en` — EU Ukraine Drone Alliance
-  6. `link:https://rea.ec.europa.eu/publications/msca-guide-businesses_en` — MSCA Guide for Businesses
-  7. `link:https://doi.org/10.1108/fs-11-2025-0260` — Artificial intelligence as a collective transformative experience: a conceptual framework for rational encounter
-  8. `link:https://www.euronews.com/next/2026/09/17/is-curtailing-ai-an-illusion-for-the-eu-despite-von-der-leyens-pledge` — Is curtailing AI an illusion for the EU, despite von der Leyen's pledge?
-  - … plus 6 more in the package manifest
+- Current package: `worker-b-20260917T154655Z-a2d59c8157d0`
+- Assigned unresolved records: **6**
+  1. `historical:id:11a2b0b21715eb40` — Research security by roundtable: analysis of Germany’s committees for the ethics of security-relevant research
+  2. `historical:id:a389794c702a37cf` — The implementation of research security policies in Germany: exploring policy narratives across governance levels
+  3. `historical:id:792eb0799f1d6011` — Fostering regional entrepreneurial ecosystem development: the role of science and technology park networks
+  4. `historical:id:ae55418dfdd17944` — New Study Examines Drivers of Government Investment in Energy Innovation
+  5. `historical:id:c24eca9c42fb2dcf` — Hot Summer of Research and Innovation Policy – What’s Cooking in Brussels | Demos Helsinki
+  6. `link:https://doi.org/10.1108/fs-11-2025-0260` — Artificial intelligence as a collective transformative experience: a conceptual framework for rational encounter — recovery attempt 2/3
 
 ## Hands-on verification needed
 
