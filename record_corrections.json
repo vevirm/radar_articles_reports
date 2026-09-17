@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-09-17T06:58:43Z",
+  "updated_at": "2026-09-17T10:58:01Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -8774,6 +8774,229 @@
       ],
       "updated_at": "2026-09-17T06:58:43Z",
       "deep_scan_package_id": "worker-b-20260917T063146Z-cd63404e9a62"
+    },
+    "historical:id:803e0ea11a467579": {
+      "fields": {
+        "type": "journal forum (collection of short articles)"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Intereconomics published this as a Forum of several signed contributions, not a single research article.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.intereconomics.eu/contents/year/2015/number/1/article/the-impact-of-horizon-2020-on-innovation-in-europe.html"
+      ],
+      "updated_at": "2026-09-17T10:57:57Z",
+      "deep_scan_package_id": "worker-a-20260917T090649Z-5d29b20d76c3"
+    },
+    "historical:id:46e993866190a610": {
+      "fields": {
+        "type": "web page (procurement navigation)"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Page is a DG RTD navigation/listing page, not a publication; stored tier unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://research-and-innovation.ec.europa.eu/funding/tender-opportunities-research-and-innovation_en"
+      ],
+      "updated_at": "2026-09-17T10:57:57Z",
+      "deep_scan_package_id": "worker-a-20260917T090649Z-5d29b20d76c3"
+    },
+    "historical:id:a5bcf5e5022e3984": {
+      "fields": {
+        "source": "The European Higher Education Area: Between Critical Reflections and Future Policies (Springer)",
+        "type": "book chapter"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Crossref and the PDF show a Springer open-access book chapter; it did not appear in the journal Higher Education.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://link.springer.com/content/pdf/10.1007/978-3-319-20877-0_11.pdf"
+      ],
+      "updated_at": "2026-09-17T10:57:57Z",
+      "deep_scan_package_id": "worker-a-20260917T090649Z-5d29b20d76c3"
+    },
+    "historical:id:781b72021bb0f82a": {
+      "fields": {
+        "authors": "Julia Christina Hess; Anna Semenova",
+        "date": "2025-03-17",
+        "source": "interface (formerly Stiftung Neue Verantwortung)",
+        "type": "data brief"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "PDF cover gives authors, publisher interface and date 17 March 2025; 2015 is the start of the data series, not the publication date.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.interface-eu.org/publications/downloadPdf/semiconductor-emission-explorer"
+      ],
+      "updated_at": "2026-09-17T10:57:57Z",
+      "deep_scan_package_id": "worker-a-20260917T090649Z-5d29b20d76c3"
+    },
+    "historical:id:05acc7fcc9961965": {
+      "fields": {
+        "source": "Science and Technology Governance and Ethics: A Global Perspective from Europe, India and China (Springer)",
+        "type": "book chapter",
+        "date": "2015-01-27"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Crossref and PDF identify an open-access Springer book chapter, not the journal Governance; online publication 27 Jan 2015.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://link.springer.com/content/pdf/10.1007/978-3-319-14693-5_3.pdf"
+      ],
+      "updated_at": "2026-09-17T10:57:58Z",
+      "deep_scan_package_id": "worker-a-20260917T090649Z-5d29b20d76c3"
+    },
+    "historical:id:06a6588c01bbee42": {
+      "fields": {
+        "source": "Science and Technology Governance and Ethics: A Global Perspective from Europe, India and China (Springer)",
+        "type": "book chapter",
+        "date": "2015-01-27"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Crossref and PDF identify an open-access Springer book chapter, not the journal Governance.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://link.springer.com/content/pdf/10.1007/978-3-319-14693-5_2.pdf"
+      ],
+      "updated_at": "2026-09-17T10:57:58Z",
+      "deep_scan_package_id": "worker-a-20260917T090649Z-5d29b20d76c3"
+    },
+    "historical:id:f4f4687bd4219683": {
+      "fields": {
+        "authors": "Sandra Collins; Natalie Harrower; Dag Trygve Truslew Haug; Beat Immenhauser; Gerhard Lauer; Tito Orlandi; Laurent Romary; Eveline Wandl-Vogt",
+        "type": "position paper / working group report",
+        "date": "2015-07"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Report title page lists the working-group authors; PDF upload folder dates it to July 2015 rather than 1 January.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.allea.org/wp-content/uploads/2015/07/Going-Digital_digital-version.pdf"
+      ],
+      "updated_at": "2026-09-17T10:57:58Z",
+      "deep_scan_package_id": "worker-a-20260917T090649Z-5d29b20d76c3"
+    },
+    "historical:id:11087db818604058": {
+      "fields": {
+        "source": "Ethics, Law and Governance of Biobanking: National, European and International Approaches (Springer)",
+        "type": "book chapter"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Crossref and the publisher page show a chapter in the Mascalzoni-edited Springer volume, not the journal Governance.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://link.springer.com/chapter/10.1007/978-94-017-9573-9_12"
+      ],
+      "updated_at": "2026-09-17T10:57:58Z",
+      "deep_scan_package_id": "worker-a-20260917T090649Z-5d29b20d76c3"
+    },
+    "historical:id:3c0bd4298a48a861": {
+      "fields": {
+        "type": "peer-reviewed article (policy paper)",
+        "date": "2024-06-10"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Article is an International Affairs policy paper; Durham record gives online publication 10 June 2024 (issue July 2024).",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://durham-repository.worktribe.com/OutputFile/2736687"
+      ],
+      "updated_at": "2026-09-17T10:57:58Z",
+      "deep_scan_package_id": "worker-a-20260917T090649Z-5d29b20d76c3"
+    },
+    "historical:id:cc369cdee634fd3c": {
+      "fields": {
+        "source": "European Commission (fact sheet, re-hosted by ERA Portal Austria)",
+        "date": "2020-05",
+        "type": "fact sheet"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The PDF is a European Commission fact sheet dated May 2020; ERA Portal Austria only hosts it, and the 2024 date is unsupported.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://era.gv.at/public/documents/4196/FINAL_AI_factsheet.pdf"
+      ],
+      "updated_at": "2026-09-17T10:57:58Z",
+      "deep_scan_package_id": "worker-a-20260917T090649Z-5d29b20d76c3"
+    },
+    "historical:id:15ed317ef708661b": {
+      "fields": {
+        "title": "Mutual learning exercise for more attractive and sustainable research careers and better-balanced talent circulation",
+        "authors": "Gareth O’Neill; Conor O’Carroll",
+        "date": "2025-05-19",
+        "type": "policy report (Horizon Europe PSF mutual learning exercise)",
+        "source": "European Commission, Directorate-General for Research and Innovation"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "EU Publications Office record and PDF give this title, personal authors and release date; stored title was an interpretive claim.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://op.europa.eu/en/publication-detail/-/publication/612dc9f7-3528-11f0-8a44-01aa75ed71a1/language-en"
+      ],
+      "updated_at": "2026-09-17T10:57:59Z",
+      "deep_scan_package_id": "worker-a-20260917T090649Z-5d29b20d76c3"
+    },
+    "historical:id:6ae8c15a106de381": {
+      "fields": {
+        "title": "EU–US collaboration on quantum technologies: Emerging opportunities for research and standards-setting",
+        "source": "Chatham House (Royal Institute of International Affairs), International Security Programme",
+        "type": "research paper"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Crossref and the catalogue give a Chatham House research paper, not an International Affairs journal article; subtitle added.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://chathamhouse.soutron.net/Portal/Public/en-GB/RecordView/Index/191257"
+      ],
+      "updated_at": "2026-09-17T10:58:00Z",
+      "deep_scan_package_id": "worker-a-20260917T090649Z-5d29b20d76c3"
+    },
+    "historical:id:d55fafdee13ee224": {
+      "fields": {
+        "title": "Support data collection and analysis concerning mobility patterns and career paths of researchers: survey on researchers in European higher education institutions (MORE4)",
+        "authors": "IDEA Consult; WIFO; PPMI (for European Commission, DG Research and Innovation)",
+        "date": "2021-05-25",
+        "type": "study report (survey)",
+        "source": "European Commission, Directorate-General for Research and Innovation"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "EU Publications Office record and PDF give the title, contractors and release date; stored title was an unverified claim.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://op.europa.eu/en/publication-detail/-/publication/487036ad-bdd1-11eb-8aca-01aa75ed71a1/language-en"
+      ],
+      "updated_at": "2026-09-17T10:58:00Z",
+      "deep_scan_package_id": "worker-a-20260917T090649Z-5d29b20d76c3"
     }
   }
 }

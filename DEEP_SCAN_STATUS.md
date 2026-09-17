@@ -6,30 +6,30 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1288** (Main **644** + Historical **644**)
-- Automatic queue still needing V2 verification: **99** (Main **1** + Historical **98**)
+- Authoritative V2 verified: **1307** (Main **644** + Historical **663**)
+- Automatic queue still needing V2 verification: **80** (Main **1** + Historical **79**)
 - Currently assigned to workers: **76** (Main **1** + Historical **75**)
-- Bounded access-recovery retries still eligible: **18**
+- Bounded access-recovery retries still eligible: **4**
 - Hands-on verification needed: **55**
-- Automatic queue pending and not yet assigned: **23**
+- Automatic queue pending and not yet assigned: **4**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260917T090649Z-5d29b20d76c3`
+- Current package: `worker-a-20260917T110032Z-9c77ac8c844d`
 - Assigned unresolved records: **36**
-  1. `link:https://doi.org/10.1016/j.bushor.2026.09.004` — From digital sovereignty to geographic intelligence: Mapping the hidden geography of digital value and control with the SCALE Framework — recovery attempt 2/3
-  2. `historical:id:872fb7d6c16ec949` — Beyond checklists: toward an ethical-constructive technology assessment
-  3. `historical:id:803e0ea11a467579` — The Impact of Horizon 2020 on Innovation in Europe
-  4. `historical:id:46e993866190a610` — Tender opportunities for research and innovation
-  5. `historical:id:a5bcf5e5022e3984` — Strategies for Efficient Funding of Universities in Europe
-  6. `historical:id:781b72021bb0f82a` — Semiconductor Emission Explorer: Tracking Greenhouse Gas Emissions from Chip Production (2015-2023)
-  7. `historical:id:05acc7fcc9961965` — Public Perceptions of Science and Technology in Europe, China and India
-  8. `historical:id:06a6588c01bbee42` — Institutionalizing Ethical Debates in Science, Technology and Innovation Policy: A Comparison of Europe, India and China
+  1. `historical:id:aadde2c8ca8c0e11` — Shaping Innovation: A Regional Perspective on Industrial PhD Programs in Italy
+  2. `historical:id:3391d6827787322e` — Open radar groups: The integration of online communities into open foresight processes
+  3. `historical:id:1697203114c385cf` — Being open to science and society
+  4. `historical:id:216cf259e760105a` — Methods for Practising Ethics in Research and Innovation: A Literature Review, Critical Analysis and Recommendations
+  5. `link:https://doi.org/10.1016/j.bushor.2026.09.004` — From digital sovereignty to geographic intelligence: Mapping the hidden geography of digital value and control with the SCALE Framework — recovery attempt 3/3
+  6. `historical:id:5f02392522b6f284` — US research-policy instability created an observable opportunity for Europe to attract mobile scientific talent. — recovery attempt 3/3
+  7. `historical:id:1b548cd98970b985` — ERC participants at the 2019 Research Innovation days
+  8. `historical:id:3cecfeb44fddb1f7` — Controlling internet content in the EU: towards digital sovereignty — recovery attempt 3/3
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260917T090704Z-c1088ee0206d`
+- Current package: `worker-b-20260917T110044Z-c1088ee0206d`
 - Assigned unresolved records: **40**
   1. `historical:id:54a0ed573cfd4e70` — Academic freedom is becoming part of Europe's competitive offer to global researchers as well as a condition for reliable knowledge production. — recovery attempt 2/3
   2. `historical:id:98e96e23a8b4f1f0` — Network structure of scientific collaborations between China and the EU member states
