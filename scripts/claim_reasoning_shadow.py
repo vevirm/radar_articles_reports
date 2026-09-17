@@ -33,7 +33,7 @@ except ModuleNotFoundError:  # direct script execution from scripts/
     from claims_schema import date_precision, load_vocabulary, validate_claim  # type: ignore
     from rebuild_active_radar import _add_historical_context  # type: ignore
 
-PROFILE = "radar-claim-reasoning-shadow-v1.2-role-constrained-frontier"
+PROFILE = "radar-claim-reasoning-shadow-v1.3-complete-grammar-shadow"
 DECISION_WEIGHT = {"keep": 1.0, "review": 0.6, "needs_manual_verification": 0.35, "provisional": 0.35, "awaiting": 0.35}
 STATUS_WEIGHT = {
     "operating": 1.0, "in_force": 1.0, "adopted": 0.9, "announced": 0.8,
@@ -270,6 +270,89 @@ def _role_strength(n: dict[str, Any], role: str) -> float:
     return round(merit * role_fit * status * breadth, 6)
 
 
+NEGATIVE_DIRECTIONS = {"contracts", "becomes_conditional", "becomes_contested"}
+
+
+def _direction_compatible(a: str, b: str) -> bool:
+    a, b = clean(a), clean(b)
+    if a == b:
+        return True
+    if a in NEGATIVE_DIRECTIONS and b in NEGATIVE_DIRECTIONS:
+        return True
+    return False
+
+
+def _role_corroboration_factor(
+    selected: dict[str, Any] | None,
+    role: str,
+    pool: Iterable[dict[str, Any]],
+    *,
+    semantic_filter: Any = None,
+    anchor_objects: set[str] | None = None,
+    max_extra_sources: int = 1,
+) -> tuple[float, list[str]]:
+    """Conservative independent-source corroboration for an already-filled role.
+
+    Corroboration never fills a role.  The supporting claim may be context (R-09)
+    because it only raises confidence in a primary role, but it must come from a
+    different record and source and overlap an exact object chosen for that role.
+    Level-5 worked examples normally use one second source (x1.1); grammars that
+    explicitly aggregate more sources, such as split_recurrence side_a, compute
+    their own capped factor.
+    """
+    if not selected or max_extra_sources <= 0:
+        return 1.0, []
+    selected_source = clean(selected.get("_source")).lower()
+    selected_record = clean(selected.get("_record_id"))
+    anchors = set(anchor_objects or _claim_objects(selected))
+    supporters: list[dict[str, Any]] = []
+    seen_sources: set[str] = set()
+    for n in pool:
+        if clean(n.get("era")) != "current":
+            continue
+        if clean(n.get("_record_id")) == selected_record:
+            continue
+        src = clean(n.get("_source")).lower()
+        if not src or src == selected_source or src in seen_sources:
+            continue
+        if anchors and not (anchors & _claim_objects(n)):
+            continue
+        if semantic_filter is not None:
+            if not semantic_filter(n):
+                continue
+        else:
+            kinds = ROLE_KINDS.get(role)
+            if kinds and clean(n.get("kind")) not in kinds:
+                continue
+            if not _direction_compatible(clean(selected.get("direction")), clean(n.get("direction"))):
+                continue
+        supporters.append(n)
+        seen_sources.add(src)
+        if len(supporters) >= max_extra_sources:
+            break
+    factor = min(1.30, 1.0 + 0.10 * len(supporters))
+    return round(factor, 2), [clean(n.get("claim_id")) for n in supporters]
+
+
+def _role_strength_corrob(
+    selected: dict[str, Any] | None,
+    role: str,
+    pool: Iterable[dict[str, Any]],
+    *,
+    semantic_filter: Any = None,
+    anchor_objects: set[str] | None = None,
+    max_extra_sources: int = 1,
+) -> tuple[float, float, list[str]]:
+    if not selected:
+        return 0.0, 1.0, []
+    base = _role_strength(selected, role)
+    factor, supporters = _role_corroboration_factor(
+        selected, role, pool, semantic_filter=semantic_filter,
+        anchor_objects=anchor_objects, max_extra_sources=max_extra_sources,
+    )
+    return round(min(1.0, base * factor), 6), factor, supporters
+
+
 def _best(nodes: Iterable[dict[str, Any]], role: str) -> dict[str, Any] | None:
     xs = [n for n in nodes if n.get("_primary")]
     if not xs:
@@ -310,12 +393,71 @@ def corroborated_claims(nodes: Iterable[dict[str, Any]]) -> list[dict[str, Any]]
     return sorted(out, key=lambda x: (x["source_count"], x["record_count"], x["object"]), reverse=True)
 
 
+def _relation_objects(n: dict[str, Any]) -> set[str]:
+    return _claim_objects(n)
+
+
+def _rule_like(n: dict[str, Any]) -> bool:
+    """Concrete rule/control claim, not any governance-adjacent action."""
+    obj = clean(n.get("object"))
+    text = _semantic_text(n)
+    mechanism = clean(n.get("mechanism"))
+    return (
+        any(tok in obj for tok in (".standards", ".certification", ".permitting", "admissibility", "regulation", "screening", "export_control."))
+        or mechanism in {"regulates", "standardises", "certifies", "licenses", "screens", "restricts", "conditions", "harmonises", "exempts", "reconciles"}
+        or bool(re.search(r"\b(?:permit(?:ting)? rule|licen[cs](?:e|ing)|mandatory screening|admissibility rule|export control|certification rule|technical standard)\b", text))
+    )
+
+
+def _doctrine_like(n: dict[str, Any]) -> bool:
+    if clean(n.get("kind")) not in {"action", "advocacy"}:
+        return False
+    text = _semantic_text(n)
+    obj = clean(n.get("object"))
+    return bool(
+        re.search(r"\b(?:act|regulation|framework|strategy|doctrine|recommendation|guidance|rulebook|policy framework)\b", text)
+        or ("governance" in obj and clean(n.get("mechanism")) in {"adopts", "proposes", "prioritises", "standardises", "regulates"})
+    )
+
+def _commitment_like(n: dict[str, Any]) -> bool:
+    if clean(n.get("kind")) != "action":
+        return False
+    if clean(n.get("status")) in {"abandoned", "lapsed"}:
+        return False
+    attrs = n.get("attributes") if isinstance(n.get("attributes"), dict) else {}
+    return bool(clean(n.get("deadline")) or clean(attrs.get("construction_window")) or clean(n.get("mechanism")) in {"procures", "builds", "funds", "recruits", "invests", "launches"})
+
+
+def _success_gap_pairs(current: list[dict[str, Any]]) -> list[tuple[str, str, dict[str, Any]]]:
+    """Structural R-24f candidates from explicit two-object current claims.
+
+    The relation claim must actually name both objects.  This deliberately avoids
+    guessing programme objectives from topical similarity.
+    """
+    pairs: list[tuple[str, str, dict[str, Any]]] = []
+    for n in current:
+        objs = sorted(_claim_objects(n))
+        if len(objs) < 2:
+            continue
+        for a, b in itertools.combinations(objs, 2):
+            pairs.append((a, b, n))
+    return pairs
+
+
 def level3_findings(nodes: Iterable[dict[str, Any]], evaluated_on: dt.date) -> list[dict[str, Any]]:
+    """R-24 sequence/gap shapes over current primary claims.
+
+    The shadow is conservative: a sequence/gap is emitted only when the claim
+    graph itself supplies the relation.  It does not infer a doctrine/tool or
+    programme objective from titles alone.
+    """
     current = [n for n in nodes if n.get("_primary") and clean(n.get("era")) == "current"]
     by_object: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for n in current:
         by_object[clean(n.get("object"))].append(n)
     out: list[dict[str, Any]] = []
+
+    # R-24e: stalled proposal.
     for obj, rows in by_object.items():
         for p in rows:
             pd = _date(p.get("status_date"))
@@ -324,14 +466,138 @@ def level3_findings(nodes: Iterable[dict[str, Any]], evaluated_on: dt.date) -> l
             later = [r for r in rows if (_date(r.get("status_date")) or dt.date.min) > pd and STATUS_RANK.get(clean(r.get("status")), 0) > STATUS_RANK["proposed"]]
             if not later:
                 out.append({"level": 3, "grammar_id": "stalled_proposal", "object": obj, "proposal_claim_id": p.get("claim_id"), "age_days": (evaluated_on - pd).days})
-    # R-24d: goal without measure. Partial dates do not matter because this is a corpus ratio.
+
+    # R-24d: goal without measure.
     for obj, rows in by_object.items():
         inv = [r for r in rows if clean(r.get("kind")) in {"advocacy", "action"}]
         meas = [r for r in rows if clean(r.get("kind")) == "effect"]
         if len(inv) >= 12 * max(1, len(meas)) and len(inv) >= 12 and (obj.startswith("goal.") or obj == "goal.strategic_autonomy"):
             out.append({"level": 3, "grammar_id": "goal_without_measure", "object": obj, "invocations": len(inv), "measurements": len(meas), "ratio": None if not meas else round(len(inv) / len(meas), 2)})
-    return out
 
+    # R-24a: practice before doctrine.  The doctrine must name the practice
+    # object structurally through object/secondary_object overlap.
+    dated = [n for n in current if _date(n.get("status_date"))]
+    for doctrine in dated:
+        if not _doctrine_like(doctrine):
+            continue
+        dd = _date(doctrine.get("status_date"))
+        doctrine_objs = _claim_objects(doctrine)
+        practices = [
+            p for p in dated
+            if p is not doctrine and _date(p.get("status_date")) < dd
+            and clean(p.get("kind")) == "action"
+            and bool(doctrine_objs & _claim_objects(p))
+            and not _doctrine_like(p)
+        ]
+        if not practices:
+            continue
+        practice = max(practices, key=lambda n: (_date(n.get("status_date")), _role_strength(n, "delivery_instrument")))
+        out.append({
+            "level": 3, "grammar_id": "practice_before_doctrine", "object": clean(practice.get("object")),
+            "practice_claim_id": practice.get("claim_id"), "practice_date": practice.get("status_date"),
+            "doctrine_claim_id": doctrine.get("claim_id"), "doctrine_date": doctrine.get("status_date"),
+            "relation_mode": "exact_object_overlap",
+        })
+
+    # R-24b: deployment before rules.
+    for deployment in dated:
+        if clean(deployment.get("status")) != "operating" or clean(deployment.get("kind")) != "action" or _rule_like(deployment):
+            continue
+        dep_date = _date(deployment.get("status_date"))
+        dep_objs = _claim_objects(deployment)
+        rules = [
+            r for r in dated if r is not deployment and _rule_like(r)
+            and bool(dep_objs & _claim_objects(r))
+            and STATUS_RANK.get(clean(r.get("status")), 0) >= STATUS_RANK["adopted"]
+        ]
+        if not rules:
+            continue
+        first_rule = min(rules, key=lambda n: _date(n.get("status_date")))
+        if _date(first_rule.get("status_date")) <= dep_date:
+            continue
+        out.append({
+            "level": 3, "grammar_id": "deployment_before_rules", "object": clean(deployment.get("object")),
+            "deployment_claim_id": deployment.get("claim_id"), "deployment_date": deployment.get("status_date"),
+            "first_adopted_rule_claim_id": first_rule.get("claim_id") if first_rule else None,
+            "first_adopted_rule_date": first_rule.get("status_date") if first_rule else None,
+        })
+
+    # R-24c: clock before rule.  The commitment's exact-object frontier may
+    # carry the rule object (e.g. public compute -> energy -> permitting).
+    for commitment in current:
+        if not _commitment_like(commitment):
+            continue
+        attrs = commitment.get("attributes") if isinstance(commitment.get("attributes"), dict) else {}
+        deadline = clean(commitment.get("deadline"))
+        window = clean(attrs.get("construction_window"))
+        if not (deadline or window):
+            continue
+        frontier, depths = _exact_object_frontier(current, commitment, max_hops=2)
+        rule_rows = [r for r in frontier if _rule_like(r) and clean(r.get("claim_id")) != clean(commitment.get("claim_id"))]
+        if not rule_rows:
+            continue
+        adopted = [r for r in rule_rows if STATUS_RANK.get(clean(r.get("status")), 0) >= STATUS_RANK["adopted"] and clean(r.get("status")) not in {"delivered"}]
+        if adopted:
+            continue
+        pending = sorted(rule_rows, key=lambda r: (_role_strength(r, "criterion_b"), -depths.get(clean(r.get("claim_id")), 99)), reverse=True)
+        out.append({
+            "level": 3, "grammar_id": "clock_before_rule", "object": clean(commitment.get("object")),
+            "commitment_claim_id": commitment.get("claim_id"), "deadline": deadline or None,
+            "construction_window": window or None,
+            "rule_claim_ids": [clean(r.get("claim_id")) for r in pending[:8]],
+            "rule_statuses": sorted({clean(r.get("status")) for r in pending}),
+            "frontier_mode": "exact_object_overlap", "max_rule_hop": max((depths.get(clean(r.get("claim_id")), 0) for r in pending), default=0),
+        })
+
+    # R-24f: success != delivery.  Start from an explicit current claim that
+    # names two programme objects.  One side must have action delivery while
+    # the other lacks any measured effect.
+    seen_gap: set[tuple[str, str]] = set()
+    for a, b, relation in _success_gap_pairs(current):
+        for objective, delivery in ((a, b), (b, a)):
+            key = (objective, delivery)
+            if key in seen_gap:
+                continue
+            objective_rows = [n for n in current if _touches(n, objective)]
+            delivery_rows = [n for n in current if _touches(n, delivery)]
+            delivery_actions = [n for n in delivery_rows if clean(n.get("kind")) == "action" and STATUS_WEIGHT.get(clean(n.get("status")), 0) > 0]
+            objective_effects = [n for n in objective_rows if clean(n.get("kind")) == "effect"]
+            objective_conditions = [n for n in objective_rows if clean(n.get("kind")) in {"action", "advocacy", "diagnosis"}]
+            if not delivery_actions or objective_effects or not objective_conditions:
+                continue
+            # R-24f is within one programme: keep the objective and delivery
+            # in the same object family, and require the relation claim itself
+            # to carry the delivery object as its primary object.
+            if objective.split(".", 1)[0] != delivery.split(".", 1)[0]:
+                continue
+            if clean(relation.get("object")) != delivery:
+                continue
+            if clean(relation.get("kind")) not in {"action", "advocacy", "diagnosis"}:
+                continue
+            if not ("retention" in objective or "success" in objective or "outcome" in objective or "performance" in objective or objective.startswith("goal.")):
+                continue
+            delivery_best = _best(delivery_actions, "delivery_instrument")
+            success_best = _best(objective_conditions, "success_condition")
+            if not delivery_best or not success_best:
+                continue
+            out.append({
+                "level": 3, "grammar_id": "success_metric_gap", "objective_object": objective,
+                "delivery_object": delivery, "success_condition_claim_id": success_best.get("claim_id"),
+                "delivery_instrument_claim_id": delivery_best.get("claim_id"),
+                "relation_claim_id": relation.get("claim_id"), "measurement_claim_count": 0,
+                "relation_mode": "explicit_two_object_claim",
+            })
+            seen_gap.add(key)
+
+    # Stable de-duplication.
+    unique: dict[tuple[Any, ...], dict[str, Any]] = {}
+    for item in out:
+        key = (
+            item.get("grammar_id"), item.get("object"), item.get("objective_object"), item.get("delivery_object"),
+            item.get("proposal_claim_id"), item.get("practice_claim_id"), item.get("deployment_claim_id"), item.get("commitment_claim_id"),
+        )
+        unique[key] = item
+    return sorted(unique.values(), key=lambda x: (clean(x.get("grammar_id")), clean(x.get("object") or x.get("objective_object")), clean(x.get("commitment_claim_id"))))
 
 def opposing_movements(nodes: Iterable[dict[str, Any]], evaluated_on: dt.date) -> list[dict[str, Any]]:
     eligible_scopes = {"eu", "member_state", "associated_country", "company_in_eu"}
@@ -602,7 +868,43 @@ def dependency_pathways(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any], 
                 chain_record_ids.add(clean(trigger.get("_record_id")))
             dist, bonus, lift = distance_excluding_records(nodes, ccluster, dcluster, chain_record_ids) if ccluster and dcluster else ("familiar", 1.0, math.inf)
 
-            strengths = {r: (_role_strength(n, r) if n else 0.0) for r, n in role_nodes.items()}
+            strengths: dict[str, float] = {}
+            role_corroboration: dict[str, dict[str, Any]] = {}
+            for role, n in role_nodes.items():
+                if not n:
+                    strengths[role] = 0.0
+                    role_corroboration[role] = {"factor": 1.0, "claim_ids": []}
+                    continue
+                # The commitment is one named institutional action; unrelated
+                # actions on the same object do not corroborate it. The other
+                # pathway roles may receive one independent-source x1.1 boost,
+                # matching the worked R-33 arithmetic without turning a broad
+                # object family into automatic corroboration.
+                if role == "commitment":
+                    strength, factor, supporter_ids = _role_strength(n, role), 1.0, []
+                elif role == "coupling":
+                    semantic_filter = lambda x: (
+                        clean(x.get("kind")) in {"action", "effect", "diagnosis"}
+                        and (clean(x.get("mechanism")) in COUPLING_MECHANISMS or clean(x.get("direction")) in NEGATIVE_DIRECTIONS)
+                    )
+                    strength, factor, supporter_ids = _role_strength_corrob(
+                        n, role, nodes, semantic_filter=semantic_filter, anchor_objects={dep_obj}
+                    )
+                elif role == "propagation":
+                    semantic_filter = lambda x, dep=dep_obj: (
+                        _touches(x, dep) and clean(x.get("kind")) in {"effect", "diagnosis"}
+                        and clean(x.get("direction")) in NEGATIVE_DIRECTIONS
+                    )
+                    strength, factor, supporter_ids = _role_strength_corrob(
+                        n, role, nodes, semantic_filter=semantic_filter, anchor_objects={dep_obj}
+                    )
+                else:  # exposure
+                    semantic_filter = lambda x, caps=set(cap_objects): _exposure_eligible(x, caps)
+                    strength, factor, supporter_ids = _role_strength_corrob(
+                        n, role, nodes, semantic_filter=semantic_filter, anchor_objects=set(cap_objects)
+                    )
+                strengths[role] = strength
+                role_corroboration[role] = {"factor": factor, "claim_ids": supporter_ids}
             base = 0.35*strengths["commitment"] + 0.30*strengths["coupling"] + 0.20*strengths["propagation"] + 0.15*strengths["exposure"]
             chain_objects = set().union(*(_claim_objects(n) for n in support_nodes))
             if trigger:
@@ -645,7 +947,8 @@ def dependency_pathways(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any], 
                 "distance": dist, "distance_lift": lift, "distance_bonus": bonus,
                 "frontier_mode": "exact_object_overlap", "coupling_hop": hop_depths.get(clean(coupling.get("claim_id"))), "max_role_hop": max_hop,
                 "endpoint_objects": [cap_obj, endpoint_b], "endpoint_joint_outside_chain": endpoint_joint,
-                "roles": {r: _snap(n, r) for r, n in role_nodes.items()}, "trigger": _snap(trigger, "trigger"), "missing_roles": missing,
+                "roles": {r: _snap(n, r) for r, n in role_nodes.items()}, "role_corroboration": role_corroboration,
+                "trigger": _snap(trigger, "trigger"), "missing_roles": missing,
                 "counter_claim_ids": sorted({clean(n.get("claim_id")) for n in counters if clean(n.get("claim_id"))}),
                 "counter_penalty": penalty, "pathway_score": pathway_score, "shock_score": shock_score if product == "shock" else None,
                 "score": candidate_score, "floor_ok": floor_ok, "wow_preliminary": wow,
@@ -714,8 +1017,8 @@ def conflicting_criteria(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any],
                 key=lambda n: (
                     1 if bool(arbitration_objs & _claim_objects(n)) else 0,
                     1 if clean(n.get("direction")) == "becomes_contested" else 0,
-                    -(b_depths.get(clean(n.get("claim_id")), 99)),
                     _role_strength(n, "divergence"),
+                    -(b_depths.get(clean(n.get("claim_id")), 99)),
                     float(n.get("merit", 0) or 0),
                     clean(n.get("status_date")),
                 ),
@@ -730,7 +1033,46 @@ def conflicting_criteria(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any],
                 continue
             if len({clean(n.get("_record_id")) for n in support}) < min(3, len(support)) or _distinct_sources(support) < 2:
                 continue
-            strengths = {r: (_role_strength(n, r) if n else 0.0) for r,n in roles.items()}
+            strengths: dict[str, float] = {}
+            role_corroboration: dict[str, dict[str, Any]] = {}
+            for role, n in roles.items():
+                if not n:
+                    strengths[role] = 0.0
+                    role_corroboration[role] = {"factor": 1.0, "claim_ids": []}
+                    continue
+                if role == "criterion_a":
+                    semantic_filter = lambda x: (
+                        clean(x.get("kind")) in {"action", "diagnosis", "effect"}
+                        and clean(x.get("direction")) in {"expands", "unchanged"}
+                    )
+                    anchors = {clean(n.get("object"))}
+                elif role == "criterion_b":
+                    semantic_filter = lambda x: (
+                        clean(x.get("kind")) in {"action", "diagnosis", "effect"}
+                        and (
+                            clean(x.get("direction")) in NEGATIVE_DIRECTIONS
+                            or clean(x.get("mechanism")) in RESTRICTION_MECHANISMS
+                            or clean(x.get("mechanism")) == "evaluates"
+                        )
+                    )
+                    anchors = _claim_objects(n)
+                elif role == "arbitration_gap":
+                    semantic_filter = lambda x: (
+                        clean(x.get("kind")) in {"diagnosis", "effect"}
+                        and clean(x.get("direction")) == "becomes_contested"
+                    )
+                    anchors = {clean(n.get("object"))}
+                else:  # divergence
+                    semantic_filter = lambda x: (
+                        clean(x.get("kind")) in {"diagnosis", "effect"}
+                        and clean(x.get("direction")) in NEGATIVE_DIRECTIONS
+                    )
+                    anchors = {clean(n.get("object"))}
+                strength, factor, supporter_ids = _role_strength_corrob(
+                    n, role, nodes, semantic_filter=semantic_filter, anchor_objects=anchors
+                )
+                strengths[role] = strength
+                role_corroboration[role] = {"factor": factor, "claim_ids": supporter_ids}
             base = .30*strengths["criterion_a"] + .30*strengths["criterion_b"] + .20*strengths["arbitration_gap"] + .20*strengths["divergence"]
             a_cluster = primary_cluster(clean(criterion_a.get("object")), vocab)
             b_cluster = primary_cluster(clean(criterion_b.get("object")), vocab)
@@ -753,7 +1095,7 @@ def conflicting_criteria(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any],
                 "frontier_mode": "exact_object_overlap", "criterion_b_hop": depths.get(clean(criterion_b.get("claim_id"))),
                 "endpoint_objects": [endpoint_a, endpoint_b], "endpoint_joint_outside_chain": endpoint_joint,
                 "divergence_from_b_hop": b_depths.get(clean(divergence.get("claim_id"))) if divergence else None,
-                "roles": {r:_snap(n,r) for r,n in roles.items()}, "missing_roles": missing,
+                "roles": {r:_snap(n,r) for r,n in roles.items()}, "role_corroboration": role_corroboration, "missing_roles": missing,
                 "distance": dist, "distance_lift": lift, "distance_bonus": bonus, "score": score,
                 "counter_claim_ids": sorted({clean(n.get("claim_id")) for n in counters if clean(n.get("claim_id"))}),
                 "counter_penalty": penalty, "floor_ok": floor_ok,
@@ -766,6 +1108,241 @@ def conflicting_criteria(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any],
         if key not in best or (c["score"], -len(c["missing_roles"])) > (best[key]["score"], -len(best[key]["missing_roles"])):
             best[key] = c
     return sorted(best.values(), key=lambda c:(c["score_gate_passes"], c["score"]), reverse=True)[:60]
+
+
+def _stake_class(obj: str, vocab: dict[str, Any]) -> str:
+    meta = (vocab.get("objects") or {}).get(clean(obj), {})
+    return clean(meta.get("stake_class")) if isinstance(meta, dict) else ""
+
+
+def _endpoint_joint(nodes: Iterable[dict[str, Any]], a: str, b: str, excluded: set[str] | None = None, eras: set[str] | None = None) -> int:
+    excluded = excluded or set()
+    eras = eras or {"current"}
+    return len({
+        clean(n.get("_record_id")) for n in nodes
+        if clean(n.get("era")) in eras and clean(n.get("_record_id")) not in excluded
+        and _touches(n, a) and _touches(n, b)
+    })
+
+
+def _wow_from_joint(current_joint: int, archive_joint: int, cross_cluster: bool = True, stake: bool = True) -> int:
+    total = current_joint + archive_joint
+    if total == 0 and cross_cluster and stake:
+        return 5
+    if total <= 1:
+        return 4
+    if total <= 5:
+        return 3
+    return 2
+
+
+def _role_bundle_score(
+    roles: dict[str, dict[str, Any] | None],
+    weights: dict[str, float],
+    nodes: Iterable[dict[str, Any]],
+    distance_bonus: float,
+    *,
+    corroborate_roles: set[str] | None = None,
+) -> tuple[dict[str, float], dict[str, dict[str, Any]], float]:
+    corroborate_roles = corroborate_roles or set()
+    strengths: dict[str, float] = {}
+    corroboration: dict[str, dict[str, Any]] = {}
+    for role, n in roles.items():
+        if n and role in corroborate_roles:
+            st, fac, ids = _role_strength_corrob(n, role, nodes)
+        else:
+            st, fac, ids = (_role_strength(n, role), 1.0, []) if n else (0.0, 1.0, [])
+        strengths[role] = st
+        corroboration[role] = {"factor": fac, "claim_ids": ids}
+    base = sum(weights.get(role, 0.0) * strengths.get(role, 0.0) for role in weights)
+    return strengths, corroboration, base * distance_bonus
+
+
+def latent_channels(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any]) -> list[dict[str, Any]]:
+    """A-3 latent_channel. One missing role is retained as a watch candidate."""
+    primary = [n for n in nodes if n.get("_primary") and clean(n.get("era")) == "current"]
+    need_cue = re.compile(r"\b(?:need|needs|gap|missing|lack|barrier|bottleneck|depends? on|requires?|unresolved|onboarding|visibility)\b", re.I)
+    starts = [n for n in primary if clean(n.get("kind")) in {"diagnosis", "advocacy"} and need_cue.search(_semantic_text(n))]
+    out: list[dict[str, Any]] = []
+    for need in starts:
+        frontier, depths = _exact_object_frontier(primary, need, max_hops=2)
+        structure_cue = re.compile(r"\b(?:platform|federation|infrastructure|service|facility|network|portal|access|authentication|interoperab)\b", re.I)
+        structures = [n for n in frontier if clean(n.get("kind")) == "action" and clean(n.get("status")) in {"operating", "in_force", "adopted", "announced", "call_open"} and structure_cue.search(_semantic_text(n))]
+        for structure in sorted(structures, key=lambda n: _role_strength(n, "existing_structure"), reverse=True)[:4]:
+            endpoint_a, endpoint_b = clean(need.get("object")), clean(structure.get("object"))
+            if endpoint_a == endpoint_b:
+                continue
+            support_pool = [n for n in frontier if n is not structure]
+            connection_cue = re.compile(r"\b(?:connect|integrat|interoperab|federat|onboard|link(?:s|ed|ing)?|authentication|single access)\b", re.I)
+            instrument_cue = re.compile(r"\b(?:task force|programme|program|call|fund|initiative|instrument|framework|act|working group)\b", re.I)
+            precedent_cue = re.compile(r"\b(?:precedent|already|existing|model|demonstrat|operat|service|platform|collectively supported)\b", re.I)
+            connection = _best_excluding([
+                n for n in support_pool if clean(n.get("kind")) == "action"
+                and _touches(n, endpoint_a) and _touches(n, endpoint_b) and connection_cue.search(_semantic_text(n))
+            ], "live_connection", {clean(need.get("claim_id")), clean(structure.get("claim_id"))})
+            instrument = _best_excluding([
+                n for n in support_pool if clean(n.get("kind")) == "action" and clean(n.get("status")) not in {"abandoned", "lapsed"}
+                and _touches(n, endpoint_a) and instrument_cue.search(_semantic_text(n))
+            ], "receiving_instrument", {clean(need.get("claim_id")), clean(structure.get("claim_id")), clean(connection.get("claim_id")) if connection else ""})
+            precedent = _best_excluding([
+                n for n in support_pool if clean(n.get("kind")) in {"diagnosis", "effect"}
+                and (_touches(n, endpoint_a) or _touches(n, endpoint_b)) and precedent_cue.search(_semantic_text(n))
+            ], "precedent", {clean(need.get("claim_id")), clean(structure.get("claim_id")), clean(connection.get("claim_id")) if connection else "", clean(instrument.get("claim_id")) if instrument else ""})
+            roles = {"unresolved_need": need, "existing_structure": structure, "live_connection": connection, "receiving_instrument": instrument, "precedent": precedent}
+            missing = [r for r,n in roles.items() if not n]
+            if len(missing) > 1:
+                continue
+            support = [n for n in roles.values() if n]
+            if _distinct_sources(support) < 2 or len({clean(n.get("_record_id")) for n in support}) < 3:
+                continue
+            recs = {clean(n.get("_record_id")) for n in support}
+            ca, cb = primary_cluster(endpoint_a, vocab), primary_cluster(endpoint_b, vocab)
+            dist, bonus, lift = distance_excluding_records(nodes, ca, cb, recs) if ca and cb else ("familiar",1.0,math.inf)
+            strengths, corrob, scored = _role_bundle_score(roles, {"unresolved_need":.25,"existing_structure":.25,"live_connection":.25,"receiving_instrument":.15,"precedent":.10}, nodes, bonus)
+            score = min(99, round(100 * scored)) if not missing else None
+            floor_ok = all(strengths[r] >= .40 for r in roles if roles[r] and r != "precedent")
+            joint = _endpoint_joint(nodes, endpoint_a, endpoint_b, recs, {"current"})
+            wow = _wow_from_joint(joint, _endpoint_joint(nodes, endpoint_a, endpoint_b, recs, {"historical"}), ca != cb, bool(_stake_class(endpoint_a,vocab) or _stake_class(endpoint_b,vocab)))
+            out.append({
+                "level": 5, "grammar_id":"latent_channel", "product":"opportunity",
+                "endpoint_objects":[endpoint_a,endpoint_b], "roles":{r:_snap(n,r) for r,n in roles.items()},
+                "missing_roles":missing, "distance":dist, "distance_lift":lift, "distance_bonus":bonus,
+                "score":score, "floor_ok":floor_ok, "wow_preliminary":wow,
+                "score_gate_passes": bool(not missing and floor_ok and score is not None and score >= 80 and dist != "familiar" and joint < 2),
+                "publication_gate_passes":False, "publication_gate_reason":"Shadow only: no executed falsifier ledger yet.",
+                "feedback_search_needed": bool(missing), "frontier_mode":"exact_object_overlap",
+            })
+    best: dict[tuple[str,str],dict[str,Any]]={}
+    for c in out:
+        key=tuple(c["endpoint_objects"])
+        rank=(0 if c["missing_roles"] else 1, c["score"] or 0)
+        if key not in best or rank > (0 if best[key]["missing_roles"] else 1, best[key]["score"] or 0):
+            best[key]=c
+    return sorted(best.values(), key=lambda c:(not c["missing_roles"], c["score"] or 0), reverse=True)[:50]
+
+
+def anchor_demand_candidates(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any]) -> list[dict[str, Any]]:
+    primary=[n for n in nodes if n.get("_primary") and clean(n.get("era"))=="current"]
+    commitments=[n for n in primary if clean(n.get("kind"))=="action" and clean(n.get("direction"))=="expands" and clean(n.get("mechanism")) in {"procures","builds","funds","launches"} and _stake_class(clean(n.get("object")), vocab) in {"flagship","capability","budget"}]
+    protect_cue=re.compile(r"\b(?:protect|blocking stake|intellectual property|ip (?:stay|remain)|safeguard|eu interest|ownership rule|screening right)\b",re.I)
+    conversion_cue=re.compile(r"\b(?:convert(?:s|ed|ing)? .*value|fast access|move(?:ment)? between providers|switch providers|condition for|depends? on|requires?)\b",re.I)
+    reform_cue=re.compile(r"\b(?:procurement reform|innovation procurement|public[- ]sector demand|raise .* demand|market-creation)\b",re.I)
+    payoff_cue=re.compile(r"\b(?:supply deal|signed .*contract|wins? .*deal|customer|order|sale|sold|supplier|anchor demand|procurement award)\b",re.I)
+    out=[]
+    for commitment in commitments:
+        frontier,depths=_exact_object_frontier(primary,commitment,max_hops=3)
+        payoff_rows=[n for n in frontier if clean(n.get("kind"))=="effect" and clean(n.get("direction"))=="expands" and clean(n.get("object"))!=clean(commitment.get("object")) and payoff_cue.search(_semantic_text(n))]
+        for payoff in sorted(payoff_rows,key=lambda n:_role_strength(n,"payoff_evidence"),reverse=True)[:4]:
+            excluded={clean(commitment.get("claim_id")),clean(payoff.get("claim_id"))}
+            protecting=_best_excluding([n for n in frontier if clean(n.get("kind"))=="action" and protect_cue.search(_semantic_text(n))],"protecting_instrument",excluded)
+            if protecting: excluded.add(clean(protecting.get("claim_id")))
+            conversion=_best_excluding([n for n in frontier if clean(n.get("kind")) in {"diagnosis","effect"} and conversion_cue.search(_semantic_text(n))],"conversion_condition",excluded)
+            if conversion: excluded.add(clean(conversion.get("claim_id")))
+            reform=_best_excluding([n for n in frontier if clean(n.get("kind"))=="action" and reform_cue.search(_semantic_text(n))],"enabling_reform",excluded)
+            roles={"commitment":commitment,"payoff_evidence":payoff,"protecting_instrument":protecting,"conversion_condition":conversion,"enabling_reform":reform}
+            missing=[r for r,n in roles.items() if not n]
+            if len(missing)>1: continue
+            support=[n for n in roles.values() if n]
+            if len({clean(n.get("_record_id")) for n in support})<3 or _distinct_sources(support)<2: continue
+            ea,eb=clean(commitment.get("object")),clean(payoff.get("object")); recs={clean(n.get("_record_id")) for n in support}
+            ca,cb=primary_cluster(ea,vocab),primary_cluster(eb,vocab)
+            dist,bonus,lift=distance_excluding_records(nodes,ca,cb,recs) if ca and cb else ("familiar",1.0,math.inf)
+            strengths,corrob,scored=_role_bundle_score(roles,{"commitment":.30,"payoff_evidence":.25,"protecting_instrument":.20,"conversion_condition":.15,"enabling_reform":.10},nodes,bonus,corroborate_roles={"commitment","payoff_evidence"})
+            counters=[]
+            for n in nodes:
+                if clean(n.get("_record_id")) in recs: continue
+                txt=_semantic_text(n)
+                if _touches(n,eb) and ("alongside, not instead" in txt or "alongside not instead" in txt): counters.append(n)
+            penalty=min(12,3*len({clean(n.get("_record_id")) for n in counters}))
+            score=max(0,min(99,round(100*scored)-penalty)) if not missing else None
+            floor_ok=all(strengths[r]>=.40 for r in roles if roles[r] and r!="enabling_reform")
+            joint=_endpoint_joint(nodes,ea,eb,recs,{"current"})
+            wow=_wow_from_joint(joint,_endpoint_joint(nodes,ea,eb,recs,{"historical"}),ca!=cb,bool(_stake_class(ea,vocab) or _stake_class(eb,vocab)))
+            out.append({"level":5,"grammar_id":"anchor_demand","product":"opportunity","endpoint_objects":[ea,eb],"roles":{r:_snap(n,r) for r,n in roles.items()},"role_corroboration":corrob,"missing_roles":missing,"distance":dist,"distance_lift":lift,"distance_bonus":bonus,"score":score,"counter_penalty":penalty,"counter_claim_ids":[clean(n.get("claim_id")) for n in counters],"floor_ok":floor_ok,"wow_preliminary":wow,"score_gate_passes":bool(not missing and floor_ok and score is not None and score>=80 and dist!="familiar" and joint<2),"publication_gate_passes":False,"publication_gate_reason":"Shadow only: no executed falsifier ledger yet.","frontier_mode":"exact_object_overlap"})
+    best={}
+    for c in out:
+        key=tuple(c["endpoint_objects"]); rank=(not c["missing_roles"],c["score"] or 0)
+        if key not in best or rank>(not best[key]["missing_roles"],best[key]["score"] or 0): best[key]=c
+    return sorted(best.values(),key=lambda c:(c["score_gate_passes"],c["score"] or 0),reverse=True)[:50]
+
+
+def split_recurrence_candidates(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any]) -> list[dict[str, Any]]:
+    current=[n for n in nodes if n.get("_primary") and clean(n.get("era"))=="current"]
+    historical=[n for n in nodes if clean(n.get("era"))=="historical" and clean(n.get("_decision"))=="keep" and clean(n.get("kind")) in {"diagnosis","effect"} and len(_claim_objects(n))>=2]
+    out=[]
+    for hist in historical:
+        objs=sorted(_claim_objects(hist))
+        for a,b in itertools.combinations(objs,2):
+            arows=[n for n in current if _touches(n,a) and clean(n.get("kind")) in {"action","effect"}]
+            brows=[n for n in current if _touches(n,b) and clean(n.get("kind")) in {"action","effect"}]
+            if len({clean(n.get("_record_id")) for n in arows})<3 or _distinct_sources(arows)<2: continue
+            if len({clean(n.get("_record_id")) for n in brows})<3 or _distinct_sources(brows)<2: continue
+            current_joint=_endpoint_joint(nodes,a,b,set(),{"current"})
+            if current_joint: continue
+            side_a=max(arows,key=lambda n:_role_strength(n,"side_a")); side_b=max(brows,key=lambda n:_role_strength(n,"side_b"))
+            hist_strength=_role_strength(hist,"historical_relation")*float(hist.get("_context_weight",1.0) or 1.0)
+            a_strength=min(1.0,_role_strength(side_a,"side_a")*min(1.3,1+.1*max(0,_distinct_sources(arows)-1)))
+            b_strength=min(1.0,_role_strength(side_b,"side_b")*min(1.3,1+.1*max(0,_distinct_sources(brows)-1)))
+            recs={clean(side_a.get("_record_id")),clean(side_b.get("_record_id"))}
+            ca,cb=primary_cluster(a,vocab),primary_cluster(b,vocab); dist,bonus,lift=distance_excluding_records(nodes,ca,cb,recs) if ca and cb else ("familiar",1.0,math.inf)
+            base=.35*hist_strength+.30*a_strength+.30*b_strength+.05
+            score=min(90,max(0,round(100*base*bonus)))
+            floor_ok=min(hist_strength,a_strength,b_strength)>=.40
+            out.append({"level":5,"grammar_id":"split_recurrence","product":"phenomenon","endpoint_objects":[a,b],"roles":{"historical_relation":_snap(hist,"historical_relation"),"side_a":_snap(side_a,"side_a"),"side_b":_snap(side_b,"side_b")},"side_a_record_count":len({clean(n.get("_record_id")) for n in arows}),"side_a_source_count":_distinct_sources(arows),"side_b_record_count":len({clean(n.get("_record_id")) for n in brows}),"side_b_source_count":_distinct_sources(brows),"current_joint":0,"distance":dist,"distance_lift":lift,"distance_bonus":bonus,"score":score,"floor_ok":floor_ok,"wow_preliminary":5,"score_gate_passes":bool(floor_ok and score>=80 and dist!="familiar"),"publication_gate_passes":False,"publication_gate_reason":"Shadow only: no executed falsifier ledger yet."})
+    best={}
+    for c in out:
+        key=tuple(c["endpoint_objects"])
+        if key not in best or c["score"]>best[key]["score"]: best[key]=c
+    return sorted(best.values(),key=lambda c:(c["score_gate_passes"],c["score"]),reverse=True)[:50]
+
+
+def era_conjunctions(nodes: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
+    """R-13b / section 4.3 object-pair lift change between eras."""
+    def records(era:str, primary_required:bool) -> tuple[dict[str,set[str]],dict[str,set[str]]]:
+        objs:dict[str,set[str]]=defaultdict(set); srcs:dict[str,set[str]]=defaultdict(set)
+        for n in nodes:
+            if clean(n.get("era"))!=era: continue
+            if primary_required and not n.get("_primary"): continue
+            rid=clean(n.get("_record_id"));
+            if not rid: continue
+            objs[rid].update(_claim_objects(n)); srcs[rid].add(clean(n.get("_source")).lower())
+        return objs,srcs
+    cur,cur_src=records("current",True); hist,hist_src=records("historical",False)
+    current_objects=Counter(o for ss in cur.values() for o in ss); historical_objects=Counter(o for ss in hist.values() for o in ss)
+    historical_authoritative = {clean(n.get("_record_id")) for n in nodes if clean(n.get("era")) == "historical" and clean(n.get("_decision")) == "keep"}
+    candidates=set(current_objects)&set(historical_objects); out=[]
+    for a,b in itertools.combinations(sorted(candidates),2):
+        cj=[rid for rid,ss in cur.items() if a in ss and b in ss]; hj=[rid for rid,ss in hist.items() if a in ss and b in ss]
+        if len(cj)<6 or len(hj)<3: continue
+        c_sources={s for rid in cj for s in cur_src.get(rid,set()) if s}; h_sources={s for rid in hj for s in hist_src.get(rid,set()) if s}
+        if len(c_sources)<5 or len(h_sources)<3: continue
+        if not any(rid in historical_authoritative for rid in hj): continue
+        cexp=(current_objects[a]*current_objects[b]/len(cur)) if cur else 0; hexp=(historical_objects[a]*historical_objects[b]/len(hist)) if hist else 0
+        clift=len(cj)/cexp if cexp else 0; hlift=len(hj)/hexp if hexp else 0; gain=clift-hlift
+        if gain<.38: continue
+        wow=4 if gain>=2 else 3 if gain>=1 else 2
+        out.append({"level":3,"grammar_id":"era_conjunction","product":"phenomenon","endpoint_objects":[a,b],"current_joint":len(cj),"current_sources":len(c_sources),"historical_joint":len(hj),"historical_sources":len(h_sources),"current_lift":round(clift,3),"historical_lift":round(hlift,3),"gain":round(gain,3),"wow_preliminary":wow,"strength":"strong" if len(cj)>=6 and len(c_sources)>=5 and len(h_sources)>=3 else "watch"})
+    return sorted(out,key=lambda x:(x["gain"],x["current_joint"]),reverse=True)[:50]
+
+
+def shadow_diff_report(legacy: dict[str, Any], groups: dict[str, list[dict[str, Any]]]) -> dict[str, Any]:
+    shadow_counts={name:len(rows) for name,rows in groups.items()}
+    legacy_by_grammar={clean(k):int(v) for k,v in (legacy.get("by_grammar") or {}).items() if clean(k)}
+    grammar_alias={
+        "corroborated_claim":"level2_corroborated","opposing_movements":"level4_opposing_movements",
+        "dependency_pathway":"level5_dependency_pathway","conflicting_criteria":"level4_5_conflicting_criteria",
+        "latent_channel":"level5_latent_channel","anchor_demand":"level5_anchor_demand","split_recurrence":"level5_split_recurrence","era_conjunction":"level3_era_conjunction",
+    }
+    shadow_by_grammar={g:len(groups.get(alias,[])) for g,alias in grammar_alias.items()}
+    return {
+        "legacy_candidate_count": legacy.get("candidate_count",0),
+        "legacy_by_grammar": legacy_by_grammar,
+        "shadow_by_grammar": shadow_by_grammar,
+        "count_delta_by_grammar": {g:shadow_by_grammar.get(g,0)-legacy_by_grammar.get(g,0) for g in sorted(set(shadow_by_grammar)|set(legacy_by_grammar))},
+        "shadow_group_counts": shadow_counts,
+        "publication_delta": 0,
+        "note":"Diagnostic count diff only. Candidate identity diff remains intentionally fail-closed until the live detector shell is switched in Stage 6.",
+    }
 
 def claim_expressiveness(nodes: Iterable[dict[str, Any]]) -> dict[str, Any]:
     current = [n for n in nodes if clean(n.get("era")) == "current"]
@@ -832,7 +1409,25 @@ def run_shadow(root: Path = ROOT, evaluated_at: str | None = None) -> dict[str, 
     level4 = opposing_movements(nodes, ev_date)
     dependency = dependency_pathways(nodes, vocab, distance)
     criteria = conflicting_criteria(nodes, vocab, distance)
+    latent = latent_channels(nodes, vocab)
+    anchor = anchor_demand_candidates(nodes, vocab)
+    split = split_recurrence_candidates(nodes, vocab)
+    era = era_conjunctions(nodes)
     raw = json.loads((root / "radar.json").read_text(encoding="utf-8"))
+    legacy = legacy_summary(raw)
+    groups = {
+        "level2_corroborated": level2,
+        "level3_sequence_gap": level3,
+        "level3_era_conjunction": era,
+        "level4_opposing_movements": level4,
+        "level5_dependency_pathway": dependency,
+        "level4_5_conflicting_criteria": criteria,
+        "level5_latent_channel": latent,
+        "level5_anchor_demand": anchor,
+        "level5_split_recurrence": split,
+    }
+    diff = shadow_diff_report(legacy, groups)
+    score_pool = dependency + criteria + latent + anchor + split
     return {
         "profile": PROFILE,
         "evaluated_at": ev_date.isoformat(),
@@ -847,42 +1442,45 @@ def run_shadow(root: Path = ROOT, evaluated_at: str | None = None) -> dict[str, 
         "claim_diagnostics": diagnostics,
         "claim_expressiveness": expressiveness,
         "distance_table": distance,
-        "claim_reasoning": {
-            "level2_corroborated": level2,
-            "level3_sequence_gap": level3,
-            "level4_opposing_movements": level4,
-            "level5_dependency_pathway": dependency,
-            "level4_5_conflicting_criteria": criteria,
-        },
+        "claim_reasoning": groups,
         "shadow_counts": {
-            "level2": len(level2), "level3": len(level3), "level4": len(level4),
+            "level2": len(level2), "level3": len(level3) + len(era), "level4": len(level4),
             "dependency_pathway": len(dependency), "conflicting_criteria": len(criteria),
-            "score_gate_passes": sum(1 for c in dependency + criteria if c.get("score_gate_passes")),
+            "latent_channel": len(latent), "anchor_demand": len(anchor),
+            "split_recurrence": len(split), "era_conjunction": len(era),
+            "score_gate_passes": sum(1 for c in score_pool if c.get("score_gate_passes")),
             "publication_gate_passes": 0,
         },
-        "legacy_snapshot": legacy_summary(raw),
+        "legacy_snapshot": legacy,
+        "shadow_diff": diff,
+        "migration_gate": {
+            "semantic_quality_ready": bool(expressiveness.get("ready_for_detector_switch")),
+            "production_grammars_implemented": True,
+            "publication_lock_held": True,
+            "two_scan_observation_required": True,
+            "detector_switch_code_enabled": False,
+        },
         "limitations": [
             "No shadow candidate is publishable until falsifier execution is recorded by candidate fingerprint.",
-            "Stage 5C constrains dependency and conflicting-criteria roles to their R-32 semantics. Remaining A-3 grammars are added before any detector switch.",
+            "Stage 5 implements the production grammar family in shadow; Stage 6 remains disabled until the required two-scan shadow observation is accepted.",
             "Trend pull is preliminary where explicit action-dedup/hostile-witness metadata are absent.",
         ],
     }
 
 
 def summary_markdown(report: dict[str, Any]) -> str:
-    c = report["shadow_counts"]; d=report["claim_diagnostics"]; legacy=report["legacy_snapshot"]
+    c = report["shadow_counts"]; d=report["claim_diagnostics"]; legacy=report["legacy_snapshot"]; gate=report.get("migration_gate",{})
     lines = [
         "# Claim reasoning shadow report", "",
         f"Evaluated: {report['evaluated_at']}", "",
         "**This artifact is diagnostic only. It does not alter the public Radar.**", "",
         "## Claim layer", f"- Loaded world-reasoning claims: {d.get('claims_loaded',0)}", f"- Primary claims: {d.get('primary_claims',0)}", f"- Context claims: {d.get('context_claims',0)}", f"- Methods/world-disabled claims excluded: {d.get('methods_or_world_disabled',0)}", "",
-        "## Claim expressiveness gate", f"- Ready for detector switch: {report['claim_expressiveness']['ready_for_detector_switch']}", f"- assesses share among current primary claims: {report['claim_expressiveness']['assesses_share']:.1%}", f"- secondary-object share: {report['claim_expressiveness']['secondary_object_share']:.1%}", f"- Strand C action-cue diagnoses needing review: {report['claim_expressiveness']['strand_c_action_cue_but_diagnosis']}", "",
-        "## Claim-native shadow", f"- Level 2 corroborated claims: {c['level2']}", f"- Level 3 sequence/gap findings: {c['level3']}", f"- Level 4 opposing movements: {c['level4']}", f"- Dependency-pathway candidates: {c['dependency_pathway']}", f"- Conflicting-criteria candidates: {c['conflicting_criteria']}", f"- Score gates passed: {c['score_gate_passes']}", f"- Publication gates passed: {c['publication_gate_passes']} (intentionally zero in Stage 5)", "",
-        "## Legacy snapshot", f"- Legacy candidates: {legacy.get('candidate_count',0)}", f"- Legacy status counts: `{json.dumps(legacy.get('by_status',{}), sort_keys=True)}`", "",
+        "## Migration gate", f"- Semantic quality ready: {gate.get('semantic_quality_ready')}", f"- Production grammars implemented in shadow: {gate.get('production_grammars_implemented')}", f"- Publication lock held: {gate.get('publication_lock_held')}", f"- Two-scan observation still required: {gate.get('two_scan_observation_required')}", f"- Detector switch enabled: {gate.get('detector_switch_code_enabled')}", "",
+        "## Claim-native shadow", f"- Level 2 corroborated claims: {c['level2']}", f"- Level 3 sequence/gap + era findings: {c['level3']}", f"- Level 4 opposing movements: {c['level4']}", f"- Dependency-pathway candidates: {c['dependency_pathway']}", f"- Conflicting-criteria candidates: {c['conflicting_criteria']}", f"- Latent-channel candidates: {c['latent_channel']}", f"- Anchor-demand candidates: {c['anchor_demand']}", f"- Split-recurrence candidates: {c['split_recurrence']}", f"- Era-conjunction findings: {c['era_conjunction']}", f"- Score gates passed: {c['score_gate_passes']}", f"- Publication gates passed: {c['publication_gate_passes']} (intentionally zero in Stage 5)", "",
+        "## Legacy diff", f"- Legacy candidates: {legacy.get('candidate_count',0)}", f"- Legacy status counts: `{json.dumps(legacy.get('by_status',{}), sort_keys=True)}`", f"- Grammar count delta: `{json.dumps(report.get('shadow_diff',{}).get('count_delta_by_grammar',{}), sort_keys=True)}`", "",
         "## Safety", "- No scanner write", "- No Deep Scan decision change", "- No radar.json/radar_active.json write", "- No reader/publication switch", "",
     ]
     return "\n".join(lines)
-
 
 def main() -> int:
     ap=argparse.ArgumentParser(description=__doc__)

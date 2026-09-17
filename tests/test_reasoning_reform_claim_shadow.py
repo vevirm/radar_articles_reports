@@ -13,6 +13,11 @@ from scripts.claim_reasoning_shadow import (
     flatten_claims,
     level3_findings,
     opposing_movements,
+    latent_channels,
+    anchor_demand_candidates,
+    split_recurrence_candidates,
+    era_conjunctions,
+    shadow_diff_report,
 )
 from scripts.claims_schema import load_vocabulary
 
@@ -231,3 +236,126 @@ def test_conflicting_criteria_divergence_must_bind_the_arbitration_branch():
     out=conflicting_criteria(nodes,VOCAB,build_distance_table(nodes))
     assert out
     assert out[0]["roles"]["divergence"]["claim_id"]=="c:cd:1"
+
+
+
+def test_clock_before_rule_requires_a_real_pending_control_rule():
+    commitment=claim(key="id:clock",cid="c:clock:1",obj="compute.public_procurement",mech="procures",direction="expands",kind="action",status="call_open",date="2026-07-30",secondary=["compute.capacity"])
+    commitment["deadline"]="2026-11-12"
+    bridge=claim(key="id:bridge",cid="c:bridge:1",obj="compute.capacity",mech="requires",direction="becomes_conditional",kind="diagnosis",status="delivered",secondary=["datacentre.energy_supply"])
+    rule=claim(key="id:rule",cid="c:rule:1",obj="datacentre.permitting",mech="regulates",direction="becomes_conditional",kind="action",status="proposed",secondary=["datacentre.energy_supply"])
+    nodes=[_node(commitment,"S1"),_node(bridge,"S2"),_node(rule,"S3")]
+    out=level3_findings(nodes,dt.date(2026,9,17))
+    clock=next(x for x in out if x["grammar_id"]=="clock_before_rule")
+    assert clock["object"]=="compute.public_procurement"
+    assert clock["deadline"]=="2026-11-12"
+    assert "c:rule:1" in clock["rule_claim_ids"]
+
+    adopted=claim(key="id:rule2",cid="c:rule2:1",obj="datacentre.permitting",mech="regulates",direction="becomes_conditional",kind="action",status="adopted",secondary=["datacentre.energy_supply"])
+    out2=level3_findings(nodes+[_node(adopted,"S4")],dt.date(2026,9,17))
+    assert not any(x["grammar_id"]=="clock_before_rule" and x.get("object")=="compute.public_procurement" for x in out2)
+
+
+def test_success_metric_gap_stays_within_one_programme_family_and_requires_no_effect_measurement():
+    relation=claim(key="id:rel",cid="c:rel:1",obj="talent.recruitment_abroad",mech="advocates",direction="expands",kind="advocacy",status="delivered",secondary=["talent.retention"])
+    relation["text"]="The programme aims to attract and retain researchers."
+    delivery=claim(key="id:del",cid="c:del:1",obj="talent.recruitment_abroad",mech="recruits",direction="expands",kind="action",status="call_open")
+    success=claim(key="id:suc",cid="c:suc:1",obj="talent.retention",mech="assesses",direction="unchanged",kind="diagnosis",status="delivered")
+    nodes=[_node(relation,"S1"),_node(delivery,"S2"),_node(success,"S3")]
+    out=level3_findings(nodes,dt.date(2026,9,17))
+    assert any(x["grammar_id"]=="success_metric_gap" and x["objective_object"]=="talent.retention" and x["delivery_object"]=="talent.recruitment_abroad" for x in out)
+    measured=claim(key="id:meas",cid="c:meas:1",obj="talent.retention",mech="assesses",direction="expands",kind="effect",status="delivered")
+    out2=level3_findings(nodes+[_node(measured,"S4")],dt.date(2026,9,17))
+    assert not any(x["grammar_id"]=="success_metric_gap" and x["objective_object"]=="talent.retention" for x in out2)
+
+
+def test_latent_channel_with_one_missing_live_connection_is_watch_only():
+    need=claim(key="id:need",cid="c:need:1",obj="research.infrastructure",mech="assesses",direction="becomes_conditional",kind="diagnosis",status="delivered",secondary=["compute.access_time"])
+    need["text"]="Research infrastructure onboarding needs a visible service and funding model."
+    structure=claim(key="id:str",cid="c:str:1",obj="compute.access_time",mech="builds",direction="expands",kind="action",status="operating")
+    structure["text"]="A federation platform provides unified access and authentication."
+    instrument=claim(key="id:inst",cid="c:inst:1",obj="research.infrastructure",mech="funds",direction="expands",kind="action",status="announced")
+    instrument["text"]="A task force is the receiving instrument for infrastructure onboarding."
+    precedent=claim(key="id:pre",cid="c:pre:1",obj="compute.access_time",mech="assesses",direction="expands",kind="effect",status="delivered")
+    precedent["text"]="An existing platform demonstrates the service model already operating."
+    nodes=[_node(need,"S1"),_node(structure,"S2"),_node(instrument,"S3"),_node(precedent,"S4")]
+    out=latent_channels(nodes,VOCAB)
+    assert out
+    cand=out[0]
+    assert cand["missing_roles"]==["live_connection"]
+    assert cand["score"] is None
+    assert cand["score_gate_passes"] is False
+    assert cand["publication_gate_passes"] is False
+
+
+def test_anchor_demand_requires_supply_payoff_and_keeps_publication_locked():
+    commitment=claim(key="id:ac",cid="c:ac:1",obj="compute.gigafactory",mech="builds",direction="expands",kind="action",status="call_open",secondary=["chips.eu_inference_supplier"])
+    payoff=claim(key="id:ap",cid="c:ap:1",obj="chips.eu_inference_supplier",mech="sells",direction="expands",kind="effect",status="delivered",secondary=["compute.gigafactory"])
+    payoff["text"]="The supplier signed a supply deal and won a customer contract."
+    protect=claim(key="id:ai",cid="c:ai:1",obj="chips.eu_inference_supplier",mech="conditions",direction="becomes_conditional",kind="action",status="adopted",secondary=["compute.gigafactory"])
+    protect["text"]="The instrument protects EU interests with a blocking stake and IP safeguards."
+    conversion=claim(key="id:av",cid="c:av:1",obj="compute.gigafactory",mech="requires",direction="becomes_conditional",kind="diagnosis",status="delivered",secondary=["chips.eu_inference_supplier"])
+    conversion["text"]="Conversion to value requires fast access and movement between providers."
+    reform=claim(key="id:ar",cid="c:ar:1",obj="compute.gigafactory",mech="proposes",direction="expands",kind="action",status="proposed",secondary=["chips.eu_inference_supplier"])
+    reform["text"]="A procurement reform would raise public-sector demand."
+    nodes=[_node(commitment,"S1"),_node(payoff,"S2"),_node(protect,"S3"),_node(conversion,"S4"),_node(reform,"S5")]
+    out=anchor_demand_candidates(nodes,VOCAB)
+    assert out
+    cand=out[0]
+    assert cand["endpoint_objects"]==["compute.gigafactory","chips.eu_inference_supplier"]
+    assert cand["missing_roles"]==[]
+    assert cand["publication_gate_passes"] is False
+
+
+def test_split_recurrence_uses_authoritative_historical_relation_and_current_side_floors():
+    hist=claim(key="historical:id:h",cid="c:h:1",obj="horizon.access",mech="conditions",direction="becomes_conditional",kind="diagnosis",status="delivered",date="2018-11-01",secondary=["eu_bilateral_agreements"])
+    hist["era"]="historical"; hist["record_key"]="historical:id:h"
+    hn=_node(hist,"H",primary=False,collection="historical_context"); hn["_decision"]="keep"; hn["_context_weight"]=1.0
+    nodes=[hn]
+    for i,(obj,direction) in enumerate([("horizon.access","expands")]*3+[("eu_bilateral_agreements","becomes_conditional")]*3,1):
+        c=claim(key=f"id:s{i}",cid=f"c:s{i}:1",obj=obj,mech="conditions" if "bilateral" in obj else "associates",direction=direction,kind="effect" if i%2==0 else "action",status="in_force")
+        nodes.append(_node(c,f"S{(i%3)+1}"))
+    out=split_recurrence_candidates(nodes,VOCAB)
+    assert out
+    cand=out[0]
+    assert cand["endpoint_objects"]==["eu_bilateral_agreements","horizon.access"] or cand["endpoint_objects"]==["horizon.access","eu_bilateral_agreements"]
+    assert cand["current_joint"]==0
+    assert cand["wow_preliminary"]==5
+    assert cand["publication_gate_passes"] is False
+
+
+def test_era_conjunction_requires_source_floors_and_lift_gain():
+    nodes=[]
+    # Six current joint records from six sources, plus marginal records to make the pair unusually coupled.
+    for i in range(6):
+        c=claim(key=f"id:cj{i}",cid=f"c:cj{i}:1",obj="chips.fab",mech="assesses",direction="unchanged",kind="diagnosis",secondary=["export_control.regulation"])
+        nodes.append(_node(c,f"C{i}"))
+    for i in range(2):
+        nodes.append(_node(claim(key=f"id:ca{i}",cid=f"c:ca{i}:1",obj="chips.fab",mech="assesses",direction="unchanged",kind="diagnosis"),f"CA{i}"))
+        nodes.append(_node(claim(key=f"id:cb{i}",cid=f"c:cb{i}:1",obj="export_control.regulation",mech="assesses",direction="unchanged",kind="diagnosis"),f"CB{i}"))
+    for i in range(9):
+        nodes.append(_node(claim(key=f"id:co{i}",cid=f"c:co{i}:1",obj="talent.retention",mech="assesses",direction="unchanged",kind="diagnosis"),f"CO{i}"))
+    # Historical pair is more ordinary: three joint records and marginal records.
+    for i in range(3):
+        h=claim(key=f"historical:id:hj{i}",cid=f"c:hj{i}:1",obj="chips.fab",mech="assesses",direction="unchanged",kind="diagnosis",date="2018-01-01",secondary=["export_control.regulation"])
+        h["era"]="historical"; h["record_key"]=f"historical:id:hj{i}"
+        n=_node(h,f"H{i}",primary=False,collection="historical_context"); n["_decision"]="keep"; n["_context_weight"]=1.0; nodes.append(n)
+    for i,obj in enumerate(["chips.fab","export_control.regulation","talent.retention","talent.retention"]):
+        h=claim(key=f"historical:id:hm{i}",cid=f"c:hm{i}:1",obj=obj,mech="assesses",direction="unchanged",kind="diagnosis",date="2019-01-01")
+        h["era"]="historical"; h["record_key"]=f"historical:id:hm{i}"
+        n=_node(h,f"HM{i}",primary=False,collection="historical_context"); n["_decision"]="keep"; n["_context_weight"]=1.0; nodes.append(n)
+    out=era_conjunctions(nodes)
+    match=next(x for x in out if set(x["endpoint_objects"])=={"chips.fab","export_control.regulation"})
+    assert match["current_joint"]==6
+    assert match["current_sources"]>=5
+    assert match["historical_joint"]==3
+    assert match["gain"]>=0.38
+
+
+def test_shadow_diff_is_count_only_and_never_changes_publication():
+    legacy={"candidate_count":2,"by_grammar":{"dependency_pathway":1}}
+    groups={"level5_dependency_pathway":[{"id":1}],"level4_5_conflicting_criteria":[],"level2_corroborated":[]}
+    diff=shadow_diff_report(legacy,groups)
+    assert diff["legacy_candidate_count"]==2
+    assert diff["shadow_by_grammar"]["dependency_pathway"]==1
+    assert diff["publication_delta"]==0
