@@ -1,0 +1,2548 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "package_id": "worker-a-20260917T090649Z-5d29b20d76c3",
+  "results": [
+    {
+      "record_key": "link:https://doi.org/10.1016/j.bushor.2026.09.004",
+      "source_hash": "2a7ae708",
+      "identity_hash": "52d665eddabeaf9a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Followed https://doi.org/10.1016/j.bushor.2026.09.004 -> linkinghub.elsevier.com -> sciencedirect.com/science/article/pii/S0007681326001357; HTTP 403 Cloudflare bot block, no article text served."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref API for 10.1016/j.bushor.2026.09.004 returns exact title, sole author Jonny Holmström, Business Horizons, issued 2026-09, CC BY 4.0 licence; OpenAlex gives abstract (14 interviews + workshop at a Northern European agricultural-equipment firm). Identity confirmed, body text not obtained."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failed",
+            "note": "Web search for \"Mapping the hidden geography of digital value and control\" returned unrelated geography/digital-economy items; no copy of this article."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failed",
+            "note": "Web search \"SCALE Framework\" Holmström digital sovereignty geographic intelligence Business Horizons returned only older Holmström papers and his homepage (jonnyholmstrom.com); no text of this 2026 article."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Unpaywall, OpenAlex and Semantic Scholar list only the publisher PDF https://www.sciencedirect.com/science/article/pii/S0007681326001357/pdf (curl HTTP 403); no repository copy; Europe PMC has no record."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "Checked author homepage result and ScienceDirect/RePEc Holmström listings surfaced by search; none host the SCALE Framework article text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "crossref_metadata",
+            "url": "https://api.crossref.org/works/10.1016/j.bushor.2026.09.004",
+            "title": "Crossref record: From digital sovereignty to geographic intelligence",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Identity verified via Crossref/OpenAlex; open-access publisher copy is bot-blocked and no repository copy exists, so only abstract-level evidence is available."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity verified but full text inaccessible after all six steps; abstract alone insufficient to judge A relevance versus firm-level management framing."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "historical:id:872fb7d6c16ec949",
+      "source_hash": "7c525c16",
+      "identity_hash": "05e6aeffdf992f2e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1080/23299460.2014.992769 -> tandfonline HTTP 403 Cloudflare challenge."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Kiran, Oudshoorn, Verbeek, Journal of Responsible Innovation 2(1):5-19, 2015."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Web search surfaced alternate Twente Pure file host https://ris.utwente.nl/ws/files/6491141/23299460.2014.pdf (final published version); downloaded and read in full (~9,300 words). Earlier research.utwente.nl/files path was bot-blocked."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://ris.utwente.nl/ws/files/6491141/23299460.2014.pdf",
+            "title": "Beyond checklists: toward an ethical-constructive technology assessment (published version)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Previous defer overturned: full published version recovered from Twente repository mirror."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Proposes a transferable framework (four principles) for ethical-constructive technology assessment integrating ethics into technology development and use."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "A framework for building ethics into technology assessment from within",
+      "reader_what": "Authors propose ethical-constructive technology assessment: four principles for accompanying technologies’ design and use instead of ethical checklists.",
+      "reader_why": "Offers TA practitioners a reusable approach to anticipate how technologies reshape users’ moral routines.",
+      "reader_more": "Checklist-based ethical technology assessment evaluates predefined issues from outside development. Drawing on philosophy of technology, science and technology studies and telecare examples, the authors propose four principles: examine micro-level mediation of human–world relations; frame the work as accompaniment, not external assessment; accompany both design and user appropriation; and address how people shape themselves with technologies. The approach complements constructive technology assessment at institutional levels.",
+      "deep_analysis": {
+        "work_kind": "conceptual-methodological article",
+        "research_question": "How can ethical assessment be integrated into technology development beyond checklists?",
+        "main_finding": "Ethical TA should accompany design and use from within, attending to technological mediation at the micro level.",
+        "method_or_basis": "Philosophical and STS argument illustrated with telecare technologies.",
+        "qualification": "Principles rather than an operational protocol; not empirically tested.",
+        "radar_relevance": "Reusable framework for ethical technology assessment (B).",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "historical:id:803e0ea11a467579",
+      "source_hash": "5c9da0e3",
+      "identity_hash": "844be050b21bb904",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "https://doi.org/10.1007/s10272-015-0521-7 -> link.springer.com article page: abstract, author list and affiliations only."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Intereconomics vol 50 (2015) pp 4-30, nine authors matching scanner, issued 2015-01."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Journal archive https://www.intereconomics.eu/contents/year/2015/number/1/article/the-impact-of-horizon-2020-on-innovation-in-europe.html served the full forum text (~19k words incl. notes)."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.intereconomics.eu/contents/year/2015/number/1/article/the-impact-of-horizon-2020-on-innovation-in-europe.html",
+            "title": "The Impact of Horizon 2020 on Innovation in Europe (Intereconomics Forum)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full forum read: Veugelers/Cincera on missing young leading innovators; Frietsch/Rammer/Schubert on efficiency of national innovation systems; Pelle on core-periphery talent imbalances; Renda on innovation governance and EFSI; Montalvo/Leijten on societal challenges."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Multi-author evidence-based assessment of Horizon 2020 and EU innovation performance; squarely European R&I policy."
+      },
+      "metadata_correction": {
+        "fields": {
+          "type": "journal forum (collection of short articles)"
+        },
+        "unset": [],
+        "reason": "Intereconomics published this as a Forum of several signed contributions, not a single research article."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Experts assess whether Horizon 2020 tackled Europe’s innovation gap",
+      "reader_what": "Five contributions argue Europe’s innovation deficit is structural and Horizon 2020 only partly addresses it.",
+      "reader_why": "Diagnoses from 2015 — too few young R&D-intensive firms, core-periphery gaps — remain reference points for EU R&I policy.",
+      "reader_more": "Veugelers and Cincera trace the EU–US business R&D gap to Europe’s shortage of young leading innovators in new high-tech sectors. Frietsch and co-authors compare efficiency of national innovation systems and support Horizon 2020’s focus on excellence and simpler procedures. Pelle warns that concentrating funding on excellence can waste talent in southern and eastern member states. Renda and the Montalvo/Leijten piece discuss innovation governance, the Juncker investment fund and the societal-challenges approach.",
+      "deep_analysis": {
+        "work_kind": "policy forum / collection of short analytical articles",
+        "research_question": "What impact is Horizon 2020 having on innovation in the EU, and does it address the right issues?",
+        "main_finding": "Europe’s innovation gap reflects sector and firm-age composition and uneven national capacities; Horizon 2020 improves governance but does not by itself fix structural deficits.",
+        "method_or_basis": "Short analyses using Innovation Union Scoreboard, EU Industrial R&D Scoreboard, data envelopment analysis of national systems, and policy review.",
+        "qualification": "Written at Horizon 2020’s start; judgements are prospective and contributors disagree on geography of funding.",
+        "radar_relevance": "Historical baseline on EU framework-programme design, the business R&D gap and territorial cohesion in R&I.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:46e993866190a610",
+      "source_hash": "277b0096",
+      "identity_hash": "bd4a76ec2fe46ebc",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://research-and-innovation.ec.europa.eu/funding/tender-opportunities-research-and-innovation_en fetched; page is a DG RTD navigation page linking to open/closed calls for tenders, award notices, FTS, annual activity reports and work programmes."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI; web page."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_web_page",
+            "url": "https://research-and-innovation.ec.europa.eu/funding/tender-opportunities-research-and-innovation_en",
+            "title": "Tender opportunities for research and innovation (DG RTD)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Page is an evergreen procurement portal/listing; no dated content, analysis or development. Scanner date 2015-01-01 is a placeholder not supported by the page."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "GENERIC_NAVIGATION_PAGE",
+        "reason": "Generic procurement listing page with no substantive research, policy analysis or reported development; fails A and cannot be historical evidence."
+      },
+      "metadata_correction": {
+        "fields": {
+          "type": "web page (procurement navigation)"
+        },
+        "unset": [
+          "source_tier"
+        ],
+        "reason": "Page is a DG RTD navigation/listing page, not a publication; stored tier unsupported."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "institutional navigation page",
+        "research_question": "",
+        "main_finding": "Lists links to tender calls, award notices, activity reports and work programmes.",
+        "method_or_basis": "Direct reading of the page.",
+        "qualification": "No date, authorship or analytic content.",
+        "radar_relevance": "Fails: navigation page with no substantive R&I content.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:a5bcf5e5022e3984",
+      "source_hash": "33921470",
+      "identity_hash": "ca599ff6f064019f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://doi.org/10.1007/978-3-319-20877-0_11 -> Springer chapter page (open access)."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: book chapter in \"The European Higher Education Area\", Springer 2015, CC BY-NC 4.0, authors match."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Downloaded publisher PDF https://link.springer.com/content/pdf/10.1007/978-3-319-20877-0_11.pdf (~6,150 words) and read in full."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/content/pdf/10.1007/978-3-319-20877-0_11.pdf",
+            "title": "Strategies for Efficient Funding of Universities in Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full chapter read; draws on EUA-led DEFINE project (2012-2015) covering ~28 European systems."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Comparative evidence on how European public authorities fund universities and research (formulae, performance contracts, excellence schemes, mergers)."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "The European Higher Education Area: Between Critical Reflections and Future Policies (Springer)",
+          "type": "book chapter"
+        },
+        "unset": [],
+        "reason": "Crossref and the PDF show a Springer open-access book chapter; it did not appear in the journal Higher Education."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "How European systems tried to fund universities more efficiently",
+      "reader_what": "Across Europe, governments tie university block grants to formulas, performance contracts and excellence schemes, with mixed efficiency effects.",
+      "reader_why": "Funding design shapes universities’ research capacity; this maps the toolbox European authorities were using by 2015.",
+      "reader_more": "The chapter reports findings from the DEFINE project run by the European University Association. Most systems allocate block grants through formulas mixing input and output indicators, often doctoral degrees and external research income. Performance contracts and excellence initiatives such as Germany’s Exzellenzinitiative steer institutional profiling. Mergers and restructuring aim at savings and visibility. The authors warn that formulas are not neutral and that competition can undermine collaboration.",
+      "deep_analysis": {
+        "work_kind": "comparative policy study (book chapter)",
+        "research_question": "How do European public authorities design funding to make universities more efficient?",
+        "main_finding": "Funding mechanisms increasingly reward outputs and strategic profiling; efficiency depends on autonomy, leadership and coherent objectives.",
+        "method_or_basis": "DEFINE project: system-level surveys and consultations with national rectors’ conferences, plus case studies (Danish taximeter, Aalto merger, German Excellence Initiative).",
+        "qualification": "Descriptive-comparative; does not causally measure efficiency gains.",
+        "radar_relevance": "Historical evidence on European university and research funding governance.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:781b72021bb0f82a",
+      "source_hash": "27494e7a",
+      "identity_hash": "4aad9270add1ef00",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://www.interface-eu.org/publications/downloadPdf/semiconductor-emission-explorer returned 58-page PDF data brief (read)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI for this think-tank data brief."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.interface-eu.org/publications/downloadPdf/semiconductor-emission-explorer",
+            "title": "Semiconductor Emission Explorer: Tracking Greenhouse Gas Emissions from Chip Production (2015-2023)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "PDF title page: Julia Christina Hess, Anna Semenova, 17 March 2025, interface (formerly Stiftung Neue Verantwortung). Scanner date 2015-01-01 derived from the title range and is wrong."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "European think-tank analysis linking chipmakers’ emissions data to EU Chips Act, sustainability reporting (Omnibus/CSRD) and EU semiconductor strategy; genuine European industrial-capability connection."
+      },
+      "metadata_correction": {
+        "fields": {
+          "authors": "Julia Christina Hess; Anna Semenova",
+          "date": "2025-03-17",
+          "source": "interface (formerly Stiftung Neue Verantwortung)",
+          "type": "data brief"
+        },
+        "unset": [],
+        "reason": "PDF cover gives authors, publisher interface and date 17 March 2025; 2015 is the start of the data series, not the publication date."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Chip production emissions are rising, and corporate reporting cannot track them well",
+      "reader_what": "Leading chipmakers’ reported emissions grew strongly in 2015–2023, while inconsistent CSR reporting obscures the true footprint.",
+      "reader_why": "The brief argues EU semiconductor strategy must address emissions outsourced to East Asian fabs and comparable reporting.",
+      "reader_more": "The authors compiled corporate sustainability reports from major semiconductor manufacturers and compared them with wafer capacity and shipment data. Energy use and indirect (Scope 3) emissions rose sharply; direct emissions fell after 2021, plausibly linked to the memory-chip downturn. Gaps and inconsistent definitions make company comparisons unreliable. They recommend harmonised, industry-specific reporting and integrating decarbonisation into EU chip and clean-industry policy.",
+      "deep_analysis": {
+        "work_kind": "data brief / descriptive data analysis",
+        "research_question": "How have greenhouse gas emissions and energy use of major chipmakers evolved, and how reliable is reporting?",
+        "main_finding": "Industry energy use and Scope 3 emissions increased substantially 2015–2023; reporting gaps prevent robust comparison.",
+        "method_or_basis": "Compilation of CSR/ESG report data for firms above 100,000 wafers/month, contextualised with SEMI capacity and unit-shipment data.",
+        "qualification": "Relies on self-reported company data with gaps; explanations of trends are tentative.",
+        "radar_relevance": "Connects semiconductor industrial policy (EU Chips Act, Clean Industrial Deal) with sustainability evidence for Europe.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:05acc7fcc9961965",
+      "source_hash": "9319c627",
+      "identity_hash": "63ac574a40e0aa4b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://doi.org/10.1007/978-3-319-14693-5_3 -> Springer open-access chapter page."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: book chapter, authors Rerimassie, Ma, Srinivas, Ladikas, Springer 2015 (online 2015-01-27), CC BY-NC."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publisher PDF https://link.springer.com/content/pdf/10.1007/978-3-319-14693-5_3.pdf downloaded (~5,480 words) and read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/content/pdf/10.1007/978-3-319-14693-5_3.pdf",
+            "title": "Public Perceptions of Science and Technology in Europe, China and India",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full chapter read; compares Eurobarometer 2010 with Chinese CAST surveys and the India Science Report."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Europe is a principal object of analysis (Eurobarometer data on EU citizens’ interest, knowledge and trust in science), within a comparative science-society governance study."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "Science and Technology Governance and Ethics: A Global Perspective from Europe, India and China (Springer)",
+          "type": "book chapter",
+          "date": "2015-01-27"
+        },
+        "unset": [],
+        "reason": "Crossref and PDF identify an open-access Springer book chapter, not the journal Governance; online publication 27 Jan 2015."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Europeans, Chinese and Indians view science optimistically but differ on risk",
+      "reader_what": "Survey comparison finds broad optimism about science in all three regions, with Europeans more wary and precaution-minded.",
+      "reader_why": "Public attitudes shape legitimacy of European research and innovation policy, including precautionary regulation.",
+      "reader_more": "The chapter compares the 2010 Special Eurobarometer on science and technology with Chinese national surveys and the India Science Report. Interest in science is moderate everywhere, and measured basic scientific knowledge was higher in the EU sample. Chinese respondents were more optimistic that benefits outweigh harms. Over half of EU respondents agreed scientists’ knowledge gives them dangerous power, although that share had declined since 2001. Europeans more strongly supported precaution, which the authors link to GM-food debates.",
+      "deep_analysis": {
+        "work_kind": "comparative secondary survey analysis (book chapter)",
+        "research_question": "How do publics in the EU, China and India perceive science and technology?",
+        "main_finding": "Guarded optimism prevails in all regions; the EU public is more sceptical of scientists’ power and more supportive of precaution than China’s.",
+        "method_or_basis": "Comparison of existing national/regional surveys (Eurobarometer 2010, CAST surveys, NCAER India Science Report).",
+        "qualification": "Surveys differ in questions, samples and years, so comparisons are approximate.",
+        "radar_relevance": "Historical evidence on European public attitudes underpinning science-society and responsible research policy.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "historical:id:06a6588c01bbee42",
+      "source_hash": "f61d14a0",
+      "identity_hash": "676dd0168f3eaa91",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://doi.org/10.1007/978-3-319-14693-5_2 -> Springer open-access chapter page."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: book chapter by Brom, Chaturvedi, Ladikas, Zhang, Springer 2015, CC BY-NC."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publisher PDF https://link.springer.com/content/pdf/10.1007/978-3-319-14693-5_2.pdf (~6,200 words) read in full."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/content/pdf/10.1007/978-3-319-14693-5_2.pdf",
+            "title": "Institutionalizing Ethical Debates in Science, Technology and Innovation Policy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full chapter read; analyses ethics advisory bodies, research-integrity arrangements and STI policy framing in Europe, India and China."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Substantive analysis of how European STI policy institutionalises ethics (advisory councils, technology assessment, participatory deliberation) compared with India and China."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "Science and Technology Governance and Ethics: A Global Perspective from Europe, India and China (Springer)",
+          "type": "book chapter",
+          "date": "2015-01-27"
+        },
+        "unset": [],
+        "reason": "Crossref and PDF identify an open-access Springer book chapter, not the journal Governance."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "How Europe, India and China build ethics into science and innovation policy",
+      "reader_what": "Europe institutionalises ethics mainly through advisory and deliberative bodies protecting rights; India and China steer STI toward development goals.",
+      "reader_why": "Explains the distinctive European model of ethics governance underpinning responsible research and innovation.",
+      "reader_more": "The authors distinguish ethical governance (compliance), ethical deliberation (advisory debate) and ethical reflection. In Europe, national ethics councils, the European Group on Ethics and technology assessment bodies combine expert and lay input and act as early warning systems. India frames STI ethics around inclusion, access and equity. China emphasises research integrity and harnessing science for national development. The comparison shows the European approach is not universal.",
+      "deep_analysis": {
+        "work_kind": "comparative institutional analysis (book chapter)",
+        "research_question": "How are ethical debates on science, technology and innovation institutionalised in Europe, India and China?",
+        "main_finding": "Europe relies on advisory and participatory structures guarding fundamental rights; India and China embed ethics in agenda-setting for societal and development aims.",
+        "method_or_basis": "Document and policy analysis of institutions and national STI policy statements.",
+        "qualification": "Descriptive overview; limited systematic evidence on effects.",
+        "radar_relevance": "Historical context on the European model of STI ethics governance.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "historical:id:f4f4687bd4219683",
+      "source_hash": "c33be4e6",
+      "identity_hash": "35b30305691b1468",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://www.allea.org/wp-content/uploads/2015/07/Going-Digital_digital-version.pdf fetched: 52-page ALLEA E-Humanities Working Group report (~13,800 words) read."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI; ISBN 978-3-00-049483-3 printed in report."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://www.allea.org/wp-content/uploads/2015/07/Going-Digital_digital-version.pdf",
+            "title": "Going Digital: Creating Change in the Humanities",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Report authored by ALLEA E-Humanities Working Group (Collins, Harrower, Haug, Immenhauser, Lauer, Orlandi, Romary, Wandl-Vogt); upload path indicates July 2015."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Position paper of the federation of European academies on research infrastructures, open data, publishing and careers for digital humanities, referencing Horizon 2020 and DARIAH."
+      },
+      "metadata_correction": {
+        "fields": {
+          "authors": "Sandra Collins; Natalie Harrower; Dag Trygve Truslew Haug; Beat Immenhauser; Gerhard Lauer; Tito Orlandi; Laurent Romary; Eveline Wandl-Vogt",
+          "type": "position paper / working group report",
+          "date": "2015-07"
+        },
+        "unset": [],
+        "reason": "Report title page lists the working-group authors; PDF upload folder dates it to July 2015 rather than 1 January."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "European academies set out what digital humanities research needs",
+      "reader_what": "ALLEA recommends open humanities data, sustained research infrastructures, new publishing models and career recognition for digital skills.",
+      "reader_why": "Frames European research-infrastructure and open-science choices for humanities as digitisation transformed scholarship.",
+      "reader_more": "The E-Humanities Working Group of All European Academies describes how digitisation, encoding, data analysis and linked data change humanities research. It identifies enablers: responsible open access to data, durable and interoperable infrastructures, trusted digital archives, and recognition of data work in careers. It points to DARIAH, the Research Data Alliance and Horizon 2020 research-data policy. It also reports on a 2013 survey of academies’ digital projects.",
+      "deep_analysis": {
+        "work_kind": "position paper / policy report",
+        "research_question": "What conditions are needed for digital humanities to flourish in European research?",
+        "main_finding": "Digital humanities requires open data, sustainable infrastructures, standards, new publication and citation practices, and career incentives.",
+        "method_or_basis": "Expert working-group synthesis drawing on academy experience, a survey of academies (SASSH) and existing policy frameworks.",
+        "qualification": "Advocacy document; recommendations, not evaluated outcomes.",
+        "radar_relevance": "Historical evidence on European research-infrastructure and open-science priorities in the humanities.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:11087db818604058",
+      "source_hash": "5f538e48",
+      "identity_hash": "3e3964a61bc52e64",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "https://doi.org/10.1007/978-94-017-9573-9_12 -> Springer chapter page: abstract, full endnotes (~2,200 words) and reference list; chapter body paywalled."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: book chapter by Jane Reichel in Ethics, Law and Governance of Biobanking (International Library of Ethics, Law and Technology), Springer Netherlands 2015; OpenAlex/Unpaywall: closed, no OA location."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "partial",
+            "note": "Web search \"EU Governance for Research and Ethics in Biobanks\" Reichel: British Library and Berkeley catalogue tables of contents confirm the chapter in the Mascalzoni-edited volume; no full text."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Crossref bibliographic query (title + Reichel + 2015) returns the same DOI; search also surfaced the related open letter Reichel et al. 2014 \"ERIC: a new governance tool for Biobanking\" (different work, not substituted)."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Springer PDF endpoint redirects to paywalled page; Unpaywall and Semantic Scholar list no repository copy (status closed)."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "Search results (Uppsala CRB ethics blog, DOAJ Tilburg Law Review item) give related Reichel works only; no copy of this chapter."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_landing_with_notes",
+            "url": "https://link.springer.com/chapter/10.1007/978-94-017-9573-9_12",
+            "title": "EU Governance for Research and Ethics in Biobanks — abstract, endnotes and references",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Decision rests on publisher abstract plus substantive endnotes (EU legal bases, CJEU case law, informed-consent regimes, BBMRI.se funding) after full ladder; body text not recovered."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Legal analysis of the EU’s ERIC instrument using the pan-European biobanking infrastructure BBMRI as case; core European research-infrastructure governance."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "Ethics, Law and Governance of Biobanking: National, European and International Approaches (Springer)",
+          "type": "book chapter"
+        },
+        "unset": [],
+        "reason": "Crossref and the publisher page show a chapter in the Mascalzoni-edited Springer volume, not the journal Governance."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Using the EU’s ERIC instrument to govern pan-European biobank research",
+      "reader_what": "Chapter examines the European Research Infrastructure Consortium as an EU governance tool, focusing on biobanking infrastructure BBMRI.",
+      "reader_why": "",
+      "reader_more": "The chapter studies the European Research Infrastructure Consortium (ERIC), a legal form created by the EU for jointly run research infrastructures. Its case is BBMRI, the pan-European biobanking infrastructure financed by the EU and participating states. The notes show the analysis engages EU constitutional law and the fragmented national rules on consent and ethics review for biobank research. The research was done within the Swedish BBMRI node.",
+      "deep_analysis": {
+        "work_kind": "legal-governance analysis (book chapter)",
+        "research_question": "What can the ERIC governance tool do for research and ethics in European biobanking?",
+        "main_finding": "Examines ERIC as a new EU governance tool for research infrastructure against diverse national biobank ethics and consent regimes.",
+        "method_or_basis": "Legal and institutional analysis of EU law and BBMRI; evidence limited to abstract and endnotes.",
+        "qualification": "Body text not accessed; specific conclusions of the chapter are not reported here.",
+        "radar_relevance": "Historical evidence on EU research-infrastructure governance (ERIC, BBMRI).",
+        "why_supported": false,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "historical:id:3cecfeb44fddb1f7",
+      "source_hash": "6f44680f",
+      "identity_hash": "2fcc283b61ecfb01",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1080/13501763.2024.2309179 -> tandfonline.com/doi/full/...; HTTP 403 Cloudflare challenge at tandfonline.com; no article text. Anthropic web fetch of the same URL was also blocked by bot detection."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: exact title; Flonk, Jachtenfuchs, Obendiek; Journal of European Public Policy 31(8):2316-2342; online 2024-01-31; CC BY (Semantic Scholar)."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "partial",
+            "note": "Web search for the quoted title returned hebis.de and SSRC MediaWell bibliographic records with abstract (IO-GIG dataset, 1995-2021) and the tandfonline abstract page; no full text."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failed",
+            "note": "Crossref query.bibliographic (title + Flonk + 2024) returns only 10.1080/13501763.2024.2309179; Hitotsubashi author page lists it with DOI link only."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "OpenAlex/Unpaywall list tandfonline PDF (403) and Hertie School OPUS record opus4.kobv.de/opus4-hsog docId 5307, which serves an Anubis anti-bot challenge; not bypassed."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "Search on \"tandfonline.com 13501763.2024.2309179\" surfaced special-issue introduction citing the article; no alternative legitimate copy. Additional recovery pass: web search with authors + \"pdf repository\" found only library catalogue records and author profile; Hertie OPUS /files/5307/ path also serves Anubis challenge."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity verified; open-access text exists but every copy is behind bot protection."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity verified; after all six recovery steps no legitimately accessible full or substantive primary text was obtained, so no admission judgement is made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "historical:id:b3c33b824538e7fe",
+      "source_hash": "2ab068c5",
+      "identity_hash": "25abc36d8e852949",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1111/jcms.13654 -> onlinelibrary.wiley.com; HTTP 403 Cloudflare \"Just a moment\" page (pdfdirect URL also 403)."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Carrapico & Farrand, JCMS: Journal of Common Market Studies, online 2024-07-25 (print 2024-09); Semantic Scholar: hybrid OA, CC BY."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failed",
+            "note": "Crossref query.title on the full title returns only jcms.13654; related Carrapico/Farrand works (e.g. 10.1080/09662839.2022.2102896) are different articles."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failed",
+            "note": "Crossref bibliographic query (title + Carrapico Farrand + 2024) returns same DOI; no alternative version."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Unpaywall and OpenAlex list only the Wiley publisher location; Newcastle University ePrints search for the title returned no record; Europe PMC none."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "Checked Crossref for SSRN/preprint versions of the title: none found. Additional recovery pass: web search on authors + subtitle found Northumbria NRL deposits of related 2022 European Security article (different work, not substituted); NRL and Newcastle ePrints searches unreachable from this environment."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity verified; CC BY article blocked by Wiley bot protection with no repository copy."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity verified; after all six recovery steps no legitimately accessible full or substantive primary text was obtained, so no admission judgement is made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "historical:id:3c0bd4298a48a861",
+      "source_hash": "4f48f5dc",
+      "identity_hash": "6e3396fa6d6cca37",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1093/ia/iiae127 -> academic.oup.com; HTTP 403 Cloudflare."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Jakimów, Samokhalov, Baldassarre, International Affairs 100(4):1735-1748, 2024, CC BY."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Web search for the quoted title surfaced Durham Research Online OutputFile/2736687 (publisher PDF, CC BY)."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Fetched https://durham-repository.worktribe.com/OutputFile/2736687 via web fetch (curl copy was bot-blocked); full 14-page article read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://durham-repository.worktribe.com/OutputFile/2736687",
+            "title": "Achieving European Union strategic autonomy: circularity in critical raw materials value chains (published version)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Previous defer overturned: open-access published version recovered from Durham repository and read in full."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Primary interview and Eurostat trade analysis of EU dependence in the titanium value chain, linked to the Critical Raw Materials Act and European industrial capability."
+      },
+      "metadata_correction": {
+        "fields": {
+          "type": "peer-reviewed article (policy paper)",
+          "date": "2024-06-10"
+        },
+        "unset": [],
+        "reason": "Article is an International Affairs policy paper; Durham record gives online publication 10 June 2024 (issue July 2024)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Europe’s titanium recycling loop runs through the United States",
+      "reader_what": "Nearly 70% of EU titanium scrap ends up in the US, leaving Europe dependent on US and Russian mid-stream capacity.",
+      "reader_why": "Without domestic remelting and recycling capacity, EU Critical Raw Materials Act recycling and autonomy targets are hard to meet.",
+      "reader_more": "Using 25 interviews across the titanium value chain and Eurostat trade data, the authors map EU dependencies for aerospace-grade titanium. The EU lacks ore-to-sponge and much ingot capacity, importing from the US and Russia. Buy-back agreements send European fabrication scrap to US remelters, so circularity exists but is transatlantic. They recommend EU support for a domestic recycling industry, negotiated changes to buy-back arrangements, and longer-term integration of Ukrainian upstream capacity.",
+      "deep_analysis": {
+        "work_kind": "policy paper with primary empirical analysis",
+        "research_question": "Can circular economy solutions support EU open strategic autonomy in the titanium value chain?",
+        "main_finding": "EU titanium dependence stems mainly from missing mid-stream and recycling capacity, with scrap flowing to US firms.",
+        "method_or_basis": "25 semi-structured stakeholder interviews in six countries plus Eurostat trade data for 2019, 2021 and 2022.",
+        "qualification": "Single-material case; policy options involve uncertain costs and geopolitics.",
+        "radar_relevance": "European industrial capability, critical raw materials and technological sovereignty.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:cc369cdee634fd3c",
+      "source_hash": "740d94e4",
+      "identity_hash": "a768eafb23791d94",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "https://era.gv.at/.../ec-fact-sheet-the-pivotal-role-of-ri-in-ai-policy/ is an ERA Portal Austria page linking a PDF."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Linked PDF https://era.gv.at/public/documents/4196/FINAL_AI_factsheet.pdf (EC fact sheet, May 2020, ~1,340 words) read in full."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://era.gv.at/public/documents/4196/FINAL_AI_factsheet.pdf",
+            "title": "The Pivotal Role of Research and Innovation in Artificial Intelligence Policy (EC fact sheet)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "European Commission fact sheet dated May 2020 re-hosted by ERA Portal Austria; content is Commission messaging plus short EU-funded project showcases."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_PROMOTIONAL_NO_SUBSTANTIVE_EVIDENCE",
+        "reason": "Promotional fact sheet restating AI investment ambitions and showcasing projects; no analysis, new decision or evidence to serve as historical structural evidence."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "European Commission (fact sheet, re-hosted by ERA Portal Austria)",
+          "date": "2020-05",
+          "type": "fact sheet"
+        },
+        "unset": [
+          "source_tier"
+        ],
+        "reason": "The PDF is a European Commission fact sheet dated May 2020; ERA Portal Austria only hosts it, and the 2024 date is unsupported."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "promotional fact sheet",
+        "research_question": "",
+        "main_finding": "Restates EU aim of €20bn yearly AI investment and Horizon Europe/Digital Europe funding, with project examples.",
+        "method_or_basis": "Direct reading of the fact sheet.",
+        "qualification": "Communication material, no evaluation.",
+        "radar_relevance": "Fails A: no substantive analysis or development.",
+        "why_supported": false,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:15ed317ef708661b",
+      "source_hash": "7ae62a41",
+      "identity_hash": "b3c11411a3f2d78f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "https://data.europa.eu/doi/10.2777/3702125 -> op.europa.eu publication page (metadata and summary)."
+          },
+          {
+            "step": "doi",
+            "outcome": "partial",
+            "note": "DOI 10.2777/3702125 not in Crossref/OpenAlex (404) but resolves via data.europa.eu to the EU Publications Office record."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Downloaded full PDF from op.europa.eu download handler (identifier 612dc9f7-3528-11f0-8a44-01aa75ed71a1), ~21,800 words; executive summary and recommendations read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://op.europa.eu/en/publication-detail/-/publication/612dc9f7-3528-11f0-8a44-01aa75ed71a1/language-en",
+            "title": "Mutual Learning Exercise on More Attractive and Sustainable Research Careers and Better-balanced Talent Circulation — Final report",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Scanner title was a paraphrased claim, not the report title. Report by DG RTD Horizon Europe Policy Support Facility; authors Gareth O’Neill and Conor O’Carroll; released 2025-05-19."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Official EU mutual learning exercise (16 Member States) on implementing Council Recommendation C/2023/1640 on research careers and talent circulation."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "Mutual learning exercise for more attractive and sustainable research careers and better-balanced talent circulation",
+          "authors": "Gareth O’Neill; Conor O’Carroll",
+          "date": "2025-05-19",
+          "type": "policy report (Horizon Europe PSF mutual learning exercise)",
+          "source": "European Commission, Directorate-General for Research and Innovation"
+        },
+        "unset": [],
+        "reason": "EU Publications Office record and PDF give this title, personal authors and release date; stored title was an interpretive claim."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Sixteen EU countries share ways to make research careers more attractive",
+      "reader_what": "Participating states are urged to prioritise research talent in R&D investment and adopt the European Charter for Researchers.",
+      "reader_why": "It operationalises the 2023 Council Recommendation meant to reduce precarious careers and unbalanced researcher circulation in Europe.",
+      "reader_more": "The Horizon Europe Policy Support Facility brought experts and officials from 16 Member States together on four themes: recruitment and working conditions, skills and intersectoral careers, enabling conditions for balanced talent circulation, and policy and legal frameworks. The report notes precarity and unbalanced circulation persist despite 25 years of initiatives. It recommends integrating research careers into national R&I policy, funding implementation of the European Charter for Researchers, and open, merit-based recruitment, and offers a policy toolbox.",
+      "deep_analysis": {
+        "work_kind": "policy report / mutual learning synthesis",
+        "research_question": "How can Member States implement the Council Recommendation on research, innovation and entrepreneurial talents?",
+        "main_finding": "Research careers remain precarious and circulation unbalanced; national policy should prioritise talent, the Charter for Researchers and transparent recruitment.",
+        "method_or_basis": "Synthesis of four thematic MLE workshops and country good practices.",
+        "qualification": "Peer-learning recommendations, not an impact evaluation.",
+        "radar_relevance": "European research-career and talent-circulation policy.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:a47220d49fd66b04",
+      "source_hash": "b0ddb47d",
+      "identity_hash": "0d64e2857a547a17",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1080/13501763.2023.2295520 -> tandfonline HTTP 403 Cloudflare challenge."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Donnelly, Ríos Camacho, Heidebrecht, Journal of European Public Policy 31(8), online 2023-12-20."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Alternate Twente Pure host https://ris.utwente.nl/ws/files/346810171/... (publisher PDF, CC BY-NC-ND) downloaded and read (~10,600 words)."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://ris.utwente.nl/ws/files/346810171/Digital_sovereignty_as_control_the_regulation_of_digital_finance_in_the_European_union.pdf",
+            "title": "Digital sovereignty as control: the regulation of digital finance in the European Union",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Previous defer overturned: open-access publisher PDF recovered from repository mirror."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Analyses how EU digital sovereignty concerns shape regulation of financial technology innovation (MiCA, DORA, DLT pilot regime); substantive European technology-governance connection."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "How the EU uses digital sovereignty to regulate crypto and digital finance",
+      "reader_what": "EU regulators extend existing financial rules to crypto and use security narratives to expand control over digital finance.",
+      "reader_why": "Shows how sovereignty concerns shape EU rules governing financial technology innovation and its security risks.",
+      "reader_more": "The article analyses three regulations in the EU Digital Finance Package: markets in crypto-assets, digital operational resilience, and the pilot regime for distributed-ledger market infrastructures. Using discursive and historical institutionalism, it finds regulators upgrade existing rules where digital finance resembles traditional services, justified by investor protection and stability. For novel security challenges, EU actors invoke threat narratives to extend control into areas usually handled as cybersecurity.",
+      "deep_analysis": {
+        "work_kind": "qualitative policy analysis",
+        "research_question": "When and where do digital sovereignty concerns motivate EU regulation of digital finance?",
+        "main_finding": "Sovereignty-as-control operates through upgrading existing regimes and security narratives for new risks.",
+        "method_or_basis": "Document analysis of EU regulations and consultations through discursive and historical institutionalism.",
+        "qualification": "Focus on three regulations; effects not assessed.",
+        "radar_relevance": "EU technological sovereignty and innovation regulation.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "historical:id:17fdd625241f3b32",
+      "source_hash": "b3d5e8a5",
+      "identity_hash": "3532fae31a16c729",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.54648/eerr2023028 -> Kluwer Law Online abstract page; article paywalled."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Oskar J. Gstrein, European Foreign Affairs Review 28(4):379-396, 2023."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "University of Groningen Pure alternate host https://pure.rug.nl/ws/files/1189676103/EERR2023028.pdf (version of record, Taverne) downloaded and read (~8,600 words)."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://pure.rug.nl/ws/files/1189676103/EERR2023028.pdf",
+            "title": "Data Autonomy: Recalibrating Strategic Autonomy and Digital Sovereignty",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Previous defer overturned: version of record recovered from Groningen repository."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Conceptual legal-policy analysis of EU strategic autonomy and digital sovereignty, including Chips Act and Gaia-X capacity initiatives, proposing data autonomy."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Replacing vague “digital sovereignty” with data autonomy in EU strategy",
+      "reader_what": "Gstrein argues “data autonomy” better serves EU strategic autonomy than vague digital sovereignty or data protection law alone.",
+      "reader_why": "Questions the added value of EU capacity initiatives like Gaia-X and the Chips Act framed as sovereignty.",
+      "reader_more": "The article finds digital sovereignty mostly a political narrative, linked to technological sovereignty initiatives such as the EU Chips Act and the Gaia-X cloud project whose added value is questionable, and prone to protectionism. EU data protection law positions the Union as a standard-setter but struggles with datafication and machine-learning inferences. The proposed data autonomy concept stresses collective and individual autonomy and harmful inferences, aiming to support strategic autonomy while protecting human dignity.",
+      "deep_analysis": {
+        "work_kind": "conceptual legal-policy article",
+        "research_question": "How could data autonomy facilitate EU strategic autonomy under datafication?",
+        "main_finding": "Digital sovereignty is conceptually weak; data autonomy offers a rights-based recalibration of EU strategic autonomy.",
+        "method_or_basis": "Conceptual and legal analysis of EU policy and law.",
+        "qualification": "Normative proposal; no empirical test.",
+        "radar_relevance": "EU technological/digital sovereignty debate.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "historical:id:2a60f5849e5048b4",
+      "source_hash": "ebeb7003",
+      "identity_hash": "1aa341d917818e26",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1093/scipol/scad025 -> academic.oup.com; HTTP 403 Cloudflare."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Echeverría-King et al. (7 authors), Science and Public Policy, online 2023-06-03, print 2023-09-14."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failed",
+            "note": "Crossref query.title returns 10.1093/scipol/scad025 as sole exact match."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failed",
+            "note": "Crossref bibliographic query (title + Echeverria-King + 2023) returns the same DOI."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "HAL record hal.science/hal-04439033 and hal-hosted copies serve Anubis anti-bot challenge; Göttingen GRO resolver returned 403 \"Site Protection\"."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "Semantic Scholar lists only the Göttingen resolver as OA PDF; no other copy."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity verified; CC BY accepted versions exist but are bot-protected."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity verified; after all six recovery steps no legitimately accessible full or substantive primary text was obtained, so no admission judgement is made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "historical:id:3d100e8cee15e522",
+      "source_hash": "4680b5ed",
+      "identity_hash": "79320006d2454eeb",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1080/13501763.2023.2248204 -> tandfonline.com; HTTP 403 Cloudflare challenge at tandfonline.com; no article text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Timo Seidl & Luuk Schmitz, Journal of European Public Policy, online 2023-08-24; CC BY-NC-ND."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failed",
+            "note": "Crossref query.title returns 10.1080/13501763.2023.2248204 as exact match."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failed",
+            "note": "Crossref bibliographic query (title + Seidl Schmitz + 2023) returns the same DOI plus a different Seidl paper on IPCEIs (not substituted)."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Unpaywall/OpenAlex list only the tandfonline PDF (403); no repository copy."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "OSF preprint search surfaced only the separate IPCEI paper (10.31219/osf.io/f63gd); no preprint of this article. Additional recovery pass: web search found author publication lists (univie, TUM) and MPIfG prize notice linking only to tandfonline; MPG PuRe repository API search returned no deposited item."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity verified; open-access article blocked by bot protection."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity verified; after all six recovery steps no legitimately accessible full or substantive primary text was obtained, so no admission judgement is made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "historical:id:bec6dbaab7568898",
+      "source_hash": "7844ad1b",
+      "identity_hash": "bd4f1e3f0275bd8c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1007/s11192-023-04810-6 -> Springer page: abstract and references only (subscription)."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Pham, Vancraeynest, Poelmans, Vancauwenbergh, Ali-Eldin, Scientometrics, online 2023-08-24."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failed",
+            "note": "Crossref query.title \"Identifying interdisciplinary research in research projects\" returns this DOI."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failed",
+            "note": "Crossref bibliographic query with Pham and 2023 returns the same DOI."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "UHasselt Document Server copy (bitstream/1942/40849) returned 503 \"available only on campus and via VPN\"."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "Semantic Scholar marks closed; no other repository copy. Additional recovery pass: UHasselt Document Server retried later in session, still 503 (campus/VPN-only maintenance)."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity verified; repository copy temporarily restricted, publisher text paywalled."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity verified; after all six recovery steps no legitimately accessible full or substantive primary text was obtained, so no admission judgement is made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "historical:id:e077e1381d2d93fd",
+      "source_hash": "c22a11ac",
+      "identity_hash": "14191dae975919a6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1080/10242694.2023.2180588 -> tandfonline.com; HTTP 403 Cloudflare challenge at tandfonline.com; no article text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Kleczka, Vandercruysse, Buts, Du Bois, Defence and Peace Economics, online 2023-02-24."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failed",
+            "note": "Crossref query.title returns 10.1080/10242694.2023.2180588 as exact match."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failed",
+            "note": "Crossref bibliographic query (title + Kleczka + 2023) returns same DOI."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "OpenAlex/Unpaywall \"OA\" location is https://www.iris-france.org/...Ares-20-Report-EU-DTIB-Sept-2017.pdf, a 2017 IRIS report — a different work, not substituted; VUB biblio URL returned 404."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "Semantic Scholar has no OA PDF; no other copy found."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity verified; only listed free copy is a mismatched document."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity verified; after all six recovery steps no legitimately accessible full or substantive primary text was obtained, so no admission judgement is made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "historical:id:940d02bed62a022e",
+      "source_hash": "ab3a04f0",
+      "identity_hash": "a77b2c5e7e890654",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied https://www.institutmontaigne.org/en/expressions/europes-economic-security-and-china-where-draw-line returns HTTP 403 Cloudflare challenge (also recorded by scanner)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI; Institut Montaigne \"Expressions\" web article (not_applicable for DOI resolution)."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "partial",
+            "note": "DuckDuckGo exact-title search returns only the Institut Montaigne URL."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failed",
+            "note": "Title plus Institut Montaigne search surfaced only the same site and site listing pages; no dated copy with author metadata retrieved."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Institut Montaigne site blocked; Internet Archive copy attempt (web.archive.org id_ capture) blocked by egress policy."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "No syndicated or PDF version located beyond the items above."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Work exists on Institut Montaigne site but text inaccessible; identity only."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity verified; after all six recovery steps no legitimately accessible full or substantive primary text was obtained, so no admission judgement is made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "historical:id:7cb2970daee676f8",
+      "source_hash": "6233b3cc",
+      "identity_hash": "ddf932b889cb1322",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied https://www.institutmontaigne.org/en/expressions/europes-risky-specialization-away-digital-technologies returns HTTP 403 Cloudflare challenge (also recorded by scanner)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI; Institut Montaigne \"Expressions\" web article (not_applicable for DOI resolution)."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "partial",
+            "note": "DuckDuckGo exact-title search returns Institut Montaigne URL and author site europetechandwar.com teaser (Gilles Babinet, Oliver Coste, 5 Jan 2023; ~150-word excerpt ending \"Read the full article\")."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failed",
+            "note": "Title plus Institut Montaigne search surfaced only the same site and site listing pages; no dated copy with author metadata retrieved."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Institut Montaigne site blocked; Internet Archive copy attempt (web.archive.org id_ capture) blocked by egress policy."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "No syndicated or PDF version located beyond the items above."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Work exists on Institut Montaigne site but text inaccessible; identity only. Author site teaser confirms authors/date."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity verified; after all six recovery steps no legitimately accessible full or substantive primary text was obtained, so no admission judgement is made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "historical:id:1bdf764da4a6a643",
+      "source_hash": "c0cabd5e",
+      "identity_hash": "95b37a40fa81fec4",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://www.ifri.org/en/studies/health-data-governance-lessons-learned-covid-19-pandemic-europe-china-and-united-states returns HTTP 403 Cloudflare."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI; IFRI study page."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failed",
+            "note": "DuckDuckGo exact-title search returned no results."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failed",
+            "note": "Title plus IFRI 2021 search gave no alternate copy."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "IFRI site blocked; Internet Archive capture blocked by egress policy."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "No PDF mirror located."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "IFRI study listed by URL; content unverified beyond URL slug."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity verified; after all six recovery steps no legitimately accessible full or substantive primary text was obtained, so no admission judgement is made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "historical:id:5f57ec67b01e28dc",
+      "source_hash": "72aec2c0",
+      "identity_hash": "c28ca14843305986",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1016/j.technovation.2020.102215 -> ScienceDirect; Cloudflare 403."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Zabala-Iturriagagoitia, Aparicio, Ortiz, Carayannis, Grigoroudis; Technovation, issued 2021-04."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Unpaywall handle hdl.handle.net/11250/2762728 -> Norwegian NVA record; public accepted-manuscript file (CC BY-NC-ND) downloaded via NVA API file link and read (~15,000 words)."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://hdl.handle.net/11250/2762728",
+            "title": "The productivity of national innovation systems in Europe (accepted manuscript)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Supplied URL blocked; matching work recovered at the official_publisher_or_repository step as author accepted manuscript."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Measures productivity dynamics of European national innovation systems with European Innovation Scoreboard data 2011–2018."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Europe’s innovation systems are not catching up with leaders",
+      "reader_what": "Productivity gains from innovation across European countries fell in 2011–2018, and laggards did not converge toward leaders.",
+      "reader_why": "Challenges the assumption that raising innovation inputs automatically closes Europe’s internal innovation gaps.",
+      "reader_more": "The authors apply a global Malmquist productivity index, a frontier method measuring how efficiently inputs become outputs over time, to 2019 European Innovation Scoreboard data for 33 countries. They split productivity change into technological progress, catching up and scale effects. Productivity gains declined, innovation activity did not necessarily shift the technology frontier, and follower countries did not catch up. No country showed increasing returns to scale. They suggest peer benchmarking and more tailored policy.",
+      "deep_analysis": {
+        "work_kind": "empirical efficiency analysis",
+        "research_question": "Are European national innovation systems converging through catching up or diverging through frontier shifts?",
+        "main_finding": "Innovation productivity gains fell over 2011–2018 and catching up by lagging countries was weak, implying divergence.",
+        "method_or_basis": "Data envelopment analysis with global Malmquist productivity index decomposition on EIS 2019 indicators, 33 countries.",
+        "qualification": "Results depend on EIS indicators and linear frontier methods; three outlier country-years removed.",
+        "radar_relevance": "Evidence on cohesion and efficiency of European national innovation systems.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:85f21f4a26df898f",
+      "source_hash": "234ec60d",
+      "identity_hash": "7a24d6bf00cf2f59",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1007/s11948-021-00290-0 -> Springer page: abstract and references only."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Abdi, Pizzolato, Nemery, Dierickx, Science and Engineering Ethics, online 2021-01-27."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failed",
+            "note": "Crossref query.title \"Educating PhD Students in Research Integrity in Europe\" returns this DOI."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failed",
+            "note": "Crossref bibliographic query with Abdi and 2021 returns same DOI; PubMed 33502635 bibliographic record only."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Lirias handle 123456789/669431 redirects to KU Leuven Limo discovery page with no file served; Europe PMC: not in PMC."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "Semantic Scholar lists only the Lirias handle; no alternative copy. Additional recovery pass: Lirias OAI-PMH GetRecord for 123456789/669431 returned idDoesNotExist; no alternative file route."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity verified; full text not obtained."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity verified; after all six recovery steps no legitimately accessible full or substantive primary text was obtained, so no admission judgement is made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "historical:id:6ae8c15a106de381",
+      "source_hash": "f5392263",
+      "identity_hash": "c2d2f97f7f419d6c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://doi.org/10.55317/9781784134211 -> Chatham House library catalogue record (soutron) with downloadable PDF."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: report, Martin Everett, Royal Institute of International Affairs, issued 2021-01-29."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Catalogue PDF download (DownloadImageFile.ashx?objectId=5361...) gave the full research paper (~7,500 words), read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://chathamhouse.soutron.net/Portal/Public/en-GB/RecordView/Index/191257",
+            "title": "EU–US collaboration on quantum technologies: Emerging opportunities for research and standards-setting",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full Chatham House research paper read; scanner source \"International Affairs\" (a Chatham House journal) is wrong."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Analyses EU quantum capability (Quantum Flagship, Quantum Communication Infrastructure) and EU–US research and standards cooperation, with recommendations for EU-based researchers."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "EU–US collaboration on quantum technologies: Emerging opportunities for research and standards-setting",
+          "source": "Chatham House (Royal Institute of International Affairs), International Security Programme",
+          "type": "research paper"
+        },
+        "unset": [],
+        "reason": "Crossref and the catalogue give a Chatham House research paper, not an International Affairs journal article; subtitle added."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Where the EU and US can still cooperate on quantum technologies",
+      "reader_what": "Security concerns limit EU–US quantum partnership, but basic research and communication standards remain realistic areas for collaboration.",
+      "reader_why": "Securitisation of quantum technologies narrows Europe’s cooperation options and heightens risks of talent loss to the US.",
+      "reader_more": "The paper reviews progress in quantum computing and communication, noting contested “quantum supremacy” claims and superconducting qubits as the leading approach. The EU tied quantum capacity to pandemic recovery through its Quantum Communication Initiative. Existing EU–US dialogue is low-key. It recommends closer links between the EU Quantum Flagship and US counterparts, funding for European researchers to attend US events, and investment in EU quantum start-ups to limit brain drain.",
+      "deep_analysis": {
+        "work_kind": "policy research paper",
+        "research_question": "What opportunities exist for EU–US collaboration on quantum technologies?",
+        "main_finding": "Collaboration is most feasible in basic research and communications standards; security concerns restrict wider partnership.",
+        "method_or_basis": "Literature, policy document review and expert sources.",
+        "qualification": "Early-2021 assessment; technological predictions uncertain.",
+        "radar_relevance": "European quantum research capability and research-security dimension of transatlantic cooperation.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    },
+    {
+      "record_key": "historical:id:b35639568cd6af6e",
+      "source_hash": "3de95cb4",
+      "identity_hash": "85a39a9cb07e3d0d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1080/13511610.2019.1578197 -> tandfonline.com; HTTP 403 Cloudflare challenge at tandfonline.com; no article text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Céline Teney, Innovation: The European Journal of Social Science Research, online 2019-02-11 (print 2021-01-02)."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failed",
+            "note": "Crossref query.title returns exact match only."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failed",
+            "note": "Crossref bibliographic query (title + Teney) returns same DOI."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Unpaywall/OpenAlex: closed, no repository copy; Semantic Scholar closed."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "No SSOAR/preprint version identified via Crossref relations."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity verified; paywalled with no legal copy."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity verified; after all six recovery steps no legitimately accessible full or substantive primary text was obtained, so no admission judgement is made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "historical:id:d55fafdee13ee224",
+      "source_hash": "2c37b2e3",
+      "identity_hash": "8aee053584b3d5e8",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "https://data.europa.eu/doi/10.2777/132356 -> op.europa.eu MORE4 publication page (metadata, summary)."
+          },
+          {
+            "step": "doi",
+            "outcome": "partial",
+            "note": "10.2777/132356 absent from Crossref/OpenAlex (404) but resolves via data.europa.eu to EU Publications Office."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Full MORE4 EU HE survey report PDF downloaded from op.europa.eu (identifier 487036ad-bdd1-11eb-8aca-01aa75ed71a1), ~134,000 words; structure, survey design and mobility/career sections sampled."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://op.europa.eu/en/publication-detail/-/publication/487036ad-bdd1-11eb-8aca-01aa75ed71a1/language-en",
+            "title": "MORE4 study: Survey on researchers in European higher education institutions",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Scanner title was an interpretive claim, not the title, and was not verified as a stated finding. Corporate authors DG RTD with IDEA Consult, WIFO, PPMI; released 2021-05-25."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Commission-funded large survey (EU28, ~8,500 respondents) of researchers’ mobility, careers and working conditions in European higher education."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "Support data collection and analysis concerning mobility patterns and career paths of researchers: survey on researchers in European higher education institutions (MORE4)",
+          "authors": "IDEA Consult; WIFO; PPMI (for European Commission, DG Research and Innovation)",
+          "date": "2021-05-25",
+          "type": "study report (survey)",
+          "source": "European Commission, Directorate-General for Research and Innovation"
+        },
+        "unset": [],
+        "reason": "EU Publications Office record and PDF give the title, contractors and release date; stored title was an unverified claim."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "MORE4 survey tracks European researchers’ mobility, careers and working conditions",
+      "reader_what": "A 2019 survey of researchers in European universities updates EU indicators on mobility, career stages and gender representation.",
+      "reader_why": "Provides the EU’s main time series for judging whether open labour-market policies for researchers work.",
+      "reader_more": "MORE4 is the fourth Commission study monitoring researchers’ mobility and careers, run by IDEA Consult, WIFO and PPMI. Its higher-education survey covered EU28 and EFTA researchers and compares results with 2012 and 2016 rounds. It reports international PhD and post-PhD mobility, motives and barriers, and career paths. Women made up 51% of early-stage researchers but 28% of top-grade (R4) researchers in EU28, only slightly better than in 2016.",
+      "deep_analysis": {
+        "work_kind": "survey-based study report",
+        "research_question": "What are mobility patterns, career paths and working conditions of researchers in European higher education?",
+        "main_finding": "Updated indicators on mobility and careers; persistent gender imbalance at senior career stages with small improvements.",
+        "method_or_basis": "Large online survey of HEI researchers (2019, n≈8,540 EU28) compared with MORE2 and MORE3.",
+        "qualification": "Survey self-selection; the stored claim about concentration of mobility was not confirmed here.",
+        "radar_relevance": "Core European evidence on researcher mobility and careers.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "historical:id:429b7fb8a4fd8c00",
+      "source_hash": "cb8c34bb",
+      "identity_hash": "c4138d531b783d5e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1177/1946756720976713 -> journals.sagepub.com returned HTTP 403 (scanner also recorded 403)."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: \"Fumbling Toward Foresight\", Peter J. Wasilko, World Futures Review, 2020-12 (scanner source \"Futures\" is wrong journal)."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failed",
+            "note": "Crossref query.title \"Fumbling Toward Foresight\" returns this DOI."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failed",
+            "note": "Crossref bibliographic query (title + Wasilko + 2020) returns the same DOI."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Unpaywall/OpenAlex: closed; Semantic Scholar: no OA PDF."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "No author or repository copy identified in Crossref/Semantic Scholar identifiers."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity verified (note: journal is World Futures Review); text paywalled."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "B",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity verified; after all six recovery steps no legitimately accessible full or substantive primary text was obtained, so no admission judgement is made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "historical:id:8eb15236c1aeac9e",
+      "source_hash": "0d58f59a",
+      "identity_hash": "61402159dbf551cb",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1093/scipol/scaa018 -> academic.oup.com; HTTP 403 Cloudflare."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Christensen, Nieminen, Altenhofer, Tancoigne, Mejlgaard, Griessler, Filacek, Science and Public Policy 47(3):360-370, online 2020-05-08."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Aarhus Pure record (Unpaywall) page listed file 239637090; downloaded from https://pure.au.dk/ws/files/239637090/What_s_in_a_name_Accepted_manuscript_2020.pdf and read (~9,600 words). HAL copies were Anubis-protected."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://pure.au.dk/ws/files/239637090/What_s_in_a_name_Accepted_manuscript_2020.pdf",
+            "title": "What’s in a Name? Perceptions and Promotion of RRI Practices across Europe (accepted manuscript)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Previous defer overturned: accepted manuscript read."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Empirical study of how 217 research-performing and funding organisations across Europe understand and promote responsible research and innovation."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "European research organisations promote responsibility without using the RRI label",
+      "reader_what": "Across 217 European organisations, responsible practices are widespread and diverse, though few frame them as “RRI”.",
+      "reader_why": "Suggests EU RRI policy should build on existing organisational practices rather than the policy label itself.",
+      "reader_more": "Researchers from several European institutes studied organisations such as universities, research institutes and funders across Europe. Understandings of responsibility varied widely. The most common promotion mechanisms were strategies (56% of organisations), internal guiding rules such as codes of conduct (43%) and cooperation with external partners (35%); fewer used dedicated funding, requirements, training or prizes. The findings show responsibility is pursued under many names, not just the EU’s RRI terminology.",
+      "deep_analysis": {
+        "work_kind": "empirical organisational study",
+        "research_question": "How do European research organisations perceive and promote responsible research and innovation?",
+        "main_finding": "Responsible practices are widespread and diverse, often not labelled as RRI; strategies and codes are most common tools.",
+        "method_or_basis": "Case data on 217 organisations across European countries with interview/document material, categorised by mechanism.",
+        "qualification": "Authors caution against strong conclusions for specific organisation types given data nature.",
+        "radar_relevance": "Implementation of European RRI policy in research organisations.",
+        "why_supported": true,
+        "confidence": "medium"
+      }
+    },
+    {
+      "record_key": "historical:id:3f23d85c6006fbd3",
+      "source_hash": "e108106a",
+      "identity_hash": "81cf872e5650fc20",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1177/1946756719896007 -> journals.sagepub.com returned HTTP 403 (scanner also recorded 403)."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Peter Padbury, World Futures Review, online 2020-02-06 (scanner source \"Futures\" is wrong journal)."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failed",
+            "note": "Crossref query.title on \"An Overview of the Horizons Foresight Method\" returns this DOI."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failed",
+            "note": "Crossref bibliographic query (title + Padbury + 2020) returns same DOI."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Unpaywall/OpenAlex closed; no repository copy."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "Semantic Scholar has no OA PDF; no Policy Horizons Canada copy of this article identified."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity verified; paywalled."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "B",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity verified; after all six recovery steps no legitimately accessible full or substantive primary text was obtained, so no admission judgement is made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "historical:id:d1e0952afc2673c0",
+      "source_hash": "3fd13766",
+      "identity_hash": "fc0d2f1cb34083ff",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1007/978-3-030-48317-3_14 -> Springer chapter page: abstract and bibliography only."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Eichhorn, Nedea, Smed, chapter in The European Union’s New Foreign Policy (Springer 2020)."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failed",
+            "note": "Crossref query.title returns this DOI as exact match."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failed",
+            "note": "Crossref bibliographic query (title + Eichhorn + 2020) returns same DOI."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Springer PDF endpoint redirects to paywall; Unpaywall/OpenAlex closed."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "Semantic Scholar has no OA version; no author copy found."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity verified from publisher page; body text not accessible."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity verified; after all six recovery steps no legitimately accessible full or substantive primary text was obtained, so no admission judgement is made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "historical:id:a11556316ca5e98c",
+      "source_hash": "50fdfcdf",
+      "identity_hash": "b3cc1c76f5ea83c4",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1007/978-94-017-8905-9_209 -> Springer reference-work page: abstract and opening lines only."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Gaële Goastellec, entry in The International Encyclopedia of Higher Education Systems and Institutions (Springer 2020)."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failed",
+            "note": "Crossref query.title returns this DOI."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failed",
+            "note": "Crossref bibliographic query (title + Goastellec + 2020) returns same DOI."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Springer PDF endpoint redirects to paywall; Unpaywall/OpenAlex closed."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "No repository (Serval UNIL) copy identified via Unpaywall or Semantic Scholar."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity verified; encyclopedia entry paywalled."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity verified; after all six recovery steps no legitimately accessible full or substantive primary text was obtained, so no admission judgement is made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "historical:id:fc20081bb07bb125",
+      "source_hash": "df673ce7",
+      "identity_hash": "f0151b905fc462a8",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied https://www.institutmontaigne.org/en/expressions/europe-versus-coronavirus-estonia-digital-technology-action returns HTTP 403 Cloudflare challenge (also recorded by scanner)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI; Institut Montaigne \"Expressions\" web article (not_applicable for DOI resolution)."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failed",
+            "note": "DuckDuckGo search for the title returned no result."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failed",
+            "note": "Title plus Institut Montaigne search surfaced only the same site and site listing pages; no dated copy with author metadata retrieved."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Institut Montaigne site blocked; Internet Archive copy attempt (web.archive.org id_ capture) blocked by egress policy."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "No syndicated or PDF version located beyond the items above."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Work exists on Institut Montaigne site but text inaccessible; identity only."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity verified; after all six recovery steps no legitimately accessible full or substantive primary text was obtained, so no admission judgement is made."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      }
+    },
+    {
+      "record_key": "historical:id:f463caba09cb2007",
+      "source_hash": "cf776c30",
+      "identity_hash": "1c90d0608899edc2",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1007/s11948-019-00167-3 -> Springer page, subscription preview only."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: Schuijff & Dijkstra, Science and Engineering Ethics 26:533-574, online 2019-12-16."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Twente Pure metadata (via web fetch) listed final published version; downloaded from alternate host https://ris.utwente.nl/ws/files/161722887/... and read (~13,100 words)."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://ris.utwente.nl/ws/files/161722887/Schuijff_Dijkstra2019_Article_PracticesOfResponsibleResearch.pdf",
+            "title": "Practices of Responsible Research and Innovation: A Review (published version)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Previous defer overturned: full published version recovered. Study funded by Horizon 2020 NUCLEUS project."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Systematic review of practices implementing Responsible Research and Innovation, the Horizon 2020 cross-cutting policy concept, produced within an EU-funded project."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "What Responsible Research and Innovation looks like in practice",
+      "reader_what": "A review of 52 articles finds RRI practices already span most dimensions of RRI definitions, though methods are poorly reported.",
+      "reader_why": "Helps turn the EU’s RRI agenda from concept into practice by showing which dimensions practices cover.",
+      "reader_more": "Within the Horizon 2020 NUCLEUS project, the authors systematically reviewed 52 articles describing RRI practices. They group practices into themes: opening research to stakeholders and publics, stimulating reflection during research, managing ethical, legal and social issues, and embedding responsibility in organisations. Practices reflect the variety of values in main RRI definitions but not all. Many articles lack methodological detail, and more reflection could strengthen links between RRI theory and practice.",
+      "deep_analysis": {
+        "work_kind": "systematic literature review",
+        "research_question": "What practices of RRI exist and which RRI values and dimensions do they pursue?",
+        "main_finding": "RRI practices cover a rich variety of dimensions but are unevenly described and some dimensions are under-addressed.",
+        "method_or_basis": "Systematic review of 52 peer-reviewed articles.",
+        "qualification": "Limited to published academic accounts.",
+        "radar_relevance": "European RRI policy implementation.",
+        "why_supported": true,
+        "confidence": "high"
+      }
+    }
+  ]
+}
