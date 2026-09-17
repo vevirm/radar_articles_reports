@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-17T11:03:36Z",
+  "generated_at": "2026-09-17T11:56:13Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -93801,6 +93801,193 @@
       "reader_text_model": "user-provided-llm-subscription",
       "reader_text_written_at": "2026-09-17T11:03:36Z",
       "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:aadde2c8ca8c0e11": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "0c93b163",
+      "identity_hash": "432714313fd43d8a",
+      "reader_title": "Industrial PhDs in Italy grew fast but remain concentrated in some regions",
+      "reader_what": "Italian industrial PhD programmes rose from 49 to 83 (4.3% to 6.8%) between 2022 and 2023, unevenly across regions.",
+      "reader_why": "EU and recovery-plan co-financing appears to be spreading industry-linked doctoral training beyond traditional innovation hubs.",
+      "reader_more": "Industrial PhDs are doctorates run with companies. The authors mapped all accredited Italian programmes for 2022 and 2023 using ministry and ANVUR data. Topic modelling of programme titles shows a shift toward robotics, biotechnology and bioengineering while sustainability stays central. Spatial analysis suggests the programmes are diffusing more widely, but several southern regions still have none. The findings are explicitly preliminary and descriptive.",
+      "deep_analysis": {
+        "work_kind": "conference paper; descriptive empirical study",
+        "research_question": "How are Italian industrial PhD programmes characterised and distributed, and are they linked to regional innovation performance?",
+        "main_finding": "Industrial PhD programmes increased from 49 (4.3%) to 83 (6.8%) of Italian PhD programmes between 2022 and 2023, with strong regional disparities and a thematic shift toward advanced technologies.",
+        "method_or_basis": "ANVUR/ministry accreditation data at NUTS 2 level; LDA topic modelling of programme titles; standard deviational ellipses; comparison with EU Regional Innovation Scoreboard groups; review of German, UK, French, Nordic and MSCA schemes.",
+        "qualification": "Preliminary, two-year descriptive analysis; explanations for spatial changes (e.g. PNRR co-financing, 2021 criteria) are offered as possibilities, not tested causally.",
+        "radar_relevance": "Historical context on how EU cohesion and recovery funding shaped academia-industry doctoral training capacity in a large EU member state.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://doi.org/10.51408/issi2025_011 redirected to the ISSI 2025 proceedings PDF (issi2025.iiap.sci.am/.../75.-cicero_fp_issi_2025_with_revisions_164.pdf); full paper text matched title and authors"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref api.crossref.org/works/10.51408/issi2025_011 returns proceedings-article in '20th International Conference on Scientometrics & Informetrics', issued 2025-07-10"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://issi2025.iiap.sci.am/wp-content/uploads/2025/07/75.-cicero_fp_issi_2025_with_revisions_164.pdf",
+            "title": "Shaping Innovation: A Regional Perspective on Industrial PhD Programs in Italy (ISSI 2025 full paper)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full conference paper read. Scanner source 'Scientometrics' is wrong: DOI resolves to ISSI 2025 conference proceedings. Authors field had a stray leading separator."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Analyses Italy's industrial PhD system (national reform, EU FSE/FESR and NextGenerationEU/PNRR co-financing) against the EU Regional Innovation Scoreboard and other European schemes; a genuine European R&I-capability study."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:56:12Z",
+      "deep_scan_package_id": "worker-a-20260917T111401Z-9c77ac8c844d"
+    },
+    "historical:id:3391d6827787322e": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "b6cc93d0",
+      "identity_hash": "5ca1240a4949dc11",
+      "reader_title": "Online communities can join expert panels in structured foresight exercises",
+      "reader_what": "A combined focus-group, Delphi and online-community process produced future assessments close to experts' on 'Aviation 2040'.",
+      "reader_why": "It offers a cheaper way to widen foresight inputs, especially for organisations lacking expert networks.",
+      "reader_more": "Foresight means systematically exploring possible futures. The authors ran an expert 'Radar Group' workshop, turned its ideas into 46 projections, and put them to an aviation online community and to experts in a Delphi survey. Only about 17% of projections differed significantly between groups; community answers were more dispersed. They formalise this as an 'open foresight' process others can reuse. The community sample was small (25 respondents, 1.25% response), so the comparison is illustrative.",
+      "deep_analysis": {
+        "work_kind": "empirical methods paper",
+        "research_question": "Do online community members differ from experts in future assessments, and how can communities be integrated actively into foresight processes?",
+        "main_finding": "Community and expert assessments differed on only 8 of 46 projections; integrating an online community via a Community Delphi within a Radar Group/Delphi sequence is feasible and useful.",
+        "method_or_basis": "Mixed methods: expert focus group (Radar Group), netnographic selection of the AVIPEO community, Community Delphi (n=25) and two-round Expert Delphi workshop (n=9), Mann-Whitney U tests and IQR consensus measures.",
+        "qualification": "Very low community response rate and small expert group; single industry; authors call results first indications.",
+        "radar_relevance": "Reusable open-foresight procedure combining expert panels with online communities, applicable to R&I foresight exercises.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "https://doi.org/10.1016/j.techfore.2018.08.022 redirected to linkinghub.elsevier.com; automated client got an empty redirect/403 from sciencedirect"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref record for 10.1016/j.techfore.2018.08.022 confirms TFSC vol.138 (Jan 2019), authors Zeng, Koller, Jahn"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "web search for the exact quoted title returned the ScienceDirect article page S0040162517317353, fetched as open-access (CC BY-NC-ND) full text"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0040162517317353",
+            "title": "Open radar groups: The integration of online communities into open foresight processes",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Open-access full text read on ScienceDirect (online 11 Sep 2018; issue Jan 2019, pp. 204-217). Identity matches scanner metadata."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Proposes and illustrates a transferable two-step open foresight process (Radar Group workshop, Community Delphi via an online community, then Expert Delphi workshop with community results as stimulus)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:56:13Z",
+      "deep_scan_package_id": "worker-a-20260917T111401Z-9c77ac8c844d"
+    },
+    "historical:id:1697203114c385cf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "a008761b",
+      "identity_hash": "864cab0ecb2c118b",
+      "reader_title": "FWF president's 2018 interview on Austria's EU Presidency and basic research",
+      "reader_what": "Klement Tockner welcomed the proposed Horizon Europe budget increase and promoted an FWF science festival.",
+      "reader_more": "The interview was published by the ERC as Austria began its 2018 Council Presidency. Tockner argued national funding underpins European success, noting over 90% of Austria's ERC Advanced Grantees had prior FWF funding. He outlined factors researchers weigh when choosing where to work. The piece is opinion and event promotion rather than analysis.",
+      "deep_analysis": {
+        "work_kind": "interview / institutional magazine piece",
+        "research_question": "",
+        "main_finding": "Opinion that strong national basic-research funding is a precondition for success in EU programmes; promotion of the BE OPEN festival.",
+        "method_or_basis": "Interview answers; one cited statistic on ERC Advanced Grantees' FWF track record.",
+        "qualification": "No method, data analysis or policy decision reported.",
+        "radar_relevance": "Fails historical Strand A: genuine European topic but not substantive evidence.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://erc.europa.eu/news-events/magazine/being-open-science-and-society opened directly; full ERC magazine interview dated 7 July 2018 retrieved"
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "ERC magazine web interview has no DOI"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_web_page",
+            "url": "https://erc.europa.eu/news-events/magazine/being-open-science-and-society",
+            "title": "Being open to science and society (ERC magazine interview with Klement Tockner)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Complete official page read. It is a short Q&A interview with the FWF President about the 2018 Austrian EU Council Presidency, the BE OPEN festival, talent attraction and basic-research funding principles. Scanner date 2018-01-01 is a placeholder; page is dated 7 July 2018."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NOT_SUBSTANTIVE",
+        "reason": "Promotional/opinion interview (festival publicity and general views on excellence funding) with no substantive analysis, evidence release or policy decision; it does not establish anything useful as historical R&I evidence beyond one passing statistic."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-17T11:56:13Z",
+      "deep_scan_package_id": "worker-a-20260917T111401Z-9c77ac8c844d"
     }
   }
 }

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-admission-v1",
-  "updated_at": "2026-09-17T11:03:36Z",
+  "updated_at": "2026-09-17T11:56:13Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "decision": "drop",
@@ -15739,6 +15739,66 @@
       "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d",
       "verification_note": "Full article read.",
       "duplicate_of": ""
+    },
+    "historical:id:aadde2c8ca8c0e11": {
+      "decision": "keep",
+      "target_strand": "A",
+      "reason_code": "A_SUBSTANTIVE_EU_RI",
+      "reason": "Analyses Italy's industrial PhD system (national reform, EU FSE/FESR and NextGenerationEU/PNRR co-financing) against the EU Regional Innovation Scoreboard and other European schemes; a genuine European R&I-capability study.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "updated_at": "2026-09-17T11:56:12Z",
+      "deep_scan_package_id": "worker-a-20260917T111401Z-9c77ac8c844d",
+      "verification_note": "Full conference paper read. Scanner source 'Scientometrics' is wrong: DOI resolves to ISSI 2025 conference proceedings. Authors field had a stray leading separator.",
+      "duplicate_of": ""
+    },
+    "historical:id:3391d6827787322e": {
+      "decision": "keep",
+      "target_strand": "B",
+      "reason_code": "B_REUSABLE_METHOD",
+      "reason": "Proposes and illustrates a transferable two-step open foresight process (Radar Group workshop, Community Delphi via an online community, then Expert Delphi workshop with community results as stimulus).",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "updated_at": "2026-09-17T11:56:13Z",
+      "deep_scan_package_id": "worker-a-20260917T111401Z-9c77ac8c844d",
+      "verification_note": "Open-access full text read on ScienceDirect (online 11 Sep 2018; issue Jan 2019, pp. 204-217). Identity matches scanner metadata.",
+      "duplicate_of": ""
+    },
+    "historical:id:1697203114c385cf": {
+      "decision": "drop",
+      "target_strand": "A",
+      "reason_code": "A_NOT_SUBSTANTIVE",
+      "reason": "Promotional/opinion interview (festival publicity and general views on excellence funding) with no substantive analysis, evidence release or policy decision; it does not establish anything useful as historical R&I evidence beyond one passing statistic.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "updated_at": "2026-09-17T11:56:13Z",
+      "deep_scan_package_id": "worker-a-20260917T111401Z-9c77ac8c844d",
+      "verification_note": "Complete official page read. It is a short Q&A interview with the FWF President about the 2018 Austrian EU Council Presidency, the BE OPEN festival, talent attraction and basic-research funding principles. Scanner date 2018-01-01 is a placeholder; page is dated 7 July 2018.",
+      "duplicate_of": ""
+    },
+    "link:https://doi.org/10.1016/j.bushor.2026.09.004": {
+      "decision": "needs_manual_verification",
+      "target_strand": "",
+      "reason_code": "NEEDS_MANUAL_VERIFICATION",
+      "reason": "Identity is credible, but substantive evidence remained inaccessible after three validated Deep Scan recovery passes; excluded from active reasoning until hands-on verification supplies materially new access.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-17T11:56:13Z",
+      "deep_scan_package_id": "worker-a-20260917T111401Z-9c77ac8c844d",
+      "verification_note": "Identity confirmed via Crossref DOI record (exact title, author, journal, 2026-09). The article is licensed CC BY but no text could be retrieved: ScienceDirect blocks automated access and no repository copy was found. No substantive content read.",
+      "recovery_attempts": 3
+    },
+    "historical:id:5f02392522b6f284": {
+      "decision": "needs_manual_verification",
+      "target_strand": "",
+      "reason_code": "NEEDS_MANUAL_VERIFICATION",
+      "reason": "Identity is credible, but substantive evidence remained inaccessible after three validated Deep Scan recovery passes; excluded from active reasoning until hands-on verification supplies materially new access.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "updated_at": "2026-09-17T11:56:13Z",
+      "deep_scan_package_id": "worker-a-20260917T111401Z-9c77ac8c844d",
+      "verification_note": "Identity verified via Crossref: Nature news feature 'US brain drain: the scientists seeking jobs abroad amid Trump's assault on research' (13 May 2025). Body is paywalled; only standfirst and one sentence accessible, insufficient to test the scanner claim about a European talent opportunity.",
+      "recovery_attempts": 3
     }
   }
 }

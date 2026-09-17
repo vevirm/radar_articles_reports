@@ -6,30 +6,30 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1339** (Main **644** + Historical **695**)
-- Automatic queue still needing V2 verification: **48** (Main **1** + Historical **47**)
-- Currently assigned to workers: **48** (Main **1** + Historical **47**)
+- Authoritative V2 verified: **1342** (Main **644** + Historical **698**)
+- Automatic queue still needing V2 verification: **43** (Main **0** + Historical **43**)
+- Currently assigned to workers: **43** (Main **0** + Historical **43**)
 - Bounded access-recovery retries still eligible: **0**
-- Hands-on verification needed: **55**
+- Hands-on verification needed: **57**
 - Automatic queue pending and not yet assigned: **0**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260917T111401Z-9c77ac8c844d`
-- Assigned unresolved records: **36**
-  1. `historical:id:aadde2c8ca8c0e11` — Shaping Innovation: A Regional Perspective on Industrial PhD Programs in Italy
-  2. `historical:id:3391d6827787322e` — Open radar groups: The integration of online communities into open foresight processes
-  3. `historical:id:1697203114c385cf` — Being open to science and society
-  4. `historical:id:216cf259e760105a` — Methods for Practising Ethics in Research and Innovation: A Literature Review, Critical Analysis and Recommendations
-  5. `link:https://doi.org/10.1016/j.bushor.2026.09.004` — From digital sovereignty to geographic intelligence: Mapping the hidden geography of digital value and control with the SCALE Framework — recovery attempt 3/3
-  6. `historical:id:5f02392522b6f284` — US research-policy instability created an observable opportunity for Europe to attract mobile scientific talent. — recovery attempt 3/3
-  7. `historical:id:1b548cd98970b985` — ERC participants at the 2019 Research Innovation days
-  8. `historical:id:3cecfeb44fddb1f7` — Controlling internet content in the EU: towards digital sovereignty — recovery attempt 3/3
-  - … plus 28 more in the package manifest
+- Current package: `worker-a-20260917T115849Z-c2247c760f8c`
+- Assigned unresolved records: **31**
+  1. `historical:id:1b548cd98970b985` — ERC participants at the 2019 Research Innovation days
+  2. `historical:id:3cecfeb44fddb1f7` — Controlling internet content in the EU: towards digital sovereignty — recovery attempt 3/3
+  3. `historical:id:b3c33b824538e7fe` — Cybersecurity Trends in the European Union: Regulatory Mercantilism and the Digitalisation of Geopolitics — recovery attempt 3/3
+  4. `historical:id:2a60f5849e5048b4` — Scientific collaborations between Latin America and Europe: an approach from science diplomacy towards international engagement — recovery attempt 3/3
+  5. `historical:id:3d100e8cee15e522` — Moving on to not fall behind? Technological sovereignty and the ‘geo-dirigiste’ turn in EU industrial policy — recovery attempt 3/3
+  6. `historical:id:bec6dbaab7568898` — Identifying interdisciplinary research in research projects — recovery attempt 3/3
+  7. `historical:id:e077e1381d2d93fd` — The Spectrum of Strategic Autonomy in EU Defence Supply Chains — recovery attempt 3/3
+  8. `historical:id:940d02bed62a022e` — Europe’s Economic Security and China: Where to Draw the Line — recovery attempt 3/3
+  - … plus 23 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260917T111410Z-93d5ce97efeb`
+- Current package: `worker-b-20260917T115900Z-93d5ce97efeb`
 - Assigned unresolved records: **12**
   1. `historical:id:ea172fb497c5e020` — From strategic autonomy to strategic partnership: <scp>EU</scp>–India relations in health diplomacy — recovery attempt 3/3
   2. `historical:id:6212b03e377b75be` — The paradox of semiconductors—EU governance between sovereignty and interdependence — recovery attempt 3/3
@@ -100,3 +100,5 @@ These works no longer consume automatic Deep Scan slots. Their identity is belie
 - `link:https://doi.org/10.1016/j.engfor.2026.09.002` — **Can EU-27 achieve the decarbonization target in the energy sector? A scenario analysis based on extended STIRPAT model** — attempts: 3/3 — Energy Foresight — 2026-09-01 — Open-access article identity confirmed, but publisher blocks retrieval and no other copy exists; cannot verify content or R&I relevance. — https://doi.org/10.1016/j.engfor.2026.09.002
 - `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxOR3p4SXpZMVhsZk0yN3V0TDZXT3pnV1VaWkNrc2hOYXpaT3RDaGZzVUhZclRKMHVDbHNIMG5vQjFmY21GQk5lcDFhWlcxaHZZekVqQkk4Z28yU2FkeGNYbVB4eUFIZkwzQTFEMnZiOFdrdGdnWFZTNkxFeUNaWklSbVRTbHE?oc=5` — **Data centres drive Ireland to reopen nuclear power debate** — attempts: 3/3 — Financial Times — 2026-08-22T07:00Z — FT article identity confirmed via headline search, but primary text is paywalled; secondary reposts cannot substitute. — https://news.google.com/rss/articles/CBMihAFBVV95cUxOR3p4SXpZMVhsZk0yN3V0TDZXT3pnV1VaWkNrc2hOYXpaT3RDaGZzVUhZclRKMHVDbHNIMG5vQjFmY21GQk5lcDFhWlcxaHZZekVqQkk4Z28yU2FkeGNYbVB4eUFIZkwzQTFEMnZiOFdrdGdnWFZTNkxFeUNaWklSbVRTbHE?oc=5
 - `link:https://doi.org/10.1080/09662839.2026.2700193` — **Disruptive technology and the high-risk/high-gain logic: societal impacts of European rearmament** — attempts: 3/3 — European Security — 2026-07-03 — Open-access article identity confirmed but publisher blocks retrieval and no repository copy exists. — https://doi.org/10.1080/09662839.2026.2700193
+- `historical:id:5f02392522b6f284` — **US research-policy instability created an observable opportunity for Europe to attract mobile scientific talent.** — attempts: 3/3 — Nature — 2025-05-13 — Paywalled news feature; accessible text is a one-line standfirst, insufficient for KEEP/REVIEW/DROP. — https://www.nature.com/articles/d41586-025-01489-y
+- `link:https://doi.org/10.1016/j.bushor.2026.09.004` — **From digital sovereignty to geographic intelligence: Mapping the hidden geography of digital value and control with the SCALE Framework** — attempts: 3/3 — Business Horizons — 2026-09-01 — Work exists (Crossref DOI 10.1016/j.bushor.2026.09.004) but no substantive text was accessible after all six steps, so European relevance of the SCALE Framework cannot be judged. — https://doi.org/10.1016/j.bushor.2026.09.004

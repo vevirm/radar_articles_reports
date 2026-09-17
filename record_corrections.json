@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-09-17T11:03:36Z",
+  "updated_at": "2026-09-17T11:56:13Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -9375,6 +9375,43 @@
       ],
       "updated_at": "2026-09-17T11:03:36Z",
       "deep_scan_package_id": "worker-b-20260917T090704Z-c1088ee0206d"
+    },
+    "historical:id:aadde2c8ca8c0e11": {
+      "fields": {
+        "source": "20th International Conference on Scientometrics & Informetrics (ISSI 2025) proceedings",
+        "authors": "Tindaro Cicero; Annalisa Di Benedetto",
+        "type": "conference paper"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Crossref and the resolved PDF show this is an ISSI 2025 proceedings paper by two authors, not a Scientometrics journal article.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://issi2025.iiap.sci.am/wp-content/uploads/2025/07/75.-cicero_fp_issi_2025_with_revisions_164.pdf"
+      ],
+      "updated_at": "2026-09-17T11:56:12Z",
+      "deep_scan_package_id": "worker-a-20260917T111401Z-9c77ac8c844d"
+    },
+    "historical:id:1697203114c385cf": {
+      "fields": {
+        "date": "2018-07-07",
+        "type": "interview"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The official ERC page is dated 7 July 2018 and is an interview, not a report.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://erc.europa.eu/news-events/magazine/being-open-science-and-society"
+      ],
+      "updated_at": "2026-09-17T11:56:13Z",
+      "deep_scan_package_id": "worker-a-20260917T111401Z-9c77ac8c844d"
     }
   }
 }
