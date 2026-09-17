@@ -105,3 +105,39 @@ def test_duplicate_claim_id_is_rejected():
     doc["claims"].append(duplicate)
     problems = validate_document(doc, load_vocabulary(VOCAB))
     assert any("duplicate claim_id" in p for p in problems)
+
+def test_partial_month_status_date_is_preserved_without_inventing_a_day():
+    claim = copy.deepcopy(fixture_doc()["claims"][0])
+    claim["status_date"] = "2025-03"
+    claim["status_date_precision"] = "month"
+    assert validate_claim(claim, load_vocabulary(VOCAB)) == []
+
+
+def test_partial_year_status_date_is_preserved_without_inventing_month_or_day():
+    claim = copy.deepcopy(fixture_doc()["claims"][0])
+    claim["status_date"] = "2013"
+    claim["status_date_precision"] = "year"
+    assert validate_claim(claim, load_vocabulary(VOCAB)) == []
+
+
+def test_partial_status_date_requires_matching_precision_marker():
+    claim = copy.deepcopy(fixture_doc()["claims"][0])
+    claim["status_date"] = "2025-03"
+    problems = validate_claim(claim, load_vocabulary(VOCAB))
+    assert any("status_date_precision='month'" in p for p in problems)
+
+
+def test_invalid_partial_date_is_rejected():
+    claim = copy.deepcopy(fixture_doc()["claims"][0])
+    claim["status_date"] = "2025-13"
+    claim["status_date_precision"] = "month"
+    problems = validate_claim(claim, load_vocabulary(VOCAB))
+    assert any("status_date must be YYYY" in p for p in problems)
+
+
+def test_deadline_stays_day_precision():
+    claim = copy.deepcopy(fixture_doc()["claims"][0])
+    claim["deadline"] = "2026-11"
+    problems = validate_claim(claim, load_vocabulary(VOCAB))
+    assert any("deadline must be null/absent or YYYY-MM-DD" in p for p in problems)
+

@@ -116,7 +116,7 @@ def test_real_job_selection_never_revives_dropped_or_stale_current_records():
 
 def test_prepare_makes_self_contained_offline_zip(tmp_path):
     out = tmp_path / "out"
-    summary = prepare(out, batch_size=2, max_records=2)
+    summary = prepare(out, batch_size=2, max_records=2, include_existing=True)
     assert summary["format"] == PACKAGE_FORMAT
     assert summary["packaged_records"] == 2
     zips = list(out.glob("*.zip"))
@@ -132,6 +132,7 @@ def test_prepare_makes_self_contained_offline_zip(tmp_path):
         assert all("record_metadata" in j for j in jobs["jobs"])
         assert all(j["record_metadata"].get("date") for j in jobs["jobs"])
         assert "status_date" in instructions and "record_metadata.date" in instructions
+        assert "status_date_precision" in instructions and "Never invent a missing day or month" in instructions
         assert "world_reasoning" in instructions
 
 

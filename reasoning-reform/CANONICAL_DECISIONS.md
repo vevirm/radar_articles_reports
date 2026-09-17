@@ -108,3 +108,15 @@ The small Appendix-B/example vocabulary is not broad enough to encode the live D
 ## C-12 Self-contained backfill dates
 
 A claim package must carry `record_metadata` from the repository record, including at least title, source, authors, date, type and link. `status_date` may use a more precise date stated in stored Deep Scan text; otherwise it uses `record_metadata.date` as the documented-by date. An extractor must not browse or invent a missing date.
+
+## C-13 Partial source dates
+
+Preserve the precision actually present in repository evidence. `status_date` may be
+`YYYY-MM-DD`, `YYYY-MM`, or `YYYY`. Month/year claims must carry
+`status_date_precision = "month" | "year"`; exact dates may omit the precision field
+or set it to `day`. Never impute the first/last day of a month or year.
+
+A partial date is valid for storage, corroboration and non-temporal reasoning, but it
+must not satisfy a rule that requires exact day ordering or an exact scheduled trigger.
+Those rules require day precision (or, in a future explicit interval comparison,
+non-overlapping date bounds). `deadline` remains day-precision only.

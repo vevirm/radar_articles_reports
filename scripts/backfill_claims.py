@@ -79,7 +79,7 @@ For each job in `claims_jobs.json`:
    qualification when the qualification does not apply to that sentence.
 7. `text` is one factual sentence. Preserve proposal/negotiation/operating status;
    do not turn intentions into outcomes or diagnoses into effects.
-8. `status_date` must be supported by the package. Use a more precise event/status date when the stored text states one; otherwise use `record_metadata.date` as the documented-by date. Never invent a date.
+8. `status_date` must be supported by the package. Use a more precise event/status date when the stored text states one; otherwise preserve `record_metadata.date` as the documented-by date. `status_date` may therefore be YYYY-MM-DD, YYYY-MM, or YYYY. For month/year precision add `status_date_precision: "month"` or `"year"`. Never invent a missing day or month.
 9. Strand B is the methods library (R-09). Its claims may be stored, but use a `methods.*` object when appropriate and set `attributes.world_reasoning` to false so methods cannot enter world-state reasoning.
 10. Historical jobs keep `era: historical`; current jobs keep `era: current`.
 11. Do not alter the top-level format or package_id.

@@ -47,15 +47,31 @@ def load_vocabulary(path: Path = DEFAULT_VOCAB) -> dict[str, Any]:
     return raw
 
 
-def _iso_date(value: Any) -> bool:
+def date_precision(value: Any) -> str | None:
+    """Return the supported source-date precision without inventing missing parts."""
     text = clean(value)
     if not text:
-        return False
-    try:
-        dt.date.fromisoformat(text)
-    except ValueError:
-        return False
-    return bool(re.fullmatch(r"\d{4}-\d{2}-\d{2}", text))
+        return None
+    if re.fullmatch(r"\d{4}", text):
+        year = int(text)
+        return "year" if 1 <= year <= 9999 else None
+    if re.fullmatch(r"\d{4}-\d{2}", text):
+        try:
+            dt.date.fromisoformat(text + "-01")
+        except ValueError:
+            return None
+        return "month"
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", text):
+        try:
+            dt.date.fromisoformat(text)
+        except ValueError:
+            return None
+        return "day"
+    return None
+
+
+def exact_iso_date(value: Any) -> bool:
+    return date_precision(value) == "day"
 
 
 def _valid_record_key(key: str) -> bool:
@@ -147,9 +163,16 @@ def validate_claim(claim: Any, vocabulary: dict[str, Any] | None = None) -> list
         if value not in set(v[vocabulary_key]):
             problems.append(f"unknown {field}: {value!r}")
 
-    if not _iso_date(claim.get("status_date")):
-        problems.append("status_date must be YYYY-MM-DD")
-    if claim.get("deadline") not in (None, "") and not _iso_date(claim.get("deadline")):
+    precision = date_precision(claim.get("status_date"))
+    declared_precision = clean(claim.get("status_date_precision"))
+    if precision is None:
+        problems.append("status_date must be YYYY, YYYY-MM, or YYYY-MM-DD")
+    elif precision in {"year", "month"}:
+        if declared_precision != precision:
+            problems.append(f"partial status_date requires status_date_precision={precision!r}")
+    elif declared_precision not in {"", "day"}:
+        problems.append("day-precision status_date may omit status_date_precision or set it to 'day'")
+    if claim.get("deadline") not in (None, "") and not exact_iso_date(claim.get("deadline")):
         problems.append("deadline must be null/absent or YYYY-MM-DD")
 
     scope = claim.get("scope")
