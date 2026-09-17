@@ -8,15 +8,15 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 
 - Authoritative V2 verified: **1213** (Main **638** + Historical **575**)
 - Automatic queue still needing V2 verification: **169** (Main **7** + Historical **162**)
-- Currently assigned to workers: **119** (Main **7** + Historical **112**)
+- Currently assigned to workers: **120** (Main **7** + Historical **113**)
 - Bounded access-recovery retries still eligible: **40**
 - Hands-on verification needed: **55**
-- Automatic queue pending and not yet assigned: **50**
+- Automatic queue pending and not yet assigned: **49**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260917T062916Z-e78722385774`
+- Current package: `worker-a-20260917T063129Z-e78722385774`
 - Assigned unresolved records: **60**
   1. `link:https://doi.org/10.1080/07036337.2026.2714069` — Between digital sovereignty and trusted connectivity: tensions in EU external digital governance — recovery attempt 3/3
   2. `historical:id:4e7f1f8a9e28de83` — The influence of proximity dimensions on international research collaboration: an analysis of European water projects
@@ -29,8 +29,8 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 52 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260917T062930Z-bc6552bc1b90`
-- Assigned unresolved records: **59**
+- Current package: `worker-b-20260917T063146Z-cd63404e9a62`
+- Assigned unresolved records: **60**
   1. `historical:id:710d045096ea6f29` — Foresight by online communities – The case of renewable energies
   2. `historical:id:08cbe07f3dbd4a87` — Recent Personnel Reforms of Public Universities in China and in Italy: A Comparison
   3. `historical:id:248f49edb3becb08` — The Evolving Role of the EU in Space-Related Security and Defence Research
@@ -39,7 +39,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:67726cf80fe23fc9` — Sweden AI Strategy Report
   7. `historical:id:0987b35b178e5609` — Policy on Open Science
   8. `historical:id:f1fbca5e768b38d8` — Policy Entrepreneurship and Agenda Setting: Comparing and Contrasting the Origins of the European Research Programmes for Security and Defense
-  - … plus 51 more in the package manifest
+  - … plus 52 more in the package manifest
 
 ## Hands-on verification needed
 
