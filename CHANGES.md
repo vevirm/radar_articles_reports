@@ -1,3 +1,14 @@
+# More disruption types and creative shock wording
+
+- 8 new shock disruption families: sudden funding cuts, talent flight, political shifts, abrupt rule changes, rival technology leaps, foreign information campaigns, supply chokepoints, climate/health emergencies.
+- Shock page: max 2 per disruption type (one-step relaxation only if slots would be empty); each type has several vivid phrasings, no phrasing repeats on the page, and carried-forward cards get refreshed wording.
+
+# Updating and variety
+
+- Stable when nothing changes (fixed tie-breaker; incumbents ranked, not display-ordered); a reserve finding swaps onto the page only when updated evidence lifts it 4+ maturity points above the weakest shown finding in its wow level.
+- Shock page variety: max 3 per disruption type, max 2 per asset; other pages max 2 per topic. Each shock card explains its own disruption and names the reporting source.
+- Creative reserve is also varied (one above page caps) and, for shocks, every disruption type keeps at least one hypothesis in reserve so it can mature.
+
 # Creative reserve and future-oriented generation rules
 
 - Every product page fills 15 slots (3 per wow 1-5); a thin wow level borrows from the nearest level. Pages now keep the published order instead of re-bucketing (the shock page was dropping ~6 items).

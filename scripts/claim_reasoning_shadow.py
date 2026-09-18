@@ -1108,6 +1108,21 @@ def _shock_driver_basis(dep_obj: str, support_nodes: Iterable[dict[str, Any]], v
 # bypass evidence authority.  They are a compact foresight grammar used to cross an
 # evidenced European asset with an evidenced disruption mechanism so the reasoning
 # corpus can contain hypotheses before every causal link has already happened.
+
+# Additional disruption families for R&I geopolitics (added with the creative
+# reserve).  Each is an abrupt, externally driven change that can knock out a
+# European research capability, not a slow trend.
+_EXTRA_PRESSURE_REGEX: dict[str, str] = {
+    "funding_cut": r"\b(?:budget cuts?|funding cuts?|cut (?:the )?(?:budget|funding)|funding (?:gap|freeze|squeeze|shortfall)|frozen funding|freez\w* (?:grants?|funding)|spending cuts?|austerity|against higher (?:total )?(?:eu )?spending|unfinanced|success rate fell)\b",
+    "talent_flight": r"\b(?:brain drain|talent (?:flight|loss|drain)|researchers? (?:leave|leaving|exodus|emigrat)\w*|visa (?:restriction|ban|rules?)|travel ban|poach\w*|mobility barriers?|refused admissions?)\b",
+    "political_shift": r"\b(?:election|populis\w*|nationalis\w*|government change|academic freedom|rule of law|exclusion from horizon|horizon exclusion|excluded from horizon|political (?:interference|pressure|shift))\b",
+    "regulatory_shift": r"\b(?:court (?:ruling|referral|decision)|cjeu|new (?:regulation|law|act)|proposed the eu [a-z ]+ act|ai act|kids act|gdpr|repeal and replace|regulatory (?:change|shock|burden)|compliance burden)\b",
+    "tech_leap": r"\b(?:agi|capability shocks?|frontier (?:ai|model)s?|breakthrough|quantum advantage|leapfrog\w*|technological (?:lead|leap|dominance)|closing (?:hardware )?gaps|chinese dominance|rapid[- ]capability)\b",
+    "info_manipulation": r"\b(?:disinformation|information manipulation|foreign (?:information )?interference|influence operations?|propaganda)\b",
+    "chokepoint": r"\b(?:chokepoints?|bottlenecks?|single (?:point of failure|supplier|source)|dependen\w* on (?:us|u\.s\.|american|chinese|foreign) (?:cloud|providers?|suppliers?|technology)|lock[- ]in)\b",
+    "hazard": r"\b(?:extreme weather|climate (?:risk|hazard|shock)s?|heatwaves?|floods?|wildfires?|drought|pandemic|outbreak)\b",
+}
+
 _SHOCK_PRESSURE_PATTERNS: dict[str, re.Pattern[str]] = {
     "export_control": re.compile(r"\b(?:export controls?|export restrictions?|export ban|dual[- ]use licensing|technology restriction)\b", re.I),
     "critical_input": re.compile(r"\b(?:critical raw material|critical mineral|rare earth|material constraints?|supply shortage|single supplier|import dependence)\b", re.I),
@@ -1121,8 +1136,17 @@ _SHOCK_PRESSURE_PATTERNS: dict[str, re.Pattern[str]] = {
     "commercial": re.compile(r"\b(?:repricing|vendor lock|market withdrawal|service withdrawal|commercial provider|proprietary database|licen[cs]e restriction)\b", re.I),
     "external_finance": re.compile(r"\b(?:hyperscaler debt|gulf capital|external finance|foreign capital)\b", re.I),
 }
+_SHOCK_PRESSURE_PATTERNS.update({k: re.compile(v, re.I) for k, v in _EXTRA_PRESSURE_REGEX.items()})
 
 _SHOCK_PRESSURE_LABELS = {
+    "funding_cut": "a sudden funding cut",
+    "talent_flight": "a sudden loss of researchers",
+    "political_shift": "a political shift",
+    "regulatory_shift": "an abrupt rule change",
+    "tech_leap": "a rival technology leap",
+    "info_manipulation": "a foreign information campaign",
+    "chokepoint": "a supply chokepoint",
+    "hazard": "a climate or health emergency",
     "export_control": "external export controls",
     "critical_input": "a critical-input shortage",
     "security_reclassification": "a sudden security reclassification",
@@ -1202,6 +1226,18 @@ _SHOCK_CLOSE_COMPAT: dict[str, set[str]] = {
     "innovation_ecosystem": {"acquisition", "commercial"},
     "ai_governance": {"data_access", "security_reclassification"},
 }
+
+
+# Wire the additional disruption families into the compatibility maps.
+for _pid, _clusters in {'funding_cut': ['funding_programme', 'research_system', 'research_infrastructure', 'talent', 'health', 'quantum', 'innovation_ecosystem'], 'talent_flight': ['talent', 'research_system', 'research_infrastructure', 'quantum', 'compute_ai', 'health'], 'political_shift': ['funding_programme', 'research_system', 'talent', 'digital_governance', 'ai_governance'], 'regulatory_shift': ['ai_governance', 'digital_governance', 'health', 'compute_ai', 'capital_markets', 'innovation_ecosystem'], 'tech_leap': ['compute_ai', 'chips', 'quantum', 'industrial_competitiveness', 'defence_dual_use', 'ai_governance'], 'info_manipulation': ['digital_governance', 'cybersecurity', 'ai_governance', 'research_system'], 'chokepoint': ['compute_ai', 'chips', 'digital_governance', 'critical_infrastructure', 'industrial_competitiveness', 'materials_energy', 'health'], 'hazard': ['research_infrastructure', 'critical_infrastructure', 'materials_energy', 'health']}.items():
+    for _cl in _clusters:
+        _SHOCK_STRONG_COMPAT.setdefault(_cl, set()).add(_pid)
+for _pid, _clusters in {'funding_cut': ['compute_ai', 'defence_dual_use'], 'talent_flight': ['innovation_ecosystem', 'chips'], 'political_shift': ['research_infrastructure', 'health'], 'regulatory_shift': ['research_system', 'chips'], 'tech_leap': ['innovation_ecosystem', 'research_system'], 'info_manipulation': ['health', 'funding_programme'], 'chokepoint': ['quantum', 'research_infrastructure'], 'hazard': ['compute_ai']}.items():
+    for _cl in _clusters:
+        _SHOCK_WEAK_COMPAT.setdefault(_cl, set()).add(_pid)
+for _pid, _clusters in {'funding_cut': ['funding_programme'], 'talent_flight': ['talent'], 'political_shift': ['funding_programme'], 'regulatory_shift': ['ai_governance', 'digital_governance'], 'tech_leap': ['compute_ai', 'quantum'], 'info_manipulation': ['digital_governance'], 'chokepoint': ['chips', 'compute_ai'], 'hazard': ['research_infrastructure']}.items():
+    for _cl in _clusters:
+        _SHOCK_CLOSE_COMPAT.setdefault(_cl, set()).add(_pid)
 
 
 def _shock_pressure_classes(n: dict[str, Any]) -> set[str]:

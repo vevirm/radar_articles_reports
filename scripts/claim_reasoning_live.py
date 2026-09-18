@@ -507,6 +507,14 @@ _SHOCK_DRIVER_GROUNDING_PATTERNS: dict[str, tuple[re.Pattern[str], ...]] = {
 }
 
 
+try:  # additional disruption families share one definition with the generator
+    from scripts.claim_reasoning_shadow import _EXTRA_PRESSURE_REGEX as _EXTRA_PR
+except ImportError:  # pragma: no cover
+    from claim_reasoning_shadow import _EXTRA_PRESSURE_REGEX as _EXTRA_PR  # type: ignore
+for _pid, _rx in _EXTRA_PR.items():
+    _SHOCK_DRIVER_GROUNDING_PATTERNS.setdefault(_pid, (re.compile(_rx, re.I),))
+
+
 def _shock_driver_is_reader_grounded(pressure_id: Any, source_statement: Any) -> bool:
     """Return whether the visible statement actually evidences the named shock class.
 
@@ -751,6 +759,10 @@ _PRESSURE_DOMAIN_PATTERNS: dict[str, re.Pattern[str]] = {
     "commercial": re.compile(r"\b(?:provider|vendor|service|repricing|market withdrawal|licen[cs]e restriction)\b", re.I),
     "external_finance": re.compile(r"\b(?:external finance|foreign capital|external capital|funding|debt)\b", re.I),
 }
+
+
+for _pid, _rx in _EXTRA_PR.items():
+    _PRESSURE_DOMAIN_PATTERNS.setdefault(_pid, re.compile(_rx, re.I))
 
 
 def _pressure_domain_is_visible(pressure_id: Any, statement: Any) -> bool:
@@ -2269,7 +2281,7 @@ def _presentation_ready(c: dict[str, Any]) -> tuple[bool, str]:
         # the phenomenon spans both eras; a second historical source raises
         # maturity instead of being a hard gate.
         ok = cs >= 2 and hs >= 1 and maturity >= 32
-        return ok, "two_eras_grounded" if ok else "continuity_needs_broader_two_era_support"
+        return ok, ("two_eras_two_sources" if hs >= 2 else "two_eras_grounded") if ok else "continuity_needs_broader_two_era_support"
 
     if product == "shock":
         if grammar == "future_shock_hypothesis" and not bool(c.get("shock_driver_semantic_alignment", True)):
@@ -2314,9 +2326,113 @@ def _presentation_ready(c: dict[str, Any]) -> tuple[bool, str]:
 SHELF_SWAP_MARGIN = 4
 
 # Page variety: one disruption type or one asset must not dominate a shelf.
-SHOCK_MAX_PER_DRIVER = 3
+SHOCK_MAX_PER_DRIVER = 2
 SHOCK_MAX_PER_ASSET = 2
 MAX_PER_TOPIC = 2
+
+_SHOCK_TITLES: dict[str, tuple[str, ...]] = {
+    "cyber": (
+        "What if a cyber incident knocked out {asset}?",
+        "One breach, and {asset} goes dark.",
+        "{Asset} is one ransomware note away from a standstill.",
+    ),
+    "energy": (
+        "{Asset} could stall if Europe's power runs short.",
+        "When the grid is rationed, who switches off {asset} first?",
+        "A winter power squeeze could put {asset} on pause.",
+    ),
+    "export_control": (
+        "Foreign export controls could cut {asset} off from what it needs.",
+        "A licence stamped abroad could decide the future of {asset}.",
+        "One new export list could leave {asset} without its parts.",
+    ),
+    "security_reclassification": (
+        "{Asset} could suddenly be treated as security-sensitive.",
+        "Overnight, {asset} could move from open science to closed doors.",
+        "A new security label could quietly shrink who may work on {asset}.",
+    ),
+    "conflict": (
+        "A wider conflict could pull people and money away from {asset}.",
+        "If fighting spreads, {asset} could be the first budget line to go.",
+        "War elsewhere could redraw the map {asset} depends on.",
+    ),
+    "critical_input": (
+        "A materials shortage could halt {asset}.",
+        "{Asset} runs on inputs Europe does not control.",
+        "No material, no {asset}: a supply squeeze could stop it cold.",
+    ),
+    "sanctions": (
+        "Sanctions could freeze the money and partners behind {asset}.",
+        "A sanctions round aimed elsewhere could land on {asset}.",
+        "Payments blocked, partners gone: sanctions could strand {asset}.",
+    ),
+    "acquisition": (
+        "A foreign takeover could move {asset} out of European control.",
+        "{Asset} could be bought before Europe notices it was for sale.",
+        "One acquisition could carry {asset}'s know-how abroad.",
+    ),
+    "data_access": (
+        "A data-transfer ban could stop {asset} using the data it relies on.",
+        "If the data stops crossing borders, {asset} stops too.",
+    ),
+    "commercial": (
+        "{Asset} could lose a key provider overnight.",
+        "A single price change from a provider could break {asset}.",
+    ),
+    "external_finance": (
+        "{Asset} could lose outside money fast.",
+        "When foreign capital blinks, {asset} could be left short.",
+    ),
+    "funding_cut": (
+        "A sudden funding cut could stall {asset}.",
+        "The next budget fight could leave {asset} unfinished.",
+        "{Asset} could be the quiet casualty of a spending squeeze.",
+    ),
+    "talent_flight": (
+        "{Asset} could lose the people who run it.",
+        "If the best researchers leave, {asset} stays behind as an empty shell.",
+        "A recruitment drive elsewhere could empty the labs behind {asset}.",
+    ),
+    "political_shift": (
+        "A political turn could put {asset} on the chopping block.",
+        "One election could rewrite the rules for {asset}.",
+        "{Asset} could become a political bargaining chip.",
+    ),
+    "regulatory_shift": (
+        "A sudden rule change could force {asset} to stop and redesign.",
+        "One court ruling could send {asset} back to the drawing board.",
+        "{Asset} could wake up non-compliant.",
+    ),
+    "tech_leap": (
+        "A rival's technology leap could make {asset} obsolete before it pays off.",
+        "What if someone else gets there first, and {asset} is suddenly yesterday's plan?",
+        "A breakthrough abroad could turn {asset} into a catch-up project.",
+    ),
+    "info_manipulation": (
+        "A foreign information campaign could turn opinion against {asset}.",
+        "A well-aimed disinformation wave could make {asset} politically toxic.",
+    ),
+    "chokepoint": (
+        "One chokepoint supplier could hold {asset} hostage.",
+        "{Asset} hangs on a single thread someone else holds.",
+        "Pull one supplier, and {asset} unravels.",
+    ),
+    "hazard": (
+        "A climate or health emergency could shut down {asset}.",
+        "One heatwave or outbreak could close the doors on {asset}.",
+    ),
+}
+
+
+def _shock_title(pid: str, lead: str, asset: str) -> str:
+    variants = _SHOCK_TITLES.get(pid)
+    if not variants:
+        return f"{lead} could disrupt {asset}."
+    # Stable per card (same wording every scan), varied across cards.
+    idx = int(hashlib.sha1(f"{pid}|{asset}".encode()).hexdigest(), 16) % len(variants)
+    tpl = variants[idx]
+    return tpl.format(asset=asset, Asset=asset[:1].upper() + asset[1:])
+
 
 _SHOCK_CONSEQUENCE = {
     "cyber": "A cyber incident could take {asset} offline or compromise it, and European teams have little ready backup to switch to.",
@@ -2330,11 +2446,20 @@ _SHOCK_CONSEQUENCE = {
     "data_access": "A cross-border data restriction could stop {asset} from lawfully using the data it needs.",
     "commercial": "If a key provider withdraws or reprices, {asset} could lose a service it cannot quickly replace.",
     "external_finance": "If outside money pulls back quickly, {asset} could lose the capital it has been counting on.",
+    "funding_cut": "A budget cut or freeze could stop {asset} mid-course, with teams and equipment left stranded.",
+    "talent_flight": "If key researchers leave or cannot come, {asset} could lose the expertise it cannot hire back quickly.",
+    "political_shift": "A change of government or political climate could withdraw support from {asset} or restrict who can take part.",
+    "regulatory_shift": "An abrupt new rule or court ruling could force {asset} to pause, redesign or seek fresh approval.",
+    "tech_leap": "If a rival leaps ahead, the case for {asset} could collapse and funding could move elsewhere.",
+    "info_manipulation": "A coordinated information campaign could erode public or political trust in {asset}.",
+    "chokepoint": "If a single foreign supplier or platform restricts access, {asset} could stall with no ready alternative.",
+    "hazard": "An extreme-weather event or public-health emergency could close facilities and halt work on {asset}.",
 }
 
 
 def _shock_consequence(raw: dict[str, Any], out: dict[str, Any]) -> str:
-    pid = clean(raw.get("pressure_id"))
+    eps = [clean(x) for x in (raw.get("endpoint_objects") or []) if clean(x)]
+    pid = clean(raw.get("pressure_id")) or next((x.split(".", 1)[1] for x in eps if x.startswith("shock_pressure.")), "")
     asset = _friendly_object_label(raw.get("capability_object") or (raw.get("endpoint_objects") or [""])[0])
     base = _SHOCK_CONSEQUENCE.get(pid, "The disruption could remove something {asset} depends on before Europe can replace it.").format(asset=asset)
     base = base[0].upper() + base[1:]
@@ -2430,12 +2555,15 @@ def _creative_score(c: dict[str, Any], traits: dict[str, bool]) -> float:
     )
 
 
-def _selection_rank(c: dict[str, Any]) -> tuple[int, int, int, int]:
+def _selection_rank(c: dict[str, Any]) -> tuple[int, int, int, int, str]:
+    # The final id component is a fixed tie-breaker: equal findings must not swap
+    # places between scans when no evidence changed.
     return (
         int(c.get("maturity_score", 0) or 0),
         int(c.get("score", 0) or 0),
         int(c.get("primary_sources", 0) or 0),
         int(c.get("primary_records", 0) or 0),
+        clean(c.get("id")),
     )
 
 
@@ -2475,6 +2603,15 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
             c["reader_eligible"] = False
             c["publication_gate_passes"] = False
             c.pop("page_slot_wow", None)
+            if clean(c.get("grammar_id")) == "future_shock_hypothesis":
+                # Carried-forward shocks keep stored copy; refresh the wording so
+                # every card uses its disruption-specific title and explanation.
+                eps0 = [clean(x) for x in (c.get("endpoint_objects") or []) if clean(x)]
+                pid0 = clean(c.get("pressure_id")) or next((x.split(".", 1)[1] for x in eps0 if x.startswith("shock_pressure.")), "")
+                asset0 = _friendly_object_label(c.get("capability_object") or next((x for x in eps0 if not x.startswith("shock_pressure.")), ""))
+                if pid0 in _SHOCK_TITLES and asset0:
+                    c["reader_title"] = _shock_title(pid0, "", asset0)
+                    c["reader_consequence"] = _shock_consequence({"pressure_id": pid0, "capability_object": c.get("capability_object") or next((x for x in eps0 if not x.startswith("shock_pressure.")), "")}, c)
             if c.get("creative_reserve") or clean(c.get("stock_tier")) == "creative_reserve":
                 # Creative reserve is re-decided every scan; never inherit it as
                 # grounded reserve.
@@ -2530,7 +2667,12 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
             # incumbent keeps its slot unless a challenger's recomputed maturity
             # beats it by SHELF_SWAP_MARGIN points.  This does not alter the three-slot
             # capacity and never lets another wow bucket steal the slot.
-            incumbents = [c for cid in previous_ids for c in bucket if clean(c.get("id")) == cid]
+            # Rank order, not last scan's display order: otherwise equal incumbents
+            # flip between their own slots and borrowed slots every scan.
+            incumbents = sorted(
+                [c for c in bucket if clean(c.get("id")) in previous_set],
+                key=_selection_rank, reverse=True,
+            )
             selected: list[dict[str, Any]] = []
             selected_ids: set[str] = set()
             for c in incumbents:
@@ -2596,6 +2738,9 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
                 if not donors:
                     break
                 fitting = next((x for w in donors for x in spare[w] if fits(x)), None)
+                if fitting is None:
+                    # Relax one step (cap + 1) before giving up on variety entirely.
+                    fitting = next((x for w in donors for x in spare[w] if all(diversity_used[(k, v)] < cap + 1 for k, v, cap in _diversity_keys(x))), None)
                 if fitting is not None:
                     spare[int(fitting.get("wow", 0) or 0)].remove(fitting)
                     c = fitting
@@ -2611,6 +2756,23 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
                 if round_idx < len(by_wow[wow]):
                     chosen.append(by_wow[wow][round_idx])
 
+        if product == "shock":
+            # No two shock cards on the page share a phrasing: a card whose
+            # preferred wording is taken moves to the next unused variant.
+            used_titles: set[str] = set()
+            for c in chosen:
+                eps0 = [clean(x) for x in (c.get("endpoint_objects") or []) if clean(x)]
+                pid0 = clean(c.get("pressure_id")) or next((x.split(".", 1)[1] for x in eps0 if x.startswith("shock_pressure.")), "")
+                asset0 = _friendly_object_label(c.get("capability_object") or next((x for x in eps0 if not x.startswith("shock_pressure.")), ""))
+                variants = _SHOCK_TITLES.get(pid0)
+                if variants and asset0:
+                    start = int(hashlib.sha1(f"{pid0}|{asset0}".encode()).hexdigest(), 16) % len(variants)
+                    for k in range(len(variants)):
+                        tpl = variants[(start + k) % len(variants)]
+                        if tpl not in used_titles:
+                            used_titles.add(tpl)
+                            c["reader_title"] = tpl.format(asset=asset0, Asset=asset0[:1].upper() + asset0[1:])
+                            break
         out[product] = [clean(c.get("id")) for c in chosen if clean(c.get("id"))]
         chosen_ids = set(out[product])
         ready_ids = {clean(c.get("id")) for c in ready}
@@ -2680,17 +2842,44 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
             creative_pool[w].sort(key=lambda t: t[0], reverse=True)
         creative: list[dict[str, Any]] = []
         used_stories: set[tuple[str, str]] = {_story_key(c) for c in chosen}
+        creative_used: Counter = Counter()
+        # Coverage pass (shocks): every disruption type absent from the page and
+        # grounded reserve keeps its best uncontradicted hypothesis in reserve, so
+        # no type of possible shock is starved of a path to mature.
+        if product == "shock":
+            present = {v for c in chosen + grounded_reserve for k, v, _ in _diversity_keys(c) if k == "driver"}
+            best_by_driver: dict[str, tuple[float, int, dict[str, Any]]] = {}
+            for w, items in creative_pool.items():
+                for score, c in items:
+                    drv = next((v for k, v, _ in _diversity_keys(c) if k == "driver"), "")
+                    if drv and drv not in present and (drv not in best_by_driver or score > best_by_driver[drv][0]):
+                        best_by_driver[drv] = (score, w, c)
+            for drv, (score, w, c) in sorted(best_by_driver.items(), key=lambda kv: kv[1][0], reverse=True):
+                if len(creative) >= creative_quota:
+                    break
+                creative_pool[w] = [t for t in creative_pool[w] if t[1] is not c]
+                used_stories.add(_story_key(c))
+                for k, v, cap in _diversity_keys(c):
+                    creative_used[(k, v)] += 1
+                creative.append(c)
         while len(creative) < creative_quota and any(creative_pool.values()):
             progressed = False
             for w in CREATIVE_WOW_ORDER:
                 if len(creative) >= creative_quota:
                     break
-                while creative_pool[w]:
-                    _score, c = creative_pool[w].pop(0)
+                for idx, (_score, c) in enumerate(creative_pool[w]):
                     key = _story_key(c)
                     if key in used_stories:
                         continue
+                    # Variety in the creative reserve too, so every disruption type
+                    # / topic keeps a path to mature (caps are one above page caps).
+                    dkeys = [(k, v, cap + 1) for k, v, cap in _diversity_keys(c)]
+                    if any(creative_used[(k, v)] >= cap for k, v, cap in dkeys):
+                        continue
+                    creative_pool[w].pop(idx)
                     used_stories.add(key)
+                    for k, v, _cap in dkeys:
+                        creative_used[(k, v)] += 1
                     creative.append(c)
                     progressed = True
                     break
@@ -2805,6 +2994,10 @@ def _friendly_object_label(value: Any) -> str:
         "ai.adoption": "AI adoption",
         "defence.drone_capability": "European drone capability",
         "defence.innovation_funding": "defence-innovation funding",
+        "ai.public_sector_capacity": "public-sector AI capacity",
+        "critical_infrastructure.resilience": "critical-infrastructure resilience",
+        "quantum.pilot_line": "the quantum pilot line",
+        "research.system_capacity": "research-system capacity",
     }
     if obj in aliases:
         return aliases[obj]
@@ -2864,7 +3057,8 @@ def _reader_copy(grammar: str, product: str, raw: dict[str, Any], candidate: dic
             summary = f"Sources separately establish the European capability, the external disruption mechanism and a direct link between them. The future disruption itself remains the Radar's scenario, not a claim made by any one source."
         else:
             summary = f"Sources separately establish the European capability and the external disruption mechanism. The claim that the disruption could reach {asset} is the Radar's future hypothesis, not a statement made by either source."
-        return f"{lead} could disrupt {asset}.", summary
+        pid = clean(raw.get("pressure_id")) or next((x.split(".", 1)[1] for x in eps if x.startswith("shock_pressure.")), "")
+        return _shock_title(pid, lead, asset), summary
     if grammar == "dependency_pathway":
         checks = candidate.get("role_semantic_checks") if isinstance(candidate.get("role_semantic_checks"), dict) else {}
         route_visible = bool(checks.get("propagation_visible"))

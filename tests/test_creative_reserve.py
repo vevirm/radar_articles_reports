@@ -90,5 +90,59 @@ class CreativeReserveEndToEndTests(unittest.TestCase):
             self.assertGreaterEqual(sum(1 for v in by_wow.values() if v > 0), 3, p)
 
 
+    def test_shock_page_is_diverse(self):
+        from collections import Counter
+        m = {c["id"]: c for c in self.state["candidates"]}
+        page = [m[i] for i in self.state["publications"]["shock"]]
+        for kind, cap in (("driver", crl.SHOCK_MAX_PER_DRIVER), ("asset", crl.SHOCK_MAX_PER_ASSET)):
+            counts = Counter(v for c in page for k, v, _ in crl._diversity_keys(c) if k == kind)
+            self.assertLessEqual(max(counts.values()), cap + 1, kind)  # one-step relaxation only
+
+    def test_every_disruption_type_has_a_path_to_mature(self):
+        stock = {c.get("pressure_id") or v.split(".")[-1]
+                 for c in self.state["candidates"] if c.get("product") == "shock" and c.get("status") not in {"killed", "dormant"}
+                 for k, v, _ in crl._diversity_keys(c) if k == "driver"}
+        held = {v.split(".")[-1]
+                for c in self.state["candidates"] if c.get("product") == "shock" and c.get("stock_tier") in {"page", "reserve", "creative_reserve"}
+                for k, v, _ in crl._diversity_keys(c) if k == "driver"}
+        self.assertEqual(stock - held, set())
+
+    def test_stable_when_nothing_changes(self):
+        raw = json.loads((ROOT / "radar.json").read_text(encoding="utf-8"))
+        raw["high_order_inference"] = copy.deepcopy(self.state)
+        crl._LIVE_DETECTION_CACHE.clear()
+        again = crl.refresh_claim_high_order(raw, copy.deepcopy(self.state), root=ROOT)
+        for p in PRODUCTS:
+            self.assertEqual(again["publications"][p], self.state["publications"][p], p)
+
+    def test_stronger_evidence_swaps_in_small_gain_does_not(self):
+        cands = self.state["candidates"]
+        m = {c["id"]: c for c in cands}
+        for p in ("risk", "opportunity"):
+            page = [m[i] for i in self.state["publications"][p]]
+            used = {(k, v) for c in page for k, v, _ in crl._diversity_keys(c)}
+            for w in (1, 2, 3, 4, 5):
+                natives = [c for c in page if c.get("wow") == w and not c.get("page_slot_wow")]
+                if len(natives) < 3:
+                    continue
+                weak = min(natives, key=crl._selection_rank)
+                if weak["maturity_score"] > 85:
+                    continue
+                pool = [c for c in cands if c.get("product") == p and c.get("wow") == w and c.get("stock_tier") == "reserve"
+                        and c.get("presentation_ready") and not ({(k, v) for k, v, _ in crl._diversity_keys(c)} & used)]
+                if not pool:
+                    continue
+                ch = max(pool, key=crl._selection_rank)
+                results = []
+                for gain in (1, crl.SHELF_SWAP_MARGIN + 3):
+                    cs = copy.deepcopy(cands); mc = {c["id"]: c for c in cs}
+                    mc[ch["id"]]["score"] = int(mc[ch["id"]].get("score", 0)) + int((weak["maturity_score"] + gain - ch["maturity_score"]) / 0.58) + 2
+                    pubs, _ = crl._select_stage7(cs, copy.deepcopy(self.state))
+                    results.append(ch["id"] in pubs[p])
+                self.assertEqual(results, [False, True], p)
+                return
+        self.skipTest("no clean swap case in this snapshot")
+
+
 if __name__ == "__main__":
     unittest.main()

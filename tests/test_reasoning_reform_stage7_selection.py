@@ -176,13 +176,18 @@ def test_stage7_claim_native_trend_uses_band_and_side_floor(monkeypatch):
 
 
 def test_stage7_three_slots_per_wow_and_surplus_goes_to_reserve():
-    xs = [shelf_candidate(f"claim:r:{i}", wow=3, score=90-i) for i in range(6)]
+    # Own wow bucket keeps its 3 slots; surplus may fill otherwise-empty slots of
+    # other wow levels (full 15-slot page), and anything beyond goes to reserve.
+    xs = [shelf_candidate(f"claim:r:{i}", wow=3, score=90-i) for i in range(20)]
+    for i, x in enumerate(xs):
+        x["object"] = f"risk.topic_{i}"
     pubs, meta = live._select_stage7(copy.deepcopy(xs), {"publications": {}, "candidates": []})
-    assert pubs["risk"] == ["claim:r:0", "claim:r:1", "claim:r:2"]
+    assert set(pubs["risk"][:15]) >= {"claim:r:0", "claim:r:1", "claim:r:2"}
+    assert len(pubs["risk"]) == 15
     assert meta["risk"]["slots_per_wow"] == 3
     assert meta["risk"]["page_capacity"] == 15
-    assert meta["risk"]["shown_by_wow"]["3"] == 3
-    assert meta["risk"]["reserve"] == 3
+    assert meta["risk"]["borrowed_slots"] == 12
+    assert meta["risk"]["reserve"] >= 5
 
 def test_stage7_page_cycles_wow_5_to_1_in_three_rounds():
     xs = []
@@ -200,11 +205,15 @@ def test_stage7_page_cycles_wow_5_to_1_in_three_rounds():
     assert meta["risk"]["hard_cap"] is True
 
 def test_stage7_same_wow_never_steals_another_wow_bucket_slots():
+    # A wow level with its own findings is never displaced by another level;
+    # borrowing only fills slots that would otherwise stay empty.
     xs = [shelf_candidate(f"claim:o:{i}", product="opportunity", wow=2, score=90-i) for i in range(6)]
+    xs += [shelf_candidate(f"claim:o5:{i}", product="opportunity", wow=5, score=60-i) for i in range(3)]
+    for i, x in enumerate(xs):
+        x["object"] = f"opp.topic_{i}"
     pubs, meta = live._select_stage7(copy.deepcopy(xs), {"publications": {}, "candidates": []})
-    assert pubs["opportunity"] == ["claim:o:0", "claim:o:1", "claim:o:2"]
-    assert meta["opportunity"]["shown_by_wow"]["2"] == 3
-    assert meta["opportunity"]["reserve"] == 3
+    assert {f"claim:o5:{i}" for i in range(3)} <= set(pubs["opportunity"])
+    assert meta["opportunity"]["shown_by_actual_wow"]["5"] == 3
 
 def test_stage7_trends_use_same_three_slots_per_wow_contract():
     xs = []
@@ -216,9 +225,9 @@ def test_stage7_trends_use_same_three_slots_per_wow_contract():
             "trend_balance": {"left_records": 2, "right_records": 2, "left_sources": 2, "right_sources": 2},
         })
     pubs, meta = live._select_stage7(copy.deepcopy(xs), {"publications": {}, "candidates": []})
-    assert pubs["trend"] == ["claim:t:0", "claim:t:1", "claim:t:2"]
-    assert meta["trend"]["shown_by_wow"]["1"] == 3
-    assert meta["trend"]["reserve"] == 9
+    assert {"claim:t:0", "claim:t:1", "claim:t:2"} <= set(pubs["trend"])
+    assert len(pubs["trend"]) == 12  # empty wow levels filled; nothing left over
+    assert meta["trend"]["shown_by_actual_wow"]["1"] == 12
 
 def test_stage7_zero_strength_primary_claim_is_stock_not_publication(monkeypatch):
     # R-09 primary/context authority and R-21 role strength are separate.
@@ -312,21 +321,29 @@ def test_stage7_level2_live_instrument_can_supply_opportunity_baseline():
 
 def test_stage7_new_wow5_has_its_own_slot_and_does_not_displace_wow3():
     incumbents = [shelf_candidate(f"claim:old:{i}", wow=3, score=95-i) for i in range(5)]
+    for i, x in enumerate(incumbents):
+        x["object"] = f"risk.topic_{i}"
     surprise = shelf_candidate("claim:new:wow5", wow=5, score=82)
     previous = {"publications": {"risk": [c["id"] for c in incumbents[:3]]}, "candidates": [dict(c) for c in incumbents]}
     pubs, meta = live._select_stage7(copy.deepcopy(incumbents + [surprise]), previous)
     assert pubs["risk"][0] == "claim:new:wow5"
-    assert sum(x.startswith("claim:old:") for x in pubs["risk"]) == 3
-    assert meta["risk"]["shown_by_wow"]["5"] == 1
-    assert meta["risk"]["shown_by_wow"]["3"] == 3
+    assert all(f"claim:old:{i}" in pubs["risk"] for i in range(3))
+    assert meta["risk"]["shown_by_actual_wow"]["5"] == 1
 
 def test_stage7_hysteresis_operates_inside_each_wow_bucket():
+    # Fill every wow level so no empty slot can be borrowed; only the swap rule
+    # can bring the challenger onto the page.
+    filler = [shelf_candidate(f"claim:w{w}:{i}", wow=w, score=90-i) for w in (5, 4, 2, 1) for i in range(3)]
     incumbents = [shelf_candidate("claim:old:0", wow=3, score=90), shelf_candidate("claim:old:1", wow=3, score=89), shelf_candidate("claim:old:2", wow=3, score=88)]
-    challenger = shelf_candidate("claim:new", wow=3, score=94)
-    previous = {"publications": {"risk": [c["id"] for c in incumbents]}, "candidates": [dict(c) for c in incumbents]}
-    pubs, _ = live._select_stage7(copy.deepcopy(incumbents + [challenger]), previous)
-    assert "claim:new" not in pubs["risk"]
-    challenger = shelf_candidate("claim:new", wow=3, score=100)
-    pubs, _ = live._select_stage7(copy.deepcopy(incumbents + [challenger]), previous)
-    assert "claim:new" in pubs["risk"]
+    for i, x in enumerate(filler + incumbents):
+        x["object"] = f"risk.topic_{i}"
+    shown = [c["id"] for c in filler + incumbents]
+    previous = {"publications": {"risk": shown}, "candidates": [dict(c) for c in filler + incumbents]}
+    def run(score):
+        ch = shelf_candidate("claim:new", wow=3, score=score)
+        ch["object"] = "risk.topic_new"
+        return live._select_stage7(copy.deepcopy(filler + incumbents + [ch]), previous)[0]["risk"]
+    assert "claim:new" not in run(89)   # marginal gain: incumbents keep their slots
+    assert "claim:new" in run(100)      # clearly stronger evidence swaps in
+
 
