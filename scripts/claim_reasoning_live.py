@@ -3409,6 +3409,7 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
         # status.  Reader surfaces need these to describe Level-2 corroborated
         # findings without falling back to generic wording.
         "object": clean(c.get("object")),
+        "family_members": list(c.get("family_members") or []),
         "mechanism": clean(c.get("mechanism")),
         "direction": clean(c.get("direction")),
         "claim_status": clean(c.get("status")),
@@ -3528,6 +3529,16 @@ def refresh_claim_high_order(
         return None
     nodes = detected["nodes"]
     groups = detected["groups"]
+    # Register every family/cluster membership before any candidate is adapted, so
+    # grounding never depends on the order candidates happen to be processed in.
+    _FAMILY_MEMBERS.clear()
+    for _items in groups.values():
+        for _raw in _items if isinstance(_items, list) else []:
+            if isinstance(_raw, dict) and _family_of(_raw.get("object")):
+                _register_family(_raw.get("object"), _raw.get("family_members") or [])
+    for _prev in previous_state.get("candidates", []) if isinstance(previous_state.get("candidates"), list) else []:
+        if isinstance(_prev, dict) and _family_of(_prev.get("object")) and clean(_prev.get("object")) not in _FAMILY_MEMBERS:
+            _register_family(_prev.get("object"), _prev.get("family_members") or [])
     vocab = load_vocabulary(root / "claims_vocabulary.json")
     ev = _date_only(completed_iso or raw.get("run_completed_at") or raw.get("last_updated"))
     try:
