@@ -25,7 +25,7 @@ import hashlib
 import json
 import math
 import re
-from collections import Counter
+from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -334,6 +334,607 @@ def _direction(text: str, mechanism: str, vocab: dict[str, Any]) -> str:
             return "expands"
     return "unchanged" if "unchanged" in allowed else next(iter(sorted(allowed)), "")
 
+
+_DIRECTION_GROUNDING_PATTERNS: dict[str, tuple[re.Pattern[str], ...]] = {
+    "becomes_contested": (
+        re.compile(r"\bcontest(?:ed|ation)?\b", re.I), re.compile(r"\boppos(?:e|ed|es|ition)\b", re.I),
+        re.compile(r"\bdisput(?:e|ed|es)\b", re.I), re.compile(r"\bdiverg(?:e|es|ed|ence|ent)\b", re.I),
+        re.compile(r"\bconflict(?:s|ing|ed)?\b", re.I), re.compile(r"\bcontrovers(?:y|ial)\b", re.I),
+        re.compile(r"\bresist(?:ance|ed|s|ing)?\b", re.I),
+    ),
+    "becomes_conditional": (
+        re.compile(r"\bcondition(?:al|ality|ed|s)?\b", re.I), re.compile(r"\bsubject to\b", re.I),
+        re.compile(r"\bcontingent (?:on|upon)\b", re.I), re.compile(r"\brequir(?:e|es|ed|ement|ements)\b", re.I),
+        re.compile(r"\bapproval\b|\bpermission\b|\blicen[cs](?:e|ing)\b", re.I), re.compile(r"\bscreen(?:ing|ed)?\b", re.I),
+        re.compile(r"\beligib(?:le|ility)\b|\bthreshold(?:s)?\b", re.I),
+        re.compile(r"\bmandatory\b|\bsafeguard(?:s|ed|ing)?\b|\bonly if\b", re.I),
+    ),
+    "contracts": (
+        re.compile(r"\brestrict(?:s|ed|ion|ions|ive)?\b", re.I), re.compile(r"\blimit(?:s|ed|ation|ations)?\b", re.I),
+        re.compile(r"\bconstrain(?:s|ed|t|ts)?\b", re.I), re.compile(r"\bdeclin(?:e|es|ed|ing)\b|\bdecreas(?:e|es|ed|ing)\b", re.I),
+        re.compile(r"\bshortage(?:s)?\b|\bscarcity\b|\bbottleneck(?:s)?\b", re.I),
+        re.compile(r"\bblock(?:s|ed|ing)?\b|\bcut(?:s|ting)?\b|\bexclude(?:s|d)?\b", re.I),
+        re.compile(r"\berod(?:e|es|ed|ing)\b|\bweaken(?:s|ed|ing)?\b|\bloss\b", re.I),
+        re.compile(r"\bbarrier(?:s)?\b|\bunderinvest(?:s|ed|ment|ing)?\b", re.I),
+        re.compile(r"\bunderperform(?:s|ed|ing|ance)?\b|\bweaker\b|\bdisintegration\b", re.I),
+        re.compile(r"\bpersistent dependenc(?:e|y|ies)\b|\bpreparedness gaps?\b|\bmaterial gaps?\b", re.I),
+        re.compile(r"\bdid not (?:shift|move|increase|grow|improve)\b|\bstagnat(?:e|es|ed|ion|ing)\b", re.I),
+        re.compile(r"\bcapped? adoption\b|\bunderperform(?:s|ed|ing|ance)?\b|\bcapacity gap(?:s)?\b", re.I),
+        re.compile(r"\bweak(?:er|ness)?\b|\bdifficulty\b|\bbarriers?\b", re.I),
+    ),
+    "expands": (
+        re.compile(r"\bexpand(?:s|ed|ing|sion)?\b|\bwiden(?:s|ed|ing)?\b", re.I),
+        re.compile(r"\bincreas(?:e|es|ed|ing)\b|\bgrow(?:s|th|ing)?\b", re.I),
+        re.compile(r"\badd(?:s|ed|ing)?\b.{0,35}\bcapacity\b|\bnew capacity\b", re.I),
+        re.compile(r"\bbuild(?:s|ing|out)?\b|\blaunch(?:es|ed|ing)?\b", re.I),
+        re.compile(r"\bfund(?:s|ed|ing)?\b|\binvest(?:s|ed|ment|ing)?\b", re.I),
+        re.compile(r"\brecruit(?:s|ed|ing)?\b|\bretain(?:s|ed|ing)?\b", re.I),
+        re.compile(r"\bopen(?:s|ed|ing)? access\b|\bassociation agreement\b", re.I),
+        re.compile(r"\bestablish(?:es|ed|ing)?\b|\bcreat(?:e|es|ed|ing)\b|\bcommit(?:s|ted|ment)?\b", re.I),
+        re.compile(r"\bagree(?:s|d|ment)\b|\bcall for\b|\bprogramme\b.{0,40}\b(?:launch|fund|support)\b", re.I),
+    ),
+}
+
+
+def _direction_is_reader_grounded(node: dict[str, Any], direction: str | None = None) -> bool:
+    """Does the reader-visible source statement actually support this direction?
+
+    This is a downstream publication-semantics check. It does not rewrite the
+    authoritative claim. It only prevents an unsupported structured direction from
+    being presented as if the publication supplied that directional evidence.
+    """
+    direction = clean(direction or node.get("direction"))
+    if not direction or direction == "unchanged":
+        return True
+    # Use the authoritative claim statement itself.  Structured mechanism/direction
+    # fields and publication titles are useful indexing metadata, but they must not
+    # rescue a reader-facing direction that the displayed source statement does not
+    # actually express.
+    text = clean(node.get("text"))
+    if not text:
+        # Synthetic/legacy test fixtures can lack reader-visible claim text.  Preserve
+        # their historical behaviour without letting structured metadata override a
+        # real source statement when one exists.
+        mechanism = clean(node.get("mechanism"))
+        if direction == "becomes_conditional":
+            return mechanism in {"conditions", "requires", "screens", "licenses"}
+        if direction == "contracts":
+            return mechanism in {"restricts", "excludes"}
+        if direction == "expands":
+            return mechanism in {"builds", "funds", "recruits", "retains", "associates", "adds_capacity", "diversifies", "supplies", "procures", "invests", "launches", "supports"}
+        return False
+    # Reader-facing directional evidence has two obligations: the statement must
+    # express the direction *and* it must visibly concern the object to which the
+    # Radar attaches that direction.  This prevents, for example, an early-warning
+    # system from being presented as direct evidence that research-system governance
+    # is expanding merely because a structured claim carried that broader tag.
+    if not _statement_grounds_object(node.get("object"), text):
+        return False
+    matches = [m for p in _DIRECTION_GROUNDING_PATTERNS.get(direction, ()) for m in p.finditer(text)]
+    if not matches:
+        return False
+
+    # Conditional/contested directions are especially easy to misattach: a source
+    # may say one thing is conditional or contested while the structured claim
+    # points at a different object in the same sentence.  Require the object anchor
+    # to sit near the directional phrase before presenting that direction publicly.
+    if direction in {"becomes_conditional", "becomes_contested"}:
+        low = text.lower()
+        terms = _object_anchor_terms(clean(node.get("object")))
+        spans: list[tuple[int, int]] = []
+        for term in terms:
+            start = 0
+            while term and (idx := low.find(term, start)) >= 0:
+                spans.append((idx, idx + len(term)))
+                start = idx + max(1, len(term))
+        if spans and not any(min(abs(m.start() - b), abs(a - m.end())) <= 60 for m in matches for a, b in spans):
+            return False
+    return True
+
+
+
+# A future-shock hypothesis may be seeded broadly, but the public page must not
+# turn a neutral mention of a policy/domain into evidence that a disruptive shock
+# mechanism is already documented.  These checks operate only at publication
+# semantics: the hypothesis remains in stock when the displayed source statement
+# does not yet evidence the named disruption family.
+_SHOCK_DRIVER_GROUNDING_PATTERNS: dict[str, tuple[re.Pattern[str], ...]] = {
+    "export_control": (
+        re.compile(r"\bexport (?:controls?|restrictions?|ban|licen[cs](?:e|ing))\b", re.I),
+        re.compile(r"\bdual[- ]use (?:controls?|licen[cs](?:e|ing)|restrictions?)\b", re.I),
+        re.compile(r"\btechnology restriction(?:s)?\b", re.I),
+    ),
+    "critical_input": (
+        re.compile(r"\b(?:critical raw materials?|critical minerals?|rare earths?)\b.{0,90}\b(?:shortage|scarcity|bottleneck|dependen|constraint|risk|insufficient|reserve|supply)\b", re.I),
+        re.compile(r"\b(?:shortage|scarcity|bottleneck|import dependence|supply[- ]chain risk|material constraint)\b", re.I),
+        re.compile(r"\bdemand\b.{0,80}\b(?:exceed|above|outstrip)\b.{0,80}\b(?:reserve|supply|capacity)\b", re.I),
+    ),
+    "security_reclassification": (
+        re.compile(r"\breclassif(?:y|ies|ied|ication)\b", re.I),
+        re.compile(r"\b(?:classified|designated|treated) as (?:sensitive|dual[- ]use|restricted)\b", re.I),
+        re.compile(r"\bsecurity screen(?:ing|ed)?\b.{0,80}\b(?:restrict|exclude|block|limit|access|collaborat)\b", re.I),
+        re.compile(r"\b(?:sensitive|dual[- ]use) research\b.{0,80}\b(?:restrict|exclude|block|limit|licen[cs]|screen)\b", re.I),
+        re.compile(r"\b(?:access|participation|collaboration)\b.{0,60}\b(?:restricted|limited|excluded|blocked)\b.{0,80}\bsecurity\b", re.I),
+    ),
+    "acquisition": (
+        re.compile(r"\bforeign (?:acquisition|ownership|takeover|buyer|investor)\b", re.I),
+        re.compile(r"\b(?:acquisition|takeover)\b.{0,70}\b(?:screen|block|security|strategic)\b", re.I),
+        re.compile(r"\binvestment screening\b.{0,80}\b(?:acquisition|ownership|takeover|transaction)\b", re.I),
+    ),
+    "conflict": (
+        re.compile(r"\barmed conflict\b", re.I),
+        re.compile(r"\bwar\b|\binvasion\b|\bhostilit(?:y|ies)\b", re.I),
+        re.compile(r"\bmilitary escalation\b|\bescalat(?:ion|ing|ed)\b.{0,40}\bmilitary\b", re.I),
+    ),
+    "sanctions": (
+        re.compile(r"\bsanctions?\b|\basset freeze\b", re.I),
+        re.compile(r"\b(?:payment|financial) restrictions?\b", re.I),
+    ),
+    "data_access": (
+        re.compile(r"\bdata (?:access|transfer) restrictions?\b", re.I),
+        re.compile(r"\bcross[- ]border data\b.{0,60}\b(?:restrict|block|limit|ban)\b", re.I),
+        re.compile(r"\bdata locali[sz]ation\b", re.I),
+    ),
+    "cyber": (
+        re.compile(r"\bcyber ?attack\b|\bransomware\b|\bdigital outage\b|\bcyber outage\b", re.I),
+        re.compile(r"\b(?:breach|compromise|intrusion|takeover|took over|hijack)\b.{0,80}\b(?:site|website|system|network|server|account|infrastructure)\b", re.I),
+        re.compile(r"\b(?:site|website|system|network|server|account|infrastructure)\b.{0,80}\b(?:breach|compromise|intrusion|takeover|took over|hijack)\b", re.I),
+        re.compile(r"\bsoftware vulnerab(?:ility|ilities)\b", re.I),
+    ),
+    "energy": (
+        re.compile(r"\b(?:power|electricity|energy) (?:shortage|outage|constraint|rationing|crisis)\b", re.I),
+        re.compile(r"\bgrid (?:constraint|congestion|bottleneck|shortage|capacity limit)\b", re.I),
+        re.compile(r"\bpower and land constraints?\b", re.I),
+        re.compile(r"\b(?:insufficient|limited) (?:power|electricity|grid capacity)\b", re.I),
+    ),
+    "commercial": (
+        re.compile(r"\b(?:provider|vendor|service) (?:withdrawal|exit|repricing)\b", re.I),
+        re.compile(r"\bmarket withdrawal\b|\bvendor lock[- ]?in\b", re.I),
+        re.compile(r"\b(?:proprietary|commercial)\b.{0,70}\b(?:licen[cs]e restriction|access restriction|withdrawal|repricing)\b", re.I),
+    ),
+    "external_finance": (
+        re.compile(r"\b(?:withdrawal|loss|cut[- ]?off|contraction) of (?:external|foreign) (?:finance|capital|funding)\b", re.I),
+        re.compile(r"\bdependen(?:ce|cy|t)\b.{0,80}\b(?:foreign|external) (?:capital|finance|funding)\b", re.I),
+        re.compile(r"\b(?:foreign|external) (?:capital|finance|funding)\b.{0,80}\bdependen(?:ce|cy|t)\b", re.I),
+    ),
+}
+
+
+def _shock_driver_is_reader_grounded(pressure_id: Any, source_statement: Any) -> bool:
+    """Return whether the visible statement actually evidences the named shock class.
+
+    Broad scenario operators may still form candidates from looser topical matches.
+    Publication, however, needs at least one displayed external-driver statement that
+    describes the disruption mechanism itself rather than merely mentioning the
+    surrounding policy area.
+    """
+    pid = clean(pressure_id)
+    text = clean(source_statement)
+    if not pid or not text:
+        return False
+    return any(rx.search(text) for rx in _SHOCK_DRIVER_GROUNDING_PATTERNS.get(pid, ()))
+
+
+
+
+def _object_anchor_terms(obj: str) -> tuple[str, ...]:
+    obj = clean(obj)
+    terminal = obj.split(".")[-1].replace("_", " ") if obj else ""
+    full_aliases: dict[str, tuple[str, ...]] = {
+        "compute.capacity": ("compute", "computing", "supercomputer", "gigafactor", "data centre", "data-center"),
+        "finance.strategic_investment": ("investment", "capital", "subsid"),
+        "digital.governance": ("digital governance", "data governance", "digital single market", "digital rules"),
+        "research.collaboration": ("collaborat", "cooperation", "partnership"),
+        "finance.venture_capital": ("venture capital", "public equity", "funding round", "equity"),
+        "innovation.regional_capacity": ("regional", "cohesion", "structural fund", "innovation capacity"),
+        "innovation.system_performance": ("innovation performance", "innovation system", "innovation capacity", "entrepreneurial", "r&d intensity"),
+        "datacentre.energy_supply": ("data centre", "data-center", "power", "energy", "electricity", "grid"),
+        "research.system_governance": ("research governance", "research system", "era", "governance"),
+        "industrial.competitiveness": ("compet", "industrial"),
+        "research_security.screening": ("research security", "security screening", "screening"),
+        "research.openness": ("open science", "scientific openness", "research openness", "openness"),
+        "industrial.technology_complexity": ("technolog", "complex"),
+        "goal.strategic_autonomy": ("strategic autonomy", "sovereign", "non-dependence", "non dependence"),
+        "defence.innovation_funding": ("defence innovation", "defense innovation", "fund"),
+        "compute.public_procurement": ("procure", "procurement", "ai gigafactor"),
+        "quantum.testing_infrastructure": ("quantum", "testing", "test infrastructure"),
+        "quantum.standards": ("quantum", "standard"),
+        "quantum.pilot_line": ("quantum", "pilot line"),
+        "compute.access_time": ("compute", "access time"),
+        "defence.drone_capability": ("drone", "counter-drone", "counter drone"),
+        "talent.retention": ("retain", "retention", "researcher"),
+    }
+    aliases: dict[str, tuple[str, ...]] = {
+        "screening": ("screen",),
+        "openness": ("open science", "scientific openness", "research openness", "openness"),
+        "retention": ("retain", "retention"),
+        "recruitment abroad": ("recruit", "recruitment"),
+        "governance": ("govern",),
+        "capacity": ("capacity",),
+        "system performance": ("performance", "innovation"),
+        "competitiveness": ("compet",),
+        "technology complexity": ("technolog", "complex"),
+        "strategic autonomy": ("strategic autonomy", "sovereign", "non-dependence", "non dependence"),
+        "innovation funding": ("fund", "innovation"),
+        "public procurement": ("procure", "procurement"),
+        "testing infrastructure": ("testing", "test infrastructure"),
+        "standards": ("standard",),
+        "pilot line": ("pilot line",),
+        "access time": ("access time",),
+        "drone capability": ("drone", "counter-drone", "counter drone"),
+        "collaboration": ("collaborat", "cooperation", "partnership"),
+        "venture capital": ("venture capital", "equity"),
+        "strategic investment": ("investment", "capital", "subsid"),
+        "regional capacity": ("regional", "capacity"),
+        "energy supply": ("energy", "power", "electricity", "grid"),
+    }
+    return full_aliases.get(obj, aliases.get(terminal, (terminal,) if terminal else ()))
+
+
+def _anchor_normalize(value: Any) -> str:
+    """Normalize reader-visible wording for conservative object-anchor matching."""
+    return re.sub(r"[^a-z0-9&]+", " ", _low(value)).strip()
+
+
+def _statement_grounds_object(object_key: Any, statement: Any) -> bool:
+    """Whether the displayed source statement visibly concerns the controlled object.
+
+    Structured object tags remain authoritative indexing metadata, but a public
+    evidence row must not use them to make a source appear to speak about an object
+    that is absent from the claim text itself.  Hyphens and punctuation are
+    normalised so genuine phrases such as ``research-security`` still match.
+    """
+    obj = clean(object_key)
+    text = _anchor_normalize(statement)
+    if not obj or not text:
+        return True
+    return any(
+        term and _anchor_normalize(term) in text
+        for term in _object_anchor_terms(obj)
+    )
+
+
+def _object_anchor_is_visible(node: dict[str, Any], object_key: str | None = None) -> bool:
+    """Conservative check that the visible statement is actually about the target object."""
+    return _statement_grounds_object(object_key or node.get("object"), node.get("text"))
+
+
+def _reader_trend_side(node: dict[str, Any], object_key: str | None = None) -> str:
+    """Classify the side a source statement can support on the public trend page.
+
+    The authoritative structured direction is useful for candidate discovery, but
+    the reader-facing side must follow the visible statement.  Direction words are
+    not enough on their own: the statement must visibly concern the structured
+    object, and negated/adverse constructions must not be counted as expansion.
+    Ambiguous statements are excluded from the public side counts.
+    """
+    text = clean(node.get("text"))
+    if not text:
+        return "expands" if clean(node.get("direction")) == "expands" else "constrains" if clean(node.get("direction")) in {"contracts", "becomes_conditional", "becomes_contested"} else ""
+    target_object = clean(object_key or node.get("object"))
+    if not _object_anchor_is_visible(node, target_object):
+        return ""
+
+    expands = any(rx.search(text) for rx in _DIRECTION_GROUNDING_PATTERNS.get("expands", ()))
+    constrains = any(
+        rx.search(text)
+        for direction in ("contracts", "becomes_conditional", "becomes_contested")
+        for rx in _DIRECTION_GROUNDING_PATTERNS.get(direction, ())
+    )
+
+    # Reader semantics must respect negation and adverse nouns.  These patterns
+    # target recurring false positives where a generic expansion verb modified a
+    # gap, dependence or a failed/non-established result rather than the object.
+    if re.search(r"\b(?:no|not|without|cannot|can't|could not|failed to|did not)\b.{0,55}\b(?:establish|create|build|expand|increase|grow|fund|invest|launch|support|retain)\w*", text, re.I):
+        # Do not erase a separate explicit positive action elsewhere; only remove
+        # expansion when the positive cue is itself the negated construction.
+        positive_elsewhere = re.search(r"\b(?:launched?|funded?|invested?|built|expanded?|opened?|established?)\b", text, re.I)
+        if not positive_elsewhere or positive_elsewhere.group(0).lower() in {"established"}:
+            expands = False
+    if re.search(r"\b(?:widen(?:ing|ed)?|grow(?:ing|n)?|increas(?:ing|ed)?)\b.{0,40}\b(?:gap|gaps|dependence|dependency|barrier|barriers|deficit|deficits|shortage|shortages|inequality|inequalities|fragmentation)\b", text, re.I):
+        constrains = True
+        # A widening gap is not evidence that the underlying object is expanding.
+        expands = False
+    if re.search(r"\b(?:losing|lost) ground\b|\b(?:exposed to|reliant on|dependent on)\b.{0,35}\b(?:external|foreign|non[- ]?european|technology|capital|supplier|suppliers)\b|\bhighly asymmetric\b", text, re.I):
+        constrains = True
+    if target_object != "talent.retention" and re.search(r"\bretain(?:s|ed|ing)?\b", text, re.I):
+        # Retaining a scientific/industrial base is stability, not expansion of a
+        # different object.  Talent-retention claims are the intentional exception.
+        if not re.search(r"\b(?:expand|increase|grow|build|launch|fund|invest|open|establish)\w*\b", text, re.I):
+            expands = False
+    if re.search(r"\b(?:less developed|below the .* mean|lower-readiness|persistent gaps?|uneven capacity|scarce specialist capacity|limited capacity|capacity remains weak)\b", text, re.I):
+        constrains = True
+
+    # ``investment`` and ``funding`` as bare nouns describe a topic, not necessarily
+    # movement.  Require an action/amount/change cue before treating them as expansion.
+    if expands and re.search(r"\binvestment\b", text, re.I) and not re.search(r"\b(?:new|additional|major|increased?|expanded?|announced?|committed?|raised?|round|subsid(?:y|ies)|€|eur|million|billion)\b.{0,55}\binvestment\b|\binvestment\b.{0,55}\b(?:increase|grow|expand|round|fund|finance|subsid)", text, re.I):
+        # Keep other explicit positive verbs such as launched/built/established.
+        if not re.search(r"\b(?:launch(?:ed|es)?|build(?:s|ing|t)?|establish(?:ed|es)?|open(?:ed|s)? access)\b", text, re.I):
+            expands = False
+
+    if expands == constrains:
+        return ""
+    return "expands" if expands else "constrains"
+
+
+_DEPENDENCY_LINK_CUE = re.compile(
+    r"\b(?:depend(?:s|ed|ence|ency|ent)?|requir(?:e|es|ed|ement|ements)|reli(?:es|ed|ance|ant)|"
+    r"coupl(?:e|es|ed|ing)|hinge(?:s|d)? on|conditional on|contingent on|needs?|through|via)\b",
+    re.I,
+)
+
+_PRESSURE_DOMAIN_PATTERNS: dict[str, re.Pattern[str]] = {
+    "export_control": re.compile(r"\b(?:export controls?|dual[- ]use|export licen[cs](?:e|ing)|technology restriction)\b", re.I),
+    "critical_input": re.compile(r"\b(?:critical raw material|critical mineral|rare earth|material supply|materials?|mineral supply)\b", re.I),
+    "security_reclassification": re.compile(r"\b(?:research security|knowledge security|dual[- ]use|sensitive research|security screening|reclassif)\b", re.I),
+    "acquisition": re.compile(r"\b(?:acquisition|takeover|foreign ownership|investment screening)\b", re.I),
+    "conflict": re.compile(r"\b(?:war|armed conflict|invasion|military escalation|hostilit)\b", re.I),
+    "sanctions": re.compile(r"\b(?:sanctions?|asset freeze|payment restriction|financial restriction)\b", re.I),
+    "data_access": re.compile(r"\b(?:data access|data transfer|cross[- ]border data|data locali[sz]ation)\b", re.I),
+    "cyber": re.compile(r"\b(?:cyber|ransomware|software vulnerab|digital outage|network|server|website|system intrusion)\b", re.I),
+    "energy": re.compile(r"\b(?:energy|power|electricity|grid)\b", re.I),
+    "commercial": re.compile(r"\b(?:provider|vendor|service|repricing|market withdrawal|licen[cs]e restriction)\b", re.I),
+    "external_finance": re.compile(r"\b(?:external finance|foreign capital|external capital|funding|debt)\b", re.I),
+}
+
+
+def _pressure_domain_is_visible(pressure_id: Any, statement: Any) -> bool:
+    pid = clean(pressure_id)
+    text = clean(statement)
+    rx = _PRESSURE_DOMAIN_PATTERNS.get(pid)
+    return bool(rx and text and rx.search(text))
+
+
+def _reader_role_ref_grounded(
+    grammar: str,
+    raw: dict[str, Any],
+    ref: dict[str, Any],
+) -> bool:
+    """Whether one displayed evidence row actually supports its assigned role.
+
+    Structured role/object tags remain useful for broad candidate formation.  Public
+    evidence, however, must not make a source appear to establish a role that is only
+    present in metadata.  This predicate is deliberately role-specific and is used to
+    demote mismatched rows to context rather than delete the candidate from stock.
+    """
+    role = clean(ref.get("role"))
+    text = clean(ref.get("source_statement"))
+    obj = clean(ref.get("object"))
+    endpoints = [clean(x) for x in raw.get("endpoint_objects", []) if clean(x)] if isinstance(raw.get("endpoint_objects"), list) else []
+
+    if not text:
+        # Legacy/synthetic detector fixtures can predate reader-visible claim text.
+        # Preserve their structural semantics; real corpus rows with statements are
+        # checked below and cannot be rescued by role/object metadata alone.
+        return True
+
+    if grammar == "future_shock_hypothesis":
+        asset = clean(raw.get("capability_object") or (endpoints[0] if endpoints else ""))
+        pressure = clean(raw.get("pressure_id") or raw.get("dependency_object"))
+        if role == "commitment":
+            return _statement_grounds_object(asset or obj, text)
+        if role == "external_driver":
+            return _shock_driver_is_reader_grounded(pressure, text)
+        if role == "bridge":
+            # A bridge is useful strengthening evidence, but the futures-research
+            # design explicitly allows the bridge itself to remain an inference.
+            return _statement_grounds_object(asset or obj, text) and _pressure_domain_is_visible(pressure, text)
+        return _statement_grounds_object(obj, text) if obj else True
+
+    if grammar == "dependency_pathway":
+        cap = clean(raw.get("capability_object") or (endpoints[0] if endpoints else ""))
+        dep = clean(raw.get("dependency_object") or (endpoints[1] if len(endpoints) > 1 else ""))
+        if role == "commitment":
+            return _statement_grounds_object(cap or obj, text)
+        if role == "coupling":
+            # This is the load-bearing factual link.  It must visibly connect both
+            # ends of the pathway and contain dependency language.
+            return (
+                _statement_grounds_object(cap, text)
+                and _statement_grounds_object(dep, text)
+                and bool(_DEPENDENCY_LINK_CUE.search(text))
+            )
+        if role == "propagation":
+            # Propagation is allowed to remain the Radar's future inference.  When a
+            # source row is displayed under this role, though, it must at least speak
+            # directly about one of the pathway endpoints.
+            return _statement_grounds_object(dep or obj, text) or _statement_grounds_object(cap, text)
+        if role == "exposure":
+            return _statement_grounds_object(cap or obj, text)
+        return _statement_grounds_object(obj, text) if obj else True
+
+    if grammar == "latent_channel":
+        target = clean(endpoints[0] if endpoints else raw.get("objective_object"))
+        structure = clean(endpoints[1] if len(endpoints) > 1 else raw.get("delivery_object"))
+        if role == "unresolved_need":
+            return _statement_grounds_object(target or obj, text)
+        if role == "existing_structure":
+            return _statement_grounds_object(structure or obj, text)
+        if role == "live_connection":
+            return (
+                _statement_grounds_object(target, text)
+                and _statement_grounds_object(structure, text)
+                and bool(_DEPENDENCY_LINK_CUE.search(text))
+            )
+        if role == "receiving_instrument":
+            return _statement_grounds_object(target or obj, text)
+        if role == "precedent":
+            return _statement_grounds_object(obj or target or structure, text)
+        return _statement_grounds_object(obj, text) if obj else True
+
+    if grammar == "conflicting_criteria":
+        if role in {"criterion_a", "criterion_b", "arbitration_gap", "divergence"}:
+            return _statement_grounds_object(obj, text) if obj else True
+
+    return True
+
+
+def _filter_reader_role_support(
+    grammar: str,
+    raw: dict[str, Any],
+    support: list[dict[str, Any]],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Split role rows into direct source evidence and clearly-labelled context."""
+    if grammar not in {"future_shock_hypothesis", "dependency_pathway", "latent_channel", "conflicting_criteria"}:
+        return support, []
+    direct: list[dict[str, Any]] = []
+    contextual: list[dict[str, Any]] = []
+    for ref in support:
+        if _reader_role_ref_grounded(grammar, raw, ref):
+            direct.append(ref)
+            continue
+        role = clean(ref.get("role")).replace("_", " ") or "assigned role"
+        contextual.append(dict(
+            ref,
+            role="context",
+            evidence_contribution=f"Related context; the source statement does not directly establish the {role} used in the finding.",
+            original_role=clean(ref.get("role")),
+        ))
+    return direct, contextual
+
+
+def _continuity_visible_counts(obj: str, nodes: list[dict[str, Any]]) -> dict[str, int]:
+    """Count only source-visible evidence for a named ongoing phenomenon.
+
+    Current primary evidence and historical context keep their separate provenance.
+    Structured object tags can seed the candidate, but they do not count toward the
+    reader-facing recurrence floor unless the source statement itself visibly concerns
+    the named object.
+    """
+    current_records: set[str] = set()
+    current_sources: set[str] = set()
+    historical_records: set[str] = set()
+    historical_sources: set[str] = set()
+    for n in nodes:
+        if clean(n.get("origin")) == "provisional":
+            continue
+        if obj not in _node_objects(n):
+            continue
+        if not _statement_grounds_object(obj, n.get("text")):
+            continue
+        era = clean(n.get("era"))
+        rid = clean(n.get("_record_id"))
+        src = clean(n.get("_source")).lower()
+        if era == "current":
+            if not n.get("_primary") or _strand_code(n) not in {"A", "C"}:
+                continue
+            if rid:
+                current_records.add(rid)
+            if src:
+                current_sources.add(src)
+        elif era == "historical":
+            if rid:
+                historical_records.add(rid)
+            if src:
+                historical_sources.add(src)
+    return {
+        "current_record_count": len(current_records),
+        "current_source_count": len(current_sources),
+        "historical_record_count": len(historical_records),
+        "historical_source_count": len(historical_sources),
+    }
+
+
+def _reader_visible_role_semantics(
+    grammar: str,
+    product: str,
+    raw: dict[str, Any],
+    support: list[dict[str, Any]],
+) -> tuple[bool, str, dict[str, bool]]:
+    """Check that the load-bearing *source* anchors are visible to the reader.
+
+    The Radar is allowed to make future-facing inferences.  Therefore this guard does
+    not require a source to state the future conclusion or every link in the causal
+    chain.  It requires the factual anchors that the conclusion depends on, while
+    optional/inferential links can remain explicitly Radar-owned.
+    """
+    by_role: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for ref in support:
+        role = clean(ref.get("role"))
+        if role:
+            by_role[role].append(ref)
+
+    checks: dict[str, bool] = {}
+    endpoints = [clean(x) for x in raw.get("endpoint_objects", []) if clean(x)] if isinstance(raw.get("endpoint_objects"), list) else []
+
+    if grammar == "future_shock_hypothesis":
+        asset = clean(raw.get("capability_object") or (endpoints[0] if endpoints else ""))
+        pressure = clean(raw.get("pressure_id") or raw.get("dependency_object"))
+        commitments = by_role.get("commitment", [])
+        drivers = by_role.get("external_driver", [])
+        bridges = by_role.get("bridge", [])
+        checks["commitment_names_asset"] = any(_statement_grounds_object(asset, x.get("source_statement")) for x in commitments)
+        checks["driver_names_disruption"] = any(_shock_driver_is_reader_grounded(pressure, x.get("source_statement")) for x in drivers)
+        checks["bridge_links_asset_and_pressure"] = any(
+            _statement_grounds_object(asset, x.get("source_statement"))
+            and _pressure_domain_is_visible(pressure, x.get("source_statement"))
+            for x in bridges
+        )
+        # The design intentionally permits a future shock to combine separately
+        # evidenced capability + disruption facts into a new scenario.  A direct
+        # bridge strengthens maturity but is not a prerequisite for the hypothesis.
+        ok = checks["commitment_names_asset"] and checks["driver_names_disruption"]
+        return ok, "reader_visible_shock_anchors" if ok else "shock_anchors_not_visible_in_source_statements", checks
+
+    if grammar == "dependency_pathway":
+        cap = clean(raw.get("capability_object") or (endpoints[0] if endpoints else ""))
+        dep = clean(raw.get("dependency_object") or (endpoints[1] if len(endpoints) > 1 else ""))
+        commitments = by_role.get("commitment", [])
+        couplings = by_role.get("coupling", [])
+        propagation = by_role.get("propagation", [])
+        exposure = by_role.get("exposure", [])
+        checks["commitment_names_capability"] = any(_statement_grounds_object(cap, x.get("source_statement")) for x in commitments)
+        checks["coupling_links_capability_and_dependency"] = any(
+            _statement_grounds_object(cap, x.get("source_statement"))
+            and _statement_grounds_object(dep, x.get("source_statement"))
+            and bool(_DEPENDENCY_LINK_CUE.search(clean(x.get("source_statement"))))
+            for x in couplings
+        )
+        checks["propagation_visible"] = any(
+            _statement_grounds_object(dep, x.get("source_statement")) or _statement_grounds_object(cap, x.get("source_statement"))
+            for x in propagation
+        )
+        checks["exposure_names_capability"] = (
+            not exposure or any(_statement_grounds_object(cap, x.get("source_statement")) for x in exposure)
+        )
+        # Capability + dependency coupling are the factual core.  The future
+        # propagation is allowed to remain the Radar's inference, exactly as the
+        # futures-research architecture requires.
+        ok = checks["commitment_names_capability"] and checks["coupling_links_capability_and_dependency"]
+        return ok, "reader_visible_dependency_anchors" if ok else "dependency_anchors_not_visible_in_source_statements", checks
+
+    if grammar == "latent_channel":
+        target = clean(endpoints[0] if endpoints else raw.get("objective_object"))
+        structure_obj = clean(endpoints[1] if len(endpoints) > 1 else raw.get("delivery_object"))
+        need = by_role.get("unresolved_need", [])
+        structure = by_role.get("existing_structure", [])
+        live = by_role.get("live_connection", [])
+        receiving = by_role.get("receiving_instrument", [])
+        precedent = by_role.get("precedent", [])
+        checks["unresolved_need_visible"] = any(_statement_grounds_object(target, x.get("source_statement")) for x in need)
+        checks["existing_structure_visible"] = any(_statement_grounds_object(structure_obj, x.get("source_statement")) for x in structure)
+        checks["connection_or_receiver_visible"] = any(
+            _statement_grounds_object(target, x.get("source_statement")) for x in receiving
+        ) or any(
+            _statement_grounds_object(target, x.get("source_statement"))
+            and _statement_grounds_object(structure_obj, x.get("source_statement"))
+            for x in live
+        ) or any(
+            _statement_grounds_object(target, x.get("source_statement"))
+            or _statement_grounds_object(structure_obj, x.get("source_statement"))
+            for x in precedent
+        )
+        ok = all(checks.values())
+        return ok, "reader_visible_latent_channel" if ok else "latent_channel_missing_reader_visible_core_role", checks
+
+    if grammar == "conflicting_criteria":
+        checks["criterion_a_visible"] = bool(by_role.get("criterion_a"))
+        checks["criterion_b_visible"] = bool(by_role.get("criterion_b"))
+        checks["arbitration_gap_visible"] = bool(by_role.get("arbitration_gap"))
+        ok = all(checks.values())
+        return ok, "reader_visible_criteria_collision" if ok else "criteria_collision_missing_reader_visible_core_role", checks
+
+    return True, "not_applicable", checks
 
 def _status(row: dict[str, Any], text: str, vocab: dict[str, Any]) -> str:
     allowed = set(vocab.get("statuses") or [])
@@ -742,7 +1343,7 @@ def _reader_evidence_contribution(role: Any) -> str:
         "coupling": "Establishes the dependency linking that capability to another input or condition.",
         "propagation": "Establishes a mechanism through which disruption could spread.",
         "exposure": "Establishes European exposure or the consequences of losing access.",
-        "external_driver": "Establishes an outside pressure that could become disruptive.",
+        "external_driver": "Establishes the documented disruption mechanism used in this scenario.",
         "bridge": "Establishes a direct link between the outside pressure and the European capability.",
         "unresolved_need": "Establishes the unresolved European need or gap.",
         "existing_structure": "Establishes an existing structure that could be used.",
@@ -757,7 +1358,7 @@ def _reader_evidence_contribution(role: Any) -> str:
         "constrains": "Establishes movement in the constraining direction.",
         "counter-evidence": "Establishes evidence that could weaken or qualify the finding.",
     }
-    return labels.get(r, "Establishes part of the source evidence used for this finding.")
+    return labels.get(r, "")
 
 
 def _support_rows(c: dict[str, Any], node_by_claim: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
@@ -1163,8 +1764,13 @@ def _trend_payload(
         return None
 
     rows: list[dict[str, Any]] = []
+    reader_side_by_claim: dict[str, str] = {}
     for n in nodes:
         if not n.get("_primary") or clean(n.get("era")) != "current" or obj not in _node_objects(n):
+            continue
+        # Provisional scanner claims may seed developing stock, but they are not
+        # authoritative source evidence for a public reasoning card.
+        if clean(n.get("origin")) == "provisional":
             continue
         scope = n.get("scope") if isinstance(n.get("scope"), dict) else {}
         if clean(scope.get("level")) not in {"eu", "member_state", "associated_country", "company_in_eu"}:
@@ -1175,12 +1781,13 @@ def _trend_payload(
                 continue
         except ValueError:
             pass
-        direction = clean(n.get("direction"))
-        if direction == "expands" or direction in {"contracts", "becomes_conditional", "becomes_contested"}:
+        side = _reader_trend_side(n, obj)
+        if side:
             rows.append(n)
+            reader_side_by_claim[clean(n.get("claim_id"))] = side
 
     def side_of(n: dict[str, Any]) -> str:
-        return "expands" if clean(n.get("direction")) == "expands" else "constrains"
+        return reader_side_by_claim.get(clean(n.get("claim_id")), "")
 
     # R-53: a record carrying both sides is context, not two votes.
     by_record: dict[str, set[str]] = {}
@@ -1247,6 +1854,7 @@ def _trend_payload(
                 "quality": int(round(float(n.get("merit", 0) or 0))),
                 "new_this_scan": bool(n.get("_new_this_scan")),
                 "claim_primary": True,
+                "claim_origin": clean(n.get("origin")),
                 "claim_kind": clean(n.get("kind")),
                 "claim_status": clean(n.get("status")),
                 "mechanism": clean(n.get("mechanism")),
@@ -1387,10 +1995,10 @@ def _story_key(c: dict[str, Any]) -> tuple[str, str]:
     if clean(c.get("product")) == "shock":
         objects = [clean(x) for x in c.get("endpoint_objects", []) if clean(x)] if isinstance(c.get("endpoint_objects"), list) else []
         # A different disruption mechanism acting on the same European asset is a
-        # different shock story.  Folding only on the asset erased the broad shock
-        # corpus and made a 15-slot wow cycle impossible even when many grounded
-        # hypotheses existed.
-        return "shock", "|".join(objects[:2]) or clean(c.get("topic_key"))
+        # different shock story.  Include the driver family explicitly; folding only
+        # on the asset erased distinct cyber/export-control/power scenarios.
+        driver = clean(c.get("pressure_id") or c.get("shock_pressure_id") or c.get("shock_driver_basis") or c.get("dependency_object"))
+        return "shock", "|".join(([driver] if driver else []) + objects[:2]) or clean(c.get("topic_key"))
     support = [x for x in c.get("support", []) if isinstance(x, dict)] if isinstance(c.get("support"), list) else []
     mechanism = clean(next((x.get("mechanism") for x in support if clean(x.get("mechanism"))), c.get("grammar_id")))
     objects = [clean(x) for x in c.get("endpoint_objects", []) if clean(x)] if isinstance(c.get("endpoint_objects"), list) else []
@@ -1421,17 +2029,19 @@ def _verification_gate(c: dict[str, Any]) -> tuple[bool, str]:
     if product == "trend" or grammar == "opposing_movements":
         return bool(c.get("trend_evidence_floor_passes")), "trend_evidence_floor"
     if grammar == "corroborated_claim":
+        if not bool(c.get("evidence_semantic_alignment", True)):
+            return False, "source_statement_direction_mismatch"
+        grounded_sources = int(c.get("direction_grounded_sources", c.get("primary_sources", 0)) or 0)
+        grounded_records = int(c.get("direction_grounded_records", c.get("primary_records", 0)) or 0)
         # A single source may seed a grounded future hypothesis, but it is not
         # corroboration. Keep it in stock without mislabelling the evidence state.
-        if int(c.get("primary_sources", 0) or 0) < 2:
+        if grounded_sources < 2:
             return False, "single_source_anchor"
-        # Genuine corroboration is the two-independent-source depth gate. Requiring a
-        # Level-5 candidate falsifier here would collapse the baseline and recreate
-        # the Stage-7 starvation bug at a lower level.
+        # Genuine corroboration is the two-independent-source depth gate.
         return (
             bool(c.get("score_gate_passes"))
-            and int(c.get("primary_records", 0) or 0) >= 2
-            and int(c.get("primary_sources", 0) or 0) >= 2
+            and grounded_records >= 2
+            and grounded_sources >= 2
         ), "corroborated_claim_floor"
     if grammar in _STRUCTURAL_VERIFICATION_GRAMMARS:
         return True, "authoritative_graph_structure"
@@ -1507,6 +2117,10 @@ def _presentation_ready(c: dict[str, Any]) -> tuple[bool, str]:
         return ok, "two_eras_two_sources" if ok else "continuity_needs_broader_two_era_support"
 
     if product == "shock":
+        if grammar == "future_shock_hypothesis" and not bool(c.get("shock_driver_semantic_alignment", True)):
+            return False, "shock_driver_statement_mismatch"
+        if grammar in {"future_shock_hypothesis", "dependency_pathway"} and not bool(c.get("role_semantic_alignment", True)):
+            return False, clean(c.get("role_semantic_reason")) or "shock_route_not_visible_in_source_statements"
         # Future-facing shock hypotheses should not need the same source diversity as
         # a retrospective factual claim merely to compete for a wow slot.  Two
         # independent sources is the normal floor.  A complete pathway carried by
@@ -1519,11 +2133,16 @@ def _presentation_ready(c: dict[str, Any]) -> tuple[bool, str]:
         return ok, "grounded_future_shock" if ok else "shock_needs_stronger_driver_or_pathway_support"
 
     if product in {"risk", "opportunity"}:
+        if grammar in {"dependency_pathway", "latent_channel", "conflicting_criteria"} and not bool(c.get("role_semantic_alignment", True)):
+            return False, clean(c.get("role_semantic_reason")) or "reader_visible_role_semantics_failed"
         if grammar == "corroborated_claim":
-            # A concrete current record can anchor a baseline future implication.
-            # Independent confirmation raises maturity and reserve rank but is not
-            # required merely to let one of the three low-wow slots exist.
-            ok = sources >= 1 and records >= 1 and maturity >= 55
+            if not bool(c.get("evidence_semantic_alignment", True)):
+                return False, "source_statement_direction_mismatch"
+            grounded_sources = int(c.get("direction_grounded_sources", sources) or 0)
+            grounded_records = int(c.get("direction_grounded_records", records) or 0)
+            # A concrete current record can anchor a baseline future implication, but
+            # the source statement must actually support the direction used on-card.
+            ok = grounded_sources >= 1 and grounded_records >= 1 and maturity >= 55
             return ok, "evidence_anchored_baseline" if ok else "baseline_needs_stronger_source_or_status"
         ok = sources >= 2 and records >= 2 and bool(c.get("role_strength_floor_passes", True)) and (coverage >= 0.50 or grammar in _STRUCTURAL_VERIFICATION_GRAMMARS) and maturity >= 38
         return ok, "grounded_future_finding" if ok else "needs_second_source_or_more_complete_mechanism"
@@ -1821,20 +2440,37 @@ def _reader_copy(grammar: str, product: str, raw: dict[str, Any], candidate: dic
     if grammar == "deployment_before_rules":
         return f"{a[:1].upper()+a[1:]} is moving ahead of settled rules.", "Operating activity appears in the evidence before an adopted rule on the same object. Practice can therefore become established before governance catches up."
     if grammar == "success_metric_gap":
-        return f"{a[:1].upper()+a[1:]} can be funded before success is properly measured.", "The stated objective and the delivery instrument are not the same thing, and the evidence base still lacks a matching outcome measure. Delivery can look successful before the intended result is known."
+        return f"Funding for {a} is visible before a matching outcome measure is.", "The sources establish the objective and a delivery instrument. The material currently supporting this finding does not establish a corresponding outcome measure, so the Radar treats the measurement gap as an open inference rather than proof that no metric exists."
     if grammar == "stalled_proposal":
         return f"A proposal affecting {a} is ageing without a later decision.", "The proposal has remained below implementation for more than six months with no later status transition in the evidence base."
     if grammar == "conflicting_criteria":
-        return f"{a[:1].upper()+a[1:]} is colliding with {b}.", "Separate records support both requirements, but the evidence base does not yet show a common tie-break. The same project or facility can therefore receive different answers depending on which rule is applied first."
+        return f"{a[:1].upper()+a[1:]} could collide with {b}.", "Separate sources establish both requirements and a governance ambiguity around them. The collision itself is the Radar's inference: the same project or facility could receive different answers depending on which rule is applied first."
     if grammar == "future_shock_hypothesis":
         pressure = clean(raw.get("pressure_label")) or "an external disruption"
         asset = _friendly_object_label(raw.get("capability_object") or (eps[0] if eps else ""))
         lead = pressure[:1].upper() + pressure[1:]
-        return f"{lead} could disrupt {asset}.", f"Europe is already building or relying on {asset}; a sudden change in the outside condition could interrupt access, operation or scale-up before alternatives are ready."
+        bridge = bool((candidate.get("role_semantic_checks") or {}).get("bridge_links_asset_and_pressure"))
+        if bridge:
+            summary = f"Sources separately establish the European capability, the external disruption mechanism and a direct link between them. The future disruption itself remains the Radar's scenario, not a claim made by any one source."
+        else:
+            summary = f"Sources separately establish the European capability and the external disruption mechanism. The claim that the disruption could reach {asset} is the Radar's future hypothesis, not a statement made by either source."
+        return f"{lead} could disrupt {asset}.", summary
     if grammar == "dependency_pathway":
+        checks = candidate.get("role_semantic_checks") if isinstance(candidate.get("role_semantic_checks"), dict) else {}
+        route_visible = bool(checks.get("propagation_visible"))
         if product == "shock":
-            return f"A sudden break in {b} could propagate into {a}.", "The disruptive event itself is not in the corpus, but separate records document the coupling, propagation route and European exposure. This is a possible discontinuity, not a forecast."
-        return f"A bottleneck in {b} could propagate into {a}.", "Separate records connect a European capability to a dependency and show a route by which disruption could spread beyond one isolated project."
+            summary = (
+                "Sources establish the European capability, the dependency link and additional evidence along the propagation route. The sudden break and its future consequences remain the Radar's scenario, not a source claim."
+                if route_visible
+                else "Sources establish the European capability and its dependency. The claim that a sudden break could propagate through that dependency is the Radar's future scenario, not a statement made by any one source."
+            )
+            return f"A sudden break in {b} could propagate into {a}.", summary
+        summary = (
+            "Sources establish the European capability, the dependency link and evidence relevant to propagation or exposure. The future spread of disruption is the Radar's inference rather than a claim made by an individual source."
+            if route_visible
+            else "Sources establish the European capability and its dependency. The claim that a bottleneck could propagate into the capability is the Radar's inference rather than a statement made by an individual source."
+        )
+        return f"A bottleneck in {b} could propagate into {a}.", summary
     if grammar == "latent_channel":
         return f"{b[:1].upper()+b[1:]} could become the missing route into {a}.", "The evidence contains both an unresolved need and an existing structure that could address it. A live connection between the two would turn existing pieces into a usable European capability rather than requiring a new system from scratch."
     if grammar == "anchor_demand":
@@ -1845,14 +2481,24 @@ def _reader_copy(grammar: str, product: str, raw: dict[str, Any], candidate: dic
         return f"An older link between {a} and {b} is returning without being named.", "A historical record states the relationship directly, while current evidence shows both sides moving again without a current record explicitly joining them."
     if grammar == "corroborated_claim":
         direction = clean(raw.get("direction")); mechanism = clean(raw.get("mechanism"))
-        corroborated = sources >= 2
+        corroborated = int(candidate.get("direction_grounded_sources", sources) or 0) >= 2
         if product == "risk":
             if corroborated:
                 verb = "is under sustained pressure" if direction == "contracts" else "is becoming more conditional" if direction == "becomes_conditional" else "is becoming more contested" if direction == "becomes_contested" else "shows a current constraint"
-                summary = "Independent sources document the same constraining direction. The forward risk shown here is the Radar's synthesis of what that pattern could mean if it persists or spreads."
+                summary = (
+                    f"Independent sources document current {a} becoming more constrained." if direction == "contracts"
+                    else f"Independent sources document current conditions around {a} becoming more conditional." if direction == "becomes_conditional"
+                    else f"Independent sources document current contestation around {a}." if direction == "becomes_contested"
+                    else f"Independent sources document a current constraint affecting {a}."
+                )
             else:
                 verb = "could come under sustained pressure" if direction == "contracts" else "could become more conditional" if direction == "becomes_conditional" else "could become more contested" if direction == "becomes_contested" else "could face a new constraint"
-                summary = "A current source provides the evidence anchor on this topic. The forward risk shown here is the Radar's synthesis of what could follow, not a statement attributed to that source."
+                summary = (
+                    f"The source documents a current constraint on {a}; the risk is that the constraint persists or spreads." if direction == "contracts"
+                    else f"The source documents current conditions on {a}; the risk is that access or action becomes more conditional." if direction == "becomes_conditional"
+                    else f"The source documents current contestation around {a}; the risk is that the contestation widens or hardens." if direction == "becomes_contested"
+                    else f"The source documents a current constraint affecting {a}; the risk is that it persists or spreads."
+                )
             return f"{a[:1].upper()+a[1:]} {verb}.", summary
         action = "is expanding through a live European instrument"
         if mechanism in {"collaborates", "associates"}: action = "is widening through active agreements"
@@ -1890,16 +2536,24 @@ def _reader_why(grammar: str, product: str, raw: dict[str, Any]) -> str:
     if grammar == "practice_before_doctrine": return "Early implementation can become the de facto rule before the formal framework has had a chance to arbitrate trade-offs."
     if grammar == "goal_without_measure": return "A goal can dominate policy language without creating an evidence base for whether interventions are working."
     if grammar == "conflicting_criteria": return f"The same European project can be treated differently depending on whether {a} or {b} is applied first."
-    if grammar == "future_shock_hypothesis": return "The asset and the disruption mechanism are both evidenced; the direct bridge is allowed to remain a future hypothesis until stronger evidence appears."
-    if grammar == "dependency_pathway" and product == "risk": return f"A failure in {b} would not stay local if the documented propagation route reaches {a}."
-    if grammar == "dependency_pathway" and product == "shock": return f"A sudden disruption in {b} could remove capability faster than the documented European responses can absorb it."
+    if grammar == "future_shock_hypothesis": return "The European asset and the outside disruption mechanism are source-evidenced; the causal bridge to a future shock remains explicitly Radar-owned unless a source establishes it directly."
+    if grammar == "dependency_pathway" and product == "risk": return f"The source-evidenced dependency creates a plausible route by which a failure in {b} could reach {a}; the future propagation is the Radar's inference."
+    if grammar == "dependency_pathway" and product == "shock": return f"The source-evidenced dependency creates a plausible route by which a sudden break in {b} could remove capability; the discontinuity itself remains a Radar scenario."
     if grammar == "latent_channel": return "The opportunity is leverage: connect pieces Europe already has instead of creating a new programme from zero."
     if grammar == "anchor_demand": return "Reliable European demand can help turn research and scale-up support into durable production, suppliers and technical capability."
     if grammar == "named_continuity": return "Persistence matters because a recurring issue is more likely to shape future choices than a one-scan spike."
     if grammar == "corroborated_claim" and product == "risk":
-        return "The source evidence establishes the current facts; the future consequence on this card is the Radar's interpretation, not wording attributed to a publication."
+        direction = clean(raw.get("direction"))
+        if direction == "becomes_contested": return f"If the documented contestation widens or hardens, it could create more friction around {a}."
+        if direction == "becomes_conditional": return f"If the documented conditions tighten or spread, access to {a} could depend on more external approvals or requirements."
+        if direction == "contracts": return f"If the documented constraint persists or spreads, it could reduce access to or capacity in {a}."
+        return f"If the current constraint persists or spreads, it could narrow room to act around {a}."
     if grammar == "corroborated_claim" and product == "opportunity":
-        return "The source evidence establishes the live instrument or action; the broader opportunity on this card is the Radar's interpretation of what it could enable."
+        mechanism = clean(raw.get("mechanism"))
+        if mechanism in {"collaborates", "associates"}: return f"If the active agreement is sustained, it could widen European access, networks or participation around {a}."
+        if mechanism in {"procures", "builds", "adds_capacity"}: return f"If the current build-out reaches users, it could add usable European capacity in {a}."
+        if mechanism == "funds": return f"If the funded activity converts into delivery, it could strengthen European capability in {a}."
+        return f"If the live instrument scales or delivers as intended, it could strengthen European capability in {a}."
     return ""
 
 def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab: dict[str, Any] | None = None, evaluated_on: dt.date | None = None) -> dict[str, Any]:
@@ -1931,6 +2585,24 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
         ref for ref in support
         if bool(ref.get("claim_primary")) and clean(ref.get("strand")) in {"A", "C"}
     ]
+
+    # Provisional claims remain useful discovery scaffolding, but Deep Scan/backfill
+    # claims are the authoritative reasoning layer.  Keep explicit provisional
+    # rows as context so the hypothesis survives in stock without presenting them
+    # to readers as established source evidence.
+    provisional_support = [
+        ref for ref in support
+        if clean(ref.get("claim_origin")) == "provisional" or clean(ref.get("claim_id")).startswith("c:provisional:")
+    ]
+    if provisional_support:
+        provisional_ids = {clean(ref.get("claim_id")) for ref in provisional_support}
+        support = [ref for ref in support if clean(ref.get("claim_id")) not in provisional_ids]
+        context.extend(dict(
+            ref,
+            role="context",
+            evidence_contribution="Related scanner context awaiting an authoritative structured claim.",
+        ) for ref in provisional_support)
+
     against = _against_rows(c, node_by_claim)
     missing = [clean(x) for x in c.get("missing_roles", []) if clean(x)] if isinstance(c.get("missing_roles"), list) else []
     roles = c.get("roles") if isinstance(c.get("roles"), dict) else {}
@@ -1959,8 +2631,103 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
     topic = topic or clean(c.get("object") or c.get("cluster") or c.get("capability_object") or c.get("objective_object") or c.get("delivery_object") or c.get("grammar_id"))
     if trend:
         topic = _trend_scope_label(clean(trend.get("trend_scope")), clean(trend.get("trend_balance", {}).get("object_key")))
+    grounded_direction_sources: set[str] = set()
+    grounded_direction_records: set[str] = set()
+    grounded_direction_refs: list[dict[str, Any]] = []
+    contextual_direction_refs: list[dict[str, Any]] = []
+    if grammar == "corroborated_claim":
+        direction = clean(c.get("direction"))
+        for ref in support:
+            cid = clean(ref.get("claim_id"))
+            node = node_by_claim.get(cid)
+            if not node or not _direction_is_reader_grounded(node, direction):
+                contextual_direction_refs.append(dict(
+                    ref,
+                    role="context",
+                    evidence_contribution="Provides related context but does not establish the direction used in the finding.",
+                ))
+                continue
+            grounded_direction_refs.append(ref)
+            src = clean(ref.get("source")).lower()
+            rec = clean(ref.get("identity"))
+            if src:
+                grounded_direction_sources.add(src)
+            if rec:
+                grounded_direction_records.add(rec)
+        # Do not let related-but-nondirectional records appear under the public
+        # heading “What the sources state”.  They remain available as explicitly
+        # labelled context, while support contains only statements that actually
+        # anchor the on-card direction.
+        support = grounded_direction_refs
+        context.extend(contextual_direction_refs)
+
+    # For ongoing phenomena, the controlled object may have been assigned through
+    # structured metadata even when a particular source statement does not visibly
+    # discuss that object.  Such rows stay available as context but cannot appear
+    # under the reader-facing source-evidence heading.
+    continuity_counts: dict[str, int] = {}
+    continuity_history: list[dict[str, Any]] = []
+    if grammar == "named_continuity":
+        target = clean(c.get("object"))
+        direct_current: list[dict[str, Any]] = []
+        contextual_current: list[dict[str, Any]] = []
+        for ref in support:
+            if _statement_grounds_object(target, ref.get("source_statement")):
+                direct_current.append(ref)
+            else:
+                contextual_current.append(dict(
+                    ref,
+                    role="context",
+                    evidence_contribution=f"Related context; the source statement does not directly establish recurrence of {_friendly_object_label(target)}.",
+                ))
+        support = direct_current
+        context.extend(contextual_current)
+        continuity_counts = _continuity_visible_counts(target, nodes)
+        continuity_history = [
+            dict(
+                ref,
+                role="historical_context",
+                evidence_contribution=f"Historical context establishing that {_friendly_object_label(target)} was already present in the earlier period.",
+            )
+            for ref in context
+            if clean(ref.get("strand")) == "H"
+            and _statement_grounds_object(target, ref.get("source_statement"))
+        ]
+
+    # Level-5 role metadata is intentionally permissive during candidate formation.
+    # Before anything is counted as public source evidence, demote rows whose visible
+    # statements do not actually support the role assigned to them.
+    support, role_context = _filter_reader_role_support(grammar, c, support)
+    if role_context:
+        context.extend(role_context)
+
     sources = {clean(x.get("source")).lower() for x in support if clean(x.get("source"))}
     records = {clean(x.get("identity")) for x in support if clean(x.get("identity"))}
+    shock_driver_grounded_sources: set[str] = set()
+    shock_driver_grounded_records: set[str] = set()
+    shock_driver_alignment = True
+    if grammar == "future_shock_hypothesis":
+        pressure_id = clean(c.get("pressure_id"))
+        for ref in support:
+            if clean(ref.get("role")) != "external_driver":
+                continue
+            if not _shock_driver_is_reader_grounded(pressure_id, ref.get("source_statement")):
+                continue
+            src = clean(ref.get("source")).lower()
+            rec = clean(ref.get("identity"))
+            if src:
+                shock_driver_grounded_sources.add(src)
+            if rec:
+                shock_driver_grounded_records.add(rec)
+        shock_driver_alignment = len(shock_driver_grounded_records) >= 1
+
+    role_semantic_alignment, role_semantic_reason, role_semantic_checks = _reader_visible_role_semantics(
+        grammar, product, c, support
+    )
+    semantic_alignment = (
+        (grammar != "corroborated_claim" or len(grounded_direction_sources) >= 1)
+        and (grammar != "future_shock_hypothesis" or shock_driver_alignment)
+    )
     if structural_verified and score <= 0:
         # Structural Level-3 findings verify by their graph shape rather than an
         # 80-point Level-5 score, but the shelf still needs a sensible same-wow
@@ -1971,11 +2738,15 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
     wow, wow_basis = _final_wow(c, nodes, vocab)
     if grammar == "opposing_movements":
         lock_reason = "Trend remains in stock until its own side-evidence floor and page-selection rules pass."
+    elif grammar == "future_shock_hypothesis" and not shock_driver_alignment:
+        lock_reason = "The scenario remains in stock, but the displayed external-driver statement does not yet evidence the named disruption mechanism strongly enough for publication."
     elif grammar == "corroborated_claim":
-        if len(sources) >= 2:
-            lock_reason = "Independent sources corroborate the current claim; the finding awaits shelf selection."
+        if not semantic_alignment:
+            lock_reason = "The candidate is retained in stock, but the reader-visible source statement does not support the structured direction strongly enough for publication."
+        elif len(grounded_direction_sources) >= 2:
+            lock_reason = "Independent source statements corroborate the current direction; the finding awaits shelf selection."
         else:
-            lock_reason = "A single authoritative source anchors the current claim; the future implication remains a Radar inference."
+            lock_reason = "A single source statement anchors the current direction; the future implication remains a Radar inference."
     elif structural_verified:
         lock_reason = "Structural candidate is verified by its authoritative graph test and is waiting for page selection."
     else:
@@ -1995,7 +2766,7 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
         "product": product,
         "inferential_distance": level,
         "topic_key": _candidate_key(c),
-        "topic_label": (f"{topic} — evidence-anchored future hypothesis" if grammar == "corroborated_claim" and len(sources) < 2 else _candidate_topic_label(grammar, topic)),
+        "topic_label": (f"{topic} — evidence-anchored future hypothesis" if grammar == "corroborated_claim" and len(grounded_direction_sources) < 2 else _candidate_topic_label(grammar, topic)),
         # Preserve the semantic claim fields separately from the candidate lifecycle
         # status.  Reader surfaces need these to describe Level-2 corroborated
         # findings without falling back to generic wording.
@@ -2003,9 +2774,17 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
         "mechanism": clean(c.get("mechanism")),
         "direction": clean(c.get("direction")),
         "claim_status": clean(c.get("status")),
-        "product_basis": ("single_source_future_anchor" if grammar == "corroborated_claim" and len(sources) < 2 else clean(c.get("product_basis"))),
+        "product_basis": (
+            "shock_driver_statement_mismatch" if grammar == "future_shock_hypothesis" and not shock_driver_alignment
+            else "source_statement_direction_mismatch" if grammar == "corroborated_claim" and not semantic_alignment
+            else "single_source_future_anchor" if grammar == "corroborated_claim" and len(grounded_direction_sources) < 2
+            else clean(c.get("product_basis"))
+        ),
         "shock_driver": bool(c.get("shock_driver")),
         "shock_driver_basis": clean(c.get("shock_driver_basis")),
+        "shock_driver_semantic_alignment": bool(shock_driver_alignment),
+        "shock_driver_grounded_records": len(shock_driver_grounded_records),
+        "shock_driver_grounded_sources": len(shock_driver_grounded_sources),
         "status": status,
         "score": score,
         "wow_preliminary": c.get("wow_preliminary"),
@@ -2021,7 +2800,19 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
         "missing_links": missing,
         "primary_records": len(records),
         "primary_sources": len(sources),
-        "evidence_semantics": "corroborated" if grammar == "corroborated_claim" and len(sources) >= 2 else "single_source_anchor" if grammar == "corroborated_claim" else "synthesis",
+        "evidence_semantics": (
+            "shock_driver_statement_mismatch" if grammar == "future_shock_hypothesis" and not shock_driver_alignment
+            else "source_statement_direction_mismatch" if grammar == "corroborated_claim" and not semantic_alignment
+            else "corroborated" if grammar == "corroborated_claim" and len(grounded_direction_sources) >= 2
+            else "single_source_anchor" if grammar == "corroborated_claim"
+            else "synthesis"
+        ),
+        "evidence_semantic_alignment": bool(semantic_alignment),
+        "role_semantic_alignment": bool(role_semantic_alignment),
+        "role_semantic_reason": role_semantic_reason,
+        "role_semantic_checks": role_semantic_checks,
+        "direction_grounded_records": len(grounded_direction_records),
+        "direction_grounded_sources": len(grounded_direction_sources),
         "context_records": len({clean(x.get("identity")) for x in context if clean(x.get("identity"))}),
         "counter_records": len(against),
         "counter_penalty": int(c.get("counter_penalty", 0) or 0),
@@ -2046,10 +2837,11 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
     }
     if grammar == "named_continuity":
         out.update({
-            "current_record_count": int(c.get("current_record_count", 0) or 0),
-            "current_source_count": int(c.get("current_source_count", 0) or 0),
-            "historical_record_count": int(c.get("historical_record_count", 0) or 0),
-            "historical_source_count": int(c.get("historical_source_count", 0) or 0),
+            "current_record_count": int(continuity_counts.get("current_record_count", 0) or 0),
+            "current_source_count": int(continuity_counts.get("current_source_count", 0) or 0),
+            "historical_record_count": int(continuity_counts.get("historical_record_count", 0) or 0),
+            "historical_source_count": int(continuity_counts.get("historical_source_count", 0) or 0),
+            "continuity_history": continuity_history,
         })
     if trend:
         out.update(trend)
