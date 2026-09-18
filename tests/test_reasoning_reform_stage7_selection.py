@@ -164,7 +164,7 @@ def test_stage7_claim_native_trend_uses_band_and_side_floor(monkeypatch):
     assert isinstance(b["left_range"], list) and len(b["left_range"]) == 2
 
 
-def test_stage7_page_capacity_puts_excess_equal_quality_candidates_in_reserve():
+def test_stage7_soft_target_curates_crowded_same_wow_shelf_into_reserve():
     xs = []
     for i in range(6):
         xs.append({
@@ -173,10 +173,76 @@ def test_stage7_page_capacity_puts_excess_equal_quality_candidates_in_reserve():
             "endpoint_objects": [f"o{i}", f"x{i}"], "support": [{"mechanism": f"m{i}"}],
         })
     pubs, meta = live._select_stage7(copy.deepcopy(xs), {"publications": {}, "candidates": []})
-    assert pubs["risk"] == [f"claim:r:{i}" for i in range(5)]
-    assert meta["risk"]["wow_floor"] == 3
+    # R-70/R-72: all six remain in the stock, but an overcrowded wow-3 shelf
+    # raises the active floor.  Because no wow-4 item exists, retain only enough
+    # strongest wow-3 findings to satisfy the soft minimum; the surplus is reserve.
+    assert pubs["risk"] == ["claim:r:0", "claim:r:1"]
+    assert meta["risk"]["wow_floor"] == 4
     assert meta["risk"]["soft_target"] == [2, 5]
-    assert meta["risk"]["reserve"] == 1
+    assert meta["risk"]["hard_cap"] is False
+    assert meta["risk"]["reserve"] == 4
+
+
+def test_stage7_soft_target_raises_wow_floor_without_numeric_cap():
+    xs = []
+    # six wow-3 findings make the shelf crowded; three wow-4 findings mean the
+    # floor can safely rise while still clearing the soft minimum of two.
+    for i in range(6):
+        xs.append({
+            "id": f"claim:r3:{i}", "claim_native": True, "product": "risk", "status": "qualified",
+            "denial_tested": True, "oddity_passes": True, "wow": 3, "score": 90-i,
+            "endpoint_objects": [f"r3{i}", f"x3{i}"], "support": [{"mechanism": f"m3{i}"}],
+        })
+    for i in range(3):
+        xs.append({
+            "id": f"claim:r4:{i}", "claim_native": True, "product": "risk", "status": "qualified",
+            "denial_tested": True, "oddity_passes": True, "wow": 4, "score": 80-i,
+            "endpoint_objects": [f"r4{i}", f"x4{i}"], "support": [{"mechanism": f"m4{i}"}],
+        })
+    pubs, meta = live._select_stage7(copy.deepcopy(xs), {"publications": {}, "candidates": []})
+    assert meta["risk"]["wow_floor"] == 4
+    assert all(x.startswith("claim:r4:") for x in pubs["risk"][:3])
+    # R-74 keeps one strongest wow-3 baseline representative beneath the upper shelf.
+    assert pubs["risk"] == ["claim:r4:0", "claim:r4:1", "claim:r4:2", "claim:r3:0"]
+    assert meta["risk"]["reserve"] == 5
+
+
+def test_stage7_sparse_baseline_can_exceed_soft_upper_target_without_becoming_a_cap():
+    xs = []
+    for i in range(6):
+        xs.append({
+            "id": f"claim:o:{i}", "claim_native": True, "product": "opportunity", "status": "qualified",
+            "denial_tested": True, "oddity_passes": True, "wow": 2, "score": 80-i,
+            "endpoint_objects": [f"o{i}", f"y{i}"], "support": [{"mechanism": f"m{i}"}],
+        })
+    pubs, meta = live._select_stage7(copy.deepcopy(xs), {"publications": {}, "candidates": []})
+    # There is no wow>=3 upper shelf at all, so R-72's shortage rule shows the
+    # verified baseline that exists.  The normal 2-5 target is not a hard cap.
+    assert pubs["opportunity"] == [f"claim:o:{i}" for i in range(6)]
+    assert meta["opportunity"]["shown"] == 6
+    assert meta["opportunity"]["reserve"] == 0
+
+
+def test_stage7_crowded_trends_raise_evidence_floor_and_keep_surplus_in_reserve():
+    xs = []
+    for i in range(12):
+        strong = i < 5
+        xs.append({
+            "id": f"claim:t:{i}", "claim_native": True, "product": "trend", "status": "qualified",
+            "oddity_passes": True, "wow": 1, "score": 95-i,
+            "trend_evidence_floor_passes": True,
+            "trend_balance": {
+                "left_records": 4 if strong else 3, "right_records": 4 if strong else 3,
+                "left_sources": 3 if strong else 2, "right_sources": 3 if strong else 2,
+            },
+            "endpoint_objects": [f"t{i}"], "trend_key": f"trend:{i}", "support": [{"mechanism": f"moves{i}"}],
+            "primary_sources": 6 if strong else 4, "primary_records": 8 if strong else 6,
+        })
+    pubs, meta = live._select_stage7(copy.deepcopy(xs), {"publications": {}, "candidates": []})
+    assert pubs["trend"] == [f"claim:t:{i}" for i in range(5)]
+    assert meta["trend"]["active_evidence_floor"] == "4_records_3_sources_each_side"
+    assert meta["trend"]["reserve"] == 7
+    assert meta["trend"]["hard_cap"] is False
 
 
 def test_stage7_zero_strength_primary_claim_is_stock_not_publication(monkeypatch):
@@ -292,30 +358,35 @@ def test_stage7_new_wow5_is_shown_even_when_soft_target_is_full():
     }
     pubs, meta = live._select_stage7(copy.deepcopy(incumbents + [surprise]), previous)
     assert "claim:new:wow5" in pubs["risk"]
-    assert len(pubs["risk"]) == 6
+    # The new wow-5 enters immediately; the crowded wow-3 band is reserve except
+    # for one minimum-fill incumbent.  The target is still a threshold guide, not
+    # a five-slot hard cap.
+    assert len(pubs["risk"]) == 2
     assert meta["risk"]["soft_target"] == [2, 5]
-    assert meta["risk"]["shown"] == 6
+    assert meta["risk"]["shown"] == 2
+    assert meta["risk"]["reserve"] == 4
 
-def test_stage7_hysteresis_keeps_equal_wow_incumbent_until_six_point_challenge():
+def test_stage7_hysteresis_keeps_equal_wow_incumbent_in_minimum_fill_until_six_point_challenge():
     base = {
         "claim_native": True, "product": "risk", "status": "qualified",
-        "denial_tested": True, "oddity_passes": True, "wow": 4,
+        "denial_tested": True, "oddity_passes": True, "wow": 3,
         "verification_mode": "executed_candidate_falsifier",
     }
-    incumbents = []
-    for i in range(5):
-        c = dict(base, id=f"claim:old:{i}", score=90-i, endpoint_objects=[f"old{i}", "x"], support=[{"mechanism": f"m{i}"}])
-        incumbents.append(c)
-    challenger = dict(base, id="claim:new", score=87, endpoint_objects=["new", "x"], support=[{"mechanism": "mn"}])
+    incumbents = [
+        dict(base, id="claim:old:0", score=90, endpoint_objects=["old0", "x"], support=[{"mechanism": "m0"}]),
+        dict(base, id="claim:old:1", score=89, endpoint_objects=["old1", "x"], support=[{"mechanism": "m1"}]),
+    ]
+    filler = [
+        dict(base, id=f"claim:filler:{i}", score=80-i, endpoint_objects=[f"f{i}", "x"], support=[{"mechanism": f"f{i}"}])
+        for i in range(4)
+    ]
+    challenger = dict(base, id="claim:new", score=94, endpoint_objects=["new", "x"], support=[{"mechanism": "mn"}])
     previous = {
         "publications": {"risk": [c["id"] for c in incumbents]},
         "candidates": [dict(c) for c in incumbents],
     }
-    pubs, _ = live._select_stage7(copy.deepcopy(incumbents + [challenger]), previous)
-    assert "claim:new" not in pubs["risk"]
-    challenger["score"] = 91  # weakest incumbent is 86: still only +5
-    pubs, _ = live._select_stage7(copy.deepcopy(incumbents + [challenger]), previous)
-    assert "claim:new" not in pubs["risk"]
-    challenger["score"] = 92  # +6 displaces the weakest incumbent
-    pubs, _ = live._select_stage7(copy.deepcopy(incumbents + [challenger]), previous)
-    assert "claim:new" in pubs["risk"]
+    pubs, _ = live._select_stage7(copy.deepcopy(incumbents + filler + [challenger]), previous)
+    assert "claim:new" not in pubs["risk"]  # weakest incumbent 89; +5 is not enough
+    challenger["score"] = 95
+    pubs, _ = live._select_stage7(copy.deepcopy(incumbents + filler + [challenger]), previous)
+    assert "claim:new" in pubs["risk"]  # +6 displaces the weakest incumbent

@@ -49,9 +49,9 @@ function item(x,kind,i){
 }
 function listHtml(items,kind){const label=kind==='risk'?'risk':'opportunity';return items.length?items.map((x,i)=>item(x,kind,i)).join(''):`<li class="empty">No current ${label} is clear enough to show here yet.</li>`}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-detail]');if(!b)return;const box=document.getElementById(b.dataset.detail);if(!box)return;const opening=box.hidden;box.hidden=!opening;b.setAttribute('aria-expanded',String(opening));b.textContent=opening?'Close':'Evidence';});
-function stockLine(reserve,watch){reserve=Number(reserve)||0;watch=Number(watch)||0;if(!reserve&&!watch)return '';return `${reserve} more in reserve, ${watch} under watch.`}
+function stockLine(reserve,watch){reserve=Number(reserve)||0;watch=Number(watch)||0;if(!reserve&&!watch)return '';return `${reserve} more in reserve, ${watch} still developing.`}
 function render(view){document.getElementById('risks').innerHTML=listHtml(view.risks,'risk');document.getElementById('opportunities').innerHTML=listHtml(view.opportunities,'opportunity');document.getElementById('riskCount').textContent=`${view.stats.shownRisks} shown`;document.getElementById('opportunityCount').textContent=`${view.stats.shownOpportunities} shown`;document.getElementById('riskStock').textContent=stockLine(view.stats.riskReserve,view.stats.riskWatch);document.getElementById('opportunityStock').textContent=stockLine(view.stats.opportunityReserve,view.stats.opportunityWatch);}
-(async()=>{try{const data=await RadarData.load('../radar.json','../radar_seed.json');render(RadarPriorities.buildPriorityView(data,{limit:20}))}catch(e){document.getElementById('risks').innerHTML='<li class="empty">Unavailable.</li>';document.getElementById('opportunities').innerHTML='<li class="empty">Unavailable.</li>'}})();
+(async()=>{try{const data=await RadarData.load('../radar.json','../radar_seed.json');render(RadarPriorities.buildPriorityView(data))}catch(e){document.getElementById('risks').innerHTML='<li class="empty">Unavailable.</li>';document.getElementById('opportunities').innerHTML='<li class="empty">Unavailable.</li>'}})();
 </script>
 <script src="../site-shell.js?v=28"></script>
 </body>

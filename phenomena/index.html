@@ -129,19 +129,30 @@ async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});ret
     ]);
     const mergedHistory=RadarPhenomena.mergeHistories(fileHistory,data?.historical_archive);
     const history=RadarHistoricalReasoning.build(mergedHistory,admission,reader,corrections);
-    const established=RadarPhenomena.build(data,history,historyConfig);
-    const patterns=RadarContinuity.build(data,history,historyConfig,RadarPhenomena.phenomena);
     const hi=data?.high_order_inference&&typeof data.high_order_inference==='object'?data.high_order_inference:{};
-    const hids=Array.isArray(hi?.publications?.continuity)?hi.publications.continuity:[];
-    const hmap=new Map((Array.isArray(hi?.candidates)?hi.candidates:[]).filter(x=>x&&typeof x==='object').map(x=>[clean(x.id),x]));
-    const highOrder=hids.map(id=>hmap.get(clean(id))).filter(Boolean).map(c=>({text:clean(c.reader_title||c.reader_summary||c.topic_label),records:Number(c.primary_records)||0,sources:Number(c.primary_sources)||0,distance:Number(c.inferential_distance)||4,rankScore:Number(c.score)||0,group:'changing'}));
-    const changing=unique([...(patterns.findings||[]).map(x=>({text:changingStatement(x),records:Number(x.currentCount)||0,sources:Number(x.currentSources)||0,distance:patternDistance(x),rankScore:Number(x.score)||0,group:'changing'})),...highOrder]);
-    const returning=unique(established.filter(x=>!x.autoDetected).map(x=>({text:returningStatement(x),records:Number(x.currentCount)||0,sources:Number(x.currentSources)||0,distance:1,rankScore:Math.min(99,(Number(x.score)||0)*4),group:'returning'})));
-    const all=rankItems(unique([...changing,...returning]));
-    const shown=all.slice(0,PHENOMENA_DISPLAY_LIMIT);
-    const hs=history?.reasoning_stats||{};
-    document.getElementById('phenomenaSummary').textContent=`Showing ${shown.length} highest-ranked ongoing ${shown.length===1?'phenomenon':'phenomena'}${all.length>shown.length?` of ${all.length}`:''}. Older verified findings help separate lasting patterns from one-off movement.`;
-    render(shown);
+    const claimNative=hi?.detector_backend==='claim_native'&&Number(hi?.selection_stage||0)>=7;
+    if(claimNative){
+      // Stage 7 is authoritative for the visible shelf.  Legacy topic/continuity
+      // detectors remain available only as rollback readers; mixing them into the
+      // claim-native shelf would recreate the pre-reform ranking system.
+      const hids=Array.isArray(hi?.publications?.continuity)?hi.publications.continuity:[];
+      const hmap=new Map((Array.isArray(hi?.candidates)?hi.candidates:[]).filter(x=>x&&typeof x==='object').map(x=>[clean(x.id),x]));
+      const shown=hids.map(id=>hmap.get(clean(id))).filter(Boolean).map(c=>({text:clean(c.reader_title||c.reader_summary||c.topic_label),records:Number(c.primary_records)||0,sources:Number(c.primary_sources)||0,distance:Number(c.wow)||Number(c.inferential_distance)||3,rankScore:Number(c.score)||0,group:'changing'}));
+      const sel=hi?.selection?.continuity||{};
+      const reserve=Number(sel.reserve)||0,watch=Number(sel.watch)||0;
+      const stockNote=(reserve||watch)?` ${reserve} more in reserve; ${watch} still developing.`:'';
+      document.getElementById('phenomenaSummary').textContent=`Showing ${shown.length} selected ongoing ${shown.length===1?'phenomenon':'phenomena'}.${stockNote}`;
+      render(shown);
+    }else{
+      const established=RadarPhenomena.build(data,history,historyConfig);
+      const patterns=RadarContinuity.build(data,history,historyConfig,RadarPhenomena.phenomena);
+      const changing=unique((patterns.findings||[]).map(x=>({text:changingStatement(x),records:Number(x.currentCount)||0,sources:Number(x.currentSources)||0,distance:patternDistance(x),rankScore:Number(x.score)||0,group:'changing'})));
+      const returning=unique(established.filter(x=>!x.autoDetected).map(x=>({text:returningStatement(x),records:Number(x.currentCount)||0,sources:Number(x.currentSources)||0,distance:1,rankScore:Math.min(99,(Number(x.score)||0)*4),group:'returning'})));
+      const all=rankItems(unique([...changing,...returning]));
+      const shown=all.slice(0,PHENOMENA_DISPLAY_LIMIT);
+      document.getElementById('phenomenaSummary').textContent=`Showing ${shown.length} highest-ranked ongoing ${shown.length===1?'phenomenon':'phenomena'}${all.length>shown.length?` of ${all.length}`:''}. Older verified findings help separate lasting patterns from one-off movement.`;
+      render(shown);
+    }
   }catch(e){
     console.error(e);
     document.getElementById('phenomenaSummary').textContent='Ongoing-phenomena evidence is unavailable.';

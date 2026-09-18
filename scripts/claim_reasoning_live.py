@@ -1255,7 +1255,7 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
 
     * formation/status is decided by the grammar;
     * verification is grammar-specific (trend floor / graph structure / L5 falsifier);
-    * page capacity chooses among verified candidates and leaves the rest in reserve;
+    * adaptive shelf thresholds choose among verified candidates and leave the rest in reserve;
     * incumbents move slowly, with a six-point same-wow challenger threshold.
     """
     targets = {
@@ -1336,51 +1336,157 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
             folded += 1
         deduped.sort(key=_selection_rank, reverse=True)
 
-        # Keep eligible incumbents first so ordinary score jitter does not churn the
-        # page.  Fill empty slots with the strongest challengers.  Once full, a
-        # challenger replaces the weakest incumbent only when it has a higher wow or,
-        # at equal wow, a >=6 point score advantage.  Trends use evidence rank and can
-        # replace only when their evidence rank is strictly stronger.
-        chosen: list[dict[str, Any]] = []
-        chosen_ids: set[str] = set()
-        by_id = {clean(c.get("id")): c for c in deduped}
-        for cid in prev_ids_ordered:
-            c = by_id.get(cid)
-            if c and cid not in chosen_ids and len(chosen) < ceil_target:
-                chosen.append(c)
-                chosen_ids.add(cid)
-        for cand in deduped:
-            cid = clean(cand.get("id"))
-            if not cid or cid in chosen_ids:
-                continue
-            if len(chosen) < ceil_target:
-                chosen.append(cand)
-                chosen_ids.add(cid)
-                continue
-            # R-72: the target is a range, not a hard cap.  A newly verified wow-5
-            # finding appears immediately even when the ordinary shelf is full; it
-            # never queues behind unchanged lower-wow material.
-            if product != "trend" and int(cand.get("wow", 0) or 0) == 5 and cid not in prev_ids:
-                chosen.append(cand)
-                chosen_ids.add(cid)
-                continue
-            weakest = min(chosen, key=_selection_rank)
-            if product == "trend":
-                displace = _selection_rank(cand) > _selection_rank(weakest)
-            else:
-                cw, ww = int(cand.get("wow", 0) or 0), int(weakest.get("wow", 0) or 0)
-                displace = cw > ww or (cw == ww and int(cand.get("score", 0) or 0) >= int(weakest.get("score", 0) or 0) + 6)
-            if displace:
-                chosen.remove(weakest)
-                chosen_ids.discard(clean(weakest.get("id")))
-                weakest["movement"] = "reserve"
-                chosen.append(cand)
-                chosen_ids.add(cid)
+        def stable_take(items: list[dict[str, Any]], count: int) -> list[dict[str, Any]]:
+            """Choose a small threshold-fallback set without page churn.
 
+            This is used only when an adaptive threshold would otherwise under-fill
+            the soft minimum.  Existing visible items keep their place until an
+            equal-wow challenger is at least six score points stronger (R-76); a
+            higher-wow challenger enters immediately.
+            """
+            if count <= 0:
+                return []
+            ranked = sorted(items, key=_selection_rank, reverse=True)
+            by_id_local = {clean(c.get("id")): c for c in ranked if clean(c.get("id"))}
+            selected: list[dict[str, Any]] = []
+            selected_ids: set[str] = set()
+            for cid in prev_ids_ordered:
+                c = by_id_local.get(cid)
+                if c is not None and cid not in selected_ids and len(selected) < count:
+                    selected.append(c); selected_ids.add(cid)
+            for c in ranked:
+                cid = clean(c.get("id"))
+                if not cid or cid in selected_ids:
+                    continue
+                if len(selected) < count:
+                    selected.append(c); selected_ids.add(cid)
+                    continue
+                weakest = min(selected, key=_selection_rank)
+                if product == "trend":
+                    displace = _selection_rank(c) > _selection_rank(weakest)
+                else:
+                    cw, ww = int(c.get("wow", 0) or 0), int(weakest.get("wow", 0) or 0)
+                    displace = cw > ww or (cw == ww and int(c.get("score", 0) or 0) >= int(weakest.get("score", 0) or 0) + 6)
+                if displace:
+                    selected.remove(weakest); selected_ids.discard(clean(weakest.get("id")))
+                    selected.append(c); selected_ids.add(cid)
+            return sorted(selected, key=_selection_rank, reverse=True)
+
+        # R-72 is a *soft target*, not a slot count.  The earlier cutover still
+        # stopped at ceil_target (5 for risks/opportunities, 10 for trends), which
+        # silently turned the target range into a hard cap.  Selection now works by
+        # threshold: when the ordinary top-of-page band is overcrowded, strengthen
+        # the relevant evidence/wow/depth floor.  Whatever clears that stronger
+        # threshold is shown; verified surplus remains reserve.  The target range
+        # therefore guides curation but never limits candidate generation.
+        prev_ids = set(prev_ids_ordered)
+        chosen: list[dict[str, Any]] = []
+
+        if product == "trend":
+            # Trends have no wow floor, so an overcrowded shelf is tightened by the
+            # *evidence floor*, not by an arbitrary item count.  R-51 starts at
+            # 3 records / 2 sources on each side.  When more than the soft upper
+            # range clear that floor, prefer the stronger 4-record / 3-source band.
+            # If that would under-fill the soft minimum, supplement with the
+            # strongest ordinary-floor pairs only until the minimum is met.
+            base = list(deduped)
+            if len(base) > ceil_target:
+                def stronger_trend_floor(c):
+                    b = c.get("trend_balance") if isinstance(c.get("trend_balance"), dict) else {}
+                    return (
+                        int(b.get("left_records", 0) or 0) >= 4
+                        and int(b.get("right_records", 0) or 0) >= 4
+                        and int(b.get("left_sources", 0) or 0) >= 3
+                        and int(b.get("right_sources", 0) or 0) >= 3
+                    )
+                chosen = [c for c in base if stronger_trend_floor(c)]
+                if len(chosen) < floor_target:
+                    chosen_ids_local = {clean(c.get("id")) for c in chosen}
+                    remaining = [c for c in base if clean(c.get("id")) not in chosen_ids_local]
+                    chosen.extend(stable_take(remaining, floor_target - len(chosen)))
+                meta_trend_floor = "4_records_3_sources_each_side"
+            else:
+                chosen = base
+                meta_trend_floor = "3_records_2_sources_each_side"
+            wow_floor = 0
+        elif product == "shock":
+            # Shocks keep the exceptional wow>=4 gate.  Overcrowding raises the
+            # floor to wow 5.  If that leaves fewer than the soft minimum, retain
+            # only enough strongest wow-4 findings to keep a real shelf; the rest
+            # remain verified reserve rather than being discarded or all displayed.
+            base = [c for c in deduped if int(c.get("wow", 0) or 0) >= 4]
+            higher = [c for c in base if int(c.get("wow", 0) or 0) >= 5]
+            if len(base) > ceil_target:
+                wow_floor = 5
+                chosen = list(higher)
+                if len(chosen) < floor_target:
+                    chosen_ids_local = {clean(c.get("id")) for c in chosen}
+                    remaining = [c for c in base if clean(c.get("id")) not in chosen_ids_local]
+                    chosen.extend(stable_take(remaining, floor_target - len(chosen)))
+            else:
+                wow_floor = 4
+                chosen = base
+        else:
+            # Risks, opportunities and continuities use wow>=3 for the upper shelf.
+            # If that band is crowded, raise the floor to wow 4.  Crucially, when
+            # the higher band is sparse we do *not* fall back to showing every
+            # wow-3 item: we keep just enough strongest wow-3 findings to satisfy
+            # the soft minimum, leaving the rest as verified reserve.  If the
+            # ordinary top band itself is sparse, show the verified baseline that
+            # actually exists (including wow 1-2) as R-72 requires.
+            top = [c for c in deduped if int(c.get("wow", 0) or 0) >= 3]
+            higher = [c for c in top if int(c.get("wow", 0) or 0) >= 4]
+            if len(top) > ceil_target:
+                wow_floor = 4
+                chosen = list(higher)
+                if len(chosen) < floor_target:
+                    chosen_ids_local = {clean(c.get("id")) for c in chosen}
+                    # If wow alone cannot separate a crowded shelf, prefer findings
+                    # built above the corroborated-claim baseline (depth >=3).  This
+                    # keeps the page analytically richer without inventing a numeric
+                    # cap; all other verified findings stay in reserve.
+                    deeper = [
+                        c for c in top
+                        if clean(c.get("id")) not in chosen_ids_local
+                        and int(c.get("inferential_distance", c.get("level", 0)) or 0) >= 3
+                    ]
+                    if len(deeper) >= floor_target - len(chosen):
+                        chosen.extend(deeper)
+                    else:
+                        chosen.extend(deeper)
+                        chosen_ids_local = {clean(c.get("id")) for c in chosen}
+                        remaining = [c for c in top if clean(c.get("id")) not in chosen_ids_local]
+                        chosen.extend(stable_take(remaining, floor_target - len(chosen)))
+                # R-74: if a lower wow point exists below the active shelf and is
+                # not already represented by the minimum-fill step, keep one best
+                # baseline representative.  Do not turn that baseline into a cap.
+                for lower_wow in range(wow_floor - 1, 0, -1):
+                    if any(int(c.get("wow", 0) or 0) == lower_wow for c in chosen):
+                        continue
+                    lower = [c for c in deduped if int(c.get("wow", 0) or 0) == lower_wow]
+                    if lower:
+                        chosen.append(max(lower, key=_selection_rank))
+            elif len(top) >= floor_target:
+                wow_floor = 3
+                chosen = list(top)
+                for lower_wow in (2, 1):
+                    lower = [c for c in deduped if int(c.get("wow", 0) or 0) == lower_wow]
+                    if lower:
+                        chosen.append(max(lower, key=_selection_rank))
+            else:
+                wow_floor = 3
+                # Shortage rule: there is no crowded upper shelf to curate, so show
+                # the verified material that exists instead of manufacturing empty
+                # space.  This is why a product may legitimately show six baseline
+                # opportunities even though 2-5 is its normal target range.
+                chosen = list(deduped)
+
+        # Preserve deterministic page order: wow first, then depth/evidence score.
+        # Same-story hysteresis was already applied during the folding pass above.
+        chosen = list({clean(c.get("id")): c for c in chosen if clean(c.get("id"))}.values())
         chosen.sort(key=_selection_rank, reverse=True)
         out[product] = [clean(c.get("id")) for c in chosen]
         chosen_ids = set(out[product])
-        prev_ids = set(prev_ids_ordered)
 
         for c in pool:
             cid = clean(c.get("id"))
@@ -1442,8 +1548,9 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
         watch = sum(1 for c in pool if clean(c.get("movement")) == "watch")
         meta[product] = {
             "soft_target": [floor_target, ceil_target],
-            "page_capacity": ceil_target,
+            "hard_cap": False,
             "wow_floor": wow_floor,
+            "active_evidence_floor": meta_trend_floor if product == "trend" else "grammar_default",
             "verified_eligible": len(verified_pool),
             "top_floor_eligible": sum(1 for c in verified_pool if product == "trend" or int(c.get("wow", 0) or 0) >= wow_floor),
             "baseline_verified": sum(1 for c in verified_pool if product not in {"trend", "shock"} and int(c.get("wow", 0) or 0) < wow_floor),
@@ -1748,7 +1855,7 @@ def refresh_claim_high_order(
         "publication_compatibility_lock": False,
         "falsifier_execution": {"executed_finding_context_queries": sorted(executed_queries), "executed_count": len(executed_queries)},
         "selection": selection,
-        "publication_policy": "Stage 7 claim-native selection separates candidate formation, grammar-specific verification, and page selection. Level-2 corroborated findings use the independent-source floor; trends use their own two-sided evidence floor; structural graph findings use their bounded graph test; Level-5 cross-evidence hypotheses require an executed candidate-specific falsifier. Verified excess candidates remain in reserve under stable page capacities and six-point hysteresis.",
+        "publication_policy": "Stage 7 claim-native selection separates candidate formation, grammar-specific verification, and page selection. Candidate stock is uncapped. Level-2 corroborated findings use the independent-source floor; trends use their own two-sided evidence floor; structural graph findings use their bounded graph test; Level-5 cross-evidence hypotheses require an executed candidate-specific falsifier. Soft target ranges tune the active shelf threshold; verified surplus remains reserve and incomplete hypotheses remain watch.",
         "lifecycle_policy": "Claim-native stock persists as page/reserve/watch tiers; evidence is recomputed each scan, missed detections decay slowly, and evidence withdrawal or a falsifier hit exits the visible shelf immediately.",
         "candidate_search_policy": "Missing-role and falsifier queries remain ordinary scanner discovery inputs and receive no admission waiver.",
         "publications": publications,
