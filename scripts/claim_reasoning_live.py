@@ -47,6 +47,7 @@ try:
         corroborated_claims,
         dependency_pathways,
         era_conjunctions,
+        exploratory_shock_hypotheses,
         flatten_claims,
         latent_channels,
         level3_findings,
@@ -72,6 +73,7 @@ except ModuleNotFoundError:  # direct execution from scripts/
         corroborated_claims,
         dependency_pathways,
         era_conjunctions,
+        exploratory_shock_hypotheses,
         flatten_claims,
         latent_channels,
         level3_findings,
@@ -151,7 +153,7 @@ def _empty_detection(raw: dict[str, Any], evaluated_at: str | None, *, reason: s
         "distance_table": {"N": 0, "clusters": {}, "pairs": {}},
         "groups": {
             "level2_corroborated": [], "level2_named_continuity": [], "level3_sequence_gap": [], "level3_era_conjunction": [],
-            "level4_opposing_movements": [], "level5_dependency_pathway": [], "level4_5_conflicting_criteria": [],
+            "level4_opposing_movements": [], "level5_dependency_pathway": [], "future_shock_hypothesis": [], "level4_5_conflicting_criteria": [],
             "level5_latent_channel": [], "level5_anchor_demand": [], "level5_split_recurrence": [],
         },
     }
@@ -575,7 +577,7 @@ def detect_claim_reasoning(raw: dict[str, Any], root: Path = ROOT, evaluated_at:
             "distance_table": {"N": 0, "clusters": {}, "pairs": {}},
             "groups": {
                 "level2_corroborated": [], "level2_named_continuity": [], "level3_sequence_gap": [], "level3_era_conjunction": [],
-                "level4_opposing_movements": [], "level5_dependency_pathway": [],
+                "level4_opposing_movements": [], "level5_dependency_pathway": [], "future_shock_hypothesis": [],
                 "level4_5_conflicting_criteria": [], "level5_latent_channel": [],
                 "level5_anchor_demand": [], "level5_split_recurrence": [],
             },
@@ -593,7 +595,7 @@ def detect_claim_reasoning(raw: dict[str, Any], root: Path = ROOT, evaluated_at:
             "claim_expressiveness": expressiveness, "distance_table": {"N": 0, "clusters": {}, "pairs": {}},
             "groups": {
                 "level2_corroborated": [], "level2_named_continuity": [], "level3_sequence_gap": [], "level3_era_conjunction": [],
-                "level4_opposing_movements": [], "level5_dependency_pathway": [],
+                "level4_opposing_movements": [], "level5_dependency_pathway": [], "future_shock_hypothesis": [],
                 "level4_5_conflicting_criteria": [], "level5_latent_channel": [],
                 "level5_anchor_demand": [], "level5_split_recurrence": [],
             },
@@ -610,6 +612,7 @@ def detect_claim_reasoning(raw: dict[str, Any], root: Path = ROOT, evaluated_at:
         "level3_era_conjunction": era_conjunctions(nodes),
         "level4_opposing_movements": opposing_movements(nodes, ev_date, vocab),
         "level5_dependency_pathway": dependency_pathways(nodes, vocab, distance),
+        "future_shock_hypothesis": exploratory_shock_hypotheses(nodes, vocab),
         "level4_5_conflicting_criteria": conflicting_criteria(nodes, vocab, distance),
         "level5_latent_channel": latent_channels(nodes, vocab),
         "level5_anchor_demand": anchor_demand_candidates(nodes, vocab),
@@ -931,7 +934,7 @@ def _final_wow(raw_candidate: dict[str, Any], nodes: Iterable[dict[str, Any]], v
         }
         h = len({x for x in hist_records if x})
         stake = _stake_class(obj, vocab) in {"flagship", "rule", "budget", "capability"}
-        if h == 0 and stake and len(cur_records) <= 8:
+        if h == 0 and len(cur_records) <= 10:
             wow = 5
         elif h <= 1:
             wow = 4
@@ -959,10 +962,14 @@ def _final_wow(raw_candidate: dict[str, Any], nodes: Iterable[dict[str, Any]], v
         ck, hk = shares(cur, "kind", kinds), shares(hist, "kind", kinds)
         kind_shift = 0.5 * sum(abs(ck[v] - hk[v]) for v in kinds)
         shift = max(direction_shift, kind_shift)
-        wow = 4 if shift >= 0.55 else 3 if shift >= 0.35 else 2 if shift >= 0.18 else 1
+        wow = 5 if shift >= 0.75 else 4 if shift >= 0.50 else 3 if shift >= 0.35 else 2 if shift >= 0.22 else 1
         return wow, {"mode": "continuity_shape_change", "direction_shift": round(direction_shift, 3), "kind_shift": round(kind_shift, 3)}
 
     eps = [clean(x) for x in raw_candidate.get("endpoint_objects", []) if clean(x)] if isinstance(raw_candidate.get("endpoint_objects"), list) else []
+    if grammar == "future_shock_hypothesis":
+        wow = max(1, min(5, int(raw_candidate.get("wow_preliminary", 3) or 3)))
+        return wow, {"mode": "shock_pair_familiarity", "joint_records": int(raw_candidate.get("pair_joint_records", 0) or 0), "compatibility_strength": int(raw_candidate.get("compatibility_strength", 0) or 0)}
+
     if grammar == "corroborated_claim":
         obj = clean(raw_candidate.get("object"))
         current_records = {clean(n.get("_record_id")) for n in nodes if clean(n.get("era")) == "current" and obj and obj in _node_objects(n)}
@@ -974,7 +981,7 @@ def _final_wow(raw_candidate: dict[str, Any], nodes: Iterable[dict[str, Any]], v
             wow = 4
         elif h <= 2:
             wow = 3
-        elif h <= 8:
+        elif h <= 15:
             wow = 2
         else:
             wow = 1
@@ -1335,6 +1342,13 @@ def _story_key(c: dict[str, Any]) -> tuple[str, str]:
     """
     if clean(c.get("product")) == "trend":
         return "trend", clean(c.get("trend_key") or c.get("topic_key"))
+    if clean(c.get("product")) == "shock":
+        objects = [clean(x) for x in c.get("endpoint_objects", []) if clean(x)] if isinstance(c.get("endpoint_objects"), list) else []
+        # A different disruption mechanism acting on the same European asset is a
+        # different shock story.  Folding only on the asset erased the broad shock
+        # corpus and made a 15-slot wow cycle impossible even when many grounded
+        # hypotheses existed.
+        return "shock", "|".join(objects[:2]) or clean(c.get("topic_key"))
     support = [x for x in c.get("support", []) if isinstance(x, dict)] if isinstance(c.get("support"), list) else []
     mechanism = clean(next((x.get("mechanism") for x in support if clean(x.get("mechanism"))), c.get("grammar_id")))
     objects = [clean(x) for x in c.get("endpoint_objects", []) if clean(x)] if isinstance(c.get("endpoint_objects"), list) else []
@@ -1447,7 +1461,15 @@ def _presentation_ready(c: dict[str, Any]) -> tuple[bool, str]:
         return ok, "two_eras_two_sources" if ok else "continuity_needs_broader_two_era_support"
 
     if product == "shock":
-        ok = bool(c.get("shock_driver")) and sources >= 2 and records >= 2 and coverage >= 0.50 and bool(c.get("role_strength_floor_passes", True)) and maturity >= 40
+        # Future-facing shock hypotheses should not need the same source diversity as
+        # a retrospective factual claim merely to compete for a wow slot.  Two
+        # independent sources is the normal floor.  A complete pathway carried by
+        # three distinct records from one authoritative source can also compete, but
+        # its lower source-diversity score keeps it behind genuinely independent
+        # alternatives inside the same wow bucket.
+        normal_grounding = sources >= 2 and records >= 2 and coverage >= 0.50 and maturity >= 40
+        concentrated_grounding = sources >= 1 and records >= 3 and coverage >= 0.75 and maturity >= 55
+        ok = bool(c.get("shock_driver")) and bool(c.get("role_strength_floor_passes", True)) and (normal_grounding or concentrated_grounding)
         return ok, "grounded_future_shock" if ok else "shock_needs_stronger_driver_or_pathway_support"
 
     if product in {"risk", "opportunity"}:
@@ -1651,6 +1673,7 @@ def _candidate_topic_label(grammar: str, topic: str) -> str:
         "era_conjunction": "current/historical conjunction",
         "conflicting_criteria": "criteria collision",
         "dependency_pathway": "dependency pathway",
+        "future_shock_hypothesis": "future shock hypothesis",
         "latent_channel": "latent channel",
         "anchor_demand": "anchor-demand pathway",
         "split_recurrence": "recurring split",
@@ -1743,6 +1766,11 @@ def _reader_copy(grammar: str, product: str, raw: dict[str, Any], candidate: dic
         return f"A proposal affecting {a} is ageing without a later decision.", "The proposal has remained below implementation for more than six months with no later status transition in the evidence base."
     if grammar == "conflicting_criteria":
         return f"{a[:1].upper()+a[1:]} is colliding with {b}.", "Separate records support both requirements, but the evidence base does not yet show a common tie-break. The same project or facility can therefore receive different answers depending on which rule is applied first."
+    if grammar == "future_shock_hypothesis":
+        pressure = clean(raw.get("pressure_label")) or "an external disruption"
+        asset = _friendly_object_label(raw.get("capability_object") or (eps[0] if eps else ""))
+        lead = pressure[:1].upper() + pressure[1:]
+        return f"{lead} could disrupt {asset}.", f"Europe is already building or relying on {asset}; a sudden change in the outside condition could interrupt access, operation or scale-up before alternatives are ready."
     if grammar == "dependency_pathway":
         if product == "shock":
             return f"A sudden break in {b} could propagate into {a}.", "The disruptive event itself is not in the corpus, but separate records document the coupling, propagation route and European exposure. This is a possible discontinuity, not a forecast."
@@ -1782,6 +1810,7 @@ def _reader_why(grammar: str, product: str, raw: dict[str, Any]) -> str:
     if grammar == "practice_before_doctrine": return "Early implementation can become the de facto rule before the formal framework has had a chance to arbitrate trade-offs."
     if grammar == "goal_without_measure": return "A goal can dominate policy language without creating an evidence base for whether interventions are working."
     if grammar == "conflicting_criteria": return f"The same European project can be treated differently depending on whether {a} or {b} is applied first."
+    if grammar == "future_shock_hypothesis": return "The asset and the disruption mechanism are both evidenced; the direct bridge is allowed to remain a future hypothesis until stronger evidence appears."
     if grammar == "dependency_pathway" and product == "risk": return f"A failure in {b} would not stay local if the documented propagation route reaches {a}."
     if grammar == "dependency_pathway" and product == "shock": return f"A sudden disruption in {b} could remove capability faster than the documented European responses can absorb it."
     if grammar == "latent_channel": return "The opportunity is leverage: connect pieces Europe already has instead of creating a new programme from zero."
@@ -1991,7 +2020,7 @@ def refresh_claim_high_order(
     for group in (
         "level2_corroborated", "level2_named_continuity",
         "level3_sequence_gap", "level3_era_conjunction", "level4_opposing_movements",
-        "level5_dependency_pathway", "level4_5_conflicting_criteria", "level5_latent_channel",
+        "level5_dependency_pathway", "future_shock_hypothesis", "level4_5_conflicting_criteria", "level5_latent_channel",
         "level5_anchor_demand", "level5_split_recurrence",
     ):
         for x in groups.get(group, []):
@@ -2132,7 +2161,7 @@ def refresh_claim_shocks(
         evaluated_on = dt.date.fromisoformat(ev) if len(ev) == 10 else dt.date.today()
     except ValueError:
         evaluated_on = dt.date.today()
-    deps = [x for x in detected["groups"].get("level5_dependency_pathway", []) if isinstance(x, dict) and clean(x.get("product")) == "shock"]
+    deps = [x for group in ("level5_dependency_pathway", "future_shock_hypothesis") for x in detected["groups"].get(group, []) if isinstance(x, dict) and clean(x.get("product")) == "shock"]
     prev_claim = {clean(x.get("id")): x for x in previous_state.get("claim_candidates", []) if isinstance(x, dict) and clean(x.get("id"))} if isinstance(previous_state.get("claim_candidates"), list) else {}
     executed = set(_feedback_queries_executed(raw))
     now = clean(completed_iso) or dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")

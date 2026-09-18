@@ -1025,6 +1025,264 @@ def _shock_driver_basis(dep_obj: str, support_nodes: Iterable[dict[str, Any]], v
         return True, "external_actor_or_scope"
     return False, "no_discontinuity_driver"
 
+
+# Future-shock scenario operators.  These are not publication detections and do not
+# bypass evidence authority.  They are a compact foresight grammar used to cross an
+# evidenced European asset with an evidenced disruption mechanism so the reasoning
+# corpus can contain hypotheses before every causal link has already happened.
+_SHOCK_PRESSURE_PATTERNS: dict[str, re.Pattern[str]] = {
+    "export_control": re.compile(r"\b(?:export controls?|export restrictions?|export ban|dual[- ]use licensing|technology restriction)\b", re.I),
+    "critical_input": re.compile(r"\b(?:critical raw material|critical mineral|rare earth|material constraints?|supply shortage|single supplier|import dependence)\b", re.I),
+    "security_reclassification": re.compile(r"\b(?:research security|knowledge security|dual[- ]use|sensitive research|biosecurity|foreign interference)\b", re.I),
+    "acquisition": re.compile(r"\b(?:foreign acquisition|foreign ownership|takeover|investment screening)\b", re.I),
+    "conflict": re.compile(r"\b(?:armed conflict|war|invasion|military escalation|geopolitical conflict)\b", re.I),
+    "sanctions": re.compile(r"\b(?:sanctions?|asset freeze|payment restriction|financial restriction)\b", re.I),
+    "data_access": re.compile(r"\b(?:data access restriction|data transfer restriction|cross[- ]border data|data localisation|data localization)\b", re.I),
+    "cyber": re.compile(r"\b(?:cyberattack|cyber attack|ransomware|cybersecurity risk|software vulnerab|digital outage|rogue ai agents?)\b", re.I),
+    "energy": re.compile(r"\b(?:energy supply|electricity shortage|power outage|energy crisis|grid constraint|electricity rationing|power supply|energy models?)\b", re.I),
+    "commercial": re.compile(r"\b(?:repricing|vendor lock|market withdrawal|service withdrawal|commercial provider|proprietary database|licen[cs]e restriction)\b", re.I),
+    "external_finance": re.compile(r"\b(?:hyperscaler debt|gulf capital|external finance|foreign capital)\b", re.I),
+}
+
+_SHOCK_PRESSURE_LABELS = {
+    "export_control": "external export controls",
+    "critical_input": "a critical-input shortage",
+    "security_reclassification": "a sudden security reclassification",
+    "acquisition": "a foreign acquisition",
+    "conflict": "an external conflict escalation",
+    "sanctions": "sanctions or payment restrictions",
+    "data_access": "a cross-border data restriction",
+    "cyber": "a cyber outage",
+    "energy": "an abrupt power constraint",
+    "commercial": "a provider withdrawal or repricing",
+    "external_finance": "an abrupt withdrawal of external finance",
+}
+
+# Strongly plausible asset-family × disruption-family combinations.  Other broadly
+# applicable pressures can still seed a hypothesis at lower mechanism confidence,
+# but clearly nonsensical combinations are excluded below.
+_SHOCK_STRONG_COMPAT: dict[str, set[str]] = {
+    "compute_ai": {"export_control", "critical_input", "cyber", "energy", "commercial", "sanctions", "acquisition", "data_access", "external_finance", "security_reclassification"},
+    "chips": {"export_control", "critical_input", "cyber", "energy", "commercial", "sanctions", "acquisition", "security_reclassification"},
+    "quantum": {"export_control", "critical_input", "cyber", "sanctions", "conflict", "data_access", "security_reclassification", "acquisition"},
+    "research_infrastructure": {"cyber", "energy", "commercial", "sanctions", "conflict", "data_access", "critical_input", "security_reclassification"},
+    "health": {"data_access", "cyber", "sanctions", "conflict", "commercial", "security_reclassification", "acquisition"},
+    "talent": {"conflict", "sanctions", "security_reclassification", "data_access"},
+    "funding_programme": {"conflict", "sanctions", "security_reclassification", "data_access"},
+    "defence_dual_use": {"export_control", "critical_input", "cyber", "conflict", "sanctions", "security_reclassification"},
+    "critical_infrastructure": {"cyber", "energy", "critical_input", "conflict", "sanctions", "commercial"},
+    "capital_markets": {"acquisition", "sanctions", "conflict", "commercial", "external_finance"},
+    "digital_governance": {"cyber", "data_access", "commercial", "sanctions", "security_reclassification"},
+    "cybersecurity": {"cyber", "commercial", "conflict", "sanctions"},
+    "industrial_competitiveness": {"export_control", "critical_input", "energy", "commercial", "acquisition", "sanctions"},
+    "materials_energy": {"export_control", "conflict", "sanctions", "commercial", "energy"},
+    "research_system": {"conflict", "sanctions", "security_reclassification", "data_access", "cyber"},
+    "innovation_ecosystem": {"acquisition", "commercial", "external_finance", "sanctions", "conflict"},
+    "ai_governance": {"cyber", "data_access", "security_reclassification", "export_control"},
+}
+
+_SHOCK_WEAK_COMPAT: dict[str, set[str]] = {
+    "compute_ai": {"conflict"},
+    "chips": {"conflict", "data_access"},
+    "quantum": {"energy", "commercial"},
+    "research_infrastructure": {"acquisition"},
+    "health": {"critical_input", "energy"},
+    "talent": {"commercial"},
+    "funding_programme": {"commercial", "cyber"},
+    "defence_dual_use": {"commercial", "acquisition", "energy"},
+    "critical_infrastructure": {"acquisition", "data_access"},
+    "capital_markets": {"cyber", "data_access", "security_reclassification"},
+    "digital_governance": {"export_control", "acquisition"},
+    "cybersecurity": {"acquisition", "export_control"},
+    "industrial_competitiveness": {"cyber", "conflict"},
+    "materials_energy": {"cyber", "acquisition"},
+    "research_system": {"commercial", "cyber"},
+    "innovation_ecosystem": {"cyber", "security_reclassification", "data_access", "export_control"},
+    "ai_governance": {"commercial", "sanctions", "conflict"},
+}
+
+# Strong pairs that are already conceptually close enough to be relatively obvious
+# even before the corpus contains a direct bridge.  This helps the wow ladder span
+# from familiar/obvious (1) to genuinely distant (5) without using evidence strength
+# as a proxy for novelty.
+_SHOCK_CLOSE_COMPAT: dict[str, set[str]] = {
+    "compute_ai": {"energy", "export_control", "cyber"},
+    "chips": {"export_control", "critical_input"},
+    "quantum": {"export_control", "security_reclassification"},
+    "research_infrastructure": {"cyber", "energy"},
+    "health": {"data_access", "cyber"},
+    "talent": {"conflict", "sanctions"},
+    "funding_programme": {"conflict", "sanctions"},
+    "defence_dual_use": {"export_control", "security_reclassification", "critical_input"},
+    "critical_infrastructure": {"cyber", "energy"},
+    "capital_markets": {"acquisition"},
+    "digital_governance": {"data_access", "cyber"},
+    "cybersecurity": {"cyber"},
+    "industrial_competitiveness": {"critical_input", "energy"},
+    "materials_energy": {"export_control", "energy"},
+    "research_system": {"security_reclassification"},
+    "innovation_ecosystem": {"acquisition", "commercial"},
+    "ai_governance": {"data_access", "security_reclassification"},
+}
+
+
+def _shock_pressure_classes(n: dict[str, Any]) -> set[str]:
+    text = _semantic_text(n)
+    objs = _claim_objects(n)
+    out = {pid for pid, rx in _SHOCK_PRESSURE_PATTERNS.items() if rx.search(text)}
+    if any(o.startswith("export_control.") or o == "eu_entities.export_access" for o in objs):
+        out.add("export_control")
+    if "materials.critical_raw" in objs:
+        out.add("critical_input")
+    if any(o in {"energy.grid", "datacentre.energy_supply"} for o in objs):
+        out.add("energy")
+    if any(o.startswith("finance.us_") or o == "finance.gulf_capital" for o in objs):
+        out.add("external_finance")
+    return out
+
+
+def exploratory_shock_hypotheses(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any]) -> list[dict[str, Any]]:
+    """Build a broad evidence-grounded shock corpus before full causal proof exists.
+
+    Candidate formation is intentionally easier than publication verification.  A
+    current European capability/flagship/budget plus a separately evidenced abrupt
+    disruption class is enough to seed a hypothesis.  A direct record connecting the
+    two is an optional bridge that raises maturity; its absence leaves a support query
+    rather than deleting the possible future.
+    """
+    all_nodes = list(nodes)
+    primary = [n for n in all_nodes if n.get("_primary") and clean(n.get("era")) == "current"]
+    object_meta = vocab.get("objects") or {}
+
+    # Pick the strongest current anchor for each concrete European asset.  Rules and
+    # broad policy goals are not treated as assets that can be physically/operationally
+    # knocked out; they can still appear elsewhere in risk reasoning.
+    asset_rows: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for n in primary:
+        for obj in _claim_objects(n):
+            meta = object_meta.get(obj, {}) if isinstance(object_meta.get(obj, {}), dict) else {}
+            if clean(meta.get("stake_class")) not in {"flagship", "capability", "budget"}:
+                continue
+            asset_rows[obj].append(n)
+
+    # Current primary evidence establishes that the disruption mechanism is a real
+    # thing in the Radar's evidence base; it need not already be acting on this asset.
+    pressure_rows: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for n in primary:
+        for pid in _shock_pressure_classes(n):
+            pressure_rows[pid].append(n)
+
+    def anchor_rank(n: dict[str, Any]) -> tuple[int, int, float, str]:
+        return (
+            1 if clean(n.get("kind")) == "action" else 0,
+            STATUS_RANK.get(clean(n.get("status")), 0),
+            float(n.get("merit", 0) or 0),
+            clean(n.get("status_date")),
+        )
+
+    # Record-level pressure classes across both eras are used only to measure how
+    # familiar the asset-pressure pairing already is (wow), not as primary support.
+    record_objects: dict[str, set[str]] = defaultdict(set)
+    record_pressures: dict[str, set[str]] = defaultdict(set)
+    for n in all_nodes:
+        rid = clean(n.get("_record_id"))
+        if not rid:
+            continue
+        record_objects[rid].update(_claim_objects(n))
+        record_pressures[rid].update(_shock_pressure_classes(n))
+
+    out: list[dict[str, Any]] = []
+    for asset_obj, rows in asset_rows.items():
+        meta = object_meta.get(asset_obj, {}) if isinstance(object_meta.get(asset_obj, {}), dict) else {}
+        cluster = clean(meta.get("cluster"))
+        if not cluster:
+            continue
+        asset = max(rows, key=anchor_rank)
+        asset_rid = clean(asset.get("_record_id"))
+        asset_src = _source(asset).lower()
+        strong = _SHOCK_STRONG_COMPAT.get(cluster, set())
+
+        for pid, prows in pressure_rows.items():
+            weak = _SHOCK_WEAK_COMPAT.get(cluster, set())
+            compat = 2 if pid in strong else 1 if pid in weak else 0
+            if compat == 0:
+                continue
+            # Foreign acquisition is nonsensical for programme budgets/talent; data
+            # restrictions and material/energy shocks are similarly domain-bound.
+            if pid == "acquisition" and cluster not in {"compute_ai", "chips", "quantum", "health", "capital_markets", "critical_infrastructure", "research_infrastructure", "innovation_ecosystem", "industrial_competitiveness"}:
+                continue
+            candidates = [n for n in prows if clean(n.get("_record_id")) != asset_rid]
+            if not candidates:
+                continue
+            pressure = max(candidates, key=lambda n: (1 if _source(n).lower() != asset_src else 0, anchor_rank(n)))
+            pressure_rid = clean(pressure.get("_record_id"))
+
+            # Optional direct bridge: any separate current primary record that both
+            # names the asset and contains this disruption class.
+            bridge_rows = [
+                n for n in primary
+                if clean(n.get("_record_id")) not in {asset_rid, pressure_rid}
+                and asset_obj in _claim_objects(n) and pid in _shock_pressure_classes(n)
+            ]
+            bridge = max(bridge_rows, key=anchor_rank) if bridge_rows else None
+
+            joint = sum(1 for rid, objs in record_objects.items() if asset_obj in objs and pid in record_pressures.get(rid, set()))
+            if joint >= 2:
+                wow = 1
+            elif joint == 1:
+                wow = 2
+            elif compat == 2 and pid in _SHOCK_CLOSE_COMPAT.get(cluster, set()):
+                wow = 3
+            elif compat == 2:
+                wow = 4
+            else:
+                wow = 5
+
+            roles = {
+                "commitment": _snap(asset, "commitment"),
+                "external_driver": _snap(pressure, "external_driver"),
+                "bridge": _snap(bridge, "bridge") if bridge else None,
+            }
+            missing = ["bridge"] if bridge is None else []
+            strengths = [
+                _role_strength(asset, "commitment"),
+                max(0.40, (float(pressure.get("merit", 0) or 0) / 100.0) * KIND_WEIGHT.get(clean(pressure.get("kind")), 0.7)),
+            ]
+            if bridge:
+                strengths.append(max(0.40, float(bridge.get("merit", 0) or 0) / 100.0))
+            score = round(100 * (sum(strengths) / len(strengths)) * (1.0 if compat == 2 else 0.88))
+            out.append({
+                "level": 5 if wow >= 4 else 4 if wow == 3 else 3,
+                "grammar_id": "future_shock_hypothesis",
+                "product": "shock",
+                "capability_object": asset_obj,
+                "dependency_object": pid,
+                "endpoint_objects": [asset_obj, f"shock_pressure.{pid}"],
+                "pressure_id": pid,
+                "pressure_label": _SHOCK_PRESSURE_LABELS[pid],
+                "shock_driver": True,
+                "shock_driver_basis": f"scenario_operator:{pid}",
+                "roles": roles,
+                "missing_roles": missing,
+                "score": max(0, min(99, score)),
+                "floor_ok": True,
+                "wow_preliminary": wow,
+                "pair_joint_records": joint,
+                "compatibility_strength": compat,
+                "score_gate_passes": bool(bridge and score >= 60),
+                "publication_gate_passes": False,
+            })
+
+    # Stable de-duplication by asset × disruption family.  Keep broad stock large but
+    # bounded enough for deterministic scans.
+    best: dict[tuple[str, str], dict[str, Any]] = {}
+    for c in out:
+        key = (clean(c.get("capability_object")), clean(c.get("pressure_id")))
+        old = best.get(key)
+        if old is None or (int(c.get("score", 0)), -len(c.get("missing_roles", []))) > (int(old.get("score", 0)), -len(old.get("missing_roles", []))):
+            best[key] = c
+    return sorted(best.values(), key=lambda c: (int(c.get("wow_preliminary", 0)), int(c.get("score", 0))), reverse=True)[:240]
+
 def dependency_pathways(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any], distance: dict[str, Any]) -> list[dict[str, Any]]:
     """Fit the R-32 dependency pathway over exact-object frontiers.
 
