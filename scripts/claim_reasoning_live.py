@@ -1882,6 +1882,29 @@ _FAMILY_LABELS = {
 }
 
 
+_TREND_TITLE_POOL: tuple[tuple[str, str], ...] = (
+    ("Europe pushes {x} forward", "{X} runs into limits"),
+    ("More money and moves behind {x}", "New conditions pile up around {x}"),
+    ("{X} gains momentum", "Rules and costs rein {x} in"),
+    ("Scaling up {x}", "{X} gets harder to do"),
+    ("Europe doubles down on {x}", "Second thoughts slow {x}"),
+    ("{X}: the build-out accelerates", "{X}: the fine print tightens"),
+    ("Fresh commitments for {x}", "Friction grows around {x}"),
+    ("{X} is on the rise", "{X} meets resistance"),
+    ("Opening the throttle on {x}", "Pulling the handbrake on {x}"),
+    ("{X} finds new backers", "{X} faces new hurdles"),
+    ("Europe bets bigger on {x}", "The bill for {x} keeps rising"),
+    ("{X} spreads", "{X} gets fenced in"),
+)
+
+
+def _trend_title_pair(label: str, key: str, index: int | None = None) -> tuple[str, str]:
+    i = index if index is not None else int(hashlib.sha1(key.encode()).hexdigest(), 16) % len(_TREND_TITLE_POOL)
+    left, right = _TREND_TITLE_POOL[i % len(_TREND_TITLE_POOL)]
+    X = label[:1].upper() + label[1:]
+    return left.format(x=label, X=X), right.format(x=label, X=X)
+
+
 def _trend_scope_label(scope_kind: str, scope_key: str) -> str:
     if _family_of(scope_key) or scope_kind == "family":
         return _friendly_object_label(scope_key if _family_of(scope_key) else FAMILY_PREFIX + clean(scope_key))
@@ -1900,7 +1923,14 @@ def _trend_scope_label(scope_kind: str, scope_key: str) -> str:
         "talent retention": "researcher retention",
         "ai governance": "AI governance",
     }
-    return aliases.get(text, text or "this object")
+    if text in aliases:
+        return aliases[text]
+    parts = clean(scope_key).split(".")
+    if len(parts) == 2 and "_" in parts[1]:
+        # "innovation.green_technology" reads as "green technology", not
+        # "innovation green technology".
+        return parts[1].replace("_", " ")
+    return text or "this object"
 
 
 def _trend_payload(
@@ -2044,10 +2074,9 @@ def _trend_payload(
         "talent.retention": ("Make Europe stickier for researchers", "Career and mobility frictions keep pulling people away"),
         "horizon.budget_2028_34": ("Put more money behind the next Horizon programme", "Frugal positions keep the budget under pressure"),
     }
-    left_title, right_title = title_pairs.get(
-        obj,
-        (f"More {label_text}", f"{label_text[:1].upper()+label_text[1:]} under tighter conditions"),
-    )
+    short_label = label_text.replace(" as a whole", "")
+    custom_title = obj in title_pairs
+    left_title, right_title = title_pairs.get(obj, _trend_title_pair(short_label, obj))
 
     mechanism_labels = {
         "procures": "procurement", "builds": "build-outs", "funds": "funding",
@@ -2066,29 +2095,67 @@ def _trend_payload(
         return sum(1 for n in rows if clean(n.get("kind")) in {"action", "effect"})
 
     lcon, rcon = concrete_count(lk), concrete_count(rk)
-    composition = (
-        f"The expansion side has {lcon} concrete action/effect record{'s' if lcon != 1 else ''} out of {len(lk)}; "
-        f"the constraining side has {rcon} out of {len(rk)}. The rest are diagnoses or positions that explain the pressure."
-    )
-    left_plain = f"Current evidence is adding or widening {label_text} through {mechanism_phrase(lk)}."
-    right_plain = f"Current evidence is making {label_text} more conditional or constrained through {mechanism_phrase(rk)}."
+
+    def strongest(rows: list[dict[str, Any]]) -> dict[str, Any] | None:
+        return max(rows, key=lambda n: (1 if clean(n.get("kind")) in {"action", "effect"} else 0,
+                                        float(n.get("merit", 0) or 0), clean(n.get("status_date"))), default=None)
+
+    def short(text: Any, words: int = 26) -> str:
+        t = clean(text)
+        parts = t.split()
+        if len(parts) <= words:
+            return t.rstrip(".") + "."
+        return " ".join(parts[:words]).rstrip(",;:") + "…"
+
+    def side_text(rows: list[dict[str, Any]], fallback: str) -> str:
+        n = strongest(rows)
+        if not n or not clean(n.get("text")):
+            return fallback
+        src = clean(n.get("_source"))
+        body = short(n.get("text"))
+        return f"{src}: {body}" if src else body
+
+    left_plain = side_text(lk, f"Signs of Europe expanding {label_text} through {mechanism_phrase(lk)}.")
+    right_plain = side_text(rk, f"Signs of {label_text} being constrained through {mechanism_phrase(rk)}.")
+
+    def weight_word(con: int, total: int) -> str:
+        if total == 0:
+            return "nothing yet"
+        if con == total:
+            return "all concrete moves" if total > 1 else "one concrete move"
+        if con == 0:
+            return "talk rather than action so far" if total > 1 else "a single diagnosis, no action yet"
+        return f"{con} concrete move{'s' if con != 1 else ''} among {total} signals"
+
+    lw, rw = weight_word(lcon, len(lk)), weight_word(rcon, len(rk))
+    if lcon == 0 and rcon == 0:
+        composition = "Both sides are still mostly analysis and positions; neither has turned into concrete action yet."
+    elif lcon > rcon:
+        composition = f"The push is more concrete ({lw}) than the pushback ({rw})."
+    elif rcon > lcon:
+        composition = f"The pushback is more concrete ({rw}) than the push ({lw})."
+    else:
+        composition = f"Both sides are equally concrete: {lw} each way."
 
     pending = {"intention", "proposed", "in_negotiation", "announced", "call_open"}
-    left_pending = sorted({clean(n.get("status")) for n in lk if clean(n.get("status")) in pending})
-    right_pending = sorted({clean(n.get("status")) for n in rk if clean(n.get("status")) in pending})
-    def status_trigger(statuses: list[str], fallback: str) -> str:
-        if not statuses:
-            return fallback
-        words = [x.replace("_", " ") for x in statuses[:2]]
-        if len(words) == 1:
-            return f"{words[0]} measures"
-        return f"{' or '.join(words)} measures"
-    left_trigger = status_trigger(left_pending, "current expansion measures")
-    right_trigger = status_trigger(right_pending, "current constraining measures")
-    flip = (
-        f"The balance moves toward expansion if {left_trigger} become adopted or operating; "
-        f"toward constraint if {right_trigger} become adopted or in force."
-    )
+
+    def pending_item(rows: list[dict[str, Any]]) -> str:
+        cand = [n for n in rows if clean(n.get("status")) in pending and clean(n.get("_title"))]
+        if not cand:
+            return ""
+        n = max(cand, key=lambda x: float(x.get("merit", 0) or 0))
+        return clean(n.get("_title")).rstrip(".")
+
+    lp, rp = pending_item(lk), pending_item(rk)
+    if lp and rp:
+        flip = f"Watch two things: if \u201c{lp}\u201d goes ahead, the push wins ground; if \u201c{rp}\u201d takes effect, the brakes do."
+    elif lp:
+        flip = f"The next swing depends on \u201c{lp}\u201d: if it goes ahead, the push gains; if it stalls, the constraints hold."
+    elif rp:
+        flip = f"The next swing depends on \u201c{rp}\u201d: if it takes effect, the constraints tighten; if it fades, the push regains ground."
+    else:
+        flip = "Nothing on either side is pending a decision, so the balance will move only with new evidence."
+
     return {
         "support": snaps(lk, "Expands") + snaps(rk, "Constrains"),
         "object": obj,
@@ -2113,6 +2180,8 @@ def _trend_payload(
             "right_range": [round(100 - high, 1), round(100 - low, 1)],
             "band_width": round(width, 1),
             "label": label,
+            "title_label": short_label,
+            "custom_title": custom_title,
             "composition": composition,
             "flip_line": flip,
             "left_sources": lsrc,
@@ -2638,8 +2707,17 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
         # version available for page selection; folded variants remain reserve.
         deduped: list[dict[str, Any]] = []
         folded = 0
+        def evidence_ids(x: dict[str, Any]) -> set[str]:
+            return {clean(r.get("identity")) for r in (x.get("support") or []) if isinstance(r, dict) and clean(r.get("identity"))}
+
+        def same_evidence(a: dict[str, Any], b: dict[str, Any]) -> bool:
+            ea, eb = evidence_ids(a), evidence_ids(b)
+            return bool(ea and eb) and len(ea & eb) / max(1, min(len(ea), len(eb))) >= 0.8
+
         for cand in ready:
-            conflict = next((x for x in deduped if _story_key(x) == _story_key(cand)), None)
+            # Same story, or the same evidence under another name (e.g. a topic and
+            # its wider field built on identical sources), competes for one card.
+            conflict = next((x for x in deduped if _story_key(x) == _story_key(cand) or same_evidence(x, cand)), None)
             if conflict is None:
                 deduped.append(cand)
                 continue
@@ -2756,6 +2834,22 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
                 if round_idx < len(by_wow[wow]):
                     chosen.append(by_wow[wow][round_idx])
 
+        if product == "trend":
+            # No two trend cards share a title pattern: give each generic card the
+            # next unused phrasing, starting from its own preferred one.
+            used_patterns: set[int] = set()
+            for c in chosen:
+                b = c.get("trend_balance") if isinstance(c.get("trend_balance"), dict) else {}
+                if b.get("custom_title") or not clean(b.get("title_label")):
+                    continue
+                key = clean(c.get("object"))
+                start = int(hashlib.sha1(key.encode()).hexdigest(), 16) % len(_TREND_TITLE_POOL)
+                for k in range(len(_TREND_TITLE_POOL)):
+                    idx = (start + k) % len(_TREND_TITLE_POOL)
+                    if idx not in used_patterns:
+                        used_patterns.add(idx)
+                        b["left_title"], b["right_title"] = _trend_title_pair(clean(b["title_label"]), key, idx)
+                        break
         if product == "shock":
             # No two shock cards on the page share a phrasing: a card whose
             # preferred wording is taken moves to the next unused variant.
@@ -2788,7 +2882,13 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
                     new_range = c["trend_balance"].get("left_range") or []
                     if len(old_range) >= 2 and len(new_range) >= 2 and max(abs(float(new_range[0])-float(old_range[0])), abs(float(new_range[1])-float(old_range[1]))) < 3:
                         c["trend_balance_computed"] = copy.deepcopy(c["trend_balance"])
+                        fresh = c["trend_balance"]
                         c["trend_balance"] = copy.deepcopy(old["trend_balance"])
+                        # Freeze only the numbers (so the bar does not wobble); the
+                        # wording always follows the current evidence.
+                        for key in ("left_title", "right_title", "left_plain", "right_plain", "composition", "flip_line", "label"):
+                            if key in fresh:
+                                c["trend_balance"][key] = fresh[key]
                         c["published_band_changed"] = False
                     else:
                         c["published_band_changed"] = True
