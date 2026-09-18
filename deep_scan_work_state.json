@@ -1,14 +1,15 @@
 {
   "version": 1,
   "profile": "radar-deep-scan-work-state-v1",
-  "updated_at": "2026-09-18T16:52:04Z",
+  "updated_at": "2026-09-18T16:56:17Z",
   "lanes": {
     "A": {
       "target_size": 36,
-      "assigned": [],
-      "current_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+      "assigned": [
+        "link:https://doi.org/10.1108/fs-11-2025-0260"
+      ],
+      "current_package_id": "worker-a-20260918T165607Z-db07e32f901c",
       "package_history": [
-        "worker-a-20260915T135230Z-5a7ccdade7b5",
         "worker-a-20260916T065732Z-58dd85c32322",
         "worker-a-20260916T072604Z-0b34267b291d",
         "worker-a-20260916T072903Z-0b34267b291d",
@@ -47,25 +48,13 @@
         "worker-a-20260917T145243Z-e4953dcbcec9",
         "worker-a-20260917T154643Z-e4953dcbcec9",
         "worker-a-20260917T155105Z-a4c0425aaf5e",
-        "worker-a-20260918T162835Z-11dcaed103f5"
+        "worker-a-20260918T162835Z-11dcaed103f5",
+        "worker-a-20260918T165607Z-db07e32f901c"
       ]
     },
     "B": {
       "target_size": 36,
-      "assigned": [
-        "historical:id:11a2b0b21715eb40",
-        "historical:id:a389794c702a37cf",
-        "historical:id:792eb0799f1d6011",
-        "historical:id:ae55418dfdd17944",
-        "historical:id:c24eca9c42fb2dcf",
-        "link:https://doi.org/10.1108/fs-11-2025-0260",
-        "historical:id:93f53dffe31df9db",
-        "historical:id:f067422a8d923845",
-        "historical:id:966e32fa87a919e7",
-        "historical:id:648abd7662187e73",
-        "historical:id:85ecbd50c21035d1",
-        "historical:id:fbc1af578830594e"
-      ],
+      "assigned": [],
       "current_package_id": "worker-b-20260918T165153Z-536ac137d3dd",
       "package_history": [
         "worker-b-20260916T065755Z-743ca1212cbd",
@@ -33510,57 +33499,57 @@
       "url": "https://doi.org/10.1108/fs-11-2025-0260",
       "corpus_scope": "main",
       "status": "assigned",
-      "lane": "B",
+      "lane": "A",
       "assigned_at": "2026-09-17T14:52:51Z",
-      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd",
-      "recovery_attempts": 1,
-      "last_recovery_at": "2026-09-17T15:43:57Z",
-      "last_recovery_package_id": "worker-b-20260917T145251Z-20e73f1838e5",
-      "recovery_reason": "Identity is verified, but substantive matching evidence remained inaccessible or insufficient after all six mandatory recovery steps.",
+      "last_package_id": "worker-a-20260918T165607Z-db07e32f901c",
+      "recovery_attempts": 2,
+      "last_recovery_at": "2026-09-18T16:53:09Z",
+      "last_recovery_package_id": "worker-b-20260918T162850Z-536ac137d3dd",
+      "recovery_reason": "Identity confirmed via Crossref (structured abstract); no legitimate full text after the full ladder.",
       "verification": {
         "identity_verified": true,
         "evidence_depth": "identity_only_after_recovery",
         "retrieval_attempts": [
           {
             "step": "supplied_url",
-            "outcome": "blocked",
-            "note": "Re-opened https://doi.org/10.1108/FS-11-2025-0260; it reaches the new Emerald conceptual paper, but full article access is not available through the supplied route."
+            "outcome": "failed",
+            "note": "https://doi.org/10.1108/fs-11-2025-0260 -> emerald.com/fs/article/doi/10.1108/FS-11-2025-0260/1396231/..., HTTP 403."
           },
           {
             "step": "doi",
-            "outcome": "success_identity_only",
-            "note": "DOI 10.1108/FS-11-2025-0260 matches Ali Chaparak, “Artificial intelligence as a collective transformative experience: a conceptual framework for rational encounter,” Foresight, published 14 September 2026."
+            "outcome": "partial",
+            "note": "Crossref: Ali Chaparak, foresight, 2026-09-14, structured abstract only; Unpaywall is_oa=false."
           },
           {
             "step": "exact_title",
-            "outcome": "success_identity_only",
-            "note": "Exact-title search found the Emerald record and Crossref-derived bibliographic mirrors; these reproduce the structured abstract rather than the full conceptual paper."
+            "outcome": "failed",
+            "note": "Quoted-title search with author returned no copy; found author's ResearchGate profile and a 2025 conference paper 'New Technologies as Transformative Experiences'."
           },
           {
             "step": "title_author_year",
-            "outcome": "success_identity_only",
-            "note": "Searched title + Ali Chaparak + 2026 + PDF; no legitimate matching full-text copy was returned."
+            "outcome": "failed",
+            "note": "Crossref title query returned only this record and an unrelated tourism chapter."
           },
           {
             "step": "official_publisher_or_repository",
-            "outcome": "insufficient",
-            "note": "Checked the Emerald article page and searched Niroo Research Institute/author repository routes; no deposited author manuscript or official open copy was found."
+            "outcome": "failed",
+            "note": "Emerald blocked (403); no repository copy per Unpaywall; ResearchGate profile lists no full text of this article."
           },
           {
             "step": "broader_identity_search",
-            "outcome": "insufficient",
-            "note": "Broader searches using DOI/title fragments, author name, ResearchGate and reviewer/announcement traces found descriptions of the framework only; none supplied the matching full text."
+            "outcome": "failed",
+            "note": "The related 2025 conference paper by the same author is a different work and was not used as substitute evidence."
           }
         ],
         "recovered_sources": [
           {
-            "kind": "publisher_or_identity_record",
-            "url": "https://www.emerald.com/fs/article-abstract/doi/10.1108/FS-11-2025-0260/1396231/Artificial-intelligence-as-a-collective?redirectedFrom=fulltext",
-            "title": "Artificial intelligence as a collective transformative experience: a conceptual framework for rational encounter",
-            "evidence_used": true
+            "kind": "crossref_metadata",
+            "url": "https://api.crossref.org/works/10.1108/fs-11-2025-0260",
+            "title": "Crossref record with structured abstract",
+            "evidence_used": false
           }
         ],
-        "verification_note": "Second recovery pass verified the newly published Emerald paper and its detailed structured abstract, but no matching full-text/author copy was accessible. Because the V2 rules reject abstract-only evidence, the record remains deferred."
+        "verification_note": "Published four days before this scan; full text not yet available in any open location."
       },
       "recovery_history": [
         {
@@ -33612,6 +33601,57 @@
               }
             ],
             "verification_note": "Second recovery pass verified the newly published Emerald paper and its detailed structured abstract, but no matching full-text/author copy was accessible. Because the V2 rules reject abstract-only evidence, the record remains deferred."
+          }
+        },
+        {
+          "attempt": 2,
+          "package_id": "worker-b-20260918T162850Z-536ac137d3dd",
+          "at": "2026-09-18T16:53:09Z",
+          "reason": "Identity confirmed via Crossref (structured abstract); no legitimate full text after the full ladder.",
+          "verification": {
+            "identity_verified": true,
+            "evidence_depth": "identity_only_after_recovery",
+            "retrieval_attempts": [
+              {
+                "step": "supplied_url",
+                "outcome": "failed",
+                "note": "https://doi.org/10.1108/fs-11-2025-0260 -> emerald.com/fs/article/doi/10.1108/FS-11-2025-0260/1396231/..., HTTP 403."
+              },
+              {
+                "step": "doi",
+                "outcome": "partial",
+                "note": "Crossref: Ali Chaparak, foresight, 2026-09-14, structured abstract only; Unpaywall is_oa=false."
+              },
+              {
+                "step": "exact_title",
+                "outcome": "failed",
+                "note": "Quoted-title search with author returned no copy; found author's ResearchGate profile and a 2025 conference paper 'New Technologies as Transformative Experiences'."
+              },
+              {
+                "step": "title_author_year",
+                "outcome": "failed",
+                "note": "Crossref title query returned only this record and an unrelated tourism chapter."
+              },
+              {
+                "step": "official_publisher_or_repository",
+                "outcome": "failed",
+                "note": "Emerald blocked (403); no repository copy per Unpaywall; ResearchGate profile lists no full text of this article."
+              },
+              {
+                "step": "broader_identity_search",
+                "outcome": "failed",
+                "note": "The related 2025 conference paper by the same author is a different work and was not used as substitute evidence."
+              }
+            ],
+            "recovered_sources": [
+              {
+                "kind": "crossref_metadata",
+                "url": "https://api.crossref.org/works/10.1108/fs-11-2025-0260",
+                "title": "Crossref record with structured abstract",
+                "evidence_used": false
+              }
+            ],
+            "verification_note": "Published four days before this scan; full text not yet available in any open location."
           }
         }
       ]
@@ -33713,10 +33753,12 @@
       "date": "2026-03-16",
       "url": "https://doi.org/10.1093/scipol/scag028",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "B",
       "assigned_at": "2026-09-17T15:46:55Z",
-      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd"
+      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd",
+      "verified_at": "2026-09-18T16:53:09Z",
+      "verified_package_id": "worker-b-20260918T162850Z-536ac137d3dd"
     },
     "historical:id:a389794c702a37cf": {
       "title": "The implementation of research security policies in Germany: exploring policy narratives across governance levels",
@@ -33724,10 +33766,12 @@
       "date": "2025-12-22",
       "url": "https://doi.org/10.1080/09662839.2025.2591708",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "B",
       "assigned_at": "2026-09-17T15:46:55Z",
-      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd"
+      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd",
+      "verified_at": "2026-09-18T16:53:09Z",
+      "verified_package_id": "worker-b-20260918T162850Z-536ac137d3dd"
     },
     "historical:id:792eb0799f1d6011": {
       "title": "Fostering regional entrepreneurial ecosystem development: the role of science and technology park networks",
@@ -33735,10 +33779,12 @@
       "date": "2025-12-22",
       "url": "https://doi.org/10.1007/s10961-025-10308-5",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "B",
       "assigned_at": "2026-09-17T15:46:55Z",
-      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd"
+      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd",
+      "verified_at": "2026-09-18T16:53:09Z",
+      "verified_package_id": "worker-b-20260918T162850Z-536ac137d3dd"
     },
     "historical:id:ae55418dfdd17944": {
       "title": "New Study Examines Drivers of Government Investment in Energy Innovation",
@@ -33746,10 +33792,12 @@
       "date": "2022-09-12",
       "url": "https://www.belfercenter.org/publication/new-study-examines-drivers-government-investment-energy-innovation",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "B",
       "assigned_at": "2026-09-17T15:46:55Z",
-      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd"
+      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd",
+      "verified_at": "2026-09-18T16:53:09Z",
+      "verified_package_id": "worker-b-20260918T162850Z-536ac137d3dd"
     },
     "historical:id:c24eca9c42fb2dcf": {
       "title": "Hot Summer of Research and Innovation Policy – What’s Cooking in Brussels | Demos Helsinki",
@@ -33757,10 +33805,12 @@
       "date": "2018-06-19",
       "url": "https://demoshelsinki.fi/hot-summer-of-research-and-innovation-policy-whats-cooking-in-brussels/",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "B",
       "assigned_at": "2026-09-17T15:46:55Z",
-      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd"
+      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd",
+      "verified_at": "2026-09-18T16:53:09Z",
+      "verified_package_id": "worker-b-20260918T162850Z-536ac137d3dd"
     },
     "link:https://www.cesaer.org/content/5-operations/2026/msca-statement-june-2026-final.pdf": {
       "title": "Marie Skłodowska-Curie Actions: Research talent is Europe’s strategic advantage",
@@ -33898,10 +33948,12 @@
       "date": "2021-08-01",
       "url": "https://doi.org/10.1016/j.joi.2021.101192",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "B",
       "assigned_at": "2026-09-18T16:28:50Z",
-      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd"
+      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd",
+      "verified_at": "2026-09-18T16:53:09Z",
+      "verified_package_id": "worker-b-20260918T162850Z-536ac137d3dd"
     },
     "historical:id:f067422a8d923845": {
       "title": "Ireland AI Strategy Report",
@@ -33909,10 +33961,12 @@
       "date": "2021-01-01",
       "url": "https://ai-watch.ec.europa.eu/countries/ireland/ireland-ai-strategy-report_en",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "B",
       "assigned_at": "2026-09-18T16:28:50Z",
-      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd"
+      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd",
+      "verified_at": "2026-09-18T16:53:09Z",
+      "verified_package_id": "worker-b-20260918T162850Z-536ac137d3dd"
     },
     "historical:id:966e32fa87a919e7": {
       "title": "Italy AI Strategy Report",
@@ -33920,10 +33974,12 @@
       "date": "2020-01-01",
       "url": "https://ai-watch.ec.europa.eu/countries/italy/italy-ai-strategy-report_en",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "B",
       "assigned_at": "2026-09-18T16:28:50Z",
-      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd"
+      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd",
+      "verified_at": "2026-09-18T16:53:09Z",
+      "verified_package_id": "worker-b-20260918T162850Z-536ac137d3dd"
     },
     "historical:id:648abd7662187e73": {
       "title": "Hungary AI Strategy Report",
@@ -33931,10 +33987,12 @@
       "date": "2020-01-01",
       "url": "https://ai-watch.ec.europa.eu/countries/hungary/hungary-ai-strategy-report_en",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "B",
       "assigned_at": "2026-09-18T16:28:50Z",
-      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd"
+      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd",
+      "verified_at": "2026-09-18T16:53:09Z",
+      "verified_package_id": "worker-b-20260918T162850Z-536ac137d3dd"
     },
     "historical:id:85ecbd50c21035d1": {
       "title": "France AI Strategy Report",
@@ -33942,10 +34000,12 @@
       "date": "2018-01-01",
       "url": "https://ai-watch.ec.europa.eu/countries/france/france-ai-strategy-report_en",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "B",
       "assigned_at": "2026-09-18T16:28:50Z",
-      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd"
+      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd",
+      "verified_at": "2026-09-18T16:53:10Z",
+      "verified_package_id": "worker-b-20260918T162850Z-536ac137d3dd"
     },
     "historical:id:fbc1af578830594e": {
       "title": "Finland AI Strategy Report",
@@ -33953,10 +34013,12 @@
       "date": "2017-01-01",
       "url": "https://ai-watch.ec.europa.eu/countries/finland/finland-ai-strategy-report_en",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "B",
       "assigned_at": "2026-09-18T16:28:50Z",
-      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd"
+      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd",
+      "verified_at": "2026-09-18T16:53:10Z",
+      "verified_package_id": "worker-b-20260918T162850Z-536ac137d3dd"
     }
   },
   "packages": {
@@ -43795,6 +43857,13 @@
         "historical:id:648abd7662187e73",
         "historical:id:85ecbd50c21035d1",
         "historical:id:fbc1af578830594e"
+      ]
+    },
+    "worker-a-20260918T165607Z-db07e32f901c": {
+      "lane": "A",
+      "created_at": "2026-09-18T16:56:16Z",
+      "record_keys": [
+        "link:https://doi.org/10.1108/fs-11-2025-0260"
       ]
     }
   }
