@@ -1,3 +1,12 @@
+# 2035 scenarios page
+
+- New page **2035** (menu after External Shocks): four 2035 worlds on two open questions (open vs guarded; scaling vs squeezed), each with four variants: two triggered by published shocks, one by an opportunity seized, one by a risk realised. 16 variants, every trigger a distinct published finding with sources.
+- Scenarios, not forecasts: no plausibility, ranking or "closest to today" assessment anywhere.
+- Every world and variant is written as labelled bullets: Picture, A day in 2035, How we got here, dated history from real sources (Still true / The bet that paid off / The warning ignored), Who wins and who loses (researchers, universities, companies, funders), The price, Signpost; variants: Trigger, Evidence today, What happens next, Where Europe ends up.
+- Rebuilt on every scan from the current findings; read-only on findings and fail-safe (an error never blocks the scan).
+- Language: phrase pools handed out page-wide (no bullet or opening repeats), topic and shock-type variety; reviewable through Reader Language.
+- Trends page: each side quotes its strongest source; varied balance and signpost lines naming pending decisions; unique title patterns; findings built on the same evidence fold into one card.
+
 # More disruption types and creative shock wording
 
 - 8 new shock disruption families: sudden funding cuts, talent flight, political shifts, abrupt rule changes, rival technology leaps, foreign information campaigns, supply chokepoints, climate/health emergencies.

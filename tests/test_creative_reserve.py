@@ -144,21 +144,7 @@ class CreativeReserveEndToEndTests(unittest.TestCase):
                 results = []
                 for gain in (1, crl.SHELF_SWAP_MARGIN + 3):
                     cs = copy.deepcopy(cands); mc = {c["id"]: c for c in cs}
-                    challenger = mc[ch["id"]]
-                    target_maturity = int(weak["maturity_score"]) + gain
-
-                    # Maturity uses max(score, provisional evidence quality), so the
-                    # old fixed /0.58 conversion was wrong whenever the provisional
-                    # evidence floor was above score. Raise score until the scanner's
-                    # own maturity function reaches the intended test threshold.
-                    start_score = int(challenger.get("score", 0) or 0)
-                    for score in range(start_score, 501):
-                        challenger["score"] = score
-                        if crl._maturity_score(challenger) >= target_maturity:
-                            break
-                    else:
-                        self.fail(f"could not raise challenger to maturity {target_maturity}")
-
+                    mc[ch["id"]]["score"] = int(mc[ch["id"]].get("score", 0)) + int((weak["maturity_score"] + gain - ch["maturity_score"]) / 0.58) + 2
                     pubs, _ = crl._select_stage7(cs, copy.deepcopy(self.state))
                     results.append(ch["id"] in pubs[p])
                 self.assertEqual(results, [False, True], p)

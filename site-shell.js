@@ -5,13 +5,14 @@
   const pages=[
     {match:/\/radar\/?$/,key:'radar',title:'Radar',purpose:'Current evidence about European research and innovation in a changing geopolitical environment.'},
     {match:/\/read\/?$/,key:'read',title:'Read At Least This',purpose:'A compact map of the main phenomena and the parts that make them up.'},
-    {match:/\/frontier\/quick\/?$/,key:'frontier-quick',title:'Matrix',purpose:'A simple view of where European research and innovation looks strong, weak, exposed or dependent.'},
+    {match:/\/frontier\/quick\/?$/,key:'frontier-quick',title:'Matrix',purpose:'Where the current evidence places European research and innovation: strong, weak, exposed or dependent.'},
     {match:/\/frontier\/?$/,key:'frontier',title:'Matrix',purpose:'The detailed evidence behind the Matrix.'},
-    {match:/\/trends\/?$/,key:'trends',title:'Trends & Counter-Trends',purpose:'Evidence moving in opposite directions around the same issue.'},
+    {match:/\/trends\/?$/,key:'trends',title:'Trends & Counter-Trends',purpose:'Opposing institutional pulls acting on the same underlying object.'},
     {match:/\/phenomena\/?$/,key:'phenomena',title:'Ongoing Phenomena',purpose:'Developments that persist, reconnect or change shape over time.'},
-    {match:/\/priorities\/?$/,key:'priorities',title:'Risks & Opportunities',purpose:'Risks and opportunities suggested by the evidence available now.'},
-    {match:/\/shocks\/variants(?:\.html)?\/?$/,key:'shocks-variants',title:'Shock Variants',purpose:'Different ways an external shock could develop, what could soften it, and what evidence points against it.'},
-    {match:/\/shocks\/?$/,key:'shocks',title:'External Shocks',purpose:'Events outside the research system that could disrupt European research and innovation.'},
+    {match:/\/priorities\/?$/,key:'priorities',title:'Risks & Opportunities',purpose:'Consequences supported by the current evidence base.'},
+    {match:/\/shocks\/variants(?:\.html)?\/?$/,key:'shocks-variants',title:'Shock Variants',purpose:'Alternative forms, absorbers and counter-evidence for one supported external-shock mechanism.'},
+    {match:/\/shocks\/?$/,key:'shocks',title:'External Shocks',purpose:'Possible disruptions to European research and innovation.'},
+    {match:/\/2035\/?$/,key:'future',title:'2035',purpose:'Four imagined worlds for European research and innovation in 2035, each with four variants, built from today\'s findings.'},
     {match:/\/(historical|history)\/?$/,key:'historical',title:'Earlier Findings',purpose:'Findings published before the Radar started scanning.'},
     {match:/\/literature\/?$/,key:'literature',title:'Sources',purpose:'Where the findings come from.'},
     {match:/\/briefing\/?$/,key:'briefing',title:'Topics',purpose:'What the Radar is seeing, grouped by subject.'},
@@ -35,6 +36,7 @@
     ['phenomena/','Ongoing Phenomena',''],
     ['priorities/','Risks & Opportunities',''],
     ['shocks/','External Shocks',''],
+    ['2035/','2035',''],
     ['glossary/','Glossary','menu-group-final'],
     ['stuff/','Stuff','']
   ];
@@ -42,6 +44,7 @@
     if(target==='frontier/quick/')return page.key==='frontier-quick'||page.key==='frontier';
     if(target==='shocks/')return page.key==='shocks'||page.key==='shocks-variants';
     if(target==='historical/')return page.key==='historical';
+    if(target==='2035/')return page.key==='future';
     return page.key===target.replace(/\/$/,'').replace(/\//g,'-');
   };
 
@@ -79,8 +82,7 @@
   // and never touch stored evidence or analytical state.
   if(!['radar','historical','literature','stuff'].includes(page.key)){
     const language=document.createElement('script');
-    if(globalThis.__RADAR_READER_LANGUAGE_V5__)return;
-    language.src=prefix+'reader_language.js?v=5';
+    language.src=prefix+'reader_language.js?v=1';
     language.defer=true;
     document.head.appendChild(language);
   }

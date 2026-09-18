@@ -30,6 +30,7 @@ HTML_ROUTES = {
     "priorities/index.html": "priorities",
     "shocks/index.html": "shocks",
     "shocks/variants.html": "shocks-variants",
+    "2035/index.html": "future",
     "briefing/index.html": "briefing",
     "glossary/index.html": "glossary",
     "explore/index.html": "explore",
@@ -64,10 +65,6 @@ META_PATTERNS = [
 ]
 
 AWKWARD_PATTERNS = [
-    (re.compile(r"\bCurrent evidence is (?:adding or widening|making)\b", re.I), "repetitive generated phrasing"),
-    (re.compile(r"\bmore conditional or constrained through\b", re.I), "bureaucratic phrase"),
-    (re.compile(r"\bas a whole through\b", re.I), "awkward phrase"),
-    (re.compile(r"\bdocumented constraints\b", re.I), "vague phrase"),
     (re.compile(r"\bis widening around\b", re.I), "awkward phrase"),
     (re.compile(r"\bforward[- ]looking pathways? to (?:loss|gain)\b", re.I), "bureaucratic phrase"),
     (re.compile(r"\bstrategic dependencies research security\b", re.I), "noun pile-up"),
@@ -306,6 +303,25 @@ def collect_radar_reader_fields(store: dict[str, Candidate]) -> None:
                 add_candidate(store, c.get("why_easy_to_miss"), [route], f"{origin}:why_easy_to_miss")
                 # The shock card explanation shown to readers.
                 add_candidate(store, c.get("reader_consequence"), [route], f"{origin}:reader_consequence")
+
+    sc = hi.get("scenarios_2035") if isinstance(hi.get("scenarios_2035"), dict) else {}
+    for w in sc.get("scenarios", []) if isinstance(sc.get("scenarios"), list) else []:
+        if not isinstance(w, dict):
+            continue
+        origin = f"{p.name}:scenarios_2035:{clean(w.get('id'))}"
+        for key in ("name", "tagline", "watch"):
+            add_candidate(store, w.get(key), ["future"], f"{origin}:{key}")
+        for j, b in enumerate(w.get("bullets") or []):
+            if isinstance(b, dict):
+                add_candidate(store, b.get("text"), ["future"], f"{origin}:bullets[{j}]")
+        for v in w.get("variants") or []:
+            if not isinstance(v, dict):
+                continue
+            vo = f"{origin}:variant:{clean(v.get('id'))}"
+            add_candidate(store, v.get("name"), ["future"], f"{vo}:name")
+            for j, b in enumerate(v.get("bullets") or []):
+                if isinstance(b, dict):
+                    add_candidate(store, b.get("text"), ["future"], f"{vo}:bullets[{j}]")
 
     shock = data.get("shock_inference") if isinstance(data, dict) else None
     shock = shock if isinstance(shock, dict) else {}

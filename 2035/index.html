@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>2035 · Research &amp; Innovation × Geopolitics Radar</title>
+<link rel="stylesheet" href="../radar.css?v=28.4">
+<script src="../radar_data.js?v=28.1"></script>
+</head>
+<body>
+<main class="wrap future-main">
+  <p id="futureIntro" class="summary">Loading</p>
+  <section class="future-frame" aria-label="The four worlds">
+    <div class="future-map" id="futureMap" aria-hidden="true">
+      <span class="future-axis future-axis-top">Scaling</span>
+      <span class="future-axis future-axis-bottom">Squeezed</span>
+      <span class="future-axis future-axis-left">Guarded</span>
+      <span class="future-axis future-axis-right">Open</span>
+      <div class="future-quad" data-world="fortress_frontier"></div>
+      <div class="future-quad" data-world="big_commons"></div>
+      <div class="future-quad" data-world="quiet_retreat"></div>
+      <div class="future-quad" data-world="brilliant_but_broke"></div>
+    </div>
+    <p class="future-axes-text">Two open questions set the frame: does European research stay open or become guarded, and do money and capacity keep scaling or get squeezed? Each corner is one possible 2035.</p>
+  </section>
+  <div id="futureWorlds" class="future-worlds"><p class="empty">Loading</p></div>
+  <p id="futureMethod" class="future-method"></p>
+</main>
+<script>
+const clean=v=>String(v||'').replace(/\s+/g,' ').trim();
+const esc=v=>clean(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const PAGE={shock:'../shocks/',trend:'../trends/',continuity:'../phenomena/',risk:'../priorities/',opportunity:'../priorities/'};
+const KIND={shock:'Shock',opportunity:'Opportunity seized',risk:'Risk realised'};
+const PRODUCT={shock:'External shock',trend:'Trend',continuity:'Ongoing phenomenon',risk:'Risk',opportunity:'Opportunity'};
+function sourcesHtml(list){
+  const xs=(Array.isArray(list)?list:[]).filter(s=>clean(s.source));
+  if(!xs.length)return '';
+  return `<ul class="future-sources">${xs.map(s=>`<li>${s.link?`<a href="${esc(s.link)}" target="_blank" rel="noopener">${esc(s.source)}</a>`:esc(s.source)}${s.title?` <span>— ${esc(s.title)}</span>`:''}</li>`).join('')}</ul>`;
+}
+function signalHtml(s){
+  const href=PAGE[s.product]||'';
+  const label=PRODUCT[s.product]||'Finding';
+  return `<li><span class="future-tag">${esc(label)}</span> ${href?`<a href="${href}">${esc(s.winning_side||s.title)}</a>`:esc(s.winning_side||s.title)}${sourcesHtml(s.sources)}</li>`;
+}
+const STAKE=new Set(['Researchers','Universities','Companies','Funders']);
+function bulletsHtml(list){
+  const items=Array.isArray(list)?list:[];
+  const out=[];let group=[];
+  const flush=()=>{if(group.length){out.push(`<li><strong>Who wins, who loses:</strong><ul>${group.map(b=>`<li><strong>${esc(b.label)}:</strong> ${esc(b.text)}</li>`).join('')}</ul></li>`);group=[]}};
+  for(const b of items){
+    if(STAKE.has(clean(b.label))){group.push(b);continue}
+    flush();
+    out.push(`<li><strong>${esc(b.label)}:</strong> ${esc(b.text)}</li>`);
+  }
+  flush();
+  return `<ul class="future-bullets">${out.join('')}</ul>`;
+}
+function variantHtml(v){
+  return `<article class="future-variant" data-kind="${esc(v.kind)}">
+    <p class="future-kind">${esc(KIND[v.kind]||'Variant')}</p>
+    <h4>${esc(v.name)}</h4>
+    ${Array.isArray(v.bullets)&&v.bullets.length?bulletsHtml(v.bullets):(v.story||[]).map(p=>`<p>${esc(p)}</p>`).join('')}
+    <details><summary>Where this comes from</summary>
+      <p>Triggered by a current ${esc((PRODUCT[v.product]||'finding').toLowerCase())}: ${PAGE[v.product]?`<a href="${PAGE[v.product]}">${esc(v.trigger)}</a>`:esc(v.trigger)}</p>
+      ${sourcesHtml(v.sources)}
+    </details>
+  </article>`;
+}
+function worldHtml(w){
+  return `<section class="future-world" id="${esc(w.id)}">
+    <article class="future-card">
+      <h2>${esc(w.name)}</h2>
+      <p class="future-tagline">${esc(w.tagline)}</p>
+      ${Array.isArray(w.bullets)&&w.bullets.length?bulletsHtml(w.bullets):(w.story||[]).map(p=>`<p>${esc(p)}</p>`).join('')+(w.watch?`<p class="future-watch"><strong>Watch for:</strong> ${esc(w.watch)}</p>`:'')}
+      <details><summary>Signals already visible today</summary><ul class="future-signals">${(w.signals||[]).map(signalHtml).join('')}</ul></details>
+    </article>
+    <div class="future-variants">${(w.variants||[]).map(variantHtml).join('')}</div>
+  </section>`;
+}
+(async()=>{
+  const box=document.getElementById('futureWorlds');
+  try{
+    const data=await RadarData.load('../radar.json','../radar_seed.json');
+    const sc=data?.high_order_inference?.scenarios_2035||{};
+    const worlds=Array.isArray(sc.scenarios)?sc.scenarios:[];
+    if(!worlds.length){
+      document.getElementById('futureIntro').textContent='The 2035 scenarios will appear after the next scan.';
+      box.innerHTML='';return;
+    }
+        const nv=worlds.reduce((n,w)=>n+(Array.isArray(w.variants)?w.variants.length:0),0);
+    document.getElementById('futureIntro').textContent=`${worlds.length} worlds and ${nv} variants. They are scenarios, not forecasts: none is ranked as more likely. Every signal and every variant trigger is a current Radar finding you can check, and the page is rebuilt with each scan.`;
+    for(const w of worlds){
+      const q=document.querySelector(`.future-quad[data-world="${w.id}"]`);
+      if(q)q.innerHTML=`<a href="#${esc(w.id)}"><strong>${esc(w.name)}</strong><span>${esc(w.tagline)}</span></a>`;
+    }
+    box.innerHTML=worlds.map(worldHtml).join('');
+    document.getElementById('futureMethod').textContent=clean(sc.method);
+  }catch(e){
+    console.error(e);
+    document.getElementById('futureIntro').textContent='The 2035 scenarios are unavailable.';
+    box.innerHTML='';
+  }
+})();
+</script>
+<script src="../site-shell.js?v=28.1"></script>
+</body>
+</html>

@@ -2115,8 +2115,8 @@ def _trend_payload(
         body = short(n.get("text"))
         return f"{src}: {body}" if src else body
 
-    left_plain = side_text(lk, f"Evidence points to growth in {short_label}, supported by {mechanism_phrase(lk)}.")
-    right_plain = side_text(rk, f"{short_label[:1].upper()+short_label[1:]} is facing tighter conditions, including {mechanism_phrase(rk)}.")
+    left_plain = side_text(lk, f"Signs of Europe expanding {label_text} through {mechanism_phrase(lk)}.")
+    right_plain = side_text(rk, f"Signs of {label_text} being constrained through {mechanism_phrase(rk)}.")
 
     def weight_word(con: int, total: int) -> str:
         if total == 0:
@@ -3103,7 +3103,7 @@ def _friendly_object_label(value: Any) -> str:
         return aliases[obj]
     fam = _family_of(obj)
     if fam:
-        return _FAMILY_LABELS.get(fam, fam.replace("_", " "))
+        return _FAMILY_LABELS.get(fam, fam.replace("_", " ")) + " as a whole"
 
     text = obj.replace(".", " ").replace("_", " ")
     return clean(text) or "European research and innovation"
@@ -3770,8 +3770,22 @@ def refresh_claim_high_order(
         "lifecycle_policy": "Claim-native stock persists as page/reserve/developing tiers. Evidence is recomputed each scan; candidates can strengthen, weaken or move between tiers as new evidence arrives. Counter-evidence and falsifier results affect maturity and can kill a contradicted hypothesis, but an unrun challenge is not a ban on future-facing reasoning.",
         "candidate_search_policy": "Missing-role and falsifier queries remain ordinary scanner discovery inputs and receive no admission waiver.",
         "publications": publications,
+        "scenarios_2035": _build_2035(publications, candidates, now),
         "candidates": candidates,
     }
+
+
+def _build_2035(publications: dict[str, Any], candidates: list[dict[str, Any]], now: str) -> dict[str, Any]:
+    """The 2035 page is presentation built on published findings; a failure there
+    must never block the scan."""
+    try:
+        try:
+            from scripts.scenarios_2035 import build_scenarios_2035
+        except ImportError:  # pragma: no cover
+            from scenarios_2035 import build_scenarios_2035  # type: ignore
+        return build_scenarios_2035(publications, candidates, now)
+    except Exception as exc:  # pragma: no cover - defensive
+        return {"horizon": 2035, "evaluated_at": now, "scenarios": [], "error": f"{type(exc).__name__}: {exc}"}
 
 def refresh_claim_shocks(
     raw: dict[str, Any],
