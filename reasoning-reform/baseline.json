@@ -47,7 +47,6 @@
       "stage": "stage6-claim-native-detector-switch"
     },
     {
-      "stage": "stage7-wow-trends-selection",
       "approved_files": [
         "scripts/claim_reasoning_live.py",
         "trends/trends.js",
@@ -57,7 +56,19 @@
         "reasoning-reform/STAGE7.md",
         "scripts/claim_reasoning_shadow.py"
       ],
-      "purpose": "Activate claim-native wow, oddity, falsifier-ledger, trend-band and threshold selection after the Stage-6 detector switch; retire legacy publication carry without changing Scanner/Deep Scan authority."
+      "purpose": "Activate claim-native wow, oddity, falsifier-ledger, trend-band and threshold selection after the Stage-6 detector switch; retire legacy publication carry without changing Scanner/Deep Scan authority.",
+      "stage": "stage7-wow-trends-selection"
+    },
+    {
+      "approved_files": [
+        ".github/workflows/finalize-reasoning-renovation.yml",
+        "radar.json",
+        "reasoning-reform/STAGE8.md",
+        "reasoning-reform/STAGE8_COMPLETE.json",
+        "reasoning-reform/baseline.json"
+      ],
+      "purpose": "Close the reasoning renovation with reader-language lint, applied downstream retrace/cleanup, zero-orphan integrity checks, evidence immutability verification, protected-core checks, and end-to-end regression validation.",
+      "stage": "stage8-reader-presentation-final-validation"
     }
   ],
   "captured_for_repository_version": "v25.1.0-evidence-linked-reader",
@@ -103,8 +114,8 @@
     "command": "python scripts/run_reasoning_reform_smoke.py",
     "latest_stage4_result": "94 passed",
     "latest_stage6_result": "124 passed (34 + 31 + 59 grouped safety runs)",
-    "note": "Full pytest collection was not used as the fast gate because at least one downstream-retrace integration test is intentionally long-running; the focused safety suite completes quickly and covers scanner/Deep Scan/active-boundary contracts.",
-    "latest_stage7_result": "132 passed (34 + 31 + 67 grouped safety runs)"
+    "latest_stage7_result": "132 passed (34 + 31 + 67 grouped safety runs)",
+    "note": "Full pytest collection was not used as the fast gate because at least one downstream-retrace integration test is intentionally long-running; the focused safety suite completes quickly and covers scanner/Deep Scan/active-boundary contracts."
   },
   "source_upload": "radar_articles_reports-main - 2026-09-17T191155.925.zip",
   "stage6_detector_switch_hashes": {
