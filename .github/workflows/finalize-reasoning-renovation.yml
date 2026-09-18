@@ -1,0 +1,226 @@
+name: FINAL — Finish Reasoning Renovation (Stage 8)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+
+# Keep scanners from changing evidence while Stage 8 closes the reasoning renovation.
+concurrency:
+  group: ri-radar-research-scanners
+  cancel-in-progress: false
+
+jobs:
+  stage8-finalize:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out main
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install repository dependencies
+        run: pip install --quiet -r requirements.txt
+
+      - name: Stage 8 — reader presentation and lint gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf reader_language_out stage8-out
+          mkdir -p stage8-out
+          python scripts/prepare_reader_language_package.py \
+            --output-dir reader_language_out \
+            --max-items 120 \
+            --mode flagged
+          cat reader_language_out/QUEUE_STATUS.txt
+          grep -Fx 'Unreviewed items eligible in this mode: 0' reader_language_out/QUEUE_STATUS.txt
+          python - <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+          sys.path.insert(0, 'scripts')
+          from reader_language_common import collect_candidates, load_approved
+          from import_reader_language_results import validate_rewrite
+
+          current = {x['id']: x for x in collect_candidates()}
+          approved = load_approved()
+          checked = 0
+          for iid, item in approved.get('items', {}).items():
+              cur = current.get(iid)
+              if not cur:
+                  continue  # Old exact-text approvals are intentionally inert.
+              if item.get('status') == 'rewrite':
+                  validate_rewrite(cur['source'], item.get('replacement', ''))
+                  checked += 1
+          print(f'Validated {checked} active approved Reader Language rewrite(s).')
+          PY
+
+      - name: Stage 8 — snapshot evidence before final retrace
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          data = json.loads(Path('radar.json').read_text(encoding='utf-8'))
+          keys = ('strand_a', 'strand_b', 'strand_c', 'frontier_evidence', 'historical_context')
+          hashes = {}
+          for key in keys:
+              payload = json.dumps(data.get(key), ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode('utf-8')
+              hashes[key] = hashlib.sha256(payload).hexdigest()
+          Path('stage8-out/evidence-before.json').write_text(json.dumps(hashes, indent=2) + '\n', encoding='utf-8')
+          print('Saved evidence snapshot for fail-closed comparison.')
+          PY
+
+      - name: Stage 8 — apply final downstream retrace and cleanup
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/downstream_retrace.py \
+            --radar radar.json \
+            --report-json stage8-out/final-retrace.json \
+            --report-md stage8-out/final-retrace.md
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          report = json.loads(Path('stage8-out/final-retrace.json').read_text(encoding='utf-8'))
+          d = report.get('diagnostics', {})
+          if d.get('orphan_references_remaining') != 0:
+              raise SystemExit('Stage 8 failed: downstream orphan references remain.')
+          if not report.get('integrity_check', {}).get('passed'):
+              raise SystemExit('Stage 8 failed: retrace integrity check did not pass.')
+
+          before = json.loads(Path('stage8-out/evidence-before.json').read_text(encoding='utf-8'))
+          data = json.loads(Path('radar.json').read_text(encoding='utf-8'))
+          for key, expected in before.items():
+              payload = json.dumps(data.get(key), ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode('utf-8')
+              actual = hashlib.sha256(payload).hexdigest()
+              if actual != expected:
+                  raise SystemExit(f'Stage 8 failed closed: evidence collection {key} changed during downstream cleanup.')
+
+          print(
+              'Final retrace: PASS — '
+              f"removed {d.get('stale_evidence_references_removed', 0)} stale reference occurrence(s); "
+              '0 orphan references remain; evidence collections unchanged.'
+          )
+          PY
+
+      - name: Stage 8 — protected-core and end-to-end validation pass
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/validate_scanner_output.py radar.json
+          python scripts/check_reasoning_reform_core_freeze.py
+          python scripts/check_workflow_contract.py
+          python scripts/run_reasoning_reform_smoke.py
+
+      - name: Record Stage 8 completion
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          report = json.loads(Path('stage8-out/final-retrace.json').read_text(encoding='utf-8'))
+          d = report['diagnostics']
+          status_path = Path('reasoning-reform/STAGE8_COMPLETE.json')
+          stage_path = Path('reasoning-reform/STAGE8.md')
+          baseline_path = Path('reasoning-reform/baseline.json')
+
+          completed_at = datetime.now(timezone.utc).isoformat()
+          status = {
+              'schema': 'radar-reasoning-reform-stage8-complete-v1',
+              'completed': True,
+              'completed_at': completed_at,
+              'reader_language_unreviewed_flagged': 0,
+              'stale_evidence_references_removed': d.get('stale_evidence_references_removed', 0),
+              'final_retrace_integrity_passed': True,
+              'orphan_references_remaining': d.get('orphan_references_remaining', 0),
+              'active_evidence_reference_occurrences_checked': d.get('active_evidence_reference_occurrences_checked', 0),
+              'evidence_collections_unchanged_by_stage8': True,
+              'protected_reasoning_core_unchanged': True,
+              'end_to_end_regressions_passed': True,
+          }
+          status_path.write_text(json.dumps(status, indent=2) + '\n', encoding='utf-8')
+          stage_path.write_text(
+              '# Stage 8 — reader presentation, final retrace and closure\n\n'
+              'Stage 8 is the closure step for the reasoning renovation. It does not change Scanner admission, Deep Scan authority, claim detection, wow, falsifiers, or publication-selection rules.\n\n'
+              'The final gate completed the reader-language lint check, validated active approved display rewrites, applied the downstream retrace/cleanup, required zero active orphan evidence references, verified that the evidence collections themselves were unchanged, re-checked the protected core and workflow contracts, and ran the reasoning-reform regression smoke suite.\n\n'
+              f"Final retrace removed {d.get('stale_evidence_references_removed', 0)} stale evidence-reference occurrences, checked {d.get('active_evidence_reference_occurrences_checked', 0)} active evidence-reference occurrences, and ended with {d.get('orphan_references_remaining', 0)} orphan references.\n\n"
+              'The Reader Language flagged queue was empty at closure. Future wording changes can still use the existing Reader Language review layer; that layer remains presentation-only and cannot alter analytical selection.\n\n'
+              '**Reasoning renovation status: COMPLETE through Stage 8.**\n',
+              encoding='utf-8',
+          )
+
+          baseline = json.loads(baseline_path.read_text(encoding='utf-8'))
+          migrations = baseline.setdefault('approved_migrations', [])
+          migrations[:] = [x for x in migrations if not (isinstance(x, dict) and x.get('stage') == 'stage8-reader-presentation-final-validation')]
+          migrations.append({
+              'stage': 'stage8-reader-presentation-final-validation',
+              'approved_files': [
+                  '.github/workflows/finalize-reasoning-renovation.yml',
+                  'radar.json',
+                  'reasoning-reform/STAGE8.md',
+                  'reasoning-reform/STAGE8_COMPLETE.json',
+                  'reasoning-reform/baseline.json',
+              ],
+              'purpose': 'Close the reasoning renovation with reader-language lint, applied downstream retrace/cleanup, zero-orphan integrity checks, evidence immutability verification, protected-core checks, and end-to-end regression validation.',
+          })
+          baseline_path.write_text(json.dumps(baseline, ensure_ascii=False, indent=2, sort_keys=True) + '\n', encoding='utf-8')
+          PY
+
+      - name: Commit the completed Stage 8 state
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add radar.json reasoning-reform/STAGE8.md reasoning-reform/STAGE8_COMPLETE.json reasoning-reform/baseline.json
+          if git diff --cached --quiet; then
+            echo 'Stage 8 was already complete; no commit needed.'
+          else
+            git commit -m 'Complete reasoning renovation Stage 8'
+            git push origin HEAD:main
+          fi
+
+      - name: Upload final Stage 8 report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reasoning-renovation-stage8-final-report
+          path: stage8-out/
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Final status
+        if: always()
+        shell: bash
+        run: |
+          echo '## Reasoning renovation — Stage 8' >> "$GITHUB_STEP_SUMMARY"
+          if [[ "${{ job.status }}" == 'success' ]]; then
+            echo '✅ **COMPLETE.** Reader presentation/lint, downstream cleanup, final retrace, evidence-integrity checks, protected-core checks and regressions all passed.' >> "$GITHUB_STEP_SUMMARY"
+            echo '' >> "$GITHUB_STEP_SUMMARY"
+            echo 'The reasoning renovation is complete through Stage 8.' >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo '❌ Stage 8 did not complete. No completion commit was pushed. Read the first failed step above; the workflow fails closed before publication.' >> "$GITHUB_STEP_SUMMARY"
+          fi
