@@ -714,6 +714,19 @@ def _strand_code(node: dict[str, Any]) -> str:
     return clean(collection).replace("strand_", "").upper()
 
 
+def _support_claim_primary(node: dict[str, Any]) -> bool:
+    """Return downstream primary authority for a support node.
+
+    Normal active-corpus nodes carry ``_primary`` explicitly.  A few retrace and
+    regression fixtures intentionally provide only ``_collection``; in that case
+    Strand A/frontier evidence must still behave as primary, while historical and
+    context-only C remain context.  Explicit ``_primary`` always wins.
+    """
+    if "_primary" in node:
+        return bool(node.get("_primary"))
+    return _strand_code(node) == "A"
+
+
 def _support_rows(c: dict[str, Any], node_by_claim: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
     snaps: list[dict[str, Any]] = []
     roles = c.get("roles") if isinstance(c.get("roles"), dict) else {}
@@ -736,7 +749,7 @@ def _support_rows(c: dict[str, Any], node_by_claim: dict[str, dict[str, Any]]) -
             "quality": int(round(float(snap.get("merit", node.get("merit", 0)) or 0))),
             "new_this_scan": bool(node.get("_new_this_scan")),
             "analytical_weight": round(float(snap.get("strength", 0) or 0), 3),
-            "claim_primary": bool(node.get("_primary")),
+            "claim_primary": _support_claim_primary(node),
             "claim_context_weight": round(float(node.get("_context_weight", 1.0) or 0), 3),
             "claim_origin": clean(node.get("origin")),
             "claim_kind": clean(node.get("kind")),
@@ -768,7 +781,7 @@ def _support_rows(c: dict[str, Any], node_by_claim: dict[str, dict[str, Any]]) -
             "date": clean(node.get("status_date")), "link": rk[5:] if rk.startswith("link:") else clean(node.get("_link")),
             "quality": int(round(float(node.get("merit", 0) or 0))), "new_this_scan": bool(node.get("_new_this_scan")),
             "analytical_weight": round(float(node.get("_context_weight", 1.0) or 0), 3),
-            "claim_primary": bool(node.get("_primary")),
+            "claim_primary": _support_claim_primary(node),
             "claim_context_weight": round(float(node.get("_context_weight", 1.0) or 0), 3),
             "claim_origin": clean(node.get("origin")),
             "claim_kind": clean(node.get("kind")),
@@ -871,7 +884,7 @@ def _against_rows(c: dict[str, Any], node_by_claim: dict[str, dict[str, Any]]) -
             "link": rk[5:] if rk.startswith("link:") else clean(node.get("_link")),
             "quality": int(round(float(node.get("merit", 0) or 0))),
             "new_this_scan": bool(node.get("_new_this_scan")),
-            "claim_primary": bool(node.get("_primary")),
+            "claim_primary": _support_claim_primary(node),
             "claim_kind": clean(node.get("kind")), "mechanism": clean(node.get("mechanism")),
             "object": clean(node.get("object")),
         })
@@ -1455,20 +1468,25 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
             if len(ranked) <= ceil_target:
                 return ranked, None
             scores = sorted({int(c.get("score", 0) or 0) for c in ranked}, reverse=True)
-            viable: list[tuple[int, int, list[dict[str, Any]]]] = []
+            viable: list[tuple[int, list[dict[str, Any]]]] = []
             for threshold in scores:
                 selected = [c for c in ranked if int(c.get("score", 0) or 0) >= threshold]
-                if len(selected) >= floor_target:
-                    # Prefer a threshold that lands inside the soft range; otherwise
-                    # choose the smallest overflow.  Lower thresholds win ties so the
-                    # shelf remains inclusive rather than brittle.
-                    overflow = 0 if len(selected) <= ceil_target else len(selected) - ceil_target
-                    viable.append((overflow, -len(selected), selected))
+                if floor_target <= len(selected) <= ceil_target:
+                    # R-72 uses the target as a threshold-calibration range.  Prefer
+                    # the most inclusive threshold that still lands inside that range.
+                    viable.append((len(selected), selected))
             if viable:
-                viable.sort(key=lambda x: (x[0], x[1]))
-                selected = viable[0][2]
+                viable.sort(key=lambda x: x[0], reverse=True)
+                selected = viable[0][1]
                 threshold = min(int(c.get("score", 0) or 0) for c in selected) if selected else None
                 return selected, threshold
+
+            # If a same-wow score tie cannot be separated by any evidence threshold,
+            # do not publish the entire crowded band.  R-72 says the surplus belongs
+            # in reserve, and R-76 says incumbents should survive equal-wow churn.
+            # The minimum-fill fallback is the deterministic tie-break, not a global
+            # hard cap: higher-wow/newly-verified findings can still make a shelf
+            # larger than the nominal range elsewhere in the selector.
             return stable_take(ranked, floor_target), None
 
         # R-72 is a *soft target*, not a slot count.  The earlier cutover still
@@ -1560,11 +1578,13 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
                             remaining = [c for c in top if clean(c.get("id")) not in chosen_ids_local]
                             chosen.extend(stable_take(remaining, max(0, floor_target - len(chosen))))
                 else:
-                    # A crowded wow-3 band must not disappear merely because there is
-                    # no wow-4 item yet.  Tighten by evidence score *inside the same
-                    # wow band* and keep the strongest threshold band visible.
-                    wow_floor = 3
-                    chosen, _same_wow_threshold = adaptive_score_band(top)
+                    # R-72: a crowded wow-3 shelf raises the active floor to wow 4.
+                    # If no wow-4 finding exists yet, keep only the strongest minimum
+                    # fill from the lower band and place the surplus in reserve.  This
+                    # is not a global numeric cap: sparse baseline shelves can still
+                    # exceed the nominal range, and new wow-5 findings enter at once.
+                    wow_floor = 4
+                    chosen = stable_take(top, floor_target)
                 # R-74: if a lower wow point exists below the active shelf and is
                 # not already represented by the minimum-fill step, keep one best
                 # baseline representative.  Do not turn that baseline into a cap.
