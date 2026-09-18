@@ -78,7 +78,7 @@ function collect(data){
   const hmap=new Map((Array.isArray(hi?.candidates)?hi.candidates:[]).filter(x=>x&&typeof x==='object').map(x=>[clean(x.id),x]));
   for(const id of hids){
     const c=hmap.get(clean(id));if(!c)continue;
-    add(c.reader_title||c.topic_label,Number(c.inferential_distance)||4,{records:c.primary_records,sources:c.primary_sources},Number(c.score)||0,c.reader_summary||'',{
+    add(c.reader_title||c.topic_label,Number(c.inferential_distance)||4,{records:c.primary_records,sources:c.primary_sources},Number(c.score)||0,c.reader_consequence||c.reader_summary||'',{
       type:'higher-order',reasoning:[clean(c.reader_summary||'')].filter(Boolean),hidden:clean(c.why_easy_to_miss||''),
       requiredRoles:Array.isArray(c.required_roles)?c.required_roles:[],coveredRoles:Array.isArray(c.covered_roles)?c.covered_roles:[],missingRoles:Array.isArray(c.missing_roles)?c.missing_roles:[],missingLinks:Array.isArray(c.missing_links)?c.missing_links:[],
       denialTested:!!c.denial_tested,falsifierQueries:Array.isArray(c.falsifier_queries)?c.falsifier_queries:[],support:(Array.isArray(c.support)?c.support:[]).map(evidenceRow),against:(Array.isArray(c.against)?c.against:[]).map(evidenceRow)
@@ -134,7 +134,7 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-shock-deta
     const reserve=Number(sel.reserve)||0,watch=Number(sel.watch)||0;
     const stockWords=()=>{if(!reserve&&!watch)return '';const r=reserve?(reserve>=10?' Many more are waiting in reserve.':' More are waiting in reserve.') : '';const w=watch?(watch>=10?' Many possible shocks are still under investigation.':' Some possible shocks are still under investigation.') : '';return `${r}${w}`};
     document.getElementById('shockSummary').textContent=items.length?`Possible shocks worth watching.${stockWords()}`:`No possible shock is ready to show yet.${stockWords()}`;
-    el.innerHTML=items.length?items.map((x,i)=>`<li><strong>${esc(x.text)}</strong><p>${esc(shockExplanation(x.text))}</p>${shockDetailHtml(x,i)}</li>`).join(''):'<li class="empty">No possible shock is ready to show yet.</li>';
+    el.innerHTML=items.length?items.map((x,i)=>`<li><strong>${esc(x.text)}</strong><p>${esc(x.explanation&&x.detail&&x.detail.type==='higher-order'?x.explanation:shockExplanation(x.text))}</p>${shockDetailHtml(x,i)}</li>`).join(''):'<li class="empty">No possible shock is ready to show yet.</li>';
   }catch(e){console.error(e);document.getElementById('shockSummary').textContent='Shock evidence is unavailable.';el.innerHTML='<li class="empty">Unavailable.</li>'}
 })();
 </script>

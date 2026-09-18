@@ -2313,6 +2313,53 @@ def _presentation_ready(c: dict[str, Any]) -> tuple[bool, str]:
 
 SHELF_SWAP_MARGIN = 4
 
+# Page variety: one disruption type or one asset must not dominate a shelf.
+SHOCK_MAX_PER_DRIVER = 3
+SHOCK_MAX_PER_ASSET = 2
+MAX_PER_TOPIC = 2
+
+_SHOCK_CONSEQUENCE = {
+    "cyber": "A cyber incident could take {asset} offline or compromise it, and European teams have little ready backup to switch to.",
+    "energy": "Scarce or rationed power could force {asset} to compete with other essential uses for electricity, slowing or pausing it.",
+    "export_control": "Export controls imposed elsewhere could cut {asset} off from equipment, components or partners it currently relies on.",
+    "security_reclassification": "If the work is suddenly reclassified as security-sensitive, {asset} could lose partners, people or openness overnight.",
+    "conflict": "A conflict escalation could divert money and attention and cut the people, sites or supply routes that {asset} depends on.",
+    "critical_input": "A shortage of critical materials or components could halt {asset} where there is no fast substitute.",
+    "sanctions": "Sanctions or payment restrictions could freeze the funding flows and partnerships behind {asset}.",
+    "acquisition": "A foreign takeover of a key firm could move control of {asset}, and its know-how, outside Europe.",
+    "data_access": "A cross-border data restriction could stop {asset} from lawfully using the data it needs.",
+    "commercial": "If a key provider withdraws or reprices, {asset} could lose a service it cannot quickly replace.",
+    "external_finance": "If outside money pulls back quickly, {asset} could lose the capital it has been counting on.",
+}
+
+
+def _shock_consequence(raw: dict[str, Any], out: dict[str, Any]) -> str:
+    pid = clean(raw.get("pressure_id"))
+    asset = _friendly_object_label(raw.get("capability_object") or (raw.get("endpoint_objects") or [""])[0])
+    base = _SHOCK_CONSEQUENCE.get(pid, "The disruption could remove something {asset} depends on before Europe can replace it.").format(asset=asset)
+    base = base[0].upper() + base[1:]
+    driver = next((x for x in (out.get("support") or []) if isinstance(x, dict) and clean(x.get("role")) == "external_driver"), None)
+    if driver and clean(driver.get("source")):
+        return f"{base} Signal behind it: {clean(driver.get('source'))} reports the disruption itself; the link to {asset} is the Radar's hypothesis."
+    return base
+
+
+def _diversity_keys(c: dict[str, Any]) -> list[tuple[str, str, int]]:
+    """(kind, key, cap) limits that keep one story from dominating a page."""
+    product = clean(c.get("product"))
+    eps = [clean(x) for x in (c.get("endpoint_objects") or []) if clean(x)] if isinstance(c.get("endpoint_objects"), list) else []
+    if product == "shock":
+        driver = next((x for x in eps if x.startswith("shock_pressure.")), "") or clean(c.get("pressure_id"))
+        asset = next((x for x in eps if not x.startswith("shock_pressure.")), "")
+        keys = []
+        if driver:
+            keys.append(("driver", driver, SHOCK_MAX_PER_DRIVER))
+        if asset:
+            keys.append(("asset", asset, SHOCK_MAX_PER_ASSET))
+        return keys
+    topic = clean(c.get("object") or (eps[0] if eps else "") or c.get("topic_key"))
+    return [("topic", topic, MAX_PER_TOPIC)] if topic else []
+
 # Creative reserve: the reserve is not only the runners-up.  It deliberately
 # holds hypotheses that are relevant and not contradicted but not yet provable -
 # distant, cross-domain, newly emerging, weak-signal or partially grounded - so
@@ -2502,7 +2549,31 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
                     selected.append(c); selected_ids.add(cid)
             return sorted(selected, key=_selection_rank, reverse=True)
 
-        by_wow = {wow: select_wow_bucket(deduped, wow) for wow in (5, 4, 3, 2, 1)}
+        # Variety caps across the whole page.  Candidates over a cap stay in
+        # reserve; if caps make the page impossible to fill they are relaxed.
+        diversity_used: Counter = Counter()
+
+        def fits(c: dict[str, Any]) -> bool:
+            return all(diversity_used[(k, v)] < cap for k, v, cap in _diversity_keys(c))
+
+        def take(c: dict[str, Any]) -> None:
+            for k, v, _cap in _diversity_keys(c):
+                diversity_used[(k, v)] += 1
+
+        by_wow = {}
+        for wow in (5, 4, 3, 2, 1):
+            picked = []
+            for c in select_wow_bucket([x for x in deduped if fits(x)], wow):
+                if fits(c):
+                    picked.append(c); take(c)
+            # Top up from the rest of the bucket that still fits.
+            rest = sorted([x for x in deduped if int(x.get("wow", 0) or 0) == wow and x not in picked and fits(x)], key=_selection_rank, reverse=True)
+            for c in rest:
+                if len(picked) >= slots_per_wow:
+                    break
+                if fits(c):
+                    picked.append(c); take(c)
+            by_wow[wow] = picked
         # A thin wow bucket must not leave a hole in the 15-slot page.  Each empty
         # slot is filled from the nearest wow level that still has grounded
         # reserve (ties prefer the lower, more visible level), so the page keeps
@@ -2524,7 +2595,13 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
                 )
                 if not donors:
                     break
-                c = spare[donors[0]].pop(0)
+                fitting = next((x for w in donors for x in spare[w] if fits(x)), None)
+                if fitting is not None:
+                    spare[int(fitting.get("wow", 0) or 0)].remove(fitting)
+                    c = fitting
+                else:
+                    c = spare[donors[0]].pop(0)  # caps relaxed only as last resort
+                take(c)
                 c["page_slot_wow"] = wow
                 by_wow[wow].append(c)
                 borrowed += 1
@@ -3220,6 +3297,8 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
     out["reader_title"] = reader_title
     out["reader_summary"] = reader_summary
     out["reader_why"] = _reader_why(grammar, product, c)
+    if grammar == "future_shock_hypothesis":
+        out["reader_consequence"] = _shock_consequence(c, out)
     oddity, oddity_reason = _oddity_pass(out, vocab)
     out["oddity_passes"] = oddity
     out["oddity_reason"] = oddity_reason
