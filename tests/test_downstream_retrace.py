@@ -82,7 +82,18 @@ class DownstreamRetraceTests(unittest.TestCase):
                 self.assertIn(ref.get('strand'), {'A', 'C'})
                 self.assertNotEqual(ref.get('strand'), 'H')
                 self.assertTrue(ref.get('claim_primary'))
-                self.assertGreater(float(ref.get('analytical_weight', 0) or 0), 0.0)
+                # R-09 primary/context authority is independent of R-21 role
+                # strength. A primary claim may legitimately carry zero role
+                # strength when its status is abandoned/lapsed (or merit is 0);
+                # Stage 7 must keep that evidence in stock while preventing it
+                # from satisfying a qualification floor.
+                weight = float(ref.get('analytical_weight', 0) or 0)
+                self.assertGreaterEqual(weight, 0.0)
+                if weight == 0.0:
+                    self.assertTrue(
+                        str(ref.get('claim_status') or '') in {'abandoned', 'lapsed'}
+                        or float(ref.get('claim_merit', 0) or 0) <= 0.0
+                    )
                 if ref.get('strand') == 'C':
                     self.assertNotEqual(str(ref.get('claim_origin') or ''), 'provisional')
                     self.assertIn(str(ref.get('claim_kind') or ''), {'action', 'effect'})

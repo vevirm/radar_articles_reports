@@ -705,6 +705,8 @@ def _support_rows(c: dict[str, Any], node_by_claim: dict[str, dict[str, Any]]) -
             "claim_context_weight": round(float(node.get("_context_weight", 1.0) or 0), 3),
             "claim_origin": clean(node.get("origin")),
             "claim_kind": clean(node.get("kind")),
+            "claim_status": clean(snap.get("status") or node.get("status")),
+            "claim_merit": float(snap.get("merit", node.get("merit", 0)) or 0),
             "mechanism": clean(snap.get("mechanism") or node.get("mechanism")),
             "object": clean(snap.get("object")),
         })
@@ -735,6 +737,8 @@ def _support_rows(c: dict[str, Any], node_by_claim: dict[str, dict[str, Any]]) -
             "claim_context_weight": round(float(node.get("_context_weight", 1.0) or 0), 3),
             "claim_origin": clean(node.get("origin")),
             "claim_kind": clean(node.get("kind")),
+            "claim_status": clean(node.get("status")),
+            "claim_merit": float(node.get("merit", 0) or 0),
             "mechanism": clean(node.get("mechanism")),
             "object": clean(node.get("object")),
         })

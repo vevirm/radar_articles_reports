@@ -171,3 +171,26 @@ def test_stage7_soft_target_raises_wow_floor_without_hard_cap():
     assert pubs["risk"] == []
     assert meta["risk"]["wow_floor"] == 4
     assert meta["risk"]["soft_target"] == [2, 5]
+
+
+def test_stage7_zero_strength_primary_claim_is_stock_not_publication(monkeypatch):
+    # R-09 primary/context authority and R-21 role strength are separate.
+    # A primary claim with a lapsed status remains authoritative evidence in
+    # stock, but its zero role strength must not satisfy the qualification gate.
+    cand = quantum_candidate()
+    cand["roles"]["criterion_a"]["strength"] = 0.0
+    cand["score_gate_passes"] = False
+    nodes = quantum_nodes()
+    nodes[0]["status"] = "lapsed"
+    monkeypatch.setattr(live, "detect_claim_reasoning", lambda *a, **k: fake_detection(cand, nodes))
+    query = "quantum.testing_infrastructure common rule export_control.competence"
+    raw = {"scan_results": {"finding_context_queries_this_scan": [query], "finding_context_queries_executed": 1}}
+    state = live.refresh_claim_high_order(raw, {}, "2026-09-18T00:00:00Z", root=ROOT)
+    c = next(x for x in state["candidates"] if x["grammar_id"] == "conflicting_criteria")
+    support = next(x for x in c["support"] if x["claim_id"] == "c:a")
+    assert support["claim_primary"] is True
+    assert support["analytical_weight"] == 0.0
+    assert support["claim_status"] == "lapsed"
+    assert c["status"] == "watch"
+    assert c["publication_gate_passes"] is False
+    assert state["publications"]["risk"] == []
