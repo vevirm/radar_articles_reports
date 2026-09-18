@@ -59,6 +59,47 @@ class ReaderLanguagePipelineTests(unittest.TestCase):
         self.assertIn(text, by_source)
         self.assertEqual(by_source[text]['routes'], ['trends'])
 
+
+    def test_reader_language_prefers_live_active_reasoning_snapshot(self):
+        active_text = 'Active snapshot wording shown to readers.'
+        raw_text = 'Raw radar wording that is not currently shown.'
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            active = {
+                'active_corpus_snapshot': True,
+                'high_order_inference': {
+                    'candidates': [{'id': 'live', 'reader_summary': active_text}],
+                    'publications': {'risk': ['live']},
+                },
+            }
+            raw = {
+                'high_order_inference': {
+                    'candidates': [{'id': 'raw', 'reader_summary': raw_text}],
+                    'publications': {'risk': ['raw']},
+                },
+            }
+            (root / 'radar_active.json').write_text(json.dumps(active), encoding='utf-8')
+            (root / 'radar.json').write_text(json.dumps(raw), encoding='utf-8')
+            with patch.object(reader_language_common, 'ROOT', root):
+                sources = {x['source'] for x in collect_candidates()}
+        self.assertIn(active_text, sources)
+        self.assertNotIn(raw_text, sources)
+
+    def test_reader_language_falls_back_to_raw_when_active_snapshot_is_not_authoritative(self):
+        raw_text = 'Raw radar wording used when no active snapshot is available.'
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            (root / 'radar_active.json').write_text(json.dumps({'active_corpus_snapshot': False}), encoding='utf-8')
+            (root / 'radar.json').write_text(json.dumps({
+                'high_order_inference': {
+                    'candidates': [{'id': 'raw', 'reader_summary': raw_text}],
+                    'publications': {'risk': ['raw']},
+                },
+            }), encoding='utf-8')
+            with patch.object(reader_language_common, 'ROOT', root):
+                sources = {x['source'] for x in collect_candidates()}
+        self.assertIn(raw_text, sources)
+
     def test_numeric_guard_preserves_factual_numbers(self):
         a = 'The balance is 46–54 and 12 sources are represented.'
         b = 'The balance is 46–54, with 12 sources represented.'

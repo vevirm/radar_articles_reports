@@ -246,13 +246,36 @@ def collect_js(store: dict[str, Candidate]) -> None:
                 add_candidate(store, text, routes, f"{rel}:{line}")
 
 
+def _reader_reasoning_document() -> tuple[Path | None, dict | None]:
+    """Return the same reasoning snapshot the public reader prefers.
+
+    The live site loads radar_active.json first when it is a generated active-corpus
+    snapshot, and falls back to radar.json otherwise. Reader Language must inspect
+    that same text or a review package can target wording that is not actually live.
+    """
+    active = ROOT / "radar_active.json"
+    if active.exists():
+        try:
+            data = json.loads(active.read_text(encoding="utf-8"))
+            if isinstance(data, dict) and data.get("active_corpus_snapshot"):
+                return active, data
+        except Exception:
+            pass
+
+    raw = ROOT / "radar.json"
+    if raw.exists():
+        try:
+            data = json.loads(raw.read_text(encoding="utf-8"))
+            if isinstance(data, dict):
+                return raw, data
+        except Exception:
+            pass
+    return None, None
+
+
 def collect_radar_reader_fields(store: dict[str, Candidate]) -> None:
-    p = ROOT / "radar.json"
-    if not p.exists():
-        return
-    try:
-        data = json.loads(p.read_text(encoding="utf-8"))
-    except Exception:
+    p, data = _reader_reasoning_document()
+    if p is None or not isinstance(data, dict):
         return
     hi = data.get("high_order_inference") if isinstance(data, dict) else None
     hi = hi if isinstance(hi, dict) else {}
@@ -270,7 +293,7 @@ def collect_radar_reader_fields(store: dict[str, Candidate]) -> None:
             c = candidates.get(clean(cid))
             if not c:
                 continue
-            origin = f"radar.json:high_order:{clean(cid)}"
+            origin = f"{p.name}:high_order:{clean(cid)}"
             for key in ("reader_title", "reader_summary"):
                 add_candidate(store, c.get(key), [route], f"{origin}:{key}")
             if product == "trend" and isinstance(c.get("trend_balance"), dict):
@@ -285,7 +308,7 @@ def collect_radar_reader_fields(store: dict[str, Candidate]) -> None:
     for i, s in enumerate(shock.get("dynamic_shocks", []) if isinstance(shock.get("dynamic_shocks"), list) else []):
         if not isinstance(s, dict):
             continue
-        origin = f"radar.json:shock_inference.dynamic_shocks[{i}]"
+        origin = f"{p.name}:shock_inference.dynamic_shocks[{i}]"
         for key in ("title", "plainly", "second_order", "why_easy_to_miss", "net_assessment"):
             add_candidate(store, s.get(key), ["shocks"], f"{origin}:{key}")
         for key in ("conditions", "case_against", "prevention_actions", "watch_for"):
