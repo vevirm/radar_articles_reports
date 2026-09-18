@@ -730,6 +730,36 @@ def _support_claim_primary(node: dict[str, Any]) -> bool:
     return _strand_code(node) == "A"
 
 
+def _reader_evidence_contribution(role: Any) -> str:
+    """Translate internal role names into reader-safe evidence contributions.
+
+    These labels describe only what a source contributes to the evidence chain;
+    they never attribute the Radar's final synthesis to that source.
+    """
+    r = clean(role).lower()
+    labels = {
+        "commitment": "Establishes the European capability, commitment or asset.",
+        "coupling": "Establishes the dependency linking that capability to another input or condition.",
+        "propagation": "Establishes a mechanism through which disruption could spread.",
+        "exposure": "Establishes European exposure or the consequences of losing access.",
+        "external_driver": "Establishes an outside pressure that could become disruptive.",
+        "bridge": "Establishes a direct link between the outside pressure and the European capability.",
+        "unresolved_need": "Establishes the unresolved European need or gap.",
+        "existing_structure": "Establishes an existing structure that could be used.",
+        "live_connection": "Establishes a live connection between the need and the available structure.",
+        "precedent": "Establishes a precedent showing that the route can work.",
+        "receiving_instrument": "Establishes an instrument that could receive or scale the route.",
+        "criterion_a": "Establishes one requirement acting on the same decision.",
+        "criterion_b": "Establishes another requirement acting on the same decision.",
+        "arbitration_gap": "Establishes that a common reconciliation rule is not yet visible.",
+        "divergence": "Establishes uneven implementation or interpretation.",
+        "expands": "Establishes movement in the expanding direction.",
+        "constrains": "Establishes movement in the constraining direction.",
+        "counter-evidence": "Establishes evidence that could weaken or qualify the finding.",
+    }
+    return labels.get(r, "Establishes part of the source evidence used for this finding.")
+
+
 def _support_rows(c: dict[str, Any], node_by_claim: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
     snaps: list[dict[str, Any]] = []
     roles = c.get("roles") if isinstance(c.get("roles"), dict) else {}
@@ -760,6 +790,12 @@ def _support_rows(c: dict[str, Any], node_by_claim: dict[str, dict[str, Any]]) -
             "claim_merit": float(snap.get("merit", node.get("merit", 0)) or 0),
             "mechanism": clean(snap.get("mechanism") or node.get("mechanism")),
             "object": clean(snap.get("object")),
+            # Reader evidence must preserve what the authoritative claim actually
+            # says.  Titles identify publications; they are not evidence statements.
+            # Keeping this narrow claim text beside the bibliographic metadata lets
+            # reader surfaces show SOURCE EVIDENCE separately from Radar synthesis.
+            "source_statement": clean(node.get("text")),
+            "evidence_contribution": _reader_evidence_contribution(role),
         })
     # Level-2/3 candidates often store claim ids directly instead of role snapshots.
     ids: list[str] = []
@@ -792,6 +828,8 @@ def _support_rows(c: dict[str, Any], node_by_claim: dict[str, dict[str, Any]]) -
             "claim_merit": float(node.get("merit", 0) or 0),
             "mechanism": clean(node.get("mechanism")),
             "object": clean(node.get("object")),
+            "source_statement": clean(node.get("text")),
+            "evidence_contribution": _reader_evidence_contribution("support"),
         })
     return snaps
 
@@ -890,6 +928,8 @@ def _against_rows(c: dict[str, Any], node_by_claim: dict[str, dict[str, Any]]) -
             "claim_primary": _support_claim_primary(node),
             "claim_kind": clean(node.get("kind")), "mechanism": clean(node.get("mechanism")),
             "object": clean(node.get("object")),
+            "source_statement": clean(node.get("text")),
+            "evidence_contribution": _reader_evidence_contribution("counter-evidence"),
         })
     return out
 
@@ -1211,6 +1251,8 @@ def _trend_payload(
                 "claim_status": clean(n.get("status")),
                 "mechanism": clean(n.get("mechanism")),
                 "object": obj,
+                "source_statement": clean(n.get("text")),
+                "evidence_contribution": _reader_evidence_contribution(role),
             })
         return out
 
@@ -1379,7 +1421,11 @@ def _verification_gate(c: dict[str, Any]) -> tuple[bool, str]:
     if product == "trend" or grammar == "opposing_movements":
         return bool(c.get("trend_evidence_floor_passes")), "trend_evidence_floor"
     if grammar == "corroborated_claim":
-        # R-25 is already an explicit two-independent-source depth gate.  Requiring a
+        # A single source may seed a grounded future hypothesis, but it is not
+        # corroboration. Keep it in stock without mislabelling the evidence state.
+        if int(c.get("primary_sources", 0) or 0) < 2:
+            return False, "single_source_anchor"
+        # Genuine corroboration is the two-independent-source depth gate. Requiring a
         # Level-5 candidate falsifier here would collapse the baseline and recreate
         # the Stage-7 starvation bug at a lower level.
         return (
@@ -1749,8 +1795,6 @@ def _reader_copy(grammar: str, product: str, raw: dict[str, Any], candidate: dic
     sources = int(candidate.get("primary_sources", 0) or 0)
 
     if grammar == "named_continuity":
-        cur_s = int(raw.get("current_source_count", 0) or 0)
-        hist_s = int(raw.get("historical_source_count", 0) or 0)
         title_map = {
             "research collaboration": "Research collaboration keeps changing shape, not disappearing.",
             "innovation-system performance": "Europe keeps returning to the same innovation-conversion problem.",
@@ -1762,7 +1806,10 @@ def _reader_copy(grammar: str, product: str, raw: dict[str, Any], candidate: dic
             "research-security screening": "Research security keeps moving into ordinary research administration.",
         }
         title = title_map.get(a, f"{a[:1].upper()+a[1:]} keeps returning across the research-policy cycle.")
-        return title, f"The same controlled issue is supported by {cur_s} current and {hist_s} historical independent sources. The current form has changed, but the underlying issue has persisted across both eras."
+        # The title carries the substantive phenomenon.  Leave the summary empty so
+        # the reader page supplies its object-specific plain-language explanation
+        # instead of generic continuity metatext or source-count arithmetic.
+        return title, ""
 
     if grammar == "practice_before_doctrine":
         return f"{a[:1].upper()+a[1:]} is moving into practice before the rulebook catches up.", "Implementation is already visible in the evidence before a later doctrine or framework on the same object has settled. That timing can make provisional practice harden into the default."
@@ -1798,9 +1845,15 @@ def _reader_copy(grammar: str, product: str, raw: dict[str, Any], candidate: dic
         return f"An older link between {a} and {b} is returning without being named.", "A historical record states the relationship directly, while current evidence shows both sides moving again without a current record explicitly joining them."
     if grammar == "corroborated_claim":
         direction = clean(raw.get("direction")); mechanism = clean(raw.get("mechanism"))
+        corroborated = sources >= 2
         if product == "risk":
-            verb = "is under sustained pressure" if direction == "contracts" else "is becoming more conditional" if direction == "becomes_conditional" else "is becoming more contested" if direction == "becomes_contested" else "shows a corroborated constraint"
-            return f"{a[:1].upper()+a[1:]} {verb}.", f"{records} records from {sources} independent sources point in the same constraining direction. This is the corroborated baseline beneath the higher-order pathway findings."
+            if corroborated:
+                verb = "is under sustained pressure" if direction == "contracts" else "is becoming more conditional" if direction == "becomes_conditional" else "is becoming more contested" if direction == "becomes_contested" else "shows a current constraint"
+                summary = "Independent sources document the same constraining direction. The forward risk shown here is the Radar's synthesis of what that pattern could mean if it persists or spreads."
+            else:
+                verb = "could come under sustained pressure" if direction == "contracts" else "could become more conditional" if direction == "becomes_conditional" else "could become more contested" if direction == "becomes_contested" else "could face a new constraint"
+                summary = "A current source provides the evidence anchor on this topic. The forward risk shown here is the Radar's synthesis of what could follow, not a statement attributed to that source."
+            return f"{a[:1].upper()+a[1:]} {verb}.", summary
         action = "is expanding through a live European instrument"
         if mechanism in {"collaborates", "associates"}: action = "is widening through active agreements"
         elif mechanism in {"procures", "builds", "adds_capacity"}: action = "is expanding through active capacity-building"
@@ -1810,7 +1863,21 @@ def _reader_copy(grammar: str, product: str, raw: dict[str, Any], candidate: dic
         elif mechanism == "coordinates": action = "is gaining an active coordination route"
         elif mechanism == "invests": action = "is expanding through new investment"
         elif mechanism == "supports": action = "is expanding through a live support instrument"
-        return f"{a[:1].upper()+a[1:]} {action}.", f"{records} records from {sources} independent sources point in the same constructive direction, with at least one live or operating instrument."
+        if corroborated:
+            summary = "Independent sources document constructive movement in the same direction, including a live or operating instrument. The broader opportunity shown here is the Radar's synthesis."
+            title = f"{a[:1].upper()+a[1:]} {action}."
+        else:
+            summary = "A current source documents a live or operating instrument moving in this direction. The broader opportunity shown here is the Radar's synthesis rather than a claim made by that source."
+            if mechanism in {"collaborates", "associates"}: title = f"Active agreements could widen {a}."
+            elif mechanism in {"procures", "builds", "adds_capacity"}: title = f"Active capacity-building could expand {a}."
+            elif mechanism == "funds": title = f"New funding could expand {a}."
+            elif mechanism == "prioritises": title = f"Adopted priorities could strengthen {a}."
+            elif mechanism == "launches": title = f"New instruments could move {a} further into operation."
+            elif mechanism == "coordinates": title = f"Active coordination could strengthen {a}."
+            elif mechanism == "invests": title = f"New investment could expand {a}."
+            elif mechanism == "supports": title = f"A live support instrument could expand {a}."
+            else: title = f"A live European instrument could expand {a}."
+        return title, summary
     return f"{a[:1].upper()+a[1:]}", clean(candidate.get("topic_label"))
 
 
@@ -1829,8 +1896,10 @@ def _reader_why(grammar: str, product: str, raw: dict[str, Any]) -> str:
     if grammar == "latent_channel": return "The opportunity is leverage: connect pieces Europe already has instead of creating a new programme from zero."
     if grammar == "anchor_demand": return "Reliable European demand can help turn research and scale-up support into durable production, suppliers and technical capability."
     if grammar == "named_continuity": return "Persistence matters because a recurring issue is more likely to shape future choices than a one-scan spike."
-    if grammar == "corroborated_claim" and product == "risk": return "Independent sources are pointing in the same constraining direction, so the issue is broader than one publication or institution."
-    if grammar == "corroborated_claim" and product == "opportunity": return "The constructive movement is already attached to a live instrument rather than remaining only an aspiration."
+    if grammar == "corroborated_claim" and product == "risk":
+        return "The source evidence establishes the current facts; the future consequence on this card is the Radar's interpretation, not wording attributed to a publication."
+    if grammar == "corroborated_claim" and product == "opportunity":
+        return "The source evidence establishes the live instrument or action; the broader opportunity on this card is the Radar's interpretation of what it could enable."
     return ""
 
 def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab: dict[str, Any] | None = None, evaluated_on: dt.date | None = None) -> dict[str, Any]:
@@ -1903,7 +1972,10 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
     if grammar == "opposing_movements":
         lock_reason = "Trend remains in stock until its own side-evidence floor and page-selection rules pass."
     elif grammar == "corroborated_claim":
-        lock_reason = "Corroborated Level-2 finding is verified by its independent-source floor and awaits shelf selection."
+        if len(sources) >= 2:
+            lock_reason = "Independent sources corroborate the current claim; the finding awaits shelf selection."
+        else:
+            lock_reason = "A single authoritative source anchors the current claim; the future implication remains a Radar inference."
     elif structural_verified:
         lock_reason = "Structural candidate is verified by its authoritative graph test and is waiting for page selection."
     else:
@@ -1923,7 +1995,7 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
         "product": product,
         "inferential_distance": level,
         "topic_key": _candidate_key(c),
-        "topic_label": _candidate_topic_label(grammar, topic),
+        "topic_label": (f"{topic} — evidence-anchored future hypothesis" if grammar == "corroborated_claim" and len(sources) < 2 else _candidate_topic_label(grammar, topic)),
         # Preserve the semantic claim fields separately from the candidate lifecycle
         # status.  Reader surfaces need these to describe Level-2 corroborated
         # findings without falling back to generic wording.
@@ -1931,7 +2003,7 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
         "mechanism": clean(c.get("mechanism")),
         "direction": clean(c.get("direction")),
         "claim_status": clean(c.get("status")),
-        "product_basis": clean(c.get("product_basis")),
+        "product_basis": ("single_source_future_anchor" if grammar == "corroborated_claim" and len(sources) < 2 else clean(c.get("product_basis"))),
         "shock_driver": bool(c.get("shock_driver")),
         "shock_driver_basis": clean(c.get("shock_driver_basis")),
         "status": status,
@@ -1949,6 +2021,7 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
         "missing_links": missing,
         "primary_records": len(records),
         "primary_sources": len(sources),
+        "evidence_semantics": "corroborated" if grammar == "corroborated_claim" and len(sources) >= 2 else "single_source_anchor" if grammar == "corroborated_claim" else "synthesis",
         "context_records": len({clean(x.get("identity")) for x in context if clean(x.get("identity"))}),
         "counter_records": len(against),
         "counter_penalty": int(c.get("counter_penalty", 0) or 0),

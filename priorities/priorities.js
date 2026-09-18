@@ -492,7 +492,7 @@
     const state=data?.high_order_inference&&typeof data.high_order_inference==='object'?data.high_order_inference:{};
     const ids=Array.isArray(state?.publications?.[kind])?state.publications[kind]:[];
     const byId=new Map((Array.isArray(state?.candidates)?state.candidates:[]).filter(x=>x&&typeof x==='object').map(x=>[clean(x.id),x]));
-    const evidenceRow=x=>({title:clean(x?.title||''),source:clean(x?.source||''),date:clean(x?.date||''),link:clean(x?.link||''),role:clean(x?.role||''),quality:Number(x?.quality)||0,analyticalWeight:Number(x?.analytical_weight)||0});
+    const evidenceRow=x=>({title:clean(x?.title||''),source:clean(x?.source||''),date:clean(x?.date||''),link:clean(x?.link||''),role:clean(x?.role||''),quality:Number(x?.quality)||0,analyticalWeight:Number(x?.analytical_weight)||0,sourceStatement:clean(x?.source_statement||''),contribution:clean(x?.evidence_contribution||'')});
     return ids.map((id,publicationRank)=>byId.get(clean(id))).filter(Boolean).map((c,publicationRank)=>{
       const support=Array.isArray(c.support)?c.support:[],against=Array.isArray(c.against)?c.against:[],ctx=Array.isArray(c.context)?c.context:[];
       const sourceLabel=Number(c.primary_sources||0)>=2?'Multiple sources':clean(support[0]?.source||'Evidence base');
@@ -503,6 +503,7 @@
         candidateId:clean(c.id),publicationRank,readerAuthored:!!clean(c.reader_title),readerWhy:clean(c.reader_why||''),grammarId:clean(c.grammar_id),topicLabel:clean(c.topic_label),
         objectKey:clean(c.object||c.topic_key),mechanism:clean(c.mechanism),direction:clean(c.direction),claimStatus:clean(c.claim_status||c.status),
         wow:Number(c.wow)||0,readerStatusChip:clean(c.reader_status_chip),inferentialDistance:Number(c.inferential_distance)||Number(c.level)||0,
+        evidenceSemantics:clean(c.evidence_semantics||''),
         supportEvidence:support.map(evidenceRow),counterEvidence:against.map(evidenceRow),
         primaryRecords:Number(c.primary_records)||0,primarySources:Number(c.primary_sources)||0,counterRecords:Number(c.counter_records)||0,
         weakSignalContext:ctx.map(evidenceRow),contextWeightTotal:Math.min(.60,ctx.reduce((n,x)=>n+(Number(x.analytical_weight)||.30),0)),
@@ -735,11 +736,9 @@
       if(g==='deployment_before_rules')return `Current evidence places operating or deployed activity before an adopted rule on the same object. That creates a period in which practice can harden before governance catches up.`;
       if(g==='conflicting_criteria')return `Independent records support both requirements, while the evidence base does not yet show a common tie-break. The risk is inconsistent decisions across institutions or countries.`;
       if(g==='dependency_pathway')return `Separate records connect a European capability to a dependency and show a route by which disruption could spread beyond one isolated project. The finding remains conditional on the documented links.`;
-      if(g==='corroborated_claim'){
-        const n=Number(x?.primaryRecords)||0,sources=Number(x?.primarySources)||0;
-        const pull=dir==='contracts'?'toward contraction':dir==='becomes_conditional'?'toward tighter conditions':dir==='becomes_contested'?'toward greater contestation':'toward expansion';
-        return `${n} records from ${sources} independent sources point in the same direction on ${topic}: ${pull}. This is the corroborated baseline; stronger cross-record findings can sit above it when they qualify.`;
-      }
+      if(g==='corroborated_claim')return clean(x?.evidenceSemantics)==='corroborated'
+        ? `Independent sources document the same current direction on ${topic}. The forward consequence on this card is the Radar's synthesis rather than a statement attributed to any one publication.`
+        : `A current source anchors the evidence on ${topic}. The forward consequence on this card is the Radar's synthesis rather than a statement made by that source.`;
       return `Several independent records support this finding about ${topic}.`;
     }
     const t=pathwayText(x),title=norm(x?.title||''),kind=clean(x?.kind),asset=semanticAssetFamily(x),mechanism=semanticMechanismFamily(x);
@@ -777,7 +776,7 @@
   }
 
   function supportingEvidenceText(x){
-    if(x?.highOrder){const lead=clean(x.evidenceSummary);return `Supported by ${x.primaryRecords||0} records from ${x.primarySources||0} independent sources${x.counterRecords?`; ${x.counterRecords} record(s) point the other way`:''}.${lead?` Key evidence: ${lead}`:''}`;}
+    if(x?.highOrder)return `The finding above is the Radar's synthesis. The source statements below are shown separately so the synthesis is not attributed to any publication.`;
     const raw=clean(x?.lensPassage||x?.abstract||x?.coreMessage||x?.title||'');
     if(!raw) return 'Evidence text unavailable.';
     const first=raw.split(/(?<=[.!?])\s+/).filter(Boolean).slice(0,3).join(' ');
