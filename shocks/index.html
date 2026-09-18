@@ -85,8 +85,6 @@ function collect(data){
     })
   }
   if(claimNative){
-    // The Python shelf is already ordered in the fixed 5,4,3,2,1 wow cycle.
-    // Preserve that order instead of sorting again by evidence score.
     return out;
   }
   const scenarioDetail=s=>({
@@ -109,9 +107,7 @@ function shockDetailHtml(x,i){
     if(Array.isArray(d.support)&&d.support.length)body+=`<p><strong>Evidence:</strong></p><ul>${evidenceRowsHtml(d.support,false)}</ul>`;
     if(Array.isArray(d.against)&&d.against.length)body+=`<p><strong>Evidence pointing the other way:</strong></p><ul>${evidenceRowsHtml(d.against,false)}</ul>`;
   }else{
-    if(d.hidden)body+=`<p><strong>Why it is easy to miss:</strong> ${esc(d.hidden)}</p>`;
-    if(d.secondOrder)body+=`<p><strong>Second-order effect:</strong> ${esc(d.secondOrder)}</p>`;
-    if(Array.isArray(d.reasoning)&&d.reasoning.filter(Boolean).length)body+=`<p><strong>Reasoning chain:</strong></p><ol>${d.reasoning.filter(Boolean).map(v=>`<li>${esc(v)}</li>`).join('')}</ol>`;
+    if(d.secondOrder)body+=`<p><strong>What could follow:</strong> ${esc(d.secondOrder)}</p>`;
     if(missing.length)body+=`<p><strong>Still unresolved:</strong> ${esc(missing.join('; '))}</p>`;
     if(Array.isArray(d.conditions)&&d.conditions.length)body+=`<p><strong>Conditions for the shock:</strong></p><ul>${d.conditions.map(v=>`<li>${esc(v)}</li>`).join('')}</ul>`;
     if(Array.isArray(d.support)&&d.support.length)body+=`<p><strong>Evidence:</strong></p><ul>${evidenceRowsHtml(d.support)}</ul>`;
@@ -121,21 +117,21 @@ function shockDetailHtml(x,i){
   if(Array.isArray(d.watchFor)&&d.watchFor.length)body+=`<p><strong>Watch for:</strong></p><ul>${d.watchFor.map(v=>`<li>${esc(v)}</li>`).join('')}</ul>`;
   if(d.netAssessment)body+=`<p><strong>Net assessment:</strong> ${esc(d.netAssessment)}</p>`;
   if(!body)return '';
-  return `<div class="shock-actions"><button class="info-button" type="button" data-shock-detail="${id}" aria-expanded="false">Evidence & reasoning</button></div><div id="${id}" class="shock-detail" hidden>${body}</div>`;
+  return `<div class="shock-actions"><button class="info-button" type="button" data-shock-detail="${id}" aria-expanded="false">Evidence</button></div><div id="${id}" class="shock-detail" hidden>${body}</div>`;
 }
-document.addEventListener('click',e=>{const b=e.target.closest('[data-shock-detail]');if(!b)return;const box=document.getElementById(b.dataset.shockDetail);if(!box)return;const opening=box.hidden;box.hidden=!opening;b.setAttribute('aria-expanded',String(opening));b.textContent=opening?'Close':'Evidence & reasoning'});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-shock-detail]');if(!b)return;const box=document.getElementById(b.dataset.shockDetail);if(!box)return;const opening=box.hidden;box.hidden=!opening;b.setAttribute('aria-expanded',String(opening));b.textContent=opening?'Close':'Evidence'});
 (async()=>{
   const el=document.getElementById('shockList');
   try{
     const data=await RadarData.load('../radar.json','../radar_seed.json');
-    const all=collect(data),items=all.slice(0,SHOCK_DISPLAY_LIMIT),hi=data?.high_order_inference||{},sel=hi?.selection?.shock||{};
+    const all=collect(data),hi=data?.high_order_inference||{},sel=hi?.selection?.shock||{};
     const claimNative=hi?.detector_backend==='claim_native'&&Number(hi?.selection_stage||0)>=7;
+    const wowCycle=items=>{const buckets=new Map([5,4,3,2,1].map(w=>[w,[]]));for(const x of items||[]){const w=Math.max(1,Math.min(5,Number(x?.distance)||3));buckets.get(w).push(x)}const out=[];for(let round=0;round<3;round++)for(const w of [5,4,3,2,1]){const x=buckets.get(w)[round];if(x)out.push(x)}return out};
+    const items=claimNative?wowCycle(all).slice(0,15):all.slice(0,15);
     const reserve=Number(sel.reserve)||0,watch=Number(sel.watch)||0;
-    const stockNote=claimNative&&(reserve||watch)?` ${reserve} more in reserve; ${watch} still developing.`:'';
-    document.getElementById('shockSummary').textContent=claimNative&&items.length===0&&watch>0
-      ?`No possible shock is supported strongly enough to show yet. ${watch} discontinuity pathway${watch===1?' is':'s are'} still being checked against missing links and contrary evidence${reserve?`; ${reserve} more ${reserve===1?'is':'are'} in reserve`:''}.`
-      :`Showing ${items.length} selected possible shock${items.length===1?'':'s'}${!claimNative&&all.length>items.length?` of ${all.length}`:''}.${stockNote}`;
-    el.innerHTML=items.length?items.map((x,i)=>`<li><strong>${esc(x.text)}</strong><p>${esc(x.explanation||shockExplanation(x.text))}</p>${shockDetailHtml(x,i)}</li>`).join(''):'<li class="empty">Nothing is shown until a possible discontinuity has a complete evidence pathway and the current evidence does not already close it.</li>';
+    const stockWords=()=>{if(!reserve&&!watch)return '';const r=reserve?(reserve>=10?' Many more are waiting in reserve.':' More are waiting in reserve.') : '';const w=watch?(watch>=10?' Many possible shocks are still under investigation.':' Some possible shocks are still under investigation.') : '';return `${r}${w}`};
+    document.getElementById('shockSummary').textContent=items.length?`Possible shocks worth watching.${stockWords()}`:`No possible shock is ready to show yet.${stockWords()}`;
+    el.innerHTML=items.length?items.map((x,i)=>`<li><strong>${esc(x.text)}</strong><p>${esc(shockExplanation(x.text))}</p>${shockDetailHtml(x,i)}</li>`).join(''):'<li class="empty">No possible shock is ready to show yet.</li>';
   }catch(e){console.error(e);document.getElementById('shockSummary').textContent='Shock evidence is unavailable.';el.innerHTML='<li class="empty">Unavailable.</li>'}
 })();
 </script>

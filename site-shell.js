@@ -11,7 +11,7 @@
     {match:/\/phenomena\/?$/,key:'phenomena',title:'Ongoing Phenomena',purpose:'Developments that persist, reconnect or change shape over time.'},
     {match:/\/priorities\/?$/,key:'priorities',title:'Risks & Opportunities',purpose:'Consequences supported by the current evidence base.'},
     {match:/\/shocks\/variants(?:\.html)?\/?$/,key:'shocks-variants',title:'Shock Variants',purpose:'Alternative forms, absorbers and counter-evidence for one supported external-shock mechanism.'},
-    {match:/\/shocks\/?$/,key:'shocks',title:'External Shocks',purpose:'Potential disruptions, ordered from more obvious to more inferential.'},
+    {match:/\/shocks\/?$/,key:'shocks',title:'External Shocks',purpose:'Possible disruptions to European research and innovation.'},
     {match:/\/(historical|history)\/?$/,key:'historical',title:'Earlier Findings',purpose:'Findings published before the Radar started scanning.'},
     {match:/\/literature\/?$/,key:'literature',title:'Sources',purpose:'Where the findings come from.'},
     {match:/\/briefing\/?$/,key:'briefing',title:'Topics',purpose:'What the Radar is seeing, grouped by subject.'},
