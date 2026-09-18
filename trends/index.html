@@ -32,28 +32,31 @@ const TREND_DISPLAY_LIMIT=30;
 function humanizeComposition(v){
   let s=String(v||'').trim();
   if(!s)return s;
-  s=s.replace(/^Both sides are still mostly analysis and positions; neither has turned into concrete action yet\.$/i,
-    'So far, both sides are based mainly on analysis and stated positions rather than actions already taken.');
-  s=s.replace(/^Both sides are equally concrete: (.+)\.$/i,'Both sides currently show the same amount of concrete action: $1.');
-  s=s.replace(/^The push is more concrete \((.+)\) than the pushback \((.+)\)\.$/i,
-    'The expansion side currently has more evidence of action ($1) than the constraint side ($2).');
-  s=s.replace(/^The pushback is more concrete \((.+)\) than the push \((.+)\)\.$/i,
-    'The constraint side currently has more evidence of action ($1) than the expansion side ($2).');
-  s=s.replace(/talk rather than action so far/gi,'no concrete action yet');
-  s=s.replace(/a single diagnosis, no action yet/gi,'one diagnostic finding and no concrete action yet');
-  s=s.replace(/(\d+) concrete move(s?) among (\d+) signals?/gi,'$1 concrete action$2 among $3 pieces of evidence');
-  s=s.replace(/all concrete moves/gi,'all of its evidence is concrete action');
+  if(/^Both sides are still mostly analysis and positions; neither has turned into concrete action yet\.$/i.test(s))
+    return 'Most of the evidence on both sides is still analysis or stated intent, not action already taken.';
+  if(/^Both sides are equally concrete:/i.test(s))
+    return 'Both directions contain about the same amount of evidence about actions already taken.';
+  if(/^The push is more concrete/i.test(s))
+    return 'More of the evidence on the first side describes actions already taken. The other side is based more on analysis, warnings or proposals.';
+  if(/^The pushback is more concrete/i.test(s))
+    return 'More of the evidence on the second side describes actions already taken. The first side is based more on analysis, warnings or proposals.';
+  s=s.replace(/talk rather than action so far/gi,'analysis or stated intent, rather than action already taken');
+  s=s.replace(/a single diagnosis, no action yet/gi,'a finding, but no action already taken');
+  s=s.replace(/(\d+) concrete move(s?) among (\d+) signals?/gi,'$1 action$2 already taken across $3 sources');
+  s=s.replace(/all concrete moves/gi,'all of the evidence describes actions already taken');
+  s=s.replace(/concrete action/gi,'action already taken');
+  s=s.replace(/pieces of evidence/gi,'sources');
   return s;
 }
 function humanizeFlip(v){
   let s=String(v||'').trim();
   if(!s)return s;
-  s=s.replace(/^Nothing on either side is pending a decision, so the balance will move only with new evidence\.$/i,
-    'No pending decision is likely to shift this yet; new evidence will determine the next move.');
+  if(/^Nothing on either side is pending a decision, so the balance will move only with new evidence\.$/i.test(s))
+    return 'There is no single pending decision likely to change the balance. The next shift will depend on new evidence.';
   s=s.replace(/^The next swing depends on “(.+)”: if it goes ahead, the push gains; if it stalls, the constraints hold\.$/i,
-    'Watch “$1”. If it goes ahead, the expansion side strengthens; if it stalls, the constraint side does.');
+    'Watch “$1”. If it happens, the first direction becomes stronger. If it is delayed or dropped, the other direction becomes stronger.');
   s=s.replace(/^Watch two things: if “(.+)” goes ahead, the push wins ground; if “(.+)” takes effect, the brakes do\.$/i,
-    'Watch two things: if “$1” goes ahead, the expansion side strengthens; if “$2” takes effect, the constraint side strengthens.');
+    'Watch “$1” and “$2”. Either one could change which direction has the stronger evidence.');
   return s;
 }
 function trendDistance(x){return x?.emergent?(TREND_DISTANCE.get(String(x.id||'').trim())||4):2}
@@ -63,9 +66,9 @@ function pair(x){
   const lt=surface(x.left.title),rt=surface(x.right.title);
   const ranges=x.emergent&&Array.isArray(x.pullRange?.left)&&x.pullRange.left.length===2&&Array.isArray(x.pullRange?.right)&&x.pullRange.right.length===2;
   const st=x.actionStats||{};
-  const rangeNote=ranges?`<div class="pull-note">Possible balance: ${esc(x.pullRange.left[0])}–${esc(x.pullRange.left[1])} vs ${esc(x.pullRange.right[0])}–${esc(x.pullRange.right[1])}.</div>`:'';
+  const rangeNote=ranges?`<div class="pull-note">Evidence range: ${esc(x.pullRange.left[0])}–${esc(x.pullRange.left[1])} vs ${esc(x.pullRange.right[0])}–${esc(x.pullRange.right[1])}.</div>`:'';
   const composition=x.composition?`<p class="why"><strong>Why the balance looks this way:</strong> ${esc(humanizeComposition(x.composition))}</p>`:'';
-  const flip=x.flip?`<p class="why"><strong>What could change the balance:</strong> ${esc(humanizeFlip(x.flip))}</p>`:'';
+  const flip=x.flip?`<p class="why"><strong>What to watch next:</strong> ${esc(humanizeFlip(x.flip))}</p>`:'';
   return `<article class="pair" data-obviousness="${trendDistance(x)}"><div class="tug-score" aria-label="Evidence balance ${x.left.pull} to ${x.right.pull}"><strong>${x.left.pull}</strong><div class="tug-track" aria-hidden="true"><span class="tug-left" data-pull="${x.left.pull}"></span><span class="tug-right" data-pull="${x.right.pull}"></span></div><strong>${x.right.pull}</strong></div>${rangeNote}<div class="axis"><section class="side"><h3>${esc(lt)}</h3>${l.what&&l.what!==lt?`<p class="plain">${esc(l.what)}</p>`:''}${l.why&&l.why!==l.what?`<p class="why">${esc(l.why)}</p>`:''}${evidenceBlock(x.left)}</section><section class="side right"><h3>${esc(rt)}</h3>${r.what&&r.what!==rt?`<p class="plain">${esc(r.what)}</p>`:''}${r.why&&r.why!==r.what?`<p class="why">${esc(r.why)}</p>`:''}${evidenceBlock(x.right)}</section></div>${composition}${flip}</article>`;
 }
 async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});if(!r.ok)return {};return await r.json()}catch(_){return {}}}

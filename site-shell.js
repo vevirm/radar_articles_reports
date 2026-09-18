@@ -79,7 +79,7 @@
   // analytical reader pages get the plain-language layer. It never changes stored data.
   if(!['radar','historical','stuff'].includes(page.key)){
     const language=document.createElement('script');
-    language.src=prefix+'reader_language.js?v=1';
+    language.src=prefix+'reader_language.js?v=2';
     language.defer=true;
     document.head.appendChild(language);
   }
