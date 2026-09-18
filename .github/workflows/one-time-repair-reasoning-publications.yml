@@ -1,0 +1,128 @@
+name: ONE-TIME Repair Reasoning Publication Pointers
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+
+concurrency:
+  group: ri-radar-research-scanners
+  cancel-in-progress: false
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install repository dependencies
+        run: pip install -r requirements.txt
+
+      - name: Repair only stale reader publication pointers
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from scripts import downstream_retrace as dr
+
+          path = Path('radar_active.json')
+          data = json.loads(path.read_text(encoding='utf-8'))
+
+          before = dr.current_orphans(data)
+          evidence_orphans = [x for x in before if x.get('kind') != 'reader_publication']
+          publication_orphans = [x for x in before if x.get('kind') == 'reader_publication']
+
+          print(f'Orphans before repair: {len(before)}')
+          print(f'  reader publication pointers: {len(publication_orphans)}')
+          print(f'  evidence ancestry references: {len(evidence_orphans)}')
+
+          # This migration is intentionally narrow. Never hide an evidence-ancestry
+          # problem by treating it as a reader-selection migration.
+          if evidence_orphans:
+              sample = '; '.join(
+                  f"{x.get('kind')} {x.get('object_id')} -> {x.get('identity')}"
+                  for x in evidence_orphans[:8]
+              )
+              raise SystemExit(
+                  'Refusing publication-only repair because actual evidence-reference '
+                  f'orphans exist: {sample}'
+              )
+
+          hi = data.get('high_order_inference')
+          if not isinstance(hi, dict):
+              raise SystemExit('radar_active.json has no high_order_inference object.')
+
+          candidates = {
+              str(x.get('id') or '').strip(): x
+              for x in hi.get('candidates', [])
+              if isinstance(x, dict) and str(x.get('id') or '').strip()
+          }
+          pubs = hi.get('publications')
+          if not isinstance(pubs, dict):
+              raise SystemExit('high_order_inference.publications is missing or invalid.')
+
+          removed = []
+          for product, ids in list(pubs.items()):
+              if not isinstance(ids, list):
+                  continue
+              kept = []
+              seen = set()
+              for cid_raw in ids:
+                  cid = str(cid_raw or '').strip()
+                  c = candidates.get(cid)
+                  valid = bool(c and c.get('status') == 'qualified' and c.get('reader_eligible'))
+                  if valid and cid not in seen:
+                      kept.append(cid)
+                      seen.add(cid)
+                  else:
+                      removed.append((product, cid))
+              pubs[product] = kept
+
+          path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          after = dr.current_orphans(data)
+          if after:
+              sample = '; '.join(
+                  f"{x.get('kind')} {x.get('object_id')} -> {x.get('identity')}"
+                  for x in after[:8]
+              )
+              raise SystemExit(f'Repair did not reach zero downstream orphans: {sample}')
+
+          print(f'Removed stale publication pointers: {len(removed)}')
+          for product, cid in removed[:30]:
+              print(f'  {product}: {cid}')
+          print('Downstream orphans after repair: 0')
+          PY
+
+      - name: Run the previously blocked downstream-retrace regression
+        run: python -m unittest tests.test_downstream_retrace.DownstreamRetraceTests.test_current_uploaded_cleaned_radar_retraces_to_zero_orphans
+
+      - name: Commit repaired derived active snapshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- radar_active.json; then
+            echo 'No repair was necessary.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- radar_active.json
+          git commit -m 'Repair reasoning publication pointers after wow-corpus migration'
+          git push
