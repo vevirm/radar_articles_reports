@@ -736,9 +736,19 @@
       if(g==='deployment_before_rules')return `Current evidence places operating or deployed activity before an adopted rule on the same object. That creates a period in which practice can harden before governance catches up.`;
       if(g==='conflicting_criteria')return `Independent records support both requirements, while the evidence base does not yet show a common tie-break. The risk is inconsistent decisions across institutions or countries.`;
       if(g==='dependency_pathway')return `Separate records connect a European capability to a dependency and show a route by which disruption could spread beyond one isolated project. The finding remains conditional on the documented links.`;
-      if(g==='corroborated_claim')return clean(x?.evidenceSemantics)==='corroborated'
-        ? `Independent sources document the same current direction on ${topic}. The forward consequence on this card is the Radar's synthesis rather than a statement attributed to any one publication.`
-        : `A current source anchors the evidence on ${topic}. The forward consequence on this card is the Radar's synthesis rather than a statement made by that source.`;
+      if(g==='corroborated_claim'){
+        const corroborated=clean(x?.evidenceSemantics)==='corroborated'||Number(x?.primarySources||0)>=2;
+        const lead=corroborated
+          ? `Independent sources document the same current direction on ${topic}.`
+          : `A current source anchors the evidence on ${topic}.`;
+        let semantic='';
+        if(clean(x?.kind)==='risk'){
+          if(dir==='becomes_conditional')semantic=`The evidence points toward tighter conditions on ${topic}.`;
+          else if(dir==='becomes_contested')semantic=`The evidence points toward more contested conditions around ${topic}.`;
+          else if(dir==='contracts')semantic=`The evidence points toward contraction or reduced room to act around ${topic}.`;
+        }
+        return `${lead}${semantic?` ${semantic}`:''} The forward consequence on this card is the Radar's synthesis rather than a statement attributed to any one publication.`;
+      }
       return `Several independent records support this finding about ${topic}.`;
     }
     const t=pathwayText(x),title=norm(x?.title||''),kind=clean(x?.kind),asset=semanticAssetFamily(x),mechanism=semanticMechanismFamily(x);
