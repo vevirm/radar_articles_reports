@@ -7,10 +7,10 @@
     {match:/\/read\/?$/,key:'read',title:'Read At Least This',purpose:'A compact map of the main phenomena and the parts that make them up.'},
     {match:/\/frontier\/quick\/?$/,key:'frontier-quick',title:'Matrix',purpose:'Where the current evidence places European research and innovation: strong, weak, exposed or dependent.'},
     {match:/\/frontier\/?$/,key:'frontier',title:'Matrix',purpose:'The detailed evidence behind the Matrix.'},
-    {match:/\/trends\/?$/,key:'trends',title:'Trends & Counter-Trends',purpose:'Opposing institutional pulls acting on the same underlying object.'},
-    {match:/\/phenomena\/?$/,key:'phenomena',title:'Ongoing Phenomena',purpose:'Developments that persist, reconnect or change shape over time.'},
-    {match:/\/priorities\/?$/,key:'priorities',title:'Risks & Opportunities',purpose:'Consequences supported by the current evidence base.'},
-    {match:/\/shocks\/variants(?:\.html)?\/?$/,key:'shocks-variants',title:'Shock Variants',purpose:'Alternative forms, absorbers and counter-evidence for one supported external-shock mechanism.'},
+    {match:/\/trends\/?$/,key:'trends',title:'Trends & Counter-Trends',purpose:'Where the evidence points in opposite directions on the same issue.'},
+    {match:/\/phenomena\/?$/,key:'phenomena',title:'Ongoing Phenomena',purpose:'Developments that keep recurring, reconnecting or changing over time.'},
+    {match:/\/priorities\/?$/,key:'priorities',title:'Risks & Opportunities',purpose:'Possible risks and opportunities supported by the current evidence.'},
+    {match:/\/shocks\/variants(?:\.html)?\/?$/,key:'shocks-variants',title:'Shock Variants',purpose:'Different ways one possible external shock could unfold, plus evidence that could soften it.'},
     {match:/\/shocks\/?$/,key:'shocks',title:'External Shocks',purpose:'Possible disruptions to European research and innovation.'},
     {match:/\/(historical|history)\/?$/,key:'historical',title:'Earlier Findings',purpose:'Findings published before the Radar started scanning.'},
     {match:/\/literature\/?$/,key:'literature',title:'Sources',purpose:'Where the findings come from.'},
@@ -74,10 +74,10 @@
 
   document.querySelectorAll('header,.core-flow,.core-path,.site-guide,.minimum-read').forEach(el=>el.classList.add('legacy-site-furniture'));
 
-  // Reader Language is presentation-only. It is deliberately absent from Main Radar,
-  // Earlier Findings, Sources and Stuff/Excel. Approved rewrites are exact-text overlays
-  // and never touch stored evidence or analytical state.
-  if(!['radar','historical','literature','stuff'].includes(page.key)){
+  // Reader Language is presentation-only. It is deliberately absent from the two raw
+  // evidence Radars (Main Radar and Earlier Findings) and Stuff/Excel. Sources and all
+  // analytical reader pages get the plain-language layer. It never changes stored data.
+  if(!['radar','historical','stuff'].includes(page.key)){
     const language=document.createElement('script');
     language.src=prefix+'reader_language.js?v=1';
     language.defer=true;

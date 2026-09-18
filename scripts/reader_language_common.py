@@ -64,6 +64,10 @@ META_PATTERNS = [
 ]
 
 AWKWARD_PATTERNS = [
+    (re.compile(r"\bCurrent evidence is (?:adding or widening|making)\b", re.I), "repetitive generated phrasing"),
+    (re.compile(r"\bmore conditional or constrained through\b", re.I), "bureaucratic phrase"),
+    (re.compile(r"\bas a whole through\b", re.I), "awkward phrase"),
+    (re.compile(r"\bdocumented constraints\b", re.I), "vague phrase"),
     (re.compile(r"\bis widening around\b", re.I), "awkward phrase"),
     (re.compile(r"\bforward[- ]looking pathways? to (?:loss|gain)\b", re.I), "bureaucratic phrase"),
     (re.compile(r"\bstrategic dependencies research security\b", re.I), "noun pile-up"),

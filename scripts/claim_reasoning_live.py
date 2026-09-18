@@ -2115,8 +2115,8 @@ def _trend_payload(
         body = short(n.get("text"))
         return f"{src}: {body}" if src else body
 
-    left_plain = side_text(lk, f"Signs of Europe expanding {label_text} through {mechanism_phrase(lk)}.")
-    right_plain = side_text(rk, f"Signs of {label_text} being constrained through {mechanism_phrase(rk)}.")
+    left_plain = side_text(lk, f"Evidence points to growth in {short_label}, supported by {mechanism_phrase(lk)}.")
+    right_plain = side_text(rk, f"{short_label[:1].upper()+short_label[1:]} is facing tighter conditions, including {mechanism_phrase(rk)}.")
 
     def weight_word(con: int, total: int) -> str:
         if total == 0:
@@ -3103,7 +3103,7 @@ def _friendly_object_label(value: Any) -> str:
         return aliases[obj]
     fam = _family_of(obj)
     if fam:
-        return _FAMILY_LABELS.get(fam, fam.replace("_", " ")) + " as a whole"
+        return _FAMILY_LABELS.get(fam, fam.replace("_", " "))
 
     text = obj.replace(".", " ").replace("_", " ")
     return clean(text) or "European research and innovation"
