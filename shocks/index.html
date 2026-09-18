@@ -106,7 +106,7 @@ function shockDetailHtml(x,i){
   if(d.type==='higher-order'){
     if(Array.isArray(d.reasoning)&&d.reasoning.length)body+=`<p><strong>What the Radar infers:</strong> ${esc(d.reasoning.join(' '))}</p>`;
     if(Array.isArray(d.support)&&d.support.length)body+=`<p><strong>What the sources state:</strong></p><ul>${evidenceRowsHtml(d.support,false)}</ul>`;
-    if(Array.isArray(d.against)&&d.against.length)body+=`<p><strong>Evidence that points the other way:</strong></p><ul>${evidenceRowsHtml(d.against,false)}</ul>`;
+    if(Array.isArray(d.against)&&d.against.length)body+=`<p><strong>Source evidence that could weaken the finding:</strong></p><ul>${evidenceRowsHtml(d.against,false)}</ul>`;
   }else{
     if(d.secondOrder)body+=`<p><strong>What could follow:</strong> ${esc(d.secondOrder)}</p>`;
     if(missing.length)body+=`<p><strong>Still unresolved:</strong> ${esc(missing.join('; '))}</p>`;
@@ -138,6 +138,7 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-shock-deta
   }catch(e){console.error(e);document.getElementById('shockSummary').textContent='Shock evidence is unavailable.';el.innerHTML='<li class="empty">Unavailable.</li>'}
 })();
 </script>
-<script src="../site-shell.js?v=28"></script>
+<script src="../reader_language.js?v=5"></script>
+<script src="../site-shell.js?v=29"></script>
 </body>
 </html>

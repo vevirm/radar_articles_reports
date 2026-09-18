@@ -126,7 +126,7 @@ function publicPhenomenonSummary(summary,text){
 }
 function fmtEvidenceDate(v){if(!v)return '';const d=new Date(v);return Number.isNaN(d.getTime())?clean(v):new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'short',year:'numeric'}).format(d)}
 function phenomenonEvidenceList(rows){return rows.map(r=>{const title=clean(r?.title||'Evidence'),source=clean(r?.source||''),date=fmtEvidenceDate(r?.date),link=clean(r?.link||''),statement=clean(r?.source_statement||''),contribution=clean(r?.evidence_contribution||'');const named=link?`<a href="${esc(link)}" target="_blank" rel="noopener">${esc(title)}</a>`:esc(title);const meta=[source,date].filter(Boolean).join(' — ');return `<li>${named}${meta?` <span>— ${esc(meta)}</span>`:''}${contribution?`<p><strong>Contribution:</strong> ${esc(contribution)}</p>`:''}${statement?`<p><strong>Source statement:</strong> ${esc(statement)}</p>`:''}</li>`}).join('')}
-function phenomenonEvidence(rows,history){rows=Array.isArray(rows)?rows:[];history=Array.isArray(history)?history:[];if(!rows.length&&!history.length)return '';let body='';if(rows.length)body+=`<p><strong>Current sources:</strong></p><ul>${phenomenonEvidenceList(rows)}</ul>`;if(history.length)body+=`<p><strong>Historical context:</strong></p><ul>${phenomenonEvidenceList(history)}</ul>`;return `<details><summary>Evidence</summary><p>The summary above combines the evidence. Current sources and older context are shown separately below.</p>${body}</details>`}
+function phenomenonEvidence(rows,history){rows=Array.isArray(rows)?rows:[];history=Array.isArray(history)?history:[];if(!rows.length&&!history.length)return '';let body='';if(rows.length)body+=`<p><strong>Current source evidence:</strong></p><ul>${phenomenonEvidenceList(rows)}</ul>`;if(history.length)body+=`<p><strong>Historical context:</strong></p><ul>${phenomenonEvidenceList(history)}</ul>`;return `<details><summary>Evidence</summary><p>The phenomenon above is the Radar's synthesis. Current source evidence and historical context are kept separate below.</p>${body}</details>`}
 function render(items){
   const el=document.getElementById('phenomena');
   el.innerHTML=items.length?items.map(x=>`<li data-obviousness="${x.distance||2}"><strong>${esc(x.text)}</strong><p>${esc(x.explanation||phenomenonExplanation(x.text))}</p>${phenomenonEvidence(x.support,x.history)}</li>`).join(''):'<li class="empty">No ongoing phenomenon is clear enough to show yet.</li>';
@@ -172,6 +172,7 @@ async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});ret
   }
 })();
 </script>
-<script src="../site-shell.js?v=28"></script>
+<script src="../reader_language.js?v=5"></script>
+<script src="../site-shell.js?v=29"></script>
 </body>
 </html>

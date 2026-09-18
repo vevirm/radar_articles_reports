@@ -54,5 +54,6 @@ function drawAllTrees(){document.querySelectorAll('.issue-chart').forEach(drawTr
 let treeResizeTimer;addEventListener('resize',()=>{clearTimeout(treeResizeTimer);treeResizeTimer=setTimeout(drawAllTrees,80)});
 (async()=>{try{const d=await RadarData.load('../radar.json','../radar_seed.json');const items=[...(d.strand_a||[]),...(d.strand_c||[])];const trees=globalThis.RadarIssues?.buildTrees?RadarIssues.buildTrees(items,{count:8}):[];document.getElementById('trees').innerHTML=trees.length?trees.map(chart).join(''):'<div class="empty">No topic maps available.</div>';requestAnimationFrame(()=>requestAnimationFrame(drawAllTrees))}catch(e){console.error(e);document.getElementById('trees').innerHTML='<div class="empty">Topic maps unavailable.</div>'}})();
 </script>
-<script src="../site-shell.js?v=28"></script>
+<script src="../reader_language.js?v=5"></script>
+<script src="../site-shell.js?v=29"></script>
 </body></html>

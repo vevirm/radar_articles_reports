@@ -56,5 +56,6 @@ function render(data){
   }).join(''):'<div class="empty">No topics to show right now.</div>';
 }
 (async()=>{try{render(await RadarData.load('../radar.json','../radar_seed.json'))}catch(e){document.getElementById('state').textContent='';document.getElementById('topics').innerHTML='<div class="empty">The Radar could not be loaded.</div>'}})();
-</script><script src="../site-shell.js?v=28"></script>
+</script><script src="../reader_language.js?v=5"></script>
+<script src="../site-shell.js?v=29"></script>
 </body></html>
