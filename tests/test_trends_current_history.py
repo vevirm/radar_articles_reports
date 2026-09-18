@@ -35,7 +35,24 @@ console.log(JSON.stringify(out.map(p=>({
 }))));
 """
         )
-        self.assertGreaterEqual(len(payload), 1)
+        radar = json.loads((ROOT / "radar.json").read_text(encoding="utf-8"))
+        state = radar.get("high_order_inference") if isinstance(radar, dict) else {}
+        state = state if isinstance(state, dict) else {}
+
+        if (
+            state.get("detector_backend") == "claim_native"
+            and int(state.get("selection_stage") or 0) >= 7
+        ):
+            publications = state.get("publications")
+            publications = publications if isinstance(publications, dict) else {}
+            expected_ids = [str(x) for x in (publications.get("trend") or [])]
+            self.assertEqual(
+                sorted(pair["id"] for pair in payload),
+                sorted(expected_ids),
+            )
+        else:
+            self.assertGreaterEqual(len(payload), 1)
+
         cutoff = json.loads((ROOT / "historical" / "historical.json").read_text(encoding="utf-8"))["cutoff_exclusive"]
         for pair in payload:
             self.assertGreaterEqual(pair["left_n"], 3, pair["id"])
