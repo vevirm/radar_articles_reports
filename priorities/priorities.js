@@ -495,8 +495,9 @@
     const evidenceRow=x=>({title:clean(x?.title||''),source:clean(x?.source||''),date:clean(x?.date||''),link:clean(x?.link||''),role:clean(x?.role||''),quality:Number(x?.quality)||0,analyticalWeight:Number(x?.analytical_weight)||0});
     return ids.map((id,publicationRank)=>byId.get(clean(id))).filter(Boolean).map((c,publicationRank)=>{
       const support=Array.isArray(c.support)?c.support:[],against=Array.isArray(c.against)?c.against:[],ctx=Array.isArray(c.context)?c.context:[];
+      const sourceLabel=Number(c.primary_sources||0)>=2?'Multiple sources':clean(support[0]?.source||'Evidence base');
       return {highOrder:true,kind,title:clean(c.reader_title||c.topic_label||'Evidence-backed finding'),coreMessage:clean(c.reader_summary||''),
-        source:'Multiple sources',date:clean(c.last_updated_at||state.evaluated_at||''),link:'',abstract:clean(c.reader_summary||''),newThisScan:!!c.new_this_scan,
+        source:sourceLabel,date:clean(c.last_updated_at||state.evaluated_at||''),link:'',abstract:clean(c.reader_summary||''),newThisScan:!!c.new_this_scan,
         qualityScore:Number(c.score)||0,analyticalWeight:1,contextOnly:false,lens:{type:kind,passage:clean(c.reader_summary||'')},
         lensPassage:clean(c.reader_summary||''),interpretationBasis:'claim_native_publication',raw:{title:clean(c.reader_title),summary:clean(c.reader_summary)},
         candidateId:clean(c.id),publicationRank,readerAuthored:!!clean(c.reader_title),readerWhy:clean(c.reader_why||''),grammarId:clean(c.grammar_id),topicLabel:clean(c.topic_label),

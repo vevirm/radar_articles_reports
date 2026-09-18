@@ -85,10 +85,9 @@ function collect(data){
     })
   }
   if(claimNative){
-    // The claim-native shelf is authoritative after Stage 7.  Legacy scenario
-    // templates are retained only as rollback/compatibility readers and must not
-    // be mixed into the live shock page.
-    return out.sort((a,b)=>b.score-a.score||b.sources-a.sources||b.records-a.records||a.distance-b.distance||a.text.localeCompare(b.text));
+    // The Python shelf is already ordered in the fixed 5,4,3,2,1 wow cycle.
+    // Preserve that order instead of sorting again by evidence score.
+    return out;
   }
   const scenarioDetail=s=>({
     type:s.dynamic?'dynamic':'scenario',reasoning:Array.isArray(s.reasoning)?s.reasoning:[],hidden:clean(s.hidden||''),secondOrder:clean(s.secondOrder||''),conditions:Array.isArray(s.conditions)?s.conditions:[],caseAgainst:Array.isArray(s.caseAgainst)?s.caseAgainst:[],watchFor:Array.isArray(s.watchFor)?s.watchFor:[],netAssessment:clean(s.netAssessment||''),support:(Array.isArray(s.evidence)?s.evidence:[]).map(evidenceRow),against:(Array.isArray(s.againstEvidence)?s.againstEvidence:[]).map(evidenceRow)

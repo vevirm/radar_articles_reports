@@ -295,7 +295,7 @@
       const rightRole=clean(b.right_role||'Spreading action');
       const leftEvidence=support.filter(x=>clean(x?.role).startsWith(leftRole)).map(x=>({row:x}));
       const rightEvidence=support.filter(x=>clean(x?.role).startsWith(rightRole)).map(x=>({row:x}));
-      if(leftEvidence.length<3||rightEvidence.length<3||Number(b.left_sources||0)<2||Number(b.right_sources||0)<2)return null;
+      if(leftEvidence.length<1||rightEvidence.length<1)return null;
       return {id:c.id,emergent:true,family:clean(b.family),objectKey:clean(b.object_key),support:Number(c.score)||0,
         left:{title:clean(b.left_title||'Pull A'),plain:clean(b.left_plain||c.reader_summary||''),why:'',pull:Math.round(lp),evidence:leftEvidence,history:[],sourceCount:Number(b.left_sources)||0},
         right:{title:clean(b.right_title||'Pull B'),plain:clean(b.right_plain||c.reader_summary||''),why:'',pull:Math.round(rp),evidence:rightEvidence,history:[],sourceCount:Number(b.right_sources)||0},
@@ -309,11 +309,9 @@
   function build(data,history){
     const state=data?.high_order_inference&&typeof data.high_order_inference==='object'?data.high_order_inference:{};
     if(state?.detector_backend==='claim_native'&&Number(state?.selection_stage||0)>=7){
-      return highOrderPairs(data).sort((a,b)=>{
-        const aw=Array.isArray(a?.pullRange?.left)&&a.pullRange.left.length>=2?Math.abs(Number(a.pullRange.left[1])-Number(a.pullRange.left[0])):0;
-        const bw=Array.isArray(b?.pullRange?.left)&&b.pullRange.left.length>=2?Math.abs(Number(b.pullRange.left[1])-Number(b.pullRange.left[0])):0;
-        return bw-aw||String(a.id).localeCompare(String(b.id));
-      });
+      // Stage 7 already publishes the deliberate wow-cycle order (5,4,3,2,1 x3).
+      // Do not re-sort the shelf in the browser.
+      return highOrderPairs(data);
     }
     const currentRows=currentCorpus(data),historicalRows=historicalCorpus(history),out=[];
     for(const pair of PAIRS){

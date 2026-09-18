@@ -36,20 +36,23 @@ console.log(JSON.stringify(out.map(p=>({
 """
         )
         radar = json.loads((ROOT / "radar.json").read_text(encoding="utf-8"))
-        state = radar.get("high_order_inference") if isinstance(radar, dict) else {}
-        state = state if isinstance(state, dict) else {}
-        if state.get("detector_backend") == "claim_native" and int(state.get("selection_stage") or 0) >= 7:
-            published = state.get("publications") if isinstance(state.get("publications"), dict) else {}
-            expected_ids = [str(x) for x in (published.get("trend") or [])]
-            self.assertEqual(sorted(p["id"] for p in payload), sorted(expected_ids))
+        hi = radar.get("high_order_inference") if isinstance(radar, dict) else {}
+        hi = hi if isinstance(hi, dict) else {}
+        if hi.get("detector_backend") == "claim_native" and int(hi.get("selection_stage") or 0) >= 7:
+            pubs = hi.get("publications") if isinstance(hi.get("publications"), dict) else {}
+            expected = sorted(str(x) for x in (pubs.get("trend") or []))
+            self.assertEqual(sorted(p["id"] for p in payload), expected)
         else:
             self.assertGreaterEqual(len(payload), 1)
         cutoff = json.loads((ROOT / "historical" / "historical.json").read_text(encoding="utf-8"))["cutoff_exclusive"]
         for pair in payload:
-            self.assertGreaterEqual(pair["left_n"], 3, pair["id"])
-            self.assertGreaterEqual(pair["right_n"], 3, pair["id"])
-            self.assertGreaterEqual(pair["left_sources"], 2, pair["id"])
-            self.assertGreaterEqual(pair["right_sources"], 2, pair["id"])
+            # Future-facing trend cards may start from one grounded vote each way;
+            # the reasoning stock and wow shelf do the curation rather than a 3x2
+            # publication gate in the browser.
+            self.assertGreaterEqual(pair["left_n"], 1, pair["id"])
+            self.assertGreaterEqual(pair["right_n"], 1, pair["id"])
+            self.assertGreaterEqual(pair["left_sources"], 1, pair["id"])
+            self.assertGreaterEqual(pair["right_sources"], 1, pair["id"])
             for date in pair["older"]:
                 self.assertLess(str(date)[:10], cutoff, pair["id"])
 

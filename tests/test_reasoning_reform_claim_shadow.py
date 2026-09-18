@@ -83,12 +83,15 @@ def test_distance_table_uses_record_cooccurrence_and_canonical_bonus():
     assert table["N"] == 3
 
 
-def test_level2_requires_two_independent_sources():
+def test_level2_single_source_seeds_stock_and_independent_source_strengthens_it():
     c1=claim(key="id:1",cid="c:1:1",obj="compute.capacity",mech="assesses",direction="contracts",kind="diagnosis")
     c2=claim(key="id:2",cid="c:2:1",obj="compute.capacity",mech="assesses",direction="contracts",kind="diagnosis")
-    assert len(corroborated_claims([_node(c1,"S1"),_node(c2,"S2")])) == 1
-    assert len(corroborated_claims([_node(c1,"S1"),_node(c2,"S1")])) == 0
-
+    two=corroborated_claims([_node(c1,"S1"),_node(c2,"S2")])
+    one=corroborated_claims([_node(c1,"S1"),_node(c2,"S1")])
+    assert len(two) == 1 and len(one) == 1
+    assert two[0]["source_count"] == 2
+    assert one[0]["source_count"] == 1
+    assert two[0]["score"] > one[0]["score"]
 
 def test_partial_date_cannot_create_stalled_proposal():
     p=claim(key="id:p",cid="c:p:1",obj="datacentre.permitting",mech="regulates",direction="becomes_conditional",status="proposed",date="2025-01-01")

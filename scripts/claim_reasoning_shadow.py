@@ -432,7 +432,9 @@ def corroborated_claims(nodes: Iterable[dict[str, Any]]) -> list[dict[str, Any]]
     for key, rows in groups.items():
         sources = {clean(r.get("_source")).lower() for r in rows if clean(r.get("_source"))}
         records = {clean(r.get("_record_id")) for r in rows if clean(r.get("_record_id"))}
-        if len(sources) < 2 or len(records) < 2:
+        # Broad stock: one grounded record may seed a future risk/opportunity.
+        # Independent confirmation raises maturity later; it is not permission to think.
+        if not sources or not records:
             continue
         strongest = max(rows, key=lambda r: (float(r.get("merit", 0) or 0), STATUS_RANK.get(clean(r.get("status")), 0)))
         product, product_basis = _level2_product(rows, key[1], key[2])
@@ -507,7 +509,9 @@ def named_continuities(nodes: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
         hist_sources = {clean(n.get("_source")).lower() for n in hist if clean(n.get("_source"))}
         cur_records = {clean(n.get("_record_id")) for n in cur if clean(n.get("_record_id"))}
         hist_records = {clean(n.get("_record_id")) for n in hist if clean(n.get("_record_id"))}
-        if len(cur_sources) < 3 or len(hist_sources) < 2:
+        # Broad stock: continuity begins as soon as both eras are represented.
+        # The live selector decides whether breadth is sufficient for reserve/page.
+        if len(cur_sources) < 1 or len(hist_sources) < 1:
             continue
 
         # Evidence strength is only a same-wow ordering device.  Breadth in both
@@ -1093,7 +1097,7 @@ def dependency_pathways(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any], 
 
             role_nodes = {"commitment": commitment, "coupling": coupling, "propagation": propagation, "exposure": exposure}
             missing = [r for r, n in role_nodes.items() if n is None]
-            if len(missing) > 1:
+            if len(missing) > 2:
                 continue
 
             support_nodes = [n for n in role_nodes.values() if n]
@@ -1102,7 +1106,7 @@ def dependency_pathways(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any], 
                 continue
             if len({clean(n.get("claim_id")) for n in support_nodes}) < min(3, len(support_nodes)):
                 continue
-            if len({clean(n.get("_record_id")) for n in support_nodes}) < min(3, len(support_nodes)) or _distinct_sources(support_nodes) < 2:
+            if len({clean(n.get("_record_id")) for n in support_nodes}) < 2:
                 continue
 
             # The trigger can sit downstream of the coupling object (the worked
@@ -1238,7 +1242,7 @@ def dependency_pathways(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any], 
         key=(c["product"],c["capability_object"],c["dependency_object"],c["endpoint_objects"][1])
         if key not in best or (c["score_gate_passes"], c["score"], -len(c["missing_roles"])) > (best[key]["score_gate_passes"], best[key]["score"], -len(best[key]["missing_roles"])):
             best[key]=c
-    return sorted(best.values(), key=lambda c: (c["score_gate_passes"], c["score"], c["wow_preliminary"]), reverse=True)[:80]
+    return sorted(best.values(), key=lambda c: (c["score_gate_passes"], c["score"], c["wow_preliminary"]), reverse=True)[:200]
 
 def conflicting_criteria(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any], distance: dict[str, Any]) -> list[dict[str, Any]]:
     """Claim-native conflicting criteria over an exact-object frontier.
@@ -1303,12 +1307,12 @@ def conflicting_criteria(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any],
             )
             roles = {"criterion_a": criterion_a, "criterion_b": criterion_b, "arbitration_gap": arbitration, "divergence": divergence}
             missing = [r for r,n in roles.items() if not n]
-            if len(missing) > 1:
+            if len(missing) > 2:
                 continue
             support = [n for n in roles.values() if n]
             if len({clean(n.get("claim_id")) for n in support}) < len(support):
                 continue
-            if len({clean(n.get("_record_id")) for n in support}) < min(3, len(support)) or _distinct_sources(support) < 2:
+            if len({clean(n.get("_record_id")) for n in support}) < 2:
                 continue
             strengths: dict[str, float] = {}
             role_corroboration: dict[str, dict[str, Any]] = {}
@@ -1384,7 +1388,7 @@ def conflicting_criteria(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any],
         key = (c["criterion_a_object"], c["criterion_b_object"])
         if key not in best or (c["score"], -len(c["missing_roles"])) > (best[key]["score"], -len(best[key]["missing_roles"])):
             best[key] = c
-    return sorted(best.values(), key=lambda c:(c["score_gate_passes"], c["score"]), reverse=True)[:60]
+    return sorted(best.values(), key=lambda c:(c["score_gate_passes"], c["score"]), reverse=True)[:200]
 
 
 def _stake_class(obj: str, vocab: dict[str, Any]) -> str:
@@ -1467,10 +1471,10 @@ def latent_channels(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any]) -> l
             ], "precedent", {clean(need.get("claim_id")), clean(structure.get("claim_id")), clean(connection.get("claim_id")) if connection else "", clean(instrument.get("claim_id")) if instrument else ""})
             roles = {"unresolved_need": need, "existing_structure": structure, "live_connection": connection, "receiving_instrument": instrument, "precedent": precedent}
             missing = [r for r,n in roles.items() if not n]
-            if len(missing) > 1:
+            if len(missing) > 2:
                 continue
             support = [n for n in roles.values() if n]
-            if _distinct_sources(support) < 2 or len({clean(n.get("_record_id")) for n in support}) < 3:
+            if len({clean(n.get("_record_id")) for n in support}) < 2:
                 continue
             recs = {clean(n.get("_record_id")) for n in support}
             ca, cb = primary_cluster(endpoint_a, vocab), primary_cluster(endpoint_b, vocab)
@@ -1495,7 +1499,7 @@ def latent_channels(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any]) -> l
         rank=(0 if c["missing_roles"] else 1, c["score"] or 0)
         if key not in best or rank > (0 if best[key]["missing_roles"] else 1, best[key]["score"] or 0):
             best[key]=c
-    return sorted(best.values(), key=lambda c:(not c["missing_roles"], c["score"] or 0), reverse=True)[:50]
+    return sorted(best.values(), key=lambda c:(not c["missing_roles"], c["score"] or 0), reverse=True)[:200]
 
 
 def anchor_demand_candidates(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any]) -> list[dict[str, Any]]:
@@ -1518,9 +1522,9 @@ def anchor_demand_candidates(nodes: Iterable[dict[str, Any]], vocab: dict[str, A
             reform=_best_excluding([n for n in frontier if clean(n.get("kind"))=="action" and reform_cue.search(_semantic_text(n))],"enabling_reform",excluded)
             roles={"commitment":commitment,"payoff_evidence":payoff,"protecting_instrument":protecting,"conversion_condition":conversion,"enabling_reform":reform}
             missing=[r for r,n in roles.items() if not n]
-            if len(missing)>1: continue
+            if len(missing)>2: continue
             support=[n for n in roles.values() if n]
-            if len({clean(n.get("_record_id")) for n in support})<3 or _distinct_sources(support)<2: continue
+            if len({clean(n.get("_record_id")) for n in support})<2: continue
             ea,eb=clean(commitment.get("object")),clean(payoff.get("object")); recs={clean(n.get("_record_id")) for n in support}
             ca,cb=primary_cluster(ea,vocab),primary_cluster(eb,vocab)
             dist,bonus,lift=distance_excluding_records(nodes,ca,cb,recs) if ca and cb else ("familiar",1.0,None)
@@ -1540,7 +1544,7 @@ def anchor_demand_candidates(nodes: Iterable[dict[str, Any]], vocab: dict[str, A
     for c in out:
         key=tuple(c["endpoint_objects"]); rank=(not c["missing_roles"],c["score"] or 0)
         if key not in best or rank>(not best[key]["missing_roles"],best[key]["score"] or 0): best[key]=c
-    return sorted(best.values(),key=lambda c:(c["score_gate_passes"],c["score"] or 0),reverse=True)[:50]
+    return sorted(best.values(),key=lambda c:(c["score_gate_passes"],c["score"] or 0),reverse=True)[:200]
 
 
 def split_recurrence_candidates(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any]) -> list[dict[str, Any]]:
@@ -1552,8 +1556,8 @@ def split_recurrence_candidates(nodes: Iterable[dict[str, Any]], vocab: dict[str
         for a,b in itertools.combinations(objs,2):
             arows=[n for n in current if _touches(n,a) and clean(n.get("kind")) in {"action","effect"}]
             brows=[n for n in current if _touches(n,b) and clean(n.get("kind")) in {"action","effect"}]
-            if len({clean(n.get("_record_id")) for n in arows})<3 or _distinct_sources(arows)<2: continue
-            if len({clean(n.get("_record_id")) for n in brows})<3 or _distinct_sources(brows)<2: continue
+            if len({clean(n.get("_record_id")) for n in arows})<1: continue
+            if len({clean(n.get("_record_id")) for n in brows})<1: continue
             current_joint=_endpoint_joint(nodes,a,b,set(),{"current"})
             if current_joint: continue
             side_a=max(arows,key=lambda n:_role_strength(n,"side_a")); side_b=max(brows,key=lambda n:_role_strength(n,"side_b"))
@@ -1570,7 +1574,7 @@ def split_recurrence_candidates(nodes: Iterable[dict[str, Any]], vocab: dict[str
     for c in out:
         key=tuple(c["endpoint_objects"])
         if key not in best or c["score"]>best[key]["score"]: best[key]=c
-    return sorted(best.values(),key=lambda c:(c["score_gate_passes"],c["score"]),reverse=True)[:50]
+    return sorted(best.values(),key=lambda c:(c["score_gate_passes"],c["score"]),reverse=True)[:200]
 
 
 def era_conjunctions(nodes: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
