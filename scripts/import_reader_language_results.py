@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import io
 import json
+import os
 import re
 import zipfile
 from datetime import datetime, timezone
@@ -47,8 +48,10 @@ def validate_rewrite(source: str, replacement: str) -> None:
         raise ValueError('replacement is unexpectedly longer than the source')
     if numeric_tokens(source) != numeric_tokens(replacement):
         raise ValueError('numbers/dates/counts changed; Reader Language may not alter factual numbers')
-    if len(NEGATION.findall(source)) != len(NEGATION.findall(replacement)):
-        raise ValueError('negation changed; this could reverse or qualify the meaning')
+    # A meaning flip is adding or removing negation altogether.  Rephrasing that
+    # uses a different number of negative words ("not yet ... not as proof") is fine.
+    if bool(NEGATION.search(source)) != bool(NEGATION.search(replacement)):
+        raise ValueError('negation added or removed; this could reverse the meaning')
     if UNCERTAINTY.search(source) and not UNCERTAINTY.search(replacement):
         raise ValueError('uncertainty was removed; may/might/could/potential language must remain qualified')
     if not UNCERTAINTY.search(source) and re.search(r"\b(?:may|might|could|potentially|possibly)\b", replacement, re.I):
@@ -76,8 +79,12 @@ def main() -> int:
     now = datetime.now(timezone.utc).isoformat()
     imported = kept = rewritten = 0
 
-    # Validate every file and item before changing the ledger: all-or-nothing is safer.
+    # Structural problems (wrong schema, unreadable file) stop the run.  Individual
+    # items are judged one by one: good items are saved, outdated or unsafe ones are
+    # reported and simply come back in a later package.  One doubtful rewrite never
+    # throws away a whole review.
     staged: list[tuple[Path, str, dict, dict]] = []
+    skipped: list[tuple[str, str, str]] = []  # (id, reason, source excerpt)
     for path, doc in docs:
         if not isinstance(doc, dict) or doc.get('schema') != SCHEMA:
             raise ValueError(f'{path}: expected schema {SCHEMA}')
@@ -88,33 +95,42 @@ def main() -> int:
         seen = set()
         for item in items:
             if not isinstance(item, dict):
-                raise ValueError(f'{path}: every item must be an object')
+                skipped.append(('?', 'item is not an object', ''))
+                continue
             iid = clean(item.get('id'))
+            excerpt = clean(item.get('source'))[:90]
             if not iid or iid in seen:
-                raise ValueError(f'{path}: missing or duplicate item id {iid!r}')
+                skipped.append((iid or '?', 'missing or duplicate item id', excerpt))
+                continue
             seen.add(iid)
             cur = current.get(iid)
             if not cur:
-                raise ValueError(f'{path}: {iid} no longer matches current reader-facing text; prepare a fresh package')
+                skipped.append((iid, 'text is no longer on the site (the finding changed since the package was made)', excerpt))
+                continue
             source = clean(item.get('source'))
             display_text = clean(item.get('display_text'))
             sha = clean(item.get('source_sha256'))
             if source != cur['source'] or sha != cur['source_sha256'] or fingerprint(source) != sha:
-                raise ValueError(f'{path}: {iid} source text changed since the package was prepared')
+                skipped.append((iid, 'source text was edited in the returned file', excerpt))
+                continue
             if display_text and display_text != clean(cur.get('display_text') or cur['source']):
-                raise ValueError(f'{path}: {iid} display_text was modified; put rewrites only in replacement')
+                skipped.append((iid, 'display_text was edited; rewrites belong only in replacement', excerpt))
+                continue
             decision = clean(item.get('decision')).upper()
             if decision not in {'KEEP', 'REWRITE'}:
-                raise ValueError(f'{path}: {iid} decision must be KEEP or REWRITE')
+                skipped.append((iid, 'decision must be KEEP or REWRITE', excerpt))
+                continue
             replacement = clean(item.get('replacement'))
             if decision == 'KEEP':
                 if replacement and replacement != source:
-                    raise ValueError(f'{path}: {iid} KEEP must leave replacement empty')
+                    skipped.append((iid, 'KEEP must leave replacement empty', excerpt))
+                    continue
             else:
                 try:
                     validate_rewrite(source, replacement)
                 except ValueError as exc:
-                    raise ValueError(f'{path}: {iid}: {exc}') from exc
+                    skipped.append((iid, f'rewrite rejected: {exc}', excerpt))
+                    continue
             staged.append((path, package_id, item, cur))
 
     for path, package_id, item, cur in staged:
@@ -145,7 +161,24 @@ def main() -> int:
         for path, _ in docs:
             path.unlink(missing_ok=True)
 
-    print(f'Imported {imported} Reader Language review item(s): {rewritten} rewrite(s), {kept} keep(s).')
+    print(f'Imported {imported} Reader Language review item(s): {rewritten} rewrite(s), {kept} keep(s); {len(skipped)} not imported.')
+    for iid, reason, excerpt in skipped:
+        # GitHub shows ::warning:: lines as yellow notes on the run page.
+        print(f'::warning title=Reader Language item not imported::{iid}: {reason} | "{excerpt}"')
+    summary = os.environ.get('GITHUB_STEP_SUMMARY')
+    if summary:
+        lines = [
+            '## Reader Language import',
+            '',
+            f'- Saved: **{imported}** ({rewritten} rewrites, {kept} keeps)',
+            f'- Not imported: **{len(skipped)}** (they will come back in a later package)',
+            '',
+        ]
+        if skipped:
+            lines += ['| Item | Why not imported | Text |', '|---|---|---|']
+            lines += [f'| {iid} | {reason} | {excerpt.replace("|", "/")} |' for iid, reason, excerpt in skipped]
+        with open(summary, 'a', encoding='utf-8') as fh:
+            fh.write('\n'.join(lines) + '\n')
     return 0
 
 

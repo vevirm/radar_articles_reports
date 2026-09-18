@@ -32,6 +32,17 @@ you want.
 9. Upload `reader_language_results.json` and commit directly to `main`.
 10. GitHub validates it. If the import workflow is green, the approved wording is live after GitHub Pages refreshes.
 
+## If some items are not imported
+
+The import checks every item on its own. Good items are saved even if others fail.
+An item is skipped (and simply comes back in a later package) when:
+
+- its text is no longer on the site because the finding changed after the package was made;
+- the rewrite would change meaning: numbers, adding/removing "not", adding/removing "may/could";
+- the LLM edited the `source` or `display_text` fields instead of only `replacement`.
+
+The run stays green. Open it to see a table of skipped items and why.
+
 ## What KEEP means
 
 The LLM is explicitly told that **KEEP is normal**. It should not rewrite good text just to be busy.

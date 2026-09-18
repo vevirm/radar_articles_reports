@@ -35,12 +35,11 @@ HTML_ROUTES = {
     "explore/index.html": "explore",
 }
 
+# Only scripts whose prose is still rendered on the live site.  The legacy fallback
+# readers (trends.js pairs, phenomena.js, continuity.js, priorities.js lenses and
+# shocks/scenarios.js) are not shown after the Stage-7 claim-native cutover; queueing
+# their text would spend review effort on wording no visitor sees.
 JS_ROUTES = {
-    "trends/trends.js": ["trends"],
-    "phenomena/phenomena.js": ["phenomena"],
-    "phenomena/continuity.js": ["phenomena"],
-    "priorities/priorities.js": ["priorities"],
-    "shocks/scenarios.js": ["shocks", "shocks-variants"],
     "briefing/insights.js": ["briefing", "read", "priorities"],
     "reader_style.js": ["briefing", "read", "frontier", "frontier-quick", "trends", "phenomena", "priorities", "shocks"],
 }
@@ -217,17 +216,16 @@ def collect_html(store: dict[str, Candidate]) -> None:
 # parse every JavaScript string: doing so would accidentally queue regexes and implementation
 # code.  These named fields are the ones used as prose on the reader-facing analytical pages.
 JS_FIELD_RE = re.compile(
-    r"\\b(?:title|plain|why|plainly|secondOrder|hidden|summary|what|explanation)\\s*:\\s*(?P<q>['\\\"])(?P<text>(?:\\\\.|(?! (?P=q)).)*?)(?P=q)",
-    re.X,
+    r"\b(?:title|plain|why|plainly|secondOrder|hidden|summary|what|explanation)\s*:\s*(?P<q>['\"])(?P<text>(?:\\.|(?!(?P=q)).)*?)(?P=q)"
 )
-JS_RETURN_RE = re.compile(r"\\breturn\\s+(?P<q>['\\\"])(?P<text>(?:\\\\.|(?! (?P=q)).){18,}?)(?P=q)\\s*;", re.X)
+JS_RETURN_RE = re.compile(r"\breturn\s+(?P<q>['\"])(?P<text>(?:\\.|(?!(?P=q)).){18,}?)(?P=q)\s*;")
 
 
 def _decode_js_string(raw: str) -> str:
-    raw = raw.replace("\\\\n", " ").replace("\\\\r", " ").replace("\\\\t", " ")
-    raw = raw.replace("\\\\'", "'").replace('\\\\"', '"')
-    raw = raw.replace("\\\\u2019", "’").replace("\\\\u2013", "–").replace("\\\\u2014", "—")
-    raw = raw.replace("\\\\\\\\", "\\\\")
+    raw = raw.replace("\\n", " ").replace("\\r", " ").replace("\\t", " ")
+    raw = raw.replace("\\'", "'").replace('\\"', '"')
+    raw = raw.replace("\\u2019", "\u2019").replace("\\u2013", "\u2013").replace("\\u2014", "\u2014")
+    raw = raw.replace("\\\\", "\\")
     return clean(raw)
 
 
@@ -242,7 +240,7 @@ def collect_js(store: dict[str, Candidate]) -> None:
                 text = _decode_js_string(m.group("text"))
                 if "${" in text or len(text.split()) < 4 or CODEISH.search(text):
                     continue
-                line = src.count("\\n", 0, m.start()) + 1
+                line = src.count("\n", 0, m.start()) + 1
                 add_candidate(store, text, routes, f"{rel}:{line}")
 
 
@@ -302,6 +300,8 @@ def collect_radar_reader_fields(store: dict[str, Candidate]) -> None:
                     add_candidate(store, b.get(key), [route], f"{origin}:trend_balance.{key}")
             if product == "shock":
                 add_candidate(store, c.get("why_easy_to_miss"), [route], f"{origin}:why_easy_to_miss")
+                # The shock card explanation shown to readers.
+                add_candidate(store, c.get("reader_consequence"), [route], f"{origin}:reader_consequence")
 
     shock = data.get("shock_inference") if isinstance(data, dict) else None
     shock = shock if isinstance(shock, dict) else {}

@@ -102,7 +102,11 @@ def main() -> int:
         queue.append({**c, 'reasons': reasons or ['new reader-facing text'], 'word_count': len(review_text.split())})
 
     # Put the strongest language warnings first; ties remain deterministic.
-    queue.sort(key=lambda x: (-len(x['reasons']), -x['word_count'], x['source'].lower()))
+    # Live finding text (what visitors read on the analytical pages) comes first,
+    # then static page text; within each, the most-flagged and longest first.
+    def _is_finding(x: dict) -> int:
+        return 0 if any(':high_order:' in o or 'shock_inference' in o for o in x.get('origins', [])) else 1
+    queue.sort(key=lambda x: (_is_finding(x), -len(x['reasons']), -x['word_count'], x['source'].lower()))
     selected = queue[: args.max_items]
     package_stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
     package_id = f"reader-language-{package_stamp}"
