@@ -7,8 +7,8 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **1406** (Main **657** + Historical **749**)
-- Automatic queue still needing V2 verification: **1** (Main **1** + Historical **0**)
-- Currently assigned to workers: **1** (Main **1** + Historical **0**)
+- Automatic queue still needing V2 verification: **15** (Main **5** + Historical **10**)
+- Currently assigned to workers: **15** (Main **5** + Historical **10**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **68**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,9 +16,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260918T165607Z-db07e32f901c`
-- Assigned unresolved records: **1**
+- Current package: `worker-a-20260918T221444Z-f8d8a6ea4cd7`
+- Assigned unresolved records: **15**
   1. `link:https://doi.org/10.1108/fs-11-2025-0260` — Artificial intelligence as a collective transformative experience: a conceptual framework for rational encounter — recovery attempt 3/3
+  2. `link:https://ecfr.eu/article/cold-comfort-what-china-can-teach-europe-about-adaptation/` — Cold comfort: What China can teach Europe about adaptation – European Council on Foreign Relations
+  3. `link:https://doi.org/10.1111/eulj.12519` — Futures in EU governance: Anticipatory governance, strategic foresight and EU Better Regulation
+  4. `link:https://www.nature.com/articles/d41586-026-02919-1` — Europe pushes for space independence amid geopolitical rifts
+  5. `link:https://demoshelsinki.fi/tag/technology/` — Technology Archives | Demos Helsinki
+  6. `historical:id:0e32bbd2adf5dc81` — Funding within large-scale research infrastructure | Vinnova
+  7. `historical:id:f60ea7812be98905` — Inclusion as a science, technology, and innovation policy objective in high-income countries: the decoupling dilemma
+  8. `historical:id:6416bf9fd594b7ec` — Futures in EU governance: Anticipatory governance, strategic foresight and EU Better Regulation
+  - … plus 7 more in the package manifest
 
 ### Worker B
 - Current package: `worker-b-20260918T165153Z-536ac137d3dd`
