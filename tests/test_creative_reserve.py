@@ -144,9 +144,20 @@ class CreativeReserveEndToEndTests(unittest.TestCase):
                 results = []
                 for gain in (1, crl.SHELF_SWAP_MARGIN + 3):
                     cs = copy.deepcopy(cands); mc = {c["id"]: c for c in cs}
-                    mc[ch["id"]]["score"] = int(mc[ch["id"]].get("score", 0)) + int((weak["maturity_score"] + gain - ch["maturity_score"]) / 0.58) + 2
+                    target = weak["maturity_score"] + gain
+                    # Raise the evidence score step by step until the recomputed
+                    # maturity reaches the target (maturity is not linear in score).
+                    probe = copy.deepcopy(mc[ch["id"]])
+                    score = int(probe.get("score", 0) or 0)
+                    while crl._maturity_score({**probe, "score": score}) < target and score < 99:
+                        score += 1
+                    if crl._maturity_score({**probe, "score": score}) < target:
+                        break
+                    mc[ch["id"]]["score"] = score
                     pubs, _ = crl._select_stage7(cs, copy.deepcopy(self.state))
                     results.append(ch["id"] in pubs[p])
+                if len(results) < 2:
+                    continue
                 self.assertEqual(results, [False, True], p)
                 return
         self.skipTest("no clean swap case in this snapshot")

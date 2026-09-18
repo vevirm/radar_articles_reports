@@ -85,12 +85,15 @@ class Scenarios2035Tests(unittest.TestCase):
 
     def test_new_finding_enters_the_scenarios(self):
         cands = copy.deepcopy(self.state["candidates"]); pubs = copy.deepcopy(self.state["publications"])
-        new = copy.deepcopy({c["id"]: c for c in cands}[pubs["opportunity"][0]])
+        base = sc2035.build_scenarios_2035(pubs, cands)
+        used = next(v["finding_id"] for w in base["scenarios"] for v in w["variants"] if v["kind"] == "opportunity")
+        by_id = {c["id"]: c for c in cands}
+        new = copy.deepcopy(by_id[used])
         new["id"] = "claim:new:opportunity"; new["reader_title"] = "A brand-new opportunity"
-        cands.append(new); pubs["opportunity"] = [new["id"]] + pubs["opportunity"]
+        cands.append(new)
+        pubs["opportunity"] = [new["id"] if i == used else i for i in pubs["opportunity"]]
         out = sc2035.build_scenarios_2035(pubs, cands)
-        text = json.dumps(out)
-        self.assertIn("A brand-new opportunity", text)
+        self.assertIn("A brand-new opportunity", json.dumps(out))
 
     def test_scenarios_are_rebuilt_by_the_scan_step(self):
         # The same refresh that updates findings each scan also rebuilds 2035.

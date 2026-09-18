@@ -344,34 +344,65 @@ def _when(date: str) -> str:
     return f"{_MONTHS[int(m.group(2)) - 1]} {m.group(1)}"
 
 
-def _history(c: dict[str, Any] | None, words: int = 24, role: str = "") -> str:
-    """Retell a finding as dated history: when, who, what they reported."""
+def _history(c: dict[str, Any] | None, words: int = 24, role: str = "", used: set[str] | None = None) -> str:
+    """Retell a finding as dated history: when, who, what they reported.
+
+    ``used`` holds statements already quoted on the page; another supporting
+    source is preferred so the same dated line never appears twice."""
     if not c:
         return ""
     rows = [r for r in (c.get("support") or []) if isinstance(r, dict) and _clean(r.get("source_statement"))]
     if role and any(_clean(r.get("role")) == role for r in rows):
-        rows = [r for r in rows if _clean(r.get("role")) == role]
+        rows = [r for r in rows if _clean(r.get("role")) == role] + [r for r in rows if _clean(r.get("role")) != role]
+    if used is not None:
+        fresh = [r for r in rows if _clean(r.get("source_statement")) not in used]
+        if not fresh:
+            return ""
+        rows = fresh[:1] if role else fresh
     if not rows:
         return _clean(_title(c)).rstrip(".") + "."
-    r = max(rows, key=lambda x: (float(x.get("quality", 0) or 0), _clean(x.get("date"))))
+    r = rows[0] if (role and used is not None) else max(rows, key=lambda x: (float(x.get("quality", 0) or 0), _clean(x.get("date"))))
+    if used is not None:
+        used.add(_clean(r.get("source_statement")))
     parts = _clean(r.get("source_statement")).split()
     text = " ".join(parts[:words]).rstrip(",;:") + ("\u2026" if len(parts) > words else "")
     text = text.rstrip(".") + ("" if text.endswith("\u2026") else ".")
     return f"{_when(r.get('date'))}, {_clean(r.get('source'))}: {text}"
 
 
+_FACILITIES = {
+    "quantum.pilot_line": "the quantum pilot line",
+    "quantum.testing_infrastructure": "an open quantum test bed",
+    "quantum.machine": "a European quantum computer",
+    "compute.capacity": "a shared European supercomputer",
+    "compute.gigafactory": "an AI gigafactory",
+    "compute.public_procurement": "a public AI factory",
+    "compute.access_time": "shared supercomputer time",
+    "chips.fab": "a new chip fab",
+    "chips.pilot_line": "a chip pilot line",
+    "research.infrastructure": "a flagship research facility",
+    "research.infrastructure_access": "a flagship research facility",
+    "datacentre.energy_supply": "a research data centre",
+    "defence.drone_capability": "a drone test range",
+    "health.data_infrastructure": "a pan-European health-data platform",
+    "space.capability": "a European satellite platform",
+}
+
+
+_FALLBACK_FACILITIES = (
+    "a shared European research facility",
+    "a university research lab",
+    "a cross-border research network",
+    "a national research centre",
+)
+
+
 def _asset(c: dict[str, Any] | None) -> str:
-    if not c:
-        return "Europe's shared research infrastructure"
-    objs = [o for o in _objects(c) if not o.startswith("shock_pressure.")]
-    if not objs:
-        return "Europe's shared research infrastructure"
-    o = objs[0].replace("family:", "").replace("cluster:", "")
-    label = o.split(".")[-1].replace("_", " ") if "." in o else o.replace("_", " ")
-    special = {"pilot line": "the quantum pilot line", "testing infrastructure": "an open quantum test bed",
-               "capacity": "a shared supercomputer", "gigafactory": "an AI gigafactory", "fab": "a new chip fab",
-               "drone capability": "a drone research programme", "public procurement": "a public AI factory"}
-    return special.get(label, f"a {label} programme")
+    """A concrete, facility-like noun for the day-in-2035 scene."""
+    for o in _objects(c) if c else []:
+        if o in _FACILITIES:
+            return _FACILITIES[o]
+    return "a shared European research facility"
 
 
 class _Picker:
@@ -523,6 +554,8 @@ def build_scenarios_2035(publications: dict[str, Any], candidates: list[dict[str
 
     used: set[str] = set()
     used_drivers: set[str] = set()
+    used_evidence: set[str] = set()
+    used_facilities: set[str] = set()
     pick_phrase = _Picker()
 
     def topic(c: dict[str, Any]) -> str:
@@ -628,7 +661,7 @@ def build_scenarios_2035(publications: dict[str, Any], candidates: list[dict[str
             m_q = re.search(r"\u201c([^\u201d]+)\u201d", pending_watch[0])
             watch = pick_phrase("watch", wid).format(d=f"\u201c{m_q.group(1)}\u201d") if m_q else pending_watch[0]
         elif drivers and drivers[0].get("winning_side"):
-            watch = f"No decision is pending yet on {drivers[0]['winning_side'][:1].lower() + drivers[0]['winning_side'][1:]}; the first adopted measure there would be the marker to follow."
+            watch = f"No decision is pending yet. The marker to follow is the first adopted measure behind \u201c{drivers[0]['winning_side']}\u201d."
         else:
             watch = ""
 
@@ -702,21 +735,34 @@ def build_scenarios_2035(publications: dict[str, Any], candidates: list[dict[str
         for v in variants:
             v["story"] = [x for x in v["story"] if x]
 
-        scene_anchor = next((by_id[v["finding_id"]] for v in variants if v["kind"] == "shock" and v["finding_id"] in by_id), None)
+        # Prefer a finding about an actual facility for the scene.
+        anchors = [by_id[v["finding_id"]] for v in variants if v["finding_id"] in by_id] + [x for x in (persists, opportunity, risk) if x]
+        def facility(a: dict[str, Any]) -> str:
+            return next((_FACILITIES[o] for o in _objects(a) if o in _FACILITIES), "")
+        # Each world's scene gets its own facility; never reuse one across worlds.
+        scene_anchor = next((a for a in anchors if facility(a) and facility(a) not in used_facilities), None)
+        if scene_anchor is not None:
+            scene_asset = facility(scene_anchor)
+        else:
+            scene_asset = next((f for f in _FALLBACK_FACILITIES if f not in used_facilities), _FALLBACK_FACILITIES[0])
+        used_facilities.add(scene_asset)
         bullets = [
             {"label": "Picture", "text": world["story"]},
-            {"label": "A day in 2035", "text": pick_phrase("scene:" + wid, wid, _SCENES[wid]).format(asset=_asset(scene_anchor))},
+            {"label": "A day in 2035", "text": pick_phrase("scene:" + wid, wid, _SCENES[wid]).format(asset=scene_asset)},
         ]
         if len(story) > 1 and drivers:
             bullets.append({"label": "How we got here", "text": story[1]})
-        if persists:
-            bullets.append({"label": "Still true", "text": _history(persists) + " Still true in 2035."})
-        if opportunity:
-            bullets.append({"label": "The bet that paid off", "text": _history(opportunity) + " Europe acted on it."})
-        if risk:
-            bullets.append({"label": "The warning ignored", "text": _history(risk) + " Nobody fixed it."})
+        h = _history(persists, used=used_evidence) if persists else ""
+        if h:
+            bullets.append({"label": "Still true", "text": h + " Still true in 2035."})
+        h = _history(opportunity, used=used_evidence) if opportunity else ""
+        if h:
+            bullets.append({"label": "The bet that paid off", "text": h + " Europe acted on it."})
+        h = _history(risk, used=used_evidence) if risk else ""
+        if h:
+            bullets.append({"label": "The warning ignored", "text": h + " Nobody fixed it."})
         bullets += [{"label": who, "text": line} for who, line in _STAKE[wid]]
-        price = re.sub(r"^The price is (\w+):\s*", lambda m: m.group(1).capitalize() + ": ", world["cost"])
+        price = re.sub(r"^The price is ([^:]+):\s*", lambda m: m.group(1)[:1].upper() + m.group(1)[1:] + ": ", world["cost"])
         bullets.append({"label": "The price", "text": price})
         if watch:
             bullets.append({"label": "Signpost", "text": watch})
@@ -726,7 +772,7 @@ def build_scenarios_2035(publications: dict[str, Any], candidates: list[dict[str
             kind = v["kind"]
             vb = [{"label": "Trigger", "text": _end(_title(src)) if src else _end(v["trigger"])}]
             # For a shock, the evidence is the disruption itself, not the asset.
-            hist = _history(src, role="external_driver" if kind == "shock" else "")
+            hist = _history(src, role="external_driver" if kind == "shock" else "", used=used_evidence)
             if hist:
                 vb.append({"label": "Evidence today", "text": hist})
             if kind == "shock":
