@@ -381,6 +381,47 @@ def _snap(n: dict[str, Any] | None, role: str) -> dict[str, Any] | None:
     }
 
 
+LEVEL2_RISK_DIRECTIONS = {"contracts", "becomes_conditional", "becomes_contested"}
+LEVEL2_OPPORTUNITY_MECHANISMS = {
+    "procures", "builds", "funds", "recruits", "retains", "associates",
+    "collaborates", "coordinates", "prioritises", "allocates", "invests",
+    "launches", "supports", "fast_tracks", "refers", "feeds_into",
+    "integrates", "adds_capacity", "substitutes", "diversifies",
+    "harmonises", "exempts", "reconciles", "secures", "pre_clears",
+    "standardises", "certifies",
+}
+LEVEL2_ACTIVE_STATUSES = {
+    "proposed", "in_negotiation", "announced", "call_open",
+    "adopted", "in_force", "operating",
+}
+
+
+def _level2_product(rows: list[dict[str, Any]], mechanism: str, direction: str) -> tuple[str, str]:
+    """R-25 product polarity for a corroborated same-claim group.
+
+    The Level-2 gate is intentionally conservative.  A constraining/contracting
+    corroborated claim is retained as a risk.  Expansion becomes an opportunity only
+    when the same corroborated mechanism is a concrete instrument/action and at least
+    one supporting record puts that instrument into a live or operating status.
+    Diagnostic ``assesses expands`` groups remain evidence for trends/other reasoning
+    but are not promoted into opportunity cards merely because the direction is
+    positive.
+    """
+    if direction in LEVEL2_RISK_DIRECTIONS:
+        return "risk", "corroborated_constraint"
+
+    if direction == "expands" and mechanism in LEVEL2_OPPORTUNITY_MECHANISMS:
+        live_actions = [
+            r for r in rows
+            if clean(r.get("kind")) == "action"
+            and clean(r.get("status")) in LEVEL2_ACTIVE_STATUSES
+        ]
+        if live_actions:
+            return "opportunity", "live_or_operating_instrument"
+
+    return "", "not_a_level2_reader_product"
+
+
 def corroborated_claims(nodes: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
     groups: dict[tuple[str, str, str], list[dict[str, Any]]] = defaultdict(list)
     for n in nodes:
@@ -394,12 +435,43 @@ def corroborated_claims(nodes: Iterable[dict[str, Any]]) -> list[dict[str, Any]]
         if len(sources) < 2 or len(records) < 2:
             continue
         strongest = max(rows, key=lambda r: (float(r.get("merit", 0) or 0), STATUS_RANK.get(clean(r.get("status")), 0)))
+        product, product_basis = _level2_product(rows, key[1], key[2])
+
+        # R-25 is a depth gate, not the Level-5 >=80 score gate.  The score below is
+        # only an internal evidence-strength tie-breaker for candidates at the same
+        # wow level.  It rewards independent sources, record breadth and mature
+        # statuses without letting one prestigious source dominate.
+        best_by_source: dict[str, dict[str, Any]] = {}
+        for row in rows:
+            src = clean(row.get("_source")).lower()
+            if not src:
+                continue
+            old = best_by_source.get(src)
+            if old is None or float(row.get("merit", 0) or 0) > float(old.get("merit", 0) or 0):
+                best_by_source[src] = row
+        mean_merit = (sum(float(r.get("merit", 0) or 0) for r in best_by_source.values()) / max(1, len(best_by_source)))
+        maturity = max((STATUS_WEIGHT.get(clean(r.get("status")), 0.0) for r in rows), default=0.0)
+        evidence_score = min(99, int(round(0.72 * mean_merit + 12 * min(1.0, (len(sources) - 1) / 3) + 15 * maturity)))
+
         out.append({
-            "level": 2, "grammar_id": "corroborated_claim", "object": key[0], "mechanism": key[1], "direction": key[2],
-            "source_count": len(sources), "record_count": len(records), "status": strongest.get("status"),
+            "level": 2,
+            "grammar_id": "corroborated_claim",
+            "object": key[0],
+            "mechanism": key[1],
+            "direction": key[2],
+            "source_count": len(sources),
+            "record_count": len(records),
+            "status": strongest.get("status"),
             "claim_ids": sorted({clean(r.get("claim_id")) for r in rows if clean(r.get("claim_id"))}),
+            "product": product,
+            "product_basis": product_basis,
+            "score": evidence_score,
+            "score_gate_passes": bool(product),
+            # R-13/R-15: ordinary corroborated constraints are the known-worry/new-turn
+            # baseline; live constructive instruments are normally the next step.
+            "wow_preliminary": 3 if product == "risk" else 2 if product == "opportunity" else 1,
         })
-    return sorted(out, key=lambda x: (x["source_count"], x["record_count"], x["object"]), reverse=True)
+    return sorted(out, key=lambda x: (bool(x.get("product")), x["source_count"], x["record_count"], x["object"]), reverse=True)
 
 
 def _relation_objects(n: dict[str, Any]) -> set[str]:

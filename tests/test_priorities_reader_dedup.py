@@ -79,6 +79,50 @@ console.log(JSON.stringify({titles:view.opportunities.map(P.plainPriorityTitle),
         out = self.run_node(js)
         self.assertEqual(len(out['titles']), len(set(out['titles'])))
 
+    def test_claim_native_stage7_uses_python_shelf_only_and_preserves_publication_order(self):
+        js = r'''
+const P=require('./priorities/priorities.js');
+const legacy={title:'Very high quality legacy talent risk',source:'CESAR',date:'2026-03-30',link:'https://legacy.example/talent',source_tier:'Tier 1',strategic_classification_source:'source_text',strategic_classification:{primary:'risk',lenses:[{type:'risk',passage:'Career precarity could create brain drain.',components:{mechanism:'precarity',carrier:'career system',asset:'research talent',loss:'brain drain'}}]}};
+const riskA={id:'claim:risk:a',product:'risk',grammar_id:'clock_before_rule',level:3,inferential_distance:3,status:'qualified',score:70,wow:3,topic_label:'compute public procurement — delivery clock ahead of settled rules',primary_records:4,primary_sources:3,support:[]};
+const riskB={id:'claim:risk:b',product:'risk',grammar_id:'corroborated_claim',level:2,inferential_distance:2,status:'qualified',score:99,wow:3,topic_label:'research security screening — corroborated current finding',object:'research_security.screening',mechanism:'conditions',direction:'becomes_conditional',claim_status:'adopted',primary_records:3,primary_sources:3,support:[]};
+const opp={id:'claim:opp:a',product:'opportunity',grammar_id:'corroborated_claim',level:2,status:'qualified',score:80,wow:2,topic_label:'horizon association — corroborated current finding',object:'horizon.association',mechanism:'associates',direction:'expands',claim_status:'in_force',primary_records:2,primary_sources:2,support:[]};
+const data={strand_a:[legacy],high_order_inference:{detector_backend:'claim_native',selection_stage:7,publications:{risk:['claim:risk:a','claim:risk:b'],opportunity:['claim:opp:a']},candidates:[riskA,riskB,opp],selection:{risk:{reserve:8,watch:4},opportunity:{reserve:2,watch:9}}}};
+const view=P.buildPriorityView(data,{limit:20});
+console.log(JSON.stringify({
+  riskIds:view.risks.map(x=>x.candidateId),
+  riskTitles:view.risks.map(P.plainPriorityTitle),
+  oppIds:view.opportunities.map(x=>x.candidateId),
+  stats:view.stats
+}));
+'''
+        out = self.run_node(js)
+        self.assertEqual(out['riskIds'], ['claim:risk:a', 'claim:risk:b'])
+        self.assertNotIn('Precarious career paths can make Europe lose research talent it has trained or attracted.', out['riskTitles'])
+        self.assertEqual(out['oppIds'], ['claim:opp:a'])
+        self.assertTrue(out['stats']['claimNativeCutover'])
+        self.assertEqual(out['stats']['riskReserve'], 8)
+        self.assertEqual(out['stats']['riskWatch'], 4)
+        self.assertEqual(out['stats']['opportunityReserve'], 2)
+        self.assertEqual(out['stats']['opportunityWatch'], 9)
+
+    def test_claim_native_level2_reader_language_uses_semantic_direction_and_mechanism(self):
+        js = r'''
+const P=require('./priorities/priorities.js');
+const data={high_order_inference:{detector_backend:'claim_native',selection_stage:7,publications:{risk:['r'],opportunity:['o1','o2']},candidates:[
+{id:'r',product:'risk',grammar_id:'corroborated_claim',level:2,wow:3,score:80,topic_label:'supply chain access — corroborated current finding',object:'supply.chain_access',mechanism:'conditions',direction:'becomes_conditional',claim_status:'in_force',primary_records:3,primary_sources:3,support:[]},
+{id:'o1',product:'opportunity',grammar_id:'corroborated_claim',level:2,wow:2,score:80,topic_label:'research system governance — corroborated current finding',object:'research.system_governance',mechanism:'prioritises',direction:'expands',claim_status:'adopted',primary_records:2,primary_sources:2,support:[]},
+{id:'o2',product:'opportunity',grammar_id:'corroborated_claim',level:2,wow:2,score:79,topic_label:'research system governance — corroborated current finding',object:'research.system_governance',mechanism:'launches',direction:'expands',claim_status:'operating',primary_records:2,primary_sources:2,support:[]}
+],selection:{risk:{},opportunity:{}}}};
+const v=P.buildPriorityView(data,{limit:20});
+console.log(JSON.stringify({riskTitle:P.plainPriorityTitle(v.risks[0]),riskText:P.plainPriorityExplanation(v.risks[0]),oppTitles:v.opportunities.map(P.plainPriorityTitle)}));
+'''
+        out = self.run_node(js)
+        self.assertIn('becoming more conditional', out['riskTitle'])
+        self.assertIn('toward tighter conditions', out['riskText'])
+        self.assertEqual(len(out['oppTitles']), len(set(out['oppTitles'])))
+        self.assertTrue(any('adopted priorities' in x for x in out['oppTitles']))
+        self.assertTrue(any('new instruments' in x for x in out['oppTitles']))
+
 
 if __name__ == '__main__':
     unittest.main()

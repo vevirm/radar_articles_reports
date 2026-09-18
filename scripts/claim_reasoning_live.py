@@ -628,6 +628,14 @@ def detect_claim_reasoning(raw: dict[str, Any], root: Path = ROOT, evaluated_at:
 
 def _candidate_key(c: dict[str, Any]) -> str:
     grammar = clean(c.get("grammar_id"))
+    if grammar == "corroborated_claim":
+        # R-25 Level-2 identity is the corroborated semantic claim itself.  Product
+        # polarity is part of the identity so a later polarity correction does not
+        # silently rewrite a risk into an opportunity under the same candidate id.
+        return "|".join([
+            grammar, clean(c.get("product")), clean(c.get("object")),
+            clean(c.get("mechanism")), clean(c.get("direction")),
+        ])
     # Trend identity must survive movement of individual supporting records.  A
     # controlled object/cluster key is the underlying thing being pulled, not one
     # transient evidence claim.
@@ -1205,6 +1213,15 @@ def _verification_gate(c: dict[str, Any]) -> tuple[bool, str]:
     grammar = clean(c.get("grammar_id"))
     if product == "trend" or grammar == "opposing_movements":
         return bool(c.get("trend_evidence_floor_passes")), "trend_evidence_floor"
+    if grammar == "corroborated_claim":
+        # R-25 is already an explicit two-independent-source depth gate.  Requiring a
+        # Level-5 candidate falsifier here would collapse the baseline and recreate
+        # the Stage-7 starvation bug at a lower level.
+        return (
+            bool(c.get("score_gate_passes"))
+            and int(c.get("primary_records", 0) or 0) >= 2
+            and int(c.get("primary_sources", 0) or 0) >= 2
+        ), "corroborated_claim_floor"
     if grammar in _STRUCTURAL_VERIFICATION_GRAMMARS:
         return True, "authoritative_graph_structure"
     return bool(c.get("denial_tested")), "executed_candidate_falsifier"
@@ -1222,9 +1239,9 @@ def _selection_rank(c: dict[str, Any]) -> tuple[int, int, int, int]:
         )
     return (
         int(c.get("wow", 0) or 0),
+        int(c.get("inferential_distance", c.get("level", 0)) or 0),
         int(c.get("score", 0) or 0),
         int(c.get("primary_sources", 0) or 0),
-        int(c.get("primary_records", 0) or 0),
     )
 
 
@@ -1269,16 +1286,21 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
             c["reader_eligible"] = False
             c["publication_gate_passes"] = False
 
-        # The wow floor is a quality rule, not a knob for hitting a count.  Never raise
-        # it because many candidates happen to exist: excess candidates belong in the
-        # reserve shelf, exactly where they can be updated on the next scan.
+        # R-71/R-74: wow >=3 is the *top-of-page* floor for risks, opportunities
+        # and ongoing phenomena, not a deletion rule.  Verified wow-1/2 findings are
+        # the baseline and may appear beneath stronger findings when shelf space is
+        # available.  Shocks remain exceptional and therefore keep the hard wow>=4
+        # eligibility gate; trends use their own structural evidence floor.
         wow_floor = 0 if product == "trend" else (4 if product == "shock" else 3)
-        eligible = [
+        verified_pool = [
             c for c in pool
             if c.get("status") == "qualified"
             and c.get("verification_gate_passes")
             and c.get("oddity_passes")
-            and (product == "trend" or int(c.get("wow", 0) or 0) >= wow_floor)
+        ]
+        eligible = [
+            c for c in verified_pool
+            if product != "shock" or int(c.get("wow", 0) or 0) >= wow_floor
         ]
         eligible.sort(key=_selection_rank, reverse=True)
 
@@ -1332,6 +1354,13 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
             if not cid or cid in chosen_ids:
                 continue
             if len(chosen) < ceil_target:
+                chosen.append(cand)
+                chosen_ids.add(cid)
+                continue
+            # R-72: the target is a range, not a hard cap.  A newly verified wow-5
+            # finding appears immediately even when the ordinary shelf is full; it
+            # never queues behind unchanged lower-wow material.
+            if product != "trend" and int(cand.get("wow", 0) or 0) == 5 and cid not in prev_ids:
                 chosen.append(cand)
                 chosen_ids.add(cid)
                 continue
@@ -1415,7 +1444,9 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
             "soft_target": [floor_target, ceil_target],
             "page_capacity": ceil_target,
             "wow_floor": wow_floor,
-            "verified_eligible": len(eligible),
+            "verified_eligible": len(verified_pool),
+            "top_floor_eligible": sum(1 for c in verified_pool if product == "trend" or int(c.get("wow", 0) or 0) >= wow_floor),
+            "baseline_verified": sum(1 for c in verified_pool if product not in {"trend", "shock"} and int(c.get("wow", 0) or 0) < wow_floor),
             "shown": len(chosen),
             "reserve": reserve,
             "watch": watch,
@@ -1446,6 +1477,7 @@ def _candidate_topic_label(grammar: str, topic: str) -> str:
         "latent_channel": "latent channel",
         "anchor_demand": "anchor-demand pathway",
         "split_recurrence": "recurring split",
+        "corroborated_claim": "corroborated current finding",
     }.get(clean(grammar), "")
     return f"{base} — {suffix}" if suffix else base
 
@@ -1500,6 +1532,8 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
     wow, wow_basis = _final_wow(c, nodes, vocab)
     if grammar == "opposing_movements":
         lock_reason = "Trend remains in stock until its own side-evidence floor and page-selection rules pass."
+    elif grammar == "corroborated_claim":
+        lock_reason = "Corroborated Level-2 finding is verified by its independent-source floor and awaits shelf selection."
     elif structural_verified:
         lock_reason = "Structural candidate is verified by its authoritative graph test and is waiting for page selection."
     else:
@@ -1513,6 +1547,14 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
         "inferential_distance": level,
         "topic_key": _candidate_key(c),
         "topic_label": _candidate_topic_label(grammar, topic),
+        # Preserve the semantic claim fields separately from the candidate lifecycle
+        # status.  Reader surfaces need these to describe Level-2 corroborated
+        # findings without falling back to generic wording.
+        "object": clean(c.get("object")),
+        "mechanism": clean(c.get("mechanism")),
+        "direction": clean(c.get("direction")),
+        "claim_status": clean(c.get("status")),
+        "product_basis": clean(c.get("product_basis")),
         "status": status,
         "score": score,
         "wow_preliminary": c.get("wow_preliminary"),
@@ -1541,7 +1583,7 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
         "context": [],
         "against": against,
         "support_queries": _support_queries(c),
-        "falsifier_queries": [] if grammar == "opposing_movements" else _falsifier_queries(c),
+        "falsifier_queries": [] if grammar in {"opposing_movements", "corroborated_claim"} else _falsifier_queries(c),
         "touched_this_scan": touched,
         "detector_backend": "claim_native",
         "claim_native": True,
@@ -1598,11 +1640,20 @@ def refresh_claim_high_order(
         evaluated_on = dt.date.today()
     raw_candidates: list[dict[str, Any]] = []
     for group in (
+        "level2_corroborated",
         "level3_sequence_gap", "level3_era_conjunction", "level4_opposing_movements",
         "level5_dependency_pathway", "level4_5_conflicting_criteria", "level5_latent_channel",
         "level5_anchor_demand", "level5_split_recurrence",
     ):
-        raw_candidates.extend(x for x in groups.get(group, []) if isinstance(x, dict))
+        for x in groups.get(group, []):
+            if not isinstance(x, dict):
+                continue
+            # Level-2 diagnostics that do not satisfy the R-25 risk/opportunity
+            # polarity guard remain claim evidence for other grammars but are not a
+            # reader-product candidate of their own.
+            if group == "level2_corroborated" and clean(x.get("product")) not in {"risk", "opportunity"}:
+                continue
+            raw_candidates.append(x)
     adapted: dict[str, dict[str, Any]] = {}
     for raw_candidate in raw_candidates:
         cand = adapt_candidate(raw_candidate, nodes, vocab=vocab, evaluated_on=evaluated_on)
@@ -1697,7 +1748,7 @@ def refresh_claim_high_order(
         "publication_compatibility_lock": False,
         "falsifier_execution": {"executed_finding_context_queries": sorted(executed_queries), "executed_count": len(executed_queries)},
         "selection": selection,
-        "publication_policy": "Stage 7 claim-native selection separates candidate formation, grammar-specific verification, and page selection. Trends use their own two-sided evidence floor; structural graph findings use their bounded graph test; Level-5 cross-evidence hypotheses require an executed candidate-specific falsifier. Verified excess candidates remain in reserve under stable page capacities and six-point hysteresis.",
+        "publication_policy": "Stage 7 claim-native selection separates candidate formation, grammar-specific verification, and page selection. Level-2 corroborated findings use the independent-source floor; trends use their own two-sided evidence floor; structural graph findings use their bounded graph test; Level-5 cross-evidence hypotheses require an executed candidate-specific falsifier. Verified excess candidates remain in reserve under stable page capacities and six-point hysteresis.",
         "lifecycle_policy": "Claim-native stock persists as page/reserve/watch tiers; evidence is recomputed each scan, missed detections decay slowly, and evidence withdrawal or a falsifier hit exits the visible shelf immediately.",
         "candidate_search_policy": "Missing-role and falsifier queries remain ordinary scanner discovery inputs and receive no admission waiver.",
         "publications": publications,

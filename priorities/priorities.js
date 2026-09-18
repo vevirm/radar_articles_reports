@@ -493,16 +493,15 @@
     const ids=Array.isArray(state?.publications?.[kind])?state.publications[kind]:[];
     const byId=new Map((Array.isArray(state?.candidates)?state.candidates:[]).filter(x=>x&&typeof x==='object').map(x=>[clean(x.id),x]));
     const evidenceRow=x=>({title:clean(x?.title||''),source:clean(x?.source||''),date:clean(x?.date||''),link:clean(x?.link||''),role:clean(x?.role||''),quality:Number(x?.quality)||0,analyticalWeight:Number(x?.analytical_weight)||0});
-    return ids.map(id=>byId.get(clean(id))).filter(Boolean).map(c=>{
+    return ids.map((id,publicationRank)=>byId.get(clean(id))).filter(Boolean).map((c,publicationRank)=>{
       const support=Array.isArray(c.support)?c.support:[],against=Array.isArray(c.against)?c.against:[],ctx=Array.isArray(c.context)?c.context:[];
-      return {highOrder:true,kind,title:clean(c.reader_title||c.topic_label||'Cross-evidence finding'),coreMessage:clean(c.reader_summary||''),
-        source:'Cross-evidence pattern',date:clean(c.last_updated_at||state.evaluated_at||''),link:'',abstract:clean(c.reader_summary||''),newThisScan:!!c.new_this_scan,
+      return {highOrder:true,kind,title:clean(c.reader_title||c.topic_label||'Evidence-backed finding'),coreMessage:clean(c.reader_summary||''),
+        source:'Multiple sources',date:clean(c.last_updated_at||state.evaluated_at||''),link:'',abstract:clean(c.reader_summary||''),newThisScan:!!c.new_this_scan,
         qualityScore:Number(c.score)||0,analyticalWeight:1,contextOnly:false,lens:{type:kind,passage:clean(c.reader_summary||'')},
-        lensPassage:clean(c.reader_summary||''),interpretationBasis:'cross_evidence_inference',raw:{title:clean(c.reader_title),summary:clean(c.reader_summary)},
-        candidateId:clean(c.id),inferentialDistance:Number(c.inferential_distance)||4,denialTested:!!c.denial_tested,
-        requiredRoles:Array.isArray(c.required_roles)?c.required_roles.map(clean).filter(Boolean):[],coveredRoles:Array.isArray(c.covered_roles)?c.covered_roles.map(clean).filter(Boolean):[],
-        missingRoles:Array.isArray(c.missing_roles)?c.missing_roles.map(clean).filter(Boolean):[],missingLinks:Array.isArray(c.missing_links)?c.missing_links.map(clean).filter(Boolean):[],
-        supportQueries:Array.isArray(c.support_queries)?c.support_queries.map(clean).filter(Boolean):[],falsifierQueries:Array.isArray(c.falsifier_queries)?c.falsifier_queries.map(clean).filter(Boolean):[],
+        lensPassage:clean(c.reader_summary||''),interpretationBasis:'claim_native_publication',raw:{title:clean(c.reader_title),summary:clean(c.reader_summary)},
+        candidateId:clean(c.id),publicationRank,readerAuthored:!!clean(c.reader_title),grammarId:clean(c.grammar_id),topicLabel:clean(c.topic_label),
+        objectKey:clean(c.object||c.topic_key),mechanism:clean(c.mechanism),direction:clean(c.direction),claimStatus:clean(c.claim_status||c.status),
+        wow:Number(c.wow)||0,readerStatusChip:clean(c.reader_status_chip),inferentialDistance:Number(c.inferential_distance)||Number(c.level)||0,
         supportEvidence:support.map(evidenceRow),counterEvidence:against.map(evidenceRow),
         primaryRecords:Number(c.primary_records)||0,primarySources:Number(c.primary_sources)||0,counterRecords:Number(c.counter_records)||0,
         weakSignalContext:ctx.map(evidenceRow),contextWeightTotal:Math.min(.60,ctx.reduce((n,x)=>n+(Number(x.analytical_weight)||.30),0)),
@@ -512,12 +511,41 @@
 
   function buildPriorityView(data,opts={}){
     const limit=Number.isFinite(opts.limit)?Math.max(1,Math.floor(opts.limit)):Number.POSITIVE_INFINITY;
+    const state=data?.high_order_inference&&typeof data.high_order_inference==='object'?data.high_order_inference:{};
+    const claimNative=state?.detector_backend==='claim_native'&&Number(state?.selection_stage||0)>=7;
+
+    // After the Stage-7 cutover the Python reasoning shelf is authoritative.  The old
+    // item-by-item source lens remains as a rollback/compatibility reader only; mixing
+    // it back into a live claim-native shelf would let one high-merit publication
+    // outrank a verified multi-record finding and would silently undo the reform.
+    if(claimNative){
+      const riskRows=highOrderRows(data,'risk');
+      const opportunityRows=highOrderRows(data,'opportunity');
+      const riskSel=state?.selection?.risk&&typeof state.selection.risk==='object'?state.selection.risk:{};
+      const oppSel=state?.selection?.opportunity&&typeof state.selection.opportunity==='object'?state.selection.opportunity:{};
+      const shownRisks=riskRows.slice(0,limit),shownOpportunities=opportunityRows.slice(0,limit);
+      return {
+        risks:shownRisks,
+        opportunities:shownOpportunities,
+        externalShocks:[],
+        stats:{
+          claimNativeCutover:true,
+          interpreted:riskRows.length+opportunityRows.length,sourceFiled:0,repositoryInterpreted:0,weakSignalContextUsed:0,
+          risks:riskRows.length,opportunities:opportunityRows.length,externalShocks:0,rawRisks:riskRows.length,rawOpportunities:opportunityRows.length,
+          mergedRiskRecords:0,mergedOpportunityRecords:0,closedRisks:0,
+          shownRisks:shownRisks.length,shownOpportunities:shownOpportunities.length,
+          riskReserve:Number(riskSel.reserve)||0,riskWatch:Number(riskSel.watch)||0,
+          opportunityReserve:Number(oppSel.reserve)||0,opportunityWatch:Number(oppSel.watch)||0,
+        }
+      };
+    }
+
     const rows=lensRows(data);
     const primaryRows=rows.filter(x=>!x.contextOnly);
     const contextRows=rows.filter(x=>x.contextOnly);
     const closedRisks=primaryRows.filter(x=>x.kind==='risk'&&clean(x.lens?.status)==='closed_into_shock');
-    const allRisks=sortPathways([...primaryRows.filter(x=>x.kind==='risk'&&clean(x.lens?.status)!=='closed_into_shock').map(x=>attachWeakContext(x,contextRows)),...highOrderRows(data,'risk')]);
-    const allOpportunities=sortPathways([...primaryRows.filter(x=>x.kind==='opportunity').map(x=>attachWeakContext(x,contextRows)),...highOrderRows(data,'opportunity')]);
+    const allRisks=sortPathways(primaryRows.filter(x=>x.kind==='risk'&&clean(x.lens?.status)!=='closed_into_shock').map(x=>attachWeakContext(x,contextRows)));
+    const allOpportunities=sortPathways(primaryRows.filter(x=>x.kind==='opportunity').map(x=>attachWeakContext(x,contextRows)));
     const readerRisks=consolidateReaderDuplicates(allRisks);
     const readerOpportunities=consolidateReaderDuplicates(allOpportunities);
     // Reader-level external-shock lenses are also primary-only.  The dedicated shock page
@@ -531,12 +559,13 @@
       opportunities:diversifiedTop(readerOpportunities,limit,2),
       externalShocks,
       stats:{
-        interpreted:allRisks.length+allOpportunities.length+externalShocks.length,
+        claimNativeCutover:false,interpreted:allRisks.length+allOpportunities.length+externalShocks.length,
         sourceFiled,repositoryInterpreted,weakSignalContextUsed,
         risks:readerRisks.length,opportunities:readerOpportunities.length,externalShocks:externalShocks.length,
         rawRisks:allRisks.length,rawOpportunities:allOpportunities.length,
         mergedRiskRecords:Math.max(0,allRisks.length-readerRisks.length),mergedOpportunityRecords:Math.max(0,allOpportunities.length-readerOpportunities.length),
         closedRisks:closedRisks.length,shownRisks:Math.min(limit,readerRisks.length),shownOpportunities:Math.min(limit,readerOpportunities.length),
+        riskReserve:0,riskWatch:0,opportunityReserve:0,opportunityWatch:0,
       }
     };
   }
@@ -601,8 +630,60 @@
     return `${kind}|semantic:${asset}|${mechanism}`;
   }
 
+  function friendlyCandidateTopic(x){
+    let raw=clean(x?.topicLabel||x?.objectKey||x?.title||'European research and innovation');
+    raw=raw.split(' — ')[0].replace(/[._]/g,' ').replace(/\s+/g,' ').trim();
+    const aliases={
+      'compute public procurement':'Europe’s AI-factory procurement',
+      'talent retention':'researcher retention',
+      'defence drone research':'defence-drone research',
+      'research security screening':'research-security screening',
+      'innovation system performance':'innovation-system performance',
+      'digital governance':'digital governance',
+      'ai governance':'AI governance',
+      'goal strategic autonomy':'strategic autonomy',
+      'research system governance':'research-system governance',
+      'defence innovation funding':'defence-innovation funding',
+      'horizon association':'Horizon association',
+      'compute gigafactory':'European AI-gigafactory capacity',
+      'research collaboration':'research collaboration',
+      'industrial competitiveness':'industrial competitiveness',
+      'export control regulation':'export-control rules',
+      'research openness':'research openness',
+      'finance strategic investment':'strategic investment finance'
+    };
+    return aliases[raw.toLowerCase()]||raw;
+  }
+
+  function claimNativeFallbackTitle(x){
+    const topic=friendlyCandidateTopic(x),g=clean(x?.grammarId),kind=clean(x?.kind),dir=clean(x?.direction),mech=clean(x?.mechanism);
+    if(g==='clock_before_rule')return `The delivery clock is running before the rules are settled for ${topic}.`;
+    if(g==='success_metric_gap')return `${topic.charAt(0).toUpperCase()+topic.slice(1)} can be funded before success is properly measured.`;
+    if(g==='deployment_before_rules')return `${topic.charAt(0).toUpperCase()+topic.slice(1)} is moving ahead of settled rules.`;
+    if(g==='conflicting_criteria')return `Two rule systems are pulling ${topic} in different directions.`;
+    if(g==='dependency_pathway')return `A dependency could propagate into ${topic}.`;
+    if(g==='corroborated_claim'&&kind==='risk'){
+      if(dir==='contracts')return `${topic.charAt(0).toUpperCase()+topic.slice(1)} is under sustained pressure.`;
+      if(dir==='becomes_conditional')return `${topic.charAt(0).toUpperCase()+topic.slice(1)} is becoming more conditional.`;
+      if(dir==='becomes_contested')return `${topic.charAt(0).toUpperCase()+topic.slice(1)} is becoming more contested.`;
+      return `${topic.charAt(0).toUpperCase()+topic.slice(1)} is showing a corroborated constraint.`;
+    }
+    if(g==='corroborated_claim'&&kind==='opportunity'){
+      if(['builds','procures','adds_capacity'].includes(mech))return `Europe is adding ${topic} through a live instrument.`;
+      if(['associates','collaborates'].includes(mech))return `${topic.charAt(0).toUpperCase()+topic.slice(1)} is widening through active agreements.`;
+      if(mech==='funds')return `New funding is expanding ${topic}.`;
+      if(mech==='prioritises')return `${topic.charAt(0).toUpperCase()+topic.slice(1)} is being backed by adopted priorities.`;
+      if(mech==='launches')return `${topic.charAt(0).toUpperCase()+topic.slice(1)} is moving into operation through new instruments.`;
+      if(mech==='coordinates')return `${topic.charAt(0).toUpperCase()+topic.slice(1)} is gaining an active coordination route.`;
+      if(mech==='invests')return `New investment is expanding ${topic}.`;
+      if(mech==='supports')return `A live support instrument is expanding ${topic}.`;
+      return `A live European instrument is expanding ${topic}.`;
+    }
+    return clean(x?.title)||`${topic.charAt(0).toUpperCase()+topic.slice(1)}.`;
+  }
+
   function plainPriorityTitle(x){
-    if(x?.highOrder)return clean(x.title)||'Cross-evidence finding';
+    if(x?.highOrder)return x?.readerAuthored?(clean(x.title)||'Evidence-backed finding'):claimNativeFallbackTitle(x);
     const t=pathwayText(x),title=norm(x?.title||''),kind=clean(x?.kind),asset=semanticAssetFamily(x),mechanism=semanticMechanismFamily(x);
     if(kind==='risk'){
       if(asset==='talent') return 'Precarious career paths can make Europe lose research talent it has trained or attracted.';
@@ -644,7 +725,22 @@
   }
 
   function plainPriorityExplanation(x){
-    if(x?.highOrder)return clean(x.coreMessage||x.abstract)||'Several independent evidence streams support this higher-order finding.';
+    if(x?.highOrder){
+      const authored=clean(x.coreMessage||x.abstract);
+      if(authored)return authored;
+      const topic=friendlyCandidateTopic(x),g=clean(x?.grammarId),dir=clean(x?.direction);
+      if(g==='clock_before_rule')return `Current evidence shows a delivery timetable already running while the relevant rules are still below the adopted stage. The timing gap is the risk.`;
+      if(g==='success_metric_gap')return `The stated objective and the activity being funded are not the same thing, and the evidence base does not yet contain a matching outcome measure. Delivery can therefore look successful before the intended result is known.`;
+      if(g==='deployment_before_rules')return `Current evidence places operating or deployed activity before an adopted rule on the same object. That creates a period in which practice can harden before governance catches up.`;
+      if(g==='conflicting_criteria')return `Independent records support both requirements, while the evidence base does not yet show a common tie-break. The risk is inconsistent decisions across institutions or countries.`;
+      if(g==='dependency_pathway')return `Separate records connect a European capability to a dependency and show a route by which disruption could spread beyond one isolated project. The finding remains conditional on the documented links.`;
+      if(g==='corroborated_claim'){
+        const n=Number(x?.primaryRecords)||0,sources=Number(x?.primarySources)||0;
+        const pull=dir==='contracts'?'toward contraction':dir==='becomes_conditional'?'toward tighter conditions':dir==='becomes_contested'?'toward greater contestation':'toward expansion';
+        return `${n} records from ${sources} independent sources point in the same direction on ${topic}: ${pull}. This is the corroborated baseline; stronger cross-record findings can sit above it when they qualify.`;
+      }
+      return `Several independent records support this finding about ${topic}.`;
+    }
     const t=pathwayText(x),title=norm(x?.title||''),kind=clean(x?.kind),asset=semanticAssetFamily(x),mechanism=semanticMechanismFamily(x);
     if(kind==='risk'){
       if(asset==='talent') return 'Short-term or insecure research careers can make Europe less attractive. If researchers leave faster than Europe can recruit and retain them, laboratories, new infrastructure and strategic technology programmes can end up short of people.';
@@ -680,7 +776,7 @@
   }
 
   function supportingEvidenceText(x){
-    if(x?.highOrder){const lead=clean(x.evidenceSummary);return `Cross-evidence support: ${x.primaryRecords||0} primary records from ${x.primarySources||0} sources${x.counterRecords?`, with ${x.counterRecords} counter-evidence record(s) tested`:''}.${lead?` Key evidence: ${lead}`:''}`;}
+    if(x?.highOrder){const lead=clean(x.evidenceSummary);return `Supported by ${x.primaryRecords||0} records from ${x.primarySources||0} independent sources${x.counterRecords?`; ${x.counterRecords} record(s) point the other way`:''}.${lead?` Key evidence: ${lead}`:''}`;}
     const raw=clean(x?.lensPassage||x?.abstract||x?.coreMessage||x?.title||'');
     if(!raw) return 'Evidence text unavailable.';
     const first=raw.split(/(?<=[.!?])\s+/).filter(Boolean).slice(0,3).join(' ');

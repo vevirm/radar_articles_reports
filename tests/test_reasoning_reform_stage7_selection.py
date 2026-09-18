@@ -222,6 +222,80 @@ def test_stage7_feedback_services_qualified_level5_before_watch_candidates():
     ]
 
 
+
+def test_stage7_level2_corroborated_risk_is_part_of_claim_native_shelf_without_level5_falsifier():
+    nodes = [
+        node("c:r1", "supply.chain_access", "Alpha", direction="becomes_conditional", mechanism="conditions", kind="action", status="adopted"),
+        node("c:r2", "supply.chain_access", "Beta", direction="becomes_conditional", mechanism="conditions", kind="action", status="in_force"),
+    ]
+    raw = {
+        "level": 2, "grammar_id": "corroborated_claim", "product": "risk",
+        "object": "supply.chain_access", "mechanism": "conditions",
+        "direction": "becomes_conditional", "status": "in_force",
+        "product_basis": "corroborated_constraint",
+        "claim_ids": ["c:r1", "c:r2"], "score": 84,
+        "score_gate_passes": True, "wow_preliminary": 3,
+    }
+    cand = live.adapt_candidate(raw, nodes, vocab={}, evaluated_on=__import__('datetime').date(2026, 9, 18))
+    assert cand["object"] == "supply.chain_access"
+    assert cand["mechanism"] == "conditions"
+    assert cand["direction"] == "becomes_conditional"
+    assert cand["claim_status"] == "in_force"
+    assert cand["product_basis"] == "corroborated_constraint"
+    assert cand["verification_mode"] == "corroborated_claim_floor"
+    assert cand["verification_gate_passes"] is True
+    assert cand["falsifier_queries"] == []
+    pubs, meta = live._select_stage7([cand], {"publications": {}, "candidates": []})
+    assert pubs["risk"] == [cand["id"]]
+    assert meta["risk"]["shown"] == 1
+
+
+def test_stage7_level2_live_instrument_can_supply_opportunity_baseline():
+    nodes = [
+        node("c:o1", "horizon.association", "Alpha", direction="expands", mechanism="associates", kind="action", status="in_force"),
+        node("c:o2", "horizon.association", "Beta", direction="expands", mechanism="associates", kind="action", status="in_negotiation"),
+    ]
+    raw = {
+        "level": 2, "grammar_id": "corroborated_claim", "product": "opportunity",
+        "object": "horizon.association", "mechanism": "associates",
+        "direction": "expands", "status": "in_force",
+        "product_basis": "live_or_operating_instrument",
+        "claim_ids": ["c:o1", "c:o2"], "score": 76,
+        "score_gate_passes": True, "wow_preliminary": 2,
+    }
+    cand = live.adapt_candidate(raw, nodes, vocab={}, evaluated_on=__import__('datetime').date(2026, 9, 18))
+    assert cand["verification_mode"] == "corroborated_claim_floor"
+    assert cand["verification_gate_passes"] is True
+    assert cand["wow"] == 2
+    pubs, meta = live._select_stage7([cand], {"publications": {}, "candidates": []})
+    assert pubs["opportunity"] == [cand["id"]]
+    assert meta["opportunity"]["baseline_verified"] == 1
+
+
+def test_stage7_new_wow5_is_shown_even_when_soft_target_is_full():
+    base = {
+        "claim_native": True, "product": "risk", "status": "qualified",
+        "denial_tested": True, "oddity_passes": True, "wow": 3,
+        "verification_mode": "executed_candidate_falsifier",
+    }
+    incumbents = [
+        dict(base, id=f"claim:old:{i}", score=95-i, endpoint_objects=[f"old{i}", "x"], support=[{"mechanism": f"m{i}"}])
+        for i in range(5)
+    ]
+    surprise = dict(
+        base, id="claim:new:wow5", wow=5, score=82,
+        endpoint_objects=["new5", "x"], support=[{"mechanism": "new5"}],
+    )
+    previous = {
+        "publications": {"risk": [c["id"] for c in incumbents]},
+        "candidates": [dict(c) for c in incumbents],
+    }
+    pubs, meta = live._select_stage7(copy.deepcopy(incumbents + [surprise]), previous)
+    assert "claim:new:wow5" in pubs["risk"]
+    assert len(pubs["risk"]) == 6
+    assert meta["risk"]["soft_target"] == [2, 5]
+    assert meta["risk"]["shown"] == 6
+
 def test_stage7_hysteresis_keeps_equal_wow_incumbent_until_six_point_challenge():
     base = {
         "claim_native": True, "product": "risk", "status": "qualified",
