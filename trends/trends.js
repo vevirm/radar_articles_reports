@@ -306,6 +306,14 @@
   }
 
   function build(data,history){
+    const state=data?.high_order_inference&&typeof data.high_order_inference==='object'?data.high_order_inference:{};
+    if(state?.detector_backend==='claim_native'&&Number(state?.selection_stage||0)>=7){
+      return highOrderPairs(data).sort((a,b)=>{
+        const aw=Array.isArray(a?.pullRange?.left)&&a.pullRange.left.length>=2?Math.abs(Number(a.pullRange.left[1])-Number(a.pullRange.left[0])):0;
+        const bw=Array.isArray(b?.pullRange?.left)&&b.pullRange.left.length>=2?Math.abs(Number(b.pullRange.left[1])-Number(b.pullRange.left[0])):0;
+        return bw-aw||String(a.id).localeCompare(String(b.id));
+      });
+    }
     const currentRows=currentCorpus(data),historicalRows=historicalCorpus(history),out=[];
     for(const pair of PAIRS){
       const left=sideEvidence(currentRows,historicalRows,pair.left),right=sideEvidence(currentRows,historicalRows,pair.right);

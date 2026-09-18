@@ -1400,6 +1400,7 @@ def legacy_summary(raw: dict[str, Any]) -> dict[str, Any]:
         "profile_version": state.get("profile_version"),
         "detector_backend": state.get("detector_backend", "legacy"),
         "detector_switch_stage": state.get("detector_switch_stage"),
+        "selection_stage": state.get("selection_stage"),
         "publication_compatibility_lock": bool(state.get("publication_compatibility_lock", False)),
         "claim_candidate_count": int(state.get("claim_candidate_count", 0) or 0),
         "legacy_publication_carry_count": int(state.get("legacy_publication_carry_count", 0) or 0),
@@ -1409,6 +1410,8 @@ def legacy_summary(raw: dict[str, Any]) -> dict[str, Any]:
         "by_product": dict(Counter(clean(c.get("product")) for c in cs)),
         "by_grammar": dict(Counter(clean(c.get("grammar_id")) for c in cs)),
         "publications": state.get("publications", {}),
+        "selection": state.get("selection", {}),
+        "selected_publication_count": sum(len(v) for v in (state.get("publications", {}) or {}).values() if isinstance(v, list)),
     }
 
 
@@ -1477,12 +1480,14 @@ def run_shadow(root: Path = ROOT, evaluated_at: str | None = None) -> dict[str, 
             "publication_lock_held": bool(legacy.get("publication_compatibility_lock", True)),
             "two_scan_observation_required": clean(legacy.get("detector_backend")) != "claim_native",
             "detector_switch_code_enabled": clean(legacy.get("detector_backend")) == "claim_native",
+            "selection_stage": legacy.get("selection_stage"),
+            "live_selected_publications": int(legacy.get("selected_publication_count", 0) or 0),
             "live_detector_backend": clean(legacy.get("detector_backend")) or "legacy",
         },
         "limitations": [
-            "No diagnostic shadow candidate is publishable until falsifier execution is recorded by candidate fingerprint.",
-            "Stage 6 may switch live detector generation to claims, but reader publication remains compatibility-locked until Stage 7.",
-            "Trend pull is preliminary where explicit action-dedup/hostile-witness metadata are absent.",
+            "The shadow itself never publishes; live Stage-7 selection is reported from the persisted claim-native detector snapshot.",
+            "A live candidate still requires an actually executed candidate-specific falsifier query before selection.",
+            "Reader prose/label lint remains a Stage-8 concern even when Stage-7 selection is active.",
         ],
     }
 
@@ -1494,8 +1499,8 @@ def summary_markdown(report: dict[str, Any]) -> str:
         f"Evaluated: {report['evaluated_at']}", "",
         "**This artifact is diagnostic only. It does not alter the public Radar.**", "",
         "## Claim layer", f"- Loaded world-reasoning claims: {d.get('claims_loaded',0)}", f"- Primary claims: {d.get('primary_claims',0)}", f"- Context claims: {d.get('context_claims',0)}", f"- Methods/world-disabled claims excluded: {d.get('methods_or_world_disabled',0)}", "",
-        "## Migration gate", f"- Semantic quality ready: {gate.get('semantic_quality_ready')}", f"- Production grammars implemented in shadow: {gate.get('production_grammars_implemented')}", f"- Live detector backend: {gate.get('live_detector_backend')}", f"- Publication lock held: {gate.get('publication_lock_held')}", f"- Two-scan observation still required: {gate.get('two_scan_observation_required')}", f"- Detector switch enabled: {gate.get('detector_switch_code_enabled')}", "",
-        "## Claim-native shadow", f"- Level 2 corroborated claims: {c['level2']}", f"- Level 3 sequence/gap + era findings: {c['level3']}", f"- Level 4 opposing movements: {c['level4']}", f"- Dependency-pathway candidates: {c['dependency_pathway']}", f"- Conflicting-criteria candidates: {c['conflicting_criteria']}", f"- Latent-channel candidates: {c['latent_channel']}", f"- Anchor-demand candidates: {c['anchor_demand']}", f"- Split-recurrence candidates: {c['split_recurrence']}", f"- Era-conjunction findings: {c['era_conjunction']}", f"- Score gates passed: {c['score_gate_passes']}", f"- Publication gates passed: {c['publication_gate_passes']} (intentionally zero in Stage 5)", "",
+        "## Migration gate", f"- Semantic quality ready: {gate.get('semantic_quality_ready')}", f"- Production grammars implemented in shadow: {gate.get('production_grammars_implemented')}", f"- Live detector backend: {gate.get('live_detector_backend')}", f"- Publication lock held: {gate.get('publication_lock_held')}", f"- Two-scan observation still required: {gate.get('two_scan_observation_required')}", f"- Detector switch enabled: {gate.get('detector_switch_code_enabled')}", f"- Selection stage: {gate.get('selection_stage')}", f"- Live selected publications: {gate.get('live_selected_publications')}", "",
+        "## Claim-native shadow", f"- Level 2 corroborated claims: {c['level2']}", f"- Level 3 sequence/gap + era findings: {c['level3']}", f"- Level 4 opposing movements: {c['level4']}", f"- Dependency-pathway candidates: {c['dependency_pathway']}", f"- Conflicting-criteria candidates: {c['conflicting_criteria']}", f"- Latent-channel candidates: {c['latent_channel']}", f"- Anchor-demand candidates: {c['anchor_demand']}", f"- Split-recurrence candidates: {c['split_recurrence']}", f"- Era-conjunction findings: {c['era_conjunction']}", f"- Score gates passed: {c['score_gate_passes']}", f"- Diagnostic shadow publication gates passed: {c['publication_gate_passes']} (shadow never publishes)", "",
         "## Live detector snapshot / diff", f"- Detector backend: {legacy.get('detector_backend','legacy')}", f"- Persisted candidates: {legacy.get('candidate_count',0)}", f"- Claim-native candidates: {legacy.get('claim_candidate_count',0)}", f"- Legacy publication carries: {legacy.get('legacy_publication_carry_count',0)}", f"- Persisted status counts: `{json.dumps(legacy.get('by_status',{}), sort_keys=True)}`", f"- Grammar count delta: `{json.dumps(report.get('shadow_diff',{}).get('count_delta_by_grammar',{}), sort_keys=True)}`", "",
         "## Safety", "- No scanner write", "- No Deep Scan decision change", "- No radar.json/radar_active.json write", "- No reader/publication switch", "",
     ]

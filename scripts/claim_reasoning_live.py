@@ -79,7 +79,7 @@ except ModuleNotFoundError:  # direct execution from scripts/
     )
 
 ROOT = Path(__file__).resolve().parents[1]
-PROFILE = "radar-claim-reasoning-live-v1-stage6"
+PROFILE = "radar-claim-reasoning-live-v1-stage7"
 AUTHORITY_MIN_CLAIMS = 100
 AUTHORITY_MIN_COVERAGE = 0.50
 
@@ -705,6 +705,7 @@ def _support_rows(c: dict[str, Any], node_by_claim: dict[str, dict[str, Any]]) -
             "claim_context_weight": round(float(node.get("_context_weight", 1.0) or 0), 3),
             "claim_origin": clean(node.get("origin")),
             "claim_kind": clean(node.get("kind")),
+            "mechanism": clean(snap.get("mechanism") or node.get("mechanism")),
             "object": clean(snap.get("object")),
         })
     # Level-2/3 candidates often store claim ids directly instead of role snapshots.
@@ -712,7 +713,7 @@ def _support_rows(c: dict[str, Any], node_by_claim: dict[str, dict[str, Any]]) -
     for key in ("claim_ids", "rule_claim_ids"):
         if isinstance(c.get(key), list):
             ids.extend(clean(x) for x in c[key] if clean(x))
-    for key in ("commitment_claim_id", "practice_claim_id", "doctrine_claim_id", "delivery_claim_id", "success_claim_id"):
+    for key in ("commitment_claim_id", "practice_claim_id", "doctrine_claim_id", "delivery_claim_id", "success_claim_id", "proposal_claim_id", "deployment_claim_id", "first_adopted_rule_claim_id", "success_condition_claim_id", "delivery_instrument_claim_id", "relation_claim_id"):
         if clean(c.get(key)):
             ids.append(clean(c.get(key)))
     existing = {x.get("claim_id") for x in snaps}
@@ -734,6 +735,7 @@ def _support_rows(c: dict[str, Any], node_by_claim: dict[str, dict[str, Any]]) -
             "claim_context_weight": round(float(node.get("_context_weight", 1.0) or 0), 3),
             "claim_origin": clean(node.get("origin")),
             "claim_kind": clean(node.get("kind")),
+            "mechanism": clean(node.get("mechanism")),
             "object": clean(node.get("object")),
         })
     return snaps
@@ -784,35 +786,393 @@ def _finite_json_number(value: Any) -> float | int | None:
     return number
 
 
-def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]]) -> dict[str, Any]:
+
+
+def _node_objects(n: dict[str, Any]) -> set[str]:
+    out = {clean(n.get("object"))}
+    out.update(clean(x) for x in (n.get("secondary_objects") or []) if clean(x))
+    return {x for x in out if x}
+
+
+def _feedback_queries_executed(raw: dict[str, Any]) -> list[str]:
+    """Exact finding-context queries that actually made a scholarly request this scan.
+
+    scan_radar already commits the finding-context cursor only across a contiguous
+    executed prefix.  Persisting that prefix here gives Stage 7 a candidate-specific
+    falsifier execution ledger without widening scanner authority or guessing from a
+    planned-but-unrun query.
+    """
+    results = raw.get("scan_results") if isinstance(raw.get("scan_results"), dict) else {}
+    planned = results.get("finding_context_queries_this_scan") if isinstance(results.get("finding_context_queries_this_scan"), list) else []
+    try:
+        count = max(0, int(results.get("finding_context_queries_executed", 0) or 0))
+    except (TypeError, ValueError):
+        count = 0
+    return [clean(q) for q in planned[:count] if clean(q)]
+
+
+def _stake_class(obj: str, vocab: dict[str, Any]) -> str:
+    meta = (vocab.get("objects") or {}).get(clean(obj), {})
+    return clean(meta.get("stake_class")) if isinstance(meta, dict) else ""
+
+
+def _against_rows(c: dict[str, Any], node_by_claim: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
+    out: list[dict[str, Any]] = []
+    for cid in c.get("counter_claim_ids", []) if isinstance(c.get("counter_claim_ids"), list) else []:
+        node = node_by_claim.get(clean(cid))
+        if not node:
+            continue
+        rk = clean(node.get("record_key"))
+        out.append({
+            "identity": _canonical_support_identity(node, {"claim_id": cid}),
+            "claim_id": clean(cid), "role": "counter-evidence",
+            "strand": clean(node.get("_collection")).replace("strand_", "").upper(),
+            "title": clean(node.get("_title")), "source": clean(node.get("_source")),
+            "date": clean(node.get("status_date")),
+            "link": rk[5:] if rk.startswith("link:") else clean(node.get("_link")),
+            "quality": int(round(float(node.get("merit", 0) or 0))),
+            "new_this_scan": bool(node.get("_new_this_scan")),
+            "claim_primary": bool(node.get("_primary")),
+            "claim_kind": clean(node.get("kind")), "mechanism": clean(node.get("mechanism")),
+            "object": clean(node.get("object")),
+        })
+    return out
+
+
+def _endpoint_joint_count(nodes: Iterable[dict[str, Any]], a: str, b: str, *, era: str, excluded_records: set[str]) -> int:
+    by_record: dict[str, set[str]] = {}
+    for n in nodes:
+        rid = clean(n.get("_record_id"))
+        if not rid or rid in excluded_records or clean(n.get("era")) != era:
+            continue
+        by_record.setdefault(rid, set()).update(_node_objects(n))
+    return sum(1 for objs in by_record.values() if a in objs and b in objs)
+
+
+def _final_wow(raw_candidate: dict[str, Any], nodes: Iterable[dict[str, Any]], vocab: dict[str, Any]) -> tuple[int, dict[str, Any]]:
+    grammar = clean(raw_candidate.get("grammar_id"))
+    if grammar == "era_conjunction":
+        gain = float(raw_candidate.get("gain", 0) or 0)
+        wow = 4 if gain >= 2.0 else 3 if gain >= 1.0 else 2
+        return wow, {"mode": "era_gain", "gain": round(gain, 3)}
+    if grammar == "opposing_movements":
+        return 1, {"mode": "structural_trend"}
+    eps = [clean(x) for x in raw_candidate.get("endpoint_objects", []) if clean(x)] if isinstance(raw_candidate.get("endpoint_objects"), list) else []
+    if len(eps) < 2:
+        # Level-3 sequence/gap findings are known-worry/new-turn by default unless
+        # a grammar-specific exception above says otherwise.
+        return int(raw_candidate.get("wow_preliminary", 3) or 3), {"mode": "sequence_gap"}
+    claim_ids: set[str] = set()
+    roles = raw_candidate.get("roles") if isinstance(raw_candidate.get("roles"), dict) else {}
+    for snap in roles.values():
+        if isinstance(snap, dict) and clean(snap.get("claim_id")):
+            claim_ids.add(clean(snap.get("claim_id")))
+    for key in ("claim_ids", "rule_claim_ids"):
+        if isinstance(raw_candidate.get(key), list):
+            claim_ids.update(clean(x) for x in raw_candidate.get(key, []) if clean(x))
+    excluded = {clean(n.get("_record_id")) for n in nodes if clean(n.get("claim_id")) in claim_ids}
+    cur = _endpoint_joint_count(nodes, eps[0], eps[1], era="current", excluded_records=excluded)
+    hist = _endpoint_joint_count(nodes, eps[0], eps[1], era="historical", excluded_records=excluded)
+    total = cur + hist
+    clusters = []
+    for obj in eps[:2]:
+        meta = (vocab.get("objects") or {}).get(obj, {})
+        clusters.append(clean(meta.get("cluster")) if isinstance(meta, dict) else "")
+    stake = any(_stake_class(obj, vocab) in {"flagship", "rule", "budget", "capability"} for obj in eps)
+    if total == 0 and len(set(x for x in clusters if x)) >= 2 and stake:
+        wow = 5
+    elif total <= 1:
+        wow = 4
+    elif total <= 5:
+        wow = 3
+    else:
+        wow = 2
+    return wow, {"mode": "endpoint_cooccurrence", "current": cur, "historical": hist, "total": total}
+
+
+def _oddity_pass(c: dict[str, Any], vocab: dict[str, Any]) -> tuple[bool, str]:
+    if clean(c.get("product")) == "trend" or int(c.get("wow", 0) or 0) <= 3:
+        return True, "not_required"
+    eps = [clean(x) for x in c.get("endpoint_objects", []) if clean(x)] if isinstance(c.get("endpoint_objects"), list) else []
+    stakes = [x for x in eps if _stake_class(x, vocab) in {"flagship", "rule", "budget", "capability"}]
+    if not stakes:
+        return False, "no_flagship_rule_budget_or_capability_at_stake"
+    if len(c.get("support", []) if isinstance(c.get("support"), list) else []) < 2:
+        return False, "mechanism_not_grounded_across_records"
+    if not (c.get("falsifier_queries") or c.get("support_queries")):
+        return False, "no_concrete_watch_item"
+    return True, "passes"
+
+
+def _title_tokens(value: Any) -> set[str]:
+    return {x for x in re.findall(r"[a-z0-9]+", _low(value)) if len(x) > 2}
+
+
+def _near_same_action(a: dict[str, Any], b: dict[str, Any]) -> bool:
+    if clean(a.get("status_date")) != clean(b.get("status_date")):
+        return False
+    ta, tb = _title_tokens(a.get("_title")), _title_tokens(b.get("_title"))
+    if not ta or not tb:
+        return False
+    inter = len(ta & tb)
+    overlap = inter / max(1, len(ta | tb))
+    containment = inter / max(1, min(len(ta), len(tb)))
+    return overlap >= .72 or containment >= .88
+
+
+def _trend_side(rows: list[dict[str, Any]], evaluated_on: dt.date) -> tuple[list[dict[str, Any]], float, int]:
+    # R-54: collapse near-duplicate reporting of one action, retaining the
+    # highest-merit row and applying corroboration rather than false independence.
+    groups: list[list[dict[str, Any]]] = []
+    for row in sorted(rows, key=lambda n: (clean(n.get("status_date")), float(n.get("merit", 0) or 0)), reverse=True):
+        placed = False
+        for group in groups:
+            if any(_near_same_action(row, x) for x in group):
+                group.append(row); placed = True; break
+        if not placed:
+            groups.append([row])
+    representatives: list[tuple[dict[str, Any], float]] = []
+    for group in groups:
+        best = max(group, key=lambda n: float(n.get("merit", 0) or 0))
+        extra_sources = max(0, len({clean(n.get("_source")).lower() for n in group if clean(n.get("_source"))}) - 1)
+        representatives.append((best, min(1.3, 1 + .1 * extra_sources)))
+    source_seen: Counter[str] = Counter()
+    total = 0.0
+    kept: list[dict[str, Any]] = []
+    for row, corroboration in representatives:
+        src = clean(row.get("_source")).lower()
+        source_seen[src] += 1
+        independence = 1.0 if source_seen[src] == 1 else .5 if source_seen[src] == 2 else .25 if source_seen[src] == 3 else .125
+        d = _date_only(row.get("status_date"))
+        try:
+            age = (evaluated_on - dt.date.fromisoformat(d)).days if len(d) == 10 else 999
+        except ValueError:
+            age = 999
+        freshness = 1.0 if age <= 90 else .85 if age <= 180 else .70
+        kind = {"action":1.0,"effect":.9,"diagnosis":.7,"advocacy":.5}.get(clean(row.get("kind")), .5)
+        status = {"operating":1.0,"in_force":1.0,"adopted":.9,"announced":.8,"call_open":.8,"delivered":.8,"in_negotiation":.6,"proposed":.5,"intention":.3}.get(clean(row.get("status")), 0.0)
+        attrs = row.get("attributes") if isinstance(row.get("attributes"), dict) else {}
+        actor = row.get("actor") if isinstance(row.get("actor"), dict) else {}
+        witness = 1.2 if attrs.get("hostile_witness") is True and clean(actor.get("class")) in {"eu_body","member_state","national_funder"} else 1.0
+        total += (float(row.get("merit", 0) or 0) / 100.0) * kind * status * independence * freshness * witness * corroboration
+        kept.append(row)
+    return kept, round(total, 6), len({clean(r.get("_source")).lower() for r in rows if clean(r.get("_source"))})
+
+
+def _trend_payload(raw_candidate: dict[str, Any], nodes: list[dict[str, Any]], evaluated_on: dt.date) -> dict[str, Any] | None:
+    obj = clean(raw_candidate.get("object"))
+    if not obj:
+        return None
+    rows = []
+    for n in nodes:
+        if not n.get("_primary") or clean(n.get("era")) != "current" or obj not in _node_objects(n):
+            continue
+        scope = n.get("scope") if isinstance(n.get("scope"), dict) else {}
+        if clean(scope.get("level")) not in {"eu","member_state","associated_country","company_in_eu"}:
+            continue
+        d = _date_only(n.get("status_date"))
+        try:
+            if len(d) == 10 and (evaluated_on - dt.date.fromisoformat(d)).days > 180:
+                continue
+        except ValueError:
+            pass
+        if clean(n.get("direction")) in {"expands","contracts"}:
+            rows.append(n)
+    by_record: dict[str, set[str]] = {}
+    for n in rows:
+        by_record.setdefault(clean(n.get("_record_id")), set()).add(clean(n.get("direction")))
+    rows = [n for n in rows if len(by_record.get(clean(n.get("_record_id")), set())) == 1]
+    left = [n for n in rows if clean(n.get("direction")) == "expands"]
+    right = [n for n in rows if clean(n.get("direction")) == "contracts"]
+    left_records, right_records = {clean(n.get("_record_id")) for n in left}, {clean(n.get("_record_id")) for n in right}
+    left_sources = {clean(n.get("_source")).lower() for n in left if clean(n.get("_source"))}
+    right_sources = {clean(n.get("_source")).lower() for n in right if clean(n.get("_source"))}
+    if len(left_records) < 3 or len(right_records) < 3 or len(left_sources) < 2 or len(right_sources) < 2:
+        return None
+    lk, lw, lsrc = _trend_side(left, evaluated_on); rk, rw, rsrc = _trend_side(right, evaluated_on)
+    if len(lk) < 3 or len(rk) < 3 or lsrc < 2 or rsrc < 2:
+        return None
+    left_records = {clean(n.get("_record_id")) for n in lk}; right_records = {clean(n.get("_record_id")) for n in rk}
+    raw_left = 100 * len(left_records) / max(1, len(left_records) + len(right_records))
+    adj_left = 100 * lw / max(.000001, lw + rw)
+    raw_left = max(15.0, min(85.0, raw_left)); adj_left = max(15.0, min(85.0, adj_left))
+    low, high = sorted((raw_left, adj_left)); width = high - low
+    thin = len(left_records) == 3 or len(right_records) == 3 or len(left_sources) == 2 or len(right_sources) == 2
+    if thin:
+        label = "thin"
+    elif width <= 8 and len(left_sources) >= 4 and len(right_sources) >= 4:
+        label = "settled"
+    else:
+        label = "contested_by_source_mix" if width > 8 else "balanced"
+    def snaps(xs: list[dict[str, Any]], role: str) -> list[dict[str, Any]]:
+        out=[]
+        for n in xs:
+            rk0=clean(n.get("record_key"))
+            out.append({"identity":_canonical_support_identity(n,{"claim_id":n.get("claim_id")}),"claim_id":clean(n.get("claim_id")),"role":role,"strand":clean(n.get("_collection")).replace("strand_","").upper(),"title":clean(n.get("_title")),"source":clean(n.get("_source")),"date":clean(n.get("status_date")),"link":rk0[5:] if rk0.startswith("link:") else clean(n.get("_link")),"quality":int(round(float(n.get("merit",0) or 0))),"new_this_scan":bool(n.get("_new_this_scan")),"claim_primary":True,"claim_kind":clean(n.get("kind")),"mechanism":clean(n.get("mechanism")),"object":obj})
+        return out
+    raw_side = "expansion" if raw_left > 50 else "contraction" if raw_left < 50 else "neither side"
+    adj_side = "expansion" if adj_left > 50 else "contraction" if adj_left < 50 else "neither side"
+    composition = (
+        f"The count leans to {raw_side}; the weighted evidence leans to {adj_side}."
+        if raw_side != adj_side else f"Both the count and weighted evidence lean to {raw_side}."
+    )
+    flip = "It moves toward expansion when expansion-side proposals become adopted or operating; toward contraction when contraction-side proposals do."
+    return {
+        "support": snaps(lk, "Expands") + snaps(rk, "Contracts"),
+        "trend_balance": {"object_key":obj,"left_role":"Expands","right_role":"Contracts","left_title":"Expands","right_title":"Contracts","left_plain":"Current evidence pulling toward expansion.","right_plain":"Current evidence pulling toward contraction.","raw_left_pull":round(raw_left,1),"raw_right_pull":round(100-raw_left,1),"left_pull":round(adj_left,1),"right_pull":round(100-adj_left,1),"left_range":[round(low,1),round(high,1)],"right_range":[round(100-high,1),round(100-low,1)],"band_width":round(width,1),"label":label,"composition":composition,"flip_line":flip,"left_sources":lsrc,"right_sources":rsrc,"left_records":len(left_records),"right_records":len(right_records)},
+    }
+
+
+def _apply_falsifier_ledger(c: dict[str, Any], old: dict[str, Any] | None, executed_queries: set[str], now: str) -> None:
+    prior = copy.deepcopy(old.get("falsifier_results", [])) if isinstance(old, dict) and isinstance(old.get("falsifier_results"), list) else []
+    seen = {clean(x.get("query")) for x in prior if isinstance(x, dict)}
+    fresh_against = [x for x in c.get("against", []) if isinstance(x, dict) and x.get("new_this_scan")]
+    for q in c.get("falsifier_queries", []) if isinstance(c.get("falsifier_queries"), list) else []:
+        q = clean(q)
+        if not q or q not in executed_queries or q in seen:
+            continue
+        hit = bool(fresh_against)
+        prior.append({"query": q, "executed_at": now, "result": "hit" if hit else "miss", "killing_claim_ids": [clean(x.get("claim_id")) for x in fresh_against] if hit else []})
+        seen.add(q)
+    c["falsifier_results"] = prior
+    c["falsifier_executed"] = bool(prior)
+    c["denial_tested"] = bool(prior)
+    if any(isinstance(x, dict) and x.get("result") == "hit" for x in prior):
+        c["status"] = "killed"
+        c["reader_eligible"] = False
+        c["publication_gate_passes"] = False
+        c["lifecycle"] = "killed_by_falsifier"
+
+
+def _story_key(c: dict[str, Any]) -> tuple[str, str]:
+    support = [x for x in c.get("support", []) if isinstance(x, dict)] if isinstance(c.get("support"), list) else []
+    mechanism = clean(next((x.get("mechanism") for x in support if clean(x.get("mechanism"))), c.get("grammar_id")))
+    objects = [clean(x) for x in c.get("endpoint_objects", []) if clean(x)] if isinstance(c.get("endpoint_objects"), list) else []
+    obj = objects[0] if objects else clean(c.get("topic_key"))
+    return mechanism, obj
+
+
+def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, Any]) -> tuple[dict[str, list[str]], dict[str, Any]]:
+    targets = {"shock":(1,4),"trend":(4,10),"continuity":(2,5),"risk":(2,5),"opportunity":(2,5)}
+    prev_pubs = previous_state.get("publications") if isinstance(previous_state.get("publications"), dict) else {}
+    prev_map = {clean(x.get("id")):x for x in previous_state.get("candidates", []) if isinstance(x, dict) and clean(x.get("id"))}
+    out = {k:[] for k in targets}; meta: dict[str, Any] = {}
+    for product,(floor_target,ceil_target) in targets.items():
+        xs=[c for c in candidates if c.get("claim_native") and clean(c.get("product"))==product and c.get("status")=="qualified" and c.get("denial_tested") and c.get("oddity_passes")]
+        if product == "trend":
+            eligible=xs; wow_floor=0
+        else:
+            base_floor=4 if product=="shock" else 3
+            top=[c for c in xs if int(c.get("wow",0) or 0)>=base_floor]
+            wow_floor=base_floor+1 if len(top)>ceil_target else base_floor
+            eligible=[c for c in xs if int(c.get("wow",0) or 0)>=wow_floor]
+            # wow 1-2 are baseline items beneath the top-of-page selection.
+            if product in {"risk","opportunity","continuity"}:
+                eligible += [c for c in xs if int(c.get("wow",0) or 0)<=2]
+        eligible.sort(key=lambda c:(int(c.get("wow",0) or 0), int(c.get("score",0) or 0), int(c.get("primary_sources",0) or 0)), reverse=True)
+        chosen: list[dict[str, Any]]=[]; folded=0
+        for cand in eligible:
+            conflict=next((x for x in chosen if _story_key(x)==_story_key(cand)),None)
+            if conflict is None:
+                chosen.append(cand); continue
+            old_conf = clean(conflict.get("id")) in set(prev_pubs.get(product, []) if isinstance(prev_pubs.get(product), list) else [])
+            challenger_new5 = int(cand.get("wow",0) or 0)==5 and clean(cand.get("id")) not in set(prev_pubs.get(product, []) if isinstance(prev_pubs.get(product), list) else [])
+            if challenger_new5 or (not old_conf and int(cand.get("score",0) or 0) >= int(conflict.get("score",0) or 0)+6):
+                conflict["folded_into"] = cand.get("id"); conflict["movement"]="reserve"; chosen.remove(conflict); chosen.append(cand)
+            else:
+                cand["folded_into"] = conflict.get("id"); cand["movement"]="reserve"; conflict.setdefault("also_ids",[]).append(cand.get("id"))
+            folded += 1
+        chosen.sort(key=lambda c:(int(c.get("wow",0) or 0), int(c.get("score",0) or 0)),reverse=True)
+        out[product]=[clean(c.get("id")) for c in chosen]
+        chosen_ids=set(out[product]); prev_ids=set(prev_pubs.get(product, []) if isinstance(prev_pubs.get(product), list) else [])
+        for c in [x for x in candidates if clean(x.get("product"))==product and x.get("claim_native")]:
+            cid=clean(c.get("id")); old=prev_map.get(cid)
+            if cid in chosen_ids:
+                stable = bool(old) and int(c.get("wow",0) or 0)==int(old.get("wow",0) or 0) and int(c.get("score",0) or 0)==int(old.get("score",0) or 0) and not c.get("updated_this_scan")
+                c["shown_unchanged_scans"] = (int(old.get("shown_unchanged_scans",0) or 0) + 1) if stable else 0
+                if product == "trend" and old and isinstance(old.get("trend_balance"), dict) and isinstance(c.get("trend_balance"), dict):
+                    old_range=old["trend_balance"].get("left_range") or []; new_range=c["trend_balance"].get("left_range") or []
+                    if len(old_range)>=2 and len(new_range)>=2 and max(abs(float(new_range[0])-float(old_range[0])),abs(float(new_range[1])-float(old_range[1]))) < 3:
+                        c["trend_balance_computed"] = copy.deepcopy(c["trend_balance"]); c["trend_balance"] = copy.deepcopy(old["trend_balance"]); c["published_band_changed"] = False
+                    else:
+                        c["published_band_changed"] = True
+                if cid not in prev_ids: c["movement"]="up"; c["reader_status_chip"]="New"
+                elif old and (int(c.get("wow",0) or 0)>int(old.get("wow",0) or 0) or int(c.get("score",0) or 0)>int(old.get("score",0) or 0)): c["movement"]="up"; c["reader_status_chip"]="Rising"
+                elif old and (int(c.get("wow",0) or 0)<int(old.get("wow",0) or 0) or int(c.get("score",0) or 0)<int(old.get("score",0) or 0) or int(c.get("missed_detection_scans",0) or 0)>=3): c["movement"]="down"; c["reader_status_chip"]="Fading"
+                elif int(c.get("wow",0) or 0)==5 and int(c.get("shown_unchanged_scans",0) or 0)>=6: c["movement"]="standing"; c["reader_status_chip"]="Standing"
+                elif c.get("updated_this_scan"): c["movement"]="hold"; c["reader_status_chip"]="Updated"
+                else: c["movement"]="hold"; c["reader_status_chip"]="Unchanged"
+                c["reader_eligible"]=True; c["publication_gate_passes"]=True
+            elif c.get("status") in {"watch","dormant"}:
+                c["movement"]="watch"
+            elif c.get("status")=="killed":
+                c["movement"]="killed"
+            elif c.get("denial_tested") and c.get("oddity_passes"):
+                c["movement"]=c.get("movement") or "reserve"
+        reserve=sum(1 for c in candidates if clean(c.get("product"))==product and c.get("claim_native") and c.get("movement")=="reserve")
+        watch=sum(1 for c in candidates if clean(c.get("product"))==product and c.get("claim_native") and c.get("movement")=="watch")
+        meta[product]={"soft_target":[floor_target,ceil_target],"wow_floor":wow_floor,"shown":len(chosen),"reserve":reserve,"watch":watch,"folded":folded}
+    shown=[c for c in candidates if clean(c.get("id")) in {x for ids in out.values() for x in ids}]
+    present={int(c.get("wow",0) or 0) for c in shown if clean(c.get("product"))!="trend"}
+    meta["page_guarantee"]={"present_wow_levels":sorted(present,reverse=True),"missing_wow_levels":[x for x in (5,4,3) if x not in present],"promotions_forbidden":True}
+    return out, meta
+
+def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab: dict[str, Any] | None = None, evaluated_on: dt.date | None = None) -> dict[str, Any]:
+    nodes = list(nodes)
     node_by_claim = {clean(n.get("claim_id")): n for n in nodes if clean(n.get("claim_id"))}
+    vocab = vocab or {}
+    evaluated_on = evaluated_on or dt.date.today()
     support = _support_rows(c, node_by_claim)
+    grammar = clean(c.get("grammar_id"))
+    if grammar == "goal_without_measure" and not support:
+        obj0 = clean(c.get("object"))
+        rows0 = [n for n in nodes if n.get("_primary") and clean(n.get("era")) == "current" and obj0 in _node_objects(n) and clean(n.get("kind")) in {"action","advocacy","effect"}]
+        support = _support_rows({"claim_ids":[clean(n.get("claim_id")) for n in rows0[:16]]}, node_by_claim)
+    elif grammar == "era_conjunction" and not support:
+        eps0 = [clean(x) for x in c.get("endpoint_objects", []) if clean(x)] if isinstance(c.get("endpoint_objects"), list) else []
+        if len(eps0) >= 2:
+            rows0 = [n for n in nodes if eps0[0] in _node_objects(n) and eps0[1] in _node_objects(n)]
+            support = _support_rows({"claim_ids":[clean(n.get("claim_id")) for n in rows0[:16]]}, node_by_claim)
+    against = _against_rows(c, node_by_claim)
     missing = [clean(x) for x in c.get("missing_roles", []) if clean(x)] if isinstance(c.get("missing_roles"), list) else []
     roles = c.get("roles") if isinstance(c.get("roles"), dict) else {}
-    required = list(roles) if roles else (["support"] if support else [])
-    covered = [r for r, snap in roles.items() if isinstance(snap, dict)] if roles else (["support"] if support else [])
+    required = list(roles) if roles else (["evidence_floor"] if clean(c.get("grammar_id")) == "opposing_movements" else (["support"] if support else []))
+    covered = [r for r, snap in roles.items() if isinstance(snap, dict)] if roles else (["evidence_floor"] if clean(c.get("grammar_id")) == "opposing_movements" else (["support"] if support else []))
     score = c.get("score")
     if score is None:
         score = 0
     score = max(0, min(99, int(round(float(score or 0)))))
-    status = "qualified" if bool(c.get("score_gate_passes")) and not missing else "watch"
+    level = int(c.get("level", 5) or 5)
+    structural_verified = grammar in {"opposing_movements", "era_conjunction", "practice_before_doctrine", "deployment_before_rules", "clock_before_rule", "goal_without_measure", "stalled_proposal", "success_metric_gap"}
+    status = "qualified" if ((bool(c.get("score_gate_passes")) or structural_verified) and not missing) else "watch"
     product = _product_for(c)
     topic = " × ".join(clean(x) for x in c.get("endpoint_objects", []) if clean(x)) if isinstance(c.get("endpoint_objects"), list) else ""
     topic = topic or clean(c.get("object") or c.get("capability_object") or c.get("grammar_id"))
     sources = {clean(x.get("source")).lower() for x in support if clean(x.get("source"))}
     records = {clean(x.get("identity")) for x in support if clean(x.get("identity"))}
     touched = any(bool(x.get("new_this_scan")) for x in support)
-    return {
+    wow, wow_basis = _final_wow(c, nodes, vocab)
+    trend = _trend_payload(c, nodes, evaluated_on) if grammar == "opposing_movements" else None
+    if grammar == "opposing_movements":
+        if trend is None:
+            status = "watch"
+        else:
+            support = trend["support"]
+            sources = {clean(x.get("source")).lower() for x in support if clean(x.get("source"))}
+            records = {clean(x.get("identity")) for x in support if clean(x.get("identity"))}
+    out = {
         "id": _candidate_id(c),
-        "grammar_id": clean(c.get("grammar_id")),
-        "level": int(c.get("level", 5) or 5),
+        "grammar_id": grammar,
+        "level": level,
         "product": product,
-        "inferential_distance": int(c.get("level", 5) or 5),
+        "inferential_distance": level,
         "topic_key": _candidate_key(c),
         "topic_label": topic,
         "status": status,
         "score": score,
         "wow_preliminary": c.get("wow_preliminary"),
+        "wow": wow,
+        "wow_basis": wow_basis,
         "distance_class": clean(c.get("distance")),
         "distance_lift": _finite_json_number(c.get("distance_lift")),
         "distance_bonus": _finite_json_number(c.get("distance_bonus")),
@@ -824,17 +1184,17 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]]) -> dict[
         "primary_records": len(records),
         "primary_sources": len(sources),
         "context_records": 0,
-        "counter_records": len(c.get("counter_claim_ids", []) if isinstance(c.get("counter_claim_ids"), list) else []),
+        "counter_records": len(against),
         "counter_penalty": int(c.get("counter_penalty", 0) or 0),
         "denial_tested": False,
         "falsifier_executed": False,
         "reader_eligible": False,
         "publication_gate_passes": False,
-        "publication_lock_reason": "Stage 6 detector switch: claim-native candidate awaits candidate-specific falsifier execution plus Stage-7 wow/oddity/selection gates.",
+        "publication_lock_reason": "Stage 7 selection requires an executed candidate-specific falsifier plus wow/oddity/selection gates.",
         "synthesis_across_records": len(records) >= 2,
         "support": support,
         "context": [],
-        "against": [],
+        "against": against,
         "support_queries": _support_queries(c),
         "falsifier_queries": _falsifier_queries(c),
         "touched_this_scan": touched,
@@ -842,9 +1202,17 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]]) -> dict[
         "claim_native": True,
         "claim_candidate_key": _candidate_key(c),
         "endpoint_objects": copy.deepcopy(c.get("endpoint_objects", [])),
-        "score_gate_passes": bool(c.get("score_gate_passes")),
+        "score_gate_passes": bool(c.get("score_gate_passes")) or structural_verified,
     }
-
+    if trend:
+        out.update(trend)
+        out["score"] = int(round(100 - min(85.0, float(trend["trend_balance"].get("band_width", 0) or 0))))
+        out["primary_records"] = len({x.get("identity") for x in out["support"]})
+        out["primary_sources"] = len({clean(x.get("source")).lower() for x in out["support"] if clean(x.get("source"))})
+    oddity, oddity_reason = _oddity_pass(out, vocab)
+    out["oddity_passes"] = oddity
+    out["oddity_reason"] = oddity_reason
+    return out
 
 def _fp(c: dict[str, Any]) -> str:
     payload = {
@@ -873,6 +1241,12 @@ def refresh_claim_high_order(
         return None
     nodes = detected["nodes"]
     groups = detected["groups"]
+    vocab = load_vocabulary(root / "claims_vocabulary.json")
+    ev = _date_only(completed_iso or raw.get("run_completed_at") or raw.get("last_updated"))
+    try:
+        evaluated_on = dt.date.fromisoformat(ev) if len(ev) == 10 else dt.date.today()
+    except ValueError:
+        evaluated_on = dt.date.today()
     raw_candidates: list[dict[str, Any]] = []
     for group in (
         "level3_sequence_gap", "level3_era_conjunction", "level4_opposing_movements",
@@ -882,11 +1256,8 @@ def refresh_claim_high_order(
         raw_candidates.extend(x for x in groups.get(group, []) if isinstance(x, dict))
     adapted: dict[str, dict[str, Any]] = {}
     for raw_candidate in raw_candidates:
-        cand = adapt_candidate(raw_candidate, nodes)
+        cand = adapt_candidate(raw_candidate, nodes, vocab=vocab, evaluated_on=evaluated_on)
         old = adapted.get(cand["id"])
-        # Multiple role fits can express the same semantic endpoint pair.  Keep one
-        # stable candidate id and retain the strongest/most-complete fit rather than
-        # treating role-choice variants as separate findings.
         rank = (int(cand.get("score", 0) or 0), len(cand.get("covered_roles", [])), int(cand.get("primary_sources", 0) or 0))
         old_rank = (int(old.get("score", 0) or 0), len(old.get("covered_roles", [])), int(old.get("primary_sources", 0) or 0)) if old else (-1, -1, -1)
         if old is None or rank > old_rank:
@@ -894,10 +1265,10 @@ def refresh_claim_high_order(
 
     prev_candidates = [x for x in previous_state.get("candidates", []) if isinstance(x, dict)] if isinstance(previous_state.get("candidates"), list) else []
     prev_claim = {clean(x.get("id")): x for x in prev_candidates if clean(x.get("id")).startswith("claim:")}
-    publication_ids = _previous_publication_ids(previous_state)
-    carry_legacy = {clean(x.get("id")): copy.deepcopy(x) for x in prev_candidates if clean(x.get("id")) in publication_ids and not clean(x.get("id")).startswith("claim:")}
     now = clean(completed_iso) or dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
+    executed_queries = set(_feedback_queries_executed(raw))
     merged: dict[str, dict[str, Any]] = {}
+    node_claim_ids = {clean(n.get("claim_id")) for n in nodes if clean(n.get("claim_id"))}
     new_count = updated_count = 0
     bootstrap = not bool(prev_claim)
 
@@ -906,12 +1277,20 @@ def refresh_claim_high_order(
         if cur is None:
             keep = copy.deepcopy(old)
             misses = int(keep.get("missed_detection_scans", 0) or 0) + 1
+            support_ids = {clean(x.get("claim_id")) for x in keep.get("support", []) if isinstance(x, dict) and clean(x.get("claim_id"))}
+            evidence_withdrawn = bool(support_ids - node_claim_ids)
+            side_floor_exit = clean(keep.get("grammar_id")) == "opposing_movements"
             keep.update({"new_this_scan": False, "updated_this_scan": False, "missed_detection_scans": misses, "lifecycle": "claim_carried_forward"})
-            if misses >= 6:
+            if evidence_withdrawn:
+                keep["status"] = "watch"; keep["lifecycle"] = "support_evidence_withdrawn"; keep["exit_reason"] = "supporting claim dropped or reinterpreted"
+            elif side_floor_exit:
+                keep["status"] = "watch"; keep["lifecycle"] = "trend_side_floor_exit"; keep["exit_reason"] = "one trend side fell below the evidence floor"
+            elif misses >= 6:
                 keep["status"] = "dormant"
             elif misses >= 3 and keep.get("status") == "qualified":
                 keep["status"] = "watch"
             keep["reader_eligible"] = False
+            keep["publication_gate_passes"] = False
             merged[cid] = keep
             continue
         fp = _fp(cur)
@@ -925,6 +1304,7 @@ def refresh_claim_high_order(
             "missed_detection_scans": 0,
             "lifecycle": "updated" if changed else "unchanged",
         })
+        _apply_falsifier_ledger(cur, old, executed_queries, now)
         if cur["updated_this_scan"]:
             updated_count += 1
         merged[cid] = cur
@@ -937,50 +1317,43 @@ def refresh_claim_high_order(
             "updated_this_scan": False, "missed_detection_scans": 0,
             "lifecycle": "claim_backend_bootstrap" if bootstrap else "new_claim_candidate",
         })
+        _apply_falsifier_ledger(cur, None, executed_queries, now)
         if cur["new_this_scan"]:
             new_count += 1
         merged[cid] = cur
 
-    # Compatibility shell: carry only items already on a reader page.  They are not
-    # redetected by regex and cannot create new publications; Stage 7 retires this shell.
-    for cid, old in carry_legacy.items():
-        old["detector_backend"] = "legacy_publication_carry"
-        old["legacy_publication_carry"] = True
-        old["new_this_scan"] = False
-        old["updated_this_scan"] = False
-        old["lifecycle"] = "stage6_publication_compatibility"
-        merged[cid] = old
-
-    order = {"qualified": 3, "watch": 2, "dormant": 1}
-    candidates = sorted(merged.values(), key=lambda c: (order.get(_low(c.get("status")), 0), int(c.get("score", 0) or 0), clean(c.get("last_updated_at"))), reverse=True)
-    prev_pubs = previous_state.get("publications") if isinstance(previous_state.get("publications"), dict) else {}
-    publications = {k: [clean(x) for x in (prev_pubs.get(k) or []) if clean(x) in merged] for k in ("shock", "risk", "opportunity", "continuity", "trend")}
+    order = {"qualified": 4, "watch": 3, "dormant": 2, "killed": 1}
+    candidates = sorted(merged.values(), key=lambda c: (order.get(_low(c.get("status")), 0), int(c.get("wow", 0) or 0), int(c.get("score", 0) or 0), clean(c.get("last_updated_at"))), reverse=True)
+    publications, selection = _select_stage7(candidates, previous_state)
     level_counts = Counter(int(c.get("level", 0) or 0) for c in candidates if c.get("claim_native"))
     return {
         "profile_version": PROFILE,
         "detector_backend": "claim_native",
         "detector_switch_stage": 6,
+        "selection_stage": 7,
         "evaluated_at": now,
         "new_count": new_count,
         "updated_count": updated_count,
         "qualified_count": sum(1 for c in candidates if c.get("claim_native") and c.get("status") == "qualified"),
         "watch_count": sum(1 for c in candidates if c.get("claim_native") and c.get("status") == "watch"),
         "dormant_count": sum(1 for c in candidates if c.get("claim_native") and c.get("status") == "dormant"),
+        "killed_count": sum(1 for c in candidates if c.get("claim_native") and c.get("status") == "killed"),
         "claim_candidate_count": sum(1 for c in candidates if c.get("claim_native")),
-        "legacy_publication_carry_count": sum(1 for c in candidates if c.get("legacy_publication_carry")),
+        "legacy_publication_carry_count": 0,
         "level_counts": {str(k): v for k, v in sorted(level_counts.items())},
         "claim_diagnostics": detected["claim_diagnostics"],
         "claim_expressiveness": detected["claim_expressiveness"],
         "authority_gate": detected["authority_gate"],
         "distance_table": detected["distance_table"],
-        "publication_compatibility_lock": True,
-        "publication_policy": "Stage 6 switches detector generation to claims but freezes reader publication IDs. Claim-native candidates remain reader-ineligible until falsifier execution and Stage-7 wow/oddity/selection are active.",
-        "lifecycle_policy": "Claim-native candidates persist and decay under the existing slow lifecycle. Only already-published legacy candidates are carried for reader compatibility; regex detection no longer adds candidates.",
-        "candidate_search_policy": "Missing-role and falsifier queries come from claim-native candidates and still pass through normal scanner admission.",
+        "publication_compatibility_lock": False,
+        "falsifier_execution": {"executed_finding_context_queries": sorted(executed_queries), "executed_count": len(executed_queries)},
+        "selection": selection,
+        "publication_policy": "Stage 7 claim-native selection: verified evidence plus an executed candidate-specific falsifier, computed wow, oddity gate, same-story folding, soft target wow-floor adjustment, and six-point hysteresis. No hard publication caps.",
+        "lifecycle_policy": "Claim-native stock persists; missed detections decay slowly, while evidence withdrawal or a falsifier hit exits the shelf immediately.",
+        "candidate_search_policy": "Missing-role and falsifier queries remain ordinary scanner discovery inputs and receive no admission waiver.",
         "publications": publications,
         "candidates": candidates,
     }
-
 
 def refresh_claim_shocks(
     raw: dict[str, Any],
@@ -993,27 +1366,41 @@ def refresh_claim_shocks(
     detected = detect_claim_reasoning(raw, root, completed_iso)
     if not detected["authority_gate"].get("ready"):
         return None
+    vocab = load_vocabulary(root / "claims_vocabulary.json")
+    ev = _date_only(completed_iso or raw.get("run_completed_at") or raw.get("last_updated"))
+    try:
+        evaluated_on = dt.date.fromisoformat(ev) if len(ev) == 10 else dt.date.today()
+    except ValueError:
+        evaluated_on = dt.date.today()
     deps = [x for x in detected["groups"].get("level5_dependency_pathway", []) if isinstance(x, dict) and clean(x.get("product")) == "shock"]
-    claim_candidates = [adapt_candidate(x, detected["nodes"]) for x in deps]
-    claim_candidates.sort(key=lambda x: (int(x.get("score", 0) or 0), int(x.get("wow_preliminary", 0) or 0)), reverse=True)
-    previous_dynamic = copy.deepcopy(previous_state.get("dynamic_shocks")) if isinstance(previous_state.get("dynamic_shocks"), list) else []
+    prev_claim = {clean(x.get("id")): x for x in previous_state.get("claim_candidates", []) if isinstance(x, dict) and clean(x.get("id"))} if isinstance(previous_state.get("claim_candidates"), list) else {}
+    executed = set(_feedback_queries_executed(raw))
+    now = clean(completed_iso) or dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
+    claim_candidates=[]
+    for item in deps:
+        cand=adapt_candidate(item, detected["nodes"], vocab=vocab, evaluated_on=evaluated_on)
+        _apply_falsifier_ledger(cand, prev_claim.get(clean(cand.get("id"))), executed, now)
+        cand["publication_gate_passes"] = bool(cand.get("status") == "qualified" and cand.get("denial_tested") and int(cand.get("wow",0) or 0) >= 4 and cand.get("oddity_passes"))
+        cand["reader_eligible"] = cand["publication_gate_passes"]
+        claim_candidates.append(cand)
+    claim_candidates.sort(key=lambda x: (bool(x.get("publication_gate_passes")), int(x.get("wow", 0) or 0), int(x.get("score", 0) or 0)), reverse=True)
     return {
         "profile_version": PROFILE + "-shock-adapter",
         "detector_backend": "claim_native",
         "detector_switch_stage": 6,
-        "evaluated_at": clean(completed_iso) or dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z"),
-        "new_count": 0,
+        "selection_stage": 7,
+        "evaluated_at": now,
+        "new_count": sum(1 for x in claim_candidates if clean(x.get("id")) not in prev_claim),
         "updated_count": 0,
-        "unchanged_count": len(previous_dynamic),
+        "unchanged_count": sum(1 for x in claim_candidates if clean(x.get("id")) in prev_claim),
         "claim_candidate_count": len(claim_candidates),
         "claim_candidates": claim_candidates,
         "claim_diagnostics": detected["claim_diagnostics"],
         "authority_gate": detected["authority_gate"],
-        "publication_compatibility_lock": True,
-        "dynamic_shocks": previous_dynamic,
-        "compatibility_note": "Stage 6 shock detector is claim-native; reader-visible dynamic_shocks are frozen legacy carry until Stage 7 activates falsifier/wow/selection gates.",
+        "publication_compatibility_lock": False,
+        "dynamic_shocks": [],
+        "compatibility_note": "Stage 7 retires legacy dynamic-shock publication carry. Reader-selected claim-native shocks are taken from high_order_inference.publications.shock; this registry remains as the shock-specific evidence/falsifier ledger.",
     }
-
 
 def claim_feedback_queries(state: dict[str, Any] | None, limit: int = 8) -> list[str]:
     if not isinstance(state, dict):

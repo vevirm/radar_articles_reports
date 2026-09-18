@@ -80,7 +80,7 @@ def test_adapted_claim_candidate_is_publication_locked():
     assert cand["id"].startswith("claim:dependency_pathway:")
 
 
-def test_live_refresh_uses_claim_candidates_and_carries_only_existing_publications(monkeypatch):
+def test_live_refresh_stage7_retires_legacy_publication_carry(monkeypatch):
     raw_candidate = {
         "level": 5,
         "grammar_id": "conflicting_criteria",
@@ -124,15 +124,17 @@ def test_live_refresh_uses_claim_candidates_and_carries_only_existing_publicatio
     assert state is not None
     assert state["detector_backend"] == "claim_native"
     ids = {c["id"] for c in state["candidates"]}
-    assert "legacy:risk" in ids
+    assert "legacy:risk" not in ids
     assert "legacy:hidden" not in ids
     assert any(x.startswith("claim:conflicting_criteria:") for x in ids)
-    assert state["publications"]["risk"] == ["legacy:risk"]
+    assert state["publications"]["risk"] == []
+    assert state["publication_compatibility_lock"] is False
+    assert state["selection_stage"] == 7
     claim_candidate = next(c for c in state["candidates"] if c.get("claim_native"))
-    assert claim_candidate["reader_eligible"] is False
+    assert claim_candidate["reader_eligible"] is False  # no falsifier was executed in this fixture
 
 
-def test_shock_adapter_freezes_reader_dynamic_shocks(monkeypatch):
+def test_shock_adapter_stage7_retires_legacy_dynamic_shocks(monkeypatch):
     fake = {
         "nodes": [],
         "groups": {"level5_dependency_pathway": [{
@@ -150,7 +152,9 @@ def test_shock_adapter_freezes_reader_dynamic_shocks(monkeypatch):
     state = live.refresh_claim_shocks({}, previous, "2026-09-18T00:00:00Z")
     assert state is not None
     assert state["detector_backend"] == "claim_native"
-    assert state["dynamic_shocks"] == previous["dynamic_shocks"]
+    assert state["dynamic_shocks"] == []
+    assert state["publication_compatibility_lock"] is False
+    assert state["selection_stage"] == 7
     assert state["claim_candidate_count"] == 1
     assert state["claim_candidates"][0]["reader_eligible"] is False
 
