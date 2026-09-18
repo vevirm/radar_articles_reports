@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-18T16:53:10Z",
+  "generated_at": "2026-09-18T22:21:46Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -129638,8 +129638,1131 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://ecfr.eu/article/cold-comfort-what-china-can-teach-europe-about-adaptation/": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "e90c3f26",
+      "identity_hash": "d4b9b700d1b4089d",
+      "reader_title": "Europe’s dependency problem through an adaptation lens",
+      "reader_what": "ECFR argues Europe should reduce exposure while building resilience to unavoidable economic dependencies.",
+      "reader_why": "Dependency management combines diversification with stronger domestic capacity and preparedness.",
+      "reader_more": "The article compares climate adaptation with economic-security policy. It argues that Europe should not rely only on eliminating dependencies, because some exposure will persist. Instead, it combines mitigation of dependencies with adaptation measures that make economies more resilient. The argument is analytical rather than an observed causal evaluation.",
+      "deep_analysis": {
+        "work_kind": "policy analysis",
+        "research_question": "How can Europe manage strategic economic dependencies using lessons from climate adaptation?",
+        "main_finding": "Europe should combine efforts to reduce dependencies with measures that increase resilience to dependencies that cannot quickly be removed.",
+        "method_or_basis": "Policy analysis using an analogy between climate adaptation and economic dependency management, supported by European and Chinese examples.",
+        "qualification": "This is a policy analysis and analogy about managing dependencies, not evidence that the proposed European measures have already produced the claimed outcomes.",
+        "radar_relevance": "Directly relevant to European industrial capability, economic security and strategic-dependency policy.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied ECFR article page provided substantial matching primary text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://ecfr.eu/article/cold-comfort-what-china-can-teach-europe-about-adaptation/",
+            "title": "Cold comfort: What China can teach Europe about adaptation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantial ECFR primary text was supplied in the package and matches the claimed work."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The article substantively analyzes European economic and industrial dependencies and policy responses, with a direct European strategic-capability connection."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-18T22:21:43Z",
+      "deep_scan_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+      "claims": [
+        {
+          "object": "goal.strategic_autonomy",
+          "secondary_objects": [
+            "finance.strategic_investment"
+          ],
+          "actor": {
+            "name": "European Council on Foreign Relations",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "advocates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-08-18",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "This is a policy analysis and analogy about managing dependencies, not evidence that the proposed European measures have already produced the claimed outcomes.",
+          "text": "ECFR argues that European resilience requires both reducing strategic dependencies and adapting to those that persist.",
+          "confidence": "high",
+          "record_key": "link:https://ecfr.eu/article/cold-comfort-what-china-can-teach-europe-about-adaptation/",
+          "merit": 85,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:d4b9b700d1b4089d:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1111/eulj.12519": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "corpus_scope": "main",
+      "source_hash": "e6f23c6d",
+      "identity_hash": "744b43c797aa5fb7",
+      "reader_title": "EU foresight is present but unevenly institutionalised",
+      "reader_what": "The paper traces anticipatory governance and foresight across EU Better Regulation.",
+      "reader_why": "Institutionalisation is intended to make EU policymaking more future-oriented and resilient.",
+      "reader_more": "The article reviews how anticipatory governance and strategic foresight appear in EU Better Regulation. It finds these tools are embedded unevenly, with anticipatory governance more visible than foresight and applications still piecemeal. The work is substantive EU governance analysis, but it does not contribute a reusable method of the kind required for Strand B.",
+      "deep_analysis": {
+        "work_kind": "legal and governance analysis",
+        "research_question": "How are anticipatory governance and strategic foresight embedded in EU multilevel governance and Better Regulation?",
+        "main_finding": "EU Better Regulation contains anticipatory governance and foresight elements, but their institutionalisation remains uneven and piecemeal.",
+        "method_or_basis": "Conceptual and institutional analysis of EU Better Regulation tools and governance arrangements.",
+        "qualification": "The paper analyzes governance arrangements rather than validating a new foresight or evaluation method.",
+        "radar_relevance": "Relevant context on EU foresight governance, but it fails the package's strict Strand B reusable-method criterion.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval of Wiley returned HTTP 403."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1111/eulj.12519 resolved to the matching open-access Wiley article with substantive text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://doi.org/10.1111/eulj.12519",
+            "title": "Futures in EU governance: Anticipatory governance, strategic foresight and EU Better Regulation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Wiley's recovered article text confirms identity and the paper's analytical scope."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_NO_REUSABLE_METHOD",
+        "reason": "The article examines anticipatory governance and strategic foresight in EU Better Regulation but does not present a new or materially improved reusable method."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-18T22:21:43Z",
+      "deep_scan_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.nature.com/articles/d41586-026-02919-1": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "9c59dd13",
+      "identity_hash": "0bf7a9617f939606",
+      "reader_title": "Europe is building more independent space capability",
+      "reader_what": "European institutions and companies are expanding launch and satellite capacity to reduce reliance on US infrastructure.",
+      "reader_why": "Security and geopolitical concerns are pushing Europe to invest in sovereign space systems.",
+      "reader_more": "Nature reports growing European efforts to strengthen independent space launch, satellite and human-spaceflight capability. The article links this push to security concerns and transatlantic tensions, while noting Europe still relies on US infrastructure in important areas. Some measures are operational, while others are announcements or development plans.",
+      "deep_analysis": {
+        "work_kind": "current development / science-policy news",
+        "research_question": "",
+        "main_finding": "Europe is accelerating efforts to build sovereign space capability and reduce dependence on US launch and satellite infrastructure.",
+        "method_or_basis": "Reported statements, policy announcements and capability developments described by Nature.",
+        "qualification": "The article reports momentum, announcements and investments; some sovereign-space capabilities remain planned or under development.",
+        "radar_relevance": "A current European strategic-capability and technology-infrastructure development.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied Nature article page provided substantial matching article text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article",
+            "url": "https://www.nature.com/articles/d41586-026-02919-1",
+            "title": "Nature news article on Europe expanding sovereign space capabilities",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The supplied Nature text reports concrete current European policy and capability developments."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CURRENT_DEVELOPMENT",
+        "reason": "Nature reports a current European push to reduce reliance on US space infrastructure through launch, satellite and related sovereign-capability investments."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-18T22:21:43Z",
+      "deep_scan_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+      "claims": [
+        {
+          "object": "goal.strategic_autonomy",
+          "secondary_objects": [
+            "critical_infrastructure.resilience"
+          ],
+          "actor": {
+            "name": "European Union",
+            "class": "eu_body"
+          },
+          "mechanism": "invests",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-09-10",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The article reports momentum, announcements and investments; some sovereign-space capabilities remain planned or under development.",
+          "text": "European institutions are pursuing greater sovereign space capability to reduce reliance on US infrastructure.",
+          "confidence": "high",
+          "record_key": "link:https://www.nature.com/articles/d41586-026-02919-1",
+          "merit": 82,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:0bf7a9617f939606:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://demoshelsinki.fi/tag/technology/": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "5360b9bd",
+      "identity_hash": "ea0be99ba96913f2",
+      "reader_title": "Technology tag page, not a single work",
+      "reader_what": "The page aggregates multiple Demos Helsinki technology posts and policy briefs.",
+      "reader_more": "The URL is an archive/tag page rather than a specific publication. Its text mixes several unrelated projects, briefs and commentary items. Because there is no single underlying work to verify and interpret, it does not meet Strand A admission criteria.",
+      "deep_analysis": {
+        "work_kind": "tag/archive listing page",
+        "research_question": "",
+        "main_finding": "No single work is represented by this URL.",
+        "method_or_basis": "Direct inspection of the supplied archive page.",
+        "qualification": "Individual linked items may merit separate records, but the tag page itself is not a substantive work.",
+        "radar_relevance": "Fails admission because it is a generic listing/navigation page.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied page text shows a tag/archive listing containing multiple separate technology-related posts."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_listing_page",
+            "url": "https://demoshelsinki.fi/tag/technology/",
+            "title": "Technology Archives | Demos Helsinki",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The claimed object is a generic archive page, not a single research or policy work suitable for Radar admission."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_GENERIC_LISTING_PAGE",
+        "reason": "The URL is a Demos Helsinki technology tag/archive page aggregating many unrelated items rather than a single substantive work."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-18T22:21:43Z",
+      "deep_scan_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:0e32bbd2adf5dc81": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "a53a84f9",
+      "identity_hash": "ef8a5dfd8545fc77",
+      "reader_title": "Vinnova links major research facilities to industrial innovation",
+      "reader_what": "Swedish funding calls support company use of neutron, synchrotron and other advanced research infrastructures.",
+      "reader_why": "Access and collaboration build industrial capability around advanced experimental techniques.",
+      "reader_more": "Vinnova's programme supports industrial use of advanced neutron and photon facilities, including MAX IV and ESS-related capabilities. The page aggregates several calls that fund competence-building, experiments and collaboration. It is useful historical evidence of how a national innovation agency connects large-scale research infrastructure to companies and applied innovation.",
+      "deep_analysis": {
+        "work_kind": "national innovation funding programme",
+        "research_question": "",
+        "main_finding": "Vinnova has used recurring calls to strengthen industrial use of large-scale research infrastructure and advanced analytical techniques.",
+        "method_or_basis": "Official programme and call descriptions.",
+        "qualification": "The page is a programme/call family and contains multiple calls over time, so it should not be read as one single dated award decision.",
+        "radar_relevance": "Direct evidence on research-infrastructure access, industrial utilisation and national innovation support.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The Vinnova programme page provided substantial official text describing calls and objectives."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_programme_page",
+            "url": "https://www.vinnova.se/en/calls-for-proposals/research-infrastructure-utilisation-and-collaboration",
+            "title": "Research infrastructure - utilisation and collaboration",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official Vinnova material confirms a substantive research-infrastructure utilisation programme."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Vinnova's programme supports industrial use of large-scale neutron and photon research infrastructures, directly linking research infrastructure access to innovation."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-18T22:21:44Z",
+      "deep_scan_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+      "claims": [
+        {
+          "object": "research.infrastructure_access",
+          "secondary_objects": [
+            "research.infrastructure"
+          ],
+          "actor": {
+            "name": "Vinnova",
+            "class": "national_funder"
+          },
+          "mechanism": "supports",
+          "direction": "expands",
+          "status": "operating",
+          "status_date": "2025",
+          "status_date_precision": "year",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "Sweden"
+            ]
+          },
+          "kind": "action",
+          "qualification": "The page is a programme/call family and contains multiple calls over time, so it should not be read as one single dated award decision.",
+          "text": "Vinnova operates recurring calls that support industrial access to and use of large-scale research infrastructures.",
+          "confidence": "high",
+          "record_key": "historical:id:0e32bbd2adf5dc81",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:ef8a5dfd8545fc77:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:f60ea7812be98905": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "4899da6c",
+      "identity_hash": "c5ad183b45026b2a",
+      "reader_title": "Inclusion goals in STI policy are broadening",
+      "reader_what": "EU and US STI frameworks increasingly frame inclusion beyond marginalized groups and toward wider impact agendas.",
+      "reader_why": "Broader policy language can blur who inclusion is intended to benefit and why.",
+      "reader_more": "The article compares the EU's Responsible Research and Innovation framework with the US Broader Impacts Criterion. It argues that inclusion is becoming partially decoupled from a primary focus on marginalized groups and increasingly tied to general impact objectives. The authors present this as a policy-governance dilemma rather than a universal empirical law.",
+      "deep_analysis": {
+        "work_kind": "comparative STI policy study",
+        "research_question": "How is inclusion conceptualized and operationalized as an STI-policy objective in high-income-country policy frameworks?",
+        "main_finding": "In selected EU and US frameworks, inclusion has broadened beyond marginalized groups and is increasingly connected to general impact agendas.",
+        "method_or_basis": "Institutional-theory framing and comparative analysis of selected EU and US STI policy frameworks.",
+        "qualification": "The analysis focuses on selected US and EU policy frameworks in high-income-country settings; its findings should not be generalized to all STI systems.",
+        "radar_relevance": "Directly relevant to STI policy design, responsible research and innovation, and research-system governance.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval of Oxford Academic returned HTTP 403."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1093/scipol/scae019 resolved to the matching Oxford Academic article with substantive sections."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://doi.org/10.1093/scipol/scae019",
+            "title": "Inclusion as a science, technology, and innovation policy objective in high-income countries: the decoupling dilemma",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered publisher text verifies the article's conceptual framework, cases and conclusions."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The article directly studies inclusion as an STI-policy objective in the EU and United States, including Responsible Research and Innovation."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-18T22:21:44Z",
+      "deep_scan_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [
+            "research.collaboration"
+          ],
+          "actor": {
+            "name": "Kalliomäki et al.",
+            "class": "university_group"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2024-05-07",
+          "scope": {
+            "level": "external",
+            "countries": [
+              "European Union",
+              "United States"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "The analysis focuses on selected US and EU policy frameworks in high-income-country settings; its findings should not be generalized to all STI systems.",
+          "text": "The study finds that inclusion in selected EU and US STI frameworks is broadening beyond a primary focus on marginalized groups.",
+          "confidence": "high",
+          "record_key": "historical:id:f60ea7812be98905",
+          "merit": 77,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:c5ad183b45026b2a:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:6416bf9fd594b7ec": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "e3ac8515",
+      "identity_hash": "08ab12d039f5a7b4",
+      "reader_title": "EU foresight governance is not a new method",
+      "reader_what": "The paper studies how foresight and anticipatory governance are embedded in EU Better Regulation.",
+      "reader_more": "The article is a substantive analysis of EU governance and future-oriented policymaking. It discusses existing anticipatory governance and strategic foresight approaches and their institutionalisation. It does not provide a new or materially improved transferable method, measurement design or evaluation procedure, so it does not satisfy historical Strand B.",
+      "deep_analysis": {
+        "work_kind": "legal and governance analysis",
+        "research_question": "How are anticipatory governance and strategic foresight embedded in EU multilevel governance and Better Regulation?",
+        "main_finding": "EU Better Regulation incorporates future-oriented tools, but their use remains uneven and institutionally incomplete.",
+        "method_or_basis": "Conceptual and institutional analysis of existing governance and foresight arrangements.",
+        "qualification": "The contribution is analytical and institutional, not a reusable methodological innovation.",
+        "radar_relevance": "Useful foresight-governance context but not admissible to the methods library under strict Strand B criteria.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval of Wiley returned HTTP 403."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1111/eulj.12519 resolved to the matching open-access Wiley article with substantive text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://doi.org/10.1111/eulj.12519",
+            "title": "Futures in EU governance: Anticipatory governance, strategic foresight and EU Better Regulation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Same underlying publication as the main-corpus record, evaluated independently under the historical Strand B criterion."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_NO_REUSABLE_METHOD",
+        "reason": "The paper analyzes foresight and anticipatory governance in EU Better Regulation but does not introduce a new or materially improved reusable method."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-18T22:21:44Z",
+      "deep_scan_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:e4073c744e62b06f": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "f012aa8e",
+      "identity_hash": "3f353fcb3ef666ad",
+      "reader_title": "EU photovoltaic supply chains show strategic dependencies",
+      "reader_what": "The study finds strong EU dependencies, especially in mid- and downstream photovoltaic supply-chain segments.",
+      "reader_why": "Concentrated production and technology positions can constrain industrial resilience and technological sovereignty.",
+      "reader_more": "The authors analyze production and technology across the photovoltaic supply chain for China, the EU, Japan, South Korea and the US from 2007 to 2021. They identify strong EU strategic dependencies, particularly in mid- and downstream segments. The paper links these patterns to debates on industrial policy and technological sovereignty.",
+      "deep_analysis": {
+        "work_kind": "empirical industrial-policy study",
+        "research_question": "How have strategic dependencies and technological sovereignty evolved across major photovoltaic supply-chain regions?",
+        "main_finding": "The EU shows strong strategic dependencies in photovoltaic supply chains, especially in mid- and downstream segments.",
+        "method_or_basis": "Fine-grained long-run analysis integrating production and technology dimensions across major economic areas from 2007 to 2021.",
+        "qualification": "The empirical period is 2007–2021 and the analysis is specific to the photovoltaic supply chain; it does not measure all dimensions of EU technological sovereignty.",
+        "radar_relevance": "Direct evidence on EU industrial capability, strategic dependencies and green-technology supply chains.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "thin",
+            "note": "The package only retained the Elsevier redirect without article text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1016/j.jclepro.2023.140222 matched the Journal of Cleaner Production article."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Roma Tre's institutional repository lists an open-access publisher PDF and matching bibliographic record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "institutional_repository",
+            "url": "https://iris.uniroma3.it/handle/11590/462531",
+            "title": "Technological sovereignty and strategic dependencies: The case of the photovoltaic supply chain",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_article_page",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0959652623043809",
+            "title": "Technological sovereignty and strategic dependencies: The case of the photovoltaic supply chain",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher and institutional-repository evidence jointly verify identity, scope, methods and the EU-focused findings."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The study provides direct empirical evidence on EU strategic dependencies and technological sovereignty in the photovoltaic supply chain."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-18T22:21:44Z",
+      "deep_scan_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+      "claims": [
+        {
+          "object": "industrial.competitiveness",
+          "secondary_objects": [
+            "goal.strategic_autonomy",
+            "green.innovation"
+          ],
+          "actor": {
+            "name": "Caravella et al.",
+            "class": "university_group"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2024-01-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The empirical period is 2007–2021 and the analysis is specific to the photovoltaic supply chain; it does not measure all dimensions of EU technological sovereignty.",
+          "text": "The study finds strong EU strategic dependencies in photovoltaic supply chains, particularly in mid- and downstream segments.",
+          "confidence": "high",
+          "record_key": "historical:id:e4073c744e62b06f",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:3f353fcb3ef666ad:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:5075d58d06cf2c2c": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "d91042e0",
+      "identity_hash": "7459536c5fea5618",
+      "reader_title": "EU defence R&D spending has a distinct legal basis",
+      "reader_what": "The article argues EU law permits defence-industrial competitiveness funding outside the CFSP/CSDP legal basis.",
+      "reader_why": "That structure links industrial R&D spending to strategic goals while leaving political direction dependent on Member States.",
+      "reader_more": "The article studies the European Defence Fund's constitutional basis. It argues the TFEU gives the EU a competence to support defence-industrial competitiveness that is distinct from CFSP/CSDP, while still serving military-strategic objectives. It also stresses that the Fund's practical strategic impact depends on Member States agreeing on defence priorities.",
+      "deep_analysis": {
+        "work_kind": "EU constitutional and defence-industrial policy analysis",
+        "research_question": "Was the European Defence Fund correctly adopted under a non-CFSP/CSDP legal basis, and what does that imply for strategic autonomy?",
+        "main_finding": "EU law permits support for defence-industrial competitiveness outside CFSP/CSDP, but the EDF's strategic effect depends on Member State political consensus.",
+        "method_or_basis": "Doctrinal legal analysis of EU competences and the European Defence Fund's legal basis.",
+        "qualification": "The article's conclusion is a legal and institutional analysis; the EDF's practical defence-industrial impact also depends on Member State political consensus.",
+        "radar_relevance": "Directly relevant to EU defence R&D funding, industrial capability and strategic autonomy.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied Kluwer page contained a substantive matching article abstract/summary and legal conclusions."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article_page",
+            "url": "https://kluwerlawonline.com/journalarticle/European%2BForeign%2BAffairs%2BReview/28.2/EERR2023026",
+            "title": "Strategic Autonomy in Military Production: The EDF and the Constitutional Limits to EU Defence-Industrial Spending Power",
+            "evidence_used": true
+          },
+          {
+            "kind": "university_research_portal",
+            "url": "https://research-portal.uu.nl/en/publications/strategic-autonomy-in-military-production-the-edf-and-the-constit",
+            "title": "Strategic Autonomy in Military Production: The EDF and the Constitutional Limits to EU Defence-Industrial Spending Power",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Kluwer and Utrecht records agree on identity and the article's legal analysis."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The article directly analyzes the EU legal basis for defence-industrial R&D spending and its implications for strategic autonomy."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-18T22:21:45Z",
+      "deep_scan_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+      "claims": [
+        {
+          "object": "defence.innovation_funding",
+          "secondary_objects": [
+            "goal.strategic_autonomy"
+          ],
+          "actor": {
+            "name": "European Union",
+            "class": "eu_body"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "operating",
+          "status_date": "2023",
+          "status_date_precision": "year",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The article's conclusion is a legal and institutional analysis; the EDF's practical defence-industrial impact also depends on Member State political consensus.",
+          "text": "The European Defence Fund enables EU funding of defence-industrial development under internal-market and research-related competences.",
+          "confidence": "high",
+          "record_key": "historical:id:5075d58d06cf2c2c",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:7459536c5fea5618:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:78184a7ab755e07d": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "b530f3ec",
+      "identity_hash": "ef96351313738619",
+      "reader_title": "A five-part framework for European 6G innovation",
+      "reader_what": "The paper links sovereignty, sustainability, innovation policy, anticipatory regulation and trustworthy networks in European 6G strategy.",
+      "reader_why": "6G is treated as a general-purpose technology requiring coordinated policy across development, deployment and governance.",
+      "reader_more": "The authors argue that 6G policy cannot be separated into isolated technology and regulatory tracks. Their framework integrates five themes: sovereignty, sustainability, transformational innovation policy, anticipatory regulation and trustworthy networks. The paper is European policy analysis and framework-building, not evidence that all five elements are already implemented.",
+      "deep_analysis": {
+        "work_kind": "technology and innovation policy framework paper",
+        "research_question": "What integrated policy framework could help Europe develop and deploy 6G as a general-purpose technology?",
+        "main_finding": "The authors propose integrating five interdependent policy themes to support European 6G innovation and deployment.",
+        "method_or_basis": "Synthesis of EU strategies, policies, action plans and relevant innovation-policy literature into an integrated conceptual framework.",
+        "qualification": "The five-part framework is a policy proposal grounded in existing strategies and literature; it is not evidence that Europe has implemented the full framework.",
+        "radar_relevance": "Directly relevant to European digital infrastructure, innovation policy, regulation and strategic autonomy.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "thin",
+            "note": "The package retained only the Elsevier redirect."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1016/j.telpol.2023.102641 matched the open-access Telecommunications Policy article."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "University of Oulu repository provides an open copy and matching metadata; ScienceDirect also exposes substantive article text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "institutional_repository",
+            "url": "https://oulurepo.oulu.fi/handle/10024/46565",
+            "title": "Toward an integrated framework for developing European 6G innovation",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0308596123001520",
+            "title": "Toward an integrated framework for developing European 6G innovation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Open publisher/repository evidence verifies the five-element framework and European policy focus."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The paper proposes an integrated European 6G innovation-policy framework linking sovereignty, sustainability, innovation policy, regulation and trustworthy networks."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-18T22:21:45Z",
+      "deep_scan_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+      "claims": [
+        {
+          "object": "digital.infrastructure",
+          "secondary_objects": [
+            "digital.governance",
+            "goal.strategic_autonomy"
+          ],
+          "actor": {
+            "name": "Ahokangas et al.",
+            "class": "university_group"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2023-09-09",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "The five-part framework is a policy proposal grounded in existing strategies and literature; it is not evidence that Europe has implemented the full framework.",
+          "text": "The authors advocate an integrated European 6G framework combining sovereignty, sustainability, innovation policy, regulation and trustworthy networks.",
+          "confidence": "high",
+          "record_key": "historical:id:78184a7ab755e07d",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:ef96351313738619:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:7a84cdfbaa9121de": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "fff77f1d",
+      "identity_hash": "15de3b14a87d01d9",
+      "reader_title": "Business Finland’s sustainability ambition outpaced implementation",
+      "reader_what": "The evaluation finds strong sustainability ambition but gaps in operational integration, accountability, resources and impact management.",
+      "reader_why": "Strategy alone does not redirect innovation funding unless goals, capabilities, criteria and measurement are embedded in operations.",
+      "reader_more": "The report evaluates Business Finland's readiness to make sustainable development a strategic priority across its innovation system role. It finds broad internal ambition but significant implementation gaps, including governance, resources and impact management. The report recommends clearer policy, stronger accountability and better integration of sustainability into RDI funding and services. Because the strategy was new, the study focuses more on prerequisites than realized societal impacts.",
+      "deep_analysis": {
+        "work_kind": "consultative evaluation of a national innovation agency",
+        "research_question": "What prerequisites does Business Finland have for implementing its sustainable-development strategic goal, and how should its impact model develop?",
+        "main_finding": "Business Finland had high sustainability ambition but needed stronger operational integration, governance, resources and impact management to realize it.",
+        "method_or_basis": "Document review, prior-evaluation synthesis, interviews/workshops, international benchmarking and consultative impact-model development.",
+        "qualification": "The evaluation is mainly a baseline and readiness assessment because Business Finland's sustainability strategy had only recently been introduced; it does not establish realized long-term societal impact.",
+        "radar_relevance": "Strong historical evidence on innovation-agency governance, sustainability criteria, RDI funding and impact management.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied Business Finland PDF is a 131-page official report with methodology, findings and recommendations."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://www.businessfinland.fi/globalassets/julkaisut/business-finland/vaikuttavuus/evaluation_superpower_final-report_2022.pdf",
+            "title": "Superpower in Sustainable Development – from Ambition to Action",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official full report and executive summary were verified; the report evaluates Business Finland's sustainability implementation and RDI role."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The report evaluates how Finland's national innovation agency integrates sustainability into strategy, funding, services and impact management."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-18T22:21:45Z",
+      "deep_scan_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+      "claims": [
+        {
+          "object": "green.innovation",
+          "secondary_objects": [
+            "research.system_governance",
+            "finance.strategic_investment"
+          ],
+          "actor": {
+            "name": "Business Finland",
+            "class": "national_funder"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2022-12",
+          "status_date_precision": "month",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "Finland"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "The evaluation is mainly a baseline and readiness assessment because Business Finland's sustainability strategy had only recently been introduced; it does not establish realized long-term societal impact.",
+          "text": "The evaluation found that Business Finland's sustainability ambition required stronger operational integration, accountability and impact management.",
+          "confidence": "high",
+          "record_key": "historical:id:7a84cdfbaa9121de",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:15de3b14a87d01d9:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:2d958c4a449e384e": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "05899ff5",
+      "identity_hash": "5d4e122e2b99c063",
+      "reader_title": "Public funding supported Finland’s quantum-computing capability",
+      "reader_what": "Business Finland documents funding for IQM’s research, hiring, production line and next-generation quantum-computer development.",
+      "reader_why": "Public and EU funding helped build domestic deep-tech capability before larger-scale commercialization.",
+      "reader_more": "The case describes IQM's growth from a VTT–Aalto spin-off into a quantum-computing company with chip production in Espoo. It records Business Finland funding, EIC support and RRF funding used for research, recruitment, production and commercialization work. The page is promotional, so broad leadership claims should be treated cautiously, but the concrete funding and capability milestones are relevant historical evidence.",
+      "deep_analysis": {
+        "work_kind": "innovation-agency company case",
+        "research_question": "",
+        "main_finding": "Finnish and EU public funding supported IQM's quantum-computing R&D, production capability and commercialization pathway.",
+        "method_or_basis": "Business Finland first-party case narrative with company milestones and disclosed funding amounts.",
+        "qualification": "This is a Business Finland customer case and contains promotional framing; the funding amounts and described company milestones are more reliable than broad claims of leadership or future impact.",
+        "radar_relevance": "Direct historical evidence on quantum capability building, national innovation support and deep-tech commercialization.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The Business Finland case page provided substantial first-party text with funding amounts, milestones and company background."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_case_page",
+            "url": "https://www.businessfinland.fi/en/services/Advice-and-market-information/data-bank/cases/2022/quantum-technology-company-iqm-finland-exports-finnish-deep-tech-expertise-with-the-help-of-business-finland/",
+            "title": "Quantum technology company IQM Finland exports Finnish deep tech expertise with the help of Business Finland",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The first-party case verifies funding and capability milestones, while promotional superlatives are treated cautiously."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The official case documents Finnish public and EU support for quantum-computing R&D, production capability and commercialization at IQM."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-18T22:21:46Z",
+      "deep_scan_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+      "claims": [
+        {
+          "object": "quantum.machine",
+          "secondary_objects": [
+            "finance.venture_capital"
+          ],
+          "actor": {
+            "name": "IQM Finland",
+            "class": "company"
+          },
+          "mechanism": "builds",
+          "direction": "expands",
+          "status": "operating",
+          "status_date": "2022-08-22",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "Finland"
+            ]
+          },
+          "kind": "action",
+          "qualification": "This is a Business Finland customer case and contains promotional framing; the funding amounts and described company milestones are more reliable than broad claims of leadership or future impact.",
+          "text": "IQM built Finnish quantum-computing capability while public and private funding supported R&D, hiring, production and commercialization.",
+          "confidence": "medium",
+          "record_key": "historical:id:2d958c4a449e384e",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:5d4e122e2b99c063:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:e872db62027e0637": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "5de08968",
+      "identity_hash": "69cf0b68494bc6b3",
+      "reader_title": "Finland’s New Energy programme delivered research and industry impacts",
+      "reader_what": "An international panel judged the programme successful, citing strong science, training, collaboration and some commercialization outcomes.",
+      "reader_why": "Programme structure connected energy-transition research with networks, skills and routes toward industrial use.",
+      "reader_more": "The Academy of Finland's international panel reviewed 13 main-call projects using project reports, surveys, statistics and bibliometric material. It concluded the programme offered good value for money and produced strong scientific outputs, researcher training, collaboration and some patents, spin-offs and research-to-business activity. The panel also emphasized wide variation across projects and recommended sharper priorities for a future programme.",
+      "deep_analysis": {
+        "work_kind": "research programme evaluation",
+        "research_question": "How successful was Finland's New Energy Programme 2015–2020 in scientific quality, impact, collaboration, mobility and future relevance?",
+        "main_finding": "The panel judged the programme successful overall, with strong research, training and collaboration plus some industrial R&D and commercialization outcomes.",
+        "method_or_basis": "Independent international panel review of project reports, researcher surveys, statistics, bibliometrics and detailed project material.",
+        "qualification": "The panel evaluated a small, heterogeneous programme; its positive aggregate judgement does not imply every project performed equally well.",
+        "radar_relevance": "Strong historical evidence on public research funding, energy-transition R&D, collaboration and evaluation practice.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied Academy of Finland PDF is a complete official programme evaluation with methods, findings and recommendations."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://www.aka.fi/globalassets/2-suomen-akatemian-toiminta/4-julkaisut/new-energy-programme-review-23072021final.pdf",
+            "title": "Evaluation of the New Energy Programme 2015-2020",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The full official evaluation verifies programme design, evidence base, findings and recommendations."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The official evaluation assesses Finland's 2015–2020 New Energy research programme, including scientific quality, impact, collaboration and commercialization."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-18T22:21:46Z",
+      "deep_scan_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+      "claims": [
+        {
+          "object": "research.system_capacity",
+          "secondary_objects": [
+            "research.collaboration",
+            "green.innovation"
+          ],
+          "actor": {
+            "name": "Academy of Finland",
+            "class": "national_funder"
+          },
+          "mechanism": "supports",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2021-10-05",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "Finland"
+            ]
+          },
+          "kind": "effect",
+          "qualification": "The panel evaluated a small, heterogeneous programme; its positive aggregate judgement does not imply every project performed equally well.",
+          "text": "The evaluation found that the New Energy Programme produced strong research outputs, training, collaboration and some commercialization activity.",
+          "confidence": "high",
+          "record_key": "historical:id:e872db62027e0637",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:69cf0b68494bc6b3:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-09-18T16:53:10Z"
+  "claims_updated_at": "2026-09-18T22:21:46Z"
 }

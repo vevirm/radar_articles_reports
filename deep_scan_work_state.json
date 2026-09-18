@@ -1,30 +1,15 @@
 {
   "version": 1,
   "profile": "radar-deep-scan-work-state-v1",
-  "updated_at": "2026-09-18T22:14:52Z",
+  "updated_at": "2026-09-18T22:25:03Z",
   "lanes": {
     "A": {
-      "target_size": 16,
+      "target_size": 36,
       "assigned": [
-        "link:https://doi.org/10.1108/fs-11-2025-0260",
-        "link:https://ecfr.eu/article/cold-comfort-what-china-can-teach-europe-about-adaptation/",
-        "link:https://doi.org/10.1111/eulj.12519",
-        "link:https://www.nature.com/articles/d41586-026-02919-1",
-        "link:https://demoshelsinki.fi/tag/technology/",
-        "historical:id:0e32bbd2adf5dc81",
-        "historical:id:f60ea7812be98905",
-        "historical:id:6416bf9fd594b7ec",
-        "historical:id:065d22064b9f3e75",
-        "historical:id:e4073c744e62b06f",
-        "historical:id:5075d58d06cf2c2c",
-        "historical:id:78184a7ab755e07d",
-        "historical:id:7a84cdfbaa9121de",
-        "historical:id:2d958c4a449e384e",
-        "historical:id:e872db62027e0637"
+        "historical:id:065d22064b9f3e75"
       ],
-      "current_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+      "current_package_id": "worker-a-20260918T222452Z-f229dd1d2bfc",
       "package_history": [
-        "worker-a-20260916T072604Z-0b34267b291d",
         "worker-a-20260916T072903Z-0b34267b291d",
         "worker-a-20260916T073231Z-392292edffe8",
         "worker-a-20260916T075346Z-f723a6a8536f",
@@ -63,11 +48,12 @@
         "worker-a-20260917T155105Z-a4c0425aaf5e",
         "worker-a-20260918T162835Z-11dcaed103f5",
         "worker-a-20260918T165607Z-db07e32f901c",
-        "worker-a-20260918T221444Z-f8d8a6ea4cd7"
+        "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+        "worker-a-20260918T222452Z-f229dd1d2bfc"
       ]
     },
     "B": {
-      "target_size": 16,
+      "target_size": 36,
       "assigned": [],
       "current_package_id": "worker-b-20260918T165153Z-536ac137d3dd",
       "package_history": [
@@ -33512,58 +33498,58 @@
       "date": "2026-09-14",
       "url": "https://doi.org/10.1108/fs-11-2025-0260",
       "corpus_scope": "main",
-      "status": "assigned",
+      "status": "needs_manual_verification",
       "lane": "A",
       "assigned_at": "2026-09-17T14:52:51Z",
       "last_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
-      "recovery_attempts": 2,
-      "last_recovery_at": "2026-09-18T16:53:09Z",
-      "last_recovery_package_id": "worker-b-20260918T162850Z-536ac137d3dd",
-      "recovery_reason": "Identity confirmed via Crossref (structured abstract); no legitimate full text after the full ladder.",
+      "recovery_attempts": 3,
+      "last_recovery_at": "2026-09-18T22:21:43Z",
+      "last_recovery_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+      "recovery_reason": "Identity is verified, but the accessible publisher material is abstract-level; V2 does not permit an admission judgement from an abstract alone.",
       "verification": {
         "identity_verified": true,
         "evidence_depth": "identity_only_after_recovery",
         "retrieval_attempts": [
           {
             "step": "supplied_url",
-            "outcome": "failed",
-            "note": "https://doi.org/10.1108/fs-11-2025-0260 -> emerald.com/fs/article/doi/10.1108/FS-11-2025-0260/1396231/..., HTTP 403."
+            "outcome": "blocked",
+            "note": "Package retrieval of the Emerald article URL returned HTTP 403."
           },
           {
             "step": "doi",
-            "outcome": "partial",
-            "note": "Crossref: Ali Chaparak, foresight, 2026-09-14, structured abstract only; Unpaywall is_oa=false."
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1108/FS-11-2025-0260; it matches Ali Chaparak's 2026 Foresight article."
           },
           {
             "step": "exact_title",
-            "outcome": "failed",
-            "note": "Quoted-title search with author returned no copy; found author's ResearchGate profile and a 2025 conference paper 'New Technologies as Transformative Experiences'."
+            "outcome": "partial",
+            "note": "Exact-title search found the Emerald article page and metadata/abstract mirrors, but not a legitimate full-text copy."
           },
           {
             "step": "title_author_year",
-            "outcome": "failed",
-            "note": "Crossref title query returned only this record and an unrelated tourism chapter."
+            "outcome": "partial",
+            "note": "Search for title + Ali Chaparak + 2026 confirmed bibliographic identity and abstract-level content only."
           },
           {
             "step": "official_publisher_or_repository",
-            "outcome": "failed",
-            "note": "Emerald blocked (403); no repository copy per Unpaywall; ResearchGate profile lists no full text of this article."
+            "outcome": "partial",
+            "note": "Emerald's official page exposed article metadata and purpose but not full/substantive text accessible for verification."
           },
           {
             "step": "broader_identity_search",
-            "outcome": "failed",
-            "note": "The related 2025 conference paper by the same author is a different work and was not used as substitute evidence."
+            "outcome": "partial",
+            "note": "Broader DOI/title search found Crossref-style metadata reproducing the structured abstract; no authoritative full text was located."
           }
         ],
         "recovered_sources": [
           {
-            "kind": "crossref_metadata",
-            "url": "https://api.crossref.org/works/10.1108/fs-11-2025-0260",
-            "title": "Crossref record with structured abstract",
+            "kind": "publisher_article_page",
+            "url": "https://www.emerald.com/fs/article-abstract/doi/10.1108/FS-11-2025-0260/1396231/Artificial-intelligence-as-a-collective",
+            "title": "Artificial intelligence as a collective transformative experience: a conceptual framework for rational encounter",
             "evidence_used": false
           }
         ],
-        "verification_note": "Published four days before this scan; full text not yet available in any open location."
+        "verification_note": "The work clearly exists and is a conceptual framework paper, but V2 requires more than abstract-level evidence for KEEP/REVIEW/DROP."
       },
       "recovery_history": [
         {
@@ -33667,8 +33653,61 @@
             ],
             "verification_note": "Published four days before this scan; full text not yet available in any open location."
           }
+        },
+        {
+          "attempt": 3,
+          "package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+          "at": "2026-09-18T22:21:43Z",
+          "reason": "Identity is verified, but the accessible publisher material is abstract-level; V2 does not permit an admission judgement from an abstract alone.",
+          "verification": {
+            "identity_verified": true,
+            "evidence_depth": "identity_only_after_recovery",
+            "retrieval_attempts": [
+              {
+                "step": "supplied_url",
+                "outcome": "blocked",
+                "note": "Package retrieval of the Emerald article URL returned HTTP 403."
+              },
+              {
+                "step": "doi",
+                "outcome": "success",
+                "note": "Resolved/searched DOI 10.1108/FS-11-2025-0260; it matches Ali Chaparak's 2026 Foresight article."
+              },
+              {
+                "step": "exact_title",
+                "outcome": "partial",
+                "note": "Exact-title search found the Emerald article page and metadata/abstract mirrors, but not a legitimate full-text copy."
+              },
+              {
+                "step": "title_author_year",
+                "outcome": "partial",
+                "note": "Search for title + Ali Chaparak + 2026 confirmed bibliographic identity and abstract-level content only."
+              },
+              {
+                "step": "official_publisher_or_repository",
+                "outcome": "partial",
+                "note": "Emerald's official page exposed article metadata and purpose but not full/substantive text accessible for verification."
+              },
+              {
+                "step": "broader_identity_search",
+                "outcome": "partial",
+                "note": "Broader DOI/title search found Crossref-style metadata reproducing the structured abstract; no authoritative full text was located."
+              }
+            ],
+            "recovered_sources": [
+              {
+                "kind": "publisher_article_page",
+                "url": "https://www.emerald.com/fs/article-abstract/doi/10.1108/FS-11-2025-0260/1396231/Artificial-intelligence-as-a-collective",
+                "title": "Artificial intelligence as a collective transformative experience: a conceptual framework for rational encounter",
+                "evidence_used": false
+              }
+            ],
+            "verification_note": "The work clearly exists and is a conceptual framework paper, but V2 requires more than abstract-level evidence for KEEP/REVIEW/DROP."
+          }
         }
-      ]
+      ],
+      "manual_verification_since": "2026-09-18T22:21:43Z",
+      "manual_verification_reason": "Identity is verified, but the accessible publisher material is abstract-level; V2 does not permit an admission judgement from an abstract alone."
     },
     "link:https://www.euronews.com/next/2026/09/17/is-curtailing-ai-an-illusion-for-the-eu-despite-von-der-leyens-pledge": {
       "title": "Is curtailing AI an illusion for the EU, despite von der Leyen's pledge?",
@@ -34040,10 +34079,12 @@
       "date": "2026-08-18",
       "url": "https://ecfr.eu/article/cold-comfort-what-china-can-teach-europe-about-adaptation/",
       "corpus_scope": "main",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-18T22:14:44Z",
-      "last_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7"
+      "last_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+      "verified_at": "2026-09-18T22:21:43Z",
+      "verified_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7"
     },
     "link:https://doi.org/10.1111/eulj.12519": {
       "title": "Futures in EU governance: Anticipatory governance, strategic foresight and EU Better Regulation",
@@ -34051,10 +34092,12 @@
       "date": "2024-09-16",
       "url": "https://doi.org/10.1111/eulj.12519",
       "corpus_scope": "main",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-18T22:14:44Z",
-      "last_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7"
+      "last_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+      "verified_at": "2026-09-18T22:21:43Z",
+      "verified_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7"
     },
     "link:https://www.nature.com/articles/d41586-026-02919-1": {
       "title": "Europe pushes for space independence amid geopolitical rifts",
@@ -34062,10 +34105,12 @@
       "date": "2026-09-18",
       "url": "https://www.nature.com/articles/d41586-026-02919-1",
       "corpus_scope": "main",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-18T22:14:44Z",
-      "last_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7"
+      "last_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+      "verified_at": "2026-09-18T22:21:43Z",
+      "verified_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7"
     },
     "link:https://demoshelsinki.fi/tag/technology/": {
       "title": "Technology Archives | Demos Helsinki",
@@ -34073,10 +34118,12 @@
       "date": "2026-09-18",
       "url": "https://demoshelsinki.fi/tag/technology/",
       "corpus_scope": "main",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-18T22:14:44Z",
-      "last_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7"
+      "last_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+      "verified_at": "2026-09-18T22:21:43Z",
+      "verified_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7"
     },
     "historical:id:0e32bbd2adf5dc81": {
       "title": "Funding within large-scale research infrastructure | Vinnova",
@@ -34084,10 +34131,12 @@
       "date": "2025-01-01",
       "url": "https://www.vinnova.se/en/calls-for-proposals/research-infrastructure-utilisation-and-collaboration/",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-18T22:14:44Z",
-      "last_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7"
+      "last_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+      "verified_at": "2026-09-18T22:21:44Z",
+      "verified_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7"
     },
     "historical:id:f60ea7812be98905": {
       "title": "Inclusion as a science, technology, and innovation policy objective in high-income countries: the decoupling dilemma",
@@ -34095,10 +34144,12 @@
       "date": "2024-10-15",
       "url": "https://doi.org/10.1093/scipol/scae019",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-18T22:14:44Z",
-      "last_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7"
+      "last_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+      "verified_at": "2026-09-18T22:21:44Z",
+      "verified_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7"
     },
     "historical:id:6416bf9fd594b7ec": {
       "title": "Futures in EU governance: Anticipatory governance, strategic foresight and EU Better Regulation",
@@ -34106,10 +34157,12 @@
       "date": "2024-09-01",
       "url": "https://doi.org/10.1111/eulj.12519",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-18T22:14:44Z",
-      "last_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7"
+      "last_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+      "verified_at": "2026-09-18T22:21:44Z",
+      "verified_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7"
     },
     "historical:id:065d22064b9f3e75": {
       "title": "International research collaboration in personalized medicine between Europe and Latin America and the Caribbean",
@@ -34120,7 +34173,109 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-18T22:14:44Z",
-      "last_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7"
+      "last_package_id": "worker-a-20260918T222452Z-f229dd1d2bfc",
+      "recovery_attempts": 1,
+      "last_recovery_at": "2026-09-18T22:21:44Z",
+      "last_recovery_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+      "recovery_reason": "Identity is verified, but accessible authoritative material remained abstract-level; V2 requires substantive evidence for an admission judgement.",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Package retrieval of the Oxford Academic article returned HTTP 403."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1093/reseval/rvae046 resolves to the matching Research Evaluation article."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "partial",
+            "note": "Exact-title search found Oxford Academic and bibliographic mirrors, but only abstract-level accessible content."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Title + Gómez-Núñez + 2024 search confirmed authorship, journal, DOI and survey summary, without authoritative full text."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "partial",
+            "note": "Oxford Academic exposed the full abstract and bibliographic record but indicated access restrictions for the article text."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "partial",
+            "note": "Broader DOI/title searches found secondary catalog and request-PDF pages; no legitimate open full-text repository copy was verified."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article_page",
+            "url": "https://academic.oup.com/rev/article-abstract/doi/10.1093/reseval/rvae046/7863402",
+            "title": "International research collaboration in personalized medicine between Europe and Latin America and the Caribbean",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "The paper clearly exists and the abstract describes a large survey, but V2 prohibits a KEEP/REVIEW/DROP decision from abstract-only evidence."
+      },
+      "recovery_history": [
+        {
+          "attempt": 1,
+          "package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+          "at": "2026-09-18T22:21:44Z",
+          "reason": "Identity is verified, but accessible authoritative material remained abstract-level; V2 requires substantive evidence for an admission judgement.",
+          "verification": {
+            "identity_verified": true,
+            "evidence_depth": "identity_only_after_recovery",
+            "retrieval_attempts": [
+              {
+                "step": "supplied_url",
+                "outcome": "blocked",
+                "note": "Package retrieval of the Oxford Academic article returned HTTP 403."
+              },
+              {
+                "step": "doi",
+                "outcome": "success",
+                "note": "DOI 10.1093/reseval/rvae046 resolves to the matching Research Evaluation article."
+              },
+              {
+                "step": "exact_title",
+                "outcome": "partial",
+                "note": "Exact-title search found Oxford Academic and bibliographic mirrors, but only abstract-level accessible content."
+              },
+              {
+                "step": "title_author_year",
+                "outcome": "partial",
+                "note": "Title + Gómez-Núñez + 2024 search confirmed authorship, journal, DOI and survey summary, without authoritative full text."
+              },
+              {
+                "step": "official_publisher_or_repository",
+                "outcome": "partial",
+                "note": "Oxford Academic exposed the full abstract and bibliographic record but indicated access restrictions for the article text."
+              },
+              {
+                "step": "broader_identity_search",
+                "outcome": "partial",
+                "note": "Broader DOI/title searches found secondary catalog and request-PDF pages; no legitimate open full-text repository copy was verified."
+              }
+            ],
+            "recovered_sources": [
+              {
+                "kind": "publisher_article_page",
+                "url": "https://academic.oup.com/rev/article-abstract/doi/10.1093/reseval/rvae046/7863402",
+                "title": "International research collaboration in personalized medicine between Europe and Latin America and the Caribbean",
+                "evidence_used": false
+              }
+            ],
+            "verification_note": "The paper clearly exists and the abstract describes a large survey, but V2 prohibits a KEEP/REVIEW/DROP decision from abstract-only evidence."
+          }
+        }
+      ]
     },
     "historical:id:e4073c744e62b06f": {
       "title": "Technological sovereignty and strategic dependencies: The case of the photovoltaic supply chain",
@@ -34128,10 +34283,12 @@
       "date": "2023-12-19",
       "url": "https://doi.org/10.1016/j.jclepro.2023.140222",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-18T22:14:44Z",
-      "last_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7"
+      "last_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+      "verified_at": "2026-09-18T22:21:44Z",
+      "verified_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7"
     },
     "historical:id:5075d58d06cf2c2c": {
       "title": "Strategic Autonomy in Military Production: The EDF and the Constitutional Limits to EU Defence-Industrial Spending Power",
@@ -34139,10 +34296,12 @@
       "date": "2023-12-01",
       "url": "https://doi.org/10.54648/eerr2023026",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-18T22:14:44Z",
-      "last_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7"
+      "last_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+      "verified_at": "2026-09-18T22:21:45Z",
+      "verified_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7"
     },
     "historical:id:78184a7ab755e07d": {
       "title": "Toward an integrated framework for developing European 6G innovation",
@@ -34150,10 +34309,12 @@
       "date": "2023-09-09",
       "url": "https://doi.org/10.1016/j.telpol.2023.102641",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-18T22:14:44Z",
-      "last_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7"
+      "last_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+      "verified_at": "2026-09-18T22:21:45Z",
+      "verified_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7"
     },
     "historical:id:7a84cdfbaa9121de": {
       "title": "Evaluation Superpower, Final Report 2022",
@@ -34161,10 +34322,12 @@
       "date": "2023-02-06",
       "url": "https://www.businessfinland.fi/globalassets/julkaisut/business-finland/vaikuttavuus/evaluation_superpower_final-report_2022.pdf",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-18T22:14:44Z",
-      "last_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7"
+      "last_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+      "verified_at": "2026-09-18T22:21:45Z",
+      "verified_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7"
     },
     "historical:id:2d958c4a449e384e": {
       "title": "IQM Finland exports quantum technology to global markets",
@@ -34172,10 +34335,12 @@
       "date": "2022-08-22",
       "url": "https://www.businessfinland.fi/en/services/Advice-and-market-information/data-bank/cases/2022/quantum-technology-company-iqm-finland-exports-finnish-deep-tech-expertise-with-the-help-of-business-finland/",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-18T22:14:44Z",
-      "last_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7"
+      "last_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+      "verified_at": "2026-09-18T22:21:46Z",
+      "verified_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7"
     },
     "historical:id:e872db62027e0637": {
       "title": "Evaluation panel: New Energy Academy Programme was a good investment",
@@ -34183,10 +34348,12 @@
       "date": "2021-01-01",
       "url": "https://www.aka.fi/globalassets/2-suomen-akatemian-toiminta/4-julkaisut/new-energy-programme-review-23072021final.pdf",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-18T22:14:44Z",
-      "last_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7"
+      "last_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
+      "verified_at": "2026-09-18T22:21:46Z",
+      "verified_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7"
     }
   },
   "packages": {
@@ -44053,6 +44220,13 @@
         "historical:id:7a84cdfbaa9121de",
         "historical:id:2d958c4a449e384e",
         "historical:id:e872db62027e0637"
+      ]
+    },
+    "worker-a-20260918T222452Z-f229dd1d2bfc": {
+      "lane": "A",
+      "created_at": "2026-09-18T22:25:02Z",
+      "record_keys": [
+        "historical:id:065d22064b9f3e75"
       ]
     }
   }

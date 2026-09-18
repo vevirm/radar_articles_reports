@@ -6,27 +6,19 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1406** (Main **657** + Historical **749**)
-- Automatic queue still needing V2 verification: **15** (Main **5** + Historical **10**)
-- Currently assigned to workers: **15** (Main **5** + Historical **10**)
+- Authoritative V2 verified: **1419** (Main **661** + Historical **758**)
+- Automatic queue still needing V2 verification: **1** (Main **0** + Historical **1**)
+- Currently assigned to workers: **1** (Main **0** + Historical **1**)
 - Bounded access-recovery retries still eligible: **0**
-- Hands-on verification needed: **68**
+- Hands-on verification needed: **69**
 - Automatic queue pending and not yet assigned: **0**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260918T221444Z-f8d8a6ea4cd7`
-- Assigned unresolved records: **15**
-  1. `link:https://doi.org/10.1108/fs-11-2025-0260` — Artificial intelligence as a collective transformative experience: a conceptual framework for rational encounter — recovery attempt 3/3
-  2. `link:https://ecfr.eu/article/cold-comfort-what-china-can-teach-europe-about-adaptation/` — Cold comfort: What China can teach Europe about adaptation – European Council on Foreign Relations
-  3. `link:https://doi.org/10.1111/eulj.12519` — Futures in EU governance: Anticipatory governance, strategic foresight and EU Better Regulation
-  4. `link:https://www.nature.com/articles/d41586-026-02919-1` — Europe pushes for space independence amid geopolitical rifts
-  5. `link:https://demoshelsinki.fi/tag/technology/` — Technology Archives | Demos Helsinki
-  6. `historical:id:0e32bbd2adf5dc81` — Funding within large-scale research infrastructure | Vinnova
-  7. `historical:id:f60ea7812be98905` — Inclusion as a science, technology, and innovation policy objective in high-income countries: the decoupling dilemma
-  8. `historical:id:6416bf9fd594b7ec` — Futures in EU governance: Anticipatory governance, strategic foresight and EU Better Regulation
-  - … plus 7 more in the package manifest
+- Current package: `worker-a-20260918T222452Z-f229dd1d2bfc`
+- Assigned unresolved records: **1**
+  1. `historical:id:065d22064b9f3e75` — International research collaboration in personalized medicine between Europe and Latin America and the Caribbean — recovery attempt 2/3
 
 ### Worker B
 - Current package: `worker-b-20260918T165153Z-536ac137d3dd`
@@ -104,3 +96,4 @@ These works no longer consume automatic Deep Scan slots. Their identity is belie
 - `historical:id:9d0da077bf121de2` — **Review of ‘The Emergence of EU Defense Research Policy: From Innovation to Militarization’** — attempts: 3/3 — Defence and Peace Economics — 2019-06-07 — Book review identity confirmed (Defence and Peace Economics 30(4):505-507); text not accessible after the full ladder. — https://doi.org/10.1080/10242694.2019.1571826
 - `historical:id:5dd5533594f180de` — **The emergence of EU defense research policy: from innovation to militarization, innovation, technology, and knowledge management** — attempts: 3/3 — Defence Studies — 2019-04-03 — Book review identity confirmed (Defence Studies 19(2):205-206); text not accessible after the full ladder. — https://doi.org/10.1080/14702436.2019.1586435
 - `historical:id:068ceabb6181be45` — **Innovation system foresight and systemic innovation for the overseas countries and territories** — attempts: 3/3 — Foresight — 2018-03-12 — Article identity confirmed (foresight 20(1):105-122); only the structured abstract is accessible after the full ladder. — https://doi.org/10.1108/fs-07-2017-0034
+- `link:https://doi.org/10.1108/fs-11-2025-0260` — **Artificial intelligence as a collective transformative experience: a conceptual framework for rational encounter** — attempts: 3/3 — foresight — 2026-09-14 — Identity is verified, but the accessible publisher material is abstract-level; V2 does not permit an admission judgement from an abstract alone. — https://doi.org/10.1108/fs-11-2025-0260
