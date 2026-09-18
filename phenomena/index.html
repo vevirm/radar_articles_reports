@@ -16,9 +16,7 @@
 </head>
 <body>
 <main class="wrap pattern-simple-main">
-  <div id="phenomenaSummary" class="summary">Loading</div>
   <section class="pattern-simple-section">
-    <h2>Highest-ranked ongoing phenomena</h2>
     <ul id="phenomena" class="pattern-simple-list"><li class="empty">Loading</li></ul>
   </section>
 </main>
@@ -118,7 +116,14 @@ function wowCycle(items){
   const out=[];for(let round=0;round<3;round++)for(const w of [5,4,3,2,1]){const x=buckets.get(w)[round];if(x)out.push(x)}
   return out;
 }
-function stockWords(reserve,watch){reserve=Number(reserve)||0;watch=Number(watch)||0;if(!reserve&&!watch)return '';const r=reserve?(reserve>=10?' Many more patterns are waiting in reserve.':' More patterns are waiting in reserve.') : '';const w=watch?(watch>=10?' Many others are still under investigation.':' Some others are still under investigation.') : '';return `${r}${w}`}
+function publicPhenomenonSummary(summary,text){
+  const s=clean(summary);
+  if(!s)return phenomenonExplanation(text);
+  const parts=s.match(/[^.!?]+[.!?]?/g)||[];
+  const kept=parts.filter(part=>!/(?:\b\d+\s+(?:current|historical|records?|sources?|publishers?)\b|independent\s+(?:sources?|publishers?)|primary\s+(?:records?|sources?)|controlled issue is supported|evidence (?:count|floor)|records? from|sources? from)/i.test(part));
+  const out=clean(kept.join(' '));
+  return out||phenomenonExplanation(text);
+}
 function render(items){
   const el=document.getElementById('phenomena');
   el.innerHTML=items.length?items.map(x=>`<li data-obviousness="${x.distance||2}"><div class="priority-meta">${esc(x.groupLabel||'Recurring pattern')}</div><strong>${esc(x.text)}</strong><p>${esc(x.explanation||phenomenonExplanation(x.text))}</p></li>`).join(''):'<li class="empty">No ongoing phenomenon is clear enough to show yet.</li>';
@@ -144,10 +149,9 @@ async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});ret
       // claim-native shelf would recreate the pre-reform ranking system.
       const hids=Array.isArray(hi?.publications?.continuity)?hi.publications.continuity:[];
       const hmap=new Map((Array.isArray(hi?.candidates)?hi.candidates:[]).filter(x=>x&&typeof x==='object').map(x=>[clean(x.id),x]));
-      const shown=hids.map(id=>hmap.get(clean(id))).filter(Boolean).map(c=>({text:clean(c.reader_title||c.topic_label),explanation:clean(c.reader_summary||''),records:Number(c.current_record_count)||Number(c.primary_records)||0,sources:Number(c.current_source_count)||Number(c.primary_sources)||0,distance:Number(c.wow)||Number(c.inferential_distance)||3,rankScore:Number(c.score)||0,groupLabel:c.grammar_id==='split_recurrence'?'Returning pattern':c.grammar_id==='era_conjunction'?'Changing pattern':'Recurring pattern'}));
+      const shown=hids.map(id=>hmap.get(clean(id))).filter(Boolean).map(c=>({text:clean(c.reader_title||c.topic_label),explanation:publicPhenomenonSummary(c.reader_summary||'',clean(c.reader_title||c.topic_label)),records:Number(c.current_record_count)||Number(c.primary_records)||0,sources:Number(c.current_source_count)||Number(c.primary_sources)||0,distance:Number(c.wow)||Number(c.inferential_distance)||3,rankScore:Number(c.score)||0,groupLabel:c.grammar_id==='split_recurrence'?'Returning pattern':c.grammar_id==='era_conjunction'?'Changing pattern':'Recurring pattern'}));
       const sel=hi?.selection?.continuity||{};
       const reserve=Number(sel.reserve)||0,watch=Number(sel.watch)||0;
-      document.getElementById('phenomenaSummary').textContent=`The strongest ongoing patterns are shown below.${stockWords(reserve,watch)}`;
       render(wowCycle(shown).slice(0,15));
     }else{
       const established=RadarPhenomena.build(data,history,historyConfig);
@@ -156,12 +160,10 @@ async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});ret
       const returning=unique(established.filter(x=>!x.autoDetected).map(x=>({text:returningStatement(x),records:Number(x.currentCount)||0,sources:Number(x.currentSources)||0,distance:1,rankScore:Math.min(99,(Number(x.score)||0)*4),group:'returning'})));
       const all=rankItems(unique([...changing,...returning]));
       const shown=wowCycle(all).slice(0,15);
-      document.getElementById('phenomenaSummary').textContent='The strongest ongoing patterns are shown below. Older findings help separate lasting patterns from one-off movement.';
       render(shown);
     }
   }catch(e){
     console.error(e);
-    document.getElementById('phenomenaSummary').textContent='Ongoing-phenomena evidence is unavailable.';
     render([]);
   }
 })();
