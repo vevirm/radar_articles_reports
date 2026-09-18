@@ -1531,7 +1531,20 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
             c["reader_eligible"] = False
             c["publication_gate_passes"] = False
 
-        ready = [c for c in pool if c.get("presentation_ready") and clean(c.get("status")) not in {"killed", "dormant"}]
+        # Shelf lifecycle semantics: ``qualified`` means the finding is grounded
+        # enough to compete for a public slot.  ``watch`` means it remains a
+        # developing hypothesis.  This keeps the persistent corpus broad while
+        # preserving the downstream integrity invariant that every published ID
+        # points to a qualified, reader-eligible candidate.  Verification details
+        # remain separate in verification_gate_passes / verification_mode.
+        for c in pool:
+            current_status = clean(c.get("status"))
+            if current_status in {"killed", "dormant"}:
+                continue
+            c["pre_shelf_status"] = current_status
+            c["status"] = "qualified" if c.get("presentation_ready") else "watch"
+
+        ready = [c for c in pool if c.get("presentation_ready") and clean(c.get("status")) == "qualified"]
         ready.sort(key=lambda c: (int(c.get("wow", 0) or 0),) + _selection_rank(c), reverse=True)
 
         # Same-story variants compete for one public narrative.  Keep the strongest
