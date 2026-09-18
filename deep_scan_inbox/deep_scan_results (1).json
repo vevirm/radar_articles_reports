@@ -1,0 +1,1021 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-b-20260918T162850Z-536ac137d3dd",
+  "results": [
+    {
+      "record_key": "historical:id:11a2b0b21715eb40",
+      "source_hash": "57b2c8af",
+      "identity_hash": "e3490e839c7e5a65",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1093/scipol/scag028 -> academic.oup.com advance article; direct curl returned HTTP 403 Cloudflare challenge."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref confirms Science and Public Policy, published 2026-04-28 (record created 2026-03-16); OUP page (academic.oup.com/spp/advance-article/doi/10.1093/scipol/scag028/8664218), found via exact-title search, opened with full text (CC BY-NC-ND)."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://academic.oup.com/spp/advance-article/doi/10.1093/scipol/scag028/8664218",
+            "title": "Research security by roundtable (Science and Public Policy, 2026)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Supplied URL blocked; matching full text recovered through the exact-title search result for the OUP article page."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Analyses Germany's institutional research-security mechanism (KEFs) in the context of the 2024 Council Recommendation on research security."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-04-28"
+        },
+        "unset": [],
+        "reason": "Crossref 'published' and the OUP article history give 28 April 2026; 16 March 2026 is only the DOI record creation date."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Germany's security-relevant research committees offered as a model for research security",
+      "reader_what": "Walker-Munro defends Germany's university ethics committees on security-relevant research as self-governance other states could adopt.",
+      "reader_why": "Offers a research-security approach that screens risky projects while protecting academic freedom.",
+      "reader_more": "Since 2014 the DFG and Leopoldina have promoted Committees for Ethics in Security-Relevant Research (KEFs) at German institutions, now nearly 170, coordinated by a Joint Committee. By 2024, 124 cases had been reviewed and nine received wholly negative votes. The paper argues the model fits the EU's 2024 research-security Recommendation, but flags uneven membership, researcher self-referral and no auditing. It recommends clear mandates, security expertise and a national oversight body.",
+      "deep_analysis": {
+        "work_kind": "legal-policy analysis",
+        "research_question": "Can Germany's KEF model of academic self-regulation serve as a research-security tool for other states?",
+        "main_finding": "KEFs offer a workable, freedom-preserving research-security mechanism, with reforms needed on mandate, membership and auditing.",
+        "method_or_basis": "Descriptive and normative analysis of DFG/Leopoldina guidance, model statutes, activity reports and literature.",
+        "qualification": "Descriptive and normative legal-policy analysis; KEF outcome figures come from DFG/Leopoldina self-reporting, which the author notes may miss unreferred risky research.",
+        "radar_relevance": "Directly concerns European research-security implementation.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research_security.self_assessment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "DFG/Leopoldina Joint Committee on the Handling of Security-Relevant Research",
+            "class": "national_funder"
+          },
+          "mechanism": "assesses",
+          "direction": "expands",
+          "status": "operating",
+          "status_date": "2024",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "DE"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Descriptive and normative legal-policy analysis; KEF outcome figures come from DFG/Leopoldina self-reporting, which the author notes may miss unreferred risky research.",
+          "text": "Germany's KEF system of institutional committees on security-relevant research covered nearly 170 institutions and had reviewed 124 cases by 2024.",
+          "confidence": "high",
+          "status_date_precision": "year"
+        },
+        {
+          "object": "research_security.screening",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Brendan Walker-Munro",
+            "class": "university_group"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-04-28",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "Normative proposal by one author; not an adopted policy.",
+          "text": "Walker-Munro proposes that other states adopt KEF-style committees with national oversight as a research-security instrument.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:a389794c702a37cf",
+      "source_hash": "60df33da",
+      "identity_hash": "4e20acc573e9e6ef",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1080/09662839.2025.2591708 -> tandfonline.com, HTTP 403."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "OpenAlex lists OA copy at UCL Discovery (eprint 10219540); fetched published PDF (CC BY) from discovery.ucl.ac.uk; European Security, published online 22 Dec 2025."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://discovery.ucl.ac.uk/id/eprint/10219540/1/Mauduit_The%20implementation%20of%20research%20.pdf",
+            "title": "The implementation of research security policies in Germany (UCL Discovery)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Supplied URL blocked; full published version recovered from institutional repository via DOI metadata."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Empirical study of how research-security policy is implemented in an EU member state."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Germany's research security rules are narrated inconsistently across government, organisations and researchers",
+      "reader_what": "Mixed-methods study finds weak links between government, organisational and researcher narratives on research security, creating implementation uncertainty.",
+      "reader_why": "Unclear national framing leaves universities and researchers guessing how to apply security measures.",
+      "reader_more": "The authors apply the narrative policy framework to Germany's research-security measures. Sentiment analysis shows government and organisational actors still view international collaboration, including with China, overwhelmingly positively. Content analysis and 21 expert interviews show few shared elements between levels. The paper proposes a 2×2 matrix of narrative trajectories and urges policymakers to create clarity rather than rely on top-down or purely bottom-up approaches.",
+      "deep_analysis": {
+        "work_kind": "empirical policy study",
+        "research_question": "How is research-security implementation narrated across micro, meso and macro levels in Germany?",
+        "main_finding": "Narratives diverge across governance levels, creating uncertainty for implementers and endangering policy effectiveness.",
+        "method_or_basis": "Sentiment analysis, qualitative content analysis and 21 semi-structured expert interviews.",
+        "qualification": "Single-country (Germany) study with 21 interviews plus document analysis; sentiment analysis covers meso/macro documents only.",
+        "radar_relevance": "Evidence on member-state research-security implementation.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research_security.self_assessment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Rüland, Rüffin, Wang and Mauduit",
+            "class": "university_group"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_contested",
+          "status": "operating",
+          "status_date": "2025-12-22",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "DE"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "Single-country (Germany) study with 21 interviews plus document analysis; sentiment analysis covers meso/macro documents only.",
+          "text": "Research on Germany finds government, organisational and researcher narratives on research-security implementation are weakly linked, creating uncertainty for implementers.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:792eb0799f1d6011",
+      "source_hash": "d170ddb9",
+      "identity_hash": "2b9ad77cce09dfc3",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied Springer page https://link.springer.com/article/10.1007/s10961-025-10308-5 (HTTP 200, dateModified 2025-12-22) text matched title and authors."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "OpenAlex: Journal of Technology Transfer, 2025-12-22, OA with PDF and Sapienza repository copy."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s10961-025-10308-5",
+            "title": "Fostering regional entrepreneurial ecosystem development (J Technol Transf)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantial article text read from supplied source (abstract, framework, methods)."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Longitudinal analysis of European regions' innovation ecosystems and science-park internationalisation."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Science parks joining a global network strengthen their regions' entrepreneurial ecosystems",
+      "reader_what": "When European science parks join IASP, their regions show stronger intermediary services, talent attraction and cross-regional knowledge spillovers.",
+      "reader_why": "Suggests supporting parks' international networking, not just creation, especially in weaker regions.",
+      "reader_more": "Using entry and exit data on science and technology parks in the International Association of Science Parks (IASP) across European regions, the authors estimate effects with a non-parametric difference-in-differences method for panel data. Joining strengthens the intermediary dimension of regional entrepreneurial ecosystems. Effects appear immediately and are larger in regions with lower GDP per capita and outside the EU.",
+      "deep_analysis": {
+        "work_kind": "empirical study",
+        "research_question": "Does joining a global science-park network affect regional entrepreneurial ecosystem development?",
+        "main_finding": "IASP membership strengthens regional ecosystems' intermediary dimension, talent attraction and knowledge spillovers.",
+        "method_or_basis": "Longitudinal regional panel; non-parametric generalisation of difference-in-differences for time-series cross-sectional data.",
+        "qualification": "Observational panel of IASP member parks across European regions; effects are on ecosystem indicators and are context-dependent, strongest in poorer and non-EU regions.",
+        "radar_relevance": "Evidence for European regional innovation policy.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "innovation.regional_capacity",
+          "secondary_objects": [
+            "research.knowledge_transfer"
+          ],
+          "actor": {
+            "name": "Ancona and Ceci",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "operating",
+          "status_date": "2025-12-22",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "effect",
+          "qualification": "Observational panel of IASP member parks across European regions; effects are on ecosystem indicators and are context-dependent, strongest in poorer and non-EU regions.",
+          "text": "European regions whose science parks joined the IASP network showed stronger intermediary services and knowledge spillovers in their entrepreneurial ecosystems.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:ae55418dfdd17944",
+      "source_hash": "61593e4b",
+      "identity_hash": "0faf6bbc44effa5d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Fetched Belfer Center release (HTTP 200) summarising Meckling et al., Nature Energy, 12 Sept 2022."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Press release has no DOI; underlying Nature Energy study not needed to decide on European relevance."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_web_page",
+            "url": "https://www.belfercenter.org/publication/new-study-examines-drivers-government-investment-energy-innovation",
+            "title": "New Study Examines Drivers of Government Investment in Energy Innovation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Page is a press release about a global comparative study of eight major economies."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NOT_SUBSTANTIVE_EU",
+        "reason": "Global study of eight major economies' energy RD&D; Europe appears only via Germany as one case and passing context, not substantively."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "press release",
+        "research_question": "",
+        "main_finding": "Mission Innovation participation and competition with China drove clean-energy RD&D funding 2001-2018, still insufficient for climate goals.",
+        "method_or_basis": "Summary of a two-dataset comparative study.",
+        "qualification": "Secondary summary of a study.",
+        "radar_relevance": "Fails Strand A: European relevance incidental.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:c24eca9c42fb2dcf",
+      "source_hash": "c42aa0ae",
+      "identity_hash": "35859f04d5eae6b5",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Fetched Demos Helsinki blog (HTTP 200), dated June 2018, by Mikael Sokero and Julia Jousilahti."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Blog post; no DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://demoshelsinki.fi/hot-summer-of-research-and-innovation-policy-whats-cooking-in-brussels/",
+            "title": "Hot Summer of Research and Innovation Policy – What's Cooking in Brussels",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Short trip-report blog listing four discussion topics (Horizon Europe missions, lifelong learning, open science, science-humanities links)."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NOT_SUBSTANTIVE_EU",
+        "reason": "Impressionistic blog of topics overheard in Brussels, partly based on rumours; no analysis or evidence of lasting historical value."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "Hot Summer of Research and Innovation Policy – What's Cooking in Brussels",
+          "authors": "Mikael Sokero; Julia Jousilahti"
+        },
+        "unset": [],
+        "reason": "Scanner title duplicated the site name and authors were empty; the post names Sokero and Jousilahti as authors."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "blog post",
+        "research_question": "",
+        "main_finding": "Lists four science-policy debates in Brussels in 2018.",
+        "method_or_basis": "Informal observations.",
+        "qualification": "Speculative.",
+        "radar_relevance": "Fails: not substantive.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1108/fs-11-2025-0260",
+      "source_hash": "785dd4b0",
+      "identity_hash": "739f62316d8487ca",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1108/fs-11-2025-0260 -> emerald.com/fs/article/doi/10.1108/FS-11-2025-0260/1396231/..., HTTP 403."
+          },
+          {
+            "step": "doi",
+            "outcome": "partial",
+            "note": "Crossref: Ali Chaparak, foresight, 2026-09-14, structured abstract only; Unpaywall is_oa=false."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failed",
+            "note": "Quoted-title search with author returned no copy; found author's ResearchGate profile and a 2025 conference paper 'New Technologies as Transformative Experiences'."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failed",
+            "note": "Crossref title query returned only this record and an unrelated tourism chapter."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Emerald blocked (403); no repository copy per Unpaywall; ResearchGate profile lists no full text of this article."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "The related 2025 conference paper by the same author is a different work and was not used as substitute evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "crossref_metadata",
+            "url": "https://api.crossref.org/works/10.1108/fs-11-2025-0260",
+            "title": "Crossref record with structured abstract",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Published four days before this scan; full text not yet available in any open location."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "B",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity confirmed via Crossref (structured abstract); no legitimate full text after the full ladder."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:93f53dffe31df9db",
+      "source_hash": "c928bf5d",
+      "identity_hash": "6a2cf20749e15707",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "linkinghub.elsevier.com/retrieve/pii/S1751157721000638 returned only a redirect shell, no article text."
+          },
+          {
+            "step": "doi",
+            "outcome": "partial",
+            "note": "OpenAlex/Crossref: Journal of Informetrics 15, 101192, online 2021-07-24; not OA; Unpaywall no repository copy."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "arXiv API search (triangular, collaborations, author Argyrakis) found 2011.04553 'Triangular research and innovation collaborations in the European area', same four authors (Angelou, Maragakis, Kosmidis, Argyrakis); full PDF fetched."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "preprint_full_text",
+            "url": "https://arxiv.org/pdf/2011.04553v1",
+            "title": "Triangular research and innovation collaborations in the European area (arXiv preprint)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Preprint title lacks 'The evolution of' but authors, data and design match the published article."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Analyses EU Framework Programme collaboration networks among European NUTS2 regions from CORDIS data."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU Framework Programme projects link regions in tight triangles; patent co-invention does not",
+      "reader_what": "FP collaborations among European regions form three-way links more than chance; patent collaborations strongly avoid them.",
+      "reader_why": "",
+      "reader_more": "The authors build a two-layer network of European NUTS2 regions: one from 34,061 Framework Programme projects in CORDIS and one from EPO patents with inventors in different regions since 2000. They compare real networks with shuffled versions over 28 six-year windows. FP collaborations favour closed triangles, while patenting shows mostly isolated pairwise links. Triangle counts reveal this more clearly than the clustering coefficient.",
+      "deep_analysis": {
+        "work_kind": "network analysis",
+        "research_question": "Do European regions prefer triangular over pairwise collaboration in FP projects and patents?",
+        "main_finding": "FP collaborations favour triangles relative to random networks; patent collaborations strongly disfavour them.",
+        "method_or_basis": "Multiplex network of NUTS2 regions from CORDIS FP data and EPO patents; z-scores vs shuffled networks; clustering coefficient.",
+        "qualification": "Network topology study on regional co-participation; shows collaboration patterns, not their causes or quality. Evidence read from the arXiv preprint of the published article.",
+        "radar_relevance": "Structural evidence on how EU framework programmes shape inter-regional collaboration.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Angelou, Maragakis, Kosmidis and Argyrakis",
+            "class": "university_group"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "operating",
+          "status_date": "2021",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Network topology study on regional co-participation; shows collaboration patterns, not their causes or quality. Evidence read from the arXiv preprint of the published article.",
+          "text": "Across 28 time windows, EU Framework Programme collaborations among NUTS2 regions formed more triangles than random networks, unlike patent co-invention networks.",
+          "confidence": "medium",
+          "status_date_precision": "year"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:f067422a8d923845",
+      "source_hash": "b0e2f2a5",
+      "identity_hash": "5a64ff477c321441",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Fetched https://ai-watch.ec.europa.eu/countries/ireland/ireland-ai-strategy-report_en (HTTP 200); AI Watch country page, footer 'Last updated: 1 September 2021' where shown."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Web report page; no DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_web_page",
+            "url": "https://ai-watch.ec.europa.eu/countries/ireland/ireland-ai-strategy-report_en",
+            "title": "Ireland AI Strategy Report (AI Watch)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official Commission AI Watch page read in full."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Official EU monitoring report on Ireland's national AI strategy, including research and innovation measures."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "European Commission – AI Watch"
+        },
+        "unset": [],
+        "reason": "Issuing service shown on the page is the Commission's AI Watch knowledge service; generic 'ec.europa.eu' label replaced."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Ireland's national AI strategy as seen by AI Watch before its release",
+      "reader_what": "AI Watch reports Ireland preparing 'AI – Here for Good', expected mid-2021, covering research, skills, data and ethics.",
+      "reader_why": "",
+      "reader_more": "The page describes the strategy as still forthcoming, led by the Department of Enterprise, Trade and Employment after wide stakeholder consultation. Planned areas include societal opportunities, enterprise adoption, research and innovation, skills, data and infrastructure, public-sector AI and governance. It also lists existing initiatives, including COVID-19 applications and a Border region enterprise fund supporting AI projects. The page predates the final strategy, so it records intentions rather than adopted measures.",
+      "deep_analysis": {
+        "work_kind": "official monitoring report",
+        "research_question": "",
+        "main_finding": "Ireland planned an integrated national AI strategy aligned with EU and OECD approaches.",
+        "method_or_basis": "AI Watch summary of national strategy documents and policy initiatives.",
+        "qualification": "Written before the strategy's release; describes expected content, not adopted measures.",
+        "radar_relevance": "Historical baseline of member-state AI and AI-research policy.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "ai.adoption",
+          "secondary_objects": [
+            "ai.research_use"
+          ],
+          "actor": {
+            "name": "Department of Enterprise, Trade and Employment (Ireland)",
+            "class": "member_state"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "intention",
+          "status_date": "2021",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "IE"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Written before the strategy's release; describes expected content, not adopted measures.",
+          "text": "Ireland's Department of Enterprise, Trade and Employment was preparing a national AI strategy covering research, adoption, skills and governance, expected in 2021.",
+          "confidence": "medium",
+          "status_date_precision": "year"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:966e32fa87a919e7",
+      "source_hash": "d3d42c15",
+      "identity_hash": "5f29a624dbe06990",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Fetched https://ai-watch.ec.europa.eu/countries/italy/italy-ai-strategy-report_en (HTTP 200); AI Watch country page, footer 'Last updated: 1 September 2021' where shown."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Web report page; no DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_web_page",
+            "url": "https://ai-watch.ec.europa.eu/countries/italy/italy-ai-strategy-report_en",
+            "title": "Italy AI Strategy Report (AI Watch)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official Commission AI Watch page read in full."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Official EU monitoring report on Italy's national AI strategy, including research and innovation measures."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "European Commission – AI Watch"
+        },
+        "unset": [],
+        "reason": "Issuing service shown on the page is the Commission's AI Watch knowledge service; generic 'ec.europa.eu' label replaced."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Italy's draft national AI strategy of 2020 as summarised by AI Watch",
+      "reader_what": "Italy's 2020 draft AI strategy set six action lines, including AI research and innovation, with an envisaged EUR 2.5 billion.",
+      "reader_why": "",
+      "reader_more": "In October 2020 the Ministry of Economic Development released a draft national AI strategy for public consultation, building on a July 2020 expert proposal. It covers education and reskilling, research and innovation for competitiveness, an ethical regulatory framework, international networks, data infrastructure and public-service use. The envisaged public investment was EUR 2.5 billion, flagged as subject to change. A final version was expected in 2021.",
+      "deep_analysis": {
+        "work_kind": "official monitoring report",
+        "research_question": "",
+        "main_finding": "Italy's draft strategy aimed to raise AI research, skills and adoption with EUR 2.5 billion public investment.",
+        "method_or_basis": "AI Watch summary of national strategy documents and policy initiatives.",
+        "qualification": "Draft for consultation; budget figure provisional.",
+        "radar_relevance": "Historical baseline of member-state AI and AI-research policy.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "ai.adoption",
+          "secondary_objects": [
+            "ai.research_use"
+          ],
+          "actor": {
+            "name": "Ministry of Economic Development (Italy)",
+            "class": "member_state"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2020-10",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "IT"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Draft for consultation; budget figure provisional.",
+          "text": "Italy released a draft national AI strategy for consultation in October 2020, envisaging EUR 2.5 billion of public investment including AI research.",
+          "confidence": "medium",
+          "status_date_precision": "month"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:648abd7662187e73",
+      "source_hash": "c6503a24",
+      "identity_hash": "1097a51724f66e98",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Fetched https://ai-watch.ec.europa.eu/countries/hungary/hungary-ai-strategy-report_en (HTTP 200); AI Watch country page, footer 'Last updated: 1 September 2021' where shown."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Web report page; no DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_web_page",
+            "url": "https://ai-watch.ec.europa.eu/countries/hungary/hungary-ai-strategy-report_en",
+            "title": "Hungary AI Strategy Report (AI Watch)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official Commission AI Watch page read in full."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Official EU monitoring report on Hungary's national AI strategy, including research and innovation measures."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "European Commission – AI Watch"
+        },
+        "unset": [],
+        "reason": "Issuing service shown on the page is the Commission's AI Watch knowledge service; generic 'ec.europa.eu' label replaced."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Hungary's 2020–2030 AI strategy, built with a 320-member AI Coalition",
+      "reader_what": "Hungary published a national AI strategy in September 2020 targeting data economy, R&D&I and AI uptake to 2030.",
+      "reader_why": "",
+      "reader_more": "The Ministry of Innovation and Technology published the strategy, drafted by the Artificial Intelligence Coalition, a partnership of government, academics and IT firms with over 320 members formed in 2018. It aims to strengthen foundations such as the data economy, research, development and innovation, and AI uptake, with goals to 2030 and an action plan to 2025. The strategy is meant to be reviewed at least every two years.",
+      "deep_analysis": {
+        "work_kind": "official monitoring report",
+        "research_question": "",
+        "main_finding": "Hungary adopted a 2020-2030 AI strategy spanning data, R&D&I and adoption.",
+        "method_or_basis": "AI Watch summary of national strategy documents and policy initiatives.",
+        "qualification": "Summary of stated goals; implementation not assessed.",
+        "radar_relevance": "Historical baseline of member-state AI and AI-research policy.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "ai.adoption",
+          "secondary_objects": [
+            "ai.research_use"
+          ],
+          "actor": {
+            "name": "Ministry of Innovation and Technology (Hungary)",
+            "class": "member_state"
+          },
+          "mechanism": "adopts",
+          "direction": "expands",
+          "status": "adopted",
+          "status_date": "2020-09",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "HU"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Summary of stated goals; implementation not assessed.",
+          "text": "Hungary's Ministry of Innovation and Technology published a 2020-2030 national AI strategy in September 2020, covering data economy, R&D&I and AI uptake.",
+          "confidence": "medium",
+          "status_date_precision": "month"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:85ecbd50c21035d1",
+      "source_hash": "6ee5dbc3",
+      "identity_hash": "a6324a55068dacd5",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Fetched https://ai-watch.ec.europa.eu/countries/france/france-ai-strategy-report_en (HTTP 200); AI Watch country page, footer 'Last updated: 1 September 2021' where shown."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Web report page; no DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_web_page",
+            "url": "https://ai-watch.ec.europa.eu/countries/france/france-ai-strategy-report_en",
+            "title": "France AI Strategy Report (AI Watch)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official Commission AI Watch page read in full."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Official EU monitoring report on France's national AI strategy, including research and innovation measures."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "European Commission – AI Watch"
+        },
+        "unset": [],
+        "reason": "Issuing service shown on the page is the Commission's AI Watch knowledge service; generic 'ec.europa.eu' label replaced."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "France's 'AI for Humanity' strategy committed EUR 1.5 billion, including research funding",
+      "reader_what": "France's 2018 AI strategy, based on the Villani report, pledged EUR 1.5 billion by 2022, EUR 700 million for research.",
+      "reader_why": "Early large national AI research commitment in the EU, shaping later European AI policy debates.",
+      "reader_more": "President Macron presented the five-year 'AI for Humanity' strategy in March 2018, built on MP Cédric Villani's report. Its aims were to strengthen AI education and talent, pursue open data and set an ethical framework. The state pledged EUR 1.5 billion by end-2022, including EUR 700 million for research. The AI Watch page also notes a renewed data strategy in 2021 and a fourth Investments for the Future programme in 2022.",
+      "deep_analysis": {
+        "work_kind": "official monitoring report",
+        "research_question": "",
+        "main_finding": "France committed EUR 1.5 billion to AI to 2022, EUR 700 million for research.",
+        "method_or_basis": "AI Watch summary of national strategy documents and policy initiatives.",
+        "qualification": "Pledged amounts as reported; actual spending not verified.",
+        "radar_relevance": "Historical baseline of member-state AI and AI-research policy.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "ai.adoption",
+          "secondary_objects": [
+            "ai.research_use"
+          ],
+          "actor": {
+            "name": "Government of France",
+            "class": "member_state"
+          },
+          "mechanism": "adopts",
+          "direction": "expands",
+          "status": "adopted",
+          "status_date": "2018-03",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "FR"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Pledged amounts as reported; actual spending not verified.",
+          "text": "France's March 2018 national AI strategy pledged EUR 1.5 billion to AI by end-2022, including EUR 700 million for research.",
+          "confidence": "medium",
+          "status_date_precision": "month"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:fbc1af578830594e",
+      "source_hash": "18d4ebf1",
+      "identity_hash": "81d470cc1d6b1847",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Fetched https://ai-watch.ec.europa.eu/countries/finland/finland-ai-strategy-report_en (HTTP 200); AI Watch country page, footer 'Last updated: 1 September 2021' where shown."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Web report page; no DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_web_page",
+            "url": "https://ai-watch.ec.europa.eu/countries/finland/finland-ai-strategy-report_en",
+            "title": "Finland AI Strategy Report (AI Watch)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official Commission AI Watch page read in full."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Official EU monitoring report on Finland's national AI strategy, including research and innovation measures."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "European Commission – AI Watch"
+        },
+        "unset": [],
+        "reason": "Issuing service shown on the page is the Commission's AI Watch knowledge service; generic 'ec.europa.eu' label replaced."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Finland's 2017 AI strategy aimed to make the country a leading AI nation",
+      "reader_what": "Finland published 'Finland's age of artificial intelligence' in October 2017, aiming at competitiveness and better public services.",
+      "reader_why": "",
+      "reader_more": "The Ministry of Economic Affairs and Employment published the strategy in October 2017 within the broader AI Finland programme. It assessed Finland's strengths and weaknesses and set goals: business competitiveness, better and more efficient public services, and societal wellbeing. It was complemented in 2018 by a report on work in the age of AI. The page lists AI-related innovation ecosystems such as Smart Otaniemi and OuluHealth.",
+      "deep_analysis": {
+        "work_kind": "official monitoring report",
+        "research_question": "",
+        "main_finding": "Finland set out an early national AI strategy under the AI Finland programme.",
+        "method_or_basis": "AI Watch summary of national strategy documents and policy initiatives.",
+        "qualification": "Summary of strategy aims; outcomes not assessed.",
+        "radar_relevance": "Historical baseline of member-state AI and AI-research policy.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "ai.adoption",
+          "secondary_objects": [
+            "ai.research_use"
+          ],
+          "actor": {
+            "name": "Ministry of Economic Affairs and Employment (Finland)",
+            "class": "member_state"
+          },
+          "mechanism": "adopts",
+          "direction": "expands",
+          "status": "adopted",
+          "status_date": "2017-10",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "FI"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Summary of strategy aims; outcomes not assessed.",
+          "text": "Finland's Ministry of Economic Affairs and Employment published a national AI strategy in October 2017 aiming to position Finland as a leading AI country.",
+          "confidence": "medium",
+          "status_date_precision": "month"
+        }
+      ]
+    }
+  ]
+}
