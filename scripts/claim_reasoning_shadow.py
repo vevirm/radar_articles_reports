@@ -608,9 +608,30 @@ def level3_findings(nodes: Iterable[dict[str, Any]], evaluated_on: dt.date) -> l
         unique[key] = item
     return sorted(unique.values(), key=lambda x: (clean(x.get("grammar_id")), clean(x.get("object") or x.get("objective_object")), clean(x.get("commitment_claim_id"))))
 
-def opposing_movements(nodes: Iterable[dict[str, Any]], evaluated_on: dt.date) -> list[dict[str, Any]]:
+def opposing_movements(
+    nodes: Iterable[dict[str, Any]],
+    evaluated_on: dt.date,
+    vocab: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
+    """R-50/R-51: keep a living stock of same-object opposing movements.
+
+    Candidate formation is deliberately broader than reader publication:
+    any current primary object with at least one independent record pulling toward
+    expansion and at least one pulling toward constraint becomes a stock candidate.
+    R-51 (>=3 records and >=2 sources on *each* side) is stored separately as the
+    reader evidence floor. This prevents the publication floor from erasing the
+    reserve/watch stock.
+
+    The object binding follows the specification exactly: a claim contributes to its
+    canonical object and its reviewed secondary_objects. We do not invent topic or
+    cluster joins. The constraining side includes contracts, becomes_conditional and
+    becomes_contested, matching the worked "build capacity vs make capacity
+    conditional" example.
+    """
+    del vocab  # retained only for call-site compatibility
     eligible_scopes = {"eu", "member_state", "associated_country", "company_in_eu"}
-    by_object_dir: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
+    by_object_side: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
+
     for n in nodes:
         if not n.get("_primary") or clean(n.get("era")) != "current":
             continue
@@ -620,35 +641,108 @@ def opposing_movements(nodes: Iterable[dict[str, Any]], evaluated_on: dt.date) -
         d = _date(n.get("status_date"))
         if d and (evaluated_on - d).days > 180:
             continue
+
         direction = clean(n.get("direction"))
-        if direction in {"expands", "contracts"}:
-            by_object_dir[(clean(n.get("object")), direction)].append(n)
-    out = []
-    for obj in sorted({k[0] for k in by_object_dir}):
-        left, right = by_object_dir[(obj, "expands")], by_object_dir[(obj, "contracts")]
-        def side_ok(rows: list[dict[str, Any]]) -> bool:
-            return len({clean(r.get("_record_id")) for r in rows}) >= 3 and len({clean(r.get("_source")).lower() for r in rows}) >= 2
-        if not (side_ok(left) and side_ok(right)):
+        if direction == "expands":
+            side = "expands"
+        elif direction in {"contracts", "becomes_conditional", "becomes_contested"}:
+            side = "constrains"
+        else:
             continue
-        def weighted(rows: list[dict[str, Any]]) -> float:
-            per_source = Counter()
-            total = 0.0
-            for r in sorted(rows, key=lambda x: clean(x.get("status_date")), reverse=True):
-                src = clean(r.get("_source")).lower()
-                per_source[src] += 1
-                independence = 1.0 / (2 ** (per_source[src] - 1))
-                d = _date(r.get("status_date"))
-                age = (evaluated_on - d).days if d else 999
-                freshness = 1.0 if age <= 90 else 0.85 if age <= 180 else 0.70
-                attrs = r.get("attributes") if isinstance(r.get("attributes"), dict) else {}
-                witness = 1.2 if attrs.get("hostile_witness") is True and clean((r.get("actor") or {}).get("class")) in {"eu_body", "member_state", "national_funder", "third_country", "court"} else 1.0
-                corroboration = min(1.3, max(1.0, float(attrs.get("corroboration_factor", 1.0) or 1.0)))
-                total += (float(r.get("merit", 0) or 0) / 100.0) * KIND_WEIGHT.get(clean(r.get("kind")), 0.5) * STATUS_WEIGHT.get(clean(r.get("status")), 0.0) * independence * freshness * witness * corroboration
-            return round(total, 4)
+
+        for obj in _claim_objects(n):
+            if obj:
+                by_object_side[(obj, side)].append(n)
+
+    def record_ids(rows: list[dict[str, Any]]) -> set[str]:
+        return {clean(r.get("_record_id")) for r in rows if clean(r.get("_record_id"))}
+
+    def source_ids(rows: list[dict[str, Any]]) -> set[str]:
+        return {clean(r.get("_source")).lower() for r in rows if clean(r.get("_source"))}
+
+    def weighted(rows: list[dict[str, Any]]) -> float:
+        # One record gets one vote on a side even when Deep Scan emitted several
+        # claims naming the same object.
+        by_record: dict[str, dict[str, Any]] = {}
+        for r in rows:
+            rid = clean(r.get("_record_id"))
+            old = by_record.get(rid)
+            if old is None or float(r.get("merit", 0) or 0) > float(old.get("merit", 0) or 0):
+                by_record[rid] = r
+        per_source = Counter()
+        total = 0.0
+        for r in sorted(by_record.values(), key=lambda x: clean(x.get("status_date")), reverse=True):
+            src = clean(r.get("_source")).lower()
+            per_source[src] += 1
+            independence = 1.0 / (2 ** (per_source[src] - 1))
+            d = _date(r.get("status_date"))
+            age = (evaluated_on - d).days if d else 999
+            freshness = 1.0 if age <= 90 else 0.85 if age <= 180 else 0.70
+            attrs = r.get("attributes") if isinstance(r.get("attributes"), dict) else {}
+            actor = r.get("actor") if isinstance(r.get("actor"), dict) else {}
+            witness = (
+                1.2
+                if attrs.get("hostile_witness") is True
+                and clean(actor.get("class")) in {"eu_body", "member_state", "national_funder"}
+                else 1.0
+            )
+            corroboration = min(1.3, max(1.0, float(attrs.get("corroboration_factor", 1.0) or 1.0)))
+            total += (
+                (float(r.get("merit", 0) or 0) / 100.0)
+                * KIND_WEIGHT.get(clean(r.get("kind")), 0.5)
+                * STATUS_WEIGHT.get(clean(r.get("status")), 0.0)
+                * independence
+                * freshness
+                * witness
+                * corroboration
+            )
+        return round(total, 4)
+
+    out: list[dict[str, Any]] = []
+    objects = sorted({obj for obj, _ in by_object_side})
+    for obj in objects:
+        left0 = by_object_side[(obj, "expands")]
+        right0 = by_object_side[(obj, "constrains")]
+
+        # R-53: if one record carries both pulls on the object, treat it as context
+        # rather than letting it vote twice.
+        ambiguous = record_ids(left0) & record_ids(right0)
+        left = [r for r in left0 if clean(r.get("_record_id")) not in ambiguous]
+        right = [r for r in right0 if clean(r.get("_record_id")) not in ambiguous]
+
+        lrecords, rrecords = record_ids(left), record_ids(right)
+        if not lrecords or not rrecords:
+            continue
+        lsources, rsources = source_ids(left), source_ids(right)
+        floor = (
+            len(lrecords) >= 3
+            and len(rrecords) >= 3
+            and len(lsources) >= 2
+            and len(rsources) >= 2
+        )
         lw, rw = weighted(left), weighted(right)
         total = lw + rw
         pull = None if total <= 0 else round(100 * lw / total, 1)
-        out.append({"level": 4, "grammar_id": "opposing_movements", "object": obj, "expands_records": len({r.get('_record_id') for r in left}), "contracts_records": len({r.get('_record_id') for r in right}), "expands_sources": len({clean(r.get('_source')).lower() for r in left}), "contracts_sources": len({clean(r.get('_source')).lower() for r in right}), "expands_weight": lw, "contracts_weight": rw, "expands_pull_preliminary": pull, "note": "Shadow diagnostic only; hostile-witness/action-dedup metadata are applied only when explicitly present."})
+        out.append(
+            {
+                "level": 4,
+                "grammar_id": "opposing_movements",
+                "trend_scope": "object",
+                "object": obj,
+                "expands_records": len(lrecords),
+                "contracts_records": len(rrecords),  # compatibility key: right/constraining side
+                "expands_sources": len(lsources),
+                "contracts_sources": len(rsources),
+                "expands_weight": lw,
+                "contracts_weight": rw,
+                "expands_pull_preliminary": pull,
+                "trend_stock_passes": True,
+                "trend_evidence_floor_passes": floor,
+                "score_gate_passes": floor,
+                "right_directions": ["contracts", "becomes_conditional", "becomes_contested"],
+                "note": "Claim-native trend stock; R-51 is a reader floor, not a candidate-formation floor.",
+            }
+        )
     return out
 
 
@@ -1427,7 +1521,7 @@ def run_shadow(root: Path = ROOT, evaluated_at: str | None = None) -> dict[str, 
     expressiveness = claim_expressiveness(nodes)
     level2 = corroborated_claims(nodes)
     level3 = level3_findings(nodes, ev_date)
-    level4 = opposing_movements(nodes, ev_date)
+    level4 = opposing_movements(nodes, ev_date, vocab)
     dependency = dependency_pathways(nodes, vocab, distance)
     criteria = conflicting_criteria(nodes, vocab, distance)
     latent = latent_channels(nodes, vocab)

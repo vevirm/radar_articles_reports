@@ -605,7 +605,7 @@ def detect_claim_reasoning(raw: dict[str, Any], root: Path = ROOT, evaluated_at:
         "level2_corroborated": corroborated_claims(nodes),
         "level3_sequence_gap": level3_findings(nodes, ev_date),
         "level3_era_conjunction": era_conjunctions(nodes),
-        "level4_opposing_movements": opposing_movements(nodes, ev_date),
+        "level4_opposing_movements": opposing_movements(nodes, ev_date, vocab),
         "level5_dependency_pathway": dependency_pathways(nodes, vocab, distance),
         "level4_5_conflicting_criteria": conflicting_criteria(nodes, vocab, distance),
         "level5_latent_channel": latent_channels(nodes, vocab),
@@ -628,9 +628,14 @@ def detect_claim_reasoning(raw: dict[str, Any], root: Path = ROOT, evaluated_at:
 
 def _candidate_key(c: dict[str, Any]) -> str:
     grammar = clean(c.get("grammar_id"))
+    # Trend identity must survive movement of individual supporting records.  A
+    # controlled object/cluster key is the underlying thing being pulled, not one
+    # transient evidence claim.
+    if grammar == "opposing_movements" and clean(c.get("trend_key")):
+        return "|".join([grammar, clean(c.get("trend_key"))])
     endpoints = [clean(x) for x in c.get("endpoint_objects", []) if clean(x)] if isinstance(c.get("endpoint_objects"), list) else []
     if not endpoints:
-        for key in ("capability_object", "dependency_object", "object", "objective_object", "delivery_object"):
+        for key in ("capability_object", "dependency_object", "object", "cluster", "objective_object", "delivery_object"):
             if clean(c.get(key)):
                 endpoints.append(clean(c.get(key)))
     if not endpoints:
@@ -963,16 +968,50 @@ def _trend_side(rows: list[dict[str, Any]], evaluated_on: dt.date) -> tuple[list
     return kept, round(total, 6), len({clean(r.get("_source")).lower() for r in rows if clean(r.get("_source"))})
 
 
-def _trend_payload(raw_candidate: dict[str, Any], nodes: list[dict[str, Any]], evaluated_on: dt.date) -> dict[str, Any] | None:
+def _trend_scope_label(scope_kind: str, scope_key: str) -> str:
+    del scope_kind
+    text = clean(scope_key).replace(".", " ").replace("_", " ")
+    aliases = {
+        "compute capacity": "compute capacity",
+        "research collaboration": "research collaboration",
+        "research system governance": "research-system governance",
+        "research infrastructure": "research infrastructure",
+        "research system capacity": "research-system capacity",
+        "industrial competitiveness": "industrial competitiveness",
+        "innovation system performance": "innovation-system performance",
+        "goal strategic autonomy": "strategic autonomy",
+        "horizon budget 2028 34": "the next Horizon budget",
+        "research security screening": "research-security screening",
+        "talent retention": "researcher retention",
+        "ai governance": "AI governance",
+    }
+    return aliases.get(text, text or "this object")
+
+
+def _trend_payload(
+    raw_candidate: dict[str, Any],
+    nodes: list[dict[str, Any]],
+    evaluated_on: dt.date,
+    vocab: dict[str, Any],
+) -> dict[str, Any] | None:
+    """R-50..R-59 trend payload over one controlled object.
+
+    The stock and the shelf are intentionally separate. Once both opposing pulls
+    exist, the pair is retained in stock. Reader publication still requires the
+    stronger R-51 floor of >=3 current records and >=2 independent sources on each
+    side. C-08 keeps this structural verification separate from Level-5 falsifiers.
+    """
+    del vocab
     obj = clean(raw_candidate.get("object"))
     if not obj:
         return None
-    rows = []
+
+    rows: list[dict[str, Any]] = []
     for n in nodes:
         if not n.get("_primary") or clean(n.get("era")) != "current" or obj not in _node_objects(n):
             continue
         scope = n.get("scope") if isinstance(n.get("scope"), dict) else {}
-        if clean(scope.get("level")) not in {"eu","member_state","associated_country","company_in_eu"}:
+        if clean(scope.get("level")) not in {"eu", "member_state", "associated_country", "company_in_eu"}:
             continue
         d = _date_only(n.get("status_date"))
         try:
@@ -980,50 +1019,131 @@ def _trend_payload(raw_candidate: dict[str, Any], nodes: list[dict[str, Any]], e
                 continue
         except ValueError:
             pass
-        if clean(n.get("direction")) in {"expands","contracts"}:
+        direction = clean(n.get("direction"))
+        if direction == "expands" or direction in {"contracts", "becomes_conditional", "becomes_contested"}:
             rows.append(n)
+
+    def side_of(n: dict[str, Any]) -> str:
+        return "expands" if clean(n.get("direction")) == "expands" else "constrains"
+
+    # R-53: a record carrying both sides is context, not two votes.
     by_record: dict[str, set[str]] = {}
     for n in rows:
-        by_record.setdefault(clean(n.get("_record_id")), set()).add(clean(n.get("direction")))
+        by_record.setdefault(clean(n.get("_record_id")), set()).add(side_of(n))
     rows = [n for n in rows if len(by_record.get(clean(n.get("_record_id")), set())) == 1]
-    left = [n for n in rows if clean(n.get("direction")) == "expands"]
-    right = [n for n in rows if clean(n.get("direction")) == "contracts"]
-    left_records, right_records = {clean(n.get("_record_id")) for n in left}, {clean(n.get("_record_id")) for n in right}
-    left_sources = {clean(n.get("_source")).lower() for n in left if clean(n.get("_source"))}
-    right_sources = {clean(n.get("_source")).lower() for n in right if clean(n.get("_source"))}
-    if len(left_records) < 3 or len(right_records) < 3 or len(left_sources) < 2 or len(right_sources) < 2:
+
+    left = [n for n in rows if side_of(n) == "expands"]
+    right = [n for n in rows if side_of(n) == "constrains"]
+    if not {clean(n.get("_record_id")) for n in left if clean(n.get("_record_id"))}:
         return None
-    lk, lw, lsrc = _trend_side(left, evaluated_on); rk, rw, rsrc = _trend_side(right, evaluated_on)
-    if len(lk) < 3 or len(rk) < 3 or lsrc < 2 or rsrc < 2:
+    if not {clean(n.get("_record_id")) for n in right if clean(n.get("_record_id"))}:
         return None
-    left_records = {clean(n.get("_record_id")) for n in lk}; right_records = {clean(n.get("_record_id")) for n in rk}
+
+    lk, lw, lsrc = _trend_side(left, evaluated_on)
+    rk, rw, rsrc = _trend_side(right, evaluated_on)
+    left_records = {clean(n.get("_record_id")) for n in lk if clean(n.get("_record_id"))}
+    right_records = {clean(n.get("_record_id")) for n in rk if clean(n.get("_record_id"))}
+    if not left_records or not right_records:
+        return None
+
+    evidence_floor_passes = (
+        len(left_records) >= 3
+        and len(right_records) >= 3
+        and lsrc >= 2
+        and rsrc >= 2
+    )
+
     raw_left = 100 * len(left_records) / max(1, len(left_records) + len(right_records))
     adj_left = 100 * lw / max(.000001, lw + rw)
-    raw_left = max(15.0, min(85.0, raw_left)); adj_left = max(15.0, min(85.0, adj_left))
-    low, high = sorted((raw_left, adj_left)); width = high - low
-    thin = len(left_records) == 3 or len(right_records) == 3 or len(left_sources) == 2 or len(right_sources) == 2
-    if thin:
+    raw_left = max(15.0, min(85.0, raw_left))
+    adj_left = max(15.0, min(85.0, adj_left))
+    low, high = sorted((raw_left, adj_left))
+    width = high - low
+
+    thin = len(left_records) == 3 or len(right_records) == 3 or lsrc == 2 or rsrc == 2
+    if not evidence_floor_passes:
+        label = "under_watch"
+    elif thin:
         label = "thin"
-    elif width <= 8 and len(left_sources) >= 4 and len(right_sources) >= 4:
+    elif width <= 8 and lsrc >= 4 and rsrc >= 4:
         label = "settled"
     else:
         label = "contested_by_source_mix" if width > 8 else "balanced"
+
     def snaps(xs: list[dict[str, Any]], role: str) -> list[dict[str, Any]]:
-        out=[]
+        out: list[dict[str, Any]] = []
+        seen_records: set[str] = set()
         for n in xs:
-            rk0=clean(n.get("record_key"))
-            out.append({"identity":_canonical_support_identity(n,{"claim_id":n.get("claim_id")}),"claim_id":clean(n.get("claim_id")),"role":role,"strand":clean(n.get("_collection")).replace("strand_","").upper(),"title":clean(n.get("_title")),"source":clean(n.get("_source")),"date":clean(n.get("status_date")),"link":rk0[5:] if rk0.startswith("link:") else clean(n.get("_link")),"quality":int(round(float(n.get("merit",0) or 0))),"new_this_scan":bool(n.get("_new_this_scan")),"claim_primary":True,"claim_kind":clean(n.get("kind")),"mechanism":clean(n.get("mechanism")),"object":obj})
+            rid = clean(n.get("_record_id"))
+            if rid in seen_records:
+                continue
+            seen_records.add(rid)
+            rk0 = clean(n.get("record_key"))
+            out.append({
+                "identity": _canonical_support_identity(n, {"claim_id": n.get("claim_id")}),
+                "claim_id": clean(n.get("claim_id")),
+                "role": role,
+                "strand": clean(n.get("_collection")).replace("strand_", "").upper(),
+                "title": clean(n.get("_title")),
+                "source": clean(n.get("_source")),
+                "date": clean(n.get("status_date")),
+                "link": rk0[5:] if rk0.startswith("link:") else clean(n.get("_link")),
+                "quality": int(round(float(n.get("merit", 0) or 0))),
+                "new_this_scan": bool(n.get("_new_this_scan")),
+                "claim_primary": True,
+                "claim_kind": clean(n.get("kind")),
+                "claim_status": clean(n.get("status")),
+                "mechanism": clean(n.get("mechanism")),
+                "object": obj,
+            })
         return out
-    raw_side = "expansion" if raw_left > 50 else "contraction" if raw_left < 50 else "neither side"
-    adj_side = "expansion" if adj_left > 50 else "contraction" if adj_left < 50 else "neither side"
+
+    raw_side = "expansion" if raw_left > 50 else "constraint" if raw_left < 50 else "neither side"
+    adj_side = "expansion" if adj_left > 50 else "constraint" if adj_left < 50 else "neither side"
     composition = (
         f"The count leans to {raw_side}; the weighted evidence leans to {adj_side}."
-        if raw_side != adj_side else f"Both the count and weighted evidence lean to {raw_side}."
+        if raw_side != adj_side
+        else f"Both the count and weighted evidence lean to {raw_side}."
     )
-    flip = "It moves toward expansion when expansion-side proposals become adopted or operating; toward contraction when contraction-side proposals do."
+    label_text = _trend_scope_label("object", obj)
+    flip = (
+        "It moves toward expansion when expansion-side actions mature or spread; "
+        "toward constraint when restrictive, conditional or contested actions mature or spread."
+    )
     return {
-        "support": snaps(lk, "Expands") + snaps(rk, "Contracts"),
-        "trend_balance": {"object_key":obj,"left_role":"Expands","right_role":"Contracts","left_title":"Expands","right_title":"Contracts","left_plain":"Current evidence pulling toward expansion.","right_plain":"Current evidence pulling toward contraction.","raw_left_pull":round(raw_left,1),"raw_right_pull":round(100-raw_left,1),"left_pull":round(adj_left,1),"right_pull":round(100-adj_left,1),"left_range":[round(low,1),round(high,1)],"right_range":[round(100-high,1),round(100-low,1)],"band_width":round(width,1),"label":label,"composition":composition,"flip_line":flip,"left_sources":lsrc,"right_sources":rsrc,"left_records":len(left_records),"right_records":len(right_records)},
+        "support": snaps(lk, "Expands") + snaps(rk, "Constrains"),
+        "object": obj,
+        "trend_scope": "object",
+        "trend_key": f"object:{obj}",
+        "trend_evidence_floor_passes": evidence_floor_passes,
+        "trend_balance": {
+            "family": "claim_native_object",
+            "scope_kind": "object",
+            "object_key": obj,
+            "left_role": "Expands",
+            "right_role": "Constrains",
+            "left_title": f"Expanding {label_text}",
+            "right_title": f"Constraining {label_text}",
+            "left_plain": f"Current evidence is pushing {label_text} toward expansion, access or added capability.",
+            "right_plain": f"Current evidence is making {label_text} more constrained, conditional or contested.",
+            "raw_left_pull": round(raw_left, 1),
+            "raw_right_pull": round(100 - raw_left, 1),
+            "left_pull": round(adj_left, 1),
+            "right_pull": round(100 - adj_left, 1),
+            "left_range": [round(low, 1), round(high, 1)],
+            "right_range": [round(100 - high, 1), round(100 - low, 1)],
+            "band_width": round(width, 1),
+            "label": label,
+            "composition": composition,
+            "flip_line": flip,
+            "left_sources": lsrc,
+            "right_sources": rsrc,
+            "left_records": len(left_records),
+            "right_records": len(right_records),
+            "left_actions": len(left_records),
+            "right_actions": len(right_records),
+            "evidence_floor_passes": evidence_floor_passes,
+        },
     }
 
 
@@ -1049,6 +1169,14 @@ def _apply_falsifier_ledger(c: dict[str, Any], old: dict[str, Any] | None, execu
 
 
 def _story_key(c: dict[str, Any]) -> tuple[str, str]:
+    """Stable duplicate-story key used only for page folding.
+
+    Trend pairs are already defined by a controlled object/cluster scope and must not
+    be folded merely because one supporting action uses the same mechanism as another
+    pair.  Other products retain the mechanism + endpoint fold used in Stage 7.
+    """
+    if clean(c.get("product")) == "trend":
+        return "trend", clean(c.get("trend_key") or c.get("topic_key"))
     support = [x for x in c.get("support", []) if isinstance(x, dict)] if isinstance(c.get("support"), list) else []
     mechanism = clean(next((x.get("mechanism") for x in support if clean(x.get("mechanism"))), c.get("grammar_id")))
     objects = [clean(x) for x in c.get("endpoint_objects", []) if clean(x)] if isinstance(c.get("endpoint_objects"), list) else []
@@ -1056,70 +1184,271 @@ def _story_key(c: dict[str, Any]) -> tuple[str, str]:
     return mechanism, obj
 
 
+# Verification is grammar-specific.  C-08 explicitly says trends use their own
+# evidence discipline instead of a Level-5 falsifier.  These structural grammars are
+# themselves bounded graph tests over authoritative claims: their finding is the
+# observed sequence/gap.  Level-5 cross-evidence hypotheses still require an actually
+# executed candidate-specific falsifier before reader publication.
+_STRUCTURAL_VERIFICATION_GRAMMARS = {
+    "era_conjunction",
+    "practice_before_doctrine",
+    "deployment_before_rules",
+    "clock_before_rule",
+    "goal_without_measure",
+    "stalled_proposal",
+    "success_metric_gap",
+}
+
+
+def _verification_gate(c: dict[str, Any]) -> tuple[bool, str]:
+    product = clean(c.get("product"))
+    grammar = clean(c.get("grammar_id"))
+    if product == "trend" or grammar == "opposing_movements":
+        return bool(c.get("trend_evidence_floor_passes")), "trend_evidence_floor"
+    if grammar in _STRUCTURAL_VERIFICATION_GRAMMARS:
+        return True, "authoritative_graph_structure"
+    return bool(c.get("denial_tested")), "executed_candidate_falsifier"
+
+
+def _selection_rank(c: dict[str, Any]) -> tuple[int, int, int, int]:
+    if clean(c.get("product")) == "trend":
+        # Trend page order is an evidence-strength order.  A balanced composition band
+        # is useful, but it must never outrank independent records/sources.
+        return (
+            int(c.get("primary_sources", 0) or 0),
+            int(c.get("primary_records", 0) or 0),
+            int(c.get("score", 0) or 0),
+            int(c.get("wow", 0) or 0),
+        )
+    return (
+        int(c.get("wow", 0) or 0),
+        int(c.get("score", 0) or 0),
+        int(c.get("primary_sources", 0) or 0),
+        int(c.get("primary_records", 0) or 0),
+    )
+
+
 def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, Any]) -> tuple[dict[str, list[str]], dict[str, Any]]:
-    targets = {"shock":(1,4),"trend":(4,10),"continuity":(2,5),"risk":(2,5),"opportunity":(2,5)}
+    """Select a visible page from a much larger persistent analytical stock.
+
+    Stage 7 originally conflated three different things: candidate formation,
+    verification, and page capacity.  That made a publication-quality falsifier an
+    accidental candidate-admission rule and let the soft-target code lift the wow
+    floor until *nothing* was shown.  The corrected selector keeps those jobs apart:
+
+    * formation/status is decided by the grammar;
+    * verification is grammar-specific (trend floor / graph structure / L5 falsifier);
+    * page capacity chooses among verified candidates and leaves the rest in reserve;
+    * incumbents move slowly, with a six-point same-wow challenger threshold.
+    """
+    targets = {
+        "shock": (1, 4),
+        "trend": (4, 10),
+        "continuity": (2, 5),
+        "risk": (2, 5),
+        "opportunity": (2, 5),
+    }
     prev_pubs = previous_state.get("publications") if isinstance(previous_state.get("publications"), dict) else {}
-    prev_map = {clean(x.get("id")):x for x in previous_state.get("candidates", []) if isinstance(x, dict) and clean(x.get("id"))}
-    out = {k:[] for k in targets}; meta: dict[str, Any] = {}
-    for product,(floor_target,ceil_target) in targets.items():
-        xs=[c for c in candidates if c.get("claim_native") and clean(c.get("product"))==product and c.get("status")=="qualified" and c.get("denial_tested") and c.get("oddity_passes")]
-        if product == "trend":
-            eligible=xs; wow_floor=0
-        else:
-            base_floor=4 if product=="shock" else 3
-            top=[c for c in xs if int(c.get("wow",0) or 0)>=base_floor]
-            wow_floor=base_floor+1 if len(top)>ceil_target else base_floor
-            eligible=[c for c in xs if int(c.get("wow",0) or 0)>=wow_floor]
-            # wow 1-2 are baseline items beneath the top-of-page selection.
-            if product in {"risk","opportunity","continuity"}:
-                eligible += [c for c in xs if int(c.get("wow",0) or 0)<=2]
-        eligible.sort(key=lambda c:(int(c.get("wow",0) or 0), int(c.get("score",0) or 0), int(c.get("primary_sources",0) or 0)), reverse=True)
-        chosen: list[dict[str, Any]]=[]; folded=0
+    prev_map = {
+        clean(x.get("id")): x
+        for x in previous_state.get("candidates", [])
+        if isinstance(x, dict) and clean(x.get("id"))
+    }
+    out = {k: [] for k in targets}
+    meta: dict[str, Any] = {}
+
+    for product, (floor_target, ceil_target) in targets.items():
+        pool = [
+            c for c in candidates
+            if c.get("claim_native") and clean(c.get("product")) == product
+        ]
+        for c in pool:
+            verified, mode = _verification_gate(c)
+            c["verification_mode"] = mode
+            c["verification_gate_passes"] = bool(verified)
+            c["reader_eligible"] = False
+            c["publication_gate_passes"] = False
+
+        # The wow floor is a quality rule, not a knob for hitting a count.  Never raise
+        # it because many candidates happen to exist: excess candidates belong in the
+        # reserve shelf, exactly where they can be updated on the next scan.
+        wow_floor = 0 if product == "trend" else (4 if product == "shock" else 3)
+        eligible = [
+            c for c in pool
+            if c.get("status") == "qualified"
+            and c.get("verification_gate_passes")
+            and c.get("oddity_passes")
+            and (product == "trend" or int(c.get("wow", 0) or 0) >= wow_floor)
+        ]
+        eligible.sort(key=_selection_rank, reverse=True)
+
+        prev_ids_ordered = [
+            clean(cid) for cid in (prev_pubs.get(product, []) if isinstance(prev_pubs.get(product), list) else [])
+            if clean(cid)
+        ]
+        eligible_by_id = {clean(c.get("id")): c for c in eligible}
+
+        # Fold exact same-story alternatives first.  The stronger candidate owns the
+        # visible slot; the other remains a reserve with an explicit relation.
+        deduped: list[dict[str, Any]] = []
+        folded = 0
         for cand in eligible:
-            conflict=next((x for x in chosen if _story_key(x)==_story_key(cand)),None)
+            conflict = next((x for x in deduped if _story_key(x) == _story_key(cand)), None)
             if conflict is None:
-                chosen.append(cand); continue
-            old_conf = clean(conflict.get("id")) in set(prev_pubs.get(product, []) if isinstance(prev_pubs.get(product), list) else [])
-            challenger_new5 = int(cand.get("wow",0) or 0)==5 and clean(cand.get("id")) not in set(prev_pubs.get(product, []) if isinstance(prev_pubs.get(product), list) else [])
-            if challenger_new5 or (not old_conf and int(cand.get("score",0) or 0) >= int(conflict.get("score",0) or 0)+6):
-                conflict["folded_into"] = cand.get("id"); conflict["movement"]="reserve"; chosen.remove(conflict); chosen.append(cand)
+                deduped.append(cand)
+                continue
+            incumbent = clean(conflict.get("id")) in set(prev_ids_ordered)
+            challenger = clean(cand.get("id")) not in set(prev_ids_ordered)
+            replace = _selection_rank(cand) > _selection_rank(conflict)
+            if incumbent and challenger and int(cand.get("wow", 0) or 0) == int(conflict.get("wow", 0) or 0):
+                replace = int(cand.get("score", 0) or 0) >= int(conflict.get("score", 0) or 0) + 6
+            if replace:
+                conflict["folded_into"] = cand.get("id")
+                conflict["movement"] = "reserve"
+                deduped.remove(conflict)
+                deduped.append(cand)
             else:
-                cand["folded_into"] = conflict.get("id"); cand["movement"]="reserve"; conflict.setdefault("also_ids",[]).append(cand.get("id"))
+                cand["folded_into"] = conflict.get("id")
+                cand["movement"] = "reserve"
+                conflict.setdefault("also_ids", []).append(cand.get("id"))
             folded += 1
-        chosen.sort(key=lambda c:(int(c.get("wow",0) or 0), int(c.get("score",0) or 0)),reverse=True)
-        out[product]=[clean(c.get("id")) for c in chosen]
-        chosen_ids=set(out[product]); prev_ids=set(prev_pubs.get(product, []) if isinstance(prev_pubs.get(product), list) else [])
-        for c in [x for x in candidates if clean(x.get("product"))==product and x.get("claim_native")]:
-            cid=clean(c.get("id")); old=prev_map.get(cid)
+        deduped.sort(key=_selection_rank, reverse=True)
+
+        # Keep eligible incumbents first so ordinary score jitter does not churn the
+        # page.  Fill empty slots with the strongest challengers.  Once full, a
+        # challenger replaces the weakest incumbent only when it has a higher wow or,
+        # at equal wow, a >=6 point score advantage.  Trends use evidence rank and can
+        # replace only when their evidence rank is strictly stronger.
+        chosen: list[dict[str, Any]] = []
+        chosen_ids: set[str] = set()
+        by_id = {clean(c.get("id")): c for c in deduped}
+        for cid in prev_ids_ordered:
+            c = by_id.get(cid)
+            if c and cid not in chosen_ids and len(chosen) < ceil_target:
+                chosen.append(c)
+                chosen_ids.add(cid)
+        for cand in deduped:
+            cid = clean(cand.get("id"))
+            if not cid or cid in chosen_ids:
+                continue
+            if len(chosen) < ceil_target:
+                chosen.append(cand)
+                chosen_ids.add(cid)
+                continue
+            weakest = min(chosen, key=_selection_rank)
+            if product == "trend":
+                displace = _selection_rank(cand) > _selection_rank(weakest)
+            else:
+                cw, ww = int(cand.get("wow", 0) or 0), int(weakest.get("wow", 0) or 0)
+                displace = cw > ww or (cw == ww and int(cand.get("score", 0) or 0) >= int(weakest.get("score", 0) or 0) + 6)
+            if displace:
+                chosen.remove(weakest)
+                chosen_ids.discard(clean(weakest.get("id")))
+                weakest["movement"] = "reserve"
+                chosen.append(cand)
+                chosen_ids.add(cid)
+
+        chosen.sort(key=_selection_rank, reverse=True)
+        out[product] = [clean(c.get("id")) for c in chosen]
+        chosen_ids = set(out[product])
+        prev_ids = set(prev_ids_ordered)
+
+        for c in pool:
+            cid = clean(c.get("id"))
+            old = prev_map.get(cid)
+            verified = bool(c.get("verification_gate_passes"))
             if cid in chosen_ids:
-                stable = bool(old) and int(c.get("wow",0) or 0)==int(old.get("wow",0) or 0) and int(c.get("score",0) or 0)==int(old.get("score",0) or 0) and not c.get("updated_this_scan")
-                c["shown_unchanged_scans"] = (int(old.get("shown_unchanged_scans",0) or 0) + 1) if stable else 0
+                stable = bool(old) and int(c.get("wow", 0) or 0) == int(old.get("wow", 0) or 0) and int(c.get("score", 0) or 0) == int(old.get("score", 0) or 0) and not c.get("updated_this_scan")
+                c["shown_unchanged_scans"] = (int(old.get("shown_unchanged_scans", 0) or 0) + 1) if stable else 0
                 if product == "trend" and old and isinstance(old.get("trend_balance"), dict) and isinstance(c.get("trend_balance"), dict):
-                    old_range=old["trend_balance"].get("left_range") or []; new_range=c["trend_balance"].get("left_range") or []
-                    if len(old_range)>=2 and len(new_range)>=2 and max(abs(float(new_range[0])-float(old_range[0])),abs(float(new_range[1])-float(old_range[1]))) < 3:
-                        c["trend_balance_computed"] = copy.deepcopy(c["trend_balance"]); c["trend_balance"] = copy.deepcopy(old["trend_balance"]); c["published_band_changed"] = False
+                    old_range = old["trend_balance"].get("left_range") or []
+                    new_range = c["trend_balance"].get("left_range") or []
+                    if len(old_range) >= 2 and len(new_range) >= 2 and max(abs(float(new_range[0])-float(old_range[0])), abs(float(new_range[1])-float(old_range[1]))) < 3:
+                        c["trend_balance_computed"] = copy.deepcopy(c["trend_balance"])
+                        c["trend_balance"] = copy.deepcopy(old["trend_balance"])
+                        c["published_band_changed"] = False
                     else:
                         c["published_band_changed"] = True
-                if cid not in prev_ids: c["movement"]="up"; c["reader_status_chip"]="New"
-                elif old and (int(c.get("wow",0) or 0)>int(old.get("wow",0) or 0) or int(c.get("score",0) or 0)>int(old.get("score",0) or 0)): c["movement"]="up"; c["reader_status_chip"]="Rising"
-                elif old and (int(c.get("wow",0) or 0)<int(old.get("wow",0) or 0) or int(c.get("score",0) or 0)<int(old.get("score",0) or 0) or int(c.get("missed_detection_scans",0) or 0)>=3): c["movement"]="down"; c["reader_status_chip"]="Fading"
-                elif int(c.get("wow",0) or 0)==5 and int(c.get("shown_unchanged_scans",0) or 0)>=6: c["movement"]="standing"; c["reader_status_chip"]="Standing"
-                elif c.get("updated_this_scan"): c["movement"]="hold"; c["reader_status_chip"]="Updated"
-                else: c["movement"]="hold"; c["reader_status_chip"]="Unchanged"
-                c["reader_eligible"]=True; c["publication_gate_passes"]=True
-            elif c.get("status") in {"watch","dormant"}:
-                c["movement"]="watch"
-            elif c.get("status")=="killed":
-                c["movement"]="killed"
-            elif c.get("denial_tested") and c.get("oddity_passes"):
-                c["movement"]=c.get("movement") or "reserve"
-        reserve=sum(1 for c in candidates if clean(c.get("product"))==product and c.get("claim_native") and c.get("movement")=="reserve")
-        watch=sum(1 for c in candidates if clean(c.get("product"))==product and c.get("claim_native") and c.get("movement")=="watch")
-        meta[product]={"soft_target":[floor_target,ceil_target],"wow_floor":wow_floor,"shown":len(chosen),"reserve":reserve,"watch":watch,"folded":folded}
-    shown=[c for c in candidates if clean(c.get("id")) in {x for ids in out.values() for x in ids}]
-    present={int(c.get("wow",0) or 0) for c in shown if clean(c.get("product"))!="trend"}
-    meta["page_guarantee"]={"present_wow_levels":sorted(present,reverse=True),"missing_wow_levels":[x for x in (5,4,3) if x not in present],"promotions_forbidden":True}
+                if cid not in prev_ids:
+                    c["movement"] = "up"; c["reader_status_chip"] = "New"
+                elif old and (int(c.get("wow", 0) or 0) > int(old.get("wow", 0) or 0) or int(c.get("score", 0) or 0) > int(old.get("score", 0) or 0)):
+                    c["movement"] = "up"; c["reader_status_chip"] = "Rising"
+                elif old and (int(c.get("wow", 0) or 0) < int(old.get("wow", 0) or 0) or int(c.get("score", 0) or 0) < int(old.get("score", 0) or 0) or int(c.get("missed_detection_scans", 0) or 0) >= 3):
+                    c["movement"] = "down"; c["reader_status_chip"] = "Fading"
+                elif int(c.get("wow", 0) or 0) == 5 and int(c.get("shown_unchanged_scans", 0) or 0) >= 6:
+                    c["movement"] = "standing"; c["reader_status_chip"] = "Standing"
+                elif c.get("updated_this_scan"):
+                    c["movement"] = "hold"; c["reader_status_chip"] = "Updated"
+                else:
+                    c["movement"] = "hold"; c["reader_status_chip"] = "Unchanged"
+                c["reader_eligible"] = True
+                c["publication_gate_passes"] = True
+                c["publication_lock_reason"] = ""
+                c["stock_tier"] = "page"
+            elif c.get("status") == "killed":
+                c["movement"] = "killed"
+                c["stock_tier"] = "killed"
+            elif c in eligible or clean(c.get("movement")) == "reserve":
+                c["movement"] = "reserve"
+                c["stock_tier"] = "reserve"
+                c["publication_lock_reason"] = "Verified candidate held on the reserve shelf by page selection or same-story folding."
+            else:
+                c["movement"] = "watch"
+                c["stock_tier"] = "watch"
+                if c.get("status") != "qualified":
+                    c["publication_lock_reason"] = "Candidate is still missing a grammar qualification condition."
+                elif not verified:
+                    if clean(c.get("verification_mode")) == "executed_candidate_falsifier":
+                        c["publication_lock_reason"] = "Level-5 candidate is waiting for an executed candidate-specific falsifier."
+                    elif product == "trend":
+                        c["publication_lock_reason"] = "Trend remains in stock below the reader evidence floor."
+                    else:
+                        c["publication_lock_reason"] = "Candidate has not yet passed its grammar-specific verification gate."
+                elif not c.get("oddity_passes"):
+                    c["publication_lock_reason"] = "Candidate is held by the oddity/stakes gate."
+                elif product != "trend" and int(c.get("wow", 0) or 0) < wow_floor:
+                    c["publication_lock_reason"] = f"Candidate is below the reader wow floor ({wow_floor})."
+
+        reserve = sum(1 for c in pool if clean(c.get("movement")) == "reserve")
+        watch = sum(1 for c in pool if clean(c.get("movement")) == "watch")
+        meta[product] = {
+            "soft_target": [floor_target, ceil_target],
+            "page_capacity": ceil_target,
+            "wow_floor": wow_floor,
+            "verified_eligible": len(eligible),
+            "shown": len(chosen),
+            "reserve": reserve,
+            "watch": watch,
+            "folded": folded,
+        }
+
+    shown = [c for c in candidates if clean(c.get("id")) in {x for ids in out.values() for x in ids}]
+    present = {int(c.get("wow", 0) or 0) for c in shown if clean(c.get("product")) != "trend"}
+    meta["page_guarantee"] = {
+        "present_wow_levels": sorted(present, reverse=True),
+        "missing_wow_levels": [x for x in (5, 4, 3) if x not in present],
+        "promotions_forbidden": True,
+    }
     return out, meta
+
+def _candidate_topic_label(grammar: str, topic: str) -> str:
+    base = clean(topic).replace(".", " ").replace("_", " ") or "European R&I"
+    suffix = {
+        "practice_before_doctrine": "practice before doctrine",
+        "deployment_before_rules": "deployment ahead of settled rules",
+        "clock_before_rule": "delivery clock ahead of settled rules",
+        "goal_without_measure": "goal without a settled measure",
+        "stalled_proposal": "proposal/practice timing gap",
+        "success_metric_gap": "delivery/outcome measurement gap",
+        "era_conjunction": "current/historical conjunction",
+        "conflicting_criteria": "criteria collision",
+        "dependency_pathway": "dependency pathway",
+        "latent_channel": "latent channel",
+        "anchor_demand": "anchor-demand pathway",
+        "split_recurrence": "recurring split",
+    }.get(clean(grammar), "")
+    return f"{base} — {suffix}" if suffix else base
+
 
 def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab: dict[str, Any] | None = None, evaluated_on: dt.date | None = None) -> dict[str, Any]:
     nodes = list(nodes)
@@ -1130,40 +1459,52 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
     grammar = clean(c.get("grammar_id"))
     if grammar == "goal_without_measure" and not support:
         obj0 = clean(c.get("object"))
-        rows0 = [n for n in nodes if n.get("_primary") and clean(n.get("era")) == "current" and obj0 in _node_objects(n) and clean(n.get("kind")) in {"action","advocacy","effect"}]
-        support = _support_rows({"claim_ids":[clean(n.get("claim_id")) for n in rows0[:16]]}, node_by_claim)
+        rows0 = [n for n in nodes if n.get("_primary") and clean(n.get("era")) == "current" and obj0 in _node_objects(n) and clean(n.get("kind")) in {"action", "advocacy", "effect"}]
+        support = _support_rows({"claim_ids": [clean(n.get("claim_id")) for n in rows0[:16]]}, node_by_claim)
     elif grammar == "era_conjunction" and not support:
         eps0 = [clean(x) for x in c.get("endpoint_objects", []) if clean(x)] if isinstance(c.get("endpoint_objects"), list) else []
         if len(eps0) >= 2:
             rows0 = [n for n in nodes if eps0[0] in _node_objects(n) and eps0[1] in _node_objects(n)]
-            support = _support_rows({"claim_ids":[clean(n.get("claim_id")) for n in rows0[:16]]}, node_by_claim)
+            support = _support_rows({"claim_ids": [clean(n.get("claim_id")) for n in rows0[:16]]}, node_by_claim)
     against = _against_rows(c, node_by_claim)
     missing = [clean(x) for x in c.get("missing_roles", []) if clean(x)] if isinstance(c.get("missing_roles"), list) else []
     roles = c.get("roles") if isinstance(c.get("roles"), dict) else {}
-    required = list(roles) if roles else (["evidence_floor"] if clean(c.get("grammar_id")) == "opposing_movements" else (["support"] if support else []))
-    covered = [r for r, snap in roles.items() if isinstance(snap, dict)] if roles else (["evidence_floor"] if clean(c.get("grammar_id")) == "opposing_movements" else (["support"] if support else []))
+    required = list(roles) if roles else (["evidence_floor"] if grammar == "opposing_movements" else (["support"] if support else []))
+    covered = [r for r, snap in roles.items() if isinstance(snap, dict)] if roles else (["evidence_floor"] if grammar == "opposing_movements" else (["support"] if support else []))
     score = c.get("score")
     if score is None:
         score = 0
     score = max(0, min(99, int(round(float(score or 0)))))
     level = int(c.get("level", 5) or 5)
-    structural_verified = grammar in {"opposing_movements", "era_conjunction", "practice_before_doctrine", "deployment_before_rules", "clock_before_rule", "goal_without_measure", "stalled_proposal", "success_metric_gap"}
+    structural_verified = grammar in _STRUCTURAL_VERIFICATION_GRAMMARS
     status = "qualified" if ((bool(c.get("score_gate_passes")) or structural_verified) and not missing) else "watch"
     product = _product_for(c)
-    topic = " × ".join(clean(x) for x in c.get("endpoint_objects", []) if clean(x)) if isinstance(c.get("endpoint_objects"), list) else ""
-    topic = topic or clean(c.get("object") or c.get("capability_object") or c.get("grammar_id"))
-    sources = {clean(x.get("source")).lower() for x in support if clean(x.get("source"))}
-    records = {clean(x.get("identity")) for x in support if clean(x.get("identity"))}
-    touched = any(bool(x.get("new_this_scan")) for x in support)
-    wow, wow_basis = _final_wow(c, nodes, vocab)
-    trend = _trend_payload(c, nodes, evaluated_on) if grammar == "opposing_movements" else None
+
+    trend = _trend_payload(c, nodes, evaluated_on, vocab) if grammar == "opposing_movements" else None
     if grammar == "opposing_movements":
         if trend is None:
             status = "watch"
         else:
+            # The 2x2 floor admits a living stock candidate; only the stronger 3x3,
+            # 2-source-per-side floor qualifies it for the visible trend page.
+            status = "qualified" if trend.get("trend_evidence_floor_passes") else "watch"
             support = trend["support"]
-            sources = {clean(x.get("source")).lower() for x in support if clean(x.get("source"))}
-            records = {clean(x.get("identity")) for x in support if clean(x.get("identity"))}
+
+    topic = " × ".join(clean(x) for x in c.get("endpoint_objects", []) if clean(x)) if isinstance(c.get("endpoint_objects"), list) else ""
+    topic = topic or clean(c.get("object") or c.get("cluster") or c.get("capability_object") or c.get("objective_object") or c.get("delivery_object") or c.get("grammar_id"))
+    if trend:
+        topic = _trend_scope_label(clean(trend.get("trend_scope")), clean(trend.get("trend_balance", {}).get("object_key")))
+    sources = {clean(x.get("source")).lower() for x in support if clean(x.get("source"))}
+    records = {clean(x.get("identity")) for x in support if clean(x.get("identity"))}
+    touched = any(bool(x.get("new_this_scan")) for x in support)
+    wow, wow_basis = _final_wow(c, nodes, vocab)
+    if grammar == "opposing_movements":
+        lock_reason = "Trend remains in stock until its own side-evidence floor and page-selection rules pass."
+    elif structural_verified:
+        lock_reason = "Structural candidate is verified by its authoritative graph test and is waiting for page selection."
+    else:
+        lock_reason = "Level-5 selection requires an executed candidate-specific falsifier plus wow/oddity/selection gates."
+
     out = {
         "id": _candidate_id(c),
         "grammar_id": grammar,
@@ -1171,7 +1512,7 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
         "product": product,
         "inferential_distance": level,
         "topic_key": _candidate_key(c),
-        "topic_label": topic,
+        "topic_label": _candidate_topic_label(grammar, topic),
         "status": status,
         "score": score,
         "wow_preliminary": c.get("wow_preliminary"),
@@ -1194,28 +1535,32 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
         "falsifier_executed": False,
         "reader_eligible": False,
         "publication_gate_passes": False,
-        "publication_lock_reason": "Stage 7 selection requires an executed candidate-specific falsifier plus wow/oddity/selection gates.",
+        "publication_lock_reason": lock_reason,
         "synthesis_across_records": len(records) >= 2,
         "support": support,
         "context": [],
         "against": against,
         "support_queries": _support_queries(c),
-        "falsifier_queries": _falsifier_queries(c),
+        "falsifier_queries": [] if grammar == "opposing_movements" else _falsifier_queries(c),
         "touched_this_scan": touched,
         "detector_backend": "claim_native",
         "claim_native": True,
         "claim_candidate_key": _candidate_key(c),
         "endpoint_objects": copy.deepcopy(c.get("endpoint_objects", [])),
-        "score_gate_passes": bool(c.get("score_gate_passes")) or structural_verified,
+        "score_gate_passes": (bool(c.get("score_gate_passes")) or structural_verified) if grammar != "opposing_movements" else bool(trend and trend.get("trend_evidence_floor_passes")),
     }
     if trend:
         out.update(trend)
         out["score"] = int(round(100 - min(85.0, float(trend["trend_balance"].get("band_width", 0) or 0))))
         out["primary_records"] = len({x.get("identity") for x in out["support"]})
         out["primary_sources"] = len({clean(x.get("source")).lower() for x in out["support"] if clean(x.get("source"))})
+        out["primary_role_coverage"] = 1.0 if trend.get("trend_evidence_floor_passes") else 0.667
     oddity, oddity_reason = _oddity_pass(out, vocab)
     out["oddity_passes"] = oddity
     out["oddity_reason"] = oddity_reason
+    verified, verification_mode = _verification_gate(out)
+    out["verification_mode"] = verification_mode
+    out["verification_gate_passes"] = verified
     return out
 
 def _fp(c: dict[str, Any]) -> str:
@@ -1352,8 +1697,8 @@ def refresh_claim_high_order(
         "publication_compatibility_lock": False,
         "falsifier_execution": {"executed_finding_context_queries": sorted(executed_queries), "executed_count": len(executed_queries)},
         "selection": selection,
-        "publication_policy": "Stage 7 claim-native selection: verified evidence plus an executed candidate-specific falsifier, computed wow, oddity gate, same-story folding, soft target wow-floor adjustment, and six-point hysteresis. No hard publication caps.",
-        "lifecycle_policy": "Claim-native stock persists; missed detections decay slowly, while evidence withdrawal or a falsifier hit exits the shelf immediately.",
+        "publication_policy": "Stage 7 claim-native selection separates candidate formation, grammar-specific verification, and page selection. Trends use their own two-sided evidence floor; structural graph findings use their bounded graph test; Level-5 cross-evidence hypotheses require an executed candidate-specific falsifier. Verified excess candidates remain in reserve under stable page capacities and six-point hysteresis.",
+        "lifecycle_policy": "Claim-native stock persists as page/reserve/watch tiers; evidence is recomputed each scan, missed detections decay slowly, and evidence withdrawal or a falsifier hit exits the visible shelf immediately.",
         "candidate_search_policy": "Missing-role and falsifier queries remain ordinary scanner discovery inputs and receive no admission waiver.",
         "publications": publications,
         "candidates": candidates,
@@ -1407,23 +1752,138 @@ def refresh_claim_shocks(
     }
 
 def claim_feedback_queries(state: dict[str, Any] | None, limit: int = 8) -> list[str]:
+    """Return bounded discovery feedback without ever changing scanner admission.
+
+    The old Stage-7 ordering put ``watch`` candidates ahead of already-qualified
+    candidates.  Because Level-5 publication then required an executed falsifier, the
+    candidates closest to publication were starved of the very search that could test
+    them.  This queue now gives first service to qualified Level-5 candidates waiting
+    only for counter-evidence, round-robins product families, then spends remaining
+    slots on missing-link support and ordinary watch-candidate challenges.
+    """
     if not isinstance(state, dict):
+        return []
+    cap = max(0, int(limit or 0))
+    if cap <= 0:
         return []
     candidates = [x for x in state.get("candidates", []) if isinstance(x, dict) and x.get("claim_native")]
     if not candidates:
         candidates = [x for x in state.get("claim_candidates", []) if isinstance(x, dict) and x.get("claim_native")]
-    candidates.sort(key=lambda c: (1 if c.get("status") == "watch" else 0, int(c.get("score", 0) or 0)), reverse=True)
-    support: list[str] = []
-    falsify: list[str] = []
-    for c in candidates[:12]:
-        support.extend(clean(q) for q in c.get("support_queries", []) if clean(q))
-        falsify.extend(clean(q) for q in c.get("falsifier_queries", []) if clean(q))
-    out: list[str] = []
-    for i in range(max(len(support), len(falsify))):
-        if i < len(support) and support[i] not in out:
-            out.append(support[i])
-        if i < len(falsify) and falsify[i] not in out:
-            out.append(falsify[i])
-        if len(out) >= max(0, int(limit or 0)):
+    if not candidates:
+        return []
+
+    product_order = ("risk", "opportunity", "shock", "continuity", "trend")
+    urgent = [
+        c for c in candidates
+        if clean(c.get("status")) == "qualified"
+        and clean(c.get("verification_mode") or "executed_candidate_falsifier") == "executed_candidate_falsifier"
+        and not c.get("denial_tested")
+        and clean(c.get("movement")) != "killed"
+        and any(clean(q) for q in (c.get("falsifier_queries") or []))
+    ]
+    urgent.sort(key=lambda c: (int(c.get("wow", 0) or 0), int(c.get("score", 0) or 0), int(c.get("primary_sources", 0) or 0)), reverse=True)
+
+    by_product: dict[str, list[dict[str, Any]]] = {p: [] for p in product_order}
+    for c in urgent:
+        by_product.setdefault(clean(c.get("product")) or "continuity", []).append(c)
+    ordered_urgent: list[dict[str, Any]] = []
+    depth = 0
+    while True:
+        added = False
+        for product in product_order:
+            bucket = by_product.get(product, [])
+            if depth < len(bucket):
+                ordered_urgent.append(bucket[depth])
+                added = True
+        if not added:
             break
-    return out[:max(0, int(limit or 0))]
+        depth += 1
+
+    out: list[str] = []
+    # First give every near-publication Level-5 candidate exactly one falsifier.  One
+    # executed no-hit is enough to satisfy the Stage-7 denial gate, so second/third
+    # variants are lower priority than helping a near-complete watch candidate mature.
+    for c in ordered_urgent:
+        qs = [clean(q) for q in c.get("falsifier_queries", []) if clean(q)]
+        if qs and qs[0] not in out:
+            out.append(qs[0])
+            if len(out) >= cap:
+                return out[:cap]
+
+    # Missing-link candidates are the next best use of discovery.  Interleave support
+    # and challenge queries so a candidate is neither blindly confirmed nor blindly
+    # rejected.  Structural/trend candidates may still contribute a challenge query,
+    # but such a query is refinement only and is never their publication admission.
+    watch = [c for c in candidates if clean(c.get("status")) == "watch" and clean(c.get("movement")) != "killed"]
+    watch.sort(
+        key=lambda c: (
+            1 if len(c.get("missing_roles", []) if isinstance(c.get("missing_roles"), list) else []) == 1 else 0,
+            float(c.get("primary_role_coverage", 0) or 0),
+            int(c.get("wow", 0) or 0),
+            int(c.get("primary_sources", 0) or 0),
+            int(c.get("score", 0) or 0),
+        ),
+        reverse=True,
+    )
+    # Round-robin the watch shelf too.  A missing opportunity role often has no score
+    # yet by construction, so a global score sort would permanently starve it behind
+    # already-scorable risks/shocks.  Product fairness lets the stock actually mature.
+    watch_product_order = ("opportunity", "risk", "shock", "continuity", "trend")
+    watch_by_product: dict[str, list[dict[str, Any]]] = {p: [] for p in watch_product_order}
+    for c in watch:
+        watch_by_product.setdefault(clean(c.get("product")) or "continuity", []).append(c)
+    ordered_watch: list[dict[str, Any]] = []
+    depth = 0
+    while len(ordered_watch) < 16:
+        added = False
+        for product in watch_product_order:
+            bucket = watch_by_product.get(product, [])
+            if depth < len(bucket):
+                ordered_watch.append(bucket[depth])
+                added = True
+                if len(ordered_watch) >= 16:
+                    break
+        if not added:
+            break
+        depth += 1
+
+    max_support = max((len(c.get("support_queries") or []) for c in ordered_watch), default=0)
+    max_challenge = max((len(c.get("falsifier_queries") or []) for c in ordered_watch), default=0)
+
+    # First support query per watch candidate, product-fair.  With the normal scanner
+    # budget this puts a live-connection/receiving-instrument search on the wire in the
+    # same scan instead of burying it behind three variants of one falsifier.
+    for c in ordered_watch:
+        qs = [clean(q) for q in c.get("support_queries", []) if clean(q)]
+        if qs and qs[0] not in out:
+            out.append(qs[0])
+            if len(out) >= cap:
+                return out[:cap]
+
+    # Only after broad candidate coverage spend remaining capacity on additional
+    # near-publication falsifiers, then deeper watch support/challenge variants.
+    max_urgent_falsifiers = max((len(c.get("falsifier_queries") or []) for c in ordered_urgent), default=0)
+    for qi in range(1, max_urgent_falsifiers):
+        for c in ordered_urgent:
+            qs = [clean(q) for q in c.get("falsifier_queries", []) if clean(q)]
+            if qi < len(qs) and qs[qi] not in out:
+                out.append(qs[qi])
+                if len(out) >= cap:
+                    return out[:cap]
+
+    for qi in range(max(max_support, max_challenge)):
+        if qi > 0:
+            for c in ordered_watch:
+                qs = [clean(q) for q in c.get("support_queries", []) if clean(q)]
+                if qi < len(qs) and qs[qi] not in out:
+                    out.append(qs[qi])
+                    if len(out) >= cap:
+                        return out[:cap]
+        for c in ordered_watch:
+            qs = [clean(q) for q in c.get("falsifier_queries", []) if clean(q)]
+            if qi < len(qs) and qs[qi] not in out:
+                out.append(qs[qi])
+                if len(out) >= cap:
+                    return out[:cap]
+    return out[:cap]
+
