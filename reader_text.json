@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-17T15:48:54Z",
+  "generated_at": "2026-09-18T16:48:56Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -127732,8 +127732,917 @@
           "provisional": false
         }
       ]
+    },
+    "link:https://www.cesaer.org/content/5-operations/2026/msca-statement-june-2026-final.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "74f854bb",
+      "identity_hash": "4a0cf5ef09f5436e",
+      "reader_title": "University association urges EU to keep MSCA bottom-up and scale it in FP10",
+      "reader_what": "CESAER and co-signers ask negotiators to keep MSCA open to all fields in Pillar I and increase its reach.",
+      "reader_why": "Pressure to add thematic priorities could reshape Europe's main researcher-training programme.",
+      "reader_more": "The Marie Skłodowska-Curie Actions (MSCA) fund doctoral and postdoctoral researchers across all fields. The statement argues MSCA works because it is researcher-driven, citing Commission evaluations. It opposes top-down thematic priorities or using MSCA to fill labour-market skills gaps, suggesting targeted actions go to Pillar II instead. It notes heavy oversubscription leaves many excellent applicants unfunded.",
+      "deep_analysis": {
+        "work_kind": "position statement",
+        "research_question": "",
+        "main_finding": "MSCA should remain a bottom-up, field-open research programme in Pillar I of FP10 and be scaled up rather than redesigned.",
+        "method_or_basis": "Advocacy text citing the Horizon 2020 ex-post evaluation, Excellent Science evaluation studies and a REA study on MSCA doctorates.",
+        "qualification": "A stakeholder position statement in ongoing FP10/MFF negotiations; it argues from cited evaluations but reports no new evidence, and the outcome is not decided.",
+        "radar_relevance": "Concerns the design of the EU's next framework programme and Europe's research-talent pipeline.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Fetched https://www.cesaer.org/content/5-operations/2026/msca-statement-june-2026-final.pdf; 3-page statement dated 29 June 2026, Brussels, with co-signatory section."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Position statement has no DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://www.cesaer.org/content/5-operations/2026/msca-statement-june-2026-final.pdf",
+            "title": "MSCA: Research Talent is Europe's Strategic Advantage (CESAER, 29 June 2026)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full statement read; matches scanner title, date and issuer."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Direct, substantive intervention in EU research-programme design (MSCA's place in FP10) by a European university association."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-18T16:48:54Z",
+      "deep_scan_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+      "claims": [
+        {
+          "object": "talent.career_structure",
+          "secondary_objects": [
+            "horizon.budget_2028_34"
+          ],
+          "actor": {
+            "name": "CESAER",
+            "class": "university_group"
+          },
+          "mechanism": "advocates",
+          "direction": "unchanged",
+          "status": "announced",
+          "status_date": "2026-06-29",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "A stakeholder position statement in ongoing FP10/MFF negotiations; it argues from cited evaluations but reports no new evidence, and the outcome is not decided.",
+          "text": "CESAER and co-signing organisations urged EU negotiators to keep MSCA a bottom-up, field-open Pillar I programme in FP10 and to scale it up.",
+          "confidence": "high",
+          "record_key": "link:https://www.cesaer.org/content/5-operations/2026/msca-statement-june-2026-final.pdf",
+          "merit": 69,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:4a0cf5ef09f5436e:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1007/s11187-026-01282-9": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "7b155dcf",
+      "identity_hash": "bdd68960975c5e36",
+      "reader_title": "EU SME Instrument grants gave firms a short patenting boost that faded within years",
+      "reader_what": "Funded SMEs patented more soon after the grant, but gains faded and novelty did not improve versus Seal-of-Excellence applicants.",
+      "reader_why": "Suggests one-off EU innovation grants mainly accelerate existing projects unless paired with further support.",
+      "reader_more": "The study compares SMEs funded under Phase 2 of the Horizon 2020 SME Instrument (2014–2018) with equally eligible applicants rejected only for lack of budget. Using proposal data and firm patent records, it finds a quick rise in patent output and more technological specialisation among funded firms. The advantage narrows over time and there is little lasting effect on novelty or entry into new fields. The authors recommend combining grants with mentoring, networks and follow-on finance.",
+      "deep_analysis": {
+        "work_kind": "empirical impact evaluation",
+        "research_question": "What are the long-term effects of SME Instrument funding on patenting scale, quality, novelty and specialisation?",
+        "main_finding": "SMEi funding produced an immediate, time-limited increase in patenting concentrated in scale rather than novelty, plus greater technological specialisation.",
+        "method_or_basis": "Funded vs eligible-unfunded SMEs from the H2020 SME Instrument CORDA database; entropy balancing and interaction-weighted dynamic event-study estimators; ORBIS and patent data.",
+        "qualification": "Observational design (entropy balancing, event study) with eligible-but-unfunded controls; residual confounding from later funding is possible, and patents capture only part of innovation.",
+        "radar_relevance": "Direct evidence on how an EU innovation funding instrument performs, relevant to EIC-style grant design.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied Springer article page text (link.springer.com/article/10.1007/s11187-026-01282-9) matched title/authors."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Fetched open-access PDF for 10.1007/s11187-026-01282-9 (received 5 Feb 2026, accepted 25 Aug 2026, CC BY)."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/content/pdf/10.1007/s11187-026-01282-9.pdf",
+            "title": "On and off the podium (Small Business Economics, 2026)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full text read, including data section, discussion and limitations."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Causal-style evaluation of an EU R&I funding instrument (Horizon 2020 SME Instrument Phase 2) using CORDA proposal data."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-18T16:48:54Z",
+      "deep_scan_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+      "claims": [
+        {
+          "object": "funding.route",
+          "secondary_objects": [
+            "innovation.deep_tech_startups"
+          ],
+          "actor": {
+            "name": "Barabuffi, Cucino, Di Minin and Piccaluga",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "effect",
+          "qualification": "Observational design (entropy balancing, event study) with eligible-but-unfunded controls; residual confounding from later funding is possible, and patents capture only part of innovation.",
+          "text": "Horizon 2020 SME Instrument Phase 2 grants were followed by a short-term rise in funded SMEs' patenting that narrowed within a few years.",
+          "confidence": "high",
+          "status_date_precision": "year",
+          "record_key": "link:https://doi.org/10.1007/s11187-026-01282-9",
+          "merit": 74,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:bdd68960975c5e36:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1016/j.apgeog.2026.104029": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "61a60674",
+      "identity_hash": "d867945781b2d295",
+      "reader_title": "Southern and Central-Eastern European social scientists stay marginal in EU environmental research consortia",
+      "reader_what": "Survey and workshops find SE/CEE SSH researchers face funding, network and recognition gaps limiting leadership in EU projects.",
+      "reader_why": "Challenges whether EU 'spreading excellence' efforts shift real control of budgets and agendas.",
+      "reader_more": "Researchers in the Horizon Europe SSH CENTRE project surveyed 137 social-science and humanities researchers from Southern and Central-Eastern Europe and ran workshops in Bilbao and Pécs. Respondents reported lower funding for SSH than STEM, fragmented networks dependent on Western hubs, and weaker recognition, felt more by women. Coordinator selection favours well-resourced institutions, and call topics often underweight regional priorities. The authors propose tracking who controls budgets and work packages, not just headcounts.",
+      "deep_analysis": {
+        "work_kind": "empirical mixed-methods study",
+        "research_question": "",
+        "main_finding": "Peripheral SSH researchers experience compound marginality in EU collaborations, with centrality locked into a few Western institutions.",
+        "method_or_basis": "Online survey (n=137) plus two regional workshops (59 participants, 25 countries) within Horizon Europe SSH CENTRE.",
+        "qualification": "Evidence is a survey of 137 SSH researchers and two workshops within one Horizon Europe project; perceptions, not audited participation data. Full text not retrieved; assessment rests on an author-institute summary.",
+        "radar_relevance": "Speaks to EU widening and framework-programme participation policy.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://linkinghub.elsevier.com/retrieve/pii/S0143622826001396 returned no article text (JavaScript redirect to ScienceDirect, not retrievable)."
+          },
+          {
+            "step": "doi",
+            "outcome": "partial",
+            "note": "Crossref for 10.1016/j.apgeog.2026.104029: Applied Geography vol 192 art 104029, July 2026, authors Varjú, Sorman, Cabello, Bálint, Loewen, Tagai, Crowther, Avendaño, Robison, Foulds; CC BY licence listed."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Quoted-title search found KRTK (co-author Tagai's institute) pages including the highlights and abstract."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Fetched KRTK research summary by co-author Gergely Tagai (krtk.elte.hu, 22 June 2026) describing methods, findings and recommendations in detail."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "ScienceDirect not retrievable by automated fetch despite CC BY licence; no repository PDF found."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_applicable",
+            "note": "Identity already secured via Crossref and co-author institutional pages; no further search needed."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "author_institution_summary",
+            "url": "https://krtk.elte.hu/en/2026/06/giving-voice-to-the-margins-shifting-power-in-eu-environmental-research-by-gergely-tagai/",
+            "title": "Giving Voice to the Margins (KRTK, co-author summary)",
+            "evidence_used": true
+          },
+          {
+            "kind": "author_institution_abstract",
+            "url": "https://krtk.elte.hu/en/2026/05/reclaiming-the-margins-in-environmental-research-epistemic-inequalities-across-europes-geographical-and-disciplinary-peripheries-2/",
+            "title": "KRTK publication record with abstract and highlights",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full text not recovered; co-author's detailed institutional summary plus abstract used. Should be re-read against full text in a later pass."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Examines participation inequalities in EU framework-programme collaborations for Southern and Central-Eastern European SSH researchers."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-18T16:48:55Z",
+      "deep_scan_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [
+            "research.system_governance"
+          ],
+          "actor": {
+            "name": "Varjú et al. (SSH CENTRE)",
+            "class": "university_group"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "operating",
+          "status_date": "2026-07",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Evidence is a survey of 137 SSH researchers and two workshops within one Horizon Europe project; perceptions, not audited participation data. Full text not retrieved; assessment rests on an author-institute summary.",
+          "text": "A survey of 137 SE/CEE SSH researchers reports persistent funding, network and recognition barriers to leadership roles in EU research collaborations.",
+          "confidence": "medium",
+          "status_date_precision": "month",
+          "record_key": "link:https://doi.org/10.1016/j.apgeog.2026.104029",
+          "merit": 77,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:d867945781b2d295:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMipgFBVV95cUxPdFEwX1A0T1RDdmxkTWpnNTNSUVl4ZUNWbmNoWmhEcFJmekdtcllTY2R6NTgyX0ZVdk1oSzBOOHRWLWlGUU1rQUViZW1RZFZxaHBzTHBwalFWYl9DblFHYVg3cVU1dXQwVGpCNWF4T3UzVkxNd0toQ2dvSUlMSUFPX2lNbXJqSWQ3dTZDazkzbjNtZkRhRmJQNjNQeTR0MlB1TzBGbkVR?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "729c397d",
+      "identity_hash": "8aeb6676a04ed860",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Google News RSS link (news.google.com/rss/articles/CBMipgFBVV95...) loads only the aggregator shell; no redirect to a sciencebusiness.net URL could be extracted."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News article; no DOI."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failed",
+            "note": "Search for quoted headline 'Canada looks to deepen research and education links with the EU' with Science|Business returned THE, older S|B pieces (2019, 2025) and other outlets, not this article."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failed",
+            "note": "Search 'sciencebusiness.net Canada Carney Erasmus+ Horizon Europe research education links September 2026' returned Research Professional, CBC, Euronews coverage; no S|B article."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Direct fetch of https://sciencebusiness.net/news and /rss.xml returned a Cloudflare 'Just a moment' challenge; article listing inaccessible."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "Search 'Canada deepen research education links EU Science Business news September 17 2026' returned only other outlets (Research Professional, THE, CNN, PIE News)."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Underlying event (Carney's 17 Sept 2026 European Parliament speech proposing Erasmus+ membership and deeper Horizon participation) is corroborated by THE, CBC and CNN; it should enter the Radar as a new record from one of those sources rather than via this unverifiable item."
+      },
+      "admission": {
+        "decision": "drop_unverifiable",
+        "target_strand": "C",
+        "reason_code": "UNVERIFIABLE_AFTER_LADDER",
+        "reason": "The claimed Science|Business article could not be opened or located after all six steps; related coverage by other outlets cannot substitute."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-18T16:48:55Z",
+      "deep_scan_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.cesaer.org/content/5-operations/2026/20260330-cesaer-report-advancing-research-careers.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "ac59e38d",
+      "identity_hash": "72bd662780eede23",
+      "reader_title": "CESAER case studies show how five tech universities try to stabilise research careers",
+      "reader_what": "Report profiles career practices at Aalborg, Brno, TU Delft/QuTech, ETH Zürich and Kyiv Polytechnic and repeats calls to reduce precarity.",
+      "reader_why": "Frames stable research careers as a strategic capability for keeping talent in Europe.",
+      "reader_more": "CESAER, a network of science and technology universities, compiled case studies presented at a 2025 task-force meeting. They cover a PhD career hub, entrepreneurship support for young researchers, QuTech's people strategy, ETH Zürich's gender strategy, and career structures in Ukraine. The report links these to Choose Europe for Science and reaffirms 2024 recommendations: more stable contracts and a better balance of temporary and permanent posts.",
+      "deep_analysis": {
+        "work_kind": "case study report",
+        "research_question": "",
+        "main_finding": "Institutional practices can improve research careers, but precarity and brain drain require coordinated long-term policy.",
+        "method_or_basis": "Five institutional case studies written by member universities, steered by CESAER Task Force Human Resources.",
+        "qualification": "Case studies are self-reported good practices from five CESAER member institutions (incl. Switzerland and Ukraine); recommendations restate CESAER's 2024 advocacy.",
+        "radar_relevance": "Directly concerns European research-talent policy and retention.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied PDF https://www.cesaer.org/content/5-operations/2026/20260330-cesaer-report-advancing-research-careers.pdf read (77 pages, dated 30 March 2026, Zenodo doi 10.5281/zenodo.19330799 listed)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Report's own Zenodo DOI noted in document; supplied PDF is the official copy."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://www.cesaer.org/content/5-operations/2026/20260330-cesaer-report-advancing-research-careers.pdf",
+            "title": "Advancing research careers across Europe (CESAER, 2026)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official report read; identity matches."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "European university association report on research-career precarity and talent retention linked to Choose Europe and EU talent policy."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-18T16:48:55Z",
+      "deep_scan_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+      "claims": [
+        {
+          "object": "talent.career_structure",
+          "secondary_objects": [
+            "talent.retention"
+          ],
+          "actor": {
+            "name": "CESAER",
+            "class": "university_group"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-03-30",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "Case studies are self-reported good practices from five CESAER member institutions (incl. Switzerland and Ukraine); recommendations restate CESAER's 2024 advocacy.",
+          "text": "CESAER's March 2026 report calls for more stable research careers and fewer temporary contracts to retain research talent in Europe.",
+          "confidence": "medium",
+          "record_key": "link:https://www.cesaer.org/content/5-operations/2026/20260330-cesaer-report-advancing-research-careers.pdf",
+          "merit": 70,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:72bd662780eede23:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1007/s13347-026-01186-2": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "d1ba4b69",
+      "identity_hash": "b7a1ec4c7b01772d",
+      "reader_title": "'Dual-use' means different things in EU export rules, R&D policy and research ethics",
+      "reader_what": "Argues dual-use has a neutral and a value-laden meaning, and conflating them muddles EU research and security debates.",
+      "reader_why": "EU moves to foster civil-defence R&D synergies reuse a term carrying different obligations elsewhere.",
+      "reader_more": "The article traces 'dual-use' from non-proliferation and export control (e.g. EU Regulation 2021/821) into research ethics and, more recently, EU R&D-support documents stressing civil-military synergies. It distinguishes a seemingly neutral reading (a technology can serve civil and military ends) from a value-charged one (it can serve good or harmful ends). Each reading suits different issues, such as export licensing versus misuse assessment in Horizon Europe ethics. It closes by asking whether dual-use assessments are factual or evaluative judgements.",
+      "deep_analysis": {
+        "work_kind": "conceptual analysis",
+        "research_question": "What does 'dual-use' mean across policy contexts, and what follows from each interpretation?",
+        "main_finding": "At least two interpretations of dual-use must be distinguished to avoid equivocation in ethical and legal debates.",
+        "method_or_basis": "Conceptual and historical analysis of legal, policy and ethics literature, including EU instruments.",
+        "qualification": "Conceptual philosophical analysis; it clarifies meanings and implications but provides no empirical evidence on how EU instruments are applied.",
+        "radar_relevance": "Clarifies a concept central to EU research-security and defence-R&D policy.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied Springer page text matched title/author; open access."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Fetched OA PDF for 10.1007/s13347-026-01186-2 (Philosophy & Technology 39, art. 181, 2026); sections 2.1-2.3, 3-6 read."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/content/pdf/10.1007/s13347-026-01186-2.pdf",
+            "title": "For Good or Ill? A Conceptual Analysis of the Notion of Dual-use Technology",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full text read; ~48 EU/European references incl. Regulation (EU) 2021/821, Commission White Paper on dual-use R&D support, Horizon Europe ethics and the European Defence Fund."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Analyses how 'dual-use' is used across EU export-control law, EU civil-defence R&D policy and research ethics, with implications for Horizon Europe and the EDF."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-18T16:48:55Z",
+      "deep_scan_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+      "claims": [
+        {
+          "object": "innovation.dual_use",
+          "secondary_objects": [
+            "export_control.regulation"
+          ],
+          "actor": {
+            "name": "Andrea Barca",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_contested",
+          "status": "operating",
+          "status_date": "2026",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Conceptual philosophical analysis; it clarifies meanings and implications but provides no empirical evidence on how EU instruments are applied.",
+          "text": "The article finds that EU export-control, R&D-support and research-ethics texts use 'dual-use' in different senses, risking equivocation in governance debates.",
+          "confidence": "medium",
+          "status_date_precision": "year",
+          "record_key": "link:https://doi.org/10.1007/s13347-026-01186-2",
+          "merit": 77,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:b7a1ec4c7b01772d:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.euronews.com/next/2026/09/18/could-the-eu-kids-act-unwittingly-widen-the-transatlantic-ai-divide": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "afde4f49",
+      "identity_hash": "c87fc39103264b91",
+      "reader_title": "EU Kids Act proposal raises worry about burdens on smaller European AI developers",
+      "reader_what": "Commission proposed the EU Kids Act: under-13 social media ban, supervised teen accounts, age checks, chatbots off by default.",
+      "reader_more": "The European Commission presented the EU Kids Act on 17 September 2026. It would ban social media for under-13s, allow supervised 'mini accounts' for younger teens, restrict addictive features and cover video platforms, games and AI chatbots, with app-store age assurance. A former Voodoo executive quoted by Euronews argues compliance costs could lead US labs to delay launches while smaller European developers struggle. That competitiveness effect is an opinion, not a demonstrated outcome.",
+      "deep_analysis": {
+        "work_kind": "current development (news report)",
+        "research_question": "",
+        "main_finding": "The Commission proposed the EU Kids Act extending child-safety obligations to platforms, games and AI chatbots; an industry voice warns of competitive costs.",
+        "method_or_basis": "News report with one industry interview; proposal details corroborated by other outlets.",
+        "qualification": "The Kids Act is a Commission proposal (17 Sept 2026) that still requires co-decision; competitiveness effects are one industry figure's opinion, not evidence.",
+        "radar_relevance": "New EU digital/AI governance proposal with possible effects on AI product launches in Europe.",
+        "confidence": "medium",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Fetched https://www.euronews.com/next/2026/09/18/could-the-eu-kids-act-unwittingly-widen-the-transatlantic-ai-divide; full article, author Jonathan Benton, published 2026-09-18T10:19+02:00."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News article; no DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euronews.com/next/2026/09/18/could-the-eu-kids-act-unwittingly-widen-the-transatlantic-ai-divide",
+            "title": "Could the EU Kids Act unwittingly widen the transatlantic AI divide? (Euronews)",
+            "evidence_used": true
+          },
+          {
+            "kind": "corroborating_news",
+            "url": "https://iapp.org/news/a/european-commission-unveils-eu-kids-act",
+            "title": "European Commission unveils EU KIDS Act (IAPP)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Development (Commission proposal of the EU Kids Act, 17 Sept 2026) corroborated by IAPP, Engadget, Reuters/US News."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "Reports a new EU legislative proposal regulating platforms and AI chatbots for minors, with a stated tension with European AI competitiveness."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-18T16:48:55Z",
+      "deep_scan_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+      "claims": [
+        {
+          "object": "digital.governance",
+          "secondary_objects": [
+            "ai.governance"
+          ],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-09-17",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The Kids Act is a Commission proposal (17 Sept 2026) that still requires co-decision; competitiveness effects are one industry figure's opinion, not evidence.",
+          "text": "On 17 September 2026 the European Commission proposed the EU Kids Act, restricting minors' access to social media and requiring AI chatbots to be off by default for them.",
+          "confidence": "high",
+          "record_key": "link:https://www.euronews.com/next/2026/09/18/could-the-eu-kids-act-unwittingly-widen-the-transatlantic-ai-divide",
+          "merit": 64,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:c87fc39103264b91:1",
+          "attributes": {}
+        },
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Stanislas Marchand",
+            "class": "other"
+          },
+          "mechanism": "advocates",
+          "direction": "becomes_contested",
+          "status": "proposed",
+          "status_date": "2026-09-18",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "Opinion of one industry figure reported by Euronews; not an assessment of evidence.",
+          "text": "An industry figure warned the Kids Act's compliance demands could delay US AI launches in Europe and disadvantage smaller European developers.",
+          "confidence": "low",
+          "attributes": {
+            "reasoning_role": "context",
+            "context_weight": 0.3
+          },
+          "record_key": "link:https://www.euronews.com/next/2026/09/18/could-the-eu-kids-act-unwittingly-widen-the-transatlantic-ai-divide",
+          "merit": 64,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:c87fc39103264b91:2"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://climate.ec.europa.eu/areas-action/research-and-innovation-climate-action/policy-briefs_en": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "8371d3e5",
+      "identity_hash": "cd6a028dd9deae32",
+      "deep_analysis": {
+        "work_kind": "listing page",
+        "research_question": "",
+        "main_finding": "Lists three Horizon Europe policy briefs on NZIA, batteries and energy-intensive industry decarbonisation.",
+        "method_or_basis": "Direct reading of the page.",
+        "qualification": "Individual briefs not assessed.",
+        "radar_relevance": "Fails: navigation page, not a substantive work.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Fetched https://climate.ec.europa.eu/areas-action/research-and-innovation-climate-action/policy-briefs_en: a listing page (last updated 4 June 2026) with three short descriptions of separate policy briefs."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Web listing page; no DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_web_page",
+            "url": "https://climate.ec.europa.eu/areas-action/research-and-innovation-climate-action/policy-briefs_en",
+            "title": "Policy briefs (DG CLIMA listing page)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The page is a navigation/listing page; the actual briefs (NZIA, batteries, energy-intensive industries) are distinct works not assessed here."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "NOT_A_WORK_LISTING_PAGE",
+        "reason": "Generic Commission listing page; it contains only teaser descriptions of separate briefs, which should be ingested individually."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-18T16:48:55Z",
+      "deep_scan_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:b730c27a0ee85b60": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "a9f11358",
+      "identity_hash": "338c85408bb60b6e",
+      "reader_title": "Combining migration models with participatory foresight: lessons from a UNDP pilot",
+      "reader_what": "Paper describes pairing gravity-model migration projections with stakeholder foresight workshops, and draws design lessons for policy use.",
+      "reader_why": "Offers a reusable template for joining quantitative scenarios with participatory anticipation.",
+      "reader_more": "UNDP's Predictive Analytics, Human Mobility and Urbanization Project (2022–2023) projected climate-related migration into Karachi and Ho Chi Minh City to 2050 using a gravity-type model under different climate scenarios. Stakeholders then explored impacts across social, economic, political and environmental domains in participatory foresight. The authors reflect on design choices and recommend integrating models with qualitative insight. The case is outside Europe; the value for the Radar is the method.",
+      "deep_analysis": {
+        "work_kind": "methodological case reflection",
+        "research_question": "",
+        "main_finding": "Hybrid data-driven plus participatory foresight can generate and test anticipatory policy ideas, given careful design choices.",
+        "method_or_basis": "Gravity-type migration projections under climate scenarios combined with participatory foresight workshops; authors' process reflection.",
+        "qualification": "A single UNDP project reflection (two cities, 2022-2023); transferability of the design is argued from experience, not tested across cases.",
+        "radar_relevance": "Transferable hybrid foresight design (historical methods library).",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied Cambridge Core article page text matched."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Fetched OA PDF (Data & Policy 7:e13, CC BY) via OpenAlex link for 10.1017/dap.2025.2; read methods and 'Lessons learned'."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/032B5739EFD7EA65AA5DE61AEF261163/S2632324925000021a.pdf/div-class-title-anticipating-climate-change-related-mobility-in-karachi-and-ho-chi-minh-city-lessons-from-a-hybrid-foresight-approach-div.pdf",
+            "title": "Anticipating climate change-related mobility... hybrid foresight approach",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full text read."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Explicitly methodological contribution: design and reflection on integrating gravity-model projections with participatory foresight, with transferable recommendations."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-18T16:48:56Z",
+      "deep_scan_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [
+            "methods.system_modelling",
+            "methods.scenario"
+          ],
+          "actor": {
+            "name": "UNDP Predictive Analytics, Human Mobility and Urbanization Project",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2023-07",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "A single UNDP project reflection (two cities, 2022-2023); transferability of the design is argued from experience, not tested across cases.",
+          "text": "A UNDP project combined gravity-model climate-migration projections with participatory foresight to support anticipatory urban policy.",
+          "confidence": "medium",
+          "status_date_precision": "month",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "historical:id:b730c27a0ee85b60",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:338c85408bb60b6e:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:3edb9b307259ac35": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "21c3b0bc",
+      "identity_hash": "ebae6cbc014cf74d",
+      "deep_analysis": {
+        "work_kind": "essay",
+        "research_question": "",
+        "main_finding": "Identifies geopolitical and technological drivers of future security from a Latin American viewpoint.",
+        "method_or_basis": "Expert essay.",
+        "qualification": "Opinion essay.",
+        "radar_relevance": "Fails Strand A: European relevance incidental.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Fetched HCSS PDF: 'A Latin American perspective on the key drivers of future international security trends', Prof. Alcides Costa Vaz (University of Brasília), September 2024, Hague Strategic Foresight Forum Talks."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "HCSS paper; no DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://hcss.nl/wp-content/uploads/2024/09/Latin-American-perspective-on-key-drivers-future-international-security-trends-HCSS-2024-1.pdf",
+            "title": "HCSS guest paper (Costa Vaz, 2024)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full paper read; Europe mentioned only twice in passing."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NOT_SUBSTANTIVE_EU",
+        "reason": "Latin American essay on global security drivers; no substantive European R&I connection beyond passing references."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-18T16:48:56Z",
+      "deep_scan_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-09-17T20:10:38.230713+00:00"
+  "claims_updated_at": "2026-09-18T16:48:56Z"
 }

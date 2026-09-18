@@ -1,28 +1,11 @@
 {
   "version": 1,
   "profile": "radar-deep-scan-work-state-v1",
-  "updated_at": "2026-09-18T16:29:02Z",
+  "updated_at": "2026-09-18T16:52:04Z",
   "lanes": {
     "A": {
-      "target_size": 16,
-      "assigned": [
-        "historical:id:0fa9a045c44ef264",
-        "historical:id:5815e2e734c08288",
-        "historical:id:e64398987bf4dc73",
-        "historical:id:9d0da077bf121de2",
-        "historical:id:5dd5533594f180de",
-        "historical:id:068ceabb6181be45",
-        "link:https://www.cesaer.org/content/5-operations/2026/msca-statement-june-2026-final.pdf",
-        "link:https://doi.org/10.1007/s11187-026-01282-9",
-        "link:https://doi.org/10.1016/j.apgeog.2026.104029",
-        "link:https://news.google.com/rss/articles/CBMipgFBVV95cUxPdFEwX1A0T1RDdmxkTWpnNTNSUVl4ZUNWbmNoWmhEcFJmekdtcllTY2R6NTgyX0ZVdk1oSzBOOHRWLWlGUU1rQUViZW1RZFZxaHBzTHBwalFWYl9DblFHYVg3cVU1dXQwVGpCNWF4T3UzVkxNd0toQ2dvSUlMSUFPX2lNbXJqSWQ3dTZDazkzbjNtZkRhRmJQNjNQeTR0MlB1TzBGbkVR?oc=5",
-        "link:https://www.cesaer.org/content/5-operations/2026/20260330-cesaer-report-advancing-research-careers.pdf",
-        "link:https://doi.org/10.1007/s13347-026-01186-2",
-        "link:https://www.euronews.com/next/2026/09/18/could-the-eu-kids-act-unwittingly-widen-the-transatlantic-ai-divide",
-        "link:https://climate.ec.europa.eu/areas-action/research-and-innovation-climate-action/policy-briefs_en",
-        "historical:id:b730c27a0ee85b60",
-        "historical:id:3edb9b307259ac35"
-      ],
+      "target_size": 36,
+      "assigned": [],
       "current_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
       "package_history": [
         "worker-a-20260915T135230Z-5a7ccdade7b5",
@@ -68,7 +51,7 @@
       ]
     },
     "B": {
-      "target_size": 16,
+      "target_size": 36,
       "assigned": [
         "historical:id:11a2b0b21715eb40",
         "historical:id:a389794c702a37cf",
@@ -83,9 +66,8 @@
         "historical:id:85ecbd50c21035d1",
         "historical:id:fbc1af578830594e"
       ],
-      "current_package_id": "worker-b-20260918T162850Z-536ac137d3dd",
+      "current_package_id": "worker-b-20260918T165153Z-536ac137d3dd",
       "package_history": [
-        "worker-b-20260915T135246Z-d417f3359068",
         "worker-b-20260916T065755Z-743ca1212cbd",
         "worker-b-20260916T072622Z-743ca1212cbd",
         "worker-b-20260916T072916Z-ed576edf88ae",
@@ -124,7 +106,8 @@
         "worker-b-20260917T145251Z-20e73f1838e5",
         "worker-b-20260917T154655Z-a2d59c8157d0",
         "worker-b-20260917T155113Z-a2d59c8157d0",
-        "worker-b-20260918T162850Z-536ac137d3dd"
+        "worker-b-20260918T162850Z-536ac137d3dd",
+        "worker-b-20260918T165153Z-536ac137d3dd"
       ]
     }
   },
@@ -6535,7 +6518,7 @@
       "verified_at": "2026-09-14T08:39:44Z",
       "verified_package_id": "worker-b-20260914T080755Z-00501c41f66a",
       "title": "AI-based scenario management for SMEs: the need for modular, explainable and reusable foresight pipelines",
-      "source_name": "Proceedings of the Design Society",
+      "source_name": "Fraunhofer Society",
       "date": "2026-07-02",
       "url": "https://doi.org/10.1017/pds.2026.10595",
       "corpus_scope": "main"
@@ -25597,58 +25580,58 @@
       "date": "2019-12-01",
       "url": "https://doi.org/10.1177/1946756719862115",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "needs_manual_verification",
       "lane": "A",
       "assigned_at": "2026-09-16T11:18:59Z",
       "last_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
-      "recovery_attempts": 2,
-      "last_recovery_at": "2026-09-17T15:48:52Z",
-      "last_recovery_package_id": "worker-a-20260917T145243Z-e4953dcbcec9",
-      "recovery_reason": "Identity is verified, but substantive matching evidence remained inaccessible or insufficient after all six mandatory recovery steps.",
+      "recovery_attempts": 3,
+      "last_recovery_at": "2026-09-18T16:48:54Z",
+      "last_recovery_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+      "recovery_reason": "Identity confirmed via Crossref/OpenAlex and publisher abstract; no legitimate full text found after all six steps, so no admission judgement is made.",
       "verification": {
         "identity_verified": true,
         "evidence_depth": "identity_only_after_recovery",
         "retrieval_attempts": [
           {
             "step": "supplied_url",
-            "outcome": "blocked",
-            "note": "Re-opened https://doi.org/10.1177/1946756719862115; the DOI reaches SAGE, but the matching article remains access-controlled beyond its abstract."
+            "outcome": "failed",
+            "note": "Opened https://doi.org/10.1177/1946756719862115 -> redirected to journals.sagepub.com/doi/10.1177/1946756719862115, HTTP 403 Cloudflare challenge; no article text."
           },
           {
             "step": "doi",
-            "outcome": "success_identity_only",
-            "note": "DOI 10.1177/1946756719862115 matches Mateus Panizzon and Paulo Fernando Pinto Barcellos, World Futures Review 11(4), 2019; accessible material remained abstract-level."
+            "outcome": "partial",
+            "note": "OpenAlex/Crossref for 10.1177/1946756719862115 confirm title, authors Panizzon & Barcellos, World Futures Review 11(4):331-350, online 2019-07-17; Crossref carries abstract only; Unpaywall is_oa=false, no repository copy."
           },
           {
             "step": "exact_title",
-            "outcome": "success_identity_only",
-            "note": "Searched exact title \"A Three-Level Evaluation Process of Cultural Readiness for Strategic Foresight Projects\"; official SAGE/index records matched, with no open full text."
+            "outcome": "partial",
+            "note": "Web search for the quoted full title returned the Sage abstract page, a ResearchGate 'Request PDF' page (no file) and the special-issue foreword (doi 10.1177/1946756719866271) describing the article; no full text."
           },
           {
             "step": "title_author_year",
-            "outcome": "success_identity_only",
-            "note": "Searched title + Panizzon + Barcellos + 2019 + PDF; bibliographic matches appeared, but no matching substantive copy was exposed."
+            "outcome": "failed",
+            "note": "Search 'Panizzon Barcellos 2019 cultural readiness strategic foresight World Futures Review Hofstede Amsteus pdf' returned only the same abstract pages and citing works (JFS 2026, IJIMES 2023)."
           },
           {
             "step": "official_publisher_or_repository",
-            "outcome": "insufficient",
-            "note": "Tried SAGE article/abstract routes including https://journals.sagepub.com/doi/abs/10.1177/1946756719862115 and the publisher PDF route; access returned only the restricted/abstract presentation."
+            "outcome": "failed",
+            "note": "Sage page blocked (403); Unpaywall reports no OA or repository location; ResearchGate entry offers only a request button. No institutional copy located."
           },
           {
             "step": "broader_identity_search",
-            "outcome": "insufficient",
-            "note": "Broader exact-title/author searches across ResearchGate, author/institutional results and citing papers found identity or related discussion only, not a matching substantive primary copy."
+            "outcome": "failed",
+            "note": "Same bounded search using distinctive terms (Hofstede, Cameron and Quinn, Amsteus Managerial Foresight) surfaced only the foreword and citing papers, which cannot substitute for the article."
           }
         ],
         "recovered_sources": [
           {
-            "kind": "publisher_or_identity_record",
-            "url": "https://journals.sagepub.com/doi/abs/10.1177/1946756719862115",
-            "title": "A Three-Level Evaluation Process of Cultural Readiness for Strategic Foresight Projects",
-            "evidence_used": true
+            "kind": "crossref_metadata",
+            "url": "https://api.crossref.org/works/10.1177/1946756719862115",
+            "title": "Crossref record with abstract",
+            "evidence_used": false
           }
         ],
-        "verification_note": "Second recovery pass verified the work’s identity through alternate routes, but no matching substantive primary/full-text source became accessible at the required evidence standard."
+        "verification_note": "Identity verified. Note for later pass: journal is World Futures Review (11(4), 2019), not Futures as the scanner states; correction withheld because DEFER may not carry metadata changes."
       },
       "recovery_history": [
         {
@@ -25752,8 +25735,61 @@
             ],
             "verification_note": "Second recovery pass verified the work’s identity through alternate routes, but no matching substantive primary/full-text source became accessible at the required evidence standard."
           }
+        },
+        {
+          "attempt": 3,
+          "package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+          "at": "2026-09-18T16:48:54Z",
+          "reason": "Identity confirmed via Crossref/OpenAlex and publisher abstract; no legitimate full text found after all six steps, so no admission judgement is made.",
+          "verification": {
+            "identity_verified": true,
+            "evidence_depth": "identity_only_after_recovery",
+            "retrieval_attempts": [
+              {
+                "step": "supplied_url",
+                "outcome": "failed",
+                "note": "Opened https://doi.org/10.1177/1946756719862115 -> redirected to journals.sagepub.com/doi/10.1177/1946756719862115, HTTP 403 Cloudflare challenge; no article text."
+              },
+              {
+                "step": "doi",
+                "outcome": "partial",
+                "note": "OpenAlex/Crossref for 10.1177/1946756719862115 confirm title, authors Panizzon & Barcellos, World Futures Review 11(4):331-350, online 2019-07-17; Crossref carries abstract only; Unpaywall is_oa=false, no repository copy."
+              },
+              {
+                "step": "exact_title",
+                "outcome": "partial",
+                "note": "Web search for the quoted full title returned the Sage abstract page, a ResearchGate 'Request PDF' page (no file) and the special-issue foreword (doi 10.1177/1946756719866271) describing the article; no full text."
+              },
+              {
+                "step": "title_author_year",
+                "outcome": "failed",
+                "note": "Search 'Panizzon Barcellos 2019 cultural readiness strategic foresight World Futures Review Hofstede Amsteus pdf' returned only the same abstract pages and citing works (JFS 2026, IJIMES 2023)."
+              },
+              {
+                "step": "official_publisher_or_repository",
+                "outcome": "failed",
+                "note": "Sage page blocked (403); Unpaywall reports no OA or repository location; ResearchGate entry offers only a request button. No institutional copy located."
+              },
+              {
+                "step": "broader_identity_search",
+                "outcome": "failed",
+                "note": "Same bounded search using distinctive terms (Hofstede, Cameron and Quinn, Amsteus Managerial Foresight) surfaced only the foreword and citing papers, which cannot substitute for the article."
+              }
+            ],
+            "recovered_sources": [
+              {
+                "kind": "crossref_metadata",
+                "url": "https://api.crossref.org/works/10.1177/1946756719862115",
+                "title": "Crossref record with abstract",
+                "evidence_used": false
+              }
+            ],
+            "verification_note": "Identity verified. Note for later pass: journal is World Futures Review (11(4), 2019), not Futures as the scanner states; correction withheld because DEFER may not carry metadata changes."
+          }
         }
-      ]
+      ],
+      "manual_verification_since": "2026-09-18T16:48:54Z",
+      "manual_verification_reason": "Identity confirmed via Crossref/OpenAlex and publisher abstract; no legitimate full text found after all six steps, so no admission judgement is made."
     },
     "historical:id:6e4ab6c02152e018": {
       "title": "Farming versus foreign policy: The future of the EU budget – European Council on Foreign Relations",
@@ -26043,64 +26079,58 @@
       "date": "2019-08-01",
       "url": "https://doi.org/10.54648/eerr2019020",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "needs_manual_verification",
       "lane": "A",
       "assigned_at": "2026-09-16T11:18:59Z",
       "last_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
-      "recovery_attempts": 2,
-      "last_recovery_at": "2026-09-17T15:48:52Z",
-      "last_recovery_package_id": "worker-a-20260917T145243Z-e4953dcbcec9",
-      "recovery_reason": "Identity is verified, but substantive matching evidence remained inaccessible or insufficient after all six mandatory recovery steps.",
+      "recovery_attempts": 3,
+      "last_recovery_at": "2026-09-18T16:48:54Z",
+      "last_recovery_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+      "recovery_reason": "Article identity confirmed but only the publisher abstract is accessible; no repository copy found after the full ladder.",
       "verification": {
         "identity_verified": true,
         "evidence_depth": "identity_only_after_recovery",
         "retrieval_attempts": [
           {
             "step": "supplied_url",
-            "outcome": "blocked",
-            "note": "Re-opened DOI 10.54648/EERR2019020 through the supplied DOI route; the Kluwer journal record is identifiable but substantive article text remains restricted."
+            "outcome": "partial",
+            "note": "https://doi.org/10.54648/eerr2019020 resolves to kluwerlawonline.com EERR2019020 landing page with abstract only; full text behind subscription."
           },
           {
             "step": "doi",
-            "outcome": "success_identity_only",
-            "note": "Resolved/searched DOI 10.54648/EERR2019020; title, author Heiko Prange-Gstöhl, journal and 2019 publication identity were corroborated."
+            "outcome": "partial",
+            "note": "OpenAlex for 10.54648/eerr2019020: Heiko Prange-Gstöhl, European Foreign Affairs Review 24 (special issue), 2019-08-01; not OA; lists a VUB biblio location. Unpaywall is_oa=false."
           },
           {
             "step": "exact_title",
-            "outcome": "success_identity_only",
-            "note": "Searched exact title \"The EU’s Approach to Transatlantic Science and Research Relations: Between ‘Laissez Faire’ and ‘Science Diplomacy’\"; the VUB research portal matched the article."
+            "outcome": "failed",
+            "note": "Web search with quoted subtitle 'Between Laissez Faire and Science Diplomacy' plus author/journal/year returned only the Kluwer landing page and unrelated science-diplomacy items."
           },
           {
             "step": "title_author_year",
-            "outcome": "success_identity_only",
-            "note": "Searched title + Heiko Prange-Gstöhl + 2019 + PDF; results led to bibliographic/index records but no legitimate matching full text."
+            "outcome": "failed",
+            "note": "Same query combined title fragment, Prange-Gstöhl, European Foreign Affairs Review and 2019; no copy beyond Kluwer."
           },
           {
             "step": "official_publisher_or_repository",
-            "outcome": "insufficient",
-            "note": "Checked Kluwer plus VUB institutional record https://researchportal.vub.be/en/publications/the-eus-approach-to-transatlantic-science-and-research-relations-/; VUB supplies metadata/Scopus linkage, not the article file."
+            "outcome": "failed",
+            "note": "Fetched the VUB biblio URL listed by OpenAlex; it redirected to a generic library catalogue search page with no attached file."
           },
           {
             "step": "broader_identity_search",
-            "outcome": "insufficient",
-            "note": "Broader searches with title fragments, author, DOI and “science diplomacy” across repository/author-copy routes found no accessible matching substantive copy."
+            "outcome": "failed",
+            "note": "Search 'Prange-Gstöhl EU US science research relations soft power actorness laissez faire 2019' returned only unrelated actorness/soft-power literature."
           }
         ],
         "recovered_sources": [
           {
-            "kind": "institutional_identity_record",
-            "url": "https://researchportal.vub.be/en/publications/the-eus-approach-to-transatlantic-science-and-research-relations-/",
-            "title": "The EU’s Approach to Transatlantic Science and Research Relations",
-            "evidence_used": true
-          },
-          {
-            "kind": "publisher_or_identity_record",
-            "url": "https://doi.org/10.54648/EERR2019020",
-            "title": "European Foreign Affairs Review DOI record",
-            "evidence_used": true
+            "kind": "publisher_abstract",
+            "url": "https://kluwerlawonline.com/journalarticle/European+Foreign+Affairs+Review/24.Special%20Issue/EERR2019020",
+            "title": "Kluwer abstract page",
+            "evidence_used": false
           }
         ],
-        "verification_note": "Second recovery pass verified the work’s identity through alternate routes, but no matching substantive primary/full-text source became accessible at the required evidence standard."
+        "verification_note": "Identity verified; abstract only. Full text needed before admission."
       },
       "recovery_history": [
         {
@@ -26210,8 +26240,61 @@
             ],
             "verification_note": "Second recovery pass verified the work’s identity through alternate routes, but no matching substantive primary/full-text source became accessible at the required evidence standard."
           }
+        },
+        {
+          "attempt": 3,
+          "package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+          "at": "2026-09-18T16:48:54Z",
+          "reason": "Article identity confirmed but only the publisher abstract is accessible; no repository copy found after the full ladder.",
+          "verification": {
+            "identity_verified": true,
+            "evidence_depth": "identity_only_after_recovery",
+            "retrieval_attempts": [
+              {
+                "step": "supplied_url",
+                "outcome": "partial",
+                "note": "https://doi.org/10.54648/eerr2019020 resolves to kluwerlawonline.com EERR2019020 landing page with abstract only; full text behind subscription."
+              },
+              {
+                "step": "doi",
+                "outcome": "partial",
+                "note": "OpenAlex for 10.54648/eerr2019020: Heiko Prange-Gstöhl, European Foreign Affairs Review 24 (special issue), 2019-08-01; not OA; lists a VUB biblio location. Unpaywall is_oa=false."
+              },
+              {
+                "step": "exact_title",
+                "outcome": "failed",
+                "note": "Web search with quoted subtitle 'Between Laissez Faire and Science Diplomacy' plus author/journal/year returned only the Kluwer landing page and unrelated science-diplomacy items."
+              },
+              {
+                "step": "title_author_year",
+                "outcome": "failed",
+                "note": "Same query combined title fragment, Prange-Gstöhl, European Foreign Affairs Review and 2019; no copy beyond Kluwer."
+              },
+              {
+                "step": "official_publisher_or_repository",
+                "outcome": "failed",
+                "note": "Fetched the VUB biblio URL listed by OpenAlex; it redirected to a generic library catalogue search page with no attached file."
+              },
+              {
+                "step": "broader_identity_search",
+                "outcome": "failed",
+                "note": "Search 'Prange-Gstöhl EU US science research relations soft power actorness laissez faire 2019' returned only unrelated actorness/soft-power literature."
+              }
+            ],
+            "recovered_sources": [
+              {
+                "kind": "publisher_abstract",
+                "url": "https://kluwerlawonline.com/journalarticle/European+Foreign+Affairs+Review/24.Special%20Issue/EERR2019020",
+                "title": "Kluwer abstract page",
+                "evidence_used": false
+              }
+            ],
+            "verification_note": "Identity verified; abstract only. Full text needed before admission."
+          }
         }
-      ]
+      ],
+      "manual_verification_since": "2026-09-18T16:48:54Z",
+      "manual_verification_reason": "Article identity confirmed but only the publisher abstract is accessible; no repository copy found after the full ladder."
     },
     "historical:id:1191d6c094c06188": {
       "title": "Total Investment in Research and Innovation (TWIN) 2017-2023 | Rathenau Instituut",
@@ -26232,64 +26315,58 @@
       "date": "2019-06-28",
       "url": "https://doi.org/10.4337/9781784715946.00025",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "needs_manual_verification",
       "lane": "A",
       "assigned_at": "2026-09-16T11:18:59Z",
       "last_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
-      "recovery_attempts": 2,
-      "last_recovery_at": "2026-09-17T15:48:52Z",
-      "last_recovery_package_id": "worker-a-20260917T145243Z-e4953dcbcec9",
-      "recovery_reason": "Identity is verified, but substantive matching evidence remained inaccessible or insufficient after all six mandatory recovery steps.",
+      "recovery_attempts": 3,
+      "last_recovery_at": "2026-09-18T16:48:54Z",
+      "last_recovery_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+      "recovery_reason": "Chapter identity confirmed (Elgar handbook chapter 15); only the abstract is accessible after the full ladder.",
       "verification": {
         "identity_verified": true,
         "evidence_depth": "identity_only_after_recovery",
         "retrieval_attempts": [
           {
             "step": "supplied_url",
-            "outcome": "blocked",
-            "note": "Re-opened DOI 10.4337/9781784715946.00025; the claimed Edward Elgar chapter is identifiable, but chapter text was not openly accessible through the DOI route."
+            "outcome": "failed",
+            "note": "https://doi.org/10.4337/9781784715946.00025 redirects to elgaronline.com/view/edcoll/9781784715939/9781784715939.00025.xml which returns HTTP 405."
           },
           {
             "step": "doi",
-            "outcome": "success_identity_only",
-            "note": "DOI 10.4337/9781784715946.00025 matches Liudvika Leišytė, “Gender in European research policy,” pp. 284–315 in Handbook on Science and Public Policy (2019)."
+            "outcome": "partial",
+            "note": "Crossref: book-chapter 'Gender in European research policy', Liudvika Leišytė, container 'Handbook on Science and Public Policy', 2019-06-28. Unpaywall is_oa=false, no repository copy."
           },
           {
             "step": "exact_title",
-            "outcome": "success_identity_only",
-            "note": "Searched exact title \"Gender in European research policy\"; Edward Elgar/author bibliography and ResearchGate matched the chapter, with ResearchGate showing “Request full-text PDF.”"
+            "outcome": "partial",
+            "note": "Search for quoted title plus 'Handbook on Science and Public Policy' found the Elgar chapter page (pp. 284-315, abstract) and TOC; no full text."
           },
           {
             "step": "title_author_year",
-            "outcome": "success_identity_only",
-            "note": "Searched \"Gender in European research policy\" Leišytė 2019 PDF; bibliographic and secondary-summary routes appeared, but not the matching primary chapter text."
+            "outcome": "failed",
+            "note": "Same search with author and handbook; only citing references (Springer 2025 chapter) and a LinkedIn post by editor Kuhlmann."
           },
           {
             "step": "official_publisher_or_repository",
-            "outcome": "insufficient",
-            "note": "Checked Edward Elgar book page https://www.e-elgar.com/shop/usd/handbook-on-science-and-public-policy-9781784715939.html and author/publication records; the chapter itself remained unavailable."
+            "outcome": "failed",
+            "note": "Elgar platform blocks automated access (405); Unpaywall shows no institutional copy."
           },
           {
             "step": "broader_identity_search",
-            "outcome": "insufficient",
-            "note": "Broader repository search found a GfHf newsletter summary and Google Books table-of-contents evidence, but these are not the claimed chapter and cannot substitute for matching substantive primary evidence."
+            "outcome": "failed",
+            "note": "Search 'Leišytė \"fixing the women\" \"fixing the institutions\" European research policy gender chapter pdf' returned only the Elgar abstract and other works."
           }
         ],
         "recovered_sources": [
           {
-            "kind": "publisher_or_identity_record",
-            "url": "https://www.e-elgar.com/shop/usd/handbook-on-science-and-public-policy-9781784715939.html",
-            "title": "Handbook on Science and Public Policy",
-            "evidence_used": true
-          },
-          {
-            "kind": "identity_record",
-            "url": "https://www.researchgate.net/publication/370809279_Gender_in_European_research_policy",
-            "title": "Gender in European research policy — Request PDF",
-            "evidence_used": true
+            "kind": "publisher_abstract",
+            "url": "https://www.elgaronline.com/edcollchap/edcoll/9781784715939/9781784715939.00025.xml",
+            "title": "Elgar chapter abstract",
+            "evidence_used": false
           }
         ],
-        "verification_note": "Second recovery pass verified the work’s identity through alternate routes, but no matching substantive primary/full-text source became accessible at the required evidence standard."
+        "verification_note": "Identity verified. For a later pass: this is a book chapter in Edward Elgar's Handbook on Science and Public Policy (eds Simon, Kuhlmann, Stamm, Canzler), not the journal Science and Public Policy; correction withheld under DEFER."
       },
       "recovery_history": [
         {
@@ -26399,8 +26476,61 @@
             ],
             "verification_note": "Second recovery pass verified the work’s identity through alternate routes, but no matching substantive primary/full-text source became accessible at the required evidence standard."
           }
+        },
+        {
+          "attempt": 3,
+          "package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+          "at": "2026-09-18T16:48:54Z",
+          "reason": "Chapter identity confirmed (Elgar handbook chapter 15); only the abstract is accessible after the full ladder.",
+          "verification": {
+            "identity_verified": true,
+            "evidence_depth": "identity_only_after_recovery",
+            "retrieval_attempts": [
+              {
+                "step": "supplied_url",
+                "outcome": "failed",
+                "note": "https://doi.org/10.4337/9781784715946.00025 redirects to elgaronline.com/view/edcoll/9781784715939/9781784715939.00025.xml which returns HTTP 405."
+              },
+              {
+                "step": "doi",
+                "outcome": "partial",
+                "note": "Crossref: book-chapter 'Gender in European research policy', Liudvika Leišytė, container 'Handbook on Science and Public Policy', 2019-06-28. Unpaywall is_oa=false, no repository copy."
+              },
+              {
+                "step": "exact_title",
+                "outcome": "partial",
+                "note": "Search for quoted title plus 'Handbook on Science and Public Policy' found the Elgar chapter page (pp. 284-315, abstract) and TOC; no full text."
+              },
+              {
+                "step": "title_author_year",
+                "outcome": "failed",
+                "note": "Same search with author and handbook; only citing references (Springer 2025 chapter) and a LinkedIn post by editor Kuhlmann."
+              },
+              {
+                "step": "official_publisher_or_repository",
+                "outcome": "failed",
+                "note": "Elgar platform blocks automated access (405); Unpaywall shows no institutional copy."
+              },
+              {
+                "step": "broader_identity_search",
+                "outcome": "failed",
+                "note": "Search 'Leišytė \"fixing the women\" \"fixing the institutions\" European research policy gender chapter pdf' returned only the Elgar abstract and other works."
+              }
+            ],
+            "recovered_sources": [
+              {
+                "kind": "publisher_abstract",
+                "url": "https://www.elgaronline.com/edcollchap/edcoll/9781784715939/9781784715939.00025.xml",
+                "title": "Elgar chapter abstract",
+                "evidence_used": false
+              }
+            ],
+            "verification_note": "Identity verified. For a later pass: this is a book chapter in Edward Elgar's Handbook on Science and Public Policy (eds Simon, Kuhlmann, Stamm, Canzler), not the journal Science and Public Policy; correction withheld under DEFER."
+          }
         }
-      ]
+      ],
+      "manual_verification_since": "2026-09-18T16:48:54Z",
+      "manual_verification_reason": "Chapter identity confirmed (Elgar handbook chapter 15); only the abstract is accessible after the full ladder."
     },
     "historical:id:2f068ea22bdf186d": {
       "title": "Innovation policy and international relations: directions for EU diplomacy",
@@ -26434,64 +26564,51 @@
       "date": "2019-06-07",
       "url": "https://doi.org/10.1080/10242694.2019.1571826",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "needs_manual_verification",
       "lane": "A",
       "assigned_at": "2026-09-16T11:18:59Z",
       "last_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
-      "recovery_attempts": 2,
-      "last_recovery_at": "2026-09-17T15:48:52Z",
-      "last_recovery_package_id": "worker-a-20260917T145243Z-e4953dcbcec9",
-      "recovery_reason": "Identity is verified, but substantive matching evidence remained inaccessible or insufficient after all six mandatory recovery steps.",
+      "recovery_attempts": 3,
+      "last_recovery_at": "2026-09-18T16:48:54Z",
+      "last_recovery_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+      "recovery_reason": "Book review identity confirmed (Defence and Peace Economics 30(4):505-507); text not accessible after the full ladder.",
       "verification": {
         "identity_verified": true,
         "evidence_depth": "identity_only_after_recovery",
         "retrieval_attempts": [
           {
             "step": "supplied_url",
-            "outcome": "blocked",
-            "note": "Re-opened https://doi.org/10.1080/10242694.2019.1571826; Taylor & Francis identifies the review but requires access for the review text."
+            "outcome": "failed",
+            "note": "https://doi.org/10.1080/10242694.2019.1571826 -> tandfonline.com/doi/full/... HTTP 403 bot block."
           },
           {
             "step": "doi",
-            "outcome": "success_identity_only",
-            "note": "DOI 10.1080/10242694.2019.1571826 matches Matthew Uttley’s 2019 review in Defence and Peace Economics 30(4), pp. 505–507."
+            "outcome": "partial",
+            "note": "Crossref/OpenAlex: Matthew Uttley review, Defence and Peace Economics vol 30 issue 4 pp 505-507, 2019-01-27. Unpaywall is_oa=false."
           },
           {
             "step": "exact_title",
-            "outcome": "success_identity_only",
-            "note": "Searched exact title \"Review of ‘The Emergence of EU Defense Research Policy: From Innovation to Militarization’\"; RePEc and ResearchGate matched the record but supplied no review text."
+            "outcome": "failed",
+            "note": "Search for the quoted book title with 'review Uttley Defence and Peace Economics 2019' returned the reviewed book's pages and the separate Defence Studies review, not this review's text."
           },
           {
             "step": "title_author_year",
-            "outcome": "success_identity_only",
-            "note": "Searched title + Matthew Uttley + 2019 + PDF; ResearchGate explicitly reports “No full-text available” and offers only a request-to-author route."
+            "outcome": "failed",
+            "note": "Same query included reviewer, journal and year; no copy."
           },
           {
             "step": "official_publisher_or_repository",
-            "outcome": "insufficient",
-            "note": "Checked Taylor & Francis issue/article routes plus institutional/author identity routes; the publisher indicates access rights are required and no repository copy surfaced."
+            "outcome": "failed",
+            "note": "Taylor & Francis blocks retrieval (403, also via web fetch tool); Unpaywall shows no repository copy."
           },
           {
             "step": "broader_identity_search",
-            "outcome": "insufficient",
-            "note": "Broader searches using DOI, review title, Uttley and the reviewed book title found citations/book material but no legitimate copy of the claimed three-page review."
+            "outcome": "failed",
+            "note": "Search 'Karampekios Oikonomou Carayannis \"Emergence of EU Defense Research Policy\" book review Uttley OR Aly' returned only book listings and citing works."
           }
         ],
-        "recovered_sources": [
-          {
-            "kind": "identity_record",
-            "url": "https://ideas.repec.org/a/taf/defpea/v30y2019i4p505-507.html",
-            "title": "Review of The Emergence of EU Defense Research Policy — RePEc",
-            "evidence_used": true
-          },
-          {
-            "kind": "identity_record",
-            "url": "https://www.researchgate.net/publication/330667144_Review_of_%27The_Emergence_of_EU_Defense_Research_Policy_From_Innovation_to_Militarization%27",
-            "title": "Matthew Uttley review — Request PDF",
-            "evidence_used": true
-          }
-        ],
-        "verification_note": "Second recovery pass verified the work’s identity through alternate routes, but no matching substantive primary/full-text source became accessible at the required evidence standard."
+        "recovered_sources": [],
+        "verification_note": "Identity verified; short book review of Karampekios, Oikonomou & Carayannis (eds, Springer 2018). Not a duplicate of the Defence Studies review by Basem Aly."
       },
       "recovery_history": [
         {
@@ -26601,8 +26718,54 @@
             ],
             "verification_note": "Second recovery pass verified the work’s identity through alternate routes, but no matching substantive primary/full-text source became accessible at the required evidence standard."
           }
+        },
+        {
+          "attempt": 3,
+          "package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+          "at": "2026-09-18T16:48:54Z",
+          "reason": "Book review identity confirmed (Defence and Peace Economics 30(4):505-507); text not accessible after the full ladder.",
+          "verification": {
+            "identity_verified": true,
+            "evidence_depth": "identity_only_after_recovery",
+            "retrieval_attempts": [
+              {
+                "step": "supplied_url",
+                "outcome": "failed",
+                "note": "https://doi.org/10.1080/10242694.2019.1571826 -> tandfonline.com/doi/full/... HTTP 403 bot block."
+              },
+              {
+                "step": "doi",
+                "outcome": "partial",
+                "note": "Crossref/OpenAlex: Matthew Uttley review, Defence and Peace Economics vol 30 issue 4 pp 505-507, 2019-01-27. Unpaywall is_oa=false."
+              },
+              {
+                "step": "exact_title",
+                "outcome": "failed",
+                "note": "Search for the quoted book title with 'review Uttley Defence and Peace Economics 2019' returned the reviewed book's pages and the separate Defence Studies review, not this review's text."
+              },
+              {
+                "step": "title_author_year",
+                "outcome": "failed",
+                "note": "Same query included reviewer, journal and year; no copy."
+              },
+              {
+                "step": "official_publisher_or_repository",
+                "outcome": "failed",
+                "note": "Taylor & Francis blocks retrieval (403, also via web fetch tool); Unpaywall shows no repository copy."
+              },
+              {
+                "step": "broader_identity_search",
+                "outcome": "failed",
+                "note": "Search 'Karampekios Oikonomou Carayannis \"Emergence of EU Defense Research Policy\" book review Uttley OR Aly' returned only book listings and citing works."
+              }
+            ],
+            "recovered_sources": [],
+            "verification_note": "Identity verified; short book review of Karampekios, Oikonomou & Carayannis (eds, Springer 2018). Not a duplicate of the Defence Studies review by Basem Aly."
+          }
         }
-      ]
+      ],
+      "manual_verification_since": "2026-09-18T16:48:54Z",
+      "manual_verification_reason": "Book review identity confirmed (Defence and Peace Economics 30(4):505-507); text not accessible after the full ladder."
     },
     "historical:id:e79df3e55bbadc2c": {
       "title": "Public understanding of futures & foresight science: A reply to Chermack’s response",
@@ -26764,64 +26927,51 @@
       "date": "2019-04-03",
       "url": "https://doi.org/10.1080/14702436.2019.1586435",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "needs_manual_verification",
       "lane": "A",
       "assigned_at": "2026-09-16T11:18:59Z",
       "last_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
-      "recovery_attempts": 2,
-      "last_recovery_at": "2026-09-17T15:48:52Z",
-      "last_recovery_package_id": "worker-a-20260917T145243Z-e4953dcbcec9",
-      "recovery_reason": "Identity is verified, but substantive matching evidence remained inaccessible or insufficient after all six mandatory recovery steps.",
+      "recovery_attempts": 3,
+      "last_recovery_at": "2026-09-18T16:48:54Z",
+      "last_recovery_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+      "recovery_reason": "Book review identity confirmed (Defence Studies 19(2):205-206); text not accessible after the full ladder.",
       "verification": {
         "identity_verified": true,
         "evidence_depth": "identity_only_after_recovery",
         "retrieval_attempts": [
           {
             "step": "supplied_url",
-            "outcome": "blocked",
-            "note": "Re-opened https://doi.org/10.1080/14702436.2019.1586435; Taylor & Francis identifies Basem Aly’s book review but gates the review text."
+            "outcome": "failed",
+            "note": "https://doi.org/10.1080/14702436.2019.1586435 -> tandfonline.com, HTTP 403; web fetch tool also reported bot detection."
           },
           {
             "step": "doi",
-            "outcome": "success_identity_only",
-            "note": "DOI 10.1080/14702436.2019.1586435 matches Basem Aly, Defence Studies 19(2), pp. 205–206, published online 1 March 2019."
+            "outcome": "partial",
+            "note": "Crossref: Basem Aly, Defence Studies 19(2) pp 205-206, 2019; OpenAlex type book-review. Unpaywall is_oa=false."
           },
           {
             "step": "exact_title",
-            "outcome": "success_identity_only",
-            "note": "Searched exact review title \"The emergence of EU defense research policy: from innovation to militarization, innovation, technology, and knowledge management\"; the T&F issue/article matched."
+            "outcome": "partial",
+            "note": "Search for the quoted book title returned the T&F record for this review (title/pages only) and the book's publisher pages."
           },
           {
             "step": "title_author_year",
-            "outcome": "success_identity_only",
-            "note": "Searched review title + Basem Aly + 2019 + PDF; results corroborated the citation but did not expose the two-page review body."
+            "outcome": "failed",
+            "note": "Query with reviewer name and year found no accessible copy."
           },
           {
             "step": "official_publisher_or_repository",
-            "outcome": "insufficient",
-            "note": "Checked T&F article and Defence Studies 19(2) issue pages; both show Full Text/PDF controls subject to access rights, with no open repository copy found."
+            "outcome": "failed",
+            "note": "T&F blocked; no repository copy per Unpaywall."
           },
           {
             "step": "broader_identity_search",
-            "outcome": "insufficient",
-            "note": "Broader DOI/title/author search across indexing and document-host routes found citation/download-service records only, not a legitimate matching substantive copy."
+            "outcome": "failed",
+            "note": "Search combining editors' names with 'book review Uttley OR Aly' found only book listings and citing works."
           }
         ],
-        "recovered_sources": [
-          {
-            "kind": "publisher_or_identity_record",
-            "url": "https://www.tandfonline.com/doi/full/10.1080/14702436.2019.1586435",
-            "title": "The emergence of EU defense research policy: from innovation to militarization, innovation, technology, and knowledge management",
-            "evidence_used": true
-          },
-          {
-            "kind": "publisher_or_identity_record",
-            "url": "https://www.tandfonline.com/toc/fdef20/19/2",
-            "title": "Defence Studies, Volume 19, Issue 2",
-            "evidence_used": true
-          }
-        ],
-        "verification_note": "Second recovery pass verified the work’s identity through alternate routes, but no matching substantive primary/full-text source became accessible at the required evidence standard."
+        "recovered_sources": [],
+        "verification_note": "Identity verified; two-page book review. Separate work from the Uttley review (A4)."
       },
       "recovery_history": [
         {
@@ -26931,8 +27081,54 @@
             ],
             "verification_note": "Second recovery pass verified the work’s identity through alternate routes, but no matching substantive primary/full-text source became accessible at the required evidence standard."
           }
+        },
+        {
+          "attempt": 3,
+          "package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+          "at": "2026-09-18T16:48:54Z",
+          "reason": "Book review identity confirmed (Defence Studies 19(2):205-206); text not accessible after the full ladder.",
+          "verification": {
+            "identity_verified": true,
+            "evidence_depth": "identity_only_after_recovery",
+            "retrieval_attempts": [
+              {
+                "step": "supplied_url",
+                "outcome": "failed",
+                "note": "https://doi.org/10.1080/14702436.2019.1586435 -> tandfonline.com, HTTP 403; web fetch tool also reported bot detection."
+              },
+              {
+                "step": "doi",
+                "outcome": "partial",
+                "note": "Crossref: Basem Aly, Defence Studies 19(2) pp 205-206, 2019; OpenAlex type book-review. Unpaywall is_oa=false."
+              },
+              {
+                "step": "exact_title",
+                "outcome": "partial",
+                "note": "Search for the quoted book title returned the T&F record for this review (title/pages only) and the book's publisher pages."
+              },
+              {
+                "step": "title_author_year",
+                "outcome": "failed",
+                "note": "Query with reviewer name and year found no accessible copy."
+              },
+              {
+                "step": "official_publisher_or_repository",
+                "outcome": "failed",
+                "note": "T&F blocked; no repository copy per Unpaywall."
+              },
+              {
+                "step": "broader_identity_search",
+                "outcome": "failed",
+                "note": "Search combining editors' names with 'book review Uttley OR Aly' found only book listings and citing works."
+              }
+            ],
+            "recovered_sources": [],
+            "verification_note": "Identity verified; two-page book review. Separate work from the Uttley review (A4)."
+          }
         }
-      ]
+      ],
+      "manual_verification_since": "2026-09-18T16:48:54Z",
+      "manual_verification_reason": "Book review identity confirmed (Defence Studies 19(2):205-206); text not accessible after the full ladder."
     },
     "historical:id:800580d3c6eec534": {
       "title": "Responsible research and innovation in Europe: A cross-country comparative analysis",
@@ -27865,64 +28061,58 @@
       "date": "2018-03-12",
       "url": "https://doi.org/10.1108/fs-07-2017-0034",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "needs_manual_verification",
       "lane": "A",
       "assigned_at": "2026-09-16T11:59:13Z",
       "last_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
-      "recovery_attempts": 2,
-      "last_recovery_at": "2026-09-17T15:48:53Z",
-      "last_recovery_package_id": "worker-a-20260917T145243Z-e4953dcbcec9",
-      "recovery_reason": "Identity is verified, but substantive matching evidence remained inaccessible or insufficient after all six mandatory recovery steps.",
+      "recovery_attempts": 3,
+      "last_recovery_at": "2026-09-18T16:48:54Z",
+      "last_recovery_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+      "recovery_reason": "Article identity confirmed (foresight 20(1):105-122); only the structured abstract is accessible after the full ladder.",
       "verification": {
         "identity_verified": true,
         "evidence_depth": "identity_only_after_recovery",
         "retrieval_attempts": [
           {
             "step": "supplied_url",
-            "outcome": "blocked",
-            "note": "Re-opened https://doi.org/10.1108/FS-07-2017-0034; Emerald identifies the exact article but labels it “Available to Purchase” and does not expose the article body."
+            "outcome": "failed",
+            "note": "https://doi.org/10.1108/fs-07-2017-0034 -> emerald.com/fs/article/20/1/105/91909/..., HTTP 403."
           },
           {
             "step": "doi",
-            "outcome": "success_identity_only",
-            "note": "DOI 10.1108/FS-07-2017-0034 matches Milan Jezic von Gesseneck, Renato Toffanin and Josip Jezic von Gesseneck, Foresight 20(1), pp. 105–122 (2018)."
+            "outcome": "partial",
+            "note": "OpenAlex: Jezic von Gesseneck, Toffanin, Jezic von Gesseneck, foresight, online 2018-01-24; not OA. Unpaywall is_oa=false."
           },
           {
             "step": "exact_title",
-            "outcome": "success_identity_only",
-            "note": "Exact-title search found the Emerald article and author-profile/index listings; none supplied a matching full/substantive copy."
+            "outcome": "partial",
+            "note": "Quoted-title search found the Emerald full-html URL (structured abstract only: multiple case study of six OCTs, Territorial Strategies for Innovation project, 10th EDF)."
           },
           {
             "step": "title_author_year",
-            "outcome": "success_identity_only",
-            "note": "Searched title + Milan Jezic von Gesseneck + Toffanin + 2018 + PDF; results corroborated identity and related work only."
+            "outcome": "failed",
+            "note": "Results for authors/2018 were the same Emerald record and issue TOC."
           },
           {
             "step": "official_publisher_or_repository",
-            "outcome": "insufficient",
-            "note": "Checked Emerald issue https://www.emerald.com/fs/issue/20/1 and followed its “Open the PDF” control; it redirected back to access-controlled article/abstract content rather than an accessible PDF."
+            "outcome": "failed",
+            "note": "Emerald blocked (403); no repository copy per Unpaywall."
           },
           {
             "step": "broader_identity_search",
-            "outcome": "insufficient",
-            "note": "Broader Academia/ResearchGate/author-title searches found the exact work listed and an open 2022 follow-up, but no accessible 2018 full text; the later related paper was rejected as a substitute."
+            "outcome": "failed",
+            "note": "Same search surfaced the authors' later Frontiers 2022 paper (doi 10.3389/frma.2021.801789) on backcasting in three OCTs; it is a different work and was not used as substitute evidence."
           }
         ],
         "recovered_sources": [
           {
-            "kind": "publisher_or_identity_record",
-            "url": "https://doi.org/10.1108/FS-07-2017-0034",
-            "title": "Innovation system foresight and systemic innovation for the overseas countries and territories",
-            "evidence_used": true
-          },
-          {
-            "kind": "publisher_or_identity_record",
-            "url": "https://www.emerald.com/fs/issue/20/1",
-            "title": "Foresight, Volume 20, Issue 1",
-            "evidence_used": true
+            "kind": "publisher_abstract",
+            "url": "https://www.emerald.com/insight/content/doi/10.1108/fs-07-2017-0034/full/html",
+            "title": "Emerald abstract",
+            "evidence_used": false
           }
         ],
-        "verification_note": "Second recovery pass confirmed the article and exposed a detailed Emerald structured abstract, but the package explicitly disallows abstract-only evidence for an authoritative decision; the publisher PDF route remained access-controlled."
+        "verification_note": "Identity verified; abstract only. Scanner date 2018-03-12 is issue date; online 2018-01-24."
       },
       "recovery_history": [
         {
@@ -28025,8 +28215,61 @@
             ],
             "verification_note": "Second recovery pass confirmed the article and exposed a detailed Emerald structured abstract, but the package explicitly disallows abstract-only evidence for an authoritative decision; the publisher PDF route remained access-controlled."
           }
+        },
+        {
+          "attempt": 3,
+          "package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+          "at": "2026-09-18T16:48:54Z",
+          "reason": "Article identity confirmed (foresight 20(1):105-122); only the structured abstract is accessible after the full ladder.",
+          "verification": {
+            "identity_verified": true,
+            "evidence_depth": "identity_only_after_recovery",
+            "retrieval_attempts": [
+              {
+                "step": "supplied_url",
+                "outcome": "failed",
+                "note": "https://doi.org/10.1108/fs-07-2017-0034 -> emerald.com/fs/article/20/1/105/91909/..., HTTP 403."
+              },
+              {
+                "step": "doi",
+                "outcome": "partial",
+                "note": "OpenAlex: Jezic von Gesseneck, Toffanin, Jezic von Gesseneck, foresight, online 2018-01-24; not OA. Unpaywall is_oa=false."
+              },
+              {
+                "step": "exact_title",
+                "outcome": "partial",
+                "note": "Quoted-title search found the Emerald full-html URL (structured abstract only: multiple case study of six OCTs, Territorial Strategies for Innovation project, 10th EDF)."
+              },
+              {
+                "step": "title_author_year",
+                "outcome": "failed",
+                "note": "Results for authors/2018 were the same Emerald record and issue TOC."
+              },
+              {
+                "step": "official_publisher_or_repository",
+                "outcome": "failed",
+                "note": "Emerald blocked (403); no repository copy per Unpaywall."
+              },
+              {
+                "step": "broader_identity_search",
+                "outcome": "failed",
+                "note": "Same search surfaced the authors' later Frontiers 2022 paper (doi 10.3389/frma.2021.801789) on backcasting in three OCTs; it is a different work and was not used as substitute evidence."
+              }
+            ],
+            "recovered_sources": [
+              {
+                "kind": "publisher_abstract",
+                "url": "https://www.emerald.com/insight/content/doi/10.1108/fs-07-2017-0034/full/html",
+                "title": "Emerald abstract",
+                "evidence_used": false
+              }
+            ],
+            "verification_note": "Identity verified; abstract only. Scanner date 2018-03-12 is issue date; online 2018-01-24."
+          }
         }
-      ]
+      ],
+      "manual_verification_since": "2026-09-18T16:48:54Z",
+      "manual_verification_reason": "Article identity confirmed (foresight 20(1):105-122); only the structured abstract is accessible after the full ladder."
     },
     "historical:id:efa8a9fe16c1dd26": {
       "title": "Scientific potential of European fully open access journals",
@@ -33269,7 +33512,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-17T14:52:51Z",
-      "last_package_id": "worker-b-20260918T162850Z-536ac137d3dd",
+      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd",
       "recovery_attempts": 1,
       "last_recovery_at": "2026-09-17T15:43:57Z",
       "last_recovery_package_id": "worker-b-20260917T145251Z-20e73f1838e5",
@@ -33473,7 +33716,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-17T15:46:55Z",
-      "last_package_id": "worker-b-20260918T162850Z-536ac137d3dd"
+      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd"
     },
     "historical:id:a389794c702a37cf": {
       "title": "The implementation of research security policies in Germany: exploring policy narratives across governance levels",
@@ -33484,7 +33727,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-17T15:46:55Z",
-      "last_package_id": "worker-b-20260918T162850Z-536ac137d3dd"
+      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd"
     },
     "historical:id:792eb0799f1d6011": {
       "title": "Fostering regional entrepreneurial ecosystem development: the role of science and technology park networks",
@@ -33495,7 +33738,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-17T15:46:55Z",
-      "last_package_id": "worker-b-20260918T162850Z-536ac137d3dd"
+      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd"
     },
     "historical:id:ae55418dfdd17944": {
       "title": "New Study Examines Drivers of Government Investment in Energy Innovation",
@@ -33506,7 +33749,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-17T15:46:55Z",
-      "last_package_id": "worker-b-20260918T162850Z-536ac137d3dd"
+      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd"
     },
     "historical:id:c24eca9c42fb2dcf": {
       "title": "Hot Summer of Research and Innovation Policy – What’s Cooking in Brussels | Demos Helsinki",
@@ -33517,7 +33760,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-17T15:46:55Z",
-      "last_package_id": "worker-b-20260918T162850Z-536ac137d3dd"
+      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd"
     },
     "link:https://www.cesaer.org/content/5-operations/2026/msca-statement-june-2026-final.pdf": {
       "title": "Marie Skłodowska-Curie Actions: Research talent is Europe’s strategic advantage",
@@ -33525,10 +33768,12 @@
       "date": "2026-06-29",
       "url": "https://www.cesaer.org/content/5-operations/2026/msca-statement-june-2026-final.pdf",
       "corpus_scope": "main",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-18T16:28:35Z",
-      "last_package_id": "worker-a-20260918T162835Z-11dcaed103f5"
+      "last_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+      "verified_at": "2026-09-18T16:48:54Z",
+      "verified_package_id": "worker-a-20260918T162835Z-11dcaed103f5"
     },
     "link:https://doi.org/10.1007/s11187-026-01282-9": {
       "title": "On and off the podium: long-term impact evaluation of European R&D Grants on patenting performance",
@@ -33536,10 +33781,12 @@
       "date": "2026-09-17",
       "url": "https://doi.org/10.1007/s11187-026-01282-9",
       "corpus_scope": "main",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-18T16:28:35Z",
-      "last_package_id": "worker-a-20260918T162835Z-11dcaed103f5"
+      "last_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+      "verified_at": "2026-09-18T16:48:54Z",
+      "verified_package_id": "worker-a-20260918T162835Z-11dcaed103f5"
     },
     "link:https://doi.org/10.1016/j.apgeog.2026.104029": {
       "title": "Reclaiming the margins in environmental research: Epistemic inequalities across Europe's geographical and disciplinary peripheries",
@@ -33547,10 +33794,12 @@
       "date": "2026-04-30",
       "url": "https://doi.org/10.1016/j.apgeog.2026.104029",
       "corpus_scope": "main",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-18T16:28:35Z",
-      "last_package_id": "worker-a-20260918T162835Z-11dcaed103f5"
+      "last_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+      "verified_at": "2026-09-18T16:48:55Z",
+      "verified_package_id": "worker-a-20260918T162835Z-11dcaed103f5"
     },
     "link:https://news.google.com/rss/articles/CBMipgFBVV95cUxPdFEwX1A0T1RDdmxkTWpnNTNSUVl4ZUNWbmNoWmhEcFJmekdtcllTY2R6NTgyX0ZVdk1oSzBOOHRWLWlGUU1rQUViZW1RZFZxaHBzTHBwalFWYl9DblFHYVg3cVU1dXQwVGpCNWF4T3UzVkxNd0toQ2dvSUlMSUFPX2lNbXJqSWQ3dTZDazkzbjNtZkRhRmJQNjNQeTR0MlB1TzBGbkVR?oc=5": {
       "title": "Canada looks to deepen research and education links with the EU",
@@ -33558,10 +33807,12 @@
       "date": "2026-09-17T14:38Z",
       "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPdFEwX1A0T1RDdmxkTWpnNTNSUVl4ZUNWbmNoWmhEcFJmekdtcllTY2R6NTgyX0ZVdk1oSzBOOHRWLWlGUU1rQUViZW1RZFZxaHBzTHBwalFWYl9DblFHYVg3cVU1dXQwVGpCNWF4T3UzVkxNd0toQ2dvSUlMSUFPX2lNbXJqSWQ3dTZDazkzbjNtZkRhRmJQNjNQeTR0MlB1TzBGbkVR?oc=5",
       "corpus_scope": "main",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-18T16:28:35Z",
-      "last_package_id": "worker-a-20260918T162835Z-11dcaed103f5"
+      "last_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+      "verified_at": "2026-09-18T16:48:55Z",
+      "verified_package_id": "worker-a-20260918T162835Z-11dcaed103f5"
     },
     "link:https://www.cesaer.org/content/5-operations/2026/20260330-cesaer-report-advancing-research-careers.pdf": {
       "title": "Advancing research careers across Europe",
@@ -33569,10 +33820,12 @@
       "date": "2026-03-30",
       "url": "https://www.cesaer.org/content/5-operations/2026/20260330-cesaer-report-advancing-research-careers.pdf",
       "corpus_scope": "main",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-18T16:28:35Z",
-      "last_package_id": "worker-a-20260918T162835Z-11dcaed103f5"
+      "last_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+      "verified_at": "2026-09-18T16:48:55Z",
+      "verified_package_id": "worker-a-20260918T162835Z-11dcaed103f5"
     },
     "link:https://doi.org/10.1007/s13347-026-01186-2": {
       "title": "For Good or Ill? A Conceptual Analysis of the Notion of Dual-use Technology",
@@ -33580,10 +33833,12 @@
       "date": "2026-09-18",
       "url": "https://doi.org/10.1007/s13347-026-01186-2",
       "corpus_scope": "main",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-18T16:28:35Z",
-      "last_package_id": "worker-a-20260918T162835Z-11dcaed103f5"
+      "last_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+      "verified_at": "2026-09-18T16:48:55Z",
+      "verified_package_id": "worker-a-20260918T162835Z-11dcaed103f5"
     },
     "link:https://www.euronews.com/next/2026/09/18/could-the-eu-kids-act-unwittingly-widen-the-transatlantic-ai-divide": {
       "title": "Could the EU Kids Act unwittingly widen the transatlantic AI divide?",
@@ -33591,10 +33846,12 @@
       "date": "2026-09-18T00:00Z",
       "url": "https://www.euronews.com/next/2026/09/18/could-the-eu-kids-act-unwittingly-widen-the-transatlantic-ai-divide",
       "corpus_scope": "main",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-18T16:28:35Z",
-      "last_package_id": "worker-a-20260918T162835Z-11dcaed103f5"
+      "last_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+      "verified_at": "2026-09-18T16:48:55Z",
+      "verified_package_id": "worker-a-20260918T162835Z-11dcaed103f5"
     },
     "link:https://climate.ec.europa.eu/areas-action/research-and-innovation-climate-action/policy-briefs_en": {
       "title": "Policy briefs",
@@ -33602,10 +33859,12 @@
       "date": "2026-07-08",
       "url": "https://climate.ec.europa.eu/areas-action/research-and-innovation-climate-action/policy-briefs_en",
       "corpus_scope": "main",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-18T16:28:35Z",
-      "last_package_id": "worker-a-20260918T162835Z-11dcaed103f5"
+      "last_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+      "verified_at": "2026-09-18T16:48:55Z",
+      "verified_package_id": "worker-a-20260918T162835Z-11dcaed103f5"
     },
     "historical:id:b730c27a0ee85b60": {
       "title": "Anticipating climate change-related mobility in Karachi and Ho Chi Minh City: lessons from a hybrid foresight approach",
@@ -33613,10 +33872,12 @@
       "date": "2025-01-01",
       "url": "https://doi.org/10.1017/dap.2025.2",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-18T16:28:35Z",
-      "last_package_id": "worker-a-20260918T162835Z-11dcaed103f5"
+      "last_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+      "verified_at": "2026-09-18T16:48:56Z",
+      "verified_package_id": "worker-a-20260918T162835Z-11dcaed103f5"
     },
     "historical:id:3edb9b307259ac35": {
       "title": "Guest Paper | A Latin American perspective on the key drivers of future international security trends - HCSS",
@@ -33624,10 +33885,12 @@
       "date": "2024-09-18",
       "url": "https://hcss.nl/wp-content/uploads/2024/09/Latin-American-perspective-on-key-drivers-future-international-security-trends-HCSS-2024-1.pdf",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-18T16:28:35Z",
-      "last_package_id": "worker-a-20260918T162835Z-11dcaed103f5"
+      "last_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
+      "verified_at": "2026-09-18T16:48:56Z",
+      "verified_package_id": "worker-a-20260918T162835Z-11dcaed103f5"
     },
     "historical:id:93f53dffe31df9db": {
       "title": "The evolution of triangular research and innovation collaborations in the European area",
@@ -33638,7 +33901,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-18T16:28:50Z",
-      "last_package_id": "worker-b-20260918T162850Z-536ac137d3dd"
+      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd"
     },
     "historical:id:f067422a8d923845": {
       "title": "Ireland AI Strategy Report",
@@ -33649,7 +33912,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-18T16:28:50Z",
-      "last_package_id": "worker-b-20260918T162850Z-536ac137d3dd"
+      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd"
     },
     "historical:id:966e32fa87a919e7": {
       "title": "Italy AI Strategy Report",
@@ -33660,7 +33923,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-18T16:28:50Z",
-      "last_package_id": "worker-b-20260918T162850Z-536ac137d3dd"
+      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd"
     },
     "historical:id:648abd7662187e73": {
       "title": "Hungary AI Strategy Report",
@@ -33671,7 +33934,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-18T16:28:50Z",
-      "last_package_id": "worker-b-20260918T162850Z-536ac137d3dd"
+      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd"
     },
     "historical:id:85ecbd50c21035d1": {
       "title": "France AI Strategy Report",
@@ -33682,7 +33945,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-18T16:28:50Z",
-      "last_package_id": "worker-b-20260918T162850Z-536ac137d3dd"
+      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd"
     },
     "historical:id:fbc1af578830594e": {
       "title": "Finland AI Strategy Report",
@@ -33693,7 +33956,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-18T16:28:50Z",
-      "last_package_id": "worker-b-20260918T162850Z-536ac137d3dd"
+      "last_package_id": "worker-b-20260918T165153Z-536ac137d3dd"
     }
   },
   "packages": {
@@ -43501,6 +43764,24 @@
     "worker-b-20260918T162850Z-536ac137d3dd": {
       "lane": "B",
       "created_at": "2026-09-18T16:29:02Z",
+      "record_keys": [
+        "historical:id:11a2b0b21715eb40",
+        "historical:id:a389794c702a37cf",
+        "historical:id:792eb0799f1d6011",
+        "historical:id:ae55418dfdd17944",
+        "historical:id:c24eca9c42fb2dcf",
+        "link:https://doi.org/10.1108/fs-11-2025-0260",
+        "historical:id:93f53dffe31df9db",
+        "historical:id:f067422a8d923845",
+        "historical:id:966e32fa87a919e7",
+        "historical:id:648abd7662187e73",
+        "historical:id:85ecbd50c21035d1",
+        "historical:id:fbc1af578830594e"
+      ]
+    },
+    "worker-b-20260918T165153Z-536ac137d3dd": {
+      "lane": "B",
+      "created_at": "2026-09-18T16:52:04Z",
       "record_keys": [
         "historical:id:11a2b0b21715eb40",
         "historical:id:a389794c702a37cf",

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-09-17T15:48:54Z",
+  "updated_at": "2026-09-18T16:48:56Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -9715,6 +9715,39 @@
       ],
       "updated_at": "2026-09-17T15:48:54Z",
       "deep_scan_package_id": "worker-a-20260917T145243Z-e4953dcbcec9"
+    },
+    "link:https://www.euronews.com/next/2026/09/18/could-the-eu-kids-act-unwittingly-widen-the-transatlantic-ai-divide": {
+      "fields": {
+        "title": "Could the EU Kids Act unwittingly widen the transatlantic AI divide?",
+        "authors": "Jonathan Benton"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Title and author were empty in scanner metadata; taken from the Euronews article page and its metadata.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://www.euronews.com/next/2026/09/18/could-the-eu-kids-act-unwittingly-widen-the-transatlantic-ai-divide",
+        "https://iapp.org/news/a/european-commission-unveils-eu-kids-act"
+      ],
+      "updated_at": "2026-09-18T16:48:55Z",
+      "deep_scan_package_id": "worker-a-20260918T162835Z-11dcaed103f5"
+    },
+    "historical:id:3edb9b307259ac35": {
+      "fields": {
+        "title": "A Latin American perspective on the key drivers of future international security trends",
+        "authors": "Alcides Costa Vaz"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Scanner title carried site suffix and authors were empty; title and author taken from the HCSS PDF.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://hcss.nl/wp-content/uploads/2024/09/Latin-American-perspective-on-key-drivers-future-international-security-trends-HCSS-2024-1.pdf"
+      ],
+      "updated_at": "2026-09-18T16:48:56Z",
+      "deep_scan_package_id": "worker-a-20260918T162835Z-11dcaed103f5"
     }
   }
 }

@@ -6,30 +6,21 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1385** (Main **649** + Historical **736**)
-- Automatic queue still needing V2 verification: **28** (Main **9** + Historical **19**)
-- Currently assigned to workers: **28** (Main **9** + Historical **19**)
+- Authoritative V2 verified: **1395** (Main **657** + Historical **738**)
+- Automatic queue still needing V2 verification: **12** (Main **1** + Historical **11**)
+- Currently assigned to workers: **12** (Main **1** + Historical **11**)
 - Bounded access-recovery retries still eligible: **0**
-- Hands-on verification needed: **62**
+- Hands-on verification needed: **68**
 - Automatic queue pending and not yet assigned: **0**
 
 ## Worker lanes
 
 ### Worker A
 - Current package: `worker-a-20260918T162835Z-11dcaed103f5`
-- Assigned unresolved records: **16**
-  1. `historical:id:0fa9a045c44ef264` — A Three-Level Evaluation Process of Cultural Readiness for Strategic Foresight Projects — recovery attempt 3/3
-  2. `historical:id:5815e2e734c08288` — The EUs Approach to Transatlantic Science and Research Relations: Between Laissez Faire and Science Diplomacy — recovery attempt 3/3
-  3. `historical:id:e64398987bf4dc73` — Gender in European research policy — recovery attempt 3/3
-  4. `historical:id:9d0da077bf121de2` — Review of ‘The Emergence of EU Defense Research Policy: From Innovation to Militarization’ — recovery attempt 3/3
-  5. `historical:id:5dd5533594f180de` — The emergence of EU defense research policy: from innovation to militarization, innovation, technology, and knowledge management — recovery attempt 3/3
-  6. `historical:id:068ceabb6181be45` — Innovation system foresight and systemic innovation for the overseas countries and territories — recovery attempt 3/3
-  7. `link:https://www.cesaer.org/content/5-operations/2026/msca-statement-june-2026-final.pdf` — Marie Skłodowska-Curie Actions: Research talent is Europe’s strategic advantage
-  8. `link:https://doi.org/10.1007/s11187-026-01282-9` — On and off the podium: long-term impact evaluation of European R&D Grants on patenting performance
-  - … plus 8 more in the package manifest
+- Assigned unresolved records: **0**
 
 ### Worker B
-- Current package: `worker-b-20260918T162850Z-536ac137d3dd`
+- Current package: `worker-b-20260918T165153Z-536ac137d3dd`
 - Assigned unresolved records: **12**
   1. `historical:id:11a2b0b21715eb40` — Research security by roundtable: analysis of Germany’s committees for the ethics of security-relevant research
   2. `historical:id:a389794c702a37cf` — The implementation of research security policies in Germany: exploring policy narratives across governance levels
@@ -107,3 +98,9 @@ These works no longer consume automatic Deep Scan slots. Their identity is belie
 - `historical:id:40a66178c02fbfdc` — **Geopolitics and Science and Technology Cooperation in Argentina, Chile, and Colombia** — attempts: 3/3 — Science Diplomacy — 2024-08-14 — Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP. — https://doi.org/10.4018/979-8-3693-2746-3.ch006
 - `historical:id:429b7fb8a4fd8c00` — **Fumbling Toward Foresight** — attempts: 3/3 — Futures — 2020-12-01 — Identity is verified, but substantive matching evidence remained inaccessible or insufficient after all six mandatory recovery steps. — https://doi.org/10.1177/1946756720976713
 - `historical:id:b6502660dc2a056b` — **Russia’s energy in 2030: future trends and technology priorities** — attempts: 3/3 — Foresight — 2017-04-10 — Identity is verified, but substantive matching evidence remained inaccessible or insufficient after all six mandatory recovery steps. — https://doi.org/10.1108/fs-07-2016-0034
+- `historical:id:0fa9a045c44ef264` — **A Three-Level Evaluation Process of Cultural Readiness for Strategic Foresight Projects** — attempts: 3/3 — Futures — 2019-12-01 — Identity confirmed via Crossref/OpenAlex and publisher abstract; no legitimate full text found after all six steps, so no admission judgement is made. — https://doi.org/10.1177/1946756719862115
+- `historical:id:5815e2e734c08288` — **The EUs Approach to Transatlantic Science and Research Relations: Between Laissez Faire and Science Diplomacy** — attempts: 3/3 — European Foreign Affairs Review — 2019-08-01 — Article identity confirmed but only the publisher abstract is accessible; no repository copy found after the full ladder. — https://doi.org/10.54648/eerr2019020
+- `historical:id:e64398987bf4dc73` — **Gender in European research policy** — attempts: 3/3 — Science and Public Policy — 2019-06-28 — Chapter identity confirmed (Elgar handbook chapter 15); only the abstract is accessible after the full ladder. — https://doi.org/10.4337/9781784715946.00025
+- `historical:id:9d0da077bf121de2` — **Review of ‘The Emergence of EU Defense Research Policy: From Innovation to Militarization’** — attempts: 3/3 — Defence and Peace Economics — 2019-06-07 — Book review identity confirmed (Defence and Peace Economics 30(4):505-507); text not accessible after the full ladder. — https://doi.org/10.1080/10242694.2019.1571826
+- `historical:id:5dd5533594f180de` — **The emergence of EU defense research policy: from innovation to militarization, innovation, technology, and knowledge management** — attempts: 3/3 — Defence Studies — 2019-04-03 — Book review identity confirmed (Defence Studies 19(2):205-206); text not accessible after the full ladder. — https://doi.org/10.1080/14702436.2019.1586435
+- `historical:id:068ceabb6181be45` — **Innovation system foresight and systemic innovation for the overseas countries and territories** — attempts: 3/3 — Foresight — 2018-03-12 — Article identity confirmed (foresight 20(1):105-122); only the structured abstract is accessible after the full ladder. — https://doi.org/10.1108/fs-07-2017-0034
