@@ -7,8 +7,8 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **1385** (Main **649** + Historical **736**)
-- Automatic queue still needing V2 verification: **12** (Main **1** + Historical **11**)
-- Currently assigned to workers: **12** (Main **1** + Historical **11**)
+- Automatic queue still needing V2 verification: **28** (Main **9** + Historical **19**)
+- Currently assigned to workers: **28** (Main **9** + Historical **19**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **62**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,24 +16,30 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260917T155105Z-a4c0425aaf5e`
-- Assigned unresolved records: **6**
+- Current package: `worker-a-20260918T162835Z-11dcaed103f5`
+- Assigned unresolved records: **16**
   1. `historical:id:0fa9a045c44ef264` — A Three-Level Evaluation Process of Cultural Readiness for Strategic Foresight Projects — recovery attempt 3/3
   2. `historical:id:5815e2e734c08288` — The EUs Approach to Transatlantic Science and Research Relations: Between Laissez Faire and Science Diplomacy — recovery attempt 3/3
   3. `historical:id:e64398987bf4dc73` — Gender in European research policy — recovery attempt 3/3
   4. `historical:id:9d0da077bf121de2` — Review of ‘The Emergence of EU Defense Research Policy: From Innovation to Militarization’ — recovery attempt 3/3
   5. `historical:id:5dd5533594f180de` — The emergence of EU defense research policy: from innovation to militarization, innovation, technology, and knowledge management — recovery attempt 3/3
   6. `historical:id:068ceabb6181be45` — Innovation system foresight and systemic innovation for the overseas countries and territories — recovery attempt 3/3
+  7. `link:https://www.cesaer.org/content/5-operations/2026/msca-statement-june-2026-final.pdf` — Marie Skłodowska-Curie Actions: Research talent is Europe’s strategic advantage
+  8. `link:https://doi.org/10.1007/s11187-026-01282-9` — On and off the podium: long-term impact evaluation of European R&D Grants on patenting performance
+  - … plus 8 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260917T155113Z-a2d59c8157d0`
-- Assigned unresolved records: **6**
+- Current package: `worker-b-20260918T162850Z-536ac137d3dd`
+- Assigned unresolved records: **12**
   1. `historical:id:11a2b0b21715eb40` — Research security by roundtable: analysis of Germany’s committees for the ethics of security-relevant research
   2. `historical:id:a389794c702a37cf` — The implementation of research security policies in Germany: exploring policy narratives across governance levels
   3. `historical:id:792eb0799f1d6011` — Fostering regional entrepreneurial ecosystem development: the role of science and technology park networks
   4. `historical:id:ae55418dfdd17944` — New Study Examines Drivers of Government Investment in Energy Innovation
   5. `historical:id:c24eca9c42fb2dcf` — Hot Summer of Research and Innovation Policy – What’s Cooking in Brussels | Demos Helsinki
   6. `link:https://doi.org/10.1108/fs-11-2025-0260` — Artificial intelligence as a collective transformative experience: a conceptual framework for rational encounter — recovery attempt 2/3
+  7. `historical:id:93f53dffe31df9db` — The evolution of triangular research and innovation collaborations in the European area
+  8. `historical:id:f067422a8d923845` — Ireland AI Strategy Report
+  - … plus 4 more in the package manifest
 
 ## Hands-on verification needed
 
