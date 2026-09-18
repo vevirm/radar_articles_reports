@@ -114,7 +114,7 @@ function phenomenonExplanation(v){
 }
 function render(items){
   const el=document.getElementById('phenomena');
-  el.innerHTML=items.length?items.map(x=>`<li data-obviousness="${x.distance||2}"><div class="priority-meta">${x.group==='changing'?'Changing pattern':'Recurring pattern'}</div><strong>${esc(x.text)}</strong><p>${esc(phenomenonExplanation(x.text))}</p></li>`).join(''):'<li class="empty">No ongoing phenomenon is clear enough to show yet.</li>';
+  el.innerHTML=items.length?items.map(x=>`<li data-obviousness="${x.distance||2}"><div class="priority-meta">${esc(x.groupLabel||'Recurring pattern')}</div><strong>${esc(x.text)}</strong><p>${esc(x.explanation||phenomenonExplanation(x.text))}</p></li>`).join(''):'<li class="empty">No ongoing phenomenon is clear enough to show yet.</li>';
 }
 async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});return r.ok?await r.json():{}}catch(_){return {}}}
 (async()=>{
@@ -137,7 +137,7 @@ async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});ret
       // claim-native shelf would recreate the pre-reform ranking system.
       const hids=Array.isArray(hi?.publications?.continuity)?hi.publications.continuity:[];
       const hmap=new Map((Array.isArray(hi?.candidates)?hi.candidates:[]).filter(x=>x&&typeof x==='object').map(x=>[clean(x.id),x]));
-      const shown=hids.map(id=>hmap.get(clean(id))).filter(Boolean).map(c=>({text:clean(c.reader_title||c.reader_summary||c.topic_label),records:Number(c.primary_records)||0,sources:Number(c.primary_sources)||0,distance:Number(c.wow)||Number(c.inferential_distance)||3,rankScore:Number(c.score)||0,group:'changing'}));
+      const shown=hids.map(id=>hmap.get(clean(id))).filter(Boolean).map(c=>({text:clean(c.reader_title||c.topic_label),explanation:clean(c.reader_summary||''),records:Number(c.current_record_count)||Number(c.primary_records)||0,sources:Number(c.current_source_count)||Number(c.primary_sources)||0,distance:Number(c.wow)||Number(c.inferential_distance)||3,rankScore:Number(c.score)||0,groupLabel:c.grammar_id==='split_recurrence'?'Returning pattern':c.grammar_id==='era_conjunction'?'Changing pattern':'Recurring pattern'}));
       const sel=hi?.selection?.continuity||{};
       const reserve=Number(sel.reserve)||0,watch=Number(sel.watch)||0;
       const stockNote=(reserve||watch)?` ${reserve} more in reserve; ${watch} still developing.`:'';

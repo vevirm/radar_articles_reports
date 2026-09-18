@@ -41,7 +41,7 @@ function item(x,kind,i){
   const evidence=RadarPriorities.supportingEvidenceText(x);
   const source=[x.source,x.date?fmtDate(x.date):''].filter(Boolean).join(' — ');
   const sourceTitle=x.title||'Source';
-  const specificWhy=String(globalThis.RadarReaderStyle?.whyFor?.(x)||'').trim();
+  const specificWhy=String(x?.highOrder?x?.readerWhy:(globalThis.RadarReaderStyle?.whyFor?.(x)||'')).trim();
   const pair=globalThis.RadarReaderStyle?.pagePair?.(explanation,specificWhy,20,20)||{what:explanation,why:specificWhy};
   const sc=supportCount(x);
   const supportLine=(sc.records===1&&sc.sources===1)?'':`<span class="evidence-count">${sc.records} ${sc.records===1?'record':'records'} from ${sc.sources} ${sc.sources===1?'source':'sources'}</span>`;

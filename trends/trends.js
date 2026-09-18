@@ -300,6 +300,7 @@
         left:{title:clean(b.left_title||'Pull A'),plain:clean(b.left_plain||c.reader_summary||''),why:'',pull:Math.round(lp),evidence:leftEvidence,history:[],sourceCount:Number(b.left_sources)||0},
         right:{title:clean(b.right_title||'Pull B'),plain:clean(b.right_plain||c.reader_summary||''),why:'',pull:Math.round(rp),evidence:rightEvidence,history:[],sourceCount:Number(b.right_sources)||0},
         pullRange:{left:b.left_range||[],right:b.right_range||[]},
+        composition:clean(b.composition||''),flip:clean(b.flip_line||''),label:clean(b.label||''),
         actionStats:{leftActions:Number(b.left_actions)||0,rightActions:Number(b.right_actions)||0,leftSources:Number(b.left_sources)||0,rightSources:Number(b.right_sources)||0,rawLeft:Number(b.raw_left_pull),rawRight:Number(b.raw_right_pull)},
         currentEvidenceCount:Number(c.primary_records)||0,historicalContextCount:0};
     }).filter(Boolean);

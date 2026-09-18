@@ -474,6 +474,67 @@ def corroborated_claims(nodes: Iterable[dict[str, Any]]) -> list[dict[str, Any]]
     return sorted(out, key=lambda x: (bool(x.get("product")), x["source_count"], x["record_count"], x["object"]), reverse=True)
 
 
+
+def named_continuities(nodes: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Level-2 ongoing phenomena: an object with real depth in both eras.
+
+    The original reasoning specification gives ongoing phenomena a deliberately
+    broad baseline: a named continuity exists when at least two independent
+    historical sources and at least three independent current sources support the
+    same controlled object.  This is not a trend direction and not a Level-5 chain;
+    it is the persistent stock that lets the continuity product say what keeps
+    returning while rarer era-conjunction/split-recurrence findings sit above it.
+    """
+    current: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    historical: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for n in nodes:
+        era = clean(n.get("era"))
+        if era == "current" and n.get("_primary"):
+            target = current
+        elif era == "historical" and clean(n.get("_decision")) == "keep":
+            target = historical
+        else:
+            continue
+        for obj in _claim_objects(n):
+            if obj and not obj.startswith("methods."):
+                target[obj].append(n)
+
+    out: list[dict[str, Any]] = []
+    for obj in sorted(set(current) & set(historical)):
+        cur = current[obj]
+        hist = historical[obj]
+        cur_sources = {clean(n.get("_source")).lower() for n in cur if clean(n.get("_source"))}
+        hist_sources = {clean(n.get("_source")).lower() for n in hist if clean(n.get("_source"))}
+        cur_records = {clean(n.get("_record_id")) for n in cur if clean(n.get("_record_id"))}
+        hist_records = {clean(n.get("_record_id")) for n in hist if clean(n.get("_record_id"))}
+        if len(cur_sources) < 3 or len(hist_sources) < 2:
+            continue
+
+        # Evidence strength is only a same-wow ordering device.  Breadth in both
+        # eras matters more than one exceptionally prestigious publication.
+        evidence_score = min(99, round(35 + 2.0 * min(18, len(cur_sources)) + 1.5 * min(18, len(hist_sources))))
+        cur_best = sorted(cur, key=lambda n: (float(n.get("merit", 0) or 0), clean(n.get("status_date"))), reverse=True)[:12]
+        hist_best = sorted(hist, key=lambda n: (float(n.get("merit", 0) or 0), clean(n.get("status_date"))), reverse=True)[:8]
+        out.append({
+            "level": 2,
+            "grammar_id": "named_continuity",
+            "product": "continuity",
+            "object": obj,
+            "claim_ids": [clean(n.get("claim_id")) for n in cur_best + hist_best if clean(n.get("claim_id"))],
+            "current_record_count": len(cur_records),
+            "current_source_count": len(cur_sources),
+            "historical_record_count": len(hist_records),
+            "historical_source_count": len(hist_sources),
+            "score": evidence_score,
+            "score_gate_passes": True,
+            "wow_preliminary": 1,
+        })
+    return sorted(
+        out,
+        key=lambda c: (c["score"], c["current_source_count"], c["historical_source_count"], c["object"]),
+        reverse=True,
+    )
+
 def _relation_objects(n: dict[str, Any]) -> set[str]:
     return _claim_objects(n)
 
@@ -925,6 +986,41 @@ def _trigger_maturity_key(n: dict[str, Any]) -> tuple[int, float, str]:
     return (STATUS_RANK.get(clean(n.get("status")), 0), float(n.get("merit", 0) or 0), clean(n.get("status_date")))
 
 
+
+def _shock_driver_basis(dep_obj: str, support_nodes: Iterable[dict[str, Any]], vocab: dict[str, Any]) -> tuple[bool, str]:
+    """Return whether an untriggered dependency is genuinely shock-shaped.
+
+    "No trigger in the corpus" is necessary for a shock but not sufficient.  The
+    earlier implementation classified every triggerless dependency pathway as a
+    shock, which produced internal policy couplings such as talent retention ×
+    public support.  R-40/R-41 require a discontinuity mechanism: an external
+    driver, or a narrow class of abrupt control/input mechanisms capable of a
+    sudden European-system flip.
+    """
+    dep_obj = clean(dep_obj)
+    cluster = primary_cluster(dep_obj, vocab)
+    rows = list(support_nodes)
+    external_rows = []
+    for n in rows:
+        actor = n.get("actor") if isinstance(n.get("actor"), dict) else {}
+        scope = n.get("scope") if isinstance(n.get("scope"), dict) else {}
+        if (clean(actor.get("class")) == "third_country" or clean(scope.get("level")) in {"external", "third_country"}) and _touches(n, dep_obj):
+            external_rows.append(n)
+
+    if dep_obj.startswith(("finance.us_", "finance.gulf_", "eu_entities.export_access")):
+        return True, "explicit_external_dependency_object"
+    if dep_obj.startswith("export_control."):
+        return True, "abrupt_control_mechanism"
+    if dep_obj == "materials.critical_raw":
+        return True, "critical_input_disruption"
+    if external_rows and cluster in {
+        "capital_markets", "materials_energy", "talent", "digital_governance",
+        "cybersecurity", "critical_infrastructure", "chips", "compute_ai",
+        "research_infrastructure", "health",
+    }:
+        return True, "external_actor_or_scope"
+    return False, "no_discontinuity_driver"
+
 def dependency_pathways(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any], distance: dict[str, Any]) -> list[dict[str, Any]]:
     """Fit the R-32 dependency pathway over exact-object frontiers.
 
@@ -1024,7 +1120,12 @@ def dependency_pathways(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any], 
                 and bool(_claim_objects(n) & dependency_branch_objects)
             ]
             trigger = max(trigger_rows, key=_trigger_maturity_key) if trigger_rows else None
-            product = "risk" if trigger else "shock"
+            shock_driver, shock_driver_basis = _shock_driver_basis(dep_obj, support_nodes, vocab)
+            # R-41: a present disruptive event/decision is a risk.  An absent trigger
+            # becomes a shock only when the chain also contains a genuine
+            # discontinuity driver.  Otherwise it remains an untriggered structural
+            # risk pathway in stock rather than being mislabeled an external shock.
+            product = "risk" if trigger or not shock_driver else "shock"
 
             # R-31 hop ceiling applies to every load-bearing role and to the
             # trigger used to classify a risk.
@@ -1119,6 +1220,7 @@ def dependency_pathways(nodes: Iterable[dict[str, Any]], vocab: dict[str, Any], 
             out.append({
                 "level": level, "grammar_id": "dependency_pathway", "product": product,
                 "capability_object": cap_obj, "dependency_object": dep_obj,
+                "shock_driver": bool(shock_driver), "shock_driver_basis": shock_driver_basis,
                 "distance": dist, "distance_lift": lift, "distance_bonus": bonus,
                 "frontier_mode": "exact_object_overlap", "coupling_hop": hop_depths.get(clean(coupling.get("claim_id"))), "max_role_hop": max_hop,
                 "endpoint_objects": [cap_obj, endpoint_b], "endpoint_joint_outside_chain": endpoint_joint,
@@ -1592,6 +1694,7 @@ def run_shadow(root: Path = ROOT, evaluated_at: str | None = None) -> dict[str, 
     distance = build_distance_table(nodes)
     expressiveness = claim_expressiveness(nodes)
     level2 = corroborated_claims(nodes)
+    continuities = named_continuities(nodes)
     level3 = level3_findings(nodes, ev_date)
     level4 = opposing_movements(nodes, ev_date, vocab)
     dependency = dependency_pathways(nodes, vocab, distance)
@@ -1604,6 +1707,7 @@ def run_shadow(root: Path = ROOT, evaluated_at: str | None = None) -> dict[str, 
     legacy = legacy_summary(raw)
     groups = {
         "level2_corroborated": level2,
+        "level2_named_continuity": continuities,
         "level3_sequence_gap": level3,
         "level3_era_conjunction": era,
         "level4_opposing_movements": level4,
@@ -1631,7 +1735,7 @@ def run_shadow(root: Path = ROOT, evaluated_at: str | None = None) -> dict[str, 
         "distance_table": distance,
         "claim_reasoning": groups,
         "shadow_counts": {
-            "level2": len(level2), "level3": len(level3) + len(era), "level4": len(level4),
+            "level2": len(level2) + len(continuities), "named_continuity": len(continuities), "level3": len(level3) + len(era), "level4": len(level4),
             "dependency_pathway": len(dependency), "conflicting_criteria": len(criteria),
             "latent_channel": len(latent), "anchor_demand": len(anchor),
             "split_recurrence": len(split), "era_conjunction": len(era),

@@ -50,6 +50,7 @@ try:
         flatten_claims,
         latent_channels,
         level3_findings,
+        named_continuities,
         opposing_movements,
         split_recurrence_candidates,
     )
@@ -74,6 +75,7 @@ except ModuleNotFoundError:  # direct execution from scripts/
         flatten_claims,
         latent_channels,
         level3_findings,
+        named_continuities,
         opposing_movements,
         split_recurrence_candidates,
     )
@@ -148,7 +150,7 @@ def _empty_detection(raw: dict[str, Any], evaluated_at: str | None, *, reason: s
         "authority_gate": gate, "claim_expressiveness": {"ready_for_detector_switch": False, "warnings": [reason]},
         "distance_table": {"N": 0, "clusters": {}, "pairs": {}},
         "groups": {
-            "level2_corroborated": [], "level3_sequence_gap": [], "level3_era_conjunction": [],
+            "level2_corroborated": [], "level2_named_continuity": [], "level3_sequence_gap": [], "level3_era_conjunction": [],
             "level4_opposing_movements": [], "level5_dependency_pathway": [], "level4_5_conflicting_criteria": [],
             "level5_latent_channel": [], "level5_anchor_demand": [], "level5_split_recurrence": [],
         },
@@ -572,7 +574,7 @@ def detect_claim_reasoning(raw: dict[str, Any], root: Path = ROOT, evaluated_at:
             "claim_expressiveness": {"ready_for_detector_switch": False, "warnings": ["claim authority gate not ready"]},
             "distance_table": {"N": 0, "clusters": {}, "pairs": {}},
             "groups": {
-                "level2_corroborated": [], "level3_sequence_gap": [], "level3_era_conjunction": [],
+                "level2_corroborated": [], "level2_named_continuity": [], "level3_sequence_gap": [], "level3_era_conjunction": [],
                 "level4_opposing_movements": [], "level5_dependency_pathway": [],
                 "level4_5_conflicting_criteria": [], "level5_latent_channel": [],
                 "level5_anchor_demand": [], "level5_split_recurrence": [],
@@ -590,7 +592,7 @@ def detect_claim_reasoning(raw: dict[str, Any], root: Path = ROOT, evaluated_at:
             "nodes": nodes, "claim_diagnostics": diagnostics, "authority_gate": gate,
             "claim_expressiveness": expressiveness, "distance_table": {"N": 0, "clusters": {}, "pairs": {}},
             "groups": {
-                "level2_corroborated": [], "level3_sequence_gap": [], "level3_era_conjunction": [],
+                "level2_corroborated": [], "level2_named_continuity": [], "level3_sequence_gap": [], "level3_era_conjunction": [],
                 "level4_opposing_movements": [], "level5_dependency_pathway": [],
                 "level4_5_conflicting_criteria": [], "level5_latent_channel": [],
                 "level5_anchor_demand": [], "level5_split_recurrence": [],
@@ -603,6 +605,7 @@ def detect_claim_reasoning(raw: dict[str, Any], root: Path = ROOT, evaluated_at:
     distance = build_distance_table(nodes)
     groups = {
         "level2_corroborated": corroborated_claims(nodes),
+        "level2_named_continuity": named_continuities(nodes),
         "level3_sequence_gap": level3_findings(nodes, ev_date),
         "level3_era_conjunction": era_conjunctions(nodes),
         "level4_opposing_movements": opposing_movements(nodes, ev_date, vocab),
@@ -664,8 +667,10 @@ def _product_for(c: dict[str, Any]) -> str:
         return "trend"
     if grammar in {"latent_channel", "anchor_demand"}:
         return "opportunity"
-    if grammar in {"conflicting_criteria", "clock_before_rule", "deployment_before_rules", "success_metric_gap", "stalled_proposal"}:
+    if grammar in {"conflicting_criteria", "clock_before_rule", "deployment_before_rules", "practice_before_doctrine", "goal_without_measure", "success_metric_gap", "stalled_proposal"}:
         return "risk"
+    if grammar in {"named_continuity", "era_conjunction", "split_recurrence"}:
+        return "continuity"
     return "continuity"
 
 
@@ -1106,17 +1111,66 @@ def _trend_payload(
             })
         return out
 
-    raw_side = "expansion" if raw_left > 50 else "constraint" if raw_left < 50 else "neither side"
-    adj_side = "expansion" if adj_left > 50 else "constraint" if adj_left < 50 else "neither side"
-    composition = (
-        f"The count leans to {raw_side}; the weighted evidence leans to {adj_side}."
-        if raw_side != adj_side
-        else f"Both the count and weighted evidence lean to {raw_side}."
-    )
     label_text = _trend_scope_label("object", obj)
+
+    title_pairs = {
+        "ai.governance": ("Turn AI governance into operating rules", "AI governance gets harder to reconcile"),
+        "research.collaboration": ("Open more research partnerships", "Put more conditions around collaboration"),
+        "innovation.system_performance": ("Push harder on innovation performance", "Structural bottlenecks keep holding performance back"),
+        "goal.strategic_autonomy": ("Build more strategic autonomy", "Dependencies keep setting the terms"),
+        "compute.capacity": ("Build more European computing capacity", "Power, supply and access constrain the build-out"),
+        "research.system_governance": ("Strengthen research-system governance", "More conditions complicate research governance"),
+        "research_security.screening": ("Make research-security screening routine", "Keep screening proportionate to open research"),
+        "research.infrastructure": ("Build and open more research infrastructure", "Access and operating constraints tighten around it"),
+        "industrial.competitiveness": ("Build more European industrial capability", "Cost and dependency pressures keep biting"),
+        "research.system_capacity": ("Expand research-system capacity", "Capacity is being stretched or made conditional"),
+        "talent.retention": ("Make Europe stickier for researchers", "Career and mobility frictions keep pulling people away"),
+        "horizon.budget_2028_34": ("Put more money behind the next Horizon programme", "Frugal positions keep the budget under pressure"),
+    }
+    left_title, right_title = title_pairs.get(
+        obj,
+        (f"More {label_text}", f"{label_text[:1].upper()+label_text[1:]} under tighter conditions"),
+    )
+
+    mechanism_labels = {
+        "procures": "procurement", "builds": "build-outs", "funds": "funding",
+        "collaborates": "partnerships", "associates": "association agreements",
+        "supports": "support instruments", "adopts": "adopted measures",
+        "launches": "new programmes", "invests": "investment", "requires": "requirements",
+        "conditions": "conditions", "restricts": "restrictions", "regulates": "rules",
+        "screens": "screening", "assesses": "documented constraints",
+    }
+    def mechanism_phrase(rows: list[dict[str, Any]]) -> str:
+        counts = Counter(clean(n.get("mechanism")) for n in rows if clean(n.get("mechanism")))
+        labels = [mechanism_labels.get(k, k.replace("_", " ")) for k, _ in counts.most_common(2)]
+        return " and ".join(labels) if labels else "independent current evidence"
+
+    def concrete_count(rows: list[dict[str, Any]]) -> int:
+        return sum(1 for n in rows if clean(n.get("kind")) in {"action", "effect"})
+
+    lcon, rcon = concrete_count(lk), concrete_count(rk)
+    composition = (
+        f"The expansion side has {lcon} concrete action/effect record{'s' if lcon != 1 else ''} out of {len(lk)}; "
+        f"the constraining side has {rcon} out of {len(rk)}. The rest are diagnoses or positions that explain the pressure."
+    )
+    left_plain = f"Current evidence is adding or widening {label_text} through {mechanism_phrase(lk)}."
+    right_plain = f"Current evidence is making {label_text} more conditional or constrained through {mechanism_phrase(rk)}."
+
+    pending = {"intention", "proposed", "in_negotiation", "announced", "call_open"}
+    left_pending = sorted({clean(n.get("status")) for n in lk if clean(n.get("status")) in pending})
+    right_pending = sorted({clean(n.get("status")) for n in rk if clean(n.get("status")) in pending})
+    def status_trigger(statuses: list[str], fallback: str) -> str:
+        if not statuses:
+            return fallback
+        words = [x.replace("_", " ") for x in statuses[:2]]
+        if len(words) == 1:
+            return f"{words[0]} measures"
+        return f"{' or '.join(words)} measures"
+    left_trigger = status_trigger(left_pending, "current expansion measures")
+    right_trigger = status_trigger(right_pending, "current constraining measures")
     flip = (
-        "It moves toward expansion when expansion-side actions mature or spread; "
-        "toward constraint when restrictive, conditional or contested actions mature or spread."
+        f"The balance moves toward expansion if {left_trigger} become adopted or operating; "
+        f"toward constraint if {right_trigger} become adopted or in force."
     )
     return {
         "support": snaps(lk, "Expands") + snaps(rk, "Constrains"),
@@ -1130,10 +1184,10 @@ def _trend_payload(
             "object_key": obj,
             "left_role": "Expands",
             "right_role": "Constrains",
-            "left_title": f"Expanding {label_text}",
-            "right_title": f"Constraining {label_text}",
-            "left_plain": f"Current evidence is pushing {label_text} toward expansion, access or added capability.",
-            "right_plain": f"Current evidence is making {label_text} more constrained, conditional or contested.",
+            "left_title": left_title,
+            "right_title": right_title,
+            "left_plain": left_plain,
+            "right_plain": right_plain,
             "raw_left_pull": round(raw_left, 1),
             "raw_right_pull": round(100 - raw_left, 1),
             "left_pull": round(adj_left, 1),
@@ -1205,6 +1259,7 @@ _STRUCTURAL_VERIFICATION_GRAMMARS = {
     "goal_without_measure",
     "stalled_proposal",
     "success_metric_gap",
+    "named_continuity",
 }
 
 
@@ -1372,6 +1427,33 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
                     selected.append(c); selected_ids.add(cid)
             return sorted(selected, key=_selection_rank, reverse=True)
 
+        def adaptive_score_band(items: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], int | None]:
+            """Use an evidence-score threshold to curate an overcrowded same-wow band.
+
+            The target range chooses a *threshold*, never the first N records.  Ties are
+            allowed to make the visible shelf slightly larger than the nominal range,
+            which preserves the specification's no-hard-cap rule.
+            """
+            ranked = sorted(items, key=_selection_rank, reverse=True)
+            if len(ranked) <= ceil_target:
+                return ranked, None
+            scores = sorted({int(c.get("score", 0) or 0) for c in ranked}, reverse=True)
+            viable: list[tuple[int, int, list[dict[str, Any]]]] = []
+            for threshold in scores:
+                selected = [c for c in ranked if int(c.get("score", 0) or 0) >= threshold]
+                if len(selected) >= floor_target:
+                    # Prefer a threshold that lands inside the soft range; otherwise
+                    # choose the smallest overflow.  Lower thresholds win ties so the
+                    # shelf remains inclusive rather than brittle.
+                    overflow = 0 if len(selected) <= ceil_target else len(selected) - ceil_target
+                    viable.append((overflow, -len(selected), selected))
+            if viable:
+                viable.sort(key=lambda x: (x[0], x[1]))
+                selected = viable[0][2]
+                threshold = min(int(c.get("score", 0) or 0) for c in selected) if selected else None
+                return selected, threshold
+            return stable_take(ranked, floor_target), None
+
         # R-72 is a *soft target*, not a slot count.  The earlier cutover still
         # stopped at ceil_target (5 for risks/opportunities, 10 for trends), which
         # silently turned the target range into a hard cap.  Selection now works by
@@ -1450,13 +1532,15 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
                         if clean(c.get("id")) not in chosen_ids_local
                         and int(c.get("inferential_distance", c.get("level", 0)) or 0) >= 3
                     ]
-                    if len(deeper) >= floor_target - len(chosen):
-                        chosen.extend(deeper)
+                    needed = max(0, floor_target - len(chosen))
+                    if len(deeper) >= needed and deeper:
+                        deep_band, _deep_threshold = adaptive_score_band(deeper)
+                        chosen.extend(deep_band)
                     else:
                         chosen.extend(deeper)
                         chosen_ids_local = {clean(c.get("id")) for c in chosen}
                         remaining = [c for c in top if clean(c.get("id")) not in chosen_ids_local]
-                        chosen.extend(stable_take(remaining, floor_target - len(chosen)))
+                        chosen.extend(stable_take(remaining, max(0, floor_target - len(chosen))))
                 # R-74: if a lower wow point exists below the active shelf and is
                 # not already represented by the minimum-fill step, keep one best
                 # baseline representative.  Do not turn that baseline into a cap.
@@ -1475,11 +1559,26 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
                         chosen.append(max(lower, key=_selection_rank))
             else:
                 wow_floor = 3
-                # Shortage rule: there is no crowded upper shelf to curate, so show
-                # the verified material that exists instead of manufacturing empty
-                # space.  This is why a product may legitimately show six baseline
-                # opportunities even though 2-5 is its normal target range.
-                chosen = list(deduped)
+                # There is no crowded wow>=3 band.  Ordinary corroborated baseline
+                # findings are therefore shown as they exist: the 2-5 target is not
+                # a numeric cap (R-72).  Named continuities are a special structural
+                # baseline because a mature archive can produce dozens of perfectly
+                # valid Level-2 continuities at once.  For that product, strengthen
+                # the *corroboration floor* in discrete source-breadth bands and show
+                # everything that clears the strongest band which still supplies the
+                # soft minimum.  This is an evidence threshold, not a first-N slice.
+                if product == "continuity" and len(deduped) > ceil_target:
+                    def continuity_breadth(c):
+                        return int(c.get("current_source_count", 0) or 0) + int(c.get("historical_source_count", 0) or 0)
+                    selected_band = []
+                    for source_floor in (40, 30, 20, 12, 8, 5):
+                        band = [c for c in deduped if continuity_breadth(c) >= source_floor]
+                        if len(band) >= floor_target:
+                            selected_band = band
+                            break
+                    chosen = selected_band or list(deduped)
+                else:
+                    chosen = list(deduped)
 
         # Preserve deterministic page order: wow first, then depth/evidence score.
         # Same-story hysteresis was already applied during the folding pass above.
@@ -1523,6 +1622,10 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
             elif c.get("status") == "killed":
                 c["movement"] = "killed"
                 c["stock_tier"] = "killed"
+            elif c.get("status") == "dormant":
+                c["movement"] = "dormant"
+                c["stock_tier"] = "dormant"
+                c["publication_lock_reason"] = clean(c.get("exit_reason")) or "Dormant stock item; not active on the current shelf."
             elif c in eligible or clean(c.get("movement")) == "reserve":
                 c["movement"] = "reserve"
                 c["stock_tier"] = "reserve"
@@ -1589,6 +1692,138 @@ def _candidate_topic_label(grammar: str, topic: str) -> str:
     return f"{base} — {suffix}" if suffix else base
 
 
+
+
+def _friendly_object_label(value: Any) -> str:
+    obj = clean(value)
+    aliases = {
+        "compute.public_procurement": "AI-factory public procurement",
+        "compute.gigafactory": "AI-gigafactory capacity",
+        "compute.capacity": "European computing capacity",
+        "compute.private_investment": "private investment in European compute",
+        "datacentre.permitting": "data-centre permitting",
+        "datacentre.energy_supply": "data-centre power supply",
+        "quantum.testing_infrastructure": "open quantum testing",
+        "export_control.competence": "national export-control licensing",
+        "export_control.regulation": "export-control rules",
+        "research_security.screening": "research-security screening",
+        "research.collaboration": "research collaboration",
+        "research.system_governance": "research-system governance",
+        "research.system_capacity": "research-system capacity",
+        "research.infrastructure": "research infrastructure",
+        "research.infrastructure_access": "access to research infrastructure",
+        "research.public_support": "public research support",
+        "innovation.system_performance": "innovation-system performance",
+        "industrial.competitiveness": "industrial competitiveness",
+        "innovation.dual_use": "dual-use innovation",
+        "goal.strategic_autonomy": "strategic-autonomy goals",
+        "talent.retention": "researcher retention",
+        "talent.recruitment_abroad": "international researcher recruitment",
+        "horizon.association": "Horizon association",
+        "horizon.budget_2028_34": "the next Horizon budget",
+        "materials.critical_raw": "critical raw-material supply",
+        "finance.strategic_investment": "strategic investment finance",
+        "finance.us_hyperscaler_debt_exposure": "European exposure to US AI debt",
+        "finance.gulf_capital": "Gulf capital for European technology",
+        "health.data_infrastructure": "European health-data infrastructure",
+        "digital.sovereignty": "digital sovereignty",
+        "ai.governance": "AI governance",
+        "ai.adoption": "AI adoption",
+        "defence.drone_capability": "European drone capability",
+        "defence.innovation_funding": "defence-innovation funding",
+    }
+    if obj in aliases:
+        return aliases[obj]
+    text = obj.replace(".", " ").replace("_", " ")
+    return clean(text) or "European research and innovation"
+
+
+def _reader_copy(grammar: str, product: str, raw: dict[str, Any], candidate: dict[str, Any]) -> tuple[str, str]:
+    eps = [clean(x) for x in raw.get("endpoint_objects", []) if clean(x)] if isinstance(raw.get("endpoint_objects"), list) else []
+    a = _friendly_object_label(eps[0] if eps else raw.get("object") or raw.get("capability_object") or raw.get("objective_object"))
+    b = _friendly_object_label(eps[1] if len(eps) > 1 else raw.get("dependency_object") or raw.get("delivery_object"))
+    records = int(candidate.get("primary_records", 0) or 0)
+    sources = int(candidate.get("primary_sources", 0) or 0)
+
+    if grammar == "named_continuity":
+        cur_s = int(raw.get("current_source_count", 0) or 0)
+        hist_s = int(raw.get("historical_source_count", 0) or 0)
+        title_map = {
+            "research collaboration": "Research collaboration keeps changing shape, not disappearing.",
+            "innovation-system performance": "Europe keeps returning to the same innovation-conversion problem.",
+            "AI governance": "AI governance keeps moving from principles into operating rules.",
+            "research-system governance": "Research governance keeps moving closer to delivery and competitiveness.",
+            "strategic-autonomy goals": "Strategic autonomy keeps spreading through research and technology policy.",
+            "research infrastructure": "Research infrastructure keeps becoming a strategic capability in its own right.",
+            "researcher retention": "Researcher retention keeps returning as a capacity constraint.",
+            "research-security screening": "Research security keeps moving into ordinary research administration.",
+        }
+        title = title_map.get(a, f"{a[:1].upper()+a[1:]} keeps returning across the research-policy cycle.")
+        return title, f"The same controlled issue is supported by {cur_s} current and {hist_s} historical independent sources. The current form has changed, but the underlying issue has persisted across both eras."
+
+    if grammar == "practice_before_doctrine":
+        return f"{a[:1].upper()+a[1:]} is moving into practice before the rulebook catches up.", "Implementation is already visible in the evidence before a later doctrine or framework on the same object has settled. That timing can make provisional practice harden into the default."
+    if grammar == "goal_without_measure":
+        inv = int(raw.get("invocations", 0) or 0); meas = int(raw.get("measurements", 0) or 0)
+        return f"{a[:1].upper()+a[1:]} is being invoked faster than it is being measured.", f"The evidence contains {inv} goal or action claims but only {meas} matching outcome measurements. The gap matters because activity can expand without showing whether the stated objective is being achieved."
+    if grammar == "clock_before_rule":
+        return f"The delivery clock is running before the rules are settled for {a}.", "A funded or scheduled delivery timetable is already running while the connected rules remain below the adopted stage. The risk is that implementation deadlines arrive before the governance conditions are fixed."
+    if grammar == "deployment_before_rules":
+        return f"{a[:1].upper()+a[1:]} is moving ahead of settled rules.", "Operating activity appears in the evidence before an adopted rule on the same object. Practice can therefore become established before governance catches up."
+    if grammar == "success_metric_gap":
+        return f"{a[:1].upper()+a[1:]} can be funded before success is properly measured.", "The stated objective and the delivery instrument are not the same thing, and the evidence base still lacks a matching outcome measure. Delivery can look successful before the intended result is known."
+    if grammar == "stalled_proposal":
+        return f"A proposal affecting {a} is ageing without a later decision.", "The proposal has remained below implementation for more than six months with no later status transition in the evidence base."
+    if grammar == "conflicting_criteria":
+        return f"{a[:1].upper()+a[1:]} is colliding with {b}.", "Separate records support both requirements, but the evidence base does not yet show a common tie-break. The same project or facility can therefore receive different answers depending on which rule is applied first."
+    if grammar == "dependency_pathway":
+        if product == "shock":
+            return f"A sudden break in {b} could propagate into {a}.", "The disruptive event itself is not in the corpus, but separate records document the coupling, propagation route and European exposure. This is a possible discontinuity, not a forecast."
+        return f"A bottleneck in {b} could propagate into {a}.", "Separate records connect a European capability to a dependency and show a route by which disruption could spread beyond one isolated project."
+    if grammar == "latent_channel":
+        return f"{b[:1].upper()+b[1:]} could become the missing route into {a}.", "The evidence contains both an unresolved need and an existing structure that could address it. A live connection between the two would turn existing pieces into a usable European capability rather than requiring a new system from scratch."
+    if grammar == "anchor_demand":
+        return f"{a[:1].upper()+a[1:]} could become an anchor customer for {b}.", "The evidence links a European commitment to a supplier or capability that could benefit from dependable public demand, with conditions that determine whether the demand converts into lasting European capacity."
+    if grammar == "era_conjunction":
+        return f"{a[:1].upper()+a[1:]} and {b} are becoming one story.", "The two objects co-occur much more strongly in current evidence than in the historical archive, suggesting a durable change in how the issues are coupled."
+    if grammar == "split_recurrence":
+        return f"An older link between {a} and {b} is returning without being named.", "A historical record states the relationship directly, while current evidence shows both sides moving again without a current record explicitly joining them."
+    if grammar == "corroborated_claim":
+        direction = clean(raw.get("direction")); mechanism = clean(raw.get("mechanism"))
+        if product == "risk":
+            verb = "is under sustained pressure" if direction == "contracts" else "is becoming more conditional" if direction == "becomes_conditional" else "is becoming more contested" if direction == "becomes_contested" else "shows a corroborated constraint"
+            return f"{a[:1].upper()+a[1:]} {verb}.", f"{records} records from {sources} independent sources point in the same constraining direction. This is the corroborated baseline beneath the higher-order pathway findings."
+        action = "is expanding through a live European instrument"
+        if mechanism in {"collaborates", "associates"}: action = "is widening through active agreements"
+        elif mechanism in {"procures", "builds", "adds_capacity"}: action = "is expanding through active capacity-building"
+        elif mechanism == "funds": action = "is expanding through new funding"
+        elif mechanism == "prioritises": action = "is being backed by adopted priorities"
+        elif mechanism == "launches": action = "is moving into operation through new instruments"
+        elif mechanism == "coordinates": action = "is gaining an active coordination route"
+        elif mechanism == "invests": action = "is expanding through new investment"
+        elif mechanism == "supports": action = "is expanding through a live support instrument"
+        return f"{a[:1].upper()+a[1:]} {action}.", f"{records} records from {sources} independent sources point in the same constructive direction, with at least one live or operating instrument."
+    return f"{a[:1].upper()+a[1:]}", clean(candidate.get("topic_label"))
+
+
+def _reader_why(grammar: str, product: str, raw: dict[str, Any]) -> str:
+    eps = [clean(x) for x in raw.get("endpoint_objects", []) if clean(x)] if isinstance(raw.get("endpoint_objects"), list) else []
+    a = _friendly_object_label(eps[0] if eps else raw.get("object") or raw.get("capability_object") or raw.get("objective_object"))
+    b = _friendly_object_label(eps[1] if len(eps) > 1 else raw.get("dependency_object") or raw.get("delivery_object"))
+    if grammar == "clock_before_rule": return "Delivery choices can become locked in before permitting, power or other operating conditions are settled."
+    if grammar == "success_metric_gap": return "Europe can spend more on an instrument while still not knowing whether the outcome it is meant to produce is improving."
+    if grammar == "practice_before_doctrine": return "Early implementation can become the de facto rule before the formal framework has had a chance to arbitrate trade-offs."
+    if grammar == "goal_without_measure": return "A goal can dominate policy language without creating an evidence base for whether interventions are working."
+    if grammar == "conflicting_criteria": return f"The same European project can be treated differently depending on whether {a} or {b} is applied first."
+    if grammar == "dependency_pathway" and product == "risk": return f"A failure in {b} would not stay local if the documented propagation route reaches {a}."
+    if grammar == "dependency_pathway" and product == "shock": return f"A sudden disruption in {b} could remove capability faster than the documented European responses can absorb it."
+    if grammar == "latent_channel": return "The opportunity is leverage: connect pieces Europe already has instead of creating a new programme from zero."
+    if grammar == "anchor_demand": return "Reliable European demand can help turn research and scale-up support into durable production, suppliers and technical capability."
+    if grammar == "named_continuity": return "Persistence matters because a recurring issue is more likely to shape future choices than a one-scan spike."
+    if grammar == "corroborated_claim" and product == "risk": return "Independent sources are pointing in the same constraining direction, so the issue is broader than one publication or institution."
+    if grammar == "corroborated_claim" and product == "opportunity": return "The constructive movement is already attached to a live instrument rather than remaining only an aspiration."
+    return ""
+
 def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab: dict[str, Any] | None = None, evaluated_on: dt.date | None = None) -> dict[str, Any]:
     nodes = list(nodes)
     node_by_claim = {clean(n.get("claim_id")): n for n in nodes if clean(n.get("claim_id"))}
@@ -1635,6 +1870,12 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
         topic = _trend_scope_label(clean(trend.get("trend_scope")), clean(trend.get("trend_balance", {}).get("object_key")))
     sources = {clean(x.get("source")).lower() for x in support if clean(x.get("source"))}
     records = {clean(x.get("identity")) for x in support if clean(x.get("identity"))}
+    if structural_verified and score <= 0:
+        # Structural Level-3 findings verify by their graph shape rather than an
+        # 80-point Level-5 score, but the shelf still needs a sensible same-wow
+        # tie-breaker.  Evidence breadth supplies that ordering without becoming a
+        # new verification gate.
+        score = min(99, 45 + 5 * min(6, len(records)) + 4 * min(6, len(sources)))
     touched = any(bool(x.get("new_this_scan")) for x in support)
     wow, wow_basis = _final_wow(c, nodes, vocab)
     if grammar == "opposing_movements":
@@ -1662,6 +1903,8 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
         "direction": clean(c.get("direction")),
         "claim_status": clean(c.get("status")),
         "product_basis": clean(c.get("product_basis")),
+        "shock_driver": bool(c.get("shock_driver")),
+        "shock_driver_basis": clean(c.get("shock_driver_basis")),
         "status": status,
         "score": score,
         "wow_preliminary": c.get("wow_preliminary"),
@@ -1698,12 +1941,23 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
         "endpoint_objects": copy.deepcopy(c.get("endpoint_objects", [])),
         "score_gate_passes": (bool(c.get("score_gate_passes")) or structural_verified) if grammar != "opposing_movements" else bool(trend and trend.get("trend_evidence_floor_passes")),
     }
+    if grammar == "named_continuity":
+        out.update({
+            "current_record_count": int(c.get("current_record_count", 0) or 0),
+            "current_source_count": int(c.get("current_source_count", 0) or 0),
+            "historical_record_count": int(c.get("historical_record_count", 0) or 0),
+            "historical_source_count": int(c.get("historical_source_count", 0) or 0),
+        })
     if trend:
         out.update(trend)
         out["score"] = int(round(100 - min(85.0, float(trend["trend_balance"].get("band_width", 0) or 0))))
         out["primary_records"] = len({x.get("identity") for x in out["support"]})
         out["primary_sources"] = len({clean(x.get("source")).lower() for x in out["support"] if clean(x.get("source"))})
         out["primary_role_coverage"] = 1.0 if trend.get("trend_evidence_floor_passes") else 0.667
+    reader_title, reader_summary = _reader_copy(grammar, product, c, out)
+    out["reader_title"] = reader_title
+    out["reader_summary"] = reader_summary
+    out["reader_why"] = _reader_why(grammar, product, c)
     oddity, oddity_reason = _oddity_pass(out, vocab)
     out["oddity_passes"] = oddity
     out["oddity_reason"] = oddity_reason
@@ -1747,7 +2001,7 @@ def refresh_claim_high_order(
         evaluated_on = dt.date.today()
     raw_candidates: list[dict[str, Any]] = []
     for group in (
-        "level2_corroborated",
+        "level2_corroborated", "level2_named_continuity",
         "level3_sequence_gap", "level3_era_conjunction", "level4_opposing_movements",
         "level5_dependency_pathway", "level4_5_conflicting_criteria", "level5_latent_channel",
         "level5_anchor_demand", "level5_split_recurrence",
@@ -1788,7 +2042,18 @@ def refresh_claim_high_order(
             evidence_withdrawn = bool(support_ids - node_claim_ids)
             side_floor_exit = clean(keep.get("grammar_id")) == "opposing_movements"
             keep.update({"new_this_scan": False, "updated_this_scan": False, "missed_detection_scans": misses, "lifecycle": "claim_carried_forward"})
-            if evidence_withdrawn:
+            semantic_shock_reclassification = (
+                clean(keep.get("grammar_id")) == "dependency_pathway"
+                and clean(keep.get("product")) == "shock"
+                and "shock_driver" not in keep
+            )
+            if semantic_shock_reclassification:
+                # Migration from the over-broad Stage-7 rule where every triggerless
+                # dependency was called a shock.  If the candidate is not rediscovered
+                # by the corrected shock grammar in this scan, preserve it in stock as
+                # dormant history rather than counting it as an active developing shock.
+                keep["status"] = "dormant"; keep["lifecycle"] = "shock_semantic_reclassification"; keep["exit_reason"] = "no current discontinuity driver under the corrected shock definition"
+            elif evidence_withdrawn:
                 keep["status"] = "watch"; keep["lifecycle"] = "support_evidence_withdrawn"; keep["exit_reason"] = "supporting claim dropped or reinterpreted"
             elif side_floor_exit:
                 keep["status"] = "watch"; keep["lifecycle"] = "trend_side_floor_exit"; keep["exit_reason"] = "one trend side fell below the evidence floor"

@@ -244,7 +244,12 @@ def test_delivered_analysis_is_not_a_risk_trigger():
     nodes=[_node(commitment,"S1"),_node(coupling,"S2"),_node(propagation,"S3"),_node(exposure,"S4"),_node(analytical,"S5")]
     out=dependency_pathways(nodes,VOCAB,build_distance_table(nodes))
     assert out
-    assert all(x["product"]=="shock" for x in out if x["capability_object"]=="compute.gigafactory")
+    # A delivered analytical restriction is not a mature trigger.  But absence of
+    # a trigger is no longer sufficient to call an internal European dependency a
+    # shock: R-40/R-41 also require a genuine discontinuity driver.  This pathway
+    # therefore remains a risk until an external/sudden shock basis is evidenced.
+    assert all(x.get("trigger") is None for x in out if x["capability_object"]=="compute.gigafactory")
+    assert all(x["product"]=="risk" for x in out if x["capability_object"]=="compute.gigafactory")
 
 
 def test_conflicting_criteria_divergence_must_bind_the_arbitration_branch():

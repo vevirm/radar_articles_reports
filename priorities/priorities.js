@@ -499,7 +499,7 @@
         source:'Multiple sources',date:clean(c.last_updated_at||state.evaluated_at||''),link:'',abstract:clean(c.reader_summary||''),newThisScan:!!c.new_this_scan,
         qualityScore:Number(c.score)||0,analyticalWeight:1,contextOnly:false,lens:{type:kind,passage:clean(c.reader_summary||'')},
         lensPassage:clean(c.reader_summary||''),interpretationBasis:'claim_native_publication',raw:{title:clean(c.reader_title),summary:clean(c.reader_summary)},
-        candidateId:clean(c.id),publicationRank,readerAuthored:!!clean(c.reader_title),grammarId:clean(c.grammar_id),topicLabel:clean(c.topic_label),
+        candidateId:clean(c.id),publicationRank,readerAuthored:!!clean(c.reader_title),readerWhy:clean(c.reader_why||''),grammarId:clean(c.grammar_id),topicLabel:clean(c.topic_label),
         objectKey:clean(c.object||c.topic_key),mechanism:clean(c.mechanism),direction:clean(c.direction),claimStatus:clean(c.claim_status||c.status),
         wow:Number(c.wow)||0,readerStatusChip:clean(c.reader_status_chip),inferentialDistance:Number(c.inferential_distance)||Number(c.level)||0,
         supportEvidence:support.map(evidenceRow),counterEvidence:against.map(evidenceRow),

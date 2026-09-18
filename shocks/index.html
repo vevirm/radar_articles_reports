@@ -133,8 +133,10 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-shock-deta
     const claimNative=hi?.detector_backend==='claim_native'&&Number(hi?.selection_stage||0)>=7;
     const reserve=Number(sel.reserve)||0,watch=Number(sel.watch)||0;
     const stockNote=claimNative&&(reserve||watch)?` ${reserve} more in reserve; ${watch} still developing.`:'';
-    document.getElementById('shockSummary').textContent=`Showing ${items.length} selected possible shock${items.length===1?'':'s'}${!claimNative&&all.length>items.length?` of ${all.length}`:''}.${stockNote}`;
-    el.innerHTML=items.length?items.map((x,i)=>`<li><strong>${esc(x.text)}</strong><p>${esc(x.explanation||shockExplanation(x.text))}</p>${shockDetailHtml(x,i)}</li>`).join(''):'<li class="empty">No external shock is clear enough to show here yet.</li>';
+    document.getElementById('shockSummary').textContent=claimNative&&items.length===0&&watch>0
+      ?`No possible shock is supported strongly enough to show yet. ${watch} discontinuity pathway${watch===1?' is':'s are'} still being checked against missing links and contrary evidence${reserve?`; ${reserve} more ${reserve===1?'is':'are'} in reserve`:''}.`
+      :`Showing ${items.length} selected possible shock${items.length===1?'':'s'}${!claimNative&&all.length>items.length?` of ${all.length}`:''}.${stockNote}`;
+    el.innerHTML=items.length?items.map((x,i)=>`<li><strong>${esc(x.text)}</strong><p>${esc(x.explanation||shockExplanation(x.text))}</p>${shockDetailHtml(x,i)}</li>`).join(''):'<li class="empty">Nothing is shown until a possible discontinuity has a complete evidence pathway and the current evidence does not already close it.</li>';
   }catch(e){console.error(e);document.getElementById('shockSummary').textContent='Shock evidence is unavailable.';el.innerHTML='<li class="empty">Unavailable.</li>'}
 })();
 </script>
