@@ -501,10 +501,31 @@ def named_continuities(nodes: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
             if obj and not obj.startswith("methods."):
                 target[obj].append(n)
 
+    # Domain-family continuity: a field (e.g. research security) that keeps
+    # returning across several related objects.  Requires >=2 member objects in
+    # the pooled evidence so it is not a relabelled single-object continuity.
+    fam_current: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    fam_historical: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    fam_members: dict[str, set[str]] = defaultdict(set)
+    for src_map, dst_map in ((current, fam_current), (historical, fam_historical)):
+        for obj, rows in src_map.items():
+            fam = obj.split(".", 1)[0]
+            if not fam or fam == obj:
+                continue
+            key = FAMILY_PREFIX + fam
+            seen = {id(r) for r in dst_map[key]}
+            dst_map[key].extend(r for r in rows if id(r) not in seen)
+            fam_members[key].add(obj)
+    scoped: list[tuple[str, list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]] = [
+        (obj, current[obj], historical[obj], {}) for obj in sorted(set(current) & set(historical))
+    ]
+    for key in sorted(set(fam_current) & set(fam_historical)):
+        if len(fam_members[key]) < 2:
+            continue
+        scoped.append((key, fam_current[key], fam_historical[key], {"family_members": sorted(fam_members[key])}))
+
     out: list[dict[str, Any]] = []
-    for obj in sorted(set(current) & set(historical)):
-        cur = current[obj]
-        hist = historical[obj]
+    for obj, cur, hist, extra in scoped:
         cur_sources = {clean(n.get("_source")).lower() for n in cur if clean(n.get("_source"))}
         hist_sources = {clean(n.get("_source")).lower() for n in hist if clean(n.get("_source"))}
         cur_records = {clean(n.get("_record_id")) for n in cur if clean(n.get("_record_id"))}
@@ -532,6 +553,7 @@ def named_continuities(nodes: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
             "score": evidence_score,
             "score_gate_passes": True,
             "wow_preliminary": 1,
+            **extra,
         })
     return sorted(
         out,
@@ -745,6 +767,11 @@ def level3_findings(nodes: Iterable[dict[str, Any]], evaluated_on: dt.date) -> l
         unique[key] = item
     return sorted(unique.values(), key=lambda x: (clean(x.get("grammar_id")), clean(x.get("object") or x.get("objective_object")), clean(x.get("commitment_claim_id"))))
 
+EXTERNAL_PRESSURE_SCOPES = {"external", "third_country"}
+FAMILY_PREFIX = "family:"
+CLUSTER_PREFIX = "cluster:"
+
+
 def opposing_movements(
     nodes: Iterable[dict[str, Any]],
     evaluated_on: dt.date,
@@ -765,7 +792,7 @@ def opposing_movements(
     becomes_contested, matching the worked "build capacity vs make capacity
     conditional" example.
     """
-    del vocab  # retained only for call-site compatibility
+    vocab = vocab or {}
     eligible_scopes = {"eu", "member_state", "associated_country", "company_in_eu"}
     by_object_side: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
 
@@ -773,7 +800,8 @@ def opposing_movements(
         if not n.get("_primary") or clean(n.get("era")) != "current":
             continue
         scope = n.get("scope") if isinstance(n.get("scope"), dict) else {}
-        if clean(scope.get("level")) not in eligible_scopes:
+        level = clean(scope.get("level"))
+        if level not in eligible_scopes and level not in EXTERNAL_PRESSURE_SCOPES:
             continue
         d = _date(n.get("status_date"))
         if d and (evaluated_on - d).days > 180:
@@ -785,6 +813,11 @@ def opposing_movements(
         elif direction in {"contracts", "becomes_conditional", "becomes_contested"}:
             side = "constrains"
         else:
+            continue
+        # Non-European actors can only press on a European object from outside:
+        # an external constraint is a legitimate counter-pull, but an external
+        # expansion is not evidence that Europe's own side is moving.
+        if level in EXTERNAL_PRESSURE_SCOPES and side != "constrains":
             continue
 
         for obj in _claim_objects(n):
@@ -835,11 +868,55 @@ def opposing_movements(
             )
         return round(total, 4)
 
+    # Domain-family scope: pool the pulls of every object sharing a prefix.  A
+    # family trend is only formed when its pulls come from at least two distinct
+    # member objects, so it never merely duplicates a single-object trend.
+    by_family_side: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
+    family_members: dict[str, set[str]] = defaultdict(set)
+    family_side_objects: dict[tuple[str, str], set[str]] = defaultdict(set)
+    for (obj, side), rows in by_object_side.items():
+        fam = obj.split(".", 1)[0]
+        if not fam or fam == obj or fam == "methods":
+            continue
+        key = FAMILY_PREFIX + fam
+        seen = {id(r) for r in by_family_side[(key, side)]}
+        by_family_side[(key, side)].extend(r for r in rows if id(r) not in seen)
+        family_members[key].add(obj)
+        family_side_objects[(key, side)].add(obj)
+
+    # Reviewed vocabulary clusters can cut across prefixes.  Keep a cluster only
+    # when its contributing objects are not already an identical prefix family.
+    object_meta = vocab.get("objects") if isinstance(vocab.get("objects"), dict) else {}
+    for (obj, side), rows in by_object_side.items():
+        meta = object_meta.get(obj) if isinstance(object_meta.get(obj), dict) else {}
+        cluster = clean(meta.get("cluster"))
+        if not cluster or cluster == "methods":
+            continue
+        key = CLUSTER_PREFIX + cluster
+        seen = {id(r) for r in by_family_side[(key, side)]}
+        by_family_side[(key, side)].extend(r for r in rows if id(r) not in seen)
+        family_members[key].add(obj)
+        family_side_objects[(key, side)].add(obj)
+    prefix_sets = {frozenset(v) for k, v in family_members.items() if k.startswith(FAMILY_PREFIX)}
+    for key in [k for k in family_members if k.startswith(CLUSTER_PREFIX)]:
+        if frozenset(family_members[key]) in prefix_sets:
+            del family_members[key]
+
+    scopes: list[tuple[str, list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]] = []
+    for obj in sorted({obj for obj, _ in by_object_side}):
+        scopes.append((obj, by_object_side[(obj, "expands")], by_object_side[(obj, "constrains")], {}))
+    for key in sorted(family_members):
+        if len(family_members[key]) < 2:
+            continue
+        if len(family_side_objects[(key, "expands")] | family_side_objects[(key, "constrains")]) < 2:
+            continue
+        scopes.append((key, by_family_side[(key, "expands")], by_family_side[(key, "constrains")], {
+            "trend_scope": "cluster" if key.startswith(CLUSTER_PREFIX) else "family",
+            "family_members": sorted(family_members[key]),
+        }))
+
     out: list[dict[str, Any]] = []
-    objects = sorted({obj for obj, _ in by_object_side})
-    for obj in objects:
-        left0 = by_object_side[(obj, "expands")]
-        right0 = by_object_side[(obj, "constrains")]
+    for obj, left0, right0, extra in scopes:
 
         # R-53: if one record carries both pulls on the object, treat it as context
         # rather than letting it vote twice.
@@ -878,6 +955,7 @@ def opposing_movements(
                 "score_gate_passes": floor,
                 "right_directions": ["contracts", "becomes_conditional", "becomes_contested"],
                 "note": "Claim-native trend stock; R-51 is a reader floor, not a candidate-formation floor.",
+                **extra,
             }
         )
     return out
@@ -1214,7 +1292,17 @@ def exploratory_shock_hypotheses(nodes: Iterable[dict[str, Any]], vocab: dict[st
             candidates = [n for n in prows if clean(n.get("_record_id")) != asset_rid]
             if not candidates:
                 continue
-            pressure = max(candidates, key=lambda n: (1 if _source(n).lower() != asset_src else 0, anchor_rank(n)))
+            # Prefer a driver whose own statement visibly shows the disruption, then
+            # one that also names this asset (an already-moving, obvious shock), then
+            # source independence and strength.  A tagged-but-silent record can only
+            # be used when nothing better exists; publication will then hold it back.
+            from scripts.claim_reasoning_live import _shock_driver_is_reader_grounded as _grounded_driver
+            pressure = max(candidates, key=lambda n: (
+                1 if _grounded_driver(pid, n.get("text")) else 0,
+                1 if asset_obj in _claim_objects(n) else 0,
+                1 if _source(n).lower() != asset_src else 0,
+                anchor_rank(n),
+            ))
             pressure_rid = clean(pressure.get("_record_id"))
 
             # Optional direct bridge: any separate current primary record that both

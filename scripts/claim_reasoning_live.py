@@ -455,6 +455,13 @@ _SHOCK_DRIVER_GROUNDING_PATTERNS: dict[str, tuple[re.Pattern[str], ...]] = {
         re.compile(r"\bsecurity screen(?:ing|ed)?\b.{0,80}\b(?:restrict|exclude|block|limit|access|collaborat)\b", re.I),
         re.compile(r"\b(?:sensitive|dual[- ]use) research\b.{0,80}\b(?:restrict|exclude|block|limit|licen[cs]|screen)\b", re.I),
         re.compile(r"\b(?:access|participation|collaboration)\b.{0,60}\b(?:restricted|limited|excluded|blocked)\b.{0,80}\bsecurity\b", re.I),
+        # How reclassification is actually reported: security rules that condition,
+        # screen or safeguard research cooperation (de-risking, securitisation).
+        re.compile(r"\b(?:de-?risk(?:ing)?|securiti[sz](?:ation|ed|ing))\b", re.I),
+        re.compile(r"\bresearch security\b.{0,100}\b(?:condition|screen|safeguard|restrict|rule|guideline|vet|due diligence|risk)\w*", re.I),
+        re.compile(r"\b(?:condition|screen|safeguard|vet)\w*\b.{0,80}\b(?:research|scientific|academic) (?:cooperation|collaboration|partnership|openness|exchange)\b", re.I),
+        re.compile(r"\bsecurity(?:-| )(?:conditional|relevant research|sensitive research)\b", re.I),
+        re.compile(r"\b(?:espionage|knowledge theft|technology leakage)\b", re.I),
     ),
     "acquisition": (
         re.compile(r"\bforeign (?:acquisition|ownership|takeover|buyer|investor)\b", re.I),
@@ -519,10 +526,16 @@ def _shock_driver_is_reader_grounded(pressure_id: Any, source_statement: Any) ->
 
 def _object_anchor_terms(obj: str) -> tuple[str, ...]:
     obj = clean(obj)
+    fam = _family_of(obj)
+    if fam:
+        terms: list[str] = [fam.replace("_", " ")]
+        for member in sorted(_FAMILY_MEMBERS.get(obj, ())):
+            terms.extend(_object_anchor_terms(member))
+        return tuple(dict.fromkeys(t for t in terms if t))
     terminal = obj.split(".")[-1].replace("_", " ") if obj else ""
     full_aliases: dict[str, tuple[str, ...]] = {
         "compute.capacity": ("compute", "computing", "supercomputer", "gigafactor", "data centre", "data-center"),
-        "finance.strategic_investment": ("investment", "capital", "subsid"),
+        "finance.strategic_investment": ("investment", "capital", "subsid", "financ", "equity", "fund"),
         "digital.governance": ("digital governance", "data governance", "digital single market", "digital rules"),
         "research.collaboration": ("collaborat", "cooperation", "partnership"),
         "finance.venture_capital": ("venture capital", "public equity", "funding round", "equity"),
@@ -542,7 +555,28 @@ def _object_anchor_terms(obj: str) -> tuple[str, ...]:
         "quantum.pilot_line": ("quantum", "pilot line"),
         "compute.access_time": ("compute", "access time"),
         "defence.drone_capability": ("drone", "counter-drone", "counter drone"),
-        "talent.retention": ("retain", "retention", "researcher"),
+        "talent.retention": ("retain", "retention", "researcher", "stay", "remain", "brain drain", "career", "talent", "mobility", "leave europe"),
+        # Future-thinking expansion: phrasings the reviewed claims actually use.
+        "innovation.system_performance": ("innovation performance", "innovation system", "innovation capacity", "entrepreneurial", "r&d intensity", "innovat", "commerciali", "scale-up", "scale up", "patent", "spin-off", "spinoff", "valorisation", "technology transfer", "productivity"),
+        "research.system_governance": ("research governance", "research system", "era", "governance", "research polic", "science polic", "research and innovation polic", "r&i polic", "research assessment", "peer review", "research council", "committee"),
+        "funding.route": ("fund", "grant", "call", "programme", "program", "financ", "investment"),
+        "ai.governance": ("govern", "ai act", "regulat", "framework", "rules", "safety", "accountab", "oversight", "guideline"),
+        "goal.strategic_autonomy": ("strategic autonomy", "sovereign", "non-dependence", "non dependence", "dependen", "self-relian", "resilien", "strategic", "de-risk", "derisk"),
+        "horizon.budget_2028_34": ("fp10", "horizon", "framework programme", "mff", "competitiveness fund", "research budget", "2028"),
+        "research_security.screening": ("research security", "security screening", "screening", "securit", "de-risk", "derisk", "safeguard", "dual-use", "dual use", "espionage", "sensitive research", "knowledge security"),
+        "research.infrastructure": ("infrastructure", "facilit", "observator", "laborator", "esfri", "synchrotron", "testbed", "test bed", "platform"),
+        "digital.governance": ("digital governance", "data governance", "digital single market", "digital rules", "gdpr", "data protection", "privacy", "platform", "copyright", "digital services", "data act", "scraping"),
+        "industrial.competitiveness": ("compet", "industrial", "industry", "manufactur", "market share", "productiv"),
+        "cybersecurity.sme_resilience": ("cyber", "security", "resilien", "attack", "incident", "manipulation"),
+        "research.system_capacity": ("capacity", "research system", "research capacit", "scientific base", "workforce", "research performance"),
+        "innovation.deep_tech_startups": ("deep tech", "deep-tech", "startup", "start-up", "scale-up", "scaleup", "venture"),
+        "chips.fab": ("fab", "semiconductor", "chip", "foundr", "wafer", "manufactur"),
+        "research.knowledge_transfer": ("knowledge transfer", "technology transfer", "know-how", "valorisation", "commerciali", "patent", "licens", "spin-off", "industry-academ", "university-industry"),
+        "export_control.regulation": ("regulation", "export control", "export restriction", "dual-use", "dual use", "licens"),
+        "ai.adoption": ("adoption", "uptake", "use of ai", "deploy", "digital infrastructure", "integration"),
+        "green.circular_economy": ("circular economy", "circular", "recycl", "reuse", "waste", "life cycle", "lifecycle"),
+        "green.innovation": ("innovation", "green", "clean", "emission", "climate", "sustainab", "pollution"),
+        "research.collaboration": ("collaborat", "cooperation", "partnership", "consorti", "joint", "network", "co-author", "association", "openness"),
     }
     aliases: dict[str, tuple[str, ...]] = {
         "screening": ("screen",),
@@ -594,9 +628,40 @@ def _statement_grounds_object(object_key: Any, statement: Any) -> bool:
     )
 
 
+_REVIEWED_ORIGINS = {"deep_scan", "backfill"}
+
+
+def _reviewed_tag_grounds(object_key: Any, primary_object: Any, origin: Any) -> bool:
+    """Reviewed Deep Scan / backfill tagging is itself authority for aboutness.
+
+    The Radar reasons about the future, so a statement need not repeat the exact
+    object vocabulary when a reviewed claim was filed under that object as its
+    *primary* subject.  Provisional scanner claims and secondary tags still have to
+    show the object in the visible text.
+    """
+    key, prim = clean(object_key), clean(primary_object)
+    if not key or not prim or clean(origin) not in _REVIEWED_ORIGINS:
+        return False
+    if key == prim:
+        return True
+    fam = _family_of(key)
+    if fam and key.startswith(FAMILY_PREFIX):
+        return prim.split(".", 1)[0] == fam
+    if fam:
+        return prim in _FAMILY_MEMBERS.get(key, set())
+    return False
+
+
+def _ref_grounds_object(object_key: Any, ref: dict[str, Any]) -> bool:
+    return _statement_grounds_object(object_key, ref.get("source_statement")) or _reviewed_tag_grounds(
+        object_key, ref.get("object"), ref.get("claim_origin")
+    )
+
+
 def _object_anchor_is_visible(node: dict[str, Any], object_key: str | None = None) -> bool:
-    """Conservative check that the visible statement is actually about the target object."""
-    return _statement_grounds_object(object_key or node.get("object"), node.get("text"))
+    """The visible statement concerns the target object, or a reviewed claim filed it there."""
+    key = object_key or node.get("object")
+    return _statement_grounds_object(key, node.get("text")) or _reviewed_tag_grounds(key, node.get("object"), node.get("origin"))
 
 
 def _reader_trend_side(node: dict[str, Any], object_key: str | None = None) -> str:
@@ -652,7 +717,17 @@ def _reader_trend_side(node: dict[str, Any], object_key: str | None = None) -> s
         if not re.search(r"\b(?:launch(?:ed|es)?|build(?:s|ing|t)?|establish(?:ed|es)?|open(?:ed|s)? access)\b", text, re.I):
             expands = False
 
-    if expands == constrains:
+    if expands and constrains:
+        return ""
+    if not expands and not constrains:
+        # Neutral wording: trust the reviewed structured direction.  Scanner-only
+        # claims stay excluded because their direction is not reviewed.
+        if clean(node.get("origin")) in _REVIEWED_ORIGINS:
+            direction = clean(node.get("direction"))
+            if direction == "expands":
+                return "expands"
+            if direction in {"contracts", "becomes_conditional", "becomes_contested"}:
+                return "constrains"
         return ""
     return "expands" if expands else "constrains"
 
@@ -808,9 +883,9 @@ def _continuity_visible_counts(obj: str, nodes: list[dict[str, Any]]) -> dict[st
     for n in nodes:
         if clean(n.get("origin")) == "provisional":
             continue
-        if obj not in _node_objects(n):
+        if not _object_matches(obj, n):
             continue
-        if not _statement_grounds_object(obj, n.get("text")):
+        if not _object_anchor_is_visible(n, obj):
             continue
         era = clean(n.get("era"))
         rid = clean(n.get("_record_id"))
@@ -1488,6 +1563,43 @@ def _node_objects(n: dict[str, Any]) -> set[str]:
     return {x for x in out if x}
 
 
+# Domain-family scope ("family:research_security") groups every controlled object
+# sharing a prefix.  It lets the Radar read a pattern across related objects
+# (e.g. several research-security instruments) without inventing a new object.
+# Vocabulary clusters ("cluster:compute_ai") are the same idea along the reviewed
+# cluster map, which can cut across prefixes.
+FAMILY_PREFIX = "family:"
+CLUSTER_PREFIX = "cluster:"
+_FAMILY_MEMBERS: dict[str, set[str]] = {}
+
+
+def _family_of(key: Any) -> str:
+    """Scope name for a family/cluster key; empty for an ordinary object."""
+    key = clean(key)
+    for prefix in (FAMILY_PREFIX, CLUSTER_PREFIX):
+        if key.startswith(prefix):
+            return key[len(prefix):]
+    return ""
+
+
+def _register_family(key: Any, members: Iterable[Any]) -> None:
+    key = clean(key)
+    if _family_of(key):
+        _FAMILY_MEMBERS.setdefault(key, set()).update(clean(m) for m in members if clean(m))
+
+
+def _object_matches(key: Any, n: dict[str, Any]) -> bool:
+    key = clean(key)
+    if not key:
+        return False
+    if key.startswith(CLUSTER_PREFIX):
+        return bool(_node_objects(n) & _FAMILY_MEMBERS.get(key, set()))
+    if key.startswith(FAMILY_PREFIX):
+        fam = key[len(FAMILY_PREFIX):]
+        return any(o.split(".", 1)[0] == fam for o in _node_objects(n))
+    return key in _node_objects(n)
+
+
 def _feedback_queries_executed(raw: dict[str, Any]) -> list[str]:
     """Exact finding-context queries that actually made a scholarly request this scan.
 
@@ -1567,11 +1679,11 @@ def _final_wow(raw_candidate: dict[str, Any], nodes: Iterable[dict[str, Any]], v
         obj = clean(raw_candidate.get("object"))
         cur_records = {
             clean(n.get("_record_id")) for n in nodes
-            if clean(n.get("era")) == "current" and obj and obj in _node_objects(n)
+            if clean(n.get("era")) == "current" and obj and _object_matches(obj, n)
         }
         hist_records = {
             clean(n.get("_record_id")) for n in nodes
-            if clean(n.get("era")) == "historical" and obj and obj in _node_objects(n)
+            if clean(n.get("era")) == "historical" and obj and _object_matches(obj, n)
         }
         h = len({x for x in hist_records if x})
         stake = _stake_class(obj, vocab) in {"flagship", "rule", "budget", "capability"}
@@ -1591,8 +1703,8 @@ def _final_wow(raw_candidate: dict[str, Any], nodes: Iterable[dict[str, Any]], v
         # A long-running issue can still be a new *kind* of phenomenon when its
         # direction or evidential mix changes sharply between eras.
         obj = clean(raw_candidate.get("object"))
-        cur = [n for n in nodes if clean(n.get("era")) == "current" and obj in _node_objects(n)]
-        hist = [n for n in nodes if clean(n.get("era")) == "historical" and obj in _node_objects(n)]
+        cur = [n for n in nodes if clean(n.get("era")) == "current" and _object_matches(obj, n)]
+        hist = [n for n in nodes if clean(n.get("era")) == "historical" and _object_matches(obj, n)]
         directions = ("expands", "contracts", "becomes_conditional", "becomes_contested", "unchanged")
         def shares(rows, key, values):
             total = max(1, len(rows))
@@ -1613,8 +1725,8 @@ def _final_wow(raw_candidate: dict[str, Any], nodes: Iterable[dict[str, Any]], v
 
     if grammar == "corroborated_claim":
         obj = clean(raw_candidate.get("object"))
-        current_records = {clean(n.get("_record_id")) for n in nodes if clean(n.get("era")) == "current" and obj and obj in _node_objects(n)}
-        historical_records = {clean(n.get("_record_id")) for n in nodes if clean(n.get("era")) == "historical" and obj and obj in _node_objects(n)}
+        current_records = {clean(n.get("_record_id")) for n in nodes if clean(n.get("era")) == "current" and obj and _object_matches(obj, n)}
+        historical_records = {clean(n.get("_record_id")) for n in nodes if clean(n.get("era")) == "historical" and obj and _object_matches(obj, n)}
         h = len({x for x in historical_records if x})
         c = len({x for x in current_records if x})
         stake = _stake_class(obj, vocab) in {"flagship", "rule", "budget", "capability"}
@@ -1725,8 +1837,42 @@ def _trend_side(rows: list[dict[str, Any]], evaluated_on: dt.date) -> tuple[list
     return kept, round(total, 6), len({clean(r.get("_source")).lower() for r in rows if clean(r.get("_source"))})
 
 
+_FAMILY_LABELS = {
+    "research": "the European research system",
+    "research_security": "research security",
+    "talent": "research talent",
+    "digital": "digital policy",
+    "ai": "AI",
+    "compute": "computing capacity",
+    "quantum": "quantum technology",
+    "chips": "semiconductors",
+    "horizon": "Horizon Europe",
+    "export_control": "export controls",
+    "finance": "R&I finance",
+    "innovation": "innovation performance",
+    "industrial": "industrial capacity",
+    "defence": "defence R&I",
+    "green": "green innovation",
+    "health": "health research",
+    "goal": "strategic goals",
+    "funding": "research funding",
+    "datacentre": "data centres",
+    "materials": "critical materials",
+    "cybersecurity": "cybersecurity",
+    "compute_ai": "compute and AI infrastructure",
+    "research_system": "the European research system",
+    "capital_markets": "capital for European technology",
+    "funding_programme": "EU funding programmes",
+    "ai_governance": "AI governance",
+    "digital_governance": "digital governance",
+    "permitting_siting": "permitting and siting",
+    "materials_energy": "materials and energy supply",
+}
+
+
 def _trend_scope_label(scope_kind: str, scope_key: str) -> str:
-    del scope_kind
+    if _family_of(scope_key) or scope_kind == "family":
+        return _friendly_object_label(scope_key if _family_of(scope_key) else FAMILY_PREFIX + clean(scope_key))
     text = clean(scope_key).replace(".", " ").replace("_", " ")
     aliases = {
         "compute capacity": "compute capacity",
@@ -1766,14 +1912,16 @@ def _trend_payload(
     rows: list[dict[str, Any]] = []
     reader_side_by_claim: dict[str, str] = {}
     for n in nodes:
-        if not n.get("_primary") or clean(n.get("era")) != "current" or obj not in _node_objects(n):
+        if not n.get("_primary") or clean(n.get("era")) != "current" or not _object_matches(obj, n):
             continue
         # Provisional scanner claims may seed developing stock, but they are not
         # authoritative source evidence for a public reasoning card.
         if clean(n.get("origin")) == "provisional":
             continue
         scope = n.get("scope") if isinstance(n.get("scope"), dict) else {}
-        if clean(scope.get("level")) not in {"eu", "member_state", "associated_country", "company_in_eu"}:
+        scope_level = clean(scope.get("level"))
+        external = scope_level in {"external", "third_country"}
+        if scope_level not in {"eu", "member_state", "associated_country", "company_in_eu"} and not external:
             continue
         d = _date_only(n.get("status_date"))
         try:
@@ -1782,6 +1930,9 @@ def _trend_payload(
         except ValueError:
             pass
         side = _reader_trend_side(n, obj)
+        if external and side != "constrains":
+            # Outside actors count only as external pressure on the European object.
+            side = ""
         if side:
             rows.append(n)
             reader_side_by_claim[clean(n.get("claim_id"))] = side
@@ -1864,7 +2015,8 @@ def _trend_payload(
             })
         return out
 
-    label_text = _trend_scope_label("object", obj)
+    scope_kind = "cluster" if clean(obj).startswith(CLUSTER_PREFIX) else "family" if _family_of(obj) else "object"
+    label_text = _trend_scope_label(scope_kind, obj)
 
     title_pairs = {
         "ai.governance": ("Turn AI governance into operating rules", "AI governance gets harder to reconcile"),
@@ -1928,7 +2080,7 @@ def _trend_payload(
     return {
         "support": snaps(lk, "Expands") + snaps(rk, "Constrains"),
         "object": obj,
-        "trend_scope": "object",
+        "trend_scope": scope_kind,
         "trend_key": f"object:{obj}",
         "trend_evidence_floor_passes": evidence_floor_passes,
         "trend_balance": {
@@ -2107,14 +2259,17 @@ def _presentation_ready(c: dict[str, Any]) -> tuple[bool, str]:
         lr, rr = int(b.get("left_records", 0) or 0), int(b.get("right_records", 0) or 0)
         ls, rs = int(b.get("left_sources", 0) or 0), int(b.get("right_sources", 0) or 0)
         total_sources = len({clean(x.get("source")).lower() for x in (c.get("support") or []) if isinstance(x, dict) and clean(x.get("source"))})
-        ok = min(lr, rr) >= 1 and total_sources >= 2 and maturity >= 40
+        ok = min(lr, rr) >= 1 and total_sources >= 2 and maturity >= 35
         return ok, "grounded_two_sided_tension" if ok else "trend_needs_two_sided_independent_grounding"
 
     if product == "continuity" and grammar == "named_continuity":
         cs = int(c.get("current_source_count", 0) or 0)
         hs = int(c.get("historical_source_count", 0) or 0)
-        ok = cs >= 2 and hs >= 2 and maturity >= 35
-        return ok, "two_eras_two_sources" if ok else "continuity_needs_broader_two_era_support"
+        # Two current sources plus at least one historical source establishes that
+        # the phenomenon spans both eras; a second historical source raises
+        # maturity instead of being a hard gate.
+        ok = cs >= 2 and hs >= 1 and maturity >= 32
+        return ok, "two_eras_grounded" if ok else "continuity_needs_broader_two_era_support"
 
     if product == "shock":
         if grammar == "future_shock_hypothesis" and not bool(c.get("shock_driver_semantic_alignment", True)):
@@ -2127,8 +2282,8 @@ def _presentation_ready(c: dict[str, Any]) -> tuple[bool, str]:
         # three distinct records from one authoritative source can also compete, but
         # its lower source-diversity score keeps it behind genuinely independent
         # alternatives inside the same wow bucket.
-        normal_grounding = sources >= 2 and records >= 2 and coverage >= 0.50 and maturity >= 40
-        concentrated_grounding = sources >= 1 and records >= 3 and coverage >= 0.75 and maturity >= 55
+        normal_grounding = sources >= 2 and records >= 2 and coverage >= 0.50 and maturity >= 35
+        concentrated_grounding = sources >= 1 and records >= 3 and coverage >= 0.75 and maturity >= 50
         ok = bool(c.get("shock_driver")) and bool(c.get("role_strength_floor_passes", True)) and (normal_grounding or concentrated_grounding)
         return ok, "grounded_future_shock" if ok else "shock_needs_stronger_driver_or_pathway_support"
 
@@ -2142,13 +2297,90 @@ def _presentation_ready(c: dict[str, Any]) -> tuple[bool, str]:
             grounded_records = int(c.get("direction_grounded_records", records) or 0)
             # A concrete current record can anchor a baseline future implication, but
             # the source statement must actually support the direction used on-card.
-            ok = grounded_sources >= 1 and grounded_records >= 1 and maturity >= 55
+            ok = grounded_sources >= 1 and grounded_records >= 1 and maturity >= 48
             return ok, "evidence_anchored_baseline" if ok else "baseline_needs_stronger_source_or_status"
-        ok = sources >= 2 and records >= 2 and bool(c.get("role_strength_floor_passes", True)) and (coverage >= 0.50 or grammar in _STRUCTURAL_VERIFICATION_GRAMMARS) and maturity >= 38
+        structural = coverage >= 0.50 or grammar in _STRUCTURAL_VERIFICATION_GRAMMARS
+        independent = sources >= 2 and records >= 2 and maturity >= 35
+        # A complete mechanism carried by three records of one strong source may
+        # compete; its lower source diversity keeps it behind independent findings.
+        concentrated = sources >= 1 and records >= 3 and coverage >= 0.75 and maturity >= 48
+        ok = bool(c.get("role_strength_floor_passes", True)) and structural and (independent or concentrated)
         return ok, "grounded_future_finding" if ok else "needs_second_source_or_more_complete_mechanism"
 
-    ok = sources >= 2 and records >= 2 and maturity >= 38
+    ok = sources >= 2 and records >= 2 and maturity >= 35
     return ok, "grounded_future_finding" if ok else "needs_more_grounding"
+
+
+SHELF_SWAP_MARGIN = 4
+
+# Creative reserve: the reserve is not only the runners-up.  It deliberately
+# holds hypotheses that are relevant and not contradicted but not yet provable -
+# distant, cross-domain, newly emerging, weak-signal or partially grounded - so
+# they can mature instead of being filtered out too early.
+RESERVE_TARGET = 45
+CREATIVE_RESERVE_MIN = 18
+# Round-robin over wow levels, weighted toward surprise but still covering 1-2.
+CREATIVE_WOW_ORDER = (5, 4, 3, 5, 4, 2, 5, 3, 1)
+
+
+def _prefix(obj: Any) -> str:
+    obj = clean(obj)
+    if obj.startswith("shock_pressure."):
+        return "shock_pressure"
+    return obj.split(".", 1)[0] if obj else ""
+
+
+def _creative_traits(c: dict[str, Any], evaluated_on: str = "") -> dict[str, bool]:
+    support = [x for x in (c.get("support") or []) if isinstance(x, dict)]
+    context = [x for x in (c.get("context") or []) if isinstance(x, dict)]
+    rows = support + context
+    endpoints = [clean(x) for x in (c.get("endpoint_objects") or []) if clean(x)] if isinstance(c.get("endpoint_objects"), list) else []
+    obj = clean(c.get("object"))
+    domains = {_prefix(x) for x in endpoints} | {_prefix(x.get("object")) for x in rows if clean(x.get("object"))}
+    domains.discard("")
+    newest = max((clean(x.get("date"))[:10] for x in rows if clean(x.get("date"))), default="")
+    recent = False
+    if newest and evaluated_on and len(newest) == 10 and len(evaluated_on) >= 10:
+        try:
+            recent = (dt.date.fromisoformat(evaluated_on[:10]) - dt.date.fromisoformat(newest)).days <= 30
+        except ValueError:
+            recent = False
+    return {
+        "distant": int(c.get("wow", 0) or 0) >= 4 or int(c.get("level", 0) or 0) >= 5,
+        "cross_domain": len({_prefix(x) for x in endpoints if _prefix(x)}) >= 2
+        or bool(_family_of(obj)) or len(domains) >= 3,
+        "emerging": bool(c.get("new_this_scan") or c.get("updated_this_scan"))
+        or any(x.get("new_this_scan") for x in rows) or recent,
+        "weak_signal": any(clean(x.get("strand")) == "C" for x in rows),
+        "partially_grounded": any(
+            clean(x.get("claim_origin")) in _REVIEWED_ORIGINS for x in rows
+        ) or len({clean(x.get("source")).lower() for x in rows if clean(x.get("source"))}) >= 2,
+    }
+
+
+def _creative_eligible(c: dict[str, Any]) -> tuple[bool, str]:
+    if clean(c.get("status")) in {"killed", "dormant"}:
+        return False, "killed_or_dormant"
+    support = [x for x in (c.get("support") or []) if isinstance(x, dict)]
+    context = [x for x in (c.get("context") or []) if isinstance(x, dict)]
+    if not support and not context:
+        return False, "no_evidence"
+    counter = int(c.get("counter_records", 0) or 0)
+    backing = len({clean(x.get("identity")) for x in support + context if clean(x.get("identity"))})
+    if counter and counter >= max(2, backing):
+        return False, "contradicted"
+    return True, ""
+
+
+def _creative_score(c: dict[str, Any], traits: dict[str, bool]) -> float:
+    return (
+        8 * int(c.get("wow", 0) or 0)
+        + 12 * traits["cross_domain"]
+        + 10 * traits["emerging"]
+        + 7 * traits["weak_signal"]
+        + 8 * traits["partially_grounded"]
+        + 0.25 * min(80, int(c.get("maturity_score", 0) or 0))
+    )
 
 
 def _selection_rank(c: dict[str, Any]) -> tuple[int, int, int, int]:
@@ -2195,6 +2427,12 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
             c["presentation_basis"] = basis
             c["reader_eligible"] = False
             c["publication_gate_passes"] = False
+            c.pop("page_slot_wow", None)
+            if c.get("creative_reserve") or clean(c.get("stock_tier")) == "creative_reserve":
+                # Creative reserve is re-decided every scan; never inherit it as
+                # grounded reserve.
+                c["creative_reserve"] = False
+                c["movement"] = "watch"
 
         # Shelf lifecycle semantics: ``qualified`` means the finding is grounded
         # enough to compete for a public slot.  ``watch`` means it remains a
@@ -2239,8 +2477,11 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
             bucket.sort(key=_selection_rank, reverse=True)
             if len(bucket) <= slots_per_wow:
                 return bucket
-            # Slow churn within a wow bucket: keep an incumbent unless a challenger
-            # has at least six maturity points more.  This does not alter the three-slot
+            # Evidence-driven churn within a wow bucket.  New records never take a
+            # slot by themselves; they update the reasoning (support, sources,
+            # maturity) of candidates, and the shelf is re-decided every scan.  An
+            # incumbent keeps its slot unless a challenger's recomputed maturity
+            # beats it by SHELF_SWAP_MARGIN points.  This does not alter the three-slot
             # capacity and never lets another wow bucket steal the slot.
             incumbents = [c for cid in previous_ids for c in bucket if clean(c.get("id")) == cid]
             selected: list[dict[str, Any]] = []
@@ -2256,12 +2497,37 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
                 if len(selected) < slots_per_wow:
                     selected.append(c); selected_ids.add(cid); continue
                 weakest = min(selected, key=_selection_rank)
-                if int(c.get("maturity_score", 0) or 0) >= int(weakest.get("maturity_score", 0) or 0) + 6:
+                if int(c.get("maturity_score", 0) or 0) >= int(weakest.get("maturity_score", 0) or 0) + SHELF_SWAP_MARGIN:
                     selected.remove(weakest); selected_ids.discard(clean(weakest.get("id")))
                     selected.append(c); selected_ids.add(cid)
             return sorted(selected, key=_selection_rank, reverse=True)
 
         by_wow = {wow: select_wow_bucket(deduped, wow) for wow in (5, 4, 3, 2, 1)}
+        # A thin wow bucket must not leave a hole in the 15-slot page.  Each empty
+        # slot is filled from the nearest wow level that still has grounded
+        # reserve (ties prefer the lower, more visible level), so the page keeps
+        # the widest possible 1-5 spread instead of shrinking.
+        taken = {clean(c.get("id")) for items in by_wow.values() for c in items}
+        spare = {
+            wow: sorted(
+                [c for c in deduped if int(c.get("wow", 0) or 0) == wow and clean(c.get("id")) not in taken],
+                key=_selection_rank, reverse=True,
+            )
+            for wow in (5, 4, 3, 2, 1)
+        }
+        borrowed = 0
+        for wow in (5, 4, 3, 2, 1):
+            while len(by_wow[wow]) < slots_per_wow:
+                donors = sorted(
+                    (w for w in (5, 4, 3, 2, 1) if w != wow and spare[w]),
+                    key=lambda w: (abs(w - wow), w),
+                )
+                if not donors:
+                    break
+                c = spare[donors[0]].pop(0)
+                c["page_slot_wow"] = wow
+                by_wow[wow].append(c)
+                borrowed += 1
         chosen: list[dict[str, Any]] = []
         for round_idx in range(slots_per_wow):
             for wow in (5, 4, 3, 2, 1):
@@ -2315,6 +2581,58 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
                 c["movement"] = "watch"; c["stock_tier"] = "watch"
                 c["publication_lock_reason"] = "Developing hypothesis: grounded enough to retain, but it still needs stronger or more independent evidence before public presentation."
 
+        # ---- Creative reserve -------------------------------------------------
+        grounded_reserve = [c for c in pool if clean(c.get("movement")) == "reserve"]
+        creative_quota = max(CREATIVE_RESERVE_MIN, RESERVE_TARGET - len(grounded_reserve))
+        evaluated_on = max((clean(c.get("last_updated_at"))[:10] for c in pool if clean(c.get("last_updated_at"))), default="")
+        creative_pool: dict[int, list[tuple[float, dict[str, Any]]]] = {w: [] for w in (5, 4, 3, 2, 1)}
+        for c in pool:
+            c.pop("creative_reserve", None); c.pop("creative_traits", None)
+            if clean(c.get("movement")) != "watch":
+                continue
+            ok, _why = _creative_eligible(c)
+            if not ok:
+                continue
+            traits = _creative_traits(c, evaluated_on)
+            if not any(traits.values()):
+                continue
+            w = max(1, min(5, int(c.get("wow", 0) or 3)))
+            creative_pool[w].append((_creative_score(c, traits), c))
+            c["creative_traits"] = [k for k, v in traits.items() if v]
+        for w in creative_pool:
+            creative_pool[w].sort(key=lambda t: t[0], reverse=True)
+        creative: list[dict[str, Any]] = []
+        used_stories: set[tuple[str, str]] = {_story_key(c) for c in chosen}
+        while len(creative) < creative_quota and any(creative_pool.values()):
+            progressed = False
+            for w in CREATIVE_WOW_ORDER:
+                if len(creative) >= creative_quota:
+                    break
+                while creative_pool[w]:
+                    _score, c = creative_pool[w].pop(0)
+                    key = _story_key(c)
+                    if key in used_stories:
+                        continue
+                    used_stories.add(key)
+                    creative.append(c)
+                    progressed = True
+                    break
+            if not progressed:
+                break
+        for c in creative:
+            c["creative_reserve"] = True
+            c["movement"] = "reserve"
+            c["stock_tier"] = "creative_reserve"
+            c["reader_status_chip"] = "Worth holding in mind"
+            c["publication_lock_reason"] = (
+                "Creative reserve: relevant and not contradicted, but not yet provable ("
+                + ", ".join(t.replace("_", " ") for t in c.get("creative_traits", []))
+                + "). Held so it can mature instead of being filtered out."
+            )
+        for c in pool:
+            if not c.get("creative_reserve"):
+                c.pop("creative_traits", None)
+
         reserve = sum(1 for c in pool if clean(c.get("movement")) == "reserve")
         watch = sum(1 for c in pool if clean(c.get("movement")) == "watch")
         meta[product] = {
@@ -2330,12 +2648,23 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
             "grounded_publishable": len(ready_ids),
             "total_active_stock": sum(1 for c in pool if clean(c.get("status")) not in {"killed", "dormant"}),
             "folded": folded,
+            "borrowed_slots": borrowed,
+            "reserve_grounded": len(grounded_reserve),
+            "reserve_creative": len(creative),
+            "reserve_target": RESERVE_TARGET,
+            "reserve_by_wow": {str(w): sum(1 for c in pool if clean(c.get("movement")) == "reserve" and int(c.get("wow", 0) or 0) == w) for w in (5, 4, 3, 2, 1)},
+            "creative_by_trait": {t: sum(1 for c in creative if t in c.get("creative_traits", [])) for t in ("distant", "cross_domain", "emerging", "weak_signal", "partially_grounded")},
+            "shown_by_actual_wow": {str(w): sum(1 for c in chosen if int(c.get("wow", 0) or 0) == w) for w in (5, 4, 3, 2, 1)},
         }
 
     meta["page_guarantee"] = {
         "slots_per_wow": 3,
         "cycle": [5, 4, 3, 2, 1] * 3,
         "promotion_between_wow_buckets": False,
+        "empty_slot_fill": "nearest_wow_with_grounded_reserve",
+        "swap_margin": SHELF_SWAP_MARGIN,
+        "rule": "New records update candidate reasoning; the shelf is re-decided each scan from recomputed maturity. No record takes a slot automatically.",
+        "creative_reserve": "Reserve = grounded runners-up + a creative reserve of relevant, uncontradicted hypotheses (distant, cross-domain, emerging, weak-signal or partially grounded), at least 18 and topped up toward 45, rotated across wow levels with weight on surprise. They mature into page competition when grounded.",
     }
     return out, meta
 
@@ -2402,6 +2731,10 @@ def _friendly_object_label(value: Any) -> str:
     }
     if obj in aliases:
         return aliases[obj]
+    fam = _family_of(obj)
+    if fam:
+        return _FAMILY_LABELS.get(fam, fam.replace("_", " ")) + " as a whole"
+
     text = obj.replace(".", " ").replace("_", " ")
     return clean(text) or "European research and innovation"
 
@@ -2558,6 +2891,8 @@ def _reader_why(grammar: str, product: str, raw: dict[str, Any]) -> str:
 
 def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab: dict[str, Any] | None = None, evaluated_on: dt.date | None = None) -> dict[str, Any]:
     nodes = list(nodes)
+    if _family_of(c.get("object")):
+        _register_family(c.get("object"), c.get("family_members") or [])
     node_by_claim = {clean(n.get("claim_id")): n for n in nodes if clean(n.get("claim_id"))}
     vocab = vocab or {}
     evaluated_on = evaluated_on or dt.date.today()
@@ -2626,6 +2961,26 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
             # 2-source-per-side floor qualifies it for the visible trend page.
             status = "qualified" if trend.get("trend_evidence_floor_passes") else "watch"
             support = trend["support"]
+        if not support:
+            # Creative-reserve bridge: the reviewed structured directions show both
+            # pulls, but the wording does not yet make a side reader-visible.  Keep
+            # those records as labelled context so the tension can be held and can
+            # mature, without presenting it as established trend evidence.
+            pulls = [
+                n for n in nodes
+                if n.get("_primary") and clean(n.get("era")) == "current"
+                and clean(n.get("origin")) in _REVIEWED_ORIGINS
+                and _object_matches(clean(c.get("object")), n)
+                and clean(n.get("direction")) in {"expands", "contracts", "becomes_conditional", "becomes_contested"}
+            ]
+            pulls.sort(key=lambda n: float(n.get("merit", 0) or 0), reverse=True)
+            rows = _support_rows({"claim_ids": [clean(n.get("claim_id")) for n in pulls[:8] if clean(n.get("claim_id"))]}, node_by_claim)
+            context.extend(dict(
+                r,
+                role="context",
+                claim_primary=False,
+                evidence_contribution="Structured pull on this object; the wording does not yet make the side reader-visible.",
+            ) for r in rows)
 
     topic = " × ".join(clean(x) for x in c.get("endpoint_objects", []) if clean(x)) if isinstance(c.get("endpoint_objects"), list) else ""
     topic = topic or clean(c.get("object") or c.get("cluster") or c.get("capability_object") or c.get("objective_object") or c.get("delivery_object") or c.get("grammar_id"))
@@ -2672,7 +3027,7 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
         direct_current: list[dict[str, Any]] = []
         contextual_current: list[dict[str, Any]] = []
         for ref in support:
-            if _statement_grounds_object(target, ref.get("source_statement")):
+            if _ref_grounds_object(target, ref):
                 direct_current.append(ref)
             else:
                 contextual_current.append(dict(
@@ -2691,7 +3046,7 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
             )
             for ref in context
             if clean(ref.get("strand")) == "H"
-            and _statement_grounds_object(target, ref.get("source_statement"))
+            and _ref_grounds_object(target, ref)
         ]
 
     # Level-5 role metadata is intentionally permissive during candidate formation.

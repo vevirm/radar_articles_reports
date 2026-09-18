@@ -155,7 +155,8 @@ async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});ret
       const shown=hids.map(id=>hmap.get(clean(id))).filter(Boolean).map(c=>({text:clean(c.reader_title||c.topic_label),explanation:publicPhenomenonSummary(c.reader_summary||'',clean(c.reader_title||c.topic_label)),records:Number(c.current_record_count)||Number(c.primary_records)||0,sources:Number(c.current_source_count)||Number(c.primary_sources)||0,distance:Number(c.wow)||Number(c.inferential_distance)||3,rankScore:Number(c.score)||0,groupLabel:c.grammar_id==='split_recurrence'?'Returning pattern':c.grammar_id==='era_conjunction'?'Changing pattern':'Recurring pattern',support:Array.isArray(c.support)?c.support:[],history:Array.isArray(c.continuity_history)?c.continuity_history:[]}));
       const sel=hi?.selection?.continuity||{};
       const reserve=Number(sel.reserve)||0,watch=Number(sel.watch)||0;
-      render(wowCycle(shown).slice(0,15));
+      // Keep the published Stage 7 order; re-bucketing would drop filled slots.
+      render(shown.slice(0,15));
     }else{
       const established=RadarPhenomena.build(data,history,historyConfig);
       const patterns=RadarContinuity.build(data,history,historyConfig,RadarPhenomena.phenomena);

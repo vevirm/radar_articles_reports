@@ -59,7 +59,8 @@ function wowCycle(items){
   const out=[];for(let round=0;round<3;round++)for(const w of [5,4,3,2,1]){const x=buckets.get(w)[round];if(x)out.push(x)}
   return out;
 }
-function render(view){const risks=wowCycle(view.risks).slice(0,15),opps=wowCycle(view.opportunities).slice(0,15);document.getElementById('risks').innerHTML=listHtml(risks,'risk');document.getElementById('opportunities').innerHTML=listHtml(opps,'opportunity');document.getElementById('riskCount').textContent='On the radar';document.getElementById('opportunityCount').textContent='On the radar';document.getElementById('riskStock').textContent=stockLine(view.stats.riskReserve,view.stats.riskWatch);document.getElementById('opportunityStock').textContent=stockLine(view.stats.opportunityReserve,view.stats.opportunityWatch);}
+function shelf(items){return (items||[]).some(x=>x&&x.highOrder)?(items||[]).slice(0,15):wowCycle(items).slice(0,15)}
+function render(view){const risks=shelf(view.risks),opps=shelf(view.opportunities);document.getElementById('risks').innerHTML=listHtml(risks,'risk');document.getElementById('opportunities').innerHTML=listHtml(opps,'opportunity');document.getElementById('riskCount').textContent='On the radar';document.getElementById('opportunityCount').textContent='On the radar';document.getElementById('riskStock').textContent=stockLine(view.stats.riskReserve,view.stats.riskWatch);document.getElementById('opportunityStock').textContent=stockLine(view.stats.opportunityReserve,view.stats.opportunityWatch);}
 (async()=>{try{const data=await RadarData.load('../radar.json','../radar_seed.json');render(RadarPriorities.buildPriorityView(data))}catch(e){document.getElementById('risks').innerHTML='<li class="empty">Unavailable.</li>';document.getElementById('opportunities').innerHTML='<li class="empty">Unavailable.</li>'}})();
 </script>
 <script src="../site-shell.js?v=28"></script>

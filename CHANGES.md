@@ -1,3 +1,11 @@
+# Creative reserve and future-oriented generation rules
+
+- Every product page fills 15 slots (3 per wow 1-5); a thin wow level borrows from the nearest level. Pages now keep the published order instead of re-bucketing (the shock page was dropping ~6 items).
+- New records never take a slot automatically: they update candidate reasoning, and the shelf is re-decided each scan (swap margin 4 maturity points).
+- Reserve = grounded runners-up + **creative reserve**: at least 18 (topped up toward 45 per category) relevant, uncontradicted hypotheses that are distant, cross-domain, emerging, weak-signal or partially grounded, rotated across wow levels with weight on surprise. They mature into page competition when grounded.
+- Generation: domain-family and vocabulary-cluster scopes for trends and ongoing phenomena; external actors count as constraining pressure on European trends; reviewed Deep Scan/backfill primary tags count as grounding; curated topic phrasings; shock drivers prefer statements that visibly show the disruption; broader research-security wording.
+- Context rows are never primary evidence (R-09 fix).
+
 # v25.1 evidence-linked reader and discovery feedback
 
 Conservative analytical/readability upgrade on top of the Deep Scan authoritative repository.

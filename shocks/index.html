@@ -128,7 +128,9 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-shock-deta
     const all=collect(data),hi=data?.high_order_inference||{},sel=hi?.selection?.shock||{};
     const claimNative=hi?.detector_backend==='claim_native'&&Number(hi?.selection_stage||0)>=7;
     const wowCycle=items=>{const buckets=new Map([5,4,3,2,1].map(w=>[w,[]]));for(const x of items||[]){const w=Math.max(1,Math.min(5,Number(x?.distance)||3));buckets.get(w).push(x)}const out=[];for(let round=0;round<3;round++)for(const w of [5,4,3,2,1]){const x=buckets.get(w)[round];if(x)out.push(x)}return out};
-    const items=claimNative?wowCycle(all).slice(0,15):all.slice(0,15);
+    // Stage 7 already publishes the 5-4-3-2-1 x3 shelf (with thin wow levels filled
+    // from the nearest level). Keep that order; re-bucketing here dropped findings.
+    const items=all.slice(0,15);
     const reserve=Number(sel.reserve)||0,watch=Number(sel.watch)||0;
     const stockWords=()=>{if(!reserve&&!watch)return '';const r=reserve?(reserve>=10?' Many more are waiting in reserve.':' More are waiting in reserve.') : '';const w=watch?(watch>=10?' Many possible shocks are still under investigation.':' Some possible shocks are still under investigation.') : '';return `${r}${w}`};
     document.getElementById('shockSummary').textContent=items.length?`Possible shocks worth watching.${stockWords()}`:`No possible shock is ready to show yet.${stockWords()}`;
