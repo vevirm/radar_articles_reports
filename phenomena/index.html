@@ -120,13 +120,13 @@ function publicPhenomenonSummary(summary,text){
   const s=clean(summary);
   if(!s)return phenomenonExplanation(text);
   const parts=s.match(/[^.!?]+[.!?]?/g)||[];
-  const kept=parts.filter(part=>!/(?:\b\d+\s+(?:current|historical|records?|sources?|publishers?)\b|independent\s+(?:sources?|publishers?)|primary\s+(?:records?|sources?)|controlled issue is supported|evidence (?:count|floor)|records? from|sources? from)/i.test(part));
+  const kept=parts.filter(part=>!/(?:\b\d+\s+(?:current|historical|records?|sources?|publishers?)\b|independent\s+(?:sources?|publishers?)|primary\s+(?:records?|sources?)|controlled issue is supported|evidence (?:count|floor)|records? from|sources? from|current form has changed|underlying issue has persisted|persisted across both eras|across both eras|current and historical|historical and current|recurr(?:ing|s|ed).*eras?)/i.test(part));
   const out=clean(kept.join(' '));
   return out||phenomenonExplanation(text);
 }
 function render(items){
   const el=document.getElementById('phenomena');
-  el.innerHTML=items.length?items.map(x=>`<li data-obviousness="${x.distance||2}"><div class="priority-meta">${esc(x.groupLabel||'Recurring pattern')}</div><strong>${esc(x.text)}</strong><p>${esc(x.explanation||phenomenonExplanation(x.text))}</p></li>`).join(''):'<li class="empty">No ongoing phenomenon is clear enough to show yet.</li>';
+  el.innerHTML=items.length?items.map(x=>`<li data-obviousness="${x.distance||2}"><strong>${esc(x.text)}</strong><p>${esc(x.explanation||phenomenonExplanation(x.text))}</p></li>`).join(''):'<li class="empty">No ongoing phenomenon is clear enough to show yet.</li>';
 }
 async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});return r.ok?await r.json():{}}catch(_){return {}}}
 (async()=>{
