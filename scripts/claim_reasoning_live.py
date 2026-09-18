@@ -697,6 +697,23 @@ def _canonical_support_identity(node: dict[str, Any], snap: dict[str, Any]) -> s
     return rk or clean(snap.get("claim_id") or node.get("claim_id"))
 
 
+def _strand_code(node: dict[str, Any]) -> str:
+    """Normalize active-corpus collections to the public downstream strand codes.
+
+    Frontier evidence is primary Strand A for downstream authority purposes;
+    historical_context is always H/context.  This keeps the claim-native output
+    aligned with R-09 and with downstream retrace semantics.
+    """
+    collection = clean(node.get("_collection"))
+    if collection in {"strand_a", "frontier_evidence"}:
+        return "A"
+    if collection == "strand_c":
+        return "C"
+    if collection == "historical_context" or clean(node.get("era")) == "historical":
+        return "H"
+    return clean(collection).replace("strand_", "").upper()
+
+
 def _support_rows(c: dict[str, Any], node_by_claim: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
     snaps: list[dict[str, Any]] = []
     roles = c.get("roles") if isinstance(c.get("roles"), dict) else {}
@@ -711,7 +728,7 @@ def _support_rows(c: dict[str, Any], node_by_claim: dict[str, dict[str, Any]]) -
             "identity": _canonical_support_identity(node, snap),
             "claim_id": cid,
             "role": clean(role),
-            "strand": clean(node.get("_collection")).replace("strand_", "").upper(),
+            "strand": _strand_code(node),
             "title": clean(snap.get("title") or node.get("_title")),
             "source": clean(snap.get("source") or node.get("_source")),
             "date": clean(snap.get("status_date") or node.get("status_date")),
@@ -746,7 +763,7 @@ def _support_rows(c: dict[str, Any], node_by_claim: dict[str, dict[str, Any]]) -
         rk = clean(node.get("record_key"))
         snaps.append({
             "identity": _canonical_support_identity(node, {"claim_id": cid}), "claim_id": cid, "role": "support",
-            "strand": clean(node.get("_collection")).replace("strand_", "").upper(),
+            "strand": _strand_code(node),
             "title": clean(node.get("_title")), "source": clean(node.get("_source")),
             "date": clean(node.get("status_date")), "link": rk[5:] if rk.startswith("link:") else clean(node.get("_link")),
             "quality": int(round(float(node.get("merit", 0) or 0))), "new_this_scan": bool(node.get("_new_this_scan")),
@@ -848,7 +865,7 @@ def _against_rows(c: dict[str, Any], node_by_claim: dict[str, dict[str, Any]]) -
         out.append({
             "identity": _canonical_support_identity(node, {"claim_id": cid}),
             "claim_id": clean(cid), "role": "counter-evidence",
-            "strand": clean(node.get("_collection")).replace("strand_", "").upper(),
+            "strand": _strand_code(node),
             "title": clean(node.get("_title")), "source": clean(node.get("_source")),
             "date": clean(node.get("status_date")),
             "link": rk[5:] if rk.startswith("link:") else clean(node.get("_link")),
@@ -1096,7 +1113,7 @@ def _trend_payload(
                 "identity": _canonical_support_identity(n, {"claim_id": n.get("claim_id")}),
                 "claim_id": clean(n.get("claim_id")),
                 "role": role,
-                "strand": clean(n.get("_collection")).replace("strand_", "").upper(),
+                "strand": _strand_code(n),
                 "title": clean(n.get("_title")),
                 "source": clean(n.get("_source")),
                 "date": clean(n.get("status_date")),
@@ -1519,28 +1536,35 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
             top = [c for c in deduped if int(c.get("wow", 0) or 0) >= 3]
             higher = [c for c in top if int(c.get("wow", 0) or 0) >= 4]
             if len(top) > ceil_target:
-                wow_floor = 4
-                chosen = list(higher)
-                if len(chosen) < floor_target:
-                    chosen_ids_local = {clean(c.get("id")) for c in chosen}
-                    # If wow alone cannot separate a crowded shelf, prefer findings
-                    # built above the corroborated-claim baseline (depth >=3).  This
-                    # keeps the page analytically richer without inventing a numeric
-                    # cap; all other verified findings stay in reserve.
-                    deeper = [
-                        c for c in top
-                        if clean(c.get("id")) not in chosen_ids_local
-                        and int(c.get("inferential_distance", c.get("level", 0)) or 0) >= 3
-                    ]
-                    needed = max(0, floor_target - len(chosen))
-                    if len(deeper) >= needed and deeper:
-                        deep_band, _deep_threshold = adaptive_score_band(deeper)
-                        chosen.extend(deep_band)
-                    else:
-                        chosen.extend(deeper)
+                if higher:
+                    wow_floor = 4
+                    chosen = list(higher)
+                    if len(chosen) < floor_target:
                         chosen_ids_local = {clean(c.get("id")) for c in chosen}
-                        remaining = [c for c in top if clean(c.get("id")) not in chosen_ids_local]
-                        chosen.extend(stable_take(remaining, max(0, floor_target - len(chosen))))
+                        # If wow alone cannot separate a crowded shelf, prefer findings
+                        # built above the corroborated-claim baseline (depth >=3).  This
+                        # keeps the page analytically richer without inventing a numeric
+                        # cap; all other verified findings stay in reserve.
+                        deeper = [
+                            c for c in top
+                            if clean(c.get("id")) not in chosen_ids_local
+                            and int(c.get("inferential_distance", c.get("level", 0)) or 0) >= 3
+                        ]
+                        needed = max(0, floor_target - len(chosen))
+                        if len(deeper) >= needed and deeper:
+                            deep_band, _deep_threshold = adaptive_score_band(deeper)
+                            chosen.extend(deep_band)
+                        else:
+                            chosen.extend(deeper)
+                            chosen_ids_local = {clean(c.get("id")) for c in chosen}
+                            remaining = [c for c in top if clean(c.get("id")) not in chosen_ids_local]
+                            chosen.extend(stable_take(remaining, max(0, floor_target - len(chosen))))
+                else:
+                    # A crowded wow-3 band must not disappear merely because there is
+                    # no wow-4 item yet.  Tighten by evidence score *inside the same
+                    # wow band* and keep the strongest threshold band visible.
+                    wow_floor = 3
+                    chosen, _same_wow_threshold = adaptive_score_band(top)
                 # R-74: if a lower wow point exists below the active shelf and is
                 # not already represented by the minimum-fill step, keep one best
                 # baseline representative.  Do not turn that baseline into a cap.
@@ -1570,13 +1594,25 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
                 if product == "continuity" and len(deduped) > ceil_target:
                     def continuity_breadth(c):
                         return int(c.get("current_source_count", 0) or 0) + int(c.get("historical_source_count", 0) or 0)
-                    selected_band = []
+                    viable_bands = []
                     for source_floor in (40, 30, 20, 12, 8, 5):
                         band = [c for c in deduped if continuity_breadth(c) >= source_floor]
                         if len(band) >= floor_target:
-                            selected_band = band
-                            break
-                    chosen = selected_band or list(deduped)
+                            overflow = 0 if len(band) <= ceil_target else len(band) - ceil_target
+                            viable_bands.append((overflow, -len(band), source_floor, band))
+                    if viable_bands:
+                        viable_bands.sort(key=lambda x: (x[0], x[1], -x[2]))
+                        chosen = list(viable_bands[0][3])
+                        # The breadth floor is a curation threshold, not a reason to
+                        # leave a mature continuity page almost empty.  Fill toward
+                        # the soft upper range with the strongest remaining verified
+                        # continuities; surplus still remains reserve.
+                        if len(chosen) < ceil_target:
+                            chosen_ids_local = {clean(c.get("id")) for c in chosen}
+                            remaining = [c for c in deduped if clean(c.get("id")) not in chosen_ids_local]
+                            chosen.extend(stable_take(remaining, ceil_target - len(chosen)))
+                    else:
+                        chosen = list(deduped)
                 else:
                     chosen = list(deduped)
 
@@ -1840,6 +1876,19 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
         if len(eps0) >= 2:
             rows0 = [n for n in nodes if eps0[0] in _node_objects(n) and eps0[1] in _node_objects(n)]
             support = _support_rows({"claim_ids": [clean(n.get("claim_id")) for n in rows0[:16]]}, node_by_claim)
+
+    # R-09: only primary A/frontier and verified event-C claims may fill
+    # downstream support. Historical and context-only C claims remain attached
+    # to the candidate, but under context rather than support.
+    context = [
+        dict(ref, claim_primary=False)
+        for ref in support
+        if (not bool(ref.get("claim_primary"))) or clean(ref.get("strand")) == "H"
+    ]
+    support = [
+        ref for ref in support
+        if bool(ref.get("claim_primary")) and clean(ref.get("strand")) in {"A", "C"}
+    ]
     against = _against_rows(c, node_by_claim)
     missing = [clean(x) for x in c.get("missing_roles", []) if clean(x)] if isinstance(c.get("missing_roles"), list) else []
     roles = c.get("roles") if isinstance(c.get("roles"), dict) else {}
@@ -1920,7 +1969,7 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
         "missing_links": missing,
         "primary_records": len(records),
         "primary_sources": len(sources),
-        "context_records": 0,
+        "context_records": len({clean(x.get("identity")) for x in context if clean(x.get("identity"))}),
         "counter_records": len(against),
         "counter_penalty": int(c.get("counter_penalty", 0) or 0),
         "denial_tested": False,
@@ -1930,7 +1979,7 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
         "publication_lock_reason": lock_reason,
         "synthesis_across_records": len(records) >= 2,
         "support": support,
-        "context": [],
+        "context": context,
         "against": against,
         "support_queries": _support_queries(c),
         "falsifier_queries": [] if grammar in {"opposing_movements", "corroborated_claim"} else _falsifier_queries(c),
