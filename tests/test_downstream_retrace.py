@@ -98,8 +98,13 @@ class DownstreamRetraceTests(unittest.TestCase):
                     self.assertNotEqual(str(ref.get('claim_origin') or ''), 'provisional')
                     self.assertIn(str(ref.get('claim_kind') or ''), {'action', 'effect'})
             for ref in candidate.get('context', []):
-                self.assertIn(ref.get('strand'), {'C', 'H'})
+                # Context holds historical/context-only claims plus A/C rows that
+                # were demoted from support (provisional, non-directional or not
+                # source-grounded). Whatever the strand, context is never primary.
+                self.assertIn(ref.get('strand'), {'A', 'C', 'H'})
                 self.assertFalse(ref.get('claim_primary', False))
+                if ref.get('strand') == 'A':
+                    self.assertTrue(ref.get('demoted_from_primary') or ref.get('evidence_contribution'))
 
     def test_full_retrace_records_changes_without_requiring_new_or_retired_objects(self):
         # `newly_inferred` and `retired` are change counters, not invariants.

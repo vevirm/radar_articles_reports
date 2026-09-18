@@ -2701,6 +2701,18 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
     if role_context:
         context.extend(role_context)
 
+    # R-09 invariant: anything filed under `context` is not primary support.
+    # Rows demoted above (provisional claims, non-directional corroboration,
+    # ungrounded continuity/role rows) were copied from primary support and
+    # still carried claim_primary=True, so a context row could masquerade as
+    # primary evidence. Normalise every context row; keep the original flag
+    # for audit.
+    context = [
+        dict(ref, claim_primary=False, demoted_from_primary=True)
+        if bool(ref.get("claim_primary")) else dict(ref, claim_primary=False)
+        for ref in context
+    ]
+
     sources = {clean(x.get("source")).lower() for x in support if clean(x.get("source"))}
     records = {clean(x.get("identity")) for x in support if clean(x.get("identity"))}
     shock_driver_grounded_sources: set[str] = set()
