@@ -175,10 +175,7 @@ def current_orphans(data: dict[str, Any]) -> list[dict[str, Any]]:
         for cid in ids:
             cid = clean(cid)
             c = candidates.get(cid)
-            # The future-hypothesis shelf no longer requires the legacy
-            # ``qualified`` lifecycle label.  Reader eligibility is authoritative;
-            # evidence maturity is stored separately from candidate existence.
-            if c is None or not c.get("reader_eligible"):
+            if c is None or c.get("status") != "qualified" or not c.get("reader_eligible"):
                 out.append({
                     "kind": "reader_publication",
                     "object_id": f"{product}:{cid}",
