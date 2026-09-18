@@ -99,14 +99,35 @@ def test_partial_date_cannot_create_stalled_proposal():
     assert not any(x["object"]=="chips.fab" for x in out)
 
 
-def test_opposing_movements_requires_three_records_and_two_sources_each_side():
+def test_opposing_movements_uses_exact_objects_secondary_objects_and_constraint_directions():
     nodes=[]
-    for i,(direction,source) in enumerate([("expands","A"),("expands","B"),("expands","C"),("contracts","D"),("contracts","E"),("contracts","F")],1):
-        c=claim(key=f"id:{i}",cid=f"c:{i}:1",obj="compute.capacity",mech="assesses",direction=direction,kind="effect",status="delivered",date="2026-08-01")
+    specs=[
+        ("expands","A","compute.capacity",[]),
+        ("expands","B","compute.gigafactory",["compute.capacity"]),
+        ("expands","C","compute.capacity",[]),
+        ("contracts","D","compute.capacity",[]),
+        ("becomes_conditional","E","datacentre.energy_supply",["compute.capacity"]),
+        ("becomes_contested","F","compute.capacity",[]),
+    ]
+    for i,(direction,source,obj,secondary) in enumerate(specs,1):
+        c=claim(key=f"id:{i}",cid=f"c:{i}:1",obj=obj,mech="assesses",direction=direction,kind="effect",status="delivered",date="2026-08-01",secondary=secondary)
         nodes.append(_node(c,source))
     out=opposing_movements(nodes,dt.date(2026,9,17))
-    assert len(out)==1
-    assert out[0]["object"]=="compute.capacity"
+    exact = next(x for x in out if x.get("trend_scope") == "object" and x.get("object") == "compute.capacity")
+    assert exact["trend_evidence_floor_passes"] is True
+    assert exact["expands_records"] == 3
+    assert exact["contracts_records"] == 3
+
+
+def test_opposing_movements_keeps_below_publication_floor_pair_in_stock():
+    nodes=[]
+    for i,(direction,source) in enumerate([("expands","A"),("becomes_conditional","B")],1):
+        c=claim(key=f"id:r{i}",cid=f"c:r{i}:1",obj="research.collaboration",mech="assesses",direction=direction,kind="effect",status="delivered",date="2026-08-01")
+        nodes.append(_node(c,source))
+    out=opposing_movements(nodes,dt.date(2026,9,17))
+    exact=next(x for x in out if x.get("trend_scope")=="object" and x.get("object")=="research.collaboration")
+    assert exact["trend_stock_passes"] is True
+    assert exact["trend_evidence_floor_passes"] is False
 
 
 def test_dependency_pathway_is_shadow_only_even_when_score_gate_passes_or_nearly_passes():

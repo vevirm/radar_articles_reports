@@ -146,11 +146,16 @@ def test_stage7_claim_native_trend_uses_band_and_side_floor(monkeypatch):
     fake["groups"]["level4_5_conflicting_criteria"] = []
     fake["groups"]["level4_opposing_movements"] = [raw_c]
     monkeypatch.setattr(live, "detect_claim_reasoning", lambda *a, **k: fake)
-    query = "compute.capacity substitution resilience alternative capacity"
-    raw = {"scan_results": {"finding_context_queries_this_scan": [query], "finding_context_queries_executed": 1}}
+    # C-08: trend pairs are verified by their own two-sided evidence discipline, not
+    # by a Level-5 candidate-specific falsifier.
+    raw = {"scan_results": {"finding_context_queries_this_scan": [], "finding_context_queries_executed": 0}}
     state = live.refresh_claim_high_order(raw, {}, "2026-09-18T00:00:00Z", root=ROOT)
     assert len(state["publications"]["trend"]) == 1
     c = next(x for x in state["candidates"] if x["grammar_id"] == "opposing_movements")
+    assert c["denial_tested"] is False
+    assert c["falsifier_queries"] == []
+    assert c["verification_mode"] == "trend_evidence_floor"
+    assert c["publication_gate_passes"] is True
     b = c["trend_balance"]
     assert b["left_records"] == 3 and b["right_records"] == 3
     assert b["left_sources"] >= 2 and b["right_sources"] >= 2
@@ -159,7 +164,7 @@ def test_stage7_claim_native_trend_uses_band_and_side_floor(monkeypatch):
     assert isinstance(b["left_range"], list) and len(b["left_range"]) == 2
 
 
-def test_stage7_soft_target_raises_wow_floor_without_hard_cap():
+def test_stage7_page_capacity_puts_excess_equal_quality_candidates_in_reserve():
     xs = []
     for i in range(6):
         xs.append({
@@ -168,9 +173,10 @@ def test_stage7_soft_target_raises_wow_floor_without_hard_cap():
             "endpoint_objects": [f"o{i}", f"x{i}"], "support": [{"mechanism": f"m{i}"}],
         })
     pubs, meta = live._select_stage7(copy.deepcopy(xs), {"publications": {}, "candidates": []})
-    assert pubs["risk"] == []
-    assert meta["risk"]["wow_floor"] == 4
+    assert pubs["risk"] == [f"claim:r:{i}" for i in range(5)]
+    assert meta["risk"]["wow_floor"] == 3
     assert meta["risk"]["soft_target"] == [2, 5]
+    assert meta["risk"]["reserve"] == 1
 
 
 def test_stage7_zero_strength_primary_claim_is_stock_not_publication(monkeypatch):
@@ -194,3 +200,48 @@ def test_stage7_zero_strength_primary_claim_is_stock_not_publication(monkeypatch
     assert c["status"] == "watch"
     assert c["publication_gate_passes"] is False
     assert state["publications"]["risk"] == []
+
+
+def test_stage7_feedback_services_qualified_level5_before_watch_candidates():
+    state = {"candidates": [
+        {
+            "id": "claim:risk:ready", "claim_native": True, "product": "risk",
+            "status": "qualified", "verification_mode": "executed_candidate_falsifier",
+            "denial_tested": False, "wow": 5, "score": 90,
+            "falsifier_queries": ["ready risk falsifier"], "support_queries": [],
+        },
+        {
+            "id": "claim:opp:watch", "claim_native": True, "product": "opportunity",
+            "status": "watch", "wow": 5, "score": 99,
+            "support_queries": ["watch missing bridge"],
+            "falsifier_queries": ["watch challenge"],
+        },
+    ]}
+    assert live.claim_feedback_queries(state, 3) == [
+        "ready risk falsifier", "watch missing bridge", "watch challenge"
+    ]
+
+
+def test_stage7_hysteresis_keeps_equal_wow_incumbent_until_six_point_challenge():
+    base = {
+        "claim_native": True, "product": "risk", "status": "qualified",
+        "denial_tested": True, "oddity_passes": True, "wow": 4,
+        "verification_mode": "executed_candidate_falsifier",
+    }
+    incumbents = []
+    for i in range(5):
+        c = dict(base, id=f"claim:old:{i}", score=90-i, endpoint_objects=[f"old{i}", "x"], support=[{"mechanism": f"m{i}"}])
+        incumbents.append(c)
+    challenger = dict(base, id="claim:new", score=87, endpoint_objects=["new", "x"], support=[{"mechanism": "mn"}])
+    previous = {
+        "publications": {"risk": [c["id"] for c in incumbents]},
+        "candidates": [dict(c) for c in incumbents],
+    }
+    pubs, _ = live._select_stage7(copy.deepcopy(incumbents + [challenger]), previous)
+    assert "claim:new" not in pubs["risk"]
+    challenger["score"] = 91  # weakest incumbent is 86: still only +5
+    pubs, _ = live._select_stage7(copy.deepcopy(incumbents + [challenger]), previous)
+    assert "claim:new" not in pubs["risk"]
+    challenger["score"] = 92  # +6 displaces the weakest incumbent
+    pubs, _ = live._select_stage7(copy.deepcopy(incumbents + [challenger]), previous)
+    assert "claim:new" in pubs["risk"]
