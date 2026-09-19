@@ -96,6 +96,21 @@ function rankItems(items){return [...items].sort((a,b)=>(b.rankScore||0)-(a.rank
 
 function phenomenonExplanation(v){
   const t=norm(v);
+  if(/international researcher recruitment/.test(t))return 'Europe’s ability to attract researchers continues to depend on mobility, career conditions and competition for specialised talent.';
+  if(/innovation conversion problem/.test(t))return 'Europe continues to produce strong research but struggles to turn it into scaled firms, products and industrial capacity.';
+  if(/innovation performance as a whole/.test(t))return 'The recurring challenge is turning research strength into productivity, commercialisation and competitive growth.';
+  if(/strategic autonomy/.test(t))return 'More research and technology decisions are being shaped by Europe’s ability to act without critical external dependencies.';
+  if(/european research system as a whole/.test(t))return 'Funding, careers, infrastructure and governance continue to shape the resilience and performance of European research as a whole.';
+  if(/older link between funding route and research system governance/.test(t))return 'How research is funded is again becoming closely tied to how institutions, programmes and priorities are governed.';
+  if(/researcher retention/.test(t))return 'Skills, mobility and career conditions determine whether Europe can retain specialised scientific capability.';
+  if(/ai as a whole/.test(t))return 'AI policy increasingly connects computing capacity, skills, research access, industrial capability and strategic dependence.';
+  if(/industrial capacity as a whole/.test(t))return 'Strong research does not automatically become globally competitive firms or production capacity in Europe.';
+  if(/research collaboration/.test(t))return 'International collaboration continues, but security, funding and strategic interests are reshaping how partnerships work.';
+  if(/research openness/.test(t))return 'Europe is still balancing open research with the need to protect sensitive knowledge, data and partnerships.';
+  if(/chips fab|chip fab|semiconductor/.test(t))return 'European chip ambitions still depend on fabs, supply chains, investment and access to specialised technology.';
+  if(/digital policy as a whole/.test(t))return 'Digital policy increasingly links regulation, infrastructure, security and industrial competitiveness rather than treating them separately.';
+  if(/innovation deep tech startups|deep tech startup/.test(t))return 'Deep-tech startups still face the challenge of turning research breakthroughs into firms that can finance, scale and remain in Europe.';
+  if(/critical raw material supply|critical materials/.test(t))return 'Access to critical raw materials remains a constraint on European research, manufacturing and strategic technologies.';
   if(/computing power|computing capacity|supercomput/.test(t))return 'Access to large computing systems affects which technologies European researchers and firms can develop independently.';
   if(/rules and standards|regulation|rulebook|standards/.test(t))return 'European rules can steer technical choices, markets and access around strategically important technologies.';
   if(/research funding|research money|funding/.test(t))return 'Public research money is increasingly tied to capabilities Europe considers strategically important.';
@@ -108,7 +123,7 @@ function phenomenonExplanation(v){
   if(/semiconductor|chip/.test(t))return 'Chip access and production shape what European research and technology can build without external constraints.';
   if(/china|rivalry|technology controls|export/.test(t))return 'Technology competition is increasingly shaping which partnerships, inputs and markets remain open to European research.';
   if(/long term strategy|foresight/.test(t))return 'Long-term planning is being pulled closer to decisions about security, capability and international dependence.';
-  return ''; // No generic filler when the title already carries the finding.
+  return 'The issue continues to shape how Europe builds, funds and protects research and technology capacity.';
 }
 function wowCycle(items){
   const buckets=new Map([5,4,3,2,1].map(w=>[w,[]]));
@@ -116,20 +131,13 @@ function wowCycle(items){
   const out=[];for(let round=0;round<3;round++)for(const w of [5,4,3,2,1]){const x=buckets.get(w)[round];if(x)out.push(x)}
   return out;
 }
-function publicPhenomenonSummary(summary,text){
-  const s=clean(summary);
-  if(!s)return phenomenonExplanation(text);
-  const parts=s.match(/[^.!?]+[.!?]?/g)||[];
-  const kept=parts.filter(part=>!/(?:\b\d+\s+(?:current|historical|records?|sources?|publishers?)\b|independent\s+(?:sources?|publishers?)|primary\s+(?:records?|sources?)|controlled issue is supported|evidence (?:count|floor)|records? from|sources? from|current form has changed|underlying issue has persisted|persisted across both eras|across both eras|current and historical|historical and current|recurr(?:ing|s|ed).*eras?)/i.test(part));
-  const out=clean(kept.join(' '));
-  return out||phenomenonExplanation(text);
-}
+function publicPhenomenonSummary(summary,text){return phenomenonExplanation(text)}
 function fmtEvidenceDate(v){if(!v)return '';const d=new Date(v);return Number.isNaN(d.getTime())?clean(v):new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'short',year:'numeric'}).format(d)}
 function phenomenonEvidenceList(rows){return rows.map(r=>{const title=clean(r?.title||'Source'),source=clean(r?.source||''),date=fmtEvidenceDate(r?.date),link=clean(r?.link||'');const named=link?`<a href="${esc(link)}" target="_blank" rel="noopener">${esc(title)}</a>`:esc(title);const meta=[source,date].filter(Boolean).join(' — ');return `<li>${named}${meta?` <span>— ${esc(meta)}</span>`:''}</li>`}).join('')}
 function phenomenonEvidence(rows,history){rows=Array.isArray(rows)?rows:[];history=Array.isArray(history)?history:[];if(!rows.length&&!history.length)return '';let body='';if(rows.length)body+=`<p><strong>Current sources:</strong></p><ul>${phenomenonEvidenceList(rows)}</ul>`;if(history.length)body+=`<p><strong>Earlier sources:</strong></p><ul>${phenomenonEvidenceList(history)}</ul>`;return `<details><summary>Sources</summary>${body}</details>`}
 function render(items){
   const el=document.getElementById('phenomena');
-  el.innerHTML=items.length?items.map(x=>{const explanation=clean(x.explanation||phenomenonExplanation(x.text));return `<li data-obviousness="${x.distance||2}"><strong>${esc(x.text)}</strong>${explanation?`<p>${esc(explanation)}</p>`:''}${phenomenonEvidence(x.support,x.history)}</li>`}).join(''):'<li class="empty">No ongoing phenomenon is clear enough to show yet.</li>';
+  el.innerHTML=items.length?items.map(x=>{const explanation=clean(x.explanation)||clean(phenomenonExplanation(x.text));return `<li data-obviousness="${x.distance||2}"><strong>${esc(x.text)}</strong>${explanation?`<p>${esc(explanation)}</p>`:''}${phenomenonEvidence(x.support,x.history)}</li>`}).join(''):'<li class="empty">No ongoing phenomenon is clear enough to show yet.</li>';
 }
 async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});return r.ok?await r.json():{}}catch(_){return {}}}
 (async()=>{
