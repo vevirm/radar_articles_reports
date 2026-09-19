@@ -728,58 +728,58 @@
 
   function plainPriorityExplanation(x){
     if(x?.highOrder){
-      const authored=clean(x.coreMessage||x.abstract);
-      if(authored)return authored;
-      const topic=friendlyCandidateTopic(x),g=clean(x?.grammarId),dir=clean(x?.direction);
-      if(g==='clock_before_rule')return `Work is already scheduled or under way while the related rules are still unsettled. That timing mismatch creates the risk.`;
-      if(g==='success_metric_gap')return `The stated objective and the funded activity are not the same thing. Delivery can therefore look successful before the intended result is known.`;
-      if(g==='deployment_before_rules')return `Activity is already operating or being deployed before the relevant rules are settled, so practice can harden before governance catches up.`;
-      if(g==='conflicting_criteria')return `Both requirements matter, but there is no clear common tie-break. That can produce inconsistent decisions across institutions or countries.`;
-      if(g==='dependency_pathway')return `A dependency links this capability to a wider chain, so disruption could spread beyond one isolated project.`;
-      if(g==='corroborated_claim'){
-        const corroborated=clean(x?.evidenceSemantics)==='corroborated'||Number(x?.primarySources||0)>=2;
-        const lead=corroborated
-          ? `Independent sources document the same current direction on ${topic}.`
-          : `A current source anchors the evidence on ${topic}.`;
-        let semantic='';
-        if(clean(x?.kind)==='risk'){
-          if(dir==='becomes_conditional')semantic=`The evidence points toward tighter conditions on ${topic}.`;
-          else if(dir==='becomes_contested')semantic=`The evidence points toward more contested conditions around ${topic}.`;
-          else if(dir==='contracts')semantic=`The evidence points toward contraction or reduced room to act around ${topic}.`;
-        }
-        return `${semantic||lead}`;
+      const topic=friendlyCandidateTopic(x),g=clean(x?.grammarId),dir=clean(x?.direction),mech=clean(x?.mechanism),kind=clean(x?.kind);
+      if(g==='dependency_pathway')return 'A constraint in one connected part of the system could carry into the other, widening the impact beyond the original bottleneck.';
+      if(g==='clock_before_rule')return 'Projects may commit money, infrastructure or operating choices before the rules are final, making later changes harder and more expensive.';
+      if(g==='success_metric_gap')return `Funding can increase before there is a clear way to tell whether ${topic} is actually improving.`;
+      if(g==='deployment_before_rules'||g==='practice_before_doctrine')return 'Early implementation can harden into the default before the formal framework has resolved the main trade-offs.';
+      if(g==='conflicting_criteria')return 'Institutions can make inconsistent choices when two valid requirements pull in different directions without a clear tie-break.';
+      if(g==='latent_channel')return 'Existing European structures could be connected to close the gap without building an entirely new programme from scratch.';
+      if(g==='corroborated_claim'&&kind==='risk'){
+        if(dir==='becomes_conditional')return `More approvals or requirements could make access to ${topic} harder and less predictable.`;
+        if(dir==='becomes_contested')return `Competing demands could make decisions around ${topic} slower, less predictable or harder to coordinate.`;
+        if(dir==='contracts')return `If the current constraint persists, capacity and room to act around ${topic} could narrow further.`;
+        return `The current pressure could reduce capacity, access or room to act around ${topic} if it persists.`;
       }
-      return `${topic.charAt(0).toUpperCase()+topic.slice(1)} is creating a material risk or opportunity for European research and innovation.`;
+      if(g==='corroborated_claim'&&kind==='opportunity'){
+        if(['collaborates','associates'].includes(mech))return `Keeping the agreement active could widen access to partners, expertise and networks around ${topic}.`;
+        if(['procures','builds','adds_capacity','invests'].includes(mech))return `If the current build-out reaches users, it could add usable European capacity around ${topic}.`;
+        if(mech==='funds')return `If funded work turns into delivery, it could strengthen European capability around ${topic}.`;
+        if(['supports','launches','coordinates','retains','allocates','prioritises'].includes(mech))return `If the current instrument works as intended, it could strengthen European capability around ${topic}.`;
+        return `If current implementation continues, Europe could gain more usable capability around ${topic}.`;
+      }
+      if(kind==='risk')return `The current pathway could reduce European capacity, access or room to act around ${topic}.`;
+      if(kind==='opportunity')return `The current pathway could turn existing European activity into more usable capability around ${topic}.`;
     }
     const t=pathwayText(x),title=norm(x?.title||''),kind=clean(x?.kind),asset=semanticAssetFamily(x),mechanism=semanticMechanismFamily(x);
     if(kind==='risk'){
-      if(asset==='talent') return 'Short-term or insecure research careers can make Europe less attractive. If researchers leave faster than Europe can recruit and retain them, laboratories, new infrastructure and strategic technology programmes can end up short of people.';
-      if(asset==='research-security'||mechanism==='interference') return 'The risk is that outside actors obtain sensitive research knowledge, know-how or access through interference, pressure or covert activity. The loss is not only information: it can weaken future European capability and bargaining power.';
-      if(asset==='chips') return mechanism==='export-control'?'European research and high-tech production rely on advanced chips made through globally concentrated supply chains. Export controls can remove access faster than European substitutes can be qualified.':'European research and high-tech production rely on chips made through concentrated global supply chains. Supplier concentration or outside dependency can therefore interrupt access faster than Europe can replace it.';
-      if(asset==='critical-materials') return 'Many research and industrial technologies depend on critical materials supplied by a small number of countries or firms. A shortage or export restriction can delay projects and raise costs before substitutes are ready.';
-      if(asset==='compute') return 'European researchers and firms can depend on computing infrastructure controlled by outside suppliers or foreign legal regimes. Access, price or permitted use can then change for reasons Europe does not control.';
-      if(asset==='collaboration') return 'Research collaboration depends on workable access, participation and governance conditions. Unequal authority, partner-country rules or other barriers can narrow the people, knowledge and networks European teams can use.';
-      if(asset==='research-infrastructure') return 'Some research depends on scarce facilities that cannot be substituted quickly. When access is limited, the bottleneck can slow experiments, training and innovation even if funding is available.';
-      if(asset==='technology-dependence') return 'The risk is not simply importing technology. It is relying on outside actors for capabilities that Europe would struggle to replace quickly, which can narrow policy choices when political or commercial conditions change.';
-      if(asset==='research-data'&&mechanism==='fragmentation') return 'Separate systems, rules or infrastructures can make collaboration and data movement harder. Over time that can reduce the effective scale of European research even when each part still functions on its own.';
-      if(asset==='firms-ip'&&mechanism==='ownership-transfer') return 'A European technology firm can remain commercially successful while control of intellectual property, product decisions and high-value research moves elsewhere after an acquisition.';
-      if(asset==='competitiveness'&&mechanism==='export-control') return 'Export-control uncertainty can affect access to advanced technology and make international alignment harder. That can constrain European firms and research programmes even when the controls are not aimed at Europe itself.';
-      if(asset==='competitiveness'&&mechanism==='concentration') return 'Concentrated markets and weak scale-up conditions can leave European research strengths without firms large enough to retain production, investment and strategic capability in Europe.';
-      if(asset==='competitiveness'&&mechanism==='access-barrier') return 'The source points to a structural barrier between European research strength and the ability to turn it into broader capability or competitiveness. The risk is persistence of that bottleneck rather than a single external shock.';
-      if(/critical raw|critical mineral|rare earth|gallium|germanium|lithium|cobalt/.test(t)) return 'Many research and industrial technologies depend on critical materials supplied by a small number of countries or firms. A shortage or export restriction can delay projects and raise costs before substitutes are ready.';
+      if(asset==='talent') return 'Insecure career paths can push researchers elsewhere, leaving laboratories, infrastructure and strategic programmes short of specialist people.';
+      if(asset==='research-security'||mechanism==='interference') return 'Outside access to sensitive knowledge or know-how can weaken future European capability as well as compromise individual projects.';
+      if(asset==='chips') return mechanism==='export-control'?'Export controls can remove access to advanced chips faster than European substitutes can be qualified.':'Concentrated chip supply can interrupt European research and production faster than alternative suppliers can be qualified.';
+      if(asset==='critical-materials') return 'A shortage or export restriction can delay research and production when critical materials have no fast substitute.';
+      if(asset==='compute') return 'Access, price or permitted use can change quickly when essential computing infrastructure is controlled by outside suppliers or foreign legal regimes.';
+      if(asset==='collaboration') return 'Restrictive participation or governance conditions can narrow the people, knowledge and networks European teams can use.';
+      if(asset==='research-infrastructure') return 'Limited access to scarce facilities can slow experiments, training and innovation even when funding is available.';
+      if(asset==='technology-dependence') return 'Reliance on capabilities that Europe cannot replace quickly can narrow policy choices when political or commercial conditions change.';
+      if(asset==='research-data'&&mechanism==='fragmentation') return 'Separate systems and rules can make data movement and collaboration harder, reducing the effective scale of European research.';
+      if(asset==='firms-ip'&&mechanism==='ownership-transfer') return 'An acquisition can move intellectual property, product decisions and high-value research outside Europe even when the company remains commercially successful.';
+      if(asset==='competitiveness'&&mechanism==='export-control') return 'Uncertain export rules can restrict access to advanced technology and make international cooperation harder for European firms and research programmes.';
+      if(asset==='competitiveness'&&mechanism==='concentration') return 'Concentrated markets can leave European research strengths without firms large enough to retain production, investment and strategic capability in Europe.';
+      if(asset==='competitiveness'&&mechanism==='access-barrier') return 'A persistent bottleneck between research strength and deployment can prevent European knowledge from becoming wider industrial capability.';
+      if(/critical raw|critical mineral|rare earth|gallium|germanium|lithium|cobalt/.test(t)) return 'A shortage or export restriction can delay research and production when critical materials have no fast substitute.';
       return 'A dependency, bottleneck, rule or structural constraint could reduce European research capacity, access or freedom to act.';
     }
     if(kind==='opportunity'){
-      if(asset==='talent'||/choose europe for science/.test(title)) return 'The opportunity is to make European research careers stable and attractive enough to keep researchers and bring more of them to Europe. In this case the programme is a response to brain drain, not the risk itself.';
-      if(/ocean research|ocean.*innovation strategy/.test(title)) return 'The opportunity is to improve coordination, priorities and governance before the future European ocean R&I strategy is fixed.';
-      if(/eit|innovation agenda|call for evidence/.test(title)) return 'A live policy-design process creates a chance to change priorities and instruments before they are fixed. The gain comes only if the final design addresses a real strategic R&I need.';
-      if(/quantum/.test(title)&&/standards?/.test(title)) return 'Standards shape interoperability, markets and who gets to set technical rules. Acting early gives Europe a chance to make its research strengths matter in the rules that later govern deployment.';
-      if(/quantum/.test(title)&&/pilot line|testing infrastructure|experimental/.test(title)) return 'Shared testing and pilot facilities can move European quantum work from research toward usable technology without every organisation having to build the same expensive infrastructure itself.';
-      if(/quantum/.test(title)&&/open|access/.test(title)) return 'The opportunity is to let researchers use European quantum computers directly, turning public infrastructure into usable scientific and technological capability.';
-      if(/quantum/.test(title)) return 'The opportunity is to use current calls and facilities to build European quantum capability while the technology and market structure are still developing.';
-      if(asset==='compute'||/ai gigafactor|computing capacity/.test(title)) return 'The opportunity is to add European-controlled compute that researchers and firms can actually use. More capacity at home can support AI work while reducing exposure to outside suppliers.';
-      if(/open access to jrc|research infrastructures?/.test(title)&&/open access/.test(title)) return 'Opening existing facilities lets more researchers use expensive European infrastructure. That can turn sunk public investment into wider capability, collaboration and faster experimentation.';
-      if(/egypt|north macedonia|association|partnership|international cooperation/.test(title)) return 'A well-chosen partnership can widen access to researchers, infrastructure, data and complementary expertise while strengthening Europe’s international research position.';
+      if(asset==='talent'||/choose europe for science/.test(title)) return 'More stable and attractive research careers could help Europe retain researchers and draw more of them in.';
+      if(/ocean research|ocean.*innovation strategy/.test(title)) return 'Better coordination can align priorities and institutions before the future European ocean research and innovation strategy is fixed.';
+      if(/eit|innovation agenda|call for evidence/.test(title)) return 'A live policy-design process creates room to improve priorities and instruments before they are fixed.';
+      if(/quantum/.test(title)&&/standards?/.test(title)) return 'Early standards work can help European research strengths shape the technical rules that later govern deployment and markets.';
+      if(/quantum/.test(title)&&/pilot line|testing infrastructure|experimental/.test(title)) return 'Shared testing and pilot facilities can move quantum research toward usable technology without every organisation duplicating expensive infrastructure.';
+      if(/quantum/.test(title)&&/open|access/.test(title)) return 'Direct access to European quantum computers can turn public infrastructure into usable scientific and technological capability.';
+      if(/quantum/.test(title)) return 'Current calls and facilities can build European quantum capability while the technology and market structure are still developing.';
+      if(asset==='compute'||/ai gigafactor|computing capacity/.test(title)) return 'More European-controlled computing capacity can support AI work while reducing exposure to outside suppliers.';
+      if(/open access to jrc|research infrastructures?/.test(title)&&/open access/.test(title)) return 'Opening existing facilities lets more researchers use expensive infrastructure and can speed experimentation and collaboration.';
+      if(/egypt|north macedonia|association|partnership|international cooperation/.test(title)) return 'A well-chosen partnership can widen access to researchers, infrastructure, data and complementary expertise.';
       return 'Europe has a concrete route to strengthen research, innovation, access, resilience or control.';
     }
     return simplePriorityText(x);

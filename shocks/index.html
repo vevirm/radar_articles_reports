@@ -42,20 +42,36 @@ const SIMPLE={
 
 function shockExplanation(v){
   const t=norm(v);
-  if(/cyberattack|computing service offline/.test(t))return 'Shared European computing capacity could become unavailable precisely when research teams have no immediate substitute.';
-  if(/critical materials|advanced chips|cutoff/.test(t))return 'European research and production could stop where critical inputs have no fast substitute.';
-  if(/conflict|research corridor|displaces people/.test(t))return 'Researchers, facilities and collaborations could be disrupted at once, with no quick replacement for lost capacity.';
-  if(/partner restricts grants|researcher participation|data exchange/.test(t))return 'European teams could suddenly lose funding links, people, data or expertise they rely on.';
-  if(/pulling researchers home|tightens research security/.test(t))return 'Talent loss and tighter security checks could weaken collaboration and specialist capacity at the same time.';
-  if(/sanctions|horizon europe partnership/.test(t))return 'Formal association would no longer guarantee practical access to funds, partners or projects.';
-  if(/standards split|unable to work together/.test(t))return 'Shared research systems could fragment if equipment, data or rules stop working together.';
-  if(/technology company is bought|taking key capability/.test(t))return 'Intellectual property, talent and growth capacity could move outside European control.';
-  if(/foreign control layer|ai computing capacity unusable/.test(t))return 'European artificial-intelligence research could lose access to computing capacity even when infrastructure remains in Europe.';
+  if(/drone capability.*spending squeeze/.test(t))return 'A sudden funding squeeze could pause procurement and testing, leaving specialist teams and equipment without a clear continuation path.';
+  if(/funding cut.*researcher retention/.test(t))return 'A sharp cut could end contracts or career support quickly enough to push researchers toward opportunities elsewhere.';
+  if(/computing capacity.*single thread|pull one supplier.*computing/.test(t))return 'If a critical supplier, service or component is cut off, European computing could lose usable capacity faster than it can be replaced.';
+  if(/breakthrough abroad.*quantum pilot/.test(t))return 'A major leap elsewhere could shift the technical benchmark so quickly that planned European facilities are forced into catch-up mode.';
+  if(/horizon budget.*bargaining chip/.test(t))return 'A political shift could turn long-term research funding into leverage, delaying commitments and making participation less predictable.';
+  if(/grid is rationed.*drone capability/.test(t))return 'Power rationing could force energy-intensive testing and production to compete with essential uses, slowing capability when demand is highest.';
+  if(/researcher retention.*closed doors|open science to closed doors/.test(t))return 'A sudden security tightening could narrow mobility, collaboration or access, making Europe less attractive to the researchers it wants to keep.';
+  if(/computing capacity goes dark|one breach.*computing/.test(t))return 'A serious breach could take shared computing services offline and interrupt many projects at once.';
+  if(/political turn.*horizon association|horizon association.*chopping block/.test(t))return 'A political decision could narrow or suspend participation even while formal cooperation structures still exist.';
+  if(/winter power squeeze.*materials/.test(t))return 'Energy shortages could pause energy-intensive processing and experiments, creating delays that cannot be solved by funding alone.';
+  if(/pull one supplier.*quantum|quantum testing.*supplier/.test(t))return 'Loss of a single critical supplier could halt testing if specialised components have no qualified substitute.';
+  if(/quantum testing.*ransomware|ransomware.*quantum/.test(t))return 'A cyberattack could disable shared testing infrastructure and strand multiple research teams at once.';
+  if(/security label.*quantum pilot|reclassification.*quantum/.test(t))return 'Reclassification could restrict who may access facilities or data, shrinking the talent pool and slowing collaboration.';
+  if(/conflict.*horizon association|horizon association.*conflict/.test(t))return 'A wider conflict could redirect public money and specialist staff away from collaborative research programmes.';
+  if(/licence stamped abroad.*defence|export.*defence innovation/.test(t))return 'A foreign export licence could delay or block access to technology needed to turn funding into usable capability.';
+  if(/cyberattack|computing service offline/.test(t))return 'A serious cyber incident could interrupt shared computing capacity before research teams have a workable substitute.';
+  if(/critical materials|advanced chips|cutoff/.test(t))return 'A supply cutoff could stop research or production where critical inputs have no fast substitute.';
+  if(/conflict|research corridor|displaces people/.test(t))return 'Conflict could disrupt researchers, facilities and collaborations at the same time, making lost capacity difficult to replace quickly.';
+  if(/partner restricts grants|researcher participation|data exchange/.test(t))return 'New restrictions could suddenly remove funding links, people, data or expertise that European teams rely on.';
+  if(/pulling researchers home|tightens research security/.test(t))return 'Talent loss combined with tighter security checks could weaken collaboration and specialist capacity at the same time.';
+  if(/sanctions|horizon europe partnership/.test(t))return 'Sanctions could leave a formal partnership in place while practical access to funds, partners or projects disappears.';
+  if(/standards split|unable to work together/.test(t))return 'A standards split could fragment shared research systems if equipment, data or rules stop working together.';
+  if(/technology company is bought|taking key capability/.test(t))return 'An acquisition could move intellectual property, talent and growth capacity outside European control.';
+  if(/foreign control layer|ai computing capacity unusable/.test(t))return 'A foreign control layer could block access to computing capacity even when the physical infrastructure remains in Europe.';
   if(/energy shock|ration.*computing/.test(t))return 'Scarce electricity could force research facilities to compete with other essential uses for computing capacity.';
-  if(/foreign data order|clinical research network/.test(t))return 'Cross-border studies could stop if researchers can no longer lawfully move or access patient data.';
+  if(/foreign data order|clinical research network/.test(t))return 'A foreign data order could stop cross-border studies if researchers can no longer lawfully move or access patient data.';
   if(/security reclassification|restricts access/.test(t))return 'A sudden security decision could close projects, data or partnerships before alternatives are available.';
-  return 'The disruption would remove an important capability, input or connection before European research could replace it.';
+  return 'A sudden external disruption could remove a capability, input or connection before European research has a workable substitute.';
 }
+
 function evidenceStats(s){
   const ev=Array.isArray(s?.evidence)?s.evidence:[];
   const rows=ev.map(e=>e?.row||e).filter(Boolean);
@@ -121,16 +137,8 @@ function shockDetailHtml(x,i){
   return `<div class="shock-actions"><button class="info-button" type="button" data-shock-detail="${id}" aria-expanded="false">Sources</button></div><div id="${id}" class="shock-detail" hidden>${body}</div>`;
 }
 document.addEventListener('click',e=>{const b=e.target.closest('[data-shock-detail]');if(!b)return;const box=document.getElementById(b.dataset.shockDetail);if(!box)return;const opening=box.hidden;box.hidden=!opening;b.setAttribute('aria-expanded',String(opening));b.textContent=opening?'Close':'Sources'});
-function visibleShockExplanation(title,text){
-  const t=clean(title).toLowerCase(),s=clean(text);
-  if(!s)return '';
-  if(/spending squeeze|funding cut/.test(t)&&/^A budget cut or freeze could stop /i.test(s))return '';
-  const a=new Set(t.replace(/[^a-z0-9 ]/g,' ').split(/\s+/).filter(w=>w.length>4));
-  const b=new Set(s.toLowerCase().replace(/[^a-z0-9 ]/g,' ').split(/\s+/).filter(w=>w.length>4));
-  let hit=0; for(const w of a) if(b.has(w)) hit++;
-  if(a.size&&hit/a.size>.72)return '';
-  return s;
-}
+function visibleShockExplanation(title,text){return clean(text)||shockExplanation(title);}
+
 
 (async()=>{
   const el=document.getElementById('shockList');
@@ -143,7 +151,7 @@ function visibleShockExplanation(title,text){
     // from the nearest level). Keep that order; re-bucketing here dropped findings.
     const items=all.slice(0,15);
     document.getElementById('shockSummary').textContent=items.length?'Possible shocks worth watching.':'No possible shock is ready to show yet.';
-    el.innerHTML=items.length?items.map((x,i)=>{const raw=x.explanation&&x.detail&&x.detail.type==='higher-order'?x.explanation:shockExplanation(x.text);const explanation=visibleShockExplanation(x.text,raw);return `<li><strong>${esc(x.text)}</strong>${explanation?`<p>${esc(explanation)}</p>`:''}${shockDetailHtml(x,i)}</li>`}).join(''):'<li class="empty">No possible shock is ready to show yet.</li>';
+    el.innerHTML=items.length?items.map((x,i)=>{const raw=x.explanation&&x.detail&&x.detail.type==='higher-order'?x.explanation:shockExplanation(x.text);const explanation=visibleShockExplanation(x.text,raw);return `<li><strong>${esc(x.text)}</strong><p>${esc(explanation)}</p>${shockDetailHtml(x,i)}</li>`}).join(''):'<li class="empty">No possible shock is ready to show yet.</li>';
   }catch(e){console.error(e);document.getElementById('shockSummary').textContent='Shock evidence is unavailable.';el.innerHTML='<li class="empty">Unavailable.</li>'}
 })();
 </script>
