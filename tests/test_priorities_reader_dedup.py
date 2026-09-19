@@ -118,7 +118,7 @@ console.log(JSON.stringify({riskTitle:P.plainPriorityTitle(v.risks[0]),riskText:
 '''
         out = self.run_node(js)
         self.assertIn('becoming more conditional', out['riskTitle'])
-        self.assertIn('toward tighter conditions', out['riskText'])
+        self.assertIn('harder and less predictable', out['riskText'])
         self.assertEqual(len(out['oppTitles']), len(set(out['oppTitles'])))
         self.assertTrue(any('adopted priorities' in x for x in out['oppTitles']))
         self.assertTrue(any('new instruments' in x for x in out['oppTitles']))
