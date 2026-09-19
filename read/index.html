@@ -19,11 +19,9 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 function nodeContent(n){
   const q=encodeURIComponent(n?.query||n?.label||'');
   const label=surface(n?.label); const source=n?.sourceLink?`<a class="node-title" href="${esc(n.sourceLink)}" target="_blank" rel="noopener" title="Open strongest supporting source">${esc(label)}</a>`:`<a class="node-title" href="../radar/?q=${q}" title="Show supporting Radar material">${esc(label)}</a>`;
-  const count=Number(n?.evidenceCount||0);
-  const meta=count?`<div class="node-meta">${count} ${count===1?'record':'records'}</div>`:'';
   const pair=globalThis.RadarReaderStyle?.pagePair?.(n?.what||'',n?.why||'',16,16)||{what:surface(n?.what),why:surface(n?.why)};
   const what=pair.what?`<div class="node-what">${esc(pair.what)}</div>`:'';
-  return source+what+meta;
+  return source+what;
 }
 function chart(x,i){
   const subs=x.subs||[], leaves=x.leaves||[];
