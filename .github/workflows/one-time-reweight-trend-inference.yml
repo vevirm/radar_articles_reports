@@ -1,0 +1,116 @@
+name: ONE-TIME Reweight Trend Inference
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+
+concurrency:
+  group: ri-radar-research-scanners
+  cancel-in-progress: false
+
+jobs:
+  reweight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install repository dependencies
+        run: pip install --quiet -r requirements.txt
+
+      - name: Snapshot evidence and current trend count
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          keys = ('strand_a','strand_b','strand_c','frontier_evidence','historical_context')
+          state = {}
+          for name in ('radar.json','radar_active.json'):
+              doc = json.loads(Path(name).read_text(encoding='utf-8'))
+              state[name] = {
+                  'hashes': {k: hashlib.sha256(json.dumps(doc.get(k), ensure_ascii=False, sort_keys=True, separators=(',',':')).encode()).hexdigest() for k in keys},
+                  'trend_count': len(((doc.get('high_order_inference') or {}).get('publications') or {}).get('trend') or []),
+              }
+          Path('/tmp/trend-reweight-before.json').write_text(json.dumps(state), encoding='utf-8')
+          print(state)
+          PY
+
+      - name: Recompute high-order inference only
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. python scripts/high_order_inference.py radar.json --write >/tmp/reweight-radar.log
+          PYTHONPATH=. python scripts/high_order_inference.py radar_active.json --write >/tmp/reweight-active.log
+          tail -25 /tmp/reweight-radar.log
+
+      - name: Fail closed on evidence, pair count, or anchor reuse
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          before = json.loads(Path('/tmp/trend-reweight-before.json').read_text())
+          keys = ('strand_a','strand_b','strand_c','frontier_evidence','historical_context')
+          for name in ('radar.json','radar_active.json'):
+              doc = json.loads(Path(name).read_text(encoding='utf-8'))
+              for k in keys:
+                  now = hashlib.sha256(json.dumps(doc.get(k), ensure_ascii=False, sort_keys=True, separators=(',',':')).encode()).hexdigest()
+                  if now != before[name]['hashes'][k]:
+                      raise SystemExit(f'FAIL CLOSED: evidence collection changed: {name} {k}')
+              hi = doc.get('high_order_inference') or {}
+              if hi.get('detector_backend') != 'claim_native':
+                  raise SystemExit(f'FAIL CLOSED: claim-native backend not active in {name}')
+              pubs = ((hi.get('publications') or {}).get('trend') or [])
+              if len(pubs) < before[name]['trend_count']:
+                  raise SystemExit(f'FAIL CLOSED: trend page would shrink in {name}: {len(pubs)} < {before[name]["trend_count"]}')
+              by_id = {str(c.get('id')): c for c in hi.get('candidates', []) if isinstance(c, dict)}
+              anchors = {}
+              for cid in pubs:
+                  c = by_id.get(str(cid), {})
+                  b = c.get('trend_balance') if isinstance(c.get('trend_balance'), dict) else {}
+                  if b.get('scoring_model') != 'weighted_distinct_developments_v2':
+                      raise SystemExit(f'FAIL CLOSED: old trend scoring survived for {cid} in {name}')
+                  for anchor in b.get('anchor_identities', []) if isinstance(b.get('anchor_identities'), list) else []:
+                      if anchor in anchors:
+                          raise SystemExit(f'FAIL CLOSED: one evidence item anchors multiple published trends: {anchor}')
+                      anchors[anchor] = cid
+              print(f'{name}: {len(pubs)} trend pairs; {len(anchors)} unique primary anchors; evidence unchanged.')
+          PY
+
+      - name: Run reasoning regression suite
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. pytest -q tests/test_reasoning_reform_stage7_selection.py tests/test_trends_current_history.py
+          PYTHONPATH=. python scripts/run_reasoning_reform_smoke.py
+
+      - name: Commit reweighted derived inference
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- radar.json radar_active.json; then
+            echo 'No derived inference change was necessary.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- radar.json radar_active.json
+          git commit -m 'Reweight trend inference by evidence strength'
+          git push
