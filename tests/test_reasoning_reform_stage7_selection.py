@@ -347,3 +347,60 @@ def test_stage7_hysteresis_operates_inside_each_wow_bucket():
     assert "claim:new" in run(100)      # clearly stronger evidence swaps in
 
 
+
+
+def test_trend_strength_not_evidence_count_three_weak_vs_one_strong():
+    evaluated = __import__('datetime').date(2026, 9, 18)
+    weak = [
+        node(f"c:w{i}", "compute.capacity", f"W{i}", mechanism="supports", kind="advocacy", status="intention", date=f"2026-09-0{i+1}")
+        for i in range(3)
+    ]
+    for n in weak:
+        n["merit"] = 82
+    strong = [node("c:s1", "compute.capacity", "Strong", direction="contracts", mechanism="restricts", kind="action", status="in_force", date="2026-09-04")]
+    strong[0]["merit"] = 99
+    _, weak_strength, _ = live._trend_side(weak, evaluated, "compute.capacity")
+    _, strong_strength, _ = live._trend_side(strong, evaluated, "compute.capacity")
+    assert strong_strength > weak_strength
+
+
+def test_trend_duplicate_reports_are_one_development_not_three_votes():
+    evaluated = __import__('datetime').date(2026, 9, 18)
+    rows = []
+    titles = [
+        "Mistral raises EUR 3 billion in European AI funding round",
+        "Mistral raises €3 billion for European artificial intelligence scale-up",
+        "European AI firm Mistral closes EUR 3 billion funding round",
+    ]
+    for i, title in enumerate(titles):
+        n = node(f"c:m{i}", "capital_markets.venture_finance", f"S{i}", mechanism="funds", kind="action", status="delivered", date="2026-09-08")
+        n["_title"] = title
+        n["merit"] = 95
+        rows.append(n)
+    kept, total, _ = live._trend_side(rows, evaluated, "capital_markets.venture_finance")
+    assert len(kept) == 1
+    assert kept[0]["_trend_event_reports"] == 3
+    assert kept[0]["_trend_event_sources"] == 3
+    assert total < 1.2  # corroborated one-event strength, not roughly three votes
+
+
+def test_member_state_signal_is_weaker_than_equivalent_eu_wide_signal():
+    evaluated = __import__('datetime').date(2026, 9, 18)
+    eu = node("c:eu", "compute.capacity", "EU", mechanism="builds", kind="action", status="in_force", date="2026-09-10")
+    de = node("c:de", "compute.capacity", "DE", mechanism="builds", kind="action", status="in_force", date="2026-09-10")
+    eu["scope"] = {"level": "eu", "countries": []}
+    de["scope"] = {"level": "member_state", "countries": ["Germany"]}
+    eu["merit"] = de["merit"] = 95
+    _, eu_strength, _ = live._trend_side([eu], evaluated, "compute.capacity")
+    _, de_strength, _ = live._trend_side([de], evaluated, "compute.capacity")
+    assert eu_strength > de_strength
+
+
+def test_trend_anchor_identity_has_publication_diversity_cap_one():
+    c = {
+        "product": "trend", "object": "capital_markets.venture_finance",
+        "trend_balance": {"anchor_identities": ["claim:mistral-round", "claim:other-side"]},
+    }
+    keys = live._diversity_keys(c)
+    assert ("trend_anchor", "claim:mistral-round", 1) in keys
+    assert ("trend_anchor", "claim:other-side", 1) in keys

@@ -1798,55 +1798,195 @@ def _title_tokens(value: Any) -> set[str]:
     return {x for x in re.findall(r"[a-z0-9]+", _low(value)) if len(x) > 2}
 
 
+def _trend_event_tokens(node: dict[str, Any]) -> set[str]:
+    """Conservative event fingerprint tokens for duplicate-report clustering.
+
+    We intentionally keep names, amounts and distinctive nouns, while dropping
+    generic policy/news vocabulary.  The goal is not topical deduplication: two
+    separate investments in AI must remain separate.  It is to stop several
+    reports of the same transaction/decision from becoming several independent
+    votes in a trend balance.
+    """
+    text = _low(node.get("_title") or "")
+    stop = {
+        "europe", "european", "eu", "new", "report", "reports", "says", "say",
+        "announces", "announced", "announcement", "launches", "launched", "launch",
+        "funding", "investment", "investments", "round", "policy", "programme",
+        "program", "strategy", "research", "innovation", "technology", "technologies",
+        "company", "companies", "commission", "council", "initiative", "support",
+        "raises", "raise", "raised", "largest", "private", "public", "towards",
+        "with", "from", "into", "for", "and", "the", "that", "this", "its",
+    }
+    return {
+        t for t in re.findall(r"[a-z0-9]+", text)
+        if len(t) > 2 and t not in stop
+    }
+
+
 def _near_same_action(a: dict[str, Any], b: dict[str, Any]) -> bool:
-    if clean(a.get("status_date")) != clean(b.get("status_date")):
+    """Whether two claims are reports of the same underlying development.
+
+    R-54 originally required the same date and very high title similarity.  That
+    misses syndicated/rewritten coverage of one event (for example one financing
+    round reported by Reuters and Euronews).  This remains deliberately
+    conservative: events need close dates plus strong distinctive-token overlap,
+    or the original near-identical-title test.
+    """
+    da, db = _date_only(a.get("status_date")), _date_only(b.get("status_date"))
+    if da and db:
+        try:
+            if abs((dt.date.fromisoformat(da) - dt.date.fromisoformat(db)).days) > 3:
+                return False
+        except ValueError:
+            if da != db:
+                return False
+    elif clean(a.get("status_date")) != clean(b.get("status_date")):
         return False
+
     ta, tb = _title_tokens(a.get("_title")), _title_tokens(b.get("_title"))
     if not ta or not tb:
         return False
     inter = len(ta & tb)
     overlap = inter / max(1, len(ta | tb))
     containment = inter / max(1, min(len(ta), len(tb)))
-    return overlap >= .72 or containment >= .88
+    if overlap >= .72 or containment >= .88:
+        return True
+
+    ea, eb = _trend_event_tokens(a), _trend_event_tokens(b)
+    if not ea or not eb:
+        return False
+    einter = len(ea & eb)
+    econtain = einter / max(1, min(len(ea), len(eb)))
+    eoverlap = einter / max(1, len(ea | eb))
+    # At least two distinctive shared tokens prevents generic same-topic stories
+    # from collapsing into one event.  Containment catches headline rewrites.
+    return einter >= 2 and (econtain >= .66 or eoverlap >= .50)
 
 
-def _trend_side(rows: list[dict[str, Any]], evaluated_on: dt.date) -> tuple[list[dict[str, Any]], float, int]:
-    # R-54: collapse near-duplicate reporting of one action, retaining the
-    # highest-merit row and applying corroboration rather than false independence.
+def _trend_scope_weight(node: dict[str, Any]) -> float:
+    """How strongly one observation can support a Europe-wide directional claim."""
+    scope = node.get("scope") if isinstance(node.get("scope"), dict) else {}
+    level = clean(scope.get("level"))
+    countries = scope.get("countries") if isinstance(scope.get("countries"), list) else []
+    n_countries = len({clean(x).lower() for x in countries if clean(x)})
+    if level == "eu":
+        return 1.0
+    if level == "company_in_eu":
+        return .82
+    if level == "member_state":
+        # A national case is a useful signal of European motion, not Europe itself.
+        return .68 if n_countries <= 1 else .78 if n_countries == 2 else .86
+    if level == "associated_country":
+        return .58
+    if level in {"external", "third_country"}:
+        return .52
+    return .72
+
+
+def _trend_relevance_weight(node: dict[str, Any], object_key: str | None) -> float:
+    """Specificity of this claim to the exact object whose direction is scored."""
+    obj = clean(object_key)
+    primary = clean(node.get("object"))
+    secondary = {clean(x) for x in node.get("secondary_objects", []) if clean(x)} if isinstance(node.get("secondary_objects"), list) else set()
+    if not obj:
+        return 1.0
+    if primary == obj:
+        return 1.0
+    if obj in secondary:
+        return .78
+    # Family/cluster matches are valid discovery evidence but weaker than exact
+    # object matches when they contribute to a reader-facing 0-100 balance.
+    if _object_matches(obj, node):
+        return .66
+    return .45
+
+
+def _trend_signal_strength(node: dict[str, Any], evaluated_on: dt.date, object_key: str | None) -> float:
+    """Evidence strength of one *development*, before corroboration/diminishing returns.
+
+    This deliberately answers strength/relevance rather than counting records.  A
+    strong enacted action can outweigh several weak intentions or advocacy items.
+    """
+    d = _date_only(node.get("status_date"))
+    try:
+        age = (evaluated_on - dt.date.fromisoformat(d)).days if len(d) == 10 else 999
+    except ValueError:
+        age = 999
+    freshness = 1.0 if age <= 90 else .88 if age <= 180 else .72
+    kind = {"action":1.0, "effect":.92, "diagnosis":.66, "advocacy":.42}.get(clean(node.get("kind")), .50)
+    status = {
+        "operating":1.0, "in_force":1.0, "delivered":.95, "adopted":.92,
+        "call_open":.82, "announced":.76, "in_negotiation":.60,
+        "proposed":.48, "intention":.28,
+    }.get(clean(node.get("status")), .35)
+    attrs = node.get("attributes") if isinstance(node.get("attributes"), dict) else {}
+    actor = node.get("actor") if isinstance(node.get("actor"), dict) else {}
+    witness = 1.12 if attrs.get("hostile_witness") is True and clean(actor.get("class")) in {"eu_body", "member_state", "national_funder"} else 1.0
+    merit = max(0.0, min(1.0, float(node.get("merit", 0) or 0) / 100.0))
+    return merit * kind * status * freshness * _trend_scope_weight(node) * _trend_relevance_weight(node, object_key) * witness
+
+
+def _trend_side(
+    rows: list[dict[str, Any]],
+    evaluated_on: dt.date,
+    object_key: str | None = None,
+) -> tuple[list[dict[str, Any]], float, int]:
+    """Return distinct developments and their combined directional strength.
+
+    The score is intentionally not a record count.  Duplicate reports are one
+    event with a small corroboration lift; individual developments are weighted by
+    merit, concreteness/status, recency, Europe-wide scope and exact relevance.
+    Additional events still matter, but with diminishing returns so a pile of weak
+    signals cannot overwhelm one very strong opposing development merely by count.
+    """
     groups: list[list[dict[str, Any]]] = []
     for row in sorted(rows, key=lambda n: (clean(n.get("status_date")), float(n.get("merit", 0) or 0)), reverse=True):
         placed = False
         for group in groups:
             if any(_near_same_action(row, x) for x in group):
-                group.append(row); placed = True; break
+                group.append(row)
+                placed = True
+                break
         if not placed:
             groups.append([row])
-    representatives: list[tuple[dict[str, Any], float]] = []
+
+    representatives: list[tuple[dict[str, Any], float, int]] = []
     for group in groups:
-        best = max(group, key=lambda n: float(n.get("merit", 0) or 0))
-        extra_sources = max(0, len({clean(n.get("_source")).lower() for n in group if clean(n.get("_source"))}) - 1)
-        representatives.append((best, min(1.3, 1 + .1 * extra_sources)))
+        best = max(group, key=lambda n: _trend_signal_strength(n, evaluated_on, object_key))
+        distinct_sources = len({clean(n.get("_source")).lower() for n in group if clean(n.get("_source"))})
+        # Corroboration increases confidence modestly; it never creates another vote.
+        corroboration = min(1.12, 1.0 + .04 * max(0, distinct_sources - 1))
+        representatives.append((best, corroboration, distinct_sources))
+
+    # Strongest independent developments matter most.  The tail adds context but
+    # progressively less pull; this prevents evidence-count gaming.
+    ranked = sorted(
+        representatives,
+        key=lambda x: _trend_signal_strength(x[0], evaluated_on, object_key) * x[1],
+        reverse=True,
+    )
+    rank_discount = (1.0, .82, .68, .57, .49, .43, .38, .34, .31, .28)
     source_seen: Counter[str] = Counter()
     total = 0.0
     kept: list[dict[str, Any]] = []
-    for row, corroboration in representatives:
+    for i, (row, corroboration, cluster_sources) in enumerate(ranked):
         src = clean(row.get("_source")).lower()
         source_seen[src] += 1
-        independence = 1.0 if source_seen[src] == 1 else .5 if source_seen[src] == 2 else .25 if source_seen[src] == 3 else .125
-        d = _date_only(row.get("status_date"))
-        try:
-            age = (evaluated_on - dt.date.fromisoformat(d)).days if len(d) == 10 else 999
-        except ValueError:
-            age = 999
-        freshness = 1.0 if age <= 90 else .85 if age <= 180 else .70
-        kind = {"action":1.0,"effect":.9,"diagnosis":.7,"advocacy":.5}.get(clean(row.get("kind")), .5)
-        status = {"operating":1.0,"in_force":1.0,"adopted":.9,"announced":.8,"call_open":.8,"delivered":.8,"in_negotiation":.6,"proposed":.5,"intention":.3}.get(clean(row.get("status")), 0.0)
-        attrs = row.get("attributes") if isinstance(row.get("attributes"), dict) else {}
-        actor = row.get("actor") if isinstance(row.get("actor"), dict) else {}
-        witness = 1.2 if attrs.get("hostile_witness") is True and clean(actor.get("class")) in {"eu_body","member_state","national_funder"} else 1.0
-        total += (float(row.get("merit", 0) or 0) / 100.0) * kind * status * independence * freshness * witness * corroboration
+        source_independence = 1.0 if source_seen[src] == 1 else .72 if source_seen[src] == 2 else .52 if source_seen[src] == 3 else .38
+        diminishing = rank_discount[i] if i < len(rank_discount) else max(.18, .28 * (.9 ** (i - len(rank_discount) + 1)))
+        strength = _trend_signal_strength(row, evaluated_on, object_key)
+        contribution = strength * corroboration * source_independence * diminishing
+        row = dict(row)
+        event_group = next((g for g in groups if row.get("claim_id") in {x.get("claim_id") for x in g}), [row])
+        row["_trend_event_reports"] = len(event_group)
+        row["_trend_event_sources"] = cluster_sources
+        row["_trend_strength"] = round(strength, 6)
+        row["_trend_contribution"] = round(contribution, 6)
+        total += contribution
         kept.append(row)
-    return kept, round(total, 6), len({clean(r.get("_source")).lower() for r in rows if clean(r.get("_source"))})
+
+    all_sources = len({clean(r.get("_source")).lower() for r in rows if clean(r.get("_source"))})
+    return kept, round(total, 6), all_sources
 
 
 _FAMILY_LABELS = {
@@ -1995,8 +2135,8 @@ def _trend_payload(
     if not {clean(n.get("_record_id")) for n in right if clean(n.get("_record_id"))}:
         return None
 
-    lk, lw, lsrc = _trend_side(left, evaluated_on)
-    rk, rw, rsrc = _trend_side(right, evaluated_on)
+    lk, left_strength, lsrc = _trend_side(left, evaluated_on, obj)
+    rk, right_strength, rsrc = _trend_side(right, evaluated_on, obj)
     left_records = {clean(n.get("_record_id")) for n in lk if clean(n.get("_record_id"))}
     right_records = {clean(n.get("_record_id")) for n in rk if clean(n.get("_record_id"))}
     if not left_records or not right_records:
@@ -2009,10 +2149,11 @@ def _trend_payload(
         and rsrc >= 2
     )
 
-    raw_left = 100 * len(left_records) / max(1, len(left_records) + len(right_records))
-    adj_left = 100 * lw / max(.000001, lw + rw)
-    raw_left = max(15.0, min(85.0, raw_left))
-    adj_left = max(15.0, min(85.0, adj_left))
+    # The reader percentage is a strength balance, not an evidence-count vote.
+    # ``raw_left`` is retained for schema compatibility but now means the
+    # unbanded strength ratio; ``left_pull`` is the reader-safe banded value.
+    raw_left = 100 * left_strength / max(.000001, left_strength + right_strength)
+    adj_left = max(15.0, min(85.0, raw_left))
     low, high = sorted((raw_left, adj_left))
     width = high - low
 
@@ -2054,6 +2195,10 @@ def _trend_payload(
                 "object": obj,
                 "source_statement": clean(n.get("text")),
                 "evidence_contribution": _reader_evidence_contribution(role),
+                "event_reports": int(n.get("_trend_event_reports", 1) or 1),
+                "event_sources": int(n.get("_trend_event_sources", 1) or 1),
+                "strength": round(float(n.get("_trend_strength", 0) or 0), 4),
+                "weighted_contribution": round(float(n.get("_trend_contribution", 0) or 0), 4),
             })
         return out
 
@@ -2097,7 +2242,10 @@ def _trend_payload(
     lcon, rcon = concrete_count(lk), concrete_count(rk)
 
     def strongest(rows: list[dict[str, Any]]) -> dict[str, Any] | None:
-        return max(rows, key=lambda n: (1 if clean(n.get("kind")) in {"action", "effect"} else 0,
+        # The sentence beneath each side should be anchored in the development
+        # carrying the most analytical weight, not simply the highest-merit article.
+        return max(rows, key=lambda n: (float(n.get("_trend_contribution", 0) or 0),
+                                        float(n.get("_trend_strength", 0) or 0),
                                         float(n.get("merit", 0) or 0), clean(n.get("status_date"))), default=None)
 
     def short(text: Any, words: int = 26) -> str:
@@ -2190,6 +2338,13 @@ def _trend_payload(
             "right_records": len(right_records),
             "left_actions": len(left_records),
             "right_actions": len(right_records),
+            "left_strength": round(left_strength, 4),
+            "right_strength": round(right_strength, 4),
+            "scoring_model": "weighted_distinct_developments_v2",
+            "anchor_identities": [
+                _canonical_support_identity(x, {"claim_id": x.get("claim_id")})
+                for x in (strongest(lk), strongest(rk)) if x
+            ],
             "evidence_floor_passes": evidence_floor_passes,
         },
     }
@@ -2552,7 +2707,17 @@ def _diversity_keys(c: dict[str, Any]) -> list[tuple[str, str, int]]:
             keys.append(("asset", asset, SHOCK_MAX_PER_ASSET))
         return keys
     topic = clean(c.get("object") or (eps[0] if eps else "") or c.get("topic_key"))
-    return [("topic", topic, MAX_PER_TOPIC)] if topic else []
+    keys = [("topic", topic, MAX_PER_TOPIC)] if topic else []
+    if product == "trend":
+        balance = c.get("trend_balance") if isinstance(c.get("trend_balance"), dict) else {}
+        # One real-world development may inform several candidate interpretations,
+        # but it cannot be the primary anchor of several published trend cards.
+        # Reserve candidates remain available, so this improves diversity without
+        # shrinking the page when alternatives exist.
+        for anchor in balance.get("anchor_identities", []) if isinstance(balance.get("anchor_identities"), list) else []:
+            if clean(anchor):
+                keys.append(("trend_anchor", clean(anchor), 1))
+    return keys
 
 # Creative reserve: the reserve is not only the runners-up.  It deliberately
 # holds hypotheses that are relevant and not contradicted but not yet provable -
@@ -2880,7 +3045,11 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
                 if product == "trend" and old and isinstance(old.get("trend_balance"), dict) and isinstance(c.get("trend_balance"), dict):
                     old_range = old["trend_balance"].get("left_range") or []
                     new_range = c["trend_balance"].get("left_range") or []
-                    if len(old_range) >= 2 and len(new_range) >= 2 and max(abs(float(new_range[0])-float(old_range[0])), abs(float(new_range[1])-float(old_range[1]))) < 3:
+                    if (
+                        old["trend_balance"].get("scoring_model") == c["trend_balance"].get("scoring_model")
+                        and len(old_range) >= 2 and len(new_range) >= 2
+                        and max(abs(float(new_range[0])-float(old_range[0])), abs(float(new_range[1])-float(old_range[1]))) < 3
+                    ):
                         c["trend_balance_computed"] = copy.deepcopy(c["trend_balance"])
                         fresh = c["trend_balance"]
                         c["trend_balance"] = copy.deepcopy(old["trend_balance"])
