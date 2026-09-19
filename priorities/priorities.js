@@ -731,7 +731,7 @@
       const authored=clean(x.coreMessage||x.abstract);
       if(authored)return authored;
       const topic=friendlyCandidateTopic(x),g=clean(x?.grammarId),dir=clean(x?.direction);
-      if(g==='clock_before_rule')return `Current evidence shows a delivery timetable already running while the relevant rules are still below the adopted stage. The timing gap is the risk.`;
+      if(g==='clock_before_rule')return `Work is already scheduled or under way while the related rules are still unsettled. That timing mismatch creates the risk.`;
       if(g==='success_metric_gap')return `The stated objective and the activity being funded are not the same thing, and the evidence base does not yet contain a matching outcome measure. Delivery can therefore look successful before the intended result is known.`;
       if(g==='deployment_before_rules')return `Current evidence places operating or deployed activity before an adopted rule on the same object. That creates a period in which practice can harden before governance catches up.`;
       if(g==='conflicting_criteria')return `Independent records support both requirements, while the evidence base does not yet show a common tie-break. The risk is inconsistent decisions across institutions or countries.`;
@@ -747,7 +747,7 @@
           else if(dir==='becomes_contested')semantic=`The evidence points toward more contested conditions around ${topic}.`;
           else if(dir==='contracts')semantic=`The evidence points toward contraction or reduced room to act around ${topic}.`;
         }
-        return `${lead}${semantic?` ${semantic}`:''} The forward consequence on this card is the Radar's synthesis rather than a statement attributed to any one publication.`;
+        return `${lead}${semantic?` ${semantic}`:''} The consequence described here is an interpretation of the evidence, not a statement from a single source.`;
       }
       return `Several independent records support this finding about ${topic}.`;
     }
@@ -786,7 +786,7 @@
   }
 
   function supportingEvidenceText(x){
-    if(x?.highOrder)return `The finding above is the Radar's synthesis. The source statements below are shown separately so the synthesis is not attributed to any publication.`;
+    if(x?.highOrder)return `The finding above combines evidence from several sources. The source statements are shown separately below.`;
     const raw=clean(x?.lensPassage||x?.abstract||x?.coreMessage||x?.title||'');
     if(!raw) return 'Evidence text unavailable.';
     const first=raw.split(/(?<=[.!?])\s+/).filter(Boolean).slice(0,3).join(' ');

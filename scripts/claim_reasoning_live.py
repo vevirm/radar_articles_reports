@@ -2084,7 +2084,7 @@ def _trend_payload(
         "supports": "support instruments", "adopts": "adopted measures",
         "launches": "new programmes", "invests": "investment", "requires": "requirements",
         "conditions": "conditions", "restricts": "restrictions", "regulates": "rules",
-        "screens": "screening", "assesses": "documented constraints",
+        "screens": "screening", "assesses": "constraints identified in the evidence",
     }
     def mechanism_phrase(rows: list[dict[str, Any]]) -> str:
         counts = Counter(clean(n.get("mechanism")) for n in rows if clean(n.get("mechanism")))
@@ -2113,7 +2113,7 @@ def _trend_payload(
             return fallback
         src = clean(n.get("_source"))
         body = short(n.get("text"))
-        return f"{src}: {body}" if src else body
+        return body
 
     left_plain = side_text(lk, f"Signs of Europe expanding {label_text} through {mechanism_phrase(lk)}.")
     right_plain = side_text(rk, f"Signs of {label_text} being constrained through {mechanism_phrase(rk)}.")
@@ -2122,20 +2122,20 @@ def _trend_payload(
         if total == 0:
             return "nothing yet"
         if con == total:
-            return "all concrete moves" if total > 1 else "one concrete move"
+            return "all measures already in effect" if total > 1 else "one measure already in effect"
         if con == 0:
-            return "talk rather than action so far" if total > 1 else "a single diagnosis, no action yet"
-        return f"{con} concrete move{'s' if con != 1 else ''} among {total} signals"
+            return "analysis or stated positions, not measures in effect" if total > 1 else "one finding, not a measure in effect"
+        return f"{con} measures already in effect among {total} pieces of evidence"
 
     lw, rw = weight_word(lcon, len(lk)), weight_word(rcon, len(rk))
     if lcon == 0 and rcon == 0:
-        composition = "Both sides are still mostly analysis and positions; neither has turned into concrete action yet."
+        composition = "So far, both directions rely mainly on analysis or stated positions rather than measures already in effect."
     elif lcon > rcon:
-        composition = f"The push is more concrete ({lw}) than the pushback ({rw})."
+        composition = "The first direction currently has more evidence from measures already in effect."
     elif rcon > lcon:
-        composition = f"The pushback is more concrete ({rw}) than the push ({lw})."
+        composition = "The second direction currently has more evidence from measures already in effect."
     else:
-        composition = f"Both sides are equally concrete: {lw} each way."
+        composition = "Both directions currently have a similar amount of evidence from measures already in effect."
 
     pending = {"intention", "proposed", "in_negotiation", "announced", "call_open"}
 
@@ -2148,13 +2148,13 @@ def _trend_payload(
 
     lp, rp = pending_item(lk), pending_item(rk)
     if lp and rp:
-        flip = f"Watch two things: if \u201c{lp}\u201d goes ahead, the push wins ground; if \u201c{rp}\u201d takes effect, the brakes do."
+        flip = f"Watch \u201c{lp}\u201d and \u201c{rp}\u201d. Their outcomes could change the balance."
     elif lp:
-        flip = f"The next swing depends on \u201c{lp}\u201d: if it goes ahead, the push gains; if it stalls, the constraints hold."
+        flip = f"Watch \u201c{lp}\u201d. Its outcome could change the balance."
     elif rp:
-        flip = f"The next swing depends on \u201c{rp}\u201d: if it takes effect, the constraints tighten; if it fades, the push regains ground."
+        flip = f"Watch \u201c{rp}\u201d. Its outcome could change the balance."
     else:
-        flip = "Nothing on either side is pending a decision, so the balance will move only with new evidence."
+        flip = "There is no single pending decision likely to change the balance. New evidence will determine the next shift."
 
     return {
         "support": snaps(lk, "Expands") + snaps(rk, "Constrains"),
@@ -2534,7 +2534,7 @@ def _shock_consequence(raw: dict[str, Any], out: dict[str, Any]) -> str:
     base = base[0].upper() + base[1:]
     driver = next((x for x in (out.get("support") or []) if isinstance(x, dict) and clean(x.get("role")) == "external_driver"), None)
     if driver and clean(driver.get("source")):
-        return f"{base} Signal behind it: {clean(driver.get('source'))} reports the disruption itself; the link to {asset} is the Radar's hypothesis."
+        return base
     return base
 
 
@@ -3190,16 +3190,16 @@ def _reader_copy(grammar: str, product: str, raw: dict[str, Any], candidate: dic
             if corroborated:
                 verb = "is under sustained pressure" if direction == "contracts" else "is becoming more conditional" if direction == "becomes_conditional" else "is becoming more contested" if direction == "becomes_contested" else "shows a current constraint"
                 summary = (
-                    f"Independent sources document current {a} becoming more constrained." if direction == "contracts"
-                    else f"Independent sources document current conditions around {a} becoming more conditional." if direction == "becomes_conditional"
+                    f"Several sources show growing pressure on {a}." if direction == "contracts"
+                    else f"Several sources show more conditions being placed on {a}." if direction == "becomes_conditional"
                     else f"Independent sources document current contestation around {a}." if direction == "becomes_contested"
                     else f"Independent sources document a current constraint affecting {a}."
                 )
             else:
                 verb = "could come under sustained pressure" if direction == "contracts" else "could become more conditional" if direction == "becomes_conditional" else "could become more contested" if direction == "becomes_contested" else "could face a new constraint"
                 summary = (
-                    f"The source documents a current constraint on {a}; the risk is that the constraint persists or spreads." if direction == "contracts"
-                    else f"The source documents current conditions on {a}; the risk is that access or action becomes more conditional." if direction == "becomes_conditional"
+                    f"Current evidence shows pressure on {a}; the risk is that it lasts or spreads." if direction == "contracts"
+                    else f"Current evidence shows more conditions around {a}; the risk is that access or participation becomes harder." if direction == "becomes_conditional"
                     else f"The source documents current contestation around {a}; the risk is that the contestation widens or hardens." if direction == "becomes_contested"
                     else f"The source documents a current constraint affecting {a}; the risk is that it persists or spreads."
                 )
@@ -3214,10 +3214,10 @@ def _reader_copy(grammar: str, product: str, raw: dict[str, Any], candidate: dic
         elif mechanism == "invests": action = "is expanding through new investment"
         elif mechanism == "supports": action = "is expanding through a live support instrument"
         if corroborated:
-            summary = "Independent sources document constructive movement in the same direction, including a live or operating instrument. The broader opportunity shown here is the Radar's synthesis."
+            summary = f"Several sources show movement that could strengthen {a}. A programme, agreement or investment is already operating, so the opportunity is tied to something Europe can use now."
             title = f"{a[:1].upper()+a[1:]} {action}."
         else:
-            summary = "A current source documents a live or operating instrument moving in this direction. The broader opportunity shown here is the Radar's synthesis rather than a claim made by that source."
+            summary = f"A programme, agreement or funding route already supports {a}. If implementation continues, it could expand European capability in this area."
             if mechanism in {"collaborates", "associates"}: title = f"Active agreements could widen {a}."
             elif mechanism in {"procures", "builds", "adds_capacity"}: title = f"Active capacity-building could expand {a}."
             elif mechanism == "funds": title = f"New funding could expand {a}."
@@ -3240,7 +3240,7 @@ def _reader_why(grammar: str, product: str, raw: dict[str, Any]) -> str:
     if grammar == "practice_before_doctrine": return "Early implementation can become the de facto rule before the formal framework has had a chance to arbitrate trade-offs."
     if grammar == "goal_without_measure": return "A goal can dominate policy language without creating an evidence base for whether interventions are working."
     if grammar == "conflicting_criteria": return f"The same European project can be treated differently depending on whether {a} or {b} is applied first."
-    if grammar == "future_shock_hypothesis": return "The European asset and the outside disruption mechanism are source-evidenced; the causal bridge to a future shock remains explicitly Radar-owned unless a source establishes it directly."
+    if grammar == "future_shock_hypothesis": return "The evidence separately shows the European capability and the outside disruption. The connection between them is a possible future scenario, not a source statement."
     if grammar == "dependency_pathway" and product == "risk": return f"The source-evidenced dependency creates a plausible route by which a failure in {b} could reach {a}; the future propagation is the Radar's inference."
     if grammar == "dependency_pathway" and product == "shock": return f"The source-evidenced dependency creates a plausible route by which a sudden break in {b} could remove capability; the discontinuity itself remains a Radar scenario."
     if grammar == "latent_channel": return "The opportunity is leverage: connect pieces Europe already has instead of creating a new programme from zero."
@@ -3590,7 +3590,7 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
         out["primary_role_coverage"] = 1.0 if trend.get("trend_evidence_floor_passes") else 0.667
     reader_title, reader_summary = _reader_copy(grammar, product, c, out)
     out["reader_title"] = reader_title
-    out["reader_summary"] = reader_summary
+    out["reader_summary"] = "" if product == "shock" else reader_summary
     out["reader_why"] = _reader_why(grammar, product, c)
     if grammar == "future_shock_hypothesis":
         out["reader_consequence"] = _shock_consequence(c, out)

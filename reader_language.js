@@ -13,9 +13,10 @@
     [/\/read\/?$/,'read'],
     [/\/briefing\/?$/,'briefing'],
     [/\/glossary\/?$/,'glossary'],
-    [/\/explore\/?$/,'explore']
+    [/\/explore\/?$/,'explore'],
+    [/\/literature\/?$/,'literature']
   ];
-  const excluded=/\/(?:radar|stuff|historical|history|literature)\/?$/;
+  const excluded=/\/(?:radar|stuff|historical|history)\/?$/;
   if(excluded.test(path))return;
   let route=(ROUTES.find(([re])=>re.test(path))||[])[1]||'';
   if(!route){

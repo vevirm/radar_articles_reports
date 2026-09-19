@@ -191,7 +191,7 @@ _VARIANT_RISK_TEXT = {
 # findings, so the same findings always give the same text.
 _POOL = {
     "drivers": (
-        "It is the world where today's pulls toward {a} and {b} win out.",
+        "It is the world where today's evidence toward {a} and {b} continues.",
         "Two pulls visible today carried it here: {a}, and {b}.",
         "Trace it back and you find two of today's tugs of war settled one way: {a}; {b}.",
         "It grew out of two arguments the 2020s never resolved, until they were: {a} and {b}.",
@@ -367,7 +367,7 @@ def _history(c: dict[str, Any] | None, words: int = 24, role: str = "", used: se
     parts = _clean(r.get("source_statement")).split()
     text = " ".join(parts[:words]).rstrip(",;:") + ("\u2026" if len(parts) > words else "")
     text = text.rstrip(".") + ("" if text.endswith("\u2026") else ".")
-    return f"{_when(r.get('date'))}, {_clean(r.get('source'))}: {text}"
+    return text
 
 
 _FACILITIES = {
@@ -754,7 +754,7 @@ def build_scenarios_2035(publications: dict[str, Any], candidates: list[dict[str
             bullets.append({"label": "How we got here", "text": story[1]})
         h = _history(persists, used=used_evidence) if persists else ""
         if h:
-            bullets.append({"label": "Still true", "text": h + " Still true in 2035."})
+            bullets.append({"label": "Evidence today", "text": h})
         h = _history(opportunity, used=used_evidence) if opportunity else ""
         if h:
             bullets.append({"label": "The bet that paid off", "text": h + " Europe acted on it."})

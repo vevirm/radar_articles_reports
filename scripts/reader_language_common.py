@@ -34,6 +34,7 @@ HTML_ROUTES = {
     "briefing/index.html": "briefing",
     "glossary/index.html": "glossary",
     "explore/index.html": "explore",
+    "literature/index.html": "literature",
 }
 
 # Only scripts whose prose is still rendered on the live site.  The legacy fallback
@@ -46,6 +47,13 @@ JS_ROUTES = {
 }
 
 META_PATTERNS = [
+
+    (re.compile(r"\bthe Radar[’']s (?:hypothesis|synthesis|inference)\b", re.I), "internal Radar language"),
+    (re.compile(r"\b(?:push|pushback) (?:gains|wins|is more concrete)\b", re.I), "analyst shorthand"),
+    (re.compile(r"\bconcrete (?:action|move)s?\b", re.I), "analyst shorthand"),
+    (re.compile(r"\badmissibility-relevant\b", re.I), "bureaucratic jargon"),
+    (re.compile(r"\bselective conditionality\b", re.I), "policy jargon"),
+    (re.compile(r"\bif it goes ahead, the push\b", re.I), "repetitive template"),
     (re.compile(r"\bqualifying (?:current )?(?:primary )?records?\b", re.I), "analysis machinery"),
     (re.compile(r"\brepeated[- ]source (?:evidence|actions?)\b", re.I), "analysis machinery"),
     (re.compile(r"\bcounter[- ]force\b", re.I), "analysis machinery"),
@@ -293,11 +301,11 @@ def collect_radar_reader_fields(store: dict[str, Candidate]) -> None:
             if not c:
                 continue
             origin = f"{p.name}:high_order:{clean(cid)}"
-            for key in ("reader_title", "reader_summary"):
+            for key in ("reader_title", "reader_summary", "reader_why"):
                 add_candidate(store, c.get(key), [route], f"{origin}:{key}")
             if product == "trend" and isinstance(c.get("trend_balance"), dict):
                 b = c["trend_balance"]
-                for key in ("left_title", "right_title", "left_plain", "right_plain"):
+                for key in ("left_title", "right_title", "left_plain", "right_plain", "composition", "flip_line"):
                     add_candidate(store, b.get(key), [route], f"{origin}:trend_balance.{key}")
             if product == "shock":
                 add_candidate(store, c.get("why_easy_to_miss"), [route], f"{origin}:why_easy_to_miss")

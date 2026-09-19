@@ -15,7 +15,8 @@ MORE_CAP = 135
 JARGON = [
     "bibliographic coupling", "citation burst", "change-point detection",
     "semantic shift", "dynamic topic model", "graph anomaly detection",
-    "technology intelligence", "chokepoint",
+    "technology intelligence", "chokepoint", "admissibility-relevant", "selective conditionality",
+    "the radar's hypothesis", "the radar's synthesis", "concrete action",
 ]
 
 

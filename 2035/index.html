@@ -92,7 +92,7 @@ function worldHtml(w){
       box.innerHTML='';return;
     }
         const nv=worlds.reduce((n,w)=>n+(Array.isArray(w.variants)?w.variants.length:0),0);
-    document.getElementById('futureIntro').textContent=`${worlds.length} worlds and ${nv} variants. They are scenarios, not forecasts: none is ranked as more likely. Every signal and every variant trigger is a current Radar finding you can check, and the page is rebuilt with each scan.`;
+    document.getElementById('futureIntro').textContent=`${worlds.length} worlds and ${nv} variants. They are scenarios, not forecasts: none is ranked as more likely. Every signal and variant is linked to a current finding you can check, and the page is rebuilt with each scan.`;
     for(const w of worlds){
       const q=document.querySelector(`.future-quad[data-world="${w.id}"]`);
       if(q)q.innerHTML=`<a href="#${esc(w.id)}"><strong>${esc(w.name)}</strong><span>${esc(w.tagline)}</span></a>`;

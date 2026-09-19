@@ -21,7 +21,7 @@ class ReaderLanguagePipelineTests(unittest.TestCase):
         self.assertNotIn('radar', routes)
         self.assertNotIn('stuff', routes)
         self.assertNotIn('historical', routes)
-        self.assertNotIn('literature', routes)
+        self.assertIn('literature', routes)
 
     def test_known_awkward_trend_sentence_is_flagged(self):
         text = 'Partnership, association or cross-border cooperation is widening around research security.'
