@@ -7,17 +7,17 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **1429** (Main **664** + Historical **765**)
-- Automatic queue still needing V2 verification: **13** (Main **0** + Historical **13**)
-- Currently assigned to workers: **13** (Main **0** + Historical **13**)
+- Automatic queue still needing V2 verification: **141** (Main **125** + Historical **16**)
+- Currently assigned to workers: **120** (Main **107** + Historical **13**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **69**
-- Automatic queue pending and not yet assigned: **0**
+- Automatic queue pending and not yet assigned: **21**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260919T074601Z-f2c9820bcc51`
-- Assigned unresolved records: **12**
+- Current package: `worker-a-20260919T134019Z-a0396602ae67`
+- Assigned unresolved records: **60**
   1. `historical:id:0f5fcfee115987b1` — War and the future of war
   2. `historical:id:3348c6be76c0879c` — Understanding Foresight‐Policy Interactions: The Role of Institutionalization
   3. `historical:id:c1f7289e1589f895` — Missions, conditions and the policy transfer of Smart Specialisation in the European Union
@@ -26,12 +26,20 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:d6849c724dba2846` — The European Union's sanctions regime against Russian science
   7. `historical:id:a2bbb70748f79890` — IVA-seminarium: Global shifts and its impact on Business Competitiveness and Value Chain Resilience
   8. `historical:id:347da2c59eed0d0d` — Research Assessment at EMBL
-  - … plus 4 more in the package manifest
+  - … plus 52 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260919T074614Z-51aff0f42d51`
-- Assigned unresolved records: **1**
+- Current package: `worker-b-20260919T134030Z-368e0397edf2`
+- Assigned unresolved records: **60**
   1. `historical:id:63a0b96383dbb86a` — UK-DE Energy Systems Symposium – Accelerating net zero through policy-research collaboration - acatech
+  2. `link:https://news.google.com/rss/articles/CBMi2wFBVV95cUxNZU1hMzRwTEVNWlllSHdQdVJJX0Y2R1BHdGhPZVdMMkN4NGItUzFnU2F3MTFCS0UySkFqNVJPTWY5QUhacERSRVRWUTRXTU5iSVQ5TWRvaGFtb3FFV3lGbllTTGk1THVKNHJqUXlOVkhRS3FfanRubC1BQ09VY2VGcE9EdTQ3RHpjZXQ4NmprRkZMUlpWN1l1SXdfdm80WXpGcU5fcXUxb0ZUa2pNVUlSOXV2Y0NSelltVm0zU3RyWl95MWgyQU9FakxxcjA1ODBhUWtKTS0teUY5RHM?oc=5` — COMMENTARY: Europe has no hope in AI race without a unified energy market
+  3. `link:https://news.google.com/rss/articles/CBMingFBVV95cUxNSG9wd0RSNGN6THVsY0N5WjlzVnc2Tk5NZllBSUV1Uy1USUhGZFVwZkVkQWxrWHlvLV9SWWJ3U0VEUEE5c1NMZENnUmxmSWk0UTlRbWs0UkJiZGltQUFpaUpvTjZvV1p4TEtuejNBX0VLei03bjFNdjk2N3ptX1FMRzk2VGljeUx1UDE3YjBUU1JPZjQyVnpqV2FmM3E2dw?oc=5` — Why is European money financing the American AI boom?
+  4. `link:https://news.google.com/rss/articles/CBMitwFBVV95cUxNRE81UlQxLU51REdpNnhRZldjMTF1bHhBTDJxN1hGeVpWVGxhRVh6MGU1bVhFcEFlWEVxbVQ0MUlSalc5M1RkX1A0MllyR2hyZXVKNy1FNlpIc2lOcER0MHdJZ2hLbUNCTHBkX2xMQXVTVWtEd1JaYWIzV2RkbG0ybWs2QVg3SHRwZDlvY2F4MTVRR3B3bF82R1NhV3VYOVduWmJuRS1oMXZvQWUzUkxwYm4yQkZ0UTA?oc=5` — Spain leads quantum computing: 'Made in Spain' chips manufactured in Barcelona
+  5. `link:https://news.google.com/rss/articles/CBMiwAFBVV95cUxNSG5uVEZIa3BaUWUwY3VkQTdlaHpuV0xBVm81VnYxcm0wUllxU3V4dmlrTnNlXzBZbUtreDV4MEJpVjdpMFg0dm0yZWFGTkFHTUh2NTBKbFB6WmloNGkzQ3Qyc3d6NkFyQkVGUXJzQnFoMVFYWXhjcC1YX1kzUkFYdHR1MEItREpNNk1ESE5VT3lsSmhVUWdQcno0OFNWWmZPSUx3WF8ySmlCU3ZIcnc4M2RLQWxkem1aZEVkaGhQMHo?oc=5` — Spain at the forefront of quantum computing: chips made in Spain, built in Barcelona
+  6. `link:https://www.euronews.com/next/2026/09/16/spain-leads-quantum-computing-made-in-spain-chips-manufactured-in-barcelona` — Spain leads quantum computing: 'Made in Spain' chips manufactured in Barcelona
+  7. `link:https://news.google.com/rss/articles/CBMinAFBVV95cUxOUUxnQ0t5VFpuckJaa2tDZXJSMFNzX09OdkpOZzNSNlU0WlMwcjc1OWpSLUxEeGFIM0NZMmliek5Ja3J3dExTc2JuQTd0alE4YUhycVprWmdJVTRwdXZWXzZId20yZk9xNVN2bkJfMEtLc0xlaG9yNUhjcHRXLWZUaGlPckN4R0RpakdSZzJLUlBadlZBNmFHekZOcl8?oc=5` — Watch Europe Has Lost Race for Frontier AI Models, Says Rhine Group's Garicano
+  8. `link:https://www.clean-hydrogen.europa.eu/document/download/5ccb5de8-a8e2-4eba-ae52-91646fc88125_en?filename=Clean%20Hydrogen_Synergies%20strategy_June2026.pdf` — Synergies Strategy - 2026 and beyond
+  - … plus 52 more in the package manifest
 
 ## Hands-on verification needed
 
