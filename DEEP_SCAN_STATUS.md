@@ -6,30 +6,30 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1454** (Main **688** + Historical **766**)
-- Automatic queue still needing V2 verification: **128** (Main **101** + Historical **27**)
-- Currently assigned to workers: **96** (Main **84** + Historical **12**)
-- Bounded access-recovery retries still eligible: **4**
+- Authoritative V2 verified: **1508** (Main **730** + Historical **778**)
+- Automatic queue still needing V2 verification: **74** (Main **59** + Historical **15**)
+- Currently assigned to workers: **72** (Main **57** + Historical **15**)
+- Bounded access-recovery retries still eligible: **2**
 - Hands-on verification needed: **69**
-- Automatic queue pending and not yet assigned: **32**
+- Automatic queue pending and not yet assigned: **2**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260919T160130Z-a0396602ae67`
-- Assigned unresolved records: **60**
-  1. `historical:id:0f5fcfee115987b1` — War and the future of war
-  2. `historical:id:3348c6be76c0879c` — Understanding Foresight‐Policy Interactions: The Role of Institutionalization
-  3. `historical:id:c1f7289e1589f895` — Missions, conditions and the policy transfer of Smart Specialisation in the European Union
-  4. `historical:id:07d61be3818e72d9` — Invisible frontlines. Safeguarding Europe's energy infrastructure
-  5. `historical:id:870e006fd661dfa3` — IVA Report: Metals and minerals for sustainable development and strengthened competitiveness
-  6. `historical:id:d6849c724dba2846` — The European Union's sanctions regime against Russian science
-  7. `historical:id:a2bbb70748f79890` — IVA-seminarium: Global shifts and its impact on Business Competitiveness and Value Chain Resilience
-  8. `historical:id:347da2c59eed0d0d` — Research Assessment at EMBL
-  - … plus 52 more in the package manifest
+- Current package: `worker-a-20260919T160709Z-2a1eeef6b404`
+- Assigned unresolved records: **36**
+  1. `link:https://news.google.com/rss/articles/CBMiwwFBVV95cUxQa2RvcWNWOTFneWVMM1JqaE9SRml3YmdEbnN0cVNlMTR2Z2VJN3IxVzlFR1hlaWhTeUt3RU9fTEtuSTFtaXphYW5Va0prYVNHS3VWWXl5N1JRUXJNTHNISDI0WEViZGxlTDNicUg5QXVMdUY5MFVGOW96aWI0aHNBMnRCNlpONEZiSklGVmZOUC1sTUJyZUhDZmllMG0tSWUxNWdhdUpYRGZuVUpnOGJGREdESURfZnVxNXhnUHkzcDRSem8?oc=5` — Industry urges governments not to cut EU R&I funds
+  2. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxONDVIS3NvSzBXVFVvSEY0Zkd5VnRCWVFPaXZ0MlpRQU1aNjhicHM1NUNfNVRId0pIelFVYXpqT21qMy1qY1pPbEl6NVFvX1dSRGNKMjh4RUJSSWl6dE04VmlqYW1XUWcyMXg3dkJScG83bGV4d1RqdEJNZUtPU214T0liRjU3SEhwT1dvcmdCczhOam42THZyQTVNOFYyRWN4c1g3RzQ2YktUYkZjdWRB?oc=5` — INTERVIEW: 'The EU’s Biotech Act is helpful, but not yet the solution,' investors say
+  3. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTE5wUms0aXQ0d1VmLXJuR0hneGNkUXlVZzNTUFo4QUowaW1fZjJDSlJBWkpuVW40YWhtb0U1VldZSEVQZl8xczF0LVZYdFdDREZKaEkxZzVZNW5PbXVlaVVXcGZnaWpIQ3dnWE9vX2hLV3NhR0ZCWU5wNF9GNjhBUQ?oc=5` — Europe’s 27 leaders to take on AI — finally
+  4. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxNTWJ2T3FjMmNvRXZrOXFMMmMyLTVpR2FENnVhZzJvNFhpc3BGQl9sUHhsVlRaMmIyV1lQdzZoRlRiLTVIVXZXX1BsNkwtVTBNbHlNd0tyNUY2emx6YjVNcmwtcjV5dFEweHZnYl9qQmtIYk9FbFhKRzBoNE04ZHJacklHWFB0Q1EtQ0lySS1LcXVubktTY2pWeXVKRU1BSkdsTDVmYXViZjFEcmlmdUE?oc=5` — It’s now or never for a European Moonshot for human-relevant health research
+  5. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxQYUtFSTRwMDl3OUhZMUF2aVFLQU9XYlZnV2NmY2NjNDdHb1RYTG1lTWZjVE1aWm56UmY0TUJCWHI1elZFZkZuMEFmdU9QZzNHZk5DVGxrSTY0VF9JSFpWMFFjS2FSd0oyT0tPWU1xbUVVT1BaRE1Vam4zTFN5U04zUVh3YjJ2eHliX0RwUDdZSUQwWkgwaXljX2RYQVpRWFZjb29Yc2dldUZzLXNxOGc?oc=5` — EU pharma reform: Belgium risks losing its life sciences edge, lawyer warns
+  6. `link:https://news.google.com/rss/articles/CBMiygFBVV95cUxOVGNheW9CUUx4Zks1ZzZoTlA4U0M0SUVBT3I2ZmZVbXFrVTJTYkxpSTBPVGQ2eVVZVlJjMFBoX0c2WWRma1hJNGNHUmVQUjhKM1BPNi1KeFJMQlgzY1Z5U19RUVhUSDF6U1Y4aU9UUzIyZHlrRzFKQTNuaGR4ZlRHbDJXWXhjNGlRNjBMaFBhMHV1cjY5a1RUcFNMMTFqb3dWOUNCbXdHTFo5VFlEM3MyUnhtUW9nQlJjOGJJS2xIOV9FZGVNMmRPZUp3?oc=5` — To secure the FP10 Europe needs, there’s work to do
+  7. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTFA3d1VZbmNrSnJ1MW5xdnNzdjBBRzMzeTF4VUhMeXdzb3VXeG9yZ2Z1aDdTZEFRZ05JNjFXN0JRMW93a0dtWlI2OG1Jd1hyVTNqaWFEWU9veDZUQzQxLWdIcjUwR1RHRFNZenRyWkUxR1hHaWZieE03MUNzU3FUZw?oc=5` — EU and US critical raw materials strategies: EU-US Explainer
+  8. `link:https://news.google.com/rss/articles/CBMizgFBVV95cUxPTXUtM2F0X0xuTjJGajR4emNZQ1BIWTdRWXdLczJINTM1ZkFxMjJHaXJYMXRHUVotcnZZMl9mY2laNGFrcGhUR04yNlhPUEJRZFpvREVFdXlaeUNtS0JtVUloSHZtakVOX1gwMkhNbGhoWE42TGVHdjFCRzliVDZBNWRzRUxQZk0ydU5Td1JacXBfV0t6QXFGaDViYkJzMk1DSnhVQ1Ziak4zd1l5cUhUczNBWVo2UTFncEt6N201WVFFaC1QRVBZNDZ3S1hDZw?oc=5` — Research leaders seek ‘better aligned’ EU and national funding
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260919T160144Z-cf4a3dfef307`
+- Current package: `worker-b-20260919T160725Z-cf4a3dfef307`
 - Assigned unresolved records: **36**
   1. `link:https://news.google.com/rss/articles/CBMic0FVX3lxTE5vNVlYVEQwal9wWXpUTU1LQUhHQTRxNmJ5b0gwcGpja2lPQXVndW1LVmpHTkZLdXlwRDktRUNNR0RTWXhPWDY0bTV2eFNqYktBTm5DSXc1aDRrTmxwaGVOcFY2cXBkX0VFSnVSS1gtNWI0T2M?oc=5` — Apply AI Summit
   2. `link:https://news.google.com/rss/articles/CBMizgFBVV95cUxPUHdtM0lSVXVkRnRTRzJ0WHJlbm05dnVMOXAwUm4tMlJjZndpMGtubGJyWGRVZG9IQkdtWnBPV1JMRFE4SzdOdUJtV2w0VzA5eGt2dFY4aEtJanVkMDN5dUpkTFluSG5ycF9HQzdnYWZyYS01eFkxSmNRRVd1RWZmMkU3WW5XdFFkaXduZzVRLVpraU9yVTZxdU1vT1ZJZTB6VVBBTWF3TDl1Tk1OcVItSlhvTk5jbnlGM3BWXzh4Q2hjM09weEhuTzAzc0NuQQ?oc=5` — European Space Agency asks governments to fund exploration
