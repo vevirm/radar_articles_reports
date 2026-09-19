@@ -6,17 +6,17 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1429** (Main **664** + Historical **765**)
-- Automatic queue still needing V2 verification: **141** (Main **125** + Historical **16**)
-- Currently assigned to workers: **120** (Main **107** + Historical **13**)
-- Bounded access-recovery retries still eligible: **0**
+- Authoritative V2 verified: **1454** (Main **688** + Historical **766**)
+- Automatic queue still needing V2 verification: **128** (Main **101** + Historical **27**)
+- Currently assigned to workers: **96** (Main **84** + Historical **12**)
+- Bounded access-recovery retries still eligible: **4**
 - Hands-on verification needed: **69**
-- Automatic queue pending and not yet assigned: **21**
+- Automatic queue pending and not yet assigned: **32**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260919T134019Z-a0396602ae67`
+- Current package: `worker-a-20260919T160130Z-a0396602ae67`
 - Assigned unresolved records: **60**
   1. `historical:id:0f5fcfee115987b1` — War and the future of war
   2. `historical:id:3348c6be76c0879c` — Understanding Foresight‐Policy Interactions: The Role of Institutionalization
@@ -29,17 +29,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 52 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260919T134030Z-368e0397edf2`
-- Assigned unresolved records: **60**
-  1. `historical:id:63a0b96383dbb86a` — UK-DE Energy Systems Symposium – Accelerating net zero through policy-research collaboration - acatech
-  2. `link:https://news.google.com/rss/articles/CBMi2wFBVV95cUxNZU1hMzRwTEVNWlllSHdQdVJJX0Y2R1BHdGhPZVdMMkN4NGItUzFnU2F3MTFCS0UySkFqNVJPTWY5QUhacERSRVRWUTRXTU5iSVQ5TWRvaGFtb3FFV3lGbllTTGk1THVKNHJqUXlOVkhRS3FfanRubC1BQ09VY2VGcE9EdTQ3RHpjZXQ4NmprRkZMUlpWN1l1SXdfdm80WXpGcU5fcXUxb0ZUa2pNVUlSOXV2Y0NSelltVm0zU3RyWl95MWgyQU9FakxxcjA1ODBhUWtKTS0teUY5RHM?oc=5` — COMMENTARY: Europe has no hope in AI race without a unified energy market
-  3. `link:https://news.google.com/rss/articles/CBMingFBVV95cUxNSG9wd0RSNGN6THVsY0N5WjlzVnc2Tk5NZllBSUV1Uy1USUhGZFVwZkVkQWxrWHlvLV9SWWJ3U0VEUEE5c1NMZENnUmxmSWk0UTlRbWs0UkJiZGltQUFpaUpvTjZvV1p4TEtuejNBX0VLei03bjFNdjk2N3ptX1FMRzk2VGljeUx1UDE3YjBUU1JPZjQyVnpqV2FmM3E2dw?oc=5` — Why is European money financing the American AI boom?
-  4. `link:https://news.google.com/rss/articles/CBMitwFBVV95cUxNRE81UlQxLU51REdpNnhRZldjMTF1bHhBTDJxN1hGeVpWVGxhRVh6MGU1bVhFcEFlWEVxbVQ0MUlSalc5M1RkX1A0MllyR2hyZXVKNy1FNlpIc2lOcER0MHdJZ2hLbUNCTHBkX2xMQXVTVWtEd1JaYWIzV2RkbG0ybWs2QVg3SHRwZDlvY2F4MTVRR3B3bF82R1NhV3VYOVduWmJuRS1oMXZvQWUzUkxwYm4yQkZ0UTA?oc=5` — Spain leads quantum computing: 'Made in Spain' chips manufactured in Barcelona
-  5. `link:https://news.google.com/rss/articles/CBMiwAFBVV95cUxNSG5uVEZIa3BaUWUwY3VkQTdlaHpuV0xBVm81VnYxcm0wUllxU3V4dmlrTnNlXzBZbUtreDV4MEJpVjdpMFg0dm0yZWFGTkFHTUh2NTBKbFB6WmloNGkzQ3Qyc3d6NkFyQkVGUXJzQnFoMVFYWXhjcC1YX1kzUkFYdHR1MEItREpNNk1ESE5VT3lsSmhVUWdQcno0OFNWWmZPSUx3WF8ySmlCU3ZIcnc4M2RLQWxkem1aZEVkaGhQMHo?oc=5` — Spain at the forefront of quantum computing: chips made in Spain, built in Barcelona
-  6. `link:https://www.euronews.com/next/2026/09/16/spain-leads-quantum-computing-made-in-spain-chips-manufactured-in-barcelona` — Spain leads quantum computing: 'Made in Spain' chips manufactured in Barcelona
-  7. `link:https://news.google.com/rss/articles/CBMinAFBVV95cUxOUUxnQ0t5VFpuckJaa2tDZXJSMFNzX09OdkpOZzNSNlU0WlMwcjc1OWpSLUxEeGFIM0NZMmliek5Ja3J3dExTc2JuQTd0alE4YUhycVprWmdJVTRwdXZWXzZId20yZk9xNVN2bkJfMEtLc0xlaG9yNUhjcHRXLWZUaGlPckN4R0RpakdSZzJLUlBadlZBNmFHekZOcl8?oc=5` — Watch Europe Has Lost Race for Frontier AI Models, Says Rhine Group's Garicano
-  8. `link:https://www.clean-hydrogen.europa.eu/document/download/5ccb5de8-a8e2-4eba-ae52-91646fc88125_en?filename=Clean%20Hydrogen_Synergies%20strategy_June2026.pdf` — Synergies Strategy - 2026 and beyond
-  - … plus 52 more in the package manifest
+- Current package: `worker-b-20260919T160144Z-cf4a3dfef307`
+- Assigned unresolved records: **36**
+  1. `link:https://news.google.com/rss/articles/CBMic0FVX3lxTE5vNVlYVEQwal9wWXpUTU1LQUhHQTRxNmJ5b0gwcGpja2lPQXVndW1LVmpHTkZLdXlwRDktRUNNR0RTWXhPWDY0bTV2eFNqYktBTm5DSXc1aDRrTmxwaGVOcFY2cXBkX0VFSnVSS1gtNWI0T2M?oc=5` — Apply AI Summit
+  2. `link:https://news.google.com/rss/articles/CBMizgFBVV95cUxPUHdtM0lSVXVkRnRTRzJ0WHJlbm05dnVMOXAwUm4tMlJjZndpMGtubGJyWGRVZG9IQkdtWnBPV1JMRFE4SzdOdUJtV2w0VzA5eGt2dFY4aEtJanVkMDN5dUpkTFluSG5ycF9HQzdnYWZyYS01eFkxSmNRRVd1RWZmMkU3WW5XdFFkaXduZzVRLVpraU9yVTZxdU1vT1ZJZTB6VVBBTWF3TDl1Tk1OcVItSlhvTk5jbnlGM3BWXzh4Q2hjM09weEhuTzAzc0NuQQ?oc=5` — European Space Agency asks governments to fund exploration
+  3. `link:https://news.google.com/rss/articles/CBMiwwFBVV95cUxOc3dqc2gtLVl6ZTJqSjNYVXlaT0Q4SkZmMnR1MEtIZmM2WHlJcXpQamVsbnFFaHlvZXhTb1dIQkwwYXJieUR6R0RxU1lzSHFSc1dKSFpXQmREaE03Y0ZYUUNUcTNUaFpfZml1dFgwT0F4Z20yOC12YWJqQVpBSElybmk4TEEzekV2VjNsdGxrS2Z3U3cyLTdBTUxhVGs0VXZOdHhoTnhaVmZsMXc5VGJ0Rjhpb3VWOE1hdUh6YzItRDNBcms?oc=5` — The Dutch Village in the Path of Europe’s Energy Transition
+  4. `link:https://news.google.com/rss/articles/CBMinAFBVV95cUxQdGg0TmtnZy1aellQQXoweDczWWV3dWdNb0JPbGVtZ1F0TW91cGJSZm9fUHlwVHlVMUxRX1lCY0tqUHFUQjZEdllmSUdIR1FxRXZVXzVzTmRKZTZRdFBSOU14bzExS0FCYWdLQnRnZ3MwdTd2bjdIY2RUVTc1VVplbmM2R0M2aWxKNmV3dDdrcjZDRDlsaTE1aFptSlk?oc=5` — French AI firm Mistral valued at €21 billion after latest funding
+  5. `link:https://news.google.com/rss/articles/CBMiyAFBVV95cUxPdHdrS1BubUQyTzh0cmJXbTBhMzBlQjQ5WVl3MUx6UmVjNUlWOE1aZjl1ZE4wY0FDcTBEQmVLOEthQzQzS1luaTBLZUgzZklIUXRUZTlhalNsb2dSR3diLW5wZnpOdExadDJ0bnBrS2szUDl4VlotcGs4ODgyeTVEX3FWQTE3SjNEWnB3MWdHdktpUjlERDJGUkgzd2ptOUVlV1F3d0N3S3gxTmd1Nm00V0hjVy1mNHV5TEE1R3g2Q2p5eXBOR2VScg?oc=5` — Sabotage, espionage and disinformation: Hybrid threats to Germany rise
+  6. `link:https://news.google.com/rss/articles/CBMiogFBVV95cUxQS2puT2p2T1JzcFVGS0VuRVIxcUpPS1VUYTZjMFQ0TW93cjUyRk1ZS0I4aEJ5U3E3elBEVjlzTElwWnlscWNCcjZiWm1UdEJCa1Y4NFZkT2stSUlXaGdoN1NUNVFuRXBiZXJtM3FZS3BrTjdaNmJOMTRidV8zUWVGSHJ4XzM3OWFXSzhZMGFhb3JfRFk0aDloSmxLMjJjNWdpSlE?oc=5` — Europe’s Software Giant Fights to Stay Relevant in the AI Era
+  7. `link:https://news.google.com/rss/articles/CBMinAFBVV95cUxQSDM4bUVJQ1BVcG1NRDh6b2kzVHM5SzhJT0VwbzV0LUZNMExOalZVSjYzU1RCQUlOMDF3MjVrU05kMG5IQXVTX2Fia3M2cDBCQmQ2S0NrVERZZEFGd29kYUFyaHVCUHo1YnhLOERtSkRqUHpzeG5lVUJNaWZHNmN3cUNuR0pDUTNpTVpQajNrb0t5VzNoZmtLUU95Nmc?oc=5` — ArianeGroup studies increase in European space launches
+  8. `link:https://news.google.com/rss/articles/CBMitgFBVV95cUxNTnpFN1FsZ1A1TzBnd0ZSOGpGeTJ6aWJ1a1FmYi1CeklIRmI1TnFfUnJDSV9wajNZZXl6SDZicTRpWnhWQ3Y2dzVvMlVVZEV2OVhmNHRoMnNEZzFrOEZVVC1ldWpLSnlDanlaNG5BUWhEc1plVlRndDVXSzRzVkd3RXJtUVhpTEhXMFJSUG9iZGZ1QUlfd05nMEZaZVNXVVBUMVFsek4yMHQ1anNkUG1NaG55YXo1UQ?oc=5` — German Startup’s Rocket Deploys Satellites in a First for Europe
+  - … plus 28 more in the package manifest
 
 ## Hands-on verification needed
 

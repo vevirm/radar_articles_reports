@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-19T07:43:33Z",
+  "generated_at": "2026-09-19T15:58:57Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -131913,8 +131913,1972 @@
       "deep_scan_package_id": "worker-a-20260919T062041Z-0349bca5eaa7",
       "claims": [],
       "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:63a0b96383dbb86a": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "0c0eb51f",
+      "identity_hash": "d3d0581a316bd44b",
+      "reader_title": "acatech and Royal Academy of Engineering announce UK-German energy systems symposium (2020)",
+      "reader_what": "Event page for a 2020 virtual UK-German symposium linking early-career energy researchers and policymakers.",
+      "reader_more": "The page announces a virtual symposium held in October 2020 by acatech and the UK Royal Academy of Engineering. It lists themes such as energy storage and public engagement and offers seed funding for resulting collaborations. It reports no findings or outcomes.",
+      "deep_analysis": {
+        "work_kind": "event announcement",
+        "research_question": "",
+        "main_finding": "Announces a bilateral early-career symposium on energy-system transformation after Brexit.",
+        "method_or_basis": "Publisher event page text.",
+        "qualification": "Announcement only; no outputs or results are documented.",
+        "radar_relevance": "Fails historical Strand A: no substantive research, policy analysis or documented outcome.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened acatech event page; it is a 'Dialog & Debatte' event listing for a virtual UK-DE Energy Systems Symposium, 19-23 October 2020, co-hosted with the Royal Academy of Engineering."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News/web item; no DOI exists for this work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_page",
+            "url": "https://www.acatech.de/termin/uk-de-energy-systems-symposium-accelerating-net-zero-through-policy-research-collaboration-2/",
+            "title": "UK-DE Energy Systems Symposium – Accelerating net zero through policy-research collaboration (acatech event page)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Supplied URL is the complete event announcement itself (about 2,000 characters); no report or findings attached to the page."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "HISTORICAL_NOT_SUBSTANTIVE_WORK",
+        "reason": "The work is an event announcement (agenda themes, seed funding offer), not a research output or finding; it establishes no substantive European R&I evidence for the historical archive."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-19T15:58:54Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMingFBVV95cUxNSG9wd0RSNGN6THVsY0N5WjlzVnc2Tk5NZllBSUV1Uy1USUhGZFVwZkVkQWxrWHlvLV9SWWJ3U0VEUEE5c1NMZENnUmxmSWk0UTlRbWs0UkJiZGltQUFpaUpvTjZvV1p4TEtuejNBX0VLei03bjFNdjk2N3ptX1FMRzk2VGljeUx1UDE3YjBUU1JPZjQyVnpqV2FmM3E2dw?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "12a81780",
+      "identity_hash": "f1006d79010d596f",
+      "reader_title": "European savings are helping finance the US AI boom, ECB warns",
+      "reader_what": "Eurozone households hold about €440bn in US tech stocks, while most hold no shares, bonds or funds at all.",
+      "reader_why": "Savings parked in deposits or US stocks leave fewer funds for European tech firms to scale.",
+      "reader_more": "ECB President Christine Lagarde said European savings risk paying for America's AI boom without Europe sharing the gains. A new ECB analysis found households keep about a third of financial assets in deposits and around 80% own no shares, bonds or funds. Analysts quoted by Euronews say Europe has money and promising firms, but too few become accessible investments. Some argue owning US tech is simply sensible diversification.",
+      "deep_analysis": {
+        "work_kind": "news analysis reporting an official evidence release",
+        "research_question": "",
+        "main_finding": "ECB data show European household savings are concentrated in deposits and property, and AI exposure runs largely through US tech stocks.",
+        "method_or_basis": "Euronews article citing Lagarde's Vienna speech and a new ECB household finance analysis.",
+        "qualification": "Figures are ECB estimates as reported by Euronews; whether US holdings harm Europe is disputed by quoted analysts.",
+        "radar_relevance": "Capital-markets constraint on European innovation and AI scale-up (savings and investment union debate).",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Google News redirect link decoded via Google's article-decoding endpoint to https://www.euronews.com/business/2026/09/16/why-is-european-money-financing-the-american-ai-boom; full Euronews Business article text retrieved (about 8,300 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News/web item; no DOI exists for this work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euronews.com/business/2026/09/16/why-is-european-money-financing-the-american-ai-boom",
+            "title": "Why is European money financing the American AI boom? (Euronews)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Title, outlet and date (2026-09-16) match the publisher page."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "Reports a new ECB analysis of household savings and Lagarde's 14 Sept speech linking European savings to US AI firms; a concrete evidence release on Europe's capacity to finance its own AI and tech scale-ups."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-19T15:58:54Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2",
+      "claims": [
+        {
+          "object": "finance.strategic_investment",
+          "secondary_objects": [
+            "finance.venture_capital"
+          ],
+          "actor": {
+            "name": "European Central Bank",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-09-15",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Figures are ECB estimates as reported by Euronews; whether US holdings harm Europe is disputed by quoted analysts.",
+          "text": "An ECB analysis found about 80% of eurozone households own no shares, bonds or investment funds, while households hold about €440bn in US tech companies.",
+          "confidence": "medium",
+          "record_key": "link:https://news.google.com/rss/articles/CBMingFBVV95cUxNSG9wd0RSNGN6THVsY0N5WjlzVnc2Tk5NZllBSUV1Uy1USUhGZFVwZkVkQWxrWHlvLV9SWWJ3U0VEUEE5c1NMZENnUmxmSWk0UTlRbWs0UkJiZGltQUFpaUpvTjZvV1p4TEtuejNBX0VLei03bjFNdjk2N3ptX1FMRzk2VGljeUx1UDE3YjBUU1JPZjQyVnpqV2FmM3E2dw?oc=5",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:f1006d79010d596f:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMitwFBVV95cUxNRE81UlQxLU51REdpNnhRZldjMTF1bHhBTDJxN1hGeVpWVGxhRVh6MGU1bVhFcEFlWEVxbVQ0MUlSalc5M1RkX1A0MllyR2hyZXVKNy1FNlpIc2lOcER0MHdJZ2hLbUNCTHBkX2xMQXVTVWtEd1JaYWIzV2RkbG0ybWs2QVg3SHRwZDlvY2F4MTVRR3B3bF82R1NhV3VYOVduWmJuRS1oMXZvQWUzUkxwYm4yQkZ0UTA?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "9946aa8f",
+      "identity_hash": "9a80d73b4f5f19d3",
+      "reader_title": "Duplicate: Euronews report on Spain's new quantum nanofabrication clean room",
+      "reader_what": "Same article as the canonical record on CSIC's Barcelona quantum nanofabrication area.",
+      "reader_more": "See canonical record. It is not admitted to the Radar: same Euronews article as the canonical direct-URL record; kept once under the canonical key.",
+      "deep_analysis": {
+        "work_kind": "news report",
+        "research_question": "",
+        "main_finding": "See canonical record.",
+        "method_or_basis": "Publisher page identical to canonical.",
+        "qualification": "Duplicate record.",
+        "radar_relevance": "Retained under canonical key only.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Google News redirect link decoded via Google's article-decoding endpoint to https://www.euronews.com/next/2026/09/16/spain-leads-quantum-computing-made-in-spain-chips-manufactured-in-barcelona; identical Euronews Next article to record link:https://www.euronews.com/next/2026/09/16/spain-leads-quantum-computing-made-in-spain-chips-manufactured-in-barcelona; same URL after decoding."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News/web item; no DOI exists for this work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euronews.com/next/2026/09/16/spain-leads-quantum-computing-made-in-spain-chips-manufactured-in-barcelona",
+            "title": "Spain leads quantum computing: 'Made in Spain' chips manufactured in Barcelona (Euronews)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Decoded URL is byte-identical to the direct Euronews URL held by the canonical record."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "DUPLICATE_OF_CANONICAL",
+        "reason": "Same Euronews article as the canonical direct-URL record; kept once under the canonical key."
+      },
+      "duplicate": {
+        "status": "duplicate",
+        "duplicate_of": "link:https://www.euronews.com/next/2026/09/16/spain-leads-quantum-computing-made-in-spain-chips-manufactured-in-barcelona",
+        "reason": "Google News wrapper resolves to exactly the same Euronews article URL as the canonical record."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-19T15:58:54Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiwAFBVV95cUxNSG5uVEZIa3BaUWUwY3VkQTdlaHpuV0xBVm81VnYxcm0wUllxU3V4dmlrTnNlXzBZbUtreDV4MEJpVjdpMFg0dm0yZWFGTkFHTUh2NTBKbFB6WmloNGkzQ3Qyc3d6NkFyQkVGUXJzQnFoMVFYWXhjcC1YX1kzUkFYdHR1MEItREpNNk1ESE5VT3lsSmhVUWdQcno0OFNWWmZPSUx3WF8ySmlCU3ZIcnc4M2RLQWxkem1aZEVkaGhQMHo?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "b0b3fd7f",
+      "identity_hash": "60e48d18e5c75aaa",
+      "reader_title": "Spain opens its largest quantum nanofabrication clean room in Barcelona",
+      "reader_what": "CSIC inaugurated a €6m-plus quantum nanofabrication area at the Barcelona Microelectronics Institute.",
+      "reader_why": "It gives Spanish researchers and firms domestic tools to prototype quantum and microelectronic chips.",
+      "reader_more": "This record is the same Euronews article as another record and should be merged with it. CSIC opened a new quantum nanofabrication area in the IMB-CNM clean room, funded by the PERTE Chip plan and NextGenerationEU. It houses Spain's most advanced electron-beam lithography system and is open to researchers and companies. CSIC also announced a new QuARC quantum research centre.",
+      "deep_analysis": {
+        "work_kind": "news report of infrastructure inauguration",
+        "research_question": "",
+        "main_finding": "CSIC opened Spain's largest research clean-room facility for quantum nanofabrication, funded by NextGenerationEU.",
+        "method_or_basis": "Euronews article based on CSIC announcement.",
+        "qualification": "Duplicate of canonical record; facility capacity claims are CSIC's own.",
+        "radar_relevance": "Research infrastructure for quantum and semiconductor capability in an EU member state.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Google News redirect link decoded via Google's article-decoding endpoint to https://www.euronews.com/next/2026/09/16/spain-at-the-forefront-of-quantum-computing-chips-made-in-spain-built-in-barcelona; that Euronews URL (slug 'spain-at-the-forefront-of-quantum-computing...') HTTP-redirects to the same article as record link:https://www.euronews.com/next/2026/09/16/spain-leads-quantum-computing-made-in-spain-chips-manufactured-in-barcelona; identical text retrieved."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News/web item; no DOI exists for this work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euronews.com/next/2026/09/16/spain-at-the-forefront-of-quantum-computing-chips-made-in-spain-built-in-barcelona",
+            "title": "Spain at the forefront of quantum computing (Euronews; redirects to canonical article)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Different headline variant, but the publisher redirects it to the canonical Euronews article; text identical."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "C",
+        "reason_code": "REVIEW_UNLISTED_DUPLICATE",
+        "reason": "Clearly the same work as the canonical record, but the package lists no possible-duplicate key for this record, so a validated duplicate flag cannot be set; human merge requested. The underlying development itself meets Strand C."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-19T15:58:54Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2",
+      "claims": [
+        {
+          "object": "research.infrastructure",
+          "secondary_objects": [
+            "quantum.equipment"
+          ],
+          "actor": {
+            "name": "Spanish National Research Council (CSIC)",
+            "class": "other"
+          },
+          "mechanism": "builds",
+          "direction": "expands",
+          "status": "operating",
+          "status_date": "2026-09",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "ES"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Duplicate of canonical record; facility capacity claims are CSIC's own.",
+          "text": "CSIC opened a quantum nanofabrication area at IMB-CNM in Barcelona, funded with over €6 million from PERTE Chip and NextGenerationEU.",
+          "confidence": "medium",
+          "status_date_precision": "month",
+          "record_key": "link:https://news.google.com/rss/articles/CBMiwAFBVV95cUxNSG5uVEZIa3BaUWUwY3VkQTdlaHpuV0xBVm81VnYxcm0wUllxU3V4dmlrTnNlXzBZbUtreDV4MEJpVjdpMFg0dm0yZWFGTkFHTUh2NTBKbFB6WmloNGkzQ3Qyc3d6NkFyQkVGUXJzQnFoMVFYWXhjcC1YX1kzUkFYdHR1MEItREpNNk1ESE5VT3lsSmhVUWdQcno0OFNWWmZPSUx3WF8ySmlCU3ZIcnc4M2RLQWxkem1aZEVkaGhQMHo?oc=5",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:60e48d18e5c75aaa:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.euronews.com/next/2026/09/16/spain-leads-quantum-computing-made-in-spain-chips-manufactured-in-barcelona": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "657a54b3",
+      "identity_hash": "c1fff618642b6c5d",
+      "reader_title": "Spain opens its largest quantum nanofabrication clean room in Barcelona",
+      "reader_what": "CSIC inaugurated a €6m-plus quantum nanofabrication area at the Barcelona Microelectronics Institute.",
+      "reader_more": "The new area in the IMB-CNM clean room was funded by Spain's PERTE Chip plan and quantum communications plan through NextGenerationEU. It includes Spain's most advanced electron-beam lithography system, used to pattern nanoscale circuits. The equipment is open to researchers and companies. CSIC also announced a QuARC quantum research centre to pool its quantum groups.",
+      "deep_analysis": {
+        "work_kind": "news report of infrastructure inauguration",
+        "research_question": "",
+        "main_finding": "CSIC opened Spain's largest research clean-room facility for quantum nanofabrication, funded by NextGenerationEU.",
+        "method_or_basis": "Euronews article based on CSIC announcement.",
+        "qualification": "Facility capacity claims are CSIC's own; the inauguration date is not stated beyond the article date.",
+        "radar_relevance": "Research infrastructure for quantum and semiconductor capability in an EU member state, co-funded by EU recovery money.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.euronews.com/next/2026/09/16/spain-leads-quantum-computing-made-in-spain-chips-manufactured-in-barcelona; full Euronews Next article retrieved (about 4,100 characters), matching stored excerpt."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News/web item; no DOI exists for this work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euronews.com/next/2026/09/16/spain-leads-quantum-computing-made-in-spain-chips-manufactured-in-barcelona",
+            "title": "Spain leads quantum computing: 'Made in Spain' chips manufactured in Barcelona (Euronews)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical record for the Google News wrappers in this package."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "Reports a concrete new research infrastructure (quantum nanofabrication clean room) opened by Spain's main public research body with EU recovery funds."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-19T15:58:55Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2",
+      "claims": [
+        {
+          "object": "research.infrastructure",
+          "secondary_objects": [
+            "quantum.equipment"
+          ],
+          "actor": {
+            "name": "Spanish National Research Council (CSIC)",
+            "class": "other"
+          },
+          "mechanism": "builds",
+          "direction": "expands",
+          "status": "operating",
+          "status_date": "2026-09",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "ES"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Facility capacity claims are CSIC's own; the inauguration date is not stated beyond the article date.",
+          "text": "CSIC opened a quantum nanofabrication area at IMB-CNM in Barcelona, funded with over €6 million from PERTE Chip and NextGenerationEU.",
+          "confidence": "high",
+          "status_date_precision": "month",
+          "record_key": "link:https://www.euronews.com/next/2026/09/16/spain-leads-quantum-computing-made-in-spain-chips-manufactured-in-barcelona",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:c1fff618642b6c5d:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMinAFBVV95cUxOUUxnQ0t5VFpuckJaa2tDZXJSMFNzX09OdkpOZzNSNlU0WlMwcjc1OWpSLUxEeGFIM0NZMmliek5Ja3J3dExTc2JuQTd0alE4YUhycVprWmdJVTRwdXZWXzZId20yZk9xNVN2bkJfMEtLc0xlaG9yNUhjcHRXLWZUaGlPckN4R0RpakdSZzJLUlBadlZBNmFHekZOcl8?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "d12bd28c",
+      "identity_hash": "9822cb0af24d7130",
+      "reader_title": "Rhine Group's Garicano says Europe has lost the race for frontier AI models",
+      "reader_what": "Bloomberg TV interview: Europe lost frontier AI models but can still lead on implementation.",
+      "reader_more": "Opinion that Europe has lost frontier-model development but can compete on AI deployment. It is not admitted to the Radar: a TV interview opinion (Garicano says Europe lost the frontier-model race but can win on implementation); no new policy, funding or evidence release.",
+      "deep_analysis": {
+        "work_kind": "TV interview",
+        "research_question": "",
+        "main_finding": "Opinion that Europe has lost frontier-model development but can compete on AI deployment.",
+        "method_or_basis": "Bloomberg video page description.",
+        "qualification": "Interview opinion only.",
+        "radar_relevance": "Commentary; fails Strand C development test.",
+        "confidence": "medium",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Google News redirect link decoded via Google's article-decoding endpoint to https://www.bloomberg.com/news/videos/2026-09-16/eu-to-unveil-latest-clampdown-on-big-tech-video; direct fetch 403; public page reader returned the Bloomberg video page with page title 'Europe Has Lost Race for Frontier AI Models, Says Rhine Group's Garicano' and the full video description. URL slug ('eu-to-unveil-latest-clampdown-on-big-tech') differs from the title but the page is the claimed interview."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News/web item; no DOI exists for this work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_page",
+            "url": "https://www.bloomberg.com/news/videos/2026-09-16/eu-to-unveil-latest-clampdown-on-big-tech-video",
+            "title": "Europe Has Lost Race for Frontier AI Models, Says Rhine Group's Garicano (Bloomberg TV)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Evidence is the publisher's full video description; the video itself was not transcribed."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_OPINION_NOT_DEVELOPMENT",
+        "reason": "A TV interview opinion (Garicano says Europe lost the frontier-model race but can win on implementation); no new policy, funding or evidence release."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-19T15:58:55Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.clean-hydrogen.europa.eu/document/download/5ccb5de8-a8e2-4eba-ae52-91646fc88125_en?filename=Clean%20Hydrogen_Synergies%20strategy_June2026.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "e81e121c",
+      "identity_hash": "456184643421f602",
+      "reader_title": "EU hydrogen partnership sets out strategy to coordinate funding across programmes",
+      "reader_what": "Clean Hydrogen JU sets eight priorities to align its R&I with other EU, national and regional funding.",
+      "reader_why": "Fragmented coordination limits how quickly hydrogen research reaches deployment; the strategy targets that gap.",
+      "reader_more": "The Clean Hydrogen Joint Undertaking is a Horizon Europe partnership funding hydrogen research. Its new strategy, built from desk research, surveys and 25 interviews and questionnaires, found fragmented coordination and little monitoring of synergy effects. It proposes eight priorities, including a monitoring framework, a two-tier coordination system, joint funder boards with member states and international alignment. It covers the 2021-2027 budget and beyond.",
+      "deep_analysis": {
+        "work_kind": "official strategy document",
+        "research_question": "",
+        "main_finding": "Identifies fragmented coordination and weak monitoring of synergies and sets eight priorities for structured synergy governance.",
+        "method_or_basis": "Mixed-methods: desk research, two surveys, 10 interviews and 15 written questionnaires, per the document.",
+        "qualification": "Strategic framework; implementation and funding of the priorities are not yet evidenced.",
+        "radar_relevance": "EU R&I partnership governance and coordination of funding instruments for clean hydrogen.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Downloaded the Clean Hydrogen JU PDF 'Synergies Strategy - 2026 and beyond' (about 220,000 characters extracted); document history shows drafts by White Research & Trinomics (Oct-Nov 2025) and reviews to 9 June 2026 for Governing Board endorsement."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News/web item; no DOI exists for this work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://www.clean-hydrogen.europa.eu/document/download/5ccb5de8-a8e2-4eba-ae52-91646fc88125_en?filename=Clean%20Hydrogen_Synergies%20strategy_June2026.pdf",
+            "title": "Clean Hydrogen JU Synergies Strategy – 2026 and beyond (PDF)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full official document read (executive summary, landscape, gap analysis, eight priorities)."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "An official EU partnership strategy document setting eight priorities to structure synergies between the Clean Hydrogen JU and other EU, national and regional funding."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-19T15:58:55Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [
+            "green.innovation"
+          ],
+          "actor": {
+            "name": "Clean Hydrogen Joint Undertaking",
+            "class": "eu_body"
+          },
+          "mechanism": "coordinates",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-06",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Strategic framework; implementation and funding of the priorities are not yet evidenced.",
+          "text": "The Clean Hydrogen JU published a synergies strategy with eight priorities to align its R&I funding with EU, national and regional programmes.",
+          "confidence": "medium",
+          "status_date_precision": "month",
+          "record_key": "link:https://www.clean-hydrogen.europa.eu/document/download/5ccb5de8-a8e2-4eba-ae52-91646fc88125_en?filename=Clean%20Hydrogen_Synergies%20strategy_June2026.pdf",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:456184643421f602:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://hadea.ec.europa.eu/news/horizon-europe-call-research-and-development-support-clean-industrial-deal-closed-2026-09-16_en": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "e1870b60",
+      "identity_hash": "dd7f41fed00cefa6",
+      "reader_title": "Clean Industrial Deal R&I call draws 144 proposals for about 16 grants",
+      "reader_what": "Horizon Europe's HORIZON-CID-2026-01 call closed with 144 proposals; about 16 will be funded.",
+      "reader_why": "Roughly one in nine proposals will win, showing demand far exceeding the demonstrator budget.",
+      "reader_more": "The call funds deployment-ready demonstrators in clean tech and decarbonising energy-intensive industries. 57 proposals targeted industrial decarbonisation (€125m indicative) and 87 targeted clean technologies (€150m). HaDEA and CINEA manage the two topics. Results are expected in December 2026.",
+      "deep_analysis": {
+        "work_kind": "official call statistics",
+        "research_question": "",
+        "main_finding": "144 proposals submitted; 16 to be selected; €275m indicative budget across two topics.",
+        "method_or_basis": "HaDEA announcement.",
+        "qualification": "Selection numbers are planned; results due December 2026.",
+        "radar_relevance": "Horizon Europe funding pressure and Clean Industrial Deal R&I implementation.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened HaDEA news page (published 16 September 2026); full text retrieved with topic-level submission numbers and budgets."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News/web item; no DOI exists for this work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_page",
+            "url": "https://hadea.ec.europa.eu/news/horizon-europe-call-research-and-development-support-clean-industrial-deal-closed-2026-09-16_en",
+            "title": "Horizon Europe call on research and development in support of the clean industrial deal closed (HaDEA)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official agency announcement; complete."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "Official data on a closed Horizon Europe call supporting the Clean Industrial Deal: 144 proposals for about 16 grants and €275m indicative budget."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-19T15:58:55Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2",
+      "claims": [
+        {
+          "object": "horizon.success_rate",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Health and Digital Executive Agency (HaDEA)",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-09-16",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Selection numbers are planned; results due December 2026.",
+          "text": "HaDEA reported 144 proposals to the Horizon Europe Clean Industrial Deal call, of which 16 will be selected for funding.",
+          "confidence": "high",
+          "record_key": "link:https://hadea.ec.europa.eu/news/horizon-europe-call-research-and-development-support-clean-industrial-deal-closed-2026-09-16_en",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:dd7f41fed00cefa6:1",
+          "attributes": {}
+        },
+        {
+          "object": "green.innovation",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Health and Digital Executive Agency (HaDEA)",
+            "class": "eu_body"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-09-16",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Indicative budgets; final grant amounts depend on evaluation.",
+          "text": "The call's two topics carry indicative budgets of €125 million for industrial decarbonisation and €150 million for clean technologies.",
+          "confidence": "high",
+          "record_key": "link:https://hadea.ec.europa.eu/news/horizon-europe-call-research-and-development-support-clean-industrial-deal-closed-2026-09-16_en",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:dd7f41fed00cefa6:2",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiugFBVV95cUxPLUtrSDJveHRTZDZNeXRVeHZvdjh0TWl1TUc2ZE1lMHpsb0VXWDRvbmVDUUNoSUJ4c3VvTDFQQi11RWpCckRvTDZjM0YtdFRfM3FpYVZjSXp1eXU3TzZKZGFmcElqdWxxMXpsYWNwRV9VSGxCV2FXSS11VFFWdE95eHd2NUw0SlM2cl9Tc1VJdmktLU1VVGtnbDZ0dmluMENkajVNZU1zNFFUbXFtc3A0UXAwSnF3azhUMmc?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "553eb97f",
+      "identity_hash": "d239afc51357472f",
+      "reader_title": "Spain's data regulator reports first breach allegedly carried out by an AI agent",
+      "reader_what": "AEPD received its first breach notification where an AI agent allegedly found flaws and altered personal data.",
+      "reader_why": "It moves AI-agent attacks from theory into formal GDPR breach filings regulators must handle.",
+      "reader_more": "Spain's Data Protection Agency said an AI agent using a widely known large language model allegedly scanned for vulnerabilities, logged in, modified personal data and accessed invoices. The organisation hit reported it; the case is still under review. The agency stressed this does not mean the model or its provider was compromised. It did not name the model or the organisation.",
+      "deep_analysis": {
+        "work_kind": "news report of regulator disclosure",
+        "research_question": "",
+        "main_finding": "First breach notification to the AEPD attributed to an AI agent executing multiple attack stages with limited human involvement.",
+        "method_or_basis": "Reuters report of an AEPD blog post.",
+        "qualification": "Allegation from the affected organisation's notification; still under AEPD review.",
+        "radar_relevance": "AI governance and cybersecurity enforcement in an EU member state.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Google News redirect link decoded via Google's article-decoding endpoint to https://www.reuters.com/business/spanish-data-watchdog-publicises-first-ai-agent-linked-data-breach-report-2026-09-15/; reuters.com returned HTTP 403 and the reader proxy was blocked."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News/web item; no DOI exists for this work."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Search for the headline found the verbatim Reuters wire copy (MADRID, Sept 15, Reuters) on thestar.com.my; full text retrieved."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "syndicated_wire_copy",
+            "url": "https://www.thestar.com.my/tech/tech-news/2026/09/16/spanish-data-watchdog-publicises-first-ai-agent-linked-data-breach-report",
+            "title": "Spanish data watchdog publicises first AI agent-linked data breach report (Reuters via The Star)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verbatim Reuters syndication; corroborated by TheNextWeb and Help Net Security reporting on the AEPD blog."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "A national regulator publicly reported the first data-breach notification attributed to an autonomous AI agent: a real regulatory evidence release on AI risk governance in the EU."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-19T15:58:55Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2",
+      "claims": [
+        {
+          "object": "ai.governance",
+          "secondary_objects": [
+            "critical_infrastructure.resilience"
+          ],
+          "actor": {
+            "name": "Spanish Data Protection Agency (AEPD)",
+            "class": "member_state"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2026-09-14",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "ES"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "Allegation from the affected organisation's notification; still under AEPD review.",
+          "text": "The AEPD reported receiving its first personal-data breach notification allegedly carried out by an AI agent.",
+          "confidence": "medium",
+          "record_key": "link:https://news.google.com/rss/articles/CBMiugFBVV95cUxPLUtrSDJveHRTZDZNeXRVeHZvdjh0TWl1TUc2ZE1lMHpsb0VXWDRvbmVDUUNoSUJ4c3VvTDFQQi11RWpCckRvTDZjM0YtdFRfM3FpYVZjSXp1eXU3TzZKZGFmcElqdWxxMXpsYWNwRV9VSGxCV2FXSS11VFFWdE95eHd2NUw0SlM2cl9Tc1VJdmktLU1VVGtnbDZ0dmluMENkajVNZU1zNFFUbXFtc3A0UXAwSnF3azhUMmc?oc=5",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:d239afc51357472f:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiY0FVX3lxTE9wLWZURlY1Mnlzd29QTE11Y01EMXlLM2tXR1Z4eW9aUEUzRnlvSnhOQ3h1NmxGMlNqQ0JPWDdsbWtCYkk5MndvMDVzV3paeVh5TFljQWdCX1hlMkZpNEFPRnlzaw?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "f7dbb5b5",
+      "identity_hash": "717262da1d6af8fc",
+      "reader_title": "European Commission research and innovation homepage (navigation page)",
+      "reader_what": "Rolling homepage with teasers and headline statistics on EU-funded research.",
+      "reader_more": "No single development. It is not admitted to the Radar: generic institutional homepage listing teasers; it is not itself a report of a specific development.",
+      "deep_analysis": {
+        "work_kind": "institutional homepage",
+        "research_question": "",
+        "main_finding": "No single development.",
+        "method_or_basis": "Publisher page.",
+        "qualification": "Rolling navigation content.",
+        "radar_relevance": "Generic page; fails Strand C.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Google News redirect link decoded via Google's article-decoding endpoint to https://research-and-innovation.ec.europa.eu/index_en; resolves to the European Commission Research and Innovation homepage (index_en), a rolling navigation page of teasers."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News/web item; no DOI exists for this work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_page",
+            "url": "https://research-and-innovation.ec.europa.eu/index_en",
+            "title": "Research and innovation – European Commission homepage",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Homepage content changes continuously; no single development is the subject."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_GENERIC_PAGE",
+        "reason": "Generic institutional homepage listing teasers; it is not itself a report of a specific development."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-19T15:58:55Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMihwFBVV95cUxPSHlNNlgyVnFySFFPMVhoWFcycUY4aF9FTTBRUmFxYmRVZ1Z4X1Rrci1uVW9WYkUxbUFYVmtYMF9rTHpQaUFyUDlkeHlrakExc1FvUWlOTFpXZU5TODN4R2E4cHVpajNMTm9tdTUzM1ltNXFKUlhsM0FjMHYtUEpTWmNSX0JENnM?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "b59f3590",
+      "identity_hash": "4137e3edb3884db0",
+      "reader_title": "University College Dublin advertises EU research funding manager post",
+      "reader_what": "Job advert for a UCD pre-award manager for Horizon Europe proposals.",
+      "reader_more": "Recruitment notice. It is not admitted to the Radar: recruitment advertisement for a research-funding manager; no policy, funding or programme development.",
+      "deep_analysis": {
+        "work_kind": "job advertisement",
+        "research_question": "",
+        "main_finding": "Recruitment notice.",
+        "method_or_basis": "Publisher page.",
+        "qualification": "Advertisement.",
+        "radar_relevance": "Vacancy page; excluded from Strand C.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "Google News redirect link decoded via Google's article-decoding endpoint to https://sciencebusiness.net/jobs/ucd-hiring-join-europes-hub-research-excellence; direct fetch blocked by Cloudflare challenge (403)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News/web item; no DOI exists for this work."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Search and fetch of the Science|Business jobs page returned the full advert: UCD EU Research Funding Manager, 5-year contract, deadline 25 September 2026."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://sciencebusiness.net/jobs/ucd-hiring-join-europes-hub-research-excellence",
+            "title": "UCD is Hiring! Join Europe's hub for research excellence (Science|Business jobs)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Job advertisement dated 15 Sep 2026."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_JOB_LISTING",
+        "reason": "Recruitment advertisement for a research-funding manager; no policy, funding or programme development."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-19T15:58:55Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMitgFBVV95cUxPVnFQZE5vLVo4MHdTS3pOSmFTYi1oeDNXdmJtWmUtWTZGU01nZURyak1BSmNXYjZGYWpCOVlLQmpYSFRJR0JpZXEzY0lmLXNYcTFQa3RzOEZSckxiaWNVN0hBNi1JV3BGM3dxRlFYQU82Y3MydlZpWkM2MXRkc0tiNEstMFRwUEpqdVB2WVpRTUE1OFk5NkI3TGhyMjZTX3lkdXV4ZXB0VWJCa1JEUHlMMmF4T3BtQQ?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "b40e8b0b",
+      "identity_hash": "8d12baa4d78081cb",
+      "reader_title": "Duplicate: Euronews on Trump calling AI extinction fears a hoax",
+      "reader_what": "Same article as the canonical record.",
+      "reader_more": "See canonical record. It is not admitted to the Radar: same Euronews article as the canonical record (which is itself dropped as off-scope).",
+      "deep_analysis": {
+        "work_kind": "news report",
+        "research_question": "",
+        "main_finding": "See canonical record.",
+        "method_or_basis": "Identical publisher page.",
+        "qualification": "Duplicate record.",
+        "radar_relevance": "Retained under canonical key only.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Google News redirect link decoded via Google's article-decoding endpoint to https://www.euronews.com/next/2026/09/15/enter-the-hoax-buster-trump-dismisses-ai-concerns-as-europe-and-china-fret; identical Euronews Next article to record link:https://www.euronews.com/next/2026/09/15/enter-the-hoax-buster-trump-dismisses-ai-concerns-as-europe-and-china-fret."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News/web item; no DOI exists for this work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euronews.com/next/2026/09/15/enter-the-hoax-buster-trump-dismisses-ai-concerns-as-europe-and-china-fret",
+            "title": "Enter the hoax buster: Trump dismisses AI concerns as Europe and China fret (Euronews)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Decoded URL identical to canonical direct-URL record."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "DUPLICATE_OF_CANONICAL",
+        "reason": "Same Euronews article as the canonical record (which is itself dropped as off-scope)."
+      },
+      "duplicate": {
+        "status": "duplicate",
+        "duplicate_of": "link:https://www.euronews.com/next/2026/09/15/enter-the-hoax-buster-trump-dismisses-ai-concerns-as-europe-and-china-fret",
+        "reason": "Google News wrapper resolves to the same Euronews URL as the canonical record."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-19T15:58:55Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMizgFBVV95cUxNS0piWDJJcEMzSjg0OHh5RFhnRTJSMmMxei00WmJfUXdlZmp4X1Q2M1A0ZW9UVnFoVEZOTU1EcDQ5cm9OMkRzWExuWWFxMTNkM1JxRDFiLXA4TWZ6SW1YdjNIWkludmpWV0laczdlN2hDcGlVanpaYmdhbHh0M0R2YWdCcFNJMFozUGFKLUdISEx0UVpHN1ltTHc0TGt1Sk5mNktGcDZYLXJiM09CTk4yNVpqQndKcVpjcUtmZ2xmZks5VXNyTlhwNHphc19Xdw?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "8ee10467",
+      "identity_hash": "41ae548115a22ae0",
+      "reader_title": "Luxembourg's Space Cargo becomes first customer of SpaceX's Starfall return capsule",
+      "reader_what": "Space Cargo will fly its BentoBox payload system on a 2028 Starship Starfall mission.",
+      "reader_more": "Commercial contract between SpaceX and Luxembourg-based integrator Space Cargo for a 2028 re-entry mission. It is not admitted to the Radar: a commercial customer contract for a US company's re-entry service; the European link is only the customer's Luxembourg base, with no European policy, funding or capability decision.",
+      "deep_analysis": {
+        "work_kind": "business news",
+        "research_question": "",
+        "main_finding": "Commercial contract between SpaceX and Luxembourg-based integrator Space Cargo for a 2028 re-entry mission.",
+        "method_or_basis": "Reuters wire report quoting Space Cargo's CEO.",
+        "qualification": "Planned 2028 mission; depends on Starship's first commercial flight.",
+        "radar_relevance": "Company deal of a US provider; weak European R&I connection.",
+        "confidence": "medium",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Google News redirect link decoded via Google's article-decoding endpoint to https://www.reuters.com/business/media-telecom/spacexs-first-starfall-customer-is-european-mission-integrator-space-cargo-2026-09-15/; reuters.com 403, reader proxy blocked."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News/web item; no DOI exists for this work."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Search for the headline found the verbatim Reuters wire copy (By Joey Roulette, WASHINGTON, Sept 15) on whbl.com and thestar.com.my; full text retrieved."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "syndicated_wire_copy",
+            "url": "https://whbl.com/?p=1006975",
+            "title": "SpaceX's first Starfall customer is European mission integrator Space Cargo (Reuters via WHBL)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verbatim Reuters syndication."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_OFF_SCOPE",
+        "reason": "A commercial customer contract for a US company's re-entry service; the European link is only the customer's Luxembourg base, with no European policy, funding or capability decision."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-19T15:58:55Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMitAFBVV95cUxPSGJ1Zjd4dTJCeHlCN2hMcm9LR3phUHNEaWtGRDNsMDlzb0VybEVNV0tiN0h6OE1TRDF2Q290c3NYcTZOc0E1LVMxMDhSbzM0MlhEblBnUkxldkR0ZFh5a2xlUFVQTU5mMExxaEoxbk03NENWS19PODJReDk5akEwcTlJbTB0RXZ2N3I1ZDNnc29IU0hDdUxqaEVDVnpLOFE2d3VWTEdFVS0zRnotSEM3eXFNOGU?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "1d5e2de2",
+      "identity_hash": "e90ad923a3c85838",
+      "reader_title": "EU and Canada announce a tech alliance to pool AI safety work and compute",
+      "reader_what": "Von der Leyen hailed an EU-Canada tech alliance; Carney urged joining forces on AI safety and compute.",
+      "reader_why": "Pooling compute and testing regimes could give two second-tier AI powers more weight on global rules.",
+      "reader_more": "In her State of the Union, the Commission President backed Canada and the EU jointly building tests and monitoring for powerful AI models. Canada's Prime Minister told the European Parliament the two sides should pool compute. Politico notes existing links: an EU-Canada AI collaboration signed last year and the April merger of Canada's Cohere with Germany's Aleph Alpha. Details of the alliance were not yet set out.",
+      "deep_analysis": {
+        "work_kind": "news analysis",
+        "research_question": "",
+        "main_finding": "EU and Canadian leaders publicly committed to an AI-focused tech alliance covering safety testing and compute pooling.",
+        "method_or_basis": "Politico Europe report of the State of the Union and Carney's address.",
+        "qualification": "Announced intention; no agreement text or budget reported.",
+        "radar_relevance": "International digital/AI partnership shaping European AI capability and governance.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Google News redirect link decoded via Google's article-decoding endpoint to https://www.politico.eu/article/the-second-democratic-rail-inside-the-eu-and-canadas-team-up-on-an-ai-alternative/; direct fetch blocked by egress policy; public page reader returned the full Politico Europe article (page title 'Why the EU and Canada are betting on an AI middle powers play'). URL slug reflects an earlier headline."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News/web item; no DOI exists for this work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.politico.eu/article/the-second-democratic-rail-inside-the-eu-and-canadas-team-up-on-an-ai-alternative/",
+            "title": "Why the EU and Canada are betting on an AI 'middle powers' play (Politico Europe)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Headline, outlet and date match; body text read in full."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "Reports von der Leyen announcing an EU-Canada tech alliance in the State of the Union and Carney proposing to pool compute and AI safety work: an international R&I and technology partnership development."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-19T15:58:56Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2",
+      "claims": [
+        {
+          "object": "digital.international_partnerships",
+          "secondary_objects": [
+            "ai.governance",
+            "compute.capacity"
+          ],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "collaborates",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-09-16",
+          "scope": {
+            "level": "eu",
+            "countries": [
+              "CA"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Announced intention; no agreement text or budget reported.",
+          "text": "Commission President von der Leyen announced an EU-Canada tech alliance including joint AI model testing and monitoring.",
+          "confidence": "medium",
+          "record_key": "link:https://news.google.com/rss/articles/CBMitAFBVV95cUxPSGJ1Zjd4dTJCeHlCN2hMcm9LR3phUHNEaWtGRDNsMDlzb0VybEVNV0tiN0h6OE1TRDF2Q290c3NYcTZOc0E1LVMxMDhSbzM0MlhEblBnUkxldkR0ZFh5a2xlUFVQTU5mMExxaEoxbk03NENWS19PODJReDk5akEwcTlJbTB0RXZ2N3I1ZDNnc29IU0hDdUxqaEVDVnpLOFE2d3VWTEdFVS0zRnotSEM3eXFNOGU?oc=5",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:e90ad923a3c85838:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.euronews.com/next/2026/09/15/enter-the-hoax-buster-trump-dismisses-ai-concerns-as-europe-and-china-fret": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "27a22398",
+      "identity_hash": "3c4b158c02f603aa",
+      "reader_title": "Trump dismisses AI extinction fears as a 'hoax'",
+      "reader_what": "Trump rejected calls to slow AI in social-media posts as Europe and China urged guardrails.",
+      "reader_more": "US President dismissed AI-risk warnings; article mentions European and Chinese calls for guardrails. It is not admitted to the Radar: about US presidential statements dismissing AI risk; Europe is mentioned only as a contrasting reaction, with no European decision or R&I development.",
+      "deep_analysis": {
+        "work_kind": "news report",
+        "research_question": "",
+        "main_finding": "US President dismissed AI-risk warnings; article mentions European and Chinese calls for guardrails.",
+        "method_or_basis": "Euronews report of Truth Social posts.",
+        "qualification": "US political statements.",
+        "radar_relevance": "Off-scope for Strand C: no European development.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.euronews.com/next/2026/09/15/enter-the-hoax-buster-trump-dismisses-ai-concerns-as-europe-and-china-fret; full Euronews article retrieved (about 4,100 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News/web item; no DOI exists for this work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euronews.com/next/2026/09/15/enter-the-hoax-buster-trump-dismisses-ai-concerns-as-europe-and-china-fret",
+            "title": "Enter the hoax buster: Trump dismisses AI concerns as Europe and China fret (Euronews)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical record for the matching Google News wrapper."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_OFF_SCOPE",
+        "reason": "About US presidential statements dismissing AI risk; Europe is mentioned only as a contrasting reaction, with no European decision or R&I development."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-19T15:58:56Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMirgFBVV95cUxOX2c3UFlUVUZxUm9MVUZMeGxuSURsX0RsNC1KSDVCZTZURnNWZVAwbUcwWk5sNUdTbGdzTEZ6MWRoV1RtRVF3eDF2bnp3aF9MNF9mR0dqd0NkTThNdVFQSzBqUGZfRFlJYkY1ZFh0VEF4NkN2QVFKMlUtUXo4eUFxUVBpUTBzbi1WN1pJWTcyZFBSY1dIcXROcjhiQ0d5TFJleUdZc0dwUmVnTlBPWHc?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "963beac0",
+      "identity_hash": "31a7f360f70292f0",
+      "reader_title": "EU to propose limits on social media and AI chatbots for children under 15",
+      "reader_what": "A leaked Commission document shows a Kids Act with age-based access limits and platform fees.",
+      "reader_more": "Commission to propose age-tiered restrictions on social media, video platforms, AI chatbots and games for minors. It is not admitted to the Radar: child online-safety consumer regulation (EU Kids Act age limits); it does not concern research, innovation or technological capability.",
+      "deep_analysis": {
+        "work_kind": "news report of leaked proposal",
+        "research_question": "",
+        "main_finding": "Commission to propose age-tiered restrictions on social media, video platforms, AI chatbots and games for minors.",
+        "method_or_basis": "Reuters report of a Commission document.",
+        "qualification": "Pre-publication proposal; legislative process pending.",
+        "radar_relevance": "Consumer child-protection rule; outside Radar R&I scope.",
+        "confidence": "medium",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Google News redirect link decoded via Google's article-decoding endpoint to https://www.reuters.com/legal/litigation/eu-is-set-propose-ban-social-media-ai-chatbots-under-15s-2026-09-14/; reuters.com 403, reader proxy blocked."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News/web item; no DOI exists for this work."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Search for the headline found the verbatim Reuters wire copy (BRUSSELS, Sept 14) on thestar.com.my and gmanetwork.com; full text retrieved."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "syndicated_wire_copy",
+            "url": "https://www.thestar.com.my/tech/tech-news/2026/09/15/eu-is-set-to-propose-ban-on-social-media-and-ai-chatbots-for-under-15s",
+            "title": "EU is set to propose ban on social media and AI chatbots for under-15s (Reuters via The Star)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verbatim Reuters syndication of a leaked Commission document report."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_OFF_SCOPE",
+        "reason": "Child online-safety consumer regulation (EU Kids Act age limits); it does not concern research, innovation or technological capability."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-19T15:58:56Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiugFBVV95cUxPWngxeGJYZ3ZCV21vN2lRRmxTRjNDQkVxS0JIVzBfSEhzb2RXTVFEZVd0Y0M1YmFzeV9hOE9BZmRpb0dELWxoWXg0NXhaSFJFX09kOG1HT1VBTUFuenFtMWI0M2FZa1UzV2V5S3oyUTJobE5ycmxZR2RCbmxUZ25uMXUtdTZ4dnRxYVRVUnBZSzZ4NlBTWDlnUFVoaWx2UzcyRk9zWk9URUpTZXlpZHcxMjY2WWVFQlJrWUE?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "11151dc1",
+      "identity_hash": "215316aab84a295d",
+      "reader_title": "Five Horizon Europe co-funded partnerships open calls worth about €200 million",
+      "reader_what": "Water, blue economy, biodiversity, forests and urban-transition partnerships opened calls in September 2026.",
+      "reader_why": "Eligibility depends on whether a country's funders join each call, shaping who can take part.",
+      "reader_more": "Co-funded partnerships pool Horizon Europe money (30-50%) with national funders and fund only transnational projects. Budgets are €34m (Water4All), €38m (blue economy), €40m (Biodiversa+), €40m (the first forests call) and €49m plus EU top-up (urban transitions). Pre-proposals are due in November 2026. Each call has its own list of participating countries.",
+      "deep_analysis": {
+        "work_kind": "funding news roundup",
+        "research_question": "",
+        "main_finding": "Five co-funded partnership calls opened with stated budgets and November 2026 pre-proposal deadlines.",
+        "method_or_basis": "Science|Business summary of official call information.",
+        "qualification": "Budgets as reported; eligibility varies by country and call.",
+        "radar_relevance": "Horizon Europe funding instruments and national co-funding.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "Google News redirect link decoded via Google's article-decoding endpoint to https://sciencebusiness.net/news/r-d-funding/horizon-europe/funding-radar-five-horizon-europe-co-funding-opportunities; direct fetch blocked by Cloudflare challenge."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News/web item; no DOI exists for this work."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Search for the exact title surfaced the Science|Business page; fetched page carries full article text (five partnership calls with budgets and deadlines), dated 15 Sep 2026."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://sciencebusiness.net/news/r-d-funding/horizon-europe/funding-radar-five-horizon-europe-co-funding-opportunities",
+            "title": "Funding Radar: Five Horizon Europe co-funding opportunities (Science|Business)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full text available in the publisher page metadata; title, author (Goda Naujokaitytė) and date confirmed."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "Reports concrete new Horizon Europe co-funded partnership calls opening in September 2026 with budgets (€34m-€49m each) and deadlines: real funding-instrument developments."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-19T15:58:56Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2",
+      "claims": [
+        {
+          "object": "funding.route",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Horizon Europe co-funded partnerships",
+            "class": "eu_body"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "call_open",
+          "status_date": "2026-09",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Budgets as reported; eligibility varies by country and call.",
+          "text": "Five Horizon Europe co-funded partnerships opened calls in September 2026 with budgets between €34 million and €49 million.",
+          "confidence": "medium",
+          "status_date_precision": "month",
+          "record_key": "link:https://news.google.com/rss/articles/CBMiugFBVV95cUxPWngxeGJYZ3ZCV21vN2lRRmxTRjNDQkVxS0JIVzBfSEhzb2RXTVFEZVd0Y0M1YmFzeV9hOE9BZmRpb0dELWxoWXg0NXhaSFJFX09kOG1HT1VBTUFuenFtMWI0M2FZa1UzV2V5S3oyUTJobE5ycmxZR2RCbmxUZ25uMXUtdTZ4dnRxYVRVUnBZSzZ4NlBTWDlnUFVoaWx2UzcyRk9zWk9URUpTZXlpZHcxMjY2WWVFQlJrWUE?oc=5",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:215316aab84a295d:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMitwFBVV95cUxQMEJidFNRQ1I5MGgydDNteUNFSGpyc0R6WEZ5RGRnQ3JBLXZfdVdnUHVpZVJxaG8zMFlIMDNucm5UM3huWVNYa1FZNmtGZk03VEY2aHJFSHBvU0ZVN1JydTVmTko0UHNJc0Z3N0d2UTU3aW5VWUtma3hiNDR3X2FybnJpTW5iMS1VYUU1ZmhLdkY4ZzlCYzVrZW1TbUR5R0VjTmdTWjdTd3UzUVh2Q2NuTC1ObEt1QU0?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "dbdb112b",
+      "identity_hash": "0335942442b5f405",
+      "reader_title": "Lagarde warns Europe risks being cut off from AI it imports",
+      "reader_what": "Lagarde said Europe must produce AI, as dependence on US technology gives outsiders unprecedented leverage.",
+      "reader_why": "If access to imported AI were withdrawn or repriced, every sector relying on it would be hit at once.",
+      "reader_more": "In a Vienna speech, the ECB President said European firms mostly import AI from abroad, especially the US. She said Europe's data-centre shortfall is projected to grow more than sixfold within a decade. She called for more European computing capacity and models 'good enough' for most tasks running on European infrastructure. She said fast AI adoption could raise productivity by up to 4% over a decade.",
+      "deep_analysis": {
+        "work_kind": "news report of policy speech",
+        "research_question": "",
+        "main_finding": "Lagarde argues AI dependence is strategic leverage over Europe and calls for European compute and models.",
+        "method_or_basis": "Reuters report of Lagarde's 14 Sept 2026 Vienna speech.",
+        "qualification": "Advocacy by the ECB President; productivity and capacity figures are her projections.",
+        "radar_relevance": "Technological sovereignty, compute capacity and AI dependence.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Google News redirect link decoded via Google's article-decoding endpoint to https://www.reuters.com/business/finance/europe-facing-unprecedented-risk-being-cut-off-ai-lagarde-warns-2026-09-14/; reuters.com returned HTTP 403 and the reader proxy was blocked."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News/web item; no DOI exists for this work."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Search for the headline found the verbatim Reuters wire copy (FRANKFURT, Sept 14; Koranyi and Murphy) on 933thedrive.com and Investing.com; full text retrieved."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "syndicated_wire_copy",
+            "url": "https://www.933thedrive.com/2026/09/14/europe-facing-unprecedented-risk-of-being-cut-off-from-ai-lagarde-warns/",
+            "title": "Europe facing unprecedented risk of being cut off from AI, Lagarde warns (Reuters)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verbatim Reuters text; consistent with Euronews coverage in record 3."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "ECB President's policy speech framing dependence on imported AI as strategic leverage over Europe and calling for European compute and 'good enough' models: a substantive high-level policy position on technological sovereignty."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-19T15:58:56Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2",
+      "claims": [
+        {
+          "object": "compute.capacity",
+          "secondary_objects": [
+            "digital.sovereignty"
+          ],
+          "actor": {
+            "name": "Christine Lagarde, European Central Bank",
+            "class": "eu_body"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "intention",
+          "status_date": "2026-09-14",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "Advocacy by the ECB President; productivity and capacity figures are her projections.",
+          "text": "Lagarde called for more European computing capacity and European-run AI models, citing a data-centre gap projected to grow sixfold within a decade.",
+          "confidence": "medium",
+          "record_key": "link:https://news.google.com/rss/articles/CBMitwFBVV95cUxQMEJidFNRQ1I5MGgydDNteUNFSGpyc0R6WEZ5RGRnQ3JBLXZfdVdnUHVpZVJxaG8zMFlIMDNucm5UM3huWVNYa1FZNmtGZk03VEY2aHJFSHBvU0ZVN1JydTVmTko0UHNJc0Z3N0d2UTU3aW5VWUtma3hiNDR3X2FybnJpTW5iMS1VYUU1ZmhLdkY4ZzlCYzVrZW1TbUR5R0VjTmdTWjdTd3UzUVh2Q2NuTC1ObEt1QU0?oc=5",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:0335942442b5f405:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMixAFBVV95cUxNMUxwdHN5dDgxNEpDZFYzNVJtZFFrSHhmRkYweEpkUVd5N3BuY0UxQ0gtYkl4bGZIRWVQLUhlbG5PVE9vT0FBSlZBWFplM3RVLUhxbkoxaUtjcC1xdXdEam1IZHFPbUlDUVB5Y2VXNVRRX2tEY05sRDYtbVFlY0hycG9NRXgtZ2FGd1NIZ1dTekhYN3VwUE0yUkpDZHVYbmdvNXEwZDJkLW5KLUNDODBaZWU5VHk4OThNZi05MEVsN1RFMmJP?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "520af217",
+      "identity_hash": "7d008c4353e3c35f",
+      "reader_title": "Germany says halting AI development is not a 'viable option' for Europe",
+      "reader_what": "Germany's digital ministry rejected an AI pause and backed G7 coordination involving the US and China.",
+      "reader_why": "Germany ties digital sovereignty to continued AI development while seeking global oversight of risks.",
+      "reader_more": "Germany's digital affairs ministry responded to Anthropic CEO Dario Amodei's call to slow frontier AI. It said strengthening Europe's digital sovereignty requires more AI development. It said AI systems escaping test environments would be an entirely new threat needing a policy response. Berlin is raising international AI governance at the G7; Spain's digital minister discussed a possible international agreement.",
+      "deep_analysis": {
+        "work_kind": "news report of government statement",
+        "research_question": "",
+        "main_finding": "German government rejects halting AI development and pushes G7-level AI governance coordination.",
+        "method_or_basis": "Reuters report of ministry spokesperson statements.",
+        "qualification": "Statements of position; no new instrument adopted.",
+        "radar_relevance": "Member-state AI governance and technological sovereignty stance.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Google News redirect link decoded via Google's article-decoding endpoint to https://www.reuters.com/legal/litigation/germany-says-halting-ai-development-not-viable-calls-us-china-involvement-2026-09-14/; reuters.com returned HTTP 403 and the reader proxy was blocked."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News/web item; no DOI exists for this work."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Search for the headline found the verbatim Reuters wire copy (By Friederike Heine, BERLIN/BRUSSELS/LONDON, Sept 14) on kfgo.com and whbl.com; full text retrieved."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "syndicated_wire_copy",
+            "url": "https://kfgo.com/?p=1351832",
+            "title": "Germany says halting AI development not 'viable' as Europe weighs safety of new tech (Reuters)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verbatim Reuters text. Decoded URL slug ('calls-us-china-involvement') matches the article content."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "A member-state government states its AI policy position (no halt; sovereignty needs AI development) and says it is raising international AI governance at the G7."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-19T15:58:56Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2",
+      "claims": [
+        {
+          "object": "ai.governance",
+          "secondary_objects": [
+            "digital.sovereignty"
+          ],
+          "actor": {
+            "name": "German Federal Ministry for Digital Affairs",
+            "class": "member_state"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "intention",
+          "status_date": "2026-09-14",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "DE"
+            ]
+          },
+          "kind": "advocacy",
+          "qualification": "Statements of position; no new instrument adopted.",
+          "text": "Germany's digital ministry said halting AI development is not viable for Europe and that it is raising international AI governance at the G7.",
+          "confidence": "medium",
+          "record_key": "link:https://news.google.com/rss/articles/CBMixAFBVV95cUxNMUxwdHN5dDgxNEpDZFYzNVJtZFFrSHhmRkYweEpkUVd5N3BuY0UxQ0gtYkl4bGZIRWVQLUhlbG5PVE9vT0FBSlZBWFplM3RVLUhxbkoxaUtjcC1xdXdEam1IZHFPbUlDUVB5Y2VXNVRRX2tEY05sRDYtbVFlY0hycG9NRXgtZ2FGd1NIZ1dTekhYN3VwUE0yUkpDZHVYbmdvNXEwZDJkLW5KLUNDODBaZWU5VHk4OThNZi05MEVsN1RFMmJP?oc=5",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:7d008c4353e3c35f:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMingFBVV95cUxPWmdZMFlVNkowMjJDbVpUX0FkYnhUY1lZMjdBY2pCTkxpbG9id01fbEpNRGpfX1d5VDJOdHBDZ2VmR25VZzk3elk3aGVGYTJWWjdFMWhUUkN0clptOEY0My1Tc2FuLWpGTWJWeVBZYkN2TmpGWDZ3NmtyNFA3dWZVeFpQVkR0Z0liMUlOSGlycGtlNjdKXzF3WktxSWVaQQ?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "f687e014",
+      "identity_hash": "f7653f58699aeaf9",
+      "reader_title": "Euractiv editorial: AI Act's safety rules look vindicated by recent AI incidents",
+      "reader_what": "Editorial argues the AI Act's incident-reporting rules matter after reported autonomous AI agent incidents.",
+      "reader_more": "Argues AI Act enforcement should be applied firmly. It is not admitted to the Radar: an editorial arguing the AI Act's incident-reporting duties are vindicated; opinion, not a new development.",
+      "deep_analysis": {
+        "work_kind": "editorial",
+        "research_question": "",
+        "main_finding": "Argues AI Act enforcement should be applied firmly.",
+        "method_or_basis": "Publisher text.",
+        "qualification": "Opinion.",
+        "radar_relevance": "Commentary; fails Strand C.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Google News redirect link decoded via Google's article-decoding endpoint to https://www.euractiv.com/opinion/editors-choice-ai-act-has-come-of-age-and-not-a-moment-too-soon/; direct fetch blocked by egress policy; reader returned full Euractiv opinion text headed 'Editors' Choice'."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News/web item; no DOI exists for this work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euractiv.com/opinion/editors-choice-ai-act-has-come-of-age-and-not-a-moment-too-soon/",
+            "title": "Editors' Choice: AI Act has come of age and not a moment too soon (Euractiv)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Opinion section URL; editorial argument."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_OPINION_NOT_DEVELOPMENT",
+        "reason": "An editorial arguing the AI Act's incident-reporting duties are vindicated; opinion, not a new development."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-19T15:58:56Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMi7AFBVV95cUxQa3BxQUFSUmhkTUptNEhRQV9sRF85V3pfdUdlekVRRVpSWDlZYTI3a1JlbXJXb3ZlU1ZBcUQxSFhPVGtIR00yLWxMSjFSRTFtWGgxUWVKTXB4ZHFlTGo5V192UUljZmFSTjkxQkVkUUI3LWxSMVFfM1cxNW9tRC1lU2xFM3BVeW5fU2E0NmU4RWRRemVtYURRUU5oVk9oV1FKMVl4UlFRUnc5ZlBxTWlOWlRIcmlNRGlvSkxSa0U3LTZ4T1JFejA5Nm1BeEM1MTZpV08zVXNSQUNibnZlTU1KVHgzSWxGbHBDWlVucw?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "e5dc7517",
+      "identity_hash": "3e087d51ce79b2e3",
+      "reader_title": "EU TalentOn 2026 names winning early-career research teams",
+      "reader_what": "100 young researchers competed on EU Mission challenges; RhizoSentinel soil biosensor won the Grand Jury Prize.",
+      "reader_more": "Prize winners of a Commission-run research talent event. It is not admitted to the Radar: results of a promotional competition event (€80,000 prize pool for early-career teams); no policy, funding-instrument or programme change.",
+      "deep_analysis": {
+        "work_kind": "event results announcement",
+        "research_question": "",
+        "main_finding": "Prize winners of a Commission-run research talent event.",
+        "method_or_basis": "Commission news item.",
+        "qualification": "Event outcome.",
+        "radar_relevance": "Promotional event; fails Strand C.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Google News redirect link decoded via Google's article-decoding endpoint to https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/europes-young-research-talent-takes-cancer-climate-and-more-2026-09-14_en; full European Commission R&I news item on EU TalentOn 2026 winners retrieved."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News/web item; no DOI exists for this work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_page",
+            "url": "https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/europes-young-research-talent-takes-cancer-climate-and-more-2026-09-14_en",
+            "title": "Europe's young research talent takes on cancer, climate and more (European Commission)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official Commission news item."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_EVENT_LISTING",
+        "reason": "Results of a promotional competition event (€80,000 prize pool for early-career teams); no policy, funding-instrument or programme change."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-19T15:58:56Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMihAFBVV95cUxOaWhxNEU5SFVSd1U0ZnJyUXlHb0xsZExQYVk3NXFBZ0M5OWt0RmszU3AtdEFPQTNIMlBGOTROYjFZNElKXzRTNjZDemdsMjVhNWhROGQ5ZVgxQWJDME42M0xRaExYVG5CWGFBSE85aEJBZjFCNC10UnhtNVQtOFZIQnVlV2o?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "7022d5ba",
+      "identity_hash": "db43b515cb94b182",
+      "reader_title": "Commission announces European AI Innovation Month, 14 October-17 November 2026",
+      "reader_what": "Programme page for a month of AI events including summits in Dublin and Brussels.",
+      "reader_more": "Event series listing. It is not admitted to the Radar: event programme page for a series of summits; no new policy decision or funding instrument.",
+      "deep_analysis": {
+        "work_kind": "event page",
+        "research_question": "",
+        "main_finding": "Event series listing.",
+        "method_or_basis": "Commission page.",
+        "qualification": "Events.",
+        "radar_relevance": "Event page; fails Strand C.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Google News redirect link decoded via Google's article-decoding endpoint to https://digital-strategy.ec.europa.eu/en/policies/european-ai-innovation-month; Commission digital-strategy page describing the European AI Innovation Month (14 Oct-17 Nov 2026) and its three flagship summits."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News/web item; no DOI exists for this work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_page",
+            "url": "https://digital-strategy.ec.europa.eu/en/policies/european-ai-innovation-month",
+            "title": "European AI Innovation Month (EU Digital Strategy)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Event programme page."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_EVENT_LISTING",
+        "reason": "Event programme page for a series of summits; no new policy decision or funding instrument."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-19T15:58:56Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMidkFVX3lxTE5QNlR6T3VTcXlWYzRCX0tmNjRpN1RKbEk2bXVUUmxnY0hIWDNBLThqMUpaeU04aXpsbWQtSmxVenpXLTVVRjMzNEszZERBdmxrTFkyQzBTbVVINEpmNnZfOUdpd0h6TXh6ZVNoZVl4MGJJUGMxamc?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "d72b6270",
+      "identity_hash": "96e776573bb1f8d5",
+      "reader_title": "'Unrestricted' AI chatbots expose gaps in how the EU AI Act can be enforced",
+      "reader_what": "Euractiv found paid services selling safeguard-free AI; German enforcers say removing guardrails is not itself illegal.",
+      "reader_why": "Rules aimed at model developers may not reach anonymous resellers who strip out safety features.",
+      "reader_more": "Euractiv found websites selling access to AI with safety filters removed, one reportedly based on a modified xAI Grok model. Germany's AI Act enforcement body said evading safeguards in someone else's model does not itself break the Act. It said offering an AI system that strongly manipulates people is banned. Enforcing rules against anonymous crypto-paid services remains difficult.",
+      "deep_analysis": {
+        "work_kind": "investigative news report",
+        "research_question": "",
+        "main_finding": "Services selling guardrail-free AI operate in Europe, and German enforcers say removing safeguards is not per se an AI Act breach.",
+        "method_or_basis": "Euractiv investigation with regulator and expert statements.",
+        "qualification": "Regulator interpretation given informally to a journalist; no enforcement action reported.",
+        "radar_relevance": "AI Act implementation and enforcement capacity.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Google News redirect link decoded via Google's article-decoding endpoint to https://www.euractiv.com/news/ai-jailbreakers-test-eu-safety-rules/; direct fetch blocked by egress policy; reader returned full Euractiv news investigation."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News/web item; no DOI exists for this work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euractiv.com/news/ai-jailbreakers-test-eu-safety-rules/",
+            "title": "AI jailbreakers test EU safety rules (Euractiv)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Investigative news article with statements from Germany's AI Act enforcement body."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "Documents a concrete AI Act enforcement gap: German enforcers told Euractiv that stripping safeguards from another's model is not itself a breach, while manipulative systems are banned."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-19T15:58:57Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2",
+      "claims": [
+        {
+          "object": "ai.governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "German AI Act market surveillance authority",
+            "class": "member_state"
+          },
+          "mechanism": "regulates",
+          "direction": "becomes_contested",
+          "status": "in_force",
+          "status_date": "2026-09",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "DE"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "Regulator interpretation given informally to a journalist; no enforcement action reported.",
+          "text": "Germany's AI Act enforcer said removing safeguards from another developer's model does not itself breach the AI Act.",
+          "confidence": "medium",
+          "status_date_precision": "month",
+          "record_key": "link:https://news.google.com/rss/articles/CBMidkFVX3lxTE5QNlR6T3VTcXlWYzRCX0tmNjRpN1RKbEk2bXVUUmxnY0hIWDNBLThqMUpaeU04aXpsbWQtSmxVenpXLTVVRjMzNEszZERBdmxrTFkyQzBTbVVINEpmNnZfOUdpd0h6TXh6ZVNoZVl4MGJJUGMxamc?oc=5",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:96e776573bb1f8d5:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiqwFBVV95cUxQVWlEZ1FwN0VjNnNsR0N2eHJ6UzVIbXgwZGJXTVlkV0dCRm5uY2dCZ0lxV1NWV2U2aUZTdEx3TzVuUURYSGRDSVFFc1hXd214Tjhfd1AxMEk1bVI3WElReTd4ckZpWnYtQ0F0cXJUNjVfNjU5ektYLTl6bGFwVjZybGZDYk9XWkx3bFVVRXVCT1hiWWozWWIyeEYzT0tOTVpxd0JjblZsZkhLUk0?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "a09e53bc",
+      "identity_hash": "cb0a53e50509e006",
+      "reader_title": "Sponsored Euractiv piece: Baltic energy executives argue for technology-neutral decarbonisation",
+      "reader_what": "Executives at a Warsaw conference argue Europe should back hydrogen, nuclear and other options together.",
+      "reader_more": "Industry views on technology neutrality. It is not admitted to the Radar: sponsored special-report content relaying energy executives' views; not an independent report of a development.",
+      "deep_analysis": {
+        "work_kind": "sponsored content",
+        "research_question": "",
+        "main_finding": "Industry views on technology neutrality.",
+        "method_or_basis": "Sponsored text.",
+        "qualification": "Commercially sponsored.",
+        "radar_relevance": "Fails Strand C (sponsored opinion).",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Google News redirect link decoded via Google's article-decoding endpoint to https://www.euractiv.com/news/from-hydrogen-to-smrs-europe-weighs-a-more-pragmatic-path-to-decarbonisation/; reader returned full text, labelled by Euractiv as 'Sponsored content' in its special report 'Powering Europe through Baltic energy cooperation'."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News/web item; no DOI exists for this work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euractiv.com/news/from-hydrogen-to-smrs-europe-weighs-a-more-pragmatic-path-to-decarbonisation/",
+            "title": "From hydrogen to SMRs, Europe weighs a more pragmatic path to decarbonisation (Euractiv, sponsored)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Page carries a commercial sponsorship disclosure."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_SPONSORED_CONTENT",
+        "reason": "Sponsored special-report content relaying energy executives' views; not an independent report of a development."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-19T15:58:57Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiygFBVV95cUxNcUNLTFFnWnJya2pmR1Y1djlQZXlsQjBtazY1QXBvOWJoOXVMeUJrOW1lX3FRWU5tMlpQSXByNGkyQjVsQjBPRGVlNVlBRzRaNFJyT2xVb1FmazdVQnJqelZpa3QxWHlzNkhSdVNxQnVMR2dUVWM4dUJtMUs4Nnd2amsyeVRBQUQ3VUd2TjE0S3ZqYWUxb2EwN1F5bUNRejZpOUV6QUVLUjZLOEFtWFRaZXo2VVA0ZDk2amxBU0dnNFhBVjROWkpVZWt3?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "16775ebd",
+      "identity_hash": "df2af5564337b2be",
+      "reader_title": "E3G advertises senior researcher post on EU industrial transition",
+      "reader_what": "Job advert for a Brussels/Berlin role on ETS reform, electrification and EU funding.",
+      "reader_more": "Recruitment notice. It is not admitted to the Radar: vacancy listing for a think-tank research post; not a development.",
+      "deep_analysis": {
+        "work_kind": "job advertisement",
+        "research_question": "",
+        "main_finding": "Recruitment notice.",
+        "method_or_basis": "Listing text.",
+        "qualification": "Advertisement.",
+        "radar_relevance": "Vacancy page; excluded.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Google News redirect link decoded via Google's article-decoding endpoint to https://jobs.euractiv.com/jobs/senior-researcher-eu-industry-transition-clean-economy-brussels-or-berlin-brussels-hybrid-e3g-asbl/; reader returned the full Euractiv Jobs listing for an E3G Senior Researcher, EU Industry Transition."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News/web item; no DOI exists for this work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://jobs.euractiv.com/jobs/senior-researcher-eu-industry-transition-clean-economy-brussels-or-berlin-brussels-hybrid-e3g-asbl/",
+            "title": "Senior Researcher, EU Industry Transition, Clean Economy (Euractiv Jobs)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Job advertisement."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_JOB_LISTING",
+        "reason": "Vacancy listing for a think-tank research post; not a development."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-19T15:58:57Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-09-19T07:43:33Z"
+  "claims_updated_at": "2026-09-19T15:58:57Z"
 }

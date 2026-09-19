@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-09-19T07:43:33Z",
+  "updated_at": "2026-09-19T15:58:57Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -9985,6 +9985,144 @@
       ],
       "updated_at": "2026-09-19T07:43:33Z",
       "deep_scan_package_id": "worker-a-20260919T062041Z-0349bca5eaa7"
+    },
+    "historical:id:63a0b96383dbb86a": {
+      "fields": {
+        "date": "2020-10-19",
+        "type": "event announcement"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Page states the symposium ran 19-23 October 2020; scanner date 2020-01-01 is a placeholder and the item is an event listing, not a report.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.acatech.de/termin/uk-de-energy-systems-symposium-accelerating-net-zero-through-policy-research-collaboration-2/"
+      ],
+      "updated_at": "2026-09-19T15:58:54Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2"
+    },
+    "link:https://www.clean-hydrogen.europa.eu/document/download/5ccb5de8-a8e2-4eba-ae52-91646fc88125_en?filename=Clean%20Hydrogen_Synergies%20strategy_June2026.pdf": {
+      "fields": {
+        "date": "2026-06",
+        "type": "official strategy document"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Document history and filename ('Synergies strategy_June2026') date the final version to June 2026; scanner used the ingest date 2026-09-16.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://www.clean-hydrogen.europa.eu/document/download/5ccb5de8-a8e2-4eba-ae52-91646fc88125_en?filename=Clean%20Hydrogen_Synergies%20strategy_June2026.pdf"
+      ],
+      "updated_at": "2026-09-19T15:58:55Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2"
+    },
+    "link:https://news.google.com/rss/articles/CBMiY0FVX3lxTE9wLWZURlY1Mnlzd29QTE11Y01EMXlLM2tXR1Z4eW9aUEUzRnlvSnhOQ3h1NmxGMlNqQ0JPWDdsbWtCYkk5MndvMDVzV3paeVh5TFljQWdCX1hlMkZpNEFPRnlzaw?oc=5": {
+      "fields": {
+        "type": "institutional homepage"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "URL is the EC R&I homepage, not an article.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://research-and-innovation.ec.europa.eu/index_en"
+      ],
+      "updated_at": "2026-09-19T15:58:55Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2"
+    },
+    "link:https://news.google.com/rss/articles/CBMihwFBVV95cUxPSHlNNlgyVnFySFFPMVhoWFcycUY4aF9FTTBRUmFxYmRVZ1Z4X1Rrci1uVW9WYkUxbUFYVmtYMF9rTHpQaUFyUDlkeHlrakExc1FvUWlOTFpXZU5TODN4R2E4cHVpajNMTm9tdTUzM1ltNXFKUlhsM0FjMHYtUEpTWmNSX0JENnM?oc=5": {
+      "fields": {
+        "type": "job advertisement",
+        "date": "2026-09-15"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Science|Business page is a jobs listing dated 15 Sep 2026.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://sciencebusiness.net/jobs/ucd-hiring-join-europes-hub-research-excellence"
+      ],
+      "updated_at": "2026-09-19T15:58:55Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2"
+    },
+    "link:https://news.google.com/rss/articles/CBMiugFBVV95cUxPWngxeGJYZ3ZCV21vN2lRRmxTRjNDQkVxS0JIVzBfSEhzb2RXTVFEZVd0Y0M1YmFzeV9hOE9BZmRpb0dELWxoWXg0NXhaSFJFX09kOG1HT1VBTUFuenFtMWI0M2FZa1UzV2V5S3oyUTJobE5ycmxZR2RCbmxUZ25uMXUtdTZ4dnRxYVRVUnBZSzZ4NlBTWDlnUFVoaWx2UzcyRk9zWk9URUpTZXlpZHcxMjY2WWVFQlJrWUE?oc=5": {
+      "fields": {
+        "date": "2026-09-15"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Publisher page dates the article 15 Sep 2026; scanner timestamp 14 Sep 16:09Z is an ingest artefact.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://sciencebusiness.net/news/r-d-funding/horizon-europe/funding-radar-five-horizon-europe-co-funding-opportunities"
+      ],
+      "updated_at": "2026-09-19T15:58:56Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2"
+    },
+    "link:https://news.google.com/rss/articles/CBMingFBVV95cUxPWmdZMFlVNkowMjJDbVpUX0FkYnhUY1lZMjdBY2pCTkxpbG9id01fbEpNRGpfX1d5VDJOdHBDZ2VmR25VZzk3elk3aGVGYTJWWjdFMWhUUkN0clptOEY0My1Tc2FuLWpGTWJWeVBZYkN2TmpGWDZ3NmtyNFA3dWZVeFpQVkR0Z0liMUlOSGlycGtlNjdKXzF3WktxSWVaQQ?oc=5": {
+      "fields": {
+        "type": "editorial/opinion"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Published in Euractiv's opinion section.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://www.euractiv.com/opinion/editors-choice-ai-act-has-come-of-age-and-not-a-moment-too-soon/"
+      ],
+      "updated_at": "2026-09-19T15:58:56Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2"
+    },
+    "link:https://news.google.com/rss/articles/CBMihAFBVV95cUxOaWhxNEU5SFVSd1U0ZnJyUXlHb0xsZExQYVk3NXFBZ0M5OWt0RmszU3AtdEFPQTNIMlBGOTROYjFZNElKXzRTNjZDemdsMjVhNWhROGQ5ZVgxQWJDME42M0xRaExYVG5CWGFBSE85aEJBZjFCNC10UnhtNVQtOFZIQnVlV2o?oc=5": {
+      "fields": {
+        "type": "event page"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Page is an event programme, not news.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://digital-strategy.ec.europa.eu/en/policies/european-ai-innovation-month"
+      ],
+      "updated_at": "2026-09-19T15:58:56Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2"
+    },
+    "link:https://news.google.com/rss/articles/CBMiqwFBVV95cUxQVWlEZ1FwN0VjNnNsR0N2eHJ6UzVIbXgwZGJXTVlkV0dCRm5uY2dCZ0lxV1NWV2U2aUZTdEx3TzVuUURYSGRDSVFFc1hXd214Tjhfd1AxMEk1bVI3WElReTd4ckZpWnYtQ0F0cXJUNjVfNjU5ektYLTl6bGFwVjZybGZDYk9XWkx3bFVVRXVCT1hiWWozWWIyeEYzT0tOTVpxd0JjblZsZkhLUk0?oc=5": {
+      "fields": {
+        "type": "sponsored content"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Euractiv labels the article as sponsored content.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://www.euractiv.com/news/from-hydrogen-to-smrs-europe-weighs-a-more-pragmatic-path-to-decarbonisation/"
+      ],
+      "updated_at": "2026-09-19T15:58:57Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2"
+    },
+    "link:https://news.google.com/rss/articles/CBMiygFBVV95cUxNcUNLTFFnWnJya2pmR1Y1djlQZXlsQjBtazY1QXBvOWJoOXVMeUJrOW1lX3FRWU5tMlpQSXByNGkyQjVsQjBPRGVlNVlBRzRaNFJyT2xVb1FmazdVQnJqelZpa3QxWHlzNkhSdVNxQnVMR2dUVWM4dUJtMUs4Nnd2amsyeVRBQUQ3VUd2TjE0S3ZqYWUxb2EwN1F5bUNRejZpOUV6QUVLUjZLOEFtWFRaZXo2VVA0ZDk2amxBU0dnNFhBVjROWkpVZWt3?oc=5": {
+      "fields": {
+        "type": "job advertisement"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "URL is a jobs listing.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://jobs.euractiv.com/jobs/senior-researcher-eu-industry-transition-clean-economy-brussels-or-berlin-brussels-hybrid-e3g-asbl/"
+      ],
+      "updated_at": "2026-09-19T15:58:57Z",
+      "deep_scan_package_id": "worker-b-20260919T134030Z-368e0397edf2"
     }
   }
 }
