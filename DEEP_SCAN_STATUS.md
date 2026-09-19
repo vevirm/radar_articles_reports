@@ -6,17 +6,17 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1508** (Main **730** + Historical **778**)
-- Automatic queue still needing V2 verification: **74** (Main **59** + Historical **15**)
+- Authoritative V2 verified: **1509** (Main **731** + Historical **778**)
+- Automatic queue still needing V2 verification: **97** (Main **59** + Historical **38**)
 - Currently assigned to workers: **72** (Main **57** + Historical **15**)
 - Bounded access-recovery retries still eligible: **2**
 - Hands-on verification needed: **69**
-- Automatic queue pending and not yet assigned: **2**
+- Automatic queue pending and not yet assigned: **25**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260919T160709Z-2a1eeef6b404`
+- Current package: `worker-a-20260919T221414Z-2a1eeef6b404`
 - Assigned unresolved records: **36**
   1. `link:https://news.google.com/rss/articles/CBMiwwFBVV95cUxQa2RvcWNWOTFneWVMM1JqaE9SRml3YmdEbnN0cVNlMTR2Z2VJN3IxVzlFR1hlaWhTeUt3RU9fTEtuSTFtaXphYW5Va0prYVNHS3VWWXl5N1JRUXJNTHNISDI0WEViZGxlTDNicUg5QXVMdUY5MFVGOW96aWI0aHNBMnRCNlpONEZiSklGVmZOUC1sTUJyZUhDZmllMG0tSWUxNWdhdUpYRGZuVUpnOGJGREdESURfZnVxNXhnUHkzcDRSem8?oc=5` — Industry urges governments not to cut EU R&I funds
   2. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxONDVIS3NvSzBXVFVvSEY0Zkd5VnRCWVFPaXZ0MlpRQU1aNjhicHM1NUNfNVRId0pIelFVYXpqT21qMy1qY1pPbEl6NVFvX1dSRGNKMjh4RUJSSWl6dE04VmlqYW1XUWcyMXg3dkJScG83bGV4d1RqdEJNZUtPU214T0liRjU3SEhwT1dvcmdCczhOam42THZyQTVNOFYyRWN4c1g3RzQ2YktUYkZjdWRB?oc=5` — INTERVIEW: 'The EU’s Biotech Act is helpful, but not yet the solution,' investors say
@@ -29,7 +29,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260919T160725Z-cf4a3dfef307`
+- Current package: `worker-b-20260919T221428Z-edc39cf90cdc`
 - Assigned unresolved records: **36**
   1. `link:https://news.google.com/rss/articles/CBMic0FVX3lxTE5vNVlYVEQwal9wWXpUTU1LQUhHQTRxNmJ5b0gwcGpja2lPQXVndW1LVmpHTkZLdXlwRDktRUNNR0RTWXhPWDY0bTV2eFNqYktBTm5DSXc1aDRrTmxwaGVOcFY2cXBkX0VFSnVSS1gtNWI0T2M?oc=5` — Apply AI Summit
   2. `link:https://news.google.com/rss/articles/CBMizgFBVV95cUxPUHdtM0lSVXVkRnRTRzJ0WHJlbm05dnVMOXAwUm4tMlJjZndpMGtubGJyWGRVZG9IQkdtWnBPV1JMRFE4SzdOdUJtV2w0VzA5eGt2dFY4aEtJanVkMDN5dUpkTFluSG5ycF9HQzdnYWZyYS01eFkxSmNRRVd1RWZmMkU3WW5XdFFkaXduZzVRLVpraU9yVTZxdU1vT1ZJZTB6VVBBTWF3TDl1Tk1OcVItSlhvTk5jbnlGM3BWXzh4Q2hjM09weEhuTzAzc0NuQQ?oc=5` — European Space Agency asks governments to fund exploration

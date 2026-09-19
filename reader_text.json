@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-19T16:03:41Z",
+  "generated_at": "2026-09-19T22:11:08Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -138424,8 +138424,124 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.europarl.europa.eu/thinktank/en/document/CASP_STU%282026%29776005": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "01d9c457",
+      "identity_hash": "510cc4b561b711cd",
+      "reader_title": "Cohesion funding helps critical-tech SMEs early, but scale-up gaps persist",
+      "reader_what": "Cohesion Policy mainly supports early-stage critical-tech innovation, while scale-up and market-deployment financing gaps persist.",
+      "reader_why": "This identifies an EU funding-system bottleneck in converting regional innovation support into commercial critical-technology capacity.",
+      "reader_more": "The study assesses Cohesion Policy support for SMEs in AI, biotechnology, advanced connectivity and energy technologies. Funding is concentrated on R&D, innovation, technology transfer and other early-stage capability building, with less support for demonstration, scale-up and commercial deployment. Econometric estimates of short-term firm outcomes are heterogeneous and often weak, while case studies identify finance, regulation, skills and specialised infrastructure as persistent constraints. The study argues that stronger sequencing with Horizon Europe, the Innovation Fund and STEP could connect regional ecosystem support to later-stage scale-up instruments.",
+      "deep_analysis": {
+        "work_kind": "European Parliament mixed-methods policy study",
+        "research_question": "How does EU Cohesion Policy support the competitiveness and scaling of SMEs in critical technologies, and where are the main gaps?",
+        "main_finding": "Cohesion Policy is concentrated on early-stage innovation and capability building for critical-technology SMEs, while later-stage scale-up and market-deployment gaps remain.",
+        "method_or_basis": "Mixed-methods study combining desk research, Kohesio project data, staggered difference-in-differences on firm outcomes, and three case studies based on 20 interviews.",
+        "qualification": "Firm-level estimates are short-term and heterogeneous across technologies; the study does not establish that Cohesion Policy alone causes long-run scale-up outcomes.",
+        "radar_relevance": "Direct evidence on how EU funding architecture affects critical-technology innovation, commercialisation, regional capability and strategic competitiveness.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "European Parliament Think Tank page matched the full REGI study, title, authors and publication identity."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "EU Publications Office metadata matched PDF DOI 10.2861/4564666, authors and issuing European Parliament body."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the European Parliament full study, executive summary and supporting annexes."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Official European Parliament study and executive-summary PDFs provided substantive methodology and findings."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://www.europarl.europa.eu/RegData/etudes/STUD/2026/776005/CASP_STU%282026%29776005_EN.pdf",
+            "title": "SMEs in Critical Technologies: Enhancing Competitiveness Through Cohesion Policy Funds",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_executive_summary",
+            "url": "https://www.europarl.europa.eu/RegData/etudes/STUD/2026/776005/CASP_STU%282026%29776005%28SUM01%29_EN.pdf",
+            "title": "SMEs in Critical Technologies: Enhancing Competitiveness Through Cohesion Policy Funds — Executive summary",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publication_metadata",
+            "url": "https://op.europa.eu/en/publication-detail/-/publication/26646535-4a87-11f1-8095-01aa75ed71a1/language-en",
+            "title": "SMEs in critical technologies — EU Publications Office",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity, bibliographic metadata, methods and substantive findings were checked against official European Parliament and EU Publications Office sources."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The full study centrally evaluates EU innovation and industrial support for critical-technology SMEs, including scale-up, strategic dependencies, competitiveness and technology capacity."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No current Radar record shares the exact title, DOI or European Parliament document identity."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "ChatGPT GPT-5.6 Sol — manual browsing Deep Scan equivalent",
+      "reader_text_written_at": "2026-09-19T22:11:08Z",
+      "deep_scan_package_id": "manual-curated-a-20260920-smes-critical-tech",
+      "claims": [
+        {
+          "object": "innovation.system_performance",
+          "secondary_objects": [
+            "industrial.competitiveness",
+            "funding.route"
+          ],
+          "actor": {
+            "name": "Study authors (PPMI / Verian Group)",
+            "class": "other"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-04-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Firm-level estimates are short-term and heterogeneous across technologies; the study does not establish that Cohesion Policy alone causes long-run scale-up outcomes.",
+          "text": "The study finds Cohesion Policy is concentrated on early-stage innovation while gaps persist for scale-up and market deployment.",
+          "confidence": "high",
+          "record_key": "link:https://www.europarl.europa.eu/thinktank/en/document/CASP_STU%282026%29776005",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:510cc4b561b711cd:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-09-19T16:03:41Z"
+  "claims_updated_at": "2026-09-19T22:11:08Z"
 }
