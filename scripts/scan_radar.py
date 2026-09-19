@@ -618,6 +618,55 @@ def bounded_quick_strand_min_runtime(budget_seconds: int, requested_seconds: int
     return min(requested, max(0, budget - reserve))
 
 
+def quick_strand_a_anti_saturation_wave(strand: str, wave_no: int) -> bool:
+    """Focused A switches away from query-heavy continuation after its first tail wave."""
+    return clean_text(strand).upper() == "A" and int(wave_no or 0) >= 2
+
+
+def apply_quick_strand_a_antisaturation_config(config: dict[str, Any]) -> None:
+    """Re-enable bounded discovery diversity for the focused 10-minute Strand-A run.
+
+    This changes search allocation only.  It intentionally does not touch any A/B/C
+    admission, merit, source-quality, duplicate, retention, or publication rule.  The
+    focused-A problem is corpus saturation: once broad page-1 queries mostly rediscover
+    known works, the remaining budget should move into different neighbourhoods rather
+    than keep reformulating the same query family.
+    """
+    config.update({
+        # Keep the ordinary first pass compact, then protect a tail for anti-saturation
+        # discovery.  The controller releases this reserve before its own work.
+        "low_yield_fresh_rotation_enabled": True,
+        "low_yield_reserved_seconds": 235,
+        "low_yield_fresh_rotation_min_seconds_remaining": 70,
+        "low_yield_fresh_rotation_queries_per_source": 5,
+        "low_yield_fresh_rotation_institution_sources_per_wave": 6,
+        "low_yield_fresh_rotation_max_waves": 2,
+        "low_yield_fresh_rotation_stage_seconds": 75,
+
+        # Different discovery methods, still routed through the ordinary Strand-A gate.
+        "journal_depth_enabled": True,
+        "journal_depth_journals_per_scan": 3,
+        "journal_depth_min_seconds_remaining": 75,
+        "journal_depth_stage_seconds": 65,
+        "priority_people_enabled": True,
+        "priority_people_per_scan": 6,
+        "priority_people_rows_per_person": 25,
+        "priority_people_abstract_recovery_per_scan": 3,
+        "citation_snowball_enabled": True,
+        "citation_snowball_seed_limit": 10,
+        "citation_snowball_anchor_limit": 6,
+        "citation_snowball_reference_pool_limit": 60,
+        "citation_snowball_forward_rows": 20,
+        "citation_snowball_min_seconds_remaining": 90,
+        "citation_snowball_stage_seconds": 85,
+
+        # Give the initial Crossref pass a little more source-first diversity too.
+        "crossref_source_first_journals_per_scan": 6,
+        "crossref_underrepresented_journals_per_scan": 3,
+        "priority_policy_journals_per_scan": 3,
+    })
+
+
 def budget_remaining() -> float:
     """Return the time ordinary pre-continuation work may still spend.
 
@@ -19152,9 +19201,10 @@ def main() -> int:
         CONFIG["openalex_missing_abstract_enrichment_per_scan"] = 4
         CONFIG["metadata_sparse_openalex_enrichment_per_scan"] = 4
 
-        # Production-only depth/adjacency machinery. These stages are useful in 24 minutes
-        # but repeatedly consumed the six-minute run after current candidates had already
-        # been retrieved. Quick sweep skips them completely.
+        # Production-only depth/adjacency machinery is disabled for the generic quick
+        # sweep by default. Focused Strand A selectively re-enables a bounded subset below
+        # because saturation makes discovery-method diversity more valuable than more of
+        # the same page-1 query rotation.
         CONFIG["direct_top_journal_sources"] = []
         CONFIG["direct_top_journal_rotating_sources_per_scan"] = 0
         CONFIG["journal_depth_enabled"] = False
@@ -19215,6 +19265,11 @@ def main() -> int:
             CONFIG["c_floor_rescue_enabled"] = False
             CONFIG["c_floor_final_reserve_enabled"] = False
             CONFIG["weak_signal_evidence_followup_enabled"] = False
+            # Focused A is the one quick lane where production-style diversity is
+            # valuable: its recent corpus is already dense, so repeated broad queries
+            # have sharply diminishing returns. Re-enable bounded anti-saturation
+            # discovery without changing the Strand-A quality/admission gate.
+            apply_quick_strand_a_antisaturation_config(CONFIG)
         elif RADAR_QUICK_STRAND == "B":
             CONFIG["news_stage_seconds"] = 15
             CONFIG["openalex_stage_seconds"] = 220
@@ -21766,6 +21821,9 @@ def main() -> int:
         "candidates": 0,
         "news_candidates": 0,
         "cooldown_seconds": 0.0,
+        "anti_saturation_waves": 0,
+        "anti_saturation_journal_candidates": 0,
+        "anti_saturation_institution_candidates": 0,
         "seconds_remaining_at_start": max(0, int(total_budget_remaining())),
         "seconds_remaining_at_end": None,
     }
@@ -22053,6 +22111,16 @@ def main() -> int:
         )
         b_tail_bank = list(dict.fromkeys(b_method_recent_bank + b_method_foundational_bank))
         b_tail_journals = list(dict.fromkeys(b_method_journal_bank))
+        # Once focused A has had its ordinary broad-query pass, rotate genuinely
+        # different source neighbourhoods. Underrepresented journals come first, then
+        # the bounded journal-depth/policy/core watchlists. Source names never affect
+        # admission; they only determine where Crossref looks.
+        a_tail_journals = list(dict.fromkeys(
+            list(diversity_bank)
+            + list(journal_depth_bank)
+            + list(priority_policy_journals)
+            + list(source_journals_all)
+        ))
         c_tail_bank = list(dict.fromkeys(
             c_floor_rescue_queries()
             + list(priority_news_queries())
@@ -22069,6 +22137,8 @@ def main() -> int:
         strand = RADAR_QUICK_STRAND
         qa_cursor = int(state.get(f"quick_strand_{strand.lower()}_query_cursor", 0) or 0)
         qj_cursor = int(state.get("quick_strand_b_journal_cursor", 0) or 0)
+        qa_journal_cursor = int(state.get("quick_strand_a_journal_cursor", 0) or 0)
+        qa_inst_cursor = int(state.get("quick_strand_a_institution_cursor", 0) or 0)
         qc_cursor = int(state.get("quick_strand_c_news_cursor", 0) or 0)
         qi_cursor = int(state.get("quick_strand_c_institution_cursor", 0) or 0)
 
@@ -22095,13 +22165,21 @@ def main() -> int:
                     executed_oa_before = set(execution_stats.get("openalex_queries", set()))
                     executed_cr_before = set(execution_stats.get("crossref_broad_queries", set()))
                     already = executed_oa_before | executed_cr_before
+                    # The initial focused-A stages plus continuation wave 1 are the
+                    # ordinary query-heavy pass. From wave 2 onward, spend fewer slots
+                    # on reformulations and add source-first journal + institutional
+                    # territory. This is the anti-saturation switch.
+                    anti_saturation_a = quick_strand_a_anti_saturation_wave(strand, wave_no)
+                    if anti_saturation_a:
+                        quick_strand_continuation["anti_saturation_waves"] += 1
+                    query_n = max(3, strand_query_n // 2) if anti_saturation_a else strand_query_n
                     queries, query_next, _ = rotating_batch_excluding(
-                        query_bank, qa_cursor, strand_query_n, already
+                        query_bank, qa_cursor, query_n, already
                     ) if query_bank else ([], qa_cursor, True)
                     if not queries and query_bank:
                         # Depth rotation is still productive once every exact query has
                         # appeared in this run; collectors advance their persisted pages.
-                        queries, query_next, _ = rotating_batch(query_bank, qa_cursor, strand_query_n)
+                        queries, query_next, _ = rotating_batch(query_bank, qa_cursor, query_n)
 
                     query_dates: dict[str, dt.date] = {}
                     query_lanes: dict[str, str] = {}
@@ -22114,7 +22192,7 @@ def main() -> int:
                             query_lanes[q] = "quick-strand-b-recent"
                         else:
                             query_dates[q] = DATE_FLOOR
-                            query_lanes[q] = "quick-strand-a"
+                            query_lanes[q] = "quick-strand-a-depth" if anti_saturation_a else "quick-strand-a"
 
                     journals: list[str] = []
                     journal_next = qj_cursor
@@ -22127,10 +22205,37 @@ def main() -> int:
                             journals, journal_next, _ = rotating_batch(
                                 b_tail_journals, qj_cursor, strand_journal_n
                             )
+                    elif anti_saturation_a and a_tail_journals:
+                        already_journals = set(execution_stats.get("crossref_source_journals", set()))
+                        journals, journal_next, _ = rotating_batch_excluding(
+                            a_tail_journals, qa_journal_cursor, strand_journal_n, already_journals
+                        )
+                        if not journals:
+                            journals, journal_next, _ = rotating_batch(
+                                a_tail_journals, qa_journal_cursor, strand_journal_n
+                            )
+
+                    inst_domains: list[str] = []
+                    inst_next = qa_inst_cursor
+                    inst_sources: list[dict[str, Any]] = []
+                    if anti_saturation_a and fresh_inst_domain_bank:
+                        already_inst = set(execution_stats.get("institution_sources", set()))
+                        inst_domains, inst_next, _ = rotating_batch_excluding(
+                            fresh_inst_domain_bank, qa_inst_cursor, strand_inst_n, already_inst
+                        )
+                        if not inst_domains:
+                            inst_domains, inst_next, _ = rotating_batch(
+                                fresh_inst_domain_bank, qa_inst_cursor, strand_inst_n
+                            )
+                        inst_sources = [
+                            fresh_inst_source_by_domain[d] for d in inst_domains
+                            if d in fresh_inst_source_by_domain
+                        ]
 
                     log_progress(
                         f"Quick Strand {strand} continuation wave {wave_no}: remaining={int(remaining_before)}s; "
-                        f"queries={len(queries)} journals={len(journals)}"
+                        f"queries={len(queries)} journals={len(journals)} institutions={len(inst_sources)}"
+                        + (" [anti-saturation]" if anti_saturation_a else "")
                     )
                     oa_depth_only = bool(queries) and all(q in executed_oa_before for q in queries)
                     cr_depth_only = bool(queries) and all(q in executed_cr_before for q in queries)
@@ -22147,6 +22252,11 @@ def main() -> int:
                             queries, [], journals, wave_deadline, query_dates,
                             state["result_depth"]["crossref_broad"], state["result_depth"]["crossref_priority"],
                             query_lanes, wave_exec, cr_depth_only
+                        )))
+                    if inst_sources:
+                        workers.append(("inst", ex.submit(
+                            safe_stage, f"Institutional quick Strand A anti-saturation wave {wave_no}", collect_institutions,
+                            EXTENDED_DATE_FLOOR, warnings, False, inst_sources, wave_deadline, wave_exec, False, EXTENDED_DATE_FLOOR
                         )))
 
                 else:  # Strand C
@@ -22187,9 +22297,13 @@ def main() -> int:
                     elif family == "cr":
                         cr.extend(extra)
                         wave_candidates += len(extra)
+                        if strand == "A" and wave_no >= 2 and journals:
+                            quick_strand_continuation["anti_saturation_journal_candidates"] += len(extra)
                     elif family == "inst":
                         inst.extend(extra)
                         wave_candidates += len(extra)
+                        if strand == "A" and wave_no >= 2:
+                            quick_strand_continuation["anti_saturation_institution_candidates"] += len(extra)
                     else:
                         news.extend(extra)
                         wave_news_candidates += len(extra)
@@ -22218,6 +22332,12 @@ def main() -> int:
                 if strand == "B" and cr_journals_executed:
                     qj_cursor = journal_next
                     state["quick_strand_b_journal_cursor"] = qj_cursor
+                elif strand == "A" and cr_journals_executed:
+                    qa_journal_cursor = journal_next
+                    state["quick_strand_a_journal_cursor"] = qa_journal_cursor
+                if strand == "A" and inst_executed:
+                    qa_inst_cursor = inst_next
+                    state["quick_strand_a_institution_cursor"] = qa_inst_cursor
             else:
                 if news_queries:
                     qc_cursor = news_next
