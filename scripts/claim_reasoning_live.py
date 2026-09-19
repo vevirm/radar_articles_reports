@@ -3036,10 +3036,57 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
                 )
                 if not donors:
                     break
-                fitting = next((x for w in donors for x in spare[w] if fits(x)), None)
+
+                # Borrowed slots have the same hysteresis as native wow slots.
+                # Without this, a reserve candidate that improves by only one or
+                # two maturity points can jump into a thin bucket during top-up,
+                # bypassing SHELF_SWAP_MARGIN even though native slots correctly
+                # resist that small churn.  Prefer the prior occupant of this
+                # borrowed slot while it remains eligible; replace it only when a
+                # fitting challenger clears the same evidence margin.
+                prior_borrowed = [
+                    x for w in donors for x in spare[w]
+                    if clean(x.get("id")) in previous_set
+                    and int((prev_map.get(clean(x.get("id"))) or {}).get("page_slot_wow", 0) or 0) == wow
+                ]
+                prior_borrowed.sort(key=_selection_rank, reverse=True)
+
+                fitting_pool = [x for w in donors for x in spare[w] if fits(x)]
+                fitting = fitting_pool[0] if fitting_pool else None
+                incumbent = next((x for x in prior_borrowed if fits(x)), None)
+                if incumbent is not None:
+                    best = max(fitting_pool, key=_selection_rank) if fitting_pool else incumbent
+                    if (
+                        clean(best.get("id")) != clean(incumbent.get("id"))
+                        and int(best.get("maturity_score", 0) or 0)
+                        >= int(incumbent.get("maturity_score", 0) or 0) + SHELF_SWAP_MARGIN
+                    ):
+                        fitting = best
+                    else:
+                        fitting = incumbent
+
                 if fitting is None:
                     # Relax one step (cap + 1) before giving up on variety entirely.
-                    fitting = next((x for w in donors for x in spare[w] if all(diversity_used[(k, v)] < cap + 1 for k, v, cap in _diversity_keys(x))), None)
+                    relaxed_pool = [
+                        x for w in donors for x in spare[w]
+                        if all(diversity_used[(k, v)] < cap + 1 for k, v, cap in _diversity_keys(x))
+                    ]
+                    fitting = relaxed_pool[0] if relaxed_pool else None
+                    incumbent = next(
+                        (x for x in prior_borrowed if all(diversity_used[(k, v)] < cap + 1 for k, v, cap in _diversity_keys(x))),
+                        None,
+                    )
+                    if incumbent is not None:
+                        best = max(relaxed_pool, key=_selection_rank) if relaxed_pool else incumbent
+                        if (
+                            clean(best.get("id")) != clean(incumbent.get("id"))
+                            and int(best.get("maturity_score", 0) or 0)
+                            >= int(incumbent.get("maturity_score", 0) or 0) + SHELF_SWAP_MARGIN
+                        ):
+                            fitting = best
+                        else:
+                            fitting = incumbent
+
                 if fitting is not None:
                     spare[int(fitting.get("wow", 0) or 0)].remove(fitting)
                     c = fitting
