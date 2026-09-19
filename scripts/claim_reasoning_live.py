@@ -2154,7 +2154,7 @@ def _trend_payload(
     elif rp:
         flip = f"Watch \u201c{rp}\u201d. Its outcome could change the balance."
     else:
-        flip = "There is no single pending decision likely to change the balance. New evidence will determine the next shift."
+        flip = "No specific decision is pending. Watch for new evidence that changes the balance."
 
     return {
         "support": snaps(lk, "Expands") + snaps(rk, "Constrains"),

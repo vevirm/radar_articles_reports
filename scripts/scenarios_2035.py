@@ -659,9 +659,26 @@ def build_scenarios_2035(publications: dict[str, Any], candidates: list[dict[str
                     break
         if pending_watch:
             m_q = re.search(r"\u201c([^\u201d]+)\u201d", pending_watch[0])
-            watch = pick_phrase("watch", wid).format(d=f"\u201c{m_q.group(1)}\u201d") if m_q else pending_watch[0]
+            if m_q:
+                watch = pick_phrase("watch", wid).format(d=f"\u201c{m_q.group(1)}\u201d")
+            elif drivers and drivers[0].get("winning_side"):
+                shape = {
+                    "big_commons": "For an open, scaling Europe",
+                    "fortress_frontier": "For a guarded, scaling Europe",
+                    "brilliant_but_broke": "For an open, squeezed Europe",
+                    "quiet_retreat": "For a guarded, squeezed Europe",
+                }.get(wid, "For this scenario")
+                watch = f"{shape}, watch for new evidence on \u201c{drivers[0]['winning_side']}\u201d."
+            else:
+                watch = "Watch for new evidence that changes the balance."
         elif drivers and drivers[0].get("winning_side"):
-            watch = f"No decision is pending yet. The marker to follow is the first adopted measure behind \u201c{drivers[0]['winning_side']}\u201d."
+            shape = {
+                "big_commons": "For an open, scaling Europe",
+                "fortress_frontier": "For a guarded, scaling Europe",
+                "brilliant_but_broke": "For an open, squeezed Europe",
+                "quiet_retreat": "For a guarded, squeezed Europe",
+            }.get(wid, "For this scenario")
+            watch = f"{shape}, watch for the first adopted measure behind \u201c{drivers[0]['winning_side']}\u201d."
         else:
             watch = ""
 
