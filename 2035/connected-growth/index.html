@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>2035 scenario · Research &amp; Innovation × Geopolitics Radar</title>
+<link rel="stylesheet" href="../../radar.css?v=28.4"><link rel="stylesheet" href="../scenarios.css?v=1">
+<script src="../../radar_data.js?v=28.1"></script>
+</head><body>
+<main class="wrap future-main scenario-detail">
+<a class="scenario-back" href="../">← All 2035 scenarios</a>
+<div id="scenarioContent"><p class="empty">Loading</p></div>
+</main>
+<script>
+const WORLD_ID='big_commons';
+const clean=v=>String(v||'').replace(/\s+/g,' ').trim();
+const esc=v=>clean(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const KIND={shock:'External shock',opportunity:'Opportunity',risk:'Risk'};
+const coordinates=w=>{const q=w.quadrant||{};const r=q.resources==='more_resources'||q.scale==='scaling'?'More resources':'Fewer resources';const c=q.connectedness==='more_connected'||q.openness==='open'?'more connected globally':'less connected globally';return `${r} · ${c}`};
+const storySummary=w=>{const b=(w.bullets||[]).find(x=>x.label==='Picture');return clean(b?.text||(w.story||[])[0]||'')};
+const sourceList=v=>{const xs=v.sources||[];return xs.length?`<details><summary>Sources</summary><ul class="scenario-sources">${xs.map(s=>`<li>${s.link?`<a href="${esc(s.link)}" target="_blank" rel="noopener">${esc(s.source||s.title)}</a>`:esc(s.source||s.title)}</li>`).join('')}</ul></details>`:''};
+const variant=v=>{const facts=(v.bullets||[]).filter(b=>!['Evidence today'].includes(b.label));return `<article class="scenario-variant-card"><p class="kind">${esc(KIND[v.kind]||'Variant')}</p><h3>${esc(v.name)}</h3>${facts.map(b=>`<p><strong>${esc(b.label)}:</strong> ${esc(b.text)}</p>`).join('')}${sourceList(v)}</article>`};
+(async()=>{try{const data=await RadarData.load('../../radar.json','../../radar_seed.json');const worlds=data?.high_order_inference?.scenarios_2035?.scenarios||[];const w=worlds.find(x=>x.id===WORLD_ID);if(!w)throw new Error('Scenario not found');document.title=`${w.name} · 2035`;const facts=(w.bullets||[]).filter(b=>!['Picture','Evidence today'].includes(b.label));document.getElementById('scenarioContent').innerHTML=`<section class="scenario-hero"><p class="coords">${esc(coordinates(w))}</p><h2>${esc(w.name)}</h2><p class="scenario-tagline">${esc(w.tagline)}</p><p class="scenario-summary">${esc(storySummary(w))}</p></section><h2 class="scenario-variants-title">Four versions of this scenario</h2><p class="scenario-variants-intro">Each version starts from the same basic world, then one different development changes how it plays out.</p><div class="scenario-variant-grid">${(w.variants||[]).slice(0,4).map(variant).join('')}</div><section class="scenario-section"><h3>What this world means</h3><div class="scenario-facts">${facts.map(b=>`<div class="scenario-fact"><strong>${esc(b.label)}</strong>${esc(b.text)}</div>`).join('')}</div></section>`;}catch(e){console.error(e);document.getElementById('scenarioContent').innerHTML='<p class="empty">This scenario is unavailable.</p>';}})();
+</script>
+<script src="../../site-shell.js?v=28.1"></script>
+</body></html>

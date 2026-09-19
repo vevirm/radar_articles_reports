@@ -2,10 +2,10 @@
 
 Method (a standard 2x2 scenario frame, grounded in the Radar's own findings):
 
-* Two critical uncertainties form the axes.  Both are read from the published
+* Two critical uncertainties form the axes. Both are read from the published
   Trends page each scan, so the frame moves with the evidence:
-    - OPEN <-> GUARDED: does European research stay open, or does security close it?
-    - SCALING <-> SQUEEZED: do money and capacity grow, or get squeezed?
+    - MORE CONNECTED <-> LESS CONNECTED: how strongly is Europe linked to global partners, markets, talent and infrastructure?
+    - MORE RESOURCES <-> FEWER RESOURCES: how much money, capacity, energy, infrastructure and talent are available?
 * Each quadrant is one 2035 world.  Its story is assembled from the published
   trends pulling toward it, ongoing phenomena that persist in it, and the risk and
   opportunity that play out in it.
@@ -93,47 +93,43 @@ def _tags(c: dict[str, Any]) -> set[str]:
 _WORLDS = {
     ("open", "scaling"): {
         "id": "big_commons",
-        "name": "The Big Commons",
-        "tagline": "Open doors, deep pockets.",
+        "name": "Connected Growth",
+        "tagline": "More resources, strong global links.",
         "story": (
-            "By 2035 Europe has chosen scale over suspicion. Shared computing, joint programmes and "
-            "easy researcher mobility have turned the continent into the world's largest open lab, "
-            "and partners queue to plug in."
+            "Europe enters 2035 with more money, capacity and research infrastructure, while staying strongly connected to global partners. "
+            "Researchers, firms and universities can work across borders easily, and Europe scales more of what it discovers."
         ),
-        "cost": "The price is exposure: what is shared this freely can also be copied, bought or switched off by others.",
+        "cost": "The trade-off is exposure: deeper global links also leave Europe more dependent on decisions, suppliers and disruptions outside Europe.",
     },
     ("guarded", "scaling"): {
         "id": "fortress_frontier",
-        "name": "Fortress Frontier",
-        "tagline": "Big money, high walls.",
+        "name": "Independent Scale",
+        "tagline": "More resources, weaker global links.",
         "story": (
-            "By 2035 Europe spends heavily on its own capabilities, but behind screening, export lists "
-            "and trusted-partner clubs. Flagship facilities are built and filled, yet who may use them "
-            "is decided as much by security offices as by scientists."
+            "By 2035, strong European investment has built more research and technology capacity, but Europe works with a narrower set of global partners. "
+            "Funding and infrastructure are strong, while security, resilience and European control shape who can take part."
         ),
-        "cost": "The price is reach: fewer partners, slower exchange and a growing talent bill to staff the walls.",
+        "cost": "The trade-off is reach: Europe has more control, but fewer outside connections and less access to some global talent, markets and ideas.",
     },
     ("open", "squeezed"): {
         "id": "brilliant_but_broke",
-        "name": "Brilliant but Broke",
-        "tagline": "Open minds, empty wallets.",
+        "name": "Open Under Pressure",
+        "tagline": "Fewer resources, strong global links.",
         "story": (
-            "By 2035 European science is still open and well connected, but chronically underfunded. "
-            "Ideas travel freely, and so do the people who have them, often to wherever the money and "
-            "the machines are."
+            "Global links remain strong in 2035, but European research and innovation operate with tight resources. "
+            "Ideas and people move easily, while many European teams depend on outside capital, infrastructure or partners to scale their work."
         ),
-        "cost": "The price is ownership: Europe discovers, others scale, and the returns flow out.",
+        "cost": "The trade-off is dependence: Europe stays connected, but often relies on others to finance, host or scale what it creates.",
     },
     ("guarded", "squeezed"): {
         "id": "quiet_retreat",
-        "name": "The Quiet Retreat",
-        "tagline": "Fewer partners, less money.",
+        "name": "Constrained Europe",
+        "tagline": "Fewer resources, weaker global links.",
         "story": (
-            "By 2035 tight budgets and tight security have met. Europe protects what it already has "
-            "rather than building what comes next, and research becomes a matter of managing risk "
-            "more than chasing discovery."
+            "In 2035, Europe has fewer resources and weaker global connections. "
+            "Governments and institutions protect a smaller core of capabilities, while new projects, partnerships and large investments become harder to sustain."
         ),
-        "cost": "The price is the future: a smaller, safer system that falls further behind each year.",
+        "cost": "The trade-off is ambition: Europe reduces exposure, but has less capacity to build, experiment and compete at scale.",
     },
 }
 
@@ -276,48 +272,48 @@ _SHOCK_AFTER = {
 # A concrete scene per world, anchored on one of its real findings ({asset}).
 _SCENES = {
     "big_commons": (
-        "A doctoral student in Tallinn books time on {asset} in minutes and runs it alongside partners in Seoul and S\u00e3o Paulo.",
-        "A start-up in Porto trains its first model on {asset} for the price of a coffee subscription; half its team moved from abroad.",
+        "A research team in Tallinn books time on {asset} and works with partners in Seoul and São Paulo the same week.",
+        "A start-up in Porto uses {asset}, European funding and overseas partners to scale without leaving Europe.",
     ),
     "fortress_frontier": (
-        "A lab in Lisbon waits six months for a security clearance before it may use {asset}; the equipment itself is world-class.",
-        "Access to {asset} starts at a badge gate: a trusted-partner list decides who gets in, and the list is shorter every year.",
+        "A lab in Lisbon uses {asset} built with strong European funding, but access depends on trusted-partner rules.",
+        "A company develops around {asset} with European suppliers and public backing, while working with fewer non-European partners.",
     ),
     "brilliant_but_broke": (
-        "A team in Krak\u00f3w designs a breakthrough around {asset}, then licenses it abroad because nobody in Europe can fund the scale-up.",
-        "A postdoc in Ghent keeps {asset} running on a shoestring and answers job offers from three other continents every month.",
+        "A team in Kraków develops a breakthrough around {asset}, then looks abroad for the money and capacity needed to scale it.",
+        "A postdoc in Ghent keeps {asset} running with limited funding while working daily with better-resourced partners abroad.",
     ),
     "quiet_retreat": (
-        "A half-empty institute in Turin still maintains {asset}, but new projects need three sign-offs and rarely start.",
-        "Work on {asset} continues in a smaller, safer form; the ambitious version was shelved in 2029 and never revived.",
+        "A research institute in Turin keeps {asset} running, but new projects are rare and international partnerships are harder to start.",
+        "Work on {asset} continues in a smaller form because neither the resources nor the outside links exist for a larger programme.",
     ),
 }
 
 # Who wins and who loses, per world (researchers, universities, companies, funders).
 _STAKE = {
     "big_commons": (
-        ("Researchers", "Move freely and plug into shared machines anywhere in Europe; competition for the best people is global and fierce."),
-        ("Universities", "Become nodes in continental networks; the ones that share infrastructure well pull ahead."),
-        ("Companies", "Scale fast on public computing and open data, but know their edge can be copied just as fast."),
-        ("Funders", "Pay for the commons and spend the decade arguing about who free-rides on it."),
+        ("Researchers", "Move easily across borders and use growing shared capacity, while competition for talent remains global."),
+        ("Universities", "Gain from large international networks and stronger infrastructure, but depend on those networks staying open."),
+        ("Companies", "Can scale faster with more capital, infrastructure and global partners, while facing strong outside competition."),
+        ("Funders", "Have more room to invest, but must decide how much European capacity should remain open to global use."),
     ),
     "fortress_frontier": (
-        ("Researchers", "Get excellent kit and generous budgets, in exchange for clearances, screening and fewer foreign co-authors."),
-        ("Universities", "Split into trusted and ordinary tiers; security offices become as powerful as research offices."),
-        ("Companies", "Win secure public contracts, lose easy access to non-European markets and suppliers."),
-        ("Funders", "Spend more than ever, much of it on compliance, vetting and duplicating what used to be shared."),
+        ("Researchers", "Gain better funded European facilities, but face more limits on international collaboration and mobility."),
+        ("Universities", "Build stronger European capacity while spending more time on security, access rules and trusted partnerships."),
+        ("Companies", "Benefit from European investment and procurement, but have fewer easy links to some foreign suppliers and markets."),
+        ("Funders", "Can build strategic capacity, but pay more for duplication, resilience and European control."),
     ),
     "brilliant_but_broke": (
-        ("Researchers", "Keep their freedom and their networks, lose their contracts; the best leave for better-funded labs."),
-        ("Universities", "Publish brilliantly and patch buildings; many survive on partnerships with foreign money."),
-        ("Companies", "Find great ideas cheaply in Europe and scale them somewhere else."),
-        ("Funders", "Ration shrinking budgets and fund many small bets instead of a few big ones."),
+        ("Researchers", "Keep strong international networks, but face tighter European funding and may move to where resources are better."),
+        ("Universities", "Stay globally connected, while relying more on outside partners and shared infrastructure they do not control."),
+        ("Companies", "Can reach global capital and markets, but European scale-up capacity remains uneven."),
+        ("Funders", "Must choose carefully where limited resources can make the biggest difference."),
     ),
     "quiet_retreat": (
-        ("Researchers", "Face fewer openings, more paperwork and slower careers; mobility turns one-way, outward."),
-        ("Universities", "Consolidate and merge; risk management replaces ambition in the strategy documents."),
-        ("Companies", "Lean on protected home markets and trusted suppliers, and stop expecting research to lead."),
-        ("Funders", "Protect a shrinking core and cut everything that looks optional."),
+        ("Researchers", "Face fewer opportunities at home and fewer easy routes into global networks."),
+        ("Universities", "Protect core strengths, merge or narrow priorities as both funding and international links weaken."),
+        ("Companies", "Work with smaller markets and more limited research capacity, with fewer options outside Europe."),
+        ("Funders", "Concentrate scarce resources on a smaller number of strategic capabilities."),
     ),
 }
 
@@ -663,20 +659,20 @@ def build_scenarios_2035(publications: dict[str, Any], candidates: list[dict[str
                 watch = pick_phrase("watch", wid).format(d=f"\u201c{m_q.group(1)}\u201d")
             elif drivers and drivers[0].get("winning_side"):
                 shape = {
-                    "big_commons": "For an open, scaling Europe",
-                    "fortress_frontier": "For a guarded, scaling Europe",
-                    "brilliant_but_broke": "For an open, squeezed Europe",
-                    "quiet_retreat": "For a guarded, squeezed Europe",
+                    "big_commons": "For a well-resourced, globally connected Europe",
+                    "fortress_frontier": "For a well-resourced Europe with weaker global links",
+                    "brilliant_but_broke": "For a resource-constrained, globally connected Europe",
+                    "quiet_retreat": "For a resource-constrained Europe with weaker global links",
                 }.get(wid, "For this scenario")
                 watch = f"{shape}, watch for new evidence on \u201c{drivers[0]['winning_side']}\u201d."
             else:
                 watch = "Watch for new evidence that changes the balance."
         elif drivers and drivers[0].get("winning_side"):
             shape = {
-                "big_commons": "For an open, scaling Europe",
-                "fortress_frontier": "For a guarded, scaling Europe",
-                "brilliant_but_broke": "For an open, squeezed Europe",
-                "quiet_retreat": "For a guarded, squeezed Europe",
+                "big_commons": "For a well-resourced, globally connected Europe",
+                "fortress_frontier": "For a well-resourced Europe with weaker global links",
+                "brilliant_but_broke": "For a resource-constrained, globally connected Europe",
+                "quiet_retreat": "For a resource-constrained Europe with weaker global links",
             }.get(wid, "For this scenario")
             watch = f"{shape}, watch for the first adopted measure behind \u201c{drivers[0]['winning_side']}\u201d."
         else:
@@ -807,7 +803,12 @@ def build_scenarios_2035(publications: dict[str, Any], candidates: list[dict[str
             "id": wid,
             "name": world["name"],
             "tagline": world["tagline"],
-            "quadrant": {"openness": quad[0], "scale": quad[1]},
+            "quadrant": {
+                "connectedness": "more_connected" if quad[0] == "open" else "less_connected",
+                "resources": "more_resources" if quad[1] == "scaling" else "fewer_resources",
+                "openness": quad[0],
+                "scale": quad[1],
+            },
             "story": story,
             "bullets": bullets,
             "signals": signals,
@@ -819,13 +820,10 @@ def build_scenarios_2035(publications: dict[str, Any], candidates: list[dict[str
         "horizon": HORIZON,
         "evaluated_at": evaluated_at,
         "method": (
-            "Two uncertainties read from today's published trends (open vs guarded; scaling vs squeezed) "
-            "define four 2035 worlds. Each world is assembled from published trends, ongoing phenomena, risks "
-            "and opportunities; each of its four variants is triggered by one published shock, opportunity or "
-            "risk. They are scenarios, not forecasts: none is ranked as more likely. Every trigger and signal is a "
-            "current finding with sources."
+            "Two uncertainties define the frame: how many resources Europe has, and how strongly Europe is connected globally. "
+            "The four worlds are scenarios, not forecasts. Each has four variants built from current shocks, risks and opportunities."
         ),
-        "axes": {"horizontal": "Guarded \u2194 Open", "vertical": "Squeezed \u2194 Scaling"},
+        "axes": {"horizontal": "Less globally connected ↔ More globally connected", "vertical": "Fewer resources ↔ More resources"},
         "scenarios": scenarios,
         "card_count": len(scenarios) + sum(len(x["variants"]) for x in scenarios),
     }

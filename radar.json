@@ -114390,36 +114390,38 @@
     "scenarios_2035": {
       "horizon": 2035,
       "evaluated_at": "2026-09-19T05:05Z",
-      "method": "Two uncertainties read from today's published trends (open vs guarded; scaling vs squeezed) define four 2035 worlds. Each world is assembled from published trends, ongoing phenomena, risks and opportunities; each of its four variants is triggered by one published shock, opportunity or risk. They are scenarios, not forecasts: none is ranked as more likely. Every trigger and signal is a current finding with sources.",
+      "method": "Two uncertainties define the frame: how many resources Europe has, and how strongly Europe is connected globally. The four worlds are scenarios, not forecasts. Each has four variants built from current shocks, risks and opportunities.",
       "axes": {
-        "horizontal": "Guarded ↔ Open",
-        "vertical": "Squeezed ↔ Scaling"
+        "horizontal": "Less globally connected ↔ More globally connected",
+        "vertical": "Fewer resources ↔ More resources"
       },
       "scenarios": [
         {
           "id": "big_commons",
-          "name": "The Big Commons",
-          "tagline": "Open doors, deep pockets.",
+          "name": "Connected Growth",
+          "tagline": "More resources, strong global links.",
           "quadrant": {
+            "connectedness": "more_connected",
+            "resources": "more_resources",
             "openness": "open",
             "scale": "scaling"
           },
           "story": [
-            "By 2035 Europe has chosen scale over suspicion. Shared computing, joint programmes and easy researcher mobility have turned the continent into the world's largest open lab, and partners queue to plug in.",
+            "Europe enters 2035 with more money, capacity and research infrastructure, while staying strongly connected to global partners. Researchers, firms and universities can work across borders easily, and Europe scales more of what it discovers.",
             "Trace it back and you find two of today's tugs of war settled one way: “Open more research partnerships”; “Europe bets bigger on AI”.",
             "Not everything moved. “International researcher recruitment keeps returning across the research-policy cycle.” That was true in the 2020s and it is true now.",
             "Someone read the signs early: “Research collaboration could become the missing route into AI governance.” The bet worked.",
             "The warning came early and was filed away: “The delivery clock is running before the rules are settled for AI-factory public procurement.” It is now the norm.",
-            "The price is exposure: what is shared this freely can also be copied, bought or switched off by others."
+            "The trade-off is exposure: deeper global links also leave Europe more dependent on decisions, suppliers and disruptions outside Europe."
           ],
           "bullets": [
             {
               "label": "Picture",
-              "text": "By 2035 Europe has chosen scale over suspicion. Shared computing, joint programmes and easy researcher mobility have turned the continent into the world's largest open lab, and partners queue to plug in."
+              "text": "Europe enters 2035 with more money, capacity and research infrastructure, while staying strongly connected to global partners. Researchers, firms and universities can work across borders easily, and Europe scales more of what it discovers."
             },
             {
               "label": "A day in 2035",
-              "text": "A doctoral student in Tallinn books time on the quantum pilot line in minutes and runs it alongside partners in Seoul and São Paulo."
+              "text": "A research team in Tallinn books time on the quantum pilot line and works with partners in Seoul and São Paulo the same week."
             },
             {
               "label": "How we got here",
@@ -114439,27 +114441,27 @@
             },
             {
               "label": "Researchers",
-              "text": "Move freely and plug into shared machines anywhere in Europe; competition for the best people is global and fierce."
+              "text": "Move easily across borders and use growing shared capacity, while competition for talent remains global."
             },
             {
               "label": "Universities",
-              "text": "Become nodes in continental networks; the ones that share infrastructure well pull ahead."
+              "text": "Gain from large international networks and stronger infrastructure, but depend on those networks staying open."
             },
             {
               "label": "Companies",
-              "text": "Scale fast on public computing and open data, but know their edge can be copied just as fast."
+              "text": "Can scale faster with more capital, infrastructure and global partners, while facing strong outside competition."
             },
             {
               "label": "Funders",
-              "text": "Pay for the commons and spend the decade arguing about who free-rides on it."
+              "text": "Have more room to invest, but must decide how much European capacity should remain open to global use."
             },
             {
               "label": "The price",
-              "text": "Exposure: what is shared this freely can also be copied, bought or switched off by others."
+              "text": "The trade-off is exposure: deeper global links also leave Europe more dependent on decisions, suppliers and disruptions outside Europe."
             },
             {
               "label": "Signpost",
-              "text": "For an open, scaling Europe, watch for new evidence on “Open more research partnerships”."
+              "text": "For a well-resourced, globally connected Europe, watch for new evidence on “Open more research partnerships”."
             }
           ],
           "signals": [
@@ -114593,12 +114595,12 @@
               ]
             }
           ],
-          "watch": "For an open, scaling Europe, watch for new evidence on “Open more research partnerships”.",
+          "watch": "For a well-resourced, globally connected Europe, watch for new evidence on “Open more research partnerships”.",
           "variants": [
             {
               "id": "big_commons:shock:8898553b64",
               "kind": "shock",
-              "name": "The Big Commons, after someone else's breakthrough",
+              "name": "Connected Growth, after someone else's breakthrough",
               "trigger": "A breakthrough abroad could turn the quantum pilot line into a catch-up project.",
               "story": [
                 "One bad year changes the story: a breakthrough abroad could turn the quantum pilot line into a catch-up project.",
@@ -114643,7 +114645,7 @@
             {
               "id": "big_commons:shock:ed41cd13ec",
               "kind": "shock",
-              "name": "The Big Commons, after the big breach",
+              "name": "Connected Growth, after the big breach",
               "trigger": "One breach, and European computing capacity goes dark.",
               "story": [
                 "It starts with a single headline: one breach, and European computing capacity goes dark.",
@@ -114688,7 +114690,7 @@
             {
               "id": "big_commons:opportunity:03ccc3b7a2",
               "kind": "opportunity",
-              "name": "The Big Commons, with a lucky break",
+              "name": "Connected Growth, with a lucky break",
               "trigger": "A live European instrument could expand researcher retention.",
               "story": [
                 "Here, a long shot lands: “A live European instrument could expand researcher retention.”",
@@ -114726,7 +114728,7 @@
             {
               "id": "big_commons:risk:5a86ac0fd9",
               "kind": "risk",
-              "name": "The Big Commons, with a slow leak",
+              "name": "Connected Growth, with a slow leak",
               "trigger": "Innovation-system performance is under sustained pressure.",
               "story": [
                 "In this version a known weakness gives way: “Innovation-system performance is under sustained pressure.”",
@@ -114777,28 +114779,30 @@
         },
         {
           "id": "fortress_frontier",
-          "name": "Fortress Frontier",
-          "tagline": "Big money, high walls.",
+          "name": "Independent Scale",
+          "tagline": "More resources, weaker global links.",
           "quadrant": {
+            "connectedness": "less_connected",
+            "resources": "more_resources",
             "openness": "guarded",
             "scale": "scaling"
           },
           "story": [
-            "By 2035 Europe spends heavily on its own capabilities, but behind screening, export lists and trusted-partner clubs. Flagship facilities are built and filled, yet who may use them is decided as much by security offices as by scientists.",
+            "By 2035, strong European investment has built more research and technology capacity, but Europe works with a narrower set of global partners. Funding and infrastructure are strong, while security, resilience and European control shape who can take part.",
             "It grew out of two arguments the 2020s never resolved, until they were: “More money and moves behind defence R&I” and “Venture capital is on the rise”.",
             "Some things never changed. In the 2020s the Radar noted: “Europe keeps returning to the same innovation-conversion problem.” In 2035 it still does.",
             "One early bet paid off. The 2020s signal was “Strategic-autonomy goals could become the missing route into European computing capacity.” In this world, it came true.",
             "One risk quietly became routine: “A bottleneck in industrial competitiveness could propagate into strategic-autonomy goals.”",
-            "The price is reach: fewer partners, slower exchange and a growing talent bill to staff the walls."
+            "The trade-off is reach: Europe has more control, but fewer outside connections and less access to some global talent, markets and ideas."
           ],
           "bullets": [
             {
               "label": "Picture",
-              "text": "By 2035 Europe spends heavily on its own capabilities, but behind screening, export lists and trusted-partner clubs. Flagship facilities are built and filled, yet who may use them is decided as much by security offices as by scientists."
+              "text": "By 2035, strong European investment has built more research and technology capacity, but Europe works with a narrower set of global partners. Funding and infrastructure are strong, while security, resilience and European control shape who can take part."
             },
             {
               "label": "A day in 2035",
-              "text": "A lab in Lisbon waits six months for a security clearance before it may use a drone test range; the equipment itself is world-class."
+              "text": "A lab in Lisbon uses a drone test range built with strong European funding, but access depends on trusted-partner rules."
             },
             {
               "label": "How we got here",
@@ -114818,23 +114822,23 @@
             },
             {
               "label": "Researchers",
-              "text": "Get excellent kit and generous budgets, in exchange for clearances, screening and fewer foreign co-authors."
+              "text": "Gain better funded European facilities, but face more limits on international collaboration and mobility."
             },
             {
               "label": "Universities",
-              "text": "Split into trusted and ordinary tiers; security offices become as powerful as research offices."
+              "text": "Build stronger European capacity while spending more time on security, access rules and trusted partnerships."
             },
             {
               "label": "Companies",
-              "text": "Win secure public contracts, lose easy access to non-European markets and suppliers."
+              "text": "Benefit from European investment and procurement, but have fewer easy links to some foreign suppliers and markets."
             },
             {
               "label": "Funders",
-              "text": "Spend more than ever, much of it on compliance, vetting and duplicating what used to be shared."
+              "text": "Can build strategic capacity, but pay more for duplication, resilience and European control."
             },
             {
               "label": "The price",
-              "text": "Reach: fewer partners, slower exchange and a growing talent bill to staff the walls."
+              "text": "The trade-off is reach: Europe has more control, but fewer outside connections and less access to some global talent, markets and ideas."
             },
             {
               "label": "Signpost",
@@ -114977,7 +114981,7 @@
             {
               "id": "fortress_frontier:shock:45b7614885",
               "kind": "shock",
-              "name": "Fortress Frontier, after the export lists",
+              "name": "Independent Scale, after the export lists",
               "trigger": "A licence stamped abroad could decide the future of defence-innovation funding.",
               "story": [
                 "Go back to the late 2020s: a licence stamped abroad could decide the future of defence-innovation funding.",
@@ -115022,7 +115026,7 @@
             {
               "id": "fortress_frontier:shock:17cbeecdd8",
               "kind": "shock",
-              "name": "Fortress Frontier, behind the security labels",
+              "name": "Independent Scale, behind the security labels",
               "trigger": "A new security label could quietly shrink who may work on the quantum pilot line.",
               "story": [
                 "The trigger arrives without warning: a new security label could quietly shrink who may work on the quantum pilot line.",
@@ -115067,7 +115071,7 @@
             {
               "id": "fortress_frontier:opportunity:071c9b0adb",
               "kind": "opportunity",
-              "name": "Fortress Frontier, with a lucky break",
+              "name": "Independent Scale, with a lucky break",
               "trigger": "Active agreements could widen European drone capability.",
               "story": [
                 "In this version Europe spots the opening in time: “Active agreements could widen European drone capability.”",
@@ -115105,7 +115109,7 @@
             {
               "id": "fortress_frontier:risk:7f94f58e40",
               "kind": "risk",
-              "name": "Fortress Frontier, with a slow leak",
+              "name": "Independent Scale, with a slow leak",
               "trigger": "A bottleneck in digital public procurement could propagate into AI governance.",
               "story": [
                 "The crack everyone saw in the 2020s finally splits open: “A bottleneck in digital public procurement could propagate into AI governance.”",
@@ -115156,28 +115160,30 @@
         },
         {
           "id": "brilliant_but_broke",
-          "name": "Brilliant but Broke",
-          "tagline": "Open minds, empty wallets.",
+          "name": "Open Under Pressure",
+          "tagline": "Fewer resources, strong global links.",
           "quadrant": {
+            "connectedness": "more_connected",
+            "resources": "fewer_resources",
             "openness": "open",
             "scale": "squeezed"
           },
           "story": [
-            "By 2035 European science is still open and well connected, but chronically underfunded. Ideas travel freely, and so do the people who have them, often to wherever the money and the machines are.",
+            "Global links remain strong in 2035, but European research and innovation operate with tight resources. Ideas and people move easily, while many European teams depend on outside capital, infrastructure or partners to scale their work.",
             "It is the world where today's evidence toward “Horizon access: the build-out accelerates” and “Capacity is being stretched or made conditional” continues.",
             "A familiar pattern survived the decade: “Researcher retention keeps returning as a capacity constraint.”",
             "One door that looked half-open in the 2020s swung wide: “Active agreements could widen research collaboration.”",
             "And one warning was not heeded: “Research openness could come under sustained pressure.” By 2035 it is simply how things work.",
-            "The price is ownership: Europe discovers, others scale, and the returns flow out."
+            "The trade-off is dependence: Europe stays connected, but often relies on others to finance, host or scale what it creates."
           ],
           "bullets": [
             {
               "label": "Picture",
-              "text": "By 2035 European science is still open and well connected, but chronically underfunded. Ideas travel freely, and so do the people who have them, often to wherever the money and the machines are."
+              "text": "Global links remain strong in 2035, but European research and innovation operate with tight resources. Ideas and people move easily, while many European teams depend on outside capital, infrastructure or partners to scale their work."
             },
             {
               "label": "A day in 2035",
-              "text": "A postdoc in Ghent keeps a shared European research facility running on a shoestring and answers job offers from three other continents every month."
+              "text": "A postdoc in Ghent keeps a shared European research facility running with limited funding while working daily with better-resourced partners abroad."
             },
             {
               "label": "How we got here",
@@ -115197,27 +115203,27 @@
             },
             {
               "label": "Researchers",
-              "text": "Keep their freedom and their networks, lose their contracts; the best leave for better-funded labs."
+              "text": "Keep strong international networks, but face tighter European funding and may move to where resources are better."
             },
             {
               "label": "Universities",
-              "text": "Publish brilliantly and patch buildings; many survive on partnerships with foreign money."
+              "text": "Stay globally connected, while relying more on outside partners and shared infrastructure they do not control."
             },
             {
               "label": "Companies",
-              "text": "Find great ideas cheaply in Europe and scale them somewhere else."
+              "text": "Can reach global capital and markets, but European scale-up capacity remains uneven."
             },
             {
               "label": "Funders",
-              "text": "Ration shrinking budgets and fund many small bets instead of a few big ones."
+              "text": "Must choose carefully where limited resources can make the biggest difference."
             },
             {
               "label": "The price",
-              "text": "Ownership: Europe discovers, others scale, and the returns flow out."
+              "text": "The trade-off is dependence: Europe stays connected, but often relies on others to finance, host or scale what it creates."
             },
             {
               "label": "Signpost",
-              "text": "For an open, squeezed Europe, watch for new evidence on “Horizon access: the build-out accelerates”."
+              "text": "For a resource-constrained, globally connected Europe, watch for new evidence on “Horizon access: the build-out accelerates”."
             }
           ],
           "signals": [
@@ -115321,12 +115327,12 @@
               ]
             }
           ],
-          "watch": "For an open, squeezed Europe, watch for new evidence on “Horizon access: the build-out accelerates”.",
+          "watch": "For a resource-constrained, globally connected Europe, watch for new evidence on “Horizon access: the build-out accelerates”.",
           "variants": [
             {
               "id": "brilliant_but_broke:shock:5070b28f99",
               "kind": "shock",
-              "name": "Brilliant but Broke, after the budget axe",
+              "name": "Open Under Pressure, after the budget axe",
               "trigger": "European drone capability could be the quiet casualty of a spending squeeze.",
               "story": [
                 "Same world, one jolt: European drone capability could be the quiet casualty of a spending squeeze.",
@@ -115371,7 +115377,7 @@
             {
               "id": "brilliant_but_broke:shock:f075e10f26",
               "kind": "shock",
-              "name": "Brilliant but Broke, in the power squeeze",
+              "name": "Open Under Pressure, in the power squeeze",
               "trigger": "A winter power squeeze could put materials advanced on pause.",
               "story": [
                 "Now add a shock: a winter power squeeze could put materials advanced on pause.",
@@ -115416,7 +115422,7 @@
             {
               "id": "brilliant_but_broke:opportunity:c344844dcf",
               "kind": "opportunity",
-              "name": "Brilliant but Broke, with a lucky break",
+              "name": "Open Under Pressure, with a lucky break",
               "trigger": "A live support instrument could expand horizon access.",
               "story": [
                 "A quiet signal from the 2020s turns into a turning point: “A live support instrument could expand horizon access.”",
@@ -115454,7 +115460,7 @@
             {
               "id": "brilliant_but_broke:risk:a6b11b080b",
               "kind": "risk",
-              "name": "Brilliant but Broke, with a slow leak",
+              "name": "Open Under Pressure, with a slow leak",
               "trigger": "Industrial technology complexity could come under sustained pressure.",
               "story": [
                 "Same world, one thing goes wrong. The 2020s warning “Industrial technology complexity could come under sustained pressure” comes true.",
@@ -115493,28 +115499,30 @@
         },
         {
           "id": "quiet_retreat",
-          "name": "The Quiet Retreat",
-          "tagline": "Fewer partners, less money.",
+          "name": "Constrained Europe",
+          "tagline": "Fewer resources, weaker global links.",
           "quadrant": {
+            "connectedness": "less_connected",
+            "resources": "fewer_resources",
             "openness": "guarded",
             "scale": "squeezed"
           },
           "story": [
-            "By 2035 tight budgets and tight security have met. Europe protects what it already has rather than building what comes next, and research becomes a matter of managing risk more than chasing discovery.",
+            "In 2035, Europe has fewer resources and weaker global connections. Governments and institutions protect a smaller core of capabilities, while new projects, partnerships and large investments become harder to sustain.",
             "Two pulls visible today carried it here: “Research security gains momentum”, and “Green technology gets harder to do”.",
             "Old habits held. Back then the Radar kept seeing “Strategic autonomy keeps spreading through research and technology policy.” It never went away.",
             "The lucky break was visible years ahead: “Defence-innovation funding is expanding through new funding.”",
             "Nobody acted on this 2020s red flag: “Research-security screening could become more conditional.” Now everyone lives with it.",
-            "The price is the future: a smaller, safer system that falls further behind each year."
+            "The trade-off is ambition: Europe reduces exposure, but has less capacity to build, experiment and compete at scale."
           ],
           "bullets": [
             {
               "label": "Picture",
-              "text": "By 2035 tight budgets and tight security have met. Europe protects what it already has rather than building what comes next, and research becomes a matter of managing risk more than chasing discovery."
+              "text": "In 2035, Europe has fewer resources and weaker global connections. Governments and institutions protect a smaller core of capabilities, while new projects, partnerships and large investments become harder to sustain."
             },
             {
               "label": "A day in 2035",
-              "text": "A half-empty institute in Turin still maintains a public AI factory, but new projects need three sign-offs and rarely start."
+              "text": "A research institute in Turin keeps a public AI factory running, but new projects are rare and international partnerships are harder to start."
             },
             {
               "label": "How we got here",
@@ -115534,27 +115542,27 @@
             },
             {
               "label": "Researchers",
-              "text": "Face fewer openings, more paperwork and slower careers; mobility turns one-way, outward."
+              "text": "Face fewer opportunities at home and fewer easy routes into global networks."
             },
             {
               "label": "Universities",
-              "text": "Consolidate and merge; risk management replaces ambition in the strategy documents."
+              "text": "Protect core strengths, merge or narrow priorities as both funding and international links weaken."
             },
             {
               "label": "Companies",
-              "text": "Lean on protected home markets and trusted suppliers, and stop expecting research to lead."
+              "text": "Work with smaller markets and more limited research capacity, with fewer options outside Europe."
             },
             {
               "label": "Funders",
-              "text": "Protect a shrinking core and cut everything that looks optional."
+              "text": "Concentrate scarce resources on a smaller number of strategic capabilities."
             },
             {
               "label": "The price",
-              "text": "The future: a smaller, safer system that falls further behind each year."
+              "text": "The trade-off is ambition: Europe reduces exposure, but has less capacity to build, experiment and compete at scale."
             },
             {
               "label": "Signpost",
-              "text": "For a guarded, squeezed Europe, watch for new evidence on “Research security gains momentum”."
+              "text": "For a resource-constrained Europe with weaker global links, watch for new evidence on “Research security gains momentum”."
             }
           ],
           "signals": [
@@ -115664,12 +115672,12 @@
               ]
             }
           ],
-          "watch": "For a guarded, squeezed Europe, watch for new evidence on “Research security gains momentum”.",
+          "watch": "For a resource-constrained Europe with weaker global links, watch for new evidence on “Research security gains momentum”.",
           "variants": [
             {
               "id": "quiet_retreat:shock:5038fbcbb9",
               "kind": "shock",
-              "name": "The Quiet Retreat, in the shadow of war",
+              "name": "Constrained Europe, in the shadow of war",
               "trigger": "A wider conflict could pull people and money away from Horizon association.",
               "story": [
                 "Picture the same 2035, but somewhere along the way: a wider conflict could pull people and money away from Horizon association.",
@@ -115714,7 +115722,7 @@
             {
               "id": "quiet_retreat:shock:5f6fe998ff",
               "kind": "shock",
-              "name": "The Quiet Retreat, after the political turn",
+              "name": "Constrained Europe, after the political turn",
               "trigger": "The next Horizon budget could become a political bargaining chip.",
               "story": [
                 "Then the unexpected happened: the next Horizon budget could become a political bargaining chip.",
@@ -115759,7 +115767,7 @@
             {
               "id": "quiet_retreat:opportunity:8f218e0751",
               "kind": "opportunity",
-              "name": "The Quiet Retreat, with a lucky break",
+              "name": "Constrained Europe, with a lucky break",
               "trigger": "Active capacity-building could expand AI-factory public procurement.",
               "story": [
                 "Same world, one door opens. The 2020s signal “Active capacity-building could expand AI-factory public procurement” becomes real.",
@@ -115797,7 +115805,7 @@
             {
               "id": "quiet_retreat:risk:4d0ca0ed9b",
               "kind": "risk",
-              "name": "The Quiet Retreat, with a slow leak",
+              "name": "Constrained Europe, with a slow leak",
               "trigger": "Funding for researcher retention is visible before a matching outcome measure is.",
               "story": [
                 "Here the slow problem wins: “Funding for researcher retention is visible before a matching outcome measure is.”",

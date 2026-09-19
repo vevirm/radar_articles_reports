@@ -12,7 +12,7 @@
     {match:/\/priorities\/?$/,key:'priorities',title:'Risks & Opportunities',purpose:'Possible consequences for European research and innovation.'},
     {match:/\/shocks\/variants(?:\.html)?\/?$/,key:'shocks-variants',title:'Shock Variants',purpose:'Alternative forms, absorbers and counter-evidence for one supported external-shock mechanism.'},
     {match:/\/shocks\/?$/,key:'shocks',title:'External Shocks',purpose:'Possible disruptions to European research and innovation.'},
-    {match:/\/2035\/?$/,key:'future',title:'2035',purpose:'Four imagined worlds for European research and innovation in 2035, each with four variants, built from today\'s findings.'},
+    {match:/\/2035(?:\/[^/]+)?\/?$/,key:'future',title:'2035',purpose:'Four possible Europes in 2035, shaped by resources and global connectedness.'},
     {match:/\/(historical|history)\/?$/,key:'historical',title:'Earlier Findings',purpose:'Findings published before the Radar started scanning.'},
     {match:/\/literature\/?$/,key:'literature',title:'Sources',purpose:'Where the findings come from.'},
     {match:/\/briefing\/?$/,key:'briefing',title:'Topics',purpose:'What the Radar is seeing, grouped by subject.'},
@@ -23,7 +23,7 @@
   const page=pages.find(x=>x.match.test(path));
   if(!page)return;
 
-  const depth=path.endsWith('/frontier/quick/')?2:1;
+  const depth=path.endsWith('/frontier/quick/')?2:(/\/2035\/[^/]+\/?$/.test(path)?2:1);
   const prefix='../'.repeat(depth);
   const menu=[
     ['radar/','Radar',''],

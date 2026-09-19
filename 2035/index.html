@@ -2,110 +2,54 @@
 <html lang="en">
 <head>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
 <title>2035 · Research &amp; Innovation × Geopolitics Radar</title>
 <link rel="stylesheet" href="../radar.css?v=28.4">
+<link rel="stylesheet" href="scenarios.css?v=1">
 <script src="../radar_data.js?v=28.1"></script>
 </head>
 <body>
 <main class="wrap future-main">
-  <p id="futureIntro" class="summary">Loading</p>
-  <section class="future-frame" aria-label="The four worlds">
-    <div class="future-map" id="futureMap" aria-hidden="true">
-      <span class="future-axis future-axis-top">Scaling</span>
-      <span class="future-axis future-axis-bottom">Squeezed</span>
-      <span class="future-axis future-axis-left">Guarded</span>
-      <span class="future-axis future-axis-right">Open</span>
-      <div class="future-quad" data-world="fortress_frontier"></div>
-      <div class="future-quad" data-world="big_commons"></div>
-      <div class="future-quad" data-world="quiet_retreat"></div>
-      <div class="future-quad" data-world="brilliant_but_broke"></div>
+  <p class="future-lede">Four different Europes in 2035. The two questions are simple: how many resources does Europe have, and how connected is it to the rest of the world?</p>
+  <section class="scenario-frame" aria-label="2035 scenario matrix">
+    <div class="scenario-matrix-wrap">
+      <div class="axis-y-high">More resources</div>
+      <div class="axis-y-title">Resources</div>
+      <div id="scenarioMatrix" class="scenario-matrix"><p class="empty">Loading</p></div>
+      <div class="axis-y-low">Fewer resources</div>
+      <div class="axis-x"><span></span><b>Global connectedness</b><span></span></div>
+      <div class="axis-x-labels"><span>Less connected</span><span>More connected</span></div>
     </div>
-    <p class="future-axes-text">Two open questions set the frame: does European research stay open or become guarded, and do money and capacity keep scaling or get squeezed? Each corner is one possible 2035.</p>
+    <p class="scenario-note">Each square is a different 2035. Click one to open the full scenario and its four variants.</p>
   </section>
-  <div id="futureWorlds" class="future-worlds"><p class="empty">Loading</p></div>
-  <p id="futureMethod" class="future-method"></p>
+
+  <section aria-labelledby="taxonomyTitle">
+    <div class="taxonomy-head"><h2 id="taxonomyTitle">Scenario families</h2><p>The same four worlds, with their four variants visible at a glance.</p></div>
+    <div id="scenarioTaxonomy" class="scenario-taxonomy"><p class="empty">Loading</p></div>
+  </section>
 </main>
 <script>
 const clean=v=>String(v||'').replace(/\s+/g,' ').trim();
 const esc=v=>clean(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const PAGE={shock:'../shocks/',trend:'../trends/',continuity:'../phenomena/',risk:'../priorities/',opportunity:'../priorities/'};
-const KIND={shock:'Shock',opportunity:'Opportunity seized',risk:'Risk realised'};
-const PRODUCT={shock:'External shock',trend:'Trend',continuity:'Ongoing phenomenon',risk:'Risk',opportunity:'Opportunity'};
-function sourcesHtml(list){
-  const xs=(Array.isArray(list)?list:[]).filter(s=>clean(s.source));
-  if(!xs.length)return '';
-  return `<ul class="future-sources">${xs.map(s=>`<li>${s.link?`<a href="${esc(s.link)}" target="_blank" rel="noopener">${esc(s.source)}</a>`:esc(s.source)}${s.title?` <span>— ${esc(s.title)}</span>`:''}</li>`).join('')}</ul>`;
-}
-function signalHtml(s){
-  const href=PAGE[s.product]||'';
-  const label=PRODUCT[s.product]||'Finding';
-  return `<li><span class="future-tag">${esc(label)}</span> ${href?`<a href="${href}">${esc(s.winning_side||s.title)}</a>`:esc(s.winning_side||s.title)}${sourcesHtml(s.sources)}</li>`;
-}
-const STAKE=new Set(['Researchers','Universities','Companies','Funders']);
-function bulletsHtml(list){
-  const items=Array.isArray(list)?list:[];
-  const out=[];let group=[];
-  const flush=()=>{if(group.length){out.push(`<li><strong>Who wins, who loses:</strong><ul>${group.map(b=>`<li><strong>${esc(b.label)}:</strong> ${esc(b.text)}</li>`).join('')}</ul></li>`);group=[]}};
-  for(const b of items){
-    if(STAKE.has(clean(b.label))){group.push(b);continue}
-    flush();
-    out.push(`<li><strong>${esc(b.label)}:</strong> ${esc(b.text)}</li>`);
-  }
-  flush();
-  return `<ul class="future-bullets">${out.join('')}</ul>`;
-}
-function variantHtml(v){
-  return `<article class="future-variant" data-kind="${esc(v.kind)}">
-    <p class="future-kind">${esc(KIND[v.kind]||'Variant')}</p>
-    <h4>${esc(v.name)}</h4>
-    ${Array.isArray(v.bullets)&&v.bullets.length?bulletsHtml(v.bullets):(v.story||[]).map(p=>`<p>${esc(p)}</p>`).join('')}
-    <details><summary>Related finding</summary>
-      <p>${PAGE[v.product]?`<a href="${PAGE[v.product]}">${esc(v.trigger)}</a>`:esc(v.trigger)}</p>
-      ${sourcesHtml(v.sources)}
-    </details>
-  </article>`;
-}
-function worldHtml(w){
-  return `<section class="future-world" id="${esc(w.id)}">
-    <article class="future-card">
-      <h2>${esc(w.name)}</h2>
-      <p class="future-tagline">${esc(w.tagline)}</p>
-      ${Array.isArray(w.bullets)&&w.bullets.length?bulletsHtml(w.bullets):(w.story||[]).map(p=>`<p>${esc(p)}</p>`).join('')+(w.watch?`<p class="future-watch"><strong>Watch for:</strong> ${esc(w.watch)}</p>`:'')}
-      <details><summary>Signals already visible today</summary><ul class="future-signals">${(w.signals||[]).map(signalHtml).join('')}</ul></details>
-    </article>
-    <div class="future-variants">${(w.variants||[]).map(variantHtml).join('')}</div>
-  </section>`;
-}
+const ROUTE={fortress_frontier:'independent-scale',big_commons:'connected-growth',quiet_retreat:'constrained-europe',brilliant_but_broke:'open-under-pressure'};
+const axisLabel=w=>{
+ const q=w.quadrant||{};
+ const resources=q.resources==='more_resources'||q.scale==='scaling'?'More resources':'Fewer resources';
+ const connected=q.connectedness==='more_connected'||q.openness==='open'?'more connected':'less connected';
+ return `${resources} · ${connected} globally`;
+};
+const familyHtml=w=>`<article class="tax-family"><div class="tax-family-top"><div><h3>${esc(w.name)}</h3><p class="tagline">${esc(w.tagline)}</p><a class="tax-open" href="${ROUTE[w.id]||w.id}/">Open scenario →</a></div><div class="tax-variants">${(w.variants||[]).slice(0,4).map(v=>`<div class="tax-variant"><small>${esc(v.kind||'Variant')}</small><span>${esc(v.name)}</span></div>`).join('')}</div></div></article>`;
 (async()=>{
-  const box=document.getElementById('futureWorlds');
-  try{
-    const data=await RadarData.load('../radar.json','../radar_seed.json');
-    const sc=data?.high_order_inference?.scenarios_2035||{};
-    const worlds=Array.isArray(sc.scenarios)?sc.scenarios:[];
-    if(!worlds.length){
-      document.getElementById('futureIntro').textContent='The 2035 scenarios will appear after the next scan.';
-      box.innerHTML='';return;
-    }
-        const nv=worlds.reduce((n,w)=>n+(Array.isArray(w.variants)?w.variants.length:0),0);
-    document.getElementById('futureIntro').textContent=`${worlds.length} worlds and ${nv} variants. These are scenarios, not forecasts, and none is ranked as more likely.`;
-    for(const w of worlds){
-      const q=document.querySelector(`.future-quad[data-world="${w.id}"]`);
-      if(q)q.innerHTML=`<a href="#${esc(w.id)}"><strong>${esc(w.name)}</strong><span>${esc(w.tagline)}</span></a>`;
-    }
-    box.innerHTML=worlds.map(worldHtml).join('');
-    document.getElementById('futureMethod').textContent=clean(sc.method);
-  }catch(e){
-    console.error(e);
-    document.getElementById('futureIntro').textContent='The 2035 scenarios are unavailable.';
-    box.innerHTML='';
-  }
+ try{
+  const data=await RadarData.load('../radar.json','../radar_seed.json');
+  const worlds=data?.high_order_inference?.scenarios_2035?.scenarios||[];
+  const byId=Object.fromEntries(worlds.map(w=>[w.id,w]));
+  const order=['fortress_frontier','big_commons','quiet_retreat','brilliant_but_broke'];
+  document.getElementById('scenarioMatrix').innerHTML=order.map(id=>{const w=byId[id];if(!w)return '';return `<div class="scenario-cell"><a href="${ROUTE[w.id]||w.id}/"><div><div class="cell-axis">${esc(axisLabel(w))}</div><h2>${esc(w.name)}</h2><p>${esc(w.tagline)}</p></div><span class="open-cue">Open scenario →</span></a></div>`}).join('');
+  document.getElementById('scenarioTaxonomy').innerHTML=order.map(id=>byId[id]).filter(Boolean).map(familyHtml).join('');
+ }catch(e){console.error(e);document.getElementById('scenarioMatrix').innerHTML='<p class="empty">Scenarios are unavailable.</p>';document.getElementById('scenarioTaxonomy').innerHTML='';}
 })();
 </script>
 <script src="../site-shell.js?v=28.1"></script>
-</body>
-</html>
+</body></html>
