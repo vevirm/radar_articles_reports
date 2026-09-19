@@ -2023,18 +2023,18 @@ _FAMILY_LABELS = {
 
 
 _TREND_TITLE_POOL: tuple[tuple[str, str], ...] = (
-    ("Europe pushes {x} forward", "{X} runs into limits"),
-    ("More money and moves behind {x}", "New conditions pile up around {x}"),
-    ("{X} gains momentum", "Rules and costs rein {x} in"),
-    ("Scaling up {x}", "{X} gets harder to do"),
-    ("Europe doubles down on {x}", "Second thoughts slow {x}"),
-    ("{X}: the build-out accelerates", "{X}: the fine print tightens"),
-    ("Fresh commitments for {x}", "Friction grows around {x}"),
-    ("{X} is on the rise", "{X} meets resistance"),
-    ("Opening the throttle on {x}", "Pulling the handbrake on {x}"),
-    ("{X} finds new backers", "{X} faces new hurdles"),
-    ("Europe bets bigger on {x}", "The bill for {x} keeps rising"),
-    ("{X} spreads", "{X} gets fenced in"),
+    ("Europe expands {x}", "Constraints on {x} are growing"),
+    ("Investment and activity increase in {x}", "Conditions around {x} are tightening"),
+    ("{X} is gaining support", "Costs and constraints are limiting {x}"),
+    ("{X} is expanding", "Barriers to {x} are increasing"),
+    ("Europe increases support for {x}", "Constraints are slowing {x}"),
+    ("{X} capacity is expanding", "Conditions around {x} are tightening"),
+    ("New commitments strengthen {x}", "Barriers around {x} are growing"),
+    ("{X} is expanding", "Resistance to {x} is growing"),
+    ("Activity is increasing in {x}", "Constraints are slowing {x}"),
+    ("Support is growing for {x}", "Barriers to {x} are growing"),
+    ("Europe is investing more in {x}", "Costs of {x} are rising"),
+    ("Use of {x} is expanding", "Restrictions on {x} are increasing"),
 )
 
 
@@ -2208,15 +2208,15 @@ def _trend_payload(
     title_pairs = {
         "ai.governance": ("Turn AI governance into operating rules", "AI governance gets harder to reconcile"),
         "research.collaboration": ("Open more research partnerships", "Put more conditions around collaboration"),
-        "innovation.system_performance": ("Push harder on innovation performance", "Structural bottlenecks keep holding performance back"),
-        "goal.strategic_autonomy": ("Build more strategic autonomy", "Dependencies keep setting the terms"),
+        "innovation.system_performance": ("Europe is strengthening innovation performance", "Structural bottlenecks are holding innovation performance back"),
+        "goal.strategic_autonomy": ("Europe is building more strategic autonomy", "Strategic dependencies are limiting autonomy"),
         "compute.capacity": ("Build more European computing capacity", "Power, supply and access constrain the build-out"),
         "research.system_governance": ("Strengthen research-system governance", "More conditions complicate research governance"),
         "research_security.screening": ("Make research-security screening routine", "Keep screening proportionate to open research"),
         "research.infrastructure": ("Build and open more research infrastructure", "Access and operating constraints tighten around it"),
         "industrial.competitiveness": ("Build more European industrial capability", "Cost and dependency pressures keep biting"),
         "research.system_capacity": ("Expand research-system capacity", "Capacity is being stretched or made conditional"),
-        "talent.retention": ("Make Europe stickier for researchers", "Career and mobility frictions keep pulling people away"),
+        "talent.retention": ("Europe is trying to retain more researchers", "Career and mobility barriers are pushing researchers away"),
         "horizon.budget_2028_34": ("Put more money behind the next Horizon programme", "Frugal positions keep the budget under pressure"),
     }
     short_label = label_text.replace(" as a whole", "")

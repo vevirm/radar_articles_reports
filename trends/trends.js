@@ -138,14 +138,14 @@
   const PAIRS=[
     {
       id:'build_vs_rent',
-      left:{title:'Building our own',plain:'Europe is putting more money and shared infrastructure into its own strategic technology capacity.',why:'More European-controlled capacity reduces exposure to outside suppliers and chokepoints.',historyAny:[/europe.*research infrastructure/,/europe.*supercomput/,/europe.*compute capacity/,/technology sovereignty/,/eurohpc/],roles:[
+      left:{title:'Europe is building more of its own capacity',plain:'Europe is putting more money and shared infrastructure into its own strategic technology capacity.',why:'More European-controlled capacity reduces exposure to outside suppliers and chokepoints.',historyAny:[/europe.*research infrastructure/,/europe.*supercomput/,/europe.*compute capacity/,/technology sovereignty/,/eurohpc/],roles:[
         {label:'AI compute investment',claimType:'action',spec:{any:[/ai gigafactor/],preferSource:/European Commission/}},
         {label:'Supercomputing capacity',claimType:'action',spec:{any:[/supercomput/,/eurohpc.*competence centre/,/federation platform/],preferSource:/EuroHPC/}},
         {label:'Quantum capacity',claimType:'action',spec:{any:[/quantum.*call/,/quantum-testing infrastructure/,/quantum experimental pilot lines/,/new quantum computer/],preferSource:/EuroHPC/}},
         {label:'Shared AI access',claimType:'action',spec:{any:[/resource for ai science in europe/,/raise.*ai science/]}},
         {label:'Sovereignty policy',claimType:'action',spec:{any:[/strengthening europe.*tech sovereignty/,/supercomputers.*europe.*technological sovereignty/,/quantum.*technological sovereignty/]}}
       ]},
-      right:{title:'Still renting theirs',plain:'Europe still relies on outside cloud, advanced chips and technology layers that cannot be replaced quickly.',why:'Outside control can still shape European research access, cost and strategic freedom.',historyAny:[/dependenc/,/semiconductor/,/technology gap/,/global rivalry/,/supply chain/],roles:[
+      right:{title:'Europe still depends on foreign capacity',plain:'Europe still relies on outside cloud, advanced chips and technology layers that cannot be replaced quickly.',why:'Outside control can still shape European research access, cost and strategic freedom.',historyAny:[/dependenc/,/semiconductor/,/technology gap/,/global rivalry/,/supply chain/],roles:[
         {label:'Cloud and AI dependence',claimType:'effect',hostileWitness:true,hostileSource:/European Commission/,spec:{any:[/cloud and ai development/,/dependence on non-european suppliers/,/limited and geographically concentrated/],preferTitle:/Cloud and AI Development/}},
         {label:'Chip dependence',claimType:'diagnosis',spec:{any:[/semiconductor.*depend/,/supply chain dependencies.*china.*taiwan.*united states/,/geopolitics of ai chips/]}},
         {label:'Capability gap',claimType:'diagnosis',spec:{any:[/structural limitations.*european union.*ai/,/catching up.*strategic autonomy/,/technology gap/,/competitiveness.*ai model/]}},
@@ -155,13 +155,13 @@
     },
     {
       id:'money_in_vs_capital_gap',
-      left:{title:'Money coming in',plain:'Europe is putting more public money and scale-up support behind research-intensive companies.',why:'More growth finance can keep valuable firms, jobs and know-how in Europe.',historyAny:[/scale-up/,/venture capital/,/innovation funding/,/startup/,/eic/],roles:[
+      left:{title:'Investment in European research is increasing',plain:'Europe is putting more public money and scale-up support behind research-intensive companies.',why:'More growth finance can keep valuable firms, jobs and know-how in Europe.',historyAny:[/scale-up/,/venture capital/,/innovation funding/,/startup/,/eic/],roles:[
         {label:'Scale-up strategy',claimType:'action',spec:{any:[/eu startup and scaleup strategy/],preferSource:/European Commission/}},
         {label:'Scale-up investment rules',claimType:'action',spec:{any:[/step scaleup/,/eic fund investment guidelines/],preferSource:/European Innovation Council/}},
         {label:'Public venture role',claimType:'action',spec:{any:[/government roles in venture capital/,/entrepreneurial state.*venture capital/]}},
         {label:'Deep-tech support',claimType:'action',spec:{any:[/deep tech.*funding/,/scale up tech leaders/,/european scale-ups/]}}
       ]},
-      right:{title:'Still short at the top',plain:'Europe still shows weak growth finance and commercialisation gaps around successful technology firms.',why:'If firms cannot scale, public research support does not become durable European capability.',historyAny:[/venture capital gap/,/scale-up gap/,/foreign investor/,/startup relocation/,/capital market/],roles:[
+      right:{title:'Funding gaps remain at the scale-up stage',plain:'Europe still shows weak growth finance and commercialisation gaps around successful technology firms.',why:'If firms cannot scale, public research support does not become durable European capability.',historyAny:[/venture capital gap/,/scale-up gap/,/foreign investor/,/startup relocation/,/capital market/],roles:[
         {label:'Growth-model gap',claimType:'diagnosis',spec:{any:[/eu.*need for a new growth model/,/growth model.*europe/],preferSource:/FIIA|Finnish Institute/}},
         {label:'Venture-capital weakness',claimType:'diagnosis',spec:{any:[/venture capital.*european countries/,/structural limitations.*venture/,/scale-up gap/,/late-stage.*capital/]}},
         {label:'Scaling friction',claimType:'effect',spec:{any:[/structural limitations and competitiveness challenges/,/innovation ecosystems and entrepreneurial venture capital/]}},
@@ -171,13 +171,13 @@
     },
     {
       id:'open_vs_secure',
-      left:{title:'Open the doors',plain:'Europe is widening open research, shared data and access to research infrastructure.',why:'Wider access can increase collaboration, reuse and the reach of European research.',historyAny:[/open science/,/open research/,/open access.*research infrastructure/,/research data/],roles:[
+      left:{title:'Research collaboration is opening up',plain:'Europe is widening open research, shared data and access to research infrastructure.',why:'Wider access can increase collaboration, reuse and the reach of European research.',historyAny:[/open science/,/open research/,/open access.*research infrastructure/,/research data/],roles:[
         {label:'Open science push',claimType:'action',spec:{any:[/stronger action on open science/,/open science as a pillar/],preferSource:/ALLEA/}},
         {label:'Open infrastructure',claimType:'action',spec:{any:[/open access to jrc research infrastructures/,/european research infrastructures/],preferSource:/European Commission|Joint Research Centre/}},
         {label:'Shared research data',claimType:'action',spec:{any:[/data sharing.*open science/,/federated.*data access/,/public sharing of research data/]}},
         {label:'Open research information',claimType:'action',spec:{any:[/barcelona declaration on open research information/,/open research information/]}}
       ]},
-      right:{title:'Lock the sensitive rooms',plain:'Research-security and dual-use rules are adding more conditions around sensitive knowledge and collaboration.',why:'Controls can reduce leakage, but they also add friction to legitimate research.',historyAny:[/research security/,/knowledge security/,/dual-use/,/foreign interference/],roles:[
+      right:{title:'Sensitive research is facing tighter controls',plain:'Research-security and dual-use rules are adding more conditions around sensitive knowledge and collaboration.',why:'Controls can reduce leakage, but they also add friction to legitimate research.',historyAny:[/research security/,/knowledge security/,/dual-use/,/foreign interference/],roles:[
         {label:'Research-security rules',claimType:'action',spec:{any:[/national knowledge security guidelines/,/research security by roundtable/,/system leadership.*research security/]}},
         {label:'Dual-use controls',claimType:'action',spec:{any:[/evaluation of the dual-use regulation/,/dual-use regulation/],preferSource:/European Commission/}},
         {label:'Securitised cooperation',claimType:'effect',spec:{any:[/securitisation of knowledge/,/partial securitisation of science policy/,/research cooperation.*de-risking/]}},
@@ -187,13 +187,13 @@
     },
     {
       id:'collaborate_vs_derisk',
-      left:{title:'Add partners',plain:'Europe is widening formal science partnerships, research links and access beyond its borders.',why:'More partners can expand talent, capability and influence beyond Europe’s domestic base.',historyAny:[/science diplomacy/,/international cooperation/,/horizon association/,/research collaboration/],roles:[
+      left:{title:'Europe is adding research partners',plain:'Europe is widening formal science partnerships, research links and access beyond its borders.',why:'More partners can expand talent, capability and influence beyond Europe’s domestic base.',historyAny:[/science diplomacy/,/international cooperation/,/horizon association/,/research collaboration/],roles:[
         {label:'Science diplomacy',claimType:'action',spec:{any:[/framework for science diplomacy/,/first ever eu framework for science diplomacy/],preferSource:/Council of the European Union|European Commission/}},
         {label:'Horizon association',claimType:'action',spec:{any:[/japan officially joins horizon europe/,/eu and egypt strengthen research and innovation partnership.*horizon europe association/],preferSource:/European Commission|ERA Portal/}},
         {label:'Cross-border research',claimType:'action',spec:{any:[/fifth freedom/,/international cooperation in research and innovation/,/innovation beyond europe.*borders/]}},
         {label:'Partnership strategy',claimType:'action',spec:{any:[/autonomy through partnerships/,/shared gains, secure links/,/researchbridge/]}}
       ]},
-      right:{title:'Check the guest list',plain:'The same system is becoming more selective where security and technology dependence are judged important.',why:'Selective access may protect capability, but it can fragment networks Europe still needs.',historyAny:[/de-risk.*research/,/research security/,/china.*research collaboration/,/restriction.*collaboration/,/knowledge security/],roles:[
+      right:{title:'Research partnerships face tighter screening',plain:'The same system is becoming more selective where security and technology dependence are judged important.',why:'Selective access may protect capability, but it can fragment networks Europe still needs.',historyAny:[/de-risk.*research/,/research security/,/china.*research collaboration/,/restriction.*collaboration/,/knowledge security/],roles:[
         {label:'Knowledge-security controls',claimType:'action',spec:{any:[/national knowledge security guidelines/,/knowledge security/]}},
         {label:'EU-China de-risking',claimType:'effect',spec:{any:[/eu.?china research cooperation.*de-risking/,/securitisation of knowledge.*eu science policy/]}},
         {label:'Partner restrictions',claimType:'effect',spec:{any:[/restrictions.*international research collaboration/,/proposed restrictions on international research collaboration/,/science knows no borders/]}},
@@ -203,13 +203,13 @@
     },
     {
       id:'talent_pull_vs_talent_friction',
-      left:{title:'Come to Europe',plain:'Europe is treating research talent as strategic capacity and is building programmes to attract and retain people.',why:'Talent gains help turn new funding and infrastructure into actual research capability.',historyAny:[/talent/,/research career/,/doctoral workforce/,/researcher mobility/],roles:[
+      left:{title:'Europe is attracting research talent',plain:'Europe is treating research talent as strategic capacity and is building programmes to attract and retain people.',why:'Talent gains help turn new funding and infrastructure into actual research capability.',historyAny:[/talent/,/research career/,/doctoral workforce/,/researcher mobility/],roles:[
         {label:'Choose Europe',claimType:'action',spec:{any:[/choose europe for science/],preferSource:/Marie Skłodowska-Curie|European Commission/}},
         {label:'Attract and retain',claimType:'action',spec:{any:[/attract and retain research talent/,/research talent.*strategic advantage/]}},
         {label:'Researcher mobility',claimType:'action',spec:{any:[/the fifth freedom in the european research area/,/ecas report: insights from researchers on the fifth freedom/]}},
         {label:'Skills pipeline',claimType:'action',spec:{any:[/doctoral networks/],preferTitle:/Doctoral Networks/}}
       ]},
-      right:{title:'Please do not leave',plain:'Career insecurity, uneven opportunities and skills gaps still make it hard to keep scarce researchers.',why:'New facilities do little if the people needed to use them leave or cannot be hired.',historyAny:[/brain drain/,/precar/,/research career/,/skills shortage/,/talent shortage/],roles:[
+      right:{title:'Europe is struggling to retain research talent',plain:'Career insecurity, uneven opportunities and skills gaps still make it hard to keep scarce researchers.',why:'New facilities do little if the people needed to use them leave or cannot be hired.',historyAny:[/brain drain/,/precar/,/research career/,/skills shortage/,/talent shortage/],roles:[
         {label:'Brain drain',claimType:'effect',spec:{any:[/research careers, brain drain and policy lessons/,/which job offers may mitigate brain drain/]}},
         {label:'Career insecurity',claimType:'effect',spec:{any:[/precarity/,/temporary contracts/],preferTitle:/Choose Europe : Research Careers/}},
         {label:'Skills gap',claimType:'diagnosis',spec:{any:[/skills shortage/,/skills gap/,/human-capability.*gap/,/researcher shortage/]}},
@@ -219,13 +219,13 @@
     },
     {
       id:'infrastructure_vs_bottlenecks',
-      left:{title:'Build the machine',plain:'Europe is expanding shared laboratories, computing facilities and other research infrastructure.',why:'More capacity gives researchers places to test, compute and scale new ideas.',historyAny:[/europe.*research infrastructure/,/europe.*supercomput/,/europe.*compute capacity/,/open access.*infrastructure/,/eurohpc/],roles:[
+      left:{title:'Europe is expanding research infrastructure',plain:'Europe is expanding shared laboratories, computing facilities and other research infrastructure.',why:'More capacity gives researchers places to test, compute and scale new ideas.',historyAny:[/europe.*research infrastructure/,/europe.*supercomput/,/europe.*compute capacity/,/open access.*infrastructure/,/eurohpc/],roles:[
         {label:'Research infrastructure',claimType:'action',spec:{any:[/^european research infrastructures/,/horizon europe: research infrastructures/]}},
         {label:'AI and compute',claimType:'action',spec:{any:[/ai gigafactor/,/supercomputer/,/resource for ai science in europe/]}},
         {label:'Quantum facilities',claimType:'action',spec:{any:[/quantum-testing infrastructure/,/quantum experimental pilot lines/,/new quantum computer/]}},
         {label:'Open facility access',claimType:'action',spec:{any:[/open access to jrc research infrastructures/,/federated.*infrastructure/]}}
       ]},
-      right:{title:'Find a free slot',plain:'Access, concentration and bottlenecks still limit how easily researchers can use scarce facilities.',why:'A facility only adds capability when researchers can actually reach and use it.',historyAny:[/bottleneck/,/limited.*capacity/,/access.*research infrastructure/,/infrastructure.*gap/,/research infrastructure.*access/],roles:[
+      right:{title:'Access to research infrastructure remains constrained',plain:'Access, concentration and bottlenecks still limit how easily researchers can use scarce facilities.',why:'A facility only adds capability when researchers can actually reach and use it.',historyAny:[/bottleneck/,/limited.*capacity/,/access.*research infrastructure/,/infrastructure.*gap/,/research infrastructure.*access/],roles:[
         {label:'Bottleneck resources',claimType:'effect',spec:{any:[/research infrastructures as bottleneck resources/],preferSource:/EPJ Research Infrastructures/}},
         {label:'Concentrated capacity',claimType:'effect',spec:{any:[/limited and geographically concentrated/,/cloud and ai computing capacity.*limited/],preferSource:/European Commission/}},
         {label:'Participation barriers',claimType:'effect',spec:{any:[/barriers and policy priorities.*underrepresented european countries/,/navigating eu research participation.*widening country/]}}
@@ -234,13 +234,13 @@
     },
     {
       id:'one_europe_vs_many_rulebooks',
-      left:{title:'One Europe on paper',plain:'Europe is building common frameworks, shared programmes and cross-border rules for research.',why:'Common approaches can make collaboration and access more predictable across Europe.',historyAny:[/european research area/,/eu framework/,/fifth freedom/,/common.*research/,/science diplomacy/],roles:[
+      left:{title:'Europe is building common research rules',plain:'Europe is building common frameworks, shared programmes and cross-border rules for research.',why:'Common approaches can make collaboration and access more predictable across Europe.',historyAny:[/european research area/,/eu framework/,/fifth freedom/,/common.*research/,/science diplomacy/],roles:[
         {label:'EU science framework',claimType:'action',spec:{any:[/eu framework for science diplomacy/,/framework for science diplomacy/],preferSource:/Council of the European Union|European Commission/}},
         {label:'European Research Area',claimType:'action',spec:{any:[/^european research area$/, /european research area.*policy/],preferSource:/European Commission/}},
         {label:'Fifth Freedom',claimType:'action',spec:{any:[/fifth freedom in the european research area/,/fifth freedom.*research/]}},
         {label:'Shared infrastructure',claimType:'action',spec:{any:[/european research infrastructures/,/federat.*european.*research/]}}
       ]},
-      right:{title:'Twenty-seven ways to do it',plain:'National approaches still diverge on research security, access and strategic technology policy.',why:'Different national rules can turn one European research space into several practical systems.',historyAny:[/fragment/,/national.*research security/,/scandinavian/,/germany.*research security/,/ireland.*research security/],roles:[
+      right:{title:'National research rules still differ',plain:'National approaches still diverge on research security, access and strategic technology policy.',why:'Different national rules can turn one European research space into several practical systems.',historyAny:[/fragment/,/national.*research security/,/scandinavian/,/germany.*research security/,/ireland.*research security/],roles:[
         {label:'Fragmented technology response',claimType:'effect',spec:{any:[/fragmented europe/],preferSource:/MERICS/}},
         {label:'Different security approaches',claimType:'effect',spec:{any:[/comparing scandinavian approaches to research security/]}},
         {label:'National securitisation',claimType:'effect',spec:{any:[/germany.*partial securitisation/,/research security by roundtable.*germany/]}},
@@ -251,13 +251,13 @@
     },
     {
       id:'dual_use_vs_open_research',
-      left:{title:'Research gets a helmet',plain:'More European research funding and policy is opening toward defence and dual-use technology.',why:'That can connect research to security needs and new sources of funding.',historyAny:[/dual-use/,/defence innovation/,/research security/,/civil-military/],roles:[
+      left:{title:'Defence and dual-use research are expanding',plain:'More European research funding and policy is opening toward defence and dual-use technology.',why:'That can connect research to security needs and new sources of funding.',historyAny:[/dual-use/,/defence innovation/,/research security/,/civil-military/],roles:[
         {label:'EIC opens to dual use',claimType:'action',spec:{any:[/european innovation council opens to defence and dual-use technologies/],preferSource:/European Innovation Council/}},
         {label:'Funding expands',claimType:'action',spec:{any:[/research and innovation funding expands to defence and dual-use/]}},
         {label:'Dual-use regulation review',claimType:'action',spec:{any:[/evaluation of the dual-use regulation/],preferSource:/European Commission/}},
         {label:'Defence regions',claimType:'action',spec:{any:[/european network of defence-related regions/]}}
       ]},
-      right:{title:'Research keeps its lab coat',plain:'Universities and research groups are also pushing to keep European research open and research-led.',why:'Those safeguards can limit how far security priorities reshape ordinary research.',historyAny:[/academic freedom/,/open science/,/research-led/,/science knows no borders/],roles:[
+      right:{title:'Civilian and open research remain important',plain:'Universities and research groups are also pushing to keep European research open and research-led.',why:'Those safeguards can limit how far security priorities reshape ordinary research.',historyAny:[/academic freedom/,/open science/,/research-led/,/science knows no borders/],roles:[
         {label:'Keep FP10 research-led',claimType:'action',spec:{any:[/keep fp10 open and research-led/]}},
         {label:'Safeguards for dual use',claimType:'action',spec:{any:[/urges safeguards as fp10 opens to dual-use/,/requests safeguards for dual-use research/]}},
         {label:'Science without borders',claimType:'action',spec:{any:[/science knows no borders/],preferSource:/ALLEA/}},
@@ -267,13 +267,13 @@
     },
     {
       id:'rules_vs_race',
-      left:{title:'Write the rulebook',plain:'Europe keeps building rules, standards and safeguards around strategic technologies and research.',why:'Clear rules can protect trust and shape markets before technologies become harder to govern.',historyAny:[/standard/,/regulation/,/governance/,/research security/,/rules-standards/],roles:[
+      left:{title:'Europe is expanding technology rules and standards',plain:'Europe keeps building rules, standards and safeguards around strategic technologies and research.',why:'Clear rules can protect trust and shape markets before technologies become harder to govern.',historyAny:[/standard/,/regulation/,/governance/,/research security/,/rules-standards/],roles:[
         {label:'AI rules',claimType:'action',spec:{any:[/ahead of the final agreement on the ai act/,/ai governance and geopolitics/]}},
         {label:'Quantum standards',claimType:'action',spec:{any:[/standards for quantum technologies/],preferSource:/EuroHPC/}},
         {label:'Dual-use rules',claimType:'action',spec:{any:[/evaluation of the dual-use regulation/],preferSource:/European Commission/}},
         {label:'Research-security guidance',claimType:'action',spec:{any:[/national knowledge security guidelines/,/research security by roundtable/]}}
       ]},
-      right:{title:'Run before the ink dries',plain:'Europe is under pressure to close technology and growth gaps faster.',why:'Slow delivery can leave good rules governing markets and capabilities built elsewhere.',historyAny:[/competitiveness gap/,/technology gap/,/scale-up/,/catching up/,/growth model/],roles:[
+      right:{title:'Europe is under pressure to move faster on technology',plain:'The same evidence base keeps warning that Europe must close technology and growth gaps faster.',why:'Slow delivery can leave good rules governing markets and capabilities built elsewhere.',historyAny:[/competitiveness gap/,/technology gap/,/scale-up/,/catching up/,/growth model/],roles:[
         {label:'Growth pressure',claimType:'diagnosis',spec:{any:[/eu.*need for a new growth model/],preferSource:/FIIA|Finnish Institute/}},
         {label:'Defence catch-up',claimType:'action',spec:{any:[/catching up: europe.*strategic autonomy in the defence industry/]}},
         {label:'AI competitiveness gap',claimType:'diagnosis',spec:{any:[/structural limitations and competitiveness challenges.*european union.*ai/,/strategic competitiveness.*eu.*united states.*ai/]}},
@@ -282,6 +282,71 @@
       flip:'It moves toward rules if standards become an advantage; toward the race if capability gaps widen despite an expanding rulebook.'
     }
   ];
+
+  function plainTrendTitle(value){
+    const t=clean(value);
+    const exact={
+      'Green technology gains momentum':'Green technology is expanding',
+      'Rules and costs rein green technology in':'Rules and costs are constraining green technology',
+      'Build more European computing capacity':'Europe is expanding computing capacity',
+      'Power, supply and access constrain the build-out':'Power, supply and access are constraining computing expansion',
+      'Fresh commitments for strategic investment':'Strategic investment is increasing',
+      'Friction grows around strategic investment':'Barriers to strategic investment are growing',
+      'Scaling up research security':'Research-security measures are expanding',
+      'Research security gets harder to do':'Research-security requirements are becoming harder to implement',
+      'Europe bets bigger on AI':'Europe is increasing investment in AI',
+      'The bill for AI keeps rising':'AI costs and requirements are increasing',
+      'Europe pushes materials advanced forward':'Europe is expanding advanced-materials capacity',
+      'Materials advanced runs into limits':'Advanced materials face growing constraints',
+      'Horizon access: the build-out accelerates':'Horizon access is expanding',
+      'Horizon access: the fine print tightens':'Conditions on Horizon access are tightening',
+      'Europe doubles down on venture capital':'European venture capital is expanding',
+      'Second thoughts slow venture capital':'Europe still has a venture-capital gap',
+      'Build more strategic autonomy':'Europe is building more strategic autonomy',
+      'Dependencies keep setting the terms':'Strategic dependencies are limiting autonomy',
+      'Open more research partnerships':'Europe is opening more research partnerships',
+      'Put more conditions around collaboration':'Research collaboration faces tighter conditions',
+      'Critical infrastructure resilience is on the rise':'Europe is strengthening critical-infrastructure resilience',
+      'Critical infrastructure resilience meets resistance':'Preparedness gaps are slowing resilience efforts',
+      'Opening the throttle on energy supply':'Energy-supply capacity is expanding',
+      'Pulling the handbrake on energy supply':'New constraints are emerging around energy supply',
+      'Expand research-system capacity':'Europe is expanding research-system capacity',
+      'Capacity is being stretched or made conditional':'Research-system capacity is being stretched or made conditional',
+      'More money and moves behind defence R&I':'Funding and activity are increasing in defence R&I',
+      'New conditions pile up around defence R&I':'Conditions around defence R&I are tightening',
+      'Push harder on innovation performance':'Europe is strengthening innovation performance',
+      'Structural bottlenecks keep holding performance back':'Structural bottlenecks are holding innovation performance back'
+    };
+    if(exact[t])return exact[t];
+    const rules=[
+      [/^Europe pushes (.+) forward$/i,(_,x)=>`Europe expands ${x}`],
+      [/^(.+) runs into limits$/i,(_,x)=>`${x} faces growing constraints`],
+      [/^More money and moves behind (.+)$/i,(_,x)=>`Investment and activity increase in ${x}`],
+      [/^New conditions pile up around (.+)$/i,(_,x)=>`Conditions around ${x} are tightening`],
+      [/^(.+) gains momentum$/i,(_,x)=>`${x} is expanding`],
+      [/^Rules and costs rein (.+) in$/i,(_,x)=>`Rules and costs are constraining ${x}`],
+      [/^Scaling up (.+)$/i,(_,x)=>`${x} is expanding`],
+      [/^(.+) gets harder to do$/i,(_,x)=>`Barriers to ${x} are increasing`],
+      [/^Europe doubles down on (.+)$/i,(_,x)=>`Europe is increasing support for ${x}`],
+      [/^Second thoughts slow (.+)$/i,(_,x)=>`Constraints are slowing ${x}`],
+      [/^(.+): the build-out accelerates$/i,(_,x)=>`${x} is expanding`],
+      [/^(.+): the fine print tightens$/i,(_,x)=>`Conditions around ${x} are tightening`],
+      [/^Fresh commitments for (.+)$/i,(_,x)=>`New commitments strengthen ${x}`],
+      [/^Friction grows around (.+)$/i,(_,x)=>`Barriers around ${x} are growing`],
+      [/^(.+) is on the rise$/i,(_,x)=>`${x} is expanding`],
+      [/^(.+) meets resistance$/i,(_,x)=>`Resistance to ${x} is growing`],
+      [/^Opening the throttle on (.+)$/i,(_,x)=>`Activity is increasing in ${x}`],
+      [/^Pulling the handbrake on (.+)$/i,(_,x)=>`Constraints are slowing ${x}`],
+      [/^(.+) finds new backers$/i,(_,x)=>`Support is growing for ${x}`],
+      [/^(.+) faces new hurdles$/i,(_,x)=>`Barriers to ${x} are growing`],
+      [/^Europe bets bigger on (.+)$/i,(_,x)=>`Europe is investing more in ${x}`],
+      [/^The bill for (.+) keeps rising$/i,(_,x)=>`Costs of ${x} are rising`],
+      [/^(.+) spreads$/i,(_,x)=>`Use of ${x} is expanding`],
+      [/^(.+) gets fenced in$/i,(_,x)=>`Restrictions on ${x} are increasing`]
+    ];
+    for(const [re,fn] of rules){const m=t.match(re);if(m)return fn(...m);}
+    return t;
+  }
 
   function highOrderPairs(data){
     const state=data?.high_order_inference&&typeof data.high_order_inference==='object'?data.high_order_inference:{};
@@ -297,8 +362,8 @@
       const rightEvidence=support.filter(x=>clean(x?.role).startsWith(rightRole)).map(x=>({row:x}));
       if(leftEvidence.length<1||rightEvidence.length<1)return null;
       return {id:c.id,emergent:true,family:clean(b.family),objectKey:clean(b.object_key),support:Number(c.score)||0,
-        left:{title:clean(b.left_title||'Pull A'),plain:clean(b.left_plain||c.reader_summary||''),why:'',pull:Math.round(lp),evidence:leftEvidence,history:[],sourceCount:Number(b.left_sources)||0},
-        right:{title:clean(b.right_title||'Pull B'),plain:clean(b.right_plain||c.reader_summary||''),why:'',pull:Math.round(rp),evidence:rightEvidence,history:[],sourceCount:Number(b.right_sources)||0},
+        left:{title:plainTrendTitle(b.left_title||'Pull A'),plain:clean(b.left_plain||c.reader_summary||''),why:'',pull:Math.round(lp),evidence:leftEvidence,history:[],sourceCount:Number(b.left_sources)||0},
+        right:{title:plainTrendTitle(b.right_title||'Pull B'),plain:clean(b.right_plain||c.reader_summary||''),why:'',pull:Math.round(rp),evidence:rightEvidence,history:[],sourceCount:Number(b.right_sources)||0},
         pullRange:{left:b.left_range||[],right:b.right_range||[]},
         composition:clean(b.composition||''),flip:clean(b.flip_line||''),label:clean(b.label||''),
         actionStats:{leftActions:Number(b.left_actions)||0,rightActions:Number(b.right_actions)||0,leftSources:Number(b.left_sources)||0,rightSources:Number(b.right_sources)||0,rawLeft:Number(b.raw_left_pull),rawRight:Number(b.raw_right_pull)},
