@@ -446,7 +446,7 @@
     const copy=NODE_COPY[label]||{};
     const whatRaw=copy.what||globalThis.RadarReaderStyle?.whatFor?.(x)||clean(x.core_message||x.what||x.title||'');
     const whyRaw=copy.why||globalThis.RadarReaderStyle?.whyFor?.(x)||clean(x.why_it_matters||x.relevance_note||'');
-    const what=globalThis.RadarReaderStyle?.limit?.(whatRaw||`${label} is supported by current Radar evidence.`,18)||whatRaw;
+    const what=globalThis.RadarReaderStyle?.limit?.(whatRaw||`${label} is active in the current material.`,18)||whatRaw;
     const why=globalThis.RadarReaderStyle?.limit?.(whyRaw||'It changes a specific European research capability, dependency, rule or partnership.',15)||whyRaw;
     return {query:clean(query),evidenceCount:matches.length,sourceLink:clean(x.link),sourceTitle:clean(x.title||x.headline),sourceName:clean(x.source),what,why};
   }

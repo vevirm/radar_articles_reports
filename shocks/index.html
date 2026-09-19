@@ -99,13 +99,13 @@ function collect(data){
   return out.sort((a,b)=>b.score-a.score||b.sources-a.sources||b.records-a.records||a.distance-b.distance||a.text.localeCompare(b.text));
 }
 function fmtDate(v){const d=new Date(v);return Number.isNaN(d.getTime())?clean(v):`${d.getUTCDate()} ${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getUTCMonth()]} ${d.getUTCFullYear()}`}
-function evidenceRowsHtml(rows,showRole=true){return (Array.isArray(rows)?rows:[]).map(e=>{const meta=[e.source,e.date?fmtDate(e.date):''].filter(Boolean).join(' — ');const label=e.title||'Evidence';const linked=e.link?`<a href="${esc(e.link)}" target="_blank" rel="noopener">${esc(label)}</a>`:esc(label);const contribution=clean(e.contribution||'');const statement=clean(e.sourceStatement||'');return `<li>${showRole&&e.role?`<strong>${esc(e.role)}:</strong> `:''}${linked}${meta?` <span class="shock-evidence-meta">— ${esc(meta)}</span>`:''}${contribution?`<p><strong>Contribution:</strong> ${esc(contribution)}</p>`:''}${statement?`<p><strong>Source statement:</strong> ${esc(statement)}</p>`:''}</li>`}).join('')}
+function evidenceRowsHtml(rows,showRole=true){return (Array.isArray(rows)?rows:[]).map(e=>{const meta=[e.source,e.date?fmtDate(e.date):''].filter(Boolean).join(' — ');const label=e.title||'Source';const linked=e.link?`<a href="${esc(e.link)}" target="_blank" rel="noopener">${esc(label)}</a>`:esc(label);return `<li>${showRole&&e.role?`<strong>${esc(e.role)}:</strong> `:''}${linked}${meta?` <span class="shock-evidence-meta">— ${esc(meta)}</span>`:''}</li>`}).join('')}
 function shockDetailHtml(x,i){
   const d=x?.detail||{},id=`shock-evidence-${i}`;let body='';
   const roles=Array.isArray(d.requiredRoles)?d.requiredRoles:[],covered=Array.isArray(d.coveredRoles)?d.coveredRoles:[],missing=[...(Array.isArray(d.missingRoles)?d.missingRoles:[]),...(Array.isArray(d.missingLinks)?d.missingLinks:[])];
   if(d.type==='higher-order'){
     if(Array.isArray(d.reasoning)&&d.reasoning.length)body+=`<p><strong>What this means:</strong> ${esc(d.reasoning.join(' '))}</p>`;
-    if(Array.isArray(d.support)&&d.support.length)body+=`<p><strong>What the sources state:</strong></p><ul>${evidenceRowsHtml(d.support,false)}</ul>`;
+    if(Array.isArray(d.support)&&d.support.length)body+=`<p><strong>Sources:</strong></p><ul>${evidenceRowsHtml(d.support,false)}</ul>`;
     if(Array.isArray(d.against)&&d.against.length)body+=`<p><strong>Source evidence that could weaken the finding:</strong></p><ul>${evidenceRowsHtml(d.against,false)}</ul>`;
   }else{
     if(d.secondOrder)body+=`<p><strong>What could follow:</strong> ${esc(d.secondOrder)}</p>`;
@@ -118,9 +118,20 @@ function shockDetailHtml(x,i){
   if(Array.isArray(d.watchFor)&&d.watchFor.length)body+=`<p><strong>Watch for:</strong></p><ul>${d.watchFor.map(v=>`<li>${esc(v)}</li>`).join('')}</ul>`;
   if(d.netAssessment)body+=`<p><strong>Net assessment:</strong> ${esc(d.netAssessment)}</p>`;
   if(!body)return '';
-  return `<div class="shock-actions"><button class="info-button" type="button" data-shock-detail="${id}" aria-expanded="false">Evidence</button></div><div id="${id}" class="shock-detail" hidden>${body}</div>`;
+  return `<div class="shock-actions"><button class="info-button" type="button" data-shock-detail="${id}" aria-expanded="false">Sources</button></div><div id="${id}" class="shock-detail" hidden>${body}</div>`;
 }
-document.addEventListener('click',e=>{const b=e.target.closest('[data-shock-detail]');if(!b)return;const box=document.getElementById(b.dataset.shockDetail);if(!box)return;const opening=box.hidden;box.hidden=!opening;b.setAttribute('aria-expanded',String(opening));b.textContent=opening?'Close':'Evidence'});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-shock-detail]');if(!b)return;const box=document.getElementById(b.dataset.shockDetail);if(!box)return;const opening=box.hidden;box.hidden=!opening;b.setAttribute('aria-expanded',String(opening));b.textContent=opening?'Close':'Sources'});
+function visibleShockExplanation(title,text){
+  const t=clean(title).toLowerCase(),s=clean(text);
+  if(!s)return '';
+  if(/spending squeeze|funding cut/.test(t)&&/^A budget cut or freeze could stop /i.test(s))return '';
+  const a=new Set(t.replace(/[^a-z0-9 ]/g,' ').split(/\s+/).filter(w=>w.length>4));
+  const b=new Set(s.toLowerCase().replace(/[^a-z0-9 ]/g,' ').split(/\s+/).filter(w=>w.length>4));
+  let hit=0; for(const w of a) if(b.has(w)) hit++;
+  if(a.size&&hit/a.size>.72)return '';
+  return s;
+}
+
 (async()=>{
   const el=document.getElementById('shockList');
   try{
@@ -131,10 +142,8 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-shock-deta
     // Stage 7 already publishes the 5-4-3-2-1 x3 shelf (with thin wow levels filled
     // from the nearest level). Keep that order; re-bucketing here dropped findings.
     const items=all.slice(0,15);
-    const reserve=Number(sel.reserve)||0,watch=Number(sel.watch)||0;
-    const stockWords=()=>{if(!reserve&&!watch)return '';const r=reserve?(reserve>=10?' Many more are waiting in reserve.':' More are waiting in reserve.') : '';const w=watch?(watch>=10?' Many possible shocks are still under investigation.':' Some possible shocks are still under investigation.') : '';return `${r}${w}`};
-    document.getElementById('shockSummary').textContent=items.length?`Possible shocks worth watching.${stockWords()}`:`No possible shock is ready to show yet.${stockWords()}`;
-    el.innerHTML=items.length?items.map((x,i)=>`<li><strong>${esc(x.text)}</strong><p>${esc(x.explanation&&x.detail&&x.detail.type==='higher-order'?x.explanation:shockExplanation(x.text))}</p>${shockDetailHtml(x,i)}</li>`).join(''):'<li class="empty">No possible shock is ready to show yet.</li>';
+    document.getElementById('shockSummary').textContent=items.length?'Possible shocks worth watching.':'No possible shock is ready to show yet.';
+    el.innerHTML=items.length?items.map((x,i)=>{const raw=x.explanation&&x.detail&&x.detail.type==='higher-order'?x.explanation:shockExplanation(x.text);const explanation=visibleShockExplanation(x.text,raw);return `<li><strong>${esc(x.text)}</strong>${explanation?`<p>${esc(explanation)}</p>`:''}${shockDetailHtml(x,i)}</li>`}).join(''):'<li class="empty">No possible shock is ready to show yet.</li>';
   }catch(e){console.error(e);document.getElementById('shockSummary').textContent='Shock evidence is unavailable.';el.innerHTML='<li class="empty">Unavailable.</li>'}
 })();
 </script>

@@ -130,8 +130,21 @@ function limit(v,n){
 }
 
 
+function stripReaderMeta(v){
+  let s=clean(v);
+  const starts=[
+    /^(?:the|this) (?:evidence|evidence base) (?:shows|suggests|indicates|points to|contains|establishes|supports) (?:that )?/i,
+    /^(?:the|these|multiple|independent|current) sources? (?:show|shows|suggest|suggests|indicate|indicates|establish|establishes|support|supports|document|documents) (?:that )?/i,
+    /^(?:the|this) (?:study|paper|article|report|analysis) (?:shows|finds|argues|indicates|suggests|demonstrates|documents) (?:that )?/i,
+    /^(?:current )?evidence (?:on|for) /i
+  ];
+  for(const re of starts)s=s.replace(re,'');
+  s=s.replace(/\b(?:the finding remains conditional on the documented links|the consequence described here is an interpretation of the evidence, not a statement from a single source)\.?/gi,'');
+  return clean(s);
+}
+
 function surfaceText(v){
-  return capitaliseStart(removeEllipsis(expandSurfaceTerms(v))
+  return capitaliseStart(stripReaderMeta(removeEllipsis(expandSurfaceTerms(v)))
     .replace(/\bservi\s+ces\b/gi,'services')
     .replace(/\bnon\s*-\s*European\b/gi,'non-European')
     .replace(/\s+([,.;:!?])/g,'$1')
@@ -294,9 +307,15 @@ function matrixPair(x,opt={}){
   return {what:w,why:y,line:`${w} — ${y}`};
 }
 function pagePair(what,why,whatWords=20,whyWords=20){
-  return {what:limit(what,whatWords),why:limit(why,whyWords)};
+  const w=limit(stripReaderMeta(what),whatWords);
+  let y=limit(stripReaderMeta(why),whyWords);
+  const toks=v=>new Set(clean(v).toLowerCase().replace(/[^a-z0-9 ]/g,' ').split(/\s+/).filter(x=>x.length>3));
+  const A=toks(w),B=toks(y);let hit=0;for(const x of A)if(B.has(x))hit++;
+  const overlap=hit/(Math.min(A.size,B.size)||1);
+  if(!y||w===y||overlap>.78)y='';
+  return {what:w,why:y};
 }
 function wordCount(v){return words(v).length}
 
-g.RadarReaderStyle={clean,limit,wordCount,whatFor,whyFor,radarPair,matrixPair,pagePair,surfaceText,expandSurfaceTerms,removeEllipsis,displayTitle};
+g.RadarReaderStyle={clean,limit,wordCount,whatFor,whyFor,radarPair,matrixPair,pagePair,surfaceText,stripReaderMeta,expandSurfaceTerms,removeEllipsis,displayTitle};
 })(globalThis);

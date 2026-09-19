@@ -732,10 +732,10 @@
       if(authored)return authored;
       const topic=friendlyCandidateTopic(x),g=clean(x?.grammarId),dir=clean(x?.direction);
       if(g==='clock_before_rule')return `Work is already scheduled or under way while the related rules are still unsettled. That timing mismatch creates the risk.`;
-      if(g==='success_metric_gap')return `The stated objective and the activity being funded are not the same thing, and the evidence base does not yet contain a matching outcome measure. Delivery can therefore look successful before the intended result is known.`;
-      if(g==='deployment_before_rules')return `Current evidence places operating or deployed activity before an adopted rule on the same object. That creates a period in which practice can harden before governance catches up.`;
-      if(g==='conflicting_criteria')return `Independent records support both requirements, while the evidence base does not yet show a common tie-break. The risk is inconsistent decisions across institutions or countries.`;
-      if(g==='dependency_pathway')return `Separate records connect a European capability to a dependency and show a route by which disruption could spread beyond one isolated project. The finding remains conditional on the documented links.`;
+      if(g==='success_metric_gap')return `The stated objective and the funded activity are not the same thing. Delivery can therefore look successful before the intended result is known.`;
+      if(g==='deployment_before_rules')return `Activity is already operating or being deployed before the relevant rules are settled, so practice can harden before governance catches up.`;
+      if(g==='conflicting_criteria')return `Both requirements matter, but there is no clear common tie-break. That can produce inconsistent decisions across institutions or countries.`;
+      if(g==='dependency_pathway')return `A dependency links this capability to a wider chain, so disruption could spread beyond one isolated project.`;
       if(g==='corroborated_claim'){
         const corroborated=clean(x?.evidenceSemantics)==='corroborated'||Number(x?.primarySources||0)>=2;
         const lead=corroborated
@@ -747,9 +747,9 @@
           else if(dir==='becomes_contested')semantic=`The evidence points toward more contested conditions around ${topic}.`;
           else if(dir==='contracts')semantic=`The evidence points toward contraction or reduced room to act around ${topic}.`;
         }
-        return `${lead}${semantic?` ${semantic}`:''} The consequence described here is an interpretation of the evidence, not a statement from a single source.`;
+        return `${semantic||lead}`;
       }
-      return `Several independent records support this finding about ${topic}.`;
+      return `${topic.charAt(0).toUpperCase()+topic.slice(1)} is creating a material risk or opportunity for European research and innovation.`;
     }
     const t=pathwayText(x),title=norm(x?.title||''),kind=clean(x?.kind),asset=semanticAssetFamily(x),mechanism=semanticMechanismFamily(x);
     if(kind==='risk'){
@@ -767,7 +767,7 @@
       if(asset==='competitiveness'&&mechanism==='concentration') return 'Concentrated markets and weak scale-up conditions can leave European research strengths without firms large enough to retain production, investment and strategic capability in Europe.';
       if(asset==='competitiveness'&&mechanism==='access-barrier') return 'The source points to a structural barrier between European research strength and the ability to turn it into broader capability or competitiveness. The risk is persistence of that bottleneck rather than a single external shock.';
       if(/critical raw|critical mineral|rare earth|gallium|germanium|lithium|cobalt/.test(t)) return 'Many research and industrial technologies depend on critical materials supplied by a small number of countries or firms. A shortage or export restriction can delay projects and raise costs before substitutes are ready.';
-      return 'The evidence points to a plausible pathway in which a dependency, bottleneck, rule or structural constraint reduces European research capacity, access or freedom to act.';
+      return 'A dependency, bottleneck, rule or structural constraint could reduce European research capacity, access or freedom to act.';
     }
     if(kind==='opportunity'){
       if(asset==='talent'||/choose europe for science/.test(title)) return 'The opportunity is to make European research careers stable and attractive enough to keep researchers and bring more of them to Europe. In this case the programme is a response to brain drain, not the risk itself.';
@@ -780,13 +780,13 @@
       if(asset==='compute'||/ai gigafactor|computing capacity/.test(title)) return 'The opportunity is to add European-controlled compute that researchers and firms can actually use. More capacity at home can support AI work while reducing exposure to outside suppliers.';
       if(/open access to jrc|research infrastructures?/.test(title)&&/open access/.test(title)) return 'Opening existing facilities lets more researchers use expensive European infrastructure. That can turn sunk public investment into wider capability, collaboration and faster experimentation.';
       if(/egypt|north macedonia|association|partnership|international cooperation/.test(title)) return 'A well-chosen partnership can widen access to researchers, infrastructure, data and complementary expertise while strengthening Europe’s international research position.';
-      return 'The evidence points to a concrete route Europe can use now or soon to strengthen research, innovation, access, resilience or control.';
+      return 'Europe has a concrete route to strengthen research, innovation, access, resilience or control.';
     }
     return simplePriorityText(x);
   }
 
   function supportingEvidenceText(x){
-    if(x?.highOrder)return `The finding above combines evidence from several sources. The source statements are shown separately below.`;
+    if(x?.highOrder)return '';
     const raw=clean(x?.lensPassage||x?.abstract||x?.coreMessage||x?.title||'');
     if(!raw) return 'Evidence text unavailable.';
     const first=raw.split(/(?<=[.!?])\s+/).filter(Boolean).slice(0,3).join(' ');

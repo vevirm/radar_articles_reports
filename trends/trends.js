@@ -273,7 +273,7 @@
         {label:'Dual-use rules',claimType:'action',spec:{any:[/evaluation of the dual-use regulation/],preferSource:/European Commission/}},
         {label:'Research-security guidance',claimType:'action',spec:{any:[/national knowledge security guidelines/,/research security by roundtable/]}}
       ]},
-      right:{title:'Run before the ink dries',plain:'The same evidence base keeps warning that Europe must close technology and growth gaps faster.',why:'Slow delivery can leave good rules governing markets and capabilities built elsewhere.',historyAny:[/competitiveness gap/,/technology gap/,/scale-up/,/catching up/,/growth model/],roles:[
+      right:{title:'Run before the ink dries',plain:'Europe is under pressure to close technology and growth gaps faster.',why:'Slow delivery can leave good rules governing markets and capabilities built elsewhere.',historyAny:[/competitiveness gap/,/technology gap/,/scale-up/,/catching up/,/growth model/],roles:[
         {label:'Growth pressure',claimType:'diagnosis',spec:{any:[/eu.*need for a new growth model/],preferSource:/FIIA|Finnish Institute/}},
         {label:'Defence catch-up',claimType:'action',spec:{any:[/catching up: europe.*strategic autonomy in the defence industry/]}},
         {label:'AI competitiveness gap',claimType:'diagnosis',spec:{any:[/structural limitations and competitiveness challenges.*european union.*ai/,/strategic competitiveness.*eu.*united states.*ai/]}},

@@ -64,8 +64,8 @@ function variantHtml(v){
     <p class="future-kind">${esc(KIND[v.kind]||'Variant')}</p>
     <h4>${esc(v.name)}</h4>
     ${Array.isArray(v.bullets)&&v.bullets.length?bulletsHtml(v.bullets):(v.story||[]).map(p=>`<p>${esc(p)}</p>`).join('')}
-    <details><summary>Where this comes from</summary>
-      <p>Triggered by a current ${esc((PRODUCT[v.product]||'finding').toLowerCase())}: ${PAGE[v.product]?`<a href="${PAGE[v.product]}">${esc(v.trigger)}</a>`:esc(v.trigger)}</p>
+    <details><summary>Related finding</summary>
+      <p>${PAGE[v.product]?`<a href="${PAGE[v.product]}">${esc(v.trigger)}</a>`:esc(v.trigger)}</p>
       ${sourcesHtml(v.sources)}
     </details>
   </article>`;
@@ -92,7 +92,7 @@ function worldHtml(w){
       box.innerHTML='';return;
     }
         const nv=worlds.reduce((n,w)=>n+(Array.isArray(w.variants)?w.variants.length:0),0);
-    document.getElementById('futureIntro').textContent=`${worlds.length} worlds and ${nv} variants. They are scenarios, not forecasts: none is ranked as more likely. Every signal and variant is linked to a current finding you can check, and the page is rebuilt with each scan.`;
+    document.getElementById('futureIntro').textContent=`${worlds.length} worlds and ${nv} variants. These are scenarios, not forecasts, and none is ranked as more likely.`;
     for(const w of worlds){
       const q=document.querySelector(`.future-quad[data-world="${w.id}"]`);
       if(q)q.innerHTML=`<a href="#${esc(w.id)}"><strong>${esc(w.name)}</strong><span>${esc(w.tagline)}</span></a>`;

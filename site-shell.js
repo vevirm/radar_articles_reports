@@ -5,11 +5,11 @@
   const pages=[
     {match:/\/radar\/?$/,key:'radar',title:'Radar',purpose:'Current evidence about European research and innovation in a changing geopolitical environment.'},
     {match:/\/read\/?$/,key:'read',title:'Read At Least This',purpose:'A compact map of the main phenomena and the parts that make them up.'},
-    {match:/\/frontier\/quick\/?$/,key:'frontier-quick',title:'Matrix',purpose:'Where the current evidence places European research and innovation: strong, weak, exposed or dependent.'},
+    {match:/\/frontier\/quick\/?$/,key:'frontier-quick',title:'Matrix',purpose:'Where European research and innovation is strong, weak, exposed or dependent.'},
     {match:/\/frontier\/?$/,key:'frontier',title:'Matrix',purpose:'The detailed evidence behind the Matrix.'},
     {match:/\/trends\/?$/,key:'trends',title:'Trends & Counter-Trends',purpose:'Opposing institutional pulls acting on the same underlying object.'},
     {match:/\/phenomena\/?$/,key:'phenomena',title:'Ongoing Phenomena',purpose:'Developments that persist, reconnect or change shape over time.'},
-    {match:/\/priorities\/?$/,key:'priorities',title:'Risks & Opportunities',purpose:'Consequences supported by the current evidence base.'},
+    {match:/\/priorities\/?$/,key:'priorities',title:'Risks & Opportunities',purpose:'Possible consequences for European research and innovation.'},
     {match:/\/shocks\/variants(?:\.html)?\/?$/,key:'shocks-variants',title:'Shock Variants',purpose:'Alternative forms, absorbers and counter-evidence for one supported external-shock mechanism.'},
     {match:/\/shocks\/?$/,key:'shocks',title:'External Shocks',purpose:'Possible disruptions to European research and innovation.'},
     {match:/\/2035\/?$/,key:'future',title:'2035',purpose:'Four imagined worlds for European research and innovation in 2035, each with four variants, built from today\'s findings.'},

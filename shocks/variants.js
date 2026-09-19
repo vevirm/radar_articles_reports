@@ -199,7 +199,7 @@
     return {
       variants:[
         {id:'contained',label:'Contained',title:`Contained: ${scenario.title}`,text:'The mechanism appears, but redundancy, substitution, workarounds or policy response keep it local and temporary.'},
-        {id:'core',label:'Core shock',title:scenario.title,text:scenario.plainly||'The identified mechanism reaches the capability described by the supporting evidence.'},
+        {id:'core',label:'Core shock',title:scenario.title,text:scenario.plainly||'The disruption reaches the capability described in the scenario.'},
         {id:'compound',label:'Compound',title:`Compound: ${scenario.title}`,text:`The same mechanism lands together with an adjacent dependency or policy failure. ${scenario.secondOrder||''}`.trim()}
       ],
       counterRoles:GENERIC_COUNTER_ROLES
