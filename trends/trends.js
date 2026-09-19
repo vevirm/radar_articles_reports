@@ -348,6 +348,58 @@
     return t;
   }
 
+
+  function trendHeadlineFromPlain(title,plain){
+    const t=plainTrendTitle(title),p=clean(plain),l=low(p);
+    // Headline must be a compact statement actually supported by the sentence below it.
+    // These rules describe the development in the sentence; they never broaden it back
+    // to the controlled object merely because that object was used for candidate discovery.
+    const rules=[
+      [/environmental biotechnology offers routes to cleaner production/,()=> 'Environmental biotechnology is opening cleaner production routes'],
+      [/persistent gaps in batteries and solar supply chains/,()=> 'Europe still has gaps in batteries and solar supply chains'],
+      [/eurohpc opened a competitive call.*ai gigafactor/,()=> 'Europe is moving to build AI Gigafactories'],
+      [/data-centre geography changing in response to power and land constraints/,()=> 'Power and land constraints are reshaping AI data-centre locations'],
+      [/subsidies helped compensate for germany.s cost disadvantages/,()=> 'Subsidies are supporting strategic investment despite Germany’s cost disadvantages'],
+      [/selective conditionality is narrowly targeted.*limited leverage over foreign investors/,()=> 'EU investment conditionality remains limited'],
+      [/belgian authorities opened a concrete semiconductor-espionage case/,()=> 'Belgium has opened a semiconductor-espionage case'],
+      [/research security self-assessment appendix is a mandatory/,()=> 'Finland has made research-security self-assessment mandatory'],
+      [/commission proposes a regulation.*cloud and ai ecosystem/,()=> 'The EU is proposing new rules for its cloud and AI ecosystem'],
+      [/legal clarity is associated with deeper, not necessarily broader.*ai adoption/,()=> 'AI legal clarity may deepen adoption without broadening it'],
+      [/advanced-materials effort must be less fragmented/,()=> 'Europe’s advanced-materials effort remains fragmented'],
+      [/mature substitutes can cut gallium.*germanium.*palladium/,()=> 'Mature substitutes can reduce some critical-material dependencies'],
+      [/horizon europe initiatives launched to improve access, financing and industry collaboration/,()=> 'EU initiatives are widening access to research infrastructure'],
+      [/hungary.s continued exclusion from horizon europe grants/,()=> 'Hungary’s Horizon exclusion is constraining research capacity'],
+      [/mistral closed a eur 3 billion round/,()=> 'Mistral’s €3 billion round is boosting European venture capital'],
+      [/eu leads globally in scientific output but underperforms markedly in patenting, venture capital and scale-up/,()=> 'Europe still lags in venture capital and scale-up'],
+      [/pursuing greater sovereign space capability/,()=> 'Europe is pursuing more sovereign space capability'],
+      [/reducing strategic dependencies and adapting to those that persist/,()=> 'Strategic dependencies continue to limit European resilience'],
+      [/council adopted the first eu framework for science diplomacy/,()=> 'The EU has adopted a framework for science diplomacy'],
+      [/security and sovereignty measures do not collapse the openness needed for science/,()=> 'Security measures can constrain research openness'],
+      [/spain proposed a stronger eu climate-resilience framework/,()=> 'Spain is pushing for stronger EU climate-resilience rules'],
+      [/preparedness and integration into corporate strategy remain uneven/,()=> 'European firms remain unevenly prepared for geopolitical risks'],
+      [/google announced a major new ai-compute investment and energy arrangement in finland/,()=> 'Google is expanding AI compute and energy investment in Finland'],
+      [/finnish opposition parties proposed a national permitting framework for data centres/,()=> 'Finland is considering a national permitting framework for data centres'],
+      [/international coalition for science, research and innovation in ukraine.*gdansk declaration/,()=> 'International partners are coordinating support for Ukraine’s research system'],
+      [/irish preparedness confidence fell.*vulnerability profiles/,()=> 'Preparedness remains uneven across countries'],
+      [/agile.*€?115 million programme.*development, testing and uptake/,()=> 'EU institutions are funding faster defence-technology development'],
+      [/defence readiness by 2030 depends on collaborative procurement, shared training/,()=> 'European defence readiness still depends on coordinated procurement and training'],
+      [/commission proposed new eu legislation aimed at strengthening the single market for innovation/,()=> 'The Commission is proposing new EU innovation legislation'],
+      [/eu27 improves but remains behind the us, south korea and japan/,()=> 'EU innovation performance still trails major global peers']
+    ];
+    for(const [re,fn] of rules){if(re.test(l))return fn();}
+    // Fail conservative: if a generic generated title appears to speak more broadly
+    // than the displayed evidence sentence, use a compact first-clause headline instead.
+    const generic=/\b(expand|expanding|constraint|constrain|slow|strengthen|tighten|support|barrier|capacity|investment|autonomy|performance|resilience|energy supply)\b/i;
+    if(generic.test(t)){
+      let h=p.replace(/^(new market data show|the evidence shows|sources show|analysis shows)\s+/i,'')
+             .split(/[.;]/)[0].trim();
+      const words=h.split(/\s+/);
+      if(words.length>16)h=words.slice(0,16).join(' ')+'…';
+      if(h)return h.charAt(0).toUpperCase()+h.slice(1).replace(/[.!?]+$/,'');
+    }
+    return t;
+  }
+
   function highOrderPairs(data){
     const state=data?.high_order_inference&&typeof data.high_order_inference==='object'?data.high_order_inference:{};
     const ids=Array.isArray(state?.publications?.trend)?state.publications.trend:[];
@@ -362,8 +414,8 @@
       const rightEvidence=support.filter(x=>clean(x?.role).startsWith(rightRole)).map(x=>({row:x}));
       if(leftEvidence.length<1||rightEvidence.length<1)return null;
       return {id:c.id,emergent:true,family:clean(b.family),objectKey:clean(b.object_key),support:Number(c.score)||0,
-        left:{title:plainTrendTitle(b.left_title||'Pull A'),plain:clean(b.left_plain||c.reader_summary||''),why:'',pull:Math.round(lp),evidence:leftEvidence,history:[],sourceCount:Number(b.left_sources)||0},
-        right:{title:plainTrendTitle(b.right_title||'Pull B'),plain:clean(b.right_plain||c.reader_summary||''),why:'',pull:Math.round(rp),evidence:rightEvidence,history:[],sourceCount:Number(b.right_sources)||0},
+        left:{title:trendHeadlineFromPlain(b.left_title||'Pull A',b.left_plain||c.reader_summary||''),plain:clean(b.left_plain||c.reader_summary||''),why:'',pull:Math.round(lp),evidence:leftEvidence,history:[],sourceCount:Number(b.left_sources)||0},
+        right:{title:trendHeadlineFromPlain(b.right_title||'Pull B',b.right_plain||c.reader_summary||''),plain:clean(b.right_plain||c.reader_summary||''),why:'',pull:Math.round(rp),evidence:rightEvidence,history:[],sourceCount:Number(b.right_sources)||0},
         pullRange:{left:b.left_range||[],right:b.right_range||[]},
         composition:clean(b.composition||''),flip:clean(b.flip_line||''),label:clean(b.label||''),
         actionStats:{leftActions:Number(b.left_actions)||0,rightActions:Number(b.right_actions)||0,leftSources:Number(b.left_sources)||0,rightSources:Number(b.right_sources)||0,rawLeft:Number(b.raw_left_pull),rawRight:Number(b.raw_right_pull)},

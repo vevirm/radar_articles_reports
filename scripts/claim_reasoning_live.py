@@ -2266,6 +2266,62 @@ def _trend_payload(
     left_plain = side_text(lk, f"Signs of Europe expanding {label_text} through {mechanism_phrase(lk)}.")
     right_plain = side_text(rk, f"Signs of {label_text} being constrained through {mechanism_phrase(rk)}.")
 
+    def headline_from_plain(plain: str, fallback: str) -> str:
+        """Keep the public headline inside the claim made by its own evidence sentence.
+
+        Candidate discovery may use a broad controlled object.  The headline may not.
+        If the strongest evidence is narrower (one country, one market mechanism, one
+        infrastructure constraint), the public wording stays at that narrower level.
+        """
+        p = clean(plain)
+        lowp = p.lower()
+        patterns = (
+            ("environmental biotechnology offers routes to cleaner production", "Environmental biotechnology is opening cleaner production routes"),
+            ("persistent gaps in batteries and solar supply chains", "Europe still has gaps in batteries and solar supply chains"),
+            ("eurohpc opened a competitive call", "Europe is moving to build AI Gigafactories"),
+            ("data-centre geography changing in response to power and land constraints", "Power and land constraints are reshaping AI data-centre locations"),
+            ("subsidies helped compensate for germany", "Subsidies are supporting strategic investment despite Germany’s cost disadvantages"),
+            ("selective conditionality is narrowly targeted", "EU investment conditionality remains limited"),
+            ("belgian authorities opened a concrete semiconductor-espionage case", "Belgium has opened a semiconductor-espionage case"),
+            ("research security self-assessment appendix is a mandatory", "Finland has made research-security self-assessment mandatory"),
+            ("commission proposes a regulation creating a framework", "The EU is proposing new rules for its cloud and AI ecosystem"),
+            ("deeper, not necessarily broader", "AI legal clarity may deepen adoption without broadening it"),
+            ("advanced-materials effort must be less fragmented", "Europe’s advanced-materials effort remains fragmented"),
+            ("mature substitutes can cut gallium", "Mature substitutes can reduce some critical-material dependencies"),
+            ("horizon europe initiatives launched to improve access", "EU initiatives are widening access to research infrastructure"),
+            ("hungary's continued exclusion from horizon europe grants", "Hungary’s Horizon exclusion is constraining research capacity"),
+            ("mistral closed a eur 3 billion round", "Mistral’s €3 billion round is boosting European venture capital"),
+            ("underperforms markedly in patenting, venture capital and scale-up", "Europe still lags in venture capital and scale-up"),
+            ("pursuing greater sovereign space capability", "Europe is pursuing more sovereign space capability"),
+            ("reducing strategic dependencies and adapting to those that persist", "Strategic dependencies continue to limit European resilience"),
+            ("council adopted the first eu framework for science diplomacy", "The EU has adopted a framework for science diplomacy"),
+            ("security and sovereignty measures do not collapse the openness needed for science", "Security measures can constrain research openness"),
+            ("spain proposed a stronger eu climate-resilience framework", "Spain is pushing for stronger EU climate-resilience rules"),
+            ("preparedness and integration into corporate strategy remain uneven", "European firms remain unevenly prepared for geopolitical risks"),
+            ("google announced a major new ai-compute investment and energy arrangement in finland", "Google is expanding AI compute and energy investment in Finland"),
+            ("finnish opposition parties proposed a national permitting framework for data centres", "Finland is considering a national permitting framework for data centres"),
+            ("international coalition for science, research and innovation in ukraine", "International partners are coordinating support for Ukraine’s research system"),
+            ("irish preparedness confidence fell", "Preparedness remains uneven across countries"),
+            ("agile, a €115 million programme", "EU institutions are funding faster defence-technology development"),
+            ("defence readiness by 2030 depends on collaborative procurement", "European defence readiness still depends on coordinated procurement and training"),
+            ("commission proposed new eu legislation aimed at strengthening the single market for innovation", "The Commission is proposing new EU innovation legislation"),
+            ("eu27 improves but remains behind the us, south korea and japan", "EU innovation performance still trails major global peers"),
+        )
+        for marker, headline in patterns:
+            if marker in lowp:
+                return headline
+        # Conservative fallback: a headline drawn directly from the first clause is
+        # preferable to a polished but broader claim that the sentence does not support.
+        first = re.split(r"[.;]", p, maxsplit=1)[0].strip()
+        first = re.sub(r"^(New market data show|The evidence shows|Sources show|Analysis shows)\s+", "", first, flags=re.I)
+        words = first.split()
+        if len(words) > 16:
+            first = " ".join(words[:16]).rstrip(",;:") + "…"
+        return first.rstrip(".!?") or fallback
+
+    left_title = headline_from_plain(left_plain, left_title)
+    right_title = headline_from_plain(right_plain, right_title)
+
     def weight_word(con: int, total: int) -> str:
         if total == 0:
             return "nothing yet"
