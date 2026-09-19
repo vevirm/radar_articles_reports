@@ -1,27 +1,26 @@
 {
   "version": 1,
   "profile": "radar-deep-scan-work-state-v1",
-  "updated_at": "2026-09-19T06:20:57Z",
+  "updated_at": "2026-09-19T07:46:22Z",
   "lanes": {
     "A": {
-      "target_size": 12,
+      "target_size": 36,
       "assigned": [
-        "historical:id:065d22064b9f3e75",
-        "link:https://doi.org/10.1016/j.sftr.2025.101127",
-        "link:https://publications.jrc.ec.europa.eu/repository/handle/JRC148265?mode=full",
-        "link:https://news.google.com/rss/articles/CBMiqgFBVV95cUxQNURXUmh6VXl6Vk9RVnZvOTJjVkpyNU1iLW9VWWNqTkNzcmJNOHdTMTJKUTVIOVZVOFFuVUI4RXdxbkFLLXFqZXpTUWJ0X25xbzNEckM0Z0ppOTQxZHFrTXM2WXRIMjNtekIyMVdrUXpwSHRKc3I5TTdGTVY4TUdtRXRpdnk2VjRTaGdBbkdYVkQtazhfUmx5OUJmVjFGV2NVMmx6RXJLdk5HUQ?oc=5",
-        "historical:id:803a539a8f2e124c",
-        "historical:id:3c4b2b27c61eca37",
-        "historical:id:2994cc4e53a0f555",
+        "historical:id:0f5fcfee115987b1",
+        "historical:id:3348c6be76c0879c",
+        "historical:id:c1f7289e1589f895",
+        "historical:id:07d61be3818e72d9",
+        "historical:id:870e006fd661dfa3",
+        "historical:id:d6849c724dba2846",
+        "historical:id:a2bbb70748f79890",
+        "historical:id:347da2c59eed0d0d",
+        "historical:id:7840ca048ca765a4",
+        "historical:id:6eccc3c1cd27313a",
         "historical:id:d765b4377cae3b9a",
-        "historical:id:5561ff7f90b7f281",
-        "historical:id:dbd60261a37ab5c6",
-        "historical:id:d1f6d08c01dac11c",
-        "historical:id:51cb20a62b97f4c2"
+        "historical:id:dbd60261a37ab5c6"
       ],
-      "current_package_id": "worker-a-20260919T062041Z-0349bca5eaa7",
+      "current_package_id": "worker-a-20260919T074601Z-f2c9820bcc51",
       "package_history": [
-        "worker-a-20260916T073231Z-392292edffe8",
         "worker-a-20260916T075346Z-f723a6a8536f",
         "worker-a-20260916T081241Z-f723a6a8536f",
         "worker-a-20260916T081404Z-7f2127b37eb2",
@@ -60,17 +59,17 @@
         "worker-a-20260918T165607Z-db07e32f901c",
         "worker-a-20260918T221444Z-f8d8a6ea4cd7",
         "worker-a-20260918T222452Z-f229dd1d2bfc",
-        "worker-a-20260919T062041Z-0349bca5eaa7"
+        "worker-a-20260919T062041Z-0349bca5eaa7",
+        "worker-a-20260919T074601Z-f2c9820bcc51"
       ]
     },
     "B": {
-      "target_size": 12,
+      "target_size": 36,
       "assigned": [
         "historical:id:63a0b96383dbb86a"
       ],
-      "current_package_id": "worker-b-20260919T062050Z-51aff0f42d51",
+      "current_package_id": "worker-b-20260919T074614Z-51aff0f42d51",
       "package_history": [
-        "worker-b-20260916T072622Z-743ca1212cbd",
         "worker-b-20260916T072916Z-ed576edf88ae",
         "worker-b-20260916T073253Z-2e1daf27f534",
         "worker-b-20260916T075359Z-2e1daf27f534",
@@ -109,7 +108,8 @@
         "worker-b-20260917T155113Z-a2d59c8157d0",
         "worker-b-20260918T162850Z-536ac137d3dd",
         "worker-b-20260918T165153Z-536ac137d3dd",
-        "worker-b-20260919T062050Z-51aff0f42d51"
+        "worker-b-20260919T062050Z-51aff0f42d51",
+        "worker-b-20260919T074614Z-51aff0f42d51"
       ]
     }
   },
@@ -34183,7 +34183,7 @@
       "date": "2024-07-22",
       "url": "https://doi.org/10.1093/reseval/rvae046",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-18T22:14:44Z",
       "last_package_id": "worker-a-20260919T062041Z-0349bca5eaa7",
@@ -34288,7 +34288,9 @@
             "verification_note": "The paper clearly exists and the abstract describes a large survey, but V2 prohibits a KEEP/REVIEW/DROP decision from abstract-only evidence."
           }
         }
-      ]
+      ],
+      "verified_at": "2026-09-19T07:43:31Z",
+      "verified_package_id": "worker-a-20260919T062041Z-0349bca5eaa7"
     },
     "historical:id:e4073c744e62b06f": {
       "title": "Technological sovereignty and strategic dependencies: The case of the photovoltaic supply chain",
@@ -34374,10 +34376,12 @@
       "date": "2025-12-01",
       "url": "https://doi.org/10.1016/j.sftr.2025.101127",
       "corpus_scope": "main",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-19T06:20:41Z",
-      "last_package_id": "worker-a-20260919T062041Z-0349bca5eaa7"
+      "last_package_id": "worker-a-20260919T062041Z-0349bca5eaa7",
+      "verified_at": "2026-09-19T07:43:31Z",
+      "verified_package_id": "worker-a-20260919T062041Z-0349bca5eaa7"
     },
     "link:https://publications.jrc.ec.europa.eu/repository/handle/JRC148265?mode=full": {
       "title": "R&I needs to reduce dependencies on critical raw materials through advanced materials in passenger vehicles",
@@ -34385,10 +34389,12 @@
       "date": "2026-09-18",
       "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC148265?mode=full",
       "corpus_scope": "main",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-19T06:20:41Z",
-      "last_package_id": "worker-a-20260919T062041Z-0349bca5eaa7"
+      "last_package_id": "worker-a-20260919T062041Z-0349bca5eaa7",
+      "verified_at": "2026-09-19T07:43:32Z",
+      "verified_package_id": "worker-a-20260919T062041Z-0349bca5eaa7"
     },
     "link:https://news.google.com/rss/articles/CBMiqgFBVV95cUxQNURXUmh6VXl6Vk9RVnZvOTJjVkpyNU1iLW9VWWNqTkNzcmJNOHdTMTJKUTVIOVZVOFFuVUI4RXdxbkFLLXFqZXpTUWJ0X25xbzNEckM0Z0ppOTQxZHFrTXM2WXRIMjNtekIyMVdrUXpwSHRKc3I5TTdGTVY4TUdtRXRpdnk2VjRTaGdBbkdYVkQtazhfUmx5OUJmVjFGV2NVMmx6RXJLdk5HUQ?oc=5": {
       "title": "Europe's AI firms, playing catch-up, challenge US calls for slowdown",
@@ -34396,10 +34402,12 @@
       "date": "2026-09-18T14:22Z",
       "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQNURXUmh6VXl6Vk9RVnZvOTJjVkpyNU1iLW9VWWNqTkNzcmJNOHdTMTJKUTVIOVZVOFFuVUI4RXdxbkFLLXFqZXpTUWJ0X25xbzNEckM0Z0ppOTQxZHFrTXM2WXRIMjNtekIyMVdrUXpwSHRKc3I5TTdGTVY4TUdtRXRpdnk2VjRTaGdBbkdYVkQtazhfUmx5OUJmVjFGV2NVMmx6RXJLdk5HUQ?oc=5",
       "corpus_scope": "main",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-19T06:20:41Z",
-      "last_package_id": "worker-a-20260919T062041Z-0349bca5eaa7"
+      "last_package_id": "worker-a-20260919T062041Z-0349bca5eaa7",
+      "verified_at": "2026-09-19T07:43:32Z",
+      "verified_package_id": "worker-a-20260919T062041Z-0349bca5eaa7"
     },
     "historical:id:803a539a8f2e124c": {
       "title": "Diagnosing the impact of the EU AI Act on market access and pace of innovation of AI-enabled healthcare devices in the EU",
@@ -34407,10 +34415,12 @@
       "date": "2026-02-10",
       "url": "https://doi.org/10.1007/s00146-026-02914-0",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-19T06:20:41Z",
-      "last_package_id": "worker-a-20260919T062041Z-0349bca5eaa7"
+      "last_package_id": "worker-a-20260919T062041Z-0349bca5eaa7",
+      "verified_at": "2026-09-19T07:43:32Z",
+      "verified_package_id": "worker-a-20260919T062041Z-0349bca5eaa7"
     },
     "historical:id:3c4b2b27c61eca37": {
       "title": "Evolution of public funding for collaborative health research towards higher level patient-oriented research: A comparison of the European Union Framework Programmes to the program funding by the United States National Institutes of Health",
@@ -34418,10 +34428,12 @@
       "date": "2026-01-01",
       "url": "https://doi.org/10.1162/qss.a.472",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-19T06:20:41Z",
-      "last_package_id": "worker-a-20260919T062041Z-0349bca5eaa7"
+      "last_package_id": "worker-a-20260919T062041Z-0349bca5eaa7",
+      "verified_at": "2026-09-19T07:43:33Z",
+      "verified_package_id": "worker-a-20260919T062041Z-0349bca5eaa7"
     },
     "historical:id:2994cc4e53a0f555": {
       "title": "Reimagining human agency in AI-driven futures: a co-evolutionary scenario framework from aviation",
@@ -34429,10 +34441,12 @@
       "date": "2025-10-30",
       "url": "https://doi.org/10.1186/s40309-025-00260-w",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-19T06:20:41Z",
-      "last_package_id": "worker-a-20260919T062041Z-0349bca5eaa7"
+      "last_package_id": "worker-a-20260919T062041Z-0349bca5eaa7",
+      "verified_at": "2026-09-19T07:43:33Z",
+      "verified_package_id": "worker-a-20260919T062041Z-0349bca5eaa7"
     },
     "historical:id:d765b4377cae3b9a": {
       "title": "EU Space Governance at the Threshold of a New Era",
@@ -34443,7 +34457,121 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-19T06:20:41Z",
-      "last_package_id": "worker-a-20260919T062041Z-0349bca5eaa7"
+      "last_package_id": "worker-a-20260919T074601Z-f2c9820bcc51",
+      "recovery_attempts": 1,
+      "last_recovery_at": "2026-09-19T07:43:33Z",
+      "last_recovery_package_id": "worker-a-20260919T062041Z-0349bca5eaa7",
+      "recovery_reason": "Identity verified via Crossref, the Wiley landing page and the journal site; the open-access full text is blocked to automated clients and no alternative copy was found, so substantive evidence is insufficient for an admission judgement.",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1111/1758-5899.70030 redirects to onlinelibrary.wiley.com/doi/10.1111/1758-5899.70030, which returned HTTP 403 (bot protection) to the sandbox client, as for the scanner."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Crossref: title, Philip De Man and Jan Wouters, Global Policy vol. 17 suppl. S3, published online 2025-05-28, CC BY-NC 4.0; identity confirmed."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "partial",
+            "note": "Search '\"EU Space Governance at the Threshold of a New Era\" De Man Wouters Global Policy' found the Wiley article and PDF URLs, the journal's special-issue page, a ResearchGate record and KU Leuven staff pages; the browsing tool was blocked by Wiley bot detection on both Wiley URLs and ResearchGate returned 429."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failed",
+            "note": "Search 'De Man Wouters 2025 \"space governance\" \"new era\" Global Policy special issue introduction pdf KU Leuven' returned the Wiley abstract page (funding: EC Jean Monnet grant 620220-EPP-1-2020-1-BE-EPPJMO-CoE), a European Parliament library-guide entry and the journal's early-view page, all abstract-level; no author-hosted full text."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Wiley pdfdirect, the only open location per Unpaywall, Semantic Scholar and OpenAIRE, returned 403 to the sandbox; KU Leuven Lirias record LIRIAS4240987 resolves to the library discovery interface with no downloadable file."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "CORE API title query returned no matching record; Semantic Scholar DOI lookup lists only the Wiley pdfdirect PDF (HYBRID, CC BY-NC)."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "registry_metadata",
+            "url": "https://api.crossref.org/works/10.1111/1758-5899.70030",
+            "title": "Crossref record for 10.1111/1758-5899.70030",
+            "evidence_used": false
+          },
+          {
+            "kind": "publisher_landing_page",
+            "url": "https://onlinelibrary.wiley.com/doi/10.1111/1758-5899.70030",
+            "title": "EU Space Governance at the Threshold of a New Era (Wiley; blocked by bot detection)",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Identity verified, but only abstract-level evidence was reachable: the article is open access at Wiley (pdfdirect, CC BY-NC) yet Wiley's bot protection blocked both the sandbox and the browsing tool, and no alternative legitimate copy exists. A human or browser-based worker should be able to read it directly."
+      },
+      "recovery_history": [
+        {
+          "attempt": 1,
+          "package_id": "worker-a-20260919T062041Z-0349bca5eaa7",
+          "at": "2026-09-19T07:43:33Z",
+          "reason": "Identity verified via Crossref, the Wiley landing page and the journal site; the open-access full text is blocked to automated clients and no alternative copy was found, so substantive evidence is insufficient for an admission judgement.",
+          "verification": {
+            "identity_verified": true,
+            "evidence_depth": "identity_only_after_recovery",
+            "retrieval_attempts": [
+              {
+                "step": "supplied_url",
+                "outcome": "failed",
+                "note": "https://doi.org/10.1111/1758-5899.70030 redirects to onlinelibrary.wiley.com/doi/10.1111/1758-5899.70030, which returned HTTP 403 (bot protection) to the sandbox client, as for the scanner."
+              },
+              {
+                "step": "doi",
+                "outcome": "success",
+                "note": "Crossref: title, Philip De Man and Jan Wouters, Global Policy vol. 17 suppl. S3, published online 2025-05-28, CC BY-NC 4.0; identity confirmed."
+              },
+              {
+                "step": "exact_title",
+                "outcome": "partial",
+                "note": "Search '\"EU Space Governance at the Threshold of a New Era\" De Man Wouters Global Policy' found the Wiley article and PDF URLs, the journal's special-issue page, a ResearchGate record and KU Leuven staff pages; the browsing tool was blocked by Wiley bot detection on both Wiley URLs and ResearchGate returned 429."
+              },
+              {
+                "step": "title_author_year",
+                "outcome": "failed",
+                "note": "Search 'De Man Wouters 2025 \"space governance\" \"new era\" Global Policy special issue introduction pdf KU Leuven' returned the Wiley abstract page (funding: EC Jean Monnet grant 620220-EPP-1-2020-1-BE-EPPJMO-CoE), a European Parliament library-guide entry and the journal's early-view page, all abstract-level; no author-hosted full text."
+              },
+              {
+                "step": "official_publisher_or_repository",
+                "outcome": "failed",
+                "note": "Wiley pdfdirect, the only open location per Unpaywall, Semantic Scholar and OpenAIRE, returned 403 to the sandbox; KU Leuven Lirias record LIRIAS4240987 resolves to the library discovery interface with no downloadable file."
+              },
+              {
+                "step": "broader_identity_search",
+                "outcome": "failed",
+                "note": "CORE API title query returned no matching record; Semantic Scholar DOI lookup lists only the Wiley pdfdirect PDF (HYBRID, CC BY-NC)."
+              }
+            ],
+            "recovered_sources": [
+              {
+                "kind": "registry_metadata",
+                "url": "https://api.crossref.org/works/10.1111/1758-5899.70030",
+                "title": "Crossref record for 10.1111/1758-5899.70030",
+                "evidence_used": false
+              },
+              {
+                "kind": "publisher_landing_page",
+                "url": "https://onlinelibrary.wiley.com/doi/10.1111/1758-5899.70030",
+                "title": "EU Space Governance at the Threshold of a New Era (Wiley; blocked by bot detection)",
+                "evidence_used": false
+              }
+            ],
+            "verification_note": "Identity verified, but only abstract-level evidence was reachable: the article is open access at Wiley (pdfdirect, CC BY-NC) yet Wiley's bot protection blocked both the sandbox and the browsing tool, and no alternative legitimate copy exists. A human or browser-based worker should be able to read it directly."
+          }
+        }
+      ]
     },
     "historical:id:5561ff7f90b7f281": {
       "title": "Benchmarking research performance in a post-Soviet science system: the case of Armenia",
@@ -34451,10 +34579,12 @@
       "date": "2025-04-01",
       "url": "https://doi.org/10.1007/s11192-025-05312-3",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-19T06:20:41Z",
-      "last_package_id": "worker-a-20260919T062041Z-0349bca5eaa7"
+      "last_package_id": "worker-a-20260919T062041Z-0349bca5eaa7",
+      "verified_at": "2026-09-19T07:43:33Z",
+      "verified_package_id": "worker-a-20260919T062041Z-0349bca5eaa7"
     },
     "historical:id:dbd60261a37ab5c6": {
       "title": "New Defence: A civilian technology playbook for future-ready security | VTT",
@@ -34465,7 +34595,109 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-19T06:20:41Z",
-      "last_package_id": "worker-a-20260919T062041Z-0349bca5eaa7"
+      "last_package_id": "worker-a-20260919T074601Z-f2c9820bcc51",
+      "recovery_attempts": 1,
+      "last_recovery_at": "2026-09-19T07:43:33Z",
+      "last_recovery_package_id": "worker-a-20260919T062041Z-0349bca5eaa7",
+      "recovery_reason": "Identity verified from VTT's own page, but the playbook is available only through a lead-generation form requiring personal details and marketing consent; no open copy was found, and the landing page alone is too thin to judge substance.",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "VTT knowledge-base page fetched (HTTP 200): it describes the white paper ('originally published in November 2025', insights from VTT's Vice President of Defence Sauli Eloranta), but the document sits behind the webform 'lead-generation-white-paper' requiring first and last name, email, company, job title and marketing consent; no direct PDF link. The form was not bypassed."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "VTT white paper; the page shows no DOI or ISBN."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failed",
+            "note": "Search '\"New Defence\" \"civilian technology playbook\" VTT' returned only VTT news pages cross-linking the white paper and a vttresearch.com/en/explore/ URL; no openly hosted copy."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failed",
+            "note": "Search '\"New Defence\" playbook Sauli Eloranta VTT 2025 white paper' returned a LinkedIn repost describing the paper, interviews and columns by Eloranta (Millog, Unikie, Digital Defence Ecosystem) and VTT news; related secondary items, not the playbook."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "VTT research portal cris.vtt.fi publications search for '\"New Defence\" playbook' returned no result page (29-byte response), and VTT's own page offers no un-gated download."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "The /en/explore/new-defence-civilian-technology-playbook-future-ready-security URL surfaced in step 3 redirects to the same gated knowledge-base page; no embedded or alternative version."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_landing_page",
+            "url": "https://www.vttresearch.com/en/knowledge-base/new-defence-civilian-technology-playbook-future-ready-security",
+            "title": "New Defence: A civilian technology playbook for future-ready security (VTT landing page; document gated)",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Identity confirmed (VTT white paper, November 2025), but the substantive content is gated behind a marketing lead form, which was not bypassed, and no open copy exists. A human can obtain the PDF by completing the form."
+      },
+      "recovery_history": [
+        {
+          "attempt": 1,
+          "package_id": "worker-a-20260919T062041Z-0349bca5eaa7",
+          "at": "2026-09-19T07:43:33Z",
+          "reason": "Identity verified from VTT's own page, but the playbook is available only through a lead-generation form requiring personal details and marketing consent; no open copy was found, and the landing page alone is too thin to judge substance.",
+          "verification": {
+            "identity_verified": true,
+            "evidence_depth": "identity_only_after_recovery",
+            "retrieval_attempts": [
+              {
+                "step": "supplied_url",
+                "outcome": "partial",
+                "note": "VTT knowledge-base page fetched (HTTP 200): it describes the white paper ('originally published in November 2025', insights from VTT's Vice President of Defence Sauli Eloranta), but the document sits behind the webform 'lead-generation-white-paper' requiring first and last name, email, company, job title and marketing consent; no direct PDF link. The form was not bypassed."
+              },
+              {
+                "step": "doi",
+                "outcome": "not_applicable",
+                "note": "VTT white paper; the page shows no DOI or ISBN."
+              },
+              {
+                "step": "exact_title",
+                "outcome": "failed",
+                "note": "Search '\"New Defence\" \"civilian technology playbook\" VTT' returned only VTT news pages cross-linking the white paper and a vttresearch.com/en/explore/ URL; no openly hosted copy."
+              },
+              {
+                "step": "title_author_year",
+                "outcome": "failed",
+                "note": "Search '\"New Defence\" playbook Sauli Eloranta VTT 2025 white paper' returned a LinkedIn repost describing the paper, interviews and columns by Eloranta (Millog, Unikie, Digital Defence Ecosystem) and VTT news; related secondary items, not the playbook."
+              },
+              {
+                "step": "official_publisher_or_repository",
+                "outcome": "failed",
+                "note": "VTT research portal cris.vtt.fi publications search for '\"New Defence\" playbook' returned no result page (29-byte response), and VTT's own page offers no un-gated download."
+              },
+              {
+                "step": "broader_identity_search",
+                "outcome": "failed",
+                "note": "The /en/explore/new-defence-civilian-technology-playbook-future-ready-security URL surfaced in step 3 redirects to the same gated knowledge-base page; no embedded or alternative version."
+              }
+            ],
+            "recovered_sources": [
+              {
+                "kind": "publisher_landing_page",
+                "url": "https://www.vttresearch.com/en/knowledge-base/new-defence-civilian-technology-playbook-future-ready-security",
+                "title": "New Defence: A civilian technology playbook for future-ready security (VTT landing page; document gated)",
+                "evidence_used": false
+              }
+            ],
+            "verification_note": "Identity confirmed (VTT white paper, November 2025), but the substantive content is gated behind a marketing lead form, which was not bypassed, and no open copy exists. A human can obtain the PDF by completing the form."
+          }
+        }
+      ]
     },
     "historical:id:d1f6d08c01dac11c": {
       "title": "Future-proofing the built environment within energy transition | VTT",
@@ -34473,10 +34705,12 @@
       "date": "2025-01-01",
       "url": "https://www.vttresearch.com/en/knowledge-base/future-proofing-built-environment-within-energy-transition",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-19T06:20:41Z",
-      "last_package_id": "worker-a-20260919T062041Z-0349bca5eaa7"
+      "last_package_id": "worker-a-20260919T062041Z-0349bca5eaa7",
+      "verified_at": "2026-09-19T07:43:33Z",
+      "verified_package_id": "worker-a-20260919T062041Z-0349bca5eaa7"
     },
     "historical:id:51cb20a62b97f4c2": {
       "title": "[VERSCHOBEN] UK-DE Energy Systems Symposium: Accelerating net zero through policy-research collaboration - acatech",
@@ -34484,10 +34718,12 @@
       "date": "2020-01-01",
       "url": "https://www.acatech.de/termin/uk-de-energy-systems-symposium-accelerating-net-zero-through-policy-research-collaboration/",
       "corpus_scope": "historical",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-09-19T06:20:41Z",
-      "last_package_id": "worker-a-20260919T062041Z-0349bca5eaa7"
+      "last_package_id": "worker-a-20260919T062041Z-0349bca5eaa7",
+      "verified_at": "2026-09-19T07:43:33Z",
+      "verified_package_id": "worker-a-20260919T062041Z-0349bca5eaa7"
     },
     "historical:id:63a0b96383dbb86a": {
       "title": "UK-DE Energy Systems Symposium – Accelerating net zero through policy-research collaboration - acatech",
@@ -34498,7 +34734,117 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-19T06:20:50Z",
-      "last_package_id": "worker-b-20260919T062050Z-51aff0f42d51"
+      "last_package_id": "worker-b-20260919T074614Z-51aff0f42d51"
+    },
+    "historical:id:0f5fcfee115987b1": {
+      "title": "War and the future of war",
+      "source_name": "UK Parliamentary Office of Science and Technology",
+      "date": "2025-01-07",
+      "url": "https://post.parliament.uk/war-and-the-future-of-war/",
+      "corpus_scope": "historical",
+      "status": "assigned",
+      "lane": "A",
+      "assigned_at": "2026-09-19T07:46:01Z",
+      "last_package_id": "worker-a-20260919T074601Z-f2c9820bcc51"
+    },
+    "historical:id:3348c6be76c0879c": {
+      "title": "Understanding Foresight‐Policy Interactions: The Role of Institutionalization",
+      "source_name": "Futures",
+      "date": "2024-11-04",
+      "url": "https://doi.org/10.1002/ffo2.197",
+      "corpus_scope": "historical",
+      "status": "assigned",
+      "lane": "A",
+      "assigned_at": "2026-09-19T07:46:01Z",
+      "last_package_id": "worker-a-20260919T074601Z-f2c9820bcc51"
+    },
+    "historical:id:c1f7289e1589f895": {
+      "title": "Missions, conditions and the policy transfer of Smart Specialisation in the European Union",
+      "source_name": "Regional Studies",
+      "date": "2024-08-08",
+      "url": "https://doi.org/10.1080/00343404.2024.2377679",
+      "corpus_scope": "historical",
+      "status": "assigned",
+      "lane": "A",
+      "assigned_at": "2026-09-19T07:46:01Z",
+      "last_package_id": "worker-a-20260919T074601Z-f2c9820bcc51"
+    },
+    "historical:id:07d61be3818e72d9": {
+      "title": "Invisible frontlines. Safeguarding Europe's energy infrastructure",
+      "source_name": "Danish Institute for International Studies",
+      "date": "2024-03-18",
+      "url": "https://www.diis.dk/en/research/invisible-frontlines-safeguarding-europes-energy-infrastructure",
+      "corpus_scope": "historical",
+      "status": "assigned",
+      "lane": "A",
+      "assigned_at": "2026-09-19T07:46:01Z",
+      "last_package_id": "worker-a-20260919T074601Z-f2c9820bcc51"
+    },
+    "historical:id:870e006fd661dfa3": {
+      "title": "IVA Report: Metals and minerals for sustainable development and strengthened competitiveness",
+      "source_name": "Royal Swedish Academy of Engineering Sciences",
+      "date": "2024-01-01",
+      "url": "https://www.iva.se/contentassets/62c6eceac52a4113b520d9def35fe989/202411-iva-vagval-for-metaller-och-mineral-syntesrapport-english-j.pdf",
+      "corpus_scope": "historical",
+      "status": "assigned",
+      "lane": "A",
+      "assigned_at": "2026-09-19T07:46:01Z",
+      "last_package_id": "worker-a-20260919T074601Z-f2c9820bcc51"
+    },
+    "historical:id:d6849c724dba2846": {
+      "title": "The European Union's sanctions regime against Russian science",
+      "source_name": "International Organization",
+      "date": "2023-04-01",
+      "url": "https://doi.org/10.7256/2454-0633.2023.4.69177",
+      "corpus_scope": "historical",
+      "status": "assigned",
+      "lane": "A",
+      "assigned_at": "2026-09-19T07:46:01Z",
+      "last_package_id": "worker-a-20260919T074601Z-f2c9820bcc51"
+    },
+    "historical:id:a2bbb70748f79890": {
+      "title": "IVA-seminarium: Global shifts and its impact on Business Competitiveness and Value Chain Resilience",
+      "source_name": "Royal Swedish Academy of Engineering Sciences",
+      "date": "2023-01-01",
+      "url": "https://www.iva.se/det-iva-gor/evenemang/global-shifts-and-its-impact-on-business-competitiveness-and-value-chain-resilience/",
+      "corpus_scope": "historical",
+      "status": "assigned",
+      "lane": "A",
+      "assigned_at": "2026-09-19T07:46:01Z",
+      "last_package_id": "worker-a-20260919T074601Z-f2c9820bcc51"
+    },
+    "historical:id:347da2c59eed0d0d": {
+      "title": "Research Assessment at EMBL",
+      "source_name": "EMBL",
+      "date": "2022-01-01",
+      "url": "https://www.embl.org/about/research-assessment/",
+      "corpus_scope": "historical",
+      "status": "assigned",
+      "lane": "A",
+      "assigned_at": "2026-09-19T07:46:01Z",
+      "last_package_id": "worker-a-20260919T074601Z-f2c9820bcc51"
+    },
+    "historical:id:7840ca048ca765a4": {
+      "title": "Experimental innovation policy for SMEs: Findings and recommendations (2022 edition)",
+      "source_name": "European Commission — ec.europa.eu",
+      "date": "2022-01-01",
+      "url": "https://eismea.ec.europa.eu/document/download/81b3b4ec-7db5-40dc-9fd1-707b62fd8fd7_en?filename=experimental%20innovation%20policy%20for%20smes-EA0922535ENN.pdf",
+      "corpus_scope": "historical",
+      "status": "assigned",
+      "lane": "A",
+      "assigned_at": "2026-09-19T07:46:01Z",
+      "last_package_id": "worker-a-20260919T074601Z-f2c9820bcc51"
+    },
+    "historical:id:6eccc3c1cd27313a": {
+      "title": "Experimental innovation policy for SMEs: findings and recommendations",
+      "source_name": "European Commission — ec.europa.eu",
+      "date": "2021-01-01",
+      "url": "https://eismea.ec.europa.eu/publications/experimental-innovation-policy-smes-findings-and-recommendations_en",
+      "corpus_scope": "historical",
+      "status": "assigned",
+      "lane": "A",
+      "assigned_at": "2026-09-19T07:46:01Z",
+      "last_package_id": "worker-a-20260919T074601Z-f2c9820bcc51"
     }
   },
   "packages": {
@@ -44395,6 +44741,31 @@
     "worker-b-20260919T062050Z-51aff0f42d51": {
       "lane": "B",
       "created_at": "2026-09-19T06:20:57Z",
+      "record_keys": [
+        "historical:id:63a0b96383dbb86a"
+      ]
+    },
+    "worker-a-20260919T074601Z-f2c9820bcc51": {
+      "lane": "A",
+      "created_at": "2026-09-19T07:46:13Z",
+      "record_keys": [
+        "historical:id:0f5fcfee115987b1",
+        "historical:id:3348c6be76c0879c",
+        "historical:id:c1f7289e1589f895",
+        "historical:id:07d61be3818e72d9",
+        "historical:id:870e006fd661dfa3",
+        "historical:id:d6849c724dba2846",
+        "historical:id:a2bbb70748f79890",
+        "historical:id:347da2c59eed0d0d",
+        "historical:id:7840ca048ca765a4",
+        "historical:id:6eccc3c1cd27313a",
+        "historical:id:d765b4377cae3b9a",
+        "historical:id:dbd60261a37ab5c6"
+      ]
+    },
+    "worker-b-20260919T074614Z-51aff0f42d51": {
+      "lane": "B",
+      "created_at": "2026-09-19T07:46:22Z",
       "record_keys": [
         "historical:id:63a0b96383dbb86a"
       ]

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-09-18T22:21:46Z",
+  "updated_at": "2026-09-19T07:43:33Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -9933,6 +9933,58 @@
       ],
       "updated_at": "2026-09-18T22:21:46Z",
       "deep_scan_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7"
+    },
+    "historical:id:065d22064b9f3e75": {
+      "fields": {
+        "date": "2024-11-01"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The OUP article page states 'Published: 01 November 2024', matching Crossref published-online and the DOI registration date; the stored 2024-07-22 is a 'print' date in OUP metadata that predates DOI registration and public availability.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://zenodo.org/records/19666167",
+        "https://academic.oup.com/rev/article-abstract/doi/10.1093/reseval/rvae046/7863402"
+      ],
+      "updated_at": "2026-09-19T07:43:31Z",
+      "deep_scan_package_id": "worker-a-20260919T062041Z-0349bca5eaa7"
+    },
+    "link:https://publications.jrc.ec.europa.eu/repository/handle/JRC148265?mode=full": {
+      "fields": {
+        "authors": "Fernando Coelho; Awais Ikram; Filipa M. Oliveira; Stefanos Mourdikoudis; David Pennington",
+        "source": "European Commission, Joint Research Centre (JRC)"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The report colophon and CELLAR notice list five authors; the stored string splits 'Filipa M. Oliveira' into 'M.' and 'OLIVEIRA Filipa'. The issuing body is the JRC (published by the Publications Office of the EU); 'JRC Publications Repository' is only the hosting repository, so any tier derived from it is unset for recomputation.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "http://publications.europa.eu/resource/cellar/7d0241d4-b3d2-11f1-81de-01aa75ed71a1.0001.01/DOC_1",
+        "http://publications.europa.eu/resource/cellar/7d0241d4-b3d2-11f1-81de-01aa75ed71a1"
+      ],
+      "updated_at": "2026-09-19T07:43:32Z",
+      "deep_scan_package_id": "worker-a-20260919T062041Z-0349bca5eaa7"
+    },
+    "historical:id:2994cc4e53a0f555": {
+      "fields": {
+        "source": "European Journal of Futures Research"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Crossref and the article header give the journal as European Journal of Futures Research (SpringerOpen, 13:16); 'Futures' is a different Elsevier journal, so any tier derived from it is unset for recomputation.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://link.springer.com/content/pdf/10.1186/s40309-025-00260-w.pdf"
+      ],
+      "updated_at": "2026-09-19T07:43:33Z",
+      "deep_scan_package_id": "worker-a-20260919T062041Z-0349bca5eaa7"
     }
   }
 }

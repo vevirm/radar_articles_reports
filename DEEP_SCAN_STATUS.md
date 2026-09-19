@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1419** (Main **661** + Historical **758**)
-- Automatic queue still needing V2 verification: **13** (Main **3** + Historical **10**)
-- Currently assigned to workers: **13** (Main **3** + Historical **10**)
+- Authoritative V2 verified: **1429** (Main **664** + Historical **765**)
+- Automatic queue still needing V2 verification: **13** (Main **0** + Historical **13**)
+- Currently assigned to workers: **13** (Main **0** + Historical **13**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **69**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,20 +16,20 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260919T062041Z-0349bca5eaa7`
+- Current package: `worker-a-20260919T074601Z-f2c9820bcc51`
 - Assigned unresolved records: **12**
-  1. `historical:id:065d22064b9f3e75` — International research collaboration in personalized medicine between Europe and Latin America and the Caribbean — recovery attempt 2/3
-  2. `link:https://doi.org/10.1016/j.sftr.2025.101127` — Green innovation ecosystems in the semiconductor industry - the role of European research and technology organisations
-  3. `link:https://publications.jrc.ec.europa.eu/repository/handle/JRC148265?mode=full` — R&I needs to reduce dependencies on critical raw materials through advanced materials in passenger vehicles
-  4. `link:https://news.google.com/rss/articles/CBMiqgFBVV95cUxQNURXUmh6VXl6Vk9RVnZvOTJjVkpyNU1iLW9VWWNqTkNzcmJNOHdTMTJKUTVIOVZVOFFuVUI4RXdxbkFLLXFqZXpTUWJ0X25xbzNEckM0Z0ppOTQxZHFrTXM2WXRIMjNtekIyMVdrUXpwSHRKc3I5TTdGTVY4TUdtRXRpdnk2VjRTaGdBbkdYVkQtazhfUmx5OUJmVjFGV2NVMmx6RXJLdk5HUQ?oc=5` — Europe's AI firms, playing catch-up, challenge US calls for slowdown
-  5. `historical:id:803a539a8f2e124c` — Diagnosing the impact of the EU AI Act on market access and pace of innovation of AI-enabled healthcare devices in the EU
-  6. `historical:id:3c4b2b27c61eca37` — Evolution of public funding for collaborative health research towards higher level patient-oriented research: A comparison of the European Union Framework Programmes to the program funding by the United States National Institutes of Health
-  7. `historical:id:2994cc4e53a0f555` — Reimagining human agency in AI-driven futures: a co-evolutionary scenario framework from aviation
-  8. `historical:id:d765b4377cae3b9a` — EU Space Governance at the Threshold of a New Era
+  1. `historical:id:0f5fcfee115987b1` — War and the future of war
+  2. `historical:id:3348c6be76c0879c` — Understanding Foresight‐Policy Interactions: The Role of Institutionalization
+  3. `historical:id:c1f7289e1589f895` — Missions, conditions and the policy transfer of Smart Specialisation in the European Union
+  4. `historical:id:07d61be3818e72d9` — Invisible frontlines. Safeguarding Europe's energy infrastructure
+  5. `historical:id:870e006fd661dfa3` — IVA Report: Metals and minerals for sustainable development and strengthened competitiveness
+  6. `historical:id:d6849c724dba2846` — The European Union's sanctions regime against Russian science
+  7. `historical:id:a2bbb70748f79890` — IVA-seminarium: Global shifts and its impact on Business Competitiveness and Value Chain Resilience
+  8. `historical:id:347da2c59eed0d0d` — Research Assessment at EMBL
   - … plus 4 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260919T062050Z-51aff0f42d51`
+- Current package: `worker-b-20260919T074614Z-51aff0f42d51`
 - Assigned unresolved records: **1**
   1. `historical:id:63a0b96383dbb86a` — UK-DE Energy Systems Symposium – Accelerating net zero through policy-research collaboration - acatech
 
