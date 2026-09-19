@@ -22074,6 +22074,9 @@ def main() -> int:
         "candidates": 0,
         "news_candidates": 0,
         "cooldown_seconds": 0.0,
+        "anti_saturation_waves": 0,
+        "anti_saturation_journal_candidates": 0,
+        "anti_saturation_institution_candidates": 0,
         "seconds_remaining_at_start": max(0, int(total_budget_remaining())),
         "seconds_remaining_at_end": None,
     }
