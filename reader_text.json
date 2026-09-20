@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-20T20:04:48Z",
+  "generated_at": "2026-09-20T21:49:59Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -145598,8 +145598,300 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:9b4fa48a5215ca5e": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "6d327b26",
+      "identity_hash": "504c0b64fce339b4",
+      "reader_title": "Scenario planning review",
+      "reader_what": "Reviews scenario planning and strategic foresight using a PRISMA-based literature review.",
+      "reader_more": "The article synthesises established scenario-planning and strategic-foresight literature and discusses dynamic capabilities. It does not introduce a materially new reusable method beyond the review procedure it applies.",
+      "deep_analysis": {
+        "work_kind": "systematic literature review",
+        "research_question": "How do scenario planning and strategic foresight relate to dynamic capabilities and strategic leadership?",
+        "main_finding": "Scenario planning is presented as a practical tool within strategic foresight, with both linked to organisational adaptability.",
+        "method_or_basis": "Systematic literature review using the PRISMA framework and inclusion/exclusion criteria.",
+        "qualification": "The paper synthesises and applies established review and foresight concepts rather than contributing a new reusable method.",
+        "radar_relevance": "Fails Strand B because the methodological contribution is not new or materially improved.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://journals.zegu.ac.zw/index.php/futures/article/view/368; it matched the claimed work/source and supplied substantive primary evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://journals.zegu.ac.zw/index.php/futures/article/view/368",
+            "title": "Futures Focus-A Systematic Review of Scenario Planning, Strategic Foresight and Dynamic Capabilities",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Read the supplied substantial matching primary/official web text and verified the work identity and substantive scope."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_NO_REUSABLE_METHOD",
+        "reason": "The article synthesises existing scenario-planning and foresight literature but does not contribute a new or materially improved reusable method."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T21:49:59Z",
+      "deep_scan_package_id": "20260920T210333Z-06285d6ed4f5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:2dd841435f84a1e3": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "60fcdd3a",
+      "identity_hash": "e8f8a38398561e6d",
+      "reader_title": "An upgrade agenda for Europe’s AI plan",
+      "reader_what": "ECFR argues the EU AI plan should strengthen open-source AI, data-centre buildout and chip security.",
+      "reader_why": "These bottlenecks directly affect European AI compute capacity and strategic technology dependence.",
+      "reader_more": "The commentary identifies compute, energy and advanced-chip supply as constraints on Europe’s AI ambitions. It recommends open-source capacity in AI factories, faster data-centre development and stronger chip-supply measures. These are policy recommendations, not demonstrated outcomes.",
+      "deep_analysis": {
+        "work_kind": "policy analysis and advocacy",
+        "research_question": "How should the EU strengthen its AI Continent Action Plan to improve Europe’s AI position?",
+        "main_finding": "The authors argue that open-source AI, data-centre capacity and secure advanced-chip supply need stronger treatment in the EU plan.",
+        "method_or_basis": "Policy analysis drawing on the AI Continent Action Plan, European infrastructure constraints and technology dependencies.",
+        "qualification": "This is ECFR analysis and advocacy; it does not establish that the recommended measures were adopted or effective.",
+        "radar_relevance": "Directly addresses strategic European AI infrastructure, compute and chip dependence.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://ecfr.eu/article/back-to-the-future-how-the-eu-can-upgrade-its-ai-continent-action-plan/; it matched the claimed work/source and supplied substantive primary evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_web_page",
+            "url": "https://ecfr.eu/article/back-to-the-future-how-the-eu-can-upgrade-its-ai-continent-action-plan/",
+            "title": "Back to the future: How the EU can upgrade its AI Continent Action Plan – European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Read the supplied substantial matching primary/official web text and verified the work identity and substantive scope."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Substantive analysis of European AI compute, data-centre and chip dependencies with direct strategic R&I implications."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T21:49:59Z",
+      "deep_scan_package_id": "20260920T210333Z-06285d6ed4f5",
+      "claims": [
+        {
+          "object": "compute.capacity",
+          "secondary_objects": [
+            "digital.sovereignty"
+          ],
+          "actor": {
+            "name": "European Council on Foreign Relations authors",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2025-04-10",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "text": "ECFR advocates expanding European AI compute and infrastructure while reducing advanced-chip dependence.",
+          "confidence": "high",
+          "qualification": "This is ECFR analysis and advocacy; it does not establish that the recommended measures were adopted or effective.",
+          "record_key": "historical:id:2dd841435f84a1e3",
+          "merit": 71,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:e8f8a38398561e6d:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:4a109082b5e68bec": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "0c9e1199",
+      "identity_hash": "8b649db89d598370",
+      "reader_title": "ESF services for research funders",
+      "reader_what": "ESF describes services it offers research funding organisations, including evaluation, peer review and programme support.",
+      "reader_more": "The page is primarily an organisational service description. It does not present a completed evidence-led study of the European R&I system or a substantive new policy development.",
+      "deep_analysis": {
+        "work_kind": "service and organisational information page",
+        "research_question": "",
+        "main_finding": "ESF advertises support services for research funding organisations.",
+        "method_or_basis": "Institutional description of services and capabilities.",
+        "qualification": "The page is promotional/service-oriented rather than a substantive evidence product.",
+        "radar_relevance": "Fails Strand A’s evidence-product guard.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.esf.org/research-funding-organisations/; it matched the claimed work/source and supplied substantive primary evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_web_page",
+            "url": "https://www.esf.org/research-funding-organisations/",
+            "title": "Research Funding Organisations - ESF",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Read the supplied substantial matching primary/official web text and verified the work identity and substantive scope."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_SUBSTANTIVE_SOURCE",
+        "reason": "The page is an ESF service description rather than a completed substantive European R&I evidence product."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T21:49:59Z",
+      "deep_scan_package_id": "20260920T210333Z-06285d6ed4f5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:4a91a36e4c83c04f": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "157453ab",
+      "identity_hash": "f57024b98513e839",
+      "reader_title": "Evidence on international researcher mobility",
+      "reader_what": "UKRI synthesises 2010–2024 evidence on researcher mobility, attraction, collaboration and gaps in the UK evidence base.",
+      "reader_why": "Researcher mobility shapes the UK’s R&I workforce and participation in international collaboration, including Horizon Europe.",
+      "reader_more": "The report centralises evidence on international researcher mobility and updates the 2022 baseline with newer studies. It explicitly discusses evidence limitations, including inconsistent definitions, small samples and difficulty measuring impacts. It is substantive R&I workforce evidence for a European associated country.",
+      "deep_analysis": {
+        "work_kind": "evidence synthesis report",
+        "research_question": "What does existing evidence show about international researcher mobility into the UK, its impacts and evidence gaps?",
+        "main_finding": "The synthesis finds international mobility important to researchers and R&I organisations while documenting persistent measurement and evidence gaps.",
+        "method_or_basis": "Collation and synthesis of studies and administrative evidence published from 2010 to 2024, with source-specific limitations.",
+        "qualification": "The report synthesises heterogeneous studies and definitions; it does not provide a single causal estimate of mobility effects.",
+        "radar_relevance": "Substantive evidence on R&I talent attraction, mobility and collaboration in the UK.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.ukri.org/publications/global-mobility-evidence-report/global-mobility-evidence-report-2024/; it matched the claimed work/source and supplied substantive primary evidence."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_web_page",
+            "url": "https://www.ukri.org/publications/global-mobility-evidence-report/global-mobility-evidence-report-2024/",
+            "title": "Global mobility evidence report 2024",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Read the supplied substantial matching primary/official web text and verified the work identity and substantive scope."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Completed evidence synthesis on researcher mobility, talent attraction and collaboration in the UK R&I system."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T21:49:59Z",
+      "deep_scan_package_id": "20260920T210333Z-06285d6ed4f5",
+      "claims": [
+        {
+          "object": "talent.recruitment_abroad",
+          "secondary_objects": [
+            "research.collaboration"
+          ],
+          "actor": {
+            "name": "UK Research and Innovation",
+            "class": "national_funder"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2025-02-24",
+          "scope": {
+            "level": "associated_country",
+            "countries": [
+              "United Kingdom"
+            ]
+          },
+          "kind": "diagnosis",
+          "text": "UKRI synthesises evidence on international researcher mobility, attraction and collaboration in the UK R&I system.",
+          "confidence": "high",
+          "qualification": "The report synthesises heterogeneous studies and definitions; it does not provide a single causal estimate of mobility effects.",
+          "record_key": "historical:id:4a91a36e4c83c04f",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:f57024b98513e839:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-09-20T20:04:48Z"
+  "claims_updated_at": "2026-09-20T21:49:59Z"
 }
