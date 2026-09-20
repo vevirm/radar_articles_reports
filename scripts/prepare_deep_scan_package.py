@@ -75,6 +75,24 @@ Therefore every decision must be source-grounded and auditable.
     return `drop_unverifiable`. If identity is confirmed but substantive evidence remains inaccessible after all six steps,
     use `defer` rather than inventing a judgement. A defer is coordination-only and leaves the Radar record provisional.
 
+## Hard source-integrity gate
+
+Source trust is a precondition for every strand, not a scoring bonus. State-controlled media / influence outlets,
+propaganda channels, anonymous advocacy material, deceptive pseudo-publications and equivalent low-integrity sources
+may **never** establish a Radar claim or rescue an otherwise inadmissible record. This applies even when the title/content
+looks relevant. Do not treat repetition across outlets from the same controlled information system as independent corroboration.
+
+If the supplied URL is such a source, continue through the retrieval ladder and look for the underlying work or claim in
+an independent peer-reviewed journal, a trusted research institution, an accountable international organisation, or another
+credible primary/independent source. If the underlying work itself is only a blocked influence/propaganda product and no
+trustworthy independent substantiation exists, return `drop`.
+
+Official actor/government material can establish narrow facts about that actor's own formal action (for example the text of a
+law, budget, programme, filing or announcement) when provenance is clear, but it must not be treated as independent evidence
+that the actor's policy succeeded, that claimed effects occurred, or that contested factual assertions are true. For Strand A
+Route 3, the substantive analytical work itself must be a trustworthy evidence product; propaganda/PR cannot qualify merely
+because it contains data-like language.
+
 ## Mandatory retrieval ladder for difficult/thin/blocked records
 
 For a record whose supplied material is not already a substantial matching primary source, attempt and
@@ -112,6 +130,31 @@ qualify merely because the EU is mentioned, used as one comparator, provides a f
 appears in references, or could have an imagined European implication. The work needs a genuine European
 research, innovation, science, technology, industrial-capability, research-policy, research-security or
 closely related connection.
+
+Do **not** require the work to state its future importance or to use explicit geopolitical vocabulary.
+A can qualify through any of three source-grounded routes:
+1. a direct or clearly supported strategic/geopolitical R&I relationship;
+2. evidence about a consequential European R&I state or trajectory (for example funding/capital,
+   capability/performance, talent/workforce, infrastructure/compute, collaboration/networks,
+   technology transfer/scale-up, technology dependency/position, or standards/rule-setting); or
+3. a high-quality completed evidence-led study/report whose substantive object is the European R&I
+   system itself (for example research/innovation policy or governance, funding, careers, mobility,
+   collaboration, infrastructure, transfer, assessment, open science, or comparable system mechanisms),
+   even when it does not use one of the narrow state-variable relationship phrasings.
+
+Route 3 is not a generic-Europe or generic-technology waiver. Local/service/consumer applications,
+ordinary sector competitiveness, programme/event/promotional pages, R&I mentioned only as a covariate or
+funding acknowledgement, and work where Europe is merely a comparator remain out. The point is to verify
+substantive present-day evidence about the European R&I system; downstream Radar reasoning may assess why
+that evidence could matter later.
+
+**Alignment rule with the automatic scanner:** after the common hard guards are satisfied (verified identity, trustworthy
+source, substantive European scope, central R&I subject, and a substantive evidence product), **any one** of Routes 1, 2,
+or 3 is sufficient for Strand A. Do **not** re-impose Route-1 or Route-2 language on a valid Route-3 work. In particular,
+do not drop an otherwise qualifying Route-3 paper/report because it lacks explicit geopolitical vocabulary, does not state
+its own future importance, or does not use the scanner's narrow structural state-variable relationship phrasing. Deep Scan
+may still drop it for the common hard guards above, bad/weak provenance, local/applied contamination, incidental Europe/R&I,
+non-substantive evidence, or identity failure — but not simply for failing the old narrower strategic wording.
 
 ### Strand B — reusable methods
 

@@ -6914,8 +6914,9 @@ def research_evidence_route_ok(title: str, abstract: str, body: str, source_kind
 def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_kind: str = 'general', eu_context_anchors: list[dict[str, Any]] | None = None) -> dict[str, Any]:
     """Classify the three-layer radar model.
 
-    A = substantive evidence about European/EU R&I that is either directly strategic/geopolitical
-        or establishes a structural R&I state variable material to Europe's strategic capacity/position.
+    A = substantive evidence about European/EU R&I that is either directly strategic/geopolitical,
+        establishes a structural R&I state variable material to Europe's strategic capacity/position,
+        or is a high-quality evidence-led study of the European R&I system itself.
     B = developed/adapted/extended/refined futures methods, plus forward-looking R&I/technology-analysis methods, reusable for understanding the future of A.
     C is handled separately in the current-development scanner and never admitted here.
     """
@@ -7140,20 +7141,34 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
         a_context = list(dict.fromkeys(structural_state_evidence + centrality_evidence + ri_hits))[:8]
     elif (
         not strategic_context_pass and not high_confidence_system_pass
-        and evidence_product_pass and structural_state_ok
+        and evidence_product_pass
         and a_focus and eu_scope_admissible(eu_rel) and aboutness.get('pass') and centrality_ok
     ):
+        # Controlled recall route: ``research_evidence_route_ok`` is already deliberately
+        # narrow (Tier 1/2, completed analytical work, real evidence cues, and a recognised
+        # R&I-system mechanism/outcome).  Requiring ``structural_state_ok`` again here made
+        # this route redundant and rejected evidence-led European R&I studies merely because
+        # they used verbs such as "examine" or "study" rather than a small relationship lexicon.
+        # Keep every ordinary scope/centrality/aboutness/source-quality guard, but let the
+        # bounded evidence route stand on its own.
         a_route = 'research-evidence'
-        a_context = list(dict.fromkeys(structural_state_evidence + centrality_evidence + evidence_product_context + ri_hits))[:8]
+        a_context = list(dict.fromkeys(centrality_evidence + evidence_product_context + ri_hits))[:8]
 
-    # Final A contract: direct strategic relationship OR structural R&I state evidence.
-    # Generic empirical/research language can strengthen a route, but cannot create one.
+    # Final A contract: one of three independently bounded routes is sufficient after the
+    # common hard guards (source-supported Europe/EU scope, substantive R&I aboutness,
+    # centrality, document quality and R&I subject evidence):
+    #   1) direct/triangulated strategic relationship;
+    #   2) measured structural R&I state evidence; or
+    #   3) Tier-1/2 evidence-led study of the European R&I system itself.
+    # Route (3) is intentionally NOT a generic empirical-paper waiver: its helper requires
+    # completed research/analysis plus recognised system mechanisms and blocks local applied
+    # technology studies and weak/non-analytical institutional pages.
     ri_subject_evidence = bool(ri_hits or structural_state_ok)
-    structural_route_pass = bool(high_confidence_system_pass or (evidence_product_pass and structural_state_ok))
+    substantive_system_route_pass = bool(high_confidence_system_pass or evidence_product_pass)
     a_pass = bool(
         a_focus and ri_subject_evidence and eu_scope_admissible(eu_rel)
         and aboutness.get('pass') and centrality_ok
-        and (strategic_context_pass or structural_route_pass)
+        and (strategic_context_pass or substantive_system_route_pass)
     )
     if external_ok:
         a_route = 'external-strategic-shock'
@@ -7521,6 +7536,53 @@ def url_domain(url: str) -> str:
         return ""
 
 
+# Hard provenance floor. These are not discovery hints or ranking penalties: a match here
+# is ineligible as the substantive source for Radar publication. The list focuses on
+# state-controlled media / influence outlets rather than geography or author nationality,
+# so ordinary peer-reviewed work about or from China/Russia/etc. is not excluded merely
+# because of origin. Deployments may extend the built-in list through radar_config.json.
+_DEFAULT_BLOCKED_STATE_MEDIA_DOMAINS = {
+    'xinhuanet.com', 'xinhua.net', 'globaltimes.cn', 'cgtn.com', 'chinadaily.com.cn',
+    'people.com.cn', 'china.com.cn', 'cctv.com', 'cri.cn',
+    'rt.com', 'sputnikglobe.com', 'sputniknews.com', 'tass.com', 'ria.ru',
+    'presstv.ir',
+}
+_DEFAULT_BLOCKED_STATE_MEDIA_NAMES = {
+    'xinhua', 'xinhua news agency', 'global times', 'cgtn', 'china global television network',
+    'china daily', "people's daily", 'peoples daily', 'china internet information center',
+    'cctv', 'china radio international',
+    'rt', 'russia today', 'sputnik', 'tass', 'ria novosti', 'press tv',
+}
+
+def source_integrity_hard_block(source: str = '', domain: str = '', link: str = '', publisher: str = '') -> tuple[bool, str]:
+    """Return (blocked, reason) for sources that may never establish Radar evidence.
+
+    This is deliberately source-based, not country-based. A peer-reviewed article by Chinese
+    researchers in a trusted journal is unaffected. The hard block targets state-controlled
+    media / influence outlets and can be extended in configuration without weakening defaults.
+    """
+    domain_n = clean_text(domain).lower().removeprefix('www.')
+    if not domain_n and clean_text(link):
+        domain_n = url_domain(clean_text(link))
+    configured_domains = {
+        clean_text(x).lower().removeprefix('www.')
+        for x in CONFIG.get('blocked_state_controlled_media_domains', [])
+        if clean_text(x)
+    }
+    blocked_domains = _DEFAULT_BLOCKED_STATE_MEDIA_DOMAINS | configured_domains
+    for blocked in blocked_domains:
+        if domain_n and (domain_n == blocked or domain_n.endswith('.' + blocked)):
+            return True, f'blocked_state_controlled_media_domain:{blocked}'
+
+    names = [normalized(source), normalized(publisher)]
+    configured_names = {normalized(x) for x in CONFIG.get('blocked_state_controlled_media_names', []) if clean_text(x)}
+    blocked_names = _DEFAULT_BLOCKED_STATE_MEDIA_NAMES | configured_names
+    for name in names:
+        if name and name in blocked_names:
+            return True, f'blocked_state_controlled_media_name:{name}'
+    return False, ''
+
+
 def source_rank_for_journal(name: str) -> tuple[int | None, float, str]:
     # Crossref/publisher metadata sometimes appends issue/date labels to a journal name.
     # Accept those harmless variants while avoiding unsafe prefix matching such as
@@ -7538,6 +7600,9 @@ def source_rank_for_journal(name: str) -> tuple[int | None, float, str]:
 
 def institution_source_for_domain(domain: str) -> tuple[str, int] | None:
     d = domain.removeprefix("www.")
+    blocked, _reason = source_integrity_hard_block(domain=d)
+    if blocked:
+        return None
     for src in CONFIG["institution_sources"]:
         allowed = src["domain"].lower().removeprefix("www.")
         if d == allowed or d.endswith("." + allowed):
@@ -7571,13 +7636,26 @@ def quality_from_openalex(work: dict[str, Any]) -> tuple[bool, int, float, str, 
     src = (work.get("primary_location") or {}).get("source") or {}
     source_name = clean_text(src.get("display_name"))
     source_type = normalized(src.get("type"))
+    host = clean_text(src.get("host_organization_name") or src.get("publisher"))
+
+    # Provenance hard floor runs before prestige/tier logic. A blocked state-controlled
+    # media outlet cannot become admissible merely because metadata labels it a journal.
+    locations = openalex_locations(work)
+    blocked, _reason = source_integrity_hard_block(source_name, publisher=host)
+    if not blocked:
+        for u in locations:
+            blocked, _reason = source_integrity_hard_block(source_name, link=u, publisher=host)
+            if blocked:
+                break
+    if blocked:
+        return False, 9, 9.0, source_name or host or "Blocked source", ""
 
     tier, rank, tier_label = source_rank_for_journal(source_name)
     if tier:
         return True, tier, rank, source_name, tier_label
 
     # Whitelisted institutional output indexed in OpenAlex.
-    for u in openalex_locations(work):
+    for u in locations:
         hit = institution_source_for_domain(url_domain(u))
         if hit:
             source, source_tier = hit
@@ -7586,7 +7664,6 @@ def quality_from_openalex(work: dict[str, Any]) -> tuple[bool, int, float, str, 
     # Broad discovery is useful, but publication type alone is not a quality guarantee.
     # Outside the curated journal list, require a trusted scholarly host/publisher rather
     # than promoting every OpenAlex journal to Tier 2.
-    host = clean_text(src.get("host_organization_name") or src.get("publisher"))
     trusted_publishers = [normalized(x) for x in CONFIG.get("trusted_broad_journal_publishers", []) if clean_text(x)]
     if (
         CONFIG.get("accept_trusted_publisher_peer_reviewed_journals", True)
@@ -8500,10 +8577,14 @@ def crossref_authors(item: dict[str, Any]) -> str:
 def quality_from_crossref(item: dict[str, Any]) -> tuple[bool, int, float, str, str, str]:
     journal = clean_text((item.get("container-title") or [""])[0])
     typ = normalized(item.get("type"))
+    publisher = clean_text(item.get("publisher"))
+    link = clean_text(item.get("URL"))
+    blocked, _reason = source_integrity_hard_block(journal, link=link, publisher=publisher)
+    if blocked:
+        return False, 9, 9.0, journal or publisher or "Blocked source", "", typ or "publication"
     tier, rank, tier_label = source_rank_for_journal(journal)
     if tier and typ in {"journal-article", "article", "review", "proceedings-article"}:
         return True, tier, rank, journal, tier_label, "peer-reviewed article"
-    publisher = clean_text(item.get("publisher"))
     trusted_publishers = [normalized(x) for x in CONFIG.get("trusted_broad_journal_publishers", []) if clean_text(x)]
     if (
         CONFIG.get("accept_trusted_publisher_peer_reviewed_journals", True)
@@ -16243,6 +16324,8 @@ def trusted_weak_signal_commentary_source(source: str = "", domain: str = "", li
             domain_n = (urlparse(clean_text(link)).hostname or "").lower().removeprefix("www.")
         except Exception:
             domain_n = ""
+    if source_integrity_hard_block(source, domain_n, link)[0]:
+        return False
     for row in CONFIG.get("weak_signal_commentary_sources", []):
         if not isinstance(row, dict):
             continue
@@ -16264,6 +16347,8 @@ def trusted_unlabelled_commentary_source(source: str = "", domain: str = "", lin
             domain_n = (urlparse(clean_text(link)).hostname or "").lower().removeprefix("www.")
         except Exception:
             domain_n = ""
+    if source_integrity_hard_block(source, domain_n, link)[0]:
+        return False
     for row in CONFIG.get("weak_signal_unlabelled_commentary_sources", []):
         if not isinstance(row, dict):
             continue
@@ -16316,6 +16401,8 @@ def trusted_europe_c_source(source: str = "", domain: str = "", link: str = "") 
             domain_n = (urlparse(clean_text(link)).hostname or "").lower().removeprefix("www.")
         except Exception:
             domain_n = ""
+    if source_integrity_hard_block(source, domain_n, link)[0]:
+        return False
     if any(domain_n == d or domain_n.endswith("." + d) for d in _C_NON_EUROPE_C_BLOCKED_DOMAINS):
         return False
     if source_n in _C_NON_EUROPE_C_BLOCKED_NAMES:
@@ -16348,6 +16435,8 @@ def trusted_independent_c_source(source: str = "", domain: str = "", link: str =
             domain_n = (urlparse(clean_text(link)).hostname or "").lower().removeprefix("www.")
         except Exception:
             domain_n = ""
+    if source_integrity_hard_block(source, domain_n, link)[0]:
+        return False
     if trusted_weak_signal_commentary_source(source, domain_n, link):
         return True
     for row in configured_c_news_sources():
@@ -16382,6 +16471,8 @@ def configured_c_source_role(source: str = "", domain: str = "", link: str = "")
             domain_n = (urlparse(clean_text(link)).hostname or "").lower().removeprefix("www.")
         except Exception:
             domain_n = ""
+    if source_integrity_hard_block(source, domain_n, link)[0]:
+        return ""
     for row in configured_c_news_sources():
         if not isinstance(row, dict):
             continue
