@@ -38,6 +38,10 @@ jobs:
       - name: Check out repository without stored credentials
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
         with:
+          # Jobs can wait behind the shared scanner concurrency lock. Without an
+          # explicit branch ref, checkout may use the event SHA captured before
+          # that wait and later rebase generated radar files against a newer main.
+          ref: main
           fetch-depth: 0
           persist-credentials: false
 
