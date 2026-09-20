@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260920T163223Z-75182b559a6c`
+- Current package: `worker-a-20260920T164723Z-75182b559a6c`
 - Assigned unresolved records: **59**
   1. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxONDVIS3NvSzBXVFVvSEY0Zkd5VnRCWVFPaXZ0MlpRQU1aNjhicHM1NUNfNVRId0pIelFVYXpqT21qMy1qY1pPbEl6NVFvX1dSRGNKMjh4RUJSSWl6dE04VmlqYW1XUWcyMXg3dkJScG83bGV4d1RqdEJNZUtPU214T0liRjU3SEhwT1dvcmdCczhOam42THZyQTVNOFYyRWN4c1g3RzQ2YktUYkZjdWRB?oc=5` — INTERVIEW: 'The EU’s Biotech Act is helpful, but not yet the solution,' investors say
   2. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTE5wUms0aXQ0d1VmLXJuR0hneGNkUXlVZzNTUFo4QUowaW1fZjJDSlJBWkpuVW40YWhtb0U1VldZSEVQZl8xczF0LVZYdFdDREZKaEkxZzVZNW5PbXVlaVVXcGZnaWpIQ3dnWE9vX2hLV3NhR0ZCWU5wNF9GNjhBUQ?oc=5` — Europe’s 27 leaders to take on AI — finally
@@ -29,7 +29,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 51 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260920T163243Z-d8384a30c2f9`
+- Current package: `worker-b-20260920T164739Z-d8384a30c2f9`
 - Assigned unresolved records: **60**
   1. `link:https://news.google.com/rss/articles/CBMizgFBVV95cUxPUHdtM0lSVXVkRnRTRzJ0WHJlbm05dnVMOXAwUm4tMlJjZndpMGtubGJyWGRVZG9IQkdtWnBPV1JMRFE4SzdOdUJtV2w0VzA5eGt2dFY4aEtJanVkMDN5dUpkTFluSG5ycF9HQzdnYWZyYS01eFkxSmNRRVd1RWZmMkU3WW5XdFFkaXduZzVRLVpraU9yVTZxdU1vT1ZJZTB6VVBBTWF3TDl1Tk1OcVItSlhvTk5jbnlGM3BWXzh4Q2hjM09weEhuTzAzc0NuQQ?oc=5` — European Space Agency asks governments to fund exploration
   2. `link:https://news.google.com/rss/articles/CBMiwwFBVV95cUxOc3dqc2gtLVl6ZTJqSjNYVXlaT0Q4SkZmMnR1MEtIZmM2WHlJcXpQamVsbnFFaHlvZXhTb1dIQkwwYXJieUR6R0RxU1lzSHFSc1dKSFpXQmREaE03Y0ZYUUNUcTNUaFpfZml1dFgwT0F4Z20yOC12YWJqQVpBSElybmk4TEEzekV2VjNsdGxrS2Z3U3cyLTdBTUxhVGs0VXZOdHhoTnhaVmZsMXc5VGJ0Rjhpb3VWOE1hdUh6YzItRDNBcms?oc=5` — The Dutch Village in the Path of Europe’s Energy Transition
