@@ -3688,7 +3688,9 @@ A_STRUCTURAL_STATE_VARIABLES: dict[str, list[str]] = {
         'patient capital for innovation', 'risk capital for innovation',
         'research infrastructure investment', 'scientific infrastructure investment',
         'innovation financing gap', 'scale-up financing gap', 'technology financing gap',
-        'r&d financing', 'research financing',
+        'r&d financing', 'research financing', 'corporate r&d', 'corporate r&d investment',
+        'business enterprise r&d', 'business expenditure on r&d', 'berd', 'late-stage venture capital',
+        'late stage venture capital', 'growth-stage capital', 'growth stage capital',
     ],
     'capability / performance': [
         'research capacity', 'scientific capacity', 'innovation capacity', 'innovation performance',
@@ -3696,6 +3698,15 @@ A_STRUCTURAL_STATE_VARIABLES: dict[str, list[str]] = {
         'r&d intensity', 'research productivity', 'scientific productivity', 'publication output',
         'citation impact', 'technology leadership', 'technological leadership', 'capability gap',
         'innovation gap', 'performance gap', 'research lead', 'technology lead',
+        'regional r&d intensity', 'regional research capacity', 'regional innovation capacity',
+        'regional innovation performance', 'research concentration', 'geographic concentration of research',
+        'innovation divide', 'research divide', 'widening participation', 'widening countries',
+    ],
+    'geography / cohesion': [
+        'regional r&d intensity', 'regional research capacity', 'regional innovation capacity',
+        'regional innovation performance', 'research concentration', 'geographic concentration of research',
+        'innovation divide', 'research divide', 'widening participation', 'widening countries',
+        'regional research infrastructure', 'regional access to research infrastructure',
     ],
     'talent / workforce': [
         'research talent', 'scientific talent', 'research workforce', 'scientific workforce',
@@ -3718,7 +3729,8 @@ A_STRUCTURAL_STATE_VARIABLES: dict[str, list[str]] = {
     'translation / scale-up': [
         'technology transfer', 'knowledge transfer', 'commercialisation', 'commercialization',
         'deep tech', 'deep-tech', 'scale-up gap', 'scale up gap', 'industrial innovation',
-        'innovation ecosystem', 'innovation ecosystems',
+        'innovation ecosystem', 'innovation ecosystems', 'late-stage financing', 'late stage financing',
+        'scale-up capital', 'scale up capital', 'commercialisation gap', 'commercialization gap',
     ],
     'technology position / dependency': [
         'strategic dependency', 'strategic dependencies', 'technology dependence', 'technological dependence',
@@ -4409,8 +4421,12 @@ A_RI_CORE = [
 A_TECH_DOMAINS = [
     'critical technology', 'critical technologies', 'strategic technology', 'strategic technologies',
     'semiconductor', 'semiconductors', 'microelectronics', 'artificial intelligence', ' ai ', 'quantum', 'biotechnology',
-    'biotech', 'advanced materials', 'robotics', 'space technology', 'satellite technology',
-    'nuclear technology', 'clean technology', 'clean tech', 'digital infrastructure',
+    'biotech', 'biomanufacturing', 'industrial biotechnology', 'synthetic biology', 'biofoundry', 'biofoundries',
+    'life sciences industry', 'life science industry', 'advanced materials', 'critical raw materials', 'critical minerals',
+    'robotics', 'space technology', 'satellite technology', 'nuclear technology', 'clean technology', 'clean tech',
+    'net-zero technology', 'battery manufacturing', 'electrolyser manufacturing', 'electrolyzer manufacturing',
+    'solar manufacturing', 'wind manufacturing', 'industrial decarbonisation technology',
+    'industrial decarbonization technology', 'digital infrastructure',
     'compute infrastructure', 'computing infrastructure', 'supercomputer', 'data centre', 'data center', 'cloud infrastructure', 'cloud computing', 'ai computing',
     # Keep evidence extraction aligned with the strategic-tech focus gate. These still
     # require an R&I/capability mechanism in the same sentence; the domain word alone
@@ -4462,9 +4478,13 @@ A_MAJOR_RI_SYSTEM = [
 ]
 A_MAJOR_TECH_DOMAINS = [
     'semiconductor', 'semiconductors', 'microelectronics', 'artificial intelligence', ' ai ',
-    'quantum', 'biotechnology', 'biotech', 'advanced materials', 'critical raw materials',
-    'critical minerals', 'space technology', 'satellite', 'nuclear technology', 'reactor',
-    'clean technology', 'clean tech', 'battery', 'batteries', 'digital infrastructure',
+    'quantum', 'biotechnology', 'biotech', 'biomanufacturing', 'industrial biotechnology', 'synthetic biology',
+    'biofoundry', 'biofoundries', 'life sciences industry', 'life science industry', 'advanced materials',
+    'critical raw materials', 'critical minerals', 'space technology', 'satellite', 'nuclear technology', 'reactor',
+    'clean technology', 'clean tech', 'net-zero technology', 'battery', 'batteries', 'battery manufacturing',
+    'electrolyser', 'electrolyzer', 'electrolyser manufacturing', 'electrolyzer manufacturing',
+    'solar manufacturing', 'wind manufacturing', 'industrial decarbonisation technology',
+    'industrial decarbonization technology', 'digital infrastructure',
     'compute infrastructure', 'supercomputer', 'cloud infrastructure', 'cybersecurity',
     'dual-use', 'dual use', 'defence technology', 'defense technology', 'robotics',
 ]
@@ -19598,6 +19618,26 @@ def main() -> int:
     # first in radar_config.json. The gate is unchanged; this is search allocation only.
     all_queries = diversified_query_bank(list(dict.fromkeys(CONFIG.get("queries_a", []))))
 
+    # Strategic-gap recall lane. The Radar's stable picture can hide topical blind spots even
+    # when the admission gate is healthy. Reserve a small, balanced discovery slice for five
+    # under-covered geopolitical R&I dimensions: clean industrial/energy/materials capability,
+    # commercialisation/private R&D power, intra-European capability asymmetry, biotech/life
+    # sciences, and actor-specific US/China dependency mechanisms. This changes where we look,
+    # never what we accept: every hit still passes the ordinary provenance, Europe, central-R&I
+    # and Strand-A evidence gates.
+    strategic_gap_cfg = CONFIG.get("strategic_gap_query_families", {})
+    strategic_gap_bank: list[str] = []
+    if isinstance(strategic_gap_cfg, dict):
+        _gap_family_lanes = []
+        for _family, _vals in strategic_gap_cfg.items():
+            vals = _vals if isinstance(_vals, list) else [_vals]
+            _gap_family_lanes.append([clean_text(x) for x in vals if clean_text(x)])
+        strategic_gap_bank = interleaved_unique_batch(sum(len(x) for x in _gap_family_lanes), *_gap_family_lanes) if _gap_family_lanes else []
+    strategic_gap_focus = least_recent_probe_batch(
+        state, "strategic_gap", strategic_gap_bank,
+        max(0, int(CONFIG.get("strategic_gap_queries_per_scan", 0) or 0)),
+    ) if strategic_gap_bank else []
+
     # Dimensional precision/recall lane.  Instead of relying on one giant Boolean query,
     # rotate explicit EU × R&I × strategic-mechanism families (research security,
     # collaboration, capability, industrial policy, dependencies, talent, infrastructure
@@ -19750,24 +19790,39 @@ def main() -> int:
     # A remains the protected scholarly backbone. B has a dedicated method lane, but
     # method queries cannot crowd the substantive A-oriented lanes out of the executed prefix.
     a_protected = max(0, int(CONFIG.get("strand_a_protected_scholarly_queries_per_source", 20) or 0))
+    strategic_gap_reserved = max(0, int(CONFIG.get("strategic_gap_queries_per_scan", 0) or 0))
     b_method_set = set(b_method_bank)
     oa_explore_a = [q for q in oa_explore if q not in b_method_set]
     cr_explore_a = [q for q in cr_explore if q not in b_method_set]
-    oa_a_prefix = interleaved_unique_batch(min(oa_cap, a_protected), dimensional_focus, evidence_first_focus, strategic_scholarly_focus, curator_seed_focus, oa_base, oa_explore_a, gap_scholarly, finding_context_focus)
-    cr_a_prefix = interleaved_unique_batch(min(cr_cap, a_protected), dimensional_focus, evidence_first_focus, strategic_scholarly_focus, curator_seed_focus, cr_base, cr_explore_a, gap_scholarly, finding_context_focus)
+    # Put the bounded strategic-gap slice at the *front* of the protected A prefix. Previous
+    # evidence/dimensional lanes were present in the plan but could receive only one or two
+    # actually executed queries before other rotating work consumed the useful prefix. Ten
+    # balanced queries still leave at least half of the default 20-query protected A prefix
+    # for ordinary broad/evidence/Matrix discovery.
+    oa_gap_head = strategic_gap_focus[: min(len(strategic_gap_focus), oa_cap, strategic_gap_reserved)]
+    cr_gap_head = strategic_gap_focus[: min(len(strategic_gap_focus), cr_cap, strategic_gap_reserved)]
+    oa_a_remaining = max(0, min(oa_cap, a_protected) - len(oa_gap_head))
+    cr_a_remaining = max(0, min(cr_cap, a_protected) - len(cr_gap_head))
+    oa_a_prefix = list(dict.fromkeys(oa_gap_head + interleaved_unique_batch(oa_a_remaining, dimensional_focus, evidence_first_focus, strategic_scholarly_focus, curator_seed_focus, oa_base, oa_explore_a, gap_scholarly, finding_context_focus)))
+    cr_a_prefix = list(dict.fromkeys(cr_gap_head + interleaved_unique_batch(cr_a_remaining, dimensional_focus, evidence_first_focus, strategic_scholarly_focus, curator_seed_focus, cr_base, cr_explore_a, gap_scholarly, finding_context_focus)))
     # Give B a small guaranteed place in the actually executed scholarly prefix.  This is
     # discovery allocation only: it does not reserve publication slots or weaken the B gate.
     b_protected = max(0, int(CONFIG.get("b_method_protected_scholarly_queries_per_source", 8) or 8))
     oa_b_prefix = interleaved_unique_batch(min(oa_cap, b_protected), b_method_recent_focus, b_method_foundational_focus)
     cr_b_prefix = interleaved_unique_batch(min(cr_cap, b_protected), b_method_recent_focus, b_method_foundational_focus)
-    oa_rest = interleaved_unique_batch(oa_cap * 2, dimensional_focus, evidence_first_focus, strategic_scholarly_focus, curator_seed_focus, oa_base, oa_explore, gap_scholarly, b_method_focus, finding_context_focus)
-    cr_rest = interleaved_unique_batch(cr_cap * 2, dimensional_focus, evidence_first_focus, strategic_scholarly_focus, curator_seed_focus, cr_base, cr_explore, gap_scholarly, b_method_focus, finding_context_focus)
+    oa_rest = interleaved_unique_batch(oa_cap * 2, strategic_gap_focus, dimensional_focus, evidence_first_focus, strategic_scholarly_focus, curator_seed_focus, oa_base, oa_explore, gap_scholarly, b_method_focus, finding_context_focus)
+    cr_rest = interleaved_unique_batch(cr_cap * 2, strategic_gap_focus, dimensional_focus, evidence_first_focus, strategic_scholarly_focus, curator_seed_focus, cr_base, cr_explore, gap_scholarly, b_method_focus, finding_context_focus)
     oa_batch = list(dict.fromkeys(oa_a_prefix + oa_b_prefix + oa_rest))[:oa_cap]
     cr_batch = list(dict.fromkeys(cr_a_prefix + cr_b_prefix + cr_rest))[:cr_cap]
     oa_query_dates = {q: gap_from for q in gap_scholarly}
     cr_query_dates = {q: gap_from for q in gap_scholarly}
     oa_depth_lanes = {q: "gap" for q in gap_scholarly}
     cr_depth_lanes = {q: "gap" for q in gap_scholarly}
+    for q in strategic_gap_focus:
+        oa_query_dates[q] = DATE_FLOOR
+        cr_query_dates[q] = DATE_FLOOR
+        oa_depth_lanes[q] = "strategic-gap"
+        cr_depth_lanes[q] = "strategic-gap"
     for q in dimensional_focus:
         oa_query_dates[q] = DATE_FLOOR
         cr_query_dates[q] = DATE_FLOOR
@@ -20368,6 +20423,7 @@ def main() -> int:
     executed_priority = set(execution_stats.get("crossref_priority_tasks", set()))
     note_probe_execution(state, "openalex_base", [q for q in oa_base if q in executed_oa], now_iso)
     note_probe_execution(state, "crossref_base", [q for q in cr_base if q in executed_cr], now_iso)
+    note_probe_execution(state, "strategic_gap", [q for q in strategic_gap_focus if q in (executed_oa | executed_cr)], now_iso)
     note_probe_execution(state, "dimensional", [q for q in dimensional_focus if q in (executed_oa | executed_cr)], now_iso)
     note_probe_execution(state, "evidence_first", [q for q in evidence_first_focus if q in (executed_oa | executed_cr)], now_iso)
     note_probe_execution(state, "strand_b_method_recent", [q for q in b_method_recent_focus if q in (executed_oa | executed_cr)], now_iso)
@@ -20381,6 +20437,7 @@ def main() -> int:
     state["openalex_cursor"], oa_wrapped, oa_base_executed = committed_rotation_cursor(
         all_queries, oa_cursor_before, oa_base, executed_oa
     )
+    strategic_gap_executed = len([q for q in strategic_gap_focus if q in (executed_oa | executed_cr)])
     state["crossref_broad_cursor"], cr_broad_wrapped, cr_base_executed = committed_rotation_cursor(
         all_queries, cr_broad_cursor_before, cr_base, executed_cr
     )
@@ -23510,6 +23567,9 @@ def main() -> int:
             "openalex_queries_executed": len(set(execution_stats.get("openalex_queries", set()))),
             "openalex_base_queries_executed": oa_base_executed,
             "openalex_exploration_queries_this_run": len(oa_explore),
+            "strategic_gap_queries_this_run": len(strategic_gap_focus),
+            "strategic_gap_queries_executed": strategic_gap_executed,
+            "strategic_gap_query_profile_version": clean_text(CONFIG.get("strategic_gap_query_profile_version")),
             "dimensional_queries_this_run": len(dimensional_focus),
             "dimensional_queries_executed": dimensional_executed,
             "finding_context_queries_this_run": len(finding_context_focus),

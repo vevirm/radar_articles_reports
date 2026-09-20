@@ -1489,6 +1489,21 @@
       "name": "EUREKA",
       "domain": "eurekanetwork.org",
       "tier": 1
+    },
+    {
+      "name": "European Climate, Infrastructure and Environment Executive Agency (CINEA)",
+      "domain": "cinea.ec.europa.eu",
+      "tier": 1
+    },
+    {
+      "name": "Circular Bio-based Europe Joint Undertaking (CBE JU)",
+      "domain": "cbe.europa.eu",
+      "tier": 1
+    },
+    {
+      "name": "Innovative Health Initiative Joint Undertaking (IHI JU)",
+      "domain": "ihi.europa.eu",
+      "tier": 1
     }
   ],
   "crossref_institution_publishers": [
@@ -1659,7 +1674,7 @@
   "first_news_lookback_hours": 1440,
   "discovery_overlap_days": 45,
   "bootstrap_lookback_months": 6,
-  "source_expansion_version": "v17.20.23-main-radar-recall-recovery",
+  "source_expansion_version": "v25.1.1-strategic-gap-source-recall",
   "force_backfill_on_source_expansion": false,
   "institution_pages_per_domain_bootstrap": 14,
   "sitemap_child_budget": 6,
@@ -1951,7 +1966,8 @@
     "Geopolitics",
     "Political Geography",
     "Journal of European Integration History",
-    "European Review of International Studies"
+    "European Review of International Studies",
+    "Nature Energy"
   ],
   "crossref_priority_journal_queries": [
     "European research security geopolitics",
@@ -2698,7 +2714,7 @@
   "quiet_scan_rescue_enabled": true,
   "quiet_scan_rescue_queries_per_source": 4,
   "quiet_scan_rescue_min_seconds_remaining": 180,
-  "recall_profile_version": "v17.17.0-phrase-ontology-relational-c",
+  "recall_profile_version": "v25.1.1-strategic-gap-domain-ontology",
   "crossref_missing_abstract_enrichment_per_scan": 48,
   "crossref_missing_abstract_enrichment_timeout_seconds": 8,
   "crossref_missing_abstract_enrichment_priority_only": false,
@@ -2850,7 +2866,10 @@
     "publications.jrc.ec.europa.eu",
     "rea.ec.europa.eu",
     "research-and-innovation.ec.europa.eu",
-    "single-market-economy.ec.europa.eu"
+    "single-market-economy.ec.europa.eu",
+    "cinea.ec.europa.eu",
+    "cbe.europa.eu",
+    "ihi.europa.eu"
   ],
   "official_eu_priority_sources_per_scan": 14,
   "source_attention_floor_broad_share": 0.4,
@@ -3229,7 +3248,8 @@
     "Science Advances",
     "Nature Human Behaviour",
     "Nature Machine Intelligence",
-    "Nature Biotechnology"
+    "Nature Biotechnology",
+    "Nature Energy"
   ],
   "top_journal_watchlist_note": "Checked source-first on every ordinary scan. Prestige never bypasses the European/EU + substantive R&I admission rules; strategic significance may be inferred after admission.",
   "direct_news_sources": [
@@ -3453,6 +3473,18 @@
       "google_news_queries": [
         "\"Studies in Higher Education\" (researcher OR academic OR mobility OR talent OR careers OR international OR Europe OR China)"
       ]
+    },
+    {
+      "name": "Nature Energy",
+      "hub": "https://www.nature.com/nenergy/articles",
+      "domain": "nature.com",
+      "article_path_regex": "/articles/",
+      "feed_urls": [
+        "https://www.nature.com/nenergy/articles?format=rss"
+      ],
+      "google_news_queries": [
+        "\"Nature Energy\" (Europe OR European OR EU) (innovation OR research OR manufacturing OR battery OR hydrogen OR solar OR wind OR critical materials OR competitiveness)"
+      ]
     }
   ],
   "direct_top_journal_rotating_sources_per_scan": 4,
@@ -3608,7 +3640,7 @@
   "metadata_sparse_doi_landing_enrichment_per_journal": 6,
   "source_yield_pruning_enabled": false,
   "source_yield_policy": "Never disable, demote, or prune a configured source because of low admissions. Track metadata coverage, judgeable records, duplicates/known items and gate yield separately; metadata availability is not source quality.",
-  "evidence_first_profile_version": "v17.20.47-research-and-longform-balance",
+  "evidence_first_profile_version": "v25.1.1-strategic-gap-system-evidence",
   "evidence_first_queries_per_scan": 12,
   "evidence_first_queries": [
     "European Research Area research performance empirical evidence",
@@ -3634,7 +3666,17 @@
     "European innovation scoreboard research evidence",
     "EU research infrastructure evaluation report",
     "European R&I performance report indicators",
-    "European science technology indicators research report"
+    "European science technology indicators research report",
+    "European clean technology manufacturing R&D capacity empirical evidence",
+    "EU critical raw materials innovation substitution recycling research evidence",
+    "Europe corporate R&D investment business R&D technology capability evidence",
+    "European deep-tech late-stage finance scale-up capital empirical evidence",
+    "EU regional R&D intensity innovation divide widening empirical evidence",
+    "Europe research infrastructure regional access concentration evidence",
+    "European biotechnology biomanufacturing research capacity empirical evidence",
+    "EU life sciences commercialisation scale-up research innovation evidence",
+    "European cloud compute dependence United States providers research capacity evidence",
+    "EU China critical technology patent supply dependency research evidence"
   ],
   "evidence_report_priority_domains": [
     "research-and-innovation.ec.europa.eu",
@@ -4157,5 +4199,39 @@
   },
   "c_exceptional_release_enabled": true,
   "c_exceptional_release_profile_version": "v24.7.6-substantial-event-bypass",
-  "c_exceptional_release_rule": "Bypass 8:1:3 only when something substantially happened: a realised/observed event, from a top-tier independent/specialist or authoritative primary source, with direct/supported European R&I scope (or an unusually large strategic member-state capital/control move), and one strict materiality class: major research-programme access change, binding rule/critical-access restriction, >=1bn strategic capital/control change, major strategic capability becoming operational, severe R&I access/capacity disruption, or an exceptionally large measured system shift. Proposals, consultations, warnings, commentary, calls, plans and ordinary announcements do not qualify. Exceptional C remains low-weight context and counts against future C balance."
+  "c_exceptional_release_rule": "Bypass 8:1:3 only when something substantially happened: a realised/observed event, from a top-tier independent/specialist or authoritative primary source, with direct/supported European R&I scope (or an unusually large strategic member-state capital/control move), and one strict materiality class: major research-programme access change, binding rule/critical-access restriction, >=1bn strategic capital/control change, major strategic capability becoming operational, severe R&I access/capacity disruption, or an exceptionally large measured system shift. Proposals, consultations, warnings, commentary, calls, plans and ordinary announcements do not qualify. Exceptional C remains low-weight context and counts against future C balance.",
+  "strategic_gap_query_profile_version": "v25.1.1-five-undercovered-dimensions",
+  "strategic_gap_queries_per_scan": 10,
+  "strategic_gap_query_families": {
+    "clean_industrial_energy_materials": [
+      "Europe clean technology manufacturing R&D innovation capacity batteries solar wind electrolysers",
+      "EU clean industrial technology research innovation scale-up manufacturing capacity",
+      "Europe critical raw materials research innovation substitution recycling technology dependency",
+      "EU energy technology R&D patents industrial innovation China United States competitiveness"
+    ],
+    "commercialisation_private_rd": [
+      "Europe business R&D investment corporate R&D innovation gap United States",
+      "EU deep tech scale-up financing venture capital late-stage growth capital foreign capital",
+      "Europe research commercialisation technology transfer scale-up industrialisation evidence",
+      "European corporate R&D strategic technology investment foreign ownership acquisition"
+    ],
+    "regional_capability_asymmetry": [
+      "EU regions R&D intensity innovation capacity regional divide widening countries",
+      "Europe research capacity geographic concentration innovation performance regions",
+      "European Research Area widening research excellence participation regional disparities",
+      "EU research infrastructure access regional concentration innovation capability"
+    ],
+    "biotech_life_sciences": [
+      "Europe biotechnology biomanufacturing R&D investment scale-up capacity",
+      "EU life sciences industry research innovation commercialisation competitiveness United States China",
+      "European biomanufacturing research infrastructure technology transfer industrial capacity",
+      "Europe biotech venture capital scale-up manufacturing research innovation"
+    ],
+    "us_china_dependency_mechanisms": [
+      "Europe technology dependence United States cloud compute AI research innovation",
+      "EU China research technology dependency supply chain patents critical technologies",
+      "Europe United States China corporate R&D investment strategic technologies",
+      "European research innovation foreign ownership acquisition strategic technology firms"
+    ]
+  }
 }

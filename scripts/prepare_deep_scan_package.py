@@ -135,8 +135,11 @@ Do **not** require the work to state its future importance or to use explicit ge
 A can qualify through any of three source-grounded routes:
 1. a direct or clearly supported strategic/geopolitical R&I relationship;
 2. evidence about a consequential European R&I state or trajectory (for example funding/capital,
-   capability/performance, talent/workforce, infrastructure/compute, collaboration/networks,
-   technology transfer/scale-up, technology dependency/position, or standards/rule-setting); or
+   including private/corporate R&D and scale-up finance; capability/performance, including regional
+   concentration, widening or intra-European gaps; talent/workforce; infrastructure/compute;
+   collaboration/networks; technology transfer/scale-up; strategic-technology capacity in areas such
+   as clean tech, critical materials, biotechnology/biomanufacturing; technology dependency/position,
+   including distinct US/China dependency mechanisms; or standards/rule-setting); or
 3. a high-quality completed evidence-led study/report whose substantive object is the European R&I
    system itself (for example research/innovation policy or governance, funding, careers, mobility,
    collaboration, infrastructure, transfer, assessment, open science, or comparable system mechanisms),
