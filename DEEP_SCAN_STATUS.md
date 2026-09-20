@@ -6,17 +6,17 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1509** (Main **731** + Historical **778**)
-- Automatic queue still needing V2 verification: **97** (Main **59** + Historical **38**)
+- Authoritative V2 verified: **1510** (Main **732** + Historical **778**)
+- Automatic queue still needing V2 verification: **123** (Main **63** + Historical **60**)
 - Currently assigned to workers: **72** (Main **57** + Historical **15**)
 - Bounded access-recovery retries still eligible: **2**
 - Hands-on verification needed: **69**
-- Automatic queue pending and not yet assigned: **25**
+- Automatic queue pending and not yet assigned: **51**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260919T221414Z-2a1eeef6b404`
+- Current package: `worker-a-20260920T133906Z-2a1eeef6b404`
 - Assigned unresolved records: **36**
   1. `link:https://news.google.com/rss/articles/CBMiwwFBVV95cUxQa2RvcWNWOTFneWVMM1JqaE9SRml3YmdEbnN0cVNlMTR2Z2VJN3IxVzlFR1hlaWhTeUt3RU9fTEtuSTFtaXphYW5Va0prYVNHS3VWWXl5N1JRUXJNTHNISDI0WEViZGxlTDNicUg5QXVMdUY5MFVGOW96aWI0aHNBMnRCNlpONEZiSklGVmZOUC1sTUJyZUhDZmllMG0tSWUxNWdhdUpYRGZuVUpnOGJGREdESURfZnVxNXhnUHkzcDRSem8?oc=5` — Industry urges governments not to cut EU R&I funds
   2. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxONDVIS3NvSzBXVFVvSEY0Zkd5VnRCWVFPaXZ0MlpRQU1aNjhicHM1NUNfNVRId0pIelFVYXpqT21qMy1qY1pPbEl6NVFvX1dSRGNKMjh4RUJSSWl6dE04VmlqYW1XUWcyMXg3dkJScG83bGV4d1RqdEJNZUtPU214T0liRjU3SEhwT1dvcmdCczhOam42THZyQTVNOFYyRWN4c1g3RzQ2YktUYkZjdWRB?oc=5` — INTERVIEW: 'The EU’s Biotech Act is helpful, but not yet the solution,' investors say
@@ -29,16 +29,16 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260919T221428Z-edc39cf90cdc`
+- Current package: `worker-b-20260920T133924Z-fd45465c8163`
 - Assigned unresolved records: **36**
-  1. `link:https://news.google.com/rss/articles/CBMic0FVX3lxTE5vNVlYVEQwal9wWXpUTU1LQUhHQTRxNmJ5b0gwcGpja2lPQXVndW1LVmpHTkZLdXlwRDktRUNNR0RTWXhPWDY0bTV2eFNqYktBTm5DSXc1aDRrTmxwaGVOcFY2cXBkX0VFSnVSS1gtNWI0T2M?oc=5` — Apply AI Summit
-  2. `link:https://news.google.com/rss/articles/CBMizgFBVV95cUxPUHdtM0lSVXVkRnRTRzJ0WHJlbm05dnVMOXAwUm4tMlJjZndpMGtubGJyWGRVZG9IQkdtWnBPV1JMRFE4SzdOdUJtV2w0VzA5eGt2dFY4aEtJanVkMDN5dUpkTFluSG5ycF9HQzdnYWZyYS01eFkxSmNRRVd1RWZmMkU3WW5XdFFkaXduZzVRLVpraU9yVTZxdU1vT1ZJZTB6VVBBTWF3TDl1Tk1OcVItSlhvTk5jbnlGM3BWXzh4Q2hjM09weEhuTzAzc0NuQQ?oc=5` — European Space Agency asks governments to fund exploration
-  3. `link:https://news.google.com/rss/articles/CBMiwwFBVV95cUxOc3dqc2gtLVl6ZTJqSjNYVXlaT0Q4SkZmMnR1MEtIZmM2WHlJcXpQamVsbnFFaHlvZXhTb1dIQkwwYXJieUR6R0RxU1lzSHFSc1dKSFpXQmREaE03Y0ZYUUNUcTNUaFpfZml1dFgwT0F4Z20yOC12YWJqQVpBSElybmk4TEEzekV2VjNsdGxrS2Z3U3cyLTdBTUxhVGs0VXZOdHhoTnhaVmZsMXc5VGJ0Rjhpb3VWOE1hdUh6YzItRDNBcms?oc=5` — The Dutch Village in the Path of Europe’s Energy Transition
-  4. `link:https://news.google.com/rss/articles/CBMinAFBVV95cUxQdGg0TmtnZy1aellQQXoweDczWWV3dWdNb0JPbGVtZ1F0TW91cGJSZm9fUHlwVHlVMUxRX1lCY0tqUHFUQjZEdllmSUdIR1FxRXZVXzVzTmRKZTZRdFBSOU14bzExS0FCYWdLQnRnZ3MwdTd2bjdIY2RUVTc1VVplbmM2R0M2aWxKNmV3dDdrcjZDRDlsaTE1aFptSlk?oc=5` — French AI firm Mistral valued at €21 billion after latest funding
-  5. `link:https://news.google.com/rss/articles/CBMiyAFBVV95cUxPdHdrS1BubUQyTzh0cmJXbTBhMzBlQjQ5WVl3MUx6UmVjNUlWOE1aZjl1ZE4wY0FDcTBEQmVLOEthQzQzS1luaTBLZUgzZklIUXRUZTlhalNsb2dSR3diLW5wZnpOdExadDJ0bnBrS2szUDl4VlotcGs4ODgyeTVEX3FWQTE3SjNEWnB3MWdHdktpUjlERDJGUkgzd2ptOUVlV1F3d0N3S3gxTmd1Nm00V0hjVy1mNHV5TEE1R3g2Q2p5eXBOR2VScg?oc=5` — Sabotage, espionage and disinformation: Hybrid threats to Germany rise
-  6. `link:https://news.google.com/rss/articles/CBMiogFBVV95cUxQS2puT2p2T1JzcFVGS0VuRVIxcUpPS1VUYTZjMFQ0TW93cjUyRk1ZS0I4aEJ5U3E3elBEVjlzTElwWnlscWNCcjZiWm1UdEJCa1Y4NFZkT2stSUlXaGdoN1NUNVFuRXBiZXJtM3FZS3BrTjdaNmJOMTRidV8zUWVGSHJ4XzM3OWFXSzhZMGFhb3JfRFk0aDloSmxLMjJjNWdpSlE?oc=5` — Europe’s Software Giant Fights to Stay Relevant in the AI Era
-  7. `link:https://news.google.com/rss/articles/CBMinAFBVV95cUxQSDM4bUVJQ1BVcG1NRDh6b2kzVHM5SzhJT0VwbzV0LUZNMExOalZVSjYzU1RCQUlOMDF3MjVrU05kMG5IQXVTX2Fia3M2cDBCQmQ2S0NrVERZZEFGd29kYUFyaHVCUHo1YnhLOERtSkRqUHpzeG5lVUJNaWZHNmN3cUNuR0pDUTNpTVpQajNrb0t5VzNoZmtLUU95Nmc?oc=5` — ArianeGroup studies increase in European space launches
-  8. `link:https://news.google.com/rss/articles/CBMitgFBVV95cUxNTnpFN1FsZ1A1TzBnd0ZSOGpGeTJ6aWJ1a1FmYi1CeklIRmI1TnFfUnJDSV9wajNZZXl6SDZicTRpWnhWQ3Y2dzVvMlVVZEV2OVhmNHRoMnNEZzFrOEZVVC1ldWpLSnlDanlaNG5BUWhEc1plVlRndDVXSzRzVkd3RXJtUVhpTEhXMFJSUG9iZGZ1QUlfd05nMEZaZVNXVVBUMVFsek4yMHQ1anNkUG1NaG55YXo1UQ?oc=5` — German Startup’s Rocket Deploys Satellites in a First for Europe
+  1. `link:https://news.google.com/rss/articles/CBMizgFBVV95cUxPUHdtM0lSVXVkRnRTRzJ0WHJlbm05dnVMOXAwUm4tMlJjZndpMGtubGJyWGRVZG9IQkdtWnBPV1JMRFE4SzdOdUJtV2w0VzA5eGt2dFY4aEtJanVkMDN5dUpkTFluSG5ycF9HQzdnYWZyYS01eFkxSmNRRVd1RWZmMkU3WW5XdFFkaXduZzVRLVpraU9yVTZxdU1vT1ZJZTB6VVBBTWF3TDl1Tk1OcVItSlhvTk5jbnlGM3BWXzh4Q2hjM09weEhuTzAzc0NuQQ?oc=5` — European Space Agency asks governments to fund exploration
+  2. `link:https://news.google.com/rss/articles/CBMiwwFBVV95cUxOc3dqc2gtLVl6ZTJqSjNYVXlaT0Q4SkZmMnR1MEtIZmM2WHlJcXpQamVsbnFFaHlvZXhTb1dIQkwwYXJieUR6R0RxU1lzSHFSc1dKSFpXQmREaE03Y0ZYUUNUcTNUaFpfZml1dFgwT0F4Z20yOC12YWJqQVpBSElybmk4TEEzekV2VjNsdGxrS2Z3U3cyLTdBTUxhVGs0VXZOdHhoTnhaVmZsMXc5VGJ0Rjhpb3VWOE1hdUh6YzItRDNBcms?oc=5` — The Dutch Village in the Path of Europe’s Energy Transition
+  3. `link:https://news.google.com/rss/articles/CBMinAFBVV95cUxQdGg0TmtnZy1aellQQXoweDczWWV3dWdNb0JPbGVtZ1F0TW91cGJSZm9fUHlwVHlVMUxRX1lCY0tqUHFUQjZEdllmSUdIR1FxRXZVXzVzTmRKZTZRdFBSOU14bzExS0FCYWdLQnRnZ3MwdTd2bjdIY2RUVTc1VVplbmM2R0M2aWxKNmV3dDdrcjZDRDlsaTE1aFptSlk?oc=5` — French AI firm Mistral valued at €21 billion after latest funding
+  4. `link:https://news.google.com/rss/articles/CBMiyAFBVV95cUxPdHdrS1BubUQyTzh0cmJXbTBhMzBlQjQ5WVl3MUx6UmVjNUlWOE1aZjl1ZE4wY0FDcTBEQmVLOEthQzQzS1luaTBLZUgzZklIUXRUZTlhalNsb2dSR3diLW5wZnpOdExadDJ0bnBrS2szUDl4VlotcGs4ODgyeTVEX3FWQTE3SjNEWnB3MWdHdktpUjlERDJGUkgzd2ptOUVlV1F3d0N3S3gxTmd1Nm00V0hjVy1mNHV5TEE1R3g2Q2p5eXBOR2VScg?oc=5` — Sabotage, espionage and disinformation: Hybrid threats to Germany rise
+  5. `link:https://news.google.com/rss/articles/CBMiogFBVV95cUxQS2puT2p2T1JzcFVGS0VuRVIxcUpPS1VUYTZjMFQ0TW93cjUyRk1ZS0I4aEJ5U3E3elBEVjlzTElwWnlscWNCcjZiWm1UdEJCa1Y4NFZkT2stSUlXaGdoN1NUNVFuRXBiZXJtM3FZS3BrTjdaNmJOMTRidV8zUWVGSHJ4XzM3OWFXSzhZMGFhb3JfRFk0aDloSmxLMjJjNWdpSlE?oc=5` — Europe’s Software Giant Fights to Stay Relevant in the AI Era
+  6. `link:https://news.google.com/rss/articles/CBMinAFBVV95cUxQSDM4bUVJQ1BVcG1NRDh6b2kzVHM5SzhJT0VwbzV0LUZNMExOalZVSjYzU1RCQUlOMDF3MjVrU05kMG5IQXVTX2Fia3M2cDBCQmQ2S0NrVERZZEFGd29kYUFyaHVCUHo1YnhLOERtSkRqUHpzeG5lVUJNaWZHNmN3cUNuR0pDUTNpTVpQajNrb0t5VzNoZmtLUU95Nmc?oc=5` — ArianeGroup studies increase in European space launches
+  7. `link:https://news.google.com/rss/articles/CBMitgFBVV95cUxNTnpFN1FsZ1A1TzBnd0ZSOGpGeTJ6aWJ1a1FmYi1CeklIRmI1TnFfUnJDSV9wajNZZXl6SDZicTRpWnhWQ3Y2dzVvMlVVZEV2OVhmNHRoMnNEZzFrOEZVVC1ldWpLSnlDanlaNG5BUWhEc1plVlRndDVXSzRzVkd3RXJtUVhpTEhXMFJSUG9iZGZ1QUlfd05nMEZaZVNXVVBUMVFsek4yMHQ1anNkUG1NaG55YXo1UQ?oc=5` — German Startup’s Rocket Deploys Satellites in a First for Europe
+  8. `link:https://news.google.com/rss/articles/CBMiwAFBVV95cUxOU1dZdnNreUFIQUEwZWdKaGRoRWdBeXdjVnlQN3hnaEZobGVvZl8zcDRsc21vR0xuUzR5VmkxbUVHcDBfdVlaQnZSSzQ1OUg5ZlVielMxMTBSS3VwTlMzRTF0SjlUQzVneExTa0VIZEZTRGEtOENucmpXb1RaZjJsZzdjN3BCQXNCWlU0VUthTWNvem5jbDNLb0dNZWpKZzZGQWh0MTFMSGVsUl9JZFBYQ3RTXzYxTU1JTlVTbHNJN2M?oc=5` — Europe is winning on AI and drones science. It's losing on deployment
   - … plus 28 more in the package manifest
 
 ## Hands-on verification needed

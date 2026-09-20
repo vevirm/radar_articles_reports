@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-19T22:11:08Z",
+  "generated_at": "2026-09-20T13:35:35Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -138540,8 +138540,67 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMic0FVX3lxTE5vNVlYVEQwal9wWXpUTU1LQUhHQTRxNmJ5b0gwcGpja2lPQXVndW1LVmpHTkZLdXlwRDktRUNNR0RTWXhPWDY0bTV2eFNqYktBTm5DSXc1aDRrTmxwaGVOcFY2cXBkX0VFSnVSS1gtNWI0T2M?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "453d5e4d",
+      "identity_hash": "a90d2f73c3e84f65",
+      "deep_analysis": {
+        "work_kind": "event announcement page",
+        "research_question": "",
+        "main_finding": "Commission announces an Apply AI Summit on 17 November 2026 for ~900 on-site stakeholders to discuss AI adoption in strategic sectors.",
+        "method_or_basis": "Official event page text and draft agenda.",
+        "qualification": "Future event; announcement only, no substantive outcome reported.",
+        "radar_relevance": "Fails Strand C: generic event/promotional page with no substantive development.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Google News RSS redirect decoded (news.google.com batchexecute) to publisher URL https://digital-strategy.ec.europa.eu/en/policies/apply-ai-summit; fetched the Commission 'Shaping Europe's digital future' page (HTTP 200), which is the event page for the Apply AI Summit."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Web event page; no DOI exists."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_page",
+            "url": "https://digital-strategy.ec.europa.eu/en/policies/apply-ai-summit",
+            "title": "Apply AI Summit – Shaping Europe's digital future",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Supplied link resolves to the official Commission event page. Page announces a hybrid summit on 17 November 2026 (Brussels EGG and online), with draft agenda, registration deadline and speaker list. No decision, funding or policy change is reported on the page."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_EVENT_PAGE_NO_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "Verified official page is an event/registration page for a future summit (17 Nov 2026) marking one year of the Apply AI Strategy. It reports no new policy decision, funding instrument or programme change; seminar/event pages do not qualify for Strand C. Scanner's 'OBSERVED/delivered' status is also wrong: the event had not yet taken place."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T13:35:35Z",
+      "deep_scan_package_id": "20260920T120714Z-b3c508601ffa",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-09-19T22:11:08Z"
+  "claims_updated_at": "2026-09-20T13:35:35Z"
 }
