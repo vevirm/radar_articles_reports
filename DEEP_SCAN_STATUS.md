@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1510** (Main **732** + Historical **778**)
-- Automatic queue still needing V2 verification: **136** (Main **67** + Historical **69**)
-- Currently assigned to workers: **120** (Main **65** + Historical **55**)
+- Authoritative V2 verified: **1511** (Main **733** + Historical **778**)
+- Automatic queue still needing V2 verification: **135** (Main **66** + Historical **69**)
+- Currently assigned to workers: **119** (Main **64** + Historical **55**)
 - Bounded access-recovery retries still eligible: **2**
 - Hands-on verification needed: **69**
 - Automatic queue pending and not yet assigned: **16**
@@ -16,20 +16,20 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260920T155135Z-f9d8f9ad1c54`
-- Assigned unresolved records: **60**
-  1. `link:https://news.google.com/rss/articles/CBMiwwFBVV95cUxQa2RvcWNWOTFneWVMM1JqaE9SRml3YmdEbnN0cVNlMTR2Z2VJN3IxVzlFR1hlaWhTeUt3RU9fTEtuSTFtaXphYW5Va0prYVNHS3VWWXl5N1JRUXJNTHNISDI0WEViZGxlTDNicUg5QXVMdUY5MFVGOW96aWI0aHNBMnRCNlpONEZiSklGVmZOUC1sTUJyZUhDZmllMG0tSWUxNWdhdUpYRGZuVUpnOGJGREdESURfZnVxNXhnUHkzcDRSem8?oc=5` — Industry urges governments not to cut EU R&I funds
-  2. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxONDVIS3NvSzBXVFVvSEY0Zkd5VnRCWVFPaXZ0MlpRQU1aNjhicHM1NUNfNVRId0pIelFVYXpqT21qMy1qY1pPbEl6NVFvX1dSRGNKMjh4RUJSSWl6dE04VmlqYW1XUWcyMXg3dkJScG83bGV4d1RqdEJNZUtPU214T0liRjU3SEhwT1dvcmdCczhOam42THZyQTVNOFYyRWN4c1g3RzQ2YktUYkZjdWRB?oc=5` — INTERVIEW: 'The EU’s Biotech Act is helpful, but not yet the solution,' investors say
-  3. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTE5wUms0aXQ0d1VmLXJuR0hneGNkUXlVZzNTUFo4QUowaW1fZjJDSlJBWkpuVW40YWhtb0U1VldZSEVQZl8xczF0LVZYdFdDREZKaEkxZzVZNW5PbXVlaVVXcGZnaWpIQ3dnWE9vX2hLV3NhR0ZCWU5wNF9GNjhBUQ?oc=5` — Europe’s 27 leaders to take on AI — finally
-  4. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxNTWJ2T3FjMmNvRXZrOXFMMmMyLTVpR2FENnVhZzJvNFhpc3BGQl9sUHhsVlRaMmIyV1lQdzZoRlRiLTVIVXZXX1BsNkwtVTBNbHlNd0tyNUY2emx6YjVNcmwtcjV5dFEweHZnYl9qQmtIYk9FbFhKRzBoNE04ZHJacklHWFB0Q1EtQ0lySS1LcXVubktTY2pWeXVKRU1BSkdsTDVmYXViZjFEcmlmdUE?oc=5` — It’s now or never for a European Moonshot for human-relevant health research
-  5. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxQYUtFSTRwMDl3OUhZMUF2aVFLQU9XYlZnV2NmY2NjNDdHb1RYTG1lTWZjVE1aWm56UmY0TUJCWHI1elZFZkZuMEFmdU9QZzNHZk5DVGxrSTY0VF9JSFpWMFFjS2FSd0oyT0tPWU1xbUVVT1BaRE1Vam4zTFN5U04zUVh3YjJ2eHliX0RwUDdZSUQwWkgwaXljX2RYQVpRWFZjb29Yc2dldUZzLXNxOGc?oc=5` — EU pharma reform: Belgium risks losing its life sciences edge, lawyer warns
-  6. `link:https://news.google.com/rss/articles/CBMiygFBVV95cUxOVGNheW9CUUx4Zks1ZzZoTlA4U0M0SUVBT3I2ZmZVbXFrVTJTYkxpSTBPVGQ2eVVZVlJjMFBoX0c2WWRma1hJNGNHUmVQUjhKM1BPNi1KeFJMQlgzY1Z5U19RUVhUSDF6U1Y4aU9UUzIyZHlrRzFKQTNuaGR4ZlRHbDJXWXhjNGlRNjBMaFBhMHV1cjY5a1RUcFNMMTFqb3dWOUNCbXdHTFo5VFlEM3MyUnhtUW9nQlJjOGJJS2xIOV9FZGVNMmRPZUp3?oc=5` — To secure the FP10 Europe needs, there’s work to do
-  7. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTFA3d1VZbmNrSnJ1MW5xdnNzdjBBRzMzeTF4VUhMeXdzb3VXeG9yZ2Z1aDdTZEFRZ05JNjFXN0JRMW93a0dtWlI2OG1Jd1hyVTNqaWFEWU9veDZUQzQxLWdIcjUwR1RHRFNZenRyWkUxR1hHaWZieE03MUNzU3FUZw?oc=5` — EU and US critical raw materials strategies: EU-US Explainer
-  8. `link:https://news.google.com/rss/articles/CBMizgFBVV95cUxPTXUtM2F0X0xuTjJGajR4emNZQ1BIWTdRWXdLczJINTM1ZkFxMjJHaXJYMXRHUVotcnZZMl9mY2laNGFrcGhUR04yNlhPUEJRZFpvREVFdXlaeUNtS0JtVUloSHZtakVOX1gwMkhNbGhoWE42TGVHdjFCRzliVDZBNWRzRUxQZk0ydU5Td1JacXBfV0t6QXFGaDViYkJzMk1DSnhVQ1Ziak4zd1l5cUhUczNBWVo2UTFncEt6N201WVFFaC1QRVBZNDZ3S1hDZw?oc=5` — Research leaders seek ‘better aligned’ EU and national funding
-  - … plus 52 more in the package manifest
+- Current package: `worker-a-20260920T163223Z-75182b559a6c`
+- Assigned unresolved records: **59**
+  1. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxONDVIS3NvSzBXVFVvSEY0Zkd5VnRCWVFPaXZ0MlpRQU1aNjhicHM1NUNfNVRId0pIelFVYXpqT21qMy1qY1pPbEl6NVFvX1dSRGNKMjh4RUJSSWl6dE04VmlqYW1XUWcyMXg3dkJScG83bGV4d1RqdEJNZUtPU214T0liRjU3SEhwT1dvcmdCczhOam42THZyQTVNOFYyRWN4c1g3RzQ2YktUYkZjdWRB?oc=5` — INTERVIEW: 'The EU’s Biotech Act is helpful, but not yet the solution,' investors say
+  2. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTE5wUms0aXQ0d1VmLXJuR0hneGNkUXlVZzNTUFo4QUowaW1fZjJDSlJBWkpuVW40YWhtb0U1VldZSEVQZl8xczF0LVZYdFdDREZKaEkxZzVZNW5PbXVlaVVXcGZnaWpIQ3dnWE9vX2hLV3NhR0ZCWU5wNF9GNjhBUQ?oc=5` — Europe’s 27 leaders to take on AI — finally
+  3. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxNTWJ2T3FjMmNvRXZrOXFMMmMyLTVpR2FENnVhZzJvNFhpc3BGQl9sUHhsVlRaMmIyV1lQdzZoRlRiLTVIVXZXX1BsNkwtVTBNbHlNd0tyNUY2emx6YjVNcmwtcjV5dFEweHZnYl9qQmtIYk9FbFhKRzBoNE04ZHJacklHWFB0Q1EtQ0lySS1LcXVubktTY2pWeXVKRU1BSkdsTDVmYXViZjFEcmlmdUE?oc=5` — It’s now or never for a European Moonshot for human-relevant health research
+  4. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxQYUtFSTRwMDl3OUhZMUF2aVFLQU9XYlZnV2NmY2NjNDdHb1RYTG1lTWZjVE1aWm56UmY0TUJCWHI1elZFZkZuMEFmdU9QZzNHZk5DVGxrSTY0VF9JSFpWMFFjS2FSd0oyT0tPWU1xbUVVT1BaRE1Vam4zTFN5U04zUVh3YjJ2eHliX0RwUDdZSUQwWkgwaXljX2RYQVpRWFZjb29Yc2dldUZzLXNxOGc?oc=5` — EU pharma reform: Belgium risks losing its life sciences edge, lawyer warns
+  5. `link:https://news.google.com/rss/articles/CBMiygFBVV95cUxOVGNheW9CUUx4Zks1ZzZoTlA4U0M0SUVBT3I2ZmZVbXFrVTJTYkxpSTBPVGQ2eVVZVlJjMFBoX0c2WWRma1hJNGNHUmVQUjhKM1BPNi1KeFJMQlgzY1Z5U19RUVhUSDF6U1Y4aU9UUzIyZHlrRzFKQTNuaGR4ZlRHbDJXWXhjNGlRNjBMaFBhMHV1cjY5a1RUcFNMMTFqb3dWOUNCbXdHTFo5VFlEM3MyUnhtUW9nQlJjOGJJS2xIOV9FZGVNMmRPZUp3?oc=5` — To secure the FP10 Europe needs, there’s work to do
+  6. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTFA3d1VZbmNrSnJ1MW5xdnNzdjBBRzMzeTF4VUhMeXdzb3VXeG9yZ2Z1aDdTZEFRZ05JNjFXN0JRMW93a0dtWlI2OG1Jd1hyVTNqaWFEWU9veDZUQzQxLWdIcjUwR1RHRFNZenRyWkUxR1hHaWZieE03MUNzU3FUZw?oc=5` — EU and US critical raw materials strategies: EU-US Explainer
+  7. `link:https://news.google.com/rss/articles/CBMizgFBVV95cUxPTXUtM2F0X0xuTjJGajR4emNZQ1BIWTdRWXdLczJINTM1ZkFxMjJHaXJYMXRHUVotcnZZMl9mY2laNGFrcGhUR04yNlhPUEJRZFpvREVFdXlaeUNtS0JtVUloSHZtakVOX1gwMkhNbGhoWE42TGVHdjFCRzliVDZBNWRzRUxQZk0ydU5Td1JacXBfV0t6QXFGaDViYkJzMk1DSnhVQ1Ziak4zd1l5cUhUczNBWVo2UTFncEt6N201WVFFaC1QRVBZNDZ3S1hDZw?oc=5` — Research leaders seek ‘better aligned’ EU and national funding
+  8. `link:https://news.google.com/rss/articles/CBMiwgFBVV95cUxQZTJGTmNHYVByVjdPdEhtZFY2UjR2Zkh4Tlc4Qjd3NFRSMmRwX2NGbHF1Q256Umo2cldzZkprcHlzT2ZTaFFVZ050RUhpOGxVMzFMRG5LUnBDNHhya2k3c2RqTG5zQnZSQkdtak9NOGFIRmRwZ2pIZmpvY010MDk0dHpRQ3VnTmNRMnd0NkxTWjFaSFgwcnRNZWE5c1gtZWNkWFdjQ2dfLXB4RzlDM2Q4NG5hUFJ2MVFJdWdvaWltVVpmZw?oc=5` — European researchers sound the alarm that Trump rule changes will hit cooperation
+  - … plus 51 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260920T155153Z-d8384a30c2f9`
+- Current package: `worker-b-20260920T163243Z-d8384a30c2f9`
 - Assigned unresolved records: **60**
   1. `link:https://news.google.com/rss/articles/CBMizgFBVV95cUxPUHdtM0lSVXVkRnRTRzJ0WHJlbm05dnVMOXAwUm4tMlJjZndpMGtubGJyWGRVZG9IQkdtWnBPV1JMRFE4SzdOdUJtV2w0VzA5eGt2dFY4aEtJanVkMDN5dUpkTFluSG5ycF9HQzdnYWZyYS01eFkxSmNRRVd1RWZmMkU3WW5XdFFkaXduZzVRLVpraU9yVTZxdU1vT1ZJZTB6VVBBTWF3TDl1Tk1OcVItSlhvTk5jbnlGM3BWXzh4Q2hjM09weEhuTzAzc0NuQQ?oc=5` — European Space Agency asks governments to fund exploration
   2. `link:https://news.google.com/rss/articles/CBMiwwFBVV95cUxOc3dqc2gtLVl6ZTJqSjNYVXlaT0Q4SkZmMnR1MEtIZmM2WHlJcXpQamVsbnFFaHlvZXhTb1dIQkwwYXJieUR6R0RxU1lzSHFSc1dKSFpXQmREaE03Y0ZYUUNUcTNUaFpfZml1dFgwT0F4Z20yOC12YWJqQVpBSElybmk4TEEzekV2VjNsdGxrS2Z3U3cyLTdBTUxhVGs0VXZOdHhoTnhaVmZsMXc5VGJ0Rjhpb3VWOE1hdUh6YzItRDNBcms?oc=5` — The Dutch Village in the Path of Europe’s Energy Transition

@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-20T13:35:35Z",
+  "generated_at": "2026-09-20T16:28:50Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -138599,8 +138599,127 @@
       "deep_scan_package_id": "20260920T120714Z-b3c508601ffa",
       "claims": [],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiwwFBVV95cUxQa2RvcWNWOTFneWVMM1JqaE9SRml3YmdEbnN0cVNlMTR2Z2VJN3IxVzlFR1hlaWhTeUt3RU9fTEtuSTFtaXphYW5Va0prYVNHS3VWWXl5N1JRUXJNTHNISDI0WEViZGxlTDNicUg5QXVMdUY5MFVGOW96aWI0aHNBMnRCNlpONEZiSklGVmZOUC1sTUJyZUhDZmllMG0tSWUxNWdhdUpYRGZuVUpnOGJGREdESURfZnVxNXhnUHkzcDRSem8?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "0343da14",
+      "identity_hash": "d38206ba1056bdf2",
+      "reader_title": "Industry groups urge EU governments not to cut FP10 and Competitiveness Fund budgets",
+      "reader_what": "Five European industry associations asked that Horizon Europe and the European Competitiveness Fund not be cut in the 2028-34 budget.",
+      "reader_why": "Industry pressure is one input into how large and industry-oriented the EU's next R&I budget will be.",
+      "reader_more": "The 22 July 2026 statement welcomes the planned European Competitiveness Fund but asks for stronger industry voice in its governance. It wants one aligned rulebook and work programme with Horizon Europe, and faster grant decisions. It argues that cuts proposed during the Cypriot Council presidency would weaken EU innovation. This is an advocacy position; it does not show what the final budget will be.",
+      "deep_analysis": {
+        "work_kind": "stakeholder advocacy statement in live legislative negotiation",
+        "research_question": "",
+        "main_finding": "Industry associations oppose proposed cuts to FP10/Horizon Europe and the ECF and call for integrated, industry-led governance and faster funding.",
+        "method_or_basis": "Primary joint statement text (22 July 2026) plus RPN teaser.",
+        "qualification": "Advocacy position only; final MFF allocations were still under negotiation and signatory list is partly unreadable.",
+        "radar_relevance": "Documents organised industry pressure on the size and governance of the EU's 2028-34 R&I budget.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "Google News redirect decoded via news.google.com batchexecute to https://www.researchprofessionalnews.com/rr-news-europe-innovation-2026-7-industry-urges-governments-not-to-cut-eu-r-i-funds/ ; HTTP 200 but subscriber paywall: only standfirst and two lead sentences (BusinessEurope, Digital Europe, ESIA joint statement asking FP10/ECF funds 'are not reduced')."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News item; no DOI."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failed",
+            "note": "web search for the joint statement (BusinessEurope DIGITALEUROPE ESIA FP10 ECF July 2026) returned the separate 7 July 86-association FP10 declaration, not the cited statement."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "web search '\"European Competitiveness Fund\" joint industry statement \"not reduced\" Council MFF July 2026' found Orgalim page dated 22 July 2026 for the joint industry call."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Downloaded signatory copy https://orgalim.eu/wp-content/uploads/Joint-industry-statement_Innovate-in-Europe-scale-in-Europe.pdf (dated 22 July 2026); full text read, including the closing request that ECF and Horizon Europe 'are not reduced'."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_applicable",
+            "note": "Underlying statement already matched on wording, date and signatory group; no further search needed."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "signatory_full_text",
+            "url": "https://orgalim.eu/wp-content/uploads/Joint-industry-statement_Innovate-in-Europe-scale-in-Europe.pdf",
+            "title": "Innovate in Europe, scale in Europe: A joint industry call for an ambitious European Competitiveness Fund (22 July 2026)",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_teaser",
+            "url": "https://www.researchprofessionalnews.com/rr-news-europe-innovation-2026-7-industry-urges-governments-not-to-cut-eu-r-i-funds/",
+            "title": "Industry urges governments not to cut EU R&I funds (RPN, paywalled teaser)",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "RPN article paywalled; the development it reports was verified from the 22 July 2026 joint industry statement published by Orgalim with four other associations. Exact signatory list not machine-readable (logos)."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "The RPN item reports a real, dated joint industry position in the live 2028-34 MFF negotiation opposing proposed cuts to FP10/Horizon Europe and the ECF; the primary statement was recovered and read."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T16:28:50Z",
+      "deep_scan_package_id": "worker-a-20260920T155135Z-f9d8f9ad1c54",
+      "claims": [
+        {
+          "object": "horizon.budget_2028_34",
+          "secondary_objects": [
+            "finance.strategic_investment"
+          ],
+          "actor": {
+            "name": "Orgalim and four other European industry associations (incl. BusinessEurope, DIGITALEUROPE, ESIA per RPN)",
+            "class": "other"
+          },
+          "mechanism": "opposes",
+          "direction": "unchanged",
+          "status": "in_negotiation",
+          "status_date": "2026-07-22",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "Advocacy position only; final MFF allocations were still under negotiation and signatory list is partly unreadable.",
+          "text": "Industry associations urged that Horizon Europe and the European Competitiveness Fund not be reduced in the final 2028-34 MFF deal.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMiwwFBVV95cUxQa2RvcWNWOTFneWVMM1JqaE9SRml3YmdEbnN0cVNlMTR2Z2VJN3IxVzlFR1hlaWhTeUt3RU9fTEtuSTFtaXphYW5Va0prYVNHS3VWWXl5N1JRUXJNTHNISDI0WEViZGxlTDNicUg5QXVMdUY5MFVGOW96aWI0aHNBMnRCNlpONEZiSklGVmZOUC1sTUJyZUhDZmllMG0tSWUxNWdhdUpYRGZuVUpnOGJGREdESURfZnVxNXhnUHkzcDRSem8?oc=5",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:d38206ba1056bdf2:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-09-20T13:35:35Z"
+  "claims_updated_at": "2026-09-20T16:28:50Z"
 }
