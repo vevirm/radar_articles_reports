@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-20T19:31:37Z",
+  "generated_at": "2026-09-20T20:04:48Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -143628,8 +143628,1978 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1057/s41599-026-08369-4": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "0f730ee9",
+      "identity_hash": "e7672bf3897c79e9",
+      "reader_title": "Why EU research participation stays uneven",
+      "reader_what": "ZRC SAZU researchers describe practical barriers that shape participation in EU Framework Programmes.",
+      "reader_why": "Partner access, proposal confidence, staffing and institutional support affect whether eligible researchers can engage.",
+      "reader_more": "The study uses interviews with ten researchers at one Slovenian research centre. Participation depended on trusted partners, confidence with proposals, institutional support, staffing capacity and fit with local research priorities. It reframes widening participation as a question of practical organisational and individual capacity, not just formal eligibility.",
+      "deep_analysis": {
+        "work_kind": "qualitative case study",
+        "research_question": "What individual and institutional factors enable or constrain researchers at ZRC SAZU from participating in EU Framework Programmes?",
+        "main_finding": "EU Framework Programme participation at the case institution depends strongly on partner access, proposal confidence, institutional support, staffing capacity and programme fit.",
+        "method_or_basis": "Qualitative case study using interviews with ten ZRC SAZU researchers; interviews were conducted in 2022 and later analysed for the article.",
+        "qualification": "Single-institution case study based on ten interviews conducted in 2022; findings are not representative of all Widening countries.",
+        "radar_relevance": "Direct evidence about participation capacity and widening within the European Research Area, qualifying under Strand A Route 3.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "The Nature article URL redirected to an identity gateway in direct open, but the package contained substantial matching article text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1057/s41599-026-08369-4 search returned the matching open-access Humanities and Social Sciences Communications article."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the publisher article record and full-text-available repository copies matching Mimi Urbanc and ZRC SAZU."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article",
+            "url": "https://www.nature.com/articles/s41599-026-08369-4",
+            "title": "Navigating EU research participation from a Widening Country institution: insights from a case study of ZRC SAZU in Slovenia",
+            "evidence_used": true
+          },
+          {
+            "kind": "repository_full_text",
+            "url": "https://www.researchgate.net/publication/410139021_Navigating_EU_research_participation_from_a_Widening_Country_institution_insights_from_a_case_study_of_ZRC_SAZU_in_Slovenia",
+            "title": "Navigating EU research participation from a Widening Country institution: insights from a case study of ZRC SAZU in Slovenia",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher and repository evidence match title, author, DOI, date and substantive findings on EU Framework Programme participation at ZRC SAZU."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The study directly examines participation in EU Framework Programmes and the European Research Area, a recognised European R&I-system mechanism."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T20:04:44Z",
+      "deep_scan_package_id": "20260920T193736Z-6d464e528a29",
+      "claims": [
+        {
+          "object": "horizon.access",
+          "secondary_objects": [
+            "research.system_capacity"
+          ],
+          "actor": {
+            "name": "ZRC SAZU researchers",
+            "class": "university_group"
+          },
+          "mechanism": "conditions",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-07-15",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "Slovenia"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "Single-institution case study based on ten interviews conducted in 2022; findings are not representative of all Widening countries.",
+          "text": "At ZRC SAZU, effective access to EU Framework Programme participation depended on trusted partners, proposal confidence, staffing and institutional support.",
+          "confidence": "high",
+          "record_key": "link:https://doi.org/10.1057/s41599-026-08369-4",
+          "merit": 77,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:e7672bf3897c79e9:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1093/esj/aakag023.353": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "99d778ed",
+      "identity_hash": "4b30983cc3469818",
+      "reader_title": "Stroke thrombectomy study, not an R&I-system record",
+      "reader_what": "The study identifies factors associated with unsuccessful recanalization after endovascular thrombectomy.",
+      "reader_more": "The work analyses 10,942 treated patients from the EVATRISP registry and reports predictors of unsuccessful recanalization. Horizon Europe appears only in a disclosure for one author and is explicitly outside the submitted work. That makes the European R&I link incidental under Strand A.",
+      "deep_analysis": {
+        "work_kind": "conference abstract / multicentre clinical cohort study",
+        "research_question": "Which pre-treatment factors are associated with unsuccessful recanalization after endovascular thrombectomy?",
+        "main_finding": "Unsuccessful recanalization occurred in 27% of included patients and was associated with poorer outcomes; the derived predictive tool had limited discrimination.",
+        "method_or_basis": "Prospective EVT registry cohort with multivariable regression among 10,942 eligible patients.",
+        "qualification": "The work is a clinical stroke study; its only Horizon Europe mention is an author disclosure outside the submitted work.",
+        "radar_relevance": "Fails Strand A because Europe and R&I are incidental rather than the substantive object of the evidence.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "The supplied Oxford Academic URL returned 403 during package retrieval."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1093/esj/aakag023.353 resolved in search to the European Stroke Journal conference abstract and a full PMC record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the full two-page conference abstract in PubMed Central, including methods, results, conclusions and conflict-of-interest statement."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13146818/",
+            "title": "ABSTRACT NUMBER: ESOC2026A578 CHARACTERISTICS AND PREDICTORS OF UNSUCCESSFUL RECANALIZATION FOLLOWING ENDOVASCULAR THROMBECTOMY: A MULTICENTER COHORT STUDY FROM THE EVATRISP COLLABORATION",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_record",
+            "url": "https://academic.oup.com/esj/article/11/Supplement_1/i207/8669320",
+            "title": "ABSTRACT NUMBER: ESOC2026A578 CHARACTERISTICS AND PREDICTORS OF UNSUCCESSFUL RECANALIZATION FOLLOWING ENDOVASCULAR THROMBECTOMY: A MULTICENTER COHORT STUDY FROM THE EVATRISP COLLABORATION",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered full conference abstract confirms the work is a clinical thrombectomy study; Horizon Europe appears only in an author conflict/funding disclosure outside the submitted work."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_RI_INCIDENTAL",
+        "reason": "The research subject is stroke thrombectomy; Horizon Europe is mentioned only in a disclosure and is not substantive evidence about the European R&I system."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T20:04:44Z",
+      "deep_scan_package_id": "20260920T193736Z-6d464e528a29",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiuAFBVV95cUxPRXE3WXRjdnNfam5CaHYzWjkxaV9abXFSRXZTMUotbWVCM2dxRmhCRlJZZ2tkQi16Um80eVVUa0R0WDRoN1lLU0lseVpQOFJUcjNDdmtJdkZrSGl4VDNFLXdWOVkxSnpIVFFkQ1JsUGxVOW5FcEdmWWhBT1d4V1ZKQ3lmS01YV2I0TDh3UHNjR1BUOTMySGpKLUk3MjgzZDYyNlktLWpXQ0hQdXpCRVdvcXNqVEJTYnpn?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "32f8e6b2",
+      "identity_hash": "d95157fba031a450",
+      "reader_title": "Sanctioned propaganda entered answers from major AI chatbots",
+      "reader_what": "Demos researchers found five mainstream LLMs sometimes cited or repeated material from an EU-sanctioned influence outlet.",
+      "reader_why": "Sanctioned influence material can enter chatbot answers and sometimes appear without clear source context.",
+      "reader_more": "Researchers built prompts from 50 narratives in ten articles from the Foundation to Battle Injustice and tested five mainstream LLMs in three languages. Euronews reports that all five cited the outlet favourably in some responses; 16.6% of responses engaged with its material in ways that could serve propaganda interests. The findings are a bounded test, not a prevalence estimate for all LLM use.",
+      "deep_analysis": {
+        "work_kind": "current evidence report / news verification",
+        "research_question": "Can sanctioned influence content be surfaced or repeated by mainstream LLMs when prompted around its narratives?",
+        "main_finding": "Across the tested prompts, all five LLMs cited the sanctioned outlet favourably at least sometimes, and some responses repeated or legitimised its narratives.",
+        "method_or_basis": "Euronews reports Demos testing of five LLMs using prompts in English, German and French derived from 50 narratives across ten articles.",
+        "qualification": "The study tested five LLMs using prompts built from 50 narratives from one sanctioned outlet; it does not measure all chatbot use.",
+        "radar_relevance": "Current evidence about an AI information-integrity vulnerability with direct EU sanctions and European AI relevance.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "The supplied Google News RSS URL identified the headline but not the article body."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the canonical Euronews article published 27 July 2026."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Opened the Euronews article and reviewed the substantive report of Demos testing across five mainstream LLMs."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "news_full_text",
+            "url": "https://www.euronews.com/my-europe/2026/07/27/ai-chatbots-citing-russian-propaganda-sourced-from-eu-sanctioned-outlet",
+            "title": "AI chatbots citing Russian propaganda sourced from EU-sanctioned outlet",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Canonical Euronews article recovered and matched the Google News item; it reports a new Demos evidence release with quantitative results and named model providers."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CURRENT_DEVELOPMENT",
+        "reason": "This is a substantive current evidence release about LLM exposure to sanctioned influence material, with direct European AI and information-security relevance."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T20:04:44Z",
+      "deep_scan_package_id": "20260920T193736Z-6d464e528a29",
+      "claims": [
+        {
+          "object": "ai.governance",
+          "secondary_objects": [
+            "research_security.screening"
+          ],
+          "actor": {
+            "name": "Demos researchers",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "detects",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2026-07-27",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The study tested five LLMs using prompts built from 50 narratives from one sanctioned outlet; it does not measure all chatbot use.",
+          "text": "Demos testing found that five mainstream LLMs sometimes cited or repeated material from an EU-sanctioned influence outlet.",
+          "confidence": "medium",
+          "record_key": "link:https://news.google.com/rss/articles/CBMiuAFBVV95cUxPRXE3WXRjdnNfam5CaHYzWjkxaV9abXFSRXZTMUotbWVCM2dxRmhCRlJZZ2tkQi16Um80eVVUa0R0WDRoN1lLU0lseVpQOFJUcjNDdmtJdkZrSGl4VDNFLXdWOVkxSnpIVFFkQ1JsUGxVOW5FcEdmWWhBT1d4V1ZKQ3lmS01YV2I0TDh3UHNjR1BUOTMySGpKLUk3MjgzZDYyNlktLWpXQ0hQdXpCRVdvcXNqVEJTYnpn?oc=5",
+          "merit": 64,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:d95157fba031a450:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:bb5c5a785e88cd12": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "b834c77c",
+      "identity_hash": "7e5062e1749fc376",
+      "reader_title": "VTT says usable data is Europe’s AI bottleneck",
+      "reader_what": "VTT links Europe’s generative-AI constraints to usable data access, interoperability, compliance fragmentation and licensing costs.",
+      "reader_why": "Usable data access connects AI capability to governance, infrastructure, standards and compliance costs rather than regulation alone.",
+      "reader_more": "VTT reports that European AI developers face legal, technical and economic barriers to high-quality, multilingual and legally shareable datasets. It highlights six cross-sector use cases for testing data governance and AI capability. The argument is that Europe’s constraint is practical access to usable data, not simply the existence of regulation.",
+      "deep_analysis": {
+        "work_kind": "research institution analysis based on commissioned study",
+        "research_question": "What is the main practical bottleneck limiting European generative-AI capability and how can governance be tested in use cases?",
+        "main_finding": "VTT identifies access to high-quality, interoperable and legally usable data, together with fragmented compliance and uneven governance, as a core European AI bottleneck.",
+        "method_or_basis": "Institutional article summarising a VTT study commissioned by the European Commission and six illustrative cross-sector use cases.",
+        "qualification": "The article summarises a VTT study commissioned by the European Commission and uses six illustrative cases rather than a census of European AI firms.",
+        "radar_relevance": "Historical evidence on European AI capability, data infrastructure and governance, fitting Strand A Route 2.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the VTT article at the supplied URL; title, author context and substantive discussion matched the package capture."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_research_article",
+            "url": "https://www.vttresearch.com/en/news-and-ideas/europes-ai-challenge-not-regulation-it-usable-data",
+            "title": "Europe’s AI challenge is not regulation – it is usable data",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "VTT primary institutional article provides substantive findings from its European Commission-commissioned study on data access and AI capability."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The work presents evidence about a consequential European AI capability constraint: access to interoperable, legally usable data and fragmented data governance."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T20:04:44Z",
+      "deep_scan_package_id": "20260920T193736Z-6d464e528a29",
+      "claims": [
+        {
+          "object": "ai.adoption",
+          "secondary_objects": [
+            "digital.governance",
+            "digital.infrastructure"
+          ],
+          "actor": {
+            "name": "VTT",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-02-10",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The article summarises a VTT study commissioned by the European Commission and uses six illustrative cases rather than a census of European AI firms.",
+          "text": "VTT identifies access to interoperable, legally usable data and fragmented compliance as key constraints on European generative-AI capability.",
+          "confidence": "medium",
+          "record_key": "historical:id:bb5c5a785e88cd12",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:7e5062e1749fc376:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:77fa7d3e34171782": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "b5b6e5fd",
+      "identity_hash": "1fc606c651c049d9",
+      "reader_title": "ESA-backed review on protecting pristine lunar regions",
+      "reader_what": "The review identifies contamination risks to lunar permanently shadowed regions and recommends modelling, monitoring and environmental safeguards.",
+      "reader_more": "ESF coordinated the review for ESA’s Independent Safety Office. The work concerns contamination risks, scientific knowledge gaps and safeguards for lunar exploration. Although European institutions commissioned and coordinated it, the substantive evidence is about the Moon rather than Europe’s R&I system or capability trajectory.",
+      "deep_analysis": {
+        "work_kind": "institutional summary of scientific review",
+        "research_question": "How could future lunar exploration contaminate permanently shadowed regions, and what safeguards are needed?",
+        "main_finding": "The review identifies contamination risks and knowledge gaps and recommends modelling, monitoring, traceability, ground-truth data and cautious exploration sequencing.",
+        "method_or_basis": "Expert review coordinated by ESF for ESA, drawing on a multi-institution consortium.",
+        "qualification": "European institutions commissioned and coordinated the review, but its substantive object is lunar environmental protection, not the European R&I system.",
+        "radar_relevance": "Fails Strand A because European provenance is not enough to make the underlying scientific object a European R&I-system mechanism.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the European Science Foundation news page describing the ESA-commissioned lunar permanently shadowed regions study."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "The ESF page links the full study at ScienceDirect and substantively summarises its contamination risks, knowledge gaps and mitigation recommendations."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_study_summary",
+            "url": "https://www.esf.org/new-esf-study-for-esa-identifies-measures-to-protect-the-moons-most-pristine-environments/",
+            "title": "New ESF Study for ESA Identifies Measures to Protect the Moon’s Most Pristine Environments",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The ESF page is an authoritative summary of an ESA-commissioned scientific review, but the substantive object is lunar environmental contamination and exploration practice rather than the European R&I system."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_EU_RI_SYSTEM_LINK_INSUFFICIENT",
+        "reason": "ESA/ESF provenance gives a European connection, but the work studies lunar contamination and exploration safeguards, not a European R&I-system mechanism or strategic European capability state."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T20:04:44Z",
+      "deep_scan_package_id": "20260920T193736Z-6d464e528a29",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:399db4f02e6f540b": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "ee05ebd3",
+      "identity_hash": "950aeadbddb9bfa6",
+      "reader_title": "U.S. testimony on China supply-chain exposure",
+      "reader_what": "Peter Harrell argues for earlier U.S. import controls, stronger enforcement and parallel investment in domestic industrial capacity.",
+      "reader_more": "The testimony focuses on U.S. vulnerabilities to Chinese industrial policy, vehicles, robotics, critical minerals and manufacturing dependencies. Europe is cited as an example of rapid Chinese vehicle market penetration. That is not enough to make the work substantively about Europe’s R&I system.",
+      "deep_analysis": {
+        "work_kind": "congressional testimony",
+        "research_question": "What tools should the United States use to counter Chinese industrial policy and supply-chain vulnerabilities?",
+        "main_finding": "Harrell advocates earlier import controls, stronger anti-evasion rules, domestic investment and allied supply diversification.",
+        "method_or_basis": "Policy testimony drawing on market examples, trade dependencies and U.S. industrial-policy instruments.",
+        "qualification": "The argument is U.S.-centred; European evidence is illustrative rather than the substantive object.",
+        "radar_relevance": "Fails Strand A because Europe is only a comparator/example in a U.S. industrial-policy argument.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the Council on Foreign Relations testimony page; it provides the testimony summary, hearing context, date and substantive policy arguments."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_testimony",
+            "url": "https://www.cfr.org/articles/testimony-from-peter-harrell-on-tools-to-counter-the-ccps-industrial-policy-and-supply-chain-threats",
+            "title": "Testimony From Peter Harrell on Tools to Counter the CCP’s Industrial Policy and Supply Chain Threats",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The page is primary testimony focused on U.S. industrial policy, import controls and supply-chain resilience; Europe appears mainly as an example of Chinese market penetration."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_EU_SCOPE_INSUFFICIENT",
+        "reason": "The testimony is substantively about U.S. policy toward China; Europe is an illustrative comparator rather than the object of the R&I evidence."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T20:04:44Z",
+      "deep_scan_package_id": "20260920T193736Z-6d464e528a29",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:578ea87b91ef18c4": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "2b78d02c",
+      "identity_hash": "33153f68cc9f22b7",
+      "reader_title": "Horizon Europe call page, not a completed evidence study",
+      "reader_what": "REA lists calls, budgets, proposal counts and timelines for projects intended to reform the EU R&I system.",
+      "reader_more": "The page provides authoritative programme facts, including call topics, budgets, submission counts and project timelines. It does not itself evaluate whether reforms changed European R&I-system performance. Under the package rules, a programme page cannot qualify as Route 3 evidence merely because its subject is research and innovation.",
+      "deep_analysis": {
+        "work_kind": "official funding programme page",
+        "research_question": "",
+        "main_finding": "The page documents Horizon Europe calls and implementation timelines for reforming and enhancing the EU R&I system.",
+        "method_or_basis": "Administrative call information and programme timelines from the European Research Executive Agency.",
+        "qualification": "This is programme administration information, not a completed analytical or empirical evidence product.",
+        "radar_relevance": "Fails Strand A Route 3 because programme pages are explicitly excluded from the evidence-product requirement.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the European Research Executive Agency page; it lists Horizon Europe calls, budgets, proposal counts, timelines and links to application resources."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_programme_page",
+            "url": "https://rea.ec.europa.eu/funding-and-grants/horizon-europe-reforming-and-enhancing-european-ri-system/reforming-and-enhancing-eu-research-and-innovation-system_en",
+            "title": "Reforming and enhancing the EU research and innovation system",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official REA page is authentic and substantive as a programme/call information page, but it is not a completed evidence-led study of the European R&I system."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_PROGRAMME_PAGE",
+        "reason": "The page is primarily Horizon Europe call and programme information; Strand A explicitly excludes generic programme/promotional pages as Route 3 evidence."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T20:04:44Z",
+      "deep_scan_package_id": "20260920T193736Z-6d464e528a29",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:ba2d11671bd71c2b": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "afe785af",
+      "identity_hash": "9479d333efef5a5f",
+      "reader_title": "Europe’s defence innovation is constrained by fragmented R&D governance",
+      "reader_what": "The chapter links fragmented European defence R&D coordination to weaker conversion of scientific strength into operational capability.",
+      "reader_why": "Standards, collaboration and resilient supply chains shape whether advanced materials and energy technologies translate into strategic capability.",
+      "reader_more": "The chapter examines convergence among AI, advanced materials and energy systems in defence. It argues that Europe’s fragmented R&D coordination and supply-chain dependencies complicate strategic autonomy and interoperability. Governance, standardisation and joint R&D are presented as mechanisms for turning innovation into deployable capability.",
+      "deep_analysis": {
+        "work_kind": "open-access analytical book chapter",
+        "research_question": "How should defence materials and energy systems be governed to combine technological convergence, interoperability, resilience and strategic autonomy?",
+        "main_finding": "The chapter argues that fragmented European defence R&D coordination and supply-chain dependencies constrain capability conversion, while coordinated governance and standards can improve resilience.",
+        "method_or_basis": "Analytical synthesis of defence technology, materials, energy systems, standards, supply chains and governance literature.",
+        "qualification": "The chapter is an analytical governance synthesis, not an empirical measurement of Europe-wide defence outcomes.",
+        "radar_relevance": "Direct evidence and analysis of European defence R&D coordination, standards and strategic-technology dependencies, qualifying under Strand A Routes 1 and 2.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the Springer chapter at DOI 10.1007/978-3-032-23622-7_7; full open-access chapter text was available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/chapter/10.1007/978-3-032-23622-7_7",
+            "title": "Materials and Energy Systems Governance in Defence: Integration, Standards, and Strategic Resilience",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full Springer chapter confirms the European defence R&D fragmentation, standards, critical-material supply-chain and strategic-autonomy analysis."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The chapter directly analyses European defence R&D coordination, advanced-material and energy dependencies, standards and strategic autonomy."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T20:04:45Z",
+      "deep_scan_package_id": "20260920T193736Z-6d464e528a29",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [
+            "research.collaboration",
+            "materials.critical_raw"
+          ],
+          "actor": {
+            "name": "European defence R&D actors",
+            "class": "other"
+          },
+          "mechanism": "coordinates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-06-20",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The chapter is an analytical governance synthesis, not an empirical measurement of Europe-wide defence outcomes.",
+          "text": "The chapter identifies fragmented European defence R&D coordination as a constraint on converting scientific strength into operational capability.",
+          "confidence": "high",
+          "record_key": "historical:id:ba2d11671bd71c2b",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:9479d333efef5a5f:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:6f28533e1b5d5f15": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "462f6932",
+      "identity_hash": "f01deb8f79200699",
+      "reader_title": "TNO maps Europe’s digital sovereignty gap",
+      "reader_what": "TNO finds strong non-European dependencies across cloud, networks, data infrastructure, algorithms, applications, materials and components.",
+      "reader_why": "Dependence across multiple technology layers can limit control, resilience, competitiveness and the ability to embed European values.",
+      "reader_more": "TNO’s full report analyses digital sovereignty across technological, policy, economic, innovation, societal and geopolitical dimensions. It concludes that the Netherlands and Europe were strongly dependent on non-European suppliers across nearly every digital layer. The report recommends investment in technology development, decentralised infrastructures, adoption and international cooperation.",
+      "deep_analysis": {
+        "work_kind": "institutional research report and summary page",
+        "research_question": "Where are Dutch and European digital-sovereignty dependencies concentrated, and what technological, policy and business responses could reduce them?",
+        "main_finding": "TNO finds strong non-European dependencies across most digital technology layers, including cloud, data infrastructure, algorithms and applications.",
+        "method_or_basis": "82-page TNO multidisciplinary report using a technology-layer model, expert input, scenario analysis and review of policy, technology, economic and innovation factors.",
+        "qualification": "The quantitative dependency evidence comes from TNO’s 2022 report and describes that period rather than a fresh 2026 remeasurement.",
+        "radar_relevance": "Direct historical evidence on European digital infrastructure and strategic-technology dependency, qualifying under Strand A Route 2.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the TNO “Importance of digital sovereignty” page; it matched the package and links its underlying TNO paper."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered the official 82-page TNO report TNO 2022 R10507, “Bridging the Dutch and European Digital Sovereignty gap,” dated 21 March 2022; conclusions substantiate the page’s dependency claims."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_institution_page",
+            "url": "https://www.tno.nl/en/importance-digital-sovereignty/",
+            "title": "Importance of digital sovereignty",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_full_report",
+            "url": "https://publications.tno.nl/publication/34639349/urAkBu/TNO-2022-R10507.pdf",
+            "title": "Bridging the Dutch and European Digital Sovereignty gap",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "TNO page and its underlying full report support the diagnosis of broad European dependence on non-European digital technology layers and related sovereignty concerns."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The TNO evidence directly assesses European digital-technology dependencies, infrastructure position, innovation capability and strategic autonomy."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T20:04:45Z",
+      "deep_scan_package_id": "20260920T193736Z-6d464e528a29",
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [
+            "digital.infrastructure"
+          ],
+          "actor": {
+            "name": "TNO",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "contracts",
+          "status": "delivered",
+          "status_date": "2022-03-21",
+          "scope": {
+            "level": "eu",
+            "countries": [
+              "Netherlands"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "The quantitative dependency evidence comes from TNO’s 2022 report and describes that period rather than a fresh 2026 remeasurement.",
+          "text": "TNO found strong Dutch and European dependence on non-European suppliers across nearly every digital technology layer.",
+          "confidence": "high",
+          "record_key": "historical:id:6f28533e1b5d5f15",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:f01deb8f79200699:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:d4f88173b0197cee": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "5de9704a",
+      "identity_hash": "ad396858c11e61b0",
+      "reader_title": "Digital-policy stakeholder consultation, not an evidence study",
+      "reader_what": "The Committee of the Regions invited stakeholder views on Digital Omnibus and Data Union Strategy proposals.",
+      "reader_more": "The page lists consultation questions about data sharing, AI compliance, digital transformation and infrastructure access. It is an invitation to collect stakeholder views during preparation of a Committee opinion. It does not itself present completed evidence about European R&I-system performance or mechanisms.",
+      "deep_analysis": {
+        "work_kind": "official stakeholder consultation event page",
+        "research_question": "",
+        "main_finding": "The page solicits stakeholder feedback on proposed digital simplification, AI and data-policy changes.",
+        "method_or_basis": "Event notice and consultation questions from the European Committee of the Regions.",
+        "qualification": "No completed analysis or empirical findings are presented on the page.",
+        "radar_relevance": "Fails Strand A because it is an event/consultation page rather than a substantive evidence product.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "The English Committee of the Regions page did not render in direct open, but the package contained the full matching event text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the official European Committee of the Regions event page for 24 February 2026."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Official CoR event listing confirms it was a stakeholder consultation on Digital Omnibus and Data Union Strategy proposals."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_event_page",
+            "url": "https://www.cor.europa.eu/en/plenaries-events/hybrid-stakeholder-consultation-digital-simplification-and-data-union-strategy",
+            "title": "Hybrid Stakeholder Consultation on the \"Digital Simplification and Data Union Strategy\"",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The work is an official stakeholder-consultation event page soliciting views on Commission digital proposals; it is not an analytical evidence product."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_EVENT_PAGE",
+        "reason": "The page is a stakeholder consultation/event notice. Strand A explicitly excludes event pages and invitations absent a substantive evidence product."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T20:04:45Z",
+      "deep_scan_package_id": "20260920T193736Z-6d464e528a29",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:9782ef35b8f0901f": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "465a1f49",
+      "identity_hash": "93c9bd0ce291cf03",
+      "reader_title": "EU space-security brief links autonomy to R&D",
+      "reader_what": "ESPI urges EU space-security implementation supported by R&D, innovation and European coordination.",
+      "reader_why": "It directly connects geopolitical capability to European R&I mechanisms.",
+      "reader_more": "The brief discusses strategic dependencies, dual-use technology, ESA coordination, dedicated R&D programmes and innovation-support mechanisms. It is advocacy supplied as input to the Commission, not an evaluation of effects.",
+      "deep_analysis": {
+        "work_kind": "policy brief",
+        "research_question": "What R&I and governance measures should underpin an EU space security and defence strategy?",
+        "main_finding": "ESPI argues Europe should pair security strategy with dedicated R&D and innovation mechanisms, coordination and selective partnerships.",
+        "method_or_basis": "Policy analysis and recommendations in an ESPI executive brief responding to an EU call for evidence.",
+        "qualification": "ESPI is advocating an EU security-and-defence space strategy that links autonomous capability to dedicated R&D, innovation support and coordination.",
+        "radar_relevance": "Direct Route 1 relevance: strategic autonomy and security are explicitly tied to European R&D and innovation mechanisms.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied source material contained a substantive matching copy sufficient to verify identity and assess the work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "source_work",
+            "url": "https://www.espi.eu/wp-content/uploads/2023/03/ESPI-Executive-Brief-n%C2%B063-March-2023-final.pdf",
+            "title": "High time for an EU Space Strategy for Security and Defence - ESPI",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The matching ESPI Brief No. 63 was available as a six-page PDF and identifies itself as published in March 2023."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The brief directly links EU strategic space capability to R&D programmes, innovation support and European coordination."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T20:04:46Z",
+      "deep_scan_package_id": "20260920T193736Z-6d464e528a29",
+      "claims": [
+        {
+          "object": "defence.innovation_funding",
+          "secondary_objects": [
+            "goal.strategic_autonomy",
+            "research.collaboration"
+          ],
+          "actor": {
+            "name": "European Space Policy Institute",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2023-03",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "ESPI is advocating an EU security-and-defence space strategy that links autonomous capability to dedicated R&D, innovation support and coordination.",
+          "text": "ESPI argued that EU space-security autonomy requires dedicated R&D programmes, innovation support and stronger civil-defence R&I synergies.",
+          "confidence": "high",
+          "status_date_precision": "month",
+          "record_key": "historical:id:9782ef35b8f0901f",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:93c9bd0ce291cf03:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:5d944032cd1a8541": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "f17d7b22",
+      "identity_hash": "c4b14f38a4e390b8",
+      "reader_title": "Generative-AI explainer, not R&I-system evidence",
+      "reader_what": "TNO explains generative AI and describes exploratory research with stakeholders.",
+      "reader_more": "The page explains generative AI, possible applications, risks and TNO research. It briefly asks whether the Netherlands and Europe are too dependent on large technology firms. That strategic question is not developed into evidence about European funding, capability, talent, infrastructure or research governance.",
+      "deep_analysis": {
+        "work_kind": "technology explainer / institutional research page",
+        "research_question": "How can generative AI be understood and deployed responsibly?",
+        "main_finding": "TNO describes generative-AI capabilities, risks and research questions around responsible use.",
+        "method_or_basis": "Institutional explanatory material and examples of ongoing TNO work.",
+        "qualification": "The page does not provide a completed analysis of European R&I-system conditions.",
+        "radar_relevance": "Fails Strand A because Europe and system-level R&I mechanisms are secondary to the generic technology explainer.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied source material contained a substantive matching copy sufficient to verify identity and assess the work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "source_work",
+            "url": "https://www.tno.nl/en/digital/data-sharing/generative-ai/",
+            "title": "Generative AI: understanding between humans & machines",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The matching TNO page was recovered with its explanatory text and description of TNO research on generative AI."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_RI_SYSTEM_LINK_INSUFFICIENT",
+        "reason": "The page is primarily a technology explainer and description of TNO activities; it does not analyze a European R&I-system mechanism."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T20:04:46Z",
+      "deep_scan_package_id": "20260920T193736Z-6d464e528a29",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:7e5d34841e57a8d3": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "ef5328fd",
+      "identity_hash": "22712573f319db65",
+      "reader_title": "Security-research funding information page",
+      "reader_what": "REA explains Horizon Europe security calls and how practitioners can participate.",
+      "reader_more": "The page describes Cluster 3 calls, end-user involvement, networking and information events. It helps prospective participants navigate funding. It does not itself analyze R&I-system performance, outcomes or a completed system-level mechanism.",
+      "deep_analysis": {
+        "work_kind": "official funding programme page",
+        "research_question": "How can security practitioners participate in EU-funded research?",
+        "main_finding": "REA points users to Horizon Europe security funding and participation opportunities.",
+        "method_or_basis": "Official programme guidance and links to calls, events and support resources.",
+        "qualification": "The material is administrative programme information rather than an evidence-led analysis.",
+        "radar_relevance": "Fails the explicit Strand A exclusion for generic funding/programme pages.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied source material contained a substantive matching copy sufficient to verify identity and assess the work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "source_work",
+            "url": "https://rea.ec.europa.eu/funding-and-grants/horizon-europe-cluster-3-civil-security-society/eu-research-funding-security-practitioners_en",
+            "title": "EU research funding for security practitioners",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The REA page was recovered and is an official Horizon Europe funding-information page aimed at security practitioners."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_PROGRAMME_PAGE",
+        "reason": "It is a funding-opportunities and participation page rather than a substantive evidence product about the European R&I system."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T20:04:46Z",
+      "deep_scan_package_id": "20260920T193736Z-6d464e528a29",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:7d134e973b998d73": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "37ff1f5d",
+      "identity_hash": "1545049262140514",
+      "reader_title": "Austria professionalises research-management careers",
+      "reader_what": "Austria’s ERA plan targets research-manager skills, recognition, careers, mobility and training.",
+      "reader_why": "This is a concrete R&I workforce and system-capacity intervention.",
+      "reader_more": "The initiative identifies research management as a professional field essential to institutions and projects. It seeks better visibility of skills, career prospects, permeability between research and management, training and networking.",
+      "deep_analysis": {
+        "work_kind": "national R&I policy initiative",
+        "research_question": "How should Austria strengthen research management as a profession and system capability?",
+        "main_finding": "The action plan proposes professionalisation, training and clearer career structures for research managers.",
+        "method_or_basis": "Official National ERA Action Plan initiative page.",
+        "qualification": "This is an adopted national ERA-plan initiative; it specifies intended professionalisation measures but does not establish that career or retention outcomes have already improved.",
+        "radar_relevance": "Direct Strand A relevance through research workforce quality, career structures and institutional R&I capacity.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied source material contained a substantive matching copy sufficient to verify identity and assess the work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "source_work",
+            "url": "https://era.gv.at/era/era-in-austria/national-era-action-plan-2026-2028/field-of-action-1/initiative-14-research-management/",
+            "title": "ERA Portal Austria – Initiative 1.4. Research Management",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The official ERA Portal Austria page gives the objectives and measures of Initiative 1.4 in the National ERA Action Plan 2026–2028."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The initiative directly changes a national research-workforce and research-management mechanism within the European Research Area."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T20:04:46Z",
+      "deep_scan_package_id": "20260920T193736Z-6d464e528a29",
+      "claims": [
+        {
+          "object": "talent.career_structure",
+          "secondary_objects": [
+            "research.system_capacity",
+            "talent.retention"
+          ],
+          "actor": {
+            "name": "Austrian Federal Ministry for Women, Science and Research",
+            "class": "member_state"
+          },
+          "mechanism": "supports",
+          "direction": "expands",
+          "status": "adopted",
+          "status_date": "2025",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "Austria"
+            ]
+          },
+          "kind": "action",
+          "qualification": "This is an adopted national ERA-plan initiative; it specifies intended professionalisation measures but does not establish that career or retention outcomes have already improved.",
+          "text": "Austria’s 2026–2028 ERA action plan includes measures to professionalise research management through recognition, career prospects, permeability and training.",
+          "confidence": "high",
+          "status_date_precision": "year",
+          "record_key": "historical:id:7d134e973b998d73",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:1545049262140514:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:b84aefd824564e4c": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "3f66560c",
+      "identity_hash": "2d0dfedc011509f1",
+      "reader_title": "Austria advances research-assessment reform",
+      "reader_what": "Austria’s ERA plan targets broader, higher-quality research assessment and reform monitoring.",
+      "reader_why": "Research assessment directly shapes careers, incentives and research-system quality.",
+      "reader_more": "The page describes concern about overreliance on publication metrics and under-recognition of diverse contributions. It sets awareness, commitment, monitoring and quality objectives linked to European assessment reform.",
+      "deep_analysis": {
+        "work_kind": "national R&I policy initiative",
+        "research_question": "How should Austria reform research assessment in line with European ERA objectives?",
+        "main_finding": "The initiative seeks broader assessment practices and monitoring to improve quality and career attractiveness.",
+        "method_or_basis": "Official National ERA Action Plan initiative page.",
+        "qualification": "The action-plan page documents policy intent and implementation framing; it does not demonstrate that assessment practice or researcher careers have already changed.",
+        "radar_relevance": "Direct Strand A relevance through reform of a core research-system governance and incentive mechanism.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied source material contained a substantive matching copy sufficient to verify identity and assess the work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "source_work",
+            "url": "https://era.gv.at/era/era-in-austria/national-era-action-plan-2026-2028/field-of-action-1/initiative-13-reforming-research-assessment/",
+            "title": "ERA Portal Austria – Initiative 1.3. Reforming Research Assessment",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The official ERA Portal Austria page substantively describes Initiative 1.3 on reforming research assessment."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Research assessment is a core R&I-system mechanism, and this initiative sets national implementation objectives within ERA."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T20:04:46Z",
+      "deep_scan_package_id": "20260920T193736Z-6d464e528a29",
+      "claims": [
+        {
+          "object": "research.assessment",
+          "secondary_objects": [
+            "talent.career_structure"
+          ],
+          "actor": {
+            "name": "Austrian Federal Ministry for Women, Science and Research",
+            "class": "member_state"
+          },
+          "mechanism": "governs",
+          "direction": "expands",
+          "status": "adopted",
+          "status_date": "2025",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "Austria"
+            ]
+          },
+          "kind": "action",
+          "qualification": "The action-plan page documents policy intent and implementation framing; it does not demonstrate that assessment practice or researcher careers have already changed.",
+          "text": "Austria’s National ERA Action Plan includes an initiative to broaden and improve research assessment and monitor reform implementation.",
+          "confidence": "high",
+          "status_date_precision": "year",
+          "record_key": "historical:id:b84aefd824564e4c",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:2d0dfedc011509f1:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:1cb4812d1cdb2136": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "266af37a",
+      "identity_hash": "9868e74fef44aa2e",
+      "reader_title": "Commission proposes 2025–2027 ERA agenda",
+      "reader_what": "The Commission proposes coordinated ERA actions and priorities for research and innovation.",
+      "reader_why": "It directly governs the European R&I system.",
+      "reader_more": "The document proposes a Council Recommendation for the ERA Policy Agenda 2025–2027. It frames ERA around free circulation of researchers and knowledge, joint priorities and coordinated actions.",
+      "deep_analysis": {
+        "work_kind": "EU legislative/policy proposal",
+        "research_question": "What joint R&I priorities and actions should structure the ERA in 2025–2027?",
+        "main_finding": "The Commission proposes a new ERA policy agenda and governance framework for coordinated European R&I actions.",
+        "method_or_basis": "Official Commission proposal and explanatory memorandum.",
+        "qualification": "This is a Commission proposal at the cited date; it establishes proposed ERA governance priorities, not evidence that the Council had adopted or implemented them.",
+        "radar_relevance": "Core Strand A material: EU-level research-system governance is the document’s object.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied source material contained a substantive matching copy sufficient to verify identity and assess the work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "source_work",
+            "url": "https://era.gv.at/public/documents/5289/COM_2025_62_F1_PROPOSAL_FOR_A_RECOMMENDATION_EN_V5_P1_3951028.pdf",
+            "title": "ERA Portal Austria – ERA Policy Agenda 2025-2027",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The supplied PDF is the European Commission proposal COM(2025) 62 final, dated 28 February 2025."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The proposal is directly about EU-level governance, priorities and coordination of the European Research Area."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T20:04:46Z",
+      "deep_scan_package_id": "20260920T193736Z-6d464e528a29",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [
+            "research.collaboration"
+          ],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2025-02-28",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "This is a Commission proposal at the cited date; it establishes proposed ERA governance priorities, not evidence that the Council had adopted or implemented them.",
+          "text": "The Commission proposed an ERA Policy Agenda for 2025–2027 to coordinate joint R&I priorities and strengthen the European Research Area.",
+          "confidence": "high",
+          "record_key": "historical:id:1cb4812d1cdb2136",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:9868e74fef44aa2e:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:e6853db5a34d128b": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "f816e502",
+      "identity_hash": "e7f569439821d26d",
+      "reader_title": "Research-infrastructure call page",
+      "reader_what": "REA describes INFRADEV funding topics, calls, deadlines and proposal volumes.",
+      "reader_more": "The page presents the Horizon Europe Research Infrastructures destination and funding opportunities. It reports administrative call information and proposal counts but does not itself evaluate infrastructure capacity, access or system effects.",
+      "deep_analysis": {
+        "work_kind": "official funding programme page",
+        "research_question": "What funding opportunities are available under INFRADEV?",
+        "main_finding": "REA lists calls intended to develop and consolidate European research infrastructures.",
+        "method_or_basis": "Official programme and call information.",
+        "qualification": "No independent or completed evidence-led analysis of R&I-system outcomes is presented.",
+        "radar_relevance": "Fails the Strand A programme-page exclusion.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied source material contained a substantive matching copy sufficient to verify identity and assess the work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "source_work",
+            "url": "https://rea.ec.europa.eu/funding-and-grants/horizon-europe-research-infrastructures/developing-consolidating-and-optimising-european-research-infrastructures-landscape-maintaining-0_en",
+            "title": "Developing, consolidating and optimising the European research infrastructures landscape, maintaining global leadership (INFRADEV)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The official REA INFRADEV page was recovered with destination, call and proposal information."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_PROGRAMME_PAGE",
+        "reason": "The item is a Horizon Europe destination/call page rather than a substantive completed study of research infrastructure performance."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T20:04:46Z",
+      "deep_scan_package_id": "20260920T193736Z-6d464e528a29",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:2f93496cf1f5c5b9": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "abc052b5",
+      "identity_hash": "3db99fdd58698451",
+      "reader_title": "TNO develops tools for cybersecure AI governance",
+      "reader_what": "TNO describes evaluation tools and research supporting AI security and EU regulatory oversight.",
+      "reader_why": "It connects European AI governance to concrete R&I capability.",
+      "reader_more": "The page covers adversarial risks, secure AI methods and TNO’s role in an AI Office support consortium. It states that the consortium develops risk models, evaluation methods and tools for general-purpose AI.",
+      "deep_analysis": {
+        "work_kind": "institutional R&I project page",
+        "research_question": "How can AI systems be evaluated and secured as both targets and potential attackers?",
+        "main_finding": "TNO is developing technical evaluation and security capabilities, including tools intended to support EU AI governance.",
+        "method_or_basis": "TNO description of its own ongoing research, testing and consortium role.",
+        "qualification": "The evidence is TNO’s own description of ongoing technical and regulatory-support work; it does not independently validate the tools’ effectiveness or adoption.",
+        "radar_relevance": "Direct Strand A relevance through European AI evaluation capacity and rule-implementation infrastructure.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied source material contained a substantive matching copy sufficient to verify identity and assess the work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "source_work",
+            "url": "https://www.tno.nl/en/digital/cybersecurity/cybersecure-ai-emerging-technology/",
+            "title": "Cybersecure AI: AI as both target and attacker | TNO",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The TNO page substantively describes ongoing cybersecure-AI research and its role in a consortium supporting the European Commission AI Office."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The work links R&I capability directly to implementation and evaluation mechanisms for EU AI governance."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T20:04:47Z",
+      "deep_scan_package_id": "20260920T193736Z-6d464e528a29",
+      "claims": [
+        {
+          "object": "ai.governance",
+          "secondary_objects": [
+            "ai.research_governance"
+          ],
+          "actor": {
+            "name": "TNO",
+            "class": "other"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "operating",
+          "status_date": "2026",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The evidence is TNO’s own description of ongoing technical and regulatory-support work; it does not independently validate the tools’ effectiveness or adoption.",
+          "text": "TNO is developing risk models, evaluation methods and technical tools to support EU oversight of general-purpose AI.",
+          "confidence": "high",
+          "status_date_precision": "year",
+          "record_key": "historical:id:2f93496cf1f5c5b9",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:3db99fdd58698451:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:94e45a1db3d459de": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "5a608040",
+      "identity_hash": "d729363213200bfb",
+      "reader_title": "JRC maps Europe’s biological-AI capability",
+      "reader_what": "JRC assesses biological AI models and Europe’s science, compute, data and coordination position.",
+      "reader_why": "It diagnoses R&I capabilities and bottlenecks in a strategic technology.",
+      "reader_more": "JRC reports a dataset of hundreds of biological AI models and assesses enabling conditions for Europe. It highlights a strong scientific base and compute alongside needs for better intra-EU collaboration, coordination and data governance.",
+      "deep_analysis": {
+        "work_kind": "official research assessment summary",
+        "research_question": "What capabilities and policy conditions shape biological AI development in Europe?",
+        "main_finding": "Europe has scientific and compute strengths, but coordination and data governance remain important constraints on scaling biological AI.",
+        "method_or_basis": "JRC empirical landscape assessment summarized on an official page.",
+        "qualification": "The JRC work is a landscape assessment of models and enabling conditions; it does not show that identified EU capability gaps have been closed.",
+        "radar_relevance": "Strong Route 2 Strand A relevance through capability, infrastructure and collaboration evidence.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied source material contained a substantive matching copy sufficient to verify identity and assess the work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "source_work",
+            "url": "https://joint-research-centre.ec.europa.eu/jrc-news-and-updates/biological-ai-models-new-paradigms-leverage-languages-life-2026-08-24_en",
+            "title": "Biological AI models: new paradigms to leverage the languages of life",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The official JRC article reports findings from its “Artificial Intelligence for Biology” landscape assessment."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The assessment directly examines European research capability, infrastructure and coordination for a strategic AI domain."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T20:04:47Z",
+      "deep_scan_package_id": "20260920T193736Z-6d464e528a29",
+      "claims": [
+        {
+          "object": "ai.research_use",
+          "secondary_objects": [
+            "research.system_capacity",
+            "research.collaboration"
+          ],
+          "actor": {
+            "name": "Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-08-24",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The JRC work is a landscape assessment of models and enabling conditions; it does not show that identified EU capability gaps have been closed.",
+          "text": "JRC finds the EU has strong biological-AI science and compute, while collaboration, coordination and data governance constrain scaling.",
+          "confidence": "high",
+          "record_key": "historical:id:94e45a1db3d459de",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:d729363213200bfb:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:46aecf365d86f042": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "b3192c24",
+      "identity_hash": "f88e657cbfb6c718",
+      "reader_title": "Energy-security analysis, not R&I-system evidence",
+      "reader_what": "ECFR examines how Europe could reduce exposure to a Strait of Hormuz disruption.",
+      "reader_more": "The article analyzes oil and LNG exposure, renewables, nuclear power, diversification and geopolitical options. Technology appears within the energy transition, but the European R&I system is not the object of analysis.",
+      "deep_analysis": {
+        "work_kind": "policy analysis",
+        "research_question": "How can Europe safeguard energy security against disruption around the Strait of Hormuz?",
+        "main_finding": "Europe can reduce exposure through diversification, domestic clean energy and geopolitical measures.",
+        "method_or_basis": "Policy and energy-market analysis by ECFR.",
+        "qualification": "R&I is ancillary to energy-security strategy rather than a substantive system mechanism.",
+        "radar_relevance": "Fails Strand A because the R&I link is incidental.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied source material contained a substantive matching copy sufficient to verify identity and assess the work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "source_work",
+            "url": "https://ecfr.eu/article/beyond-the-strait-of-hormuz-how-europe-can-safeguard-its-energy-future/",
+            "title": "Beyond the Strait of Hormuz: How Europe can safeguard its energy future – European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The complete ECFR analysis was available and focuses on European energy security around the Strait of Hormuz."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_RI_INCIDENTAL",
+        "reason": "The substantive object is energy supply, trade and geopolitical resilience; R&I mechanisms are not central to the analysis."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T20:04:47Z",
+      "deep_scan_package_id": "20260920T193736Z-6d464e528a29",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:8feba3748e8a0bb2": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "ef077a8f",
+      "identity_hash": "da7ef7c8a6608b17",
+      "reader_title": "Applied AI disease-surveillance study",
+      "reader_what": "JRC tests AI-assisted disease-surveillance prototypes while stressing human oversight.",
+      "reader_more": "The work explores retrieval-augmented generation and knowledge-graph approaches for public-health surveillance. It is useful applied research, but the package rules exclude local or service applications unless they establish a broader R&I-system mechanism.",
+      "deep_analysis": {
+        "work_kind": "applied research project summary",
+        "research_question": "Can AI support European public-health disease surveillance while retaining human oversight?",
+        "main_finding": "Exploratory prototypes may assist surveillance, but validation and human oversight remain necessary.",
+        "method_or_basis": "JRC applied research and prototype testing.",
+        "qualification": "The article does not establish system-level funding, capability, talent, infrastructure or governance evidence.",
+        "radar_relevance": "Fails Strand A under the service/application exclusion.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied source material contained a substantive matching copy sufficient to verify identity and assess the work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "source_work",
+            "url": "https://joint-research-centre.ec.europa.eu/jrc-news-and-updates/ai-can-improve-disease-surveillance-europe-human-oversight-remains-essential-2026-08-28_en",
+            "title": "AI can improve disease surveillance in Europe, but human oversight remains essential",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The official JRC page describes an exploratory AI disease-surveillance research project and its prototype approach."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_RI_SYSTEM_LINK_INSUFFICIENT",
+        "reason": "The work is an applied public-health AI use case; it does not analyze a European R&I-system mechanism or condition."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T20:04:47Z",
+      "deep_scan_package_id": "20260920T193736Z-6d464e528a29",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:37d1b05a36f8c640": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "3698e01a",
+      "identity_hash": "6109994a2bab1f2f",
+      "reader_title": "UKRI summarizes researcher-mobility evidence",
+      "reader_what": "UKRI synthesizes drivers, barriers and trends affecting international researchers in the UK.",
+      "reader_why": "Talent mobility directly shapes R&I workforce capacity and collaboration.",
+      "reader_more": "The summary covers career progression, research funding, networks, pay, infrastructure, visa costs and mobility trends. It also tracks the composition and intentions of the international R&D workforce.",
+      "deep_analysis": {
+        "work_kind": "official evidence synthesis summary",
+        "research_question": "What attracts international researchers to the UK, and what barriers shape mobility?",
+        "main_finding": "International mobility remains important to UK R&I, but attraction and retention depend on institutional and immigration conditions.",
+        "method_or_basis": "UKRI synthesis of published studies and workforce evidence.",
+        "qualification": "This is an annual evidence synthesis drawing on heterogeneous studies and administrative sources; comparability, definitions and coverage vary across the underlying evidence.",
+        "radar_relevance": "Strong Strand A evidence on talent recruitment, retention and cross-border R&I collaboration.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied source material contained a substantive matching copy sufficient to verify identity and assess the work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "source_work",
+            "url": "https://www.ukri.org/publications/global-mobility-evidence-report/global-mobility-evidence-report-2025-summary/",
+            "title": "Global mobility evidence report 2025 summary",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The official UKRI 2025 summary provides substantive findings from the annual global-mobility evidence report."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Researcher mobility, attraction and collaboration are direct R&I-workforce mechanisms for a Horizon-associated European country."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T20:04:47Z",
+      "deep_scan_package_id": "20260920T193736Z-6d464e528a29",
+      "claims": [
+        {
+          "object": "talent.recruitment_abroad",
+          "secondary_objects": [
+            "talent.retention",
+            "research.collaboration"
+          ],
+          "actor": {
+            "name": "UK Research and Innovation",
+            "class": "national_funder"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2025-12-15",
+          "scope": {
+            "level": "associated_country",
+            "countries": [
+              "United Kingdom"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "This is an annual evidence synthesis drawing on heterogeneous studies and administrative sources; comparability, definitions and coverage vary across the underlying evidence.",
+          "text": "UKRI’s 2025 evidence summary finds international researcher attraction depends on careers, funding, networks, pay, infrastructure and immigration conditions.",
+          "confidence": "high",
+          "record_key": "historical:id:37d1b05a36f8c640",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:6109994a2bab1f2f:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:f9d62ed45b507a39": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "110f8bd6",
+      "identity_hash": "b99613bfc02151dd",
+      "reader_title": "UKRI reviews global R&I mobility",
+      "reader_what": "The 2025 report synthesizes evidence on international researcher attraction, mobility barriers and collaboration.",
+      "reader_why": "It is directly about R&I talent and cross-border research capacity.",
+      "reader_more": "The report centralizes newly published evidence on researcher mobility to the UK alongside prior context. It covers immigration policy, career conditions, research organizations, business R&D and international collaboration.",
+      "deep_analysis": {
+        "work_kind": "official evidence report",
+        "research_question": "What does current evidence show about international R&I personnel mobility to and from the UK?",
+        "main_finding": "Mobility supports research and collaboration, while visa, cost, career and institutional conditions affect attraction and retention.",
+        "method_or_basis": "Evidence synthesis with methodology and collated quantitative and qualitative sources.",
+        "qualification": "The report synthesizes varied studies and data sources with differing definitions and populations; it should not be read as a single causal estimate.",
+        "radar_relevance": "Direct Strand A evidence on a core research-workforce mechanism.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied source material contained a substantive matching copy sufficient to verify identity and assess the work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "source_work",
+            "url": "https://www.ukri.org/publications/global-mobility-evidence-report/global-mobility-evidence-report-2025/",
+            "title": "Global mobility evidence report 2025",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The full official UKRI 2025 evidence report was recovered with methodology, evidence summaries and policy context."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "It is a completed evidence-led synthesis of researcher mobility and R&I workforce conditions in a European associated country."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T20:04:47Z",
+      "deep_scan_package_id": "20260920T193736Z-6d464e528a29",
+      "claims": [
+        {
+          "object": "talent.recruitment_abroad",
+          "secondary_objects": [
+            "research.collaboration",
+            "talent.retention"
+          ],
+          "actor": {
+            "name": "UK Research and Innovation",
+            "class": "national_funder"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2025-12-15",
+          "scope": {
+            "level": "associated_country",
+            "countries": [
+              "United Kingdom"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "The report synthesizes varied studies and data sources with differing definitions and populations; it should not be read as a single causal estimate.",
+          "text": "UKRI’s 2025 report finds international researcher mobility is valuable but shaped by career, funding, visa, cost and collaboration conditions.",
+          "confidence": "high",
+          "record_key": "historical:id:f9d62ed45b507a39",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:b99613bfc02151dd:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:140921d9d66954fc": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "7209d811",
+      "identity_hash": "81040861952869d8",
+      "reader_title": "Comparative AI-governance study",
+      "reader_what": "The article compares US, EU and Chinese problem framings and post-2024 regulatory softening.",
+      "reader_more": "Using qualitative policy-document analysis and a problem-representation framework, the article contrasts three “digital empires.” It argues their different framings are converging toward regulatory softening. The European Union is one case among three rather than the work’s dominant R&I-system object.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed comparative policy study",
+        "research_question": "How do major jurisdictions frame risks of algorithmic public-sector decision-making, and how do those framings shape regulation?",
+        "main_finding": "Different framings produce distinct trajectories, but the authors identify a post-2024 trend toward regulatory softening across jurisdictions.",
+        "method_or_basis": "Qualitative document analysis of policy and regulatory material from the US, EU and China.",
+        "qualification": "The paper is a comparative governance study; its claims about EU regulatory softening are author interpretation within a three-jurisdiction design.",
+        "radar_relevance": "Under the package’s Europe rule, a study does not qualify merely because the EU is one comparator among non-European cases.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "The DOI identity matched, while package source text contained only a short fragment."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "The DOI resolved to the open-access Politics and Governance article."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publisher and Queen’s University Belfast repository records exposed the full published article."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.cogitatiopress.com/politicsandgovernance/article/view/10245",
+            "title": "Governing AI Decision‐Making: Balancing Innovation and Accountability",
+            "evidence_used": true
+          },
+          {
+            "kind": "institutional_repository",
+            "url": "https://pure.qub.ac.uk/en/publications/governing-ai-decison-making-balancing-innovation-and-accountabili/",
+            "title": "Governing AI Decision‐Making: Balancing Innovation and Accountability",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The full open-access article was recovered. It compares the United States, European Union and China as three AI-governance jurisdictions."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_EU_SCOPE_INSUFFICIENT",
+        "reason": "The EU is one of three comparative jurisdictions; the work’s primary object is cross-jurisdiction public-sector AI governance, not the European R&I system."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T20:04:47Z",
+      "deep_scan_package_id": "20260920T193736Z-6d464e528a29",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:56027628177bcfa7": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "f76d3035",
+      "identity_hash": "edc299db6b47247d",
+      "reader_title": "Staged foresight model for medical universities",
+      "reader_what": "Researchers develop a structured foresight model for Iranian medical universities facing emerging education challenges.",
+      "reader_why": "The contribution is a reusable multi-stage process design.",
+      "reader_more": "The study synthesizes literature and expert input into a model with stages and substages for scanning, scenario work, evaluation and action. It explicitly aims to provide a structured foresight approach for institutional decision-making.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed methods/model-development study",
+        "research_question": "How can a structured foresight model be designed for medical universities facing emerging challenges?",
+        "main_finding": "The authors develop a staged model that integrates environmental scanning, scenario construction, prioritisation and evaluation.",
+        "method_or_basis": "Structured review, qualitative content analysis and expert engagement used to develop and refine a foresight model.",
+        "qualification": "The model is tailored to Iranian medical universities and assembled through review, qualitative synthesis and expert input; transferability beyond that institutional setting is not validated.",
+        "radar_relevance": "Fits Strand B because the output is a defined, reusable foresight process architecture.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied source material contained a substantive matching copy sufficient to verify identity and assess the work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "source_work",
+            "url": "https://link.springer.com/article/10.1186/s40309-025-00259-3",
+            "title": "Designing a research-based foresight model for Iranian medical universities: addressing emerging challenges in medical education",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The full peer-reviewed article was available in the package and describes development of a staged foresight model."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD_CONTRIBUTION",
+        "reason": "It contributes a reusable structured foresight process rather than merely applying an off-the-shelf method."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-20T20:04:48Z",
+      "deep_scan_package_id": "20260920T193736Z-6d464e528a29",
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [
+            "methods.scenario"
+          ],
+          "actor": {
+            "name": "Study authors",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2025-10-23",
+          "scope": {
+            "level": "external",
+            "countries": [
+              "Iran"
+            ]
+          },
+          "kind": "action",
+          "qualification": "The model is tailored to Iranian medical universities and assembled through review, qualitative synthesis and expert input; transferability beyond that institutional setting is not validated.",
+          "text": "The study integrates scanning, scenario development, evaluation and expert input into a staged foresight model for Iranian medical universities.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "historical:id:56027628177bcfa7",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:edc299db6b47247d:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-09-20T19:31:37Z"
+  "claims_updated_at": "2026-09-20T20:04:48Z"
 }

@@ -6,31 +6,31 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1567** (Main **789** + Historical **778**)
-- Automatic queue still needing V2 verification: **91** (Main **15** + Historical **76**)
-- Currently assigned to workers: **75** (Main **13** + Historical **62**)
-- Bounded access-recovery retries still eligible: **2**
+- Authoritative V2 verified: **1592** (Main **792** + Historical **800**)
+- Automatic queue still needing V2 verification: **66** (Main **12** + Historical **54**)
+- Currently assigned to workers: **66** (Main **12** + Historical **54**)
+- Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **69**
-- Automatic queue pending and not yet assigned: **16**
+- Automatic queue pending and not yet assigned: **0**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260920T193520Z-5d05bedcc540`
-- Assigned unresolved records: **39**
-  1. `historical:id:d4f88173b0197cee` — Hybrid Stakeholder Consultation on the "Digital Simplification and Data Union Strategy"
-  2. `historical:id:9782ef35b8f0901f` — High time for an EU Space Strategy for Security and Defence - ESPI
-  3. `historical:id:94e45a1db3d459de` — Biological AI models: new paradigms to leverage the languages of life
-  4. `historical:id:8feba3748e8a0bb2` — AI can improve disease surveillance in Europe, but human oversight remains essential
-  5. `historical:id:140921d9d66954fc` — Governing AI Decision‐Making: Balancing Innovation and Accountability
-  6. `historical:id:56027628177bcfa7` — Designing a research-based foresight model for Iranian medical universities: addressing emerging challenges in medical education
-  7. `historical:id:baa1adf25a4711e4` — When forecasting and foresight meet data and innovation: toward a taxonomy of anticipatory methods for migration policy
-  8. `historical:id:6fb8dfb91e3b2676` — Guidelines on obligations for General-Purpose AI providers
-  - … plus 31 more in the package manifest
+- Current package: `worker-a-20260920T200838Z-310d256d19cf`
+- Assigned unresolved records: **35**
+  1. `historical:id:baa1adf25a4711e4` — When forecasting and foresight meet data and innovation: toward a taxonomy of anticipatory methods for migration policy
+  2. `historical:id:6fb8dfb91e3b2676` — Guidelines on obligations for General-Purpose AI providers
+  3. `historical:id:72c64fa7339524e2` — AI: friend or foe of disinformation?
+  4. `historical:id:dec74740c0ba2ddb` — AI in medical imaging: where do we stand and what comes next?
+  5. `historical:id:84d02d53e32cf18c` — AI Continent Action Plan - Q&A
+  6. `historical:id:1cfcd2560462717d` — General-Purpose AI Models in the AI Act – Questions & Answers
+  7. `historical:id:dc4b38228e40cefd` — EuroHPC JU’s Mandate Expanded Under New Regulation Amendment
+  8. `historical:id:06883d1b0e18ec80` — DIGITAL success stories – Cancer imaging and AI | Shaping Europe’s digital future
+  - … plus 27 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260920T193539Z-a2a9a549d244`
-- Assigned unresolved records: **36**
+- Current package: `worker-b-20260920T200859Z-7e5456a7a8bf`
+- Assigned unresolved records: **31**
   1. `historical:id:9b4fa48a5215ca5e` — Futures Focus-A Systematic Review of Scenario Planning, Strategic Foresight and Dynamic Capabilities
   2. `historical:id:2dd841435f84a1e3` — Back to the future: How the EU can upgrade its AI Continent Action Plan – European Council on Foreign Relations
   3. `historical:id:4a109082b5e68bec` — Research Funding Organisations - ESF
@@ -39,7 +39,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:efd08e7d9312f53b` — The EU wants to get rid of ghost cars – could Finland take the lead in car recycling using a new digital platform? - Sitra
   7. `historical:id:1794b8e341f3e27a` — FIIA's Scientific Council: publications by FIIA researchers of high international quality - FIIA - Finnish Institute of International Affairs
   8. `historical:id:37d4a2366e5cb210` — EIC Challenge In-space solar energy harvesting for innovative space applications
-  - … plus 28 more in the package manifest
+  - … plus 23 more in the package manifest
 
 ## Hands-on verification needed
 
