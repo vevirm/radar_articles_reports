@@ -144,9 +144,13 @@ A can qualify through any of three source-grounded routes:
 
 Route 3 is not a generic-Europe or generic-technology waiver. Local/service/consumer applications,
 ordinary sector competitiveness, programme/event/promotional pages, R&I mentioned only as a covariate or
-funding acknowledgement, and work where Europe is merely a comparator remain out. The point is to verify
-substantive present-day evidence about the European R&I system; downstream Radar reasoning may assess why
-that evidence could matter later.
+funding acknowledgement, and work where Europe is merely a comparator remain out. Generic studies of
+research practice, researcher habits/attitudes, language use or multilingualism, teaching/learning practice,
+or ordinary organisational behaviour also remain out unless the work actually measures a recognised
+European R&I-system mechanism such as funding, careers/mobility, workforce/talent, collaboration networks,
+infrastructure, transfer/scale-up, assessment/governance, open science, or a comparable system variable.
+The point is to verify substantive present-day evidence about the European R&I system; downstream Radar
+reasoning may assess why that evidence could matter later.
 
 **Alignment rule with the automatic scanner:** after the common hard guards are satisfied (verified identity, trustworthy
 source, substantive European scope, central R&I subject, and a substantive evidence product), **any one** of Routes 1, 2,

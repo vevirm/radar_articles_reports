@@ -4450,7 +4450,7 @@ A_MAJOR_RI_SYSTEM = [
     'research workforce', 'scientific workforce', 'brain drain', 'brain gain', 'technology transfer',
     'industrial innovation', 'deep tech', 'deep-tech', 'innovation capacity', 'innovation ecosystem',
     'innovation ecosystems', 'innovation financing', 'financing instruments for innovation', 'research careers',
-    'research evaluation', 'research assessment', 'research activity', 'research activities',
+    'research evaluation', 'research assessment',
     'grant evaluation', 'grant evaluations',
     'research funder', 'research funders', 'science-policy interface', 'science policy interface',
     'scientific knowledge in policymaking', 'scientific knowledge in policy making',
@@ -6832,7 +6832,7 @@ A_RESEARCH_SYSTEM_OUTCOME_CUES = [
     'research collaboration', 'scientific collaboration', 'researcher mobility',
     'research careers', 'research workforce', 'scientific workforce',
     'research talent', 'scientific talent', 'brain drain', 'brain gain',
-    'research evaluation', 'research assessment', 'research activity', 'research activities',
+    'research evaluation', 'research assessment',
     'grant evaluation', 'grant evaluations',
     'research funder', 'research funders', 'research grant', 'research grants',
     'research productivity', 'scientific productivity', 'publication output',
@@ -6851,7 +6851,7 @@ A_RESEARCH_STRONG_SYSTEM_CUES = [
     'research talent', 'scientific talent', 'research workforce', 'scientific workforce',
     'research careers', 'researcher mobility', 'brain drain', 'brain gain',
     'technology transfer', 'knowledge transfer', 'innovation ecosystem',
-    'research evaluation', 'research assessment', 'research activity', 'research activities',
+    'research evaluation', 'research assessment',
     'grant evaluation', 'grant evaluations',
     'research funder', 'research funders', 'science-policy interface', 'science policy interface',
     'scientific knowledge in policymaking', 'scientific knowledge in policy making',
@@ -6904,9 +6904,12 @@ def research_evidence_route_ok(title: str, abstract: str, body: str, source_kind
     )
     if historical_title:
         return False, []
-    # Generic "research and innovation project", firm-efficiency or regional-innovation
-    # language is deliberately insufficient. The paper/report must measure a recognisable
-    # R&I-system mechanism (careers, collaboration, infrastructure, transfer, assessment, etc.).
+    # Generic "research and innovation project", firm-efficiency, regional-innovation, or
+    # descriptions of ordinary research practice are deliberately insufficient.  Phrases such
+    # as "research activities" do not by themselves identify an R&I-system mechanism: otherwise
+    # surveys of language use, researcher habits, teaching practice, etc. become false positives.
+    # The paper/report must measure a recognisable system mechanism (careers, mobility, funding,
+    # collaboration, infrastructure, transfer, assessment, governance, open science, etc.).
     ok = bool(evidence and system and (outcomes or len(system) >= 2))
     return ok, list(dict.fromkeys(evidence[:4] + outcomes[:4] + system[:4]))[:8]
 
