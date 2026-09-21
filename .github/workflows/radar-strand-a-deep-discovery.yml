@@ -1,4 +1,4 @@
-name: R&I Radar Strand A Deep Discovery — 24 min
+name: R&I Radar Strand A Deep Discovery v2 — 24 min
 
 on:
   workflow_dispatch:
@@ -45,7 +45,7 @@ jobs:
           # apply the old hourly-workflow 6h age gate here: on a real 4h cron it would
           # incorrectly skip every other production scan.
           echo "run=true" >> "$GITHUB_OUTPUT"
-          echo "Reason: manual 24-minute Strand A deep-discovery scan; broad first pass is skipped."
+          echo "Reason: manual 24-minute Strand A Deep Discovery v2; broad/fallback repetition is skipped."
 
       - name: Set up Python
         if: steps.due.outputs.run == 'true'
