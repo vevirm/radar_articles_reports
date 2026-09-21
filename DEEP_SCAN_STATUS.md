@@ -6,40 +6,29 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1650** (Main **809** + Historical **841**)
-- Automatic queue still needing V2 verification: **43** (Main **13** + Historical **30**)
-- Currently assigned to workers: **43** (Main **13** + Historical **30**)
+- Authoritative V2 verified: **1684** (Main **815** + Historical **869**)
+- Automatic queue still needing V2 verification: **7** (Main **5** + Historical **2**)
+- Currently assigned to workers: **7** (Main **5** + Historical **2**)
 - Bounded access-recovery retries still eligible: **0**
-- Hands-on verification needed: **70**
+- Hands-on verification needed: **72**
 - Automatic queue pending and not yet assigned: **0**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260921T092116Z-eb9b7a7712b1`
-- Assigned unresolved records: **31**
-  1. `historical:id:3c6b044baecd3002` — World Science Forum 2017: COST President says research networks help spread scientific excellence worldwide and reduce brain drain - COST
-  2. `link:https://doi.org/10.1108/14636681211210341` — A case study on localising foresight in South Africa: using foresight in the context of local government participatory planning — recovery attempt 2/3
-  3. `link:https://doi.org/10.1016/j.futures.2021.102872` — Assessing futures literacy as an academic competence for the deployment of foresight competencies — recovery attempt 2/3
-  4. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxOQUZFYldBemM1TGotSVFra1F1UkY5elJsMlBScWNqelRJb2Rnd1BGX3pURVRGNzdUQ2FfQWJvR1JrN1RnbVlQZ21Vbm54c0oydk9ySHpiRkwteGdXTzV1YjBWOVZ6VGNZSk5BZDg2eEhyWURuWmJNQ3RzWHJYeS1xWWVfLTVmNl9USm1iMUpYazNka2FZVHNYLV9RVHYwOFFHUFF4Y0VQbGwwQ3RDekE?oc=5` — EU antitrust chief would consider request from AI firms to coordinate on safety — recovery attempt 2/3
-  5. `link:https://news.google.com/rss/articles/CBMi2wFBVV95cUxNZU1hMzRwTEVNWlllSHdQdVJJX0Y2R1BHdGhPZVdMMkN4NGItUzFnU2F3MTFCS0UySkFqNVJPTWY5QUhacERSRVRWUTRXTU5iSVQ5TWRvaGFtb3FFV3lGbllTTGk1THVKNHJqUXlOVkhRS3FfanRubC1BQ09VY2VGcE9EdTQ3RHpjZXQ4NmprRkZMUlpWN1l1SXdfdm80WXpGcU5fcXUxb0ZUa2pNVUlSOXV2Y0NSelltVm0zU3RyWl95MWgyQU9FakxxcjA1ODBhUWtKTS0teUY5RHM?oc=5` — COMMENTARY: Europe has no hope in AI race without a unified energy market — recovery attempt 2/3
-  6. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxQaXo4bFQ3SDlxM3piaUc0YTF2SmlnZnRlVjBuSjBTdXdWYlZFckNiSEw5VXh6MHdMaUJja0h4cUVwYTZjMVNGdDRjVUZkUUl5YlpIN1dFWWw4ZjZiUXNiX1F0UFdlbFV6elRCY0VVb0ZvRC04YUdmNFg1V1lYTmlfdUFuaWw?oc=5` — Italian start-up Exein raises $270mn to fight AI hackers with AI — recovery attempt 2/3
-  7. `historical:id:5f7cfd158fe24bb0` — ifo Viewpoint 202: Germany’s new industrial policy | ifo Institute
-  8. `historical:id:0fd0b191a79d898d` — How to Operationalise a Transatlantic Cyber Policy Research Initiative (TCPRI)
-  - … plus 23 more in the package manifest
+- Current package: `worker-a-20260921T123405Z-ac020104b281`
+- Assigned unresolved records: **7**
+  1. `link:https://doi.org/10.1108/14636681211210341` — A case study on localising foresight in South Africa: using foresight in the context of local government participatory planning — recovery attempt 3/3
+  2. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxOQUZFYldBemM1TGotSVFra1F1UkY5elJsMlBScWNqelRJb2Rnd1BGX3pURVRGNzdUQ2FfQWJvR1JrN1RnbVlQZ21Vbm54c0oydk9ySHpiRkwteGdXTzV1YjBWOVZ6VGNZSk5BZDg2eEhyWURuWmJNQ3RzWHJYeS1xWWVfLTVmNl9USm1iMUpYazNka2FZVHNYLV9RVHYwOFFHUFF4Y0VQbGwwQ3RDekE?oc=5` — EU antitrust chief would consider request from AI firms to coordinate on safety — recovery attempt 3/3
+  3. `link:https://doi.org/10.1177/03400352261470844` — Global patterns and regional disparities in library and information science research productivity — recovery attempt 3/3
+  4. `link:https://doi.org/10.1108/fs-06-2015-0036` — Strategic planning and foresight: the case of Smart Specialisation Strategy in Tuscany — recovery attempt 3/3
+  5. `link:https://news.google.com/rss/articles/CBMimwFBVV95cUxOUWR1bzN3YkNacm5ZT3dwUGtzU3BsNnRBcUdyT3hZNkl3X0h1RWlFa2tEYkdTZUktRXFmeG02cGplNEhoYlg0ZlpZWkRJdU1lVTZGWWt0NHR6Q1JKdk1EN1JfSTJuYlpvQ1FFQm1EelpXZVBKV3dJRFZCOWtlN2hCaTEteGxKbW12NVNmY1pvVHE2ZjdyMDhyWXdpcw?oc=5` — Spanish vaccine maker urges broader EU incentives for innovation — recovery attempt 3/3
+  6. `historical:id:9f7aa4b8571cb32b` — Science Diplomacy for Eastern Europe: A New Beginning — recovery attempt 3/3
+  7. `historical:id:d436106c01077081` — Measuring the contribution of higher education to innovation capacity in the EU — recovery attempt 2/3
 
 ### Worker B
 - Current package: `worker-b-20260921T092147Z-26e064ab9ffe`
-- Assigned unresolved records: **12**
-  1. `historical:id:26ddf8e046c40b5c` — Enabling AI capabilities in government agencies: A study of determinants for European municipalities
-  2. `historical:id:cc2b14371cbc83e9` — Analysis of the European energy innovation system: Contribution of the Framework Programmes to the EU policy objectives
-  3. `historical:id:eb4a7d3ddcdbdb44` — Finnish AI Region (FAIR) is a candidate for European EDIH | VTT
-  4. `historical:id:328a913230fca246` — The Semiconductor Supply Chain | Center for Security and Emerging Technology
-  5. `historical:id:bc9bddc9dfeb60ef` — (Not) Lost in Foresight
-  6. `historical:id:9ef24f242c0931ae` — The governance of dual-use research in the EU
-  7. `historical:id:66d7d7355e59acf1` — Gaia-X – your own cloud is the best cloud, but why? | VTT
-  8. `historical:id:a9f4e16d93c1b5ba` — 50 Years of corporate and organizational foresight: Looking back and going forward
-  - … plus 4 more in the package manifest
+- Assigned unresolved records: **0**
 
 ## Hands-on verification needed
 
@@ -115,3 +104,5 @@ These works no longer consume automatic Deep Scan slots. Their identity is belie
 - `historical:id:068ceabb6181be45` — **Innovation system foresight and systemic innovation for the overseas countries and territories** — attempts: 3/3 — Foresight — 2018-03-12 — Article identity confirmed (foresight 20(1):105-122); only the structured abstract is accessible after the full ladder. — https://doi.org/10.1108/fs-07-2017-0034
 - `link:https://doi.org/10.1108/fs-11-2025-0260` — **Artificial intelligence as a collective transformative experience: a conceptual framework for rational encounter** — attempts: 3/3 — foresight — 2026-09-14 — Identity is verified, but the accessible publisher material is abstract-level; V2 does not permit an admission judgement from an abstract alone. — https://doi.org/10.1108/fs-11-2025-0260
 - `link:https://doi.org/10.1016/j.asej.2026.104429` — **Scenario planning for Mashhad’s smart city: an ICT-driven future** — attempts: 3/3 — Ain Shams Engineering Journal — 2026-09-12 — Substantive evidence remained inaccessible after the full recovery ladder; identity is verified but an authoritative admission judgement would require inventing beyond the accessible source. — https://doi.org/10.1016/j.asej.2026.104429
+- `link:https://doi.org/10.1002/ffo2.15` — **Public understanding of futures & foresight science: A reply to Chermack’s response** — attempts: 3/3 — FUTURES & FORESIGHT SCIENCE — 2019-04-14 — Identity is verified, but only abstracts/metadata were recoverable; the package rules prohibit deciding methodological contribution from abstract-only evidence. — https://doi.org/10.1002/ffo2.15
+- `link:https://doi.org/10.1108/fs-10-2017-0064` — **Analyzing Iran’s science and technology foresight programs: recommendations for further practices** — attempts: 3/3 — foresight — 2018-06-22 — Identity and structured abstract are verified, but no substantive full article was accessible; abstract-only evidence cannot establish a reusable methodological contribution. — https://doi.org/10.1108/fs-10-2017-0064
