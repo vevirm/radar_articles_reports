@@ -113,7 +113,8 @@ logging.getLogger("pypdf._page").setLevel(logging.ERROR)
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / "radar_config.json"
-OUT_PATH = ROOT / "radar.json"
+OUT_PATH = Path(os.environ.get("RADAR_DEEP_A_WORK_CORPUS", str(ROOT / "radar.json"))).resolve()
+PRIVATE_DEEP_A_HARVEST = os.environ.get("RADAR_STRAND_A_PRIVATE_HARVEST", "").strip().lower() in {"1", "true", "yes", "on"}
 SEED_PATH = ROOT / "radar_seed.json"
 FRONTIER_COVERAGE_SCRIPT = ROOT / "scripts" / "frontier_coverage.js"
 PRIORITY_PEOPLE_PATH = ROOT / "priority_people.json"
@@ -325,6 +326,200 @@ def _apply_rule_fix_source_extensions() -> None:
                 current.append(domain)
 
 _apply_rule_fix_source_extensions()
+
+# Private Deep-A benchmark expansion -------------------------------------------------
+#
+# This lane exists only in the separate, non-public 24-minute harvester.  It is intentionally
+# broader about *where it looks*, not about what Deep Scan eventually accepts.  The themes and
+# source neighbourhoods below were benchmarked against current European R&I strategy/evidence
+# families that are easy to miss when retrieval is dominated by generic geopolitics keywords:
+# AI-in-science/compute/data, research & technology infrastructures, life-sciences/biotech,
+# scale-up/valorisation, research security/science diplomacy, talent/careers, patent/technology
+# monitoring, dual-use/economic security, advanced materials and other critical technologies.
+PRIVATE_DEEP_A_WILD_QUERY_FAMILIES: dict[str, list[str]] = {
+    "ai_science_compute_data": [
+        "Europe AI in science research compute data talent funding scientific competitiveness",
+        "European research AI infrastructure compute data scientific discovery RAISE",
+        "Europe scientific AI adoption laboratory automation research data compute capacity",
+        "EU AI science research infrastructure technological leadership global competition",
+    ],
+    "research_technology_infrastructures": [
+        "Europe research technology infrastructures pilot lines testbeds cleanrooms innovation competitiveness",
+        "EU technology infrastructure demonstration facilities scale-up R&D industrial innovation sovereignty",
+        "European research infrastructures access capacity scientific competitiveness technological sovereignty",
+        "Europe testbeds pilot plants living labs research innovation infrastructure market adoption",
+    ],
+    "life_sciences_biotech": [
+        "Europe life sciences research innovation competitiveness biotechnology scale-up evidence",
+        "EU biotechnology research innovation fragmented funding market uptake global competition",
+        "European life sciences research commercialization technology transfer competitiveness",
+        "Europe biotech scientific leadership innovation ecosystem strategic capability",
+    ],
+    "scaleup_valorisation_transfer": [
+        "Europe research innovation scale-up gap deep tech finance relocation acquisition evidence",
+        "EU knowledge valorisation technology transfer research commercialisation scale-up competitiveness",
+        "European deep tech startups research spinouts scaleup capital market innovation gap",
+        "Europe lab to market research innovation procurement scale-up financing evidence",
+    ],
+    "research_security_science_diplomacy": [
+        "Europe research security knowledge leakage foreign interference scientific collaboration evidence",
+        "EU science diplomacy international research cooperation strategic autonomy critical technologies",
+        "European research security due diligence trusted research international collaboration",
+        "Europe scientific cooperation geopolitical competition research security knowledge protection",
+    ],
+    "talent_careers_mobility": [
+        "Europe research careers scientific talent mobility attraction retention global competition",
+        "EU researcher mobility brain drain scientific talent innovation capacity evidence",
+        "European research careers precarity talent circulation competitiveness science system",
+        "Europe doctoral postdoctoral talent research system international mobility innovation",
+    ],
+    "technology_monitoring_patents": [
+        "Europe technology monitoring research innovation United States China comparative evidence",
+        "European patents AI quantum semiconductor battery technology trends innovation competitiveness",
+        "Europe patent technology indicators scientific innovation capability global competition",
+        "EU critical technology monitoring technological position research innovation evidence",
+    ],
+    "dual_use_economic_security": [
+        "Europe dual-use research innovation economic security civil defence technology capability",
+        "EU dual use R&D research security critical technologies strategic autonomy evidence",
+        "European economic security research innovation technology risk dependency resilience",
+        "Europe civil defence research innovation dual use knowledge technology transfer",
+    ],
+    "advanced_materials_semiconductors_quantum": [
+        "Europe advanced materials research innovation strategic autonomy competitiveness",
+        "EU semiconductor research pilot lines innovation capability global competition",
+        "Europe quantum research technology capability talent infrastructure competitiveness",
+        "European critical technologies research innovation dependencies capability semiconductor quantum materials",
+    ],
+    "industrial_policy_innovation_system": [
+        "Europe industrial policy research innovation ecosystem technological sovereignty evidence",
+        "EU innovation system fragmentation research funding industrial competitiveness evidence",
+        "European research innovation policy mission industrial strategy technology capability",
+        "Europe strategic technology ecosystems research innovation policy experimentation",
+    ],
+    "open_science_data_sovereignty": [
+        "Europe research data sovereignty open science infrastructure strategic autonomy",
+        "EU scientific data spaces research infrastructure interoperability competitiveness",
+        "European research data access cloud compute scientific collaboration security",
+        "Europe open science research data infrastructure knowledge security innovation",
+    ],
+}
+
+PRIVATE_DEEP_A_PRIORITY_INSTITUTION_DOMAINS = [
+    "research-and-innovation.ec.europa.eu",
+    "joint-research-centre.ec.europa.eu",
+    "publications.jrc.ec.europa.eu",
+    "cordis.europa.eu",
+    "eur-lex.europa.eu",
+    "digital-strategy.ec.europa.eu",
+    "eic.ec.europa.eu",
+    "erc.europa.eu",
+    "marie-sklodowska-curie-actions.ec.europa.eu",
+    "eurohpc-ju.europa.eu",
+    "defence-industry-space.ec.europa.eu",
+    "health.ec.europa.eu",
+    "oecd.org",
+    "eib.org",
+    "epo.org",
+    "scienceeurope.org",
+    "europarl.europa.eu",
+    "op.europa.eu",
+]
+
+PRIVATE_DEEP_A_SOURCE_EXTENSIONS = [
+    {"name": "European Commission — Competition", "domain": "competition-policy.ec.europa.eu", "tier": 1},
+    {"name": "European Commission — Trade", "domain": "policy.trade.ec.europa.eu", "tier": 1},
+]
+
+PRIVATE_DEEP_A_ADAPTER_EXTENSIONS: dict[str, dict[str, list[str]]] = {
+    "research-and-innovation.ec.europa.eu": {
+        "hub_paths": [
+            "/strategy/strategy-research-and-innovation/our-digital-future/european-ai-science-strategy_en",
+            "/research-area/industrial-research-and-innovation/artificial-intelligence-ai-science_en",
+            "/research-area/industrial-research-and-innovation/technology-infrastructures_en",
+            "/strategy/strategy-research-and-innovation/our-digital-future/european-strategy-research-and-technology-infrastructures_en",
+            "/strategy/strategy-research-and-innovation/jobs-and-economy/strategy-european-life-sciences_en",
+            "/strategy/strategy-research-and-innovation/europe-world/international-cooperation/strategic-autonomy-and-european-economic-and-research-security_en",
+            "/strategy/support-policy-making/support-national-research-and-innovation-policy-making/research-and-innovation-paper-series_en",
+        ],
+        "path_hints": [
+            "ai-science", "RAISE", "technology-infrastructures", "pilot-lines", "testbeds", "cleanrooms",
+            "life-sciences", "biotech", "research-security", "science-diplomacy", "knowledge-valorisation",
+            "research-careers", "dual-use", "advanced-materials", "scale-up", "technology-monitoring",
+        ],
+    },
+    "cordis.europa.eu": {
+        "hub_paths": ["/projects", "/article", "/programme"],
+        "path_hints": ["project", "result", "publication", "deliverable", "report", "research", "innovation", "technology"],
+    },
+    "oecd.org": {
+        "hub_paths": ["/en/topics/science-technology-and-innovation.html", "/en/publications.html"],
+        "path_hints": ["science", "technology", "innovation", "research-security", "critical-technologies", "science-diplomacy", "industrial-policy"],
+    },
+    "eib.org": {
+        "hub_paths": ["/en/publications", "/en/projects/sectors/innovation-digital-and-human-capital"],
+        "path_hints": ["scale-up", "innovation", "deep-tech", "research", "technology", "venture", "financing", "competitiveness"],
+    },
+    "epo.org": {
+        "hub_paths": ["/en/about-us/statistics", "/en/searching-for-patents/technology-trends"],
+        "path_hints": ["technology-dashboard", "patent-index", "technology-trends", "AI", "quantum", "semiconductor", "battery", "innovation"],
+    },
+    "scienceeurope.org": {
+        "hub_paths": ["/our-resources", "/our-priorities"],
+        "path_hints": ["research", "science", "careers", "open-science", "research-security", "infrastructure", "policy"],
+    },
+}
+
+
+def private_deep_a_wild_query_bank() -> list[str]:
+    """Interleave benchmarked private-A discovery themes; never used by public scans."""
+    if not PRIVATE_DEEP_A_HARVEST:
+        return []
+    families = [list(v) for v in PRIVATE_DEEP_A_WILD_QUERY_FAMILIES.values() if isinstance(v, list)]
+    out: list[str] = []
+    for i in range(max((len(v) for v in families), default=0)):
+        for vals in families:
+            if i < len(vals) and vals[i] not in out:
+                out.append(vals[i])
+    return out
+
+
+def _apply_private_deep_a_wild_source_extensions() -> None:
+    """Add source neighbourhoods only to the private scanner's in-memory config."""
+    if not PRIVATE_DEEP_A_HARVEST:
+        return
+    sources = CONFIG.setdefault("institution_sources", [])
+    existing = {
+        str(s.get("domain", "")).strip().lower().removeprefix("www.")
+        for s in sources if isinstance(s, dict)
+    }
+    for src in PRIVATE_DEEP_A_SOURCE_EXTENSIONS:
+        dom = str(src.get("domain", "")).strip().lower().removeprefix("www.")
+        if dom and dom not in existing:
+            sources.append(dict(src))
+            existing.add(dom)
+    adapters = CONFIG.setdefault("institution_source_adapters", {})
+    for domain, extra in PRIVATE_DEEP_A_ADAPTER_EXTENSIONS.items():
+        row = adapters.setdefault(domain, {})
+        if not isinstance(row, dict):
+            row = {}
+            adapters[domain] = row
+        for key in ("hub_paths", "path_hints"):
+            current = row.setdefault(key, [])
+            if not isinstance(current, list):
+                current = [current] if current else []
+                row[key] = current
+            for value in extra.get(key, []):
+                if value not in current:
+                    current.append(value)
+    # The private scanner can spend more time walking hub neighbourhoods because nothing
+    # it finds becomes public before authoritative Deep Scan KEEP.
+    CONFIG["institution_source_adapter_sources_per_scan"] = max(18, int(CONFIG.get("institution_source_adapter_sources_per_scan", 12) or 12))
+    CONFIG["institution_source_adapter_pages_per_domain"] = max(48, int(CONFIG.get("institution_source_adapter_pages_per_domain", 36) or 36))
+    CONFIG["institution_source_adapter_max_hub_fetches"] = max(14, int(CONFIG.get("institution_source_adapter_max_hub_fetches", 10) or 10))
+
+
+_apply_private_deep_a_wild_source_extensions()
 
 BOOTSTRAP_LOOKBACK_MONTHS = int(CONFIG.get("bootstrap_lookback_months", 4))
 EXTENDED_TOP_QUALITY_LOOKBACK_MONTHS = int(CONFIG.get("extended_top_quality_lookback_months", 6))
@@ -771,6 +966,33 @@ def apply_strand_a_deep_discovery_config(config: dict[str, Any]) -> None:
         "network_reserve_seconds": 45,
         "scan_finalize_reserve_seconds": 75,
     })
+    if PRIVATE_DEEP_A_HARVEST:
+        # Private-A should reach the wild continuation quickly. Keep a compact dose of
+        # journal/author/citation adjacency, then release most of the 24-minute budget to
+        # benchmarked query/source neighbourhoods. This changes discovery only.
+        config.update({
+            "journal_depth_journals_per_scan": 4,
+            "journal_depth_stage_seconds": 55,
+            "priority_people_per_scan": 8,
+            "priority_people_rows_per_person": 35,
+            "priority_people_abstract_recovery_per_scan": 4,
+            "priority_people_stage_seconds": 60,
+            "citation_snowball_seed_limit": 12,
+            "citation_snowball_anchor_limit": 8,
+            "citation_snowball_reference_pool_limit": 70,
+            "citation_snowball_forward_rows": 24,
+            "citation_snowball_stage_seconds": 75,
+            "low_yield_reserved_seconds": 1080,
+            # Quick mode normally shrinks institutional crawling to three pages and
+            # disables source adapters. Restore deeper crawling only for this private run.
+            "institution_pages_per_domain": 12,
+            "institution_pages_per_domain_bootstrap": 12,
+            "institution_max_pages": 520,
+            "institution_max_pages_bootstrap": 520,
+            "institution_source_adapter_pages_per_domain": 48,
+            "institution_source_adapter_max_hub_fetches": 14,
+            "institution_source_adapter_crawl_depth": 2,
+        })
 
 
 def budget_remaining() -> float:
@@ -1079,6 +1301,25 @@ def deep_a_wave_profile(wave_no: int, zero_yield_streak: int = 0) -> tuple[str, 
     """
     wave = max(1, int(wave_no or 1))
     zero = max(0, int(zero_yield_streak or 0))
+    if PRIVATE_DEEP_A_HARVEST:
+        # The private queue can tolerate more false positives, so spend more of each wave
+        # on unfamiliar vocabulary/source neighbourhoods. Publication is still impossible
+        # until the unchanged authoritative Deep Scan returns KEEP.
+        if zero >= 2:
+            profiles = (
+                ("wild-source-neighbourhood", 1, 4, 12),
+                ("wild-cross-domain", 3, 3, 8),
+                ("wild-journal-bridge", 1, 6, 8),
+                ("wild-theme-probe", 3, 2, 8),
+            )
+        else:
+            profiles = (
+                ("wild-theme-probe", 3, 3, 8),
+                ("wild-source-neighbourhood", 1, 4, 10),
+                ("wild-cross-domain", 3, 2, 8),
+                ("wild-journal-bridge", 1, 6, 6),
+            )
+        return profiles[(wave - 1) % len(profiles)]
     if zero >= 2:
         profiles = (
             ("journal-heavy", 0, 7, 8),
@@ -1152,6 +1393,18 @@ def rotating_variants(items: list[Any], cursor: int, count: int = 1) -> tuple[li
 def query_theme(query: str) -> str:
     """Coarse topic label used only to diversify and explain scan rotation."""
     q = normalized(query)
+    if any(x in q for x in ("ai in science", "raise", "laboratory automation", "scientific ai")):
+        return "AI in science"
+    if any(x in q for x in ("pilot line", "pilot plant", "testbed", "test bed", "cleanroom", "technology infrastructure")):
+        return "technology infrastructures"
+    if any(x in q for x in ("life sciences", "biotech", "biotechnology")):
+        return "life sciences and biotech"
+    if any(x in q for x in ("scale-up", "scaleup", "valorisation", "valorization", "spinout", "lab to market")):
+        return "scale-up and valorisation"
+    if any(x in q for x in ("technology monitoring", "patent", "technology indicators")):
+        return "technology monitoring"
+    if any(x in q for x in ("dual-use", "dual use", "economic security")):
+        return "dual use and economic security"
     if any(x in q for x in ("brain drain", "talent", "researcher mobility", "research careers", "scientific talent", "academic")):
         return "talent and mobility"
     if any(x in q for x in ("research security", "foreign interference", "knowledge security", "trusted research")):
@@ -7368,6 +7621,44 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
         and aboutness.get('pass') and centrality_ok
         and (strategic_context_pass or substantive_system_route_pass)
     )
+    ordinary_a_pass = bool(a_pass)
+    deep_a_private_recall = False
+    deep_a_private_relaxation: list[str] = []
+
+    # Deep-A private harvesting is deliberately broader than public Strand A, but it is
+    # never a publication path.  The dedicated workflow writes these candidates only to
+    # the private Deep Scan staging pool.  Source quality, document/language exclusions,
+    # direct European/EU scope and genuine R&I subject evidence remain hard requirements.
+    # We merely allow one of the three *soft* public-A checks (aboutness, centrality, or
+    # strategic/system-route fit) to remain unresolved so authoritative Deep Scan can
+    # inspect the source rather than the fast scanner discarding the candidate.
+    if PRIVATE_DEEP_A_HARVEST and not a_pass and source_kind in {'scholarly', 'institutional'}:
+        try:
+            deep_tier_ok = int(source_tier or 9) <= 3
+        except Exception:
+            deep_tier_ok = False
+        deep_ri_subject = bool(a_focus or ri_hits or structural_state_ok or title_system_evidence_ok)
+        soft_checks = {
+            'aboutness': bool(aboutness.get('pass')),
+            'centrality': bool(centrality_ok),
+            'strategic_or_system_route': bool(strategic_context_pass or substantive_system_route_pass),
+        }
+        soft_passes = sum(1 for ok in soft_checks.values() if ok)
+        if deep_tier_ok and eu_scope_admissible(eu_rel) and deep_ri_subject and soft_passes >= 2:
+            deep_a_private_recall = True
+            deep_a_private_relaxation = [name for name, ok in soft_checks.items() if not ok]
+            a_pass = True
+            a_focus = True
+            a_route = 'deep-a-private-recall'
+            if not ri_hits:
+                ri_hits = list(dict.fromkeys(
+                    [x for x in structural_state_evidence if x not in A_STRUCTURAL_STATE_VARIABLES]
+                    + title_system_evidence
+                ))[:5]
+            a_context = list(dict.fromkeys(
+                a_context + centrality_evidence + structural_state_evidence + title_system_evidence + geo_hits
+            ))[:8]
+
     if external_ok:
         a_route = 'external-strategic-shock'
         a_context = external_evidence
@@ -7424,6 +7715,9 @@ def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_ki
         'b_route': (b_route or 'future-of-A-method') if b_pass else '',
         'trend_only': bool(contains_any(title, TREND_ONLY_HINTS) and not b_pass),
         'source_tier': source_tier,
+        'ordinary_a_pass': ordinary_a_pass,
+        'deep_a_private_recall': deep_a_private_recall,
+        'deep_a_private_relaxation': deep_a_private_relaxation,
     }
 
 def _theme_term_present(text: str, term: str) -> bool:
@@ -13390,6 +13684,9 @@ def build_item(*, title: str, authors: str, source: str, date: dt.date, link: st
         "geo_evidence": evidence.get("geo_evidence", []),
         "a_context_evidence": evidence.get("a_context_evidence", []),
         "text_mode": evidence.get("text_mode", ""),
+        "deep_a_private_recall": bool(evidence.get("deep_a_private_recall")),
+        "deep_a_private_relaxation": list(evidence.get("deep_a_private_relaxation", []) or []),
+        "ordinary_a_pass": bool(evidence.get("ordinary_a_pass", evidence.get("a_pass", False))),
         "strategic_classification": strategic_classification,
         "strategic_classification_source": "source_text",
         "_source_rank": source_rank,
@@ -21601,6 +21898,12 @@ def main() -> int:
         if domain and domain not in fresh_inst_source_by_domain:
             fresh_inst_source_by_domain[domain] = src
     fresh_inst_domain_bank = list(fresh_inst_source_by_domain)
+    if PRIVATE_DEEP_A_HARVEST:
+        # Put benchmarked high-information neighbourhoods first while preserving every
+        # configured source behind them. least_recent_any_lane_batch still pushes recently
+        # exhausted domains down on later private runs.
+        priority = [d for d in PRIVATE_DEEP_A_PRIORITY_INSTITUTION_DOMAINS if d in fresh_inst_source_by_domain]
+        fresh_inst_domain_bank = priority + [d for d in fresh_inst_domain_bank if d not in set(priority)]
     low_yield_rotation["fresh_waves"] = []
     fresh_max_waves = max(1, int(CONFIG.get("low_yield_fresh_rotation_max_waves", 3) or 3))
     if (
@@ -22452,7 +22755,8 @@ def main() -> int:
         strand_cooldown_seconds = 8.0
 
         a_tail_bank = diversified_query_bank(
-            list(dimensional_bank)
+            private_deep_a_wild_query_bank()
+            + list(dimensional_bank)
             + list(evidence_first_bank)
             + list(strategic_scholarly_focus)
             + list(curator_seed_bank)
@@ -23947,6 +24251,8 @@ def main() -> int:
             "full_budget_continuation_news_candidates": int(full_budget_continuation.get("news_candidates", 0)),
             "full_budget_seconds_remaining_at_end": int(full_budget_continuation.get("seconds_remaining_at_end", 0) or 0),
             "strand_a_deep_discovery_mode": bool(RADAR_STRAND_A_DEEP_DISCOVERY),
+            "strand_a_private_wild_benchmark_mode": bool(PRIVATE_DEEP_A_HARVEST),
+            "strand_a_private_wild_query_count": len(private_deep_a_wild_query_bank()) if PRIVATE_DEEP_A_HARVEST else 0,
             "quick_strand_continuation_waves": int(quick_strand_continuation.get("waves", 0)),
             "quick_strand_minimum_runtime_seconds": int(quick_strand_continuation.get("minimum_runtime_seconds", 0)),
             "quick_strand_seconds_remaining_at_end": int(quick_strand_continuation.get("seconds_remaining_at_end", 0) or 0),

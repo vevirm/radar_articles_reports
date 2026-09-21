@@ -171,42 +171,57 @@ def update_record_metadata(state: dict[str, Any], key: str, row: dict[str, Any])
     if url:
         rec["url"] = url
     rec["corpus_scope"] = "historical" if _is_historical(key) else "main"
+    strand = str(row.get("strand") or "").strip().upper()
+    if bool(row.get("deep_a_private_candidate")):
+        rec["queue_priority"] = "private_strand_a"
+    elif strand in {"A", "BOTH"}:
+        rec["queue_priority"] = "strand_a"
+    elif rec.get("queue_priority") in {"private_strand_a", "strand_a"}:
+        # Metadata can be refreshed from a corrected/reclassified copy later. Do not keep
+        # a stale A-priority tag if the row itself no longer identifies as Strand A.
+        rec.pop("queue_priority", None)
 
 
 def prioritize_pending_keys(state: dict[str, Any], pending_keys: list[str]) -> list[str]:
-    """Apply Main-first scheduling without allowing difficult retries to monopolize lanes.
+    """Schedule urgent Strand-A verification first while preserving retry safeguards.
 
-    Policy:
-    1. Existing reservations are handled separately by :func:`fill_lane` and stay put.
-    2. Never-attempted/unblocked Main Radar work comes first.
-    3. Once fresh Main work is exhausted, Historical work uses the free capacity.
-    4. Access-recovery retries are interleaved at no more than one per 12 background
-       (historical) slots while fresh historical work exists.  When no fresh work of
-       either scope remains, retries may fill the lane so they reach the three-pass cap.
-    5. Hands-on/legacy-deferred records are never automatically reassigned.
+    Fresh Main Radar evidence still outranks Historical work, but within each scope the
+    queue now gives Strand A explicit priority. Ordinary public Strand-A discoveries come first so the normal scanner's high-confidence
+    A evidence is verified as fast as possible. Private 24-minute Deep-A candidates follow
+    immediately; both A queues stay ahead of other Main Radar work.
+    Difficult access-recovery retries remain throttled exactly as before and therefore
+    cannot monopolize worker capacity.
     """
     terminal = manual_verification_keys(state)
     records = state.get("records", {}) if isinstance(state.get("records"), dict) else {}
     ordered = _unique([k for k in pending_keys if k not in terminal])
 
-    fresh_main: list[str] = []
-    fresh_hist: list[str] = []
+    fresh_private_a: list[str] = []
+    fresh_main_a: list[str] = []
+    fresh_main_other: list[str] = []
+    fresh_hist_a: list[str] = []
+    fresh_hist_other: list[str] = []
     retries: list[str] = []
     for key in ordered:
         rec = records.get(key) if isinstance(records.get(key), dict) else {}
         attempts = _attempt_count(rec)
         status = str(rec.get("status") or "")
         is_retry = status == "recovery_retry" or attempts > 0
+        priority = str(rec.get("queue_priority") or "")
         if is_retry:
             retries.append(key)
         elif _is_historical(key):
-            fresh_hist.append(key)
+            (fresh_hist_a if priority in {"private_strand_a", "strand_a"} else fresh_hist_other).append(key)
+        elif priority == "private_strand_a":
+            fresh_private_a.append(key)
+        elif priority == "strand_a":
+            fresh_main_a.append(key)
         else:
-            fresh_main.append(key)
+            fresh_main_other.append(key)
 
-    # Fresh Main is absolute priority. Difficult access cases do not sit in front of
-    # newly discovered Main works, and Historical begins naturally when that queue clears.
-    out = list(fresh_main)
+    # Main remains ahead of Historical, but A is no longer buried in a large FIFO backlog.
+    out = fresh_main_a + fresh_private_a + fresh_main_other
+    fresh_hist = fresh_hist_a + fresh_hist_other
     if fresh_hist:
         retry_idx = 0
         for start in range(0, len(fresh_hist), RETRY_INTERVAL - 1):
