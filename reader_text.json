@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-21T20:56:22Z",
+  "generated_at": "2026-09-21T21:38:55Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -1179,27 +1179,80 @@
       ]
     },
     "link:https://doi.org/10.1002/psp.70369": {
-      "profile": "deep-reader-offline-v1",
-      "strand": "strand_a",
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "main",
       "source_hash": "37826238",
-      "reader_title": "Where non-European master's graduates go after studying in Germany, Italy and the UK",
-      "reader_what": "Destinations depend on both host and home country conditions, with the UK pattern diverging from the others.",
-      "reader_why": "Bears on whether Europe retains the internationally trained technical talent it educates.",
-      "reader_more": "This article follows the careers of international science, technology and business master's graduates who studied in Germany, Italy and the United Kingdom, drawing on 28 in-depth interviews with graduates from India, China and Iran. The central finding is that destinations are shaped by conditions in both the host and the home country, not the host alone. Germany and Italy show a clear trend towards the host labour market or other Western-oriented markets. The United Kingdom pattern differs, producing either successful transition into the host labour market or return to the home country. The authors add that home country effects themselves vary according to which host country the graduate studied in.",
+      "identity_hash": "eca191c193b6bd6e",
+      "reader_title": "International graduates’ careers are shaped by host- and home-country conditions",
+      "reader_what": "Interviews trace how visas, labour markets and prior experience shape non-European graduates’ post-study career pathways.",
+      "reader_more": "The study uses 28 in-depth interviews with graduates from China, India and Iran who studied in Germany, Italy and the UK. It explains education-to-work transitions through visas, labour-market structures, prior experience and individual agency. The object is general graduate mobility rather than research employment, research careers or another R&I-system workforce variable.",
       "deep_analysis": {
-        "work_kind": "peer-reviewed qualitative empirical study",
-        "research_question": "What shapes the career pathways and labour market destinations of non-European master's graduates who studied in Europe.",
-        "main_finding": "Career pathways are significantly influenced by conditions in both home and host countries; Germany and Italy channel graduates towards host or other Western markets, while the UK produces either host-market transition or return home.",
-        "method_or_basis": "28 in-depth interviews with international master's graduates from India, China and Iran who studied in Germany, Italy or the United Kingdom.",
-        "qualification": "A small qualitative sample spread across three host and three origin countries, supporting interpretation rather than generalisable estimates; based on the published abstract.",
-        "radar_relevance": "Speaks to European retention of internationally educated research and technical talent.",
+        "work_kind": "empirical qualitative study",
+        "research_question": "How do home- and host-country conditions shape post-study career pathways of non-European master’s graduates in Germany, Italy and the UK?",
+        "main_finding": "Career pathways are shaped by immigration rules, labour-market conditions, prior experience and conditions in graduates’ home countries.",
+        "method_or_basis": "Twenty-eight in-depth interviews with international STEM and business master’s graduates from China, India and Iran.",
+        "qualification": "The sample covers general STEM/business graduates rather than research careers or a European R&I-system workforce mechanism.",
+        "radar_relevance": "European graduate mobility is present, but the study does not substantively measure research talent, research careers or another recognised R&I-system mechanism.",
         "confidence": "high",
-        "why_supported": true
+        "why_supported": false
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Retried https://doi.org/10.1002/psp.70369; the Wiley article page now exposed the matching full article, including methods and findings, rather than the earlier 403."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://onlinelibrary.wiley.com/doi/10.1002/psp.70369",
+            "title": "Career Pathways in the Global Labour Market: Non-European Master's Graduates in Germany, Italy, and the United Kingdom",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "A legitimate substantive matching source was recovered and read deeply enough to make the normal Deep Scan decision; no blocked access controls were bypassed.",
+        "hardcore_recovery": {
+          "routes": [
+            {
+              "route": "prior_attempt_audit",
+              "outcome": "completed",
+              "query_or_url": "supplied previous_recovery_history",
+              "note": "Earlier attempts repeatedly stopped at Wiley 403/identity records, so the first new action was a fresh publisher retry."
+            },
+            {
+              "route": "supplied_url_redirects",
+              "outcome": "success",
+              "query_or_url": "https://doi.org/10.1002/psp.70369",
+              "note": "The DOI redirect now rendered substantive Wiley full text; recovery stopped because the claimed article body was available."
+            }
+          ],
+          "try_harder_passes": [],
+          "all_routes_exhausted": false,
+          "terminal_reason": ""
+        }
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_RI_MECHANISM_NOT_CENTRAL",
+        "reason": "The full study concerns general post-study graduate labour-market pathways, not research careers, research workforce or another recognised European R&I-system mechanism."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_hardcore_terminal_recovery",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T09:48:21Z",
-      "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+      "reader_text_written_at": "2026-09-21T21:38:54Z",
+      "deep_scan_package_id": "hardcore-20260921T210249Z-91de7169dc46",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
     },
     "link:https://www.espi.eu/wp-content/uploads/2026/09/ESPI-Insights-Issue-August_2026.pdf": {
       "profile": "deep-reader-v2-authoritative",
@@ -1852,27 +1905,112 @@
       ]
     },
     "link:https://doi.org/10.1177/17816858261477419": {
-      "profile": "deep-reader-offline-v1",
-      "strand": "strand_a",
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "main",
       "source_hash": "8d51e3d6",
-      "reader_title": "Argument that European defence readiness by 2030 requires reducing industrial fragmentation",
-      "reader_what": "Argues Europe must cut defence industrial fragmentation and reform procurement to meet its 2030 readiness goal.",
-      "reader_why": "Frames defence research and development as a bottleneck, not just a budget line, before a 2030 deadline.",
-      "reader_more": "This article addresses the industrial side of the EU and member state goal of restoring European defence capabilities by 2030, a target framed primarily around deterring Russia. The author argues that after decades of peace dividends and underfunding, Europe's defence sector was unprepared for the demand shock following Russia's full-scale invasion of Ukraine, and that progress since has not matched the necessary scale or pace. Peacetime conditions, the shift in United States policy, geopolitical strain on supply chains and technological change all compound the difficulty. The prescription is reduced fragmentation and higher defence industrial output through systemic reform: optimised procurement, deeper cooperation between states, and strategic investment in critical enablers and research and development. The author concludes that only a unified European approach can sustain credible deterrence.",
+      "identity_hash": "c36ccda0b031f56b",
+      "reader_title": "Europe’s defence-readiness goal depends on industrial scale, joint procurement and sustained R&D",
+      "reader_what": "Policy analysis identifies fragmented demand, production bottlenecks and technology gaps as constraints on European defence-industrial readiness.",
+      "reader_why": "Coordinated procurement and sustained R&D are presented as necessary to turn higher spending into durable capability.",
+      "reader_more": "Schmitt assesses whether European defence industry can support the EU and member states’ 2030 readiness ambitions. He highlights fragmented procurement, production-capacity limits, supply-chain exposure and technology gaps. The article argues for more coordinated procurement, industrial scaling and sustained investment in research, development and critical enablers; these are policy prescriptions rather than measured causal effects.",
       "deep_analysis": {
-        "work_kind": "peer-reviewed policy analysis article",
-        "research_question": "What the 2030 European defence readiness goal requires of the defence industrial base.",
-        "main_finding": "The 2030 target cannot be met without reducing fragmentation and raising defence industrial output, via systemic reform of procurement, cooperation and strategic investment in enablers and research and development.",
-        "method_or_basis": "Expert policy argument; no empirical method is described.",
-        "qualification": "An argued position rather than measured evidence, and the assessment of what is achievable by 2030 is the author's judgement.",
-        "radar_relevance": "Links European defence industrial capacity directly to research and development investment and procurement reform.",
+        "work_kind": "expert policy analysis",
+        "research_question": "What industrial constraints must Europe address to make its 2030 defence-readiness ambitions credible?",
+        "main_finding": "Fragmented demand, production bottlenecks, supply-chain constraints and technology gaps limit readiness; coordinated procurement and sustained R&D are presented as central remedies.",
+        "method_or_basis": "Expert analysis of European defence-industrial capacity, procurement structures, technology pressures and policy initiatives.",
+        "qualification": "This is expert policy analysis and advocacy, not a causal empirical evaluation of defence-industrial reforms.",
+        "radar_relevance": "Direct evidence and policy argument on European defence-industrial capability, innovation funding and dual-use technology readiness.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Retried https://doi.org/10.1177/17816858261477419; SAGE now exposed the full matching European View article rather than the earlier 403, including its industrial-capacity and R&D argument."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://journals.sagepub.com/doi/10.1177/17816858261477419",
+            "title": "Defence readiness 2030: The industrial dimension",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "A legitimate substantive matching source was recovered and read deeply enough to make the normal Deep Scan decision; no blocked access controls were bypassed.",
+        "hardcore_recovery": {
+          "routes": [
+            {
+              "route": "prior_attempt_audit",
+              "outcome": "completed",
+              "query_or_url": "supplied previous_recovery_history",
+              "note": "Earlier attempts had publisher identity only and no repository copy; a fresh SAGE page retry was the highest-value new route."
+            },
+            {
+              "route": "supplied_url_redirects",
+              "outcome": "success",
+              "query_or_url": "https://journals.sagepub.com/doi/10.1177/17816858261477419",
+              "note": "The full publisher article was accessible and substantive, so unused recovery routes were not pursued."
+            }
+          ],
+          "try_harder_passes": [],
+          "all_routes_exhausted": false,
+          "terminal_reason": ""
+        }
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The full European View article directly analyses Europe’s defence-industrial readiness, production fragmentation, procurement coordination and the need for sustained defence R&D investment."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_hardcore_terminal_recovery",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T09:48:21Z",
-      "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+      "reader_text_written_at": "2026-09-21T21:38:55Z",
+      "deep_scan_package_id": "hardcore-20260921T210249Z-91de7169dc46",
+      "claims": [
+        {
+          "object": "defence.innovation_funding",
+          "secondary_objects": [
+            "industrial.competitiveness",
+            "innovation.dual_use"
+          ],
+          "actor": {
+            "name": "Burkard Schmitt",
+            "class": "other"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-09-04",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "text": "Schmitt advocates coordinated procurement and sustained defence R&D to expand Europe’s industrial readiness and reduce fragmentation.",
+          "confidence": "high",
+          "qualification": "This is expert policy analysis and advocacy, not a causal empirical evaluation of defence-industrial reforms.",
+          "record_key": "link:https://doi.org/10.1177/17816858261477419",
+          "merit": 77,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:c36ccda0b031f56b:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     },
     "link:https://fiia.fi/wp-content/uploads/2026/09/BP441_Japans-security-policy-under-Prime-Minister-Takaichi.pdf": {
       "profile": "deep-reader-v2-authoritative",
@@ -4593,27 +4731,130 @@
       ]
     },
     "link:https://doi.org/10.1016/j.exis.2026.102034": {
-      "profile": "deep-reader-offline-v1",
-      "strand": "strand_a",
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "main",
       "source_hash": "95850587",
-      "reader_title": "Governance quality matters more than mineral deposits for secure raw material supply",
-      "reader_what": "Comparative analysis finds supply chain resilience depends on institutional governance rather than resource endowment.",
-      "reader_why": "Implies EU raw materials policy should weigh partner governance alongside where deposits sit.",
-      "reader_more": "This study compares extractive governance across five settings: lithium in Australia, cobalt in the Democratic Republic of the Congo, nickel in Canada, copper in Chile, and the European Union under the Critical Raw Materials Act. It uses qualitative comparative legal and institutional analysis framed by sustainable supply chain management and triple bottom line thinking. The authors identify four governance elements operating together: legal and regulatory frameworks, administrative capacity and coordination, rights-based safeguards, and environmental governance. Their conclusion is that resilience depends less on how much of a mineral a country holds than on whether institutions provide regulatory predictability, procedural legitimacy and long-term environmental stewardship. They reframe security of supply, diversification, sustainability and circularity as system-level governance outcomes rather than separate policy goals.",
+      "identity_hash": "67650f7db8c1d4c9",
+      "reader_title": "Critical-material supply resilience depends on institutional governance across very different jurisdictions",
+      "reader_what": "Five-case comparison links resilient critical-material supply chains to regulatory predictability, administrative capacity, rights safeguards and environmental governance.",
+      "reader_more": "The article compares Australia, Canada, Chile, the Democratic Republic of the Congo and the European Union under the Critical Raw Materials Act. It argues that supply resilience depends on interacting legal, administrative, rights and environmental institutions rather than resource endowment alone. Because the EU is one of five comparative governance contexts rather than the substantive European object of the study, it fails Strand A’s Europe-as-comparator guard despite its strategic subject matter.",
       "deep_analysis": {
-        "work_kind": "peer-reviewed qualitative comparative study",
-        "research_question": "How institutional governance conditions shape the resilience and sustainability of critical raw material supply chains.",
-        "main_finding": "Four governance elements acting collectively determine resilience, and supply chain resilience depends less on resource endowment than on institutions delivering regulatory predictability, procedural legitimacy and environmental stewardship.",
-        "method_or_basis": "Qualitative comparative legal and institutional analysis of four resource-producing jurisdictions plus the EU under the Critical Raw Materials Act.",
-        "qualification": "Five cases across different minerals and political systems, so the comparison is illustrative rather than statistically generalisable.",
-        "radar_relevance": "Speaks directly to how the EU should structure critical raw material partnerships under its own legislation.",
+        "work_kind": "comparative legal and institutional study",
+        "research_question": "How do institutional governance conditions shape resilient and sustainable critical-raw-material supply chains across different governance contexts?",
+        "main_finding": "Resilient supply chains depend on combinations of legal predictability, administrative coordination, rights safeguards and environmental governance rather than resource endowment or policy ambition alone.",
+        "method_or_basis": "Qualitative comparative legal and institutional analysis of Australia, Canada, Chile, the DRC and the EU under the Critical Raw Materials Act.",
+        "qualification": "The EU is one of five comparative governance contexts; the study’s substantive object is global critical-material governance rather than the European R&I system itself.",
+        "radar_relevance": "Critical raw materials are strategically relevant, but Strand A excludes a non-European comparative study when Europe is merely one comparator.",
         "confidence": "high",
-        "why_supported": true
+        "why_supported": false
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Retried https://doi.org/10.1016/j.exis.2026.102034; ScienceDirect still did not provide a usable article body."
+          },
+          {
+            "step": "doi",
+            "outcome": "identity_only",
+            "note": "DOI 10.1016/j.exis.2026.102034 continued to confirm the exact Elsevier article identity, but identity metadata alone was not treated as substantive evidence."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "insufficient",
+            "note": "Exact-title search still returned publisher/aggregator traces rather than usable full text."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Title + Engman/Pettersson/Poelzer + 2026 again identified Luleå University of Technology DiVA record diva2:2096283."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Retried the legitimate Luleå DiVA file https://ltu.diva-portal.org/smash/get/diva2:2096283/FULLTEXT01.pdf; the prior 503 had cleared and the complete 11-page article was readable and visually inspected."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "institutional_repository_full_text",
+            "url": "https://ltu.diva-portal.org/smash/get/diva2:2096283/FULLTEXT01.pdf",
+            "title": "Institutional capacity and sustainable critical raw material supply chains: A comparative analysis of extractive governance",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "A legitimate substantive matching source was recovered and read deeply enough to make the normal Deep Scan decision; no blocked access controls were bypassed.",
+        "hardcore_recovery": {
+          "routes": [
+            {
+              "route": "prior_attempt_audit",
+              "outcome": "completed",
+              "query_or_url": "supplied previous_recovery_history",
+              "note": "Previous verification had already found the exact Luleå DiVA full-text route but recorded a transient 503; that made a direct repository retry the highest-value new action."
+            },
+            {
+              "route": "supplied_url_redirects",
+              "outcome": "blocked",
+              "query_or_url": "https://doi.org/10.1016/j.exis.2026.102034",
+              "note": "ScienceDirect remained unavailable for substantive retrieval."
+            },
+            {
+              "route": "doi_registry_publisher",
+              "outcome": "identity_only",
+              "query_or_url": "10.1016/j.exis.2026.102034",
+              "note": "DOI metadata verified the article and publisher but did not supply the body."
+            },
+            {
+              "route": "exact_title_variants",
+              "outcome": "insufficient",
+              "query_or_url": "\"Institutional capacity and sustainable critical raw material supply chains\"",
+              "note": "Title searching reconfirmed the article and the Luleå deposit."
+            },
+            {
+              "route": "title_author_year_identifiers",
+              "outcome": "partial",
+              "query_or_url": "title + Engman + Pettersson + Poelzer + 2026 + diva2:2096283",
+              "note": "The institutional identifier for the matching LTU deposit was confirmed."
+            },
+            {
+              "route": "open_access_resolvers",
+              "outcome": "partial",
+              "query_or_url": "DOI 10.1016/j.exis.2026.102034 via OA-location metadata",
+              "note": "OA metadata pointed to the same publisher/repository identity, with no third independent location."
+            },
+            {
+              "route": "institutional_repositories",
+              "outcome": "success",
+              "query_or_url": "https://ltu.diva-portal.org/smash/get/diva2:2096283/FULLTEXT01.pdf",
+              "note": "The DiVA final full text loaded successfully on retry; recovery stopped."
+            }
+          ],
+          "try_harder_passes": [],
+          "all_routes_exhausted": false,
+          "terminal_reason": ""
+        }
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_EU_COMPARATOR_ONLY",
+        "reason": "The full study is a five-jurisdiction global comparison of critical-raw-material governance; the EU is one comparator, which the Strand A common guard explicitly excludes."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_hardcore_terminal_recovery",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T09:48:22Z",
-      "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+      "reader_text_written_at": "2026-09-21T21:38:54Z",
+      "deep_scan_package_id": "hardcore-20260921T210249Z-91de7169dc46",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
     },
     "link:https://www.aka.fi/en/research-funding/apply-for-funding/how-to-apply-for-funding/az-index-of-application-guidelines/research-security/": {
       "profile": "deep-reader-v2-authoritative",
@@ -19686,27 +19927,111 @@
       ]
     },
     "link:https://doi.org/10.1111/1758-5899.70201": {
-      "profile": "deep-reader-offline-v1",
-      "strand": "strand_a",
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "main",
       "source_hash": "6367fcaf",
-      "reader_title": "How the EU reconciled its openness and digital sovereignty stories",
-      "reader_what": "Traces how EU digital connectivity and digital sovereignty narratives converged under rising geopolitical competition.",
-      "reader_why": "Explains how Europe justifies both open digital partnerships and reduced dependence on foreign technology.",
-      "reader_more": "The article studies the stories the European Union tells about governing digital technology, using the strategic narratives approach. It contrasts an older digital connectivity narrative, which promotes collaboration, engagement and market inclusion, with a newer digital sovereignty narrative that stresses European digital industry, diversified supply chains and less reliance on outside powers. The authors track how both narratives changed as geopolitical competition intensified. They find a point of convergence in the mid-2020s at which the EU appeared to reconcile openness with autonomy. The analysis is about discourse and framing rather than measured policy outcomes.",
+      "identity_hash": "99547df43c73df2f",
+      "reader_title": "EU connectivity strategy increasingly pairs openness with digital autonomy",
+      "reader_what": "Document analysis finds EU digital policy combines domestic capability-building with selective external partnerships to reduce strategic dependencies.",
+      "reader_why": "Autonomy is pursued through internal investment and trusted connectivity, rather than simple technological decoupling.",
+      "reader_more": "The authors analyse EU strategies, legislation, speeches and policy documents from 2019 to 2024 through a strategic-narratives lens. They trace an initially open connectivity narrative alongside a more defensive digital-sovereignty narrative. By the mid-2020s, the two increasingly converge around strengthening European capabilities while preserving selected international connections, although implementation remains constrained by resources and capacity.",
       "deep_analysis": {
-        "work_kind": "peer-reviewed discourse/policy analysis",
-        "research_question": "How EU strategic narratives on digital connectivity and digital sovereignty have evolved and whether they can be reconciled.",
-        "main_finding": "The EU connectivity and digital sovereignty narratives converged in the mid-2020s, allowing the Union to present openness and autonomy as compatible aims.",
-        "method_or_basis": "Stored publisher abstract in the package; publisher page returned 403",
-        "qualification": "Analyses narratives and framing; apparent reconciliation at the discourse level need not hold in practice.",
-        "radar_relevance": "Core to European technological sovereignty debates that shape research, innovation and digital policy.",
-        "confidence": "medium",
+        "work_kind": "qualitative strategic-narrative policy study",
+        "research_question": "How have EU narratives of digital connectivity and digital sovereignty evolved and interacted under growing geopolitical competition?",
+        "main_finding": "EU digital policy increasingly reconciles autonomy with connectivity by combining domestic capability-building and diversified or trusted external partnerships.",
+        "method_or_basis": "Qualitative analysis of EU strategies, legislation, speeches and policy documents from 2019 to 2024 using the strategic-narratives approach.",
+        "qualification": "This is a narrative and document analysis of 2019–2024 strategy; it does not measure whether autonomy policies reduced dependencies in practice.",
+        "radar_relevance": "Direct evidence on EU digital sovereignty, technology dependency and the governance of international digital partnerships.",
+        "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Retried https://doi.org/10.1111/1758-5899.70201; Wiley now exposed the matching full article, allowing the document corpus, narrative comparison and conclusions to be read beyond the abstract."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://onlinelibrary.wiley.com/doi/10.1111/1758-5899.70201",
+            "title": "‘Having Your (Digital) Cake and Eating It’: Reconciling EU Strategic Narratives on Connectivity and Autonomy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "A legitimate substantive matching source was recovered and read deeply enough to make the normal Deep Scan decision; no blocked access controls were bypassed.",
+        "hardcore_recovery": {
+          "routes": [
+            {
+              "route": "prior_attempt_audit",
+              "outcome": "completed",
+              "query_or_url": "supplied previous_recovery_history",
+              "note": "Prior attempts had exhausted Maastricht/OA metadata while Wiley returned 403; a fresh publisher availability check was therefore the decisive new route."
+            },
+            {
+              "route": "supplied_url_redirects",
+              "outcome": "success",
+              "query_or_url": "https://onlinelibrary.wiley.com/doi/10.1111/1758-5899.70201",
+              "note": "The Wiley article body was readable on retry; substantive recovery ended the route search."
+            }
+          ],
+          "try_harder_passes": [],
+          "all_routes_exhausted": false,
+          "terminal_reason": ""
+        }
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Full-text document analysis directly examines EU digital-connectivity and digital-sovereignty strategy, including dependencies, domestic capability-building and trusted external partnerships."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_hardcore_terminal_recovery",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T12:57:49Z",
-      "deep_scan_package_id": "20260913T115013Z-08265b5e784f"
+      "reader_text_written_at": "2026-09-21T21:38:55Z",
+      "deep_scan_package_id": "hardcore-20260921T210249Z-91de7169dc46",
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [
+            "digital.international_partnerships"
+          ],
+          "actor": {
+            "name": "Flavia Lucenti, Céleste Bonnamy, Thomas Christiansen, Ville Sinkkonen and Sophie Vanhoonacker",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-07-15",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "text": "The study finds EU digital-autonomy strategy increasingly combines domestic capability-building with connectivity to selected external partners.",
+          "confidence": "high",
+          "qualification": "This is a narrative and document analysis of 2019–2024 strategy; it does not measure whether autonomy policies reduced dependencies in practice.",
+          "record_key": "link:https://doi.org/10.1111/1758-5899.70201",
+          "merit": 83,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:99547df43c73df2f:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     },
     "link:https://research-and-innovation.ec.europa.eu/strategy/strategy-research-and-innovation/europe-world/international-cooperation/bilateral-cooperation-science-and-technology-agreements-non-eu-countries/india_en": {
       "profile": "deep-reader-v2-authoritative",
@@ -153254,8 +153579,296 @@
       "deep_scan_package_id": "20260921T113124Z-d03593aeef89",
       "claims": [],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1002/cep4.70037": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "main",
+      "source_hash": "e450fb0a",
+      "identity_hash": "64ba7a769f80473a",
+      "reader_title": "European University alliances negotiate Europeanisation through local institutional practice",
+      "reader_what": "A scholar-practitioner analysis shows EU-level alliance policy is interpreted through local capacities, teams and strategic practice.",
+      "reader_more": "The paper combines EU-level policy discussion with the authors’ scholar-practitioner experience in the FORTHEM alliance. It treats knowledge-creating teams, paradiplomacy and science diplomacy as mechanisms through which Europeanisation is negotiated locally. The contribution is conceptual and practice-based rather than a systematic empirical assessment of research-system performance, governance or collaboration.",
+      "deep_analysis": {
+        "work_kind": "conceptual scholar-practitioner article",
+        "research_question": "How can subnational Europeanisation, paradiplomacy and science diplomacy explain organisational practice in European University Alliances?",
+        "main_finding": "The paper argues that alliances are active arenas where European norms and governance logics are interpreted through local organisational mechanisms.",
+        "method_or_basis": "Conceptual synthesis linked to scholar-practitioner experience with the FORTHEM European University Alliance.",
+        "qualification": "The article is primarily conceptual and experience-based, not a completed evidence-led study of a European R&I-system mechanism.",
+        "radar_relevance": "European University Alliances are relevant context, but this article does not meet Strand A Route 3’s completed evidence-led study requirement.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Retried https://doi.org/10.1002/cep4.70037; the Wiley article body became readable and supplied the conceptual framing, organisational discussion and conclusion needed for a normal admission decision."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://onlinelibrary.wiley.com/doi/10.1002/cep4.70037",
+            "title": "The Interplay of Policy and Practice on Europeanisation in the Context of the European Universities Initiative",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "A legitimate substantive matching source was recovered and read deeply enough to make the normal Deep Scan decision; no blocked access controls were bypassed.",
+        "hardcore_recovery": {
+          "routes": [
+            {
+              "route": "prior_attempt_audit",
+              "outcome": "completed",
+              "query_or_url": "supplied previous_recovery_history",
+              "note": "Prior attempts reached Wiley/DOAJ metadata only; a fresh publisher/full-text retry was therefore new and potentially decisive."
+            },
+            {
+              "route": "supplied_url_redirects",
+              "outcome": "success",
+              "query_or_url": "https://doi.org/10.1002/cep4.70037",
+              "note": "The Wiley landing/full-text route now exposed substantive matching article text; no further hardcore routes were needed."
+            }
+          ],
+          "try_harder_passes": [],
+          "all_routes_exhausted": false,
+          "terminal_reason": ""
+        }
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_EMPIRICAL_CONCEPTUAL_PRACTICE",
+        "reason": "The recovered article is primarily a conceptual scholar-practitioner exploration of Europeanisation in a university alliance, not a completed evidence-led study of a recognised R&I-system mechanism."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_hardcore_terminal_recovery",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-21T21:38:54Z",
+      "deep_scan_package_id": "hardcore-20260921T210249Z-91de7169dc46",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://ellis.eu/publication/2007-do-theories-of-syntactic-processing-difficulty-scale-up-to-naturally-o": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "main",
+      "source_hash": "0c3d173c",
+      "identity_hash": "1ba556fc69e6a639",
+      "reader_title": "Eye-tracking corpus evidence tests sentence-processing difficulty theories on natural text",
+      "reader_what": "Eye-tracking models compare dependency locality and surprisal predictions against reading behaviour in a natural newspaper corpus.",
+      "reader_more": "The presentation analyses eye-tracking data from the Dundee corpus and syntactic parses produced by computational parsers. Mixed-effects models compare predictions from Dependency Locality Theory and surprisal-based accounts. The results concern psycholinguistic sentence processing, not a European research-system mechanism, strategic technology capability or a new reusable Radar method.",
+      "deep_analysis": {
+        "work_kind": "conference research presentation",
+        "research_question": "Do major theories of syntactic processing difficulty predict reading behaviour in naturally occurring text?",
+        "main_finding": "The presentation reports mixed support for dependency-locality predictors and significant surprisal effects in eye-tracking data from natural text.",
+        "method_or_basis": "Dundee eye-tracking corpus, computational parses and mixed-effects modelling of reading-time measures.",
+        "qualification": "This is a 2007 psycholinguistics presentation about sentence processing, not evidence about Europe’s R&I system or strategic technology capability.",
+        "radar_relevance": "The scanner’s apparent present-day European relevance came from the modern ELLIS host page rather than the 2007 work itself.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "identity_only",
+            "note": "Opened the supplied ELLIS record; it identifies Vera Demberg and Frank Keller, labels the item a 2007 conference work, but provides no substantive text."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is present on the ELLIS record or the recovered presentation."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title/author searching located the author-hosted AMLaP presentation PDF at https://www.coli.uni-saarland.de/~vera/AMLaP-slides.pdf; the slides contain data, methods and results."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "author_hosted_full_text",
+            "url": "https://www.coli.uni-saarland.de/~vera/AMLaP-slides.pdf",
+            "title": "Do theories of syntactic processing difficulty scale up to naturally occurring text?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "A legitimate substantive matching source was recovered and read deeply enough to make the normal Deep Scan decision; no blocked access controls were bypassed.",
+        "hardcore_recovery": {
+          "routes": [
+            {
+              "route": "prior_attempt_audit",
+              "outcome": "completed",
+              "query_or_url": "supplied previous_recovery_history",
+              "note": "Earlier attempts established a 2007 Demberg/Keller conference identity but did not try the author-hosted slide filename/location."
+            },
+            {
+              "route": "supplied_url_redirects",
+              "outcome": "identity_only",
+              "query_or_url": "https://ellis.eu/publication/2007-do-theories-of-syntactic-processing-difficulty-scale-up-to-naturally-o",
+              "note": "ELLIS supplied bibliographic identity only, with no abstract or full text."
+            },
+            {
+              "route": "doi_registry_publisher",
+              "outcome": "not_applicable",
+              "query_or_url": "ELLIS record / recovered presentation",
+              "note": "No DOI exists for this conference presentation, so DOI-registry recovery is not applicable."
+            },
+            {
+              "route": "exact_title_variants",
+              "outcome": "partial",
+              "query_or_url": "\"Do theories of syntactic processing difficulty scale up to naturally occurring text?\"",
+              "note": "Exact-title variants confirmed the work and led toward Demberg/Keller author pages."
+            },
+            {
+              "route": "author_research_group_pages",
+              "outcome": "success",
+              "query_or_url": "https://www.coli.uni-saarland.de/~vera/AMLaP-slides.pdf",
+              "note": "The author-hosted AMLaP slides are substantive full presentation material and resolve the work."
+            }
+          ],
+          "try_harder_passes": [],
+          "all_routes_exhausted": false,
+          "terminal_reason": ""
+        }
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_OUT_OF_SCOPE",
+        "reason": "The recovered 2007 conference presentation is a psycholinguistic eye-tracking study of sentence-processing theories, not European R&I-system evidence or a reusable methods contribution for Strand B."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_hardcore_terminal_recovery",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-21T21:38:54Z",
+      "deep_scan_package_id": "hardcore-20260921T210249Z-91de7169dc46",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1111/jcms.70116": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "main",
+      "source_hash": "b245433a",
+      "identity_hash": "3995772b4f7e1a06",
+      "reader_title": "EU green industrial policy relies on an uneven mix of state aid, funding and trade tools",
+      "reader_what": "Policy tracing shows national state aid and trade measures dominate Europe’s support for strategic net-zero manufacturing.",
+      "reader_why": "Fiscal and institutional constraints shape which green-industrial instruments governments can deploy.",
+      "reader_more": "The article traces the EU’s emerging green industrial policy from mid-2022 to mid-2025 using legislation, policy documents and stakeholder material. It distinguishes national state aid, EU-level funding, procurement and trade-defence instruments. The authors find that national subsidies and trade measures have advanced more readily than common EU fiscal support, reflecting institutional constraints, industry preferences and divergent fiscal capacity.",
+      "deep_analysis": {
+        "work_kind": "comparative political-economy policy analysis",
+        "research_question": "Why has the EU’s new green industrial policy developed through an uneven mix of national and EU-level instruments?",
+        "main_finding": "National state aid and trade measures became more prominent than common EU funding, with instrument choice shaped by institutional constraints, industry preferences, fiscal capacity and sequencing.",
+        "method_or_basis": "Policy tracing from mid-2022 to mid-2025 using EU legislation, policy documents and stakeholder position material.",
+        "qualification": "The study explains instrument choice and political constraints through policy tracing; it does not estimate the causal effectiveness of those instruments.",
+        "radar_relevance": "Direct evidence on EU strategic clean-technology industrial capacity, funding architecture and policy constraints.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Retried https://doi.org/10.1111/jcms.70116 and the Wiley full-text endpoint; the matching article body was readable, overcoming the earlier 403/embargo-only repository situation."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://onlinelibrary.wiley.com/doi/full/10.1111/jcms.70116",
+            "title": "The Political Economy of the EU's New Green Industrial Policy: A Framework for Analysis",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "A legitimate substantive matching source was recovered and read deeply enough to make the normal Deep Scan decision; no blocked access controls were bypassed.",
+        "hardcore_recovery": {
+          "routes": [
+            {
+              "route": "prior_attempt_audit",
+              "outcome": "completed",
+              "query_or_url": "supplied previous_recovery_history",
+              "note": "Prior attempts had found an embargoed UGent accepted manuscript and a blocked Wiley page; a publisher recheck was a genuinely different availability test."
+            },
+            {
+              "route": "supplied_url_redirects",
+              "outcome": "success",
+              "query_or_url": "https://onlinelibrary.wiley.com/doi/full/10.1111/jcms.70116",
+              "note": "Wiley now exposed the substantive full article, including its policy-instrument framework, tracing and conclusions."
+            }
+          ],
+          "try_harder_passes": [],
+          "all_routes_exhausted": false,
+          "terminal_reason": ""
+        }
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Full-text policy tracing directly analyses the EU’s green industrial policy for strategic net-zero technologies, including state aid, EU funding, procurement and trade instruments."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_hardcore_terminal_recovery",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-21T21:38:54Z",
+      "deep_scan_package_id": "hardcore-20260921T210249Z-91de7169dc46",
+      "claims": [
+        {
+          "object": "industrial.competitiveness",
+          "secondary_objects": [
+            "innovation.green_technology",
+            "goal.strategic_autonomy"
+          ],
+          "actor": {
+            "name": "Ruben De La Cruz, Ferdi De Ville, Simon Rogissart and Thijs Van de Graaf",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-04-10",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "text": "The study finds EU green-industrial support for net-zero technologies is shaped by fiscal capacity, institutional constraints and instrument sequencing.",
+          "confidence": "high",
+          "qualification": "The study explains instrument choice and political constraints through policy tracing; it does not estimate the causal effectiveness of those instruments.",
+          "record_key": "link:https://doi.org/10.1111/jcms.70116",
+          "merit": 91,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:3995772b4f7e1a06:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-09-21T20:56:22Z"
+  "claims_updated_at": "2026-09-21T21:38:55Z"
 }
