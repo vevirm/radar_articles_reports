@@ -1,0 +1,88 @@
+name: Deep Scan Recovery — Prepare PUSH HARDER Package
+
+on:
+  workflow_dispatch:
+    inputs:
+      package_size:
+        description: 'Terminal recovery records to package (A first; 1-24)'
+        required: false
+        default: '12'
+
+permissions:
+  contents: read
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+
+concurrency:
+  group: ri-radar-research-scanners
+  cancel-in-progress: false
+
+jobs:
+  prepare-hardcore-recovery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out main safely
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.12'
+
+      - name: Install Deep Scan dependencies
+        run: pip install --quiet -r requirements.txt
+
+      - name: Protect existing scanner and Deep Scan core
+        run: python scripts/check_reasoning_reform_core_freeze.py
+
+      - name: Prepare terminal PUSH HARDER package
+        shell: bash
+        env:
+          PACKAGE_SIZE: ${{ inputs.package_size }}
+        run: |
+          set -euo pipefail
+          size="${PACKAGE_SIZE:-12}"
+          if ! [[ "$size" =~ ^[0-9]+$ ]] || (( size < 1 || size > 24 )); then
+            echo '::error::package_size must be an integer from 1 to 24'
+            exit 1
+          fi
+          rm -rf deep_scan_hardcore_recovery
+          python scripts/prepare_deep_scan_hardcore_recovery.py \
+            --output-dir deep_scan_hardcore_recovery \
+            --max-records "$size"
+          if [[ -f deep_scan_hardcore_recovery/PACKAGE_SUMMARY.txt ]]; then
+            cat deep_scan_hardcore_recovery/PACKAGE_SUMMARY.txt
+          fi
+          if [[ -f deep_scan_hardcore_recovery/NO_HARDCORE_RECOVERY_NEEDED.txt ]]; then
+            cat deep_scan_hardcore_recovery/NO_HARDCORE_RECOVERY_NEEDED.txt
+          fi
+
+      - name: Upload PUSH HARDER recovery package
+        uses: actions/upload-artifact@v4
+        with:
+          name: deep-scan-push-harder-recovery
+          path: |
+            deep_scan_hardcore_recovery/deep_scan_hardcore_recovery.zip
+            deep_scan_hardcore_recovery/PACKAGE_SUMMARY.txt
+            deep_scan_hardcore_recovery/NO_HARDCORE_RECOVERY_NEEDED.txt
+          if-no-files-found: warn
+          retention-days: 21
+
+      - name: Recovery instructions
+        shell: bash
+        run: |
+          cat >> "$GITHUB_STEP_SUMMARY" <<'EOF2'
+          ## Deep Scan PUSH HARDER recovery
+
+          Download **deep-scan-push-harder-recovery** and give `deep_scan_hardcore_recovery.zip` to one browsing-capable LLM.
+
+          This package contains only records that had reached the terminal access-limited/manual list. It requires the normal Deep Scan standard **plus** a much stronger retrieval protocol, including two mandatory **TRY HARDER** self-challenge passes before an item may be closed as unverifiable.
+
+          Returned results go in `deep_scan_hardcore_inbox/`, not the ordinary `deep_scan_inbox/`.
+          EOF2

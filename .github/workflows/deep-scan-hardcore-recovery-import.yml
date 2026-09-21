@@ -1,0 +1,117 @@
+name: Deep Scan Recovery — Import PUSH HARDER Results
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'deep_scan_hardcore_inbox/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+
+concurrency:
+  group: ri-radar-research-scanners
+  cancel-in-progress: false
+
+jobs:
+  import-hardcore-recovery:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out main safely
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Deep Scan dependencies
+        run: pip install --quiet -r requirements.txt
+
+      - name: Protect existing scanner and Deep Scan core
+        run: python scripts/check_reasoning_reform_core_freeze.py
+
+      - name: Import PUSH HARDER results and rebuild active corpus
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/import_deep_scan_hardcore_recovery.py \
+            --inbox deep_scan_hardcore_inbox \
+            --work-state deep_scan_work_state.json \
+            --status-file DEEP_SCAN_STATUS.md
+          python scripts/check_reader_text.py
+          python scripts/rebuild_active_radar.py --report migration-reports/latest-deep-scan-active-rebuild.json
+          python scripts/check_active_corpus.py
+          node scripts/generate_stuff_workbook.js
+
+          python3 - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          before=json.loads(subprocess.check_output(['git','show','HEAD:radar.json']).decode('utf-8'))
+          after=json.loads(Path('radar.json').read_text(encoding='utf-8'))
+          for key in ('strand_a','strand_b','strand_c','frontier_evidence','ab_archive','signal_archive'):
+              if before.get(key) != after.get(key):
+                  raise SystemExit(f'Hardcore recovery unexpectedly modified raw evidence collection {key}')
+          print('Raw evidence immutability check passed.')
+          PY
+
+      - name: Configure secure push authentication
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'radar-deep-scan-hardcore-recovery'
+          git config user.email 'actions@github.com'
+          auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
+          git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${auth}"
+
+      - name: Save validated recovery state
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add \
+            reader_text.json admission_state.json record_corrections.json \
+            radar_active.json stuff/source_merit_ranking.xlsx \
+            migration-reports/latest-deep-scan-active-rebuild.json \
+            deep_scan_hardcore_inbox deep_scan_work_state.json DEEP_SCAN_STATUS.md
+          if git diff --cached --quiet; then
+            echo 'No valid PUSH HARDER results to commit.'
+            exit 0
+          fi
+          git commit -m 'Deep Scan recovery: exhaust terminal access cases'
+          git push origin HEAD:main
+
+      - name: Import summary
+        if: always()
+        shell: bash
+        run: |
+          cat >> "$GITHUB_STEP_SUMMARY" <<'EOF2'
+          ## PUSH HARDER recovery import
+
+          Recovered KEEP/REVIEW/DROP results must pass the unchanged normal Deep Scan V2 validator.
+
+          A terminal DROP_UNVERIFIABLE is accepted only when the special recovery audit proves the expanded route checklist and both TRY HARDER challenge passes were exhausted. Such a record is removed from the active Radar and does not return to a human/manual queue.
+          EOF2
+
+      - name: Remove temporary repository credential
+        if: always()
+        shell: bash
+        run: git config --local --unset-all http.https://github.com/.extraheader >/dev/null 2>&1 || true
