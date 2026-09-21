@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-admission-v1",
-  "updated_at": "2026-09-21T12:31:00Z",
+  "updated_at": "2026-09-21T20:56:22Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "decision": "drop",
@@ -13161,16 +13161,16 @@
       "duplicate_of": ""
     },
     "link:https://doi.org/10.1080/09662839.2026.2700193": {
-      "decision": "needs_manual_verification",
-      "target_strand": "",
-      "reason_code": "NEEDS_MANUAL_VERIFICATION",
-      "reason": "Identity is credible, but substantive evidence remained inaccessible after three validated Deep Scan recovery passes; excluded from active reasoning until hands-on verification supplies materially new access.",
-      "source": "deep_scan_v2",
+      "decision": "keep",
+      "target_strand": "A",
+      "reason_code": "A_SUBSTANTIVE_EU_RI",
+      "reason": "Peer-reviewed analysis whose object is Europe's post-2022 defence and dual-use R&I ecosystem: EU instruments (EDF, EUDIS, BraveTech EU), defence-tech startups, research consortia and venture funding, with explicit risks to basic-research agendas. Qualifies under Route 1 (strategic R&I relationship) and Route 2 (dual-use capability, capital and research-system trajectory).",
+      "source": "deep_scan_hardcore_terminal",
       "corpus_scope": "main",
-      "updated_at": "2026-09-16T11:56:54Z",
-      "deep_scan_package_id": "worker-b-20260916T111859Z-7e67cb37e8b4",
-      "verification_note": "Identity verified; substantive text not legitimately accessible after all six steps.",
-      "recovery_attempts": 3
+      "updated_at": "2026-09-21T20:56:22Z",
+      "deep_scan_package_id": "hardcore-20260921T202337Z-f90e4b3a3d81",
+      "verification_note": "Full published text (CC BY) read from the PRIO-hosted copy after the T&F host blocked access. Date note: the PDF cover shows 'Accepted 3 July 2026 / Published online 09 Sep 2026' while Crossref gives 2026-07-03; left uncorrected because the two authoritative sources disagree.",
+      "duplicate_of": ""
     },
     "historical:id:56e6d8d68851e8c2": {
       "decision": "keep",
@@ -20092,6 +20092,18 @@
       "updated_at": "2026-09-21T12:31:00Z",
       "deep_scan_package_id": "20260921T113124Z-d03593aeef89",
       "verification_note": "Identity matched on title/source metadata and substantive evidence was checked for admission as Strand A.",
+      "duplicate_of": ""
+    },
+    "link:https://doi.org/10.19062/2247-3173.2026.27.30": {
+      "decision": "drop",
+      "target_strand": "A",
+      "reason_code": "A_NOT_SUBSTANTIVE_EVIDENCE",
+      "reason": "European connection is real (EU dual-use export rules, EDF, NATO DIANA, Romania), but the work is not a substantive evidence product: an exploratory doctoral work-in-progress whose quantitative claims (e.g. up to 75% faster compliance) rest on PwC, IBM and 'ResearchGate' material rather than completed analysis. Fails the common substantive-evidence guard; Route 3 requires a completed high-quality study.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-21T20:56:22Z",
+      "deep_scan_package_id": "hardcore-20260921T202337Z-f90e4b3a3d81",
+      "verification_note": "Full text read. The paper states it is an intermediate, exploratory stage of the first author's doctoral thesis, submitted to the AFASES military conference proceedings; results section reports the study 'began in January 2026 and is currently in Tier 1 of the documentation phase'.",
       "duplicate_of": ""
     }
   }
