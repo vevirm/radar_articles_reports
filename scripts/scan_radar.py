@@ -540,10 +540,13 @@ OPENALEX_API_KEY = os.environ.get("OPENALEX_API_KEY", "").strip()
 RADAR_RESCUE_MODE = os.environ.get("RADAR_RESCUE_MODE", "").strip().lower() in {"1", "true", "yes", "on"}
 RADAR_QUICK_SCAN = os.environ.get("RADAR_QUICK_SCAN", "").strip().lower() in {"1", "true", "yes", "on"}
 RADAR_QUICK_STRAND = os.environ.get("RADAR_QUICK_STRAND", "").strip().upper()
+RADAR_STRAND_A_DEEP_DISCOVERY = os.environ.get("RADAR_STRAND_A_DEEP_DISCOVERY", "").strip().lower() in {"1", "true", "yes", "on"}
 if RADAR_QUICK_STRAND not in {"", "A", "B", "C"}:
     raise SystemExit(f"Invalid RADAR_QUICK_STRAND={RADAR_QUICK_STRAND!r}; expected A, B, C, or empty")
 if RADAR_QUICK_STRAND and not RADAR_QUICK_SCAN:
     raise SystemExit("RADAR_QUICK_STRAND is only valid together with RADAR_QUICK_SCAN=true")
+if RADAR_STRAND_A_DEEP_DISCOVERY and not (RADAR_QUICK_SCAN and RADAR_QUICK_STRAND == "A"):
+    raise SystemExit("RADAR_STRAND_A_DEEP_DISCOVERY requires RADAR_QUICK_SCAN=true and RADAR_QUICK_STRAND=A")
 RADAR_PRIORITY_SCAN = os.environ.get("RADAR_PRIORITY_SCAN", "").strip().lower() in {"1", "true", "yes", "on"}
 RADAR_DIAGNOSTIC_RUN = False  # v19 production: the temporary five-minute bootstrap/debug mode is retired
 
@@ -664,6 +667,100 @@ def apply_quick_strand_a_antisaturation_config(config: dict[str, Any]) -> None:
         "crossref_source_first_journals_per_scan": 6,
         "crossref_underrepresented_journals_per_scan": 3,
         "priority_policy_journals_per_scan": 3,
+    })
+
+
+def apply_strand_a_deep_discovery_config(config: dict[str, Any]) -> None:
+    """Make focused Strand A a continuation/depth scan instead of another broad pass.
+
+    Search allocation changes only. Strand-A admission, source merit, duplicate,
+    retention and publication rules remain exactly the ordinary scanner rules.
+    """
+    config.update({
+        # The main scanner already did broad freshness. Do not spend this run doing it again.
+        "news_stage_seconds": 8,
+        "openalex_stage_seconds": 20,
+        "crossref_stage_seconds": 20,
+        "institution_stage_seconds": 20,
+        "primary_evidence_stage_seconds": 12,
+        "openalex_queries_per_scan": 0,
+        "crossref_broad_queries_per_scan": 0,
+        "openalex_exploration_queries_per_scan": 0,
+        "crossref_exploration_queries_per_scan": 0,
+        "scholarly_base_queries_per_scan": 0,
+        "strand_a_protected_scholarly_queries_per_source": 0,
+        "strategic_gap_queries_per_scan": 0,
+        "precision_recall_queries_per_scan": 0,
+        "evidence_first_queries_per_scan": 0,
+        "finding_context_queries_per_scan": 0,
+        "curator_seed_queries_per_scan": 0,
+        "crossref_priority_tasks_per_scan": 0,
+        "crossref_source_first_journals_per_scan": 0,
+        "crossref_underrepresented_journals_per_scan": 0,
+        "priority_policy_journals_per_scan": 0,
+        "preferred_q1_journals_per_scan": 0,
+        "institution_full_census_each_scan": False,
+        "institution_sources_per_scan": 0,
+        "official_eu_priority_sources_per_scan": 0,
+        "evidence_report_priority_sources_per_scan": 0,
+        "frontier_gap_institution_extra_sources_per_scan": 0,
+        "institution_source_adapter_sources_per_scan": 0,
+        "primary_evidence_sources_per_scan": 0,
+        "primary_evidence_lane_enabled": False,
+        "direct_top_journal_sources": [],
+        "direct_top_journal_rotating_sources_per_scan": 0,
+
+        # Shared persisted cursors continue where normal production scans left off.
+        "journal_depth_enabled": True,
+        "journal_depth_journals_per_scan": 8,
+        "journal_depth_min_seconds_remaining": 240,
+        "journal_depth_stage_seconds": 180,
+        "priority_people_enabled": True,
+        "priority_people_per_scan": 18,
+        "priority_people_rows_per_person": 50,
+        "priority_people_abstract_recovery_per_scan": 8,
+        "priority_people_stage_seconds": 210,
+        "priority_people_trigger_below_scholarly_candidates": 999999,
+        "priority_people_context_fallback_per_scan": 6,
+        "priority_people_context_stage_seconds": 90,
+        "citation_snowball_enabled": True,
+        "citation_snowball_seed_limit": 24,
+        "citation_snowball_anchor_limit": 14,
+        "citation_snowball_reference_pool_limit": 120,
+        "citation_snowball_forward_rows": 35,
+        "citation_snowball_min_seconds_remaining": 210,
+        "citation_snowball_stage_seconds": 210,
+
+        # Sparse depth results trigger a wider continuation, not a softer admission gate.
+        "low_yield_fresh_rotation_enabled": True,
+        "low_yield_reserved_seconds": 420,
+        "low_yield_fresh_rotation_min_seconds_remaining": 150,
+        "low_yield_fresh_rotation_queries_per_source": 4,
+        "low_yield_fresh_rotation_institution_sources_per_wave": 10,
+        "low_yield_fresh_rotation_max_waves": 3,
+        "low_yield_fresh_rotation_stage_seconds": 125,
+        "low_yield_extended_fallback_enabled": True,
+        "low_yield_extended_fallback_min_seconds_remaining": 120,
+        "low_yield_extended_fallback_stage_seconds": 120,
+        "low_yield_extended_queries_per_source": 3,
+        "low_yield_extended_sources_per_scan": 4,
+        "frontier_gap_deepening_max_waves": 4,
+        "frontier_gap_deepening_max_waves_no_empty": 2,
+        "frontier_gap_deepening_queries_per_wave": 8,
+        "frontier_stubborn_recovery_enabled": True,
+
+        # Strand A only; retain enough protected tail for judgement and persistence.
+        "c_floor_rescue_enabled": False,
+        "c_floor_final_reserve_enabled": False,
+        "weak_signal_evidence_followup_enabled": False,
+        "quiet_scan_rescue_enabled": False,
+        "curator_candidate_testing_enabled": False,
+        "foresight_author_followup_enabled": False,
+        "source_failure_reallocation_enabled": True,
+        "legacy_a_recall_recovery_enabled": False,
+        "full_budget_continuation_enabled": False,
+        "network_reserve_seconds": 50,
+        "scan_finalize_reserve_seconds": 75,
     })
 
 
@@ -19384,6 +19481,8 @@ def main() -> int:
             # have sharply diminishing returns. Re-enable bounded anti-saturation
             # discovery without changing the Strand-A quality/admission gate.
             apply_quick_strand_a_antisaturation_config(CONFIG)
+            if RADAR_STRAND_A_DEEP_DISCOVERY:
+                apply_strand_a_deep_discovery_config(CONFIG)
         elif RADAR_QUICK_STRAND == "B":
             CONFIG["news_stage_seconds"] = 15
             CONFIG["openalex_stage_seconds"] = 220
@@ -19449,12 +19548,15 @@ def main() -> int:
     if budget_override and budget_seconds < configured_budget_seconds:
         mode = (
             "priority" if RADAR_PRIORITY_SCAN
+            else "Strand A deep discovery" if RADAR_STRAND_A_DEEP_DISCOVERY
             else f"quick Strand {RADAR_QUICK_STRAND}" if (RADAR_QUICK_SCAN and RADAR_QUICK_STRAND)
             else "quick sweep" if RADAR_QUICK_SCAN
             else "diagnostic"
         )
         detail = (
-            "selected-strand discovery allocation; same substantive admission gates"
+            "depth/continuation allocation; broad first pass skipped; same substantive Strand-A admission gate"
+            if RADAR_STRAND_A_DEEP_DISCOVERY
+            else "selected-strand discovery allocation; same substantive admission gates"
             if (RADAR_QUICK_SCAN and RADAR_QUICK_STRAND)
             else "high-yield lanes only; production depth stages disabled in memory"
             if RADAR_QUICK_SCAN
@@ -20273,7 +20375,8 @@ def main() -> int:
     with cf.ThreadPoolExecutor(max_workers=6) as ex:
         fut_news = ex.submit(
             safe_stage, "weak-signal news", collect_news, now, news_warnings, news_lookback, news_deadline,
-            list(dict.fromkeys(list(priority_news_queries()) + list(frontier_focus["queries"]) + high_order_news_focus))
+            [] if RADAR_STRAND_A_DEEP_DISCOVERY else list(dict.fromkeys(list(priority_news_queries()) + list(frontier_focus["queries"]) + high_order_news_focus)),
+            not RADAR_STRAND_A_DEEP_DISCOVERY,
         )
         fut_oa = ex.submit(
             safe_stage, "OpenAlex", collect_openalex, oa_from, warnings, oa_batch, oa_deadline, oa_query_dates,
@@ -22323,10 +22426,17 @@ def main() -> int:
                     # ordinary query-heavy pass. From wave 2 onward, spend fewer slots
                     # on reformulations and add source-first journal + institutional
                     # territory. This is the anti-saturation switch.
-                    anti_saturation_a = quick_strand_a_anti_saturation_wave(strand, wave_no)
+                    anti_saturation_a = bool(
+                        strand == "A"
+                        and (RADAR_STRAND_A_DEEP_DISCOVERY or quick_strand_a_anti_saturation_wave(strand, wave_no))
+                    )
                     if anti_saturation_a:
                         quick_strand_continuation["anti_saturation_waves"] += 1
-                    query_n = max(3, strand_query_n // 2) if anti_saturation_a else strand_query_n
+                    query_n = (
+                        2 if (strand == "A" and RADAR_STRAND_A_DEEP_DISCOVERY)
+                        else max(3, strand_query_n // 2) if anti_saturation_a
+                        else strand_query_n
+                    )
                     queries, query_next, _ = rotating_batch_excluding(
                         query_bank, qa_cursor, query_n, already
                     ) if query_bank else ([], qa_cursor, True)
@@ -23702,6 +23812,7 @@ def main() -> int:
             "full_budget_continuation_candidates": int(full_budget_continuation.get("candidates", 0)),
             "full_budget_continuation_news_candidates": int(full_budget_continuation.get("news_candidates", 0)),
             "full_budget_seconds_remaining_at_end": int(full_budget_continuation.get("seconds_remaining_at_end", 0) or 0),
+            "strand_a_deep_discovery_mode": bool(RADAR_STRAND_A_DEEP_DISCOVERY),
             "quick_strand_continuation_waves": int(quick_strand_continuation.get("waves", 0)),
             "quick_strand_minimum_runtime_seconds": int(quick_strand_continuation.get("minimum_runtime_seconds", 0)),
             "quick_strand_seconds_remaining_at_end": int(quick_strand_continuation.get("seconds_remaining_at_end", 0) or 0),
