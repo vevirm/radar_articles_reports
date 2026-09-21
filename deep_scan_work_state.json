@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-deep-scan-work-state-v1",
-  "updated_at": "2026-09-21T21:38:55Z",
+  "updated_at": "2026-09-21T22:50:03Z",
   "lanes": {
     "A": {
       "target_size": 36,
@@ -7658,7 +7658,7 @@
       "corpus_scope": "main"
     },
     "link:https://doi.org/10.1080/13501763.2026.2701223": {
-      "status": "deferred",
+      "status": "verified",
       "lane": "B",
       "assigned_at": "2026-09-14T07:30:45Z",
       "last_package_id": "worker-b-20260914T080755Z-00501c41f66a",
@@ -7708,7 +7708,9 @@
       "date": "2026-07-14",
       "url": "https://doi.org/10.1080/13501763.2026.2701223",
       "corpus_scope": "main",
-      "queue_priority": "strand_a"
+      "queue_priority": "strand_a",
+      "verified_at": "2026-09-21T22:50:02Z",
+      "verified_package_id": "hardcore-20260921T214943Z-b2dfd9dc29d8"
     },
     "link:https://www.cer.eu/sites/default/files/press_release_AvR_rearming_europe_9.6.26.pdf": {
       "status": "verified",
@@ -18268,7 +18270,7 @@
       "date": "2024-11-01",
       "url": "https://doi.org/10.1111/1758-5899.13459",
       "corpus_scope": "historical",
-      "status": "needs_manual_verification",
+      "status": "verified",
       "lane": "B",
       "assigned_at": "2026-09-15T08:15:24Z",
       "last_package_id": "worker-b-20260917T115900Z-93d5ce97efeb",
@@ -18464,7 +18466,9 @@
       ],
       "manual_verification_since": "2026-09-17T12:01:16Z",
       "manual_verification_reason": "Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP.",
-      "queue_priority": "strand_a"
+      "queue_priority": "strand_a",
+      "verified_at": "2026-09-21T22:50:03Z",
+      "verified_package_id": "hardcore-20260921T214943Z-b2dfd9dc29d8"
     },
     "historical:id:35b7726f3c33dbd3": {
       "title": "European Open Science Cloud - EOSC",
@@ -18499,7 +18503,7 @@
       "date": "2024-09-26",
       "url": "https://doi.org/10.1080/09557571.2024.2405915",
       "corpus_scope": "historical",
-      "status": "needs_manual_verification",
+      "status": "verified",
       "lane": "B",
       "assigned_at": "2026-09-15T08:15:24Z",
       "last_package_id": "worker-b-20260917T115900Z-93d5ce97efeb",
@@ -18695,7 +18699,9 @@
       ],
       "manual_verification_since": "2026-09-17T12:01:16Z",
       "manual_verification_reason": "Identity verified, but only abstract/landing-page information was reachable after all six steps; abstracts are not admissible evidence for KEEP/REVIEW/DROP.",
-      "queue_priority": "strand_a"
+      "queue_priority": "strand_a",
+      "verified_at": "2026-09-21T22:50:03Z",
+      "verified_package_id": "hardcore-20260921T214943Z-b2dfd9dc29d8"
     },
     "historical:id:50d118a3a332ccb5": {
       "title": "Competing ambitions regarding the global governance of artificial intelligence: China, the US , and the EU",
@@ -41467,6 +41473,61 @@
       "url": "https://allea.org/wp-content/uploads/2022/06/ALLEA-Response-to-Council-Conclusions.pdf",
       "corpus_scope": "historical",
       "queue_priority": "strand_a"
+    },
+    "historical:id:7f0d58a64874147a": {
+      "title": "Strategic Autonomy for Europe: Strength at Home and Strong in the World, Illusion or Realism",
+      "source_name": "Governance",
+      "date": "2023-01-01",
+      "url": "https://doi.org/10.1007/978-3-031-28678-0_8",
+      "corpus_scope": "historical",
+      "queue_priority": "strand_a"
+    },
+    "historical:id:8cd9114a2062c756": {
+      "title": "How the Heritage Foundation Is Wrong About the CHIPS Act",
+      "source_name": "Information Technology and Innovation Foundation",
+      "date": "2022-05-20",
+      "url": "https://itif.org/publications/2022/05/20/how-heritage-foundation-wrong-about-chips-act/",
+      "corpus_scope": "historical",
+      "queue_priority": "strand_a"
+    },
+    "historical:id:301ee4df61f7ebcf": {
+      "title": "Collaborative innovation in emerging innovation systems: Evidence from Central and Eastern Europe",
+      "source_name": "Journal of Technology Transfer",
+      "date": "2021-04-01",
+      "url": "https://doi.org/10.1007/s10961-020-09792-8",
+      "corpus_scope": "historical",
+      "queue_priority": "strand_a"
+    },
+    "historical:id:2fcac62cb78b158d": {
+      "title": "To Do: Pass a CHIPS Act for the Biopharma Industry",
+      "source_name": "Information Technology and Innovation Foundation",
+      "date": "2020-07-16",
+      "url": "https://itif.org/publications/2020/07/16/to-do-pass-a-chips-act-for-the-biopharma-industry/",
+      "corpus_scope": "historical",
+      "queue_priority": "strand_a"
+    },
+    "historical:id:12a963565322f382": {
+      "title": "After Covid-19: economic security in EU-Asia connectivity",
+      "source_name": "Asia Europe Journal",
+      "date": "2020-05-26",
+      "url": "https://doi.org/10.1007/s10308-020-00579-y",
+      "corpus_scope": "historical",
+      "queue_priority": "strand_a"
+    },
+    "historical:id:95cd1aa29322edeb": {
+      "title": "Education and Training as a Disruptive Dual Use Technology",
+      "source_name": "Prometheus",
+      "date": "2020-01-01",
+      "url": "https://doi.org/10.1007/978-3-030-28285-1_10",
+      "corpus_scope": "historical",
+      "queue_priority": "strand_a"
+    },
+    "historical:id:a34c49c48c80878c": {
+      "title": "How to reveal alternative futures for nations? | Demos Helsinki",
+      "source_name": "Demos Helsinki",
+      "date": "2015-09-21",
+      "url": "https://demoshelsinki.fi/how-to-reveal-alternative-futures-for-nationslangen/",
+      "corpus_scope": "historical"
     }
   },
   "packages": {

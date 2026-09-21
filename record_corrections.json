@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-09-21T21:38:55Z",
+  "updated_at": "2026-09-21T22:50:03Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -11242,6 +11242,37 @@
       ],
       "updated_at": "2026-09-21T21:38:54Z",
       "deep_scan_package_id": "hardcore-20260921T210249Z-91de7169dc46"
+    },
+    "historical:id:6212b03e377b75be": {
+      "fields": {
+        "source": "Cambridge Review of International Affairs"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Authoritative DOI identity for the substantively recovered article places it in Cambridge Review of International Affairs, not International Affairs.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.iir.cz/en/the-paradox-of-semiconductors-eu-governance-between-sovereignty-and-interdependence-1"
+      ],
+      "updated_at": "2026-09-21T22:50:03Z",
+      "deep_scan_package_id": "hardcore-20260921T214943Z-b2dfd9dc29d8"
+    },
+    "historical:id:ea172fb497c5e020": {
+      "fields": {
+        "title": "From strategic autonomy to strategic partnership: EU–India relations in health diplomacy",
+        "date": "2024-11-06"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The full Wiley record gives the plain title and states “First published: 06 November 2024”; the scanner stored markup in the title and 2024-11-01.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://onlinelibrary.wiley.com/doi/10.1111/1758-5899.13459"
+      ],
+      "updated_at": "2026-09-21T22:50:03Z",
+      "deep_scan_package_id": "hardcore-20260921T214943Z-b2dfd9dc29d8"
     }
   }
 }

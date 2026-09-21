@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-admission-v1",
-  "updated_at": "2026-09-21T21:38:55Z",
+  "updated_at": "2026-09-21T22:50:03Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "decision": "drop",
@@ -15801,28 +15801,28 @@
       "recovery_attempts": 3
     },
     "historical:id:ea172fb497c5e020": {
-      "decision": "needs_manual_verification",
-      "target_strand": "",
-      "reason_code": "NEEDS_MANUAL_VERIFICATION",
-      "reason": "Identity is credible, but substantive evidence remained inaccessible after three validated Deep Scan recovery passes; excluded from active reasoning until hands-on verification supplies materially new access.",
-      "source": "deep_scan_v2",
+      "decision": "keep",
+      "target_strand": "A",
+      "reason_code": "A_SUBSTANTIVE_EU_RI",
+      "reason": "The full paper directly analyses EU–India health diplomacy and science/technology/R&D cooperation, including research funding, technology transfer, health-data rules and joint research facilities, making it substantive historical European R&I context.",
+      "source": "deep_scan_hardcore_terminal",
       "corpus_scope": "historical",
-      "updated_at": "2026-09-17T12:01:16Z",
-      "deep_scan_package_id": "worker-b-20260917T111410Z-93d5ce97efeb",
-      "verification_note": "Identity verified: Global Policy, November 2024 issue, Pattanshetty, Inamdar, Poojary, Kickbusch, Brand. Open access on Wiley but Wiley returns 403; Maastricht University CRIS page yields abstract and citation only, no file reachable. Second pass found no repository or author copy with retrievable text.",
-      "recovery_attempts": 3
+      "updated_at": "2026-09-21T22:50:03Z",
+      "deep_scan_package_id": "hardcore-20260921T214943Z-b2dfd9dc29d8",
+      "verification_note": "Full Wiley HTML was recovered. It reports qualitative content analysis of all 16 EU–India summit joint statements and gives detailed discussion and recommendations on R&D, technology transfer, regulation, supply chains, data and research funding.",
+      "duplicate_of": ""
     },
     "historical:id:6212b03e377b75be": {
-      "decision": "needs_manual_verification",
-      "target_strand": "",
-      "reason_code": "NEEDS_MANUAL_VERIFICATION",
-      "reason": "Identity is credible, but substantive evidence remained inaccessible after three validated Deep Scan recovery passes; excluded from active reasoning until hands-on verification supplies materially new access.",
-      "source": "deep_scan_v2",
+      "decision": "keep",
+      "target_strand": "A",
+      "reason_code": "A_SUBSTANTIVE_EU_RI",
+      "reason": "The work directly analyses EU semiconductor governance, digital sovereignty, research/economic policy and dependence on globally distributed production—substantive historical evidence on a strategic European technology capability.",
+      "source": "deep_scan_hardcore_terminal",
       "corpus_scope": "historical",
-      "updated_at": "2026-09-17T12:01:16Z",
-      "deep_scan_package_id": "worker-b-20260917T111410Z-93d5ce97efeb",
-      "verification_note": "Identity verified via Crossref: the journal is Cambridge Review of International Affairs (online 26 Sep 2024), not 'International Affairs' as the scanner states; sole author Linda Monsees. Open access on T&F, which blocks automated access (403).",
-      "recovery_attempts": 3
+      "updated_at": "2026-09-21T22:50:03Z",
+      "deep_scan_package_id": "hardcore-20260921T214943Z-b2dfd9dc29d8",
+      "verification_note": "The IIR page gives substantive details of the article’s argument about EU semiconductor governance, digital sovereignty, globally distributed production, supply-chain threats and subsidy politics. Identity sources additionally correct the journal name.",
+      "duplicate_of": ""
     },
     "historical:id:40a66178c02fbfdc": {
       "decision": "needs_manual_verification",
@@ -20188,6 +20188,18 @@
       "updated_at": "2026-09-21T21:38:55Z",
       "deep_scan_package_id": "hardcore-20260921T210249Z-91de7169dc46",
       "verification_note": "A legitimate substantive matching source was recovered and read deeply enough to make the normal Deep Scan decision; no blocked access controls were bypassed.",
+      "duplicate_of": ""
+    },
+    "link:https://doi.org/10.1080/13501763.2026.2701223": {
+      "decision": "keep",
+      "target_strand": "A",
+      "reason_code": "A_SUBSTANTIVE_EU_RI",
+      "reason": "The study directly examines EU digital-sovereignty funding, infrastructure and network/policy representation and finds consequential core–periphery inequalities, a substantive European digital/R&I capability trajectory.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-21T22:50:02Z",
+      "deep_scan_package_id": "hardcore-20260921T214943Z-b2dfd9dc29d8",
+      "verification_note": "Identity is verified and the author’s institute provides substantive evidence about the study’s examined variables and central finding, sufficient for a Strand A decision despite the publisher block.",
       "duplicate_of": ""
     }
   }
