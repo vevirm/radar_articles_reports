@@ -47,27 +47,59 @@ jobs:
       - name: Install Deep Scan dependencies
         run: pip install --quiet -r requirements.txt
 
-      - name: Import, rebuild active corpus, and validate
+      - name: Import, promote verified private A, rebuild active corpus, and validate
         shell: bash
         run: |
           set -euo pipefail
-          python scripts/import_deep_scan_results.py --work-state deep_scan_work_state.json
+          python scripts/build_deep_scan_corpus.py --output .deep_scan_combined.json
+          python scripts/import_deep_scan_results.py \
+            --corpus .deep_scan_combined.json \
+            --work-state deep_scan_work_state.json
+          python scripts/promote_deep_a_candidates.py
           python scripts/check_reader_text.py
           python scripts/rebuild_active_radar.py --report migration-reports/latest-deep-scan-active-rebuild.json
           python scripts/check_active_corpus.py
           node scripts/generate_stuff_workbook.js
 
-          # Deep Scan may change derived products, but must never destructively
-          # rewrite the raw evidence collections in radar.json.
+          # Existing raw evidence is immutable. The sole exception is append-only promotion
+          # of authoritative Deep Scan KEEP results from the private Deep-A pool into A/B.
           python3 - <<'PY'
-          import json, subprocess
+          import json, re, subprocess
           from pathlib import Path
+
+          def clean(v):
+              return re.sub(r'\s+', ' ', str(v or '')).strip()
+          def key(row):
+              link=clean(row.get('link') or row.get('url'))
+              if link: return 'link:'+link
+              doi=clean(row.get('doi') or row.get('_doi')).lower()
+              if doi:
+                  doi=re.sub(r'^https?://(?:dx\.)?doi\.org/', '', doi).removeprefix('doi:')
+                  return 'doi:'+doi
+              rid=clean(row.get('id') or row.get('record_id') or row.get('fingerprint'))
+              return 'id:'+rid if rid else ''
+
           before=json.loads(subprocess.check_output(['git','show','HEAD:radar.json']).decode('utf-8'))
           after=json.loads(Path('radar.json').read_text(encoding='utf-8'))
-          for key in ('strand_a','strand_b','strand_c','frontier_evidence','ab_archive','signal_archive'):
-              if before.get(key) != after.get(key):
-                  raise SystemExit(f'Deep Scan rebuild unexpectedly modified raw evidence collection {key}')
-          print('Raw evidence immutability check passed.')
+          report_path=Path('migration-reports/latest-deep-a-promotion.json')
+          report=json.loads(report_path.read_text(encoding='utf-8')) if report_path.exists() else {'promoted': []}
+          allowed={(x.get('record_key'), x.get('target_strand')) for x in report.get('promoted',[]) if isinstance(x,dict)}
+
+          for collection in ('strand_c','frontier_evidence','ab_archive','signal_archive'):
+              if before.get(collection) != after.get(collection):
+                  raise SystemExit(f'Deep Scan unexpectedly modified protected raw collection {collection}')
+
+          for collection, strand in (('strand_a','A'),('strand_b','B')):
+              old=before.get(collection,[]) if isinstance(before.get(collection),list) else []
+              new=after.get(collection,[]) if isinstance(after.get(collection),list) else []
+              if new[:len(old)] != old:
+                  raise SystemExit(f'Deep Scan changed existing raw records in {collection}; only append-only promotion is allowed')
+              extras=new[len(old):]
+              extra_pairs={(key(x), strand) for x in extras if isinstance(x,dict)}
+              expected={(k,t) for (k,t) in allowed if t == strand}
+              if extra_pairs != expected:
+                  raise SystemExit(f'Unexpected Deep-A promotion set in {collection}: {extra_pairs!r} vs {expected!r}')
+          print(f'Raw evidence safety check passed; verified private promotions: {len(allowed)}.')
           PY
 
       - name: Refresh both persistent worker lanes
@@ -75,22 +107,29 @@ jobs:
         run: |
           set -euo pipefail
           rm -rf deep_scan_workers
+          rm -f .deep_scan_combined.json
+          python scripts/build_deep_scan_corpus.py --output .deep_scan_combined.json
           python scripts/prepare_deep_scan_package.py \
+            --corpus .deep_scan_combined.json \
             --output-dir deep_scan_workers/worker-A \
             --lane A --lane-size 36 --batch-size 12 \
             --work-state deep_scan_work_state.json \
             --status-file DEEP_SCAN_STATUS.md --write-work-state
           python scripts/prepare_deep_scan_package.py \
+            --corpus .deep_scan_combined.json \
             --output-dir deep_scan_workers/worker-B \
             --lane B --lane-size 36 --batch-size 12 \
             --work-state deep_scan_work_state.json \
             --status-file DEEP_SCAN_STATUS.md --write-work-state
+          rm -f .deep_scan_combined.json
 
           unexpected="$(git diff --name-only -- . \
             ':!reader_text.json' ':!admission_state.json' ':!record_corrections.json' \
             ':!radar.json' ':!radar_active.json' ':!stuff/source_merit_ranking.xlsx' \
-            ':!migration-reports/latest-deep-scan-active-rebuild.json' ':!deep_scan_inbox/**' \
-            ':!deep_scan_work_state.json' ':!DEEP_SCAN_STATUS.md' || true)"
+            ':!migration-reports/latest-deep-scan-active-rebuild.json' \
+            ':!migration-reports/latest-deep-a-promotion.json' ':!deep_scan_inbox/**' \
+            ':!deep_scan_work_state.json' ':!DEEP_SCAN_STATUS.md' \
+            ':!deep_a_candidates.json' ':!deep_a_candidate_archive.json' || true)"
           if [[ -n "$unexpected" ]]; then
             echo '::error::Deep Scan import changed an unexpected tracked file. Refusing to save.'
             printf '%s\n' "$unexpected"
@@ -115,8 +154,10 @@ jobs:
           git add \
             reader_text.json admission_state.json record_corrections.json \
             radar.json radar_active.json stuff/source_merit_ranking.xlsx \
-            migration-reports/latest-deep-scan-active-rebuild.json deep_scan_inbox \
-            deep_scan_work_state.json DEEP_SCAN_STATUS.md
+            migration-reports/latest-deep-scan-active-rebuild.json \
+            migration-reports/latest-deep-a-promotion.json deep_scan_inbox \
+            deep_scan_work_state.json DEEP_SCAN_STATUS.md \
+            deep_a_candidates.json deep_a_candidate_archive.json
           if git diff --cached --quiet; then
             echo 'No valid Deep Scan results or worker-state changes to commit.'
             exit 0
@@ -147,10 +188,10 @@ jobs:
           cat >> "$GITHUB_STEP_SUMMARY" <<'EOF2'
           ## Deep Scan V2 import
 
-          Returned work is authoritative only after validation. Raw scanner evidence remains preserved in `radar.json`; the active/readable corpus is rebuilt in `radar_active.json`.
+          Returned work is authoritative only after validation. Existing raw scanner evidence remains preserved; a private Deep-A candidate is appended to the public corpus only after an authoritative Deep Scan KEEP. The active/readable corpus is then rebuilt in `radar_active.json`.
 
           ### Parallel work model
-          - Worker A and Worker B are persistent, non-overlapping lanes reserved in FIFO assignment order.
+          - Worker A and Worker B are persistent, non-overlapping lanes. New assignments prioritise public unverified Strand-A records, then private Strand-A candidates, then other Main Radar work, then Historical work.
           - A returned file may contain only a carefully completed prefix. Unfinished records stay assigned rather than being forgotten.
           - A later lane may finish before the earlier lane; this does not let newly discovered records jump the queue because assignment itself remains FIFO.
           - If a work's identity is confirmed but substantive evidence is still inaccessible after all six recovery steps, the worker may use `defer`; this records the audited blockage without inventing an admission decision.

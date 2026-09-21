@@ -52,12 +52,15 @@ jobs:
             exit 1
           fi
           rm -rf deep_scan_workers
+          python scripts/build_deep_scan_corpus.py --output .deep_scan_combined.json
           python scripts/prepare_deep_scan_package.py \
+            --corpus .deep_scan_combined.json \
             --output-dir deep_scan_workers/worker-A \
             --lane A --lane-size "$size" --batch-size 12 \
             --work-state deep_scan_work_state.json \
             --status-file DEEP_SCAN_STATUS.md --write-work-state
           python scripts/prepare_deep_scan_package.py \
+            --corpus .deep_scan_combined.json \
             --output-dir deep_scan_workers/worker-B \
             --lane B --lane-size "$size" --batch-size 12 \
             --work-state deep_scan_work_state.json \
@@ -109,7 +112,7 @@ jobs:
           cat >> "$GITHUB_STEP_SUMMARY" <<'EOF2'
           ## Parallel Deep Scan workers are ready
 
-          GitHub has persistently reserved two non-overlapping FIFO lanes. Download **deep-scan-worker-A** for one browsing-capable LLM and **deep-scan-worker-B** for the other.
+          GitHub has persistently reserved two non-overlapping lanes. New free slots prioritise public unverified Strand-A records, then private Strand-A candidates, then other Main Radar work, then Historical Radar work. Download **deep-scan-worker-A** for one browsing-capable LLM and **deep-scan-worker-B** for the other.
 
           Each ZIP is self-contained and tells a fresh chat exactly what to do. A worker may return a carefully completed prefix instead of finishing the whole lane. Upload each returned `deep_scan_results.json` to `deep_scan_inbox`; the import workflow records completed work, keeps unfinished assignments, refills both lanes from the oldest unassigned queue, and publishes refreshed worker artifacts.
 

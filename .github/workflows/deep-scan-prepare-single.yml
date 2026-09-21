@@ -20,6 +20,8 @@ concurrency:
 
 jobs:
   prepare-single:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -50,7 +52,9 @@ jobs:
             exit 1
           fi
           rm -rf deep_scan_single
+          python scripts/build_deep_scan_corpus.py --output .deep_scan_combined.json
           python scripts/prepare_deep_scan_package.py \
+            --corpus .deep_scan_combined.json \
             --output-dir deep_scan_single \
             --max-records "$size" --batch-size 12 \
             --work-state deep_scan_work_state.json \
@@ -60,6 +64,38 @@ jobs:
           fi
           if [[ -f deep_scan_single/NO_DEEP_SCAN_NEEDED.txt ]]; then
             cat deep_scan_single/NO_DEEP_SCAN_NEEDED.txt
+          fi
+
+      - name: Reserve the exact single-package order
+        if: ${{ hashFiles('deep_scan_single/deep_scan_package.zip') != '' }}
+        run: |
+          python scripts/reserve_single_deep_scan_package.py \
+            --package deep_scan_single/deep_scan_package.zip \
+            --work-state deep_scan_work_state.json
+
+      - name: Configure secure push authentication
+        if: ${{ hashFiles('deep_scan_single/deep_scan_package.zip') != '' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'radar-deep-scan-coordinator'
+          git config user.email 'actions@github.com'
+          auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
+          git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${auth}"
+
+      - name: Save single-package reservation
+        if: ${{ hashFiles('deep_scan_single/deep_scan_package.zip') != '' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add deep_scan_work_state.json
+          if git diff --cached --quiet; then
+            echo 'Single-package reservation already current.'
+          else
+            git commit -m 'Deep Scan V2: reserve single package order'
+            git push origin HEAD:main
           fi
 
       - name: Upload the single Deep Scan package
@@ -81,7 +117,12 @@ jobs:
 
           Download **deep-scan-single-package**. Inside it, use the single `deep_scan_package.zip` with one browsing-capable LLM.
 
-          The package uses the same authoritative Deep Scan V2 instructions and the same FIFO scheduling policy as the existing system: unresolved Main Radar work first, then Historical Radar work, while terminal hands-on cases stay excluded.
+          The package uses the same authoritative Deep Scan V2 instructions. Scheduling now puts public unverified Strand-A records first, then private Strand-A candidates, then other Main Radar work, then Historical Radar work; terminal hands-on cases stay excluded. Private candidates remain invisible unless Deep Scan returns KEEP.
 
           This workflow does not replace or delete the existing parallel-package workflow. Returned `deep_scan_results.json` files still go through the normal **Deep Scan V2 — Import Returned Results** workflow.
           EOF2
+
+      - name: Remove temporary repository credential
+        if: always()
+        shell: bash
+        run: git config --local --unset-all http.https://github.com/.extraheader >/dev/null 2>&1 || true
