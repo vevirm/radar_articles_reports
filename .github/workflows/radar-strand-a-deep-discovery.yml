@@ -44,6 +44,28 @@ jobs:
       - name: Confirm the protected main scanner is unchanged
         run: python scripts/check_reasoning_reform_core_freeze.py --group scanner_hard_core
 
+      - name: Restore Deep Scan work state touched by regression fixtures
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Some Deep Scan regression tests intentionally exercise the default work-state
+          # path and can leave fixture records in the checked-out work tree.  Restore the
+          # authoritative repository copy before the private harvest so the later safety
+          # guard measures only changes made by Deep-A itself.
+          git restore --worktree --source=HEAD -- deep_scan_work_state.json
+
+      - name: Confirm clean tree before private harvest
+        shell: bash
+        run: |
+          set -euo pipefail
+          dirty="$({ git diff --name-only; git ls-files --others --exclude-standard; } | sort -u)"
+          if [[ -n "$dirty" ]]; then
+            echo '::error::Regression/setup steps left unexpected repository changes before Deep-A.'
+            printf '%s\n' "$dirty"
+            exit 1
+          fi
+
+
       - name: Run private Strand A harvest
         env:
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
