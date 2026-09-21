@@ -710,44 +710,52 @@ def apply_strand_a_deep_discovery_config(config: dict[str, Any]) -> None:
         "direct_top_journal_sources": [],
         "direct_top_journal_rotating_sources_per_scan": 0,
 
-        # Shared persisted cursors continue where normal production scans left off.
+        # The opening phase is already diversified: bounded journal depth, exact-author
+        # traversal and citation snowballing. Keep it short enough that most of the
+        # 24-minute allocation reaches the rotating continuation rather than being spent
+        # before the anti-saturation controller becomes visible.
         "journal_depth_enabled": True,
-        "journal_depth_journals_per_scan": 8,
-        "journal_depth_min_seconds_remaining": 240,
-        "journal_depth_stage_seconds": 180,
+        "journal_depth_journals_per_scan": 6,
+        "journal_depth_min_seconds_remaining": 180,
+        "journal_depth_stage_seconds": 95,
         "priority_people_enabled": True,
-        "priority_people_per_scan": 18,
-        "priority_people_rows_per_person": 50,
-        "priority_people_abstract_recovery_per_scan": 8,
-        "priority_people_stage_seconds": 210,
+        "priority_people_per_scan": 12,
+        "priority_people_rows_per_person": 45,
+        "priority_people_abstract_recovery_per_scan": 6,
+        "priority_people_stage_seconds": 105,
         "priority_people_trigger_below_scholarly_candidates": 999999,
-        "priority_people_context_fallback_per_scan": 6,
-        "priority_people_context_stage_seconds": 90,
+        # Context-query fallbacks are query reformulations. Deep-A v2 prefers to leave
+        # that time to new journals, institutions and citation neighbourhoods.
+        "priority_people_context_fallback_per_scan": 0,
+        "priority_people_context_stage_seconds": 0,
         "citation_snowball_enabled": True,
-        "citation_snowball_seed_limit": 24,
-        "citation_snowball_anchor_limit": 14,
-        "citation_snowball_reference_pool_limit": 120,
-        "citation_snowball_forward_rows": 35,
-        "citation_snowball_min_seconds_remaining": 210,
-        "citation_snowball_stage_seconds": 210,
+        "citation_snowball_seed_limit": 18,
+        "citation_snowball_anchor_limit": 10,
+        "citation_snowball_reference_pool_limit": 90,
+        "citation_snowball_forward_rows": 30,
+        "citation_snowball_min_seconds_remaining": 150,
+        "citation_snowball_stage_seconds": 110,
 
-        # Sparse depth results trigger a wider continuation, not a softer admission gate.
+        # Keep a large protected tail, but do NOT spend it on the generic low-yield
+        # query rotation or the 4-6 month fallback. The controller simply releases the
+        # reserve into the dedicated Deep-A continuation below. This is the key v2
+        # distinction: the main scanner did the generic freshness/fallback work already.
         "low_yield_fresh_rotation_enabled": True,
-        "low_yield_reserved_seconds": 420,
+        "low_yield_reserved_seconds": 900,
         "low_yield_fresh_rotation_min_seconds_remaining": 150,
-        "low_yield_fresh_rotation_queries_per_source": 4,
-        "low_yield_fresh_rotation_institution_sources_per_wave": 10,
-        "low_yield_fresh_rotation_max_waves": 3,
-        "low_yield_fresh_rotation_stage_seconds": 125,
-        "low_yield_extended_fallback_enabled": True,
-        "low_yield_extended_fallback_min_seconds_remaining": 120,
-        "low_yield_extended_fallback_stage_seconds": 120,
-        "low_yield_extended_queries_per_source": 3,
-        "low_yield_extended_sources_per_scan": 4,
-        "frontier_gap_deepening_max_waves": 4,
-        "frontier_gap_deepening_max_waves_no_empty": 2,
-        "frontier_gap_deepening_queries_per_wave": 8,
-        "frontier_stubborn_recovery_enabled": True,
+        "low_yield_fresh_rotation_queries_per_source": 0,
+        "low_yield_fresh_rotation_institution_sources_per_wave": 0,
+        "low_yield_fresh_rotation_max_waves": 1,
+        "low_yield_fresh_rotation_stage_seconds": 30,
+        "low_yield_extended_fallback_enabled": False,
+        "low_yield_extended_fallback_min_seconds_remaining": 999999,
+        "low_yield_extended_fallback_stage_seconds": 30,
+        "low_yield_extended_queries_per_source": 0,
+        "low_yield_extended_sources_per_scan": 0,
+        "frontier_gap_deepening_max_waves": 0,
+        "frontier_gap_deepening_max_waves_no_empty": 0,
+        "frontier_gap_deepening_queries_per_wave": 0,
+        "frontier_stubborn_recovery_enabled": False,
 
         # Strand A only; retain enough protected tail for judgement and persistence.
         "c_floor_rescue_enabled": False,
@@ -759,7 +767,8 @@ def apply_strand_a_deep_discovery_config(config: dict[str, Any]) -> None:
         "source_failure_reallocation_enabled": True,
         "legacy_a_recall_recovery_enabled": False,
         "full_budget_continuation_enabled": False,
-        "network_reserve_seconds": 50,
+        "manual_recovery_stage_seconds": 30,
+        "network_reserve_seconds": 45,
         "scan_finalize_reserve_seconds": 75,
     })
 
@@ -1016,6 +1025,75 @@ def least_recent_probe_batch(state: dict[str, Any], lane: str, items: Iterable[A
         indexed.append((stamp or "", visits, idx, item))
     indexed.sort(key=lambda row: (row[0], row[1], row[2]))
     return [row[3] for row in indexed[: min(len(indexed), max(1, int(limit)))]]
+
+
+def least_recent_any_lane_batch(
+    state: dict[str, Any],
+    items: Iterable[Any],
+    limit: int,
+    excluded: Iterable[Any] | None = None,
+) -> list[Any]:
+    """Pick probes least recently executed anywhere in the persisted scheduler.
+
+    Deep-A uses this across the main scanner and its own prior runs.  A query or source
+    touched recently by any registered lane therefore falls behind genuinely neglected
+    territory.  ``excluded`` keeps the current run from cycling back until fresh territory
+    is exhausted.
+    """
+    seq = list(dict.fromkeys(items))
+    if not seq or int(limit or 0) <= 0:
+        return []
+    blocked = set(excluded or [])
+    registry = state.get("probe_registry") if isinstance(state.get("probe_registry"), dict) else {}
+    token_meta: dict[str, tuple[str, int]] = {}
+    for key, raw_meta in registry.items():
+        if not isinstance(raw_meta, dict):
+            continue
+        token = clean_text(key).rsplit(":", 1)[-1]
+        if not token:
+            continue
+        stamp = clean_text(raw_meta.get("last_executed_at"))
+        visits = int(raw_meta.get("visits", 0) or 0)
+        old_stamp, old_visits = token_meta.get(token, ("", 0))
+        token_meta[token] = (max(old_stamp, stamp), old_visits + visits)
+
+    ranked: list[tuple[str, int, int, Any]] = []
+    for idx, item in enumerate(seq):
+        stamp, visits = token_meta.get(_probe_token(item), ("", 0))
+        ranked.append((stamp, visits, idx, item))
+    ranked.sort(key=lambda row: (row[0], row[1], row[2]))
+    ordered = [row[3] for row in ranked]
+    fresh = [item for item in ordered if item not in blocked]
+    chosen = fresh[: int(limit)]
+    if len(chosen) < int(limit):
+        chosen.extend(item for item in ordered if item in blocked and item not in chosen)
+    return chosen[: int(limit)]
+
+
+def deep_a_wave_profile(wave_no: int, zero_yield_streak: int = 0) -> tuple[str, int, int, int]:
+    """Return (label, query slots, journal slots, institution slots) for Deep-A v2.
+
+    The profiles deliberately change method mix from wave to wave.  After repeated
+    zero-candidate waves they become more source-heavy instead of simply issuing more
+    reformulated scholarly queries.
+    """
+    wave = max(1, int(wave_no or 1))
+    zero = max(0, int(zero_yield_streak or 0))
+    if zero >= 2:
+        profiles = (
+            ("journal-heavy", 0, 7, 8),
+            ("institution-heavy", 0, 4, 12),
+            ("mixed-new-territory", 1, 5, 10),
+            ("bounded-scholarly-reprobe", 1, 3, 8),
+        )
+    else:
+        profiles = (
+            ("source-balanced", 1, 4, 8),
+            ("journal-heavy", 0, 6, 8),
+            ("institution-heavy", 1, 3, 10),
+            ("scholarly-depth", 2, 4, 6),
+        )
+    return profiles[(wave - 1) % len(profiles)]
 
 
 def note_probe_execution(state: dict[str, Any], lane: str, executed: Iterable[Any], at_iso: str) -> None:
@@ -19568,6 +19646,11 @@ def main() -> int:
         )
     else:
         log_progress(f"Scanner time budget: {budget_seconds}s production profile")
+    if RADAR_STRAND_A_DEEP_DISCOVERY:
+        log_progress(
+            "Deep-A v2 active: broad first pass disabled; starting with journal depth, "
+            "exact-author traversal and citation snowballing, then least-recent source rotation"
+        )
     now = dt.datetime.now(dt.timezone.utc)
     now_iso = now.isoformat(timespec="minutes").replace("+00:00", "Z")
     warnings: list[str] = []
@@ -20481,7 +20564,7 @@ def main() -> int:
     # authenticated OpenAlex key that is backwards: low yield is exactly when researcher,
     # journal and citation neighbourhoods should get a bounded chance to find new evidence.
     auxiliary_scholarly_allowed = True
-    if primary_new_ab >= primary_target_new_ab:
+    if primary_new_ab >= primary_target_new_ab and not RADAR_STRAND_A_DEEP_DISCOVERY:
         LOW_YIELD_RESERVE_ACTIVE = False
         log_progress(
             f"Primary discovery already has {primary_new_ab} publishable genuinely new A/B item(s); "
@@ -20743,7 +20826,7 @@ def main() -> int:
     # run correctly preserved all cursors, but that also meant these sources inherited
     # the 14-day incremental window and could not recover older May-July material.
     # This separate lane fixes that without resetting or moving any normal cursor.
-    if rule_fix_source_recovery_needed and budget_remaining() > 210:
+    if rule_fix_source_recovery_needed and not RADAR_STRAND_A_DEEP_DISCOVERY and budget_remaining() > 210:
         rule_fix_source_recovery_attempted = True
         old_signal_window_start = SIGNAL_WINDOW_START_DATE
         # Historical source recovery is for missed A/B publications. Strand C remains
@@ -21321,6 +21404,11 @@ def main() -> int:
     LOW_YIELD_RESERVE_ACTIVE = False
     low_yield_reserved_seconds = int(LOW_YIELD_RESERVE_SECONDS or 0)
     low_yield_actual_seconds_remaining = max(0, int(total_budget_remaining()))
+    if RADAR_STRAND_A_DEEP_DISCOVERY:
+        log_progress(
+            "Deep-A v2: opening journal/researcher/citation phase complete; "
+            "generic low-yield and 4-6 month fallback are skipped; entering diversified continuation"
+        )
 
     # Target-driven low-yield rule: after the ordinary scholarly + institutional pass,
     # count only genuinely new, unique A/B records that already passed the normal gates.
@@ -21375,6 +21463,7 @@ def main() -> int:
     }
     if (
         low_yield_rotation["enabled"]
+        and not RADAR_STRAND_A_DEEP_DISCOVERY
         and low_yield_rotation["new_ab_before"] <= low_yield_threshold
         and total_budget_remaining() > 240
     ):
@@ -21427,6 +21516,7 @@ def main() -> int:
     # reserve. It still passes every ordinary EU-R&I-geopolitics admission rule.
     if (
         low_yield_rotation["enabled"]
+        and not RADAR_STRAND_A_DEEP_DISCOVERY
         and low_yield_rotation["new_ab_after_fresh_rotation"] <= low_yield_threshold
         and total_budget_remaining() > 210
     ):
@@ -21515,6 +21605,7 @@ def main() -> int:
     fresh_max_waves = max(1, int(CONFIG.get("low_yield_fresh_rotation_max_waves", 3) or 3))
     if (
         low_yield_rotation["enabled"]
+        and not RADAR_STRAND_A_DEEP_DISCOVERY
         and low_yield_rotation["new_ab_before"] <= low_yield_threshold
         and budget_remaining() > fresh_min_remaining
         and (fresh_bank or fresh_inst_domain_bank)
@@ -21647,7 +21738,7 @@ def main() -> int:
     # A second low-yield fallback may look into months 4-6, but only the existing
     # Highest source-merit band is eligible for admission. This is extra recall, not
     # a relaxation of aboutness, EU scope, language, document-type or quality gates.
-    extended_fallback_enabled = bool(CONFIG.get("low_yield_extended_fallback_enabled", True))
+    extended_fallback_enabled = bool(CONFIG.get("low_yield_extended_fallback_enabled", True)) and not RADAR_STRAND_A_DEEP_DISCOVERY
     extended_fallback_min_remaining = max(45, int(CONFIG.get("low_yield_extended_fallback_min_seconds_remaining", 150) or 150))
     if (
         extended_fallback_enabled
@@ -22078,6 +22169,8 @@ def main() -> int:
         "anti_saturation_waves": 0,
         "anti_saturation_journal_candidates": 0,
         "anti_saturation_institution_candidates": 0,
+        "deep_a_zero_yield_streak_max": 0,
+        "deep_a_method_profiles": [],
         "seconds_remaining_at_start": max(0, int(total_budget_remaining())),
         "seconds_remaining_at_end": None,
     }
@@ -22398,6 +22491,7 @@ def main() -> int:
         qa_inst_cursor = int(state.get("quick_strand_a_institution_cursor", 0) or 0)
         qc_cursor = int(state.get("quick_strand_c_news_cursor", 0) or 0)
         qi_cursor = int(state.get("quick_strand_c_institution_cursor", 0) or 0)
+        deep_a_zero_yield_streak = 0
 
         while total_budget_remaining() > quick_finalize_reserve + 5:
             quick_strand_continuation["attempted"] = True
@@ -22422,28 +22516,37 @@ def main() -> int:
                     executed_oa_before = set(execution_stats.get("openalex_queries", set()))
                     executed_cr_before = set(execution_stats.get("crossref_broad_queries", set()))
                     already = executed_oa_before | executed_cr_before
-                    # The initial focused-A stages plus continuation wave 1 are the
-                    # ordinary query-heavy pass. From wave 2 onward, spend fewer slots
-                    # on reformulations and add source-first journal + institutional
-                    # territory. This is the anti-saturation switch.
+                    # Deep-A v2 is anti-saturation from its first continuation wave.
+                    # It varies the method mix and chooses least-recent territory across
+                    # both normal scanner runs and prior Deep-A runs. The ordinary 10-min
+                    # focused-A mode keeps its original wave-2 anti-saturation switch.
                     anti_saturation_a = bool(
                         strand == "A"
                         and (RADAR_STRAND_A_DEEP_DISCOVERY or quick_strand_a_anti_saturation_wave(strand, wave_no))
                     )
                     if anti_saturation_a:
                         quick_strand_continuation["anti_saturation_waves"] += 1
-                    query_n = (
-                        2 if (strand == "A" and RADAR_STRAND_A_DEEP_DISCOVERY)
-                        else max(3, strand_query_n // 2) if anti_saturation_a
-                        else strand_query_n
-                    )
-                    queries, query_next, _ = rotating_batch_excluding(
-                        query_bank, qa_cursor, query_n, already
-                    ) if query_bank else ([], qa_cursor, True)
-                    if not queries and query_bank:
-                        # Depth rotation is still productive once every exact query has
-                        # appeared in this run; collectors advance their persisted pages.
-                        queries, query_next, _ = rotating_batch(query_bank, qa_cursor, query_n)
+                    deep_profile = ""
+                    journal_n_this_wave = strand_journal_n
+                    inst_n_this_wave = strand_inst_n
+                    if strand == "A" and RADAR_STRAND_A_DEEP_DISCOVERY:
+                        deep_profile, query_n, journal_n_this_wave, inst_n_this_wave = deep_a_wave_profile(
+                            wave_no, deep_a_zero_yield_streak
+                        )
+                        quick_strand_continuation["deep_a_method_profiles"].append(deep_profile)
+                        queries = least_recent_any_lane_batch(
+                            state, query_bank, query_n, already
+                        ) if query_bank and query_n else []
+                        query_next = qa_cursor
+                    else:
+                        query_n = max(3, strand_query_n // 2) if anti_saturation_a else strand_query_n
+                        queries, query_next, _ = rotating_batch_excluding(
+                            query_bank, qa_cursor, query_n, already
+                        ) if query_bank else ([], qa_cursor, True)
+                        if not queries and query_bank:
+                            # Depth rotation is still productive once every exact query has
+                            # appeared in this run; collectors advance their persisted pages.
+                            queries, query_next, _ = rotating_batch(query_bank, qa_cursor, query_n)
 
                     query_dates: dict[str, dt.date] = {}
                     query_lanes: dict[str, str] = {}
@@ -22471,26 +22574,38 @@ def main() -> int:
                             )
                     elif anti_saturation_a and a_tail_journals:
                         already_journals = set(execution_stats.get("crossref_source_journals", set()))
-                        journals, journal_next, _ = rotating_batch_excluding(
-                            a_tail_journals, qa_journal_cursor, strand_journal_n, already_journals
-                        )
-                        if not journals:
-                            journals, journal_next, _ = rotating_batch(
-                                a_tail_journals, qa_journal_cursor, strand_journal_n
+                        if RADAR_STRAND_A_DEEP_DISCOVERY:
+                            journals = least_recent_any_lane_batch(
+                                state, a_tail_journals, journal_n_this_wave, already_journals
                             )
+                            journal_next = qa_journal_cursor
+                        else:
+                            journals, journal_next, _ = rotating_batch_excluding(
+                                a_tail_journals, qa_journal_cursor, journal_n_this_wave, already_journals
+                            )
+                            if not journals:
+                                journals, journal_next, _ = rotating_batch(
+                                    a_tail_journals, qa_journal_cursor, journal_n_this_wave
+                                )
 
                     inst_domains: list[str] = []
                     inst_next = qa_inst_cursor
                     inst_sources: list[dict[str, Any]] = []
                     if anti_saturation_a and fresh_inst_domain_bank:
                         already_inst = set(execution_stats.get("institution_sources", set()))
-                        inst_domains, inst_next, _ = rotating_batch_excluding(
-                            fresh_inst_domain_bank, qa_inst_cursor, strand_inst_n, already_inst
-                        )
-                        if not inst_domains:
-                            inst_domains, inst_next, _ = rotating_batch(
-                                fresh_inst_domain_bank, qa_inst_cursor, strand_inst_n
+                        if RADAR_STRAND_A_DEEP_DISCOVERY:
+                            inst_domains = least_recent_any_lane_batch(
+                                state, fresh_inst_domain_bank, inst_n_this_wave, already_inst
                             )
+                            inst_next = qa_inst_cursor
+                        else:
+                            inst_domains, inst_next, _ = rotating_batch_excluding(
+                                fresh_inst_domain_bank, qa_inst_cursor, inst_n_this_wave, already_inst
+                            )
+                            if not inst_domains:
+                                inst_domains, inst_next, _ = rotating_batch(
+                                    fresh_inst_domain_bank, qa_inst_cursor, inst_n_this_wave
+                                )
                         inst_sources = [
                             fresh_inst_source_by_domain[d] for d in inst_domains
                             if d in fresh_inst_source_by_domain
@@ -22499,7 +22614,7 @@ def main() -> int:
                     log_progress(
                         f"Quick Strand {strand} continuation wave {wave_no}: remaining={int(remaining_before)}s; "
                         f"queries={len(queries)} journals={len(journals)} institutions={len(inst_sources)}"
-                        + (" [anti-saturation]" if anti_saturation_a else "")
+                        + (f" [anti-saturation:{deep_profile}]" if deep_profile else " [anti-saturation]" if anti_saturation_a else "")
                     )
                     oa_depth_only = bool(queries) and all(q in executed_oa_before for q in queries)
                     cr_depth_only = bool(queries) and all(q in executed_cr_before for q in queries)
@@ -22561,12 +22676,12 @@ def main() -> int:
                     elif family == "cr":
                         cr.extend(extra)
                         wave_candidates += len(extra)
-                        if strand == "A" and wave_no >= 2 and journals:
+                        if strand == "A" and (RADAR_STRAND_A_DEEP_DISCOVERY or wave_no >= 2) and journals:
                             quick_strand_continuation["anti_saturation_journal_candidates"] += len(extra)
                     elif family == "inst":
                         inst.extend(extra)
                         wave_candidates += len(extra)
-                        if strand == "A" and wave_no >= 2:
+                        if strand == "A" and (RADAR_STRAND_A_DEEP_DISCOVERY or wave_no >= 2):
                             quick_strand_continuation["anti_saturation_institution_candidates"] += len(extra)
                     else:
                         news.extend(extra)
@@ -22588,6 +22703,25 @@ def main() -> int:
             quick_strand_continuation["institution_sources_executed"] += len(inst_executed)
             quick_strand_continuation["candidates"] += wave_candidates
             quick_strand_continuation["news_candidates"] += wave_news_candidates
+
+            if strand == "A" and RADAR_STRAND_A_DEEP_DISCOVERY:
+                probe_stamp = dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
+                note_probe_execution(state, "deep_a_any_query", sorted(oa_executed | cr_executed), probe_stamp)
+                note_probe_execution(state, "deep_a_journal", sorted(cr_journals_executed), probe_stamp)
+                note_probe_execution(state, "deep_a_institution", sorted(inst_executed), probe_stamp)
+                if wave_candidates == 0:
+                    deep_a_zero_yield_streak += 1
+                    quick_strand_continuation["deep_a_zero_yield_streak_max"] = max(
+                        int(quick_strand_continuation.get("deep_a_zero_yield_streak_max", 0) or 0),
+                        deep_a_zero_yield_streak,
+                    )
+                    if deep_a_zero_yield_streak == 2:
+                        log_progress(
+                            "Deep-A v2: two zero-candidate continuation waves; "
+                            "shifting subsequent waves toward journals and institutions"
+                        )
+                else:
+                    deep_a_zero_yield_streak = 0
 
             if strand in {"A", "B"}:
                 if oa_executed or cr_executed:
