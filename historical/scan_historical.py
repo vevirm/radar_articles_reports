@@ -103,14 +103,13 @@ CUTOFF_EXCLUSIVE = historical_cutoff_exclusive()
 DATE_TO = CUTOFF_EXCLUSIVE - dt.timedelta(days=1)
 MIN_SCORE = int(CONFIG.get("minimum_admission_score", 93))
 MAX_ITEMS = int(CONFIG.get("max_items", 350))
-# Production contract: every Historical research cycle gets exactly 10 minutes.
-# Older hidden workflows may still export 1050 seconds; ignore that stale value.
-BUDGET_SECONDS = 600 if str(os.environ.get("GITHUB_ACTIONS") or "").lower() == "true" else int(os.environ.get("HISTORICAL_SCAN_BUDGET_SECONDS", str(CONFIG.get("budget_seconds", 600))))
-# The production contract is a real ten-minute research window.  Older builds treated
-# 600 seconds as a ceiling while reserving 90-170 seconds inside most discovery stages,
-# which could leave a large idle tail.  Historical now keeps rotating useful discovery
-# until only a small local-finalisation margin remains.
-MIN_RUNTIME_SECONDS = int(os.environ.get("HISTORICAL_MIN_RUNTIME_SECONDS", str(CONFIG.get("minimum_runtime_seconds", 600))))
+# Production contract: Historical gets the same 20-minute research window as the
+# other full scanners. Honour the workflow/configured budget in GitHub Actions too;
+# older builds hard-capped Actions runs at 600 seconds and silently ignored the env.
+BUDGET_SECONDS = int(os.environ.get("HISTORICAL_SCAN_BUDGET_SECONDS", str(CONFIG.get("budget_seconds", 1200))))
+# Keep discovery active for at least 18 minutes of that window while retaining a small
+# finalisation margin for JSON assembly/saving. Admission quality never changes.
+MIN_RUNTIME_SECONDS = int(os.environ.get("HISTORICAL_MIN_RUNTIME_SECONDS", str(CONFIG.get("minimum_runtime_seconds", 1080))))
 FINALIZE_MARGIN_SECONDS = max(5, int(CONFIG.get("finalize_margin_seconds", 8) or 8))
 REQUEST_TIMEOUT = int(os.environ.get("HISTORICAL_REQUEST_TIMEOUT", "12"))
 STARTED_MONO = time.monotonic()
@@ -225,7 +224,7 @@ def budget_ok(reserve: int = 30) -> bool:
     """Return True while useful research may still start.
 
     Historical used to honour each caller's very large reserve literally.  That made
-    90-170 seconds of a ten-minute run unavailable to research.  The caller reserve is
+    90-170 seconds of a research run unavailable to discovery.  The caller reserve is
     now capped by the small finalisation margin, so all discovery lanes can use almost
     the whole research window while JSON assembly/saving still has protected time.
     """
@@ -1466,7 +1465,7 @@ def main() -> int:
 
     # 5) Full-window continuation inside this same GitHub job. Every continuation
     # advances to fresh topic/source/band/depth territory. Reaching the new-item target
-    # never ends research early; the scanner keeps using the ten-minute window. Source
+    # never ends research early; the scanner keeps using the twenty-minute window. Source
     # quality and EU/R&I/geopolitical admission gates never change.
     continuation_waves=[]
     topics_per_wave=max(1,int(CONFIG.get("minimum_runtime_topics_per_wave",2)))
