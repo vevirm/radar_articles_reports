@@ -13,12 +13,12 @@ sys.modules[spec.name] = H
 spec.loader.exec_module(H)
 
 class HistoricalCurrentContractTests(unittest.TestCase):
-    def test_budget_is_ten_minutes(self):
-        self.assertEqual(H.BUDGET_SECONDS, 600)
+    def test_budget_is_twenty_minutes(self):
+        self.assertEqual(H.BUDGET_SECONDS, 1200)
 
 
-    def test_full_ten_minute_research_window(self):
-        self.assertEqual(H.MIN_RUNTIME_SECONDS, 600)
+    def test_full_twenty_minute_research_window(self):
+        self.assertEqual(H.MIN_RUNTIME_SECONDS, 1080)
         self.assertLessEqual(H.FINALIZE_MARGIN_SECONDS, 10)
         source = PATH.read_text(encoding='utf-8')
         self.assertIn('while budget_ok(FINALIZE_MARGIN_SECONDS)', source)
