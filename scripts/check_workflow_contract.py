@@ -12,7 +12,8 @@ checks=[
  ('cancel-in-progress: false' in main and 'cancel-in-progress: false' in hist,'Neither scanner cancels the other; the later run waits'),
  ('Run scanner regression tests' in main,'Main regression gate retained'),
  ('Run historical scanner tests' in hist,'Historical regression gate retained'),
- ("HISTORICAL_MIN_RUNTIME_SECONDS: '600'" in hist,'Historical minimum research runtime remains ten minutes'),
+ ("HISTORICAL_SCAN_BUDGET_SECONDS: '1200'" in hist,'Historical research budget is twenty minutes'),
+ ("HISTORICAL_MIN_RUNTIME_SECONDS: '1080'" in hist,'Historical minimum research runtime is eighteen minutes'),
  ('git add -- radar.json' in main,'Main persistence boundary'),
  ('git add -- historical/historical.json' in hist,'Historical persistence boundary'),
 ]
