@@ -67,25 +67,63 @@ def eligible_files(cfg: dict[str, Any], scope: str | None = None) -> list[Path]:
 def html_items(path: Path, cfg: dict[str, Any]) -> list[dict[str, Any]]:
     source = path.read_text(encoding="utf-8")
     tags = "|".join(re.escape(t) for t in cfg["html_tags"])
-    # V1 intentionally handles only blocks without nested HTML. That prevents
-    # readability edits from accidentally deleting links/emphasis/markup.
-    rx = re.compile(rf"<(?P<tag>{tags})\b(?P<attrs>[^>]*)>(?P<body>[^<>]+)</(?P=tag)>", re.I | re.S)
     items = []
+    seen_text = set()
+
+    # First collect simple whole blocks. These are ideal because a complete
+    # reader-facing sentence/paragraph can be rewritten as one unit.
+    block_rx = re.compile(
+        rf"<(?P<tag>{tags})\b(?P<attrs>[^>]*)>(?P<body>[^<>]+)</(?P=tag)>",
+        re.I | re.S,
+    )
     ordinal = 0
-    for m in rx.finditer(source):
+    for m in block_rx.finditer(source):
         ordinal += 1
         body_raw = m.group("body")
         text = html.unescape(body_raw).strip()
-        wc = words(text)
-        if wc < cfg["min_words"]:
+        if words(text) < cfg["min_words"]:
             continue
         if re.search(r"\{\{|{%|<%", text):
             continue
+        if source.count(body_raw) != 1:
+            continue
+        seen_text.add(text)
         items.append({
             "locator": f"html:{m.group('tag').lower()}:{ordinal}",
             "source_kind": "html_text",
             "text": text,
             "source_token": body_raw,
+        })
+
+    # Also collect substantial visible text nodes inside nested markup.
+    # This preserves links/emphasis because only the text node is replaced.
+    scrubbed = re.sub(
+        r"(?is)<(script|style|template|svg)\b.*?</\1>",
+        lambda m: " " * len(m.group(0)),
+        source,
+    )
+    text_ordinal = 0
+    for m in re.finditer(r"(?s)(?P<node>[^<>]+)", scrubbed):
+        raw = source[m.start("node"):m.end("node")]
+        stripped = raw.strip()
+        if not stripped:
+            continue
+        text = html.unescape(stripped)
+        if words(text) < cfg["min_words"]:
+            continue
+        if re.search(r"\{\{|{%|<%|\$\{", text):
+            continue
+        if text in seen_text:
+            continue
+        if source.count(stripped) != 1:
+            continue
+        text_ordinal += 1
+        seen_text.add(text)
+        items.append({
+            "locator": f"html:text:{text_ordinal}",
+            "source_kind": "html_text",
+            "text": text,
+            "source_token": stripped,
         })
     return items
 
@@ -127,6 +165,10 @@ def walk_data(obj: Any, allowed: set[str], path: tuple[Any, ...] = ()):
             p = path + (k,)
             if k in allowed and isinstance(v, str):
                 yield p, v
+            elif k in allowed and isinstance(v, list):
+                for i, item in enumerate(v):
+                    if isinstance(item, str):
+                        yield p + (i,), item
             yield from walk_data(v, allowed, p)
     elif isinstance(obj, list):
         for i, v in enumerate(obj):
@@ -140,12 +182,23 @@ def path_label(parts: tuple[Any, ...]) -> str:
 def parse_data_source(path: Path) -> tuple[Any, str, str] | None:
     source = path.read_text(encoding="utf-8")
     if path.suffix.lower() == ".json":
-        return json.loads(source), "", ""
-    if path.name == "site-data.js":
-        m = re.match(r"(?s)(\s*window\.siteData\s*=\s*)(\{.*\})(\s*;\s*)\Z", source)
+        try:
+            return json.loads(source), "", ""
+        except json.JSONDecodeError:
+            return None
+    if path.suffix.lower() == ".js":
+        # Support data-only JS files such as `window.siteData = {...};`.
+        # Arbitrary application JavaScript is intentionally ignored.
+        m = re.match(
+            r"(?s)(\s*(?:window\.)?[A-Za-z_$][\w$]*\s*=\s*)(\{.*\}|\[.*\])(\s*;\s*)\Z",
+            source,
+        )
         if not m:
             return None
-        return json.loads(m.group(2)), m.group(1), m.group(3)
+        try:
+            return json.loads(m.group(2)), m.group(1), m.group(3)
+        except json.JSONDecodeError:
+            return None
     return None
 
 
