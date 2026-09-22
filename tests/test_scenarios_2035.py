@@ -121,7 +121,18 @@ class Scenarios2035Tests(unittest.TestCase):
 
     def test_language_does_not_repeat(self):
         from collections import Counter
-        paras = self._paragraphs(self.sc)
+
+        # Trigger text is evidence carried in from a finding, not prose written by
+        # the scenario renderer.  As the live corpus grows, two legitimate
+        # findings can naturally share a headline opening (for example
+        # "Active agreements could widen ...").  That must not block a scan.
+        # Keep the style guard on the renderer-owned language instead.
+        paras = []
+        for w in self.sc["scenarios"]:
+            paras += [b["text"] for b in w["bullets"]]
+            for v in w["variants"]:
+                paras += [b["text"] for b in v["bullets"] if b.get("label") != "Trigger"]
+
         self.assertEqual([p for p, n in Counter(paras).items() if n > 1], [])
         import re as _re
         # Dated history lines ("July 2026, <source>: ...") legitimately share openings.
