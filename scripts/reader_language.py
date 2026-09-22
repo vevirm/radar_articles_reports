@@ -102,6 +102,13 @@ def html_items(path: Path, cfg: dict[str, Any]) -> list[dict[str, Any]]:
         lambda m: " " * len(m.group(0)),
         source,
     )
+    # Remove all remaining HTML tags from consideration while preserving
+    # positions. Only text *between* tags can become a reader-language item.
+    scrubbed = re.sub(
+        r"(?s)<[^>]*>",
+        lambda m: " " * len(m.group(0)),
+        scrubbed,
+    )
     text_ordinal = 0
     for m in re.finditer(r"(?s)(?P<node>[^<>]+)", scrubbed):
         raw = source[m.start("node"):m.end("node")]
