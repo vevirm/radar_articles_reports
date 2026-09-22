@@ -16,7 +16,7 @@ from typing import Any
 
 try:
     from scripts.deep_read_works import (
-        CORPUS, SIDECAR, SourceRead, clean, fetch_source, iter_records, load_sidecar,
+        CORPUS, SIDECAR, SourceRead, clean, fetch_source_for_record, iter_records, load_sidecar,
         pending, historical_pending, record_key, identity_hash, scanner_fields,
     )
     from scripts.deep_scan_work_state import (
@@ -26,7 +26,7 @@ try:
     )
 except ModuleNotFoundError:
     from deep_read_works import (  # type: ignore
-        CORPUS, SIDECAR, SourceRead, clean, fetch_source, iter_records, load_sidecar,
+        CORPUS, SIDECAR, SourceRead, clean, fetch_source_for_record, iter_records, load_sidecar,
         pending, historical_pending, record_key, identity_hash, scanner_fields,
     )
     from deep_scan_work_state import (  # type: ignore
@@ -61,7 +61,11 @@ Therefore every decision must be source-grounded and auditable.
 1. Process records **in the supplied order**. Do not cherry-pick easy records.
 2. Read deeply enough to understand the actual work. Prefer full text or a substantive primary/official
    source whenever it is legally accessible. Do not stop at an abstract if a legitimate full text is available.
-3. Treat scanner fields and older Deep Scan text as hypotheses, never as ground truth.
+3. Treat scanner interpretations and older Deep Scan text as hypotheses, never as ground truth. **But do not discard
+   matching first-party source material merely because you cannot rediscover it through a separate web search.** When
+   `source_material` was retrieved through `automatic_scanner.source_validation_url`, `source_access`, CELEX, an EP
+   document URL, or another scanner source route, inspect that material as evidence. Deep Scan judges the work; it does
+   not require the work to win a second discovery contest. Independently verify identity/provenance.
 4. Verify bibliographic identity: title, authors/organisation, publication/outlet, year/date, DOI when present,
    and the relationship between the supplied URL and the underlying work.
 5. Search snippets are navigation clues only. They are never substantive evidence.
@@ -72,7 +76,7 @@ Therefore every decision must be source-grounded and auditable.
 9. If a record is difficult or blocked, **keep searching through the mandatory retrieval ladder below**.
    A failed URL is not permission to give up.
 10. If the claimed work itself still cannot be substantiated after the full mandatory recovery ladder,
-    return `drop_unverifiable`. If identity is confirmed but substantive evidence remains inaccessible after all six steps,
+    return `drop_unverifiable`. If identity is confirmed but substantive evidence remains inaccessible after all required recovery steps,
     use `defer` rather than inventing a judgement. A defer is coordination-only and leaves the Radar record provisional.
 
 ## Hard source-integrity gate
@@ -96,11 +100,17 @@ because it contains data-like language.
 ## Mandatory retrieval ladder for difficult/thin/blocked records
 
 For a record whose supplied material is not already a substantial matching primary source, attempt and
-record each applicable step. For `drop_unverifiable`, all six steps must be reported. Each attempt note must
+record each applicable step. For `drop_unverifiable`, all six standard steps must be reported, plus
+`scanner_validation_route` whenever the job supplies one. Each attempt note must
 state the actual URL/query/identifier used (or why a step is not applicable) and what happened; do not repeat
 generic phrases such as "checked" across the ladder.
 
-1. `supplied_url` — open/follow redirects and inspect what the URL actually is.
+1. `supplied_url` — inspect the reader-facing URL.
+1a. `scanner_validation_route` — **required whenever `automatic_scanner.source_validation_url`, `source_access`,
+   CELEX, or an EP document URL is present.** Inspect that exact first-party scanner route and the package's
+   `source_material`. If the package already contains substantial matching first-party text/PDF from that route,
+   record this step as successful and cite the material in `recovered_sources`; do not demand rediscovery through
+   a different web route. This step is omitted only when the job truly has no scanner-specific validation route.
 2. `doi` — resolve/search the DOI when present; if no DOI exists, explicitly record `not_applicable`.
 3. `exact_title` — search the exact title in quotation marks.
 4. `title_author_year` — search title plus author/organisation/year or other identifying metadata.
@@ -121,7 +131,7 @@ Return exactly one decision:
 - `review` — the work exists and has real evidence, but admission genuinely requires human judgement.
   REVIEW is not a refuge for laziness or failed retrieval.
 - `drop_unverifiable` — after the complete retrieval ladder, the claimed work itself cannot be substantiated.
-- `defer` — coordination-only, not an admission judgement. Use only when the work's identity is verified but, after all six recovery steps, substantive evidence remains inaccessible or too thin to support KEEP/REVIEW/DROP. Each validated defer counts as one genuine recovery pass. GitHub permits at most three such passes, throttles retries so they cannot dominate worker capacity, and after the third failed pass moves the work to the persistent **Hands-on verification needed** list.
+- `defer` — coordination-only, not an admission judgement. Use only when the work's identity is verified but, after all required recovery steps, substantive evidence remains inaccessible or too thin to support KEEP/REVIEW/DROP. Each validated defer counts as one genuine recovery pass. GitHub permits at most three such passes, throttles retries so they cannot dominate worker capacity, and after the third failed pass moves the work to the persistent **Hands-on verification needed** list.
 
 ### Strand A — substantive European R&I work
 
@@ -339,14 +349,14 @@ Return exactly one UTF-8 file named `deep_scan_results.json` (or a ZIP containin
 
 `confidence` is `high`, `medium` or `low`. `target_strand` is `A`, `B` or `C` for KEEP/REVIEW.
 For DROP/DROP_UNVERIFIABLE/DEFER it may be the original strand or empty.
-For DEFER use `reason_code: "EVIDENCE_ACCESS_LIMITED"`, set `verification.evidence_depth` to `identity_only_after_recovery`, report all six retrieval steps with specific notes, and do not invent reader interpretation.
+For DEFER use `reason_code: "EVIDENCE_ACCESS_LIMITED"`, set `verification.evidence_depth` to `identity_only_after_recovery`, report all required retrieval steps with specific notes, and do not invent reader interpretation.
 
 ### Hard validation rules
 
 - KEEP/REVIEW/DROP of a recovered work requires `identity_verified: true` and at least one recovered source
   actually used as substantive evidence. `title_only` and `search_snippet` are not acceptable evidence depths.
-- DEFER is allowed only after all six retrieval steps when identity is verified but substantive evidence is still unavailable/insufficient. It is not authoritative and must not contain invented reader prose or metadata corrections.
-- `drop_unverifiable` requires all six mandatory retrieval steps to be reported. If no DOI exists, the DOI step
+- DEFER is allowed only after all required retrieval steps when identity is verified but substantive evidence is still unavailable/insufficient. It is not authoritative and must not contain invented reader prose or metadata corrections.
+- `drop_unverifiable` requires all required retrieval steps to be reported. If no DOI exists, the DOI step
   still appears with outcome `not_applicable`. Each step needs a specific audit note (what was searched/opened
   and what happened); repeated generic notes are rejected. A DROP_UNVERIFIABLE result cannot simultaneously
   claim a successful recovery step.
@@ -395,7 +405,7 @@ def package_id_for(rows: list[tuple[str, str, str, dict[str, Any], str]], lane: 
 
 def source_for(item: tuple[str, str, str, dict[str, Any], str]):
     strand, key, h, r, reason = item
-    src = fetch_source(clean(r.get("link") or r.get("url")))
+    src = fetch_source_for_record(r)
     return strand, key, h, r, reason, src
 
 

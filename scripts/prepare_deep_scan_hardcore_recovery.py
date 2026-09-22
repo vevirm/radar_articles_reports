@@ -22,7 +22,7 @@ from typing import Any
 
 try:
     from scripts.deep_read_works import (
-        CORPUS, SIDECAR, SourceRead, clean, fetch_source, identity_hash,
+        CORPUS, SIDECAR, SourceRead, clean, fetch_source_for_record, identity_hash,
         iter_historical_records, iter_records, load_sidecar, record_key, source_hash,
     )
     from scripts.deep_scan_work_state import (
@@ -35,7 +35,7 @@ try:
     )
 except ModuleNotFoundError:
     from deep_read_works import (  # type: ignore
-        CORPUS, SIDECAR, SourceRead, clean, fetch_source, identity_hash,
+        CORPUS, SIDECAR, SourceRead, clean, fetch_source_for_record, identity_hash,
         iter_historical_records, iter_records, load_sidecar, record_key, source_hash,
     )
     from deep_scan_work_state import (  # type: ignore
@@ -83,6 +83,10 @@ substantive evidence.  **Do not treat that earlier failure as evidence that the 
 This is the final automatic recovery stage.  The objective is to reproduce the useful behaviour of a human
 operator saying **"try harder"**: when the obvious routes fail, stop, identify genuinely new routes, and search
 again before concluding that access is exhausted.
+
+The same route-parity rule as ordinary Deep Scan applies: matching first-party material supplied through a scanner
+validation URL, Cellar, Parliament or another explicit source route remains valid evidence. A blocked reader-facing
+page or failed rediscovery search must not erase source material the scanner already retrieved and packaged.
 
 ## Non-negotiable persistence rule
 
@@ -244,7 +248,7 @@ def current_rows(doc: dict[str, Any], historical: dict[str, Any]) -> dict[str, t
 def fetch_one(item: tuple[str, str, dict[str, Any], dict[str, Any]]):
     key, strand, row, state_row = item
     url = clean(row.get("link") or row.get("url") or row.get("doi"))
-    src = fetch_source(url)
+    src = fetch_source_for_record(row)
     return key, strand, row, state_row, src
 
 
@@ -369,21 +373,21 @@ def main() -> None:
         jobs = [build_job(i + 1, key, strand, row, st, src, sidecar, dupes, variants) for i, (key, strand, row, st, src) in enumerate(fetched)]
         standard = STANDARD_DEEP_SCAN_INSTRUCTIONS
         standard = standard.replace(
-            "10. If the claimed work itself still cannot be substantiated after the full mandatory recovery ladder,\n    return `drop_unverifiable`. If identity is confirmed but substantive evidence remains inaccessible after all six steps,\n    use `defer` rather than inventing a judgement. A defer is coordination-only and leaves the Radar record provisional.",
+            "10. If the claimed work itself still cannot be substantiated after the full mandatory recovery ladder,\n    return `drop_unverifiable`. If identity is confirmed but substantive evidence remains inaccessible after all required recovery steps,\n    use `defer` rather than inventing a judgement. A defer is coordination-only and leaves the Radar record provisional.",
             "10. In this terminal recovery package, do not DEFER. If substantive evidence is recovered, apply the unchanged admission standard. If the complete PUSH HARDER protocol is exhausted without substantive evidence, return `drop_unverifiable` with the mandatory hardcore audit.",
         )
         standard = standard.replace(
-            "- `defer` — coordination-only, not an admission judgement. Use only when the work's identity is verified but, after all six recovery steps, substantive evidence remains inaccessible or too thin to support KEEP/REVIEW/DROP. Each validated defer counts as one genuine recovery pass. GitHub permits at most three such passes, throttles retries so they cannot dominate worker capacity, and after the third failed pass moves the work to the persistent **Hands-on verification needed** list.",
+            "- `defer` — coordination-only, not an admission judgement. Use only when the work's identity is verified but, after all required recovery steps, substantive evidence remains inaccessible or too thin to support KEEP/REVIEW/DROP. Each validated defer counts as one genuine recovery pass. GitHub permits at most three such passes, throttles retries so they cannot dominate worker capacity, and after the third failed pass moves the work to the persistent **Hands-on verification needed** list.",
             "- `defer` — **NOT AVAILABLE IN THIS TERMINAL RECOVERY PACKAGE.** Recover substantive evidence and decide KEEP/REVIEW/DROP, or exhaust PUSH HARDER and use `drop_unverifiable`.",
         )
         standard = standard.replace("For `drop`, `drop_unverifiable`, or `defer`, return `claims: []`.", "For `drop` or `drop_unverifiable`, return `claims: []`.")
         standard = standard.replace("For DROP/DROP_UNVERIFIABLE/DEFER it may be the original strand or empty.", "For DROP/DROP_UNVERIFIABLE it may be the original strand or empty.")
         standard = standard.replace(
-            "For DEFER use `reason_code: \"EVIDENCE_ACCESS_LIMITED\"`, set `verification.evidence_depth` to `identity_only_after_recovery`, report all six retrieval steps with specific notes, and do not invent reader interpretation.",
+            "For DEFER use `reason_code: \"EVIDENCE_ACCESS_LIMITED\"`, set `verification.evidence_depth` to `identity_only_after_recovery`, report all required retrieval steps with specific notes, and do not invent reader interpretation.",
             "DEFER is not permitted in this terminal recovery package.",
         )
         standard = standard.replace(
-            "- DEFER is allowed only after all six retrieval steps when identity is verified but substantive evidence is still unavailable/insufficient. It is not authoritative and must not contain invented reader prose or metadata corrections.",
+            "- DEFER is allowed only after all required retrieval steps when identity is verified but substantive evidence is still unavailable/insufficient. It is not authoritative and must not contain invented reader prose or metadata corrections.",
             "- DEFER is not allowed in terminal recovery. Identity-confirmed but substantively inaccessible work must continue through PUSH HARDER; only after exhaustion may it use terminal `drop_unverifiable`.",
         )
         instructions = HARDCORE_PREAMBLE + standard

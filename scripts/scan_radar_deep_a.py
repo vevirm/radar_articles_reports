@@ -718,7 +718,21 @@ ADMISSION_DIAGNOSTICS: Counter = Counter()
 ADMISSION_DIAGNOSTICS_LOCK = threading.Lock()
 ACTIVE_EU_CONTEXT_ANCHORS: list[dict[str, Any]] = []
 LOAD_SANITIZE_REMOVED: dict[str, int] = {"strand_a": 0, "strand_b": 0, "strand_c": 0}
-UA = "RI-Geopolitics-Radar/3.0 (+https://vevirm.github.io/radar_articles_reports/)"
+# Identify the crawler honestly while using the conventional compatible-crawler format.
+# CROSSREF_MAILTO is optional locally; GitHub workflows pass the repository secret when set.
+# Crossref routes identified clients to its more reliable polite pool.
+CROSSREF_MAILTO = os.environ.get("CROSSREF_MAILTO", "").strip()
+if CROSSREF_MAILTO and not re.fullmatch(r"[^\s@]+@[^\s@]+\.[^\s@]+", CROSSREF_MAILTO):
+    CROSSREF_MAILTO = ""
+_UA_MAILTO = f"; mailto:{CROSSREF_MAILTO}" if CROSSREF_MAILTO else ""
+UA = f"Mozilla/5.0 (compatible; RI-Geopolitics-Radar/3.1; +https://vevirm.github.io/radar_articles_reports/{_UA_MAILTO})"
+
+def crossref_params(params: dict[str, Any] | None = None) -> dict[str, Any]:
+    """Attach Crossref's documented polite-pool contact parameter when configured."""
+    out = dict(params or {})
+    if CROSSREF_MAILTO:
+        out.setdefault("mailto", CROSSREF_MAILTO)
+    return out
 
 SESSION = requests.Session()
 SESSION.headers.update({
@@ -9897,7 +9911,7 @@ def _curator_crossref_lookup(entry: dict[str, Any], timeout: int) -> tuple[dict[
     title = clean_text(entry.get("title"))
     try:
         if doi:
-            r = SESSION.get(f"https://api.crossref.org/works/{quote(doi, safe='')}", timeout=timeout)
+            r = SESSION.get(f"https://api.crossref.org/works/{quote(doi, safe='')}", params=crossref_params(), timeout=timeout)
             if r.status_code == 429:
                 return None, "crossref_rate_limited"
             if r.status_code != 200:
@@ -9908,11 +9922,11 @@ def _curator_crossref_lookup(entry: dict[str, Any], timeout: int) -> tuple[dict[
             return None, "missing_title"
         r = SESSION.get(
             "https://api.crossref.org/works",
-            params={
+            params=crossref_params({
                 "query.bibliographic": title,
                 "rows": 6,
                 "select": "DOI,title,author,publisher,container-title,published-online,published-print,published,issued,type,URL,abstract,score",
-            },
+            }),
             timeout=timeout,
         )
         if r.status_code == 429:
@@ -10598,10 +10612,14 @@ def collect_crossref(
             params["order"] = "desc"
         if journal:
             params["query.container-title"] = journal
+            issn = clean_text((CONFIG.get("crossref_journal_issns", {}) or {}).get(journal))
+            if issn:
+                params.pop("query.container-title", None)
+                params["filter"] = ",".join(x for x in (params.get("filter", ""), f"issn:{issn}") if x)
         for attempt in range(retries + 1):
             wait_for_slot()
             try:
-                r = SESSION.get("https://api.crossref.org/works", params=params, timeout=timeout)
+                r = SESSION.get("https://api.crossref.org/works", params=crossref_params(params), timeout=timeout)
                 if r.status_code == 200:
                     # Cursor advancement is success-based.  A rate-limited or failed
                     # request remains pending for a later rotation instead of silently
@@ -10733,12 +10751,16 @@ def collect_crossref(
                 "sort": "published", "order": "desc",
                 "select": "DOI,title,author,publisher,container-title,published-online,published-print,published,issued,type,URL,abstract,score",
             }
+            issn = clean_text((CONFIG.get("crossref_journal_issns", {}) or {}).get(journal))
+            if issn:
+                params.pop("query.container-title", None)
+                params["filter"] = ",".join(x for x in (params.get("filter", ""), f"issn:{issn}") if x)
             for attempt in range(retries + 1):
                 if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
                     return [], "budget", 0
                 wait_for_slot()
                 try:
-                    r = SESSION.get("https://api.crossref.org/works", params=params, timeout=timeout)
+                    r = SESSION.get("https://api.crossref.org/works", params=crossref_params(params), timeout=timeout)
                     if r.status_code == 200:
                         with execution_lock:
                             executed_source_journals.add(journal)
@@ -10859,6 +10881,98 @@ def collect_crossref(
                 dest["health_is_diagnostic_only"] = True
     return dedupe_candidates(out)
 
+
+def collect_crossref_prefix_sources(
+    from_date: dt.date,
+    warnings: list[str],
+    stage_deadline: float | None = None,
+    execution_stats: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
+    """Bounded exact-prefix discovery for selected institutional publishers.
+
+    This is recall-only: records are converted by ``candidate_from_crossref`` and
+    therefore pass the same source-quality, language, date, EU/R&I and A/B gates as
+    ordinary Crossref discovery.  Only publishers with a usable downstream validation
+    path belong here; a DOI-prefix hit is never itself substantive Deep Scan evidence.
+    """
+    if RADAR_PRIORITY_SCAN or RADAR_QUICK_STRAND == "C":
+        return []
+    rows_out: list[dict[str, Any]] = []
+    sources = [x for x in CONFIG.get("crossref_prefix_sources", []) if isinstance(x, dict) and bool(x.get("enabled", True))]
+    if not sources:
+        return []
+    timeout = max(4, int(CONFIG.get("crossref_prefix_timeout_seconds", CONFIG.get("scholarly_api_timeout_seconds", 12)) or 12))
+    today = dt.date.today()
+    attempted = succeeded = raw_seen = enriched = 0
+    for src in sources:
+        if stage_deadline_reached(stage_deadline, 4) or deadline_reached(int(CONFIG.get("network_reserve_seconds", 90))):
+            break
+        prefix = clean_text(src.get("prefix")).lower().removeprefix("https://doi.org/").strip("/")
+        name = clean_text(src.get("name")) or prefix
+        if not prefix or not re.fullmatch(r"10\.\d{4,9}", prefix):
+            warnings.append(f"Crossref prefix source misconfigured: {name}")
+            continue
+        lookback = max(1, int(src.get("lookback_days", 30) or 30))
+        query_from = max(from_date, today - dt.timedelta(days=lookback))
+        max_rows = max(1, min(100, int(src.get("max_rows", 24) or 24)))
+        params = crossref_params({
+            "filter": f"from-pub-date:{query_from.isoformat()},until-pub-date:{today.isoformat()}",
+            "rows": str(max_rows),
+            "sort": "published",
+            "order": "desc",
+        })
+        attempted += 1
+        try:
+            r = SESSION.get(
+                f"https://api.crossref.org/prefixes/{quote(prefix, safe='')}/works",
+                params=params,
+                timeout=timeout,
+                allow_redirects=True,
+            )
+            if r.status_code != 200:
+                warnings.append(f"Crossref prefix {name}: HTTP {r.status_code}")
+                continue
+            succeeded += 1
+            items = (r.json() or {}).get("message", {}).get("items", []) or []
+        except Exception as e:
+            warnings.append(f"Crossref prefix {name}: {type(e).__name__}: {str(e)[:120]}")
+            continue
+        raw_seen += len(items)
+        enrich_budget = max(0, int(src.get("missing_abstract_enrichment", 3) or 0))
+        for raw in items:
+            if stage_deadline_reached(stage_deadline, 3):
+                break
+            if not isinstance(raw, dict):
+                continue
+            item = dict(raw)
+            # Prefix endpoints should already enforce publisher identity. Still require
+            # the DOI itself to carry the expected prefix before spending enrichment.
+            doi_raw = clean_text(item.get("DOI")).lower()
+            if doi_raw and not doi_raw.startswith(prefix + "/"):
+                continue
+            if not clean_text(item.get("abstract")) and enrich_budget > 0 and doi_raw:
+                text, method = recover_scholarly_abstract(doi_raw, timeout=min(timeout, 8))
+                enrich_budget -= 1
+                if text:
+                    item["abstract"] = text
+                    enriched += 1
+                    item["_abstract_recovery"] = method
+            candidate = candidate_from_crossref(item, date_floor=query_from, allow_strategic=False)
+            if not candidate:
+                continue
+            candidate["discovery_provenance"] = "crossref_doi_prefix"
+            candidate["crossref_prefix"] = prefix
+            candidate["crossref_prefix_source"] = name
+            if clean_text(item.get("_abstract_recovery")):
+                candidate["metadata_note"] = f"Abstract recovered via {clean_text(item.get('_abstract_recovery'))}; ordinary Crossref A/B admission applied."
+            rows_out.append(candidate)
+    if isinstance(execution_stats, dict):
+        execution_stats["crossref_prefix_sources_attempted"] = attempted
+        execution_stats["crossref_prefix_sources_succeeded"] = succeeded
+        execution_stats["crossref_prefix_raw_records"] = raw_seen
+        execution_stats["crossref_prefix_abstracts_recovered"] = enriched
+        execution_stats["crossref_prefix_candidates"] = len(rows_out)
+    return dedupe_candidates(rows_out)
 
 def _priority_affiliation_score(author_record: dict[str, Any], affiliation_hint: str) -> int:
     """Light disambiguation score for exact-name OpenAlex author candidates."""
@@ -11028,7 +11142,7 @@ def collect_priority_people(
                 "select": "DOI,title,author,publisher,container-title,published-online,published-print,published,issued,type,URL,abstract,score",
             }
             try:
-                r = SESSION.get("https://api.crossref.org/works", params=params, timeout=timeout)
+                r = SESSION.get("https://api.crossref.org/works", params=crossref_params(params), timeout=timeout)
                 person_attempted = True
                 if r.status_code == 200:
                     items = (r.json().get("message") or {}).get("items", [])
@@ -11096,15 +11210,18 @@ def localname(tag: str) -> str:
 
 
 def discover_sitemaps(domain: str) -> list[str]:
-    base = f"https://{domain}"
+    """Discover sitemap candidates on both the bare and conventional www host."""
+    clean_domain = clean_text(domain).lower().removeprefix("www.")
+    bases = [f"https://{clean_domain}", f"https://www.{clean_domain}"] if clean_domain else []
     urls = []
-    r = get(base + "/robots.txt", timeout=int(CONFIG.get("sitemap_timeout_seconds", 10)))
-    if r:
-        for line in r.text.splitlines():
-            if line.lower().startswith("sitemap:"):
-                urls.append(line.split(":", 1)[1].strip())
-    urls.extend([base + "/sitemap.xml", base + "/sitemap_index.xml", base + "/sitemap-index.xml"])
-    return list(dict.fromkeys(u for u in urls if u))[:8]
+    for base in bases:
+        r = get(base + "/robots.txt", timeout=int(CONFIG.get("sitemap_timeout_seconds", 10)))
+        if r:
+            for line in r.text.splitlines():
+                if line.lower().startswith("sitemap:"):
+                    urls.append(line.split(":", 1)[1].strip())
+        urls.extend([base + "/sitemap.xml", base + "/sitemap_index.xml", base + "/sitemap-index.xml"])
+    return list(dict.fromkeys(u for u in urls if u))[:10]
 
 
 def sitemap_entries(url: str, depth: int = 0, child_budget: int | None = None) -> list[tuple[str, dt.date | None]]:
@@ -12310,9 +12427,61 @@ def _source_adapter_domain_jobs(
     return out
 
 
+def _institution_feed_jobs(
+    src: dict[str, Any],
+    from_date: dt.date,
+    stage_deadline: float | None = None,
+    reconsider_seen: bool = False,
+) -> list[tuple[str, str, int, str]]:
+    """Queue explicitly configured institution RSS/Atom entries through normal page parsing."""
+    feeds = [clean_text(x) for x in (src.get("feeds") or []) if clean_text(x)]
+    if not feeds:
+        return []
+    domain = clean_text(src.get("domain", "")).lower().removeprefix("www.")
+    source_name = clean_text(src.get("name")) or domain
+    tier = int(src.get("tier", 2) or 2)
+    timeout = int(CONFIG.get("sitemap_timeout_seconds", 10) or 10)
+    max_entries = max(1, int(CONFIG.get("institution_feed_entries_per_source", 40) or 40))
+    today = dt.date.today()
+    out: list[tuple[str, str, int, str]] = []
+    for feed_url in feeds:
+        if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+            break
+        fr = get(feed_url, timeout=timeout)
+        if not fr:
+            continue
+        try:
+            entries = list(getattr(feedparser.parse(fr.content), "entries", []) or [])[:max_entries]
+        except Exception:
+            continue
+        for entry in entries:
+            link = clean_text(getattr(entry, "link", "") or (entry.get("link", "") if isinstance(entry, dict) else ""))
+            if not link:
+                continue
+            try:
+                host = (urlparse(link).hostname or "").lower().removeprefix("www.")
+            except Exception:
+                host = ""
+            if domain and not (host == domain or host.endswith("." + domain)):
+                continue
+            stamp = getattr(entry, "published_parsed", None) or getattr(entry, "updated_parsed", None)
+            when = dt.date(*stamp[:3]) if stamp else None
+            if when and (when < from_date or when > today + dt.timedelta(days=1)):
+                continue
+            fp = institution_fingerprint(link, when)
+            if _known_institution_url_should_skip(link, fp, reconsider_seen):
+                continue
+            if fp in INSTITUTION_SEEN_FINGERPRINTS and not reconsider_seen:
+                continue
+            out.append((link, source_name, tier, fp))
+    _diag_inc("institution_feed_jobs", len(out))
+    return out
+
+
 def _discover_domain(src: dict[str, Any], from_date: dt.date, bootstrap: bool = False, stage_deadline: float | None = None, reconsider_seen: bool = False) -> tuple[list[tuple[str, str, int, str]], str | None]:
     domain = src["domain"]
     adapter_jobs = _source_adapter_domain_jobs(src, from_date, stage_deadline, reconsider_seen)
+    adapter_jobs.extend(_institution_feed_jobs(src, from_date, stage_deadline, reconsider_seen))
     entries = []
     max_entries = int(CONFIG.get("sitemap_max_entries", 800))
     if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
@@ -15101,8 +15270,14 @@ def _audit_refresh_document(item: dict[str, Any]) -> tuple[str, str, str] | None
     m = re.search(r"10\.\d{4,9}/[^\s?#]+", normalized(link))
     if m:
         doi = m.group(0).rstrip(".,)")
-        r = get(f"https://api.crossref.org/works/{quote_plus(doi)}", timeout=timeout)
-        if r:
+        try:
+            r = SESSION.get(
+                f"https://api.crossref.org/works/{quote_plus(doi)}",
+                params=crossref_params(), timeout=timeout, allow_redirects=True,
+            )
+        except requests.RequestException:
+            r = None
+        if r is not None and r.status_code == 200:
             try:
                 msg = (r.json() or {}).get("message") or {}
                 title = clean_text((msg.get("title") or [item.get("title", "")])[0])
@@ -17770,7 +17945,7 @@ def _linked_doi_candidate(url: str, stage_deadline: float | None = None) -> dict
         doi = parsed.path.lstrip("/")
         if not doi:
             return None
-        r = SESSION.get("https://api.crossref.org/works/" + quote_plus(doi, safe="/()"), timeout=int(CONFIG.get("scholarly_api_timeout_seconds", 12) or 12))
+        r = SESSION.get("https://api.crossref.org/works/" + quote_plus(doi, safe="/()"), params=crossref_params(), timeout=int(CONFIG.get("scholarly_api_timeout_seconds", 12) or 12))
         if r.status_code != 200:
             return None
         raw = (r.json().get("message") or {})
@@ -20741,6 +20916,7 @@ def main() -> int:
     inst_deadline = phase_started + int(CONFIG.get("institution_stage_seconds", 480))
     direct_journal_deadline = phase_started + int(CONFIG.get('direct_top_journal_stage_seconds', 220) or 220)
     primary_evidence_deadline = phase_started + int(CONFIG.get('primary_evidence_stage_seconds', 180) or 180)
+    crossref_prefix_deadline = phase_started + int(CONFIG.get('crossref_prefix_stage_seconds', 60) or 60)
 
     high_order_news_focus = []
     try:
@@ -20752,7 +20928,7 @@ def main() -> int:
     except Exception:
         high_order_news_focus = []
 
-    with cf.ThreadPoolExecutor(max_workers=6) as ex:
+    with cf.ThreadPoolExecutor(max_workers=7) as ex:
         fut_news = ex.submit(
             safe_stage, "weak-signal news", collect_news, now, news_warnings, news_lookback, news_deadline,
             [] if RADAR_STRAND_A_DEEP_DISCOVERY else list(dict.fromkeys(list(priority_news_queries()) + list(frontier_focus["queries"]) + high_order_news_focus)),
@@ -20778,6 +20954,10 @@ def main() -> int:
             safe_stage, "must-not-miss primary EU evidence", collect_must_not_miss_primary_evidence,
             previous, warnings, primary_evidence_deadline, execution_stats
         )
+        fut_crossref_prefix = ex.submit(
+            safe_stage, "Crossref exact publisher prefix", collect_crossref_prefix_sources,
+            cr_from, warnings, crossref_prefix_deadline, execution_stats
+        )
         news = fut_news.result()
         if priority_direct_news:
             news.extend(priority_direct_news)
@@ -20791,6 +20971,9 @@ def main() -> int:
         primary_evidence_rows = fut_primary_evidence.result()
         if primary_evidence_rows:
             inst_base.extend(primary_evidence_rows)
+        crossref_prefix_rows = fut_crossref_prefix.result()
+        if crossref_prefix_rows:
+            cr.extend(crossref_prefix_rows)
         try:
             direct_journal_ab, direct_journal_c = fut_direct_journals.result()
         except Exception as e:
@@ -23691,7 +23874,7 @@ def main() -> int:
         if any(x in normalized(w) for x in ["connection", "timeout", "httperror", "name resolution", "http 429", "http 5"])
     )
     fatal_stage_error = any("fatal stage error" in normalized(w) for w in warnings)
-    health = "degraded" if overall_budget_hit or fatal_stage_error or partial_budget_hit or (total_ab_live == 0 and len(warnings) >= 10) else "ok"
+    health = "degraded" if overall_budget_hit or fatal_stage_error or (total_ab_live == 0 and len(warnings) >= 10) else "ok"
     if overall_budget_hit:
         warnings.append("Overall scan runtime budget reached; queued work was skipped safely and persisted cursors prevent restarting from query 1")
 

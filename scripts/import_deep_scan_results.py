@@ -265,8 +265,19 @@ def _usable_sources(verification: dict[str, Any]) -> list[dict[str, Any]]:
     return out
 
 
+def _scanner_validation_route_url(row: dict[str, Any] | None) -> str:
+    row = row if isinstance(row, dict) else {}
+    access = row.get("source_access") if isinstance(row.get("source_access"), dict) else {}
+    url = clean(row.get("source_validation_url") or access.get("validation_url") or row.get("ep_document_pdf") or access.get("document_pdf"))
+    if url:
+        return url
+    celex = clean(row.get("celex") or access.get("celex"))
+    return ("https://publications.europa.eu/resource/celex/" + celex) if celex else ""
+
+
 def validate_v2_result(
-    raw: dict[str, Any], *, key: str, current_keys: set[str], allowed_target_strands: set[str] | None = None
+    raw: dict[str, Any], *, key: str, current_keys: set[str], allowed_target_strands: set[str] | None = None,
+    current_row: dict[str, Any] | None = None,
 ) -> list[str]:
     problems: list[str] = []
     verification = raw.get("verification") if isinstance(raw.get("verification"), dict) else {}
@@ -292,6 +303,10 @@ def validate_v2_result(
     attempts = verification.get("retrieval_attempts") if isinstance(verification.get("retrieval_attempts"), list) else []
     attempt_steps = _attempt_steps(verification)
     audit_by_step = _attempt_map(verification)
+    scanner_route_url = _scanner_validation_route_url(current_row)
+    required_retrieval_steps = set(REQUIRED_UNVERIFIABLE_STEPS)
+    if scanner_route_url:
+        required_retrieval_steps.add("scanner_validation_route")
     if "supplied_url" not in attempt_steps:
         problems.append("verification must report the supplied_url retrieval attempt")
     if len(clean(verification.get("verification_note"))) < 12:
@@ -299,16 +314,16 @@ def validate_v2_result(
     if decision == "drop_unverifiable":
         if identity_verified:
             problems.append("drop_unverifiable requires identity_verified=false")
-        missing = REQUIRED_UNVERIFIABLE_STEPS - attempt_steps
+        missing = required_retrieval_steps - attempt_steps
         if missing:
             problems.append("drop_unverifiable missing retrieval steps: " + ",".join(sorted(missing)))
-        thin = [step for step in REQUIRED_UNVERIFIABLE_STEPS if step in audit_by_step and len(clean(audit_by_step[step].get("note"))) < 12]
+        thin = [step for step in required_retrieval_steps if step in audit_by_step and len(clean(audit_by_step[step].get("note"))) < 12]
         if thin:
             problems.append("drop_unverifiable retrieval steps need specific audit notes (12+ chars): " + ",".join(sorted(thin)))
-        success_steps = [step for step in REQUIRED_UNVERIFIABLE_STEPS if step in audit_by_step and _outcome(audit_by_step[step].get("outcome")) in SUCCESS_OUTCOMES]
+        success_steps = [step for step in required_retrieval_steps if step in audit_by_step and _outcome(audit_by_step[step].get("outcome")) in SUCCESS_OUTCOMES]
         if success_steps:
             problems.append("drop_unverifiable cannot report a successful recovery step: " + ",".join(sorted(success_steps)))
-        distinct_notes = {clean(audit_by_step[s].get("note")).lower() for s in REQUIRED_UNVERIFIABLE_STEPS if s in audit_by_step}
+        distinct_notes = {clean(audit_by_step[s].get("note")).lower() for s in required_retrieval_steps if s in audit_by_step}
         if len(distinct_notes) < 4:
             problems.append("drop_unverifiable retrieval audit is too repetitive; record what was actually tried at each step")
         if usable:
@@ -318,13 +333,13 @@ def validate_v2_result(
             problems.append("defer requires identity_verified=true")
         if depth != DEFER_EVIDENCE_DEPTH:
             problems.append(f"defer requires evidence_depth={DEFER_EVIDENCE_DEPTH}")
-        missing = REQUIRED_UNVERIFIABLE_STEPS - attempt_steps
+        missing = required_retrieval_steps - attempt_steps
         if missing:
             problems.append("defer requires the full retrieval ladder: " + ",".join(sorted(missing)))
-        thin = [step for step in REQUIRED_UNVERIFIABLE_STEPS if step in audit_by_step and len(clean(audit_by_step[step].get("note"))) < 12]
+        thin = [step for step in required_retrieval_steps if step in audit_by_step and len(clean(audit_by_step[step].get("note"))) < 12]
         if thin:
             problems.append("defer retrieval steps need specific audit notes (12+ chars): " + ",".join(sorted(thin)))
-        distinct_notes = {clean(audit_by_step[s].get("note")).lower() for s in REQUIRED_UNVERIFIABLE_STEPS if s in audit_by_step}
+        distinct_notes = {clean(audit_by_step[s].get("note")).lower() for s in required_retrieval_steps if s in audit_by_step}
         if len(distinct_notes) < 4:
             problems.append("defer retrieval audit is too repetitive; record what was actually tried at each step")
         if clean(admission.get("reason_code")).upper() != "EVIDENCE_ACCESS_LIMITED":
@@ -344,7 +359,7 @@ def validate_v2_result(
         if depth in FORBIDDEN_EVIDENCE_DEPTHS or depth not in ALLOWED_RECOVERED_DEPTHS:
             problems.append("evidence depth must be one of the authoritative recovered-source levels")
         if depth == "substantive_primary_after_recovery":
-            missing = REQUIRED_UNVERIFIABLE_STEPS - attempt_steps
+            missing = required_retrieval_steps - attempt_steps
             if missing:
                 problems.append("substantive_primary_after_recovery requires the full retrieval ladder: " + ",".join(sorted(missing)))
         if not usable:
@@ -353,6 +368,8 @@ def validate_v2_result(
         supplied_outcome = _outcome(supplied.get("outcome"))
         if supplied_outcome and supplied_outcome not in SUCCESS_OUTCOMES:
             recovery_steps = {"doi", "exact_title", "title_author_year", "official_publisher_or_repository", "broader_identity_search"}
+            if scanner_route_url:
+                recovery_steps.add("scanner_validation_route")
             successful_recovery = [s for s in recovery_steps if s in audit_by_step and _outcome(audit_by_step[s].get("outcome")) in SUCCESS_OUTCOMES]
             if not successful_recovery:
                 problems.append("supplied URL did not recover the work; recovered-work decision must report which recovery-ladder step actually found it")
@@ -581,6 +598,7 @@ def main() -> None:
                 v2_problems = validate_v2_result(
                     raw, key=key, current_keys=current_keys,
                     allowed_target_strands={"A", "B"} if is_historical else TARGET_STRANDS,
+                    current_row=_row,
                 )
                 dup = raw.get("duplicate") if isinstance(raw.get("duplicate"), dict) else {}
                 dup_of = clean(dup.get("duplicate_of"))

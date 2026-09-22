@@ -109,7 +109,19 @@ def _normal_attempt_steps(raw: dict[str, Any]) -> set[str]:
     return {clean(x.get("step")).lower() for x in rows if isinstance(x, dict) and clean(x.get("step"))}
 
 
-def validate_hardcore_audit(raw: dict[str, Any], *, exhausted: bool) -> list[str]:
+
+
+def _scanner_validation_route_url(row: dict[str, Any] | None) -> str:
+    row = row if isinstance(row, dict) else {}
+    access = row.get("source_access") if isinstance(row.get("source_access"), dict) else {}
+    url = clean(row.get("source_validation_url") or access.get("validation_url") or row.get("ep_document_pdf") or access.get("document_pdf"))
+    if url:
+        return url
+    celex = clean(row.get("celex") or access.get("celex"))
+    return ("https://publications.europa.eu/resource/celex/" + celex) if celex else ""
+
+
+def validate_hardcore_audit(raw: dict[str, Any], *, exhausted: bool, current_row: dict[str, Any] | None = None) -> list[str]:
     problems: list[str] = []
     hc = raw.get("hardcore_recovery") if isinstance(raw.get("hardcore_recovery"), dict) else {}
     if not hc:
@@ -149,7 +161,10 @@ def validate_hardcore_audit(raw: dict[str, Any], *, exhausted: bool) -> list[str
                 problems.append(f"TRY HARDER pass {n} did not execute enough concrete new actions")
             if len(clean(p.get("result"))) < 18:
                 problems.append(f"TRY HARDER pass {n} result is too thin")
-        missing_normal = REQUIRED_NORMAL_STEPS - _normal_attempt_steps(raw)
+        required_normal_steps = set(REQUIRED_NORMAL_STEPS)
+        if _scanner_validation_route_url(current_row):
+            required_normal_steps.add("scanner_validation_route")
+        missing_normal = required_normal_steps - _normal_attempt_steps(raw)
         if missing_normal:
             problems.append("terminal recovery missing original Deep Scan retrieval steps: " + ",".join(sorted(missing_normal)))
     else:
@@ -265,7 +280,7 @@ def main() -> None:
                 allowed = {"A", "B"} if is_historical else {"A", "B", "C"}
 
                 if decision == "drop_unverifiable":
-                    problems = validate_hardcore_audit(raw, exhausted=True)
+                    problems = validate_hardcore_audit(raw, exhausted=True, current_row=row)
                     verification = raw.get("verification") if isinstance(raw.get("verification"), dict) else {}
                     depth = clean(verification.get("evidence_depth")).lower()
                     if depth not in EXHAUSTED_DEPTHS:

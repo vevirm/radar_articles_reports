@@ -40,7 +40,7 @@ NEAR_DUPLICATE = 0.86
 SOURCE_CHAR_CAP = 24000
 PDF_PAGE_CAP = 10
 HTTP_TIMEOUT = 12
-USER_AGENT = "EU-RI-Radar-DeepScan-Packager/3.0 (+manual offline semantic pass)"
+USER_AGENT = "Mozilla/5.0 (compatible; RI-Geopolitics-Radar-DeepScan/3.1; +https://vevirm.github.io/radar_articles_reports/)"
 ACTIVE_DEEP_PROFILES = {"deep-reader-v2-authoritative"}
 LEGACY_DEEP_PROFILES = {"deep-reader-v2", "deep-reader-v2.1", "deep-reader-offline-v1"}
 
@@ -308,18 +308,15 @@ def _html_text(payload: bytes, encoding: str | None = None) -> str:
     return "\n".join(dict.fromkeys(preferred + body_parts))[:SOURCE_CHAR_CAP]
 
 
-def fetch_source(url: str) -> SourceRead:
+def fetch_source(url: str, *, extra_headers: dict[str, str] | None = None) -> SourceRead:
     """Best-effort source retrieval. Failure never blocks package creation."""
     if not _safe_url(url):
         return SourceRead("stored_only", "", note="no usable http(s) source link")
+    headers = {"User-Agent": USER_AGENT, "Accept": "text/html,application/pdf;q=0.9,*/*;q=0.5"}
+    if extra_headers:
+        headers.update({str(k): str(v) for k, v in extra_headers.items() if clean(k) and clean(v)})
     try:
-        with requests.get(
-            url,
-            headers={"User-Agent": USER_AGENT, "Accept": "text/html,application/pdf;q=0.9,*/*;q=0.5"},
-            timeout=HTTP_TIMEOUT,
-            allow_redirects=True,
-            stream=True,
-        ) as resp:
+        with requests.get(url, headers=headers, timeout=HTTP_TIMEOUT, allow_redirects=True, stream=True) as resp:
             resp.raise_for_status()
             ctype = clean(resp.headers.get("content-type")).lower()
             chunks: list[bytes] = []
@@ -349,6 +346,55 @@ def fetch_source(url: str) -> SourceRead:
         return SourceRead("stored_only", "", note=f"source retrieval failed: {clean(exc)[:180]}")
 
 
+def fetch_source_for_record(r: dict[str, Any]) -> SourceRead:
+    """Use the scanner's first-party validation route before the reader-facing URL."""
+    provenance = clean(r.get("discovery_provenance")).lower()
+    access = r.get("source_access") if isinstance(r.get("source_access"), dict) else {}
+    candidates: list[tuple[str, dict[str, str] | None, str]] = []
+    validation_url = clean(r.get("source_validation_url") or access.get("validation_url"))
+    route_name = clean(access.get("route")).lower()
+    cellar_route = bool(
+        provenance == "eurlex_cellar" or route_name == "eurlex_cellar"
+        or "publications.europa.eu/resource/celex/" in validation_url.lower()
+    )
+    if validation_url:
+        headers = {"Accept": "application/xhtml+xml", "Accept-Language": "eng"} if cellar_route else None
+        label = "EUR-Lex/Cellar first-party route" if cellar_route else "scanner validation route"
+        candidates.append((validation_url, headers, label))
+    celex = clean(r.get("celex") or access.get("celex"))
+    if celex and (cellar_route or not validation_url):
+        candidates.append((
+            "https://publications.europa.eu/resource/celex/" + celex,
+            {"Accept": "application/xhtml+xml", "Accept-Language": "eng"},
+            "EUR-Lex/Cellar first-party route",
+        ))
+    ep_url = clean(r.get("ep_document_pdf") or access.get("document_pdf"))
+    if ep_url and ep_url != validation_url:
+        candidates.append((ep_url, None, "European Parliament first-party document route"))
+    public_url = clean(r.get("link") or r.get("url"))
+    if public_url:
+        candidates.append((public_url, None, "reader-facing URL"))
+
+    seen: set[str] = set()
+    failures: list[str] = []
+    best: SourceRead | None = None
+    for url, headers, label in candidates:
+        if not _safe_url(url) or url in seen:
+            continue
+        seen.add(url)
+        src = fetch_source(url, extra_headers=headers)
+        if src.mode != "stored_only" and clean(src.text):
+            note = f"retrieved via {label}"
+            if src.note:
+                note += f"; {src.note}"
+            return SourceRead(src.mode, src.text, src.final_url or url, note)
+        failures.append(f"{label}: {src.note or 'no substantive text'}")
+        if best is None:
+            best = src
+    note = "; ".join(failures)[:500] if failures else "no usable scanner or public source route"
+    return SourceRead("stored_only", "", (best.final_url if best else ""), note=note)
+
+
 def scanner_fields(r: dict[str, Any]) -> dict[str, Any]:
     """Material the fast scanner already knows and which helps deep reading."""
     keys = (
@@ -357,6 +403,8 @@ def scanner_fields(r: dict[str, Any]) -> dict[str, Any]:
         "summary", "signal_note", "core_message", "what", "relevance_note", "why_it_matters",
         "bridge_sentence", "external_eu_bridge", "eu_evidence", "ri_evidence", "geo_evidence",
         "doi", "link", "url", "cluster", "theme", "topics", "keywords",
+        "discovery_provenance", "source_domain", "date_basis",
+        "source_validation_url", "source_access", "celex", "ep_doc_id", "ep_document_pdf",
     )
     out: dict[str, Any] = {}
     for k in keys:

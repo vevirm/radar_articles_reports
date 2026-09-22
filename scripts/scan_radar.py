@@ -523,7 +523,21 @@ ADMISSION_DIAGNOSTICS: Counter = Counter()
 ADMISSION_DIAGNOSTICS_LOCK = threading.Lock()
 ACTIVE_EU_CONTEXT_ANCHORS: list[dict[str, Any]] = []
 LOAD_SANITIZE_REMOVED: dict[str, int] = {"strand_a": 0, "strand_b": 0, "strand_c": 0}
-UA = "RI-Geopolitics-Radar/3.0 (+https://vevirm.github.io/radar_articles_reports/)"
+# Identify the crawler honestly while using the conventional compatible-crawler format.
+# CROSSREF_MAILTO is optional locally; GitHub workflows pass the repository secret when set.
+# Crossref routes identified clients to its more reliable polite pool.
+CROSSREF_MAILTO = os.environ.get("CROSSREF_MAILTO", "").strip()
+if CROSSREF_MAILTO and not re.fullmatch(r"[^\s@]+@[^\s@]+\.[^\s@]+", CROSSREF_MAILTO):
+    CROSSREF_MAILTO = ""
+_UA_MAILTO = f"; mailto:{CROSSREF_MAILTO}" if CROSSREF_MAILTO else ""
+UA = f"Mozilla/5.0 (compatible; RI-Geopolitics-Radar/3.1; +https://vevirm.github.io/radar_articles_reports/{_UA_MAILTO})"
+
+def crossref_params(params: dict[str, Any] | None = None) -> dict[str, Any]:
+    """Attach Crossref's documented polite-pool contact parameter when configured."""
+    out = dict(params or {})
+    if CROSSREF_MAILTO:
+        out.setdefault("mailto", CROSSREF_MAILTO)
+    return out
 
 SESSION = requests.Session()
 SESSION.headers.update({
@@ -9428,7 +9442,7 @@ def _curator_crossref_lookup(entry: dict[str, Any], timeout: int) -> tuple[dict[
     title = clean_text(entry.get("title"))
     try:
         if doi:
-            r = SESSION.get(f"https://api.crossref.org/works/{quote(doi, safe='')}", timeout=timeout)
+            r = SESSION.get(f"https://api.crossref.org/works/{quote(doi, safe='')}", params=crossref_params(), timeout=timeout)
             if r.status_code == 429:
                 return None, "crossref_rate_limited"
             if r.status_code != 200:
@@ -9439,11 +9453,11 @@ def _curator_crossref_lookup(entry: dict[str, Any], timeout: int) -> tuple[dict[
             return None, "missing_title"
         r = SESSION.get(
             "https://api.crossref.org/works",
-            params={
+            params=crossref_params({
                 "query.bibliographic": title,
                 "rows": 6,
                 "select": "DOI,title,author,publisher,container-title,published-online,published-print,published,issued,type,URL,abstract,score",
-            },
+            }),
             timeout=timeout,
         )
         if r.status_code == 429:
@@ -10129,10 +10143,14 @@ def collect_crossref(
             params["order"] = "desc"
         if journal:
             params["query.container-title"] = journal
+            issn = clean_text((CONFIG.get("crossref_journal_issns", {}) or {}).get(journal))
+            if issn:
+                params.pop("query.container-title", None)
+                params["filter"] = ",".join(x for x in (params.get("filter", ""), f"issn:{issn}") if x)
         for attempt in range(retries + 1):
             wait_for_slot()
             try:
-                r = SESSION.get("https://api.crossref.org/works", params=params, timeout=timeout)
+                r = SESSION.get("https://api.crossref.org/works", params=crossref_params(params), timeout=timeout)
                 if r.status_code == 200:
                     # Cursor advancement is success-based.  A rate-limited or failed
                     # request remains pending for a later rotation instead of silently
@@ -10264,12 +10282,16 @@ def collect_crossref(
                 "sort": "published", "order": "desc",
                 "select": "DOI,title,author,publisher,container-title,published-online,published-print,published,issued,type,URL,abstract,score",
             }
+            issn = clean_text((CONFIG.get("crossref_journal_issns", {}) or {}).get(journal))
+            if issn:
+                params.pop("query.container-title", None)
+                params["filter"] = ",".join(x for x in (params.get("filter", ""), f"issn:{issn}") if x)
             for attempt in range(retries + 1):
                 if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
                     return [], "budget", 0
                 wait_for_slot()
                 try:
-                    r = SESSION.get("https://api.crossref.org/works", params=params, timeout=timeout)
+                    r = SESSION.get("https://api.crossref.org/works", params=crossref_params(params), timeout=timeout)
                     if r.status_code == 200:
                         with execution_lock:
                             executed_source_journals.add(journal)
@@ -10390,6 +10412,99 @@ def collect_crossref(
                 dest["health_is_diagnostic_only"] = True
     return dedupe_candidates(out)
 
+
+
+def collect_crossref_prefix_sources(
+    from_date: dt.date,
+    warnings: list[str],
+    stage_deadline: float | None = None,
+    execution_stats: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
+    """Bounded exact-prefix discovery for selected institutional publishers.
+
+    This is recall-only: records are converted by ``candidate_from_crossref`` and
+    therefore pass the same source-quality, language, date, EU/R&I and A/B gates as
+    ordinary Crossref discovery.  Only publishers with a usable downstream validation
+    path belong here; a DOI-prefix hit is never itself substantive Deep Scan evidence.
+    """
+    if RADAR_PRIORITY_SCAN or RADAR_QUICK_STRAND == "C":
+        return []
+    rows_out: list[dict[str, Any]] = []
+    sources = [x for x in CONFIG.get("crossref_prefix_sources", []) if isinstance(x, dict) and bool(x.get("enabled", True))]
+    if not sources:
+        return []
+    timeout = max(4, int(CONFIG.get("crossref_prefix_timeout_seconds", CONFIG.get("scholarly_api_timeout_seconds", 12)) or 12))
+    today = dt.date.today()
+    attempted = succeeded = raw_seen = enriched = 0
+    for src in sources:
+        if stage_deadline_reached(stage_deadline, 4) or deadline_reached(int(CONFIG.get("network_reserve_seconds", 90))):
+            break
+        prefix = clean_text(src.get("prefix")).lower().removeprefix("https://doi.org/").strip("/")
+        name = clean_text(src.get("name")) or prefix
+        if not prefix or not re.fullmatch(r"10\.\d{4,9}", prefix):
+            warnings.append(f"Crossref prefix source misconfigured: {name}")
+            continue
+        lookback = max(1, int(src.get("lookback_days", 30) or 30))
+        query_from = max(from_date, today - dt.timedelta(days=lookback))
+        max_rows = max(1, min(100, int(src.get("max_rows", 24) or 24)))
+        params = crossref_params({
+            "filter": f"from-pub-date:{query_from.isoformat()},until-pub-date:{today.isoformat()}",
+            "rows": str(max_rows),
+            "sort": "published",
+            "order": "desc",
+        })
+        attempted += 1
+        try:
+            r = SESSION.get(
+                f"https://api.crossref.org/prefixes/{quote(prefix, safe='')}/works",
+                params=params,
+                timeout=timeout,
+                allow_redirects=True,
+            )
+            if r.status_code != 200:
+                warnings.append(f"Crossref prefix {name}: HTTP {r.status_code}")
+                continue
+            succeeded += 1
+            items = (r.json() or {}).get("message", {}).get("items", []) or []
+        except Exception as e:
+            warnings.append(f"Crossref prefix {name}: {type(e).__name__}: {str(e)[:120]}")
+            continue
+        raw_seen += len(items)
+        enrich_budget = max(0, int(src.get("missing_abstract_enrichment", 3) or 0))
+        for raw in items:
+            if stage_deadline_reached(stage_deadline, 3):
+                break
+            if not isinstance(raw, dict):
+                continue
+            item = dict(raw)
+            # Prefix endpoints should already enforce publisher identity. Still require
+            # the DOI itself to carry the expected prefix before spending enrichment.
+            doi_raw = clean_text(item.get("DOI")).lower()
+            if doi_raw and not doi_raw.startswith(prefix + "/"):
+                continue
+            if not clean_text(item.get("abstract")) and enrich_budget > 0 and doi_raw:
+                text, method = recover_scholarly_abstract(doi_raw, timeout=min(timeout, 8))
+                enrich_budget -= 1
+                if text:
+                    item["abstract"] = text
+                    enriched += 1
+                    item["_abstract_recovery"] = method
+            candidate = candidate_from_crossref(item, date_floor=query_from, allow_strategic=False)
+            if not candidate:
+                continue
+            candidate["discovery_provenance"] = "crossref_doi_prefix"
+            candidate["crossref_prefix"] = prefix
+            candidate["crossref_prefix_source"] = name
+            if clean_text(item.get("_abstract_recovery")):
+                candidate["metadata_note"] = f"Abstract recovered via {clean_text(item.get('_abstract_recovery'))}; ordinary Crossref A/B admission applied."
+            rows_out.append(candidate)
+    if isinstance(execution_stats, dict):
+        execution_stats["crossref_prefix_sources_attempted"] = attempted
+        execution_stats["crossref_prefix_sources_succeeded"] = succeeded
+        execution_stats["crossref_prefix_raw_records"] = raw_seen
+        execution_stats["crossref_prefix_abstracts_recovered"] = enriched
+        execution_stats["crossref_prefix_candidates"] = len(rows_out)
+    return dedupe_candidates(rows_out)
 
 def _priority_affiliation_score(author_record: dict[str, Any], affiliation_hint: str) -> int:
     """Light disambiguation score for exact-name OpenAlex author candidates."""
@@ -10559,7 +10674,7 @@ def collect_priority_people(
                 "select": "DOI,title,author,publisher,container-title,published-online,published-print,published,issued,type,URL,abstract,score",
             }
             try:
-                r = SESSION.get("https://api.crossref.org/works", params=params, timeout=timeout)
+                r = SESSION.get("https://api.crossref.org/works", params=crossref_params(params), timeout=timeout)
                 person_attempted = True
                 if r.status_code == 200:
                     items = (r.json().get("message") or {}).get("items", [])
@@ -10627,15 +10742,18 @@ def localname(tag: str) -> str:
 
 
 def discover_sitemaps(domain: str) -> list[str]:
-    base = f"https://{domain}"
+    """Discover sitemap candidates on both the bare and conventional www host."""
+    clean_domain = clean_text(domain).lower().removeprefix("www.")
+    bases = [f"https://{clean_domain}", f"https://www.{clean_domain}"] if clean_domain else []
     urls = []
-    r = get(base + "/robots.txt", timeout=int(CONFIG.get("sitemap_timeout_seconds", 10)))
-    if r:
-        for line in r.text.splitlines():
-            if line.lower().startswith("sitemap:"):
-                urls.append(line.split(":", 1)[1].strip())
-    urls.extend([base + "/sitemap.xml", base + "/sitemap_index.xml", base + "/sitemap-index.xml"])
-    return list(dict.fromkeys(u for u in urls if u))[:8]
+    for base in bases:
+        r = get(base + "/robots.txt", timeout=int(CONFIG.get("sitemap_timeout_seconds", 10)))
+        if r:
+            for line in r.text.splitlines():
+                if line.lower().startswith("sitemap:"):
+                    urls.append(line.split(":", 1)[1].strip())
+        urls.extend([base + "/sitemap.xml", base + "/sitemap_index.xml", base + "/sitemap-index.xml"])
+    return list(dict.fromkeys(u for u in urls if u))[:10]
 
 
 def sitemap_entries(url: str, depth: int = 0, child_budget: int | None = None) -> list[tuple[str, dt.date | None]]:
@@ -11841,9 +11959,73 @@ def _source_adapter_domain_jobs(
     return out
 
 
+def _institution_feed_jobs(
+    src: dict[str, Any],
+    from_date: dt.date,
+    stage_deadline: float | None = None,
+    reconsider_seen: bool = False,
+    transport: dict[str, Any] | None = None,
+) -> list[tuple[str, str, int, str]]:
+    """Queue explicitly configured institution RSS/Atom entries through normal page parsing."""
+    feeds = [clean_text(x) for x in (src.get("feeds") or []) if clean_text(x)]
+    if transport is not None:
+        transport["feed_configured"] = bool(feeds)
+        transport.setdefault("feed_attempted", 0)
+        transport.setdefault("feed_successful", 0)
+        transport.setdefault("feed_entries_seen", 0)
+    if not feeds:
+        return []
+    domain = clean_text(src.get("domain", "")).lower().removeprefix("www.")
+    source_name = clean_text(src.get("name")) or domain
+    tier = int(src.get("tier", 2) or 2)
+    timeout = int(CONFIG.get("sitemap_timeout_seconds", 10) or 10)
+    max_entries = max(1, int(CONFIG.get("institution_feed_entries_per_source", 40) or 40))
+    today = dt.date.today()
+    out: list[tuple[str, str, int, str]] = []
+    for feed_url in feeds:
+        if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+            break
+        if transport is not None:
+            transport["feed_attempted"] = int(transport.get("feed_attempted", 0) or 0) + 1
+        fr = get(feed_url, timeout=timeout)
+        if not fr:
+            continue
+        try:
+            entries = list(getattr(feedparser.parse(fr.content), "entries", []) or [])[:max_entries]
+        except Exception:
+            continue
+        if transport is not None:
+            transport["feed_successful"] = int(transport.get("feed_successful", 0) or 0) + 1
+            transport["feed_entries_seen"] = int(transport.get("feed_entries_seen", 0) or 0) + len(entries)
+        for entry in entries:
+            link = clean_text(getattr(entry, "link", "") or (entry.get("link", "") if isinstance(entry, dict) else ""))
+            if not link:
+                continue
+            try:
+                host = (urlparse(link).hostname or "").lower().removeprefix("www.")
+            except Exception:
+                host = ""
+            if domain and not (host == domain or host.endswith("." + domain)):
+                continue
+            stamp = getattr(entry, "published_parsed", None) or getattr(entry, "updated_parsed", None)
+            when = dt.date(*stamp[:3]) if stamp else None
+            if when and (when < from_date or when > today + dt.timedelta(days=1)):
+                continue
+            fp = institution_fingerprint(link, when)
+            if _known_institution_url_should_skip(link, fp, reconsider_seen):
+                continue
+            if fp in INSTITUTION_SEEN_FINGERPRINTS and not reconsider_seen:
+                continue
+            out.append((link, source_name, tier, fp))
+    _diag_inc("institution_feed_jobs", len(out))
+    return out
+
+
 def _discover_domain(src: dict[str, Any], from_date: dt.date, bootstrap: bool = False, stage_deadline: float | None = None, reconsider_seen: bool = False) -> tuple[list[tuple[str, str, int, str]], str | None]:
     domain = src["domain"]
+    feed_transport: dict[str, Any] = {}
     adapter_jobs = _source_adapter_domain_jobs(src, from_date, stage_deadline, reconsider_seen)
+    adapter_jobs.extend(_institution_feed_jobs(src, from_date, stage_deadline, reconsider_seen, feed_transport))
     entries = []
     max_entries = int(CONFIG.get("sitemap_max_entries", 800))
     if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
@@ -11857,6 +12039,10 @@ def _discover_domain(src: dict[str, Any], from_date: dt.date, bootstrap: bool = 
     if not entries:
         if adapter_jobs:
             return adapter_jobs, f"No usable sitemap: {domain}; using source-specific publication adapter ({len(adapter_jobs)} page(s))"
+        # A configured feed that was successfully fetched is a healthy transport even when
+        # it happens to contain no in-window candidate. Do not turn "quiet" into "failed".
+        if int(feed_transport.get("feed_successful", 0) or 0) > 0:
+            return [], None
         # Trusted institutional sources without usable sitemaps still deserve bounded
         # source-local discovery. This follows only same-domain links from a few hubs;
         # it is not a global crawler or search-engine dependency.
@@ -12168,21 +12354,49 @@ def collect_institutions(from_date: dt.date, warnings: list[str], bootstrap: boo
     page_workers = int(CONFIG.get("institution_page_workers", 24))
     log_progress(f"Institutional discovery: {len(sources)} rotating source(s) this run")
     submitted_sources = []
+    transport_attempts = execution_stats.setdefault("source_transport_attempts", {}) if isinstance(execution_stats, dict) else {}
     with cf.ThreadPoolExecutor(max_workers=max(1, discovery_workers)) as ex:
-        futs = []
+        futs: dict[Any, dict[str, Any]] = {}
         for src in sources:
             if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
                 break
-            submitted_sources.append(clean_text(src.get("domain", "")).lower().removeprefix("www."))
-            futs.append(ex.submit(_discover_domain, src, from_date, bootstrap, stage_deadline, reconsider_seen))
+            domain = clean_text(src.get("domain", "")).lower().removeprefix("www.")
+            submitted_sources.append(domain)
+            fut = ex.submit(_discover_domain, src, from_date, bootstrap, stage_deadline, reconsider_seen)
+            futs[fut] = dict(src)
         for fut in cf.as_completed(futs):
+            src = futs[fut]
+            domain = clean_text(src.get("domain", "")).lower().removeprefix("www.")
+            source_name = clean_text(src.get("name")) or domain
+            tier = int(src.get("tier", 3) or 3)
             try:
                 found, warn = fut.result()
                 jobs.extend(found)
                 if warn:
                     warnings.append(warn)
+                low_warn = normalized(warn or "")
+                if "budget reached before" in low_warn:
+                    status = "skipped_budget"
+                elif found:
+                    status = "ok"
+                elif warn:
+                    status = "failed"
+                else:
+                    status = "ok_empty"
+                if isinstance(transport_attempts, dict) and domain:
+                    transport_attempts[domain] = {
+                        "source": source_name, "domain": domain, "tier": tier,
+                        "route": "institution_discovery", "status": status,
+                        "jobs_found": len(found), "note": clean_text(warn)[:240],
+                    }
             except Exception as e:
                 warnings.append(f"Institution sitemap: {type(e).__name__}")
+                if isinstance(transport_attempts, dict) and domain:
+                    transport_attempts[domain] = {
+                        "source": source_name, "domain": domain, "tier": tier,
+                        "route": "institution_discovery", "status": "failed",
+                        "jobs_found": 0, "note": f"{type(e).__name__}: {str(e)[:160]}",
+                    }
     out = []
     default_max = 1200 if bootstrap else 700
     max_key = "institution_max_pages_bootstrap" if bootstrap else "institution_max_pages"
@@ -14629,8 +14843,14 @@ def _audit_refresh_document(item: dict[str, Any]) -> tuple[str, str, str] | None
     m = re.search(r"10\.\d{4,9}/[^\s?#]+", normalized(link))
     if m:
         doi = m.group(0).rstrip(".,)")
-        r = get(f"https://api.crossref.org/works/{quote_plus(doi)}", timeout=timeout)
-        if r:
+        try:
+            r = SESSION.get(
+                f"https://api.crossref.org/works/{quote_plus(doi)}",
+                params=crossref_params(), timeout=timeout, allow_redirects=True,
+            )
+        except requests.RequestException:
+            r = None
+        if r is not None and r.status_code == 200:
             try:
                 msg = (r.json() or {}).get("message") or {}
                 title = clean_text((msg.get("title") or [item.get("title", "")])[0])
@@ -16806,6 +17026,560 @@ def allowed_global_news_source(name: str, domain: str) -> tuple[bool, str]:
     return False, name
 
 
+
+def _record_source_transport_attempt(
+    execution_stats: dict[str, Any] | None,
+    key: str,
+    *,
+    source: str,
+    domain: str,
+    tier: int,
+    route: str,
+    status: str,
+    jobs_found: int = 0,
+    note: str = "",
+) -> None:
+    if not isinstance(execution_stats, dict) or not clean_text(key):
+        return
+    table = execution_stats.setdefault("source_transport_attempts", {})
+    if not isinstance(table, dict):
+        return
+    table[clean_text(key)] = {
+        "source": clean_text(source), "domain": clean_text(domain).lower().removeprefix("www."),
+        "tier": int(tier or 3), "route": clean_text(route), "status": clean_text(status),
+        "jobs_found": max(0, int(jobs_found or 0)), "note": clean_text(note)[:240],
+    }
+
+
+def _roll_source_transport_health(
+    previous: dict[str, Any],
+    attempts: dict[str, Any],
+    completed: dt.datetime,
+    warnings: list[str],
+) -> dict[str, Any]:
+    """Persist source transport state without treating unscheduled sources as failures."""
+    prev_diag = previous.get("scan_diagnostics") if isinstance(previous.get("scan_diagnostics"), dict) else {}
+    prior = prev_diag.get("source_transport_health") if isinstance(prev_diag.get("source_transport_health"), dict) else {}
+    valid_keys = {
+        clean_text(x.get("domain", "")).lower().removeprefix("www.")
+        for x in CONFIG.get("institution_sources", []) if isinstance(x, dict) and clean_text(x.get("domain"))
+    } | {"eurlex_cellar", "europarl_open_data"}
+    out: dict[str, Any] = {k: dict(v) for k, v in prior.items() if k in valid_keys and isinstance(v, dict)}
+    completed_iso = completed.isoformat(timespec="minutes").replace("+00:00", "Z")
+    for key, raw in (attempts or {}).items():
+        if not isinstance(raw, dict):
+            continue
+        status = clean_text(raw.get("status")) or "unknown"
+        row = dict(out.get(key) or {})
+        row.update({
+            "source": clean_text(raw.get("source")) or clean_text(row.get("source")) or key,
+            "domain": clean_text(raw.get("domain")) or clean_text(row.get("domain")),
+            "tier": int(raw.get("tier", row.get("tier", 3)) or 3),
+            "route": clean_text(raw.get("route")) or clean_text(row.get("route")),
+            "last_jobs_found": max(0, int(raw.get("jobs_found", 0) or 0)),
+            "last_note": clean_text(raw.get("note"))[:240],
+            "last_scheduled_at": completed_iso,
+            "last_schedule_status": status,
+        })
+        if status == "skipped_budget":
+            # Neutral means genuinely neutral: do not turn a previous failure into a
+            # success, but also do not extend the failure streak when no request ran.
+            out[key] = row
+            continue
+        row["last_status"] = status
+        row["last_attempt_at"] = completed_iso
+        if status in {"ok", "ok_empty"}:
+            row["last_success_at"] = completed_iso
+            row["failure_since"] = ""
+            row["consecutive_failures"] = 0
+        elif status in {"failed", "degraded", "attempting", "unknown"}:
+            if not clean_text(row.get("failure_since")):
+                row["failure_since"] = completed_iso
+            row["consecutive_failures"] = int(row.get("consecutive_failures", 0) or 0) + 1
+        out[key] = row
+
+    threshold_days = max(1, int(CONFIG.get("source_transport_alert_after_days", 7) or 7))
+    for key, row in out.items():
+        if int(row.get("tier", 3) or 3) != 1 or clean_text(row.get("last_status")) not in {"failed", "degraded", "attempting", "unknown"}:
+            continue
+        since = clean_text(row.get("failure_since"))
+        try:
+            since_dt = dateparser.parse(since) if since else None
+            if since_dt and since_dt.tzinfo is None:
+                since_dt = since_dt.replace(tzinfo=dt.timezone.utc)
+        except Exception:
+            since_dt = None
+        if since_dt and (completed - since_dt).total_seconds() >= threshold_days * 86400:
+            msg = f"Tier-1 source transport unhealthy for {threshold_days}+ days: {clean_text(row.get('source')) or key} ({clean_text(row.get('route')) or key})"
+            if msg not in warnings:
+                warnings.append(msg)
+            print(f"::warning::{msg}")
+    return out
+
+
+def collect_eurlex_cellar(
+    now: dt.datetime,
+    warnings: list[str],
+    stage_deadline: float | None = None,
+    execution_stats: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
+    """Discover recent adopted EU legal acts through the Publications Office Cellar.
+
+    Cellar supplies the first-party metadata/text; the reader-facing link remains EUR-Lex.
+    Returned candidates still pass the ordinary Strand-C source, scope, topic and event gates.
+    """
+    if not bool(CONFIG.get("eurlex_cellar_enabled", True)) or RADAR_PRIORITY_SCAN or RADAR_QUICK_STRAND in {"A", "B"}:
+        return []
+    if stage_deadline_reached(stage_deadline, 10):
+        return []
+    _record_source_transport_attempt(
+        execution_stats, "eurlex_cellar", source="EUR-Lex", domain="publications.europa.eu",
+        tier=1, route="eurlex_cellar", status="attempting"
+    )
+    lookback_days = max(1, min(30, int(CONFIG.get("eurlex_cellar_lookback_days", 7) or 7)))
+    start_date = now.date() - dt.timedelta(days=lookback_days)
+    terms = [normalized(x) for x in CONFIG.get("eurlex_cellar_title_terms", []) if clean_text(x)]
+    if not terms:
+        terms = [
+            "research", "innovation", "technolog", "digital", "artificial intelligence",
+            "semiconductor", "chip", "space", "quantum", "export", "dual-use", "dual use",
+            "sanction", "screening", "horizon", "data", "cyber", "raw material", "defence",
+            "defense", "energy",
+        ]
+    sparql = "\n".join([
+        "PREFIX cdm: <http://publications.europa.eu/ontology/cdm#>",
+        "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>",
+        "SELECT DISTINCT ?celex ?date ?title WHERE {",
+        "  ?w cdm:resource_legal_id_celex ?celex ; cdm:work_date_document ?date .",
+        f'  FILTER(?date >= "{start_date.isoformat()}"^^xsd:date)',
+        "  ?e cdm:expression_belongs_to_work ?w ; cdm:expression_title ?title ;",
+        "     cdm:expression_uses_language <http://publications.europa.eu/resource/authority/language/ENG> .",
+        "}",
+        "ORDER BY DESC(?date)",
+        "LIMIT 160",
+    ])
+    timeout = max(5, int(CONFIG.get("eurlex_cellar_timeout_seconds", 18) or 18))
+    try:
+        r = SESSION.get(
+            "https://publications.europa.eu/webapi/rdf/sparql",
+            params={"query": sparql, "format": "application/sparql-results+json"},
+            timeout=timeout,
+            allow_redirects=True,
+        )
+        if r.status_code != 200:
+            warnings.append(f"EUR-Lex Cellar SPARQL: HTTP {r.status_code}")
+            _record_source_transport_attempt(execution_stats, "eurlex_cellar", source="EUR-Lex", domain="publications.europa.eu", tier=1, route="eurlex_cellar", status="failed", note=f"SPARQL HTTP {r.status_code}")
+            return []
+        bindings = (((r.json() or {}).get("results") or {}).get("bindings") or [])
+    except Exception as e:
+        warnings.append(f"EUR-Lex Cellar SPARQL: {type(e).__name__}")
+        _record_source_transport_attempt(execution_stats, "eurlex_cellar", source="EUR-Lex", domain="publications.europa.eu", tier=1, route="eurlex_cellar", status="failed", note=type(e).__name__)
+        return []
+
+    out: list[dict[str, Any]] = []
+    seen_celex: set[str] = set()
+    relevant_records = 0
+    readable_records = 0
+    max_items = max(1, int(CONFIG.get("eurlex_cellar_max_items", 30) or 30))
+    for row in bindings:
+        if len(out) >= max_items or stage_deadline_reached(stage_deadline, 8):
+            break
+        if not isinstance(row, dict):
+            continue
+        celex = clean_text(((row.get("celex") or {}).get("value")))
+        title = clean_text(((row.get("title") or {}).get("value")))
+        published = parse_date(((row.get("date") or {}).get("value")))
+        if not celex or not title or not published or celex in seen_celex:
+            continue
+        seen_celex.add(celex)
+        if published < start_date or published > now.date() + dt.timedelta(days=1):
+            _diag_inc("eurlex_cellar_reject_bad_date")
+            continue
+        ntitle = normalized(title)
+        if not any(term in ntitle for term in terms):
+            continue
+        relevant_records += 1
+        try:
+            tr = SESSION.get(
+                "https://publications.europa.eu/resource/celex/" + quote(celex, safe=""),
+                headers={
+                    "Accept": "application/xhtml+xml",
+                    "Accept-Language": "eng",
+                    "Accept-Max-Cs-Size": "6000000",
+                },
+                timeout=timeout,
+                allow_redirects=True,
+            )
+        except Exception:
+            _diag_inc("eurlex_cellar_text_fetch_failed")
+            continue
+        if tr.status_code != 200 or not getattr(tr, "content", b""):
+            _diag_inc("eurlex_cellar_text_fetch_failed")
+            continue
+        try:
+            soup = BeautifulSoup(tr.text, "html.parser")
+            for bad in soup(["script", "style", "nav", "header", "footer", "aside", "form", "noscript"]):
+                bad.decompose()
+            body = clean_text((soup.find("main") or soup.find("article") or soup.body or soup).get_text(" ", strip=True))
+        except Exception:
+            body = ""
+        if len(body.split()) < 40:
+            _diag_inc("eurlex_cellar_text_too_short")
+            continue
+        readable_records += 1
+        desc = body[:14000]
+        text = clean_text(f"{title}. {desc}")
+        signal_key = f"signal:{normalized('EUR-Lex')}:{norm_title(title)}"
+        if signal_key in KNOWN_SIGNAL_IDENTITIES:
+            continue
+        link = "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:" + quote(celex, safe="")
+        out.append({
+            "headline": title,
+            "source": "EUR-Lex",
+            "source_domain": "eur-lex.europa.eu",
+            "discovery_provenance": "eurlex_cellar",
+            "date": published.isoformat(),
+            "date_basis": "cellar_work_date_document",
+            "link": link,
+            "language": "en",
+            "source_validation_url": "https://publications.europa.eu/resource/celex/" + quote(celex, safe=""),
+            "source_access": {
+                "route": "eurlex_cellar",
+                "celex": celex,
+                "validation_url": "https://publications.europa.eu/resource/celex/" + quote(celex, safe=""),
+            },
+            "_desc": desc,
+            "_desc_html": "",
+            "_themes": themes_for(text),
+            "_entities": distinct_matches(text, ENTITY_TERMS + GEO_ACTORS),
+            "_institutional_signal": True,
+            "_trusted_europe_publication": True,
+            "_formal_proposal_signal": bool(formal_proposal_is_public_signal(text, title, desc, "EUR-Lex", link)),
+            "_strategic_source_text": text,
+            "celex": celex,
+        })
+    _diag_inc("eurlex_cellar_candidates", len(out))
+    transport_status = "ok" if readable_records else ("degraded" if relevant_records else "ok_empty")
+    transport_note = ""
+    if transport_status == "degraded":
+        transport_note = f"{relevant_records} title-relevant act(s) found but no substantive Cellar text was readable"
+        warnings.append(f"EUR-Lex Cellar: {transport_note}")
+    _record_source_transport_attempt(
+        execution_stats, "eurlex_cellar", source="EUR-Lex", domain="publications.europa.eu", tier=1,
+        route="eurlex_cellar", status=transport_status, jobs_found=len(out), note=transport_note
+    )
+    return out
+
+
+def _ep_json_scalar(value: Any) -> str:
+    """Collapse common JSON-LD scalar shapes without depending on one EP model revision."""
+    if isinstance(value, str):
+        return clean_text(value)
+    if isinstance(value, (int, float)):
+        return clean_text(value)
+    if isinstance(value, list):
+        for part in value:
+            got = _ep_json_scalar(part)
+            if got:
+                return got
+        return ""
+    if isinstance(value, dict):
+        for key in ("@value", "value", "label", "title", "name", "@id", "id"):
+            if key in value:
+                got = _ep_json_scalar(value.get(key))
+                if got:
+                    return got
+    return ""
+
+
+def _ep_key_tail(key: Any) -> str:
+    return re.split(r"[#/:]", clean_text(key).lower())[-1].replace("-", "_")
+
+
+def _ep_walk_dicts(value: Any):
+    if isinstance(value, dict):
+        yield value
+        for child in value.values():
+            yield from _ep_walk_dicts(child)
+    elif isinstance(value, list):
+        for child in value:
+            yield from _ep_walk_dicts(child)
+
+
+def _ep_urls(value: Any) -> list[str]:
+    out: list[str] = []
+    if isinstance(value, str):
+        if value.startswith(("http://", "https://")):
+            out.append(clean_text(value))
+    elif isinstance(value, dict):
+        for child in value.values():
+            out.extend(_ep_urls(child))
+    elif isinstance(value, list):
+        for child in value:
+            out.extend(_ep_urls(child))
+    return list(dict.fromkeys(x for x in out if x))
+
+
+def _ep_document_records(payload: Any) -> list[dict[str, Any]]:
+    """Extract adopted-text records from framed/unframed JSON-LD defensively."""
+    records: dict[str, dict[str, Any]] = {}
+    for node in _ep_walk_dicts(payload):
+        keys = {_ep_key_tail(k): k for k in node.keys()}
+        values = [_ep_json_scalar(v) for v in node.values()]
+        joined = " ".join(x for x in values if x)
+        doc_match = re.search(r"\bTA-(?:9|10)-20\d{2}-\d{4}\b", joined, re.I)
+        if not doc_match:
+            doc_match = re.search(r"\bP(?:9|10)_TA\(20\d{2}\)\d{4}\b", joined, re.I)
+        if not doc_match:
+            continue
+        raw_id = doc_match.group(0).upper()
+        if raw_id.startswith("P"):
+            m = re.search(r"P(\d+)_TA\((20\d{2})\)(\d{4})", raw_id)
+            doc_id = f"TA-{m.group(1)}-{m.group(2)}-{m.group(3)}" if m else raw_id
+        else:
+            doc_id = raw_id
+        title = ""
+        for tail in ("document_title", "title", "title_dcterms", "expression_title"):
+            if tail in keys:
+                title = _ep_json_scalar(node.get(keys[tail]))
+                if title:
+                    break
+        published = None
+        for tail in ("document_date", "date_document", "date", "created", "issued"):
+            if tail in keys:
+                published = parse_date(_ep_json_scalar(node.get(keys[tail])))
+                if published:
+                    break
+        urls = _ep_urls(node)
+        rec = records.setdefault(doc_id, {"doc_id": doc_id, "title": "", "date": None, "urls": []})
+        if title and (not rec["title"] or len(title) > len(rec["title"])):
+            rec["title"] = title
+        if published and not rec["date"]:
+            rec["date"] = published
+        rec["urls"] = list(dict.fromkeys(list(rec["urls"]) + urls))
+    return list(records.values())
+
+
+def _ep_pdf_text(payload: bytes) -> str:
+    try:
+        reader = PdfReader(io.BytesIO(payload))
+    except Exception:
+        return ""
+    texts: list[str] = []
+    page_cap = max(2, min(12, int(CONFIG.get("europarl_pdf_page_cap", 8) or 8)))
+    for page in reader.pages[:page_cap]:
+        try:
+            text = page.extract_text() or ""
+        except Exception:
+            text = ""
+        if text:
+            texts.append(text)
+        if sum(len(x) for x in texts) >= 18000:
+            break
+    return clean_text(" ".join(texts))[:18000]
+
+
+def collect_europarl_adopted_texts(
+    now: dt.datetime,
+    warnings: list[str],
+    stage_deadline: float | None = None,
+    execution_stats: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
+    """Discover recent EP adopted texts through the official Open Data API.
+
+    This is a first-party discovery/transport lane only.  Its output still enters the same
+    Strand-C admission logic as news/Cellar candidates.  A stable EP document/PDF URL is
+    persisted so authoritative Deep Scan can validate through the identical source route.
+    """
+    if not bool(CONFIG.get("europarl_adopted_texts_enabled", True)) or RADAR_PRIORITY_SCAN or RADAR_QUICK_STRAND in {"A", "B"}:
+        return []
+    if stage_deadline_reached(stage_deadline, 10):
+        return []
+    _record_source_transport_attempt(
+        execution_stats, "europarl_open_data", source="European Parliament", domain="data.europarl.europa.eu",
+        tier=1, route="europarl_open_data_adopted_text", status="attempting"
+    )
+    lookback_days = max(1, min(30, int(CONFIG.get("europarl_lookback_days", 7) or 7)))
+    start_date = now.date() - dt.timedelta(days=lookback_days)
+    terms = [normalized(x) for x in CONFIG.get("europarl_title_terms", []) if clean_text(x)]
+    if not terms:
+        terms = [normalized(x) for x in CONFIG.get("eurlex_cellar_title_terms", []) if clean_text(x)]
+    timeout = max(5, int(CONFIG.get("europarl_timeout_seconds", 18) or 18))
+    # The EP v2 feed is designed for incremental "published or updated" retrieval and,
+    # since 2025, accepts a caller-defined timeframe/start-date.  Use it first so an
+    # ordinary scan does not refetch a whole year.  The date-filtered list endpoint is
+    # retained as a bounded fallback because feeds can be slow or temporarily empty/404.
+    requests_plan = [
+        (
+            "https://data.europarl.europa.eu/api/v2/adopted-texts/feed",
+            {
+                "timeframe": "custom",
+                "start-date": start_date.isoformat(),
+                "language-filter": "en",
+                "include-output": "true",
+                "format": "application/ld+json",
+            },
+            "feed",
+        ),
+        (
+            "https://data.europarl.europa.eu/api/v2/adopted-texts",
+            {
+                "sitting-date-start": start_date.isoformat(),
+                "sitting-date-end": now.date().isoformat(),
+                "language-filter": "en",
+                "include-output": "true",
+                "format": "application/ld+json",
+            },
+            "date-filtered-list",
+        ),
+    ]
+    records: list[dict[str, Any]] = []
+    attempt_notes: list[str] = []
+    request_attempted = False
+    for endpoint, params, mode in requests_plan:
+        if stage_deadline_reached(stage_deadline, 8):
+            break
+        request_attempted = True
+        try:
+            r = SESSION.get(
+                endpoint,
+                params=params,
+                headers={"Accept": "application/ld+json"},
+                timeout=timeout,
+                allow_redirects=True,
+            )
+            # A feed may legitimately be empty/404 during a quiet period.  Fall back to
+            # the date-filtered list before calling the source unhealthy.
+            if r.status_code != 200:
+                attempt_notes.append(f"{mode} HTTP {r.status_code}")
+                continue
+            records = _ep_document_records(r.json())
+            attempt_notes.append(f"{mode} HTTP 200 ({len(records)} record(s))")
+            if records:
+                break
+        except Exception as exc:
+            attempt_notes.append(f"{mode} {type(exc).__name__}")
+    if not records:
+        # If budget expired before any network request, this is not a source failure.
+        # If either endpoint answered successfully but the period was quiet, transport is
+        # healthy. Only mark failure when a real request was made and every attempt failed.
+        had_success = any("HTTP 200" in note for note in attempt_notes)
+        status = "skipped_budget" if not request_attempted else ("ok_empty" if had_success else "failed")
+        note = ("stage budget expired before request" if not request_attempted else "; ".join(attempt_notes))[:240]
+        if status == "failed":
+            warnings.append(f"European Parliament Open Data: {note or 'no successful endpoint'}")
+        _record_source_transport_attempt(
+            execution_stats, "europarl_open_data", source="European Parliament",
+            domain="data.europarl.europa.eu", tier=1, route="europarl_open_data_adopted_text",
+            status=status, note=note,
+        )
+        return []
+
+    out: list[dict[str, Any]] = []
+    relevant_records = 0
+    readable_records = 0
+    max_items = max(1, int(CONFIG.get("europarl_max_items", 24) or 24))
+    for rec in records:
+        if len(out) >= max_items or stage_deadline_reached(stage_deadline, 8):
+            break
+        doc_id = clean_text(rec.get("doc_id"))
+        title = clean_text(rec.get("title"))
+        published = rec.get("date") if isinstance(rec.get("date"), dt.date) else parse_date(rec.get("date"))
+        if not doc_id or not title or not published:
+            continue
+        if published < start_date or published > now.date() + dt.timedelta(days=1):
+            _diag_inc("europarl_reject_bad_date")
+            continue
+        ntitle = normalized(title)
+        if terms and not any(term in ntitle for term in terms):
+            continue
+        relevant_records += 1
+        urls = [clean_text(x) for x in rec.get("urls", []) if clean_text(x)]
+        pdf_urls = [u for u in urls if re.search(r"_en\.pdf(?:$|\?)", u, re.I)]
+        if not pdf_urls:
+            pdf_urls = [u for u in urls if urlparse(u).path.lower().endswith(".pdf")]
+        doc_uri = next((u for u in urls if f"/eli/dl/doc/{doc_id.lower()}" in u.lower()), "")
+        if not doc_uri:
+            doc_uri = f"https://data.europarl.europa.eu/eli/dl/doc/{doc_id}"
+        validation_url = pdf_urls[0] if pdf_urls else ""
+        if not validation_url:
+            # Detail calls often expose language-specific output links even when the list
+            # representation is compact. Keep this bounded to already title-relevant rows.
+            try:
+                dr = SESSION.get(
+                    "https://data.europarl.europa.eu/api/v2/adopted-texts/" + quote(doc_id, safe=""),
+                    params={"language-filter": "en", "include-output": "true", "format": "application/ld+json"},
+                    headers={"Accept": "application/ld+json"}, timeout=timeout, allow_redirects=True,
+                )
+                if dr.status_code == 200:
+                    detail_urls = _ep_urls(dr.json())
+                    validation_url = next((u for u in detail_urls if re.search(r"_en\.pdf(?:$|\?)", u, re.I)), "")
+                    if not validation_url:
+                        validation_url = next((u for u in detail_urls if urlparse(u).path.lower().endswith(".pdf")), "")
+                    doc_uri = next((u for u in detail_urls if f"/eli/dl/doc/{doc_id.lower()}" in u.lower()), doc_uri)
+            except Exception:
+                _diag_inc("europarl_detail_fetch_failed")
+        if not validation_url:
+            _diag_inc("europarl_no_english_pdf")
+            continue
+        try:
+            pr = SESSION.get(validation_url, timeout=timeout, allow_redirects=True)
+        except Exception:
+            _diag_inc("europarl_pdf_fetch_failed")
+            continue
+        if pr.status_code != 200 or not getattr(pr, "content", b"") or len(pr.content) > 22_000_000:
+            _diag_inc("europarl_pdf_fetch_failed")
+            continue
+        body = _ep_pdf_text(pr.content)
+        if len(body.split()) < 60:
+            _diag_inc("europarl_pdf_text_too_short")
+            continue
+        readable_records += 1
+        desc = body[:14000]
+        text = clean_text(f"{title}. {desc}")
+        signal_key = f"signal:{normalized('European Parliament')}:{norm_title(title)}"
+        if signal_key in KNOWN_SIGNAL_IDENTITIES:
+            continue
+        out.append({
+            "headline": title,
+            "source": "European Parliament",
+            "source_domain": "data.europarl.europa.eu",
+            "discovery_provenance": "europarl_open_data_adopted_text",
+            "date": published.isoformat(),
+            "date_basis": "ep_adopted_text_document_date",
+            "link": doc_uri,
+            "language": "en",
+            "source_validation_url": validation_url,
+            "source_access": {
+                "route": "europarl_open_data_adopted_text",
+                "ep_doc_id": doc_id,
+                "validation_url": validation_url,
+                "document_uri": doc_uri,
+            },
+            "ep_doc_id": doc_id,
+            "ep_document_pdf": validation_url,
+            "_desc": desc,
+            "_desc_html": "",
+            "_themes": themes_for(text),
+            "_entities": distinct_matches(text, ENTITY_TERMS + GEO_ACTORS),
+            "_institutional_signal": True,
+            "_trusted_europe_publication": True,
+            "_formal_proposal_signal": bool(formal_proposal_is_public_signal(text, title, desc, "European Parliament", doc_uri)),
+            "_strategic_source_text": text,
+        })
+    _diag_inc("europarl_candidates", len(out))
+    transport_status = "ok" if readable_records else ("degraded" if relevant_records else "ok_empty")
+    transport_note = ""
+    if transport_status == "degraded":
+        transport_note = f"{relevant_records} title-relevant adopted text(s) found but no substantive first-party document was readable"
+        warnings.append(f"European Parliament Open Data: {transport_note}")
+    _record_source_transport_attempt(
+        execution_stats, "europarl_open_data", source="European Parliament", domain="data.europarl.europa.eu", tier=1,
+        route="europarl_open_data_adopted_text", status=transport_status, jobs_found=len(out), note=transport_note
+    )
+    return out
+
+
 def collect_news(now: dt.datetime, warnings: list[str], lookback_hours: int | None = None, stage_deadline: float | None = None, coverage_queries: list[str] | None = None, include_base_queries: bool = True, reserve_seconds: int | None = None) -> list[dict[str, Any]]:
     lookback_hours = int(lookback_hours or NEWS_LOOKBACK_HOURS)
     news_reserve = int(CONFIG.get("network_reserve_seconds", 90)) if reserve_seconds is None else max(0, int(reserve_seconds))
@@ -17298,7 +18072,7 @@ def _linked_doi_candidate(url: str, stage_deadline: float | None = None) -> dict
         doi = parsed.path.lstrip("/")
         if not doi:
             return None
-        r = SESSION.get("https://api.crossref.org/works/" + quote_plus(doi, safe="/()"), timeout=int(CONFIG.get("scholarly_api_timeout_seconds", 12) or 12))
+        r = SESSION.get("https://api.crossref.org/works/" + quote_plus(doi, safe="/()"), params=crossref_params(), timeout=int(CONFIG.get("scholarly_api_timeout_seconds", 12) or 12))
         if r.status_code != 200:
             return None
         raw = (r.json().get("message") or {})
@@ -20259,6 +21033,9 @@ def main() -> int:
     inst_deadline = phase_started + int(CONFIG.get("institution_stage_seconds", 480))
     direct_journal_deadline = phase_started + int(CONFIG.get('direct_top_journal_stage_seconds', 220) or 220)
     primary_evidence_deadline = phase_started + int(CONFIG.get('primary_evidence_stage_seconds', 180) or 180)
+    eurlex_cellar_deadline = phase_started + int(CONFIG.get('eurlex_cellar_stage_seconds', 120) or 120)
+    europarl_deadline = phase_started + int(CONFIG.get('europarl_stage_seconds', 120) or 120)
+    crossref_prefix_deadline = phase_started + int(CONFIG.get('crossref_prefix_stage_seconds', 60) or 60)
 
     high_order_news_focus = []
     try:
@@ -20270,7 +21047,7 @@ def main() -> int:
     except Exception:
         high_order_news_focus = []
 
-    with cf.ThreadPoolExecutor(max_workers=6) as ex:
+    with cf.ThreadPoolExecutor(max_workers=9) as ex:
         fut_news = ex.submit(
             safe_stage, "weak-signal news", collect_news, now, news_warnings, news_lookback, news_deadline,
             list(dict.fromkeys(list(priority_news_queries()) + list(frontier_focus["queries"]) + high_order_news_focus))
@@ -20295,6 +21072,16 @@ def main() -> int:
             safe_stage, "must-not-miss primary EU evidence", collect_must_not_miss_primary_evidence,
             previous, warnings, primary_evidence_deadline, execution_stats
         )
+        fut_eurlex_cellar = ex.submit(
+            safe_stage, "EUR-Lex Cellar", collect_eurlex_cellar, now, warnings, eurlex_cellar_deadline, execution_stats
+        )
+        fut_europarl = ex.submit(
+            safe_stage, "European Parliament adopted texts", collect_europarl_adopted_texts, now, warnings, europarl_deadline, execution_stats
+        )
+        fut_crossref_prefix = ex.submit(
+            safe_stage, "Crossref exact publisher prefix", collect_crossref_prefix_sources,
+            cr_from, warnings, crossref_prefix_deadline, execution_stats
+        )
         news = fut_news.result()
         if priority_direct_news:
             news.extend(priority_direct_news)
@@ -20308,6 +21095,15 @@ def main() -> int:
         primary_evidence_rows = fut_primary_evidence.result()
         if primary_evidence_rows:
             inst_base.extend(primary_evidence_rows)
+        eurlex_cellar_rows = fut_eurlex_cellar.result()
+        if eurlex_cellar_rows:
+            news.extend(eurlex_cellar_rows)
+        europarl_rows = fut_europarl.result()
+        if europarl_rows:
+            news.extend(europarl_rows)
+        crossref_prefix_rows = fut_crossref_prefix.result()
+        if crossref_prefix_rows:
+            cr.extend(crossref_prefix_rows)
         try:
             direct_journal_ab, direct_journal_c = fut_direct_journals.result()
         except Exception as e:
@@ -23143,7 +23939,7 @@ def main() -> int:
         if any(x in normalized(w) for x in ["connection", "timeout", "httperror", "name resolution", "http 429", "http 5"])
     )
     fatal_stage_error = any("fatal stage error" in normalized(w) for w in warnings)
-    health = "degraded" if overall_budget_hit or fatal_stage_error or partial_budget_hit or (total_ab_live == 0 and len(warnings) >= 10) else "ok"
+    health = "degraded" if overall_budget_hit or fatal_stage_error or (total_ab_live == 0 and len(warnings) >= 10) else "ok"
     if overall_budget_hit:
         warnings.append("Overall scan runtime budget reached; queued work was skipped safely and persisted cursors prevent restarting from query 1")
 
@@ -23246,6 +24042,26 @@ def main() -> int:
 
     completed = dt.datetime.now(dt.timezone.utc)
     completed_iso = completed.isoformat(timespec="minutes").replace("+00:00", "Z")
+    source_transport_health = _roll_source_transport_health(
+        previous,
+        execution_stats.get("source_transport_attempts", {}) if isinstance(execution_stats, dict) else {},
+        completed, warnings,
+    )
+    # "Degraded" should signal a real operational problem, not an expected partial
+    # time-slice stop.  A Tier-1 source only reaches this condition after the persisted
+    # health log shows that its transport has remained unhealthy for the configured
+    # alert window (normally seven days).
+    critical_source_transport_unhealthy = any(
+        normalized(w).startswith("tier-1 source transport unhealthy") for w in warnings
+    )
+    if critical_source_transport_unhealthy:
+        health = "degraded"
+    # Health rolling can add the long-running Tier-1 warning after the initial warning
+    # summary was computed, so refresh this diagnostic count here.
+    transport_failure_count = sum(
+        1 for w in warnings
+        if any(x in normalized(w) for x in ["connection", "timeout", "httperror", "name resolution", "http 429", "http 5", "source transport unhealthy"])
+    )
     state["last_run"] = completed_iso
     state["last_reader_products_refresh"] = completed_iso
     scheduler_completed = scheduler_state_completed_at(completed)
@@ -23755,6 +24571,8 @@ def main() -> int:
             "source_warning_count": len(warnings),
             "source_warnings": list(dict.fromkeys(warnings))[:100],
             "transport_failure_warning_count": transport_failure_count,
+            "source_transport_attempts": dict(execution_stats.get("source_transport_attempts", {}) or {}),
+            "source_transport_health": source_transport_health,
             "c_admission_trace": c_admission_trace,
             "c_admission_reason_counts": c_admission_reason_counts,
         },
