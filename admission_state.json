@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-admission-v1",
-  "updated_at": "2026-09-22T00:39:59Z",
+  "updated_at": "2026-09-22T10:33:31Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "decision": "drop",
@@ -8253,16 +8253,15 @@
       "duplicate_of": ""
     },
     "link:https://doi.org/10.1163/15691497-20263013": {
-      "decision": "needs_manual_verification",
+      "decision": "drop_unverifiable",
       "target_strand": "",
-      "reason_code": "NEEDS_MANUAL_VERIFICATION",
-      "reason": "Identity is credible, but substantive evidence remained inaccessible after three validated Deep Scan recovery passes; excluded from active reasoning until hands-on verification supplies materially new access.",
-      "source": "deep_scan_v2",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "The work identity is established, but substantive evidence remained inaccessible after the complete PUSH HARDER protocol; terminal drop_unverifiable is therefore required without a content judgement.",
+      "source": "deep_scan_hardcore_terminal",
       "corpus_scope": "main",
-      "updated_at": "2026-09-15T12:19:13Z",
-      "deep_scan_package_id": "worker-a-20260915T112419Z-c19ab9b1c63a",
-      "verification_note": "Identity is bibliographically confirmed, but substantive evidence remained inaccessible after the complete mandatory recovery ladder.",
-      "recovery_attempts": 3
+      "updated_at": "2026-09-22T10:33:31Z",
+      "deep_scan_package_id": "hardcore-20260922T093512Z-13aef701e7de",
+      "verification_note": "Bibliographic identity is credible, but no substantive matching primary/repository/author text was legitimately recoverable after all 14 applicable route categories, both TRY HARDER challenge passes, and the final exhaustion audit. Abstracts, metadata, search extraction and related works were not used as substantive evidence."
     },
     "historical:id:d7fe43f9da2ef60f": {
       "decision": "keep",
@@ -10185,16 +10184,15 @@
       "duplicate_of": ""
     },
     "link:https://doi.org/10.1080/09537325.2013.877129": {
-      "decision": "needs_manual_verification",
+      "decision": "drop_unverifiable",
       "target_strand": "",
-      "reason_code": "NEEDS_MANUAL_VERIFICATION",
-      "reason": "Identity is credible, but substantive evidence remained inaccessible after three validated Deep Scan recovery passes; excluded from active reasoning until hands-on verification supplies materially new access.",
-      "source": "deep_scan_v2",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "The work identity is established, but substantive evidence remained inaccessible after the complete PUSH HARDER protocol; terminal drop_unverifiable is therefore required without a content judgement.",
+      "source": "deep_scan_hardcore_terminal",
       "corpus_scope": "main",
-      "updated_at": "2026-09-16T09:07:21Z",
-      "deep_scan_package_id": "worker-a-20260916T084632Z-bc02df452405",
-      "verification_note": "Identity and canonical citation are verified, but all six recovery steps failed to produce admissible substantive text; no Strand B judgement was inferred from the abstract.",
-      "recovery_attempts": 3
+      "updated_at": "2026-09-22T10:33:31Z",
+      "deep_scan_package_id": "hardcore-20260922T093512Z-13aef701e7de",
+      "verification_note": "Bibliographic identity is credible, but no substantive matching primary/repository/author text was legitimately recoverable after all 14 applicable route categories, both TRY HARDER challenge passes, and the final exhaustion audit. Abstracts, metadata, search extraction and related works were not used as substantive evidence."
     },
     "historical:id:b00054029c32ded1": {
       "decision": "drop",
@@ -11025,16 +11023,16 @@
       "duplicate_of": ""
     },
     "link:https://doi.org/10.1177/19467567261450218": {
-      "decision": "needs_manual_verification",
-      "target_strand": "",
-      "reason_code": "NEEDS_MANUAL_VERIFICATION",
-      "reason": "Identity is credible, but substantive evidence remained inaccessible after three validated Deep Scan recovery passes; excluded from active reasoning until hands-on verification supplies materially new access.",
-      "source": "deep_scan_v2",
+      "decision": "keep",
+      "target_strand": "B",
+      "reason_code": "B_REUSABLE_METHOD_CONTRIBUTION",
+      "reason": "The systematic review goes beyond applying CPSM: it synthesises 31 applications into a transferable diagnostic theory, identifies the adaptive trap as a recurring failure mode, and specifies method-integration guidance with CLA and the Futures Triangle.",
+      "source": "deep_scan_hardcore_terminal",
       "corpus_scope": "main",
-      "updated_at": "2026-09-16T10:13:04Z",
-      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad",
-      "verification_note": "Identity is fully verified and the abstract is readable, but the article is restricted and no legitimate copy exists. Whether the review makes a genuine reusable methodological contribution or merely catalogues applications of an existing method cannot be judged from an abstract.",
-      "recovery_attempts": 3
+      "updated_at": "2026-09-22T10:33:31Z",
+      "deep_scan_package_id": "hardcore-20260922T093512Z-13aef701e7de",
+      "verification_note": "Recovered an author-uploaded accepted manuscript matching the DOI. The manuscript contains the PRISMA methods, study-selection flow, 31-study synthesis, discussion and conclusion, allowing a full Strand B judgement.",
+      "duplicate_of": ""
     },
     "historical:id:2e8fa943a5ec6807": {
       "decision": "keep",
@@ -11049,28 +11047,26 @@
       "duplicate_of": ""
     },
     "link:https://doi.org/10.1177/19467567261444949": {
-      "decision": "needs_manual_verification",
+      "decision": "drop_unverifiable",
       "target_strand": "",
-      "reason_code": "NEEDS_MANUAL_VERIFICATION",
-      "reason": "Identity is credible, but substantive evidence remained inaccessible after three validated Deep Scan recovery passes; excluded from active reasoning until hands-on verification supplies materially new access.",
-      "source": "deep_scan_v2",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "The work identity is established, but substantive evidence remained inaccessible after the complete PUSH HARDER protocol; terminal drop_unverifiable is therefore required without a content judgement.",
+      "source": "deep_scan_hardcore_terminal",
       "corpus_scope": "main",
-      "updated_at": "2026-09-16T10:13:04Z",
-      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad",
-      "verification_note": "Identity is verified and the abstract describes a practice-based speculative design methodology, but the full text is inaccessible, so whether it constitutes a genuine reusable method contribution rather than a reflective account of two art projects cannot be responsibly decided.",
-      "recovery_attempts": 3
+      "updated_at": "2026-09-22T10:33:31Z",
+      "deep_scan_package_id": "hardcore-20260922T093512Z-13aef701e7de",
+      "verification_note": "Bibliographic identity is credible, but no substantive matching primary/repository/author text was legitimately recoverable after all 14 applicable route categories, both TRY HARDER challenge passes, and the final exhaustion audit. Abstracts, metadata, search extraction and related works were not used as substantive evidence."
     },
     "link:https://doi.org/10.1108/fs-03-2024-0052": {
-      "decision": "needs_manual_verification",
+      "decision": "drop_unverifiable",
       "target_strand": "",
-      "reason_code": "NEEDS_MANUAL_VERIFICATION",
-      "reason": "Identity is credible, but substantive evidence remained inaccessible after three validated Deep Scan recovery passes; excluded from active reasoning until hands-on verification supplies materially new access.",
-      "source": "deep_scan_v2",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "The work identity is established, but substantive evidence remained inaccessible after the complete PUSH HARDER protocol; terminal drop_unverifiable is therefore required without a content judgement.",
+      "source": "deep_scan_hardcore_terminal",
       "corpus_scope": "main",
-      "updated_at": "2026-09-16T10:13:04Z",
-      "deep_scan_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad",
-      "verification_note": "Identity is settled and the structured abstract is known, but the only OA copy sits in a repository that is persistently unavailable, so the methodological contribution question cannot be judged on substantive evidence.",
-      "recovery_attempts": 3
+      "updated_at": "2026-09-22T10:33:31Z",
+      "deep_scan_package_id": "hardcore-20260922T093512Z-13aef701e7de",
+      "verification_note": "Bibliographic identity is credible, but no substantive matching primary/repository/author text was legitimately recoverable after all 14 applicable route categories, both TRY HARDER challenge passes, and the final exhaustion audit. Abstracts, metadata, search extraction and related works were not used as substantive evidence."
     },
     "historical:id:a8618bb56441d976": {
       "decision": "drop",
@@ -12849,16 +12845,15 @@
       "duplicate_of": ""
     },
     "link:https://doi.org/10.1016/j.engfor.2026.09.002": {
-      "decision": "needs_manual_verification",
+      "decision": "drop_unverifiable",
       "target_strand": "",
-      "reason_code": "NEEDS_MANUAL_VERIFICATION",
-      "reason": "Identity is credible, but substantive evidence remained inaccessible after three validated Deep Scan recovery passes; excluded from active reasoning until hands-on verification supplies materially new access.",
-      "source": "deep_scan_v2",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "The work identity is established, but substantive evidence remained inaccessible after the complete PUSH HARDER protocol; terminal drop_unverifiable is therefore required without a content judgement.",
+      "source": "deep_scan_hardcore_terminal",
       "corpus_scope": "main",
-      "updated_at": "2026-09-16T11:56:51Z",
-      "deep_scan_package_id": "worker-b-20260916T111859Z-7e67cb37e8b4",
-      "verification_note": "Identity verified; substantive text not legitimately accessible after all six steps.",
-      "recovery_attempts": 3
+      "updated_at": "2026-09-22T10:33:31Z",
+      "deep_scan_package_id": "hardcore-20260922T093512Z-13aef701e7de",
+      "verification_note": "Bibliographic identity is credible, but no substantive matching primary/repository/author text was legitimately recoverable after all 14 applicable route categories, both TRY HARDER challenge passes, and the final exhaustion audit. Abstracts, metadata, search extraction and related works were not used as substantive evidence."
     },
     "historical:id:a4ff9ac2ff0bc41c": {
       "decision": "drop",
@@ -15777,16 +15772,15 @@
       "duplicate_of": ""
     },
     "link:https://doi.org/10.1016/j.bushor.2026.09.004": {
-      "decision": "needs_manual_verification",
+      "decision": "drop_unverifiable",
       "target_strand": "",
-      "reason_code": "NEEDS_MANUAL_VERIFICATION",
-      "reason": "Identity is credible, but substantive evidence remained inaccessible after three validated Deep Scan recovery passes; excluded from active reasoning until hands-on verification supplies materially new access.",
-      "source": "deep_scan_v2",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "The work identity is established, but substantive evidence remained inaccessible after the complete PUSH HARDER protocol; terminal drop_unverifiable is therefore required without a content judgement.",
+      "source": "deep_scan_hardcore_terminal",
       "corpus_scope": "main",
-      "updated_at": "2026-09-17T11:56:13Z",
-      "deep_scan_package_id": "worker-a-20260917T111401Z-9c77ac8c844d",
-      "verification_note": "Identity confirmed via Crossref DOI record (exact title, author, journal, 2026-09). The article is licensed CC BY but no text could be retrieved: ScienceDirect blocks automated access and no repository copy was found. No substantive content read.",
-      "recovery_attempts": 3
+      "updated_at": "2026-09-22T10:33:31Z",
+      "deep_scan_package_id": "hardcore-20260922T093512Z-13aef701e7de",
+      "verification_note": "Bibliographic identity is credible, but no substantive matching primary/repository/author text was legitimately recoverable after all 14 applicable route categories, both TRY HARDER challenge passes, and the final exhaustion audit. Abstracts, metadata, search extraction and related works were not used as substantive evidence."
     },
     "historical:id:5f02392522b6f284": {
       "decision": "needs_manual_verification",
@@ -15825,16 +15819,15 @@
       "duplicate_of": ""
     },
     "historical:id:40a66178c02fbfdc": {
-      "decision": "needs_manual_verification",
+      "decision": "drop_unverifiable",
       "target_strand": "",
-      "reason_code": "NEEDS_MANUAL_VERIFICATION",
-      "reason": "Identity is credible, but substantive evidence remained inaccessible after three validated Deep Scan recovery passes; excluded from active reasoning until hands-on verification supplies materially new access.",
-      "source": "deep_scan_v2",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "The work identity is established, but substantive evidence remained inaccessible after the complete PUSH HARDER protocol; terminal drop_unverifiable is therefore required without a content judgement.",
+      "source": "deep_scan_hardcore_terminal",
       "corpus_scope": "historical",
-      "updated_at": "2026-09-17T12:01:16Z",
-      "deep_scan_package_id": "worker-b-20260917T111410Z-93d5ce97efeb",
-      "verification_note": "Identity verified: chapter in IGI Global 'Developments and Approaches in Science Diplomacy' (2024), Prieto, Vera, Guglielminotti. IGI resolver returned HTTP 429; the chapter is paywalled and no OA copy exists.",
-      "recovery_attempts": 3
+      "updated_at": "2026-09-22T10:33:31Z",
+      "deep_scan_package_id": "hardcore-20260922T093512Z-13aef701e7de",
+      "verification_note": "Bibliographic identity is credible, but no substantive matching primary/repository/author text was legitimately recoverable after all 14 applicable route categories, both TRY HARDER challenge passes, and the final exhaustion audit. Abstracts, metadata, search extraction and related works were not used as substantive evidence."
     },
     "historical:id:b4ea7b84e8c47191": {
       "decision": "keep",
@@ -16389,64 +16382,59 @@
       "recovery_attempts": 3
     },
     "historical:id:5815e2e734c08288": {
-      "decision": "needs_manual_verification",
+      "decision": "drop_unverifiable",
       "target_strand": "",
-      "reason_code": "NEEDS_MANUAL_VERIFICATION",
-      "reason": "Identity is credible, but substantive evidence remained inaccessible after three validated Deep Scan recovery passes; excluded from active reasoning until hands-on verification supplies materially new access.",
-      "source": "deep_scan_v2",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "The work identity is established, but substantive evidence remained inaccessible after the complete PUSH HARDER protocol; terminal drop_unverifiable is therefore required without a content judgement.",
+      "source": "deep_scan_hardcore_terminal",
       "corpus_scope": "historical",
-      "updated_at": "2026-09-18T16:48:54Z",
-      "deep_scan_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
-      "verification_note": "Identity verified; abstract only. Full text needed before admission.",
-      "recovery_attempts": 3
+      "updated_at": "2026-09-22T10:33:31Z",
+      "deep_scan_package_id": "hardcore-20260922T093512Z-13aef701e7de",
+      "verification_note": "Bibliographic identity is credible, but no substantive matching primary/repository/author text was legitimately recoverable after all 14 applicable route categories, both TRY HARDER challenge passes, and the final exhaustion audit. Abstracts, metadata, search extraction and related works were not used as substantive evidence."
     },
     "historical:id:e64398987bf4dc73": {
-      "decision": "needs_manual_verification",
+      "decision": "drop_unverifiable",
       "target_strand": "",
-      "reason_code": "NEEDS_MANUAL_VERIFICATION",
-      "reason": "Identity is credible, but substantive evidence remained inaccessible after three validated Deep Scan recovery passes; excluded from active reasoning until hands-on verification supplies materially new access.",
-      "source": "deep_scan_v2",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "The work identity is established, but substantive evidence remained inaccessible after the complete PUSH HARDER protocol; terminal drop_unverifiable is therefore required without a content judgement.",
+      "source": "deep_scan_hardcore_terminal",
       "corpus_scope": "historical",
-      "updated_at": "2026-09-18T16:48:54Z",
-      "deep_scan_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
-      "verification_note": "Identity verified. For a later pass: this is a book chapter in Edward Elgar's Handbook on Science and Public Policy (eds Simon, Kuhlmann, Stamm, Canzler), not the journal Science and Public Policy; correction withheld under DEFER.",
-      "recovery_attempts": 3
+      "updated_at": "2026-09-22T10:33:31Z",
+      "deep_scan_package_id": "hardcore-20260922T093512Z-13aef701e7de",
+      "verification_note": "Bibliographic identity is credible, but no substantive matching primary/repository/author text was legitimately recoverable after all 14 applicable route categories, both TRY HARDER challenge passes, and the final exhaustion audit. Abstracts, metadata, search extraction and related works were not used as substantive evidence."
     },
     "historical:id:9d0da077bf121de2": {
-      "decision": "needs_manual_verification",
+      "decision": "drop_unverifiable",
       "target_strand": "",
-      "reason_code": "NEEDS_MANUAL_VERIFICATION",
-      "reason": "Identity is credible, but substantive evidence remained inaccessible after three validated Deep Scan recovery passes; excluded from active reasoning until hands-on verification supplies materially new access.",
-      "source": "deep_scan_v2",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "The work identity is established, but substantive evidence remained inaccessible after the complete PUSH HARDER protocol; terminal drop_unverifiable is therefore required without a content judgement.",
+      "source": "deep_scan_hardcore_terminal",
       "corpus_scope": "historical",
-      "updated_at": "2026-09-18T16:48:54Z",
-      "deep_scan_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
-      "verification_note": "Identity verified; short book review of Karampekios, Oikonomou & Carayannis (eds, Springer 2018). Not a duplicate of the Defence Studies review by Basem Aly.",
-      "recovery_attempts": 3
+      "updated_at": "2026-09-22T10:33:31Z",
+      "deep_scan_package_id": "hardcore-20260922T093512Z-13aef701e7de",
+      "verification_note": "Bibliographic identity is credible, but no substantive matching primary/repository/author text was legitimately recoverable after all 14 applicable route categories, both TRY HARDER challenge passes, and the final exhaustion audit. Abstracts, metadata, search extraction and related works were not used as substantive evidence."
     },
     "historical:id:5dd5533594f180de": {
-      "decision": "needs_manual_verification",
+      "decision": "drop_unverifiable",
       "target_strand": "",
-      "reason_code": "NEEDS_MANUAL_VERIFICATION",
-      "reason": "Identity is credible, but substantive evidence remained inaccessible after three validated Deep Scan recovery passes; excluded from active reasoning until hands-on verification supplies materially new access.",
-      "source": "deep_scan_v2",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "The work identity is established, but substantive evidence remained inaccessible after the complete PUSH HARDER protocol; terminal drop_unverifiable is therefore required without a content judgement.",
+      "source": "deep_scan_hardcore_terminal",
       "corpus_scope": "historical",
-      "updated_at": "2026-09-18T16:48:54Z",
-      "deep_scan_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
-      "verification_note": "Identity verified; two-page book review. Separate work from the Uttley review (A4).",
-      "recovery_attempts": 3
+      "updated_at": "2026-09-22T10:33:31Z",
+      "deep_scan_package_id": "hardcore-20260922T093512Z-13aef701e7de",
+      "verification_note": "Bibliographic identity is credible, but no substantive matching primary/repository/author text was legitimately recoverable after all 14 applicable route categories, both TRY HARDER challenge passes, and the final exhaustion audit. Abstracts, metadata, search extraction and related works were not used as substantive evidence."
     },
     "historical:id:068ceabb6181be45": {
-      "decision": "needs_manual_verification",
+      "decision": "drop_unverifiable",
       "target_strand": "",
-      "reason_code": "NEEDS_MANUAL_VERIFICATION",
-      "reason": "Identity is credible, but substantive evidence remained inaccessible after three validated Deep Scan recovery passes; excluded from active reasoning until hands-on verification supplies materially new access.",
-      "source": "deep_scan_v2",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "The work identity is established, but substantive evidence remained inaccessible after the complete PUSH HARDER protocol; terminal drop_unverifiable is therefore required without a content judgement.",
+      "source": "deep_scan_hardcore_terminal",
       "corpus_scope": "historical",
-      "updated_at": "2026-09-18T16:48:54Z",
-      "deep_scan_package_id": "worker-a-20260918T162835Z-11dcaed103f5",
-      "verification_note": "Identity verified; abstract only. Scanner date 2018-03-12 is issue date; online 2018-01-24.",
-      "recovery_attempts": 3
+      "updated_at": "2026-09-22T10:33:31Z",
+      "deep_scan_package_id": "hardcore-20260922T093512Z-13aef701e7de",
+      "verification_note": "Bibliographic identity is credible, but no substantive matching primary/repository/author text was legitimately recoverable after all 14 applicable route categories, both TRY HARDER challenge passes, and the final exhaustion audit. Abstracts, metadata, search extraction and related works were not used as substantive evidence."
     },
     "link:https://www.cesaer.org/content/5-operations/2026/msca-statement-june-2026-final.pdf": {
       "decision": "keep",
@@ -16701,16 +16689,15 @@
       "duplicate_of": ""
     },
     "link:https://doi.org/10.1108/fs-11-2025-0260": {
-      "decision": "needs_manual_verification",
+      "decision": "drop_unverifiable",
       "target_strand": "",
-      "reason_code": "NEEDS_MANUAL_VERIFICATION",
-      "reason": "Identity is credible, but substantive evidence remained inaccessible after three validated Deep Scan recovery passes; excluded from active reasoning until hands-on verification supplies materially new access.",
-      "source": "deep_scan_v2",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "The work identity is established, but substantive evidence remained inaccessible after the complete PUSH HARDER protocol; terminal drop_unverifiable is therefore required without a content judgement.",
+      "source": "deep_scan_hardcore_terminal",
       "corpus_scope": "main",
-      "updated_at": "2026-09-18T22:21:43Z",
-      "deep_scan_package_id": "worker-a-20260918T221444Z-f8d8a6ea4cd7",
-      "verification_note": "The work clearly exists and is a conceptual framework paper, but V2 requires more than abstract-level evidence for KEEP/REVIEW/DROP.",
-      "recovery_attempts": 3
+      "updated_at": "2026-09-22T10:33:31Z",
+      "deep_scan_package_id": "hardcore-20260922T093512Z-13aef701e7de",
+      "verification_note": "Bibliographic identity is credible, but no substantive matching primary/repository/author text was legitimately recoverable after all 14 applicable route categories, both TRY HARDER challenge passes, and the final exhaustion audit. Abstracts, metadata, search extraction and related works were not used as substantive evidence."
     },
     "link:https://ecfr.eu/article/cold-comfort-what-china-can-teach-europe-about-adaptation/": {
       "decision": "keep",
@@ -20249,6 +20236,116 @@
       "deep_scan_package_id": "hardcore-20260921T225909Z-b47fec6444be",
       "verification_note": "Open-access publisher full text was recovered and used to assess the study’s 27-country cross-sectional design, regression results and scope.",
       "duplicate_of": ""
+    },
+    "link:https://www.elgaronline.com/doi/10.4337/9781035365616.00011": {
+      "decision": "drop_unverifiable",
+      "target_strand": "",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "The work identity is established, but substantive evidence remained inaccessible after the complete PUSH HARDER protocol; terminal drop_unverifiable is therefore required without a content judgement.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T10:33:31Z",
+      "deep_scan_package_id": "hardcore-20260922T093512Z-13aef701e7de",
+      "verification_note": "Bibliographic identity is credible, but no substantive matching primary/repository/author text was legitimately recoverable after all 14 applicable route categories, both TRY HARDER challenge passes, and the final exhaustion audit. Abstracts, metadata, search extraction and related works were not used as substantive evidence."
+    },
+    "link:https://doi.org/10.1093/scipol/scag060": {
+      "decision": "drop_unverifiable",
+      "target_strand": "",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "The work identity is established, but substantive evidence remained inaccessible after the complete PUSH HARDER protocol; terminal drop_unverifiable is therefore required without a content judgement.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T10:33:31Z",
+      "deep_scan_package_id": "hardcore-20260922T093512Z-13aef701e7de",
+      "verification_note": "Bibliographic identity is credible, but no substantive matching primary/repository/author text was legitimately recoverable after all 14 applicable route categories, both TRY HARDER challenge passes, and the final exhaustion audit. Abstracts, metadata, search extraction and related works were not used as substantive evidence."
+    },
+    "link:https://doi.org/10.1093/scipol/scag041": {
+      "decision": "drop_unverifiable",
+      "target_strand": "",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "The work identity is established, but substantive evidence remained inaccessible after the complete PUSH HARDER protocol; terminal drop_unverifiable is therefore required without a content judgement.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T10:33:31Z",
+      "deep_scan_package_id": "hardcore-20260922T093512Z-13aef701e7de",
+      "verification_note": "Bibliographic identity is credible, but no substantive matching primary/repository/author text was legitimately recoverable after all 14 applicable route categories, both TRY HARDER challenge passes, and the final exhaustion audit. Abstracts, metadata, search extraction and related works were not used as substantive evidence."
+    },
+    "link:https://doi.org/10.1080/09654313.2026.2693155": {
+      "decision": "drop_unverifiable",
+      "target_strand": "",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "The work identity is established, but substantive evidence remained inaccessible after the complete PUSH HARDER protocol; terminal drop_unverifiable is therefore required without a content judgement.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T10:33:31Z",
+      "deep_scan_package_id": "hardcore-20260922T093512Z-13aef701e7de",
+      "verification_note": "Bibliographic identity is credible, but no substantive matching primary/repository/author text was legitimately recoverable after all 14 applicable route categories, both TRY HARDER challenge passes, and the final exhaustion audit. Abstracts, metadata, search extraction and related works were not used as substantive evidence."
+    },
+    "link:https://doi.org/10.1163/1573384x-03003004": {
+      "decision": "drop_unverifiable",
+      "target_strand": "",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "The work identity is established, but substantive evidence remained inaccessible after the complete PUSH HARDER protocol; terminal drop_unverifiable is therefore required without a content judgement.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T10:33:31Z",
+      "deep_scan_package_id": "hardcore-20260922T093512Z-13aef701e7de",
+      "verification_note": "Bibliographic identity is credible, but no substantive matching primary/repository/author text was legitimately recoverable after all 14 applicable route categories, both TRY HARDER challenge passes, and the final exhaustion audit. Abstracts, metadata, search extraction and related works were not used as substantive evidence."
+    },
+    "link:https://doi.org/10.1080/00343404.2026.2688966": {
+      "decision": "drop_unverifiable",
+      "target_strand": "",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "The work identity is established, but substantive evidence remained inaccessible after the complete PUSH HARDER protocol; terminal drop_unverifiable is therefore required without a content judgement.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T10:33:31Z",
+      "deep_scan_package_id": "hardcore-20260922T093512Z-13aef701e7de",
+      "verification_note": "Bibliographic identity is credible, but no substantive matching primary/repository/author text was legitimately recoverable after all 14 applicable route categories, both TRY HARDER challenge passes, and the final exhaustion audit. Abstracts, metadata, search extraction and related works were not used as substantive evidence."
+    },
+    "link:https://doi.org/10.1177/19475535261432944": {
+      "decision": "drop_unverifiable",
+      "target_strand": "",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "The work identity is established, but substantive evidence remained inaccessible after the complete PUSH HARDER protocol; terminal drop_unverifiable is therefore required without a content judgement.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T10:33:31Z",
+      "deep_scan_package_id": "hardcore-20260922T093512Z-13aef701e7de",
+      "verification_note": "Bibliographic identity is credible, but no substantive matching primary/repository/author text was legitimately recoverable after all 14 applicable route categories, both TRY HARDER challenge passes, and the final exhaustion audit. Abstracts, metadata, search extraction and related works were not used as substantive evidence."
+    },
+    "link:https://doi.org/10.1515/bfp-2026-0030": {
+      "decision": "drop_unverifiable",
+      "target_strand": "",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "The work identity is established, but substantive evidence remained inaccessible after the complete PUSH HARDER protocol; terminal drop_unverifiable is therefore required without a content judgement.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T10:33:31Z",
+      "deep_scan_package_id": "hardcore-20260922T093512Z-13aef701e7de",
+      "verification_note": "Bibliographic identity is credible, but no substantive matching primary/repository/author text was legitimately recoverable after all 14 applicable route categories, both TRY HARDER challenge passes, and the final exhaustion audit. Abstracts, metadata, search extraction and related works were not used as substantive evidence."
+    },
+    "link:https://doi.org/10.1007/s11192-026-05619-9": {
+      "decision": "drop_unverifiable",
+      "target_strand": "",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "The work identity is established, but substantive evidence remained inaccessible after the complete PUSH HARDER protocol; terminal drop_unverifiable is therefore required without a content judgement.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T10:33:31Z",
+      "deep_scan_package_id": "hardcore-20260922T093512Z-13aef701e7de",
+      "verification_note": "Bibliographic identity is credible, but no substantive matching primary/repository/author text was legitimately recoverable after all 14 applicable route categories, both TRY HARDER challenge passes, and the final exhaustion audit. Abstracts, metadata, search extraction and related works were not used as substantive evidence."
+    },
+    "link:https://doi.org/10.1016/j.techfore.2026.124833": {
+      "decision": "drop_unverifiable",
+      "target_strand": "",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "The work identity is established, but substantive evidence remained inaccessible after the complete PUSH HARDER protocol; terminal drop_unverifiable is therefore required without a content judgement.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T10:33:31Z",
+      "deep_scan_package_id": "hardcore-20260922T093512Z-13aef701e7de",
+      "verification_note": "Bibliographic identity is credible, but no substantive matching primary/repository/author text was legitimately recoverable after all 14 applicable route categories, both TRY HARDER challenge passes, and the final exhaustion audit. Abstracts, metadata, search extraction and related works were not used as substantive evidence."
     }
   }
 }

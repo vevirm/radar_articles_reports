@@ -1,6 +1,6 @@
 {
   "profile": "radar-active-corpus-rebuild-v1",
-  "completed_at": "2026-09-22T08:55:57Z",
+  "completed_at": "2026-09-22T10:36:29Z",
   "raw_counts": {
     "strand_a": 471,
     "strand_b": 162,
@@ -8,45 +8,45 @@
     "frontier_evidence": 0
   },
   "active_counts": {
-    "strand_a": 325,
-    "strand_b": 128,
+    "strand_a": 315,
+    "strand_b": 129,
     "strand_c": 223,
     "frontier_evidence": 0
   },
   "decision_counts": {
-    "provisional": 41,
-    "keep": 620,
+    "provisional": 31,
+    "keep": 621,
     "review": 24,
     "drop": 180,
-    "drop_unverifiable": 11,
+    "drop_unverifiable": 28,
     "duplicate": 3,
-    "needs_manual_verification": 12
+    "needs_manual_verification": 4
   },
   "deep_scan_v2": {
     "total_records": 881,
-    "v2_verified": 827,
-    "v2_pending": 54
+    "v2_verified": 845,
+    "v2_pending": 36
   },
   "historical_deep_scan_v2": {
     "total_records": 902,
-    "v2_verified": 871,
-    "v2_pending": 31,
+    "v2_verified": 877,
+    "v2_pending": 25,
     "active_a_context": 557
   },
   "downstream_diagnostics": {
-    "derived_objects_checked": 782,
-    "unchanged": 782,
-    "rebuilt": 0,
-    "materially_rewritten": 0,
-    "newly_inferred": 0,
-    "retired": 0,
-    "stale_evidence_references_before": 0,
-    "stale_evidence_references_removed": 0,
+    "derived_objects_checked": 809,
+    "unchanged": 673,
+    "rebuilt": 42,
+    "materially_rewritten": 4,
+    "newly_inferred": 27,
+    "retired": 63,
+    "stale_evidence_references_before": 103,
+    "stale_evidence_references_removed": 103,
     "orphan_references_remaining": 0,
-    "active_evidence_reference_occurrences_checked": 3165,
+    "active_evidence_reference_occurrences_checked": 3045,
     "shock_support_chains_changed_after_a_removal": 0,
     "active_dynamic_shocks": 9,
-    "active_high_order_candidates": 697,
+    "active_high_order_candidates": 661,
     "active_strategic_pathways": 1,
     "active_possible_external_shocks": 0,
     "standalone_matrix_objects": 0,
