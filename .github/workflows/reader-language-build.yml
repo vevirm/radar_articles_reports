@@ -1,0 +1,47 @@
+name: Build reader-language batch
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_words:
+        description: Approximate number of words to review
+        required: true
+        default: '10000'
+      scope:
+        description: Optional repo path prefix (leave blank for all)
+        required: false
+        default: ''
+      rescan:
+        description: Include unchanged text already reviewed
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build batch
+        run: |
+          args=(build --target-words "${{ inputs.target_words }}")
+          if [ -n "${{ inputs.scope }}" ]; then args+=(--scope "${{ inputs.scope }}"); fi
+          if [ "${{ inputs.rescan }}" = "true" ]; then args+=(--rescan); fi
+          python scripts/reader_language.py "${args[@]}"
+      - name: Commit batch to outbox
+        run: |
+          if git diff --quiet -- language-outbox/ && [ -z "$(git status --porcelain language-outbox/)" ]; then
+            echo "No new batch was created."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add language-outbox/
+          git commit -m "Build reader-language batch"
+          git push

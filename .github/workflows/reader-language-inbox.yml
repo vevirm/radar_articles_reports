@@ -1,0 +1,55 @@
+name: Apply reader-language inbox
+
+on:
+  push:
+    paths:
+      - 'language-inbox/*.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply returned batches
+        id: apply
+        run: |
+          shopt -s nullglob
+          files=(language-inbox/*.json)
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "No JSON batches in language-inbox/."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          for f in "${files[@]}"; do
+            python scripts/reader_language.py apply "$f"
+          done
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - name: Create review branch and pull request
+        if: steps.apply.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet && [ -z "$(git status --porcelain)" ]; then
+            echo "Nothing changed."
+            exit 0
+          fi
+          branch="reader-language/${GITHUB_RUN_ID}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add -A
+          git commit -m "Apply reader-language improvements"
+          git push --set-upstream origin "$branch"
+          gh pr create \
+            --title "Reader-language improvements" \
+            --body "Applies the returned reader-language batch from language-inbox. Rewrites are best-effort readability changes; rejected/stale items remain unchanged. Review the source diff before merging." \
+            --base "${GITHUB_REF_NAME}" \
+            --head "$branch"
