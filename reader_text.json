@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-21T22:50:03Z",
+  "generated_at": "2026-09-22T00:39:59Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -2795,27 +2795,86 @@
       ]
     },
     "link:https://doi.org/10.1080/10301763.2026.2726657": {
-      "profile": "deep-reader-offline-v1",
-      "strand": "strand_a",
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "main",
       "source_hash": "53ed3a28",
-      "reader_title": "Once income is controlled for, AI adoption no longer predicts EU labour productivity",
-      "reader_what": "After controlling for economic development, only GDP per capita significantly predicted labour productivity.",
-      "reader_why": "Indicates digital technology alone does not deliver productivity gains without complementary economic capability.",
-      "reader_more": "This study relates enterprise AI adoption and workforce digital skills to labour productivity across the 27 EU member states, using Eurostat and OECD data in a cross-sectional design. Simple pairwise correlations look encouraging, with productivity positively associated with AI adoption, digital skills and GDP per capita alike. The regression tells a different story: once economic development is controlled for, GDP per capita is the only statistically significant predictor, and the independent effects of AI adoption and digital skills cease to be significant. The authors read this as evidence that digital technologies do not by themselves guarantee productivity gains. Their argument is that complementary economic capabilities are what translate digital transformation into measurable output.",
+      "identity_hash": "24264f3d61bfad43",
+      "reader_title": "AI adoption alone does not explain EU productivity gaps",
+      "reader_what": "Across 27 EU states, AI adoption and digital skills lose significance after controlling for GDP per capita.",
+      "reader_why": "Productivity differences appear tied to broader economic capabilities, not digital adoption by itself.",
+      "reader_more": "The study uses Eurostat and OECD data for all 27 EU member states with correlations and OLS regression. AI adoption and digital skills are positively associated with productivity in simple comparisons, but GDP per capita is the only significant predictor in the controlled model. The paper is about enterprise digitalisation and labour productivity rather than the European R&I system.",
       "deep_analysis": {
-        "work_kind": "peer-reviewed quantitative empirical study",
-        "research_question": "How enterprise AI adoption and workforce digital skills relate to labour productivity across EU member states.",
-        "main_finding": "Positive bivariate associations for AI adoption and digital skills disappear once economic development is controlled for, leaving GDP per capita as the only statistically significant predictor of labour productivity.",
-        "method_or_basis": "Cross-sectional analysis of Eurostat and OECD data for 27 EU member states using descriptive statistics, Pearson correlation and ordinary least squares regression.",
-        "qualification": "A single cross-section of 27 country-level observations, a small sample with high collinearity between wealth, skills and adoption; a non-significant coefficient here is weak evidence of no effect rather than proof of none.",
-        "radar_relevance": "Directly tests whether AI diffusion is translating into European productivity gains, and finds country-level evidence does not support it.",
+        "work_kind": "cross-sectional quantitative economic study",
+        "research_question": "How are enterprise AI adoption and workforce digital skills associated with labour productivity across EU member states after accounting for economic development?",
+        "main_finding": "AI adoption and digital skills show positive bivariate associations with productivity, but GDP per capita is the only statistically significant predictor in the controlled regression.",
+        "method_or_basis": "Cross-sectional secondary data for 27 EU member states from Eurostat and OECD; descriptive statistics, Pearson correlations and OLS regression.",
+        "qualification": "The cross-sectional 27-country analysis identifies associations rather than causal effects, and its substantive object is labour productivity and enterprise digital adoption rather than the European R&I system.",
+        "radar_relevance": "Fails Strand A because the object is general enterprise digital adoption and labour productivity, not a recognised European R&I-system mechanism.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "recovered_full_text",
+            "note": "The DOI route https://doi.org/10.1080/10301763.2026.2726657 reached the open-access Taylor & Francis Full Article page with methods and results."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1080/10301763.2026.2726657 matched the Labour & Industry article."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.tandfonline.com/doi/full/10.1080/10301763.2026.2726657",
+            "title": "Digital adoption, AI integration, and labor productivity: empirical insights from the European Union",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Open-access publisher full text was recovered and used to assess the study’s 27-country cross-sectional design, regression results and scope.",
+        "hardcore_recovery": {
+          "routes": [
+            {
+              "route": "prior_attempt_audit",
+              "outcome": "completed",
+              "query_or_url": "previous_recovery_history + previous_verification",
+              "note": "Prior access limitations were rechecked rather than treated as final."
+            },
+            {
+              "route": "supplied_url_redirects",
+              "outcome": "recovered",
+              "query_or_url": "https://doi.org/10.1080/10301763.2026.2726657",
+              "note": "Retry reached the open-access Taylor & Francis Full Article page with substantive methods and results."
+            }
+          ],
+          "try_harder_passes": [],
+          "all_routes_exhausted": false,
+          "terminal_reason": "Full publisher text was recovered; further hardcore routes were unnecessary."
+        }
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_RI_NOT_CENTRAL",
+        "reason": "The paper studies enterprise AI adoption, digital skills and labour productivity across EU member states. This is ordinary digital-economy/productivity analysis, not a European research-and-innovation system mechanism."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_hardcore_terminal_recovery",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T09:48:21Z",
-      "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+      "reader_text_written_at": "2026-09-22T00:39:59Z",
+      "deep_scan_package_id": "hardcore-20260921T225909Z-b47fec6444be",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
     },
     "link:https://doi.org/10.1016/j.engfor.2026.09.002": {
       "profile": "deep-reader-offline-v1",
@@ -2953,27 +3012,116 @@
       ]
     },
     "link:https://doi.org/10.1016/j.joitmc.2026.100865": {
-      "profile": "deep-reader-offline-v1",
-      "strand": "strand_a",
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "main",
       "source_hash": "433f2783",
-      "reader_title": "University research raises regional prosperity mainly in dense metropolitan hubs",
-      "reader_what": "Returns to academic excellence concentrate in metropolitan hubs; peripheral universities instead stabilise local economies.",
-      "reader_why": "Peripheral universities act as anchor institutions, a role that patent and spin-off counts miss.",
-      "reader_more": "This study examines 301 universities across the European Economic Area, relating innovation outputs such as Horizon 2020 participation, patents and spin-offs, together with sustainability profiles, to regional economic and labour market outcomes. Regional scientific and human capital is strongly associated with regional GDP and employment, but technological innovation outputs show no direct conversion into growth at aggregate level, which the authors call a regional innovation paradox. Environmental sustainability performance is positively linked to innovation capacity, while social sustainability outcomes appear structurally decoupled in the short run. A multi-group analysis reveals the spatial asymmetry behind the aggregate result: returns concentrate in high-density metropolitan hubs with strong absorptive capacity, whereas in low-density peripheral regions universities function primarily as anchor institutions stabilising local economies.",
+      "identity_hash": "9f0152f47a53d5d2",
+      "reader_title": "Regional absorptive capacity shapes university-led growth",
+      "reader_what": "Across 301 EEA universities, regional scientific capacity and absorption distinguish core knowledge hubs from peripheral anchors.",
+      "reader_why": "Research outputs translate unevenly where regional density, commercialization capacity and sustainability burdens differ.",
+      "reader_more": "The study combines PLS-SEM with CART machine learning across 301 EEA universities. It finds strong core–periphery asymmetries: universities act differently where regional scientific density and absorptive capacity vary. The analysis is directly about European university, research and regional innovation-system performance.",
       "deep_analysis": {
-        "work_kind": "peer-reviewed quantitative empirical study",
-        "research_question": "How university innovation outputs and sustainability profiles relate to regional economic outcomes, and why the relationship differs between core and peripheral regions.",
-        "main_finding": "Scientific and human capital is strongly associated with regional GDP and employment while innovation outputs are not at aggregate level; multi-group analysis shows returns concentrate in metropolitan hubs with high absorptive capacity, with peripheral universities acting as stabilising anchor institutions.",
-        "method_or_basis": "Partial least squares structural equation modelling on 301 European Economic Area universities, with multi-group analysis comparing metropolitan and peripheral regions.",
-        "qualification": "Cross-sectional associations rather than causal estimates; the absence of an aggregate effect does not establish that innovation outputs have none, and the anchor institution role is inferred from group differences.",
-        "radar_relevance": "Bears on whether regional research investment converts into economic performance, and on how lagging regions actually benefit.",
+        "work_kind": "cross-sectional empirical study of universities and regional innovation systems",
+        "research_question": "How do university capabilities and regional absorptive capacity relate to economic and innovation outcomes in core and peripheral European regions?",
+        "main_finding": "Regional scientific capacity and absorptive conditions are more important than university reputation for economic outcomes, with technology-transfer and research-growth effects varying across core and peripheral regions.",
+        "method_or_basis": "PLS-SEM and CART machine learning using data from 301 European Economic Area universities.",
+        "qualification": "Cross-sectional modelling of 301 EEA universities identifies regional absorptive-capacity patterns; it does not by itself establish causal effects from universities to regional growth.",
+        "radar_relevance": "Qualifies for Strand A as completed evidence on European university-driven regional innovation capacity, technology transfer and absorptive-capacity differences.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "recovered_substantive_primary",
+            "note": "The DOI/publisher retry https://doi.org/10.1016/j.joitmc.2026.100865 reached the open-access ScienceDirect article with substantive methods, highlights and results."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1016/j.joitmc.2026.100865 matched the Journal of Open Innovation article and open-access publisher version."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_open_access_article",
+            "url": "https://www.sciencedirect.com/science/article/pii/S2199853126001514",
+            "title": "The anchor trap and the absorptive capacity: Divergent paths of university-induced economic growth in core and peripheral European regions by PLS-SEM analysis",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The open-access publisher source supplied substantive empirical evidence on 301 EEA universities, regional scientific capacity, absorptive conditions and core–periphery differences.",
+        "hardcore_recovery": {
+          "routes": [
+            {
+              "route": "prior_attempt_audit",
+              "outcome": "completed",
+              "query_or_url": "previous_recovery_history + previous_verification",
+              "note": "Prior retrieval had not yielded body-level evidence; the publisher route was retried because the item was marked open access."
+            },
+            {
+              "route": "supplied_url_redirects",
+              "outcome": "recovered",
+              "query_or_url": "https://doi.org/10.1016/j.joitmc.2026.100865",
+              "note": "The publisher retry exposed the open-access ScienceDirect article and substantive empirical content."
+            }
+          ],
+          "try_harder_passes": [],
+          "all_routes_exhausted": false,
+          "terminal_reason": "Substantive publisher evidence was recovered on retry; further hardcore routes were unnecessary."
+        }
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The completed empirical study directly measures European university/regional innovation capacity, knowledge-transfer conditions and uneven absorptive capacity across 301 EEA universities."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_hardcore_terminal_recovery",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T09:48:21Z",
-      "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+      "reader_text_written_at": "2026-09-22T00:39:58Z",
+      "deep_scan_package_id": "hardcore-20260921T225909Z-b47fec6444be",
+      "claims": [
+        {
+          "object": "innovation.regional_capacity",
+          "secondary_objects": [
+            "research.knowledge_transfer"
+          ],
+          "actor": {
+            "name": "European Economic Area university regions",
+            "class": "university_group"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-09-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Cross-sectional modelling of 301 EEA universities identifies regional absorptive-capacity patterns; it does not by itself establish causal effects from universities to regional growth.",
+          "text": "Across 301 EEA universities, regional scientific capacity and absorptive conditions are associated with stronger economic outcomes while commercialization effects differ between core and peripheral regions.",
+          "confidence": "high",
+          "record_key": "link:https://doi.org/10.1016/j.joitmc.2026.100865",
+          "merit": 68,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:9f0152f47a53d5d2:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     },
     "link:https://doi.org/10.1016/j.jik.2026.101155": {
       "profile": "deep-reader-v2-authoritative",
@@ -4235,27 +4383,86 @@
       ]
     },
     "link:https://doi.org/10.1016/j.ijmedinf.2026.106685": {
-      "profile": "deep-reader-offline-v1",
-      "strand": "strand_a",
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "main",
       "source_hash": "03ac2d82",
-      "reader_title": "Five-year check on a 2020 health AI forecast: right domains, wrong pace",
-      "reader_what": "Two predictions held, two under-delivered, and generative AI emerged entirely outside the forecast's scope.",
-      "reader_why": "Concludes progress depends on interoperability and governance rather than new model architectures.",
-      "reader_more": "This structured narrative review tests the 2020 EIT Health and McKinsey forecast against evidence through 2025, classifying each prediction as realised, under-realised, exceeded or unanticipated. Two held: administrative automation and medical imaging led adoption, with ambient documentation reaching deployment and over 1,300 AI-enabled devices authorised by the US regulator, mostly in radiology. Two under-delivered: remote monitoring and classical natural language processing decision support, constrained by interoperability, reimbursement and workflow barriers. Procurement moved faster than forecast, though chiefly on industry rather than peer-reviewed evidence. The largest divergence was generative AI and multimodal foundation models from late 2022, which the authors judge fell outside what the forecast could reasonably have anticipated.",
+      "identity_hash": "cf0e504d1a5bdca1",
+      "reader_title": "AI healthcare forecasts met a mixed reality",
+      "reader_what": "The review finds only two of eight 2020 forecasts broadly held, while generative AI changed the trajectory.",
+      "reader_why": "Adoption depended on workflow, reimbursement, interoperability and business models, not model performance alone.",
+      "reader_more": "The review compares a widely cited 2020 healthcare-AI forecast with deployment evidence five years later. Imaging and administrative uses advanced, while some remote-monitoring and language applications stalled and generative AI became the largest unforeseen shift. Its object is healthcare technology adoption across markets, not the European R&I system.",
       "deep_analysis": {
-        "work_kind": "peer-reviewed structured narrative review of a forecast",
-        "research_question": "How accurately the 2020 EIT Health and McKinsey predictions tracked real-world AI adoption in healthcare through 2025.",
-        "main_finding": "The roadmap identified the right domains but misjudged the pace of discontinuous change and overestimated readiness of data, governance and workflow infrastructure; two predictions realised, two under-realised, procurement exceeded forecast, generative AI unanticipated.",
-        "method_or_basis": "Structured comparison of domain-level forecasts against 2020-2025 peer-reviewed implementation studies, FDA regulatory data, national and international guidance, industry surveys and foundation-model evaluations, using explicit classification criteria.",
-        "qualification": "Classification against stated criteria still involves judgement; FDA authorisation counts measure United States regulatory throughput rather than clinical use or European adoption.",
-        "radar_relevance": "Assesses the reliability of forecasts from an EU innovation body that shaped health AI expectations and investment.",
+        "work_kind": "retrospective evidence review",
+        "research_question": "How did major 2020 forecasts for AI adoption in healthcare compare with deployment evidence over the following five years?",
+        "main_finding": "Only two of eight forecasts broadly held; adoption varied by use case and generative AI became a major unanticipated development.",
+        "method_or_basis": "Retrospective comparison of 2020 healthcare-AI forecasts with evidence on 2020–2025 adoption and deployment outcomes.",
+        "qualification": "This is a retrospective review of AI deployment evidence against a 2020 forecast; it is not an evaluation of the European research-and-innovation system.",
+        "radar_relevance": "Fails Strand A because the work evaluates healthcare AI deployment globally rather than a European research, innovation or science-system mechanism.",
         "confidence": "high",
         "why_supported": true
       },
-      "deep_read_mode": "offline_llm_package",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "recovered_substantive_primary",
+            "note": "The DOI/publisher route https://doi.org/10.1016/j.ijmedinf.2026.106685 led to the open-access ScienceDirect article and substantive publisher text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1016/j.ijmedinf.2026.106685 matched the open-access International Journal of Medical Informatics review."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_open_access_article",
+            "url": "https://www.sciencedirect.com/science/article/pii/S1386505626004259",
+            "title": "From prediction to reality: Five years of AI in healthcare. Adoption, impact, and the road ahead",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The open-access publisher record supplied substantive article material sufficient to evaluate scope, basis and findings.",
+        "hardcore_recovery": {
+          "routes": [
+            {
+              "route": "prior_attempt_audit",
+              "outcome": "completed",
+              "query_or_url": "previous_recovery_history + previous_verification",
+              "note": "Previous access was incomplete, so the publisher route was retried rather than accepted as terminal."
+            },
+            {
+              "route": "supplied_url_redirects",
+              "outcome": "recovered",
+              "query_or_url": "https://doi.org/10.1016/j.ijmedinf.2026.106685",
+              "note": "Retry reached the open-access ScienceDirect record with substantive article content."
+            }
+          ],
+          "try_harder_passes": [],
+          "all_routes_exhausted": false,
+          "terminal_reason": "Substantive publisher evidence was recovered immediately on retry; additional hardcore routes were unnecessary."
+        }
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_RI_NOT_CENTRAL",
+        "reason": "The review concerns global healthcare AI deployment and adoption outcomes, not a European R&I-system mechanism; European provenance of an earlier forecast does not make the reviewed system European R&I."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_hardcore_terminal_recovery",
       "reader_text_model": "user-provided-llm-subscription",
-      "reader_text_written_at": "2026-09-13T09:48:21Z",
-      "deep_scan_package_id": "20260913T085149Z-f7dd04ecac1a"
+      "reader_text_written_at": "2026-09-22T00:39:58Z",
+      "deep_scan_package_id": "hardcore-20260921T225909Z-b47fec6444be",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
     },
     "link:https://doi.org/10.1007/s44163-026-02019-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -154328,8 +154535,120 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1080/14702436.2026.2664455": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "main",
+      "source_hash": "e3e01859",
+      "identity_hash": "c8f924d06625d453",
+      "reader_title": "EU defence-innovation narratives emphasise industry and technology",
+      "reader_what": "EU discourse justifies defence-innovation investment mainly through economic, industrial and strategic-technological arguments.",
+      "reader_why": "Investment narratives link defence technology to industrial competitiveness, technological leadership, security and sovereignty.",
+      "reader_more": "The study codes 100 text fragments from 58 documents published between 2005 and 2025. It identifies five families of investment rationales and compares EU with NATO framing. In the EU subset, economic and industrial policy sits alongside strategic technological advantage, while the study cautions that it maps justification narratives rather than realised investment effects.",
+      "deep_analysis": {
+        "work_kind": "qualitative comparative policy-discourse study",
+        "research_question": "What arguments justify public investment in defence-related innovation in the Euro-Atlantic area, and how do they vary across actors and alliances?",
+        "main_finding": "Technological and economic rationales dominate defence-innovation justifications, with EU discourse prioritising economic and industrial policy alongside technological advantage.",
+        "method_or_basis": "Qualitative content analysis of 100 coded text fragments from 58 government, academic, intergovernmental and civil-society documents published from 2005 to 2025.",
+        "qualification": "Qualitative content analysis maps how investment is justified in selected 2005–2025 documents; it does not measure whether defence-innovation spending actually improves resilience or competitiveness.",
+        "radar_relevance": "Qualifies for Strand A through direct European strategic/geopolitical R&I evidence on defence-innovation investment rationales and industrial-technological priorities.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "recovered_full_text",
+            "note": "The DOI route https://doi.org/10.1080/14702436.2026.2664455 reached the open-access Taylor & Francis Full Article page with introduction, methods, results and conclusion."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1080/14702436.2026.2664455 matched the Defence Studies article."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.tandfonline.com/doi/full/10.1080/14702436.2026.2664455",
+            "title": "Butter through guns? Mobilizing innovation for defence in the Euro-Atlantic area",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Open-access publisher full text was recovered, including the dataset, qualitative-content-analysis method, EU/NATO comparison and conclusions.",
+        "hardcore_recovery": {
+          "routes": [
+            {
+              "route": "prior_attempt_audit",
+              "outcome": "completed",
+              "query_or_url": "previous_recovery_history + previous_verification",
+              "note": "Earlier access problems were not treated as terminal because an open-access full-article route remained plausible."
+            },
+            {
+              "route": "supplied_url_redirects",
+              "outcome": "recovered",
+              "query_or_url": "https://doi.org/10.1080/14702436.2026.2664455",
+              "note": "Retry reached Taylor & Francis Full Article with complete substantive sections and open-access status."
+            }
+          ],
+          "try_harder_passes": [],
+          "all_routes_exhausted": false,
+          "terminal_reason": "Full publisher text was recovered; further hardcore routes were unnecessary."
+        }
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The article directly analyses the strategic, economic and security rationales used to justify Euro-Atlantic defence-innovation investment, including a distinct EU discourse."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_hardcore_terminal_recovery",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-22T00:39:59Z",
+      "deep_scan_package_id": "hardcore-20260921T225909Z-b47fec6444be",
+      "claims": [
+        {
+          "object": "defence.innovation_funding",
+          "secondary_objects": [
+            "goal.strategic_autonomy"
+          ],
+          "actor": {
+            "name": "European Union policy discourse",
+            "class": "eu_body"
+          },
+          "mechanism": "prioritises",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-04-27",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Qualitative content analysis maps how investment is justified in selected 2005–2025 documents; it does not measure whether defence-innovation spending actually improves resilience or competitiveness.",
+          "text": "EU discourse around growing defence-innovation investment prioritises economic and industrial policy alongside strategic technological advantage.",
+          "confidence": "high",
+          "record_key": "link:https://doi.org/10.1080/14702436.2026.2664455",
+          "merit": 83,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:c8f924d06625d453:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-09-21T22:50:03Z"
+  "claims_updated_at": "2026-09-22T00:39:59Z"
 }
