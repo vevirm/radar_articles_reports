@@ -508,7 +508,10 @@
     {
       "name": "Bruegel",
       "domain": "bruegel.org",
-      "tier": 1
+      "tier": 1,
+      "feeds": [
+        "https://www.bruegel.org/rss.xml"
+      ]
     },
     {
       "name": "VoxEU / CEPR",
@@ -1088,7 +1091,10 @@
     {
       "name": "French Academy of Sciences",
       "domain": "academie-sciences.fr",
-      "tier": 1
+      "tier": 1,
+      "feeds": [
+        "https://www.academie-sciences.fr/en/rss.xml"
+      ]
     },
     {
       "name": "Inria",
@@ -1792,7 +1798,13 @@
     "Europe strategic technology acquisition ownership investment research innovation",
     "EU research innovation law act regulation procurement intellectual property",
     "Europe university science budget cut increase research funding government",
-    "European data centre AI infrastructure investment national government technology capacity"
+    "European data centre AI infrastructure investment national government technology capacity",
+    "Council of the EU adopts research innovation",
+    "Council conclusions research innovation",
+    "OECD report science technology innovation",
+    "IEA critical minerals Europe report",
+    "Chatham House Europe technology",
+    "UNCTAD technology report"
   ],
   "quality_profile_version": "v24.6-criteria-repair",
   "crossref_priority_journals": [
@@ -1967,7 +1979,8 @@
     "Political Geography",
     "Journal of European Integration History",
     "European Review of International Studies",
-    "Nature Energy"
+    "Nature Energy",
+    "Science"
   ],
   "crossref_priority_journal_queries": [
     "European research security geopolitics",
@@ -4233,5 +4246,70 @@
       "Europe United States China corporate R&D investment strategic technologies",
       "European research innovation foreign ownership acquisition strategic technology firms"
     ]
-  }
+  },
+  "institution_feed_entries_per_source": 40,
+  "crossref_journal_issns": {
+    "Science": "0036-8075"
+  },
+  "eurlex_cellar_enabled": true,
+  "eurlex_cellar_stage_seconds": 120,
+  "eurlex_cellar_timeout_seconds": 18,
+  "eurlex_cellar_lookback_days": 7,
+  "eurlex_cellar_max_items": 30,
+  "eurlex_cellar_title_terms": [
+    "research",
+    "innovation",
+    "technolog",
+    "digital",
+    "artificial intelligence",
+    "semiconductor",
+    "chip",
+    "space",
+    "quantum",
+    "export",
+    "dual-use",
+    "dual use",
+    "sanction",
+    "screening",
+    "Horizon",
+    "data",
+    "cyber",
+    "raw material",
+    "defence",
+    "defense",
+    "energy"
+  ],
+  "europarl_adopted_texts_enabled": true,
+  "europarl_stage_seconds": 120,
+  "europarl_timeout_seconds": 18,
+  "europarl_lookback_days": 7,
+  "europarl_max_items": 24,
+  "europarl_pdf_page_cap": 8,
+  "europarl_title_terms": [
+    "research",
+    "innovation",
+    "technolog",
+    "digital",
+    "artificial intelligence",
+    "semiconductor",
+    "chip",
+    "space",
+    "quantum",
+    "export",
+    "dual-use",
+    "dual use",
+    "sanction",
+    "screening",
+    "Horizon",
+    "data",
+    "cyber",
+    "raw material",
+    "defence",
+    "defense",
+    "energy"
+  ],
+  "source_transport_alert_after_days": 7,
+  "crossref_prefix_sources": [],
+  "crossref_prefix_stage_seconds": 60,
+  "crossref_prefix_timeout_seconds": 12
 }
