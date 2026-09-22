@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-admission-v1",
-  "updated_at": "2026-09-22T10:33:31Z",
+  "updated_at": "2026-09-22T12:21:55Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "decision": "drop",
@@ -19326,16 +19326,15 @@
       "duplicate_of": ""
     },
     "link:https://doi.org/10.1016/j.asej.2026.104429": {
-      "decision": "needs_manual_verification",
+      "decision": "drop_unverifiable",
       "target_strand": "",
-      "reason_code": "NEEDS_MANUAL_VERIFICATION",
-      "reason": "Identity is credible, but substantive evidence remained inaccessible after three validated Deep Scan recovery passes; excluded from active reasoning until hands-on verification supplies materially new access.",
-      "source": "deep_scan_v2",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "Identity is verified, but no substantive matching source was recovered after full terminal recovery; an admission judgment would require relying on prohibited abstract/title evidence.",
+      "source": "deep_scan_hardcore_terminal",
       "corpus_scope": "main",
-      "updated_at": "2026-09-21T09:17:16Z",
-      "deep_scan_package_id": "20260921T082457Z-d5ee59a8bae9",
-      "verification_note": "Identity was verified across independent bibliographic/publisher records, but all six recovery steps failed to yield substantive accessible evidence sufficient for an authoritative admission decision.",
-      "recovery_attempts": 3
+      "updated_at": "2026-09-22T12:21:51Z",
+      "deep_scan_package_id": "hardcore-20260922T104251Z-fe8d13c4ebf7",
+      "verification_note": "Bibliographic identity is credible, but substantive text remained inaccessible after the complete mandatory ladder, all applicable hardcore routes, and both TRY HARDER passes."
     },
     "historical:id:5b880b8dc5bfd94f": {
       "decision": "keep",
@@ -19782,16 +19781,15 @@
       "duplicate_of": ""
     },
     "link:https://doi.org/10.1002/ffo2.15": {
-      "decision": "needs_manual_verification",
+      "decision": "drop_unverifiable",
       "target_strand": "",
-      "reason_code": "NEEDS_MANUAL_VERIFICATION",
-      "reason": "Identity is credible, but substantive evidence remained inaccessible after three validated Deep Scan recovery passes; excluded from active reasoning until hands-on verification supplies materially new access.",
-      "source": "deep_scan_v2",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "Identity is verified, but no substantive matching source was recovered after full terminal recovery; an admission judgment would require relying on prohibited abstract/title evidence.",
+      "source": "deep_scan_hardcore_terminal",
       "corpus_scope": "main",
-      "updated_at": "2026-09-21T12:30:57Z",
-      "deep_scan_package_id": "20260921T113124Z-d03593aeef89",
-      "verification_note": "Identity is verified, but the six-step recovery ladder did not yield substantive evidence beyond restricted/abstract/identity material. No substantive admission inference was made.",
-      "recovery_attempts": 3
+      "updated_at": "2026-09-22T12:21:51Z",
+      "deep_scan_package_id": "hardcore-20260922T104251Z-fe8d13c4ebf7",
+      "verification_note": "Bibliographic identity is credible, but substantive text remained inaccessible after the complete mandatory ladder, all applicable hardcore routes, and both TRY HARDER passes."
     },
     "historical:id:f017bb698810a01a": {
       "decision": "keep",
@@ -19926,16 +19924,15 @@
       "duplicate_of": ""
     },
     "link:https://doi.org/10.1108/fs-10-2017-0064": {
-      "decision": "needs_manual_verification",
+      "decision": "drop_unverifiable",
       "target_strand": "",
-      "reason_code": "NEEDS_MANUAL_VERIFICATION",
-      "reason": "Identity is credible, but substantive evidence remained inaccessible after three validated Deep Scan recovery passes; excluded from active reasoning until hands-on verification supplies materially new access.",
-      "source": "deep_scan_v2",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "Identity is verified, but no substantive matching source was recovered after full terminal recovery; an admission judgment would require relying on prohibited abstract/title evidence.",
+      "source": "deep_scan_hardcore_terminal",
       "corpus_scope": "main",
-      "updated_at": "2026-09-21T12:30:58Z",
-      "deep_scan_package_id": "20260921T113124Z-d03593aeef89",
-      "verification_note": "Identity is verified, but the six-step recovery ladder did not yield substantive evidence beyond restricted/abstract/identity material. No substantive admission inference was made.",
-      "recovery_attempts": 3
+      "updated_at": "2026-09-22T12:21:51Z",
+      "deep_scan_package_id": "hardcore-20260922T104251Z-fe8d13c4ebf7",
+      "verification_note": "Bibliographic identity is credible, but substantive text remained inaccessible after the complete mandatory ladder, all applicable hardcore routes, and both TRY HARDER passes."
     },
     "historical:id:8643f51e4c5dd00f": {
       "decision": "keep",
@@ -20346,6 +20343,250 @@
       "updated_at": "2026-09-22T10:33:31Z",
       "deep_scan_package_id": "hardcore-20260922T093512Z-13aef701e7de",
       "verification_note": "Bibliographic identity is credible, but no substantive matching primary/repository/author text was legitimately recoverable after all 14 applicable route categories, both TRY HARDER challenge passes, and the final exhaustion audit. Abstracts, metadata, search extraction and related works were not used as substantive evidence."
+    },
+    "link:https://doi.org/10.1108/fs-09-2014-0058": {
+      "decision": "keep",
+      "target_strand": "B",
+      "reason_code": "B_REUSABLE_METHOD",
+      "reason": "The recovered work makes a reusable methodological contribution to foresight/evaluation practice: An integrated matrix-based approach can connect emerging technologies, industrial domains and regional characteristics for regional foresight.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T12:21:51Z",
+      "deep_scan_package_id": "hardcore-20260922T104251Z-fe8d13c4ebf7",
+      "verification_note": "Matching substantive primary/full-text evidence was recovered and used for the admission judgment.",
+      "duplicate_of": ""
+    },
+    "link:https://doi.org/10.1002/ffo2.70026": {
+      "decision": "keep",
+      "target_strand": "B",
+      "reason_code": "B_REUSABLE_METHOD",
+      "reason": "The recovered work makes a reusable methodological contribution to foresight/evaluation practice: A scalable automated framework can continuously identify emerging technology trends, startup activity and spatial hotspots from multiple online data sources.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T12:21:52Z",
+      "deep_scan_package_id": "hardcore-20260922T104251Z-fe8d13c4ebf7",
+      "verification_note": "Matching substantive primary/full-text evidence was recovered and used for the admission judgment.",
+      "duplicate_of": ""
+    },
+    "link:https://doi.org/10.1108/fs-07-2023-0134": {
+      "decision": "drop_unverifiable",
+      "target_strand": "",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "Identity is verified, but no substantive matching source was recovered after full terminal recovery; an admission judgment would require relying on prohibited abstract/title evidence.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T12:21:52Z",
+      "deep_scan_package_id": "hardcore-20260922T104251Z-fe8d13c4ebf7",
+      "verification_note": "Bibliographic identity is credible, but substantive text remained inaccessible after the complete mandatory ladder, all applicable hardcore routes, and both TRY HARDER passes."
+    },
+    "link:https://doi.org/10.1108/fs-12-2023-0252": {
+      "decision": "keep",
+      "target_strand": "B",
+      "reason_code": "B_METHOD_EVALUATION",
+      "reason": "The recovered work makes a reusable methodological contribution to foresight/evaluation practice: Simple aggregation of many nonexpert estimates performed slightly better than the expert ranking on the study’s first ex-post benchmark.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T12:21:52Z",
+      "deep_scan_package_id": "hardcore-20260922T104251Z-fe8d13c4ebf7",
+      "verification_note": "Matching substantive primary/full-text evidence was recovered and used for the admission judgment.",
+      "duplicate_of": ""
+    },
+    "link:https://doi.org/10.1109/tem.2020.3032603": {
+      "decision": "drop_unverifiable",
+      "target_strand": "",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "Identity is verified, but no substantive matching source was recovered after full terminal recovery; an admission judgment would require relying on prohibited abstract/title evidence.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T12:21:52Z",
+      "deep_scan_package_id": "hardcore-20260922T104251Z-fe8d13c4ebf7",
+      "verification_note": "Bibliographic identity is credible, but substantive text remained inaccessible after the complete mandatory ladder, all applicable hardcore routes, and both TRY HARDER passes."
+    },
+    "link:https://doi.org/10.1016/j.jtrangeo.2026.104813": {
+      "decision": "keep",
+      "target_strand": "B",
+      "reason_code": "B_REUSABLE_METHOD",
+      "reason": "The recovered work makes a reusable methodological contribution to foresight/evaluation practice: Planning cells can be integrated into formal scenario development to enrich projections with citizen priorities while preserving the core scenario architecture.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T12:21:52Z",
+      "deep_scan_package_id": "hardcore-20260922T104251Z-fe8d13c4ebf7",
+      "verification_note": "Matching substantive primary/full-text evidence was recovered and used for the admission judgment.",
+      "duplicate_of": ""
+    },
+    "link:https://www.cifs.dk/read-listen/reports-knowledge/the-role-of-foresight-in-organisations": {
+      "decision": "drop_unverifiable",
+      "target_strand": "",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "Identity is verified, but no substantive matching source was recovered after full terminal recovery; an admission judgment would require relying on prohibited abstract/title evidence.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T12:21:52Z",
+      "deep_scan_package_id": "hardcore-20260922T104251Z-fe8d13c4ebf7",
+      "verification_note": "Bibliographic identity is credible, but substantive text remained inaccessible after the complete mandatory ladder, all applicable hardcore routes, and both TRY HARDER passes."
+    },
+    "link:https://doi.org/10.1016/j.futures.2026.103897": {
+      "decision": "drop",
+      "target_strand": "B",
+      "reason_code": "B_NOT_METHOD_CONTRIBUTION",
+      "reason": "The recovered work is substantive, but its contribution is conceptual, empirical, or agenda-setting rather than a new or materially improved reusable method for Strand B.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T12:21:52Z",
+      "deep_scan_package_id": "hardcore-20260922T104251Z-fe8d13c4ebf7",
+      "verification_note": "Matching substantive primary/full-text evidence was recovered and used for the admission judgment.",
+      "duplicate_of": ""
+    },
+    "link:https://doi.org/10.1093/etojnl/vgag243": {
+      "decision": "drop_unverifiable",
+      "target_strand": "",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "Identity is verified, but no substantive matching source was recovered after full terminal recovery; an admission judgment would require relying on prohibited abstract/title evidence.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T12:21:52Z",
+      "deep_scan_package_id": "hardcore-20260922T104251Z-fe8d13c4ebf7",
+      "verification_note": "Bibliographic identity is credible, but substantive text remained inaccessible after the complete mandatory ladder, all applicable hardcore routes, and both TRY HARDER passes."
+    },
+    "link:https://doi.org/10.1002/ffo2.99": {
+      "decision": "keep",
+      "target_strand": "B",
+      "reason_code": "B_REUSABLE_METHOD",
+      "reason": "The recovered work makes a reusable methodological contribution to foresight/evaluation practice: A structured hybrid approach can combine automated data analysis with expert interpretation across foresight stages.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T12:21:53Z",
+      "deep_scan_package_id": "hardcore-20260922T104251Z-fe8d13c4ebf7",
+      "verification_note": "Matching substantive primary/full-text evidence was recovered and used for the admission judgment.",
+      "duplicate_of": ""
+    },
+    "link:https://doi.org/10.1016/j.futures.2025.103703": {
+      "decision": "keep",
+      "target_strand": "B",
+      "reason_code": "B_REUSABLE_METHOD",
+      "reason": "The recovered work makes a reusable methodological contribution to foresight/evaluation practice: Real-Time AI Delphi integrates AI support into iterative Delphi feedback and synthesis as a reusable method variant.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T12:21:53Z",
+      "deep_scan_package_id": "hardcore-20260922T104251Z-fe8d13c4ebf7",
+      "verification_note": "Matching substantive primary/full-text evidence was recovered and used for the admission judgment.",
+      "duplicate_of": ""
+    },
+    "link:https://doi.org/10.1016/j.procs.2026.02.071": {
+      "decision": "keep",
+      "target_strand": "B",
+      "reason_code": "B_METHOD_IMPROVEMENT",
+      "reason": "The recovered work makes a reusable methodological contribution to foresight/evaluation practice: A simplified AI-supported scenario process can speed scenario development, with usefulness varying by model and task.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T12:21:54Z",
+      "deep_scan_package_id": "hardcore-20260922T104251Z-fe8d13c4ebf7",
+      "verification_note": "Matching substantive primary/full-text evidence was recovered and used for the admission judgment.",
+      "duplicate_of": ""
+    },
+    "link:https://doi.org/10.1016/j.techfore.2013.07.012": {
+      "decision": "keep",
+      "target_strand": "B",
+      "reason_code": "B_METHOD_EVALUATION",
+      "reason": "The recovered work makes a reusable methodological contribution to foresight/evaluation practice: Comparing internal and external panels reveals systematic differences that inform how Delphi panels should be composed for strategic foresight.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T12:21:54Z",
+      "deep_scan_package_id": "hardcore-20260922T104251Z-fe8d13c4ebf7",
+      "verification_note": "Matching substantive primary/full-text evidence was recovered and used for the admission judgment.",
+      "duplicate_of": ""
+    },
+    "link:https://doi.org/10.1108/fs-02-2025-0027": {
+      "decision": "keep",
+      "target_strand": "B",
+      "reason_code": "B_REUSABLE_METHOD",
+      "reason": "The recovered work makes a reusable methodological contribution to foresight/evaluation practice: A documented GenAI workflow can retrospectively compare morphological scenario configurations with later observed conditions.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T12:21:54Z",
+      "deep_scan_package_id": "hardcore-20260922T104251Z-fe8d13c4ebf7",
+      "verification_note": "Matching substantive primary/full-text evidence was recovered and used for the admission judgment.",
+      "duplicate_of": ""
+    },
+    "link:https://doi.org/10.1177/1946756717739627": {
+      "decision": "drop_unverifiable",
+      "target_strand": "",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "Identity is verified, but no substantive matching source was recovered after full terminal recovery; an admission judgment would require relying on prohibited abstract/title evidence.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T12:21:54Z",
+      "deep_scan_package_id": "hardcore-20260922T104251Z-fe8d13c4ebf7",
+      "verification_note": "Bibliographic identity is credible, but substantive text remained inaccessible after the complete mandatory ladder, all applicable hardcore routes, and both TRY HARDER passes."
+    },
+    "link:https://doi.org/10.1016/j.array.2026.101126": {
+      "decision": "keep",
+      "target_strand": "B",
+      "reason_code": "B_REUSABLE_METHOD",
+      "reason": "The recovered work makes a reusable methodological contribution to foresight/evaluation practice: An end-to-end micro-topic emergence pipeline can detect rare, rapidly growing weak signals and rank them for expert review.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T12:21:55Z",
+      "deep_scan_package_id": "hardcore-20260922T104251Z-fe8d13c4ebf7",
+      "verification_note": "Matching substantive primary/full-text evidence was recovered and used for the admission judgment.",
+      "duplicate_of": ""
+    },
+    "link:https://doi.org/10.1002/ev.20602": {
+      "decision": "drop_unverifiable",
+      "target_strand": "",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "Identity is verified, but no substantive matching source was recovered after full terminal recovery; an admission judgment would require relying on prohibited abstract/title evidence.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T12:21:55Z",
+      "deep_scan_package_id": "hardcore-20260922T104251Z-fe8d13c4ebf7",
+      "verification_note": "Bibliographic identity is credible, but substantive text remained inaccessible after the complete mandatory ladder, all applicable hardcore routes, and both TRY HARDER passes."
+    },
+    "link:https://doi.org/10.1002/ev.20605": {
+      "decision": "drop",
+      "target_strand": "B",
+      "reason_code": "B_NOT_METHOD_CONTRIBUTION",
+      "reason": "The recovered work is substantive, but its contribution is conceptual, empirical, or agenda-setting rather than a new or materially improved reusable method for Strand B.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T12:21:55Z",
+      "deep_scan_package_id": "hardcore-20260922T104251Z-fe8d13c4ebf7",
+      "verification_note": "Matching substantive primary/full-text evidence was recovered and used for the admission judgment.",
+      "duplicate_of": ""
+    },
+    "link:https://doi.org/10.1108/fs-03-2024-0043": {
+      "decision": "drop_unverifiable",
+      "target_strand": "",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "Identity is verified, but no substantive matching source was recovered after full terminal recovery; an admission judgment would require relying on prohibited abstract/title evidence.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T12:21:55Z",
+      "deep_scan_package_id": "hardcore-20260922T104251Z-fe8d13c4ebf7",
+      "verification_note": "Bibliographic identity is credible, but substantive text remained inaccessible after the complete mandatory ladder, all applicable hardcore routes, and both TRY HARDER passes."
+    },
+    "link:https://doi.org/10.1108/fs-06-2022-0069": {
+      "decision": "drop_unverifiable",
+      "target_strand": "",
+      "reason_code": "EVIDENCE_ACCESS_EXHAUSTED",
+      "reason": "Identity is verified, but no substantive matching source was recovered after full terminal recovery; an admission judgment would require relying on prohibited abstract/title evidence.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T12:21:55Z",
+      "deep_scan_package_id": "hardcore-20260922T104251Z-fe8d13c4ebf7",
+      "verification_note": "Bibliographic identity is credible, but substantive text remained inaccessible after the complete mandatory ladder, all applicable hardcore routes, and both TRY HARDER passes."
+    },
+    "link:https://doi.org/10.1108/fs-10-2021-0189": {
+      "decision": "keep",
+      "target_strand": "B",
+      "reason_code": "B_REUSABLE_METHOD",
+      "reason": "The recovered work makes a reusable methodological contribution to foresight/evaluation practice: An integrated stage-based evaluation framework links foresight phases to topics and criteria for systematic corporate-foresight assessment.",
+      "source": "deep_scan_hardcore_terminal",
+      "corpus_scope": "main",
+      "updated_at": "2026-09-22T12:21:55Z",
+      "deep_scan_package_id": "hardcore-20260922T104251Z-fe8d13c4ebf7",
+      "verification_note": "Matching substantive primary/full-text evidence was recovered and used for the admission judgment.",
+      "duplicate_of": ""
     }
   }
 }
