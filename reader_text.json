@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-22T21:47:50Z",
+  "generated_at": "2026-09-22T22:28:16Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -167539,8 +167539,249 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://era.gv.at/news-items/ec-launches-security-research-and-innovation-campus-at-jrc/": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "3519a355",
+      "identity_hash": "75552b81cad03ed2",
+      "reader_title": "JRC launches security research campus",
+      "reader_what": "A new JRC campus links laboratories, EU agencies and research facilities around security technology.",
+      "reader_why": "It creates a shared European R&I infrastructure for testing, collaboration and deployment.",
+      "reader_more": "The campus launched in Ispra on 10 September 2026. It brings together JRC laboratories across six security pillars and is intended to connect scientific work with operational needs. National experts and EU practitioners are offered access to JRC facilities, training and collaboration schemes.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "The European Commission launched the Security Research and Innovation Campus at JRC Ispra.",
+        "method_or_basis": "ERA Portal first-party-linked account, corroborated by the European Commission JRC launch page.",
+        "qualification": "The source establishes the campus launch and intended functions; it does not demonstrate future security or innovation outcomes.",
+        "radar_relevance": "Concrete expansion of European research infrastructure and cross-agency R&I coordination.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching substantive work inspected at https://era.gv.at/news-items/ec-launches-security-research-and-innovation-campus-at-jrc/."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "First-party corroboration recovered at https://joint-research-centre.ec.europa.eu/jrc-news-and-updates/jrc-launches-security-research-and-innovation-campus-2026-09-10_en."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_recovered_primary",
+            "url": "https://era.gv.at/news-items/ec-launches-security-research-and-innovation-campus-at-jrc/",
+            "title": "EC launches Security Research and Innovation Campus at JRC",
+            "evidence_used": true
+          },
+          {
+            "kind": "corroborating_primary",
+            "url": "https://joint-research-centre.ec.europa.eu/jrc-news-and-updates/jrc-launches-security-research-and-innovation-campus-2026-09-10_en",
+            "title": "JRC launches Security Research and Innovation Campus",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity verified; admission based on the recovered substantive source(s)."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CURRENT_DEVELOPMENT",
+        "reason": "The Commission launched a new JRC security R&I campus with laboratories, agency collaboration and facility access."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-22T22:28:15Z",
+      "deep_scan_package_id": "worker-b-20260922T211608Z-12263e3eb8c8",
+      "claims": [
+        {
+          "object": "research.infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission / Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "launches",
+          "direction": "expands",
+          "status": "operating",
+          "status_date": "2026-09-10",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The source establishes the campus launch and intended functions; it does not demonstrate future security or innovation outcomes.",
+          "text": "The European Commission launched the JRC Security Research and Innovation Campus in Ispra.",
+          "confidence": "high",
+          "record_key": "link:https://era.gv.at/news-items/ec-launches-security-research-and-innovation-campus-at-jrc/",
+          "merit": 69,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:75552b81cad03ed2:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://era.gv.at/news-items/ec-launches-call-for-evidence-or-future-eit-regulation-and-strategic-innovation-agenda-2028-2034/": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "f1cd5a4b",
+      "identity_hash": "e7f5c9de1313ed9d",
+      "reader_title": "Commission opens evidence call on future EIT rules",
+      "reader_what": "The Commission opened evidence gathering for the next EIT Regulation and 2028–2034 strategic agenda.",
+      "reader_why": "Stakeholder evidence is being used before the Commission prepares the legislative and strategic proposals.",
+      "reader_more": "The call for evidence opened on 12 August and ran to 23 September 2026. It covers the EIT Regulation and Strategic Innovation Agenda for 2028–2034. The source describes this as a preparatory consultation rather than an adopted policy.",
+      "deep_analysis": {
+        "work_kind": "current policy development",
+        "research_question": "",
+        "main_finding": "A formal evidence-gathering process was launched for revision of the EIT legal and strategic framework.",
+        "method_or_basis": "ERA Portal account of the Commission consultation and timetable.",
+        "qualification": "The consultation is evidence gathering for a planned revision; it is not the final regulation or strategic agenda.",
+        "radar_relevance": "Live EU R&I-governance process shaping the EIT framework for the next budget period.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching substantive work inspected at https://era.gv.at/news-items/ec-launches-call-for-evidence-or-future-eit-regulation-and-strategic-innovation-agenda-2028-2034/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_recovered_primary",
+            "url": "https://era.gv.at/news-items/ec-launches-call-for-evidence-or-future-eit-regulation-and-strategic-innovation-agenda-2028-2034/",
+            "title": "EC launches call for evidence or future EIT Regulation and Strategic Innovation Agenda (2028-2034)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity verified; admission based on the recovered substantive source(s)."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CURRENT_DEVELOPMENT",
+        "reason": "The Commission opened a consultation feeding directly into the next EIT Regulation and 2028–2034 strategy."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-22T22:28:16Z",
+      "deep_scan_package_id": "worker-b-20260922T211608Z-12263e3eb8c8",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "launches",
+          "direction": "expands",
+          "status": "call_open",
+          "status_date": "2026-08-12",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The consultation is evidence gathering for a planned revision; it is not the final regulation or strategic agenda.",
+          "text": "The Commission opened a call for evidence for the future EIT Regulation and 2028–2034 Strategic Innovation Agenda.",
+          "confidence": "high",
+          "deadline": "2026-09-23",
+          "record_key": "link:https://era.gv.at/news-items/ec-launches-call-for-evidence-or-future-eit-regulation-and-strategic-innovation-agenda-2028-2034/",
+          "merit": 69,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:e7f5c9de1313ed9d:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://eic.ec.europa.eu/document/download/2c9a91d1-5d64-44ba-b772-6e3f3c1b48fe_en?filename=Chapter_4_EIC_Toolkit_new%20template_v.05%20%28draft%29.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "75976075",
+      "identity_hash": "4ea8cc6764fcfdbd",
+      "reader_title": "EIC procurement toolkit is guidance",
+      "reader_what": "A toolkit explains private-sector innovation procurement for EIC-backed start-ups and SMEs.",
+      "reader_more": "The February 2025 module is practical guidance on using private-sector innovation procurement. It offers definitions, process advice and tools. It is not a completed empirical or analytical study of a European R&I-system mechanism and does not itself document a new policy decision.",
+      "deep_analysis": {
+        "work_kind": "guidance toolkit",
+        "research_question": "",
+        "main_finding": "The document is operational guidance for innovation procurement.",
+        "method_or_basis": "Official EIC/EISMEA PDF excerpt.",
+        "qualification": "Its purpose is guidance and capacity building rather than evidence production or a new policy action.",
+        "radar_relevance": "Fails Strand A Route 3 and is not a distinct current Strand C event.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching substantive work inspected at https://webgate.ec.europa.eu/circabc-ewpp/d/d/workspace/SpacesStore/9d409312-d6fd-4361-a8bb-52112d91b7e0/download."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_recovered_primary",
+            "url": "https://webgate.ec.europa.eu/circabc-ewpp/d/d/workspace/SpacesStore/9d409312-d6fd-4361-a8bb-52112d91b7e0/download",
+            "title": "EIC Innovation Procurement Toolkit",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity verified; admission based on the recovered substantive source(s)."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "NON_SUBSTANTIVE_GUIDANCE",
+        "reason": "This is a practical procurement toolkit, not a completed evidence-led study of the European R&I system or a current policy change."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-22T22:28:16Z",
+      "deep_scan_package_id": "worker-b-20260922T211608Z-12263e3eb8c8",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-09-22T21:47:50Z"
+  "claims_updated_at": "2026-09-22T22:28:16Z"
 }

@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1802** (Main **924** + Historical **878**)
-- Automatic queue still needing V2 verification: **107** (Main **77** + Historical **30**)
-- Currently assigned to workers: **96** (Main **77** + Historical **19**)
+- Authoritative V2 verified: **1805** (Main **927** + Historical **878**)
+- Automatic queue still needing V2 verification: **104** (Main **74** + Historical **30**)
+- Currently assigned to workers: **93** (Main **74** + Historical **19**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **13**
 - Automatic queue pending and not yet assigned: **11**
@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260922T215201Z-16cbcf5a4ec0`
+- Current package: `worker-a-20260922T223228Z-16cbcf5a4ec0`
 - Assigned unresolved records: **36**
   1. `link:https://news.google.com/rss/articles/CBMiswFBVV95cUxQUk9tdXhDdmkyRU54dVNWMmI4WXJVeVdOZm5FS0pYSklqNlhlWlBpS2Q1QUdBUk53NU11U3hQcmZ1Ulg1QmhSam9zTnE4MGt5TTg3M0g0RDlRWDZKWG1uNUoyejhqUzZ2LWhfYjZNVHUydi1fRHk4aTFZSjVHenpjenhlWEY5c1dVUTdyNlhlZXZLc0VNWDEzOThTdHRhb2l2LTN4aWp4SUNtbDNoZUE4RHpNMA?oc=5` — EU to require data centres to disclose energy and water efficiency
   2. `link:https://news.google.com/rss/articles/CBMipgFBVV95cUxQYWNkdTRVNFBacWZiOWRiZkVNc180aXBkTG0yeTJfVnBxYzNBOHhiS0g2YVZLSWxMalJvUzJNMkh1dm9OY1FsQXNfUFI0VXZYVXhWMVhWMEJDUzBDSVEzMjIwYzZabGpKYXB1THA5cUw1V0d1TXp3a0NUbUhMZHpNUzAzNnpIYVNzUGFfRkJMSjFYaVZUdW5uSzVJd1ZTX21xTkEtWE1B?oc=5` — Europe has the science. Now it needs a clinical trials system to match.
@@ -29,17 +29,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260922T215226Z-12263e3eb8c8`
-- Assigned unresolved records: **60**
-  1. `link:https://era.gv.at/news-items/ec-launches-security-research-and-innovation-campus-at-jrc/` — EC launches Security Research and Innovation Campus at JRC
-  2. `link:https://era.gv.at/news-items/ec-launches-call-for-evidence-or-future-eit-regulation-and-strategic-innovation-agenda-2028-2034/` — EC launches call for evidence or future EIT Regulation and Strategic Innovation Agenda (2028-2034)
-  3. `link:https://eic.ec.europa.eu/document/download/2c9a91d1-5d64-44ba-b772-6e3f3c1b48fe_en?filename=Chapter_4_EIC_Toolkit_new%20template_v.05%20%28draft%29.pdf` — EIC Innovation Procurement Toolkit
-  4. `link:https://www.eit.europa.eu/` — EIT entrepreneurial education: Learn from leaders of European innovation
-  5. `link:https://www.ellisinstitute.fi/PIs-2026` — ELLIS Institute Finland recruits 7 new principal investigators | ELLIS Institute Finland
-  6. `link:https://www.clean-hydrogen.europa.eu/document/download/0fa1c244-a674-4899-bf4f-f2fc9ba43ae7_en?filename=H2Week_Agenda%20Innovation%20Forum%202026_HE_web%20%28002%29.pdf` — EU Hydrogen Innovation Forum 2026
-  7. `link:https://era.gv.at/news-items/eu-launches-first-research-network-on-antisemitism-and-jewish-life/` — EU launches first research network on antisemitism and Jewish life
-  8. `link:https://defence-industry-space.ec.europa.eu/eudis-defence-hackathon-spring-2026-meet-winning-teams-driving-innovation-airspace-defence-2026-03-30_en` — EUDIS Defence Hackathon Spring 2026: Meet the Winning Teams Driving Innovation in Airspace Defence
-  - … plus 52 more in the package manifest
+- Current package: `worker-b-20260922T223252Z-6012c1ed5277`
+- Assigned unresolved records: **57**
+  1. `link:https://www.eit.europa.eu/` — EIT entrepreneurial education: Learn from leaders of European innovation
+  2. `link:https://www.ellisinstitute.fi/PIs-2026` — ELLIS Institute Finland recruits 7 new principal investigators | ELLIS Institute Finland
+  3. `link:https://www.clean-hydrogen.europa.eu/document/download/0fa1c244-a674-4899-bf4f-f2fc9ba43ae7_en?filename=H2Week_Agenda%20Innovation%20Forum%202026_HE_web%20%28002%29.pdf` — EU Hydrogen Innovation Forum 2026
+  4. `link:https://era.gv.at/news-items/eu-launches-first-research-network-on-antisemitism-and-jewish-life/` — EU launches first research network on antisemitism and Jewish life
+  5. `link:https://defence-industry-space.ec.europa.eu/eudis-defence-hackathon-spring-2026-meet-winning-teams-driving-innovation-airspace-defence-2026-03-30_en` — EUDIS Defence Hackathon Spring 2026: Meet the Winning Teams Driving Innovation in Airspace Defence
+  6. `link:https://doi.org/10.1007/s10888-026-09737-5` — Earnings inequality patterns: A comparative analysis of France, Italy, Portugal and Spain
+  7. `link:https://ellis.eu/publication/2025-enhancing-study-level-inference-from-clinical-trial-papers-via-reinfor` — Enhancing Study-Level Inference from Clinical Trial Papers via Reinforcement Learning-Based Numeric Reasoning
+  8. `link:https://www.ellisinstitute.fi/entrepreneurial-postdoc-recruit-autumn-2026` — Entrepreneurial postdoc positions at ELLIS Institute Finland | ELLIS Institute Finland
+  - … plus 49 more in the package manifest
 
 ## Hands-on verification needed
 
