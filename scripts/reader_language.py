@@ -96,22 +96,23 @@ def html_items(path: Path, cfg: dict[str, Any]) -> list[dict[str, Any]]:
         })
 
     # Also collect substantial visible text nodes inside nested markup.
-    # This preserves links/emphasis because only the text node is replaced.
-    scrubbed = re.sub(
+    # Only genuine text between HTML tags is considered. Script/style/template/
+    # svg bodies are blocked, and tags/attributes can never become language items.
+    blocked_spans = []
+    for bm in re.finditer(
         r"(?is)<(script|style|template|svg)\b.*?</\1>",
-        lambda m: " " * len(m.group(0)),
         source,
-    )
-    # Remove all remaining HTML tags from consideration while preserving
-    # positions. Only text *between* tags can become a reader-language item.
-    scrubbed = re.sub(
-        r"(?s)<[^>]*>",
-        lambda m: " " * len(m.group(0)),
-        scrubbed,
-    )
+    ):
+        blocked_spans.append((bm.start(), bm.end()))
+
+    def is_blocked(pos: int) -> bool:
+        return any(a <= pos < b for a, b in blocked_spans)
+
     text_ordinal = 0
-    for m in re.finditer(r"(?s)(?P<node>[^<>]+)", scrubbed):
-        raw = source[m.start("node"):m.end("node")]
+    for m in re.finditer(r"(?s)>(?P<node>[^<>]+)<", source):
+        if is_blocked(m.start("node")):
+            continue
+        raw = m.group("node")
         stripped = raw.strip()
         if not stripped:
             continue
@@ -217,7 +218,10 @@ def data_items(path: Path, cfg: dict[str, Any]) -> list[dict[str, Any]]:
     source = path.read_text(encoding="utf-8")
     allowed = set(cfg["data_keys"])
     items = []
+    excluded_prefixes = set(cfg.get("data_exclude_path_prefixes", []))
     for parts, text in walk_data(obj, allowed):
+        if parts and str(parts[0]) in excluded_prefixes:
+            continue
         if words(text) < cfg["min_words"]:
             continue
         token = json.dumps(text, ensure_ascii=False)
