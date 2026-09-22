@@ -1,4 +1,4 @@
-name: R&I Radar Strand A Wild Private Deep Discovery — 24 min
+name: R&I Radar Strand A Wild Private Deep Discovery — 20 min
 
 on:
   workflow_dispatch:
@@ -19,7 +19,7 @@ jobs:
     permissions:
       contents: write
     runs-on: ubuntu-latest
-    timeout-minutes: 42
+    timeout-minutes: 30
 
     steps:
       - name: Check out current main safely
@@ -72,8 +72,8 @@ jobs:
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
           CROSSREF_MAILTO: ${{ secrets.CROSSREF_MAILTO }}
           RADAR_QUICK_SCAN: 'true'
-          RADAR_SCAN_BUDGET_SECONDS: '1440'
-          RADAR_QUICK_STRAND_MIN_RUNTIME_SECONDS: '1320'
+          RADAR_SCAN_BUDGET_SECONDS: '1200'
+          RADAR_QUICK_STRAND_MIN_RUNTIME_SECONDS: '1080'
           RADAR_QUICK_STRAND: A
           RADAR_STRAND_A_DEEP_DISCOVERY: 'true'
           RADAR_RESCUE_MODE: 'false'

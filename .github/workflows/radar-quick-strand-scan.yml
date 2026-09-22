@@ -1,10 +1,10 @@
-name: R&I Radar Quick Strand Scan — 10 min
+name: R&I Radar Focused Strand Scan — 20 min
 
 on:
   workflow_dispatch:
     inputs:
       strand:
-        description: 'Which strand to scan for 10 minutes'
+        description: 'Which strand to scan for 20 minutes'
         required: true
         default: 'A'
         type: choice
@@ -33,7 +33,7 @@ jobs:
       contents: write
       actions: write
     runs-on: ubuntu-latest
-    timeout-minutes: 18
+    timeout-minutes: 30
 
     steps:
       - name: Check out repository without stored credentials
@@ -56,7 +56,7 @@ jobs:
           # apply the old hourly-workflow 6h age gate here: on a real 4h cron it would
           # incorrectly skip every other production scan.
           echo "run=true" >> "$GITHUB_OUTPUT"
-          echo "Reason: manual ten-minute Strand ${{ inputs.strand }} quick scan."
+          echo "Reason: manual twenty-minute focused Strand ${{ inputs.strand }} scan."
 
       - name: Set up Python
         if: steps.due.outputs.run == 'true'
@@ -89,8 +89,8 @@ jobs:
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
           CROSSREF_MAILTO: ${{ secrets.CROSSREF_MAILTO }}
           RADAR_QUICK_SCAN: 'true'
-          RADAR_SCAN_BUDGET_SECONDS: '600'
-          RADAR_QUICK_STRAND_MIN_RUNTIME_SECONDS: '540'
+          RADAR_SCAN_BUDGET_SECONDS: '1200'
+          RADAR_QUICK_STRAND_MIN_RUNTIME_SECONDS: '1080'
           RADAR_QUICK_STRAND: ${{ inputs.strand }}
           RADAR_RESCUE_MODE: 'false'
         run: python scripts/scan_radar.py
