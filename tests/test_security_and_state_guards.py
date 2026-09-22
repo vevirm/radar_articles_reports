@@ -45,9 +45,9 @@ class CurrentRepositoryContractTests(unittest.TestCase):
         self.assertIn('OpenAlex low-yield continuation wave {wave_idx}", collect_openalex, EXTENDED_DATE_FLOOR', source)
         self.assertIn('Institutional low-yield continuation wave {wave_idx}", collect_institutions, EXTENDED_DATE_FLOOR', source)
 
-    def test_main_budget_is_twenty_four_minutes(self):
+    def test_main_budget_is_twenty_minutes(self):
         cfg = json.loads((ROOT / 'radar_config.json').read_text(encoding='utf-8'))
-        self.assertEqual(int(cfg.get('scan_budget_seconds', 0)), 1440)
+        self.assertEqual(int(cfg.get('scan_budget_seconds', 0)), 1200)
         self.assertTrue(bool(cfg.get('full_budget_continuation_enabled')))
         self.assertLessEqual(int(cfg.get('scan_finalize_reserve_seconds', 999)), 45)
 
