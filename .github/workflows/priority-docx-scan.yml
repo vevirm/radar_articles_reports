@@ -98,6 +98,7 @@ jobs:
         if: steps.due.outputs.run == 'true'
         env:
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
+          CROSSREF_MAILTO: ${{ secrets.CROSSREF_MAILTO }}
           RADAR_QUICK_SCAN: 'true'
           RADAR_PRIORITY_SCAN: 'true'
           RADAR_SCAN_BUDGET_SECONDS: '900'

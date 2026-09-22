@@ -84,6 +84,7 @@ jobs:
         if: steps.due.outputs.run == 'true'
         env:
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
+          CROSSREF_MAILTO: ${{ secrets.CROSSREF_MAILTO }}
           RADAR_RESCUE_MODE: ${{ github.event.inputs.rescue_mode || 'false' }}
         run: python scripts/scan_radar.py
 
