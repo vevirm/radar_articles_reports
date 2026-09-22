@@ -12,6 +12,7 @@ env:
 # Keep scanners from changing evidence while Stage 8 closes the reasoning renovation.
 concurrency:
   group: ri-radar-research-scanners
+  queue: max
   cancel-in-progress: false
 
 jobs:

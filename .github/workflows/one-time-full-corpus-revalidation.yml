@@ -12,6 +12,7 @@ env:
 # Use the same queue as Main/Historical so revalidation cannot race a discovery scan.
 concurrency:
   group: ri-radar-research-scanners
+  queue: max
   cancel-in-progress: false
 
 jobs:

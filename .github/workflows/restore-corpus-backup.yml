@@ -12,6 +12,7 @@ env:
 # Restoration also waits for Main/Historical rather than racing them.
 concurrency:
   group: ri-radar-research-scanners
+  queue: max
   cancel-in-progress: false
 
 jobs:

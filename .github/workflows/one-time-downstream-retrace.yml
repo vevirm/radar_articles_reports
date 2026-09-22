@@ -12,6 +12,7 @@ env:
 # Use the scanner queue so the evidence corpus cannot change while ancestry is rebuilt.
 concurrency:
   group: ri-radar-research-scanners
+  queue: max
   cancel-in-progress: false
 
 jobs:

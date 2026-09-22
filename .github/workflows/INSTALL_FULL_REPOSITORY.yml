@@ -16,6 +16,7 @@ permissions:
 # replacement is being committed.
 concurrency:
   group: ri-radar-research-scanners
+  queue: max
   cancel-in-progress: false
 
 env:

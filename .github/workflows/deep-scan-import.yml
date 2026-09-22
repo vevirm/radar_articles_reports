@@ -17,6 +17,7 @@ env:
 # Deep Scan and automatic scanners must never rewrite corpus state concurrently.
 concurrency:
   group: ri-radar-research-scanners
+  queue: max
   cancel-in-progress: false
 
 jobs:

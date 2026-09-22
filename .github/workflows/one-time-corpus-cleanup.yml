@@ -12,6 +12,7 @@ env:
 # Use the exact same queue as Main/Historical so cleanup can never race a scanner.
 concurrency:
   group: ri-radar-research-scanners
+  queue: max
   cancel-in-progress: false
 
 jobs:
