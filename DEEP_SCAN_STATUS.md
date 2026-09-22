@@ -7,17 +7,17 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **1748** (Main **871** + Historical **877**)
-- Automatic queue still needing V2 verification: **29** (Main **8** + Historical **21**)
-- Currently assigned to workers: **72** (Main **70** + Historical **2**)
+- Automatic queue still needing V2 verification: **155** (Main **134** + Historical **21**)
+- Currently assigned to workers: **120** (Main **118** + Historical **2**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **8**
-- Automatic queue pending and not yet assigned: **19**
+- Automatic queue pending and not yet assigned: **35**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260922T080933Z-731b2be376e6`
-- Assigned unresolved records: **36**
+- Current package: `worker-a-20260922T211532Z-5a6639c8ff8e`
+- Assigned unresolved records: **60**
   1. `link:https://doi.org/10.1108/14636681211210341` — A case study on localising foresight in South Africa: using foresight in the context of local government participatory planning — recovery attempt 3/3
   2. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxOQUZFYldBemM1TGotSVFra1F1UkY5elJsMlBScWNqelRJb2Rnd1BGX3pURVRGNzdUQ2FfQWJvR1JrN1RnbVlQZ21Vbm54c0oydk9ySHpiRkwteGdXTzV1YjBWOVZ6VGNZSk5BZDg2eEhyWURuWmJNQ3RzWHJYeS1xWWVfLTVmNl9USm1iMUpYazNka2FZVHNYLV9RVHYwOFFHUFF4Y0VQbGwwQ3RDekE?oc=5` — EU antitrust chief would consider request from AI firms to coordinate on safety — recovery attempt 3/3
   3. `link:https://doi.org/10.1177/03400352261470844` — Global patterns and regional disparities in library and information science research productivity — recovery attempt 3/3
@@ -26,11 +26,11 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:9f7aa4b8571cb32b` — Science Diplomacy for Eastern Europe: A New Beginning — recovery attempt 3/3
   7. `historical:id:d436106c01077081` — Measuring the contribution of higher education to innovation capacity in the EU — recovery attempt 2/3
   8. `link:https://doi.org/10.1007/s13563-026-00696-x` — Hybrid development trajectories in former mining regions: collective memory, tourism, and social licence for mine reactivation
-  - … plus 28 more in the package manifest
+  - … plus 52 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260922T080956Z-b755601da681`
-- Assigned unresolved records: **36**
+- Current package: `worker-b-20260922T211608Z-12263e3eb8c8`
+- Assigned unresolved records: **60**
   1. `link:https://era.gv.at/news-items/ec-launches-security-research-and-innovation-campus-at-jrc/` — EC launches Security Research and Innovation Campus at JRC
   2. `link:https://era.gv.at/news-items/ec-launches-call-for-evidence-or-future-eit-regulation-and-strategic-innovation-agenda-2028-2034/` — EC launches call for evidence or future EIT Regulation and Strategic Innovation Agenda (2028-2034)
   3. `link:https://eic.ec.europa.eu/document/download/2c9a91d1-5d64-44ba-b772-6e3f3c1b48fe_en?filename=Chapter_4_EIC_Toolkit_new%20template_v.05%20%28draft%29.pdf` — EIC Innovation Procurement Toolkit
@@ -39,7 +39,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `link:https://www.clean-hydrogen.europa.eu/document/download/0fa1c244-a674-4899-bf4f-f2fc9ba43ae7_en?filename=H2Week_Agenda%20Innovation%20Forum%202026_HE_web%20%28002%29.pdf` — EU Hydrogen Innovation Forum 2026
   7. `link:https://era.gv.at/news-items/eu-launches-first-research-network-on-antisemitism-and-jewish-life/` — EU launches first research network on antisemitism and Jewish life
   8. `link:https://defence-industry-space.ec.europa.eu/eudis-defence-hackathon-spring-2026-meet-winning-teams-driving-innovation-airspace-defence-2026-03-30_en` — EUDIS Defence Hackathon Spring 2026: Meet the Winning Teams Driving Innovation in Airspace Defence
-  - … plus 28 more in the package manifest
+  - … plus 52 more in the package manifest
 
 ## Hands-on verification needed
 
