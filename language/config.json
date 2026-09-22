@@ -155,6 +155,15 @@
     "**/radar*.json",
     "**/historical*.json",
     "assets/research-radar-approved.json",
-    "research-radar.html"
+    "research-radar.html",
+    "radar*.json",
+    "historical*.json"
+  ],
+  "data_exclude_path_prefixes": [
+    "scan_state",
+    "private_state",
+    "candidates",
+    "queue",
+    "audit"
   ]
 }
