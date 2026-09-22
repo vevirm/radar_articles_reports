@@ -88,6 +88,54 @@
       ],
       "purpose": "Strategic-gap discovery repair: reserve bounded front-of-queue scholarly discovery for clean industrial/energy/materials capability, commercialisation/private R&D, intra-European capability asymmetry, biotech/life sciences, and US/China dependency mechanisms; expand only the matching R&I-system ontology and authoritative EU source universe; explicitly align Deep Scan with those same state-variable examples; preserve all provenance, Europe, central-R&I and admission gates.",
       "stage": "post-stage8-strategic-gap-recall"
+    },
+    {
+      "approved_files": [
+        "scripts/scan_radar.py",
+        "scripts/scan_radar_deep_a.py",
+        "radar_config.json",
+        ".github/workflows/radar-scan.yml",
+        ".github/workflows/radar-quick-scan.yml",
+        ".github/workflows/radar-quick-strand-scan.yml",
+        ".github/workflows/priority-docx-scan.yml",
+        ".github/workflows/radar-strand-a-deep-discovery.yml",
+        "tests/test_source_transport_repair.py",
+        "reasoning-reform/baseline.json"
+      ],
+      "purpose": "Source transport and first-party legal-source repair: identify the crawler for Crossref and blocked-source compatibility; try bare/www sitemap hosts; add configured institution RSS discovery without bypassing normal page/admission gates; use exact ISSN lookup for Science; stop normal partial-stage budgets from forcing degraded health; add bounded blocked-source news queries; and add a bounded first-party EUR-Lex/Cellar legal-act lane while preserving existing Strand-C gates.",
+      "stage": "post-stage8-source-transport-and-eurlex-recall"
+    },
+    {
+      "approved_files": [
+        "scripts/scan_radar.py",
+        "scripts/deep_read_works.py",
+        "scripts/prepare_deep_scan_package.py",
+        "scripts/prepare_deep_scan_hardcore_recovery.py",
+        "radar_config.json",
+        "tests/test_source_route_parity.py",
+        "reasoning-reform/baseline.json",
+        "scripts/import_deep_scan_results.py",
+        "scripts/import_deep_scan_hardcore_recovery.py"
+      ],
+      "purpose": "Add bounded first-party European Parliament adopted-text discovery and persistent source-transport telemetry; preserve scan-to-Deep-Scan route parity by carrying scanner validation routes into ordinary and hard-core Deep Scan source retrieval; require Deep Scan and terminal recovery audits to explicitly exercise scanner_validation_route when one exists, and reject drop_unverifiable when that route succeeded; treat unscheduled and pre-request budget-skipped source checks as neutral; preserve existing admission and Deep Scan correctness gates.",
+      "stage": "post-stage8-parliament-route-parity-and-source-health"
+    },
+    {
+      "approved_files": [
+        "scripts/scan_radar.py",
+        "scripts/scan_radar_deep_a.py",
+        "scripts/deep_read_works.py",
+        "scripts/import_deep_scan_results.py",
+        "scripts/import_deep_scan_hardcore_recovery.py",
+        "scripts/prepare_deep_scan_package.py",
+        "scripts/prepare_deep_scan_hardcore_recovery.py",
+        "radar_config.json",
+        "tests/test_source_transport_repair.py",
+        "tests/test_source_route_parity.py",
+        "reasoning-reform/baseline.json"
+      ],
+      "purpose": "Complete scan-to-validation route parity and selective publisher recall: keep first-party Cellar and European Parliament validation routes mandatory in ordinary and hard-core Deep Scan recovery; use an honest compatible Deep Scan crawler identity; add bounded exact DOI-prefix discovery only for RAND where current DOI activity and downstream validation are usable; mirror that route into the 24-minute Strand-A discovery scanner; leave blocked/metadata-sparse publisher prefixes out until substantive validation parity exists; preserve all ordinary A/B/C admission and source-integrity gates.",
+      "stage": "post-stage8-route-parity-and-selective-prefix-recall"
     }
   ],
   "captured_for_repository_version": "v25.1.0-evidence-linked-reader",
@@ -109,12 +157,12 @@
       "scripts/rebuild_active_radar.py": "3e77545a932113686237f43a23a2a0db5225902ee4e2ed31f2c8b19951829f4a"
     },
     "deep_scan_hard_core": {
-      "scripts/deep_read_works.py": "ce482f7cd4d21868a2eecaada2866473da1e7769e53038f58ffa52cd61d3e78c",
-      "scripts/import_deep_scan_results.py": "4a7d5aaf348d13ec780afa5874bc2f2ed3521df206fee8d3f2ab898b795df7af",
-      "scripts/prepare_deep_scan_package.py": "80145904dbe9fc0e9c54f12ceb039fbdc3244606f17858bc7779106f7d589479"
+      "scripts/deep_read_works.py": "1719b59895e0072803cc531daa650bc95ba5aa870e88256a1545dbf2ede90dc1",
+      "scripts/import_deep_scan_results.py": "3ab47dc8c955df3d29946c4117087a4fc52058430c371f64a3dcc543f56ae7f0",
+      "scripts/prepare_deep_scan_package.py": "51e3c77490a6af953fca597ef54038c41b88cac87803464b9f5f66401cc7a7e5"
     },
     "scanner_hard_core": {
-      "scripts/scan_radar.py": "e73c3a10306bbde393a635652be95b78f002cbfd3bd6238d2c3ffbcd927d27a5"
+      "scripts/scan_radar.py": "24b86b79dcca6f4feac73a63e71900cdd5d492fb06388af7d70d7ab018f96dc4"
     }
   },
   "raw_counts": {
