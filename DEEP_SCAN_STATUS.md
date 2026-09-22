@@ -6,30 +6,30 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1748** (Main **871** + Historical **877**)
-- Automatic queue still needing V2 verification: **155** (Main **134** + Historical **21**)
-- Currently assigned to workers: **120** (Main **118** + Historical **2**)
+- Authoritative V2 verified: **1802** (Main **924** + Historical **878**)
+- Automatic queue still needing V2 verification: **107** (Main **77** + Historical **30**)
+- Currently assigned to workers: **96** (Main **77** + Historical **19**)
 - Bounded access-recovery retries still eligible: **0**
-- Hands-on verification needed: **8**
-- Automatic queue pending and not yet assigned: **35**
+- Hands-on verification needed: **13**
+- Automatic queue pending and not yet assigned: **11**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260922T211532Z-5a6639c8ff8e`
-- Assigned unresolved records: **60**
-  1. `link:https://doi.org/10.1108/14636681211210341` — A case study on localising foresight in South Africa: using foresight in the context of local government participatory planning — recovery attempt 3/3
-  2. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxOQUZFYldBemM1TGotSVFra1F1UkY5elJsMlBScWNqelRJb2Rnd1BGX3pURVRGNzdUQ2FfQWJvR1JrN1RnbVlQZ21Vbm54c0oydk9ySHpiRkwteGdXTzV1YjBWOVZ6VGNZSk5BZDg2eEhyWURuWmJNQ3RzWHJYeS1xWWVfLTVmNl9USm1iMUpYazNka2FZVHNYLV9RVHYwOFFHUFF4Y0VQbGwwQ3RDekE?oc=5` — EU antitrust chief would consider request from AI firms to coordinate on safety — recovery attempt 3/3
-  3. `link:https://doi.org/10.1177/03400352261470844` — Global patterns and regional disparities in library and information science research productivity — recovery attempt 3/3
-  4. `link:https://doi.org/10.1108/fs-06-2015-0036` — Strategic planning and foresight: the case of Smart Specialisation Strategy in Tuscany — recovery attempt 3/3
-  5. `link:https://news.google.com/rss/articles/CBMimwFBVV95cUxOUWR1bzN3YkNacm5ZT3dwUGtzU3BsNnRBcUdyT3hZNkl3X0h1RWlFa2tEYkdTZUktRXFmeG02cGplNEhoYlg0ZlpZWkRJdU1lVTZGWWt0NHR6Q1JKdk1EN1JfSTJuYlpvQ1FFQm1EelpXZVBKV3dJRFZCOWtlN2hCaTEteGxKbW12NVNmY1pvVHE2ZjdyMDhyWXdpcw?oc=5` — Spanish vaccine maker urges broader EU incentives for innovation — recovery attempt 3/3
-  6. `historical:id:9f7aa4b8571cb32b` — Science Diplomacy for Eastern Europe: A New Beginning — recovery attempt 3/3
-  7. `historical:id:d436106c01077081` — Measuring the contribution of higher education to innovation capacity in the EU — recovery attempt 2/3
-  8. `link:https://doi.org/10.1007/s13563-026-00696-x` — Hybrid development trajectories in former mining regions: collective memory, tourism, and social licence for mine reactivation
-  - … plus 52 more in the package manifest
+- Current package: `worker-a-20260922T215201Z-16cbcf5a4ec0`
+- Assigned unresolved records: **36**
+  1. `link:https://news.google.com/rss/articles/CBMiswFBVV95cUxQUk9tdXhDdmkyRU54dVNWMmI4WXJVeVdOZm5FS0pYSklqNlhlWlBpS2Q1QUdBUk53NU11U3hQcmZ1Ulg1QmhSam9zTnE4MGt5TTg3M0g0RDlRWDZKWG1uNUoyejhqUzZ2LWhfYjZNVHUydi1fRHk4aTFZSjVHenpjenhlWEY5c1dVUTdyNlhlZXZLc0VNWDEzOThTdHRhb2l2LTN4aWp4SUNtbDNoZUE4RHpNMA?oc=5` — EU to require data centres to disclose energy and water efficiency
+  2. `link:https://news.google.com/rss/articles/CBMipgFBVV95cUxQYWNkdTRVNFBacWZiOWRiZkVNc180aXBkTG0yeTJfVnBxYzNBOHhiS0g2YVZLSWxMalJvUzJNMkh1dm9OY1FsQXNfUFI0VXZYVXhWMVhWMEJDUzBDSVEzMjIwYzZabGpKYXB1THA5cUw1V0d1TXp3a0NUbUhMZHpNUzAzNnpIYVNzUGFfRkJMSjFYaVZUdW5uSzVJd1ZTX21xTkEtWE1B?oc=5` — Europe has the science. Now it needs a clinical trials system to match.
+  3. `link:https://news.google.com/rss/articles/CBMiwgFBVV95cUxNa3RGdU9WcUZUNnNmWERzWWplN1RoRVBLelBmZHVuQlBpcWNJUVVrTlBhRV9CQndBOHJHY2VOS0l1M2lPcGJBR0lsU1JZd1VqSFI3NDJlektYUlV6cGZ0UWFWRW5GakhNN2NZSHZ2VG9QWUFjRGFTY0FGSDBoVl90UWNNSGx5NjlxUkdkUXNlSjNWVzU1TGJ5dm95NGNQRHRmMTdZWGx0dXNiUGs4Y3RJY3V4STc3dXkwNWhFdXR5R0VTUQ?oc=5` — EU pressures Big Tech to go green with new data center sustainability label
+  4. `link:https://news.google.com/rss/articles/CBMixgFBVV95cUxNa3JhUUhsWjhCV3o4Y1B3WDRFU1h5TlpISTNmNWo1UjdsYmFKVFpaVUpTV0NidEVQYXVEYTh5Y0RrSVlHS3Q2YUMxNnlzcWNRVWt6clhGWDdwSnBEUlZLQlFrb055RW5fbXVYT1JWMm9qNHhVVHlPUmxCTTBXYXlOYXB0MG5OelhIaE5hemZZT2xPdkdUVzdWMkxRdmN4LW9yalVienIyRWU4cEwwcFMxcnNSTi14QTFnY1hIYzhjdlpWcUlwVEE?oc=5` — Making data centres energy efficient thanks to a new EU rating system
+  5. `link:https://news.google.com/rss/articles/CBMilwFBVV95cUxNZWFDRENoNzlFV3RwamFFdEVxdnBRV3VCOV9SQ2g0RFNLVU4xNm41ZVdGOWl3RXp5bVNEc0J6RWtjQzBFTURReG9WM3NfR1JUSFNWd3dzNUpZaDJFRkZRODhrclVNdXdRQlMzZDEtV25VWTVXdHVVSnktNG10WHhYUzJVd1pFTFlOQ0FoV3hjaU5hb0tEX2RJ?oc=5` — World in Brief: AfD triumphs again in Germany; America and China agree to talk AI
+  6. `link:https://news.google.com/rss/articles/CBMivAFBVV95cUxOUjd6SnhEMGdGc0lCWnRQZk1EcEFCcHBoamZJR0ZDQnJRNVVHVHdTbU1RT0Ywc2g3ZEgtX014NTJObldia1NXWjl1N1psZlRVTTVkaThLRXA0Rk83WG1LcnVab1o5MHVSX3h1emVqOHJocmdnMU1YbHV3NzZwX2xzcUtyZEpfTHl0N2VBWVk1cHM2bjFMcmZpTEJSVV9HdGdleWxhSU9FbWd1U2hTVUxUZnUxYzZ1YUtSb1h5UQ?oc=5` — Russia’s hybrid war and Trump’s tantrums are pushing Europe towards real strategic autonomy
+  7. `link:https://news.google.com/rss/articles/CBMi0gFBVV95cUxOZVdPenQ4c3pJYXhfMmJKOWpJYldTcDVNVUF2UW95OG15OUlRVmJNeXY2Q0JGdnpwOFNfQVJISjIwalY1UkZPZ01pZk5ZdnFMa0haTHFWVzBNSWlvRGtFWm9lUC1zMy1Hal9LZVVDS2RkenJJQ1d0Vm05dGkyR3lFUS1HSTJkTHFzZ3dzeEJfVk1uNlpHY1k2SExTWTlMN1huMEx0LUhXbkJDVWVmODlpaDJYdVhCSGJ6QlRTckZGTWwzb3kzUnlvQi1sYk9jMlZydWc?oc=5` — Europe cannot afford to miss AI transformation, with fiscal dividend within reach, OECD chief says
+  8. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTFB3X2lIVGxXMmR6YnJya2xIS2t0WGs0UWZlN0hCNFdQWDAzTVpZWGJVT2VaNnFHa0xDVXpaSG9CNlBWeXVLWXR2M3pNbGxYS0laSWdyN05ETFhCNEp0OEtlOXVSSlBPRDRSUFBPb242Z1JGdVJXZ2xQU1ZEUUxsQQ?oc=5` — THE HACK: EU progress on industrial AI push
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260922T211608Z-12263e3eb8c8`
+- Current package: `worker-b-20260922T215226Z-12263e3eb8c8`
 - Assigned unresolved records: **60**
   1. `link:https://era.gv.at/news-items/ec-launches-security-research-and-innovation-campus-at-jrc/` — EC launches Security Research and Innovation Campus at JRC
   2. `link:https://era.gv.at/news-items/ec-launches-call-for-evidence-or-future-eit-regulation-and-strategic-innovation-agenda-2028-2034/` — EC launches call for evidence or future EIT Regulation and Strategic Innovation Agenda (2028-2034)
@@ -53,3 +53,8 @@ These works no longer consume automatic Deep Scan slots. Their identity is belie
 - `historical:id:429b7fb8a4fd8c00` — **Fumbling Toward Foresight** — attempts: 3/3 — Futures — 2020-12-01 — Identity is verified, but substantive matching evidence remained inaccessible or insufficient after all six mandatory recovery steps. — https://doi.org/10.1177/1946756720976713
 - `historical:id:b6502660dc2a056b` — **Russia’s energy in 2030: future trends and technology priorities** — attempts: 3/3 — Foresight — 2017-04-10 — Identity is verified, but substantive matching evidence remained inaccessible or insufficient after all six mandatory recovery steps. — https://doi.org/10.1108/fs-07-2016-0034
 - `historical:id:0fa9a045c44ef264` — **A Three-Level Evaluation Process of Cultural Readiness for Strategic Foresight Projects** — attempts: 3/3 — Futures — 2019-12-01 — Identity confirmed via Crossref/OpenAlex and publisher abstract; no legitimate full text found after all six steps, so no admission judgement is made. — https://doi.org/10.1177/1946756719862115
+- `link:https://doi.org/10.1108/14636681211210341` — **A case study on localising foresight in South Africa: using foresight in the context of local government participatory planning** — attempts: 3/3 — Foresight — 2012-02-24 — Identity is verified, but only publisher structured-abstract material was recoverable; the required substantive text was not accessible. — https://doi.org/10.1108/14636681211210341
+- `link:https://doi.org/10.1177/03400352261470844` — **Global patterns and regional disparities in library and information science research productivity** — attempts: 3/3 — IFLA Journal — 2026-08-06 — The article identity is verified, but the recoverable publisher material is restricted to the abstract and references; no substantive copy was found. — https://doi.org/10.1177/03400352261470844
+- `historical:id:9f7aa4b8571cb32b` — **Science Diplomacy for Eastern Europe: A New Beginning** — attempts: 3/3 — Science Diplomacy — 2022-01-01 — Identity is verified, but all recovery routes led only to metadata or request-a-copy pages, not substantive evidence. — https://doi.org/10.1126/scidip.adf8092
+- `link:https://doi.org/10.1108/fs-06-2015-0036` — **Strategic planning and foresight: the case of Smart Specialisation Strategy in Tuscany** — attempts: 3/3 — foresight — 2016-09-12 — The article identity is verified, but the full paper could not be recovered; available sources expose only structured-abstract material and citations. — https://doi.org/10.1108/fs-06-2015-0036
+- `link:https://news.google.com/rss/articles/CBMimwFBVV95cUxOUWR1bzN3YkNacm5ZT3dwUGtzU3BsNnRBcUdyT3hZNkl3X0h1RWlFa2tEYkdTZUktRXFmeG02cGplNEhoYlg0ZlpZWkRJdU1lVTZGWWt0NHR6Q1JKdk1EN1JfSTJuYlpvQ1FFQm1EelpXZVBKV3dJRFZCOWtlN2hCaTEteGxKbW12NVNmY1pvVHE2ZjdyMDhyWXdpcw?oc=5` — **Spanish vaccine maker urges broader EU incentives for innovation** — attempts: 3/3 — Euractiv — 2026-07-28T07:00Z — The Euractiv report is identifiable, but the article body is paywalled and no substantive matching copy was recovered. — https://news.google.com/rss/articles/CBMimwFBVV95cUxOUWR1bzN3YkNacm5ZT3dwUGtzU3BsNnRBcUdyT3hZNkl3X0h1RWlFa2tEYkdTZUktRXFmeG02cGplNEhoYlg0ZlpZWkRJdU1lVTZGWWt0NHR6Q1JKdk1EN1JfSTJuYlpvQ1FFQm1EelpXZVBKV3dJRFZCOWtlN2hCaTEteGxKbW12NVNmY1pvVHE2ZjdyMDhyWXdpcw?oc=5

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-09-22T12:21:55Z",
+  "updated_at": "2026-09-22T21:47:50Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -11273,6 +11273,244 @@
       ],
       "updated_at": "2026-09-21T22:50:03Z",
       "deep_scan_package_id": "hardcore-20260921T214943Z-b2dfd9dc29d8"
+    },
+    "link:https://news.google.com/rss/articles/CBMirgFBVV95cUxOQUZFYldBemM1TGotSVFra1F1UkY5elJsMlBScWNqelRJb2Rnd1BGX3pURVRGNzdUQ2FfQWJvR1JrN1RnbVlQZ21Vbm54c0oydk9ySHpiRkwteGdXTzV1YjBWOVZ6VGNZSk5BZDg2eEhyWURuWmJNQ3RzWHJYeS1xWWVfLTVmNl9USm1iMUpYazNka2FZVHNYLV9RVHYwOFFHUFF4Y0VQbGwwQ3RDekE?oc=5": {
+      "fields": {
+        "title": "EU competition chief open to AI firms coordinating on safety",
+        "type": "news report"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The scanner ingested a Google News item without a title; recovery identified the underlying Politico report and its article type.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://technology.newsgist.net/articles/18490"
+      ],
+      "updated_at": "2026-09-22T21:47:39Z",
+      "deep_scan_package_id": "worker-a-20260922T211532Z-5a6639c8ff8e"
+    },
+    "historical:id:d436106c01077081": {
+      "fields": {
+        "source": "University of Twente / CHEPS",
+        "type": "working paper"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The recovered university repository identifies this as a CHEPS working paper, not a Higher Education journal article.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://research.utwente.nl/en/publications/measuring-the-contribution-of-higher-education-to-innovation-capa/"
+      ],
+      "updated_at": "2026-09-22T21:47:39Z",
+      "deep_scan_package_id": "worker-a-20260922T211532Z-5a6639c8ff8e"
+    },
+    "link:https://ellis.eu/publication/2024-a-diachronic-analysis-of-paradigm-shifts-in-nlp-research-when-how-and": {
+      "fields": {
+        "authors": "Aniket Pramanick; Yufang Hou; Saif M. Mohammad; Iryna Gurevych",
+        "source": "Proceedings of EMNLP 2023 (ACL)",
+        "date": "2023-12",
+        "type": "conference paper"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The ELLIS metadata date and corporate authorship were scanner artefacts; ACL Anthology gives the original publication metadata.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://aclanthology.org/2023.emnlp-main.142.pdf"
+      ],
+      "updated_at": "2026-09-22T21:47:41Z",
+      "deep_scan_package_id": "worker-a-20260922T211532Z-5a6639c8ff8e"
+    },
+    "link:https://ellis.eu/publication/2025-confidence-regulation-neurons-in-language-models": {
+      "fields": {
+        "authors": "Alessandro Stolfo; Ben Wu; Wes Gurnee; Yonatan Belinkov; Xingyi Song; Mrinmaya Sachan; Neel Nanda",
+        "source": "NeurIPS 2024",
+        "date": "2024",
+        "type": "conference paper"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "ELLIS mirrored the paper in 2026; the recovered original is a NeurIPS 2024 paper by the listed authors.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://github.com/bpwu1/confidence-regulation-neurons"
+      ],
+      "updated_at": "2026-09-22T21:47:42Z",
+      "deep_scan_package_id": "worker-a-20260922T211532Z-5a6639c8ff8e"
+    },
+    "link:https://ellis.eu/publication/2020-delft-university-of-technology-a-research-agenda-for-hybrid-intelligen": {
+      "fields": {
+        "title": "A Research Agenda for Hybrid Intelligence: Augmenting Human Intellect with Collaborative, Adaptive, Responsible, and Explainable Artificial Intelligence",
+        "source": "Computer",
+        "date": "2020-08",
+        "type": "peer-reviewed article"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The ELLIS title incorrectly prefixed the institution and used its 2026 mirror date; the original article appeared in Computer in 2020.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://research.tudelft.nl/en/publications/a-research-agenda-for-hybrid-intelligence-augmenting-human-intell/"
+      ],
+      "updated_at": "2026-09-22T21:47:42Z",
+      "deep_scan_package_id": "worker-a-20260922T211532Z-5a6639c8ff8e"
+    },
+    "link:https://ellis.eu/publication/2024-do-llms-think-fast-and-slow-a-causal-study-on-sentiment-analysis": {
+      "fields": {
+        "authors": "Zhiheng Lyu; Zhijing Jin; Fernando Gonzalez Adauto; Rada Mihalcea; Bernhard Schölkopf; Mrinmaya Sachan",
+        "source": "Findings of EMNLP 2024 (ACL)",
+        "date": "2024-11",
+        "type": "conference paper"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "ACL Anthology identifies the original paper; ELLIS supplied mirror metadata.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://aclanthology.org/2024.findings-emnlp.547.pdf"
+      ],
+      "updated_at": "2026-09-22T21:47:43Z",
+      "deep_scan_package_id": "worker-a-20260922T211532Z-5a6639c8ff8e"
+    },
+    "link:https://www.rand.org/multimedia/audio/expert-insights/2021/expert-insights-the-future-of-research-assessments.html": {
+      "fields": {
+        "date": "2021-09-29",
+        "source": "RAND Europe",
+        "type": "podcast transcript"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The RAND programme is dated 29 September 2021; the scanner’s 2026 date reflects later ingestion rather than publication.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://www.rand.org/multimedia/audio/expert-insights/2021/expert-insights-the-future-of-research-assessments.html"
+      ],
+      "updated_at": "2026-09-22T21:47:44Z",
+      "deep_scan_package_id": "worker-a-20260922T211532Z-5a6639c8ff8e"
+    },
+    "link:https://cdn.ceps.eu/2026/04/study-supporting-the-evaluation-of-the-eu-executive-KI0126016ENN.pdf": {
+      "fields": {
+        "title": "Study supporting the evaluation of the EU Executive Agencies: Cross analysis",
+        "source": "European Commission, Directorate-General for Research and Innovation",
+        "type": "formal evaluation report"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The Publications Office record identifies the Commission-commissioned report and its formal title; CEPS is a contractor/publication host.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://cdn.ceps.eu/2026/04/study-supporting-the-evaluation-of-the-eu-executive-KI0126016ENN.pdf"
+      ],
+      "updated_at": "2026-09-22T21:47:46Z",
+      "deep_scan_package_id": "worker-a-20260922T211532Z-5a6639c8ff8e"
+    },
+    "link:https://defence-industry-space.ec.europa.eu/newsroom_en": {
+      "fields": {
+        "title": "EU–African Union Space Dialogue strengthens strategic partnership for innovation and sustainable development"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The scanner captured body text from a generic newsroom page; the exact DG DEFIS article has this headline.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://defence-industry-space.ec.europa.eu/eu-african-union-space-dialogue-strengthens-strategic-partnership-innovation-and-sustainable-2026-03-24_en"
+      ],
+      "updated_at": "2026-09-22T21:47:46Z",
+      "deep_scan_package_id": "worker-a-20260922T211532Z-5a6639c8ff8e"
+    },
+    "link:https://scienceeurope.org/media/stpfxu0d/202606-fp10-position-bottom-up-collaborative-research.pdf": {
+      "fields": {
+        "title": "Science Europe Supports New Instrument for Collaborative Bottom-up Research in Horizon Europe 2028–2034"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The scanner used the opening sentence of the PDF; the Science Europe publication title is recoverable from the document and publication notice.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://scienceeurope.org/media/stpfxu0d/202606-fp10-position-bottom-up-collaborative-research.pdf"
+      ],
+      "updated_at": "2026-09-22T21:47:47Z",
+      "deep_scan_package_id": "worker-a-20260922T211532Z-5a6639c8ff8e"
+    },
+    "link:https://ellis.eu/publication/2024-understanding-fine-grained-distortions-in-reports-of-scientific-findin": {
+      "fields": {
+        "authors": "Amelie Wuehrl; Dustin Wright; Roman Klinger; Isabelle Augenstein",
+        "source": "Findings of ACL 2024",
+        "date": "2024-08",
+        "type": "conference paper"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "ACL Anthology provides the original bibliographic metadata; ELLIS supplied mirror metadata.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://aclanthology.org/2024.findings-acl.369.pdf"
+      ],
+      "updated_at": "2026-09-22T21:47:47Z",
+      "deep_scan_package_id": "worker-a-20260922T211532Z-5a6639c8ff8e"
+    },
+    "link:https://www.cesaer.org/publications/inside-european-university-alliances-institutional-insights-from-universities-of-science-and-technology/": {
+      "fields": {
+        "title": "Inside European University Alliances: institutional insights from universities of science and technology",
+        "date": "2026-04-20",
+        "type": "white paper"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "CESAER and the repository record show the white paper was released on 20 April 2026; the scanner’s June date is later page metadata.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://zenodo.org/records/19660020"
+      ],
+      "updated_at": "2026-09-22T21:47:47Z",
+      "deep_scan_package_id": "worker-a-20260922T211532Z-5a6639c8ff8e"
+    },
+    "link:https://ellis.eu/publication/2025-challenge-reports-improved-protein-function-prediction-and-new-functio": {
+      "fields": {
+        "title": "The CAFA challenge reports improved protein function prediction and new functional annotations for hundreds of genes through experimental screens",
+        "authors": "Naihui Zhou et al.",
+        "source": "Genome Biology",
+        "date": "2019-11-19",
+        "type": "peer-reviewed article"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The ELLIS record is a 2026 mirror with a truncated title; PubMed/PMC and Genome Biology provide the original 2019 metadata.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC6864930/"
+      ],
+      "updated_at": "2026-09-22T21:47:48Z",
+      "deep_scan_package_id": "worker-a-20260922T211532Z-5a6639c8ff8e"
+    },
+    "link:https://cerre.eu/wp-content/uploads/2026/07/CERRE_CERRE_Agentic-AI-and-Consumer-Protection.pdf": {
+      "fields": {
+        "authors": "Christoph Busch",
+        "type": "issue paper"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "CERRE’s publication page identifies Christoph Busch as the author and the work as an issue paper.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://cerre.eu/publications/agentic-ai-and-consumer-protection/"
+      ],
+      "updated_at": "2026-09-22T21:47:48Z",
+      "deep_scan_package_id": "worker-a-20260922T211532Z-5a6639c8ff8e"
     }
   }
 }
