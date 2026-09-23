@@ -7,17 +7,17 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **1805** (Main **927** + Historical **878**)
-- Automatic queue still needing V2 verification: **104** (Main **74** + Historical **30**)
-- Currently assigned to workers: **93** (Main **74** + Historical **19**)
+- Automatic queue still needing V2 verification: **154** (Main **76** + Historical **78**)
+- Currently assigned to workers: **120** (Main **76** + Historical **44**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **13**
-- Automatic queue pending and not yet assigned: **11**
+- Automatic queue pending and not yet assigned: **34**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260922T223228Z-16cbcf5a4ec0`
-- Assigned unresolved records: **36**
+- Current package: `worker-a-20260923T092702Z-d74d45757992`
+- Assigned unresolved records: **60**
   1. `link:https://news.google.com/rss/articles/CBMiswFBVV95cUxQUk9tdXhDdmkyRU54dVNWMmI4WXJVeVdOZm5FS0pYSklqNlhlWlBpS2Q1QUdBUk53NU11U3hQcmZ1Ulg1QmhSam9zTnE4MGt5TTg3M0g0RDlRWDZKWG1uNUoyejhqUzZ2LWhfYjZNVHUydi1fRHk4aTFZSjVHenpjenhlWEY5c1dVUTdyNlhlZXZLc0VNWDEzOThTdHRhb2l2LTN4aWp4SUNtbDNoZUE4RHpNMA?oc=5` — EU to require data centres to disclose energy and water efficiency
   2. `link:https://news.google.com/rss/articles/CBMipgFBVV95cUxQYWNkdTRVNFBacWZiOWRiZkVNc180aXBkTG0yeTJfVnBxYzNBOHhiS0g2YVZLSWxMalJvUzJNMkh1dm9OY1FsQXNfUFI0VXZYVXhWMVhWMEJDUzBDSVEzMjIwYzZabGpKYXB1THA5cUw1V0d1TXp3a0NUbUhMZHpNUzAzNnpIYVNzUGFfRkJMSjFYaVZUdW5uSzVJd1ZTX21xTkEtWE1B?oc=5` — Europe has the science. Now it needs a clinical trials system to match.
   3. `link:https://news.google.com/rss/articles/CBMiwgFBVV95cUxNa3RGdU9WcUZUNnNmWERzWWplN1RoRVBLelBmZHVuQlBpcWNJUVVrTlBhRV9CQndBOHJHY2VOS0l1M2lPcGJBR0lsU1JZd1VqSFI3NDJlektYUlV6cGZ0UWFWRW5GakhNN2NZSHZ2VG9QWUFjRGFTY0FGSDBoVl90UWNNSGx5NjlxUkdkUXNlSjNWVzU1TGJ5dm95NGNQRHRmMTdZWGx0dXNiUGs4Y3RJY3V4STc3dXkwNWhFdXR5R0VTUQ?oc=5` — EU pressures Big Tech to go green with new data center sustainability label
@@ -26,11 +26,11 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `link:https://news.google.com/rss/articles/CBMivAFBVV95cUxOUjd6SnhEMGdGc0lCWnRQZk1EcEFCcHBoamZJR0ZDQnJRNVVHVHdTbU1RT0Ywc2g3ZEgtX014NTJObldia1NXWjl1N1psZlRVTTVkaThLRXA0Rk83WG1LcnVab1o5MHVSX3h1emVqOHJocmdnMU1YbHV3NzZwX2xzcUtyZEpfTHl0N2VBWVk1cHM2bjFMcmZpTEJSVV9HdGdleWxhSU9FbWd1U2hTVUxUZnUxYzZ1YUtSb1h5UQ?oc=5` — Russia’s hybrid war and Trump’s tantrums are pushing Europe towards real strategic autonomy
   7. `link:https://news.google.com/rss/articles/CBMi0gFBVV95cUxOZVdPenQ4c3pJYXhfMmJKOWpJYldTcDVNVUF2UW95OG15OUlRVmJNeXY2Q0JGdnpwOFNfQVJISjIwalY1UkZPZ01pZk5ZdnFMa0haTHFWVzBNSWlvRGtFWm9lUC1zMy1Hal9LZVVDS2RkenJJQ1d0Vm05dGkyR3lFUS1HSTJkTHFzZ3dzeEJfVk1uNlpHY1k2SExTWTlMN1huMEx0LUhXbkJDVWVmODlpaDJYdVhCSGJ6QlRTckZGTWwzb3kzUnlvQi1sYk9jMlZydWc?oc=5` — Europe cannot afford to miss AI transformation, with fiscal dividend within reach, OECD chief says
   8. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTFB3X2lIVGxXMmR6YnJya2xIS2t0WGs0UWZlN0hCNFdQWDAzTVpZWGJVT2VaNnFHa0xDVXpaSG9CNlBWeXVLWXR2M3pNbGxYS0laSWdyN05ETFhCNEp0OEtlOXVSSlBPRDRSUFBPb242Z1JGdVJXZ2xQU1ZEUUxsQQ?oc=5` — THE HACK: EU progress on industrial AI push
-  - … plus 28 more in the package manifest
+  - … plus 52 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260922T223252Z-6012c1ed5277`
-- Assigned unresolved records: **57**
+- Current package: `worker-b-20260923T092732Z-28aea726fe9b`
+- Assigned unresolved records: **60**
   1. `link:https://www.eit.europa.eu/` — EIT entrepreneurial education: Learn from leaders of European innovation
   2. `link:https://www.ellisinstitute.fi/PIs-2026` — ELLIS Institute Finland recruits 7 new principal investigators | ELLIS Institute Finland
   3. `link:https://www.clean-hydrogen.europa.eu/document/download/0fa1c244-a674-4899-bf4f-f2fc9ba43ae7_en?filename=H2Week_Agenda%20Innovation%20Forum%202026_HE_web%20%28002%29.pdf` — EU Hydrogen Innovation Forum 2026
@@ -39,7 +39,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `link:https://doi.org/10.1007/s10888-026-09737-5` — Earnings inequality patterns: A comparative analysis of France, Italy, Portugal and Spain
   7. `link:https://ellis.eu/publication/2025-enhancing-study-level-inference-from-clinical-trial-papers-via-reinfor` — Enhancing Study-Level Inference from Clinical Trial Papers via Reinforcement Learning-Based Numeric Reasoning
   8. `link:https://www.ellisinstitute.fi/entrepreneurial-postdoc-recruit-autumn-2026` — Entrepreneurial postdoc positions at ELLIS Institute Finland | ELLIS Institute Finland
-  - … plus 49 more in the package manifest
+  - … plus 52 more in the package manifest
 
 ## Hands-on verification needed
 
