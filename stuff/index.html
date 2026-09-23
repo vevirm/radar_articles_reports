@@ -4,7 +4,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive">
 <title>Stuff · EU R&amp;I Radar</title>
-<link rel="stylesheet" href="../radar.css?v=28">
+<link rel="stylesheet" href="../radar.css?v=28.4">
 <script src="../radar_data.js?v=28.1"></script>
 
 
@@ -13,6 +13,17 @@
 <body>
 <header><div class="wrap top"><h1>Stuff</h1></div></header>
 <main class="wrap">
+<section class="section candidate-review" aria-labelledby="candidateReviewTitle">
+  <div class="candidate-review-head">
+    <div>
+      <div class="eyebrow">Safety check</div>
+      <h2 id="candidateReviewTitle">New candidates awaiting review</h2>
+      <p class="note">Scanner candidates stay here until Deep Scan checks them. They are not shown on the main Radar while verification is pending.</p>
+    </div>
+    <div class="candidate-review-count"><strong id="pendingCandidateCount">—</strong><span>awaiting review</span></div>
+  </div>
+  <div id="pendingCandidateList" class="candidate-review-list"><div class="empty">Loading candidates…</div></div>
+</section>
 <section class="download-card">
   <div><h2>Everything the scanner knows about each publication</h2><p>The Excel opens on one row per publication or report. It includes the current Radar plus every Historical scanner finding. Historical rows appear as soon as the Historical scanner finds them, then the same rows are updated with Deep Scan verification, admission and correction details. Authoritative historical material is clearly marked; pending or non-retained historical findings stay visible for audit.</p></div>
   <div><button id="downloadExcel" class="btn red" type="button">Download all publication data (.xlsx)</button><div class="note"><a href="source_merit_ranking.xlsx" download>Repository snapshot</a></div></div>
@@ -23,9 +34,14 @@
 <script src="workbook.js?v=23.4"></script>
 <script>
 let radarData=null,workbookExtras={historical:{items:[]},reader:{records:{}},admission:{records:{}},corrections:{records:{}}};
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const clean=v=>String(v??'').replace(/\s+/g,' ').trim();
+function fmtAddedAt(v){if(!v)return 'Unknown';const d=new Date(v);if(Number.isNaN(d.getTime()))return clean(v);return new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}).format(d)}
+function pendingCandidates(doc){const out=[];for(const [strand,key] of [['A','strand_a'],['B','strand_b'],['C','strand_c']])for(const row of Array.isArray(doc?.[key])?doc[key]:[])if(clean(row?.admission_status).toLowerCase()==='provisional')out.push({...row,_strand:strand});return out.sort((a,b)=>(Date.parse(b.first_seen||'')||0)-(Date.parse(a.first_seen||'')||0)||clean(a.title||a.headline).localeCompare(clean(b.title||b.headline)))}
+function renderPendingCandidates(doc){const rows=pendingCandidates(doc),host=document.getElementById('pendingCandidateList');document.getElementById('pendingCandidateCount').textContent=new Intl.NumberFormat('en-GB').format(rows.length);if(!rows.length){host.innerHTML='<div class="empty">No new candidates are awaiting review.</div>';return}host.innerHTML=rows.map(x=>{const title=clean(x.title||x.headline||'Untitled candidate'),source=clean(x.source||''),link=clean(x.link||x.url||''),added=fmtAddedAt(x.first_seen);return `<article class="candidate-review-row"><div class="candidate-review-meta"><span class="candidate-strand">${esc(x._strand)}</span><span>Added at ${esc(added)}</span></div><h3>${link?`<a href="${esc(link)}" target="_blank" rel="noopener">${esc(title)}</a>`:esc(title)}</h3>${source?`<div class="candidate-review-source">${esc(source)}</div>`:''}<div class="candidate-review-state">Awaiting Deep Scan review</div></article>`}).join('')}
 async function fetchJsonMaybe(path,fallback){try{const r=await fetch(path+(path.includes('?')?'&':'?')+'ts='+Date.now(),{cache:'no-store'});return r.ok?await r.json():fallback}catch(_){return fallback}}
 document.getElementById('downloadExcel').addEventListener('click',()=>{try{if(!radarData)throw new Error('Radar data is still loading');const bytes=globalThis.RadarStuffWorkbook?.buildXlsx?.(radarData,globalThis.RadarSourceMerit,workbookExtras);if(!bytes)throw new Error('Workbook generator unavailable');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([bytes],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}));a.download='radar_all_publication_data.xlsx';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000)}catch(e){console.error('Excel generation failed',e);alert('The current Excel could not be generated. Try the repository snapshot link.')}});
-(async()=>{try{const [active,historical,reader,admission,corrections]=await Promise.all([RadarData.load('../radar.json','../radar_seed.json'),fetchJsonMaybe('../historical/historical.json',{items:[]}),fetchJsonMaybe('../reader_text.json',{records:{}}),fetchJsonMaybe('../admission_state.json',{records:{}}),fetchJsonMaybe('../record_corrections.json',{records:{}})]);radarData=active;workbookExtras={historical,reader,admission,corrections}}catch(e){console.error(e);document.getElementById('downloadExcel').disabled=true;document.getElementById('downloadExcel').textContent='Radar data unavailable'}})();
+(async()=>{try{const [active,historical,reader,admission,corrections]=await Promise.all([RadarData.load('../radar.json','../radar_seed.json'),fetchJsonMaybe('../historical/historical.json',{items:[]}),fetchJsonMaybe('../reader_text.json',{records:{}}),fetchJsonMaybe('../admission_state.json',{records:{}}),fetchJsonMaybe('../record_corrections.json',{records:{}})]);radarData=active;workbookExtras={historical,reader,admission,corrections};renderPendingCandidates(active)}catch(e){console.error(e);document.getElementById('pendingCandidateList').innerHTML='<div class="empty">Candidate queue unavailable.</div>';document.getElementById('downloadExcel').disabled=true;document.getElementById('downloadExcel').textContent='Radar data unavailable'}})();
 </script>
 <script src="../site-shell.js?v=28"></script>
 </body></html>
