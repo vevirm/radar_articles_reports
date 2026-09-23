@@ -172,11 +172,13 @@ def update_record_metadata(state: dict[str, Any], key: str, row: dict[str, Any])
         rec["url"] = url
     rec["corpus_scope"] = "historical" if _is_historical(key) else "main"
     strand = str(row.get("strand") or "").strip().upper()
-    if bool(row.get("deep_a_private_candidate")):
+    if bool(row.get("must_deep_scan")) or str(row.get("deep_scan_priority") or "").strip().lower() == "must":
+        rec["queue_priority"] = "must_scan"
+    elif bool(row.get("deep_a_private_candidate")):
         rec["queue_priority"] = "private_strand_a"
     elif strand in {"A", "BOTH"}:
         rec["queue_priority"] = "strand_a"
-    elif rec.get("queue_priority") in {"private_strand_a", "strand_a"}:
+    elif rec.get("queue_priority") in {"must_scan", "private_strand_a", "strand_a"}:
         # Metadata can be refreshed from a corrected/reclassified copy later. Do not keep
         # a stale A-priority tag if the row itself no longer identifies as Strand A.
         rec.pop("queue_priority", None)
@@ -196,11 +198,14 @@ def prioritize_pending_keys(state: dict[str, Any], pending_keys: list[str]) -> l
     records = state.get("records", {}) if isinstance(state.get("records"), dict) else {}
     ordered = _unique([k for k in pending_keys if k not in terminal])
 
+    fresh_main_must: list[str] = []
     fresh_private_a: list[str] = []
     fresh_main_a: list[str] = []
     fresh_main_other: list[str] = []
+    fresh_hist_must: list[str] = []
     fresh_hist_a: list[str] = []
     fresh_hist_other: list[str] = []
+    must_retries: list[str] = []
     retries: list[str] = []
     for key in ordered:
         rec = records.get(key) if isinstance(records.get(key), dict) else {}
@@ -209,9 +214,16 @@ def prioritize_pending_keys(state: dict[str, Any], pending_keys: list[str]) -> l
         is_retry = status == "recovery_retry" or attempts > 0
         priority = str(rec.get("queue_priority") or "")
         if is_retry:
-            retries.append(key)
+            (must_retries if priority == "must_scan" else retries).append(key)
         elif _is_historical(key):
-            (fresh_hist_a if priority in {"private_strand_a", "strand_a"} else fresh_hist_other).append(key)
+            if priority == "must_scan":
+                fresh_hist_must.append(key)
+            elif priority in {"private_strand_a", "strand_a"}:
+                fresh_hist_a.append(key)
+            else:
+                fresh_hist_other.append(key)
+        elif priority == "must_scan":
+            fresh_main_must.append(key)
         elif priority == "private_strand_a":
             fresh_private_a.append(key)
         elif priority == "strand_a":
@@ -219,9 +231,10 @@ def prioritize_pending_keys(state: dict[str, Any], pending_keys: list[str]) -> l
         else:
             fresh_main_other.append(key)
 
-    # Main remains ahead of Historical, but A is no longer buried in a large FIFO backlog.
-    out = fresh_main_a + fresh_private_a + fresh_main_other
-    fresh_hist = fresh_hist_a + fresh_hist_other
+    # Explicit must-scan records are deterministic operator requirements and therefore lead
+    # the automatic queue. Main still remains ahead of ordinary Historical work.
+    out = fresh_main_must + must_retries + fresh_main_a + fresh_private_a + fresh_main_other
+    fresh_hist = fresh_hist_must + fresh_hist_a + fresh_hist_other
     if fresh_hist:
         retry_idx = 0
         for start in range(0, len(fresh_hist), RETRY_INTERVAL - 1):
