@@ -1,10 +1,11 @@
 name: TEMPORARY OpenAlex paid Strand A spender
 
 on:
-  # Midway between the normal 4-hour scans (which run at :17 on 0/4/8/12/16/20 UTC).
-  # The shared concurrency group below is the real collision protection.
+  # The repository already has a scanner at :17 of every EVEN UTC hour:
+  # normal scan at 00/04/08/12/16/20 and historical scan at 02/06/10/14/18/22.
+  # This temporary job therefore tries the midpoint, at :17 of ODD UTC hours.
   schedule:
-    - cron: '17 2,6,10,14,18,22 * * *'
+    - cron: '17 1,3,5,7,9,11,13,15,17,19,21,23 * * *'
   workflow_dispatch:
 
 permissions:
@@ -12,16 +13,13 @@ permissions:
 
 env:
   PYTHONDONTWRITEBYTECODE: '1'
-  # Hard ceiling for this temporary experiment. Search calls cost $0.001 each at the
-  # current OpenAlex price. OpenAlex may apply its daily free allowance before prepaid funds.
   TEMP_OPENALEX_TOTAL_USD: '11.00'
-  # Small chunks keep the temporary job from monopolising the scanner lane.
-  TEMP_OPENALEX_CHUNK_USD: '2.00'
+  TEMP_OPENALEX_CHUNK_USD: '1.50'
   TEMP_OPENALEX_PER_PAGE: '100'
-  TEMP_OPENALEX_MAX_MINUTES: '75'
+  # Keep each paid burst short so the established scanners remain the priority.
+  TEMP_OPENALEX_MAX_MINUTES: '20'
 
-# EXACTLY the same lock as the normal scanner and the existing Strand-A workflows.
-# Therefore this temporary spender can never scan/write simultaneously with them.
+# Same protected scanner lane as the existing workflows. Nothing runs simultaneously.
 concurrency:
   group: ri-radar-research-scanners
   queue: max
@@ -32,10 +30,35 @@ jobs:
     permissions:
       contents: write
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 35
 
     steps:
+      - name: Confirm there is still a genuinely idle window
+        id: idle
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import datetime as dt
+          import os
+
+          now = dt.datetime.now(dt.timezone.utc)
+          midnight_17 = now.replace(hour=0, minute=17, second=0, microsecond=0)
+          slots = [midnight_17 + dt.timedelta(hours=2*i) for i in range(14)]
+          next_scan = next(x for x in slots if x > now)
+          minutes = (next_scan - now).total_seconds() / 60
+
+          # Setup + paid scan + rebuild/push must fit comfortably before the next
+          # established scanner. If this temporary workflow had to wait in the shared
+          # queue, it simply skips this opportunity instead of delaying the next scan.
+          run = minutes >= 50
+          print(f'Now UTC: {now:%Y-%m-%d %H:%M:%S}; next established scan: {next_scan:%H:%M}; free window: {minutes:.1f} min')
+          print('Temporary OpenAlex burst will run.' if run else 'Too close to the next established scan; skipping this burst.')
+          with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as f:
+              f.write(f"run={'true' if run else 'false'}\n")
+          PY
+
       - name: Check out current main safely
+        if: steps.idle.outputs.run == 'true'
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
         with:
           ref: main
@@ -43,20 +66,24 @@ jobs:
           persist-credentials: false
 
       - name: Set up Python
+        if: steps.idle.outputs.run == 'true'
         uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
         with:
           python-version: '3.12'
           cache: pip
 
       - name: Install existing scanner dependencies
+        if: steps.idle.outputs.run == 'true'
         run: pip install -r requirements.txt
 
       - name: Run temporary paid OpenAlex Strand A chunk
+        if: steps.idle.outputs.run == 'true'
         env:
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
         run: python scripts/temporary_openalex_a_spender.py
 
       - name: Rebuild the normal active/public products if A changed
+        if: steps.idle.outputs.run == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -69,6 +96,7 @@ jobs:
           fi
 
       - name: Safety check — temporary job may change only its state plus normal generated products
+        if: steps.idle.outputs.run == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -80,6 +108,7 @@ jobs:
           fi
 
       - name: Configure secure push authentication
+        if: steps.idle.outputs.run == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: bash
@@ -91,6 +120,7 @@ jobs:
           git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${auth}"
 
       - name: Save temporary state and any accepted Strand A findings
+        if: steps.idle.outputs.run == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -103,6 +133,6 @@ jobs:
           fi
 
       - name: Remove temporary repository credential
-        if: always()
+        if: always() && steps.idle.outputs.run == 'true'
         shell: bash
         run: git config --local --unset-all http.https://github.com/.extraheader >/dev/null 2>&1 || true
