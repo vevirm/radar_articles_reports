@@ -21,6 +21,7 @@ import difflib
 import hashlib
 import io
 import json
+import os
 import re
 from dataclasses import dataclass
 from pathlib import Path
@@ -41,6 +42,8 @@ SOURCE_CHAR_CAP = 24000
 PDF_PAGE_CAP = 10
 HTTP_TIMEOUT = 12
 USER_AGENT = "Mozilla/5.0 (compatible; RI-Geopolitics-Radar-DeepScan/3.1; +https://vevirm.github.io/radar_articles_reports/)"
+OPENALEX_API_ROOT = "https://api.openalex.org"
+OPENALEX_MAX_LOCATION_ROUTES = 10
 ACTIVE_DEEP_PROFILES = {"deep-reader-v2-authoritative"}
 LEGACY_DEEP_PROFILES = {"deep-reader-v2", "deep-reader-v2.1", "deep-reader-offline-v1"}
 
@@ -346,8 +349,97 @@ def fetch_source(url: str, *, extra_headers: dict[str, str] | None = None) -> So
         return SourceRead("stored_only", "", note=f"source retrieval failed: {clean(exc)[:180]}")
 
 
+def _record_doi(r: dict[str, Any]) -> str:
+    value = clean(r.get("doi"))
+    if not value:
+        link = clean(r.get("link") or r.get("url"))
+        m = re.search(r"doi\.org/(10\.\d{4,9}/[^?#\s]+)", link, re.I)
+        value = m.group(1) if m else ""
+    return re.sub(r"^https?://(?:dx\.)?doi\.org/", "", value, flags=re.I).strip().rstrip("/")
+
+
+def _openalex_work_for_record(r: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
+    """Authenticated exact-DOI OpenAlex lookup used only by Deep Scan package preparation.
+
+    The API key is read from the Actions environment and is never returned, logged,
+    written to package files, or placed in a URL.  DOI-only matching deliberately
+    avoids injecting a similarly titled but different work into authoritative review.
+    """
+    api_key = clean(os.environ.get("OPENALEX_API_KEY"))
+    doi = _record_doi(r)
+    if not api_key:
+        return None, "OpenAlex recovery unavailable: OPENALEX_API_KEY not configured"
+    if not doi:
+        return None, "OpenAlex recovery not applicable: no DOI on record"
+    try:
+        resp = requests.get(
+            f"{OPENALEX_API_ROOT}/works",
+            headers={
+                "User-Agent": USER_AGENT,
+                "Accept": "application/json",
+                "Authorization": f"Bearer {api_key}",
+            },
+            params={
+                "filter": f"doi:https://doi.org/{doi}",
+                "per_page": "1",
+                "select": "id,doi,display_name,publication_year,primary_location,best_oa_location,locations,has_content,content_urls",
+            },
+            timeout=HTTP_TIMEOUT,
+        )
+        resp.raise_for_status()
+        rows = (resp.json() or {}).get("results") or []
+        work = rows[0] if rows and isinstance(rows[0], dict) else None
+        if not work:
+            return None, f"OpenAlex authenticated DOI lookup found no work for {doi}"
+        work_id = clean(work.get("id")).rsplit("/", 1)[-1]
+        return work, f"OpenAlex authenticated DOI lookup matched {work_id or doi}"
+    except Exception as exc:
+        return None, f"OpenAlex authenticated DOI lookup failed: {clean(exc)[:180]}"
+
+
+def _openalex_recovery_candidates(work: dict[str, Any]) -> list[tuple[str, dict[str, str] | None, str]]:
+    """Return safe OpenAlex-assisted retrieval routes without exposing the API key."""
+    api_key = clean(os.environ.get("OPENALEX_API_KEY"))
+    auth = {"Authorization": f"Bearer {api_key}"} if api_key else None
+    candidates: list[tuple[str, dict[str, str] | None, str]] = []
+    content_urls = work.get("content_urls") if isinstance(work.get("content_urls"), dict) else {}
+    pdf_url = clean(content_urls.get("pdf"))
+    xml_url = clean(content_urls.get("grobid_xml"))
+    if pdf_url:
+        candidates.append((pdf_url, auth, "OpenAlex cached full-text PDF"))
+    if xml_url:
+        candidates.append((xml_url, auth, "OpenAlex cached full-text XML"))
+
+    locations: list[dict[str, Any]] = []
+    for loc in [work.get("best_oa_location"), work.get("primary_location")]:
+        if isinstance(loc, dict):
+            locations.append(loc)
+    for loc in work.get("locations") or []:
+        if isinstance(loc, dict):
+            locations.append(loc)
+
+    seen: set[str] = {url for url, _headers, _label in candidates}
+    added = 0
+    for loc in locations:
+        # Prefer Open Access copies. best_oa_location is included even on older API
+        # payloads where an explicit is_oa flag may be absent.
+        is_oa = bool(loc.get("is_oa")) or loc is work.get("best_oa_location")
+        if not is_oa:
+            continue
+        for field, suffix in (("pdf_url", "OA PDF/location"), ("landing_page_url", "OA landing/repository")):
+            url = clean(loc.get(field))
+            if not _safe_url(url) or url in seen:
+                continue
+            seen.add(url)
+            candidates.append((url, None, f"OpenAlex {suffix}"))
+            added += 1
+            if added >= OPENALEX_MAX_LOCATION_ROUTES:
+                return candidates
+    return candidates
+
+
 def fetch_source_for_record(r: dict[str, Any]) -> SourceRead:
-    """Use the scanner's first-party validation route before the reader-facing URL."""
+    """Use scanner routes first, then authenticated OpenAlex recovery for scholarly DOI records."""
     provenance = clean(r.get("discovery_provenance")).lower()
     access = r.get("source_access") if isinstance(r.get("source_access"), dict) else {}
     candidates: list[tuple[str, dict[str, str] | None, str]] = []
@@ -378,20 +470,52 @@ def fetch_source_for_record(r: dict[str, Any]) -> SourceRead:
     seen: set[str] = set()
     failures: list[str] = []
     best: SourceRead | None = None
-    for url, headers, label in candidates:
-        if not _safe_url(url) or url in seen:
-            continue
-        seen.add(url)
-        src = fetch_source(url, extra_headers=headers)
-        if src.mode != "stored_only" and clean(src.text):
-            note = f"retrieved via {label}"
-            if src.note:
-                note += f"; {src.note}"
-            return SourceRead(src.mode, src.text, src.final_url or url, note)
-        failures.append(f"{label}: {src.note or 'no substantive text'}")
-        if best is None:
-            best = src
-    note = "; ".join(failures)[:500] if failures else "no usable scanner or public source route"
+    best_label = ""
+
+    def try_candidates(routes: list[tuple[str, dict[str, str] | None, str]]) -> SourceRead | None:
+        nonlocal best, best_label
+        for url, headers, label in routes:
+            if not _safe_url(url) or url in seen:
+                continue
+            seen.add(url)
+            src = fetch_source(url, extra_headers=headers)
+            if src.mode in {"substantial_web_text", "pdf_excerpt"} and clean(src.text):
+                note = f"retrieved via {label}"
+                if src.note:
+                    note += f"; {src.note}"
+                return SourceRead(src.mode, src.text, src.final_url or url, note)
+            if src.mode != "stored_only" and clean(src.text):
+                if best is None or len(clean(src.text)) > len(clean(best.text)):
+                    best = src
+                    best_label = label
+                failures.append(f"{label}: only {src.mode}")
+            else:
+                failures.append(f"{label}: {src.note or 'no substantive text'}")
+        return None
+
+    direct = try_candidates(candidates)
+    if direct is not None:
+        return direct
+
+    # If the ordinary source routes produced only a thin landing page or failed, use
+    # the repository's OpenAlex key to recover an exact DOI match and legitimate OA
+    # copies/full text before the package is handed to the LLM.
+    work, oa_note = _openalex_work_for_record(r)
+    if work is not None:
+        recovered = try_candidates(_openalex_recovery_candidates(work))
+        if recovered is not None:
+            recovered.note = f"{oa_note}; {recovered.note}"
+            return recovered
+        failures.append(f"{oa_note}; no substantive OpenAlex-assisted source recovered")
+    elif oa_note and "not applicable" not in oa_note.lower() and "not configured" not in oa_note.lower():
+        failures.append(oa_note)
+
+    if best is not None and clean(best.text):
+        note = f"retrieved via {best_label}; strongest available package material was {best.mode}"
+        if work is not None:
+            note = f"{oa_note}; {note}"
+        return SourceRead(best.mode, best.text, best.final_url, note)
+    note = "; ".join(failures)[:900] if failures else "no usable scanner, public, or OpenAlex recovery route"
     return SourceRead("stored_only", "", (best.final_url if best else ""), note=note)
 
 
