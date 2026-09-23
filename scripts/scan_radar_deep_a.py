@@ -13051,6 +13051,39 @@ def _primary_target_landing_only_record(spec: dict[str, Any], previous: dict[str
     return None
 
 
+
+def _primary_evidence_target_floor(spec: dict[str, Any]) -> dt.date:
+    """Date floor for an exact must-not-miss target.
+
+    Exact primary-evidence targets are intentionally allowed a wider, bounded window than
+    ordinary discovery.  This is a recovery exception for explicitly named documents, not
+    a relaxation of the general scanner window.
+    """
+    raw_months = spec.get("lookback_months", CONFIG.get("primary_evidence_lookback_months", 12))
+    try:
+        months = int(raw_months or 12)
+    except (TypeError, ValueError):
+        months = 12
+    months = max(1, min(36, months))
+    return dt.date.today() - relativedelta(months=months)
+
+
+def _annotate_primary_evidence_item(
+    item: dict[str, Any],
+    spec: dict[str, Any],
+    label: str,
+    role: str,
+    landing_page_url: str,
+) -> dict[str, Any]:
+    item["primary_evidence_recovery"] = True
+    item["primary_evidence_target_label"] = label
+    item["primary_document_role"] = role
+    item["landing_page_url"] = landing_page_url
+    if bool(spec.get("must_deep_scan")):
+        item["must_deep_scan"] = True
+        item["deep_scan_priority"] = "must"
+    return item
+
 def _primary_evidence_from_landing(
     spec: dict[str, Any],
     warnings: list[str],
@@ -13067,6 +13100,19 @@ def _primary_evidence_from_landing(
     source = clean_text(spec.get("source")) or _domain_host(url)
     tier = int(spec.get("tier", 1) or 1)
     label = clean_text(spec.get("label"))
+    publication_floor = _primary_evidence_target_floor(spec)
+    if _domain_host(url) == "op.europa.eu":
+        # Exact must-not-miss OP targets must retain enough metadata for the first-party
+        # Cellar PDF fallback even when the public portal throttles the landing page.
+        seeded = OP_PUBLICATIONS_CATALOGUE_METADATA.setdefault(normalized_link(url), {})
+        if label and not clean_text(seeded.get("title")):
+            seeded["title"] = label
+        spec_published = clean_text(spec.get("published"))
+        if spec_published and not clean_text(seeded.get("published")):
+            seeded["published"] = spec_published
+        uuid = _op_publication_uuid(url)
+        if uuid and not clean_text(seeded.get("cellar_url")):
+            seeded["cellar_url"] = f"https://publications.europa.eu/resource/cellar/{uuid}"
     status: dict[str, Any] = {
         "label": label or url, "url": url, "status": "FAILED_TO_RETRIEVE",
         "attachments_discovered": 0, "attachments_fetched": 0, "admitted": 0,
@@ -13076,6 +13122,18 @@ def _primary_evidence_from_landing(
         return [], status
     landing = get(url, timeout=int(CONFIG.get("institution_page_timeout_seconds", 12)))
     if not landing:
+        if _domain_host(url) == "op.europa.eu":
+            fallback = _op_catalogue_pdf_fallback(
+                url, source, tier, stage_deadline, "", publication_floor
+            )
+            if fallback:
+                role = _primary_document_role(label) or "report"
+                _annotate_primary_evidence_item(fallback, spec, label, role, url)
+                status.update({
+                    "status": "FOUND", "attachments_fetched": 1, "admitted": 1,
+                    "reason": "op_cellar_pdf_fallback",
+                })
+                return [fallback], status
         status["reason"] = "landing_fetch_failed"
         return [], status
     ctype = normalized(landing.headers.get("content-type", "text/html"))
@@ -13083,13 +13141,13 @@ def _primary_evidence_from_landing(
         # An exact target may itself redirect straight to a PDF. Parse that object directly.
         if "pdf" in ctype or bytes((getattr(landing, "content", b"") or b"")[:5]).startswith(b"%PDF-"):
             item = parse_institution_pdf(
-                url, source, tier, stage_deadline, "", EXTENDED_DATE_FLOOR, response=landing,
+                url, source, tier, stage_deadline, "", publication_floor, response=landing,
                 title_hint=label, landing_page_url=url,
             )
             if item:
-                item["primary_evidence_recovery"] = True
-                item["primary_evidence_target_label"] = label
-                item["primary_document_role"] = _primary_document_role(label)
+                _annotate_primary_evidence_item(
+                    item, spec, label, _primary_document_role(label) or "report", url
+                )
                 status.update({"status": "FOUND", "attachments_fetched": 1, "admitted": 1})
                 return [item], status
         status["reason"] = f"landing_content_type:{ctype or 'unknown'}"
@@ -13130,7 +13188,7 @@ def _primary_evidence_from_landing(
                 # Some download endpoints resolve to an HTML intermediary; hand it back to
                 # the ordinary parser rather than pretending it is a PDF.
                 item = parse_institution_page(
-                    doc_url, source, tier, stage_deadline, "", EXTENDED_DATE_FLOOR,
+                    doc_url, source, tier, stage_deadline, "", publication_floor,
                 )
             else:
                 title_hint = clean_text(cand.get("label"))
@@ -13139,16 +13197,15 @@ def _primary_evidence_from_landing(
                 if len(title_hint.split()) < 3 or normalized(title_hint) == "download":
                     title_hint = label or page_title
                 item = parse_institution_pdf(
-                    doc_url, source, tier, stage_deadline, "", EXTENDED_DATE_FLOOR, response=response,
+                    doc_url, source, tier, stage_deadline, "", publication_floor, response=response,
                     title_hint=title_hint, fallback_publication_date=published,
                     fallback_date_basis=date_basis or "landing_page_publication_date",
                     landing_page_url=landing.url or url,
                 )
             if item:
-                item["primary_evidence_recovery"] = True
-                item["primary_evidence_target_label"] = label
-                item["primary_document_role"] = role
-                item["landing_page_url"] = landing.url or url
+                _annotate_primary_evidence_item(
+                    item, spec, label, role, landing.url or url
+                )
                 out.append(item)
                 used_roles.add(role)
         except Exception as exc:
@@ -13163,16 +13220,15 @@ def _primary_evidence_from_landing(
     # preferred over an available substantive downloadable document.
     try:
         fallback = parse_institution_page(
-            url, source, tier, stage_deadline, "", EXTENDED_DATE_FLOOR,
+            url, source, tier, stage_deadline, "", publication_floor,
         )
     except Exception as exc:
         warnings.append(f"Primary evidence landing fallback {label or url}: {type(exc).__name__}")
         fallback = None
     if fallback:
-        fallback["primary_evidence_recovery"] = True
-        fallback["primary_evidence_target_label"] = label
-        fallback["primary_document_role"] = "landing_page"
-        fallback["landing_page_url"] = landing.url or url
+        _annotate_primary_evidence_item(
+            fallback, spec, label, "landing_page", landing.url or url
+        )
         status.update({"status": "FOUND", "admitted": 1, "reason": "landing_page_fallback"})
         return [fallback], status
     status["status"] = "RETRIEVED_NO_ADMISSION"
@@ -13200,9 +13256,14 @@ def collect_must_not_miss_primary_evidence(
     stats = execution_stats if isinstance(execution_stats, dict) else {}
     target_status: dict[str, Any] = {}
     out: list[dict[str, Any]] = []
-    for spec in specs:
-        if not isinstance(spec, dict) or not spec.get("main", True):
-            continue
+    active_specs = [
+        spec for spec in specs
+        if isinstance(spec, dict) and spec.get("main", True)
+    ]
+    # Deterministic curator requirements are attempted first so a short/quick run cannot
+    # spend the exact-target budget on lower-priority recovery probes before reaching them.
+    active_specs.sort(key=lambda spec: 0 if bool(spec.get("must_deep_scan")) else 1)
+    for spec in active_specs:
         label = clean_text(spec.get("label")) or clean_text(spec.get("url"))
         if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
             target_status[label] = {"status": "FAILED_TO_RETRIEVE", "reason": "stage_budget"}
@@ -13231,7 +13292,7 @@ def collect_must_not_miss_primary_evidence(
                 "reason": f"{type(exc).__name__}:{str(exc)[:100]}",
             }
     stats["primary_evidence_target_status"] = target_status
-    stats["primary_evidence_targets_configured"] = len([x for x in specs if isinstance(x, dict) and x.get("main", True)])
+    stats["primary_evidence_targets_configured"] = len(active_specs)
     stats["primary_evidence_targets_found"] = sum(1 for x in target_status.values() if isinstance(x, dict) and x.get("status") == "FOUND")
     stats["primary_evidence_targets_already_present"] = sum(1 for x in target_status.values() if isinstance(x, dict) and x.get("status") == "ALREADY_PRESENT")
     return dedupe_candidates(out)
