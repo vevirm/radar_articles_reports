@@ -56,7 +56,7 @@ from collections import Counter
 from copy import deepcopy
 from pathlib import Path
 from typing import Any, Iterable
-from urllib.parse import quote, quote_plus, urljoin, urlparse
+from urllib.parse import parse_qs, quote, quote_plus, urljoin, urlparse
 
 try:
     import feedparser
@@ -711,6 +711,10 @@ INSTITUTION_SEEN_FINGERPRINTS: dict[str, str] = {}
 # their sitemap provides a precise update date.  Keep this run-local map separate
 # from the persisted seen-cache so it cannot become an admission shortcut.
 INSTITUTION_DISCOVERED_DATES: dict[str, dt.date] = {}
+# Run-local metadata for Publications Office records discovered through Cellar.  It lets
+# a throttled/JS-only portal landing page fall back to the official Cellar PDF without
+# losing the catalogue title/date that made the record discoverable.
+OP_PUBLICATIONS_CATALOGUE_METADATA: dict[str, dict[str, Any]] = {}
 INSTITUTION_SIGNAL_CANDIDATES: list[dict[str, Any]] = []
 SIGNAL_WINDOW_START_DATE: dt.date | None = None
 ACTIVE_FRONTIER_GAP_URL_TERMS: list[str] = []
@@ -5742,6 +5746,11 @@ def _ri_system_compound_hits(text: str) -> list[str]:
     hits: list[str] = []
     for sent in split_sentences(_strip_relevance_boilerplate(text)):
         low = normalized(sent)
+        # OP and other institutional subtitles often write "research, innovation and policy".
+        # Treat the explicit research+innovation pair as the same R&I subject phrase as
+        # "research and innovation"; the comma must not make scope/centrality disappear.
+        if re.search(r'\bresearch\s*,\s*innovation\b', low):
+            hits.append('research and innovation')
         if (
             re.search(r'\bgrant evaluations?\b|\bgrant peer review\b', low)
             and re.search(r'\b(?:research|scientific|academic|university|funder|funding agenc|european research council|erc)\w*\b', low)
@@ -7305,7 +7314,8 @@ A_RESEARCH_SYSTEM_OUTCOME_CUES = [
 ]
 A_RESEARCH_STRONG_SYSTEM_CUES = [
     'research policy', 'innovation policy', 'science policy',
-    'research system', 'innovation system', 'research governance', 'innovation governance',
+    'research system', 'innovation system', 'research and innovation system', 'r&i system',
+    'research and innovation ecosystem', 'r&i ecosystem', 'research governance', 'innovation governance',
     'research infrastructure', 'research infrastructures', 'scientific infrastructure',
     'horizon europe', 'fp10', 'framework programme', 'european research area',
     'research funding system', 'research funding policy',
@@ -7344,12 +7354,30 @@ def research_evidence_route_ok(title: str, abstract: str, body: str, source_kind
     evidence = distinct_matches(text, A_RESEARCH_EVIDENCE_CUES)
     outcomes = distinct_matches(text, A_RESEARCH_SYSTEM_OUTCOME_CUES)
     system = distinct_matches(text, A_RESEARCH_STRONG_SYSTEM_CUES)
+    forward_patterns = [
+        r'\bforesight (?:analysis|report|study|assessment)\b',
+        r'\bscenario (?:analysis|exercise|study|report|planning)\b',
+        r'\b(?:develops?|presents?|examines?|explores?|constructs?|sets? out)\b.{0,90}\b(?:two|three|four|five|six|\d+)?\s*scenarios?\b',
+        r'\bpossible futures?\b',
+    ]
+    forward_evidence = [m.group(0)[:140] for pattern in forward_patterns for m in re.finditer(pattern, normalized(text), re.I)]
+    institutional_forward_product = False
     # Institutional pages must look like completed analytical products; otherwise a news/
     # programme page containing "report" in navigation could be promoted accidentally.
     if source_kind == 'institutional':
-        title_formal = contains_any(normalized(title), FORMAL_EVIDENCE_TITLE_HINTS)
+        formal_probe = normalized(f"{title}. {abstract[:1200]}")
+        title_formal = contains_any(formal_probe, FORMAL_EVIDENCE_TITLE_HINTS)
         completion = contains_any(normalized(text), FORMAL_EVIDENCE_COMPLETION_CUES)
-        if not (title_formal and completion):
+        explicit_final_report = bool(re.search(r'\bfinal report\b', formal_probe))
+        explicit_foresight_analysis = bool(re.search(
+            r'\b(?:foresight|scenario) (?:analysis|report|study|assessment)\b', normalized(text), re.I
+        ))
+        institutional_forward_product = bool(
+            forward_evidence
+            and (title_formal or explicit_foresight_analysis)
+            and (completion or explicit_final_report or explicit_foresight_analysis)
+        )
+        if not ((title_formal and completion) or institutional_forward_product):
             return False, []
     # Scholarly/local-service studies are a recurring contamination source. Evidence about
     # AI use in one hospital, school, firm, etc. is not R&I-system evidence merely because
@@ -7372,8 +7400,18 @@ def research_evidence_route_ok(title: str, abstract: str, body: str, source_kind
     # surveys of language use, researcher habits, teaching practice, etc. become false positives.
     # The paper/report must measure a recognisable system mechanism (careers, mobility, funding,
     # collaboration, infrastructure, transfer, assessment, governance, open science, etc.).
-    ok = bool(evidence and system and (outcomes or len(system) >= 2))
-    return ok, list(dict.fromkeys(evidence[:4] + outcomes[:4] + system[:4]))[:8]
+    empirical_ok = bool(evidence and system and (outcomes or len(system) >= 2))
+    # Completed institutional foresight analyses are evidence about the R&I system even when
+    # they are scenario-based rather than empirical. This is deliberately narrower than a
+    # generic "future/scenario" waiver: it requires a formal completed product, an explicit
+    # foresight/scenario construction, and a recognised R&I-system mechanism. The common A
+    # gate still separately requires supported European scope, aboutness and centrality.
+    foresight_analysis_ok = bool(
+        source_kind == 'institutional' and institutional_forward_product and forward_evidence and system
+    )
+    ok = bool(empirical_ok or foresight_analysis_ok)
+    context = list(dict.fromkeys(evidence[:4] + forward_evidence[:3] + outcomes[:4] + system[:4]))[:8]
+    return ok, context
 
 
 def gate_scope(title: str, abstract: str, body: str, source_tier: int, source_kind: str = 'general', eu_context_anchors: list[dict[str, Any]] | None = None) -> dict[str, Any]:
@@ -11336,36 +11374,119 @@ def jsonld_objects(obj: Any):
             yield from jsonld_objects(v)
 
 
+def _op_publication_uuid(url: str) -> str:
+    """Return the Cellar UUID embedded in an OP detail/download/resource URL."""
+    try:
+        parsed = urlparse(clean_text(url))
+    except Exception:
+        return ""
+    host = (parsed.hostname or "").lower().removeprefix("www.")
+    uuid_pat = r"([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})"
+    if host == "op.europa.eu":
+        m = re.search(r"/publication/" + uuid_pat, parsed.path, re.I)
+        if m:
+            return m.group(1).lower()
+        if "download-handler" in parsed.path:
+            ident = clean_text((parse_qs(parsed.query).get("identifier") or [""])[0])
+            if re.fullmatch(uuid_pat, ident, re.I):
+                return ident.lower()
+    if host == "publications.europa.eu":
+        m = re.search(r"/resource/cellar/" + uuid_pat, parsed.path, re.I)
+        if m:
+            return m.group(1).lower()
+    return ""
+
+
+def _op_cellar_resource_url(url: str) -> str:
+    uuid = _op_publication_uuid(url)
+    return f"https://publications.europa.eu/resource/cellar/{uuid}" if uuid else ""
+
+
+def _same_op_publication_identity(a: str, b: str) -> bool:
+    """True when two OP/Cellar URLs identify the same publication work UUID."""
+    ua, ub = _op_publication_uuid(a), _op_publication_uuid(b)
+    return bool(ua and ub and ua == ub)
+
+
+def _op_cellar_pdf_response(url: str, timeout: int) -> requests.Response | None:
+    """Fetch an English PDF directly from Cellar using the documented REST negotiation."""
+    cellar_url = _op_cellar_resource_url(url)
+    if not cellar_url or deadline_reached(int(CONFIG.get("network_reserve_seconds", 90))):
+        return None
+    headers = {
+        "Accept": "application/pdf",
+        "Accept-Language": "eng",
+        # Stay aligned with the scanner's own hard PDF payload ceiling.
+        "Accept-Max-Cs-Size": "22000000",
+    }
+    try:
+        r = SESSION.get(cellar_url, headers=headers, timeout=timeout, allow_redirects=True)
+        if r.status_code == 200 and len(r.content) <= 22_000_000:
+            return r
+    except requests.RequestException:
+        pass
+    return None
+
+
 def _pdf_payload(url: str, response: requests.Response | None = None, stage_deadline: float | None = None) -> tuple[str, int, dict[str, Any]]:
-    """Fetch/extract a bounded PDF once and return text plus metadata."""
+    """Fetch/extract a bounded PDF once, with an official Cellar fallback for OP records."""
     if deadline_reached(int(CONFIG.get("network_reserve_seconds", 90))):
         return "", 0, {}
-    try:
-        r = response or SESSION.get(url, timeout=int(CONFIG.get("pdf_timeout_seconds", 14)))
-        if r.status_code != 200 or len(r.content) > 22_000_000:
+
+    timeout = int(CONFIG.get("pdf_timeout_seconds", 14))
+
+    def extract(r: requests.Response | None) -> tuple[str, int, dict[str, Any]]:
+        if r is None or r.status_code != 200 or len(r.content) > 22_000_000:
             return "", 0, {}
-        reader = PdfReader(io.BytesIO(r.content))
-        texts = []
-        for page in reader.pages[:_pdf_page_cap()]:
-            # Do not let a PDF that started just before a deadline keep the institutional
-            # stage alive for minutes. This is allocation only; a later rotation can retry.
-            if stage_deadline_reached(stage_deadline, 0) or total_budget_remaining() <= 12:
-                break
-            try:
-                texts.append(page.extract_text() or "")
-            except Exception:
-                pass
-        txt = clean_text(" ".join(texts))
-        meta_raw = reader.metadata or {}
-        meta = {
-            "title": clean_text(getattr(meta_raw, "title", "") or meta_raw.get("/Title", "")),
-            "author": clean_text(getattr(meta_raw, "author", "") or meta_raw.get("/Author", "")),
-            "creation_date": clean_text(str(getattr(meta_raw, "creation_date", "") or meta_raw.get("/CreationDate", ""))),
-            "modification_date": clean_text(str(getattr(meta_raw, "modification_date", "") or meta_raw.get("/ModDate", ""))),
-        }
-        return txt, len(txt.split()), meta
-    except Exception:
-        return "", 0, {}
+        try:
+            reader = PdfReader(io.BytesIO(r.content))
+            texts = []
+            for page in reader.pages[:_pdf_page_cap()]:
+                # Do not let a PDF that started just before a deadline keep the institutional
+                # stage alive for minutes. This is allocation only; a later rotation can retry.
+                if stage_deadline_reached(stage_deadline, 0) or total_budget_remaining() <= 12:
+                    break
+                try:
+                    texts.append(page.extract_text() or "")
+                except Exception:
+                    pass
+            txt = clean_text(" ".join(texts))
+            meta_raw = reader.metadata or {}
+            meta = {
+                "title": clean_text(getattr(meta_raw, "title", "") or meta_raw.get("/Title", "")),
+                "author": clean_text(getattr(meta_raw, "author", "") or meta_raw.get("/Author", "")),
+                "creation_date": clean_text(str(getattr(meta_raw, "creation_date", "") or meta_raw.get("/CreationDate", ""))),
+                "modification_date": clean_text(str(getattr(meta_raw, "modification_date", "") or meta_raw.get("/ModDate", ""))),
+            }
+            return txt, len(txt.split()), meta
+        except Exception:
+            return "", 0, {}
+
+    # Cellar resources require content negotiation; OP download-handler URLs can also be
+    # throttled independently of the underlying publication.  Try the supplied/original
+    # response first, then the canonical Cellar resource if extraction failed.
+    original: requests.Response | None = response
+    if original is None:
+        try:
+            if (urlparse(clean_text(url)).hostname or "").lower().removeprefix("www.") == "publications.europa.eu" and _op_publication_uuid(url):
+                original = _op_cellar_pdf_response(url, timeout)
+            else:
+                original = SESSION.get(url, timeout=timeout, allow_redirects=True)
+        except requests.RequestException:
+            original = None
+    payload = extract(original)
+    if payload[0]:
+        return payload
+
+    cellar_url = _op_cellar_resource_url(url)
+    if cellar_url and normalized_link(cellar_url) != normalized_link(url):
+        fallback = _op_cellar_pdf_response(url, timeout)
+        payload = extract(fallback)
+        if payload[0]:
+            _diag_inc("op_cellar_pdf_fallback_success")
+            return payload
+        _diag_inc("op_cellar_pdf_fallback_failed")
+    return "", 0, {}
 
 
 def pdf_text(url: str, stage_deadline: float | None = None) -> tuple[str, int]:
@@ -11696,6 +11817,86 @@ def _pdf_visible_date_hint(text: str, url: str = "") -> tuple[dt.date | None, st
     return _url_publication_date_hint(url, allow_month_only=True)
 
 
+
+def _op_portal_subtitle(soup: BeautifulSoup, url: str) -> str:
+    """Return the substantive subtitle rendered under an OP publication title.
+
+    Publications Office records frequently keep the R&I/system semantics in the subtitle
+    while the H1 is deliberately short (for example a series title). Preserve that text for
+    relevance gating, but ignore catalogue/navigation section headings.
+    """
+    try:
+        parsed = urlparse(clean_text(url))
+    except Exception:
+        return ""
+    if (parsed.hostname or "").lower().removeprefix("www.") != "op.europa.eu":
+        return ""
+    if "/publication-detail/" not in (parsed.path or "").lower():
+        return ""
+    root = soup.find("main") or soup.body or soup
+    if root is None:
+        return ""
+    h1 = root.find("h1")
+    headings = list(root.find_all(["h2", "h3"], limit=12))
+    if h1:
+        after = []
+        for node in h1.find_all_next(["h2", "h3"], limit=12):
+            if root is node or root in node.parents:
+                after.append(node)
+        if after:
+            headings = after
+    skip = {
+        "publication metadata", "available languages and formats", "available languages",
+        "document viewer", "related publications", "how to cite", "download", "downloads",
+        "details", "publication details", "actions", "utilities", "share this publication",
+    }
+    for heading in headings:
+        text = clean_text(heading.get_text(" ", strip=True))
+        low = normalized(text).strip(" :.-")
+        if not text or len(text) < 12 or low in skip:
+            continue
+        if any(low.startswith(prefix) for prefix in (
+            "available language", "publication metadata", "related publication",
+            "document viewer", "how to cite", "share this",
+        )):
+            continue
+        return text
+    return ""
+
+
+def _op_portal_publication_date(soup: BeautifulSoup, url: str) -> dt.date | None:
+    """Read the Publications Office's explicit release date from a publication-detail page.
+
+    OP publication pages often expose only a year in generic metadata while rendering the
+    precise catalogue release date as ``Released on EU publications website: YYYY-MM-DD``.
+    That date is first-party publication evidence and is more precise than sitemap lastmod.
+    """
+    try:
+        parsed = urlparse(clean_text(url))
+    except Exception:
+        return None
+    if (parsed.hostname or "").lower().removeprefix("www.") != "op.europa.eu":
+        return None
+    if "/publication-detail/" not in (parsed.path or "").lower():
+        return None
+    container = soup.find("main") or soup.body or soup
+    if container is None:
+        return None
+    text = clean_text(container.get_text(" ", strip=True))
+    patterns = [
+        r"\bReleased on EU publications website\s*:\s*(20\d{2}-\d{1,2}-\d{1,2})\b",
+        r"\bPublication date\s*:\s*(20\d{2}-\d{1,2}-\d{1,2})\b",
+        r"\bPublished\s*:\s*(20\d{2}-\d{1,2}-\d{1,2})\b",
+    ]
+    for pattern in patterns:
+        m = re.search(pattern, text, re.I)
+        if not m:
+            continue
+        d = parse_date(m.group(1))
+        if d and dt.date(2015, 1, 1) <= d <= dt.date.today() + dt.timedelta(days=1):
+            return d
+    return None
+
 def _semantic_publication_date(soup: BeautifulSoup, title: str = "") -> dt.date | None:
     """Recover a visible/structured publication date from common institutional CMS markup.
 
@@ -11918,6 +12119,7 @@ def parse_institution_pdf(
     fallback_publication_date: dt.date | None = None,
     fallback_date_basis: str = "landing_page_publication_date",
     landing_page_url: str = "",
+    prefer_fallback_publication_date: bool = False,
 ) -> dict[str, Any] | None:
     """Parse a direct institutional PDF discovered in a sitemap/hub.
 
@@ -11941,7 +12143,8 @@ def parse_institution_pdf(
     # Exact download blocks on official hubs often carry the human-readable document title
     # while the PDF metadata is blank or an internal filename. Trust the landing-page hint
     # only when the PDF body itself overlaps that title.
-    if hint and _pdf_text_matches_document(hint, body) and (title_is_weak or not _pdf_text_matches_document(title, body)):
+    verified_op_identity = bool(landing_page_url and _same_op_publication_identity(url, landing_page_url))
+    if hint and (verified_op_identity or _pdf_text_matches_document(hint, body)) and (title_is_weak or not _pdf_text_matches_document(title, body)):
         title = hint
         title_is_weak = False
     if title_is_weak:
@@ -11955,8 +12158,8 @@ def parse_institution_pdf(
         _diag_inc("institution_reject_no_title")
         return None
 
-    published = _pdf_metadata_date(meta)
-    date_basis = "pdf_metadata_date" if published else ""
+    published = fallback_publication_date if (prefer_fallback_publication_date and fallback_publication_date) else _pdf_metadata_date(meta)
+    date_basis = (fallback_date_basis or "landing_page_publication_date") if (prefer_fallback_publication_date and published) else ("pdf_metadata_date" if published else "")
     if not published:
         top_text = body[:3000]
         m = re.search(
@@ -12033,6 +12236,58 @@ def parse_institution_pdf(
     return row
 
 
+def _op_catalogue_pdf_fallback(
+    page_url: str,
+    source: str,
+    tier: int,
+    stage_deadline: float | None = None,
+    fingerprint: str = "",
+    publication_floor: dt.date | None = None,
+) -> dict[str, Any] | None:
+    """Read an OP catalogue record from Cellar when the public detail page is unavailable.
+
+    The human-facing OP URL remains the record link.  Cellar is recorded as the validation
+    route and supplies the actual English PDF used by the ordinary institutional A/B gate.
+    """
+    uuid = _op_publication_uuid(page_url)
+    if not uuid or _domain_host(page_url) != "op.europa.eu":
+        return None
+    meta = OP_PUBLICATIONS_CATALOGUE_METADATA.get(normalized_link(page_url), {})
+    title_hint = clean_text(meta.get("title"))
+    published = parse_date(meta.get("published"))
+    cellar_url = _op_cellar_resource_url(page_url)
+    if not cellar_url:
+        return None
+    row = parse_institution_pdf(
+        cellar_url,
+        source,
+        tier,
+        stage_deadline=stage_deadline,
+        fingerprint=fingerprint,
+        publication_floor=publication_floor,
+        title_hint=title_hint,
+        fallback_publication_date=published,
+        fallback_date_basis="op_catalogue_work_date",
+        landing_page_url=page_url,
+        prefer_fallback_publication_date=True,
+    )
+    if not row:
+        _diag_inc("op_catalogue_cellar_fallback_rejected")
+        return None
+    row["link"] = page_url
+    row["landing_page_url"] = page_url
+    row["source_validation_url"] = cellar_url
+    row["source_access"] = {
+        "route": "op_cellar_catalogue_pdf",
+        "validation_url": cellar_url,
+        "cellar_id": uuid,
+    }
+    row["source_integrity_basis"] = "institution_pdf_via_cellar"
+    row["discovery_provenance"] = "op_cellar_catalogue"
+    _diag_inc("op_catalogue_cellar_fallback_success")
+    return row
+
+
 def parse_institution_page(url: str, source: str, tier: int, stage_deadline: float | None = None, fingerprint: str = "", publication_floor: dt.date | None = None) -> dict[str, Any] | None:
     if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
         return None
@@ -12041,6 +12296,9 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
         return None
     r = get(url, timeout=int(CONFIG.get("institution_page_timeout_seconds", 12)))
     if not r:
+        fallback = _op_catalogue_pdf_fallback(url, source, tier, stage_deadline, fingerprint, publication_floor)
+        if fallback:
+            return fallback
         _diag_inc("institution_reject_fetch_or_nonhtml")
         return None
     ctype = normalized(r.headers.get("content-type", "text/html"))
@@ -12052,12 +12310,21 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
     if response_is_pdf:
         return parse_institution_pdf(url, source, tier, stage_deadline, fingerprint, publication_floor, response=r)
     if "html" not in ctype:
+        fallback = _op_catalogue_pdf_fallback(url, source, tier, stage_deadline, fingerprint, publication_floor)
+        if fallback:
+            return fallback
         _diag_inc("institution_reject_fetch_or_nonhtml")
         return None
     soup = BeautifulSoup(r.text, "html.parser")
+    catalogue_meta = OP_PUBLICATIONS_CATALOGUE_METADATA.get(normalized_link(url), {})
     title = meta_content(soup, ["og:title", "twitter:title", "headline"]) or clean_text(soup.h1.get_text(" ", strip=True) if soup.h1 else "")
+    if not title and catalogue_meta:
+        title = clean_text(catalogue_meta.get("title"))
     page_type = meta_content(soup, ["og:type", "article:section", "type"])
     desc = meta_content(soup, ["description", "og:description", "twitter:description"])
+    op_subtitle = _op_portal_subtitle(soup, r.url)
+    if op_subtitle and normalized(op_subtitle) not in normalized(desc):
+        desc = clean_text(f"{op_subtitle}. {desc}")
     html_lang = clean_text((soup.html or {}).get("lang", "") if soup.html else "")
     # Early language rejection is allowed only with positive foreign-language evidence.
     # Short English institutional titles are often ambiguous until the body/PDF is read.
@@ -12073,6 +12340,9 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
         return None
     exclusion = document_exclusion_reason(title, desc, r.url, page_type)
     if not title:
+        fallback = _op_catalogue_pdf_fallback(url, source, tier, stage_deadline, fingerprint, publication_floor)
+        if fallback:
+            return fallback
         _diag_inc("institution_reject_no_title")
         return None
     if institutional_container_page(title, r.url, page_type):
@@ -12081,8 +12351,12 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
         _diag_inc("institution_reject_listing_container")
         return None
 
-    published = _jrc_repository_publication_date(soup, r.url)
-    date_basis = "jrc_visible_publication_date" if published else "page"
+    published = _op_portal_publication_date(soup, r.url)
+    date_basis = "op_portal_release_date" if published else "page"
+    if not published:
+        published = _jrc_repository_publication_date(soup, r.url)
+        if published:
+            date_basis = "jrc_visible_publication_date"
     authors: list[str] = []
     article_body = ""
     for script in soup.find_all("script", attrs={"type": re.compile("ld\\+json", re.I)}):
@@ -12143,6 +12417,11 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
         m_labelled = re.search(r"\b(?:published|publication date|date)\s*[:\-]?\s*((?:[0-3]?\d[.\-/ ](?:0?\d|[A-Za-z]{3,9})[.\-/ ]20\d{2})|(?:[A-Za-z]{3,9}\s+[0-3]?\d,?\s+20\d{2})|(?:20\d{2}-\d{1,2}-\d{1,2}))", top_text, re.I)
         if m_labelled:
             published = parse_date(m_labelled.group(1))
+    if not published and catalogue_meta:
+        catalogue_date = parse_date(catalogue_meta.get("published"))
+        if catalogue_date:
+            published = catalogue_date
+            date_basis = "op_catalogue_work_date"
     if not published and fingerprint and bool(CONFIG.get("institution_sitemap_lastmod_fallback_enabled", True)):
         # Lastmod is not publication proof, but discarding the page entirely loses a large
         # share of institutional reports. Accept it only as explicitly approximate metadata.
@@ -12182,7 +12461,8 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
     pdf_url = primary_pdf_url
     if pdf_url and word_count < 2500:
         ptxt, pwords = pdf_text(pdf_url, stage_deadline)
-        if pwords > word_count and _pdf_text_matches_document(title, ptxt):
+        verified_op_identity = _same_op_publication_identity(r.url, pdf_url)
+        if pwords > word_count and (_pdf_text_matches_document(title, ptxt) or verified_op_identity):
             body, word_count = ptxt, pwords
             # If the linked PDF is the evidence body, its own publication date outranks a
             # wrapper/news-page date. This prevents a 2026 page from laundering a 2025 PDF
@@ -12328,6 +12608,147 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
 
 
 
+
+def _op_publications_catalogue_jobs(
+    src: dict[str, Any],
+    from_date: dt.date,
+    stage_deadline: float | None = None,
+    reconsider_seen: bool = False,
+) -> list[tuple[str, str, int, str]]:
+    """Discover OP publication-detail pages from the Cellar knowledge graph.
+
+    The Publications Office portal is a catalogue, not a conventional publication blog.
+    Its editorial hubs expose only a curated subset of records, so same-domain link crawling
+    cannot provide reliable recall.  Query the official Cellar SPARQL endpoint for recent
+    English works whose titles match broad Radar R&I/foresight themes, convert Cellar work
+    UUIDs into reader-facing OP publication-detail URLs, then hand every page to the normal
+    institutional parser/admission gate.  Discovery changes; admission does not.
+    """
+    domain = clean_text(src.get("domain", "")).lower().removeprefix("www.")
+    if domain != "op.europa.eu" or not bool(CONFIG.get("op_publications_catalogue_enabled", True)):
+        return []
+    if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+        return []
+
+    source_name = clean_text(src.get("name")) or "EU Publications Office"
+    tier = int(src.get("tier", 1) or 1)
+    lookback_months = max(1, min(24, int(CONFIG.get("op_publications_catalogue_lookback_months", 6) or 6)))
+    catalogue_floor = dt.date.today() - relativedelta(months=lookback_months)
+    start_date = max(from_date, catalogue_floor)
+    raw_terms = CONFIG.get("op_publications_catalogue_title_terms", [])
+    terms = [normalized(x) for x in raw_terms if clean_text(x)] if isinstance(raw_terms, list) else []
+    if not terms:
+        terms = [
+            "research", "innovation", "science", "technology", "foresight", "future", "futures",
+            "artificial intelligence", "ai", "demograph", "talent", "skills", "workforce",
+            "competitiveness", "productivity", "industrial", "industry", "strategic", "security",
+            "resilience", "autonomy", "sovereignty", "quantum", "semiconductor", "biotech",
+            "digital", "data", "cyber", "cloud", "compute", "space", "energy", "raw material",
+        ]
+    # Short tokens such as "AI" are unsafe as bare substring filters (e.g. "training").
+    # Keep server-side discovery high recall but avoid obviously noisy 1-2 character probes.
+    terms = list(dict.fromkeys(t for t in terms if len(t) >= 3))
+    if not terms:
+        return []
+
+    batch_size = max(4, min(20, int(CONFIG.get("op_publications_catalogue_terms_per_query", 10) or 10)))
+    per_query_limit = max(20, min(300, int(CONFIG.get("op_publications_catalogue_results_per_query", 120) or 120)))
+    max_pages = max(1, min(120, int(CONFIG.get("op_publications_catalogue_max_pages", 48) or 48)))
+    timeout = max(5, min(30, int(CONFIG.get("op_publications_catalogue_timeout_seconds", 18) or 18)))
+    endpoint = "https://publications.europa.eu/webapi/rdf/sparql"
+
+    def sparql_literal(value: str) -> str:
+        return value.replace("\\", "\\\\").replace('"', '\\"')
+
+    discovered: dict[str, tuple[float, dt.date, str]] = {}
+    query_count = 0
+    successful_queries = 0
+    for i in range(0, len(terms), batch_size):
+        if stage_deadline_reached(stage_deadline, max(8, int(CONFIG.get("network_reserve_seconds", 90)))):
+            break
+        chunk = terms[i:i + batch_size]
+        title_filter = " || ".join(
+            f'CONTAINS(LCASE(STR(?title)), "{sparql_literal(term)}")' for term in chunk
+        )
+        sparql = "\n".join([
+            "PREFIX cdm: <http://publications.europa.eu/ontology/cdm#>",
+            "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>",
+            "SELECT DISTINCT ?w ?date ?title WHERE {",
+            "  ?w cdm:work_date_document ?date .",
+            "  ?e cdm:expression_belongs_to_work ?w ;",
+            "     cdm:expression_title ?title ;",
+            "     cdm:expression_uses_language <http://publications.europa.eu/resource/authority/language/ENG> .",
+            f'  FILTER(?date >= "{start_date.isoformat()}"^^xsd:date)',
+            f"  FILTER({title_filter})",
+            "}",
+            "ORDER BY DESC(?date)",
+            f"LIMIT {per_query_limit}",
+        ])
+        query_count += 1
+        try:
+            r = SESSION.get(
+                endpoint,
+                params={"query": sparql, "format": "application/sparql-results+json"},
+                timeout=timeout,
+                allow_redirects=True,
+            )
+            if r.status_code != 200:
+                _diag_inc("op_catalogue_sparql_http_error")
+                continue
+            bindings = (((r.json() or {}).get("results") or {}).get("bindings") or [])
+            successful_queries += 1
+        except Exception:
+            _diag_inc("op_catalogue_sparql_error")
+            continue
+
+        for row in bindings:
+            if not isinstance(row, dict):
+                continue
+            work_uri = clean_text(((row.get("w") or {}).get("value")))
+            title = clean_text(((row.get("title") or {}).get("value")))
+            published = parse_date(((row.get("date") or {}).get("value")))
+            m = re.search(r"/resource/cellar/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})(?:$|[./])", work_uri, re.I)
+            if not m or not title or not published:
+                continue
+            if published < start_date or published > dt.date.today() + dt.timedelta(days=1):
+                continue
+            uuid = m.group(1).lower()
+            page_url = f"https://op.europa.eu/en/publication-detail/-/publication/{uuid}/language-en"
+            ntitle = normalized(title)
+            hits = sum(1 for term in terms if term in ntitle)
+            age_days = max(0, (dt.date.today() - published).days)
+            # Strong title match first, then recency.  This ranking only decides which pages
+            # get fetched under a bounded budget; the ordinary parser still decides relevance.
+            score = 20.0 + min(30.0, hits * 6.0) + max(0.0, 12.0 - age_days / 15.0)
+            prior = discovered.get(page_url)
+            if prior is None or score > prior[0]:
+                discovered[page_url] = (score, published, title)
+                OP_PUBLICATIONS_CATALOGUE_METADATA[normalized_link(page_url)] = {
+                    "title": title,
+                    "published": published.isoformat(),
+                    "cellar_url": f"https://publications.europa.eu/resource/cellar/{uuid}",
+                    "work_uri": work_uri,
+                }
+
+    _diag_inc("op_catalogue_sparql_queries", query_count)
+    _diag_inc("op_catalogue_sparql_successful_queries", successful_queries)
+    _diag_inc("op_catalogue_records_discovered", len(discovered))
+
+    out: list[tuple[str, str, int, str]] = []
+    ranked = sorted(discovered.items(), key=lambda kv: (kv[1][0], kv[1][1]), reverse=True)
+    for page_url, (_score, published, _title) in ranked:
+        fp = institution_fingerprint(page_url, published)
+        if _known_institution_url_should_skip(page_url, fp, reconsider_seen):
+            continue
+        if fp in INSTITUTION_SEEN_FINGERPRINTS and not reconsider_seen:
+            continue
+        INSTITUTION_DISCOVERED_DATES[fp] = published
+        out.append((page_url, source_name, tier, fp))
+        if len(out) >= max_pages:
+            break
+    _diag_inc("op_catalogue_jobs", len(out))
+    return out
+
 def _source_adapter_domain_jobs(
     src: dict[str, Any],
     from_date: dt.date,
@@ -12345,10 +12766,15 @@ def _source_adapter_domain_jobs(
     if not bool(CONFIG.get("institution_source_adapter_enabled", True)):
         return []
     domain = clean_text(src.get("domain", "")).lower().removeprefix("www.")
+    if not domain:
+        return []
+    # OP catalogue discovery is a first-party source adapter in its own right. Keep it alive
+    # even if a future configuration removes the optional editorial-hub profile.
+    catalogue_jobs = _op_publications_catalogue_jobs(src, from_date, stage_deadline, reconsider_seen)
     profiles = CONFIG.get("institution_source_adapters", {})
     profile = profiles.get(domain) if isinstance(profiles, dict) else None
-    if not domain or not isinstance(profile, dict):
-        return []
+    if not isinstance(profile, dict):
+        return catalogue_jobs
     source_name = clean_text(src.get("name")) or domain
     tier = int(src.get("tier", 2) or 2)
     base = f"https://{domain}"
@@ -12361,16 +12787,25 @@ def _source_adapter_domain_jobs(
             hubs.append(raw if raw.startswith("http") else urljoin(base + "/", raw.lstrip("/")))
     hubs.extend(clean_text(x) for x in raw_seeds if clean_text(x))
     hubs = list(dict.fromkeys(hubs))
-    if not hubs:
+    if not hubs and domain != "op.europa.eu":
         return []
 
     path_hints = [normalized(x) for x in (profile.get("path_hints") or []) if clean_text(x)]
     max_fetches = max(1, int(CONFIG.get("institution_source_adapter_max_hub_fetches", 6) or 6))
     max_pages = max(1, int(CONFIG.get("institution_source_adapter_pages_per_domain", 20) or 20))
+    if domain == "op.europa.eu":
+        max_pages = max(max_pages, int(CONFIG.get("op_publications_catalogue_max_pages", max_pages) or max_pages))
     max_depth = max(0, min(2, int(CONFIG.get("institution_source_adapter_crawl_depth", 2) or 2)))
     queue: list[tuple[str, int]] = [(u, 0) for u in hubs]
     fetched: set[str] = set()
     discovered: dict[str, int] = {}
+
+    # OP is a catalogue application: use Cellar metadata as the primary discovery surface,
+    # then retain the existing bounded hub crawl as a complementary route.
+    catalogue_fingerprints: dict[str, str] = {}
+    for u, _source, _tier, _fp in catalogue_jobs:
+        discovered[u] = max(100, discovered.get(u, -100))
+        catalogue_fingerprints[normalized_link(u)] = _fp
 
     while queue and len(fetched) < max_fetches:
         if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
@@ -12415,7 +12850,7 @@ def _source_adapter_domain_jobs(
     out: list[tuple[str, str, int, str]] = []
     for u, _score in sorted(discovered.items(), key=lambda kv: kv[1], reverse=True):
         nu = normalized_link(u)
-        fp = institution_fingerprint(u, None)
+        fp = catalogue_fingerprints.get(nu) or institution_fingerprint(u, None)
         if _known_institution_url_should_skip(u, fp, reconsider_seen):
             continue
         if fp in INSTITUTION_SEEN_FINGERPRINTS and not reconsider_seen:
@@ -12527,6 +12962,9 @@ def _discover_domain(src: dict[str, Any], from_date: dt.date, bootstrap: bool = 
 
 def _primary_page_publication_date(soup: BeautifulSoup, page_url: str, title: str) -> tuple[dt.date | None, str]:
     """Conservative publication date for an exact official document hub."""
+    published = _op_portal_publication_date(soup, page_url)
+    if published:
+        return published, "op_portal_release_date"
     published = _jrc_repository_publication_date(soup, page_url)
     if published:
         return published, "jrc_visible_publication_date"
@@ -19860,7 +20298,7 @@ def scan_from_date(previous: dict[str, Any], today: dt.date) -> tuple[dt.date, b
 
 
 def main() -> int:
-    global DATE_FLOOR, EXTENDED_DATE_FLOOR, B_METHOD_DATE_FLOOR, B_METHOD_RECENT_DATE_FLOOR, SIGNAL_RETENTION_FLOOR, SCAN_DEADLINE_MONO, LOW_YIELD_RESERVE_ACTIVE, LOW_YIELD_RESERVE_SECONDS, KNOWN_AB_IDENTITIES, KNOWN_AB_DOI_TITLES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, INSTITUTION_SEEN_FINGERPRINTS, INSTITUTION_DISCOVERED_DATES, INSTITUTION_SIGNAL_CANDIDATES, SIGNAL_WINDOW_START_DATE, ACTIVE_FRONTIER_GAP_URL_TERMS, ADMISSION_DIAGNOSTICS, ACTIVE_EU_CONTEXT_ANCHORS, LOAD_SANITIZE_REMOVED, OPENALEX_KEYLESS_REQUEST_COUNT
+    global DATE_FLOOR, EXTENDED_DATE_FLOOR, B_METHOD_DATE_FLOOR, B_METHOD_RECENT_DATE_FLOOR, SIGNAL_RETENTION_FLOOR, SCAN_DEADLINE_MONO, LOW_YIELD_RESERVE_ACTIVE, LOW_YIELD_RESERVE_SECONDS, KNOWN_AB_IDENTITIES, KNOWN_AB_DOI_TITLES, KNOWN_AB_LINKS, KNOWN_SIGNAL_IDENTITIES, INSTITUTION_SEEN_FINGERPRINTS, INSTITUTION_DISCOVERED_DATES, OP_PUBLICATIONS_CATALOGUE_METADATA, INSTITUTION_SIGNAL_CANDIDATES, SIGNAL_WINDOW_START_DATE, ACTIVE_FRONTIER_GAP_URL_TERMS, ADMISSION_DIAGNOSTICS, ACTIVE_EU_CONTEXT_ANCHORS, LOAD_SANITIZE_REMOVED, OPENALEX_KEYLESS_REQUEST_COUNT
     started = time.time()
     log_progress.started = time.monotonic()
     configured_budget_seconds = max(60, int(CONFIG.get("scan_budget_seconds", 1200)))
@@ -20136,6 +20574,7 @@ def main() -> int:
     else:
         log_progress("OpenAlex: authenticated API key detected")
     INSTITUTION_DISCOVERED_DATES = {}
+    OP_PUBLICATIONS_CATALOGUE_METADATA = {}
     INSTITUTION_SIGNAL_CANDIDATES = []
     SIGNAL_WINDOW_START_DATE = None
     with ADMISSION_DIAGNOSTICS_LOCK:
