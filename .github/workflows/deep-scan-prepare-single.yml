@@ -45,6 +45,7 @@ jobs:
         shell: bash
         env:
           PACKAGE_SIZE: ${{ inputs.package_size }}
+          OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
         run: |
           set -euo pipefail
           size="${PACKAGE_SIZE:-36}"

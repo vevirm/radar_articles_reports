@@ -45,6 +45,7 @@ jobs:
         shell: bash
         env:
           LANE_SIZE: ${{ inputs.lane_size }}
+          OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
         run: |
           set -euo pipefail
           size="${LANE_SIZE:-36}"

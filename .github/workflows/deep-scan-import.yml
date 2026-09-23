@@ -105,6 +105,8 @@ jobs:
 
       - name: Refresh both persistent worker lanes
         shell: bash
+        env:
+          OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
         run: |
           set -euo pipefail
           rm -rf deep_scan_workers

@@ -56,6 +56,8 @@ jobs:
 
       - name: Prepare the next Deep Scan V2 group
         shell: bash
+        env:
+          OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
         run: |
           set -euo pipefail
           rm -rf deep_scan_out
