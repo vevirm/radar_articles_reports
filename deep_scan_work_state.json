@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-deep-scan-work-state-v1",
-  "updated_at": "2026-09-23T12:09:09Z",
+  "updated_at": "2026-09-23T21:16:07Z",
   "lanes": {
     "A": {
       "target_size": 36,
@@ -143,6 +143,17 @@
         "worker-b-20260923T110554Z-28aea726fe9b",
         "worker-b-20260923T111141Z-28aea726fe9b",
         "worker-b-20260923T120856Z-8767e590e0ea"
+      ]
+    },
+    "SINGLE": {
+      "current_package_id": "20260923T211548Z-44619dd3ec29",
+      "package_history": [
+        "20260923T211548Z-44619dd3ec29"
+      ],
+      "target_size": 2,
+      "assigned": [
+        "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=52028928-482a-11f1-8095-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+        "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=6c154d71-d7d0-11f0-8da2-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part="
       ]
     }
   },
@@ -45014,6 +45025,18 @@
       "lane": "A",
       "assigned_at": "2026-09-23T10:30:57Z",
       "last_package_id": "worker-a-20260923T120837Z-2c2436e144e4"
+    },
+    "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=52028928-482a-11f1-8095-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=": {
+      "status": "assigned",
+      "lane": "SINGLE",
+      "last_package_id": "20260923T211548Z-44619dd3ec29",
+      "assigned_at": "2026-09-23T21:16:07Z"
+    },
+    "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=6c154d71-d7d0-11f0-8da2-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=": {
+      "status": "assigned",
+      "lane": "SINGLE",
+      "last_package_id": "20260923T211548Z-44619dd3ec29",
+      "assigned_at": "2026-09-23T21:16:07Z"
     }
   },
   "packages": {
@@ -57090,6 +57113,14 @@
         "historical:id:a5d8eeaff9fe0aff",
         "historical:id:61635393ea017006",
         "historical:id:a34c49c48c80878c"
+      ]
+    },
+    "20260923T211548Z-44619dd3ec29": {
+      "lane": "SINGLE",
+      "created_at": "2026-09-23T21:16:07Z",
+      "record_keys": [
+        "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=52028928-482a-11f1-8095-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+        "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=6c154d71-d7d0-11f0-8da2-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part="
       ]
     }
   }
