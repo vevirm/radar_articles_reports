@@ -6,30 +6,30 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1805** (Main **927** + Historical **878**)
-- Automatic queue still needing V2 verification: **154** (Main **76** + Historical **78**)
-- Currently assigned to workers: **120** (Main **76** + Historical **44**)
+- Authoritative V2 verified: **1862** (Main **944** + Historical **918**)
+- Automatic queue still needing V2 verification: **97** (Main **59** + Historical **38**)
+- Currently assigned to workers: **96** (Main **59** + Historical **37**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **13**
-- Automatic queue pending and not yet assigned: **34**
+- Automatic queue pending and not yet assigned: **1**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260923T092702Z-d74d45757992`
-- Assigned unresolved records: **60**
-  1. `link:https://news.google.com/rss/articles/CBMiswFBVV95cUxQUk9tdXhDdmkyRU54dVNWMmI4WXJVeVdOZm5FS0pYSklqNlhlWlBpS2Q1QUdBUk53NU11U3hQcmZ1Ulg1QmhSam9zTnE4MGt5TTg3M0g0RDlRWDZKWG1uNUoyejhqUzZ2LWhfYjZNVHUydi1fRHk4aTFZSjVHenpjenhlWEY5c1dVUTdyNlhlZXZLc0VNWDEzOThTdHRhb2l2LTN4aWp4SUNtbDNoZUE4RHpNMA?oc=5` — EU to require data centres to disclose energy and water efficiency
-  2. `link:https://news.google.com/rss/articles/CBMipgFBVV95cUxQYWNkdTRVNFBacWZiOWRiZkVNc180aXBkTG0yeTJfVnBxYzNBOHhiS0g2YVZLSWxMalJvUzJNMkh1dm9OY1FsQXNfUFI0VXZYVXhWMVhWMEJDUzBDSVEzMjIwYzZabGpKYXB1THA5cUw1V0d1TXp3a0NUbUhMZHpNUzAzNnpIYVNzUGFfRkJMSjFYaVZUdW5uSzVJd1ZTX21xTkEtWE1B?oc=5` — Europe has the science. Now it needs a clinical trials system to match.
-  3. `link:https://news.google.com/rss/articles/CBMiwgFBVV95cUxNa3RGdU9WcUZUNnNmWERzWWplN1RoRVBLelBmZHVuQlBpcWNJUVVrTlBhRV9CQndBOHJHY2VOS0l1M2lPcGJBR0lsU1JZd1VqSFI3NDJlektYUlV6cGZ0UWFWRW5GakhNN2NZSHZ2VG9QWUFjRGFTY0FGSDBoVl90UWNNSGx5NjlxUkdkUXNlSjNWVzU1TGJ5dm95NGNQRHRmMTdZWGx0dXNiUGs4Y3RJY3V4STc3dXkwNWhFdXR5R0VTUQ?oc=5` — EU pressures Big Tech to go green with new data center sustainability label
-  4. `link:https://news.google.com/rss/articles/CBMixgFBVV95cUxNa3JhUUhsWjhCV3o4Y1B3WDRFU1h5TlpISTNmNWo1UjdsYmFKVFpaVUpTV0NidEVQYXVEYTh5Y0RrSVlHS3Q2YUMxNnlzcWNRVWt6clhGWDdwSnBEUlZLQlFrb055RW5fbXVYT1JWMm9qNHhVVHlPUmxCTTBXYXlOYXB0MG5OelhIaE5hemZZT2xPdkdUVzdWMkxRdmN4LW9yalVienIyRWU4cEwwcFMxcnNSTi14QTFnY1hIYzhjdlpWcUlwVEE?oc=5` — Making data centres energy efficient thanks to a new EU rating system
-  5. `link:https://news.google.com/rss/articles/CBMilwFBVV95cUxNZWFDRENoNzlFV3RwamFFdEVxdnBRV3VCOV9SQ2g0RFNLVU4xNm41ZVdGOWl3RXp5bVNEc0J6RWtjQzBFTURReG9WM3NfR1JUSFNWd3dzNUpZaDJFRkZRODhrclVNdXdRQlMzZDEtV25VWTVXdHVVSnktNG10WHhYUzJVd1pFTFlOQ0FoV3hjaU5hb0tEX2RJ?oc=5` — World in Brief: AfD triumphs again in Germany; America and China agree to talk AI
-  6. `link:https://news.google.com/rss/articles/CBMivAFBVV95cUxOUjd6SnhEMGdGc0lCWnRQZk1EcEFCcHBoamZJR0ZDQnJRNVVHVHdTbU1RT0Ywc2g3ZEgtX014NTJObldia1NXWjl1N1psZlRVTTVkaThLRXA0Rk83WG1LcnVab1o5MHVSX3h1emVqOHJocmdnMU1YbHV3NzZwX2xzcUtyZEpfTHl0N2VBWVk1cHM2bjFMcmZpTEJSVV9HdGdleWxhSU9FbWd1U2hTVUxUZnUxYzZ1YUtSb1h5UQ?oc=5` — Russia’s hybrid war and Trump’s tantrums are pushing Europe towards real strategic autonomy
-  7. `link:https://news.google.com/rss/articles/CBMi0gFBVV95cUxOZVdPenQ4c3pJYXhfMmJKOWpJYldTcDVNVUF2UW95OG15OUlRVmJNeXY2Q0JGdnpwOFNfQVJISjIwalY1UkZPZ01pZk5ZdnFMa0haTHFWVzBNSWlvRGtFWm9lUC1zMy1Hal9LZVVDS2RkenJJQ1d0Vm05dGkyR3lFUS1HSTJkTHFzZ3dzeEJfVk1uNlpHY1k2SExTWTlMN1huMEx0LUhXbkJDVWVmODlpaDJYdVhCSGJ6QlRTckZGTWwzb3kzUnlvQi1sYk9jMlZydWc?oc=5` — Europe cannot afford to miss AI transformation, with fiscal dividend within reach, OECD chief says
-  8. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTFB3X2lIVGxXMmR6YnJya2xIS2t0WGs0UWZlN0hCNFdQWDAzTVpZWGJVT2VaNnFHa0xDVXpaSG9CNlBWeXVLWXR2M3pNbGxYS0laSWdyN05ETFhCNEp0OEtlOXVSSlBPRDRSUFBPb242Z1JGdVJXZ2xQU1ZEUUxsQQ?oc=5` — THE HACK: EU progress on industrial AI push
-  - … plus 52 more in the package manifest
+- Current package: `worker-a-20260923T103057Z-2c2436e144e4`
+- Assigned unresolved records: **36**
+  1. `historical:id:bc665999887802f2` — ALLEA Participates in EU-Funded Project to Support Reforms in Research Assessment - ALLEA
+  2. `historical:id:7a6b1859e290bf8d` — Innovation Wars: How China Is Gaining on the United States in Corporate R&D
+  3. `historical:id:975c2b201ea7d1ec` — How China Divides Europe and the United States
+  4. `historical:id:df7334496eb36789` — A Compass to Guide EU Policy in Support of Business Competitiveness
+  5. `historical:id:9c46d0586d96396f` — ALLEA Joins the European Commission Coalition on Research Assessment Reform - ALLEA
+  6. `historical:id:d8cc69968937a4cd` — Europe’s dependence on Chinese semiconductor manufacturing - Digital Power China Report
+  7. `historical:id:cef3cfdeb1591a87` — Explanatory models of regional innovation performance in Europe: policy implications for regions
+  8. `link:https://doi.org/10.1080/10438599.2026.2693627` — Do wage pressure and government R&D stimulate business R&D? Regional level evidence from Europe — recovery attempt 3/3
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260923T092732Z-28aea726fe9b`
+- Current package: `worker-b-20260923T103122Z-28aea726fe9b`
 - Assigned unresolved records: **60**
   1. `link:https://www.eit.europa.eu/` — EIT entrepreneurial education: Learn from leaders of European innovation
   2. `link:https://www.ellisinstitute.fi/PIs-2026` — ELLIS Institute Finland recruits 7 new principal investigators | ELLIS Institute Finland

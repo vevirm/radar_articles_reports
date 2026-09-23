@@ -1,52 +1,52 @@
 {
   "profile": "radar-active-corpus-rebuild-v1",
-  "completed_at": "2026-09-22T22:31:25Z",
+  "completed_at": "2026-09-23T10:29:53Z",
   "raw_counts": {
-    "strand_a": 489,
+    "strand_a": 491,
     "strand_b": 166,
-    "strand_c": 282,
+    "strand_c": 281,
     "frontier_evidence": 0
   },
   "active_counts": {
     "strand_a": 329,
     "strand_b": 122,
-    "strand_c": 246,
+    "strand_c": 236,
     "frontier_evidence": 0
   },
   "decision_counts": {
-    "provisional": 27,
-    "keep": 655,
+    "provisional": 12,
+    "keep": 660,
     "review": 24,
-    "drop": 184,
+    "drop": 195,
     "drop_unverifiable": 39,
     "duplicate": 3,
     "needs_manual_verification": 5
   },
   "deep_scan_v2": {
-    "total_records": 927,
-    "v2_verified": 895,
-    "v2_pending": 32
+    "total_records": 928,
+    "v2_verified": 911,
+    "v2_pending": 17
   },
   "historical_deep_scan_v2": {
-    "total_records": 913,
-    "v2_verified": 878,
-    "v2_pending": 35,
-    "active_a_context": 566
+    "total_records": 961,
+    "v2_verified": 918,
+    "v2_pending": 43,
+    "active_a_context": 585
   },
   "downstream_diagnostics": {
-    "derived_objects_checked": 746,
-    "unchanged": 746,
-    "rebuilt": 0,
+    "derived_objects_checked": 777,
+    "unchanged": 661,
+    "rebuilt": 67,
     "materially_rewritten": 0,
-    "newly_inferred": 0,
-    "retired": 0,
-    "stale_evidence_references_before": 0,
-    "stale_evidence_references_removed": 0,
+    "newly_inferred": 23,
+    "retired": 26,
+    "stale_evidence_references_before": 23,
+    "stale_evidence_references_removed": 23,
     "orphan_references_remaining": 0,
-    "active_evidence_reference_occurrences_checked": 3105,
+    "active_evidence_reference_occurrences_checked": 3129,
     "shock_support_chains_changed_after_a_removal": 0,
     "active_dynamic_shocks": 10,
-    "active_high_order_candidates": 660,
+    "active_high_order_candidates": 665,
     "active_strategic_pathways": 1,
     "active_possible_external_shocks": 0,
     "standalone_matrix_objects": 0,
