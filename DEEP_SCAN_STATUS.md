@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260923T110531Z-2c2436e144e4`
+- Current package: `worker-a-20260923T111117Z-2c2436e144e4`
 - Assigned unresolved records: **36**
   1. `historical:id:bc665999887802f2` — ALLEA Participates in EU-Funded Project to Support Reforms in Research Assessment - ALLEA
   2. `historical:id:7a6b1859e290bf8d` — Innovation Wars: How China Is Gaining on the United States in Corporate R&D
@@ -29,7 +29,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260923T110554Z-28aea726fe9b`
+- Current package: `worker-b-20260923T111141Z-28aea726fe9b`
 - Assigned unresolved records: **60**
   1. `link:https://www.eit.europa.eu/` — EIT entrepreneurial education: Learn from leaders of European innovation
   2. `link:https://www.ellisinstitute.fi/PIs-2026` — ELLIS Institute Finland recruits 7 new principal investigators | ELLIS Institute Finland
