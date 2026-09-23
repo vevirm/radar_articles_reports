@@ -1,6 +1,7 @@
 from pathlib import Path
 import datetime as dt
 import importlib.util
+import os
 import sys
 import unittest
 from unittest.mock import patch
@@ -202,6 +203,70 @@ class RouteParityTests(unittest.TestCase):
         self.assertIn("publications.europa.eu", calls[0][0])
         self.assertEqual((calls[0][1] or {}).get("Accept-Language"), "eng")
         self.assertIn("first-party route", result.note)
+
+    def test_deep_scan_openalex_key_recovers_cached_fulltext_without_leaking_secret(self):
+        secret = "test-openalex-secret"
+        record = {
+            "title": "A scholarly work",
+            "doi": "10.1234/example.1",
+            "link": "https://doi.org/10.1234/example.1",
+        }
+
+        class OAResp:
+            def raise_for_status(self):
+                return None
+
+            def json(self):
+                return {
+                    "results": [{
+                        "id": "https://openalex.org/W123456789",
+                        "doi": "https://doi.org/10.1234/example.1",
+                        "content_urls": {
+                            "pdf": "https://content.openalex.org/works/W123456789.pdf",
+                        },
+                        "best_oa_location": {
+                            "is_oa": True,
+                            "landing_page_url": "https://repository.example/work",
+                        },
+                        "locations": [],
+                    }]
+                }
+
+        fetch_calls = []
+
+        def fake_fetch(url, *, extra_headers=None):
+            fetch_calls.append((url, extra_headers or {}))
+            if url.startswith("https://doi.org/"):
+                return deep.SourceRead("stored_only", "", url, "publisher blocked")
+            if url.startswith("https://content.openalex.org/"):
+                return deep.SourceRead("pdf_excerpt", "verified scholarly full text " * 80, url, "")
+            return deep.SourceRead("stored_only", "", url, "unused")
+
+        with patch.dict(os.environ, {"OPENALEX_API_KEY": secret}, clear=False), \
+             patch.object(deep.requests, "get", return_value=OAResp()) as oa_get, \
+             patch.object(deep, "fetch_source", side_effect=fake_fetch):
+            result = deep.fetch_source_for_record(record)
+
+        self.assertEqual(result.mode, "pdf_excerpt")
+        self.assertIn("OpenAlex authenticated DOI lookup matched W123456789", result.note)
+        self.assertNotIn(secret, result.note)
+        self.assertNotIn(secret, result.final_url)
+        auth_header = oa_get.call_args.kwargs["headers"].get("Authorization")
+        self.assertEqual(auth_header, f"Bearer {secret}")
+        content_call = next(call for call in fetch_calls if call[0].startswith("https://content.openalex.org/"))
+        self.assertEqual(content_call[1].get("Authorization"), f"Bearer {secret}")
+
+    def test_deep_scan_preparation_workflows_expose_openalex_secret(self):
+        workflows = [
+            ".github/workflows/deep-scan-prepare-workers.yml",
+            ".github/workflows/deep-scan-prepare-single.yml",
+            ".github/workflows/deep-scan-import.yml",
+            ".github/workflows/deep-scan-hardcore-recovery-prepare.yml",
+            ".github/workflows/radar-v2-migration.yml",
+        ]
+        for rel in workflows:
+            text = (ROOT / rel).read_text(encoding="utf-8")
+            self.assertIn("OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}", text, rel)
 
     def test_deep_scan_ep_route_uses_pdf_even_if_public_uri_is_blocked(self):
         pdf = "https://data.europarl.europa.eu/distribution/doc/TA-10-2026-0123_en.pdf"
