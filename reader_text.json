@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-23T12:05:58Z",
+  "generated_at": "2026-09-23T21:29:31Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -176069,8 +176069,350 @@
       "deep_scan_package_id": "worker-b-20260923T111141Z-28aea726fe9b",
       "claims": [],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=52028928-482a-11f1-8095-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "60e01c69",
+      "identity_hash": "ad92ffd487a24dd2",
+      "reader_title": "AI futures and Europe’s R&I ecosystem",
+      "reader_what": "EU AI adoption is uneven; scenarios expose barriers and support three strategic orientations for R&I policy.",
+      "reader_why": "AI competitiveness depends on adoption, infrastructure, skills, governance and cross-border ecosystems, not model development alone.",
+      "reader_more": "The report combines EU adoption mapping, quantitative sources, expert surveys, interviews and participatory foresight. It develops three 2040 scenarios, then stress-tests strategic orientations with the TOSA framework and a policymaker workshop. It finds uneven uptake and structural barriers around data, skills, investment and fragmentation, and recommends anticipatory governance, stronger enabling infrastructure and a distinct European AI pathway. The scenarios are exploratory, not forecasts.",
+      "deep_analysis": {
+        "work_kind": "European Commission foresight policy report",
+        "research_question": "How could different AI development trajectories affect Europe’s R&I ecosystem, and which policy orientations remain robust across them?",
+        "main_finding": "EU AI adoption is uneven and constrained by fragmentation, skills, data, investment and infrastructure; robust policy should strengthen adaptive governance, diffusion capacity and a distinct European pathway.",
+        "method_or_basis": "Empirical EU adoption mapping and taxonomy; quantitative data, expert surveys and interviews; three 2040 scenarios; TOSA analysis; and a policymaker sense-making workshop.",
+        "qualification": "The report combines current EU adoption evidence with exploratory 2040 scenarios; scenario outcomes are not predictions or adopted policy.",
+        "radar_relevance": "Completed evidence-led study of Europe’s R&I ecosystem and AI adoption, directly addressing capability, governance, infrastructure and competitiveness; it qualifies for Strand A as substantive European R&I evidence.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the supplied OP Cellar PDF URL for identifier 52028928-482a-11f1-8095-01aa75ed71a1; package source_material contains matching official PDF pages 1-6 and 39-42 with title, DOI, executive summary and conclusion."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Checked DOI 10.2777/7322666; Publications Office metadata and AIT/Fraunhofer records identify the same 2026 final report, authors and 42-page publication."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title query \"The futures of artificial intelligence: Implications for Europe’s R&I ecosystem. Part 5, Final report\" returned the Publications Office record with matching UUID, ISBN and DOI."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Checked the Publications Office record at https://op.europa.eu/en/publication-detail/-/publication/52028928-482a-11f1-8095-01aa75ed71a1/language-en and matching Fraunhofer/AIT repository metadata; provenance and bibliographic identity agree."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_pdf",
+            "url": "https://op.europa.eu/o/opportal-service/download-handler?identifier=52028928-482a-11f1-8095-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+            "title": "The Futures of Artificial Intelligence: Implications for Europe’s R&I Ecosystem. Part 5: Final report",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publication_record",
+            "url": "https://op.europa.eu/en/publication-detail/-/publication/52028928-482a-11f1-8095-01aa75ed71a1/language-en",
+            "title": "The futures of artificial intelligence — Implications for Europe’s R&I ecosystem. Part 5, Final report",
+            "evidence_used": true
+          },
+          {
+            "kind": "institutional_repository_record",
+            "url": "https://publications.ait.ac.at/en/publications/the-futures-of-artificial-intelligence-implications-for-europes-r/",
+            "title": "The futures of artificial intelligence: Implications for Europe’s R&I ecosystem. Part 5, Final report",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity is confirmed by the official PDF, DOI 10.2777/7322666, OP catalogue metadata and matching institutional repository records; the substantive PDF excerpts cover the executive summary, methods, recommendations and conclusion."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Completed European Commission foresight report directly studies Europe’s R&I ecosystem, combining current EU AI adoption evidence with scenario analysis and policy-relevant strategic orientations."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied possible-duplicate key identifies the same underlying publication."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-23T21:29:31Z",
+      "deep_scan_package_id": "20260923T211548Z-44619dd3ec29",
+      "claims": [
+        {
+          "object": "ai.adoption",
+          "secondary_objects": [
+            "digital.infrastructure",
+            "research.system_capacity"
+          ],
+          "actor": {
+            "name": "European Commission, Directorate-General for Research and Innovation",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-05-04",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The report combines current EU adoption evidence with exploratory 2040 scenarios; scenario outcomes are not predictions or adopted policy.",
+          "text": "EU AI adoption remains uneven and is constrained by fragmented markets, data access, skills, investment and infrastructure.",
+          "confidence": "high",
+          "record_key": "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=52028928-482a-11f1-8095-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:ad92ffd487a24dd2:1",
+          "attributes": {}
+        },
+        {
+          "object": "ai.governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission, Directorate-General for Research and Innovation",
+            "class": "eu_body"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-05-04",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "The strategic orientations are recommendations from the study, not adopted EU policy.",
+          "text": "The report advocates stronger anticipatory AI governance with monitoring, foresight and flexible institutions able to adapt under uncertainty.",
+          "confidence": "high",
+          "record_key": "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=52028928-482a-11f1-8095-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:ad92ffd487a24dd2:2",
+          "attributes": {}
+        },
+        {
+          "object": "digital.infrastructure",
+          "secondary_objects": [
+            "ai.adoption",
+            "compute.capacity"
+          ],
+          "actor": {
+            "name": "European Commission, Directorate-General for Research and Innovation",
+            "class": "eu_body"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-05-04",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "The report identifies enabling infrastructure as a strategic orientation rather than a completed investment programme.",
+          "text": "The report advocates stronger digital, data and compute infrastructure to support broader sectoral AI adoption and European competitiveness.",
+          "confidence": "high",
+          "record_key": "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=52028928-482a-11f1-8095-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:ad92ffd487a24dd2:3",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=6c154d71-d7d0-11f0-8da2-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "3137826b",
+      "identity_hash": "903e61ee2f0c5654",
+      "reader_title": "Demographic change could reshape Europe’s R&I system",
+      "reader_what": "Shrinking working-age populations may squeeze research talent and funding, while raising pressure for productivity and automation.",
+      "reader_why": "The report links demographic pressure to R&I workforce renewal, regional resilience, public research protection and trust.",
+      "reader_more": "The report uses desk research, weak-signal scanning and expert workshops to build four contrasting 2050 scenarios for Europe’s R&I system. It treats demographic contraction as a stressor for talent pipelines, public research funding and regional cohesion. Its recommendations are organised around protection, adaptation, cohesion and trust, including lifelong learning and more distributed innovation capacity. These are wind-tunnelled strategic options, not predictions of a single future.",
+      "deep_analysis": {
+        "work_kind": "European Commission strategic foresight report",
+        "research_question": "How could demographic change reshape Europe’s R&I system to 2050, and which policy actions remain robust across contrasting futures?",
+        "main_finding": "Demographic contraction threatens the R&I talent pipeline, fiscal room for public research and regional cohesion, requiring workforce renewal, protected research capacity, distributed infrastructure and public trust.",
+        "method_or_basis": "Desk research and weak-signal analysis; identification of critical uncertainties; expert workshops; four 2050 scenarios; and wind-tunnelling or stress-testing of policy options.",
+        "qualification": "The report is a foresight stress test: its 2050 scenarios and demographic pressures are plausible pathways, not predictions or observed future outcomes.",
+        "radar_relevance": "Completed evidence-led study whose substantive object is the European R&I system, directly addressing research talent, funding, regional capacity and governance; it qualifies for Strand A as substantive European R&I evidence.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the supplied OP Cellar PDF URL for identifier 6c154d71-d7d0-11f0-8da2-01aa75ed71a1; package source_material contains matching official PDF pages 1-6 and 54-57 with title, DOI, executive summary, methodology and recommendations."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Checked DOI 10.2777/8349625; the Foresight on Demand project page lists it as the final report and the DOI matches the official PDF title page."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title query \"The Demographic Turn: Actions Needed for Research, Innovation and Policy in Europe\" returned matching Foresight on Demand and Futures4Europe records identifying the same DG RTD study."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Checked https://foresight-on-demand.eu/projects/demographic-change-what-implications-and-opportunities-for-europe-r-and-i-s-systems/; it identifies DG RTD as client, the final report, DOI 10.2777/8349625, and the foresight methods used."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_pdf",
+            "url": "https://op.europa.eu/o/opportal-service/download-handler?identifier=6c154d71-d7d0-11f0-8da2-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+            "title": "The Demographic Turn: Actions Needed for Research, Innovation and Policy in Europe",
+            "evidence_used": true
+          },
+          {
+            "kind": "commissioned_project_record",
+            "url": "https://foresight-on-demand.eu/projects/demographic-change-what-implications-and-opportunities-for-europe-r-and-i-s-systems/",
+            "title": "Demographic Change: what implications and opportunities for Europe R&I's systems?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity is confirmed by the official PDF and DOI 10.2777/8349625, with Foresight on Demand independently matching the DG RTD client, final report and methodology; the supplied PDF excerpts cover the main diagnosis, method and final recommendations."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Completed evidence-led foresight report whose substantive object is Europe’s R&I system, including research talent, funding, regional capacity, automation and governance under demographic change."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied possible-duplicate key identifies the same underlying publication."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-23T21:29:31Z",
+      "deep_scan_package_id": "20260923T211548Z-44619dd3ec29",
+      "claims": [
+        {
+          "object": "research.system_capacity",
+          "secondary_objects": [
+            "research.workforce_quality",
+            "funding.route"
+          ],
+          "actor": {
+            "name": "European Commission, Directorate-General for Research and Innovation",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2025-12-10",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The report is a foresight stress test: its 2050 scenarios and demographic pressures are plausible pathways, not predictions or observed future outcomes.",
+          "text": "Europe’s R&I system capacity becomes increasingly dependent on workforce renewal and fiscal resilience as demographic contraction intensifies.",
+          "confidence": "high",
+          "record_key": "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=6c154d71-d7d0-11f0-8da2-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:903e61ee2f0c5654:1",
+          "attributes": {}
+        },
+        {
+          "object": "research.workforce_quality",
+          "secondary_objects": [
+            "talent.career_structure"
+          ],
+          "actor": {
+            "name": "European Commission, Directorate-General for Research and Innovation",
+            "class": "eu_body"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2025-12-10",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "The adaptation mandate is a policy recommendation stress-tested across scenarios, not an adopted programme.",
+          "text": "The report advocates cyclical lifelong learning and retraining sabbaticals to renew R&I skills across longer careers.",
+          "confidence": "high",
+          "record_key": "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=6c154d71-d7d0-11f0-8da2-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:903e61ee2f0c5654:2",
+          "attributes": {}
+        },
+        {
+          "object": "innovation.regional_capacity",
+          "secondary_objects": [
+            "research.infrastructure",
+            "talent.retention"
+          ],
+          "actor": {
+            "name": "European Commission, Directorate-General for Research and Innovation",
+            "class": "eu_body"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2025-12-10",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "The cohesion mandate is a recommended resilience strategy, not evidence that the infrastructure has already been built.",
+          "text": "The report advocates distributed regional innovation campuses and resilience labs to anchor talent and strengthen territorial R&I resilience.",
+          "confidence": "high",
+          "record_key": "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=6c154d71-d7d0-11f0-8da2-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:903e61ee2f0c5654:3",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-09-23T12:05:58Z"
+  "claims_updated_at": "2026-09-23T21:29:31Z"
 }

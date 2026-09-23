@@ -6,17 +6,17 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1913** (Main **995** + Historical **918**)
-- Automatic queue still needing V2 verification: **46** (Main **8** + Historical **38**)
-- Currently assigned to workers: **46** (Main **8** + Historical **38**)
+- Authoritative V2 verified: **1915** (Main **997** + Historical **918**)
+- Automatic queue still needing V2 verification: **78** (Main **28** + Historical **50**)
+- Currently assigned to workers: **72** (Main **28** + Historical **44**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **13**
-- Automatic queue pending and not yet assigned: **0**
+- Automatic queue pending and not yet assigned: **6**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260923T120837Z-2c2436e144e4`
+- Current package: `worker-a-20260923T213404Z-2c2436e144e4`
 - Assigned unresolved records: **36**
   1. `historical:id:bc665999887802f2` — ALLEA Participates in EU-Funded Project to Support Reforms in Research Assessment - ALLEA
   2. `historical:id:7a6b1859e290bf8d` — Innovation Wars: How China Is Gaining on the United States in Corporate R&D
@@ -29,8 +29,8 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260923T120856Z-8767e590e0ea`
-- Assigned unresolved records: **10**
+- Current package: `worker-b-20260923T213430Z-c315b38c9cf5`
+- Assigned unresolved records: **36**
   1. `link:https://news.google.com/rss/articles/CBMiowFBVV95cUxQUWF6NXZ4TFR5TmpJYXhJTjMtWVpYZlJXWkd0UXllanVaNzdIUEttZlpjdVVqa2IyT1M3b0w1ZzY4cGVWOVljV0pyTEpFWmZBOVczSVFUVDRrbkdTN1lmaFpyV2JlQkpqWGxSbUhIRDJGeC03dmU2XzNiaHQtYzdjRldWam1KVWZ5UGliU2VUUjRFZU5wdk1Tb3NTZ3hFY3RXRkV3?oc=5` — EU lawmakers float product liability rules to help avert AI disaster
   2. `link:https://news.google.com/rss/articles/CBMipAFBVV95cUxPajhwN0pNUXd1bTByQVNWOWRPVVJuc3haRHNGVnZIYmJrYWlIU0ZNdlE2d3hNMF9RZXQ4LWFwSkJUblI4cldvZWlPSTVoeDJwRW9acmMwaHV5UmZDOVlWdE9XM3RsZFhoclVGclF6ZjFRcmFNUzZiSm1TemFiSTIzMFFRdGJOalJ5SXZZeHdkYTliZ0JlSWRfOWtMWXg3RWFISHVWRw?oc=5` — Spanish PM Sanchez says AI industry cannot be self-regulated
   3. `link:https://news.google.com/rss/articles/CBMinAFBVV95cUxQQ0ZPTHNsYmxNQS1GdkR0b2ZSQVhlN3BQcHM1R2dsMEVldlBTYXlTaXc3QWlfRURuWG5Nc1hYWG5XcHZ5TERONmVSNzlSRzhVT1dzNjNlYjRhLXNNZlB2TEcxR1JqNjdfbkJSV3JxZVpka0VnZkJ2TGFCUzJtbFBmWmwzNFFGZy1wMWxMSDNzSWU3TzhGRXl2QWdORmQ?oc=5` — Will the Horizon Europe Missions survive?
@@ -39,7 +39,11 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:095d418b7242cbd0` — Independent review of the ESRC research data policy
   7. `historical:id:e78ffe91db1790f9` — When theory meets practice in transformative innovation policy evaluation: experiences from Sweden
   8. `historical:id:a5d8eeaff9fe0aff` — The Missing Strategy in Europe's Chip Ambitions
-  - … plus 2 more in the package manifest
+  - … plus 28 more in the package manifest
+
+### Worker SINGLE
+- Current package: `20260923T211548Z-44619dd3ec29`
+- Assigned unresolved records: **0**
 
 ## Hands-on verification needed
 
