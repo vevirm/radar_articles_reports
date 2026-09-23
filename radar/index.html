@@ -7,7 +7,7 @@
   <meta name="robots" content="noindex,nofollow,noarchive">
   <meta name="theme-color" content="#111111">
   <title>R&I × Geopolitics Radar</title>
-<link rel="stylesheet" href="../radar.css?v=28.2">
+<link rel="stylesheet" href="../radar.css?v=28.4">
 <script src="../radar_data.js?v=28.1"></script>
 
 
@@ -45,11 +45,10 @@
         <div class="radar-title-block">
           <div class="radar-kicker">Current evidence</div>
           <h1>Radar</h1>
-          <p>Search what the scanner has found. Open a finding only when you want the evidence behind it.</p>
+          <p>Search findings that have passed verification. Open a finding only when you want the evidence behind it.</p>
         </div>
         <div id="scanStrip" class="radar-counts" aria-label="Radar item counts">
-          <div><strong id="itemsCount">—</strong><span>current records</span></div>
-          <div class="new"><strong id="newCount">—</strong><span>new</span></div>
+          <div><strong id="itemsCount">—</strong><span>verified records</span></div>
         </div>
         <nav class="strand-jump" aria-label="Three Radar strands">
           <a class="strand-a-link" href="#strand-a" aria-label="A · Established evidence"><strong>A</strong><span>Established evidence</span><em id="jumpCountA">—</em></a>
@@ -61,7 +60,6 @@
 
     <div class="toolbar" id="radarFilters"><div class="wrap tools">
       <input id="search" class="search" type="search" placeholder="Search topic, title or source" aria-label="Search radar">
-      <button id="newOnly" class="filter added-filter" type="button">New</button>
       <button id="recentOnly" class="filter" type="button">Latest 30 days</button>
       <button id="clearFilter" class="filter" type="button">Clear</button>
     </div></div>
@@ -90,7 +88,7 @@
 <script src="../reader_style.js?v=28.3"></script>
 <script>
 const PASSWORD_HASH="2a2acaba9fbe458e48fdcf8dd59c276bb425780c82a976dea408b88b46612bb8";
-const state={data:null,query:"",recentOnly:false,newOnly:false,allDetails:false,limits:{A:12,B:12,C:18},latestDate:0,newStart:0,newEnd:0};
+const state={data:null,query:"",recentOnly:false,allDetails:false,limits:{A:12,B:12,C:18},latestDate:0};
 async function sha256(text){const data=new TextEncoder().encode(text);const hash=await crypto.subtle.digest("SHA-256",data);return [...new Uint8Array(hash)].map(b=>b.toString(16).padStart(2,"0")).join("")}
 function unlock(){sessionStorage.setItem("radarUnlocked","1");document.getElementById("gate").style.display="none";document.getElementById("app").style.display="block";loadRadar()}
 if(sessionStorage.getItem("radarUnlocked")==="1") unlock();
@@ -198,19 +196,11 @@ function searchable(x){return cleanText([x.title,x.headline,x.source,x.authors,x
 function publicDisplayOk(x){try{const t=cleanText(x?.title||x?.headline||'');if(!t)return false;if(globalThis.RadarInsights?.likelyEnglish?.(t)===false)return false;const claim=claimText(x);return globalThis.RadarInsights?.likelyEnglish?.(claim)!==false}catch(e){console.warn('Radar display filter skipped a problematic item',e);return Boolean(cleanText(x?.title||x?.headline||''))}}
 function dateMs(x){const t=Date.parse(x?.date||'');return Number.isFinite(t)?t:0}
 function firstSeenMs(x){const t=Date.parse(x?.first_seen||'');return Number.isFinite(t)?t:0}
-function productiveWindow(d,items){
-  const explicit=d?.latest_productive_scan;
-  if(explicit&&Number(explicit.new_items)>0){const start=Date.parse(explicit.started_at||''),end=Date.parse(explicit.completed_at||'');if(Number.isFinite(start))return {start,end:Number.isFinite(end)?end:start+60_000}}
-  const history=Array.isArray(d?.scan_history)?d.scan_history:[];
-  for(let i=history.length-1;i>=0;i--){const h=history[i]||{},n=Number(h.new_a||0)+Number(h.new_b||0)+Number(h.new_c||0);if(n<=0)continue;const start=Date.parse(h.started_at||''),end=Date.parse(h.completed_at||'');if(Number.isFinite(start))return {start,end:Number.isFinite(end)?end:start+60_000}}
-  const latest=Math.max(0,...items.map(firstSeenMs));return latest?{start:latest-60_000,end:latest+60_000}:{start:0,end:0};
-}
-function newItem(x){const seen=firstSeenMs(x);return Boolean(x?.new_this_scan)||(seen&&state.newStart&&seen>=state.newStart&&seen<=state.newEnd+60_000)}
+function radarReady(x){return ['keep','review'].includes(cleanText(x?.admission_status||'').toLowerCase())}
 function rankScore(x){return globalThis.RadarReaderRank?.scoreFor?.(x)??0}
 function rankClass(x){return globalThis.RadarReaderRank?.band?.(rankScore(x))||''}
-function filtered(items){const q=state.query.trim().toLowerCase();const floor=state.latestDate?state.latestDate-30*86400000:0;let out=items.filter(x=>publicDisplayOk(x)&&(!state.recentOnly||dateMs(x)>=floor)&&(!q||searchable(x).includes(q))&&(!state.newOnly||newItem(x)));return [...out].sort((a,b)=>(globalThis.RadarReaderRank?.compare?.(a,b)??0)||firstSeenMs(b)-firstSeenMs(a)||dateMs(b)-dateMs(a)||cleanText(a.title||a.headline).localeCompare(cleanText(b.title||b.headline)))}
+function filtered(items){const q=state.query.trim().toLowerCase();const floor=state.latestDate?state.latestDate-30*86400000:0;let out=items.filter(x=>radarReady(x)&&publicDisplayOk(x)&&(!state.recentOnly||dateMs(x)>=floor)&&(!q||searchable(x).includes(q)));return [...out].sort((a,b)=>(globalThis.RadarReaderRank?.compare?.(a,b)??0)||firstSeenMs(b)-firstSeenMs(a)||dateMs(b)-dateMs(a)||cleanText(a.title||a.headline).localeCompare(cleanText(b.title||b.headline)))}
 function tag(text,cls=""){return text?`<span class="tag ${cls}">${esc(text)}</span>`:""}
-function addedTag(x){return newItem(x)?tag('New','new'):''}
 function admissionTag(x){const d=cleanText(x?.admission_status||'').toLowerCase();if(d==='review')return tag('Review','review');if(x?.deep_scan_authoritative)return tag('Deep verified','verified');return ''}
 function rankBadge(x){const n=rankScore(x),cls=rankClass(x);return `<span class="rank-badge ${esc(cls)}" title="Reader rank ${n}/100" aria-label="Reader rank ${n} out of 100">${n}</span>`}
 function fmtInt(v){const n=Number(v);return Number.isFinite(n)?new Intl.NumberFormat('en-GB').format(n):'—'}
@@ -227,19 +217,19 @@ function signalPoint(x){const raw=globalThis.RadarInsights?.signalWhat?.(x)||x.w
 function claimButton(x,id,title=cardHeading(x),linkLabel='Open publication ↗'){return `<h3 class="claim-title">${esc(title)}</h3><div class="card-actions"><button class="info-button" type="button" data-abstract="${id}" aria-controls="${id}" aria-expanded="${state.allDetails?'true':'false'}">More info</button>${x.link?`<a class="publication-link" href="${esc(x.link)}" target="_blank" rel="noopener">${esc(linkLabel)}</a>`:''}</div>`}
 function abItem(x,i){
   const id=`abstract-a-${i}`;
-  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${rankBadge(x)}${addedTag(x)}${admissionTag(x)}</div></div>${claimButton(x,id)}${visibleSource(x)}${biblio(x)}${abstractPanel(x,id)}${whatLine(x)}${whyLine(x)}</article>`
+  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${rankBadge(x)}${admissionTag(x)}</div></div>${claimButton(x,id)}${visibleSource(x)}${biblio(x)}${abstractPanel(x,id)}${whatLine(x)}${whyLine(x)}</article>`
 }
 function bItem(x,i){
   const id=`abstract-b-${i}`;
   const pair=globalThis.RadarReaderStyle?.radarPair?.(x,{what:methodPoint(x),why:methodUse(x)})||{what:methodPoint(x),why:methodUse(x)};
-  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${rankBadge(x)}${addedTag(x)}${admissionTag(x)}${tag("Method")}</div></div>${claimButton(x,id)}${visibleSource(x)}<p class="whatline"><strong>WHAT:</strong> ${esc(pair.what)}</p><p class="whyline"><strong>WHY:</strong> ${esc(pair.why)}</p>${biblio(x)}${abstractPanel(x,id)}</article>`
+  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${rankBadge(x)}${admissionTag(x)}${tag("Method")}</div></div>${claimButton(x,id)}${visibleSource(x)}<p class="whatline"><strong>WHAT:</strong> ${esc(pair.what)}</p><p class="whyline"><strong>WHY:</strong> ${esc(pair.why)}</p>${biblio(x)}${abstractPanel(x,id)}</article>`
 }
 function cItem(x,i){
   const id=`abstract-c-${i}`;
   const rawWhat=globalThis.RadarInsights?.signalWhat?.(x)||x.what||x.core_message||x.headline||x.title||'';
   const rawWhy=globalThis.RadarInsights?.fastReaderText?.(x.why_it_matters||'')||x.why_it_matters||simpleWhy(x);
   const pair=globalThis.RadarReaderStyle?.radarPair?.(x,{what:rawWhat,why:rawWhy})||{what:rawWhat,why:rawWhy};
-  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${rankBadge(x)}${addedTag(x)}${admissionTag(x)}</div></div>${claimButton(x,id,cardHeading(x),'Open source evidence ↗')}${visibleSource(x)}<p class="whatline"><strong>WHAT:</strong> ${esc(pair.what)}</p><p class="whyline"><strong>WHY:</strong> ${esc(pair.why)}</p>${biblio(x,'Source')}${abstractPanel(x,id)}</article>`
+  return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x.date))}</div><div class="badges">${rankBadge(x)}${admissionTag(x)}</div></div>${claimButton(x,id,cardHeading(x),'Open source evidence ↗')}${visibleSource(x)}<p class="whatline"><strong>WHAT:</strong> ${esc(pair.what)}</p><p class="whyline"><strong>WHY:</strong> ${esc(pair.why)}</p>${biblio(x,'Source')}${abstractPanel(x,id)}</article>`
 }
 function empty(msg){return `<div class="empty">${esc(msg)}</div>`}
 function fallbackCard(x){const rawTitle=cleanText(x?.reader_title||x?.title||x?.headline||x?.core_message||'Finding');const title=globalThis.RadarReaderStyle?.displayTitle?.(rawTitle)||rawTitle;const source=cleanText(x?.source||'');const link=cleanText(x?.link||'');return `<article class="item"><div class="item-top"><div class="meta">${esc(fmtDate(x?.date))}</div></div><h3 class="claim-title">${link?`<a href="${esc(link)}" target="_blank" rel="noopener">${esc(title)}</a>`:esc(title)}</h3>${source?`<div class="visible-source"><strong>Source:</strong> ${esc(source)}</div>`:''}</article>`}
@@ -249,7 +239,7 @@ function render(){if(!state.data)return;const d=state.data,A=d.strand_a||[],B=d.
 document.addEventListener('click',e=>{const b=e.target.closest('[data-abstract]');if(!b)return;const panel=document.getElementById(b.dataset.abstract);if(!panel)return;const opening=panel.hidden;panel.hidden=!opening;b.setAttribute('aria-expanded',String(opening));});
 function resetLimits(){state.limits={A:12,B:12,C:18}}
 const initialQuery=new URLSearchParams(location.search).get("q")||"";if(initialQuery){state.query=initialQuery;document.getElementById("search").value=initialQuery}
-function wire(){document.getElementById("search").addEventListener("input",e=>{state.query=e.target.value;resetLimits();render()});document.getElementById('newOnly').addEventListener('click',e=>{state.newOnly=!state.newOnly;e.currentTarget.classList.toggle('active',state.newOnly);resetLimits();render()});document.getElementById("recentOnly").addEventListener("click",e=>{state.recentOnly=!state.recentOnly;e.currentTarget.classList.toggle("active",state.recentOnly);resetLimits();render()});document.getElementById("clearFilter").addEventListener("click",()=>{state.query="";state.recentOnly=false;state.newOnly=false;document.getElementById("search").value="";document.getElementById("recentOnly").classList.remove("active");document.getElementById('newOnly').classList.remove('active');resetLimits();render()});for(const l of ["A","B","C"])document.getElementById(`more${l}`).addEventListener("click",()=>{state.limits[l]+=12;render()})}
+function wire(){document.getElementById("search").addEventListener("input",e=>{state.query=e.target.value;resetLimits();render()});document.getElementById("recentOnly").addEventListener("click",e=>{state.recentOnly=!state.recentOnly;e.currentTarget.classList.toggle("active",state.recentOnly);resetLimits();render()});document.getElementById("clearFilter").addEventListener("click",()=>{state.query="";state.recentOnly=false;document.getElementById("search").value="";document.getElementById("recentOnly").classList.remove("active");resetLimits();render()});for(const l of ["A","B","C"])document.getElementById(`more${l}`).addEventListener("click",()=>{state.limits[l]+=12;render()})}
 wire();
 async function loadRadar(){
   let raw;
@@ -260,18 +250,17 @@ async function loadRadar(){
     for(const l of ["A","B","C"])document.getElementById(`items${l}`).innerHTML=empty("radar.json could not be loaded.");
     return;
   }
-  const safeFilter=xs=>Array.isArray(xs)?xs.filter(publicDisplayOk):[];
+  // Main Radar is a verified surface: provisional scanner candidates stay in Stuff until Deep Scan checks them.
+  const safeFilter=xs=>Array.isArray(xs)?xs.filter(x=>radarReady(x)&&publicDisplayOk(x)):[];
   const d={...raw,strand_a:safeFilter(raw.strand_a),strand_b:safeFilter(raw.strand_b),strand_c:safeFilter(raw.strand_c)};
   state.data=d;
   const A=d.strand_a||[],B=d.strand_b||[],C=d.strand_c||[];
   state.latestDate=Math.max(Date.parse(d.last_updated||'')||0,...[...A,...B,...C].map(dateMs));
-  const all=[...A,...B,...C],window=productiveWindow(d,all);state.newStart=window.start;state.newEnd=window.end;
-  const newItems=all.filter(newItem).length;
-  document.getElementById('itemsCount').textContent=fmtInt(all.length);document.getElementById('newCount').textContent=fmtInt(newItems);
+  const all=[...A,...B,...C];
+  document.getElementById('itemsCount').textContent=fmtInt(all.length);
   document.getElementById('jumpCountA').textContent=fmtInt(A.length);
   document.getElementById('jumpCountB').textContent=fmtInt(B.length);
   document.getElementById('jumpCountC').textContent=fmtInt(C.length);
-  const newBtn=document.getElementById('newOnly');newBtn.textContent=`New (${newItems})`;
   render();
 }
 </script>
