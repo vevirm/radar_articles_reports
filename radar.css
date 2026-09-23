@@ -694,6 +694,22 @@ p,li,dd,.plain,.why,.point,.priority-what,.priority-why,.node-what,.node-why{fon
 .page-stuff .download-card h2{font-size:var(--t-h2);margin:0 0 var(--s-8)}
 .page-stuff .formats{display:flex;gap:var(--s-8);flex-wrap:wrap}
 .page-stuff .note,.page-stuff .secondary{font-family:var(--sans);font-size:var(--t-meta);color:var(--quiet)}
+.page-stuff .candidate-review{padding:0}
+.page-stuff .candidate-review-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--s-24);align-items:start;padding:var(--s-32);border-bottom:var(--w-hair) solid var(--rule)}
+.page-stuff .candidate-review-head h2{font-size:var(--t-h2);line-height:1.1;margin:var(--s-8) 0}
+.page-stuff .candidate-review-head p{margin:0;max-width:var(--measure)}
+.page-stuff .candidate-review-count{min-width:180px;font-family:var(--sans);display:flex;flex-direction:column;align-items:flex-end;line-height:1.15}
+.page-stuff .candidate-review-count strong{font-size:32px;font-weight:700;color:var(--red)}
+.page-stuff .candidate-review-count span{font-size:var(--t-meta);color:var(--quiet)}
+.page-stuff .candidate-review-list{display:grid}
+.page-stuff .candidate-review-row{padding:var(--s-24) var(--s-32);border-bottom:var(--w-hair) solid var(--rule)}
+.page-stuff .candidate-review-row:last-child{border-bottom:0}
+.page-stuff .candidate-review-meta{font-family:var(--sans);font-size:var(--t-meta);color:var(--quiet);display:flex;gap:var(--s-12);align-items:center;flex-wrap:wrap}
+.page-stuff .candidate-strand{display:inline-grid;place-items:center;min-width:28px;height:28px;padding:0 var(--s-8);background:var(--ink);color:var(--paper);font-weight:700}
+.page-stuff .candidate-review-row h3{font-size:var(--t-title);line-height:1.25;margin:var(--s-8) 0 var(--s-4)}
+.page-stuff .candidate-review-source,.page-stuff .candidate-review-state{font-family:var(--sans);font-size:var(--t-meta)}
+.page-stuff .candidate-review-source{color:var(--quiet)}
+.page-stuff .candidate-review-state{margin-top:var(--s-8);font-weight:700;color:var(--red)}
 .page-explore .explore-main{padding:var(--s-40) 0 var(--s-96)}
 .page-explore .explore-grid{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
@@ -868,6 +884,9 @@ body:not(.radar-site){font-family:var(--serif)}
   .page-trends .pair,.page-briefing .topic,.page-stuff .download-card,
   .page-stuff .section,.page-read .issue-chart{padding:var(--s-24) var(--s-16)}
   .page-stuff .download-card{grid-template-columns:1fr}
+  .page-stuff .candidate-review-head{grid-template-columns:1fr;padding:var(--s-24) var(--s-16)}
+  .page-stuff .candidate-review-count{align-items:flex-start;min-width:0}
+  .page-stuff .candidate-review-row{padding:var(--s-24) var(--s-16)}
   .page-frontier-quick .matrix,.page-frontier .matrix{min-width:820px}
   .home-main{grid-template-columns:1fr;grid-template-areas:"summary" "menu" "cloud";gap:var(--s-24);padding-top:var(--s-24)}
   .site-menu{position:static}
