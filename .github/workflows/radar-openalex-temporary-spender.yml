@@ -1,0 +1,108 @@
+name: TEMPORARY OpenAlex paid Strand A spender
+
+on:
+  # Midway between the normal 4-hour scans (which run at :17 on 0/4/8/12/16/20 UTC).
+  # The shared concurrency group below is the real collision protection.
+  schedule:
+    - cron: '17 2,6,10,14,18,22 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+  # Hard ceiling for this temporary experiment. Search calls cost $0.001 each at the
+  # current OpenAlex price. OpenAlex may apply its daily free allowance before prepaid funds.
+  TEMP_OPENALEX_TOTAL_USD: '11.00'
+  # Small chunks keep the temporary job from monopolising the scanner lane.
+  TEMP_OPENALEX_CHUNK_USD: '2.00'
+  TEMP_OPENALEX_PER_PAGE: '100'
+  TEMP_OPENALEX_MAX_MINUTES: '75'
+
+# EXACTLY the same lock as the normal scanner and the existing Strand-A workflows.
+# Therefore this temporary spender can never scan/write simultaneously with them.
+concurrency:
+  group: ri-radar-research-scanners
+  queue: max
+  cancel-in-progress: false
+
+jobs:
+  spend:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Check out current main safely
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install existing scanner dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run temporary paid OpenAlex Strand A chunk
+        env:
+          OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
+        run: python scripts/temporary_openalex_a_spender.py
+
+      - name: Rebuild the normal active/public products if A changed
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! git diff --quiet -- radar.json; then
+            python scripts/rebuild_active_radar.py
+            python scripts/check_active_corpus.py
+            node scripts/generate_stuff_workbook.js
+          else
+            echo 'No new Strand-A findings in this chunk; no public rebuild needed.'
+          fi
+
+      - name: Safety check — temporary job may change only its state plus normal generated products
+        shell: bash
+        run: |
+          set -euo pipefail
+          unexpected="$({ git diff --name-only; git ls-files --others --exclude-standard; } | sort -u | grep -Ev '^(radar\.json|radar_active\.json|stuff/source_merit_ranking\.xlsx|temporary_openalex_a_state\.json)$' || true)"
+          if [[ -n "$unexpected" ]]; then
+            echo '::error::Temporary OpenAlex job changed an unexpected file. Refusing to save.'
+            printf '%s\n' "$unexpected"
+            exit 1
+          fi
+
+      - name: Configure secure push authentication
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'radar-openalex-temporary'
+          git config user.email 'actions@github.com'
+          auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
+          git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${auth}"
+
+      - name: Save temporary state and any accepted Strand A findings
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add temporary_openalex_a_state.json radar.json radar_active.json stuff/source_merit_ranking.xlsx 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo 'Nothing changed.'
+          else
+            git commit -m 'Temporary OpenAlex paid Strand A discovery'
+            git push origin HEAD:main
+          fi
+
+      - name: Remove temporary repository credential
+        if: always()
+        shell: bash
+        run: git config --local --unset-all http.https://github.com/.extraheader >/dev/null 2>&1 || true
