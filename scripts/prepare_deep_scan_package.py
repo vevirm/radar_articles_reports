@@ -20,7 +20,7 @@ try:
         pending, historical_pending, record_key, identity_hash, scanner_fields,
     )
     from scripts.deep_scan_work_state import (
-        DEFAULT_WORK_STATE, DEFAULT_LANE_SIZE, fill_lane, load_state, manual_verification_keys,
+        DEFAULT_WORK_STATE, DEFAULT_LANE_SIZE, assigned_keys, fill_lane, load_state, manual_verification_keys,
         prioritize_pending_keys, register_package, save_state, sync_verified, update_record_metadata,
         write_status_markdown,
     )
@@ -30,7 +30,7 @@ except ModuleNotFoundError:
         pending, historical_pending, record_key, identity_hash, scanner_fields,
     )
     from deep_scan_work_state import (  # type: ignore
-        DEFAULT_WORK_STATE, DEFAULT_LANE_SIZE, fill_lane, load_state, manual_verification_keys,
+        DEFAULT_WORK_STATE, DEFAULT_LANE_SIZE, assigned_keys, fill_lane, load_state, manual_verification_keys,
         prioritize_pending_keys, register_package, save_state, sync_verified, update_record_metadata,
         write_status_markdown,
     )
@@ -584,8 +584,14 @@ def main() -> None:
             f"({assigned_main} main + {assigned_historical} historical)"
         )
     else:
+        # A legacy/manual SINGLE package must never steal work already reserved to a
+        # persistent worker lane (or another unresolved SINGLE package).  Older
+        # versions sliced the live priority queue directly, which allowed the same
+        # records to be reserved by SINGLE and A/B at the same time.
+        occupied = assigned_keys(state)
+        single_candidates = [item for item in prioritized_items if item[1] not in occupied]
         limit = max(0, int(args.max_records or 0))
-        todo = prioritized_items[:limit] if limit else prioritized_items
+        todo = single_candidates[:limit] if limit else single_candidates
         packaged_main = len([x for x in todo if not x[1].startswith("historical:")])
         packaged_historical = len(todo) - packaged_main
         print(
