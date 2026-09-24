@@ -52,7 +52,7 @@
 </div>
 <script src="topic-cloud.js?v=24.0"></script>
 <script>
-const PASSWORD_HASH="2a2acaba9fbe458e48fdcf8dd59c276bb425780c82a976dea408b88b46612bb8";
+const PASSWORD_HASH="8e1be4b8ade75bbd815f588e2fab5e8ce0bc9660530f856278d66909a8301eff";
 async function sha256(text){const data=new TextEncoder().encode(text),hash=await crypto.subtle.digest('SHA-256',data);return [...new Uint8Array(hash)].map(b=>b.toString(16).padStart(2,'0')).join('')}
 function unlock(){sessionStorage.setItem('radarUnlocked','1');document.getElementById('gate').style.display='none';document.getElementById('app').style.display='block';TopicCloud.load()}
 if(sessionStorage.getItem('radarUnlocked')==='1')unlock();
