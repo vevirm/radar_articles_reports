@@ -7,8 +7,8 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **1997** (Main **1035** + Historical **962**)
-- Automatic queue still needing V2 verification: **55** (Main **14** + Historical **41**)
-- Currently assigned to workers: **55** (Main **14** + Historical **41**)
+- Automatic queue still needing V2 verification: **58** (Main **17** + Historical **41**)
+- Currently assigned to workers: **58** (Main **17** + Historical **41**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **14**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,8 +16,8 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260924T185352Z-38dd35dc314d`
-- Assigned unresolved records: **25**
+- Current package: `worker-a-20260924T210414Z-89415ea89c09`
+- Assigned unresolved records: **28**
   1. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTFB3X2lIVGxXMmR6YnJya2xIS2t0WGs0UWZlN0hCNFdQWDAzTVpZWGJVT2VaNnFHa0xDVXpaSG9CNlBWeXVLWXR2M3pNbGxYS0laSWdyN05ETFhCNEp0OEtlOXVSSlBPRDRSUFBPb242Z1JGdVJXZ2xQU1ZEUUxsQQ?oc=5` — THE HACK: EU progress on industrial AI push — recovery attempt 3/3
   2. `link:https://news.google.com/rss/articles/CBMiiAFBVV95cUxPd0hNY0hZU3UySUVzcXFVREJmT0lUQk5QZGJVcXVrck1lYl9BY1UzaDdUamtzbmpKNUNka216YXB6eEc4NTFka0hRR3p4dGFJQjZCdHJTYnNyRlFyUnV4UE0taXRlWWFQdU4ycUtSSVIzVDJwRXJWZTR2ZkJzb3R3M0dJcERGenAt?oc=5` — THE HACK: EU data centre push amid fossil fuel risk — recovery attempt 3/3
   3. `link:https://doi.org/10.1016/j.ejps.2026.107570` — European science for health research needs and priorities — recovery attempt 2/3
@@ -26,10 +26,10 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:256f788e05840f94` — Foresight and strategic decision-making framework from artificial intelligence technology development to utilization activities in small-and-medium-sized enterprises
   7. `historical:id:388a8f406be45f71` — A probabilistic cross‐impact methodology for explorative scenario analysis
   8. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=8baf21ed-b790-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — DRAFT REPORT - on the proposal for a regulation of the European Parliament and of the Council on the European Union Agency for Cybersecurity (ENISA), the European cybersecurity certification framework, and ICT supply chain security and repealing Regulation (EU) 2019/881 (The Cybersecurity Act 2) - (COM(2026)0011 - C10-0015/2026 - 2026/0011(COD)) - Committee on Industry, Research and Energy - Rapporteur: Markéta Gregorová - Publications Office of the EU — recovery attempt 2/3
-  - … plus 17 more in the package manifest
+  - … plus 20 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260924T185424Z-b92bbe8b1cd0`
+- Current package: `worker-b-20260924T210441Z-b92bbe8b1cd0`
 - Assigned unresolved records: **30**
   1. `link:https://doi.org/10.1080/23299460.2026.2731654` — Does the EU AI act align with responsible AI? An evaluation of the European Union’s artificial intelligence act in a responsible research and innovation framework — recovery attempt 2/3
   2. `historical:id:fae68357821b2313` — MSCA: Research Talent is Europe’s Strategic Advantage | Coimbra
