@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>2035 scenario lens · Research &amp; Innovation × Geopolitics Radar</title>
+<link rel="stylesheet" href="../../radar.css?v=28.4">
+<link rel="stylesheet" href="../scenarios.css?v=2">
+<script src="../../radar_data.js?v=28.1"></script>
+</head>
+<body>
+<main class="wrap future-main">
+  <a class="scenario-back" href="../">← Choose another 2035 lens</a>
+  <section class="frame-intro"><h2 id="frameTitle">2035</h2><p id="frameQuestion" class="future-lede"></p></section>
+  <div class="scenario-count"><strong>16 scenarios in total</strong><span>4 main 2035 worlds × 4 variants in each world.</span></div>
+  <section class="scenario-frame" aria-label="2035 scenario matrix">
+    <div class="scenario-matrix-wrap">
+      <div id="axisYHigh" class="axis-y-high"></div>
+      <div id="axisYTitle" class="axis-y-title"></div>
+      <div id="scenarioMatrix" class="scenario-matrix"><p class="empty">Loading</p></div>
+      <div id="axisYLow" class="axis-y-low"></div>
+      <div class="axis-x"><span></span><b id="axisXTitle"></b><span></span></div>
+      <div class="axis-x-labels"><span id="axisXLow"></span><span id="axisXHigh"></span></div>
+    </div>
+    <p class="scenario-note"><strong>Choose one of the four main 2035 worlds.</strong> Each square opens its four findings-driven variants.</p>
+  </section>
+  <section aria-labelledby="taxonomyTitle">
+    <div class="taxonomy-head"><div><p class="taxonomy-kicker">4 worlds × 4 variants</p><h2 id="taxonomyTitle">All 16 scenarios</h2></div><p>Each main world has four different ways it could develop, selected from the current findings.</p></div>
+    <div id="scenarioTaxonomy" class="scenario-taxonomy"><p class="empty">Loading</p></div>
+  </section>
+</main>
+<script>
+const params=new URLSearchParams(location.search);
+const FRAME_ID=params.get('frame')||'resources-connectedness';
+const clean=v=>String(v||'').replace(/\s+/g,' ').trim();
+const esc=v=>clean(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pole=(axis,id)=>id===axis?.high?.id?axis.high:id===axis?.low?.id?axis.low:null;
+const coords=(frame,w)=>{const q=w.quadrant||{},x=frame.axes.horizontal,y=frame.axes.vertical;const xp=pole(x,q[x.key]||q.horizontal),yp=pole(y,q[y.key]||q.vertical);return `${yp?.label||''} · ${xp?.label||''}`;};
+const ordered=(frame)=>{const x=frame.axes.horizontal,y=frame.axes.vertical,target=[[y.high.id,x.low.id],[y.high.id,x.high.id],[y.low.id,x.low.id],[y.low.id,x.high.id]];return target.map(([vy,hx])=>(frame.scenarios||[]).find(w=>{const q=w.quadrant||{};return (q[y.key]||q.vertical)===vy&&(q[x.key]||q.horizontal)===hx;})).filter(Boolean);};
+const familyHtml=(frame,w)=>`<article class="tax-family"><div class="tax-family-top"><div><div class="cell-axis">${esc(coords(frame,w))}</div><h3>${esc(w.name)}</h3><p class="tagline">${esc(w.tagline)}</p><a class="tax-open" href="../scenario/?frame=${encodeURIComponent(frame.id)}&world=${encodeURIComponent(w.id)}">Open scenario →</a></div><div class="tax-variants">${(w.variants||[]).slice(0,4).map(v=>`<div class="tax-variant"><small>${esc(v.kind||'Variant')}</small><span>${esc(v.name)}</span></div>`).join('')}</div></div></article>`;
+(async()=>{try{
+ const data=await RadarData.load('../../radar.json','../../radar_seed.json');
+ const sc=data?.high_order_inference?.scenarios_2035||{};
+ let frame=(sc.frames||[]).find(f=>f.id===FRAME_ID);
+ if(!frame&&FRAME_ID==='resources-connectedness')frame={id:FRAME_ID,title:'Resources × Global connectedness',question:'Can Europe mobilise the resources it needs, and how connected is it to the world?',axes:{vertical:{key:'resources',title:'Resources',low:{id:'fewer_resources',label:'Fewer resources'},high:{id:'more_resources',label:'More resources'}},horizontal:{key:'connectedness',title:'Global connectedness',low:{id:'less_connected',label:'Less connected'},high:{id:'more_connected',label:'More connected'}}},scenarios:sc.scenarios||[]};
+ if(!frame)throw new Error('Scenario lens not found');
+ document.title=`${frame.title} · 2035`;
+ document.getElementById('frameTitle').textContent=frame.title;document.getElementById('frameQuestion').textContent=frame.question||'';
+ const x=frame.axes.horizontal,y=frame.axes.vertical;document.getElementById('axisYHigh').textContent=y.high.label;document.getElementById('axisYLow').textContent=y.low.label;document.getElementById('axisYTitle').textContent=y.title;document.getElementById('axisXTitle').textContent=x.title;document.getElementById('axisXLow').textContent=x.low.label;document.getElementById('axisXHigh').textContent=x.high.label;
+ const worlds=ordered(frame);
+ document.getElementById('scenarioMatrix').innerHTML=worlds.map(w=>`<div class="scenario-cell"><a href="../scenario/?frame=${encodeURIComponent(frame.id)}&world=${encodeURIComponent(w.id)}"><div><div class="cell-axis">${esc(coords(frame,w))}</div><h2>${esc(w.name)}</h2><p>${esc(w.tagline)}</p></div><span class="open-cue">Open scenario →</span></a></div>`).join('');
+ document.getElementById('scenarioTaxonomy').innerHTML=worlds.map(w=>familyHtml(frame,w)).join('');
+}catch(e){console.error(e);document.getElementById('scenarioMatrix').innerHTML='<p class="empty">Scenarios are unavailable.</p>';document.getElementById('scenarioTaxonomy').innerHTML='';}})();
+</script>
+<script src="../../site-shell.js?v=28.1"></script>
+</body></html>
