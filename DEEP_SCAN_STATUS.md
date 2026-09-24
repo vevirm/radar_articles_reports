@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260924T210414Z-89415ea89c09`
+- Current package: `worker-a-20260924T214254Z-89415ea89c09`
 - Assigned unresolved records: **28**
   1. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTFB3X2lIVGxXMmR6YnJya2xIS2t0WGs0UWZlN0hCNFdQWDAzTVpZWGJVT2VaNnFHa0xDVXpaSG9CNlBWeXVLWXR2M3pNbGxYS0laSWdyN05ETFhCNEp0OEtlOXVSSlBPRDRSUFBPb242Z1JGdVJXZ2xQU1ZEUUxsQQ?oc=5` — THE HACK: EU progress on industrial AI push — recovery attempt 3/3
   2. `link:https://news.google.com/rss/articles/CBMiiAFBVV95cUxPd0hNY0hZU3UySUVzcXFVREJmT0lUQk5QZGJVcXVrck1lYl9BY1UzaDdUamtzbmpKNUNka216YXB6eEc4NTFka0hRR3p4dGFJQjZCdHJTYnNyRlFyUnV4UE0taXRlWWFQdU4ycUtSSVIzVDJwRXJWZTR2ZkJzb3R3M0dJcERGenAt?oc=5` — THE HACK: EU data centre push amid fossil fuel risk — recovery attempt 3/3
@@ -29,7 +29,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 20 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260924T210441Z-b92bbe8b1cd0`
+- Current package: `worker-b-20260924T214326Z-b92bbe8b1cd0`
 - Assigned unresolved records: **30**
   1. `link:https://doi.org/10.1080/23299460.2026.2731654` — Does the EU AI act align with responsible AI? An evaluation of the European Union’s artificial intelligence act in a responsible research and innovation framework — recovery attempt 2/3
   2. `historical:id:fae68357821b2313` — MSCA: Research Talent is Europe’s Strategic Advantage | Coimbra
@@ -42,17 +42,8 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 22 more in the package manifest
 
 ### Worker SINGLE
-- Current package: `20260924T122640Z-502486fd6dc7`
-- Assigned unresolved records: **40**
-  1. `historical:id:fae68357821b2313` — MSCA: Research Talent is Europe’s Strategic Advantage | Coimbra
-  2. `historical:id:6bebf0998c688989` — Open Source AI as Sweden’s Path to an Independent Digital Future | RISE
-  3. `historical:id:763b105f33832495` — AI as a Force Field: From Sustainable Farmlands to Digital Sovereignty | RISE
-  4. `historical:id:61e4d438bc111671` — Building a Resilient AI Future – For Real | RISE
-  5. `historical:id:f3d09a6bdf5ef6e5` — Driving European competitiveness through innovation: Eureka network’s call for an ambitious FP10
-  6. `historical:id:e2499b71f7df0d43` — The Impact of Artificial Intelligence on Regional Security, Threat Perceptions and the Middle East WMD-Free Zone → UNIDIR
-  7. `historical:id:df026e59ba727592` — Research security as a collective responsibility: empowering universities, enabling Europe
-  8. `historical:id:c01dcbb54fcab376` — Foresight Talk on Ukraine: Scenarios for the end of the war
-  - … plus 32 more in the package manifest
+- Current package: `none`
+- Assigned unresolved records: **0**
 
 ## Hands-on verification needed
 
