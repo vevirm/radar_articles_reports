@@ -66,3 +66,24 @@
 @media(max-width:650px){
  .page-future .scenario-matrix-wrap{grid-template-columns:30px 1fr}.page-future .scenario-matrix{min-height:0}.page-future .scenario-cell{min-height:190px}.page-future .scenario-cell a{padding:18px}.page-future .scenario-cell h2{font-size:22px}.page-future .scenario-cell p{font-size:13px}.page-future .scenario-note{margin-left:42px}.page-future .tax-variants,.page-future .scenario-variant-grid,.page-future .scenario-facts{grid-template-columns:1fr}.page-future .taxonomy-head{display:block}.page-future .taxonomy-head p{margin-top:8px}
 }
+
+/* Multi-lens 2035 navigation */
+.page-future .lens-head{margin-top:18px}
+.page-future .axis-lens-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;max-width:980px}
+.page-future .axis-lens-card{border:1px solid var(--rule);background:var(--paper);min-height:250px;position:relative}
+.page-future .axis-lens-card a{display:flex;box-sizing:border-box;min-height:250px;height:100%;padding:26px;flex-direction:column;text-decoration:none;color:var(--ink);border-top:6px solid transparent;transition:background .14s ease,border-color .14s ease}
+.page-future .axis-lens-card a:hover,.page-future .axis-lens-card a:focus{background:#fff7f5;border-top-color:var(--red);outline:0}
+.page-future .axis-lens-card .lens-number{margin:0 0 20px;color:var(--red);font-size:13px;font-weight:850;letter-spacing:.08em}
+.page-future .axis-lens-card h2{margin:0 0 12px;font-size:clamp(25px,3vw,34px);line-height:1.08;max-width:18ch}
+.page-future .axis-lens-card> a > p:not(.lens-number){font-size:16px;line-height:1.5;color:var(--quiet);margin:0 0 22px;max-width:46ch}
+.page-future .axis-lens-card strong{margin-top:auto;font-size:14px}
+.page-future .lens-meta{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}
+.page-future .lens-meta span{font-size:12px;font-weight:800;padding:5px 8px;border:1px solid var(--rule);background:#fff}
+.page-future .frame-intro{max-width:820px;margin:0 0 14px}
+.page-future .frame-intro h2{font-size:clamp(34px,5vw,52px);line-height:1.02;margin:0 0 10px}
+.page-future .frame-intro .future-lede{margin-bottom:0}
+
+@media(max-width:760px){
+ .page-future .axis-lens-grid{grid-template-columns:1fr}
+ .page-future .axis-lens-card,.page-future .axis-lens-card a{min-height:220px}
+}
