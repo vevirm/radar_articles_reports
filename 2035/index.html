@@ -6,29 +6,74 @@
 <meta name="robots" content="noindex,nofollow,noarchive">
 <title>2035 · Research &amp; Innovation × Geopolitics Radar</title>
 <link rel="stylesheet" href="../radar.css?v=28.4">
-<link rel="stylesheet" href="scenarios.css?v=2">
+<link rel="stylesheet" href="scenarios.css?v=3">
 <script src="../radar_data.js?v=28.1"></script>
 </head>
 <body>
 <main class="wrap future-main">
-  <p class="future-lede">Choose the uncertainty you want to explore. Each lens opens a different 2×2 scenario space for Europe in 2035.</p>
-  <div class="scenario-count"><strong id="lensCount">Scenario lenses</strong><span>Each lens contains 4 worlds × 4 findings-driven variants.</span></div>
-  <section aria-labelledby="lensTitle">
-    <div class="taxonomy-head lens-head"><div><p class="taxonomy-kicker">Choose a lens</p><h2 id="lensTitle">Four ways to explore 2035</h2></div><p>The axes are curated by hand. The scenario content beneath them is rebuilt from the Radar's current published findings.</p></div>
-    <div id="axisLensGrid" class="axis-lens-grid"><p class="empty">Loading</p></div>
+  <section class="axis-pair-intro" aria-labelledby="axisPairTitle">
+    <p class="taxonomy-kicker">2035 scenario spaces</p>
+    <h1 id="axisPairTitle">Choose an axis pair</h1>
+    <p class="future-lede">Four different pairs of uncertainties open four different views of Europe in 2035. Each axis-pair leads to 4 scenarios, and each scenario has 4 findings-driven subscenarios.</p>
   </section>
+  <div id="axisLensGrid" class="axis-lens-grid"><p class="empty">Loading</p></div>
 </main>
 <script>
 const clean=v=>String(v||'').replace(/\s+/g,' ').trim();
 const esc=v=>clean(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+const AXIS_PAIRS=[
+  {
+    id:'resources-connectedness',
+    title:'Resources × Global connectedness',
+    question:'Can Europe mobilise the resources it needs, and how connected is it to the world?'
+  },
+  {
+    id:'integration-dependency',
+    title:'European integration × Strategic dependency',
+    question:'Does Europe act together, and how much does it depend on capabilities outside Europe?'
+  },
+  {
+    id:'talent-scale-up',
+    title:'Talent × Scale-up capacity',
+    question:'Can Europe attract and keep the people, and can it grow what they create?'
+  },
+  {
+    id:'scale-up-dependency',
+    title:'Scale-up capacity × Strategic dependency',
+    question:'Can Europe turn innovation into scale, and whose capabilities make that scale possible?'
+  }
+];
+
 (async()=>{
  try{
   const data=await RadarData.load('../radar.json','../radar_seed.json');
-  const sc=data?.high_order_inference?.scenarios_2035||{};
-  const frames=Array.isArray(sc.frames)&&sc.frames.length?sc.frames:[{id:'resources-connectedness',title:'Resources × Global connectedness',question:'Can Europe mobilise the resources it needs, and how connected is it to the world?',scenarios:sc.scenarios||[]}];
-  document.getElementById('lensCount').textContent=`${frames.length} scenario ${frames.length===1?'lens':'lenses'}`;
-  document.getElementById('axisLensGrid').innerHTML=frames.map((f,i)=>`<article class="axis-lens-card"><a href="lens/?frame=${encodeURIComponent(f.id)}"><p class="lens-number">0${i+1}</p><h2>${esc(f.title)}</h2><p>${esc(f.question)}</p><div class="lens-meta"><span>${(f.scenarios||[]).length||4} worlds</span><span>4 variants each</span></div><strong>Explore this scenario space →</strong></a></article>`).join('');
- }catch(e){console.error(e);document.getElementById('axisLensGrid').innerHTML='<p class="empty">2035 scenario lenses are unavailable.</p>';}
+  const generated=data?.high_order_inference?.scenarios_2035?.frames||[];
+  const generatedById=new Map(generated.map(f=>[f.id,f]));
+  const frames=AXIS_PAIRS.map(base=>({...base,...(generatedById.get(base.id)||{})}));
+  document.getElementById('axisLensGrid').innerHTML=frames.map((f,i)=>`
+    <article class="axis-lens-card">
+      <a href="lens/?frame=${encodeURIComponent(f.id)}">
+        <p class="lens-number">0${i+1}</p>
+        <h2>${esc(f.title)}</h2>
+        <p>${esc(f.question)}</p>
+        <div class="lens-meta"><span>4 scenarios</span><span>4 subscenarios each</span></div>
+        <strong>Explore this axis pair →</strong>
+      </a>
+    </article>`).join('');
+ }catch(e){
+  console.error(e);
+  document.getElementById('axisLensGrid').innerHTML=AXIS_PAIRS.map((f,i)=>`
+    <article class="axis-lens-card">
+      <a href="lens/?frame=${encodeURIComponent(f.id)}">
+        <p class="lens-number">0${i+1}</p>
+        <h2>${esc(f.title)}</h2>
+        <p>${esc(f.question)}</p>
+        <div class="lens-meta"><span>4 scenarios</span><span>4 subscenarios each</span></div>
+        <strong>Explore this axis pair →</strong>
+      </a>
+    </article>`).join('');
+ }
 })();
 </script>
 <script src="../site-shell.js?v=28.1"></script>
