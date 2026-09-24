@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1967** (Main **1011** + Historical **956**)
-- Automatic queue still needing V2 verification: **71** (Main **30** + Historical **41**)
-- Currently assigned to workers: **71** (Main **30** + Historical **41**)
+- Authoritative V2 verified: **1980** (Main **1019** + Historical **961**)
+- Automatic queue still needing V2 verification: **58** (Main **22** + Historical **36**)
+- Currently assigned to workers: **58** (Main **22** + Historical **36**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **14**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260924T110112Z-53a179411e7d`
+- Current package: `worker-a-20260924T115237Z-53a179411e7d`
 - Assigned unresolved records: **11**
   1. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTFB3X2lIVGxXMmR6YnJya2xIS2t0WGs0UWZlN0hCNFdQWDAzTVpZWGJVT2VaNnFHa0xDVXpaSG9CNlBWeXVLWXR2M3pNbGxYS0laSWdyN05ETFhCNEp0OEtlOXVSSlBPRDRSUFBPb242Z1JGdVJXZ2xQU1ZEUUxsQQ?oc=5` — THE HACK: EU progress on industrial AI push — recovery attempt 3/3
   2. `link:https://news.google.com/rss/articles/CBMiiAFBVV95cUxPd0hNY0hZU3UySUVzcXFVREJmT0lUQk5QZGJVcXVrck1lYl9BY1UzaDdUamtzbmpKNUNka216YXB6eEc4NTFka0hRR3p4dGFJQjZCdHJTYnNyRlFyUnV4UE0taXRlWWFQdU4ycUtSSVIzVDJwRXJWZTR2ZkJzb3R3M0dJcERGenAt?oc=5` — THE HACK: EU data centre push amid fossil fuel risk — recovery attempt 3/3
@@ -29,17 +29,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 3 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260924T110136Z-07f1c6c12977`
-- Assigned unresolved records: **60**
-  1. `link:https://news.google.com/rss/articles/CBMiowFBVV95cUxQUWF6NXZ4TFR5TmpJYXhJTjMtWVpYZlJXWkd0UXllanVaNzdIUEttZlpjdVVqa2IyT1M3b0w1ZzY4cGVWOVljV0pyTEpFWmZBOVczSVFUVDRrbkdTN1lmaFpyV2JlQkpqWGxSbUhIRDJGeC03dmU2XzNiaHQtYzdjRldWam1KVWZ5UGliU2VUUjRFZU5wdk1Tb3NTZ3hFY3RXRkV3?oc=5` — EU lawmakers float product liability rules to help avert AI disaster
-  2. `link:https://news.google.com/rss/articles/CBMipAFBVV95cUxPajhwN0pNUXd1bTByQVNWOWRPVVJuc3haRHNGVnZIYmJrYWlIU0ZNdlE2d3hNMF9RZXQ4LWFwSkJUblI4cldvZWlPSTVoeDJwRW9acmMwaHV5UmZDOVlWdE9XM3RsZFhoclVGclF6ZjFRcmFNUzZiSm1TemFiSTIzMFFRdGJOalJ5SXZZeHdkYTliZ0JlSWRfOWtMWXg3RWFISHVWRw?oc=5` — Spanish PM Sanchez says AI industry cannot be self-regulated
-  3. `link:https://news.google.com/rss/articles/CBMinAFBVV95cUxQQ0ZPTHNsYmxNQS1GdkR0b2ZSQVhlN3BQcHM1R2dsMEVldlBTYXlTaXc3QWlfRURuWG5Nc1hYWG5XcHZ5TERONmVSNzlSRzhVT1dzNjNlYjRhLXNNZlB2TEcxR1JqNjdfbkJSV3JxZVpka0VnZkJ2TGFCUzJtbFBmWmwzNFFGZy1wMWxMSDNzSWU3TzhGRXl2QWdORmQ?oc=5` — Will the Horizon Europe Missions survive?
-  4. `link:https://news.google.com/rss/articles/CBMivwFBVV95cUxOTTlwd1dfQTB4MnpTcG41V3RPRExSempKRjVmcV9neWxWai05S0s0aUxWQTZJVEZ3VUVnWW1oMzVUQzZkQk1YZXhRY3JjOElHSzZLdGRHLW9lck93WmZGZEJpUm9zNlJaVnAzVkRiRDU1REluOXpXSFpIZEYwdzA0WWMwbUFmMVJzaUZPYU5xLTJuVmFWaVhOWm9DX3MyTlY3TnNTeHZab2ZkcnhNQmFCRHp0bkpmLXRQcFBfbkhvYw?oc=5` — US-based ERC winners count the reasons for returning to Europe
-  5. `link:https://news.google.com/rss/articles/CBMinAFBVV95cUxNY0xnTnFPelBOUnV2dF9NRjNRejJ3SUI4STluWjh1TUZJVWNrRVlDT0xENXFPeUdGbjhiQ0JKbEoxR0VQdGZscG9aazBHcHhIWnA1ZUw2YWIzODlXNGRYc21xS1V5VXBOS0doVXNSQi1ELWt6dllRb3dseEcyMlE1c1pUdGc2dEFQLU5lV2Q4cjJyUnRXSUlaNzVURGI?oc=5` — EU moves to curb data centre energy and water use
-  6. `historical:id:095d418b7242cbd0` — Independent review of the ESRC research data policy
-  7. `historical:id:e78ffe91db1790f9` — When theory meets practice in transformative innovation policy evaluation: experiences from Sweden
-  8. `historical:id:a5d8eeaff9fe0aff` — The Missing Strategy in Europe's Chip Ambitions
-  - … plus 52 more in the package manifest
+- Current package: `worker-b-20260924T115301Z-6828e4075d6a`
+- Assigned unresolved records: **47**
+  1. `link:https://doi.org/10.1080/23299460.2026.2731654` — Does the EU AI act align with responsible AI? An evaluation of the European Union’s artificial intelligence act in a responsible research and innovation framework
+  2. `link:https://era.gv.at/news-items/ec-proposes-to-restore-full-access-to-horizon-europe-and-erasmus-for-hungary/` — EC proposes to restore full access to Horizon Europe and Erasmus+ for Hungary
+  3. `link:https://era.gv.at/news-items/esfri-publishes-position-paper-on-infrastructure-ecosystem/` — ESFRI publishes position paper on infrastructure ecosystem
+  4. `link:https://ellis.eu/publication/2025-enhancing-study-level-inference-from-clinical-trial-papers-via-rl-base` — Enhancing Study-Level Inference from Clinical Trial Papers via RL-based Numeric Reasoning
+  5. `link:https://era.gv.at/news-items/expert-report-finds-progress-in-open-science-in-era-uneven-and-fragmented/` — Expert report finds progress in open science in ERA uneven and fragmented
+  6. `link:https://ellis.eu/publication/2004-knowledge-representation-for-semantic-multimedia-content-analysis-and` — Knowledge Representation for Semantic Multimedia Content Analysis and Reasoning
+  7. `link:https://ellis.eu/publication/2002-knowledge-based-multilingual-document-analysis` — Knowledge-Based Multilingual Document Analysis
+  8. `link:https://doi.org/10.48550/arxiv.2609.20650` — Multi-center Medical Data Mining with FL-Net - A One-stop Shop for Federated Learning
+  - … plus 39 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20260923T211548Z-44619dd3ec29`

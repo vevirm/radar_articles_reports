@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-24T10:56:27Z",
+  "generated_at": "2026-09-24T11:47:46Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -180194,8 +180194,1357 @@
       "deep_scan_package_id": "worker-a-20260924T095247Z-6c1fdba58312",
       "claims": [],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiowFBVV95cUxQUWF6NXZ4TFR5TmpJYXhJTjMtWVpYZlJXWkd0UXllanVaNzdIUEttZlpjdVVqa2IyT1M3b0w1ZzY4cGVWOVljV0pyTEpFWmZBOVczSVFUVDRrbkdTN1lmaFpyV2JlQkpqWGxSbUhIRDJGeC03dmU2XzNiaHQtYzdjRldWam1KVWZ5UGliU2VUUjRFZU5wdk1Tb3NTZ3hFY3RXRkV3?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "40e2737a",
+      "identity_hash": "f38820fa9649fb27",
+      "reader_title": "Lawmakers push EU AI liability rules",
+      "reader_what": "Four European Parliament lawmakers backed new product-liability rules for AI harms.",
+      "reader_why": "The proposal would change how injured users seek compensation and prove liability.",
+      "reader_more": "Politico reported that senior lawmakers from multiple groups want an AI liability instrument after earlier negotiations stalled. Their ideas include shifting parts of the evidentiary burden toward providers. The initiative remains a lawmaker proposal, not enacted EU law.",
+      "deep_analysis": {
+        "work_kind": "current policy development",
+        "research_question": "",
+        "main_finding": "Four European Parliament lawmakers backed new AI product-liability rules, including easier proof requirements for harmed users.",
+        "method_or_basis": "Reported statements by named lawmakers in a contemporaneous Politico article.",
+        "qualification": "The article reports a cross-party lawmaker push; it is not an adopted Commission proposal or enacted liability regime.",
+        "radar_relevance": "Substantive current EU AI-governance development.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "Opened https://news.google.com/rss/articles/CBMiowFBVV95cUxQUWF6NXZ4TFR5TmpJYXhJTjMtWVpYZlJXWkd0UXllanVaNzdIUEttZlpjdVVqa2IyT1M3b0w1ZzY4cGVWOVljV0pyTEpFWmZBOVczSVFUVDRrbkdTN1lmaFpyV2JlQkpqWGxSbUhIRDJGeC03dmU2XzNiaHQtYzdjRldWam1KVWZ5UGliU2VUUjRFZU5wdk1Tb3NTZ3hFY3RXRkV3?oc=5; it did not itself provide enough substantive text for a decision."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied or established for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title 'EU lawmakers float product liability rules to help avert AI disaster'; matching bibliographic/official results were found."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched 'EU lawmakers float product liability rules to help avert AI disaster' with 'Politico Europe' and 2026; results matched the same work."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching evidence at https://www.politico.eu/article/eu-lawmakers-ai-apocalypse-warnings-brussels-scrambles-ai-rules-gaps/."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "A bounded search using distinctive title/source terms corroborated the same identity and did not reveal a conflicting work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "news_full_text",
+            "url": "https://www.politico.eu/article/eu-lawmakers-ai-apocalypse-warnings-brussels-scrambles-ai-rules-gaps/",
+            "title": "EU lawmakers float product liability rules to help avert AI disaster",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Politico reporting and independent indexing matched the scanner headline and identified the specific European Parliament liability push."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "A concrete cross-party legislative push on AI liability is a substantive current EU governance development."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T11:47:42Z",
+      "deep_scan_package_id": "worker-b-20260924T095318Z-07f1c6c12977",
+      "claims": [
+        {
+          "object": "ai.governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Four European Parliament lawmakers",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-09-21",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The article reports a cross-party lawmaker push; it is not an adopted Commission proposal or enacted liability regime.",
+          "text": "Four European Parliament lawmakers proposed additional AI product-liability rules to improve redress for harms.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMiowFBVV95cUxQUWF6NXZ4TFR5TmpJYXhJTjMtWVpYZlJXWkd0UXllanVaNzdIUEttZlpjdVVqa2IyT1M3b0w1ZzY4cGVWOVljV0pyTEpFWmZBOVczSVFUVDRrbkdTN1lmaFpyV2JlQkpqWGxSbUhIRDJGeC03dmU2XzNiaHQtYzdjRldWam1KVWZ5UGliU2VUUjRFZU5wdk1Tb3NTZ3hFY3RXRkV3?oc=5",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:f38820fa9649fb27:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMipAFBVV95cUxPajhwN0pNUXd1bTByQVNWOWRPVVJuc3haRHNGVnZIYmJrYWlIU0ZNdlE2d3hNMF9RZXQ4LWFwSkJUblI4cldvZWlPSTVoeDJwRW9acmMwaHV5UmZDOVlWdE9XM3RsZFhoclVGclF6ZjFRcmFNUzZiSm1TemFiSTIzMFFRdGJOalJ5SXZZeHdkYTliZ0JlSWRfOWtMWXg3RWFISHVWRw?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "e95dd42f",
+      "identity_hash": "5d86a7f9074616b2",
+      "reader_title": "Spain sets a broader AI roadmap",
+      "reader_what": "Spain’s prime minister rejected industry self-regulation and announced public AI governance and compute measures.",
+      "reader_why": "The roadmap couples AI oversight with domestic compute, models, cybersecurity and infrastructure standards.",
+      "reader_more": "Reuters reported a 12-month Spanish roadmap that includes an AI gigafactory, public-interest models and stronger infrastructure requirements. Sánchez framed these steps as alternatives to industry self-regulation. They were announced measures, not completed outcomes.",
+      "deep_analysis": {
+        "work_kind": "current policy development",
+        "research_question": "",
+        "main_finding": "Spain’s prime minister rejected AI self-regulation and outlined a national roadmap including public compute and governance measures.",
+        "method_or_basis": "Reuters reporting on Pedro Sánchez’s public remarks and announced 12-month roadmap.",
+        "qualification": "The evidence is a prime-ministerial speech and roadmap announcement, not proof that new AI rules or infrastructure are already adopted or built.",
+        "radar_relevance": "Current member-state AI governance and compute-capacity signal.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "Opened https://news.google.com/rss/articles/CBMipAFBVV95cUxPajhwN0pNUXd1bTByQVNWOWRPVVJuc3haRHNGVnZIYmJrYWlIU0ZNdlE2d3hNMF9RZXQ4LWFwSkJUblI4cldvZWlPSTVoeDJwRW9acmMwaHV5UmZDOVlWdE9XM3RsZFhoclVGclF6ZjFRcmFNUzZiSm1TemFiSTIzMFFRdGJOalJ5SXZZeHdkYTliZ0JlSWRfOWtMWXg3RWFISHVWRw?oc=5; it did not itself provide enough substantive text for a decision."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied or established for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title 'Spanish PM Sanchez says AI industry cannot be self-regulated'; matching bibliographic/official results were found."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched 'Spanish PM Sanchez says AI industry cannot be self-regulated' with 'Reuters' and 2026; results matched the same work."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching evidence at https://www.reuters.com/world/spanish-pm-sanchez-says-ai-industry-cannot-be-self-regulated-2026-09-21/."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "A bounded search using distinctive title/source terms corroborated the same identity and did not reveal a conflicting work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "news_full_text",
+            "url": "https://www.reuters.com/world/spanish-pm-sanchez-says-ai-industry-cannot-be-self-regulated-2026-09-21/",
+            "title": "Spanish PM Sanchez says AI industry cannot be self-regulated",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Reuters matched the headline, date and speaker and provided substantive reporting on the announced Spanish AI roadmap."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "The speech announced a concrete national AI-governance and infrastructure roadmap."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T11:47:42Z",
+      "deep_scan_package_id": "worker-b-20260924T095318Z-07f1c6c12977",
+      "claims": [
+        {
+          "object": "ai.governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Government of Spain / Prime Minister Pedro Sánchez",
+            "class": "member_state"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-09-21",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "Spain"
+            ]
+          },
+          "kind": "advocacy",
+          "qualification": "The evidence is a prime-ministerial speech and roadmap announcement, not proof that new AI rules or infrastructure are already adopted or built.",
+          "text": "Spain’s prime minister argued that AI cannot be left to industry self-regulation and announced a broader public roadmap.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMipAFBVV95cUxPajhwN0pNUXd1bTByQVNWOWRPVVJuc3haRHNGVnZIYmJrYWlIU0ZNdlE2d3hNMF9RZXQ4LWFwSkJUblI4cldvZWlPSTVoeDJwRW9acmMwaHV5UmZDOVlWdE9XM3RsZFhoclVGclF6ZjFRcmFNUzZiSm1TemFiSTIzMFFRdGJOalJ5SXZZeHdkYTliZ0JlSWRfOWtMWXg3RWFISHVWRw?oc=5",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:5d86a7f9074616b2:1",
+          "attributes": {}
+        },
+        {
+          "object": "compute.gigafactory",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Government of Spain",
+            "class": "member_state"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-09-21",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "Spain"
+            ]
+          },
+          "kind": "action",
+          "qualification": "The gigafactory was described in a roadmap; construction and operating status were not established.",
+          "text": "Spain’s announced AI roadmap included a proposed AI gigafactory and public-model work with the Barcelona Supercomputing Center.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMipAFBVV95cUxPajhwN0pNUXd1bTByQVNWOWRPVVJuc3haRHNGVnZIYmJrYWlIU0ZNdlE2d3hNMF9RZXQ4LWFwSkJUblI4cldvZWlPSTVoeDJwRW9acmMwaHV5UmZDOVlWdE9XM3RsZFhoclVGclF6ZjFRcmFNUzZiSm1TemFiSTIzMFFRdGJOalJ5SXZZeHdkYTliZ0JlSWRfOWtMWXg3RWFISHVWRw?oc=5",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:5d86a7f9074616b2:2",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMinAFBVV95cUxQQ0ZPTHNsYmxNQS1GdkR0b2ZSQVhlN3BQcHM1R2dsMEVldlBTYXlTaXc3QWlfRURuWG5Nc1hYWG5XcHZ5TERONmVSNzlSRzhVT1dzNjNlYjRhLXNNZlB2TEcxR1JqNjdfbkJSV3JxZVpka0VnZkJ2TGFCUzJtbFBmWmwzNFFGZy1wMWxMSDNzSWU3TzhGRXl2QWdORmQ?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "fa3b899c",
+      "identity_hash": "e992155324786dc5",
+      "reader_title": "Horizon Missions face a continuation decision",
+      "reader_what": "A new assessment was positive, but the future of Horizon Europe Missions remained unsettled.",
+      "reader_why": "The assessment feeds directly into decisions on whether mission-style governance continues in the next EU research framework.",
+      "reader_more": "The recovered article reports a five-year assessment and the policy debate it triggered. It distinguishes favorable evaluation findings from the separate political decision about continuation. That makes it a current R&I-governance development rather than a generic programme page.",
+      "deep_analysis": {
+        "work_kind": "current R&I policy development",
+        "research_question": "",
+        "main_finding": "A five-year assessment gave Horizon Europe Missions positive marks while their continuation remained politically unsettled.",
+        "method_or_basis": "Science|Business reporting on a newly released assessment and the policy debate around the Missions.",
+        "qualification": "A favorable five-year assessment does not itself guarantee continuation of the Missions in the next framework programme.",
+        "radar_relevance": "Current evidence release and governance debate over a major Horizon Europe instrument.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "Opened https://news.google.com/rss/articles/CBMinAFBVV95cUxQQ0ZPTHNsYmxNQS1GdkR0b2ZSQVhlN3BQcHM1R2dsMEVldlBTYXlTaXc3QWlfRURuWG5Nc1hYWG5XcHZ5TERONmVSNzlSRzhVT1dzNjNlYjRhLXNNZlB2TEcxR1JqNjdfbkJSV3JxZVpka0VnZkJ2TGFCUzJtbFBmWmwzNFFGZy1wMWxMSDNzSWU3TzhGRXl2QWdORmQ?oc=5; it did not itself provide enough substantive text for a decision."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied or established for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title 'Will the Horizon Europe Missions survive?'; matching bibliographic/official results were found."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched 'Will the Horizon Europe Missions survive?' with 'Science|Business' and 2026; results matched the same work."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching evidence at https://sciencebusiness.net/news/r-d-funding/horizon-europe/will-horizon-europe-missions-survive."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "A bounded search using distinctive title/source terms corroborated the same identity and did not reveal a conflicting work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "news_full_text",
+            "url": "https://sciencebusiness.net/news/r-d-funding/horizon-europe/will-horizon-europe-missions-survive",
+            "title": "Will the Horizon Europe Missions survive?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The Science|Business article was recovered and reports a fresh assessment alongside uncertainty over the Missions’ future."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "The record reports a new evaluation and an active governance decision over a major EU R&I instrument."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T11:47:43Z",
+      "deep_scan_package_id": "worker-b-20260924T095318Z-07f1c6c12977",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission and Horizon Europe policymakers",
+            "class": "eu_body"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2026-09-22",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "A favorable five-year assessment does not itself guarantee continuation of the Missions in the next framework programme.",
+          "text": "A five-year assessment reported positive results for Horizon Europe Missions while their post-programme continuation remained unsettled.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMinAFBVV95cUxQQ0ZPTHNsYmxNQS1GdkR0b2ZSQVhlN3BQcHM1R2dsMEVldlBTYXlTaXc3QWlfRURuWG5Nc1hYWG5XcHZ5TERONmVSNzlSRzhVT1dzNjNlYjRhLXNNZlB2TEcxR1JqNjdfbkJSV3JxZVpka0VnZkJ2TGFCUzJtbFBmWmwzNFFGZy1wMWxMSDNzSWU3TzhGRXl2QWdORmQ?oc=5",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:e992155324786dc5:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMivwFBVV95cUxOTTlwd1dfQTB4MnpTcG41V3RPRExSempKRjVmcV9neWxWai05S0s0aUxWQTZJVEZ3VUVnWW1oMzVUQzZkQk1YZXhRY3JjOElHSzZLdGRHLW9lck93WmZGZEJpUm9zNlJaVnAzVkRiRDU1REluOXpXSFpIZEYwdzA0WWMwbUFmMVJzaUZPYU5xLTJuVmFWaVhOWm9DX3MyTlY3TnNTeHZab2ZkcnhNQmFCRHp0bkpmLXRQcFBfbkhvYw?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "16b46ae9",
+      "identity_hash": "1bd3163ee36b6a9e",
+      "reader_title": "ERC draws more US-based applicants",
+      "reader_what": "US-based ERC Starting Grant applications rose, with successful applicants required to relocate to European hosts.",
+      "reader_why": "ERC grant terms create a direct recruitment channel for researchers currently based in the United States.",
+      "reader_more": "The article reports 170 eligible US-based Starting Grant applications in 2026, compared with 113 in 2025 and 58 in 2024, and says 20 US-based winners must move to Europe. Interviews describe grant conditions as a major draw. These data do not measure overall US-to-Europe researcher migration.",
+      "deep_analysis": {
+        "work_kind": "current R&I talent development",
+        "research_question": "",
+        "main_finding": "US-based ERC Starting Grant applications rose sharply, and winning applicants must relocate to a European host institution.",
+        "method_or_basis": "Science|Business reporting using ERC application and award figures plus winner interviews.",
+        "qualification": "The figures cover 2026 ERC Starting Grant applications and winners based in the United States, not total scientific migration.",
+        "radar_relevance": "Direct current evidence on Europe’s research-talent attraction through ERC funding.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "Opened https://news.google.com/rss/articles/CBMivwFBVV95cUxOTTlwd1dfQTB4MnpTcG41V3RPRExSempKRjVmcV9neWxWai05S0s0aUxWQTZJVEZ3VUVnWW1oMzVUQzZkQk1YZXhRY3JjOElHSzZLdGRHLW9lck93WmZGZEJpUm9zNlJaVnAzVkRiRDU1REluOXpXSFpIZEYwdzA0WWMwbUFmMVJzaUZPYU5xLTJuVmFWaVhOWm9DX3MyTlY3TnNTeHZab2ZkcnhNQmFCRHp0bkpmLXRQcFBfbkhvYw?oc=5; it did not itself provide enough substantive text for a decision."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied or established for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title 'US-based ERC winners count the reasons for returning to Europe'; matching bibliographic/official results were found."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched 'US-based ERC winners count the reasons for returning to Europe' with 'Science|Business' and 2026; results matched the same work."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching evidence at https://sciencebusiness.net/news/r-d-funding/european-research-council/us-based-erc-winners-count-reasons-returning-europe."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "A bounded search using distinctive title/source terms corroborated the same identity and did not reveal a conflicting work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "news_full_text",
+            "url": "https://sciencebusiness.net/news/r-d-funding/european-research-council/us-based-erc-winners-count-reasons-returning-europe",
+            "title": "US-based ERC winners count the reasons for returning to Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered Science|Business reporting matched the title and supplied current application and winner figures."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "The article provides current quantified evidence about ERC-driven researcher recruitment from the United States."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T11:47:43Z",
+      "deep_scan_package_id": "worker-b-20260924T095318Z-07f1c6c12977",
+      "claims": [
+        {
+          "object": "talent.recruitment_abroad",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Research Council",
+            "class": "eu_body"
+          },
+          "mechanism": "recruits",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-09-22",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "effect",
+          "qualification": "The figures cover 2026 ERC Starting Grant applications and winners based in the United States, not total scientific migration.",
+          "text": "US-based eligible ERC Starting Grant applications increased in 2026, and successful applicants must move to European host institutions.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMivwFBVV95cUxOTTlwd1dfQTB4MnpTcG41V3RPRExSempKRjVmcV9neWxWai05S0s0aUxWQTZJVEZ3VUVnWW1oMzVUQzZkQk1YZXhRY3JjOElHSzZLdGRHLW9lck93WmZGZEJpUm9zNlJaVnAzVkRiRDU1REluOXpXSFpIZEYwdzA0WWMwbUFmMVJzaUZPYU5xLTJuVmFWaVhOWm9DX3MyTlY3TnNTeHZab2ZkcnhNQmFCRHp0bkpmLXRQcFBfbkhvYw?oc=5",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:1bd3163ee36b6a9e:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMinAFBVV95cUxNY0xnTnFPelBOUnV2dF9NRjNRejJ3SUI4STluWjh1TUZJVWNrRVlDT0xENXFPeUdGbjhiQ0JKbEoxR0VQdGZscG9aazBHcHhIWnA1ZUw2YWIzODlXNGRYc21xS1V5VXBOS0doVXNSQi1ELWt6dllRb3dseEcyMlE1c1pUdGc2dEFQLU5lV2Q4cjJyUnRXSUlaNzVURGI?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "fc7a5dc9",
+      "identity_hash": "bc84b197658adb8e",
+      "reader_title": "EU tightens data-centre efficiency policy",
+      "reader_what": "The Commission launched efficiency ratings and consulted on minimum energy and water standards for data centres.",
+      "reader_why": "These measures could condition future European data-centre expansion on resource-performance requirements.",
+      "reader_more": "The official Commission material confirms the new rating and consultation steps reported by Euronews. Minimum performance standards were still under development, with a legislative proposal expected later. The record therefore supports a current regulatory-development claim, not an implemented standards outcome.",
+      "deep_analysis": {
+        "work_kind": "current regulatory development",
+        "research_question": "",
+        "main_finding": "The Commission launched an EU data-centre efficiency rating scheme and consultation toward minimum energy and water performance standards.",
+        "method_or_basis": "European Commission energy-efficiency pages and consultation announcement, corroborating the Euronews report.",
+        "qualification": "The rating scheme and consultation are current EU policy steps; minimum performance standards were not yet adopted and were planned for later legislation.",
+        "radar_relevance": "Direct current regulation of infrastructure underpinning European compute capacity.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "Opened https://news.google.com/rss/articles/CBMinAFBVV95cUxNY0xnTnFPelBOUnV2dF9NRjNRejJ3SUI4STluWjh1TUZJVWNrRVlDT0xENXFPeUdGbjhiQ0JKbEoxR0VQdGZscG9aazBHcHhIWnA1ZUw2YWIzODlXNGRYc21xS1V5VXBOS0doVXNSQi1ELWt6dllRb3dseEcyMlE1c1pUdGc2dEFQLU5lV2Q4cjJyUnRXSUlaNzVURGI?oc=5; it did not itself provide enough substantive text for a decision."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied or established for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title 'EU moves to curb data centre energy and water use'; matching bibliographic/official results were found."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched 'EU moves to curb data centre energy and water use' with 'Euronews' and 2026; results matched the same work."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching evidence at https://energy.ec.europa.eu/news/minimum-performance-standards-data-centres-europe-public-consultation-launched-2026-09-21_en."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "A bounded search using distinctive title/source terms corroborated the same identity and did not reveal a conflicting work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_web",
+            "url": "https://energy.ec.europa.eu/news/minimum-performance-standards-data-centres-europe-public-consultation-launched-2026-09-21_en",
+            "title": "Minimum performance standards for data centres in Europe: public consultation launched",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_web",
+            "url": "https://energy.ec.europa.eu/topics/energy-efficiency/energy-efficiency-targets-directive-and-rules/energy-efficiency-directive/energy-performance-data-centres_en",
+            "title": "Energy performance of data centres",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Euronews’ report was corroborated with the Commission’s official consultation and data-centre energy-performance material."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_DEVELOPMENT",
+        "reason": "A new Commission consultation and rating scheme are substantive current data-centre policy actions."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T11:47:43Z",
+      "deep_scan_package_id": "worker-b-20260924T095318Z-07f1c6c12977",
+      "claims": [
+        {
+          "object": "datacentre.energy_supply",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "regulates",
+          "direction": "becomes_conditional",
+          "status": "proposed",
+          "status_date": "2026-09-21",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The rating scheme and consultation are current EU policy steps; minimum performance standards were not yet adopted and were planned for later legislation.",
+          "text": "The Commission launched data-centre efficiency measures and consulted on future minimum energy and water performance standards.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMinAFBVV95cUxNY0xnTnFPelBOUnV2dF9NRjNRejJ3SUI4STluWjh1TUZJVWNrRVlDT0xENXFPeUdGbjhiQ0JKbEoxR0VQdGZscG9aazBHcHhIWnA1ZUw2YWIzODlXNGRYc21xS1V5VXBOS0doVXNSQi1ELWt6dllRb3dseEcyMlE1c1pUdGc2dEFQLU5lV2Q4cjJyUnRXSUlaNzVURGI?oc=5",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:bc84b197658adb8e:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:095d418b7242cbd0": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "f4e0942a",
+      "identity_hash": "6463add7e6c889f7",
+      "reader_title": "Improving ESRC research-data sharing",
+      "reader_what": "An independent review found barriers in ESRC data-sharing practice and recommended clearer, more proportionate policy.",
+      "reader_why": "Its mixed evidence directly tests how a national research funder can make data sharing more workable.",
+      "reader_more": "The report combines document analysis, a survey and focus groups with legal and policy review. It recommends improving data-management planning, deposit practices, treatment of sensitive data and responsibilities of users. The evidence is specific to ESRC-funded research and should not be generalized to all European open-science systems.",
+      "deep_analysis": {
+        "work_kind": "research policy report",
+        "research_question": "How should ESRC research-data policy be improved?",
+        "main_finding": "The review found practical barriers to data sharing and proposed clearer, more proportionate ESRC policy and implementation.",
+        "method_or_basis": "Analysis of data-management plans, a researcher survey, focus groups and policy/legal review.",
+        "qualification": "The report is an independent UK funder-policy study; its findings concern ESRC data-sharing practice rather than all European open science.",
+        "radar_relevance": "Historical evidence on a recognized research-system mechanism: funder data-sharing and open-research policy.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.ukri.org/wp-content/uploads/2024/05/ESRC-15052024-Doing-ESRC-Data-Better.pdf; the package contains substantive matching pdf excerpt used for identity and content verification."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_pdf",
+            "url": "https://www.ukri.org/wp-content/uploads/2024/05/ESRC-15052024-Doing-ESRC-Data-Better.pdf",
+            "title": "Independent review of the ESRC research data policy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The PDF identifies the University of Dundee team, the ESRC-funded study, its methods and detailed recommendations."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A completed evidence-led study directly evaluates research-data governance in a European national funding system."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T11:47:44Z",
+      "deep_scan_package_id": "worker-b-20260924T095318Z-07f1c6c12977",
+      "claims": [
+        {
+          "object": "research.openness",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Economic and Social Research Council",
+            "class": "national_funder"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2024",
+          "scope": {
+            "level": "associated_country",
+            "countries": [
+              "United Kingdom"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "The report is an independent UK funder-policy study; its findings concern ESRC data-sharing practice rather than all European open science.",
+          "text": "An independent review found that ESRC data-sharing policy needed clearer implementation, sensitivity tiers and stronger deposit practices.",
+          "confidence": "high",
+          "status_date_precision": "year",
+          "record_key": "historical:id:095d418b7242cbd0",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:6463add7e6c889f7:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:e78ffe91db1790f9": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "902de4f6",
+      "identity_hash": "d3ca0fa5a5dc77a7",
+      "reader_title": "Evaluating transformative innovation policy",
+      "reader_what": "A Swedish cross-case study proposes a transformation-oriented evaluation framework and identifies gaps in current practice.",
+      "reader_why": "Evaluation design shapes whether innovation programmes can learn about system change rather than only count conventional outputs.",
+      "reader_more": "The article adapts an established innovation-policy evaluation framework for transformative policy and tests it across three Swedish programmes. It finds evaluation practice only partly reflects transformation-oriented needs and highlights challenges around scope, learning and stakeholder involvement. The study is nationally bounded, but the research-system mechanism is directly relevant to European R&I governance.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed innovation-policy study",
+        "research_question": "How should transformative innovation policy be evaluated, and how far does Swedish practice align?",
+        "main_finding": "The authors adapt an evaluation framework for transformative innovation policy and find partial alignment plus recurring implementation challenges in Sweden.",
+        "method_or_basis": "Literature-derived analytical framework and cross-case comparison of three Swedish innovation programmes.",
+        "qualification": "The empirical test covers three Swedish innovation programmes; the proposed evaluation framework is broader but not validated across all European systems.",
+        "radar_relevance": "Historical evidence on innovation-policy evaluation design in a European national R&I system.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://research.chalmers.se/publication/544489/file/544489_Fulltext.pdf; the package contains substantive matching pdf excerpt used for identity and content verification."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://research.chalmers.se/publication/544489/file/544489_Fulltext.pdf",
+            "title": "When theory meets practice in transformative innovation policy evaluation: experiences from Sweden",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The Chalmers repository copy and DOI identify the peer-reviewed Research Evaluation article and its Swedish cross-case analysis."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The article directly studies evaluation practice in Sweden’s innovation-policy system and proposes an evidence-based assessment framework."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T11:47:44Z",
+      "deep_scan_package_id": "worker-b-20260924T095318Z-07f1c6c12977",
+      "claims": [
+        {
+          "object": "research.assessment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Haddad, Wise and Arnold",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2024-12-15",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "Sweden"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "The empirical test covers three Swedish innovation programmes; the proposed evaluation framework is broader but not validated across all European systems.",
+          "text": "A cross-case study found that transformative innovation policy requires broader, more formative evaluation practices than conventional programme evaluation.",
+          "confidence": "high",
+          "record_key": "historical:id:e78ffe91db1790f9",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:d3ca0fa5a5dc77a7:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:a5d8eeaff9fe0aff": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "de044ce8",
+      "identity_hash": "16181a85ab998d0c",
+      "reader_title": "Rethinking Europe’s chip strategy",
+      "reader_what": "Interface argues Europe should prioritize strategic supplier strengths and coordinated policy over simple semiconductor production-share targets.",
+      "reader_why": "Its value-chain analysis identifies where European leverage and dependencies actually sit.",
+      "reader_more": "The paper reviews the EU Chips Act and Europe’s positions across the semiconductor value chain. It argues that capacity-share targets and subsidy competition can distract from Europe’s strongest strategic assets, including manufacturing equipment, chemicals and specialized chips. The recommendations are advocacy, not measured policy effects.",
+      "deep_analysis": {
+        "work_kind": "policy analysis / perspective",
+        "research_question": "What semiconductor strategy should Europe pursue beyond subsidy competition?",
+        "main_finding": "The paper argues Europe should build on strategic supplier strengths and coordinated member-state action rather than chase production-share targets alone.",
+        "method_or_basis": "Semiconductor value-chain analysis and policy argument based on Europe’s existing industrial positions and the Chips Act design.",
+        "qualification": "This is a think-tank policy perspective and advocacy argument, not a causal evaluation of the EU Chips Act.",
+        "radar_relevance": "Historical strategic analysis of European semiconductor capability and policy.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.interface-eu.org/publications/download/europe-semiconductor-strategy; the package contains substantive matching pdf excerpt used for identity and content verification."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_pdf",
+            "url": "https://www.interface-eu.org/publications/download/europe-semiconductor-strategy",
+            "title": "The Missing Strategy in Europe's Chip Ambitions",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The Interface PDF supplies the complete perspective, named author, date and detailed semiconductor-policy argument."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The work directly analyzes Europe’s semiconductor capability, dependencies and strategic policy choices."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T11:47:45Z",
+      "deep_scan_package_id": "worker-b-20260924T095318Z-07f1c6c12977",
+      "claims": [
+        {
+          "object": "chips.fab",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Interface",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "advocates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2024-07-30",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "This is a think-tank policy perspective and advocacy argument, not a causal evaluation of the EU Chips Act.",
+          "text": "Interface argued that Europe’s chip strategy should prioritize strategic value-chain strengths and coordinated policy rather than production-share targets alone.",
+          "confidence": "high",
+          "record_key": "historical:id:a5d8eeaff9fe0aff",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:16181a85ab998d0c:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:61635393ea017006": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "1755c76d",
+      "identity_hash": "586b552e9b0847c1",
+      "reader_title": "PhDs working beyond academia",
+      "reader_what": "CESAER maps models for PhD collaboration with industry and other non-academic partners across Europe.",
+      "reader_why": "These partnerships link research careers, knowledge transfer and industrial innovation.",
+      "reader_more": "The report draws on a CESAER workshop and institutional examples from European universities. It discusses intellectual property, publication timing and alignment between academic and partner expectations, then offers recommendations to universities, industry and policymakers. The evidence is illustrative rather than Europe-wide representative.",
+      "deep_analysis": {
+        "work_kind": "university-group policy report",
+        "research_question": "How can European PhD programmes engage non-academic partners while preserving research quality?",
+        "main_finding": "CESAER identifies collaboration models and recommends conditions for stronger university–industry doctoral engagement across Europe.",
+        "method_or_basis": "Workshop evidence, institutional case examples and stakeholder discussion led by CESAER’s Task Force Innovation.",
+        "qualification": "The report synthesizes selected university and partner cases; it is not a representative evaluation of all European doctoral-industry collaboration.",
+        "radar_relevance": "Historical evidence on research careers, collaboration and knowledge transfer in European R&I.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.cesaer.org/content/5-operations/2024/20241017-phd-report/20241017-report-models-of-engagement-for-phds-with-non-academic-partners.pdf; the package contains substantive matching pdf excerpt used for identity and content verification."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_pdf",
+            "url": "https://www.cesaer.org/content/5-operations/2024/20241017-phd-report/20241017-report-models-of-engagement-for-phds-with-non-academic-partners.pdf",
+            "title": "Enhancing PhD cooperation with industry to drive European innovation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The CESAER PDF is a dated report describing evidence from a 2023 workshop and examples from European universities."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The report’s substantive object is a European R&I-system mechanism: doctoral collaboration with industry and other non-academic partners."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T11:47:45Z",
+      "deep_scan_package_id": "worker-b-20260924T095318Z-07f1c6c12977",
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "CESAER",
+            "class": "university_group"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2024-10-17",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "The report synthesizes selected university and partner cases; it is not a representative evaluation of all European doctoral-industry collaboration.",
+          "text": "CESAER recommended expanding well-governed PhD collaboration with non-academic partners to strengthen European innovation and knowledge transfer.",
+          "confidence": "high",
+          "record_key": "historical:id:61635393ea017006",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:586b552e9b0847c1:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:a34c49c48c80878c": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "4e3058f8",
+      "identity_hash": "e04c1202fad7de58",
+      "reader_title": "A reusable national foresight workflow",
+      "reader_what": "Demos Helsinki combines scanning, Delphi, backcasting and scenario workshops into a transferable national foresight process.",
+      "reader_why": "The staged workflow links expert elicitation, alternative futures and action-oriented testing.",
+      "reader_more": "The described project begins with environmental scanning and a Delphi exercise, then uses backcasting, a futures table and scenario construction, followed by a testing and training seminar. Four Tanzanian forest futures to 2035 were produced. The page documents the workflow clearly enough for methodological reuse, although it does not compare performance against other foresight methods.",
+      "deep_analysis": {
+        "work_kind": "foresight method description",
+        "research_question": "How can national actors build and test alternative long-term futures?",
+        "main_finding": "Demos Helsinki describes a transferable workflow combining scanning, Delphi, backcasting, scenario construction and stakeholder testing.",
+        "method_or_basis": "Three-stage process applied to Tanzanian forest futures to 2035 with 34 experts and facilitated workshops.",
+        "qualification": "This is a project-based method description; the evidence demonstrates the workflow, not comparative superiority over other foresight approaches.",
+        "radar_relevance": "Reusable foresight method rather than a Europe-specific substantive claim.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://demoshelsinki.fi/how-to-reveal-alternative-futures-for-nationslangen/; the package contains substantive matching substantial web text used for identity and content verification."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://demoshelsinki.fi/how-to-reveal-alternative-futures-for-nationslangen/",
+            "title": "How to reveal alternative futures for nations? | Demos Helsinki",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The Demos Helsinki page describes the actual three-stage foresight workflow and its application to Tanzanian forest futures."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The page describes a concrete, transferable multi-stage foresight method rather than merely advertising a service."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T11:47:45Z",
+      "deep_scan_package_id": "worker-b-20260924T095318Z-07f1c6c12977",
+      "claims": [
+        {
+          "object": "methods.delphi",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Demos Helsinki",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2015-09-21",
+          "scope": {
+            "level": "external",
+            "countries": [
+              "Tanzania"
+            ]
+          },
+          "kind": "action",
+          "qualification": "This is a project-based method description; the evidence demonstrates the workflow, not comparative superiority over other foresight approaches.",
+          "text": "The workflow uses environmental scanning and a Delphi process with experts to structure future drivers and uncertainties.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "historical:id:a34c49c48c80878c",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:e04c1202fad7de58:1"
+        },
+        {
+          "object": "methods.scenario",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Demos Helsinki",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2015-09-21",
+          "scope": {
+            "level": "external",
+            "countries": [
+              "Tanzania"
+            ]
+          },
+          "kind": "action",
+          "qualification": "The scenario workflow is demonstrated in one national forest-sector project rather than benchmarked against alternatives.",
+          "text": "The method combines a futures table, backcasting and facilitated scenario building to produce four alternative futures.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "historical:id:a34c49c48c80878c",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:e04c1202fad7de58:2"
+        },
+        {
+          "object": "methods.roadmapping",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Demos Helsinki",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2015-09-21",
+          "scope": {
+            "level": "external",
+            "countries": [
+              "Tanzania"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Backcasting is used as part of the wider foresight process rather than evaluated as a standalone method.",
+          "text": "Backcasting and final stakeholder testing connect alternative futures to action-oriented discussion.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "historical:id:a34c49c48c80878c",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:e04c1202fad7de58:3"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.eurohpc-ju.europa.eu/europe-and-latin-america-strengthen-digital-ties-high-performance-computing-and-ai-2026-09-23_en": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "b2256dbe",
+      "identity_hash": "6c6803a43e4018d4",
+      "reader_title": "EuroHPC links Europe and Latin America",
+      "reader_what": "EuroHPC launched an EU–Latin America network connecting supercomputing capacity, AI use cases and research partners.",
+      "reader_why": "Shared HPC infrastructure can widen international access to European compute and deepen research collaboration.",
+      "reader_more": "The official EuroHPC announcement says implementation began in August 2026 and runs for two years. It links European HPC and research institutions with partners in seven Latin American countries and builds on BELLA connectivity. The source supports the existence and scope of the network, not claims about its eventual impact.",
+      "deep_analysis": {
+        "work_kind": "official programme development",
+        "research_question": "",
+        "main_finding": "EuroHPC launched an EU–Latin America supercomputing network for AI, linking European HPC institutions with partners in seven Latin American countries.",
+        "method_or_basis": "Official EuroHPC JU announcement describing a two-year implementation, partners, use cases and connectivity.",
+        "qualification": "The source establishes launch and implementation of the EU–LAC network, not downstream economic or research impacts.",
+        "radar_relevance": "Direct current European compute and international R&I cooperation.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.eurohpc-ju.europa.eu/europe-and-latin-america-strengthen-digital-ties-high-performance-computing-and-ai-2026-09-23_en; the package contains substantive matching substantial web text used for identity and content verification."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.eurohpc-ju.europa.eu/europe-and-latin-america-strengthen-digital-ties-high-performance-computing-and-ai-2026-09-23_en",
+            "title": "Europe and Latin America strengthen digital ties with High-Performance Computing and AI",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The EuroHPC page is an official substantive announcement with project scope, participants and implementation details."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The official announcement reports an operating EU-backed international HPC and AI research collaboration."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T11:47:46Z",
+      "deep_scan_package_id": "worker-b-20260924T095318Z-07f1c6c12977",
+      "claims": [
+        {
+          "object": "digital.international_partnerships",
+          "secondary_objects": [],
+          "actor": {
+            "name": "EuroHPC Joint Undertaking",
+            "class": "eu_body"
+          },
+          "mechanism": "launches",
+          "direction": "expands",
+          "status": "operating",
+          "status_date": "2026-09-23",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The source establishes launch and implementation of the EU–LAC network, not downstream economic or research impacts.",
+          "text": "EuroHPC launched the EU–LAC Supercomputing Network for AI to connect European HPC capacity with Latin American partners.",
+          "confidence": "high",
+          "record_key": "link:https://www.eurohpc-ju.europa.eu/europe-and-latin-america-strengthen-digital-ties-high-performance-computing-and-ai-2026-09-23_en",
+          "merit": 99,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:6c6803a43e4018d4:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.atlanticcouncil.org/wp-content/uploads/2026/09/AI_Data_Under_Microscope.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "6661ce67",
+      "identity_hash": "fba8b330f106e21b",
+      "reader_title": "Global AI-health data governance",
+      "reader_what": "The report compares health and biopharma AI-data governance globally, with the EU as one jurisdiction.",
+      "reader_more": "It contains substantive analysis, but its main object is the global AI-data supply chain and US-centered security concerns. European regulation is one part of a broader comparison, so the European R&I connection is incidental for Strand A.",
+      "deep_analysis": {
+        "work_kind": "policy report",
+        "research_question": "",
+        "main_finding": "The report analyzes global health and biopharma AI-data supply chains across multiple jurisdictions.",
+        "method_or_basis": "Comparative legal and policy analysis spanning the United States, EU, China, India and other regimes.",
+        "qualification": "The EU is one regulatory comparator in a global study; the substantive object is not the European R&I system.",
+        "radar_relevance": "The report does not satisfy Strand A because Europe is not the central R&I object.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.atlanticcouncil.org/wp-content/uploads/2026/09/AI_Data_Under_Microscope.pdf; the package contains substantive matching pdf excerpt used for identity and content verification."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_pdf",
+            "url": "https://www.atlanticcouncil.org/wp-content/uploads/2026/09/AI_Data_Under_Microscope.pdf",
+            "title": "AI data under the microscope: Accelerating and securing the AI data supply chain for the health and biopharmaceutical sectors",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The Atlantic Council PDF identifies Justin Sherman as author and presents a global comparison of AI-data regulation in health and biopharma."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NO_SUBSTANTIVE_EU_RI",
+        "reason": "The recovered work is substantive but global; Europe is a comparator rather than the central R&I-system object."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T11:47:46Z",
+      "deep_scan_package_id": "worker-b-20260924T095318Z-07f1c6c12977",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://era.gv.at/news-items/canada-in-favour-of-deepending-research-and-education-cooperation-with-eu/": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "ef607ded",
+      "identity_hash": "a63d2bba18bc9ba5",
+      "reader_title": "Canada seeks deeper EU research ties",
+      "reader_what": "Canada’s prime minister proposed association with the next EU research framework and deeper frontier-technology cooperation.",
+      "reader_why": "Association would directly widen shared funding, institutional collaboration and access to European research programmes.",
+      "reader_more": "The official speech states that future framework-programme association would let Canada and Europe pool resources, cooperate on frontier technology and leverage research institutions and universities. It also places research cooperation within a broader strategic-capabilities agenda. The statement is an intention, not an agreed association deal.",
+      "deep_analysis": {
+        "work_kind": "international R&I policy statement",
+        "research_question": "",
+        "main_finding": "Canada’s prime minister proposed deeper EU research cooperation, including association with the next framework programme.",
+        "method_or_basis": "Official Canadian prime ministerial speech to the European Parliament.",
+        "qualification": "This is a Canadian government proposal for future association; it is not an EU acceptance or completed FP10 association agreement.",
+        "radar_relevance": "Direct proposal to expand an associated country’s participation in EU R&I programmes.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "Opened https://era.gv.at/news-items/canada-in-favour-of-deepending-research-and-education-cooperation-with-eu/; it did not itself provide enough substantive text for a decision."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied or established for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title 'Canada looks forward to deepening research and education cooperation with EU'; matching bibliographic/official results were found."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched 'Canada looks forward to deepening research and education cooperation with EU' with 'ERA Portal Austria' and 2026; results matched the same work."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching evidence at https://www.pm.gc.ca/en/news/speeches/2026/09/17/prime-minister-carney-delivers-address-european-parliament."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "A bounded search using distinctive title/source terms corroborated the same identity and did not reveal a conflicting work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_speech",
+            "url": "https://www.pm.gc.ca/en/news/speeches/2026/09/17/prime-minister-carney-delivers-address-european-parliament",
+            "title": "Prime Minister Carney delivers address to the European Parliament",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The ERA landing page was thin; the Canadian prime minister’s official speech supplied the underlying statements about future Horizon association."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The underlying official speech directly concerns Canada–EU research cooperation and future framework-programme association."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T11:47:46Z",
+      "deep_scan_package_id": "worker-b-20260924T095318Z-07f1c6c12977",
+      "claims": [
+        {
+          "object": "horizon.association",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Government of Canada",
+            "class": "third_country"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "intention",
+          "status_date": "2026-09-17",
+          "scope": {
+            "level": "associated_country",
+            "countries": [
+              "Canada"
+            ]
+          },
+          "kind": "action",
+          "qualification": "This is a Canadian government proposal for future association; it is not an EU acceptance or completed FP10 association agreement.",
+          "text": "Canada’s prime minister proposed association with the next EU framework programme to pool resources and cooperate on frontier technologies.",
+          "confidence": "high",
+          "record_key": "link:https://era.gv.at/news-items/canada-in-favour-of-deepending-research-and-education-cooperation-with-eu/",
+          "merit": 69,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:a63d2bba18bc9ba5:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-09-24T10:56:27Z"
+  "claims_updated_at": "2026-09-24T11:47:46Z"
 }
