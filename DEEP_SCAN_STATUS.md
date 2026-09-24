@@ -6,30 +6,30 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1915** (Main **997** + Historical **918**)
-- Automatic queue still needing V2 verification: **124** (Main **45** + Historical **79**)
-- Currently assigned to workers: **120** (Main **45** + Historical **75**)
+- Authoritative V2 verified: **1967** (Main **1011** + Historical **956**)
+- Automatic queue still needing V2 verification: **71** (Main **30** + Historical **41**)
+- Currently assigned to workers: **71** (Main **30** + Historical **41**)
 - Bounded access-recovery retries still eligible: **0**
-- Hands-on verification needed: **13**
-- Automatic queue pending and not yet assigned: **4**
+- Hands-on verification needed: **14**
+- Automatic queue pending and not yet assigned: **0**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260924T095247Z-6c1fdba58312`
-- Assigned unresolved records: **60**
-  1. `historical:id:bc665999887802f2` — ALLEA Participates in EU-Funded Project to Support Reforms in Research Assessment - ALLEA
-  2. `historical:id:7a6b1859e290bf8d` — Innovation Wars: How China Is Gaining on the United States in Corporate R&D
-  3. `historical:id:975c2b201ea7d1ec` — How China Divides Europe and the United States
-  4. `historical:id:df7334496eb36789` — A Compass to Guide EU Policy in Support of Business Competitiveness
-  5. `historical:id:9c46d0586d96396f` — ALLEA Joins the European Commission Coalition on Research Assessment Reform - ALLEA
-  6. `historical:id:d8cc69968937a4cd` — Europe’s dependence on Chinese semiconductor manufacturing - Digital Power China Report
-  7. `historical:id:cef3cfdeb1591a87` — Explanatory models of regional innovation performance in Europe: policy implications for regions
-  8. `link:https://doi.org/10.1080/10438599.2026.2693627` — Do wage pressure and government R&D stimulate business R&D? Regional level evidence from Europe — recovery attempt 3/3
-  - … plus 52 more in the package manifest
+- Current package: `worker-a-20260924T110112Z-53a179411e7d`
+- Assigned unresolved records: **11**
+  1. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTFB3X2lIVGxXMmR6YnJya2xIS2t0WGs0UWZlN0hCNFdQWDAzTVpZWGJVT2VaNnFHa0xDVXpaSG9CNlBWeXVLWXR2M3pNbGxYS0laSWdyN05ETFhCNEp0OEtlOXVSSlBPRDRSUFBPb242Z1JGdVJXZ2xQU1ZEUUxsQQ?oc=5` — THE HACK: EU progress on industrial AI push — recovery attempt 3/3
+  2. `link:https://news.google.com/rss/articles/CBMiiAFBVV95cUxPd0hNY0hZU3UySUVzcXFVREJmT0lUQk5QZGJVcXVrck1lYl9BY1UzaDdUamtzbmpKNUNka216YXB6eEc4NTFka0hRR3p4dGFJQjZCdHJTYnNyRlFyUnV4UE0taXRlWWFQdU4ycUtSSVIzVDJwRXJWZTR2ZkJzb3R3M0dJcERGenAt?oc=5` — THE HACK: EU data centre push amid fossil fuel risk — recovery attempt 3/3
+  3. `link:https://doi.org/10.1016/j.ejps.2026.107570` — European science for health research needs and priorities — recovery attempt 2/3
+  4. `historical:id:9b579a1a37c6d632` — Consumer flash fiction: A methodology to support the early sensing of far-future innovation opportunities
+  5. `historical:id:2084a8c4b9bba7a3` — Analysis of Smart Technologies Used in Smart Hotels
+  6. `historical:id:256f788e05840f94` — Foresight and strategic decision-making framework from artificial intelligence technology development to utilization activities in small-and-medium-sized enterprises
+  7. `historical:id:388a8f406be45f71` — A probabilistic cross‐impact methodology for explorative scenario analysis
+  8. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=8baf21ed-b790-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — DRAFT REPORT - on the proposal for a regulation of the European Parliament and of the Council on the European Union Agency for Cybersecurity (ENISA), the European cybersecurity certification framework, and ICT supply chain security and repealing Regulation (EU) 2019/881 (The Cybersecurity Act 2) - (COM(2026)0011 - C10-0015/2026 - 2026/0011(COD)) - Committee on Industry, Research and Energy - Rapporteur: Markéta Gregorová - Publications Office of the EU — recovery attempt 2/3
+  - … plus 3 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260924T095318Z-07f1c6c12977`
+- Current package: `worker-b-20260924T110136Z-07f1c6c12977`
 - Assigned unresolved records: **60**
   1. `link:https://news.google.com/rss/articles/CBMiowFBVV95cUxQUWF6NXZ4TFR5TmpJYXhJTjMtWVpYZlJXWkd0UXllanVaNzdIUEttZlpjdVVqa2IyT1M3b0w1ZzY4cGVWOVljV0pyTEpFWmZBOVczSVFUVDRrbkdTN1lmaFpyV2JlQkpqWGxSbUhIRDJGeC03dmU2XzNiaHQtYzdjRldWam1KVWZ5UGliU2VUUjRFZU5wdk1Tb3NTZ3hFY3RXRkV3?oc=5` — EU lawmakers float product liability rules to help avert AI disaster
   2. `link:https://news.google.com/rss/articles/CBMipAFBVV95cUxPajhwN0pNUXd1bTByQVNWOWRPVVJuc3haRHNGVnZIYmJrYWlIU0ZNdlE2d3hNMF9RZXQ4LWFwSkJUblI4cldvZWlPSTVoeDJwRW9acmMwaHV5UmZDOVlWdE9XM3RsZFhoclVGclF6ZjFRcmFNUzZiSm1TemFiSTIzMFFRdGJOalJ5SXZZeHdkYTliZ0JlSWRfOWtMWXg3RWFISHVWRw?oc=5` — Spanish PM Sanchez says AI industry cannot be self-regulated
@@ -62,3 +62,4 @@ These works no longer consume automatic Deep Scan slots. Their identity is belie
 - `historical:id:9f7aa4b8571cb32b` — **Science Diplomacy for Eastern Europe: A New Beginning** — attempts: 3/3 — Science Diplomacy — 2022-01-01 — Identity is verified, but all recovery routes led only to metadata or request-a-copy pages, not substantive evidence. — https://doi.org/10.1126/scidip.adf8092
 - `link:https://doi.org/10.1108/fs-06-2015-0036` — **Strategic planning and foresight: the case of Smart Specialisation Strategy in Tuscany** — attempts: 3/3 — foresight — 2016-09-12 — The article identity is verified, but the full paper could not be recovered; available sources expose only structured-abstract material and citations. — https://doi.org/10.1108/fs-06-2015-0036
 - `link:https://news.google.com/rss/articles/CBMimwFBVV95cUxOUWR1bzN3YkNacm5ZT3dwUGtzU3BsNnRBcUdyT3hZNkl3X0h1RWlFa2tEYkdTZUktRXFmeG02cGplNEhoYlg0ZlpZWkRJdU1lVTZGWWt0NHR6Q1JKdk1EN1JfSTJuYlpvQ1FFQm1EelpXZVBKV3dJRFZCOWtlN2hCaTEteGxKbW12NVNmY1pvVHE2ZjdyMDhyWXdpcw?oc=5` — **Spanish vaccine maker urges broader EU incentives for innovation** — attempts: 3/3 — Euractiv — 2026-07-28T07:00Z — The Euractiv report is identifiable, but the article body is paywalled and no substantive matching copy was recovered. — https://news.google.com/rss/articles/CBMimwFBVV95cUxOUWR1bzN3YkNacm5ZT3dwUGtzU3BsNnRBcUdyT3hZNkl3X0h1RWlFa2tEYkdTZUktRXFmeG02cGplNEhoYlg0ZlpZWkRJdU1lVTZGWWt0NHR6Q1JKdk1EN1JfSTJuYlpvQ1FFQm1EelpXZVBKV3dJRFZCOWtlN2hCaTEteGxKbW12NVNmY1pvVHE2ZjdyMDhyWXdpcw?oc=5
+- `link:https://doi.org/10.1080/10438599.2026.2693627` — **Do wage pressure and government R&D stimulate business R&D? Regional level evidence from Europe** — attempts: 3/3 — Economics of Innovation and New Technology — 2026-06-29 — Identity is verified, but only abstract/repository metadata was recoverable; substantive full evidence remained inaccessible. — https://doi.org/10.1080/10438599.2026.2693627
