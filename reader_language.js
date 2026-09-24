@@ -9,7 +9,7 @@
     [/\/priorities\/?$/,'priorities'],
     [/\/shocks\/variants(?:\.html)?\/?$/,'shocks-variants'],
     [/\/shocks\/?$/,'shocks'],
-    [/\/2035\/?$/,'future'],
+    [/\/2035(?:\/[^/]+)?\/?$/,'future'],
     [/\/read\/?$/,'read'],
     [/\/briefing\/?$/,'briefing'],
     [/\/glossary\/?$/,'glossary'],
