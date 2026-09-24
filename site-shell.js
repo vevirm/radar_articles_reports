@@ -90,7 +90,7 @@
     {match:/\/priorities\/?$/,key:'priorities',title:'Risks & Opportunities',purpose:'Possible consequences for European research and innovation.'},
     {match:/\/shocks\/variants(?:\.html)?\/?$/,key:'shocks-variants',title:'Shock Variants',purpose:'Alternative forms, absorbers and counter-evidence for one supported external-shock mechanism.'},
     {match:/\/shocks\/?$/,key:'shocks',title:'External Shocks',purpose:'Possible disruptions to European research and innovation.'},
-    {match:/\/2035(?:\/[^/]+)?\/?$/,key:'future',title:'2035',purpose:'Four possible Europes in 2035, shaped by resources and global connectedness.'},
+    {match:/\/2035(?:\/[^/]+)?\/?$/,key:'future',title:'2035',purpose:'Alternative scenario spaces for Europe in 2035, rebuilt from the Radar’s current findings.'},
     {match:/\/(historical|history)\/?$/,key:'historical',title:'Earlier Findings',purpose:'Findings published before the Radar started scanning.'},
     {match:/\/literature\/?$/,key:'literature',title:'Sources',purpose:'Where the findings come from.'},
     {match:/\/briefing\/?$/,key:'briefing',title:'Topics',purpose:'What the Radar is seeing, grouped by subject.'},
