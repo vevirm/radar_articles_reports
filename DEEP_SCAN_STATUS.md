@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260924T225103Z-a89f3aae9af0`
+- Current package: `worker-a-20260924T225742Z-a89f3aae9af0`
 - Assigned unresolved records: **27**
   1. `link:https://doi.org/10.1016/j.ejps.2026.107570` — European science for health research needs and priorities — recovery attempt 2/3
   2. `historical:id:9b579a1a37c6d632` — Consumer flash fiction: A methodology to support the early sensing of far-future innovation opportunities
@@ -29,7 +29,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 19 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260924T225133Z-7506a469f4c2`
+- Current package: `worker-b-20260924T225808Z-7506a469f4c2`
 - Assigned unresolved records: **14**
   1. `historical:id:8830ed616891a4b2` — Horizon Europe Space calls 2023 2024
   2. `historical:id:7a52a7fe58625ca7` — 6G and Future Wireless Systems
