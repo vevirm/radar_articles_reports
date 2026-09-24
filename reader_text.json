@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-24T18:48:57Z",
+  "generated_at": "2026-09-24T22:46:04Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -183018,8 +183018,988 @@
       "deep_scan_package_id": "20260924T122640Z-502486fd6dc7",
       "claims": [],
       "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:fae68357821b2313": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "2f480d86",
+      "identity_hash": "6c5ae7cf388e1d99",
+      "reader_title": "MSCA advocacy statement",
+      "reader_what": "Coimbra Group argues that MSCA talent funding is strategically important for Europe.",
+      "reader_more": "It is stakeholder advocacy rather than a completed evidence-led study. The work is therefore excluded from this strand.",
+      "deep_analysis": {
+        "work_kind": "recovered publication/page",
+        "research_question": "",
+        "main_finding": "Coimbra Group argues that MSCA talent funding is strategically important for Europe.",
+        "method_or_basis": "Verified matching source material from the package or authoritative recovered source.",
+        "qualification": "The classification concerns the claimed work itself and does not substitute a related source.",
+        "radar_relevance": "This is a university-network advocacy statement on MSCA funding and talent, not a completed evidence-led study or report.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened matching PDF text from https://www.coimbra-group.eu/wp-content/uploads/MSCA-Statement-June-2026_FINAL.pdf; title/content matched the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "full_text_pdf",
+            "url": "https://www.coimbra-group.eu/wp-content/uploads/MSCA-Statement-June-2026_FINAL.pdf",
+            "title": "MSCA: Research Talent is Europe’s Strategic Advantage | Coimbra",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity/provenance and substantive evidence were checked against the matching primary, official or repository source; the decision applies to the claimed work."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "STRAND_CRITERIA_NOT_MET",
+        "reason": "This is a university-network advocacy statement on MSCA funding and talent, not a completed evidence-led study or report."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T22:46:03Z",
+      "deep_scan_package_id": "worker-b-20260924T214326Z-b92bbe8b1cd0",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:6bebf0998c688989": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "db710b40",
+      "identity_hash": "7d40948c8e97b45c",
+      "reader_title": "Open-source AI perspective",
+      "reader_what": "RISE argues for open-source AI as a route to Swedish digital independence.",
+      "reader_more": "The item is a perspective/blog post rather than completed evidence. The work is therefore excluded from this strand.",
+      "deep_analysis": {
+        "work_kind": "recovered publication/page",
+        "research_question": "",
+        "main_finding": "RISE argues for open-source AI as a route to Swedish digital independence.",
+        "method_or_basis": "Verified matching source material from the package or authoritative recovered source.",
+        "qualification": "The classification concerns the claimed work itself and does not substitute a related source.",
+        "radar_relevance": "This is a RISE perspective advocating open-source AI for Swedish digital independence rather than a completed evidence product.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened matching primary/official page text from https://www.ri.se/en/artificial-intelligence/blogpost/open-source-ai-as-swedens-path-to-an-independent-digital-future; title/content matched the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_page",
+            "url": "https://www.ri.se/en/artificial-intelligence/blogpost/open-source-ai-as-swedens-path-to-an-independent-digital-future",
+            "title": "Open Source AI as Sweden’s Path to an Independent Digital Future | RISE",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity/provenance and substantive evidence were checked against the matching primary, official or repository source; the decision applies to the claimed work."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "STRAND_CRITERIA_NOT_MET",
+        "reason": "This is a RISE perspective advocating open-source AI for Swedish digital independence rather than a completed evidence product."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T22:46:03Z",
+      "deep_scan_package_id": "worker-b-20260924T214326Z-b92bbe8b1cd0",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:763b105f33832495": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "c994f9b2",
+      "identity_hash": "512095bfc580cb04",
+      "reader_title": "RISE AI project perspective",
+      "reader_what": "RISE describes AI projects spanning farming, sovereignty and institutional capabilities.",
+      "reader_more": "The blog is project/capability communication, not a completed R&I-system study. The work is therefore excluded from this strand.",
+      "deep_analysis": {
+        "work_kind": "recovered publication/page",
+        "research_question": "",
+        "main_finding": "RISE describes AI projects spanning farming, sovereignty and institutional capabilities.",
+        "method_or_basis": "Verified matching source material from the package or authoritative recovered source.",
+        "qualification": "The classification concerns the claimed work itself and does not substitute a related source.",
+        "radar_relevance": "This RISE blog post showcases projects and capability narratives rather than providing completed evidence on a European R&I-system mechanism.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened matching primary/official page text from https://www.ri.se/en/artificial-intelligence/blogpost/ai-as-a-force-field-from-sustainable-farmlands-to-digital; title/content matched the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_page",
+            "url": "https://www.ri.se/en/artificial-intelligence/blogpost/ai-as-a-force-field-from-sustainable-farmlands-to-digital",
+            "title": "AI as a Force Field: From Sustainable Farmlands to Digital Sovereignty | RISE",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity/provenance and substantive evidence were checked against the matching primary, official or repository source; the decision applies to the claimed work."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "STRAND_CRITERIA_NOT_MET",
+        "reason": "This RISE blog post showcases projects and capability narratives rather than providing completed evidence on a European R&I-system mechanism."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T22:46:03Z",
+      "deep_scan_package_id": "worker-b-20260924T214326Z-b92bbe8b1cd0",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:61e4d438bc111671": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "a66d2d22",
+      "identity_hash": "407b26a3faebbf82",
+      "reader_title": "Resilient-AI futures perspective",
+      "reader_what": "RISE describes futures work and a resilient-AI workshop perspective.",
+      "reader_more": "It reports exploratory activity rather than completed evidence. The work is therefore excluded from this strand.",
+      "deep_analysis": {
+        "work_kind": "recovered publication/page",
+        "research_question": "",
+        "main_finding": "RISE describes futures work and a resilient-AI workshop perspective.",
+        "method_or_basis": "Verified matching source material from the package or authoritative recovered source.",
+        "qualification": "The classification concerns the claimed work itself and does not substitute a related source.",
+        "radar_relevance": "This is an internal futures/workshop perspective on resilient AI, not a completed evidence-led R&I-system study.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened matching primary/official page text from https://www.ri.se/en/artificial-intelligence/blogpost/building-a-resilient-ai-future-for-real; title/content matched the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_page",
+            "url": "https://www.ri.se/en/artificial-intelligence/blogpost/building-a-resilient-ai-future-for-real",
+            "title": "Building a Resilient AI Future – For Real | RISE",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity/provenance and substantive evidence were checked against the matching primary, official or repository source; the decision applies to the claimed work."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "STRAND_CRITERIA_NOT_MET",
+        "reason": "This is an internal futures/workshop perspective on resilient AI, not a completed evidence-led R&I-system study."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T22:46:03Z",
+      "deep_scan_package_id": "worker-b-20260924T214326Z-b92bbe8b1cd0",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:7c25ff51596285fe": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "05106422",
+      "identity_hash": "a5644f7369dafb0a",
+      "reader_title": "Outbound-investment consultation",
+      "reader_what": "The Commission consulted on monitoring and risk assessment of outbound investment.",
+      "reader_more": "As historical evidence, this consultation page is neither a Strand A study nor eligible current Strand C signal. The work is therefore excluded from this strand.",
+      "deep_analysis": {
+        "work_kind": "recovered publication/page",
+        "research_question": "",
+        "main_finding": "The Commission consulted on monitoring and risk assessment of outbound investment.",
+        "method_or_basis": "Verified matching source material from the package or authoritative recovered source.",
+        "qualification": "The classification concerns the claimed work itself and does not substitute a related source.",
+        "radar_relevance": "The Commission page is a consultation on outbound-investment monitoring; as a historical job it cannot qualify as current Strand C evidence and is not a completed Strand A study.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened matching primary/official page text from https://policy.trade.ec.europa.eu/consultations/monitoring-and-risk-assessment-outbound-investment_en; title/content matched the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_page",
+            "url": "https://policy.trade.ec.europa.eu/consultations/monitoring-and-risk-assessment-outbound-investment_en",
+            "title": "Monitoring and risk assessment of outbound investment",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity/provenance and substantive evidence were checked against the matching primary, official or repository source; the decision applies to the claimed work."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "STRAND_CRITERIA_NOT_MET",
+        "reason": "The Commission page is a consultation on outbound-investment monitoring; as a historical job it cannot qualify as current Strand C evidence and is not a completed Strand A study."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T22:46:03Z",
+      "deep_scan_package_id": "worker-b-20260924T214326Z-b92bbe8b1cd0",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:f3d09a6bdf5ef6e5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "6e48c71f",
+      "identity_hash": "ac52377f86fbeb82",
+      "reader_title": "Eureka FP10 position",
+      "reader_what": "Eureka calls for a more ambitious successor to Horizon Europe.",
+      "reader_more": "The page is an advocacy position, not an evidence-led study. The work is therefore excluded from this strand.",
+      "deep_analysis": {
+        "work_kind": "recovered publication/page",
+        "research_question": "",
+        "main_finding": "Eureka calls for a more ambitious successor to Horizon Europe.",
+        "method_or_basis": "Verified matching source material from the package or authoritative recovered source.",
+        "qualification": "The classification concerns the claimed work itself and does not substitute a related source.",
+        "radar_relevance": "The Eureka page is an advocacy position calling for an ambitious FP10, not a completed evidence-led study.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened matching primary/official page text from https://www.eurekanetwork.org/driving-european-competitiveness-through-innovation-eureka-networks-call-for-an-ambitious-fp10/; title/content matched the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_page",
+            "url": "https://www.eurekanetwork.org/driving-european-competitiveness-through-innovation-eureka-networks-call-for-an-ambitious-fp10/",
+            "title": "Driving European competitiveness through innovation: Eureka network’s call for an ambitious FP10",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity/provenance and substantive evidence were checked against the matching primary, official or repository source; the decision applies to the claimed work."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "STRAND_CRITERIA_NOT_MET",
+        "reason": "The Eureka page is an advocacy position calling for an ambitious FP10, not a completed evidence-led study."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T22:46:03Z",
+      "deep_scan_package_id": "worker-b-20260924T214326Z-b92bbe8b1cd0",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:e2499b71f7df0d43": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "9fdb2721",
+      "identity_hash": "8e97a46b37fd7163",
+      "reader_title": "Middle East defence-AI study",
+      "reader_what": "UNIDIR maps how AI affects security and threat perceptions around a Middle East WMD-free zone.",
+      "reader_more": "European scope is incidental to the report’s Middle East focus. The work is therefore excluded from this strand.",
+      "deep_analysis": {
+        "work_kind": "recovered publication/page",
+        "research_question": "",
+        "main_finding": "UNIDIR maps how AI affects security and threat perceptions around a Middle East WMD-free zone.",
+        "method_or_basis": "Verified matching source material from the package or authoritative recovered source.",
+        "qualification": "The classification concerns the claimed work itself and does not substitute a related source.",
+        "radar_relevance": "The UNIDIR report focuses on AI and Middle East regional security; European scope is not substantive.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened matching PDF text from https://unidir.org/wp-content/uploads/2025/02/UNIDIR_The_Impact_of_Artificial_Intelligence_on_Regional_Security.pdf; title/content matched the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "full_text_pdf",
+            "url": "https://unidir.org/wp-content/uploads/2025/02/UNIDIR_The_Impact_of_Artificial_Intelligence_on_Regional_Security.pdf",
+            "title": "The Impact of Artificial Intelligence on Regional Security, Threat Perceptions and the Middle East WMD-Free Zone → UNIDIR",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity/provenance and substantive evidence were checked against the matching primary, official or repository source; the decision applies to the claimed work."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "STRAND_CRITERIA_NOT_MET",
+        "reason": "The UNIDIR report focuses on AI and Middle East regional security; European scope is not substantive."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T22:46:03Z",
+      "deep_scan_package_id": "worker-b-20260924T214326Z-b92bbe8b1cd0",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:df026e59ba727592": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "a0792d39",
+      "identity_hash": "6ca98d937e9d95b0",
+      "reader_title": "Research security as university responsibility",
+      "reader_what": "CESAER proposes university-level research-security governance, screening and shared responsibility across Europe.",
+      "reader_why": "The recommendations target how European research openness is protected while security risks are managed.",
+      "reader_more": "CESAER recommends governance, support and proportionate screening approaches for research security in European universities. Policy input note synthesising university-sector concerns and recommendations.",
+      "deep_analysis": {
+        "work_kind": "university-sector policy input note",
+        "research_question": "",
+        "main_finding": "CESAER recommends governance, support and proportionate screening approaches for research security in European universities.",
+        "method_or_basis": "Policy input note synthesising university-sector concerns and recommendations.",
+        "qualification": "This is a CESAER policy input note representing university-sector recommendations, not an evaluation of implemented research-security outcomes.",
+        "radar_relevance": "Direct strategic relationship to European research-system openness and security governance.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened matching PDF text from https://www.cesaer.org/content/5-operations/2025/20251027-cesaer-input-note-research-security.pdf; title/content matched the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "full_text_pdf",
+            "url": "https://www.cesaer.org/content/5-operations/2025/20251027-cesaer-input-note-research-security.pdf",
+            "title": "Research security as a collective responsibility: empowering universities, enabling Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity/provenance and substantive evidence were checked against the matching primary, official or repository source; the decision applies to the claimed work."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "CESAER’s input note directly addresses European university research-security governance and screening as a strategic R&I-system issue."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T22:46:03Z",
+      "deep_scan_package_id": "worker-b-20260924T214326Z-b92bbe8b1cd0",
+      "claims": [
+        {
+          "object": "research_security.screening",
+          "secondary_objects": [
+            "research.openness"
+          ],
+          "actor": {
+            "name": "CESAER",
+            "class": "university_group"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2025-10-27",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "This is a CESAER policy input note representing university-sector recommendations, not an evaluation of implemented research-security outcomes.",
+          "text": "CESAER advocates proportionate research-security governance and screening across European universities.",
+          "confidence": "high",
+          "record_key": "historical:id:df026e59ba727592",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:6ca98d937e9d95b0:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:c01dcbb54fcab376": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "19d63cbf",
+      "identity_hash": "a4eed021607c50eb",
+      "reader_title": "Ukraine foresight event",
+      "reader_what": "The Committee of the Regions hosted a foresight talk on scenarios for ending the war in Ukraine.",
+      "reader_more": "The claimed item is an event page, which is excluded. The work is therefore excluded from this strand.",
+      "deep_analysis": {
+        "work_kind": "recovered publication/page",
+        "research_question": "",
+        "main_finding": "The Committee of the Regions hosted a foresight talk on scenarios for ending the war in Ukraine.",
+        "method_or_basis": "Verified matching source material from the package or authoritative recovered source.",
+        "qualification": "The classification concerns the claimed work itself and does not substitute a related source.",
+        "radar_relevance": "The claimed item is an event page for a foresight talk, which is excluded as historical evidence.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened matching primary/official page text from https://www.cor.europa.eu/en/plenaries-events/foresight-talk-ukraine-scenarios-end-war; title/content matched the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_page",
+            "url": "https://www.cor.europa.eu/en/plenaries-events/foresight-talk-ukraine-scenarios-end-war",
+            "title": "Foresight Talk on Ukraine: Scenarios for the end of the war",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity/provenance and substantive evidence were checked against the matching primary, official or repository source; the decision applies to the claimed work."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "STRAND_CRITERIA_NOT_MET",
+        "reason": "The claimed item is an event page for a foresight talk, which is excluded as historical evidence."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T22:46:03Z",
+      "deep_scan_package_id": "worker-b-20260924T214326Z-b92bbe8b1cd0",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:17356c42136c6158": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "d8cceb05",
+      "identity_hash": "2e9a40101899ac84",
+      "reader_title": "US CHIPS talent commentary",
+      "reader_what": "CNAS discusses workforce needs for implementation of the US CHIPS Act.",
+      "reader_more": "The substantive policy object is the United States, not Europe. The work is therefore excluded from this strand.",
+      "deep_analysis": {
+        "work_kind": "recovered publication/page",
+        "research_question": "",
+        "main_finding": "CNAS discusses workforce needs for implementation of the US CHIPS Act.",
+        "method_or_basis": "Verified matching source material from the package or authoritative recovered source.",
+        "qualification": "The classification concerns the claimed work itself and does not substitute a related source.",
+        "radar_relevance": "The commentary concerns United States CHIPS Act talent policy; Europe is not the substantive object.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened matching primary/official page text from https://www.cnas.org/publications/commentary/securing-talent-for-chips-act-success; title/content matched the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_page",
+            "url": "https://www.cnas.org/publications/commentary/securing-talent-for-chips-act-success",
+            "title": "Securing Talent for CHIPS Act Success",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity/provenance and substantive evidence were checked against the matching primary, official or repository source; the decision applies to the claimed work."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "STRAND_CRITERIA_NOT_MET",
+        "reason": "The commentary concerns United States CHIPS Act talent policy; Europe is not the substantive object."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T22:46:03Z",
+      "deep_scan_package_id": "worker-b-20260924T214326Z-b92bbe8b1cd0",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:58065e9822c89576": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "77e77fc5",
+      "identity_hash": "9d661c34d01b6ace",
+      "reader_title": "Draghi sectors through a security lens",
+      "reader_what": "HCSS analyses European competitiveness sectors including semiconductors, clean technology, defence and innovation clusters.",
+      "reader_why": "The commentary connects fragmented capability and investment structures to Europe’s strategic competitiveness.",
+      "reader_more": "The report analyses sectoral competitiveness, technology capacity, fragmentation and strategic dependencies across Europe. Multi-author expert analysis of selected Draghi-report sectors and policy recommendations.",
+      "deep_analysis": {
+        "work_kind": "expert analytical report",
+        "research_question": "What security and geopolitical implications follow from key sector recommendations in the Draghi competitiveness report?",
+        "main_finding": "The report analyses sectoral competitiveness, technology capacity, fragmentation and strategic dependencies across Europe.",
+        "method_or_basis": "Multi-author expert analysis of selected Draghi-report sectors and policy recommendations.",
+        "qualification": "The report is expert commentary on sector sections of the Draghi report rather than a new primary empirical dataset.",
+        "radar_relevance": "Historical strategic analysis of European industrial and innovation capability.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened matching PDF text from https://hcss.nl/wp-content/uploads/2024/11/HCSS-Draghi-Report-Series-2024.pdf; title/content matched the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "full_text_pdf",
+            "url": "https://hcss.nl/wp-content/uploads/2024/11/HCSS-Draghi-Report-Series-2024.pdf",
+            "title": "HCSS Draghi Report Series - HCSS",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity/provenance and substantive evidence were checked against the matching primary, official or repository source; the decision applies to the claimed work."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The HCSS report provides substantive expert analysis of European competitiveness, industrial capacity and innovation policy through the Draghi-report sectors."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T22:46:04Z",
+      "deep_scan_package_id": "worker-b-20260924T214326Z-b92bbe8b1cd0",
+      "claims": [
+        {
+          "object": "industrial.competitiveness",
+          "secondary_objects": [
+            "goal.strategic_autonomy"
+          ],
+          "actor": {
+            "name": "The Hague Centre for Strategic Studies",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2024-11",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The report is expert commentary on sector sections of the Draghi report rather than a new primary empirical dataset.",
+          "text": "HCSS analyses European competitiveness and strategic-capability gaps across several Draghi-report sectors.",
+          "confidence": "medium",
+          "status_date_precision": "month",
+          "record_key": "historical:id:58065e9822c89576",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:9d661c34d01b6ace:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:f9638c7fc2e64794": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "1ee1581b",
+      "identity_hash": "11d988bfc3bec74a",
+      "reader_title": "Automotive chiplet programme",
+      "reader_what": "imec describes an autonomous-edge chiplet programme, reference architectures and testbeds.",
+      "reader_more": "The page is programme material rather than a completed evidence product. The work is therefore excluded from this strand.",
+      "deep_analysis": {
+        "work_kind": "recovered publication/page",
+        "research_question": "",
+        "main_finding": "imec describes an autonomous-edge chiplet programme, reference architectures and testbeds.",
+        "method_or_basis": "Verified matching source material from the package or authoritative recovered source.",
+        "qualification": "The classification concerns the claimed work itself and does not substitute a related source.",
+        "radar_relevance": "The imec page describes an ongoing autonomous-edge chiplet programme and testbed, not a completed evidence product.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened matching primary/official page text from https://www.imec-int.com/en/expertise/cmos-advanced-and-beyond/compute/automotive-chiplet-program; title/content matched the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_page",
+            "url": "https://www.imec-int.com/en/expertise/cmos-advanced-and-beyond/compute/automotive-chiplet-program",
+            "title": "Automonomous edge chiplet program | imec",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity/provenance and substantive evidence were checked against the matching primary, official or repository source; the decision applies to the claimed work."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "STRAND_CRITERIA_NOT_MET",
+        "reason": "The imec page describes an ongoing autonomous-edge chiplet programme and testbed, not a completed evidence product."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T22:46:04Z",
+      "deep_scan_package_id": "worker-b-20260924T214326Z-b92bbe8b1cd0",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:76e5fbed37f5eae3": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "16a09642",
+      "identity_hash": "2cbfe5ba5a9cfbdd",
+      "reader_title": "Measuring university size differently",
+      "reader_what": "University rankings change when institution size uses scientific talent pools instead of academic personnel counts.",
+      "reader_why": "The comparison exposes a measurement choice that can alter cross-university performance indicators.",
+      "reader_more": "Across more than 1,500 European HEIs, the two size measures differ systematically and affect size-normalised comparisons. Comparative indicator analysis using academic personnel and publication-derived scientific talent-pool data.",
+      "deep_analysis": {
+        "work_kind": "methodological measurement study",
+        "research_question": "How do academic-personnel and scientific-talent-pool measures differ as indicators of university size?",
+        "main_finding": "Across more than 1,500 European HEIs, the two size measures differ systematically and affect size-normalised comparisons.",
+        "method_or_basis": "Comparative indicator analysis using academic personnel and publication-derived scientific talent-pool data.",
+        "qualification": "The comparison uses more than 1,500 European HEIs and two specific data sources; indicator behaviour can differ in other systems and databases.",
+        "radar_relevance": "Reusable research-evaluation and measurement methodology.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened matching PDF text from https://content.openalex.org/works/W4388465127.pdf; title/content matched the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "full_text_pdf",
+            "url": "https://content.openalex.org/works/W4388465127.pdf",
+            "title": "Measuring university size: A comparison of academic personnel versus scientific talent pool data",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity/provenance and substantive evidence were checked against the matching primary, official or repository source; the decision applies to the claimed work."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The study contributes a reusable measurement comparison for university size using academic personnel versus scientific talent-pool data."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T22:46:04Z",
+      "deep_scan_package_id": "worker-b-20260924T214326Z-b92bbe8b1cd0",
+      "claims": [
+        {
+          "object": "methods.evaluation",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Lepori, Bornmann and de Moya Anegón",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2023-11-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The comparison uses more than 1,500 European HEIs and two specific data sources; indicator behaviour can differ in other systems and databases.",
+          "text": "The study compares two university-size measures and shows their consequences for evaluation across European HEIs.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "historical:id:76e5fbed37f5eae3",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:2cbfe5ba5a9cfbdd:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:5bcf22121bb3f862": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "b7d72f4f",
+      "identity_hash": "3a9eee92d1e574ff",
+      "reader_title": "Research in the Brexit policy process",
+      "reader_what": "The article traces how higher education and research interests were handled throughout Brexit policymaking.",
+      "reader_why": "It documents institutional legacies and constraints shaping UK–EU research collaboration after withdrawal.",
+      "reader_more": "The analysis shows how pre-existing institutions and policy relationships shaped the treatment of research and higher education during Brexit. Policy-process analysis of UK–EU higher-education and research negotiations and institutional evidence.",
+      "deep_analysis": {
+        "work_kind": "European public-policy research article",
+        "research_question": "How were higher education and research represented and negotiated in the Brexit policy process?",
+        "main_finding": "The analysis shows how pre-existing institutions and policy relationships shaped the treatment of research and higher education during Brexit.",
+        "method_or_basis": "Policy-process analysis of UK–EU higher-education and research negotiations and institutional evidence.",
+        "qualification": "The article analyses the UK–EU Brexit policy process and institutional legacy; it does not measure post-2023 outcomes of later association arrangements.",
+        "radar_relevance": "Direct historical evidence on UK–EU research collaboration and governance.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened matching PDF text from https://content.openalex.org/works/W4353040050.pdf; title/content matched the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "full_text_pdf",
+            "url": "https://content.openalex.org/works/W4353040050.pdf",
+            "title": "Higher education and research in the Brexit policy process",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity/provenance and substantive evidence were checked against the matching primary, official or repository source; the decision applies to the claimed work."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The article analyses how higher education and research were handled in the Brexit policy process and the institutional legacy for UK–EU collaboration."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T22:46:04Z",
+      "deep_scan_package_id": "worker-b-20260924T214326Z-b92bbe8b1cd0",
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Corbett and Hantrais",
+            "class": "other"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2023-03-22",
+          "scope": {
+            "level": "third_country",
+            "countries": [
+              "United Kingdom"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "The article analyses the UK–EU Brexit policy process and institutional legacy; it does not measure post-2023 outcomes of later association arrangements.",
+          "text": "The article analyses how Brexit institutions shaped higher-education and research relations between the United Kingdom and EU.",
+          "confidence": "high",
+          "record_key": "historical:id:5bcf22121bb3f862",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:3a9eee92d1e574ff:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:c8cb84af5ab093ba": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "b83eb61b",
+      "identity_hash": "e01b27ef6c8c21be",
+      "reader_title": "Global defence-AI principles",
+      "reader_what": "UNIDIR compares responsible-AI principles adopted by states for defence applications.",
+      "reader_more": "Europe is one part of a global mapping, not the substantive object. The work is therefore excluded from this strand.",
+      "deep_analysis": {
+        "work_kind": "recovered publication/page",
+        "research_question": "",
+        "main_finding": "UNIDIR compares responsible-AI principles adopted by states for defence applications.",
+        "method_or_basis": "Verified matching source material from the package or authoritative recovered source.",
+        "qualification": "The classification concerns the claimed work itself and does not substitute a related source.",
+        "radar_relevance": "The UNIDIR mapping is global defence-AI governance research; Europe is one subset rather than the substantive object.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened matching PDF text from https://unidir.org/wp-content/uploads/2023/05/Brief-ResponsibleAI-Final.pdf; title/content matched the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "full_text_pdf",
+            "url": "https://unidir.org/wp-content/uploads/2023/05/Brief-ResponsibleAI-Final.pdf",
+            "title": "Towards Responsible AI in Defence: A Mapping and Comparative Analysis of AI Principles Adopted by States → UNIDIR",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity/provenance and substantive evidence were checked against the matching primary, official or repository source; the decision applies to the claimed work."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "STRAND_CRITERIA_NOT_MET",
+        "reason": "The UNIDIR mapping is global defence-AI governance research; Europe is one subset rather than the substantive object."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T22:46:04Z",
+      "deep_scan_package_id": "worker-b-20260924T214326Z-b92bbe8b1cd0",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-09-24T18:48:57Z"
+  "claims_updated_at": "2026-09-24T22:46:04Z"
 }

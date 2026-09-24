@@ -6,40 +6,40 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1997** (Main **1035** + Historical **962**)
-- Automatic queue still needing V2 verification: **58** (Main **17** + Historical **41**)
-- Currently assigned to workers: **58** (Main **17** + Historical **41**)
+- Authoritative V2 verified: **2012** (Main **1035** + Historical **977**)
+- Automatic queue still needing V2 verification: **41** (Main **15** + Historical **26**)
+- Currently assigned to workers: **41** (Main **15** + Historical **26**)
 - Bounded access-recovery retries still eligible: **0**
-- Hands-on verification needed: **14**
+- Hands-on verification needed: **16**
 - Automatic queue pending and not yet assigned: **0**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260924T214254Z-89415ea89c09`
-- Assigned unresolved records: **28**
-  1. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTFB3X2lIVGxXMmR6YnJya2xIS2t0WGs0UWZlN0hCNFdQWDAzTVpZWGJVT2VaNnFHa0xDVXpaSG9CNlBWeXVLWXR2M3pNbGxYS0laSWdyN05ETFhCNEp0OEtlOXVSSlBPRDRSUFBPb242Z1JGdVJXZ2xQU1ZEUUxsQQ?oc=5` — THE HACK: EU progress on industrial AI push — recovery attempt 3/3
-  2. `link:https://news.google.com/rss/articles/CBMiiAFBVV95cUxPd0hNY0hZU3UySUVzcXFVREJmT0lUQk5QZGJVcXVrck1lYl9BY1UzaDdUamtzbmpKNUNka216YXB6eEc4NTFka0hRR3p4dGFJQjZCdHJTYnNyRlFyUnV4UE0taXRlWWFQdU4ycUtSSVIzVDJwRXJWZTR2ZkJzb3R3M0dJcERGenAt?oc=5` — THE HACK: EU data centre push amid fossil fuel risk — recovery attempt 3/3
-  3. `link:https://doi.org/10.1016/j.ejps.2026.107570` — European science for health research needs and priorities — recovery attempt 2/3
-  4. `historical:id:9b579a1a37c6d632` — Consumer flash fiction: A methodology to support the early sensing of far-future innovation opportunities
-  5. `historical:id:2084a8c4b9bba7a3` — Analysis of Smart Technologies Used in Smart Hotels
-  6. `historical:id:256f788e05840f94` — Foresight and strategic decision-making framework from artificial intelligence technology development to utilization activities in small-and-medium-sized enterprises
-  7. `historical:id:388a8f406be45f71` — A probabilistic cross‐impact methodology for explorative scenario analysis
-  8. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=8baf21ed-b790-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — DRAFT REPORT - on the proposal for a regulation of the European Parliament and of the Council on the European Union Agency for Cybersecurity (ENISA), the European cybersecurity certification framework, and ICT supply chain security and repealing Regulation (EU) 2019/881 (The Cybersecurity Act 2) - (COM(2026)0011 - C10-0015/2026 - 2026/0011(COD)) - Committee on Industry, Research and Energy - Rapporteur: Markéta Gregorová - Publications Office of the EU — recovery attempt 2/3
-  - … plus 20 more in the package manifest
+- Current package: `worker-a-20260924T225103Z-a89f3aae9af0`
+- Assigned unresolved records: **27**
+  1. `link:https://doi.org/10.1016/j.ejps.2026.107570` — European science for health research needs and priorities — recovery attempt 2/3
+  2. `historical:id:9b579a1a37c6d632` — Consumer flash fiction: A methodology to support the early sensing of far-future innovation opportunities
+  3. `historical:id:2084a8c4b9bba7a3` — Analysis of Smart Technologies Used in Smart Hotels
+  4. `historical:id:256f788e05840f94` — Foresight and strategic decision-making framework from artificial intelligence technology development to utilization activities in small-and-medium-sized enterprises
+  5. `historical:id:388a8f406be45f71` — A probabilistic cross‐impact methodology for explorative scenario analysis
+  6. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=8baf21ed-b790-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — DRAFT REPORT - on the proposal for a regulation of the European Parliament and of the Council on the European Union Agency for Cybersecurity (ENISA), the European cybersecurity certification framework, and ICT supply chain security and repealing Regulation (EU) 2019/881 (The Cybersecurity Act 2) - (COM(2026)0011 - C10-0015/2026 - 2026/0011(COD)) - Committee on Industry, Research and Energy - Rapporteur: Markéta Gregorová - Publications Office of the EU — recovery attempt 2/3
+  7. `link:https://doi.org/10.1111/aepr.70032` — Comment on “Supply Chain Diversification and Industrial Policies to Strengthen Economic Security” — recovery attempt 2/3
+  8. `historical:id:cef3cfdeb1591a87` — Explanatory models of regional innovation performance in Europe: policy implications for regions — recovery attempt 2/3
+  - … plus 19 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260924T214326Z-b92bbe8b1cd0`
-- Assigned unresolved records: **30**
-  1. `link:https://doi.org/10.1080/23299460.2026.2731654` — Does the EU AI act align with responsible AI? An evaluation of the European Union’s artificial intelligence act in a responsible research and innovation framework — recovery attempt 2/3
-  2. `historical:id:fae68357821b2313` — MSCA: Research Talent is Europe’s Strategic Advantage | Coimbra
-  3. `historical:id:6bebf0998c688989` — Open Source AI as Sweden’s Path to an Independent Digital Future | RISE
-  4. `historical:id:763b105f33832495` — AI as a Force Field: From Sustainable Farmlands to Digital Sovereignty | RISE
-  5. `historical:id:61e4d438bc111671` — Building a Resilient AI Future – For Real | RISE
-  6. `historical:id:7c25ff51596285fe` — Monitoring and risk assessment of outbound investment
-  7. `historical:id:f3d09a6bdf5ef6e5` — Driving European competitiveness through innovation: Eureka network’s call for an ambitious FP10
-  8. `historical:id:e2499b71f7df0d43` — The Impact of Artificial Intelligence on Regional Security, Threat Perceptions and the Middle East WMD-Free Zone → UNIDIR
-  - … plus 22 more in the package manifest
+- Current package: `worker-b-20260924T225133Z-7506a469f4c2`
+- Assigned unresolved records: **14**
+  1. `historical:id:8830ed616891a4b2` — Horizon Europe Space calls 2023 2024
+  2. `historical:id:7a52a7fe58625ca7` — 6G and Future Wireless Systems
+  3. `historical:id:32dbe0c26d06c41f` — Santander-CIDOB Future Leaders Forum “How can the EU achieve digital strategic autonomy?" - HCSS
+  4. `historical:id:91281e6793343147` — CSET on China's Advanced AI Research and the China AI "Watchboard" Pilot Program | Center for Security and Emerging Technology
+  5. `historical:id:815cd8b237e07d7b` — How Congress Can Ensure CHIPS Act Funding Advances National Security Interests
+  6. `historical:id:2a46a133474228a1` — Germany’s Cybersecurity Posture? Let’s Focus on Resilience
+  7. `historical:id:dd2d92bb540bfefd` — Tech-chat on 'Standardization and Technology Transfer' - COST
+  8. `historical:id:05af1ae09ac5a7c5` — Horizon Europe - funding digital technology and research
+  - … plus 6 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `none`
@@ -63,3 +63,5 @@ These works no longer consume automatic Deep Scan slots. Their identity is belie
 - `link:https://doi.org/10.1108/fs-06-2015-0036` — **Strategic planning and foresight: the case of Smart Specialisation Strategy in Tuscany** — attempts: 3/3 — foresight — 2016-09-12 — The article identity is verified, but the full paper could not be recovered; available sources expose only structured-abstract material and citations. — https://doi.org/10.1108/fs-06-2015-0036
 - `link:https://news.google.com/rss/articles/CBMimwFBVV95cUxOUWR1bzN3YkNacm5ZT3dwUGtzU3BsNnRBcUdyT3hZNkl3X0h1RWlFa2tEYkdTZUktRXFmeG02cGplNEhoYlg0ZlpZWkRJdU1lVTZGWWt0NHR6Q1JKdk1EN1JfSTJuYlpvQ1FFQm1EelpXZVBKV3dJRFZCOWtlN2hCaTEteGxKbW12NVNmY1pvVHE2ZjdyMDhyWXdpcw?oc=5` — **Spanish vaccine maker urges broader EU incentives for innovation** — attempts: 3/3 — Euractiv — 2026-07-28T07:00Z — The Euractiv report is identifiable, but the article body is paywalled and no substantive matching copy was recovered. — https://news.google.com/rss/articles/CBMimwFBVV95cUxOUWR1bzN3YkNacm5ZT3dwUGtzU3BsNnRBcUdyT3hZNkl3X0h1RWlFa2tEYkdTZUktRXFmeG02cGplNEhoYlg0ZlpZWkRJdU1lVTZGWWt0NHR6Q1JKdk1EN1JfSTJuYlpvQ1FFQm1EelpXZVBKV3dJRFZCOWtlN2hCaTEteGxKbW12NVNmY1pvVHE2ZjdyMDhyWXdpcw?oc=5
 - `link:https://doi.org/10.1080/10438599.2026.2693627` — **Do wage pressure and government R&D stimulate business R&D? Regional level evidence from Europe** — attempts: 3/3 — Economics of Innovation and New Technology — 2026-06-29 — Identity is verified, but only abstract/repository metadata was recoverable; substantive full evidence remained inaccessible. — https://doi.org/10.1080/10438599.2026.2693627
+- `link:https://news.google.com/rss/articles/CBMifkFVX3lxTFB3X2lIVGxXMmR6YnJya2xIS2t0WGs0UWZlN0hCNFdQWDAzTVpZWGJVT2VaNnFHa0xDVXpaSG9CNlBWeXVLWXR2M3pNbGxYS0laSWdyN05ETFhCNEp0OEtlOXVSSlBPRDRSUFBPb242Z1JGdVJXZ2xQU1ZEUUxsQQ?oc=5` — **THE HACK: EU progress on industrial AI push** — attempts: 3/3 — Euractiv — 2026-09-21T07:21Z — Identity is verified as the Euractiv newsletter item, but substantive article text remained inaccessible after the recovery ladder. — https://news.google.com/rss/articles/CBMifkFVX3lxTFB3X2lIVGxXMmR6YnJya2xIS2t0WGs0UWZlN0hCNFdQWDAzTVpZWGJVT2VaNnFHa0xDVXpaSG9CNlBWeXVLWXR2M3pNbGxYS0laSWdyN05ETFhCNEp0OEtlOXVSSlBPRDRSUFBPb242Z1JGdVJXZ2xQU1ZEUUxsQQ?oc=5
+- `link:https://news.google.com/rss/articles/CBMiiAFBVV95cUxPd0hNY0hZU3UySUVzcXFVREJmT0lUQk5QZGJVcXVrck1lYl9BY1UzaDdUamtzbmpKNUNka216YXB6eEc4NTFka0hRR3p4dGFJQjZCdHJTYnNyRlFyUnV4UE0taXRlWWFQdU4ycUtSSVIzVDJwRXJWZTR2ZkJzb3R3M0dJcERGenAt?oc=5` — **THE HACK: EU data centre push amid fossil fuel risk** — attempts: 3/3 — Euractiv — 2026-07-29T07:00Z — Identity is verified as the Euractiv newsletter item, but substantive article text remained inaccessible after the recovery ladder. — https://news.google.com/rss/articles/CBMiiAFBVV95cUxPd0hNY0hZU3UySUVzcXFVREJmT0lUQk5QZGJVcXVrck1lYl9BY1UzaDdUamtzbmpKNUNka216YXB6eEc4NTFka0hRR3p4dGFJQjZCdHJTYnNyRlFyUnV4UE0taXRlWWFQdU4ycUtSSVIzVDJwRXJWZTR2ZkJzb3R3M0dJcERGenAt?oc=5
