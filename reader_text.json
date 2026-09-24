@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-24T11:47:46Z",
+  "generated_at": "2026-09-24T18:48:57Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -181543,8 +181543,1483 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://era.gv.at/news-items/ec-proposes-to-restore-full-access-to-horizon-europe-and-erasmus-for-hungary/": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "71e13f2e",
+      "identity_hash": "61fd770020fb3d60",
+      "reader_title": "Hungary Horizon access proposal",
+      "reader_what": "Commission proposed lifting conditionality measures that blocked Horizon Europe access for affected Hungarian institutions.",
+      "reader_why": "It could reopen participation in a flagship EU R&I programme.",
+      "reader_more": "The proposal was announced on 23 September 2026. It would lift 2022 protective measures if the Council agrees, restoring Horizon Europe and Erasmus+ access for institutions maintained by Hungarian public-interest trusts. It was not yet adopted.",
+      "deep_analysis": {
+        "work_kind": "current policy development",
+        "research_question": "What changed in EU programme access for affected Hungarian institutions?",
+        "main_finding": "The Commission proposed lifting the measures that had restricted their Horizon Europe access.",
+        "method_or_basis": "First-party policy reporting of the Commission proposal and stated consequences.",
+        "qualification": "The Commission proposal still required Council action and was not yet in force.",
+        "radar_relevance": "Directly changes access conditions for Horizon Europe participation.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "ERA Portal reproduced substantive details of the Commission proposal and its immediate programme-access consequences."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_web_source",
+            "url": "https://era.gv.at/news-items/ec-proposes-to-restore-full-access-to-horizon-europe-and-erasmus-for-hungary/",
+            "title": "EC proposes to restore full access to Horizon Europe and Erasmus+ for Hungary",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching first-party policy report used; proposal status preserved."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_CURRENT_DEVELOPMENT",
+        "reason": "A dated Commission proposal would restore Horizon Europe access for affected Hungarian institutions, a substantive current R&I development."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate was established within the supplied candidate metadata."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T18:48:54Z",
+      "deep_scan_package_id": "20260924T122640Z-502486fd6dc7",
+      "claims": [
+        {
+          "object": "horizon.access",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-09-23",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "Hungary"
+            ]
+          },
+          "kind": "action",
+          "qualification": "The Commission proposal still required Council action and was not yet in force.",
+          "text": "The European Commission proposed restoring Horizon Europe access for affected Hungarian institutions.",
+          "confidence": "high",
+          "record_key": "link:https://era.gv.at/news-items/ec-proposes-to-restore-full-access-to-horizon-europe-and-erasmus-for-hungary/",
+          "merit": 69,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:61fd770020fb3d60:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://era.gv.at/news-items/esfri-publishes-position-paper-on-infrastructure-ecosystem/": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "75d70ca7",
+      "identity_hash": "3196be329563a42f",
+      "reader_title": "ESFRI infrastructure ecosystem",
+      "reader_what": "ESFRI calls for a more integrated European research- and technology-infrastructure ecosystem.",
+      "reader_why": "Infrastructure coordination shapes access, capability and technology development across European R&I.",
+      "reader_more": "Published on 16 September 2026, the position paper links research and technology infrastructures as a continuum. It recommends stronger strategic coordination while preserving distinct missions. Its proposals are advocacy, not adopted governance.",
+      "deep_analysis": {
+        "work_kind": "R&I policy position paper",
+        "research_question": "How should Europe coordinate research and technology infrastructures?",
+        "main_finding": "ESFRI advocates an integrated, strategically coordinated RI–TI ecosystem and governance adjustments.",
+        "method_or_basis": "ESFRI position paper and official summary.",
+        "qualification": "This is an ESFRI position paper proposing governance changes, not an adopted EU-wide infrastructure reform.",
+        "radar_relevance": "Research infrastructure is a core European R&I capability and governance mechanism.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "ERA Portal gave a substantive summary of ESFRI’s position paper; ESFRI publication was independently matched."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_web_source",
+            "url": "https://era.gv.at/news-items/esfri-publishes-position-paper-on-infrastructure-ecosystem/",
+            "title": "ESFRI publishes position paper on infrastructure ecosystem",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_position_page",
+            "url": "https://www.esfri.eu/latest-esfri-news/esfri-position-paper-infrastructure-ecosystem",
+            "title": "ESFRI Position Paper on the Infrastructure Ecosystem",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and 16 September publication verified against ESFRI."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The work directly addresses governance and coordination of Europe’s research and technology infrastructure ecosystem."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate was established within the supplied candidate metadata."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T18:48:54Z",
+      "deep_scan_package_id": "20260924T122640Z-502486fd6dc7",
+      "claims": [
+        {
+          "object": "research.infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "ESFRI",
+            "class": "eu_body"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-09-16",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "This is an ESFRI position paper proposing governance changes, not an adopted EU-wide infrastructure reform.",
+          "text": "ESFRI advocates stronger coordination across Europe’s research and technology infrastructure ecosystem.",
+          "confidence": "high",
+          "record_key": "link:https://era.gv.at/news-items/esfri-publishes-position-paper-on-infrastructure-ecosystem/",
+          "merit": 69,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:3196be329563a42f:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://ellis.eu/publication/2025-enhancing-study-level-inference-from-clinical-trial-papers-via-rl-base": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "10c60e98",
+      "identity_hash": "850497c2d623fe8d",
+      "reader_title": "Numeric reasoning for evidence synthesis",
+      "reader_what": "A structured numeric pipeline improves study-level inference over retrieval baselines on CochraneForest.",
+      "reader_why": "It offers a reusable method for automated evidence synthesis.",
+      "reader_more": "The method extracts numerical evidence, computes effect estimates, and trains extraction with supervised and reinforcement learning. The best reported configuration improved F1 substantially on CochraneForest. Those gains are tied to the reported benchmark and task.",
+      "deep_analysis": {
+        "work_kind": "methods paper",
+        "research_question": "Can structured numeric reasoning improve automated study-level inference from clinical-trial papers?",
+        "main_finding": "The proposed numeric reasoning pipeline outperformed retrieval-based systems and very large general-purpose LLMs on the reported benchmark.",
+        "method_or_basis": "Numeric extraction, effect-estimate logic, supervised fine-tuning and reinforcement learning with a value reward.",
+        "qualification": "The contribution is a reusable evidence-synthesis method; its reported gains are benchmark-specific.",
+        "radar_relevance": "Reusable methodology for evidence extraction and synthesis rather than a geography-specific application.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "ELLIS landing page contained no substantive text and carried incorrect 2026 metadata."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied in the job; the recovered conference version later supplied DOI 10.18653/v1/2025.emnlp-main.1544."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered arXiv 2505.22928 and the ACL Anthology full paper."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "ACL Anthology provided the matching full conference paper."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://arxiv.org/abs/2505.22928",
+            "title": "Enhancing Study-Level Inference from Clinical Trial Papers via RL-based Numeric Reasoning",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_full_text",
+            "url": "https://aclanthology.org/2025.emnlp-main.1544.pdf",
+            "title": "Enhancing Study-Level Inference from Clinical Trial Papers via Reinforcement Learning-Based Numeric Reasoning",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered exact paper from arXiv and ACL Anthology; ELLIS metadata corrected."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The paper develops a reusable numeric-reasoning pipeline and reinforcement-learning training approach for study-level evidence synthesis."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate was established within the supplied candidate metadata."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T18:48:55Z",
+      "deep_scan_package_id": "20260924T122640Z-502486fd6dc7",
+      "claims": [
+        {
+          "object": "methods.evaluation",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Pronesti et al.",
+            "class": "university_group"
+          },
+          "mechanism": "automates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2025-11-05",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The contribution is a reusable evidence-synthesis method; its reported gains are benchmark-specific.",
+          "text": "The authors introduce a numeric-reasoning pipeline for automated study-level evidence synthesis.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "link:https://ellis.eu/publication/2025-enhancing-study-level-inference-from-clinical-trial-papers-via-rl-base",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:850497c2d623fe8d:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://era.gv.at/news-items/expert-report-finds-progress-in-open-science-in-era-uneven-and-fragmented/": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "a970d999",
+      "identity_hash": "6a492d6b95448fe0",
+      "reader_title": "Open access remains uneven",
+      "reader_what": "A Commission expert report finds uneven and fragmented open-access implementation across the ERA.",
+      "reader_why": "Open-access conditions affect how European research outputs circulate and are reused.",
+      "reader_more": "The assessment covers EU and non-EU countries participating in the European Research Area. It identifies persistent barriers despite progress and offers recommendations for further action. The finding is system-level, not a claim that every country performs identically.",
+      "deep_analysis": {
+        "work_kind": "expert policy report",
+        "research_question": "How consistently is open access being implemented across the European Research Area?",
+        "main_finding": "Implementation has advanced but remains uneven and fragmented across the assessed systems.",
+        "method_or_basis": "Cross-country expert assessment commissioned by the European Commission.",
+        "qualification": "The report documents uneven implementation across participating countries; it does not show that every ERA system has the same barriers.",
+        "radar_relevance": "Direct evidence on European research-system openness and dissemination.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The ERA Portal summary reports the Commission expert report’s scope, cross-country assessment and principal conclusion."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_web_source",
+            "url": "https://era.gv.at/news-items/expert-report-finds-progress-in-open-science-in-era-uneven-and-fragmented/",
+            "title": "Expert report finds progress in open science in ERA uneven and fragmented",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_report_page",
+            "url": "https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/open-access-european-research-area-progress-remains-uneven-and-fragmented-2026-09-15_en",
+            "title": "Open Access in the European Research Area: progress remains uneven and fragmented",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Commission report identity and release date independently matched."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A completed expert report assesses open-access implementation across the European Research Area, a core R&I-system mechanism."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate was established within the supplied candidate metadata."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T18:48:55Z",
+      "deep_scan_package_id": "20260924T122640Z-502486fd6dc7",
+      "claims": [
+        {
+          "object": "research.open_access",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission expert group",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2026-09-15",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The report documents uneven implementation across participating countries; it does not show that every ERA system has the same barriers.",
+          "text": "The expert report finds open-access implementation across the ERA uneven and fragmented.",
+          "confidence": "high",
+          "record_key": "link:https://era.gv.at/news-items/expert-report-finds-progress-in-open-science-in-era-uneven-and-fragmented/",
+          "merit": 69,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:6a492d6b95448fe0:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://ellis.eu/publication/2004-knowledge-representation-for-semantic-multimedia-content-analysis-and": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "898b6a08",
+      "identity_hash": "220bc84159da4d07",
+      "reader_title": "Ontology infrastructure for multimedia",
+      "reader_what": "The paper combines core, visual-descriptor and multimedia-structure ontologies with an extraction tool.",
+      "reader_why": "It is a reusable knowledge-representation design for semantic multimedia analysis.",
+      "reader_more": "The work specifies a DOLCE-based core ontology, MPEG-7-oriented descriptor and structure ontologies, and a visual-descriptor extraction tool. It is a concrete architecture rather than a case-only application. Its evaluation is primarily demonstrative.",
+      "deep_analysis": {
+        "work_kind": "methods paper",
+        "research_question": "How can multimedia features and structure be represented for semantic analysis and reasoning?",
+        "main_finding": "The authors present an ontology-based representation infrastructure plus a feature-extraction tool.",
+        "method_or_basis": "Ontology engineering integrating DOLCE extensions, MPEG-7 descriptors and multimedia structures.",
+        "qualification": "The infrastructure was presented for semantic multimedia analysis in the aceMedia context; general reuse beyond that domain is plausible but not empirically tested here.",
+        "radar_relevance": "Reusable representation method suitable for a methods library.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "ELLIS page verified author names but contained no methods or results."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied or found for the workshop paper."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the authors’ full PDF describing the ontology infrastructure and tool."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Author/institutional copy matched title and authors and supplied the full paper."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "author_full_text",
+            "url": "https://mklab.iti.gr/files/pdf/ewimt_p33.pdf",
+            "title": "Knowledge Representation for Semantic Multimedia Content Analysis and Reasoning",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full institutional PDF recovered by exact-title search."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The paper presents an explicit reusable ontology-based knowledge-representation infrastructure and extraction tool."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate was established within the supplied candidate metadata."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T18:48:55Z",
+      "deep_scan_package_id": "20260924T122640Z-502486fd6dc7",
+      "claims": [
+        {
+          "object": "methods.system_modelling",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Petridis et al.",
+            "class": "university_group"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2004",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The infrastructure was presented for semantic multimedia analysis in the aceMedia context; general reuse beyond that domain is plausible but not empirically tested here.",
+          "text": "The authors integrate multiple ontologies and an extraction tool into a semantic multimedia representation infrastructure.",
+          "confidence": "medium",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "status_date_precision": "year",
+          "record_key": "link:https://ellis.eu/publication/2004-knowledge-representation-for-semantic-multimedia-content-analysis-and",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:220bc84159da4d07:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://ellis.eu/publication/2002-knowledge-based-multilingual-document-analysis": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "90bfc395",
+      "identity_hash": "014fae8a35eab7e1",
+      "reader_title": "Multilingual document-analysis architecture",
+      "reader_what": "A knowledge-based system links multilingual categorisation, extraction and event matching for news streams.",
+      "reader_why": "Its architecture is reusable beyond the specific demonstration corpus.",
+      "reader_more": "The paper combines multilingual linguistic resources, information extraction, semantic networks and event matching. It is presented as a system architecture for automatic categorisation and authoring. The demonstrated domain is news, so broader transfer is not directly measured.",
+      "deep_analysis": {
+        "work_kind": "methods paper",
+        "research_question": "How can multilingual documents be analysed and linked using shared knowledge representations?",
+        "main_finding": "The authors build an integrated knowledge-based architecture for multilingual categorisation, extraction and event matching.",
+        "method_or_basis": "Knowledge-based NLP using EuroWordNet-style resources, information extraction and discourse/event models.",
+        "qualification": "The system is demonstrated on multilingual news analysis; the evidence supports the architecture, not universal performance across domains.",
+        "radar_relevance": "A reusable analysis architecture rather than a Europe-specific finding.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "ELLIS page contained no substantive text."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is listed for the ACL Anthology record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered ACL Anthology record W02-1101 and full PDF."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "ACL Anthology verified the conference paper and hosts the full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://aclanthology.org/W02-1101.pdf",
+            "title": "Knowledge-Based Multilingual Document Analysis",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "ACL Anthology full paper recovered and matched."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The paper presents a reusable knowledge-based multilingual document-analysis architecture combining categorisation, information extraction and event matching."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate was established within the supplied candidate metadata."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T18:48:56Z",
+      "deep_scan_package_id": "20260924T122640Z-502486fd6dc7",
+      "claims": [
+        {
+          "object": "methods.system_modelling",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Basili et al.",
+            "class": "university_group"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2002",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The system is demonstrated on multilingual news analysis; the evidence supports the architecture, not universal performance across domains.",
+          "text": "The authors integrate multilingual knowledge resources, extraction and event matching in a reusable document-analysis architecture.",
+          "confidence": "medium",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "status_date_precision": "year",
+          "record_key": "link:https://ellis.eu/publication/2002-knowledge-based-multilingual-document-analysis",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:014fae8a35eab7e1:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.48550/arxiv.2609.20650": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "38cb91b1",
+      "identity_hash": "cbc5ad43ecd6ef19",
+      "reader_title": "FL-Net unifies federated research",
+      "reader_what": "FL-Net integrates data harmonisation, discovery, privacy controls and reproducible federated workflows.",
+      "reader_why": "The framework targets reusable, multi-centre clinical research infrastructure.",
+      "reader_more": "The authors derive five requirements, compare 14 federated-learning frameworks, and present FL-Net to address the gaps. Evaluation includes networks with up to 50 clients and real multi-centre project experience. Results are specific to the reported environments.",
+      "deep_analysis": {
+        "work_kind": "methods/framework paper",
+        "research_question": "How can federated clinical research move from simulations to persistent multi-centre infrastructure?",
+        "main_finding": "FL-Net integrates harmonisation, discovery, disclosure control, versioned tools and containerised workflows in one framework.",
+        "method_or_basis": "Requirements analysis, comparison of 14 frameworks, implementation and multi-client evaluation.",
+        "qualification": "Evaluation covers the reported federated deployments and simulated scale tests; operational performance may differ in other clinical networks.",
+        "radar_relevance": "A reusable federated research framework independent of one geography.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "arXiv abstract and substantive article text describe the framework, comparison of 14 alternatives and evaluation design."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_web_source",
+            "url": "https://arxiv.org/abs/2609.20650",
+            "title": "Multi-center Medical Data Mining with FL-Net - A One-stop Shop for Federated Learning",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantive arXiv primary source used."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "FL-Net is a materially new federated-learning research framework integrating harmonisation, discovery, disclosure control and versioned execution."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate was established within the supplied candidate metadata."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T18:48:56Z",
+      "deep_scan_package_id": "20260924T122640Z-502486fd6dc7",
+      "claims": [
+        {
+          "object": "methods.system_modelling",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Süwer et al.",
+            "class": "university_group"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-09-17",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Evaluation covers the reported federated deployments and simulated scale tests; operational performance may differ in other clinical networks.",
+          "text": "The authors integrate core federated-research functions into the FL-Net framework.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "link:https://doi.org/10.48550/arxiv.2609.20650",
+          "merit": 60,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:cbc5ad43ecd6ef19:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://ellis.eu/publication/2006-oxford-trecvid-2006-notebook-paper": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "caa5f94c",
+      "identity_hash": "c5045da81f5d77d5",
+      "reader_title": "Oxford TRECVID benchmark entry",
+      "reader_what": "Oxford’s 2006 entry applies existing visual features and classifiers to TRECVID tasks.",
+      "reader_more": "The paper reports benchmark runs using sparse and dense visual features plus a face classifier. These are applied to high-level feature extraction and interactive search. The contribution is an application/evaluation package rather than a materially new general method.",
+      "deep_analysis": {
+        "work_kind": "benchmark notebook paper",
+        "research_question": "How did the Oxford team configure vision systems for TRECVID 2006?",
+        "main_finding": "It reports benchmark systems built from established feature and classifier approaches.",
+        "method_or_basis": "Benchmark application of sparse/dense visual features, SVM-style concept classifiers and face-specific features.",
+        "qualification": "The notebook paper applies established sparse/dense visual features, SVM classifiers and a face classifier to a benchmark; it does not establish a materially new reusable method.",
+        "radar_relevance": "Fails Strand B because application of existing methods is insufficient.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "ELLIS page had no substantive text."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied or found."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the Oxford Visual Geometry Group publication page and PDF."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Oxford VGG author page matched the paper and described the submitted benchmark systems."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "author_primary",
+            "url": "https://robots.ox.ac.uk/~vgg/publications/2006/Philbin06/",
+            "title": "Oxford TRECVID 2006 -- Notebook Paper",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Oxford VGG primary page recovered by exact-title search."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_NOT_REUSABLE_METHOD",
+        "reason": "The work is primarily a benchmark notebook applying existing vision methods, so it fails the Strand B novelty/reusability gate."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate was established within the supplied candidate metadata."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T18:48:56Z",
+      "deep_scan_package_id": "20260924T122640Z-502486fd6dc7",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.ri.se/en/packaging/pulp-and-paper/story/research-programmes-give-companies-a-head-start-on-the-transition": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "07631c7e",
+      "identity_hash": "c455df93997d94bc",
+      "reader_title": "RISE programme promotion",
+      "reader_what": "The page promotes collaborative research programmes as a route to industrial transition.",
+      "reader_more": "It describes the Bioeconomy research programme and benefits claimed for participating companies. The page is promotional and programme-oriented rather than a completed evidence-led study of European R&I. Europe-related policy context does not change that classification.",
+      "deep_analysis": {
+        "work_kind": "promotional programme story",
+        "research_question": "",
+        "main_finding": "The page argues that collaborative research programmes can give firms an advantage in transition.",
+        "method_or_basis": "First-party RISE programme story and examples.",
+        "qualification": "The page promotes participation in a RISE research programme and does not itself report a completed evidence product or qualifying policy development.",
+        "radar_relevance": "Excluded by the programme/promotional-page guard for Strand A.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching source material in the package was substantive enough for verification."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_web_source",
+            "url": "https://www.ri.se/en/packaging/pulp-and-paper/story/research-programmes-give-companies-a-head-start-on-the-transition",
+            "title": "Research programmes give companies a head start on the transition | RISE",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full RISE page used to classify the page type and scope."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "EXCLUDED_EVENT_PROGRAMME_PROMOTIONAL",
+        "reason": "This is a promotional programme story, explicitly excluded from Strand A despite discussing research collaboration and transition."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate was established within the supplied candidate metadata."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T18:48:56Z",
+      "deep_scan_package_id": "20260924T122640Z-502486fd6dc7",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://era.gv.at/news-items/ten-countries-associated-to-horizon-europe-present-joint-statement-on-association-to-future-eu-programmes/": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "79d2017f",
+      "identity_hash": "c8be1206ab897174",
+      "reader_title": "Associated countries seek stable access",
+      "reader_what": "Ten Horizon Europe associated countries call for association to remain open, predictable and central in future EU programmes.",
+      "reader_why": "Association rules shape cross-border research collaboration and programme access.",
+      "reader_more": "The statement covers Australia, Canada, the Faroe Islands, Iceland, Japan, New Zealand, Norway, South Korea, Switzerland and the United Kingdom. It asks for timely, stable association with clear governance and rules. These are recommendations from partner countries, not decisions by EU institutions.",
+      "deep_analysis": {
+        "work_kind": "joint policy statement",
+        "research_question": "What association principles do current Horizon Europe partners want in future EU programmes?",
+        "main_finding": "The signatories advocate open, predictable and timely association as a central feature of future programmes.",
+        "method_or_basis": "Joint statement by ten associated countries, reported through the ERA Portal.",
+        "qualification": "The document is a joint policy position by associated countries; its recommendations are not adopted EU programme rules.",
+        "radar_relevance": "Directly concerns Horizon association and international R&I collaboration.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching source material in the package was substantive enough for verification."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_web_source",
+            "url": "https://era.gv.at/news-items/ten-countries-associated-to-horizon-europe-present-joint-statement-on-association-to-future-eu-programmes/",
+            "title": "Ten countries associated to Horizon Europe present joint statement on association to future EU programmes",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantive joint-statement text in the package supports the admission."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The joint statement directly addresses future association rules for EU research programmes, a core R&I participation mechanism."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate was established within the supplied candidate metadata."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T18:48:56Z",
+      "deep_scan_package_id": "20260924T122640Z-502486fd6dc7",
+      "claims": [
+        {
+          "object": "horizon.association",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Ten Horizon Europe associated countries",
+            "class": "third_country"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-09-23",
+          "scope": {
+            "level": "associated_country",
+            "countries": [
+              "Australia",
+              "Canada",
+              "Faroe Islands",
+              "Iceland",
+              "Japan",
+              "New Zealand",
+              "Norway",
+              "South Korea",
+              "Switzerland",
+              "United Kingdom"
+            ]
+          },
+          "kind": "advocacy",
+          "qualification": "The document is a joint policy position by associated countries; its recommendations are not adopted EU programme rules.",
+          "text": "Ten associated countries advocate open, predictable and timely association to future EU programmes.",
+          "confidence": "high",
+          "record_key": "link:https://era.gv.at/news-items/ten-countries-associated-to-horizon-europe-present-joint-statement-on-association-to-future-eu-programmes/",
+          "merit": 69,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:c8be1206ab897174:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://ellis.eu/publication/2025-the-cambridge-report-on-database-research": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "4b74c990",
+      "identity_hash": "f9ed1c5685c523c9",
+      "reader_title": "Database research agenda",
+      "reader_what": "Senior database researchers review recent progress and outline future technical opportunities.",
+      "reader_more": "The report grew from a Cambridge, Massachusetts meeting and surveys cloud systems, hardware, data science, governance and generative AI. It is a global disciplinary agenda. It does not substantively study European R&I structures or relations.",
+      "deep_analysis": {
+        "work_kind": "research community report",
+        "research_question": "What challenges and opportunities should database research prioritise?",
+        "main_finding": "The report synthesises senior researchers’ views on achievements and future research opportunities.",
+        "method_or_basis": "Expert workshop synthesis and field review.",
+        "qualification": "The report concerns the global database research field and future technical directions; Europe is not its substantive object and it does not introduce a reusable method.",
+        "radar_relevance": "Fails Strand A because Europe is not the substantive R&I object.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "ELLIS page had no substantive text."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered arXiv 2504.11259."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "arXiv provided the matching report and author list."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://arxiv.org/abs/2504.11259",
+            "title": "The Cambridge Report on Database Research",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Exact-title recovery on arXiv established identity and scope."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUTSIDE_EU_RI_SCOPE",
+        "reason": "The report is a field-wide database research agenda, not a study of the European R&I system or a direct European R&I relationship."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate was established within the supplied candidate metadata."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T18:48:56Z",
+      "deep_scan_package_id": "20260924T122640Z-502486fd6dc7",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://ellis.eu/publication/2026-this-paper-is-included-in-the-proceedings-of-the-32nd-usenix-security": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "c9bb6331",
+      "identity_hash": "d457fa5dc065d8d3",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "Underlying work could not be uniquely identified after the mandatory recovery ladder.",
+        "radar_relevance": "No authoritative strand decision is possible without a unique work identity.",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "ELLIS URL did not expose substantive text or a unique bibliographic identity."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied and no unique work was identifiable to query by DOI."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failure",
+            "note": "Searching the exact boilerplate phrase returned generic proceedings references rather than a unique paper."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failure",
+            "note": "No authors are supplied; combining the phrase with 2023/32nd USENIX Security did not identify one work."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "The USENIX Security 2023 proceedings contain many papers and the boilerplate string is not a unique title."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "Broader searches using the ELLIS slug and proceedings wording still produced no unique underlying paper."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "All mandatory recovery steps exhausted without a unique identity."
+      },
+      "admission": {
+        "decision": "drop_unverifiable",
+        "target_strand": "A",
+        "reason_code": "UNVERIFIABLE_IDENTITY",
+        "reason": "The ELLIS slug exposes only boilerplate wording and could not be mapped uniquely to one USENIX Security 2023 paper."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate was established within the supplied candidate metadata."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T18:48:56Z",
+      "deep_scan_package_id": "20260924T122640Z-502486fd6dc7",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://ellis.eu/publication/1998-to-appear-in-ai-based-mobile-robots-case-studies-of-successful-robot-s": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "cae301f5",
+      "identity_hash": "71ba9a4ba6dade5d",
+      "reader_title": "RHINO navigation methods",
+      "reader_what": "The chapter synthesises tested mapping and high-speed navigation methods for indoor autonomous robots.",
+      "reader_why": "It is a reusable engineering methods reference for mobile-robot navigation.",
+      "reader_more": "The chapter covers map learning, localisation, planning and navigation components developed and tested in indoor environments. It is explicitly aimed at researchers and engineers building reliable navigation software. Its value is as an integrated methods synthesis.",
+      "deep_analysis": {
+        "work_kind": "book chapter / methods synthesis",
+        "research_question": "How can indoor mobile robots learn maps and navigate reliably at speed?",
+        "main_finding": "The chapter integrates a suite of tested mapping and navigation methods from the RHINO system.",
+        "method_or_basis": "Technical synthesis of lab-developed mapping, localisation and navigation methods with empirical demonstrations.",
+        "qualification": "The chapter surveys and integrates methods developed by the authors’ lab; it is a reusable technical synthesis, not a single newly isolated algorithm.",
+        "radar_relevance": "Reusable robotics methodology fits Strand B.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "ELLIS record did not expose substantive text."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is associated with the book chapter."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the Carnegie Mellon full chapter."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Carnegie Mellon Robotics Institute archive hosts the matching full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "institutional_full_text",
+            "url": "https://publications.ri.cmu.edu/storage/publications/pub_files/pub1/thrun_sebastian_1998_2/thrun_sebastian_1998_2.pdf",
+            "title": "Map Learning and High-Speed Navigation in RHINO",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "CMU institutional full text recovered."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The chapter provides a reusable technical synthesis of mapping, localisation and high-speed navigation methods for indoor robots."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate was established within the supplied candidate metadata."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T18:48:57Z",
+      "deep_scan_package_id": "20260924T122640Z-502486fd6dc7",
+      "claims": [
+        {
+          "object": "methods.system_modelling",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Thrun et al.",
+            "class": "university_group"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "1998",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The chapter surveys and integrates methods developed by the authors’ lab; it is a reusable technical synthesis, not a single newly isolated algorithm.",
+          "text": "The authors integrate mapping, localisation and navigation methods into the RHINO technical framework.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "status_date_precision": "year",
+          "record_key": "link:https://ellis.eu/publication/1998-to-appear-in-ai-based-mobile-robots-case-studies-of-successful-robot-s",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:71ba9a4ba6dade5d:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://ellis.eu/publication/2006-towards-multidimensional-subspace-skyline-analysis": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "a74be9cc",
+      "identity_hash": "c29652794a8e16fc",
+      "reader_title": "Subspace skyline analysis",
+      "reader_what": "The paper introduces structures and algorithms for analysing skylines across multiple subspaces.",
+      "reader_why": "It supplies reusable database-analysis methods for multicriteria queries.",
+      "reader_more": "The work formalises simultaneous skyline analysis across subspaces and develops techniques such as the Skycube and related analytical operations. The contribution is algorithmic and general to the query problem. Reported efficiency is based on the article’s experiments.",
+      "deep_analysis": {
+        "work_kind": "methods/algorithms article",
+        "research_question": "How can skyline objects be computed and explained across many data subspaces?",
+        "main_finding": "The article develops a multidimensional subspace skyline framework with algorithms for computation and analysis.",
+        "method_or_basis": "Formal problem definition, data structures and skyline algorithms evaluated experimentally.",
+        "qualification": "The contribution is methodological for multidimensional skyline analysis; performance claims are tied to the experiments reported in the article.",
+        "radar_relevance": "Reusable data-analysis methodology fits Strand B.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "ELLIS page had no substantive text."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied by the ELLIS job; recovery identified DOI 10.1145/1189769.1189774."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered a detailed university publication record with abstract and DOI."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Duke Scholars record matched the ACM Transactions article and substantive abstract."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "institutional_substantive_record",
+            "url": "https://scholars.duke.edu/individual/pub1530873",
+            "title": "Towards multidimensional subspace skyline analysis",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantive institutional record and DOI identity used."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The article develops new data structures and algorithms for multidimensional subspace skyline analysis."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate was established within the supplied candidate metadata."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T18:48:57Z",
+      "deep_scan_package_id": "20260924T122640Z-502486fd6dc7",
+      "claims": [
+        {
+          "object": "methods.system_modelling",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Pei et al.",
+            "class": "university_group"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2006-12-01",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The contribution is methodological for multidimensional skyline analysis; performance claims are tied to the experiments reported in the article.",
+          "text": "The authors develop a framework and algorithms for multidimensional subspace skyline analysis.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "link:https://ellis.eu/publication/2006-towards-multidimensional-subspace-skyline-analysis",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:c29652794a8e16fc:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1186/s12961-026-01532-y": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "6c208b8a",
+      "identity_hash": "155eb791304a2b97",
+      "reader_title": "Global pandemic funding map",
+      "reader_what": "The study maps epidemic-intelligence funding across a global award database.",
+      "reader_more": "The article analyses 26,028 awards and identifies the share devoted to epidemic intelligence, with funders concentrated largely in North America and Europe. Its substantive object is global pandemic research funding. Europe is not the R&I system under study.",
+      "deep_analysis": {
+        "work_kind": "empirical funding study",
+        "research_question": "How much pandemic-research funding supports epidemic intelligence?",
+        "main_finding": "The authors find epidemic-intelligence awards are a small share of the mapped global portfolio.",
+        "method_or_basis": "Analysis of the Pandemic PACT award database and funder distributions.",
+        "qualification": "The study maps global pandemic-research funding and is not substantively about the European R&I system; European funders are participants rather than the analytical object.",
+        "radar_relevance": "Fails Strand A because the analytical object is global, with Europe only part of the funder distribution.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching source material in the package was substantive enough for verification."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_web_source",
+            "url": "https://link.springer.com/article/10.1186/s12961-026-01532-y",
+            "title": "Tracking funding to inform action: mapping the award landscape for research on pandemic and epidemic intelligence",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantive article material used; geographic scope distinguished from funder locations."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUTSIDE_EU_RI_SCOPE",
+        "reason": "A global funding-mapping study does not qualify for Strand A merely because some funders are European."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate was established within the supplied candidate metadata."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T18:48:57Z",
+      "deep_scan_package_id": "20260924T122640Z-502486fd6dc7",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.euronews.com/2026/09/23/ai-chatbots-serve-up-content-from-russias-sanctioned-state-run-outlets-rsf-finds": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "c3cba178",
+      "identity_hash": "c5e12f2e78eca3f5",
+      "reader_title": "Chatbots surface sanctioned outlets",
+      "reader_what": "RSF found several major chatbots could surface or cite content from Russian outlets sanctioned in Europe.",
+      "reader_why": "It tests how AI systems mediate access to information targeted by EU sanctions.",
+      "reader_more": "RSF tested six chatbots against content from sanctioned Russian state outlets. The investigation reports that several systems returned summaries, links or quotations from those sources. The result is a bounded audit, not a universal claim about all AI systems.",
+      "deep_analysis": {
+        "work_kind": "current investigation",
+        "research_question": "Do leading AI chatbots surface content from Russian state outlets sanctioned in Europe?",
+        "main_finding": "The audit found several tested chatbots returned material traceable to sanctioned outlets.",
+        "method_or_basis": "Structured testing by Reporters Without Borders across six chatbots and selected sanctioned sources.",
+        "qualification": "The finding is an RSF investigation of six chatbots and selected sanctioned outlets; it should not be generalised to every chatbot or all state-media content.",
+        "radar_relevance": "A substantive current development connecting AI governance and EU information controls.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching source material in the package was substantive enough for verification."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_web_source",
+            "url": "https://www.euronews.com/2026/09/23/ai-chatbots-serve-up-content-from-russias-sanctioned-state-run-outlets-rsf-finds",
+            "title": "Source",
+            "evidence_used": true
+          },
+          {
+            "kind": "primary_investigation",
+            "url": "https://rsf.org/en/ai-chatbots-serve-content-russia-s-sanctioned-state-media-rsf-investigation-finds",
+            "title": "RSF investigation of AI chatbot use of sanctioned Russian outlets",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Euronews report cross-checked against RSF first-party investigation."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_CURRENT_DEVELOPMENT",
+        "reason": "A current investigation documents a concrete AI-information-governance problem with direct EU sanctions relevance."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate was established within the supplied candidate metadata."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T18:48:57Z",
+      "deep_scan_package_id": "20260924T122640Z-502486fd6dc7",
+      "claims": [
+        {
+          "object": "ai.governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Reporters Without Borders",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2026-09-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The finding is an RSF investigation of six chatbots and selected sanctioned outlets; it should not be generalised to every chatbot or all state-media content.",
+          "text": "RSF reports that several tested chatbots surfaced content from Russian outlets sanctioned in Europe.",
+          "confidence": "medium",
+          "record_key": "link:https://www.euronews.com/2026/09/23/ai-chatbots-serve-up-content-from-russias-sanctioned-state-run-outlets-rsf-finds",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:c5e12f2e78eca3f5:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:3d74089270adfc67": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "342651e3",
+      "identity_hash": "c093f3aec7a4379f",
+      "reader_title": "EU Chips Act opinion",
+      "reader_what": "The authors argue that EU chip policy should prioritise R&D and existing strategic assets over national subsidies.",
+      "reader_more": "The article criticises national subsidy choices and advocates a more focused Chips Act centred on advanced R&D and European strengths such as semiconductor equipment. It is clearly labelled Opinion. Historical Strand A requires a substantive evidence product, so advocacy alone is insufficient here.",
+      "deep_analysis": {
+        "work_kind": "opinion article",
+        "research_question": "",
+        "main_finding": "The authors argue for redirecting EU chips policy toward advanced R&D and existing strategic assets.",
+        "method_or_basis": "Policy argument drawing on semiconductor market structure and selected examples.",
+        "qualification": "This is an opinion piece making policy arguments, not a completed evidence-led study or report.",
+        "radar_relevance": "Directly R&I-related but excluded as an opinion rather than an evidence-led study/report.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "The package stored no source text."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI applies to the opinion article."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the ifo/EconPol opinion page with full text."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "ifo Institute hosts the complete opinion article."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.ifo.de/en/econpol/opinion/2026-02-13/rethinking-the-eu-chips-act",
+            "title": "Rethinking the EU Chips Act",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full official opinion page recovered."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NOT_SUBSTANTIVE_EU_RI",
+        "reason": "Although directly about EU semiconductor R&I policy, the source is explicitly an opinion article and fails the evidence-product guard for historical Strand A."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate was established within the supplied candidate metadata."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-24T18:48:57Z",
+      "deep_scan_package_id": "20260924T122640Z-502486fd6dc7",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-09-24T11:47:46Z"
+  "claims_updated_at": "2026-09-24T18:48:57Z"
 }

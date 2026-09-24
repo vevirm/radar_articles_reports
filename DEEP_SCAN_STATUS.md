@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **1980** (Main **1019** + Historical **961**)
-- Automatic queue still needing V2 verification: **58** (Main **22** + Historical **36**)
-- Currently assigned to workers: **58** (Main **22** + Historical **36**)
+- Authoritative V2 verified: **1997** (Main **1035** + Historical **962**)
+- Automatic queue still needing V2 verification: **55** (Main **14** + Historical **41**)
+- Currently assigned to workers: **55** (Main **14** + Historical **41**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **14**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,8 +16,8 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260924T115237Z-53a179411e7d`
-- Assigned unresolved records: **11**
+- Current package: `worker-a-20260924T185352Z-38dd35dc314d`
+- Assigned unresolved records: **25**
   1. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTFB3X2lIVGxXMmR6YnJya2xIS2t0WGs0UWZlN0hCNFdQWDAzTVpZWGJVT2VaNnFHa0xDVXpaSG9CNlBWeXVLWXR2M3pNbGxYS0laSWdyN05ETFhCNEp0OEtlOXVSSlBPRDRSUFBPb242Z1JGdVJXZ2xQU1ZEUUxsQQ?oc=5` — THE HACK: EU progress on industrial AI push — recovery attempt 3/3
   2. `link:https://news.google.com/rss/articles/CBMiiAFBVV95cUxPd0hNY0hZU3UySUVzcXFVREJmT0lUQk5QZGJVcXVrck1lYl9BY1UzaDdUamtzbmpKNUNka216YXB6eEc4NTFka0hRR3p4dGFJQjZCdHJTYnNyRlFyUnV4UE0taXRlWWFQdU4ycUtSSVIzVDJwRXJWZTR2ZkJzb3R3M0dJcERGenAt?oc=5` — THE HACK: EU data centre push amid fossil fuel risk — recovery attempt 3/3
   3. `link:https://doi.org/10.1016/j.ejps.2026.107570` — European science for health research needs and priorities — recovery attempt 2/3
@@ -26,24 +26,33 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:256f788e05840f94` — Foresight and strategic decision-making framework from artificial intelligence technology development to utilization activities in small-and-medium-sized enterprises
   7. `historical:id:388a8f406be45f71` — A probabilistic cross‐impact methodology for explorative scenario analysis
   8. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=8baf21ed-b790-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — DRAFT REPORT - on the proposal for a regulation of the European Parliament and of the Council on the European Union Agency for Cybersecurity (ENISA), the European cybersecurity certification framework, and ICT supply chain security and repealing Regulation (EU) 2019/881 (The Cybersecurity Act 2) - (COM(2026)0011 - C10-0015/2026 - 2026/0011(COD)) - Committee on Industry, Research and Energy - Rapporteur: Markéta Gregorová - Publications Office of the EU — recovery attempt 2/3
-  - … plus 3 more in the package manifest
+  - … plus 17 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260924T115301Z-6828e4075d6a`
-- Assigned unresolved records: **47**
-  1. `link:https://doi.org/10.1080/23299460.2026.2731654` — Does the EU AI act align with responsible AI? An evaluation of the European Union’s artificial intelligence act in a responsible research and innovation framework
-  2. `link:https://era.gv.at/news-items/ec-proposes-to-restore-full-access-to-horizon-europe-and-erasmus-for-hungary/` — EC proposes to restore full access to Horizon Europe and Erasmus+ for Hungary
-  3. `link:https://era.gv.at/news-items/esfri-publishes-position-paper-on-infrastructure-ecosystem/` — ESFRI publishes position paper on infrastructure ecosystem
-  4. `link:https://ellis.eu/publication/2025-enhancing-study-level-inference-from-clinical-trial-papers-via-rl-base` — Enhancing Study-Level Inference from Clinical Trial Papers via RL-based Numeric Reasoning
-  5. `link:https://era.gv.at/news-items/expert-report-finds-progress-in-open-science-in-era-uneven-and-fragmented/` — Expert report finds progress in open science in ERA uneven and fragmented
-  6. `link:https://ellis.eu/publication/2004-knowledge-representation-for-semantic-multimedia-content-analysis-and` — Knowledge Representation for Semantic Multimedia Content Analysis and Reasoning
-  7. `link:https://ellis.eu/publication/2002-knowledge-based-multilingual-document-analysis` — Knowledge-Based Multilingual Document Analysis
-  8. `link:https://doi.org/10.48550/arxiv.2609.20650` — Multi-center Medical Data Mining with FL-Net - A One-stop Shop for Federated Learning
-  - … plus 39 more in the package manifest
+- Current package: `worker-b-20260924T185424Z-b92bbe8b1cd0`
+- Assigned unresolved records: **30**
+  1. `link:https://doi.org/10.1080/23299460.2026.2731654` — Does the EU AI act align with responsible AI? An evaluation of the European Union’s artificial intelligence act in a responsible research and innovation framework — recovery attempt 2/3
+  2. `historical:id:fae68357821b2313` — MSCA: Research Talent is Europe’s Strategic Advantage | Coimbra
+  3. `historical:id:6bebf0998c688989` — Open Source AI as Sweden’s Path to an Independent Digital Future | RISE
+  4. `historical:id:763b105f33832495` — AI as a Force Field: From Sustainable Farmlands to Digital Sovereignty | RISE
+  5. `historical:id:61e4d438bc111671` — Building a Resilient AI Future – For Real | RISE
+  6. `historical:id:7c25ff51596285fe` — Monitoring and risk assessment of outbound investment
+  7. `historical:id:f3d09a6bdf5ef6e5` — Driving European competitiveness through innovation: Eureka network’s call for an ambitious FP10
+  8. `historical:id:e2499b71f7df0d43` — The Impact of Artificial Intelligence on Regional Security, Threat Perceptions and the Middle East WMD-Free Zone → UNIDIR
+  - … plus 22 more in the package manifest
 
 ### Worker SINGLE
-- Current package: `20260923T211548Z-44619dd3ec29`
-- Assigned unresolved records: **0**
+- Current package: `20260924T122640Z-502486fd6dc7`
+- Assigned unresolved records: **40**
+  1. `historical:id:fae68357821b2313` — MSCA: Research Talent is Europe’s Strategic Advantage | Coimbra
+  2. `historical:id:6bebf0998c688989` — Open Source AI as Sweden’s Path to an Independent Digital Future | RISE
+  3. `historical:id:763b105f33832495` — AI as a Force Field: From Sustainable Farmlands to Digital Sovereignty | RISE
+  4. `historical:id:61e4d438bc111671` — Building a Resilient AI Future – For Real | RISE
+  5. `historical:id:f3d09a6bdf5ef6e5` — Driving European competitiveness through innovation: Eureka network’s call for an ambitious FP10
+  6. `historical:id:e2499b71f7df0d43` — The Impact of Artificial Intelligence on Regional Security, Threat Perceptions and the Middle East WMD-Free Zone → UNIDIR
+  7. `historical:id:df026e59ba727592` — Research security as a collective responsibility: empowering universities, enabling Europe
+  8. `historical:id:c01dcbb54fcab376` — Foresight Talk on Ukraine: Scenarios for the end of the war
+  - … plus 32 more in the package manifest
 
 ## Hands-on verification needed
 
