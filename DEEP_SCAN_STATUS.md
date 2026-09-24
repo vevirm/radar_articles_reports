@@ -7,17 +7,17 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **1915** (Main **997** + Historical **918**)
-- Automatic queue still needing V2 verification: **78** (Main **28** + Historical **50**)
-- Currently assigned to workers: **72** (Main **28** + Historical **44**)
+- Automatic queue still needing V2 verification: **124** (Main **45** + Historical **79**)
+- Currently assigned to workers: **120** (Main **45** + Historical **75**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **13**
-- Automatic queue pending and not yet assigned: **6**
+- Automatic queue pending and not yet assigned: **4**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260923T213404Z-2c2436e144e4`
-- Assigned unresolved records: **36**
+- Current package: `worker-a-20260924T095247Z-6c1fdba58312`
+- Assigned unresolved records: **60**
   1. `historical:id:bc665999887802f2` — ALLEA Participates in EU-Funded Project to Support Reforms in Research Assessment - ALLEA
   2. `historical:id:7a6b1859e290bf8d` — Innovation Wars: How China Is Gaining on the United States in Corporate R&D
   3. `historical:id:975c2b201ea7d1ec` — How China Divides Europe and the United States
@@ -26,11 +26,11 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:d8cc69968937a4cd` — Europe’s dependence on Chinese semiconductor manufacturing - Digital Power China Report
   7. `historical:id:cef3cfdeb1591a87` — Explanatory models of regional innovation performance in Europe: policy implications for regions
   8. `link:https://doi.org/10.1080/10438599.2026.2693627` — Do wage pressure and government R&D stimulate business R&D? Regional level evidence from Europe — recovery attempt 3/3
-  - … plus 28 more in the package manifest
+  - … plus 52 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260923T213430Z-c315b38c9cf5`
-- Assigned unresolved records: **36**
+- Current package: `worker-b-20260924T095318Z-07f1c6c12977`
+- Assigned unresolved records: **60**
   1. `link:https://news.google.com/rss/articles/CBMiowFBVV95cUxQUWF6NXZ4TFR5TmpJYXhJTjMtWVpYZlJXWkd0UXllanVaNzdIUEttZlpjdVVqa2IyT1M3b0w1ZzY4cGVWOVljV0pyTEpFWmZBOVczSVFUVDRrbkdTN1lmaFpyV2JlQkpqWGxSbUhIRDJGeC03dmU2XzNiaHQtYzdjRldWam1KVWZ5UGliU2VUUjRFZU5wdk1Tb3NTZ3hFY3RXRkV3?oc=5` — EU lawmakers float product liability rules to help avert AI disaster
   2. `link:https://news.google.com/rss/articles/CBMipAFBVV95cUxPajhwN0pNUXd1bTByQVNWOWRPVVJuc3haRHNGVnZIYmJrYWlIU0ZNdlE2d3hNMF9RZXQ4LWFwSkJUblI4cldvZWlPSTVoeDJwRW9acmMwaHV5UmZDOVlWdE9XM3RsZFhoclVGclF6ZjFRcmFNUzZiSm1TemFiSTIzMFFRdGJOalJ5SXZZeHdkYTliZ0JlSWRfOWtMWXg3RWFISHVWRw?oc=5` — Spanish PM Sanchez says AI industry cannot be self-regulated
   3. `link:https://news.google.com/rss/articles/CBMinAFBVV95cUxQQ0ZPTHNsYmxNQS1GdkR0b2ZSQVhlN3BQcHM1R2dsMEVldlBTYXlTaXc3QWlfRURuWG5Nc1hYWG5XcHZ5TERONmVSNzlSRzhVT1dzNjNlYjRhLXNNZlB2TEcxR1JqNjdfbkJSV3JxZVpka0VnZkJ2TGFCUzJtbFBmWmwzNFFGZy1wMWxMSDNzSWU3TzhGRXl2QWdORmQ?oc=5` — Will the Horizon Europe Missions survive?
@@ -39,7 +39,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:095d418b7242cbd0` — Independent review of the ESRC research data policy
   7. `historical:id:e78ffe91db1790f9` — When theory meets practice in transformative innovation policy evaluation: experiences from Sweden
   8. `historical:id:a5d8eeaff9fe0aff` — The Missing Strategy in Europe's Chip Ambitions
-  - … plus 28 more in the package manifest
+  - … plus 52 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20260923T211548Z-44619dd3ec29`
