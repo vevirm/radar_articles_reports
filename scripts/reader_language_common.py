@@ -31,6 +31,8 @@ HTML_ROUTES = {
     "shocks/index.html": "shocks",
     "shocks/variants.html": "shocks-variants",
     "2035/index.html": "future",
+    "2035/lens/index.html": "future",
+    "2035/scenario/index.html": "future",
     "briefing/index.html": "briefing",
     "glossary/index.html": "glossary",
     "explore/index.html": "explore",
@@ -313,23 +315,38 @@ def collect_radar_reader_fields(store: dict[str, Candidate]) -> None:
                 add_candidate(store, c.get("reader_consequence"), [route], f"{origin}:reader_consequence")
 
     sc = hi.get("scenarios_2035") if isinstance(hi.get("scenarios_2035"), dict) else {}
-    for w in sc.get("scenarios", []) if isinstance(sc.get("scenarios"), list) else []:
-        if not isinstance(w, dict):
+    # Multi-axis 2035: collect every generated frame when present. The old
+    # top-level ``scenarios`` field remains a compatibility alias of the
+    # default frame and is used only for older reasoning snapshots. Axis labels
+    # themselves stay human-curated; generated questions/scenarios/variants go
+    # through the same optional reader-language workflow as before.
+    frames = sc.get("frames") if isinstance(sc.get("frames"), list) else []
+    if not frames:
+        frames = [{"id": clean(sc.get("default_frame_id")) or "resources-connectedness", "scenarios": sc.get("scenarios", [])}]
+    for frame in frames:
+        if not isinstance(frame, dict):
             continue
-        origin = f"{p.name}:scenarios_2035:{clean(w.get('id'))}"
-        for key in ("name", "tagline", "watch"):
-            add_candidate(store, w.get(key), ["future"], f"{origin}:{key}")
-        for j, b in enumerate(w.get("bullets") or []):
-            if isinstance(b, dict):
-                add_candidate(store, b.get("text"), ["future"], f"{origin}:bullets[{j}]")
-        for v in w.get("variants") or []:
-            if not isinstance(v, dict):
+        fid = clean(frame.get("id")) or "frame"
+        for key in ("question",):
+            add_candidate(store, frame.get(key), ["future"], f"{p.name}:scenarios_2035:{fid}:{key}")
+        worlds = frame.get("scenarios") if isinstance(frame.get("scenarios"), list) else []
+        for w in worlds:
+            if not isinstance(w, dict):
                 continue
-            vo = f"{origin}:variant:{clean(v.get('id'))}"
-            add_candidate(store, v.get("name"), ["future"], f"{vo}:name")
-            for j, b in enumerate(v.get("bullets") or []):
+            origin = f"{p.name}:scenarios_2035:{fid}:{clean(w.get('id'))}"
+            for key in ("name", "tagline", "watch"):
+                add_candidate(store, w.get(key), ["future"], f"{origin}:{key}")
+            for j, b in enumerate(w.get("bullets") or []):
                 if isinstance(b, dict):
-                    add_candidate(store, b.get("text"), ["future"], f"{vo}:bullets[{j}]")
+                    add_candidate(store, b.get("text"), ["future"], f"{origin}:bullets[{j}]")
+            for v in w.get("variants") or []:
+                if not isinstance(v, dict):
+                    continue
+                vo = f"{origin}:variant:{clean(v.get('id'))}"
+                add_candidate(store, v.get("name"), ["future"], f"{vo}:name")
+                for j, b in enumerate(v.get("bullets") or []):
+                    if isinstance(b, dict):
+                        add_candidate(store, b.get("text"), ["future"], f"{vo}:bullets[{j}]")
 
     shock = data.get("shock_inference") if isinstance(data, dict) else None
     shock = shock if isinstance(shock, dict) else {}

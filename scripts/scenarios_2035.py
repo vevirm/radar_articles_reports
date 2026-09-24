@@ -538,7 +538,7 @@ def _axes(trends: list[dict[str, Any]]) -> dict[str, Any]:
 
 
 # ------------------------------------------------------------------- builder
-def build_scenarios_2035(publications: dict[str, Any], candidates: list[dict[str, Any]], evaluated_at: str = "") -> dict[str, Any]:
+def _build_default_frame(publications: dict[str, Any], candidates: list[dict[str, Any]], evaluated_at: str = "") -> dict[str, Any]:
     by_id = {_clean(c.get("id")): c for c in candidates if isinstance(c, dict) and _clean(c.get("id"))}
     trends = _pub(publications, by_id, "trend")
     shocks = _pub(publications, by_id, "shock")
@@ -826,4 +826,331 @@ def build_scenarios_2035(publications: dict[str, Any], candidates: list[dict[str
         "axes": {"horizontal": "Less globally connected ↔ More globally connected", "vertical": "Fewer resources ↔ More resources"},
         "scenarios": scenarios,
         "card_count": len(scenarios) + sum(len(x["variants"]) for x in scenarios),
+    }
+
+
+# ========================================================= multi-axis frames
+# The original Resources × Global connectedness builder above is retained as the
+# default frame for backward compatibility. Additional frames use the same live
+# publications but are generated from the manual axis definitions in
+# scenario_axes_2035.py. The top-level ``scenarios`` field remains an alias of
+# the default frame so older pages and downstream consumers keep working.
+
+
+def _public_axis(axis: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "key": _clean(axis.get("key")),
+        "title": _clean(axis.get("title")),
+        "low": dict(axis.get("low") or {}),
+        "high": dict(axis.get("high") or {}),
+    }
+
+
+def _axis_relevance(c: dict[str, Any], axis: dict[str, Any]) -> int:
+    """How directly a published finding belongs to one manually defined axis."""
+    score = 0
+    patterns = tuple(_clean(x) for x in axis.get("objects", ()) if _clean(x))
+    for obj in _objects(c):
+        bare = obj.replace("family:", "").replace("cluster:", "")
+        for pat in patterns:
+            pbare = pat.replace("family:", "").replace("cluster:", "")
+            if obj == pat.rstrip(".") or obj.startswith(pat) or bare == pbare.rstrip(".") or bare.startswith(pbare):
+                score += 5
+                break
+    hay = " ".join(
+        _clean(c.get(k)) for k in ("reader_title", "reader_summary", "reader_why", "topic_label")
+    ).lower()
+    for kw in axis.get("keywords", ()):
+        if _clean(kw).lower() in hay:
+            score += 1
+    return score
+
+
+def _frame_relevance(c: dict[str, Any], frame: dict[str, Any]) -> int:
+    return _axis_relevance(c, frame["horizontal"]) + _axis_relevance(c, frame["vertical"])
+
+
+def _other_pole(pole: str) -> str:
+    return "low" if pole == "high" else "high"
+
+
+def _finding_affinity(c: dict[str, Any], axis: dict[str, Any]) -> str:
+    """Return the pole a finding most naturally stresses, or empty if neutral.
+
+    This is deliberately modest. Opportunities pull toward the axis's declared
+    capacity/agency pole; risks and shocks stress the opposite pole. Trends and
+    continuities remain usable on either side because they describe the tension
+    itself rather than a forecast of which side wins.
+    """
+    if _axis_relevance(c, axis) <= 0:
+        return ""
+    product = _clean(c.get("product"))
+    positive = _clean(axis.get("positive_pole")) or "high"
+    if product == "opportunity":
+        return positive
+    if product in {"risk", "shock"}:
+        return _other_pole(positive)
+    return ""
+
+
+def _quadrant_fit(c: dict[str, Any], frame: dict[str, Any], hpole: str, vpole: str) -> int:
+    score = _frame_relevance(c, frame) * 10
+    for axis, pole in ((frame["horizontal"], hpole), (frame["vertical"], vpole)):
+        affinity = _finding_affinity(c, axis)
+        if affinity:
+            score += 8 if affinity == pole else -4
+    # Prefer stronger presentational candidates when thematic fit ties.
+    try:
+        score += int(float(c.get("score", 0) or 0) // 10)
+    except (TypeError, ValueError):
+        pass
+    return score
+
+
+def _ranked_for_world(
+    pool: list[dict[str, Any]],
+    frame: dict[str, Any],
+    hpole: str,
+    vpole: str,
+    seed: str,
+    used: set[str] | None = None,
+    require_relevant: bool = True,
+) -> list[dict[str, Any]]:
+    used = used if used is not None else set()
+    rows = [c for c in pool if _clean(c.get("id")) and _clean(c.get("id")) not in used]
+    if require_relevant:
+        relevant = [c for c in rows if _frame_relevance(c, frame) > 0]
+        if relevant:
+            rows = relevant
+    return sorted(rows, key=lambda c: (-_quadrant_fit(c, frame, hpole, vpole), _stable(seed + _clean(c.get("id")))))
+
+
+def _choose_world_finding(
+    pool: list[dict[str, Any]],
+    frame: dict[str, Any],
+    hpole: str,
+    vpole: str,
+    seed: str,
+    used: set[str],
+) -> dict[str, Any] | None:
+    ranked = _ranked_for_world(pool, frame, hpole, vpole, seed, used, True)
+    if not ranked:
+        ranked = _ranked_for_world(pool, frame, hpole, vpole, seed, used, False)
+    if not ranked:
+        return None
+    got = ranked[0]
+    used.add(_clean(got.get("id")))
+    return got
+
+
+def _axis_driver(
+    trends: list[dict[str, Any]],
+    axis: dict[str, Any],
+    pole: str,
+    seed: str,
+    used: set[str],
+) -> dict[str, Any] | None:
+    rows = [t for t in trends if _axis_relevance(t, axis) > 0]
+    if not rows:
+        return None
+    fresh = [t for t in rows if _clean(t.get("id")) not in used] or rows
+    fresh = sorted(fresh, key=lambda t: (-_axis_relevance(t, axis), _stable(seed + _clean(t.get("id")))))
+    t = fresh[0]
+    used.add(_clean(t.get("id")))
+    b = t.get("trend_balance") if isinstance(t.get("trend_balance"), dict) else {}
+    positive = _clean(axis.get("positive_pole")) or "high"
+    side = _clean(b.get("left_title") if pole == positive else b.get("right_title"))
+    return {**_ref(t), "winning_side": side, "watch": _clean(b.get("flip_line"))}
+
+
+def _variant_next(c: dict[str, Any]) -> str:
+    product = _clean(c.get("product"))
+    if product == "shock":
+        return _consequence(c)
+    return _clean(c.get("reader_why") or c.get("reader_summary") or _title(c))
+
+
+def _generic_variant(
+    c: dict[str, Any],
+    frame: dict[str, Any],
+    hpole: str,
+    vpole: str,
+    world_id: str,
+    used_evidence: set[str],
+) -> dict[str, Any]:
+    kind = _clean(c.get("product")) or "variant"
+    h = frame["horizontal"][hpole]
+    v = frame["vertical"][vpole]
+    ref = _ref(c)
+    bullets = [{"label": "Trigger", "text": _end(_title(c))}]
+    hist = _history(c, role="external_driver" if kind == "shock" else "", used=used_evidence)
+    if hist:
+        bullets.append({"label": "Evidence today", "text": hist})
+    nxt = _variant_next(c)
+    if nxt:
+        bullets.append({"label": "What happens next", "text": _end(nxt)})
+    bullets.append({
+        "label": "Where Europe ends up",
+        "text": (
+            f"The development plays out inside a 2035 Europe with {v['label'].lower()} and "
+            f"{h['label'].lower()}. It changes the route through that world without changing the two uncertainties that define it."
+        ),
+    })
+    return {
+        "id": f"{world_id}:{kind}:{_clean(c.get('id'))[-12:]}",
+        "kind": kind,
+        "name": _title(c),
+        "trigger": _title(c),
+        "bullets": bullets,
+        **{k: v for k, v in ref.items() if k in ("finding_id", "product", "sources")},
+    }
+
+
+def _build_axis_frame(
+    spec: dict[str, Any],
+    publications: dict[str, Any],
+    candidates: list[dict[str, Any]],
+    evaluated_at: str,
+) -> dict[str, Any]:
+    by_id = {_clean(c.get("id")): c for c in candidates if isinstance(c, dict) and _clean(c.get("id"))}
+    pools = {p: _pub(publications, by_id, p) for p in ("trend", "continuity", "risk", "opportunity", "shock")}
+    if not any(pools.values()):
+        return {
+            "id": spec["id"], "title": spec["title"], "question": spec["question"],
+            "axes": {"horizontal": _public_axis(spec["horizontal"]), "vertical": _public_axis(spec["vertical"])},
+            "scenarios": [], "card_count": 0,
+        }
+
+    frame = spec
+    scenarios: list[dict[str, Any]] = []
+    used_variants: set[str] = set()
+    used_evidence: set[str] = set()
+
+    # Matrix order: upper-left, upper-right, lower-left, lower-right.
+    for vpole, hpole in (("high", "low"), ("high", "high"), ("low", "low"), ("low", "high")):
+        h = frame["horizontal"][hpole]
+        v = frame["vertical"][vpole]
+        wid = f"{vpole}-{hpole}"
+        seed = f"{frame['id']}:{wid}:"
+
+        # Reuse the same strongest current tension for an axis across all four
+        # quadrants; only the side carried forward changes. This makes the
+        # matrix a coherent test of the same uncertainty rather than four
+        # unrelated trend selections.
+        vdriver = _axis_driver(pools["trend"], frame["vertical"], vpole, f"{frame['id']}:vertical", set())
+        hdriver = _axis_driver(pools["trend"], frame["horizontal"], hpole, f"{frame['id']}:horizontal", set())
+        drivers = [d for d in (vdriver, hdriver) if d]
+
+        # Context findings may recur across quadrants when they are the best
+        # evidence for the axis. Forcing uniqueness here quickly pushes later
+        # quadrants toward off-topic evidence; uniqueness matters for the four
+        # subscenario triggers, not for the shared evidence base.
+        persists = _choose_world_finding(pools["continuity"], frame, hpole, vpole, seed + "continuity", set())
+        opportunity = _choose_world_finding(pools["opportunity"], frame, hpole, vpole, seed + "opportunity", set())
+        risk = _choose_world_finding(pools["risk"], frame, hpole, vpole, seed + "risk", set())
+
+        name = f"{v['short']} · {h['short']}"
+        tagline = f"{v['label']}; {h['label']}."
+        picture = (
+            f"In this 2035 world, Europe combines {v['label'].lower()} with {h['label'].lower()}. "
+            "The world is a scenario frame, not a forecast; the details below are rebuilt from the Radar's current published findings."
+        )
+        bullets: list[dict[str, str]] = [{"label": "Picture", "text": picture}]
+        sides = [f"“{d['winning_side']}”" for d in drivers if _clean(d.get("winning_side"))]
+        if len(sides) >= 2:
+            bullets.append({"label": "How we got here", "text": f"Two current tensions are carried forward into this world: {sides[0]} and {sides[1]}."})
+        elif sides:
+            bullets.append({"label": "How we got here", "text": f"One current tension carried forward into this world is {sides[0]}."})
+
+        hist = _history(persists, used=used_evidence) if persists else ""
+        if hist:
+            bullets.append({"label": "Evidence today", "text": hist})
+        if opportunity:
+            bullets.append({"label": "Opportunity in the evidence", "text": _end(_clean(opportunity.get("reader_why") or opportunity.get("reader_summary") or _title(opportunity)))})
+        if risk:
+            bullets.append({"label": "Risk in the evidence", "text": _end(_clean(risk.get("reader_why") or risk.get("reader_summary") or _title(risk)))})
+
+        watch = next((_clean(d.get("watch")) for d in drivers if _clean(d.get("watch")) and not _clean(d.get("watch")).startswith("Nothing")), "")
+        if watch:
+            bullets.append({"label": "Signpost", "text": watch})
+
+        # Four subscenarios: two external shocks, one opportunity and one risk,
+        # with thematic ranking first and graceful fallback if a pool is thin.
+        variants: list[dict[str, Any]] = []
+        for kind, count in (("shock", 2), ("opportunity", 1), ("risk", 1)):
+            for n in range(count):
+                c = _choose_world_finding(pools[kind], frame, hpole, vpole, seed + f"{kind}:{n}", used_variants)
+                if c:
+                    variants.append(_generic_variant(c, frame, hpole, vpole, wid, used_evidence))
+
+        if len(variants) < 4:
+            fallback = [*pools["shock"], *pools["opportunity"], *pools["risk"], *pools["continuity"], *pools["trend"]]
+            while len(variants) < 4:
+                c = _choose_world_finding(fallback, frame, hpole, vpole, seed + f"fallback:{len(variants)}", used_variants)
+                if not c:
+                    break
+                variants.append(_generic_variant(c, frame, hpole, vpole, wid, used_evidence))
+
+        signals = [x for x in drivers]
+        for c in (persists, opportunity, risk):
+            if c:
+                signals.append(_ref(c))
+        scenarios.append({
+            "id": wid,
+            "frame_id": frame["id"],
+            "name": name,
+            "tagline": tagline,
+            "quadrant": {
+                frame["horizontal"]["key"]: h["id"],
+                frame["vertical"]["key"]: v["id"],
+                "horizontal": h["id"],
+                "vertical": v["id"],
+            },
+            "story": [picture],
+            "bullets": bullets,
+            "signals": signals,
+            "watch": watch,
+            "variants": variants[:4],
+        })
+
+    return {
+        "id": frame["id"],
+        "title": frame["title"],
+        "question": frame["question"],
+        "method": "The axis pair is curated by hand. The four quadrant scenarios and their four variants are rebuilt from the current published findings on each reasoning refresh; reader-language editing is separate.",
+        "axes": {"horizontal": _public_axis(frame["horizontal"]), "vertical": _public_axis(frame["vertical"])},
+        "scenarios": scenarios,
+        "card_count": len(scenarios) + sum(len(x.get("variants", [])) for x in scenarios),
+    }
+
+
+def build_scenarios_2035(publications: dict[str, Any], candidates: list[dict[str, Any]], evaluated_at: str = "") -> dict[str, Any]:
+    """Build all 2035 lenses while preserving the original top-level contract."""
+    try:
+        from scripts.scenario_axes_2035 import AXIS_FRAMES, DEFAULT_FRAME_ID
+    except ImportError:  # pragma: no cover
+        from scenario_axes_2035 import AXIS_FRAMES, DEFAULT_FRAME_ID  # type: ignore
+
+    default = _build_default_frame(publications, candidates, evaluated_at)
+    frames: list[dict[str, Any]] = []
+    for spec in AXIS_FRAMES:
+        if spec.get("legacy"):
+            frame = {
+                "id": spec["id"],
+                "title": spec["title"],
+                "question": spec["question"],
+                "method": default.get("method", ""),
+                "axes": {"horizontal": _public_axis(spec["horizontal"]), "vertical": _public_axis(spec["vertical"])},
+                "scenarios": default.get("scenarios", []),
+                "card_count": default.get("card_count", 0),
+            }
+        else:
+            frame = _build_axis_frame(spec, publications, candidates, evaluated_at)
+        frames.append(frame)
+
+    return {
+        **default,
+        "default_frame_id": DEFAULT_FRAME_ID,
+        "frames": frames,
+        "frame_count": len(frames),
     }
