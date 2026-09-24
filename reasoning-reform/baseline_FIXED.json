@@ -1,0 +1,194 @@
+{
+  "active_counts": {
+    "frontier_evidence": 0,
+    "strand_a": 309,
+    "strand_b": 112,
+    "strand_c": 149
+  },
+  "admission_decisions": {
+    "drop": 300,
+    "drop_unverifiable": 9,
+    "duplicate": 1,
+    "keep": 1043,
+    "needs_manual_verification": 15,
+    "review": 32
+  },
+  "approved_migrations": [
+    {
+      "approved_files": [
+        "scripts/prepare_deep_scan_package.py",
+        "scripts/import_deep_scan_results.py",
+        "scripts/active_corpus.py"
+      ],
+      "purpose": "Extend Deep Scan output/import and active-view carriage for schema-validated claims; scanner and legacy reasoning unchanged.",
+      "stage": "stage4-future-deep-scan-claims"
+    },
+    {
+      "approved_files": [
+        "scripts/high_order_inference.py",
+        "scripts/shock_inference.py",
+        "scripts/claim_reasoning_shadow.py",
+        "scripts/claim_reasoning_live.py"
+      ],
+      "purpose": "Switch high-order and shock detector generation to the verified claim graph after two clean shadow scans; preserve publication compatibility lock and fail closed to legacy if claim authority is unavailable.",
+      "stage": "stage6-claim-detector-switch"
+    },
+    {
+      "approved_files": [
+        "scripts/high_order_inference.py",
+        "scripts/shock_inference.py",
+        "scripts/claim_reasoning_live.py",
+        "scripts/claim_reasoning_shadow.py",
+        "scripts/run_reasoning_reform_smoke.py",
+        "tests/test_reasoning_reform_detector_switch.py",
+        "reasoning-reform/STAGE6.md"
+      ],
+      "purpose": "Switch high-order and shock detector generation to the accepted claim-native backend while preserving scanner/Deep Scan authority and freezing reader publication IDs until Stage 7.",
+      "stage": "stage6-claim-native-detector-switch"
+    },
+    {
+      "approved_files": [
+        "scripts/claim_reasoning_live.py",
+        "trends/trends.js",
+        "scripts/run_reasoning_reform_smoke.py",
+        "tests/test_reasoning_reform_detector_switch.py",
+        "tests/test_reasoning_reform_stage7_selection.py",
+        "reasoning-reform/STAGE7.md",
+        "scripts/claim_reasoning_shadow.py"
+      ],
+      "purpose": "Activate claim-native wow, oddity, falsifier-ledger, trend-band and threshold selection after the Stage-6 detector switch; retire legacy publication carry without changing Scanner/Deep Scan authority.",
+      "stage": "stage7-wow-trends-selection"
+    },
+    {
+      "approved_files": [
+        ".github/workflows/finalize-reasoning-renovation.yml",
+        "radar.json",
+        "reasoning-reform/STAGE8.md",
+        "reasoning-reform/STAGE8_COMPLETE.json",
+        "reasoning-reform/baseline.json"
+      ],
+      "purpose": "Close the reasoning renovation with reader-language lint, applied downstream retrace/cleanup, zero-orphan integrity checks, evidence immutability verification, protected-core checks, and end-to-end regression validation.",
+      "stage": "stage8-reader-presentation-final-validation"
+    },
+    {
+      "approved_files": [
+        "scripts/scan_radar.py",
+        "scripts/prepare_deep_scan_package.py",
+        "reasoning-reform/baseline.json"
+      ],
+      "purpose": "Controlled Strand-A recall repair: admit trustworthy Tier-1/2 European R&I system evidence through the bounded evidence-led route without requiring explicit geopolitical wording; align Deep Scan with the same route; preserve hard source-integrity exclusions; update protected-core fingerprints after regression validation.",
+      "stage": "post-stage8-strand-a-controlled-recall"
+    },
+    {
+      "approved_files": [
+        "scripts/scan_radar.py",
+        "scripts/prepare_deep_scan_package.py",
+        "radar_config.json",
+        "reasoning-reform/baseline.json"
+      ],
+      "purpose": "Strategic-gap discovery repair: reserve bounded front-of-queue scholarly discovery for clean industrial/energy/materials capability, commercialisation/private R&D, intra-European capability asymmetry, biotech/life sciences, and US/China dependency mechanisms; expand only the matching R&I-system ontology and authoritative EU source universe; explicitly align Deep Scan with those same state-variable examples; preserve all provenance, Europe, central-R&I and admission gates.",
+      "stage": "post-stage8-strategic-gap-recall"
+    },
+    {
+      "approved_files": [
+        "scripts/scan_radar.py",
+        "scripts/scan_radar_deep_a.py",
+        "radar_config.json",
+        ".github/workflows/radar-scan.yml",
+        ".github/workflows/radar-quick-scan.yml",
+        ".github/workflows/radar-quick-strand-scan.yml",
+        ".github/workflows/priority-docx-scan.yml",
+        ".github/workflows/radar-strand-a-deep-discovery.yml",
+        "tests/test_source_transport_repair.py",
+        "reasoning-reform/baseline.json"
+      ],
+      "purpose": "Source transport and first-party legal-source repair: identify the crawler for Crossref and blocked-source compatibility; try bare/www sitemap hosts; add configured institution RSS discovery without bypassing normal page/admission gates; use exact ISSN lookup for Science; stop normal partial-stage budgets from forcing degraded health; add bounded blocked-source news queries; and add a bounded first-party EUR-Lex/Cellar legal-act lane while preserving existing Strand-C gates.",
+      "stage": "post-stage8-source-transport-and-eurlex-recall"
+    },
+    {
+      "approved_files": [
+        "scripts/scan_radar.py",
+        "scripts/deep_read_works.py",
+        "scripts/prepare_deep_scan_package.py",
+        "scripts/prepare_deep_scan_hardcore_recovery.py",
+        "radar_config.json",
+        "tests/test_source_route_parity.py",
+        "reasoning-reform/baseline.json",
+        "scripts/import_deep_scan_results.py",
+        "scripts/import_deep_scan_hardcore_recovery.py"
+      ],
+      "purpose": "Add bounded first-party European Parliament adopted-text discovery and persistent source-transport telemetry; preserve scan-to-Deep-Scan route parity by carrying scanner validation routes into ordinary and hard-core Deep Scan source retrieval; require Deep Scan and terminal recovery audits to explicitly exercise scanner_validation_route when one exists, and reject drop_unverifiable when that route succeeded; treat unscheduled and pre-request budget-skipped source checks as neutral; preserve existing admission and Deep Scan correctness gates.",
+      "stage": "post-stage8-parliament-route-parity-and-source-health"
+    },
+    {
+      "approved_files": [
+        "scripts/scan_radar.py",
+        "scripts/scan_radar_deep_a.py",
+        "scripts/deep_read_works.py",
+        "scripts/import_deep_scan_results.py",
+        "scripts/import_deep_scan_hardcore_recovery.py",
+        "scripts/prepare_deep_scan_package.py",
+        "scripts/prepare_deep_scan_hardcore_recovery.py",
+        "radar_config.json",
+        "tests/test_source_transport_repair.py",
+        "tests/test_source_route_parity.py",
+        "reasoning-reform/baseline.json"
+      ],
+      "purpose": "Complete scan-to-validation route parity and selective publisher recall: keep first-party Cellar and European Parliament validation routes mandatory in ordinary and hard-core Deep Scan recovery; use an honest compatible Deep Scan crawler identity; add bounded exact DOI-prefix discovery only for RAND where current DOI activity and downstream validation are usable; mirror that route into the 24-minute Strand-A discovery scanner; leave blocked/metadata-sparse publisher prefixes out until substantive validation parity exists; preserve all ordinary A/B/C admission and source-integrity gates.",
+      "stage": "post-stage8-route-parity-and-selective-prefix-recall"
+    }
+  ],
+  "captured_for_repository_version": "v25.1.0-evidence-linked-reader",
+  "data_hashes_for_reference_only": {
+    "admission_state.json": "9fab021e2787d77f534b3f0b87d4f8930c818764d9bf3270859d8899f4da9bb9",
+    "radar.json": "2267ad6aeb54f19e905b552bfc617bb23fb27365f1e2b4d131f5ef762ac46b83",
+    "radar_active.json": "678fab7003c2f18f2fdae6e6dbe06590ce1b00565e20f4040ace70a9f1ff1715",
+    "reader_text.json": "496cdca24ec3e9150b78ded9e41ae9c35a27b7e691a5d42c5fd4df64053a5d96"
+  },
+  "legacy_reasoning_hashes": {
+    "scripts/high_order_inference.py": "c3250fbcc4198273e64f9ad5838aa89e5b2ed7509d79c9d0d4855a863a21b24d",
+    "scripts/shock_inference.py": "26051ca071108d6ee77063bd7b5c1c715cf29038de575920932be1a2f58c0add"
+  },
+  "profile": "radar-reasoning-reform-baseline-v1",
+  "protected_code_hashes": {
+    "active_boundary": {
+      "scripts/active_corpus.py": "0b61f05a03ff817364aee398e47dd5c43c7d9339201a773742d40a067bce5c42",
+      "scripts/downstream_retrace.py": "19f9272969986e4adb78abf64c5716ae99fc9811807fec35d76f3325f77ce5bf",
+      "scripts/rebuild_active_radar.py": "3e77545a932113686237f43a23a2a0db5225902ee4e2ed31f2c8b19951829f4a"
+    },
+    "deep_scan_hard_core": {
+      "scripts/deep_read_works.py": "61984f3c6afb7e464505476ca966281c13857a52e34f7a068fd49ad2674330e8",
+      "scripts/import_deep_scan_results.py": "3ab47dc8c955df3d29946c4117087a4fc52058430c371f64a3dcc543f56ae7f0",
+      "scripts/prepare_deep_scan_package.py": "375ecf671a29335211101d0b3a1957eb63fa7bb0059bf787d5d3e50e266a7dc3"
+    },
+    "scanner_hard_core": {
+      "scripts/scan_radar.py": "3a572e568cfe357e4be7da8c98e0378d3df44b2f570e8728ce8c9e3cd0e05f61"
+    }
+  },
+  "raw_counts": {
+    "frontier_evidence": 0,
+    "strand_a": 439,
+    "strand_b": 136,
+    "strand_c": 138
+  },
+  "reader_profiles": {
+    "deep-reader-offline-v1": 23,
+    "deep-reader-v2-authoritative": 1385
+  },
+  "reader_records": 1408,
+  "smoke_suite": {
+    "baseline_result": "65 passed",
+    "command": "python scripts/run_reasoning_reform_smoke.py",
+    "latest_stage4_result": "94 passed",
+    "latest_stage6_result": "124 passed (34 + 31 + 59 grouped safety runs)",
+    "latest_stage7_result": "132 passed (34 + 31 + 67 grouped safety runs)",
+    "note": "Full pytest collection was not used as the fast gate because at least one downstream-retrace integration test is intentionally long-running; the focused safety suite completes quickly and covers scanner/Deep Scan/active-boundary contracts."
+  },
+  "source_upload": "radar_articles_reports-main - 2026-09-17T191155.925.zip",
+  "stage6_detector_switch_hashes": {
+    "scripts/claim_reasoning_live.py": "b7b1e7a2c67250b2ecbfef3701b5717dfb6b9eb60c37b93e17591d79f7bad15d",
+    "scripts/claim_reasoning_shadow.py": "9ee5b0291028c6b2aeadb9ba4f230f333b430cd65c5cd537e49694c2385e0abf",
+    "scripts/high_order_inference.py": "776ce6d7fcf921afa94c03f78ffd4ae36de51ab031b56a5c4dcedbb740859046",
+    "scripts/shock_inference.py": "08ca326be0387db44a9378dc482a62ae8d1d6edad0ab44b3376d5a1cde436631"
+  }
+}
