@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
 <title>EU research and innovation · Risks &amp; Opportunities</title>
-<link rel="stylesheet" href="../radar.css?v=28.2">
+<link rel="stylesheet" href="../radar.css?v=29">
 <script src="../radar_data.js?v=28.1"></script>
 
 
-<!-- Legacy regression tokens only: reform.css?v=23.0 · site-shell.js?v=23.0 -->
+<!-- Legacy regression tokens only: reform.css?v=23.0 · site-shell.js?v=29 -->
 </head>
 <body>
 <header><div class="wrap top"><div><div class="kicker">PATHWAYS</div><h1>Risks &amp; Opportunities</h1><p class="lede">Forward-looking risks and opportunities for EU research &amp; innovation.</p></div><nav class="nav" aria-label="Primary site sections"><a href="../">Start</a><a href="../radar/">Main Radar</a><a href="../read/">Read At Least This</a><a href="../frontier/quick/">Matrix</a><a href="../trends/">Trends</a><a href="../phenomena/">Ongoing Phenomena</a><a class="primary" href="./" aria-current="page">Risks &amp; Opportunities</a><a href="../shocks/">External Shocks</a><a href="../historical/">Earlier Findings</a><a href="../literature/">Sources</a><a href="../stuff/">Stuff</a></nav></div></header>
@@ -21,8 +21,8 @@
 </div></main>
 <script src="../reader_rank.js?v=17.20.17"></script>
 <script src="../briefing/insights.js?v=22.2"></script>
-<script src="../reader_style.js?v=28.3"></script>
-<script src="priorities.js?v=23.8"></script>
+<script src="../reader_style.js?v=29"></script>
+<script src="../reader_cards.js?v=26"></script><script src="priorities.js?v=26"></script>
 <script>
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const p=v=>esc((globalThis.RadarInsights&&(RadarInsights.matrixText?.(v)||RadarInsights.fastReaderText?.(v)))||v);
@@ -34,6 +34,13 @@ function highOrderEvidenceHtml(x){if(!x?.highOrder)return '';const support=Array
 function displayDistance(x){if(x?.highOrder)return Math.max(1,Math.min(5,Number(x?.wow)||3));if(['scanner_source_classification','deep_scan_v2_semantic_classification'].includes(x?.interpretationBasis))return 1;return 2}
 function item(x,kind,i){
   const id=`detail-${kind}-${i}`;
+  const C=globalThis.RadarCards;
+  if(x?.highOrder&&x?.readerAuthored&&C){
+    // v26: engine-written card - kind of reasoning, finding, evidence, so-what.
+    const text=C.surface(x.title);
+    const body=C.body({lead:x.coreMessage,so:x.readerWhy,basis:x.readerBasis});
+    return `<li class="priority-card" data-obviousness="${displayDistance(x)}"><div class="priority-main"><span class="rank">${i+1}</span><div class="priority-copy">${C.chip(x.readerKindLabel,x.wow)}<div class="priority-title">${esc(text)}</div>${body}<div class="priority-actions"><button class="info-button" type="button" data-detail="${id}" aria-expanded="false">Sources</button></div></div></div><div id="${id}" class="detail" hidden>${highOrderEvidenceHtml(x)}${relatedEvidenceHtml(x)}${weakContextHtml(x)}</div></li>`;
+  }
   const rawText=RadarPriorities.plainPriorityTitle(x);
   const text=globalThis.RadarReaderStyle?.displayTitle?.(rawText)||rawText;
   const explanation=RadarPriorities.plainPriorityExplanation(x);
@@ -57,6 +64,6 @@ function shelf(items){return (items||[]).some(x=>x&&x.highOrder)?(items||[]).sli
 function render(view){const risks=shelf(view.risks),opps=shelf(view.opportunities);document.getElementById('risks').innerHTML=listHtml(risks,'risk');document.getElementById('opportunities').innerHTML=listHtml(opps,'opportunity');document.getElementById('riskCount').textContent='On the radar';document.getElementById('opportunityCount').textContent='On the radar';document.getElementById('riskStock').textContent=stockLine(view.stats.riskReserve,view.stats.riskWatch);document.getElementById('opportunityStock').textContent=stockLine(view.stats.opportunityReserve,view.stats.opportunityWatch);}
 (async()=>{try{const data=await RadarData.load('../radar.json','../radar_seed.json');render(RadarPriorities.buildPriorityView(data))}catch(e){document.getElementById('risks').innerHTML='<li class="empty">Unavailable.</li>';document.getElementById('opportunities').innerHTML='<li class="empty">Unavailable.</li>'}})();
 </script>
-<script src="../site-shell.js?v=28"></script>
+<script src="../site-shell.js?v=29"></script>
 </body>
 </html>
