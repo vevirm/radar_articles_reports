@@ -40,25 +40,25 @@ KIND_LABELS: dict[str, str] = {
     "corroborated": "Confirmed by several sources",
     "several_places": "Seen in several places",
     "early_sign": "Early sign",
-    "single_signal": "Single strong signal",
+    "single_signal": "One strong source",
     "continuity": "Keeps coming back",
-    "split_recurrence": "An old link returns",
-    "era_conjunction": "Issues merging",
+    "split_recurrence": "An old link is back",
+    "era_conjunction": "Two issues becoming one",
     "practice_before_doctrine": "Practice before rules",
-    "deployment_before_rules": "Running before rules",
+    "deployment_before_rules": "In use before rules",
     "clock_before_rule": "Deadline before rules",
-    "goal_without_measure": "Goal without a yardstick",
-    "success_metric_gap": "Money without a yardstick",
-    "stalled_proposal": "Stalled proposal",
-    "conflicting_criteria": "Rules in collision",
+    "goal_without_measure": "Goal without a measure",
+    "success_metric_gap": "Money without a measure of success",
+    "stalled_proposal": "Proposal stuck",
+    "conflicting_criteria": "Rules that clash",
     "dependency_pathway": "Chain reaction",
-    "latent_channel": "Unused lever",
-    "anchor_demand": "Ready-made customer",
+    "latent_channel": "A tool not yet used",
+    "anchor_demand": "A ready buyer",
     "future_shock": "What if",
     "trend": "Tug of war",
-    "magnitude_contrast": "Scale check",
-    "external_opening": "Opening from abroad",
-    "cross_pressure": "Policies at cross purposes",
+    "magnitude_contrast": "Size comparison",
+    "external_opening": "A chance from abroad",
+    "cross_pressure": "Policies pulling apart",
     "common_driver": "One cause, many fields",
     "national_convergence": "Country by country",
 }
@@ -463,22 +463,22 @@ def card(kind: str, headline: str, lead: str, so_what: str, basis: str = "", kin
 
 _OPPORTUNITY_FRAMES: dict[str, tuple[str, str]] = {
     # mechanism -> (single-development headline, condition that makes it count)
-    "funds": ("{X} {be} starting to get dedicated money", "the money turning into working facilities, teams and users"),
-    "invests": ("Serious money is starting to move into {x}", "the investment staying and scaling in Europe"),
-    "builds": ("{X} {be} starting to be built out", "the new capacity reaching the researchers and firms who need it"),
-    "adds_capacity": ("{X} {be} starting to be built out", "the new capacity reaching the researchers and firms who need it"),
-    "procures": ("Europe is starting to buy its way into {x}", "the purchases reaching users on fair terms"),
-    "collaborates": ("{X} {be} starting to rest on new alliances", "the partnership lasting beyond its launch"),
-    "associates": ("Horizon Europe's circle of partners is widening", "equal-terms participation turning into joint projects"),
-    "recruits": ("Europe is starting to recruit for {x}", "recruits finding careers that make them stay"),
-    "retains": ("New schemes are testing how to improve {x}", "people actually staying once the scheme runs"),
-    "launches": ("{X} {be} getting instruments of its own", "the instrument delivering beyond its first call"),
-    "supports": ("{X} {be} getting new public support", "support reaching the organisations that need it most"),
-    "coordinates": ("{X} {be} starting to be coordinated across borders", "coordination producing joint decisions, not just meetings"),
-    "prioritises": ("{X} {be} moving up Europe's priority list", "priorities being matched by budgets"),
-    "adopts": ("{X} {be} getting a formal basis", "the adopted measure being implemented on time"),
-    "standardises": ("Europe is helping write the rules for {x}", "European work shaping the international standard"),
-    "transfers": ("{X} {be} starting to move toward Europe", "others following the same route"),
+    "funds": ("{X} {be} starting to get dedicated money", "the money turns into working facilities, teams and users"),
+    "invests": ("Large sums are starting to go into {x}", "the investment stays and grows in Europe"),
+    "builds": ("More {x} {be} being built", "the new capacity reaches the researchers and firms who need it"),
+    "adds_capacity": ("More {x} {be} being built", "the new capacity reaches the researchers and firms who need it"),
+    "procures": ("{X} {be} starting to grow through public purchases", "the purchases reach users on fair terms"),
+    "collaborates": ("{X} {be} starting to rely on new partnerships", "the partnership lasts beyond its launch"),
+    "associates": ("More countries are joining Horizon Europe", "equal terms turn into joint projects"),
+    "recruits": ("Europe is starting to recruit people for {x}", "the people recruited find careers that make them stay"),
+    "retains": ("New schemes are testing ways to improve {x}", "people actually stay once the scheme runs"),
+    "launches": ("New programmes are being set up for {x}", "the programme delivers beyond its first call"),
+    "supports": ("{X} {be} getting new public support", "the support reaches the organisations that need it most"),
+    "coordinates": ("{X} {be} starting to be coordinated across borders", "coordination leads to joint decisions, not just meetings"),
+    "prioritises": ("{X} {be} moving up Europe's priority list", "budgets follow the priorities"),
+    "adopts": ("{X} {be} getting a legal basis", "the measure is put into practice on time"),
+    "standardises": ("Europe is helping write the rules for {x}", "European work shapes the international standard"),
+    "transfers": ("{X} {be} starting to move toward Europe", "others follow the same route"),
 }
 
 _FUNDING_WORDS = re.compile(r"\b(?:funding|finance|financing|investment|capital|budget|money)\b", re.I)
@@ -495,7 +495,7 @@ def _opportunity_single(e: Ev, x: str) -> str:
 
 
 _RISK_EVENT_FRAMES = (
-    (frozenset({"regulates", "requires", "restricts", "conditions", "screens", "licenses", "excludes"}), "{X} {be} starting to come with conditions"),
+    (frozenset({"regulates", "requires", "restricts", "conditions", "screens", "licenses", "excludes"}), "New conditions are starting to limit {x}"),
     (frozenset({"opposes"}), "{X} {be} meeting resistance"),
     (frozenset({"cuts", "withdraws", "reduces"}), "{X} {be} starting to lose support"),
 )
@@ -587,8 +587,29 @@ def weak_spots(evs: list[Ev], exclude: str = "") -> tuple[list[str], bool]:
     return ranked[:3], bool(ranked) and len(seen[ranked[0]]) >= 2
 
 
+# Plain words for each concept, so a non-specialist (and a non-native reader)
+# sees what is weak without decoding jargon.
+_WEAK_GLOSS = {
+    "commercialisation": "turning research into products",
+    "scale-up": "growing small firms into large ones",
+    "market demand": "finding buyers for new products",
+    "venture capital": "risk capital for young firms",
+    "exit markets": "stock-market listings for growing firms",
+    "public procurement": "public buying of new solutions",
+    "patenting": "patents",
+    "skills": "skilled people",
+    "knowledge transfer": "moving knowledge from labs to firms",
+    "clusters": "business clusters",
+    "the rules": "the rules",
+    "finance": "finance",
+}
+# The steps that come after the research itself.
+_DOWNSTREAM = {"commercialisation", "scale-up", "market demand", "venture capital", "exit markets",
+               "public procurement", "patenting", "knowledge transfer"}
+
+
 def _weak_phrase(terms: list[str]) -> str:
-    return RL.join_names(terms)
+    return RL.join_names([_WEAK_GLOSS.get(t, t) for t in terms])
 
 
 def _stay(terms: list[str]) -> str:
@@ -608,6 +629,8 @@ def _single_headline(e: Ev, x: str) -> str:
     core = re.sub(r"^(?:mapping|analysing|analyzing|reviewing|surveying|a (?:review|survey|mapping) of|an analysis of)\b[^.]*?\b(?:reveals?|shows?|finds?|suggests?|indicates?)\s+(?:that\s+)?",
                   "", e.statement, flags=re.I)
     stmt = headline_from_statement(cap(core) if core != e.statement else e.statement, 18)
+    if core != e.statement and len(stmt) > 1 and stmt[0].isupper() and stmt[1].islower():
+        stmt = stmt[0].lower() + stmt[1:]  # "Strategic autonomy: fragmented coverage ...", not "...: Fragmented"
     if not stmt:
         return f"{cap(x)} {be(x)} under strain"
     first = [w.lower() for w in re.findall(r"[A-Za-z]+", stmt)[:4]]
@@ -633,35 +656,38 @@ def write_corroborated(product: str, raw: dict[str, Any], cand: dict[str, Any], 
         # One source reporting one event: an early sign, stated about the system.
         head = _risk_event_headline(evs[0], x)
         return card(kind, head, lead, stake_line(obj, vocab, x),
-                    "One source so far: an early sign, not yet a pattern.", kind_label=KIND_LABELS["early_sign"])
+                    "Only one source so far: an early sign, not yet a pattern.", kind_label=KIND_LABELS["early_sign"])
     if product == "risk":
         analysis = sum(1 for e in evs if e.is_analysis) >= max(1, len(evs) / 2)
         # One source is a signal, not an established pattern: its headline is modal.
         if direction == "becomes_conditional":
-            head = (f"{cap(x)} increasingly {verb_s(x, 'come')} with strings attached" if n_src >= 2
+            head = (f"More and more conditions are attached to {x}" if n_src >= 2
                     else _single_headline(evs[0], x) if evs else f"{cap(x)} could come with more strings attached")
         elif direction == "becomes_contested":
-            head = (f"{cap(x)} {be(x)} now openly contested" if n_src >= 2
+            head = (f"People now disagree openly about {x}" if n_src >= 2
                     else f"{cap(x)} could become more contested")
         else:
             term = _shared_constraint(evs)
             weak, shared = weak_spots(evs, x) if term else ([], False)
             if weak:
-                head = (f"{cap(x)} keeps falling short on {_weak_phrase(weak[:1])}" + (f", and on {_weak_phrase(weak[1:])}" if len(weak) > 1 else "")
-                        if shared else f"{cap(x)} falls short on {_weak_phrase(weak)}")
+                if all(t in _DOWNSTREAM for t in weak):
+                    # The finding is about the chain: research is there, the next steps are not.
+                    head = f"Research is not Europe's weak link. What comes after it is: {_weak_phrase(weak)}"
+                else:
+                    head = f"Studies find weak points in {x}: {_weak_phrase(weak)}"
             elif len(states) >= 2:
-                head = (f"{cap(x)} keeps hitting the same {term} in several member states" if term
+                head = (f"The same {term} {'keep' if is_plural(term) else 'keeps'} showing up in {x} across member states" if term
                         else f"{cap(x)} {be(x)} under strain in several member states")
             elif n_src >= 2 and analysis:
-                head = (f"Independent studies keep finding {term} in {x}" if term
+                head = (f"Several studies find {term} in {x}" if term
                         else f"Independent studies agree: {x} is falling short")
             elif n_src >= 2:
-                head = f"{cap(x)} {be(x)} being squeezed by measures already in force"
+                head = f"Rules already in force are limiting {x}"
             else:
                 head = _single_headline(evs[0], x) if evs else f"{cap(x)} is under strain"
         so = stake_line(obj, vocab, x)
         if n_src >= 2:
-            basis = "Several independent sources show this directly."
+            basis = "The sources are independent of each other."
         elif direction == "becomes_contested":
             basis = "One source shows this directly; whether the contestation widens or hardens is the Radar's inference."
         elif direction == "becomes_conditional":
@@ -679,13 +705,16 @@ def write_corroborated(product: str, raw: dict[str, Any], cand: dict[str, Any], 
     actors = {e.actor for e in evs if e.actor}
     eu_level = any(e.scope == "eu" for e in evs)
     if records >= 2 and public and private:
-        head = f"{cap(x)} {be(x)} growing on two fronts: public and private"
+        head = f"Both public and private money is going into {x}"
     elif records >= 2 and len(states) >= 2:
-        head = f"{cap(x)} {be(x)} expanding in several member states at once"
+        head = f"Several member states are expanding {x} at the same time"
     elif records >= 2 and eu_level and states:
-        head = f"{cap(x)} {be(x)} being pushed at EU level and nationally at once"
+        core = re.sub(r"^(?:money for |funding for )|\s+funding$", "", x)
+        head = (f"Both the EU and national governments are putting money into {core}"
+                if core != x and all(e.mechanism in _MONEY for e in evs if not e.is_analysis)
+                else f"Both the EU and national governments are pushing {x}")
     elif records >= 2 and len(actors) == 1:
-        head = f"{cap(x)} {be(x)} expanding on {_number_word(records)} fronts at once"
+        head = f"{cap(x)} {be(x)} growing in {_number_word(records)} ways at once"
     elif records >= 2:
         head = f"Several separate moves are expanding {x}"
     else:
@@ -693,9 +722,9 @@ def write_corroborated(product: str, raw: dict[str, Any], cand: dict[str, Any], 
     cond = _OPPORTUNITY_FRAMES.get(evs[0].mechanism, ("", ""))[1] if evs else ""
     if head.startswith("Europe is paying to shape"):
         cond = _OPPORTUNITY_FRAMES["standardises"][1]
-    so = f"What would make it count: {cond}." if cond else stake_line(obj, vocab, x)
-    basis = ("Several independent sources show this directly." if n_src >= 2
-             else "One source shows the move; whether it scales is the open question.")
+    so = f"It will count only if {cond}." if cond else stake_line(obj, vocab, x)
+    basis = ("The sources are independent of each other." if n_src >= 2
+             else "One source reports this move; whether it grows is the open question.")
     if "member states" in head or "nationally" in head:
         places = KIND_LABELS["several_places"]
     elif event:
@@ -711,70 +740,70 @@ _CONTINUITY_TITLES = {
     "research.collaboration": "Research collaboration keeps changing shape, not disappearing",
     "innovation.system_performance": "Europe keeps returning to the same problem: turning research into companies",
     "ai.governance": "AI governance keeps moving from principles into operating rules",
-    "research.system_governance": "Research governance keeps being pulled toward competitiveness",
+    "research.system_governance": "Research policy is being pulled more and more toward competitiveness",
     "goal.strategic_autonomy": "Strategic autonomy keeps spreading through research and technology policy",
-    "research.infrastructure": "Research infrastructure keeps becoming a strategic asset in its own right",
-    "talent.retention": "Keeping researchers keeps returning as Europe's capacity limit",
+    "research.infrastructure": "Research facilities are becoming strategic assets in their own right",
+    "talent.retention": "Keeping researchers is still one of Europe's biggest problems",
     "talent.recruitment_abroad": "Europe keeps trying to recruit researchers from abroad",
-    "research_security.screening": "Research security keeps moving into ordinary research administration",
+    "research_security.screening": "Security checks are becoming part of everyday research work",
     "chips.international_cooperation": "Europe keeps looking abroad for chip partnerships",
     "funding.route": "Where Europe's research money should go keeps coming back as a question",
     "family:innovation": "The innovation gap keeps coming back in new forms",
-    "family:digital": "Digital policy keeps merging rules, infrastructure and security",
+    "family:digital": "Digital policy now mixes rules, infrastructure and security",
     "family:industrial": "Europe keeps rediscovering that research does not automatically become industry",
     "family:research": "The research system keeps being asked to deliver more than research",
-    "family:talent": "The contest for research talent keeps returning",
-    "family:compute": "Compute keeps coming back as the limit on European AI",
+    "family:talent": "Countries keep competing for researchers",
+    "family:compute": "Computing power is still what limits European AI",
 }
 
-_KIND_WORD = {"action": "action", "effect": "measured effects", "diagnosis": "analysis", "advocacy": "calls to act"}
+_KIND_WORD = {"action": "report action", "effect": "report measured effects", "diagnosis": "analyse it", "advocacy": "call for action"}
 
 # What the persistence means, per object (curated pattern statements, formerly
 # hard-wired in phenomena/index.html; now the engine's so-what for continuity).
 _OPENNESS = "Europe is still balancing open research against protecting sensitive knowledge, data and partnerships."
-_TALENT = "Skills, mobility and career conditions decide whether Europe keeps the specialised scientific capability it trains."
-_INDUSTRY = "Strong research still does not automatically become globally competitive firms or production capacity in Europe."
-_SYSTEM = "Funding, careers, infrastructure and governance keep deciding how resilient and productive European research is as a whole."
+_TALENT = "Careers, mobility and working conditions decide whether Europe keeps the specialists it trains."
+_INDUSTRY = "Strong research still does not automatically lead to strong firms or factories in Europe."
+_SYSTEM = "Money, careers, facilities and governance still decide how much European research produces and how well it copes with shocks."
 _CONTINUITY_PATTERNS = {
-    "talent.recruitment_abroad": "Europe's pull on researchers still depends on mobility, career conditions and the competition for specialised talent.",
+    "talent.recruitment_abroad": "Whether researchers come to Europe still depends on careers, mobility and competition from other countries.",
     "talent.retention": _TALENT,
     "talent.career_structure": _TALENT,
-    "innovation.system_performance": "Europe still produces strong research but struggles to turn it into scaled firms, products and industrial capacity.",
-    "innovation.deep_tech_startups": "Deep-tech start-ups still have to turn research breakthroughs into firms that can finance, scale and stay in Europe.",
+    "innovation.system_performance": "Europe still produces strong research, but it struggles to turn it into products, growing firms and factories.",
+    "innovation.deep_tech_startups": "Deep-tech start-ups still struggle to turn research breakthroughs into firms that can raise money, grow and stay in Europe.",
     "industrial.competitiveness": _INDUSTRY,
-    "goal.strategic_autonomy": "More research and technology decisions are shaped by whether Europe can act without critical outside dependencies.",
+    "goal.strategic_autonomy": "More research and technology decisions now depend on whether Europe can act without relying on others.",
     "research.system_governance": _SYSTEM,
     "research.system_capacity": _SYSTEM,
-    "funding.route": "Public research money is increasingly tied to capabilities Europe considers strategically important.",
+    "funding.route": "Public research money is more and more tied to what Europe sees as strategically important.",
     "research.collaboration": "Collaboration continues, but security, funding and strategic interests are reshaping how partnerships work.",
     "research.openness": _OPENNESS,
     "research.open_access": _OPENNESS,
-    "research.infrastructure": "Shared facilities and computing systems now matter directly to European resilience and strategic capability.",
-    "research.infrastructure_access": "Shared facilities and computing systems now matter directly to European resilience and strategic capability.",
-    "research_security.screening": "Collaboration remains important, but partners, data and knowledge flows face tighter security conditions.",
+    "research.infrastructure": "Shared research facilities and computers now matter for Europe's security and independence, not only for science.",
+    "research.infrastructure_access": "Shared research facilities and computers now matter for Europe's security and independence, not only for science.",
+    "research_security.screening": "Collaboration still matters, but partners, data and knowledge now face tighter security checks.",
     "materials.critical_raw": "Access to critical raw materials remains a constraint on European research, manufacturing and strategic technologies.",
-    "family:chips": "European chip ambitions still depend on fabs, supply chains, investment and access to specialised technology.",
-    "family:digital": "Digital policy increasingly links regulation, infrastructure, security and industrial competitiveness rather than treating them separately.",
-    "family:ai": "AI policy increasingly connects computing capacity, skills, research access, industrial capability and strategic dependence.",
-    "family:compute": "Access to large computing systems decides which technologies European researchers and firms can develop on their own terms.",
-    "family:export_control": "Technology competition increasingly decides which partnerships, inputs and markets stay open to European research.",
-    "family:research_security": "Collaboration remains important, but partners, data and knowledge flows face tighter security conditions.",
-    "family:innovation": "The recurring challenge is turning research strength into productivity, commercialisation and competitive growth.",
+    "family:chips": "Europe's chip plans still depend on factories, supply chains, money and access to special equipment.",
+    "family:digital": "Digital policy now treats rules, infrastructure, security and industry together, not separately.",
+    "family:ai": "AI policy now ties together computing power, skills, research, industry and dependence on others.",
+    "family:compute": "Access to large computers decides which technologies European researchers and firms can develop on their own.",
+    "family:export_control": "Competition over technology more and more decides which partners, supplies and markets stay open to European research.",
+    "family:research_security": "Collaboration still matters, but partners, data and knowledge now face tighter security checks.",
+    "family:innovation": "The same problem keeps returning: turning strong research into products, jobs and growth.",
     "family:industrial": _INDUSTRY,
     "family:methods": "Long-term planning is being pulled closer to decisions about security, capability and international dependence.",
-    "family:energy": "Research and production stay exposed when essential inputs come from concentrated outside suppliers.",
-    "family:materials": "Research and production stay exposed when essential inputs come from concentrated outside suppliers.",
+    "family:energy": "Research and production stay at risk when essential supplies come from a few outside suppliers.",
+    "family:materials": "Research and production stay at risk when essential supplies come from a few outside suppliers.",
     "family:research": _SYSTEM,
     "family:talent": _TALENT,
-    "family:funding": "Public research money is increasingly tied to capabilities Europe considers strategically important.",
-    "family:horizon": "Public research money is increasingly tied to capabilities Europe considers strategically important.",
+    "family:funding": "Public research money is more and more tied to what Europe sees as strategically important.",
+    "family:horizon": "Public research money is more and more tied to what Europe sees as strategically important.",
     "family:defence": "European research policy keeps being asked how close it should come to defence, and each instrument answers separately.",
     "family:quantum": "Quantum keeps moving from laboratory promise toward infrastructure that someone has to build, pay for and secure.",
-    "family:datacentre": "Where compute can physically be built is becoming as decisive as how much of it Europe can afford.",
+    "family:datacentre": "Where data centres can physically be built now matters as much as how many Europe can afford.",
     "family:green": "Clean technology keeps testing whether Europe can turn research leadership into manufacturing at scale.",
     "family:health": "Health research keeps depending on data and infrastructure that cross national borders more easily than the rules do.",
-    "family:finance": "Europe keeps producing ideas faster than the capital that could scale them.",
-    "family:goal": "More research and technology decisions are shaped by whether Europe can act without critical outside dependencies.",
+    "family:finance": "Europe keeps producing ideas faster than it finds the money to grow them.",
+    "family:goal": "More research and technology decisions now depend on whether Europe can act without relying on others.",
 }
 
 
@@ -819,10 +848,10 @@ def write_named_continuity(raw: dict[str, Any], cand: dict[str, Any], node_by_cl
     dn, dt_ = dominant(now), dominant(then)
     form = ""
     if dn and dt_ and dn != dt_ and _KIND_WORD.get(dn) and _KIND_WORD.get(dt_):
-        form = f"What has changed is the form: the earlier record is mostly {_KIND_WORD[dt_]}, the current one mostly {_KIND_WORD[dn]}."
+        form = f"What has changed: earlier sources mostly {_KIND_WORD[dt_]}; recent ones mostly {_KIND_WORD[dn]}."
     pattern = continuity_pattern(obj)
-    so = " ".join(p for p in (pattern, form) if p) or "An issue that survives several policy cycles is structural; expect it in the next programme too."
-    return card("continuity", head, " ".join(parts), so, "Recurrence across the historical and current record; no single source says it persists.")
+    so = " ".join(p for p in (pattern, form) if p) or "An issue that survives several policy cycles is built into the system; expect it in the next programme too."
+    return card("continuity", head, " ".join(parts), so, "Seen again and again in older and recent sources; no single source says it continues.")
 
 
 def write_split_recurrence(raw: dict[str, Any], cand: dict[str, Any], node_by_claim: dict, vocab: dict | None) -> dict[str, str]:
@@ -875,20 +904,20 @@ def write_sequence(grammar: str, raw: dict[str, Any], cand: dict[str, Any], node
         first = (roles.get("practice") or evs[:1] or [None])[0]
         later = (roles.get("doctrine") or evs[1:2] or [None])[0]
         head = f"{cap(x)} {be(x)} moving faster than {its(x)} rules{_where(first)}"
-        so = "What gets built first tends to set the terms that the later rules have to accept."
-        basis = "Dated sources show the practice before the framework; the lock-in risk is the Radar's inference."
+        so = "What is built first usually sets the terms that later rules must accept."
+        basis = "The dates in the sources show the practice came before the rules; the risk is the Radar's inference."
     elif grammar == "deployment_before_rules":
         first = (roles.get("deployment") or evs[:1] or [None])[0]
         later = (roles.get("first_rule") or evs[1:2] or [None])[0]
         head = f"{cap(x)} {be(x)} operating before {its(x)} rules are settled{_where(first)}"
-        so = "Operations that start first can lock in choices the rules then have to accommodate."
-        basis = "Dated sources show operation before adoption; the lock-in risk is the Radar's inference."
+        so = "What starts running first can fix choices that the rules then have to accept."
+        basis = "The dates in the sources show it was running before the rules were adopted; the risk is the Radar's inference."
     else:  # clock_before_rule
         first = (roles.get("commitment") or evs[:1] or [None])[0]
         later = (roles.get("rule") or evs[1:2] or [None])[0]
-        head = f"{cap(x)} {be(x)} on a deadline {its(x)} rules have not caught up with"
-        so = "A running clock can force choices on sites, power or eligibility before the rules for them exist."
-        basis = "Sources show the deadline and the unsettled rules; the squeeze is the Radar's inference."
+        head = f"{cap(x)} {'have' if is_plural(x) else 'has'} a deadline, but {its(x)} rules are not ready"
+        so = "A deadline can force choices on sites, power or eligibility before the rules for them exist."
+        basis = "The sources show the deadline and the unfinished rules; the squeeze is the Radar's inference."
     parts = []
     if first:
         parts.append(first.said(28))
@@ -918,7 +947,7 @@ def write_goal_without_measure(raw: dict[str, Any], cand: dict[str, Any], node_b
     inv = int(raw.get("invocations", 0) or 0)
     meas = int(raw.get("measurements", 0) or 0)
     evs = evidence(cand.get("support") or [], node_by_claim)
-    head = f"Everyone invokes {x}; almost no one measures it"
+    head = f"Everyone talks about {x}; almost no one measures it"
     lead = f"The current evidence invokes {x} {inv} times but measures an outcome {meas} times. " + lead_from(evs, 1)
     return card("goal_without_measure", head, lead, "A goal that is never measured can justify almost any spending.",
                 "Counts from the Radar's current evidence base.")
@@ -956,7 +985,7 @@ def write_conflicting(raw: dict[str, Any], cand: dict[str, Any], node_by_claim: 
     if gap:
         parts.append(gap.said(24))
     return card("conflicting_criteria", head, " ".join(parts),
-                "Without a tie-break, the same project can get different answers depending on which rule is applied first.",
+                "No rule says which requirement wins, so the same project can get different answers depending on which rule is applied first.",
                 "Each requirement is sourced; the collision is the Radar's inference.")
 
 
@@ -983,24 +1012,24 @@ def write_dependency(product: str, raw: dict[str, Any], cand: dict[str, Any], no
         "european", "europe", "research", "public", "access", "capacity", "joint"}
     if expo and expo is not commit and any(k[:6] in expo.statement.lower() for k in keys):
         parts.append(expo.said(24))
-    so = f"A failure in {d_label} would reach {c_label} before Europe could substitute."
+    so = f"If {d_label} fails, {c_label} is hit before Europe can find a replacement."
     return card("dependency_pathway", head, " ".join(parts), so, "Each link is sourced; the chain as a whole is the Radar's inference.")
 
 
 _LEVER_KIND = {
-    "procures": ("buys at scale", "Whoever buys at this scale can attach conditions to access, a way to act on {need} without new law."),
-    "funds": ("funds", "Funding conditions can steer {need} faster than new regulation."),
-    "invests": ("invests", "Investment terms can steer {need} faster than new regulation."),
-    "standardises": ("sets standards", "Standards written now decide who can compete later."),
-    "certifies": ("certifies", "Certification decides who may take part, which makes it a lever for {need}."),
-    "coordinates": ("coordinates", "An existing network can carry {need} without building new institutions."),
-    "collaborates": ("partners", "An existing partnership can carry {need} without building new institutions."),
-    "associates": ("associates partners", "Association terms can carry {need} to partners outside the EU."),
+    "procures": ("buys at scale", "A buyer this large can set conditions for access. That is a way to improve {need} without a new law."),
+    "funds": ("funds", "Conditions attached to funding can improve {need} faster than new rules."),
+    "invests": ("invests", "Conditions attached to investment can improve {need} faster than new rules."),
+    "standardises": ("sets standards", "The standards written now decide who can compete later."),
+    "certifies": ("certifies", "Certification decides who may take part, so it can be used to improve {need}."),
+    "coordinates": ("coordinates", "An existing network can take on {need} without new institutions."),
+    "collaborates": ("partners", "An existing partnership can take on {need} without new institutions."),
+    "associates": ("associates partners", "The terms for partner countries can carry {need} beyond the EU."),
     "regulates": ("regulates", "Rules already in force can be extended to {need} faster than new ones can be written."),
-    "prioritises": ("sets priorities", "Existing priorities can be re-aimed at {need} without a new programme."),
-    "builds": ("builds", "What Europe builds for one purpose can be opened to serve {need}."),
-    "launches": ("runs", "A running instrument can take on {need} faster than a new one can be set up."),
-    "supports": ("supports", "A running support scheme can take on {need} faster than a new one can be set up."),
+    "prioritises": ("sets priorities", "Existing priorities can be pointed at {need} without a new programme."),
+    "builds": ("builds", "What Europe builds for one purpose can be opened up for {need}."),
+    "launches": ("runs", "A programme that already runs can take on {need} faster than a new one can start."),
+    "supports": ("supports", "A support scheme that already runs can take on {need} faster than a new one can start."),
 }
 
 
@@ -1015,7 +1044,7 @@ def write_latent(raw: dict[str, Any], cand: dict[str, Any], node_by_claim: dict,
     lever = (roles.get("existing_structure") or [None])[0]
     recv = (roles.get("receiving_instrument") or roles.get("live_connection") or [None])[0]
     prec = (roles.get("precedent") or [None])[0]
-    head = f"{cap(tool)} could double as a lever for {need}"
+    head = f"{cap(tool)} could also be used to improve {need}"
     parts = []
     if gap:
         parts.append(f"The gap: {lower_first(gap.said(26))}")
@@ -1026,7 +1055,7 @@ def write_latent(raw: dict[str, Any], cand: dict[str, Any], node_by_claim: dict,
     elif prec:
         parts.append(f"A precedent: {lower_first(prec.said(22))}")
     mech = lever.mechanism if lever else ""
-    so = _LEVER_KIND.get(mech, ("", "It would use something Europe already runs instead of building from scratch."))[1].format(need=need)
+    so = _LEVER_KIND.get(mech, ("", "It would use something Europe already has instead of starting from zero."))[1].format(need=need)
     return card("latent_channel", head, " ".join(parts), so, "No source makes this connection yet; it is the Radar's inference.")
 
 
@@ -1309,36 +1338,36 @@ EXPOSURE_MECHANISMS: dict[str, dict[str, str]] = {
 }
 
 _SHOCK_CONSEQUENCE = {
-    "cyber": "{X} could go offline or be compromised, with little ready backup to switch to.",
-    "energy": "{X} could be slowed or paused while power goes to other essential uses.",
-    "export_control": "{X} could be cut off from equipment, components or partners it relies on.",
+    "cyber": "{X} could stop working or be taken over, with no backup ready.",
+    "energy": "{X} could slow down or stop while power goes to other essential uses.",
+    "export_control": "{X} could lose access to equipment, parts or partners it needs.",
     "security_reclassification": "{X} could lose partners, people or openness almost overnight.",
-    "conflict": "Money, people and supply routes behind {x} could be diverted or cut.",
-    "critical_input": "{X} could halt where there is no fast substitute.",
+    "conflict": "The money, people and supply routes behind {x} could be diverted or cut.",
+    "critical_input": "{X} could stop if there is no quick replacement.",
     "sanctions": "The money and partnerships behind {x} could be frozen.",
     "acquisition": "Control of {x}, and its know-how, could move outside Europe.",
-    "data_access": "{X} could lose lawful access to the data it needs.",
+    "data_access": "{X} could lose legal access to the data it needs.",
     "commercial": "{X} could lose a service it cannot quickly replace.",
-    "external_finance": "{X} could lose the capital it has been counting on.",
-    "funding_cut": "{X} could stop mid-course, with teams and equipment stranded.",
-    "talent_flight": "{X} could lose expertise it cannot hire back quickly.",
-    "political_shift": "Support for {x} could be withdrawn or its rules rewritten.",
-    "regulatory_shift": "{X} could have to pause, redesign or seek fresh approval.",
-    "tech_leap": "The case for {x} could collapse and money could move elsewhere.",
-    "info_manipulation": "Public and political trust in {x} could erode.",
-    "chokepoint": "{X} could stall with no ready alternative.",
-    "hazard": "Facilities could close and work on {x} halt.",
+    "external_finance": "{X} could lose money it has been counting on.",
+    "funding_cut": "{X} could stop halfway, leaving teams and equipment without work.",
+    "talent_flight": "{X} could lose experts it cannot quickly replace.",
+    "political_shift": "Support for {x} could be withdrawn, or its rules rewritten.",
+    "regulatory_shift": "{X} could have to stop, change its design or ask for new approval.",
+    "tech_leap": "The reason to invest in {x} could disappear, and the money could move elsewhere.",
+    "info_manipulation": "Public and political trust in {x} could fall.",
+    "chokepoint": "{X} could stop, with no alternative ready.",
+    "hazard": "Facilities could close and work on {x} could stop.",
 }
 
 
 # Where the generic consequence would misdescribe how the asset fails.
 _SHOCK_CONSEQUENCE_BY_CLUSTER = {
-    ("funding_cut", "talent"): "Fellowships and early-career positions are usually cut first, and the researchers they hold leave for better-funded systems.",
-    ("funding_cut", "funding_programme"): "Planned growth in {x} could turn into a freeze, with calls cancelled or shrunk mid-programme.",
-    ("funding_cut", "research_infrastructure"): "Facilities would keep their running costs but lose the money for upgrades and staff, and users would move elsewhere.",
-    ("energy", "compute_ai"): "{X} would be among the first loads throttled when grids run short, since data centres draw power around the clock.",
-    ("talent_flight", "chips"): "Fabs and pilot lines could stand half-staffed: specialised process engineers take years to train.",
-    ("political_shift", "funding_programme"): "{X} could be renegotiated in the next budget round, with research competing against louder priorities.",
+    ("funding_cut", "talent"): "Fellowships and early-career jobs are usually cut first, and those researchers leave for countries that pay better.",
+    ("funding_cut", "funding_programme"): "Planned growth in {x} could turn into a freeze, with calls cancelled or cut halfway through.",
+    ("funding_cut", "research_infrastructure"): "Facilities would still have running costs but no money for upgrades and staff, and users would go elsewhere.",
+    ("energy", "compute_ai"): "{X} would be among the first users cut when the grid runs short, because data centres need power day and night.",
+    ("talent_flight", "chips"): "Chip factories could be left half-staffed, because their engineers take years to train.",
+    ("political_shift", "funding_programme"): "{X} could be reopened in the next budget round, with research competing against louder priorities.",
 }
 
 
@@ -1379,7 +1408,7 @@ def write_shock(raw: dict[str, Any], cand: dict[str, Any], node_by_claim: dict, 
     tpl = (_SHOCK_CONSEQUENCE_BY_CLUSTER.get((pid, cluster_of(asset_obj, vocab)))
            or _SHOCK_CONSEQUENCE.get(pid, "The disruption could remove something {x} depends on before Europe can replace it."))
     so = tpl.format(x=asset, X=cap(asset))
-    return card("future_shock", head, " ".join(parts), so, "The connection is the Radar's future hypothesis, built from separate sources, not a forecast made by any of them.")
+    return card("future_shock", head, " ".join(parts), so, "This is the Radar's future hypothesis, built from separate sources; none of them makes this forecast.")
 
 
 # ---------------------------------------------------------------------------
@@ -1399,13 +1428,13 @@ def write_magnitude(raw: dict[str, Any], cand: dict[str, Any], node_by_claim: di
         head = (f"{cap(clean(raw.get('unit_label')))} ({clean(raw.get('unit_text'))}) {clean(raw.get('relation')) or 'rivals'} "
                 f"{clean(raw.get('programme_label'))} ({clean(raw.get('programme_text'))})")
         if clean(raw.get("relation")) == "outweighs":
-            so = ("When one project outweighs a whole public programme, the larger investor sets the terms for sites, power and people, "
-                  "and in this case that is not the programme.")
+            so = ("When one project is bigger than a whole public programme, its owner, not the programme, "
+                  "decides where sites, power and people go.")
         else:
             so = "When a single plan comes close to a whole EU programme, the programme no longer sets the direction on its own."
     elif frame == "deal_vs_sector":
         head = f"{cap(big_what)} ({big_amt}) is {ratio_phrase(r)} {small_what} ({small_amt})"
-        so = "Money is concentrating on a few champions; the rest of the field competes for a much smaller pool."
+        so = "The money goes to a few big winners; everyone else shares a much smaller pot."
     else:  # priority_gap
         head = f"{big_amt} for {big_what}, {small_amt} for {small_what}"
         so = (f"That is {ratio_phrase(r).replace('times', 'to one').replace('about ', 'about ')}. "
@@ -1425,6 +1454,16 @@ def write_magnitude(raw: dict[str, Any], cand: dict[str, Any], node_by_claim: di
     return card("magnitude_contrast", head, " ".join(parts), so, basis)
 
 
+_GAIN_VERB = {
+    "talent.recruitment_abroad": "to recruit researchers",
+    "talent.retention": "to keep its researchers",
+    "horizon.association": "to attract new partners to Horizon Europe",
+    "research.collaboration": "to win research partners",
+    "innovation.deep_tech_startups": "to attract start-ups",
+    "finance.venture_capital": "to attract investors",
+}
+
+
 def write_external_opening(raw: dict[str, Any], cand: dict[str, Any], node_by_claim: dict, vocab: dict | None) -> dict[str, str]:
     evs = evidence(cand.get("support") or [], node_by_claim)
     roles = by_role(evs)
@@ -1432,7 +1471,8 @@ def write_external_opening(raw: dict[str, Any], cand: dict[str, Any], node_by_cl
     gains = roles.get("european_gain") or []
     who = clean(raw.get("external_actor"))
     phrase = clean(raw.get("gain_phrase")) or f"Europe in {label(raw.get('gain_object'))}"
-    head = f"{who + ' ' if who else 'Outside '}restrictions open a window for {phrase}"
+    verb = _GAIN_VERB.get(clean(raw.get("gain_object")), f"in {label(raw.get('gain_object'))}")
+    head = f"{who + ' restrictions' if who else 'Restrictions abroad'} give Europe a chance {verb}"
     parts = []
     if ext:
         parts.append(f"Abroad: {lower_first(ext.said(24))}")
@@ -1440,7 +1480,7 @@ def write_external_opening(raw: dict[str, Any], cand: dict[str, Any], node_by_cl
         parts.append(f"In Europe: {lower_first(gains[0].said(24))}")
         if len(gains) > 1:
             parts.append(gains[1].said(22))
-    so = "What others close can be Europe's to take, but only if the offer is ready before the window shuts."
+    so = "Europe can gain what others close off, but only if its offer is ready in time."
     return card("external_opening", head, " ".join(parts), so,
                 "Each move is sourced; that one opens room for the other is the Radar's inference, not a cause any source reports.")
 
@@ -1467,7 +1507,7 @@ def write_common_driver(raw: dict[str, Any], cand: dict[str, Any], node_by_claim
     fields = [clean(x) for x in (raw.get("field_labels") or []) if clean(x)]
     head = clean(raw.get("headline")) or f"{cap(driver)} now shapes European plans in {RL.join_names(fields[:4])} at once"
     parts = [e.said(20) for e in evs[:3]]
-    so = "When one dependency drives several fields, a single outside decision can move them all together; a joint response is also possible."
+    so = "Because one cause is behind all of them, one decision abroad could hit them all at once. Europe could also answer them together."
     return card("common_driver", head, " ".join(parts), so, "Each field is sourced separately; the common driver is the Radar's synthesis.")
 
 
@@ -1478,8 +1518,8 @@ def write_national_convergence(raw: dict[str, Any], cand: dict[str, Any], node_b
     head = f"{cap(x)} {be(x)} being built country by country, not as one European effort"
     parts = [e.said(20) for e in evs[:3]]
     eu = clean(raw.get("eu_state"))
-    so = ("National moves are running ahead of a common EU approach; 27 designs are harder to align later than one."
-          if eu != "adopted" else "National moves now sit alongside an EU framework; the test is whether they converge on it.")
+    so = ("Countries are moving before there is a common EU approach; 27 separate designs are harder to align later than one."
+          if eu != "adopted" else "National measures now exist next to an EU framework; the question is whether they will fit together.")
     return card("national_convergence", head, " ".join(parts), so, "Each national move is sourced; the pattern is the Radar's synthesis.")
 
 
@@ -1534,7 +1574,7 @@ def _left_side(evs: list[Ev], x: str) -> tuple[str, str, list[Ev]]:
     money_label = bool(re.search(r"capital|investment|financ|funding", x))
     if firms and money_label:
         ex, shown_states = _state_examples(concrete_first, states)
-        return "Big funding rounds are landing", "big rounds land", ex
+        return "Firms are raising large funding rounds", "big rounds land", ex
     ex, shown_states = _state_examples(concrete_first, states)
     if len(shown_states) >= 2:
         states = shown_states
@@ -1625,34 +1665,34 @@ def _trend_idea(x: str, lp: str, rp: str, term: str, split: bool, r_analysis: bo
     if weak and R in {"evidence", "limits"} and not split and not (L == "partner" and term == "fragmentation"):
         more = {"money": "more money", "build": "more capacity", "policy": "more measures", "partner": "more partnerships"}.get(L)
         if more:
-            return f"{X}: {more}, but {_weak_phrase(weak)} {_stay(weak)} weak"
+            return f"{X}: {more}, but weak points remain: {_weak_phrase(weak)}"
     t = (term or "limits").replace("a gap to rivals", "gap to rivals")
     if split:
         return f"{X}: the evidence points both ways"
     def pick(options: list[str]) -> str:
         return options[sum(map(ord, x)) % len(options)]
     policy_doubt = pick([f"{X}: measures are multiplying faster than evidence that they work",
-                         f"{X}: policy is running ahead of proof",
-                         f"{X}: the rulebook grows, the doubts stay",
+                         f"{X}: measures are spreading before anyone knows if they work",
+                         f"{X}: more rules, but the doubts remain",
                          f"{X}: governments are acting before the evidence says what works"])
-    money_doubt = pick([f"{X}: the money is flowing, the warnings are not fading",
-                        f"{X}: more money has not settled the doubts"])
+    money_doubt = pick([f"{X}: more money, but the warnings remain",
+                        f"{X}: more money, but the doubts remain"])
     ideas = {
         ("money", "evidence"): f"{X}: more money, same {t}" if term else money_doubt,
         ("money", "limits"): f"{X}: more money, same {t}" if term else money_doubt,
         ("money", "rules"): f"{X}: money is arriving faster than the rules on how it can be used",
-        ("money", "resist"): f"{X}: money is moving faster than local consent",
-        ("money", "dispute"): f"{X}: investment is racing ahead of agreement on the terms",
+        ("money", "resist"): f"{X}: money is moving faster than local people agree",
+        ("money", "dispute"): f"{X}: investment is moving faster than agreement on the terms",
         ("money", "outside"): f"{X}: European money is growing under rising outside pressure",
         ("build", "rules"): f"{X}: capacity is being built before the conditions are settled",
-        ("build", "resist"): f"{X}: capacity is being built into growing local resistance",
-        ("build", "evidence"): f"{X}: more capacity, same {t}" if term else f"{X}: capacity is growing faster than the case for it",
-        ("build", "limits"): f"{X}: more capacity, same {t}" if term else f"{X}: capacity is growing faster than the case for it",
+        ("build", "resist"): f"{X}: capacity is being built despite growing local resistance",
+        ("build", "evidence"): f"{X}: more capacity, same {t}" if term else f"{X}: more capacity, but the doubts remain",
+        ("build", "limits"): f"{X}: more capacity, same {t}" if term else f"{X}: more capacity, but the doubts remain",
         ("build", "dispute"): f"{X}: capacity is being built while its terms are still disputed",
         ("policy", "evidence"): f"{X}: more measures, same {t}" if term else policy_doubt,
         ("policy", "limits"): f"{X}: measures are multiplying, but the {t} persist" if t.endswith("s") else f"{X}: measures are multiplying, but the {t} persists",
         ("policy", "rules"): f"{X}: support and restrictions are growing at the same time",
-        ("policy", "resist"): f"{X}: policy is pushing ahead into growing resistance",
+        ("policy", "resist"): f"{X}: policy is pushing ahead despite growing resistance",
         ("policy", "dispute"): f"{X}: measures are multiplying while their terms are still disputed",
         ("policy", "outside"): f"{X}: Europe is acting under rising outside pressure",
         ("partner", "evidence"): f"{X}: more partnerships, {'more' if t == 'fragmentation' else 'same'} {t}",
@@ -1686,7 +1726,7 @@ def write_trend(object_key: str, left_refs: list[dict], right_refs: list[dict], 
         rt = f"Others keep finding {_shared_constraint(right)}" if _shared_constraint(right) else "Others see limits"
     weak, _shared = weak_spots(right, x)
     if weak and rp.startswith("studies"):
-        rt = f"Studies keep finding {_weak_phrase(weak)} too weak"
+        rt = f"Studies find weak points: {_weak_phrase(weak)}"
     pair_title = _trend_idea(x, lp, rp, _shared_constraint(right), l_analysis and r_analysis, r_analysis, weak)
 
     def plain(evs: list[Ev], side: str, phrase: str) -> str:
@@ -1724,13 +1764,13 @@ def write_trend(object_key: str, left_refs: list[dict], right_refs: list[dict], 
 
     lw, rw = weight(lc), weight(rc)
     if lw == rw == "measures already under way":
-        composition = "Both sides are backed by measures already under way: a real tug of war, not just a debate."
+        composition = "Both sides are backed by measures already in place: this is a real contest, not just a debate."
     elif lw == rw:
-        composition = f"Both sides rest mainly on {lw}; the first binding decision will tell which way this goes."
+        composition = f"Both sides rest mainly on {lw}. The first binding decision will show which way this goes."
     else:
-        composition = f"The pull toward expansion rests mainly on {lw}; the pull against rests mainly on {rw}."
+        composition = f"The push forward rests mainly on {lw}; the pushback rests mainly on {rw}."
         if rw == "analysis" and lw == "measures already under way":
-            composition += " The warnings could still turn into rules."
+            composition += " The warnings could still become rules."
         elif lw == "analysis" and rw == "measures already under way":
             composition += " The momentum is still mostly on paper."
 
@@ -1741,13 +1781,13 @@ def write_trend(object_key: str, left_refs: list[dict], right_refs: list[dict], 
             n = len(evs)
             return "a pending decision" if n == 1 else f"{_number_word(n)} pending decisions"
         if pend_l and pend_r:
-            flip = f"What could tip it: {what(pend_l)} would add to the push and {what(pend_r)} to the limits."
+            flip = f"What could change the balance: {what(pend_l)} on the side of growth and {what(pend_r)} on the side of limits."
         elif pend_l:
-            flip = f"What could tip it: {what(pend_l)} would add to the push; nothing pending on the other side."
+            flip = f"What could change the balance: {what(pend_l)} on the side of growth; none on the other side."
         else:
-            flip = f"What could tip it: {what(pend_r)} would add to the limits; nothing pending on the other side."
+            flip = f"What could change the balance: {what(pend_r)} on the side of limits; none on the other side."
     else:
-        flip = "No decision is pending in the evidence; watch for the next binding measure on either side."
+        flip = "No decision is pending. Watch for the next binding decision on either side."
     lead_side = "expanding" if left_pull > right_pull + 4 else "constraining" if right_pull > left_pull + 4 else ""
     return {
         "pair_title": pair_title,
@@ -1880,9 +1920,8 @@ def point_for(grammar: str, product: str, raw: dict[str, Any], cand: dict[str, A
             term = _shared_constraint(evs) or {"becomes_conditional": "tightening conditions", "becomes_contested": "open disagreement",
                                               "contracts": "cutbacks"}.get(direction, "")
             who, plural = _mix(evs)
-            what = f"the same {term} in {x}" if term else f"trouble in {x}"
-            return sentence(f"{cap(who)} {'report' if plural else 'reports'} {what}" + "".join(
-                f" {b}" for b in (_places(evs), _span(evs)) if b))
+            return sentence(f"{cap(who)} {'report' if plural else 'reports'} this" + "".join(
+                f", {b}" for b in (_places(evs), _span(evs)) if b))
         acts = _acts(evs)
         records = len({e.identity for e in evs if e.identity}) or len(evs)
         if acts:
@@ -1895,7 +1934,7 @@ def point_for(grammar: str, product: str, raw: dict[str, Any], cand: dict[str, A
         yrs = sorted(y for y in (year_of(e.date) for e in then) if y)
         now = _count(len(evs), "current finding", "current findings")
         if yrs:
-            return sentence(f"In the record since {yrs[0]}; {now} {_span(evs)} show it is still open".replace("  ", " "))
+            return sentence(f"First seen in {yrs[0]}. {cap(now)} {_span(evs)} show it is still open".replace("  ", " "))
         return sentence(f"{cap(now)} {_span(evs)} keep it open".replace("  ", " "))
     if g == "split_recurrence":
         a, b = (label(eps[0]), label(eps[1])) if len(eps) >= 2 else (x, "a second issue")
@@ -1928,7 +1967,7 @@ def point_for(grammar: str, product: str, raw: dict[str, Any], cand: dict[str, A
     if g == "goal_without_measure":
         inv = int(raw.get("invocations", 0) or 0)
         meas = int(raw.get("measurements", 0) or 0)
-        return sentence(f"The current evidence invokes {x} {inv} times and measures an outcome {meas} times")
+        return sentence(f"The sources mention {x} {inv} times but measure a result only {meas} times")
     if g == "stalled_proposal":
         return sentence(f"Proposed {_span(evs[:1]) or 'earlier'}; nothing in the evidence shows a decision since")
     if g == "conflicting_criteria":
@@ -1940,14 +1979,14 @@ def point_for(grammar: str, product: str, raw: dict[str, Any], cand: dict[str, A
         d_label = label(raw.get("dependency_object") or (eps[1] if len(eps) > 1 else ""))
         strain = [e for e in evs if e.role in {"coupling", "exposure", "propagation"}]
         if strain:
-            return sentence(f"{cap(c_label)} {'rest' if is_plural(c_label) else 'rests'} on {d_label}, and "
-                            f"{_count(len(strain), 'finding', 'findings')} {_span(strain)} show {d_label} under strain".replace("  ", " "))
-        return sentence(f"{cap(c_label)} {'rest' if is_plural(c_label) else 'rests'} on {d_label}")
+            return sentence(f"{cap(c_label)} {'depend' if is_plural(c_label) else 'depends'} on {d_label}, and "
+                            f"{_count(len(strain), 'recent finding', 'recent findings')} show {d_label} {'are' if is_plural(d_label) else 'is'} under strain")
+        return sentence(f"{cap(c_label)} {'depend' if is_plural(c_label) else 'depends'} on {d_label}")
     if g == "latent_channel":
         need = label(eps[0] if eps else raw.get("objective_object"))
         tool = label(eps[1] if len(eps) > 1 else raw.get("delivery_object"))
-        return sentence(f"{cap(need)} {'have' if is_plural(need) else 'has'} a documented gap, and {tool} "
-                        f"{'are' if is_plural(tool) else 'is'} already running; no source connects the two yet")
+        return (f"Sources show a gap in {need}. {cap(tool)} already {'exist' if is_plural(tool) else 'exists'}. "
+                "No source has yet suggested using one for the other.")
     if g == "anchor_demand":
         return ""
     if g == "future_shock_hypothesis":
@@ -1971,7 +2010,7 @@ def point_for(grammar: str, product: str, raw: dict[str, Any], cand: dict[str, A
         pull = roles.get("pull") or []
         pa = (_acts(push) or ["support"])[0]
         pb = (_acts(pull) or ["new rules"])[0]
-        return sentence(f"Both are live: {pa} {_span(push)}, {pb} {_span(pull)}".replace("  ", " "))
+        return sentence(f"Both policies are active: {pa} {_span(push)}, {pb} {_span(pull)}".replace("  ", " "))
     if g == "common_driver":
         fields = [clean(v) for v in (raw.get("field_labels") or []) if clean(v)]
         return sentence(f"The same dependence shows up in {_count(len(fields) or len(evs), 'field', 'fields')} and "
