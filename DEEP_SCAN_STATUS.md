@@ -6,31 +6,31 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2012** (Main **1035** + Historical **977**)
-- Automatic queue still needing V2 verification: **67** (Main **18** + Historical **49**)
-- Currently assigned to workers: **56** (Main **18** + Historical **38**)
-- Bounded access-recovery retries still eligible: **0**
-- Hands-on verification needed: **16**
+- Authoritative V2 verified: **2032** (Main **1047** + Historical **985**)
+- Automatic queue still needing V2 verification: **83** (Main **42** + Historical **41**)
+- Currently assigned to workers: **72** (Main **41** + Historical **31**)
+- Bounded access-recovery retries still eligible: **5**
+- Hands-on verification needed: **17**
 - Automatic queue pending and not yet assigned: **11**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260925T060410Z-656d7f0e33c1`
-- Assigned unresolved records: **28**
-  1. `link:https://doi.org/10.1016/j.ejps.2026.107570` — European science for health research needs and priorities — recovery attempt 2/3
-  2. `historical:id:9b579a1a37c6d632` — Consumer flash fiction: A methodology to support the early sensing of far-future innovation opportunities
-  3. `historical:id:2084a8c4b9bba7a3` — Analysis of Smart Technologies Used in Smart Hotels
-  4. `historical:id:256f788e05840f94` — Foresight and strategic decision-making framework from artificial intelligence technology development to utilization activities in small-and-medium-sized enterprises
-  5. `historical:id:388a8f406be45f71` — A probabilistic cross‐impact methodology for explorative scenario analysis
-  6. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=8baf21ed-b790-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — DRAFT REPORT - on the proposal for a regulation of the European Parliament and of the Council on the European Union Agency for Cybersecurity (ENISA), the European cybersecurity certification framework, and ICT supply chain security and repealing Regulation (EU) 2019/881 (The Cybersecurity Act 2) - (COM(2026)0011 - C10-0015/2026 - 2026/0011(COD)) - Committee on Industry, Research and Energy - Rapporteur: Markéta Gregorová - Publications Office of the EU — recovery attempt 2/3
-  7. `link:https://doi.org/10.1111/aepr.70032` — Comment on “Supply Chain Diversification and Industrial Policies to Strengthen Economic Security” — recovery attempt 2/3
-  8. `historical:id:cef3cfdeb1591a87` — Explanatory models of regional innovation performance in Europe: policy implications for regions — recovery attempt 2/3
-  - … plus 20 more in the package manifest
+- Current package: `worker-a-20260925T064950Z-829fd216d189`
+- Assigned unresolved records: **36**
+  1. `link:https://www.euronews.com/2026/09/25/a-national-project-what-green-hydrogen-is-and-why-spain-is-backing-it` — A national project: What green hydrogen is and why Spain is backing it
+  2. `link:https://news.google.com/rss/articles/CBMiYEFVX3lxTE5kbTAyVkNPbFFfaTVKRFZvVjQ2SG9aT1p2eFFCVk5LWXNiUnI4MWdBeTdmdXhDVzZtTHFPYWVfYTk5SnpOMlppVmRwM0hsUkMxSW1XQ0kzR3MybjB4akV0aQ?oc=5` — Enhancing Europe’s competitiveness by empowering researchers as innovators - Science | AAAS
+  3. `link:https://news.google.com/rss/articles/CBMimANBVV95cUxNSlNkU05HVnBSMlk5Y3BJYmZtT0lhSFRhMERhMlQ5QzQxbG5Dcnd4RWE1aFNVd0RoX3RmYTNpSEpISzVEaVV4VlduZF9RNXlDTzhzeVllVnkwdGZHQWgxX21sWXp2ZVZQRTBNellUVGxRZnE0Zkk5b0J6OWQwMlczZHl2WnZFWmhpOHpULXNOZFBmdDNMNjBUbDZlWEVWT0Y3UFlRd1pJdEhiVDhPMEZtb0M1VlZyd2xZQS1KQkhXNUk3SmllSUFIV3NNQnFIVDUyRjIyTkFtQ05pa3dkVXZuM3N2TTRmT2JWTGpNQmx1NzhwcW16WW8zSU1DZ2ZxdmlPLW9lakRYd29yT2NzX3RUMGdmQ0ZBV2hRYVVrTDlaT3JUSDNWcmpMNUlyMENHSkY0QVhRUU5tRHFtRmdRNENNMi1NUXN6S1ZHLU41cjJsRGJsX2dlVE14ZF90VlB1NmFhTTRQaTI0RmVDMFk2elNKLXJCdmdIcnppaEphb0dVT3kxRXgxSUF5Z0dPR1JYX3BMZ1R6SW1wY0g?oc=5` — Horizon Europe Work Programme: Calls under the Mission Restore our Ocean and Waters are now closed - research-and-innovation.ec.europa.eu
+  4. `link:https://news.google.com/rss/articles/CBMioAFBVV95cUxQVW5pc0lQdTY4aGtUMmhJNFR3SnZrNmtqcEVWanlDeVFCTnpIeUNjT3VqQlZSckVpM3FMclp2a0p1SnBSSzhITVBrSmtMUkZhdkVkSzZNWUNfV1hqdktGTXVNVndVOGpqcWZfWnIySGx3WXVIM0RqN3NaNkJGQ1F5N01Xb2xTTVBnb3pyclhHMmtqWHZWVXVmQ2FEVUV0b2Nj?oc=5` — Mining firms’ plea for EU critical minerals budget falls on deaf ears
+  5. `link:https://news.google.com/rss/articles/CBMisgFBVV95cUxPbWVJSjJ5REV2blF6NVFaTFBfamFWU3FLVjJiYkNGLUhxVGpFWE9EY0NsOW9keXZGNWJKY01lNFktMDhVRlJDZTF0dGZGT2hWRzdNa3Vrd1I4RmZVRTgzWmRRNjdnbWdBOEJZc2RkM3dNUWI5ekV1YVZrdmV0dnB5ZzZSQWN6Uk9hZ2J4NElxal8tTlBJdW14RW9XczU4RFVpTnVydGdHUGxGLURtWUhyWEdR?oc=5` — Parliament to discuss moving 'sectoral plans’ to Pillar 2 of Horizon Europe
+  6. `link:https://news.google.com/rss/articles/CBMisgFBVV95cUxOWjY4YUdqOUhyTXV6c3ZpU2hEb1BVRDFVT3hTYko5akx0WFdRTUdyZEdKWkYyWWxFNzRZZDUxeW42QVk3UTE0a2JJOFNmajZxaGROeWRNZUZwQlVqVjdQa1RHNHJCaXZIS2I0dEVQTlhLZEt2WkNKNmxCZ3ExMkhpQndMRW9tVU9oWVBqMDI2Ykk2MXZtTUk0MHp2eVI5MENGdHBCbThLd0pmcXg4U3IwMnhB?oc=5` — EU science policy wonks debate prospect of stronger ties with Canada
+  7. `link:https://news.google.com/rss/articles/CBMiyAFBVV95cUxQSVQ3ejlTdXZtQnM1ZjlwdF9aTGhXdlFPem11XzNNUk5nQTkwdWVNT2N5MndQanVVM0lUa0dfLXFwRjF6dk1UOWItUXFGMFQ1TXd3Qks5dnJ4all5QjhMZHdGbFVTN0FWLXlKUkhtWmw5d25lcDJlTmhnLXlKN3RmaHFRZXR6eTJkYXdXcXZUQVpaWVRGRFRRRGlENlNteDFrZU94bzBVdkkzTGYtcHBDVlBYSUwtU1ZjZ0tRMERiYlJ3VHNYd1oxQQ?oc=5` — ‘Battle’ ahead to create new researcher-led EU funding
+  8. `link:https://news.google.com/rss/articles/CBMi9AFBVV95cUxOVE9xeldLYUNjS25wTkhOVnFyQzRtUUNveklCMVBhcEpOX09LOFV2X0RJZklwczluU2U4SVpHMEF2dEpjdFItX0gxYUM5WHJXOTZqeEJONGRJOE9Bc1lqdk8wbVhWdkhiTDEwTDFBeTFSczhVZUFsMXJZNElBWjJqVk81aW1FT19hRjhsR1cxRkRtNVJQTUlwaS11WjNrcWtnaTd6d3pWWGd4T2tJcTY2Wk1xY251QmE2a1lIeFEzTHJUaG1ZQXdDc2lxTmlFOFRsejVMRmFDNVR3bXotQzlSTmxSaWN0UnNrcy12NXB3SkRPZU0z?oc=5` — Mark Carney reminds Europe that its universities and research are strategic assets
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260925T060438Z-87d34e864d6a`
-- Assigned unresolved records: **28**
+- Current package: `worker-b-20260925T065005Z-c10203bf3530`
+- Assigned unresolved records: **36**
   1. `historical:id:8830ed616891a4b2` — Horizon Europe Space calls 2023 2024
   2. `historical:id:7a52a7fe58625ca7` — 6G and Future Wireless Systems
   3. `historical:id:32dbe0c26d06c41f` — Santander-CIDOB Future Leaders Forum “How can the EU achieve digital strategic autonomy?" - HCSS
@@ -39,7 +39,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:2a46a133474228a1` — Germany’s Cybersecurity Posture? Let’s Focus on Resilience
   7. `historical:id:dd2d92bb540bfefd` — Tech-chat on 'Standardization and Technology Transfer' - COST
   8. `historical:id:05af1ae09ac5a7c5` — Horizon Europe - funding digital technology and research
-  - … plus 20 more in the package manifest
+  - … plus 28 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `none`
@@ -65,3 +65,4 @@ These works no longer consume automatic Deep Scan slots. Their identity is belie
 - `link:https://doi.org/10.1080/10438599.2026.2693627` — **Do wage pressure and government R&D stimulate business R&D? Regional level evidence from Europe** — attempts: 3/3 — Economics of Innovation and New Technology — 2026-06-29 — Identity is verified, but only abstract/repository metadata was recoverable; substantive full evidence remained inaccessible. — https://doi.org/10.1080/10438599.2026.2693627
 - `link:https://news.google.com/rss/articles/CBMifkFVX3lxTFB3X2lIVGxXMmR6YnJya2xIS2t0WGs0UWZlN0hCNFdQWDAzTVpZWGJVT2VaNnFHa0xDVXpaSG9CNlBWeXVLWXR2M3pNbGxYS0laSWdyN05ETFhCNEp0OEtlOXVSSlBPRDRSUFBPb242Z1JGdVJXZ2xQU1ZEUUxsQQ?oc=5` — **THE HACK: EU progress on industrial AI push** — attempts: 3/3 — Euractiv — 2026-09-21T07:21Z — Identity is verified as the Euractiv newsletter item, but substantive article text remained inaccessible after the recovery ladder. — https://news.google.com/rss/articles/CBMifkFVX3lxTFB3X2lIVGxXMmR6YnJya2xIS2t0WGs0UWZlN0hCNFdQWDAzTVpZWGJVT2VaNnFHa0xDVXpaSG9CNlBWeXVLWXR2M3pNbGxYS0laSWdyN05ETFhCNEp0OEtlOXVSSlBPRDRSUFBPb242Z1JGdVJXZ2xQU1ZEUUxsQQ?oc=5
 - `link:https://news.google.com/rss/articles/CBMiiAFBVV95cUxPd0hNY0hZU3UySUVzcXFVREJmT0lUQk5QZGJVcXVrck1lYl9BY1UzaDdUamtzbmpKNUNka216YXB6eEc4NTFka0hRR3p4dGFJQjZCdHJTYnNyRlFyUnV4UE0taXRlWWFQdU4ycUtSSVIzVDJwRXJWZTR2ZkJzb3R3M0dJcERGenAt?oc=5` — **THE HACK: EU data centre push amid fossil fuel risk** — attempts: 3/3 — Euractiv — 2026-07-29T07:00Z — Identity is verified as the Euractiv newsletter item, but substantive article text remained inaccessible after the recovery ladder. — https://news.google.com/rss/articles/CBMiiAFBVV95cUxPd0hNY0hZU3UySUVzcXFVREJmT0lUQk5QZGJVcXVrck1lYl9BY1UzaDdUamtzbmpKNUNka216YXB6eEc4NTFka0hRR3p4dGFJQjZCdHJTYnNyRlFyUnV4UE0taXRlWWFQdU4ycUtSSVIzVDJwRXJWZTR2ZkJzb3R3M0dJcERGenAt?oc=5
+- `link:https://doi.org/10.1080/23299460.2026.2731654` — **Does the EU AI act align with responsible AI? An evaluation of the European Union’s artificial intelligence act in a responsible research and innovation framework** — attempts: 3/3 — Journal of Responsible Innovation — 2026-09-22 — Identity is verified, but substantive evidence remained inaccessible after the required recovery ladder. — https://doi.org/10.1080/23299460.2026.2731654

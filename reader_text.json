@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-24T22:46:04Z",
+  "generated_at": "2026-09-25T06:46:38Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -183998,8 +183998,1484 @@
       "deep_scan_package_id": "worker-b-20260924T214326Z-b92bbe8b1cd0",
       "claims": [],
       "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:9b579a1a37c6d632": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "019c5bf2",
+      "identity_hash": "3e96c25fc09dea6c",
+      "reader_title": "Consumer flash fiction for far-future sensing",
+      "reader_what": "Three studies show short consumer-written futures can surface early innovation opportunities.",
+      "reader_why": "It adds a reusable non-expert input method for foresight and scenario work.",
+      "reader_more": "The method uses 150–300-word consumer science-fiction stories in structured workshops. Across three studies it analyses 859 stories and compares the insights with expert-led scenario approaches.",
+      "deep_analysis": {
+        "work_kind": "methodological article",
+        "research_question": "",
+        "main_finding": "Consumer flash fiction can complement expert scenario development by eliciting non-expert visions of far-future opportunities.",
+        "method_or_basis": "Three empirical studies collecting and analysing 859 consumer flash-fiction stories.",
+        "qualification": "Method is validated on three studies but is designed for far-future consumer opportunity sensing rather than every foresight context.",
+        "radar_relevance": "Reusable foresight methodology with explicit design, empirical testing and guidance for combining consumer and expert inputs.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied university repository page matched the DOI but primarily exposed abstract/bibliographic text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1016/j.technovation.2024.103014 matched the Technovation article."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Query: \"Consumer flash fiction: A methodology to support the early sensing of far-future innovation opportunities\". ScienceDirect exposed full article sections including introduction, methods, findings and discussion."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0166497224000646",
+            "title": "Consumer flash fiction: A methodology to support the early sensing of far-future innovation opportunities",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and the full open-access publisher text were verified after the packaged repository page proved too thin."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The article proposes and empirically tests a reusable consumer flash-fiction foresight method."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-25T06:46:35Z",
+      "deep_scan_package_id": "worker-a-20260925T060410Z-656d7f0e33c1",
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Wolf, Klotz and Frederiksen",
+            "class": "university_group"
+          },
+          "mechanism": "detects",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2024-04-13",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Method is validated on three studies but is designed for far-future consumer opportunity sensing rather than every foresight context.",
+          "text": "The authors develop consumer flash fiction as a structured method for early sensing of far-future innovation opportunities.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "historical:id:9b579a1a37c6d632",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:3e96c25fc09dea6c:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:2084a8c4b9bba7a3": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "a1c002b0",
+      "identity_hash": "faa655b69b4cfdfc",
+      "reader_title": "Smart-hotel technology review, not a new method",
+      "reader_what": "The study catalogues smart technologies across 1,084 hotels using established review methods.",
+      "reader_why": "Its foresight relevance is topical, not methodological.",
+      "reader_more": "The article applies document analysis, content analysis and a seven-step systematic review. Its contribution is empirical mapping of hotel technologies rather than a novel foresight or evaluation method.",
+      "deep_analysis": {
+        "work_kind": "empirical review",
+        "research_question": "",
+        "main_finding": "Cloud, AI, big data, IoT and recognition technologies were among the most-used technologies in the sampled smart hotels.",
+        "method_or_basis": "Document analysis, content analysis and a seven-step systematic review across 1,084 hotels.",
+        "qualification": "The study applies established document, content-analysis and systematic-review procedures; it does not introduce a reusable new method.",
+        "radar_relevance": "Fails Strand B because the method is applied rather than newly developed or materially extended.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching substantive source recovered in the supplied package material."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_document",
+            "url": "https://content.openalex.org/works/W4390467525.pdf",
+            "title": "Analysis of Smart Technologies Used in Smart Hotels",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against the cited matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_NO_REUSABLE_METHOD",
+        "reason": "The work is an application of established review methods to smart hotels, not a methodological contribution."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-25T06:46:35Z",
+      "deep_scan_package_id": "worker-a-20260925T060410Z-656d7f0e33c1",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:388a8f406be45f71": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "d63a4950",
+      "identity_hash": "ab8ef8fdcb4e3f56",
+      "reader_title": "Probabilistic cross-impact scenarios",
+      "reader_what": "A new cross-impact approach converts probabilistic expert statements into joint scenario probabilities.",
+      "reader_why": "It extends scenario analysis into risk and decision analysis.",
+      "reader_more": "The method supports probabilistic elicitation, solves optimisation models to derive scenario probabilities and can generate Bayesian networks. A Finnish Defence Forces case demonstrates the workflow.",
+      "deep_analysis": {
+        "work_kind": "methodological article",
+        "research_question": "",
+        "main_finding": "The proposed method derives a joint probability distribution over scenarios from probabilistically interpreted cross-impact statements.",
+        "method_or_basis": "Formal probabilistic elicitation and optimisation, illustrated with a Finnish Defence Forces 3D-printing case.",
+        "qualification": "The method is illustrated on Finnish Defence Forces 3D-printing futures; transferability beyond the case is argued, not exhaustively tested.",
+        "radar_relevance": "A reusable and technically specified extension to cross-impact scenario analysis.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching substantive source recovered in the supplied package material."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_document",
+            "url": "https://content.openalex.org/works/W4384698366.pdf",
+            "title": "A probabilistic cross‐impact methodology for explorative scenario analysis",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against the cited matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The article develops a probabilistic cross-impact method that derives scenario probabilities from expert judgements."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-25T06:46:35Z",
+      "deep_scan_package_id": "worker-a-20260925T060410Z-656d7f0e33c1",
+      "claims": [
+        {
+          "object": "methods.scenario",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Roponen and Salo",
+            "class": "university_group"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2023-07-18",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "FI"
+            ]
+          },
+          "kind": "action",
+          "qualification": "The method is illustrated on Finnish Defence Forces 3D-printing futures; transferability beyond the case is argued, not exhaustively tested.",
+          "text": "The authors develop a probabilistic cross-impact method that assigns probabilities to scenarios and supports Bayesian-network analysis.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "historical:id:388a8f406be45f71",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:ab8ef8fdcb4e3f56:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=8baf21ed-b790-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "e8ad1237",
+      "identity_hash": "9daea8422b4da5d0",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "Supplied route https://op.europa.eu/o/opportal-service/download-handler?identifier=8baf21ed-b790-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=: the Publications Office download returned a 404/error page rather than the claimed report."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI applies to this claimed European Parliament draft report; recorded as not_applicable."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failure",
+            "note": "Query: \"DRAFT REPORT - on the proposal for a regulation of the European Parliament and of the Council on the European Union Agency for Cybersecurity (ENISA), the European cybersecurity certification framework, and ICT supply chain security and repealing Regulation (EU) 2019/881 (The Cybersecurity Act 2) - (COM(2026)0011 - C10-0015/2026 - 2026/0011(COD)) - Committee on Industry, Research and Energy - Rapporteur: Markéta Gregorová - Publications Office of the EU\". No matching 18 September 2026 draft report was recovered."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failure",
+            "note": "Searches combining the title, rapporteur Markéta Gregorová and 2026 did not substantiate the claimed draft report."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "Official EU/European Parliament search for procedure 2026/0011(COD) and rapporteur Markéta Gregorová confirmed the procedure, but not the claimed draft report/date."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "Query: 2026/0011(COD) Gregorová draft report PDF. Only related Cybersecurity Act 2 procedure material was found."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Related legislative procedure material exists, but the supplied claimed work itself was not substantiated."
+      },
+      "admission": {
+        "decision": "drop_unverifiable",
+        "target_strand": "A",
+        "reason_code": "UNVERIFIABLE_IDENTITY",
+        "reason": "The claimed work could not be substantiated after all required recovery steps."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-25T06:46:35Z",
+      "deep_scan_package_id": "worker-a-20260925T060410Z-656d7f0e33c1",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.eif.org/press/all/first-czech-technology-transfer-fund-focused-on-ai-applications-to-invest-nearly-eur50-million-in-research-commercialisation": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "f67745d4",
+      "identity_hash": "70fe629fde004388",
+      "reader_title": "Czech AI technology-transfer fund launched",
+      "reader_what": "EIF is investing over €27 million in a Czech fund targeting more than €50 million.",
+      "reader_why": "It creates a new route from Czech research organisations into deep-tech commercialisation.",
+      "reader_more": "The fund targets university and research-organisation spin-outs, especially AI and related deep technologies. It is the first Czech fund described as dedicated to technology transfer of this kind.",
+      "deep_analysis": {
+        "work_kind": "current funding development",
+        "research_question": "",
+        "main_finding": "EIF committed more than €27 million from the National Recovery Plan to IP Lab Ventures Fund I, which targets over €50 million.",
+        "method_or_basis": "Official EIF announcement describing the investment, fund target and intended technology-transfer focus.",
+        "qualification": "The announcement reports committed public investment and a fund target; future portfolio outcomes are not yet observed.",
+        "radar_relevance": "Current European R&I financing action with a specific commitment, vehicle and commercialisation objective.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching substantive source recovered in the supplied package material."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_web_text",
+            "url": "https://www.eif.org/press/all/first-czech-technology-transfer-fund-focused-on-ai-applications-to-invest-nearly-eur50-million-in-research-commercialisation",
+            "title": "New Czech fund backs AI and deep-tech innovation with €50m for research commercialisation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against the cited matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CURRENT_DEVELOPMENT",
+        "reason": "An official EIF announcement reports a new Czech technology-transfer fund with committed public capital."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-25T06:46:35Z",
+      "deep_scan_package_id": "worker-a-20260925T060410Z-656d7f0e33c1",
+      "claims": [
+        {
+          "object": "research.knowledge_transfer",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Investment Fund",
+            "class": "eu_body"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-09-24",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "CZ"
+            ]
+          },
+          "kind": "action",
+          "qualification": "The announcement reports committed public investment and a fund target; future portfolio outcomes are not yet observed.",
+          "text": "The EIF announced more than €27 million for a Czech technology-transfer fund targeting over €50 million for research commercialisation.",
+          "confidence": "high",
+          "record_key": "link:https://www.eif.org/press/all/first-czech-technology-transfer-fund-focused-on-ai-applications-to-invest-nearly-eur50-million-in-research-commercialisation",
+          "merit": 69,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:70fe629fde004388:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1016/j.wds.2026.100371": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "c9acf06b",
+      "identity_hash": "47ea7f65ae035c61",
+      "reader_title": "Czech sustainability model with incidental innovation",
+      "reader_what": "The paper models growth, trade, renewables, innovation and emissions in the Czech Republic.",
+      "reader_why": "Innovation is incidental to the environmental-growth question.",
+      "reader_more": "The article is an econometric sustainability study. Its innovation measure is used alongside macroeconomic variables rather than to examine research funding, capabilities, institutions or innovation-system performance.",
+      "deep_analysis": {
+        "work_kind": "empirical economics study",
+        "research_question": "",
+        "main_finding": "The study estimates relationships among economic growth, trade openness, renewable energy, innovation and CO2 emissions.",
+        "method_or_basis": "Econometric analysis of Czech macroeconomic and sustainability indicators.",
+        "qualification": "Innovation is one explanatory variable in a sustainability model; the study does not assess the Czech or European R&I system itself.",
+        "radar_relevance": "Fails Strand A because European R&I is not the substantive object of analysis.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching substantive source recovered in the supplied package material."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_document",
+            "url": "https://content.openalex.org/works/W7213597045.pdf",
+            "title": "Indicators of sustainable growth in the Czech Republic: Evidence from economic growth, trade openness, renewable energy, innovation, and CO2 emissions",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against the cited matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_CRITERIA_NOT_MET",
+        "reason": "The Czech sustainability study is not substantively about European R&I capacity, policy or institutions."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-25T06:46:36Z",
+      "deep_scan_package_id": "worker-a-20260925T060410Z-656d7f0e33c1",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=32b870b8-ab69-11f1-b9e5-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "a83344fa",
+      "identity_hash": "5803e99a42992590",
+      "reader_title": "EU agri-food R&I achievements reviewed",
+      "reader_what": "The Commission reviews achievements of its 2016 agricultural R&I approach and Food 2030 framework.",
+      "reader_why": "It is direct evidence on EU research strategy, programme performance and future priorities.",
+      "reader_more": "The staff working document synthesises implementation evidence and stakeholder consultations for AgRI 2040 and Food 2040. It directly concerns EU research and innovation governance and priorities.",
+      "deep_analysis": {
+        "work_kind": "policy evaluation report",
+        "research_question": "",
+        "main_finding": "The document reviews the achievements of EU agricultural and food R&I frameworks and evidence from stakeholder consultations.",
+        "method_or_basis": "Commission programme evidence and structured stakeholder consultation synthesis.",
+        "qualification": "This is a Commission analytical review and consultation synthesis; it reports programme achievements rather than independently causal effects.",
+        "radar_relevance": "Direct, completed EU R&I system evidence on programme achievements and future strategy.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching substantive source recovered in the supplied package material."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_document",
+            "url": "https://op.europa.eu/o/opportal-service/download-handler?identifier=32b870b8-ab69-11f1-b9e5-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+            "title": "COMMISSION STAFF WORKING DOCUMENT Analytical overview of the achievements of the 2016 strategic approach to agricultural research and innovation and Food 2030 research and innovation framework and insights from stakeholder consultation activities Accompanying the document COMMUNICATION FROM THE COMMISSION TO THE EUROPEAN PARLIAMENT, THE COUNCIL, THE EUROPEAN ECONOMIC AND SOCIAL COMMITTEE AND THE COMMITTEE OF THE REGIONS New Strategic Approach to Research and Innovation for competitive, resilient and sustainable agriculture, forestry, rural areas and food systems Future-proofing EU agri-food through AgRI 2040 and Food 2040 - Publications Office of the EU",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against the cited matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The Commission staff working document directly evaluates EU agri-food R&I frameworks and consultation evidence."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-25T06:46:36Z",
+      "deep_scan_package_id": "worker-a-20260925T060410Z-656d7f0e33c1",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "evaluates",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-09-08",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "This is a Commission analytical review and consultation synthesis; it reports programme achievements rather than independently causal effects.",
+          "text": "The Commission evaluated achievements of its agricultural and food R&I frameworks and synthesised stakeholder evidence for the next strategic approach.",
+          "confidence": "high",
+          "record_key": "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=32b870b8-ab69-11f1-b9e5-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:5803e99a42992590:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=1e8751e3-a289-11f1-b25c-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "e1dba463",
+      "identity_hash": "9430da68199d7c3e",
+      "reader_title": "Collaborative research and Europe’s biotech lead",
+      "reader_what": "The report links collaborative research networks to health-biotech innovation and European competitiveness.",
+      "reader_why": "It directly addresses research collaboration, translation and strategic biotech capability in Europe.",
+      "reader_more": "The DG Research and Innovation report reviews collaborative health-biotech research and how it supports innovation ecosystems and competitiveness. Its focus is explicitly European R&I capability.",
+      "deep_analysis": {
+        "work_kind": "policy evidence report",
+        "research_question": "",
+        "main_finding": "The report argues that collaborative research is central to sustaining European health-biotech innovation and competitiveness.",
+        "method_or_basis": "Commission synthesis of collaborative research activity, programme evidence and biotech innovation context.",
+        "qualification": "The report is a Commission evidence synthesis and strategic case for collaboration, not a controlled estimate of policy impact.",
+        "radar_relevance": "Direct European R&I evidence on collaboration, health innovation and strategic technology capability.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching substantive source recovered in the supplied package material."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_document",
+            "url": "https://op.europa.eu/o/opportal-service/download-handler?identifier=1e8751e3-a289-11f1-b25c-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+            "title": "Securing Europe’s biotech lead - Publications Office of the EU",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against the cited matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The Commission report directly examines collaborative health-biotech R&I and European competitiveness."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-25T06:46:36Z",
+      "deep_scan_package_id": "worker-a-20260925T060410Z-656d7f0e33c1",
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission Directorate-General for Research and Innovation",
+            "class": "eu_body"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-08-27",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The report is a Commission evidence synthesis and strategic case for collaboration, not a controlled estimate of policy impact.",
+          "text": "The Commission report assesses collaborative research as a driver of European health-biotech innovation and competitiveness.",
+          "confidence": "high",
+          "record_key": "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=1e8751e3-a289-11f1-b25c-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:9430da68199d7c3e:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=f28bbffd-9787-11f1-9262-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "ac0b9272",
+      "identity_hash": "9349464438763b7d",
+      "reader_title": "Regional dual-use innovation ecosystems",
+      "reader_what": "JRC cases show territories combining innovation instruments and European funding to build dual-use hubs.",
+      "reader_why": "It connects regional R&I capacity with defence preparedness and open strategic autonomy.",
+      "reader_more": "Cases from Andalucía, Podkarpackie and Estonia illustrate how territorial innovation ecosystems mobilise cohesion, Horizon, Digital Europe, defence and other funding. The analysis is explicitly about capability formation and competitiveness.",
+      "deep_analysis": {
+        "work_kind": "JRC policy brief",
+        "research_question": "",
+        "main_finding": "The brief identifies emerging regional dual-use and defence hubs embedded in territorial innovation ecosystems.",
+        "method_or_basis": "Exploratory regional case studies under the JRC REGDUALOSA activity.",
+        "qualification": "The brief uses exploratory regional cases; findings illustrate emerging patterns rather than a complete census of European dual-use ecosystems.",
+        "radar_relevance": "Direct European R&I evidence on dual-use innovation, regional capacity and strategic autonomy.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching substantive source recovered in the supplied package material."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_document",
+            "url": "https://op.europa.eu/o/opportal-service/download-handler?identifier=f28bbffd-9787-11f1-9262-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+            "title": "Territories—competitiveness, defence, and preparedness - Publications Office of the EU",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against the cited matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The JRC brief directly analyses regional dual-use innovation ecosystems, funding and strategic autonomy."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-25T06:46:36Z",
+      "deep_scan_package_id": "worker-a-20260925T060410Z-656d7f0e33c1",
+      "claims": [
+        {
+          "object": "innovation.dual_use",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-08-13",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The brief uses exploratory regional cases; findings illustrate emerging patterns rather than a complete census of European dual-use ecosystems.",
+          "text": "JRC case studies report emerging regional dual-use innovation hubs supported by territorial and European funding instruments.",
+          "confidence": "high",
+          "record_key": "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=f28bbffd-9787-11f1-9262-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:9349464438763b7d:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.vinnova.se/en/p/foresight-project-innovair": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "6350420f",
+      "identity_hash": "94653ea159a94d69",
+      "reader_title": "Innovair foresight project page",
+      "reader_what": "Vinnova describes an ongoing foresight project using scenarios and backcasting for Swedish aviation.",
+      "reader_why": "A project description alone does not satisfy the evidence-product threshold.",
+      "reader_more": "The page outlines objectives, participants and foresight activities extending toward 2045. It does not provide completed findings, a formal funding decision of wider R&I significance, or a methodological contribution.",
+      "deep_analysis": {
+        "work_kind": "project page",
+        "research_question": "",
+        "main_finding": "The project plans scenarios and backcasting to inform long-term Innovair strategy.",
+        "method_or_basis": "Programme/project description of planned foresight activities.",
+        "qualification": "The page describes an ongoing foresight project and planned process; it does not report a completed evidence product or new method.",
+        "radar_relevance": "Fails Strand A because the page primarily describes ongoing work rather than reporting substantive R&I evidence.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching substantive source recovered in the supplied package material."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_web_text",
+            "url": "https://www.vinnova.se/en/p/foresight-project-innovair",
+            "title": "Foresight project – Innovair | Vinnova",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against the cited matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_CRITERIA_NOT_MET",
+        "reason": "The Vinnova page is an ongoing project description rather than substantive completed European R&I evidence."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-25T06:46:36Z",
+      "deep_scan_package_id": "worker-a-20260925T060410Z-656d7f0e33c1",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1007/s11625-026-01873-1": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "a7e03857",
+      "identity_hash": "4d49b91aeaf8c287",
+      "reader_title": "Rural digital transition case study",
+      "reader_what": "Three rural cases examine tensions among local actors during digital transition.",
+      "reader_why": "The European policy setting is context rather than the substantive R&I object.",
+      "reader_more": "The article studies local administrators, technology providers and communities in rural innovation ecosystems. Its contribution concerns local digital-transition governance, not European research funding, capability or strategic technology policy.",
+      "deep_analysis": {
+        "work_kind": "empirical case study",
+        "research_question": "",
+        "main_finding": "The study identifies actor tensions and negotiation challenges in rural digital transitions.",
+        "method_or_basis": "Comparative qualitative analysis of three rural innovation ecosystems.",
+        "qualification": "The cases concern rural local innovation ecosystems; they do not assess Europe’s R&I system, strategic capabilities or research policy.",
+        "radar_relevance": "Fails Strand A because Europe and R&I policy are contextual rather than central.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching substantive source recovered in the supplied package material."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_web_text",
+            "url": "https://link.springer.com/article/10.1007/s11625-026-01873-1",
+            "title": "Navigating rural digital transition: lessons from innovation ecosystems in practice",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against the cited matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_CRITERIA_NOT_MET",
+        "reason": "The study is about rural digital-transition practice, not the European R&I system."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-25T06:46:37Z",
+      "deep_scan_package_id": "worker-a-20260925T060410Z-656d7f0e33c1",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:87e441422fcfdb9d": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "31480674",
+      "identity_hash": "c73045dae000e796",
+      "reader_title": "Asia outlook, not European R&I evidence",
+      "reader_what": "The publication surveys Asian technology and geopolitical developments.",
+      "reader_why": "Its geographic and analytical centre lies outside European research and innovation.",
+      "reader_more": "The piece discusses Asian AI, industrial and geopolitical developments, including China-related competition. It does not provide a substantive assessment of European R&I capability, policy or institutions.",
+      "deep_analysis": {
+        "work_kind": "strategic outlook",
+        "research_question": "",
+        "main_finding": "The outlook highlights technology and geopolitical developments in Asia.",
+        "method_or_basis": "Expert strategic commentary and regional outlook.",
+        "qualification": "The publication focuses on Asian technology and geopolitical developments; European R&I appears only peripherally.",
+        "radar_relevance": "Fails Strand A because European R&I is not a central object of the work.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching substantive source recovered in the supplied package material."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_web_text",
+            "url": "https://www.iva.se/en/published/global-outlook-asia-1/",
+            "title": "Global Outlook: Asia #1",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against the cited matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_CRITERIA_NOT_MET",
+        "reason": "The Asia outlook is not substantively about European R&I."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-25T06:46:37Z",
+      "deep_scan_package_id": "worker-a-20260925T060410Z-656d7f0e33c1",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:95c17d601fcb8d4c": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "7387d151",
+      "identity_hash": "44bd2e12a5cf2d88",
+      "reader_title": "Sitra article summarises another report",
+      "reader_what": "The article relays recommendations on EU circularity and the clean-energy transition.",
+      "reader_why": "The substantive evidence resides in the underlying report, not this wrapper article.",
+      "reader_more": "Sitra presents the conclusions and recommendations of a separate report. The article itself is communication and advocacy rather than an original completed R&I study or formal policy action.",
+      "deep_analysis": {
+        "work_kind": "news article",
+        "research_question": "",
+        "main_finding": "The article summarises proposals to use circularity and resource management to support the EU clean-energy transition.",
+        "method_or_basis": "Secondary summary of an external report.",
+        "qualification": "This Sitra article is a secondary news wrapper around another report rather than the underlying evidence product.",
+        "radar_relevance": "Fails the evidence-product threshold for Strand A as the claimed work is a wrapper rather than the underlying analysis.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching substantive source recovered in the supplied package material."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_web_text",
+            "url": "https://www.sitra.fi/en/articles/a-new-report-proposes-the-eu-to-harness-circularity-and-sustainable-resource-management-to-safeguard-the-clean-energy-transition/",
+            "title": "A new report proposes the EU to harness circularity and sustainable resource management to safeguard the clean energy transition - Sitra",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against the cited matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_CRITERIA_NOT_MET",
+        "reason": "The claimed work is a news article summarising a separate circular-economy report."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-25T06:46:37Z",
+      "deep_scan_package_id": "worker-a-20260925T060410Z-656d7f0e33c1",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:70ce132ab57f330a": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "65075976",
+      "identity_hash": "e9198f4b6e5e8165",
+      "reader_title": "Denmark’s green R&I investment strategy",
+      "reader_what": "The strategy directs DKK 2.3 billion toward green research, technology and innovation priorities.",
+      "reader_why": "It is a formal national R&I funding and capability decision inside Europe.",
+      "reader_more": "The government strategy defines mission-oriented green research priorities, funding instruments and implementation arrangements. It provides direct evidence of national R&I policy and public support.",
+      "deep_analysis": {
+        "work_kind": "government strategy",
+        "research_question": "",
+        "main_finding": "Denmark set a green research, technology and innovation investment strategy backed by DKK 2.3 billion.",
+        "method_or_basis": "Official national strategy and budgeted R&I investment framework.",
+        "qualification": "The strategy sets public investment priorities and allocations; later programme outcomes require separate evaluation.",
+        "radar_relevance": "Direct European member-state R&I policy evidence on public funding and green technology development.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching substantive source recovered in the supplied package material."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_document",
+            "url": "https://ufm.dk/media/mswc5gg4/green-solutions-of-the-future.pdf",
+            "title": "Green solutions of the future - Strategy for investments in green research, technology, and innovation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against the cited matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Denmark’s official strategy sets major green R&I investment priorities and public funding allocations."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-25T06:46:37Z",
+      "deep_scan_package_id": "worker-a-20260925T060410Z-656d7f0e33c1",
+      "claims": [
+        {
+          "object": "green.innovation",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Danish Government",
+            "class": "member_state"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "adopted",
+          "status_date": "2020-12-02",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "DK"
+            ]
+          },
+          "kind": "action",
+          "qualification": "The strategy sets public investment priorities and allocations; later programme outcomes require separate evaluation.",
+          "text": "Denmark adopted a green R&I investment strategy allocating DKK 2.3 billion to research, technology and innovation priorities.",
+          "confidence": "high",
+          "record_key": "historical:id:70ce132ab57f330a",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:e9198f4b6e5e8165:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:25a38b93875169a1": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "3b025b57",
+      "identity_hash": "6e9aa9cfb6683bf5",
+      "reader_title": "Croatia’s technology-transfer policy path",
+      "reader_what": "Croatia’s technology-transfer system evolved through socialism, transition and EU membership, with persistent implementation weaknesses.",
+      "reader_why": "It is direct evidence on a European innovation system and knowledge-transfer policy.",
+      "reader_more": "The study traces policy phases and institutional changes, including EU assistance and cohesion-policy influence. It finds that formal policy development did not automatically produce strong technology-transfer performance.",
+      "deep_analysis": {
+        "work_kind": "historical policy study",
+        "research_question": "",
+        "main_finding": "Croatian technology-transfer policy changed markedly through EU integration, while practical transfer capacity remained constrained.",
+        "method_or_basis": "Historical institutional and policy analysis of Croatia’s technology-transfer system.",
+        "qualification": "The article is a historical national case; conclusions about transfer-policy performance are specific to Croatia’s institutional trajectory.",
+        "radar_relevance": "Direct member-state R&I system evidence on knowledge transfer, institutions and EU-related policy evolution.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching substantive source recovered in the supplied package material."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_web_text",
+            "url": "https://link.springer.com/article/10.1007/s10961-019-09732-1",
+            "title": "The Croatian path from socialism to European membership through the lens of technology transfer policies",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against the cited matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The article examines Croatia’s technology-transfer policy trajectory through EU accession and cohesion-era support."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-25T06:46:37Z",
+      "deep_scan_package_id": "worker-a-20260925T060410Z-656d7f0e33c1",
+      "claims": [
+        {
+          "object": "research.knowledge_transfer",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Croatian research and innovation system",
+            "class": "member_state"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2019-10-01",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "HR"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "The article is a historical national case; conclusions about transfer-policy performance are specific to Croatia’s institutional trajectory.",
+          "text": "The study finds that Croatia developed technology-transfer policies through EU integration but continued to face weak transfer performance and institutional constraints.",
+          "confidence": "high",
+          "record_key": "historical:id:25a38b93875169a1",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:6e9aa9cfb6683bf5:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:3d742a6c089730ce": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "2345ee6d",
+      "identity_hash": "5017eeae6008cf36",
+      "reader_title": "Overview of established foresight methods",
+      "reader_what": "The chapter reviews 15 commonly used foresight methods and their applications.",
+      "reader_why": "A catalogue of existing methods does not meet Strand B’s contribution threshold.",
+      "reader_more": "The chapter describes qualitative and quantitative methods used in South Africa’s SAForSTI 2030 process, with advantages and limitations. It is useful methodological orientation but does not introduce a new method.",
+      "deep_analysis": {
+        "work_kind": "methods review chapter",
+        "research_question": "",
+        "main_finding": "The chapter surveys established foresight methods used in a national foresight exercise.",
+        "method_or_basis": "Descriptive synthesis of 15 common foresight methods and their applications.",
+        "qualification": "The chapter synthesises established foresight methods used in SAForSTI; it does not present a distinct new or materially extended method.",
+        "radar_relevance": "Fails Strand B because it reviews established methods rather than contributing a reusable new method.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching substantive source recovered in the supplied package material."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_web_text",
+            "url": "https://link.springer.com/chapter/10.1007/978-3-031-69557-5_4",
+            "title": "Foresight Methodology and Commonly Used Methods in the New Generation Foresight",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against the cited matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_NO_REUSABLE_METHOD",
+        "reason": "The chapter is a methods overview, not a novel reusable methodological contribution."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-25T06:46:38Z",
+      "deep_scan_package_id": "worker-a-20260925T060410Z-656d7f0e33c1",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1016/j.ejso.2026.112070": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "871de05c",
+      "identity_hash": "a2d84b54982ef106",
+      "reader_title": "DISSECT surgical-oncology network operating",
+      "reader_what": "The COST Action connects 28 countries around surgical-oncology research, training and capacity-building.",
+      "reader_why": "It is a concrete current European research-collaboration infrastructure development.",
+      "reader_more": "DISSECT CA24158 runs from September 2025 to September 2029 and is structured around cross-country research and training activities. The article reports the operating network rather than completed impact.",
+      "deep_analysis": {
+        "work_kind": "current research-network development",
+        "research_question": "",
+        "main_finding": "A 28-country COST Action is operating to coordinate surgical-oncology research and training and reduce capacity gaps.",
+        "method_or_basis": "Article describing the funded COST Action, participating network and planned activities.",
+        "qualification": "The article describes the funded COST Action and its planned network; scientific and training outcomes remain prospective.",
+        "radar_relevance": "Current European R&I development with a defined funded network, timetable and collaboration objective.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching substantive source recovered in the supplied package material."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_document",
+            "url": "https://www.um.edu.mt/library/oar/bitstream/123456789/148552/3/Bridging%20gaps%20in%20surgical%20oncology%20research%20and%20training%20%20the%20DISSECT%20COST%20action.pdf",
+            "title": "Bridging gaps in surgical oncology research and training: the DISSECT COST action (CA24158)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against the cited matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CURRENT_DEVELOPMENT",
+        "reason": "The article documents an operating European COST Action addressing surgical-oncology research and training gaps."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-25T06:46:38Z",
+      "deep_scan_package_id": "worker-a-20260925T060410Z-656d7f0e33c1",
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "DISSECT COST Action CA24158",
+            "class": "other"
+          },
+          "mechanism": "coordinates",
+          "direction": "expands",
+          "status": "operating",
+          "status_date": "2026-09-09",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The article describes the funded COST Action and its planned network; scientific and training outcomes remain prospective.",
+          "text": "DISSECT CA24158 is operating as a 28-country COST network coordinating surgical-oncology research, training and capacity-building.",
+          "confidence": "high",
+          "record_key": "link:https://doi.org/10.1016/j.ejso.2026.112070",
+          "merit": 77,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:a2d84b54982ef106:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.5281/zenodo.22045085": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "1d88a50b",
+      "identity_hash": "86998871bec1e789",
+      "reader_title": "Distributed AI manifesto proposes a network",
+      "reader_what": "The manifesto argues for a distributed European foundation-model development alliance.",
+      "reader_why": "Its claims support an advocacy case rather than an established R&I development or evaluation.",
+      "reader_more": "The author proposes an open alliance spanning laboratories, computing centres, firms and free-software communities and closes with seven commitments. The record explicitly presents itself as a manifesto and invitation to participate.",
+      "deep_analysis": {
+        "work_kind": "manifesto",
+        "research_question": "",
+        "main_finding": "The manifesto argues that distributed training and shared infrastructure could support a European foundation-model commons.",
+        "method_or_basis": "Technical argument and policy advocacy synthesising existing distributed-AI approaches and European initiatives.",
+        "qualification": "The document is a manifesto advocating a proposed network; it is not evidence that the distributed AI alliance or claimed benefits already exist.",
+        "radar_relevance": "Fails Strand A’s evidence-product threshold because the work is chiefly advocacy for a proposed network.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching substantive source recovered in the supplied package material."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_web_text",
+            "url": "https://zenodo.org/records/22045086",
+            "title": "Distributed AI: A European Path to the Frontier. A Manifesto for a European Network for the Distributed Development of Foundation Models",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against the cited matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_CRITERIA_NOT_MET",
+        "reason": "The manifesto is primarily a proposal and advocacy document, not a completed evidence-led assessment of European R&I."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-25T06:46:38Z",
+      "deep_scan_package_id": "worker-a-20260925T060410Z-656d7f0e33c1",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1016/j.resplu.2026.101298": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "de86d9b6",
+      "identity_hash": "ee7518e63d0c0e93",
+      "reader_title": "Resuscitation congress recap",
+      "reader_what": "The article summarises guideline launches, science, education and innovation discussed at a congress.",
+      "reader_why": "Conference content does not itself establish a European R&I-system development.",
+      "reader_more": "The publication reports scientific and educational highlights across the chain of survival. Its focus is clinical and professional rather than research funding, infrastructure, strategic capability or innovation-system performance.",
+      "deep_analysis": {
+        "work_kind": "conference recap article",
+        "research_question": "",
+        "main_finding": "The article reviews notable scientific and educational themes presented at Resuscitation 2025.",
+        "method_or_basis": "Narrative congress summary.",
+        "qualification": "The paper is a congress recap across clinical, educational and equity topics; it does not assess European R&I structures or capabilities.",
+        "radar_relevance": "Fails Strand A because European R&I is not the substantive analytical object.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching substantive source recovered in the supplied package material."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_web_text",
+            "url": "https://pure.au.dk/portal/en/publications/resuscitation-2025-congress-launch-of-the-resuscitation-guideline/",
+            "title": "Resuscitation 2025 congress: launch of the resuscitation guidelines, scientific advances, education, equity, and innovation across the chain of survival",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against the cited matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_CRITERIA_NOT_MET",
+        "reason": "The resuscitation congress recap is not substantive European R&I system evidence."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-25T06:46:38Z",
+      "deep_scan_package_id": "worker-a-20260925T060410Z-656d7f0e33c1",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=c8f853a8-b598-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "cc7f94a4",
+      "identity_hash": "f30f8f884bebf220",
+      "reader_title": "EU data-centre energy demand rising",
+      "reader_what": "The Commission reports 68 TWh use in 2024 and projects about 114 TWh by 2030.",
+      "reader_why": "It links digital infrastructure growth to energy, standards and strategic AI/cloud policy.",
+      "reader_more": "The report uses EU reporting data and projections to assess data-centre energy efficiency. It discusses common rating schemes, minimum performance standards and links with wider cloud and AI infrastructure policy.",
+      "deep_analysis": {
+        "work_kind": "Commission policy report",
+        "research_question": "",
+        "main_finding": "EU data-centre electricity demand is projected to rise substantially, motivating common efficiency metrics and possible minimum standards.",
+        "method_or_basis": "Official EU reporting data, modelling and policy analysis on data-centre energy efficiency.",
+        "qualification": "The Commission report measures and projects electricity use and outlines policy options; projections are scenario-dependent, not observed outcomes.",
+        "radar_relevance": "Direct evidence on European digital infrastructure capacity, energy constraints and governance.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching substantive source recovered in the supplied package material."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_document",
+            "url": "https://op.europa.eu/o/opportal-service/download-handler?identifier=c8f853a8-b598-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+            "title": "REPORT FROM THE COMMISSION TO THE EUROPEAN PARLIAMENT AND THE COUNCIL on the energy efficiency of data centres in the EU - Publications Office of the EU",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against the cited matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The Commission report directly assesses EU data-centre energy demand and regulatory options linked to AI and cloud infrastructure."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-25T06:46:38Z",
+      "deep_scan_package_id": "worker-a-20260925T060410Z-656d7f0e33c1",
+      "claims": [
+        {
+          "object": "datacentre.energy_supply",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-09-21",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The Commission report measures and projects electricity use and outlines policy options; projections are scenario-dependent, not observed outcomes.",
+          "text": "The Commission reports EU data-centre electricity use at about 68 TWh in 2024 and projects roughly 114 TWh by 2030.",
+          "confidence": "high",
+          "record_key": "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=c8f853a8-b598-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:f30f8f884bebf220:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-09-24T22:46:04Z"
+  "claims_updated_at": "2026-09-25T06:46:38Z"
 }
