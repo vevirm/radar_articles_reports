@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260925T064950Z-829fd216d189`
+- Current package: `worker-a-20260925T065825Z-829fd216d189`
 - Assigned unresolved records: **36**
   1. `link:https://www.euronews.com/2026/09/25/a-national-project-what-green-hydrogen-is-and-why-spain-is-backing-it` — A national project: What green hydrogen is and why Spain is backing it
   2. `link:https://news.google.com/rss/articles/CBMiYEFVX3lxTE5kbTAyVkNPbFFfaTVKRFZvVjQ2SG9aT1p2eFFCVk5LWXNiUnI4MWdBeTdmdXhDVzZtTHFPYWVfYTk5SnpOMlppVmRwM0hsUkMxSW1XQ0kzR3MybjB4akV0aQ?oc=5` — Enhancing Europe’s competitiveness by empowering researchers as innovators - Science | AAAS
@@ -29,7 +29,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260925T065005Z-c10203bf3530`
+- Current package: `worker-b-20260925T065850Z-c10203bf3530`
 - Assigned unresolved records: **36**
   1. `historical:id:8830ed616891a4b2` — Horizon Europe Space calls 2023 2024
   2. `historical:id:7a52a7fe58625ca7` — 6G and Future Wireless Systems
