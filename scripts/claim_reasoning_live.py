@@ -3297,6 +3297,12 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
             c["page_slot_wow"] = w
             by_wow[w].append(c)
             borrowed += 1
+        # Keep the order within each level stable: cards already on the shelf keep
+        # their previous order; new ones follow in pick order.  Without this, the
+        # same set of cards can swap places between scans when nothing changed.
+        prev_order = {clean(x): i for i, x in enumerate(prev_pubs.get(product) or [])} if isinstance(prev_pubs.get(product), list) else {}
+        for w in by_wow:
+            by_wow[w] = sorted(by_wow[w], key=lambda c: prev_order.get(clean(c.get("id")), 10 ** 6))
         chosen: list[dict[str, Any]] = []
         for round_idx in range(slots_per_wow):
             for wow in (5, 4, 3, 2, 1):
