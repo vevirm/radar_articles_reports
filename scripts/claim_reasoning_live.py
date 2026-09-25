@@ -82,8 +82,18 @@ except ModuleNotFoundError:  # direct execution from scripts/
         split_recurrence_candidates,
     )
 
+try:
+    from scripts import card_writer as _CW
+    from scripts import reader_labels as _RL
+    from scripts import reasoning_moves as _MOVES
+except ModuleNotFoundError:  # direct execution from scripts/
+    import card_writer as _CW  # type: ignore
+    import reader_labels as _RL  # type: ignore
+    import reasoning_moves as _MOVES  # type: ignore
+
 ROOT = Path(__file__).resolve().parents[1]
 PROFILE = "radar-claim-reasoning-live-v1-stage7"
+MOVE_GRAMMARS = {"magnitude_contrast", "external_opening", "cross_pressure", "common_driver", "national_convergence"}
 AUTHORITY_MIN_CLAIMS = 100
 AUTHORITY_MIN_COVERAGE = 0.50
 
@@ -342,9 +352,14 @@ _DIRECTION_GROUNDING_PATTERNS: dict[str, tuple[re.Pattern[str], ...]] = {
         re.compile(r"\bconflict(?:s|ing|ed)?\b", re.I), re.compile(r"\bcontrovers(?:y|ial)\b", re.I),
         re.compile(r"\bresist(?:ance|ed|s|ing)?\b", re.I),
     ),
+    # Conditionality must be about access, participation, funding or approval.  Bare
+    # "conditions" ("absorptive conditions") or "requires" ("resilience requires ...")
+    # is not evidence that something is becoming conditional.
     "becomes_conditional": (
-        re.compile(r"\bcondition(?:al|ality|ed|s)?\b", re.I), re.compile(r"\bsubject to\b", re.I),
-        re.compile(r"\bcontingent (?:on|upon)\b", re.I), re.compile(r"\brequir(?:e|es|ed|ement|ements)\b", re.I),
+        re.compile(r"\bconditional(?:ity)?\b|\bconditioned\b|\bconditions? (?:on|for|attached to|of access|of participation)\b|\battach(?:es|ed|ing)? conditions\b|\bcondition (?:eligibility|access|participation|funding)\b", re.I),
+        re.compile(r"\bsubject to\b", re.I),
+        re.compile(r"\bcontingent (?:on|upon)\b", re.I),
+        re.compile(r"\brequir(?:e|es|ed|ing)\b.{0,40}\b(?:approval|licen[cs]\w*|screening|clearance|consent|registration|self-assessment|security)\b|\b(?:new|additional|mandatory|security) requirements?\b", re.I),
         re.compile(r"\bapproval\b|\bpermission\b|\blicen[cs](?:e|ing)\b", re.I), re.compile(r"\bscreen(?:ing|ed)?\b", re.I),
         re.compile(r"\beligib(?:le|ility)\b|\bthreshold(?:s)?\b", re.I),
         re.compile(r"\bmandatory\b|\bsafeguard(?:s|ed|ing)?\b|\bonly if\b", re.I),
@@ -470,7 +485,7 @@ _SHOCK_DRIVER_GROUNDING_PATTERNS: dict[str, tuple[re.Pattern[str], ...]] = {
     ),
     "conflict": (
         re.compile(r"\barmed conflict\b", re.I),
-        re.compile(r"\bwar\b|\binvasion\b|\bhostilit(?:y|ies)\b", re.I),
+        re.compile(r"(?<!post-)(?<!post )\bwar\b(?!-)|\binvasion\b|\bhostilit(?:y|ies)\b", re.I),
         re.compile(r"\bmilitary escalation\b|\bescalat(?:ion|ing|ed)\b.{0,40}\bmilitary\b", re.I),
     ),
     "sanctions": (
@@ -513,6 +528,23 @@ except ImportError:  # pragma: no cover
     from claim_reasoning_shadow import _EXTRA_PRESSURE_REGEX as _EXTRA_PR  # type: ignore
 for _pid, _rx in _EXTRA_PR.items():
     _SHOCK_DRIVER_GROUNDING_PATTERNS.setdefault(_pid, (re.compile(_rx, re.I),))
+
+# Publication grounding for three disruption families is stricter than candidate
+# formation: a statement must describe the disruption itself.  A meeting with
+# "frontier AI" labs is not a technology leap; applicable "AI Act" rules are not an
+# abrupt rule change; an "innovation bottleneck" is not a supplier chokepoint.
+_SHOCK_DRIVER_GROUNDING_PATTERNS["tech_leap"] = (
+    re.compile(r"\b(?:breakthrough\w*|leapfrog\w*|quantum advantage|overtak\w*|surpass\w*|capability (?:shock|jump|leap)s?|technological (?:lead|leap|dominance)|"
+               r"dominan\w* in (?:output|production|patents?)|rapid(?:ly)? (?:advanc|catch|locali[sz])\w*|losing ground)\b", re.I),
+)
+_SHOCK_DRIVER_GROUNDING_PATTERNS["regulatory_shift"] = (
+    re.compile(r"\b(?:court (?:ruling|decision|referral)|CJEU|struck down|annul\w*|repeal\w*|moratorium|ban(?:s|ned|ning)?\b|abrupt\w* (?:rule|regulat\w*)|"
+               r"proposed (?:the )?(?:EU )?[A-Z][\w ]{0,40}Act\b.{0,80}\b(?:restrict\w*|requir\w*|burden\w*|ban\w*))", re.I),
+)
+_SHOCK_DRIVER_GROUNDING_PATTERNS["chokepoint"] = (
+    re.compile(r"\b(?:chokepoints?|single (?:point of failure|supplier|source)|sole supplier|lock[- ]in|"
+               r"(?:substantial |heavy |critical )?dependen\w* on (?:the )?(?:US|U\.S\.|American|Chinese|foreign|non-European|external) (?:cloud|providers?|suppliers?|technolog\w*|platforms?))\b", re.I),
+)
 
 
 def _shock_driver_is_reader_grounded(pressure_id: Any, source_statement: Any) -> bool:
@@ -725,6 +757,16 @@ def _reader_trend_side(node: dict[str, Any], object_key: str | None = None) -> s
         if not re.search(r"\b(?:launch(?:ed|es)?|build(?:s|ing|t)?|establish(?:ed|es)?|open(?:ed|s)? access)\b", text, re.I):
             expands = False
 
+    # A reviewed claim whose mechanism places a rule or a condition on the object is a
+    # constraint on it, even when the sentence uses an expansion verb ("launched
+    # efficiency measures", "adopted minimum standards").
+    # (For objects that are themselves rules - research security, export controls, AI
+    # governance - a new rule is growth of the object, so this does not apply.)
+    if expands and not constrains and clean(node.get("origin")) in _REVIEWED_ORIGINS \
+            and clean(node.get("direction")) in {"contracts", "becomes_conditional", "becomes_contested"} \
+            and clean(node.get("mechanism")) in {"regulates", "requires", "conditions", "screens", "restricts", "licenses", "excludes", "opposes"} \
+            and not re.search(r"^(?:cluster:|family:)?(?:research_security|export_control|ai\.governance|ai_governance|digital\.governance|digital_governance|grant\.|eu_competence|exclusion)", target_object):
+        return "constrains"
     if expands and constrains:
         return ""
     if not expands and not constrains:
@@ -1306,6 +1348,10 @@ def detect_claim_reasoning(raw: dict[str, Any], root: Path = ROOT, evaluated_at:
         "level5_anchor_demand": anchor_demand_candidates(nodes, vocab),
         "level5_split_recurrence": split_recurrence_candidates(nodes, vocab),
     }
+    try:
+        groups.update(_MOVES.detect_moves(nodes, vocab, ev_date))
+    except Exception:  # pragma: no cover - a new move must never break the scan
+        pass
     result = {
         "profile": PROFILE,
         "evaluated_at": ev or ev_date.isoformat(),
@@ -1360,8 +1406,12 @@ def _product_for(c: dict[str, Any]) -> str:
         return "opportunity"
     if grammar in {"conflicting_criteria", "clock_before_rule", "deployment_before_rules", "practice_before_doctrine", "goal_without_measure", "success_metric_gap", "stalled_proposal"}:
         return "risk"
-    if grammar in {"named_continuity", "era_conjunction", "split_recurrence"}:
+    if grammar in {"named_continuity", "era_conjunction", "split_recurrence", "common_driver", "national_convergence"}:
         return "continuity"
+    if grammar in {"magnitude_contrast", "cross_pressure"}:
+        return "risk"
+    if grammar == "external_opening":
+        return "opportunity"
     return "continuity"
 
 
@@ -1490,9 +1540,13 @@ def _support_rows(c: dict[str, Any], node_by_claim: dict[str, dict[str, Any]]) -
     for key in ("claim_ids", "rule_claim_ids"):
         if isinstance(c.get(key), list):
             ids.extend(clean(x) for x in c[key] if clean(x))
+    role_for_id: dict[str, str] = {}
     for key in ("commitment_claim_id", "practice_claim_id", "doctrine_claim_id", "delivery_claim_id", "success_claim_id", "proposal_claim_id", "deployment_claim_id", "first_adopted_rule_claim_id", "success_condition_claim_id", "delivery_instrument_claim_id", "relation_claim_id"):
         if clean(c.get(key)):
             ids.append(clean(c.get(key)))
+            role_for_id.setdefault(clean(c.get(key)), key.replace("_claim_id", "").replace("first_adopted_rule", "first_rule"))
+    for rid in c.get("rule_claim_ids", []) if isinstance(c.get("rule_claim_ids"), list) else []:
+        role_for_id.setdefault(clean(rid), "rule")
     existing = {x.get("claim_id") for x in snaps}
     for cid in ids:
         if cid in existing:
@@ -1502,7 +1556,7 @@ def _support_rows(c: dict[str, Any], node_by_claim: dict[str, dict[str, Any]]) -
             continue
         rk = clean(node.get("record_key"))
         snaps.append({
-            "identity": _canonical_support_identity(node, {"claim_id": cid}), "claim_id": cid, "role": "support",
+            "identity": _canonical_support_identity(node, {"claim_id": cid}), "claim_id": cid, "role": role_for_id.get(cid, "support"),
             "strand": _strand_code(node),
             "title": clean(node.get("_title")), "source": clean(node.get("_source")),
             "date": clean(node.get("status_date")), "link": rk[5:] if rk.startswith("link:") else clean(node.get("_link")),
@@ -1522,11 +1576,32 @@ def _support_rows(c: dict[str, Any], node_by_claim: dict[str, dict[str, Any]]) -
     return snaps
 
 
+def _query_label(key: str) -> str:
+    key = clean(key)
+    if not key:
+        return ""
+    if key.startswith("shock_pressure."):
+        return _CW._SHOCK_EVENT.get(key.split(".", 1)[1], key.split(".", 1)[1].replace("_", " "))
+    if key.startswith(("driver:", "convergence:")):
+        return key.split(":", 1)[1].replace("_", " ")
+    return _RL.label(key)
+
+
 def _falsifier_queries(c: dict[str, Any]) -> list[str]:
     g = clean(c.get("grammar_id"))
-    eps = [clean(x) for x in c.get("endpoint_objects", []) if clean(x)] if isinstance(c.get("endpoint_objects"), list) else []
-    a = eps[0] if eps else clean(c.get("capability_object") or c.get("object"))
-    b = eps[1] if len(eps) > 1 else clean(c.get("dependency_object"))
+    if isinstance(c.get("falsifier_queries_override"), list):
+        return [clean(q) for q in c["falsifier_queries_override"] if clean(q)][:5]
+    # Existing grammars keep their historical query text: the falsifier ledger matches
+    # executed queries by exact text, so rewording would silently reset tested findings.
+    # New reasoning moves word their queries in reader language.
+    if g in MOVE_GRAMMARS:
+        eps = [_query_label(x) for x in c.get("endpoint_objects", []) if clean(x)] if isinstance(c.get("endpoint_objects"), list) else []
+        a = eps[0] if eps else _query_label(c.get("capability_object") or c.get("object"))
+        b = eps[1] if len(eps) > 1 else _query_label(c.get("dependency_object"))
+    else:
+        eps = [clean(x) for x in c.get("endpoint_objects", []) if clean(x)] if isinstance(c.get("endpoint_objects"), list) else []
+        a = eps[0] if eps else clean(c.get("capability_object") or c.get("object"))
+        b = eps[1] if len(eps) > 1 else clean(c.get("dependency_object"))
     qs: list[str] = []
     if g == "dependency_pathway" and a and b:
         qs = [f"{b} exemption {a}", f"{a} site {b} secured", f"{a} hosting agreement {b} pre-cleared"]
@@ -1548,6 +1623,9 @@ def _support_queries(c: dict[str, Any]) -> list[str]:
     eps = [clean(x) for x in c.get("endpoint_objects", []) if clean(x)] if isinstance(c.get("endpoint_objects"), list) else []
     if not missing:
         return []
+    if clean(c.get("grammar_id")) in MOVE_GRAMMARS:
+        base = " ".join(_query_label(x) for x in eps) or _query_label(c.get("object") or c.get("capability_object"))
+        return [clean(f"{base} {role.replace('_', ' ')} evidence Europe research innovation") for role in missing[:3] if base]
     base = " ".join(eps) or clean(c.get("object") or c.get("capability_object"))
     return [clean(f"{base} {role} evidence Europe research innovation") for role in missing[:3] if base]
 
@@ -1679,6 +1757,9 @@ def _final_wow(raw_candidate: dict[str, Any], nodes: Iterable[dict[str, Any]], v
     """
     nodes = list(nodes)
     grammar = clean(raw_candidate.get("grammar_id"))
+    if grammar in MOVE_GRAMMARS:
+        wow = max(1, min(5, int(raw_candidate.get("wow_preliminary", 3) or 3)))
+        return wow, {"mode": "reasoning_move", "move": grammar}
     if grammar == "era_conjunction":
         gain = float(raw_candidate.get("gain", 0) or 0)
         wow = 4 if gain >= 2.0 else 3 if gain >= 1.0 else 2
@@ -2046,6 +2127,13 @@ def _trend_title_pair(label: str, key: str, index: int | None = None) -> tuple[s
 
 
 def _trend_scope_label(scope_kind: str, scope_key: str) -> str:
+    key = clean(scope_key)
+    if key in _RL.OBJECT_LABELS or _RL.family_of(key) or _RL.cluster_of_key(key):
+        return _RL.label(key)
+    return _legacy_trend_scope_label(scope_kind, scope_key)
+
+
+def _legacy_trend_scope_label(scope_kind: str, scope_key: str) -> str:
     if _family_of(scope_key) or scope_kind == "family":
         return _friendly_object_label(scope_key if _family_of(scope_key) else FAMILY_PREFIX + clean(scope_key))
     text = clean(scope_key).replace(".", " ").replace("_", " ")
@@ -2204,161 +2292,23 @@ def _trend_payload(
 
     scope_kind = "cluster" if clean(obj).startswith(CLUSTER_PREFIX) else "family" if _family_of(obj) else "object"
     label_text = _trend_scope_label(scope_kind, obj)
-
-    title_pairs = {
-        "ai.governance": ("Turn AI governance into operating rules", "AI governance gets harder to reconcile"),
-        "research.collaboration": ("Open more research partnerships", "Put more conditions around collaboration"),
-        "innovation.system_performance": ("Europe is strengthening innovation performance", "Structural bottlenecks are holding innovation performance back"),
-        "goal.strategic_autonomy": ("Europe is building more strategic autonomy", "Strategic dependencies are limiting autonomy"),
-        "compute.capacity": ("Build more European computing capacity", "Power, supply and access constrain the build-out"),
-        "research.system_governance": ("Strengthen research-system governance", "More conditions complicate research governance"),
-        "research_security.screening": ("Make research-security screening routine", "Keep screening proportionate to open research"),
-        "research.infrastructure": ("Build and open more research infrastructure", "Access and operating constraints tighten around it"),
-        "industrial.competitiveness": ("Build more European industrial capability", "Cost and dependency pressures keep biting"),
-        "research.system_capacity": ("Expand research-system capacity", "Capacity is being stretched or made conditional"),
-        "talent.retention": ("Europe is trying to retain more researchers", "Career and mobility barriers are pushing researchers away"),
-        "horizon.budget_2028_34": ("Put more money behind the next Horizon programme", "Frugal positions keep the budget under pressure"),
-    }
-    short_label = label_text.replace(" as a whole", "")
-    custom_title = obj in title_pairs
-    left_title, right_title = title_pairs.get(obj, _trend_title_pair(short_label, obj))
-
-    mechanism_labels = {
-        "procures": "procurement", "builds": "build-outs", "funds": "funding",
-        "collaborates": "partnerships", "associates": "association agreements",
-        "supports": "support instruments", "adopts": "adopted measures",
-        "launches": "new programmes", "invests": "investment", "requires": "requirements",
-        "conditions": "conditions", "restricts": "restrictions", "regulates": "rules",
-        "screens": "screening", "assesses": "constraints identified in the evidence",
-    }
-    def mechanism_phrase(rows: list[dict[str, Any]]) -> str:
-        counts = Counter(clean(n.get("mechanism")) for n in rows if clean(n.get("mechanism")))
-        labels = [mechanism_labels.get(k, k.replace("_", " ")) for k, _ in counts.most_common(2)]
-        return " and ".join(labels) if labels else "independent current evidence"
-
-    def concrete_count(rows: list[dict[str, Any]]) -> int:
-        return sum(1 for n in rows if clean(n.get("kind")) in {"action", "effect"})
-
-    lcon, rcon = concrete_count(lk), concrete_count(rk)
+    short_label = label_text
 
     def strongest(rows: list[dict[str, Any]]) -> dict[str, Any] | None:
-        # The sentence beneath each side should be anchored in the development
-        # carrying the most analytical weight, not simply the highest-merit article.
         return max(rows, key=lambda n: (float(n.get("_trend_contribution", 0) or 0),
                                         float(n.get("_trend_strength", 0) or 0),
                                         float(n.get("merit", 0) or 0), clean(n.get("status_date"))), default=None)
 
-    def short(text: Any, words: int = 26) -> str:
-        t = clean(text)
-        parts = t.split()
-        if len(parts) <= words:
-            return t.rstrip(".") + "."
-        return " ".join(parts[:words]).rstrip(",;:") + "…"
-
-    def side_text(rows: list[dict[str, Any]], fallback: str) -> str:
-        n = strongest(rows)
-        if not n or not clean(n.get("text")):
-            return fallback
-        src = clean(n.get("_source"))
-        body = short(n.get("text"))
-        return body
-
-    left_plain = side_text(lk, f"Signs of Europe expanding {label_text} through {mechanism_phrase(lk)}.")
-    right_plain = side_text(rk, f"Signs of {label_text} being constrained through {mechanism_phrase(rk)}.")
-
-    def headline_from_plain(plain: str, fallback: str) -> str:
-        """Keep the public headline inside the claim made by its own evidence sentence.
-
-        Candidate discovery may use a broad controlled object.  The headline may not.
-        If the strongest evidence is narrower (one country, one market mechanism, one
-        infrastructure constraint), the public wording stays at that narrower level.
-        """
-        p = clean(plain)
-        lowp = p.lower()
-        patterns = (
-            ("environmental biotechnology offers routes to cleaner production", "Environmental biotechnology is opening cleaner production routes"),
-            ("persistent gaps in batteries and solar supply chains", "Europe still has gaps in batteries and solar supply chains"),
-            ("eurohpc opened a competitive call", "Europe is moving to build AI Gigafactories"),
-            ("data-centre geography changing in response to power and land constraints", "Power and land constraints are reshaping AI data-centre locations"),
-            ("subsidies helped compensate for germany", "Subsidies are supporting strategic investment despite Germany’s cost disadvantages"),
-            ("selective conditionality is narrowly targeted", "EU investment conditionality remains limited"),
-            ("belgian authorities opened a concrete semiconductor-espionage case", "Belgium has opened a semiconductor-espionage case"),
-            ("research security self-assessment appendix is a mandatory", "Finland has made research-security self-assessment mandatory"),
-            ("commission proposes a regulation creating a framework", "The EU is proposing new rules for its cloud and AI ecosystem"),
-            ("deeper, not necessarily broader", "AI legal clarity may deepen adoption without broadening it"),
-            ("advanced-materials effort must be less fragmented", "Europe’s advanced-materials effort remains fragmented"),
-            ("mature substitutes can cut gallium", "Mature substitutes can reduce some critical-material dependencies"),
-            ("horizon europe initiatives launched to improve access", "EU initiatives are widening access to research infrastructure"),
-            ("hungary's continued exclusion from horizon europe grants", "Hungary’s Horizon exclusion is constraining research capacity"),
-            ("mistral closed a eur 3 billion round", "Mistral’s €3 billion round is boosting European venture capital"),
-            ("underperforms markedly in patenting, venture capital and scale-up", "Europe still lags in venture capital and scale-up"),
-            ("pursuing greater sovereign space capability", "Europe is pursuing more sovereign space capability"),
-            ("reducing strategic dependencies and adapting to those that persist", "Strategic dependencies continue to limit European resilience"),
-            ("council adopted the first eu framework for science diplomacy", "The EU has adopted a framework for science diplomacy"),
-            ("security and sovereignty measures do not collapse the openness needed for science", "Security measures can constrain research openness"),
-            ("spain proposed a stronger eu climate-resilience framework", "Spain is pushing for stronger EU climate-resilience rules"),
-            ("preparedness and integration into corporate strategy remain uneven", "European firms remain unevenly prepared for geopolitical risks"),
-            ("google announced a major new ai-compute investment and energy arrangement in finland", "Google is expanding AI compute and energy investment in Finland"),
-            ("finnish opposition parties proposed a national permitting framework for data centres", "Finland is considering a national permitting framework for data centres"),
-            ("international coalition for science, research and innovation in ukraine", "International partners are coordinating support for Ukraine’s research system"),
-            ("irish preparedness confidence fell", "Preparedness remains uneven across countries"),
-            ("agile, a €115 million programme", "EU institutions are funding faster defence-technology development"),
-            ("defence readiness by 2030 depends on collaborative procurement", "European defence readiness still depends on coordinated procurement and training"),
-            ("commission proposed new eu legislation aimed at strengthening the single market for innovation", "The Commission is proposing new EU innovation legislation"),
-            ("eu27 improves but remains behind the us, south korea and japan", "EU innovation performance still trails major global peers"),
-        )
-        for marker, headline in patterns:
-            if marker in lowp:
-                return headline
-        # Conservative fallback: a headline drawn directly from the first clause is
-        # preferable to a polished but broader claim that the sentence does not support.
-        first = re.split(r"[.;]", p, maxsplit=1)[0].strip()
-        first = re.sub(r"^(New market data show|The evidence shows|Sources show|Analysis shows)\s+", "", first, flags=re.I)
-        words = first.split()
-        if len(words) > 16:
-            first = " ".join(words[:16]).rstrip(",;:") + "…"
-        return first.rstrip(".!?") or fallback
-
-    left_title = headline_from_plain(left_plain, left_title)
-    right_title = headline_from_plain(right_plain, right_title)
-
-    def weight_word(con: int, total: int) -> str:
-        if total == 0:
-            return "nothing yet"
-        if con == total:
-            return "all measures already in effect" if total > 1 else "one measure already in effect"
-        if con == 0:
-            return "analysis or stated positions, not measures in effect" if total > 1 else "one finding, not a measure in effect"
-        return f"{con} measures already in effect among {total} pieces of evidence"
-
-    lw, rw = weight_word(lcon, len(lk)), weight_word(rcon, len(rk))
-    if lcon == 0 and rcon == 0:
-        composition = "So far, both directions rely mainly on analysis or stated positions rather than measures already in effect."
-    elif lcon > rcon:
-        composition = "The first direction currently has more evidence from measures already in effect."
-    elif rcon > lcon:
-        composition = "The second direction currently has more evidence from measures already in effect."
-    else:
-        composition = "Both directions currently have a similar amount of evidence from measures already in effect."
-
-    pending = {"intention", "proposed", "in_negotiation", "announced", "call_open"}
-
-    def pending_item(rows: list[dict[str, Any]]) -> str:
-        cand = [n for n in rows if clean(n.get("status")) in pending and clean(n.get("_title"))]
-        if not cand:
-            return ""
-        n = max(cand, key=lambda x: float(x.get("merit", 0) or 0))
-        return clean(n.get("_title")).rstrip(".")
-
-    lp, rp = pending_item(lk), pending_item(rk)
-    if lp and rp:
-        flip = f"Watch \u201c{lp}\u201d and \u201c{rp}\u201d. Their outcomes could change the balance."
-    elif lp:
-        flip = f"Watch \u201c{lp}\u201d. Its outcome could change the balance."
-    elif rp:
-        flip = f"Watch \u201c{rp}\u201d. Its outcome could change the balance."
-    else:
-        flip = "No specific decision is pending. Watch for new evidence that changes the balance."
+    # The card writer heads each side with the *trend* (what several independent
+    # developments show together), then lists the developments as examples.  A single
+    # anecdote never heads a trend.
+    node_by_claim = {clean(n.get("claim_id")): n for n in nodes if clean(n.get("claim_id"))}
+    left_refs, right_refs = snaps(lk, "Expands"), snaps(rk, "Constrains")
+    text = _CW.write_trend(obj, left_refs, right_refs, node_by_claim, left_pull=adj_left, right_pull=100 - adj_left)
+    left_title, right_title = text["left_title"], text["right_title"]
+    left_plain, right_plain = text["left_plain"], text["right_plain"]
+    composition, flip = text["composition"], text["flip_line"]
+    custom_title = False
 
     return {
         "support": snaps(lk, "Expands") + snaps(rk, "Constrains"),
@@ -2388,6 +2338,10 @@ def _trend_payload(
             "custom_title": custom_title,
             "composition": composition,
             "flip_line": flip,
+            "pair_title": text["pair_title"],
+            "left_examples": text["left_examples"],
+            "right_examples": text["right_examples"],
+            "leading_side": text["leading_side"],
             "left_sources": lsrc,
             "right_sources": rsrc,
             "left_records": len(left_records),
@@ -2464,6 +2418,9 @@ _STRUCTURAL_VERIFICATION_GRAMMARS = {
     "stalled_proposal",
     "success_metric_gap",
     "named_continuity",
+    "magnitude_contrast",
+    "common_driver",
+    "national_convergence",
 }
 
 
@@ -2531,7 +2488,202 @@ def _maturity_score(c: dict[str, Any]) -> int:
     return max(0, min(99, int(round(maturity))))
 
 
+_LINK_STOP = {
+    "european", "europe", "their", "which", "while", "about", "under", "these", "there", "where", "would", "could",
+    "should", "other", "across", "including", "through", "between", "within", "without", "after", "before", "research",
+    "national", "public", "policy", "policies", "support", "programme", "programmes", "funding", "union", "commission",
+    "council", "member", "states", "state", "report", "study", "analysis", "article", "paper", "authors", "sources",
+    "evidence", "innovation", "strategic", "capacity", "cooperation", "development", "framework", "proposed", "announced",
+    "adopted", "measures", "measure", "rules", "governance", "system", "systems", "technology", "technologies",
+}
+
+
+def _content_tokens(text: Any, drop: Iterable[str] = ()) -> set[str]:
+    words = {w for w in re.findall(r"[a-z][a-z0-9\-]{3,}", _low(text))}
+    return words - _LINK_STOP - {d.lower() for d in drop}
+
+
+def _named_tokens(text: Any) -> set[str]:
+    return {m.group(0) for m in re.finditer(r"\b(?:[A-Z]{3,}[A-Z0-9\-]*|[A-Z][a-z]+(?:[A-Z][a-z]+)+|[A-Z][a-z]{3,})\b", clean(text))} - {
+        "European", "Europe", "Commission", "Council", "Parliament", "Union", "The", "This", "These", "Several"}
+
+
+_PREFIX_CLUSTER = {
+    "compute": "compute_ai", "datacentre": "permitting_siting", "chips": "chips", "quantum": "quantum",
+    "research_security": "research_security", "grant": "research_security", "talent": "talent", "horizon": "funding_programme",
+    "funding": "funding_programme", "materials": "materials_energy", "energy": "materials_energy", "finance": "capital_markets",
+    "goal": "strategic_goals", "health": "health", "research": "research_system", "ai": "ai_governance",
+    "digital": "digital_governance", "defence": "defence_dual_use", "innovation": "innovation_ecosystem",
+    "industrial": "industrial_competitiveness", "cybersecurity": "cybersecurity", "green": "green_transition",
+    "critical_infrastructure": "critical_infrastructure", "export_control": "export_controls",
+}
+
+
+_PHYSICAL_PRESSURES = {"cyber", "energy", "hazard", "critical_input", "chokepoint"}
+_PHYSICAL_ASSET = re.compile(r"^(?:compute|chips|quantum|datacentre|energy|materials|critical_infrastructure|health|cybersecurity|"
+                             r"defence\.drone|research\.infrastructure|digital\.infrastructure|industrial\.ev_capacity)")
+_CYBER_SOFT_ASSET = re.compile(r"^(?:research\.|digital\.|ai\.public_sector|finance\.digital_market|horizon\.access)")
+_MONEY_ASSET = re.compile(r"^(?:finance\.|funding\.|horizon\.budget|defence\.innovation_funding|compute\.gigafactory_cofinancing|compute\.private_investment)")
+
+
+def _coherence(grammar: str, raw: dict[str, Any], cand: dict[str, Any], node_by_claim: dict[str, dict[str, Any]], vocab: dict[str, Any]) -> tuple[bool, str]:
+    """Does the evidence joined by a finding actually hang together?
+
+    Candidate formation stays broad (a finding may connect items in new ways).  This
+    check only asks for the *mechanism* of the connection before a card goes public:
+    a shock needs a way to reach its asset, a timing finding needs the later rule to
+    concern the same practice, a returning link needs the current sides to echo the
+    old one, a collision needs two different requirements.
+    """
+    support = [x for x in cand.get("support") or [] if isinstance(x, dict)]
+    by_role: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for x in support:
+        by_role[clean(x.get("role"))].append(x)
+    def text_of(ref: dict[str, Any] | None) -> str:
+        if not ref:
+            return ""
+        n = node_by_claim.get(clean(ref.get("claim_id")), {})
+        return clean(n.get("text") or ref.get("source_statement")) + " " + clean(n.get("_title") or ref.get("title"))
+    def countries(ref: dict[str, Any] | None) -> set[str]:
+        n = node_by_claim.get(clean((ref or {}).get("claim_id")), {})
+        sc = n.get("scope") if isinstance(n.get("scope"), dict) else {}
+        return {_RL.country_name(x) for x in (sc.get("countries") or []) if clean(x)}
+    def linked(a: dict[str, Any] | None, b: dict[str, Any] | None, anchors: Iterable[str] = ()) -> bool:
+        if not a or not b:
+            return False
+        if countries(a) & countries(b):
+            return True
+        ta, tb = text_of(a), text_of(b)
+        if (_named_tokens(ta) & _named_tokens(tb)) - {"Horizon"}:
+            return True
+        drop = set()
+        for obj in anchors:
+            drop.update(w for t in _object_anchor_terms(obj) for w in re.findall(r"[a-z]+", t))
+        return len(_content_tokens(ta, drop) & _content_tokens(tb, drop)) >= 2
+
+    if grammar == "future_shock_hypothesis":
+        eps = [clean(x) for x in raw.get("endpoint_objects") or [] if clean(x)]
+        pid = clean(raw.get("pressure_id")) or next((x.split(".", 1)[1] for x in eps if x.startswith("shock_pressure.")), "")
+        asset = clean(raw.get("capability_object")) or next((x for x in eps if not x.startswith("shock_pressure.")), "")
+        cluster = clean(((vocab.get("objects") or {}).get(asset) or {}).get("cluster")) or _PREFIX_CLUSTER.get(asset.split(".", 1)[0], "")
+        if not _CW.exposure_mechanism(pid, cluster):
+            return False, "no_exposure_mechanism_for_asset"
+        commit = (by_role.get("commitment") or [None])[0]
+        cn = node_by_claim.get(clean((commit or {}).get("claim_id")), {})
+        money_asset = bool(_MONEY_ASSET.match(asset))
+        if pid in _PHYSICAL_PRESSURES and not _PHYSICAL_ASSET.match(asset):
+            # A power cut, a heatwave or a missing input stops things that run, not
+            # budgets or abstractions; a cyberattack also reaches research and
+            # digital systems, but not an economy-wide goal paid for by a loan.
+            soft_ok = pid == "cyber" and bool(_CYBER_SOFT_ASSET.match(asset)) and clean(cn.get("mechanism")) not in {"funds", "invests", "allocates"}
+            if not soft_ok:
+                return False, "physical_disruption_needs_a_physical_asset"
+        if pid == "tech_leap" and money_asset:
+            return False, "tech_leap_does_not_hit_a_budget"
+        if pid == "regulatory_shift":
+            driver = (by_role.get("external_driver") or [None])[0]
+            dn = node_by_claim.get(clean((driver or {}).get("claim_id")), {})
+            d_objs = {clean(dn.get("object"))} | {clean(x) for x in (dn.get("secondary_objects") or []) if clean(x)}
+            anchors = [t for t in _object_anchor_terms(asset) if len(t) > 3]
+            if asset not in d_objs and not any(t in _low(dn.get("text")) for t in anchors):
+                return False, "rule_change_does_not_name_the_asset"
+        if pid in {"regulatory_shift", "tech_leap", "chokepoint", "commercial", "data_access", "acquisition"}:
+            # These disruptions act on a specific domain: the rule, the rival's leap or
+            # the supplier must belong to the asset's field.
+            driver = (by_role.get("external_driver") or [None])[0]
+            dn = node_by_claim.get(clean((driver or {}).get("claim_id")), {})
+            d_objs = {clean(dn.get("object"))} | {clean(x) for x in (dn.get("secondary_objects") or []) if clean(x)}
+            d_clusters = {clean(((vocab.get("objects") or {}).get(o) or {}).get("cluster")) for o in d_objs}
+            anchors = [t for t in _object_anchor_terms(asset) if len(t) > 3]
+            dtext = _low(dn.get("text"))
+            if cluster not in d_clusters and asset not in d_objs and not any(t in dtext for t in anchors):
+                return False, "disruption_outside_the_asset_domain"
+        return True, "exposure_mechanism_named"
+    if grammar == "conflicting_criteria":
+        eps = [clean(x) for x in raw.get("endpoint_objects") or [] if clean(x)]
+        if len(eps) >= 2 and eps[0] == eps[1]:
+            return False, "same_requirement_on_both_sides"
+        return True, "distinct_requirements"
+    if grammar == "latent_channel":
+        gap = (by_role.get("unresolved_need") or [None])[0]
+        lever = (by_role.get("existing_structure") or [None])[0]
+        if not gap or not re.search(r"\b(?:gap\w*|lack\w*|limited|constrain\w*|under-address\w*|depend\w*|reliance|weak\w*|fragil\w*|fragment\w*|uneven|barrier\w*|shortage\w*|requires?|needs?|must)\b", text_of(gap), re.I):
+            return False, "need_is_not_a_gap"
+        ln = node_by_claim.get(clean((lever or {}).get("claim_id")), {})
+        actor = ln.get("actor") if isinstance(ln.get("actor"), dict) else {}
+        scope = ln.get("scope") if isinstance(ln.get("scope"), dict) else {}
+        lever_ok = (
+            clean(ln.get("kind")) == "action"
+            and clean(ln.get("mechanism")) in {"procures", "funds", "invests", "builds", "standardises", "certifies", "regulates", "launches", "associates", "adds_capacity", "supports", "coordinates"}
+            and (clean(actor.get("class")) in {"eu_body", "member_state", "national_funder"} or clean(scope.get("level")) == "eu")
+            and clean(ln.get("status")) in {"operating", "in_force", "adopted", "call_open", "delivered", "announced"}
+        )
+        if not lever_ok:
+            return False, "lever_is_not_a_live_public_instrument"
+        eps = [clean(x) for x in raw.get("endpoint_objects") or [] if clean(x)]
+        need_obj = eps[0] if eps else clean(raw.get("objective_object"))
+        tool_obj = eps[1] if len(eps) > 1 else clean(raw.get("delivery_object"))
+        objs = vocab.get("objects") or {}
+        def _cl(o: str) -> str:
+            return clean((objs.get(o) or {}).get("cluster")) or _PREFIX_CLUSTER.get(o.split(".", 1)[0], "")
+        mech = clean(ln.get("mechanism"))
+        if _cl(need_obj) and _cl(tool_obj) and _cl(need_obj) != _cl(tool_obj):
+            # Across fields only instruments that attach conditions (buying, rules,
+            # standards, certification) or money instruments can carry another need.
+            cross_ok = mech in {"procures", "standardises", "regulates", "certifies"} or (
+                mech in {"funds", "invests"} and bool(_MONEY_ASSET.match(tool_obj)))
+            if not cross_ok:
+                return False, "lever_belongs_to_another_field"
+        return True, "gap_and_live_lever"
+    if grammar == "success_metric_gap":
+        d = (by_role.get("delivery_instrument") or [None])[0]
+        g = (by_role.get("success_condition") or [None])[0]
+        if not linked(d, g, [clean(raw.get("objective_object")), clean(raw.get("delivery_object"))]):
+            return False, "objective_and_instrument_not_linked"
+        return True, "objective_and_instrument_linked"
+    if grammar in {"practice_before_doctrine", "deployment_before_rules"}:
+        first = (by_role.get("practice") or by_role.get("deployment") or [None])[0]
+        later = (by_role.get("doctrine") or by_role.get("first_rule") or [None])[0]
+        if grammar == "practice_before_doctrine":
+            # "Doctrine" means a written rule or framework, not a debate still under way.
+            ln = node_by_claim.get(clean((later or {}).get("claim_id")), {})
+            if clean(ln.get("status") or (later or {}).get("claim_status")) not in {"proposed", "adopted", "in_force"}:
+                return False, "doctrine_is_still_a_debate"
+        if not linked(first, later, [clean(raw.get("object"))]):
+            return False, "later_rule_does_not_concern_the_practice"
+        return True, "rule_concerns_practice"
+    if grammar == "split_recurrence":
+        roles = raw.get("roles") if isinstance(raw.get("roles"), dict) else {}
+        hist = roles.get("historical_relation") if isinstance(roles.get("historical_relation"), dict) else None
+        hist_ref = {"claim_id": hist.get("claim_id")} if hist else None
+        a = (by_role.get("side_a") or [None])[0]
+        b = (by_role.get("side_b") or [None])[0]
+        eps = [clean(x) for x in raw.get("endpoint_objects") or [] if clean(x)]
+        hn = node_by_claim.get(clean((hist or {}).get("claim_id")), {})
+        hy = re.match(r"^(\d{4})", clean(hn.get("status_date") or (hist or {}).get("status_date")))
+        cy = max((int(m.group(1)) for x in (a, b) if x for m in [re.match(r"^(\d{4})", clean(x.get("date")))] if m), default=0)
+        if hy and cy and cy - int(hy.group(1)) < 2:
+            return False, "old_link_is_not_old"
+        if not (linked(hist_ref, a, eps) or linked(hist_ref, b, eps)):
+            return False, "current_sides_do_not_echo_the_old_link"
+        return True, "current_side_echoes_old_link"
+    return True, "not_applicable"
+
+
 def _presentation_ready(c: dict[str, Any]) -> tuple[bool, str]:
+    ok, basis = _presentation_ready_base(c)
+    if ok and c.get("coherence_passes") is False:
+        return False, clean(c.get("coherence_reason")) or "evidence_does_not_hang_together"
+    return ok, basis
+
+
+def _presentation_ready_base(c: dict[str, Any]) -> tuple[bool, str]:
+    if clean(c.get("grammar_id")) in {"magnitude_contrast", "national_convergence", "common_driver"}:
+        # Computed from separately sourced facts (amounts, countries, fields): the
+        # finding is the computation, so two authoritative records may come from one
+        # official source.
+        ok = int(c.get("primary_records", 0) or 0) >= 2 and int(c.get("maturity_score", 0) or 0) >= 45
+        return ok, "computed_from_sourced_facts" if ok else "computation_needs_more_facts"
     """Low publication floor for a grounded future-facing finding.
 
     The public shelf is selective because each wow bucket has only three slots, not
@@ -2609,6 +2761,8 @@ SHELF_SWAP_MARGIN = 4
 SHOCK_MAX_PER_DRIVER = 2
 SHOCK_MAX_PER_ASSET = 2
 MAX_PER_TOPIC = 2
+MAX_PER_GRAMMAR = 4
+_GRAMMAR_MIX_ACTIVE: dict[str, bool] = {}
 
 _SHOCK_TITLES: dict[str, tuple[str, ...]] = {
     "cyber": (
@@ -2764,6 +2918,13 @@ def _diversity_keys(c: dict[str, Any]) -> list[tuple[str, str, int]]:
         return keys
     topic = clean(c.get("object") or (eps[0] if eps else "") or c.get("topic_key"))
     keys = [("topic", topic, MAX_PER_TOPIC)] if topic else []
+    if clean(c.get("grammar_id")) == "latent_channel" and len(eps) > 1:
+        keys.append(("lever", eps[1], 1))
+    if product in {"risk", "opportunity", "continuity"} and _GRAMMAR_MIX_ACTIVE.get(product):
+        # A deliberate mix of reasoning kinds: when at least three kinds of reasoning are
+        # ready for a page, no single grammar may take more than MAX_PER_GRAMMAR slots
+        # (caps relax if the page cannot otherwise fill).
+        keys.append(("grammar", clean(c.get("grammar_id")), MAX_PER_GRAMMAR))
     if product == "trend":
         balance = c.get("trend_balance") if isinstance(c.get("trend_balance"), dict) else {}
         # One real-world development may inform several candidate interpretations,
@@ -2845,10 +3006,23 @@ def _creative_score(c: dict[str, Any], traits: dict[str, bool]) -> float:
     )
 
 
-def _selection_rank(c: dict[str, Any]) -> tuple[int, int, int, int, str]:
-    # The final id component is a fixed tie-breaker: equal findings must not swap
-    # places between scans when no evidence changed.
+def _is_single_event(c: dict[str, Any]) -> bool:
+    """One source reporting one event: an early sign, shown only after the points."""
+    if clean(c.get("grammar_id")) != "corroborated_claim":
+        return False
+    support = [x for x in c.get("support") or [] if isinstance(x, dict)]
+    srcs = {clean(x.get("source")).lower() for x in support if clean(x.get("source"))}
+    kinds = {clean(x.get("claim_kind")) for x in support}
+    return len(srcs) < 2 and not (kinds & {"diagnosis", "advocacy"})
+
+
+def _selection_rank(c: dict[str, Any]) -> tuple[int, int, int, int, int, str]:
+    # Points (patterns, diagnoses, higher-order findings) rank before single-event
+    # early signs within a wow bucket.  The final id component is a fixed
+    # tie-breaker: equal findings must not swap places between scans when no
+    # evidence changed.
     return (
+        0 if _is_single_event(c) else 1,
         int(c.get("maturity_score", 0) or 0),
         int(c.get("score", 0) or 0),
         int(c.get("primary_sources", 0) or 0),
@@ -2868,6 +3042,24 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
     """
     products = ("shock", "trend", "continuity", "risk", "opportunity")
     slots_per_wow = 3
+    # One card per lever: the same instrument offered as the answer to several needs
+    # reads as a formula, not as a point.  The strongest pairing is kept.
+    best_lever: dict[tuple[str, str], dict[str, Any]] = {}
+    for c in candidates:
+        eps = [clean(x) for x in c.get("endpoint_objects") or [] if clean(x)]
+        if clean(c.get("grammar_id")) != "latent_channel" or len(eps) < 2:
+            continue
+        key = (clean(c.get("product")), eps[1])
+        cur = best_lever.get(key)
+        rank = (int(c.get("wow", 0) or 0), int(c.get("maturity_score", 0) or 0), int(c.get("score", 0) or 0))
+        if cur is None or rank > (int(cur.get("wow", 0) or 0), int(cur.get("maturity_score", 0) or 0), int(cur.get("score", 0) or 0)):
+            best_lever[key] = c
+    keep = {id(c) for c in best_lever.values()}
+    for c in candidates:
+        eps = [clean(x) for x in c.get("endpoint_objects") or [] if clean(x)]
+        if clean(c.get("grammar_id")) == "latent_channel" and len(eps) >= 2 and id(c) not in keep and c.get("coherence_passes") is not False:
+            c["coherence_passes"] = False
+            c["coherence_reason"] = "same_lever_already_on_the_shelf"
     prev_pubs = previous_state.get("publications") if isinstance(previous_state.get("publications"), dict) else {}
     prev_map = {
         clean(x.get("id")): x
@@ -2893,15 +3085,8 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
             c["reader_eligible"] = False
             c["publication_gate_passes"] = False
             c.pop("page_slot_wow", None)
-            if clean(c.get("grammar_id")) == "future_shock_hypothesis":
-                # Carried-forward shocks keep stored copy; refresh the wording so
-                # every card uses its disruption-specific title and explanation.
-                eps0 = [clean(x) for x in (c.get("endpoint_objects") or []) if clean(x)]
-                pid0 = clean(c.get("pressure_id")) or next((x.split(".", 1)[1] for x in eps0 if x.startswith("shock_pressure.")), "")
-                asset0 = _friendly_object_label(c.get("capability_object") or next((x for x in eps0 if not x.startswith("shock_pressure.")), ""))
-                if pid0 in _SHOCK_TITLES and asset0:
-                    c["reader_title"] = _shock_title(pid0, "", asset0)
-                    c["reader_consequence"] = _shock_consequence({"pressure_id": pid0, "capability_object": c.get("capability_object") or next((x for x in eps0 if not x.startswith("shock_pressure.")), "")}, c)
+            # Card copy is written by the card writer when the candidate is adapted;
+            # selection never rewrites it.
             if c.get("creative_reserve") or clean(c.get("stock_tier")) == "creative_reserve":
                 # Creative reserve is re-decided every scan; never inherit it as
                 # grounded reserve.
@@ -2923,6 +3108,7 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
 
         ready = [c for c in pool if c.get("presentation_ready") and clean(c.get("status")) == "qualified"]
         ready.sort(key=lambda c: (int(c.get("wow", 0) or 0),) + _selection_rank(c), reverse=True)
+        _GRAMMAR_MIX_ACTIVE[product] = len({clean(c.get("grammar_id")) for c in ready}) >= 3
 
         # Same-story variants compete for one public narrative.  Keep the strongest
         # version available for page selection; folded variants remain reserve.
@@ -3096,45 +3282,29 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
                 c["page_slot_wow"] = wow
                 by_wow[wow].append(c)
                 borrowed += 1
+        # Final top-up: if a bucket is still short while grounded findings wait in
+        # spare (the per-bucket pass can stop early), fill the thinnest bucket so
+        # the page stays full.
+        leftovers = sorted((c for w in (5, 4, 3, 2, 1) for c in spare[w]), key=_selection_rank, reverse=True)
+        while sum(min(len(v), slots_per_wow) for v in by_wow.values()) < slots_per_wow * 5 and leftovers:
+            short = [w for w in (5, 4, 3, 2, 1) if len(by_wow[w]) < slots_per_wow]
+            if not short:
+                break
+            c = leftovers.pop(0)
+            spare[int(c.get("wow", 0) or 0)].remove(c)
+            take(c)
+            w = min(short, key=lambda k: (len(by_wow[k]), abs(k - int(c.get("wow", 0) or 0))))
+            c["page_slot_wow"] = w
+            by_wow[w].append(c)
+            borrowed += 1
         chosen: list[dict[str, Any]] = []
         for round_idx in range(slots_per_wow):
             for wow in (5, 4, 3, 2, 1):
                 if round_idx < len(by_wow[wow]):
                     chosen.append(by_wow[wow][round_idx])
 
-        if product == "trend":
-            # No two trend cards share a title pattern: give each generic card the
-            # next unused phrasing, starting from its own preferred one.
-            used_patterns: set[int] = set()
-            for c in chosen:
-                b = c.get("trend_balance") if isinstance(c.get("trend_balance"), dict) else {}
-                if b.get("custom_title") or not clean(b.get("title_label")):
-                    continue
-                key = clean(c.get("object"))
-                start = int(hashlib.sha1(key.encode()).hexdigest(), 16) % len(_TREND_TITLE_POOL)
-                for k in range(len(_TREND_TITLE_POOL)):
-                    idx = (start + k) % len(_TREND_TITLE_POOL)
-                    if idx not in used_patterns:
-                        used_patterns.add(idx)
-                        b["left_title"], b["right_title"] = _trend_title_pair(clean(b["title_label"]), key, idx)
-                        break
-        if product == "shock":
-            # No two shock cards on the page share a phrasing: a card whose
-            # preferred wording is taken moves to the next unused variant.
-            used_titles: set[str] = set()
-            for c in chosen:
-                eps0 = [clean(x) for x in (c.get("endpoint_objects") or []) if clean(x)]
-                pid0 = clean(c.get("pressure_id")) or next((x.split(".", 1)[1] for x in eps0 if x.startswith("shock_pressure.")), "")
-                asset0 = _friendly_object_label(c.get("capability_object") or next((x for x in eps0 if not x.startswith("shock_pressure.")), ""))
-                variants = _SHOCK_TITLES.get(pid0)
-                if variants and asset0:
-                    start = int(hashlib.sha1(f"{pid0}|{asset0}".encode()).hexdigest(), 16) % len(variants)
-                    for k in range(len(variants)):
-                        tpl = variants[(start + k) % len(variants)]
-                        if tpl not in used_titles:
-                            used_titles.add(tpl)
-                            c["reader_title"] = tpl.format(asset=asset0, Asset=asset0[:1].upper() + asset0[1:])
-                            break
+        # Wording is written once, by the card writer, from each card's own evidence.
+        # Selection never swaps in pooled title patterns.
         out[product] = [clean(c.get("id")) for c in chosen if clean(c.get("id"))]
         chosen_ids = set(out[product])
         ready_ids = {clean(c.get("id")) for c in ready}
@@ -3158,7 +3328,8 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
                         c["trend_balance"] = copy.deepcopy(old["trend_balance"])
                         # Freeze only the numbers (so the bar does not wobble); the
                         # wording always follows the current evidence.
-                        for key in ("left_title", "right_title", "left_plain", "right_plain", "composition", "flip_line", "label"):
+                        for key in ("left_title", "right_title", "left_plain", "right_plain", "composition", "flip_line", "label",
+                                    "pair_title", "left_examples", "right_examples", "leading_side", "title_label", "custom_title"):
                             if key in fresh:
                                 c["trend_balance"][key] = fresh[key]
                         c["published_band_changed"] = False
@@ -3245,7 +3416,7 @@ def _select_stage7(candidates: list[dict[str, Any]], previous_state: dict[str, A
                         continue
                     # Variety in the creative reserve too, so every disruption type
                     # / topic keeps a path to mature (caps are one above page caps).
-                    dkeys = [(k, v, cap + 1) for k, v, cap in _diversity_keys(c)]
+                    dkeys = [(k, v, cap + 1) for k, v, cap in _diversity_keys(c) if k not in {"grammar", "lever"}]
                     if any(creative_used[(k, v)] >= cap for k, v, cap in dkeys):
                         continue
                     creative_pool[w].pop(idx)
@@ -3331,6 +3502,8 @@ def _candidate_topic_label(grammar: str, topic: str) -> str:
 
 def _friendly_object_label(value: Any) -> str:
     obj = clean(value)
+    if obj in _RL.OBJECT_LABELS or _RL.family_of(obj) or _RL.cluster_of_key(obj):
+        return _RL.label(obj)
     aliases = {
         "compute.public_procurement": "AI-factory public procurement",
         "compute.gigafactory": "AI-gigafactory capacity",
@@ -3860,12 +4033,30 @@ def adapt_candidate(c: dict[str, Any], nodes: Iterable[dict[str, Any]], *, vocab
         out["primary_records"] = len({x.get("identity") for x in out["support"]})
         out["primary_sources"] = len({clean(x.get("source")).lower() for x in out["support"] if clean(x.get("source"))})
         out["primary_role_coverage"] = 1.0 if trend.get("trend_evidence_floor_passes") else 0.667
-    reader_title, reader_summary = _reader_copy(grammar, product, c, out)
-    out["reader_title"] = reader_title
-    out["reader_summary"] = "" if product == "shock" else reader_summary
-    out["reader_why"] = _reader_why(grammar, product, c)
+    for key in ("contrast_frame", "ratio", "larger_text", "smaller_text", "larger_label", "smaller_label", "unit_label",
+                "unit_text", "programme_label", "programme_text", "relation", "external_actor", "gain_object", "gain_phrase",
+                "population", "cross_id", "driver_id", "driver_label", "field_labels", "countries", "eu_state", "group_label",
+                "pressure_id", "capability_object", "move"):
+        if key in c and key not in out:
+            out[key] = copy.deepcopy(c[key])
+    if grammar in MOVE_GRAMMARS and isinstance(c.get("support_queries_override"), list):
+        out["support_queries"] = c["support_queries_override"]
+    card = _CW.write_card(grammar, product, c, out, node_by_claim, vocab)
+    if grammar == "opposing_movements" and isinstance(out.get("trend_balance"), dict):
+        card = dict(card, headline=clean(out["trend_balance"].get("pair_title")) or card.get("headline"))
+    out["card"] = card
+    out["reader_kind"] = clean(card.get("kind"))
+    out["reader_kind_label"] = clean(card.get("kind_label"))
+    out["reader_title"] = clean(card.get("headline"))
+    out["reader_summary"] = clean(" ".join(x for x in (clean(card.get("lead")), clean(card.get("basis"))) if x))
+    out["reader_why"] = clean(card.get("so_what"))
+    out["reader_basis"] = clean(card.get("basis"))
+    out["reader_lead"] = clean(card.get("lead"))
     if grammar == "future_shock_hypothesis":
-        out["reader_consequence"] = _shock_consequence(c, out)
+        out["reader_consequence"] = clean(card.get("so_what"))
+    coherent, coherence_reason = _coherence(grammar, c, out, node_by_claim, vocab)
+    out["coherence_passes"] = coherent
+    out["coherence_reason"] = coherence_reason
     oddity, oddity_reason = _oddity_pass(out, vocab)
     out["oddity_passes"] = oddity
     out["oddity_reason"] = oddity_reason
@@ -3923,6 +4114,8 @@ def refresh_claim_high_order(
         "level3_sequence_gap", "level3_era_conjunction", "level4_opposing_movements",
         "level5_dependency_pathway", "future_shock_hypothesis", "level4_5_conflicting_criteria", "level5_latent_channel",
         "level5_anchor_demand", "level5_split_recurrence",
+        "move_magnitude_contrast", "move_external_opening", "move_cross_pressure",
+        "move_common_driver", "move_national_convergence",
     ):
         for x in groups.get(group, []):
             if not isinstance(x, dict):

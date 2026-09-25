@@ -429,7 +429,12 @@ def _title(c: dict[str, Any]) -> str:
     if _clean(c.get("product")) == "trend":
         b = c.get("trend_balance") if isinstance(c.get("trend_balance"), dict) else {}
         return _clean(b.get("left_title")) + " vs " + _clean(b.get("right_title"))
-    return _clean(c.get("reader_title") or c.get("topic_label"))
+    t = _clean(c.get("reader_title") or c.get("topic_label"))
+    # Shock cards are headed as questions ("What if X hit Y?"); a story needs the event.
+    m = re.match(r"^What if (.+?) hit (.+?)\?$", t)
+    if m:
+        return f"{m.group(1)[:1].upper()}{m.group(1)[1:]} hit {m.group(2)}."
+    return t
 
 
 def _sources(c: dict[str, Any], n: int = 3) -> list[dict[str, str]]:

@@ -303,7 +303,7 @@ def collect_radar_reader_fields(store: dict[str, Candidate]) -> None:
             if not c:
                 continue
             origin = f"{p.name}:high_order:{clean(cid)}"
-            for key in ("reader_title", "reader_summary", "reader_why"):
+            for key in ("reader_title", "reader_summary", "reader_why", "reader_lead", "reader_basis"):
                 add_candidate(store, c.get(key), [route], f"{origin}:{key}")
             if product == "trend" and isinstance(c.get("trend_balance"), dict):
                 b = c["trend_balance"]

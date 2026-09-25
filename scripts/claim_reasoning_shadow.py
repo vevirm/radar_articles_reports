@@ -1335,6 +1335,7 @@ def exploratory_shock_hypotheses(nodes: Iterable[dict[str, Any]], vocab: dict[st
             from scripts.claim_reasoning_live import _shock_driver_is_reader_grounded as _grounded_driver
             pressure = max(candidates, key=lambda n: (
                 1 if _grounded_driver(pid, n.get("text")) else 0,
+                1 if any(primary_cluster(o, vocab) == cluster for o in _claim_objects(n)) else 0,
                 1 if asset_obj in _claim_objects(n) else 0,
                 1 if _source(n).lower() != asset_src else 0,
                 anchor_rank(n),
