@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-25T06:46:38Z",
+  "generated_at": "2026-09-25T09:56:07Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -185474,8 +185474,96 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.euronews.com/2026/09/25/a-national-project-what-green-hydrogen-is-and-why-spain-is-backing-it": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "1f82e5eb",
+      "identity_hash": "56d87083402736c9",
+      "reader_title": "Spain moves a large green-hydrogen project into construction",
+      "reader_what": "Moeve began building a 300 MW hydrogen plant while Spain expanded public support.",
+      "reader_why": "It adds European clean-tech capacity and targets a domestic equipment value chain.",
+      "reader_more": "Construction began on Moeve’s 300 MW Onuba green-hydrogen project as Spain scales public support and a domestic hydrogen value chain. The project is under construction, but cost competitiveness, demand and transport infrastructure remain unresolved.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "Construction began on Moeve’s 300 MW Onuba green-hydrogen project as Spain scales public support and a domestic hydrogen value chain.",
+        "method_or_basis": "Substantive Euronews reporting based on the project launch, company details and Spanish government statements.",
+        "qualification": "The project is under construction, but cost competitiveness, demand and transport infrastructure remain unresolved.",
+        "radar_relevance": "A concrete clean-technology capacity build with public funding, industrial equipment ambitions and links to European energy security.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.euronews.com/2026/09/25/a-national-project-what-green-hydrogen-is-and-why-spain-is-backing-it; the package contains matching substantive primary web text used for verification."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euronews.com/2026/09/25/a-national-project-what-green-hydrogen-is-and-why-spain-is-backing-it",
+            "title": "A national project: What green hydrogen is and why Spain is backing it",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive content were verified against the matching packaged source material."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CURRENT_DEVELOPMENT",
+        "reason": "A concrete clean-technology capacity build with public funding, industrial equipment ambitions and links to European energy security."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-25T09:56:07Z",
+      "deep_scan_package_id": "worker-a-20260925T091316Z-829fd216d189",
+      "claims": [
+        {
+          "object": "green.innovation",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Moeve",
+            "class": "company"
+          },
+          "mechanism": "builds",
+          "direction": "expands",
+          "status": "operating",
+          "status_date": "2026-09-25",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "ES"
+            ]
+          },
+          "kind": "action",
+          "text": "Construction began on Moeve’s 300 MW Onuba green-hydrogen project as Spain scales public support and a domestic hydrogen value chain.",
+          "confidence": "high",
+          "qualification": "The project is under construction, but cost competitiveness, demand and transport infrastructure remain unresolved.",
+          "record_key": "link:https://www.euronews.com/2026/09/25/a-national-project-what-green-hydrogen-is-and-why-spain-is-backing-it",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:56d87083402736c9:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-09-25T06:46:38Z"
+  "claims_updated_at": "2026-09-25T09:56:07Z"
 }
