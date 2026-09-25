@@ -496,11 +496,11 @@
     return ids.map((id,publicationRank)=>byId.get(clean(id))).filter(Boolean).map((c,publicationRank)=>{
       const support=Array.isArray(c.support)?c.support:[],against=Array.isArray(c.against)?c.against:[],ctx=Array.isArray(c.context)?c.context:[];
       const sourceLabel=Number(c.primary_sources||0)>=2?'Multiple sources':clean(support[0]?.source||'Evidence base');
-      return {highOrder:true,kind,title:clean(c.reader_title||c.topic_label||'Evidence-backed finding'),coreMessage:clean(c.reader_summary||''),
+      return {highOrder:true,kind,title:clean(c.reader_title||c.topic_label||'Evidence-backed finding'),coreMessage:clean(c.card&&typeof c.card==='object'?c.card.lead:c.reader_summary),
         source:sourceLabel,date:clean(c.last_updated_at||state.evaluated_at||''),link:'',abstract:clean(c.reader_summary||''),newThisScan:!!c.new_this_scan,
         qualityScore:Number(c.score)||0,analyticalWeight:1,contextOnly:false,lens:{type:kind,passage:clean(c.reader_summary||'')},
         lensPassage:clean(c.reader_summary||''),interpretationBasis:'claim_native_publication',raw:{title:clean(c.reader_title),summary:clean(c.reader_summary)},
-        candidateId:clean(c.id),publicationRank,readerAuthored:!!clean(c.reader_title),readerWhy:clean(c.reader_why||''),grammarId:clean(c.grammar_id),topicLabel:clean(c.topic_label),
+        candidateId:clean(c.id),publicationRank,readerAuthored:!!clean(c.reader_title),readerWhy:clean(c.reader_why||''),readerKindLabel:clean(c.reader_kind_label||''),readerBasis:clean(c.reader_basis||''),grammarId:clean(c.grammar_id),topicLabel:clean(c.topic_label),
         objectKey:clean(c.object||c.topic_key),mechanism:clean(c.mechanism),direction:clean(c.direction),claimStatus:clean(c.claim_status||c.status),
         wow:Number(c.wow)||0,readerStatusChip:clean(c.reader_status_chip),inferentialDistance:Number(c.inferential_distance)||Number(c.level)||0,
         evidenceSemantics:clean(c.evidence_semantics||''),
@@ -727,6 +727,7 @@
   }
 
   function plainPriorityExplanation(x){
+    if(x?.highOrder&&x?.readerAuthored&&clean(x?.coreMessage))return clean(x.coreMessage);
     if(x?.highOrder){
       const topic=friendlyCandidateTopic(x),g=clean(x?.grammarId),dir=clean(x?.direction),mech=clean(x?.mechanism),kind=clean(x?.kind);
       if(g==='dependency_pathway')return 'A constraint in one connected part of the system could carry into the other, widening the impact beyond the original bottleneck.';
