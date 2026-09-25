@@ -8,11 +8,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
 <title>External Shock · Research &amp; Innovation × Geopolitics Radar</title>
-<link rel="stylesheet" href="../radar.css?v=28.3">
+<link rel="stylesheet" href="../radar.css?v=29">
 <script src="../radar_data.js?v=28.1"></script>
 
 
-<!-- Legacy regression tokens only: reform.css?v=23.0 · site-shell.js?v=23.0 -->
+<!-- Legacy regression tokens only: reform.css?v=23.0 · site-shell.js?v=29 -->
 </head>
 <body>
 <main class="wrap external-shock-main">
@@ -95,7 +95,7 @@ function collect(data){
   for(const id of hids){
     const c=hmap.get(clean(id));if(!c)continue;
     add(c.reader_title||c.topic_label,Number(c.inferential_distance)||4,{records:c.primary_records,sources:c.primary_sources},Number(c.score)||0,c.reader_consequence||c.reader_summary||'',{
-      type:'higher-order',reasoning:[clean(c.reader_summary||'')].filter(Boolean),hidden:clean(c.why_easy_to_miss||''),
+      type:'higher-order',engine:{kindLabel:clean(c.reader_kind_label||''),lead:clean(c.card&&typeof c.card==='object'?c.card.lead:c.reader_summary),so:clean(c.reader_consequence||c.reader_why||''),basis:clean(c.reader_basis||''),wow:Number(c.wow)||0},reasoning:[],hidden:clean(c.why_easy_to_miss||''),
       requiredRoles:Array.isArray(c.required_roles)?c.required_roles:[],coveredRoles:Array.isArray(c.covered_roles)?c.covered_roles:[],missingRoles:Array.isArray(c.missing_roles)?c.missing_roles:[],missingLinks:Array.isArray(c.missing_links)?c.missing_links:[],
       denialTested:!!c.denial_tested,falsifierQueries:Array.isArray(c.falsifier_queries)?c.falsifier_queries:[],support:(Array.isArray(c.support)?c.support:[]).map(evidenceRow),against:(Array.isArray(c.against)?c.against:[]).map(evidenceRow)
     })
@@ -151,10 +151,12 @@ function visibleShockExplanation(title,text){return clean(text)||shockExplanatio
     // from the nearest level). Keep that order; re-bucketing here dropped findings.
     const items=all.slice(0,15);
     document.getElementById('shockSummary').textContent=items.length?'Possible shocks worth watching.':'No possible shock is ready to show yet.';
-    el.innerHTML=items.length?items.map((x,i)=>{const raw=x.explanation&&x.detail&&x.detail.type==='higher-order'?x.explanation:shockExplanation(x.text);const explanation=visibleShockExplanation(x.text,raw);return `<li><strong>${esc(x.text)}</strong><p>${esc(explanation)}</p>${shockDetailHtml(x,i)}</li>`}).join(''):'<li class="empty">No possible shock is ready to show yet.</li>';
+    const C=globalThis.RadarCards;
+    el.innerHTML=items.length?items.map((x,i)=>{const e=x.detail&&x.detail.engine;if(C&&e&&e.lead){return `<li>${C.chip(e.kindLabel||'What if',e.wow)}<strong>${esc(C.surface(x.text))}</strong>${C.body({lead:e.lead,so:e.so,basis:e.basis})}${shockDetailHtml(x,i)}</li>`}const raw=x.explanation&&x.detail&&x.detail.type==='higher-order'?x.explanation:shockExplanation(x.text);const explanation=visibleShockExplanation(x.text,raw);return `<li><strong>${esc(x.text)}</strong><p>${esc(explanation)}</p>${shockDetailHtml(x,i)}</li>`}).join(''):'<li class="empty">No possible shock is ready to show yet.</li>';
   }catch(e){console.error(e);document.getElementById('shockSummary').textContent='Shock evidence is unavailable.';el.innerHTML='<li class="empty">Unavailable.</li>'}
 })();
 </script>
-<script src="../site-shell.js?v=28"></script>
+<script src="../reader_cards.js?v=26"></script>
+<script src="../site-shell.js?v=29"></script>
 </body>
 </html>
