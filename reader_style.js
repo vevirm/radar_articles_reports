@@ -21,61 +21,39 @@ function expandSurfaceTerms(v){
   s=s.replace(/^de[- ]risking\s+(.+)$/i,'Reducing risks around $1');
   s=s.replace(/^Partnership, association or cross-border cooperation is widening around (.+)\.$/i,'Cross-border cooperation on $1 is increasing.');
   s=s.replace(/^Security, export-control or de[- ]risking conditions are tightening around (.+)\.$/i,'Security and export-control conditions around $1 are getting tighter.');
+  // Names are never rewritten: "AI Act", "Mistral AI", "EuroHPC", "LUMI-AI" stay as
+  // they are.  Well-known terms (AI, export controls, dual-use, scale-ups, pilot lines)
+  // are kept: expanding them inside sentences produced broken grammar
+  // ("EU economic competition between countries power", "Mistral artificial intelligence").
+  // Only genuinely opaque abbreviations are expanded, and only where they stand alone.
+  const protectedNames=[];
+  s=s.replace(/\b(?:[A-Z][\w-]*\s)?(?:AI|HPC|IP)(?:[-\s](?:Act|Office|Factor(?:y|ies)|Gigafactor(?:y|ies)|Continent|Pact|Board|Liability))\b|\b[A-Z][a-z]+\sAI\b|\b[\w-]*-AI\b|\bAI4\w+\b|\bEuroHPC\b/g,m=>{protectedNames.push(m);return `\u0000${protectedNames.length-1}\u0000`});
   const replacements=[
     [/\bHPC\b/g,'high-performance computing'],
-    [/\bEuroHPC\b/g,'the European shared computing programme'],
     [/\bFP10\b/g,'the next EU research framework programme'],
     [/\bMFF\b/g,'the EU long-term budget'],
-    [/\bMSCA\b/g,'Marie Skłodowska-Curie Actions'],
     [/\bFDI\b/g,'foreign direct investment'],
     [/\bTRLs?\b/g,'technology readiness levels'],
     [/\bLLMs?\b/g,'large language models'],
-    [/\bGPUs?\b/g,'graphics processors'],
-    [/\bSMEs?\b/g,'small and medium-sized firms'],
-    [/\bR&D\b/g,'research and development'],
     [/\bIPCEI\b/g,'large cross-country European industrial project'],
-    [/\bIP\b/g,'intellectual property'],
-    [/\bAI\b/g,'artificial intelligence'],
     [/\bNLP\b/g,'language analysis'],
     [/\bDOI\b/g,'publication identifier'],
-    [/\bEOSC\b/g,'European Open Science Cloud'],
-    [/\bSTEM\b/g,'science and engineering'],
-    [/\bJRC\b/g,'Joint Research Centre'],
-    [/\bERC\b/g,'European Research Council'],
-    [/\bEIC\b/g,'European Innovation Council'],
-    [/\bEIB\b/g,'European Investment Bank']
+    [/\bEOSC\b/g,'European Open Science Cloud']
   ];
   for(const [re,to] of replacements)s=s.replace(re,to);
   s=s.replace(/\bR&I\b/g,'research and innovation');
   const jargon=[
-    [/\bextraterritorial(?:ity)?\b/gi,'foreign rules applied outside their own country'],
-    [/\bgeoeconomic\b/gi,'economic competition between countries'],
-    [/\bdual[- ]use\b/gi,'civilian and defence'],
-    [/\bbibliometric(?:s)?\b/gi,'research publication analysis'],
-    [/\bscientometric(?:s)?\b/gi,'analysis of research activity'],
+    [/\bbibliometric(?:s)?\b/gi,'publication-based'],
+    [/\bscientometric(?:s)?\b/gi,'research-activity'],
     [/\bcitation burst(?:s)?\b/gi,'sudden rises in citations'],
     [/\bchange[- ]point detection\b/gi,'detecting sudden changes'],
     [/\bsemantic shift(?:s)?\b/gi,'changes in language'],
     [/\bdynamic topic model(?:s)?\b/gi,'methods that track changing research topics'],
     [/\bgraph anomaly detection\b/gi,'finding unusual changes in networks'],
-    [/\bdeemed export\b/gi,'rules treating access by foreign nationals as an export'],
-    [/\bcompute access\b/gi,'access to computing power'],
-    [/\bcompute capacity\b/gi,'computing capacity'],
-    [/\bcompute infrastructure\b/gi,'computing infrastructure'],
-    [/\bgeopolitical chokepoints?\b/gi,'geopolitical bottlenecks'],
-    [/\bchokepoints?\b/gi,'critical bottlenecks'],
-    [/\binteroperability\b/gi,'ability of systems to work together'],
-    [/\bpilot lines?\b/gi,'test production lines'],
-    [/\btestbeds?\b/gi,'test facilities'],
-    [/\bdeep[- ]tech\b/gi,'advanced technology'],
-    [/\bde[- ]risking\b/gi,'risk-reduction'],
-    [/\btechnology sovereignty\b/gi,'control over critical technology'],
-    [/\bfrontier research\b/gi,'cutting-edge research'],
-    [/\bscale[- ]ups?\b/gi,'growing technology firms'],
-    [/\bscale[- ]up\b/gi,'growth'],
-    [/\bexport controls?\b/gi,'rules limiting technology exports']
+    [/\bdeemed export\b/gi,'rules treating access by foreign nationals as an export']
   ];
   for(const [re,to] of jargon)s=s.replace(re,to);
+  s=s.replace(/\u0000(\d+)\u0000/g,(_,i)=>protectedNames[Number(i)]);
   return clean(s);
 }
 

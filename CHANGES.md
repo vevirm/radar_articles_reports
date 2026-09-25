@@ -1,3 +1,14 @@
+# v26 — the engine writes the cards; bolder, mechanism-backed connections
+
+- **Cards are points about the EU R&I system, written by the reasoning engine** (`scripts/card_writer.py`): the headline states the point (no country, company or programme names), the first line gives the reasoning (why it matters or what follows), and small print counts the evidence and says what is the Radar's inference. Single events become "Early sign" cards ranked after the points. A chip names the kind of reasoning.
+- **Trends are stated as one idea** ("Research security: policy is running ahead of proof"; "International digital partnerships: more partnerships, more fragmentation"), never by one of their anecdotes. Sides are characterised without names ("Governments are acting on research security", "Studies warn of limits"). The balance line says what kind of evidence carries each side, and "What could tip it" says which way the genuinely pending decisions would push.
+- **Reader names for every engine object** (`scripts/reader_labels.py`, all 102 objects). There is no more "materials advanced", "funding route" or "AI governance could collide with AI governance".
+- **Coherence gates:** a connection needs a mechanism before it is shown (shock exposure, rule concerning the practice, old link actually echoed, distinct requirements, live lever in the same field or one that attaches conditions). Physical disruptions (cyber, energy, hazards, inputs) only hit things that run, not budgets; a technology leap does not hit a budget; a rule change must name what it hits; "doctrine" must be a written rule, not a debate. Grounding fixes cover "conditions", "frontier AI", "AI Act" mentions, "bottleneck" and "post-war".
+- **New reasoning moves** (`scripts/reasoning_moves.py`): magnitude contrasts computed from stated amounts, restrictions abroad that feed European openings, policies at cross purposes, one dependency across many fields, and country-by-country convergence.
+- Deliberate mix: when three or more kinds of reasoning are ready, no single kind takes more than four of a page's fifteen slots.
+- Plain-language pass no longer rewrites names or common terms ("Mistral AI", "AI Act", "EuroHPC", "export controls" stay as they are).
+- Removed: the per-record trend headline rules, pooled trend title patterns and pooled shock title rewrites.
+
 # 2035 scenarios page
 
 - New page **2035** (menu after External Shocks): four 2035 worlds on two open questions (open vs guarded; scaling vs squeezed), each with four variants: two triggered by published shocks, one by an opportunity seized, one by a risk realised. 16 variants, every trigger a distinct published finding with sources.
