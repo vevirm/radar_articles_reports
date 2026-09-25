@@ -520,6 +520,81 @@ _CONSTRAINT_TERMS: tuple[tuple[str, str], ...] = (
 )
 
 
+# What exactly is weak.  "Weak spots" says nothing; "scale-up and exit markets"
+# says what the studies found.  Phrases are pulled from the statements with a few
+# grammatical patterns and mapped onto R&I system concepts; a concept that several
+# statements share comes first.
+_WEAK_PATTERNS = (
+    r"\bweak(?:er|ening)?\s+((?:[a-z][\w\-]*\s+){0,3}[a-z][\w\-]*)",
+    r"\b(?:gaps?|constraints?|bottlenecks?|barriers?|shortages?|shortfalls?)\s+(?:persist\s+)?(?:in|for|to|on|around)\s+((?:[a-z][\w\-]*[\s,]+){0,6}[a-z][\w\-]*)",
+    r"\bunderperforms?\s+(?:\w+ly\s+)?in\s+((?:[a-z][\w\-]*[\s,]+){0,6}[a-z][\w\-]*)",
+    r"\b((?:[a-z][\w\-]*\s+){0,2}[a-z][\w\-]*)\s+lags?\b",
+    r"\b((?:[a-z][\w\-]*[\s,]+){0,6}[a-z][\w\-]*)\s+(?:are\s+|were\s+)?identified as (?:persistent\s+)?gaps",
+    r"\b(?:lack|lacks|lacking|absence) of\s+((?:[a-z][\w\-]*\s+){0,3}[a-z][\w\-]*)",
+)
+_WEAK_CANON = (
+    (r"scale-?ups?|scaling|scaleup", "scale-up"),
+    (r"commerciali[sz]\w*", "commercialisation"),
+    (r"venture (?:capital|investment)|\bvc\b", "venture capital"),
+    (r"public[- ]equity|\bipos?\b|\bexits?\b", "exit markets"),
+    (r"procurement", "public procurement"),
+    (r"patent\w*", "patenting"),
+    (r"deployment|market uptake|\bdemand\b", "market demand"),
+    (r"entrepreneur\w* education|\bskills?\b|human capital", "skills"),
+    (r"\bclusters?\b", "clusters"),
+    (r"technology transfer|knowledge transfer", "knowledge transfer"),
+    (r"supply chains?", "supply chains"),
+    (r"participation|visibility", "equal participation"),
+    (r"coordination|fragment\w*", "coordination"),
+    (r"legal framework|regulat\w*|\brules\b", "the rules"),
+    (r"financ\w*|\bfunding\b|\bcapital\b", "finance"),
+)
+_WEAK_DROP = {"the", "a", "an", "and", "or", "of", "in", "for", "to", "on", "its", "their", "this", "that", "these", "more",
+              "specific", "persistent", "pillars", "indicators", "incentives", "links", "performance", "capacity", "conditions",
+              "constraints", "constraint", "gaps", "gap", "barriers", "barrier", "bottlenecks", "shortages", "limits", "weaknesses",
+              "problems", "issues", "practical"}
+
+
+def weak_spots(evs: list[Ev], exclude: str = "") -> tuple[list[str], bool]:
+    """(concepts that are weak, whether the first is shared by several statements)."""
+    skip = {w for w in re.findall(r"[a-z]+", exclude.lower()) if len(w) > 3}
+    seen: dict[str, set[int]] = {}
+    order: list[str] = []
+    for i, e in enumerate(evs):
+        text = e.statement.lower()
+        for rx in _WEAK_PATTERNS:
+            for m in re.finditer(rx, text):
+                phrase = re.split(r"\b(?:while|despite|with|as|because|that|which|than|compared|across)\b", m.group(1))[0]
+                for item in re.split(r",|\band\b|\bor\b", phrase):
+                    words = [w for w in re.findall(r"[a-z][\w\-]*", item) if w not in _WEAK_DROP]
+                    if not words:
+                        continue
+                    bit = " ".join(words)
+                    canon = next((c for rx2, c in _WEAK_CANON if re.search(rx2, bit)), "")
+                    if not canon:
+                        # Keep only short, clean phrases that read as a thing ("equal participation").
+                        if len(words) > 3 or all(w in skip for w in words) or re.search(r"\d", bit) or not re.search(re.escape(bit), text):
+                            continue
+                        canon = bit
+                    if canon in skip or all(w in skip for w in canon.split()):
+                        continue
+                    seen.setdefault(canon, set()).add(i)
+                    if canon not in order:
+                        order.append(canon)
+    if "finance" in seen and ({"venture capital", "exit markets", "scale-up"} & set(seen)):
+        seen.pop("finance"); order.remove("finance")
+    ranked = sorted(order, key=lambda c: (-len(seen[c]), order.index(c)))
+    return ranked[:3], bool(ranked) and len(seen[ranked[0]]) >= 2
+
+
+def _weak_phrase(terms: list[str]) -> str:
+    return RL.join_names(terms)
+
+
+def _stay(terms: list[str]) -> str:
+    return "stay" if len(terms) > 1 or is_plural(terms[0]) else "stays"
+
+
 def _shared_constraint(evs: list[Ev]) -> str:
     for rx, term in _CONSTRAINT_TERMS:
         if sum(1 for e in evs if re.search(rx, e.statement, re.I)) >= 2:
@@ -570,7 +645,11 @@ def write_corroborated(product: str, raw: dict[str, Any], cand: dict[str, Any], 
                     else f"{cap(x)} could become more contested")
         else:
             term = _shared_constraint(evs)
-            if len(states) >= 2:
+            weak, shared = weak_spots(evs, x) if term else ([], False)
+            if weak:
+                head = (f"{cap(x)} keeps falling short on {_weak_phrase(weak[:1])}" + (f", and on {_weak_phrase(weak[1:])}" if len(weak) > 1 else "")
+                        if shared else f"{cap(x)} falls short on {_weak_phrase(weak)}")
+            elif len(states) >= 2:
                 head = (f"{cap(x)} keeps hitting the same {term} in several member states" if term
                         else f"{cap(x)} {be(x)} under strain in several member states")
             elif n_src >= 2 and analysis:
@@ -1539,10 +1618,14 @@ def _r_class(rp: str) -> str:
             "the terms are disputed": "dispute", "outside pressure grows": "outside"}.get(rp, "limits")
 
 
-def _trend_idea(x: str, lp: str, rp: str, term: str, split: bool, r_analysis: bool) -> str:
+def _trend_idea(x: str, lp: str, rp: str, term: str, split: bool, r_analysis: bool, weak: list[str] | None = None) -> str:
     """The trend as one idea about the system, not a list of who did what."""
     X = cap(x)
     L, R = _L_CLASS.get(lp, "grow"), _r_class(rp)
+    if weak and R in {"evidence", "limits"} and not split and not (L == "partner" and term == "fragmentation"):
+        more = {"money": "more money", "build": "more capacity", "policy": "more measures", "partner": "more partnerships"}.get(L)
+        if more:
+            return f"{X}: {more}, but {_weak_phrase(weak)} {_stay(weak)} weak"
     t = (term or "limits").replace("a gap to rivals", "gap to rivals")
     if split:
         return f"{X}: the evidence points both ways"
@@ -1601,7 +1684,10 @@ def write_trend(object_key: str, left_refs: list[dict], right_refs: list[dict], 
     if l_analysis and r_analysis:
         lt = f"Some see {x} gaining ground"
         rt = f"Others keep finding {_shared_constraint(right)}" if _shared_constraint(right) else "Others see limits"
-    pair_title = _trend_idea(x, lp, rp, _shared_constraint(right), l_analysis and r_analysis, r_analysis)
+    weak, _shared = weak_spots(right, x)
+    if weak and rp.startswith("studies"):
+        rt = f"Studies keep finding {_weak_phrase(weak)} too weak"
+    pair_title = _trend_idea(x, lp, rp, _shared_constraint(right), l_analysis and r_analysis, r_analysis, weak)
 
     def plain(evs: list[Ev], side: str, phrase: str) -> str:
         # What the side adds up to, not a chain of who-did-what.  Only the kinds of
