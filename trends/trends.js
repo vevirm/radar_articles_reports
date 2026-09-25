@@ -413,9 +413,12 @@
       const leftEvidence=support.filter(x=>clean(x?.role).startsWith(leftRole)).map(x=>({row:x}));
       const rightEvidence=support.filter(x=>clean(x?.role).startsWith(rightRole)).map(x=>({row:x}));
       if(leftEvidence.length<1||rightEvidence.length<1)return null;
+      // v26: the engine's card writer heads each side with the trend itself and lists
+      // the developments behind it; the page never swaps in a single anecdote.
       return {id:c.id,emergent:true,family:clean(b.family),objectKey:clean(b.object_key),support:Number(c.score)||0,
-        left:{title:trendHeadlineFromPlain(b.left_title||'Pull A',b.left_plain||c.reader_summary||''),plain:clean(b.left_plain||c.reader_summary||''),why:'',pull:Math.round(lp),evidence:leftEvidence,history:[],sourceCount:Number(b.left_sources)||0},
-        right:{title:trendHeadlineFromPlain(b.right_title||'Pull B',b.right_plain||c.reader_summary||''),plain:clean(b.right_plain||c.reader_summary||''),why:'',pull:Math.round(rp),evidence:rightEvidence,history:[],sourceCount:Number(b.right_sources)||0},
+        pairTitle:clean(b.pair_title||c.reader_title||''),kindLabel:clean(c.reader_kind_label||'Tug of war'),wow:Number(c.wow)||0,
+        left:{title:clean(b.left_title||'Pull A'),plain:clean(b.left_plain||''),why:'',pull:Math.round(lp),evidence:leftEvidence,history:[],sourceCount:Number(b.left_sources)||0},
+        right:{title:clean(b.right_title||'Pull B'),plain:clean(b.right_plain||''),why:'',pull:Math.round(rp),evidence:rightEvidence,history:[],sourceCount:Number(b.right_sources)||0},
         pullRange:{left:b.left_range||[],right:b.right_range||[]},
         composition:clean(b.composition||''),flip:clean(b.flip_line||''),label:clean(b.label||''),
         actionStats:{leftActions:Number(b.left_actions)||0,rightActions:Number(b.right_actions)||0,leftSources:Number(b.left_sources)||0,rightSources:Number(b.right_sources)||0,rawLeft:Number(b.raw_left_pull),rawRight:Number(b.raw_right_pull)},
