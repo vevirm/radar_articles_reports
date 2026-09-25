@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260925T095847Z-e5e7e9aa24f8`
+- Current package: `worker-a-20260925T100746Z-e5e7e9aa24f8`
 - Assigned unresolved records: **36**
   1. `link:https://news.google.com/rss/articles/CBMiYEFVX3lxTE5kbTAyVkNPbFFfaTVKRFZvVjQ2SG9aT1p2eFFCVk5LWXNiUnI4MWdBeTdmdXhDVzZtTHFPYWVfYTk5SnpOMlppVmRwM0hsUkMxSW1XQ0kzR3MybjB4akV0aQ?oc=5` — Enhancing Europe’s competitiveness by empowering researchers as innovators - Science | AAAS
   2. `link:https://news.google.com/rss/articles/CBMimANBVV95cUxNSlNkU05HVnBSMlk5Y3BJYmZtT0lhSFRhMERhMlQ5QzQxbG5Dcnd4RWE1aFNVd0RoX3RmYTNpSEpISzVEaVV4VlduZF9RNXlDTzhzeVllVnkwdGZHQWgxX21sWXp2ZVZQRTBNellUVGxRZnE0Zkk5b0J6OWQwMlczZHl2WnZFWmhpOHpULXNOZFBmdDNMNjBUbDZlWEVWT0Y3UFlRd1pJdEhiVDhPMEZtb0M1VlZyd2xZQS1KQkhXNUk3SmllSUFIV3NNQnFIVDUyRjIyTkFtQ05pa3dkVXZuM3N2TTRmT2JWTGpNQmx1NzhwcW16WW8zSU1DZ2ZxdmlPLW9lakRYd29yT2NzX3RUMGdmQ0ZBV2hRYVVrTDlaT3JUSDNWcmpMNUlyMENHSkY0QVhRUU5tRHFtRmdRNENNMi1NUXN6S1ZHLU41cjJsRGJsX2dlVE14ZF90VlB1NmFhTTRQaTI0RmVDMFk2elNKLXJCdmdIcnppaEphb0dVT3kxRXgxSUF5Z0dPR1JYX3BMZ1R6SW1wY0g?oc=5` — Horizon Europe Work Programme: Calls under the Mission Restore our Ocean and Waters are now closed - research-and-innovation.ec.europa.eu
@@ -29,7 +29,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260925T095902Z-c10203bf3530`
+- Current package: `worker-b-20260925T100810Z-c10203bf3530`
 - Assigned unresolved records: **36**
   1. `historical:id:8830ed616891a4b2` — Horizon Europe Space calls 2023 2024
   2. `historical:id:7a52a7fe58625ca7` — 6G and Future Wireless Systems
