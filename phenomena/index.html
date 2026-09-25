@@ -8,11 +8,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
 <title>Ongoing Phenomena · Research &amp; Innovation × Geopolitics Radar</title>
-<link rel="stylesheet" href="../radar.css?v=28.2">
+<link rel="stylesheet" href="../radar.css?v=29">
 <script src="../radar_data.js?v=28.1"></script>
 
 
-<!-- Legacy regression tokens only: reform.css?v=23.0 · site-shell.js?v=23.0 -->
+<!-- Legacy regression tokens only: reform.css?v=23.0 · site-shell.js?v=29 -->
 </head>
 <body>
 <main class="wrap pattern-simple-main">
@@ -137,7 +137,8 @@ function phenomenonEvidenceList(rows){return rows.map(r=>{const title=clean(r?.t
 function phenomenonEvidence(rows,history){rows=Array.isArray(rows)?rows:[];history=Array.isArray(history)?history:[];if(!rows.length&&!history.length)return '';let body='';if(rows.length)body+=`<p><strong>Current sources:</strong></p><ul>${phenomenonEvidenceList(rows)}</ul>`;if(history.length)body+=`<p><strong>Earlier sources:</strong></p><ul>${phenomenonEvidenceList(history)}</ul>`;return `<details><summary>Sources</summary>${body}</details>`}
 function render(items){
   const el=document.getElementById('phenomena');
-  el.innerHTML=items.length?items.map(x=>{const explanation=clean(x.explanation)||clean(phenomenonExplanation(x.text));return `<li data-obviousness="${x.distance||2}"><strong>${esc(x.text)}</strong>${explanation?`<p>${esc(explanation)}</p>`:''}${phenomenonEvidence(x.support,x.history)}</li>`}).join(''):'<li class="empty">No ongoing phenomenon is clear enough to show yet.</li>';
+  const C=globalThis.RadarCards;
+  el.innerHTML=items.length?items.map(x=>{if(C&&x.kindLabel){return `<li data-obviousness="${x.distance||2}">${C.chip(x.kindLabel,x.wow)}<strong>${esc(C.surface(x.text))}</strong>${C.body({lead:x.explanation,so:x.so,basis:x.basis})}${phenomenonEvidence(x.support,x.history)}</li>`}const explanation=clean(x.explanation)||clean(phenomenonExplanation(x.text));return `<li data-obviousness="${x.distance||2}"><strong>${esc(x.text)}</strong>${explanation?`<p>${esc(explanation)}</p>`:''}${phenomenonEvidence(x.support,x.history)}</li>`}).join(''):'<li class="empty">No ongoing phenomenon is clear enough to show yet.</li>';
 }
 async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});return r.ok?await r.json():{}}catch(_){return {}}}
 (async()=>{
@@ -160,7 +161,7 @@ async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});ret
       // claim-native shelf would recreate the pre-reform ranking system.
       const hids=Array.isArray(hi?.publications?.continuity)?hi.publications.continuity:[];
       const hmap=new Map((Array.isArray(hi?.candidates)?hi.candidates:[]).filter(x=>x&&typeof x==='object').map(x=>[clean(x.id),x]));
-      const shown=hids.map(id=>hmap.get(clean(id))).filter(Boolean).map(c=>({text:clean(c.reader_title||c.topic_label),explanation:publicPhenomenonSummary(c.reader_summary||'',clean(c.reader_title||c.topic_label)),records:Number(c.current_record_count)||Number(c.primary_records)||0,sources:Number(c.current_source_count)||Number(c.primary_sources)||0,distance:Number(c.wow)||Number(c.inferential_distance)||3,rankScore:Number(c.score)||0,groupLabel:c.grammar_id==='split_recurrence'?'Returning pattern':c.grammar_id==='era_conjunction'?'Changing pattern':'Recurring pattern',support:Array.isArray(c.support)?c.support:[],history:Array.isArray(c.continuity_history)?c.continuity_history:[]}));
+      const shown=hids.map(id=>hmap.get(clean(id))).filter(Boolean).map(c=>({text:clean(c.reader_title||c.topic_label),explanation:(c.card&&typeof c.card==='object')?clean(c.card.lead):(clean(c.reader_summary||'')||publicPhenomenonSummary(c.reader_summary||'',clean(c.reader_title||c.topic_label))),so:clean(c.reader_why||''),basis:clean(c.reader_basis||''),kindLabel:clean(c.reader_kind_label||''),wow:Number(c.wow)||0,records:Number(c.current_record_count)||Number(c.primary_records)||0,sources:Number(c.current_source_count)||Number(c.primary_sources)||0,distance:Number(c.wow)||Number(c.inferential_distance)||3,rankScore:Number(c.score)||0,groupLabel:c.grammar_id==='split_recurrence'?'Returning pattern':c.grammar_id==='era_conjunction'?'Changing pattern':'Recurring pattern',support:Array.isArray(c.support)?c.support:[],history:Array.isArray(c.continuity_history)?c.continuity_history:[]}));
       const sel=hi?.selection?.continuity||{};
       const reserve=Number(sel.reserve)||0,watch=Number(sel.watch)||0;
       // Keep the published Stage 7 order; re-bucketing would drop filled slots.
@@ -180,6 +181,7 @@ async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});ret
   }
 })();
 </script>
-<script src="../site-shell.js?v=28"></script>
+<script src="../reader_cards.js?v=26"></script>
+<script src="../site-shell.js?v=29"></script>
 </body>
 </html>
