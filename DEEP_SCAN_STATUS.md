@@ -7,17 +7,17 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **2012** (Main **1035** + Historical **977**)
-- Automatic queue still needing V2 verification: **41** (Main **15** + Historical **26**)
-- Currently assigned to workers: **41** (Main **15** + Historical **26**)
+- Automatic queue still needing V2 verification: **67** (Main **18** + Historical **49**)
+- Currently assigned to workers: **56** (Main **18** + Historical **38**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **16**
-- Automatic queue pending and not yet assigned: **0**
+- Automatic queue pending and not yet assigned: **11**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260924T225742Z-a89f3aae9af0`
-- Assigned unresolved records: **27**
+- Current package: `worker-a-20260925T060410Z-656d7f0e33c1`
+- Assigned unresolved records: **28**
   1. `link:https://doi.org/10.1016/j.ejps.2026.107570` — European science for health research needs and priorities — recovery attempt 2/3
   2. `historical:id:9b579a1a37c6d632` — Consumer flash fiction: A methodology to support the early sensing of far-future innovation opportunities
   3. `historical:id:2084a8c4b9bba7a3` — Analysis of Smart Technologies Used in Smart Hotels
@@ -26,11 +26,11 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=8baf21ed-b790-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — DRAFT REPORT - on the proposal for a regulation of the European Parliament and of the Council on the European Union Agency for Cybersecurity (ENISA), the European cybersecurity certification framework, and ICT supply chain security and repealing Regulation (EU) 2019/881 (The Cybersecurity Act 2) - (COM(2026)0011 - C10-0015/2026 - 2026/0011(COD)) - Committee on Industry, Research and Energy - Rapporteur: Markéta Gregorová - Publications Office of the EU — recovery attempt 2/3
   7. `link:https://doi.org/10.1111/aepr.70032` — Comment on “Supply Chain Diversification and Industrial Policies to Strengthen Economic Security” — recovery attempt 2/3
   8. `historical:id:cef3cfdeb1591a87` — Explanatory models of regional innovation performance in Europe: policy implications for regions — recovery attempt 2/3
-  - … plus 19 more in the package manifest
+  - … plus 20 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260924T225808Z-7506a469f4c2`
-- Assigned unresolved records: **14**
+- Current package: `worker-b-20260925T060438Z-87d34e864d6a`
+- Assigned unresolved records: **28**
   1. `historical:id:8830ed616891a4b2` — Horizon Europe Space calls 2023 2024
   2. `historical:id:7a52a7fe58625ca7` — 6G and Future Wireless Systems
   3. `historical:id:32dbe0c26d06c41f` — Santander-CIDOB Future Leaders Forum “How can the EU achieve digital strategic autonomy?" - HCSS
@@ -39,7 +39,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:2a46a133474228a1` — Germany’s Cybersecurity Posture? Let’s Focus on Resilience
   7. `historical:id:dd2d92bb540bfefd` — Tech-chat on 'Standardization and Technology Transfer' - COST
   8. `historical:id:05af1ae09ac5a7c5` — Horizon Europe - funding digital technology and research
-  - … plus 6 more in the package manifest
+  - … plus 20 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `none`
