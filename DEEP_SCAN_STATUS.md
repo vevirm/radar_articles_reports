@@ -6,17 +6,17 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2033** (Main **1048** + Historical **985**)
-- Automatic queue still needing V2 verification: **150** (Main **53** + Historical **97**)
-- Currently assigned to workers: **80** (Main **49** + Historical **31**)
-- Bounded access-recovery retries still eligible: **5**
-- Hands-on verification needed: **17**
-- Automatic queue pending and not yet assigned: **70**
+- Authoritative V2 verified: **2070** (Main **1054** + Historical **1016**)
+- Automatic queue still needing V2 verification: **112** (Main **46** + Historical **66**)
+- Currently assigned to workers: **76** (Main **46** + Historical **30**)
+- Bounded access-recovery retries still eligible: **4**
+- Hands-on verification needed: **19**
+- Automatic queue pending and not yet assigned: **36**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260926T041858Z-008a4941c732`
+- Current package: `worker-a-20260926T053933Z-008a4941c732`
 - Assigned unresolved records: **40**
   1. `link:https://news.google.com/rss/articles/CBMiYEFVX3lxTE5kbTAyVkNPbFFfaTVKRFZvVjQ2SG9aT1p2eFFCVk5LWXNiUnI4MWdBeTdmdXhDVzZtTHFPYWVfYTk5SnpOMlppVmRwM0hsUkMxSW1XQ0kzR3MybjB4akV0aQ?oc=5` — Enhancing Europe’s competitiveness by empowering researchers as innovators - Science | AAAS
   2. `link:https://news.google.com/rss/articles/CBMimANBVV95cUxNSlNkU05HVnBSMlk5Y3BJYmZtT0lhSFRhMERhMlQ5QzQxbG5Dcnd4RWE1aFNVd0RoX3RmYTNpSEpISzVEaVV4VlduZF9RNXlDTzhzeVllVnkwdGZHQWgxX21sWXp2ZVZQRTBNellUVGxRZnE0Zkk5b0J6OWQwMlczZHl2WnZFWmhpOHpULXNOZFBmdDNMNjBUbDZlWEVWT0Y3UFlRd1pJdEhiVDhPMEZtb0M1VlZyd2xZQS1KQkhXNUk3SmllSUFIV3NNQnFIVDUyRjIyTkFtQ05pa3dkVXZuM3N2TTRmT2JWTGpNQmx1NzhwcW16WW8zSU1DZ2ZxdmlPLW9lakRYd29yT2NzX3RUMGdmQ0ZBV2hRYVVrTDlaT3JUSDNWcmpMNUlyMENHSkY0QVhRUU5tRHFtRmdRNENNMi1NUXN6S1ZHLU41cjJsRGJsX2dlVE14ZF90VlB1NmFhTTRQaTI0RmVDMFk2elNKLXJCdmdIcnppaEphb0dVT3kxRXgxSUF5Z0dPR1JYX3BMZ1R6SW1wY0g?oc=5` — Horizon Europe Work Programme: Calls under the Mission Restore our Ocean and Waters are now closed - research-and-innovation.ec.europa.eu
@@ -29,17 +29,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 32 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260926T041925Z-4706ad515738`
-- Assigned unresolved records: **40**
-  1. `historical:id:8830ed616891a4b2` — Horizon Europe Space calls 2023 2024
-  2. `historical:id:7a52a7fe58625ca7` — 6G and Future Wireless Systems
-  3. `historical:id:32dbe0c26d06c41f` — Santander-CIDOB Future Leaders Forum “How can the EU achieve digital strategic autonomy?" - HCSS
-  4. `historical:id:91281e6793343147` — CSET on China's Advanced AI Research and the China AI "Watchboard" Pilot Program | Center for Security and Emerging Technology
-  5. `historical:id:815cd8b237e07d7b` — How Congress Can Ensure CHIPS Act Funding Advances National Security Interests
-  6. `historical:id:2a46a133474228a1` — Germany’s Cybersecurity Posture? Let’s Focus on Resilience
-  7. `historical:id:dd2d92bb540bfefd` — Tech-chat on 'Standardization and Technology Transfer' - COST
-  8. `historical:id:05af1ae09ac5a7c5` — Horizon Europe - funding digital technology and research
-  - … plus 32 more in the package manifest
+- Current package: `worker-b-20260926T054001Z-73a5335928ff`
+- Assigned unresolved records: **36**
+  1. `link:https://www.ri.se/sv/om-rise/jobba-hos-oss/lediga-jobb/postdoc-researcher-in-resilient-edge-computing-for-critical` — Postdoc Researcher in Resilient Edge Computing for Critical Infrastructure | RISE
+  2. `link:https://doi.org/10.2478/sm-2026-0001` — Language Policy Implementation: The Role of Applied Linguistics for Knowledge Transfer
+  3. `link:https://doi.org/10.1016/j.ejon.2026.103258` — Rural cancer research activity across Europe: A bibliometric analysis on patterns, gaps and policy implications
+  4. `link:https://doi.org/10.22323/355120260309065841` — Citizen Science, Cognitive Justice and Data Sovereignty: a View from the South
+  5. `historical:id:ae02cbe99a23df59` — Developing an agile and secure single market and infrastructure for data-services and trustworthy artificial intelligence services
+  6. `historical:id:61346ffd17e338e1` — IVA's President: Some thoughts on the EU's Approach to China
+  7. `historical:id:cd4c3060be7a2c0b` — Fast Track to the EIC Accelerator ‒ Call 4
+  8. `historical:id:62e774d1bd2981cc` — European RTD Policy, Competitiveness and Space - ESPI
+  - … plus 28 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `none`
@@ -66,3 +66,5 @@ These works no longer consume automatic Deep Scan slots. Their identity is belie
 - `link:https://news.google.com/rss/articles/CBMifkFVX3lxTFB3X2lIVGxXMmR6YnJya2xIS2t0WGs0UWZlN0hCNFdQWDAzTVpZWGJVT2VaNnFHa0xDVXpaSG9CNlBWeXVLWXR2M3pNbGxYS0laSWdyN05ETFhCNEp0OEtlOXVSSlBPRDRSUFBPb242Z1JGdVJXZ2xQU1ZEUUxsQQ?oc=5` — **THE HACK: EU progress on industrial AI push** — attempts: 3/3 — Euractiv — 2026-09-21T07:21Z — Identity is verified as the Euractiv newsletter item, but substantive article text remained inaccessible after the recovery ladder. — https://news.google.com/rss/articles/CBMifkFVX3lxTFB3X2lIVGxXMmR6YnJya2xIS2t0WGs0UWZlN0hCNFdQWDAzTVpZWGJVT2VaNnFHa0xDVXpaSG9CNlBWeXVLWXR2M3pNbGxYS0laSWdyN05ETFhCNEp0OEtlOXVSSlBPRDRSUFBPb242Z1JGdVJXZ2xQU1ZEUUxsQQ?oc=5
 - `link:https://news.google.com/rss/articles/CBMiiAFBVV95cUxPd0hNY0hZU3UySUVzcXFVREJmT0lUQk5QZGJVcXVrck1lYl9BY1UzaDdUamtzbmpKNUNka216YXB6eEc4NTFka0hRR3p4dGFJQjZCdHJTYnNyRlFyUnV4UE0taXRlWWFQdU4ycUtSSVIzVDJwRXJWZTR2ZkJzb3R3M0dJcERGenAt?oc=5` — **THE HACK: EU data centre push amid fossil fuel risk** — attempts: 3/3 — Euractiv — 2026-07-29T07:00Z — Identity is verified as the Euractiv newsletter item, but substantive article text remained inaccessible after the recovery ladder. — https://news.google.com/rss/articles/CBMiiAFBVV95cUxPd0hNY0hZU3UySUVzcXFVREJmT0lUQk5QZGJVcXVrck1lYl9BY1UzaDdUamtzbmpKNUNka216YXB6eEc4NTFka0hRR3p4dGFJQjZCdHJTYnNyRlFyUnV4UE0taXRlWWFQdU4ycUtSSVIzVDJwRXJWZTR2ZkJzb3R3M0dJcERGenAt?oc=5
 - `link:https://doi.org/10.1080/23299460.2026.2731654` — **Does the EU AI act align with responsible AI? An evaluation of the European Union’s artificial intelligence act in a responsible research and innovation framework** — attempts: 3/3 — Journal of Responsible Innovation — 2026-09-22 — Identity is verified, but substantive evidence remained inaccessible after the required recovery ladder. — https://doi.org/10.1080/23299460.2026.2731654
+- `link:https://doi.org/10.1016/j.ejps.2026.107570` — **European science for health research needs and priorities** — attempts: 3/3 — European Journal of Pharmaceutical Sciences — 2026-05-30 — Identity is verified, but admissible substantive evidence was not recovered; no admission judgement is asserted. — https://doi.org/10.1016/j.ejps.2026.107570
+- `link:https://doi.org/10.1111/aepr.70032` — **Comment on “Supply Chain Diversification and Industrial Policies to Strengthen Economic Security”** — attempts: 3/3 — Asian Economic Policy Review — 2026-05-18 — Identity is verified, but admissible substantive evidence was not recovered; no admission judgement is asserted. — https://doi.org/10.1111/aepr.70032
