@@ -7,17 +7,17 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **2099** (Main **1083** + Historical **1016**)
-- Automatic queue still needing V2 verification: **83** (Main **17** + Historical **66**)
-- Currently assigned to workers: **72** (Main **10** + Historical **62**)
-- Bounded access-recovery retries still eligible: **11**
+- Automatic queue still needing V2 verification: **94** (Main **17** + Historical **77**)
+- Currently assigned to workers: **88** (Main **15** + Historical **73**)
+- Bounded access-recovery retries still eligible: **6**
 - Hands-on verification needed: **19**
-- Automatic queue pending and not yet assigned: **11**
+- Automatic queue pending and not yet assigned: **6**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260926T055226Z-e730ca1bde68`
-- Assigned unresolved records: **36**
+- Current package: `worker-a-20260926T095441Z-8c2c04c52db2`
+- Assigned unresolved records: **44**
   1. `historical:id:83be61b7ef7c99b0` — Eagle-1: New European partnership to boost Cyber Resilience with Quantum Technology
   2. `historical:id:7a998d5f7036694a` — Horizon Europe EIE SCALEUP calls
   3. `historical:id:bec93254a8eb60b8` — Horizon Europe INNOVSMES calls - European Partnership on Innovative SMEs
@@ -26,11 +26,11 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:4265bbe788054112` — Testing and Experimentation Facilities (TEFs): Questions and answers
   7. `historical:id:e1c472d381945760` — Special funding for research on key areas of green and digital transition 2021
   8. `historical:id:6ce7716a41d15b20` — Are EU and Member States policy makers truly willing to engage and dialogue with Universities? | Coimbra
-  - … plus 28 more in the package manifest
+  - … plus 36 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260926T055302Z-73a5335928ff`
-- Assigned unresolved records: **36**
+- Current package: `worker-b-20260926T095517Z-caee6e5c7474`
+- Assigned unresolved records: **44**
   1. `link:https://www.ri.se/sv/om-rise/jobba-hos-oss/lediga-jobb/postdoc-researcher-in-resilient-edge-computing-for-critical` — Postdoc Researcher in Resilient Edge Computing for Critical Infrastructure | RISE
   2. `link:https://doi.org/10.2478/sm-2026-0001` — Language Policy Implementation: The Role of Applied Linguistics for Knowledge Transfer
   3. `link:https://doi.org/10.1016/j.ejon.2026.103258` — Rural cancer research activity across Europe: A bibliometric analysis on patterns, gaps and policy implications
@@ -39,7 +39,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:61346ffd17e338e1` — IVA's President: Some thoughts on the EU's Approach to China
   7. `historical:id:cd4c3060be7a2c0b` — Fast Track to the EIC Accelerator ‒ Call 4
   8. `historical:id:62e774d1bd2981cc` — European RTD Policy, Competitiveness and Space - ESPI
-  - … plus 28 more in the package manifest
+  - … plus 36 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `none`
