@@ -6,17 +6,17 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2102** (Main **1083** + Historical **1019**)
-- Automatic queue still needing V2 verification: **91** (Main **17** + Historical **74**)
-- Currently assigned to workers: **85** (Main **15** + Historical **70**)
-- Bounded access-recovery retries still eligible: **6**
+- Authoritative V2 verified: **2138** (Main **1087** + Historical **1051**)
+- Automatic queue still needing V2 verification: **55** (Main **13** + Historical **42**)
+- Currently assigned to workers: **55** (Main **13** + Historical **42**)
+- Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **19**
-- Automatic queue pending and not yet assigned: **6**
+- Automatic queue pending and not yet assigned: **0**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260926T125513Z-c59b42f1cfd4`
+- Current package: `worker-a-20260926T130153Z-c59b42f1cfd4`
 - Assigned unresolved records: **41**
   1. `link:https://news.google.com/rss/articles/CBMiYEFVX3lxTE5kbTAyVkNPbFFfaTVKRFZvVjQ2SG9aT1p2eFFCVk5LWXNiUnI4MWdBeTdmdXhDVzZtTHFPYWVfYTk5SnpOMlppVmRwM0hsUkMxSW1XQ0kzR3MybjB4akV0aQ?oc=5` — Enhancing Europe’s competitiveness by empowering researchers as innovators - Science | AAAS — recovery attempt 2/3
   2. `historical:id:a86678a3e0e70faa` — RRI legacies: co-creation for responsible, equitable and fair innovation in Horizon Europe
@@ -29,17 +29,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 33 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260926T125540Z-caee6e5c7474`
-- Assigned unresolved records: **44**
-  1. `link:https://www.ri.se/sv/om-rise/jobba-hos-oss/lediga-jobb/postdoc-researcher-in-resilient-edge-computing-for-critical` — Postdoc Researcher in Resilient Edge Computing for Critical Infrastructure | RISE
-  2. `link:https://doi.org/10.2478/sm-2026-0001` — Language Policy Implementation: The Role of Applied Linguistics for Knowledge Transfer
-  3. `link:https://doi.org/10.1016/j.ejon.2026.103258` — Rural cancer research activity across Europe: A bibliometric analysis on patterns, gaps and policy implications
-  4. `link:https://doi.org/10.22323/355120260309065841` — Citizen Science, Cognitive Justice and Data Sovereignty: a View from the South
-  5. `historical:id:ae02cbe99a23df59` — Developing an agile and secure single market and infrastructure for data-services and trustworthy artificial intelligence services
-  6. `historical:id:61346ffd17e338e1` — IVA's President: Some thoughts on the EU's Approach to China
-  7. `historical:id:cd4c3060be7a2c0b` — Fast Track to the EIC Accelerator ‒ Call 4
-  8. `historical:id:62e774d1bd2981cc` — European RTD Policy, Competitiveness and Space - ESPI
-  - … plus 36 more in the package manifest
+- Current package: `worker-b-20260926T130210Z-c8b2e815037f`
+- Assigned unresolved records: **14**
+  1. `link:https://news.google.com/rss/articles/CBMitAFBVV95cUxNUmxjeFFxcVhEcVdSZG5ERnk2clR1djlYSEJZb3FFOXBmdlFTTTl2LXVmeVFqeEpqemxYQlBOUlZWRHRjQkF6RUlSaFd0dU81ODItY0d5T1N6Y3FDMng3MTBsVlZNLVZoOGpvTW1nZ191bUFONE9zVlYzNWgyNTZVVTlZSlVtYzJJcS1YdGt5Sy1vcDIxbEVwMEk0Q3V6VnZhbjZVZDd0dEFHTTQ3QTgteFgxZXk?oc=5` — Planet Labs’ First German-Made Satellite to Launch in Early 2027 — recovery attempt 2/3
+  2. `link:https://news.google.com/rss/articles/CBMiekFVX3lxTE1Pc1RnZW41ZU9YUUZqVHFjT0lTUWFKTldPaEZxVDQwMzg0OFgzR3djc0lZMlRnX2JYbmVEdHBEMTFOMWlzMDhxMFFuSmlzbmtjUW9vUmJXenljakFpNy1RQnNJTXlIZEFhRjJtUWtUNm5mT2dpQkZYYWtR?oc=5` — THE HACK: EU weighs AI labs' safety plans — recovery attempt 2/3
+  3. `link:https://doi.org/10.1177/01655515261437410` — The impact of open data on research productivity and academic collaboration: A systematic literature review (2021–2025) — recovery attempt 3/3
+  4. `link:https://doi.org/10.1016/j.techsoc.2026.103564` — Country-Level Configurations Associated with Enterprise AI Diffusion in Europe: An fsQCA of Digitalization, Skills, and R&D Intensity — recovery attempt 3/3
+  5. `link:https://news.google.com/rss/articles/CBMiqgFBVV95cUxPVGxic0FTbm5TT0RQalVXQnBBOFJhOWh0bDN0WjZjNzJEZ2JfZXVzZ3VISmI3NVMxdV8xWnQza0ctUEJsaUtCQm5JSnI5UjhzNEJROW9Ea2VoRkpUNnl2cGJoT2hoZkFCU0hmeXFoYVVDZi11UHVBa0JZN05ISTFkX1N2TXJheUlRc1hPbVdfSHNCdEtrcTk1clRLMjVQemloWkl2Mkd2X3VtUQ?oc=5` — Research Europe – 24 September 2026 — recovery attempt 3/3
+  6. `link:https://news.google.com/rss/articles/CBMimgFBVV95cUxPbFd0dlh5RjQzUnEwLTRpU2hMaWxPNk5Zal93N2lITWliRHhzNEhJOGYtWUJ1U0tab2tseTE1bWhlei1mQ09EMXZSM0g3MzdWMWlaSlF4eEx5U1BXQ0daV1RwLVVqdW5SYnUxY09GUUxSbldRZEttV0ZkbnhMTzNycFFOWXVQLUhFRURwTVlBWXVwN20wSnFPRXln?oc=5` — Don’t believe the doomers: Europe’s tech industry slams AI panic — recovery attempt 3/3
+  7. `link:https://news.google.com/rss/articles/CBMigwFBVV95cUxQUGRlY09GVnBXQVd2bTJuY3JiUWQ5eEwzelBqMnltTmtxRmhXeUozcWVJUW1KMWtTcW9pcEFIX3JWTUxWQnZVZi1QdENTc2k2ZGJMbzBVR1ZGS1pKdUExVzlNZkxpcmxuNnZzNUpzX2RPU3hETjNNbmtPMm9sZkJxMXpLSQ?oc=5` — What is Europe's plan if AI doesn’t self-improve? — recovery attempt 3/3
+  8. `link:https://news.google.com/rss/articles/CBMivAFBVV95cUxPRzB3NGFPR1cwVnhGTkxvM0w0VFNwYmVBYTdTTWlHLW1BRVUtcFhGMTN1YktLUVBUdm9tLWhSVTdmREpfM2Z6d2ZLbUphZ0FjN2xtQ29LZnM2Yjk3RlJuRm4yLW1WYVpyaHlFa3Q0Zy1Na2pTQnM2UnVBOW8wdHRfZm9GUlR6c0RVcEd0bGtBS2FGc0lRbEh4dE9VbmVBUW83a05fdEhLcG5pSnVWM3otTWF6REZPYlc0YnVEWA?oc=5` — What Backlash? Greek Region Pins Revival Hopes on Amazon Data Center — recovery attempt 2/3
+  - … plus 6 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `none`
