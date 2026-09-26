@@ -6,30 +6,30 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2070** (Main **1054** + Historical **1016**)
-- Automatic queue still needing V2 verification: **112** (Main **46** + Historical **66**)
-- Currently assigned to workers: **76** (Main **46** + Historical **30**)
-- Bounded access-recovery retries still eligible: **4**
+- Authoritative V2 verified: **2099** (Main **1083** + Historical **1016**)
+- Automatic queue still needing V2 verification: **83** (Main **17** + Historical **66**)
+- Currently assigned to workers: **72** (Main **10** + Historical **62**)
+- Bounded access-recovery retries still eligible: **11**
 - Hands-on verification needed: **19**
-- Automatic queue pending and not yet assigned: **36**
+- Automatic queue pending and not yet assigned: **11**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260926T053933Z-008a4941c732`
-- Assigned unresolved records: **40**
-  1. `link:https://news.google.com/rss/articles/CBMiYEFVX3lxTE5kbTAyVkNPbFFfaTVKRFZvVjQ2SG9aT1p2eFFCVk5LWXNiUnI4MWdBeTdmdXhDVzZtTHFPYWVfYTk5SnpOMlppVmRwM0hsUkMxSW1XQ0kzR3MybjB4akV0aQ?oc=5` — Enhancing Europe’s competitiveness by empowering researchers as innovators - Science | AAAS
-  2. `link:https://news.google.com/rss/articles/CBMimANBVV95cUxNSlNkU05HVnBSMlk5Y3BJYmZtT0lhSFRhMERhMlQ5QzQxbG5Dcnd4RWE1aFNVd0RoX3RmYTNpSEpISzVEaVV4VlduZF9RNXlDTzhzeVllVnkwdGZHQWgxX21sWXp2ZVZQRTBNellUVGxRZnE0Zkk5b0J6OWQwMlczZHl2WnZFWmhpOHpULXNOZFBmdDNMNjBUbDZlWEVWT0Y3UFlRd1pJdEhiVDhPMEZtb0M1VlZyd2xZQS1KQkhXNUk3SmllSUFIV3NNQnFIVDUyRjIyTkFtQ05pa3dkVXZuM3N2TTRmT2JWTGpNQmx1NzhwcW16WW8zSU1DZ2ZxdmlPLW9lakRYd29yT2NzX3RUMGdmQ0ZBV2hRYVVrTDlaT3JUSDNWcmpMNUlyMENHSkY0QVhRUU5tRHFtRmdRNENNMi1NUXN6S1ZHLU41cjJsRGJsX2dlVE14ZF90VlB1NmFhTTRQaTI0RmVDMFk2elNKLXJCdmdIcnppaEphb0dVT3kxRXgxSUF5Z0dPR1JYX3BMZ1R6SW1wY0g?oc=5` — Horizon Europe Work Programme: Calls under the Mission Restore our Ocean and Waters are now closed - research-and-innovation.ec.europa.eu
-  3. `link:https://news.google.com/rss/articles/CBMioAFBVV95cUxQVW5pc0lQdTY4aGtUMmhJNFR3SnZrNmtqcEVWanlDeVFCTnpIeUNjT3VqQlZSckVpM3FMclp2a0p1SnBSSzhITVBrSmtMUkZhdkVkSzZNWUNfV1hqdktGTXVNVndVOGpqcWZfWnIySGx3WXVIM0RqN3NaNkJGQ1F5N01Xb2xTTVBnb3pyclhHMmtqWHZWVXVmQ2FEVUV0b2Nj?oc=5` — Mining firms’ plea for EU critical minerals budget falls on deaf ears
-  4. `link:https://news.google.com/rss/articles/CBMisgFBVV95cUxPbWVJSjJ5REV2blF6NVFaTFBfamFWU3FLVjJiYkNGLUhxVGpFWE9EY0NsOW9keXZGNWJKY01lNFktMDhVRlJDZTF0dGZGT2hWRzdNa3Vrd1I4RmZVRTgzWmRRNjdnbWdBOEJZc2RkM3dNUWI5ekV1YVZrdmV0dnB5ZzZSQWN6Uk9hZ2J4NElxal8tTlBJdW14RW9XczU4RFVpTnVydGdHUGxGLURtWUhyWEdR?oc=5` — Parliament to discuss moving 'sectoral plans’ to Pillar 2 of Horizon Europe
-  5. `link:https://news.google.com/rss/articles/CBMisgFBVV95cUxOWjY4YUdqOUhyTXV6c3ZpU2hEb1BVRDFVT3hTYko5akx0WFdRTUdyZEdKWkYyWWxFNzRZZDUxeW42QVk3UTE0a2JJOFNmajZxaGROeWRNZUZwQlVqVjdQa1RHNHJCaXZIS2I0dEVQTlhLZEt2WkNKNmxCZ3ExMkhpQndMRW9tVU9oWVBqMDI2Ykk2MXZtTUk0MHp2eVI5MENGdHBCbThLd0pmcXg4U3IwMnhB?oc=5` — EU science policy wonks debate prospect of stronger ties with Canada
-  6. `link:https://news.google.com/rss/articles/CBMiyAFBVV95cUxQSVQ3ejlTdXZtQnM1ZjlwdF9aTGhXdlFPem11XzNNUk5nQTkwdWVNT2N5MndQanVVM0lUa0dfLXFwRjF6dk1UOWItUXFGMFQ1TXd3Qks5dnJ4all5QjhMZHdGbFVTN0FWLXlKUkhtWmw5d25lcDJlTmhnLXlKN3RmaHFRZXR6eTJkYXdXcXZUQVpaWVRGRFRRRGlENlNteDFrZU94bzBVdkkzTGYtcHBDVlBYSUwtU1ZjZ0tRMERiYlJ3VHNYd1oxQQ?oc=5` — ‘Battle’ ahead to create new researcher-led EU funding
-  7. `link:https://news.google.com/rss/articles/CBMi9AFBVV95cUxOVE9xeldLYUNjS25wTkhOVnFyQzRtUUNveklCMVBhcEpOX09LOFV2X0RJZklwczluU2U4SVpHMEF2dEpjdFItX0gxYUM5WHJXOTZqeEJONGRJOE9Bc1lqdk8wbVhWdkhiTDEwTDFBeTFSczhVZUFsMXJZNElBWjJqVk81aW1FT19hRjhsR1cxRkRtNVJQTUlwaS11WjNrcWtnaTd6d3pWWGd4T2tJcTY2Wk1xY251QmE2a1lIeFEzTHJUaG1ZQXdDc2lxTmlFOFRsejVMRmFDNVR3bXotQzlSTmxSaWN0UnNrcy12NXB3SkRPZU0z?oc=5` — Mark Carney reminds Europe that its universities and research are strategic assets
-  8. `link:https://news.google.com/rss/articles/CBMizwFBVV95cUxNc1FfN2Z2S3dWRlp0blRyT3gtMWhDVVl4YmRMUWw4ZHlVSi1FWDA0WFNESVRIa200WERZaVdJSUl0OGpaRTJCRUNvWThOWFp1MHBqRWdBTUZpWUVqWjM2LUFFenp5YVU2b2tHWmRGa05mMml3d0Y4ZUk0VlllVzlSQURNUVlhZlBBUXZtOUhFUWVoUmY0NlRkMC1USUNhWmVXQmZwcG5QVVNXOEdRQ0Q4QndrY2RvSTl0a21fU3M5MG5BZXFTb2FZcUctYnZNbWs?oc=5` — EU qualifications package ‘could boost researcher mobility’
-  - … plus 32 more in the package manifest
+- Current package: `worker-a-20260926T055226Z-e730ca1bde68`
+- Assigned unresolved records: **36**
+  1. `historical:id:83be61b7ef7c99b0` — Eagle-1: New European partnership to boost Cyber Resilience with Quantum Technology
+  2. `historical:id:7a998d5f7036694a` — Horizon Europe EIE SCALEUP calls
+  3. `historical:id:bec93254a8eb60b8` — Horizon Europe INNOVSMES calls - European Partnership on Innovative SMEs
+  4. `link:https://news.google.com/rss/articles/CBMiYEFVX3lxTE5kbTAyVkNPbFFfaTVKRFZvVjQ2SG9aT1p2eFFCVk5LWXNiUnI4MWdBeTdmdXhDVzZtTHFPYWVfYTk5SnpOMlppVmRwM0hsUkMxSW1XQ0kzR3MybjB4akV0aQ?oc=5` — Enhancing Europe’s competitiveness by empowering researchers as innovators - Science | AAAS — recovery attempt 2/3
+  5. `historical:id:a86678a3e0e70faa` — RRI legacies: co-creation for responsible, equitable and fair innovation in Horizon Europe
+  6. `historical:id:4265bbe788054112` — Testing and Experimentation Facilities (TEFs): Questions and answers
+  7. `historical:id:e1c472d381945760` — Special funding for research on key areas of green and digital transition 2021
+  8. `historical:id:6ce7716a41d15b20` — Are EU and Member States policy makers truly willing to engage and dialogue with Universities? | Coimbra
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260926T054001Z-73a5335928ff`
+- Current package: `worker-b-20260926T055302Z-73a5335928ff`
 - Assigned unresolved records: **36**
   1. `link:https://www.ri.se/sv/om-rise/jobba-hos-oss/lediga-jobb/postdoc-researcher-in-resilient-edge-computing-for-critical` — Postdoc Researcher in Resilient Edge Computing for Critical Infrastructure | RISE
   2. `link:https://doi.org/10.2478/sm-2026-0001` — Language Policy Implementation: The Role of Applied Linguistics for Knowledge Transfer
