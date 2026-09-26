@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-26T12:58:58Z",
+  "generated_at": "2026-09-26T18:59:33Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -193287,8 +193287,1572 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1186/s40550-026-00159-9": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "8562928d",
+      "identity_hash": "22580932a8a1f106",
+      "reader_title": "Integrating European research infrastructures",
+      "reader_what": "FHERITALE maps fragmented research-infrastructure services and proposes more integrated access, protocols and interoperability.",
+      "reader_why": "Integrated services can reduce fragmentation across European facilities and user communities.",
+      "reader_more": "The article maps research outputs, services and infrastructure needs across FHERITALE partners. It argues for coordinated access, shared protocols and interoperable services. Its conclusions are recommendations rather than measured system-wide impacts.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed perspective/article",
+        "research_question": "How can European research infrastructures integrate services and access for micro- and nanomaterial heritage research?",
+        "main_finding": "European research infrastructures remain fragmented; coordinated services, protocols and access could improve integration.",
+        "method_or_basis": "Bibliometric mapping of more than 800 publications, expert consultation and service/infrastructure mapping within FHERITALE.",
+        "qualification": "The paper is a perspective synthesising FHERITALE mapping and recommendations, not an evaluation of implemented system-wide effects.",
+        "radar_relevance": "Direct evidence about European research-infrastructure organisation, access and coordination qualifies under Strand A Route 3.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The package recovered substantial matching full text from https://link.springer.com/article/10.1186/s40550-026-00159-9; title, authors, DOI and content match."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1186/s40550-026-00159-9",
+            "title": "Research infrastructures as engines of integration for micro- and nanomaterial research: a European perspective inspired by FHERITALE",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Springer full text verifies a Europe-focused research-infrastructure perspective based on FHERITALE mapping, service analysis and expert input."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The full article directly examines European research-infrastructure integration, services, access and governance and therefore satisfies Strand A Route 3."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-26T18:59:31Z",
+      "deep_scan_package_id": "20260926T181349Z-7fe851e9c341",
+      "claims": [
+        {
+          "object": "research.infrastructure_access",
+          "secondary_objects": [
+            "research.infrastructure"
+          ],
+          "actor": {
+            "name": "FHERITALE consortium",
+            "class": "other"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-09-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "The paper is a perspective synthesising FHERITALE mapping and recommendations, not an evaluation of implemented system-wide effects.",
+          "text": "FHERITALE recommends integrating and harmonising European research-infrastructure services to improve access and interoperability.",
+          "confidence": "high",
+          "record_key": "link:https://doi.org/10.1186/s40550-026-00159-9",
+          "merit": 68,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:22580932a8a1f106:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:6a530f5222aabe38": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "e164c620",
+      "identity_hash": "fb74bad6a043005a",
+      "reader_title": "EU legal diplomacy and like-mindedness",
+      "reader_what": "The article analyses how EU legal diplomacy uses like-minded partnerships in a changing international order.",
+      "reader_more": "Digital, climate and raw-material partnerships appear as foreign-policy examples, not as evidence about Europe’s R&I system. The work therefore fails Strand A’s central-R&I guard.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed legal/policy analysis",
+        "research_question": "Can like-minded legal diplomacy sustain EU strategic alignment in a changing international order?",
+        "main_finding": "The EU uses flexible legal-diplomatic partnerships across several external-policy domains, with limits and tensions in like-mindedness.",
+        "method_or_basis": "Doctrinal and policy analysis of EU external legal instruments and partnership practice.",
+        "qualification": "R&I-related examples are incidental to a broader foreign-policy argument.",
+        "radar_relevance": "Europe is central, but research and innovation system mechanisms are not.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The package contains substantial matching Kluwer Law Online text from https://kluwerlawonline.com/journalarticle/European%2BForeign%2BAffairs%2BReview/31.2/EERR2026011, sufficient to establish subject and scope."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article",
+            "url": "https://kluwerlawonline.com/journalarticle/European%2BForeign%2BAffairs%2BReview/31.2/EERR2026011",
+            "title": "Can Like-Mindedness Sustain Order? Legal Diplomacy and Strategic Alignment in EU Foreign Policy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The work is genuine and Europe-focused, but its object is EU foreign policy and legal diplomacy rather than a European R&I-system mechanism."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_RI_NOT_CENTRAL",
+        "reason": "The article concerns EU foreign-policy legal diplomacy and strategic alignment; research and innovation are not its central substantive object."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-26T18:59:31Z",
+      "deep_scan_package_id": "20260926T181349Z-7fe851e9c341",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:26aee7f50d717c2a": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "d3b61445",
+      "identity_hash": "429a4a146c94b066",
+      "reader_title": "Soviet science diplomacy and JINR",
+      "reader_what": "The article reconstructs the Soviet use of science diplomacy in creating the Joint Institute for Nuclear Research.",
+      "reader_more": "Its historical subject is Soviet-led international scientific cooperation. European institutions are contextual comparisons rather than the substantive R&I-system scope required for Strand A.",
+      "deep_analysis": {
+        "work_kind": "historical peer-reviewed study",
+        "research_question": "How did Soviet science diplomacy shape the establishment of the Joint Institute for Nuclear Research?",
+        "main_finding": "JINR’s establishment is analysed as an instrument of Soviet science diplomacy and international scientific cooperation.",
+        "method_or_basis": "Historical/documentary analysis of JINR’s formation and Soviet science-diplomacy practice.",
+        "qualification": "The work is historically substantive but not a study of the European R&I system.",
+        "radar_relevance": "Fails Strand A because the relevant R&I object is Soviet/JINR rather than substantively European.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The package contains a 24,000-character matching PDF excerpt from https://content.openalex.org/works/W7127385977.pdf; title and author match the article."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "The DOI/publisher identity was cross-checked as Lomonosov World Politics Journal, volume 17 issue 4, DOI 10.48015/2076-7404-2025-17-4-55-88."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://content.openalex.org/works/W7127385977.pdf",
+            "title": "Soviet Experience of Science Diplomacy: Establishment of the Joint Institute for Nuclear Research",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantive text verifies a historical study of Soviet/JINR science diplomacy; CERN appears comparatively but the European R&I system is not the object."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_EU_SCOPE",
+        "reason": "The article is historical evidence on Soviet science diplomacy and the establishment of JINR; Europe is not the substantive R&I-system scope required by Strand A."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-26T18:59:31Z",
+      "deep_scan_package_id": "20260926T181349Z-7fe851e9c341",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:724c9bbed50a5767": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "83ba9516",
+      "identity_hash": "47bf92817877bdc4",
+      "reader_title": "Semiconductor geopolitics outside Europe",
+      "reader_what": "The paper analyses changing semiconductor production networks in the United States and Southeast Asia under the chips war.",
+      "reader_more": "Europe is mentioned in the wider reshoring and geopolitical context, but it is not the empirical or analytical centre. That makes European relevance incidental for Strand A.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed economic-geography study",
+        "research_question": "How are chips-war geopolitics reshaping semiconductor global production networks and uneven regional development?",
+        "main_finding": "Geopolitical intervention is reconfiguring semiconductor production networks and regional development across the US and Southeast Asia.",
+        "method_or_basis": "Global production network analysis supported by sectoral and regional evidence.",
+        "qualification": "The main empirical geography is the United States and Southeast Asia.",
+        "radar_relevance": "Fails Strand A’s substantive-European-scope guard.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The package contains a 24,000-character matching full-text excerpt from the OpenAlex PDF for the article."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Taylor & Francis/CUHK records confirm the article identity and publication in Regional Studies, Regional Science."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://content.openalex.org/works/W7124171822.pdf",
+            "title": "Uneven regional development in a contentious world of changing global production networks: ‘chips war’ and the geopolitics of semiconductor production in the United States and Southeast Asia",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The full-text excerpt establishes a chips-war/GPN study centred on the United States and Southeast Asia, not European semiconductor capacity."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_EU_SCOPE_INCIDENTAL",
+        "reason": "The article studies semiconductor production networks in the United States and Southeast Asia; Europe is only peripheral/comparative."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-26T18:59:31Z",
+      "deep_scan_package_id": "20260926T181349Z-7fe851e9c341",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:ade0116d3e2f6baf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "4dcd0fb8",
+      "identity_hash": "bbccca335b52d071",
+      "reader_title": "Europe’s space talent bottlenecks",
+      "reader_what": "ESPI finds sustained mid-level demand alongside junior-entry barriers, skills concerns and constrained career progression in Europe’s space sector.",
+      "reader_why": "Workforce bottlenecks can constrain Europe’s ability to build space capabilities and innovate.",
+      "reader_more": "The report contrasts perspectives from students and young professionals with those of employers. It covers recruitment demand, education, skills, sector attractiveness and career pathways. The evidence is sectoral rather than a measure of Europe’s entire research workforce.",
+      "deep_analysis": {
+        "work_kind": "policy research report",
+        "research_question": "Where are the main supply, demand and career frictions in the European space workforce?",
+        "main_finding": "Demand is concentrated at mid-career levels while entrants face competition, programme-quality concerns and constrained progression pathways.",
+        "method_or_basis": "Analysis combining student/young-professional and employer perspectives, sector mapping and policy context.",
+        "qualification": "The report combines student, young-professional and employer perspectives; it is sector-specific and not a census of Europe’s full R&I workforce.",
+        "radar_relevance": "Direct evidence on a strategically important European technology workforce qualifies under Strand A.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The package contains a substantial excerpt from the official ESPI report PDF."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "ESPI’s report page and official PDF confirm the title, issuing organisation and publication date 6 October 2025."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_report_pdf",
+            "url": "https://www.espi.eu/wp-content/uploads/2025/10/Talent-in-the-European-Space-Sector-Bridging-Gaps-Building-Futures.pdf",
+            "title": "Talent in the European Space Sector: Bridging Gaps, Building Futures",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official ESPI material verifies a completed evidence report on European space-sector workforce dynamics and career bottlenecks."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_TALENT",
+        "reason": "The completed ESPI report directly examines European space-sector talent supply, demand, career pathways and skills, a strategic R&I workforce mechanism."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-26T18:59:31Z",
+      "deep_scan_package_id": "20260926T181349Z-7fe851e9c341",
+      "claims": [
+        {
+          "object": "talent.career_structure",
+          "secondary_objects": [
+            "research.system_capacity"
+          ],
+          "actor": {
+            "name": "European Space Policy Institute",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2025-10-06",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The report combines student, young-professional and employer perspectives; it is sector-specific and not a census of Europe’s full R&I workforce.",
+          "text": "ESPI identifies mid-level talent shortages, junior-entry barriers and constrained progression pathways in Europe’s space workforce.",
+          "confidence": "high",
+          "record_key": "historical:id:ade0116d3e2f6baf",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:bbccca335b52d071:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:2dad846c0d6f4ba3": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "2476825f",
+      "identity_hash": "3e6dbca0db0fb08c",
+      "reader_title": "An R&I budget advocacy event",
+      "reader_what": "Coimbra Group promotes an event arguing for substantially higher EU research and innovation funding.",
+      "reader_more": "The page supplies event framing and an advocacy position, not a completed study with methods and findings. Historical Strand A therefore does not admit it as structural evidence.",
+      "deep_analysis": {
+        "work_kind": "event announcement/advocacy page",
+        "research_question": "",
+        "main_finding": "The page promotes a discussion and a higher future EU R&I budget.",
+        "method_or_basis": "Event description and institutional advocacy statement.",
+        "qualification": "No completed evidence-led analysis is presented.",
+        "radar_relevance": "Fails the historical Strand A evidence-product guard.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The package contains the full Coimbra Group event page at https://www.coimbra-group.eu/ri-in-the-next-eu-budget-investing-in-europes-prosperity-and-competitiveness/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_event_page",
+            "url": "https://www.coimbra-group.eu/ri-in-the-next-eu-budget-investing-in-europes-prosperity-and-competitiveness/",
+            "title": "R&I in the next EU budget: investing in Europe’s prosperity and competitiveness",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The official page verifies the event and its advocacy message, but it does not present completed research evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_SUBSTANTIVE_EVENT_PAGE",
+        "reason": "The page advertises an event and advances a budget position; it is not a completed evidence-led study or substantive evidence product."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-26T18:59:31Z",
+      "deep_scan_package_id": "20260926T181349Z-7fe851e9c341",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:6f49ece186d4ebe7": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "50d02c77",
+      "identity_hash": "ff5463bf6be29911",
+      "reader_title": "Universities’ FP10–ECF position",
+      "reader_what": "University associations call for FP10 autonomy and a complementary relationship with the European Competitiveness Fund.",
+      "reader_more": "The document is directly about EU R&I funding architecture. However, it is a joint advocacy statement rather than a completed evidence product, so it does not qualify for historical Strand A.",
+      "deep_analysis": {
+        "work_kind": "joint policy statement",
+        "research_question": "",
+        "main_finding": "The signatories argue for an autonomous FP10 and a complementary FP10–ECF interface.",
+        "method_or_basis": "Institutional position statement by university associations.",
+        "qualification": "The document advances recommendations without a documented evidence-led study design.",
+        "radar_relevance": "Substantively R&I-related but excluded by the historical evidence-product guard.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The package contains the full official Coimbra Group statement page."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "The Coimbra Group page and downloadable statement identify the joint position and date."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_statement",
+            "url": "https://www.coimbra-group.eu/designing-the-european-competitiveness-fund-key-elements-and-the-fp10-ecf-interface/",
+            "title": "Designing the European Competitiveness Fund: Key elements and the FP10–ECF interface",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The source is authentic and R&I-relevant, but its function is sector advocacy rather than evidence-led analysis."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_SUBSTANTIVE_ADVOCACY",
+        "reason": "The joint statement advocates design choices for the European Competitiveness Fund and FP10; it is not a completed evidence-led study."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-26T18:59:31Z",
+      "deep_scan_package_id": "20260926T181349Z-7fe851e9c341",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:3d8d15d8283b28f7": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "33db6c50",
+      "identity_hash": "6be432adf7f4e0f5",
+      "reader_title": "European RTOs and green semiconductor innovation",
+      "reader_what": "Four European RTO cases link shared semiconductor research infrastructure with sustainability-oriented innovation and local ecosystem activity.",
+      "reader_why": "Research infrastructures can anchor organisational and ecosystem-level green innovation in a strategic technology sector.",
+      "reader_more": "The study uses two rounds of data collection with four European RTO microelectronics departments. It reports activity in operational optimisation, organisational transformation and systems building, and proposes an ecosystem-actor framework. The small selected sample limits generalisation.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed qualitative multiple-case study",
+        "research_question": "How do European semiconductor RTOs advance sustainability-oriented innovation, and which actors form their local green innovation ecosystems?",
+        "main_finding": "All four studied RTOs pursue sustainability-oriented innovation through infrastructure operations, organisational change and ecosystem activity, though engagement levels differ.",
+        "method_or_basis": "Qualitative multiple-case study of four selected European RTOs using discussions, surveys and follow-up semi-structured interviews.",
+        "qualification": "The evidence comes from four selected European RTO cases, so it does not establish sector-wide prevalence.",
+        "radar_relevance": "Direct evidence on European semiconductor research infrastructures and RTO innovation ecosystems qualifies under Strand A.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "no_substantive_text",
+            "note": "The package had no stored body text for the reader-facing record."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Recovered and checked DOI 10.1016/j.sftr.2025.101127; it matches the title and authors."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search found the open-access Sustainable Futures article and VTT publication record."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searching the title with Piia Konstari, Katri Valkokari and 2025 confirmed the same article and four-European-RTO case design."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive full-text article content from LUT University repository: https://lutpub.lut.fi/bitstream/handle/10024/170782/Piia%20Konstari_A4.pdf?isAllowed=y&sequence=1."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "VTT, DOAJ and Research.fi independently match the title, authors, DOI, journal and December 2025 publication."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://lutpub.lut.fi/bitstream/handle/10024/170782/Piia%20Konstari_A4.pdf?isAllowed=y&sequence=1",
+            "title": "Green innovation ecosystems in the semiconductor industry - the role of European research and technology organisations",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_metadata",
+            "url": "https://www.sciencedirect.com/science/article/pii/S2666188825006914",
+            "title": "Green innovation ecosystems in the semiconductor industry - the role of European research and technology organisations",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Recovered full text verifies a qualitative multiple-case study of four European RTOs with semiconductor research infrastructure."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The full article studies European RTO semiconductor research infrastructures and their role in sustainability-oriented innovation ecosystems."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-26T18:59:31Z",
+      "deep_scan_package_id": "20260926T181349Z-7fe851e9c341",
+      "claims": [
+        {
+          "object": "research.infrastructure",
+          "secondary_objects": [
+            "innovation.regional_capacity"
+          ],
+          "actor": {
+            "name": "European research and technology organisations in the study",
+            "class": "other"
+          },
+          "mechanism": "supports",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2025-12",
+          "status_date_precision": "month",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The evidence comes from four selected European RTO cases, so it does not establish sector-wide prevalence.",
+          "text": "Four European RTO cases show semiconductor research infrastructures supporting sustainability-oriented innovation within organisations and local ecosystems.",
+          "confidence": "high",
+          "record_key": "historical:id:3d8d15d8283b28f7",
+          "merit": 68,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:6be432adf7f4e0f5:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:8960ff6c25bb822b": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "721327cd",
+      "identity_hash": "f59a1eb1f387a3a4",
+      "reader_title": "Future-proofing Europe’s social model",
+      "reader_what": "The report considers how Europe can reconcile competitiveness, sustainability and democracy under structural pressures.",
+      "reader_more": "Research and innovation appear among multiple levers in a much broader political-economy analysis. That is insufficient for Strand A’s central-R&I requirement.",
+      "deep_analysis": {
+        "work_kind": "policy report",
+        "research_question": "How can the European model reconcile economic dynamism, sustainability and democratic legitimacy?",
+        "main_finding": "Europe needs coordinated institutional and policy adaptation across economic, social, environmental and democratic domains.",
+        "method_or_basis": "Expert policy analysis drawing on economic, institutional and societal evidence.",
+        "qualification": "R&I is only one component of a broader European-model diagnosis.",
+        "radar_relevance": "Fails Strand A because the European R&I system is not the report’s substantive object.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The package contains substantial official JRC repository text from https://publications.jrc.ec.europa.eu/repository/handle/JRC144547."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "The JRC/Publications Office record confirms the full title and publication date."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_report_page",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC144547",
+            "title": "Capitalism, Sustainability and Democracy: Future-proofing the European model",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The official report is substantive and European, but its main object is the overall European socio-economic model, not the R&I system."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_RI_NOT_CENTRAL",
+        "reason": "The JRC report examines Europe’s broader economic, democratic and sustainability model; R&I is one policy dimension rather than the central evidence object."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-26T18:59:31Z",
+      "deep_scan_package_id": "20260926T181349Z-7fe851e9c341",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:c5e76e4cb08c5e3f": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "b7109828",
+      "identity_hash": "b6f8cf7253e03529",
+      "reader_title": "AI infrastructure and media freedom",
+      "reader_what": "The article argues that newsroom dependence on AI companies creates media-freedom risks not fully addressed by existing EU law.",
+      "reader_more": "It evaluates opacity, lock-in and resource disparities in media organisations’ use of AI and cloud infrastructure. This is a media-law problem, not evidence about Europe’s research or innovation system.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed legal analysis",
+        "research_question": "How should EU law address media-freedom risks created by reliance on AI companies’ infrastructure?",
+        "main_finding": "Existing EU law only partly addresses opacity, lock-in and resource disparities; interoperability, transparency and alternatives are needed.",
+        "method_or_basis": "Doctrinal analysis of media-freedom law and horizontal EU technology regulation.",
+        "qualification": "The infrastructure at issue is newsroom AI/cloud infrastructure, not research infrastructure.",
+        "radar_relevance": "Fails Strand A’s central-R&I guard despite clear EU legal relevance.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "The supplied UvA repository page https://dare.uva.nl/id/d12f1c35-4a52-4e55-8e2a-87381bf18050 provided matching identity and abstract-level content."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1016/j.telpol.2025.102990 resolves to the matching Telecommunications Policy article."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search found the Elsevier article and institutional full-text copies."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Title + Max van Drunen + 2025 matched the same publication across ScienceDirect, UvA/IViR and RePEc."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered the complete article from the University of Amsterdam/IViR repository: https://www.ivir.nl/publicaties/download/TelecommunicationsPolicy_2025_7.pdf."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Broader search confirmed volume 49 issue 7, article 102990 and the same author/title across institutional and publisher records."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://www.ivir.nl/publicaties/download/TelecommunicationsPolicy_2025_7.pdf",
+            "title": "Safeguarding media freedom from infrastructural reliance on AI companies: The role of EU law",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_metadata",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0308596125000874",
+            "title": "Safeguarding media freedom from infrastructural reliance on AI companies: The role of EU law",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Full text establishes a legal/media study of AI-company infrastructural power inside newsrooms; “infrastructure” is not research infrastructure."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_RI_NOT_CENTRAL",
+        "reason": "The full article studies media freedom and newsroom dependence on AI/cloud infrastructure under EU law, not a European research-and-innovation system mechanism."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-26T18:59:31Z",
+      "deep_scan_package_id": "20260926T181349Z-7fe851e9c341",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:b663ec64a94f32b4": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "623e4442",
+      "identity_hash": "cbb4a16650b1c150",
+      "reader_title": "Call for more EU R&I investment",
+      "reader_what": "The open letter urges the European Commission to raise investment across the research and innovation continuum.",
+      "reader_more": "Its substantive function is advocacy and coalition signalling. It does not supply a completed empirical or analytical study meeting the historical Strand A evidence-product guard.",
+      "deep_analysis": {
+        "work_kind": "open letter/advocacy statement",
+        "research_question": "",
+        "main_finding": "The signatories advocate increased EU investment across the R&I continuum.",
+        "method_or_basis": "Institutional advocacy/open-letter text.",
+        "qualification": "No documented evidence-led research design or completed study is presented.",
+        "radar_relevance": "Direct R&I relevance is insufficient because the historical evidence-product guard fails.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The package contains the official Coimbra Group page and open-letter text at https://www.coimbra-group.eu/the-european-commission-must-increase-its-investment-in-the-entire-ri-continuum/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_advocacy_page",
+            "url": "https://www.coimbra-group.eu/the-european-commission-must-increase-its-investment-in-the-entire-ri-continuum/",
+            "title": "The European Commission must increase its investment in the entire R&I continuum",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The source is authentic and directly concerns EU R&I funding, but it is an advocacy/open-letter item rather than an evidence product."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_SUBSTANTIVE_ADVOCACY",
+        "reason": "The page amplifies an open letter urging higher EU R&I investment; it is advocacy rather than a completed evidence-led study."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-26T18:59:31Z",
+      "deep_scan_package_id": "20260926T181349Z-7fe851e9c341",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:0a6e3f1915d83f7f": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "4aa355fb",
+      "identity_hash": "1518709a46a33717",
+      "reader_title": "Rethinking dual-use R&I",
+      "reader_what": "ESIR proposes “dual use by design” across EU research funding, civil-defence collaboration, governance and skills.",
+      "reader_why": "The approach aims to connect civilian and defence R&I while managing openness, security and ethical risks.",
+      "reader_more": "The brief links geopolitical change to EU research and innovation funding design. It recommends integration with the next Framework Programme, alignment with the European Defence Fund, ethical governance, security-aware openness and training. These are expert recommendations, not adopted measures.",
+      "deep_analysis": {
+        "work_kind": "expert policy brief",
+        "research_question": "How should EU R&I policy capture civil-defence synergies while managing security and ethical risks?",
+        "main_finding": "ESIR recommends “dual use by design,” stronger civil-defence links, coordinated funding and governance safeguards.",
+        "method_or_basis": "Expert-group policy analysis drawing on strategic, historical and institutional evidence about dual-use R&I.",
+        "qualification": "This is independent expert advice to the Commission; its recommendations do not themselves constitute adopted EU policy.",
+        "radar_relevance": "The substantive object is EU R&I funding and governance in a strategic technology/security context, qualifying under Strand A.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "The supplied Fraunhofer handle https://publica.fraunhofer.de/handle/publica/499370 timed out in package retrieval."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Recovered DOI 10.2777/6637451 and matched it to the European Commission/Publications Office policy brief."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search found the official Publications Office record and the ESIR report page."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Title + ESIR/European Commission + 2025 confirmed the same report and author group."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "The Publications Office metadata and Commission ESIR page verify the official report; a complete matching PDF copy was recovered from https://www.iva.se/contentassets/c2a4f2be7cda47dfbaef605c4f92f407/making-the-most-of-eu-research-and-innovation-investments-ki0125078enn.pdf."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Fraunhofer and institutional repository records corroborate the same DOI, report title, authorship and open-access status."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://www.iva.se/contentassets/c2a4f2be7cda47dfbaef605c4f92f407/making-the-most-of-eu-research-and-innovation-investments-ki0125078enn.pdf",
+            "title": "Making the most of EU research and innovation investments: Rethinking dual use",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publication_record",
+            "url": "https://op.europa.eu/en/web/eu-law-and-publications/publication-detail/-/publication/9d84f730-516c-11f0-a9d0-01aa75ed71a1/language-en",
+            "title": "Making the most of EU research and innovation investments: Rethinking dual use",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Recovered report text verifies a Europe-wide dual-use R&I governance argument and detailed recommendations for future EU funding architecture."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The recovered policy brief is a completed expert evidence product whose substantive object is EU R&I funding and governance for dual-use technologies."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-26T18:59:32Z",
+      "deep_scan_package_id": "20260926T181349Z-7fe851e9c341",
+      "claims": [
+        {
+          "object": "innovation.dual_use",
+          "secondary_objects": [
+            "research.system_governance"
+          ],
+          "actor": {
+            "name": "Expert Group on the Economic and Societal Impact of Research & Innovation (ESIR)",
+            "class": "other"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2025-06-24",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "This is independent expert advice to the Commission; its recommendations do not themselves constitute adopted EU policy.",
+          "text": "ESIR recommends a dual-use-by-design approach linking the next EU Framework Programme with the European Defence Fund.",
+          "confidence": "high",
+          "record_key": "historical:id:0a6e3f1915d83f7f",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:1518709a46a33717:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:17e1a4919ce906d6": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "889205a7",
+      "identity_hash": "140557af61931450",
+      "reader_title": "Reaction to UK Horizon association",
+      "reader_what": "Coimbra Group welcomes the political agreement enabling UK association to Horizon Europe.",
+      "reader_more": "The underlying association development is substantive, but this record is a university-network reaction to it. Historical Strand A requires the work itself to be a substantive evidence product.",
+      "deep_analysis": {
+        "work_kind": "institutional news/position statement",
+        "research_question": "",
+        "main_finding": "The organisation welcomes the UK–EU political agreement on Horizon Europe association.",
+        "method_or_basis": "Official institutional statement reacting to a policy development.",
+        "qualification": "It reports and comments on a real development but does not analyse it through an evidence-led study.",
+        "radar_relevance": "Fails the historical evidence-product guard for Strand A.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The package contains the full official Coimbra Group PDF statement announcing its reaction to the UK association agreement."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_statement_pdf",
+            "url": "https://www.coimbra-group.eu/wp-content/uploads/20230908-CG-welcomes-UK-association-to-Horizon-Europe.pdf",
+            "title": "Coimbra Group welcomes announcement of UK association to Horizon Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The source authenticates the reaction and underlying development, but the work itself is institutional news/advocacy rather than analytical evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_SUBSTANTIVE_NEWS_PAGE",
+        "reason": "The Coimbra Group item welcomes the political agreement on UK Horizon Europe association; it is a reaction statement, not an evidence product."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-26T18:59:32Z",
+      "deep_scan_package_id": "20260926T181349Z-7fe851e9c341",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:1b74d757673d85a3": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "84ee98d6",
+      "identity_hash": "f790d9eaf0719c32",
+      "reader_title": "Horizon Europe implementation recap",
+      "reader_what": "The page summarises conference discussion on Horizon Europe work programmes, lump-sum funding and implementation issues.",
+      "reader_more": "It reports speakers’ remarks and institutional discussion rather than presenting a method, evidence base and findings. That excludes it from historical Strand A.",
+      "deep_analysis": {
+        "work_kind": "event recap/news",
+        "research_question": "",
+        "main_finding": "The article relays discussion about Horizon Europe implementation and prospective programme changes.",
+        "method_or_basis": "Conference reporting and quotation of participants.",
+        "qualification": "No independent evidence-led analysis is presented.",
+        "radar_relevance": "Fails the historical Strand A evidence-product guard.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The package contains the full Coimbra Group recap page at https://www.coimbra-group.eu/horizon-europe-what-is-the-european-commission-up-to/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_event_recap",
+            "url": "https://www.coimbra-group.eu/horizon-europe-what-is-the-european-commission-up-to/",
+            "title": "Horizon Europe: what is the European Commission up to?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The page is a reliable account of an event, but its content is conference reporting rather than a completed evidence product."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_SUBSTANTIVE_EVENT_RECAP",
+        "reason": "The page recaps a conference and Commission remarks about Horizon Europe implementation; it is not an evidence-led study."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-26T18:59:32Z",
+      "deep_scan_package_id": "20260926T181349Z-7fe851e9c341",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:991bc2932d88f4d7": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "2d59cdf3",
+      "identity_hash": "eded925a76600a54",
+      "reader_title": "Universities seek UK Horizon association",
+      "reader_what": "European university networks urge the Commission to finalise UK association to Horizon Europe.",
+      "reader_more": "The document is useful evidence of sector preferences at the time. It does not meet the package’s requirement for a substantive historical A evidence product.",
+      "deep_analysis": {
+        "work_kind": "joint statement/open letter",
+        "research_question": "",
+        "main_finding": "University associations advocate rapid UK association to Horizon Europe.",
+        "method_or_basis": "Coalition advocacy statement.",
+        "qualification": "The work expresses a position rather than reporting a completed study.",
+        "radar_relevance": "Fails the historical evidence-product guard despite direct Horizon relevance.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The package contains the full Coimbra Group joint-statement page."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Other signatory-network records corroborate the same November 2021 open letter on UK association."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_statement",
+            "url": "https://www.coimbra-group.eu/joint-statement-for-uk-association-to-horizon-europe/",
+            "title": "Joint Statement for UK Association to Horizon Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The statement is authentic and directly R&I-policy related, but is an advocacy intervention rather than historical evidence research."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_SUBSTANTIVE_ADVOCACY",
+        "reason": "The joint statement urges completion of UK association to Horizon Europe; it is policy advocacy, not a completed evidence-led work."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-26T18:59:32Z",
+      "deep_scan_package_id": "20260926T181349Z-7fe851e9c341",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:89b1423e1ce3fafd": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "313a0ef7",
+      "identity_hash": "480df412f45d713b",
+      "reader_title": "Universities advocate UK participation",
+      "reader_what": "The statement calls for arrangements enabling strong UK participation in Horizon Europe.",
+      "reader_more": "It provides contemporaneous policy advocacy from university networks. Historical Strand A requires substantive evidence rather than a position statement.",
+      "deep_analysis": {
+        "work_kind": "joint policy statement",
+        "research_question": "",
+        "main_finding": "The signatories advocate continued UK participation in Horizon Europe.",
+        "method_or_basis": "Institutional coalition statement.",
+        "qualification": "No evidence-led study design or independent findings are presented.",
+        "radar_relevance": "Fails historical Strand A’s evidence-product requirement.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The package contains the full official Coimbra Group statement page at https://www.coimbra-group.eu/joint-statement-on-uk-participation-in-horizon-europe/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_statement",
+            "url": "https://www.coimbra-group.eu/joint-statement-on-uk-participation-in-horizon-europe/",
+            "title": "Joint statement on UK participation in Horizon Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The authentic statement documents university-sector preferences on UK participation but provides no completed evidence study."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_SUBSTANTIVE_ADVOCACY",
+        "reason": "The statement advocates arrangements for UK participation in Horizon Europe; it is institutional advocacy rather than evidence-led research."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-26T18:59:32Z",
+      "deep_scan_package_id": "20260926T181349Z-7fe851e9c341",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:fa57dbdb31801b64": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "6a8c1bf8",
+      "identity_hash": "5397e1d77430c104",
+      "reader_title": "Tender for a quantum-infrastructure study",
+      "reader_what": "The Commission sought a study to specify architecture for a future European quantum communication infrastructure.",
+      "reader_more": "The procurement objective is directly relevant to strategic research infrastructure. But this record is only the tender notice; it does not contain the commissioned study’s evidence or conclusions.",
+      "deep_analysis": {
+        "work_kind": "call for tenders",
+        "research_question": "",
+        "main_finding": "The Commission invited bids for a study on European quantum communication infrastructure architecture.",
+        "method_or_basis": "Official procurement notice describing study objectives and scope.",
+        "qualification": "The work is a procurement page, not the completed research deliverable.",
+        "radar_relevance": "Fails the historical Strand A evidence-product guard.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The official Commission page at https://single-market-economy.ec.europa.eu/calls-tenders/study-system-architecture-quantum-communication-infrastructure_en defines the procurement scope and is marked closed."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_tender_page",
+            "url": "https://single-market-economy.ec.europa.eu/calls-tenders/study-system-architecture-quantum-communication-infrastructure_en",
+            "title": "Study on the system architecture of a quantum communication infrastructure",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The official page verifies a procurement action for an EU quantum-infrastructure study, but it contains objectives rather than completed evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_SUBSTANTIVE_CALL",
+        "reason": "The European Commission page is a call for tenders to commission a quantum-communications architecture study, not the completed study or its findings."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-26T18:59:32Z",
+      "deep_scan_package_id": "20260926T181349Z-7fe851e9c341",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:2c1a4e152ef39115": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "40cc613d",
+      "identity_hash": "44af4c453a2bb8e4",
+      "reader_title": "Universities respond to Horizon Europe",
+      "reader_what": "University networks set out priorities and concerns for the proposed Horizon Europe programme.",
+      "reader_more": "The statement records sector preferences during programme design. It does not provide a completed empirical or analytical evidence base qualifying for historical Strand A.",
+      "deep_analysis": {
+        "work_kind": "joint policy statement",
+        "research_question": "",
+        "main_finding": "University associations advocate design priorities for Horizon Europe.",
+        "method_or_basis": "Coalition response to the Commission’s programme proposal.",
+        "qualification": "The document is advocacy rather than a completed evidence-led study.",
+        "radar_relevance": "Fails the historical evidence-product guard.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The package contains the full official Coimbra Group statement page at https://www.coimbra-group.eu/universities-united-for-the-best-horizon-europe/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_statement",
+            "url": "https://www.coimbra-group.eu/universities-united-for-the-best-horizon-europe/",
+            "title": "Universities united for the best Horizon Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The source is authentic and directly about EU research policy, but functions as coalition advocacy."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_SUBSTANTIVE_ADVOCACY",
+        "reason": "The statement is a university-sector response advocating priorities for Horizon Europe; it is not a completed evidence-led study."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-26T18:59:32Z",
+      "deep_scan_package_id": "20260926T181349Z-7fe851e9c341",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:0527d1455e844698": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "4bf7bebf",
+      "identity_hash": "c2eaf45bbaa4e3c4",
+      "reader_title": "Joint call to double EU investment",
+      "reader_what": "Thirteen university associations call for doubling European research, innovation and education investment.",
+      "reader_more": "The supplied URL points to this joint statement, not to the scanner’s “Joint amendments” title. The corrected work is directly R&I-related but remains advocacy without a completed evidence-led analysis.",
+      "deep_analysis": {
+        "work_kind": "joint advocacy statement",
+        "research_question": "",
+        "main_finding": "Thirteen university associations advocate doubling EU investment in research, innovation and education.",
+        "method_or_basis": "Joint institutional statement by European university networks.",
+        "qualification": "The scanner title was wrong; the actual PDF is a different advocacy statement.",
+        "radar_relevance": "After identity correction, the work still fails the historical evidence-product guard.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied PDF https://www.coimbra-group.eu/wp-content/uploads/Joint-statement-on-double-research-investment-21.03.2018.pdf identifies itself as “Double Investment in Research, Innovation and Education to boost Europe’s Competitiveness and Sustainability,” not the scanner title."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title searches on the PDF’s real title found matching official association records."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "European University Association, LERU and YERUN pages corroborate the same 21 March 2018 joint statement by 13 university associations."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_statement_pdf",
+            "url": "https://www.coimbra-group.eu/wp-content/uploads/Joint-statement-on-double-research-investment-21.03.2018.pdf",
+            "title": "Double Investment in Research, Innovation and Education to boost Europe’s Competitiveness and Sustainability",
+            "evidence_used": true
+          },
+          {
+            "kind": "association_record",
+            "url": "https://www.eua.eu/publications/policy-input/double-investment-in-research-innovation-and-education-to-boost-europe-s-competitiveness-and-sustainability.html",
+            "title": "Double Investment in Research Innovation and Education to boost Europe’s Competitiveness and Sustainability",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "URL identity was corrected from the PDF itself and corroborated by other signatory associations; the actual work is a funding-advocacy statement, not a study."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_IDENTITY_MISMATCH_NON_SUBSTANTIVE_ADVOCACY",
+        "reason": "The supplied PDF is not the scanner-titled “Joint amendments” work; it is a different 2018 joint statement advocating doubled EU investment, which is still non-substantive advocacy."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-26T18:59:32Z",
+      "deep_scan_package_id": "20260926T181349Z-7fe851e9c341",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:8ca8855fcc83076c": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "6ef4372d",
+      "identity_hash": "40c3e66efebbc74f",
+      "reader_title": "Nested interactive horizon scanning",
+      "reader_what": "The study combines interactive horizon scanning with NEST layers to make weak signals more usable for organisational decision-making.",
+      "reader_why": "Layered interpretation connects distant change signals to meso-level systems and concrete actors.",
+      "reader_more": "A Finnish forest-bioeconomy pilot collected and interpreted weak signals with stakeholders across nested system, meso and actor layers. The authors discuss strengths and limitations and present the approach as transferable to other renewable-resource sectors. They also state that further testing is needed.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed methods study",
+        "research_question": "Can a nested business-environment framework improve interpretation and use of weak signals in interactive horizon scanning?",
+        "main_finding": "Combining interactive scanning with NEST layers provides a structured way to interpret signals across system, meso and actor levels.",
+        "method_or_basis": "Participatory horizon-scanning pilot with Finnish forest-bioeconomy stakeholders, followed by layered NEST interpretation and method reflection.",
+        "qualification": "The method was piloted with Finnish forest-bioeconomy stakeholders; the authors say broader feasibility still needs further testing.",
+        "radar_relevance": "This is a genuine reusable foresight-method contribution rather than merely application of an unchanged method.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "The package reader could not retrieve https://onlinelibrary.wiley.com/doi/10.1002/ffo2.70015 and stored no body text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1002/ffo2.70015 resolves to the matching Wiley open-access article."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the full Wiley HTML article."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Title + Mauno + 2025 matched Wiley, UEF and ResearchGate records with the same five authors."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Wiley full HTML provides complete methods, discussion and conclusions at https://onlinelibrary.wiley.com/doi/10.1002/ffo2.70015."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "UEF CRIS and other bibliographic records confirm volume 7 issue 2, e70015 and first publication on 5 August 2025."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://onlinelibrary.wiley.com/doi/10.1002/ffo2.70015",
+            "title": "Interactive Horizon Scanning of the Forest Bioeconomy With a Nested Business Environment Framework",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full Wiley text shows the paper explicitly tests a combined analytical approach, discusses strengths/weaknesses and claims use beyond the pilot sector."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The article makes a transferable methodological contribution by integrating the NEST framework with interactive horizon scanning for structured signal interpretation."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-26T18:59:32Z",
+      "deep_scan_package_id": "20260926T181349Z-7fe851e9c341",
+      "claims": [
+        {
+          "object": "methods.horizon_scanning",
+          "secondary_objects": [
+            "methods.foresight"
+          ],
+          "actor": {
+            "name": "Mauno et al.",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2025-08-05",
+          "scope": {
+            "level": "external",
+            "countries": [
+              "FI"
+            ]
+          },
+          "kind": "action",
+          "qualification": "The method was piloted with Finnish forest-bioeconomy stakeholders; the authors say broader feasibility still needs further testing.",
+          "text": "The study integrates NEST layers with interactive horizon scanning to structure weak-signal interpretation from system to actor levels.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "historical:id:8ca8855fcc83076c",
+          "merit": 68,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:40c3e66efebbc74f:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:76961a4373201c84": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "42bf677c",
+      "identity_hash": "90bd0275d9c2490c",
+      "reader_title": "A two-level business scenario method",
+      "reader_what": "The study combines macro quantitative scenarios with company-level expert workshops in a replicable business-foresight design.",
+      "reader_why": "Combining scales can connect structural economic change with firm-level strategic uncertainty.",
+      "reader_more": "The paper builds Visegrad macro scenarios from quantitative indicators and micro scenarios through expert workshops using intuitive-logic axes. It presents the combined design as readily replicable and uses the macro–micro combination to curb limitations of the scenario-axes technique. The contribution adapts established methods rather than inventing scenario planning from scratch.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed foresight methods/application study",
+        "research_question": "How can macroeconomic and company-level foresight be combined to explore business futures in the Visegrad region?",
+        "main_finding": "A combined macro quantitative and micro expert-scenario design links regional structural futures with firm-level strategic scenarios.",
+        "method_or_basis": "Macro indicator analysis combined with expert-based scenario workshops and a two-axis/four-quadrant intuitive-logic design.",
+        "qualification": "The approach combines established scenario techniques and was demonstrated in Visegrad business cases; it is an adaptation, not a wholly new scenario method.",
+        "radar_relevance": "The explicit, replicable integration of two analytical levels is a material reusable scenario-method contribution qualifying for Strand B.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The package contains substantial matching full text from the open-access Springer article."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Springer confirms open access, publication date 14 December 2016 and the same methodology/article identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s40309-016-0103-3",
+            "title": "The future of business in Visegrad region",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The full article explicitly combines macro and micro scenario methods, discusses methodological limitations and says the approach can be replicated elsewhere."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The article presents and reflects on a replicable two-level scenario design that combines macro quantitative and micro expert-based foresight."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-26T18:59:33Z",
+      "deep_scan_package_id": "20260926T181349Z-7fe851e9c341",
+      "claims": [
+        {
+          "object": "methods.scenario",
+          "secondary_objects": [
+            "methods.foresight"
+          ],
+          "actor": {
+            "name": "Sacio-Szymańska et al.",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2016-12-14",
+          "scope": {
+            "level": "external",
+            "countries": [
+              "CZ",
+              "HU",
+              "PL",
+              "SK"
+            ]
+          },
+          "kind": "action",
+          "qualification": "The approach combines established scenario techniques and was demonstrated in Visegrad business cases; it is an adaptation, not a wholly new scenario method.",
+          "text": "The paper integrates macro quantitative scenarios with micro expert workshops into a replicable two-level business foresight design.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "historical:id:76961a4373201c84",
+          "merit": 74,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:90bd0275d9c2490c:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-09-26T12:58:58Z"
+  "claims_updated_at": "2026-09-26T18:59:33Z"
 }
