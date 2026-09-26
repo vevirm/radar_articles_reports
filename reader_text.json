@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-26T05:47:07Z",
+  "generated_at": "2026-09-26T12:51:09Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -190630,8 +190630,208 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:83be61b7ef7c99b0": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "07d0565f",
+      "identity_hash": "71bfa8b87d900e61",
+      "reader_title": "EAGLE-1 builds a European quantum-communications test capability",
+      "reader_what": "A signed ESA–SES contract created a Horizon Europe-backed satellite QKD demonstrator for in-orbit validation.",
+      "reader_why": "It adds test infrastructure for Europe’s planned cross-border quantum-secure communications network.",
+      "reader_more": "ESA and an SES-led European consortium contracted to build, launch and operate EAGLE-1 for space-based QKD validation. The 2022 source describes a contracted capability and planned validation, not evidence that the later mission outcomes were achieved.",
+      "deep_analysis": {
+        "work_kind": "official capability announcement",
+        "research_question": "",
+        "main_finding": "ESA and an SES-led European consortium contracted to build, launch and operate EAGLE-1 for space-based QKD validation.",
+        "method_or_basis": "European Commission first-party announcement of the signed contract, consortium and planned in-orbit validation.",
+        "qualification": "The 2022 source describes a contracted capability and planned validation, not evidence that the later mission outcomes were achieved.",
+        "radar_relevance": "Direct historical evidence of European strategic quantum testing infrastructure and sovereign communications capability.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://defence-industry-space.ec.europa.eu/eagle-1-new-european-partnership-boost-cyber-resilience-quantum-technology-2022-09-22_en; package contains matching abstract_or_landing_page source material sufficient to identify and classify the work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_web_page",
+            "url": "https://defence-industry-space.ec.europa.eu/eagle-1-new-european-partnership-boost-cyber-resilience-quantum-technology-2022-09-22_en",
+            "title": "Eagle-1: New European partnership to boost Cyber Resilience with Quantum Technology",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and work type verified from the matching source material supplied in the reserved package."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified substantive evidence concerns a consequential European R&I capability, trajectory or system mechanism."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-26T12:51:09Z",
+      "deep_scan_package_id": "worker-a-20260926T095441Z-8c2c04c52db2",
+      "claims": [
+        {
+          "object": "quantum.testing_infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission / ESA",
+            "class": "eu_body"
+          },
+          "mechanism": "builds",
+          "direction": "expands",
+          "status": "adopted",
+          "status_date": "2022-09-22",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The 2022 source describes a contracted capability and planned validation, not evidence that the later mission outcomes were achieved.",
+          "text": "The EAGLE-1 contract established a European space-based QKD demonstrator for in-orbit validation.",
+          "confidence": "high",
+          "record_key": "historical:id:83be61b7ef7c99b0",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:71bfa8b87d900e61:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:7a998d5f7036694a": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "87af83db",
+      "identity_hash": "833e58208601ef6c",
+      "reader_title": "Not admitted after source verification",
+      "reader_what": "This is procedural, service, vacancy, event or programme material rather than a qualifying evidence product.",
+      "reader_more": "The source identity matches “Horizon Europe EIE SCALEUP calls”. A funding-call page is procedural programme material, not a completed evidence product about the European R&I system.",
+      "deep_analysis": {
+        "work_kind": "non-qualifying source type or scope",
+        "research_question": "",
+        "main_finding": "A funding-call page is procedural programme material, not a completed evidence product about the European R&I system.",
+        "method_or_basis": "Classification is based on the verified matching source and its actual scope/type.",
+        "qualification": "The drop applies to the Radar admission criteria, not to the work’s general usefulness or quality.",
+        "radar_relevance": "A funding-call page is procedural programme material, not a completed evidence product about the European R&I system.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://eic.ec.europa.eu/eic-funding-opportunities/calls-proposals/horizon-europe-eie-scaleup-calls_en; package contains matching abstract_or_landing_page source material sufficient to identify and classify the work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_web_page",
+            "url": "https://eic.ec.europa.eu/eic-funding-opportunities/calls-proposals/horizon-europe-eie-scaleup-calls_en",
+            "title": "Horizon Europe EIE SCALEUP calls",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and work type verified from the matching source material supplied in the reserved package."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "GENERIC_PROGRAMME_OR_CALL",
+        "reason": "A funding-call page is procedural programme material, not a completed evidence product about the European R&I system."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-26T12:51:09Z",
+      "deep_scan_package_id": "worker-a-20260926T095441Z-8c2c04c52db2",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:bec93254a8eb60b8": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "72141183",
+      "identity_hash": "af39e643e1804c55",
+      "reader_title": "Not admitted after source verification",
+      "reader_what": "This is procedural, service, vacancy, event or programme material rather than a qualifying evidence product.",
+      "reader_more": "The source identity matches “Horizon Europe INNOVSMES calls - European Partnership on Innovative SMEs”. A funding-call page is procedural programme material rather than substantive evidence about an R&I state or trajectory.",
+      "deep_analysis": {
+        "work_kind": "non-qualifying source type or scope",
+        "research_question": "",
+        "main_finding": "A funding-call page is procedural programme material rather than substantive evidence about an R&I state or trajectory.",
+        "method_or_basis": "Classification is based on the verified matching source and its actual scope/type.",
+        "qualification": "The drop applies to the Radar admission criteria, not to the work’s general usefulness or quality.",
+        "radar_relevance": "A funding-call page is procedural programme material rather than substantive evidence about an R&I state or trajectory.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://eic.ec.europa.eu/eic-funding-opportunities/calls-proposals/horizon-europe-innovsmes-calls-european-partnership_en; package contains matching abstract_or_landing_page source material sufficient to identify and classify the work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_web_page",
+            "url": "https://eic.ec.europa.eu/eic-funding-opportunities/calls-proposals/horizon-europe-innovsmes-calls-european-partnership_en",
+            "title": "Horizon Europe INNOVSMES calls - European Partnership on Innovative SMEs",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and work type verified from the matching source material supplied in the reserved package."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "GENERIC_PROGRAMME_OR_CALL",
+        "reason": "A funding-call page is procedural programme material rather than substantive evidence about an R&I state or trajectory."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-26T12:51:09Z",
+      "deep_scan_package_id": "worker-a-20260926T095441Z-8c2c04c52db2",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-09-26T05:47:07Z"
+  "claims_updated_at": "2026-09-26T12:51:09Z"
 }
