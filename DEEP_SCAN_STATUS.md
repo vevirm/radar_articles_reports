@@ -6,17 +6,17 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2177** (Main **1089** + Historical **1088**)
-- Automatic queue still needing V2 verification: **89** (Main **15** + Historical **74**)
-- Currently assigned to workers: **72** (Main **15** + Historical **57**)
+- Authoritative V2 verified: **2203** (Main **1094** + Historical **1109**)
+- Automatic queue still needing V2 verification: **57** (Main **6** + Historical **51**)
+- Currently assigned to workers: **57** (Main **6** + Historical **51**)
 - Bounded access-recovery retries still eligible: **0**
-- Hands-on verification needed: **19**
-- Automatic queue pending and not yet assigned: **17**
+- Hands-on verification needed: **25**
+- Automatic queue pending and not yet assigned: **0**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260927T173451Z-ba5f9ffc014d`
+- Current package: `worker-a-20260927T174243Z-ba5f9ffc014d`
 - Assigned unresolved records: **36**
   1. `historical:id:6943a4a7489e9044` — Is Innovation Conducive to Economic Growth? The Case of Central and Eastern European Countries
   2. `historical:id:85a44c7e3f47061c` — EARTO Position Paper on EU Partnerships in FP10: How to boost Future EU Public-Private Partnerships? | EARTO
@@ -29,17 +29,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260927T173517Z-15f33790c00c`
-- Assigned unresolved records: **36**
-  1. `link:https://news.google.com/rss/articles/CBMitAFBVV95cUxNUmxjeFFxcVhEcVdSZG5ERnk2clR1djlYSEJZb3FFOXBmdlFTTTl2LXVmeVFqeEpqemxYQlBOUlZWRHRjQkF6RUlSaFd0dU81ODItY0d5T1N6Y3FDMng3MTBsVlZNLVZoOGpvTW1nZ191bUFONE9zVlYzNWgyNTZVVTlZSlVtYzJJcS1YdGt5Sy1vcDIxbEVwMEk0Q3V6VnZhbjZVZDd0dEFHTTQ3QTgteFgxZXk?oc=5` — Planet Labs’ First German-Made Satellite to Launch in Early 2027 — recovery attempt 2/3
-  2. `link:https://news.google.com/rss/articles/CBMiekFVX3lxTE1Pc1RnZW41ZU9YUUZqVHFjT0lTUWFKTldPaEZxVDQwMzg0OFgzR3djc0lZMlRnX2JYbmVEdHBEMTFOMWlzMDhxMFFuSmlzbmtjUW9vUmJXenljakFpNy1RQnNJTXlIZEFhRjJtUWtUNm5mT2dpQkZYYWtR?oc=5` — THE HACK: EU weighs AI labs' safety plans — recovery attempt 2/3
-  3. `link:https://doi.org/10.1177/01655515261437410` — The impact of open data on research productivity and academic collaboration: A systematic literature review (2021–2025) — recovery attempt 3/3
-  4. `link:https://doi.org/10.1016/j.techsoc.2026.103564` — Country-Level Configurations Associated with Enterprise AI Diffusion in Europe: An fsQCA of Digitalization, Skills, and R&D Intensity — recovery attempt 3/3
-  5. `link:https://news.google.com/rss/articles/CBMiqgFBVV95cUxPVGxic0FTbm5TT0RQalVXQnBBOFJhOWh0bDN0WjZjNzJEZ2JfZXVzZ3VISmI3NVMxdV8xWnQza0ctUEJsaUtCQm5JSnI5UjhzNEJROW9Ea2VoRkpUNnl2cGJoT2hoZkFCU0hmeXFoYVVDZi11UHVBa0JZN05ISTFkX1N2TXJheUlRc1hPbVdfSHNCdEtrcTk1clRLMjVQemloWkl2Mkd2X3VtUQ?oc=5` — Research Europe – 24 September 2026 — recovery attempt 3/3
-  6. `link:https://news.google.com/rss/articles/CBMimgFBVV95cUxPbFd0dlh5RjQzUnEwLTRpU2hMaWxPNk5Zal93N2lITWliRHhzNEhJOGYtWUJ1U0tab2tseTE1bWhlei1mQ09EMXZSM0g3MzdWMWlaSlF4eEx5U1BXQ0daV1RwLVVqdW5SYnUxY09GUUxSbldRZEttV0ZkbnhMTzNycFFOWXVQLUhFRURwTVlBWXVwN20wSnFPRXln?oc=5` — Don’t believe the doomers: Europe’s tech industry slams AI panic — recovery attempt 3/3
-  7. `link:https://news.google.com/rss/articles/CBMigwFBVV95cUxQUGRlY09GVnBXQVd2bTJuY3JiUWQ5eEwzelBqMnltTmtxRmhXeUozcWVJUW1KMWtTcW9pcEFIX3JWTUxWQnZVZi1QdENTc2k2ZGJMbzBVR1ZGS1pKdUExVzlNZkxpcmxuNnZzNUpzX2RPU3hETjNNbmtPMm9sZkJxMXpLSQ?oc=5` — What is Europe's plan if AI doesn’t self-improve? — recovery attempt 3/3
-  8. `link:https://news.google.com/rss/articles/CBMivAFBVV95cUxPRzB3NGFPR1cwVnhGTkxvM0w0VFNwYmVBYTdTTWlHLW1BRVUtcFhGMTN1YktLUVBUdm9tLWhSVTdmREpfM2Z6d2ZLbUphZ0FjN2xtQ29LZnM2Yjk3RlJuRm4yLW1WYVpyaHlFa3Q0Zy1Na2pTQnM2UnVBOW8wdHRfZm9GUlR6c0RVcEd0bGtBS2FGc0lRbEh4dE9VbmVBUW83a05fdEhLcG5pSnVWM3otTWF6REZPYlc0YnVEWA?oc=5` — What Backlash? Greek Region Pins Revival Hopes on Amazon Data Center — recovery attempt 2/3
-  - … plus 28 more in the package manifest
+- Current package: `worker-b-20260927T174312Z-ed24f1889e25`
+- Assigned unresolved records: **21**
+  1. `historical:id:4d9a17c6df3843d4` — Czechia 2024 Digital Decade Country Report | Shaping Europe’s digital future
+  2. `historical:id:74a0c404d3daf38a` — After China
+  3. `historical:id:8029f67b0507be47` — COST Meets Researchers in the Near Neighbour Countries - COST
+  4. `historical:id:03746d0ffbf0a93e` — Innovation in energy enabling technologies | epo.org
+  5. `historical:id:5a048e406145e9d4` — Clean Energy Transition - Horizon Europe Partnership
+  6. `historical:id:f782b4bcd5a240a2` — COST stays a unique career booster for new generations of researchers - COST
+  7. `historical:id:7ba17b892de57b32` — Contesting Concentrated Scientific Power: The Case of the European Commission’s Chief Scientific Adviser
+  8. `historical:id:4cabd13c809a74e3` — Digital solutions for homes, energy and mobility
+  - … plus 13 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20260926T181349Z-7fe851e9c341`
@@ -68,3 +68,9 @@ These works no longer consume automatic Deep Scan slots. Their identity is belie
 - `link:https://doi.org/10.1080/23299460.2026.2731654` — **Does the EU AI act align with responsible AI? An evaluation of the European Union’s artificial intelligence act in a responsible research and innovation framework** — attempts: 3/3 — Journal of Responsible Innovation — 2026-09-22 — Identity is verified, but substantive evidence remained inaccessible after the required recovery ladder. — https://doi.org/10.1080/23299460.2026.2731654
 - `link:https://doi.org/10.1016/j.ejps.2026.107570` — **European science for health research needs and priorities** — attempts: 3/3 — European Journal of Pharmaceutical Sciences — 2026-05-30 — Identity is verified, but admissible substantive evidence was not recovered; no admission judgement is asserted. — https://doi.org/10.1016/j.ejps.2026.107570
 - `link:https://doi.org/10.1111/aepr.70032` — **Comment on “Supply Chain Diversification and Industrial Policies to Strengthen Economic Security”** — attempts: 3/3 — Asian Economic Policy Review — 2026-05-18 — Identity is verified, but admissible substantive evidence was not recovered; no admission judgement is asserted. — https://doi.org/10.1111/aepr.70032
+- `historical:id:43de0137b55c0df2` — **Strategic planning and foresight: the case of Smart Specialisation Strategy in Tuscany** — attempts: 3/3 — Foresight — 2016-09-12 — Identity and abstract are verified and indicate an innovative methodological scheme, but full text was not legitimately recovered; abstract-only evidence is insufficient. — https://doi.org/10.1108/fs-06-2015-0036
+- `historical:id:cef3cfdeb1591a87` — **Explanatory models of regional innovation performance in Europe: policy implications for regions** — attempts: 3/3 — Innovation: The European Journal of Social Science Research — 2021-10-02 — Publisher/DOI metadata verify the article, but full text or a legitimate repository copy was not recovered. — https://doi.org/10.1080/13511610.2021.1909462
+- `link:https://doi.org/10.1177/01655515261437410` — **The impact of open data on research productivity and academic collaboration: A systematic literature review (2021–2025)** — attempts: 3/3 — Journal of Information Science — 2026-06-13 — Publisher metadata and abstract verify the systematic review, but full text was restricted and abstract-only evidence is insufficient under the package rules. — https://doi.org/10.1177/01655515261437410
+- `link:https://doi.org/10.1016/j.techsoc.2026.103564` — **Country-Level Configurations Associated with Enterprise AI Diffusion in Europe: An fsQCA of Digitalization, Skills, and R&D Intensity** — attempts: 3/3 — Technology in Society — 2026-09-01 — The article identity is verified through DOI/publisher metadata, but no substantive full text or legitimate repository copy was recovered. — https://doi.org/10.1016/j.techsoc.2026.103564
+- `link:https://news.google.com/rss/articles/CBMimgFBVV95cUxPbFd0dlh5RjQzUnEwLTRpU2hMaWxPNk5Zal93N2lITWliRHhzNEhJOGYtWUJ1U0tab2tseTE1bWhlei1mQ09EMXZSM0g3MzdWMWlaSlF4eEx5U1BXQ0daV1RwLVVqdW5SYnUxY09GUUxSbldRZEttV0ZkbnhMTzNycFFOWXVQLUhFRURwTVlBWXVwN20wSnFPRXln?oc=5` — **Don’t believe the doomers: Europe’s tech industry slams AI panic** — attempts: 3/3 — Politico Europe — 2026-09-24T03:00Z — The POLITICO article identity is corroborated, but accessible material came from secondary mirrors or snippets; the primary article remained insufficient for authoritative claim verification. — https://news.google.com/rss/articles/CBMimgFBVV95cUxPbFd0dlh5RjQzUnEwLTRpU2hMaWxPNk5Zal93N2lITWliRHhzNEhJOGYtWUJ1U0tab2tseTE1bWhlei1mQ09EMXZSM0g3MzdWMWlaSlF4eEx5U1BXQ0daV1RwLVVqdW5SYnUxY09GUUxSbldRZEttV0ZkbnhMTzNycFFOWXVQLUhFRURwTVlBWXVwN20wSnFPRXln?oc=5
+- `link:https://news.google.com/rss/articles/CBMigwFBVV95cUxQUGRlY09GVnBXQVd2bTJuY3JiUWQ5eEwzelBqMnltTmtxRmhXeUozcWVJUW1KMWtTcW9pcEFIX3JWTUxWQnZVZi1QdENTc2k2ZGJMbzBVR1ZGS1pKdUExVzlNZkxpcmxuNnZzNUpzX2RPU3hETjNNbmtPMm9sZkJxMXpLSQ?oc=5` — **What is Europe's plan if AI doesn’t self-improve?** — attempts: 3/3 — Euractiv — 2026-09-24T02:03Z — The Euractiv Pro article identity is verified, but only headline/subhead-level material was accessible. — https://news.google.com/rss/articles/CBMigwFBVV95cUxQUGRlY09GVnBXQVd2bTJuY3JiUWQ5eEwzelBqMnltTmtxRmhXeUozcWVJUW1KMWtTcW9pcEFIX3JWTUxWQnZVZi1QdENTc2k2ZGJMbzBVR1ZGS1pKdUExVzlNZkxpcmxuNnZzNUpzX2RPU3hETjNNbmtPMm9sZkJxMXpLSQ?oc=5
