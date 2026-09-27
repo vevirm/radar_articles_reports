@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-09-26T18:59:33Z",
+  "updated_at": "2026-09-27T17:29:48Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -13216,6 +13216,22 @@
       ],
       "updated_at": "2026-09-26T18:59:33Z",
       "deep_scan_package_id": "20260926T181349Z-7fe851e9c341"
+    },
+    "historical:id:cddbd3fa3fd27a16": {
+      "fields": {
+        "source": "Springer",
+        "type": "book chapter"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The DOI resolves to a Springer book chapter in R&D Management in the Knowledge Era, not to the journal R&D Management.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://link.springer.com/chapter/10.1007/978-3-030-15409-7_17"
+      ],
+      "updated_at": "2026-09-27T17:29:47Z",
+      "deep_scan_package_id": "worker-a-20260927T154458Z-c59b42f1cfd4"
     }
   }
 }

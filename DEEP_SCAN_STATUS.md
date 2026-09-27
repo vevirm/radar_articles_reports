@@ -6,30 +6,30 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2159** (Main **1088** + Historical **1071**)
-- Automatic queue still needing V2 verification: **107** (Main **16** + Historical **91**)
-- Currently assigned to workers: **77** (Main **15** + Historical **62**)
+- Authoritative V2 verified: **2177** (Main **1089** + Historical **1088**)
+- Automatic queue still needing V2 verification: **89** (Main **15** + Historical **74**)
+- Currently assigned to workers: **72** (Main **15** + Historical **57**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **19**
-- Automatic queue pending and not yet assigned: **30**
+- Automatic queue pending and not yet assigned: **17**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260927T154458Z-c59b42f1cfd4`
-- Assigned unresolved records: **41**
-  1. `link:https://news.google.com/rss/articles/CBMiYEFVX3lxTE5kbTAyVkNPbFFfaTVKRFZvVjQ2SG9aT1p2eFFCVk5LWXNiUnI4MWdBeTdmdXhDVzZtTHFPYWVfYTk5SnpOMlppVmRwM0hsUkMxSW1XQ0kzR3MybjB4akV0aQ?oc=5` — Enhancing Europe’s competitiveness by empowering researchers as innovators - Science | AAAS — recovery attempt 2/3
-  2. `historical:id:a86678a3e0e70faa` — RRI legacies: co-creation for responsible, equitable and fair innovation in Horizon Europe
-  3. `historical:id:4265bbe788054112` — Testing and Experimentation Facilities (TEFs): Questions and answers
-  4. `historical:id:e1c472d381945760` — Special funding for research on key areas of green and digital transition 2021
-  5. `historical:id:6ce7716a41d15b20` — Are EU and Member States policy makers truly willing to engage and dialogue with Universities? | Coimbra
-  6. `historical:id:7eec5662e552529c` — Untangling the Web: Why the U.S. Needs Allies to Defend Against Chinese Technology Transfer | Center for Security and Emerging Technology
-  7. `historical:id:e2b1921f524f5162` — IP and SMEs
-  8. `historical:id:6c61e15e1772f8e8` — Framing brain drain: between solidarity and skills in European labor mobility
-  - … plus 33 more in the package manifest
+- Current package: `worker-a-20260927T173451Z-ba5f9ffc014d`
+- Assigned unresolved records: **36**
+  1. `historical:id:6943a4a7489e9044` — Is Innovation Conducive to Economic Growth? The Case of Central and Eastern European Countries
+  2. `historical:id:85a44c7e3f47061c` — EARTO Position Paper on EU Partnerships in FP10: How to boost Future EU Public-Private Partnerships? | EARTO
+  3. `historical:id:01107ae3ae2642d4` — EARTO Position Paper on Accelerating AI Adoption in Healthcare | EARTO
+  4. `historical:id:69772244d4fda8ff` — Innovation, Regulation, and the EU's Digital Single Market Strategy
+  5. `historical:id:1284bb72d9316963` — Future-proofing your business: Which foresight model fits your company? | VTT
+  6. `link:https://news.google.com/rss/articles/CBMi9AFBVV95cUxOVE9xeldLYUNjS25wTkhOVnFyQzRtUUNveklCMVBhcEpOX09LOFV2X0RJZklwczluU2U4SVpHMEF2dEpjdFItX0gxYUM5WHJXOTZqeEJONGRJOE9Bc1lqdk8wbVhWdkhiTDEwTDFBeTFSczhVZUFsMXJZNElBWjJqVk81aW1FT19hRjhsR1cxRkRtNVJQTUlwaS11WjNrcWtnaTd6d3pWWGd4T2tJcTY2Wk1xY251QmE2a1lIeFEzTHJUaG1ZQXdDc2lxTmlFOFRsejVMRmFDNVR3bXotQzlSTmxSaWN0UnNrcy12NXB3SkRPZU0z?oc=5` — Mark Carney reminds Europe that its universities and research are strategic assets — recovery attempt 2/3
+  7. `historical:id:01b8d9307d8896c0` — Foresight & Futures Capabilities
+  8. `historical:id:4c175377997921f0` — Development of a novel framework for the analysis of Technological Innovation Systems by Causal Layered Analysis (CLA) in energy systems
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260927T154530Z-15f33790c00c`
+- Current package: `worker-b-20260927T173517Z-15f33790c00c`
 - Assigned unresolved records: **36**
   1. `link:https://news.google.com/rss/articles/CBMitAFBVV95cUxNUmxjeFFxcVhEcVdSZG5ERnk2clR1djlYSEJZb3FFOXBmdlFTTTl2LXVmeVFqeEpqemxYQlBOUlZWRHRjQkF6RUlSaFd0dU81ODItY0d5T1N6Y3FDMng3MTBsVlZNLVZoOGpvTW1nZ191bUFONE9zVlYzNWgyNTZVVTlZSlVtYzJJcS1YdGt5Sy1vcDIxbEVwMEk0Q3V6VnZhbjZVZDd0dEFHTTQ3QTgteFgxZXk?oc=5` — Planet Labs’ First German-Made Satellite to Launch in Early 2027 — recovery attempt 2/3
   2. `link:https://news.google.com/rss/articles/CBMiekFVX3lxTE1Pc1RnZW41ZU9YUUZqVHFjT0lTUWFKTldPaEZxVDQwMzg0OFgzR3djc0lZMlRnX2JYbmVEdHBEMTFOMWlzMDhxMFFuSmlzbmtjUW9vUmJXenljakFpNy1RQnNJTXlIZEFhRjJtUWtUNm5mT2dpQkZYYWtR?oc=5` — THE HACK: EU weighs AI labs' safety plans — recovery attempt 2/3
