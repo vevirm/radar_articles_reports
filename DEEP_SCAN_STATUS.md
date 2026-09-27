@@ -7,16 +7,16 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **2159** (Main **1088** + Historical **1071**)
-- Automatic queue still needing V2 verification: **88** (Main **15** + Historical **73**)
+- Automatic queue still needing V2 verification: **107** (Main **16** + Historical **91**)
 - Currently assigned to workers: **77** (Main **15** + Historical **62**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **19**
-- Automatic queue pending and not yet assigned: **11**
+- Automatic queue pending and not yet assigned: **30**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260927T080730Z-c59b42f1cfd4`
+- Current package: `worker-a-20260927T154458Z-c59b42f1cfd4`
 - Assigned unresolved records: **41**
   1. `link:https://news.google.com/rss/articles/CBMiYEFVX3lxTE5kbTAyVkNPbFFfaTVKRFZvVjQ2SG9aT1p2eFFCVk5LWXNiUnI4MWdBeTdmdXhDVzZtTHFPYWVfYTk5SnpOMlppVmRwM0hsUkMxSW1XQ0kzR3MybjB4akV0aQ?oc=5` — Enhancing Europe’s competitiveness by empowering researchers as innovators - Science | AAAS — recovery attempt 2/3
   2. `historical:id:a86678a3e0e70faa` — RRI legacies: co-creation for responsible, equitable and fair innovation in Horizon Europe
@@ -29,7 +29,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 33 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260927T080749Z-15f33790c00c`
+- Current package: `worker-b-20260927T154530Z-15f33790c00c`
 - Assigned unresolved records: **36**
   1. `link:https://news.google.com/rss/articles/CBMitAFBVV95cUxNUmxjeFFxcVhEcVdSZG5ERnk2clR1djlYSEJZb3FFOXBmdlFTTTl2LXVmeVFqeEpqemxYQlBOUlZWRHRjQkF6RUlSaFd0dU81ODItY0d5T1N6Y3FDMng3MTBsVlZNLVZoOGpvTW1nZ191bUFONE9zVlYzNWgyNTZVVTlZSlVtYzJJcS1YdGt5Sy1vcDIxbEVwMEk0Q3V6VnZhbjZVZDd0dEFHTTQ3QTgteFgxZXk?oc=5` — Planet Labs’ First German-Made Satellite to Launch in Early 2027 — recovery attempt 2/3
   2. `link:https://news.google.com/rss/articles/CBMiekFVX3lxTE1Pc1RnZW41ZU9YUUZqVHFjT0lTUWFKTldPaEZxVDQwMzg0OFgzR3djc0lZMlRnX2JYbmVEdHBEMTFOMWlzMDhxMFFuSmlzbmtjUW9vUmJXenljakFpNy1RQnNJTXlIZEFhRjJtUWtUNm5mT2dpQkZYYWtR?oc=5` — THE HACK: EU weighs AI labs' safety plans — recovery attempt 2/3
