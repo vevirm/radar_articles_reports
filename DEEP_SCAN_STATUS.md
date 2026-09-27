@@ -7,16 +7,16 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **2159** (Main **1088** + Historical **1071**)
-- Automatic queue still needing V2 verification: **57** (Main **14** + Historical **43**)
-- Currently assigned to workers: **57** (Main **14** + Historical **43**)
+- Automatic queue still needing V2 verification: **88** (Main **15** + Historical **73**)
+- Currently assigned to workers: **77** (Main **15** + Historical **62**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **19**
-- Automatic queue pending and not yet assigned: **0**
+- Automatic queue pending and not yet assigned: **11**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260926T190507Z-c59b42f1cfd4`
+- Current package: `worker-a-20260927T072104Z-c59b42f1cfd4`
 - Assigned unresolved records: **41**
   1. `link:https://news.google.com/rss/articles/CBMiYEFVX3lxTE5kbTAyVkNPbFFfaTVKRFZvVjQ2SG9aT1p2eFFCVk5LWXNiUnI4MWdBeTdmdXhDVzZtTHFPYWVfYTk5SnpOMlppVmRwM0hsUkMxSW1XQ0kzR3MybjB4akV0aQ?oc=5` — Enhancing Europe’s competitiveness by empowering researchers as innovators - Science | AAAS — recovery attempt 2/3
   2. `historical:id:a86678a3e0e70faa` — RRI legacies: co-creation for responsible, equitable and fair innovation in Horizon Europe
@@ -29,8 +29,8 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 33 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260926T190537Z-daaf2db6cdd4`
-- Assigned unresolved records: **16**
+- Current package: `worker-b-20260927T072133Z-15f33790c00c`
+- Assigned unresolved records: **36**
   1. `link:https://news.google.com/rss/articles/CBMitAFBVV95cUxNUmxjeFFxcVhEcVdSZG5ERnk2clR1djlYSEJZb3FFOXBmdlFTTTl2LXVmeVFqeEpqemxYQlBOUlZWRHRjQkF6RUlSaFd0dU81ODItY0d5T1N6Y3FDMng3MTBsVlZNLVZoOGpvTW1nZ191bUFONE9zVlYzNWgyNTZVVTlZSlVtYzJJcS1YdGt5Sy1vcDIxbEVwMEk0Q3V6VnZhbjZVZDd0dEFHTTQ3QTgteFgxZXk?oc=5` — Planet Labs’ First German-Made Satellite to Launch in Early 2027 — recovery attempt 2/3
   2. `link:https://news.google.com/rss/articles/CBMiekFVX3lxTE1Pc1RnZW41ZU9YUUZqVHFjT0lTUWFKTldPaEZxVDQwMzg0OFgzR3djc0lZMlRnX2JYbmVEdHBEMTFOMWlzMDhxMFFuSmlzbmtjUW9vUmJXenljakFpNy1RQnNJTXlIZEFhRjJtUWtUNm5mT2dpQkZYYWtR?oc=5` — THE HACK: EU weighs AI labs' safety plans — recovery attempt 2/3
   3. `link:https://doi.org/10.1177/01655515261437410` — The impact of open data on research productivity and academic collaboration: A systematic literature review (2021–2025) — recovery attempt 3/3
@@ -39,7 +39,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `link:https://news.google.com/rss/articles/CBMimgFBVV95cUxPbFd0dlh5RjQzUnEwLTRpU2hMaWxPNk5Zal93N2lITWliRHhzNEhJOGYtWUJ1U0tab2tseTE1bWhlei1mQ09EMXZSM0g3MzdWMWlaSlF4eEx5U1BXQ0daV1RwLVVqdW5SYnUxY09GUUxSbldRZEttV0ZkbnhMTzNycFFOWXVQLUhFRURwTVlBWXVwN20wSnFPRXln?oc=5` — Don’t believe the doomers: Europe’s tech industry slams AI panic — recovery attempt 3/3
   7. `link:https://news.google.com/rss/articles/CBMigwFBVV95cUxQUGRlY09GVnBXQVd2bTJuY3JiUWQ5eEwzelBqMnltTmtxRmhXeUozcWVJUW1KMWtTcW9pcEFIX3JWTUxWQnZVZi1QdENTc2k2ZGJMbzBVR1ZGS1pKdUExVzlNZkxpcmxuNnZzNUpzX2RPU3hETjNNbmtPMm9sZkJxMXpLSQ?oc=5` — What is Europe's plan if AI doesn’t self-improve? — recovery attempt 3/3
   8. `link:https://news.google.com/rss/articles/CBMivAFBVV95cUxPRzB3NGFPR1cwVnhGTkxvM0w0VFNwYmVBYTdTTWlHLW1BRVUtcFhGMTN1YktLUVBUdm9tLWhSVTdmREpfM2Z6d2ZLbUphZ0FjN2xtQ29LZnM2Yjk3RlJuRm4yLW1WYVpyaHlFa3Q0Zy1Na2pTQnM2UnVBOW8wdHRfZm9GUlR6c0RVcEd0bGtBS2FGc0lRbEh4dE9VbmVBUW83a05fdEhLcG5pSnVWM3otTWF6REZPYlc0YnVEWA?oc=5` — What Backlash? Greek Region Pins Revival Hopes on Amazon Data Center — recovery attempt 2/3
-  - … plus 8 more in the package manifest
+  - … plus 28 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20260926T181349Z-7fe851e9c341`
