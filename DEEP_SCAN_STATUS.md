@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2203** (Main **1094** + Historical **1109**)
-- Automatic queue still needing V2 verification: **57** (Main **6** + Historical **51**)
-- Currently assigned to workers: **57** (Main **6** + Historical **51**)
+- Authoritative V2 verified: **2230** (Main **1095** + Historical **1135**)
+- Automatic queue still needing V2 verification: **58** (Main **6** + Historical **52**)
+- Currently assigned to workers: **58** (Main **6** + Historical **52**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **25**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260927T174243Z-ba5f9ffc014d`
+- Current package: `worker-a-20260928T055901Z-ba5f9ffc014d`
 - Assigned unresolved records: **36**
   1. `historical:id:6943a4a7489e9044` — Is Innovation Conducive to Economic Growth? The Case of Central and Eastern European Countries
   2. `historical:id:85a44c7e3f47061c` — EARTO Position Paper on EU Partnerships in FP10: How to boost Future EU Public-Private Partnerships? | EARTO
@@ -29,7 +29,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260927T174312Z-ed24f1889e25`
+- Current package: `worker-b-20260928T055931Z-ed24f1889e25`
 - Assigned unresolved records: **21**
   1. `historical:id:4d9a17c6df3843d4` — Czechia 2024 Digital Decade Country Report | Shaping Europe’s digital future
   2. `historical:id:74a0c404d3daf38a` — After China
@@ -42,8 +42,9 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 13 more in the package manifest
 
 ### Worker SINGLE
-- Current package: `20260926T181349Z-7fe851e9c341`
-- Assigned unresolved records: **0**
+- Current package: `20260928T051735Z-7cc7e929318d`
+- Assigned unresolved records: **1**
+  1. `historical:id:d3e269b3737c0dfb` — Analyzing Iran’s science and technology foresight programs: recommendations for further practices
 
 ## Hands-on verification needed
 
@@ -71,6 +72,6 @@ These works no longer consume automatic Deep Scan slots. Their identity is belie
 - `historical:id:43de0137b55c0df2` — **Strategic planning and foresight: the case of Smart Specialisation Strategy in Tuscany** — attempts: 3/3 — Foresight — 2016-09-12 — Identity and abstract are verified and indicate an innovative methodological scheme, but full text was not legitimately recovered; abstract-only evidence is insufficient. — https://doi.org/10.1108/fs-06-2015-0036
 - `historical:id:cef3cfdeb1591a87` — **Explanatory models of regional innovation performance in Europe: policy implications for regions** — attempts: 3/3 — Innovation: The European Journal of Social Science Research — 2021-10-02 — Publisher/DOI metadata verify the article, but full text or a legitimate repository copy was not recovered. — https://doi.org/10.1080/13511610.2021.1909462
 - `link:https://doi.org/10.1177/01655515261437410` — **The impact of open data on research productivity and academic collaboration: A systematic literature review (2021–2025)** — attempts: 3/3 — Journal of Information Science — 2026-06-13 — Publisher metadata and abstract verify the systematic review, but full text was restricted and abstract-only evidence is insufficient under the package rules. — https://doi.org/10.1177/01655515261437410
-- `link:https://doi.org/10.1016/j.techsoc.2026.103564` — **Country-Level Configurations Associated with Enterprise AI Diffusion in Europe: An fsQCA of Digitalization, Skills, and R&D Intensity** — attempts: 3/3 — Technology in Society — 2026-09-01 — The article identity is verified through DOI/publisher metadata, but no substantive full text or legitimate repository copy was recovered. — https://doi.org/10.1016/j.techsoc.2026.103564
+- `link:https://doi.org/10.1016/j.techsoc.2026.103564` — **Country-level configurations associated with enterprise AI diffusion in Europe: An fsQCA of digitalization, skills, and R&D intensity** — attempts: 3/3 — Technology in Society — 2026-09-23 — The article identity is verified through DOI/publisher metadata, but no substantive full text or legitimate repository copy was recovered. — https://doi.org/10.1016/j.techsoc.2026.103564
 - `link:https://news.google.com/rss/articles/CBMimgFBVV95cUxPbFd0dlh5RjQzUnEwLTRpU2hMaWxPNk5Zal93N2lITWliRHhzNEhJOGYtWUJ1U0tab2tseTE1bWhlei1mQ09EMXZSM0g3MzdWMWlaSlF4eEx5U1BXQ0daV1RwLVVqdW5SYnUxY09GUUxSbldRZEttV0ZkbnhMTzNycFFOWXVQLUhFRURwTVlBWXVwN20wSnFPRXln?oc=5` — **Don’t believe the doomers: Europe’s tech industry slams AI panic** — attempts: 3/3 — Politico Europe — 2026-09-24T03:00Z — The POLITICO article identity is corroborated, but accessible material came from secondary mirrors or snippets; the primary article remained insufficient for authoritative claim verification. — https://news.google.com/rss/articles/CBMimgFBVV95cUxPbFd0dlh5RjQzUnEwLTRpU2hMaWxPNk5Zal93N2lITWliRHhzNEhJOGYtWUJ1U0tab2tseTE1bWhlei1mQ09EMXZSM0g3MzdWMWlaSlF4eEx5U1BXQ0daV1RwLVVqdW5SYnUxY09GUUxSbldRZEttV0ZkbnhMTzNycFFOWXVQLUhFRURwTVlBWXVwN20wSnFPRXln?oc=5
 - `link:https://news.google.com/rss/articles/CBMigwFBVV95cUxQUGRlY09GVnBXQVd2bTJuY3JiUWQ5eEwzelBqMnltTmtxRmhXeUozcWVJUW1KMWtTcW9pcEFIX3JWTUxWQnZVZi1QdENTc2k2ZGJMbzBVR1ZGS1pKdUExVzlNZkxpcmxuNnZzNUpzX2RPU3hETjNNbmtPMm9sZkJxMXpLSQ?oc=5` — **What is Europe's plan if AI doesn’t self-improve?** — attempts: 3/3 — Euractiv — 2026-09-24T02:03Z — The Euractiv Pro article identity is verified, but only headline/subhead-level material was accessible. — https://news.google.com/rss/articles/CBMigwFBVV95cUxQUGRlY09GVnBXQVd2bTJuY3JiUWQ5eEwzelBqMnltTmtxRmhXeUozcWVJUW1KMWtTcW9pcEFIX3JWTUxWQnZVZi1QdENTc2k2ZGJMbzBVR1ZGS1pKdUExVzlNZkxpcmxuNnZzNUpzX2RPU3hETjNNbmtPMm9sZkJxMXpLSQ?oc=5
