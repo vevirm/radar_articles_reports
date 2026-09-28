@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-28T05:53:21Z",
+  "generated_at": "2026-09-28T14:31:17Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -200391,8 +200391,89 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:d3e269b3737c0dfb": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "4d5d95ff",
+      "identity_hash": "e2db4d710e295746",
+      "reader_title": "Analyzing Iran’s science and technology foresight programs: recommendations for further practices",
+      "reader_more": "The paper analyses Iranian foresight programmes using a three-stage process, but its primary contribution is case diagnosis and recommendations rather than a clearly novel reusable method. The work exists and its identity is verified, but it does not meet the package’s substantive admission test.",
+      "deep_analysis": {
+        "work_kind": "publication/page",
+        "research_question": "",
+        "main_finding": "The paper analyses Iranian foresight programmes using a three-stage process, but its primary contribution is case diagnosis and recommendations rather than a clearly novel reusable method.",
+        "method_or_basis": "Verified from the supplied source material and matching provenance/identity evidence.",
+        "qualification": "The drop concerns Radar admission criteria, not the existence or general usefulness of the source.",
+        "radar_relevance": "The paper analyses Iranian foresight programmes using a three-stage process, but its primary contribution is case diagnosis and recommendations rather than a clearly novel reusable method.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_applicable",
+            "note": "No reader-facing URL was supplied in the job."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/search-verified DOI 10.1108/FS-10-2017-0064; metadata matched Hafezi, Malekifar and Akhavan, Foresight 20(3), 2018."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered matching bibliographic and substantive abstract records for the 2018 Foresight article."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Title + authors + 2018 search matched the same DOI, journal, volume and pages 312–331."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "limited",
+            "note": "Publisher full text was not openly recovered; legitimate bibliographic/abstract records matched the work and described its three-stage case-analysis method."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Broader DOI/title searches consistently corroborated the article identity and its case-study contribution."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_official_source",
+            "url": "https://doi.org/10.1108/FS-10-2017-0064",
+            "title": "Analyzing Iran’s science and technology foresight programs: recommendations for further practices",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance were checked against the supplied primary material and, where needed, authoritative publisher/issuer records; scanner metadata was treated as provisional."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "OUT_OF_SCOPE_OR_NON_SUBSTANTIVE",
+        "reason": "The paper analyses Iranian foresight programmes using a three-stage process, but its primary contribution is case diagnosis and recommendations rather than a clearly novel reusable method."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-28T14:31:17Z",
+      "deep_scan_package_id": "20260928T051735Z-7cc7e929318d",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-09-28T05:53:21Z"
+  "claims_updated_at": "2026-09-28T14:31:17Z"
 }

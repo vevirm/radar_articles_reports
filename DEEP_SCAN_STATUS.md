@@ -6,17 +6,17 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2230** (Main **1095** + Historical **1135**)
-- Automatic queue still needing V2 verification: **58** (Main **6** + Historical **52**)
-- Currently assigned to workers: **58** (Main **6** + Historical **52**)
+- Authoritative V2 verified: **2231** (Main **1095** + Historical **1136**)
+- Automatic queue still needing V2 verification: **75** (Main **6** + Historical **69**)
+- Currently assigned to workers: **72** (Main **6** + Historical **66**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **25**
-- Automatic queue pending and not yet assigned: **0**
+- Automatic queue pending and not yet assigned: **3**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260928T055901Z-ba5f9ffc014d`
+- Current package: `worker-a-20260928T143652Z-ba5f9ffc014d`
 - Assigned unresolved records: **36**
   1. `historical:id:6943a4a7489e9044` — Is Innovation Conducive to Economic Growth? The Case of Central and Eastern European Countries
   2. `historical:id:85a44c7e3f47061c` — EARTO Position Paper on EU Partnerships in FP10: How to boost Future EU Public-Private Partnerships? | EARTO
@@ -29,8 +29,8 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260928T055931Z-ed24f1889e25`
-- Assigned unresolved records: **21**
+- Current package: `worker-b-20260928T143720Z-2429a6423a48`
+- Assigned unresolved records: **36**
   1. `historical:id:4d9a17c6df3843d4` — Czechia 2024 Digital Decade Country Report | Shaping Europe’s digital future
   2. `historical:id:74a0c404d3daf38a` — After China
   3. `historical:id:8029f67b0507be47` — COST Meets Researchers in the Near Neighbour Countries - COST
@@ -39,12 +39,11 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:f782b4bcd5a240a2` — COST stays a unique career booster for new generations of researchers - COST
   7. `historical:id:7ba17b892de57b32` — Contesting Concentrated Scientific Power: The Case of the European Commission’s Chief Scientific Adviser
   8. `historical:id:4cabd13c809a74e3` — Digital solutions for homes, energy and mobility
-  - … plus 13 more in the package manifest
+  - … plus 28 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20260928T051735Z-7cc7e929318d`
-- Assigned unresolved records: **1**
-  1. `historical:id:d3e269b3737c0dfb` — Analyzing Iran’s science and technology foresight programs: recommendations for further practices
+- Assigned unresolved records: **0**
 
 ## Hands-on verification needed
 
