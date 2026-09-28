@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-28T14:31:17Z",
+  "generated_at": "2026-09-28T15:07:50Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -200472,8 +200472,1522 @@
       "deep_scan_package_id": "20260928T051735Z-7cc7e929318d",
       "claims": [],
       "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:8fe81b8bda04c7ca": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "8346aa37",
+      "identity_hash": "0ab13376f39118b8",
+      "reader_title": "An AI capability club for middle powers",
+      "reader_what": "ECFR argues the EU should pool AI development and infrastructure efforts with other middle powers.",
+      "reader_why": "Joint R&D and infrastructure could reduce dependence on US- and China-dominated AI capacity.",
+      "reader_more": "The article says the US and China dominate global AI supercomputing and frontier-model output. It proposes an EU-led middle-power club focused on joint AI development, compute infrastructure and related capabilities. The proposal is strategic advocacy rather than evidence of implementation.",
+      "deep_analysis": {
+        "work_kind": "policy commentary",
+        "research_question": "How can the EU and other AI middle powers build greater independent capability?",
+        "main_finding": "The EU should organize a middle-power AI club to pool R&D and infrastructure costs and develop alternative capability.",
+        "method_or_basis": "Policy analysis using comparative capability indicators and examples of AI infrastructure and model development.",
+        "qualification": "The proposal is an ECFR policy argument, not evidence that the proposed club has been created or that collaboration would deliver the projected gains.",
+        "radar_relevance": "Directly concerns Europe’s strategic AI R&D, compute and technological capability position.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the ECFR reader-facing article at the supplied URL; title, author, date and full commentary text matched the job."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is assigned to this ECFR commentary."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title web search returned the same ECFR article dated 11 February 2026."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://ecfr.eu/article/capability-club-how-the-eu-can-lead-the-fight-for-ai-middle-powers/",
+            "title": "Capability club: How the EU can lead the fight for AI middle powers",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and substantive text were verified on ECFR. The article directly analyses Europe’s AI compute, model-development and R&D position relative to the US and China and proposes joint capability-building with other middle powers."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Direct, source-grounded analysis of European AI capability, compute infrastructure and collaborative R&D strategy satisfies Strand A Route 1/2."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence duplicate match in the supplied candidates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-28T15:07:46Z",
+      "deep_scan_package_id": "20260928T145745Z-a37e7f3e3fcd",
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Council on Foreign Relations",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-02-11",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "The proposal is an ECFR policy argument, not evidence that the proposed club has been created or that collaboration would deliver the projected gains.",
+          "text": "ECFR advocates an EU-led club of AI middle powers to expand joint research and development and infrastructure collaboration.",
+          "confidence": "high",
+          "record_key": "historical:id:8fe81b8bda04c7ca",
+          "merit": 71,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:0ab13376f39118b8:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:82b9e8d3a848def8": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "1af60bac",
+      "identity_hash": "bb93bd5f8b7edb65",
+      "reader_title": "Why Europe needs an AI foreign policy",
+      "reader_what": "Europe has limited frontier AI capability but strategic leverage in chipmaking equipment and other assets.",
+      "reader_why": "Using indispensable assets could help Europe secure AI inputs and reduce exposure to external restrictions.",
+      "reader_more": "The article contrasts EU AI capacity with US leadership, including compute, frontier models and chip dependencies. It identifies ASML-linked lithography capability as a source of leverage and proposes using foreign policy to secure compute, models and other inputs. These are recommendations, not observed outcomes.",
+      "deep_analysis": {
+        "work_kind": "policy commentary",
+        "research_question": "How could EU foreign policy strengthen Europe’s weak position in frontier AI?",
+        "main_finding": "Europe’s AI weakness and external dependencies could be partly offset by using strategically indispensable assets as leverage.",
+        "method_or_basis": "Policy analysis drawing on reported compute, company, chip and lithography capacity indicators.",
+        "qualification": "The piece is policy advocacy and uses reported capacity and dependency indicators; it does not demonstrate that the recommended foreign-policy leverage has been implemented or effective.",
+        "radar_relevance": "Directly concerns European AI capability, dependency, compute and strategic technology position.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the matching ECFR article and verified Giorgos Verdi, 3 September 2025, and the full text."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is assigned to the ECFR commentary."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search returned the same ECFR publication."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://ecfr.eu/article/why-the-eu-needs-an-ai-foreign-policy/",
+            "title": "Why the EU needs an AI foreign policy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The ECFR page verifies the work and provides substantive discussion of EU compute share, frontier-model weakness, dependence on US chips, and lithography leverage."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The work directly analyses European AI capability and technology dependencies and their geopolitical implications."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence duplicate match in the supplied candidates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-28T15:07:46Z",
+      "deep_scan_package_id": "20260928T145745Z-a37e7f3e3fcd",
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Council on Foreign Relations",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2025-09-03",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "The piece is policy advocacy and uses reported capacity and dependency indicators; it does not demonstrate that the recommended foreign-policy leverage has been implemented or effective.",
+          "text": "ECFR advocates an EU AI foreign policy that uses strategic technology assets to strengthen European AI sovereignty.",
+          "confidence": "high",
+          "record_key": "historical:id:82b9e8d3a848def8",
+          "merit": 71,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:bb93bd5f8b7edb65:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:1a4494ad2d74cb7f": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "c5cee4a8",
+      "identity_hash": "5672384d289bbce7",
+      "reader_title": "A more strategic European semiconductor policy",
+      "reader_what": "ECFR argues Europe should target chip investment and cross-border projects around areas of strategic indispensability.",
+      "reader_why": "Focused investment could strengthen Europe’s position in semiconductor supply chains amid US-China competition.",
+      "reader_more": "The commentary links the planned Chips Act 2.0 debate to fragmented European capital markets and the need for targeted semiconductor support. It urges Europe to identify and reinforce segments where it is difficult to replace. The analysis is strategic and prospective rather than an evaluation of policy effects.",
+      "deep_analysis": {
+        "work_kind": "policy commentary",
+        "research_question": "How should Europe adapt semiconductor industrial policy to sharper US-China technology competition?",
+        "main_finding": "Targeted support and cross-border investment should reinforce strategically indispensable European semiconductor capabilities.",
+        "method_or_basis": "Policy analysis of EU financing arrangements, industrial position and Japanese semiconductor-policy comparison.",
+        "qualification": "The article recommends policy choices; expected investment and strategic-indispensability benefits are prospective rather than demonstrated outcomes.",
+        "radar_relevance": "Directly addresses European semiconductor R&I/industrial capability and strategic dependence.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the ECFR article; title, Chiara Malaponti byline, 30 April 2025 date and substantive text matched."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is assigned to this commentary."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search returned the matching ECFR page."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://ecfr.eu/article/chips-on-the-menu-how-the-eu-can-get-its-act-together-on-semiconductors/",
+            "title": "Chips on the menu: How the EU can get its act together on semiconductors",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified on ECFR. The article connects EU semiconductor financing, cross-border investment and supply-chain position to US-China technology competition."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Substantive analysis of European semiconductor capacity, financing and strategic technology position meets Strand A Route 1/2."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence duplicate match in the supplied candidates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-28T15:07:46Z",
+      "deep_scan_package_id": "20260928T145745Z-a37e7f3e3fcd",
+      "claims": [
+        {
+          "object": "chips.international_cooperation",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Council on Foreign Relations",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2025-04-30",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "The article recommends policy choices; expected investment and strategic-indispensability benefits are prospective rather than demonstrated outcomes.",
+          "text": "ECFR advocates stronger cross-border European semiconductor investment and cooperation around strategically indispensable capabilities.",
+          "confidence": "high",
+          "record_key": "historical:id:1a4494ad2d74cb7f",
+          "merit": 71,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:5672384d289bbce7:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:85d89a6fefd4c8eb": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "fbce367a",
+      "identity_hash": "c804dd1a3da5a21c",
+      "deep_analysis": {
+        "work_kind": "policy alert",
+        "research_question": "",
+        "main_finding": "The author argues that common AI rules can support innovation and that the EU should lead on governance.",
+        "method_or_basis": "Brief normative policy argument tied to the Paris AI Summit.",
+        "qualification": "This one-minute policy alert is primarily normative advocacy and does not provide a sufficiently substantive evidence product on European R&I capability or system performance.",
+        "radar_relevance": "Fails Strand A because relevance alone is insufficient without a substantive R&I evidence product.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the ECFR policy alert; Herman Quarles van Ufford, 17 February 2025, and the complete short text matched."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is assigned."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search confirmed the same ECFR policy alert."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://ecfr.eu/article/regulate-or-stagnate-why-the-eu-must-lead-on-ai/",
+            "title": "Regulate or stagnate: Why the EU must lead on AI",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The work is genuine and source-valid, but it is a very short policy alert arguing for common AI regulation, with little empirical or analytical depth on R&I-system mechanisms."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INSUFFICIENT_SUBSTANTIVE_RI_EVIDENCE",
+        "reason": "AI governance is relevant, but this short advocacy piece does not meet the strand’s substantive-evidence guard for European R&I work."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence duplicate match in the supplied candidates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-28T15:07:46Z",
+      "deep_scan_package_id": "20260928T145745Z-a37e7f3e3fcd",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:4404e7958d22a7c8": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "dbaec978",
+      "identity_hash": "3072180437a750a6",
+      "reader_title": "Austria’s digital capability strengths and gaps",
+      "reader_what": "Austria shows strong AI adoption and selected technology strengths, but cloud uptake, connectivity and ICT talent remain constraints.",
+      "reader_why": "Infrastructure and specialist shortages can limit the conversion of digital strengths into broader technological capability.",
+      "reader_more": "The Commission’s 2026 country report assesses Austria against Digital Decade targets. It reports strong SME digitalisation and AI adoption, leadership in areas including quantum technologies, but gaps in cloud/data analytics, connectivity and ICT specialists. It also details the scale and timing of national digital measures.",
+      "deep_analysis": {
+        "work_kind": "official monitoring report",
+        "research_question": "How is Austria progressing toward the EU Digital Decade objectives?",
+        "main_finding": "Austria combines strong AI adoption and some advanced-technology strengths with infrastructure and ICT-workforce gaps.",
+        "method_or_basis": "Commission country monitoring using Digital Decade indicators, national roadmap measures and Eurobarometer evidence.",
+        "qualification": "The report is a country-level monitoring product: several indicators describe digital transformation rather than R&I narrowly, and quantum performance is not available as a member-state KPI.",
+        "radar_relevance": "Provides member-state evidence on technological capability, adoption, infrastructure and talent within an EU policy framework.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the European Commission Austria 2026 Digital Decade country page; it contains country findings, funding figures and report downloads."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is assigned to this Commission country report."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search returned the official Commission fact page, last updated 28 August 2026."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_report_page",
+            "url": "https://digital-strategy.ec.europa.eu/en/factpages/austrias-2026-digital-decade-country-report",
+            "title": "Austria's 2026 Digital Decade Country Report",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The official Commission page verifies the 2026 report and reports Austria’s AI adoption, digital infrastructure, ICT talent constraints and technology strengths alongside national funding."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The official monitoring report provides evidence on consequential member-state technology capability, adoption, infrastructure and talent variables."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence duplicate match in the supplied candidates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-28T15:07:47Z",
+      "deep_scan_package_id": "20260928T145745Z-a37e7f3e3fcd",
+      "claims": [
+        {
+          "object": "ai.adoption",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "operating",
+          "status_date": "2026-08-28",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "AT"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "The report is a country-level monitoring product: several indicators describe digital transformation rather than R&I narrowly, and quantum performance is not available as a member-state KPI.",
+          "text": "The 2026 Digital Decade report finds strong growth in business AI adoption in Austria.",
+          "confidence": "high",
+          "record_key": "historical:id:4404e7958d22a7c8",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:3072180437a750a6:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:ba8f7f2b6b256e5a": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "450f70f3",
+      "identity_hash": "4f28f9f63f48b506",
+      "reader_title": "The EU’s Apply AI Strategy",
+      "reader_what": "The EU adopted a strategy to accelerate AI uptake across strategic sectors while strengthening European technological sovereignty.",
+      "reader_why": "Linking infrastructure, data and sectoral deployment is intended to shorten the path from AI research to market use.",
+      "reader_more": "The Commission’s Apply AI Strategy sets an “AI first” approach and targeted measures across ten sectors plus the public sector. It is explicitly tied to competitiveness, innovation and technological sovereignty. The document establishes policy direction and instruments, not evidence of achieved effects.",
+      "deep_analysis": {
+        "work_kind": "official policy strategy",
+        "research_question": "How will the EU accelerate AI adoption from research and infrastructure into strategic sectors?",
+        "main_finding": "The strategy organizes EU measures to increase AI adoption and connect infrastructure, data, innovation and deployment.",
+        "method_or_basis": "Official European Commission strategy and annexes, supported by the Commission Communication record.",
+        "qualification": "The strategy describes adopted policy intentions and planned instruments; it does not itself establish that adoption, competitiveness or sovereignty outcomes have occurred.",
+        "radar_relevance": "Directly concerns EU AI innovation policy, deployment capability and technological sovereignty.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied Commission fact page matched the Apply AI Strategy but was a summary rather than the full policy document."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is assigned."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the official Apply AI policy page and Commission Communication library entry."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Search using Apply AI Strategy + European Commission + 2025 confirmed the Commission Communication publication date of 8 October 2025."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "European Commission library page links the strategy and annexes in EUR-Lex and describes the adopted strategy."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_policy_page",
+            "url": "https://digital-strategy.ec.europa.eu/en/policies/apply-ai",
+            "title": "Apply AI Strategy",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_communication_page",
+            "url": "https://digital-strategy.ec.europa.eu/en/library/commission-communication-apply-ai-strategy",
+            "title": "Commission Communication Apply AI Strategy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity was confirmed through the Commission’s fact page, policy page and Communication record. The strategy is an official EU action aimed at sectoral AI adoption and technological sovereignty."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "An adopted EU-wide AI strategy directly governing innovation uptake, infrastructure/data linkages and technological sovereignty is substantive European R&I policy."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence duplicate match in the supplied candidates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-28T15:07:48Z",
+      "deep_scan_package_id": "20260928T145745Z-a37e7f3e3fcd",
+      "claims": [
+        {
+          "object": "ai.adoption",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "adopts",
+          "direction": "expands",
+          "status": "adopted",
+          "status_date": "2025-10-08",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The strategy describes adopted policy intentions and planned instruments; it does not itself establish that adoption, competitiveness or sovereignty outcomes have occurred.",
+          "text": "The European Commission adopted the Apply AI Strategy to expand AI uptake across strategic sectors and the public sector.",
+          "confidence": "high",
+          "record_key": "historical:id:ba8f7f2b6b256e5a",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:4f28f9f63f48b506:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:06569106de5a5002": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "93a426cd",
+      "identity_hash": "c051b0dfb1dcd363",
+      "deep_analysis": {
+        "work_kind": "book chapter",
+        "research_question": "What is the role of foresight in STI policy, especially for emerging economies?",
+        "main_finding": "Foresight can support STI priority-setting and policy development in emerging economies.",
+        "method_or_basis": "Conceptual review and discussion of foresight uses in STI policy.",
+        "qualification": "The chapter discusses foresight practice for emerging economies but is not European in scope, and the recovered text does not establish a new or materially improved general method that would justify reassignment to Strand B.",
+        "radar_relevance": "Fails Strand A for lack of substantive European relevance; evidence is insufficient for a distinct Strand B method contribution.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The Springer chapter page matched the supplied DOI and title and identified Alexander Sokolov as author."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1007/978-3-031-69557-5_3 resolved to the Springer chapter in 21st Century Foresight."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search returned matching Springer/ResearchGate bibliographic records."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_chapter_page",
+            "url": "https://link.springer.com/chapter/10.1007/978-3-031-69557-5_3",
+            "title": "Foresight for Science, Technology and Innovation Policy: Relevance and Uses for Emerging Economies",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The chapter identity is verified. Its subject is foresight for STI policy in emerging economies, not substantive European R&I, and it mainly explains relevance and uses rather than introducing a clearly novel reusable method."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NO_SUBSTANTIVE_EU_SCOPE",
+        "reason": "The work lacks substantive European scope and therefore cannot qualify for Strand A."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence duplicate match in the supplied candidates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-28T15:07:48Z",
+      "deep_scan_package_id": "20260928T145745Z-a37e7f3e3fcd",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:463d18ca19d5ee37": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "08db4ff0",
+      "identity_hash": "6332cf2c63e16719",
+      "deep_analysis": {
+        "work_kind": "policy commentary",
+        "research_question": "",
+        "main_finding": "ChatGPT may affect technology competition, cybersecurity and geopolitics, but the authors stress that its effects were unknowable at the time.",
+        "method_or_basis": "Exploratory commentary combining prompted model responses with author discussion.",
+        "qualification": "The authors explicitly describe the geopolitical effects as uncertain and speculative; the piece is an exploratory commentary rather than substantive evidence about European R&I state or trajectory.",
+        "radar_relevance": "Fails Strand A because Europe is not the substantive object of an evidence-led R&I analysis.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the ECFR commentary and verified Víctor Muñoz and José Ignacio Torreblanca, 15 February 2023."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is assigned."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search returned the same ECFR article and author profile references."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://ecfr.eu/article/insights-from-an-ai-author-the-geopolitical-consequences-of-chatgpt/",
+            "title": "Insights from an AI author: The geopolitical consequences of ChatGPT",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The article is authentic but intentionally exploratory, including edited ChatGPT answers and speculative discussion of possible geopolitical effects."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INSUFFICIENT_SUBSTANTIVE_RI_EVIDENCE",
+        "reason": "The work mentions EU dilemmas but does not provide substantive evidence about European R&I capability, performance or system mechanisms."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence duplicate match in the supplied candidates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-28T15:07:48Z",
+      "deep_scan_package_id": "20260928T145745Z-a37e7f3e3fcd",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:ca635210de3eddc1": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "ed9aaa63",
+      "identity_hash": "287aa9b10a052544",
+      "deep_analysis": {
+        "work_kind": "official report collection",
+        "research_question": "What future developments should Horizon Europe mission areas consider?",
+        "main_finding": "Five foresight projects provided future-oriented inputs for mission areas in climate, health, oceans, cities and soil/food.",
+        "method_or_basis": "Applied foresight reports produced for Horizon Europe mission areas.",
+        "qualification": "The page is a collection of mission-area foresight outputs. Those outputs support Horizon Europe mission thinking, but the record does not itself constitute evidence about a European R&I-system mechanism or a new reusable foresight method.",
+        "radar_relevance": "Relevant to Horizon Europe planning but not sufficient as substantive R&I-system evidence under the strand rules.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied Commission page matched the collection but was primarily a landing page listing five mission-area reports."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is assigned to the collection."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search returned the official Commission report page."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Search with the title and DG Research and Innovation confirmed publication on 21 October 2021."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "The Commission page exposes five official report files for climate adaptation, cancer, oceans, cities and soil/food mission areas."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_collection_page",
+            "url": "https://research-and-innovation.ec.europa.eu/knowledge-publications-tools-and-data/publications/all-publications/foresight-reports-missions-horizon-europe_en",
+            "title": "Foresight reports for Missions in Horizon Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The Commission collection is verified and its underlying reports are official, but the record is a bundle of applied mission foresight rather than evidence on the R&I system or a methodological innovation."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_APPLIED_PROGRAMME_OUTPUT",
+        "reason": "Applied mission-area foresight outputs do not by themselves satisfy Strand A’s R&I-system evidence routes, and the collection is not a Strand B method contribution."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence duplicate match in the supplied candidates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-28T15:07:48Z",
+      "deep_scan_package_id": "20260928T145745Z-a37e7f3e3fcd",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:2f38c70ba8055f08": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "029b423c",
+      "identity_hash": "fdcf05022e205867",
+      "reader_title": "Europe’s fragmented push to build AI capability",
+      "reader_what": "European governments expanded AI strategies and funding, while EU coordination and joint projects remained the central challenge.",
+      "reader_why": "Fragmented national approaches can limit Europe’s ability to convert investment into shared technological capability.",
+      "reader_more": "The 2020 commentary surveys national AI strategies, new funding streams and the EU’s coordinated plan. It links AI capability to technological sovereignty and discusses defence-related projects under PESCO and the European Defence Fund. Its forward-looking recommendations should be read in their 2020 context.",
+      "deep_analysis": {
+        "work_kind": "policy commentary",
+        "research_question": "What was preventing Europe from turning AI ambitions into shared capability in 2020?",
+        "main_finding": "Europe had growing AI strategies and funding, but needed stronger coordination and concrete cross-border projects.",
+        "method_or_basis": "Policy analysis drawing on member-state AI strategies, EU plans, funding initiatives and defence projects.",
+        "qualification": "The work is a policy analysis written in early 2020; its descriptions of strategies and projects are time-specific and its recommendations are not evidence that coordination later succeeded.",
+        "radar_relevance": "Directly concerns European AI R&I capability, funding and cross-border coordination.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the ECFR article and verified Ulrike Franke, 4 February 2020 and the complete commentary."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is assigned."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search returned the same ECFR commentary."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://ecfr.eu/article/commentary_out_of_the_slow_lane_how_europe_can_meet_the_challenge_of_ai/",
+            "title": "Out of the slow lane: How Europe can meet the challenge of AI",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The article provides substantive contemporaneous analysis of national AI strategies, funding, EU coordination, technological sovereignty and defence-related AI projects."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The work directly analyses Europe’s AI innovation capability, funding and coordination trajectory and its strategic implications."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence duplicate match in the supplied candidates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-28T15:07:48Z",
+      "deep_scan_package_id": "20260928T145745Z-a37e7f3e3fcd",
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Council on Foreign Relations",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2020-02-04",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "The work is a policy analysis written in early 2020; its descriptions of strategies and projects are time-specific and its recommendations are not evidence that coordination later succeeded.",
+          "text": "ECFR argued that EU member states needed to turn AI cooperation and technological-sovereignty commitments into concrete joint projects.",
+          "confidence": "high",
+          "record_key": "historical:id:2f38c70ba8055f08",
+          "merit": 71,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:fdcf05022e205867:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:50eb0541b74f3ff7": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "e0729565",
+      "identity_hash": "56de802f5a3a2596",
+      "reader_title": "How the Commission models R&I policy impacts",
+      "reader_what": "The report compares Commission macroeconomic models used to assess R&D and innovation policies and illustrates Horizon Europe simulations.",
+      "reader_why": "Model choice and assumptions shape how expected R&I policy effects are quantified for policy appraisal.",
+      "reader_more": "The paper reviews the main macroeconomic modelling platforms used by the European Commission for R&D and innovation policy impact assessment. It discusses strengths and limitations and includes model-based simulations related to Horizon Europe. This is analysis of the R&I policy system itself, not a claim that simulated effects were observed.",
+      "deep_analysis": {
+        "work_kind": "policy methods report",
+        "research_question": "How does the European Commission model the macroeconomic effects of R&D and innovation policy?",
+        "main_finding": "Different modelling platforms provide complementary ways to assess R&I policy, each with distinct strengths and limitations.",
+        "method_or_basis": "Comparative description of Commission macroeconomic models plus an illustrative simulation of EU R&I policy.",
+        "qualification": "The paper explains and compares Commission modelling platforms and gives a simulation example; model results remain conditional on model structure and assumptions.",
+        "radar_relevance": "Direct Route 3 evidence on European R&I policy assessment and governance.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied Commission page matched the report but initially exposed only its description and download link."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is shown for the report; it is identified by ISBN 978-92-76-19833-8 and catalogue number KI-BD-20-013-EN-N."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search returned the official Commission report page."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Title plus DG RTD/2020 search confirmed authors Cristiana Benedetti Fasil, Roberto Martino, Julien Ravet and Miguel Sanchez-Martinez."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "The official Commission page provides the report file and publication metadata dated 24 August 2020."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_report_page",
+            "url": "https://research-and-innovation.ec.europa.eu/knowledge-publications-tools-and-data/publications/all-publications/macroeconomic-models-research-and-innovation-policy-present-and-future_en",
+            "title": "Macroeconomic Models for Research and Innovation Policy: The Present and the Future",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The Commission report is verified and is directly about modelling platforms used to assess EU R&D and innovation policies, including Horizon Europe simulations."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A completed evidence-led report whose substantive object is EU R&I policy assessment qualifies under Strand A Route 3."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence duplicate match in the supplied candidates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-28T15:07:48Z",
+      "deep_scan_package_id": "20260928T145745Z-a37e7f3e3fcd",
+      "claims": [
+        {
+          "object": "research.assessment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "evaluates",
+          "direction": "unchanged",
+          "status": "operating",
+          "status_date": "2020-08-24",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The paper explains and compares Commission modelling platforms and gives a simulation example; model results remain conditional on model structure and assumptions.",
+          "text": "The European Commission uses multiple macroeconomic modelling platforms to assess R&D and innovation policies, including Horizon Europe.",
+          "confidence": "high",
+          "record_key": "historical:id:50eb0541b74f3ff7",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:56de802f5a3a2596:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:ab4319b96021fb55": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "37883bc7",
+      "identity_hash": "8addeec59f2c97df",
+      "deep_analysis": {
+        "work_kind": "official technical article",
+        "research_question": "How can AI improve air-traffic management operations?",
+        "main_finding": "EUROCONTROL reports AI applications for trajectory prediction, conflict detection, data analysis and operational efficiency.",
+        "method_or_basis": "Operational examples, agency trials and expert statements; the article reports 20–30% gains in some prediction/efficiency trials.",
+        "qualification": "The evidence concerns operational application of AI in air-traffic management; Strand A explicitly excludes ordinary local/service applications unless they measure a recognised European R&I-system mechanism.",
+        "radar_relevance": "Technologically substantive but outside Strand A’s system-level European R&I scope.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the EUROCONTROL article dated 29 November 2019; the page contains detailed examples of AI trials and data use in air-traffic management."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is assigned to the web article."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search also recovered the matching article in EUROCONTROL Skyway Magazine 71."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_text",
+            "url": "https://www.eurocontrol.int/article/why-artificial-intelligence-highly-relevant-air-traffic-control",
+            "title": "Why artificial intelligence is highly relevant to air traffic control",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_magazine_pdf",
+            "url": "https://www.eurocontrol.int/sites/default/files/2019-11/skyway-magazine-autumn-winter-2019.pdf",
+            "title": "Skyway Magazine 71",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The source is strong and reports concrete EUROCONTROL AI trials, but the object is operational air-traffic-control application rather than the European R&I system."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_LOCAL_OR_SERVICE_APPLICATION",
+        "reason": "The work is an applied sectoral AI deployment case, which Strand A excludes absent a broader European R&I-system mechanism."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence duplicate match in the supplied candidates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-28T15:07:48Z",
+      "deep_scan_package_id": "20260928T145745Z-a37e7f3e3fcd",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:d75114be984cd036": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "a7959620",
+      "identity_hash": "3cf75bd45f1b2ceb",
+      "deep_analysis": {
+        "work_kind": "conference summary",
+        "research_question": "",
+        "main_finding": "Central European governments need reforms that improve conditions and reduce long-term loss of people through intra-EU mobility.",
+        "method_or_basis": "Summary of an expert conference rather than a dedicated empirical R&I study.",
+        "qualification": "The CEPS item is a summary of an expert conference about general intra-EU mobility and economic reform; it does not isolate research, innovation or technical workforce mechanisms.",
+        "radar_relevance": "Fails Strand A because the talent issue is not specifically tied to the R&I system.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the CEPS page dated 7 December 2018; it identifies the item as a summary of a 6 November 2018 expert conference."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is assigned."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search returned the same CEPS conference-summary page and Cinzia Alcidi author profile listing."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.ceps.eu/smart-strategies-to-increase-prosperity-and-limit-brain-drain-in-central-europe/",
+            "title": "Smart strategies to increase prosperity and limit brain drain in Central Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The work is verified but focuses on general migration, prosperity and reform in newer EU member states rather than an R&I-specific talent system."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_RI_ONLY_INCIDENTAL",
+        "reason": "Brain drain is discussed broadly; the source does not substantively analyse research careers, R&I workforce or another recognised European R&I mechanism."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence duplicate match in the supplied candidates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-28T15:07:48Z",
+      "deep_scan_package_id": "20260928T145745Z-a37e7f3e3fcd",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:1015eb824972bee4": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "32277d4f",
+      "identity_hash": "e4e61d78d48d515b",
+      "deep_analysis": {
+        "work_kind": "policy commentary",
+        "research_question": "What strengths and weaknesses shaped China’s AI push in 2018?",
+        "main_finding": "China’s AI ambitions were strong, but leaders acknowledged gaps in talent, advanced research and core technologies.",
+        "method_or_basis": "Analysis of Chinese policy statements, plans and expert debate.",
+        "qualification": "The article is focused on China’s domestic AI policy and capabilities; Europe is not a substantive study object or R&I comparator.",
+        "radar_relevance": "Fails Strand A on European scope.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the ECFR commentary by Elsa B. Kania dated 6 November 2018; the full China-focused text matched."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is assigned."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search returned the same ECFR article."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://ecfr.eu/article/commentary_chinas_embrace_of_ai_enthusiasm_and_challenges/",
+            "title": "China’s embrace of AI: Enthusiasm and challenges",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The work is authentic and substantive on China, but it does not have the required substantive European R&I scope."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NO_SUBSTANTIVE_EU_SCOPE",
+        "reason": "A China-focused AI capability analysis cannot qualify for Strand A merely because it may be strategically relevant to Europe."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence duplicate match in the supplied candidates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-28T15:07:48Z",
+      "deep_scan_package_id": "20260928T145745Z-a37e7f3e3fcd",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:03954df66bb60f36": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "ddd0cccd",
+      "identity_hash": "ac4b72486aef70aa",
+      "deep_analysis": {
+        "work_kind": "policy commentary",
+        "research_question": "How can Europe use regulatory power to protect values and shape global data flows?",
+        "main_finding": "The author argues Europe can use GDPR and related rules to exert global influence over data governance.",
+        "method_or_basis": "Policy analysis of GDPR, the EU-US Privacy Shield and transatlantic data relations.",
+        "qualification": "The article is substantive digital-governance analysis, but its central mechanism is privacy and cross-border data regulation rather than research, innovation or a recognised R&I-system variable.",
+        "radar_relevance": "Strategically relevant digital policy, but outside the required central R&I subject.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the ECFR commentary and verified Jonathan Hackenbroich, 17 October 2018, with full text."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is assigned."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search/opening the canonical URL confirmed the same publication."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://ecfr.eu/article/commentary_reality_bytes_europes_bid_for_digital_sovereignty/",
+            "title": "Reality bytes: Europe’s bid for digital sovereignty",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The article analyses GDPR, the EU-US Privacy Shield and Europe’s regulatory influence over global data flows. Its substantive object is digital governance and privacy, not R&I capability or system performance."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_RI_ONLY_INCIDENTAL",
+        "reason": "Digital sovereignty alone is not enough for Strand A where the central analysis is privacy/data regulation rather than R&I."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence duplicate match in the supplied candidates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-28T15:07:48Z",
+      "deep_scan_package_id": "20260928T145745Z-a37e7f3e3fcd",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:0a93c20cfa6434fa": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "cba1fe1d",
+      "identity_hash": "edf43efc784b7871",
+      "deep_analysis": {
+        "work_kind": "EU project results pack",
+        "research_question": "How are EU-funded projects contributing to Food 2030 priorities?",
+        "main_finding": "The pack showcases 13 FP7/Horizon 2020 projects addressing food-system transformation priorities.",
+        "method_or_basis": "Curated summaries of funded research projects rather than a system-level evaluation.",
+        "qualification": "This is a results-pack overview showcasing funded projects. Strand A excludes programme/promotional pages and ordinary sector applications unless the work itself is a substantive R&I-system evidence product.",
+        "radar_relevance": "The work documents funded R&I activity but does not itself analyse a recognised R&I-system mechanism.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied Commission page matched the Food 2030 Results Pack but was an overview/landing page."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is assigned to the collection; the page lists ISBN 978-92-78-41775-8."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search returned the official Commission publication page."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Title plus DG Research and Innovation confirmed publication on 13 June 2018."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "The Commission publication page provides the official Results Pack file and description of the 13 EU-funded projects."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_report_page",
+            "url": "https://research-and-innovation.ec.europa.eu/knowledge-publications-tools-and-data/publications/all-publications/food-2030-innovative-eu-research-ensures-food-system-future-ready_en",
+            "title": "Food 2030: Innovative EU research ensures food system is future-ready",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The collection is official and verifiable, but it is a project-results showcase around food-system applications rather than an evidence-led analysis of a European R&I-system mechanism."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_PROGRAMME_PROMOTIONAL_OR_APPLIED",
+        "reason": "A portfolio Results Pack of sectoral projects does not meet Strand A’s substantive R&I-system evidence requirement."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence duplicate match in the supplied candidates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-28T15:07:48Z",
+      "deep_scan_package_id": "20260928T145745Z-a37e7f3e3fcd",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:7b7b7fd37e85cbdc": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "446b1c2c",
+      "identity_hash": "0bfec160422601dc",
+      "reader_title": "An ecosystem method for education foresight",
+      "reader_what": "The paper proposes an ecosystem-based methodology for foresight that maps actors, interactions, indicators and coevolving trajectories.",
+      "reader_why": "The framework can structure future-oriented analysis where outcomes depend on interacting actors, resources and institutional change.",
+      "reader_more": "The article conceptualises education as an open, dynamic ecosystem and links that model to foresight practice. It proposes using the ecosystem approach in source selection, interpretation of prospective indicators and definition of foresight subjects. The method is presented for education and SDG-related co-design, so transfer beyond that domain should be tested.",
+      "deep_analysis": {
+        "work_kind": "methodological article",
+        "research_question": "How can an ecosystem concept be operationalised for education foresight and co-design?",
+        "main_finding": "An ecosystem framing can structure foresight around interacting actors, coevolving trajectories and shared development priorities.",
+        "method_or_basis": "Conceptual synthesis of ecosystem and helix models leading to a proposed foresight/co-design methodology.",
+        "qualification": "The method is proposed specifically for education foresight and SDG-oriented co-design; evidence for predictive validity is mainly conceptual rather than a broad comparative validation.",
+        "radar_relevance": "Provides a genuine reusable foresight-method contribution; geography is irrelevant for Strand B.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The journal page matched the article, authors, DOI and publication date and provides the full paper/PDF."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.17323/2500-2597.2023.4.93.109 resolves to Foresight and STI Governance, volume 17(4), pages 93–109."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search returned the journal article and a matching full-text ResearchGate copy."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "journal_full_text",
+            "url": "https://foresight-journal.hse.ru/article/view/19155",
+            "title": "Genesis and Predictive Ability of Ecosystem Approach in Education",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The full text explicitly says the authors propose a methodology for applying an ecosystem approach to foresight studies and co-design, including source selection, prospective indicators and foresight-subject description."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The paper proposes a transferable methodology for using an ecosystem approach in foresight and co-design, beyond merely applying an existing tool."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence duplicate match in the supplied candidates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-28T15:07:49Z",
+      "deep_scan_package_id": "20260928T145745Z-a37e7f3e3fcd",
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Koroleva, Khavenson and Tomasova",
+            "class": "university_group"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2023-12-25",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The method is proposed specifically for education foresight and SDG-oriented co-design; evidence for predictive validity is mainly conceptual rather than a broad comparative validation.",
+          "text": "The authors propose an ecosystem-based foresight methodology that integrates actor interactions, prospective indicators and coevolving trajectories.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "historical:id:7b7b7fd37e85cbdc",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:0bfec160422601dc:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:404b6a5559e0bec2": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "6c1a86f3",
+      "identity_hash": "e3d1512b5caa0231",
+      "reader_title": "Assessing inclusion in participatory foresight",
+      "reader_what": "A comparative framework shows where gender and social inclusion break down across scenario-guided foresight processes.",
+      "reader_why": "Early participant design, facilitation and parallel engagement can improve whose knowledge enters foresight and planning.",
+      "reader_more": "The study adapts an inclusion framework and applies it to 15 scenario-guided processes across several regions using interviews and document review. It identifies recurring constraints such as limited time, resources and power imbalances, and practical leverage points including participant-list review, probing, visual prompts and parallel processes. The framework is adapted rather than wholly novel.",
+      "deep_analysis": {
+        "work_kind": "methodological empirical study",
+        "research_question": "How can gender and social inclusion be assessed and improved in participatory scenario-guided foresight?",
+        "main_finding": "A structured inclusion framework reveals recurring participation failures and practical leverage points across foresight cases.",
+        "method_or_basis": "Adapted analytical framework applied to 15 cases, informed by key-informant interviews and review of reports and outputs.",
+        "qualification": "The framework is adapted from existing participation/GESI literature and evaluated on 15 cases; it is a reusable assessment design, not a wholly new foresight technique.",
+        "radar_relevance": "Provides a transferable evaluation design for participatory foresight, satisfying Strand B.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The DOI resolves to the Climate Policy article; the publisher page confirms title, authors and online publication on 17 November 2023."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "The package includes an OpenAlex-authenticated cached full-text PDF matching DOI 10.1080/14693062.2023.2268042; the PDF was used as substantive evidence."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1080/14693062.2023.2268042 matched the Climate Policy article."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered matching publisher, ILRI and ICRISAT repository records."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "ICRISAT and ILRI repository records provide an open-access matching copy/abstract and citation."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.tandfonline.com/doi/full/10.1080/14693062.2023.2268042",
+            "title": "Enabling gender and social inclusion in climate and agriculture policy and planning through foresight processes: assessing challenges and leverage points",
+            "evidence_used": true
+          },
+          {
+            "kind": "institutional_repository",
+            "url": "https://oar.icrisat.org/12523/",
+            "title": "ICRISAT repository copy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and full text were verified via DOI plus the package’s authenticated PDF/repository route. The authors adapt a participation/GESI framework and use it comparatively across 15 scenario-guided foresight cases to identify recurring process leverage points."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The study contributes a reusable evaluation framework and practical design levers for assessing and improving inclusion in participatory foresight processes."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No high-confidence duplicate match in the supplied candidates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-28T15:07:50Z",
+      "deep_scan_package_id": "20260928T145745Z-a37e7f3e3fcd",
+      "claims": [
+        {
+          "object": "methods.scenario",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Marty et al.",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2023-11-17",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The framework is adapted from existing participation/GESI literature and evaluated on 15 cases; it is a reusable assessment design, not a wholly new foresight technique.",
+          "text": "The authors adapt and apply a framework for evaluating gender and social inclusion across participatory scenario-guided foresight processes.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "historical:id:404b6a5559e0bec2",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:e3d1512b5caa0231:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-09-28T14:31:17Z"
+  "claims_updated_at": "2026-09-28T15:07:50Z"
 }
