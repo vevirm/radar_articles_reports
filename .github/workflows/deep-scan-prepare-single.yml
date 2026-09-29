@@ -41,6 +41,12 @@ jobs:
       - name: Install Deep Scan dependencies
         run: pip install --quiet -r requirements.txt
 
+      - name: Release any abandoned single-package reservation
+        run: |
+          python scripts/reserve_single_deep_scan_package.py \
+            --release-existing \
+            --work-state deep_scan_work_state.json
+
       - name: Prepare one FIFO Deep Scan package
         shell: bash
         env:
