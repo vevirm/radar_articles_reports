@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-09-28T15:07:50Z",
+  "updated_at": "2026-09-29T13:05:16Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -13828,6 +13828,45 @@
       ],
       "updated_at": "2026-09-28T15:07:48Z",
       "deep_scan_package_id": "20260928T145745Z-a37e7f3e3fcd"
+    },
+    "link:https://op.europa.eu/en/publication-detail/-/publication/677409ab-482a-11f1-8095-01aa75ed71a1/language-en": {
+      "fields": {
+        "authors": [
+          "Kerstin Cuhls",
+          "Lorenz Erdmann",
+          "Ralph Gutknecht",
+          "Miquel Banchs-Piqué",
+          "Alba Ciliberti"
+        ],
+        "source": "Directorate-General for Research and Innovation (European Commission)",
+        "type": "report"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "EU publication metadata identifies the expert authors and DG Research and Innovation as the corporate issuing body.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://op.europa.eu/en/publication-detail/-/publication/677409ab-482a-11f1-8095-01aa75ed71a1/language-en",
+        "https://publica-rest.fraunhofer.de/server/api/core/bitstreams/b2e5b8f2-3578-4e32-a61e-252342b53dc9/content"
+      ],
+      "updated_at": "2026-09-29T13:05:14Z",
+      "deep_scan_package_id": "20260929T121743Z-e775de6d81ad"
+    },
+    "historical:id:73c7644c63d4d176": {
+      "fields": {},
+      "unset": [
+        "date"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The programme page has no supported publication date; the stored 2026-01-01 value is not bibliographically evidenced.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.interface-eu.org/programmes/strengthening-the-digital-public-sphere-and-platform-regulation"
+      ],
+      "updated_at": "2026-09-29T13:05:16Z",
+      "deep_scan_package_id": "20260929T121743Z-e775de6d81ad"
     }
   }
 }

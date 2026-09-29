@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-09-28T15:07:50Z",
+  "generated_at": "2026-09-29T13:05:16Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -201986,8 +201986,455 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1016/j.forpol.2026.103909": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "0417c8fb",
+      "identity_hash": "16b3b802cf2da4ea",
+      "reader_title": "Bio-based innovation diffusion meets policy gaps",
+      "reader_what": "EU and Finnish bioeconomy policies only moderately match firms’ needs for scaling wood-based innovations.",
+      "reader_why": "Funding access, legitimacy and scale-up support shape whether bio-based innovations cross the market-entry gap.",
+      "reader_more": "The study compares EU and Finnish policy strategies with interviews from industry, ministries and businesses. It finds moderate alignment across technological-innovation-system functions, but highlights implementation and design gaps around scale-up. The evidence is specific to wood-based textile and packaging innovations.",
+      "deep_analysis": {
+        "work_kind": "empirical study",
+        "research_question": "How well do EU and Finnish innovation policies match the support needs of firms developing wood-based bioproducts?",
+        "main_finding": "Policy support broadly aligns with industry needs, but scale-up is constrained by funding access, legitimacy and implementation gaps.",
+        "method_or_basis": "Content analysis of EU and Finnish policy strategies plus interviews with industry, ministry and business representatives.",
+        "qualification": "The study is sector-specific and uses Finland as the national case; it does not establish economy-wide causal effects.",
+        "radar_relevance": "Direct evidence on European green-innovation policy alignment, technology scale-up and commercialization barriers.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected claimed work at https://doi.org/10.1016/j.forpol.2026.103909; package/source material matched the record identity and content type."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1016/j.forpol.2026.103909 matched the title/authorship or publisher/repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_pdf",
+            "url": "https://doi.org/10.1016/j.forpol.2026.103909",
+            "title": "Accelerating the market diffusion of bio-based innovations – Evidence from expert and business perspectives and policy strategies",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified record 1 against matching primary/publisher material; scanner interpretation was treated as provisional."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Direct evidence on European green-innovation policy alignment, technology scale-up and commercialization barriers."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-29T13:05:14Z",
+      "deep_scan_package_id": "20260929T121743Z-e775de6d81ad",
+      "claims": [
+        {
+          "object": "innovation.green_technology",
+          "secondary_objects": [
+            "research.knowledge_transfer"
+          ],
+          "actor": {
+            "name": "Myllärniemi et al.",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-09-26",
+          "scope": {
+            "level": "eu",
+            "countries": [
+              "FI"
+            ]
+          },
+          "kind": "diagnosis",
+          "text": "The study finds only moderate alignment between EU/Finnish innovation-policy support and business needs for wood-based bio-innovation diffusion.",
+          "confidence": "high",
+          "qualification": "The study is sector-specific and uses Finland as the national case; it does not establish economy-wide causal effects.",
+          "attributes": {},
+          "record_key": "link:https://doi.org/10.1016/j.forpol.2026.103909",
+          "merit": 77,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:16b3b802cf2da4ea:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://op.europa.eu/en/publication-detail/-/publication/677409ab-482a-11f1-8095-01aa75ed71a1/language-en": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "7b1b35bc",
+      "identity_hash": "3cbf27056f80e4b2",
+      "reader_title": "Five AI futures for Europe’s R&I ecosystem",
+      "reader_what": "Five AI scenarios explore Europe’s R&I risks, opportunities and policy choices through 2040.",
+      "reader_why": "Scenario differences expose where EU research and innovation policy may need to adapt under divergent AI futures.",
+      "reader_more": "This European Commission expert report develops five possible AI futures to 2040. Three scenarios are used to examine threats, opportunities, stakes and actions for the European R&I ecosystem. The exercise supports policy recommendations rather than predicting which future will occur.",
+      "deep_analysis": {
+        "work_kind": "foresight report",
+        "research_question": "What plausible AI futures to 2040 could shape Europe’s R&I ecosystem, and what policy opportunities follow?",
+        "main_finding": "Divergent AI futures imply materially different opportunities and risks for Europe’s R&I ecosystem and policy choices.",
+        "method_or_basis": "Scenario-building and foresight sense-making undertaken by an expert consortium for the European Commission.",
+        "qualification": "The scenarios are exploratory, not forecasts; they map possibilities and policy implications rather than observed future outcomes.",
+        "radar_relevance": "A completed EU foresight study directly about the European R&I system and AI policy.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected claimed work at https://op.europa.eu/en/publication-detail/-/publication/677409ab-482a-11f1-8095-01aa75ed71a1/language-en; package/source material matched the record identity and content type."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive publisher/repository evidence at https://publica-rest.fraunhofer.de/server/api/core/bitstreams/b2e5b8f2-3578-4e32-a61e-252342b53dc9/content."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_publication_page",
+            "url": "https://op.europa.eu/en/publication-detail/-/publication/677409ab-482a-11f1-8095-01aa75ed71a1/language-en",
+            "title": "The futures of artificial intelligence: Implications for Europe’s R&I ecosystem. Part 4, Scenarios and opportunities",
+            "evidence_used": true
+          },
+          {
+            "kind": "repository_full_text",
+            "url": "https://publica-rest.fraunhofer.de/server/api/core/bitstreams/b2e5b8f2-3578-4e32-a61e-252342b53dc9/content",
+            "title": "The futures of artificial intelligence. Part 4: Scenarios and opportunities",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified record 2 against matching primary/publisher material; scanner interpretation was treated as provisional."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A completed EU foresight study directly about the European R&I system and AI policy."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-29T13:05:14Z",
+      "deep_scan_package_id": "20260929T121743Z-e775de6d81ad",
+      "claims": [
+        {
+          "object": "ai.research_governance",
+          "secondary_objects": [
+            "methods.scenario"
+          ],
+          "actor": {
+            "name": "European Commission Directorate-General for Research and Innovation",
+            "class": "eu_body"
+          },
+          "mechanism": "evaluates",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-05-04",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "text": "Five AI scenarios were used to assess threats, opportunities and policy options for Europe’s research and innovation ecosystem to 2040.",
+          "confidence": "high",
+          "qualification": "The scenarios are exploratory, not forecasts; they map possibilities and policy implications rather than observed future outcomes.",
+          "attributes": {},
+          "record_key": "link:https://op.europa.eu/en/publication-detail/-/publication/677409ab-482a-11f1-8095-01aa75ed71a1/language-en",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:3cbf27056f80e4b2:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.48550/arxiv.2609.23115": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "246da7df",
+      "identity_hash": "4917174811fe0081",
+      "reader_title": "EU disruptive research under a citation lens",
+      "reader_what": "Citation-tail comparisons suggest EU disruptive research underperforms US and Chinese benchmarks in selected technologies.",
+      "reader_why": "The report links weak highly cited research tails to Europe’s capacity for disruptive technological innovation.",
+      "reader_more": "The author compares citation distributions for graphene, solar cells, lithium batteries and fuel cells, including ERC-funded work. The analysis argues that EU research is overrepresented in lower citation ranges and underrepresented in extreme upper tails. The paper is a preprint and its interpretation of citations as disruptive research should be treated cautiously.",
+      "deep_analysis": {
+        "work_kind": "bibliometric report / preprint",
+        "research_question": "Does EU research, including ERC-funded work, generate disruptive research at levels comparable with major competitors?",
+        "main_finding": "In selected technology fields, the report finds substantially weaker EU representation in the extreme upper citation tail than US benchmarks.",
+        "method_or_basis": "Bibliometric analysis of citation distributions and double-rank measures using 2016–2020 publications and later citation windows.",
+        "qualification": "This is a non-peer-reviewed preprint; citation-tail measures are a proxy for disruption and results cover selected technologies and windows.",
+        "radar_relevance": "Measures a consequential European research-performance trajectory against global technology competitors.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected claimed work at https://doi.org/10.48550/arxiv.2609.23115; package/source material matched the record identity and content type."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.48550/arxiv.2609.23115 matched the title/authorship or publisher/repository record."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching substantive publisher/repository evidence at https://arxiv.org/pdf/2609.23115."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://arxiv.org/pdf/2609.23115",
+            "title": "Improving disruptive research in the EU: why strengthening European Research Council grants alone is not enough",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified record 3 against matching primary/publisher material; scanner interpretation was treated as provisional."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Measures a consequential European research-performance trajectory against global technology competitors."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-29T13:05:15Z",
+      "deep_scan_package_id": "20260929T121743Z-e775de6d81ad",
+      "claims": [
+        {
+          "object": "research.system_capacity",
+          "secondary_objects": [
+            "innovation.system_performance"
+          ],
+          "actor": {
+            "name": "European Union research system",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "contracts",
+          "status": "delivered",
+          "status_date": "2026-09-19",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "text": "The report finds weaker EU representation than US benchmarks in the extreme upper citation tail across selected strategic technologies.",
+          "confidence": "medium",
+          "qualification": "This is a non-peer-reviewed preprint; citation-tail measures are a proxy for disruption and results cover selected technologies and windows.",
+          "attributes": {},
+          "record_key": "link:https://doi.org/10.48550/arxiv.2609.23115",
+          "merit": 60,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:4917174811fe0081:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://digital-strategy.ec.europa.eu/en/library/study-eus-strategic-digital-technologies-next-eu-research-innovation-programme": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "58b2aed3",
+      "identity_hash": "24d79b5e99239673",
+      "reader_title": "Europe’s strategic digital technology priorities beyond 2027",
+      "reader_what": "The study identifies strategic digital technologies and investment priorities for the EU’s next R&I programme.",
+      "reader_why": "It links research strength, patenting and commercialization gaps to Europe’s technological leadership and strategic autonomy.",
+      "reader_more": "The Commission study examines digital R&I needs for the 2028–2040 period. It reports that Europe retains scientific strengths but is losing ground in research excellence and patenting across many digital fields and struggles to commercialise at scale. The study is intended to inform the next EU R&I programming period.",
+      "deep_analysis": {
+        "work_kind": "policy study",
+        "research_question": "Which strategic digital technologies should EU R&I funding prioritise beyond 2027, and what ecosystem gaps matter most?",
+        "main_finding": "Europe’s central digital challenge is sustaining frontier performance and converting research into market success at scale.",
+        "method_or_basis": "Study combining technology assessment, stakeholder interviews, workshops and forward-looking investment analysis.",
+        "qualification": "The study informs future programming; its priorities and scenarios are recommendations rather than adopted funding decisions.",
+        "radar_relevance": "Direct evidence on EU digital R&I capability, commercialization, strategic autonomy and future investment priorities.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected claimed work at https://digital-strategy.ec.europa.eu/en/library/study-eus-strategic-digital-technologies-next-eu-research-innovation-programme; package/source material matched the record identity and content type."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title verification matched the claimed work to https://digital-strategy.ec.europa.eu/en/library/study-eus-strategic-digital-technologies-next-eu-research-innovation-programme."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_study_page",
+            "url": "https://digital-strategy.ec.europa.eu/en/library/study-eus-strategic-digital-technologies-next-eu-research-innovation-programme",
+            "title": "Study on the EU's strategic digital technologies for the next EU research & innovation programme",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified record 4 against matching primary/publisher material; scanner interpretation was treated as provisional."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Direct evidence on EU digital R&I capability, commercialization, strategic autonomy and future investment priorities."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-29T13:05:16Z",
+      "deep_scan_package_id": "20260929T121743Z-e775de6d81ad",
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [
+            "innovation.system_performance"
+          ],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "evaluates",
+          "direction": "contracts",
+          "status": "delivered",
+          "status_date": "2026-09-29",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "text": "The study finds Europe losing ground in research excellence and patenting across many digital fields while struggling to commercialise at scale.",
+          "confidence": "high",
+          "qualification": "The study informs future programming; its priorities and scenarios are recommendations rather than adopted funding decisions.",
+          "attributes": {},
+          "record_key": "link:https://digital-strategy.ec.europa.eu/en/library/study-eus-strategic-digital-technologies-next-eu-research-innovation-programme",
+          "merit": 99,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:24d79b5e99239673:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:73c7644c63d4d176": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "158f54d5",
+      "identity_hash": "c4a1d4987973d2df",
+      "reader_title": "Interface platform-regulation programme page",
+      "reader_what": "A programme page describes Interface Europe’s ongoing work on EU platform regulation and the digital public sphere.",
+      "reader_more": "The page identifies questions, staff, publications and events within an ongoing research programme. It is not itself a completed evidence product or a study of a European R&I-system mechanism. The underlying programme may contain qualifying publications, but this record is only the programme landing page.",
+      "deep_analysis": {
+        "work_kind": "research programme page",
+        "research_question": "",
+        "main_finding": "The record is a programme landing page rather than a substantive research output.",
+        "method_or_basis": "Programme description and navigation links.",
+        "qualification": "No completed study or evidence-led finding is contained in the claimed work itself.",
+        "radar_relevance": "Fails Strand A because programme/promotional pages are excluded and R&I is not the central evidence object.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected claimed work at https://www.interface-eu.org/programmes/strengthening-the-digital-public-sphere-and-platform-regulation; package/source material matched the record identity and content type."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title verification matched the claimed work to https://www.interface-eu.org/programmes/strengthening-the-digital-public-sphere-and-platform-regulation."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "supplied_page",
+            "url": "https://www.interface-eu.org/programmes/strengthening-the-digital-public-sphere-and-platform-regulation",
+            "title": "Strengthening the Digital Public Sphere and Platform Regulation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified record 5 against matching primary/publisher material; scanner interpretation was treated as provisional."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_SUBSTANTIVE_PROGRAMME_PAGE",
+        "reason": "Fails Strand A because programme/promotional pages are excluded and R&I is not the central evidence object."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-09-29T13:05:16Z",
+      "deep_scan_package_id": "20260929T121743Z-e775de6d81ad",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-09-28T15:07:50Z"
+  "claims_updated_at": "2026-09-29T13:05:16Z"
 }

@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2249** (Main **1095** + Historical **1154**)
-- Automatic queue still needing V2 verification: **81** (Main **9** + Historical **72**)
-- Currently assigned to workers: **81** (Main **9** + Historical **72**)
+- Authoritative V2 verified: **2254** (Main **1099** + Historical **1155**)
+- Automatic queue still needing V2 verification: **82** (Main **6** + Historical **76**)
+- Currently assigned to workers: **82** (Main **6** + Historical **76**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **25**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260929T055033Z-ba5f9ffc014d`
+- Current package: `worker-a-20260929T131113Z-ba5f9ffc014d`
 - Assigned unresolved records: **36**
   1. `historical:id:6943a4a7489e9044` — Is Innovation Conducive to Economic Growth? The Case of Central and Eastern European Countries
   2. `historical:id:85a44c7e3f47061c` — EARTO Position Paper on EU Partnerships in FP10: How to boost Future EU Public-Private Partnerships? | EARTO
@@ -29,7 +29,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260929T055102Z-ed24f1889e25`
+- Current package: `worker-b-20260929T131146Z-ed24f1889e25`
 - Assigned unresolved records: **21**
   1. `historical:id:4d9a17c6df3843d4` — Czechia 2024 Digital Decade Country Report | Shaping Europe’s digital future
   2. `historical:id:74a0c404d3daf38a` — After China
@@ -42,17 +42,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 13 more in the package manifest
 
 ### Worker SINGLE
-- Current package: `20260929T053410Z-6d16fca1779a`
-- Assigned unresolved records: **24**
-  1. `link:https://doi.org/10.1016/j.forpol.2026.103909` — Accelerating the market diffusion of bio-based innovations – Evidence from expert and business perspectives and policy strategies
-  2. `link:https://op.europa.eu/en/publication-detail/-/publication/677409ab-482a-11f1-8095-01aa75ed71a1/language-en` — The futures of artificial intelligence : implications for Europe’s R&I ecosystem. Part 4, Scenarios and opportunities
-  3. `link:https://doi.org/10.48550/arxiv.2609.23115` — Improving disruptive research in the EU: why strengthening European Research Council grants alone is not enough
-  4. `historical:id:73c7644c63d4d176` — Strengthening the Digital Public Sphere and Platform Regulation
-  5. `historical:id:1649bc6c3124c171` — Research and innovation funding for resilient democracies and good governance
-  6. `historical:id:005df4d6b2d5d49a` — KIC Robust and resilient space infrastructure for a secure Netherlands | NWO
-  7. `historical:id:15773a1a1bfd9ac7` — ERA Portal Austria – Industrial Transformation
-  8. `historical:id:c3fe28c3a44d47bd` — ERA Portal Austria – Conclusions on the future governance of the European Research Area
-  - … plus 16 more in the package manifest
+- Current package: `20260929T121743Z-e775de6d81ad`
+- Assigned unresolved records: **25**
+  1. `historical:id:1649bc6c3124c171` — Research and innovation funding for resilient democracies and good governance
+  2. `historical:id:005df4d6b2d5d49a` — KIC Robust and resilient space infrastructure for a secure Netherlands | NWO
+  3. `historical:id:15773a1a1bfd9ac7` — ERA Portal Austria – Industrial Transformation
+  4. `historical:id:c3fe28c3a44d47bd` — ERA Portal Austria – Conclusions on the future governance of the European Research Area
+  5. `historical:id:778893bb17351e70` — Digital Rights, Surveillance and Democracy
+  6. `historical:id:5477dad26dc49b35` — KIC Data sharing for the energy transition: socio-technical challenges | NWO
+  7. `historical:id:4b9d38d87a4f73b6` — The CNRS looks to the future | CNRS
+  8. `historical:id:ab946448bc101ece` — Disability and Specific Educational Needs Policy - Researchers / Students
+  - … plus 17 more in the package manifest
 
 ## Hands-on verification needed
 
