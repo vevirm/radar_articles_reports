@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2254** (Main **1099** + Historical **1155**)
-- Automatic queue still needing V2 verification: **82** (Main **6** + Historical **76**)
-- Currently assigned to workers: **82** (Main **6** + Historical **76**)
+- Authoritative V2 verified: **2289** (Main **1103** + Historical **1186**)
+- Automatic queue still needing V2 verification: **47** (Main **2** + Historical **45**)
+- Currently assigned to workers: **47** (Main **2** + Historical **45**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **25**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,20 +16,12 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260929T131345Z-ba5f9ffc014d`
-- Assigned unresolved records: **36**
-  1. `historical:id:6943a4a7489e9044` — Is Innovation Conducive to Economic Growth? The Case of Central and Eastern European Countries
-  2. `historical:id:85a44c7e3f47061c` — EARTO Position Paper on EU Partnerships in FP10: How to boost Future EU Public-Private Partnerships? | EARTO
-  3. `historical:id:01107ae3ae2642d4` — EARTO Position Paper on Accelerating AI Adoption in Healthcare | EARTO
-  4. `historical:id:69772244d4fda8ff` — Innovation, Regulation, and the EU's Digital Single Market Strategy
-  5. `historical:id:1284bb72d9316963` — Future-proofing your business: Which foresight model fits your company? | VTT
-  6. `link:https://news.google.com/rss/articles/CBMi9AFBVV95cUxOVE9xeldLYUNjS25wTkhOVnFyQzRtUUNveklCMVBhcEpOX09LOFV2X0RJZklwczluU2U4SVpHMEF2dEpjdFItX0gxYUM5WHJXOTZqeEJONGRJOE9Bc1lqdk8wbVhWdkhiTDEwTDFBeTFSczhVZUFsMXJZNElBWjJqVk81aW1FT19hRjhsR1cxRkRtNVJQTUlwaS11WjNrcWtnaTd6d3pWWGd4T2tJcTY2Wk1xY251QmE2a1lIeFEzTHJUaG1ZQXdDc2lxTmlFOFRsejVMRmFDNVR3bXotQzlSTmxSaWN0UnNrcy12NXB3SkRPZU0z?oc=5` — Mark Carney reminds Europe that its universities and research are strategic assets — recovery attempt 2/3
-  7. `historical:id:01b8d9307d8896c0` — Foresight & Futures Capabilities
-  8. `historical:id:4c175377997921f0` — Development of a novel framework for the analysis of Technological Innovation Systems by Causal Layered Analysis (CLA) in energy systems
-  - … plus 28 more in the package manifest
+- Current package: `worker-a-20260929T133419Z-07e14d03ce60`
+- Assigned unresolved records: **1**
+  1. `historical:id:4c175377997921f0` — Development of a novel framework for the analysis of Technological Innovation Systems by Causal Layered Analysis (CLA) in energy systems — recovery attempt 2/3
 
 ### Worker B
-- Current package: `worker-b-20260929T131414Z-ed24f1889e25`
+- Current package: `worker-b-20260929T133435Z-ed24f1889e25`
 - Assigned unresolved records: **21**
   1. `historical:id:4d9a17c6df3843d4` — Czechia 2024 Digital Decade Country Report | Shaping Europe’s digital future
   2. `historical:id:74a0c404d3daf38a` — After China
