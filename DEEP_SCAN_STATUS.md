@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260929T131113Z-ba5f9ffc014d`
+- Current package: `worker-a-20260929T131345Z-ba5f9ffc014d`
 - Assigned unresolved records: **36**
   1. `historical:id:6943a4a7489e9044` — Is Innovation Conducive to Economic Growth? The Case of Central and Eastern European Countries
   2. `historical:id:85a44c7e3f47061c` — EARTO Position Paper on EU Partnerships in FP10: How to boost Future EU Public-Private Partnerships? | EARTO
@@ -29,7 +29,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260929T131146Z-ed24f1889e25`
+- Current package: `worker-b-20260929T131414Z-ed24f1889e25`
 - Assigned unresolved records: **21**
   1. `historical:id:4d9a17c6df3843d4` — Czechia 2024 Digital Decade Country Report | Shaping Europe’s digital future
   2. `historical:id:74a0c404d3daf38a` — After China
