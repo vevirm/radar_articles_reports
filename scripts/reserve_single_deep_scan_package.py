@@ -21,13 +21,44 @@ except ModuleNotFoundError:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--package", type=Path, required=True)
+    ap.add_argument("--package", type=Path)
+    ap.add_argument("--release-existing", action="store_true", help="Release an unfinished SINGLE reservation before preparing its replacement")
     ap.add_argument("--work-state", type=Path, default=Path("deep_scan_work_state.json"))
     args = ap.parse_args()
 
+    state = load_state(args.work_state)
+
+    if args.release_existing:
+        lanes = state.get("lanes", {}) if isinstance(state.get("lanes"), dict) else {}
+        existing = lanes.get("SINGLE", {})
+        unresolved = [x for x in existing.get("assigned", []) if isinstance(x, str)] if isinstance(existing, dict) else []
+        old_package_id = str(existing.get("current_package_id") or "") if isinstance(existing, dict) else ""
+        if unresolved:
+            # An explicit Prepare Single invocation means the operator wants a fresh package.
+            # Release only the ephemeral SINGLE lane; persistent A/B worker reservations are untouched.
+            existing["assigned"] = []
+            existing["target_size"] = 0
+            existing["current_package_id"] = ""
+            for key in unresolved:
+                rec = state.get("records", {}).get(key)
+                if isinstance(rec, dict) and str(rec.get("lane") or "").upper() == "SINGLE" and rec.get("status") == "assigned":
+                    rec.pop("lane", None)
+                    rec["status"] = "pending"
+            if old_package_id:
+                pkg = state.get("packages", {}).get(old_package_id)
+                if isinstance(pkg, dict):
+                    pkg["status"] = "superseded"
+            save_state(state, args.work_state)
+            print(f"Released prior SINGLE reservation: {len(unresolved)} record(s) will be eligible for the replacement package.")
+        else:
+            print("No prior SINGLE reservation to release.")
+        if args.package is None:
+            return
+
+    if args.package is None:
+        raise SystemExit("--package is required unless --release-existing is used")
     if not args.package.exists():
         raise SystemExit(f"Package not found: {args.package}")
-    state = load_state(args.work_state)
     lanes = state.get("lanes", {}) if isinstance(state.get("lanes"), dict) else {}
     existing = lanes.get("SINGLE", {})
     unresolved = [x for x in existing.get("assigned", []) if isinstance(x, str)] if isinstance(existing, dict) else []
