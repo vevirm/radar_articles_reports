@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2294** (Main **1103** + Historical **1191**)
-- Automatic queue still needing V2 verification: **89** (Main **8** + Historical **81**)
-- Currently assigned to workers: **89** (Main **8** + Historical **81**)
+- Authoritative V2 verified: **2301** (Main **1103** + Historical **1198**)
+- Automatic queue still needing V2 verification: **82** (Main **8** + Historical **74**)
+- Currently assigned to workers: **82** (Main **8** + Historical **74**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **25**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20260930T060752Z-654ccf10abf1`
+- Current package: `worker-a-20260930T061601Z-654ccf10abf1`
 - Assigned unresolved records: **36**
   1. `historical:id:4c175377997921f0` — Development of a novel framework for the analysis of Technological Innovation Systems by Causal Layered Analysis (CLA) in energy systems — recovery attempt 2/3
   2. `link:https://era.gv.at/news-items/ec-allocates-additional-500-million-to-horizon-europe-and-publishes-two-monitoring-reports/` — EC allocates additional € 500 million to Horizon Europe and publishes two monitoring reports
@@ -29,17 +29,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20260930T060822Z-aacd662cfe13`
-- Assigned unresolved records: **28**
-  1. `historical:id:f782b4bcd5a240a2` — COST stays a unique career booster for new generations of researchers - COST
-  2. `historical:id:7ba17b892de57b32` — Contesting Concentrated Scientific Power: The Case of the European Commission’s Chief Scientific Adviser
-  3. `historical:id:4cabd13c809a74e3` — Digital solutions for homes, energy and mobility
-  4. `historical:id:ac292fd3fee4db45` — 35 proposals to make the European data strategy work - Sitra
-  5. `historical:id:86805dae4d6b0983` — The European Parliament in Security and Defence: The Parliamentary Contribution to the European Defence Union
-  6. `historical:id:6dbf1e1cf20fb685` — Science’s disparate responsibilities: Patterns across European countries
-  7. `historical:id:661ab27d5233e430` — European defence research in crisis? The way towards strategic autonomy
-  8. `historical:id:217bb85900a247b7` — Building dynamic capabilities to cope with environmental uncertainty: The role of strategic foresight
-  - … plus 20 more in the package manifest
+- Current package: `worker-b-20260930T061628Z-83df83d74e18`
+- Assigned unresolved records: **21**
+  1. `historical:id:217bb85900a247b7` — Building dynamic capabilities to cope with environmental uncertainty: The role of strategic foresight
+  2. `link:https://news.google.com/rss/articles/CBMiekFVX3lxTE1Pc1RnZW41ZU9YUUZqVHFjT0lTUWFKTldPaEZxVDQwMzg0OFgzR3djc0lZMlRnX2JYbmVEdHBEMTFOMWlzMDhxMFFuSmlzbmtjUW9vUmJXenljakFpNy1RQnNJTXlIZEFhRjJtUWtUNm5mT2dpQkZYYWtR?oc=5` — THE HACK: EU weighs AI labs' safety plans — recovery attempt 3/3
+  3. `historical:id:edd664f7e29f4f65` — Our Futures: By the people, for the people
+  4. `historical:id:2e253c28db67fe16` — The Extended Map methodology: Technology roadmapping for SMES clusters
+  5. `historical:id:7ed808b505d8e762` — Investigating scenario planning – a European tourism perspective
+  6. `historical:id:1a9c0296ad57a559` — Development of data-driven technology roadmap considering dependency: An ARM-based technology roadmapping
+  7. `link:https://doi.org/10.1016/j.iref.2026.105712` — Strategic coherence as a signal in innovation grants: Unpacking how technological alignment and financial flexibility shape SME funding decisions — recovery attempt 3/3
+  8. `historical:id:256f788e05840f94` — Foresight and strategic decision-making framework from artificial intelligence technology development to utilization activities in small-and-medium-sized enterprises — recovery attempt 3/3
+  - … plus 13 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20260929T121743Z-e775de6d81ad`

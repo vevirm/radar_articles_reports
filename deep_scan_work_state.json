@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-deep-scan-work-state-v1",
-  "updated_at": "2026-09-30T06:08:49Z",
+  "updated_at": "2026-09-30T06:16:52Z",
   "lanes": {
     "A": {
       "target_size": 36,
@@ -43,9 +43,8 @@
         "historical:id:6668e2308d002dcb",
         "historical:id:2d25acbe77bf339c"
       ],
-      "current_package_id": "worker-a-20260930T060752Z-654ccf10abf1",
+      "current_package_id": "worker-a-20260930T061601Z-654ccf10abf1",
       "package_history": [
-        "worker-a-20260923T120837Z-2c2436e144e4",
         "worker-a-20260923T213404Z-2c2436e144e4",
         "worker-a-20260924T095247Z-6c1fdba58312",
         "worker-a-20260924T110112Z-53a179411e7d",
@@ -84,19 +83,13 @@
         "worker-a-20260929T133419Z-07e14d03ce60",
         "worker-a-20260929T134242Z-07e14d03ce60",
         "worker-a-20260930T051656Z-654ccf10abf1",
-        "worker-a-20260930T060752Z-654ccf10abf1"
+        "worker-a-20260930T060752Z-654ccf10abf1",
+        "worker-a-20260930T061601Z-654ccf10abf1"
       ]
     },
     "B": {
       "target_size": 36,
       "assigned": [
-        "historical:id:f782b4bcd5a240a2",
-        "historical:id:7ba17b892de57b32",
-        "historical:id:4cabd13c809a74e3",
-        "historical:id:ac292fd3fee4db45",
-        "historical:id:86805dae4d6b0983",
-        "historical:id:6dbf1e1cf20fb685",
-        "historical:id:661ab27d5233e430",
         "historical:id:217bb85900a247b7",
         "link:https://news.google.com/rss/articles/CBMiekFVX3lxTE1Pc1RnZW41ZU9YUUZqVHFjT0lTUWFKTldPaEZxVDQwMzg0OFgzR3djc0lZMlRnX2JYbmVEdHBEMTFOMWlzMDhxMFFuSmlzbmtjUW9vUmJXenljakFpNy1RQnNJTXlIZEFhRjJtUWtUNm5mT2dpQkZYYWtR?oc=5",
         "historical:id:edd664f7e29f4f65",
@@ -119,9 +112,8 @@
         "link:https://dfrlab.org/2026/09/15/digital-sovereignty-and-europes-democracy-stack/",
         "link:https://defence-industry-space.ec.europa.eu/system/files/2026-07/Proposal-for-a-Council-Implementing-Decision-on-the-establishment-of-european-Projects-of-Common-Interest.pdf"
       ],
-      "current_package_id": "worker-b-20260930T060822Z-aacd662cfe13",
+      "current_package_id": "worker-b-20260930T061628Z-83df83d74e18",
       "package_history": [
-        "worker-b-20260923T120856Z-8767e590e0ea",
         "worker-b-20260923T213430Z-c315b38c9cf5",
         "worker-b-20260924T095318Z-07f1c6c12977",
         "worker-b-20260924T110136Z-07f1c6c12977",
@@ -160,7 +152,8 @@
         "worker-b-20260929T133435Z-ed24f1889e25",
         "worker-b-20260929T134305Z-541101ad7000",
         "worker-b-20260930T051722Z-bc6f6f41cbaf",
-        "worker-b-20260930T060822Z-aacd662cfe13"
+        "worker-b-20260930T060822Z-aacd662cfe13",
+        "worker-b-20260930T061628Z-83df83d74e18"
       ]
     },
     "SINGLE": {
@@ -21625,7 +21618,8 @@
       "assigned_at": "2026-09-16T07:32:53Z",
       "last_package_id": "worker-b-20260916T090917Z-bbd7a21c44ad",
       "verified_at": "2026-09-16T10:13:05Z",
-      "verified_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad"
+      "verified_package_id": "worker-b-20260916T084652Z-bbd7a21c44ad",
+      "queue_priority": "strand_a"
     },
     "historical:id:9572e3bbe5367f02": {
       "title": "Types of scenario planning and their effectiveness: A review of reviews",
@@ -47448,7 +47442,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-24T11:01:12Z",
-      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13",
+      "last_package_id": "worker-b-20260930T061628Z-83df83d74e18",
       "recovery_attempts": 2,
       "last_recovery_at": "2026-09-27T17:37:07Z",
       "last_recovery_package_id": "worker-b-20260927T154530Z-15f33790c00c",
@@ -48143,7 +48137,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-24T18:53:52Z",
-      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13",
+      "last_package_id": "worker-b-20260930T061628Z-83df83d74e18",
       "recovery_attempts": 2,
       "last_recovery_at": "2026-09-27T17:37:07Z",
       "last_recovery_package_id": "worker-b-20260927T154530Z-15f33790c00c",
@@ -48693,7 +48687,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-26T05:52:26Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1",
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1",
       "recovery_attempts": 1,
       "last_recovery_at": "2026-09-29T13:29:51Z",
       "last_recovery_package_id": "worker-a-20260929T131345Z-ba5f9ffc014d",
@@ -50348,7 +50342,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-25T06:49:50Z",
-      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13",
+      "last_package_id": "worker-b-20260930T061628Z-83df83d74e18",
       "recovery_attempts": 2,
       "last_recovery_at": "2026-09-27T17:37:07Z",
       "last_recovery_package_id": "worker-b-20260927T154530Z-15f33790c00c",
@@ -50765,7 +50759,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-26T04:18:58Z",
-      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13",
+      "last_package_id": "worker-b-20260930T061628Z-83df83d74e18",
       "recovery_attempts": 2,
       "last_recovery_at": "2026-09-27T17:37:07Z",
       "last_recovery_package_id": "worker-b-20260927T154530Z-15f33790c00c",
@@ -53004,10 +52998,12 @@
       "url": "https://www.cost.eu/cost-stays-a-unique-career-booster-for-new-generations-of-researchers/",
       "corpus_scope": "historical",
       "queue_priority": "strand_a",
-      "status": "assigned",
+      "status": "verified",
       "lane": "B",
       "assigned_at": "2026-09-27T17:43:12Z",
-      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13"
+      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13",
+      "verified_at": "2026-09-30T06:10:32Z",
+      "verified_package_id": "worker-b-20260930T051722Z-bc6f6f41cbaf"
     },
     "historical:id:7ba17b892de57b32": {
       "title": "Contesting Concentrated Scientific Power: The Case of the European Commission’s Chief Scientific Adviser",
@@ -53016,10 +53012,12 @@
       "url": "https://doi.org/10.1007/978-3-030-54367-9_9",
       "corpus_scope": "historical",
       "queue_priority": "strand_a",
-      "status": "assigned",
+      "status": "verified",
       "lane": "B",
       "assigned_at": "2026-09-27T17:43:12Z",
-      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13"
+      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13",
+      "verified_at": "2026-09-30T06:10:32Z",
+      "verified_package_id": "worker-b-20260930T051722Z-bc6f6f41cbaf"
     },
     "historical:id:217bb85900a247b7": {
       "title": "Building dynamic capabilities to cope with environmental uncertainty: The role of strategic foresight",
@@ -53030,7 +53028,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-27T17:43:12Z",
-      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13"
+      "last_package_id": "worker-b-20260930T061628Z-83df83d74e18"
     },
     "historical:id:2e253c28db67fe16": {
       "title": "The Extended Map methodology: Technology roadmapping for SMES clusters",
@@ -53041,7 +53039,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-27T17:43:12Z",
-      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13"
+      "last_package_id": "worker-b-20260930T061628Z-83df83d74e18"
     },
     "historical:id:7ed808b505d8e762": {
       "title": "Investigating scenario planning – a European tourism perspective",
@@ -53052,7 +53050,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-27T17:43:12Z",
-      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13"
+      "last_package_id": "worker-b-20260930T061628Z-83df83d74e18"
     },
     "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=982bcabb-9d05-11f1-b25c-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=": {
       "title": "Analysis of the regulatory framework for biotechnology and biomanufacturing in the EU - Publications Office of the EU",
@@ -53229,10 +53227,12 @@
       "url": "https://digital-strategy.ec.europa.eu/en/policies/data-solutions",
       "corpus_scope": "historical",
       "queue_priority": "strand_a",
-      "status": "assigned",
+      "status": "verified",
       "lane": "B",
       "assigned_at": "2026-09-27T17:43:12Z",
-      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13"
+      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13",
+      "verified_at": "2026-09-30T06:10:32Z",
+      "verified_package_id": "worker-b-20260930T051722Z-bc6f6f41cbaf"
     },
     "historical:id:ac292fd3fee4db45": {
       "title": "35 proposals to make the European data strategy work - Sitra",
@@ -53241,10 +53241,12 @@
       "url": "https://www.sitra.fi/wp-content/uploads/2020/05/35-proposals-to-make-the-european-data-strategy-work.pdf",
       "corpus_scope": "historical",
       "queue_priority": "strand_a",
-      "status": "assigned",
+      "status": "verified",
       "lane": "B",
       "assigned_at": "2026-09-27T17:43:12Z",
-      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13"
+      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13",
+      "verified_at": "2026-09-30T06:10:32Z",
+      "verified_package_id": "worker-b-20260930T051722Z-bc6f6f41cbaf"
     },
     "historical:id:86805dae4d6b0983": {
       "title": "The European Parliament in Security and Defence: The Parliamentary Contribution to the European Defence Union",
@@ -53253,10 +53255,12 @@
       "url": "https://doi.org/10.1007/978-3-319-97391-3_20",
       "corpus_scope": "historical",
       "queue_priority": "strand_a",
-      "status": "assigned",
+      "status": "verified",
       "lane": "B",
       "assigned_at": "2026-09-27T17:43:12Z",
-      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13"
+      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13",
+      "verified_at": "2026-09-30T06:10:32Z",
+      "verified_package_id": "worker-b-20260930T051722Z-bc6f6f41cbaf"
     },
     "historical:id:edd664f7e29f4f65": {
       "title": "Our Futures: By the people, for the people",
@@ -53267,7 +53271,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-27T17:43:12Z",
-      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13"
+      "last_package_id": "worker-b-20260930T061628Z-83df83d74e18"
     },
     "historical:id:6dbf1e1cf20fb685": {
       "title": "Science’s disparate responsibilities: Patterns across European countries",
@@ -53276,10 +53280,12 @@
       "url": "https://doi.org/10.1177/0963662517724645",
       "corpus_scope": "historical",
       "queue_priority": "strand_a",
-      "status": "assigned",
+      "status": "verified",
       "lane": "B",
       "assigned_at": "2026-09-27T17:43:12Z",
-      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13"
+      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13",
+      "verified_at": "2026-09-30T06:10:32Z",
+      "verified_package_id": "worker-b-20260930T051722Z-bc6f6f41cbaf"
     },
     "historical:id:661ab27d5233e430": {
       "title": "European defence research in crisis? The way towards strategic autonomy",
@@ -53288,10 +53294,12 @@
       "url": "https://www.ffi.no/publikasjoner/arkiv/european-defence-research-in-crisis-the-way-towards-strategic-autonomy",
       "corpus_scope": "historical",
       "queue_priority": "strand_a",
-      "status": "assigned",
+      "status": "verified",
       "lane": "B",
       "assigned_at": "2026-09-27T17:43:12Z",
-      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13"
+      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13",
+      "verified_at": "2026-09-30T06:10:32Z",
+      "verified_package_id": "worker-b-20260930T051722Z-bc6f6f41cbaf"
     },
     "historical:id:1a9c0296ad57a559": {
       "title": "Development of data-driven technology roadmap considering dependency: An ARM-based technology roadmapping",
@@ -53302,7 +53310,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-27T17:43:12Z",
-      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13"
+      "last_package_id": "worker-b-20260930T061628Z-83df83d74e18"
     },
     "link:https://digital-strategy.ec.europa.eu/en/policies/ai-screening-centres": {
       "status": "verified",
@@ -54320,7 +54328,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "link:https://www.gmfus.org/innovation-competitiveness/gmf-technology": {
       "title": "GMF Technology",
@@ -54332,7 +54340,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "link:https://doi.org/10.1163/21971927-bja10077": {
       "title": "University–Industry Collaboration and Innovation Performance: Insights from the Quadruple Helix Perspective",
@@ -54344,7 +54352,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:6af45802f36e938a": {
       "title": "Three shifts that define a new chapter for AI | RISE",
@@ -54356,7 +54364,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:db100ac909ce7ce3": {
       "title": "How ERC frontier research strengthens Europe’s competitiveness",
@@ -54368,7 +54376,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:c62c5b50076b6a4f": {
       "title": "Anticipatory Methods for the Emergence of Radically New Technologies: Navigating Uncertainty",
@@ -54379,7 +54387,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-30T05:17:22Z",
-      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13"
+      "last_package_id": "worker-b-20260930T061628Z-83df83d74e18"
     },
     "historical:id:061189819c7516e9": {
       "title": "Talent in, Talent out",
@@ -54391,7 +54399,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:aba42c2d79d6aa16": {
       "title": "Strategic Vulnerabilities of the European Union",
@@ -54403,7 +54411,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:a27dcc6c17eaa230": {
       "title": "ERA Portal Austria – TOWARDS A EUROPEAN FRAMEWORK FOR RESEARCH CAREERS (2011)",
@@ -54415,7 +54423,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:430a0c6600f89574": {
       "title": "ERA Portal Austria – Research Careers",
@@ -54427,7 +54435,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:6e9495cbc7e7feb7": {
       "title": "ECAS Report: Insights from Researchers on the Fifth Freedom in Europe - ECAS",
@@ -54439,7 +54447,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:84bdd53bdefffffe": {
       "title": "A brighter future: Why upgrading the grid is vital for Europe’s competitiveness – European Council on Foreign Relations",
@@ -54451,7 +54459,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:09dfe3e1a2bc3143": {
       "title": "Towards a Responsible Research Assessment Transition: A Novel Framework for Researcher Profiles",
@@ -54463,7 +54471,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:b24b045a073e9a30": {
       "title": "Tide turners: How startups can shape Europe’s tech future and geoeconomic strategy – European Council on Foreign Relations",
@@ -54475,7 +54483,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:09f7fe2d1995fee8": {
       "title": "New report | Raw material and supply chain vulnerabilities in the Dutch defence sector: An analysis of the Air Defence & Command Frigate - HCSS",
@@ -54487,7 +54495,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:584da47fe51bc377": {
       "title": "Technical Tiers: A New Classification Framework for Global AI Workforce Analysis",
@@ -54499,7 +54507,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:b76d43e84a99c2e8": {
       "title": "Solving Europe's AI talent equation: Supply, demand and missing pieces",
@@ -54511,7 +54519,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:49d10cd2bd833c73": {
       "title": "Offensive strategy: The EU’s economic security – European Council on Foreign Relations",
@@ -54523,7 +54531,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:71f0ec91ad3f16e9": {
       "title": "ALLEA Calls For Balanced And Secure International Research Collaboration In A Changing World - ALLEA",
@@ -54535,7 +54543,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:3d138bc184983727": {
       "title": "Green team: Von der Leyen holds the future of Europe’s climate policy in her hands – European Council on Foreign Relations",
@@ -54547,7 +54555,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:74e7999086b3eaa3": {
       "title": "The European Union continues to call for improved intellectual property protection in China",
@@ -54559,7 +54567,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:e6dcd3c339076f1b": {
       "title": "Advanced Materials for Renewable Energy and Energy Storage Systems",
@@ -54571,7 +54579,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:016e829f90584e6f": {
       "title": "A Digital Connectivity Masterplan for the Global Gateway – CEPS",
@@ -54583,7 +54591,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:90006f474bb310bb": {
       "title": "Impact Assessment Study on Short-Term Mobility Impact Assessment Study on Short-Term Mobility - COST",
@@ -54595,7 +54603,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:0532cbde55a30f41": {
       "title": "Navigating the AI Act",
@@ -54607,7 +54615,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:657a8404d5211dce": {
       "title": "EU Industrial Strategy: preparatory consultation towards transition pathway for Aerospace and Defence industrial ecosystem",
@@ -54619,7 +54627,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:5c1c6d9b03a6268d": {
       "title": "AI Watch, road to the adoption of Artificial Intelligence by the public sector",
@@ -54631,7 +54639,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:6ee51b88e0306b3f": {
       "title": "AI Talent Flows in Germany",
@@ -54643,7 +54651,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:bb826c1528b8de2d": {
       "title": "Joint declaration on mainstreaming RRI across Horizon Europe",
@@ -54655,7 +54663,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:85dbe9802d1d549c": {
       "title": "Might Europe one day again be a global scientific powerhouse? Analysis of ERC publications suggests it will not be possible without changes in research policy",
@@ -54667,7 +54675,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:2e2b4134ff7dad38": {
       "title": "Finland will be a winner in the Artificial Intelligence disruption | VTT",
@@ -54679,7 +54687,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:047fe16719c3cb7d": {
       "title": "ERC President urges EU Research Ministers to reinforce excellence in Europe (Competitiveness Council)",
@@ -54691,7 +54699,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:4d1130d6d376c8bf": {
       "title": "A collective outlook on the next academic year at Coimbra Group universities | Coimbra",
@@ -54703,7 +54711,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:aa805dfa2f7f9514": {
       "title": "2020-2021, an unprecedented academic year for the European Higher Education, Research and Innovation Areas | Coimbra",
@@ -54715,7 +54723,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:6668e2308d002dcb": {
       "title": "Finland has a lot of special expertise in microelectronics | VTT",
@@ -54727,7 +54735,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:cfc3df63ea047522": {
       "title": "Foresight Training: Moving from Design to Evaluation",
@@ -54738,7 +54746,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-30T05:17:22Z",
-      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13"
+      "last_package_id": "worker-b-20260930T061628Z-83df83d74e18"
     },
     "historical:id:61e9f501f96f5182": {
       "title": "Developing Horizon Scanning Methods for the Discovery of Scientific Trends",
@@ -54749,7 +54757,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-30T05:17:22Z",
-      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13"
+      "last_package_id": "worker-b-20260930T061628Z-83df83d74e18"
     },
     "historical:id:71fb388747f74384": {
       "title": "“Mainstreaming” foresight program development in the public sector",
@@ -54760,7 +54768,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-30T05:17:22Z",
-      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13"
+      "last_package_id": "worker-b-20260930T061628Z-83df83d74e18"
     },
     "historical:id:2d25acbe77bf339c": {
       "title": "CEPS Digital Forum – CEPS",
@@ -54772,7 +54780,7 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-09-30T05:16:56Z",
-      "last_package_id": "worker-a-20260930T060752Z-654ccf10abf1"
+      "last_package_id": "worker-a-20260930T061601Z-654ccf10abf1"
     },
     "historical:id:856a230d289dd3f9": {
       "title": "Ethical artificial intelligence as a competitive advantage | VTT",
@@ -54784,7 +54792,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-30T05:17:22Z",
-      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13"
+      "last_package_id": "worker-b-20260930T061628Z-83df83d74e18"
     },
     "historical:id:86e62b0797a1d2df": {
       "title": "A First Response from the CG to the Lamy Report | Coimbra",
@@ -54796,7 +54804,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-30T05:17:22Z",
-      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13"
+      "last_package_id": "worker-b-20260930T061628Z-83df83d74e18"
     },
     "historical:id:f89e2f0952d9a342": {
       "title": "A new path in foresight validation? Discussing the socio-epistemic underpinning of foresight quality criteria",
@@ -54807,7 +54815,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-30T05:17:22Z",
-      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13"
+      "last_package_id": "worker-b-20260930T061628Z-83df83d74e18"
     },
     "historical:id:67a3d3b56eeb550e": {
       "title": "University knowledge and firm innovation: evidence from European countries",
@@ -54819,7 +54827,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-30T05:17:22Z",
-      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13"
+      "last_package_id": "worker-b-20260930T061628Z-83df83d74e18"
     },
     "historical:id:9f1a10ecfe6e61da": {
       "title": "Competing for Public Resources: Higher Education and Academic Research in Europe — A Cross-Sectoral Perspective",
@@ -54831,7 +54839,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-30T05:17:22Z",
-      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13"
+      "last_package_id": "worker-b-20260930T061628Z-83df83d74e18"
     },
     "link:https://digital-strategy.ec.europa.eu/en/activities/study-identify-digital-technologies-next-eu-research-and-innovation-fund": {
       "title": "Study to identify key strategic digital technologies for EU research and innovation funding beyond 2027",
@@ -54843,7 +54851,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-30T06:08:22Z",
-      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13"
+      "last_package_id": "worker-b-20260930T061628Z-83df83d74e18"
     },
     "link:https://dfrlab.org/2026/09/15/digital-sovereignty-and-europes-democracy-stack/": {
       "title": "Digital sovereignty and Europe’s democracy stack: Delivering on the European Union’s priorities for the 2028–2034 Multiannual Financial Framework",
@@ -54855,7 +54863,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-30T06:08:22Z",
-      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13"
+      "last_package_id": "worker-b-20260930T061628Z-83df83d74e18"
     },
     "link:https://defence-industry-space.ec.europa.eu/system/files/2026-07/Proposal-for-a-Council-Implementing-Decision-on-the-establishment-of-european-Projects-of-Common-Interest.pdf": {
       "title": "EDIP Forging Europe's Defence",
@@ -54867,7 +54875,7 @@
       "status": "assigned",
       "lane": "B",
       "assigned_at": "2026-09-30T06:08:22Z",
-      "last_package_id": "worker-b-20260930T060822Z-aacd662cfe13"
+      "last_package_id": "worker-b-20260930T061628Z-83df83d74e18"
     }
   },
   "packages": {
@@ -70150,6 +70158,75 @@
         "historical:id:86805dae4d6b0983",
         "historical:id:6dbf1e1cf20fb685",
         "historical:id:661ab27d5233e430",
+        "historical:id:217bb85900a247b7",
+        "link:https://news.google.com/rss/articles/CBMiekFVX3lxTE1Pc1RnZW41ZU9YUUZqVHFjT0lTUWFKTldPaEZxVDQwMzg0OFgzR3djc0lZMlRnX2JYbmVEdHBEMTFOMWlzMDhxMFFuSmlzbmtjUW9vUmJXenljakFpNy1RQnNJTXlIZEFhRjJtUWtUNm5mT2dpQkZYYWtR?oc=5",
+        "historical:id:edd664f7e29f4f65",
+        "historical:id:2e253c28db67fe16",
+        "historical:id:7ed808b505d8e762",
+        "historical:id:1a9c0296ad57a559",
+        "link:https://doi.org/10.1016/j.iref.2026.105712",
+        "historical:id:256f788e05840f94",
+        "historical:id:5c7d57c2c2f2d019",
+        "historical:id:856a230d289dd3f9",
+        "historical:id:86e62b0797a1d2df",
+        "historical:id:67a3d3b56eeb550e",
+        "historical:id:9f1a10ecfe6e61da",
+        "historical:id:c62c5b50076b6a4f",
+        "historical:id:cfc3df63ea047522",
+        "historical:id:61e9f501f96f5182",
+        "historical:id:71fb388747f74384",
+        "historical:id:f89e2f0952d9a342",
+        "link:https://digital-strategy.ec.europa.eu/en/activities/study-identify-digital-technologies-next-eu-research-and-innovation-fund",
+        "link:https://dfrlab.org/2026/09/15/digital-sovereignty-and-europes-democracy-stack/",
+        "link:https://defence-industry-space.ec.europa.eu/system/files/2026-07/Proposal-for-a-Council-Implementing-Decision-on-the-establishment-of-european-Projects-of-Common-Interest.pdf"
+      ]
+    },
+    "worker-a-20260930T061601Z-654ccf10abf1": {
+      "lane": "A",
+      "created_at": "2026-09-30T06:16:27Z",
+      "record_keys": [
+        "historical:id:4c175377997921f0",
+        "link:https://era.gv.at/news-items/ec-allocates-additional-500-million-to-horizon-europe-and-publishes-two-monitoring-reports/",
+        "link:https://www.gmfus.org/innovation-competitiveness/gmf-technology",
+        "link:https://doi.org/10.1163/21971927-bja10077",
+        "historical:id:6af45802f36e938a",
+        "historical:id:db100ac909ce7ce3",
+        "historical:id:061189819c7516e9",
+        "historical:id:aba42c2d79d6aa16",
+        "historical:id:a27dcc6c17eaa230",
+        "historical:id:430a0c6600f89574",
+        "historical:id:6e9495cbc7e7feb7",
+        "historical:id:84bdd53bdefffffe",
+        "historical:id:09dfe3e1a2bc3143",
+        "historical:id:b24b045a073e9a30",
+        "historical:id:09f7fe2d1995fee8",
+        "historical:id:584da47fe51bc377",
+        "historical:id:b76d43e84a99c2e8",
+        "historical:id:49d10cd2bd833c73",
+        "historical:id:71f0ec91ad3f16e9",
+        "historical:id:3d138bc184983727",
+        "historical:id:74e7999086b3eaa3",
+        "historical:id:e6dcd3c339076f1b",
+        "historical:id:016e829f90584e6f",
+        "historical:id:90006f474bb310bb",
+        "historical:id:0532cbde55a30f41",
+        "historical:id:657a8404d5211dce",
+        "historical:id:5c1c6d9b03a6268d",
+        "historical:id:6ee51b88e0306b3f",
+        "historical:id:bb826c1528b8de2d",
+        "historical:id:85dbe9802d1d549c",
+        "historical:id:2e2b4134ff7dad38",
+        "historical:id:047fe16719c3cb7d",
+        "historical:id:4d1130d6d376c8bf",
+        "historical:id:aa805dfa2f7f9514",
+        "historical:id:6668e2308d002dcb",
+        "historical:id:2d25acbe77bf339c"
+      ]
+    },
+    "worker-b-20260930T061628Z-83df83d74e18": {
+      "lane": "B",
+      "created_at": "2026-09-30T06:16:52Z",
+      "record_keys": [
         "historical:id:217bb85900a247b7",
         "link:https://news.google.com/rss/articles/CBMiekFVX3lxTE1Pc1RnZW41ZU9YUUZqVHFjT0lTUWFKTldPaEZxVDQwMzg0OFgzR3djc0lZMlRnX2JYbmVEdHBEMTFOMWlzMDhxMFFuSmlzbmtjUW9vUmJXenljakFpNy1RQnNJTXlIZEFhRjJtUWtUNm5mT2dpQkZYYWtR?oc=5",
         "historical:id:edd664f7e29f4f65",
