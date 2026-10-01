@@ -1,0 +1,2532 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-a-20261001T052304Z-654ccf10abf1",
+  "results": [
+    {
+      "record_key": "historical:id:4c175377997921f0",
+      "source_hash": "226746f3",
+      "identity_hash": "71dfa482cb6186e7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "DOI resolved to the Taylor & Francis article page; bibliographic identity and abstract were visible, but full text was not recovered."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1080/09537325.2023.2214639 matches the title, authors and 2024 journal issue."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the publisher record and matching bibliographic listings."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Title plus Heirani, Bagheri Moghaddam and Fazli recovered matching journal metadata."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "partial",
+            "note": "Publisher and bibliographic repositories exposed the abstract but no legitimate substantive full-text copy."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "partial",
+            "note": "Broader searches confirmed the same work but did not recover evidence beyond abstract-level material."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article_page",
+            "url": "https://www.tandfonline.com/doi/abs/10.1080/09537325.2023.2214639",
+            "title": "Development of a novel framework for the analysis of Technological Innovation Systems by Causal Layered Analysis (CLA) in energy systems",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity is verified; full substantive evidence was not legitimately recoverable, so the record is deferred."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "B",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity is verified, but substantive evidence remains inaccessible or too thin after recovery."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://era.gv.at/news-items/ec-allocates-additional-500-million-to-horizon-europe-and-publishes-two-monitoring-reports/",
+      "source_hash": "a934bb3e",
+      "identity_hash": "ee5daf9385b2fe01",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://era.gv.at/news-items/ec-allocates-additional-500-million-to-horizon-europe-and-publishes-two-monitoring-reports/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_primary_web_text",
+            "url": "https://era.gv.at/news-items/ec-allocates-additional-500-million-to-horizon-europe-and-publishes-two-monitoring-reports/",
+            "title": "EC allocates additional € 500 million to Horizon Europe and publishes two monitoring reports",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified substantive European research, innovation or strategic-technology evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Horizon Europe gets €500m more",
+      "reader_what": "The Commission added €500 million to Horizon Europe for 2026–27 and announced two cross-cutting calls.",
+      "reader_why": "The change directly expands EU research and innovation funding and priorities.",
+      "reader_more": "The page reports an additional €500 million for Horizon Europe in 2026–27, bringing the two-year total to about €14.8 billion. It also describes new cross-cutting calls on biodiversity, AI-enabled energy systems and SME skills. This is a substantive funding and programme change, not a generic programme page.",
+      "deep_analysis": {
+        "work_kind": "policy/report evidence",
+        "research_question": "",
+        "main_finding": "The Commission added €500 million to Horizon Europe for 2026–27 and announced two cross-cutting calls.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "The source supports the stated development; implementation or downstream effects are not assumed unless directly evidenced.",
+        "radar_relevance": "Verified substantive European research, innovation or strategic-technology evidence.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.public_support",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Union",
+            "class": "eu_body"
+          },
+          "mechanism": "allocates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-09-29",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The source supports the stated development; implementation or downstream effects are not assumed unless directly evidenced.",
+          "text": "The Commission added €500 million to Horizon Europe for 2026–27 and announced two cross-cutting calls.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://www.gmfus.org/innovation-competitiveness/gmf-technology",
+      "source_hash": "5222a8db",
+      "identity_hash": "de6d598bfd2a4a52",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://www.gmfus.org/innovation-competitiveness/gmf-technology."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_primary_web_text",
+            "url": "https://www.gmfus.org/innovation-competitiveness/gmf-technology",
+            "title": "GMF Technology",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INSUFFICIENT_EU_RI",
+        "reason": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "GMF Technology",
+      "reader_what": "The work was verified but does not meet the package’s strand-specific admission criteria.",
+      "reader_why": "",
+      "reader_more": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship. The source remains recorded as evidence for the exclusion decision.",
+      "deep_analysis": {
+        "work_kind": "verified source",
+        "research_question": "",
+        "main_finding": "The work was verified but does not meet the package’s strand-specific admission criteria.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "The source supports the stated development; implementation or downstream effects are not assumed unless directly evidenced.",
+        "radar_relevance": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1163/21971927-bja10077",
+      "source_hash": "fbf0758f",
+      "identity_hash": "f3db25e18001eae6",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "Opened DOI 10.1163/21971927-bja10077; the supplied Brill route returned an access/method failure."
+          },
+          {
+            "step": "doi",
+            "outcome": "failure",
+            "note": "Searched exact DOI 10.1163/21971927-bja10077; no matching authoritative bibliographic record was recovered."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failure",
+            "note": "Searched the exact supplied title in quotation marks; results returned different quadruple-helix papers, not this claimed work."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failure",
+            "note": "Searched title with Abazi-Alili, Ramadani, Fernandes and 2026; no matching publication was substantiated."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failure",
+            "note": "Searched Brill/Triple Helix and repository routes; no matching work for the supplied title/DOI combination was found."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failure",
+            "note": "Broader searches using title fragments, author names and DOI fragments did not recover the claimed work."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "The claimed title/DOI combination could not be substantiated after the full recovery ladder."
+      },
+      "admission": {
+        "decision": "drop_unverifiable",
+        "target_strand": "A",
+        "reason_code": "UNVERIFIABLE_WORK",
+        "reason": "The claimed work itself could not be substantiated after the required retrieval ladder."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "verified source",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "No substantive evidence basis was recoverable.",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:6af45802f36e938a",
+      "source_hash": "4bb2c9d3",
+      "identity_hash": "2a0803ebe7c6f17e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://www.ri.se/en/blogpost/three-shifts-that-define-a-new-chapter-for-ai."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_primary_web_text",
+            "url": "https://www.ri.se/en/blogpost/three-shifts-that-define-a-new-chapter-for-ai",
+            "title": "Three shifts that define a new chapter for AI | RISE",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INSUFFICIENT_EU_RI",
+        "reason": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Three shifts that define a new chapter for AI | RISE",
+      "reader_what": "The work was verified but does not meet the package’s strand-specific admission criteria.",
+      "reader_why": "",
+      "reader_more": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship. The source remains recorded as evidence for the exclusion decision.",
+      "deep_analysis": {
+        "work_kind": "verified source",
+        "research_question": "",
+        "main_finding": "The work was verified but does not meet the package’s strand-specific admission criteria.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:db100ac909ce7ce3",
+      "source_hash": "55355529",
+      "identity_hash": "498aa897e03ec654",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://erc.europa.eu/projects-statistics/mapping-erc-frontier-research-overview/how-erc-frontier-research-strengthens-europes-competitiveness."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_primary_web_text",
+            "url": "https://erc.europa.eu/projects-statistics/mapping-erc-frontier-research-overview/how-erc-frontier-research-strengthens-europes-competitiveness",
+            "title": "How ERC frontier research strengthens Europe’s competitiveness",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified substantive European research, innovation or strategic-technology evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "ERC frontier research and competitiveness",
+      "reader_what": "ERC-backed frontier research is linked to technology creation, entrepreneurship and transfer into European industry.",
+      "reader_why": "It provides evidence on how frontier research feeds Europe’s innovation capacity.",
+      "reader_more": "The ERC page summarizes a report mapping technological and sectoral innovation emerging from ERC-supported research. It describes pathways from frontier research toward applications, firms and industrial use. The evidence is directly about a European research funding mechanism and downstream innovation.",
+      "deep_analysis": {
+        "work_kind": "policy/report evidence",
+        "research_question": "",
+        "main_finding": "ERC-backed frontier research is linked to technology creation, entrepreneurship and transfer into European industry.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "Verified substantive European research, innovation or strategic-technology evidence.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.public_support",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Union",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-02-26",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+          "text": "ERC-backed frontier research is linked to technology creation, entrepreneurship and transfer into European industry.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:061189819c7516e9",
+      "source_hash": "d790e6da",
+      "identity_hash": "e0b636e68e601f21",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://www.interface-eu.org/publications/download/talent-in-talent-out."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_pdf_excerpt",
+            "url": "https://www.interface-eu.org/publications/download/talent-in-talent-out",
+            "title": "Talent in, Talent out",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified substantive European research, innovation or strategic-technology evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Europe in the global AI talent map",
+      "reader_what": "The report maps global AI talent movements and Europe’s position in attracting, retaining and circulating skilled workers.",
+      "reader_why": "AI talent flows affect Europe’s strategic technology capacity.",
+      "reader_more": "Interface’s data brief maps AI workforce movements between April 2024 and September 2025 and places Europe within the global competition for AI talent. It documents origin, destination and workforce composition patterns. The report is directly relevant to European talent attraction and retention.",
+      "deep_analysis": {
+        "work_kind": "policy/report evidence",
+        "research_question": "",
+        "main_finding": "The report maps global AI talent movements and Europe’s position in attracting, retaining and circulating skilled workers.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "Verified substantive European research, innovation or strategic-technology evidence.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "talent.career_structure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Interface Europe",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-01-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+          "text": "The report maps global AI talent movements and Europe’s position in attracting, retaining and circulating skilled workers.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:aba42c2d79d6aa16",
+      "source_hash": "6512ee2e",
+      "identity_hash": "7db3390e3d096c46",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://link.springer.com/chapter/10.1007/978-3-032-20210-9_5."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_primary_web_text",
+            "url": "https://link.springer.com/chapter/10.1007/978-3-032-20210-9_5",
+            "title": "Strategic Vulnerabilities of the European Union",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified substantive European research, innovation or strategic-technology evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU strategic vulnerabilities",
+      "reader_what": "The chapter identifies European dependencies in critical technologies, energy, defence and resources that constrain strategic autonomy.",
+      "reader_why": "Technology and resource dependencies can limit Europe’s research, industrial and innovation options.",
+      "reader_more": "The chapter assesses structural vulnerabilities of the European Union, including foreign dependence in critical technologies and resources. It connects these dependencies to strategic autonomy and industrial capacity. The work is broader than research policy but contains a direct strategic-technology relationship.",
+      "deep_analysis": {
+        "work_kind": "policy/report evidence",
+        "research_question": "",
+        "main_finding": "The chapter identifies European dependencies in critical technologies, energy, defence and resources that constrain strategic autonomy.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "Verified substantive European research, innovation or strategic-technology evidence.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.system_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Defence Studies",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-01-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+          "text": "The chapter identifies European dependencies in critical technologies, energy, defence and resources that constrain strategic autonomy.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:a27dcc6c17eaa230",
+      "source_hash": "dbdead04",
+      "identity_hash": "f6a0186748798fa5",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching source recovered at https://era.gv.at/public/documents/2309/Towards_a_European_Framework_for_Research_Careers_final.pdf."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://era.gv.at/public/documents/2309/Towards_a_European_Framework_for_Research_Careers_final.pdf",
+            "title": "ERA Portal Austria – TOWARDS A EUROPEAN FRAMEWORK FOR RESEARCH CAREERS (2011)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered source matches the claimed work and supports the verification decision."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified substantive European research, innovation or strategic-technology evidence."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "TOWARDS A EUROPEAN FRAMEWORK FOR RESEARCH CAREERS",
+          "source": "European Commission",
+          "date": "2011-07-21"
+        },
+        "unset": [],
+        "reason": "Recovered Commission PDF supplies the actual document title, issuer and date."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "A European framework for research careers",
+      "reader_what": "The Commission framework identifies fragmented researcher labour markets and proposes common career classifications across sectors and countries.",
+      "reader_why": "Comparable careers and mobility are core mechanisms of the European Research Area.",
+      "reader_more": "The 2011 Commission document describes fragmented research careers, barriers to cross-border and cross-sector mobility, and the case for a common European framework. It is a primary policy document about the structure of the European research labour market.",
+      "deep_analysis": {
+        "work_kind": "policy/report evidence",
+        "research_question": "",
+        "main_finding": "The Commission framework identifies fragmented researcher labour markets and proposes common career classifications across sectors and countries.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "Verified substantive European research, innovation or strategic-technology evidence.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "talent.career_structure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Union",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-01-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+          "text": "The Commission framework identifies fragmented researcher labour markets and proposes common career classifications across sectors and countries.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:430a0c6600f89574",
+      "source_hash": "d1c34bac",
+      "identity_hash": "91ff99f2d1629572",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://era.gv.at/era/era-policy-agenda/ongoing-era-actions/research-careers/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_primary_web_text",
+            "url": "https://era.gv.at/era/era-policy-agenda/ongoing-era-actions/research-careers/",
+            "title": "ERA Portal Austria – Research Careers",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified substantive European research, innovation or strategic-technology evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Making European research careers more sustainable",
+      "reader_what": "The ERA action targets recruitment, mobility, skills, career progression, precarity and comparable research careers across Europe.",
+      "reader_why": "These are direct research-workforce mechanisms in the European Research Area.",
+      "reader_more": "The ERA Portal describes implementation objectives and expected outcomes for research careers, including mobility, recruitment, skills, progression, precarity and the Research and Innovation Careers Observatory. It is substantive system-level research policy rather than a generic careers page.",
+      "deep_analysis": {
+        "work_kind": "policy/report evidence",
+        "research_question": "",
+        "main_finding": "The ERA action targets recruitment, mobility, skills, career progression, precarity and comparable research careers across Europe.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "Verified substantive European research, innovation or strategic-technology evidence.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "talent.career_structure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Union",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-01-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+          "text": "The ERA action targets recruitment, mobility, skills, career progression, precarity and comparable research careers across Europe.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:6e9495cbc7e7feb7",
+      "source_hash": "e0799522",
+      "identity_hash": "545fe32470cff63d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://ecas.org/publication/ecas-report-insights-from-researchers-on-the-fifth-freedom-in-europe/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_primary_web_text",
+            "url": "https://ecas.org/publication/ecas-report-insights-from-researchers-on-the-fifth-freedom-in-europe/",
+            "title": "ECAS Report: Insights from Researchers on the Fifth Freedom in Europe - ECAS",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified substantive European research, innovation or strategic-technology evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Researchers report barriers to a European fifth freedom",
+      "reader_what": "A researcher survey identifies mobility barriers and support for freer movement of knowledge and researchers across Europe.",
+      "reader_why": "Mobility barriers can weaken an integrated European research labour market.",
+      "reader_more": "ECAS reports survey evidence from researchers in EU Member States on working and moving across Europe. The work concerns researcher mobility and the proposed 'fifth freedom' for research, knowledge and innovation. It directly addresses a European research-system mechanism.",
+      "deep_analysis": {
+        "work_kind": "policy/report evidence",
+        "research_question": "",
+        "main_finding": "A researcher survey identifies mobility barriers and support for freer movement of knowledge and researchers across Europe.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "Verified substantive European research, innovation or strategic-technology evidence.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Citizen Action Service",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-01-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+          "text": "A researcher survey identifies mobility barriers and support for freer movement of knowledge and researchers across Europe.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:84bdd53bdefffffe",
+      "source_hash": "f591ad7e",
+      "identity_hash": "069ac552c643e191",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://ecfr.eu/article/a-brighter-future-why-upgrading-the-grid-is-vital-for-europes-competitiveness/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_primary_web_text",
+            "url": "https://ecfr.eu/article/a-brighter-future-why-upgrading-the-grid-is-vital-for-europes-competitiveness/",
+            "title": "A brighter future: Why upgrading the grid is vital for Europe’s competitiveness – European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INSUFFICIENT_EU_RI",
+        "reason": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "A brighter future: Why upgrading the grid is vital for Europe’s competitiveness – European Council on Foreign",
+      "reader_what": "The work was verified but does not meet the package’s strand-specific admission criteria.",
+      "reader_why": "",
+      "reader_more": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship. The source remains recorded as evidence for the exclusion decision.",
+      "deep_analysis": {
+        "work_kind": "verified source",
+        "research_question": "",
+        "main_finding": "The work was verified but does not meet the package’s strand-specific admission criteria.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:09dfe3e1a2bc3143",
+      "source_hash": "5ee99dc2",
+      "identity_hash": "da5e0c1601db8a39",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://issi2025.iiap.sci.am/wp-content/uploads/2025/07/11.-xenou_rp_issi2025_209.pdf."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_pdf_excerpt",
+            "url": "https://issi2025.iiap.sci.am/wp-content/uploads/2025/07/11.-xenou_rp_issi2025_209.pdf",
+            "title": "Towards a Responsible Research Assessment Transition: A Novel Framework for Researcher Profiles",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified substantive European research, innovation or strategic-technology evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "A framework for responsible researcher profiles",
+      "reader_what": "The paper proposes a structured framework for researcher profiles intended to support a transition in research assessment.",
+      "reader_why": "Assessment rules shape incentives, careers and recognition across research systems.",
+      "reader_more": "The conference paper develops a framework for researcher profiles within responsible research assessment. It addresses how researchers are described and evaluated, making it directly relevant to research-assessment governance.",
+      "deep_analysis": {
+        "work_kind": "policy/report evidence",
+        "research_question": "",
+        "main_finding": "The paper proposes a structured framework for researcher profiles intended to support a transition in research assessment.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "Verified substantive European research, innovation or strategic-technology evidence.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.assessment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Scientometrics",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2025-07-10",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+          "text": "The paper proposes a structured framework for researcher profiles intended to support a transition in research assessment.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:b24b045a073e9a30",
+      "source_hash": "863739f3",
+      "identity_hash": "863fe39a9b6d6e60",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://ecfr.eu/article/tide-turners-how-startups-can-shape-europes-tech-future-and-geoeconomic-strategy/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_primary_web_text",
+            "url": "https://ecfr.eu/article/tide-turners-how-startups-can-shape-europes-tech-future-and-geoeconomic-strategy/",
+            "title": "Tide turners: How startups can shape Europe’s tech future and geoeconomic strategy – European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified substantive European research, innovation or strategic-technology evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Startups in Europe’s geoeconomic strategy",
+      "reader_what": "The analysis links European startup scale-up conditions to strategic technology capacity and geoeconomic resilience.",
+      "reader_why": "Scale-up finance and startup growth affect Europe’s ability to retain strategic technology capability.",
+      "reader_more": "The ECFR analysis examines how European startups can contribute to technology strategy and geoeconomic capacity. It focuses on scale-up constraints and the policy environment for retaining and growing strategic firms in Europe.",
+      "deep_analysis": {
+        "work_kind": "policy/report evidence",
+        "research_question": "",
+        "main_finding": "The analysis links European startup scale-up conditions to strategic technology capacity and geoeconomic resilience.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "Verified substantive European research, innovation or strategic-technology evidence.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "innovation.system_performance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Council on Foreign Relations",
+            "class": "other"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2025-07-03",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+          "text": "The analysis links European startup scale-up conditions to strategic technology capacity and geoeconomic resilience.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:09f7fe2d1995fee8",
+      "source_hash": "4bd3fea9",
+      "identity_hash": "fa0fb44f85248c47",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://hcss.nl/wp-content/uploads/2025/01/Raw-material-and-supply-chain-vulnerabilities-in-Dutch-defence-sector-HCSS-2024-V2.pdf."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_pdf_excerpt",
+            "url": "https://hcss.nl/wp-content/uploads/2025/01/Raw-material-and-supply-chain-vulnerabilities-in-Dutch-defence-sector-HCSS-2024-V2.pdf",
+            "title": "New report | Raw material and supply chain vulnerabilities in the Dutch defence sector: An analysis of the Air Defence & Command Frigate - HCSS",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified substantive European research, innovation or strategic-technology evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Raw-material exposure in Dutch defence supply chains",
+      "reader_what": "The report traces raw-material and supply-chain vulnerabilities in a Dutch defence platform and its technology inputs.",
+      "reader_why": "Material dependencies can constrain European defence-industrial and technology capacity.",
+      "reader_more": "HCSS analyzes the Air Defence & Command Frigate supply chain to identify raw-material and supplier vulnerabilities. The work connects critical-material exposure to a European defence capability and provides an evidence-led dependency assessment.",
+      "deep_analysis": {
+        "work_kind": "policy/report evidence",
+        "research_question": "",
+        "main_finding": "The report traces raw-material and supply-chain vulnerabilities in a Dutch defence platform and its technology inputs.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "Verified substantive European research, innovation or strategic-technology evidence.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "materials.critical_raw",
+          "secondary_objects": [],
+          "actor": {
+            "name": "The Hague Centre for Strategic Studies",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2025-01-15",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+          "text": "The report traces raw-material and supply-chain vulnerabilities in a Dutch defence platform and its technology inputs.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:584da47fe51bc377",
+      "source_hash": "647fca93",
+      "identity_hash": "0a86cc30e955ac29",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://www.interface-eu.org/publications/downloadPdf/technical-tiers-in-ai-talent."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_pdf_excerpt",
+            "url": "https://www.interface-eu.org/publications/downloadPdf/technical-tiers-in-ai-talent",
+            "title": "Technical Tiers: A New Classification Framework for Global AI Workforce Analysis",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified substantive European research, innovation or strategic-technology evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "A tiered framework for AI workforce analysis",
+      "reader_what": "The report develops a classification for comparing AI workforce capability and applies it to global talent patterns relevant to Europe.",
+      "reader_why": "A more precise workforce measure helps diagnose Europe’s AI talent position.",
+      "reader_more": "The report introduces technical tiers for AI workforce analysis rather than treating all AI roles as equivalent. It uses the framework to compare capability patterns and supports analysis of Europe’s position in global AI talent competition.",
+      "deep_analysis": {
+        "work_kind": "policy/report evidence",
+        "research_question": "",
+        "main_finding": "The report develops a classification for comparing AI workforce capability and applies it to global talent patterns relevant to Europe.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "Verified substantive European research, innovation or strategic-technology evidence.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "talent.career_structure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Interface Europe",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2025-01-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+          "text": "The report develops a classification for comparing AI workforce capability and applies it to global talent patterns relevant to Europe.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:b76d43e84a99c2e8",
+      "source_hash": "8d317611",
+      "identity_hash": "e65c404a148e32fa",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://www.interface-eu.org/publications/downloadPdf/solving-europes-ai-talent-equation."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_pdf_excerpt",
+            "url": "https://www.interface-eu.org/publications/downloadPdf/solving-europes-ai-talent-equation",
+            "title": "Solving Europe's AI talent equation: Supply, demand and missing pieces",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified substantive European research, innovation or strategic-technology evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Europe’s AI talent supply-demand gap",
+      "reader_what": "The report assesses Europe’s AI talent supply, demand and missing capabilities across the workforce pipeline.",
+      "reader_why": "Persistent talent gaps can limit European AI research, deployment and scale-up.",
+      "reader_more": "The report examines the European AI workforce from both supply and demand sides and identifies gaps in skills and availability. It is directly about a strategic-technology talent mechanism in Europe.",
+      "deep_analysis": {
+        "work_kind": "policy/report evidence",
+        "research_question": "",
+        "main_finding": "The report assesses Europe’s AI talent supply, demand and missing capabilities across the workforce pipeline.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "Verified substantive European research, innovation or strategic-technology evidence.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "talent.career_structure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Interface Europe",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2025-01-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+          "text": "The report assesses Europe’s AI talent supply, demand and missing capabilities across the workforce pipeline.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:49d10cd2bd833c73",
+      "source_hash": "827a7f30",
+      "identity_hash": "e07f6e2d209265e7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://ecfr.eu/article/offensive-strategy-the-eus-economic-security/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_primary_web_text",
+            "url": "https://ecfr.eu/article/offensive-strategy-the-eus-economic-security/",
+            "title": "Offensive strategy: The EU’s economic security – European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified substantive European research, innovation or strategic-technology evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Economic security as EU strategy",
+      "reader_what": "The analysis argues for a more active EU economic-security approach around technology, dependencies and strategic industries.",
+      "reader_why": "Economic-security tools can reshape technology dependencies and investment conditions affecting European innovation.",
+      "reader_more": "ECFR examines the EU’s economic-security agenda and the need to address strategic dependencies more actively. The analysis covers technology and industrial exposure as part of a broader geoeconomic strategy.",
+      "deep_analysis": {
+        "work_kind": "policy/report evidence",
+        "research_question": "",
+        "main_finding": "The analysis argues for a more active EU economic-security approach around technology, dependencies and strategic industries.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "Verified substantive European research, innovation or strategic-technology evidence.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.system_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Council on Foreign Relations",
+            "class": "other"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2024-12-19",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+          "text": "The analysis argues for a more active EU economic-security approach around technology, dependencies and strategic industries.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:71f0ec91ad3f16e9",
+      "source_hash": "78e33ce1",
+      "identity_hash": "aa235fe1a1f99c8b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://allea.org/allea-calls-for-balanced-and-secure-international-research-collaboration-in-a-changing-world/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_primary_web_text",
+            "url": "https://allea.org/allea-calls-for-balanced-and-secure-international-research-collaboration-in-a-changing-world/",
+            "title": "ALLEA Calls For Balanced And Secure International Research Collaboration In A Changing World - ALLEA",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified substantive European research, innovation or strategic-technology evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Securing international research collaboration",
+      "reader_what": "ALLEA calls for research cooperation that remains open while managing security, interference and dependency risks.",
+      "reader_why": "Research-security rules directly affect Europe’s international collaboration networks.",
+      "reader_more": "ALLEA’s statement addresses how European research organisations should balance openness and security in international collaboration. It concerns a recognised research-system mechanism: cross-border collaboration under changing security conditions.",
+      "deep_analysis": {
+        "work_kind": "policy/report evidence",
+        "research_question": "",
+        "main_finding": "ALLEA calls for research cooperation that remains open while managing security, interference and dependency risks.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "Verified substantive European research, innovation or strategic-technology evidence.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "ALLEA",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "collaborates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2024-12-18",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+          "text": "ALLEA calls for research cooperation that remains open while managing security, interference and dependency risks.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:3d138bc184983727",
+      "source_hash": "711e1be8",
+      "identity_hash": "a892f7e2a0b2ead3",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://ecfr.eu/article/green-team-von-der-leyen-holds-the-future-of-europes-climate-policy-in-her-hands/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_primary_web_text",
+            "url": "https://ecfr.eu/article/green-team-von-der-leyen-holds-the-future-of-europes-climate-policy-in-her-hands/",
+            "title": "Green team: Von der Leyen holds the future of Europe’s climate policy in her hands – European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INSUFFICIENT_EU_RI",
+        "reason": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Green team: Von der Leyen holds the future of Europe’s climate policy in her hands – European Council",
+      "reader_what": "The work was verified but does not meet the package’s strand-specific admission criteria.",
+      "reader_why": "",
+      "reader_more": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship. The source remains recorded as evidence for the exclusion decision.",
+      "deep_analysis": {
+        "work_kind": "verified source",
+        "research_question": "",
+        "main_finding": "The work was verified but does not meet the package’s strand-specific admission criteria.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:74e7999086b3eaa3",
+      "source_hash": "33201f19",
+      "identity_hash": "12081cb54fab1bc2",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://www.eeas.europa.eu/delegations/china/european-union-continues-call-improved-intellectual-property-protection-china_en."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_primary_web_text",
+            "url": "https://www.eeas.europa.eu/delegations/china/european-union-continues-call-improved-intellectual-property-protection-china_en",
+            "title": "The European Union continues to call for improved intellectual property protection in China",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified substantive European research, innovation or strategic-technology evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU pressure on IP protection in China",
+      "reader_what": "The EU documents continuing concerns about intellectual-property protection and technology-related market conditions in China.",
+      "reader_why": "IP protection affects technology transfer and the conditions for European firms and research-linked innovation abroad.",
+      "reader_more": "The EU Delegation to China reports the Union’s formal position on intellectual-property protection in China. The evidence establishes the EU’s policy stance and a direct EU–China technology-transfer relationship; it does not by itself prove policy effectiveness.",
+      "deep_analysis": {
+        "work_kind": "policy/report evidence",
+        "research_question": "",
+        "main_finding": "The EU documents continuing concerns about intellectual-property protection and technology-related market conditions in China.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "Verified substantive European research, innovation or strategic-technology evidence.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.system_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European External Action Service",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2024-01-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+          "text": "The EU documents continuing concerns about intellectual-property protection and technology-related market conditions in China.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:e6dcd3c339076f1b",
+      "source_hash": "bfb898ef",
+      "identity_hash": "23ebecf525f0308f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://eic.ec.europa.eu/eic-funding-opportunities/eic-accelerator/eic-accelerator-challenges-2026/advanced-materials-renewable-energy-and-energy-storage-systems_en."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_primary_web_text",
+            "url": "https://eic.ec.europa.eu/eic-funding-opportunities/eic-accelerator/eic-accelerator-challenges-2026/advanced-materials-renewable-energy-and-energy-storage-systems_en",
+            "title": "Advanced Materials for Renewable Energy and Energy Storage Systems",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INSUFFICIENT_EU_RI",
+        "reason": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Advanced Materials for Renewable Energy and Energy Storage Systems",
+      "reader_what": "The work was verified but does not meet the package’s strand-specific admission criteria.",
+      "reader_why": "",
+      "reader_more": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship. The source remains recorded as evidence for the exclusion decision.",
+      "deep_analysis": {
+        "work_kind": "verified source",
+        "research_question": "",
+        "main_finding": "The work was verified but does not meet the package’s strand-specific admission criteria.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:016e829f90584e6f",
+      "source_hash": "be874d50",
+      "identity_hash": "74fa86ce52b8f646",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://www.ceps.eu/ceps-publications/a-digital-connectivity-masterplan-for-the-global-gateway/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_primary_web_text",
+            "url": "https://www.ceps.eu/ceps-publications/a-digital-connectivity-masterplan-for-the-global-gateway/",
+            "title": "A Digital Connectivity Masterplan for the Global Gateway – CEPS",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified substantive European research, innovation or strategic-technology evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Digital connectivity for the Global Gateway",
+      "reader_what": "CEPS proposes a connectivity masterplan linking EU external infrastructure investment with digital standards and strategic partnerships.",
+      "reader_why": "Digital infrastructure and rule-setting shape Europe’s external technology position.",
+      "reader_more": "The CEPS report develops a policy architecture for digital connectivity under the Global Gateway. It links infrastructure, financing, standards and international partnerships, giving it a direct strategic digital-policy connection.",
+      "deep_analysis": {
+        "work_kind": "policy/report evidence",
+        "research_question": "",
+        "main_finding": "CEPS proposes a connectivity masterplan linking EU external infrastructure investment with digital standards and strategic partnerships.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "Verified substantive European research, innovation or strategic-technology evidence.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "CEPS",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2023-03-22",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+          "text": "CEPS proposes a connectivity masterplan linking EU external infrastructure investment with digital standards and strategic partnerships.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:90006f474bb310bb",
+      "source_hash": "5610c1b8",
+      "identity_hash": "f5427be95dc483cd",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://www.cost.eu/uploads/2023/03/221128_COST_Final_Report_STSM_clean.pdf."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_pdf_excerpt",
+            "url": "https://www.cost.eu/uploads/2023/03/221128_COST_Final_Report_STSM_clean.pdf",
+            "title": "Impact Assessment Study on Short-Term Mobility Impact Assessment Study on Short-Term Mobility - COST",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified substantive European research, innovation or strategic-technology evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "What short-term COST mobility delivers",
+      "reader_what": "The impact study evaluates short-term scientific mobility within COST networks and its effects on collaboration and careers.",
+      "reader_why": "Mobility and network formation are core mechanisms in the European research system.",
+      "reader_more": "The COST study evaluates short-term mobility as a research-network instrument. It examines participant and collaboration outcomes, providing system-level evidence on a European research mobility mechanism.",
+      "deep_analysis": {
+        "work_kind": "policy/report evidence",
+        "research_question": "",
+        "main_finding": "The impact study evaluates short-term scientific mobility within COST networks and its effects on collaboration and careers.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "Verified substantive European research, innovation or strategic-technology evidence.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.assessment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "COST Association",
+            "class": "other"
+          },
+          "mechanism": "regulates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2023-03-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+          "text": "The impact study evaluates short-term scientific mobility within COST networks and its effects on collaboration and careers.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:0532cbde55a30f41",
+      "source_hash": "e26fe4b5",
+      "identity_hash": "27eddb95bb4891ef",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://digital-strategy.ec.europa.eu/en/faqs/navigating-ai-act."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_primary_web_text",
+            "url": "https://digital-strategy.ec.europa.eu/en/faqs/navigating-ai-act",
+            "title": "Navigating the AI Act",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified substantive European research, innovation or strategic-technology evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Navigating the EU AI Act",
+      "reader_what": "The analysis explains how the AI Act changes governance obligations around AI development and deployment in Europe.",
+      "reader_why": "Regulatory design can alter research, innovation and market pathways for AI in Europe.",
+      "reader_more": "The work analyzes the EU AI Act and its implications for actors developing or deploying AI. Its relevance is the direct governance relationship between a strategic technology and European innovation conditions.",
+      "deep_analysis": {
+        "work_kind": "policy/report evidence",
+        "research_question": "",
+        "main_finding": "The analysis explains how the AI Act changes governance obligations around AI development and deployment in Europe.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "Verified substantive European research, innovation or strategic-technology evidence.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "ai.governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Union",
+            "class": "eu_body"
+          },
+          "mechanism": "regulates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2023-01-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+          "text": "The analysis explains how the AI Act changes governance obligations around AI development and deployment in Europe.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:657a8404d5211dce",
+      "source_hash": "4737c8f0",
+      "identity_hash": "c1b1f7f13c159007",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://defence-industry-space.ec.europa.eu/eu-industrial-strategy-preparatory-consultation-towards-transition-pathway-aerospace-and-defence-2023-07-26_en."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_primary_web_text",
+            "url": "https://defence-industry-space.ec.europa.eu/eu-industrial-strategy-preparatory-consultation-towards-transition-pathway-aerospace-and-defence-2023-07-26_en",
+            "title": "EU Industrial Strategy: preparatory consultation towards transition pathway for Aerospace and Defence industrial ecosystem",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "GENERIC_PROGRAMME_OR_EVENT",
+        "reason": "The source is primarily a programme, call, consultation, event or promotional page rather than substantive evidence-led R&I analysis."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU Industrial Strategy: preparatory consultation towards transition pathway for Aerospace and Defence industri",
+      "reader_what": "The work was verified but does not meet the package’s strand-specific admission criteria.",
+      "reader_why": "",
+      "reader_more": "The source is primarily a programme, call, consultation, event or promotional page rather than substantive evidence-led R&I analysis. The source remains recorded as evidence for the exclusion decision.",
+      "deep_analysis": {
+        "work_kind": "verified source",
+        "research_question": "",
+        "main_finding": "The work was verified but does not meet the package’s strand-specific admission criteria.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "The source is primarily a programme, call, consultation, event or promotional page rather than substantive evidence-led R&I analysis.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:5c1c6d9b03a6268d",
+      "source_hash": "c5d41ba8",
+      "identity_hash": "ed808aa573d1c164",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://ai-watch.ec.europa.eu/publications/ai-watch-road-adoption-artificial-intelligence-public-sector_en."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_primary_web_text",
+            "url": "https://ai-watch.ec.europa.eu/publications/ai-watch-road-adoption-artificial-intelligence-public-sector_en",
+            "title": "AI Watch, road to the adoption of Artificial Intelligence by the public sector",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INSUFFICIENT_EU_RI",
+        "reason": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "AI Watch, road to the adoption of Artificial Intelligence by the public sector",
+      "reader_what": "The work was verified but does not meet the package’s strand-specific admission criteria.",
+      "reader_why": "",
+      "reader_more": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship. The source remains recorded as evidence for the exclusion decision.",
+      "deep_analysis": {
+        "work_kind": "verified source",
+        "research_question": "",
+        "main_finding": "The work was verified but does not meet the package’s strand-specific admission criteria.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:6ee51b88e0306b3f",
+      "source_hash": "8cd06289",
+      "identity_hash": "e1f61bd9a5f2cb02",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://www.interface-eu.org/publications/ai-talent-flows-germany."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_primary_web_text",
+            "url": "https://www.interface-eu.org/publications/ai-talent-flows-germany",
+            "title": "AI Talent Flows in Germany",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified substantive European research, innovation or strategic-technology evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "AI talent flows in Germany",
+      "reader_what": "The study maps international AI talent movement into and out of Germany and the factors shaping those flows.",
+      "reader_why": "Talent attraction and retention affect European AI capability.",
+      "reader_more": "The work provides evidence on AI talent mobility in Germany, a member-state component of Europe’s research and innovation workforce. It is directly relevant to strategic-technology talent capacity.",
+      "deep_analysis": {
+        "work_kind": "policy/report evidence",
+        "research_question": "",
+        "main_finding": "The study maps international AI talent movement into and out of Germany and the factors shaping those flows.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "Verified substantive European research, innovation or strategic-technology evidence.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "talent.career_structure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Interface Europe",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2022-01-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+          "text": "The study maps international AI talent movement into and out of Germany and the factors shaping those flows.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:bb826c1528b8de2d",
+      "source_hash": "31225d29",
+      "identity_hash": "6c08d00fa7491e15",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://content.openalex.org/works/W3027019472.pdf."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_pdf_excerpt",
+            "url": "https://content.openalex.org/works/W3027019472.pdf",
+            "title": "Joint declaration on mainstreaming RRI across Horizon Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INSUFFICIENT_EU_RI",
+        "reason": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Joint declaration on mainstreaming RRI across Horizon Europe",
+      "reader_what": "The work was verified but does not meet the package’s strand-specific admission criteria.",
+      "reader_why": "",
+      "reader_more": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship. The source remains recorded as evidence for the exclusion decision.",
+      "deep_analysis": {
+        "work_kind": "verified source",
+        "research_question": "",
+        "main_finding": "The work was verified but does not meet the package’s strand-specific admission criteria.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:85dbe9802d1d549c",
+      "source_hash": "db929088",
+      "identity_hash": "db4b260c32f9bf87",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://arxiv.org/pdf/1907.08975."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_pdf_excerpt",
+            "url": "https://arxiv.org/pdf/1907.08975",
+            "title": "Might Europe one day again be a global scientific powerhouse? Analysis of ERC publications suggests it will not be possible without changes in research policy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified substantive European research, innovation or strategic-technology evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "ERC publications and Europe’s scientific position",
+      "reader_what": "Bibliometric analysis examines ERC-supported publications and their contribution to Europe’s high-impact scientific output.",
+      "reader_why": "Research performance evidence helps assess Europe’s frontier-science capacity.",
+      "reader_more": "The study uses publication data linked to ERC funding to assess Europe’s scientific performance. It is evidence-led analysis of a European research-funding mechanism and its research output.",
+      "deep_analysis": {
+        "work_kind": "policy/report evidence",
+        "research_question": "",
+        "main_finding": "Bibliometric analysis examines ERC-supported publications and their contribution to Europe’s high-impact scientific output.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "Verified substantive European research, innovation or strategic-technology evidence.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.public_support",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Union",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2020-06-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+          "text": "Bibliometric analysis examines ERC-supported publications and their contribution to Europe’s high-impact scientific output.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:2e2b4134ff7dad38",
+      "source_hash": "256e51a6",
+      "identity_hash": "d6d20b1aa074cb86",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://www.vttresearch.com/en/news-and-ideas/finland-will-be-winner-artificial-intelligence-disruption."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_primary_web_text",
+            "url": "https://www.vttresearch.com/en/news-and-ideas/finland-will-be-winner-artificial-intelligence-disruption",
+            "title": "Finland will be a winner in the Artificial Intelligence disruption | VTT",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INSUFFICIENT_EU_RI",
+        "reason": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Finland will be a winner in the Artificial Intelligence disruption | VTT",
+      "reader_what": "The work was verified but does not meet the package’s strand-specific admission criteria.",
+      "reader_why": "",
+      "reader_more": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship. The source remains recorded as evidence for the exclusion decision.",
+      "deep_analysis": {
+        "work_kind": "verified source",
+        "research_question": "",
+        "main_finding": "The work was verified but does not meet the package’s strand-specific admission criteria.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:047fe16719c3cb7d",
+      "source_hash": "79ad2d9c",
+      "identity_hash": "c6a93ddb576695e1",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://erc.europa.eu/sites/default/files/press_release/files/erc_pr_2011_competitiveness_council_lunch_0_0.pdf."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_pdf_excerpt",
+            "url": "https://erc.europa.eu/sites/default/files/press_release/files/erc_pr_2011_competitiveness_council_lunch_0_0.pdf",
+            "title": "ERC President urges EU Research Ministers to reinforce excellence in Europe (Competitiveness Council)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INSUFFICIENT_EU_RI",
+        "reason": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "ERC President urges EU Research Ministers to reinforce excellence in Europe (Competitiveness Council)",
+      "reader_what": "The work was verified but does not meet the package’s strand-specific admission criteria.",
+      "reader_why": "",
+      "reader_more": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship. The source remains recorded as evidence for the exclusion decision.",
+      "deep_analysis": {
+        "work_kind": "verified source",
+        "research_question": "",
+        "main_finding": "The work was verified but does not meet the package’s strand-specific admission criteria.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:4d1130d6d376c8bf",
+      "source_hash": "3d3db4a6",
+      "identity_hash": "adf18ef961e54799",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://www.coimbra-group.eu/a-collective-outlook-on-the-next-academic-year-at-coimbra-group-universities/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_primary_web_text",
+            "url": "https://www.coimbra-group.eu/a-collective-outlook-on-the-next-academic-year-at-coimbra-group-universities/",
+            "title": "A collective outlook on the next academic year at Coimbra Group universities | Coimbra",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INSUFFICIENT_EU_RI",
+        "reason": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "A collective outlook on the next academic year at Coimbra Group universities | Coimbra",
+      "reader_what": "The work was verified but does not meet the package’s strand-specific admission criteria.",
+      "reader_why": "",
+      "reader_more": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship. The source remains recorded as evidence for the exclusion decision.",
+      "deep_analysis": {
+        "work_kind": "verified source",
+        "research_question": "",
+        "main_finding": "The work was verified but does not meet the package’s strand-specific admission criteria.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:aa805dfa2f7f9514",
+      "source_hash": "702e6cfb",
+      "identity_hash": "b8805f8ae6a8fe7b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://www.coimbra-group.eu/2020-2021-an-unprecedented-academic-year-for-the-european-higher-education-research-and-innovation-areas/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_primary_web_text",
+            "url": "https://www.coimbra-group.eu/2020-2021-an-unprecedented-academic-year-for-the-european-higher-education-research-and-innovation-areas/",
+            "title": "2020-2021, an unprecedented academic year for the European Higher Education, Research and Innovation Areas | Coimbra",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INSUFFICIENT_EU_RI",
+        "reason": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "2020-2021, an unprecedented academic year for the European Higher Education, Research and Innovation Areas | C",
+      "reader_what": "The work was verified but does not meet the package’s strand-specific admission criteria.",
+      "reader_why": "",
+      "reader_more": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship. The source remains recorded as evidence for the exclusion decision.",
+      "deep_analysis": {
+        "work_kind": "verified source",
+        "research_question": "",
+        "main_finding": "The work was verified but does not meet the package’s strand-specific admission criteria.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "The work exists, but its substantive object is not a qualifying European R&I-system or strategic-technology relationship.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:6668e2308d002dcb",
+      "source_hash": "b43bfd5c",
+      "identity_hash": "09d9a94978f49a6d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://www.vttresearch.com/en/news-and-ideas/finland-has-lot-special-expertise-microelectronics."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_primary_web_text",
+            "url": "https://www.vttresearch.com/en/news-and-ideas/finland-has-lot-special-expertise-microelectronics",
+            "title": "Finland has a lot of special expertise in microelectronics | VTT",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "A",
+        "reason_code": "HUMAN_JUDGEMENT_REQUIRED",
+        "reason": "The work is substantive and relevant, but source role or canonical-record handling warrants human judgement."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Finland’s microelectronics capability",
+      "reader_what": "VTT describes areas of Finnish microelectronics expertise and their relevance to industrial and technology capability.",
+      "reader_why": "Microelectronics is strategically important, but the page mixes capability evidence with institutional promotion.",
+      "reader_more": "The VTT article identifies Finnish strengths in microelectronics and related research expertise. It is relevant to strategic-technology capacity, but the promotional source format makes the strength of the evidence less clear than in an independent capability study.",
+      "deep_analysis": {
+        "work_kind": "policy/report evidence",
+        "research_question": "",
+        "main_finding": "VTT describes areas of Finnish microelectronics expertise and their relevance to industrial and technology capability.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "The source is a VTT institutional article, so capability claims should not be read as independent comparative measurement.",
+        "radar_relevance": "The work is substantive and relevant, but source role or canonical-record handling warrants human judgement.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "chips.international_cooperation",
+          "secondary_objects": [],
+          "actor": {
+            "name": "VTT",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2019-12-09",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The source is a VTT institutional article, so capability claims should not be read as independent comparative measurement.",
+          "text": "VTT describes areas of Finnish microelectronics expertise and their relevance to industrial and technology capability.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:2d25acbe77bf339c",
+      "source_hash": "48a484eb",
+      "identity_hash": "72229cea7e5703ae",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains substantive matching material retrieved from https://www.ceps.eu/wp-content/uploads/2015/03/Digital%20Forum%20Brochure%20Update%202016.pdf."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_pdf_excerpt",
+            "url": "https://www.ceps.eu/wp-content/uploads/2015/03/Digital%20Forum%20Brochure%20Update%202016.pdf",
+            "title": "CEPS Digital Forum – CEPS",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The packaged substantive source material matches the work and was used as primary evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "GENERIC_PROGRAMME_OR_EVENT",
+        "reason": "The source is primarily a programme, call, consultation, event or promotional page rather than substantive evidence-led R&I analysis."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "CEPS Digital Forum – CEPS",
+      "reader_what": "The work was verified but does not meet the package’s strand-specific admission criteria.",
+      "reader_why": "",
+      "reader_more": "The source is primarily a programme, call, consultation, event or promotional page rather than substantive evidence-led R&I analysis. The source remains recorded as evidence for the exclusion decision.",
+      "deep_analysis": {
+        "work_kind": "verified source",
+        "research_question": "",
+        "main_finding": "The work was verified but does not meet the package’s strand-specific admission criteria.",
+        "method_or_basis": "Verified from the recovered primary/official material listed in verification.recovered_sources.",
+        "qualification": "Historical evidence; findings should be read in the context of the publication date.",
+        "radar_relevance": "The source is primarily a programme, call, consultation, event or promotional page rather than substantive evidence-led R&I analysis.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    }
+  ]
+}
