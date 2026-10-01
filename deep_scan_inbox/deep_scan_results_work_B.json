@@ -1,0 +1,2586 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-b-20261001T134947Z-bd668899fd86",
+  "results": [
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiekFVX3lxTE1Pc1RnZW41ZU9YUUZqVHFjT0lTUWFKTldPaEZxVDQwMzg0OFgzR3djc0lZMlRnX2JYbmVEdHBEMTFOMWlzMDhxMFFuSmlzbmtjUW9vUmJXenljakFpNy1RQnNJTXlIZEFhRjJtUWtUNm5mT2dpQkZYYWtR?oc=5",
+      "source_hash": "74ab27a0",
+      "identity_hash": "5104ab37622d18b9",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "limited",
+            "note": "Google News RSS redirect supplied; no substantive article text recovered from the reader-facing link."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is associated with this Euractiv news item."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered Euractiv page “THE HACK: EU weighs AI labs’ safety plans”, dated 18 September 2026."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "limited",
+            "note": "Title/date search confirmed the Euractiv item but exposed only the paywalled teaser."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "limited",
+            "note": "Euractiv article and The Hack archive confirmed identity; substantive text remained subscription-gated."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "limited",
+            "note": "Broader search for the headline and EU AI-lab safety plans did not recover a legitimate substantive copy."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_landing_page",
+            "url": "https://www.euractiv.com/news/the-hack-eu-weighs-ai-labs-safety-plans/",
+            "title": "THE HACK: EU weighs AI labs' safety plans",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Identity is verified, but available evidence is too thin to judge the underlying development without inventing details."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "C",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "The article exists, but substantive evidence remained inaccessible after recovery attempts."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "current news item",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "Substantive article text was not accessible.",
+        "radar_relevance": "Potential AI-governance signal, but not verifiable from accessible evidence.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:edd664f7e29f4f65",
+      "source_hash": "69863120",
+      "identity_hash": "ef488f4932405274",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://media.nesta.org.uk/documents/Our_futures_by_the_people_for_the_people_WEB_v5.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_pdf",
+            "url": "https://media.nesta.org.uk/documents/Our_futures_by_the_people_for_the_people_WEB_v5.pdf",
+            "title": "Our Futures: By the people, for the people",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Recovered work makes a reusable methodological contribution rather than merely applying an existing technique."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Our Futures: By the people, for the people",
+      "reader_what": "We also benefited hugely from the input of our colleagues: Harry Armstrong, Peter Baeck, Theo Bass, Will Bibby, Bea Karol",
+      "reader_why": "Provides a transferable method for structured foresight or analysis.",
+      "reader_more": "We also benefited hugely from the input of our colleagues: Harry Armstrong, Peter Baeck, Theo Bass, Will Bibby, Bea Karol Burks, Carrie Deacon, Madeleine Gabriel, Sinead MacManus, Belinda Moreau-Jones, Geoff Mulgan, Rosalyn Old, Jen Rae and Oli Usher. The recovered source was treated as evidence for the work itself, not for broader claims beyond its stated scope.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "We also benefited hugely from the input of our colleagues: Harry Armstrong, Peter Baeck, Theo Bass, Will Bibby, Bea Karol Burks, Carrie Deacon, Madeleine Gabriel, Sinead MacManus, Belinda Moreau-Jones, Geoff Mulgan, Rosalyn Old, Jen Rae and Oli Usher.",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "Recovered work makes a reusable methodological contribution rather than merely applying an existing technique.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "methods.system_modelling",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Nesta",
+            "class": "other"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2019",
+          "status_date_precision": "year",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+          "text": "We also benefited hugely from the input of our colleagues: Harry Armstrong, Peter Baeck, Theo Bass, Will Bibby, Bea Karol Burks, Carrie Deacon, Madeleine Gabriel, Sinead MacManus, Belinda Moreau-Jones, Geoff Mulgan, Rosalyn Old, Jen Rae and Oli Usher.",
+          "confidence": "medium",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:2e253c28db67fe16",
+      "source_hash": "8b3fb1e9",
+      "identity_hash": "3b2354191b24db82",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://doi.org/10.1016/j.jengtecman.2015.05.006"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI/publisher identity matched the packaged title and work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "recovered_web_source",
+            "url": "https://doi.org/10.1016/j.jengtecman.2015.05.006",
+            "title": "The Extended Map methodology: Technology roadmapping for SMES clusters",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Recovered work makes a reusable methodological contribution rather than merely applying an existing technique."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "The Extended Map methodology: Technology roadmapping for SMES clusters",
+      "reader_what": "The Extended Map methodology: Technology roadmapping for SMES clusters",
+      "reader_why": "Provides a transferable method for structured foresight or analysis.",
+      "reader_more": "The Extended Map methodology: Technology roadmapping for SMES clusters The recovered source was treated as evidence for the work itself, not for broader claims beyond its stated scope.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The Extended Map methodology: Technology roadmapping for SMES clusters",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "Recovered work makes a reusable methodological contribution rather than merely applying an existing technique.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "methods.roadmapping",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Journal of Engineering and Technology Management",
+            "class": "other"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2015",
+          "status_date_precision": "year",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+          "text": "The Extended Map methodology: Technology roadmapping for SMES clusters",
+          "confidence": "medium",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:7ed808b505d8e762",
+      "source_hash": "87f077a2",
+      "identity_hash": "33856fd831ac0790",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://content.openalex.org/works/W2032749953.pdf"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI/publisher identity matched the packaged title and work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_pdf",
+            "url": "https://content.openalex.org/works/W2032749953.pdf",
+            "title": "Investigating scenario planning – a European tourism perspective",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "The recovered work exists, but it is primarily a generic programme/advocacy/application page or lacks the substantive European R&I or reusable-method contribution required by the strand."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Investigating scenario planning – a European tourism perspective",
+      "reader_what": "Abstract Purpose – The purpose of this paper is to discuss the scenario planning approach developed and used by the",
+      "reader_why": "",
+      "reader_more": "Abstract Purpose – The purpose of this paper is to discuss the scenario planning approach developed and used by the European Tourism Futures Institute (ETFI). The source was recoverable, but it does not clear the strand’s substantive admission threshold.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "Abstract Purpose – The purpose of this paper is to discuss the scenario planning approach developed and used by the European Tourism Futures Institute (ETFI).",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "The recovered work exists, but it is primarily a generic programme/advocacy/application page or lacks the substantive European R&I or reusable-method contribution required by the strand.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:1a9c0296ad57a559",
+      "source_hash": "70ae7fd4",
+      "identity_hash": "b50ba27b8566147f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://doi.org/10.1016/j.techfore.2014.03.003"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI/publisher identity matched the packaged title and work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "recovered_web_source",
+            "url": "https://doi.org/10.1016/j.techfore.2014.03.003",
+            "title": "Development of data-driven technology roadmap considering dependency: An ARM-based technology roadmapping",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Recovered work makes a reusable methodological contribution rather than merely applying an existing technique."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Development of data-driven technology roadmap considering dependency: An ARM-based technology roadmapping",
+      "reader_what": "Development of data-driven technology roadmap considering dependency: An ARM-based technology roadmapping",
+      "reader_why": "Provides a transferable method for structured foresight or analysis.",
+      "reader_more": "Development of data-driven technology roadmap considering dependency: An ARM-based technology roadmapping The recovered source was treated as evidence for the work itself, not for broader claims beyond its stated scope.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "Development of data-driven technology roadmap considering dependency: An ARM-based technology roadmapping",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "Recovered work makes a reusable methodological contribution rather than merely applying an existing technique.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "methods.roadmapping",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Technological Forecasting and Social Change",
+            "class": "other"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2015",
+          "status_date_precision": "year",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+          "text": "Development of data-driven technology roadmap considering dependency: An ARM-based technology roadmapping",
+          "confidence": "medium",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.iref.2026.105712",
+      "source_hash": "5647a4eb",
+      "identity_hash": "58bb7c1e18d05c0c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://doi.org/10.1016/j.iref.2026.105712"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "recovered_web_source",
+            "url": "https://doi.org/10.1016/j.iref.2026.105712",
+            "title": "Strategic coherence as a signal in innovation grants: Unpacking how technological alignment and financial flexibility shape SME funding decisions",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "The recovered work exists, but it is primarily a generic programme/advocacy/application page or lacks the substantive European R&I or reusable-method contribution required by the strand."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Strategic coherence as a signal in innovation grants: Unpacking how technological alignment and financial flexibility shape SME funding",
+      "reader_what": "Strategic coherence as a signal in innovation grants: Unpacking how technological alignment and financial flexibility shape SME funding decisions",
+      "reader_why": "",
+      "reader_more": "Strategic coherence as a signal in innovation grants: Unpacking how technological alignment and financial flexibility shape SME funding decisions The source was recoverable, but it does not clear the strand’s substantive admission threshold.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "Strategic coherence as a signal in innovation grants: Unpacking how technological alignment and financial flexibility shape SME funding decisions",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "The recovered work exists, but it is primarily a generic programme/advocacy/application page or lacks the substantive European R&I or reusable-method contribution required by the strand.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:256f788e05840f94",
+      "source_hash": "16c5b548",
+      "identity_hash": "ceaa753e387f9413",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://doi.org/10.1108/fs-06-2022-0069"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI/publisher identity matched the packaged title and work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "recovered_web_source",
+            "url": "https://doi.org/10.1108/fs-06-2022-0069",
+            "title": "Foresight and strategic decision-making framework from artificial intelligence technology development to utilization activities in small-and-medium-sized enterprises",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Recovered work makes a reusable methodological contribution rather than merely applying an existing technique."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Foresight and strategic decision-making framework from artificial intelligence technology development to utilization activities in small-and-medium-sized enterprises",
+      "reader_what": "Foresight and strategic decision-making framework from artificial intelligence technology development to utilization activities in small-and-medium-sized enterprises",
+      "reader_why": "Provides a transferable method for structured foresight or analysis.",
+      "reader_more": "Foresight and strategic decision-making framework from artificial intelligence technology development to utilization activities in small-and-medium-sized enterprises The recovered source was treated as evidence for the work itself, not for broader claims beyond its stated scope.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "Foresight and strategic decision-making framework from artificial intelligence technology development to utilization activities in small-and-medium-sized enterprises",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "Recovered work makes a reusable methodological contribution rather than merely applying an existing technique.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Foresight",
+            "class": "other"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2023",
+          "status_date_precision": "year",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+          "text": "Foresight and strategic decision-making framework from artificial intelligence technology development to utilization activities in small-and-medium-sized enterprises",
+          "confidence": "medium",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:5c7d57c2c2f2d019",
+      "source_hash": "4ca2eea7",
+      "identity_hash": "94fb0e5865d7bf14",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://ricerca.sns.it/handle/11384/83669"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI/publisher identity matched the packaged title and work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_landing_page",
+            "url": "https://ricerca.sns.it/handle/11384/83669",
+            "title": "The policy space for a novel industrial policy in Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Recovered substantive evidence directly concerns a qualifying European R&I-system/capability issue."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "The policy space for a novel industrial policy in Europe",
+      "reader_what": "This article examines the main actions in the field of industrial, investment and innovation policy currently carried out at the",
+      "reader_why": "Supports understanding of a verified European R&I mechanism.",
+      "reader_more": "This article examines the main actions in the field of industrial, investment and innovation policy currently carried out at the European level, focusing on the changes in Europe’s manufacturing production since the 2008 crisis. The recovered source was treated as evidence for the work itself, not for broader claims beyond its stated scope.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "This article examines the main actions in the field of industrial, investment and innovation policy currently carried out at the European level, focusing on the changes in Europe’s manufacturing production since the 2008 crisis.",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "Recovered substantive evidence directly concerns a qualifying European R&I-system/capability issue.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "industrial.competitiveness",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Industrial and Corporate Change",
+            "class": "other"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2020",
+          "status_date_precision": "year",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+          "text": "This article examines the main actions in the field of industrial, investment and innovation policy currently carried out at the European level, focusing on the changes in Europe’s manufacturing production since the 2008 crisis.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:856a230d289dd3f9",
+      "source_hash": "87b280eb",
+      "identity_hash": "7dc72e92ef123df9",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://www.vttresearch.com/en/news-and-ideas/ethical-artificial-intelligence-competitive-advantage"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "substantive_web_primary",
+            "url": "https://www.vttresearch.com/en/news-and-ideas/ethical-artificial-intelligence-competitive-advantage",
+            "title": "Ethical artificial intelligence as a competitive advantage | VTT",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "The recovered work exists, but it is primarily a generic programme/advocacy/application page or lacks the substantive European R&I or reusable-method contribution required by the strand."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Ethical artificial intelligence as a competitive advantage | VTT",
+      "reader_what": "Artificial intelligence (AI) is revolutionising business opportunities and is expected to have an even greater transformative effect on the world",
+      "reader_why": "",
+      "reader_more": "Artificial intelligence (AI) is revolutionising business opportunities and is expected to have an even greater transformative effect on the world than the steam engine once did. The source was recoverable, but it does not clear the strand’s substantive admission threshold.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "Artificial intelligence (AI) is revolutionising business opportunities and is expected to have an even greater transformative effect on the world than the steam engine once did.",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "The recovered work exists, but it is primarily a generic programme/advocacy/application page or lacks the substantive European R&I or reusable-method contribution required by the strand.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:86e62b0797a1d2df",
+      "source_hash": "dab0fb21",
+      "identity_hash": "8dd10062bd358dec",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://www.coimbra-group.eu/wp-content/uploads/A-First-Response-to-the-Lamy-Report-CG-1-1-1.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_pdf",
+            "url": "https://www.coimbra-group.eu/wp-content/uploads/A-First-Response-to-the-Lamy-Report-CG-1-1-1.pdf",
+            "title": "A First Response from the CG to the Lamy Report | Coimbra",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "The recovered work exists, but it is primarily a generic programme/advocacy/application page or lacks the substantive European R&I or reusable-method contribution required by the strand."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "A First Response from the CG to the Lamy Report | Coimbra",
+      "reader_what": "Petersburg (RU) Salamanca (ES) Siena (IT) Tartu (EE) Turku (FI) Uppsala (SE) Vilnius (LT) Würzburg (DE) Åbo (FI) Executive Board",
+      "reader_why": "",
+      "reader_more": "Petersburg (RU) Salamanca (ES) Siena (IT) Tartu (EE) Turku (FI) Uppsala (SE) Vilnius (LT) Würzburg (DE) Åbo (FI) Executive Board Chair: Prof. The source was recoverable, but it does not clear the strand’s substantive admission threshold.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "Petersburg (RU) Salamanca (ES) Siena (IT) Tartu (EE) Turku (FI) Uppsala (SE) Vilnius (LT) Würzburg (DE) Åbo (FI) Executive Board Chair: Prof.",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "The recovered work exists, but it is primarily a generic programme/advocacy/application page or lacks the substantive European R&I or reusable-method contribution required by the strand.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:67a3d3b56eeb550e",
+      "source_hash": "e6a28142",
+      "identity_hash": "ba3d98886cfc36be",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://link.springer.com/article/10.1007/s10961-015-9408-9"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI/publisher identity matched the packaged title and work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "substantive_web_primary",
+            "url": "https://link.springer.com/article/10.1007/s10961-015-9408-9",
+            "title": "University knowledge and firm innovation: evidence from European countries",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Recovered substantive evidence directly concerns a qualifying European R&I-system/capability issue."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "University knowledge and firm innovation: evidence from European countries",
+      "reader_what": "In recent decades, firms have intensified the exploration of external sources of knowledge to enhance their innovation capabilities.",
+      "reader_why": "Supports understanding of a verified European R&I mechanism.",
+      "reader_more": "In recent decades, firms have intensified the exploration of external sources of knowledge to enhance their innovation capabilities. The recovered source was treated as evidence for the work itself, not for broader claims beyond its stated scope.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "In recent decades, firms have intensified the exploration of external sources of knowledge to enhance their innovation capabilities.",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "Recovered substantive evidence directly concerns a qualifying European R&I-system/capability issue.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.knowledge_transfer",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Journal of Technology Transfer",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2015",
+          "status_date_precision": "year",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+          "text": "In recent decades, firms have intensified the exploration of external sources of knowledge to enhance their innovation capabilities.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:9f1a10ecfe6e61da",
+      "source_hash": "88e13313",
+      "identity_hash": "548fc3e5b37d6ce7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://link.springer.com/chapter/10.1057/9781137549143_2"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI/publisher identity matched the packaged title and work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "substantive_web_primary",
+            "url": "https://link.springer.com/chapter/10.1057/9781137549143_2",
+            "title": "Competing for Public Resources: Higher Education and Academic Research in Europe — A Cross-Sectoral Perspective",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Recovered substantive evidence directly concerns a qualifying European R&I-system/capability issue."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Competing for Public Resources: Higher Education and Academic Research in Europe — A Cross-Sectoral Perspective",
+      "reader_what": "The chapter focuses on the increasing cross-sectoral competition for public resources between various types of public sector institutions in Europe",
+      "reader_why": "Supports understanding of a verified European R&I mechanism.",
+      "reader_more": "The chapter focuses on the increasing cross-sectoral competition for public resources between various types of public sector institutions in Europe and its implications for future public funding for both higher education and academic research. The recovered source was treated as evidence for the work itself, not for broader claims beyond its stated scope.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "The chapter focuses on the increasing cross-sectoral competition for public resources between various types of public sector institutions in Europe and its implications for future public funding for both higher education and academic research.",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "Recovered substantive evidence directly concerns a qualifying European R&I-system/capability issue.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.system_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Higher Education",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2015",
+          "status_date_precision": "year",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+          "text": "The chapter focuses on the increasing cross-sectoral competition for public resources between various types of public sector institutions in Europe and its implications for future public funding for both higher education and academic research.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:c62c5b50076b6a4f",
+      "source_hash": "8191f9d1",
+      "identity_hash": "37c6f2b70ca99928",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://content.openalex.org/works/W7125403670.pdf"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI/publisher identity matched the packaged title and work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_pdf",
+            "url": "https://content.openalex.org/works/W7125403670.pdf",
+            "title": "Anticipatory Methods for the Emergence of Radically New Technologies: Navigating Uncertainty",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "The recovered work exists, but it is primarily a generic programme/advocacy/application page or lacks the substantive European R&I or reusable-method contribution required by the strand."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Anticipatory Methods for the Emergence of Radically New Technologies: Navigating Uncertainty",
+      "reader_what": "Roland Ortt1,2 1Faculty of Technology, Policy and Management, Delft University of Technology, Delft, the Netherlands | 2Faculty Erasmus School of",
+      "reader_why": "",
+      "reader_more": "Roland Ortt1,2 1Faculty of Technology, Policy and Management, Delft University of Technology, Delft, the Netherlands | 2Faculty Erasmus School of Social and Behavioural Sciences, Erasmus University Rotterdam, Rotterdam, the Netherlands Correspondence: Barbara L. The source was recoverable, but it does not clear the strand’s substantive admission threshold.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "Roland Ortt1,2 1Faculty of Technology, Policy and Management, Delft University of Technology, Delft, the Netherlands | 2Faculty Erasmus School of Social and Behavioural Sciences, Erasmus University Rotterdam, Rotterdam, the Netherlands Correspondence: Barbara L.",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "The recovered work exists, but it is primarily a generic programme/advocacy/application page or lacks the substantive European R&I or reusable-method contribution required by the strand.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:cfc3df63ea047522",
+      "source_hash": "7ad1b1f7",
+      "identity_hash": "ba66f1960662d613",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://doi.org/10.1177/1946756719851524"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI/publisher identity matched the packaged title and work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "recovered_web_source",
+            "url": "https://doi.org/10.1177/1946756719851524",
+            "title": "Foresight Training: Moving from Design to Evaluation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "The recovered work exists, but it is primarily a generic programme/advocacy/application page or lacks the substantive European R&I or reusable-method contribution required by the strand."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Foresight Training: Moving from Design to Evaluation",
+      "reader_what": "Foresight Training: Moving from Design to Evaluation",
+      "reader_why": "",
+      "reader_more": "Foresight Training: Moving from Design to Evaluation The source was recoverable, but it does not clear the strand’s substantive admission threshold.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "Foresight Training: Moving from Design to Evaluation",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "The recovered work exists, but it is primarily a generic programme/advocacy/application page or lacks the substantive European R&I or reusable-method contribution required by the strand.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:61e9f501f96f5182",
+      "source_hash": "89ae7561",
+      "identity_hash": "e5ab8299c14b8263",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://www.foi.se/download/18.787987fb16d6f5f4a2a1d6/1570188796672/Developing_horizon_scanning_FOI-S--6080--SE.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_pdf",
+            "url": "https://www.foi.se/download/18.787987fb16d6f5f4a2a1d6/1570188796672/Developing_horizon_scanning_FOI-S--6080--SE.pdf",
+            "title": "Developing Horizon Scanning Methods for the Discovery of Scientific Trends",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Recovered work makes a reusable methodological contribution rather than merely applying an existing technique."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Developing Horizon Scanning Methods for the Discovery of Scientific Trends",
+      "reader_what": "Literature within a broadly defined field is automatically clustered and ranked based on topic and scientific impact, respectively.",
+      "reader_why": "Provides a transferable method for structured foresight or analysis.",
+      "reader_more": "Literature within a broadly defined field is automatically clustered and ranked based on topic and scientific impact, respectively. The recovered source was treated as evidence for the work itself, not for broader claims beyond its stated scope.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "Literature within a broadly defined field is automatically clustered and ranked based on topic and scientific impact, respectively.",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "Recovered work makes a reusable methodological contribution rather than merely applying an existing technique.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "methods.horizon_scanning",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Swedish Defence Research Agency",
+            "class": "other"
+          },
+          "mechanism": "detects",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2019",
+          "status_date_precision": "year",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+          "text": "Literature within a broadly defined field is automatically clustered and ranked based on topic and scientific impact, respectively.",
+          "confidence": "medium",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:71fb388747f74384",
+      "source_hash": "fdd4f429",
+      "identity_hash": "c551e0918da1e17e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://doi.org/10.1108/fs-11-2018-0093"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI/publisher identity matched the packaged title and work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "recovered_web_source",
+            "url": "https://doi.org/10.1108/fs-11-2018-0093",
+            "title": "“Mainstreaming” foresight program development in the public sector",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Recovered work makes a reusable methodological contribution rather than merely applying an existing technique."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "“Mainstreaming” foresight program development in the public sector",
+      "reader_what": "“Mainstreaming” foresight program development in the public sector",
+      "reader_why": "Provides a transferable method for structured foresight or analysis.",
+      "reader_more": "“Mainstreaming” foresight program development in the public sector The recovered source was treated as evidence for the work itself, not for broader claims beyond its stated scope.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "“Mainstreaming” foresight program development in the public sector",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "Recovered work makes a reusable methodological contribution rather than merely applying an existing technique.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Foresight",
+            "class": "other"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2019",
+          "status_date_precision": "year",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+          "text": "“Mainstreaming” foresight program development in the public sector",
+          "confidence": "medium",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:f89e2f0952d9a342",
+      "source_hash": "8e15e988",
+      "identity_hash": "02bee804773bcc54",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://link.springer.com/article/10.1007/s40309-015-0079-4"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI/publisher identity matched the packaged title and work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "substantive_web_primary",
+            "url": "https://link.springer.com/article/10.1007/s40309-015-0079-4",
+            "title": "A new path in foresight validation? Discussing the socio-epistemic underpinning of foresight quality criteria",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Recovered work makes a reusable methodological contribution rather than merely applying an existing technique."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "A new path in foresight validation? Discussing the socio-epistemic underpinning of foresight quality criteria",
+      "reader_what": "At present, there are different attempts to establish quality criteria for foresight based on both, the epistemic and the procedural",
+      "reader_why": "Provides a transferable method for structured foresight or analysis.",
+      "reader_more": "At present, there are different attempts to establish quality criteria for foresight based on both, the epistemic and the procedural level and all these attempts contribute to a scientific discourse on foresight. The recovered source was treated as evidence for the work itself, not for broader claims beyond its stated scope.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "At present, there are different attempts to establish quality criteria for foresight based on both, the epistemic and the procedural level and all these attempts contribute to a scientific discourse on foresight.",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "Recovered work makes a reusable methodological contribution rather than merely applying an existing technique.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "methods.evaluation",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Futures",
+            "class": "other"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2015",
+          "status_date_precision": "year",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+          "text": "At present, there are different attempts to establish quality criteria for foresight based on both, the epistemic and the procedural level and all these attempts contribute to a scientific discourse on foresight.",
+          "confidence": "medium",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://digital-strategy.ec.europa.eu/en/activities/study-identify-digital-technologies-next-eu-research-and-innovation-fund",
+      "source_hash": "22849766",
+      "identity_hash": "e4b4bb1cdfb7c394",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://digital-strategy.ec.europa.eu/en/activities/study-identify-digital-technologies-next-eu-research-and-innovation-fund"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "substantive_web_primary",
+            "url": "https://digital-strategy.ec.europa.eu/en/activities/study-identify-digital-technologies-next-eu-research-and-innovation-fund",
+            "title": "Study to identify key strategic digital technologies for EU research and innovation funding beyond 2027",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Recovered substantive evidence directly concerns a qualifying European R&I-system/capability issue."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Study to identify key strategic digital technologies for EU research and innovation funding beyond 2027",
+      "reader_what": "Collecting evidence on Research & Innovation needs for EU investments in digital technology in the next Multiannual Financial Framework (MFF).",
+      "reader_why": "Supports understanding of a verified European R&I mechanism.",
+      "reader_more": "Collecting evidence on Research & Innovation needs for EU investments in digital technology in the next Multiannual Financial Framework (MFF). The recovered source was treated as evidence for the work itself, not for broader claims beyond its stated scope.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "Collecting evidence on Research & Innovation needs for EU investments in digital technology in the next Multiannual Financial Framework (MFF).",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "Recovered substantive evidence directly concerns a qualifying European R&I-system/capability issue.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "funding.route",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission — Digital Strategy",
+            "class": "eu_body"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026",
+          "status_date_precision": "year",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+          "text": "Collecting evidence on Research & Innovation needs for EU investments in digital technology in the next Multiannual Financial Framework (MFF).",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://dfrlab.org/2026/09/15/digital-sovereignty-and-europes-democracy-stack/",
+      "source_hash": "fc411378",
+      "identity_hash": "47b7d5f1bf521e03",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://dfrlab.org/2026/09/15/digital-sovereignty-and-europes-democracy-stack/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "substantive_web_primary",
+            "url": "https://dfrlab.org/2026/09/15/digital-sovereignty-and-europes-democracy-stack/",
+            "title": "Digital sovereignty and Europe’s democracy stack: Delivering on the European Union’s priorities for the 2028–2034 Multiannual Financial Framework",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "The recovered work exists, but it is primarily a generic programme/advocacy/application page or lacks the substantive European R&I or reusable-method contribution required by the strand."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Digital sovereignty and Europe’s democracy stack: Delivering on the European Union’s priorities for the 2028–2034 Multiannual Financial Framework",
+      "reader_what": "The EU's digital sovereignty agenda is missing a funded, independent institutional capability to hold its own technology investments democratically accountable.",
+      "reader_why": "",
+      "reader_more": "The EU's digital sovereignty agenda is missing a funded, independent institutional capability to hold its own technology investments democratically accountable. The source was recoverable, but it does not clear the strand’s substantive admission threshold.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "The EU's digital sovereignty agenda is missing a funded, independent institutional capability to hold its own technology investments democratically accountable.",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "The recovered work exists, but it is primarily a generic programme/advocacy/application page or lacks the substantive European R&I or reusable-method contribution required by the strand.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://defence-industry-space.ec.europa.eu/system/files/2026-07/Proposal-for-a-Council-Implementing-Decision-on-the-establishment-of-european-Projects-of-Common-Interest.pdf",
+      "source_hash": "793dc35b",
+      "identity_hash": "26484a0f642ce9e7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://defence-industry-space.ec.europa.eu/system/files/2026-07/Proposal-for-a-Council-Implementing-Decision-on-the-establishment-of-european-Projects-of-Common-Interest.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_pdf",
+            "url": "https://defence-industry-space.ec.europa.eu/system/files/2026-07/Proposal-for-a-Council-Implementing-Decision-on-the-establishment-of-european-Projects-of-Common-Interest.pdf",
+            "title": "EDIP Forging Europe's Defence",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Recovered substantive evidence directly concerns a qualifying European R&I-system/capability issue."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EDIP Forging Europe's Defence",
+      "reader_what": "EDPCIs shall consist of collaborative industrial projects aimed at reinforcing the competitiveness of the EDTIB throughout the Union while contributing",
+      "reader_why": "Supports understanding of a verified European R&I mechanism.",
+      "reader_more": "EDPCIs shall consist of collaborative industrial projects aimed at reinforcing the competitiveness of the EDTIB throughout the Union while contributing to the development of Member States’ military capabilities critical for the security and defence interests of the Union and including those capabilities securing access to all operational domains. The recovered source was treated as evidence for the work itself, not for broader claims beyond its stated scope.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "EDPCIs shall consist of collaborative industrial projects aimed at reinforcing the competitiveness of the EDTIB throughout the Union while contributing to the development of Member States’ military capabilities critical for the security and defence interests of the Union and including those capabilities securing access to all operational domains.",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "Recovered substantive evidence directly concerns a qualifying European R&I-system/capability issue.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "innovation.dual_use",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission — Defence Industry and Space",
+            "class": "other"
+          },
+          "mechanism": "supports",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026",
+          "status_date_precision": "year",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+          "text": "EDPCIs shall consist of collaborative industrial projects aimed at reinforcing the competitiveness of the EDTIB throughout the Union while contributing to the development of Member States’ military capabilities critical for the security and defence interests of the Union and including those capabilities securing…",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:ef00c4c686d3048f",
+      "source_hash": "444ef62d",
+      "identity_hash": "cf7f2e0c8338c5c0",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://www.aka.fi/globalassets/3-stn/2-hankkeille/raportointi-ja-seuranta/src_researchreport_instructions_english.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_pdf",
+            "url": "https://www.aka.fi/globalassets/3-stn/2-hankkeille/raportointi-ja-seuranta/src_researchreport_instructions_english.pdf",
+            "title": "2026 Second funding period (2026–2029) for SRC programmes JUST ENERGY and JUST TRANSITION, invitation-only call",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "The recovered work exists, but it is primarily a generic programme/advocacy/application page or lacks the substantive European R&I or reusable-method contribution required by the strand."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "2026 Second funding period (2026–2029) for SRC programmes JUST ENERGY and JUST TRANSITION, invitation-only call",
+      "reader_what": "This document contains concrete annual, interim and final reporting instructions for SRC projects.",
+      "reader_why": "",
+      "reader_more": "This document contains concrete annual, interim and final reporting instructions for SRC projects. The source was recoverable, but it does not clear the strand’s substantive admission threshold.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "This document contains concrete annual, interim and final reporting instructions for SRC projects.",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "The recovered work exists, but it is primarily a generic programme/advocacy/application page or lacks the substantive European R&I or reusable-method contribution required by the strand.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:02612788fb72c94a",
+      "source_hash": "6b722839",
+      "identity_hash": "114b02c0b9cec3b2",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://digital-strategy.ec.europa.eu/en/library/study-eus-strategic-digital-technologies-next-eu-research-innovation-programme"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "substantive_web_primary",
+            "url": "https://digital-strategy.ec.europa.eu/en/library/study-eus-strategic-digital-technologies-next-eu-research-innovation-programme",
+            "title": "Study on the EU's strategic digital technologies for the next EU research & innovation programme",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Recovered substantive evidence directly concerns a qualifying European R&I-system/capability issue."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Study on the EU's strategic digital technologies for the next EU research & innovation programme",
+      "reader_what": "The European Commission has published a new study to help shape priorities in digital technologies for research, development and innovation",
+      "reader_why": "Supports understanding of a verified European R&I mechanism.",
+      "reader_more": "The European Commission has published a new study to help shape priorities in digital technologies for research, development and innovation in Europe under the next Multiannual Financial Framework (2028–2034). The recovered source was treated as evidence for the work itself, not for broader claims beyond its stated scope.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "The European Commission has published a new study to help shape priorities in digital technologies for research, development and innovation in Europe under the next Multiannual Financial Framework (2028–2034).",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "Recovered substantive evidence directly concerns a qualifying European R&I-system/capability issue.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission — Digital Strategy",
+            "class": "eu_body"
+          },
+          "mechanism": "prioritises",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2025",
+          "status_date_precision": "year",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+          "text": "The European Commission has published a new study to help shape priorities in digital technologies for research, development and innovation in Europe under the next Multiannual Financial Framework (2028–2034).",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:de91f5cc48a378b6",
+      "source_hash": "be32184c",
+      "identity_hash": "25fddfce4d703da4",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://www.aka.fi/globalassets/2-suomen-akatemian-toiminta/4-julkaisut/julkaisut/aka_eu-rrf-raportti_en_web.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_pdf",
+            "url": "https://www.aka.fi/globalassets/2-suomen-akatemian-toiminta/4-julkaisut/julkaisut/aka_eu-rrf-raportti_en_web.pdf",
+            "title": "New report by Research Council of Finland examines results and effects of projects funded through EU Recovery and Resilience Facility (RRF)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Recovered substantive evidence directly concerns a qualifying European R&I-system/capability issue."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "New report by Research Council of Finland examines results and effects of projects funded through EU Recovery and",
+      "reader_what": "Introduction ..............................................................................",
+      "reader_why": "Supports understanding of a verified European R&I mechanism.",
+      "reader_more": "Introduction .............................................................................. The recovered source was treated as evidence for the work itself, not for broader claims beyond its stated scope.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "Introduction ..............................................................................",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "Recovered substantive evidence directly concerns a qualifying European R&I-system/capability issue.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Research Council of Finland",
+            "class": "other"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2025",
+          "status_date_precision": "year",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+          "text": "Introduction ..............................................................................",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:c0895f07df144605",
+      "source_hash": "a82a9b0d",
+      "identity_hash": "5d6927ca037f5668",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://www.eeas.europa.eu/delegations/armenia/new-eu-strategy-secure-prosperous-and-resilient-black-sea-region_en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "substantive_web_primary",
+            "url": "https://www.eeas.europa.eu/delegations/armenia/new-eu-strategy-secure-prosperous-and-resilient-black-sea-region_en",
+            "title": "New EU strategy for secure, prosperous and resilient Black Sea region",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "The recovered work exists, but it is primarily a generic programme/advocacy/application page or lacks the substantive European R&I or reusable-method contribution required by the strand."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "New EU strategy for secure, prosperous and resilient Black Sea region",
+      "reader_what": "Today the EU is putting forward a new strategy for a stable and secure Black Sea region.",
+      "reader_why": "",
+      "reader_more": "Today the EU is putting forward a new strategy for a stable and secure Black Sea region. The source was recoverable, but it does not clear the strand’s substantive admission threshold.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "Today the EU is putting forward a new strategy for a stable and secure Black Sea region.",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "The recovered work exists, but it is primarily a generic programme/advocacy/application page or lacks the substantive European R&I or reusable-method contribution required by the strand.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:c265aa671e402a03",
+      "source_hash": "7cc1d403",
+      "identity_hash": "275a8bbb46dc3d71",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://www.vinnova.se/en/p/a-digital-twin-for-the-swedish-tyre-industry--scenario-modelling-for-civil-preparedness-and-supply-chain-resilience/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "substantive_web_primary",
+            "url": "https://www.vinnova.se/en/p/a-digital-twin-for-the-swedish-tyre-industry--scenario-modelling-for-civil-preparedness-and-supply-chain-resilience/",
+            "title": "A digital twin for the Swedish tyre industry – scenario modelling for civil preparedness and supply chain resilience | Vinnova",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "The recovered work exists, but it is primarily a generic programme/advocacy/application page or lacks the substantive European R&I or reusable-method contribution required by the strand."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "A digital twin for the Swedish tyre industry – scenario modelling for civil preparedness and supply chain resilience",
+      "reader_what": "You're using version {0} of the web browser {1}.",
+      "reader_why": "",
+      "reader_more": "You're using version {0} of the web browser {1}. The source was recoverable, but it does not clear the strand’s substantive admission threshold.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "You're using version {0} of the web browser {1}.",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "The recovered work exists, but it is primarily a generic programme/advocacy/application page or lacks the substantive European R&I or reusable-method contribution required by the strand.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:3a1956fb364849bf",
+      "source_hash": "1ea0f714",
+      "identity_hash": "acf313097f7c15ba",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://www.aka.fi/en/research-funding/apply-for-funding/calls-for-applications/apply-now2/2025-funding-for-research-into-sustainable-energy-solutions-of-the-future/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "substantive_web_primary",
+            "url": "https://www.aka.fi/en/research-funding/apply-for-funding/calls-for-applications/apply-now2/2025-funding-for-research-into-sustainable-energy-solutions-of-the-future/",
+            "title": "2025 Funding for research into sustainable energy solutions of the future",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Recovered substantive evidence directly concerns a qualifying European R&I-system/capability issue."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "2025 Funding for research into sustainable energy solutions of the future",
+      "reader_what": "Increasing our carbon handprint is at the heart of future solutions.",
+      "reader_why": "Supports understanding of a verified European R&I mechanism.",
+      "reader_more": "Increasing our carbon handprint is at the heart of future solutions. The recovered source was treated as evidence for the work itself, not for broader claims beyond its stated scope.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "Increasing our carbon handprint is at the heart of future solutions.",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "Recovered substantive evidence directly concerns a qualifying European R&I-system/capability issue.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "funding.route",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Research Council of Finland",
+            "class": "eu_body"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2025",
+          "status_date_precision": "year",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+          "text": "Increasing our carbon handprint is at the heart of future solutions.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:8ff0b5cce5c71b2d",
+      "source_hash": "a949a1c4",
+      "identity_hash": "50bca1cfb645fef6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://www.cnas.org/publications/commentary/how-policymakers-can-advance-american-quantum-technology-leadership-in-2024"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "substantive_web_primary",
+            "url": "https://www.cnas.org/publications/commentary/how-policymakers-can-advance-american-quantum-technology-leadership-in-2024",
+            "title": "How Policymakers Can Advance American Quantum Technology Leadership in 2024",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "The recovered work exists, but it is primarily a generic programme/advocacy/application page or lacks the substantive European R&I or reusable-method contribution required by the strand."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "How Policymakers Can Advance American Quantum Technology Leadership in 2024",
+      "reader_what": "Developing strong, pragmatic and principled national security and defense policies.",
+      "reader_why": "",
+      "reader_more": "Developing strong, pragmatic and principled national security and defense policies. The source was recoverable, but it does not clear the strand’s substantive admission threshold.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "Developing strong, pragmatic and principled national security and defense policies.",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "The recovered work exists, but it is primarily a generic programme/advocacy/application page or lacks the substantive European R&I or reusable-method contribution required by the strand.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:97ab0bc88afa62b2",
+      "source_hash": "cbd46361",
+      "identity_hash": "803c0df372af519b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://www.earto.eu/wp-content/uploads/EARTO-Recommendations-No-EU-Tech-No-EU-Competitiveness-Final.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_pdf",
+            "url": "https://www.earto.eu/wp-content/uploads/EARTO-Recommendations-No-EU-Tech-No-EU-Competitiveness-Final.pdf",
+            "title": "EARTO Policy Recommendations 2024-2029: No EU Tech, No EU Competitiveness | EARTO",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "The recovered work exists, but it is primarily a generic programme/advocacy/application page or lacks the substantive European R&I or reusable-method contribution required by the strand."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EARTO Policy Recommendations 2024-2029: No EU Tech, No EU Competitiveness | EARTO",
+      "reader_what": "Competitiveness lies at the heart of Europe’s response to the numerous challenges we face today.",
+      "reader_why": "",
+      "reader_more": "Competitiveness lies at the heart of Europe’s response to the numerous challenges we face today. The source was recoverable, but it does not clear the strand’s substantive admission threshold.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "Competitiveness lies at the heart of Europe’s response to the numerous challenges we face today.",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "The recovered work exists, but it is primarily a generic programme/advocacy/application page or lacks the substantive European R&I or reusable-method contribution required by the strand.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:ce89d27611298f45",
+      "source_hash": "5f1300c7",
+      "identity_hash": "300a5411a656c79e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://www.hybridcoe.fi/wp-content/uploads/2024/12/20241212-Hybrid-CoE-Paper-22-Cross-cutting-technologies-in-Chinese-space-activities-WEB.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_pdf",
+            "url": "https://www.hybridcoe.fi/wp-content/uploads/2024/12/20241212-Hybrid-CoE-Paper-22-Cross-cutting-technologies-in-Chinese-space-activities-WEB.pdf",
+            "title": "Cross-cutting technologies in Chinese space activities: Raising the risk of hybrid threats",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Recovered substantive evidence directly concerns a qualifying European R&I-system/capability issue."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Cross-cutting technologies in Chinese space activities: Raising the risk of hybrid threats",
+      "reader_what": "They may be either conceptual analyses or based on a concrete case study with empirical data.",
+      "reader_why": "Supports understanding of a verified European R&I mechanism.",
+      "reader_more": "They may be either conceptual analyses or based on a concrete case study with empirical data. The recovered source was treated as evidence for the work itself, not for broader claims beyond its stated scope.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "They may be either conceptual analyses or based on a concrete case study with empirical data.",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "Recovered substantive evidence directly concerns a qualifying European R&I-system/capability issue.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "innovation.dual_use",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Hybrid CoE — European Centre of Excellence for Countering Hybrid Threats",
+            "class": "other"
+          },
+          "mechanism": "supports",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2024",
+          "status_date_precision": "year",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+          "text": "They may be either conceptual analyses or based on a concrete case study with empirical data.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:c05e0265f1cd3d4a",
+      "source_hash": "a975ad16",
+      "identity_hash": "11cb9317928e0e5f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://www.eurekanetwork.org/european-partnership-on-innovative-smes-reaction-to-the-uks-association-to-horizon-europe-and-copernicus/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_landing_page",
+            "url": "https://www.eurekanetwork.org/european-partnership-on-innovative-smes-reaction-to-the-uks-association-to-horizon-europe-and-copernicus/",
+            "title": "European Partnership on Innovative SMEs – Reaction to the UK’s association to Horizon Europe and Copernicus",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Recovered substantive evidence directly concerns a qualifying European R&I-system/capability issue."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "European Partnership on Innovative SMEs – Reaction to the UK’s association to Horizon Europe and Copernicus",
+      "reader_what": "Eureka Discover the world’s largest network of ministries and innovation agencies dedicated to supporting international research and development (R&D).",
+      "reader_why": "Supports understanding of a verified European R&I mechanism.",
+      "reader_more": "Eureka Discover the world’s largest network of ministries and innovation agencies dedicated to supporting international research and development (R&D). The recovered source was treated as evidence for the work itself, not for broader claims beyond its stated scope.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "Eureka Discover the world’s largest network of ministries and innovation agencies dedicated to supporting international research and development (R&D).",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "Recovered substantive evidence directly concerns a qualifying European R&I-system/capability issue.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "funding.route",
+          "secondary_objects": [],
+          "actor": {
+            "name": "EUREKA",
+            "class": "eu_body"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2023",
+          "status_date_precision": "year",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+          "text": "Eureka Discover the world’s largest network of ministries and innovation agencies dedicated to supporting international research and development (R&D).",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:054d9bb973bb1328",
+      "source_hash": "cf4444b7",
+      "identity_hash": "343768f0e6e43bb5",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://www.interface-eu.org/publications/downloadPdf/chinas-digital-power-assessing-implications-eu"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_pdf",
+            "url": "https://www.interface-eu.org/publications/downloadPdf/chinas-digital-power-assessing-implications-eu",
+            "title": "China’s Digital Power - Assessing the Implications for the EU",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Recovered substantive evidence directly concerns a qualifying European R&I-system/capability issue."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "China’s Digital Power - Assessing the Implications for the EU",
+      "reader_what": "In addition, a European non-resident fellow of a US re- search institution has joined DPC.",
+      "reader_why": "Supports understanding of a verified European R&I mechanism.",
+      "reader_more": "In addition, a European non-resident fellow of a US re- search institution has joined DPC. The recovered source was treated as evidence for the work itself, not for broader claims beyond its stated scope.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "In addition, a European non-resident fellow of a US re- search institution has joined DPC.",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "Recovered substantive evidence directly concerns a qualifying European R&I-system/capability issue.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Interface Europe",
+            "class": "eu_body"
+          },
+          "mechanism": "prioritises",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2022",
+          "status_date_precision": "year",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+          "text": "In addition, a European non-resident fellow of a US re- search institution has joined DPC.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:290c373b963684b8",
+      "source_hash": "b4290f52",
+      "identity_hash": "cd2581931245ec75",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://health.ec.europa.eu/latest-updates/flash-report-joint-meeting-shadow-health-configuration-horizon-europe-programme-committee-and-2021-03-05_en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_landing_page",
+            "url": "https://health.ec.europa.eu/latest-updates/flash-report-joint-meeting-shadow-health-configuration-horizon-europe-programme-committee-and-2021-03-05_en",
+            "title": "Flash report - Joint Meeting of the Shadow Health Configuration of the Horizon Europe Programme Committee and of the Steering Group on Health Promotion, Disease Preventio",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "The recovered work exists, but it is primarily a generic programme/advocacy/application page or lacks the substantive European R&I or reusable-method contribution required by the strand."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Flash report - Joint Meeting of the Shadow Health Configuration of the Horizon Europe Programme Committee and of",
+      "reader_what": "Flash report - Joint Meeting of the Shadow Health Configuration of the Horizon Europe Programme Committee and of the Steering",
+      "reader_why": "",
+      "reader_more": "Flash report - Joint Meeting of the Shadow Health Configuration of the Horizon Europe Programme Committee and of the Steering Group on Health Promotion, Disease Preventio Directorate-General for Health and Food Safety The source was recoverable, but it does not clear the strand’s substantive admission threshold.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "Flash report - Joint Meeting of the Shadow Health Configuration of the Horizon Europe Programme Committee and of the Steering Group on Health Promotion, Disease Preventio Directorate-General for Health and Food Safety",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "The recovered work exists, but it is primarily a generic programme/advocacy/application page or lacks the substantive European R&I or reusable-method contribution required by the strand.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:c925e36d2670fb1e",
+      "source_hash": "94f749ed",
+      "identity_hash": "50219670450d0e37",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://www.eeas.europa.eu/delegations/armenia/armenia-joins-horizon-europe-eu-research-and-innovation-programme_en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "substantive_web_primary",
+            "url": "https://www.eeas.europa.eu/delegations/armenia/armenia-joins-horizon-europe-eu-research-and-innovation-programme_en",
+            "title": "Armenia joins Horizon Europe, the EU research and innovation programme",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Recovered substantive evidence directly concerns a qualifying European R&I-system/capability issue."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Armenia joins Horizon Europe, the EU research and innovation programme",
+      "reader_what": "Armenia joins Horizon Europe, the EU research and innovation programme Today, the European Commission and Armenia have signed the agreement",
+      "reader_why": "Supports understanding of a verified European R&I mechanism.",
+      "reader_more": "Armenia joins Horizon Europe, the EU research and innovation programme Today, the European Commission and Armenia have signed the agreement granting the Republic of Armenia the association status to Horizon Europe , the EU’s research and innovation programme (2021-2027). The recovered source was treated as evidence for the work itself, not for broader claims beyond its stated scope.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "Armenia joins Horizon Europe, the EU research and innovation programme Today, the European Commission and Armenia have signed the agreement granting the Republic of Armenia the association status to Horizon Europe , the EU’s research and innovation programme (2021-2027).",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "Recovered substantive evidence directly concerns a qualifying European R&I-system/capability issue.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "funding.route",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European External Action Service",
+            "class": "eu_body"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2021",
+          "status_date_precision": "year",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+          "text": "Armenia joins Horizon Europe, the EU research and innovation programme Today, the European Commission and Armenia have signed the agreement granting the Republic of Armenia the association status to Horizon Europe , the EU’s research and innovation programme (2021-2027).",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:589da8a2858eb5d2",
+      "source_hash": "29902fe4",
+      "identity_hash": "725d4f051b1046af",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://www.awti.nl/site/binaries/site-content/collections/documents/2021/04/01/advisory-report-state-of-knowledge---restoring-the-value-of-knowledge-and-expertise-in-policy-and-politics/Advisory+report_State+of+knowledge+-+Restoring+the+value+of+knowledge+and+expertise+in+policy+and+politics.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_pdf",
+            "url": "https://www.awti.nl/site/binaries/site-content/collections/documents/2021/04/01/advisory-report-state-of-knowledge---restoring-the-value-of-knowledge-and-expertise-in-policy-and-politics/Advisory+report_State+of+knowledge+-+Restoring+the+value+of+knowledge+and+expertise+in+policy+and+politics.pdf",
+            "title": "Advisory report: State of knowledge - Restoring the value of knowledge and expertise in policy and politics | Adviesraad voor wetenschap, technologie en innovatie",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Recovered substantive evidence directly concerns a qualifying European R&I-system/capability issue."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Advisory report: State of knowledge - Restoring the value of knowledge and expertise in policy and politics |",
+      "reader_what": "Its independent reports are strategic in nature and focus on the contours of government science, technology and innovation policy.",
+      "reader_why": "Supports understanding of a verified European R&I mechanism.",
+      "reader_more": "Its independent reports are strategic in nature and focus on the contours of government science, technology and innovation policy. The recovered source was treated as evidence for the work itself, not for broader claims beyond its stated scope.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "Its independent reports are strategic in nature and focus on the contours of government science, technology and innovation policy.",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "Recovered substantive evidence directly concerns a qualifying European R&I-system/capability issue.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Dutch Advisory Council for Science, Technology and Innovation",
+            "class": "other"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2021",
+          "status_date_precision": "year",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+          "text": "Its independent reports are strategic in nature and focus on the contours of government science, technology and innovation policy.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:4bfd9887275b1ef8",
+      "source_hash": "df618ddb",
+      "identity_hash": "378d5d6b99e1a1f5",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://www.awti.nl/site/binaries/site-content/collections/documents/2021/02/17/advice-state-of-knowledge-restoring-the-value-of-knowledge-and-expertise-in-policy-and-politics/AWTI-Advice+State+of+knowledge.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_pdf",
+            "url": "https://www.awti.nl/site/binaries/site-content/collections/documents/2021/02/17/advice-state-of-knowledge-restoring-the-value-of-knowledge-and-expertise-in-policy-and-politics/AWTI-Advice+State+of+knowledge.pdf",
+            "title": "Advice: State of knowledge - Restoring the value of knowledge and expertise in policy and politics | Adviesraad voor wetenschap, technologie en innovatie",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Recovered substantive evidence directly concerns a qualifying European R&I-system/capability issue."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Advice: State of knowledge - Restoring the value of knowledge and expertise in policy and politics | Adviesraad",
+      "reader_what": "Its independent reports are strategic in nature and focus on the contours of government science, technology and innovation policy.",
+      "reader_why": "Supports understanding of a verified European R&I mechanism.",
+      "reader_more": "Its independent reports are strategic in nature and focus on the contours of government science, technology and innovation policy. The recovered source was treated as evidence for the work itself, not for broader claims beyond its stated scope.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "Its independent reports are strategic in nature and focus on the contours of government science, technology and innovation policy.",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "Recovered substantive evidence directly concerns a qualifying European R&I-system/capability issue.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Dutch Advisory Council for Science, Technology and Innovation",
+            "class": "other"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2021",
+          "status_date_precision": "year",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+          "text": "Its independent reports are strategic in nature and focus on the contours of government science, technology and innovation policy.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:2b7c63703c2f2046",
+      "source_hash": "028945e1",
+      "identity_hash": "46ceda427c38382f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching source material at https://www.coimbra-group.eu/what-research-for-the-future-balancing-the-obsession-with-publishing-and-the-need-for-social-impact/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "substantive_web_primary",
+            "url": "https://www.coimbra-group.eu/what-research-for-the-future-balancing-the-obsession-with-publishing-and-the-need-for-social-impact/",
+            "title": "What Research for the Future? Balancing the Obsession with Publishing and the Need for Social Impact | Coimbra",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched title/provenance to the packaged primary or publisher material and assessed the actual work against the V2 strand criteria."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "The recovered work exists, but it is primarily a generic programme/advocacy/application page or lacks the substantive European R&I or reusable-method contribution required by the strand."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "What Research for the Future? Balancing the Obsession with Publishing and the Need for Social Impact | Coimbra",
+      "reader_what": "It is certainly an important step for the main institutions of Italian scientific research and, once again, a significant opportunity",
+      "reader_why": "",
+      "reader_more": "It is certainly an important step for the main institutions of Italian scientific research and, once again, a significant opportunity to reflect on the sense and meaning of research. The source was recoverable, but it does not clear the strand’s substantive admission threshold.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "It is certainly an important step for the main institutions of Italian scientific research and, once again, a significant opportunity to reflect on the sense and meaning of research.",
+        "method_or_basis": "Assessment based on the recovered primary/publisher text included in the Deep Scan package.",
+        "qualification": "Evidence is limited to the scope and methods of the recovered work; broader causal or future claims are not inferred.",
+        "radar_relevance": "The recovered work exists, but it is primarily a generic programme/advocacy/application page or lacks the substantive European R&I or reusable-method contribution required by the strand.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    }
+  ]
+}
