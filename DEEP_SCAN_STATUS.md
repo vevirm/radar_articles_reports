@@ -9,14 +9,14 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 - Authoritative V2 verified: **2308** (Main **1106** + Historical **1202**)
 - Automatic queue still needing V2 verification: **126** (Main **8** + Historical **118**)
 - Currently assigned to workers: **97** (Main **8** + Historical **89**)
-- Bounded access-recovery retries still eligible: **0**
+- Bounded access-recovery retries still eligible: **1**
 - Hands-on verification needed: **25**
 - Automatic queue pending and not yet assigned: **29**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261001T113458Z-27812f81b3b5`
+- Current package: `worker-a-20261001T114418Z-27812f81b3b5`
 - Assigned unresolved records: **36**
   1. `historical:id:a27dcc6c17eaa230` — ERA Portal Austria – TOWARDS A EUROPEAN FRAMEWORK FOR RESEARCH CAREERS (2011)
   2. `historical:id:430a0c6600f89574` — ERA Portal Austria – Research Careers
@@ -29,16 +29,16 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261001T113516Z-53013f12cbc7`
+- Current package: `worker-b-20261001T114446Z-bd668899fd86`
 - Assigned unresolved records: **36**
-  1. `historical:id:217bb85900a247b7` — Building dynamic capabilities to cope with environmental uncertainty: The role of strategic foresight
-  2. `link:https://news.google.com/rss/articles/CBMiekFVX3lxTE1Pc1RnZW41ZU9YUUZqVHFjT0lTUWFKTldPaEZxVDQwMzg0OFgzR3djc0lZMlRnX2JYbmVEdHBEMTFOMWlzMDhxMFFuSmlzbmtjUW9vUmJXenljakFpNy1RQnNJTXlIZEFhRjJtUWtUNm5mT2dpQkZYYWtR?oc=5` — THE HACK: EU weighs AI labs' safety plans — recovery attempt 3/3
-  3. `historical:id:edd664f7e29f4f65` — Our Futures: By the people, for the people
-  4. `historical:id:2e253c28db67fe16` — The Extended Map methodology: Technology roadmapping for SMES clusters
-  5. `historical:id:7ed808b505d8e762` — Investigating scenario planning – a European tourism perspective
-  6. `historical:id:1a9c0296ad57a559` — Development of data-driven technology roadmap considering dependency: An ARM-based technology roadmapping
-  7. `link:https://doi.org/10.1016/j.iref.2026.105712` — Strategic coherence as a signal in innovation grants: Unpacking how technological alignment and financial flexibility shape SME funding decisions — recovery attempt 3/3
-  8. `historical:id:256f788e05840f94` — Foresight and strategic decision-making framework from artificial intelligence technology development to utilization activities in small-and-medium-sized enterprises — recovery attempt 3/3
+  1. `link:https://news.google.com/rss/articles/CBMiekFVX3lxTE1Pc1RnZW41ZU9YUUZqVHFjT0lTUWFKTldPaEZxVDQwMzg0OFgzR3djc0lZMlRnX2JYbmVEdHBEMTFOMWlzMDhxMFFuSmlzbmtjUW9vUmJXenljakFpNy1RQnNJTXlIZEFhRjJtUWtUNm5mT2dpQkZYYWtR?oc=5` — THE HACK: EU weighs AI labs' safety plans — recovery attempt 3/3
+  2. `historical:id:edd664f7e29f4f65` — Our Futures: By the people, for the people
+  3. `historical:id:2e253c28db67fe16` — The Extended Map methodology: Technology roadmapping for SMES clusters
+  4. `historical:id:7ed808b505d8e762` — Investigating scenario planning – a European tourism perspective
+  5. `historical:id:1a9c0296ad57a559` — Development of data-driven technology roadmap considering dependency: An ARM-based technology roadmapping
+  6. `link:https://doi.org/10.1016/j.iref.2026.105712` — Strategic coherence as a signal in innovation grants: Unpacking how technological alignment and financial flexibility shape SME funding decisions — recovery attempt 3/3
+  7. `historical:id:256f788e05840f94` — Foresight and strategic decision-making framework from artificial intelligence technology development to utilization activities in small-and-medium-sized enterprises — recovery attempt 3/3
+  8. `historical:id:5c7d57c2c2f2d019` — The policy space for a novel industrial policy in Europe — recovery attempt 3/3
   - … plus 28 more in the package manifest
 
 ### Worker SINGLE
