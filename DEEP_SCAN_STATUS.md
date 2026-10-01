@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261001T054327Z-654ccf10abf1`
+- Current package: `worker-a-20261001T055155Z-654ccf10abf1`
 - Assigned unresolved records: **36**
   1. `historical:id:4c175377997921f0` — Development of a novel framework for the analysis of Technological Innovation Systems by Causal Layered Analysis (CLA) in energy systems — recovery attempt 2/3
   2. `link:https://era.gv.at/news-items/ec-allocates-additional-500-million-to-horizon-europe-and-publishes-two-monitoring-reports/` — EC allocates additional € 500 million to Horizon Europe and publishes two monitoring reports
@@ -29,7 +29,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261001T054356Z-53013f12cbc7`
+- Current package: `worker-b-20261001T055222Z-53013f12cbc7`
 - Assigned unresolved records: **36**
   1. `historical:id:217bb85900a247b7` — Building dynamic capabilities to cope with environmental uncertainty: The role of strategic foresight
   2. `link:https://news.google.com/rss/articles/CBMiekFVX3lxTE1Pc1RnZW41ZU9YUUZqVHFjT0lTUWFKTldPaEZxVDQwMzg0OFgzR3djc0lZMlRnX2JYbmVEdHBEMTFOMWlzMDhxMFFuSmlzbmtjUW9vUmJXenljakFpNy1RQnNJTXlIZEFhRjJtUWtUNm5mT2dpQkZYYWtR?oc=5` — THE HACK: EU weighs AI labs' safety plans — recovery attempt 3/3
