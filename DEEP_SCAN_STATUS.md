@@ -6,30 +6,30 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2301** (Main **1103** + Historical **1198**)
-- Automatic queue still needing V2 verification: **133** (Main **11** + Historical **122**)
+- Authoritative V2 verified: **2308** (Main **1106** + Historical **1202**)
+- Automatic queue still needing V2 verification: **126** (Main **8** + Historical **118**)
 - Currently assigned to workers: **97** (Main **8** + Historical **89**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **25**
-- Automatic queue pending and not yet assigned: **36**
+- Automatic queue pending and not yet assigned: **29**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261001T111430Z-654ccf10abf1`
+- Current package: `worker-a-20261001T113458Z-27812f81b3b5`
 - Assigned unresolved records: **36**
-  1. `historical:id:4c175377997921f0` — Development of a novel framework for the analysis of Technological Innovation Systems by Causal Layered Analysis (CLA) in energy systems — recovery attempt 2/3
-  2. `link:https://era.gv.at/news-items/ec-allocates-additional-500-million-to-horizon-europe-and-publishes-two-monitoring-reports/` — EC allocates additional € 500 million to Horizon Europe and publishes two monitoring reports
-  3. `link:https://www.gmfus.org/innovation-competitiveness/gmf-technology` — GMF Technology
-  4. `link:https://doi.org/10.1163/21971927-bja10077` — University–Industry Collaboration and Innovation Performance: Insights from the Quadruple Helix Perspective
-  5. `historical:id:6af45802f36e938a` — Three shifts that define a new chapter for AI | RISE
-  6. `historical:id:db100ac909ce7ce3` — How ERC frontier research strengthens Europe’s competitiveness
-  7. `historical:id:061189819c7516e9` — Talent in, Talent out
-  8. `historical:id:aba42c2d79d6aa16` — Strategic Vulnerabilities of the European Union
+  1. `historical:id:a27dcc6c17eaa230` — ERA Portal Austria – TOWARDS A EUROPEAN FRAMEWORK FOR RESEARCH CAREERS (2011)
+  2. `historical:id:430a0c6600f89574` — ERA Portal Austria – Research Careers
+  3. `historical:id:6e9495cbc7e7feb7` — ECAS Report: Insights from Researchers on the Fifth Freedom in Europe - ECAS
+  4. `historical:id:84bdd53bdefffffe` — A brighter future: Why upgrading the grid is vital for Europe’s competitiveness – European Council on Foreign Relations
+  5. `historical:id:09dfe3e1a2bc3143` — Towards a Responsible Research Assessment Transition: A Novel Framework for Researcher Profiles
+  6. `historical:id:b24b045a073e9a30` — Tide turners: How startups can shape Europe’s tech future and geoeconomic strategy – European Council on Foreign Relations
+  7. `historical:id:09f7fe2d1995fee8` — New report | Raw material and supply chain vulnerabilities in the Dutch defence sector: An analysis of the Air Defence & Command Frigate - HCSS
+  8. `historical:id:584da47fe51bc377` — Technical Tiers: A New Classification Framework for Global AI Workforce Analysis
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261001T111459Z-53013f12cbc7`
+- Current package: `worker-b-20261001T113516Z-53013f12cbc7`
 - Assigned unresolved records: **36**
   1. `historical:id:217bb85900a247b7` — Building dynamic capabilities to cope with environmental uncertainty: The role of strategic foresight
   2. `link:https://news.google.com/rss/articles/CBMiekFVX3lxTE1Pc1RnZW41ZU9YUUZqVHFjT0lTUWFKTldPaEZxVDQwMzg0OFgzR3djc0lZMlRnX2JYbmVEdHBEMTFOMWlzMDhxMFFuSmlzbmtjUW9vUmJXenljakFpNy1RQnNJTXlIZEFhRjJtUWtUNm5mT2dpQkZYYWtR?oc=5` — THE HACK: EU weighs AI labs' safety plans — recovery attempt 3/3
