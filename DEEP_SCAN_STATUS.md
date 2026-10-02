@@ -7,17 +7,17 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **2372** (Main **1112** + Historical **1260**)
-- Automatic queue still needing V2 verification: **83** (Main **7** + Historical **76**)
-- Currently assigned to workers: **83** (Main **7** + Historical **76**)
+- Automatic queue still needing V2 verification: **157** (Main **78** + Historical **79**)
+- Currently assigned to workers: **129** (Main **53** + Historical **76**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **29**
-- Automatic queue pending and not yet assigned: **0**
+- Automatic queue pending and not yet assigned: **28**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261002T054102Z-5c32c46c6046`
-- Assigned unresolved records: **36**
+- Current package: `worker-a-20261002T130016Z-6b1d6fe24985`
+- Assigned unresolved records: **52**
   1. `link:https://www.espi.eu/wp-content/uploads/2026/10/ESPI-Insights-Issue-August-2026.pdf` — ESPI Insights for August 2026 is out! - ESPI
   2. `link:https://ecipe.org/publications/6g-wake-up-call-for-europe/#_ftnref1` — The 6G Wake-up Call for Europe: Reforms Urgently Needed to Sustain Europe’s Telecommunications Leadership
   3. `link:https://doi.org/10.1016/j.lanepe.2026.101778` — Rebalancing innovation, affordability, and access for orphan drugs in the European Union
@@ -26,11 +26,11 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `link:https://ecfr.eu/publication/bewitched-sleep-russians-views-on-ukraine-and-the-world/` — Bewitched sleep: Russians’ views on Ukraine and the world – European Council on Foreign Relations
   7. `link:https://doi.org/10.1016/j.joi.2026.101874` — Knowledge creation and patenting by European higher education institutions–evidence from a new dataset (KC-HEI)
   8. `historical:id:6dec1388df761e83` — Essay: Sweden can help shape a future of sustainable prosperity
-  - … plus 28 more in the package manifest
+  - … plus 44 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261002T054131Z-2fd5e828663c`
-- Assigned unresolved records: **22**
+- Current package: `worker-b-20261002T130036Z-31ec3a93209e`
+- Assigned unresolved records: **52**
   1. `historical:id:cfc3df63ea047522` — Foresight Training: Moving from Design to Evaluation — recovery attempt 2/3
   2. `historical:id:71fb388747f74384` — “Mainstreaming” foresight program development in the public sector — recovery attempt 2/3
   3. `historical:id:2e253c28db67fe16` — The Extended Map methodology: Technology roadmapping for SMES clusters — recovery attempt 2/3
@@ -39,7 +39,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:b4dd14c145bda2d8` — Chinese tech standards put the screws on European companies
   7. `historical:id:f50731a742ee5685` — Building the future with nanoimprint lithography
   8. `historical:id:9877c1198845aa39` — Sharing research data
-  - … plus 14 more in the package manifest
+  - … plus 44 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20260929T121743Z-e775de6d81ad`
