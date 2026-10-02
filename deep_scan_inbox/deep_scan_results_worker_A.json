@@ -1,0 +1,2446 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-a-20261002T051330Z-8d50ffbdca7b",
+  "results": [
+    {
+      "record_key": "historical:id:a27dcc6c17eaa230",
+      "source_hash": "dbdead04",
+      "identity_hash": "f6a0186748798fa5",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://era.gv.at/era/era-policy-agenda/ongoing-era-actions/research-careers/towards-a-european-framework-for-research-careers/; package contains matching abstract_or_landing_page material for the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied or identifiable for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title \"ERA Portal Austria – TOWARDS A EUROPEAN FRAMEWORK FOR RESEARCH CAREERS (2011)\"; matching publisher/issuing-body record was found."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched title with source/year metadata (ERA Portal Austria; 2026); identity was corroborated."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "limited",
+            "note": "Checked issuing organisation/publisher for \"ERA Portal Austria – TOWARDS A EUROPEAN FRAMEWORK FOR RESEARCH CAREERS (2011)\"; no stronger accessible full-text source was recovered."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Final search using distinctive title fragments and identifiers confirmed the same work; no conflicting identity was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_landing_page",
+            "url": "https://era.gv.at/era/era-policy-agenda/ongoing-era-actions/research-careers/towards-a-european-framework-for-research-careers/",
+            "title": "ERA Portal Austria – TOWARDS A EUROPEAN FRAMEWORK FOR RESEARCH CAREERS (2011)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Official European research-career framework is substantive evidence about ERA career structures and researcher mobility policy."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "European research-career framework",
+      "reader_what": "European Commission set out a common framework for describing researcher career stages and mobility.",
+      "reader_why": "It provides source-grounded evidence about a consequential European research, innovation or strategic-technology mechanism.",
+      "reader_more": "European Commission set out a common framework for describing researcher career stages and mobility. The document is a policy framework; it does not demonstrate later implementation effects.",
+      "deep_analysis": {
+        "work_kind": "empirical study / policy report / methodological study",
+        "research_question": "",
+        "main_finding": "European Commission set out a common framework for describing researcher career stages and mobility.",
+        "method_or_basis": "Recovered full/substantive primary text from the supplied source, with identity/provenance checks.",
+        "qualification": "The document is a policy framework; it does not demonstrate later implementation effects.",
+        "radar_relevance": "It provides source-grounded evidence about a consequential European research, innovation or strategic-technology mechanism.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "talent.career_structure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "standardises",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2011",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The document is a policy framework; it does not demonstrate later implementation effects.",
+          "text": "European Commission set out a common framework for describing researcher career stages and mobility.",
+          "confidence": "high",
+          "status_date_precision": "year"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:430a0c6600f89574",
+      "source_hash": "d1c34bac",
+      "identity_hash": "91ff99f2d1629572",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://era.gv.at/era/era-policy-agenda/ongoing-era-actions/research-careers/; package contains matching substantial_web_text material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_web_text",
+            "url": "https://era.gv.at/era/era-policy-agenda/ongoing-era-actions/research-careers/",
+            "title": "ERA Portal Austria – Research Careers",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_SUBSTANTIVE_PROGRAMME_PAGE",
+        "reason": "ERA action overview is a programme/policy navigation page rather than a completed evidence product."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "ERA Portal Austria",
+      "reader_what": "ERA action overview is a programme/policy navigation page rather than a completed evidence product.",
+      "reader_why": "",
+      "reader_more": "ERA action overview is a programme/policy navigation page rather than a completed evidence product. The work exists and its provenance is verified, but it does not satisfy the current strand admission standard.",
+      "deep_analysis": {
+        "work_kind": "policy/news/commentary/programme material or out-of-scope work",
+        "research_question": "",
+        "main_finding": "ERA action overview is a programme/policy navigation page rather than a completed evidence product.",
+        "method_or_basis": "Verified against substantial_web_text package material and source identity.",
+        "qualification": "The decision concerns Radar admission, not the general value of the source.",
+        "radar_relevance": "ERA action overview is a programme/policy navigation page rather than a completed evidence product.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:6e9495cbc7e7feb7",
+      "source_hash": "e0799522",
+      "identity_hash": "545fe32470cff63d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://ecas.org/publication/ecas-report-insights-from-researchers-on-the-fifth-freedom-in-europe/; package contains matching substantial_web_text material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_web_text",
+            "url": "https://ecas.org/publication/ecas-report-insights-from-researchers-on-the-fifth-freedom-in-europe/",
+            "title": "ECAS Report: Insights from Researchers on the Fifth Freedom in Europe - ECAS",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Survey-based report directly examines barriers to researcher mobility in the European Research Area."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Barriers to Europe’s fifth freedom",
+      "reader_what": "Researchers reported persistent administrative, recognition and recruitment barriers to cross-border mobility in Europe.",
+      "reader_why": "It provides source-grounded evidence about a consequential European research, innovation or strategic-technology mechanism.",
+      "reader_more": "Researchers reported persistent administrative, recognition and recruitment barriers to cross-border mobility in Europe. Survey evidence reflects respondents and should not be treated as a census of all European researchers.",
+      "deep_analysis": {
+        "work_kind": "empirical study / policy report / methodological study",
+        "research_question": "",
+        "main_finding": "Researchers reported persistent administrative, recognition and recruitment barriers to cross-border mobility in Europe.",
+        "method_or_basis": "Recovered full/substantive primary text from the supplied source, with identity/provenance checks.",
+        "qualification": "Survey evidence reflects respondents and should not be treated as a census of all European researchers.",
+        "radar_relevance": "It provides source-grounded evidence about a consequential European research, innovation or strategic-technology mechanism.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "talent.career_structure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Citizen Action Service",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2026-06-10",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Survey evidence reflects respondents and should not be treated as a census of all European researchers.",
+          "text": "Researchers reported persistent administrative, recognition and recruitment barriers to cross-border mobility in Europe.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:84bdd53bdefffffe",
+      "source_hash": "f591ad7e",
+      "identity_hash": "069ac552c643e191",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://ecfr.eu/article/a-brighter-future-why-upgrading-the-grid-is-vital-for-europes-competitiveness/; package contains matching substantial_web_text material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_web_text",
+            "url": "https://ecfr.eu/article/a-brighter-future-why-upgrading-the-grid-is-vital-for-europes-competitiveness/",
+            "title": "A brighter future: Why upgrading the grid is vital for Europe’s competitiveness – European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_RI_NOT_CENTRAL",
+        "reason": "Commentary focuses on electricity-grid competitiveness; research and innovation system evidence is not the substantive object."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "A brighter future: Why upgrading the grid is vital for Europe’s competitiveness",
+      "reader_what": "Commentary focuses on electricity-grid competitiveness; research and innovation system evidence is not the substantive object.",
+      "reader_why": "",
+      "reader_more": "Commentary focuses on electricity-grid competitiveness; research and innovation system evidence is not the substantive object. The work exists and its provenance is verified, but it does not satisfy the current strand admission standard.",
+      "deep_analysis": {
+        "work_kind": "policy/news/commentary/programme material or out-of-scope work",
+        "research_question": "",
+        "main_finding": "Commentary focuses on electricity-grid competitiveness; research and innovation system evidence is not the substantive object.",
+        "method_or_basis": "Verified against substantial_web_text package material and source identity.",
+        "qualification": "The decision concerns Radar admission, not the general value of the source.",
+        "radar_relevance": "Commentary focuses on electricity-grid competitiveness; research and innovation system evidence is not the substantive object.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:09dfe3e1a2bc3143",
+      "source_hash": "5ee99dc2",
+      "identity_hash": "da5e0c1601db8a39",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://doi.org/10.51408/issi2025_139; package contains matching pdf_excerpt material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_recovered_pdf_text",
+            "url": "https://issi2025.iiap.sci.am/wp-content/uploads/2025/07/11.-xenou_rp_issi2025_209.pdf",
+            "title": "Towards a Responsible Research Assessment Transition: A Novel Framework for Researcher Profiles",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Conference paper develops and tests a framework for responsible researcher assessment within the European research-policy context."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "A framework for responsible researcher assessment",
+      "reader_what": "The paper proposes researcher profiles that capture broader contributions beyond conventional publication metrics.",
+      "reader_why": "It provides source-grounded evidence about a consequential European research, innovation or strategic-technology mechanism.",
+      "reader_more": "The paper proposes researcher profiles that capture broader contributions beyond conventional publication metrics. The framework is a methodological proposal presented in a conference paper, not evidence of system-wide adoption.",
+      "deep_analysis": {
+        "work_kind": "empirical study / policy report / methodological study",
+        "research_question": "",
+        "main_finding": "The paper proposes researcher profiles that capture broader contributions beyond conventional publication metrics.",
+        "method_or_basis": "Recovered full/substantive primary text from the supplied source, with identity/provenance checks.",
+        "qualification": "The framework is a methodological proposal presented in a conference paper, not evidence of system-wide adoption.",
+        "radar_relevance": "It provides source-grounded evidence about a consequential European research, innovation or strategic-technology mechanism.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.assessment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "OpenAIRE contributors",
+            "class": "other"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2025-07-10",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The framework is a methodological proposal presented in a conference paper, not evidence of system-wide adoption.",
+          "text": "The paper proposes researcher profiles that capture broader contributions beyond conventional publication metrics.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:b24b045a073e9a30",
+      "source_hash": "863739f3",
+      "identity_hash": "863fe39a9b6d6e60",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://ecfr.eu/article/tide-turners-how-startups-can-shape-europes-tech-future-and-geoeconomic-strategy/; package contains matching substantial_web_text material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_web_text",
+            "url": "https://ecfr.eu/article/tide-turners-how-startups-can-shape-europes-tech-future-and-geoeconomic-strategy/",
+            "title": "Tide turners: How startups can shape Europe’s tech future and geoeconomic strategy – European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_SUBSTANTIVE_COMMENTARY",
+        "reason": "Policy commentary on startups and geoeconomics is not a completed evidence-led study of the European R&I system."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Tide turners: How startups can shape Europe’s tech future and geoeconomic strategy",
+      "reader_what": "Policy commentary on startups and geoeconomics is not a completed evidence-led study of the European R&I system.",
+      "reader_why": "",
+      "reader_more": "Policy commentary on startups and geoeconomics is not a completed evidence-led study of the European R&I system. The work exists and its provenance is verified, but it does not satisfy the current strand admission standard.",
+      "deep_analysis": {
+        "work_kind": "policy/news/commentary/programme material or out-of-scope work",
+        "research_question": "",
+        "main_finding": "Policy commentary on startups and geoeconomics is not a completed evidence-led study of the European R&I system.",
+        "method_or_basis": "Verified against substantial_web_text package material and source identity.",
+        "qualification": "The decision concerns Radar admission, not the general value of the source.",
+        "radar_relevance": "Policy commentary on startups and geoeconomics is not a completed evidence-led study of the European R&I system.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:09f7fe2d1995fee8",
+      "source_hash": "4bd3fea9",
+      "identity_hash": "fa0fb44f85248c47",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://hcss.nl/wp-content/uploads/2025/01/Raw-material-and-supply-chain-vulnerabilities-in-Dutch-defence-sector-HCSS-2024-V2.pdf; package contains matching pdf_excerpt material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_recovered_pdf_text",
+            "url": "https://hcss.nl/wp-content/uploads/2025/01/Raw-material-and-supply-chain-vulnerabilities-in-Dutch-defence-sector-HCSS-2024-V2.pdf",
+            "title": "New report | Raw material and supply chain vulnerabilities in the Dutch defence sector: An analysis of the Air Defence & Command Frigate - HCSS",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Commissioned independent study maps critical-material and supply-chain vulnerabilities affecting Dutch and allied defence capability."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Defence supply-chain vulnerabilities",
+      "reader_what": "The study identifies raw-material and deeper-tier supply-chain vulnerabilities in a Dutch air-defence frigate.",
+      "reader_why": "It provides source-grounded evidence about a consequential European research, innovation or strategic-technology mechanism.",
+      "reader_more": "The study identifies raw-material and deeper-tier supply-chain vulnerabilities in a Dutch air-defence frigate. The case is one defence platform; findings should not be generalised to all European defence supply chains.",
+      "deep_analysis": {
+        "work_kind": "empirical study / policy report / methodological study",
+        "research_question": "",
+        "main_finding": "The study identifies raw-material and deeper-tier supply-chain vulnerabilities in a Dutch air-defence frigate.",
+        "method_or_basis": "Recovered full/substantive primary text from the supplied source, with identity/provenance checks.",
+        "qualification": "The case is one defence platform; findings should not be generalised to all European defence supply chains.",
+        "radar_relevance": "It provides source-grounded evidence about a consequential European research, innovation or strategic-technology mechanism.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "materials.critical_raw",
+          "secondary_objects": [],
+          "actor": {
+            "name": "HCSS",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2024-10",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "NL"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "The case is one defence platform; findings should not be generalised to all European defence supply chains.",
+          "text": "The study identifies raw-material and deeper-tier supply-chain vulnerabilities in a Dutch air-defence frigate.",
+          "confidence": "high",
+          "status_date_precision": "month"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:584da47fe51bc377",
+      "source_hash": "647fca93",
+      "identity_hash": "0a86cc30e955ac29",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://www.interface-eu.org/publications/downloadPdf/technical-tiers-in-ai-talent; package contains matching pdf_excerpt material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_recovered_pdf_text",
+            "url": "https://www.interface-eu.org/publications/downloadPdf/technical-tiers-in-ai-talent",
+            "title": "Technical Tiers: A New Classification Framework for Global AI Workforce Analysis",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Study introduces a reusable tiered classification framework for analysing AI workforce supply and demand."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Technical tiers for AI workforce analysis",
+      "reader_what": "The study defines three AI-proficiency tiers to compare workforce supply and demand more precisely.",
+      "reader_why": "It contributes a reusable analytical or foresight method beyond a one-off application.",
+      "reader_more": "The study defines three AI-proficiency tiers to compare workforce supply and demand more precisely. The classification depends on occupational, vacancy and profile data that may not capture all AI work.",
+      "deep_analysis": {
+        "work_kind": "empirical study / policy report / methodological study",
+        "research_question": "",
+        "main_finding": "The study defines three AI-proficiency tiers to compare workforce supply and demand more precisely.",
+        "method_or_basis": "Recovered full/substantive primary text from the supplied source, with identity/provenance checks.",
+        "qualification": "The classification depends on occupational, vacancy and profile data that may not capture all AI work.",
+        "radar_relevance": "It contributes a reusable analytical or foresight method beyond a one-off application.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.evaluation",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Interface Europe",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "standardises",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2025",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The classification depends on occupational, vacancy and profile data that may not capture all AI work.",
+          "text": "The study defines three AI-proficiency tiers to compare workforce supply and demand more precisely.",
+          "confidence": "high",
+          "status_date_precision": "year",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:b76d43e84a99c2e8",
+      "source_hash": "8d317611",
+      "identity_hash": "e65c404a148e32fa",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://www.interface-eu.org/publications/downloadPdf/solving-europes-ai-talent-equation; package contains matching pdf_excerpt material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_recovered_pdf_text",
+            "url": "https://www.interface-eu.org/publications/downloadPdf/solving-europes-ai-talent-equation",
+            "title": "Solving Europe's AI talent equation: Supply, demand and missing pieces",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Data brief measures AI talent supply-demand mismatches across European countries using vacancy and talent-profile data."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Europe’s AI talent mismatches",
+      "reader_what": "European vacancy and profile data show different AI-skill supply-demand conditions across proficiency tiers and countries.",
+      "reader_why": "It provides source-grounded evidence about a consequential European research, innovation or strategic-technology mechanism.",
+      "reader_more": "European vacancy and profile data show different AI-skill supply-demand conditions across proficiency tiers and countries. Online vacancies and web-scraped profiles are imperfect proxies for total labour-market supply and demand.",
+      "deep_analysis": {
+        "work_kind": "empirical study / policy report / methodological study",
+        "research_question": "",
+        "main_finding": "European vacancy and profile data show different AI-skill supply-demand conditions across proficiency tiers and countries.",
+        "method_or_basis": "Recovered full/substantive primary text from the supplied source, with identity/provenance checks.",
+        "qualification": "Online vacancies and web-scraped profiles are imperfect proxies for total labour-market supply and demand.",
+        "radar_relevance": "It provides source-grounded evidence about a consequential European research, innovation or strategic-technology mechanism.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "ai.workforce_evaluation",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Interface Europe and CEPS",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2025-07-09",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Online vacancies and web-scraped profiles are imperfect proxies for total labour-market supply and demand.",
+          "text": "European vacancy and profile data show different AI-skill supply-demand conditions across proficiency tiers and countries.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:49d10cd2bd833c73",
+      "source_hash": "827a7f30",
+      "identity_hash": "e07f6e2d209265e7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://ecfr.eu/article/offensive-strategy-the-eus-economic-security/; package contains matching substantial_web_text material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_web_text",
+            "url": "https://ecfr.eu/article/offensive-strategy-the-eus-economic-security/",
+            "title": "Offensive strategy: The EU’s economic security – European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_SUBSTANTIVE_COMMENTARY",
+        "reason": "Short policy commentary is not a substantive evidence product focused on European R&I."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Offensive strategy: The EU’s economic security",
+      "reader_what": "Short policy commentary is not a substantive evidence product focused on European R&I.",
+      "reader_why": "",
+      "reader_more": "Short policy commentary is not a substantive evidence product focused on European R&I. The work exists and its provenance is verified, but it does not satisfy the current strand admission standard.",
+      "deep_analysis": {
+        "work_kind": "policy/news/commentary/programme material or out-of-scope work",
+        "research_question": "",
+        "main_finding": "Short policy commentary is not a substantive evidence product focused on European R&I.",
+        "method_or_basis": "Verified against substantial_web_text package material and source identity.",
+        "qualification": "The decision concerns Radar admission, not the general value of the source.",
+        "radar_relevance": "Short policy commentary is not a substantive evidence product focused on European R&I.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:71f0ec91ad3f16e9",
+      "source_hash": "78e33ce1",
+      "identity_hash": "aa235fe1a1f99c8b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://allea.org/allea-calls-for-balanced-and-secure-international-research-collaboration-in-a-changing-world/; package contains matching substantial_web_text material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_web_text",
+            "url": "https://allea.org/allea-calls-for-balanced-and-secure-international-research-collaboration-in-a-changing-world/",
+            "title": "ALLEA Calls For Balanced And Secure International Research Collaboration In A Changing World - ALLEA",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_ADVOCACY_NOT_EVIDENCE_PRODUCT",
+        "reason": "ALLEA statement is policy advocacy on research security rather than a completed analytical evidence product."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "ALLEA Calls For Balanced And Secure International Research Collaboration In A Changing World",
+      "reader_what": "ALLEA statement is policy advocacy on research security rather than a completed analytical evidence product.",
+      "reader_why": "",
+      "reader_more": "ALLEA statement is policy advocacy on research security rather than a completed analytical evidence product. The work exists and its provenance is verified, but it does not satisfy the current strand admission standard.",
+      "deep_analysis": {
+        "work_kind": "policy/news/commentary/programme material or out-of-scope work",
+        "research_question": "",
+        "main_finding": "ALLEA statement is policy advocacy on research security rather than a completed analytical evidence product.",
+        "method_or_basis": "Verified against substantial_web_text package material and source identity.",
+        "qualification": "The decision concerns Radar admission, not the general value of the source.",
+        "radar_relevance": "ALLEA statement is policy advocacy on research security rather than a completed analytical evidence product.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:3d138bc184983727",
+      "source_hash": "711e1be8",
+      "identity_hash": "a892f7e2a0b2ead3",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://ecfr.eu/article/green-team-von-der-leyen-holds-the-future-of-europes-climate-policy-in-her-hands/; package contains matching substantial_web_text material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_web_text",
+            "url": "https://ecfr.eu/article/green-team-von-der-leyen-holds-the-future-of-europes-climate-policy-in-her-hands/",
+            "title": "Green team: Von der Leyen holds the future of Europe’s climate policy in her hands – European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_SUBSTANTIVE_COMMENTARY",
+        "reason": "Climate-policy commentary is not a completed R&I evidence product."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Green team: Von der Leyen holds the future of Europe’s climate policy in her hands",
+      "reader_what": "Climate-policy commentary is not a completed R&I evidence product.",
+      "reader_why": "",
+      "reader_more": "Climate-policy commentary is not a completed R&I evidence product. The work exists and its provenance is verified, but it does not satisfy the current strand admission standard.",
+      "deep_analysis": {
+        "work_kind": "policy/news/commentary/programme material or out-of-scope work",
+        "research_question": "",
+        "main_finding": "Climate-policy commentary is not a completed R&I evidence product.",
+        "method_or_basis": "Verified against substantial_web_text package material and source identity.",
+        "qualification": "The decision concerns Radar admission, not the general value of the source.",
+        "radar_relevance": "Climate-policy commentary is not a completed R&I evidence product.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:74e7999086b3eaa3",
+      "source_hash": "33201f19",
+      "identity_hash": "12081cb54fab1bc2",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://www.eeas.europa.eu/delegations/china/european-union-continues-call-improved-intellectual-property-protection-china_en; package contains matching substantial_web_text material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_web_text",
+            "url": "https://www.eeas.europa.eu/delegations/china/european-union-continues-call-improved-intellectual-property-protection-china_en",
+            "title": "The European Union continues to call for improved intellectual property protection in China",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_FORMAL_ACTION_NOT_RI_EVIDENCE",
+        "reason": "Official statement documents EU IP advocacy in China but does not provide substantive evidence about the European R&I system."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "The European Union continues to call for improved intellectual property protection in China",
+      "reader_what": "Official statement documents EU IP advocacy in China but does not provide substantive evidence about the European R&I system.",
+      "reader_why": "",
+      "reader_more": "Official statement documents EU IP advocacy in China but does not provide substantive evidence about the European R&I system. The work exists and its provenance is verified, but it does not satisfy the current strand admission standard.",
+      "deep_analysis": {
+        "work_kind": "policy/news/commentary/programme material or out-of-scope work",
+        "research_question": "",
+        "main_finding": "Official statement documents EU IP advocacy in China but does not provide substantive evidence about the European R&I system.",
+        "method_or_basis": "Verified against substantial_web_text package material and source identity.",
+        "qualification": "The decision concerns Radar admission, not the general value of the source.",
+        "radar_relevance": "Official statement documents EU IP advocacy in China but does not provide substantive evidence about the European R&I system.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:e6dcd3c339076f1b",
+      "source_hash": "bfb898ef",
+      "identity_hash": "23ebecf525f0308f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://eic.ec.europa.eu/eic-funding-opportunities/eic-accelerator/eic-accelerator-challenges-2026/advanced-materials-renewable-energy-and-energy-storage-systems_en; package contains matching substantial_web_text material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_web_text",
+            "url": "https://eic.ec.europa.eu/eic-funding-opportunities/eic-accelerator/eic-accelerator-challenges-2026/advanced-materials-renewable-energy-and-energy-storage-systems_en",
+            "title": "Advanced Materials for Renewable Energy and Energy Storage Systems",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_PROGRAMME_OR_CALL_PAGE",
+        "reason": "EIC challenge page is a funding call/programme page, which the admission rules explicitly exclude."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Advanced Materials for Renewable Energy and Energy Storage Systems",
+      "reader_what": "EIC challenge page is a funding call/programme page, which the admission rules explicitly exclude.",
+      "reader_why": "",
+      "reader_more": "EIC challenge page is a funding call/programme page, which the admission rules explicitly exclude. The work exists and its provenance is verified, but it does not satisfy the current strand admission standard.",
+      "deep_analysis": {
+        "work_kind": "policy/news/commentary/programme material or out-of-scope work",
+        "research_question": "",
+        "main_finding": "EIC challenge page is a funding call/programme page, which the admission rules explicitly exclude.",
+        "method_or_basis": "Verified against substantial_web_text package material and source identity.",
+        "qualification": "The decision concerns Radar admission, not the general value of the source.",
+        "radar_relevance": "EIC challenge page is a funding call/programme page, which the admission rules explicitly exclude.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:016e829f90584e6f",
+      "source_hash": "be874d50",
+      "identity_hash": "74fa86ce52b8f646",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://www.ceps.eu/ceps-publications/a-digital-connectivity-masterplan-for-the-global-gateway/; package contains matching substantial_web_text material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_web_text",
+            "url": "https://www.ceps.eu/ceps-publications/a-digital-connectivity-masterplan-for-the-global-gateway/",
+            "title": "A Digital Connectivity Masterplan for the Global Gateway – CEPS",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_RI_NOT_CENTRAL",
+        "reason": "Report concerns external digital-connectivity investment under Global Gateway rather than the European R&I system itself."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "A Digital Connectivity Masterplan for the Global Gateway",
+      "reader_what": "Report concerns external digital-connectivity investment under Global Gateway rather than the European R&I system itself.",
+      "reader_why": "",
+      "reader_more": "Report concerns external digital-connectivity investment under Global Gateway rather than the European R&I system itself. The work exists and its provenance is verified, but it does not satisfy the current strand admission standard.",
+      "deep_analysis": {
+        "work_kind": "policy/news/commentary/programme material or out-of-scope work",
+        "research_question": "",
+        "main_finding": "Report concerns external digital-connectivity investment under Global Gateway rather than the European R&I system itself.",
+        "method_or_basis": "Verified against substantial_web_text package material and source identity.",
+        "qualification": "The decision concerns Radar admission, not the general value of the source.",
+        "radar_relevance": "Report concerns external digital-connectivity investment under Global Gateway rather than the European R&I system itself.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:90006f474bb310bb",
+      "source_hash": "5610c1b8",
+      "identity_hash": "f5427be95dc483cd",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://www.cost.eu/uploads/2023/03/221128_COST_Final_Report_STSM_clean.pdf; package contains matching pdf_excerpt material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_recovered_pdf_text",
+            "url": "https://www.cost.eu/uploads/2023/03/221128_COST_Final_Report_STSM_clean.pdf",
+            "title": "Impact Assessment Study on Short-Term Mobility Impact Assessment Study on Short-Term Mobility - COST",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Impact assessment evaluates a European research-mobility instrument using interviews across 44 short-term scientific missions."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "What short research visits achieve",
+      "reader_what": "COST’s assessment finds short scientific missions support collaboration, methods learning, networking and infrastructure access.",
+      "reader_why": "It provides source-grounded evidence about a consequential European research, innovation or strategic-technology mechanism.",
+      "reader_more": "COST’s assessment finds short scientific missions support collaboration, methods learning, networking and infrastructure access. The study covers 44 missions and relies substantially on interviews with participants.",
+      "deep_analysis": {
+        "work_kind": "empirical study / policy report / methodological study",
+        "research_question": "",
+        "main_finding": "COST’s assessment finds short scientific missions support collaboration, methods learning, networking and infrastructure access.",
+        "method_or_basis": "Recovered full/substantive primary text from the supplied source, with identity/provenance checks.",
+        "qualification": "The study covers 44 missions and relies substantially on interviews with participants.",
+        "radar_relevance": "It provides source-grounded evidence about a consequential European research, innovation or strategic-technology mechanism.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "COST Association",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2022",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The study covers 44 missions and relies substantially on interviews with participants.",
+          "text": "COST’s assessment finds short scientific missions support collaboration, methods learning, networking and infrastructure access.",
+          "confidence": "high",
+          "status_date_precision": "year"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:0532cbde55a30f41",
+      "source_hash": "e26fe4b5",
+      "identity_hash": "27eddb95bb4891ef",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://digital-strategy.ec.europa.eu/en/faqs/navigating-ai-act; package contains matching substantial_web_text material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_web_text",
+            "url": "https://digital-strategy.ec.europa.eu/en/faqs/navigating-ai-act",
+            "title": "Navigating the AI Act",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_GUIDANCE_NOT_EVIDENCE_PRODUCT",
+        "reason": "AI Act FAQ is regulatory guidance, not a substantive research or R&I-system evidence product."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Navigating the AI Act",
+      "reader_what": "AI Act FAQ is regulatory guidance, not a substantive research or R&I-system evidence product.",
+      "reader_why": "",
+      "reader_more": "AI Act FAQ is regulatory guidance, not a substantive research or R&I-system evidence product. The work exists and its provenance is verified, but it does not satisfy the current strand admission standard.",
+      "deep_analysis": {
+        "work_kind": "policy/news/commentary/programme material or out-of-scope work",
+        "research_question": "",
+        "main_finding": "AI Act FAQ is regulatory guidance, not a substantive research or R&I-system evidence product.",
+        "method_or_basis": "Verified against substantial_web_text package material and source identity.",
+        "qualification": "The decision concerns Radar admission, not the general value of the source.",
+        "radar_relevance": "AI Act FAQ is regulatory guidance, not a substantive research or R&I-system evidence product.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:657a8404d5211dce",
+      "source_hash": "4737c8f0",
+      "identity_hash": "c1b1f7f13c159007",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://defence-industry-space.ec.europa.eu/eu-industrial-strategy-preparatory-consultation-towards-transition-pathway-aerospace-and-defence-2023-07-26_en; package contains matching substantial_web_text material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_web_text",
+            "url": "https://defence-industry-space.ec.europa.eu/eu-industrial-strategy-preparatory-consultation-towards-transition-pathway-aerospace-and-defence-2023-07-26_en",
+            "title": "EU Industrial Strategy: preparatory consultation towards transition pathway for Aerospace and Defence industrial ecosystem",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_CONSULTATION_PAGE",
+        "reason": "Preparatory consultation is a policy-process page rather than a completed evidence-led study."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU Industrial Strategy: preparatory consultation towards transition pathway for Aerospace and Defence industrial ecosystem",
+      "reader_what": "Preparatory consultation is a policy-process page rather than a completed evidence-led study.",
+      "reader_why": "",
+      "reader_more": "Preparatory consultation is a policy-process page rather than a completed evidence-led study. The work exists and its provenance is verified, but it does not satisfy the current strand admission standard.",
+      "deep_analysis": {
+        "work_kind": "policy/news/commentary/programme material or out-of-scope work",
+        "research_question": "",
+        "main_finding": "Preparatory consultation is a policy-process page rather than a completed evidence-led study.",
+        "method_or_basis": "Verified against substantial_web_text package material and source identity.",
+        "qualification": "The decision concerns Radar admission, not the general value of the source.",
+        "radar_relevance": "Preparatory consultation is a policy-process page rather than a completed evidence-led study.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:5c1c6d9b03a6268d",
+      "source_hash": "c5d41ba8",
+      "identity_hash": "ed808aa573d1c164",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://ai-watch.ec.europa.eu/publications/ai-watch-road-adoption-artificial-intelligence-public-sector_en; package contains matching substantial_web_text material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_web_text",
+            "url": "https://ai-watch.ec.europa.eu/publications/ai-watch-road-adoption-artificial-intelligence-public-sector_en",
+            "title": "AI Watch, road to the adoption of Artificial Intelligence by the public sector",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "JRC handbook synthesises evidence on public-sector AI adoption across Europe and identifies capability and governance barriers."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Public-sector AI adoption in Europe",
+      "reader_what": "JRC identifies practical governance and capability issues for safe, lawful and inclusive public-sector AI adoption.",
+      "reader_why": "It provides source-grounded evidence about a consequential European research, innovation or strategic-technology mechanism.",
+      "reader_more": "JRC identifies practical governance and capability issues for safe, lawful and inclusive public-sector AI adoption. The handbook is guidance informed by evidence; it is not an impact evaluation of AI deployment outcomes.",
+      "deep_analysis": {
+        "work_kind": "empirical study / policy report / methodological study",
+        "research_question": "",
+        "main_finding": "JRC identifies practical governance and capability issues for safe, lawful and inclusive public-sector AI adoption.",
+        "method_or_basis": "Recovered full/substantive primary text from the supplied source, with identity/provenance checks.",
+        "qualification": "The handbook is guidance informed by evidence; it is not an impact evaluation of AI deployment outcomes.",
+        "radar_relevance": "It provides source-grounded evidence about a consequential European research, innovation or strategic-technology mechanism.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "ai.public_sector_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2022-05-25",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The handbook is guidance informed by evidence; it is not an impact evaluation of AI deployment outcomes.",
+          "text": "JRC identifies practical governance and capability issues for safe, lawful and inclusive public-sector AI adoption.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:6ee51b88e0306b3f",
+      "source_hash": "8cd06289",
+      "identity_hash": "e1f61bd9a5f2cb02",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://www.interface-eu.org/publications/ai-talent-flows-germany; package contains matching substantial_web_text material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_web_text",
+            "url": "https://www.interface-eu.org/publications/ai-talent-flows-germany",
+            "title": "AI Talent Flows in Germany",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Study analyses AI talent flows in Germany, providing evidence on a strategic European technology workforce."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "AI talent flows in Germany",
+      "reader_what": "The study tracks the composition and movement of AI talent relevant to Germany’s technology workforce.",
+      "reader_why": "It provides source-grounded evidence about a consequential European research, innovation or strategic-technology mechanism.",
+      "reader_more": "The study tracks the composition and movement of AI talent relevant to Germany’s technology workforce. The analysis is country-specific and should not be treated as a complete picture of European AI labour mobility.",
+      "deep_analysis": {
+        "work_kind": "empirical study / policy report / methodological study",
+        "research_question": "",
+        "main_finding": "The study tracks the composition and movement of AI talent relevant to Germany’s technology workforce.",
+        "method_or_basis": "Recovered full/substantive primary text from the supplied source, with identity/provenance checks.",
+        "qualification": "The analysis is country-specific and should not be treated as a complete picture of European AI labour mobility.",
+        "radar_relevance": "It provides source-grounded evidence about a consequential European research, innovation or strategic-technology mechanism.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "talent.retention",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Interface Europe",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2022",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "DE"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "The analysis is country-specific and should not be treated as a complete picture of European AI labour mobility.",
+          "text": "The study tracks the composition and movement of AI talent relevant to Germany’s technology workforce.",
+          "confidence": "high",
+          "status_date_precision": "year"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:bb826c1528b8de2d",
+      "source_hash": "31225d29",
+      "identity_hash": "6c08d00fa7491e15",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://doi.org/10.1080/23299460.2020.1764837; package contains matching pdf_excerpt material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_recovered_pdf_text",
+            "url": "https://content.openalex.org/works/W3027019472.pdf",
+            "title": "Joint declaration on mainstreaming RRI across Horizon Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_ADVOCACY_NOT_EVIDENCE_PRODUCT",
+        "reason": "Joint declaration advocates mainstreaming RRI in Horizon Europe but is not itself a completed evidence-led study."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Joint declaration on mainstreaming RRI across Horizon Europe",
+      "reader_what": "Joint declaration advocates mainstreaming RRI in Horizon Europe but is not itself a completed evidence-led study.",
+      "reader_why": "",
+      "reader_more": "Joint declaration advocates mainstreaming RRI in Horizon Europe but is not itself a completed evidence-led study. The work exists and its provenance is verified, but it does not satisfy the current strand admission standard.",
+      "deep_analysis": {
+        "work_kind": "policy/news/commentary/programme material or out-of-scope work",
+        "research_question": "",
+        "main_finding": "Joint declaration advocates mainstreaming RRI in Horizon Europe but is not itself a completed evidence-led study.",
+        "method_or_basis": "Verified against pdf_excerpt package material and source identity.",
+        "qualification": "The decision concerns Radar admission, not the general value of the source.",
+        "radar_relevance": "Joint declaration advocates mainstreaming RRI in Horizon Europe but is not itself a completed evidence-led study.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:85dbe9802d1d549c",
+      "source_hash": "db929088",
+      "identity_hash": "db4b260c32f9bf87",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://doi.org/10.1162/qss_a_00039; package contains matching pdf_excerpt material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_recovered_pdf_text",
+            "url": "https://arxiv.org/pdf/1907.08975",
+            "title": "Might Europe one day again be a global scientific powerhouse? Analysis of ERC publications suggests it will not be possible without changes in research policy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Peer-reviewed study empirically compares European research performance and ERC-funded publication outcomes."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Uneven European research performance",
+      "reader_what": "The study finds large research-performance differences among European country groups, including within ERC-funded work.",
+      "reader_why": "It provides source-grounded evidence about a consequential European research, innovation or strategic-technology mechanism.",
+      "reader_more": "The study finds large research-performance differences among European country groups, including within ERC-funded work. The analysis uses selected fields and citation-based indicators, so conclusions depend on those measurement choices.",
+      "deep_analysis": {
+        "work_kind": "empirical study / policy report / methodological study",
+        "research_question": "",
+        "main_finding": "The study finds large research-performance differences among European country groups, including within ERC-funded work.",
+        "method_or_basis": "Recovered full/substantive primary text from the supplied source, with identity/provenance checks.",
+        "qualification": "The analysis uses selected fields and citation-based indicators, so conclusions depend on those measurement choices.",
+        "radar_relevance": "It provides source-grounded evidence about a consequential European research, innovation or strategic-technology mechanism.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.system_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Rodríguez-Navarro and Brito",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "contracts",
+          "status": "delivered",
+          "status_date": "2020-06-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The analysis uses selected fields and citation-based indicators, so conclusions depend on those measurement choices.",
+          "text": "The study finds large research-performance differences among European country groups, including within ERC-funded work.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:2e2b4134ff7dad38",
+      "source_hash": "256e51a6",
+      "identity_hash": "d6d20b1aa074cb86",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://www.vttresearch.com/en/news-and-ideas/finland-will-be-winner-artificial-intelligence-disruption; package contains matching substantial_web_text material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_web_text",
+            "url": "https://www.vttresearch.com/en/news-and-ideas/finland-will-be-winner-artificial-intelligence-disruption",
+            "title": "Finland will be a winner in the Artificial Intelligence disruption | VTT",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_SUBSTANTIVE_COMMENTARY",
+        "reason": "VTT blog post is an opinion piece rather than a completed evidence product."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Finland will be a winner in the Artificial Intelligence disruption",
+      "reader_what": "VTT blog post is an opinion piece rather than a completed evidence product.",
+      "reader_why": "",
+      "reader_more": "VTT blog post is an opinion piece rather than a completed evidence product. The work exists and its provenance is verified, but it does not satisfy the current strand admission standard.",
+      "deep_analysis": {
+        "work_kind": "policy/news/commentary/programme material or out-of-scope work",
+        "research_question": "",
+        "main_finding": "VTT blog post is an opinion piece rather than a completed evidence product.",
+        "method_or_basis": "Verified against substantial_web_text package material and source identity.",
+        "qualification": "The decision concerns Radar admission, not the general value of the source.",
+        "radar_relevance": "VTT blog post is an opinion piece rather than a completed evidence product.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:047fe16719c3cb7d",
+      "source_hash": "79ad2d9c",
+      "identity_hash": "c6a93ddb576695e1",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://erc.europa.eu/sites/default/files/press_release/files/erc_pr_2011_competitiveness_council_lunch_0_0.pdf; package contains matching pdf_excerpt material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_recovered_pdf_text",
+            "url": "https://erc.europa.eu/sites/default/files/press_release/files/erc_pr_2011_competitiveness_council_lunch_0_0.pdf",
+            "title": "ERC President urges EU Research Ministers to reinforce excellence in Europe (Competitiveness Council)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_ADVOCACY_NOT_EVIDENCE_PRODUCT",
+        "reason": "Press release records an ERC president intervention but does not provide substantive analytical evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "ERC President urges EU Research Ministers to reinforce excellence in Europe (Competitiveness Council)",
+      "reader_what": "Press release records an ERC president intervention but does not provide substantive analytical evidence.",
+      "reader_why": "",
+      "reader_more": "Press release records an ERC president intervention but does not provide substantive analytical evidence. The work exists and its provenance is verified, but it does not satisfy the current strand admission standard.",
+      "deep_analysis": {
+        "work_kind": "policy/news/commentary/programme material or out-of-scope work",
+        "research_question": "",
+        "main_finding": "Press release records an ERC president intervention but does not provide substantive analytical evidence.",
+        "method_or_basis": "Verified against pdf_excerpt package material and source identity.",
+        "qualification": "The decision concerns Radar admission, not the general value of the source.",
+        "radar_relevance": "Press release records an ERC president intervention but does not provide substantive analytical evidence.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:4d1130d6d376c8bf",
+      "source_hash": "3d3db4a6",
+      "identity_hash": "adf18ef961e54799",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://www.coimbra-group.eu/a-collective-outlook-on-the-next-academic-year-at-coimbra-group-universities/; package contains matching substantial_web_text material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_web_text",
+            "url": "https://www.coimbra-group.eu/a-collective-outlook-on-the-next-academic-year-at-coimbra-group-universities/",
+            "title": "A collective outlook on the next academic year at Coimbra Group universities | Coimbra",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_SUBSTANTIVE_COMMENTARY",
+        "reason": "University-group outlook article is commentary rather than a completed R&I-system study."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "A collective outlook on the next academic year at Coimbra Group universities",
+      "reader_what": "University-group outlook article is commentary rather than a completed R&I-system study.",
+      "reader_why": "",
+      "reader_more": "University-group outlook article is commentary rather than a completed R&I-system study. The work exists and its provenance is verified, but it does not satisfy the current strand admission standard.",
+      "deep_analysis": {
+        "work_kind": "policy/news/commentary/programme material or out-of-scope work",
+        "research_question": "",
+        "main_finding": "University-group outlook article is commentary rather than a completed R&I-system study.",
+        "method_or_basis": "Verified against substantial_web_text package material and source identity.",
+        "qualification": "The decision concerns Radar admission, not the general value of the source.",
+        "radar_relevance": "University-group outlook article is commentary rather than a completed R&I-system study.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:aa805dfa2f7f9514",
+      "source_hash": "702e6cfb",
+      "identity_hash": "b8805f8ae6a8fe7b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://www.coimbra-group.eu/2020-2021-an-unprecedented-academic-year-for-the-european-higher-education-research-and-innovation-areas/; package contains matching substantial_web_text material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_web_text",
+            "url": "https://www.coimbra-group.eu/2020-2021-an-unprecedented-academic-year-for-the-european-higher-education-research-and-innovation-areas/",
+            "title": "2020-2021, an unprecedented academic year for the European Higher Education, Research and Innovation Areas | Coimbra",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_SUBSTANTIVE_COMMENTARY",
+        "reason": "Institutional reflection on the academic year is not a completed evidence-led R&I study."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "2020-2021, an unprecedented academic year for the European Higher Education, Research and Innovation Areas",
+      "reader_what": "Institutional reflection on the academic year is not a completed evidence-led R&I study.",
+      "reader_why": "",
+      "reader_more": "Institutional reflection on the academic year is not a completed evidence-led R&I study. The work exists and its provenance is verified, but it does not satisfy the current strand admission standard.",
+      "deep_analysis": {
+        "work_kind": "policy/news/commentary/programme material or out-of-scope work",
+        "research_question": "",
+        "main_finding": "Institutional reflection on the academic year is not a completed evidence-led R&I study.",
+        "method_or_basis": "Verified against substantial_web_text package material and source identity.",
+        "qualification": "The decision concerns Radar admission, not the general value of the source.",
+        "radar_relevance": "Institutional reflection on the academic year is not a completed evidence-led R&I study.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:6668e2308d002dcb",
+      "source_hash": "b43bfd5c",
+      "identity_hash": "09d9a94978f49a6d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://www.vttresearch.com/en/news-and-ideas/finland-has-lot-special-expertise-microelectronics; package contains matching substantial_web_text material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_web_text",
+            "url": "https://www.vttresearch.com/en/news-and-ideas/finland-has-lot-special-expertise-microelectronics",
+            "title": "Finland has a lot of special expertise in microelectronics | VTT",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_PROMOTIONAL_OR_NEWS_PAGE",
+        "reason": "Institutional news article about Finnish microelectronics expertise is not a completed evidence product."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Finland has a lot of special expertise in microelectronics",
+      "reader_what": "Institutional news article about Finnish microelectronics expertise is not a completed evidence product.",
+      "reader_why": "",
+      "reader_more": "Institutional news article about Finnish microelectronics expertise is not a completed evidence product. The work exists and its provenance is verified, but it does not satisfy the current strand admission standard.",
+      "deep_analysis": {
+        "work_kind": "policy/news/commentary/programme material or out-of-scope work",
+        "research_question": "",
+        "main_finding": "Institutional news article about Finnish microelectronics expertise is not a completed evidence product.",
+        "method_or_basis": "Verified against substantial_web_text package material and source identity.",
+        "qualification": "The decision concerns Radar admission, not the general value of the source.",
+        "radar_relevance": "Institutional news article about Finnish microelectronics expertise is not a completed evidence product.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:2d25acbe77bf339c",
+      "source_hash": "48a484eb",
+      "identity_hash": "72229cea7e5703ae",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://www.ceps.eu/wp-content/uploads/2015/03/Digital Forum Brochure Update 2016.pdf; package contains matching pdf_excerpt material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_recovered_pdf_text",
+            "url": "https://www.ceps.eu/wp-content/uploads/2015/03/Digital%20Forum%20Brochure%20Update%202016.pdf",
+            "title": "CEPS Digital Forum – CEPS",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_PROGRAMME_OR_EVENT_MATERIAL",
+        "reason": "Digital Forum brochure is programme/event material, not a substantive study."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "CEPS Digital Forum",
+      "reader_what": "Digital Forum brochure is programme/event material, not a substantive study.",
+      "reader_why": "",
+      "reader_more": "Digital Forum brochure is programme/event material, not a substantive study. The work exists and its provenance is verified, but it does not satisfy the current strand admission standard.",
+      "deep_analysis": {
+        "work_kind": "policy/news/commentary/programme material or out-of-scope work",
+        "research_question": "",
+        "main_finding": "Digital Forum brochure is programme/event material, not a substantive study.",
+        "method_or_basis": "Verified against pdf_excerpt package material and source identity.",
+        "qualification": "The decision concerns Radar admission, not the general value of the source.",
+        "radar_relevance": "Digital Forum brochure is programme/event material, not a substantive study.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://cerre.eu/wp-content/uploads/2026/09/CERRE_Improving-the-Digital-Networks-Act-Proposal.pdf",
+      "source_hash": "5a162e2e",
+      "identity_hash": "e7cae74f8d2a197a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://cerre.eu/wp-content/uploads/2026/09/CERRE_Improving-the-Digital-Networks-Act-Proposal.pdf; package contains matching pdf_excerpt material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_recovered_pdf_text",
+            "url": "https://cerre.eu/wp-content/uploads/2026/09/CERRE_Improving-the-Digital-Networks-Act-Proposal.pdf",
+            "title": "Improving the Digital Networks Act Proposal",
+            "evidence_used": true
+          },
+          {
+            "kind": "independent_identity_or_primary_verification",
+            "url": "https://cerre.eu/publications/improving-the-digital-networks-act-proposal/",
+            "title": "Improving the Digital Networks Act Proposal",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "CERRE policy report evaluates EU digital-network regulation and its implications for investment and advanced digital infrastructure."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Testing the Digital Networks Act",
+      "reader_what": "CERRE evaluates whether proposed EU telecom reforms support integration, investment and advanced digital infrastructure.",
+      "reader_why": "It provides source-grounded evidence about a consequential European research, innovation or strategic-technology mechanism.",
+      "reader_more": "CERRE evaluates whether proposed EU telecom reforms support integration, investment and advanced digital infrastructure. This is a policy analysis of a proposal; regulatory effects are not yet observed outcomes.",
+      "deep_analysis": {
+        "work_kind": "empirical study / policy report / methodological study",
+        "research_question": "",
+        "main_finding": "CERRE evaluates whether proposed EU telecom reforms support integration, investment and advanced digital infrastructure.",
+        "method_or_basis": "Recovered full/substantive primary text from the supplied source, with identity/provenance checks.",
+        "qualification": "This is a policy analysis of a proposal; regulatory effects are not yet observed outcomes.",
+        "radar_relevance": "It provides source-grounded evidence about a consequential European research, innovation or strategic-technology mechanism.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "digital.infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "CERRE",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-09-30",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "This is a policy analysis of a proposal; regulatory effects are not yet observed outcomes.",
+          "text": "CERRE evaluates whether proposed EU telecom reforms support integration, investment and advanced digital infrastructure.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://www.atlanticcouncil.org/wp-content/uploads/2026/09/Europe-Gulf-Forum-Policy-Brief-Investment.pdf",
+      "source_hash": "97a29a85",
+      "identity_hash": "6ae98ce6ad53b8a1",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://www.atlanticcouncil.org/wp-content/uploads/2026/09/Europe-Gulf-Forum-Policy-Brief-Investment.pdf; package contains matching pdf_excerpt material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_recovered_pdf_text",
+            "url": "https://www.atlanticcouncil.org/wp-content/uploads/2026/09/Europe-Gulf-Forum-Policy-Brief-Investment.pdf",
+            "title": "The strategic rationale for closer investment ties between Europe and the Gulf",
+            "evidence_used": true
+          },
+          {
+            "kind": "independent_identity_or_primary_verification",
+            "url": "https://www.atlanticcouncil.org/in-depth-research-reports/issue-brief/the-strategic-rationale-for-closer-investment-ties-between-europe-and-the-gulf/",
+            "title": "The strategic rationale for closer investment ties between Europe and the Gulf",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Issue brief analyses Europe’s strategic investment gap and potential Gulf capital in defence, digital and energy-resilience technologies."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Europe–Gulf strategic investment",
+      "reader_what": "The brief identifies defence tech, data-centre redundancy and energy resilience as priorities for Europe–Gulf investment.",
+      "reader_why": "It provides source-grounded evidence about a consequential European research, innovation or strategic-technology mechanism.",
+      "reader_more": "The brief identifies defence tech, data-centre redundancy and energy resilience as priorities for Europe–Gulf investment. The paper is an issue brief advocating investment priorities, not evidence that the proposed investment flows will occur.",
+      "deep_analysis": {
+        "work_kind": "empirical study / policy report / methodological study",
+        "research_question": "",
+        "main_finding": "The brief identifies defence tech, data-centre redundancy and energy resilience as priorities for Europe–Gulf investment.",
+        "method_or_basis": "Recovered full/substantive primary text from the supplied source, with identity/provenance checks.",
+        "qualification": "The paper is an issue brief advocating investment priorities, not evidence that the proposed investment flows will occur.",
+        "radar_relevance": "It provides source-grounded evidence about a consequential European research, innovation or strategic-technology mechanism.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "finance.strategic_investment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Atlantic Council",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-09-29",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "The paper is an issue brief advocating investment priorities, not evidence that the proposed investment flows will occur.",
+          "text": "The brief identifies defence tech, data-centre redundancy and energy resilience as priorities for Europe–Gulf investment.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://easac.eu/fileadmin/PDF_s/reports_statements/AI_Healthcare/EASAC-FEAM_Report_AI-in-Healthcare_2026.pdf",
+      "source_hash": "8304f48f",
+      "identity_hash": "33865e1fc058a630",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://easac.eu/fileadmin/PDF_s/reports_statements/AI_Healthcare/EASAC-FEAM_Report_AI-in-Healthcare_2026.pdf; package contains matching pdf_excerpt material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_recovered_pdf_text",
+            "url": "https://easac.eu/fileadmin/PDF_s/reports_statements/AI_Healthcare/EASAC-FEAM_Report_AI-in-Healthcare_2026.pdf",
+            "title": "“AI in European Healthcare” Report Launched",
+            "evidence_used": true
+          },
+          {
+            "kind": "independent_identity_or_primary_verification",
+            "url": "https://easac.eu/publications/details/ai-in-healthcare",
+            "title": "“AI in European Healthcare” Report Launched",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Academies report evaluates how AI can be safely assessed and integrated in European healthcare, including innovation governance."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Governing AI in European healthcare",
+      "reader_what": "European academies recommend how AI health products should be evaluated and safely integrated into healthcare.",
+      "reader_why": "It provides source-grounded evidence about a consequential European research, innovation or strategic-technology mechanism.",
+      "reader_more": "European academies recommend how AI health products should be evaluated and safely integrated into healthcare. Recommendations address governance and adoption; they do not establish clinical benefit for AI systems in general.",
+      "deep_analysis": {
+        "work_kind": "empirical study / policy report / methodological study",
+        "research_question": "",
+        "main_finding": "European academies recommend how AI health products should be evaluated and safely integrated into healthcare.",
+        "method_or_basis": "Recovered full/substantive primary text from the supplied source, with identity/provenance checks.",
+        "qualification": "Recommendations address governance and adoption; they do not establish clinical benefit for AI systems in general.",
+        "radar_relevance": "It provides source-grounded evidence about a consequential European research, innovation or strategic-technology mechanism.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "ai.governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "EASAC and FEAM",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-09-30",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "Recommendations address governance and adoption; they do not establish clinical benefit for AI systems in general.",
+          "text": "European academies recommend how AI health products should be evaluated and safely integrated into healthcare.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:e4cf3e7e3db2e520",
+      "source_hash": "47d704f4",
+      "identity_hash": "a7453a996c006c61",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://climate.ec.europa.eu/areas-action/research-and-innovation-climate-action/policy-briefs_en; package contains matching abstract_or_landing_page material for the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied or identifiable for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title \"Policy briefs\"; matching publisher/issuing-body record was found."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched title with source/year metadata (European Commission — ec.europa.eu; 2026); identity was corroborated."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "limited",
+            "note": "Checked issuing organisation/publisher for \"Policy briefs\"; no stronger accessible full-text source was recovered."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Final search using distinctive title fragments and identifiers confirmed the same work; no conflicting identity was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_landing_page",
+            "url": "https://climate.ec.europa.eu/areas-action/research-and-innovation-climate-action/policy-briefs_en",
+            "title": "Policy briefs",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_LISTING_OR_NAVIGATION_PAGE",
+        "reason": "Commission policy-briefs page is a listing/navigation page rather than a specific substantive work."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Policy briefs",
+      "reader_what": "Commission policy-briefs page is a listing/navigation page rather than a specific substantive work.",
+      "reader_why": "",
+      "reader_more": "Commission policy-briefs page is a listing/navigation page rather than a specific substantive work. The work exists and its provenance is verified, but it does not satisfy the current strand admission standard.",
+      "deep_analysis": {
+        "work_kind": "policy/news/commentary/programme material or out-of-scope work",
+        "research_question": "",
+        "main_finding": "Commission policy-briefs page is a listing/navigation page rather than a specific substantive work.",
+        "method_or_basis": "Verified against abstract_or_landing_page package material and source identity.",
+        "qualification": "The decision concerns Radar admission, not the general value of the source.",
+        "radar_relevance": "Commission policy-briefs page is a listing/navigation page rather than a specific substantive work.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:0d551703f39ee9c8",
+      "source_hash": "92c20d72",
+      "identity_hash": "4b09a5d574531015",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://cdn.ceps.eu/2025/11/Mainstreaming-Gender-in-HE-Policy-Progress-Challenges-and-Pathways-Forward-formatted.pdf; package contains matching pdf_excerpt material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_recovered_pdf_text",
+            "url": "https://cdn.ceps.eu/2025/11/Mainstreaming-Gender-in-HE-Policy-Progress-Challenges-and-Pathways-Forward-formatted.pdf",
+            "title": "Mainstreaming gender in Horizon Europe: policy progress, challenges, and pathways forward – CEPS",
+            "evidence_used": true
+          },
+          {
+            "kind": "independent_identity_or_primary_verification",
+            "url": "https://www.ceps.eu/ceps-publications/mainstreaming-gender-in-horizon-europe-policy-progress-challenges-and-pathways-forward/",
+            "title": "Mainstreaming gender in Horizon Europe: policy progress, challenges, and pathways forward – CEPS",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "CEPS paper analyses gender-mainstreaming mechanisms within Horizon Europe using literature, data and a new analytical framework."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-07-01"
+        },
+        "unset": [],
+        "reason": "Authoritative publisher/official source gives corrected bibliographic metadata."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Gender mainstreaming in Horizon Europe",
+      "reader_what": "CEPS finds progress remains slow and proposes a three-dimension framework for analysing gender mainstreaming in Horizon Europe.",
+      "reader_why": "It provides source-grounded evidence about a consequential European research, innovation or strategic-technology mechanism.",
+      "reader_more": "CEPS finds progress remains slow and proposes a three-dimension framework for analysing gender mainstreaming in Horizon Europe. The study synthesises available data and literature; its framework is analytical and its policy recommendations are prospective.",
+      "deep_analysis": {
+        "work_kind": "empirical study / policy report / methodological study",
+        "research_question": "",
+        "main_finding": "CEPS finds progress remains slow and proposes a three-dimension framework for analysing gender mainstreaming in Horizon Europe.",
+        "method_or_basis": "Recovered full/substantive primary text from the supplied source, with identity/provenance checks.",
+        "qualification": "The study synthesises available data and literature; its framework is analytical and its policy recommendations are prospective.",
+        "radar_relevance": "It provides source-grounded evidence about a consequential European research, innovation or strategic-technology mechanism.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "CEPS",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-07-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The study synthesises available data and literature; its framework is analytical and its policy recommendations are prospective.",
+          "text": "CEPS finds progress remains slow and proposes a three-dimension framework for analysing gender mainstreaming in Horizon Europe.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:69b92e6780675f29",
+      "source_hash": "eb27250a",
+      "identity_hash": "b90a3d9ea3af8c08",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://www.vttresearch.com/en/news-and-ideas/significant-eu-investment-vtt-advanced-defence-technologies-innovations-minesweeping; package contains matching substantial_web_text material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_web_text",
+            "url": "https://www.vttresearch.com/en/news-and-ideas/significant-eu-investment-vtt-advanced-defence-technologies-innovations-minesweeping",
+            "title": "Significant EU investment in VTT for advanced defence technologies: innovations in minesweeping, next-gen helicopters, and underwater communications | VTT",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "VTT announcement documents concrete EU investment in advanced defence R&D projects, evidencing European dual-use capability building."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU-funded defence R&D at VTT",
+      "reader_what": "VTT reports EU investment in R&D on minesweeping, next-generation helicopters and underwater communications.",
+      "reader_why": "It provides source-grounded evidence about a consequential European research, innovation or strategic-technology mechanism.",
+      "reader_more": "VTT reports EU investment in R&D on minesweeping, next-generation helicopters and underwater communications. The source establishes funding and project activity, not eventual technical performance or deployment impact.",
+      "deep_analysis": {
+        "work_kind": "empirical study / policy report / methodological study",
+        "research_question": "",
+        "main_finding": "VTT reports EU investment in R&D on minesweeping, next-generation helicopters and underwater communications.",
+        "method_or_basis": "Recovered full/substantive primary text from the supplied source, with identity/provenance checks.",
+        "qualification": "The source establishes funding and project activity, not eventual technical performance or deployment impact.",
+        "radar_relevance": "It provides source-grounded evidence about a consequential European research, innovation or strategic-technology mechanism.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "defence.innovation_funding",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Union and VTT",
+            "class": "eu_body"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2025-05-13",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "FI"
+            ]
+          },
+          "kind": "action",
+          "qualification": "The source establishes funding and project activity, not eventual technical performance or deployment impact.",
+          "text": "VTT reports EU investment in R&D on minesweeping, next-generation helicopters and underwater communications.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:b3615c0a69f01ece",
+      "source_hash": "a217acf9",
+      "identity_hash": "06afa4e46442740f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied URL https://www.vinnova.se/en/p/commercialization-of-knowledge-from-university-researchers/; package contains matching substantial_web_text material for the claimed work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_web_text",
+            "url": "https://www.vinnova.se/en/p/commercialization-of-knowledge-from-university-researchers/",
+            "title": "Commercialization of knowledge from university researchers | Vinnova",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance match the supplied record; admission was judged from the recovered primary/official material and corroborating source checks."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_PROJECT_OR_PROGRAMME_PAGE",
+        "reason": "Vinnova project page describes a knowledge-commercialisation initiative rather than a completed evidence-led study."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Commercialization of knowledge from university researchers",
+      "reader_what": "Vinnova project page describes a knowledge-commercialisation initiative rather than a completed evidence-led study.",
+      "reader_why": "",
+      "reader_more": "Vinnova project page describes a knowledge-commercialisation initiative rather than a completed evidence-led study. The work exists and its provenance is verified, but it does not satisfy the current strand admission standard.",
+      "deep_analysis": {
+        "work_kind": "policy/news/commentary/programme material or out-of-scope work",
+        "research_question": "",
+        "main_finding": "Vinnova project page describes a knowledge-commercialisation initiative rather than a completed evidence-led study.",
+        "method_or_basis": "Verified against substantial_web_text package material and source identity.",
+        "qualification": "The decision concerns Radar admission, not the general value of the source.",
+        "radar_relevance": "Vinnova project page describes a knowledge-commercialisation initiative rather than a completed evidence-led study.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:4c175377997921f0",
+      "source_hash": "226746f3",
+      "identity_hash": "71dfa482cb6186e7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "limited",
+            "note": "Opened/checked supplied URL https://doi.org/10.1080/09537325.2023.2214639; no substantive text was available in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1080/09537325.2023.2214639; bibliographic identity matched the supplied title."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title \"Development of a novel framework for the analysis of Technological Innovation Systems by Causal Layered Analysis (CLA) in energy systems\"; matching publisher/issuing-body record was found at https://www.tandfonline.com/doi/abs/10.1080/09537325.2023.2214639"
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched title with source/year metadata (Technology Analysis & Strategic Management; 2024); identity was corroborated."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Checked official/publisher source https://www.tandfonline.com/doi/abs/10.1080/09537325.2023.2214639; identity matched but full substantive text remained inaccessible."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Final search using distinctive title fragments and identifiers confirmed the same work; no conflicting identity was found."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity verified, but full substantive evidence remained inaccessible after the required recovery ladder."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "B",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity and methodological claim are verified, but only abstract-level substantive evidence was recoverable; full text was not accessible."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    }
+  ]
+}
