@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-02T18:52:17Z",
+  "generated_at": "2026-10-02T20:27:16Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -211157,8 +211157,3498 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.ukri.org/wp-content/uploads/2026/07/UKRI-060726-ListCentresInstitutesCatapultsUnits.xlsx": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "4eb0c8ae",
+      "identity_hash": "b85418542543768a",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "no_substantive_text",
+            "note": "Opened/checked https://www.ukri.org/wp-content/uploads/2026/07/UKRI-060726-ListCentresInstitutesCatapultsUnits.xlsx; supplied route did not provide substantive text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title recovery for \"UKRI Strategy 2026 to 2031\" found a matching source at https://www.ukri.org/publications/uk-research-and-innovation-strategy-2026-to-2031/ukri-strategy-2026-to-2031/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://www.ukri.org/publications/uk-research-and-innovation-strategy-2026-to-2031/ukri-strategy-2026-to-2031/",
+            "title": "UKRI Strategy 2026 to 2031",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_OR_NON_SUBSTANTIVE",
+        "reason": "The verified item does not meet the strand’s substantive admission criteria (for example, it is generic, promotional, event/listing material, incidental R&I, or not a reusable method)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:07Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://publications.jrc.ec.europa.eu/repository/handle/JRC148453": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "3e05ef91",
+      "identity_hash": "d1172f7e5f0e542a",
+      "reader_title": "Critical raw materials substitution with advanced materials",
+      "reader_what": "JRC identifies advanced-material substitution, efficiency and circularity as ways to reduce EU critical-material dependencies.",
+      "reader_why": "It maps research and innovation needs tied directly to EU supply security and competitiveness.",
+      "reader_more": "The recovered source verifies the work and its central claim. JRC identifies advanced-material substitution, efficiency and circularity as ways to reduce EU critical-material dependencies. The result is admitted to Strand A because its evidence is substantive under the package criteria.",
+      "deep_analysis": {
+        "work_kind": "formal study / report",
+        "research_question": "What does the verified work establish that is relevant to the assigned Radar strand?",
+        "main_finding": "JRC identifies advanced-material substitution, efficiency and circularity as ways to reduce EU critical-material dependencies.",
+        "method_or_basis": "Recovered primary/full-text material and bibliographic verification.",
+        "qualification": "Current status and effects may evolve; this result records only what the recovered source establishes.",
+        "radar_relevance": "It maps research and innovation needs tied directly to EU supply security and competitiveness.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://publications.jrc.ec.europa.eu/repository/handle/JRC148453; package contains matching abstract_or_landing_page material (689 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC148453",
+            "title": "Reducing dependencies on Critical Raw Materials with advanced materials",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified A evidence satisfies the strand criteria based on the recovered source."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:07Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [
+        {
+          "object": "materials.critical_raw",
+          "secondary_objects": [],
+          "actor": {
+            "name": "JRC Publications Repository",
+            "class": "other"
+          },
+          "mechanism": "substitutes",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-09-30",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Current status and effects may evolve; this result records only what the recovered source establishes.",
+          "text": "JRC identifies advanced-material substitution, efficiency and circularity as ways to reduce EU critical-material dependencies.",
+          "confidence": "high",
+          "record_key": "link:https://publications.jrc.ec.europa.eu/repository/handle/JRC148453",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:d1172f7e5f0e542a:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1016/j.joi.2026.101874": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "c173bc90",
+      "identity_hash": "d2c4cc9ba6cc8098",
+      "reader_title": "European universities: knowledge creation and patents",
+      "reader_what": "The study links European higher-education knowledge production with patenting using a newly constructed institutional dataset.",
+      "reader_why": "It provides system-level evidence on European university innovation and knowledge transfer.",
+      "reader_more": "The recovered source verifies the work and its central claim. The study links European higher-education knowledge production with patenting using a newly constructed institutional dataset. The result is admitted to Strand A because its evidence is substantive under the package criteria.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed article",
+        "research_question": "What does the verified work establish that is relevant to the assigned Radar strand?",
+        "main_finding": "The study links European higher-education knowledge production with patenting using a newly constructed institutional dataset.",
+        "method_or_basis": "Recovered primary/full-text material and bibliographic verification.",
+        "qualification": "Current status and effects may evolve; this result records only what the recovered source establishes.",
+        "radar_relevance": "It provides system-level evidence on European university innovation and knowledge transfer.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://doi.org/10.1016/j.joi.2026.101874; package contains matching pdf_excerpt material (24000 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1016/j.joi.2026.101874; bibliographic identity matched title and authors."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://doi.org/10.1016/j.joi.2026.101874",
+            "title": "Knowledge creation and patenting by European higher education institutions–evidence from a new dataset (KC-HEI)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified A evidence satisfies the strand criteria based on the recovered source."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:08Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [
+        {
+          "object": "research.knowledge_transfer",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Journal of Informetrics",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-09-12",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Current status and effects may evolve; this result records only what the recovered source establishes.",
+          "text": "The study links European higher-education knowledge production with patenting using a newly constructed institutional dataset.",
+          "confidence": "high",
+          "record_key": "link:https://doi.org/10.1016/j.joi.2026.101874",
+          "merit": 83,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:d2c4cc9ba6cc8098:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:6dec1388df761e83": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "3139ffaa",
+      "identity_hash": "9b3360d0a4146974",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.iva.se/en/Swedish-futures/Essays/sweden-can-help-shape-a-future-of-sustainable-prosperity/; package contains matching substantial_web_text material (14716 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://www.iva.se/en/Swedish-futures/Essays/sweden-can-help-shape-a-future-of-sustainable-prosperity/",
+            "title": "Essay: Sweden can help shape a future of sustainable prosperity",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_OR_NON_SUBSTANTIVE",
+        "reason": "The verified item does not meet the strand’s substantive admission criteria (for example, it is generic, promotional, event/listing material, incidental R&I, or not a reusable method)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:08Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:fa058b049c30d6bf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "3015c430",
+      "identity_hash": "b64fdf743d5a8909",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.iva.se/en/Swedish-futures/Essays/Essa-a-common-idea-for-the-future/; package contains matching substantial_web_text material (10441 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://www.iva.se/en/Swedish-futures/Essays/Essa-a-common-idea-for-the-future/",
+            "title": "Essay: A Shared Vision of the Future",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_OR_NON_SUBSTANTIVE",
+        "reason": "The verified item does not meet the strand’s substantive admission criteria (for example, it is generic, promotional, event/listing material, incidental R&I, or not a reusable method)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:08Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:fbe8c3a366c979b5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "65f33dd9",
+      "identity_hash": "dc6c9658cabceb91",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.coimbra-group.eu/coimbra-group-launches-2026-scholarship-programme-for-early-career-professors-and-researchers/; package contains matching substantial_web_text material (3670 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://www.coimbra-group.eu/coimbra-group-launches-2026-scholarship-programme-for-early-career-professors-and-researchers/",
+            "title": "Coimbra Group launches 2026 Scholarship Programme for Early-Career Professors and Researchers | Coimbra",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_OR_NON_SUBSTANTIVE",
+        "reason": "The verified item does not meet the strand’s substantive admission criteria (for example, it is generic, promotional, event/listing material, incidental R&I, or not a reusable method)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:08Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:9094e6055be98452": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "338ed90e",
+      "identity_hash": "44fdd615900aacb2",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://defence-industry-space.ec.europa.eu/battlefield-redefined-2026-modern-technologies-dual-use-potential-enhancing-security-defence-and-2026-02-26_en; package contains matching substantial_web_text material (3984 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://defence-industry-space.ec.europa.eu/battlefield-redefined-2026-modern-technologies-dual-use-potential-enhancing-security-defence-and-2026-02-26_en",
+            "title": "Battlefield redefined 2026: Modern technologies with dual-use potential for enhancing security, defence and space resilience",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_OR_NON_SUBSTANTIVE",
+        "reason": "The verified item does not meet the strand’s substantive admission criteria (for example, it is generic, promotional, event/listing material, incidental R&I, or not a reusable method)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:08Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:2e36bb967e3b4bf1": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "6ca88c15",
+      "identity_hash": "a88c7634b9485d16",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.coimbra-group.eu/coimbra-group-calls-the-eu-to-address-barriers-to-global-talent/; package contains matching substantial_web_text material (4903 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://www.coimbra-group.eu/coimbra-group-calls-the-eu-to-address-barriers-to-global-talent/",
+            "title": "Coimbra Group calls the EU to address barriers to global talent | Coimbra",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_OR_NON_SUBSTANTIVE",
+        "reason": "The verified item does not meet the strand’s substantive admission criteria (for example, it is generic, promotional, event/listing material, incidental R&I, or not a reusable method)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:08Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:6febe0acaca373c2": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "4bc0feb9",
+      "identity_hash": "796b16dbde88ac13",
+      "reader_title": "EU digital capacity investment needs",
+      "reader_what": "The Commission study assesses future EU investment needs for deploying strategic digital technologies, infrastructure and skills.",
+      "reader_why": "It directly informs Europe’s post-2027 digital capability and funding choices.",
+      "reader_more": "The recovered source verifies the work and its central claim. The Commission study assesses future EU investment needs for deploying strategic digital technologies, infrastructure and skills. The result is admitted to Strand A because its evidence is substantive under the package criteria.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "What does the verified work establish that is relevant to the assigned Radar strand?",
+        "main_finding": "The Commission study assesses future EU investment needs for deploying strategic digital technologies, infrastructure and skills.",
+        "method_or_basis": "Recovered primary/full-text material and bibliographic verification.",
+        "qualification": "Historical context; interpret within the evidence and policy conditions of its publication date.",
+        "radar_relevance": "It directly informs Europe’s post-2027 digital capability and funding choices.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://digital-strategy.ec.europa.eu/en/activities/study-eus-critical-digital-capacities-deployment-beyond-2027; package contains matching substantial_web_text material (3622 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://digital-strategy.ec.europa.eu/en/activities/study-eus-critical-digital-capacities-deployment-beyond-2027",
+            "title": "Study on the EU’s critical digital capacities deployment beyond 2027",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified historical A evidence satisfies the strand criteria based on the recovered source."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:08Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission — Digital Strategy",
+            "class": "eu_body"
+          },
+          "mechanism": "governs",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2024-01-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Historical context; interpret within the evidence and policy conditions of its publication date.",
+          "text": "The Commission study assesses future EU investment needs for deploying strategic digital technologies, infrastructure and skills.",
+          "confidence": "high",
+          "record_key": "historical:id:6febe0acaca373c2",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:796b16dbde88ac13:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:24c16a739b04608d": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "774299a3",
+      "identity_hash": "f1c7a7f272426769",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.sitra.fi/en/financed-project/rdi-outlook-of-the-kajaani-innovation-ecosystem/; package contains matching substantial_web_text material (2888 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://www.sitra.fi/en/financed-project/rdi-outlook-of-the-kajaani-innovation-ecosystem/",
+            "title": "RDI Outlook of the Kajaani Innovation Ecosystem - Sitra",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_OR_NON_SUBSTANTIVE",
+        "reason": "The verified item does not meet the strand’s substantive admission criteria (for example, it is generic, promotional, event/listing material, incidental R&I, or not a reusable method)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:08Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:522e0a095d1d691f": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "54f2884a",
+      "identity_hash": "7fd81bf8c2961702",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://hadea.ec.europa.eu/calls-proposals/horizon-europe-calls-2024-destination-4-digital-emerging-technologies-competitiveness-and-fit-green_en; package contains matching abstract_or_landing_page material (1372 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://hadea.ec.europa.eu/calls-proposals/horizon-europe-calls-2024-destination-4-digital-emerging-technologies-competitiveness-and-fit-green_en",
+            "title": "Horizon Europe Calls 2024 - Destination 4. Digital & Emerging Technologies for Competitiveness and Fit for the Green Deal",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_OR_NON_SUBSTANTIVE",
+        "reason": "The verified item does not meet the strand’s substantive admission criteria (for example, it is generic, promotional, event/listing material, incidental R&I, or not a reusable method)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:08Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:a49c3ecaef86cd84": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "a011f708",
+      "identity_hash": "df6a93ccbe8733be",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://ecfr.eu/article/a-united-states-of-europe-the-need-for-leadership/; package contains matching substantial_web_text material (6170 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://ecfr.eu/article/a-united-states-of-europe-the-need-for-leadership/",
+            "title": "A United States of Europe: The need for leadership - European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_OR_NON_SUBSTANTIVE",
+        "reason": "The verified item does not meet the strand’s substantive admission criteria (for example, it is generic, promotional, event/listing material, incidental R&I, or not a reusable method)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:08Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:0931139beca2f6d3": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "f06b72b8",
+      "identity_hash": "5dd2ad0fe3e59a3e",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://single-market-economy.ec.europa.eu/single-market/goods/european-standards/standardisation-policy/high-level-forum-european-standardisation_en; package contains matching substantial_web_text material (8562 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://single-market-economy.ec.europa.eu/single-market/goods/european-standards/standardisation-policy/high-level-forum-european-standardisation_en",
+            "title": "High-Level Forum on European Standardisation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_OR_NON_SUBSTANTIVE",
+        "reason": "The verified item does not meet the strand’s substantive admission criteria (for example, it is generic, promotional, event/listing material, incidental R&I, or not a reusable method)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:08Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:7c67227cf44e11f9": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "598df263",
+      "identity_hash": "2d63e57095e4af4c",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.ukri.org/apply-for-funding/get-funding-for-international-research/; package contains matching substantial_web_text material (4548 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://www.ukri.org/apply-for-funding/get-funding-for-international-research/",
+            "title": "Get funding for international research",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_OR_NON_SUBSTANTIVE",
+        "reason": "The verified item does not meet the strand’s substantive admission criteria (for example, it is generic, promotional, event/listing material, incidental R&I, or not a reusable method)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:08Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:0c819fc3e66efd6c": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "3e291904",
+      "identity_hash": "4f19a73130e7d78e",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://doi.org/10.47305/jlia2393426l; package contains matching substantial_web_text material (3836 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.47305/jlia2393426l; bibliographic identity matched title and authors."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://e-jlia.com/index.php/jlia/article/view/1209",
+            "title": "EAST SEA POLICY OF THE UNITED STATES IN THE CONTEXT OF THE US-CHINA COMPETITION",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_OR_NON_SUBSTANTIVE",
+        "reason": "The verified item does not meet the strand’s substantive admission criteria (for example, it is generic, promotional, event/listing material, incidental R&I, or not a reusable method)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:08Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:8acafb10ddb99ec0": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "92132ce9",
+      "identity_hash": "c11fe7a7872a346e",
+      "reader_title": "EU-US trade tensions and China",
+      "reader_what": "The analysis argues for closer EU-US coordination on China while addressing trade, technology and transfer frictions.",
+      "reader_why": "It connects European technology policy and transatlantic coordination to strategic competition.",
+      "reader_more": "The recovered source verifies the work and its central claim. The analysis argues for closer EU-US coordination on China while addressing trade, technology and transfer frictions. The result is admitted to Strand A because its evidence is substantive under the package criteria.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "What does the verified work establish that is relevant to the assigned Radar strand?",
+        "main_finding": "The analysis argues for closer EU-US coordination on China while addressing trade, technology and transfer frictions.",
+        "method_or_basis": "Recovered primary/full-text material and bibliographic verification.",
+        "qualification": "Historical context; interpret within the evidence and policy conditions of its publication date.",
+        "radar_relevance": "It connects European technology policy and transatlantic coordination to strategic competition.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://ecfr.eu/article/a-united-front-how-the-us-and-the-eu-can-move-beyond-trade-tensions-to-counter-china/; package contains matching substantial_web_text material (8368 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://ecfr.eu/article/a-united-front-how-the-us-and-the-eu-can-move-beyond-trade-tensions-to-counter-china/",
+            "title": "A united front: How the US and the EU can move beyond trade tensions to counter China – European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified historical A evidence satisfies the strand criteria based on the recovered source."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:08Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Council on Foreign Relations",
+            "class": "eu_body"
+          },
+          "mechanism": "governs",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2022-12-20",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Historical context; interpret within the evidence and policy conditions of its publication date.",
+          "text": "The analysis argues for closer EU-US coordination on China while addressing trade, technology and transfer frictions.",
+          "confidence": "high",
+          "record_key": "historical:id:8acafb10ddb99ec0",
+          "merit": 71,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:c11fe7a7872a346e:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:5b0c50ae8a0ff2e4": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "94e7bf4b",
+      "identity_hash": "96f0d73537a4d250",
+      "reader_title": "Finland forms a 6G coalition",
+      "reader_what": "Finnish organisations created a coalition to strengthen national 6G research, development and commercial competitiveness.",
+      "reader_why": "The coalition links research actors and industry around a strategic communications technology.",
+      "reader_more": "The recovered source verifies the work and its central claim. Finnish organisations created a coalition to strengthen national 6G research, development and commercial competitiveness. The result is admitted to Strand A because its evidence is substantive under the package criteria.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "What does the verified work establish that is relevant to the assigned Radar strand?",
+        "main_finding": "Finnish organisations created a coalition to strengthen national 6G research, development and commercial competitiveness.",
+        "method_or_basis": "Recovered primary/full-text material and bibliographic verification.",
+        "qualification": "Historical context; interpret within the evidence and policy conditions of its publication date.",
+        "radar_relevance": "The coalition links research actors and industry around a strategic communications technology.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.vttresearch.com/en/news-and-ideas/finnish-organisations-founded-coalition-advance-finlands-6g-competitiveness; package contains matching substantial_web_text material (2658 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://www.vttresearch.com/en/news-and-ideas/finnish-organisations-founded-coalition-advance-finlands-6g-competitiveness",
+            "title": "Finnish Organisations Founded a Coalition to Advance Finland’s 6G Competitiveness | VTT",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified historical A evidence satisfies the strand criteria based on the recovered source."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:09Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "VTT Technical Research Centre of Finland",
+            "class": "other"
+          },
+          "mechanism": "governs",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2022-05-12",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Historical context; interpret within the evidence and policy conditions of its publication date.",
+          "text": "Finnish organisations created a coalition to strengthen national 6G research, development and commercial competitiveness.",
+          "confidence": "high",
+          "record_key": "historical:id:5b0c50ae8a0ff2e4",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:96f0d73537a4d250:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:05dbd87447871561": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "b333a666",
+      "identity_hash": "cacf71b677218a91",
+      "reader_title": "EU standardisation strategy",
+      "reader_what": "The EU standardisation strategy sets measures to strengthen Europe’s role in standards for strategic technologies.",
+      "reader_why": "Standards can shape technology deployment, market access and European strategic capacity.",
+      "reader_more": "The recovered source verifies the work and its central claim. The EU standardisation strategy sets measures to strengthen Europe’s role in standards for strategic technologies. The result is admitted to Strand A because its evidence is substantive under the package criteria.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "What does the verified work establish that is relevant to the assigned Radar strand?",
+        "main_finding": "The EU standardisation strategy sets measures to strengthen Europe’s role in standards for strategic technologies.",
+        "method_or_basis": "Recovered primary/full-text material and bibliographic verification.",
+        "qualification": "Historical context; interpret within the evidence and policy conditions of its publication date.",
+        "radar_relevance": "Standards can shape technology deployment, market access and European strategic capacity.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://single-market-economy.ec.europa.eu/single-market/goods/european-standards/standardisation-policy/standardisation-strategy_en; package contains matching substantial_web_text material (3139 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://single-market-economy.ec.europa.eu/single-market/goods/european-standards/standardisation-policy/standardisation-strategy_en",
+            "title": "Standardisation strategy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified historical A evidence satisfies the strand criteria based on the recovered source."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:09Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission — ec.europa.eu",
+            "class": "eu_body"
+          },
+          "mechanism": "standardises",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2022-01-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Historical context; interpret within the evidence and policy conditions of its publication date.",
+          "text": "The EU standardisation strategy sets measures to strengthen Europe’s role in standards for strategic technologies.",
+          "confidence": "high",
+          "record_key": "historical:id:05dbd87447871561",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:cacf71b677218a91:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:ec6c6431c69e5d92": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "ca995b40",
+      "identity_hash": "d57e8e0818f5deb6",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://joint-research-centre.ec.europa.eu/about-us/partnerships/international-cooperation_en; package contains matching substantial_web_text material (3084 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://joint-research-centre.ec.europa.eu/about-us/partnerships/international-cooperation_en",
+            "title": "International cooperation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_OR_NON_SUBSTANTIVE",
+        "reason": "The verified item does not meet the strand’s substantive admission criteria (for example, it is generic, promotional, event/listing material, incidental R&I, or not a reusable method)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:09Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:c1c92de5374eb509": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "4754fe15",
+      "identity_hash": "8f1b6cfa09407914",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.cost.eu/cost-events/horizon-europe-the-first-assessment-sciencebusiness/; package contains matching abstract_or_landing_page material (1285 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://www.cost.eu/cost-events/horizon-europe-the-first-assessment-sciencebusiness/",
+            "title": "Horizon Europe: The first assessment - COST",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_OR_NON_SUBSTANTIVE",
+        "reason": "The verified item does not meet the strand’s substantive admission criteria (for example, it is generic, promotional, event/listing material, incidental R&I, or not a reusable method)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:09Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:f0e7a379a3d826a9": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "e5f2cab2",
+      "identity_hash": "66c00eb87a633434",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.cost.eu/horizon-europe-info-day-cost-as-a-core-instrument-to-widening-participation-in-the-era/; package contains matching substantial_web_text material (6608 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://www.cost.eu/horizon-europe-info-day-cost-as-a-core-instrument-to-widening-participation-in-the-era/",
+            "title": "Horizon Europe Info Day: COST as a core instrument to Widening Participation in the ERA - COST",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_OR_NON_SUBSTANTIVE",
+        "reason": "The verified item does not meet the strand’s substantive admission criteria (for example, it is generic, promotional, event/listing material, incidental R&I, or not a reusable method)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:09Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:ce828b3c7296dff2": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "0b74104b",
+      "identity_hash": "0f24e9db77d835cd",
+      "reader_title": "Strategic digital technologies for EU R&I funding",
+      "reader_what": "The study identifies strategic digital technologies relevant to EU research and innovation funding beyond 2027.",
+      "reader_why": "It directly informs priority-setting for Europe’s future digital R&I portfolio.",
+      "reader_more": "The recovered source verifies the work and its central claim. The study identifies strategic digital technologies relevant to EU research and innovation funding beyond 2027. The result is admitted to Strand A because its evidence is substantive under the package criteria.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "What does the verified work establish that is relevant to the assigned Radar strand?",
+        "main_finding": "The study identifies strategic digital technologies relevant to EU research and innovation funding beyond 2027.",
+        "method_or_basis": "Recovered primary/full-text material and bibliographic verification.",
+        "qualification": "Historical context; interpret within the evidence and policy conditions of its publication date.",
+        "radar_relevance": "It directly informs priority-setting for Europe’s future digital R&I portfolio.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://digital-strategy.ec.europa.eu/en/activities/study-identify-digital-technologies-next-eu-research-and-innovation-fund; package contains matching substantial_web_text material (3791 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://digital-strategy.ec.europa.eu/en/activities/study-identify-digital-technologies-next-eu-research-and-innovation-fund",
+            "title": "Study to identify key strategic digital technologies for EU research and innovation funding beyond 2027",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified historical A evidence satisfies the strand criteria based on the recovered source."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:10Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [
+        {
+          "object": "funding.route",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission — Digital Strategy",
+            "class": "eu_body"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2021-01-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Historical context; interpret within the evidence and policy conditions of its publication date.",
+          "text": "The study identifies strategic digital technologies relevant to EU research and innovation funding beyond 2027.",
+          "confidence": "high",
+          "record_key": "historical:id:ce828b3c7296dff2",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:0f24e9db77d835cd:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:5d354d3db82fcf61": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "72579ba9",
+      "identity_hash": "3703b7148ea02d46",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.cost.eu/cost-events/horizon-europe-info-days-2021-era-widening/; package contains matching abstract_or_landing_page material (764 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://www.cost.eu/cost-events/horizon-europe-info-days-2021-era-widening/",
+            "title": "Horizon Europe Info Days 2021 | ERA & Widening - COST",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_OR_NON_SUBSTANTIVE",
+        "reason": "The verified item does not meet the strand’s substantive admission criteria (for example, it is generic, promotional, event/listing material, incidental R&I, or not a reusable method)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:10Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:dcd3c390f1c0f43a": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "be587cfb",
+      "identity_hash": "b1d93ff4f245e869",
+      "reader_title": "Eurostars-3 and Horizon Europe",
+      "reader_what": "Eurostars-3 was positioned as a joint programme supporting international R&D-performing SMEs under Horizon Europe.",
+      "reader_why": "It is a concrete European research-funding instrument for cross-border innovation.",
+      "reader_more": "The recovered source verifies the work and its central claim. Eurostars-3 was positioned as a joint programme supporting international R&D-performing SMEs under Horizon Europe. The result is admitted to Strand A because its evidence is substantive under the package criteria.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "What does the verified work establish that is relevant to the assigned Radar strand?",
+        "main_finding": "Eurostars-3 was positioned as a joint programme supporting international R&D-performing SMEs under Horizon Europe.",
+        "method_or_basis": "Recovered primary/full-text material and bibliographic verification.",
+        "qualification": "Historical context; interpret within the evidence and policy conditions of its publication date.",
+        "radar_relevance": "It is a concrete European research-funding instrument for cross-border innovation.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.eurekanetwork.org/eurostars-3-a-key-instrument-for-horizon-europe/; package contains matching substantial_web_text material (9805 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://www.eurekanetwork.org/eurostars-3-a-key-instrument-for-horizon-europe/",
+            "title": "Eurostars-3: A key instrument for Horizon Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified historical A evidence satisfies the strand criteria based on the recovered source."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:10Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [
+        {
+          "object": "funding.route",
+          "secondary_objects": [],
+          "actor": {
+            "name": "EUREKA",
+            "class": "other"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2020-12-15",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Historical context; interpret within the evidence and policy conditions of its publication date.",
+          "text": "Eurostars-3 was positioned as a joint programme supporting international R&D-performing SMEs under Horizon Europe.",
+          "confidence": "high",
+          "record_key": "historical:id:dcd3c390f1c0f43a",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:b1d93ff4f245e869:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:4efb0c23344a4fba": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "1a332e2c",
+      "identity_hash": "ba2699382279ffee",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://cset.georgetown.edu/wp-content/uploads/Jason-Matheny-Testimony-House-Budget-Committee.pdf; package contains matching pdf_excerpt material (9645 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://cset.georgetown.edu/wp-content/uploads/Jason-Matheny-Testimony-House-Budget-Committee.pdf",
+            "title": "Preparing the U.S. Economy for an AI Future Through Wise Policy Choices | Center for Security and Emerging Technology",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_OR_NON_SUBSTANTIVE",
+        "reason": "The verified item does not meet the strand’s substantive admission criteria (for example, it is generic, promotional, event/listing material, incidental R&I, or not a reusable method)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:10Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:217bb85900a247b7": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "1a350152",
+      "identity_hash": "5655c6d0580bfc5b",
+      "reader_title": "Measuring strategic foresight capability",
+      "reader_what": "The study develops and tests dimensions for measuring strategic foresight and links them to organisational dynamic capabilities.",
+      "reader_why": "The measurement approach can be reused to assess foresight practice under uncertainty.",
+      "reader_more": "The recovered source verifies the work and its central claim. The study develops and tests dimensions for measuring strategic foresight and links them to organisational dynamic capabilities. The result is admitted to Strand B because its evidence is substantive under the package criteria.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "What does the verified work establish that is relevant to the assigned Radar strand?",
+        "main_finding": "The study develops and tests dimensions for measuring strategic foresight and links them to organisational dynamic capabilities.",
+        "method_or_basis": "Recovered matching source and bibliographic verification.",
+        "qualification": "Historical context; interpret within the evidence and policy conditions of its publication date.",
+        "radar_relevance": "The measurement approach can be reused to assess foresight practice under uncertainty.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "no_substantive_text",
+            "note": "Opened/checked https://doi.org/10.1016/j.techfore.2020.120033; supplied route did not provide substantive text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1016/j.techfore.2020.120033; bibliographic identity matched title and authors."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title recovery for \"Building dynamic capabilities to cope with environmental uncertainty: The role of strategic foresight\" found a matching source at https://www.sciencedirect.com/science/article/pii/S0040162519316877."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0040162519316877",
+            "title": "Building dynamic capabilities to cope with environmental uncertainty: The role of strategic foresight",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Verified historical B evidence satisfies the strand criteria based on the recovered source."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:10Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Technological Forecasting and Social Change",
+            "class": "other"
+          },
+          "mechanism": "evaluates",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2020-06-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Historical context; interpret within the evidence and policy conditions of its publication date.",
+          "text": "The study develops and tests dimensions for measuring strategic foresight and links them to organisational dynamic capabilities.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "historical:id:217bb85900a247b7",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:5655c6d0580bfc5b:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:fb69231d069f1fb9": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "aac4ca49",
+      "identity_hash": "e3fc186c78a8e4fc",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://commission.europa.eu/strategy-and-policy/eu-budget/long-term-eu-budget/2014-2020/eu-funding-programmes/heading-1a-competitiveness-growth-and-jobs_en; package contains matching substantial_web_text material (10476 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://commission.europa.eu/strategy-and-policy/eu-budget/long-term-eu-budget/2014-2020/eu-funding-programmes/heading-1a-competitiveness-growth-and-jobs_en",
+            "title": "Heading 1a: Competitiveness for growth and jobs",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_OR_NON_SUBSTANTIVE",
+        "reason": "The verified item does not meet the strand’s substantive admission criteria (for example, it is generic, promotional, event/listing material, incidental R&I, or not a reusable method)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:10Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:c85d8600744a03c7": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "5358a002",
+      "identity_hash": "8ba021b4ef0ddac2",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://cset.georgetown.edu/newsletter/facial-recognition-regulations-evolve-industries-of-the-future-act-introduced-and-trade-deal-with-china-tackles-tech-transfer/; package contains matching abstract_or_landing_page material (1375 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://cset.georgetown.edu/newsletter/facial-recognition-regulations-evolve-industries-of-the-future-act-introduced-and-trade-deal-with-china-tackles-tech-transfer/",
+            "title": "Facial recognition regulations evolve, Industries of the Future Act introduced and trade deal with China tackles tech transfer | Center for Security and Emerging Technology",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_OR_NON_SUBSTANTIVE",
+        "reason": "The verified item does not meet the strand’s substantive admission criteria (for example, it is generic, promotional, event/listing material, incidental R&I, or not a reusable method)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:10Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:84ee4a353b6fa79d": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "771bf2e5",
+      "identity_hash": "f292f1585b7570f0",
+      "reader_title": "Ex-post evaluation of FP6",
+      "reader_what": "The evaluation reviews performance and effects of the EU’s Sixth Framework Programme for research.",
+      "reader_why": "It is historical evidence on the design and performance of the European R&I system.",
+      "reader_more": "The recovered source verifies the work and its central claim. The evaluation reviews performance and effects of the EU’s Sixth Framework Programme for research. The result is admitted to Strand A because its evidence is substantive under the package criteria.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "What does the verified work establish that is relevant to the assigned Radar strand?",
+        "main_finding": "The evaluation reviews performance and effects of the EU’s Sixth Framework Programme for research.",
+        "method_or_basis": "Recovered primary/full-text material and bibliographic verification.",
+        "qualification": "Historical context; interpret within the evidence and policy conditions of its publication date.",
+        "radar_relevance": "It is historical evidence on the design and performance of the European R&I system.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://era.gv.at/horizon-europe/previous-framework-programmes/ex-post-evaluation-of-the-sixth-framework-programme/; package contains matching abstract_or_landing_page material (2246 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://era.gv.at/horizon-europe/previous-framework-programmes/ex-post-evaluation-of-the-sixth-framework-programme/",
+            "title": "ERA Portal Austria – Ex Post Evaluation of the Sixth Framework Programme",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified historical A evidence satisfies the strand criteria based on the recovered source."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:11Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [
+        {
+          "object": "funding.route",
+          "secondary_objects": [],
+          "actor": {
+            "name": "ERA Portal Austria",
+            "class": "other"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2020-01-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Historical context; interpret within the evidence and policy conditions of its publication date.",
+          "text": "The evaluation reviews performance and effects of the EU’s Sixth Framework Programme for research.",
+          "confidence": "high",
+          "record_key": "historical:id:84ee4a353b6fa79d",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:f292f1585b7570f0:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:cfe69cc6aaad27c7": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "dd09f64f",
+      "identity_hash": "c87cdcc9dc8cd3c6",
+      "reader_title": "Joint Undertakings under Horizon Europe",
+      "reader_what": "The regulation establishes institutionalised European R&I partnerships through Joint Undertakings.",
+      "reader_why": "It defines governance structures for major collaborative European research and innovation programmes.",
+      "reader_more": "The recovered source verifies the work and its central claim. The regulation establishes institutionalised European R&I partnerships through Joint Undertakings. The result is admitted to Strand A because its evidence is substantive under the package criteria.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "What does the verified work establish that is relevant to the assigned Radar strand?",
+        "main_finding": "The regulation establishes institutionalised European R&I partnerships through Joint Undertakings.",
+        "method_or_basis": "Recovered primary/full-text material and bibliographic verification.",
+        "qualification": "Historical context; interpret within the evidence and policy conditions of its publication date.",
+        "radar_relevance": "It defines governance structures for major collaborative European research and innovation programmes.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://era.gv.at/horizon-europe/partnerships/institutionalised-partnerships/council-regulation-establishing-the-joint-undertakings-under-horizon-europe/; package contains matching abstract_or_landing_page material (1253 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://era.gv.at/horizon-europe/partnerships/institutionalised-partnerships/council-regulation-establishing-the-joint-undertakings-under-horizon-europe/",
+            "title": "ERA Portal Austria – Council Regulation establishing the Joint Undertakings under Horizon Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified historical A evidence satisfies the strand criteria based on the recovered source."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:11Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [
+        {
+          "object": "funding.route",
+          "secondary_objects": [],
+          "actor": {
+            "name": "ERA Portal Austria",
+            "class": "other"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "adopted",
+          "status_date": "2020-01-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Historical context; interpret within the evidence and policy conditions of its publication date.",
+          "text": "The regulation establishes institutionalised European R&I partnerships through Joint Undertakings.",
+          "confidence": "high",
+          "record_key": "historical:id:cfe69cc6aaad27c7",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:c87cdcc9dc8cd3c6:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:37ed06685eea11a0": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "afec9499",
+      "identity_hash": "2d114bfde209cf30",
+      "reader_title": "Euratom Seventh Framework Programme",
+      "reader_what": "The Council decision set the research programme framework for Euratom activities under FP7.",
+      "reader_why": "It is direct historical evidence on European research governance and funding priorities.",
+      "reader_more": "The recovered source verifies the work and its central claim. The Council decision set the research programme framework for Euratom activities under FP7. The result is admitted to Strand A because its evidence is substantive under the package criteria.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "What does the verified work establish that is relevant to the assigned Radar strand?",
+        "main_finding": "The Council decision set the research programme framework for Euratom activities under FP7.",
+        "method_or_basis": "Recovered primary/full-text material and bibliographic verification.",
+        "qualification": "Historical context; interpret within the evidence and policy conditions of its publication date.",
+        "radar_relevance": "It is direct historical evidence on European research governance and funding priorities.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://era.gv.at/horizon-europe/previous-framework-programmes/council-decision-concerning-the-seventh-framework-programme-euratom/; package contains matching abstract_or_landing_page material (1332 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://era.gv.at/horizon-europe/previous-framework-programmes/council-decision-concerning-the-seventh-framework-programme-euratom/",
+            "title": "ERA Portal Austria – Council Decision concerning the Seventh Framework Programme - EURATOM",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified historical A evidence satisfies the strand criteria based on the recovered source."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:12Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [
+        {
+          "object": "funding.route",
+          "secondary_objects": [],
+          "actor": {
+            "name": "ERA Portal Austria",
+            "class": "other"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "adopted",
+          "status_date": "2020-01-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Historical context; interpret within the evidence and policy conditions of its publication date.",
+          "text": "The Council decision set the research programme framework for Euratom activities under FP7.",
+          "confidence": "high",
+          "record_key": "historical:id:37ed06685eea11a0",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:2d114bfde209cf30:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:6369500e7cd7c3cb": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "bbe09ee8",
+      "identity_hash": "d7e5b2d0bca0f453",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.coimbra-group.eu/alliances-of-european-universities-future-developments/; package contains matching substantial_web_text material (8818 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://www.coimbra-group.eu/alliances-of-european-universities-future-developments/",
+            "title": "Alliances of European Universities : future developments | Coimbra",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_OR_NON_SUBSTANTIVE",
+        "reason": "The verified item does not meet the strand’s substantive admission criteria (for example, it is generic, promotional, event/listing material, incidental R&I, or not a reusable method)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:12Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://publications.jrc.ec.europa.eu/repository/handle/JRC147428?mode=full": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "14878ee4",
+      "identity_hash": "44b7f57e721357c0",
+      "reader_title": "Advanced materials for construction CRMs",
+      "reader_what": "JRC compares 43 substitution, design, process and circularity routes for critical materials used in construction.",
+      "reader_why": "The report identifies qualification, pilot-line and scale-up constraints for EU deployment.",
+      "reader_more": "The recovered source verifies the work and its central claim. JRC compares 43 substitution, design, process and circularity routes for critical materials used in construction. The result is admitted to Strand A because its evidence is substantive under the package criteria.",
+      "deep_analysis": {
+        "work_kind": "formal study / report",
+        "research_question": "What does the verified work establish that is relevant to the assigned Radar strand?",
+        "main_finding": "JRC compares 43 substitution, design, process and circularity routes for critical materials used in construction.",
+        "method_or_basis": "Recovered primary/full-text material and bibliographic verification.",
+        "qualification": "Current status and effects may evolve; this result records only what the recovered source establishes.",
+        "radar_relevance": "The report identifies qualification, pilot-line and scale-up constraints for EU deployment.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://publications.jrc.ec.europa.eu/repository/handle/JRC147428?mode=full; package contains matching abstract_or_landing_page material (1452 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC147428",
+            "title": "R&I needs to reduce critical raw materials through advanced materials in construction",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified A evidence satisfies the strand criteria based on the recovered source."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:12Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [
+        {
+          "object": "materials.critical_raw",
+          "secondary_objects": [],
+          "actor": {
+            "name": "JRC Publications Repository",
+            "class": "other"
+          },
+          "mechanism": "substitutes",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-10-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Current status and effects may evolve; this result records only what the recovered source establishes.",
+          "text": "JRC compares 43 substitution, design, process and circularity routes for critical materials used in construction.",
+          "confidence": "high",
+          "record_key": "link:https://publications.jrc.ec.europa.eu/repository/handle/JRC147428?mode=full",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:44b7f57e721357c0:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://publications.jrc.ec.europa.eu/repository/handle/JRC147646?mode=full": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "1a003474",
+      "identity_hash": "7f215b084ac86ec2",
+      "reader_title": "Benchmarking EU innovation performance",
+      "reader_what": "The JRC brief benchmarks EU innovation output against global peers and tracks differences among member states.",
+      "reader_why": "It directly measures Europe’s innovation performance and gaps relevant to competitiveness policy.",
+      "reader_more": "The recovered source verifies the work and its central claim. The JRC brief benchmarks EU innovation output against global peers and tracks differences among member states. The result is admitted to Strand A because its evidence is substantive under the package criteria.",
+      "deep_analysis": {
+        "work_kind": "formal study / report",
+        "research_question": "What does the verified work establish that is relevant to the assigned Radar strand?",
+        "main_finding": "The JRC brief benchmarks EU innovation output against global peers and tracks differences among member states.",
+        "method_or_basis": "Recovered primary/full-text material and bibliographic verification.",
+        "qualification": "Current status and effects may evolve; this result records only what the recovered source establishes.",
+        "radar_relevance": "It directly measures Europe’s innovation performance and gaps relevant to competitiveness policy.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://publications.jrc.ec.europa.eu/repository/handle/JRC147646?mode=full; package contains matching abstract_or_landing_page material (1203 characters)."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC147646",
+            "title": "Benchmarking innovation to inform EU policy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified A evidence satisfies the strand criteria based on the recovered source."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:13Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [
+        {
+          "object": "innovation.system_performance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "JRC Publications Repository",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-10-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Current status and effects may evolve; this result records only what the recovered source establishes.",
+          "text": "The JRC brief benchmarks EU innovation output against global peers and tracks differences among member states.",
+          "confidence": "high",
+          "record_key": "link:https://publications.jrc.ec.europa.eu/repository/handle/JRC147646?mode=full",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:7f215b084ac86ec2:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://cepr.org/system/files/publication-files/307835-global_coordination_after_the_loss_of_the_hegemon_a_viable_basis_for_european_cooperation.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "6f070214",
+      "identity_hash": "68c2465c67172df3",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "no_substantive_text",
+            "note": "Opened/checked https://cepr.org/system/files/publication-files/307835-global_coordination_after_the_loss_of_the_hegemon_a_viable_basis_for_european_cooperation.pdf; supplied route did not provide substantive text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title recovery for \"Global Coordination after the loss of the hegemon: a viable basis for European cooperation\" found a matching source at https://cepr.org/system/files/publication-files/307835-global_coordination_after_the_loss_of_the_hegemon_a_viable_basis_for_european_cooperation.pdf."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://cepr.org/system/files/publication-files/307835-global_coordination_after_the_loss_of_the_hegemon_a_viable_basis_for_european_cooperation.pdf",
+            "title": "Global Coordination after the loss of the hegemon: a viable basis for European cooperation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_OR_NON_SUBSTANTIVE",
+        "reason": "The verified item does not meet the strand’s substantive admission criteria (for example, it is generic, promotional, event/listing material, incidental R&I, or not a reusable method)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:13Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMinwFBVV95cUxQTUhFTjk0YmtjYmtZc2MzVlFmaGZwNjFJSzZKZkh3akVmQ0JCMlFLNlpidHlRNjRGWHVFa1ZHcUJWdWJtdWpoc05odFRuTHM5aWJReG42a1REemdxc29JMnlDbHpnaFhrblJxaEtZcEE5VHk2dzRnd01ieW53cDBHbDhOaVVhU0h3bVptckRsUjl1dUF1MUtXUlFnZERwbGM?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "bc0efdc1",
+      "identity_hash": "f7d158a41a0e6c07",
+      "reader_title": "Horizon Europe adds €507 million in calls",
+      "reader_what": "The 2026–27 Horizon Europe work programme was updated with new biodiversity and research-to-market funding calls.",
+      "reader_why": "The adopted funding change alters near-term EU R&I opportunities and programme priorities.",
+      "reader_more": "The recovered source verifies the work and its central claim. The 2026–27 Horizon Europe work programme was updated with new biodiversity and research-to-market funding calls. The result is admitted to Strand C because its evidence is substantive under the package criteria.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "What does the verified work establish that is relevant to the assigned Radar strand?",
+        "main_finding": "The 2026–27 Horizon Europe work programme was updated with new biodiversity and research-to-market funding calls.",
+        "method_or_basis": "Recovered matching source and bibliographic verification.",
+        "qualification": "Current status and effects may evolve; this result records only what the recovered source establishes.",
+        "radar_relevance": "The adopted funding change alters near-term EU R&I opportunities and programme priorities.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "no_substantive_text",
+            "note": "Opened/checked https://news.google.com/rss/articles/CBMinwFBVV95cUxQTUhFTjk0YmtjYmtZc2MzVlFmaGZwNjFJSzZKZkh3akVmQ0JCMlFLNlpidHlRNjRGWHVFa1ZHcUJWdWJtdWpoc05odFRuTHM5aWJReG42a1REemdxc29JMnlDbHpnaFhrblJxaEtZcEE5VHk2dzRnd01ieW53cDBHbDhOaVVhU0h3bVptckRsUjl1dUF1MUtXUlFnZERwbGM?oc=5; supplied route did not provide substantive text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title recovery for \"Horizon Europe 2027 plans updated with €507M in new calls\" found a matching source at https://sciencebusiness.net/news/horizon-europe/horizon-europe-2027-plans-updated-eu507m-new-calls."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://sciencebusiness.net/news/horizon-europe/horizon-europe-2027-plans-updated-eu507m-new-calls",
+            "title": "Horizon Europe 2027 plans updated with €507M in new calls",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CURRENT",
+        "reason": "Verified C evidence satisfies the strand criteria based on the recovered source."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:13Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [
+        {
+          "object": "funding.route",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Science|Business",
+            "class": "company"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "call_open",
+          "status_date": "2026-10-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Current status and effects may evolve; this result records only what the recovered source establishes.",
+          "text": "The 2026–27 Horizon Europe work programme was updated with new biodiversity and research-to-market funding calls.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMinwFBVV95cUxQTUhFTjk0YmtjYmtZc2MzVlFmaGZwNjFJSzZKZkh3akVmQ0JCMlFLNlpidHlRNjRGWHVFa1ZHcUJWdWJtdWpoc05odFRuTHM5aWJReG42a1REemdxc29JMnlDbHpnaFhrblJxaEtZcEE5VHk2dzRnd01ieW53cDBHbDhOaVVhU0h3bVptckRsUjl1dUF1MUtXUlFnZERwbGM?oc=5",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:f7d158a41a0e6c07:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMi5AFBVV95cUxPOEFDWVZ1NnhBMm9CVjJucURud3UwV0ZtcXFfV1lRcF90M1l1Ui01bUdzeXdFTVB5Q2NueHFiLU1jV3VkZXNMZVowOU1ueGlkTVJoN0lUdndIaE5CX3hmZmFQV05ROWJrcEU2VEZVODlsVlJjcTY1eXBOdk93WGZKdmszUlZ6Q2VtX3lidnJpMVdnbzBvZEtfbUdwSE53WWdjQmQ3NXMzWmUxbDExT1JsbFZDcEg3MkloMUtodmgxajBjUXZ3ZEEyd3RTMi0tR2xLMDhBMnJyd3pQS0ZkYW9waHRYdDg?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "1f708f69",
+      "identity_hash": "39c187257c097826",
+      "reader_title": "EU releases 2026 R&I performance report",
+      "reader_what": "The Commission released its 2026 flagship assessment of Europe’s science, research and innovation performance.",
+      "reader_why": "The report provides current system-wide evidence on investment, capabilities, gaps and innovation scaling.",
+      "reader_more": "The recovered source verifies the work and its central claim. The Commission released its 2026 flagship assessment of Europe’s science, research and innovation performance. The result is admitted to Strand C because its evidence is substantive under the package criteria.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "What does the verified work establish that is relevant to the assigned Radar strand?",
+        "main_finding": "The Commission released its 2026 flagship assessment of Europe’s science, research and innovation performance.",
+        "method_or_basis": "Recovered matching source and bibliographic verification.",
+        "qualification": "Current status and effects may evolve; this result records only what the recovered source establishes.",
+        "radar_relevance": "The report provides current system-wide evidence on investment, capabilities, gaps and innovation scaling.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "no_substantive_text",
+            "note": "Opened/checked https://news.google.com/rss/articles/CBMi5AFBVV95cUxPOEFDWVZ1NnhBMm9CVjJucURud3UwV0ZtcXFfV1lRcF90M1l1Ui01bUdzeXdFTVB5Q2NueHFiLU1jV3VkZXNMZVowOU1ueGlkTVJoN0lUdndIaE5CX3hmZmFQV05ROWJrcEU2VEZVODlsVlJjcTY1eXBOdk93WGZKdmszUlZ6Q2VtX3lidnJpMVdnbzBvZEtfbUdwSE53WWdjQmQ3NXMzWmUxbDExT1JsbFZDcEg3MkloMUtodmgxajBjUXZ3ZEEyd3RTMi0tR2xLMDhBMnJyd3pQS0ZkYW9waHRYdDg?oc=5; supplied route did not provide substantive text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title recovery for \"Science, research and innovation performance of the EU 2026\" found a matching source at https://research-and-innovation.ec.europa.eu/knowledge-publications-tools-and-data/publications/all-publications/science-research-and-innovation-performance-eu-2026-report_en."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://research-and-innovation.ec.europa.eu/knowledge-publications-tools-and-data/publications/all-publications/science-research-and-innovation-performance-eu-2026-report_en",
+            "title": "Science, research and innovation performance of the EU 2026",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CURRENT",
+        "reason": "Verified C evidence satisfies the strand criteria based on the recovered source."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:13Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [
+        {
+          "object": "innovation.system_performance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "EU Research & Innovation",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-10-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Current status and effects may evolve; this result records only what the recovered source establishes.",
+          "text": "The Commission released its 2026 flagship assessment of Europe’s science, research and innovation performance.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMi5AFBVV95cUxPOEFDWVZ1NnhBMm9CVjJucURud3UwV0ZtcXFfV1lRcF90M1l1Ui01bUdzeXdFTVB5Q2NueHFiLU1jV3VkZXNMZVowOU1ueGlkTVJoN0lUdndIaE5CX3hmZmFQV05ROWJrcEU2VEZVODlsVlJjcTY1eXBOdk93WGZKdmszUlZ6Q2VtX3lidnJpMVdnbzBvZEtfbUdwSE53WWdjQmQ3NXMzWmUxbDExT1JsbFZDcEg3MkloMUtodmgxajBjUXZ3ZEEyd3RTMi0tR2xLMDhBMnJyd3pQS0ZkYW9waHRYdDg?oc=5",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:39c187257c097826:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMivAFBVV95cUxPNl9UZUx6VWZ4bmlmeUg2a2xjUV9DdTBBaFJEM2o4emtxaHNHMnFvcnNicHdXZkxET0ZYMWkyckNXNVZtamZsREhuQUVYLVFrQ0dTT1pRb1M5N2F5LVhlVGU2cWlpcndxbDhjSV9tZThzRGlpWTBHY3FYdHU3NE1wOGpGNng3aUpBWVFXQU1sNVBlU05CeWJ2UGNjWGVIMng1dEtJWWY5M0ZtZnNHajNxcFZKdHRpRGYwb2F4Sg?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "614bf5bc",
+      "identity_hash": "86975cac77a3e88b",
+      "reader_title": "Nordic universities press for dual-use research",
+      "reader_what": "Nordic university leaders warned that overly restrictive dual-use rules could exclude scientifically valuable Horizon Europe research.",
+      "reader_why": "Their intervention feeds an active EU decision over the scope of the next research programme.",
+      "reader_more": "The recovered source verifies the work and its central claim. Nordic university leaders warned that overly restrictive dual-use rules could exclude scientifically valuable Horizon Europe research. The result is admitted to Strand C because its evidence is substantive under the package criteria.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "What does the verified work establish that is relevant to the assigned Radar strand?",
+        "main_finding": "Nordic university leaders warned that overly restrictive dual-use rules could exclude scientifically valuable Horizon Europe research.",
+        "method_or_basis": "Recovered matching source and bibliographic verification.",
+        "qualification": "Current status and effects may evolve; this result records only what the recovered source establishes.",
+        "radar_relevance": "Their intervention feeds an active EU decision over the scope of the next research programme.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "no_substantive_text",
+            "note": "Opened/checked https://news.google.com/rss/articles/CBMivAFBVV95cUxPNl9UZUx6VWZ4bmlmeUg2a2xjUV9DdTBBaFJEM2o4emtxaHNHMnFvcnNicHdXZkxET0ZYMWkyckNXNVZtamZsREhuQUVYLVFrQ0dTT1pRb1M5N2F5LVhlVGU2cWlpcndxbDhjSV9tZThzRGlpWTBHY3FYdHU3NE1wOGpGNng3aUpBWVFXQU1sNVBlU05CeWJ2UGNjWGVIMng1dEtJWWY5M0ZtZnNHajNxcFZKdHRpRGYwb2F4Sg?oc=5; supplied route did not provide substantive text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title recovery for \"Dual-use restrictions risk holding back research, Nordic universities say\" found a matching source at https://sciencebusiness.net/news/horizon-europe/dual-use-restrictions-risk-holding-back-research-nordic-universities-say."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://sciencebusiness.net/news/horizon-europe/dual-use-restrictions-risk-holding-back-research-nordic-universities-say",
+            "title": "Dual-use restrictions risk holding back research, Nordic universities say",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CURRENT",
+        "reason": "Verified C evidence satisfies the strand criteria based on the recovered source."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:14Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Science|Business",
+            "class": "company"
+          },
+          "mechanism": "governs",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-10-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Current status and effects may evolve; this result records only what the recovered source establishes.",
+          "text": "Nordic university leaders warned that overly restrictive dual-use rules could exclude scientifically valuable Horizon Europe research.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMivAFBVV95cUxPNl9UZUx6VWZ4bmlmeUg2a2xjUV9DdTBBaFJEM2o4emtxaHNHMnFvcnNicHdXZkxET0ZYMWkyckNXNVZtamZsREhuQUVYLVFrQ0dTT1pRb1M5N2F5LVhlVGU2cWlpcndxbDhjSV9tZThzRGlpWTBHY3FYdHU3NE1wOGpGNng3aUpBWVFXQU1sNVBlU05CeWJ2UGNjWGVIMng1dEtJWWY5M0ZtZnNHajNxcFZKdHRpRGYwb2F4Sg?oc=5",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:86975cac77a3e88b:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiswFBVV95cUxQUW9EM2tBWktUUUhVMHJFWFlhMk1JQmtrUEp4dG92aGU1MjhDTXpSY0JOVnZ3QnJFb08xRjRRNXVDWHV5SzZsSkFGT09IbGxqdUJkSmJPeTB5UndrUkNHZ3pkbHVUV0k5VXRSSXRGUlVkbFVhV05jVmcxa0VuY3pYM2NvaVRudzc1MmQ3aDZ6YmpjMTlGTWJVSTVlbTFoOHhEaVYtbUpkeDJkZmhfSGZ4S2Zicw?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "3d74a6c4",
+      "identity_hash": "5bcf25ef34068b6d",
+      "reader_title": "Lagarde calls for European AI capability",
+      "reader_what": "ECB President Christine Lagarde argued Europe needs its own AI capabilities to reduce dependence on externally controlled models.",
+      "reader_why": "The statement links AI capability concentration to financial resilience and European technological dependence.",
+      "reader_more": "The recovered source verifies the work and its central claim. ECB President Christine Lagarde argued Europe needs its own AI capabilities to reduce dependence on externally controlled models. The result is admitted to Strand C because its evidence is substantive under the package criteria.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "What does the verified work establish that is relevant to the assigned Radar strand?",
+        "main_finding": "ECB President Christine Lagarde argued Europe needs its own AI capabilities to reduce dependence on externally controlled models.",
+        "method_or_basis": "Recovered matching source and bibliographic verification.",
+        "qualification": "Current status and effects may evolve; this result records only what the recovered source establishes.",
+        "radar_relevance": "The statement links AI capability concentration to financial resilience and European technological dependence.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "no_substantive_text",
+            "note": "Opened/checked https://news.google.com/rss/articles/CBMiswFBVV95cUxQUW9EM2tBWktUUUhVMHJFWFlhMk1JQmtrUEp4dG92aGU1MjhDTXpSY0JOVnZ3QnJFb08xRjRRNXVDWHV5SzZsSkFGT09IbGxqdUJkSmJPeTB5UndrUkNHZ3pkbHVUV0k5VXRSSXRGUlVkbFVhV05jVmcxa0VuY3pYM2NvaVRudzc1MmQ3aDZ6YmpjMTlGTWJVSTVlbTFoOHhEaVYtbUpkeDJkZmhfSGZ4S2Zicw?oc=5; supplied route did not provide substantive text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title recovery for \"ECB’s Lagarde Says Europe Must Develop Its Own AI Capabilities\" found a matching source at https://newsdig.tbs.co.jp/articles/withbloomberg/2984066?display=1."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://newsdig.tbs.co.jp/articles/withbloomberg/2984066?display=1",
+            "title": "ECB’s Lagarde Says Europe Must Develop Its Own AI Capabilities",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CURRENT",
+        "reason": "Verified C evidence satisfies the strand criteria based on the recovered source."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:14Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [
+        {
+          "object": "ai.governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Bloomberg",
+            "class": "other"
+          },
+          "mechanism": "governs",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-10-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Current status and effects may evolve; this result records only what the recovered source establishes.",
+          "text": "ECB President Christine Lagarde argued Europe needs its own AI capabilities to reduce dependence on externally controlled models.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMiswFBVV95cUxQUW9EM2tBWktUUUhVMHJFWFlhMk1JQmtrUEp4dG92aGU1MjhDTXpSY0JOVnZ3QnJFb08xRjRRNXVDWHV5SzZsSkFGT09IbGxqdUJkSmJPeTB5UndrUkNHZ3pkbHVUV0k5VXRSSXRGUlVkbFVhV05jVmcxa0VuY3pYM2NvaVRudzc1MmQ3aDZ6YmpjMTlGTWJVSTVlbTFoOHhEaVYtbUpkeDJkZmhfSGZ4S2Zicw?oc=5",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:5bcf25ef34068b6d:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiiAFBVV95cUxPaXBtT291MGhVQXRpTWlmOVVPd0xsTGZ2OVV0N3pMR203R3I3TWZvazA1YU9FR2Q0VDRQclZQNm5uLWZCOW5Tc1JTMUNJbEJzTHRXeUZ0cTdqWnVLcGxqZjV3cWpFVl95cnUwSW95LXEyWkRNWGxKZGhLX24ydF93MXBpb01Ga1p3?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "df041f03",
+      "identity_hash": "c2bc0c3f14db9d18",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "no_substantive_text",
+            "note": "Opened/checked https://news.google.com/rss/articles/CBMiiAFBVV95cUxPaXBtT291MGhVQXRpTWlmOVVPd0xsTGZ2OVV0N3pMR203R3I3TWZvazA1YU9FR2Q0VDRQclZQNm5uLWZCOW5Tc1JTMUNJbEJzTHRXeUZ0cTdqWnVLcGxqZjV3cWpFVl95cnUwSW95LXEyWkRNWGxKZGhLX24ydF93MXBpb01Ga1p3?oc=5; supplied route did not provide substantive text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title recovery for \"Listen: How does Trump’s AI pact compare with the EU?\" found a matching source at https://euobserver.com/240706/listen-how-does-trumps-ai-pact-compare-with-the-eu/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://euobserver.com/240706/listen-how-does-trumps-ai-pact-compare-with-the-eu/",
+            "title": "Listen: How does Trump’s AI pact compare with the EU?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE_OR_NON_SUBSTANTIVE",
+        "reason": "The verified item does not meet the strand’s substantive admission criteria (for example, it is generic, promotional, event/listing material, incidental R&I, or not a reusable method)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:14Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMihwJBVV95cUxOVUp4dE9HdzBGZWpYc1B4TmpDVnZla3I1azNJbkVVa3pPZFQ1WWVJUmtOcm1acU50ZFlMeWxyWW94RS1hT3BwanV6djh6d3RER1NqczVyZlFscDM5NU5SSlRYWmtVU0cxQkU2cmRndm1DOVlPaGpsT2o2MVVreDZ3ZDVmTktnakVBblZWQnhKZ3NxbWVrdzlCaGNoX2pxbi1BSUNhdkxVUWJBWXUyOHVNd0VsSzhRcUdKRHdibFcwdFZiS2R6bjFOUndQYU1BTlV3cllVd0kzdWZaSVgtMkxlVFk5NXpPZ2FqUFBzcUhwb3BYMm16clV2cnNYT0VFM0JUV3VRM0hfZw?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "32cfc9a2",
+      "identity_hash": "4a5130afb2ac9ab7",
+      "reader_title": "EU-Moldova research cooperation deepens",
+      "reader_what": "The EU and Moldova reported rising Horizon Europe participation and new innovation-integration milestones.",
+      "reader_why": "It shows concrete expansion of an associated country’s integration into European R&I networks.",
+      "reader_more": "The recovered source verifies the work and its central claim. The EU and Moldova reported rising Horizon Europe participation and new innovation-integration milestones. The result is admitted to Strand C because its evidence is substantive under the package criteria.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "What does the verified work establish that is relevant to the assigned Radar strand?",
+        "main_finding": "The EU and Moldova reported rising Horizon Europe participation and new innovation-integration milestones.",
+        "method_or_basis": "Recovered matching source and bibliographic verification.",
+        "qualification": "Current status and effects may evolve; this result records only what the recovered source establishes.",
+        "radar_relevance": "It shows concrete expansion of an associated country’s integration into European R&I networks.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "no_substantive_text",
+            "note": "Opened/checked https://news.google.com/rss/articles/CBMihwJBVV95cUxOVUp4dE9HdzBGZWpYc1B4TmpDVnZla3I1azNJbkVVa3pPZFQ1WWVJUmtOcm1acU50ZFlMeWxyWW94RS1hT3BwanV6djh6d3RER1NqczVyZlFscDM5NU5SSlRYWmtVU0cxQkU2cmRndm1DOVlPaGpsT2o2MVVreDZ3ZDVmTktnakVBblZWQnhKZ3NxbWVrdzlCaGNoX2pxbi1BSUNhdkxVUWJBWXUyOHVNd0VsSzhRcUdKRHdibFcwdFZiS2R6bjFOUndQYU1BTlV3cllVd0kzdWZaSVgtMkxlVFk5NXpPZ2FqUFBzcUhwb3BYMm16clV2cnNYT0VFM0JUV3VRM0hfZw?oc=5; supplied route did not provide substantive text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title recovery for \"Fifth EU-Moldova Horizon Europe Joint Research and Innovation Committee meeting\" found a matching source at https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/fifth-eu-moldova-horizon-europe-joint-research-and-innovation-committee-meeting-2026-10-01_en."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/fifth-eu-moldova-horizon-europe-joint-research-and-innovation-committee-meeting-2026-10-01_en",
+            "title": "Fifth EU-Moldova Horizon Europe Joint Research and Innovation Committee meeting",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CURRENT",
+        "reason": "Verified C evidence satisfies the strand criteria based on the recovered source."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:15Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [
+        {
+          "object": "funding.route",
+          "secondary_objects": [],
+          "actor": {
+            "name": "EU Research & Innovation",
+            "class": "other"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-10-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Current status and effects may evolve; this result records only what the recovered source establishes.",
+          "text": "The EU and Moldova reported rising Horizon Europe participation and new innovation-integration milestones.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMihwJBVV95cUxOVUp4dE9HdzBGZWpYc1B4TmpDVnZla3I1azNJbkVVa3pPZFQ1WWVJUmtOcm1acU50ZFlMeWxyWW94RS1hT3BwanV6djh6d3RER1NqczVyZlFscDM5NU5SSlRYWmtVU0cxQkU2cmRndm1DOVlPaGpsT2o2MVVreDZ3ZDVmTktnakVBblZWQnhKZ3NxbWVrdzlCaGNoX2pxbi1BSUNhdkxVUWJBWXUyOHVNd0VsSzhRcUdKRHdibFcwdFZiS2R6bjFOUndQYU1BTlV3cllVd0kzdWZaSVgtMkxlVFk5NXpPZ2FqUFBzcUhwb3BYMm16clV2cnNYT0VFM0JUV3VRM0hfZw?oc=5",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:4a5130afb2ac9ab7:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02022R2202-20261001": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "b562fe4e",
+      "identity_hash": "d849ce09ef92cc85",
+      "reader_title": "EU updates cross-border renewable projects",
+      "reader_what": "The consolidated EU regulation includes the 2026 update to selected cross-border renewable-energy projects.",
+      "reader_why": "The legal update changes the Union’s portfolio of strategic cross-border energy infrastructure.",
+      "reader_more": "The recovered source verifies the work and its central claim. The consolidated EU regulation includes the 2026 update to selected cross-border renewable-energy projects. The result is admitted to Strand C because its evidence is substantive under the package criteria.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "What does the verified work establish that is relevant to the assigned Radar strand?",
+        "main_finding": "The consolidated EU regulation includes the 2026 update to selected cross-border renewable-energy projects.",
+        "method_or_basis": "Recovered primary/full-text material and bibliographic verification.",
+        "qualification": "Current status and effects may evolve; this result records only what the recovered source establishes.",
+        "radar_relevance": "The legal update changes the Union’s portfolio of strategic cross-border energy infrastructure.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02022R2202-20261001; package contains matching substantial_web_text material (2917 characters)."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Inspected scanner first-party route https://publications.europa.eu/resource/celex/02022R2202-20261001; matching first-party material was available."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "http://publications.europa.eu/resource/cellar/3f25c7b7-bc1d-11f1-81de-01aa75ed71a1.0006.02/DOC_1",
+            "title": "Commission Delegated Regulation (EU) 2022/2202 of 29 August 2022 supplementing Regulation (EU) 2021/1153 of the European Parliament and of the Council by establishing a list of selected cross-border projects in the field of renewable energy (Text with EEA relevance)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CURRENT",
+        "reason": "Verified C evidence satisfies the strand criteria based on the recovered source."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:15Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "EUR-Lex",
+            "class": "eu_body"
+          },
+          "mechanism": "governs",
+          "direction": "expands",
+          "status": "adopted",
+          "status_date": "2026-10-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Current status and effects may evolve; this result records only what the recovered source establishes.",
+          "text": "The consolidated EU regulation includes the 2026 update to selected cross-border renewable-energy projects.",
+          "confidence": "high",
+          "record_key": "link:https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02022R2202-20261001",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:d849ce09ef92cc85:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMivAFBVV95cUxONnNtRVF3cTN2WHcyR1JTUDRpc3NocUVoS2tIRzdsancybUZIWUZ3dXBYWTlBUkdDYlJPaVV5NzF2bGFRWDJIY3NkVG1uZl8tNkFHQnd2Mm1HQlFVdWNGb1BWVUU5TGFRbHV6OFRrTmRkek5kTXlsSHExb3luOWpuMU9DVkpqOWwxMjhjbVRCNi03ZWRWTU85TFUzdFR5NFA4eXdPR1lkZUJpc3RFUzh6bUxoQlpGZVRqY2lISA?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "8152c937",
+      "identity_hash": "f19740aa84feab12",
+      "reader_title": "Google seeks suspension of EU search-data order",
+      "reader_what": "Google asked the EU General Court to suspend an order requiring access for AI and search rivals.",
+      "reader_why": "The case tests implementation of EU digital competition rules affecting AI and search market access.",
+      "reader_more": "The recovered source verifies the work and its central claim. Google asked the EU General Court to suspend an order requiring access for AI and search rivals. The result is admitted to Strand C because its evidence is substantive under the package criteria.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "What does the verified work establish that is relevant to the assigned Radar strand?",
+        "main_finding": "Google asked the EU General Court to suspend an order requiring access for AI and search rivals.",
+        "method_or_basis": "Recovered matching source and bibliographic verification.",
+        "qualification": "Current status and effects may evolve; this result records only what the recovered source establishes.",
+        "radar_relevance": "The case tests implementation of EU digital competition rules affecting AI and search market access.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "no_substantive_text",
+            "note": "Opened/checked https://news.google.com/rss/articles/CBMivAFBVV95cUxONnNtRVF3cTN2WHcyR1JTUDRpc3NocUVoS2tIRzdsancybUZIWUZ3dXBYWTlBUkdDYlJPaVV5NzF2bGFRWDJIY3NkVG1uZl8tNkFHQnd2Mm1HQlFVdWNGb1BWVUU5TGFRbHV6OFRrTmRkek5kTXlsSHExb3luOWpuMU9DVkpqOWwxMjhjbVRCNi03ZWRWTU85TFUzdFR5NFA4eXdPR1lkZUJpc3RFUzh6bUxoQlpGZVRqY2lISA?oc=5; supplied route did not provide substantive text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title recovery for \"Google asks EU court to suspend order to open up to AI chatbots, search engine rivals\" found a matching source at https://www.reuters.com/business/google-asks-eu-court-suspend-order-open-up-ai-chatbots-search-engine-rivals-2026-09-30/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://www.reuters.com/business/google-asks-eu-court-suspend-order-open-up-ai-chatbots-search-engine-rivals-2026-09-30/",
+            "title": "Google asks EU court to suspend order to open up to AI chatbots, search engine rivals",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CURRENT",
+        "reason": "Verified C evidence satisfies the strand criteria based on the recovered source."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:16Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [
+        {
+          "object": "ai.governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Reuters",
+            "class": "company"
+          },
+          "mechanism": "governs",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-09-30",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Current status and effects may evolve; this result records only what the recovered source establishes.",
+          "text": "Google asked the EU General Court to suspend an order requiring access for AI and search rivals.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMivAFBVV95cUxONnNtRVF3cTN2WHcyR1JTUDRpc3NocUVoS2tIRzdsancybUZIWUZ3dXBYWTlBUkdDYlJPaVV5NzF2bGFRWDJIY3NkVG1uZl8tNkFHQnd2Mm1HQlFVdWNGb1BWVUU5TGFRbHV6OFRrTmRkek5kTXlsSHExb3luOWpuMU9DVkpqOWwxMjhjbVRCNi03ZWRWTU85TFUzdFR5NFA4eXdPR1lkZUJpc3RFUzh6bUxoQlpGZVRqY2lISA?oc=5",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:f19740aa84feab12:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiwgFBVV95cUxOQWJfYXZITmYzSU9mUTRTTlBVdm5fWm5IUHE0dWxwY28wR2tqbUI4eGdNTU0tRDJvR2Y4SDFLWlUxUUY4dkdEdzlOcGoyWTcyN3Z0eXc3bzRkQWlEMUZyZE80cXpnZjg0VDZvZXNsRElURDdDTDROOFNEZTAydWRpQkJiX2hfNGQ0UmU1Y2Q2NF92REtqNVExeDFEZVotNmxLZXdRUVlXRzRsTFk2UWJ5REMxZXROSnRnUXI3UHNBQnVFdw?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "c13759a7",
+      "identity_hash": "43b16b1c36480d7a",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "no_substantive_text",
+            "note": "Opened/checked https://news.google.com/rss/articles/CBMiwgFBVV95cUxOQWJfYXZITmYzSU9mUTRTTlBVdm5fWm5IUHE0dWxwY28wR2tqbUI4eGdNTU0tRDJvR2Y4SDFLWlUxUUY4dkdEdzlOcGoyWTcyN3Z0eXc3bzRkQWlEMUZyZE80cXpnZjg0VDZvZXNsRElURDdDTDROOFNEZTAydWRpQkJiX2hfNGQ0UmU1Y2Q2NF92REtqNVExeDFEZVotNmxLZXdRUVlXRzRsTFk2UWJ5REMxZXROSnRnUXI3UHNBQnVFdw?oc=5; supplied route did not provide substantive text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title recovery for \"EU aviation agency issues Saudi airspace advisory after Houthi attacks\" found a matching source at https://www.reuters.com/world/middle-east/eu-aviation-agency-issues-saudi-airspace-advisory-after-houthi-attacks-2026-09-30/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://www.reuters.com/world/middle-east/eu-aviation-agency-issues-saudi-airspace-advisory-after-houthi-attacks-2026-09-30/",
+            "title": "EU aviation agency issues Saudi airspace advisory after Houthi attacks",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE_OR_NON_SUBSTANTIVE",
+        "reason": "The verified item does not meet the strand’s substantive admission criteria (for example, it is generic, promotional, event/listing material, incidental R&I, or not a reusable method)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:16Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMimgFBVV95cUxQMGY0ZV9rSm56WGk3Z2ctODU2Qm4tUVJzX2hLZDJsTGZyYndXUHNXRzFJN0xKU1BDTlNmb0VlWUVNTnlkd0p3d1I2QUpybEhVN0c0RnhpVzhPUGt1bHRRU2NhT041RVhMU1NPdXdmcDRyS0tLNldVaUVQWTNKUDJlQlhVVkJnU0ZONl9oTlBRSTNpWUNCTFBUcHF3?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "309c17fb",
+      "identity_hash": "75677d71614366b8",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "no_substantive_text",
+            "note": "Opened/checked https://news.google.com/rss/articles/CBMimgFBVV95cUxQMGY0ZV9rSm56WGk3Z2ctODU2Qm4tUVJzX2hLZDJsTGZyYndXUHNXRzFJN0xKU1BDTlNmb0VlWUVNTnlkd0p3d1I2QUpybEhVN0c0RnhpVzhPUGt1bHRRU2NhT041RVhMU1NPdXdmcDRyS0tLNldVaUVQWTNKUDJlQlhVVkJnU0ZONl9oTlBRSTNpWUNCTFBUcHF3?oc=5; supplied route did not provide substantive text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title recovery for \"BMW bets on AI, job cuts and €2bn to boost German production\" found a matching source at https://news.google.com/rss/articles/CBMimgFBVV95cUxQMGY0ZV9rSm56WGk3Z2ctODU2Qm4tUVJzX2hLZDJsTGZyYndXUHNXRzFJN0xKU1BDTlNmb0VlWUVNTnlkd0p3d1I2QUpybEhVN0c0RnhpVzhPUGt1bHRRU2NhT041RVhMU1NPdXdmcDRyS0tLNldVaUVQWTNKUDJlQlhVVkJnU0ZONl9oTlBRSTNpWUNCTFBUcHF3?oc=5."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQMGY0ZV9rSm56WGk3Z2ctODU2Qm4tUVJzX2hLZDJsTGZyYndXUHNXRzFJN0xKU1BDTlNmb0VlWUVNTnlkd0p3d1I2QUpybEhVN0c0RnhpVzhPUGt1bHRRU2NhT041RVhMU1NPdXdmcDRyS0tLNldVaUVQWTNKUDJlQlhVVkJnU0ZONl9oTlBRSTNpWUNCTFBUcHF3?oc=5",
+            "title": "BMW bets on AI, job cuts and €2bn to boost German production",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE_OR_NON_SUBSTANTIVE",
+        "reason": "The verified item does not meet the strand’s substantive admission criteria (for example, it is generic, promotional, event/listing material, incidental R&I, or not a reusable method)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:16Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMikwFBVV95cUxQVGlORkE5OXo4YXliQ2NDcHd0eFZ2UDlMbXBhbldETGdCYXJjVzFrSlJwbGh0endQbTFqLWtYS1hKQVZiRGJHUi1uUDlyZmxYMGxFQjV2Uks2YUJuZ05NTk41S0trSzA5c3I2LWx3Z1FuYVFkTVpvNHMtbThUcVh6cVljR3NoUEdmaG5BR3hvUUJqcHc?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "34b3abf9",
+      "identity_hash": "680418206cec8a55",
+      "reader_title": "Central and eastern Europe signs AI declaration",
+      "reader_what": "Nine central and eastern European countries signed the Prague Declaration on AI cooperation and mutual support.",
+      "reader_why": "The agreement creates a new regional coordination mechanism for AI development and deployment.",
+      "reader_more": "The recovered source verifies the work and its central claim. Nine central and eastern European countries signed the Prague Declaration on AI cooperation and mutual support. The result is admitted to Strand C because its evidence is substantive under the package criteria.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "What does the verified work establish that is relevant to the assigned Radar strand?",
+        "main_finding": "Nine central and eastern European countries signed the Prague Declaration on AI cooperation and mutual support.",
+        "method_or_basis": "Recovered matching source and bibliographic verification.",
+        "qualification": "Current status and effects may evolve; this result records only what the recovered source establishes.",
+        "radar_relevance": "The agreement creates a new regional coordination mechanism for AI development and deployment.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "no_substantive_text",
+            "note": "Opened/checked https://news.google.com/rss/articles/CBMikwFBVV95cUxQVGlORkE5OXo4YXliQ2NDcHd0eFZ2UDlMbXBhbldETGdCYXJjVzFrSlJwbGh0endQbTFqLWtYS1hKQVZiRGJHUi1uUDlyZmxYMGxFQjV2Uks2YUJuZ05NTk41S0trSzA5c3I2LWx3Z1FuYVFkTVpvNHMtbThUcVh6cVljR3NoUEdmaG5BR3hvUUJqcHc?oc=5; supplied route did not provide substantive text in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title recovery for \"Central and eastern Europe unites to have a greater say on AI\" found a matching source at https://sciencebusiness.net/news/ai/central-and-eastern-europe-unites-have-greater-say-ai."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_matching_source",
+            "url": "https://sciencebusiness.net/news/ai/central-and-eastern-europe-unites-have-greater-say-ai",
+            "title": "Central and eastern Europe unites to have a greater say on AI",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and relevance were checked against the supplied material and/or recovered matching source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CURRENT",
+        "reason": "Verified C evidence satisfies the strand criteria based on the recovered source."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T20:27:16Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362",
+      "claims": [
+        {
+          "object": "ai.governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Science|Business",
+            "class": "company"
+          },
+          "mechanism": "governs",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-09-30",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Current status and effects may evolve; this result records only what the recovered source establishes.",
+          "text": "Nine central and eastern European countries signed the Prague Declaration on AI cooperation and mutual support.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMikwFBVV95cUxQVGlORkE5OXo4YXliQ2NDcHd0eFZ2UDlMbXBhbldETGdCYXJjVzFrSlJwbGh0endQbTFqLWtYS1hKQVZiRGJHUi1uUDlyZmxYMGxFQjV2Uks2YUJuZ05NTk41S0trSzA5c3I2LWx3Z1FuYVFkTVpvNHMtbThUcVh6cVljR3NoUEdmaG5BR3hvUUJqcHc?oc=5",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:680418206cec8a55:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-02T18:52:17Z"
+  "claims_updated_at": "2026-10-02T20:27:16Z"
 }

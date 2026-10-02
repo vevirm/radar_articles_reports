@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-10-02T18:52:17Z",
+  "updated_at": "2026-10-02T20:27:16Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -14010,6 +14010,24 @@
       ],
       "updated_at": "2026-10-02T05:35:04Z",
       "deep_scan_package_id": "worker-b-20261002T051349Z-bd668899fd86"
+    },
+    "link:https://www.ukri.org/wp-content/uploads/2026/07/UKRI-060726-ListCentresInstitutesCatapultsUnits.xlsx": {
+      "fields": {
+        "title": "List of UKRI centres, institutes, Catapults and units",
+        "type": "spreadsheet/listing"
+      },
+      "unset": [
+        "source_tier"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The supplied URL is an XLSX listing, while the scanner assigned the title of the separate UKRI Strategy 2026–2031 page.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://www.ukri.org/publications/uk-research-and-innovation-strategy-2026-to-2031/ukri-strategy-2026-to-2031/"
+      ],
+      "updated_at": "2026-10-02T20:27:07Z",
+      "deep_scan_package_id": "worker-a-20261002T201236Z-f1d7ad3a0362"
     }
   }
 }

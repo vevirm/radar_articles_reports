@@ -6,30 +6,30 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2375** (Main **1115** + Historical **1260**)
-- Automatic queue still needing V2 verification: **162** (Main **77** + Historical **85**)
-- Currently assigned to workers: **125** (Main **49** + Historical **76**)
+- Authoritative V2 verified: **2421** (Main **1132** + Historical **1289**)
+- Automatic queue still needing V2 verification: **116** (Main **60** + Historical **56**)
+- Currently assigned to workers: **113** (Main **60** + Historical **53**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **29**
-- Automatic queue pending and not yet assigned: **37**
+- Automatic queue pending and not yet assigned: **3**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261002T201236Z-f1d7ad3a0362`
-- Assigned unresolved records: **48**
-  1. `link:https://www.ukri.org/wp-content/uploads/2026/07/UKRI-060726-ListCentresInstitutesCatapultsUnits.xlsx` — UKRI Strategy 2026 to 2031
-  2. `link:https://publications.jrc.ec.europa.eu/repository/handle/JRC148453` — Reducing dependencies on Critical Raw Materials with advanced materials
-  3. `link:https://doi.org/10.1016/j.joi.2026.101874` — Knowledge creation and patenting by European higher education institutions–evidence from a new dataset (KC-HEI)
-  4. `historical:id:6dec1388df761e83` — Essay: Sweden can help shape a future of sustainable prosperity
-  5. `historical:id:fa058b049c30d6bf` — Essay: A Shared Vision of the Future
-  6. `historical:id:fbe8c3a366c979b5` — Coimbra Group launches 2026 Scholarship Programme for Early-Career Professors and Researchers | Coimbra
-  7. `historical:id:9094e6055be98452` — Battlefield redefined 2026: Modern technologies with dual-use potential for enhancing security, defence and space resilience
-  8. `historical:id:2e36bb967e3b4bf1` — Coimbra Group calls the EU to address barriers to global talent | Coimbra
-  - … plus 40 more in the package manifest
+- Current package: `worker-a-20261002T203328Z-9a8f6b785d7d`
+- Assigned unresolved records: **36**
+  1. `link:https://ecfr.eu/wp-content/uploads/2026/10/Bewitched-sleep-Russians-views-on-Ukraine-and-the-world.pdf` — Bewitched sleep: Russians’ views on Ukraine and the world – European Council on Foreign Relations
+  2. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=ed6968df-be08-11f1-9aae-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Feeding the beast - Publications Office of the EU
+  3. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=d70dd67e-be08-11f1-9aae-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Strategic intelligence for emerging and critical technologies - Publications Office of the EU
+  4. `link:https://news.google.com/rss/articles/CBMiX0FVX3lxTE9ZbG5DMGljUXJ4QkxkVVBUdE1mbW84V09nejAxTmtFcE1oQ2xGRHZJdGo0X2ZlYXdTdUgzSGxLOVNhcnI2OXVJLXRzVmlmMFpKVDFkdXFjOHZkNmwwYkFF?oc=5` — A Pan-European Multimodal Dataset Linking Field Photos with Satellite Image Time Series for Agricultural Mapping
+  5. `link:https://news.google.com/rss/articles/CBMinwFBVV95cUxOM243bllna1JGajRibnN5c0xxc1hSRHB1Y25Vb1Axb2VsVlBQbWdoWi1jc2ktdlVlcGI3VlpTdTl6TXNjRTh5eEwzN0ttaWJfaFA5MGQzZXA0azRISnNuTWFQZkpTa0hQUDV3ejFEeHZnZXZXczFxNUtnRkloV0Q3QkR6dkZ0VE1JR1ZWM3NjX1dhSlllNUpHWmNud21Wams?oc=5` — Could the EU AI Act deter 'housefishing' in European real estate?
+  6. `link:https://news.google.com/rss/articles/CBMilgFBVV95cUxQajBMVmhnZ1BaM3hnMl8zMUNxQmFST0w5VGMwaDA3MmNfTVdvdmU0d1UzdWN4Z1BGTlVNb0NLb1dYZUc5dXF5TDVQYTVyMHVZQzcteDZBb0U4RjNBb1RPVFlhdTdlRzR3OVcxbkJMblBhcFhFdFY2OVFGWHlvQVYtOU9CREFILTFreWZ1UTIxZi1iaTBxNHc?oc=5` — European FOMO while US-China summit wraps
+  7. `link:https://news.google.com/rss/articles/CBMiugFBVV95cUxPd1pTLUZZcmpqOENya2o4VVFoQk1ZRUFyR0ZYR3g5YVE1SWdOdmpVSFU2QW14c0NQR1VXbG1kTDJlN19WN01ZSTFPVFAzZ1hSOFZjdmRPbW9VRTAxSU5JN09kSFNjUmZRMnFnenNyT0t5NlZKVFJXUWFqcGpaVnk2azZtQjV4ZlR5S1ZtYm9rWFNvR2VFSXFVaFIzOXBHQWN4SnVGbHk4M0k0OU5XTXExWEtjakVOQVB4ZGc?oc=5` — The Pope is fretting about frontier AI — what’s the EU’s answer?
+  8. `link:https://news.google.com/rss/articles/CBMinAFBVV95cUxNNUE4SXBaWkNRTUc2d2dRUjBiYlY3NV9IQVpublNGYmVjbzJER0R4emlPcUo0U1FxQzMtMm9ZWTVXc0F0MXEwc2hXcDRWVEgtTUo2Z3ZjbmlOQzZJeDh5ZTg4UEZBdzZhWlU4RnVqd0ZSNk1OTU5mNWcyb3hJVEFzR2g0WXdKWURCWVNySHRHUDRhUWRuUFN3VXo1bnk?oc=5` — France taps ‘engineer-tinkerers’ for defence innovation - rapporteur.com
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261002T201306Z-b0bb2b7d17e6`
+- Current package: `worker-b-20261002T203403Z-b0bb2b7d17e6`
 - Assigned unresolved records: **52**
   1. `historical:id:cfc3df63ea047522` — Foresight Training: Moving from Design to Evaluation — recovery attempt 2/3
   2. `historical:id:71fb388747f74384` — “Mainstreaming” foresight program development in the public sector — recovery attempt 2/3
