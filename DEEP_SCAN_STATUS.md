@@ -7,16 +7,16 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **2308** (Main **1106** + Historical **1202**)
-- Automatic queue still needing V2 verification: **126** (Main **8** + Historical **118**)
+- Automatic queue still needing V2 verification: **151** (Main **15** + Historical **136**)
 - Currently assigned to workers: **97** (Main **8** + Historical **89**)
 - Bounded access-recovery retries still eligible: **1**
 - Hands-on verification needed: **25**
-- Automatic queue pending and not yet assigned: **29**
+- Automatic queue pending and not yet assigned: **54**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261001T141225Z-27812f81b3b5`
+- Current package: `worker-a-20261002T051330Z-8d50ffbdca7b`
 - Assigned unresolved records: **36**
   1. `historical:id:a27dcc6c17eaa230` — ERA Portal Austria – TOWARDS A EUROPEAN FRAMEWORK FOR RESEARCH CAREERS (2011)
   2. `historical:id:430a0c6600f89574` — ERA Portal Austria – Research Careers
@@ -29,7 +29,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261001T141254Z-bd668899fd86`
+- Current package: `worker-b-20261002T051349Z-bd668899fd86`
 - Assigned unresolved records: **36**
   1. `link:https://news.google.com/rss/articles/CBMiekFVX3lxTE1Pc1RnZW41ZU9YUUZqVHFjT0lTUWFKTldPaEZxVDQwMzg0OFgzR3djc0lZMlRnX2JYbmVEdHBEMTFOMWlzMDhxMFFuSmlzbmtjUW9vUmJXenljakFpNy1RQnNJTXlIZEFhRjJtUWtUNm5mT2dpQkZYYWtR?oc=5` — THE HACK: EU weighs AI labs' safety plans — recovery attempt 3/3
   2. `historical:id:edd664f7e29f4f65` — Our Futures: By the people, for the people
