@@ -6,17 +6,17 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2343** (Main **1109** + Historical **1234**)
-- Automatic queue still needing V2 verification: **115** (Main **12** + Historical **103**)
-- Currently assigned to workers: **97** (Main **12** + Historical **85**)
+- Authoritative V2 verified: **2372** (Main **1112** + Historical **1260**)
+- Automatic queue still needing V2 verification: **83** (Main **7** + Historical **76**)
+- Currently assigned to workers: **83** (Main **7** + Historical **76**)
 - Bounded access-recovery retries still eligible: **0**
-- Hands-on verification needed: **26**
-- Automatic queue pending and not yet assigned: **18**
+- Hands-on verification needed: **29**
+- Automatic queue pending and not yet assigned: **0**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261002T053211Z-5c32c46c6046`
+- Current package: `worker-a-20261002T054102Z-5c32c46c6046`
 - Assigned unresolved records: **36**
   1. `link:https://www.espi.eu/wp-content/uploads/2026/10/ESPI-Insights-Issue-August-2026.pdf` — ESPI Insights for August 2026 is out! - ESPI
   2. `link:https://ecipe.org/publications/6g-wake-up-call-for-europe/#_ftnref1` — The 6G Wake-up Call for Europe: Reforms Urgently Needed to Sustain Europe’s Telecommunications Leadership
@@ -29,17 +29,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261002T053240Z-bd668899fd86`
-- Assigned unresolved records: **36**
-  1. `link:https://news.google.com/rss/articles/CBMiekFVX3lxTE1Pc1RnZW41ZU9YUUZqVHFjT0lTUWFKTldPaEZxVDQwMzg0OFgzR3djc0lZMlRnX2JYbmVEdHBEMTFOMWlzMDhxMFFuSmlzbmtjUW9vUmJXenljakFpNy1RQnNJTXlIZEFhRjJtUWtUNm5mT2dpQkZYYWtR?oc=5` — THE HACK: EU weighs AI labs' safety plans — recovery attempt 3/3
-  2. `historical:id:edd664f7e29f4f65` — Our Futures: By the people, for the people
-  3. `historical:id:2e253c28db67fe16` — The Extended Map methodology: Technology roadmapping for SMES clusters
-  4. `historical:id:7ed808b505d8e762` — Investigating scenario planning – a European tourism perspective
-  5. `historical:id:1a9c0296ad57a559` — Development of data-driven technology roadmap considering dependency: An ARM-based technology roadmapping
-  6. `link:https://doi.org/10.1016/j.iref.2026.105712` — Strategic coherence as a signal in innovation grants: Unpacking how technological alignment and financial flexibility shape SME funding decisions — recovery attempt 3/3
-  7. `historical:id:256f788e05840f94` — Foresight and strategic decision-making framework from artificial intelligence technology development to utilization activities in small-and-medium-sized enterprises — recovery attempt 3/3
-  8. `historical:id:5c7d57c2c2f2d019` — The policy space for a novel industrial policy in Europe — recovery attempt 3/3
-  - … plus 28 more in the package manifest
+- Current package: `worker-b-20261002T054131Z-2fd5e828663c`
+- Assigned unresolved records: **22**
+  1. `historical:id:cfc3df63ea047522` — Foresight Training: Moving from Design to Evaluation — recovery attempt 2/3
+  2. `historical:id:71fb388747f74384` — “Mainstreaming” foresight program development in the public sector — recovery attempt 2/3
+  3. `historical:id:2e253c28db67fe16` — The Extended Map methodology: Technology roadmapping for SMES clusters — recovery attempt 2/3
+  4. `historical:id:f844fdc985add8c2` — Interim AI report offers mix of ambitious and practical recommendations | Center for Security and Emerging Technology
+  5. `historical:id:971cca475a8b3e0f` — Innovation Vouchers for Energy and Innovation Systems’ Transition
+  6. `historical:id:b4dd14c145bda2d8` — Chinese tech standards put the screws on European companies
+  7. `historical:id:f50731a742ee5685` — Building the future with nanoimprint lithography
+  8. `historical:id:9877c1198845aa39` — Sharing research data
+  - … plus 14 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20260929T121743Z-e775de6d81ad`
@@ -84,3 +84,6 @@ These works no longer consume automatic Deep Scan slots. Their identity is belie
 - `link:https://news.google.com/rss/articles/CBMimgFBVV95cUxPbFd0dlh5RjQzUnEwLTRpU2hMaWxPNk5Zal93N2lITWliRHhzNEhJOGYtWUJ1U0tab2tseTE1bWhlei1mQ09EMXZSM0g3MzdWMWlaSlF4eEx5U1BXQ0daV1RwLVVqdW5SYnUxY09GUUxSbldRZEttV0ZkbnhMTzNycFFOWXVQLUhFRURwTVlBWXVwN20wSnFPRXln?oc=5` — **Don’t believe the doomers: Europe’s tech industry slams AI panic** — attempts: 3/3 — Politico Europe — 2026-09-24T03:00Z — The POLITICO article identity is corroborated, but accessible material came from secondary mirrors or snippets; the primary article remained insufficient for authoritative claim verification. — https://news.google.com/rss/articles/CBMimgFBVV95cUxPbFd0dlh5RjQzUnEwLTRpU2hMaWxPNk5Zal93N2lITWliRHhzNEhJOGYtWUJ1U0tab2tseTE1bWhlei1mQ09EMXZSM0g3MzdWMWlaSlF4eEx5U1BXQ0daV1RwLVVqdW5SYnUxY09GUUxSbldRZEttV0ZkbnhMTzNycFFOWXVQLUhFRURwTVlBWXVwN20wSnFPRXln?oc=5
 - `link:https://news.google.com/rss/articles/CBMigwFBVV95cUxQUGRlY09GVnBXQVd2bTJuY3JiUWQ5eEwzelBqMnltTmtxRmhXeUozcWVJUW1KMWtTcW9pcEFIX3JWTUxWQnZVZi1QdENTc2k2ZGJMbzBVR1ZGS1pKdUExVzlNZkxpcmxuNnZzNUpzX2RPU3hETjNNbmtPMm9sZkJxMXpLSQ?oc=5` — **What is Europe's plan if AI doesn’t self-improve?** — attempts: 3/3 — Euractiv — 2026-09-24T02:03Z — The Euractiv Pro article identity is verified, but only headline/subhead-level material was accessible. — https://news.google.com/rss/articles/CBMigwFBVV95cUxQUGRlY09GVnBXQVd2bTJuY3JiUWQ5eEwzelBqMnltTmtxRmhXeUozcWVJUW1KMWtTcW9pcEFIX3JWTUxWQnZVZi1QdENTc2k2ZGJMbzBVR1ZGS1pKdUExVzlNZkxpcmxuNnZzNUpzX2RPU3hETjNNbmtPMm9sZkJxMXpLSQ?oc=5
 - `historical:id:4c175377997921f0` — **Development of a novel framework for the analysis of Technological Innovation Systems by Causal Layered Analysis (CLA) in energy systems** — attempts: 3/3 — Technology Analysis & Strategic Management — 2024-11-01 — Identity and methodological claim are verified, but only abstract-level substantive evidence was recoverable; full text was not accessible. — https://doi.org/10.1080/09537325.2023.2214639
+- `link:https://news.google.com/rss/articles/CBMiekFVX3lxTE1Pc1RnZW41ZU9YUUZqVHFjT0lTUWFKTldPaEZxVDQwMzg0OFgzR3djc0lZMlRnX2JYbmVEdHBEMTFOMWlzMDhxMFFuSmlzbmtjUW9vUmJXenljakFpNy1RQnNJTXlIZEFhRjJtUWtUNm5mT2dpQkZYYWtR?oc=5` — **THE HACK: EU weighs AI labs' safety plans** — attempts: 3/3 — Euractiv — 2026-09-18T06:47Z — Euractiv item identity is verified, but the substantive article is paywalled and accessible evidence is too thin for an authoritative event judgement. — https://news.google.com/rss/articles/CBMiekFVX3lxTE1Pc1RnZW41ZU9YUUZqVHFjT0lTUWFKTldPaEZxVDQwMzg0OFgzR3djc0lZMlRnX2JYbmVEdHBEMTFOMWlzMDhxMFFuSmlzbmtjUW9vUmJXenljakFpNy1RQnNJTXlIZEFhRjJtUWtUNm5mT2dpQkZYYWtR?oc=5
+- `historical:id:256f788e05840f94` — **Foresight and strategic decision-making framework from artificial intelligence technology development to utilization activities in small-and-medium-sized enterprises** — attempts: 3/3 — Foresight — 2023-10-24 — Identity is verified and the paper presents a foresight/decision framework, but full substantive evidence was not accessible. — https://doi.org/10.1108/fs-06-2022-0069
+- `link:https://doi.org/10.1016/j.iref.2026.105712` — **Strategic coherence as a signal in innovation grants: Unpacking how technological alignment and financial flexibility shape SME funding decisions** — attempts: 3/3 — International Review of Economics & Finance — 2026-08-06 — Identity and EU Horizon 2020 empirical basis are verified, but accessible evidence remained abstract-level only. — https://doi.org/10.1016/j.iref.2026.105712
