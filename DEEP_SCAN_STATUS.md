@@ -6,17 +6,17 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2421** (Main **1132** + Historical **1289**)
-- Automatic queue still needing V2 verification: **116** (Main **60** + Historical **56**)
-- Currently assigned to workers: **113** (Main **60** + Historical **53**)
+- Authoritative V2 verified: **2469** (Main **1158** + Historical **1311**)
+- Automatic queue still needing V2 verification: **68** (Main **34** + Historical **34**)
+- Currently assigned to workers: **68** (Main **34** + Historical **34**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **29**
-- Automatic queue pending and not yet assigned: **3**
+- Automatic queue pending and not yet assigned: **0**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261002T203328Z-9a8f6b785d7d`
+- Current package: `worker-a-20261002T203930Z-9a8f6b785d7d`
 - Assigned unresolved records: **36**
   1. `link:https://ecfr.eu/wp-content/uploads/2026/10/Bewitched-sleep-Russians-views-on-Ukraine-and-the-world.pdf` — Bewitched sleep: Russians’ views on Ukraine and the world – European Council on Foreign Relations
   2. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=ed6968df-be08-11f1-9aae-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Feeding the beast - Publications Office of the EU
@@ -29,17 +29,15 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261002T203403Z-b0bb2b7d17e6`
-- Assigned unresolved records: **52**
-  1. `historical:id:cfc3df63ea047522` — Foresight Training: Moving from Design to Evaluation — recovery attempt 2/3
-  2. `historical:id:71fb388747f74384` — “Mainstreaming” foresight program development in the public sector — recovery attempt 2/3
-  3. `historical:id:2e253c28db67fe16` — The Extended Map methodology: Technology roadmapping for SMES clusters — recovery attempt 2/3
-  4. `historical:id:f844fdc985add8c2` — Interim AI report offers mix of ambitious and practical recommendations | Center for Security and Emerging Technology
-  5. `historical:id:971cca475a8b3e0f` — Innovation Vouchers for Energy and Innovation Systems’ Transition
-  6. `historical:id:b4dd14c145bda2d8` — Chinese tech standards put the screws on European companies
-  7. `historical:id:f50731a742ee5685` — Building the future with nanoimprint lithography
-  8. `historical:id:9877c1198845aa39` — Sharing research data
-  - … plus 44 more in the package manifest
+- Current package: `worker-b-20261002T203950Z-de2c4ed694f4`
+- Assigned unresolved records: **7**
+  1. `historical:id:dded1cf39bcbe3e0` — Standards for Critical Raw Materials | HCSS
+  2. `historical:id:44f35087f1b36ffe` — European research supports industry in digital transformation | VTT
+  3. `historical:id:f25801a278c17636` — Futures Partnership
+  4. `link:https://news.google.com/rss/articles/CBMivwFBVV95cUxNWGd3OGE0ZFluellpVF9qX0R4RjV5cnpfVGNQNE5XZndfVFZGSndiVUk5VzJseDl5Mzc2bDlXa3ctR3dEdDIzaXIyb1hxRm11bU9nT1ItNEZIRmsxLTFuZ1lmLWtHT2ZVSEdzOXl1VWZZMjFVU1oyU0FlYjFRWDEyRElrdWhwSUprY1NPU3NXOVB1NmZ0OXBOYUVCZkQ5REVVenkwUmo3RjVoc0FJc3U5dU51bEdoYzk0SnpSaHZUYw?oc=5` — Europe Today: NATO chief Mark Rutte joins Euronews' Defence and Space Summit in Brussels — recovery attempt 2/3
+  5. `link:https://news.google.com/rss/articles/CBMirAFBVV95cUxNQS1XZXNsUW14ek8zbVJhMzJTZTVvVk81ZUZ0aDRDWFNBZFR5aVFTcXhYcThkS3FZZTJuOWFnOU9SV1pxdEF6VmpmekFZS1lLdnRjSlozdThvbFRPQ1lvZzhpNkNpUUtmSDdsa2RhLWhxRVcySXdzZktsVWoyVVNRZFl3NkFPcVEwOGNnN1pJeDFBV3V3QmdmbmE2MEdpcnVTZHhrOC1TVXBSYm5Q?oc=5` — Kyiv's digital minister: 'We want Europe to use us as an AI sandbox' — recovery attempt 2/3
+  6. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTE5na2d5djZmZnloSXVwUGVEeTRhOE9rLVFUSUE0VXBlaGUyZUFNdk5wSm9JMEZ1VDd6Yk5CakJDdV9wdjhQYi1FNFd5VkhITWpPMlo0YkdJUkd4Ti1ueUJXdVhDam1yUEZTMnhIcmRQWm4tTE80MzlRNUhiUGlSdw?oc=5` — EU-China trade and investment relations — recovery attempt 2/3
+  7. `link:https://news.google.com/rss/articles/CBMilAFBVV95cUxQTUp2WlpkWGxVZmRvd1VUd3FZYkkyNlNtRkQ0ekI5bzBZOUprMWZiZkdBSWtDSGNtU0FSTHNVZVdNQ253YzRnNFE3NjkxclJ6MEotUlRBUnBsSmxlajlQeFJzdkppam9HYjJhbUx4cUJOMTFNQ1dNZEduSllUcUpzZ1pzald3VFlYR3V0Nk1EZHZ6Qzd4?oc=5` — Human control and AI-enabled military systems: Human rights risks, accountability and policy options for the European Union — recovery attempt 2/3
 
 ### Worker SINGLE
 - Current package: `20260929T121743Z-e775de6d81ad`
