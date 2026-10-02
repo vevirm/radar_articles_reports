@@ -7,29 +7,29 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **2372** (Main **1112** + Historical **1260**)
-- Automatic queue still needing V2 verification: **157** (Main **78** + Historical **79**)
-- Currently assigned to workers: **129** (Main **53** + Historical **76**)
+- Automatic queue still needing V2 verification: **165** (Main **80** + Historical **85**)
+- Currently assigned to workers: **128** (Main **52** + Historical **76**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **29**
-- Automatic queue pending and not yet assigned: **28**
+- Automatic queue pending and not yet assigned: **37**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261002T135100Z-6b1d6fe24985`
-- Assigned unresolved records: **52**
+- Current package: `worker-a-20261002T180951Z-4a88f39c8ffc`
+- Assigned unresolved records: **51**
   1. `link:https://www.espi.eu/wp-content/uploads/2026/10/ESPI-Insights-Issue-August-2026.pdf` — ESPI Insights for August 2026 is out! - ESPI
   2. `link:https://ecipe.org/publications/6g-wake-up-call-for-europe/#_ftnref1` — The 6G Wake-up Call for Europe: Reforms Urgently Needed to Sustain Europe’s Telecommunications Leadership
   3. `link:https://doi.org/10.1016/j.lanepe.2026.101778` — Rebalancing innovation, affordability, and access for orphan drugs in the European Union
   4. `link:https://www.ukri.org/wp-content/uploads/2026/07/UKRI-060726-ListCentresInstitutesCatapultsUnits.xlsx` — UKRI Strategy 2026 to 2031
   5. `link:https://publications.jrc.ec.europa.eu/repository/handle/JRC148453` — Reducing dependencies on Critical Raw Materials with advanced materials
-  6. `link:https://ecfr.eu/publication/bewitched-sleep-russians-views-on-ukraine-and-the-world/` — Bewitched sleep: Russians’ views on Ukraine and the world – European Council on Foreign Relations
-  7. `link:https://doi.org/10.1016/j.joi.2026.101874` — Knowledge creation and patenting by European higher education institutions–evidence from a new dataset (KC-HEI)
-  8. `historical:id:6dec1388df761e83` — Essay: Sweden can help shape a future of sustainable prosperity
-  - … plus 44 more in the package manifest
+  6. `link:https://doi.org/10.1016/j.joi.2026.101874` — Knowledge creation and patenting by European higher education institutions–evidence from a new dataset (KC-HEI)
+  7. `historical:id:6dec1388df761e83` — Essay: Sweden can help shape a future of sustainable prosperity
+  8. `historical:id:fa058b049c30d6bf` — Essay: A Shared Vision of the Future
+  - … plus 43 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261002T135133Z-31ec3a93209e`
+- Current package: `worker-b-20261002T181016Z-b0bb2b7d17e6`
 - Assigned unresolved records: **52**
   1. `historical:id:cfc3df63ea047522` — Foresight Training: Moving from Design to Evaluation — recovery attempt 2/3
   2. `historical:id:71fb388747f74384` — “Mainstreaming” foresight program development in the public sector — recovery attempt 2/3
