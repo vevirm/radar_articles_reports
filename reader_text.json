@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-02T05:35:06Z",
+  "generated_at": "2026-10-02T18:52:17Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -210896,8 +210896,269 @@
       "deep_scan_package_id": "worker-b-20261002T051349Z-bd668899fd86",
       "claims": [],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.espi.eu/wp-content/uploads/2026/10/ESPI-Insights-Issue-August-2026.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "4a9889e2",
+      "identity_hash": "e5e8df0e8c80e6d0",
+      "reader_title": "ESPI Insights for August 2026 is out! - ESPI",
+      "reader_what": "ESPI Insights for August 2026 is out! - ESPI.",
+      "reader_why": "It provides verified evidence about European research, innovation, technology capacity, governance or strategic dependence.",
+      "reader_more": "The recovered source matches the claimed work. ESPI Insights for August 2026 is out! - ESPI.. The admission decision follows the package's A criteria and preserves the stated qualification.",
+      "deep_analysis": {
+        "work_kind": "institutional report",
+        "research_question": "What does this work establish that is relevant to the Radar strand?",
+        "main_finding": "ESPI Insights for August 2026 is out! - ESPI.",
+        "method_or_basis": "Verified from pdf_excerpt and matching publisher/official evidence where recovery was needed.",
+        "qualification": "Evidence supports the work as described, but claims are limited to what the recovered source directly establishes.",
+        "radar_relevance": "Recovered evidence confirms a substantive A work matching the package identity and strand criteria.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied reader-facing URL https://www.espi.eu/wp-content/uploads/2026/10/ESPI-Insights-Issue-August-2026.pdf; package retrieval mode was pdf_excerpt."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "substantive_source",
+            "url": "https://www.espi.eu/wp-content/uploads/2026/10/ESPI-Insights-Issue-August-2026.pdf",
+            "title": "ESPI Insights for August 2026 is out! - ESPI",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified against package source material and/or recovered matching source. Decision: keep."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Recovered evidence confirms a substantive A work matching the package identity and strand criteria."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T18:52:16Z",
+      "deep_scan_package_id": "worker-a-20261002T180951Z-4a88f39c8ffc",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Space Policy Institute",
+            "class": "other"
+          },
+          "mechanism": "supports",
+          "direction": "expands",
+          "status": "adopted",
+          "status_date": "2026-09-07",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Evidence supports the work as described, but claims are limited to what the recovered source directly establishes.",
+          "text": "ESPI Insights for August 2026 is out! - ESPI.",
+          "confidence": "high",
+          "record_key": "link:https://www.espi.eu/wp-content/uploads/2026/10/ESPI-Insights-Issue-August-2026.pdf",
+          "merit": 81,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:e5e8df0e8c80e6d0:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://ecipe.org/publications/6g-wake-up-call-for-europe/#_ftnref1": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "3da3aab9",
+      "identity_hash": "1cec3be61b246450",
+      "reader_title": "The 6G Wake-up Call for Europe: Reforms Urgently Needed to Sustain Europe’s Telecommunications Leadership",
+      "reader_what": "The 6G Wake-up Call for Europe: Reforms Urgently Needed to Sustain Europe’s Telecommunications Leadership.",
+      "reader_more": "The recovered source matches the claimed work. The 6G Wake-up Call for Europe: Reforms Urgently Needed to Sustain Europe’s Telecommunications Leadership.. The admission decision follows the package's A criteria and preserves the stated qualification.",
+      "deep_analysis": {
+        "work_kind": "institutional report",
+        "research_question": "What does this work establish that is relevant to the Radar strand?",
+        "main_finding": "The 6G Wake-up Call for Europe: Reforms Urgently Needed to Sustain Europe’s Telecommunications Leadership.",
+        "method_or_basis": "Verified from substantial_web_text and matching publisher/official evidence where recovery was needed.",
+        "qualification": "Evidence supports the work as described, but claims are limited to what the recovered source directly establishes.",
+        "radar_relevance": "Recovered evidence confirms a substantive A work matching the package identity and strand criteria.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied reader-facing URL https://ecipe.org/publications/6g-wake-up-call-for-europe/#_ftnref1; package retrieval mode was substantial_web_text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "substantive_source",
+            "url": "https://ecipe.org/publications/6g-wake-up-call-for-europe/#_ftnref1",
+            "title": "The 6G Wake-up Call for Europe: Reforms Urgently Needed to Sustain Europe’s Telecommunications Leadership",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified against package source material and/or recovered matching source. Decision: keep."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Recovered evidence confirms a substantive A work matching the package identity and strand criteria."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T18:52:17Z",
+      "deep_scan_package_id": "worker-a-20261002T180951Z-4a88f39c8ffc",
+      "claims": [
+        {
+          "object": "digital.infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "ECIPE",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "supports",
+          "direction": "expands",
+          "status": "abandoned",
+          "status_date": "2026-10-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Evidence supports the work as described, but claims are limited to what the recovered source directly establishes.",
+          "text": "The 6G Wake-up Call for Europe: Reforms Urgently Needed to Sustain Europe’s Telecommunications Leadership.",
+          "confidence": "high",
+          "record_key": "link:https://ecipe.org/publications/6g-wake-up-call-for-europe/#_ftnref1",
+          "merit": 87,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:1cec3be61b246450:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1016/j.lanepe.2026.101778": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "36b46437",
+      "identity_hash": "5c6640844a11784f",
+      "reader_title": "Rebalancing innovation, affordability, and access for orphan drugs in the European Union",
+      "reader_what": "leaving most rare disease patients facing high unmet medical needs.",
+      "reader_more": "The recovered source matches the claimed work. leaving most rare disease patients facing high unmet medical needs.. The admission decision follows the package's A criteria and preserves the stated qualification.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed article",
+        "research_question": "What does this work establish that is relevant to the Radar strand?",
+        "main_finding": "leaving most rare disease patients facing high unmet medical needs.",
+        "method_or_basis": "Verified from pdf_excerpt and matching publisher/official evidence where recovery was needed.",
+        "qualification": "Evidence supports the work as described, but claims are limited to what the recovered source directly establishes.",
+        "radar_relevance": "Recovered evidence confirms a substantive A work matching the package identity and strand criteria.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied reader-facing URL https://doi.org/10.1016/j.lanepe.2026.101778; package retrieval mode was pdf_excerpt."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title recovery located a matching substantive source at https://dipot.ulb.ac.be/dspace/bitstream/2013/414127/1/doi_397771.pdf."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "substantive_source",
+            "url": "https://dipot.ulb.ac.be/dspace/bitstream/2013/414127/1/doi_397771.pdf",
+            "title": "Rebalancing innovation, affordability, and access for orphan drugs in the European Union",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified against package source material and/or recovered matching source. Decision: keep."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Recovered evidence confirms a substantive A work matching the package identity and strand criteria."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-02T18:52:17Z",
+      "deep_scan_package_id": "worker-a-20261002T180951Z-4a88f39c8ffc",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "The Lancet Regional Health - Europe",
+            "class": "other"
+          },
+          "mechanism": "supports",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-07-30",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Evidence supports the work as described, but claims are limited to what the recovered source directly establishes.",
+          "text": "leaving most rare disease patients facing high unmet medical needs.",
+          "confidence": "high",
+          "record_key": "link:https://doi.org/10.1016/j.lanepe.2026.101778",
+          "merit": 77,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:5c6640844a11784f:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-02T05:35:06Z"
+  "claims_updated_at": "2026-10-02T18:52:17Z"
 }
