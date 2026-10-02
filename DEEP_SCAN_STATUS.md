@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261002T180951Z-4a88f39c8ffc`
+- Current package: `worker-a-20261002T184901Z-4a88f39c8ffc`
 - Assigned unresolved records: **51**
   1. `link:https://www.espi.eu/wp-content/uploads/2026/10/ESPI-Insights-Issue-August-2026.pdf` — ESPI Insights for August 2026 is out! - ESPI
   2. `link:https://ecipe.org/publications/6g-wake-up-call-for-europe/#_ftnref1` — The 6G Wake-up Call for Europe: Reforms Urgently Needed to Sustain Europe’s Telecommunications Leadership
@@ -29,7 +29,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 43 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261002T181016Z-b0bb2b7d17e6`
+- Current package: `worker-b-20261002T184935Z-b0bb2b7d17e6`
 - Assigned unresolved records: **52**
   1. `historical:id:cfc3df63ea047522` — Foresight Training: Moving from Design to Evaluation — recovery attempt 2/3
   2. `historical:id:71fb388747f74384` — “Mainstreaming” foresight program development in the public sector — recovery attempt 2/3
