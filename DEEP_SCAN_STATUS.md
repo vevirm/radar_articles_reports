@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261002T185751Z-f1d7ad3a0362`
+- Current package: `worker-a-20261002T201236Z-f1d7ad3a0362`
 - Assigned unresolved records: **48**
   1. `link:https://www.ukri.org/wp-content/uploads/2026/07/UKRI-060726-ListCentresInstitutesCatapultsUnits.xlsx` — UKRI Strategy 2026 to 2031
   2. `link:https://publications.jrc.ec.europa.eu/repository/handle/JRC148453` — Reducing dependencies on Critical Raw Materials with advanced materials
@@ -29,7 +29,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 40 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261002T185820Z-b0bb2b7d17e6`
+- Current package: `worker-b-20261002T201306Z-b0bb2b7d17e6`
 - Assigned unresolved records: **52**
   1. `historical:id:cfc3df63ea047522` — Foresight Training: Moving from Design to Evaluation — recovery attempt 2/3
   2. `historical:id:71fb388747f74384` — “Mainstreaming” foresight program development in the public sector — recovery attempt 2/3
