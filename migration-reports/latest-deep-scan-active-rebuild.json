@@ -1,52 +1,52 @@
 {
   "profile": "radar-active-corpus-rebuild-v1",
-  "completed_at": "2026-10-01T14:11:06Z",
+  "completed_at": "2026-10-02T05:30:56Z",
   "raw_counts": {
-    "strand_a": 584,
+    "strand_a": 591,
     "strand_b": 175,
     "strand_c": 323,
     "frontier_evidence": 0
   },
   "active_counts": {
-    "strand_a": 387,
+    "strand_a": 394,
     "strand_b": 134,
-    "strand_c": 252,
+    "strand_c": 251,
     "frontier_evidence": 0
   },
   "decision_counts": {
-    "provisional": 11,
-    "keep": 752,
-    "review": 25,
+    "provisional": 15,
+    "keep": 756,
+    "review": 24,
     "drop": 231,
     "drop_unverifiable": 46,
     "duplicate": 4,
     "needs_manual_verification": 13
   },
   "deep_scan_v2": {
-    "total_records": 1065,
-    "v2_verified": 1041,
-    "v2_pending": 24
+    "total_records": 1071,
+    "v2_verified": 1043,
+    "v2_pending": 28
   },
   "historical_deep_scan_v2": {
-    "total_records": 1327,
-    "v2_verified": 1202,
-    "v2_pending": 125,
-    "active_a_context": 747
+    "total_records": 1345,
+    "v2_verified": 1234,
+    "v2_pending": 111,
+    "active_a_context": 742
   },
   "downstream_diagnostics": {
-    "derived_objects_checked": 840,
-    "unchanged": 840,
-    "rebuilt": 0,
-    "materially_rewritten": 0,
-    "newly_inferred": 0,
-    "retired": 0,
-    "stale_evidence_references_before": 0,
-    "stale_evidence_references_removed": 0,
+    "derived_objects_checked": 866,
+    "unchanged": 793,
+    "rebuilt": 35,
+    "materially_rewritten": 4,
+    "newly_inferred": 14,
+    "retired": 20,
+    "stale_evidence_references_before": 2,
+    "stale_evidence_references_removed": 2,
     "orphan_references_remaining": 0,
-    "active_evidence_reference_occurrences_checked": 3653,
+    "active_evidence_reference_occurrences_checked": 3684,
     "shock_support_chains_changed_after_a_removal": 0,
     "active_dynamic_shocks": 10,
-    "active_high_order_candidates": 754,
+    "active_high_order_candidates": 760,
     "active_strategic_pathways": 1,
     "active_possible_external_shocks": 0,
     "standalone_matrix_objects": 0,

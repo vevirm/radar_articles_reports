@@ -6,30 +6,30 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2308** (Main **1106** + Historical **1202**)
-- Automatic queue still needing V2 verification: **151** (Main **15** + Historical **136**)
-- Currently assigned to workers: **97** (Main **8** + Historical **89**)
-- Bounded access-recovery retries still eligible: **1**
-- Hands-on verification needed: **25**
-- Automatic queue pending and not yet assigned: **54**
+- Authoritative V2 verified: **2343** (Main **1109** + Historical **1234**)
+- Automatic queue still needing V2 verification: **115** (Main **12** + Historical **103**)
+- Currently assigned to workers: **97** (Main **12** + Historical **85**)
+- Bounded access-recovery retries still eligible: **0**
+- Hands-on verification needed: **26**
+- Automatic queue pending and not yet assigned: **18**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261002T051330Z-8d50ffbdca7b`
+- Current package: `worker-a-20261002T053211Z-5c32c46c6046`
 - Assigned unresolved records: **36**
-  1. `historical:id:a27dcc6c17eaa230` — ERA Portal Austria – TOWARDS A EUROPEAN FRAMEWORK FOR RESEARCH CAREERS (2011)
-  2. `historical:id:430a0c6600f89574` — ERA Portal Austria – Research Careers
-  3. `historical:id:6e9495cbc7e7feb7` — ECAS Report: Insights from Researchers on the Fifth Freedom in Europe - ECAS
-  4. `historical:id:84bdd53bdefffffe` — A brighter future: Why upgrading the grid is vital for Europe’s competitiveness – European Council on Foreign Relations
-  5. `historical:id:09dfe3e1a2bc3143` — Towards a Responsible Research Assessment Transition: A Novel Framework for Researcher Profiles
-  6. `historical:id:b24b045a073e9a30` — Tide turners: How startups can shape Europe’s tech future and geoeconomic strategy – European Council on Foreign Relations
-  7. `historical:id:09f7fe2d1995fee8` — New report | Raw material and supply chain vulnerabilities in the Dutch defence sector: An analysis of the Air Defence & Command Frigate - HCSS
-  8. `historical:id:584da47fe51bc377` — Technical Tiers: A New Classification Framework for Global AI Workforce Analysis
+  1. `link:https://www.espi.eu/wp-content/uploads/2026/10/ESPI-Insights-Issue-August-2026.pdf` — ESPI Insights for August 2026 is out! - ESPI
+  2. `link:https://ecipe.org/publications/6g-wake-up-call-for-europe/#_ftnref1` — The 6G Wake-up Call for Europe: Reforms Urgently Needed to Sustain Europe’s Telecommunications Leadership
+  3. `link:https://doi.org/10.1016/j.lanepe.2026.101778` — Rebalancing innovation, affordability, and access for orphan drugs in the European Union
+  4. `link:https://www.ukri.org/wp-content/uploads/2026/07/UKRI-060726-ListCentresInstitutesCatapultsUnits.xlsx` — UKRI Strategy 2026 to 2031
+  5. `link:https://publications.jrc.ec.europa.eu/repository/handle/JRC148453` — Reducing dependencies on Critical Raw Materials with advanced materials
+  6. `link:https://ecfr.eu/publication/bewitched-sleep-russians-views-on-ukraine-and-the-world/` — Bewitched sleep: Russians’ views on Ukraine and the world – European Council on Foreign Relations
+  7. `link:https://doi.org/10.1016/j.joi.2026.101874` — Knowledge creation and patenting by European higher education institutions–evidence from a new dataset (KC-HEI)
+  8. `historical:id:6dec1388df761e83` — Essay: Sweden can help shape a future of sustainable prosperity
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261002T051349Z-bd668899fd86`
+- Current package: `worker-b-20261002T053240Z-bd668899fd86`
 - Assigned unresolved records: **36**
   1. `link:https://news.google.com/rss/articles/CBMiekFVX3lxTE1Pc1RnZW41ZU9YUUZqVHFjT0lTUWFKTldPaEZxVDQwMzg0OFgzR3djc0lZMlRnX2JYbmVEdHBEMTFOMWlzMDhxMFFuSmlzbmtjUW9vUmJXenljakFpNy1RQnNJTXlIZEFhRjJtUWtUNm5mT2dpQkZYYWtR?oc=5` — THE HACK: EU weighs AI labs' safety plans — recovery attempt 3/3
   2. `historical:id:edd664f7e29f4f65` — Our Futures: By the people, for the people
@@ -83,3 +83,4 @@ These works no longer consume automatic Deep Scan slots. Their identity is belie
 - `link:https://doi.org/10.1016/j.techsoc.2026.103564` — **Country-level configurations associated with enterprise AI diffusion in Europe: An fsQCA of digitalization, skills, and R&D intensity** — attempts: 3/3 — Technology in Society — 2026-09-23 — The article identity is verified through DOI/publisher metadata, but no substantive full text or legitimate repository copy was recovered. — https://doi.org/10.1016/j.techsoc.2026.103564
 - `link:https://news.google.com/rss/articles/CBMimgFBVV95cUxPbFd0dlh5RjQzUnEwLTRpU2hMaWxPNk5Zal93N2lITWliRHhzNEhJOGYtWUJ1U0tab2tseTE1bWhlei1mQ09EMXZSM0g3MzdWMWlaSlF4eEx5U1BXQ0daV1RwLVVqdW5SYnUxY09GUUxSbldRZEttV0ZkbnhMTzNycFFOWXVQLUhFRURwTVlBWXVwN20wSnFPRXln?oc=5` — **Don’t believe the doomers: Europe’s tech industry slams AI panic** — attempts: 3/3 — Politico Europe — 2026-09-24T03:00Z — The POLITICO article identity is corroborated, but accessible material came from secondary mirrors or snippets; the primary article remained insufficient for authoritative claim verification. — https://news.google.com/rss/articles/CBMimgFBVV95cUxPbFd0dlh5RjQzUnEwLTRpU2hMaWxPNk5Zal93N2lITWliRHhzNEhJOGYtWUJ1U0tab2tseTE1bWhlei1mQ09EMXZSM0g3MzdWMWlaSlF4eEx5U1BXQ0daV1RwLVVqdW5SYnUxY09GUUxSbldRZEttV0ZkbnhMTzNycFFOWXVQLUhFRURwTVlBWXVwN20wSnFPRXln?oc=5
 - `link:https://news.google.com/rss/articles/CBMigwFBVV95cUxQUGRlY09GVnBXQVd2bTJuY3JiUWQ5eEwzelBqMnltTmtxRmhXeUozcWVJUW1KMWtTcW9pcEFIX3JWTUxWQnZVZi1QdENTc2k2ZGJMbzBVR1ZGS1pKdUExVzlNZkxpcmxuNnZzNUpzX2RPU3hETjNNbmtPMm9sZkJxMXpLSQ?oc=5` — **What is Europe's plan if AI doesn’t self-improve?** — attempts: 3/3 — Euractiv — 2026-09-24T02:03Z — The Euractiv Pro article identity is verified, but only headline/subhead-level material was accessible. — https://news.google.com/rss/articles/CBMigwFBVV95cUxQUGRlY09GVnBXQVd2bTJuY3JiUWQ5eEwzelBqMnltTmtxRmhXeUozcWVJUW1KMWtTcW9pcEFIX3JWTUxWQnZVZi1QdENTc2k2ZGJMbzBVR1ZGS1pKdUExVzlNZkxpcmxuNnZzNUpzX2RPU3hETjNNbmtPMm9sZkJxMXpLSQ?oc=5
+- `historical:id:4c175377997921f0` — **Development of a novel framework for the analysis of Technological Innovation Systems by Causal Layered Analysis (CLA) in energy systems** — attempts: 3/3 — Technology Analysis & Strategic Management — 2024-11-01 — Identity and methodological claim are verified, but only abstract-level substantive evidence was recoverable; full text was not accessible. — https://doi.org/10.1080/09537325.2023.2214639
