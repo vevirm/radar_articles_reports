@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-02T20:36:07Z",
+  "generated_at": "2026-10-03T08:28:37Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -218451,8 +218451,319 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:9ea3027e5e264df4": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "350205eb",
+      "identity_hash": "ad004bd63137f3d3",
+      "reader_title": "European open-access book policies vary sharply",
+      "reader_what": "Analysis of 66 policies finds substantial variation in rules, implementation and enforcement.",
+      "reader_why": "Heterogeneous OA rules create coordination and implementation burdens across Europe.",
+      "reader_more": "Sixty-six European OA book policies vary substantially in included elements and how those elements are operationalised. Structured content analysis of 66 recent university and research-funder OA book policies, using a 16-element coding framework. The analysis covers 66 recent OA book policies and concerns policy design, not measured causal effects on openness.",
+      "deep_analysis": {
+        "work_kind": "empirical policy study",
+        "research_question": "How do European university and funder open-access book policies differ in content and implementation?",
+        "main_finding": "Sixty-six European OA book policies vary substantially in included elements and how those elements are operationalised.",
+        "method_or_basis": "Structured content analysis of 66 recent university and research-funder OA book policies, using a 16-element coding framework.",
+        "qualification": "The analysis covers 66 recent OA book policies and concerns policy design, not measured causal effects on openness.",
+        "radar_relevance": "Direct evidence on European open-science governance and a core R&I-system mechanism.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "Opened/resolved the supplied route https://doi.org/10.1093/scipol/scag021; identity matched, but the package did not contain stored substantive text from that route."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1093/scipol/scag021; bibliographic identity matched the supplied title and author/source metadata."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title recovery located a matching substantive publisher/official source at https://academic.oup.com/spp/advance-article/doi/10.1093/scipol/scag021/8541723."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "recovered_primary_source",
+            "url": "https://academic.oup.com/spp/advance-article/doi/10.1093/scipol/scag021/8541723",
+            "title": "Structured content analysis of open access book policies: European university and research funder approaches",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching work and provenance were verified against the supplied primary material and an independent publisher/official identity route."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Substantive, source-grounded evidence on a European R&I-system mechanism, strategic technology capacity, dependency, talent, infrastructure, finance or governance."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-03T08:28:37Z",
+      "deep_scan_package_id": "20261003T075602Z-f1fd44dd82c0",
+      "claims": [
+        {
+          "object": "research.open_access",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European universities and research funders",
+            "class": "other"
+          },
+          "mechanism": "governs",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2026-03-26",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The analysis covers 66 recent OA book policies and concerns policy design, not measured causal effects on openness.",
+          "text": "European open-access book policies differ substantially in their requirements and operational design.",
+          "confidence": "high",
+          "record_key": "historical:id:9ea3027e5e264df4",
+          "merit": 77,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:ad004bd63137f3d3:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:83a503f454f25cb2": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "7f28c6cf",
+      "identity_hash": "abfd18b8e0e14024",
+      "reader_title": "Research evaluation regimes shape science governance",
+      "reader_what": "The paper develops four dimensions for comparing how states govern science through research evaluation.",
+      "reader_why": "Evaluation regimes influence funding allocation and research-system governance.",
+      "reader_more": "The article proposes a four-dimensional heuristic for comparing research evaluation regimes and their modes of governing science. Theoretical synthesis of research-evaluation scholarship, grounded in European historical cases and extended to global comparison. The article is a theoretical heuristic, not an empirical estimate of evaluation outcomes.",
+      "deep_analysis": {
+        "work_kind": "conceptual research-policy article",
+        "research_question": "How can research evaluation regimes be compared across political and historical contexts?",
+        "main_finding": "The article proposes a four-dimensional heuristic for comparing research evaluation regimes and their modes of governing science.",
+        "method_or_basis": "Theoretical synthesis of research-evaluation scholarship, grounded in European historical cases and extended to global comparison.",
+        "qualification": "The article is a theoretical heuristic, not an empirical estimate of evaluation outcomes.",
+        "radar_relevance": "Research assessment and funding governance are core European R&I-system mechanisms.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected the supplied/reader-facing route https://doi.org/10.1007/s11024-026-09633-2; the package contained matching substantial_web_text tied to the same work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1007/s11024-026-09633-2; bibliographic identity matched the supplied title and author/source metadata."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_full_text",
+            "url": "https://link.springer.com/article/10.1007/s11024-026-09633-2",
+            "title": "Governing Science through Evaluation: A Global Heuristic of Research Evaluation Regimes",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching work and provenance were verified against the supplied primary material and an independent publisher/official identity route."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Substantive, source-grounded evidence on a European R&I-system mechanism, strategic technology capacity, dependency, talent, infrastructure, finance or governance."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-03T08:28:37Z",
+      "deep_scan_package_id": "20261003T075602Z-f1fd44dd82c0",
+      "claims": [
+        {
+          "object": "research.assessment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Research evaluation regimes",
+            "class": "other"
+          },
+          "mechanism": "governs",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2026-02-19",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The article is a theoretical heuristic, not an empirical estimate of evaluation outcomes.",
+          "text": "Research evaluation regimes can be compared through dimensions that capture different modes of governing science.",
+          "confidence": "high",
+          "record_key": "historical:id:83a503f454f25cb2",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:abfd18b8e0e14024:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:da679480dfe0e3f0": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "1c070ecd",
+      "identity_hash": "06c8a499b2a3e051",
+      "reader_title": "Rethinking Schooling in the Age of AI: Equity, Ethics, and the Four Pillars of Transformation",
+      "reader_what": "A conceptual review of AI-driven changes in school curriculum, teaching, assessment and governance, centred on education rather than the R&I",
+      "reader_more": "A conceptual review of AI-driven changes in school curriculum, teaching, assessment and governance, centred on education rather than the R&I system. Under the historical rules, that does not qualify as substantive Strand A evidence or a reusable Strand B method.",
+      "deep_analysis": {
+        "work_kind": "policy/research work",
+        "research_question": "",
+        "main_finding": "A conceptual review of AI-driven changes in school curriculum, teaching, assessment and governance, centred on education rather than the R&I system.",
+        "method_or_basis": "The integration of artificial intelligence (AI) into education marks a critical transition, not only through the adoption of new tools but by challenging the epistemological foundations of teaching and learning.",
+        "qualification": "The drop is an admission judgement about Radar fit, not a claim that the work lacks value in its own domain.",
+        "radar_relevance": "The work concerns education or student practice rather than a recognised European R&I-system mechanism.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected the supplied/reader-facing route https://doi.org/10.1007/s44366-026-0081-3; the package contained matching substantial_web_text tied to the same work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1007/s44366-026-0081-3; bibliographic identity matched the supplied title and author/source metadata."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_full_text",
+            "url": "https://journal.hep.com.cn/fde/EN/10.1007/s44366-026-0081-3",
+            "title": "Rethinking Schooling in the Age of AI: Equity, Ethics, and the Four Pillars of Transformation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The claimed work/page was recovered and matched to its authoritative or publisher source; its actual scope and work type were then tested against the historical A/B admission rules."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_GENERIC_EDUCATION",
+        "reason": "The work concerns education or student practice rather than a recognised European R&I-system mechanism."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-03T08:28:37Z",
+      "deep_scan_package_id": "20261003T075602Z-f1fd44dd82c0",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:38f35da46ba0b73f": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "993ea198",
+      "identity_hash": "0016a39355a4309b",
+      "reader_title": "Research and innovation in Norway",
+      "reader_what": "A Research Council of Norway landing page that links to indicators, statistics and analyses rather than constituting a single completed",
+      "reader_more": "A Research Council of Norway landing page that links to indicators, statistics and analyses rather than constituting a single completed study itself. Under the historical rules, that does not qualify as substantive Strand A evidence or a reusable Strand B method.",
+      "deep_analysis": {
+        "work_kind": "navigation/portal page",
+        "research_question": "",
+        "main_finding": "A Research Council of Norway landing page that links to indicators, statistics and analyses rather than constituting a single completed study itself.",
+        "method_or_basis": "In our consultancy and analysis of the Norwegian research and innovation system, we use a number of data sources that are collected and made available through collaboration with external partners.",
+        "qualification": "The drop is an admission judgement about Radar fit, not a claim that the work lacks value in its own domain.",
+        "radar_relevance": "The claimed object is a navigation or portal page rather than a substantive evidence product.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected the supplied/reader-facing route https://www.forskningsradet.no/en/analysis-numbers/research-innovation-norway/; the package contained matching abstract_or_landing_page tied to the same work."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched the exact title “Research and innovation in Norway” and confirmed the matching official/publisher source and provenance."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_web_page",
+            "url": "https://www.forskningsradet.no/en/analysis-numbers/research-innovation-norway/",
+            "title": "Research and innovation in Norway",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The claimed work/page was recovered and matched to its authoritative or publisher source; its actual scope and work type were then tested against the historical A/B admission rules."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_PROGRAMME_OR_NAVIGATION",
+        "reason": "The claimed object is a navigation or portal page rather than a substantive evidence product."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-03T08:28:37Z",
+      "deep_scan_package_id": "20261003T075602Z-f1fd44dd82c0",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-02T20:36:07Z"
+  "claims_updated_at": "2026-10-03T08:28:37Z"
 }
