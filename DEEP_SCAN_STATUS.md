@@ -7,8 +7,8 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **2474** (Main **1158** + Historical **1316**)
-- Automatic queue still needing V2 verification: **108** (Main **34** + Historical **74**)
-- Currently assigned to workers: **55** (Main **0** + Historical **55**)
+- Automatic queue still needing V2 verification: **141** (Main **67** + Historical **74**)
+- Currently assigned to workers: **88** (Main **33** + Historical **55**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **29**
 - Automatic queue pending and not yet assigned: **53**
@@ -16,8 +16,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261003T083501Z-9a8f6b785d7d`
-- Assigned unresolved records: **0**
+- Current package: `worker-a-20261003T163612Z-bd0bb75fc561`
+- Assigned unresolved records: **33**
+  1. `link:https://doi.org/10.1016/j.tifs.2026.106099` — Keeping food law ahead of food technology: A critical review of EU regulation, emerging food technologies and regulatory gaps, with Malta as a case study
+  2. `link:https://doi.org/10.1016/j.scs.2026.107732` — Whose future? Citizens shaping green–blue infrastructure scenarios in European cities – a review and proposed framework
+  3. `link:https://doi.org/10.1093/police/paaf060` — Strategic integration of foresight tools in policing: a case study of Dubai Police
+  4. `link:https://doi.org/10.1108/fs-06-2025-0136` — An integrated framework for developing a national industrial technology roadmap: Thailand perspectives
+  5. `link:https://doi.org/10.1080/23299460.2026.2731692` — A chance to redefine global technology assessment? A relational framework for impact reflexivity
+  6. `link:https://doi.org/10.1016/j.indic.2026.101531` — Biophysically-grounded scenario building for Island sustainability governance: A methodological framework and application to La Palma (Canary Islands, Spain)
+  7. `link:https://doi.org/10.1016/j.esr.2026.102181` — Participatory scenario planning for energy governance under uncertainty: Insights from Iran
+  8. `link:https://doi.org/10.1108/fs-05-2019-0041` — Hybrid processes for a new era of strategic foresight
+  - … plus 25 more in the package manifest
 
 ### Worker B
 - Current package: `worker-b-20261003T152510Z-0d5f0fd43446`
