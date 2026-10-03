@@ -122,6 +122,21 @@ generic phrases such as "checked" across the ladder.
 Do not bypass authentication, paywalls or access controls. If full text is paywalled, look for legitimate
 repository/author copies and use the strongest matching evidence available.
 
+
+## Main Radar third-attempt hard-final mode
+
+Some jobs carry `scan_attempt = 3` and `scan_mode = "hard_final"`. This flag is used only for a **Main Radar** work on its third and final automatic Deep Scan issuance. For those jobs, do not repeat an ordinary pass. Before returning `drop_unverifiable`, `defer`, `drop`, or `review` for lack of evidence, perform a stronger final recovery pass:
+
+- exhaust every applicable standard retrieval step and record concrete URLs/queries/results;
+- run at least **two materially different broader identity searches** using distinctive title fragments, authors/organisation, DOI/report/document identifiers, or translated/variant title clues when relevant;
+- check the most plausible **official publisher/issuing-body site and at least one legitimate repository/archive/author/institutional route** when such routes can exist;
+- inspect cached/package-supplied substantive source material and scanner validation routes carefully rather than treating rediscovery failure as disproof;
+- cross-check bibliographic identity against at least **two independent identity signals** where possible (for example DOI metadata + publisher page, repository record + author/institution page);
+- if the main URL is blocked, broken, moved, or paywalled, actively look for an official mirror, repository copy, archived official copy, preprint/working-paper version, or the issuing body's document registry;
+- state in `verification.verification_note` that the **third-attempt hard-final pass** was completed and summarize what extra routes were tried.
+
+This is still bounded: attempt 3 is the last automatic pass. Do not invent evidence, bypass access controls, or relax admission/source-integrity standards merely to avoid a terminal outcome. Historical jobs and Main attempts 1–2 use the normal rules above.
+
 ## Admission decision
 
 Return exactly one decision:
@@ -471,6 +486,20 @@ def same_key_variants(doc: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:
         })
     return {k: v for k, v in out.items() if len(v) > 1}
 
+def annotate_scan_attempts(jobs: list[dict[str, Any]], state: dict[str, Any] | None) -> None:
+    """Annotate the upcoming issuance; Main attempt 3 is the hard final pass."""
+    state_records = state.get("records", {}) if isinstance(state, dict) else {}
+    for job in jobs:
+        row_state = state_records.get(job["record_key"], {}) if isinstance(state_records, dict) else {}
+        try:
+            previous_package_attempts = max(0, int((row_state or {}).get("scan_package_attempts") or 0))
+        except (TypeError, ValueError):
+            previous_package_attempts = 0
+        scan_attempt = min(3, previous_package_attempts + 1)
+        job["scan_attempt"] = scan_attempt
+        job["scan_mode"] = "hard_final" if job.get("corpus_scope") == "main" and scan_attempt == 3 else "standard"
+
+
 def build_job(row, ordinal: int, sidecar: dict[str, Any], dupes: dict[str, list[dict[str, str]]], variants: dict[str, list[dict[str, Any]]]) -> dict[str, Any]:
     strand, key, h, r, reason, src = row
     existing = sidecar.get("records", {}).get(key)
@@ -662,6 +691,9 @@ def main() -> None:
             fetched = [ordered[i] for i in range(len(todo))]
 
         jobs = [build_job(row, i + 1, sidecar, dupes, variants) for i, row in enumerate(fetched)]
+        # Make the next issuance explicit in every job. Main Radar attempt 3 is
+        # a deliberately stronger final automatic verification pass.
+        annotate_scan_attempts(jobs, state)
         batch_size = max(1, min(args.batch_size, 30))
         batch_files: list[dict[str, Any]] = []
         for start in range(0, len(jobs), batch_size):
@@ -688,6 +720,7 @@ def main() -> None:
             "main_pending_total": main_pending_total, "historical_pending_total": historical_pending_total,
             "works_in_package": len(jobs), "scope_counts": scope_counts, "queue_reasons": counts,
             "source_modes": source_modes, "possible_duplicate_records": len(dupes), "same_record_key_variant_groups": len(variants), "batch_size": batch_size,
+            "hard_final_main_jobs": sum(1 for job in jobs if job.get("scan_mode") == "hard_final"),
             "batches": batch_files, "instructions": "INSTRUCTIONS.md", "claims_vocabulary": "claims_vocabulary.json",
             "claims_format": CLAIMS_FORMAT, "expected_result_filename": "deep_scan_results.json",
         }
