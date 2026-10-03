@@ -20,6 +20,7 @@ PROFILE = "radar-deep-scan-work-state-v1"
 DEFAULT_LANES = ("A", "B")
 DEFAULT_LANE_SIZE = 36
 MAX_RECOVERY_ATTEMPTS = 3
+MAX_SCAN_PACKAGE_ATTEMPTS = 3
 RETRY_INTERVAL = 12  # at most one retry per 12 historical/background slots while fresh history exists
 TERMINAL_MANUAL_STATUSES = {"needs_manual_verification", "deferred"}  # deferred = legacy terminal status
 
@@ -68,6 +69,7 @@ def load_state(path: Path = DEFAULT_WORK_STATE) -> dict[str, Any]:
         row.setdefault("package_history", [])
     data.setdefault("records", {})
     data.setdefault("packages", {})
+    _backfill_scan_package_attempts(data)
     return data
 
 
@@ -97,6 +99,30 @@ def _attempt_count(row: dict[str, Any] | None) -> int:
         return max(0, int((row or {}).get("recovery_attempts") or 0))
     except (TypeError, ValueError):
         return 0
+
+
+def _scan_package_attempt_count(row: dict[str, Any] | None) -> int:
+    try:
+        return max(0, int((row or {}).get("scan_package_attempts") or 0))
+    except (TypeError, ValueError):
+        return 0
+
+
+def _backfill_scan_package_attempts(state: dict[str, Any]) -> None:
+    """Infer per-record issuance counts from historical package membership."""
+    memberships: dict[str, int] = {}
+    for pkg in state.get("packages", {}).values():
+        if not isinstance(pkg, dict):
+            continue
+        keys = {k for k in (pkg.get("record_keys") or []) if isinstance(k, str) and k}
+        for key in keys:
+            memberships[key] = memberships.get(key, 0) + 1
+    for key, rec in state.get("records", {}).items():
+        if not isinstance(rec, dict):
+            continue
+        inferred = max(_attempt_count(rec), memberships.get(key, 0))
+        if inferred > _scan_package_attempt_count(rec):
+            rec["scan_package_attempts"] = inferred
 
 
 def sync_verified(state: dict[str, Any], reader: dict[str, Any]) -> None:
@@ -144,6 +170,19 @@ def manual_verification_keys(state: dict[str, Any]) -> set[str]:
 def deferred_keys(state: dict[str, Any]) -> set[str]:
     """Backward-compatible alias for terminal access-limited work."""
     return manual_verification_keys(state)
+
+
+def assignment_blocked_keys(state: dict[str, Any]) -> set[str]:
+    """Unverified records already issued in the maximum number of packages.
+
+    They remain importable from their final package, but cannot be issued again.
+    """
+    return {
+        key for key, row in state.get("records", {}).items()
+        if isinstance(row, dict)
+        and str(row.get("status") or "") != "verified"
+        and _scan_package_attempt_count(row) >= MAX_SCAN_PACKAGE_ATTEMPTS
+    }
 
 
 def recovery_retry_keys(state: dict[str, Any]) -> set[str]:
@@ -195,8 +234,9 @@ def prioritize_pending_keys(state: dict[str, Any], pending_keys: list[str]) -> l
     cannot monopolize worker capacity.
     """
     terminal = manual_verification_keys(state)
+    blocked = assignment_blocked_keys(state)
     records = state.get("records", {}) if isinstance(state.get("records"), dict) else {}
-    ordered = _unique([k for k in pending_keys if k not in terminal])
+    ordered = _unique([k for k in pending_keys if k not in terminal and k not in blocked])
 
     fresh_main_must: list[str] = []
     fresh_private_a: list[str] = []
@@ -210,8 +250,9 @@ def prioritize_pending_keys(state: dict[str, Any], pending_keys: list[str]) -> l
     for key in ordered:
         rec = records.get(key) if isinstance(records.get(key), dict) else {}
         attempts = _attempt_count(rec)
+        package_attempts = _scan_package_attempt_count(rec)
         status = str(rec.get("status") or "")
-        is_retry = status == "recovery_retry" or attempts > 0
+        is_retry = status == "recovery_retry" or attempts > 0 or package_attempts > 0
         priority = str(rec.get("queue_priority") or "")
         if is_retry:
             (must_retries if priority == "must_scan" else retries).append(key)
@@ -255,7 +296,11 @@ def fill_lane(
     *,
     target_size: int = DEFAULT_LANE_SIZE,
 ) -> list[str]:
-    """Keep existing unresolved lane order, then append priority-ordered pending work."""
+    """Keep unissued reservations, but rotate records after they have been packaged.
+
+    Issued records become retry work and compete with the live queue, so fresh work can
+    advance instead of the same package being regenerated indefinitely.
+    """
     lane = lane.upper()
     if lane not in state.setdefault("lanes", {}):
         state["lanes"][lane] = {
@@ -269,8 +314,12 @@ def fill_lane(
     terminal = manual_verification_keys(state)
     prioritized = prioritize_pending_keys(state, pending_keys)
     pending_set = set(prioritized)
-    current = [k for k in lane_row.get("assigned", []) if k in pending_set and k not in terminal]
-    current = _unique(current)
+    current = _unique([
+        k for k in lane_row.get("assigned", [])
+        if k in pending_set
+        and k not in terminal
+        and _scan_package_attempt_count(state.get("records", {}).get(k)) == 0
+    ])
     occupied_elsewhere: set[str] = set()
     for other, row in state.get("lanes", {}).items():
         if other == lane or not isinstance(row, dict):
@@ -318,6 +367,8 @@ def register_package(state: dict[str, Any], lane: str, package_id: str, record_k
         rec["status"] = "assigned"
         rec["lane"] = lane
         rec["last_package_id"] = package_id
+        rec["scan_package_attempts"] = _scan_package_attempt_count(rec) + 1
+        rec["last_scan_package_at"] = now
         rec.setdefault("assigned_at", now)
 
 
@@ -377,7 +428,7 @@ def mark_recovery_failure(
     max_attempts = max(1, int(max_attempts))
     rec = state.setdefault("records", {}).setdefault(key, {})
     lane = rec.get("lane")
-    attempts = min(max_attempts, _attempt_count(rec) + 1)
+    attempts = min(max_attempts, max(_attempt_count(rec) + 1, _scan_package_attempt_count(rec)))
     history = rec.get("recovery_history") if isinstance(rec.get("recovery_history"), list) else []
     history = list(history)[-(max_attempts - 1):] if max_attempts > 1 else []
     history.append({
