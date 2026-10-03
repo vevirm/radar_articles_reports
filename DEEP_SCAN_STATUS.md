@@ -8,38 +8,29 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 
 - Authoritative V2 verified: **2473** (Main **1158** + Historical **1315**)
 - Automatic queue still needing V2 verification: **109** (Main **34** + Historical **75**)
-- Currently assigned to workers: **109** (Main **34** + Historical **75**)
+- Currently assigned to workers: **69** (Main **0** + Historical **69**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **29**
-- Automatic queue pending and not yet assigned: **0**
+- Automatic queue pending and not yet assigned: **40**
 
 ## Worker lanes
 
 ### Worker A
 - Current package: `worker-a-20261003T083501Z-9a8f6b785d7d`
-- Assigned unresolved records: **36**
-  1. `link:https://ecfr.eu/wp-content/uploads/2026/10/Bewitched-sleep-Russians-views-on-Ukraine-and-the-world.pdf` — Bewitched sleep: Russians’ views on Ukraine and the world – European Council on Foreign Relations
-  2. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=ed6968df-be08-11f1-9aae-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Feeding the beast - Publications Office of the EU
-  3. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=d70dd67e-be08-11f1-9aae-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Strategic intelligence for emerging and critical technologies - Publications Office of the EU
-  4. `link:https://news.google.com/rss/articles/CBMiX0FVX3lxTE9ZbG5DMGljUXJ4QkxkVVBUdE1mbW84V09nejAxTmtFcE1oQ2xGRHZJdGo0X2ZlYXdTdUgzSGxLOVNhcnI2OXVJLXRzVmlmMFpKVDFkdXFjOHZkNmwwYkFF?oc=5` — A Pan-European Multimodal Dataset Linking Field Photos with Satellite Image Time Series for Agricultural Mapping
-  5. `link:https://news.google.com/rss/articles/CBMinwFBVV95cUxOM243bllna1JGajRibnN5c0xxc1hSRHB1Y25Vb1Axb2VsVlBQbWdoWi1jc2ktdlVlcGI3VlpTdTl6TXNjRTh5eEwzN0ttaWJfaFA5MGQzZXA0azRISnNuTWFQZkpTa0hQUDV3ejFEeHZnZXZXczFxNUtnRkloV0Q3QkR6dkZ0VE1JR1ZWM3NjX1dhSlllNUpHWmNud21Wams?oc=5` — Could the EU AI Act deter 'housefishing' in European real estate?
-  6. `link:https://news.google.com/rss/articles/CBMilgFBVV95cUxQajBMVmhnZ1BaM3hnMl8zMUNxQmFST0w5VGMwaDA3MmNfTVdvdmU0d1UzdWN4Z1BGTlVNb0NLb1dYZUc5dXF5TDVQYTVyMHVZQzcteDZBb0U4RjNBb1RPVFlhdTdlRzR3OVcxbkJMblBhcFhFdFY2OVFGWHlvQVYtOU9CREFILTFreWZ1UTIxZi1iaTBxNHc?oc=5` — European FOMO while US-China summit wraps
-  7. `link:https://news.google.com/rss/articles/CBMiugFBVV95cUxPd1pTLUZZcmpqOENya2o4VVFoQk1ZRUFyR0ZYR3g5YVE1SWdOdmpVSFU2QW14c0NQR1VXbG1kTDJlN19WN01ZSTFPVFAzZ1hSOFZjdmRPbW9VRTAxSU5JN09kSFNjUmZRMnFnenNyT0t5NlZKVFJXUWFqcGpaVnk2azZtQjV4ZlR5S1ZtYm9rWFNvR2VFSXFVaFIzOXBHQWN4SnVGbHk4M0k0OU5XTXExWEtjakVOQVB4ZGc?oc=5` — The Pope is fretting about frontier AI — what’s the EU’s answer?
-  8. `link:https://news.google.com/rss/articles/CBMinAFBVV95cUxNNUE4SXBaWkNRTUc2d2dRUjBiYlY3NV9IQVpublNGYmVjbzJER0R4emlPcUo0U1FxQzMtMm9ZWTVXc0F0MXEwc2hXcDRWVEgtTUo2Z3ZjbmlOQzZJeDh5ZTg4UEZBdzZhWlU4RnVqd0ZSNk1OTU5mNWcyb3hJVEFzR2g0WXdKWURCWVNySHRHUDRhUWRuUFN3VXo1bnk?oc=5` — France taps ‘engineer-tinkerers’ for defence innovation - rapporteur.com
-  - … plus 28 more in the package manifest
+- Assigned unresolved records: **0**
 
 ### Worker B
-- Current package: `worker-b-20261003T083536Z-a42b1a039f58`
-- Assigned unresolved records: **18**
-  1. `historical:id:dded1cf39bcbe3e0` — Standards for Critical Raw Materials | HCSS
-  2. `historical:id:44f35087f1b36ffe` — European research supports industry in digital transformation | VTT
-  3. `historical:id:f25801a278c17636` — Futures Partnership
-  4. `link:https://news.google.com/rss/articles/CBMivwFBVV95cUxNWGd3OGE0ZFluellpVF9qX0R4RjV5cnpfVGNQNE5XZndfVFZGSndiVUk5VzJseDl5Mzc2bDlXa3ctR3dEdDIzaXIyb1hxRm11bU9nT1ItNEZIRmsxLTFuZ1lmLWtHT2ZVSEdzOXl1VWZZMjFVU1oyU0FlYjFRWDEyRElrdWhwSUprY1NPU3NXOVB1NmZ0OXBOYUVCZkQ5REVVenkwUmo3RjVoc0FJc3U5dU51bEdoYzk0SnpSaHZUYw?oc=5` — Europe Today: NATO chief Mark Rutte joins Euronews' Defence and Space Summit in Brussels — recovery attempt 2/3
-  5. `link:https://news.google.com/rss/articles/CBMirAFBVV95cUxNQS1XZXNsUW14ek8zbVJhMzJTZTVvVk81ZUZ0aDRDWFNBZFR5aVFTcXhYcThkS3FZZTJuOWFnOU9SV1pxdEF6VmpmekFZS1lLdnRjSlozdThvbFRPQ1lvZzhpNkNpUUtmSDdsa2RhLWhxRVcySXdzZktsVWoyVVNRZFl3NkFPcVEwOGNnN1pJeDFBV3V3QmdmbmE2MEdpcnVTZHhrOC1TVXBSYm5Q?oc=5` — Kyiv's digital minister: 'We want Europe to use us as an AI sandbox' — recovery attempt 2/3
-  6. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTE5na2d5djZmZnloSXVwUGVEeTRhOE9rLVFUSUE0VXBlaGUyZUFNdk5wSm9JMEZ1VDd6Yk5CakJDdV9wdjhQYi1FNFd5VkhITWpPMlo0YkdJUkd4Ti1ueUJXdVhDam1yUEZTMnhIcmRQWm4tTE80MzlRNUhiUGlSdw?oc=5` — EU-China trade and investment relations — recovery attempt 2/3
-  7. `link:https://news.google.com/rss/articles/CBMilAFBVV95cUxQTUp2WlpkWGxVZmRvd1VUd3FZYkkyNlNtRkQ0ekI5bzBZOUprMWZiZkdBSWtDSGNtU0FSTHNVZVdNQ253YzRnNFE3NjkxclJ6MEotUlRBUnBsSmxlajlQeFJzdkppam9HYjJhbUx4cUJOMTFNQ1dNZEduSllUcUpzZ1pzald3VFlYR3V0Nk1EZHZ6Qzd4?oc=5` — Human control and AI-enabled military systems: Human rights risks, accountability and policy options for the European Union — recovery attempt 2/3
-  8. `historical:id:da6cc4656096d37b` — Quantum communication infrastructure (EuroQCI)
-  - … plus 10 more in the package manifest
+- Current package: `worker-b-20261003T150557Z-57815ad7cd2b`
+- Assigned unresolved records: **14**
+  1. `historical:id:ecfd0d849c6a055d` — Igniting doctoral students’ work engagement: the roles of managing up atmosphere and work passion within their research groups from a job demands-resources perspective — recovery attempt 2/3
+  2. `historical:id:1aa7b79c38c2f720` — Integrating scenario planning with futures wheels: a sequential framework for exploring tourism futures
+  3. `historical:id:da6cc4656096d37b` — Quantum communication infrastructure (EuroQCI)
+  4. `historical:id:a45a9672ee653528` — 2nd Digital Participatory Forum
+  5. `historical:id:4d7514d809255a3f` — Nuclear investment needs
+  6. `historical:id:f25801a278c17636` — Futures Partnership
+  7. `historical:id:a0c302591294fbed` — Supporting analysis of cybersecurity investments and business resilience (re-launched) | ENISA
+  8. `historical:id:f1582f6a65720f82` — The value of experiments in futures and foresight science as illustrated by the case of scenario planning
+  - … plus 6 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
