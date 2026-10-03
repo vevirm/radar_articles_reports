@@ -6,12 +6,12 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2473** (Main **1158** + Historical **1315**)
-- Automatic queue still needing V2 verification: **109** (Main **34** + Historical **75**)
-- Currently assigned to workers: **69** (Main **0** + Historical **69**)
+- Authoritative V2 verified: **2474** (Main **1158** + Historical **1316**)
+- Automatic queue still needing V2 verification: **108** (Main **34** + Historical **74**)
+- Currently assigned to workers: **65** (Main **0** + Historical **65**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **29**
-- Automatic queue pending and not yet assigned: **40**
+- Automatic queue pending and not yet assigned: **43**
 
 ## Worker lanes
 
@@ -20,17 +20,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 - Assigned unresolved records: **0**
 
 ### Worker B
-- Current package: `worker-b-20261003T150557Z-57815ad7cd2b`
-- Assigned unresolved records: **14**
-  1. `historical:id:ecfd0d849c6a055d` — Igniting doctoral students’ work engagement: the roles of managing up atmosphere and work passion within their research groups from a job demands-resources perspective — recovery attempt 2/3
-  2. `historical:id:1aa7b79c38c2f720` — Integrating scenario planning with futures wheels: a sequential framework for exploring tourism futures
-  3. `historical:id:da6cc4656096d37b` — Quantum communication infrastructure (EuroQCI)
-  4. `historical:id:a45a9672ee653528` — 2nd Digital Participatory Forum
-  5. `historical:id:4d7514d809255a3f` — Nuclear investment needs
-  6. `historical:id:f25801a278c17636` — Futures Partnership
-  7. `historical:id:a0c302591294fbed` — Supporting analysis of cybersecurity investments and business resilience (re-launched) | ENISA
-  8. `historical:id:f1582f6a65720f82` — The value of experiments in futures and foresight science as illustrated by the case of scenario planning
-  - … plus 6 more in the package manifest
+- Current package: `worker-b-20261003T152510Z-0d5f0fd43446`
+- Assigned unresolved records: **10**
+  1. `historical:id:1aa7b79c38c2f720` — Integrating scenario planning with futures wheels: a sequential framework for exploring tourism futures
+  2. `historical:id:da6cc4656096d37b` — Quantum communication infrastructure (EuroQCI)
+  3. `historical:id:a45a9672ee653528` — 2nd Digital Participatory Forum
+  4. `historical:id:4d7514d809255a3f` — Nuclear investment needs
+  5. `historical:id:a0c302591294fbed` — Supporting analysis of cybersecurity investments and business resilience (re-launched) | ENISA
+  6. `historical:id:f1582f6a65720f82` — The value of experiments in futures and foresight science as illustrated by the case of scenario planning
+  7. `historical:id:70132994939710fa` — Open call for Coimbra Group Scholarship Programme for Young Researchers & Professors | Coimbra
+  8. `historical:id:6e397b190d0c6320` — We cannot afford to let down Europe’s next generation of researchers | Coimbra
+  - … plus 2 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`

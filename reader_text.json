@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-03T08:28:37Z",
+  "generated_at": "2026-10-03T15:18:51Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -218762,8 +218762,69 @@
       "deep_scan_package_id": "20261003T075602Z-f1fd44dd82c0",
       "claims": [],
       "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:ecfd0d849c6a055d": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "7991ba0b",
+      "identity_hash": "3a96fc3245819a69",
+      "reader_title": "Doctoral work engagement study is not European R&I-system evidence",
+      "reader_more": "This is a substantive higher-education study, but it does not measure a European R&I-system mechanism. European references or applicability do not make the Chinese sample substantive European evidence.",
+      "deep_analysis": {
+        "work_kind": "empirical study",
+        "research_question": "How does managing-up atmosphere affect doctoral students’ work engagement, including mediation through harmonious and obsessive work passion?",
+        "main_finding": "In a survey of 355 doctoral students from 10 Chinese universities, collaborative managing-up atmosphere was positively associated with work engagement, with mediation through both forms of work passion.",
+        "method_or_basis": "Questionnaire survey of 355 doctoral students at 10 Chinese universities analysed with hierarchical linear modelling.",
+        "qualification": "The evidence is from China and concerns organisational/psychological dynamics rather than a European R&I-system mechanism.",
+        "radar_relevance": "Fails Strand A because European relevance is incidental rather than substantive.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened/checked the supplied work route: https://doi.org/10.1007/s10734-025-01479-z. It matched the claimed item and supplied sufficient evidence to identify the work/page."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved DOI https://doi.org/10.1007/s10734-025-01479-z; publisher metadata matched the title/work identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "authoritative_source",
+            "url": "https://link.springer.com/article/10.1007/s10734-025-01479-z",
+            "title": "Igniting doctoral students’ work engagement: the roles of managing up atmosphere and work passion within their research groups from a job demands-resources perspective",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance verified against the matching publisher/official source. Scan attempt 3 (standard). Admission was reassessed from the actual work rather than scanner wording."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_EU_SCOPE_INSUFFICIENT",
+        "reason": "Empirical doctoral-work-engagement study is based on 355 doctoral students at 10 universities in China; European R&I-system evidence is not its substantive object."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-03T15:18:51Z",
+      "deep_scan_package_id": "worker-b-20261003T150557Z-57815ad7cd2b",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-03T08:28:37Z"
+  "claims_updated_at": "2026-10-03T15:18:51Z"
 }
