@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-03T15:18:51Z",
+  "generated_at": "2026-10-03T16:48:06Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -218823,8 +218823,193 @@
       "deep_scan_package_id": "worker-b-20261003T150557Z-57815ad7cd2b",
       "claims": [],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1016/j.tifs.2026.106099": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "corpus_scope": "main",
+      "source_hash": "1c639cec",
+      "identity_hash": "1189d52cbdc7fe10",
+      "reader_what": "Proposes a reusable risk-proportionate governance cycle that integrates horizon scanning, classification, tiered evidence, authorisation, surveillance and reassessment.",
+      "reader_why": "Proposes a reusable risk-proportionate governance cycle that integrates horizon scanning, classification, tiered evidence, authorisation, surveillance and reassessment.",
+      "reader_more": "The verified work is peer-reviewed article. Critical review combining PRISMA-informed search, doctrinal legal analysis and regulatory horizon scanning; governance cycle synthesised across technologies. It meets Strand B because proposes a reusable risk-proportionate governance cycle that integrates horizon scanning, classification, tiered evidence, authorisation, surveillance and reassessment.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed article",
+        "research_question": "Keeping food law ahead of food technology: A critical review of EU regulation, emerging food technologies and regulatory gaps, with Malta as a case study",
+        "main_finding": "Proposes a reusable risk-proportionate governance cycle that integrates horizon scanning, classification, tiered evidence, authorisation, surveillance and reassessment.",
+        "method_or_basis": "Critical review combining PRISMA-informed search, doctrinal legal analysis and regulatory horizon scanning; governance cycle synthesised across technologies.",
+        "qualification": "The governance cycle is proposed from a critical review and synthesis; it is not validated as a causal regulatory-performance intervention.",
+        "radar_relevance": "Proposes a reusable risk-proportionate governance cycle that integrates horizon scanning, classification, tiered evidence, authorisation, surveillance and reassessment.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Recovered matching substantive pdf_excerpt via https://www.um.edu.mt/library/oar/bitstream/123456789/149391/1/Keeping_food_law_ahead_of_food_technology_A_critical_review_of_EU_regulation,_emerging_food_technologies_and_regulatory_gaps,_with_Malta_as_a_case_study(2026).pdf."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1016/j.tifs.2026.106099 matched the recovered title and source metadata."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.um.edu.mt/library/oar/bitstream/123456789/149391/1/Keeping_food_law_ahead_of_food_technology_A_critical_review_of_EU_regulation,_emerging_food_technologies_and_regulatory_gaps,_with_Malta_as_a_case_study(2026).pdf",
+            "title": "Keeping food law ahead of food technology: A critical review of EU regulation, emerging food technologies and regulatory gaps, with Malta as a case study",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity matched on title/DOI or issuing record and substantive evidence was inspected. Strand B was applied strictly: application of established tools alone is insufficient. Decision: keep."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Proposes a reusable risk-proportionate governance cycle that integrates horizon scanning, classification, tiered evidence, authorisation, surveillance and reassessment."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-03T16:48:06Z",
+      "deep_scan_package_id": "worker-a-20261003T163612Z-bd0bb75fc561",
+      "claims": [
+        {
+          "object": "methods.horizon_scanning",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Renald A. Blundell",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-09-20",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The governance cycle is proposed from a critical review and synthesis; it is not validated as a causal regulatory-performance intervention.",
+          "text": "Proposes a reusable risk-proportionate governance cycle that integrates horizon scanning, classification, tiered evidence, authorisation, surveillance and reassessment.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "link:https://doi.org/10.1016/j.tifs.2026.106099",
+          "merit": 77,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:1189d52cbdc7fe10:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1016/j.scs.2026.107732": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "corpus_scope": "main",
+      "source_hash": "935edb34",
+      "identity_hash": "b249b2d98449dabc",
+      "reader_title": "Whose future? Citizens shaping green–blue infrastructure scenarios in European cities – a review and proposed framework",
+      "reader_what": "Introduces the Citizen Scenario Cycle, a reusable framework for analysing and strengthening citizen agency across scenario-planning stages.",
+      "reader_why": "Introduces the Citizen Scenario Cycle, a reusable framework for analysing and strengthening citizen agency across scenario-planning stages.",
+      "reader_more": "The verified work is peer-reviewed article. Systematic review of 36 publications with extracted scenario, participation and citizen-agency features; framework synthesised as the Citizen Scenario Cycle. It meets Strand B because introduces the Citizen Scenario Cycle, a reusable framework for analysing and strengthening citizen agency across scenario-planning stages.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed article",
+        "research_question": "Whose future? Citizens shaping green–blue infrastructure scenarios in European cities – a review and proposed framework",
+        "main_finding": "Introduces the Citizen Scenario Cycle, a reusable framework for analysing and strengthening citizen agency across scenario-planning stages.",
+        "method_or_basis": "Systematic review of 36 publications with extracted scenario, participation and citizen-agency features; framework synthesised as the Citizen Scenario Cycle.",
+        "qualification": "The framework is derived from a systematic review; evidence of downstream policy uptake and inclusion of vulnerable groups was limited.",
+        "radar_relevance": "Introduces the Citizen Scenario Cycle, a reusable framework for analysing and strengthening citizen agency across scenario-planning stages.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Recovered matching substantive pdf_excerpt via https://discovery.dundee.ac.uk/ws/files/175871509/main.pdf."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1016/j.scs.2026.107732 matched the recovered title and source metadata."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://discovery.dundee.ac.uk/ws/files/175871509/main.pdf",
+            "title": "Whose future? Citizens shaping green–blue infrastructure scenarios in European cities – a review and proposed framework",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity matched on title/DOI or issuing record and substantive evidence was inspected. Strand B was applied strictly: application of established tools alone is insufficient. Decision: keep."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Introduces the Citizen Scenario Cycle, a reusable framework for analysing and strengthening citizen agency across scenario-planning stages."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-03T16:48:06Z",
+      "deep_scan_package_id": "worker-a-20261003T163612Z-bd0bb75fc561",
+      "claims": [
+        {
+          "object": "methods.scenario",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Matthew G. Kirby, Mel Woods, Kevin Frediani, Husam AlWaer",
+            "class": "other"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-07-23",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The framework is derived from a systematic review; evidence of downstream policy uptake and inclusion of vulnerable groups was limited.",
+          "text": "Introduces the Citizen Scenario Cycle, a reusable framework for analysing and strengthening citizen agency across scenario-planning stages.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "link:https://doi.org/10.1016/j.scs.2026.107732",
+          "merit": 70,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:b249b2d98449dabc:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-03T15:18:51Z"
+  "claims_updated_at": "2026-10-03T16:48:06Z"
 }
