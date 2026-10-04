@@ -1,0 +1,1593 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-b-20261004T075859Z-67e25a44f2dc",
+  "results": [
+    {
+      "record_key": "link:https://doi.org/10.1186/s40309-026-00301-y",
+      "source_hash": "87975a2d",
+      "identity_hash": "c1da8e7470cf61f1",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1186/s40309-026-00301-y; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1186/s40309-026-00301-y; title and authors matched publisher or repository metadata."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://link.springer.com/article/10.1186/s40309-026-00301-y",
+            "title": "Do “AI-assisted” labels reduce perceived quality of scenarios? An exploratory experimental study",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_APPLICATION_ONLY",
+        "reason": "It evaluates reactions to scenarios but does not materially improve a foresight or scenario method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "AI labels and scenario credibility",
+      "reader_what": "The experiment measures how an AI-assistance label changes perceptions of scenario quality.",
+      "reader_why": "",
+      "reader_more": "The experiment measures how an AI-assistance label changes perceptions of scenario quality. It evaluates reactions to scenarios but does not materially improve a foresight or scenario method.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The experiment measures how an AI-assistance label changes perceptions of scenario quality.",
+        "method_or_basis": "Randomised label experiment with non-parametric tests and ordinal regression.",
+        "qualification": "It evaluates reactions to scenarios but does not materially improve a foresight or scenario method.",
+        "radar_relevance": "Fails B admission because it evaluates reactions to scenarios but does not materially improve a foresight or scenario method.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1038/s41598-026-52549-w",
+      "source_hash": "e5646028",
+      "identity_hash": "2abfce54911a326c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1038/s41598-026-52549-w; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1038/s41598-026-52549-w; title and authors matched publisher or repository metadata."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://www.nature.com/articles/s41598-026-52549-w",
+            "title": "Designing strategic scenarios for the digital transition",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "It connects risk governance directly to strategic scenario construction."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Risk-based strategic scenarios for digital transition",
+      "reader_what": "The study proposes a scenario-development method integrating risk assessment and risk appetite for Industry 4.0.",
+      "reader_why": "It connects risk governance directly to strategic scenario construction.",
+      "reader_more": "The study proposes a scenario-development method integrating risk assessment and risk appetite for Industry 4.0. It connects risk governance directly to strategic scenario construction.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The study proposes a scenario-development method integrating risk assessment and risk appetite for Industry 4.0.",
+        "method_or_basis": "Design Science Research and a reusable scenario methodology.",
+        "qualification": "The method is demonstrated in a digital-transition context and needs testing elsewhere.",
+        "radar_relevance": "It connects risk governance directly to strategic scenario construction.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.scenario",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Alcácer and colleagues",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-05-14",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The method is demonstrated in a digital-transition context and needs testing elsewhere.",
+          "text": "The study proposes a scenario-development method integrating risk assessment and risk appetite for Industry 4.0.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.ssaho.2026.103666",
+      "source_hash": "6ad55d64",
+      "identity_hash": "99d44504cd369465",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1016/j.ssaho.2026.103666; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1016/j.ssaho.2026.103666; title and authors matched publisher or repository metadata."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://content.openalex.org/works/W7213906773.pdf",
+            "title": "Integrated governance intelligence for higher education in resource-constrained contexts: A design science study of BI-SI integration and decision support",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The design offers a reusable architecture for fragmented, resource-constrained decision environments."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Integrated governance intelligence for universities",
+      "reader_what": "IBISIF combines business intelligence, strategic intelligence, data governance and decision dashboards in one framework.",
+      "reader_why": "The design offers a reusable architecture for fragmented, resource-constrained decision environments.",
+      "reader_more": "IBISIF combines business intelligence, strategic intelligence, data governance and decision dashboards in one framework. The design offers a reusable architecture for fragmented, resource-constrained decision environments.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "IBISIF combines business intelligence, strategic intelligence, data governance and decision dashboards in one framework.",
+        "method_or_basis": "Design Science Research with prototype construction and multi-part evaluation.",
+        "qualification": "Evaluation is single-site and formative, limiting claims about broader effectiveness.",
+        "radar_relevance": "The design offers a reusable architecture for fragmented, resource-constrained decision environments.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.system_modelling",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Mpia Héritier Nsenge",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-09-22",
+          "scope": {
+            "level": "external",
+            "countries": [
+              "CD"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "Evaluation is single-site and formative, limiting claims about broader effectiveness.",
+          "text": "IBISIF combines business intelligence, strategic intelligence, data governance and decision dashboards in one framework.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.futures.2026.103867",
+      "source_hash": "08767526",
+      "identity_hash": "d266f63779d84d99",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1016/j.futures.2026.103867; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1016/j.futures.2026.103867; title and authors matched publisher or repository metadata."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “Navigating the Delphi jungle: Evaluating the Delphi method in the health and social sciences”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_primary",
+            "url": "https://doi.org/10.1016/j.futures.2026.103867",
+            "title": "Navigating the Delphi jungle: Evaluating the Delphi method in the health and social sciences",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The structured quality lens can guide design, reporting and evaluation of future Delphi studies."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Evaluating Delphi practice quality",
+      "reader_what": "The study organises practitioner evidence around Delphi quality indicators and identifies recurrent methodological weaknesses.",
+      "reader_why": "The structured quality lens can guide design, reporting and evaluation of future Delphi studies.",
+      "reader_more": "The study organises practitioner evidence around Delphi quality indicators and identifies recurrent methodological weaknesses. The structured quality lens can guide design, reporting and evaluation of future Delphi studies.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The study organises practitioner evidence around Delphi quality indicators and identifies recurrent methodological weaknesses.",
+        "method_or_basis": "Survey of Delphi practitioners linked to quality-indicator analysis.",
+        "qualification": "The evidence comes from a German-speaking Delphi network and may not capture all disciplinary practices.",
+        "radar_relevance": "The structured quality lens can guide design, reporting and evaluation of future Delphi studies.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "methods.delphi",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Mangelkramer and colleagues",
+            "class": "other"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-09-01",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The evidence comes from a German-speaking Delphi network and may not capture all disciplinary practices.",
+          "text": "The study organises practitioner evidence around Delphi quality indicators and identifies recurrent methodological weaknesses.",
+          "confidence": "medium",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1017/dap.2025.2",
+      "source_hash": "3d3ecb01",
+      "identity_hash": "f8b5b0492f5bb40a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1017/dap.2025.2; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1017/dap.2025.2; title and authors matched publisher or repository metadata."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://www.cambridge.org/core/journals/data-and-policy/article/anticipating-climate-changerelated-mobility-in-karachi-and-ho-chi-minh-city-lessons-from-a-hybrid-foresight-approach/032B5739EFD7EA65AA5DE61AEF261163",
+            "title": "Anticipating climate change-related mobility in Karachi and Ho Chi Minh City: lessons from a hybrid foresight approach",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "It joins quantitative projections with stakeholder reasoning where migration data and causal knowledge are incomplete."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Hybrid foresight for climate-related mobility",
+      "reader_what": "The approach combines predictive analytics with participatory foresight to analyse climate-related mobility futures.",
+      "reader_why": "It joins quantitative projections with stakeholder reasoning where migration data and causal knowledge are incomplete.",
+      "reader_more": "The approach combines predictive analytics with participatory foresight to analyse climate-related mobility futures. It joins quantitative projections with stakeholder reasoning where migration data and causal knowledge are incomplete.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The approach combines predictive analytics with participatory foresight to analyse climate-related mobility futures.",
+        "method_or_basis": "Hybrid predictive-analytics and participatory-foresight process.",
+        "qualification": "Lessons derive from Karachi and Ho Chi Minh City and need adaptation elsewhere.",
+        "radar_relevance": "It joins quantitative projections with stakeholder reasoning where migration data and causal knowledge are incomplete.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [],
+          "actor": {
+            "name": "UNDP project team",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2025-02-07",
+          "scope": {
+            "level": "external",
+            "countries": [
+              "PK",
+              "VN"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "Lessons derive from Karachi and Ho Chi Minh City and need adaptation elsewhere.",
+          "text": "The approach combines predictive analytics with participatory foresight to analyse climate-related mobility futures.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1002/ffo2.206",
+      "source_hash": "1a49c2d6",
+      "identity_hash": "dde609d06163e648",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1002/ffo2.206; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1002/ffo2.206; title and authors matched publisher or repository metadata."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://content.openalex.org/works/W4405726541.pdf",
+            "title": "Participation of Civil Society in Security and Defense Foresight Exercises",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Participation design can widen expertise while preserving the information demands of sensitive foresight exercises."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Civil-society participation in security foresight",
+      "reader_what": "The paper develops guidance for selecting and enabling informed citizen participation in security and defence foresight.",
+      "reader_why": "Participation design can widen expertise while preserving the information demands of sensitive foresight exercises.",
+      "reader_more": "The paper develops guidance for selecting and enabling informed citizen participation in security and defence foresight. Participation design can widen expertise while preserving the information demands of sensitive foresight exercises.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The paper develops guidance for selecting and enabling informed citizen participation in security and defence foresight.",
+        "method_or_basis": "Methodological analysis of participation requirements in security foresight.",
+        "qualification": "The framework addresses participation design rather than validating policy outcomes.",
+        "radar_relevance": "Participation design can widen expertise while preserving the information demands of sensitive foresight exercises.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Silvia Vicente-Oliva",
+            "class": "other"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2024-12-23",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The framework addresses participation design rather than validating policy outcomes.",
+          "text": "The paper develops guidance for selecting and enabling informed citizen participation in security and defence foresight.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1093/geroni/igaf122.123",
+      "source_hash": "1a2d67c2",
+      "identity_hash": "a0c0259b7e2e0080",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1093/geroni/igaf122.123; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1093/geroni/igaf122.123; title and authors matched publisher or repository metadata."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://content.openalex.org/works/W7118081061.pdf",
+            "title": "Using the Foresight 50+ National Probability Panel of Older Adults for Rapid Recruitment for Qualitative Research",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_FALSE_POSITIVE_TERM",
+        "reason": "“Foresight 50+” is a panel name; the work is unrelated to foresight methodology."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Foresight 50+ recruitment panel",
+      "reader_what": "The study tests a branded older-adult panel for rapid qualitative-research recruitment.",
+      "reader_why": "",
+      "reader_more": "The study tests a branded older-adult panel for rapid qualitative-research recruitment. “Foresight 50+” is a panel name; the work is unrelated to foresight methodology.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The study tests a branded older-adult panel for rapid qualitative-research recruitment.",
+        "method_or_basis": "Feasibility test of survey-panel recruitment.",
+        "qualification": "“Foresight 50+” is a panel name; the work is unrelated to foresight methodology.",
+        "radar_relevance": "Fails B admission because “Foresight 50+” is a panel name; the work is unrelated to foresight methodology.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1111/jfr3.70074",
+      "source_hash": "12468b75",
+      "identity_hash": "066a7fba6e0809cd",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1111/jfr3.70074; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1111/jfr3.70074; title and authors matched publisher or repository metadata."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://content.openalex.org/works/W4411190134.pdf",
+            "title": "Dynamic Adaptive Policy Pathways Approach to Manage Climate and Land Use Change‐Induced Urban Flood Damages",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_APPLICATION_ONLY",
+        "reason": "The main contribution is case application and policy analysis rather than a materially new reusable method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Adaptive pathways for urban flood risk",
+      "reader_what": "The study applies integrated models and the established Dynamic Adaptive Policy Pathways approach to flood management.",
+      "reader_why": "",
+      "reader_more": "The study applies integrated models and the established Dynamic Adaptive Policy Pathways approach to flood management. The main contribution is case application and policy analysis rather than a materially new reusable method.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The study applies integrated models and the established Dynamic Adaptive Policy Pathways approach to flood management.",
+        "method_or_basis": "Climate, land-use, hydrological, hydraulic and damage modelling with DAPP.",
+        "qualification": "The main contribution is case application and policy analysis rather than a materially new reusable method.",
+        "radar_relevance": "Fails B admission because the main contribution is case application and policy analysis rather than a materially new reusable method.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1093/eurpub/ckae144.477",
+      "source_hash": "9ffa1900",
+      "identity_hash": "c04848044998d691",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1093/eurpub/ckae144.477; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1093/eurpub/ckae144.477; title and authors matched publisher or repository metadata."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “Climate change adaptation measures in the context of health promotion using participatory foresight”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_primary",
+            "url": "https://doi.org/10.1093/eurpub/ckae144.477",
+            "title": "Climate change adaptation measures in the context of health promotion using participatory foresight",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The process is designed for transfer across regions conducting climate-health adaptation assessments."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Participatory foresight for climate-health adaptation",
+      "reader_what": "The method combines persona-based foresight workshops with public intervention boards to identify locally supported measures.",
+      "reader_why": "The process is designed for transfer across regions conducting climate-health adaptation assessments.",
+      "reader_more": "The method combines persona-based foresight workshops with public intervention boards to identify locally supported measures. The process is designed for transfer across regions conducting climate-health adaptation assessments.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The method combines persona-based foresight workshops with public intervention boards to identify locally supported measures.",
+        "method_or_basis": "Two-stage participatory foresight and public validation process.",
+        "qualification": "The evidence is a conference-format study from an Austrian regional programme.",
+        "radar_relevance": "The process is designed for transfer across regions conducting climate-health adaptation assessments.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Austrian climate-health project team",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2024-10-28",
+          "scope": {
+            "level": "external",
+            "countries": [
+              "AT"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "The evidence is a conference-format study from an Austrian regional programme.",
+          "text": "The method combines persona-based foresight workshops with public intervention boards to identify locally supported measures.",
+          "confidence": "medium",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1177/14782103231173615",
+      "source_hash": "72ddb101",
+      "identity_hash": "12b2e17737a5684c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1177/14782103231173615; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1177/14782103231173615; title and authors matched publisher or repository metadata."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “Alternative futures of Finnish comprehensive school”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_primary",
+            "url": "https://trepo.tuni.fi/handle/10024/206782",
+            "title": "Alternative futures of Finnish comprehensive school",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_APPLICATION_ONLY",
+        "reason": "It applies established Delphi and scenario techniques without a material methodological contribution."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Alternative futures of Finnish comprehensive school",
+      "reader_what": "The study uses Delphi evidence to construct three scenarios for Finnish schools.",
+      "reader_why": "",
+      "reader_more": "The study uses Delphi evidence to construct three scenarios for Finnish schools. It applies established Delphi and scenario techniques without a material methodological contribution.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The study uses Delphi evidence to construct three scenarios for Finnish schools.",
+        "method_or_basis": "Delphi panel and scenario analysis.",
+        "qualification": "It applies established Delphi and scenario techniques without a material methodological contribution.",
+        "radar_relevance": "Fails B admission because it applies established Delphi and scenario techniques without a material methodological contribution.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1108/fs-11-2018-0093",
+      "source_hash": "1d1f8ab5",
+      "identity_hash": "44e6b8b68200f470",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1108/fs-11-2018-0093; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1108/fs-11-2018-0093; title and authors matched publisher or repository metadata."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title ““Mainstreaming” foresight program development in the public sector”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_primary",
+            "url": "https://doi.org/10.1108/fs-11-2018-0093",
+            "title": "“Mainstreaming” foresight program development in the public sector",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "It gives managers a reusable benchmark for technical, structural and cultural foresight development."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Benchmarking public-sector foresight maturity",
+      "reader_what": "The framework distinguishes maturity attributes and strategies for developing foresight programmes inside government.",
+      "reader_why": "It gives managers a reusable benchmark for technical, structural and cultural foresight development.",
+      "reader_more": "The framework distinguishes maturity attributes and strategies for developing foresight programmes inside government. It gives managers a reusable benchmark for technical, structural and cultural foresight development.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The framework distinguishes maturity attributes and strategies for developing foresight programmes inside government.",
+        "method_or_basis": "Literature synthesis plus three interview rounds in a government foresight programme.",
+        "qualification": "The framework was developed with one relatively young departmental programme.",
+        "radar_relevance": "It gives managers a reusable benchmark for technical, structural and cultural foresight development.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Janzwood and Piereder",
+            "class": "other"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2019-09-05",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The framework was developed with one relatively young departmental programme.",
+          "text": "The framework distinguishes maturity attributes and strategies for developing foresight programmes inside government.",
+          "confidence": "medium",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1108/fs-06-2015-0037",
+      "source_hash": "86b0d832",
+      "identity_hash": "5fd40290d864197d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1108/fs-06-2015-0037; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1108/fs-06-2015-0037; title and authors matched publisher or repository metadata."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://content.openalex.org/works/W2511380308.pdf",
+            "title": "Foresight in cities: on the possibility of a “strategic urban intelligence”",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The toolkit links complex-system mapping to practical city foresight and strategic intelligence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Synergy foresight for cities",
+      "reader_what": "The paper combines co-evolutionary systems thinking with synergistic mapping and design in an urban foresight method.",
+      "reader_why": "The toolkit links complex-system mapping to practical city foresight and strategic intelligence.",
+      "reader_more": "The paper combines co-evolutionary systems thinking with synergistic mapping and design in an urban foresight method. The toolkit links complex-system mapping to practical city foresight and strategic intelligence.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The paper combines co-evolutionary systems thinking with synergistic mapping and design in an urban foresight method.",
+        "method_or_basis": "New synergistic mapping toolkit applied through a synergy-foresight method.",
+        "qualification": "The city demonstrations were work in progress when the paper was written.",
+        "radar_relevance": "The toolkit links complex-system mapping to practical city foresight and strategic intelligence.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Ravetz and Miles",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2016-09-12",
+          "scope": {
+            "level": "external",
+            "countries": [
+              "GB"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "The city demonstrations were work in progress when the paper was written.",
+          "text": "The paper combines co-evolutionary systems thinking with synergistic mapping and design in an urban foresight method.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.48550/arxiv.2609.13737",
+      "source_hash": "738c31f4",
+      "identity_hash": "cd7284f4bb310244",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.48550/arxiv.2609.13737; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.48550/arxiv.2609.13737; title and authors matched publisher or repository metadata."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://arxiv.org/abs/2609.13737",
+            "title": "ForeSight: Enhancing Risk Monitoring via Early Safety Signal Distillation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_FALSE_POSITIVE_TERM",
+        "reason": "“ForeSight” is the model name; the work is unrelated to strategic foresight or Radar methods."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Early safety-signal distillation for LLMs",
+      "reader_what": "ForeSight predicts harmful model output from first-token hidden states.",
+      "reader_why": "",
+      "reader_more": "ForeSight predicts harmful model output from first-token hidden states. “ForeSight” is the model name; the work is unrelated to strategic foresight or Radar methods.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "ForeSight predicts harmful model output from first-token hidden states.",
+        "method_or_basis": "Machine-learning safety classifier and representation-distillation framework.",
+        "qualification": "“ForeSight” is the model name; the work is unrelated to strategic foresight or Radar methods.",
+        "radar_relevance": "Fails B admission because “ForeSight” is the model name; the work is unrelated to strategic foresight or Radar methods.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/23311983.2026.2726122",
+      "source_hash": "8f2510ec",
+      "identity_hash": "a54fca1edbe0e765",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1080/23311983.2026.2726122; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1080/23311983.2026.2726122; title and authors matched publisher or repository metadata."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://content.openalex.org/works/W7214899941.pdf",
+            "title": "Towards a quality framework for educational concerts in primary education: an analysis of key criteria based on expert judgement",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_APPLICATION_ONLY",
+        "reason": "The work applies Delphi to a domain problem rather than materially improving Delphi methodology."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Quality criteria for educational concerts",
+      "reader_what": "The study uses a modified one-round Delphi to derive criteria for educational concerts.",
+      "reader_why": "",
+      "reader_more": "The study uses a modified one-round Delphi to derive criteria for educational concerts. The work applies Delphi to a domain problem rather than materially improving Delphi methodology.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The study uses a modified one-round Delphi to derive criteria for educational concerts.",
+        "method_or_basis": "Expert-judgement Delphi application.",
+        "qualification": "The work applies Delphi to a domain problem rather than materially improving Delphi methodology.",
+        "radar_relevance": "Fails B admission because the work applies Delphi to a domain problem rather than materially improving Delphi methodology.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1177/1946756713516604",
+      "source_hash": "0240af67",
+      "identity_hash": "2c838e28a6c4056c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1177/1946756713516604; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1177/1946756713516604; title and authors matched publisher or repository metadata."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “Beyond the NIC Quadrennial Reports”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_primary",
+            "url": "https://doi.org/10.1177/1946756713516604",
+            "title": "Beyond the NIC Quadrennial Reports",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_NO_METHOD_CONTRIBUTION",
+        "reason": "It advocates institutional use of foresight but does not present a reusable new or materially improved method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Beyond the NIC quadrennial reports",
+      "reader_what": "The essay argues for integrating strategic foresight more systematically into US policy processes.",
+      "reader_why": "",
+      "reader_more": "The essay argues for integrating strategic foresight more systematically into US policy processes. It advocates institutional use of foresight but does not present a reusable new or materially improved method.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The essay argues for integrating strategic foresight more systematically into US policy processes.",
+        "method_or_basis": "Conceptual policy commentary on national foresight.",
+        "qualification": "It advocates institutional use of foresight but does not present a reusable new or materially improved method.",
+        "radar_relevance": "Fails B admission because it advocates institutional use of foresight but does not present a reusable new or materially improved method.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/13658816.2026.2626935",
+      "source_hash": "a22ee12a",
+      "identity_hash": "34b34363466779cf",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1080/13658816.2026.2626935; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1080/13658816.2026.2626935; title and authors matched publisher or repository metadata."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://content.openalex.org/works/W7130408104.pdf",
+            "title": "GeoAI for map generalization in multi-scale cartography: foundations, a research agenda, and interdisciplinary perspectives",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_OUT_OF_SCOPE_METHOD",
+        "reason": "The reusable method is for cartography, not foresight, horizon scanning or Radar-style anticipatory analysis."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "GeoAI for map generalization",
+      "reader_what": "The paper proposes a GeoAI framework and research agenda for automated cartographic generalization.",
+      "reader_why": "",
+      "reader_more": "The paper proposes a GeoAI framework and research agenda for automated cartographic generalization. The reusable method is for cartography, not foresight, horizon scanning or Radar-style anticipatory analysis.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The paper proposes a GeoAI framework and research agenda for automated cartographic generalization.",
+        "method_or_basis": "Technical cartographic framework and research agenda.",
+        "qualification": "The reusable method is for cartography, not foresight, horizon scanning or Radar-style anticipatory analysis.",
+        "radar_relevance": "Fails B admission because the reusable method is for cartography, not foresight, horizon scanning or Radar-style anticipatory analysis.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.landusepol.2014.12.007",
+      "source_hash": "cc979c8d",
+      "identity_hash": "570d91be25e5c45b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1016/j.landusepol.2014.12.007; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1016/j.landusepol.2014.12.007; title and authors matched publisher or repository metadata."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “A pragmatic methodology for horizon scanning of water quality linked to future climate and land use scenarios”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_primary",
+            "url": "https://doi.org/10.1016/j.landusepol.2014.12.007",
+            "title": "A pragmatic methodology for horizon scanning of water quality linked to future climate and land use scenarios",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "It offers a reusable way to incorporate uncertain future drivers into water-quality policy analysis."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Horizon scanning for future water quality",
+      "reader_what": "The study develops a practitioner co-constructed national horizon-scanning approach using climate and land-use transition matrices.",
+      "reader_why": "It offers a reusable way to incorporate uncertain future drivers into water-quality policy analysis.",
+      "reader_more": "The study develops a practitioner co-constructed national horizon-scanning approach using climate and land-use transition matrices. It offers a reusable way to incorporate uncertain future drivers into water-quality policy analysis.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The study develops a practitioner co-constructed national horizon-scanning approach using climate and land-use transition matrices.",
+        "method_or_basis": "Co-constructed transition-matrix horizon-scanning method demonstrated in Scotland.",
+        "qualification": "The method was designed around water-quality regulation and needs adaptation for other domains.",
+        "radar_relevance": "It offers a reusable way to incorporate uncertain future drivers into water-quality policy analysis.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "methods.horizon_scanning",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Dunn and colleagues",
+            "class": "other"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2015-03-01",
+          "scope": {
+            "level": "external",
+            "countries": [
+              "GB"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "The method was designed around water-quality regulation and needs adaptation for other domains.",
+          "text": "The study develops a practitioner co-constructed national horizon-scanning approach using climate and land-use transition matrices.",
+          "confidence": "medium",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.48550/arxiv.2607.04988",
+      "source_hash": "ae47b68c",
+      "identity_hash": "da5d49f484684aaf",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.48550/arxiv.2607.04988; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.48550/arxiv.2607.04988; title and authors matched publisher or repository metadata."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://arxiv.org/abs/2607.04988",
+            "title": "InternVLA-A1.5: Unifying Understanding, Latent Foresight, and Action for Compositional Generalization",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_FALSE_POSITIVE_TERM",
+        "reason": "Here foresight means latent future-state prediction in robotics, not strategic foresight methodology."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Latent foresight tokens for robot action",
+      "reader_what": "The model uses latent “foresight tokens” to improve robot manipulation and future prediction.",
+      "reader_why": "",
+      "reader_more": "The model uses latent “foresight tokens” to improve robot manipulation and future prediction. Here foresight means latent future-state prediction in robotics, not strategic foresight methodology.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The model uses latent “foresight tokens” to improve robot manipulation and future prediction.",
+        "method_or_basis": "Vision-language-action model architecture.",
+        "qualification": "Here foresight means latent future-state prediction in robotics, not strategic foresight methodology.",
+        "radar_relevance": "Fails B admission because here foresight means latent future-state prediction in robotics, not strategic foresight methodology.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://www.ri.se/en/system-innovation/circular-transition/story/future-scenarios-opening-the-door-to-circular-product",
+      "source_hash": "1ab814d1",
+      "identity_hash": "24524328b71f4141",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://www.ri.se/en/system-innovation/circular-transition/story/future-scenarios-opening-the-door-to-circular-product; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://www.ri.se/en/system-innovation/circular-transition/story/future-scenarios-opening-the-door-to-circular-product",
+            "title": "Future scenarios opening the door to circular product development and remanufacturing | RISE",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_APPLICATION_ONLY",
+        "reason": "The page reports an application and organisational benefits, not a new or materially improved method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Circular-product scenarios at Axkid",
+      "reader_what": "RISE applied a structured foresight process to help a company explore remanufacturing futures.",
+      "reader_why": "",
+      "reader_more": "RISE applied a structured foresight process to help a company explore remanufacturing futures. The page reports an application and organisational benefits, not a new or materially improved method.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "RISE applied a structured foresight process to help a company explore remanufacturing futures.",
+        "method_or_basis": "Corporate foresight project using scenarios and visualisation.",
+        "qualification": "The page reports an application and organisational benefits, not a new or materially improved method.",
+        "radar_relevance": "Fails B admission because the page reports an application and organisational benefits, not a new or materially improved method.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/09537325.2025.2506122",
+      "source_hash": "c2509bbe",
+      "identity_hash": "d11f3f96eacd1145",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1080/09537325.2025.2506122; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1080/09537325.2025.2506122; title and authors matched publisher or repository metadata."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://arxiv.org/pdf/2405.06957",
+            "title": "On the role of intelligence and business wargaming in developing foresight",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "It provides a transferable model for turning data into intelligence and testing or developing strategy."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Business wargaming inside the intelligence cycle",
+      "reader_what": "The paper links business wargaming to intelligence-cycle stages and strategic foresight.",
+      "reader_why": "It provides a transferable model for turning data into intelligence and testing or developing strategy.",
+      "reader_more": "The paper links business wargaming to intelligence-cycle stages and strategic foresight. It provides a transferable model for turning data into intelligence and testing or developing strategy.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The paper links business wargaming to intelligence-cycle stages and strategic foresight.",
+        "method_or_basis": "Conceptual integration plus literature and practitioner wargame cases.",
+        "qualification": "Evidence combines selected cases and conceptual synthesis rather than controlled comparative evaluation.",
+        "radar_relevance": "It provides a transferable model for turning data into intelligence and testing or developing strategy.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Werro, Nitzl and Borghoff",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2025-05-15",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Evidence combines selected cases and conceptual synthesis rather than controlled comparative evaluation.",
+          "text": "The paper links business wargaming to intelligence-cycle stages and strategic foresight.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.futures.2018.03.018",
+      "source_hash": "9a43d33a",
+      "identity_hash": "55e87f8310eac8dd",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1016/j.futures.2018.03.018; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1016/j.futures.2018.03.018; title and authors matched publisher or repository metadata."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://content.openalex.org/works/W2795285991.pdf",
+            "title": "The tower of Babylon in the governance of research, technology and innovation: Participatory foresight as a method of policy coordination",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Shared future-building can align actors with different organisational goals, frames and responsibilities."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Participatory foresight for policy coordination",
+      "reader_what": "The paper treats participatory foresight as a coordination mechanism across fragmented research and innovation governance.",
+      "reader_why": "Shared future-building can align actors with different organisational goals, frames and responsibilities.",
+      "reader_more": "The paper treats participatory foresight as a coordination mechanism across fragmented research and innovation governance. Shared future-building can align actors with different organisational goals, frames and responsibilities.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The paper treats participatory foresight as a coordination mechanism across fragmented research and innovation governance.",
+        "method_or_basis": "Conceptual and case-based analysis of participatory foresight in RTI policy coordination.",
+        "qualification": "Coordination effects are context-sensitive and no single foresight design fits every governance system.",
+        "radar_relevance": "Shared future-building can align actors with different organisational goals, frames and responsibilities.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Dinges, Biegelbauer and Wilhelmer",
+            "class": "other"
+          },
+          "mechanism": "coordinates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2018-06-01",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Coordination effects are context-sensitive and no single foresight design fits every governance system.",
+          "text": "The paper treats participatory foresight as a coordination mechanism across fragmented research and innovation governance.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    }
+  ]
+}
