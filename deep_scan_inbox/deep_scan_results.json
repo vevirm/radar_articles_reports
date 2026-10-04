@@ -1,0 +1,2965 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-a-20261004T075824Z-44d525f16342",
+  "results": [
+    {
+      "record_key": "link:https://doi.org/10.24425/gsm.2026.6007",
+      "source_hash": "e18495db",
+      "identity_hash": "c9c16dd3c5a9869f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.24425/gsm.2026.6007; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.24425/gsm.2026.6007; title and authors matched publisher or repository metadata."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://wydawnictwo.pan.pl/index.php/gsm/article/view/6007",
+            "title": "Potential of critical raw materials of Slovakia",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance independently checked against publisher/official/repository metadata; package-supplied matching primary text was used where available."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NOT_CENTRAL_RI",
+        "reason": "European relevance is substantive, but research and innovation is not the central subject."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Critical raw materials potential in Slovakia",
+      "reader_what": "The paper evaluates Slovak mineral resources and price trends, not the R&I system.",
+      "reader_why": "",
+      "reader_more": "The paper evaluates Slovak mineral resources and price trends, not the R&I system. European relevance is substantive, but research and innovation is not the central subject.",
+      "deep_analysis": {
+        "work_kind": "research or policy study",
+        "research_question": "",
+        "main_finding": "The paper evaluates Slovak mineral resources and price trends, not the R&I system.",
+        "method_or_basis": "Secondary-data price and resource analysis.",
+        "qualification": "European relevance is substantive, but research and innovation is not the central subject.",
+        "radar_relevance": "Fails A admission because european relevance is substantive, but research and innovation is not the central subject.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=fd8601ae-bbad-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+      "source_hash": "320aa571",
+      "identity_hash": "b7bd9727ac9c6dce",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://op.europa.eu/o/opportal-service/download-handler?identifier=fd8601ae-bbad-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://op.europa.eu/o/opportal-service/download-handler?identifier=fd8601ae-bbad-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+            "title": "Study on the EU’s strategic digital technologies for the next EU R&I programme. Annex 12, Technology area report - Publications Office of the EU",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance independently checked against publisher/official/repository metadata; package-supplied matching primary text was used where available."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "It directly informs future EU robotics R&I investment priorities."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Robotics priorities for the next EU R&I programme",
+      "reader_what": "The study benchmarks EU robotics strengths, weaknesses, trends and investment needs.",
+      "reader_why": "It directly informs future EU robotics R&I investment priorities.",
+      "reader_more": "The study benchmarks EU robotics strengths, weaknesses, trends and investment needs. It directly informs future EU robotics R&I investment priorities.",
+      "deep_analysis": {
+        "work_kind": "official/policy evidence product",
+        "research_question": "",
+        "main_finding": "The study benchmarks EU robotics strengths, weaknesses, trends and investment needs.",
+        "method_or_basis": "Desk research, stakeholder consultation and technology-area benchmarking.",
+        "qualification": "The report informs investment priorities; it does not itself allocate funding.",
+        "radar_relevance": "It directly informs future EU robotics R&I investment priorities.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.system_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-09-29",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The report informs investment priorities; it does not itself allocate funding.",
+          "text": "The study benchmarks EU robotics strengths, weaknesses, trends and investment needs.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.technovation.2026.103731",
+      "source_hash": "af4a84d6",
+      "identity_hash": "765f785421c51337",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1016/j.technovation.2026.103731; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1016/j.technovation.2026.103731; title and authors matched publisher or repository metadata."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “Pursuing technology sovereignty under dependency: The case of Mistral AI”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_primary",
+            "url": "https://doi.org/10.1016/j.technovation.2026.103731",
+            "title": "Pursuing technology sovereignty under dependency: The case of Mistral AI",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance independently checked against publisher/official/repository metadata; package-supplied matching primary text was used where available."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Infrastructure dependencies constrain how European AI firms can pursue technological sovereignty."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Technology sovereignty under dependency",
+      "reader_what": "The Mistral AI case shows how a European firm pursues sovereignty while relying on foreign infrastructure.",
+      "reader_why": "Infrastructure dependencies constrain how European AI firms can pursue technological sovereignty.",
+      "reader_more": "The Mistral AI case shows how a European firm pursues sovereignty while relying on foreign infrastructure. Infrastructure dependencies constrain how European AI firms can pursue technological sovereignty.",
+      "deep_analysis": {
+        "work_kind": "research or policy study",
+        "research_question": "",
+        "main_finding": "The Mistral AI case shows how a European firm pursues sovereignty while relying on foreign infrastructure.",
+        "method_or_basis": "Qualitative case study and institutional-work analysis.",
+        "qualification": "A single-company case limits generalisation beyond similarly infrastructure-dependent sectors.",
+        "radar_relevance": "Infrastructure dependencies constrain how European AI firms can pursue technological sovereignty.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Mistral AI",
+            "class": "company"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-10-01",
+          "scope": {
+            "level": "company_in_eu",
+            "countries": [
+              "FR"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "A single-company case limits generalisation beyond similarly infrastructure-dependent sectors.",
+          "text": "The Mistral AI case shows how a European firm pursues sovereignty while relying on foreign infrastructure.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://www.cesaer.org/publications/best-practices-lessons-learned-and-recommendations-for-implementing-coara-commitments/",
+      "source_hash": "19f6fe73",
+      "identity_hash": "ff619c36766d2dc4",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://www.cesaer.org/publications/best-practices-lessons-learned-and-recommendations-for-implementing-coara-commitments/; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “Report 'Best practices, lessons learned and recommendations for implementing CoARA commitments'”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_primary",
+            "url": "https://www.cesaer.org/publications/best-practices-lessons-learned-and-recommendations-for-implementing-coara-commitments/",
+            "title": "Report 'Best practices, lessons learned and recommendations for implementing CoARA commitments'",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance independently checked against publisher/official/repository metadata; package-supplied matching primary text was used where available."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Research-assessment rules shape researcher incentives, careers and institutional behaviour."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2025-12-18"
+        },
+        "unset": [],
+        "reason": "CESAER publication/news page identifies the report as published on 18 December 2025."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Implementing CoARA research assessment reform",
+      "reader_what": "CESAER identifies practical institutional conditions for implementing qualitative and inclusive research assessment.",
+      "reader_why": "Research-assessment rules shape researcher incentives, careers and institutional behaviour.",
+      "reader_more": "CESAER identifies practical institutional conditions for implementing qualitative and inclusive research assessment. Research-assessment rules shape researcher incentives, careers and institutional behaviour.",
+      "deep_analysis": {
+        "work_kind": "research or policy study",
+        "research_question": "",
+        "main_finding": "CESAER identifies practical institutional conditions for implementing qualitative and inclusive research assessment.",
+        "method_or_basis": "Workshop synthesis of university implementation experience.",
+        "qualification": "The evidence is practice-based and drawn from a limited set of member universities.",
+        "radar_relevance": "Research-assessment rules shape researcher incentives, careers and institutional behaviour.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.assessment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "CESAER",
+            "class": "university_group"
+          },
+          "mechanism": "advocates",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-06-10",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The evidence is practice-based and drawn from a limited set of member universities.",
+          "text": "CESAER identifies practical institutional conditions for implementing qualitative and inclusive research assessment.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1002/adem.71258",
+      "source_hash": "460638b5",
+      "identity_hash": "4fba80a73aecfa5a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1002/adem.71258; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1002/adem.71258; title and authors matched publisher or repository metadata."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://content.openalex.org/works/W7214614418.pdf",
+            "title": "Toward Full Interoperability in Materials Science: Integrating Workflows With Knowledge Graphs",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance independently checked against publisher/official/repository metadata; package-supplied matching primary text was used where available."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Interoperability can make European materials infrastructures more reusable, traceable and AI-ready."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Interoperable workflows for materials research",
+      "reader_what": "European materials initiatives show how workflows, ontologies and knowledge graphs can improve research interoperability.",
+      "reader_why": "Interoperability can make European materials infrastructures more reusable, traceable and AI-ready.",
+      "reader_more": "European materials initiatives show how workflows, ontologies and knowledge graphs can improve research interoperability. Interoperability can make European materials infrastructures more reusable, traceable and AI-ready.",
+      "deep_analysis": {
+        "work_kind": "research or policy study",
+        "research_question": "",
+        "main_finding": "European materials initiatives show how workflows, ontologies and knowledge graphs can improve research interoperability.",
+        "method_or_basis": "Perspective synthesising workflow systems, semantic technologies and research infrastructures.",
+        "qualification": "The paper is a perspective and architecture synthesis rather than a comparative impact evaluation.",
+        "radar_relevance": "Interoperability can make European materials infrastructures more reusable, traceable and AI-ready.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European materials research initiatives",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-09-28",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The paper is a perspective and architecture synthesis rather than a comparative impact evaluation.",
+          "text": "European materials initiatives show how workflows, ontologies and knowledge graphs can improve research interoperability.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://op.europa.eu/en/publication-detail/-/publication/21575070-bbae-11f1-81de-01aa75ed71a1/language-en",
+      "source_hash": "bcab2237",
+      "identity_hash": "155618dbbed9b0a0",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://op.europa.eu/en/publication-detail/-/publication/21575070-bbae-11f1-81de-01aa75ed71a1/language-en; identity matched the claimed work."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Inspected scanner validation route https://publications.europa.eu/resource/cellar/21575070-bbae-11f1-81de-01aa75ed71a1; matching first-party material confirmed."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://op.europa.eu/en/publication-detail/-/publication/21575070-bbae-11f1-81de-01aa75ed71a1/language-en",
+            "title": "Study on strategic digital technologies for the EU research and innovation funding beyond 2027. Annex 10, Technology area report : photonics",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance independently checked against publisher/official/repository metadata; package-supplied matching primary text was used where available."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "It directly supports decisions on post-2027 EU photonics R&I priorities."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Photonics priorities for future EU R&I funding",
+      "reader_what": "The report benchmarks EU photonics capabilities, global positioning and future investment needs.",
+      "reader_why": "It directly supports decisions on post-2027 EU photonics R&I priorities.",
+      "reader_more": "The report benchmarks EU photonics capabilities, global positioning and future investment needs. It directly supports decisions on post-2027 EU photonics R&I priorities.",
+      "deep_analysis": {
+        "work_kind": "official/policy evidence product",
+        "research_question": "",
+        "main_finding": "The report benchmarks EU photonics capabilities, global positioning and future investment needs.",
+        "method_or_basis": "Technology-area assessment combining desk research and consultation.",
+        "qualification": "The study supports priority-setting; future programme decisions remain separate.",
+        "radar_relevance": "It directly supports decisions on post-2027 EU photonics R&I priorities.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.system_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-09-29",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The study supports priority-setting; future programme decisions remain separate.",
+          "text": "The report benchmarks EU photonics capabilities, global positioning and future investment needs.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://op.europa.eu/en/publication-detail/-/publication/f8f38add-bbae-11f1-81de-01aa75ed71a1/language-en",
+      "source_hash": "30df0212",
+      "identity_hash": "bffd42c507a62eff",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://op.europa.eu/en/publication-detail/-/publication/f8f38add-bbae-11f1-81de-01aa75ed71a1/language-en; identity matched the claimed work."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Inspected scanner validation route https://publications.europa.eu/resource/cellar/f8f38add-bbae-11f1-81de-01aa75ed71a1; matching first-party material confirmed."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://op.europa.eu/en/publication-detail/-/publication/f8f38add-bbae-11f1-81de-01aa75ed71a1/language-en",
+            "title": "Study on the EU’s critical digital capacities deployment beyond 2027 & study on strategic digital technologies for the EU research and innovation funding beyond 2027 : international benchmarking case studies",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance independently checked against publisher/official/repository metadata; package-supplied matching primary text was used where available."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Benchmarking reveals where EU investment and deployment approaches differ from global competitors."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "International benchmarks for strategic digital technologies",
+      "reader_what": "The report compares international approaches to critical digital capacities and strategic digital R&I.",
+      "reader_why": "Benchmarking reveals where EU investment and deployment approaches differ from global competitors.",
+      "reader_more": "The report compares international approaches to critical digital capacities and strategic digital R&I. Benchmarking reveals where EU investment and deployment approaches differ from global competitors.",
+      "deep_analysis": {
+        "work_kind": "official/policy evidence product",
+        "research_question": "",
+        "main_finding": "The report compares international approaches to critical digital capacities and strategic digital R&I.",
+        "method_or_basis": "Cross-country case studies and comparative benchmarking.",
+        "qualification": "Case studies support comparison but do not by themselves prove causal effects of policy choices.",
+        "radar_relevance": "Benchmarking reveals where EU investment and deployment approaches differ from global competitors.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-09-29",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Case studies support comparison but do not by themselves prove causal effects of policy choices.",
+          "text": "The report compares international approaches to critical digital capacities and strategic digital R&I.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.nbsj.2026.100381",
+      "source_hash": "255cbcd8",
+      "identity_hash": "dfbd18795c537e64",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1016/j.nbsj.2026.100381; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1016/j.nbsj.2026.100381; title and authors matched publisher or repository metadata."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “Mapping the Biodiversity, Climate, and Health Nexus: an Analysis of Horizon Europe research projects”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_primary",
+            "url": "https://doi.org/10.1016/j.nbsj.2026.100381",
+            "title": "Mapping the Biodiversity, Climate, and Health Nexus: an Analysis of Horizon Europe research projects",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance independently checked against publisher/official/repository metadata; package-supplied matching primary text was used where available."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Portfolio structure shows where EU research investment links these interdependent policy challenges."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Horizon Europe projects across biodiversity, climate and health",
+      "reader_what": "The study maps how Horizon Europe projects connect biodiversity, climate and health research.",
+      "reader_why": "Portfolio structure shows where EU research investment links these interdependent policy challenges.",
+      "reader_more": "The study maps how Horizon Europe projects connect biodiversity, climate and health research. Portfolio structure shows where EU research investment links these interdependent policy challenges.",
+      "deep_analysis": {
+        "work_kind": "research or policy study",
+        "research_question": "",
+        "main_finding": "The study maps how Horizon Europe projects connect biodiversity, climate and health research.",
+        "method_or_basis": "Systematic mapping and analysis of Horizon Europe projects.",
+        "qualification": "The study maps funded projects rather than measuring downstream societal impacts.",
+        "radar_relevance": "Portfolio structure shows where EU research investment links these interdependent policy challenges.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Horizon Europe",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-10-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The study maps funded projects rather than measuring downstream societal impacts.",
+          "text": "The study maps how Horizon Europe projects connect biodiversity, climate and health research.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=b26447fa-bc09-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+      "source_hash": "cd2041f1",
+      "identity_hash": "8e11e3a49c689777",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://op.europa.eu/o/opportal-service/download-handler?identifier=b26447fa-bc09-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “Commission Proposal for a Regulation of the European Parliament and of the Council establishing diversification instrument to address critical strategic dependencies that expose the Union to economic security risks - Publications Office of the EU”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_primary",
+            "url": "https://op.europa.eu/en/errorpage;jsessionid=6134C53F2EB754A1C4CDD1B967D80D1F",
+            "title": "Commission Proposal for a Regulation of the European Parliament and of the Council establishing diversification instrument to address critical strategic dependencies that expose the Union to economic security risks - Publications Office of the EU",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance independently checked against publisher/official/repository metadata; package-supplied matching primary text was used where available."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NOT_CENTRAL_RI",
+        "reason": "R&I may be affected indirectly, but it is not the proposal’s central subject."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU diversification instrument proposal",
+      "reader_what": "The proposal targets strategic trade dependencies and economic security, not research and innovation.",
+      "reader_why": "",
+      "reader_more": "The proposal targets strategic trade dependencies and economic security, not research and innovation. R&I may be affected indirectly, but it is not the proposal’s central subject.",
+      "deep_analysis": {
+        "work_kind": "official/policy evidence product",
+        "research_question": "",
+        "main_finding": "The proposal targets strategic trade dependencies and economic security, not research and innovation.",
+        "method_or_basis": "Legislative proposal and economic-security instrument design.",
+        "qualification": "R&I may be affected indirectly, but it is not the proposal’s central subject.",
+        "radar_relevance": "Fails A admission because r&I may be affected indirectly, but it is not the proposal’s central subject.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=692a9852-b703-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+      "source_hash": "4bfc88ce",
+      "identity_hash": "94a1cd4d347cdd6e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://op.europa.eu/o/opportal-service/download-handler?identifier=692a9852-b703-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://op.europa.eu/o/opportal-service/download-handler?identifier=692a9852-b703-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+            "title": "Detecting and responding to cybersecurity incidents - Publications Office of the EU",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance independently checked against publisher/official/repository metadata; package-supplied matching primary text was used where available."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NOT_CENTRAL_RI",
+        "reason": "Digital Europe projects appear in the evidence, but R&I is not the central analytical subject."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU cybersecurity incident-response performance",
+      "reader_what": "The audit assesses cybersecurity incident detection and response mechanisms, not an R&I-system mechanism.",
+      "reader_why": "",
+      "reader_more": "The audit assesses cybersecurity incident detection and response mechanisms, not an R&I-system mechanism. Digital Europe projects appear in the evidence, but R&I is not the central analytical subject.",
+      "deep_analysis": {
+        "work_kind": "official/policy evidence product",
+        "research_question": "",
+        "main_finding": "The audit assesses cybersecurity incident detection and response mechanisms, not an R&I-system mechanism.",
+        "method_or_basis": "European Court of Auditors performance audit.",
+        "qualification": "Digital Europe projects appear in the evidence, but R&I is not the central analytical subject.",
+        "radar_relevance": "Fails A admission because digital Europe projects appear in the evidence, but R&I is not the central analytical subject.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=4ec4e4c3-b309-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+      "source_hash": "698cfa1f",
+      "identity_hash": "c9c2501250adb973",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://op.europa.eu/o/opportal-service/download-handler?identifier=4ec4e4c3-b309-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://op.europa.eu/o/opportal-service/download-handler?identifier=4ec4e4c3-b309-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+            "title": "Cleantech innovation, industrial decarbonisation and global competition - Publications Office of the EU",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance independently checked against publisher/official/repository metadata; package-supplied matching primary text was used where available."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "R&D, deployment and manufacturing policy jointly shape technological sovereignty and industrial resilience."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Cleantech innovation and industrial competition",
+      "reader_what": "The briefing argues that Europe needs a complete innovation pipeline and stable policy for competitive cleantech.",
+      "reader_why": "R&D, deployment and manufacturing policy jointly shape technological sovereignty and industrial resilience.",
+      "reader_more": "The briefing argues that Europe needs a complete innovation pipeline and stable policy for competitive cleantech. R&D, deployment and manufacturing policy jointly shape technological sovereignty and industrial resilience.",
+      "deep_analysis": {
+        "work_kind": "official/policy evidence product",
+        "research_question": "",
+        "main_finding": "The briefing argues that Europe needs a complete innovation pipeline and stable policy for competitive cleantech.",
+        "method_or_basis": "Comparative policy and innovation-system analysis focused on the US and EU lessons.",
+        "qualification": "US experience is used as comparative evidence; policy transfer to Europe is not automatic.",
+        "radar_relevance": "R&D, deployment and manufacturing policy jointly shape technological sovereignty and industrial resilience.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "green.innovation",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Parliament",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-09-17",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "US experience is used as comparative evidence; policy transfer to Europe is not automatic.",
+          "text": "The briefing argues that Europe needs a complete innovation pipeline and stable policy for competitive cleantech.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:b2108cf9277be596",
+      "source_hash": "7954b693",
+      "identity_hash": "639f46af8bc6321b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1017/s1062798726100635; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “Choose Europe : Research Careers, Brain Drain and Policy Lessons from the CESAER 2024 Survey”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://www.cambridge.org/core/journals/european-review/article/choose-europe-research-careers-brain-drain-and-policy-lessons-from-the-cesaer-2024-survey/713E6B8C16ED9791756A712DC2C3D950",
+            "title": "Choose Europe : Research Careers, Brain Drain and Policy Lessons from the CESAER 2024 Survey",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance independently checked against publisher/official/repository metadata; package-supplied matching primary text was used where available."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Career stability and mobility affect Europe’s ability to attract and retain research talent."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "European research careers and brain circulation",
+      "reader_what": "A 24-university survey finds growth alongside persistent temporary contracts and uneven research career conditions.",
+      "reader_why": "Career stability and mobility affect Europe’s ability to attract and retain research talent.",
+      "reader_more": "A 24-university survey finds growth alongside persistent temporary contracts and uneven research career conditions. Career stability and mobility affect Europe’s ability to attract and retain research talent.",
+      "deep_analysis": {
+        "work_kind": "research or policy study",
+        "research_question": "",
+        "main_finding": "A 24-university survey finds growth alongside persistent temporary contracts and uneven research career conditions.",
+        "method_or_basis": "Survey of 24 European universities plus case studies.",
+        "qualification": "Participating universities are not a statistically representative sample of all European institutions.",
+        "radar_relevance": "Career stability and mobility affect Europe’s ability to attract and retain research talent.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "talent.career_structure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "CESAER survey universities",
+            "class": "university_group"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-04-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Participating universities are not a statistically representative sample of all European institutions.",
+          "text": "A 24-university survey finds growth alongside persistent temporary contracts and uneven research career conditions.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:9d928836907db70a",
+      "source_hash": "36b09cc0",
+      "identity_hash": "5183608f18e0dbe6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://resolver.tno.nl/uuid:58cd1557-4a4e-4aee-899b-076de5c158c0; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “Speed as key success factor for scale-ups: The Dutch scale-up ecosystem in international perspective”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_primary",
+            "url": "https://www.tno.nl/en/newsroom/2026/09/bottlenecks-growth-tech-start-ups/",
+            "title": "Speed as key success factor for scale-ups: The Dutch scale-up ecosystem in international perspective",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance independently checked against publisher/official/repository metadata; package-supplied matching primary text was used where available."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Combined ecosystem frictions can delay technology firms before they reach international scale."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Why Dutch technology scale-ups lose speed",
+      "reader_what": "The report identifies interacting bottlenecks in finance, talent, infrastructure and regulation that slow Dutch scale-ups.",
+      "reader_why": "Combined ecosystem frictions can delay technology firms before they reach international scale.",
+      "reader_more": "The report identifies interacting bottlenecks in finance, talent, infrastructure and regulation that slow Dutch scale-ups. Combined ecosystem frictions can delay technology firms before they reach international scale.",
+      "deep_analysis": {
+        "work_kind": "research or policy study",
+        "research_question": "",
+        "main_finding": "The report identifies interacting bottlenecks in finance, talent, infrastructure and regulation that slow Dutch scale-ups.",
+        "method_or_basis": "International ecosystem benchmarking plus company interviews.",
+        "qualification": "The report focuses on the Netherlands and selected comparator ecosystems.",
+        "radar_relevance": "Combined ecosystem frictions can delay technology firms before they reach international scale.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "innovation.system_performance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "TNO",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-01-01",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "NL"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "The report focuses on the Netherlands and selected comparator ecosystems.",
+          "text": "The report identifies interacting bottlenecks in finance, talent, infrastructure and regulation that slow Dutch scale-ups.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:31b5f48a3329a4f1",
+      "source_hash": "558f6454",
+      "identity_hash": "ffd0dcb6f0dee8fe",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://publications.jrc.ec.europa.eu/repository/handle/JRC145753; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “Estonia: Total cyberdefence, preparedness and competitiveness.”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC145753",
+            "title": "Estonia: Total cyberdefence, preparedness and competitiveness.",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance independently checked against publisher/official/repository metadata; package-supplied matching primary text was used where available."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Security demand can be converted into innovation capacity when institutions, infrastructure and firms are connected."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Estonia’s cyberdefence innovation ecosystem",
+      "reader_what": "The JRC links Estonia’s whole-of-society cyber model to innovation capacity, start-ups and strategic autonomy.",
+      "reader_why": "Security demand can be converted into innovation capacity when institutions, infrastructure and firms are connected.",
+      "reader_more": "The JRC links Estonia’s whole-of-society cyber model to innovation capacity, start-ups and strategic autonomy. Security demand can be converted into innovation capacity when institutions, infrastructure and firms are connected.",
+      "deep_analysis": {
+        "work_kind": "research or policy study",
+        "research_question": "",
+        "main_finding": "The JRC links Estonia’s whole-of-society cyber model to innovation capacity, start-ups and strategic autonomy.",
+        "method_or_basis": "In-depth ecosystem review using an adapted JRC POINT methodology.",
+        "qualification": "Estonia is a small and highly digitalised case, so institutional lessons require contextual adaptation.",
+        "radar_relevance": "Security demand can be converted into innovation capacity when institutions, infrastructure and firms are connected.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "innovation.dual_use",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-01-01",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "EE"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "Estonia is a small and highly digitalised case, so institutional lessons require contextual adaptation.",
+          "text": "The JRC links Estonia’s whole-of-society cyber model to innovation capacity, start-ups and strategic autonomy.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:ea9455586e195b4e",
+      "source_hash": "83e47b8a",
+      "identity_hash": "36f36f91258bd15a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://www.vttresearch.com/en/news-and-ideas/vtt-launches-quantum-computing-campaign-company-public-research; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “VTT launches a quantum computing campaign for company public research | VTT”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://www.vttresearch.com/en/news-and-ideas/vtt-launches-quantum-computing-campaign-company-public-research",
+            "title": "VTT launches a quantum computing campaign for company public research | VTT",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance independently checked against publisher/official/repository metadata; package-supplied matching primary text was used where available."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_SUBSTANTIVE_EVIDENCE",
+        "reason": "This is a programme-access announcement, not a substantive analytical R&I evidence product."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "VTT quantum-computer access campaign",
+      "reader_what": "VTT announced free quantum-computer access for eligible public research projects.",
+      "reader_why": "",
+      "reader_more": "VTT announced free quantum-computer access for eligible public research projects. This is a programme-access announcement, not a substantive analytical R&I evidence product.",
+      "deep_analysis": {
+        "work_kind": "research or policy study",
+        "research_question": "",
+        "main_finding": "VTT announced free quantum-computer access for eligible public research projects.",
+        "method_or_basis": "Institutional programme announcement.",
+        "qualification": "This is a programme-access announcement, not a substantive analytical R&I evidence product.",
+        "radar_relevance": "Fails A admission because this is a programme-access announcement, not a substantive analytical R&I evidence product.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:eaf6f21849392dc8",
+      "source_hash": "dbda05d1",
+      "identity_hash": "44102a92bd4d9a65",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://joint-research-centre.ec.europa.eu/jrc-news-and-updates/eu-companies-lead-global-rd-investment-growth-breaking-decade-long-trend-2024-12-18_en; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “EU companies lead global R&D investment growth, breaking decade-long trend”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://joint-research-centre.ec.europa.eu/jrc-news-and-updates/eu-companies-lead-global-rd-investment-growth-breaking-decade-long-trend-2024-12-18_en",
+            "title": "EU companies lead global R&D investment growth, breaking decade-long trend",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance independently checked against publisher/official/repository metadata; package-supplied matching primary text was used where available."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Private R&D investment is a direct indicator of Europe’s innovation trajectory and competitive capacity."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2024-12-18"
+        },
+        "unset": [],
+        "reason": "The Joint Research Centre page is dated 18 December 2024."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU corporate R&D growth regained momentum",
+      "reader_what": "The 2024 Scoreboard found EU-headquartered firms’ R&D growth outpaced US and Chinese peers in 2023.",
+      "reader_why": "Private R&D investment is a direct indicator of Europe’s innovation trajectory and competitive capacity.",
+      "reader_more": "The 2024 Scoreboard found EU-headquartered firms’ R&D growth outpaced US and Chinese peers in 2023. Private R&D investment is a direct indicator of Europe’s innovation trajectory and competitive capacity.",
+      "deep_analysis": {
+        "work_kind": "official/policy evidence product",
+        "research_question": "",
+        "main_finding": "The 2024 Scoreboard found EU-headquartered firms’ R&D growth outpaced US and Chinese peers in 2023.",
+        "method_or_basis": "JRC analysis of company financial accounts in the EU Industrial R&D Investment Scoreboard.",
+        "qualification": "The result describes large corporate R&D investors and should not be generalised to all firms.",
+        "radar_relevance": "Private R&D investment is a direct indicator of Europe’s innovation trajectory and competitive capacity.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "innovation.system_performance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2025-08-13",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The result describes large corporate R&D investors and should not be generalised to all firms.",
+          "text": "The 2024 Scoreboard found EU-headquartered firms’ R&D growth outpaced US and Chinese peers in 2023.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:baa572dd6b4e131e",
+      "source_hash": "fec40098",
+      "identity_hash": "3a055a372d4f1718",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://joint-research-centre.ec.europa.eu/jrc-news-and-updates/2025-eu-industrial-rd-investment-scoreboard-2025-12-22_en; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “The 2025 EU Industrial R&D Investment Scoreboard”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://joint-research-centre.ec.europa.eu/jrc-news-and-updates/2025-eu-industrial-rd-investment-scoreboard-2025-12-22_en",
+            "title": "The 2025 EU Industrial R&D Investment Scoreboard",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance independently checked against publisher/official/repository metadata; package-supplied matching primary text was used where available."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Sector-level investment shifts indicate changing strengths and weaknesses in Europe’s innovation base."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "2025 EU industrial R&D investment trends",
+      "reader_what": "The 2025 Scoreboard records slower overall EU corporate R&D growth with marked sector differences.",
+      "reader_why": "Sector-level investment shifts indicate changing strengths and weaknesses in Europe’s innovation base.",
+      "reader_more": "The 2025 Scoreboard records slower overall EU corporate R&D growth with marked sector differences. Sector-level investment shifts indicate changing strengths and weaknesses in Europe’s innovation base.",
+      "deep_analysis": {
+        "work_kind": "official/policy evidence product",
+        "research_question": "",
+        "main_finding": "The 2025 Scoreboard records slower overall EU corporate R&D growth with marked sector differences.",
+        "method_or_basis": "JRC corporate R&D investment scoreboard and sector analysis.",
+        "qualification": "Scoreboard coverage is concentrated on the largest R&D-investing companies.",
+        "radar_relevance": "Sector-level investment shifts indicate changing strengths and weaknesses in Europe’s innovation base.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "innovation.system_performance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2025-06-24",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Scoreboard coverage is concentrated on the largest R&D-investing companies.",
+          "text": "The 2025 Scoreboard records slower overall EU corporate R&D growth with marked sector differences.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:9fbc4bb6fdcf3e9a",
+      "source_hash": "f989a39e",
+      "identity_hash": "60c20ab124d8902d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://joint-research-centre.ec.europa.eu/scientific-activities/economic-security-trade-foreign-investment-and-global-value-chains_en; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “Economic Security: Trade, Foreign Investment and Global Value Chains”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://joint-research-centre.ec.europa.eu/scientific-activities/economic-security-trade-foreign-investment-and-global-value-chains_en",
+            "title": "Economic Security: Trade, Foreign Investment and Global Value Chains",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance independently checked against publisher/official/repository metadata; package-supplied matching primary text was used where available."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_SUBSTANTIVE_EVIDENCE",
+        "reason": "It is a programme/activity description rather than a distinct substantive analytical work."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "JRC economic-security activity page",
+      "reader_what": "The page describes an ongoing JRC research activity on trade, investment and value chains.",
+      "reader_why": "",
+      "reader_more": "The page describes an ongoing JRC research activity on trade, investment and value chains. It is a programme/activity description rather than a distinct substantive analytical work.",
+      "deep_analysis": {
+        "work_kind": "official/policy evidence product",
+        "research_question": "",
+        "main_finding": "The page describes an ongoing JRC research activity on trade, investment and value chains.",
+        "method_or_basis": "Institutional activity overview.",
+        "qualification": "It is a programme/activity description rather than a distinct substantive analytical work.",
+        "radar_relevance": "Fails A admission because it is a programme/activity description rather than a distinct substantive analytical work.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:5d90b3ee8a4ac271",
+      "source_hash": "6c853ce5",
+      "identity_hash": "2d83b0cc91e89b3f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://resolver.tno.nl/uuid:bdd3411a-7754-4e6a-b21c-046ef50ee802; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “Dutch competitiveness in the light of the Draghi rapport”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_primary",
+            "url": "https://publications.tno.nl/publication/34644211/E9oXtODx/TNO-2025-R10842-eng.pdf",
+            "title": "Dutch competitiveness in the light of the Draghi rapport",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance independently checked against publisher/official/repository metadata; package-supplied matching primary text was used where available."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Competitiveness depends partly on innovation, investment and the ability to scale technology-intensive activity."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Dutch competitiveness through the Draghi lens",
+      "reader_what": "The report assesses Dutch competitiveness against structural challenges highlighted in the Draghi agenda.",
+      "reader_why": "Competitiveness depends partly on innovation, investment and the ability to scale technology-intensive activity.",
+      "reader_more": "The report assesses Dutch competitiveness against structural challenges highlighted in the Draghi agenda. Competitiveness depends partly on innovation, investment and the ability to scale technology-intensive activity.",
+      "deep_analysis": {
+        "work_kind": "research or policy study",
+        "research_question": "",
+        "main_finding": "The report assesses Dutch competitiveness against structural challenges highlighted in the Draghi agenda.",
+        "method_or_basis": "Policy-economic analysis using Dutch and European indicators.",
+        "qualification": "The report is national in focus and uses the Draghi report as a comparative policy frame.",
+        "radar_relevance": "Competitiveness depends partly on innovation, investment and the ability to scale technology-intensive activity.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "industrial.competitiveness",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Dutch research authors",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2025-01-01",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "NL"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "The report is national in focus and uses the Draghi report as a comparative policy frame.",
+          "text": "The report assesses Dutch competitiveness against structural challenges highlighted in the Draghi agenda.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:224e414a84e29bf6",
+      "source_hash": "bdcbb038",
+      "identity_hash": "2a450be8b72d40f3",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://dumas.ccsd.cnrs.fr/dumas-05535033; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “AI for growth, not for green : a critical look at environmental considerations and trade-offs in EU AI governance”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_primary",
+            "url": "https://dumas.ccsd.cnrs.fr/dumas-05535033",
+            "title": "AI for growth, not for green : a critical look at environmental considerations and trade-offs in EU AI governance",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance independently checked against publisher/official/repository metadata; package-supplied matching primary text was used where available."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NOT_CENTRAL_RI",
+        "reason": "The subject is AI regulation and environmental trade-offs, not a recognised R&I-system mechanism."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Environmental trade-offs in EU AI governance",
+      "reader_what": "The work critiques environmental considerations in EU AI governance rather than analysing the European R&I system.",
+      "reader_why": "",
+      "reader_more": "The work critiques environmental considerations in EU AI governance rather than analysing the European R&I system. The subject is AI regulation and environmental trade-offs, not a recognised R&I-system mechanism.",
+      "deep_analysis": {
+        "work_kind": "research or policy study",
+        "research_question": "",
+        "main_finding": "The work critiques environmental considerations in EU AI governance rather than analysing the European R&I system.",
+        "method_or_basis": "Policy and governance analysis.",
+        "qualification": "The subject is AI regulation and environmental trade-offs, not a recognised R&I-system mechanism.",
+        "radar_relevance": "Fails A admission because the subject is AI regulation and environmental trade-offs, not a recognised R&I-system mechanism.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:1bc0383d04ea5459",
+      "source_hash": "dc65d56d",
+      "identity_hash": "0c415f0e2a392473",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://unidir.org/wp-content/uploads/2024/12/UNIDIR_Cloud_Computing_International_Security.pdf; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “Cloud Computing and International Security: Risks, Opportunities and Governance Challenges → UNIDIR”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://unidir.org/wp-content/uploads/2024/12/UNIDIR_Cloud_Computing_International_Security.pdf",
+            "title": "Cloud Computing and International Security: Risks, Opportunities and Governance Challenges → UNIDIR",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance independently checked against publisher/official/repository metadata; package-supplied matching primary text was used where available."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_EU_RELEVANCE_INSUFFICIENT",
+        "reason": "EU funding supports the report, but European R&I is not its substantive analytical scope."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Cloud computing and international security",
+      "reader_what": "UNIDIR analyses global cloud-security risks and governance challenges.",
+      "reader_why": "",
+      "reader_more": "UNIDIR analyses global cloud-security risks and governance challenges. EU funding supports the report, but European R&I is not its substantive analytical scope.",
+      "deep_analysis": {
+        "work_kind": "research or policy study",
+        "research_question": "",
+        "main_finding": "UNIDIR analyses global cloud-security risks and governance challenges.",
+        "method_or_basis": "International-security policy analysis.",
+        "qualification": "EU funding supports the report, but European R&I is not its substantive analytical scope.",
+        "radar_relevance": "Fails A admission because eU funding supports the report, but European R&I is not its substantive analytical scope.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:dd33caa74bd37ea5",
+      "source_hash": "763d1195",
+      "identity_hash": "f5a678faa35a8575",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://joint-research-centre.ec.europa.eu/jrc-news-and-updates/industrial-rd-investment-eus-growth-highest-2015-2023-12-14_en; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “Industrial R&D investment: EU's growth highest since 2015”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://joint-research-centre.ec.europa.eu/jrc-news-and-updates/industrial-rd-investment-eus-growth-highest-2015-2023-12-14_en",
+            "title": "Industrial R&D investment: EU's growth highest since 2015",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance independently checked against publisher/official/repository metadata; package-supplied matching primary text was used where available."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Corporate R&D investment tracks a consequential part of Europe’s innovation capacity."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "EU industrial R&D growth in 2022",
+      "reader_what": "The 2023 Scoreboard reported EU industrial R&D investment growing above the global average in 2022.",
+      "reader_why": "Corporate R&D investment tracks a consequential part of Europe’s innovation capacity.",
+      "reader_more": "The 2023 Scoreboard reported EU industrial R&D investment growing above the global average in 2022. Corporate R&D investment tracks a consequential part of Europe’s innovation capacity.",
+      "deep_analysis": {
+        "work_kind": "official/policy evidence product",
+        "research_question": "",
+        "main_finding": "The 2023 Scoreboard reported EU industrial R&D investment growing above the global average in 2022.",
+        "method_or_basis": "JRC scoreboard based on company financial accounts.",
+        "qualification": "The scoreboard is weighted toward the world’s largest corporate R&D investors.",
+        "radar_relevance": "Corporate R&D investment tracks a consequential part of Europe’s innovation capacity.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "innovation.system_performance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2023-12-19",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The scoreboard is weighted toward the world’s largest corporate R&D investors.",
+          "text": "The 2023 Scoreboard reported EU industrial R&D investment growing above the global average in 2022.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1093/police/paaf060",
+      "source_hash": "cec3d364",
+      "identity_hash": "6f292aae55f5babf",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1093/police/paaf060; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1093/police/paaf060; title and authors matched publisher or repository metadata."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “Strategic integration of foresight tools in policing: a case study of Dubai Police”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_primary",
+            "url": "https://doi.org/10.1093/police/paaf060",
+            "title": "Strategic integration of foresight tools in policing: a case study of Dubai Police",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_APPLICATION_ONLY",
+        "reason": "It applies scenario planning, horizon scanning and Delphi methods without a material methodological advance."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Foresight tools in Dubai Police",
+      "reader_what": "The case documents institutional use of established foresight tools in policing.",
+      "reader_why": "",
+      "reader_more": "The case documents institutional use of established foresight tools in policing. It applies scenario planning, horizon scanning and Delphi methods without a material methodological advance.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The case documents institutional use of established foresight tools in policing.",
+        "method_or_basis": "Qualitative case study using interviews, documents and training data.",
+        "qualification": "It applies scenario planning, horizon scanning and Delphi methods without a material methodological advance.",
+        "radar_relevance": "Fails B admission because it applies scenario planning, horizon scanning and Delphi methods without a material methodological advance.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:d05039bcc2a68682",
+      "source_hash": "2aa6fbd4",
+      "identity_hash": "f6e7b8971b8ac254",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://www.vinnova.se/en/calls-for-proposals/future-mobility/future-mobility--innovation-2023-00433/; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “Future Mobility – innovation collaborations between Sweden and the USA | Vinnova”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://www.vinnova.se/en/calls-for-proposals/future-mobility/future-mobility--innovation-2023-00433/",
+            "title": "Future Mobility – innovation collaborations between Sweden and the USA | Vinnova",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance independently checked against publisher/official/repository metadata; package-supplied matching primary text was used where available."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_SUBSTANTIVE_EVIDENCE",
+        "reason": "The historical A archive requires substantive evidence, not a call or programme listing."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Sweden–US Future Mobility call",
+      "reader_what": "The page describes a bilateral funding call for sustainable-mobility innovation projects.",
+      "reader_why": "",
+      "reader_more": "The page describes a bilateral funding call for sustainable-mobility innovation projects. The historical A archive requires substantive evidence, not a call or programme listing.",
+      "deep_analysis": {
+        "work_kind": "research or policy study",
+        "research_question": "",
+        "main_finding": "The page describes a bilateral funding call for sustainable-mobility innovation projects.",
+        "method_or_basis": "Funding-call and programme documentation.",
+        "qualification": "The historical A archive requires substantive evidence, not a call or programme listing.",
+        "radar_relevance": "Fails A admission because the historical A archive requires substantive evidence, not a call or programme listing.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:5404064ed9ca5c3c",
+      "source_hash": "28e4642d",
+      "identity_hash": "1d841ecb218d2235",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://joint-research-centre.ec.europa.eu/jrc-news-and-updates/advanced-manufacturing-key-eu-competitiveness-2024-09-24_en; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “Advanced manufacturing is key for EU competitiveness”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://joint-research-centre.ec.europa.eu/jrc-news-and-updates/advanced-manufacturing-key-eu-competitiveness-2024-09-24_en",
+            "title": "Advanced manufacturing is key for EU competitiveness",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance independently checked against publisher/official/repository metadata; package-supplied matching primary text was used where available."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Metrics can help identify industrial technology strengths, gaps and strategic investment needs."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2024-09-24"
+        },
+        "unset": [],
+        "reason": "The Joint Research Centre publication page is dated 24 September 2024."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Advanced manufacturing and EU competitiveness",
+      "reader_what": "The JRC develops a quantified overview of EU advanced manufacturing and benchmarks it against global competitors.",
+      "reader_why": "Metrics can help identify industrial technology strengths, gaps and strategic investment needs.",
+      "reader_more": "The JRC develops a quantified overview of EU advanced manufacturing and benchmarks it against global competitors. Metrics can help identify industrial technology strengths, gaps and strategic investment needs.",
+      "deep_analysis": {
+        "work_kind": "official/policy evidence product",
+        "research_question": "",
+        "main_finding": "The JRC develops a quantified overview of EU advanced manufacturing and benchmarks it against global competitors.",
+        "method_or_basis": "Technology taxonomy, indicators and comparative industrial analysis.",
+        "qualification": "The framework provides a first comprehensive overview and will require updating as technologies and industries evolve.",
+        "radar_relevance": "Metrics can help identify industrial technology strengths, gaps and strategic investment needs.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "industrial.technology_complexity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2023-01-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The framework provides a first comprehensive overview and will require updating as technologies and industries evolve.",
+          "text": "The JRC develops a quantified overview of EU advanced manufacturing and benchmarks it against global competitors.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:7a09f8a854fb5b94",
+      "source_hash": "9814e0a6",
+      "identity_hash": "be78129fbb69a3bf",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1002/ffo2.172; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “Quality indicators for Delphi studies”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://content.openalex.org/works/W4388128702.pdf",
+            "title": "Quality indicators for Delphi studies",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance independently checked against publisher/official/repository metadata; package-supplied matching primary text was used where available."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The indicators give users a reusable way to assess Delphi design and reporting."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Quality indicators for Delphi studies",
+      "reader_what": "The paper develops indicators for judging the methodological quality and credibility of Delphi studies.",
+      "reader_why": "The indicators give users a reusable way to assess Delphi design and reporting.",
+      "reader_more": "The paper develops indicators for judging the methodological quality and credibility of Delphi studies. The indicators give users a reusable way to assess Delphi design and reporting.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The paper develops indicators for judging the methodological quality and credibility of Delphi studies.",
+        "method_or_basis": "Methodological development grounded in Delphi literature and expert practice.",
+        "qualification": "The proposed indicators require further use and validation across disciplines.",
+        "radar_relevance": "The indicators give users a reusable way to assess Delphi design and reporting.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.delphi",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Landeta and Lertxundi",
+            "class": "other"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2023-11-01",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The proposed indicators require further use and validation across disciplines.",
+          "text": "The paper develops indicators for judging the methodological quality and credibility of Delphi studies.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:f02cd2197dfb52a6",
+      "source_hash": "afc8b4f0",
+      "identity_hash": "f0cfccf112eac3e4",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1002/ffo2.32; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “Scenario planning as strategic activity: A practice‐orientated approach”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_primary",
+            "url": "https://doi.org/10.1002/ffo2.32",
+            "title": "Scenario planning as strategic activity: A practice‐orientated approach",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance independently checked against publisher/official/repository metadata; package-supplied matching primary text was used where available."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The framework gives researchers and practitioners a transferable lens for analysing scenario work."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Scenario planning as strategy practice",
+      "reader_what": "The paper reframes scenario planning through strategy-as-practice: situated practice, macro influences and micro activities.",
+      "reader_why": "The framework gives researchers and practitioners a transferable lens for analysing scenario work.",
+      "reader_more": "The paper reframes scenario planning through strategy-as-practice: situated practice, macro influences and micro activities. The framework gives researchers and practitioners a transferable lens for analysing scenario work.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The paper reframes scenario planning through strategy-as-practice: situated practice, macro influences and micro activities.",
+        "method_or_basis": "Conceptual integration of scenario planning and strategy-as-practice research.",
+        "qualification": "It is primarily a conceptual framework rather than a validated procedural protocol.",
+        "radar_relevance": "The framework gives researchers and practitioners a transferable lens for analysing scenario work.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "methods.scenario",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Bowman and MacKay",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2020-09-01",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "It is primarily a conceptual framework rather than a validated procedural protocol.",
+          "text": "The paper reframes scenario planning through strategy-as-practice: situated practice, macro influences and micro activities.",
+          "confidence": "medium",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1108/fs-06-2025-0136",
+      "source_hash": "f621ba92",
+      "identity_hash": "698610e91114089a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1108/fs-06-2025-0136; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1108/fs-06-2025-0136; title and authors matched publisher or repository metadata."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “An integrated framework for developing a national industrial technology roadmap: Thailand perspectives”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_primary",
+            "url": "https://doi.org/10.1108/fs-06-2025-0136",
+            "title": "An integrated framework for developing a national industrial technology roadmap: Thailand perspectives",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "It links national goals, technology maturity and collaboration in one reusable roadmapping process."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Integrated national technology roadmapping",
+      "reader_what": "The framework combines trend analysis, network analysis and readiness assessment for national technology roadmaps.",
+      "reader_why": "It links national goals, technology maturity and collaboration in one reusable roadmapping process.",
+      "reader_more": "The framework combines trend analysis, network analysis and readiness assessment for national technology roadmaps. It links national goals, technology maturity and collaboration in one reusable roadmapping process.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The framework combines trend analysis, network analysis and readiness assessment for national technology roadmaps.",
+        "method_or_basis": "Integrated roadmapping framework demonstrated in Thailand’s automotive industry.",
+        "qualification": "The empirical demonstration is sector- and country-specific, so transfer requires contextual adaptation.",
+        "radar_relevance": "It links national goals, technology maturity and collaboration in one reusable roadmapping process.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "methods.roadmapping",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Gerdsri and colleagues",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-10-02",
+          "scope": {
+            "level": "external",
+            "countries": [
+              "TH"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "The empirical demonstration is sector- and country-specific, so transfer requires contextual adaptation.",
+          "text": "The framework combines trend analysis, network analysis and readiness assessment for national technology roadmaps.",
+          "confidence": "medium",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/23299460.2026.2731692",
+      "source_hash": "5b1b0532",
+      "identity_hash": "4543f795b6005002",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1080/23299460.2026.2731692; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1080/23299460.2026.2731692; title and authors matched publisher or repository metadata."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://content.openalex.org/works/W7214323022.pdf",
+            "title": "A chance to redefine global technology assessment? A relational framework for impact reflexivity",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The framework makes power, inclusion, ethics and timing explicit in impact evaluation."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Relational impact reflexivity for technology assessment",
+      "reader_what": "The paper proposes seven design principles for assessing technology-assessment impact as a contextual, relational process.",
+      "reader_why": "The framework makes power, inclusion, ethics and timing explicit in impact evaluation.",
+      "reader_more": "The paper proposes seven design principles for assessing technology-assessment impact as a contextual, relational process. The framework makes power, inclusion, ethics and timing explicit in impact evaluation.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The paper proposes seven design principles for assessing technology-assessment impact as a contextual, relational process.",
+        "method_or_basis": "Conceptual framework synthesis for technology assessment.",
+        "qualification": "The framework still requires comparative empirical testing and refinement.",
+        "radar_relevance": "The framework makes power, inclusion, ethics and timing explicit in impact evaluation.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.evaluation",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Franziska Sörgel",
+            "class": "other"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-09-25",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The framework still requires comparative empirical testing and refinement.",
+          "text": "The paper proposes seven design principles for assessing technology-assessment impact as a contextual, relational process.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.indic.2026.101531",
+      "source_hash": "22faaf3f",
+      "identity_hash": "0abfb95ff9c3ce3f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1016/j.indic.2026.101531; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1016/j.indic.2026.101531; title and authors matched publisher or repository metadata."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://content.openalex.org/works/W7213515937.pdf",
+            "title": "Biophysically-grounded scenario building for Island sustainability governance: A methodological framework and application to La Palma (Canary Islands, Spain)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "It offers a transferable procedure that keeps scenarios constrained by material and systemic limits."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Biophysically grounded island scenarios",
+      "reader_what": "The method combines structural scenario logic, metabolic accounting and cross-impact analysis for island futures.",
+      "reader_why": "It offers a transferable procedure that keeps scenarios constrained by material and systemic limits.",
+      "reader_more": "The method combines structural scenario logic, metabolic accounting and cross-impact analysis for island futures. It offers a transferable procedure that keeps scenarios constrained by material and systemic limits.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The method combines structural scenario logic, metabolic accounting and cross-impact analysis for island futures.",
+        "method_or_basis": "Step-by-step scenario framework demonstrated on La Palma.",
+        "qualification": "Transfer beyond islands requires adaptation to different system boundaries and data conditions.",
+        "radar_relevance": "It offers a transferable procedure that keeps scenarios constrained by material and systemic limits.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.scenario",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Serafín Corral Quintana",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-09-17",
+          "scope": {
+            "level": "external",
+            "countries": [
+              "ES"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "Transfer beyond islands requires adaptation to different system boundaries and data conditions.",
+          "text": "The method combines structural scenario logic, metabolic accounting and cross-impact analysis for island futures.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.esr.2026.102181",
+      "source_hash": "8de19c7f",
+      "identity_hash": "a7806a18b03b3cfb",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1016/j.esr.2026.102181; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1016/j.esr.2026.102181; title and authors matched publisher or repository metadata."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “Participatory scenario planning for energy governance under uncertainty: Insights from Iran”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_primary",
+            "url": "https://doi.org/10.1016/j.esr.2026.102181",
+            "title": "Participatory scenario planning for energy governance under uncertainty: Insights from Iran",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The method translates global uncertainty into nationally relevant policy narratives."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Participatory energy-governance scenarios",
+      "reader_what": "The study proposes a participatory scenario model combining global foresight, local expertise, taxonomy and scenario logic.",
+      "reader_why": "The method translates global uncertainty into nationally relevant policy narratives.",
+      "reader_more": "The study proposes a participatory scenario model combining global foresight, local expertise, taxonomy and scenario logic. The method translates global uncertainty into nationally relevant policy narratives.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The study proposes a participatory scenario model combining global foresight, local expertise, taxonomy and scenario logic.",
+        "method_or_basis": "Participatory expert-based scenario development demonstrated for Iran.",
+        "qualification": "The transferability claim is based on a single national application.",
+        "radar_relevance": "The method translates global uncertainty into nationally relevant policy narratives.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "methods.scenario",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Hafezi and Rahimirad",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-03-21",
+          "scope": {
+            "level": "external",
+            "countries": [
+              "IR"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "The transferability claim is based on a single national application.",
+          "text": "The study proposes a participatory scenario model combining global foresight, local expertise, taxonomy and scenario logic.",
+          "confidence": "medium",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1108/fs-05-2019-0041",
+      "source_hash": "0f5e12fe",
+      "identity_hash": "30cc0d8cbd015f69",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1108/fs-05-2019-0041; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1108/fs-05-2019-0041; title and authors matched publisher or repository metadata."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “Hybrid processes for a new era of strategic foresight”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_primary",
+            "url": "https://doi.org/10.1108/fs-05-2019-0041",
+            "title": "Hybrid processes for a new era of strategic foresight",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The hybrid process aims to produce scenarios with greater decision relevance and organisational follow-through."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "A hybrid strategic foresight process",
+      "reader_what": "The paper integrates science fiction, speculative design and organisational tools into one foresight process.",
+      "reader_why": "The hybrid process aims to produce scenarios with greater decision relevance and organisational follow-through.",
+      "reader_more": "The paper integrates science fiction, speculative design and organisational tools into one foresight process. The hybrid process aims to produce scenarios with greater decision relevance and organisational follow-through.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The paper integrates science fiction, speculative design and organisational tools into one foresight process.",
+        "method_or_basis": "Conceptual synthesis and process design.",
+        "qualification": "The proposal is primarily conceptual and needs broader empirical comparison.",
+        "radar_relevance": "The hybrid process aims to produce scenarios with greater decision relevance and organisational follow-through.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Pinto and Medina",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2020-06-20",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The proposal is primarily conceptual and needs broader empirical comparison.",
+          "text": "The paper integrates science fiction, speculative design and organisational tools into one foresight process.",
+          "confidence": "medium",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1108/fs-12-2014-0085",
+      "source_hash": "1c31d3f4",
+      "identity_hash": "bdf2089652f55f85",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1108/fs-12-2014-0085; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1108/fs-12-2014-0085; title and authors matched publisher or repository metadata."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “Designing a moving strategic foresight approach: ontological and methodological issues of scenario design”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_primary",
+            "url": "https://doi.org/10.1108/fs-12-2014-0085",
+            "title": "Designing a moving strategic foresight approach: ontological and methodological issues of scenario design",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Moving scenarios can test strategies against changing scales, actors and time horizons."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Moving strategic foresight",
+      "reader_what": "The authors propose iterative scenario transformations rather than treating scenarios only as fixed end-states.",
+      "reader_why": "Moving scenarios can test strategies against changing scales, actors and time horizons.",
+      "reader_more": "The authors propose iterative scenario transformations rather than treating scenarios only as fixed end-states. Moving scenarios can test strategies against changing scales, actors and time horizons.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The authors propose iterative scenario transformations rather than treating scenarios only as fixed end-states.",
+        "method_or_basis": "Ontological and methodological development of action-based scenario design.",
+        "qualification": "The method is conceptually argued and requires further empirical validation.",
+        "radar_relevance": "Moving scenarios can test strategies against changing scales, actors and time horizons.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "methods.scenario",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Marchais-Roubelat and Roubelat",
+            "class": "other"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2015-11-09",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The method is conceptually argued and requires further empirical validation.",
+          "text": "The authors propose iterative scenario transformations rather than treating scenarios only as fixed end-states.",
+          "confidence": "medium",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1002/jsc.1968",
+      "source_hash": "5a07442c",
+      "identity_hash": "ded323e1ed77a373",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1002/jsc.1968; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1002/jsc.1968; title and authors matched publisher or repository metadata."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “Conceptualizing Strategic Foresight: An Integrated Framework”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_primary",
+            "url": "https://doi.org/10.1002/jsc.1968",
+            "title": "Conceptualizing Strategic Foresight: An Integrated Framework",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The framework offers a reusable way to analyse foresight in fast-changing organisations."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Strategic foresight as an organising capability",
+      "reader_what": "The paper integrates planning, practice and capability perspectives into a strategic foresight framework.",
+      "reader_why": "The framework offers a reusable way to analyse foresight in fast-changing organisations.",
+      "reader_more": "The paper integrates planning, practice and capability perspectives into a strategic foresight framework. The framework offers a reusable way to analyse foresight in fast-changing organisations.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The paper integrates planning, practice and capability perspectives into a strategic foresight framework.",
+        "method_or_basis": "Conceptual integration of strategic foresight literatures.",
+        "qualification": "The contribution is conceptual rather than a tested operational procedure.",
+        "radar_relevance": "The framework offers a reusable way to analyse foresight in fast-changing organisations.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Paliokaitė, Pačėsa and Sarpong",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2014-05-19",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The contribution is conceptual rather than a tested operational procedure.",
+          "text": "The paper integrates planning, practice and capability perspectives into a strategic foresight framework.",
+          "confidence": "medium",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1108/fs-01-2026-0014",
+      "source_hash": "0a92f913",
+      "identity_hash": "31f585f6f1ff916b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1108/fs-01-2026-0014; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1108/fs-01-2026-0014; title and authors matched publisher or repository metadata."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title “Watching the wind, not the wrapper: DEFT+signals from scanning to anticipatory decisions”; located matching publisher, institutional, or repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_primary",
+            "url": "https://doi.org/10.1108/fs-01-2026-0014",
+            "title": "Watching the wind, not the wrapper: DEFT+signals from scanning to anticipatory decisions",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "It links environmental scanning directly to auditable strategic choices under uncertainty."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "DEFT plus signals for anticipatory decisions",
+      "reader_what": "DEFT+Signals converts scanning into staged signals, decision packages, review triggers and traceable governance.",
+      "reader_why": "It links environmental scanning directly to auditable strategic choices under uncertainty.",
+      "reader_more": "DEFT+Signals converts scanning into staged signals, decision packages, review triggers and traceable governance. It links environmental scanning directly to auditable strategic choices under uncertainty.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "DEFT+Signals converts scanning into staged signals, decision packages, review triggers and traceable governance.",
+        "method_or_basis": "Conceptual method with an operational pipeline and methodological application.",
+        "qualification": "The pipeline has one methodological demonstration and needs comparative validation.",
+        "radar_relevance": "It links environmental scanning directly to auditable strategic choices under uncertainty.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "methods.horizon_scanning",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Fredy Vargas-Lama",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-09-26",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The pipeline has one methodological demonstration and needs comparative validation.",
+          "text": "DEFT+Signals converts scanning into staged signals, decision packages, review triggers and traceable governance.",
+          "confidence": "medium",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s43979-026-00183-w",
+      "source_hash": "05fb9cdf",
+      "identity_hash": "5f08f703a5e47bc8",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1007/s43979-026-00183-w; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1007/s43979-026-00183-w; title and authors matched publisher or repository metadata."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://link.springer.com/article/10.1007/s43979-026-00183-w",
+            "title": "A goal-driven framework for carbon neutrality technology development",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "It provides a reusable top-down and bottom-up technology-roadmapping structure."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Goal-driven carbon-neutrality roadmapping",
+      "reader_what": "The framework links long-term neutrality goals to short- and medium-term technology development priorities.",
+      "reader_why": "It provides a reusable top-down and bottom-up technology-roadmapping structure.",
+      "reader_more": "The framework links long-term neutrality goals to short- and medium-term technology development priorities. It provides a reusable top-down and bottom-up technology-roadmapping structure.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The framework links long-term neutrality goals to short- and medium-term technology development priorities.",
+        "method_or_basis": "Goal-driven roadmapping framework with a China case demonstration.",
+        "qualification": "The case illustrates implementation but does not establish effectiveness across jurisdictions.",
+        "radar_relevance": "It provides a reusable top-down and bottom-up technology-roadmapping structure.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.roadmapping",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Guo and colleagues",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-09-21",
+          "scope": {
+            "level": "external",
+            "countries": [
+              "CN"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "The case illustrates implementation but does not establish effectiveness across jurisdictions.",
+          "text": "The framework links long-term neutrality goals to short- and medium-term technology development priorities.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    }
+  ]
+}
