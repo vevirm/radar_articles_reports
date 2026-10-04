@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-04T08:11:59Z",
+  "generated_at": "2026-10-04T08:48:35Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -219161,8 +219161,258 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1186/s40309-026-00301-y": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "corpus_scope": "main",
+      "source_hash": "87975a2d",
+      "identity_hash": "c1da8e7470cf61f1",
+      "reader_title": "AI labels and scenario credibility",
+      "reader_what": "The experiment measures how an AI-assistance label changes perceptions of scenario quality.",
+      "reader_more": "The experiment measures how an AI-assistance label changes perceptions of scenario quality. It evaluates reactions to scenarios but does not materially improve a foresight or scenario method.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The experiment measures how an AI-assistance label changes perceptions of scenario quality.",
+        "method_or_basis": "Randomised label experiment with non-parametric tests and ordinal regression.",
+        "qualification": "It evaluates reactions to scenarios but does not materially improve a foresight or scenario method.",
+        "radar_relevance": "Fails B admission because it evaluates reactions to scenarios but does not materially improve a foresight or scenario method.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1186/s40309-026-00301-y; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1186/s40309-026-00301-y; title and authors matched publisher or repository metadata."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://link.springer.com/article/10.1186/s40309-026-00301-y",
+            "title": "Do “AI-assisted” labels reduce perceived quality of scenarios? An exploratory experimental study",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_APPLICATION_ONLY",
+        "reason": "It evaluates reactions to scenarios but does not materially improve a foresight or scenario method."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-04T08:48:34Z",
+      "deep_scan_package_id": "worker-b-20261004T075859Z-67e25a44f2dc",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1038/s41598-026-52549-w": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "corpus_scope": "main",
+      "source_hash": "e5646028",
+      "identity_hash": "2abfce54911a326c",
+      "reader_title": "Risk-based strategic scenarios for digital transition",
+      "reader_what": "The study proposes a scenario-development method integrating risk assessment and risk appetite for Industry 4.0.",
+      "reader_why": "It connects risk governance directly to strategic scenario construction.",
+      "reader_more": "The study proposes a scenario-development method integrating risk assessment and risk appetite for Industry 4.0. It connects risk governance directly to strategic scenario construction.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "The study proposes a scenario-development method integrating risk assessment and risk appetite for Industry 4.0.",
+        "method_or_basis": "Design Science Research and a reusable scenario methodology.",
+        "qualification": "The method is demonstrated in a digital-transition context and needs testing elsewhere.",
+        "radar_relevance": "It connects risk governance directly to strategic scenario construction.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1038/s41598-026-52549-w; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1038/s41598-026-52549-w; title and authors matched publisher or repository metadata."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://www.nature.com/articles/s41598-026-52549-w",
+            "title": "Designing strategic scenarios for the digital transition",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "It connects risk governance directly to strategic scenario construction."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-04T08:48:35Z",
+      "deep_scan_package_id": "worker-b-20261004T075859Z-67e25a44f2dc",
+      "claims": [
+        {
+          "object": "methods.scenario",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Alcácer and colleagues",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-05-14",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The method is demonstrated in a digital-transition context and needs testing elsewhere.",
+          "text": "The study proposes a scenario-development method integrating risk assessment and risk appetite for Industry 4.0.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "link:https://doi.org/10.1038/s41598-026-52549-w",
+          "merit": 84,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:2abfce54911a326c:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1016/j.ssaho.2026.103666": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "corpus_scope": "main",
+      "source_hash": "6ad55d64",
+      "identity_hash": "99d44504cd369465",
+      "reader_title": "Integrated governance intelligence for universities",
+      "reader_what": "IBISIF combines business intelligence, strategic intelligence, data governance and decision dashboards in one framework.",
+      "reader_why": "The design offers a reusable architecture for fragmented, resource-constrained decision environments.",
+      "reader_more": "IBISIF combines business intelligence, strategic intelligence, data governance and decision dashboards in one framework. The design offers a reusable architecture for fragmented, resource-constrained decision environments.",
+      "deep_analysis": {
+        "work_kind": "methodological study",
+        "research_question": "",
+        "main_finding": "IBISIF combines business intelligence, strategic intelligence, data governance and decision dashboards in one framework.",
+        "method_or_basis": "Design Science Research with prototype construction and multi-part evaluation.",
+        "qualification": "Evaluation is single-site and formative, limiting claims about broader effectiveness.",
+        "radar_relevance": "The design offers a reusable architecture for fragmented, resource-constrained decision environments.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.1016/j.ssaho.2026.103666; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1016/j.ssaho.2026.103666; title and authors matched publisher or repository metadata."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://content.openalex.org/works/W7213906773.pdf",
+            "title": "Integrated governance intelligence for higher education in resource-constrained contexts: A design science study of BI-SI integration and decision support",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed. Identity/provenance were checked against DOI/publisher or repository metadata, with package primary text used where available; the decision is based on the work itself rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The design offers a reusable architecture for fragmented, resource-constrained decision environments."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-04T08:48:35Z",
+      "deep_scan_package_id": "worker-b-20261004T075859Z-67e25a44f2dc",
+      "claims": [
+        {
+          "object": "methods.system_modelling",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Mpia Héritier Nsenge",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-09-22",
+          "scope": {
+            "level": "external",
+            "countries": [
+              "CD"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "Evaluation is single-site and formative, limiting claims about broader effectiveness.",
+          "text": "IBISIF combines business intelligence, strategic intelligence, data governance and decision dashboards in one framework.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "link:https://doi.org/10.1016/j.ssaho.2026.103666",
+          "merit": 70,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:99d44504cd369465:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-04T08:11:59Z"
+  "claims_updated_at": "2026-10-04T08:48:35Z"
 }

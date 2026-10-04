@@ -6,27 +6,27 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2478** (Main **1162** + Historical **1316**)
-- Automatic queue still needing V2 verification: **163** (Main **74** + Historical **89**)
-- Currently assigned to workers: **79** (Main **9** + Historical **70**)
+- Authoritative V2 verified: **2481** (Main **1165** + Historical **1316**)
+- Automatic queue still needing V2 verification: **169** (Main **71** + Historical **98**)
+- Currently assigned to workers: **88** (Main **9** + Historical **79**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **29**
-- Automatic queue pending and not yet assigned: **84**
+- Automatic queue pending and not yet assigned: **81**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261004T081542Z-e184c2926b8c`
-- Assigned unresolved records: **24**
-  1. `link:https://doi.org/10.1016/j.technovation.2026.103731` — Pursuing technology sovereignty under dependency: The case of Mistral AI
-  2. `link:https://www.cesaer.org/publications/best-practices-lessons-learned-and-recommendations-for-implementing-coara-commitments/` — Report 'Best practices, lessons learned and recommendations for implementing CoARA commitments'
-  3. `link:https://doi.org/10.1002/adem.71258` — Toward Full Interoperability in Materials Science: Integrating Workflows With Knowledge Graphs
-  4. `link:https://op.europa.eu/en/publication-detail/-/publication/21575070-bbae-11f1-81de-01aa75ed71a1/language-en` — Study on strategic digital technologies for the EU research and innovation funding beyond 2027. Annex 10, Technology area report : photonics
-  5. `link:https://op.europa.eu/en/publication-detail/-/publication/f8f38add-bbae-11f1-81de-01aa75ed71a1/language-en` — Study on the EU’s critical digital capacities deployment beyond 2027 & study on strategic digital technologies for the EU research and innovation funding beyond 2027 : international benchmarking case studies
-  6. `link:https://doi.org/10.1016/j.nbsj.2026.100381` — Mapping the Biodiversity, Climate, and Health Nexus: an Analysis of Horizon Europe research projects
-  7. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=b26447fa-bc09-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Commission Proposal for a Regulation of the European Parliament and of the Council establishing diversification instrument to address critical strategic dependencies that expose the Union to economic security risks - Publications Office of the EU
-  8. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=692a9852-b703-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Detecting and responding to cybersecurity incidents - Publications Office of the EU
-  - … plus 16 more in the package manifest
+- Current package: `worker-a-20261004T085230Z-006341f402a8`
+- Assigned unresolved records: **33**
+  1. `historical:id:88e263ffc2effb1d` — Wellcome position paper on Horizon Europe 2028–2034 | Wellcome
+  2. `historical:id:521bbc68831c9ee4` — Gen-4 Engineering Research Centers (ERC)
+  3. `historical:id:7efe8cb5bef255ac` — Gen-4 Engineering Research Centers
+  4. `historical:id:fe5713cc7f2d20d3` — Supporting analysis of cybersecurity investments and business resilience | ENISA
+  5. `historical:id:33ed4208ee9cdb93` — Opportunities with Sweden’s EU presidency in 2023
+  6. `historical:id:8db3b3c0641afd7d` — Dual-use research debates and public health: better integration would do no harm
+  7. `historical:id:203582363dbacd0a` — Intelligence: Environmental and Horizon Scanning
+  8. `historical:id:4a8d494ca1aeaa44` — Gen-3 Engineering Research Centers (ERC)
+  - … plus 25 more in the package manifest
 
 ### Worker B
 - Current package: `worker-b-20261004T075859Z-67e25a44f2dc`
