@@ -6,40 +6,31 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2476** (Main **1160** + Historical **1316**)
-- Automatic queue still needing V2 verification: **165** (Main **76** + Historical **89**)
-- Currently assigned to workers: **112** (Main **42** + Historical **70**)
+- Authoritative V2 verified: **2478** (Main **1162** + Historical **1316**)
+- Automatic queue still needing V2 verification: **163** (Main **74** + Historical **89**)
+- Currently assigned to workers: **79** (Main **9** + Historical **70**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **29**
-- Automatic queue pending and not yet assigned: **53**
+- Automatic queue pending and not yet assigned: **84**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261004T075824Z-44d525f16342`
-- Assigned unresolved records: **36**
-  1. `link:https://doi.org/10.24425/gsm.2026.6007` — Potential of critical raw materials of Slovakia
-  2. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=fd8601ae-bbad-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Study on the EU’s strategic digital technologies for the next EU R&I programme. Annex 12, Technology area report - Publications Office of the EU
-  3. `link:https://doi.org/10.1016/j.technovation.2026.103731` — Pursuing technology sovereignty under dependency: The case of Mistral AI
-  4. `link:https://www.cesaer.org/publications/best-practices-lessons-learned-and-recommendations-for-implementing-coara-commitments/` — Report 'Best practices, lessons learned and recommendations for implementing CoARA commitments'
-  5. `link:https://doi.org/10.1002/adem.71258` — Toward Full Interoperability in Materials Science: Integrating Workflows With Knowledge Graphs
-  6. `link:https://op.europa.eu/en/publication-detail/-/publication/21575070-bbae-11f1-81de-01aa75ed71a1/language-en` — Study on strategic digital technologies for the EU research and innovation funding beyond 2027. Annex 10, Technology area report : photonics
-  7. `link:https://op.europa.eu/en/publication-detail/-/publication/f8f38add-bbae-11f1-81de-01aa75ed71a1/language-en` — Study on the EU’s critical digital capacities deployment beyond 2027 & study on strategic digital technologies for the EU research and innovation funding beyond 2027 : international benchmarking case studies
-  8. `link:https://doi.org/10.1016/j.nbsj.2026.100381` — Mapping the Biodiversity, Climate, and Health Nexus: an Analysis of Horizon Europe research projects
-  - … plus 28 more in the package manifest
+- Current package: `worker-a-20261004T081542Z-e184c2926b8c`
+- Assigned unresolved records: **24**
+  1. `link:https://doi.org/10.1016/j.technovation.2026.103731` — Pursuing technology sovereignty under dependency: The case of Mistral AI
+  2. `link:https://www.cesaer.org/publications/best-practices-lessons-learned-and-recommendations-for-implementing-coara-commitments/` — Report 'Best practices, lessons learned and recommendations for implementing CoARA commitments'
+  3. `link:https://doi.org/10.1002/adem.71258` — Toward Full Interoperability in Materials Science: Integrating Workflows With Knowledge Graphs
+  4. `link:https://op.europa.eu/en/publication-detail/-/publication/21575070-bbae-11f1-81de-01aa75ed71a1/language-en` — Study on strategic digital technologies for the EU research and innovation funding beyond 2027. Annex 10, Technology area report : photonics
+  5. `link:https://op.europa.eu/en/publication-detail/-/publication/f8f38add-bbae-11f1-81de-01aa75ed71a1/language-en` — Study on the EU’s critical digital capacities deployment beyond 2027 & study on strategic digital technologies for the EU research and innovation funding beyond 2027 : international benchmarking case studies
+  6. `link:https://doi.org/10.1016/j.nbsj.2026.100381` — Mapping the Biodiversity, Climate, and Health Nexus: an Analysis of Horizon Europe research projects
+  7. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=b26447fa-bc09-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Commission Proposal for a Regulation of the European Parliament and of the Council establishing diversification instrument to address critical strategic dependencies that expose the Union to economic security risks - Publications Office of the EU
+  8. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=692a9852-b703-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Detecting and responding to cybersecurity incidents - Publications Office of the EU
+  - … plus 16 more in the package manifest
 
 ### Worker B
 - Current package: `worker-b-20261004T075859Z-67e25a44f2dc`
-- Assigned unresolved records: **21**
-  1. `link:https://doi.org/10.1186/s40309-026-00301-y` — Do “AI-assisted” labels reduce perceived quality of scenarios? An exploratory experimental study
-  2. `link:https://doi.org/10.1038/s41598-026-52549-w` — Designing strategic scenarios for the digital transition
-  3. `link:https://doi.org/10.1016/j.ssaho.2026.103666` — Integrated governance intelligence for higher education in resource-constrained contexts: A design science study of BI-SI integration and decision support
-  4. `link:https://doi.org/10.1016/j.futures.2026.103867` — Navigating the Delphi jungle: Evaluating the Delphi method in the health and social sciences
-  5. `link:https://doi.org/10.1017/dap.2025.2` — Anticipating climate change-related mobility in Karachi and Ho Chi Minh City: lessons from a hybrid foresight approach
-  6. `link:https://doi.org/10.1002/ffo2.206` — Participation of Civil Society in Security and Defense Foresight Exercises
-  7. `link:https://doi.org/10.1093/geroni/igaf122.123` — Using the Foresight 50+ National Probability Panel of Older Adults for Rapid Recruitment for Qualitative Research
-  8. `link:https://doi.org/10.1111/jfr3.70074` — Dynamic Adaptive Policy Pathways Approach to Manage Climate and Land Use Change‐Induced Urban Flood Damages
-  - … plus 13 more in the package manifest
+- Assigned unresolved records: **0**
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`

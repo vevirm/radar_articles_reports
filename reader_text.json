@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-03T16:48:06Z",
+  "generated_at": "2026-10-04T08:11:59Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -219008,8 +219008,161 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.24425/gsm.2026.6007": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "e18495db",
+      "identity_hash": "c9c16dd3c5a9869f",
+      "reader_title": "Critical raw materials potential in Slovakia",
+      "reader_what": "The paper evaluates Slovak mineral resources and price trends, not the R&I system.",
+      "reader_more": "The paper evaluates Slovak mineral resources and price trends, not the R&I system. European relevance is substantive, but research and innovation is not the central subject.",
+      "deep_analysis": {
+        "work_kind": "research or policy study",
+        "research_question": "",
+        "main_finding": "The paper evaluates Slovak mineral resources and price trends, not the R&I system.",
+        "method_or_basis": "Secondary-data price and resource analysis.",
+        "qualification": "European relevance is substantive, but research and innovation is not the central subject.",
+        "radar_relevance": "Fails A admission because european relevance is substantive, but research and innovation is not the central subject.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://doi.org/10.24425/gsm.2026.6007; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.24425/gsm.2026.6007; title and authors matched publisher or repository metadata."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://wydawnictwo.pan.pl/index.php/gsm/article/view/6007",
+            "title": "Potential of critical raw materials of Slovakia",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance independently checked against publisher/official/repository metadata; package-supplied matching primary text was used where available."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NOT_CENTRAL_RI",
+        "reason": "European relevance is substantive, but research and innovation is not the central subject."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-04T08:11:59Z",
+      "deep_scan_package_id": "worker-a-20261004T075824Z-44d525f16342",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=fd8601ae-bbad-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "320aa571",
+      "identity_hash": "b7bd9727ac9c6dce",
+      "reader_title": "Robotics priorities for the next EU R&I programme",
+      "reader_what": "The study benchmarks EU robotics strengths, weaknesses, trends and investment needs.",
+      "reader_why": "It directly informs future EU robotics R&I investment priorities.",
+      "reader_more": "The study benchmarks EU robotics strengths, weaknesses, trends and investment needs. It directly informs future EU robotics R&I investment priorities.",
+      "deep_analysis": {
+        "work_kind": "official/policy evidence product",
+        "research_question": "",
+        "main_finding": "The study benchmarks EU robotics strengths, weaknesses, trends and investment needs.",
+        "method_or_basis": "Desk research, stakeholder consultation and technology-area benchmarking.",
+        "qualification": "The report informs investment priorities; it does not itself allocate funding.",
+        "radar_relevance": "It directly informs future EU robotics R&I investment priorities.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied route https://op.europa.eu/o/opportal-service/download-handler?identifier=fd8601ae-bbad-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=; identity matched the claimed work."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_text",
+            "url": "https://op.europa.eu/o/opportal-service/download-handler?identifier=fd8601ae-bbad-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+            "title": "Study on the EU’s strategic digital technologies for the next EU R&I programme. Annex 12, Technology area report - Publications Office of the EU",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance independently checked against publisher/official/repository metadata; package-supplied matching primary text was used where available."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "It directly informs future EU robotics R&I investment priorities."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-04T08:11:59Z",
+      "deep_scan_package_id": "worker-a-20261004T075824Z-44d525f16342",
+      "claims": [
+        {
+          "object": "research.system_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-09-29",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The report informs investment priorities; it does not itself allocate funding.",
+          "text": "The study benchmarks EU robotics strengths, weaknesses, trends and investment needs.",
+          "confidence": "high",
+          "record_key": "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=fd8601ae-bbad-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:b7bd9727ac9c6dce:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-03T16:48:06Z"
+  "claims_updated_at": "2026-10-04T08:11:59Z"
 }
