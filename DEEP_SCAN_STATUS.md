@@ -6,27 +6,27 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2481** (Main **1165** + Historical **1316**)
-- Automatic queue still needing V2 verification: **169** (Main **71** + Historical **98**)
-- Currently assigned to workers: **88** (Main **9** + Historical **79**)
+- Authoritative V2 verified: **2606** (Main **1236** + Historical **1370**)
+- Automatic queue still needing V2 verification: **44** (Main **0** + Historical **44**)
+- Currently assigned to workers: **44** (Main **0** + Historical **44**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **29**
-- Automatic queue pending and not yet assigned: **81**
+- Automatic queue pending and not yet assigned: **0**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261004T085230Z-006341f402a8`
-- Assigned unresolved records: **33**
+- Current package: `worker-a-20261004T100027Z-ea201bb978d8`
+- Assigned unresolved records: **9**
   1. `historical:id:88e263ffc2effb1d` — Wellcome position paper on Horizon Europe 2028–2034 | Wellcome
   2. `historical:id:521bbc68831c9ee4` — Gen-4 Engineering Research Centers (ERC)
   3. `historical:id:7efe8cb5bef255ac` — Gen-4 Engineering Research Centers
   4. `historical:id:fe5713cc7f2d20d3` — Supporting analysis of cybersecurity investments and business resilience | ENISA
   5. `historical:id:33ed4208ee9cdb93` — Opportunities with Sweden’s EU presidency in 2023
   6. `historical:id:8db3b3c0641afd7d` — Dual-use research debates and public health: better integration would do no harm
-  7. `historical:id:203582363dbacd0a` — Intelligence: Environmental and Horizon Scanning
-  8. `historical:id:4a8d494ca1aeaa44` — Gen-3 Engineering Research Centers (ERC)
-  - … plus 25 more in the package manifest
+  7. `historical:id:28d6d5ebc62cd05b` — Assessing the desirability and feasibility of scenarios on eco-efficient transport: a heuristic for efficient stakeholder involvement during foresight processes
+  8. `historical:id:203582363dbacd0a` — Intelligence: Environmental and Horizon Scanning
+  - … plus 1 more in the package manifest
 
 ### Worker B
 - Current package: `worker-b-20261004T075859Z-67e25a44f2dc`
@@ -34,16 +34,16 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
-- Assigned unresolved records: **55**
-  1. `historical:id:1649bc6c3124c171` — Research and innovation funding for resilient democracies and good governance
-  2. `historical:id:40d3e71d328ba77b` — Quantum and Space: The ultimate solution to secured communications? - ESPI
-  3. `historical:id:005df4d6b2d5d49a` — KIC Robust and resilient space infrastructure for a secure Netherlands | NWO
-  4. `historical:id:902dfd64b15e4d09` — Global EEE supply chain disruptions and implications for the space sector - ESPI
-  5. `historical:id:15773a1a1bfd9ac7` — ERA Portal Austria – Industrial Transformation
-  6. `historical:id:c3fe28c3a44d47bd` — ERA Portal Austria – Conclusions on the future governance of the European Research Area
-  7. `historical:id:778893bb17351e70` — Digital Rights, Surveillance and Democracy
-  8. `historical:id:2cc4d437897e34ea` — Denmark's 2026 Digital Decade Country Report | Shaping Europe’s digital future
-  - … plus 47 more in the package manifest
+- Assigned unresolved records: **35**
+  1. `historical:id:40d3e71d328ba77b` — Quantum and Space: The ultimate solution to secured communications? - ESPI
+  2. `historical:id:902dfd64b15e4d09` — Global EEE supply chain disruptions and implications for the space sector - ESPI
+  3. `historical:id:2cc4d437897e34ea` — Denmark's 2026 Digital Decade Country Report | Shaping Europe’s digital future
+  4. `historical:id:8bf73311aa6aac73` — Advancing research careers across Europe
+  5. `historical:id:9290b6d4356e1d50` — A Policy Vision for Earth Observation: Food, Water, Energy, Democracy, Peace Empowered Through Space - ESPI
+  6. `historical:id:4c6f272106a28f77` — Pursuing practicality and autonomy in the Indo-Pacific: the case of ROK-India Special Strategic Partnership
+  7. `historical:id:a35d7c6799d456f2` — Europe’s Race to the Frontier: Building a Growth Model of De-Risked Innovation
+  8. `historical:id:e3582bdae1a29de6` — Defense and Digital Resilience
+  - … plus 27 more in the package manifest
 
 ## Hands-on verification needed
 
