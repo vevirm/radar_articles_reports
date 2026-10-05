@@ -1,0 +1,1259 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-b-20261005T075900Z-001f0cf188ca",
+  "results": [
+    {
+      "record_key": "historical:id:02003b3207002949",
+      "source_hash": "a0d89431",
+      "identity_hash": "43ad7e4b4559ee2b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied work/page: https://www.institutmontaigne.org/en/expressions/franco-german-china-policy-road-less-traveled; identity and substantive content were assessed against the claimed record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title/identity recovery found https://www.institutmontaigne.org/en/expressions/franco-german-china-policy-road-less-traveled, matching the claimed title and provenance."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered authoritative or legitimate publisher/repository source: https://www.institutmontaigne.org/en/expressions/franco-german-china-policy-road-less-traveled."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_source",
+            "url": "https://www.institutmontaigne.org/en/expressions/franco-german-china-policy-road-less-traveled",
+            "title": "A Franco-German China Policy: The Road Less Traveled",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance were checked against the supplied primary material and an independent publisher/repository recovery route. The admission decision reflects the actual work rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The analysis compares French and German China policy and explicitly discusses European coordination, technology competition, data protection and dependence on foreign digital technology."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2019-04-12"
+        },
+        "unset": [],
+        "reason": "Institut Montaigne dates the discussion to 12 April 2019."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "A Franco-German China Policy: The Road Less Traveled",
+      "reader_what": "The discussion identifies growing Franco-German convergence toward a more European China policy, including technology and digital-security concerns.",
+      "reader_why": "It records how technology dependence and digital-security concerns were entering coordinated European China policy.",
+      "reader_more": "The discussion identifies growing Franco-German convergence toward a more European China policy, including technology and digital-security concerns. The piece predates later coalition and EU policy changes and is analytical rather than an outcome evaluation. This is relevant to the Radar because the analysis compares French and German China policy and explicitly discusses European coordination, technology competition, data protection and dependence on foreign digital technology.",
+      "deep_analysis": {
+        "work_kind": "geopolitical policy analysis",
+        "research_question": "",
+        "main_finding": "The discussion identifies growing Franco-German convergence toward a more European China policy, including technology and digital-security concerns.",
+        "method_or_basis": "Substantive Institut Montaigne/MERICS expert discussion grounded in the two countries’ policy positions.",
+        "qualification": "The piece predates later coalition and EU policy changes and is analytical rather than an outcome evaluation.",
+        "radar_relevance": "The analysis compares French and German China policy and explicitly discusses European coordination, technology competition, data protection and dependence on foreign digital technology.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "France and Germany",
+            "class": "member_state"
+          },
+          "mechanism": "coordinates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2019-04-12",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "FR",
+              "DE"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "The piece predates later coalition and EU policy changes and is analytical rather than an outcome evaluation.",
+          "text": "The discussion identifies growing Franco-German convergence toward a more European China policy, including technology and digital-security concerns.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:e8f7087392fbb137",
+      "source_hash": "8f37ae83",
+      "identity_hash": "e3d755d0939b0258",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied work/page: https://www.vr.se/download/18.56d49a6016b104df37f9b4/1561370122052/Swedish+Research+Council+position+Interim+evaluation+of+Horizon+2020+and+the+next+framework+programme.pdf; identity and substantive content were assessed against the claimed record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_source",
+            "url": "https://www.vr.se/download/18.56d49a6016b104df37f9b4/1561370122052/Swedish+Research+Council+position+Interim+evaluation+of+Horizon+2020+and+the+next+framework+programme.pdf",
+            "title": "Recommendations from the Swedish Research Council for Horizon 2020 and the next framwork programme",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance were checked against the supplied primary material. The admission decision reflects the actual work rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The Swedish Research Council paper gives substantive recommendations on Horizon 2020 and the design of the next EU research framework programme."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Recommendations from the Swedish Research Council for Horizon 2020 and the next framwork programme",
+      "reader_what": "The Swedish Research Council recommended changes to EU framework-programme design based on its experience with Horizon 2020.",
+      "reader_why": "It captures a national funder’s evidence and priorities for the post-Horizon-2020 research framework.",
+      "reader_more": "The Swedish Research Council recommended changes to EU framework-programme design based on its experience with Horizon 2020. The recommendations are advocacy and do not establish subsequent EU adoption or effects. This is relevant to the Radar because the Swedish Research Council paper gives substantive recommendations on Horizon 2020 and the design of the next EU research framework programme.",
+      "deep_analysis": {
+        "work_kind": "policy recommendations",
+        "research_question": "",
+        "main_finding": "The Swedish Research Council recommended changes to EU framework-programme design based on its experience with Horizon 2020.",
+        "method_or_basis": "Official Swedish Research Council position paper.",
+        "qualification": "The recommendations are advocacy and do not establish subsequent EU adoption or effects.",
+        "radar_relevance": "The Swedish Research Council paper gives substantive recommendations on Horizon 2020 and the design of the next EU research framework programme.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Swedish Research Council",
+            "class": "national_funder"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2017-01-13",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "The recommendations are advocacy and do not establish subsequent EU adoption or effects.",
+          "text": "The Swedish Research Council recommended changes to EU framework-programme design based on its experience with Horizon 2020.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:61deaf307b884e50",
+      "source_hash": "c6487fb4",
+      "identity_hash": "0e5832baf61aacf1",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied work/page: https://cds.cern.ch/record/2256342; identity and substantive content were assessed against the claimed record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title/identity recovery found https://cds.cern.ch/record/1746337/files/Knowledge-Transfer-2015.pdf, matching the claimed title and provenance."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered authoritative or legitimate publisher/repository source: https://cds.cern.ch/record/1746337/files/Knowledge-Transfer-2015.pdf."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_source",
+            "url": "https://cds.cern.ch/record/2256342",
+            "title": "Knowledge Transfer 2015",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_full_document",
+            "url": "https://cds.cern.ch/record/1746337/files/Knowledge-Transfer-2015.pdf",
+            "title": "Knowledge Transfer 2015",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance were checked against the supplied primary material and an independent publisher/repository recovery route. The admission decision reflects the actual work rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "CERN’s annual Knowledge Transfer report provides substantive evidence on technology transfer, industry collaboration, IP tools, open science and support for applications."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2016",
+          "source": "CERN"
+        },
+        "unset": [],
+        "reason": "The recovered CERN annual report covers 2015 activities and was issued in the 2016 transition period."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Knowledge Transfer 2015",
+      "reader_what": "CERN reported a broad knowledge-transfer portfolio spanning industry collaboration, licensing, open technologies, business development and medical applications.",
+      "reader_why": "It documents how a major European research infrastructure organised technology transfer and industry engagement.",
+      "reader_more": "CERN reported a broad knowledge-transfer portfolio spanning industry collaboration, licensing, open technologies, business development and medical applications. The report is CERN’s own activity account and should not be read as independent proof of downstream economic impact. This is relevant to the Radar because cERN’s annual Knowledge Transfer report provides substantive evidence on technology transfer, industry collaboration, IP tools, open science and support for applications.",
+      "deep_analysis": {
+        "work_kind": "annual activity report",
+        "research_question": "",
+        "main_finding": "CERN reported a broad knowledge-transfer portfolio spanning industry collaboration, licensing, open technologies, business development and medical applications.",
+        "method_or_basis": "Recovered CERN full annual report PDF.",
+        "qualification": "The report is CERN’s own activity account and should not be read as independent proof of downstream economic impact.",
+        "radar_relevance": "CERN’s annual Knowledge Transfer report provides substantive evidence on technology transfer, industry collaboration, IP tools, open science and support for applications.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.knowledge_transfer",
+          "secondary_objects": [],
+          "actor": {
+            "name": "CERN",
+            "class": "other"
+          },
+          "mechanism": "transfers",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2016",
+          "scope": {
+            "level": "associated_country",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The report is CERN’s own activity account and should not be read as independent proof of downstream economic impact.",
+          "text": "CERN reported a broad knowledge-transfer portfolio spanning industry collaboration, licensing, open technologies, business development and medical applications.",
+          "confidence": "high",
+          "status_date_precision": "year"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:cfd5ae4e33f6a521",
+      "source_hash": "fc6fe0b5",
+      "identity_hash": "ad108f12254be629",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied work/page: https://www.enisa.europa.eu/sites/default/files/publications/Foresight_booklet.pdf; identity and substantive content were assessed against the claimed record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_source",
+            "url": "https://www.enisa.europa.eu/sites/default/files/publications/Foresight_booklet.pdf",
+            "title": "Foresight 2030 Threats | ENISA",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance were checked against the supplied primary material. The admission decision reflects the actual work rather than scanner prose."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "The ENISA foresight booklet applies foresight to identify future cyber threats but does not demonstrate a new or materially improved reusable method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "The ENISA foresight booklet applies foresight to identify future cyber threats but does not demonstrate a new or materially improved reusable method.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:b5f939bb363fae8f",
+      "source_hash": "5a61deab",
+      "identity_hash": "55404d1badb3b7a4",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied work/page: https://www.espi.eu/wp-content/uploads/2024/01/Future-of-European-Space-Exploration_final-version.pdf; identity and substantive content were assessed against the claimed record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title/identity recovery found https://www.espi.eu/news/future-of-space-exploration-strategic-scenarios-for-european-space-exploration-2040-2060/, matching the claimed title and provenance."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered authoritative or legitimate publisher/repository source: https://www.espi.eu/news/future-of-space-exploration-strategic-scenarios-for-european-space-exploration-2040-2060/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_source",
+            "url": "https://www.espi.eu/wp-content/uploads/2024/01/Future-of-European-Space-Exploration_final-version.pdf",
+            "title": "Future of Space Exploration: Strategic Scenarios for European Space Exploration 2040-2060 - ESPI",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publisher",
+            "url": "https://www.espi.eu/news/future-of-space-exploration-strategic-scenarios-for-european-space-exploration-2040-2060/",
+            "title": "Future of Space Exploration: Strategic Scenarios for European Space Exploration 2040-2060",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance were checked against the supplied primary material and an independent publisher/repository recovery route. The admission decision reflects the actual work rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The ESPI/CIFS report provides substantive European strategic foresight on space exploration, using scenarios to support long-term capability and policy decisions."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Future of Space Exploration: Strategic Scenarios for European Space Exploration 2040-2060 - ESPI",
+      "reader_what": "The report develops four scenarios for European space exploration in 2040–2060 around critical uncertainties and forces of change.",
+      "reader_why": "It provides structured long-horizon context for European space capability choices.",
+      "reader_more": "The report develops four scenarios for European space exploration in 2040–2060 around critical uncertainties and forces of change. The scenarios are exploratory and are not predictions of which future will occur. This is relevant to the Radar because the ESPI/CIFS report provides substantive European strategic foresight on space exploration, using scenarios to support long-term capability and policy decisions.",
+      "deep_analysis": {
+        "work_kind": "strategic foresight report",
+        "research_question": "",
+        "main_finding": "The report develops four scenarios for European space exploration in 2040–2060 around critical uncertainties and forces of change.",
+        "method_or_basis": "Full ESPI report and official publication page.",
+        "qualification": "The scenarios are exploratory and are not predictions of which future will occur.",
+        "radar_relevance": "The ESPI/CIFS report provides substantive European strategic foresight on space exploration, using scenarios to support long-term capability and policy decisions.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "goal.strategic_autonomy",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Space Policy Institute",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2023-11-29",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The scenarios are exploratory and are not predictions of which future will occur.",
+          "text": "The report develops four scenarios for European space exploration in 2040–2060 around critical uncertainties and forces of change.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:7cd5bf0ed1eee954",
+      "source_hash": "0c3cd427",
+      "identity_hash": "455814dc9b6ad565",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "No usable reader-facing URL content was supplied in the package."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title/identity recovery found https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3578317, matching the claimed title and provenance."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered authoritative or legitimate publisher/repository source: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3578317."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched title with source/year metadata (Long Range Planning, 2015-12-01); results matched the claimed work."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "A broader bounded identity search using title/DOI/source terms corroborated the same work; no conflicting identity was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "author_repository",
+            "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3578317",
+            "title": "A Hybrid Scenario Planning Methodology for Interactive Digital Media",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance were checked against the supplied primary material and an independent publisher/repository recovery route. The admission decision reflects the actual work rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The article explicitly proposes a hybrid scenario-planning methodology combining qualitative scenario work, automated event capture and quantitative pattern analysis."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "A Hybrid Scenario Planning Methodology for Interactive Digital Media",
+      "reader_what": "The authors propose a hybrid, scalable scenario method for fast-moving industries using event capture, multidimensional scaling and expert scenario construction.",
+      "reader_why": "The hybrid design combines automated scanning, quantitative structure and expert narrative construction.",
+      "reader_more": "The authors propose a hybrid, scalable scenario method for fast-moving industries using event capture, multidimensional scaling and expert scenario construction. The method was demonstrated in interactive digital media; transfer to other domains requires adaptation and validation. This is relevant to the Radar because the article explicitly proposes a hybrid scenario-planning methodology combining qualitative scenario work, automated event capture and quantitative pattern analysis.",
+      "deep_analysis": {
+        "work_kind": "methods paper",
+        "research_question": "",
+        "main_finding": "The authors propose a hybrid, scalable scenario method for fast-moving industries using event capture, multidimensional scaling and expert scenario construction.",
+        "method_or_basis": "Publisher article plus author-posted bibliographic/abstract record.",
+        "qualification": "The method was demonstrated in interactive digital media; transfer to other domains requires adaptation and validation.",
+        "radar_relevance": "The article explicitly proposes a hybrid scenario-planning methodology combining qualitative scenario work, automated event capture and quantitative pattern analysis.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.scenario",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Ravi S. Sharma and Yi Yang",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2015-12-01",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The method was demonstrated in interactive digital media; transfer to other domains requires adaptation and validation.",
+          "text": "The authors propose a hybrid, scalable scenario method for fast-moving industries using event capture, multidimensional scaling and expert scenario construction.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:0ce87ce447d6c00d",
+      "source_hash": "acf2a7cc",
+      "identity_hash": "207c15398187e802",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "No usable reader-facing URL content was supplied in the package."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title/identity recovery found https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2338083, matching the claimed title and provenance."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered authoritative or legitimate publisher/repository source: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2338083."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched title with source/year metadata (Technological Forecasting and Social Change, 2015-06-13); results matched the claimed work."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "A broader bounded identity search using title/DOI/source terms corroborated the same work; no conflicting identity was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "author_repository",
+            "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2338083",
+            "title": "The Integrated Approach for Foresight Evaluation: The Russian Case",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance were checked against the supplied primary material and an independent publisher/repository recovery route. The admission decision reflects the actual work rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The paper explicitly develops an integrated evaluation framework for national foresight, including project classification and evaluation criteria."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2015-12"
+        },
+        "unset": [],
+        "reason": "Publisher metadata places the journal article in December 2015."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "An integrated approach for the evaluation of national Foresight: The Russian case",
+      "reader_what": "The study proposes an integrated ex-post framework for evaluating national foresight design, outputs, impact and implementation.",
+      "reader_why": "It supplies a reusable evaluation structure rather than merely applying an existing indicator.",
+      "reader_more": "The study proposes an integrated ex-post framework for evaluating national foresight design, outputs, impact and implementation. The framework was tested on Russian National Foresight 2030 and may need adaptation in other institutional settings. This is relevant to the Radar because the paper explicitly develops an integrated evaluation framework for national foresight, including project classification and evaluation criteria.",
+      "deep_analysis": {
+        "work_kind": "methods paper",
+        "research_question": "",
+        "main_finding": "The study proposes an integrated ex-post framework for evaluating national foresight design, outputs, impact and implementation.",
+        "method_or_basis": "Publisher article plus open HSE working-paper version recovered through SSRN/IDEAS.",
+        "qualification": "The framework was tested on Russian National Foresight 2030 and may need adaptation in other institutional settings.",
+        "radar_relevance": "The paper explicitly develops an integrated evaluation framework for national foresight, including project classification and evaluation criteria.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.evaluation",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Anna Sokolova",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2015-12",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The framework was tested on Russian National Foresight 2030 and may need adaptation in other institutional settings.",
+          "text": "The study proposes an integrated ex-post framework for evaluating national foresight design, outputs, impact and implementation.",
+          "confidence": "high",
+          "status_date_precision": "month",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:521bbc68831c9ee4",
+      "source_hash": "cfc19c79",
+      "identity_hash": "a347434344144c68",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied work/page: https://www.nsf.gov/funding/opportunities/erc-gen-4-engineering-research-centers/505599/nsf24-576; identity and substantive content were assessed against the claimed record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_source",
+            "url": "https://www.nsf.gov/funding/opportunities/erc-gen-4-engineering-research-centers/505599/nsf24-576",
+            "title": "Gen-4 Engineering Research Centers (ERC)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance were checked against the supplied primary material. The admission decision reflects the actual work rather than scanner prose."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "The NSF Engineering Research Centers solicitation is a US programme and has no substantive European R&I scope."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "The NSF Engineering Research Centers solicitation is a US programme and has no substantive European R&I scope.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:7efe8cb5bef255ac",
+      "source_hash": "55c409a0",
+      "identity_hash": "7cf585f1c2af2736",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied work/page: https://www.nsf.gov/funding/opportunities/erc-gen-4-engineering-research-centers/505599/nsf24-576/solicitation; identity and substantive content were assessed against the claimed record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_source",
+            "url": "https://www.nsf.gov/funding/opportunities/erc-gen-4-engineering-research-centers/505599/nsf24-576/solicitation",
+            "title": "Gen-4 Engineering Research Centers",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance were checked against the supplied primary material. The admission decision reflects the actual work rather than scanner prose."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "The NSF Engineering Research Centers solicitation is a US programme and has no substantive European R&I scope."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "The NSF Engineering Research Centers solicitation is a US programme and has no substantive European R&I scope.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:fe5713cc7f2d20d3",
+      "source_hash": "0f55b8f5",
+      "identity_hash": "26a817f9946c3561",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied work/page: https://www.enisa.europa.eu/procurement/supporting-analysis-of-cybersecurity-investments-and-business-resilience; identity and substantive content were assessed against the claimed record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_source",
+            "url": "https://www.enisa.europa.eu/procurement/supporting-analysis-of-cybersecurity-investments-and-business-resilience",
+            "title": "Supporting analysis of cybersecurity investments and business resilience | ENISA",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance were checked against the supplied primary material. The admission decision reflects the actual work rather than scanner prose."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "This is a procurement call for analytical support, not a completed evidence product and not itself a substantive R&I finding."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "This is a procurement call for analytical support, not a completed evidence product and not itself a substantive R&I finding.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:33ed4208ee9cdb93",
+      "source_hash": "f0e37179",
+      "identity_hash": "eb3178be0b4fb8ff",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied work/page: https://www.iva.se/contentassets/037952b6611b4ebaafd847d24d5ae824/202212-iva-eu-rapport-english.pdf; identity and substantive content were assessed against the claimed record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title/identity recovery found https://www.iva.se/en/published/report-opportunities-with-swedens-eu-presidency-in-2023/, matching the claimed title and provenance."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered authoritative or legitimate publisher/repository source: https://www.iva.se/en/published/report-opportunities-with-swedens-eu-presidency-in-2023/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_source",
+            "url": "https://www.iva.se/contentassets/037952b6611b4ebaafd847d24d5ae824/202212-iva-eu-rapport-english.pdf",
+            "title": "Opportunities with Sweden’s EU presidency in 2023",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publisher",
+            "url": "https://www.iva.se/en/published/report-opportunities-with-swedens-eu-presidency-in-2023/",
+            "title": "Opportunities with Sweden’s EU presidency in 2023",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance were checked against the supplied primary material and an independent publisher/repository recovery route. The admission decision reflects the actual work rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The IVA report gives substantive recommendations for Sweden’s 2023 EU presidency, including R&D investment, collaboration, strategic autonomy and supply security."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2022-11-21"
+        },
+        "unset": [],
+        "reason": "IVA published the report on 21 November 2022."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Opportunities with Sweden’s EU presidency in 2023",
+      "reader_what": "IVA recommended that Sweden use its EU presidency to promote higher R&D investment, collaboration and a more strategic European competitiveness.",
+      "reader_why": "It shows how research investment and collaboration were framed as EU-presidency competitiveness priorities.",
+      "reader_more": "IVA recommended that Sweden use its EU presidency to promote higher R&D investment, collaboration and a more strategic European competitiveness agenda. The recommendations are advocacy prepared before the presidency; they are not an evaluation of what was ultimately delivered. This is relevant to the Radar because the IVA report gives substantive recommendations for Sweden’s 2023 EU presidency, including R&D investment, collaboration, strategic autonomy and supply security.",
+      "deep_analysis": {
+        "work_kind": "policy report",
+        "research_question": "",
+        "main_finding": "IVA recommended that Sweden use its EU presidency to promote higher R&D investment, collaboration and a more strategic European competitiveness agenda.",
+        "method_or_basis": "Full IVA report and official publication page.",
+        "qualification": "The recommendations are advocacy prepared before the presidency; they are not an evaluation of what was ultimately delivered.",
+        "radar_relevance": "The IVA report gives substantive recommendations for Sweden’s 2023 EU presidency, including R&D investment, collaboration, strategic autonomy and supply security.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.public_support",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Royal Swedish Academy of Engineering Sciences",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2022-11-21",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "SE"
+            ]
+          },
+          "kind": "advocacy",
+          "qualification": "The recommendations are advocacy prepared before the presidency; they are not an evaluation of what was ultimately delivered.",
+          "text": "IVA recommended that Sweden use its EU presidency to promote higher R&D investment, collaboration and a more strategic European competitiveness agenda.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:8db3b3c0641afd7d",
+      "source_hash": "5a0a34d8",
+      "identity_hash": "f516246531a9b50f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied work/page: https://www.ecdc.europa.eu/en/news-events/dual-use-research-debates-and-public-health-better-integration-would-do-no-harm; identity and substantive content were assessed against the claimed record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title/identity recovery found https://www.frontiersin.org/journals/public-health/articles/10.3389/fpubh.2014.00114/full, matching the claimed title and provenance."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered authoritative or legitimate publisher/repository source: https://www.frontiersin.org/journals/public-health/articles/10.3389/fpubh.2014.00114/full."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_source",
+            "url": "https://www.ecdc.europa.eu/en/news-events/dual-use-research-debates-and-public-health-better-integration-would-do-no-harm",
+            "title": "Dual-use research debates and public health: better integration would do no harm",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.frontiersin.org/journals/public-health/articles/10.3389/fpubh.2014.00114/full",
+            "title": "Dual-Use Research Debates and Public Health: Better Integration Would Do No Harm",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance were checked against the supplied primary material and an independent publisher/repository recovery route. The admission decision reflects the actual work rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The peer-reviewed ECDC-authored article directly addresses governance of dual-use life-science research and the role of public health in research-risk decisions."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2014-09-12",
+          "source": "Frontiers in Public Health",
+          "type": "opinion article"
+        },
+        "unset": [],
+        "reason": "The peer-reviewed article was published in Frontiers in Public Health on 12 September 2014; the ECDC page is a later pointer."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Dual-use research debates and public health: better integration would do no harm",
+      "reader_what": "The authors argue public-health expertise should be integrated throughout governance of dual-use life-science research.",
+      "reader_why": "It identifies public-health participation as a governance mechanism for managing dual-use research risks.",
+      "reader_more": "The authors argue public-health expertise should be integrated throughout governance of dual-use life-science research. The article is an expert policy argument rather than empirical proof that the proposed governance model reduces risk. This is relevant to the Radar because the peer-reviewed ECDC-authored article directly addresses governance of dual-use life-science research and the role of public health in research-risk decisions.",
+      "deep_analysis": {
+        "work_kind": "policy opinion article",
+        "research_question": "",
+        "main_finding": "The authors argue public-health expertise should be integrated throughout governance of dual-use life-science research.",
+        "method_or_basis": "Peer-reviewed full article in Frontiers in Public Health, recovered directly and via PMC.",
+        "qualification": "The article is an expert policy argument rather than empirical proof that the proposed governance model reduces risk.",
+        "radar_relevance": "The peer-reviewed ECDC-authored article directly addresses governance of dual-use life-science research and the role of public health in research-risk decisions.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "innovation.dual_use",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Centre for Disease Prevention and Control authors",
+            "class": "eu_body"
+          },
+          "mechanism": "advocates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2014-09-12",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "The article is an expert policy argument rather than empirical proof that the proposed governance model reduces risk.",
+          "text": "The authors argue public-health expertise should be integrated throughout governance of dual-use life-science research.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:28d6d5ebc62cd05b",
+      "source_hash": "2951208a",
+      "identity_hash": "6ff8923dce0af384",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "No usable reader-facing URL content was supplied in the package."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title/identity recovery found https://publikationen.bibliothek.kit.edu/1000054390, matching the claimed title and provenance."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered authoritative or legitimate publisher/repository source: https://publikationen.bibliothek.kit.edu/1000054390."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched title with source/year metadata (Foresight, 2016-03-14); results matched the claimed work."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "A broader bounded identity search using title/DOI/source terms corroborated the same work; no conflicting identity was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "institutional_repository",
+            "url": "https://publikationen.bibliothek.kit.edu/1000054390",
+            "title": "Assessing the desirability and feasibility of scenarios on eco-efficient transport",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance were checked against the supplied primary material and an independent publisher/repository recovery route. The admission decision reflects the actual work rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The paper develops a reusable stakeholder-assessment heuristic that separates desirability from feasibility when evaluating scenarios."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Assessing the desirability and feasibility of scenarios on eco-efficient transport: a heuristic for efficient stakeholder involvement during foresight",
+      "reader_what": "The method uses scenario assumptions, survey assessment and stakeholder workshops to distinguish desirable from feasible futures.",
+      "reader_why": "Separating desirability from feasibility makes stakeholder debate over scenarios more structured and transparent.",
+      "reader_more": "The method uses scenario assumptions, survey assessment and stakeholder workshops to distinguish desirable from feasible futures. The method was developed in an eco-efficient transport case and should be validated when transferred to other foresight settings. This is relevant to the Radar because the paper develops a reusable stakeholder-assessment heuristic that separates desirability from feasibility when evaluating scenarios.",
+      "deep_analysis": {
+        "work_kind": "methods paper",
+        "research_question": "",
+        "main_finding": "The method uses scenario assumptions, survey assessment and stakeholder workshops to distinguish desirable from feasible futures.",
+        "method_or_basis": "Publisher article, KIT repository record and project documentation.",
+        "qualification": "The method was developed in an eco-efficient transport case and should be validated when transferred to other foresight settings.",
+        "radar_relevance": "The paper develops a reusable stakeholder-assessment heuristic that separates desirability from feasibility when evaluating scenarios.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.scenario",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Jens Schippl",
+            "class": "other"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2016-03-14",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The method was developed in an eco-efficient transport case and should be validated when transferred to other foresight settings.",
+          "text": "The method uses scenario assumptions, survey assessment and stakeholder workshops to distinguish desirable from feasible futures.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:203582363dbacd0a",
+      "source_hash": "4fba9800",
+      "identity_hash": "8639aa221155a4ac",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied work/page: https://link.springer.com/chapter/10.1007/978-3-319-32574-3_5; identity and substantive content were assessed against the claimed record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title/identity recovery found https://link.springer.com/book/10.1007/978-3-319-32574-3, matching the claimed title and provenance."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered authoritative or legitimate publisher/repository source: https://link.springer.com/book/10.1007/978-3-319-32574-3."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_source",
+            "url": "https://link.springer.com/chapter/10.1007/978-3-319-32574-3_5",
+            "title": "Intelligence: Environmental and Horizon Scanning",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_record",
+            "url": "https://link.springer.com/book/10.1007/978-3-319-32574-3",
+            "title": "Foresight for Science, Technology and Innovation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance were checked against the supplied primary material and an independent publisher/repository recovery route. The admission decision reflects the actual work rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The book chapter provides a reusable environmental and horizon-scanning method within a broader foresight-for-STI framework."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2016-08",
+          "authors": "Ian Miles; Ozcan Saritas; Alexander Sokolov",
+          "source": "Springer"
+        },
+        "unset": [],
+        "reason": "Springer book metadata identifies the chapter authors and 2016 publication."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Intelligence: Environmental and Horizon Scanning",
+      "reader_what": "The chapter structures the intelligence phase of foresight around scanning STEEPV systems, uncertainties, actors and emerging characteristics.",
+      "reader_why": "Its structured scanning phase is intended to produce a shared evidence base for later foresight stages.",
+      "reader_more": "The chapter structures the intelligence phase of foresight around scanning STEEPV systems, uncertainties, actors and emerging characteristics. It is a methodological framework chapter rather than a comparative validation across multiple foresight exercises. This is relevant to the Radar because the book chapter provides a reusable environmental and horizon-scanning method within a broader foresight-for-STI framework.",
+      "deep_analysis": {
+        "work_kind": "methods chapter",
+        "research_question": "",
+        "main_finding": "The chapter structures the intelligence phase of foresight around scanning STEEPV systems, uncertainties, actors and emerging characteristics.",
+        "method_or_basis": "Substantive Springer book-chapter text supplied in the package and verified against the book record.",
+        "qualification": "It is a methodological framework chapter rather than a comparative validation across multiple foresight exercises.",
+        "radar_relevance": "The book chapter provides a reusable environmental and horizon-scanning method within a broader foresight-for-STI framework.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.horizon_scanning",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Ian Miles, Ozcan Saritas and Alexander Sokolov",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2016",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "It is a methodological framework chapter rather than a comparative validation across multiple foresight exercises.",
+          "text": "The chapter structures the intelligence phase of foresight around scanning STEEPV systems, uncertainties, actors and emerging characteristics.",
+          "confidence": "high",
+          "status_date_precision": "year",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:4a8d494ca1aeaa44",
+      "source_hash": "c76f2eca",
+      "identity_hash": "99d6145757e8935a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied work/page: https://www.nsf.gov/funding/opportunities/erc-engineering-research-centers/5502/nsf15-589/solicitation; identity and substantive content were assessed against the claimed record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_source",
+            "url": "https://www.nsf.gov/funding/opportunities/erc-engineering-research-centers/5502/nsf15-589/solicitation",
+            "title": "Gen-3 Engineering Research Centers (ERC)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance were checked against the supplied primary material. The admission decision reflects the actual work rather than scanner prose."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "The NSF Engineering Research Centers solicitation is a US programme and has no substantive European R&I scope."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "The NSF Engineering Research Centers solicitation is a US programme and has no substantive European R&I scope.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    }
+  ]
+}
