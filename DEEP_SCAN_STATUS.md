@@ -6,40 +6,31 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2615** (Main **1242** + Historical **1373**)
-- Automatic queue still needing V2 verification: **99** (Main **0** + Historical **99**)
-- Currently assigned to workers: **90** (Main **0** + Historical **90**)
+- Authoritative V2 verified: **2629** (Main **1242** + Historical **1387**)
+- Automatic queue still needing V2 verification: **85** (Main **0** + Historical **85**)
+- Currently assigned to workers: **44** (Main **0** + Historical **44**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **29**
-- Automatic queue pending and not yet assigned: **9**
+- Automatic queue pending and not yet assigned: **41**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261005T093429Z-d275e359cac3`
-- Assigned unresolved records: **36**
-  1. `historical:id:53a5c41fc874984c` — AI adoption, productivity and employment: evidence from European firms | Bank for International Settlements
-  2. `historical:id:a0d3aec44cdb9e3c` — Implementation dialogue on the Chips Act with Executive Vice-President Henna Virkkunen
-  3. `historical:id:36c2a6e773a261ac` — From analysis to action - AI in financial markets | Bank for International Settlements
-  4. `historical:id:15fcdd32dcb8df56` — Data Union in a nutshell | Shaping Europe’s digital future
-  5. `historical:id:e9adf7de4ec87403` — Horizon Europe Roadshow - Christchurch
-  6. `historical:id:e5b4bf7f44b8dd42` — ALLEA Responds to High-Level Group’s Report on Framework Programme 10 - ALLEA
-  7. `historical:id:4e54f0d346a71500` — Horizon Europe Roadshow - Auckland
-  8. `historical:id:97048a0eb1dd0233` — Framework Programme 10: ALLEA Advocates for Widening Scientific Cooperation and Freedom of Research - ALLEA
-  - … plus 28 more in the package manifest
+- Current package: `worker-a-20261005T095515Z-7fb8937875b9`
+- Assigned unresolved records: **9**
+  1. `historical:id:d70681a30b303787` — EC concludes first negotiation rounds on Horizon Europe association with Albania
+  2. `historical:id:5ea183ed65b7eaac` — Albania: Informal exploratory talks for association to Horizon Europe
+  3. `historical:id:f1a32dd9a0fb8eeb` — Research Policy - ALLEA
+  4. `historical:id:f65f8f71b73c4f78` — Promoting cooperation in innovation ecosystems: evidence from European traditional manufacturing SMEs
+  5. `historical:id:11d3317314174086` — Future transitions for the Bioeconomy towards Sustainable Development and a Climate-Neutral Economy - Knowledge Synthesis Final Report: WP1 - Knowledge synthesis and foresight
+  6. `historical:id:8fa238a08d76f644` — Scientific collaboration of Cuban researchers working in Europe: understanding relations between origin and destination countries
+  7. `historical:id:b94e1bed5d2ccda7` — EARTO Publishes Recommendations and Analysis of EC Proposals for Horizon Europe and Digital Europe Programme | EARTO
+  8. `historical:id:ef7b579e40c70bf7` — Exploring the development of a methodology for scenario use: Combining scenario and resource mapping approaches
+  - … plus 1 more in the package manifest
 
 ### Worker B
 - Current package: `worker-b-20261005T093508Z-f144aa6c1220`
-- Assigned unresolved records: **19**
-  1. `historical:id:cfd5ae4e33f6a521` — Foresight 2030 Threats | ENISA
-  2. `historical:id:b5f939bb363fae8f` — Future of Space Exploration: Strategic Scenarios for European Space Exploration 2040-2060 - ESPI
-  3. `historical:id:bb687decff3ff985` — The Swedish presidency and academic freedom | Coimbra
-  4. `historical:id:7a7bb987851d62f9` — Supply Chain Resilience Bulletin - January 2023
-  5. `historical:id:1d9fa8302a46fad2` — Supply Chain Resilience Bulletin - February 2023
-  6. `historical:id:d6350a1cf9d493cd` — Mission incomplete: Layered practices of monitoring and evaluation in Swedish transformative innovation policy
-  7. `historical:id:53336de6b6301fe2` — Towards a responsible and reciprocal global research partnership
-  8. `historical:id:9b3b40c028b87fc7` — Supply Chain Resilience Bulletin - July 2022
-  - … plus 11 more in the package manifest
+- Assigned unresolved records: **0**
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`

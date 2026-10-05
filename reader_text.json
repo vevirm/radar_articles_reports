@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-05T09:01:05Z",
+  "generated_at": "2026-10-05T09:48:39Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -226741,8 +226741,1157 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:53a5c41fc874984c": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "5ada008f",
+      "identity_hash": "78ab5c8cd3401517",
+      "reader_title": "AI adoption, productivity and employment: evidence from European firms",
+      "reader_what": "AI adoption raised labour productivity in sampled EU firms by about 4%, without short-run firm-level employment losses.",
+      "reader_why": "AI adoption can raise firm productivity when software, data and workforce training complement the technology.",
+      "reader_more": "AI adoption raised labour productivity in sampled EU firms by about 4%, without short-run firm-level employment losses. Matched EIBIS-ORBIS data for EU and US firms, using US peer adoption rates as an instrument for EU AI adoption. The estimates cover sampled non-financial firms and short-run outcomes; longer-run employment effects remain uncertain.",
+      "deep_analysis": {
+        "work_kind": "empirical study",
+        "research_question": "What does this work establish about its stated research, policy or methodological problem?",
+        "main_finding": "AI adoption raised labour productivity in sampled EU firms by about 4%, without short-run firm-level employment losses.",
+        "method_or_basis": "Matched EIBIS-ORBIS data for EU and US firms, using US peer adoption rates as an instrument for EU AI adoption.",
+        "qualification": "The estimates cover sampled non-financial firms and short-run outcomes; longer-run employment effects remain uncertain.",
+        "radar_relevance": "Direct evidence on European firms’ adoption of a strategic technology, productivity effects, innovation and complementary investment needs.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching reader-facing source https://www.bis.org/publications/working-paper-1325-ai-adoption-productivity-and-employment-evidence-european-firms.pdf; package contains substantive matching pdf_excerpt material from this route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.bis.org/publications/working-paper-1325-ai-adoption-productivity-and-employment-evidence-european-firms.pdf",
+            "title": "AI adoption, productivity and employment: evidence from European firms | Bank for International Settlements",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and substantive content verified against the supplied primary material and, where thin, an independently recovered publisher/repository source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Direct evidence on European firms’ adoption of a strategic technology, productivity effects, innovation and complementary investment needs."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T09:48:36Z",
+      "deep_scan_package_id": "worker-a-20261005T093429Z-d275e359cac3",
+      "claims": [
+        {
+          "object": "ai.adoption",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European firms",
+            "class": "company"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-01-23",
+          "scope": {
+            "level": "company_in_eu",
+            "countries": []
+          },
+          "kind": "effect",
+          "qualification": "The estimates cover sampled non-financial firms and short-run outcomes; longer-run employment effects remain uncertain.",
+          "text": "AI adoption raised labour productivity in sampled EU firms by about 4%, without short-run firm-level employment losses.",
+          "confidence": "high",
+          "record_key": "historical:id:53a5c41fc874984c",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:78ab5c8cd3401517:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:a0d3aec44cdb9e3c": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "7d43551b",
+      "identity_hash": "d3730633fe2a2c4d",
+      "reader_title": "Implementation dialogue on the Chips Act with Executive Vice-President Henna Virkkunen",
+      "reader_what": "Official event summary reports a Chips Act implementation dialogue and stakeholder recommendations, but it is not a completed evidence product",
+      "reader_more": "Official event summary reports a Chips Act implementation dialogue and stakeholder recommendations, but it is not a completed evidence product for historical Strand A or B.",
+      "deep_analysis": {
+        "work_kind": "event/landing page or out-of-scope evidence product",
+        "research_question": "",
+        "main_finding": "Official event summary reports a Chips Act implementation dialogue and stakeholder recommendations, but it is not a completed evidence product for historical Strand A or B.",
+        "method_or_basis": "Verified matching primary/official source and assessed it against historical Strand A/B admission rules.",
+        "qualification": "The negative decision concerns Radar admission, not the legitimacy of the underlying organisation or activity.",
+        "radar_relevance": "Official event summary reports a Chips Act implementation dialogue and stakeholder recommendations, but it is not a completed evidence product for historical Strand A or B.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching reader-facing source https://commission.europa.eu/implementation-dialogues/implementation-dialogue-chips-act-executive-vice-president-henna-virkkunen-2026-03-26_en; package contains substantive matching substantial_web_text material from this route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://commission.europa.eu/implementation-dialogues/implementation-dialogue-chips-act-executive-vice-president-henna-virkkunen-2026-03-26_en",
+            "title": "Implementation dialogue on the Chips Act with Executive Vice-President Henna Virkkunen",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and source provenance were verified sufficiently to make a negative admission decision; no substitute work was used."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "NON_SUBSTANTIVE_EVENT_PAGE",
+        "reason": "Official event summary reports a Chips Act implementation dialogue and stakeholder recommendations, but it is not a completed evidence product for historical Strand A or B."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T09:48:36Z",
+      "deep_scan_package_id": "worker-a-20261005T093429Z-d275e359cac3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:36c2a6e773a261ac": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "150017ca",
+      "identity_hash": "faea3a0a192c5e8c",
+      "reader_title": "From analysis to action - AI in financial markets",
+      "reader_what": "The BIS speech concerns AI use in Italian financial markets and regulation; R&I is not the central object and the",
+      "reader_more": "The BIS speech concerns AI use in Italian financial markets and regulation; R&I is not the central object and the work does not establish a European R&I-system mechanism.",
+      "deep_analysis": {
+        "work_kind": "event/landing page or out-of-scope evidence product",
+        "research_question": "",
+        "main_finding": "The BIS speech concerns AI use in Italian financial markets and regulation; R&I is not the central object and the work does not establish a European R&I-system mechanism.",
+        "method_or_basis": "Verified matching primary/official source and assessed it against historical Strand A/B admission rules.",
+        "qualification": "The negative decision concerns Radar admission, not the legitimacy of the underlying organisation or activity.",
+        "radar_relevance": "The BIS speech concerns AI use in Italian financial markets and regulation; R&I is not the central object and the work does not establish a European R&I-system mechanism.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching reader-facing source https://www.bis.org/speeches/20260428-analysis-action-ai-financial-markets.pdf; package contains substantive matching pdf_excerpt material from this route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.bis.org/speeches/20260428-analysis-action-ai-financial-markets.pdf",
+            "title": "From analysis to action - AI in financial markets | Bank for International Settlements",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and source provenance were verified sufficiently to make a negative admission decision; no substitute work was used."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_RI",
+        "reason": "The BIS speech concerns AI use in Italian financial markets and regulation; R&I is not the central object and the work does not establish a European R&I-system mechanism."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T09:48:36Z",
+      "deep_scan_package_id": "worker-a-20261005T093429Z-d275e359cac3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:15fcdd32dcb8df56": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "c35fcd9d",
+      "identity_hash": "7fccd89c8a28d18c",
+      "reader_title": "Data Union in a nutshell",
+      "reader_what": "The Data Union Strategy proposes data labs, expanded data spaces and simpler data rules to increase access to data for",
+      "reader_why": "Broader access to high-quality data is intended to strengthen European AI development and reduce capability bottlenecks.",
+      "reader_more": "The Data Union Strategy proposes data labs, expanded data spaces and simpler data rules to increase access to data for AI in Europe. European Commission strategy fact page describing planned instruments, services and regulatory simplification. This is a Commission strategy description, not evidence that the planned measures have already produced outcomes.",
+      "deep_analysis": {
+        "work_kind": "policy strategy",
+        "research_question": "What does this work establish about its stated research, policy or methodological problem?",
+        "main_finding": "The Data Union Strategy proposes data labs, expanded data spaces and simpler data rules to increase access to data for AI in Europe.",
+        "method_or_basis": "European Commission strategy fact page describing planned instruments, services and regulatory simplification.",
+        "qualification": "This is a Commission strategy description, not evidence that the planned measures have already produced outcomes.",
+        "radar_relevance": "It directly concerns Europe’s AI/data capability, digital infrastructure and strategic position.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied URL https://digital-strategy.ec.europa.eu/en/factpages/data-union-nutshell; package material was abstract_or_landing_page, so independent recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the current European Commission Data Union fact page with substantive policy detail."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched title with issuing organisation/year (European Commission — Digital Strategy; 2025-01-01) and found consistent identity signals."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Checked the official publisher/repository route; matching source used: https://digital-strategy.ec.europa.eu/en/factpages/data-union-nutshell"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Used distinctive title fragments and organisation/DOI clues; no conflicting bibliographic identity was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://digital-strategy.ec.europa.eu/en/factpages/data-union-nutshell",
+            "title": "Data Union in a nutshell | Shaping Europe’s digital future",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and substantive content verified against the supplied primary material and, where thin, an independently recovered publisher/repository source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "It directly concerns Europe’s AI/data capability, digital infrastructure and strategic position."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T09:48:36Z",
+      "deep_scan_package_id": "worker-a-20261005T093429Z-d275e359cac3",
+      "claims": [
+        {
+          "object": "digital.infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2025-01-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "This is a Commission strategy description, not evidence that the planned measures have already produced outcomes.",
+          "text": "The Data Union Strategy proposes data labs, expanded data spaces and simpler data rules to increase access to data for AI in Europe.",
+          "confidence": "high",
+          "record_key": "historical:id:15fcdd32dcb8df56",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:7fccd89c8a28d18c:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:e9adf7de4ec87403": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "c422675f",
+      "identity_hash": "8a3470a7e653f318",
+      "reader_title": "Horizon Europe Roadshow - Christchurch",
+      "reader_what": "The Christchurch page is an information/networking roadshow announcement, which the rules explicitly exclude as an event/promotional page.",
+      "reader_more": "The Christchurch page is an information/networking roadshow announcement, which the rules explicitly exclude as an event/promotional page.",
+      "deep_analysis": {
+        "work_kind": "event/landing page or out-of-scope evidence product",
+        "research_question": "",
+        "main_finding": "The Christchurch page is an information/networking roadshow announcement, which the rules explicitly exclude as an event/promotional page.",
+        "method_or_basis": "Verified matching primary/official source and assessed it against historical Strand A/B admission rules.",
+        "qualification": "The negative decision concerns Radar admission, not the legitimacy of the underlying organisation or activity.",
+        "radar_relevance": "The Christchurch page is an information/networking roadshow announcement, which the rules explicitly exclude as an event/promotional page.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied URL https://www.eeas.europa.eu/delegations/aotearoa-new-zealand/horizon-europe-roadshow-christchurch_en; package material was abstract_or_landing_page, so independent recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the EEAS Christchurch event page and confirmed it is an information/networking event."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched title with issuing organisation/year (European External Action Service; 2024-10-23) and found consistent identity signals."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Checked the official publisher/repository route; matching source used: https://www.eeas.europa.eu/delegations/aotearoa-new-zealand/horizon-europe-roadshow-christchurch_en"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Used distinctive title fragments and organisation/DOI clues; no conflicting bibliographic identity was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.eeas.europa.eu/delegations/aotearoa-new-zealand/horizon-europe-roadshow-christchurch_en",
+            "title": "Horizon Europe Roadshow - Christchurch",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and source provenance were verified sufficiently to make a negative admission decision; no substitute work was used."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "NON_SUBSTANTIVE_EVENT_PAGE",
+        "reason": "The Christchurch page is an information/networking roadshow announcement, which the rules explicitly exclude as an event/promotional page."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T09:48:36Z",
+      "deep_scan_package_id": "worker-a-20261005T093429Z-d275e359cac3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:e5b4bf7f44b8dd42": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "0059796f",
+      "identity_hash": "87df7dea74e69a7a",
+      "reader_title": "ALLEA Responds to High-Level Group’s Report on Framework Programme 10 - ALLEA",
+      "reader_what": "The ALLEA response is a stakeholder reaction to another report rather than a completed evidence-led study or formal R&I-system action.",
+      "reader_more": "The ALLEA response is a stakeholder reaction to another report rather than a completed evidence-led study or formal R&I-system action.",
+      "deep_analysis": {
+        "work_kind": "event/landing page or out-of-scope evidence product",
+        "research_question": "",
+        "main_finding": "The ALLEA response is a stakeholder reaction to another report rather than a completed evidence-led study or formal R&I-system action.",
+        "method_or_basis": "Verified matching primary/official source and assessed it against historical Strand A/B admission rules.",
+        "qualification": "The negative decision concerns Radar admission, not the legitimacy of the underlying organisation or activity.",
+        "radar_relevance": "The ALLEA response is a stakeholder reaction to another report rather than a completed evidence-led study or formal R&I-system action.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching reader-facing source https://allea.org/allea-responds-to-high-level-groups-report-on-framework-programme-10/; package contains substantive matching substantial_web_text material from this route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://allea.org/allea-responds-to-high-level-groups-report-on-framework-programme-10/",
+            "title": "ALLEA Responds to High-Level Group’s Report on Framework Programme 10 - ALLEA",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and source provenance were verified sufficiently to make a negative admission decision; no substitute work was used."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "ADVOCACY_NOT_EVIDENCE_PRODUCT",
+        "reason": "The ALLEA response is a stakeholder reaction to another report rather than a completed evidence-led study or formal R&I-system action."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T09:48:36Z",
+      "deep_scan_package_id": "worker-a-20261005T093429Z-d275e359cac3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:4e54f0d346a71500": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "220a36ea",
+      "identity_hash": "aa68886e77f09408",
+      "reader_title": "Horizon Europe Roadshow - Auckland",
+      "reader_what": "The Auckland roadshow page is an information/networking event announcement rather than substantive historical R&I evidence.",
+      "reader_more": "The Auckland roadshow page is an information/networking event announcement rather than substantive historical R&I evidence.",
+      "deep_analysis": {
+        "work_kind": "event/landing page or out-of-scope evidence product",
+        "research_question": "",
+        "main_finding": "The Auckland roadshow page is an information/networking event announcement rather than substantive historical R&I evidence.",
+        "method_or_basis": "Verified matching primary/official source and assessed it against historical Strand A/B admission rules.",
+        "qualification": "The negative decision concerns Radar admission, not the legitimacy of the underlying organisation or activity.",
+        "radar_relevance": "The Auckland roadshow page is an information/networking event announcement rather than substantive historical R&I evidence.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied URL https://www.eeas.europa.eu/delegations/aotearoa-new-zealand/horizon-europe-roadshow-auckland_en; package material was abstract_or_landing_page, so independent recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Publisher/event search confirmed the Auckland item is a Horizon Europe roadshow event."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched title with issuing organisation/year (European External Action Service; 2024-10-15) and found consistent identity signals."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Checked the official publisher/repository route; matching source used: https://www.eeas.europa.eu/delegations/aotearoa-new-zealand/horizon-europe-roadshow-auckland_en"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Used distinctive title fragments and organisation/DOI clues; no conflicting bibliographic identity was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.eeas.europa.eu/delegations/aotearoa-new-zealand/horizon-europe-roadshow-auckland_en",
+            "title": "Horizon Europe Roadshow - Auckland",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and source provenance were verified sufficiently to make a negative admission decision; no substitute work was used."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "NON_SUBSTANTIVE_EVENT_PAGE",
+        "reason": "The Auckland roadshow page is an information/networking event announcement rather than substantive historical R&I evidence."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T09:48:36Z",
+      "deep_scan_package_id": "worker-a-20261005T093429Z-d275e359cac3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:97048a0eb1dd0233": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "495772ad",
+      "identity_hash": "6ee28ad5de86e0ed",
+      "reader_title": "Framework Programme 10: ALLEA Advocates for Widening Scientific Cooperation and Freedom of Research - ALLEA",
+      "reader_what": "ALLEA advocated wider participation, stronger basic research, research freedom and simpler funding arrangements for FP10.",
+      "reader_why": "Funding design and widening rules can shape who participates in European research and where capacity develops.",
+      "reader_more": "ALLEA advocated wider participation, stronger basic research, research freedom and simpler funding arrangements for FP10. Stakeholder position submitted by ALLEA to the European Commission’s FP10 consultation. The source is an advocacy position; it establishes ALLEA’s recommendations, not their adoption or effects.",
+      "deep_analysis": {
+        "work_kind": "policy position",
+        "research_question": "What does this work establish about its stated research, policy or methodological problem?",
+        "main_finding": "ALLEA advocated wider participation, stronger basic research, research freedom and simpler funding arrangements for FP10.",
+        "method_or_basis": "Stakeholder position submitted by ALLEA to the European Commission’s FP10 consultation.",
+        "qualification": "The source is an advocacy position; it establishes ALLEA’s recommendations, not their adoption or effects.",
+        "radar_relevance": "The work directly addresses governance and design of Europe’s next R&I framework programme.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied URL https://allea.org/framework-programme-10-allea-advocates-for-widening-scientific-cooperation-and-freedom-of-research/; package material was abstract_or_landing_page, so independent recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the ALLEA article dated 26 September 2023 and its FP10 recommendations."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched title with issuing organisation/year (ALLEA; 2023-09-26) and found consistent identity signals."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Checked the official publisher/repository route; matching source used: https://allea.org/framework-programme-10-allea-advocates-for-widening-scientific-cooperation-and-freedom-of-research/"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Used distinctive title fragments and organisation/DOI clues; no conflicting bibliographic identity was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://allea.org/framework-programme-10-allea-advocates-for-widening-scientific-cooperation-and-freedom-of-research/",
+            "title": "Framework Programme 10: ALLEA Advocates for Widening Scientific Cooperation and Freedom of Research - ALLEA",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and substantive content verified against the supplied primary material and, where thin, an independently recovered publisher/repository source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The work directly addresses governance and design of Europe’s next R&I framework programme."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T09:48:37Z",
+      "deep_scan_package_id": "worker-a-20261005T093429Z-d275e359cac3",
+      "claims": [
+        {
+          "object": "horizon.budget_2028_34",
+          "secondary_objects": [],
+          "actor": {
+            "name": "ALLEA",
+            "class": "university_group"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2023-09-26",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "The source is an advocacy position; it establishes ALLEA’s recommendations, not their adoption or effects.",
+          "text": "ALLEA advocated wider participation, stronger basic research, research freedom and simpler funding arrangements for FP10.",
+          "confidence": "medium",
+          "record_key": "historical:id:97048a0eb1dd0233",
+          "merit": 74,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:6ee28ad5de86e0ed:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:9a8aa00cab5b6df0": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "8419d252",
+      "identity_hash": "198fd8064afc69e4",
+      "reader_title": "The EU budget bolsters Europe’s technological leadership: the European Chips Act",
+      "reader_what": "The Chips Act combines EU funding and policy-driven investment to strengthen semiconductor design, manufacturing, pilot capability and skills.",
+      "reader_why": "Funding pilot lines, design tools and competence centres can expand European semiconductor innovation capacity.",
+      "reader_more": "The Chips Act combines EU funding and policy-driven investment to strengthen semiconductor design, manufacturing, pilot capability and skills. European Commission budget and programme account of Chips Act instruments and funding. Official material establishes EU policy and funding commitments, not independent proof that all expected industrial outcomes occurred.",
+      "deep_analysis": {
+        "work_kind": "policy programme",
+        "research_question": "What does this work establish about its stated research, policy or methodological problem?",
+        "main_finding": "The Chips Act combines EU funding and policy-driven investment to strengthen semiconductor design, manufacturing, pilot capability and skills.",
+        "method_or_basis": "European Commission budget and programme account of Chips Act instruments and funding.",
+        "qualification": "Official material establishes EU policy and funding commitments, not independent proof that all expected industrial outcomes occurred.",
+        "radar_relevance": "Semiconductors are a strategic technology and the page directly links EU R&I funding to capability and reduced dependency.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied URL https://commission.europa.eu/strategy-and-policy/eu-budget/motion/focus/eu-budget-bolsters-europes-technological-leadership-european-chips-act_en; package material was abstract_or_landing_page, so independent recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the European Commission Chips Act budget page with substantive funding and capability detail."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched title with issuing organisation/year (European Commission; 2021-01-01) and found consistent identity signals."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Checked the official publisher/repository route; matching source used: https://commission.europa.eu/strategy-and-policy/eu-budget/motion/focus/eu-budget-bolsters-europes-technological-leadership-european-chips-act_en"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Used distinctive title fragments and organisation/DOI clues; no conflicting bibliographic identity was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://commission.europa.eu/strategy-and-policy/eu-budget/motion/focus/eu-budget-bolsters-europes-technological-leadership-european-chips-act_en",
+            "title": "The EU budget bolsters Europe’s technological leadership: the European Chips Act",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and substantive content verified against the supplied primary material and, where thin, an independently recovered publisher/repository source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Semiconductors are a strategic technology and the page directly links EU R&I funding to capability and reduced dependency."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T09:48:37Z",
+      "deep_scan_package_id": "worker-a-20261005T093429Z-d275e359cac3",
+      "claims": [
+        {
+          "object": "chips.pilot_line",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "operating",
+          "status_date": "2021-01-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Official material establishes EU policy and funding commitments, not independent proof that all expected industrial outcomes occurred.",
+          "text": "The Chips Act combines EU funding and policy-driven investment to strengthen semiconductor design, manufacturing, pilot capability and skills.",
+          "confidence": "high",
+          "record_key": "historical:id:9a8aa00cab5b6df0",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:198fd8064afc69e4:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:cfd5ae4e33f6a521": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "fc6fe0b5",
+      "identity_hash": "ad108f12254be629",
+      "reader_title": "Foresight 2030 Threats",
+      "reader_what": "ENISA’s booklet applies an existing foresight framework to cybersecurity threats; it does not present a material new reusable method, and",
+      "reader_more": "ENISA’s booklet applies an existing foresight framework to cybersecurity threats; it does not present a material new reusable method, and historical jobs cannot be kept as Strand C.",
+      "deep_analysis": {
+        "work_kind": "event/landing page or out-of-scope evidence product",
+        "research_question": "",
+        "main_finding": "ENISA’s booklet applies an existing foresight framework to cybersecurity threats; it does not present a material new reusable method, and historical jobs cannot be kept as Strand C.",
+        "method_or_basis": "Verified matching primary/official source and assessed it against historical Strand A/B admission rules.",
+        "qualification": "The negative decision concerns Radar admission, not the legitimacy of the underlying organisation or activity.",
+        "radar_relevance": "ENISA’s booklet applies an existing foresight framework to cybersecurity threats; it does not present a material new reusable method, and historical jobs cannot be kept as Strand C.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching reader-facing source https://www.enisa.europa.eu/sites/default/files/publications/Foresight_booklet.pdf; package contains substantive matching pdf_excerpt material from this route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.enisa.europa.eu/sites/default/files/publications/Foresight_booklet.pdf",
+            "title": "Foresight 2030 Threats | ENISA",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and source provenance were verified sufficiently to make a negative admission decision; no substitute work was used."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "METHOD_APPLICATION_NOT_CONTRIBUTION",
+        "reason": "ENISA’s booklet applies an existing foresight framework to cybersecurity threats; it does not present a material new reusable method, and historical jobs cannot be kept as Strand C."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T09:48:38Z",
+      "deep_scan_package_id": "worker-b-20261005T093508Z-f144aa6c1220",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:b5f939bb363fae8f": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "5a61deab",
+      "identity_hash": "55404d1badb3b7a4",
+      "reader_title": "Future of Space Exploration: Strategic Scenarios for European Space Exploration 2040-2060 - ESPI",
+      "reader_what": "The report develops four scenarios for European space exploration in 2040–2060 around critical uncertainties and forces of change.",
+      "reader_why": "Scenario differences reveal how geopolitical, social and technological conditions could shape future European space capability.",
+      "reader_more": "The report develops four scenarios for European space exploration in 2040–2060 around critical uncertainties and forces of change. Collaborative strategic-foresight exercise using scenario planning, trend analysis and expert work. The scenarios are exploratory and should not be interpreted as forecasts.",
+      "deep_analysis": {
+        "work_kind": "strategic foresight report",
+        "research_question": "What does this work establish about its stated research, policy or methodological problem?",
+        "main_finding": "The report develops four scenarios for European space exploration in 2040–2060 around critical uncertainties and forces of change.",
+        "method_or_basis": "Collaborative strategic-foresight exercise using scenario planning, trend analysis and expert work.",
+        "qualification": "The scenarios are exploratory and should not be interpreted as forecasts.",
+        "radar_relevance": "The work directly examines Europe’s long-term strategic capability in a research- and technology-intensive sector.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching reader-facing source https://www.espi.eu/wp-content/uploads/2024/01/Future-of-European-Space-Exploration_final-version.pdf; package contains substantive matching pdf_excerpt material from this route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.espi.eu/wp-content/uploads/2024/01/Future-of-European-Space-Exploration_final-version.pdf",
+            "title": "Future of Space Exploration: Strategic Scenarios for European Space Exploration 2040-2060 - ESPI",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and substantive content verified against the supplied primary material and, where thin, an independently recovered publisher/repository source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The work directly examines Europe’s long-term strategic capability in a research- and technology-intensive sector."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T09:48:38Z",
+      "deep_scan_package_id": "worker-b-20261005T093508Z-f144aa6c1220",
+      "claims": [
+        {
+          "object": "research.system_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Space Policy Institute and Copenhagen Institute for Futures Studies",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2023-11-29",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The scenarios are exploratory and should not be interpreted as forecasts.",
+          "text": "The report develops four scenarios for European space exploration in 2040–2060 around critical uncertainties and forces of change.",
+          "confidence": "high",
+          "record_key": "historical:id:b5f939bb363fae8f",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:55404d1badb3b7a4:1",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:bb687decff3ff985": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "e9b50c84",
+      "identity_hash": "7acb18be7cd9d5c2",
+      "reader_title": "The Swedish presidency and academic freedom",
+      "reader_what": "The Coimbra Group discussed academic freedom during the Swedish EU Council Presidency and argued for protecting it in European policy.",
+      "reader_why": "Policy protections for academic freedom can affect the openness and autonomy of European research institutions.",
+      "reader_more": "The Coimbra Group discussed academic freedom during the Swedish EU Council Presidency and argued for protecting it in European policy. University-network policy commentary grounded in current European research-policy debates. The article is advocacy and commentary; it does not measure academic-freedom outcomes.",
+      "deep_analysis": {
+        "work_kind": "policy commentary",
+        "research_question": "What does this work establish about its stated research, policy or methodological problem?",
+        "main_finding": "The Coimbra Group discussed academic freedom during the Swedish EU Council Presidency and argued for protecting it in European policy.",
+        "method_or_basis": "University-network policy commentary grounded in current European research-policy debates.",
+        "qualification": "The article is advocacy and commentary; it does not measure academic-freedom outcomes.",
+        "radar_relevance": "Academic freedom and research openness are governance conditions for the European research system.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching reader-facing source https://www.coimbra-group.eu/the-swedish-presidency-and-academic-freedom/; package contains substantive matching substantial_web_text material from this route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.coimbra-group.eu/the-swedish-presidency-and-academic-freedom/",
+            "title": "The Swedish presidency and academic freedom | Coimbra",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and substantive content verified against the supplied primary material and, where thin, an independently recovered publisher/repository source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Academic freedom and research openness are governance conditions for the European research system."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T09:48:39Z",
+      "deep_scan_package_id": "worker-b-20261005T093508Z-f144aa6c1220",
+      "claims": [
+        {
+          "object": "research.openness",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Coimbra Group",
+            "class": "university_group"
+          },
+          "mechanism": "advocates",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2023-01-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "The article is advocacy and commentary; it does not measure academic-freedom outcomes.",
+          "text": "The Coimbra Group discussed academic freedom during the Swedish EU Council Presidency and argued for protecting it in European policy.",
+          "confidence": "medium",
+          "record_key": "historical:id:bb687decff3ff985",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:7acb18be7cd9d5c2:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:7a7bb987851d62f9": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "9f031291",
+      "identity_hash": "7cdbeecfd6a484cd",
+      "reader_title": "Supply Chain Resilience Bulletin - January 2023",
+      "reader_what": "The January 2023 Supply Chain Resilience Bulletin analyses war-related industrial supply-chain disruption, not a central European R&I-system mechanism.",
+      "reader_more": "The January 2023 Supply Chain Resilience Bulletin analyses war-related industrial supply-chain disruption, not a central European R&I-system mechanism.",
+      "deep_analysis": {
+        "work_kind": "event/landing page or out-of-scope evidence product",
+        "research_question": "",
+        "main_finding": "The January 2023 Supply Chain Resilience Bulletin analyses war-related industrial supply-chain disruption, not a central European R&I-system mechanism.",
+        "method_or_basis": "Verified matching primary/official source and assessed it against historical Strand A/B admission rules.",
+        "qualification": "The negative decision concerns Radar admission, not the legitimacy of the underlying organisation or activity.",
+        "radar_relevance": "The January 2023 Supply Chain Resilience Bulletin analyses war-related industrial supply-chain disruption, not a central European R&I-system mechanism.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "limited",
+            "note": "Inspected supplied URL https://single-market-economy.ec.europa.eu/publications/supply-chain-resilience-bulletin-january-2023_en; package material was stored_only, so independent recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the Commission periodic-report page and publication date."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched title with issuing organisation/year (European Commission — ec.europa.eu; 2023-01-01) and found consistent identity signals."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Checked the official publisher/repository route; matching source used: https://single-market-economy.ec.europa.eu/publications/supply-chain-resilience-bulletin-january-2023_en"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Used distinctive title fragments and organisation/DOI clues; no conflicting bibliographic identity was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://single-market-economy.ec.europa.eu/publications/supply-chain-resilience-bulletin-january-2023_en",
+            "title": "Supply Chain Resilience Bulletin - January 2023",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and source provenance were verified sufficiently to make a negative admission decision; no substitute work was used."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_RI",
+        "reason": "The January 2023 Supply Chain Resilience Bulletin analyses war-related industrial supply-chain disruption, not a central European R&I-system mechanism."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T09:48:39Z",
+      "deep_scan_package_id": "worker-b-20261005T093508Z-f144aa6c1220",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:1d9fa8302a46fad2": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "f768b29d",
+      "identity_hash": "8417a52631c545dd",
+      "reader_title": "Supply Chain Resilience Bulletin - February 2023",
+      "reader_what": "The February 2023 Supply Chain Resilience Bulletin analyses industrial supply-chain disruption, not a central European R&I-system mechanism.",
+      "reader_more": "The February 2023 Supply Chain Resilience Bulletin analyses industrial supply-chain disruption, not a central European R&I-system mechanism.",
+      "deep_analysis": {
+        "work_kind": "event/landing page or out-of-scope evidence product",
+        "research_question": "",
+        "main_finding": "The February 2023 Supply Chain Resilience Bulletin analyses industrial supply-chain disruption, not a central European R&I-system mechanism.",
+        "method_or_basis": "Verified matching primary/official source and assessed it against historical Strand A/B admission rules.",
+        "qualification": "The negative decision concerns Radar admission, not the legitimacy of the underlying organisation or activity.",
+        "radar_relevance": "The February 2023 Supply Chain Resilience Bulletin analyses industrial supply-chain disruption, not a central European R&I-system mechanism.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "limited",
+            "note": "Inspected supplied URL https://single-market-economy.ec.europa.eu/publications/supply-chain-resilience-bulletin-february-2023_en; package material was stored_only, so independent recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the Commission periodic-report page and publication date."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched title with issuing organisation/year (European Commission — ec.europa.eu; 2023-01-01) and found consistent identity signals."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Checked the official publisher/repository route; matching source used: https://single-market-economy.ec.europa.eu/publications/supply-chain-resilience-bulletin-february-2023_en"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Used distinctive title fragments and organisation/DOI clues; no conflicting bibliographic identity was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://single-market-economy.ec.europa.eu/publications/supply-chain-resilience-bulletin-february-2023_en",
+            "title": "Supply Chain Resilience Bulletin - February 2023",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and source provenance were verified sufficiently to make a negative admission decision; no substitute work was used."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_RI",
+        "reason": "The February 2023 Supply Chain Resilience Bulletin analyses industrial supply-chain disruption, not a central European R&I-system mechanism."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T09:48:39Z",
+      "deep_scan_package_id": "worker-b-20261005T093508Z-f144aa6c1220",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-05T09:01:05Z"
+  "claims_updated_at": "2026-10-05T09:48:39Z"
 }
