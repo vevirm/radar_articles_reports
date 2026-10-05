@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2629** (Main **1242** + Historical **1387**)
-- Automatic queue still needing V2 verification: **85** (Main **0** + Historical **85**)
-- Currently assigned to workers: **44** (Main **0** + Historical **44**)
+- Authoritative V2 verified: **2638** (Main **1242** + Historical **1396**)
+- Automatic queue still needing V2 verification: **76** (Main **0** + Historical **76**)
+- Currently assigned to workers: **35** (Main **0** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **29**
 - Automatic queue pending and not yet assigned: **41**
@@ -17,16 +17,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 
 ### Worker A
 - Current package: `worker-a-20261005T114145Z-7fb8937875b9`
-- Assigned unresolved records: **9**
-  1. `historical:id:d70681a30b303787` — EC concludes first negotiation rounds on Horizon Europe association with Albania
-  2. `historical:id:5ea183ed65b7eaac` — Albania: Informal exploratory talks for association to Horizon Europe
-  3. `historical:id:f1a32dd9a0fb8eeb` — Research Policy - ALLEA
-  4. `historical:id:f65f8f71b73c4f78` — Promoting cooperation in innovation ecosystems: evidence from European traditional manufacturing SMEs
-  5. `historical:id:11d3317314174086` — Future transitions for the Bioeconomy towards Sustainable Development and a Climate-Neutral Economy - Knowledge Synthesis Final Report: WP1 - Knowledge synthesis and foresight
-  6. `historical:id:8fa238a08d76f644` — Scientific collaboration of Cuban researchers working in Europe: understanding relations between origin and destination countries
-  7. `historical:id:b94e1bed5d2ccda7` — EARTO Publishes Recommendations and Analysis of EC Proposals for Horizon Europe and Digital Europe Programme | EARTO
-  8. `historical:id:ef7b579e40c70bf7` — Exploring the development of a methodology for scenario use: Combining scenario and resource mapping approaches
-  - … plus 1 more in the package manifest
+- Assigned unresolved records: **0**
 
 ### Worker B
 - Current package: `worker-b-20261005T093508Z-f144aa6c1220`

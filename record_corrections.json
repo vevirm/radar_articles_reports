@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-10-05T09:48:39Z",
+  "updated_at": "2026-10-05T11:54:10Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -14148,6 +14148,115 @@
       ],
       "updated_at": "2026-10-05T09:48:39Z",
       "deep_scan_package_id": "worker-b-20261005T093508Z-f144aa6c1220"
+    },
+    "historical:id:d70681a30b303787": {
+      "fields": {
+        "date": "2021-06-29"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The official EEAS page is dated 29 June 2021, not the scanner placeholder 2021-01-01.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.eeas.europa.eu/delegations/albania/ec-concludes-first-negotiation-rounds-horizon-europe-association-albania_en"
+      ],
+      "updated_at": "2026-10-05T11:54:08Z",
+      "deep_scan_package_id": "worker-a-20261005T114145Z-7fb8937875b9"
+    },
+    "historical:id:5ea183ed65b7eaac": {
+      "fields": {
+        "date": "2021-02-05"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The official EEAS page is dated 5 February 2021, replacing the scanner placeholder date.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.eeas.europa.eu/delegations/albania/albania-informal-exploratory-talks-association-horizon-europe_en"
+      ],
+      "updated_at": "2026-10-05T11:54:09Z",
+      "deep_scan_package_id": "worker-a-20261005T114145Z-7fb8937875b9"
+    },
+    "historical:id:f1a32dd9a0fb8eeb": {
+      "fields": {},
+      "unset": [
+        "date"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The page carries no supported 2020 publication date and contains evolving material from later policy periods; a fixed scanner date is not bibliographically defensible.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://allea.org/research-policy/"
+      ],
+      "updated_at": "2026-10-05T11:54:09Z",
+      "deep_scan_package_id": "worker-a-20261005T114145Z-7fb8937875b9"
+    },
+    "historical:id:f65f8f71b73c4f78": {
+      "fields": {
+        "date": "2018-08-28"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Springer records the article as published/version of record on 28 August 2018; 2020 is the issue year.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://link.springer.com/article/10.1007/s11187-018-0088-3"
+      ],
+      "updated_at": "2026-10-05T11:54:09Z",
+      "deep_scan_package_id": "worker-a-20261005T114145Z-7fb8937875b9"
+    },
+    "historical:id:11d3317314174086": {
+      "fields": {
+        "date": "2020-09-10"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The JRC repository gives the publication date as 10 September 2020.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://publications.jrc.ec.europa.eu/repository/handle/JRC121212",
+        "https://op.europa.eu/en/publication-detail/-/publication/54a1e679-f634-11ea-991b-01aa75ed71a1/language-en"
+      ],
+      "updated_at": "2026-10-05T11:54:09Z",
+      "deep_scan_package_id": "worker-a-20261005T114145Z-7fb8937875b9"
+    },
+    "historical:id:b94e1bed5d2ccda7": {
+      "fields": {
+        "title": "EARTO Recommendations on EC Proposal for a Horizon Europe Programme with High Impact",
+        "date": "2018-06-25",
+        "type": "policy recommendations"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The supplied object is the dated EARTO PDF itself, not the broader publication-page headline stored by the scanner.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.earto.eu/wp-content/uploads/EARTO_Recommendations_on_EC_Proposal_for_HEU_-_Final-1.pdf"
+      ],
+      "updated_at": "2026-10-05T11:54:09Z",
+      "deep_scan_package_id": "worker-a-20261005T114145Z-7fb8937875b9"
+    },
+    "historical:id:aedea75858f2f582": {
+      "fields": {
+        "date": "2022-12-05",
+        "type": "joint policy statement"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "EARTO’s page and the official PDF are dated 5 December 2022; the scanner’s 2016 date is incorrect.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.earto.eu/wp-content/uploads/Joint-statement_EIC-IP-provisions_5-December-2022.pdf"
+      ],
+      "updated_at": "2026-10-05T11:54:10Z",
+      "deep_scan_package_id": "worker-a-20261005T114145Z-7fb8937875b9"
     }
   }
 }

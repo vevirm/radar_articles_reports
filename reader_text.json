@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-05T09:48:39Z",
+  "generated_at": "2026-10-05T11:54:10Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -227890,8 +227890,800 @@
       "deep_scan_package_id": "worker-b-20261005T093508Z-f144aa6c1220",
       "claims": [],
       "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:d70681a30b303787": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "d42155dd",
+      "identity_hash": "ee9cf7d1858d220e",
+      "reader_title": "Albania entered formal Horizon Europe association negotiations",
+      "reader_what": "The first formal negotiation round covered association financing and financial-management terms.",
+      "reader_why": "Association would expand Albania’s participation in the EU research and innovation framework.",
+      "reader_more": "The Commission and Albania completed a first negotiation round on 21 June 2021. The Commission explained the association agreement’s financial contribution model and sound-financial-management elements. Both sides aimed to finish negotiations in autumn 2021 and sign by year-end.",
+      "deep_analysis": {
+        "work_kind": "official policy development",
+        "research_question": "",
+        "main_finding": "The European Commission and Albania completed the first formal Horizon Europe association negotiation round on 21 June 2021 and planned further talks toward a 2021 agreement.",
+        "method_or_basis": "Official EEAS account of the Commission-Albania negotiation round.",
+        "qualification": "This source records a negotiation stage, not a completed association agreement or evidence of later programme outcomes.",
+        "radar_relevance": "Historical evidence of Horizon Europe programme association expanding toward Albania, directly affecting prospective participation in EU R&I funding and collaboration.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the supplied EEAS Albania page https://www.eeas.europa.eu/delegations/albania/ec-concludes-first-negotiation-rounds-horizon-europe-association-albania_en; it matches the claimed title and reports the first Horizon Europe association negotiation round and next steps."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is associated with this EEAS news item."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title web search returned the same official EEAS page and no conflicting work identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_webpage",
+            "url": "https://www.eeas.europa.eu/delegations/albania/ec-concludes-first-negotiation-rounds-horizon-europe-association-albania_en",
+            "title": "EC concludes first negotiation rounds on Horizon Europe association with Albania",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official EEAS primary source verifies the event, date, Albania, the Commission negotiation team, the financial-contribution discussion, and the intended 2021 timetable."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The official source documents a concrete change in Albania’s prospective access to the EU research and innovation framework programme, a substantive Horizon association and funding-governance state."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T11:54:08Z",
+      "deep_scan_package_id": "worker-a-20261005T114145Z-7fb8937875b9",
+      "claims": [
+        {
+          "object": "horizon.association",
+          "secondary_objects": [
+            "horizon.access"
+          ],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "associates",
+          "direction": "expands",
+          "status": "in_negotiation",
+          "status_date": "2021-06-21",
+          "scope": {
+            "level": "associated_country",
+            "countries": [
+              "Albania"
+            ]
+          },
+          "kind": "action",
+          "qualification": "This source records a negotiation stage, not a completed association agreement or evidence of later programme outcomes.",
+          "text": "The European Commission and Albania completed a first Horizon Europe association negotiation round on 21 June 2021.",
+          "confidence": "high",
+          "record_key": "historical:id:d70681a30b303787",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:ee9cf7d1858d220e:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:5ea183ed65b7eaac": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "a166b238",
+      "identity_hash": "4d30a1e85621adbb",
+      "reader_title": "Albania opened exploratory talks on Horizon Europe association",
+      "reader_what": "Albania and the Commission began exploratory talks to prepare formal Horizon Europe association negotiations.",
+      "reader_why": "The process could restore Albania’s access to the EU’s main research and innovation programme.",
+      "reader_more": "Albania formally expressed interest in re-associating to the EU Research & Innovation Framework Programme. The Commission and Albania then held exploratory talks, including a virtual meeting on 5 February 2021, to prepare formal association negotiations.",
+      "deep_analysis": {
+        "work_kind": "official policy development",
+        "research_question": "",
+        "main_finding": "Albania and the European Commission were engaged in exploratory talks to prepare negotiations for Horizon Europe association following Albania’s formal expression of interest.",
+        "method_or_basis": "Official EEAS status update on the association process.",
+        "qualification": "The source confirms exploratory talks only; it does not establish that formal negotiations or association were completed at that point.",
+        "radar_relevance": "Historical evidence of a Horizon Europe association pathway that could alter Albania’s access to EU research funding and cross-border R&I collaboration.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.eeas.europa.eu/delegations/albania/albania-informal-exploratory-talks-association-horizon-europe_en; the official EEAS page matches the title and states that Albania and the Commission were in exploratory talks after Albania expressed interest in re-association."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI is associated with this EEAS news item."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search confirmed the same Albania Horizon Europe exploratory-talks item; the official page gives the event date and status."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_webpage",
+            "url": "https://www.eeas.europa.eu/delegations/albania/albania-informal-exploratory-talks-association-horizon-europe_en",
+            "title": "Albania: Informal exploratory talks for association to Horizon Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official EEAS primary source verifies Albania’s formal expression of interest and exploratory talks preparing Horizon Europe association negotiations."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The page records a concrete Horizon Europe association process affecting a third country’s prospective access to the EU R&I framework, not merely a generic programme description."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T11:54:09Z",
+      "deep_scan_package_id": "worker-a-20261005T114145Z-7fb8937875b9",
+      "claims": [
+        {
+          "object": "horizon.association",
+          "secondary_objects": [
+            "horizon.access"
+          ],
+          "actor": {
+            "name": "European Commission and Albania",
+            "class": "other"
+          },
+          "mechanism": "associates",
+          "direction": "expands",
+          "status": "in_negotiation",
+          "status_date": "2021-02-05",
+          "scope": {
+            "level": "associated_country",
+            "countries": [
+              "Albania"
+            ]
+          },
+          "kind": "action",
+          "qualification": "The source confirms exploratory talks only; it does not establish that formal negotiations or association were completed at that point.",
+          "text": "Albania and the European Commission were holding exploratory talks to prepare Horizon Europe association negotiations by 5 February 2021.",
+          "confidence": "high",
+          "record_key": "historical:id:5ea183ed65b7eaac",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:4d30a1e85621adbb:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:f1a32dd9a0fb8eeb": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "87323e5f",
+      "identity_hash": "b948e2e12b61770e",
+      "reader_title": "ALLEA research-policy topic page",
+      "reader_what": "ALLEA summarises its continuing work across European research policy topics.",
+      "reader_more": "The page describes ALLEA’s policy areas, including the European Research Area, open science, research security and Horizon Europe. It does not present a single completed study, dataset, or evidence-led finding suitable for historical Radar admission.",
+      "deep_analysis": {
+        "work_kind": "organisational topic and navigation page",
+        "research_question": "",
+        "main_finding": "ALLEA describes the research-policy areas in which it advises European institutions and participates in European Research Area activity.",
+        "method_or_basis": "Organisation-authored overview page with links to multiple activities and policy areas.",
+        "qualification": "The page is continuously maintained and does not constitute a discrete completed analytical work with a stable publication date.",
+        "radar_relevance": "The subject matter is relevant to European R&I governance, but the object fails the substantive evidence-product guard for Strand A.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://allea.org/research-policy/; it is an ALLEA thematic landing page describing ongoing research-policy activities across ERA, open science, research security and related topics."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "The landing page is not a publication and has no DOI."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search returned the same ALLEA Research Policy landing page, confirming that the claimed object is a topic/navigation page rather than a discrete study or report."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "organisation_topic_page",
+            "url": "https://allea.org/research-policy/",
+            "title": "Research Policy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity is clear, but the recovered object is an evolving organisational topic page, not a completed substantive evidence product."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_GENERIC_ORGANISATIONAL_PAGE",
+        "reason": "Although centrally about European research policy, this is a broad organisational landing/navigation page summarising ALLEA activities, not a discrete evidence-led study, report, or qualifying R&I-system finding."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T11:54:09Z",
+      "deep_scan_package_id": "worker-a-20261005T114145Z-7fb8937875b9",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:f65f8f71b73c4f78": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "aea103e4",
+      "identity_hash": "fde75bfc4b601563",
+      "reader_title": "Public innovation support changed SME collaboration patterns",
+      "reader_what": "Support strongly increased cooperation with knowledge providers, but not with competitors.",
+      "reader_why": "Public funding can reshape innovation networks, not only firms’ inputs or outputs.",
+      "reader_more": "The study analysed 312 traditional-manufacturing SMEs across seven EU regions using matching estimators. Support programmes strongly promoted cooperation with universities, public research centres and consultants, while effects on suppliers and customers were marginal and competitor cooperation did not increase. The authors argue evaluations should capture behavioural and systemic effects as well as conventional input and output additionality.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed empirical study",
+        "research_question": "Does public innovation support increase cooperation for innovation among traditional-manufacturing SMEs?",
+        "main_finding": "Public support strongly increased cooperation with external knowledge providers, marginally increased cooperation with customers and suppliers, and did not increase competitor cooperation.",
+        "method_or_basis": "Survey of 312 SMEs in seven EU regions covering 2005–2009, analysed with matching estimators to estimate treatment effects of support participation.",
+        "qualification": "The sample covers traditional manufacturing SMEs in seven EU regions and survey data from 2005–2009, so effects should not be generalised to all sectors or periods.",
+        "radar_relevance": "Direct historical evidence on the behavioural and network effects of public innovation support inside European regional innovation ecosystems.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The Springer article page https://link.springer.com/article/10.1007/s11187-018-0088-3 provides open full text matching the claimed title and authors."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1007/s11187-018-0088-3 resolves to the same Small Business Economics article and matches title, authors and bibliographic details."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search returned the Springer version of record and consistent bibliographic records."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s11187-018-0088-3",
+            "title": "Promoting cooperation in innovation ecosystems: evidence from European traditional manufacturing SMEs",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Open publisher full text verifies a 312-SME survey from seven EU regions and matching-estimator analysis of how public innovation support affected cooperation patterns."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "This peer-reviewed EU-regional study measures a recognised innovation-system mechanism: how public innovation support changes SME collaboration with firms and knowledge providers."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T11:54:09Z",
+      "deep_scan_package_id": "worker-a-20261005T114145Z-7fb8937875b9",
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [
+            "research.public_support"
+          ],
+          "actor": {
+            "name": "Public innovation support programmes in seven EU regions",
+            "class": "other"
+          },
+          "mechanism": "supports",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2018-08-28",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "effect",
+          "qualification": "The sample covers traditional manufacturing SMEs in seven EU regions and survey data from 2005–2009, so effects should not be generalised to all sectors or periods.",
+          "text": "Public innovation support strongly increased supported SMEs’ cooperation with external knowledge providers in seven EU regions.",
+          "confidence": "high",
+          "record_key": "historical:id:f65f8f71b73c4f78",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:fde75bfc4b601563:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:11d3317314174086": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "652e8840",
+      "identity_hash": "191bb3c52f7e2dd4",
+      "reader_title": "EU bioeconomy knowledge synthesis and foresight report",
+      "reader_what": "The report synthesises bioeconomy trends and frames sustainability choices for Europe.",
+      "reader_more": "JRC and DG Research and Innovation commissioned expert synthesis and forward-looking analysis for the EU bioeconomy. The report discusses biomass availability, circularity, governance, climate trade-offs and research needs. Foresight is used as an analytical application, but the work does not establish a novel reusable method required for Strand B.",
+      "deep_analysis": {
+        "work_kind": "official knowledge-synthesis and foresight report",
+        "research_question": "What drivers, sustainability constraints and research needs shape a circular, sustainable EU bioeconomy toward 2030 and 2050?",
+        "main_finding": "The report argues that a sustainable EU bioeconomy requires integrated governance, attention to trade-offs and further research across biomass, social factors and sustainability.",
+        "method_or_basis": "Expert knowledge synthesis and forward-looking analysis commissioned by the JRC and DG Research and Innovation.",
+        "qualification": "The report is scenario- and policy-oriented and includes assumptions about successful transformation; it is not evidence of observed future outcomes.",
+        "radar_relevance": "Substantive EU policy context, but it fails Strand B because foresight is applied rather than methodologically advanced, and it is not centrally a European R&I-system study for Strand A.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the official JRC repository record https://publications.jrc.ec.europa.eu/repository/handle/JRC121212; it provides extensive substantive text, authors, publication date and report identifier."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "The official record identifies DOI 10.2760/667966 and the Publications Office record matches the same report."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search confirmed JRC121212 and the Publications Office of the EU as the same 2020 report."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_report_record",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC121212",
+            "title": "Future transitions for the Bioeconomy towards Sustainable Development and a Climate-Neutral Economy - Knowledge Synthesis Final Report",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publications_office_record",
+            "url": "https://op.europa.eu/en/publication-detail/-/publication/54a1e679-f634-11ea-991b-01aa75ed71a1/language-en",
+            "title": "Future transitions for the bioeconomy towards sustainable development and a climate-neutral economy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The official EU report is substantive and verified, but its core contribution is a bioeconomy knowledge synthesis and policy-oriented foresight application, not a new reusable foresight method."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_METHOD_APPLICATION_ONLY",
+        "reason": "The report applies knowledge synthesis and foresight to the EU bioeconomy; it does not present a new or materially improved reusable method, and its central object is sectoral sustainability transition rather than the European R&I system itself."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T11:54:09Z",
+      "deep_scan_package_id": "worker-a-20261005T114145Z-7fb8937875b9",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:8fa238a08d76f644": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "35794343",
+      "identity_hash": "ca19442277244705",
+      "reader_title": "Cuban researchers in Europe formed broad transnational science networks",
+      "reader_what": "Their collaboration network spanned 991 affiliations, while ties with Cuba weakened with time abroad.",
+      "reader_why": "Researcher mobility can connect science systems, but origin-country ties may erode over time.",
+      "reader_more": "The authors analysed Scopus publication affiliations for Cuban researchers working in Europe from 1995–2014. Their collaboration network included 991 affiliations across 58 countries, with 698 in Europe. Collaboration with Cuba correlated moderately with performance in Europe, but declined as researchers spent longer publishing from European institutions.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed bibliometric study",
+        "research_question": "How do Cuban researchers working in Europe connect destination-country science networks with institutions in Cuba?",
+        "main_finding": "Cuban researchers in Europe participated in a broad international collaboration network, but their collaboration with Cuba declined the longer they published from Europe.",
+        "method_or_basis": "Scopus-based bibliometric and network analysis of publication affiliations and co-authors for 1995–2014.",
+        "qualification": "The sample is a defined group of Cuban researchers and Scopus-indexed publications, so it does not measure all researcher mobility or collaboration in Europe.",
+        "radar_relevance": "Historical evidence on researcher mobility, diaspora ties and cross-border scientific collaboration involving European institutions.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Springer provides open full text at https://link.springer.com/article/10.1007/s11192-018-2888-2 matching the title and authors."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1007/s11192-018-2888-2 resolves to the same Scientometrics article."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search found the Springer full text and a matching PMC copy with consistent bibliographic identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s11192-018-2888-2",
+            "title": "Scientific collaboration of Cuban researchers working in Europe: understanding relations between origin and destination countries",
+            "evidence_used": true
+          },
+          {
+            "kind": "repository_full_text",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6280978/",
+            "title": "Scientific collaboration of Cuban researchers working in Europe: understanding relations between origin and destination countries",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full text verifies a bibliometric study of Cuban researchers working across European S&T institutions, their collaboration with Cuba, and a 991-affiliation international network."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The study directly measures research mobility and collaboration networks connecting researchers based in European science and technology institutions with their origin-country system, a recognised R&I-system mechanism."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T11:54:09Z",
+      "deep_scan_package_id": "worker-a-20261005T114145Z-7fb8937875b9",
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [
+            "talent.retention"
+          ],
+          "actor": {
+            "name": "Cuban researchers working in European science and technology institutions",
+            "class": "other"
+          },
+          "mechanism": "collaborates",
+          "direction": "contracts",
+          "status": "operating",
+          "status_date": "2018-08-20",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The sample is a defined group of Cuban researchers and Scopus-indexed publications, so it does not measure all researcher mobility or collaboration in Europe.",
+          "text": "Collaboration with Cuban institutions declined the longer sampled Cuban researchers published from European institutions.",
+          "confidence": "high",
+          "record_key": "historical:id:8fa238a08d76f644",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:ca19442277244705:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:b94e1bed5d2ccda7": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "367c65cd",
+      "identity_hash": "eb95eab803d5e9de",
+      "reader_title": "EARTO recommendations on the Horizon Europe proposal",
+      "reader_what": "EARTO urged a larger budget, stronger collaborative R&D and support for enabling technologies.",
+      "reader_more": "The paper calls for at least €120 billion for Horizon Europe, a larger Pillar II share, support for key enabling technologies, public-private partnerships and industry participation. These are stakeholder recommendations. They are useful as advocacy history but not a qualifying independent evidence product for Strand A.",
+      "deep_analysis": {
+        "work_kind": "stakeholder policy recommendations",
+        "research_question": "",
+        "main_finding": "EARTO advocated changes to the Commission’s Horizon Europe proposal, including a larger budget and stronger support for collaborative applied R&D and enabling technologies.",
+        "method_or_basis": "Position paper reflecting EARTO and member recommendations; no independent empirical evaluation is presented.",
+        "qualification": "The document expresses EARTO’s policy preferences and supporting assertions; it does not independently establish that the proposed changes would produce the claimed outcomes.",
+        "radar_relevance": "Directly concerns EU R&I programme design, but fails the evidence-product threshold for Strand A.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the supplied two-page EARTO PDF https://www.earto.eu/wp-content/uploads/EARTO_Recommendations_on_EC_Proposal_for_HEU_-_Final-1.pdf; it is the complete recommendation paper dated 25 June 2018."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "The EARTO position paper has no DOI."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the same official EARTO PDF and confirms the document identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_advocacy_document",
+            "url": "https://www.earto.eu/wp-content/uploads/EARTO_Recommendations_on_EC_Proposal_for_HEU_-_Final-1.pdf",
+            "title": "EARTO Recommendations on EC Proposal for a Horizon Europe Programme with High Impact",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The complete EARTO document is verified. It is a stakeholder recommendation/advocacy paper calling for budget, programme-design and industrial-policy choices, rather than an independent evidence-led analytical study."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_ADVOCACY_NOT_EVIDENCE_PRODUCT",
+        "reason": "The paper is substantively about Horizon Europe but is primarily stakeholder advocacy and recommendations; it does not meet Strand A’s substantive evidence-product guard."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T11:54:09Z",
+      "deep_scan_package_id": "worker-a-20261005T114145Z-7fb8937875b9",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:ef7b579e40c70bf7": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "b8c6f7fc",
+      "identity_hash": "259469daebf0864f",
+      "reader_title": "A method linking scenarios with resource mapping",
+      "reader_what": "The method connects future scenarios to internal resources, capabilities and strategy evaluation.",
+      "reader_why": "It helps users rehearse strategic performance over time instead of assessing scenarios only statically.",
+      "reader_more": "Kunc and O’Brien combine scenario planning with resource mapping from the resource-based view and system dynamics. The method links external future conditions to internal resources and capabilities, supporting development and evaluation of strategy over time. The paper illustrates the approach in a postgraduate course and a company application, while noting that further research is needed.",
+      "deep_analysis": {
+        "work_kind": "methodological research article",
+        "research_question": "How can scenario use be enhanced so organisations can connect uncertain external futures with internal resources and strategic performance over time?",
+        "main_finding": "Serially integrating scenarios with resource mapping provides a structured method for linking future environments to resources, strategy development and evaluation.",
+        "method_or_basis": "Conceptual methodological integration of scenario planning, the resource-based view and resource mapping/system dynamics, illustrated with two applications.",
+        "qualification": "The method is illustrated through early teaching and company applications; the paper calls for further research rather than claiming broad validation.",
+        "radar_relevance": "A transferable foresight and strategy method suitable for reuse across domains, satisfying Strand B’s methodological-contribution requirement.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied DOI https://doi.org/10.1016/j.techfore.2017.03.018 resolves to the Elsevier article page with title, authors, DOI, abstract and methodological contribution."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1016/j.techfore.2017.03.018 matches the Technological Forecasting and Social Change article."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search found the University of Warwick WRAP repository record for the same article."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Warwick WRAP provides the accepted full-text manuscript at https://wrap.warwick.ac.uk/id/eprint/87744/1/WRAP-exploring-development-methodology-scenario-Kunc-2017.pdf; the manuscript explicitly proposes and develops the integrated scenario/resource-mapping method."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article_page",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0040162517303463",
+            "title": "Exploring the development of a methodology for scenario use: Combining scenario and resource mapping approaches",
+            "evidence_used": true
+          },
+          {
+            "kind": "institutional_repository_full_text",
+            "url": "https://wrap.warwick.ac.uk/id/eprint/87744/1/WRAP-exploring-development-methodology-scenario-Kunc-2017.pdf",
+            "title": "Exploring the development of a methodology for scenario use: combining scenario and resource mapping approaches",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full accepted manuscript verifies a novel serial integration of scenario planning with resource mapping/system-dynamics concepts, illustrated in teaching and company applications."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The paper explicitly proposes a novel reusable methodology that integrates scenarios with resource mapping to support strategy development, rehearsal and evaluation."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T11:54:10Z",
+      "deep_scan_package_id": "worker-a-20261005T114145Z-7fb8937875b9",
+      "claims": [
+        {
+          "object": "methods.scenario",
+          "secondary_objects": [
+            "methods.system_modelling"
+          ],
+          "actor": {
+            "name": "Kunc and O’Brien",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2017-04-04",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The method is illustrated through early teaching and company applications; the paper calls for further research rather than claiming broad validation.",
+          "text": "Kunc and O’Brien proposed a reusable method integrating scenario planning with resource mapping for strategy development and evaluation.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "historical:id:ef7b579e40c70bf7",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:259469daebf0864f:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:aedea75858f2f582": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "e2023400",
+      "identity_hash": "bb9733314a39093c",
+      "reader_title": "Research organisations challenged EIC intellectual-property rules",
+      "reader_what": "The signatories argued EIC IP rules could obstruct institutional knowledge-valorisation services.",
+      "reader_more": "Research-performing and knowledge-transfer organisations urged the Commission to use standard Horizon Europe IP rules for EIC Pathfinder and Transition projects. They argued the special provisions conflicted with institutional rules and complicated exploitation support. The document is a joint advocacy statement, so its predicted effects are not treated as independently demonstrated evidence.",
+      "deep_analysis": {
+        "work_kind": "joint stakeholder advocacy statement",
+        "research_question": "",
+        "main_finding": "The signatories opposed special EIC Pathfinder and Transition IP provisions and called for standard Horizon Europe rules.",
+        "method_or_basis": "Policy and legal argument by associations of research-performing organisations and knowledge-transfer professionals, citing the Model Grant Agreement and related EU policy documents.",
+        "qualification": "The statement accurately identifies and critiques policy provisions, but its claims about negative participation and valorisation effects are stakeholder assertions rather than independently evaluated outcomes.",
+        "radar_relevance": "The topic concerns European knowledge transfer and Horizon governance, but the work fails Strand A’s independent substantive evidence-product requirement.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "The supplied EARTO publication page resolves to the 5 December 2022 joint statement on EIC Model Grant Agreement IP provisions."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "The joint statement has no DOI."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the EARTO page and the complete joint-statement PDF."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Opened the official PDF https://www.earto.eu/wp-content/uploads/Joint-statement_EIC-IP-provisions_5-December-2022.pdf; it sets out the signatories’ objections to EIC Pathfinder and Transition IP rules."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_advocacy_document",
+            "url": "https://www.earto.eu/wp-content/uploads/Joint-statement_EIC-IP-provisions_5-December-2022.pdf",
+            "title": "Joint Statement Paper on the Model Grant Agreement’s Intellectual Property Provisions of the European Innovation Council under Horizon Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The complete official statement verifies the policy position and the cited EIC IP rule, but the work is a stakeholder advocacy statement rather than an independent evidence-led study."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_ADVOCACY_NOT_EVIDENCE_PRODUCT",
+        "reason": "The statement addresses an important Horizon Europe knowledge-transfer rule but is primarily stakeholder advocacy; its asserted consequences are not established by an independent substantive evidence product."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T11:54:10Z",
+      "deep_scan_package_id": "worker-a-20261005T114145Z-7fb8937875b9",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-05T09:48:39Z"
+  "claims_updated_at": "2026-10-05T11:54:10Z"
 }
