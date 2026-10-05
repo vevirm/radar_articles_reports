@@ -10,13 +10,13 @@
 <!-- Legacy regression tokens only: reform.css?v=23.0 · site-shell.js?v=29 -->
 </head>
 <body>
-<header><div class="wrap top"><div><div class="kicker">Competing directions</div><h1>Trends &amp; Counter-Trends</h1><p class="lede">Each pair shows two forces pulling in different directions. The numbers show their relative pull, not probabilities.</p></div><nav class="nav"><a href="../">Start</a><a href="../radar/">Main Radar</a><a href="../read/">Read At Least This</a><a href="../frontier/quick/">Matrix</a><a class="primary" href="./">Trends</a><a href="../priorities/">Risks &amp; Opportunities</a><a href="../shocks/">External Shocks</a></nav></div></header>
+<header><div class="wrap top"><div><div class="kicker">Competing directions</div><h1>Trends &amp; Counter-Trends</h1><p class="lede">Each pair shows two forces pulling in different directions: what is changing on each side, and why the tension matters for Europe. The numbers show relative evidence pull, not probabilities.</p></div><nav class="nav"><a href="../">Start</a><a href="../radar/">Main Radar</a><a href="../read/">Read At Least This</a><a href="../frontier/quick/">Matrix</a><a class="primary" href="./">Trends</a><a href="../priorities/">Risks &amp; Opportunities</a><a href="../shocks/">External Shocks</a></nav></div></header>
 <section class="core-flow"><div class="wrap flow"><a href="../radar/">1 · Radar</a><span>→</span><a href="../frontier/quick/">2 · Matrix</a><span>→</span><a class="current" href="./">3 · Trends</a><span>→</span><a href="../phenomena/">4 · Ongoing phenomena</a><span>→</span><a href="../priorities/">5 · Risks &amp; opportunities</a><span>→</span><a href="../shocks/">6 · External shocks</a></div></section>
 <main class="wrap">
 <section class="method"><div class="method-head"><h2>How to read these pairs</h2><p class="method-note">The two sides can strengthen at the same time. Older material is shown only when it adds useful context.</p></div><div id="corpusLine" class="corpus-line"></div></section>
 <div id="pairs" class="pair-list"><div class="empty">Loading</div></div>
 </main>
-<script src="../reader_rank.js?v=21.7"></script><script src="../reader_style.js?v=29"></script><script src="../historical/reasoning_context.js?v=1"></script><script src="../reader_cards.js?v=26"></script><script src="trends.js?v=26"></script>
+<script src="../reader_rank.js?v=21.7"></script><script src="../reader_style.js?v=29"></script><script src="../historical/reasoning_context.js?v=1"></script><script src="../reader_cards.js?v=26"></script><script src="../reader_clarity.js?v=1"></script><script src="trends.js?v=26"></script>
 <script>
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function surface(v){return globalThis.RadarReaderStyle?.surfaceText?.(v)||String(v||'')}
@@ -28,11 +28,15 @@ const TREND_DISPLAY_LIMIT=30;
 function trendDistance(x){return x?.emergent?(TREND_DISTANCE.get(String(x.id||'').trim())||4):2}
 function pair(x){
   const C=globalThis.RadarCards;
-  const lt=surface(x.left.title),rt=surface(x.right.title);
+  const R=globalThis.RadarReaderClarity;
+  const left=R?R.trendSide({title:x.left.title,plain:x.left.plain,why:x.left.why,pairTitle:x.pairTitle}):{title:x.left.title,evidence:x.left.plain,why:x.left.why};
+  const right=R?R.trendSide({title:x.right.title,plain:x.right.plain,why:x.right.why,pairTitle:x.pairTitle}):{title:x.right.title,evidence:x.right.plain,why:x.right.why};
+  const lt=surface(left.title),rt=surface(right.title);
   const head=x.pairTitle?`<div class="pair-head">${C?C.chip(x.kindLabel,x.wow):''}<h2 class="pair-title">${esc(surface(x.pairTitle))}</h2></div>`:'';
-  const composition=x.composition?`<p class="why">${esc(x.composition)}</p>`:'';
-  const flip=x.flip?`<p class="why">${esc(surface(x.flip))}</p>`:'';
-  return `<article class="pair" data-obviousness="${trendDistance(x)}">${head}<div class="tug-score" aria-label="Evidence pull ${x.left.pull} to ${x.right.pull}"><strong>${x.left.pull}</strong><div class="tug-track" aria-hidden="true"><span class="tug-left" data-pull="${x.left.pull}"></span><span class="tug-right" data-pull="${x.right.pull}"></span></div><strong>${x.right.pull}</strong></div><div class="axis"><section class="side"><h3>${esc(lt)}</h3>${x.left.plain?`<p class="plain">${esc(surface(x.left.plain))}</p>`:''}${evidenceBlock(x.left)}</section><section class="side right"><h3>${esc(rt)}</h3>${x.right.plain?`<p class="plain">${esc(surface(x.right.plain))}</p>`:''}${evidenceBlock(x.right)}</section></div>${composition}${flip}</article>`;
+  const composition=x.composition?`<p class="why"><strong>What the tension means:</strong> ${esc(x.composition)}</p>`:'';
+  const flip=x.flip?`<p class="why"><strong>What could change it:</strong> ${esc(surface(x.flip).replace(/^What could change the balance:\s*/i,''))}</p>`:'';
+  const sideBody=(side,raw)=>`${side.evidence?`<p class="plain"><strong>What is happening:</strong> ${esc(surface(side.evidence))}</p>`:''}${side.why?`<p class="why"><strong>Why it matters:</strong> ${esc(surface(side.why))}</p>`:''}${evidenceBlock(raw)}`;
+  return `<article class="pair" data-obviousness="${trendDistance(x)}">${head}<div class="tug-score" aria-label="Evidence pull ${x.left.pull} to ${x.right.pull}"><strong>${x.left.pull}</strong><div class="tug-track" aria-hidden="true"><span class="tug-left" data-pull="${x.left.pull}"></span><span class="tug-right" data-pull="${x.right.pull}"></span></div><strong>${x.right.pull}</strong></div><div class="axis"><section class="side"><h3>${esc(lt)}</h3>${sideBody(left,x.left)}</section><section class="side right"><h3>${esc(rt)}</h3>${sideBody(right,x.right)}</section></div>${composition}${flip}</article>`;
 }
 async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});if(!r.ok)return {};return await r.json()}catch(_){return {}}}
 function wowCyclePairs(items){const buckets=new Map([5,4,3,2,1].map(w=>[w,[]]));for(const x of items||[]){const w=Math.max(1,Math.min(5,trendDistance(x)));buckets.get(w).push(x)}const out=[];for(let round=0;round<3;round++)for(const w of [5,4,3,2,1]){const x=buckets.get(w)[round];if(x)out.push(x)}return out}
