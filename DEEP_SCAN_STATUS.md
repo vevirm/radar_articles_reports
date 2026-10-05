@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261005T095515Z-7fb8937875b9`
+- Current package: `worker-a-20261005T114145Z-7fb8937875b9`
 - Assigned unresolved records: **9**
   1. `historical:id:d70681a30b303787` — EC concludes first negotiation rounds on Horizon Europe association with Albania
   2. `historical:id:5ea183ed65b7eaac` — Albania: Informal exploratory talks for association to Horizon Europe
