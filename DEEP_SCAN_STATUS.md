@@ -6,40 +6,36 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2606** (Main **1236** + Historical **1370**)
-- Automatic queue still needing V2 verification: **90** (Main **6** + Historical **84**)
-- Currently assigned to workers: **90** (Main **6** + Historical **84**)
+- Authoritative V2 verified: **2615** (Main **1242** + Historical **1373**)
+- Automatic queue still needing V2 verification: **81** (Main **0** + Historical **81**)
+- Currently assigned to workers: **72** (Main **0** + Historical **72**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **29**
-- Automatic queue pending and not yet assigned: **0**
+- Automatic queue pending and not yet assigned: **9**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261005T075813Z-09a34b25a1eb`
-- Assigned unresolved records: **40**
-  1. `link:https://www.atlanticcouncil.org/category/in-depth-research-reports/` — Issue briefs and reports
-  2. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=c69a83e3-bcba-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Technology assessment for an EU digital tool for preventive healthcare - Publications Office of the EU
-  3. `link:https://www.aka.fi/en/from-research-to-society/rcf-impact/international-cooperation/european-cooperation/european-funding-cooperation/` — Horizon Europe funding cooperation
-  4. `link:https://doi.org/10.1111/1750-3841.71525` — Bioactive Peptides in Functional Foods: From Production and Validation to Commercialization, Regulatory Hurdles, and Future Prospects
-  5. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=2608d934-bd30-11f1-9aae-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Commission Implementing Decision (EU) 2026/2166 of 29 September 2026 amending Implementing Decision 2013/700/EU setting up the European Social Survey as a European Research Infrastructure Consortium (ESS ERIC) (notified under document C(2026) 6735) - Publications Office of the EU
-  6. `link:https://www.cesaer.org/publications/designing-the-european-competitiveness-fund-key-elements-and-the-fp10ecf-interface/` — Joint statement 'Designing the European Competitiveness Fund: Key elements and the FP10–ECF interface'
-  7. `historical:id:95ad1ace03b22f0b` — Futures Literacy for Anticipatory Societies – Strengthening Foresight Systems Across Europe (FLARE)
-  8. `historical:id:7430f92885685c0b` — ERA Portal Austria – Slovenian Presidency Conference “New European Research Area" - Report and recommendations
-  - … plus 32 more in the package manifest
+- Current package: `worker-a-20261005T090615Z-e207d826bc8f`
+- Assigned unresolved records: **32**
+  1. `historical:id:7430f92885685c0b` — ERA Portal Austria – Slovenian Presidency Conference “New European Research Area" - Report and recommendations
+  2. `historical:id:5d17b716789ab12c` — ERA Portal Austria – GENDERACTIONplus policy briefs and Position Papers
+  3. `historical:id:5aa6f9b6def3d1b9` — ERA Portal Austria – European Research Area Policy Agenda
+  4. `historical:id:9f9bb8666f5173bd` — ERA Portal Austria – Council conclusions on the New European Research Area (1 Dec 2020)
+  5. `historical:id:bd3640327b5b1db5` — ERA Portal Austria – A new ERA for Research and Innovation
+  6. `historical:id:9df98530c8e7c960` — Welcome to digital coffee about Horizon Europe cluster 3 | Vinnova
+  7. `historical:id:d8644ec6784bcc45` — User study and IPR analysis in preparation for EIC Accelerator - Strategic Health and Digital Technologies | Vinnova
+  8. `historical:id:9038452533515f40` — Interested in Horizon Europe Research Infrastructure Programme? | Vinnova
+  - … plus 24 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261005T075900Z-001f0cf188ca`
-- Assigned unresolved records: **15**
-  1. `historical:id:02003b3207002949` — A Franco-German China Policy: The Road Less Traveled
-  2. `historical:id:e8f7087392fbb137` — Recommendations from the Swedish Research Council for Horizon 2020 and the next framwork programme
+- Current package: `worker-b-20261005T090651Z-2057765d77e5`
+- Assigned unresolved records: **5**
+  1. `historical:id:cfd5ae4e33f6a521` — Foresight 2030 Threats | ENISA
+  2. `historical:id:b5f939bb363fae8f` — Future of Space Exploration: Strategic Scenarios for European Space Exploration 2040-2060 - ESPI
   3. `historical:id:61deaf307b884e50` — Knowledge Transfer 2015
-  4. `historical:id:cfd5ae4e33f6a521` — Foresight 2030 Threats | ENISA
-  5. `historical:id:b5f939bb363fae8f` — Future of Space Exploration: Strategic Scenarios for European Space Exploration 2040-2060 - ESPI
-  6. `historical:id:7cd5bf0ed1eee954` — A Hybrid Scenario Planning Methodology for Interactive Digital Media
-  7. `historical:id:0ce87ce447d6c00d` — An integrated approach for the evaluation of national Foresight: The Russian case
-  8. `historical:id:521bbc68831c9ee4` — Gen-4 Engineering Research Centers (ERC)
-  - … plus 7 more in the package manifest
+  4. `historical:id:7cd5bf0ed1eee954` — A Hybrid Scenario Planning Methodology for Interactive Digital Media
+  5. `historical:id:0ce87ce447d6c00d` — An integrated approach for the evaluation of national Foresight: The Russian case
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`

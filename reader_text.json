@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-04T09:56:56Z",
+  "generated_at": "2026-10-05T09:01:05Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -226113,8 +226113,636 @@
       "reader_text_model": "user-provided-llm-subscription",
       "reader_text_written_at": "2026-10-04T09:56:56Z",
       "deep_scan_package_id": "worker-b-20261004T075859Z-67e25a44f2dc"
+    },
+    "link:https://www.atlanticcouncil.org/category/in-depth-research-reports/": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "0b680bdb",
+      "identity_hash": "f573881b7fa03ab9",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "The record is a category/listing page containing many unrelated reports, not one identifiable substantive work.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied work/page: https://www.atlanticcouncil.org/category/in-depth-research-reports/; identity and substantive content were assessed against the claimed record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_source",
+            "url": "https://www.atlanticcouncil.org/category/in-depth-research-reports/",
+            "title": "Issue briefs and reports",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance were checked against the supplied primary material. The admission decision reflects the actual work rather than scanner prose."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "The record is a category/listing page containing many unrelated reports, not one identifiable substantive work."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T09:01:03Z",
+      "deep_scan_package_id": "worker-a-20261005T075813Z-09a34b25a1eb",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=c69a83e3-bcba-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "d1d09d72",
+      "identity_hash": "494eb28574df3e27",
+      "reader_title": "Technology assessment for an EU digital tool for preventive healthcare - Publications Office of the EU",
+      "reader_what": "The STOA study finds an EU preventive-health platform technically plausible but dependent on interoperability, governance, trust and sustainable implementation.",
+      "reader_why": "Its feasibility depends on interoperable, governed and trusted European health-data infrastructure.",
+      "reader_more": "The STOA study finds an EU preventive-health platform technically plausible but dependent on interoperability, governance, trust and sustainable implementation. The study assesses a proposed platform; it does not report an implemented EU system. This is relevant to the Radar because a substantive STOA technology assessment examines the feasibility, governance and sustainability of an EU-level AI-supported preventive-health platform.",
+      "deep_analysis": {
+        "work_kind": "technology assessment",
+        "research_question": "",
+        "main_finding": "The STOA study finds an EU preventive-health platform technically plausible but dependent on interoperability, governance, trust and sustainable implementation.",
+        "method_or_basis": "Technology assessment drawing on system readiness, governance and implementation analysis for a proposed European-level digital platform.",
+        "qualification": "The study assesses a proposed platform; it does not report an implemented EU system.",
+        "radar_relevance": "A substantive STOA technology assessment examines the feasibility, governance and sustainability of an EU-level AI-supported preventive-health platform.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied work/page: https://op.europa.eu/o/opportal-service/download-handler?identifier=c69a83e3-bcba-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=; identity and substantive content were assessed against the claimed record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_source",
+            "url": "https://op.europa.eu/o/opportal-service/download-handler?identifier=c69a83e3-bcba-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+            "title": "Technology assessment for an EU digital tool for preventive healthcare - Publications Office of the EU",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance were checked against the supplied primary material. The admission decision reflects the actual work rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A substantive STOA technology assessment examines the feasibility, governance and sustainability of an EU-level AI-supported preventive-health platform."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T09:01:04Z",
+      "deep_scan_package_id": "worker-a-20261005T075813Z-09a34b25a1eb",
+      "claims": [
+        {
+          "object": "health.data_infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Parliament",
+            "class": "eu_body"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-09",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The study assesses a proposed platform; it does not report an implemented EU system.",
+          "text": "The STOA study finds an EU preventive-health platform technically plausible but dependent on interoperability, governance, trust and sustainable implementation.",
+          "confidence": "high",
+          "status_date_precision": "month",
+          "record_key": "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=c69a83e3-bcba-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:494eb28574df3e27:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.aka.fi/en/from-research-to-society/rcf-impact/international-cooperation/european-cooperation/european-funding-cooperation/": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "d4ea2525",
+      "identity_hash": "8b579041332cd44e",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "The page is programme information about Horizon Europe partnerships rather than a completed substantive evidence product.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied work/page: https://www.aka.fi/en/from-research-to-society/rcf-impact/international-cooperation/european-cooperation/european-funding-cooperation/; identity and substantive content were assessed against the claimed record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_source",
+            "url": "https://www.aka.fi/en/from-research-to-society/rcf-impact/international-cooperation/european-cooperation/european-funding-cooperation/",
+            "title": "Horizon Europe funding cooperation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance were checked against the supplied primary material. The admission decision reflects the actual work rather than scanner prose."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "The page is programme information about Horizon Europe partnerships rather than a completed substantive evidence product."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T09:01:04Z",
+      "deep_scan_package_id": "worker-a-20261005T075813Z-09a34b25a1eb",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1111/1750-3841.71525": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "405414a3",
+      "identity_hash": "44375ce6c48b15bc",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "The review is not substantively European; Europe appears mainly through regulatory context in a global functional-food review.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied work/page: https://content.openalex.org/works/W7215036107.pdf; identity and substantive content were assessed against the claimed record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_source",
+            "url": "https://content.openalex.org/works/W7215036107.pdf",
+            "title": "Bioactive Peptides in Functional Foods: From Production and Validation to Commercialization, Regulatory Hurdles, and Future Prospects",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance were checked against the supplied primary material. The admission decision reflects the actual work rather than scanner prose."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "The review is not substantively European; Europe appears mainly through regulatory context in a global functional-food review."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T09:01:04Z",
+      "deep_scan_package_id": "worker-a-20261005T075813Z-09a34b25a1eb",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=2608d934-bd30-11f1-9aae-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "8c7684bb",
+      "identity_hash": "4c2f1367991a8916",
+      "reader_title": "Commission Implementing Decision (EU) 2026/2166 of 29 September 2026 amending Implementing Decision 2013/700/EU setting up the European Social",
+      "reader_what": "The Commission amended the legal act establishing ESS ERIC under the EU research-infrastructure framework.",
+      "reader_why": "It changes the formal governance basis of a major European research infrastructure.",
+      "reader_more": "The Commission amended the legal act establishing ESS ERIC under the EU research-infrastructure framework. This establishes a formal governance change; it does not itself measure research outcomes. This is relevant to the Radar because the Commission adopted a formal 2026 legal amendment governing the European Social Survey ERIC, a substantive current research-infrastructure development.",
+      "deep_analysis": {
+        "work_kind": "legal decision",
+        "research_question": "",
+        "main_finding": "The Commission amended the legal act establishing ESS ERIC under the EU research-infrastructure framework.",
+        "method_or_basis": "Official Journal legal text adopted under the ERIC Regulation.",
+        "qualification": "This establishes a formal governance change; it does not itself measure research outcomes.",
+        "radar_relevance": "The Commission adopted a formal 2026 legal amendment governing the European Social Survey ERIC, a substantive current research-infrastructure development.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied work/page: https://op.europa.eu/o/opportal-service/download-handler?identifier=2608d934-bd30-11f1-9aae-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=; identity and substantive content were assessed against the claimed record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_source",
+            "url": "https://op.europa.eu/o/opportal-service/download-handler?identifier=2608d934-bd30-11f1-9aae-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+            "title": "Commission Implementing Decision (EU) 2026/2166 of 29 September 2026 amending Implementing Decision 2013/700/EU setting up the European Social Survey as a European Research Infrastructure Consortium (ESS ERIC) (notified under document C(2026) 6735) - Publications Office of the EU",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance were checked against the supplied primary material. The admission decision reflects the actual work rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CURRENT_DEVELOPMENT",
+        "reason": "The Commission adopted a formal 2026 legal amendment governing the European Social Survey ERIC, a substantive current research-infrastructure development."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T09:01:04Z",
+      "deep_scan_package_id": "worker-a-20261005T075813Z-09a34b25a1eb",
+      "claims": [
+        {
+          "object": "research.infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "adopts",
+          "direction": "unchanged",
+          "status": "adopted",
+          "status_date": "2026-09-29",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "This establishes a formal governance change; it does not itself measure research outcomes.",
+          "text": "The Commission amended the legal act establishing ESS ERIC under the EU research-infrastructure framework.",
+          "confidence": "high",
+          "record_key": "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=2608d934-bd30-11f1-9aae-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:4c2f1367991a8916:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.cesaer.org/publications/designing-the-european-competitiveness-fund-key-elements-and-the-fp10ecf-interface/": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "972425a9",
+      "identity_hash": "e2335162090fbc7d",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "The supplied page is a short stakeholder advocacy statement and does not provide a sufficiently substantive evidence product for authoritative admission.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied work/page: https://www.cesaer.org/publications/designing-the-european-competitiveness-fund-key-elements-and-the-fp10ecf-interface/; identity and substantive content were assessed against the claimed record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_source",
+            "url": "https://www.cesaer.org/publications/designing-the-european-competitiveness-fund-key-elements-and-the-fp10ecf-interface/",
+            "title": "Joint statement 'Designing the European Competitiveness Fund: Key elements and the FP10–ECF interface'",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance were checked against the supplied primary material. The admission decision reflects the actual work rather than scanner prose."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "The supplied page is a short stakeholder advocacy statement and does not provide a sufficiently substantive evidence product for authoritative admission."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T09:01:04Z",
+      "deep_scan_package_id": "worker-a-20261005T075813Z-09a34b25a1eb",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:95ad1ace03b22f0b": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "0bf2a7d8",
+      "identity_hash": "79312089dfbed2bb",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "This is a COST Action/project description, not a completed evidence-led study or substantive policy analysis.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied work/page: https://www.cost.eu/actions/CA25141/; identity and substantive content were assessed against the claimed record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_source",
+            "url": "https://www.cost.eu/actions/CA25141/",
+            "title": "Futures Literacy for Anticipatory Societies – Strengthening Foresight Systems Across Europe (FLARE)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance were checked against the supplied primary material. The admission decision reflects the actual work rather than scanner prose."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "This is a COST Action/project description, not a completed evidence-led study or substantive policy analysis."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T09:01:04Z",
+      "deep_scan_package_id": "worker-a-20261005T075813Z-09a34b25a1eb",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:02003b3207002949": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "a0d89431",
+      "identity_hash": "43ad7e4b4559ee2b",
+      "reader_title": "A Franco-German China Policy: The Road Less Traveled",
+      "reader_what": "The discussion identifies growing Franco-German convergence toward a more European China policy, including technology and digital-security concerns.",
+      "reader_why": "It records how technology dependence and digital-security concerns were entering coordinated European China policy.",
+      "reader_more": "The discussion identifies growing Franco-German convergence toward a more European China policy, including technology and digital-security concerns. The piece predates later coalition and EU policy changes and is analytical rather than an outcome evaluation. This is relevant to the Radar because the analysis compares French and German China policy and explicitly discusses European coordination, technology competition, data protection and dependence on foreign digital technology.",
+      "deep_analysis": {
+        "work_kind": "geopolitical policy analysis",
+        "research_question": "",
+        "main_finding": "The discussion identifies growing Franco-German convergence toward a more European China policy, including technology and digital-security concerns.",
+        "method_or_basis": "Substantive Institut Montaigne/MERICS expert discussion grounded in the two countries’ policy positions.",
+        "qualification": "The piece predates later coalition and EU policy changes and is analytical rather than an outcome evaluation.",
+        "radar_relevance": "The analysis compares French and German China policy and explicitly discusses European coordination, technology competition, data protection and dependence on foreign digital technology.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied work/page: https://www.institutmontaigne.org/en/expressions/franco-german-china-policy-road-less-traveled; identity and substantive content were assessed against the claimed record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title/identity recovery found https://www.institutmontaigne.org/en/expressions/franco-german-china-policy-road-less-traveled, matching the claimed title and provenance."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered authoritative or legitimate publisher/repository source: https://www.institutmontaigne.org/en/expressions/franco-german-china-policy-road-less-traveled."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_source",
+            "url": "https://www.institutmontaigne.org/en/expressions/franco-german-china-policy-road-less-traveled",
+            "title": "A Franco-German China Policy: The Road Less Traveled",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance were checked against the supplied primary material and an independent publisher/repository recovery route. The admission decision reflects the actual work rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The analysis compares French and German China policy and explicitly discusses European coordination, technology competition, data protection and dependence on foreign digital technology."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T09:01:05Z",
+      "deep_scan_package_id": "worker-b-20261005T075900Z-001f0cf188ca",
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "France and Germany",
+            "class": "member_state"
+          },
+          "mechanism": "coordinates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2019-04-12",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "FR",
+              "DE"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "The piece predates later coalition and EU policy changes and is analytical rather than an outcome evaluation.",
+          "text": "The discussion identifies growing Franco-German convergence toward a more European China policy, including technology and digital-security concerns.",
+          "confidence": "high",
+          "record_key": "historical:id:02003b3207002949",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:43ad7e4b4559ee2b:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:e8f7087392fbb137": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "8f37ae83",
+      "identity_hash": "e3d755d0939b0258",
+      "reader_title": "Recommendations from the Swedish Research Council for Horizon 2020 and the next framwork programme",
+      "reader_what": "The Swedish Research Council recommended changes to EU framework-programme design based on its experience with Horizon 2020.",
+      "reader_why": "It captures a national funder’s evidence and priorities for the post-Horizon-2020 research framework.",
+      "reader_more": "The Swedish Research Council recommended changes to EU framework-programme design based on its experience with Horizon 2020. The recommendations are advocacy and do not establish subsequent EU adoption or effects. This is relevant to the Radar because the Swedish Research Council paper gives substantive recommendations on Horizon 2020 and the design of the next EU research framework programme.",
+      "deep_analysis": {
+        "work_kind": "policy recommendations",
+        "research_question": "",
+        "main_finding": "The Swedish Research Council recommended changes to EU framework-programme design based on its experience with Horizon 2020.",
+        "method_or_basis": "Official Swedish Research Council position paper.",
+        "qualification": "The recommendations are advocacy and do not establish subsequent EU adoption or effects.",
+        "radar_relevance": "The Swedish Research Council paper gives substantive recommendations on Horizon 2020 and the design of the next EU research framework programme.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened supplied work/page: https://www.vr.se/download/18.56d49a6016b104df37f9b4/1561370122052/Swedish+Research+Council+position+Interim+evaluation+of+Horizon+2020+and+the+next+framework+programme.pdf; identity and substantive content were assessed against the claimed record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_source",
+            "url": "https://www.vr.se/download/18.56d49a6016b104df37f9b4/1561370122052/Swedish+Research+Council+position+Interim+evaluation+of+Horizon+2020+and+the+next+framework+programme.pdf",
+            "title": "Recommendations from the Swedish Research Council for Horizon 2020 and the next framwork programme",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and provenance were checked against the supplied primary material. The admission decision reflects the actual work rather than scanner prose."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The Swedish Research Council paper gives substantive recommendations on Horizon 2020 and the design of the next EU research framework programme."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-05T09:01:05Z",
+      "deep_scan_package_id": "worker-b-20261005T075900Z-001f0cf188ca",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Swedish Research Council",
+            "class": "national_funder"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2017-01-13",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "The recommendations are advocacy and do not establish subsequent EU adoption or effects.",
+          "text": "The Swedish Research Council recommended changes to EU framework-programme design based on its experience with Horizon 2020.",
+          "confidence": "high",
+          "record_key": "historical:id:e8f7087392fbb137",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:e3d755d0939b0258:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-04T09:56:56Z"
+  "claims_updated_at": "2026-10-05T09:01:05Z"
 }
