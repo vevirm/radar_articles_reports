@@ -21,6 +21,8 @@
 </main>
 <script src="../reader_rank.js?v=17.20.18"></script>
 <script src="scenarios.js?v=23.3"></script>
+<script src="../reader_cards.js?v=26"></script>
+<script src="../reader_clarity.js?v=1"></script>
 <script>
 const clean=v=>String(v||'').replace(/\s+/g,' ').trim();
 const esc=v=>clean(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -150,13 +152,13 @@ function visibleShockExplanation(title,text){return clean(text)||shockExplanatio
     // Stage 7 already publishes the 5-4-3-2-1 x3 shelf (with thin wow levels filled
     // from the nearest level). Keep that order; re-bucketing here dropped findings.
     const items=all.slice(0,15);
-    document.getElementById('shockSummary').textContent=items.length?'Possible shocks worth watching.':'No possible shock is ready to show yet.';
+    document.getElementById('shockSummary').textContent=items.length?'Outside events that could abruptly change the current European research and innovation picture.':'No possible shock is ready to show yet.';
     const C=globalThis.RadarCards;
-    el.innerHTML=items.length?items.map((x,i)=>{const e=x.detail&&x.detail.engine;if(C&&e&&e.lead){return `<li>${C.chip(e.kindLabel||'What if',e.wow)}<strong>${esc(C.surface(x.text))}</strong>${C.body({lead:e.lead,so:e.so,basis:e.basis})}${shockDetailHtml(x,i)}</li>`}const raw=x.explanation&&x.detail&&x.detail.type==='higher-order'?x.explanation:shockExplanation(x.text);const explanation=visibleShockExplanation(x.text,raw);return `<li><strong>${esc(x.text)}</strong><p>${esc(explanation)}</p>${shockDetailHtml(x,i)}</li>`}).join(''):'<li class="empty">No possible shock is ready to show yet.</li>';
+    const R=globalThis.RadarReaderClarity;
+    el.innerHTML=items.length?items.map((x,i)=>{const e=x.detail&&x.detail.engine;if(C&&e&&e.lead){const r=R?R.shock({headline:x.text,lead:e.lead,so:e.so,basis:e.basis}):{headline:x.text,what:e.lead,why:e.so,basis:e.basis};return `<li>${C.chip(e.kindLabel||'What if',e.wow)}<strong>${esc(C.surface(r.headline))}</strong>${r.what?`<p class="card-lead"><strong>What makes this possible:</strong> ${esc(C.surface(r.what))}</p>`:''}${r.why?`<p class="card-so"><strong>Why it matters:</strong> ${esc(C.surface(r.why))}</p>`:''}${r.basis?`<p class="card-basis">${esc(r.basis)}</p>`:''}${shockDetailHtml(x,i)}</li>`}const raw=x.explanation&&x.detail&&x.detail.type==='higher-order'?x.explanation:shockExplanation(x.text);const explanation=visibleShockExplanation(x.text,raw);const why=R?R.whyFor(x.text,explanation):'';return `<li><strong>${esc(x.text)}</strong><p><strong>What makes this possible:</strong> ${esc(explanation)}</p>${why?`<p><strong>Why it matters:</strong> ${esc(why)}</p>`:''}${shockDetailHtml(x,i)}</li>`}).join(''):'<li class="empty">No possible shock is ready to show yet.</li>';
   }catch(e){console.error(e);document.getElementById('shockSummary').textContent='Shock evidence is unavailable.';el.innerHTML='<li class="empty">Unavailable.</li>'}
 })();
 </script>
-<script src="../reader_cards.js?v=26"></script>
 <script src="../site-shell.js?v=29"></script>
 </body>
 </html>
