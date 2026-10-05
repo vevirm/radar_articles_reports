@@ -1,0 +1,2849 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-a-20261005T093429Z-d275e359cac3",
+  "results": [
+    {
+      "record_key": "historical:id:53a5c41fc874984c",
+      "source_hash": "5ada008f",
+      "identity_hash": "78ab5c8cd3401517",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching reader-facing source https://www.bis.org/publications/working-paper-1325-ai-adoption-productivity-and-employment-evidence-european-firms.pdf; package contains substantive matching pdf_excerpt material from this route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.bis.org/publications/working-paper-1325-ai-adoption-productivity-and-employment-evidence-european-firms.pdf",
+            "title": "AI adoption, productivity and employment: evidence from European firms | Bank for International Settlements",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and substantive content verified against the supplied primary material and, where thin, an independently recovered publisher/repository source."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Direct evidence on European firms’ adoption of a strategic technology, productivity effects, innovation and complementary investment needs."
+      },
+      "reader_title": "AI adoption, productivity and employment: evidence from European firms",
+      "reader_what": "AI adoption raised labour productivity in sampled EU firms by about 4%, without short-run firm-level employment losses.",
+      "reader_why": "AI adoption can raise firm productivity when software, data and workforce training complement the technology.",
+      "reader_more": "AI adoption raised labour productivity in sampled EU firms by about 4%, without short-run firm-level employment losses. Matched EIBIS-ORBIS data for EU and US firms, using US peer adoption rates as an instrument for EU AI adoption. The estimates cover sampled non-financial firms and short-run outcomes; longer-run employment effects remain uncertain.",
+      "deep_analysis": {
+        "work_kind": "empirical study",
+        "research_question": "What does this work establish about its stated research, policy or methodological problem?",
+        "main_finding": "AI adoption raised labour productivity in sampled EU firms by about 4%, without short-run firm-level employment losses.",
+        "method_or_basis": "Matched EIBIS-ORBIS data for EU and US firms, using US peer adoption rates as an instrument for EU AI adoption.",
+        "qualification": "The estimates cover sampled non-financial firms and short-run outcomes; longer-run employment effects remain uncertain.",
+        "radar_relevance": "Direct evidence on European firms’ adoption of a strategic technology, productivity effects, innovation and complementary investment needs.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "ai.adoption",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European firms",
+            "class": "company"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-01-23",
+          "scope": {
+            "level": "company_in_eu",
+            "countries": []
+          },
+          "kind": "effect",
+          "qualification": "The estimates cover sampled non-financial firms and short-run outcomes; longer-run employment effects remain uncertain.",
+          "text": "AI adoption raised labour productivity in sampled EU firms by about 4%, without short-run firm-level employment losses.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:a0d3aec44cdb9e3c",
+      "source_hash": "7d43551b",
+      "identity_hash": "d3730633fe2a2c4d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching reader-facing source https://commission.europa.eu/implementation-dialogues/implementation-dialogue-chips-act-executive-vice-president-henna-virkkunen-2026-03-26_en; package contains substantive matching substantial_web_text material from this route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://commission.europa.eu/implementation-dialogues/implementation-dialogue-chips-act-executive-vice-president-henna-virkkunen-2026-03-26_en",
+            "title": "Implementation dialogue on the Chips Act with Executive Vice-President Henna Virkkunen",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and source provenance were verified sufficiently to make a negative admission decision; no substitute work was used."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-03-26"
+        },
+        "unset": [],
+        "reason": "European Commission event page gives 26 March 2026."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "NON_SUBSTANTIVE_EVENT_PAGE",
+        "reason": "Official event summary reports a Chips Act implementation dialogue and stakeholder recommendations, but it is not a completed evidence product for historical Strand A or B."
+      },
+      "reader_title": "Implementation dialogue on the Chips Act with Executive Vice-President Henna Virkkunen",
+      "reader_what": "Official event summary reports a Chips Act implementation dialogue and stakeholder recommendations, but it is not a completed evidence product",
+      "reader_why": "",
+      "reader_more": "Official event summary reports a Chips Act implementation dialogue and stakeholder recommendations, but it is not a completed evidence product for historical Strand A or B.",
+      "deep_analysis": {
+        "work_kind": "event/landing page or out-of-scope evidence product",
+        "research_question": "",
+        "main_finding": "Official event summary reports a Chips Act implementation dialogue and stakeholder recommendations, but it is not a completed evidence product for historical Strand A or B.",
+        "method_or_basis": "Verified matching primary/official source and assessed it against historical Strand A/B admission rules.",
+        "qualification": "The negative decision concerns Radar admission, not the legitimacy of the underlying organisation or activity.",
+        "radar_relevance": "Official event summary reports a Chips Act implementation dialogue and stakeholder recommendations, but it is not a completed evidence product for historical Strand A or B.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:36c2a6e773a261ac",
+      "source_hash": "150017ca",
+      "identity_hash": "faea3a0a192c5e8c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching reader-facing source https://www.bis.org/speeches/20260428-analysis-action-ai-financial-markets.pdf; package contains substantive matching pdf_excerpt material from this route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.bis.org/speeches/20260428-analysis-action-ai-financial-markets.pdf",
+            "title": "From analysis to action - AI in financial markets | Bank for International Settlements",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and source provenance were verified sufficiently to make a negative admission decision; no substitute work was used."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-04-28"
+        },
+        "unset": [],
+        "reason": "BIS identifies the speech as delivered 28 April 2026."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_RI",
+        "reason": "The BIS speech concerns AI use in Italian financial markets and regulation; R&I is not the central object and the work does not establish a European R&I-system mechanism."
+      },
+      "reader_title": "From analysis to action - AI in financial markets",
+      "reader_what": "The BIS speech concerns AI use in Italian financial markets and regulation; R&I is not the central object and the",
+      "reader_why": "",
+      "reader_more": "The BIS speech concerns AI use in Italian financial markets and regulation; R&I is not the central object and the work does not establish a European R&I-system mechanism.",
+      "deep_analysis": {
+        "work_kind": "event/landing page or out-of-scope evidence product",
+        "research_question": "",
+        "main_finding": "The BIS speech concerns AI use in Italian financial markets and regulation; R&I is not the central object and the work does not establish a European R&I-system mechanism.",
+        "method_or_basis": "Verified matching primary/official source and assessed it against historical Strand A/B admission rules.",
+        "qualification": "The negative decision concerns Radar admission, not the legitimacy of the underlying organisation or activity.",
+        "radar_relevance": "The BIS speech concerns AI use in Italian financial markets and regulation; R&I is not the central object and the work does not establish a European R&I-system mechanism.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:15fcdd32dcb8df56",
+      "source_hash": "c35fcd9d",
+      "identity_hash": "7fccd89c8a28d18c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied URL https://digital-strategy.ec.europa.eu/en/factpages/data-union-nutshell; package material was abstract_or_landing_page, so independent recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the current European Commission Data Union fact page with substantive policy detail."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched title with issuing organisation/year (European Commission — Digital Strategy; 2025-01-01) and found consistent identity signals."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Checked the official publisher/repository route; matching source used: https://digital-strategy.ec.europa.eu/en/factpages/data-union-nutshell"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Used distinctive title fragments and organisation/DOI clues; no conflicting bibliographic identity was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://digital-strategy.ec.europa.eu/en/factpages/data-union-nutshell",
+            "title": "Data Union in a nutshell | Shaping Europe’s digital future",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and substantive content verified against the supplied primary material and, where thin, an independently recovered publisher/repository source."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "It directly concerns Europe’s AI/data capability, digital infrastructure and strategic position."
+      },
+      "reader_title": "Data Union in a nutshell",
+      "reader_what": "The Data Union Strategy proposes data labs, expanded data spaces and simpler data rules to increase access to data for",
+      "reader_why": "Broader access to high-quality data is intended to strengthen European AI development and reduce capability bottlenecks.",
+      "reader_more": "The Data Union Strategy proposes data labs, expanded data spaces and simpler data rules to increase access to data for AI in Europe. European Commission strategy fact page describing planned instruments, services and regulatory simplification. This is a Commission strategy description, not evidence that the planned measures have already produced outcomes.",
+      "deep_analysis": {
+        "work_kind": "policy strategy",
+        "research_question": "What does this work establish about its stated research, policy or methodological problem?",
+        "main_finding": "The Data Union Strategy proposes data labs, expanded data spaces and simpler data rules to increase access to data for AI in Europe.",
+        "method_or_basis": "European Commission strategy fact page describing planned instruments, services and regulatory simplification.",
+        "qualification": "This is a Commission strategy description, not evidence that the planned measures have already produced outcomes.",
+        "radar_relevance": "It directly concerns Europe’s AI/data capability, digital infrastructure and strategic position.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "digital.infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2025-01-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "This is a Commission strategy description, not evidence that the planned measures have already produced outcomes.",
+          "text": "The Data Union Strategy proposes data labs, expanded data spaces and simpler data rules to increase access to data for AI in Europe.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:e9adf7de4ec87403",
+      "source_hash": "c422675f",
+      "identity_hash": "8a3470a7e653f318",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied URL https://www.eeas.europa.eu/delegations/aotearoa-new-zealand/horizon-europe-roadshow-christchurch_en; package material was abstract_or_landing_page, so independent recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the EEAS Christchurch event page and confirmed it is an information/networking event."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched title with issuing organisation/year (European External Action Service; 2024-10-23) and found consistent identity signals."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Checked the official publisher/repository route; matching source used: https://www.eeas.europa.eu/delegations/aotearoa-new-zealand/horizon-europe-roadshow-christchurch_en"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Used distinctive title fragments and organisation/DOI clues; no conflicting bibliographic identity was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.eeas.europa.eu/delegations/aotearoa-new-zealand/horizon-europe-roadshow-christchurch_en",
+            "title": "Horizon Europe Roadshow - Christchurch",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and source provenance were verified sufficiently to make a negative admission decision; no substitute work was used."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "NON_SUBSTANTIVE_EVENT_PAGE",
+        "reason": "The Christchurch page is an information/networking roadshow announcement, which the rules explicitly exclude as an event/promotional page."
+      },
+      "reader_title": "Horizon Europe Roadshow - Christchurch",
+      "reader_what": "The Christchurch page is an information/networking roadshow announcement, which the rules explicitly exclude as an event/promotional page.",
+      "reader_why": "",
+      "reader_more": "The Christchurch page is an information/networking roadshow announcement, which the rules explicitly exclude as an event/promotional page.",
+      "deep_analysis": {
+        "work_kind": "event/landing page or out-of-scope evidence product",
+        "research_question": "",
+        "main_finding": "The Christchurch page is an information/networking roadshow announcement, which the rules explicitly exclude as an event/promotional page.",
+        "method_or_basis": "Verified matching primary/official source and assessed it against historical Strand A/B admission rules.",
+        "qualification": "The negative decision concerns Radar admission, not the legitimacy of the underlying organisation or activity.",
+        "radar_relevance": "The Christchurch page is an information/networking roadshow announcement, which the rules explicitly exclude as an event/promotional page.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:e5b4bf7f44b8dd42",
+      "source_hash": "0059796f",
+      "identity_hash": "87df7dea74e69a7a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching reader-facing source https://allea.org/allea-responds-to-high-level-groups-report-on-framework-programme-10/; package contains substantive matching substantial_web_text material from this route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://allea.org/allea-responds-to-high-level-groups-report-on-framework-programme-10/",
+            "title": "ALLEA Responds to High-Level Group’s Report on Framework Programme 10 - ALLEA",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and source provenance were verified sufficiently to make a negative admission decision; no substitute work was used."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "ADVOCACY_NOT_EVIDENCE_PRODUCT",
+        "reason": "The ALLEA response is a stakeholder reaction to another report rather than a completed evidence-led study or formal R&I-system action."
+      },
+      "reader_title": "ALLEA Responds to High-Level Group’s Report on Framework Programme 10 - ALLEA",
+      "reader_what": "The ALLEA response is a stakeholder reaction to another report rather than a completed evidence-led study or formal R&I-system action.",
+      "reader_why": "",
+      "reader_more": "The ALLEA response is a stakeholder reaction to another report rather than a completed evidence-led study or formal R&I-system action.",
+      "deep_analysis": {
+        "work_kind": "event/landing page or out-of-scope evidence product",
+        "research_question": "",
+        "main_finding": "The ALLEA response is a stakeholder reaction to another report rather than a completed evidence-led study or formal R&I-system action.",
+        "method_or_basis": "Verified matching primary/official source and assessed it against historical Strand A/B admission rules.",
+        "qualification": "The negative decision concerns Radar admission, not the legitimacy of the underlying organisation or activity.",
+        "radar_relevance": "The ALLEA response is a stakeholder reaction to another report rather than a completed evidence-led study or formal R&I-system action.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:4e54f0d346a71500",
+      "source_hash": "220a36ea",
+      "identity_hash": "aa68886e77f09408",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied URL https://www.eeas.europa.eu/delegations/aotearoa-new-zealand/horizon-europe-roadshow-auckland_en; package material was abstract_or_landing_page, so independent recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Publisher/event search confirmed the Auckland item is a Horizon Europe roadshow event."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched title with issuing organisation/year (European External Action Service; 2024-10-15) and found consistent identity signals."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Checked the official publisher/repository route; matching source used: https://www.eeas.europa.eu/delegations/aotearoa-new-zealand/horizon-europe-roadshow-auckland_en"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Used distinctive title fragments and organisation/DOI clues; no conflicting bibliographic identity was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.eeas.europa.eu/delegations/aotearoa-new-zealand/horizon-europe-roadshow-auckland_en",
+            "title": "Horizon Europe Roadshow - Auckland",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and source provenance were verified sufficiently to make a negative admission decision; no substitute work was used."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "NON_SUBSTANTIVE_EVENT_PAGE",
+        "reason": "The Auckland roadshow page is an information/networking event announcement rather than substantive historical R&I evidence."
+      },
+      "reader_title": "Horizon Europe Roadshow - Auckland",
+      "reader_what": "The Auckland roadshow page is an information/networking event announcement rather than substantive historical R&I evidence.",
+      "reader_why": "",
+      "reader_more": "The Auckland roadshow page is an information/networking event announcement rather than substantive historical R&I evidence.",
+      "deep_analysis": {
+        "work_kind": "event/landing page or out-of-scope evidence product",
+        "research_question": "",
+        "main_finding": "The Auckland roadshow page is an information/networking event announcement rather than substantive historical R&I evidence.",
+        "method_or_basis": "Verified matching primary/official source and assessed it against historical Strand A/B admission rules.",
+        "qualification": "The negative decision concerns Radar admission, not the legitimacy of the underlying organisation or activity.",
+        "radar_relevance": "The Auckland roadshow page is an information/networking event announcement rather than substantive historical R&I evidence.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:97048a0eb1dd0233",
+      "source_hash": "495772ad",
+      "identity_hash": "6ee28ad5de86e0ed",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied URL https://allea.org/framework-programme-10-allea-advocates-for-widening-scientific-cooperation-and-freedom-of-research/; package material was abstract_or_landing_page, so independent recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the ALLEA article dated 26 September 2023 and its FP10 recommendations."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched title with issuing organisation/year (ALLEA; 2023-09-26) and found consistent identity signals."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Checked the official publisher/repository route; matching source used: https://allea.org/framework-programme-10-allea-advocates-for-widening-scientific-cooperation-and-freedom-of-research/"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Used distinctive title fragments and organisation/DOI clues; no conflicting bibliographic identity was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://allea.org/framework-programme-10-allea-advocates-for-widening-scientific-cooperation-and-freedom-of-research/",
+            "title": "Framework Programme 10: ALLEA Advocates for Widening Scientific Cooperation and Freedom of Research - ALLEA",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and substantive content verified against the supplied primary material and, where thin, an independently recovered publisher/repository source."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The work directly addresses governance and design of Europe’s next R&I framework programme."
+      },
+      "reader_title": "Framework Programme 10: ALLEA Advocates for Widening Scientific Cooperation and Freedom of Research - ALLEA",
+      "reader_what": "ALLEA advocated wider participation, stronger basic research, research freedom and simpler funding arrangements for FP10.",
+      "reader_why": "Funding design and widening rules can shape who participates in European research and where capacity develops.",
+      "reader_more": "ALLEA advocated wider participation, stronger basic research, research freedom and simpler funding arrangements for FP10. Stakeholder position submitted by ALLEA to the European Commission’s FP10 consultation. The source is an advocacy position; it establishes ALLEA’s recommendations, not their adoption or effects.",
+      "deep_analysis": {
+        "work_kind": "policy position",
+        "research_question": "What does this work establish about its stated research, policy or methodological problem?",
+        "main_finding": "ALLEA advocated wider participation, stronger basic research, research freedom and simpler funding arrangements for FP10.",
+        "method_or_basis": "Stakeholder position submitted by ALLEA to the European Commission’s FP10 consultation.",
+        "qualification": "The source is an advocacy position; it establishes ALLEA’s recommendations, not their adoption or effects.",
+        "radar_relevance": "The work directly addresses governance and design of Europe’s next R&I framework programme.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "horizon.budget_2028_34",
+          "secondary_objects": [],
+          "actor": {
+            "name": "ALLEA",
+            "class": "university_group"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2023-09-26",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "The source is an advocacy position; it establishes ALLEA’s recommendations, not their adoption or effects.",
+          "text": "ALLEA advocated wider participation, stronger basic research, research freedom and simpler funding arrangements for FP10.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:9a8aa00cab5b6df0",
+      "source_hash": "8419d252",
+      "identity_hash": "198fd8064afc69e4",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied URL https://commission.europa.eu/strategy-and-policy/eu-budget/motion/focus/eu-budget-bolsters-europes-technological-leadership-european-chips-act_en; package material was abstract_or_landing_page, so independent recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the European Commission Chips Act budget page with substantive funding and capability detail."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched title with issuing organisation/year (European Commission; 2021-01-01) and found consistent identity signals."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Checked the official publisher/repository route; matching source used: https://commission.europa.eu/strategy-and-policy/eu-budget/motion/focus/eu-budget-bolsters-europes-technological-leadership-european-chips-act_en"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Used distinctive title fragments and organisation/DOI clues; no conflicting bibliographic identity was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://commission.europa.eu/strategy-and-policy/eu-budget/motion/focus/eu-budget-bolsters-europes-technological-leadership-european-chips-act_en",
+            "title": "The EU budget bolsters Europe’s technological leadership: the European Chips Act",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and substantive content verified against the supplied primary material and, where thin, an independently recovered publisher/repository source."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Semiconductors are a strategic technology and the page directly links EU R&I funding to capability and reduced dependency."
+      },
+      "reader_title": "The EU budget bolsters Europe’s technological leadership: the European Chips Act",
+      "reader_what": "The Chips Act combines EU funding and policy-driven investment to strengthen semiconductor design, manufacturing, pilot capability and skills.",
+      "reader_why": "Funding pilot lines, design tools and competence centres can expand European semiconductor innovation capacity.",
+      "reader_more": "The Chips Act combines EU funding and policy-driven investment to strengthen semiconductor design, manufacturing, pilot capability and skills. European Commission budget and programme account of Chips Act instruments and funding. Official material establishes EU policy and funding commitments, not independent proof that all expected industrial outcomes occurred.",
+      "deep_analysis": {
+        "work_kind": "policy programme",
+        "research_question": "What does this work establish about its stated research, policy or methodological problem?",
+        "main_finding": "The Chips Act combines EU funding and policy-driven investment to strengthen semiconductor design, manufacturing, pilot capability and skills.",
+        "method_or_basis": "European Commission budget and programme account of Chips Act instruments and funding.",
+        "qualification": "Official material establishes EU policy and funding commitments, not independent proof that all expected industrial outcomes occurred.",
+        "radar_relevance": "Semiconductors are a strategic technology and the page directly links EU R&I funding to capability and reduced dependency.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "chips.pilot_line",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "operating",
+          "status_date": "2021-01-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Official material establishes EU policy and funding commitments, not independent proof that all expected industrial outcomes occurred.",
+          "text": "The Chips Act combines EU funding and policy-driven investment to strengthen semiconductor design, manufacturing, pilot capability and skills.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:d70681a30b303787",
+      "source_hash": "d42155dd",
+      "identity_hash": "ee9cf7d1858d220e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied URL https://www.eeas.europa.eu/delegations/albania/ec-concludes-first-negotiation-rounds-horizon-europe-association-albania_en; package material was abstract_or_landing_page, so independent recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the EEAS negotiation notice dated 29 June 2021."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched title with issuing organisation/year (European External Action Service; 2021-01-01) and found consistent identity signals."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Checked the official publisher/repository route; matching source used: https://www.eeas.europa.eu/delegations/albania/ec-concludes-first-negotiation-rounds-horizon-europe-association-albania_en"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Used distinctive title fragments and organisation/DOI clues; no conflicting bibliographic identity was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.eeas.europa.eu/delegations/albania/ec-concludes-first-negotiation-rounds-horizon-europe-association-albania_en",
+            "title": "EC concludes first negotiation rounds on Horizon Europe association with Albania",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and substantive content verified against the supplied primary material and, where thin, an independently recovered publisher/repository source."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Horizon association is a direct European R&I-system mechanism governing participation and cross-border collaboration."
+      },
+      "reader_title": "EC concludes first negotiation rounds on Horizon Europe association with Albania",
+      "reader_what": "The Commission and Albania completed a first negotiation round toward Albania’s association to Horizon Europe in June 2021.",
+      "reader_why": "Association can expand access to Horizon funding and collaboration networks for an associated country.",
+      "reader_more": "The Commission and Albania completed a first negotiation round toward Albania’s association to Horizon Europe in June 2021. Official EEAS account of the Horizon Europe association negotiations. The item records a negotiation stage, not completed association at that date.",
+      "deep_analysis": {
+        "work_kind": "official policy development",
+        "research_question": "What does this work establish about its stated research, policy or methodological problem?",
+        "main_finding": "The Commission and Albania completed a first negotiation round toward Albania’s association to Horizon Europe in June 2021.",
+        "method_or_basis": "Official EEAS account of the Horizon Europe association negotiations.",
+        "qualification": "The item records a negotiation stage, not completed association at that date.",
+        "radar_relevance": "Horizon association is a direct European R&I-system mechanism governing participation and cross-border collaboration.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "horizon.association",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "associates",
+          "direction": "expands",
+          "status": "in_negotiation",
+          "status_date": "2021-01-01",
+          "scope": {
+            "level": "associated_country",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The item records a negotiation stage, not completed association at that date.",
+          "text": "The Commission and Albania completed a first negotiation round toward Albania’s association to Horizon Europe in June 2021.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:5ea183ed65b7eaac",
+      "source_hash": "a166b238",
+      "identity_hash": "4d30a1e85621adbb",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied URL https://www.eeas.europa.eu/delegations/albania/albania-informal-exploratory-talks-association-horizon-europe_en; package material was abstract_or_landing_page, so independent recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Title/organisation search confirmed the EEAS exploratory-talks record and Horizon association context."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched title with issuing organisation/year (European External Action Service; 2021-01-01) and found consistent identity signals."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Checked the official publisher/repository route; matching source used: https://www.eeas.europa.eu/delegations/albania/albania-informal-exploratory-talks-association-horizon-europe_en"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Used distinctive title fragments and organisation/DOI clues; no conflicting bibliographic identity was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.eeas.europa.eu/delegations/albania/albania-informal-exploratory-talks-association-horizon-europe_en",
+            "title": "Albania: Informal exploratory talks for association to Horizon Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and substantive content verified against the supplied primary material and, where thin, an independently recovered publisher/repository source."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "It documents the early formation of a Horizon association relationship, a recognised European R&I-system mechanism."
+      },
+      "reader_title": "Albania: Informal exploratory talks for association to Horizon Europe",
+      "reader_what": "The EU and Albania held exploratory talks on possible association to Horizon Europe before formal negotiations.",
+      "reader_why": "Association can open programme participation and research collaboration if negotiations conclude successfully.",
+      "reader_more": "The EU and Albania held exploratory talks on possible association to Horizon Europe before formal negotiations. Official EEAS account of exploratory association talks. The source records exploratory talks only; it does not establish a concluded association agreement.",
+      "deep_analysis": {
+        "work_kind": "official policy development",
+        "research_question": "What does this work establish about its stated research, policy or methodological problem?",
+        "main_finding": "The EU and Albania held exploratory talks on possible association to Horizon Europe before formal negotiations.",
+        "method_or_basis": "Official EEAS account of exploratory association talks.",
+        "qualification": "The source records exploratory talks only; it does not establish a concluded association agreement.",
+        "radar_relevance": "It documents the early formation of a Horizon association relationship, a recognised European R&I-system mechanism.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "horizon.association",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "associates",
+          "direction": "expands",
+          "status": "in_negotiation",
+          "status_date": "2021-01-01",
+          "scope": {
+            "level": "associated_country",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The source records exploratory talks only; it does not establish a concluded association agreement.",
+          "text": "The EU and Albania held exploratory talks on possible association to Horizon Europe before formal negotiations.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:f1a32dd9a0fb8eeb",
+      "source_hash": "87323e5f",
+      "identity_hash": "b948e2e12b61770e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied URL https://allea.org/research-policy/; package material was abstract_or_landing_page, so independent recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Organisation search confirmed this is ALLEA’s generic Research Policy activity page rather than a bounded publication."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched title with issuing organisation/year (ALLEA; 2020-01-01) and found consistent identity signals."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Checked the official publisher/repository route; matching source used: https://allea.org/research-policy/"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Used distinctive title fragments and organisation/DOI clues; no conflicting bibliographic identity was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://allea.org/research-policy/",
+            "title": "Research Policy - ALLEA",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and source provenance were verified sufficiently to make a negative admission decision; no substitute work was used."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "GENERIC_ORG_PAGE",
+        "reason": "The ALLEA Research Policy page is a thematic navigation/organisational page, not a distinct evidence product."
+      },
+      "reader_title": "Research Policy - ALLEA",
+      "reader_what": "The ALLEA Research Policy page is a thematic navigation/organisational page, not a distinct evidence product.",
+      "reader_why": "",
+      "reader_more": "The ALLEA Research Policy page is a thematic navigation/organisational page, not a distinct evidence product.",
+      "deep_analysis": {
+        "work_kind": "event/landing page or out-of-scope evidence product",
+        "research_question": "",
+        "main_finding": "The ALLEA Research Policy page is a thematic navigation/organisational page, not a distinct evidence product.",
+        "method_or_basis": "Verified matching primary/official source and assessed it against historical Strand A/B admission rules.",
+        "qualification": "The negative decision concerns Radar admission, not the legitimacy of the underlying organisation or activity.",
+        "radar_relevance": "The ALLEA Research Policy page is a thematic navigation/organisational page, not a distinct evidence product.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:f65f8f71b73c4f78",
+      "source_hash": "aea103e4",
+      "identity_hash": "fde75bfc4b601563",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching reader-facing source https://doi.org/10.1007/s11187-018-0088-3; package contains substantive matching substantial_web_text material from this route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://doi.org/10.1007/s11187-018-0088-3",
+            "title": "Promoting cooperation in innovation ecosystems: evidence from European traditional manufacturing SMEs",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and substantive content verified against the supplied primary material and, where thin, an independently recovered publisher/repository source."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "It measures a European innovation-system mechanism: firm cooperation within innovation ecosystems."
+      },
+      "reader_title": "Promoting cooperation in innovation ecosystems: evidence from European traditional manufacturing SMEs",
+      "reader_what": "The study examines how cooperation within innovation ecosystems supports innovation among European traditional manufacturing SMEs.",
+      "reader_why": "Cooperation networks can help traditional SMEs access complementary knowledge and innovation resources.",
+      "reader_more": "The study examines how cooperation within innovation ecosystems supports innovation among European traditional manufacturing SMEs. Peer-reviewed empirical analysis of European manufacturing SMEs and their innovation cooperation. The results concern the sampled firms and cooperation setting; they should not be read as universal causal effects.",
+      "deep_analysis": {
+        "work_kind": "empirical study",
+        "research_question": "What does this work establish about its stated research, policy or methodological problem?",
+        "main_finding": "The study examines how cooperation within innovation ecosystems supports innovation among European traditional manufacturing SMEs.",
+        "method_or_basis": "Peer-reviewed empirical analysis of European manufacturing SMEs and their innovation cooperation.",
+        "qualification": "The results concern the sampled firms and cooperation setting; they should not be read as universal causal effects.",
+        "radar_relevance": "It measures a European innovation-system mechanism: firm cooperation within innovation ecosystems.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "innovation.system_performance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European manufacturing SMEs",
+            "class": "company"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2020-01-01",
+          "scope": {
+            "level": "company_in_eu",
+            "countries": []
+          },
+          "kind": "effect",
+          "qualification": "The results concern the sampled firms and cooperation setting; they should not be read as universal causal effects.",
+          "text": "The study examines how cooperation within innovation ecosystems supports innovation among European traditional manufacturing SMEs.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:8fa238a08d76f644",
+      "source_hash": "35794343",
+      "identity_hash": "ca19442277244705",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching reader-facing source https://doi.org/10.1007/s11192-018-2888-2; package contains substantive matching substantial_web_text material from this route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://doi.org/10.1007/s11192-018-2888-2",
+            "title": "Scientific collaboration of Cuban researchers working in Europe: understanding relations between origin and destination countries",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and substantive content verified against the supplied primary material and, where thin, an independently recovered publisher/repository source."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Researcher mobility and cross-border collaboration are recognised European research-system mechanisms."
+      },
+      "reader_title": "Scientific collaboration of Cuban researchers working in Europe: understanding relations between origin and destination countries",
+      "reader_what": "The study maps scientific collaboration patterns of Cuban researchers working in Europe and links between origin and destination countries.",
+      "reader_why": "Mobile researchers can connect European institutions with origin-country research networks.",
+      "reader_more": "The study maps scientific collaboration patterns of Cuban researchers working in Europe and links between origin and destination countries. Bibliometric/scientometric analysis of researchers, affiliations and collaboration relationships. The analysis concerns a specific migrant-researcher population and should not be generalised to all European mobility.",
+      "deep_analysis": {
+        "work_kind": "scientometric study",
+        "research_question": "What does this work establish about its stated research, policy or methodological problem?",
+        "main_finding": "The study maps scientific collaboration patterns of Cuban researchers working in Europe and links between origin and destination countries.",
+        "method_or_basis": "Bibliometric/scientometric analysis of researchers, affiliations and collaboration relationships.",
+        "qualification": "The analysis concerns a specific migrant-researcher population and should not be generalised to all European mobility.",
+        "radar_relevance": "Researcher mobility and cross-border collaboration are recognised European research-system mechanisms.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Cuban researchers in Europe",
+            "class": "university_group"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2018-08-20",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The analysis concerns a specific migrant-researcher population and should not be generalised to all European mobility.",
+          "text": "The study maps scientific collaboration patterns of Cuban researchers working in Europe and links between origin and destination countries.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:b94e1bed5d2ccda7",
+      "source_hash": "367c65cd",
+      "identity_hash": "eb95eab803d5e9de",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching reader-facing source https://www.earto.eu/wp-content/uploads/EARTO_Recommendations_on_EC_Proposal_for_HEU_-_Final-1.pdf; package contains substantive matching pdf_excerpt material from this route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.earto.eu/wp-content/uploads/EARTO_Recommendations_on_EC_Proposal_for_HEU_-_Final-1.pdf",
+            "title": "EARTO Publishes Recommendations and Analysis of EC Proposals for Horizon Europe and Digital Europe Programme | EARTO",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and substantive content verified against the supplied primary material and, where thin, an independently recovered publisher/repository source."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "It directly concerns design of the EU framework programme and conditions for research and technology organisations."
+      },
+      "reader_title": "EARTO Publishes Recommendations and Analysis of EC Proposals for Horizon Europe and Digital Europe Programme",
+      "reader_what": "EARTO assessed Commission proposals for Horizon Europe and Digital Europe and recommended changes affecting RTO participation and programme design.",
+      "reader_why": "Programme rules and access conditions shape how European RTOs can contribute to collaborative R&I.",
+      "reader_more": "EARTO assessed Commission proposals for Horizon Europe and Digital Europe and recommended changes affecting RTO participation and programme design. Substantive EARTO recommendations paper analysing proposed EU R&I programmes. The paper is stakeholder advocacy; recommendations are not evidence of later adoption or programme effects.",
+      "deep_analysis": {
+        "work_kind": "policy position",
+        "research_question": "What does this work establish about its stated research, policy or methodological problem?",
+        "main_finding": "EARTO assessed Commission proposals for Horizon Europe and Digital Europe and recommended changes affecting RTO participation and programme design.",
+        "method_or_basis": "Substantive EARTO recommendations paper analysing proposed EU R&I programmes.",
+        "qualification": "The paper is stakeholder advocacy; recommendations are not evidence of later adoption or programme effects.",
+        "radar_relevance": "It directly concerns design of the EU framework programme and conditions for research and technology organisations.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "horizon.access",
+          "secondary_objects": [],
+          "actor": {
+            "name": "EARTO",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2018-01-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "The paper is stakeholder advocacy; recommendations are not evidence of later adoption or programme effects.",
+          "text": "EARTO assessed Commission proposals for Horizon Europe and Digital Europe and recommended changes affecting RTO participation and programme design.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:aedea75858f2f582",
+      "source_hash": "e2023400",
+      "identity_hash": "bb9733314a39093c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied URL https://www.earto.eu/publication/joint-statement-on-the-mga-ip-provisions-of-the-eic-under-horizon-europe/; package material was abstract_or_landing_page, so independent recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the EARTO statement and corrected its date to 5 December 2022."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched title with issuing organisation/year (EARTO; 2016-01-01) and found consistent identity signals."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Checked the official publisher/repository route; matching source used: https://www.earto.eu/publication/joint-statement-on-the-mga-ip-provisions-of-the-eic-under-horizon-europe/"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Used distinctive title fragments and organisation/DOI clues; no conflicting bibliographic identity was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.earto.eu/publication/joint-statement-on-the-mga-ip-provisions-of-the-eic-under-horizon-europe/",
+            "title": "Joint Statement on the MGA IP Provisions of the EIC under Horizon Europe | EARTO",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and substantive content verified against the supplied primary material and, where thin, an independently recovered publisher/repository source."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2022-12-05"
+        },
+        "unset": [],
+        "reason": "EARTO page dates the joint statement 5 December 2022."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Knowledge-transfer governance is a recognised European R&I-system mechanism."
+      },
+      "reader_title": "Joint Statement on the MGA IP Provisions of the EIC under Horizon Europe",
+      "reader_what": "Research organisations argued that EIC Pathfinder and Transition IP provisions could obstruct professional knowledge-transfer and valorisation services.",
+      "reader_why": "IP rules can alter how research organisations manage exploitation and transfer of publicly funded research results.",
+      "reader_more": "Research organisations argued that EIC Pathfinder and Transition IP provisions could obstruct professional knowledge-transfer and valorisation services. Joint stakeholder statement on EIC Model Grant Agreement intellectual-property provisions. The source establishes the organisations’ concerns and recommendations, not measured effects of the provisions.",
+      "deep_analysis": {
+        "work_kind": "joint policy statement",
+        "research_question": "What does this work establish about its stated research, policy or methodological problem?",
+        "main_finding": "Research organisations argued that EIC Pathfinder and Transition IP provisions could obstruct professional knowledge-transfer and valorisation services.",
+        "method_or_basis": "Joint stakeholder statement on EIC Model Grant Agreement intellectual-property provisions.",
+        "qualification": "The source establishes the organisations’ concerns and recommendations, not measured effects of the provisions.",
+        "radar_relevance": "Knowledge-transfer governance is a recognised European R&I-system mechanism.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.knowledge_transfer",
+          "secondary_objects": [],
+          "actor": {
+            "name": "EARTO and partner R&I organisations",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "advocates",
+          "direction": "becomes_contested",
+          "status": "proposed",
+          "status_date": "2022-12-05",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "The source establishes the organisations’ concerns and recommendations, not measured effects of the provisions.",
+          "text": "Research organisations argued that EIC Pathfinder and Transition IP provisions could obstruct professional knowledge-transfer and valorisation services.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:11d3317314174086",
+      "source_hash": "652e8840",
+      "identity_hash": "191bb3c52f7e2dd4",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching reader-facing source https://publications.jrc.ec.europa.eu/repository/handle/JRC121212; package contains substantive matching substantial_web_text material from this route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC121212",
+            "title": "Future transitions for the Bioeconomy towards Sustainable Development and a Climate-Neutral Economy - Knowledge Synthesis Final Report: WP1 - Knowledge synthesis and foresight",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and substantive content verified against the supplied primary material and, where thin, an independently recovered publisher/repository source."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "It assesses a strategic European technology and innovation transition with explicit competitiveness, sustainability and R&I-policy links."
+      },
+      "reader_title": "Future transitions for the Bioeconomy towards Sustainable Development and a Climate-Neutral Economy - Knowledge Synthesis Final Report: WP1",
+      "reader_what": "The report synthesises evidence and foresight on pathways for a circular, sustainable EU bioeconomy toward climate neutrality.",
+      "reader_why": "Bioeconomy governance and innovation choices affect Europe’s capacity to substitute fossil inputs while maintaining sustainable biomass supply.",
+      "reader_more": "The report synthesises evidence and foresight on pathways for a circular, sustainable EU bioeconomy toward climate neutrality. JRC/DG RTD expert-network knowledge synthesis combining evidence review and forward-looking analysis. Many statements are scenario- or transition-oriented and depend on successful policy implementation rather than observed outcomes.",
+      "deep_analysis": {
+        "work_kind": "evidence synthesis and foresight report",
+        "research_question": "What does this work establish about its stated research, policy or methodological problem?",
+        "main_finding": "The report synthesises evidence and foresight on pathways for a circular, sustainable EU bioeconomy toward climate neutrality.",
+        "method_or_basis": "JRC/DG RTD expert-network knowledge synthesis combining evidence review and forward-looking analysis.",
+        "qualification": "Many statements are scenario- or transition-oriented and depend on successful policy implementation rather than observed outcomes.",
+        "radar_relevance": "It assesses a strategic European technology and innovation transition with explicit competitiveness, sustainability and R&I-policy links.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "green.innovation",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2020-01-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Many statements are scenario- or transition-oriented and depend on successful policy implementation rather than observed outcomes.",
+          "text": "The report synthesises evidence and foresight on pathways for a circular, sustainable EU bioeconomy toward climate neutrality.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:ef7b579e40c70bf7",
+      "source_hash": "b8c6f7fc",
+      "identity_hash": "259469daebf0864f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "limited",
+            "note": "Inspected supplied URL https://doi.org/10.1016/j.techfore.2017.03.018; package material was stored_only, so independent recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1016/j.techfore.2017.03.018; metadata matched the claimed title and publication."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "DOI search matched the article; Warwick Research Archive provided the accepted full-text manuscript."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched title with issuing organisation/year (Technological Forecasting and Social Change; 2017-04-04) and found consistent identity signals."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Checked the official publisher/repository route; matching source used: https://wrap.warwick.ac.uk/87744/1/WRAP-exploring-development-methodology-scenario-Kunc-2017.pdf"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Used distinctive title fragments and organisation/DOI clues; no conflicting bibliographic identity was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://wrap.warwick.ac.uk/87744/1/WRAP-exploring-development-methodology-scenario-Kunc-2017.pdf",
+            "title": "Warwick Research Archive accepted manuscript",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_identity",
+            "url": "https://doi.org/10.1016/j.techfore.2017.03.018",
+            "title": "Exploring the development of a methodology for scenario use: Combining scenario and resource mapping approaches",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and substantive content verified against the supplied primary material and, where thin, an independently recovered publisher/repository source."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "This is a genuine reusable scenario-method contribution rather than a case-only application."
+      },
+      "reader_title": "Exploring the development of a methodology for scenario use: Combining scenario and resource mapping approaches",
+      "reader_what": "The paper develops a method that serially integrates scenario planning with resource mapping to connect external futures with internal capabilities.",
+      "reader_why": "Linking scenarios to resource mapping gives decision-makers a repeatable way to test strategy against plausible futures.",
+      "reader_more": "The paper develops a method that serially integrates scenario planning with resource mapping to connect external futures with internal capabilities. Method-development paper with a teaching application and company application, recovered from Warwick’s institutional repository. The method is illustrated in limited applications and requires further testing across settings.",
+      "deep_analysis": {
+        "work_kind": "methodology paper",
+        "research_question": "What does this work establish about its stated research, policy or methodological problem?",
+        "main_finding": "The paper develops a method that serially integrates scenario planning with resource mapping to connect external futures with internal capabilities.",
+        "method_or_basis": "Method-development paper with a teaching application and company application, recovered from Warwick’s institutional repository.",
+        "qualification": "The method is illustrated in limited applications and requires further testing across settings.",
+        "radar_relevance": "This is a genuine reusable scenario-method contribution rather than a case-only application.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.scenario",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Kunc and O’Brien",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2017-04-04",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The method is illustrated in limited applications and requires further testing across settings.",
+          "text": "The paper develops a method that serially integrates scenario planning with resource mapping to connect external futures with internal capabilities.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:7430f92885685c0b",
+      "source_hash": "4ad3d570",
+      "identity_hash": "c1032370945699a4",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied URL https://era.gv.at/era/era-2000-2021/future-of-era/slovenian-presidency-conference-new-european-research-area-report-and-recommendations/; package material was abstract_or_landing_page, so independent recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the ERA Portal record and linked Slovenian Presidency conference report."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched title with issuing organisation/year (ERA Portal Austria; 2026-01-01) and found consistent identity signals."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Checked the official publisher/repository route; matching source used: https://era.gv.at/era/era-2000-2021/future-of-era/slovenian-presidency-conference-new-european-research-area-report-and-recommendations/"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Used distinctive title fragments and organisation/DOI clues; no conflicting bibliographic identity was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://era.gv.at/era/era-2000-2021/future-of-era/slovenian-presidency-conference-new-european-research-area-report-and-recommendations/",
+            "title": "ERA Portal Austria – Slovenian Presidency Conference “New European Research Area\" - Report and recommendations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and substantive content verified against the supplied primary material and, where thin, an independently recovered publisher/repository source."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2021"
+        },
+        "unset": [],
+        "reason": "ERA Portal identifies the Slovenian Presidency conference report as 26–27 October 2021; only year precision is safe for the report itself."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The report directly concerns governance and priorities of the European Research Area."
+      },
+      "reader_title": "ERA Portal Austria – Slovenian Presidency Conference “New European Research Area\" - Report and recommendations",
+      "reader_what": "The 2021 Slovenian Presidency conference report assembled recommendations for developing the new European Research Area.",
+      "reader_why": "ERA governance choices coordinate national and EU research systems and can affect collaboration and capacity.",
+      "reader_more": "The 2021 Slovenian Presidency conference report assembled recommendations for developing the new European Research Area. Conference summary report and recommendations from the Slovenian EU Council Presidency. The recommendations reflect conference deliberation and do not by themselves establish subsequent implementation.",
+      "deep_analysis": {
+        "work_kind": "conference policy report",
+        "research_question": "What does this work establish about its stated research, policy or methodological problem?",
+        "main_finding": "The 2021 Slovenian Presidency conference report assembled recommendations for developing the new European Research Area.",
+        "method_or_basis": "Conference summary report and recommendations from the Slovenian EU Council Presidency.",
+        "qualification": "The recommendations reflect conference deliberation and do not by themselves establish subsequent implementation.",
+        "radar_relevance": "The report directly concerns governance and priorities of the European Research Area.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Slovenian Presidency of the Council of the EU",
+            "class": "eu_body"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2021",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "The recommendations reflect conference deliberation and do not by themselves establish subsequent implementation.",
+          "text": "The 2021 Slovenian Presidency conference report assembled recommendations for developing the new European Research Area.",
+          "confidence": "medium",
+          "status_date_precision": "year"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:5d17b716789ab12c",
+      "source_hash": "8153f66b",
+      "identity_hash": "012a693347a6f2bb",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied URL https://era.gv.at/era/era-policy-agenda/ongoing-era-actions/gender-equality-inclusiveness/genderactionplus-position-paper-on-the-future-of-gender-equality-in-the-european-research-area/; package material was abstract_or_landing_page, so independent recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the ERA Portal collection page, confirming it aggregates multiple position papers."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched title with issuing organisation/year (ERA Portal Austria; 2026-01-01) and found consistent identity signals."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Checked the official publisher/repository route; matching source used: https://era.gv.at/era/era-policy-agenda/ongoing-era-actions/gender-equality-inclusiveness/genderactionplus-position-paper-on-the-future-of-gender-equality-in-the-european-research-area/"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Used distinctive title fragments and organisation/DOI clues; no conflicting bibliographic identity was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://era.gv.at/era/era-policy-agenda/ongoing-era-actions/gender-equality-inclusiveness/genderactionplus-position-paper-on-the-future-of-gender-equality-in-the-european-research-area/",
+            "title": "ERA Portal Austria – GENDERACTIONplus policy briefs and Position Papers",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and source provenance were verified sufficiently to make a negative admission decision; no substitute work was used."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2024"
+        },
+        "unset": [],
+        "reason": "ERA Portal states the position paper collection was prepared around the 13 February 2024 GENDERACTIONplus conference."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "COLLECTION_NOT_SINGLE_WORK",
+        "reason": "The ERA Portal page aggregates multiple GENDERACTIONplus briefs and position papers rather than identifying one bounded work for verification."
+      },
+      "reader_title": "ERA Portal Austria – GENDERACTIONplus policy briefs and Position Papers",
+      "reader_what": "The ERA Portal page aggregates multiple GENDERACTIONplus briefs and position papers rather than identifying one bounded work for verification.",
+      "reader_why": "",
+      "reader_more": "The ERA Portal page aggregates multiple GENDERACTIONplus briefs and position papers rather than identifying one bounded work for verification.",
+      "deep_analysis": {
+        "work_kind": "event/landing page or out-of-scope evidence product",
+        "research_question": "",
+        "main_finding": "The ERA Portal page aggregates multiple GENDERACTIONplus briefs and position papers rather than identifying one bounded work for verification.",
+        "method_or_basis": "Verified matching primary/official source and assessed it against historical Strand A/B admission rules.",
+        "qualification": "The negative decision concerns Radar admission, not the legitimacy of the underlying organisation or activity.",
+        "radar_relevance": "The ERA Portal page aggregates multiple GENDERACTIONplus briefs and position papers rather than identifying one bounded work for verification.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:5aa6f9b6def3d1b9",
+      "source_hash": "13195655",
+      "identity_hash": "3c7be76a6bb38d46",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied URL https://era.gv.at/era/era-2000-2021/future-of-era/european-research-area-policy-agenda/; package material was abstract_or_landing_page, so independent recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered the ERA Policy Agenda page and its 2022–2024 scope."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched title with issuing organisation/year (ERA Portal Austria; 2026-01-01) and found consistent identity signals."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Checked the official publisher/repository route; matching source used: https://era.gv.at/era/era-2000-2021/future-of-era/european-research-area-policy-agenda/"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Used distinctive title fragments and organisation/DOI clues; no conflicting bibliographic identity was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://era.gv.at/era/era-2000-2021/future-of-era/european-research-area-policy-agenda/",
+            "title": "ERA Portal Austria – European Research Area Policy Agenda",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and substantive content verified against the supplied primary material and, where thin, an independently recovered publisher/repository source."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2021"
+        },
+        "unset": [],
+        "reason": "The page describes the first ERA Policy Agenda for 2022–2024, established in the 2021 ERA governance cycle; exact page publication day is not supported."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The agenda is a core European R&I-system governance instrument."
+      },
+      "reader_title": "ERA Portal Austria – European Research Area Policy Agenda",
+      "reader_what": "The ERA Policy Agenda set voluntary actions for 2022–2024 to implement priorities under the Pact for Research and Innovation.",
+      "reader_why": "A shared policy agenda coordinates reforms and joint actions across the European Research Area.",
+      "reader_more": "The ERA Policy Agenda set voluntary actions for 2022–2024 to implement priorities under the Pact for Research and Innovation. Official ERA policy agenda description and linked policy instrument. Actions were voluntary and the page does not itself prove implementation quality or outcomes across countries.",
+      "deep_analysis": {
+        "work_kind": "policy agenda",
+        "research_question": "What does this work establish about its stated research, policy or methodological problem?",
+        "main_finding": "The ERA Policy Agenda set voluntary actions for 2022–2024 to implement priorities under the Pact for Research and Innovation.",
+        "method_or_basis": "Official ERA policy agenda description and linked policy instrument.",
+        "qualification": "Actions were voluntary and the page does not itself prove implementation quality or outcomes across countries.",
+        "radar_relevance": "The agenda is a core European R&I-system governance instrument.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Union and participating Member States",
+            "class": "eu_body"
+          },
+          "mechanism": "adopts",
+          "direction": "expands",
+          "status": "adopted",
+          "status_date": "2021",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Actions were voluntary and the page does not itself prove implementation quality or outcomes across countries.",
+          "text": "The ERA Policy Agenda set voluntary actions for 2022–2024 to implement priorities under the Pact for Research and Innovation.",
+          "confidence": "high",
+          "status_date_precision": "year"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:9f9bb8666f5173bd",
+      "source_hash": "22e3b55a",
+      "identity_hash": "d0736ff78d259681",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied URL https://era.gv.at/era/era-2000-2021/future-of-era/council-conclusions-on-the-new-european-research-area-1-dec-2020/; package material was abstract_or_landing_page, so independent recovery was used."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI was supplied for this record."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title search recovered ERA Portal and Council records confirming adoption on 1 December 2020."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched title with issuing organisation/year (ERA Portal Austria; 2026-01-01) and found consistent identity signals."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Checked the official publisher/repository route; matching source used: https://era.gv.at/era/era-2000-2021/future-of-era/council-conclusions-on-the-new-european-research-area-1-dec-2020/"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Used distinctive title fragments and organisation/DOI clues; no conflicting bibliographic identity was found."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://era.gv.at/era/era-2000-2021/future-of-era/council-conclusions-on-the-new-european-research-area-1-dec-2020/",
+            "title": "ERA Portal Austria – Council conclusions on the New European Research Area (1 Dec 2020)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and substantive content verified against the supplied primary material and, where thin, an independently recovered publisher/repository source."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2020-12-01"
+        },
+        "unset": [],
+        "reason": "Council conclusions were adopted on 1 December 2020."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "This is a formal governance milestone for the European Research Area."
+      },
+      "reader_title": "ERA Portal Austria – Council conclusions on the New European Research Area (1 Dec 2020)",
+      "reader_what": "The Council adopted conclusions in December 2020 calling for a more impactful European Research Area and continued international openness.",
+      "reader_why": "Council conclusions coordinate Member State and EU priorities for research-system reform and collaboration.",
+      "reader_more": "The Council adopted conclusions in December 2020 calling for a more impactful European Research Area and continued international openness. Official Council conclusions and matching ERA portal record. Council conclusions set policy direction; they do not by themselves demonstrate downstream implementation or effects.",
+      "deep_analysis": {
+        "work_kind": "formal policy instrument",
+        "research_question": "What does this work establish about its stated research, policy or methodological problem?",
+        "main_finding": "The Council adopted conclusions in December 2020 calling for a more impactful European Research Area and continued international openness.",
+        "method_or_basis": "Official Council conclusions and matching ERA portal record.",
+        "qualification": "Council conclusions set policy direction; they do not by themselves demonstrate downstream implementation or effects.",
+        "radar_relevance": "This is a formal governance milestone for the European Research Area.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Council of the European Union",
+            "class": "eu_body"
+          },
+          "mechanism": "adopts",
+          "direction": "expands",
+          "status": "adopted",
+          "status_date": "2020-12-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Council conclusions set policy direction; they do not by themselves demonstrate downstream implementation or effects.",
+          "text": "The Council adopted conclusions in December 2020 calling for a more impactful European Research Area and continued international openness.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:bd3640327b5b1db5",
+      "source_hash": "6e8b300d",
+      "identity_hash": "350975f02b899bfb",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching reader-facing source https://era.gv.at/public/documents/4336/ERA_Comm_Staff_WD.pdf; package contains substantive matching pdf_excerpt material from this route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://era.gv.at/public/documents/4336/ERA_Comm_Staff_WD.pdf",
+            "title": "ERA Portal Austria – A new ERA for Research and Innovation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and substantive content verified against the supplied primary material and, where thin, an independently recovered publisher/repository source."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2020-11-17"
+        },
+        "unset": [],
+        "reason": "European Commission publication page gives 17 November 2020."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Its substantive object is the European R&I system and its governance, funding and knowledge-transfer mechanisms."
+      },
+      "reader_title": "ERA Portal Austria – A new ERA for Research and Innovation",
+      "reader_what": "The Commission staff working document diagnosed ERA challenges and supported objectives on investment, excellence, market uptake and resilience.",
+      "reader_why": "ERA reforms were intended to improve investment, access to excellence and movement of research results into the economy.",
+      "reader_more": "The Commission staff working document diagnosed ERA challenges and supported objectives on investment, excellence, market uptake and resilience. European Commission staff working document accompanying the communication on a new ERA for Research and Innovation. The document supports a Commission policy proposal and mixes diagnosis with policy rationale; it is not an ex-post impact evaluation.",
+      "deep_analysis": {
+        "work_kind": "Commission staff working document",
+        "research_question": "What does this work establish about its stated research, policy or methodological problem?",
+        "main_finding": "The Commission staff working document diagnosed ERA challenges and supported objectives on investment, excellence, market uptake and resilience.",
+        "method_or_basis": "European Commission staff working document accompanying the communication on a new ERA for Research and Innovation.",
+        "qualification": "The document supports a Commission policy proposal and mixes diagnosis with policy rationale; it is not an ex-post impact evaluation.",
+        "radar_relevance": "Its substantive object is the European R&I system and its governance, funding and knowledge-transfer mechanisms.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2020-11-17",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The document supports a Commission policy proposal and mixes diagnosis with policy rationale; it is not an ex-post impact evaluation.",
+          "text": "The Commission staff working document diagnosed ERA challenges and supported objectives on investment, excellence, market uptake and resilience.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:9df98530c8e7c960",
+      "source_hash": "da15d895",
+      "identity_hash": "dde0010328f24944",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching reader-facing source https://www.vinnova.se/contentassets/4be67bf221f14a66939aec5e7bf54284/fika-med-din-ncp--kluster-3.pdf; package contains substantive matching pdf_excerpt material from this route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.vinnova.se/contentassets/4be67bf221f14a66939aec5e7bf54284/fika-med-din-ncp--kluster-3.pdf",
+            "title": "Welcome to digital coffee about Horizon Europe cluster 3 | Vinnova",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and source provenance were verified sufficiently to make a negative admission decision; no substitute work was used."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2025-03-17"
+        },
+        "unset": [],
+        "reason": "Vinnova event page gives 17 March 2025."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "NON_SUBSTANTIVE_EVENT_PAGE",
+        "reason": "The Vinnova Cluster 3 digital coffee material is event guidance for applicants, not a substantive evidence product."
+      },
+      "reader_title": "Welcome to digital coffee about Horizon Europe cluster 3",
+      "reader_what": "The Vinnova Cluster 3 digital coffee material is event guidance for applicants, not a substantive evidence product.",
+      "reader_why": "",
+      "reader_more": "The Vinnova Cluster 3 digital coffee material is event guidance for applicants, not a substantive evidence product.",
+      "deep_analysis": {
+        "work_kind": "event/landing page or out-of-scope evidence product",
+        "research_question": "",
+        "main_finding": "The Vinnova Cluster 3 digital coffee material is event guidance for applicants, not a substantive evidence product.",
+        "method_or_basis": "Verified matching primary/official source and assessed it against historical Strand A/B admission rules.",
+        "qualification": "The negative decision concerns Radar admission, not the legitimacy of the underlying organisation or activity.",
+        "radar_relevance": "The Vinnova Cluster 3 digital coffee material is event guidance for applicants, not a substantive evidence product.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:d8644ec6784bcc45",
+      "source_hash": "3c8296cc",
+      "identity_hash": "0601ee24bb238ad6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching reader-facing source https://www.vinnova.se/en/p/user-study-and-ipr-analysis-in-preparation-for-eic-accelerator---strategic-health-and-digital-technologies/; package contains substantive matching substantial_web_text material from this route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.vinnova.se/en/p/user-study-and-ipr-analysis-in-preparation-for-eic-accelerator---strategic-health-and-digital-technologies/",
+            "title": "User study and IPR analysis in preparation for EIC Accelerator - Strategic Health and Digital Technologies | Vinnova",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and source provenance were verified sufficiently to make a negative admission decision; no substitute work was used."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "PROJECT_SUPPORT_PAGE",
+        "reason": "The Vinnova page describes a supported user/IPR analysis project preparing an EIC Accelerator application, not completed European R&I-system evidence."
+      },
+      "reader_title": "User study and IPR analysis in preparation for EIC Accelerator - Strategic Health and Digital Technologies",
+      "reader_what": "The Vinnova page describes a supported user/IPR analysis project preparing an EIC Accelerator application, not completed European R&I-system evidence.",
+      "reader_why": "",
+      "reader_more": "The Vinnova page describes a supported user/IPR analysis project preparing an EIC Accelerator application, not completed European R&I-system evidence.",
+      "deep_analysis": {
+        "work_kind": "event/landing page or out-of-scope evidence product",
+        "research_question": "",
+        "main_finding": "The Vinnova page describes a supported user/IPR analysis project preparing an EIC Accelerator application, not completed European R&I-system evidence.",
+        "method_or_basis": "Verified matching primary/official source and assessed it against historical Strand A/B admission rules.",
+        "qualification": "The negative decision concerns Radar admission, not the legitimacy of the underlying organisation or activity.",
+        "radar_relevance": "The Vinnova page describes a supported user/IPR analysis project preparing an EIC Accelerator application, not completed European R&I-system evidence.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:9038452533515f40",
+      "source_hash": "b5a10d2d",
+      "identity_hash": "304ea62c142728d3",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching reader-facing source https://www.vinnova.se/contentassets/8d7c1466ab0043d59815e7cd4d383f17/digital-fika-om-horisont-europas-forskningsinfrastrukturprogram_20260330.pdf; package contains substantive matching pdf_excerpt material from this route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.vinnova.se/contentassets/8d7c1466ab0043d59815e7cd4d383f17/digital-fika-om-horisont-europas-forskningsinfrastrukturprogram_20260330.pdf",
+            "title": "Interested in Horizon Europe Research Infrastructure Programme? | Vinnova",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and source provenance were verified sufficiently to make a negative admission decision; no substitute work was used."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-03-30"
+        },
+        "unset": [],
+        "reason": "Vinnova event page gives 30 March 2026."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "NON_SUBSTANTIVE_EVENT_PAGE",
+        "reason": "The 2026 research-infrastructure digital coffee is an applicant information event, not historical A/B evidence."
+      },
+      "reader_title": "Interested in Horizon Europe Research Infrastructure Programme?",
+      "reader_what": "The 2026 research-infrastructure digital coffee is an applicant information event, not historical A/B evidence.",
+      "reader_why": "",
+      "reader_more": "The 2026 research-infrastructure digital coffee is an applicant information event, not historical A/B evidence.",
+      "deep_analysis": {
+        "work_kind": "event/landing page or out-of-scope evidence product",
+        "research_question": "",
+        "main_finding": "The 2026 research-infrastructure digital coffee is an applicant information event, not historical A/B evidence.",
+        "method_or_basis": "Verified matching primary/official source and assessed it against historical Strand A/B admission rules.",
+        "qualification": "The negative decision concerns Radar admission, not the legitimacy of the underlying organisation or activity.",
+        "radar_relevance": "The 2026 research-infrastructure digital coffee is an applicant information event, not historical A/B evidence.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:252537eb118e001f",
+      "source_hash": "d7a2c203",
+      "identity_hash": "e4af92a534855c99",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching reader-facing source https://www.vinnova.se/contentassets/a53d31e05bd44321a549092259685c2d/kluster-5-fika-presentation.pdf; package contains substantive matching pdf_excerpt material from this route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.vinnova.se/contentassets/a53d31e05bd44321a549092259685c2d/kluster-5-fika-presentation.pdf",
+            "title": "Digital coffee for cluster 5 within Horizon Europe | Vinnova",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and source provenance were verified sufficiently to make a negative admission decision; no substitute work was used."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2025-02-05"
+        },
+        "unset": [],
+        "reason": "Vinnova event page gives 5 February 2025."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "NON_SUBSTANTIVE_EVENT_PAGE",
+        "reason": "The Cluster 5 digital coffee is an applicant information event and is excluded as a generic event page."
+      },
+      "reader_title": "Digital coffee for cluster 5 within Horizon Europe",
+      "reader_what": "The Cluster 5 digital coffee is an applicant information event and is excluded as a generic event page.",
+      "reader_why": "",
+      "reader_more": "The Cluster 5 digital coffee is an applicant information event and is excluded as a generic event page.",
+      "deep_analysis": {
+        "work_kind": "event/landing page or out-of-scope evidence product",
+        "research_question": "",
+        "main_finding": "The Cluster 5 digital coffee is an applicant information event and is excluded as a generic event page.",
+        "method_or_basis": "Verified matching primary/official source and assessed it against historical Strand A/B admission rules.",
+        "qualification": "The negative decision concerns Radar admission, not the legitimacy of the underlying organisation or activity.",
+        "radar_relevance": "The Cluster 5 digital coffee is an applicant information event and is excluded as a generic event page.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:4da07238c77d692a",
+      "source_hash": "f463e758",
+      "identity_hash": "498d85ccb62c4f9c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching reader-facing source https://www.vinnova.se/contentassets/b337de0896c04ecb9669fe4eccee34a4/ri-heu-wp2025-digital-fika-250623-utskick.pdf; package contains substantive matching pdf_excerpt material from this route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.vinnova.se/contentassets/b337de0896c04ecb9669fe4eccee34a4/ri-heu-wp2025-digital-fika-250623-utskick.pdf",
+            "title": "Digital coffee about the Horizon Europe research infrastructure | Vinnova",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and source provenance were verified sufficiently to make a negative admission decision; no substitute work was used."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2025-06-23"
+        },
+        "unset": [],
+        "reason": "Vinnova event page gives 23 June 2025."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "NON_SUBSTANTIVE_EVENT_PAGE",
+        "reason": "The research-infrastructure digital coffee is an information session on calls, not a substantive research or policy evidence product."
+      },
+      "reader_title": "Digital coffee about the Horizon Europe research infrastructure",
+      "reader_what": "The research-infrastructure digital coffee is an information session on calls, not a substantive research or policy evidence product.",
+      "reader_why": "",
+      "reader_more": "The research-infrastructure digital coffee is an information session on calls, not a substantive research or policy evidence product.",
+      "deep_analysis": {
+        "work_kind": "event/landing page or out-of-scope evidence product",
+        "research_question": "",
+        "main_finding": "The research-infrastructure digital coffee is an information session on calls, not a substantive research or policy evidence product.",
+        "method_or_basis": "Verified matching primary/official source and assessed it against historical Strand A/B admission rules.",
+        "qualification": "The negative decision concerns Radar admission, not the legitimacy of the underlying organisation or activity.",
+        "radar_relevance": "The research-infrastructure digital coffee is an information session on calls, not a substantive research or policy evidence product.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:5ef6d1c3914de16e",
+      "source_hash": "a3961518",
+      "identity_hash": "c291340902af79b3",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching reader-facing source https://doi.org/10.12688/openreseurope.18023.1; package contains substantive matching substantial_web_text material from this route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://doi.org/10.12688/openreseurope.18023.1",
+            "title": "Facilitating remote and virtual access provision by European research infrastructures – requirements, issues, and recommendations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and substantive content verified against the supplied primary material and, where thin, an independently recovered publisher/repository source."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Research-infrastructure access is a recognised European R&I-system mechanism."
+      },
+      "reader_title": "Facilitating remote and virtual access provision by European research infrastructures – requirements, issues, and recommendations",
+      "reader_what": "The study identifies requirements, benefits, obstacles and recommendations for remote and virtual access to European research infrastructures.",
+      "reader_why": "Remote and virtual access can broaden use of specialised infrastructure while creating funding, operational and data-governance requirements.",
+      "reader_more": "The study identifies requirements, benefits, obstacles and recommendations for remote and virtual access to European research infrastructures. Surveys, stakeholder workshops, expert-group discussions and use cases across research infrastructures. Recommendations synthesise heterogeneous infrastructure experiences; access models remain field- and facility-specific.",
+      "deep_analysis": {
+        "work_kind": "empirical recommendations study",
+        "research_question": "What does this work establish about its stated research, policy or methodological problem?",
+        "main_finding": "The study identifies requirements, benefits, obstacles and recommendations for remote and virtual access to European research infrastructures.",
+        "method_or_basis": "Surveys, stakeholder workshops, expert-group discussions and use cases across research infrastructures.",
+        "qualification": "Recommendations synthesise heterogeneous infrastructure experiences; access models remain field- and facility-specific.",
+        "radar_relevance": "Research-infrastructure access is a recognised European R&I-system mechanism.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.infrastructure_access",
+          "secondary_objects": [],
+          "actor": {
+            "name": "eRImote project consortium",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2024-07-24",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Recommendations synthesise heterogeneous infrastructure experiences; access models remain field- and facility-specific.",
+          "text": "The study identifies requirements, benefits, obstacles and recommendations for remote and virtual access to European research infrastructures.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:294814d951455c30",
+      "source_hash": "baa134cd",
+      "identity_hash": "46ec67f60099bca2",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching reader-facing source https://doi.org/10.1007/s10734-023-01046-4; package contains substantive matching substantial_web_text material from this route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://doi.org/10.1007/s10734-023-01046-4",
+            "title": "Returnee and local doctorates on research productivity: doctoral training, international mobility, and research collaboration",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and source provenance were verified sufficiently to make a negative admission decision; no substitute work was used."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE_EU",
+        "reason": "The study focuses on returnee and local doctorates in East Asian higher education rather than a substantive European R&I system or capability question."
+      },
+      "reader_title": "Returnee and local doctorates on research productivity: doctoral training, international mobility, and research collaboration",
+      "reader_what": "The study focuses on returnee and local doctorates in East Asian higher education rather than a substantive European R&I system",
+      "reader_why": "",
+      "reader_more": "The study focuses on returnee and local doctorates in East Asian higher education rather than a substantive European R&I system or capability question.",
+      "deep_analysis": {
+        "work_kind": "event/landing page or out-of-scope evidence product",
+        "research_question": "",
+        "main_finding": "The study focuses on returnee and local doctorates in East Asian higher education rather than a substantive European R&I system or capability question.",
+        "method_or_basis": "Verified matching primary/official source and assessed it against historical Strand A/B admission rules.",
+        "qualification": "The negative decision concerns Radar admission, not the legitimacy of the underlying organisation or activity.",
+        "radar_relevance": "The study focuses on returnee and local doctorates in East Asian higher education rather than a substantive European R&I system or capability question.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:ff9a54d20dabce60",
+      "source_hash": "0c16a36d",
+      "identity_hash": "cd5c3237d3e84c9f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching reader-facing source https://www.vr.se/download/18.683da7018fa3fd6f4518346/1717507512798/Recommendations_for_the_EUs_framwork_programme_FP10.pdf; package contains substantive matching pdf_excerpt material from this route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.vr.se/download/18.683da7018fa3fd6f4518346/1717507512798/Recommendations_for_the_EUs_framwork_programme_FP10.pdf",
+            "title": "The Swedish Research Council’s recommendations for the EU’s framework programme FP10",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and substantive content verified against the supplied primary material and, where thin, an independently recovered publisher/repository source."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "It directly addresses the design and priorities of the EU research and innovation framework programme."
+      },
+      "reader_title": "The Swedish Research Council’s recommendations for the EU’s framework programme FP10",
+      "reader_what": "The Swedish Research Council recommended priorities for FP10 aimed at research quality, competitiveness and an effective European R&I programme.",
+      "reader_why": "Framework-programme design influences research quality, collaboration, capacity and Europe’s ability to address strategic challenges.",
+      "reader_more": "The Swedish Research Council recommended priorities for FP10 aimed at research quality, competitiveness and an effective European R&I programme. Official memorandum from a national research funder setting out recommendations for FP10. The document is a national funder’s policy position, not evidence that the recommendations were adopted.",
+      "deep_analysis": {
+        "work_kind": "policy memorandum",
+        "research_question": "What does this work establish about its stated research, policy or methodological problem?",
+        "main_finding": "The Swedish Research Council recommended priorities for FP10 aimed at research quality, competitiveness and an effective European R&I programme.",
+        "method_or_basis": "Official memorandum from a national research funder setting out recommendations for FP10.",
+        "qualification": "The document is a national funder’s policy position, not evidence that the recommendations were adopted.",
+        "radar_relevance": "It directly addresses the design and priorities of the EU research and innovation framework programme.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "horizon.budget_2028_34",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Swedish Research Council",
+            "class": "national_funder"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2024-01-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "The document is a national funder’s policy position, not evidence that the recommendations were adopted.",
+          "text": "The Swedish Research Council recommended priorities for FP10 aimed at research quality, competitiveness and an effective European R&I programme.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:55196f5a54029016",
+      "source_hash": "1cc384e0",
+      "identity_hash": "05b6fde5f9c246cd",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching reader-facing source https://www.nesta.org.uk/project-updates/citizen-science-is-shaping-european-technology-policy-around-home-appliance-repair/; package contains substantive matching substantial_web_text material from this route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.nesta.org.uk/project-updates/citizen-science-is-shaping-european-technology-policy-around-home-appliance-repair/",
+            "title": "How citizen science is shaping European technology policy around home-appliance repair",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and source provenance were verified sufficiently to make a negative admission decision; no substitute work was used."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "LOCAL_CONSUMER_APPLICATION",
+        "reason": "The citizen-science repair project concerns home-appliance repair policy; it is a consumer/application case that the Strand A guard explicitly excludes."
+      },
+      "reader_title": "How citizen science is shaping European technology policy around home-appliance repair",
+      "reader_what": "The citizen-science repair project concerns home-appliance repair policy; it is a consumer/application case that the Strand A guard explicitly excludes.",
+      "reader_why": "",
+      "reader_more": "The citizen-science repair project concerns home-appliance repair policy; it is a consumer/application case that the Strand A guard explicitly excludes.",
+      "deep_analysis": {
+        "work_kind": "event/landing page or out-of-scope evidence product",
+        "research_question": "",
+        "main_finding": "The citizen-science repair project concerns home-appliance repair policy; it is a consumer/application case that the Strand A guard explicitly excludes.",
+        "method_or_basis": "Verified matching primary/official source and assessed it against historical Strand A/B admission rules.",
+        "qualification": "The negative decision concerns Radar admission, not the legitimacy of the underlying organisation or activity.",
+        "radar_relevance": "The citizen-science repair project concerns home-appliance repair policy; it is a consumer/application case that the Strand A guard explicitly excludes.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:a6bf9f2cfd6c9517",
+      "source_hash": "d8c2cf1b",
+      "identity_hash": "6a27ba6ef6391f76",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching reader-facing source https://www.eeas.europa.eu/delegations/association-southeast-asian-nations-asean/eu%E2%80%99s-global-gateway-initiative-unlocks-new-opportunities-education-and-research-asean_en; package contains substantive matching substantial_web_text material from this route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.eeas.europa.eu/delegations/association-southeast-asian-nations-asean/eu%E2%80%99s-global-gateway-initiative-unlocks-new-opportunities-education-and-research-asean_en",
+            "title": "EU’s Global Gateway Initiative Unlocks New Opportunities for Education and Research in ASEAN",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and substantive content verified against the supplied primary material and, where thin, an independently recovered publisher/repository source."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "It documents an EU-backed international research-collaboration mechanism linking European and ASEAN institutions."
+      },
+      "reader_title": "EU’s Global Gateway Initiative Unlocks New Opportunities for Education and Research in ASEAN",
+      "reader_what": "The EU Global Gateway initiative announced support intended to expand education and research cooperation with ASEAN partners.",
+      "reader_why": "Dedicated partnership funding can expand cross-regional research and education networks.",
+      "reader_more": "The EU Global Gateway initiative announced support intended to expand education and research cooperation with ASEAN partners. Official EEAS account of an EU external partnership initiative. The announcement establishes the initiative and intended cooperation, not measured research outcomes.",
+      "deep_analysis": {
+        "work_kind": "official programme announcement",
+        "research_question": "What does this work establish about its stated research, policy or methodological problem?",
+        "main_finding": "The EU Global Gateway initiative announced support intended to expand education and research cooperation with ASEAN partners.",
+        "method_or_basis": "Official EEAS account of an EU external partnership initiative.",
+        "qualification": "The announcement establishes the initiative and intended cooperation, not measured research outcomes.",
+        "radar_relevance": "It documents an EU-backed international research-collaboration mechanism linking European and ASEAN institutions.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Union",
+            "class": "eu_body"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2024-01-01",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The announcement establishes the initiative and intended cooperation, not measured research outcomes.",
+          "text": "The EU Global Gateway initiative announced support intended to expand education and research cooperation with ASEAN partners.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:96d2b74807741141",
+      "source_hash": "4067d446",
+      "identity_hash": "7518f5e6763350a5",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching reader-facing source https://www.eeas.europa.eu/delegations/association-southeast-asian-nations-asean/eu-asean-team-boost-educational-and-research-ties-eur-93-million-initiative_en; package contains substantive matching substantial_web_text material from this route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.eeas.europa.eu/delegations/association-southeast-asian-nations-asean/eu-asean-team-boost-educational-and-research-ties-eur-93-million-initiative_en",
+            "title": "EU, ASEAN team up to boost educational and research ties with EUR 9.3 million initiative",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and substantive content verified against the supplied primary material and, where thin, an independently recovered publisher/repository source."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The initiative directly funds international research and education cooperation involving European institutions."
+      },
+      "reader_title": "EU, ASEAN team up to boost educational and research ties with EUR 9.3 million initiative",
+      "reader_what": "The EU and ASEAN announced a €9.3 million initiative to strengthen education and research links between the two regions.",
+      "reader_why": "Targeted funding can create cross-regional networks and participation opportunities for researchers and institutions.",
+      "reader_more": "The EU and ASEAN announced a €9.3 million initiative to strengthen education and research links between the two regions. Official EEAS announcement describing the funded cooperation initiative. The source establishes funding and programme intent, not later collaboration outcomes.",
+      "deep_analysis": {
+        "work_kind": "official funding announcement",
+        "research_question": "What does this work establish about its stated research, policy or methodological problem?",
+        "main_finding": "The EU and ASEAN announced a €9.3 million initiative to strengthen education and research links between the two regions.",
+        "method_or_basis": "Official EEAS announcement describing the funded cooperation initiative.",
+        "qualification": "The source establishes funding and programme intent, not later collaboration outcomes.",
+        "radar_relevance": "The initiative directly funds international research and education cooperation involving European institutions.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Union and ASEAN",
+            "class": "eu_body"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2024-01-01",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The source establishes funding and programme intent, not later collaboration outcomes.",
+          "text": "The EU and ASEAN announced a €9.3 million initiative to strengthen education and research links between the two regions.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:bdec09c0c1bb2766",
+      "source_hash": "296b6754",
+      "identity_hash": "c142c5fae64c995a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching reader-facing source https://www.eeas.europa.eu/delegations/association-southeast-asian-nations-asean/asean-gains-insights-about-eurocodes-european-commission%E2%80%99s-joint-research-centre_en; package contains substantive matching substantial_web_text material from this route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.eeas.europa.eu/delegations/association-southeast-asian-nations-asean/asean-gains-insights-about-eurocodes-european-commission%E2%80%99s-joint-research-centre_en",
+            "title": "ASEAN gains insights about the Eurocodes at the European Commission’s Joint Research Centre",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and source provenance were verified sufficiently to make a negative admission decision; no substitute work was used."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "NON_SUBSTANTIVE_VISIT_PAGE",
+        "reason": "The Eurocodes item reports an ASEAN study visit to the JRC; it is an outreach/knowledge-exchange event rather than substantive R&I evidence."
+      },
+      "reader_title": "ASEAN gains insights about the Eurocodes at the European Commission’s Joint Research Centre",
+      "reader_what": "The Eurocodes item reports an ASEAN study visit to the JRC; it is an outreach/knowledge-exchange event rather than substantive R&I",
+      "reader_why": "",
+      "reader_more": "The Eurocodes item reports an ASEAN study visit to the JRC; it is an outreach/knowledge-exchange event rather than substantive R&I evidence.",
+      "deep_analysis": {
+        "work_kind": "event/landing page or out-of-scope evidence product",
+        "research_question": "",
+        "main_finding": "The Eurocodes item reports an ASEAN study visit to the JRC; it is an outreach/knowledge-exchange event rather than substantive R&I evidence.",
+        "method_or_basis": "Verified matching primary/official source and assessed it against historical Strand A/B admission rules.",
+        "qualification": "The negative decision concerns Radar admission, not the legitimacy of the underlying organisation or activity.",
+        "radar_relevance": "The Eurocodes item reports an ASEAN study visit to the JRC; it is an outreach/knowledge-exchange event rather than substantive R&I evidence.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:7d46803936809e94",
+      "source_hash": "b5b2136d",
+      "identity_hash": "3a94f1eb48c455c6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching reader-facing source https://www.espi.eu/wp-content/uploads/2023/09/ESPI2040_FINAL-Copy.pdf; package contains substantive matching pdf_excerpt material from this route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.espi.eu/wp-content/uploads/2023/09/ESPI2040_FINAL-Copy.pdf",
+            "title": "ESPI2040: Space for Prosperity, Peace and Future Generations - ESPI",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and substantive content verified against the supplied primary material and, where thin, an independently recovered publisher/repository source."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "European space is a strategic technology domain with direct links to research, innovation and industrial capability."
+      },
+      "reader_title": "ESPI2040: Space for Prosperity, Peace and Future Generations - ESPI",
+      "reader_what": "ESPI2040 uses strategic foresight to examine how Europe can sustain space-sector prosperity, peace and long-term capability.",
+      "reader_why": "Long-term space capability depends on choices about innovation, governance, industrial capacity and international cooperation.",
+      "reader_more": "ESPI2040 uses strategic foresight to examine how Europe can sustain space-sector prosperity, peace and long-term capability. Strategic policy report using long-horizon analysis of European space trends, capabilities and choices. The report is foresight: it explores plausible futures and strategic choices rather than predicting observed outcomes.",
+      "deep_analysis": {
+        "work_kind": "strategic foresight report",
+        "research_question": "What does this work establish about its stated research, policy or methodological problem?",
+        "main_finding": "ESPI2040 uses strategic foresight to examine how Europe can sustain space-sector prosperity, peace and long-term capability.",
+        "method_or_basis": "Strategic policy report using long-horizon analysis of European space trends, capabilities and choices.",
+        "qualification": "The report is foresight: it explores plausible futures and strategic choices rather than predicting observed outcomes.",
+        "radar_relevance": "European space is a strategic technology domain with direct links to research, innovation and industrial capability.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.system_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Space Policy Institute",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2023-09-25",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The report is foresight: it explores plausible futures and strategic choices rather than predicting observed outcomes.",
+          "text": "ESPI2040 uses strategic foresight to examine how Europe can sustain space-sector prosperity, peace and long-term capability.",
+          "confidence": "high"
+        }
+      ]
+    }
+  ]
+}
