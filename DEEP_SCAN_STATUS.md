@@ -7,8 +7,8 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **2615** (Main **1242** + Historical **1373**)
-- Automatic queue still needing V2 verification: **81** (Main **0** + Historical **81**)
-- Currently assigned to workers: **72** (Main **0** + Historical **72**)
+- Automatic queue still needing V2 verification: **99** (Main **0** + Historical **99**)
+- Currently assigned to workers: **90** (Main **0** + Historical **90**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **29**
 - Automatic queue pending and not yet assigned: **9**
@@ -16,26 +16,30 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261005T090615Z-e207d826bc8f`
-- Assigned unresolved records: **32**
-  1. `historical:id:7430f92885685c0b` — ERA Portal Austria – Slovenian Presidency Conference “New European Research Area" - Report and recommendations
-  2. `historical:id:5d17b716789ab12c` — ERA Portal Austria – GENDERACTIONplus policy briefs and Position Papers
-  3. `historical:id:5aa6f9b6def3d1b9` — ERA Portal Austria – European Research Area Policy Agenda
-  4. `historical:id:9f9bb8666f5173bd` — ERA Portal Austria – Council conclusions on the New European Research Area (1 Dec 2020)
-  5. `historical:id:bd3640327b5b1db5` — ERA Portal Austria – A new ERA for Research and Innovation
-  6. `historical:id:9df98530c8e7c960` — Welcome to digital coffee about Horizon Europe cluster 3 | Vinnova
-  7. `historical:id:d8644ec6784bcc45` — User study and IPR analysis in preparation for EIC Accelerator - Strategic Health and Digital Technologies | Vinnova
-  8. `historical:id:9038452533515f40` — Interested in Horizon Europe Research Infrastructure Programme? | Vinnova
-  - … plus 24 more in the package manifest
+- Current package: `worker-a-20261005T093429Z-d275e359cac3`
+- Assigned unresolved records: **36**
+  1. `historical:id:53a5c41fc874984c` — AI adoption, productivity and employment: evidence from European firms | Bank for International Settlements
+  2. `historical:id:a0d3aec44cdb9e3c` — Implementation dialogue on the Chips Act with Executive Vice-President Henna Virkkunen
+  3. `historical:id:36c2a6e773a261ac` — From analysis to action - AI in financial markets | Bank for International Settlements
+  4. `historical:id:15fcdd32dcb8df56` — Data Union in a nutshell | Shaping Europe’s digital future
+  5. `historical:id:e9adf7de4ec87403` — Horizon Europe Roadshow - Christchurch
+  6. `historical:id:e5b4bf7f44b8dd42` — ALLEA Responds to High-Level Group’s Report on Framework Programme 10 - ALLEA
+  7. `historical:id:4e54f0d346a71500` — Horizon Europe Roadshow - Auckland
+  8. `historical:id:97048a0eb1dd0233` — Framework Programme 10: ALLEA Advocates for Widening Scientific Cooperation and Freedom of Research - ALLEA
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261005T090651Z-2057765d77e5`
-- Assigned unresolved records: **5**
+- Current package: `worker-b-20261005T093508Z-f144aa6c1220`
+- Assigned unresolved records: **19**
   1. `historical:id:cfd5ae4e33f6a521` — Foresight 2030 Threats | ENISA
   2. `historical:id:b5f939bb363fae8f` — Future of Space Exploration: Strategic Scenarios for European Space Exploration 2040-2060 - ESPI
-  3. `historical:id:61deaf307b884e50` — Knowledge Transfer 2015
-  4. `historical:id:7cd5bf0ed1eee954` — A Hybrid Scenario Planning Methodology for Interactive Digital Media
-  5. `historical:id:0ce87ce447d6c00d` — An integrated approach for the evaluation of national Foresight: The Russian case
+  3. `historical:id:bb687decff3ff985` — The Swedish presidency and academic freedom | Coimbra
+  4. `historical:id:7a7bb987851d62f9` — Supply Chain Resilience Bulletin - January 2023
+  5. `historical:id:1d9fa8302a46fad2` — Supply Chain Resilience Bulletin - February 2023
+  6. `historical:id:d6350a1cf9d493cd` — Mission incomplete: Layered practices of monitoring and evaluation in Swedish transformative innovation policy
+  7. `historical:id:53336de6b6301fe2` — Towards a responsible and reciprocal global research partnership
+  8. `historical:id:9b3b40c028b87fc7` — Supply Chain Resilience Bulletin - July 2022
+  - … plus 11 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
