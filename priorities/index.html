@@ -13,7 +13,7 @@
 <!-- Legacy regression tokens only: reform.css?v=23.0 · site-shell.js?v=29 -->
 </head>
 <body>
-<header><div class="wrap top"><div><div class="kicker">PATHWAYS</div><h1>Risks &amp; Opportunities</h1><p class="lede">Forward-looking risks and opportunities for EU research &amp; innovation.</p></div><nav class="nav" aria-label="Primary site sections"><a href="../">Start</a><a href="../radar/">Main Radar</a><a href="../read/">Read At Least This</a><a href="../frontier/quick/">Matrix</a><a href="../trends/">Trends</a><a href="../phenomena/">Ongoing Phenomena</a><a class="primary" href="./" aria-current="page">Risks &amp; Opportunities</a><a href="../shocks/">External Shocks</a><a href="../historical/">Earlier Findings</a><a href="../literature/">Sources</a><a href="../stuff/">Stuff</a></nav></div></header>
+<header><div class="wrap top"><div><div class="kicker">PATHWAYS</div><h1>Risks &amp; Opportunities</h1><p class="lede">What current developments could mean for Europe next: where they could weaken research and innovation, and where they could strengthen it.</p></div><nav class="nav" aria-label="Primary site sections"><a href="../">Start</a><a href="../radar/">Main Radar</a><a href="../read/">Read At Least This</a><a href="../frontier/quick/">Matrix</a><a href="../trends/">Trends</a><a href="../phenomena/">Ongoing Phenomena</a><a class="primary" href="./" aria-current="page">Risks &amp; Opportunities</a><a href="../shocks/">External Shocks</a><a href="../historical/">Earlier Findings</a><a href="../literature/">Sources</a><a href="../stuff/">Stuff</a></nav></div></header>
 <section class="core-flow" aria-label="Core reader path"><div class="wrap flow"><a href="../radar/">1 · Radar</a><span>→</span><a href="../frontier/quick/">2 · Matrix</a><span>→</span><a href="../trends/">3 · Trends</a><span>→</span><a href="../phenomena/">4 · Ongoing phenomena</a><span>→</span><a class="current" href="./">5 · Risks &amp; opportunities</a><span>→</span><a href="../shocks/">6 · External shocks</a></div></section>
 <main class="wrap"><div class="grid">
 <section class="panel"><div class="panel-head"><div><h2>Risks</h2><p class="hint">Ways current developments could create problems for European research and innovation.</p></div><span id="riskCount" class="panel-count">—</span></div><ol id="risks" class="list risk"><li class="empty">Loading</li></ol><p id="riskStock" class="hint"></p></section>
@@ -22,7 +22,7 @@
 <script src="../reader_rank.js?v=17.20.17"></script>
 <script src="../briefing/insights.js?v=22.2"></script>
 <script src="../reader_style.js?v=29"></script>
-<script src="../reader_cards.js?v=26"></script><script src="priorities.js?v=26"></script>
+<script src="../reader_cards.js?v=26"></script><script src="../reader_clarity.js?v=1"></script><script src="priorities.js?v=26"></script>
 <script>
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const p=v=>esc((globalThis.RadarInsights&&(RadarInsights.matrixText?.(v)||RadarInsights.fastReaderText?.(v)))||v);
@@ -37,8 +37,10 @@ function item(x,kind,i){
   const C=globalThis.RadarCards;
   if(x?.highOrder&&x?.readerAuthored&&C){
     // v26: engine-written card - kind of reasoning, finding, evidence, so-what.
-    const text=C.surface(x.title);
-    const body=C.body({lead:x.coreMessage,so:x.readerWhy,basis:x.readerBasis});
+    const R=globalThis.RadarReaderClarity;
+    const r=R?R.priority(kind,{headline:x.title,lead:x.coreMessage,so:x.readerWhy,basis:x.readerBasis,topic:x.topicLabel||x.topic_label||''}):{headline:x.title,what:x.coreMessage,why:x.readerWhy,basis:x.readerBasis};
+    const text=C.surface(r.headline);
+    const body=`${r.what?`<p class="card-lead"><strong>What is happening:</strong> ${esc(C.surface(r.what))}</p>`:''}${r.why?`<p class="card-so"><strong>Why it matters:</strong> ${esc(C.surface(r.why))}</p>`:''}${r.basis?`<p class="card-basis">${esc(r.basis)}</p>`:''}`;
     return `<li class="priority-card" data-obviousness="${displayDistance(x)}"><div class="priority-main"><span class="rank">${i+1}</span><div class="priority-copy">${C.chip(x.readerKindLabel,x.wow)}<div class="priority-title">${esc(text)}</div>${body}<div class="priority-actions"><button class="info-button" type="button" data-detail="${id}" aria-expanded="false">Sources</button></div></div></div><div id="${id}" class="detail" hidden>${highOrderEvidenceHtml(x)}${relatedEvidenceHtml(x)}${weakContextHtml(x)}</div></li>`;
   }
   const rawText=RadarPriorities.plainPriorityTitle(x);
