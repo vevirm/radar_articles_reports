@@ -7,8 +7,8 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **2606** (Main **1236** + Historical **1370**)
-- Automatic queue still needing V2 verification: **44** (Main **0** + Historical **44**)
-- Currently assigned to workers: **44** (Main **0** + Historical **44**)
+- Automatic queue still needing V2 verification: **90** (Main **6** + Historical **84**)
+- Currently assigned to workers: **90** (Main **6** + Historical **84**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **29**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,21 +16,30 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261004T100027Z-ea201bb978d8`
-- Assigned unresolved records: **9**
-  1. `historical:id:88e263ffc2effb1d` — Wellcome position paper on Horizon Europe 2028–2034 | Wellcome
-  2. `historical:id:521bbc68831c9ee4` — Gen-4 Engineering Research Centers (ERC)
-  3. `historical:id:7efe8cb5bef255ac` — Gen-4 Engineering Research Centers
-  4. `historical:id:fe5713cc7f2d20d3` — Supporting analysis of cybersecurity investments and business resilience | ENISA
-  5. `historical:id:33ed4208ee9cdb93` — Opportunities with Sweden’s EU presidency in 2023
-  6. `historical:id:8db3b3c0641afd7d` — Dual-use research debates and public health: better integration would do no harm
-  7. `historical:id:28d6d5ebc62cd05b` — Assessing the desirability and feasibility of scenarios on eco-efficient transport: a heuristic for efficient stakeholder involvement during foresight processes
-  8. `historical:id:203582363dbacd0a` — Intelligence: Environmental and Horizon Scanning
-  - … plus 1 more in the package manifest
+- Current package: `worker-a-20261005T075813Z-09a34b25a1eb`
+- Assigned unresolved records: **40**
+  1. `link:https://www.atlanticcouncil.org/category/in-depth-research-reports/` — Issue briefs and reports
+  2. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=c69a83e3-bcba-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Technology assessment for an EU digital tool for preventive healthcare - Publications Office of the EU
+  3. `link:https://www.aka.fi/en/from-research-to-society/rcf-impact/international-cooperation/european-cooperation/european-funding-cooperation/` — Horizon Europe funding cooperation
+  4. `link:https://doi.org/10.1111/1750-3841.71525` — Bioactive Peptides in Functional Foods: From Production and Validation to Commercialization, Regulatory Hurdles, and Future Prospects
+  5. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=2608d934-bd30-11f1-9aae-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Commission Implementing Decision (EU) 2026/2166 of 29 September 2026 amending Implementing Decision 2013/700/EU setting up the European Social Survey as a European Research Infrastructure Consortium (ESS ERIC) (notified under document C(2026) 6735) - Publications Office of the EU
+  6. `link:https://www.cesaer.org/publications/designing-the-european-competitiveness-fund-key-elements-and-the-fp10ecf-interface/` — Joint statement 'Designing the European Competitiveness Fund: Key elements and the FP10–ECF interface'
+  7. `historical:id:95ad1ace03b22f0b` — Futures Literacy for Anticipatory Societies – Strengthening Foresight Systems Across Europe (FLARE)
+  8. `historical:id:7430f92885685c0b` — ERA Portal Austria – Slovenian Presidency Conference “New European Research Area" - Report and recommendations
+  - … plus 32 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261004T075859Z-67e25a44f2dc`
-- Assigned unresolved records: **0**
+- Current package: `worker-b-20261005T075900Z-001f0cf188ca`
+- Assigned unresolved records: **15**
+  1. `historical:id:02003b3207002949` — A Franco-German China Policy: The Road Less Traveled
+  2. `historical:id:e8f7087392fbb137` — Recommendations from the Swedish Research Council for Horizon 2020 and the next framwork programme
+  3. `historical:id:61deaf307b884e50` — Knowledge Transfer 2015
+  4. `historical:id:cfd5ae4e33f6a521` — Foresight 2030 Threats | ENISA
+  5. `historical:id:b5f939bb363fae8f` — Future of Space Exploration: Strategic Scenarios for European Space Exploration 2040-2060 - ESPI
+  6. `historical:id:7cd5bf0ed1eee954` — A Hybrid Scenario Planning Methodology for Interactive Digital Media
+  7. `historical:id:0ce87ce447d6c00d` — An integrated approach for the evaluation of national Foresight: The Russian case
+  8. `historical:id:521bbc68831c9ee4` — Gen-4 Engineering Research Centers (ERC)
+  - … plus 7 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
