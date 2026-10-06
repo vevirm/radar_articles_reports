@@ -7,8 +7,8 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **2638** (Main **1242** + Historical **1396**)
-- Automatic queue still needing V2 verification: **76** (Main **0** + Historical **76**)
-- Currently assigned to workers: **35** (Main **0** + Historical **35**)
+- Automatic queue still needing V2 verification: **149** (Main **45** + Historical **104**)
+- Currently assigned to workers: **108** (Main **45** + Historical **63**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **29**
 - Automatic queue pending and not yet assigned: **41**
@@ -16,12 +16,30 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261005T114145Z-7fb8937875b9`
-- Assigned unresolved records: **0**
+- Current package: `worker-a-20261006T085208Z-6edc71cf3442`
+- Assigned unresolved records: **48**
+  1. `link:https://cerre.eu/wp-content/uploads/2026/09/Cerre_​Improving-the-Digital-Networks-Act-Proposal.pdf` — Improving the Digital Networks Act Proposal
+  2. `link:https://www.interface-eu.org/publications/download/eu-chips-act-cooperation` — Tech Sovereignty and the EU's Chips Act 2.0
+  3. `link:https://doi.org/10.1016/j.iref.2026.105933` — AI and cloud adoption in European banking: Country-level evidence on the profitability-cyber risk trade-off
+  4. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxPdDhGbmhkQi1JRWZXcUNzZjNsVVdIcGQ3ckZFYkRCVHFWVDFsaDRKeUtPWXZuSkIyUG0xUjRYLUt1VWxqWWpPT19PN291VTRVZjJxbURUcFB1NTM4Z3JDek1HVnlyWW91N3VfaUtRRUhwVGZscXMyenRYb1hwaElJMmk4T0k4V1VRZGVQaV9FSEpRbzFjOXZROHRmbXEzR2pWbnFPczlIaTc3V0wxTmtF?oc=5` — Women MEPs targeted by AI ‘nudifier’ apps push EU leaders to enforce December ban
+  5. `link:https://news.google.com/rss/articles/CBMiyAFBVV95cUxOV3VXWGtPck1HLW4ydkZncTNLa1Bqdmx6RGhVRlQ1QWd2NWE0eUdnaDUwX0ZOUGZVbmV1Ni1fN09WODRtczZIVURqT3dTTHFnX0k0WF8zRlJsU3EwR1JIbHI0cFpzcDVIZDJ5emhiWEhWd2o0dXBFZ2Y2RDdaNnBXaHBNX1psa21Ka29ROG1UT05jY2FsQ0ZoeEhGVUllSHV5cGY4NVdLb19TOHFVNXJXUUZkUG81T1JMQkNMNnRYY1RfWXFWU1pnOQ?oc=5` — Funding Radar: Horizon Europe opens new €35M call for climate-related projects
+  6. `link:https://news.google.com/rss/articles/CBMiuAFBVV95cUxQekxyVUN1OFM5SWNqbmFGcVVySURrTVdjRnhKaDJ3elpRS2hlWUJTQzN3U2xibk51c3JkdXI4c2pQNTBKTWlMb25zR2E1SGwtZU1RUGtzUW0yQXF0X0tmRU9KTV9vNzkyWlRjQTUtN1BKcS01UG5kUzRFUGVROFB0WC1EM0V0RTlXZ05fQjJrcjFyWU45bUVwRDZzVnl1U3lTME5iNHFpWlBHSU5YSzVKZkhVOG9JeDds?oc=5` — Data Corner: The EU’s research and innovation performance in six charts
+  7. `link:https://news.google.com/rss/articles/CBMitAFBVV95cUxPX2xRcUZHLUJybUdWU0hwNHo4emp6NmhObVNRMlFoVE1oaXJCdXFIZEFYY1MxQ0U2dVNOVkV2b0o3dUpzQVYzSEwySFpHOGRmVnZlaVZxdHY3a256Q2gxcW93UHVNT2lSUUVfVmxZdEtHVk91UFh5MXlXWG54Qm5SaFZVcHF5OWJfSVRYSGs5dzh3TE5ybkVxdUJpM0ZVeU51UlRQYmdLTVVDakl6bXBZM3Jrc18?oc=5` — Italy PM Meloni seeks EU trademark for her voice amid AI deepfake risks
+  8. `link:https://news.google.com/rss/articles/CBMisAFBVV95cUxOaVJTMVNQWkE1TTNwWDlQdU9HcWtfaXVVNFQ5TGREVEpWZ0FfNlZYU0tYTHoyYklqNDlrMkoxcFBLVGxNa0hTdTdmdVFWRkhQSVRwbVpmc0owZWZTUzBhYkZTbG5aMkQ5WGpmQW8wWl9sNWVpUDZrc2JrWXZ6aFJXZEVOUm41a0J2OFNjaGtPeXRtZnNpYU4yU19EbmE4MUhFaDhuTHpVeXNBaTc0X01MRg?oc=5` — Slovenian glacier could disappear in days, researchers say
+  - … plus 40 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261005T093508Z-f144aa6c1220`
-- Assigned unresolved records: **0**
+- Current package: `worker-b-20261006T085242Z-38657e486b3f`
+- Assigned unresolved records: **25**
+  1. `historical:id:db0b87a794fd1871` — Ethical Frameworks for AI in Higher Education: Between European Regulation and Chinese Innovation
+  2. `historical:id:185814c1da1ddaf3` — ERA Portal Austria – Research Security
+  3. `historical:id:065123cbb1bdf9fa` — The European Union’s AI Factories
+  4. `historical:id:3c216e419acb7e46` — Swedish Futures - Vision Reports
+  5. `historical:id:d2dba3a6f8ae468f` — IVA's President: some thoughts on Swedish Futures
+  6. `historical:id:0af6e4742029f243` — Government assignment that Vinnova reported on in 2018 | Vinnova
+  7. `historical:id:45b0f16d69feb127` — Built for Purpose?
+  8. `historical:id:bea9c72856f3b6e5` — Secure Network Intelligence – better resilience for critical infrastructure | VTT
+  - … plus 17 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
