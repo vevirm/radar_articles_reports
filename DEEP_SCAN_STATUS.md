@@ -8,38 +8,20 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 
 - Authoritative V2 verified: **2639** (Main **1243** + Historical **1396**)
 - Automatic queue still needing V2 verification: **148** (Main **44** + Historical **104**)
-- Currently assigned to workers: **107** (Main **44** + Historical **63**)
+- Currently assigned to workers: **35** (Main **0** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **29**
-- Automatic queue pending and not yet assigned: **41**
+- Automatic queue pending and not yet assigned: **113**
 
 ## Worker lanes
 
 ### Worker A
 - Current package: `worker-a-20261006T092111Z-a911d7fe4267`
-- Assigned unresolved records: **36**
-  1. `link:https://www.interface-eu.org/publications/download/eu-chips-act-cooperation` — Tech Sovereignty and the EU's Chips Act 2.0
-  2. `link:https://doi.org/10.1016/j.iref.2026.105933` — AI and cloud adoption in European banking: Country-level evidence on the profitability-cyber risk trade-off
-  3. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxPdDhGbmhkQi1JRWZXcUNzZjNsVVdIcGQ3ckZFYkRCVHFWVDFsaDRKeUtPWXZuSkIyUG0xUjRYLUt1VWxqWWpPT19PN291VTRVZjJxbURUcFB1NTM4Z3JDek1HVnlyWW91N3VfaUtRRUhwVGZscXMyenRYb1hwaElJMmk4T0k4V1VRZGVQaV9FSEpRbzFjOXZROHRmbXEzR2pWbnFPczlIaTc3V0wxTmtF?oc=5` — Women MEPs targeted by AI ‘nudifier’ apps push EU leaders to enforce December ban
-  4. `link:https://news.google.com/rss/articles/CBMiyAFBVV95cUxOV3VXWGtPck1HLW4ydkZncTNLa1Bqdmx6RGhVRlQ1QWd2NWE0eUdnaDUwX0ZOUGZVbmV1Ni1fN09WODRtczZIVURqT3dTTHFnX0k0WF8zRlJsU3EwR1JIbHI0cFpzcDVIZDJ5emhiWEhWd2o0dXBFZ2Y2RDdaNnBXaHBNX1psa21Ka29ROG1UT05jY2FsQ0ZoeEhGVUllSHV5cGY4NVdLb19TOHFVNXJXUUZkUG81T1JMQkNMNnRYY1RfWXFWU1pnOQ?oc=5` — Funding Radar: Horizon Europe opens new €35M call for climate-related projects
-  5. `link:https://news.google.com/rss/articles/CBMiuAFBVV95cUxQekxyVUN1OFM5SWNqbmFGcVVySURrTVdjRnhKaDJ3elpRS2hlWUJTQzN3U2xibk51c3JkdXI4c2pQNTBKTWlMb25zR2E1SGwtZU1RUGtzUW0yQXF0X0tmRU9KTV9vNzkyWlRjQTUtN1BKcS01UG5kUzRFUGVROFB0WC1EM0V0RTlXZ05fQjJrcjFyWU45bUVwRDZzVnl1U3lTME5iNHFpWlBHSU5YSzVKZkhVOG9JeDds?oc=5` — Data Corner: The EU’s research and innovation performance in six charts
-  6. `link:https://news.google.com/rss/articles/CBMitAFBVV95cUxPX2xRcUZHLUJybUdWU0hwNHo4emp6NmhObVNRMlFoVE1oaXJCdXFIZEFYY1MxQ0U2dVNOVkV2b0o3dUpzQVYzSEwySFpHOGRmVnZlaVZxdHY3a256Q2gxcW93UHVNT2lSUUVfVmxZdEtHVk91UFh5MXlXWG54Qm5SaFZVcHF5OWJfSVRYSGs5dzh3TE5ybkVxdUJpM0ZVeU51UlRQYmdLTVVDakl6bXBZM3Jrc18?oc=5` — Italy PM Meloni seeks EU trademark for her voice amid AI deepfake risks
-  7. `link:https://news.google.com/rss/articles/CBMisAFBVV95cUxOaVJTMVNQWkE1TTNwWDlQdU9HcWtfaXVVNFQ5TGREVEpWZ0FfNlZYU0tYTHoyYklqNDlrMkoxcFBLVGxNa0hTdTdmdVFWRkhQSVRwbVpmc0owZWZTUzBhYkZTbG5aMkQ5WGpmQW8wWl9sNWVpUDZrc2JrWXZ6aFJXZEVOUm41a0J2OFNjaGtPeXRtZnNpYU4yU19EbmE4MUhFaDhuTHpVeXNBaTc0X01MRg?oc=5` — Slovenian glacier could disappear in days, researchers say
-  8. `link:https://news.google.com/rss/articles/CBMivAFBVV95cUxNcV9ZLUZYN2pKcXF5eVFlTEZQTEhRZTdiVmpxVUp2SmpQb1Z5SXl6QTlHTFhNS2k0Z2JTaUVZZVhqNEFxRmptQTBnc1hQWW5WWUE4Z0NSYk9oNnVETGhIaThZWWk5SFllajlTc2MwQ1k1NDh5WU42Q18tMlFER0RQM0JtLUxOdkpMV1FITEs2U05qOU1mallzZDlDTkRIMnN0ZjhtQ3U0blVoN2JUUDdWc2JNd1BNUWZqYjJSTQ?oc=5` — How is Europe sharpening migration rules? Ask the Euronews AI chatbot
-  - … plus 28 more in the package manifest
+- Assigned unresolved records: **0**
 
 ### Worker B
 - Current package: `worker-b-20261006T092145Z-43145ce18cfa`
-- Assigned unresolved records: **36**
-  1. `link:https://news.google.com/rss/articles/CBMickFVX3lxTE5zZmNYczFJMWRNNnZsZ21RenpjVFpXSGF5TTlTZXdnOUgxMG1VdzFIUUFCR2g4X05iU3NNWUd6TzYxR3RSQ0VXTmVLZ09IaTVBM00tcDlPMlNGRXhqWThHTnhWYm1oTnVoeDloSVhfVjM5dw?oc=5` — The French way of electrification - rapporteur.com
-  2. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTE9TRExTdEZISFROa1psdjh4LVdkc1ExcUM4ekwybXlUNEIwbVJySW9IMTNxcmRYdzdGRTk5N3VpeDU4Q01naERzalowX0FBSV96dHQyZFB2cUFjQUN4QVhqM05zVGI3djZkQjlGYTJjSEJWTnFobVpnOWdtVDFaQQ?oc=5` — Cleantech Innovation, Industrial Decarbonisation and Global Competition - Where does the EU stand in the race towards net-zero compared to the US and China?
-  3. `link:https://news.google.com/rss/articles/CBMiwAFBVV95cUxOWVZKYjhaUnkyLXUwR25RNm1NVEVHbzRHY29RSWd3cHJnV3ZlWFo4cEctNzg2RTcxVUdPZDdqZ2lHckF4Z0F3QmFIc2RzMEE1LWQtX2VSRXQ0bmw4dU1oWXZqdjhKcG5LNEF3V0hBSlJZOFRubzNwd0wzcm0xOXZ5bXprVjY0S1lJaW5XYnNmNjNyUVYzZ0ozQlJ4SVdEVFZBYVJlUWx0eHRWenNLZkxwYUE0OU03WUtrQnNLTlA2czM?oc=5` — Laying the foundations: Making philanthropy a structural force in European research and innovation
-  4. `link:https://news.google.com/rss/articles/CBMinwFBVV95cUxNSlJEX19pMXB1eXZFM1FGME51QVA5cGZwaTlCcUdCVk8xNlJOc0xKZXlsa08wa2VBTE5sNnRLR0dVR2lUV3pfY09zZ3hUYjJ5clhCUlV2aUFCcmNSZHpTdlVqTk1KUjFvdlVOWGgwdVlpZHlBbkVaT1dGZUJUbGNuc1daN1lVdFBjRjZjYnZsMWdSOXhtMjdTclkwMHpnLVk?oc=5` — Europe’s wildfire devastation could almost triple, new research finds
-  5. `link:https://news.google.com/rss/articles/CBMiswFBVV95cUxPOEJFdzZ6Sl9fLW5fYTRmYnpfS080d3dzcEZQVFNNc1F2eHV4V2NDcWZJem9qYVFZdVNmeG9UeC1ua2lSeUNNa3hDd2NGd1kwMm5oenYwOWZmWDMxTWVQcWdKZG5JTVA2NWgzYzk0dkJIVWk2UXZwTzdYMk1HX0dqc1NCd002bTA5dUw4WVpldUxKaXZ4dDNKdmo3MUVBXzM1cW14TEJIbXh1UkZhMmNQd3NzVQ?oc=5` — [Interview] Does copyright protect your AI-generated content in Europe? Let’s find out
-  6. `link:https://news.google.com/rss/articles/CBMingFBVV95cUxQby1BRzAyc1pSay02cy0taWxfZlRLaS1CaU04RWlDZk9DN1AySUMyQlY4NUcxY3E2bGdBWVNjM29rWU9JQjNzVmY2YmZyRmtKWVkyR3lDNDIxRjVjMzVwaEszY2g4WmZFNHJiTmpPMmx5aE1PNkliQVpGUnhsQzhsV3M3Q3FnUEtkb3lQc1Y0WlNJNEtmTkVFQnJZaDc3QQ?oc=5` — Romania says Spanish fighter jet downs drone after airspace breach - rapporteur.com
-  7. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTE9wQ3Q1U1htX1RJRHluUlR3eno2bEJ6WmNxR09vZUlielQ1ekFCcDlXMWF2Vnp0SjFJMndaQktNSFZfTnV4MGlra1FIdHMxd2NzcTNKSkJIQ25EOXBzVFBjSElNXzFXWU5CZUFqWG51ZzNiekpHSHdtZjBsUnZKZw?oc=5` — Research for PECH Committee - Allocation of fishing opportunities in the EU | Think Tank | Parlament Ewropew
-  8. `link:https://news.google.com/rss/articles/CBMiZEFVX3lxTE9HUWR0c3BNLTV4bW54WmJ5elZleHZIUWdCNjBKNmtvMlZxc1FVQTl3VFBOa18xbVBtVjdmbWtmcS1TRXdSRkFmdXp5bnlZanJSVGRnOE1MYkFrX0hqaTNzTGdwN2Y?oc=5` — The obstacles and changes in Sino-European trade routes in the twenty-first century due to climate change and geopolitical risks
-  - … plus 28 more in the package manifest
+- Assigned unresolved records: **0**
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
