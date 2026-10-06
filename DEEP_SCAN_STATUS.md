@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261006T091824Z-a911d7fe4267`
+- Current package: `worker-a-20261006T092111Z-a911d7fe4267`
 - Assigned unresolved records: **36**
   1. `link:https://www.interface-eu.org/publications/download/eu-chips-act-cooperation` — Tech Sovereignty and the EU's Chips Act 2.0
   2. `link:https://doi.org/10.1016/j.iref.2026.105933` — AI and cloud adoption in European banking: Country-level evidence on the profitability-cyber risk trade-off
@@ -29,7 +29,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261006T091859Z-43145ce18cfa`
+- Current package: `worker-b-20261006T092145Z-43145ce18cfa`
 - Assigned unresolved records: **36**
   1. `link:https://news.google.com/rss/articles/CBMickFVX3lxTE5zZmNYczFJMWRNNnZsZ21RenpjVFpXSGF5TTlTZXdnOUgxMG1VdzFIUUFCR2g4X05iU3NNWUd6TzYxR3RSQ0VXTmVLZ09IaTVBM00tcDlPMlNGRXhqWThHTnhWYm1oTnVoeDloSVhfVjM5dw?oc=5` — The French way of electrification - rapporteur.com
   2. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTE9TRExTdEZISFROa1psdjh4LVdkc1ExcUM4ekwybXlUNEIwbVJySW9IMTNxcmRYdzdGRTk5N3VpeDU4Q01naERzalowX0FBSV96dHQyZFB2cUFjQUN4QVhqM05zVGI3djZkQjlGYTJjSEJWTnFobVpnOWdtVDFaQQ?oc=5` — Cleantech Innovation, Industrial Decarbonisation and Global Competition - Where does the EU stand in the race towards net-zero compared to the US and China?
