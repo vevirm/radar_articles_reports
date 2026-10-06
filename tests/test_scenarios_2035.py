@@ -54,7 +54,7 @@ class Scenarios2035Tests(unittest.TestCase):
         joined = " ".join(texts).lower()
         for phrase in ("closest", "plausib", "likely", "probab", "odds", "long shot", "stretch from here"):
             if phrase in joined:
-    print(f"WARNING: likelihood language found: {phrase}")
+                print(f"WARNING: likelihood language found: {phrase}")
         html = (ROOT / "2035" / "index.html").read_text(encoding="utf-8")
         self.assertNotIn("futureToday", html)
         self.assertNotIn("closeness", html)
@@ -166,3 +166,4 @@ class Scenarios2035Tests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
