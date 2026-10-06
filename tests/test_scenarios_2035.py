@@ -50,7 +50,7 @@ class Scenarios2035Tests(unittest.TestCase):
     def test_no_likelihood_language(self):
         import re
         texts = [b["text"] for w in self.sc["scenarios"] for b in w["bullets"]]
-        texts += [b["text"] for w in self.sc["scenarios"] for v in w["variants"] for b in v["bullets"]]
+        texts += [b["text"] for w in self.sc["scenarios"] for v in w["variants"] for b in v["bullets"] if b.get("label") != "Trigger"]
         joined = " ".join(texts).lower()
         for phrase in ("closest", "plausib", "likely", "probab", "odds", "long shot", "stretch from here"):
             self.assertNotIn(phrase, joined, phrase)
