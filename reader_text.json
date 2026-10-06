@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-05T11:54:10Z",
+  "generated_at": "2026-10-06T09:11:42Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -228682,8 +228682,110 @@
       "deep_scan_package_id": "worker-a-20261005T114145Z-7fb8937875b9",
       "claims": [],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://cerre.eu/wp-content/uploads/2026/09/Cerre_​Improving-the-Digital-Networks-Act-Proposal.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "5a162e2e",
+      "identity_hash": "15ccf01c4718561c",
+      "reader_title": "Improving the Digital Networks Act Proposal",
+      "reader_what": "and updating the rules governing an open and neutral I nternet.",
+      "reader_why": "It materially informs European research, innovation, capability, funding or governance.",
+      "reader_more": "and updating the rules governing an open and neutral I nternet. Admission was assessed against the Deep Scan V2 strand rules and the strongest substantive evidence recovered.",
+      "deep_analysis": {
+        "work_kind": "institutional report",
+        "research_question": "",
+        "main_finding": "and updating the rules governing an open and neutral I nternet.",
+        "method_or_basis": "Verified from substantive first-party/full-text material supplied in the package or recovered from the publisher.",
+        "qualification": "The verified source supports the stated finding or action, but it should not be extended beyond the source’s stated scope.",
+        "radar_relevance": "Substantive European research, innovation, technology or current-policy relevance supported by the source.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package includes matching source material."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title/publisher search recovered a matching source route."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://cerre.eu/wp-content/uploads/2026/09/Cerre_%E2%80%8BImproving-the-Digital-Networks-Act-Proposal.pdf",
+            "title": "Improving the Digital Networks Act Proposal",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_or_primary_page",
+            "url": "https://cerre.eu/publications/improving-the-digital-networks-act-proposal/",
+            "title": "Improving the Digital Networks Act Proposal",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Decision is grounded in substantive package text or recovered publisher/primary evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Verified work has substantive European R&I-system, strategic-technology, capability or governance relevance."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-06T09:11:42Z",
+      "deep_scan_package_id": "worker-a-20261006T085208Z-6edc71cf3442",
+      "claims": [
+        {
+          "object": "digital.infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "CERRE — Centre on Regulation in Europe",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "adds_capacity",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-09-30",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The verified source supports the stated finding or action, but it should not be extended beyond the source’s stated scope.",
+          "text": "Improving the Digital Networks Act Proposal.",
+          "confidence": "medium",
+          "record_key": "link:https://cerre.eu/wp-content/uploads/2026/09/Cerre_​Improving-the-Digital-Networks-Act-Proposal.pdf",
+          "merit": 81,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:15ccf01c4718561c:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-05T11:54:10Z"
+  "claims_updated_at": "2026-10-06T09:11:42Z"
 }
