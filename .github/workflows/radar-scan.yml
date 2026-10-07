@@ -31,7 +31,7 @@ jobs:
       contents: write
       actions: write
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
 
     steps:
       - name: Check out repository without stored credentials
