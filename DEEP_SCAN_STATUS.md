@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2639** (Main **1243** + Historical **1396**)
-- Automatic queue still needing V2 verification: **202** (Main **56** + Historical **146**)
-- Currently assigned to workers: **89** (Main **12** + Historical **77**)
+- Authoritative V2 verified: **2644** (Main **1243** + Historical **1401**)
+- Automatic queue still needing V2 verification: **197** (Main **56** + Historical **141**)
+- Currently assigned to workers: **84** (Main **12** + Historical **72**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **29**
 - Automatic queue pending and not yet assigned: **113**
@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261007T075858Z-2cd6d7f77b89`
+- Current package: `worker-a-20261007T081755Z-2cd6d7f77b89`
 - Assigned unresolved records: **36**
   1. `link:https://doi.org/10.1108/dprg-06-2026-0347` — Open source digital sovereignty: the case for a Canadian national Linux distribution
   2. `link:https://doi.org/10.48550/arxiv.2609.39285` — The Concentration of Artificial Intelligence in Big Tech and Its Implications for Human Rights in the European Union
@@ -29,17 +29,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261007T075943Z-4ccadf5340c2`
-- Assigned unresolved records: **18**
-  1. `historical:id:e2be3818179e3703` — Shape industrial policy and resilient competitiveness through cutting-edge science and technology
-  2. `historical:id:8d00f6c8fb8ab09f` — Knowledge and Innovation Management as a Driver of Competitiveness in Textile Firms
-  3. `historical:id:811357d021f30aec` — The G6 is preparing the future of European research
-  4. `historical:id:f6333f5542ab96cc` — Global Governance for the Digital Ecosystems
-  5. `historical:id:093da64e5c37286e` — Action Plan on synergies between civil, defence and space industries
-  6. `historical:id:5e640ca14007f2bb` — Operationalizing urban resilience: insights from the science-policy interface in the European Union
-  7. `historical:id:64e514c08980fe9c` — EU Civil security research funds
+- Current package: `worker-b-20261007T081828Z-293b99d07eff`
+- Assigned unresolved records: **13**
+  1. `historical:id:0108003bca53e8f6` — Foresight Cybersecurity Threats For 2030 - Update 2024: Extended report | ENISA
+  2. `historical:id:a6d6fa7cd238807a` — Foresight Cybersecurity Threats For 2030 - Update 2024: Executive Summary | ENISA
+  3. `historical:id:6d0796b4bbbd369e` — Young people and the future of Scotland: a participatory Horizon Scanning engagement | Demos Helsinki
+  4. `historical:id:3b8066429894dd63` — AI & Foresight: Envisioning the Future When the Unthinkable Becomes Possible
+  5. `historical:id:5e640ca14007f2bb` — Operationalizing urban resilience: insights from the science-policy interface in the European Union
+  6. `historical:id:64e514c08980fe9c` — EU Civil security research funds
+  7. `historical:id:83c59682e4f39495` — Development of a circular economy and evolution of working conditions and occupational risks—a strategic foresight study
   8. `historical:id:6bc253116c68944a` — Business innovation modes and their impact on innovation outputs: Regional variations and the nature of innovation across EU regions
-  - … plus 10 more in the package manifest
+  - … plus 5 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
