@@ -52,6 +52,50 @@ class RouteParityTests(unittest.TestCase):
     def setUp(self):
         scan.KNOWN_SIGNAL_IDENTITIES.clear()
 
+    def test_high_value_institution_sources_are_guaranteed_without_relaxing_admission(self):
+        required = {
+            "research-and-innovation.ec.europa.eu",
+            "publications.jrc.ec.europa.eu",
+            "joint-research-centre.ec.europa.eu",
+            "europarl.europa.eu",
+            "oecd.org",
+            "eib.org",
+            "eit.europa.eu",
+        }
+        guaranteed = {
+            str(x).lower().removeprefix("www.")
+            for x in scan.CONFIG.get("institution_guaranteed_direct_domains", [])
+        }
+        self.assertTrue(required.issubset(guaranteed), required - guaranteed)
+
+        configured = {
+            str(x.get("domain", "")).lower().removeprefix("www.")
+            for x in scan.CONFIG.get("institution_sources", [])
+            if isinstance(x, dict)
+        }
+        self.assertTrue(required.issubset(configured), required - configured)
+
+        # The discovery repair must not turn source prestige into admission. A Tier-1
+        # institutional item that is not centrally about the European R&I system still fails.
+        ev = scan.gate_scope(
+            "Foreign direct investment and employment in Europe",
+            "The report estimates aggregate foreign investment and employment effects across service industries.",
+            "", 1, source_kind="institutional",
+        )
+        self.assertFalse(ev["a_pass"], ev)
+        self.assertFalse(ev["b_pass"], ev)
+
+    def test_oecd_eib_eit_have_direct_publication_hub_adapters(self):
+        adapters = scan.CONFIG.get("institution_source_adapters", {})
+        for domain in ("oecd.org", "eib.org", "eit.europa.eu"):
+            self.assertIn(domain, adapters)
+            self.assertTrue(adapters[domain].get("hub_paths"), domain)
+            self.assertTrue(adapters[domain].get("path_hints"), domain)
+
+        self.assertIn("/en/publications.html", adapters["oecd.org"]["hub_paths"])
+        self.assertIn("/en/press/all", adapters["eib.org"]["hub_paths"])
+        self.assertIn("/news-events/news", adapters["eit.europa.eu"]["hub_paths"])
+
     def test_ep_jsonld_extractor_accepts_flat_portal_shape(self):
         payload = {
             "data": [{
