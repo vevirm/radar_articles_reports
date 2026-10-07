@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261007T081755Z-2cd6d7f77b89`
+- Current package: `worker-a-20261007T084356Z-2cd6d7f77b89`
 - Assigned unresolved records: **36**
   1. `link:https://doi.org/10.1108/dprg-06-2026-0347` — Open source digital sovereignty: the case for a Canadian national Linux distribution
   2. `link:https://doi.org/10.48550/arxiv.2609.39285` — The Concentration of Artificial Intelligence in Big Tech and Its Implications for Human Rights in the European Union
@@ -29,7 +29,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261007T081828Z-293b99d07eff`
+- Current package: `worker-b-20261007T084440Z-293b99d07eff`
 - Assigned unresolved records: **13**
   1. `historical:id:0108003bca53e8f6` — Foresight Cybersecurity Threats For 2030 - Update 2024: Extended report | ENISA
   2. `historical:id:a6d6fa7cd238807a` — Foresight Cybersecurity Threats For 2030 - Update 2024: Executive Summary | ENISA
