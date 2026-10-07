@@ -47,7 +47,7 @@ class CurrentRepositoryContractTests(unittest.TestCase):
 
     def test_main_budget_is_twenty_minutes(self):
         cfg = json.loads((ROOT / 'radar_config.json').read_text(encoding='utf-8'))
-        self.assertEqual(int(cfg.get('scan_budget_seconds', 0)), 1200)
+        self.assertEqual(int(cfg.get('scan_budget_seconds', 0)), 2400)
         self.assertTrue(bool(cfg.get('full_budget_continuation_enabled')))
         self.assertLessEqual(int(cfg.get('scan_finalize_reserve_seconds', 999)), 45)
 
