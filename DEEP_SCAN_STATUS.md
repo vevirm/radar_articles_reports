@@ -7,8 +7,8 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **2639** (Main **1243** + Historical **1396**)
-- Automatic queue still needing V2 verification: **148** (Main **44** + Historical **104**)
-- Currently assigned to workers: **35** (Main **0** + Historical **35**)
+- Automatic queue still needing V2 verification: **202** (Main **56** + Historical **146**)
+- Currently assigned to workers: **89** (Main **12** + Historical **77**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **29**
 - Automatic queue pending and not yet assigned: **113**
@@ -16,12 +16,30 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261006T092111Z-a911d7fe4267`
-- Assigned unresolved records: **0**
+- Current package: `worker-a-20261007T075858Z-2cd6d7f77b89`
+- Assigned unresolved records: **36**
+  1. `link:https://doi.org/10.1108/dprg-06-2026-0347` — Open source digital sovereignty: the case for a Canadian national Linux distribution
+  2. `link:https://doi.org/10.48550/arxiv.2609.39285` — The Concentration of Artificial Intelligence in Big Tech and Its Implications for Human Rights in the European Union
+  3. `link:https://institutdelors.eu/en/publications/speech-by-e-moulin-strengthening-european-sovereignty-from-integration-to-competitiveness/` — Speech by E. Moulin: “Strengthening European sovereignty : from integration to competitiveness” - Institut Jacques Delors
+  4. `link:https://doi.org/10.1080/09654313.2026.2671213` — The geography of exclusion: cumulative causation and the persistence of lagging regions
+  5. `link:https://www.eif.org/news-and-publications/newsroom/latest-insights` — EIF thought leadership | Inspiring progress for future funding
+  6. `link:https://institutdelors.eu/content/uploads/2026/06/Etude-CRIP_Revolution_IA_horizon_2035_Barichella_EN_2.pdf` — The Artificial Intelligence Revolution by 2035 - Institut Jacques Delors
+  7. `link:https://institutdelors.eu/content/uploads/2026/06/Etude-CRIP_Revolution_IA_horizon_2035_Barichella__Short_version_EN_2.pdf` — The Artificial Intelligence Revolution by 2035 (Short version) - Institut Jacques Delors
+  8. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=e7ce9d4e-c15e-11f1-988f-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Science, research and innovation performance of the EU 2026 - Publications Office of the EU
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261006T092145Z-43145ce18cfa`
-- Assigned unresolved records: **0**
+- Current package: `worker-b-20261007T075943Z-4ccadf5340c2`
+- Assigned unresolved records: **18**
+  1. `historical:id:e2be3818179e3703` — Shape industrial policy and resilient competitiveness through cutting-edge science and technology
+  2. `historical:id:8d00f6c8fb8ab09f` — Knowledge and Innovation Management as a Driver of Competitiveness in Textile Firms
+  3. `historical:id:811357d021f30aec` — The G6 is preparing the future of European research
+  4. `historical:id:f6333f5542ab96cc` — Global Governance for the Digital Ecosystems
+  5. `historical:id:093da64e5c37286e` — Action Plan on synergies between civil, defence and space industries
+  6. `historical:id:5e640ca14007f2bb` — Operationalizing urban resilience: insights from the science-policy interface in the European Union
+  7. `historical:id:64e514c08980fe9c` — EU Civil security research funds
+  8. `historical:id:6bc253116c68944a` — Business innovation modes and their impact on innovation outputs: Regional variations and the nature of innovation across EU regions
+  - … plus 10 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
