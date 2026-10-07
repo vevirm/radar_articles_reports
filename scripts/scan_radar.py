@@ -21358,6 +21358,21 @@ def main() -> int:
         if d in source_by_domain
     ]
 
+    # Guaranteed high-value institutional discovery. These sources are offered to the
+    # ordinary institutional collector on every scan and are placed first so they receive
+    # the first discovery-worker slots under a tight stage budget. This widens discovery
+    # only: every page still goes through parse_institution_page()/gate_scope(), the same
+    # quality, scope, novelty and dedupe rules used by all other institutional sources.
+    guaranteed_institution_domains = [
+        clean_text(d).lower().removeprefix("www.")
+        for d in CONFIG.get("institution_guaranteed_direct_domains", [])
+        if clean_text(d)
+    ]
+    guaranteed_institution_sources = [
+        source_by_domain[d] for d in guaranteed_institution_domains
+        if d in source_by_domain
+    ]
+
     # Source-specific adapters for the hardest/highest-value EU publication domains get
     # their own small persisted rotation. This is additive to the broad institutional
     # source rotation, never a replacement for it. Adapter pages still pass the exact
@@ -21375,7 +21390,7 @@ def main() -> int:
     ) if adapter_domains_all else []
     adapter_rotating = [source_by_domain[d] for d in adapter_domain_batch if d in source_by_domain]
 
-    inst_batch_raw = evidence_report_sources + inst_rotating + gap_sources + adapter_rotating
+    inst_batch_raw = guaranteed_institution_sources + evidence_report_sources + inst_rotating + gap_sources + adapter_rotating
     inst_batch = []
     inst_batch_seen: set[str] = set()
     for src in inst_batch_raw:
@@ -21407,7 +21422,7 @@ def main() -> int:
         f"Crossref {len(cr_batch)} broad + {len(cr_priority_batch)} priority task(s) + {len(cr_source_batch)} source-first journal(s) "
         f"({len(priority_policy_batch)} rotating R&I-policy + {len(diversity_batch)} underrepresented-journal + {len(cr_preferred_batch)} preferred-Q1 + {len(cr_general_batch)} broad; interleaved/overlaps capped) from {cr_from.isoformat()}, "
         f"direct elite-journal watch {len(direct_journal_batch)} source(s), "
-        f"institutions {len(inst_batch)} source(s) ({len(evidence_report_sources)} evidence-report priority + {len(official_rotating)} EU-primary + {len(general_rotating)} broad + {len(gap_sources)} gap-specialist + {len(adapter_rotating)} source-adapter, overlaps deduped) from {inst_from.isoformat()}; "
+        f"institutions {len(inst_batch)} source(s) ({len(guaranteed_institution_sources)} guaranteed high-value + {len(evidence_report_sources)} evidence-report priority + {len(official_rotating)} EU-primary + {len(general_rotating)} broad + {len(gap_sources)} gap-specialist + {len(adapter_rotating)} source-adapter, overlaps deduped) from {inst_from.isoformat()}; "
         f"hard budget {budget_seconds//60} min"
     )
     if evidence_first_focus:
@@ -25072,6 +25087,11 @@ def main() -> int:
             "source_warnings": list(dict.fromkeys(warnings))[:100],
             "transport_failure_warning_count": transport_failure_count,
             "source_transport_attempts": dict(execution_stats.get("source_transport_attempts", {}) or {}),
+            "guaranteed_institution_source_domains": list(guaranteed_institution_domains),
+            "guaranteed_institution_source_attempts": {
+                domain: dict((execution_stats.get("source_transport_attempts", {}) or {}).get(domain, {}) or {})
+                for domain in guaranteed_institution_domains
+            },
             "source_transport_health": source_transport_health,
             "c_admission_trace": c_admission_trace,
             "c_admission_reason_counts": c_admission_reason_counts,
