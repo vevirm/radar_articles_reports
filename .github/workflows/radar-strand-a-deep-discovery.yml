@@ -38,9 +38,9 @@ jobs:
       - name: Install scanner dependencies
         run: pip install -r requirements.txt
 
-      - name: Run scanner/state regression tests
+      - name: Run production-safe scanner/state preflight tests
         run: |
-          python -m unittest discover -s tests -p 'test_*.py'
+          python scripts/run_scan_preflight_tests.py
 
       - name: Confirm the protected main scanner is unchanged
         run: python scripts/check_reasoning_reform_core_freeze.py --group scanner_hard_core
