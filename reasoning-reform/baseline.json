@@ -136,6 +136,16 @@
       ],
       "purpose": "Complete scan-to-validation route parity and selective publisher recall: keep first-party Cellar and European Parliament validation routes mandatory in ordinary and hard-core Deep Scan recovery; use an honest compatible Deep Scan crawler identity; add bounded exact DOI-prefix discovery only for RAND where current DOI activity and downstream validation are usable; mirror that route into the 24-minute Strand-A discovery scanner; leave blocked/metadata-sparse publisher prefixes out until substantive validation parity exists; preserve all ordinary A/B/C admission and source-integrity gates.",
       "stage": "post-stage8-route-parity-and-selective-prefix-recall"
+    },
+    {
+      "approved_files": [
+        "scripts/scan_radar.py",
+        "radar_config.json",
+        "tests/test_source_route_parity.py",
+        "reasoning-reform/baseline.json"
+      ],
+      "purpose": "Priority-institution discovery recall: guarantee bounded early discovery attention for high-value European R&I institutional sources and add explicit first-party OECD/EIB/EIT routes while preserving the existing strict admission, relevance, provenance, novelty and deduplication gates; update the protected scanner fingerprint after validation.",
+      "stage": "post-stage8-priority-institution-discovery-recall"
     }
   ],
   "captured_for_repository_version": "v25.1.0-evidence-linked-reader",
@@ -162,7 +172,7 @@
       "scripts/prepare_deep_scan_package.py": "1440ec604b2260ff026342481a84abf01dccb03d462f293b63056018e8fcf3a7"
     },
     "scanner_hard_core": {
-      "scripts/scan_radar.py": "3a572e568cfe357e4be7da8c98e0378d3df44b2f570e8728ce8c9e3cd0e05f61"
+      "scripts/scan_radar.py": "daed43662bffec6880adc5987b48bcb84dffba04ea09ee4079772353e8263a4b"
     }
   },
   "raw_counts": {
