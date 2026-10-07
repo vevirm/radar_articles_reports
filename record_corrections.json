@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-10-07T08:12:40Z",
+  "updated_at": "2026-10-07T08:51:19Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -14257,6 +14257,36 @@
       ],
       "updated_at": "2026-10-05T11:54:10Z",
       "deep_scan_package_id": "worker-a-20261005T114145Z-7fb8937875b9"
+    },
+    "historical:id:0108003bca53e8f6": {
+      "fields": {
+        "date": "2024-04-30"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The official ENISA extended-report page gives publication date 2024-04-30.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.enisa.europa.eu/publications/foresight-cybersecurity-threats-for-2030-update-2024-extended-report"
+      ],
+      "updated_at": "2026-10-07T08:51:18Z",
+      "deep_scan_package_id": "worker-b-20261007T084440Z-293b99d07eff"
+    },
+    "historical:id:a6d6fa7cd238807a": {
+      "fields": {
+        "date": "2024-03-27"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The official ENISA executive-summary page gives publication date 2024-03-27.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.enisa.europa.eu/publications/foresight-cybersecurity-threats-for-2030-update-2024-executive-summary"
+      ],
+      "updated_at": "2026-10-07T08:51:18Z",
+      "deep_scan_package_id": "worker-b-20261007T084440Z-293b99d07eff"
     }
   }
 }

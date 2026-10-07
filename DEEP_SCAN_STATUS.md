@@ -6,40 +6,22 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2644** (Main **1243** + Historical **1401**)
-- Automatic queue still needing V2 verification: **197** (Main **56** + Historical **141**)
-- Currently assigned to workers: **84** (Main **12** + Historical **72**)
+- Authoritative V2 verified: **2648** (Main **1243** + Historical **1405**)
+- Automatic queue still needing V2 verification: **193** (Main **56** + Historical **137**)
+- Currently assigned to workers: **35** (Main **0** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **29**
-- Automatic queue pending and not yet assigned: **113**
+- Automatic queue pending and not yet assigned: **158**
 
 ## Worker lanes
 
 ### Worker A
 - Current package: `worker-a-20261007T084356Z-2cd6d7f77b89`
-- Assigned unresolved records: **36**
-  1. `link:https://doi.org/10.1108/dprg-06-2026-0347` — Open source digital sovereignty: the case for a Canadian national Linux distribution
-  2. `link:https://doi.org/10.48550/arxiv.2609.39285` — The Concentration of Artificial Intelligence in Big Tech and Its Implications for Human Rights in the European Union
-  3. `link:https://institutdelors.eu/en/publications/speech-by-e-moulin-strengthening-european-sovereignty-from-integration-to-competitiveness/` — Speech by E. Moulin: “Strengthening European sovereignty : from integration to competitiveness” - Institut Jacques Delors
-  4. `link:https://doi.org/10.1080/09654313.2026.2671213` — The geography of exclusion: cumulative causation and the persistence of lagging regions
-  5. `link:https://www.eif.org/news-and-publications/newsroom/latest-insights` — EIF thought leadership | Inspiring progress for future funding
-  6. `link:https://institutdelors.eu/content/uploads/2026/06/Etude-CRIP_Revolution_IA_horizon_2035_Barichella_EN_2.pdf` — The Artificial Intelligence Revolution by 2035 - Institut Jacques Delors
-  7. `link:https://institutdelors.eu/content/uploads/2026/06/Etude-CRIP_Revolution_IA_horizon_2035_Barichella__Short_version_EN_2.pdf` — The Artificial Intelligence Revolution by 2035 (Short version) - Institut Jacques Delors
-  8. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=e7ce9d4e-c15e-11f1-988f-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Science, research and innovation performance of the EU 2026 - Publications Office of the EU
-  - … plus 28 more in the package manifest
+- Assigned unresolved records: **0**
 
 ### Worker B
 - Current package: `worker-b-20261007T084440Z-293b99d07eff`
-- Assigned unresolved records: **13**
-  1. `historical:id:0108003bca53e8f6` — Foresight Cybersecurity Threats For 2030 - Update 2024: Extended report | ENISA
-  2. `historical:id:a6d6fa7cd238807a` — Foresight Cybersecurity Threats For 2030 - Update 2024: Executive Summary | ENISA
-  3. `historical:id:6d0796b4bbbd369e` — Young people and the future of Scotland: a participatory Horizon Scanning engagement | Demos Helsinki
-  4. `historical:id:3b8066429894dd63` — AI & Foresight: Envisioning the Future When the Unthinkable Becomes Possible
-  5. `historical:id:5e640ca14007f2bb` — Operationalizing urban resilience: insights from the science-policy interface in the European Union
-  6. `historical:id:64e514c08980fe9c` — EU Civil security research funds
-  7. `historical:id:83c59682e4f39495` — Development of a circular economy and evolution of working conditions and occupational risks—a strategic foresight study
-  8. `historical:id:6bc253116c68944a` — Business innovation modes and their impact on innovation outputs: Regional variations and the nature of innovation across EU regions
-  - … plus 5 more in the package manifest
+- Assigned unresolved records: **0**
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`

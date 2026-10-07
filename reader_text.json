@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-07T08:12:40Z",
+  "generated_at": "2026-10-07T08:51:19Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -229098,8 +229098,300 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:0108003bca53e8f6": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "504f0b69",
+      "identity_hash": "ad11e8da54951e1d",
+      "reader_title": "Foresight Cybersecurity Threats For 2030 - Update 2024: Extended report",
+      "reader_what": "ENISA uses a structured multidimensional foresight cycle to reassess trends and prioritise cybersecurity threats for 2030.",
+      "reader_why": "The extended ENISA report documents a structured, repeatable foresight process for identifying, reassessing and prioritising future cyber threats.",
+      "reader_more": "ENISA uses a structured multidimensional foresight cycle to reassess trends and prioritise cybersecurity threats for 2030. The verification used the matching primary or repository evidence identified above. The method prioritises plausible future threats rather than predicting which threats will occur.",
+      "deep_analysis": {
+        "work_kind": "reusable method report",
+        "research_question": "Foresight Cybersecurity Threats For 2030 - Update 2024: Extended report | ENISA",
+        "main_finding": "ENISA uses a structured multidimensional foresight cycle to reassess trends and prioritise cybersecurity threats for 2030.",
+        "method_or_basis": "The work documents the method, its steps and how it was applied, allowing transfer beyond the immediate case.",
+        "qualification": "The method prioritises plausible future threats rather than predicting which threats will occur.",
+        "radar_relevance": "The extended ENISA report documents a structured, repeatable foresight process for identifying, reassessing and prioritising future cyber threats.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://www.enisa.europa.eu/sites/default/files/2024-11/Foresight%20Cybersecurity%20Threats%20for%202030-Update-fullreport_en_0.pdf — package material contains matching substantive primary text for this work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.enisa.europa.eu/publications/foresight-cybersecurity-threats-for-2030-update-2024-extended-report",
+            "title": "Foresight Cybersecurity Threats For 2030 - Update 2024: Extended report | ENISA",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and admission were checked against the packaged source material and, where the package was thin or blocked, a recovered authoritative or legitimate repository source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The extended ENISA report documents a structured, repeatable foresight process for identifying, reassessing and prioritising future cyber threats."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-07T08:51:18Z",
+      "deep_scan_package_id": "worker-b-20261007T084440Z-293b99d07eff",
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Union Agency for Cybersecurity",
+            "class": "eu_body"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2024-04-30",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The method prioritises plausible future threats rather than predicting which threats will occur.",
+          "text": "ENISA uses a structured multidimensional foresight cycle to reassess trends and prioritise cybersecurity threats for 2030.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "historical:id:0108003bca53e8f6",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:ad11e8da54951e1d:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:a6d6fa7cd238807a": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "15311c4a",
+      "identity_hash": "9e14bbf6028a71a9",
+      "reader_title": "Foresight Cybersecurity Threats For 2030 - Update 2024: Executive Summary | ENISA",
+      "reader_what": "The executive summary reports outputs of the ENISA foresight process but does not itself make a reusable methodological contribution.",
+      "reader_more": "The executive summary reports outputs of the ENISA foresight process but does not itself make a reusable methodological contribution. The underlying work/page was verified rather than treated as unverifiable. No Strand claim is retained.",
+      "deep_analysis": {
+        "work_kind": "verified work outside strand criteria",
+        "research_question": "",
+        "main_finding": "The executive summary reports outputs of the ENISA foresight process but does not itself make a reusable methodological contribution.",
+        "method_or_basis": "Verified against matching primary, publisher, official or repository material.",
+        "qualification": "The work exists and was verified, but it fails the current strand admission criteria.",
+        "radar_relevance": "The executive summary reports outputs of the ENISA foresight process but does not itself make a reusable methodological contribution.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://www.enisa.europa.eu/sites/default/files/2024-11/Cybersecurity%20Threats%20for%202030%20-%20Update%202024%20-%20Executive%20Summary_0.pdf — package material contains matching substantive primary text for this work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.enisa.europa.eu/publications/foresight-cybersecurity-threats-for-2030-update-2024-executive-summary",
+            "title": "Foresight Cybersecurity Threats For 2030 - Update 2024: Executive Summary | ENISA",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and admission were checked against the packaged source material and, where the package was thin or blocked, a recovered authoritative or legitimate repository source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_METHOD_SUMMARY_ONLY",
+        "reason": "The executive summary reports outputs of the ENISA foresight process but does not itself make a reusable methodological contribution."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-07T08:51:18Z",
+      "deep_scan_package_id": "worker-b-20261007T084440Z-293b99d07eff",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:6d0796b4bbbd369e": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "866e5f97",
+      "identity_hash": "c85d6524b5d663ab",
+      "reader_title": "Young people and the future of Scotland: a participatory Horizon Scanning engagement | Demos Helsinki",
+      "reader_what": "A four-phase co-created workshop method combines trend evidence, future-state exploration and policy prioritisation for participatory horizon scanning.",
+      "reader_why": "The report develops and tests a replicable participatory horizon-scanning method for integrating young people into government foresight.",
+      "reader_more": "A four-phase co-created workshop method combines trend evidence, future-state exploration and policy prioritisation for participatory horizon scanning. The verification used the matching primary or repository evidence identified above. The method was tested with a small, non-representative youth group and is designed for participatory insight rather than population inference.",
+      "deep_analysis": {
+        "work_kind": "reusable method report",
+        "research_question": "Young people and the future of Scotland: a participatory Horizon Scanning engagement | Demos Helsinki",
+        "main_finding": "A four-phase co-created workshop method combines trend evidence, future-state exploration and policy prioritisation for participatory horizon scanning.",
+        "method_or_basis": "The work documents the method, its steps and how it was applied, allowing transfer beyond the immediate case.",
+        "qualification": "The method was tested with a small, non-representative youth group and is designed for participatory insight rather than population inference.",
+        "radar_relevance": "The report develops and tests a replicable participatory horizon-scanning method for integrating young people into government foresight.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://demoshelsinki.fi/publication/scotland-young-people-horizon-scanning/ — package material contains matching substantive primary text for this work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.gov.scot/publications/young-people-future-scotland-participatory-horizon-scanning-engagement/",
+            "title": "Young people and the future of Scotland: a participatory Horizon Scanning engagement | Demos Helsinki",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and admission were checked against the packaged source material and, where the package was thin or blocked, a recovered authoritative or legitimate repository source."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "The report develops and tests a replicable participatory horizon-scanning method for integrating young people into government foresight."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-07T08:51:19Z",
+      "deep_scan_package_id": "worker-b-20261007T084440Z-293b99d07eff",
+      "claims": [
+        {
+          "object": "methods.horizon_scanning",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Demos Helsinki",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2024-12-03",
+          "scope": {
+            "level": "associated_country",
+            "countries": [
+              "GB"
+            ]
+          },
+          "kind": "advocacy",
+          "qualification": "The method was tested with a small, non-representative youth group and is designed for participatory insight rather than population inference.",
+          "text": "A four-phase co-created workshop method combines trend evidence, future-state exploration and policy prioritisation for participatory horizon scanning.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "historical:id:6d0796b4bbbd369e",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:c85d6524b5d663ab:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:3b8066429894dd63": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "754ed160",
+      "identity_hash": "c3e106df01940340",
+      "reader_title": "AI & Foresight: Envisioning the Future When the Unthinkable Becomes Possible",
+      "reader_what": "The essay argues for rethinking foresight around AI but does not specify a new or materially improved transferable method.",
+      "reader_more": "The essay argues for rethinking foresight around AI but does not specify a new or materially improved transferable method. The underlying work/page was verified rather than treated as unverifiable. No Strand claim is retained.",
+      "deep_analysis": {
+        "work_kind": "verified work outside strand criteria",
+        "research_question": "",
+        "main_finding": "The essay argues for rethinking foresight around AI but does not specify a new or materially improved transferable method.",
+        "method_or_basis": "Verified against matching primary, publisher, official or repository material.",
+        "qualification": "The work exists and was verified, but it fails the current strand admission criteria.",
+        "radar_relevance": "The essay argues for rethinking foresight around AI but does not specify a new or materially improved transferable method.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "https://www.institutmontaigne.org/en/expressions/ai-foresight-envisioning-future-when-unthinkable-becomes-possible — package material contains matching substantive primary text for this work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://www.institutmontaigne.org/en/expressions/ai-foresight-envisioning-future-when-unthinkable-becomes-possible",
+            "title": "AI & Foresight: Envisioning the Future When the Unthinkable Becomes Possible",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bibliographic identity and admission were checked against the packaged source material and, where the package was thin or blocked, a recovered authoritative or legitimate repository source."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_NO_REUSABLE_METHOD",
+        "reason": "The essay argues for rethinking foresight around AI but does not specify a new or materially improved transferable method."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-07T08:51:19Z",
+      "deep_scan_package_id": "worker-b-20261007T084440Z-293b99d07eff",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-07T08:12:40Z"
+  "claims_updated_at": "2026-10-07T08:51:19Z"
 }
