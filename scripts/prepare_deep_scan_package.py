@@ -43,6 +43,8 @@ DEFAULT_WORKERS = 10
 ROOT = Path(__file__).resolve().parents[1]
 CLAIMS_VOCAB = ROOT / "claims_vocabulary.json"
 CLAIMS_FORMAT = "radar-claims-v1"
+# Same admission remit as the production scanner; verification remains independent.
+EU_RI_SCOPE_POLICY = "eu-ri-scanner-parity-2026-10"
 
 INSTRUCTIONS = r"""# Radar Deep Scan V2 — authoritative verification instructions
 
@@ -55,6 +57,63 @@ it claims to be. Existing Deep Scan V1 text is also only prior evidence: check i
 
 A V2 result may change what the active Radar says and may remove a record from the active corpus.
 Therefore every decision must be source-grounded and auditable.
+
+## Scope contract — SAME "what we want" as the automatic Europe/EU R&I scanner
+
+The mission is **European/EU research and innovation intelligence**, not general science, generic
+European news, a technology-news feed, or a geopolitical-news filter. Use the **same target of
+interest as the automatic scanner** for all strands; Deep Scan differs by verifying primary
+sources more rigorously, not by inventing a second, narrower idea of relevance.
+
+- **A / Evidence:** strong, substantive evidence *about* the European/EU R&I system and its
+  strategic environment. There are **three independent positive admission routes**, detailed
+  below. After common hard gates pass, **any one** qualifies. In particular, systemic European
+  R&I evidence does **not** need a geopolitical hook, foreign rival, future-impact prediction,
+  explicit sovereignty language, or a scenario. A European paper about R&I policy, research
+  careers, researcher mobility, funding, innovation finance, open science, research
+  assessment, research infrastructure, collaboration, technology transfer, or related
+  European R&I-system mechanisms can qualify **as evidence in its own right**.
+- **B / Methods:** a genuinely new, materially improved, scrutinised or newly useful
+  **transferable futures, foresight or forward-looking R&I/technology-intelligence method**.
+  B is deliberately geography-independent: **do not reject because Europe/EU is absent**.
+  A domain-specific application of an existing method, or a generic prediction/AI algorithm
+  without a futures/R&I-analysis contribution, is not B.
+- **C / Changes:** a *verified new substantive development* that changes, or plausibly
+  creates a **source-supported connection to**, Europe's/EU's R&I system or strategic
+  research/technology position. Include genuine science/research policy, research funding,
+  programmes/instruments, research infrastructure, technology/industrial capability,
+  talent, international technological dependencies, regulations, standards and relevant
+  external shocks **when their EU R&I connection is evidenced**. It need not already have
+  measured effects; label a proposal, decision, announcement or outcome accurately. Exclude
+  generic politics/business/tech headlines, routine press, promotional/event pages, and
+  unrelated global developments even if someone could imagine an EU impact.
+
+**Same exclusions for all strands:** an incidental EU mention, EU grant acknowledgement,
+European address or comparator, geographic keyword, speculative EU bridge, untrusted source,
+search snippet, generic sector/local consumer/service application, mere programme listing or
+unverified claim does **not** establish admission. Trustworthy official announcements can
+establish that an action was announced, not that claimed benefits occurred. Do not turn a
+single news item into Strand A evidence merely by calling it a report; do not turn a
+completed analytical EU R&I report into Strand C just because it is newly published.
+
+**Decision discipline:** First verify the work and trustworthiness. Then test all applicable
+routes for its correct strand against the **substance actually in the source**, not against
+scanner keywords or earlier scanner guesses. If a putative A work fails Route 1 (geopolitics),
+**explicitly test Route 2 (European R&I states/trajectories) and Route 3 (European R&I-system
+research)** before DROP. A valid Route 3 is *not* rejected for missing Route 1/2 wording.
+If C, distinguish a new substantive action from a static information page and explicitly
+identify the evidenced EU R&I connection. If B, identify the transferable method contribution.
+
+For DROP, the `admission.reason` must identify **which relevant positive route(s) were checked**
+and the concrete gate that failed, using evidence from the recovered source; vague reasons
+such as "not strategic enough", "no geopolitical significance", "doesn't predict the
+future", or "not about European competitiveness" are not enough. If the *substantive*
+evidence supports one qualifying route, choose KEEP (or REVIEW for a genuine interpretive
+borderline) even if the original scanner chose the wrong strand. Do not rubber-stamp the
+scanner either: its decisions remain provisional and weak evidence still fails.
+
+This contract changes **neither** the mandatory retrieval ladder **nor** the bounded three-
+pass recovery/terminal-unverifiable policy. Do not park unverified items in REVIEW forever.
 
 ## Non-negotiable working rules
 
@@ -142,7 +201,9 @@ This is still bounded: attempt 3 is the last automatic pass. Do not invent evide
 Return exactly one decision:
 
 - `keep` — the recovered work clearly satisfies the current strand criteria.
-- `drop` — the recovered work clearly exists but fails the current criteria.
+- `drop` — the recovered work clearly exists but fails the current criteria **after the
+  relevant A/B/C admission routes have been tested**. Record the actual failing gate and
+  source-grounded reason; absence of a geopolitical hook alone is never an A failure.
 - `review` — the work exists and has real evidence, but admission genuinely requires human judgement.
   REVIEW is not a refuge for laziness or failed retrieval.
 - `drop_unverifiable` — after the complete retrieval ladder, the claimed work itself cannot be substantiated.
@@ -194,14 +255,28 @@ B is geography-independent, but it requires a genuine reusable methodological co
 materially improved method, transferable analytical framework, measurement/indicator approach, evaluation
 design, foresight/scenario method, evidence-synthesis procedure, or similar technique. Merely applying an
 existing method/index/framework/model/survey/clustering tool to a case is not enough.
+A method focused on foresight, futures, horizon scanning, scenarios or forward-looking
+technology/R&I intelligence can qualify without EU scope, but a new algorithm for an
+unrelated operational task does not become a futures method by mentioning "forecast".
 
-### Strand C — substantive current developments
+### Strand C — substantive CURRENT European R&I developments
 
-C requires a substantive current development with a defensible Radar connection. Generic institutional,
-programme, navigation, promotional, vacancy/recruitment, seminar/event or listing pages do not qualify just
-because vocabulary matches. An otherwise generic page may qualify only when the page itself reports a real
-new policy decision, funding instrument, programme change, legislative development, evidence release or
-comparable substantive event.
+A C record must establish **both** (a) a real, dateable change/development, and (b) a source-
+supported link to Europe/EU R&I systems, research capability, technological/industrial
+capacity, cross-border cooperation or research-security/strategic dependencies. The event
+can be outside Europe if the external shock has a concrete supported European R&I bridge;
+"this technology might someday matter to the EU" is not enough. A source-grounded policy
+proposal, decision or announcement may qualify before implementation, but **state its actual
+status**, do not report promised outcomes as measured impacts, and distinguish repeated
+coverage of one event from a genuinely new development.
+
+Generic institutional, programme, navigation, promotional, vacancy/recruitment,
+seminar/event, generic fundraising/launch or listing pages do not qualify merely
+because vocabulary matches. An otherwise generic page can qualify only when it
+**reports a real new R&I-relevant decision, funding instrument, programme change,
+legislative development, research-evidence release, strategic technology change or
+comparable substantive event** and supports its European R&I connection. An analytical
+study/report is evaluated under A, not pushed to C merely because it has a recent date.
 
 ## Historical archive jobs
 
@@ -722,7 +797,7 @@ def main() -> None:
             "source_modes": source_modes, "possible_duplicate_records": len(dupes), "same_record_key_variant_groups": len(variants), "batch_size": batch_size,
             "hard_final_main_jobs": sum(1 for job in jobs if job.get("scan_mode") == "hard_final"),
             "batches": batch_files, "instructions": "INSTRUCTIONS.md", "claims_vocabulary": "claims_vocabulary.json",
-            "claims_format": CLAIMS_FORMAT, "expected_result_filename": "deep_scan_results.json",
+            "claims_format": CLAIMS_FORMAT, "admission_scope_policy": EU_RI_SCOPE_POLICY, "expected_result_filename": "deep_scan_results.json",
         }
         (root / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         if not CLAIMS_VOCAB.exists():

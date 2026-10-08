@@ -882,6 +882,27 @@ def interleaved_unique_batch(limit: int, *lanes: Iterable[Any]) -> list[Any]:
     return out
 
 
+def strand_a_first_query_prefix(
+    limit: int,
+    evidence: Iterable[str],
+    base: Iterable[str],
+    dimensional: Iterable[str],
+    context: Iterable[str],
+    gap: Iterable[str],
+    strategic: Iterable[str],
+    exploration: Iterable[str],
+) -> list[str]:
+    """Front-load *executed* scholarly searches for substantive Europe/EU R&I evidence.
+
+    A first: evidence, rotating broad A, EU/system mechanisms and finding context
+    each get early turns before supplemental strategic or exploratory expansions.
+    This only orders queries; admission, verification and deduplication are untouched.
+    """
+    return interleaved_unique_batch(
+        limit, evidence, base, dimensional, context, gap, strategic, exploration
+    )
+
+
 def committed_rotation_cursor(items: list[Any], original_cursor: int, planned: list[Any], executed: set[Any]) -> tuple[int, bool, int]:
     """Advance a persisted rotation only across the contiguous planned work actually executed.
 
@@ -21151,26 +21172,28 @@ def main() -> int:
     cr_broad_cursor_before = int(state.get("crossref_broad_cursor", 0) or 0)
     oa_base = least_recent_probe_batch(state, "openalex_base", all_queries, oa_base_cap)
     cr_base = least_recent_probe_batch(state, "crossref_base", all_queries, cr_base_cap)
-    # A remains the protected scholarly backbone. B has a dedicated method lane, but
-    # method queries cannot crowd the substantive A-oriented lanes out of the executed prefix.
+    # A is the primary mission: substantive empirical/research evidence on the European
+    # R&I system and its strategic position. A historical issue in Run #714: the planned
+    # generic/base rotation executed *zero* queries despite a 60-query OpenAlex budget.
+    # Give A multiple distinct methods in the executed prefix: evidence, broad rotated A,
+    # dimensional/systems evidence, and finding-context, not solely Matrix-gap keywords.
+    # B retains a small guaranteed baseline but receives no low-yield catch-up bonus.
     a_protected = max(0, int(CONFIG.get("strand_a_protected_scholarly_queries_per_source", 20) or 0))
-    strategic_gap_reserved = max(0, int(CONFIG.get("strategic_gap_queries_per_scan", 0) or 0))
     b_method_set = set(b_method_bank)
     oa_explore_a = [q for q in oa_explore if q not in b_method_set]
     cr_explore_a = [q for q in cr_explore if q not in b_method_set]
-    # Put the bounded strategic-gap slice at the *front* of the protected A prefix. Previous
-    # evidence/dimensional lanes were present in the plan but could receive only one or two
-    # actually executed queries before other rotating work consumed the useful prefix. Ten
-    # balanced queries still leave at least half of the default 20-query protected A prefix
-    # for ordinary broad/evidence/Matrix discovery.
-    oa_gap_head = strategic_gap_focus[: min(len(strategic_gap_focus), oa_cap, strategic_gap_reserved)]
-    cr_gap_head = strategic_gap_focus[: min(len(strategic_gap_focus), cr_cap, strategic_gap_reserved)]
-    oa_a_remaining = max(0, min(oa_cap, a_protected) - len(oa_gap_head))
-    cr_a_remaining = max(0, min(cr_cap, a_protected) - len(cr_gap_head))
-    oa_a_prefix = list(dict.fromkeys(oa_gap_head + interleaved_unique_batch(oa_a_remaining, dimensional_focus, evidence_first_focus, strategic_scholarly_focus, curator_seed_focus, oa_base, oa_explore_a, gap_scholarly, finding_context_focus)))
-    cr_a_prefix = list(dict.fromkeys(cr_gap_head + interleaved_unique_batch(cr_a_remaining, dimensional_focus, evidence_first_focus, strategic_scholarly_focus, curator_seed_focus, cr_base, cr_explore_a, gap_scholarly, finding_context_focus)))
-    # Give B a small guaranteed place in the actually executed scholarly prefix.  This is
-    # discovery allocation only: it does not reserve publication slots or weaken the B gate.
+    oa_a_prefix = strand_a_first_query_prefix(
+        min(oa_cap, a_protected), evidence_first_focus, oa_base, dimensional_focus,
+        finding_context_focus, strategic_gap_focus + gap_scholarly,
+        strategic_scholarly_focus + curator_seed_focus, oa_explore_a,
+    )
+    cr_a_prefix = strand_a_first_query_prefix(
+        min(cr_cap, a_protected), evidence_first_focus, cr_base, dimensional_focus,
+        finding_context_focus, strategic_gap_focus + gap_scholarly,
+        strategic_scholarly_focus + curator_seed_focus, cr_explore_a,
+    )
+    # B is useful supporting methodology, not a reason to delay Strand-A discovery.
+    # Its baseline protected slice remains and its normal B gate is fully preserved.
     b_protected = max(0, int(CONFIG.get("b_method_protected_scholarly_queries_per_source", 8) or 8))
     oa_b_prefix = interleaved_unique_batch(min(oa_cap, b_protected), b_method_recent_focus, b_method_foundational_focus)
     cr_b_prefix = interleaved_unique_batch(min(cr_cap, b_protected), b_method_recent_focus, b_method_foundational_focus)
@@ -23369,8 +23392,11 @@ def main() -> int:
         "waves": 0,
         "crossref_queries_executed": 0,
         "openalex_queries_executed": 0,
+        "crossref_source_journals_executed": 0,
         "institution_sources_executed": 0,
         "candidates": 0,
+        "a_candidates": 0,
+        "b_candidates": 0,
         "news_candidates": 0,
         "cooldown_seconds": 0.0,
         "anti_saturation_waves": 0,
@@ -23384,6 +23410,7 @@ def main() -> int:
         continuation_stage_seconds = max(20, int(CONFIG.get("full_budget_continuation_stage_seconds", 75) or 75))
         continuation_query_n = max(1, int(CONFIG.get("full_budget_continuation_queries_per_wave", 8) or 8))
         continuation_inst_n = max(0, int(CONFIG.get("full_budget_continuation_institution_sources_per_wave", 10) or 0))
+        continuation_journal_n = max(0, int(CONFIG.get("full_budget_continuation_a_journals_per_wave", 3) or 0))
         # C always receives its baseline elite-source scan. Extra C continuation runs only
         # while C is below its relative 3/12 share in the current discovery batch. This is
         # the anti-firehose brake that does not recreate the old C=0 hard choke.
@@ -23400,19 +23427,25 @@ def main() -> int:
         # finalisation reserve protects, so release the oversized network reserve.
         original_network_reserve = int(CONFIG.get("network_reserve_seconds", 100) or 100)
         CONFIG["network_reserve_seconds"] = min(original_network_reserve, max(15, continuation_reserve - 10))
-        continuation_a_bank = list(dict.fromkeys(
-            curator_seed_bank + finding_context_bank + strategic_scholarly_focus + all_queries
+        # The full-budget tail is Strand-A research recovery. Run #714 had *zero* new
+        # A publications; chasing a numerical B mix in this tail was the wrong priority.
+        # Rotate evidence reports, broad A, precision/dimensional searches, and citation-
+        # adjacent queries across distinct neighbourhoods. B still has a guaranteed
+        # baseline in the initial scan, but cannot displace A in a low-yield A recovery.
+        continuation_bank = interleaved_unique_batch(
+            sum(map(len, (evidence_first_bank, all_queries, dimensional_bank,
+                          finding_context_bank, strategic_gap_bank, curator_seed_bank,
+                          strategic_scholarly_focus))),
+            evidence_first_bank, all_queries, dimensional_bank, finding_context_bank,
+            strategic_gap_bank, curator_seed_bank, strategic_scholarly_focus,
+        )
+        # Different discovery channels matter more than endless page-one keyword variants
+        # when the established research corpus is mature. From wave 2, add a few rotating
+        # source-first A journal checks using the existing Crossref gate and source lists.
+        continuation_a_journals = list(dict.fromkeys(
+            list(diversity_bank) + list(journal_depth_bank)
+            + list(priority_policy_journals) + list(source_journals_all)
         ))
-        _a_under = bool(preliminary_mix_state.get("under_target", {}).get("A", False))
-        _b_under = bool(preliminary_mix_state.get("under_target", {}).get("B", False))
-        if _b_under and not _a_under:
-            # B is behind its 1/12 share: bonus scholarly work temporarily favours methods.
-            # Baseline A work has already happened, so this is catch-up rather than a new cap.
-            continuation_bank = weighted_strand_query_bank(continuation_a_bank, b_method_bank, 1, 3)
-        elif _a_under and not _b_under:
-            continuation_bank = weighted_strand_query_bank(continuation_a_bank, b_method_bank, 12, 1)
-        else:
-            continuation_bank = weighted_strand_query_bank(continuation_a_bank, b_method_bank)
         continuation_news_bank = list(dict.fromkeys(
             c_floor_rescue_queries() + [
                 "EU research innovation new restriction investment agreement capability",
@@ -23426,6 +23459,7 @@ def main() -> int:
         cont_cr_cursor = int(state.get("full_budget_crossref_cursor", 0) or 0)
         cont_oa_cursor = int(state.get("full_budget_openalex_cursor", 0) or 0)
         cont_inst_cursor = int(state.get("full_budget_institution_cursor", 0) or 0)
+        cont_journal_cursor = int(state.get("full_budget_a_journal_cursor", 0) or 0)
         cont_news_cursor = int(state.get("full_budget_news_cursor", 0) or 0)
         while (
             full_budget_continuation["waves"] < continuation_max_waves
@@ -23472,6 +23506,14 @@ def main() -> int:
             else:
                 cr_next = cont_cr_cursor
 
+            cr_journals: list[str] = []
+            cr_journal_next = cont_journal_cursor
+            if wave_no >= 2 and not cont_cr_unavailable and continuation_journal_n:
+                cr_journals, cr_journal_next, _ = rotating_batch_excluding(
+                    continuation_a_journals, cont_journal_cursor, continuation_journal_n,
+                    set(execution_stats.get("crossref_source_journals", set())),
+                )
+
             inst_domains, inst_next, _ = rotating_batch_excluding(
                 fresh_inst_domain_bank, cont_inst_cursor, continuation_inst_n, executed_inst_before
             ) if fresh_inst_domain_bank and continuation_inst_n else ([], cont_inst_cursor, True)
@@ -23488,7 +23530,7 @@ def main() -> int:
             workers = 0
             if oa_queries:
                 workers += 1
-            if cr_queries:
+            if cr_queries or cr_journals:
                 workers += 1
             if inst_sources:
                 workers += 1
@@ -23497,7 +23539,8 @@ def main() -> int:
             if workers:
                 log_progress(
                     f"Full-budget discovery wave {wave_no}: remaining={int(remaining_before)}s; "
-                    f"OA={len(oa_queries)} CR={len(cr_queries)} institutions={len(inst_sources)} current={len(news_queries)}"
+                    f"OA={len(oa_queries)} CR={len(cr_queries)} A-journals={len(cr_journals)} "
+                    f"institutions={len(inst_sources)} current={len(news_queries)} (A-first tail)"
                 )
                 with cf.ThreadPoolExecutor(max_workers=min(4, workers)) as ex:
                     if oa_queries:
@@ -23506,10 +23549,10 @@ def main() -> int:
                             oa_queries, wave_deadline, {q: DATE_FLOOR for q in oa_queries},
                             state["result_depth"]["openalex"], {q: "full-budget-depth" for q in oa_queries}, wave_exec, oa_depth_only
                         )))
-                    if cr_queries:
+                    if cr_queries or cr_journals:
                         futures.append(("cr", ex.submit(
                             safe_stage, f"Crossref full-budget wave {wave_no}", collect_crossref, DATE_FLOOR, warnings,
-                            cr_queries, [], [], wave_deadline, {q: DATE_FLOOR for q in cr_queries},
+                            cr_queries, [], cr_journals, wave_deadline, {q: DATE_FLOOR for q in cr_queries},
                             state["result_depth"]["crossref_broad"], state["result_depth"]["crossref_priority"],
                             {q: "full-budget-depth" for q in cr_queries}, wave_exec, cr_depth_only
                         )))
@@ -23525,6 +23568,13 @@ def main() -> int:
                         )))
                     for family, fut in futures:
                         rows = [x for x in fut.result() if isinstance(x, dict)]
+                        if family in {"oa", "cr", "inst"}:
+                            full_budget_continuation["a_candidates"] += sum(
+                                x.get("strand") in {"A", "both"} for x in rows
+                            )
+                            full_budget_continuation["b_candidates"] += sum(
+                                x.get("strand") == "B" for x in rows
+                            )
                         if family == "oa":
                             oa.extend(rows)
                             wave_candidates += len(rows)
@@ -23540,6 +23590,7 @@ def main() -> int:
 
             oa_executed = set(wave_exec.get("openalex_queries", set()))
             cr_executed = set(wave_exec.get("crossref_broad_queries", set()))
+            cr_journals_executed = set(wave_exec.get("crossref_source_journals", set()))
             inst_executed = set(wave_exec.get("institution_sources", set()))
             if oa_queries and oa_executed:
                 cont_oa_cursor = commit_planned_cursor_if_executed(
@@ -23548,6 +23599,11 @@ def main() -> int:
             if cr_queries and cr_executed:
                 cont_cr_cursor = commit_planned_cursor_if_executed(
                     state, "full_budget_crossref_cursor", cont_cr_cursor, cr_queries, cr_next, cr_executed
+                )
+            if cr_journals and cr_journals_executed:
+                cont_journal_cursor = commit_planned_cursor_if_executed(
+                    state, "full_budget_a_journal_cursor", cont_journal_cursor, cr_journals,
+                    cr_journal_next, cr_journals_executed
                 )
             if inst_domains and inst_executed:
                 cont_inst_cursor = commit_planned_cursor_if_executed(
@@ -23558,10 +23614,12 @@ def main() -> int:
                 state["full_budget_news_cursor"] = cont_news_cursor
             execution_stats.setdefault("openalex_queries", set()).update(oa_executed)
             execution_stats.setdefault("crossref_broad_queries", set()).update(cr_executed)
+            execution_stats.setdefault("crossref_source_journals", set()).update(cr_journals_executed)
             execution_stats.setdefault("institution_sources", set()).update(inst_executed)
             execution_stats["crossref_abstracts_enrichment_attempted"] = int(execution_stats.get("crossref_abstracts_enrichment_attempted", 0)) + int(wave_exec.get("crossref_abstracts_enrichment_attempted", 0))
             full_budget_continuation["openalex_queries_executed"] += len(oa_executed)
             full_budget_continuation["crossref_queries_executed"] += len(cr_executed)
+            full_budget_continuation["crossref_source_journals_executed"] += len(cr_journals_executed)
             full_budget_continuation["institution_sources_executed"] += len(inst_executed)
             full_budget_continuation["candidates"] += wave_candidates
             full_budget_continuation["news_candidates"] += wave_news_candidates
@@ -23571,7 +23629,7 @@ def main() -> int:
             # not an idle early exit; it prevents hammering blocked services while keeping
             # the 24-minute research allocation available for recovery.
             elapsed_wave = time.monotonic() - wave_started
-            progressed = bool(oa_executed or cr_executed or inst_executed or wave_candidates or wave_news_candidates)
+            progressed = bool(oa_executed or cr_executed or cr_journals_executed or inst_executed or wave_candidates or wave_news_candidates)
             if not progressed and total_budget_remaining() > continuation_reserve + continuation_cooldown + 8:
                 sleep_for = min(float(continuation_cooldown), max(0.0, total_budget_remaining() - continuation_reserve - 8.0))
                 if sleep_for > 0:
@@ -23600,6 +23658,7 @@ def main() -> int:
         state["full_budget_crossref_cursor"] = cont_cr_cursor
         state["full_budget_openalex_cursor"] = cont_oa_cursor
         state["full_budget_institution_cursor"] = cont_inst_cursor
+        state["full_budget_a_journal_cursor"] = cont_journal_cursor
         state["full_budget_news_cursor"] = cont_news_cursor
         CONFIG["network_reserve_seconds"] = original_network_reserve
     full_budget_continuation["seconds_remaining_at_end"] = max(0, int(total_budget_remaining()))
@@ -25122,6 +25181,9 @@ def main() -> int:
             "full_budget_continuation_waves": int(full_budget_continuation.get("waves", 0)),
             "full_budget_continuation_crossref_queries": int(full_budget_continuation.get("crossref_queries_executed", 0)),
             "full_budget_continuation_openalex_queries": int(full_budget_continuation.get("openalex_queries_executed", 0)),
+            "full_budget_continuation_a_journals": int(full_budget_continuation.get("crossref_source_journals_executed", 0)),
+            "full_budget_continuation_a_candidates_before_dedupe": int(full_budget_continuation.get("a_candidates", 0)),
+            "full_budget_continuation_b_candidates_before_dedupe": int(full_budget_continuation.get("b_candidates", 0)),
             "full_budget_continuation_institution_sources": int(full_budget_continuation.get("institution_sources_executed", 0)),
             "full_budget_continuation_candidates": int(full_budget_continuation.get("candidates", 0)),
             "full_budget_continuation_news_candidates": int(full_budget_continuation.get("news_candidates", 0)),
