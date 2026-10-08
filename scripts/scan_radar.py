@@ -523,6 +523,9 @@ INSTITUTION_DISCOVERED_DATES: dict[str, dt.date] = {}
 # a throttled/JS-only portal landing page fall back to the official Cellar PDF without
 # losing the catalogue title/date that made the record discoverable.
 OP_PUBLICATIONS_CATALOGUE_METADATA: dict[str, dict[str, Any]] = {}
+# Bounded per-run citation-grade hints carried from the institution's own publication
+# listing to the *same named work*. They never bypass the normal A/B admission gate.
+INSTITUTION_OFFICIAL_LISTING_METADATA: dict[str, dict[str, Any]] = {}
 INSTITUTION_SIGNAL_CANDIDATES: list[dict[str, Any]] = []
 SIGNAL_WINDOW_START_DATE: dt.date | None = None
 ACTIVE_FRONTIER_GAP_URL_TERMS: list[str] = []
@@ -11843,8 +11846,11 @@ def parse_institution_pdf(
     if not published:
         published, date_basis = _pdf_visible_date_hint(body, url)
     if not published and fallback_publication_date:
-        published = fallback_publication_date
-        date_basis = fallback_date_basis or "landing_page_publication_date"
+        if fallback_date_basis != "official_publication_listing_date" or (hint and _pdf_text_matches_document(hint, body)):
+            published = fallback_publication_date
+            date_basis = fallback_date_basis or "landing_page_publication_date"
+            if fallback_date_basis == "official_publication_listing_date":
+                _diag_inc("institution_official_listing_pdf_date_verified")
     if not published and fingerprint and bool(CONFIG.get("institution_sitemap_lastmod_fallback_enabled", True)):
         discovered = INSTITUTION_DISCOVERED_DATES.get(fingerprint)
         if discovered:
@@ -12038,7 +12044,16 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
         or bytes((getattr(r, "content", b"") or b"")[:5]).startswith(b"%PDF-")
     )
     if response_is_pdf:
-        return parse_institution_pdf(url, source, tier, stage_deadline, fingerprint, publication_floor, response=r)
+        listing = INSTITUTION_OFFICIAL_LISTING_METADATA.get(normalized_link(url), {})
+        hint = clean_text(listing.get("title")) if isinstance(listing, dict) else ""
+        # The PDF constructor validates its own text/date and A/B gate. Catalogue dates
+        # are passed only if the document itself can be matched to the catalogue title.
+        return parse_institution_pdf(
+            url, source, tier, stage_deadline, fingerprint, publication_floor, response=r,
+            title_hint=hint,
+            fallback_publication_date=parse_date(listing.get("published")) if hint and _same_institution_family(listing.get("hub", ""), r.url) else None,
+            fallback_date_basis="official_publication_listing_date",
+        )
     if "html" not in ctype:
         fallback = _op_catalogue_pdf_fallback(url, source, tier, stage_deadline, fingerprint, publication_floor)
         if fallback:
@@ -12155,6 +12170,10 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
         if catalogue_date:
             published = catalogue_date
             date_basis = "op_catalogue_work_date"
+    if not published:
+        published, listing_date_basis = _official_listing_publication_date(url, r.url, title)
+        if published:
+            date_basis = listing_date_basis
     if not published:
         # Research-report landing pages frequently have a valid attached study/PDF but no
         # article date at all. The old path returned here before ever inspecting that PDF.
@@ -12499,6 +12518,117 @@ def _op_publications_catalogue_jobs(
     _diag_inc("op_catalogue_jobs", len(out))
     return out
 
+def _official_publication_listing_hint(
+    anchor: Any, listing_url: str, document_url: str, profile: dict[str, Any],
+) -> dict[str, str] | None:
+    """Extract a *card-local* date/title from a configured first-party publications list.
+
+    A generic website page, footer, updated timestamp, or a neighbouring item's date
+    is not evidence of a document's publication. Require a named publication link,
+    a small card with one unambiguous date, and a whitelisted publication hub.
+    """
+    listing_paths = profile.get("dated_publication_hubs") or []
+    if not isinstance(listing_paths, list) or not listing_paths:
+        return None
+    if not _same_institution_family(listing_url, document_url):
+        return None
+    source_path = urlparse(listing_url).path.rstrip("/").lower()
+    if source_path not in {urlparse(p).path.rstrip("/").lower() for p in listing_paths}:
+        return None
+    title = clean_text(anchor.get_text(" ", strip=True))
+    title_tokens = _document_title_tokens(title)
+    if len(title_tokens) < 3 or len(title) > 220:
+        return None
+
+    # Work outward to the *smallest* self-contained card. A single giant <main> with
+    # dated unrelated research must never confer one item's date on another.
+    parent = anchor.parent
+    for _ in range(4):
+        if parent is None or getattr(parent, "name", None) in {"body", "main", "html"}:
+            break
+        block = clean_text(parent.get_text(" ", strip=True))
+        if len(block) > 750:
+            break
+        links = parent.find_all("a", href=True)
+        if len(links) > 3:
+            break
+        # A block with multiple strong publication links is a list, not an item card.
+        named = [x for x in links if len(_document_title_tokens(x.get_text(" ", strip=True))) >= 3]
+        if len(named) > 1:
+            parent = parent.parent
+            continue
+        candidates: list[str] = []
+        # An explicit 'updated' field in the same card makes the date ambiguous:
+        # absent a separately verified publication field we must not use it.
+        if any(re.search(r"updated|modified|lastmod", str(n.get("class", "")) + " " + str(n.get("itemprop", "")), re.I)
+               for n in parent.find_all(True, limit=24)):
+            parent = parent.parent
+            continue
+        for node in parent.find_all("time", limit=3):
+            candidates.append(clean_text(node.get("datetime") or node.get_text(" ", strip=True)))
+        for node in parent.find_all(True, limit=24):
+            attrs = " ".join([str(node.get("class", "")), str(node.get("itemprop", ""))]).lower()
+            if ("date" in attrs or "published" in attrs) and not any(x in attrs for x in ("updated", "modified", "lastmod")):
+                candidates.append(clean_text(node.get("content") or node.get_text(" ", strip=True)))
+        # Certain official listings (e.g. ESFRI) render a small date/title line with no
+        # <time> element. Accept it only as a date at the start of this one-publication
+        # card, not as an arbitrary date in prose.
+        if len(named) == 1:
+            candidates.append(block[:95])
+        observed: set[dt.date] = set()
+        for raw in candidates:
+            if not raw or re.search(r"\b(?:updated|modified|last updated|deadline|event date)\b", raw[:65], re.I):
+                continue
+            match = re.search(
+                r"(?<!\d)(?:[0-3]?\d[./-][01]?\d[./-]20\d{2}|20\d{2}-[01]?\d-[0-3]?\d|"
+                r"[0-3]?\d\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+20\d{2}|"
+                r"(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+[0-3]?\d,?\s+20\d{2})",
+                raw, re.I,
+            )
+            if match:
+                value = match.group(0)
+                european = re.fullmatch(r"([0-3]?\d)\.([01]?\d)\.(20\d{2})", value)
+                if european:
+                    try:
+                        d = dt.date(int(european.group(3)), int(european.group(2)), int(european.group(1)))
+                    except ValueError:
+                        d = None
+                elif re.fullmatch(r"[0-3]?\d/[01]?\d/20\d{2}", value):
+                    # 03/04 is ambiguous across institutional locales; do not invent a
+                    # publication date from locale-dependent slash formats.
+                    d = None
+                else:
+                    d = parse_date(value)
+                if d:
+                    observed.add(d)
+        if len(observed) == 1:
+            published = next(iter(observed))
+            if published <= dt.datetime.now(dt.timezone.utc).date() + dt.timedelta(days=1):
+                return {"title": title, "published": published.isoformat(), "hub": listing_url}
+        parent = parent.parent
+    return None
+
+
+def _official_listing_publication_date(
+    url: str, actual_url: str, title: str,
+) -> tuple[dt.date | None, str]:
+    """Use a publisher listing date only for a verified same-title same-family work."""
+    meta = INSTITUTION_OFFICIAL_LISTING_METADATA.get(normalized_link(url))
+    if not isinstance(meta, dict) or not _same_institution_family(meta.get("hub", ""), actual_url):
+        return None, ""
+    expected = _document_title_tokens(meta.get("title", ""))
+    actual = _document_title_tokens(title)
+    overlap = len(expected & actual)
+    if overlap < 3 or overlap / max(1, min(len(expected), len(actual))) < 0.65:
+        _diag_inc("institution_listing_date_title_mismatch")
+        return None, ""
+    date = parse_date(meta.get("published"))
+    if date and date <= dt.datetime.now(dt.timezone.utc).date() + dt.timedelta(days=1):
+        _diag_inc("institution_official_listing_date_verified")
+        return date, "official_publication_listing_date"
+    return None, ""
+
+
 def _source_adapter_domain_jobs(
     src: dict[str, Any],
     from_date: dt.date,
@@ -12593,6 +12723,11 @@ def _source_adapter_domain_jobs(
             # bonus, but generic navigation still needs a content/path signal.
             score = generic_score + min(12, semantic_hits * 4) + (3 if year_hit else 0) + (4 if is_pdf else 0)
             if is_pdf or semantic_hits or generic_score >= 3 or year_hit:
+                listing_hint = _official_publication_listing_hint(a, r.url, u, profile)
+                if listing_hint:
+                    INSTITUTION_OFFICIAL_LISTING_METADATA[normalized_link(u)] = listing_hint
+                    score += 10  # explicit dated publisher catalogue items before generic pages
+                    _diag_inc("institution_official_listing_dates_discovered")
                 discovered[u] = max(score, discovered.get(u, -100))
             if (not is_pdf) and depth < max_depth and semantic_hits and generic_score >= -2 and normalized_link(u) not in fetched:
                 queue.append((u, depth + 1))
@@ -12621,6 +12756,11 @@ def _institution_feed_jobs(
 ) -> list[tuple[str, str, int, str]]:
     """Queue explicitly configured institution RSS/Atom entries through normal page parsing."""
     feeds = [clean_text(x) for x in (src.get("feeds") or []) if clean_text(x)]
+    domain_profile = CONFIG.get("institution_source_adapters", {}).get(clean_text(src.get("domain", "")).lower().removeprefix("www."), {})
+    official_publication_feeds = {
+        normalized_link(x) for x in (domain_profile.get("dated_publication_feeds", []) if isinstance(domain_profile, dict) else [])
+        if clean_text(x)
+    }
     if transport is not None:
         transport["feed_configured"] = bool(feeds)
         transport.setdefault("feed_attempted", 0)
@@ -12669,6 +12809,24 @@ def _institution_feed_jobs(
                 continue
             if fp in INSTITUTION_SEEN_FINGERPRINTS and not reconsider_seen:
                 continue
+            # A first-party research-publications RSS feed already has the document's
+            # title and published timestamp. Preserve that metadata for the *same named*
+            # destination: the page parser checks both title and host before using it.
+            # A feed's updated timestamp alone is never publication-date evidence.
+            if normalized_link(feed_url) in official_publication_feeds:
+                published_stamp = getattr(entry, "published_parsed", None)
+                feed_title = clean_text(getattr(entry, "title", ""))
+                if (published_stamp and len(_document_title_tokens(feed_title)) >= 3
+                        and _same_institution_family(feed_url, link)):
+                    try:
+                        publication_date = dt.date(*published_stamp[:3])
+                    except (TypeError, ValueError):
+                        publication_date = None
+                    if publication_date and publication_date <= today + dt.timedelta(days=1):
+                        INSTITUTION_OFFICIAL_LISTING_METADATA[normalized_link(link)] = {
+                            "title": feed_title, "published": publication_date.isoformat(), "hub": feed_url,
+                        }
+                        _diag_inc("institution_official_feed_publications_discovered")
             out.append((link, source_name, tier, fp))
     _diag_inc("institution_feed_jobs", len(out))
     return out
@@ -20945,6 +21103,7 @@ def main() -> int:
         log_progress("OpenAlex: authenticated API key detected")
     INSTITUTION_DISCOVERED_DATES = {}
     OP_PUBLICATIONS_CATALOGUE_METADATA = {}
+    INSTITUTION_OFFICIAL_LISTING_METADATA.clear()
     INSTITUTION_SIGNAL_CANDIDATES = []
     SIGNAL_WINDOW_START_DATE = None
     with ADMISSION_DIAGNOSTICS_LOCK:
