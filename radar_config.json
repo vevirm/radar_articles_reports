@@ -3069,21 +3069,28 @@
     },
     "europarl.europa.eu": {
       "hub_paths": [
+        "/stoa/en/publications/search",
+        "/thinktank/en/research/advanced-search",
         "/thinktank/en/home",
         "/stoa/en/home",
-        "/news/en/press-room",
+        "/stoa/en/publications",
         "/thinktank/en/research.html",
-        "/stoa/en/publications"
+        "/news/en/press-room"
       ],
       "path_hints": [
-        "thinktank",
-        "stoa",
+        "publication",
+        "publications",
         "study",
+        "in-depth-analysis",
+        "thinktank",
         "briefing",
-        "analysis",
-        "research",
+        "stoa",
+        "science",
         "technology",
+        "research",
         "innovation",
+        "assessment",
+        "analysis",
         "foresight"
       ]
     },
@@ -3188,17 +3195,22 @@
     },
     "bruegel.org": {
       "hub_paths": [
-        "/",
+        "/publications/working-papers",
+        "/publications/policy-briefs",
         "/publications",
-        "/research"
+        "/research",
+        "/"
       ],
       "path_hints": [
-        "analysis",
-        "policy-brief",
         "working-paper",
+        "policy-brief",
+        "report",
+        "publication",
+        "analysis",
         "research",
-        "technology",
         "innovation",
+        "technology",
+        "science",
         "geoeconomics"
       ]
     },
@@ -3206,8 +3218,8 @@
       "hub_paths": [
         "/en/publications.html",
         "/en/topics/science-technology-and-innovation.html",
-        "/en/topics/research-careers-and-mobility.html",
-        "/en/networks/research-and-innovation-careers-observatory.html"
+        "/en/networks/research-and-innovation-careers-observatory.html",
+        "/en/topics/research-careers-and-mobility.html"
       ],
       "path_hints": [
         "publication",
@@ -3275,6 +3287,51 @@
         "funding",
         "call",
         "commercialisation"
+      ]
+    },
+    "esfri.eu": {
+      "hub_paths": [
+        "/publications/",
+        "/policy-docs",
+        "/publications/policy-documents",
+        "/publications/wg-reports"
+      ],
+      "path_hints": [
+        "publications",
+        "policy-documents",
+        "research-infrastructures",
+        "report",
+        "position-paper",
+        "paper",
+        "research",
+        "infrastructure",
+        "roadmap",
+        "strategy",
+        "study",
+        "monitoring",
+        "performance",
+        "industrial"
+      ]
+    },
+    "espas.eu": {
+      "hub_paths": [
+        "/general.html",
+        "/"
+      ],
+      "path_hints": [
+        "publication",
+        "report",
+        "foresight",
+        "research",
+        "innovation",
+        "technology",
+        "trend",
+        "future",
+        "study",
+        "study",
+        "strategic",
+        "science",
+        "europe"
       ]
     }
   },
@@ -4469,5 +4526,7 @@
     "eit.europa.eu"
   ],
   "full_budget_continuation_a_journals_per_wave": 3,
-  "scanner_a_first_recall_profile_version": "v25.2-a-primary-c-secondary-b-supporting-research-diversification"
+  "scanner_a_first_recall_profile_version": "v25.2-a-primary-c-secondary-b-supporting-research-diversification",
+  "institution_undated_pdf_recovery_enabled": true,
+  "institution_undated_pdf_recovery_max_links": 2
 }
