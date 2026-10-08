@@ -4075,7 +4075,7 @@
   "target_new_b_per_scan": 1,
   "target_new_c_per_scan": 3,
   "b_method_lookback_years": 15,
-  "target_item_mix_rule": "Relative publication balance for NEW admissions: A:B:C = 8:1:3 (about 66.7% / 8.3% / 25%). These are ratio weights, never fixed per-run ceilings. Main mixed scans release B/C relative to accumulated A and keep surplus valid B/C privately for later release. A narrowly defined exceptional-C urgency bypass may publish a realised, genuinely substantial European R&I event immediately; it still counts in the C ledger, so later ordinary C remains deferred until A catches up. Focused strand scans may intentionally bypass the mix and later mixed scans compensate.",
+  "target_item_mix_rule": "European/EU research-and-innovation Radar discovery-attention target A:B:C = 8:1:3 (approximately 66.7% / 8.3% / 25%). These weights shape search effort and diagnostics; they are neither fixed per-run caps nor cumulative publication quotas. Publish genuinely novel source-supported European/EU R&I A/B evidence and significant eligible European/EU R&I C developments under their existing source, scope, precision, dating, novelty and retention gates. Revalidate previously ratio-deferred candidates before release; preserve C as lower-weight context and flag exceptionally material events for reading priority without ratio debt.",
   "c_unanchored_analytical_weight": 0.22,
   "c_unanchored_rule": "Independent C may be admitted from a trusted source when it is a dated, concrete, source-backed external R&I/technology development capable of changing a European A state variable. The event facts must come from the source; Europe-impact language may be a clearly labelled radar inference. A publication anchor is preferred but not mandatory.",
   "institution_sitemap_lastmod_fallback_enabled": true,
@@ -4251,7 +4251,7 @@
   "deferred_metadata_recovery_per_scan": 16,
   "deferred_metadata_recovery_stage_seconds": 35,
   "deferred_metadata_recovery_timeout_seconds": 8,
-  "deferred_metadata_queue_max": 400,
+  "deferred_metadata_queue_max": 2400,
   "c_pre_novelty_candidate_cap": 30,
   "country_news_sources": [],
   "trusted_primary_c_sources": [
@@ -4297,11 +4297,11 @@
     }
   ],
   "c_event_integrity_profile_version": "v24.7.3-soft-mix-shares",
-  "target_item_mix_mode": "relative_release",
+  "target_item_mix_mode": "discovery_weights_no_release_cap",
   "c_source_policy": "Elite Europe-facing current reporting plus authoritative EU/international primary institutions. Broad national-media and think-tank layers are context for A/institutional discovery, not routine Strand-C publication sources.",
   "c_source_policy_version": "v24.7.4-elite-c-balanced",
   "historical_strand_policy": "A+B only. Historical never searches for, reconstructs, admits, or publishes Strand C.",
-  "target_item_mix_implementation": "cumulative_a_anchored_ratio_with_private_pending_backlog_and_strict_exceptional_c_urgency_bypass",
+  "target_item_mix_implementation": "8_1_3_discovery_attention_only;_eu_ri_evidence_source_scope_novelty_gates_control_publication;_legacy_backlog_revalidated_once",
   "target_item_mix_weights": {
     "A": 8,
     "B": 1,
@@ -4309,7 +4309,7 @@
   },
   "c_exceptional_release_enabled": true,
   "c_exceptional_release_profile_version": "v24.7.6-substantial-event-bypass",
-  "c_exceptional_release_rule": "Bypass 8:1:3 only when something substantially happened: a realised/observed event, from a top-tier independent/specialist or authoritative primary source, with direct/supported European R&I scope (or an unusually large strategic member-state capital/control move), and one strict materiality class: major research-programme access change, binding rule/critical-access restriction, >=1bn strategic capital/control change, major strategic capability becoming operational, severe R&I access/capacity disruption, or an exceptionally large measured system shift. Proposals, consultations, warnings, commentary, calls, plans and ordinary announcements do not qualify. Exceptional C remains low-weight context and counts against future C balance.",
+  "c_exceptional_release_rule": "Exceptional EU R&I developments remain explicitly labelled for priority reading and keep C contextual evidence weight. All otherwise-eligible genuinely novel C developments may publish without historical A:B:C release-debt; source integrity, EU scope, material change, temporal and event-level dedupe gates still apply.",
   "strategic_gap_query_profile_version": "v25.1.1-five-undercovered-dimensions",
   "strategic_gap_queries_per_scan": 10,
   "strategic_gap_query_families": {
