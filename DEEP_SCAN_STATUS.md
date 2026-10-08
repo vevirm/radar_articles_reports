@@ -16,20 +16,20 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261008T133221Z-da80bb397d4f`
+- Current package: `worker-a-20261008T134108Z-9e06f8398e6d`
 - Assigned unresolved records: **36**
-  1. `historical:id:20b1406428b30286` — How to future-proof NATO’s defence innovation and EDT strategy – CEPS
-  2. `historical:id:0c74ae0fab99be67` — The ‘AI Factories’ Amendment to the EuroHPC JU Regulation Enters Into Force
-  3. `historical:id:19a585dd6eafef9e` — AI is a strategic tool to improve scientific research
-  4. `historical:id:28857adbdbb8930f` — RETHINKING STRATEGIC AUTONOMY IN TIMES OF NEXT GENERATION EU: NEW DIGITAL AGENDA
-  5. `historical:id:5a1b826e50095b97` — ‘Closer to the Market’: EU Research Governance and Symbolic Power
-  6. `historical:id:48e268204c448631` — The Application of the Science Diplomacy Model: the Russian and International Experience
-  7. `historical:id:ac6a33b6763883f5` — Dutch and French Cooperation in Quantum Innovation
-  8. `historical:id:8dc382a7f4033b91` — European research development and deployment of AI
+  1. `link:https://news.google.com/rss/articles/CBMiwgFBVV95cUxPWmxzbkh0NkVNb3JibmJFOVJROXBKcC1rYjRmZ3NFVUlianUzYi1GUUNQVFloQm94cVMwMUdOSllPMmc1QUlyMXJRSFV4MmF1LXpYYXJGc2twSHhwaHZZVEVNVjEzaWp0RHNwVUxDRmxVcDZ2WFpFaEZlcHYtRUVzQWljY3J4S0hGWjFWaHZSODNlWTZVMXNvWTVGaXNld2N6R2hZQXV6OUNBSjRYR3Z5Y0NuR3FRS0hKM1BRcTdleHBsUQ?oc=5` — Germany’s most promising industries depend on China, clashing with Berlin’s derisking push, study finds
+  2. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxQLUwzMzRKWnpxQjNiX0tpdUxpd1Z5VjVzMXVULUhkNjFqTHV1Wk80bGw5N1VOVEdpOGF2azhxSG9LcXBEYW9YWGh4T0lCM2VjNEswWkd2MnVGejFJNTIxZnFSb01ab0RNUkMyUFM1TkRSdW5pY0NEVFI1bnNWaFRxd28tdVc?oc=5` — Norway lays down a line for EU on AI glasses
+  3. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTE1GNFNQODVUbk15ODIxYTBLek9lNFBkYUdrazNVa3QyS0N2TTZpRUJ5S0xnd0cyYXd1a2syMG5hcHFHbmFLU0ZKcFdkX1lrU3ItVDF0UFpUWHBDQnc3Z1h6Yzg0ZWtndlZ1RXV5Vk1DbmEwVDhTNjJFMGpDdjI0dw?oc=5` — Research for TRAN Committee - European Port Strategy
+  4. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxPbE0xOEpsajFJS09iaEJuNC11NEtBR3E1ME81TkZfMFhYQjVTOWtRQ2hqSGQ0a1duMFlRZWpJX2szSVJCNFNUYU5fbVRGM2ozM2R0U0pLREhnazR3NWhmbDBNdGxhNXJJVUtrVHFIUTRTMklJTlhsSE9fc0pCMWQxUUs0VUt0Z0N2QjM5WVd6dFJraVlGVWFadHMxQVVDYlFHcVlkTjNycmJwU1VZRnow?oc=5` — EU-China relations: MEPs defend dialogue, fair trade, and human rights | News
+  5. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxPc0hMY0o1X3RqSGNsaG5UZFZvMVlCTTNham5oUW91NXBBUkRjLW5PWElueEhQaEdoOGRkMzlia0UwSkEtWnNKemxvX0V0R1VvZkpzeFRwSUNyb1AzcnlMYlM4V2ZzdzFuVmRBUzNrWW9lLWhxR0pYSXdvQ2tjWDYzenFJbDA?oc=5` — Sleepy European telcos turn to data centre craze
+  6. `link:https://news.google.com/rss/articles/CBMiqgFBVV95cUxPSDUzTVl6SVNZdWVqX3BsUmJoZHdIczV5ZExVQ1dlWXgyTEFPRVVROHZzcUxlc2I4bVRkSS10aFFrVXlPS002WDNuS2tiWk8zczlyR25XN0xNbDhxNERJbks0b1J1dzhvNFhUY0w0a3hWZkp3eUxHYkFWTndyWGV0dVpOdzUxbHVYMEc4Y2U0dWZSWmR4OHppZmI2OW5zN0dOVEZjR25vSlVSUQ?oc=5` — Laws, pledges or an iron grip? How the EU, US and China are reining in AI
+  7. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxOTjJXaXJMMk1EY0hlaXBPQy1haFVKOEQtcjZMSjVNc2lHdnhILUVUZWN5cTJIT3ZTT0VDODB6NDlyNHh2MVRfb0swYXZhSU5UNUF2eEtxbi0xUFJsTGlpWlpuY3BCZFlIZDhqN0NmVWJqOFcyc1NYOXN5TEFNRElhekg1YzZvS0dNMWdSY1pmY2dhTXRfYW9oNjdHSy01X05qY1hheGNkcDhySmZWNXc?oc=5` — Finland orders pause on Google AI data centres over environmental concerns
+  8. `link:https://news.google.com/rss/articles/CBMipgFBVV95cUxNWTVKYXo4SUlia1FlR3VNM3FZZmQ1bjl0OUVkbGN5QUdSakU5V3p5bUNraU1UVDc3TlQ2Wm9IVUNLRnItREEwREdhZWxtZDVlT0lnbDZoR2ppcWYtb2puU0RyaFROUUxGUUJsUWVodUhoY01HTzVUUmJHUV9iVTBuMDExNEplQ3lVQ3JRMXIzSVdYZ2hhbU5Ucld0OUFJQVFmYmdYOGxR?oc=5` — An ambitious MFF 2028-2034 for a strong and resilient Europe: extracts from the debate - api.multimedia.europarl.europa.eu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261008T133250Z-5a619b6f0fa0`
+- Current package: `worker-b-20261008T134144Z-5a619b6f0fa0`
 - Assigned unresolved records: **36**
   1. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxPQTVhdGtDQ3ltbWRrWWxnSjE2TTF1R0szTjQ0OW5NSjJtRzJVN1ZtblJ1QjhQbUdHMzZMUmF0OTVlcGtmaUFhN2J3UXI2WkhlSVJxTWhpa205ckxkZHVudzBGcWxscHl5M21TSi11UmpZczF0bkZsYTlJekplbzQ0VTVWTVh5d3Rna09YbFZONUR0VmpSUEVudTluUkJoOG04alJZejNrUTM5cFNxRmdn?oc=5` — Former German spy chief arrested for treason and espionage
   2. `link:https://news.google.com/rss/articles/CBMikAJBVV95cUxPWUJDemFBRS1vSFhhNk5EdGxXNmtwM3AzY3Z3aF9EMHpSNmV2ckxIVl9hQ1VtMm45dHdEemQ1YmZGaDhMaUJ1WFpINmhsNi1WOXhVSTJwcnc0QmVoeE5ySU01VEdKVElMOHZMQkN3ejMtb0xPcFBKSlhaX25yZVg4aDg3bWtzRzhOXzB2X2txOTNhUlE0Q2VZMXhWSXBIeXhvQlhrdTlWSmdIWUc2MUV0Tlk4WDlBSlZ0TWNhNzd1YnJWZ0hYc0dpcmVZYk1vWWh6TW91QlZUWUlPNEZfWWZUVGR3RUpTeF9iUHEtdWRBTWF6OU5tTXUyd0IwS0pJSTA3bWRsTXpzU0ZsR1NPN1ZGMA?oc=5` — Fourth EU-Faroe Islands Horizon Europe Joint Research and Innovation Committee meeting - European Commission
