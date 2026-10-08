@@ -28,7 +28,7 @@ class DeferredMetadataFairnessTests(unittest.TestCase):
         fresh = {'key': 'new', 'provider': 'crossref', 'raw': {'DOI': '10.1234/new'}, 'attempts': 0}
         state = {'deferred_metadata_queue': old + [fresh]}
         with patch.object(radar, 'candidate_from_crossref', return_value=None), \
-             patch.object(radar, 'doi_landing_abstract', return_value='') as fetch, \
+             patch.object(radar, 'recover_scholarly_abstract', return_value=('', '')) as fetch, \
              patch.dict(radar.CONFIG, {'deferred_metadata_recovery_per_scan': 1,
                                        'network_reserve_seconds': 0}):
             radar.recover_persistent_metadata_queue(state, [], None)

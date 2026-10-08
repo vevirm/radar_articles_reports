@@ -1,4 +1,4 @@
-"""Regression tests: 8:1:3 is a relative publication ratio, not fixed 8/1/3 caps."""
+"""Regression: 8:1:3 remains discovery attention, not a publication quota."""
 from pathlib import Path
 import importlib.util
 import sys
@@ -60,18 +60,18 @@ class V2475RelativeMixRelease(unittest.TestCase):
     def test_no_c_floor_or_rescue_is_configured(self):
         self.assertEqual(int(S.CONFIG.get("c_min_new_per_successful_scan", -1)), 0)
         self.assertFalse(bool(S.CONFIG.get("c_floor_rescue_enabled", True)))
-        self.assertEqual(S.CONFIG.get("target_item_mix_mode"), "relative_release")
+        self.assertEqual(S.CONFIG.get("target_item_mix_mode"), "discovery_weights_no_release_cap")
 
     def test_relative_mix_weights_are_8_1_3(self):
         self.assertEqual(S.target_mix_weights(), {"A": 8, "B": 1, "C": 3})
 
-    def test_one_a_cannot_release_a_c_flood(self):
+    def test_old_ratio_distance_is_diagnostic_only(self):
         published = {"A": 0, "B": 0, "C": 0}
         b_slots, b_target, projected_a = S.relative_mix_release_slots(published, 1, "B")
         c_slots, c_target, projected_a_c = S.relative_mix_release_slots(published, 1, "C")
         self.assertEqual(projected_a, 1)
         self.assertEqual(projected_a_c, 1)
-        # One small-sample pulse avoids starvation; 25/26 C can never be released here.
+        # Legacy ratio distance is kept only for reporting and never limits release.
         self.assertEqual((b_slots, b_target), (1, 1))
         self.assertEqual((c_slots, c_target), (1, 1))
 

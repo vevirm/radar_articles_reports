@@ -33,8 +33,8 @@ class ScannerFeatureContractTests(unittest.TestCase):
 
     def test_v2473_strand_mix_is_soft_publication_share(self):
         self.assertEqual((int(scan.CONFIG.get('target_new_a_per_scan',0)), int(scan.CONFIG.get('target_new_b_per_scan',0)), int(scan.CONFIG.get('target_new_c_per_scan',0))), (8,1,3))
-        self.assertIn('Relative publication balance', str(scan.CONFIG.get('target_item_mix_rule','')))
-        self.assertEqual(scan.CONFIG.get('target_item_mix_mode'), 'relative_release')
+        self.assertIn('European/EU research-and-innovation Radar discovery-attention', str(scan.CONFIG.get('target_item_mix_rule','')))
+        self.assertEqual(scan.CONFIG.get('target_item_mix_mode'), 'discovery_weights_no_release_cap')
         self.assertGreaterEqual(int(scan.CONFIG.get('b_method_lookback_years',0)), 10)
 
     def test_v235_research_analysis_platform_can_be_unlabelled_commentary(self):

@@ -113,66 +113,64 @@ class V2476ExceptionalCRelease(unittest.TestCase):
         decision = S.exceptional_c_release_decision(row)
         self.assertFalse(decision["eligible"], decision)
 
-    def test_ordinary_valid_c_still_waits_when_there_are_no_slots(self):
+    def test_ordinary_valid_european_c_is_not_blocked_by_prior_ledger(self):
         ordinary = c_row("Europe discusses new approaches to quantum research cooperation")
         selected, deferred, stats = S.select_relative_c_release(
-            [ordinary], {"A": 3, "B": 1, "C": 1}, 0
-        )
-        self.assertEqual(stats["release_slots"], 0)
-        self.assertEqual(selected, [])
-        self.assertEqual(len(deferred), 1)
-        self.assertEqual(stats["exceptional_ratio_bypass_c"], 0)
-
-    def test_exceptional_event_publishes_even_with_zero_normal_slots(self):
-        urgent = c_row("Japan formally joins Horizon Europe as associated country")
-        selected, deferred, stats = S.select_relative_c_release(
-            [urgent], {"A": 3, "B": 1, "C": 1}, 0
-        )
-        self.assertEqual(stats["release_slots"], 0)
-        self.assertEqual(len(selected), 1)
-        self.assertEqual(deferred, [])
-        self.assertTrue(selected[0]["exceptional_c_release"])
-        self.assertTrue(selected[0]["exceptional_c_ratio_bypass"])
-        self.assertEqual(stats["exceptional_ratio_bypass_c"], 1)
-        # Urgency changes timing only; the weak-signal analytical weight is untouched.
-        self.assertEqual(selected[0]["analytical_weight"], 0.3)
-
-    def test_exceptional_event_uses_an_available_normal_slot_before_bypassing(self):
-        ordinary = c_row("Europe reports a new AI research cooperation initiative", n=2)
-        urgent = c_row("Japan formally joins Horizon Europe as associated country", n=3)
-        selected, deferred, stats = S.select_relative_c_release(
-            [ordinary, urgent], {"A": 1, "B": 1, "C": 0}, 0
+            [ordinary], {"A": 3, "B": 1, "C": 313}, 0
         )
         self.assertEqual(stats["release_slots"], 1)
         self.assertEqual(len(selected), 1)
+        self.assertEqual(deferred, [])
+        self.assertTrue(stats["relative_target_is_diagnostic_only"])
+        self.assertEqual(stats["exceptional_ratio_bypass_c"], 0)
+
+    def test_exceptional_event_is_labelled_not_given_ratio_bypass(self):
+        urgent = c_row("Japan formally joins Horizon Europe as associated country")
+        selected, deferred, stats = S.select_relative_c_release(
+            [urgent], {"A": 3, "B": 1, "C": 313}, 0
+        )
+        self.assertEqual(stats["release_slots"], 1)
+        self.assertEqual(len(selected), 1)
+        self.assertEqual(deferred, [])
         self.assertTrue(selected[0]["exceptional_c_release"])
         self.assertFalse(selected[0]["exceptional_c_ratio_bypass"])
         self.assertEqual(stats["exceptional_ratio_bypass_c"], 0)
-        self.assertEqual(len(deferred), 1)
+        # The existing evidence hierarchy remains intact.
+        self.assertEqual(selected[0]["analytical_weight"], 0.3)
 
-    def test_multiple_exceptional_events_can_all_surface_but_create_ratio_debt(self):
+    def test_ordinary_and_exceptional_c_both_publish_when_novel(self):
+        ordinary = c_row("Europe reports a new AI research cooperation initiative", n=2)
+        urgent = c_row("Japan formally joins Horizon Europe as associated country", n=3)
+        selected, deferred, stats = S.select_relative_c_release(
+            [ordinary, urgent], {"A": 1, "B": 1, "C": 313}, 0
+        )
+        self.assertEqual(stats["release_slots"], 2)
+        self.assertEqual(len(selected), 2)
+        self.assertTrue(selected[0]["exceptional_c_release"])
+        self.assertNotIn("exceptional_c_release", selected[1])
+        self.assertEqual(stats["exceptional_ratio_bypass_c"], 0)
+        self.assertEqual(deferred, [])
+
+    def test_multiple_exceptional_events_no_longer_create_publication_debt(self):
         horizon = c_row("Japan formally joins Horizon Europe as associated country", n=4)
         capital = c_row(
             "French start-up Mistral AI raises €3 billion in Samsung-led round",
-            source="Euronews",
-            domain="euronews.com",
-            rel="member_state",
-            n=5,
+            source="Euronews", domain="euronews.com", rel="member_state", n=5,
         )
+        ordinary = c_row("New European scientific collaboration funding announced", n=6)
         selected, deferred, stats = S.select_relative_c_release(
-            [horizon, capital], {"A": 3, "B": 1, "C": 1}, 0
+            [horizon, capital, ordinary], {"A": 3, "B": 1, "C": 313}, 0
         )
-        self.assertEqual(len(selected), 2)
-        self.assertEqual(stats["exceptional_ratio_bypass_c"], 2)
+        self.assertEqual(len(selected), 3)
+        self.assertEqual(stats["exceptional_selected_c"], 2)
+        self.assertEqual(stats["exceptional_ratio_bypass_c"], 0)
         self.assertEqual(deferred, [])
-        # Once both are counted in the ledger, even A=8 supports only C=3 total,
-        # so no ordinary C slot reopens yet.
-        c_slots, c_target, projected_a = S.relative_mix_release_slots(
-            {"A": 3, "B": 1, "C": 3}, 5, "C"
+        # The historic target is still available for diagnostic discovery allocation only.
+        _gap, target, projected_a = S.relative_mix_release_slots(
+            {"A": 3, "B": 1, "C": 313}, 5, "C"
         )
         self.assertEqual(projected_a, 8)
-        self.assertEqual(c_target, 3)
-        self.assertEqual(c_slots, 0)
+        self.assertEqual(target, 3)
 
     def test_untrusted_source_cannot_use_exception(self):
         row = c_row(
