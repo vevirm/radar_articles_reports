@@ -11957,6 +11957,67 @@ def _op_catalogue_pdf_fallback(
     return row
 
 
+def _recover_undated_institution_pdf(
+    soup: BeautifulSoup, page_url: str, title: str,
+    stage_deadline: float | None = None,
+) -> tuple[str, str, int, dt.date | None, str]:
+    """Retrieve the *matching official document* before rejecting an undated landing page.
+
+    This is evidence recovery, not weaker admission: a landing page's sitemap lastmod,
+    a PDF's file-creation date, an unrelated citation or an arbitrary date in prose
+    cannot become a publication date. The exact PDF still passes ordinary A/B gates.
+    Only a small number of same-publisher attachments may be tried per landing page.
+    """
+    if not bool(CONFIG.get("institution_undated_pdf_recovery_enabled", True)):
+        return "", "", 0, None, ""
+    max_links = max(1, min(3, int(CONFIG.get("institution_undated_pdf_recovery_max_links", 2) or 2)))
+    attempted = 0
+    for candidate in _primary_document_candidates(soup, page_url, title):
+        link = clean_text(candidate.get("url"))
+        if not link:
+            continue
+        # Do not follow unrelated external citations as a way to launder their dates.
+        same_official_document = _same_institution_family(page_url, link) or _same_op_publication_identity(page_url, link)
+        if not same_official_document:
+            continue
+        if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
+            break
+        if attempted >= max_links:
+            break
+        attempted += 1
+        _diag_inc("institution_undated_pdf_attempted")
+        body, words, _meta = _pdf_payload(link, stage_deadline=stage_deadline)
+        if words < 100 or not (
+            _pdf_text_matches_document(title, body) or _same_op_publication_identity(page_url, link)
+        ):
+            _diag_inc("institution_undated_pdf_unmatched")
+            continue
+        # The visible first-page date is publication evidence. PDF metadata creation and
+        # /YYYY/MM in a download path are not, so they must not rescue an undated page.
+        published, basis = _pdf_visible_date_hint(body, link)
+        # A bare month/year can be a forecast, a data collection period or a cited
+        # date. In the no-date recovery lane it only counts when explicitly labelled
+        # as the document's publication/issue month on the cover.
+        if basis == "pdf_visible_publication_month":
+            cover = clean_text(body)[:2200]
+            month = re.search(
+                r"\b(?:publication date|published|issued|release date)\s*[:\-]?\s*"
+                r"(January|February|March|April|May|June|July|August|September|October|November|December)\s+(20\d{2})\b",
+                cover, re.I,
+            )
+            if not month:
+                published, basis = None, ""
+        if not published or basis not in {"pdf_visible_publication_date", "pdf_visible_publication_month"}:
+            _diag_inc("institution_undated_pdf_no_publication_date")
+            continue
+        if published > dt.datetime.now(dt.timezone.utc).date() + dt.timedelta(days=1):
+            _diag_inc("institution_undated_pdf_future_date")
+            continue
+        _diag_inc("institution_undated_pdf_dated_matches")
+        return link, body, words, published, basis
+    return "", "", 0, None, ""
+
+
 def parse_institution_page(url: str, source: str, tier: int, stage_deadline: float | None = None, fingerprint: str = "", publication_floor: dt.date | None = None) -> dict[str, Any] | None:
     if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
         return None
@@ -12020,6 +12081,9 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
         _diag_inc("institution_reject_listing_container")
         return None
 
+    recovered_pdf_url = ""
+    recovered_pdf_body = ""
+    recovered_pdf_words = 0
     published = _op_portal_publication_date(soup, r.url)
     date_basis = "op_portal_release_date" if published else "page"
     if not published:
@@ -12091,6 +12155,14 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
         if catalogue_date:
             published = catalogue_date
             date_basis = "op_catalogue_work_date"
+    if not published:
+        # Research-report landing pages frequently have a valid attached study/PDF but no
+        # article date at all. The old path returned here before ever inspecting that PDF.
+        recovered_pdf_url, recovered_pdf_body, recovered_pdf_words, published, recovered_basis = (
+            _recover_undated_institution_pdf(soup, r.url, title, stage_deadline)
+        )
+        if published:
+            date_basis = recovered_basis
     if not published and fingerprint and bool(CONFIG.get("institution_sitemap_lastmod_fallback_enabled", True)):
         # Lastmod is not publication proof, but discarding the page entirely loses a large
         # share of institutional reports. Accept it only as explicitly approximate metadata.
@@ -12121,15 +12193,19 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
 
     # Select a candidate attachment before destructive DOM cleanup. Navigation/main download
     # controls may otherwise disappear, leaving a cited third-party PDF as the first survivor.
-    primary_pdf_url = _primary_pdf_link(soup, r.url, title)
+    primary_pdf_url = recovered_pdf_url or _primary_pdf_link(soup, r.url, title)
     for bad in soup(["script", "style", "nav", "header", "footer", "aside", "form", "noscript"]):
         bad.decompose()
     container = soup.find("article") or soup.find("main") or soup.body
     body = article_body or clean_text(container.get_text(" ", strip=True) if container else "")
     word_count = len(body.split())
     pdf_url = primary_pdf_url
-    if pdf_url and word_count < 2500:
-        ptxt, pwords = pdf_text(pdf_url, stage_deadline)
+    if pdf_url and (word_count < 2500 or recovered_pdf_body):
+        if pdf_url == recovered_pdf_url and recovered_pdf_body:
+            ptxt, pwords = recovered_pdf_body, recovered_pdf_words
+            _diag_inc("institution_undated_pdf_reused_evidence")
+        else:
+            ptxt, pwords = pdf_text(pdf_url, stage_deadline)
         verified_op_identity = _same_op_publication_identity(r.url, pdf_url)
         if pwords > word_count and (_pdf_text_matches_document(title, ptxt) or verified_op_identity):
             body, word_count = ptxt, pwords
@@ -12150,6 +12226,11 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
         elif pwords:
             # Never let an unrelated cited PDF become this record's Source link.
             _diag_inc("institution_reject_mismatched_linked_pdf")
+            pdf_url = ""
+        else:
+            # If a landing page is readable but its attached PDF failed, cite the
+            # readable official HTML page, not an unverified/broken download URL.
+            _diag_inc("institution_linked_pdf_unavailable")
             pdf_url = ""
 
     # Do not mark seen until an A/B item is actually admitted. Rejected pages remain
@@ -12270,7 +12351,7 @@ def parse_institution_page(url: str, source: str, tier: int, stage_deadline: flo
     )
     if date_basis != "page":
         result["date_basis"] = date_basis
-    if date_basis == "sitemap_lastmod_approximate":
+    if date_basis in {"sitemap_lastmod_approximate", "pdf_visible_publication_month"}:
         result["publication_date_approximate"] = True
     _mark_institution_seen(fingerprint)
     return result
