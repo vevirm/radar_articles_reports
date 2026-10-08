@@ -9848,6 +9848,37 @@ def crossref_execution_plan(
     return out
 
 
+def order_deferred_metadata_retries(rows: list[dict[str, Any]], now: dt.datetime | None = None) -> list[dict[str, Any]]:
+    """Fair, bounded retry order: never let a failing queue head starve newer records.
+
+    A failed retrieval has exponential cooldown (1h, 2h, 4h ... up to 7d).
+    Rows still in cooldown remain persisted, but do not consume network calls.
+    """
+    now = now or dt.datetime.now(dt.timezone.utc)
+    due = []
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        attempts = max(0, int(row.get('attempts', 0) or 0))
+        last = clean_text(row.get('last_attempted'))
+        if last and attempts:
+            try:
+                last_dt = dt.datetime.fromisoformat(last.replace('Z', '+00:00'))
+                if last_dt.tzinfo is None:
+                    last_dt = last_dt.replace(tzinfo=dt.timezone.utc)
+                cooldown = dt.timedelta(hours=min(168, 2 ** min(attempts - 1, 8)))
+                if now < last_dt + cooldown:
+                    continue
+            except (ValueError, OverflowError):
+                pass
+        due.append(row)
+    return sorted(due, key=lambda r: (
+        max(0, int(r.get('attempts', 0) or 0)),
+        clean_text(r.get('last_attempted')),
+        clean_text(r.get('key')),
+    ))
+
+
 def recover_persistent_metadata_queue(state: dict[str, Any], warnings: list[str], stage_deadline: float | None = None) -> list[dict[str, Any]]:
     """Retry unresolved scholarly candidates from prior scans under the current gates."""
     pending = state.get('deferred_metadata_queue') if isinstance(state.get('deferred_metadata_queue'), list) else []
@@ -9859,7 +9890,11 @@ def recover_persistent_metadata_queue(state: dict[str, Any], warnings: list[str]
     admitted: list[dict[str, Any]] = []
     retained: list[dict[str, Any]] = []
     attempted = 0
-    for row in pending:
+    # Revisit every due item eventually, rather than retrying the same failing prefix.
+    ordered = order_deferred_metadata_retries(pending)
+    due_ids = {id(row) for row in ordered}
+    retained.extend(row for row in pending if isinstance(row, dict) and id(row) not in due_ids)
+    for row in ordered:
         if not isinstance(row, dict):
             continue
         if attempted >= cap or stage_deadline_reached(stage_deadline, int(CONFIG.get('network_reserve_seconds', 15))):
@@ -9886,6 +9921,7 @@ def recover_persistent_metadata_queue(state: dict[str, Any], warnings: list[str]
         doi = clean_text(raw.get('doi') or raw.get('DOI'))
         if not doi:
             row['attempts'] = int(row.get('attempts', 0) or 0) + 1
+            row['last_attempted'] = dt.datetime.now(dt.timezone.utc).isoformat()
             retained.append(row); continue
         attempted += 1
         recovered = doi_landing_abstract(doi, timeout)
@@ -9910,6 +9946,11 @@ def recover_persistent_metadata_queue(state: dict[str, Any], warnings: list[str]
             admitted.append(candidate)
         # Once substantive text was recovered, a non-admission is a gate decision rather than a retrieval failure.
     state['deferred_metadata_queue'] = retained[: max(50, int(CONFIG.get('deferred_metadata_queue_max', 400) or 400))]
+    state['deferred_metadata_retry_stats'] = {
+        'pending_before': len(pending), 'eligible_now': len(ordered),
+        'retrieval_attempted': attempted, 'admitted': len(admitted),
+        'pending_after': len(state['deferred_metadata_queue']),
+    }
     return admitted
 
 def persist_current_metadata_queue(state: dict[str, Any]) -> None:
@@ -24950,6 +24991,7 @@ def main() -> int:
             "crossref_missing_abstract_enrichment_attempted": int(execution_stats.get("crossref_abstracts_enrichment_attempted", 0)),
             "crossref_openalex_doi_enrichment_attempted": int(execution_stats.get("crossref_openalex_doi_enrichment_attempted", 0)),
             "source_metadata_health": dict(execution_stats.get("source_metadata_health", {}) or {}),
+            "deferred_metadata_retry_stats": dict(state.get("deferred_metadata_retry_stats", {}) or {}),
             "source_health_policy": "Diagnostic only: source quality is never inferred from admission yield or abstract coverage, and observed yield never prunes a configured source.",
             "source_yield_pruning_enabled": False,
             "b_method_queries_executed": b_method_executed,
