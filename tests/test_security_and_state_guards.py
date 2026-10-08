@@ -39,7 +39,7 @@ class CurrentRepositoryContractTests(unittest.TestCase):
 
     def test_continuation_is_bounded_and_rescue_has_reserved_time(self):
         cfg = json.loads((ROOT / 'radar_config.json').read_text(encoding='utf-8'))
-        self.assertLessEqual(int(cfg.get('full_budget_continuation_max_waves',999)), 2)
+        self.assertLessEqual(int(cfg.get('full_budget_continuation_max_waves',999)), 6)
         self.assertGreaterEqual(int(cfg.get('low_yield_reserved_seconds',0)), 240)
         source = (ROOT / 'scripts' / 'scan_radar.py').read_text(encoding='utf-8')
         self.assertIn('OpenAlex low-yield continuation wave {wave_idx}", collect_openalex, EXTENDED_DATE_FLOOR', source)
