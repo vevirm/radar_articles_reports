@@ -7,21 +7,39 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **2648** (Main **1243** + Historical **1405**)
-- Automatic queue still needing V2 verification: **193** (Main **56** + Historical **137**)
-- Currently assigned to workers: **35** (Main **0** + Historical **35**)
+- Automatic queue still needing V2 verification: **280** (Main **114** + Historical **166**)
+- Currently assigned to workers: **107** (Main **59** + Historical **48**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **29**
-- Automatic queue pending and not yet assigned: **158**
+- Automatic queue pending and not yet assigned: **173**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261007T084356Z-2cd6d7f77b89`
-- Assigned unresolved records: **0**
+- Current package: `worker-a-20261008T130030Z-46f36111e948`
+- Assigned unresolved records: **36**
+  1. `link:https://www.eib.org/files/publications/2026-0163-120626-mid-term-report-eib-group-strategic-roadmap-2024-2027-en.pdf` — Mid-term report: EIB Group Strategic Roadmap 2024/2027
+  2. `link:https://www.eib.org/en/press/speeches/beer-speech-critical-raw-materials-joint-research-centre-conference` — Vice-President Beer on raw materials, EU sustainable competitiveness and business opportunities
+  3. `link:https://www.eib.org/en/press/all/2026-254-eib-and-crediabank-partner-to-strengthen-investment-in-greece-s-security-and-defence-ecosystem` — Greece: EIB and CrediaBank partner to strengthen investment in security and defence ecosystem
+  4. `link:https://www.eib.org/en/press/all/2026-228-eib-commits-eur3-billion-to-airbus-to-boost-europe-s-industrial-base-and-technological-edge-in-aerospace-innovation` — EIB commits €3 billion to Airbus to boost Europe’s industrial base and technological edge in aerospace innovation
+  5. `link:https://doi.org/10.1007/s11846-026-01053-6` — Configuring Artificial Intelligence capabilities for business model innovation in earth observation SMEs: insights from the European Space Industry
+  6. `link:https://www.atlanticcouncil.org/issue/technology-innovation/` — Technology & Innovation
+  7. `link:https://erc.europa.eu/sites/default/files/2026-09/ERC-Frontier-Research-on-Biotechnology.pdf` — Europe’s biotech frontier: New ERC report charts breakthrough potential and barriers
+  8. `link:https://www.iss.europa.eu/sites/default/files/2026-09/Brief_2026-15_Energy%20security.pdf` — Feeding the beast: Energy security as a precondition for the EU's AI power
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261007T084440Z-293b99d07eff`
-- Assigned unresolved records: **0**
+- Current package: `worker-b-20261008T130109Z-62931535cfb8`
+- Assigned unresolved records: **36**
+  1. `link:https://www.euronews.com/2026/10/06/what-to-know-about-mistrals-ml4-as-it-bets-on-eu-sovereignty-in-the-us-china-open-weight-a` — What to know about Mistral's new model in the US-China open AI race
+  2. `link:https://news.google.com/rss/articles/CBMimAFBVV95cUxNRmdhb3VwRE1ZWGhyRGI2RW5ZNURTRjFrYmJ2T0Z2ejdyVURwVGhoS2dESEdDYnVZZDJkb2NVN1Nuc2dJd0F4Z21KdjNTYzd5OWUxSkZQMGdJeThVd3NWM25xQi10ZDZYNm1KTUZSNzFYMFZTSFlfcHlFWW5ERlREMEVYZHJTQlNOQVpIMjBwQlpNNjNyb1BUeA?oc=5` — Europe’s AI policing plan stokes privacy concerns
+  3. `link:https://news.google.com/rss/articles/CBMioAFBVV95cUxQMWE0UWNBUWJqc0pGNUo4cUVPYkVzZHRvbVFMSGJDU0V3aHFnUTM5R2RaMFBFNkh2bGM5TUVKcVAzY1dka0tGRC1rbW84ckxKRlBLS2NOVVBWVk9sdi04M2VCLWxDM1phS3VCb3ZpenN0ODVFVjhzVmJNLS1vakFRYmxrdUt4d0JtdEdFenlhNzZvOWZYYmpRd1VXcjB1a2xn?oc=5` — EU rejects €26 million state aid to MAN truck manufacturer
+  4. `link:https://news.google.com/rss/articles/CBMiswFBVV95cUxOMXRYNUNxWFlxNHVBS3ljMWFpX1BOOWo0YzFJc0JvbzBWc3ByS29Ka2RBUUhLWlU4VDVaODFwQzlLWnRfY25LLVlTai1teTE4RkNEdFlaUGlPVmpqUkpvSjVYVlluNGdUQ25jVExTeFFqbENhM3c5Q1pmcWlWQzJ0Q0NQR1Uxc211NkFweEg0eU1JTUJ6UExCTFpPaW9ENmpLenkxaXJReWs3N01YQmVJM3Y2Yw?oc=5` — MSCA research career scheme gets €210M funding boost
+  5. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxNOEdpVjh0dUlLemVFaXJVREtGdGZBSzdpbWhoX2RxSXBEUzVCd2VQTFRocVNPNHNXSThuQUhLQy1tSlpYOEdKZXBDeHhENmZIUnFjWlZ1UWl4cERJTEZnLTlUb2NHOGhwVlZqQTVScUJkQzdMaE9hUjMwZk1na3VlaVdDdEswZGdjUWhsdUJJN0tEaU55NjJMV3JieEJWLTJCSzdPWmkzMVhKQW1QSFE?oc=5` — The Netherlands unveils its new innovation agency
+  6. `link:https://news.google.com/rss/articles/CBMizgFBVV95cUxPbmcwM1FMNHIwX2JMN3p0dlQ5LVFPdkZsdm1wSHlsZHBXaDNzVXdRa19RRUFBNHo0MUNGTXdiYmxrc1lfZ09MRWkzQS1kSGdFVko1TEIxSjBKTkV6UjNyTjJDb2NDbkx0YWlpMzVrN1RNSkh1UF9iNDlWdGNnUGpXWS13dzEzRlFwUDBOTlZYMHlBUHQ1ZU5FLVhaRjYyblV0M2hxZTdsVlZkYXY2TVp1ZTh4UXdmTHRkU0Z1Wi1VTnp6Y0h1emdSQV94bTlxQQ?oc=5` — EU innovation agency ‘must be reformed to be worth keeping’
+  7. `link:https://news.google.com/rss/articles/CBMihAJBVV95cUxQcS1MTFQ3ZTYzeVB1WHV1MUZiZjlXYWo2UGJVMmVXWUlVS0pXVXBTOHpqSDdTRzZBVnBlMkdWNEd1UW9PUmFVZGpUbVdYVUxQdUt2bzVXTFBERkdISEFOQVFaS0hzc3pmZEdQZTNxZGQ4aHFibWJ0SmhEMkdWSGs5bVo2V1ZCTEllYS1nNWphbG1ZRk1lWFBYUjBabElabzRrN0lTV1YzbTRERmUtU0lrdGtaODJGMTVjUm45Mk80dkNWUW9kRUlVUUhJN3F3aHc3RGhhbHlkb0xXOGNQY0d6TlRrRFp5VzhoRF9LSDNFRnhKRV9WdXlZQnlSQmJYdTdUckNaVg?oc=5` — Science, Research and Innovation performance of the EU 2026 report
+  8. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=c9a363b1-be08-11f1-9aae-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Horizon is powering the EU’s biotechnology industry, from innovation to investment - Publications Office of the EU
+  - … plus 28 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
