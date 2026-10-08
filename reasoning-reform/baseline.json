@@ -164,6 +164,17 @@
         "tests/test_v246_criteria_repair.py"
       ],
       "purpose": "Correct the stale scanner fingerprint that blocked the claim-shadow workflow; make 8:1:3 discovery-only so valid EU R&I publications are not withheld by cumulative historic debt; repair DOI metadata retry fairness and state preservation; retain every ordinary European-scope, source-integrity, evidence, deduplication and retention gate. Fingerprint updated only after validating the scanner patch."
+    },
+    {
+      "approved_files": [
+        "scripts/scan_radar.py",
+        "radar_config.json",
+        "tests/test_institutional_undated_report_recovery.py",
+        "tests/test_tier1_institutional_report_hubs.py",
+        "reasoning-reform/baseline.json"
+      ],
+      "purpose": "Bounded first-party European institutional-report recovery: improve Tier-1 publication hub discovery and retrieve title-matched official PDF evidence for undated institutional landing pages before no-date rejection; require explicit PDF publication date and keep original A/B scope, source, deadline, dedupe and Deep Scan verification rules.",
+      "stage": "post-stage8-strand-a-institutional-document-recovery"
     }
   ],
   "captured_for_repository_version": "v25.1.0-evidence-linked-reader",
@@ -190,7 +201,7 @@
       "scripts/prepare_deep_scan_package.py": "4ef41a0104a2c089d19c78346fd9ccec75eb9501266f7058225e5ffa423cd529"
     },
     "scanner_hard_core": {
-      "scripts/scan_radar.py": "6bc075007b5dbd79dceb07990aee6c1a47f17cc797eee13bf62d8bab1148c028"
+      "scripts/scan_radar.py": "407d0f7ef473ae8486ef6791253019ecd06b4acb239b0b7134800bcf42df2259"
     }
   },
   "raw_counts": {
