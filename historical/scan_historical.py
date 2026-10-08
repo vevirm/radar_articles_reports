@@ -127,6 +127,8 @@ SESSION.headers.update({
 
 DIAG: collections.Counter[str] = collections.Counter()
 HIST_DEFERRED_THIS_RUN: dict[str, dict[str, Any]] = {}
+# Ephemeral publisher catalogue facts: never persisted and never treated as admission.
+HIST_OFFICIAL_LISTING_HINTS: dict[str, dict[str, str]] = {}
 
 def _hist_deferred_key(raw: dict[str, Any]) -> str:
     return norm(clean(raw.get('doi') or raw.get('url'))) or norm(clean(raw.get('title')))
@@ -651,6 +653,89 @@ def topic_score(text: str, active_topics: list[dict[str, Any]]) -> int:
     return score
 
 
+def _historical_listing_date_value(value: str) -> dt.date | None:
+    """Require a *full*, unambiguous historical date; never invent January 1 from a year."""
+    value=clean(value)
+    matches=re.findall(
+        r"(?<!\d)(?:[0-3]?\d[.-][01]?\d[.-]20\d{2}|20\d{2}-[01]?\d-[0-3]?\d|"
+        r"[0-3]?\d\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+20\d{2}|"
+        r"(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+[0-3]?\d,?\s+20\d{2})",
+        value, re.I,
+    )
+    dates=set()
+    for match in matches:
+        european=re.fullmatch(r"([0-3]?\d)([.-])([01]?\d)\2(20\d{2})",match)
+        if european:
+            # A 05-06-2019 hyphen date is locale-ambiguous; fail closed.
+            if european.group(2)=="-" and int(european.group(1))<=12 and int(european.group(3))<=12:
+                continue
+            try: d=dt.date(int(european.group(4)),int(european.group(3)),int(european.group(1)))
+            except ValueError: continue
+        else: d=parse_date(match)
+        if d and DATE_FROM<=d<=DATE_TO: dates.add(d)
+    return next(iter(dates)) if len(dates)==1 else None
+
+
+def _historical_listing_hint(anchor: Any, hub: str, link: str) -> dict[str, str] | None:
+    """Pick up an explicit publication date from ONE official source-list card.
+
+    A date in a general page, an update label, a navigation list or a card with
+    multiple report links must never be attributed to an unrelated publication.
+    """
+    if not _historical_same_source_family(hub,link): return None
+    title=clean(anchor.get_text(" ",strip=True))
+    tokens=_historical_doc_tokens(title)
+    if len(tokens)<3 or len(title)>230: return None
+    parent=anchor.parent
+    for _ in range(4):
+        if parent is None or getattr(parent,"name",None) in {"body","main","html"}: break
+        block=clean(parent.get_text(" ",strip=True))
+        if len(block)>650: break
+        links=parent.find_all("a",href=True)
+        if len(links)>3: break
+        strong=[x for x in links if len(_historical_doc_tokens(x.get_text(" ",strip=True)))>=3]
+        if len(strong)!=1: parent=parent.parent; continue
+        # Explicitly labelled updated/modified dates are not publication dates.
+        if re.search(r"\b(last updated|updated|modified|last modified|deadline|event date)\b",block[:220],re.I):
+            parent=parent.parent; continue
+        values=[]
+        for el in parent.find_all("time",limit=4):
+            values.append(clean(el.get("datetime") or el.get_text(" ",strip=True)))
+        for el in parent.find_all(True,limit=24):
+            attrs=" ".join(str(el.get(k) or "") for k in ("class","itemprop","property","name")).lower()
+            if any(x in attrs for x in ("published","publication-date","publication_date","date")) and not any(x in attrs for x in ("updated","modified","lastmod")):
+                values.append(clean(el.get("content") or el.get_text(" ",strip=True)))
+        # Official archive cards can render '01.07.2023 Title' without a <time> tag.
+        values.append(block[:95])
+        dates={d for v in values if (d:=_historical_listing_date_value(v))}
+        if len(dates)==1:
+            return {"title":title,"published":next(iter(dates)).isoformat(),"hub":hub}
+        parent=parent.parent
+    return None
+
+
+def _historical_verified_listing_date(url: str, actual_url: str, title: str) -> dt.date | None:
+    """Trust the official catalogue only after same-source and same-title checks."""
+    hint=HIST_OFFICIAL_LISTING_HINTS.get(url.lower().rstrip("/"))
+    # Publication-list dates need stricter publisher identity than PDF download links.
+    # Merely sharing the europa.eu suffix is not sufficient to borrow a date.
+    if not hint: return None
+    hub_host=(urlparse(hint.get("hub","")).hostname or "").lower().removeprefix("www.")
+    actual_host=(urlparse(actual_url).hostname or "").lower().removeprefix("www.")
+    if not hub_host or not actual_host or not (hub_host==actual_host or actual_host.endswith("."+hub_host)):
+        return None
+    expected=_historical_doc_tokens(hint.get("title","")); actual=_historical_doc_tokens(title)
+    overlap=len(expected&actual)
+    if overlap<3 or overlap/max(1,min(len(expected),len(actual)))<0.65:
+        _diag("historical_listing_title_mismatch")
+        return None
+    d=parse_date(hint.get("published"))
+    if d and DATE_FROM<=d<=DATE_TO:
+        _diag("historical_official_listing_date_verified")
+        return d
+    return None
+
+
 def source_adapter_candidates(src: dict[str, Any], active_topics: list[dict[str, Any]], warnings: list[str]) -> list[str]:
     domain=clean(src.get("domain")); profiles=CONFIG.get("source_adapters",{}); hubs=profiles.get(domain,[]) if isinstance(profiles,dict) else []
     if not hubs: return []
@@ -667,7 +752,13 @@ def source_adapter_candidates(src: dict[str, Any], active_topics: list[dict[str,
             href=urljoin(r.url,clean(a.get("href"))); d=domain_of(href)
             if not d or not (d==domain or d.endswith("."+domain) or domain.endswith("."+d)): continue
             label=clean(a.get_text(" ",strip=True)); s=topic_score(f"{urlparse(href).path} {label}",active_topics)
-            if s>0: scored[href]=max(scored.get(href,0),s)
+            if s>0:
+                scored[href]=max(scored.get(href,0),s)
+                hint=_historical_listing_hint(a,r.url,href)
+                if hint:
+                    HIST_OFFICIAL_LISTING_HINTS[href.lower().rstrip("/")]=hint
+                    scored[href]+=6
+                    _diag("historical_official_listing_dates_discovered")
     if scored: _diag("institution_adapter_jobs",len(scored))
     else: warnings.append(f"Source adapter found no topic links: {domain}")
     return [u for u,_ in sorted(scored.items(),key=lambda kv:(-kv[1],kv[0]))[:max_pages]]
@@ -703,23 +794,27 @@ def sitemap_candidates(domain: str, active_topics: list[dict[str, Any]], warning
 
 
 def historical_date_from_text(text: str) -> dt.date | None:
-    """Recover an eligible historical date from body text or opaque URLs.
+    """Recover only explicit historical publication-date evidence, not incidental years.
 
-    Older code only recognised 2023–2025 in this fallback, which systematically hurt
-    discovery of 2015–2022 institutional material when structured metadata was absent.
+    Dates embedded in citations/references are not publication dates. A bare 2019
+    used to become the fabricated date 2019-01-01; that false precision is unsafe.
     """
-    for m in re.finditer(r"\b(20\d{2})[-/.](\d{1,2})[-/.](\d{1,2})\b", clean(text)[:12000]):
-        d = parse_date(m.group(0))
-        if d and DATE_FROM <= d <= DATE_TO:
-            return d
-    for m in re.finditer(r"\b(20\d{2})\b", clean(text)[:12000]):
-        try:
-            y = int(m.group(1))
-            d = dt.date(y, 1, 1)
-        except Exception:
-            continue
-        if DATE_FROM.year <= y <= DATE_TO.year:
-            return d
+    value=clean(text)
+    head=value[:1400]
+    # Dates in a document URL itself often carry a real YYYY/MM/DD upload date,
+    # but we require the *full* date and never infer from a year alone.
+    url_match=re.search(r"https?://[^\s]+",value[:450])
+    if url_match:
+        path=urlparse(url_match.group(0)).path
+        m=re.search(r"(?<!\d)(20\d{2})[/.-]([01]?\d)[/.-]([0-3]?\d)(?!\d)",path)
+        if m:
+            try: d=dt.date(int(m.group(1)),int(m.group(2)),int(m.group(3)))
+            except ValueError: d=None
+            if d and DATE_FROM<=d<=DATE_TO: return d
+    # For page/PDF prose, require a publication or issuing label close to the date.
+    for m in re.finditer(r"\b(?:published(?:\s+on)?|publication date|date of publication|issued(?:\s+on)?|release date)\s*[:\-]?\s*([^;|]{0,50})",head,re.I):
+        d=_historical_listing_date_value(m.group(1))
+        if d: return d
     return None
 
 
@@ -730,8 +825,8 @@ def page_date(soup: BeautifulSoup, text: str) -> dt.date | None:
         if key in {"article:published_time","date","datepublished","publication_date","dc.date","dcterms.date"}: candidates.append(clean(tag.get("content")))
     for t in soup.find_all("time")[:8]: candidates.append(clean(t.get("datetime") or t.get_text(" ",strip=True)))
     for c in candidates:
-        d=parse_date(c)
-        if d and DATE_FROM<=d<=DATE_TO: return d
+        d=_historical_listing_date_value(c)
+        if d: return d
     return historical_date_from_text(text)
 
 
@@ -820,10 +915,15 @@ def fetch_page_candidate(url: str, src: dict[str, Any], warnings: list[str], lan
     ctype=(r.headers.get("Content-Type") or "").lower()
     if "pdf" in ctype or r.url.lower().endswith(".pdf"):
         try:
-            reader=PdfReader(io.BytesIO(r.content)); body=clean(" ".join((p.extract_text() or "") for p in reader.pages[:10])); title=clean(reader.metadata.title if reader.metadata else "") or clean(urlparse(r.url).path.rsplit("/",1)[-1].replace("-"," ")); d=parse_date(reader.metadata.creation_date if reader.metadata else None)
+            reader=PdfReader(io.BytesIO(r.content)); body=clean(" ".join((p.extract_text() or "") for p in reader.pages[:10])); title=clean(reader.metadata.title if reader.metadata else "") or clean(urlparse(r.url).path.rsplit("/",1)[-1].replace("-"," "))
         except Exception: return None
+        # PDF creation time is a file-system event, not evidence of publication.
+        hint=HIST_OFFICIAL_LISTING_HINTS.get(url.lower().rstrip("/"))
+        if hint and not _historical_doc_tokens(title)&_historical_doc_tokens(hint.get("title","")):
+            title=clean(hint.get("title")) if len(_historical_doc_tokens(hint.get("title",""))&_historical_doc_tokens(body[:3500]))>=3 else title
+        d=_historical_verified_listing_date(url,r.url,title)
         if not d:
-            d=historical_date_from_text(f"{r.url} {body[:10000]}")
+            d=historical_date_from_text(f"{r.url} {body[:2500]}")
         return admit({"title":title,"abstract":body[:10000],"date":d,"url":r.url,"venue":src.get("name"),"publisher":src.get("name"),"discovery":f"direct source · {src.get('name')}"},lane)
     try: soup=BeautifulSoup(r.text,"html.parser")
     except Exception: return None
@@ -833,7 +933,10 @@ def fetch_page_candidate(url: str, src: dict[str, Any], warnings: list[str], lan
     primary_document_url=_historical_primary_document_url(soup,r.url,title) if bool(CONFIG.get("prefer_downloadable_primary_document",True)) else ""
     for bad in soup(["script","style","nav","footer","form","noscript"]): bad.decompose()
     content_root=soup.find("article") or soup.find("main") or soup
-    body=clean(content_root.get_text(" ",strip=True))[:14000]; d=page_date(soup,body)
+    body=clean(content_root.get_text(" ",strip=True))[:14000]
+    # A matching official publication-list date outranks unstructured body prose.
+    structured=page_date(soup,"")
+    d=structured or _historical_verified_listing_date(url,r.url,title) or historical_date_from_text(body[:2500])
     evidence_body=body; evidence_url=r.url
     if primary_document_url and budget_ok(35):
         pdf_body,pdf_words=_historical_pdf_body(primary_document_url,title)
@@ -846,6 +949,7 @@ def fetch_page_candidate(url: str, src: dict[str, Any], warnings: list[str], lan
 
 def collect_direct_sources(active_sources: list[dict[str, Any]], active_topics: list[dict[str, Any]], warnings: list[str], depth_page: int = 1) -> list[dict[str, Any]]:
     out=[]; limit=max(1,int(CONFIG.get("direct_pages_per_source",10)))
+    HIST_OFFICIAL_LISTING_HINTS.clear()  # Do not let a previous source batch lend its metadata.
     max_depth=max(1,int(CONFIG.get("direct_source_depth_pages",4)))
     requested_page=max(1,int(depth_page))
     for src in active_sources:
@@ -1086,6 +1190,9 @@ def rejection_funnel(new_items: int, unique_gate_candidates: int) -> dict[str, A
             "text_recovered": int(DIAG["openalex_metadata_rescue_recovered"]+DIAG["crossref_metadata_rescue_recovered"]),
         },
         "source_adapter_jobs": int(DIAG["institution_adapter_jobs"]),
+        "official_listing_dates_discovered": int(DIAG["historical_official_listing_dates_discovered"]),
+        "official_listing_dates_verified": int(DIAG["historical_official_listing_date_verified"]),
+        "official_listing_title_mismatches": int(DIAG["historical_listing_title_mismatch"]),
         "rejections": {k:int(v) for k,v in sorted(DIAG.items()) if k.startswith("reject_") or k.startswith("defer_") or k=="insufficient_text"},
     }
 
