@@ -363,6 +363,7 @@ A_RECALL_RECOVERY_SOURCES_PER_SCAN = 24
 
 _METADATA_DEFERRED_LOCK = threading.Lock()
 _METADATA_DEFERRED_THIS_SCAN: dict[str, dict[str, Any]] = {}
+_METADATA_RESOLVED_THIS_SCAN: set[str] = set()
 
 def _metadata_deferred_key(provider: str, raw: dict[str, Any]) -> str:
     doi = clean_text(raw.get('doi') or raw.get('DOI')).lower().replace('https://doi.org/', '')
@@ -386,13 +387,15 @@ def remember_deferred_metadata(provider: str, raw: dict[str, Any], *, query: str
         'attempts': 0, 'last_seen': dt.datetime.now(dt.timezone.utc).isoformat(),
     }
     with _METADATA_DEFERRED_LOCK:
-        _METADATA_DEFERRED_THIS_SCAN[key] = row
+        if key not in _METADATA_RESOLVED_THIS_SCAN:
+            _METADATA_DEFERRED_THIS_SCAN[key] = row
 
 def resolve_deferred_metadata(provider: str, raw: dict[str, Any]) -> None:
     key = _metadata_deferred_key(provider, raw)
     if not key:
         return
     with _METADATA_DEFERRED_LOCK:
+        _METADATA_RESOLVED_THIS_SCAN.add(key)
         _METADATA_DEFERRED_THIS_SCAN.pop(key, None)
 
 RULE_FIX_SOURCE_RECOVERY_STAGE_SECONDS = 360
@@ -1116,7 +1119,7 @@ def relative_mix_discovery_state(counts: dict[str, int], enabled: Iterable[str] 
     }
 
 
-RELATIVE_MIX_PUBLICATION_VERSION = "v24.7.5-relative-publication-8-1-3"
+RELATIVE_MIX_PUBLICATION_VERSION = "v25.1-eu-ri-quality-gated-no-publication-cap"
 
 
 def relative_mix_target_count(a_count: int, strand: str, already_published: int = 0) -> int:
@@ -1145,7 +1148,7 @@ def relative_mix_target_count(a_count: int, strand: str, already_published: int 
 
 
 def relative_mix_release_slots(published: dict[str, int], new_a: int, strand: str) -> tuple[int, int, int]:
-    """Return (slots_now, cumulative_target, projected_A) for B or C."""
+    """Report legacy ratio distance for diagnostics; NEVER gate publication with it."""
     clean = {k: max(0, int((published or {}).get(k, 0) or 0)) for k in ("A", "B", "C")}
     projected_a = clean["A"] + max(0, int(new_a or 0))
     label = clean_text(strand).upper()
@@ -1154,24 +1157,25 @@ def relative_mix_release_slots(published: dict[str, int], new_a: int, strand: st
 
 
 def relative_mix_publication_state(state: dict[str, Any]) -> dict[str, Any]:
-    """Return the persistent mixed-scan publication ledger/backlog.
+    """Migrate the legacy 8:1:3 ledger *without losing pending accepted evidence*.
 
-    Excess valid B/C candidates are deferred, not rejected.  This is what lets the
-    main scanner respect 8:1:3 without recreating the old Strand-C starvation bug.
+    Publication is now determined by existing European R&I source/scope/evidence gates,
+    not historical A:B:C totals. The 8:1:3 ratio remains a *discovery allocation*
+    guideline. Previously deferred candidates get one ordinary validity/dedupe pass
+    on the next eligible scan; they are never published directly from the ledger.
     """
     raw = state.get("relative_mix_publication") if isinstance(state, dict) else None
-    if not isinstance(raw, dict) or clean_text(raw.get("version")) != RELATIVE_MIX_PUBLICATION_VERSION:
-        raw = {
-            "version": RELATIVE_MIX_PUBLICATION_VERSION,
-            "published": {"A": 0, "B": 0, "C": 0},
-            "pending_b": [],
-            "pending_c": [],
-        }
+    if not isinstance(raw, dict):
+        raw = {}
+    previous_version = clean_text(raw.get("version"))
     published = raw.get("published") if isinstance(raw.get("published"), dict) else {}
     raw["published"] = {k: max(0, int(published.get(k, 0) or 0)) for k in ("A", "B", "C")}
     for key in ("pending_b", "pending_c"):
         vals = raw.get(key) if isinstance(raw.get(key), list) else []
         raw[key] = [dict(x) for x in vals if isinstance(x, dict)]
+    if previous_version and previous_version != RELATIVE_MIX_PUBLICATION_VERSION:
+        raw["migrated_from_version"] = previous_version
+    raw["version"] = RELATIVE_MIX_PUBLICATION_VERSION
     state["relative_mix_publication"] = raw
     return raw
 
@@ -9849,13 +9853,14 @@ def crossref_execution_plan(
 
 
 def order_deferred_metadata_retries(rows: list[dict[str, Any]], now: dt.datetime | None = None) -> list[dict[str, Any]]:
-    """Fair, bounded retry order: never let a failing queue head starve newer records.
+    """Interleave first attempts with due older retries so neither group starves.
 
-    A failed retrieval has exponential cooldown (1h, 2h, 4h ... up to 7d).
-    Rows still in cooldown remain persisted, but do not consume network calls.
+    A failed network retrieval cools down for 1h, 2h, 4h ... up to 7d. The
+    fallback date for old persisted rows is last_seen (they predate first_seen).
     """
     now = now or dt.datetime.now(dt.timezone.utc)
-    due = []
+    fresh: list[dict[str, Any]] = []
+    retry: list[dict[str, Any]] = []
     for row in rows:
         if not isinstance(row, dict):
             continue
@@ -9871,12 +9876,80 @@ def order_deferred_metadata_retries(rows: list[dict[str, Any]], now: dt.datetime
                     continue
             except (ValueError, OverflowError):
                 pass
-        due.append(row)
-    return sorted(due, key=lambda r: (
-        max(0, int(r.get('attempts', 0) or 0)),
-        clean_text(r.get('last_attempted')),
+        (retry if attempts else fresh).append(row)
+    # Oldest untried records get first chance. Retried records rotate by when
+    # they last consumed network budget, not by attempts or discovery rank.
+    fresh.sort(key=lambda r: (
+        clean_text(r.get('first_seen') or r.get('last_seen')),
         clean_text(r.get('key')),
     ))
+    retry.sort(key=lambda r: (
+        clean_text(r.get('last_attempted')),
+        clean_text(r.get('first_seen') or r.get('last_seen')),
+        clean_text(r.get('key')),
+    ))
+    out: list[dict[str, Any]] = []
+    for i in range(max(len(fresh), len(retry))):
+        if i < len(fresh):
+            out.append(fresh[i])
+        if i < len(retry):
+            out.append(retry[i])
+    return out
+
+
+def compact_deferred_metadata_queue(rows: list[dict[str, Any]], limit: int) -> list[dict[str, Any]]:
+    """Bound persistent metadata without sacrificing either old or new discoveries.
+
+    Former code always took the *last* 400 rows and repeatedly erased attempt
+    timestamps when a failed DOI reappeared. Preserve up to half of the oldest
+    still-unresolved rows and fill the rest with newer records. A DOI-less row
+    cannot be retried by the current DOI recovery route; give such rows only a
+    small slice of the store without permanently deleting every one.
+    """
+    by_key: dict[str, dict[str, Any]] = {}
+    for raw in rows:
+        if not isinstance(raw, dict):
+            continue
+        key = clean_text(raw.get('key'))
+        if not key:
+            continue
+        old = by_key.get(key)
+        row = dict(raw)
+        if old:
+            row['attempts'] = max(int(old.get('attempts', 0) or 0), int(row.get('attempts', 0) or 0))
+            row['last_attempted'] = clean_text(row.get('last_attempted')) or clean_text(old.get('last_attempted'))
+            row['first_seen'] = clean_text(old.get('first_seen') or old.get('last_seen')) or clean_text(row.get('first_seen') or row.get('last_seen'))
+        else:
+            row['first_seen'] = clean_text(row.get('first_seen') or row.get('last_seen'))
+        by_key[key] = row
+    cap = max(1, int(limit))
+    if len(by_key) <= cap:
+        return list(by_key.values())
+    candidates = list(by_key.values())
+    # Exclude no-DOI records from most of the network-recoverable capacity.
+    def has_recoverable_doi(row: dict[str, Any]) -> bool:
+        raw = row.get('raw')
+        return isinstance(raw, dict) and bool(clean_text(raw.get('doi') or raw.get('DOI')))
+    with_doi = [x for x in candidates if has_recoverable_doi(x)]
+    without_doi = [x for x in candidates if not has_recoverable_doi(x)]
+    doi_capacity = min(len(with_doi), cap)
+    def take_balanced(items: list[dict[str, Any]], n: int) -> list[dict[str, Any]]:
+        if n <= 0:
+            return []
+        oldest = sorted(items, key=lambda x: (clean_text(x.get('first_seen')), clean_text(x.get('key'))))
+        newest = sorted(items, key=lambda x: (clean_text(x.get('last_seen')), clean_text(x.get('key'))), reverse=True)
+        selected: dict[str, dict[str, Any]] = {}
+        for r in oldest[: (n + 1) // 2]:
+            selected[clean_text(r['key'])] = r
+        for r in newest:
+            if len(selected) >= n:
+                break
+            selected.setdefault(clean_text(r['key']), r)
+        return list(selected.values())
+    chosen = take_balanced(with_doi, doi_capacity)
+    if len(chosen) < cap:
+        chosen.extend(take_balanced(without_doi, cap - len(chosen)))
+    return chosen
 
 
 def recover_persistent_metadata_queue(state: dict[str, Any], warnings: list[str], stage_deadline: float | None = None) -> list[dict[str, Any]]:
@@ -9916,6 +9989,7 @@ def recover_persistent_metadata_queue(state: dict[str, Any], warnings: list[str]
             candidate = None
         if candidate:
             candidate['metadata_note'] = 'Recovered from the persistent metadata queue and admitted under the current ordinary gate.'
+            resolve_deferred_metadata(provider, raw)
             admitted.append(candidate)
             continue
         doi = clean_text(raw.get('doi') or raw.get('DOI'))
@@ -9924,7 +9998,7 @@ def recover_persistent_metadata_queue(state: dict[str, Any], warnings: list[str]
             row['last_attempted'] = dt.datetime.now(dt.timezone.utc).isoformat()
             retained.append(row); continue
         attempted += 1
-        recovered = doi_landing_abstract(doi, timeout)
+        recovered, recovery_method = recover_scholarly_abstract(doi, timeout)
         if not recovered:
             row['attempts'] = int(row.get('attempts', 0) or 0) + 1
             row['last_attempted'] = dt.datetime.now(dt.timezone.utc).isoformat()
@@ -9942,10 +10016,11 @@ def recover_persistent_metadata_queue(state: dict[str, Any], warnings: list[str]
             warnings.append(f"Persistent metadata recovery: {type(e).__name__}: {str(e)[:120]}")
             candidate = None
         if candidate:
-            candidate['metadata_note'] = 'Abstract recovered from the persistent metadata queue; ordinary A/B admission rules applied.'
+            candidate['metadata_note'] = f'Abstract recovered from the persistent metadata queue via {recovery_method}; ordinary A/B admission rules applied.'
+            resolve_deferred_metadata(provider, raw)
             admitted.append(candidate)
         # Once substantive text was recovered, a non-admission is a gate decision rather than a retrieval failure.
-    state['deferred_metadata_queue'] = retained[: max(50, int(CONFIG.get('deferred_metadata_queue_max', 400) or 400))]
+    state['deferred_metadata_queue'] = compact_deferred_metadata_queue(retained, max(50, int(CONFIG.get('deferred_metadata_queue_max', 2400) or 2400)))
     state['deferred_metadata_retry_stats'] = {
         'pending_before': len(pending), 'eligible_now': len(ordered),
         'retrieval_attempted': attempted, 'admitted': len(admitted),
@@ -9955,20 +10030,20 @@ def recover_persistent_metadata_queue(state: dict[str, Any], warnings: list[str]
 
 def persist_current_metadata_queue(state: dict[str, Any]) -> None:
     existing = state.get('deferred_metadata_queue') if isinstance(state.get('deferred_metadata_queue'), list) else []
-    merged: dict[str, dict[str, Any]] = {}
-    for row in existing:
-        if isinstance(row, dict) and clean_text(row.get('key')):
-            merged[clean_text(row.get('key'))] = row
     with _METADATA_DEFERRED_LOCK:
         current = list(_METADATA_DEFERRED_THIS_SCAN.values())
-    for row in current:
-        if isinstance(row, dict) and clean_text(row.get('key')):
-            old = merged.get(clean_text(row.get('key')), {})
-            if old:
-                row = {**row, 'attempts': max(int(old.get('attempts', 0) or 0), int(row.get('attempts', 0) or 0))}
-            merged[clean_text(row.get('key'))] = row
-    cap = max(50, int(CONFIG.get('deferred_metadata_queue_max', 400) or 400))
-    state['deferred_metadata_queue'] = list(merged.values())[-cap:]
+        resolved = set(_METADATA_RESOLVED_THIS_SCAN)
+    old_keys = {clean_text(x.get('key')) for x in existing if isinstance(x, dict)}
+    merged = compact_deferred_metadata_queue(
+        [x for x in list(existing) + current if isinstance(x, dict) and clean_text(x.get('key')) not in resolved],
+        max(50, int(CONFIG.get('deferred_metadata_queue_max', 2400) or 2400)),
+    )
+    state['deferred_metadata_queue'] = merged
+    stats = state.setdefault('deferred_metadata_retry_stats', {})
+    stats['rediscovered_old_keys'] = sum(1 for row in current if clean_text(row.get('key')) in old_keys)
+    stats['resolved_removed'] = len(resolved & old_keys)
+    stats['new_deferred_this_scan'] = len(current)
+    stats['pending_after_persist'] = len(merged)
 
 
 def collect_crossref(
@@ -20121,70 +20196,44 @@ def select_relative_c_release(
     published: dict[str, int],
     new_a: int,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
-    """Apply normal 8:1:3 C slots plus a strict substantial-event urgency bypass.
+    """Rank already-admitted EU R&I C signals without withholding them by 8:1:3.
 
-    Exceptional rows consume ordinary slots first. Only exceptional rows beyond those slots
-    bypass the ratio. Every published exceptional row is still added to the same C ledger by
-    the caller, creating C debt that blocks ordinary C until A catches up.
+    Earlier releases withheld ordinary validated developments indefinitely because
+    the historical ledger was above the ratio. The strict C gates, event-level
+    deduplication and limited C retention still happen BEFORE this function.
+    Exceptional materiality remains a label, not a release bypass or a higher
+    evidential weight. The legacy relative target is diagnostics only.
     """
-    c_slots, target_c_total, projected_a = relative_mix_release_slots(published, new_a, "C")
+    _ratio_distance, target_c_total, projected_a = relative_mix_release_slots(published, new_a, "C")
     ranked = [dict(x) for x in current_c if isinstance(x, dict)]
     ranked.sort(key=_c_publication_rank_key, reverse=True)
-
-    selected: list[dict[str, Any]] = list(ranked[:c_slots])
-    selected_ids = {signal_identity(x) for x in selected}
-    exceptional_all: list[tuple[dict[str, Any], dict[str, Any]]] = []
+    annotated: list[dict[str, Any]] = []
+    exceptional_count = 0
     for row in ranked:
         decision = exceptional_c_release_decision(row)
         if decision.get("eligible"):
-            exceptional_all.append((row, decision))
-
-    bypass_ids: set[str] = set()
-    for row, _decision in exceptional_all:
-        sid = signal_identity(row)
-        if sid in selected_ids:
-            continue
-        selected.append(row)
-        selected_ids.add(sid)
-        bypass_ids.add(sid)
-
-    annotated_selected: list[dict[str, Any]] = []
-    for row in selected:
-        out = dict(row)
-        decision = exceptional_c_release_decision(out)
-        if decision.get("eligible"):
-            out["exceptional_c_release"] = True
-            out["exceptional_c_release_reason"] = clean_text(decision.get("reason"))
-            out["exceptional_c_release_profile_version"] = C_EXCEPTIONAL_RELEASE_PROFILE_VERSION
-            out["exceptional_c_ratio_bypass"] = signal_identity(out) in bypass_ids
+            row["exceptional_c_release"] = True
+            row["exceptional_c_release_reason"] = clean_text(decision.get("reason"))
+            row["exceptional_c_release_profile_version"] = C_EXCEPTIONAL_RELEASE_PROFILE_VERSION
+            row["exceptional_c_ratio_bypass"] = False
+            exceptional_count += 1
         else:
-            out.pop("exceptional_c_release", None)
-            out.pop("exceptional_c_release_reason", None)
-            out.pop("exceptional_c_release_profile_version", None)
-            out.pop("exceptional_c_ratio_bypass", None)
-        annotated_selected.append(out)
-
-    deferred: list[dict[str, Any]] = []
-    for row in ranked:
-        if signal_identity(row) in selected_ids:
-            continue
-        out = dict(row)
-        out.pop("exceptional_c_release", None)
-        out.pop("exceptional_c_release_reason", None)
-        out.pop("exceptional_c_release_profile_version", None)
-        out.pop("exceptional_c_ratio_bypass", None)
-        deferred.append(out)
-
-    stats: dict[str, Any] = {
+            for key in (
+                "exceptional_c_release", "exceptional_c_release_reason",
+                "exceptional_c_release_profile_version", "exceptional_c_ratio_bypass",
+            ):
+                row.pop(key, None)
+        annotated.append(row)
+    return annotated, [], {
         "projected_a_total": projected_a,
         "relative_target_c_total": target_c_total,
-        "release_slots": c_slots,
-        "exceptional_eligible_c": len(exceptional_all),
-        "exceptional_selected_c": sum(1 for x in annotated_selected if x.get("exceptional_c_release")),
-        "exceptional_ratio_bypass_c": len(bypass_ids),
+        "relative_target_is_diagnostic_only": True,
+        "release_slots": len(annotated),
+        "exceptional_eligible_c": exceptional_count,
+        "exceptional_selected_c": exceptional_count,
+        "exceptional_ratio_bypass_c": 0,
         "exceptional_release_profile_version": C_EXCEPTIONAL_RELEASE_PROFILE_VERSION,
     }
-    return annotated_selected, deferred, stats
 
 
 def c_floor_rescue_queries() -> list[str]:
@@ -24100,14 +24149,21 @@ def main() -> int:
             "selected_b": sum(1 for x in new_selected if clean_text(x.get("strand")).upper() == "B"),
         }
 
-    # Relative publication balance is enforced at release time, not by weakening discovery.
-    # Valid B/C work that is ahead of the 8:1:3 mix is kept privately and can be released
-    # later when A catches up.  Focused strand scans bypass this release throttle.
+    # European/EU R&I relevance, source trust, substantive evidence and novelty
+    # determine publication. 8:1:3 remains an attention/discovery ratio, NOT a
+    # cumulative release quota. Migrate formerly withheld B through the same
+    # last-mile worthiness gate, and do not lose candidates on version change.
     mix_publication = relative_mix_publication_state(state)
+    pending_b = _dedupe_pending_rows(mix_publication.get("pending_b", []), signal=False)
     if (not RADAR_QUICK_STRAND) or RADAR_QUICK_STRAND == "B":
-        pending_b = _dedupe_pending_rows(mix_publication.get("pending_b", []), signal=False)
-        if pending_b:
-            new_selected = dedupe_candidates(list(new_selected) + pending_b)
+        revalidated_b = [x for x in pending_b if final_ab_candidate_worthiness(x)]
+        if revalidated_b:
+            new_selected = dedupe_candidates(list(new_selected) + revalidated_b)
+        # Rows failing today's gate remain private for audit/future stricter recovery;
+        # never publish them without passing the ordinary European R&I check.
+        mix_publication["pending_b"] = [x for x in pending_b if not final_ab_candidate_worthiness(x)]
+    else:
+        revalidated_b = []
 
     prev_a = previous.get("strand_a", []) if isinstance(previous.get("strand_a"), list) else []
     prev_b = previous.get("strand_b", []) if isinstance(previous.get("strand_b"), list) else []
@@ -24117,35 +24173,25 @@ def main() -> int:
     strand_b, expired_b_after_merge, extended_b_kept = enforce_two_tier_ab_window(strand_b, DATE_FLOOR, EXTENDED_DATE_FLOOR)
 
     relative_mix_release_stats: dict[str, Any] = {
-        "mode": "focused" if RADAR_QUICK_STRAND else "mixed_8_1_3",
+        "mode": "quality_gated_no_publication_cap",
+        "ratio_is_discovery_weight_only": True,
         "ledger_before": dict(mix_publication.get("published", {})),
         "new_a_before_release": sum(1 for x in strand_a if isinstance(x, dict) and x.get("new_this_scan")),
         "new_b_before_release": sum(1 for x in strand_b if isinstance(x, dict) and x.get("new_this_scan")),
+        "legacy_pending_b_revalidated": len(revalidated_b),
+        "legacy_pending_b_rejected_or_duplicate": len(pending_b) - len(revalidated_b),
     }
-    if not RADAR_QUICK_STRAND:
-        new_a_for_ratio = relative_mix_release_stats["new_a_before_release"]
+    if (not RADAR_QUICK_STRAND) or RADAR_QUICK_STRAND == "B":
         ledger_counts = mix_publication.get("published", {})
-        b_slots, target_b_total, projected_a = relative_mix_release_slots(ledger_counts, int(new_a_for_ratio), "B")
-        new_b_rows = [x for x in strand_b if isinstance(x, dict) and x.get("new_this_scan")]
-        new_b_rows.sort(key=rank_candidate)
-        keep_b_ids = {identity(internalize_previous(x)) for x in new_b_rows[:b_slots]}
-        deferred_b = [x for x in new_b_rows if identity(internalize_previous(x)) not in keep_b_ids]
-        if deferred_b:
-            strand_b = [
-                x for x in strand_b
-                if not (isinstance(x, dict) and x.get("new_this_scan") and identity(internalize_previous(x)) not in keep_b_ids)
-            ]
-        mix_publication["pending_b"] = _dedupe_pending_rows(deferred_b, signal=False)
+        _distance, target_b_total, projected_a = relative_mix_release_slots(
+            ledger_counts, relative_mix_release_stats["new_a_before_release"], "B",
+        )
         relative_mix_release_stats.update({
             "projected_a_total": projected_a,
-            "target_b_total": target_b_total,
-            "b_release_slots": b_slots,
-            "b_deferred": len(deferred_b),
+            "target_b_total_diagnostic_only": target_b_total,
+            "b_release_slots": relative_mix_release_stats["new_b_before_release"],
+            "b_deferred": 0,
         })
-    elif RADAR_QUICK_STRAND == "B":
-        # A focused B scan intentionally publishes the B work it finds.  The ledger below
-        # records that choice so subsequent mixed scans compensate toward 8:1:3.
-        mix_publication["pending_b"] = []
 
     # Preserve any previously accepted active record that ages out of the presentation
     # window by handing it to the archive seed before rebalancing.  Accepted history
@@ -24283,8 +24329,14 @@ def main() -> int:
 
     if (not RADAR_QUICK_STRAND) or RADAR_QUICK_STRAND == "C":
         pending_c = _dedupe_pending_rows(mix_publication.get("pending_c", []), signal=True)
-        if pending_c:
-            current_c.extend(pending_c)
+        revalidated_c = [
+            row for row in pending_c
+            if _saved_signal_passes(row)
+            and trusted_europe_c_source(row.get("source", ""), row.get("source_domain", ""), row.get("link", ""))
+        ]
+        current_c.extend(revalidated_c)
+        relative_mix_release_stats['legacy_pending_c_revalidated'] = len(revalidated_c)
+        relative_mix_release_stats['legacy_pending_c_failed_recheck'] = len(pending_c) - len(revalidated_c)
 
     current_c, c_quota_stats = select_hard_new_c_mix(current_c, prev_c)
     if not RADAR_QUICK_STRAND:
@@ -24311,7 +24363,7 @@ def main() -> int:
         })
     elif RADAR_QUICK_STRAND == "C":
         # A focused C scan is intentionally allowed to publish its own strand.  Main mixed
-        # scans will see that in the ledger and rebalance later rather than choking discovery.
+        # focused scans publish normally under the same EU R&I quality gates.
         mix_publication["pending_c"] = []
 
     strand_c = merge_signal_corpus(prev_c, current_c, now_iso)
@@ -24347,9 +24399,8 @@ def main() -> int:
         precursor_watch = [dict(x) for x in quick_strand_baseline.get("precursor_watch", []) if isinstance(x, dict)]
         signal_archive = [dict(x) for x in quick_strand_baseline.get(SIGNAL_ARCHIVE_KEY, []) if isinstance(x, dict)]
         c_quota_stats = {"eligible_c": 0, "selected_c": 0, "suppressed_c": 0, "quick_strand": RADAR_QUICK_STRAND}
-    # Update the persistent publication ledger only after final strand routing.  Focused
-    # scans are counted too: they may deliberately skew the public corpus for that invocation,
-    # and later mixed scans compensate rather than pretending those publications never happened.
+    # Keep the historical ledger for audit and discovery allocation statistics only.
+    # No future scan may use an old overrepresentation as a publication veto.
     final_mix_new = {
         "A": sum(1 for x in strand_a if isinstance(x, dict) and x.get("new_this_scan")),
         "B": sum(1 for x in strand_b if isinstance(x, dict) and x.get("new_this_scan")),
@@ -24372,7 +24423,7 @@ def main() -> int:
     state["relative_mix_publication"] = mix_publication
 
     # Strand C alone has finite, status-aware retention from first insertion; A/B/frontier are cumulative.
-    # Ratio balancing defers surplus valid C privately; it does not weaken C admission or discovery.
+    # Quality gates/novelty/retention still restrict C; ratios never defer admitted rows.
     c_share_removed = int(c_quota_stats.get("deferred_c", 0) or 0)
 
     # Risks, opportunities and external shocks are a separate analytical corpus, but their
@@ -25117,7 +25168,7 @@ def main() -> int:
             "b_method_foundational_discovery_from": B_METHOD_DATE_FLOOR.isoformat(),
             "b_method_discovery_from": B_METHOD_DATE_FLOOR.isoformat(),
             "quick_strand_mode": RADAR_QUICK_STRAND or "",
-            "target_item_mix": {"A": int(CONFIG.get("target_new_a_per_scan", 8) or 8), "B": int(CONFIG.get("target_new_b_per_scan", 1) or 1), "C": int(CONFIG.get("target_new_c_per_scan", 3) or 3), "hard_quota": False, "mode": "relative_release", "share_weights": target_mix_weights(), "release_stats": relative_mix_release_stats, "ab_quota_stats": hard_mix_stats, "c_quota_stats": c_quota_stats},
+            "target_item_mix": {"A": int(CONFIG.get("target_new_a_per_scan", 8) or 8), "B": int(CONFIG.get("target_new_b_per_scan", 1) or 1), "C": int(CONFIG.get("target_new_c_per_scan", 3) or 3), "hard_quota": False, "mode": "discovery_weights_no_release_cap", "share_weights": target_mix_weights(), "release_stats": relative_mix_release_stats, "ab_quota_stats": hard_mix_stats, "c_quota_stats": c_quota_stats},
             "budget_reached": overall_budget_hit,
             "partial_stage_budget_reached": partial_budget_hit,
             "runtime_seconds": round(time.time() - started, 1),
