@@ -146,6 +146,24 @@
       ],
       "purpose": "Priority-institution discovery recall: guarantee bounded early discovery attention for high-value European R&I institutional sources and add explicit first-party OECD/EIB/EIT routes while preserving the existing strict admission, relevance, provenance, novelty and deduplication gates; update the protected scanner fingerprint after validation.",
       "stage": "post-stage8-priority-institution-discovery-recall"
+    },
+    {
+      "stage": "post-stage8-eu-ri-yield-and-freeze-repair-2026-10-08",
+      "approved_files": [
+        "scripts/scan_radar.py",
+        "radar_config.json",
+        "scripts/run_scan_preflight_tests.py",
+        "reasoning-reform/baseline.json",
+        "tests/test_deferred_metadata_fair_retries.py",
+        "tests/test_eu_ri_recall_and_publication_repair.py",
+        "tests/test_v2473_mix_shares_not_caps.py",
+        "tests/test_v2476_exceptional_c_release.py",
+        "tests/test_v242_scanner_admission_repair.py",
+        "tests/test_scanner_features.py",
+        "tests/test_v241_strand_b_methods.py",
+        "tests/test_v246_criteria_repair.py"
+      ],
+      "purpose": "Correct the stale scanner fingerprint that blocked the claim-shadow workflow; make 8:1:3 discovery-only so valid EU R&I publications are not withheld by cumulative historic debt; repair DOI metadata retry fairness and state preservation; retain every ordinary European-scope, source-integrity, evidence, deduplication and retention gate. Fingerprint updated only after validating the scanner patch."
     }
   ],
   "captured_for_repository_version": "v25.1.0-evidence-linked-reader",
@@ -172,7 +190,7 @@
       "scripts/prepare_deep_scan_package.py": "1440ec604b2260ff026342481a84abf01dccb03d462f293b63056018e8fcf3a7"
     },
     "scanner_hard_core": {
-      "scripts/scan_radar.py": "daed43662bffec6880adc5987b48bcb84dffba04ea09ee4079772353e8263a4b"
+      "scripts/scan_radar.py": "8027b9b1ef8fd56ca5c5c8249c5d10c70fa8922f4207f9388d3dacfe8c873701"
     }
   },
   "raw_counts": {
