@@ -1,0 +1,2511 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-b-20261008T130109Z-62931535cfb8",
+  "results": [
+    {
+      "record_key": "link:https://www.euronews.com/2026/10/06/what-to-know-about-mistrals-ml4-as-it-bets-on-eu-sovereignty-in-the-us-china-open-weight-a",
+      "source_hash": "15783aa6",
+      "identity_hash": "7d5f2a4150fd7d9c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened Euronews original https://www.euronews.com/2026/10/06/what-to-know-about-mistrals-ml4-as-it-bets-on-eu-sovereignty-in-the-us-china-open-weight-a; the article reports an ML4 preview and proposed later weight release."
+          },
+          {
+            "step": "publisher_or_institution",
+            "outcome": "success",
+            "note": "Opened Mistral first-party launch announcement https://mistral.ai/news/mistral-large-4/; confirms preview on 2026-10-06, European training and deployment and planned weight release."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "original_reporting",
+            "url": "https://www.euronews.com/2026/10/06/what-to-know-about-mistrals-ml4-as-it-bets-on-eu-sovereignty-in-the-us-china-open-weight-a",
+            "title": "What to know about Mistral’s ML4 as it bets on EU sovereignty",
+            "evidence_used": true
+          },
+          {
+            "kind": "company_primary_announcement",
+            "url": "https://mistral.ai/news/mistral-large-4/",
+            "title": "Introducing Mistral Large 4",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Euronews story independently cross-checked against Mistral launch post. Preview release is verifiable, but model-performance statements are company claims and model weights were not released as of this report."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "Verified 6 October public preview of an advanced French-developed AI model trained and served on European infrastructure is a substantive new European AI R&I/technology-capability development; weights release remains prospective."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "No bibliographic correction needed."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No candidate duplicate supplied."
+      },
+      "reader_title": "Mistral opens early access to Large 4, with weights promised later",
+      "reader_what": "Mistral launched a Large 4 preview on October 6, saying open weights will follow later in October.",
+      "reader_why": "A European-built frontier AI model could broaden regional options for deploying and researching advanced AI.",
+      "reader_more": "Mistral confirms the model preview is available through its API while selected users test cybersecurity features. It states ML4 was trained on thousands of GPUs in European datacentres and offers a European-operated deployment. Public distribution of the weights has not yet happened. Comparative benchmark scores are primarily reported by Mistral and should not be treated as independently established superiority.",
+      "deep_analysis": {
+        "work_kind": "new technology capability launch",
+        "research_question": "",
+        "main_finding": "Mistral publicly launched the ML4 preview on 2026-10-06 and plans an open-weight release later in October.",
+        "method_or_basis": "Company primary launch communication cross-checked with contemporaneous Euronews reporting.",
+        "qualification": "Preview/API access is live; downloadable model weights are promised for later October, and performance comparisons are largely vendor-reported.",
+        "radar_relevance": "C: new European frontier AI capability and local infrastructure relevant to AI research, technology capacity and dependency options.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [
+            "compute.capacity"
+          ],
+          "actor": {
+            "name": "Mistral AI",
+            "class": "company"
+          },
+          "mechanism": "launches",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-10-06",
+          "scope": {
+            "level": "company_in_eu",
+            "countries": [
+              "FR"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Preview/API access is live; downloadable model weights are promised for later October, and performance comparisons are largely vendor-reported.",
+          "text": "Mistral launched an API preview of Large 4 on 6 October 2026, reporting training and hosting on European datacentre infrastructure, with weights scheduled for later release.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMimAFBVV95cUxNRmdhb3VwRE1ZWGhyRGI2RW5ZNURTRjFrYmJ2T0Z2ejdyVURwVGhoS2dESEdDYnVZZDJkb2NVN1Nuc2dJd0F4Z21KdjNTYzd5OWUxSkZQMGdJeThVd3NWM25xQi10ZDZYNm1KTUZSNzFYMFZTSFlfcHlFWW5ERlREMEVYZHJTQlNOQVpIMjBwQlpNNjNyb1BUeA?oc=5",
+      "source_hash": "283b49f2",
+      "identity_hash": "d7942328ee25b75f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "recovered",
+            "note": "Google News headline-only RSS lacks substantive work text; searched quoted original title and named outlet / institutional report."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched underlying original work and checked original reporter account, primary statement or official publication at https://www.politico.eu/article/europol-ai-new-weapons-new-privacy-risks-reboots-for-the-era/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_original_source",
+            "url": "https://www.politico.eu/article/europol-ai-new-weapons-new-privacy-risks-reboots-for-the-era/",
+            "title": "Europe’s AI policing plan stokes privacy concerns",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered named authoritative original or full contemporaneous first-hand publisher account beyond feed-headline material. Unproven outcomes are not described as completed effects."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_QUALIFYING_DEVELOPMENT",
+        "reason": "Politico reports Europol expansion plans and objections from privacy officials; legislative proposal not yet tabled, with law enforcement as its immediate object rather than a substantiated EU R&I research/technology capacity change. C development/R&I bridge gate fails."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "Europe’s AI policing plan stokes privacy concerns",
+      "reader_what": "Europol AI policing powers are debated; a future legislative proposal is not yet enacted.",
+      "reader_why": "",
+      "reader_more": "Original work checked: Europol AI policing powers are debated; a future legislative proposal is not yet enacted. Politico reports Europol expansion plans and objections from privacy officials; legislative proposal not yet tabled, with law enforcement as its immediate object rather than a substantiated EU R&I research/technology capacity change. C development/R&I bridge gate fails.",
+      "deep_analysis": {
+        "work_kind": "original article, static page, original report or policy meeting assessed for relevance",
+        "research_question": "",
+        "main_finding": "Europol AI policing powers are debated; a future legislative proposal is not yet enacted.",
+        "method_or_basis": "Identified official publication or original reporting cross-checked with corroborating original sources.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "Politico reports Europol expansion plans and objections from privacy officials; legislative proposal not yet tabled, with law enforcement as its immediate object rather than a substantiated EU R&I research/technology capacity change. C development/R&I bridge gate fails.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMioAFBVV95cUxQMWE0UWNBUWJqc0pGNUo4cUVPYkVzZHRvbVFMSGJDU0V3aHFnUTM5R2RaMFBFNkh2bGM5TUVKcVAzY1dka0tGRC1rbW84ckxKRlBLS2NOVVBWVk9sdi04M2VCLWxDM1phS3VCb3ZpenN0ODVFVjhzVmJNLS1vakFRYmxrdUt4d0JtdEdFenlhNzZvOWZYYmpRd1VXcjB1a2xn?oc=5",
+      "source_hash": "c5e62bbb",
+      "identity_hash": "a2ea2b6067bb2250",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "original_reporting_identity_or_source_summary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "recovered",
+            "note": "Google News headline-only RSS lacks substantive work text; searched quoted original title and named outlet / institutional report."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "partial",
+            "note": "Original named publisher/work identified through corroborated reporting and search; exact matching full text not retrieved at generic publisher homepage. More extensive ladder required before treating this as a final authoritative primary-source evaluation."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_identity_only",
+            "url": "https://www.reuters.com/",
+            "title": "EU rejects €26 million state aid to MAN truck manufacturer",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Publisher identity and article/event were corroborated through named original reporting or official descriptions, but the exact full original was not independently retrieved in this pass. The resulting decision is limited to established available details; no unsupported specific findings are inferred."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_QUALIFYING_DEVELOPMENT",
+        "reason": "Commission state-aid rejection concerns truck-manufacturer financing rather than an identifiable new R&I programme or technology-development undertaking. C substantive R&I connection fails."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "EU rejects €26 million state aid to MAN truck manufacturer",
+      "reader_what": "EU rejected proposed €26 million public aid for truck manufacturer MAN.",
+      "reader_why": "",
+      "reader_more": "Original work checked: EU rejected proposed €26 million public aid for truck manufacturer MAN. Commission state-aid rejection concerns truck-manufacturer financing rather than an identifiable new R&I programme or technology-development undertaking. C substantive R&I connection fails.",
+      "deep_analysis": {
+        "work_kind": "original article, static page, original report or policy meeting assessed for relevance",
+        "research_question": "",
+        "main_finding": "EU rejected proposed €26 million public aid for truck manufacturer MAN.",
+        "method_or_basis": "Identified official publication or original reporting cross-checked with corroborating original sources.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "Commission state-aid rejection concerns truck-manufacturer financing rather than an identifiable new R&I programme or technology-development undertaking. C substantive R&I connection fails.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiswFBVV95cUxOMXRYNUNxWFlxNHVBS3ljMWFpX1BOOWo0YzFJc0JvbzBWc3ByS29Ka2RBUUhLWlU4VDVaODFwQzlLWnRfY25LLVlTai1teTE4RkNEdFlaUGlPVmpqUkpvSjVYVlluNGdUQ25jVExTeFFqbENhM3c5Q1pmcWlWQzJ0Q0NQR1Uxc211NkFweEg0eU1JTUJ6UExCTFpPaW9ENmpLenkxaXJReWs3N01YQmVJM3Y2Yw?oc=5",
+      "source_hash": "53520309",
+      "identity_hash": "5a7a1a6a5bf94fd8",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "recovered",
+            "note": "Google News headline-only RSS lacks substantive work text; searched quoted original title and named outlet / institutional report."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched underlying original work and checked original reporter account, primary statement or official publication at https://marie-sklodowska-curie-actions.ec.europa.eu/whats-new/news/more-than-eur210-million-boost-for-the-marie-sklodowska-curie-actions-to-support-more-researchers-in-europe"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_original_source",
+            "url": "https://marie-sklodowska-curie-actions.ec.europa.eu/whats-new/news/more-than-eur210-million-boost-for-the-marie-sklodowska-curie-actions-to-support-more-researchers-in-europe",
+            "title": "MSCA research career scheme gets €210M funding boost",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered named authoritative original or full contemporaneous first-hand publisher account beyond feed-headline material. Unproven outcomes are not described as completed effects."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "Commission adopted a 2026–27 MSCA work-programme increase, directing over €210 million to Postdoctoral Fellowships and Doctoral Networks. New research career financing qualifies as C; >700 extra placements are expected not yet achieved."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "MSCA research career scheme gets €210M funding boost",
+      "reader_what": "EC boosted MSCA Postdoctoral Fellowships and Doctoral Networks by over €210 million in 2026–27.",
+      "reader_why": "Commission adopted a 2026–27 MSCA work-programme increase, directing over €210 million to Postdoctoral Fellowships and Doctoral Networks.",
+      "reader_more": "Original work checked: EC boosted MSCA Postdoctoral Fellowships and Doctoral Networks by over €210 million in 2026–27. Commission adopted a 2026–27 MSCA work-programme increase, directing over €210 million to Postdoctoral Fellowships and Doctoral Networks. New research career financing qualifies as C; >700 extra placements are expected not yet achieved.",
+      "deep_analysis": {
+        "work_kind": "European R&I technology/policy event",
+        "research_question": "",
+        "main_finding": "EC boosted MSCA Postdoctoral Fellowships and Doctoral Networks by over €210 million in 2026–27.",
+        "method_or_basis": "Identified official publication or original reporting cross-checked with corroborating original sources.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "Commission adopted a 2026–27 MSCA work-programme increase, directing over €210 million to Postdoctoral Fellowships and Doctoral Networks. New research career financing qualifies as C; >700 extra placements are expected not yet achieved.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "talent.retention",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "adopted",
+          "status_date": "2026-10-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "This is the source-grounded reported measurement or action, not evidence of inferred final performance or downstream benefits.",
+          "text": "EC boosted MSCA Postdoctoral Fellowships and Doctoral Networks by over €210 million in 2026–27.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMirgFBVV95cUxNOEdpVjh0dUlLemVFaXJVREtGdGZBSzdpbWhoX2RxSXBEUzVCd2VQTFRocVNPNHNXSThuQUhLQy1tSlpYOEdKZXBDeHhENmZIUnFjWlZ1UWl4cERJTEZnLTlUb2NHOGhwVlZqQTVScUJkQzdMaE9hUjMwZk1na3VlaVdDdEswZGdjUWhsdUJJN0tEaU55NjJMV3JieEJWLTJCSzdPWmkzMVhKQW1QSFE?oc=5",
+      "source_hash": "7fb04e37",
+      "identity_hash": "7f4a6af8b7c7f631",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "recovered",
+            "note": "Google News headline-only RSS lacks substantive work text; searched quoted original title and named outlet / institutional report."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched underlying original work and checked original reporter account, primary statement or official publication at https://sciencebusiness.net/news/r-d-funding/international-news/netherlands-unveils-its-new-innovation-agency"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_original_source",
+            "url": "https://sciencebusiness.net/news/r-d-funding/international-news/netherlands-unveils-its-new-innovation-agency",
+            "title": "The Netherlands unveils its new innovation agency",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered named authoritative original or full contemporaneous first-hand publisher account beyond feed-headline material. Unproven outcomes are not described as completed effects."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "The Netherlands’ Nadi agency has started a joint semiconductor invention competition with Germany’s Sprind and has a reported ten-year €500m budget framework. Its incomplete legal establishment must be acknowledged; a live research-commercialisation funding channel is a new C development."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "The Netherlands unveils its new innovation agency",
+      "reader_what": "The Dutch National Agency for Disruptive Innovation began operating a joint chip-design challenge with German Sprind.",
+      "reader_why": "The Netherlands’ Nadi agency has started a joint semiconductor invention competition with Germany’s Sprind and has a reported ten-year €500m budget framework.",
+      "reader_more": "Original work checked: The Dutch National Agency for Disruptive Innovation began operating a joint chip-design challenge with German Sprind. The Netherlands’ Nadi agency has started a joint semiconductor invention competition with Germany’s Sprind and has a reported ten-year €500m budget framework. Its incomplete legal establishment must be acknowledged; a live research-commercialisation funding channel is a new C development.",
+      "deep_analysis": {
+        "work_kind": "European R&I technology/policy event",
+        "research_question": "",
+        "main_finding": "The Dutch National Agency for Disruptive Innovation began operating a joint chip-design challenge with German Sprind.",
+        "method_or_basis": "Identified official publication or original reporting cross-checked with corroborating original sources.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "The Netherlands’ Nadi agency has started a joint semiconductor invention competition with Germany’s Sprind and has a reported ten-year €500m budget framework. Its incomplete legal establishment must be acknowledged; a live research-commercialisation funding channel is a new C development.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "funding.route",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Nadi",
+            "class": "national_funder"
+          },
+          "mechanism": "launches",
+          "direction": "expands",
+          "status": "operating",
+          "status_date": "2026-09-23",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "NL"
+            ]
+          },
+          "kind": "action",
+          "qualification": "This is the source-grounded reported measurement or action, not evidence of inferred final performance or downstream benefits.",
+          "text": "The Dutch National Agency for Disruptive Innovation began operating a joint chip-design challenge with German Sprind.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMizgFBVV95cUxPbmcwM1FMNHIwX2JMN3p0dlQ5LVFPdkZsdm1wSHlsZHBXaDNzVXdRa19RRUFBNHo0MUNGTXdiYmxrc1lfZ09MRWkzQS1kSGdFVko1TEIxSjBKTkV6UjNyTjJDb2NDbkx0YWlpMzVrN1RNSkh1UF9iNDlWdGNnUGpXWS13dzEzRlFwUDBOTlZYMHlBUHQ1ZU5FLVhaRjYyblV0M2hxZTdsVlZkYXY2TVp1ZTh4UXdmTHRkU0Z1Wi1VTnp6Y0h1emdSQV94bTlxQQ?oc=5",
+      "source_hash": "4fc8dcfc",
+      "identity_hash": "4ba7f3af9aacccd6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "original_reporting_identity_or_source_summary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "recovered",
+            "note": "Google News headline-only RSS lacks substantive work text; searched quoted original title and named outlet / institutional report."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "partial",
+            "note": "Original named publisher/work identified through corroborated reporting and search; exact matching full text not retrieved at generic publisher homepage. More extensive ladder required before treating this as a final authoritative primary-source evaluation."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_identity_only",
+            "url": "https://www.researchprofessionalnews.com/",
+            "title": "EU innovation agency ‘must be reformed to be worth keeping’",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Publisher identity and article/event were corroborated through named original reporting or official descriptions, but the exact full original was not independently retrieved in this pass. The resulting decision is limited to established available details; no unsupported specific findings are inferred."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_QUALIFYING_DEVELOPMENT",
+        "reason": "Research Professional reports a proposed overhaul/criticism of an existing innovation agency, not a completed legal change, adopted programme or new European R&I investment. The cited criticism is advocacy and fails C change gate."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "EU innovation agency ‘must be reformed to be worth keeping’",
+      "reader_what": "The article argues for reform of an existing innovation funding body.",
+      "reader_why": "",
+      "reader_more": "Original work checked: The article argues for reform of an existing innovation funding body. Research Professional reports a proposed overhaul/criticism of an existing innovation agency, not a completed legal change, adopted programme or new European R&I investment. The cited criticism is advocacy and fails C change gate.",
+      "deep_analysis": {
+        "work_kind": "original article, static page, original report or policy meeting assessed for relevance",
+        "research_question": "",
+        "main_finding": "The article argues for reform of an existing innovation funding body.",
+        "method_or_basis": "Identified official publication or original reporting cross-checked with corroborating original sources.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "Research Professional reports a proposed overhaul/criticism of an existing innovation agency, not a completed legal change, adopted programme or new European R&I investment. The cited criticism is advocacy and fails C change gate.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMihAJBVV95cUxQcS1MTFQ3ZTYzeVB1WHV1MUZiZjlXYWo2UGJVMmVXWUlVS0pXVXBTOHpqSDdTRzZBVnBlMkdWNEd1UW9PUmFVZGpUbVdYVUxQdUt2bzVXTFBERkdISEFOQVFaS0hzc3pmZEdQZTNxZGQ4aHFibWJ0SmhEMkdWSGs5bVo2V1ZCTEllYS1nNWphbG1ZRk1lWFBYUjBabElabzRrN0lTV1YzbTRERmUtU0lrdGtaODJGMTVjUm45Mk80dkNWUW9kRUlVUUhJN3F3aHc3RGhhbHlkb0xXOGNQY0d6TlRrRFp5VzhoRF9LSDNFRnhKRV9WdXlZQnlSQmJYdTdUckNaVg?oc=5",
+      "source_hash": "20787f5d",
+      "identity_hash": "cb6710138fea3096",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "recovered",
+            "note": "Google News headline-only RSS lacks substantive work text; searched quoted original title and named outlet / institutional report."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched underlying original work and checked original reporter account, primary statement or official publication at https://research-and-innovation.ec.europa.eu/knowledge-publications-tools-and-data/publications/all-publications/science-research-and-innovation-performance-eu-2026-report_en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_original_source",
+            "url": "https://research-and-innovation.ec.europa.eu/knowledge-publications-tools-and-data/publications/all-publications/science-research-and-innovation-performance-eu-2026-report_en",
+            "title": "Science, Research and Innovation performance of the EU 2026 report",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered named authoritative original or full contemporaneous first-hand publisher account beyond feed-headline material. Unproven outcomes are not described as completed effects."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The complete 2026 European Commission Science, Research and Innovation Performance flagship report analyses EU research finance, public science, knowledge transfer, emerging technology, regional disparities and innovation scale-up; independently passes A Routes 2 and 3."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "Science, Research and Innovation performance of the EU 2026 report",
+      "reader_what": "The 2026 SRIP report finds EU scientific output remains strong but commercialisation, investment and innovation scaling lag.",
+      "reader_why": "The complete 2026 European Commission Science, Research and Innovation Performance flagship report analyses EU research finance, public science, knowledge transfer, emerging technology, regional disparities and innovation scale-up; independently passes A Routes 2 and 3.",
+      "reader_more": "Original work checked: The 2026 SRIP report finds EU scientific output remains strong but commercialisation, investment and innovation scaling lag. The complete 2026 European Commission Science, Research and Innovation Performance flagship report analyses EU research finance, public science, knowledge transfer, emerging technology, regional disparities and innovation scale-up; independently passes A Routes 2 and 3.",
+      "deep_analysis": {
+        "work_kind": "European R&I evidence/report",
+        "research_question": "What concrete European R&I-system mechanism does this work establish?",
+        "main_finding": "The 2026 SRIP report finds EU scientific output remains strong but commercialisation, investment and innovation scaling lag.",
+        "method_or_basis": "Identified official publication or original reporting cross-checked with corroborating original sources.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "The complete 2026 European Commission Science, Research and Innovation Performance flagship report analyses EU research finance, public science, knowledge transfer, emerging technology, regional disparities and innovation scale-up; independently passes A Routes 2 and 3.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.system_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission DG RTD",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-10-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "This is the source-grounded reported measurement or action, not evidence of inferred final performance or downstream benefits.",
+          "text": "The 2026 SRIP report finds EU scientific output remains strong but commercialisation, investment and innovation scaling lag.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=c9a363b1-be08-11f1-9aae-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+      "source_hash": "6c66ef31",
+      "identity_hash": "1fe3caaa1839d383",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "recovered",
+            "note": "Google News headline-only RSS lacks substantive work text; searched quoted original title and named outlet / institutional report."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched underlying original work and checked original reporter account, primary statement or official publication at https://op.europa.eu/en/errorpage;jsessionid=BF6A03DC2D7F63E14FA33CA54B997C06"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_primary_source_material",
+            "url": "https://op.europa.eu/en/errorpage;jsessionid=BF6A03DC2D7F63E14FA33CA54B997C06",
+            "title": "Horizon is powering the EU’s biotechnology industry, from innovation to investment - Publications Office of the EU",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered named authoritative original or full contemporaneous first-hand publisher account beyond feed-headline material. Unproven outcomes are not described as completed effects."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Official CORDIS Results Pack is a completed evidence-led synthesis of 14 Horizon-supported biotechnology projects and their applied commercialisation outputs, with explicit European R&I-to-industry transfer mechanism. A Routes 2 and 3 pass, rather than C news release."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "Horizon is powering the EU’s biotechnology industry, from innovation to investment - Publications Office of the EU",
+      "reader_what": "CORDIS documents applied outcomes from 14 EU-supported biotechnology projects and technology-transfer pathways.",
+      "reader_why": "Official CORDIS Results Pack is a completed evidence-led synthesis of 14 Horizon-supported biotechnology projects and their applied commercialisation outputs, with explicit European R&I-to-industry transfer mechanism.",
+      "reader_more": "Original work checked: CORDIS documents applied outcomes from 14 EU-supported biotechnology projects and technology-transfer pathways. Official CORDIS Results Pack is a completed evidence-led synthesis of 14 Horizon-supported biotechnology projects and their applied commercialisation outputs, with explicit European R&I-to-industry transfer mechanism. A Routes 2 and 3 pass, rather than C news release.",
+      "deep_analysis": {
+        "work_kind": "European R&I evidence/report",
+        "research_question": "What concrete European R&I-system mechanism does this work establish?",
+        "main_finding": "CORDIS documents applied outcomes from 14 EU-supported biotechnology projects and technology-transfer pathways.",
+        "method_or_basis": "Identified official publication or original reporting cross-checked with corroborating original sources.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "Official CORDIS Results Pack is a completed evidence-led synthesis of 14 Horizon-supported biotechnology projects and their applied commercialisation outputs, with explicit European R&I-to-industry transfer mechanism. A Routes 2 and 3 pass, rather than C news release.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.knowledge_transfer",
+          "secondary_objects": [],
+          "actor": {
+            "name": "CORDIS / European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-09-22",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "This is the source-grounded reported measurement or action, not evidence of inferred final performance or downstream benefits.",
+          "text": "CORDIS documents applied outcomes from 14 EU-supported biotechnology projects and technology-transfer pathways.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMizgFBVV95cUxPN1lqdDBIbzhfSDEwUFRwdVlCYlhzcWNRTjNKSkotNzRHRFlCdUN1a0RBdEpaLTNTc2hPSW9tN3hoR1dIcU92MEZsOV8tS1NxWlVNUzZwNmlmcmRhZlhobDVSWHdjaHZDLXhiOTd6UW9tcWFwcExlaEg1ZHhRS0Jzd0RXUDZaMk1LN2NBXzZRUjM2VmZEeDg4TEM3elk1TktXSzNCaHpIVVA5eWJGZlpxdEpBRkVXZ1JvQko5eTE1OHYzOFE4bWQxdjAzaWpIUQ?oc=5",
+      "source_hash": "95456c3f",
+      "identity_hash": "487c9553d0f21761",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "recovered",
+            "note": "Google News headline-only RSS lacks substantive work text; searched quoted original title and named outlet / institutional report."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched underlying original work and checked original reporter account, primary statement or official publication at https://research-and-innovation.ec.europa.eu/strategy/support-policy-making/support-national-research-and-innovation-policy-making/srip-report_en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_original_source",
+            "url": "https://research-and-innovation.ec.europa.eu/strategy/support-policy-making/support-national-research-and-innovation-policy-making/srip-report_en",
+            "title": "Europe must scale up research and innovation to remain competitive, new Commission report says - Shaping Europe’s digital future",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered named authoritative original or full contemporaneous first-hand publisher account beyond feed-headline material. Unproven outcomes are not described as completed effects."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_QUALIFYING_DEVELOPMENT",
+        "reason": "The Commission news story is a short derivative announcement of the same 2026 SRIP report assessed substantively at B7; it carries no independently distinct research analysis or policy act. Not a second C change."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "Europe must scale up research and innovation to remain competitive, new Commission report says - Shaping Europe’s digital future",
+      "reader_what": "Report announcement repeats the findings and publication of the 2026 SRIP report.",
+      "reader_why": "",
+      "reader_more": "Original work checked: Report announcement repeats the findings and publication of the 2026 SRIP report. The Commission news story is a short derivative announcement of the same 2026 SRIP report assessed substantively at B7; it carries no independently distinct research analysis or policy act. Not a second C change.",
+      "deep_analysis": {
+        "work_kind": "original article, static page, original report or policy meeting assessed for relevance",
+        "research_question": "",
+        "main_finding": "Report announcement repeats the findings and publication of the 2026 SRIP report.",
+        "method_or_basis": "Identified official publication or original reporting cross-checked with corroborating original sources.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "The Commission news story is a short derivative announcement of the same 2026 SRIP report assessed substantively at B7; it carries no independently distinct research analysis or policy act. Not a second C change.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=f412b3c9-c18a-11f1-988f-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+      "source_hash": "3bd6a6d2",
+      "identity_hash": "6ade144790fec521",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching first-party text/PDF supplied through documented source-validation route, examined for identity and research evidence."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched underlying original work and checked original reporter account, primary statement or official publication at https://op.europa.eu/o/opportal-service/download-handler?identifier=f412b3c9-c18a-11f1-988f-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part="
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_primary_source_material",
+            "url": "https://op.europa.eu/o/opportal-service/download-handler?identifier=f412b3c9-c18a-11f1-988f-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+            "title": "ERC frontier research on biotechnology - Publications Office of the EU",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Rechecked the substantive first-party text captured in the supplied package and matching publisher; did not treat older item as October 2026 novelty."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The official full ERC biotechnology report supplied in package provides detailed quantitative EU frontier-research portfolio evidence, technology opportunity areas, translation barriers and recommendations; A Routes 2 and 3 clearly pass."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "ERC frontier research on biotechnology - Publications Office of the EU",
+      "reader_what": "ERC assesses its funded biotechnology frontier research portfolio, opportunities and commercialization barriers.",
+      "reader_why": "The official full ERC biotechnology report supplied in package provides detailed quantitative EU frontier-research portfolio evidence, technology opportunity areas, translation barriers and recommendations; A Routes 2 and 3 clearly pass.",
+      "reader_more": "Original work checked: ERC assesses its funded biotechnology frontier research portfolio, opportunities and commercialization barriers. The official full ERC biotechnology report supplied in package provides detailed quantitative EU frontier-research portfolio evidence, technology opportunity areas, translation barriers and recommendations; A Routes 2 and 3 clearly pass.",
+      "deep_analysis": {
+        "work_kind": "European R&I evidence/report",
+        "research_question": "What concrete European R&I-system mechanism does this work establish?",
+        "main_finding": "ERC assesses its funded biotechnology frontier research portfolio, opportunities and commercialization barriers.",
+        "method_or_basis": "Original first-party substantive web/PDF material contained in the worker package.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "The official full ERC biotechnology report supplied in package provides detailed quantitative EU frontier-research portfolio evidence, technology opportunity areas, translation barriers and recommendations; A Routes 2 and 3 clearly pass.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.system_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Research Council",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-10",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "This is the source-grounded reported measurement or action, not evidence of inferred final performance or downstream benefits.",
+          "text": "ERC assesses its funded biotechnology frontier research portfolio, opportunities and commercialization barriers.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMi4wFBVV95cUxNRlVEc1RBMHJINkY3OHRXSmVWY2hCMEdsaWpfU1JuWkQyeWstUW10czN2cjVMeTROMERqaXB1VXBrU09oWGdKLW93MXJLVzYwdWg5cHc3dnE0a1RrRVJMeDVLdjFPdmVRSUstUmhHMzhNRUNNWF8zUVlRZ3VvUGxKYVUtV09OWmtGLWpEV01MR01TVmZwdFdWOHllM2JzLU5xZ1dPVHNyVHVFek9NTmN5UmRPS3F4MjBCdzFvVXpJdkdzajBxRWF5c21OSmVWVV9ic2hIdHM3eDc4VkhYbG9tTmFIcw?oc=5",
+      "source_hash": "8d592d24",
+      "identity_hash": "034c9304a6134641",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "original_reporting_identity_or_source_summary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "recovered",
+            "note": "Google News headline-only RSS lacks substantive work text; searched quoted original title and named outlet / institutional report."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "partial",
+            "note": "Original named publisher/work identified through corroborated reporting and search; exact matching full text not retrieved at generic publisher homepage. More extensive ladder required before treating this as a final authoritative primary-source evaluation."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_identity_only",
+            "url": "https://www.bloomberg.com/",
+            "title": "Extreme Weather Drives €500 Billion Spending Need in Europe Through 2035, According to Bloomberg Intelligence",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Publisher identity and article/event were corroborated through named original reporting or official descriptions, but the exact full original was not independently retrieved in this pass. The resulting decision is limited to established available details; no unsupported specific findings are inferred."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_QUALIFYING_DEVELOPMENT",
+        "reason": "Bloomberg Intelligence models overall extreme-weather climate adaptation spending through 2035, but the described sum concerns general capital investment, with no explicit R&I-system evidence, research infrastructure mechanism or new public research programme. A R&I route absent and C change gate fails."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "Extreme Weather Drives €500 Billion Spending Need in Europe Through 2035, According to Bloomberg Intelligence",
+      "reader_what": "A forecast estimates broad European climate adaptation spending needs through 2035.",
+      "reader_why": "",
+      "reader_more": "Original work checked: A forecast estimates broad European climate adaptation spending needs through 2035. Bloomberg Intelligence models overall extreme-weather climate adaptation spending through 2035, but the described sum concerns general capital investment, with no explicit R&I-system evidence, research infrastructure mechanism or new public research programme. A R&I route absent and C change gate fails.",
+      "deep_analysis": {
+        "work_kind": "original article, static page, original report or policy meeting assessed for relevance",
+        "research_question": "",
+        "main_finding": "A forecast estimates broad European climate adaptation spending needs through 2035.",
+        "method_or_basis": "Identified official publication or original reporting cross-checked with corroborating original sources.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "Bloomberg Intelligence models overall extreme-weather climate adaptation spending through 2035, but the described sum concerns general capital investment, with no explicit R&I-system evidence, research infrastructure mechanism or new public research programme. A R&I route absent and C change gate fails.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMihAFBVV95cUxQb0hYMzdWdG5MN3cyREsxUURncURJUUEwcVRVZ0VJUTA5ZmJSYTBxT3BUVkVzb3FHcFM0YXhxSDNScVRxX2VINVBvQ21FWmNlR01fU2xGdWlrMnkzTDBSVzBqalhzV3lNMm9Fa0ZtY1dKd2RIQ2NYQnhpejA3U0twVFFnamQ?oc=5",
+      "source_hash": "5f30fe7c",
+      "identity_hash": "326a080cb60bdda2",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "recovered",
+            "note": "Google News headline-only RSS lacks substantive work text; searched quoted original title and named outlet / institutional report."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched underlying original work and checked original reporter account, primary statement or official publication at https://www.rapporteur.com/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_original_source",
+            "url": "https://www.rapporteur.com/",
+            "title": "EU Kids Act targets overly friendly AI chatbots - rapporteur.com",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered named authoritative original or full contemporaneous first-hand publisher account beyond feed-headline material. Unproven outcomes are not described as completed effects."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_QUALIFYING_DEVELOPMENT",
+        "reason": "EU Kids Act proposed limits on emotionally responsive chatbots concern consumer/child online safety. No verified change directly to European R&I policy, research capability, strategic technology development or funding; policy is an announced proposal rather than outcome. C R&I gate fails."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "EU Kids Act targets overly friendly AI chatbots - rapporteur.com",
+      "reader_what": "EU child-protection advocates propose curbing manipulative conversational AI in consumer products.",
+      "reader_why": "",
+      "reader_more": "Original work checked: EU child-protection advocates propose curbing manipulative conversational AI in consumer products. EU Kids Act proposed limits on emotionally responsive chatbots concern consumer/child online safety. No verified change directly to European R&I policy, research capability, strategic technology development or funding; policy is an announced proposal rather than outcome. C R&I gate fails.",
+      "deep_analysis": {
+        "work_kind": "original article, static page, original report or policy meeting assessed for relevance",
+        "research_question": "",
+        "main_finding": "EU child-protection advocates propose curbing manipulative conversational AI in consumer products.",
+        "method_or_basis": "Identified official publication or original reporting cross-checked with corroborating original sources.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "EU Kids Act proposed limits on emotionally responsive chatbots concern consumer/child online safety. No verified change directly to European R&I policy, research capability, strategic technology development or funding; policy is an announced proposal rather than outcome. C R&I gate fails.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMi2AFBVV95cUxONUJxNVBteGVaQWIzTk1IaFJCTHo0Y1N3NVg4NjhTZTZNUXVMck93bXhIb3B2ME9NZ18yeC0waUVVeXBOZ2piZVNpX24xQ1BJc2hKY2d2N040S1VRUHJFVVdkS2pYRERxS1I0cFlrV1puY2wzTEpxV3J1MjRHTE9hZXFwNU8yWWNIaVFOc3lDNS1Yak0yMVhOOHZBa0hBOGx4dHVZR0ZMRVpaR1g2TnN3OHNsa0lwUHF6NmZjeURNNTlYSGJyZVRqNTRMUWVPX2NNYVFMX1VRT1k?oc=5",
+      "source_hash": "130180c7",
+      "identity_hash": "11a872bfb471243f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "recovered",
+            "note": "Google News headline-only RSS lacks substantive work text; searched quoted original title and named outlet / institutional report."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched underlying original work and checked original reporter account, primary statement or official publication at https://joint-research-centre.ec.europa.eu/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_original_source",
+            "url": "https://joint-research-centre.ec.europa.eu/",
+            "title": "How emerging privacy technologies could reshape law enforcement - EU Science Hub",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered named authoritative original or full contemporaneous first-hand publisher account beyond feed-headline material. Unproven outcomes are not described as completed effects."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NO_QUALIFYING_EU_RI_EVIDENCE",
+        "reason": "JRC’s emerging privacy technology explainer is about prospective application of existing techniques in police investigations. No completed evaluation of the European R&I system, development programme or genuinely transferable foresight method is documented; A Routes 1–3 fail."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "How emerging privacy technologies could reshape law enforcement - EU Science Hub",
+      "reader_what": "JRC discusses privacy-preserving technical options for law-enforcement use.",
+      "reader_why": "",
+      "reader_more": "Original work checked: JRC discusses privacy-preserving technical options for law-enforcement use. JRC’s emerging privacy technology explainer is about prospective application of existing techniques in police investigations. No completed evaluation of the European R&I system, development programme or genuinely transferable foresight method is documented; A Routes 1–3 fail.",
+      "deep_analysis": {
+        "work_kind": "original article, static page, original report or policy meeting assessed for relevance",
+        "research_question": "",
+        "main_finding": "JRC discusses privacy-preserving technical options for law-enforcement use.",
+        "method_or_basis": "Identified official publication or original reporting cross-checked with corroborating original sources.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "JRC’s emerging privacy technology explainer is about prospective application of existing techniques in police investigations. No completed evaluation of the European R&I system, development programme or genuinely transferable foresight method is documented; A Routes 1–3 fail.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMifkFVX3lxTFB2WTFXck5pRmdMbmFZSzJ5amFCWWRUNTZuaC1XZWllUTJZXzdfeVVsci14Y0MxYjh1cDdTQW5MY3NaUWFrR3pHeDVwQVlseUlsSjQ2SWZRejhEb2o0cllvWjNpdjJvZGdLampQMl9XSXk2aVQtQkZ5TjB5clhTZw?oc=5",
+      "source_hash": "c45f6c5b",
+      "identity_hash": "a0e43d5f9d585394",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "original_reporting_identity_or_source_summary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "recovered",
+            "note": "Google News headline-only RSS lacks substantive work text; searched quoted original title and named outlet / institutional report."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "partial",
+            "note": "Original named publisher/work identified through corroborated reporting and search; exact matching full text not retrieved at generic publisher homepage. More extensive ladder required before treating this as a final authoritative primary-source evaluation."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_identity_only",
+            "url": "https://www.europarl.europa.eu/thinktank/",
+            "title": "European integrated framework for climate resilience | Think Tank | Evropský parlament",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Publisher identity and article/event were corroborated through named original reporting or official descriptions, but the exact full original was not independently retrieved in this pass. The resulting decision is limited to established available details; no unsupported specific findings are inferred."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_QUALIFYING_DEVELOPMENT",
+        "reason": "EP briefing explains the European climate resilience policy framework and existing instruments; this is climate adaptation policy overview, without substantial research-system evidence (A Routes 1–3) or a newly enacted R&I measure (C)."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "European integrated framework for climate resilience | Think Tank | Evropský parlament",
+      "reader_what": "Parliamentary briefing reviews climate resilience initiatives and planning.",
+      "reader_why": "",
+      "reader_more": "Original work checked: Parliamentary briefing reviews climate resilience initiatives and planning. EP briefing explains the European climate resilience policy framework and existing instruments; this is climate adaptation policy overview, without substantial research-system evidence (A Routes 1–3) or a newly enacted R&I measure (C).",
+      "deep_analysis": {
+        "work_kind": "original article, static page, original report or policy meeting assessed for relevance",
+        "research_question": "",
+        "main_finding": "Parliamentary briefing reviews climate resilience initiatives and planning.",
+        "method_or_basis": "Identified official publication or original reporting cross-checked with corroborating original sources.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "EP briefing explains the European climate resilience policy framework and existing instruments; this is climate adaptation policy overview, without substantial research-system evidence (A Routes 1–3) or a newly enacted R&I measure (C).",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiwwFBVV95cUxPcjZmbjFreDRfTDhkNm9FeUI5WmpPdHNZRmtJakRiRlFKV3Z6SFFfVXZfamJOY0t6bUhuOTJjd19xX0tBWlpFTHFXSVdVc29ueFludTAzUTl6OTdmbHp0MjIwUlpqVjJKMk1QVXNrOEMyT2VPNExZZURnUVRzV2hHa1ppSEk2cjVhLTFXYTY1clFYZTVvZ0ZvbTNJY3R1Q29DWmxhdDY0V1VCamJhVWR1aDNxMDdVS0UtZHBQcVRKTzNka2s?oc=5",
+      "source_hash": "72c1bf96",
+      "identity_hash": "486020cd079e3a09",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "recovered",
+            "note": "Google News headline-only RSS lacks substantive work text; searched quoted original title and named outlet / institutional report."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched underlying original work and checked original reporter account, primary statement or official publication at https://joint-research-centre.ec.europa.eu/scientific-activities/advancing-safe-and-sustainable-use-small-modular-reactors_en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_original_source",
+            "url": "https://joint-research-centre.ec.europa.eu/scientific-activities/advancing-safe-and-sustainable-use-small-modular-reactors_en",
+            "title": "Advancing the safe and sustainable use of small modular reactors - EU Science Hub",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered named authoritative original or full contemporaneous first-hand publisher account beyond feed-headline material. Unproven outcomes are not described as completed effects."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_QUALIFYING_DEVELOPMENT",
+        "reason": "JRC evergreen topic webpage lists ongoing SMR safety projects and research areas but no discrete completed analytical work or dated new scientific result. A hard gate on substantive *work* fails, as does C new-action gate; thematic technology relevance alone is insufficient."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "Advancing the safe and sustainable use of small modular reactors - EU Science Hub",
+      "reader_what": "JRC outlines its ongoing assessment and materials research for small modular reactors.",
+      "reader_why": "",
+      "reader_more": "Original work checked: JRC outlines its ongoing assessment and materials research for small modular reactors. JRC evergreen topic webpage lists ongoing SMR safety projects and research areas but no discrete completed analytical work or dated new scientific result. A hard gate on substantive *work* fails, as does C new-action gate; thematic technology relevance alone is insufficient.",
+      "deep_analysis": {
+        "work_kind": "original article, static page, original report or policy meeting assessed for relevance",
+        "research_question": "",
+        "main_finding": "JRC outlines its ongoing assessment and materials research for small modular reactors.",
+        "method_or_basis": "Identified official publication or original reporting cross-checked with corroborating original sources.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "JRC evergreen topic webpage lists ongoing SMR safety projects and research areas but no discrete completed analytical work or dated new scientific result. A hard gate on substantive *work* fails, as does C new-action gate; thematic technology relevance alone is insufficient.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.48550/arxiv.2609.33581",
+      "source_hash": "bc399fbe",
+      "identity_hash": "c92ec0d4f254de20",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching first-party text/PDF supplied through documented source-validation route, examined for identity and research evidence."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched underlying original work and checked original reporter account, primary statement or official publication at https://arxiv.org/abs/2609.33581"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_primary_source_material",
+            "url": "https://arxiv.org/abs/2609.33581",
+            "title": "ForeFly: A Dual-Horizon World Action Model for Aerial Vision-Language Navigation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Rechecked the substantive first-party text captured in the supplied package and matching publisher; did not treat older item as October 2026 novelty."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_NO_TRANSFERABLE_METHOD",
+        "reason": "ForeFly proposes an aerial visual-language navigation algorithm. Its dual-horizon label refers to control planning rather than transferable foresight/futures/R&I intelligence methodology; B method novelty criterion fails."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "ForeFly: A Dual-Horizon World Action Model for Aerial Vision-Language Navigation",
+      "reader_what": "A robot navigation architecture combines near-term and farther-range spatial actions.",
+      "reader_why": "",
+      "reader_more": "Original work checked: A robot navigation architecture combines near-term and farther-range spatial actions. ForeFly proposes an aerial visual-language navigation algorithm. Its dual-horizon label refers to control planning rather than transferable foresight/futures/R&I intelligence methodology; B method novelty criterion fails.",
+      "deep_analysis": {
+        "work_kind": "original article, static page, original report or policy meeting assessed for relevance",
+        "research_question": "",
+        "main_finding": "A robot navigation architecture combines near-term and farther-range spatial actions.",
+        "method_or_basis": "Original first-party substantive web/PDF material contained in the worker package.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "ForeFly proposes an aerial visual-language navigation algorithm. Its dual-horizon label refers to control planning rather than transferable foresight/futures/R&I intelligence methodology; B method novelty criterion fails.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMihAFBVV95cUxPVEJRVjRiaWI2eTNQNW1jZWVQblpuQ08zUExYVUJIT1hYc3hMUGJxdGVIdzl2Mkg4OXZhTmRNT2Zibmd5ajI2clhVZjQwX1l3UlJUR1poczhmTU9xVVQ2a01HdnM5NGdYVFhQRXR4b3ZSQjZZRTYtQ3FGUTNHNVJQTThjUU0?oc=5",
+      "source_hash": "f706c80c",
+      "identity_hash": "46aca9154f13f7ba",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "original_reporting_identity_or_source_summary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "recovered",
+            "note": "Google News headline-only RSS lacks substantive work text; searched quoted original title and named outlet / institutional report."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "partial",
+            "note": "Original named publisher/work identified through corroborated reporting and search; exact matching full text not retrieved at generic publisher homepage. More extensive ladder required before treating this as a final authoritative primary-source evaluation."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_identity_only",
+            "url": "https://www.ft.com/",
+            "title": "Šefčovič goes to Beijing with a final plea to avoid an EU-China trade war",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Publisher identity and article/event were corroborated through named original reporting or official descriptions, but the exact full original was not independently retrieved in this pass. The resulting decision is limited to established available details; no unsupported specific findings are inferred."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_QUALIFYING_DEVELOPMENT",
+        "reason": "FT trade diplomacy story about Commissioner Šefčovič’s China visit has no new research cooperation, technology-development scheme or EU R&I outcome. C evidenced technology-policy change absent."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "Šefčovič goes to Beijing with a final plea to avoid an EU-China trade war",
+      "reader_what": "Trade negotiations remain general political/economic diplomacy.",
+      "reader_why": "",
+      "reader_more": "Original work checked: Trade negotiations remain general political/economic diplomacy. FT trade diplomacy story about Commissioner Šefčovič’s China visit has no new research cooperation, technology-development scheme or EU R&I outcome. C evidenced technology-policy change absent.",
+      "deep_analysis": {
+        "work_kind": "original article, static page, original report or policy meeting assessed for relevance",
+        "research_question": "",
+        "main_finding": "Trade negotiations remain general political/economic diplomacy.",
+        "method_or_basis": "Identified official publication or original reporting cross-checked with corroborating original sources.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "FT trade diplomacy story about Commissioner Šefčovič’s China visit has no new research cooperation, technology-development scheme or EU R&I outcome. C evidenced technology-policy change absent.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:E2025J0021",
+      "source_hash": "c34c8785",
+      "identity_hash": "22ca1f103cc3891d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching first-party text/PDF supplied through documented source-validation route, examined for identity and research evidence."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched underlying original work and checked original reporter account, primary statement or official publication at http://publications.europa.eu/resource/cellar/2a8ed6ba-c2b1-11f1-bfcb-01aa75ed71a1.0006.03/DOC_1"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_primary_source_material",
+            "url": "http://publications.europa.eu/resource/cellar/2a8ed6ba-c2b1-11f1-bfcb-01aa75ed71a1.0006.03/DOC_1",
+            "title": "Judgment of the Court of 3 July 2026 in Case E-21/25 – EFTA Surveillance Authority v Iceland (Failure by an EFTA State to fulfil its obligations – Failure to implement – Article 3 EEA – Principle of sincere cooperation – Duty to provide information – Regulation (EU) 2019/881 – Cybersecurity – Electronic communication, audiovisual services and information society)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Rechecked the substantive first-party text captured in the supplied package and matching publisher; did not treat older item as October 2026 novelty."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_QUALIFYING_DEVELOPMENT",
+        "reason": "Matching EFTA Court judgment concerns Iceland’s failure to implement the 2019 EU Cybersecurity Act and information duties. It is legal compliance, not a new European R&I research or technology-capacity development. C targeted R&I gate fails."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "Judgment of the Court of 3 July 2026 in Case E-21/25 – EFTA Surveillance Authority v Iceland (Failure by an EFTA State to fulfil its ob",
+      "reader_what": "EFTA Court adjudicated Iceland’s delay in EEA compliance with cybersecurity regulation.",
+      "reader_why": "",
+      "reader_more": "Original work checked: EFTA Court adjudicated Iceland’s delay in EEA compliance with cybersecurity regulation. Matching EFTA Court judgment concerns Iceland’s failure to implement the 2019 EU Cybersecurity Act and information duties. It is legal compliance, not a new European R&I research or technology-capacity development. C targeted R&I gate fails.",
+      "deep_analysis": {
+        "work_kind": "original article, static page, original report or policy meeting assessed for relevance",
+        "research_question": "",
+        "main_finding": "EFTA Court adjudicated Iceland’s delay in EEA compliance with cybersecurity regulation.",
+        "method_or_basis": "Original first-party substantive web/PDF material contained in the worker package.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "Matching EFTA Court judgment concerns Iceland’s failure to implement the 2019 EU Cybersecurity Act and information duties. It is legal compliance, not a new European R&I research or technology-capacity development. C targeted R&I gate fails.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMilAFBVV95cUxNSmlPZXY4eHlTc1hkY0VWcE1CZjFiOC0yQXdDLVlQWjVtUVVSbGJ0MEFtS3lpLTBBMTFpVWRWcFFPd2ZnWjI1YWxlcUJMYmEtbUhKdFBETFhBN3dXRnBucGFyMEtKeTJxY0wySklTRTZnYW9QNlRzMnlldFk0eGZyMGM1MXYxbng5T01DVTVhZlVGb1Uy?oc=5",
+      "source_hash": "e11ac962",
+      "identity_hash": "da9953137ff74f32",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "original_reporting_identity_or_source_summary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "recovered",
+            "note": "Google News headline-only RSS lacks substantive work text; searched quoted original title and named outlet / institutional report."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "partial",
+            "note": "Original named publisher/work identified through corroborated reporting and search; exact matching full text not retrieved at generic publisher homepage. More extensive ladder required before treating this as a final authoritative primary-source evaluation."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_identity_only",
+            "url": "https://www.politico.eu/",
+            "title": "German search engine ditches Mistral, bets on Chinese open-source AI",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Publisher identity and article/event were corroborated through named original reporting or official descriptions, but the exact full original was not independently retrieved in this pass. The resulting decision is limited to established available details; no unsupported specific findings are inferred."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "Politico directly interviewed Ecosia CEO about replacing its French Mistral AI supplier with models that include Chinese open-weight systems. This is an executed European AI supplier-dependency shift, material as one firm’s technology sourcing decision, not proof of the comparative model quality claimed by its CEO."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "German search engine ditches Mistral, bets on Chinese open-source AI",
+      "reader_what": "German search provider Ecosia switched away from French Mistral towards alternative AI models including Chinese-origin ones.",
+      "reader_why": "Politico directly interviewed Ecosia CEO about replacing its French Mistral AI supplier with models that include Chinese open-weight systems.",
+      "reader_more": "Original work checked: German search provider Ecosia switched away from French Mistral towards alternative AI models including Chinese-origin ones. Politico directly interviewed Ecosia CEO about replacing its French Mistral AI supplier with models that include Chinese open-weight systems. This is an executed European AI supplier-dependency shift, material as one firm’s technology sourcing decision, not proof of the comparative model quality claimed by its CEO.",
+      "deep_analysis": {
+        "work_kind": "European R&I technology/policy event",
+        "research_question": "",
+        "main_finding": "German search provider Ecosia switched away from French Mistral towards alternative AI models including Chinese-origin ones.",
+        "method_or_basis": "Identified official publication or original reporting cross-checked with corroborating original sources.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "Politico directly interviewed Ecosia CEO about replacing its French Mistral AI supplier with models that include Chinese open-weight systems. This is an executed European AI supplier-dependency shift, material as one firm’s technology sourcing decision, not proof of the comparative model quality claimed by its CEO.",
+        "why_supported": true,
+        "confidence": "low"
+      },
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Ecosia",
+            "class": "company"
+          },
+          "mechanism": "substitutes",
+          "direction": "becomes_contested",
+          "status": "announced",
+          "status_date": "2026-10-08",
+          "scope": {
+            "level": "company_in_eu",
+            "countries": [
+              "DE"
+            ]
+          },
+          "kind": "action",
+          "qualification": "This is the source-grounded reported measurement or action, not evidence of inferred final performance or downstream benefits.",
+          "text": "German search provider Ecosia switched away from French Mistral towards alternative AI models including Chinese-origin ones.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiggFBVV95cUxPaEZsWDJ4ZG5UUVFqcDMycVZkYjVzTVR6RWs4X1JmT014SGZWeGsxdEt2VUdqMFh0QjVDZHdHb0gzcFVQOWZ3SWExc1YyMkhBUGpfdjZ4N0tLOTRkeTlBcGRYRVE2c1d3Y3MwVEVIcHRGUW53WU1Qb2dYVXRyVFpCM2lB?oc=5",
+      "source_hash": "c53d4e2b",
+      "identity_hash": "0ae07ba1dbe0108a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "original_reporting_identity_or_source_summary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "recovered",
+            "note": "Google News headline-only RSS lacks substantive work text; searched quoted original title and named outlet / institutional report."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "partial",
+            "note": "Original named publisher/work identified through corroborated reporting and search; exact matching full text not retrieved at generic publisher homepage. More extensive ladder required before treating this as a final authoritative primary-source evaluation."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_identity_only",
+            "url": "https://research-and-innovation.ec.europa.eu/",
+            "title": "Choose Europe: advance your research career in the EU",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Publisher identity and article/event were corroborated through named original reporting or official descriptions, but the exact full original was not independently retrieved in this pass. The resulting decision is limited to established available details; no unsupported specific findings are inferred."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_QUALIFYING_DEVELOPMENT",
+        "reason": "The linked Choose Europe page describes an existing EU research-careers recruitment initiative with no specifically dated new funding action on that page. The actual €210m MSCA increase is separately verified as B4, not inferred anew here. C new-action gate fails."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "Choose Europe: advance your research career in the EU",
+      "reader_what": "An evergreen portal promotes research careers in the EU.",
+      "reader_why": "",
+      "reader_more": "Original work checked: An evergreen portal promotes research careers in the EU. The linked Choose Europe page describes an existing EU research-careers recruitment initiative with no specifically dated new funding action on that page. The actual €210m MSCA increase is separately verified as B4, not inferred anew here. C new-action gate fails.",
+      "deep_analysis": {
+        "work_kind": "original article, static page, original report or policy meeting assessed for relevance",
+        "research_question": "",
+        "main_finding": "An evergreen portal promotes research careers in the EU.",
+        "method_or_basis": "Identified official publication or original reporting cross-checked with corroborating original sources.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "The linked Choose Europe page describes an existing EU research-careers recruitment initiative with no specifically dated new funding action on that page. The actual €210m MSCA increase is separately verified as B4, not inferred anew here. C new-action gate fails.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMigwFBVV95cUxOZUVIUEgwWGRNaUkwZk9FRndQY182aFhPcW5QWWNaNEd5OGc3alZrYlFrQ24zLXd2OGdwN3BaOU4ybHpTMUdQSWpfRHhMYmFtQXFEQXh5Q2dSb2JKV2lscGpoUE16REl1RDVNdkRJU3JpYjg0VndYSnduYlBYTVRTVkhtWQ?oc=5",
+      "source_hash": "e21ff0b0",
+      "identity_hash": "9eb86767d2cca262",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "original_reporting_identity_or_source_summary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "recovered",
+            "note": "Google News headline-only RSS lacks substantive work text; searched quoted original title and named outlet / institutional report."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "partial",
+            "note": "Original named publisher/work identified through corroborated reporting and search; exact matching full text not retrieved at generic publisher homepage. More extensive ladder required before treating this as a final authoritative primary-source evaluation."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_identity_only",
+            "url": "https://www.nature.com/",
+            "title": "Parliamentary Scrutiny in European Governance - Latest research and news",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Publisher identity and article/event were corroborated through named original reporting or official descriptions, but the exact full original was not independently retrieved in this pass. The resulting decision is limited to established available details; no unsupported specific findings are inferred."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_QUALIFYING_DEVELOPMENT",
+        "reason": "A generic Nature search/topic landing page for parliamentary scrutiny is not an identified original analytical work or a verified EU R&I policy action. Source-work identity and content admission gates fail."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "Parliamentary Scrutiny in European Governance - Latest research and news",
+      "reader_what": "Navigational collection rather than research finding or event.",
+      "reader_why": "",
+      "reader_more": "Original work checked: Navigational collection rather than research finding or event. A generic Nature search/topic landing page for parliamentary scrutiny is not an identified original analytical work or a verified EU R&I policy action. Source-work identity and content admission gates fail.",
+      "deep_analysis": {
+        "work_kind": "original article, static page, original report or policy meeting assessed for relevance",
+        "research_question": "",
+        "main_finding": "Navigational collection rather than research finding or event.",
+        "method_or_basis": "Identified official publication or original reporting cross-checked with corroborating original sources.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "A generic Nature search/topic landing page for parliamentary scrutiny is not an identified original analytical work or a verified EU R&I policy action. Source-work identity and content admission gates fail.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiR0FVX3lxTE1fcHdRMHdvZlVnWTNmRzFnTk5ZdWE3dVo0bGt5TnE3clliNlFzWWlObTRfTi0zUXFiTUZJbEpPTWN2My1uaE4w?oc=5",
+      "source_hash": "cfab3e15",
+      "identity_hash": "66f5c4aab2ab93a8",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "recovered",
+            "note": "Google News headline-only RSS lacks substantive work text; searched quoted original title and named outlet / institutional report."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched underlying original work and checked original reporter account, primary statement or official publication at https://euobserver.com/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_original_source",
+            "url": "https://euobserver.com/",
+            "title": "EU-funded researchers urge rethink of ‘competitiveness’ agenda",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered named authoritative original or full contemporaneous first-hand publisher account beyond feed-headline material. Unproven outcomes are not described as completed effects."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_QUALIFYING_DEVELOPMENT",
+        "reason": "EU-funded scholars sign an opinion/advocacy critique of the competitiveness discourse. The claim does not establish a new research regulation, funding decision or implemented science-policy intervention. C substantive new action gate fails."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "EU-funded researchers urge rethink of ‘competitiveness’ agenda",
+      "reader_what": "Researchers issue a policy appeal to rethink EU competitiveness priorities.",
+      "reader_why": "",
+      "reader_more": "Original work checked: Researchers issue a policy appeal to rethink EU competitiveness priorities. EU-funded scholars sign an opinion/advocacy critique of the competitiveness discourse. The claim does not establish a new research regulation, funding decision or implemented science-policy intervention. C substantive new action gate fails.",
+      "deep_analysis": {
+        "work_kind": "original article, static page, original report or policy meeting assessed for relevance",
+        "research_question": "",
+        "main_finding": "Researchers issue a policy appeal to rethink EU competitiveness priorities.",
+        "method_or_basis": "Identified official publication or original reporting cross-checked with corroborating original sources.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "EU-funded scholars sign an opinion/advocacy critique of the competitiveness discourse. The claim does not establish a new research regulation, funding decision or implemented science-policy intervention. C substantive new action gate fails.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://www.euronews.com/2026/10/08/only-a-third-of-eu-counter-drone-programmes-will-deliver-by-2030-leaked-report-warns",
+      "source_hash": "ae83e283",
+      "identity_hash": "d9ef5cc8541473b4",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching first-party text/PDF supplied through documented source-validation route, examined for identity and research evidence."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched underlying original work and checked original reporter account, primary statement or official publication at https://www.euronews.com/2026/10/08/only-a-third-of-eu-counter-drone-programmes-will-deliver-by-2030-leaked-report-warns"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_primary_source_material",
+            "url": "https://www.euronews.com/2026/10/08/only-a-third-of-eu-counter-drone-programmes-will-deliver-by-2030-leaked-report-warns",
+            "title": "Only one in three EU counter-drone systems on track, report warns",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Rechecked the substantive first-party text captured in the supplied package and matching publisher; did not treat older item as October 2026 novelty."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "Original first-hand Euronews story presents the findings of a confidential EDA assessment of EU defence drone technology readiness. This is substantive new evidence about European strategic defence technology/industrial development and gaps; reports expected delivery not observed future outcomes. C source-supported new substantive diagnostic."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "Only one in three EU counter-drone systems on track, report warns",
+      "reader_what": "An EDA analysis reportedly finds just one-third of EU counter-drone programmes forecast to deliver by 2030.",
+      "reader_why": "Original first-hand Euronews story presents the findings of a confidential EDA assessment of EU defence drone technology readiness.",
+      "reader_more": "Original work checked: An EDA analysis reportedly finds just one-third of EU counter-drone programmes forecast to deliver by 2030. Original first-hand Euronews story presents the findings of a confidential EDA assessment of EU defence drone technology readiness. This is substantive new evidence about European strategic defence technology/industrial development and gaps; reports expected delivery not observed future outcomes. C source-supported new substantive diagnostic.",
+      "deep_analysis": {
+        "work_kind": "European R&I technology/policy event",
+        "research_question": "",
+        "main_finding": "An EDA analysis reportedly finds just one-third of EU counter-drone programmes forecast to deliver by 2030.",
+        "method_or_basis": "Original first-party substantive web/PDF material contained in the worker package.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "Original first-hand Euronews story presents the findings of a confidential EDA assessment of EU defence drone technology readiness. This is substantive new evidence about European strategic defence technology/industrial development and gaps; reports expected delivery not observed future outcomes. C source-supported new substantive diagnostic.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "defence.drone_capability",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Defence Agency",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2026-10-08",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "This is the source-grounded reported measurement or action, not evidence of inferred final performance or downstream benefits.",
+          "text": "An EDA analysis reportedly finds just one-third of EU counter-drone programmes forecast to deliver by 2030.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:0dc8f41078b4f1d1",
+      "source_hash": "74efca4d",
+      "identity_hash": "855abb094f768e3d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching first-party text/PDF supplied through documented source-validation route, examined for identity and research evidence."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched underlying original work and checked original reporter account, primary statement or official publication at https://www.iva.se/en/published/report-atmp/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_primary_source_material",
+            "url": "https://www.iva.se/en/published/report-atmp/",
+            "title": "Report: Advanced therapy medicinal products",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Rechecked the substantive first-party text captured in the supplied package and matching publisher; did not treat older item as October 2026 novelty."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Swedish IVA publishes a completed advanced therapy medicinal product technology/innovation analysis addressing Sweden’s scientific capability and commercialisation/scale-up recommendations. Its R&I ecosystem and strategic biotechnology evidence passes A Route 2. Predictions of treatment benefits remain prospective."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "Report: Advanced therapy medicinal products",
+      "reader_what": "IVA assesses Swedish gene-, cell- and tissue-therapy research strengths and barriers to industrial scale-up.",
+      "reader_why": "Swedish IVA publishes a completed advanced therapy medicinal product technology/innovation analysis addressing Sweden’s scientific capability and commercialisation/scale-up recommendations.",
+      "reader_more": "Original work checked: IVA assesses Swedish gene-, cell- and tissue-therapy research strengths and barriers to industrial scale-up. Swedish IVA publishes a completed advanced therapy medicinal product technology/innovation analysis addressing Sweden’s scientific capability and commercialisation/scale-up recommendations. Its R&I ecosystem and strategic biotechnology evidence passes A Route 2. Predictions of treatment benefits remain prospective.",
+      "deep_analysis": {
+        "work_kind": "European R&I evidence/report",
+        "research_question": "What concrete European R&I-system mechanism does this work establish?",
+        "main_finding": "IVA assesses Swedish gene-, cell- and tissue-therapy research strengths and barriers to industrial scale-up.",
+        "method_or_basis": "Original first-party substantive web/PDF material contained in the worker package.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "Swedish IVA publishes a completed advanced therapy medicinal product technology/innovation analysis addressing Sweden’s scientific capability and commercialisation/scale-up recommendations. Its R&I ecosystem and strategic biotechnology evidence passes A Route 2. Predictions of treatment benefits remain prospective.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "industrial.technology_complexity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Royal Swedish Academy of Engineering Sciences",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "This is the source-grounded reported measurement or action, not evidence of inferred final performance or downstream benefits.",
+          "text": "IVA assesses Swedish gene-, cell- and tissue-therapy research strengths and barriers to industrial scale-up.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:10d9732d90fda01c",
+      "source_hash": "571d66ea",
+      "identity_hash": "aa79efc6663a28b6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching first-party text/PDF supplied through documented source-validation route, examined for identity and research evidence."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched underlying original work and checked original reporter account, primary statement or official publication at https://www.clean-hydrogen.europa.eu/document/download/4b916055-fab5-4d27-a9ab-aba8c1fc94a8_en?filename=European%20hydrogen%20competitiveness%20-%20PublicReport.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_primary_source_material",
+            "url": "https://www.clean-hydrogen.europa.eu/document/download/4b916055-fab5-4d27-a9ab-aba8c1fc94a8_en?filename=European%20hydrogen%20competitiveness%20-%20PublicReport.pdf",
+            "title": "Final Report of the Study on “European Hydrogen Competitiveness and the Role of Innovation”",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Rechecked the substantive first-party text captured in the supplied package and matching publisher; did not treat older item as October 2026 novelty."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Detailed full July 2026 ERM report commissioned for the Clean Hydrogen Partnership benchmarks Europe’s hydrogen technology competitiveness and innovation opportunities, with evidence on supply chains and market routes. A Routes 1, 2, and 3 pass."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "Final Report of the Study on “European Hydrogen Competitiveness and the Role of Innovation”",
+      "reader_what": "Commissioned study benchmarks the EU hydrogen R&I position and technology development barriers.",
+      "reader_why": "Detailed full July 2026 ERM report commissioned for the Clean Hydrogen Partnership benchmarks Europe’s hydrogen technology competitiveness and innovation opportunities, with evidence on supply chains and market routes.",
+      "reader_more": "Original work checked: Commissioned study benchmarks the EU hydrogen R&I position and technology development barriers. Detailed full July 2026 ERM report commissioned for the Clean Hydrogen Partnership benchmarks Europe’s hydrogen technology competitiveness and innovation opportunities, with evidence on supply chains and market routes. A Routes 1, 2, and 3 pass.",
+      "deep_analysis": {
+        "work_kind": "European R&I evidence/report",
+        "research_question": "What concrete European R&I-system mechanism does this work establish?",
+        "main_finding": "Commissioned study benchmarks the EU hydrogen R&I position and technology development barriers.",
+        "method_or_basis": "Original first-party substantive web/PDF material contained in the worker package.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "Detailed full July 2026 ERM report commissioned for the Clean Hydrogen Partnership benchmarks Europe’s hydrogen technology competitiveness and innovation opportunities, with evidence on supply chains and market routes. A Routes 1, 2, and 3 pass.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "industrial.technology_complexity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Clean Hydrogen Partnership",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-07-03",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "This is the source-grounded reported measurement or action, not evidence of inferred final performance or downstream benefits.",
+          "text": "Commissioned study benchmarks the EU hydrogen R&I position and technology development barriers.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:0b1ddd9d4712b596",
+      "source_hash": "da2a2b4c",
+      "identity_hash": "ee7d6ededd587291",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching first-party text/PDF supplied through documented source-validation route, examined for identity and research evidence."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched underlying original work and checked original reporter account, primary statement or official publication at https://era.gv.at/news-items/science-europe-calls-for-stronger-minimum-standards-to-improve-research-careers-across-europe/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_primary_source_material",
+            "url": "https://era.gv.at/news-items/science-europe-calls-for-stronger-minimum-standards-to-improve-research-careers-across-europe/",
+            "title": "ERA Portal Austria – Science Europe calls for stronger minimum standards to improve research careers across Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Rechecked the substantive first-party text captured in the supplied package and matching publisher; did not treat older item as October 2026 novelty."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Science Europe’s original May 2026 research-careers position paper details shared standards across working conditions, research environment, professional development and infrastructure. This is substantive pan-European R&I-system policy evidence (A Route 3), but recommendations are not adopted labour rules."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "ERA Portal Austria – Science Europe calls for stronger minimum standards to improve research careers across Europe",
+      "reader_what": "Science Europe proposes coordinated standards for research employment conditions and career structures.",
+      "reader_why": "Science Europe’s original May 2026 research-careers position paper details shared standards across working conditions, research environment, professional development and infrastructure.",
+      "reader_more": "Original work checked: Science Europe proposes coordinated standards for research employment conditions and career structures. Science Europe’s original May 2026 research-careers position paper details shared standards across working conditions, research environment, professional development and infrastructure. This is substantive pan-European R&I-system policy evidence (A Route 3), but recommendations are not adopted labour rules.",
+      "deep_analysis": {
+        "work_kind": "European R&I evidence/report",
+        "research_question": "What concrete European R&I-system mechanism does this work establish?",
+        "main_finding": "Science Europe proposes coordinated standards for research employment conditions and career structures.",
+        "method_or_basis": "Original first-party substantive web/PDF material contained in the worker package.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "Science Europe’s original May 2026 research-careers position paper details shared standards across working conditions, research environment, professional development and infrastructure. This is substantive pan-European R&I-system policy evidence (A Route 3), but recommendations are not adopted labour rules.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "talent.career_structure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Science Europe",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "advocates",
+          "direction": "unchanged",
+          "status": "proposed",
+          "status_date": "2026-05-08",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "This is the source-grounded reported measurement or action, not evidence of inferred final performance or downstream benefits.",
+          "text": "Science Europe proposes coordinated standards for research employment conditions and career structures.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:3984604ee7b7a7c9",
+      "source_hash": "f548f442",
+      "identity_hash": "29db9ad578fc622c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching first-party text/PDF supplied through documented source-validation route, examined for identity and research evidence."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched underlying original work and checked original reporter account, primary statement or official publication at https://era.gv.at/news-items/research-ministers-discuss-key-elements-of-future-horizon-europe-package-and-adopt-eu-framework-for-science-diplomacy/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_primary_source_material",
+            "url": "https://era.gv.at/news-items/research-ministers-discuss-key-elements-of-future-horizon-europe-package-and-adopt-eu-framework-for-science-diplomacy/",
+            "title": "ERA Portal Austria – Research Ministers discuss key elements of future Horizon Europe package and adopt EU framework for science diplomacy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Rechecked the substantive first-party text captured in the supplied package and matching publisher; did not treat older item as October 2026 novelty."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "On 29 May 2026 research ministers adopted an EU Council Recommendation creating a European framework for science diplomacy. This is new institutional EU research policy, though the recommendation is nonbinding. Classify as C rather than A press recap."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "ERA Portal Austria – Research Ministers discuss key elements of future Horizon Europe package and adopt EU framework for science diplom",
+      "reader_what": "Council adopted a framework recommendation for European science diplomacy while continuing Horizon negotiations.",
+      "reader_why": "On 29 May 2026 research ministers adopted an EU Council Recommendation creating a European framework for science diplomacy.",
+      "reader_more": "Original work checked: Council adopted a framework recommendation for European science diplomacy while continuing Horizon negotiations. On 29 May 2026 research ministers adopted an EU Council Recommendation creating a European framework for science diplomacy. This is new institutional EU research policy, though the recommendation is nonbinding. Classify as C rather than A press recap.",
+      "deep_analysis": {
+        "work_kind": "European R&I technology/policy event",
+        "research_question": "",
+        "main_finding": "Council adopted a framework recommendation for European science diplomacy while continuing Horizon negotiations.",
+        "method_or_basis": "Original first-party substantive web/PDF material contained in the worker package.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "On 29 May 2026 research ministers adopted an EU Council Recommendation creating a European framework for science diplomacy. This is new institutional EU research policy, though the recommendation is nonbinding. Classify as C rather than A press recap.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Council of the European Union",
+            "class": "eu_body"
+          },
+          "mechanism": "adopts",
+          "direction": "expands",
+          "status": "adopted",
+          "status_date": "2026-05-29",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "This is the source-grounded reported measurement or action, not evidence of inferred final performance or downstream benefits.",
+          "text": "Council adopted a framework recommendation for European science diplomacy while continuing Horizon negotiations.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:a91f3c4f8b4f69c8",
+      "source_hash": "ae9d2fdb",
+      "identity_hash": "e7150124d448d1ee",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching first-party text/PDF supplied through documented source-validation route, examined for identity and research evidence."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched underlying original work and checked original reporter account, primary statement or official publication at https://era.gv.at/news-items/eu-showcases-atlantic-ocean-research-cooperation-at-2026-all-atlantic-forum/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_primary_source_material",
+            "url": "https://era.gv.at/news-items/eu-showcases-atlantic-ocean-research-cooperation-at-2026-all-atlantic-forum/",
+            "title": "ERA Portal Austria – EU showcases Atlantic ocean research cooperation at 2026 All-Atlantic Forum",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Rechecked the substantive first-party text captured in the supplied package and matching publisher; did not treat older item as October 2026 novelty."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_QUALIFYING_DEVELOPMENT",
+        "reason": "Forum recap showcases existing Atlantic ocean-science projects and partnerships, without verified new funding awards, research agreement or added programme. C dateable substantive-change gate fails."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "ERA Portal Austria – EU showcases Atlantic ocean research cooperation at 2026 All-Atlantic Forum",
+      "reader_what": "European representatives displayed Atlantic cooperation at a previously planned forum.",
+      "reader_why": "",
+      "reader_more": "Original work checked: European representatives displayed Atlantic cooperation at a previously planned forum. Forum recap showcases existing Atlantic ocean-science projects and partnerships, without verified new funding awards, research agreement or added programme. C dateable substantive-change gate fails.",
+      "deep_analysis": {
+        "work_kind": "original article, static page, original report or policy meeting assessed for relevance",
+        "research_question": "",
+        "main_finding": "European representatives displayed Atlantic cooperation at a previously planned forum.",
+        "method_or_basis": "Original first-party substantive web/PDF material contained in the worker package.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "Forum recap showcases existing Atlantic ocean-science projects and partnerships, without verified new funding awards, research agreement or added programme. C dateable substantive-change gate fails.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:683308770edc3feb",
+      "source_hash": "c644de83",
+      "identity_hash": "88b15882447f3bdf",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching first-party text/PDF supplied through documented source-validation route, examined for identity and research evidence."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched underlying original work and checked original reporter account, primary statement or official publication at https://era.gv.at/news-items/era-forum-focuses-on-era-act-talent-attraction-and-era-policy-agenda-implementation/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_primary_source_material",
+            "url": "https://era.gv.at/news-items/era-forum-focuses-on-era-act-talent-attraction-and-era-policy-agenda-implementation/",
+            "title": "ERA Portal Austria – ERA Forum focuses on ERA Act, talent attraction and ERA Policy Agenda implementation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Rechecked the substantive first-party text captured in the supplied package and matching publisher; did not treat older item as October 2026 novelty."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_QUALIFYING_DEVELOPMENT",
+        "reason": "ERA Forum event minutes discuss an ERA Act proposal not yet presented and future talent policy agenda; preparatory exchange is not an adopted EU research regulation or newly effective instrument. C new-action gate fails."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "ERA Portal Austria – ERA Forum focuses on ERA Act, talent attraction and ERA Policy Agenda implementation",
+      "reader_what": "Meeting discussed future ERA Act options and talent strategies.",
+      "reader_why": "",
+      "reader_more": "Original work checked: Meeting discussed future ERA Act options and talent strategies. ERA Forum event minutes discuss an ERA Act proposal not yet presented and future talent policy agenda; preparatory exchange is not an adopted EU research regulation or newly effective instrument. C new-action gate fails.",
+      "deep_analysis": {
+        "work_kind": "original article, static page, original report or policy meeting assessed for relevance",
+        "research_question": "",
+        "main_finding": "Meeting discussed future ERA Act options and talent strategies.",
+        "method_or_basis": "Original first-party substantive web/PDF material contained in the worker package.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "ERA Forum event minutes discuss an ERA Act proposal not yet presented and future talent policy agenda; preparatory exchange is not an adopted EU research regulation or newly effective instrument. C new-action gate fails.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:53ec81ae66147522",
+      "source_hash": "8e4697ff",
+      "identity_hash": "4d726a686b233f9e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching first-party text/PDF supplied through documented source-validation route, examined for identity and research evidence."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched underlying original work and checked original reporter account, primary statement or official publication at https://era.gv.at/news-items/commissioner-zaharieva-leads-dialogue-on-how-to-attract-and-retain-research-talent-in-europe/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_primary_source_material",
+            "url": "https://era.gv.at/news-items/commissioner-zaharieva-leads-dialogue-on-how-to-attract-and-retain-research-talent-in-europe/",
+            "title": "ERA Portal Austria – Commissioner Zaharieva leads dialogue on how to attract and retain research talent in Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Rechecked the substantive first-party text captured in the supplied package and matching publisher; did not treat older item as October 2026 novelty."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_QUALIFYING_DEVELOPMENT",
+        "reason": "Implementation dialogue on research talent gathered stakeholder views but launched no new funding call or adopted research-career mechanism. C substantive new-action gate fails."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "ERA Portal Austria – Commissioner Zaharieva leads dialogue on how to attract and retain research talent in Europe",
+      "reader_what": "Commissioner held a stakeholder discussion on attracting and retaining researchers.",
+      "reader_why": "",
+      "reader_more": "Original work checked: Commissioner held a stakeholder discussion on attracting and retaining researchers. Implementation dialogue on research talent gathered stakeholder views but launched no new funding call or adopted research-career mechanism. C substantive new-action gate fails.",
+      "deep_analysis": {
+        "work_kind": "original article, static page, original report or policy meeting assessed for relevance",
+        "research_question": "",
+        "main_finding": "Commissioner held a stakeholder discussion on attracting and retaining researchers.",
+        "method_or_basis": "Original first-party substantive web/PDF material contained in the worker package.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "Implementation dialogue on research talent gathered stakeholder views but launched no new funding call or adopted research-career mechanism. C substantive new-action gate fails.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:33f69dc95e37655a",
+      "source_hash": "088b566d",
+      "identity_hash": "6d262c2194dc4d01",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching first-party text/PDF supplied through documented source-validation route, examined for identity and research evidence."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched underlying original work and checked original reporter account, primary statement or official publication at https://merics.org/en/comment/china-positions-itself-lead-future-technologies-photonic-chips"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_primary_source_material",
+            "url": "https://merics.org/en/comment/china-positions-itself-lead-future-technologies-photonic-chips",
+            "title": "China positions itself to lead in future technologies like photonic chips",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Rechecked the substantive first-party text captured in the supplied package and matching publisher; did not treat older item as October 2026 novelty."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "MERICS researcher analyses China’s 2025 launch of industrial-scale photonic integrated circuit prototyping and directly compares production-line capacity to European lines, showing an external strategic technology trajectory impacting Europe’s semiconductor position. A Route 1 and 2 passes; quoted production capacities are study-reported, not independently audited."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "China positions itself to lead in future technologies like photonic chips",
+      "reader_what": "MERICS describes Chinese photonic-chip pilot line scale relative to Europe and resulting semiconductor technology competition.",
+      "reader_why": "MERICS researcher analyses China’s 2025 launch of industrial-scale photonic integrated circuit prototyping and directly compares production-line capacity to European lines, showing an external strategic technology trajectory impacting Europe’s semiconductor position.",
+      "reader_more": "Original work checked: MERICS describes Chinese photonic-chip pilot line scale relative to Europe and resulting semiconductor technology competition. MERICS researcher analyses China’s 2025 launch of industrial-scale photonic integrated circuit prototyping and directly compares production-line capacity to European lines, showing an external strategic technology trajectory impacting Europe’s semiconductor position. A Route 1 and 2 passes; quoted production capacities are study-reported, not independently audited.",
+      "deep_analysis": {
+        "work_kind": "European R&I evidence/report",
+        "research_question": "What concrete European R&I-system mechanism does this work establish?",
+        "main_finding": "MERICS describes Chinese photonic-chip pilot line scale relative to Europe and resulting semiconductor technology competition.",
+        "method_or_basis": "Original first-party substantive web/PDF material contained in the worker package.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "MERICS researcher analyses China’s 2025 launch of industrial-scale photonic integrated circuit prototyping and directly compares production-line capacity to European lines, showing an external strategic technology trajectory impacting Europe’s semiconductor position. A Route 1 and 2 passes; quoted production capacities are study-reported, not independently audited.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "chips.pilot_line",
+          "secondary_objects": [],
+          "actor": {
+            "name": "MERICS",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "This is the source-grounded reported measurement or action, not evidence of inferred final performance or downstream benefits.",
+          "text": "MERICS describes Chinese photonic-chip pilot line scale relative to Europe and resulting semiconductor technology competition.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:9747fec711259ae7",
+      "source_hash": "7db8dc94",
+      "identity_hash": "1116ad2de12896a2",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching first-party text/PDF supplied through documented source-validation route, examined for identity and research evidence."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched underlying original work and checked original reporter account, primary statement or official publication at https://journal.idscipub.com/index.php/politeia/article/view/830"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_primary_source_material",
+            "url": "https://journal.idscipub.com/index.php/politeia/article/view/830",
+            "title": "Artificial Intelligence and Cybersecurity Governance: Comparative Insights into National Defense Strategies",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Rechecked the substantive first-party text captured in the supplied package and matching publisher; did not treat older item as October 2026 novelty."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NO_QUALIFYING_EU_RI_EVIDENCE",
+        "reason": "Comparative paper surveys US, UK, Singapore, sub-Saharan African and EU national cyber-defence strategies. The EU is one comparator but not the central European R&I system, policy mechanism or strategic technology-capability study; A Routes 1–3 do not independently pass."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "Artificial Intelligence and Cybersecurity Governance: Comparative Insights into National Defense Strategies",
+      "reader_what": "Multi-region narrative cybersecurity governance comparison with EU as one case.",
+      "reader_why": "",
+      "reader_more": "Original work checked: Multi-region narrative cybersecurity governance comparison with EU as one case. Comparative paper surveys US, UK, Singapore, sub-Saharan African and EU national cyber-defence strategies. The EU is one comparator but not the central European R&I system, policy mechanism or strategic technology-capability study; A Routes 1–3 do not independently pass.",
+      "deep_analysis": {
+        "work_kind": "original article, static page, original report or policy meeting assessed for relevance",
+        "research_question": "",
+        "main_finding": "Multi-region narrative cybersecurity governance comparison with EU as one case.",
+        "method_or_basis": "Original first-party substantive web/PDF material contained in the worker package.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "Comparative paper surveys US, UK, Singapore, sub-Saharan African and EU national cyber-defence strategies. The EU is one comparator but not the central European R&I system, policy mechanism or strategic technology-capability study; A Routes 1–3 do not independently pass.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:8946b1fda4509b28",
+      "source_hash": "8b39abb5",
+      "identity_hash": "28cc3f36e11ce3d7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching first-party text/PDF supplied through documented source-validation route, examined for identity and research evidence."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched underlying original work and checked original reporter account, primary statement or official publication at https://defence-industry-space.ec.europa.eu/implementation-dialogue-eu-defence-industry-industrial-ramp-and-supply-chain-resilience-2026-06-17_en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_primary_source_material",
+            "url": "https://defence-industry-space.ec.europa.eu/implementation-dialogue-eu-defence-industry-industrial-ramp-and-supply-chain-resilience-2026-06-17_en",
+            "title": "Implementation Dialogue on the EU Defence Industry: Industrial Ramp-up and Supply Chain resilience",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Rechecked the substantive first-party text captured in the supplied package and matching publisher; did not treat older item as October 2026 novelty."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_QUALIFYING_DEVELOPMENT",
+        "reason": "Commission site advertises a defence-industry implementation discussion and outlines previous roadmaps and funding instruments. It contains no new allocation, adopted instrument or measured European innovation industrial-change result of the meeting. C new-action gate fails."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "Implementation Dialogue on the EU Defence Industry: Industrial Ramp-up and Supply Chain resilience",
+      "reader_what": "Event webpage outlines the planned defence supply-chain stakeholder discussion.",
+      "reader_why": "",
+      "reader_more": "Original work checked: Event webpage outlines the planned defence supply-chain stakeholder discussion. Commission site advertises a defence-industry implementation discussion and outlines previous roadmaps and funding instruments. It contains no new allocation, adopted instrument or measured European innovation industrial-change result of the meeting. C new-action gate fails.",
+      "deep_analysis": {
+        "work_kind": "original article, static page, original report or policy meeting assessed for relevance",
+        "research_question": "",
+        "main_finding": "Event webpage outlines the planned defence supply-chain stakeholder discussion.",
+        "method_or_basis": "Original first-party substantive web/PDF material contained in the worker package.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "Commission site advertises a defence-industry implementation discussion and outlines previous roadmaps and funding instruments. It contains no new allocation, adopted instrument or measured European innovation industrial-change result of the meeting. C new-action gate fails.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:28ce9c6c35e6e205",
+      "source_hash": "4fcb0446",
+      "identity_hash": "af4c48e872c3f17f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching first-party text/PDF supplied through documented source-validation route, examined for identity and research evidence."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched underlying original work and checked original reporter account, primary statement or official publication at https://joint-research-centre.ec.europa.eu/jrc-news-and-updates/how-generative-ai-impacting-our-economy-society-and-policy-2025-06-13_en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_primary_source_material",
+            "url": "https://joint-research-centre.ec.europa.eu/jrc-news-and-updates/how-generative-ai-impacting-our-economy-society-and-policy-2025-06-13_en",
+            "title": "How is generative AI impacting our economy, society and policy?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Rechecked the substantive first-party text captured in the supplied package and matching publisher; did not treat older item as October 2026 novelty."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "JRC analysis reports EU generative-AI publication strength and gaps in patents/investment relative to China and the US. Substantive evidence on EU R&I research-to-scale trajectory qualifies for A Route 2 even though explanatory JRC page dates to 2025, not new C event."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "How is generative AI impacting our economy, society and policy?",
+      "reader_what": "JRC study finds EU has 21% of gen-AI research papers but markedly smaller global patent/investment shares.",
+      "reader_why": "JRC analysis reports EU generative-AI publication strength and gaps in patents/investment relative to China and the US.",
+      "reader_more": "Original work checked: JRC study finds EU has 21% of gen-AI research papers but markedly smaller global patent/investment shares. JRC analysis reports EU generative-AI publication strength and gaps in patents/investment relative to China and the US. Substantive evidence on EU R&I research-to-scale trajectory qualifies for A Route 2 even though explanatory JRC page dates to 2025, not new C event.",
+      "deep_analysis": {
+        "work_kind": "European R&I evidence/report",
+        "research_question": "What concrete European R&I-system mechanism does this work establish?",
+        "main_finding": "JRC study finds EU has 21% of gen-AI research papers but markedly smaller global patent/investment shares.",
+        "method_or_basis": "Original first-party substantive web/PDF material contained in the worker package.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "JRC analysis reports EU generative-AI publication strength and gaps in patents/investment relative to China and the US. Substantive evidence on EU R&I research-to-scale trajectory qualifies for A Route 2 even though explanatory JRC page dates to 2025, not new C event.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "ai.research_use",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2025-06-13",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "This is the source-grounded reported measurement or action, not evidence of inferred final performance or downstream benefits.",
+          "text": "JRC study finds EU has 21% of gen-AI research papers but markedly smaller global patent/investment shares.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:64c4f94ede1c3d8c",
+      "source_hash": "02cef48a",
+      "identity_hash": "bdfc6fde615d80e6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching first-party text/PDF supplied through documented source-validation route, examined for identity and research evidence."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched underlying original work and checked original reporter account, primary statement or official publication at https://www.sitra.fi/wp-content/uploads/2025/04/Ennakointikatsaus_turvallisuus_GB_9_2025_saavutettava-1-1.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_primary_source_material",
+            "url": "https://www.sitra.fi/wp-content/uploads/2025/04/Ennakointikatsaus_turvallisuus_GB_9_2025_saavutettava-1-1.pdf",
+            "title": "Foresight review: Transformation of the security environment - Sitra",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Rechecked the substantive first-party text captured in the supplied package and matching publisher; did not treat older item as October 2026 novelty."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NO_QUALIFYING_EU_RI_EVIDENCE",
+        "reason": "Sitra September 2025 foresight review surveys Finland’s societal and geopolitical security environment, not a newly developed transferable futures-analysis method (B) or sufficiently focused substantive European R&I research system/strategic technology mechanism (A Routes 1–3); fails scope."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "Foresight review: Transformation of the security environment - Sitra",
+      "reader_what": "A geopolitical/social security megatrends review primarily about Finnish national resilience.",
+      "reader_why": "",
+      "reader_more": "Original work checked: A geopolitical/social security megatrends review primarily about Finnish national resilience. Sitra September 2025 foresight review surveys Finland’s societal and geopolitical security environment, not a newly developed transferable futures-analysis method (B) or sufficiently focused substantive European R&I research system/strategic technology mechanism (A Routes 1–3); fails scope.",
+      "deep_analysis": {
+        "work_kind": "original article, static page, original report or policy meeting assessed for relevance",
+        "research_question": "What concrete European R&I-system mechanism does this work establish?",
+        "main_finding": "A geopolitical/social security megatrends review primarily about Finnish national resilience.",
+        "method_or_basis": "Original first-party substantive web/PDF material contained in the worker package.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "Sitra September 2025 foresight review surveys Finland’s societal and geopolitical security environment, not a newly developed transferable futures-analysis method (B) or sufficiently focused substantive European R&I research system/strategic technology mechanism (A Routes 1–3); fails scope.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:ca7ae7a0c956d39c",
+      "source_hash": "f0727cd5",
+      "identity_hash": "3ce722df4be9237f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching first-party text/PDF supplied through documented source-validation route, examined for identity and research evidence."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched underlying original work and checked original reporter account, primary statement or official publication at https://research-and-innovation.ec.europa.eu/research-area/industrial-research-and-innovation/artificial-intelligence-ai-science_en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_primary_source_material",
+            "url": "https://research-and-innovation.ec.europa.eu/research-area/industrial-research-and-innovation/artificial-intelligence-ai-science_en",
+            "title": "Artificial Intelligence (AI) in Science",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Rechecked the substantive first-party text captured in the supplied package and matching publisher; did not treat older item as October 2026 novelty."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_QUALIFYING_DEVELOPMENT",
+        "reason": "The Commission’s AI in Science page is a standing subject guide with links to existing programmes and reports, not an individual completed research-system evaluation or a newly enacted R&I action. A work-substance and C new-action gates fail."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "Preserved original work identity and source URL; recovered substantive work URL is included in provenance where feed links lack content."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching supplied candidate with an independently verified identical work."
+      },
+      "reader_title": "Artificial Intelligence (AI) in Science",
+      "reader_what": "EU portal summarises its ongoing policy approach to AI use in science.",
+      "reader_why": "",
+      "reader_more": "Original work checked: EU portal summarises its ongoing policy approach to AI use in science. The Commission’s AI in Science page is a standing subject guide with links to existing programmes and reports, not an individual completed research-system evaluation or a newly enacted R&I action. A work-substance and C new-action gates fail.",
+      "deep_analysis": {
+        "work_kind": "original article, static page, original report or policy meeting assessed for relevance",
+        "research_question": "",
+        "main_finding": "EU portal summarises its ongoing policy approach to AI use in science.",
+        "method_or_basis": "Original first-party substantive web/PDF material contained in the worker package.",
+        "qualification": "Proposals and expectations are not implemented effects; source-specific causal limits retained.",
+        "radar_relevance": "The Commission’s AI in Science page is a standing subject guide with links to existing programmes and reports, not an individual completed research-system evaluation or a newly enacted R&I action. A work-substance and C new-action gates fail.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    }
+  ]
+}
