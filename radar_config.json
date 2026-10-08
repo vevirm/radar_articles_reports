@@ -498,7 +498,10 @@
     {
       "name": "European Parliament / STOA",
       "domain": "europarl.europa.eu",
-      "tier": 1
+      "tier": 1,
+      "feeds": [
+        "https://www.europarl.europa.eu/thinktank/en/rss/search.html"
+      ]
     },
     {
       "name": "ESPAS",
@@ -3069,6 +3072,7 @@
     },
     "europarl.europa.eu": {
       "hub_paths": [
+        "/thinktank/en/home.html",
         "/stoa/en/publications/search",
         "/thinktank/en/research/advanced-search",
         "/thinktank/en/home",
@@ -3092,6 +3096,14 @@
         "assessment",
         "analysis",
         "foresight"
+      ],
+      "dated_publication_hubs": [
+        "/stoa/en/publications/search",
+        "/thinktank/en/home.html",
+        "/thinktank/en/home"
+      ],
+      "dated_publication_feeds": [
+        "https://www.europarl.europa.eu/thinktank/en/rss/search.html"
       ]
     },
     "consilium.europa.eu": {
@@ -3212,10 +3224,17 @@
         "technology",
         "science",
         "geoeconomics"
+      ],
+      "dated_publication_hubs": [
+        "/publications/working-papers",
+        "/publications/policy-briefs",
+        "/publications"
       ]
     },
     "oecd.org": {
       "hub_paths": [
+        "/en/publications/reports.html",
+        "/en/publications/briefs.html",
         "/en/publications.html",
         "/en/topics/science-technology-and-innovation.html",
         "/en/networks/research-and-innovation-careers-observatory.html",
@@ -3239,6 +3258,11 @@
         "digital",
         "artificial-intelligence",
         "indicators"
+      ],
+      "dated_publication_hubs": [
+        "/en/publications/reports.html",
+        "/en/publications/briefs.html",
+        "/en/publications.html"
       ]
     },
     "eib.org": {
@@ -3291,6 +3315,7 @@
     },
     "esfri.eu": {
       "hub_paths": [
+        "/library",
         "/publications/",
         "/policy-docs",
         "/publications/policy-documents",
@@ -3311,10 +3336,17 @@
         "monitoring",
         "performance",
         "industrial"
+      ],
+      "dated_publication_hubs": [
+        "/library",
+        "/publications/policy-documents"
       ]
     },
     "espas.eu": {
       "hub_paths": [
+        "/ideas.html",
+        "/horizon.html",
+        "/gtr.html",
         "/general.html",
         "/"
       ],
@@ -3332,6 +3364,10 @@
         "strategic",
         "science",
         "europe"
+      ],
+      "dated_publication_hubs": [
+        "/ideas.html",
+        "/horizon.html"
       ]
     }
   },
