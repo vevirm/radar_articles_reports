@@ -1,0 +1,60 @@
+name: Strand A — Prepare LLM Research Discovery
+
+on:
+  workflow_dispatch:
+    inputs:
+      task_count:
+        description: 'Bounded research tasks (5–20; default 18)'
+        required: false
+        default: '18'
+
+permissions:
+  contents: read
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out Main Radar
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Python 3.12
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.12'
+      - name: Install non-AI scanner helper dependencies
+        run: pip install --quiet -r requirements.txt
+      - name: Validate preparer and importer offline contracts
+        run: python -m pytest -q tests/test_llm_discovery.py
+      - name: Build human-operated research package
+        env:
+          TASK_COUNT: ${{ inputs.task_count }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          count="${TASK_COUNT:-18}"
+          [[ "$count" =~ ^[0-9]+$ ]] && (( count >= 5 && count <= 20 )) || { echo 'task_count must be 5–20'; exit 1; }
+          python scripts/prepare_llm_discovery.py --max-tasks "$count" --output llm-discovery-research-package.zip
+      - name: Downloadable research package
+        uses: actions/upload-artifact@v4
+        with:
+          name: strand-a-llm-research-package
+          path: llm-discovery-research-package.zip
+          if-no-files-found: error
+          retention-days: 21
+      - name: Instructions
+        run: |
+          cat >> "$GITHUB_STEP_SUMMARY" <<'EOF'
+          ## Manual LLM research discovery
+          1. Download **strand-a-llm-research-package** from the **Artifacts** section of this run.
+          2. Give the ZIP to ChatGPT or another browsing-capable LLM (no API key/automation required).
+          3. Follow `START_HERE.md` and ask for an actual downloadable `llm_research_results.json`.
+          4. Upload that JSON file in the GitHub browser into `llm_discovery_inbox/`.
+          5. The separate **Strand A — Import LLM Research Discoveries** action verifies evidence and admits qualified publications to `radar.json` as pending Deep Scan.
+          EOF
