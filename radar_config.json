@@ -3896,9 +3896,9 @@
   "full_budget_continuation_enabled": true,
   "full_budget_continuation_stage_seconds": 75,
   "full_budget_continuation_queries_per_wave": 8,
-  "full_budget_continuation_institution_sources_per_wave": 10,
+  "full_budget_continuation_institution_sources_per_wave": 8,
   "full_budget_continuation_news_queries_per_wave": 8,
-  "full_budget_continuation_max_waves": 2,
+  "full_budget_continuation_max_waves": 6,
   "full_budget_zero_progress_cooldown_seconds": 30,
   "full_budget_min_wave_seconds": 5,
   "scanner_repair_profile_version": "v24.0-admission-recall-independent-c-long-horizon-b",
@@ -4068,7 +4068,7 @@
       "domain": "techpolicy.press"
     }
   ],
-  "strand_a_protected_scholarly_queries_per_source": 20,
+  "strand_a_protected_scholarly_queries_per_source": 32,
   "strand_a_priority_policy": "The first 20 broad scholarly query slots per source are protected for substantive Strand-A-oriented lanes when budget allows. Strand-B method queries may use remaining broad slots plus bounded method-author/source follow-up, but cannot crowd A out of the executed prefix.",
   "high_order_inference_news_queries_per_scan": 4,
   "high_order_inference_news_feedback_policy": "Up to four missing-link/falsifier queries may join ordinary weak-signal coverage. Results still need trusted-source, 60-day and C substantive admission rules; an existing A anchor is preferred but not mandatory.",
@@ -4225,7 +4225,7 @@
   "queries_b_method_recent_per_scan": 9,
   "queries_b_method_foundational_per_scan": 3,
   "b_method_recent_lookback_years": 5,
-  "b_method_protected_scholarly_queries_per_source": 8,
+  "b_method_protected_scholarly_queries_per_source": 6,
   "b_method_journal_watchlist": [
     "Technological Forecasting and Social Change",
     "Futures",
@@ -4467,5 +4467,7 @@
     "oecd.org",
     "eib.org",
     "eit.europa.eu"
-  ]
+  ],
+  "full_budget_continuation_a_journals_per_wave": 3,
+  "scanner_a_first_recall_profile_version": "v25.2-a-primary-c-secondary-b-supporting-research-diversification"
 }
