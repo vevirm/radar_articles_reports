@@ -6,39 +6,39 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2648** (Main **1243** + Historical **1405**)
-- Automatic queue still needing V2 verification: **280** (Main **114** + Historical **166**)
-- Currently assigned to workers: **107** (Main **59** + Historical **48**)
+- Authoritative V2 verified: **2662** (Main **1257** + Historical **1405**)
+- Automatic queue still needing V2 verification: **266** (Main **100** + Historical **166**)
+- Currently assigned to workers: **107** (Main **45** + Historical **62**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **29**
-- Automatic queue pending and not yet assigned: **173**
+- Automatic queue pending and not yet assigned: **159**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261008T130030Z-46f36111e948`
+- Current package: `worker-a-20261008T133221Z-da80bb397d4f`
 - Assigned unresolved records: **36**
-  1. `link:https://www.eib.org/files/publications/2026-0163-120626-mid-term-report-eib-group-strategic-roadmap-2024-2027-en.pdf` — Mid-term report: EIB Group Strategic Roadmap 2024/2027
-  2. `link:https://www.eib.org/en/press/speeches/beer-speech-critical-raw-materials-joint-research-centre-conference` — Vice-President Beer on raw materials, EU sustainable competitiveness and business opportunities
-  3. `link:https://www.eib.org/en/press/all/2026-254-eib-and-crediabank-partner-to-strengthen-investment-in-greece-s-security-and-defence-ecosystem` — Greece: EIB and CrediaBank partner to strengthen investment in security and defence ecosystem
-  4. `link:https://www.eib.org/en/press/all/2026-228-eib-commits-eur3-billion-to-airbus-to-boost-europe-s-industrial-base-and-technological-edge-in-aerospace-innovation` — EIB commits €3 billion to Airbus to boost Europe’s industrial base and technological edge in aerospace innovation
-  5. `link:https://doi.org/10.1007/s11846-026-01053-6` — Configuring Artificial Intelligence capabilities for business model innovation in earth observation SMEs: insights from the European Space Industry
-  6. `link:https://www.atlanticcouncil.org/issue/technology-innovation/` — Technology & Innovation
-  7. `link:https://erc.europa.eu/sites/default/files/2026-09/ERC-Frontier-Research-on-Biotechnology.pdf` — Europe’s biotech frontier: New ERC report charts breakthrough potential and barriers
-  8. `link:https://www.iss.europa.eu/sites/default/files/2026-09/Brief_2026-15_Energy%20security.pdf` — Feeding the beast: Energy security as a precondition for the EU's AI power
+  1. `historical:id:20b1406428b30286` — How to future-proof NATO’s defence innovation and EDT strategy – CEPS
+  2. `historical:id:0c74ae0fab99be67` — The ‘AI Factories’ Amendment to the EuroHPC JU Regulation Enters Into Force
+  3. `historical:id:19a585dd6eafef9e` — AI is a strategic tool to improve scientific research
+  4. `historical:id:28857adbdbb8930f` — RETHINKING STRATEGIC AUTONOMY IN TIMES OF NEXT GENERATION EU: NEW DIGITAL AGENDA
+  5. `historical:id:5a1b826e50095b97` — ‘Closer to the Market’: EU Research Governance and Symbolic Power
+  6. `historical:id:48e268204c448631` — The Application of the Science Diplomacy Model: the Russian and International Experience
+  7. `historical:id:ac6a33b6763883f5` — Dutch and French Cooperation in Quantum Innovation
+  8. `historical:id:8dc382a7f4033b91` — European research development and deployment of AI
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261008T130109Z-62931535cfb8`
+- Current package: `worker-b-20261008T133250Z-5a619b6f0fa0`
 - Assigned unresolved records: **36**
-  1. `link:https://www.euronews.com/2026/10/06/what-to-know-about-mistrals-ml4-as-it-bets-on-eu-sovereignty-in-the-us-china-open-weight-a` — What to know about Mistral's new model in the US-China open AI race
-  2. `link:https://news.google.com/rss/articles/CBMimAFBVV95cUxNRmdhb3VwRE1ZWGhyRGI2RW5ZNURTRjFrYmJ2T0Z2ejdyVURwVGhoS2dESEdDYnVZZDJkb2NVN1Nuc2dJd0F4Z21KdjNTYzd5OWUxSkZQMGdJeThVd3NWM25xQi10ZDZYNm1KTUZSNzFYMFZTSFlfcHlFWW5ERlREMEVYZHJTQlNOQVpIMjBwQlpNNjNyb1BUeA?oc=5` — Europe’s AI policing plan stokes privacy concerns
-  3. `link:https://news.google.com/rss/articles/CBMioAFBVV95cUxQMWE0UWNBUWJqc0pGNUo4cUVPYkVzZHRvbVFMSGJDU0V3aHFnUTM5R2RaMFBFNkh2bGM5TUVKcVAzY1dka0tGRC1rbW84ckxKRlBLS2NOVVBWVk9sdi04M2VCLWxDM1phS3VCb3ZpenN0ODVFVjhzVmJNLS1vakFRYmxrdUt4d0JtdEdFenlhNzZvOWZYYmpRd1VXcjB1a2xn?oc=5` — EU rejects €26 million state aid to MAN truck manufacturer
-  4. `link:https://news.google.com/rss/articles/CBMiswFBVV95cUxOMXRYNUNxWFlxNHVBS3ljMWFpX1BOOWo0YzFJc0JvbzBWc3ByS29Ka2RBUUhLWlU4VDVaODFwQzlLWnRfY25LLVlTai1teTE4RkNEdFlaUGlPVmpqUkpvSjVYVlluNGdUQ25jVExTeFFqbENhM3c5Q1pmcWlWQzJ0Q0NQR1Uxc211NkFweEg0eU1JTUJ6UExCTFpPaW9ENmpLenkxaXJReWs3N01YQmVJM3Y2Yw?oc=5` — MSCA research career scheme gets €210M funding boost
-  5. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxNOEdpVjh0dUlLemVFaXJVREtGdGZBSzdpbWhoX2RxSXBEUzVCd2VQTFRocVNPNHNXSThuQUhLQy1tSlpYOEdKZXBDeHhENmZIUnFjWlZ1UWl4cERJTEZnLTlUb2NHOGhwVlZqQTVScUJkQzdMaE9hUjMwZk1na3VlaVdDdEswZGdjUWhsdUJJN0tEaU55NjJMV3JieEJWLTJCSzdPWmkzMVhKQW1QSFE?oc=5` — The Netherlands unveils its new innovation agency
-  6. `link:https://news.google.com/rss/articles/CBMizgFBVV95cUxPbmcwM1FMNHIwX2JMN3p0dlQ5LVFPdkZsdm1wSHlsZHBXaDNzVXdRa19RRUFBNHo0MUNGTXdiYmxrc1lfZ09MRWkzQS1kSGdFVko1TEIxSjBKTkV6UjNyTjJDb2NDbkx0YWlpMzVrN1RNSkh1UF9iNDlWdGNnUGpXWS13dzEzRlFwUDBOTlZYMHlBUHQ1ZU5FLVhaRjYyblV0M2hxZTdsVlZkYXY2TVp1ZTh4UXdmTHRkU0Z1Wi1VTnp6Y0h1emdSQV94bTlxQQ?oc=5` — EU innovation agency ‘must be reformed to be worth keeping’
-  7. `link:https://news.google.com/rss/articles/CBMihAJBVV95cUxQcS1MTFQ3ZTYzeVB1WHV1MUZiZjlXYWo2UGJVMmVXWUlVS0pXVXBTOHpqSDdTRzZBVnBlMkdWNEd1UW9PUmFVZGpUbVdYVUxQdUt2bzVXTFBERkdISEFOQVFaS0hzc3pmZEdQZTNxZGQ4aHFibWJ0SmhEMkdWSGs5bVo2V1ZCTEllYS1nNWphbG1ZRk1lWFBYUjBabElabzRrN0lTV1YzbTRERmUtU0lrdGtaODJGMTVjUm45Mk80dkNWUW9kRUlVUUhJN3F3aHc3RGhhbHlkb0xXOGNQY0d6TlRrRFp5VzhoRF9LSDNFRnhKRV9WdXlZQnlSQmJYdTdUckNaVg?oc=5` — Science, Research and Innovation performance of the EU 2026 report
-  8. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=c9a363b1-be08-11f1-9aae-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Horizon is powering the EU’s biotechnology industry, from innovation to investment - Publications Office of the EU
+  1. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxPQTVhdGtDQ3ltbWRrWWxnSjE2TTF1R0szTjQ0OW5NSjJtRzJVN1ZtblJ1QjhQbUdHMzZMUmF0OTVlcGtmaUFhN2J3UXI2WkhlSVJxTWhpa205ckxkZHVudzBGcWxscHl5M21TSi11UmpZczF0bkZsYTlJekplbzQ0VTVWTVh5d3Rna09YbFZONUR0VmpSUEVudTluUkJoOG04alJZejNrUTM5cFNxRmdn?oc=5` — Former German spy chief arrested for treason and espionage
+  2. `link:https://news.google.com/rss/articles/CBMikAJBVV95cUxPWUJDemFBRS1vSFhhNk5EdGxXNmtwM3AzY3Z3aF9EMHpSNmV2ckxIVl9hQ1VtMm45dHdEemQ1YmZGaDhMaUJ1WFpINmhsNi1WOXhVSTJwcnc0QmVoeE5ySU01VEdKVElMOHZMQkN3ejMtb0xPcFBKSlhaX25yZVg4aDg3bWtzRzhOXzB2X2txOTNhUlE0Q2VZMXhWSXBIeXhvQlhrdTlWSmdIWUc2MUV0Tlk4WDlBSlZ0TWNhNzd1YnJWZ0hYc0dpcmVZYk1vWWh6TW91QlZUWUlPNEZfWWZUVGR3RUpTeF9iUHEtdWRBTWF6OU5tTXUyd0IwS0pJSTA3bWRsTXpzU0ZsR1NPN1ZGMA?oc=5` — Fourth EU-Faroe Islands Horizon Europe Joint Research and Innovation Committee meeting - European Commission
+  3. `link:https://news.google.com/rss/articles/CBMiwgFBVV95cUxOMVNCTWtQRkQ1cEFETTRrTzhjMWtFdGkyb2twbkpLMU1rblBVaUF6MHB4U0hXN2Y2TlAxRGZFTm91eGJsekxQWDhIYnJiZmZwOEU0Nk40SDM3aENZUm45ZFBPR0Z1U3RHLXo2S1piZ0VfNVR2Tm43WTdHOS10ZllyaDh1SThsakhaMnFobmlFeF9DQ0JxX0JqT3hWTUNGZ1FvNkIxLUhrMVRTclE1TS02TDVadko0Q25pZ2hwck9Nd0dnUQ?oc=5` — Fast-track permits turn Spain's Aragon into a $70 billion data centre magnet. At what cost?
+  4. `link:https://news.google.com/rss/articles/CBMimAFBVV95cUxNRmdhb3VwRE1ZWGhyRGI2RW5ZNURTRjFrYmJ2T0Z2ejdyVURwVGhoS2dESEdDYnVZZDJkb2NVN1Nuc2dJd0F4Z21KdjNTYzd5OWUxSkZQMGdJeThVd3NWM25xQi10ZDZYNm1KTUZSNzFYMFZTSFlfcHlFWW5ERlREMEVYZHJTQlNOQVpIMjBwQlpNNjNyb1BUeA?oc=5` — Europe’s AI policing plan stokes privacy concerns
+  5. `link:https://news.google.com/rss/articles/CBMioAFBVV95cUxQMWE0UWNBUWJqc0pGNUo4cUVPYkVzZHRvbVFMSGJDU0V3aHFnUTM5R2RaMFBFNkh2bGM5TUVKcVAzY1dka0tGRC1rbW84ckxKRlBLS2NOVVBWVk9sdi04M2VCLWxDM1phS3VCb3ZpenN0ODVFVjhzVmJNLS1vakFRYmxrdUt4d0JtdEdFenlhNzZvOWZYYmpRd1VXcjB1a2xn?oc=5` — EU rejects €26 million state aid to MAN truck manufacturer
+  6. `link:https://news.google.com/rss/articles/CBMiswFBVV95cUxOMXRYNUNxWFlxNHVBS3ljMWFpX1BOOWo0YzFJc0JvbzBWc3ByS29Ka2RBUUhLWlU4VDVaODFwQzlLWnRfY25LLVlTai1teTE4RkNEdFlaUGlPVmpqUkpvSjVYVlluNGdUQ25jVExTeFFqbENhM3c5Q1pmcWlWQzJ0Q0NQR1Uxc211NkFweEg0eU1JTUJ6UExCTFpPaW9ENmpLenkxaXJReWs3N01YQmVJM3Y2Yw?oc=5` — MSCA research career scheme gets €210M funding boost
+  7. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxNOEdpVjh0dUlLemVFaXJVREtGdGZBSzdpbWhoX2RxSXBEUzVCd2VQTFRocVNPNHNXSThuQUhLQy1tSlpYOEdKZXBDeHhENmZIUnFjWlZ1UWl4cERJTEZnLTlUb2NHOGhwVlZqQTVScUJkQzdMaE9hUjMwZk1na3VlaVdDdEswZGdjUWhsdUJJN0tEaU55NjJMV3JieEJWLTJCSzdPWmkzMVhKQW1QSFE?oc=5` — The Netherlands unveils its new innovation agency
+  8. `link:https://news.google.com/rss/articles/CBMizgFBVV95cUxPbmcwM1FMNHIwX2JMN3p0dlQ5LVFPdkZsdm1wSHlsZHBXaDNzVXdRa19RRUFBNHo0MUNGTXdiYmxrc1lfZ09MRWkzQS1kSGdFVko1TEIxSjBKTkV6UjNyTjJDb2NDbkx0YWlpMzVrN1RNSkh1UF9iNDlWdGNnUGpXWS13dzEzRlFwUDBOTlZYMHlBUHQ1ZU5FLVhaRjYyblV0M2hxZTdsVlZkYXY2TVp1ZTh4UXdmTHRkU0Z1Wi1VTnp6Y0h1emdSQV94bTlxQQ?oc=5` — EU innovation agency ‘must be reformed to be worth keeping’
   - … plus 28 more in the package manifest
 
 ### Worker SINGLE

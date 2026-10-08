@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-07T08:51:19Z",
+  "generated_at": "2026-10-08T13:26:55Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -229390,8 +229390,1147 @@
       "deep_scan_package_id": "worker-b-20261007T084440Z-293b99d07eff",
       "claims": [],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.eib.org/files/publications/2026-0163-120626-mid-term-report-eib-group-strategic-roadmap-2024-2027-en.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "b5246661",
+      "identity_hash": "15cac51b9c367cd8",
+      "reader_title": "EIB roadmap review charts larger innovation financing and TechEU ambitions",
+      "reader_what": "EIB reports expanding higher-risk financing and technology investments, alongside a TechEU mobilisation ambition through 2028.",
+      "reader_why": "EU-backed risk finance supports technology scaleups and potentially strengthens European innovation value chains.",
+      "reader_more": "The EIB Group reviews implementation of its 2024–2027 roadmap, drawing on its own lending and investment records. It reports €100 billion in signed new financing during 2025 across many priorities, not solely innovation. TechEU is expected to mobilise up to €340 billion by 2028, including support for artificial intelligence, semiconductors and other critical technologies. These are institutional figures and projections, not independently evaluated outcomes.",
+      "deep_analysis": {
+        "work_kind": "official mid-term institutional strategy report",
+        "research_question": "How has the EIB Group implemented its 2024–2027 roadmap, including innovation and critical technology finance?",
+        "main_finding": "The EIB reports increased higher-risk activity and describes TechEU as a financing instrument for European technology and scaleups.",
+        "method_or_basis": "EIB operational reporting, strategy assessment and flagship project annex through May 2026.",
+        "qualification": "EIB self-reported financing performance; TechEU €340 billion is a forward-looking mobilisation expectation, not investment already delivered.",
+        "radar_relevance": "Direct European R&I finance and innovation-system capacity evidence; A Route 3, additionally framed by strategic technology autonomy.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.eib.org/files/publications/2026-0163-120626-mid-term-report-eib-group-strategic-roadmap-2024-2027-en.pdf; 64-page EIB-hosted official PDF with ISBN 978-92-861-6209-1, DOI 10.2867/4102968, and full sections; page 7 executive summary visually checked."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://www.eib.org/files/publications/2026-0163-120626-mid-term-report-eib-group-strategic-roadmap-2024-2027-en.pdf",
+            "title": "Mid-term report: EIB Group Strategic Roadmap 2024/2027",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching 2026 EIB institutional report independently retrieved as a 64-page original PDF. Executive summary and section contents establish primary evidence about EIB financing, TechEU, and EU technology scaleup."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Official institutional reporting on EU innovation finance and its trajectory qualifies as substantive European R&I-system evidence (A Route 3); explicitly relates technical investment to strategic dependencies (Route 1). Future mobilisation is a target, not delivered funding."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No candidate duplicate supplied."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-08T13:26:51Z",
+      "deep_scan_package_id": "worker-a-20261008T130030Z-46f36111e948",
+      "claims": [
+        {
+          "object": "finance.strategic_investment",
+          "secondary_objects": [
+            "innovation.deep_tech_startups"
+          ],
+          "actor": {
+            "name": "European Investment Bank Group",
+            "class": "eu_body"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "operating",
+          "status_date": "2026-06",
+          "status_date_precision": "month",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "EIB self-reported financing performance; TechEU €340 billion is a forward-looking mobilisation expectation, not investment already delivered.",
+          "text": "The EIB Group describes TechEU as a risk-finance programme targeting innovative European firms and strategic technology value chains, with an up-to-€340-billion mobilisation ambition by 2028.",
+          "confidence": "high",
+          "record_key": "link:https://www.eib.org/files/publications/2026-0163-120626-mid-term-report-eib-group-strategic-roadmap-2024-2027-en.pdf",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:15cac51b9c367cd8:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.eib.org/en/press/speeches/beer-speech-critical-raw-materials-joint-research-centre-conference": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "0ca7bf10",
+      "identity_hash": "b8bcd8d416a06113",
+      "reader_title": "Official policy speech",
+      "reader_what": "EIB vice-president advocates critical-raw-materials project financing and EU value-chain investment.",
+      "reader_more": "This is a policy speech rather than an empirical report. It describes institutional priorities and examples of EIB support. Assertions about constraints and future opportunities are advocacy, not verified research findings.",
+      "deep_analysis": {
+        "work_kind": "speech / advocacy",
+        "research_question": "",
+        "main_finding": "EIB vice-president outlines critical-materials supply and investment priorities.",
+        "method_or_basis": "Official EIB speech; no independent empirical method.",
+        "qualification": "Position statement; no evidence that promised investment benefits have materialised.",
+        "radar_relevance": "Not a substantive Strand A evidence product despite meaningful EU strategic content.",
+        "confidence": "medium",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected scanner-captured matching first-party publication from https://www.eib.org/en/press/speeches/beer-speech-critical-raw-materials-joint-research-centre-conference (8429 characters); checked title, source and content against the recorded work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_publication_or_official_source",
+            "url": "https://www.eib.org/en/press/speeches/beer-speech-critical-raw-materials-joint-research-centre-conference",
+            "title": "Vice-President Beer on raw materials, EU sustainable competitiveness and business opportunities",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching publisher/official source text supplied and inspected (8429 characters); decision reflects document type and actual substantive content, not scanner admission. Source URL: https://www.eib.org/en/press/speeches/beer-speech-critical-raw-materials-joint-research-centre-conference"
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_EVIDENCE",
+        "reason": "A Routes 1–3 checked: this is an EIB official speech expressing policy priorities and investment views, not a completed analytical evidence product or measured European R&I-system study. It is not a dated financing decision either."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-08T13:26:51Z",
+      "deep_scan_package_id": "worker-a-20261008T130030Z-46f36111e948",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.eib.org/en/press/all/2026-254-eib-and-crediabank-partner-to-strengthen-investment-in-greece-s-security-and-defence-ecosystem": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "1eab6b0d",
+      "identity_hash": "337bd3ff23ebf362",
+      "reader_title": "EIB signs Greek defence-industry lending tranche",
+      "reader_what": "EIB signed €50 million via CrediaBank to finance Greek security and defence small and medium-sized firms.",
+      "reader_why": "An EU-backed financial intermediary expands investment access for Europe’s security and defence supply chains.",
+      "reader_more": "The EIB and CrediaBank signed a first €50 million tranche in July 2026. The wider agreement allows up to €100 million in EIB lending. Larger eventual investment figures depend on future lending and leverage, not completed results.",
+      "deep_analysis": {
+        "work_kind": "official financing announcement",
+        "research_question": "",
+        "main_finding": "A €50 million tranche is signed for lending to eligible Greek security and defence firms.",
+        "method_or_basis": "EIB announcement and signed project disclosure.",
+        "qualification": "Only initial tranche signed; onward lending and predicted mobilisation are not demonstrated.",
+        "radar_relevance": "New EU defence-industrial investment financing action.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected scanner-captured matching first-party publication from https://www.eib.org/en/press/all/2026-254-eib-and-crediabank-partner-to-strengthen-investment-in-greece-s-security-and-defence-ecosystem (8430 characters); checked title, source and content against the recorded work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_publication_or_official_source",
+            "url": "https://www.eib.org/en/press/all/2026-254-eib-and-crediabank-partner-to-strengthen-investment-in-greece-s-security-and-defence-ecosystem",
+            "title": "Greece: EIB and CrediaBank partner to strengthen investment in security and defence ecosystem",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching publisher/official source text supplied and inspected (8430 characters); decision reflects document type and actual substantive content, not scanner admission. Source URL: https://www.eib.org/en/press/all/2026-254-eib-and-crediabank-partner-to-strengthen-investment-in-greece-s-security-and-defence-ecosystem"
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "EIB first-party release and project record confirm a €50 million signed financing tranche for Greek security/defence SMEs, within an up-to-€100 million approval. This is a real EU-supported strategic industrial financing development, not Strand A analysis."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-08T13:26:51Z",
+      "deep_scan_package_id": "worker-a-20261008T130030Z-46f36111e948",
+      "claims": [
+        {
+          "object": "finance.strategic_investment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Investment Bank",
+            "class": "eu_body"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-07-13",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "GR"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Only initial tranche signed; onward lending and predicted mobilisation are not demonstrated.",
+          "text": "A €50 million tranche is signed for lending to eligible Greek security and defence firms.",
+          "confidence": "high",
+          "record_key": "link:https://www.eib.org/en/press/all/2026-254-eib-and-crediabank-partner-to-strengthen-investment-in-greece-s-security-and-defence-ecosystem",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:337bd3ff23ebf362:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.eib.org/en/press/all/2026-228-eib-commits-eur3-billion-to-airbus-to-boost-europe-s-industrial-base-and-technological-edge-in-aerospace-innovation": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "588deb85",
+      "identity_hash": "28782ef659525cc3",
+      "reader_title": "EIB signs Airbus aerospace R&D loan",
+      "reader_what": "A €1 billion EIB loan starts a planned €3 billion envelope backing Airbus research and technology development.",
+      "reader_why": "Research finance targets European commercial and defence aerospace capability in three member states.",
+      "reader_more": "On 29 June 2026 the EIB announced the signed first €1 billion Airbus loan. Its €3 billion total is an approved ceiling rather than a disbursement already fully made. R&D spending is planned across France, Germany and Spain through 2030.",
+      "deep_analysis": {
+        "work_kind": "official financing announcement",
+        "research_question": "",
+        "main_finding": "First €1 billion EIB loan signed for Airbus R&D; €3 billion overall authorisation.",
+        "method_or_basis": "EIB primary loan/financing release.",
+        "qualification": "€3 billion envelope is authorised, not fully signed or delivered; benefits are projected.",
+        "radar_relevance": "Material new funding commitment to strategic European R&D.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected scanner-captured matching first-party publication from https://www.eib.org/en/press/all/2026-228-eib-commits-eur3-billion-to-airbus-to-boost-europe-s-industrial-base-and-technological-edge-in-aerospace-innovation (6239 characters); checked title, source and content against the recorded work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_publication_or_official_source",
+            "url": "https://www.eib.org/en/press/all/2026-228-eib-commits-eur3-billion-to-airbus-to-boost-europe-s-industrial-base-and-technological-edge-in-aerospace-innovation",
+            "title": "EIB commits €3 billion to Airbus to boost Europe’s industrial base and technological edge in aerospace innovation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching publisher/official source text supplied and inspected (6239 characters); decision reflects document type and actual substantive content, not scanner admission. Source URL: https://www.eib.org/en/press/all/2026-228-eib-commits-eur3-billion-to-airbus-to-boost-europe-s-industrial-base-and-technological-edge-in-aerospace-innovation"
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "Primary EIB announcement confirms a first €1 billion Airbus R&D loan was signed under a €3 billion authorised envelope, targeting development in France, Germany and Spain. Dateable new EU research/technology financing, not empirical Strand A analysis."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-08T13:26:52Z",
+      "deep_scan_package_id": "worker-a-20261008T130030Z-46f36111e948",
+      "claims": [
+        {
+          "object": "research.system_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Investment Bank",
+            "class": "eu_body"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-06-29",
+          "scope": {
+            "level": "eu",
+            "countries": [
+              "FR",
+              "DE",
+              "ES"
+            ]
+          },
+          "kind": "action",
+          "qualification": "€3 billion envelope is authorised, not fully signed or delivered; benefits are projected.",
+          "text": "First €1 billion EIB loan signed for Airbus R&D; €3 billion overall authorisation.",
+          "confidence": "high",
+          "record_key": "link:https://www.eib.org/en/press/all/2026-228-eib-commits-eur3-billion-to-airbus-to-boost-europe-s-industrial-base-and-technological-edge-in-aerospace-innovation",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:28782ef659525cc3:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1007/s11846-026-01053-6": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "b194d6f0",
+      "identity_hash": "088de3f446302fdf",
+      "reader_title": "AI capabilities shape European space SMEs’ business models",
+      "reader_what": "Ten case studies identify different AI capability configurations associated with Earth-observation business-model innovation.",
+      "reader_why": "Commercialisation of European space-data research depends on SMEs’ complementary AI and market-facing capabilities.",
+      "reader_more": "The peer-reviewed study compares ten European Earth-observation SMEs. It identifies two business-model patterns and examines combinations of data, algorithms, foundational capabilities and AI accessibility. Case-study evidence describes configurations rather than demonstrating general causal effects.",
+      "deep_analysis": {
+        "work_kind": "empirical case-study article",
+        "research_question": "",
+        "main_finding": "Two AI-enabled Earth-observation SME business-model archetypes emerge from ten European cases.",
+        "method_or_basis": "Multiple qualitative organisational case studies across the European Earth-observation value chain.",
+        "qualification": "Qualitative sample of ten firms; archetypes are not population-wide or causal estimates.",
+        "radar_relevance": "European innovation commercialisation capability and downstream space-data ecosystem evidence.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected scanner-captured matching first-party publication from https://doi.org/10.1007/s11846-026-01053-6 (21076 characters); checked title, source and content against the recorded work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_publication_or_official_source",
+            "url": "https://doi.org/10.1007/s11846-026-01053-6",
+            "title": "Configuring Artificial Intelligence capabilities for business model innovation in earth observation SMEs: insights from the European Space Industry",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching publisher/official source text supplied and inspected (21076 characters); decision reflects document type and actual substantive content, not scanner admission. Source URL: https://doi.org/10.1007/s11846-026-01053-6"
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Research based on ten European space/earth-observation SMEs investigates AI-enabled technology commercialisation and business-model innovation; innovation transfer/scale-up mechanisms give substantive EU R&I-system relevance under Route 3. Not merely an EU address."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-08T13:26:52Z",
+      "deep_scan_package_id": "worker-a-20261008T130030Z-46f36111e948",
+      "claims": [
+        {
+          "object": "research.knowledge_transfer",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Earth-observation SMEs",
+            "class": "company"
+          },
+          "mechanism": "transfers",
+          "direction": "becomes_conditional",
+          "status": "operating",
+          "status_date": "2026",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Qualitative sample of ten firms; archetypes are not population-wide or causal estimates.",
+          "text": "Two AI-enabled Earth-observation SME business-model archetypes emerge from ten European cases.",
+          "confidence": "medium",
+          "status_date_precision": "year",
+          "record_key": "link:https://doi.org/10.1007/s11846-026-01053-6",
+          "merit": 68,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:088de3f446302fdf:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.atlanticcouncil.org/issue/technology-innovation/": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "29acbf31",
+      "identity_hash": "56f6b737d018c4ec",
+      "reader_title": "Generic technology-innovation topic hub",
+      "reader_what": "The page links to commentary across many technology and policy topics.",
+      "reader_more": "The supplied URL is a topical landing page, not one identifiable study. Its general text concerns worldwide technology and innovation issues. No single completed evidence product on the European R&I system can be identified as the claimed work.",
+      "deep_analysis": {
+        "work_kind": "topic / navigation page",
+        "research_question": "",
+        "main_finding": "An organisational section aggregating technology-related commentary.",
+        "method_or_basis": "Atlantic Council topic page navigation and introductory text.",
+        "qualification": "No bounded research design, finding or document to verify.",
+        "radar_relevance": "Fails the substantive evidence-product gate for all A routes.",
+        "confidence": "medium",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected scanner-captured matching first-party publication from https://www.atlanticcouncil.org/issue/technology-innovation/ (3958 characters); checked title, source and content against the recorded work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_publication_or_official_source",
+            "url": "https://www.atlanticcouncil.org/issue/technology-innovation/",
+            "title": "Technology & Innovation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching publisher/official source text supplied and inspected (3958 characters); decision reflects document type and actual substantive content, not scanner admission. Source URL: https://www.atlanticcouncil.org/issue/technology-innovation/"
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NOT_SUBSTANTIVE_WORK",
+        "reason": "A Routes 1–3 checked: the Atlantic Council Technology & Innovation URL is a broad topical/navigation hub with aggregated links and generic position text, not a single substantive analytical work about European R&I trajectories or system mechanisms."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-08T13:26:52Z",
+      "deep_scan_package_id": "worker-a-20261008T130030Z-46f36111e948",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://erc.europa.eu/sites/default/files/2026-09/ERC-Frontier-Research-on-Biotechnology.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "c70b420d",
+      "identity_hash": "bcdb9cfbcb2c4248",
+      "reader_title": "ERC maps European biotechnology research and translation barriers",
+      "reader_what": "ERC portfolio analysis and researcher survey identify biotech research strengths and obstacles between discovery and commercialisation.",
+      "reader_why": "Funding continuity and scale-up constraints shape Europe’s capacity to translate frontier biotech discoveries into applications.",
+      "reader_more": "ERC analysis covers 2,416 funded biotechnology projects during 2014–2023, receiving €4.09 billion. A survey of 388 biotech grantees identifies problems in intermediate financing, translation, scale-up and ecosystems. Survey participation was about one fifth, limiting representativeness.",
+      "deep_analysis": {
+        "work_kind": "official research portfolio and survey report",
+        "research_question": "",
+        "main_finding": "ERC biotechnology investment and survey reveal a large research base but persistent translation and finance challenges.",
+        "method_or_basis": "Analysis of ERC portfolio data and May 2026 survey of 388 funded researchers.",
+        "qualification": "ERC-funded researcher sample and roughly 20% response rate; expectations are not realised outcomes.",
+        "radar_relevance": "European R&I portfolio, research-to-market mechanisms and strategic biotech capability.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected scanner-captured matching first-party publication from https://erc.europa.eu/sites/default/files/2026-09/ERC-Frontier-Research-on-Biotechnology.pdf (18986 characters); checked title, source and content against the recorded work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_publication_or_official_source",
+            "url": "https://erc.europa.eu/sites/default/files/2026-09/ERC-Frontier-Research-on-Biotechnology.pdf",
+            "title": "Europe’s biotech frontier: New ERC report charts breakthrough potential and barriers",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching publisher/official source text supplied and inspected (18986 characters); decision reflects document type and actual substantive content, not scanner admission. Source URL: https://erc.europa.eu/sites/default/files/2026-09/ERC-Frontier-Research-on-Biotechnology.pdf"
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The official ERC 2026 full report assesses European frontier biotech research portfolios and survey evidence about funding, commercialisation and translation bottlenecks: A Routes 2 and 3."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-08T13:26:53Z",
+      "deep_scan_package_id": "worker-a-20261008T130030Z-46f36111e948",
+      "claims": [
+        {
+          "object": "research.knowledge_transfer",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Research Council",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_conditional",
+          "status": "operating",
+          "status_date": "2026-09-30",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "ERC-funded researcher sample and roughly 20% response rate; expectations are not realised outcomes.",
+          "text": "ERC biotechnology investment and survey reveal a large research base but persistent translation and finance challenges.",
+          "confidence": "high",
+          "record_key": "link:https://erc.europa.eu/sites/default/files/2026-09/ERC-Frontier-Research-on-Biotechnology.pdf",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:bcdb9cfbcb2c4248:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.iss.europa.eu/sites/default/files/2026-09/Brief_2026-15_Energy%20security.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "962007ec",
+      "identity_hash": "6da4101931a1777c",
+      "reader_title": "Energy constraints condition Europe’s AI compute ambitions",
+      "reader_what": "EUISS argues that energy costs, power-grid limits and import exposure constrain expansion of European AI compute.",
+      "reader_why": "Power availability and grids mediate whether EU investments can become usable AI capabilities.",
+      "reader_more": "The EU Institute for Security Studies compares AI energy requirements with European supply, prices and network constraints. It analyses how data-centre growth may worsen existing bottlenecks, while more secure electricity could support domestic AI capability. This is a strategic assessment, not a forecast of actual future shortages.",
+      "deep_analysis": {
+        "work_kind": "institutional strategic research brief",
+        "research_question": "",
+        "main_finding": "Energy availability is a precondition for scaling European AI compute and improving strategic positioning.",
+        "method_or_basis": "EUISS research brief analysing energy and AI infrastructure conditions.",
+        "qualification": "Strategic assessment; projected demand and future risks are conditional, not observed impacts.",
+        "radar_relevance": "Evidence on energy infrastructure and technology dependency constraining EU AI capabilities.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected scanner-captured matching first-party publication from https://www.iss.europa.eu/sites/default/files/2026-09/Brief_2026-15_Energy%20security.pdf (16701 characters); checked title, source and content against the recorded work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_publication_or_official_source",
+            "url": "https://www.iss.europa.eu/sites/default/files/2026-09/Brief_2026-15_Energy%20security.pdf",
+            "title": "Feeding the beast: Energy security as a precondition for the EU's AI power",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching publisher/official source text supplied and inspected (16701 characters); decision reflects document type and actual substantive content, not scanner admission. Source URL: https://www.iss.europa.eu/sites/default/files/2026-09/Brief_2026-15_Energy%20security.pdf"
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The EUISS substantive policy analysis documents concrete EU AI-compute energy-supply/grid constraints and external dependencies; qualifies under A Routes 1 and 2."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-08T13:26:53Z",
+      "deep_scan_package_id": "worker-a-20261008T130030Z-46f36111e948",
+      "claims": [
+        {
+          "object": "datacentre.energy_supply",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Union Institute for Security Studies",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_conditional",
+          "status": "operating",
+          "status_date": "2026-09",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Strategic assessment; projected demand and future risks are conditional, not observed impacts.",
+          "text": "Energy availability is a precondition for scaling European AI compute and improving strategic positioning.",
+          "confidence": "high",
+          "status_date_precision": "month",
+          "record_key": "link:https://www.iss.europa.eu/sites/default/files/2026-09/Brief_2026-15_Energy%20security.pdf",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:6da4101931a1777c:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1002/poi3.70041": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "2a7e0be5",
+      "identity_hash": "17fe8b6279f61091",
+      "reader_title": "Research tests generative-AI watermark adoption against EU rules",
+      "reader_what": "A legal and empirical study examines whether watermarking practices meet new AI-generated-content transparency requirements.",
+      "reader_why": "Observed technical practice can reveal implementation gaps in EU digital technology governance.",
+      "reader_more": "The article examines AI-image watermarking technologies and their deployment alongside EU AI Act obligations. It distinguishes available technology and observed adoption from regulatory expectations. Conclusions apply to the examined tools and rules, not all AI content or future compliance.",
+      "deep_analysis": {
+        "work_kind": "empirical and legal research article",
+        "research_question": "",
+        "main_finding": "Generative AI watermarking practice and EU transparency requirements are not automatically aligned.",
+        "method_or_basis": "Technical empirical assessment of watermark deployment with doctrinal EU AI Act analysis.",
+        "qualification": "Examined sample and regulatory interpretation limit extrapolation to universal compliance.",
+        "radar_relevance": "European AI governance and practical technological implementation evidence.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected scanner-captured matching first-party publication from https://doi.org/10.1002/poi3.70041 (4556 characters); checked title, source and content against the recorded work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_publication_or_official_source",
+            "url": "https://doi.org/10.1002/poi3.70041",
+            "title": "Missing the Mark: Adoption of Watermarking for Generative AI Systems in Practice and Implications Under the New EU AI Act",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching publisher/official source text supplied and inspected (4556 characters); decision reflects document type and actual substantive content, not scanner admission. Source URL: https://doi.org/10.1002/poi3.70041"
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The published empirical/legal study examines implementation of EU AI Act generative-AI watermarking and labelling measures; directly studies EU R&I-technology governance under A Route 3."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-08T13:26:53Z",
+      "deep_scan_package_id": "worker-a-20261008T130030Z-46f36111e948",
+      "claims": [
+        {
+          "object": "ai.governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Academic research team",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_contested",
+          "status": "operating",
+          "status_date": "2026",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Examined sample and regulatory interpretation limit extrapolation to universal compliance.",
+          "text": "Generative AI watermarking practice and EU transparency requirements are not automatically aligned.",
+          "confidence": "medium",
+          "status_date_precision": "year",
+          "record_key": "link:https://doi.org/10.1002/poi3.70041",
+          "merit": 77,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:17fe8b6279f61091:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1007/s11365-026-01258-x": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "4d282b78",
+      "identity_hash": "aef8a6e25a5e1c17",
+      "reader_title": "European living labs show changing innovation consortium structures",
+      "reader_what": "CORDIS analysis of 350 living-lab projects examines entrepreneurial actors and collaboration architecture across two EU programmes.",
+      "reader_why": "Consortium design influences which firms and organisations connect within European innovation ecosystems.",
+      "reader_more": "Researchers construct consortium indicators from CORDIS metadata for 350 projects labelled as living labs. They compare the Horizon 2020 and Horizon Europe cohorts on partner diversity, company participation and coordination. Results describe the observed funded-project sample rather than demonstrating programme causality.",
+      "deep_analysis": {
+        "work_kind": "empirical innovation-system article",
+        "research_question": "",
+        "main_finding": "Living-lab consortia provide measurable architecture for European multi-actor innovation ecosystems.",
+        "method_or_basis": "CORDIS project metadata analysis with indicators for firm participation, diversity and coordination.",
+        "qualification": "Labels and administrative project metadata limit inference; observed differences are not causal programme effects.",
+        "radar_relevance": "Direct evidence on Horizon collaboration networks, entrepreneurial embeddedness and R&I ecosystem governance.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected scanner-captured matching first-party publication from https://doi.org/10.1007/s11365-026-01258-x (20438 characters); checked title, source and content against the recorded work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_publication_or_official_source",
+            "url": "https://doi.org/10.1007/s11365-026-01258-x",
+            "title": "Living labs as entrepreneurial ecosystem architectures evidence from Horizon 2020 and Horizon Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching publisher/official source text supplied and inspected (20438 characters); decision reflects document type and actual substantive content, not scanner admission. Source URL: https://doi.org/10.1007/s11365-026-01258-x"
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Peer-reviewed research analyses 350 Horizon 2020/Horizon Europe living-lab projects using CORDIS consortium indicators. It directly measures European innovation-system collaborations and actor mix (A Route 3)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-08T13:26:54Z",
+      "deep_scan_package_id": "worker-a-20261008T130030Z-46f36111e948",
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "EU living-lab consortia",
+            "class": "university_group"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "operating",
+          "status_date": "2026",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Labels and administrative project metadata limit inference; observed differences are not causal programme effects.",
+          "text": "Living-lab consortia provide measurable architecture for European multi-actor innovation ecosystems.",
+          "confidence": "high",
+          "status_date_precision": "year",
+          "record_key": "link:https://doi.org/10.1007/s11365-026-01258-x",
+          "merit": 77,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:aef8a6e25a5e1c17:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1108/fs-07-2025-0141": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "corpus_scope": "main",
+      "source_hash": "025bdbfc",
+      "identity_hash": "ef824453b6693b75",
+      "reader_title": "Framework treats AI as both tool and object of strategic foresight",
+      "reader_what": "The paper integrates AI systems, human interaction and governance into a four-part framework for organisational futures thinking.",
+      "reader_why": "The model may help structure AI-enabled scanning, scenarios and scrutiny of futures analysis.",
+      "reader_more": "A narrative literature synthesis produces a four-component socio-technical foresight framework and five propositions. It conceptualises how analysts and AI tools co-evolve. The authors acknowledge that the framework has not been empirically validated.",
+      "deep_analysis": {
+        "work_kind": "conceptual foresight method paper",
+        "research_question": "",
+        "main_finding": "A novel four-part integrated organisational AI foresight framework, with five propositions for validation.",
+        "method_or_basis": "Peer-reviewed narrative synthesis and conceptual integration; 27-page university repository manuscript.",
+        "qualification": "Unvalidated theoretical foresight framework; proposed model is not empirical proof of improved forecasting.",
+        "radar_relevance": "Reusable strategic foresight framework in methods library.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Emerald DOI landing page https://doi.org/10.1108/fs-07-2025-0141 initially blocked scanner retrieval (403)."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Publisher DOI landing page https://doi.org/10.1108/fs-07-2025-0141 corroborated author names, article, 5 October 2026 publication and conceptual abstract."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered complete 27-page author manuscript from Universidad Rey Juan Carlos open institutional repository https://burjcdigital.urjc.es/bitstreams/fb5f08d1-53dd-4943-9994-e8dc85209ebe/download; checked introductory contributions and manuscript framework."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "full_text_repository_copy",
+            "url": "https://burjcdigital.urjc.es/bitstreams/fb5f08d1-53dd-4943-9994-e8dc85209ebe/download",
+            "title": "Artificial intelligence as enabler and object of strategic foresight: a theoretical framework for digital organisational transformation",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_record",
+            "url": "https://doi.org/10.1108/fs-07-2025-0141",
+            "title": "Artificial intelligence as enabler and object of strategic foresight: a theoretical framework for digital organisational transformation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identified matching publisher work and reviewed substantive source. The peer-reviewed full author-repository manuscript proposes an integrated AI-enabled strategic-foresight framework with four components and five testable propositions, including anticipatory co-evolution. Substantive transferable futures-method conceptual contribution; geography not required."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_TRANSFERABLE_FORESIGHT_FRAMEWORK",
+        "reason": "The peer-reviewed full author-repository manuscript proposes an integrated AI-enabled strategic-foresight framework with four components and five testable propositions, including anticipatory co-evolution. Substantive transferable futures-method conceptual contribution; geography not required."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-08T13:26:54Z",
+      "deep_scan_package_id": "worker-a-20261008T130030Z-46f36111e948",
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Dittmar, Sposato and Vargas Portillo",
+            "class": "university_group"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-10-05",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Unvalidated theoretical foresight framework; proposed model is not empirical proof of improved forecasting.",
+          "text": "A novel four-part integrated organisational AI foresight framework, with five propositions for validation.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "link:https://doi.org/10.1108/fs-07-2025-0141",
+          "merit": 70,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:ef824453b6693b75:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1080/26437015.2026.2737090": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "corpus_scope": "main",
+      "source_hash": "9c334e3e",
+      "identity_hash": "2266b3695370dfe1",
+      "reader_title": "Delphi expert survey on small-business recovery",
+      "reader_what": "Expert panels discuss entrepreneurial resilience and recovery from business disruptions.",
+      "reader_more": "The article conducts a two-round Delphi exercise across experts in restructuring, risk management and resilience research. It uses a known expert-consensus technique to study a business-management question. The work does not establish a new general-purpose foresight method.",
+      "deep_analysis": {
+        "work_kind": "applied expert Delphi study",
+        "research_question": "",
+        "main_finding": "Delphi panels identify perceived conditions shaping small-business resilience and recovery.",
+        "method_or_basis": "Two rounds of existing Delphi technique across three expert panels; scanner-supplied 24,000-character matching primary paper text.",
+        "qualification": "Expert consensus does not directly measure causal impacts; Delphi methodology is already established.",
+        "radar_relevance": "Applied small-business resilience, not methodological innovation for Strand B.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching 24,000-character article text recovered in supplied OpenAlex-assisted full-text PDF route for https://doi.org/10.1080/26437015.2026.2737090; publisher article corroborated by Taylor & Francis listing."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "full_text_repository_copy",
+            "url": "https://doi.org/10.1080/26437015.2026.2737090",
+            "title": "Entrepreneurial resilience and small business recovery: A Delphi study",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identified matching publisher work and reviewed substantive source. Paper applies an established two-round Delphi expert elicitation to small-business recovery and resilience; it does not propose a new or substantially improved transferable foresight/technology-intelligence method. Applied expert consensus is not enough for B."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_EXISTING_METHOD_APPLIED",
+        "reason": "Paper applies an established two-round Delphi expert elicitation to small-business recovery and resilience; it does not propose a new or substantially improved transferable foresight/technology-intelligence method. Applied expert consensus is not enough for B."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-08T13:26:54Z",
+      "deep_scan_package_id": "worker-a-20261008T130030Z-46f36111e948",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1016/j.omega.2026.103627": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "corpus_scope": "main",
+      "source_hash": "14011ee5",
+      "identity_hash": "9c92568d6cd8ff07",
+      "reader_title": "Retail pricing model uses foresight as an economic planning horizon",
+      "reader_what": "A mathematical model compares pay contracts between streamers and brand suppliers across two sales periods.",
+      "reader_more": "The Omega article develops a two-stage game model for livestream and later conventional retail sales. It analyses when commissions and sales-target contracts benefit parties. Although it uses “strategic foresight,” this denotes considering later retail sales, not systematic scenario analysis or research intelligence.",
+      "deep_analysis": {
+        "work_kind": "operations research pricing model",
+        "research_question": "",
+        "main_finding": "Retail contractual incentives vary with streamer ability and intertemporal sales diffusion.",
+        "method_or_basis": "Elsevier publisher article with substantive introduction, model exposition, comparative results and conclusion.",
+        "qualification": "Results come from a stylised commerce model, not measured futures-method performance.",
+        "radar_relevance": "No transferable futures/foresight or R&I-intelligence method contribution.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "DOI https://doi.org/10.1016/j.omega.2026.103627 was inaccessible to original scanner; no substantive stored text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Publisher article https://www.sciencedirect.com/science/article/pii/S0305048326001167 provided substantive sections and matched DOI https://doi.org/10.1016/j.omega.2026.103627."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0305048326001167",
+            "title": "Pricing and incentive contracts design in live-streaming commerce with intertemporal diffusion and strategic foresight",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identified matching publisher work and reviewed substantive source. Publisher article explicitly develops an operations-research two-stage Stackelberg pricing-and-incentive model for live-stream commerce. Its “strategic foresight” means a merchant’s intertemporal decision horizon, not a futures/foresight or forward-looking R&I-intelligence method. B relevance gate fails."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_UNRELATED_OPERATIONAL_MODEL",
+        "reason": "Publisher article explicitly develops an operations-research two-stage Stackelberg pricing-and-incentive model for live-stream commerce. Its “strategic foresight” means a merchant’s intertemporal decision horizon, not a futures/foresight or forward-looking R&I-intelligence method. B relevance gate fails."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-08T13:26:54Z",
+      "deep_scan_package_id": "worker-a-20261008T130030Z-46f36111e948",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.euronews.com/2026/10/06/what-to-know-about-mistrals-ml4-as-it-bets-on-eu-sovereignty-in-the-us-china-open-weight-a": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "15783aa6",
+      "identity_hash": "7d5f2a4150fd7d9c",
+      "reader_title": "Mistral opens early access to Large 4, with weights promised later",
+      "reader_what": "Mistral launched a Large 4 preview on October 6, saying open weights will follow later in October.",
+      "reader_why": "A European-built frontier AI model could broaden regional options for deploying and researching advanced AI.",
+      "reader_more": "Mistral confirms the model preview is available through its API while selected users test cybersecurity features. It states ML4 was trained on thousands of GPUs in European datacentres and offers a European-operated deployment. Public distribution of the weights has not yet happened. Comparative benchmark scores are primarily reported by Mistral and should not be treated as independently established superiority.",
+      "deep_analysis": {
+        "work_kind": "new technology capability launch",
+        "research_question": "",
+        "main_finding": "Mistral publicly launched the ML4 preview on 2026-10-06 and plans an open-weight release later in October.",
+        "method_or_basis": "Company primary launch communication cross-checked with contemporaneous Euronews reporting.",
+        "qualification": "Preview/API access is live; downloadable model weights are promised for later October, and performance comparisons are largely vendor-reported.",
+        "radar_relevance": "C: new European frontier AI capability and local infrastructure relevant to AI research, technology capacity and dependency options.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened Euronews original https://www.euronews.com/2026/10/06/what-to-know-about-mistrals-ml4-as-it-bets-on-eu-sovereignty-in-the-us-china-open-weight-a; the article reports an ML4 preview and proposed later weight release."
+          },
+          {
+            "step": "publisher_or_institution",
+            "outcome": "success",
+            "note": "Opened Mistral first-party launch announcement https://mistral.ai/news/mistral-large-4/; confirms preview on 2026-10-06, European training and deployment and planned weight release."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "original_reporting",
+            "url": "https://www.euronews.com/2026/10/06/what-to-know-about-mistrals-ml4-as-it-bets-on-eu-sovereignty-in-the-us-china-open-weight-a",
+            "title": "What to know about Mistral’s ML4 as it bets on EU sovereignty",
+            "evidence_used": true
+          },
+          {
+            "kind": "company_primary_announcement",
+            "url": "https://mistral.ai/news/mistral-large-4/",
+            "title": "Introducing Mistral Large 4",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Euronews story independently cross-checked against Mistral launch post. Preview release is verifiable, but model-performance statements are company claims and model weights were not released as of this report."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "Verified 6 October public preview of an advanced French-developed AI model trained and served on European infrastructure is a substantive new European AI R&I/technology-capability development; weights release remains prospective."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No candidate duplicate supplied."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-08T13:26:55Z",
+      "deep_scan_package_id": "worker-b-20261008T130109Z-62931535cfb8",
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [
+            "compute.capacity"
+          ],
+          "actor": {
+            "name": "Mistral AI",
+            "class": "company"
+          },
+          "mechanism": "launches",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-10-06",
+          "scope": {
+            "level": "company_in_eu",
+            "countries": [
+              "FR"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Preview/API access is live; downloadable model weights are promised for later October, and performance comparisons are largely vendor-reported.",
+          "text": "Mistral launched an API preview of Large 4 on 6 October 2026, reporting training and hosting on European datacentre infrastructure, with weights scheduled for later release.",
+          "confidence": "high",
+          "record_key": "link:https://www.euronews.com/2026/10/06/what-to-know-about-mistrals-ml4-as-it-bets-on-eu-sovereignty-in-the-us-china-open-weight-a",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:7d5f2a4150fd7d9c:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-07T08:51:19Z"
+  "claims_updated_at": "2026-10-08T13:26:55Z"
 }
