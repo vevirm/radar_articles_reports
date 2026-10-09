@@ -7,8 +7,8 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **2675** (Main **1264** + Historical **1411**)
-- Automatic queue still needing V2 verification: **279** (Main **106** + Historical **173**)
-- Currently assigned to workers: **37** (Main **0** + Historical **37**)
+- Automatic queue still needing V2 verification: **291** (Main **118** + Historical **173**)
+- Currently assigned to workers: **49** (Main **12** + Historical **37**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **29**
 - Automatic queue pending and not yet assigned: **242**
@@ -16,10 +16,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261009T100342Z-4dfac6bed106`
-- Assigned unresolved records: **2**
-  1. `historical:id:dd7feef75f937a9c` — Applying Evaluation Thinking and Practice to Foresight Evaluation
-  2. `historical:id:a09a5ff2672d4d27` — Educational Sovereignty and Artificial Intelligence Challenges: The Case of Morocco
+- Current package: `worker-a-20261009T164449Z-37036ce5e9dd`
+- Assigned unresolved records: **14**
+  1. `link:https://doi.org/10.1177/23210230261483357` — Digital Sovereignty and India: Rhetoric and Reality
+  2. `link:https://www.atlanticcouncil.org/in-depth-research-reports/issue-brief/the-new-geoeconomics-of-bretton-woods/` — The new geoeconomics of Bretton Woods
+  3. `link:https://doi.org/10.1016/j.chbr.2026.101382` — Trust, Ethical Exposure, and AI Adoption Intention among Accounting Professionals: Incremental Explanatory Evidence Beyond UTAUT
+  4. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=1ec3c1c3-c388-11f1-bfcb-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — From research & innovation to deployment - Publications Office of the EU
+  5. `link:https://www.cesaer.org/content/5-operations/2026/investing-in-what-makes-europe-strong-event-report.pdf` — EU budget talks must protect what makes Europe strong
+  6. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=aa48c483-c388-11f1-bfcb-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — ESIR - Publications Office of the EU
+  7. `link:https://news.google.com/rss/articles/CBMixgFBVV95cUxOOUk2RnFEbjJ3U1VMdUdwTXNrT3VNT0FpcjBDMFVLVHVzSHVlLVJjZE8tRC15Y1I0aWN5ZzJJQlJZaldBVmJ0cy1FLUVZNGVVc0k2bzg5dDlQTFlabzFrSHgtQ0dMNXg2N21BSzhsZEhyTTRTUjlBa2JhSWh5RVU1UWs4bnlhZ3M5Z3RCMTBLSXVieTBwckZNTWR0MUhkYUk1NUp6STFSaGhZb3FFTE5hVlRodXVOdE9faFlDZklPdGRlaERDR2c?oc=5` — US, European telecom stocks slide as SpaceX spectrum deal rattles sector
+  8. `link:https://news.google.com/rss/articles/CBMiqAFBVV95cUxPRE85czRTdEdua3U2RlVVTkdvMHRuQlhvbXM5T1JpWkdyTmExZEc4dmdRbllKTWo3dVNucml3dVQwc1V2RlRpOG82QzVQc2lXVUxTREkzMHZtVHVWSEk1bmlfMHZjZU1saGo1SjFYTFFveXh6dGVTVVc1bTdVbndVNUZIalE1NWg0OEhPMTN1QTZ2SDdKSjdxeXNxMkVWVnBpNEU4cXhyMzU?oc=5` — EU’s new list of critical mineral projects focuses on clean energy metals
+  - … plus 6 more in the package manifest
 
 ### Worker B
 - Current package: `worker-b-20261009T080214Z-5994737f044d`
