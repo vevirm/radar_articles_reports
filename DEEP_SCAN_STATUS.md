@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261009T082234Z-5ae189a1d2b9`
+- Current package: `worker-a-20261009T082718Z-5ae189a1d2b9`
 - Assigned unresolved records: **17**
   1. `link:https://doi.org/10.1007/s41781-026-00188-1` — ZaB–Zentrum am Berg: Research for New Underground Solutions
   2. `link:https://doi.org/10.1007/s00168-026-01565-9` — Do firms conducting environmental projects funded by European Regional Development Funds perform better in Galicia (Spain)? The role of innovation
