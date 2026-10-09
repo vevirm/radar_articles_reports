@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-08T13:26:55Z",
+  "generated_at": "2026-10-09T08:15:28Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -230529,8 +230529,403 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1016/j.ijheh.2026.114907": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "b01b5598",
+      "identity_hash": "3d93785e4a6f6b66",
+      "reader_title": "European joint programme HBM4EU - Bridging science and policy: experiences and lessons learned from the key partners in",
+      "reader_what": "HBM4EU partners analyse coordination of European human-biomonitoring research and translation of evidence into chemicals policy.",
+      "reader_why": "This gives evidence about European research-system capacity, governance or strategic technology choices.",
+      "reader_more": "HBM4EU partners analyse coordination of European human-biomonitoring research and translation of evidence into chemicals policy. Claims are bounded by the source’s reported evidence.",
+      "deep_analysis": {
+        "work_kind": "research or policy analysis",
+        "research_question": "",
+        "main_finding": "HBM4EU partners analyse coordination of European human-biomonitoring research and translation of evidence into chemicals policy.",
+        "method_or_basis": "Primary text recovered from the supplied scanner package.",
+        "qualification": "This is an assessment of documented evidence, not proof of causal impact or of future outcomes.",
+        "radar_relevance": "Route 3: a completed first-hand analysis of cross-country European research coordination and science–policy interfaces.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Job-supplied destination: https://doi.org/10.1016/j.ijheh.2026.114907; matching source content available through the scanner or alternative identified source."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Inspected packaged pdf_excerpt text (24000 characters) from https://content.openalex.org/works/W7220735509.pdf; checked title/subject against the supplied work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_retrieved_primary_material",
+            "url": "https://content.openalex.org/works/W7220735509.pdf",
+            "title": "European joint programme HBM4EU - Bridging science and policy: experiences and lessons learned from the key partners in the scientific steering of the initiative",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching scanner-recovered primary text reviewed; admission independently reassessed rather than accepting scanner label."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Route 3: a completed first-hand analysis of cross-country European research coordination and science–policy interfaces."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact-identity duplicate established in supplied candidates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-09T08:15:27Z",
+      "deep_scan_package_id": "worker-a-20261009T080136Z-8cddc8c000de",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "HBM4EU scientific coordination partners",
+            "class": "university_group"
+          },
+          "mechanism": "coordinates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-10-07",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "This is an assessment of documented evidence, not proof of causal impact or of future outcomes.",
+          "text": "HBM4EU partners analyse coordination of European human-biomonitoring research and translation of evidence into chemicals policy.",
+          "confidence": "high",
+          "record_key": "link:https://doi.org/10.1016/j.ijheh.2026.114907",
+          "merit": 77,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:3d93785e4a6f6b66:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1007/s44274-026-01111-6": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "1f65a537",
+      "identity_hash": "e1eeb172f63b5959",
+      "reader_title": "Financial, innovation and fiscal drivers of ecological efficiency across Western and Eastern European Union member states",
+      "reader_what": "Panel study associates green innovation efficiency, finance and taxes with environmental efficiency across EU member states.",
+      "reader_more": "Panel study associates green innovation efficiency, finance and taxes with environmental efficiency across EU member states. Claims are bounded by the source’s reported evidence.",
+      "deep_analysis": {
+        "work_kind": "research or policy analysis",
+        "research_question": "",
+        "main_finding": "Panel study associates green innovation efficiency, finance and taxes with environmental efficiency across EU member states.",
+        "method_or_basis": "Primary text recovered from the supplied scanner package.",
+        "qualification": "The identified source does not satisfy the specified strand’s positive admission route.",
+        "radar_relevance": "A Routes 1–3: environmental performance is the outcome; European research or innovation system capacity and mechanisms are not the study’s central object.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Job-supplied destination: https://doi.org/10.1007/s44274-026-01111-6; matching source content available through the scanner or alternative identified source."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Inspected packaged substantial_web_text text (20533 characters) from https://link.springer.com/article/10.1007/s44274-026-01111-6; checked title/subject against the supplied work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_retrieved_primary_material",
+            "url": "https://link.springer.com/article/10.1007/s44274-026-01111-6",
+            "title": "Financial, innovation and fiscal drivers of ecological efficiency across Western and Eastern European Union member states",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching scanner-recovered primary text reviewed; admission independently reassessed rather than accepting scanner label."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Routes 1–3: environmental performance is the outcome; European research or innovation system capacity and mechanisms are not the study’s central object."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact-identity duplicate established in supplied candidates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-09T08:15:27Z",
+      "deep_scan_package_id": "worker-a-20261009T080136Z-8cddc8c000de",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1177/21582440261489945": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "e970763a",
+      "identity_hash": "0bd0c11d7ee58efa",
+      "reader_title": "Reading Literacy, Reading Habits, Democracy and Innovation: A Cross-National Analysis of Selected European Countries",
+      "reader_what": "Study considers literacy and reading habits alongside democracy and innovation in a European cross-national comparison.",
+      "reader_more": "Study considers literacy and reading habits alongside democracy and innovation in a European cross-national comparison. Claims are bounded by the source’s reported evidence.",
+      "deep_analysis": {
+        "work_kind": "research or policy analysis",
+        "research_question": "",
+        "main_finding": "Study considers literacy and reading habits alongside democracy and innovation in a European cross-national comparison.",
+        "method_or_basis": "Identifiable article or primary report recovered from publication source.",
+        "qualification": "The identified source does not satisfy the specified strand’s positive admission route.",
+        "radar_relevance": "A Routes 1–3: innovation is a contextual national indicator, not a substantive investigation of Europe’s R&I system.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "limited",
+            "note": "Job-supplied destination: https://doi.org/10.1177/21582440261489945; matching source content available through the scanner or alternative identified source."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Recovered matching identity or supporting article: https://sage.cnpereading.com/doi/10.1177/21582440261489945. SAGE Open full-text article, July 2026."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "recovered_article_or_official_document",
+            "url": "https://sage.cnpereading.com/doi/10.1177/21582440261489945",
+            "title": "SAGE Open full-text article, July 2026",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "External recovery consulted; admission independently reassessed rather than accepting scanner label."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Routes 1–3: innovation is a contextual national indicator, not a substantive investigation of Europe’s R&I system."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact-identity duplicate established in supplied candidates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-09T08:15:27Z",
+      "deep_scan_package_id": "worker-a-20261009T080136Z-8cddc8c000de",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:b3d90de3674f53a5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "493d22bf",
+      "identity_hash": "6d4aa2a6cabb77a4",
+      "reader_title": "EARTO Analysis on EARTO Members’ Participation in Horizon Europe | EARTO",
+      "reader_what": "EARTO analyses Horizon Europe eCORDA grant data and the participation of its members in European collaborative projects.",
+      "reader_more": "EARTO analyses Horizon Europe eCORDA grant data and the participation of its members in European collaborative projects. This is historical context rather than a new event.",
+      "deep_analysis": {
+        "work_kind": "research or policy analysis",
+        "research_question": "",
+        "main_finding": "EARTO analyses Horizon Europe eCORDA grant data and the participation of its members in European collaborative projects.",
+        "method_or_basis": "Identifiable article or primary report recovered from publication source.",
+        "qualification": "This is an assessment of documented evidence, not proof of causal impact or of future outcomes.",
+        "radar_relevance": "A Route 3: a completed quantitative assessment of European R&I funding, collaborative networks and research–industry links.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "limited",
+            "note": "Job-supplied destination: https://www.earto.eu/publication/earto-analysis-on-earto-members-participation-in-horizon-europe/; matching source content available through the scanner or alternative identified source."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Recovered matching identity or supporting article: https://www.earto.eu/wp-content/uploads/EARTO-Members-Participation-in-Horizon-Europe-EC-eCORDA-Data-Analysis-November-2022.pdf. EARTO first-party 10 February 2023 quantitative report."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "recovered_article_or_official_document",
+            "url": "https://www.earto.eu/wp-content/uploads/EARTO-Members-Participation-in-Horizon-Europe-EC-eCORDA-Data-Analysis-November-2022.pdf",
+            "title": "EARTO first-party 10 February 2023 quantitative report",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "External recovery consulted; retrieved report identity and substantive findings checked."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: a completed quantitative assessment of European R&I funding, collaborative networks and research–industry links."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact-identity duplicate established in supplied candidates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-09T08:15:28Z",
+      "deep_scan_package_id": "worker-b-20261009T080214Z-5994737f044d",
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "EARTO",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2023-02-10",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "This is an assessment of documented evidence, not proof of causal impact or of future outcomes.",
+          "text": "EARTO analyses Horizon Europe eCORDA grant data and the participation of its members in European collaborative projects.",
+          "confidence": "high",
+          "record_key": "historical:id:b3d90de3674f53a5",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:6d4aa2a6cabb77a4:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:ec3ab153a1e522a8": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "cfdce7a8",
+      "identity_hash": "91dd1c49346b5030",
+      "reader_title": "EARTO Analysis on Budget and Structure of Horizon Europe 2.0 | EARTO",
+      "reader_what": "EARTO compares the Commission’s proposed 2028–2034 Horizon Europe budget and pillar structure with the current programme.",
+      "reader_more": "EARTO compares the Commission’s proposed 2028–2034 Horizon Europe budget and pillar structure with the current programme. This is historical context rather than a new event.",
+      "deep_analysis": {
+        "work_kind": "research or policy analysis",
+        "research_question": "",
+        "main_finding": "EARTO compares the Commission’s proposed 2028–2034 Horizon Europe budget and pillar structure with the current programme.",
+        "method_or_basis": "Identifiable article or primary report recovered from publication source.",
+        "qualification": "This is an assessment of documented evidence, not proof of causal impact or of future outcomes.",
+        "radar_relevance": "A Route 3: detailed evidence-led European research funding and programme governance analysis, clearly distinguishing proposals from enacted budgets.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "limited",
+            "note": "Job-supplied destination: https://www.earto.eu/publication/earto-analysis-on-budget-and-structure-of-horizon-europe-2-0/; matching source content available through the scanner or alternative identified source."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Recovered matching identity or supporting article: https://www.earto.eu/wp-content/uploads/EARTO-Analysis-of-Horizon-Europe-2.0-Budget-Final.pdf. EARTO first-party 25 July 2025 analytical PDF."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "recovered_article_or_official_document",
+            "url": "https://www.earto.eu/wp-content/uploads/EARTO-Analysis-of-Horizon-Europe-2.0-Budget-Final.pdf",
+            "title": "EARTO first-party 25 July 2025 analytical PDF",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "External recovery consulted; retrieved report identity and substantive findings checked."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: detailed evidence-led European research funding and programme governance analysis, clearly distinguishing proposals from enacted budgets."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact-identity duplicate established in supplied candidates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-09T08:15:28Z",
+      "deep_scan_package_id": "worker-b-20261009T080214Z-5994737f044d",
+      "claims": [
+        {
+          "object": "horizon.budget_2028_34",
+          "secondary_objects": [],
+          "actor": {
+            "name": "EARTO",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2025-07-25",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "This is an assessment of documented evidence, not proof of causal impact or of future outcomes.",
+          "text": "EARTO compares the Commission’s proposed 2028–2034 Horizon Europe budget and pillar structure with the current programme.",
+          "confidence": "high",
+          "record_key": "historical:id:ec3ab153a1e522a8",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:91dd1c49346b5030:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-08T13:26:55Z"
+  "claims_updated_at": "2026-10-09T08:15:28Z"
 }

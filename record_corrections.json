@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-10-08T13:26:55Z",
+  "updated_at": "2026-10-09T08:15:28Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -14287,6 +14287,36 @@
       ],
       "updated_at": "2026-10-07T08:51:18Z",
       "deep_scan_package_id": "worker-b-20261007T084440Z-293b99d07eff"
+    },
+    "historical:id:b3d90de3674f53a5": {
+      "fields": {
+        "date": "2023-02-10"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The EARTO primary analysis using November 2022 eCORDA data is dated 10 February 2023, not 2016.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.earto.eu/wp-content/uploads/EARTO-Members-Participation-in-Horizon-Europe-EC-eCORDA-Data-Analysis-November-2022.pdf"
+      ],
+      "updated_at": "2026-10-09T08:15:28Z",
+      "deep_scan_package_id": "worker-b-20261009T080214Z-5994737f044d"
+    },
+    "historical:id:ec3ab153a1e522a8": {
+      "fields": {
+        "date": "2025-07-25"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The first-party EARTO report is dated 25 July 2025, not 2016.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.earto.eu/wp-content/uploads/EARTO-Analysis-of-Horizon-Europe-2.0-Budget-Final.pdf"
+      ],
+      "updated_at": "2026-10-09T08:15:28Z",
+      "deep_scan_package_id": "worker-b-20261009T080214Z-5994737f044d"
     }
   }
 }
