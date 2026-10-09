@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-10-09T08:55:36Z",
+  "updated_at": "2026-10-09T09:56:38Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -14347,6 +14347,77 @@
       ],
       "updated_at": "2026-10-09T08:55:36Z",
       "deep_scan_package_id": "worker-a-20261009T082718Z-5ae189a1d2b9"
+    },
+    "historical:id:dc36a3b4703eac14": {
+      "fields": {
+        "source": "CEBRI-Revista: Brazilian Journal of International Affairs",
+        "type": "journal article"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The publisher is CEBRI-Revista, not International Affairs; English full text confirms original title, author and DOI.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://cebri.org/revista/en/artigo/249/defending-eu-democracy-and-sovereignty-from-the-new-geopolitics-of-technology",
+        "https://cebri-revista.emnuvens.com.br/revista/article/view/298"
+      ],
+      "updated_at": "2026-10-09T09:56:37Z",
+      "deep_scan_package_id": "worker-a-20261009T094041Z-87dfa3f83ea9"
+    },
+    "historical:id:fb93ad255037a74d": {
+      "fields": {
+        "date": "2026-08-20",
+        "source": "Publications Office of the European Union",
+        "type": "policy report"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The JRC record specifies 20 August 2026, correcting scanner placeholder 1 January 2026; EU Publications Office is named publisher.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://publications.jrc.ec.europa.eu/repository/handle/JRC147825",
+        "https://op.europa.eu/fi/publication-detail/-/publication/bbc8c40d-9d05-11f1-b25c-01aa75ed71a1"
+      ],
+      "updated_at": "2026-10-09T09:56:37Z",
+      "deep_scan_package_id": "worker-a-20261009T094041Z-87dfa3f83ea9"
+    },
+    "historical:id:3938364551e8ab70": {
+      "fields": {
+        "authors": "Trine Rosengren Pejstrup; Ian Klinke",
+        "type": "policy brief"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "DIIS repository names two authors, absent in scanner metadata.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://pure.diis.dk/ws/files/26524082/DIIS_PB_Decolonisation_in_the_second_space_age_WEB.pdf",
+        "https://research.diis.dk/da/publications/decolonisation-in-the-second-space-age/"
+      ],
+      "updated_at": "2026-10-09T09:56:38Z",
+      "deep_scan_package_id": "worker-a-20261009T094041Z-87dfa3f83ea9"
+    },
+    "historical:id:a601d52daab65496": {
+      "fields": {
+        "source": "Journal of Liberty and International Affairs",
+        "date": "2023-12-26",
+        "authors": "Pham Thi Yen",
+        "type": "journal article"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Journal reproduction and indexed journal record identify Journal of Liberty and International Affairs rather than International Affairs, and give publication 26 December 2023; byline is Pham Thi Yen.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.researchgate.net/publication/376025099_SOUTH_KOREA_AND_THE_INDO-PACIFIC_STRATEGY_FROM_STRATEGIC_AMBIGUITY_TO_STRATEGIC_AUTONOMY",
+        "https://izvor.net.mk/article.php?id=43624"
+      ],
+      "updated_at": "2026-10-09T09:56:38Z",
+      "deep_scan_package_id": "worker-a-20261009T094041Z-87dfa3f83ea9"
     }
   }
 }

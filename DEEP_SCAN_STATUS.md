@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2671** (Main **1264** + Historical **1407**)
-- Automatic queue still needing V2 verification: **283** (Main **106** + Historical **177**)
-- Currently assigned to workers: **41** (Main **0** + Historical **41**)
+- Authoritative V2 verified: **2675** (Main **1264** + Historical **1411**)
+- Automatic queue still needing V2 verification: **279** (Main **106** + Historical **173**)
+- Currently assigned to workers: **37** (Main **0** + Historical **37**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **29**
 - Automatic queue pending and not yet assigned: **242**
@@ -16,14 +16,10 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261009T094041Z-87dfa3f83ea9`
-- Assigned unresolved records: **6**
-  1. `historical:id:dc36a3b4703eac14` — Defending EU Democracy and Sovereignty from the New Geopolitics of Technology
-  2. `historical:id:fb93ad255037a74d` — Building Resilient and Robust Clean Energy Supply Chains: Challenges and Opportunities for a Sustainable Energy Transition
-  3. `historical:id:3938364551e8ab70` — Decolonisation in the second space age
-  4. `historical:id:a601d52daab65496` — SOUTH KOREA AND THE INDO-PACIFIC STRATEGY: FROM STRATEGIC AMBIGUITY TO STRATEGIC AUTONOMY
-  5. `historical:id:a09a5ff2672d4d27` — Educational Sovereignty and Artificial Intelligence Challenges: The Case of Morocco
-  6. `historical:id:dd7feef75f937a9c` — Applying Evaluation Thinking and Practice to Foresight Evaluation
+- Current package: `worker-a-20261009T100342Z-4dfac6bed106`
+- Assigned unresolved records: **2**
+  1. `historical:id:dd7feef75f937a9c` — Applying Evaluation Thinking and Practice to Foresight Evaluation
+  2. `historical:id:a09a5ff2672d4d27` — Educational Sovereignty and Artificial Intelligence Challenges: The Case of Morocco
 
 ### Worker B
 - Current package: `worker-b-20261009T080214Z-5994737f044d`
