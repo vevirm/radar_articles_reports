@@ -1,0 +1,550 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-a-20261009T094041Z-87dfa3f83ea9",
+  "results": [
+    {
+      "record_key": "historical:id:dc36a3b4703eac14",
+      "source_hash": "1b3f0428",
+      "identity_hash": "2ca55814c7f5744f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI 10.54827/issn2764-7897.cebri2025.16.02.11.155-173.en resolves to CEBRI-Revista article record, not International Affairs."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publisher English full-text URL cebri.org/revista/en/artigo/249 matches title, author and DOI."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://cebri.org/revista/en/artigo/249/defending-eu-democracy-and-sovereignty-from-the-new-geopolitics-of-technology",
+            "title": "Defending EU Democracy and Sovereignty from the New Geopolitics of Technology",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_record",
+            "url": "https://cebri-revista.emnuvens.com.br/revista/article/view/298",
+            "title": "CEBRI-Revista issue 16 record",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full publisher article analyses EU dependence on US-controlled AI, cloud, semiconductors and digital infrastructure and argues regulation alone cannot secure strategic capacity."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Full publisher article analyses EU dependence on US-controlled AI, cloud, semiconductors and digital infrastructure and argues regulation alone cannot secure strategic capacity."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "CEBRI-Revista: Brazilian Journal of International Affairs",
+          "type": "journal article"
+        },
+        "unset": [],
+        "reason": "The publisher is CEBRI-Revista, not International Affairs; English full text confirms original title, author and DOI."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied possible duplicates or variant keys."
+      },
+      "reader_title": "How technological dependence constrains EU autonomy",
+      "reader_what": "The author links EU technology reliance to vulnerability to foreign political leverage.",
+      "reader_why": "EU regulatory power cannot replace domestic technology capacity or control over essential infrastructure.",
+      "reader_more": "The paper surveys the politics of AI, cloud, chips, standards and digital infrastructure. It argues that dependence on US technology suppliers exposes European rule-setting to external pressure. This is an interpretive argument, not an empirical estimate of the size of the effect.",
+      "deep_analysis": {
+        "work_kind": "policy analysis",
+        "research_question": "How do geopolitical technology rivalries affect EU sovereignty and democratic autonomy?",
+        "main_finding": "EU technology dependencies constrain strategic room to manoeuvre despite regulatory leadership.",
+        "method_or_basis": "Historical comparison and contemporary geopolitical policy analysis in full publisher article.",
+        "qualification": "Interpretive policy analysis; arguments about dependency and coercion are not new causal measurements.",
+        "radar_relevance": "Direct route-1/2 EU strategic technology-capacity and dependence evidence.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "José Ignacio Torreblanca",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_conditional",
+          "status": "announced",
+          "status_date": "2025",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Interpretive policy analysis; arguments about dependency and coercion are not new causal measurements.",
+          "text": "The paper argues that EU digital sovereignty depends on reducing exposure to foreign-owned technology infrastructures.",
+          "confidence": "high",
+          "status_date_precision": "year"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:fb93ad255037a74d",
+      "source_hash": "2df945b0",
+      "identity_hash": "05e87ee9966585ec",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "JRC147825 official record confirms authors, report identity, 20 August 2026 issue and substantial summary."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "EU Publications Office catalogue corroborates report identifier DOI 10.2760/5640390, workshop origin and editorial responsibility."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_report_record",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC147825",
+            "title": "JRC147825 Clean Energy Supply Chains",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publisher_record",
+            "url": "https://op.europa.eu/fi/publication-detail/-/publication/bbc8c40d-9d05-11f1-b25c-01aa75ed71a1",
+            "title": "Publications Office clean-energy supply-chains report",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official JRC workshop synthesis evaluates monitoring and technological dependencies in EU-relevant clean-energy manufacturing value chains."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Official JRC workshop synthesis evaluates monitoring and technological dependencies in EU-relevant clean-energy manufacturing value chains."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-08-20",
+          "source": "Publications Office of the European Union",
+          "type": "policy report"
+        },
+        "unset": [],
+        "reason": "The JRC record specifies 20 August 2026, correcting scanner placeholder 1 January 2026; EU Publications Office is named publisher."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied possible duplicates or variant keys."
+      },
+      "reader_title": "Monitoring clean-energy technology supply chains",
+      "reader_what": "JRC and IEA workshop synthesis identifies concentration, opacity and fast shifts in clean-technology manufacturing networks.",
+      "reader_why": "Timely granular data could help EU policymakers detect strategic material and equipment supply vulnerabilities.",
+      "reader_more": "The report records discussions from the November 2025 JRC–IEA workshop in the Netherlands. Participants stressed combining company information, satellite observations and component-origin data to trace supply chains. The synthesis recommends continuous monitoring and materials-saving innovation rather than relying on static snapshots.",
+      "deep_analysis": {
+        "work_kind": "JRC workshop synthesis report",
+        "research_question": "What data and analytical methods can support resilient clean-energy supply chains?",
+        "main_finding": "Concentrated, rapidly changing clean-energy supply chains require improved transparent, continuously updated monitoring.",
+        "method_or_basis": "Synthesis of expert workshop presentations and discussions, as described in the JRC official publication record.",
+        "qualification": "JRC synthesis of workshop discussion, not a completed quantitative supply-chain measurement or proven intervention impact.",
+        "radar_relevance": "Evidence on clean-technology supply-chain dependence, monitoring and industrial innovation capability relevant to European R&I.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "innovation.green_technology",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_conditional",
+          "status": "announced",
+          "status_date": "2026-08-20",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "JRC synthesis of workshop discussion, not a completed quantitative supply-chain measurement or proven intervention impact.",
+          "text": "JRC workshop synthesis reports fragmented data and concentrated clean-energy value chains that hinder monitoring of emerging technology dependencies.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:3938364551e8ab70",
+      "source_hash": "7eb157e7",
+      "identity_hash": "1891964fe9b45c85",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://www.diis.dk/en/research/decolonisation-in-the-second-space-age returned 502 in web reader."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "DIIS Pure repository record verifies Trine Rosengren Pejstrup and Ian Klinke and links full institutional PDF dated 24 February 2025."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "institutional_full_text",
+            "url": "https://pure.diis.dk/ws/files/26524082/DIIS_PB_Decolonisation_in_the_second_space_age_WEB.pdf",
+            "title": "DIIS policy brief: Decolonisation in the second space age",
+            "evidence_used": true
+          },
+          {
+            "kind": "institutional_record",
+            "url": "https://research.diis.dk/da/publications/decolonisation-in-the-second-space-age/",
+            "title": "DIIS research output record",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "DIIS brief substantively connects Danish space research/industrial investment to contested global governance and private-company technological power."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "DIIS brief substantively connects Danish space research/industrial investment to contested global governance and private-company technological power."
+      },
+      "metadata_correction": {
+        "fields": {
+          "authors": "Trine Rosengren Pejstrup; Ian Klinke",
+          "type": "policy brief"
+        },
+        "unset": [],
+        "reason": "DIIS repository names two authors, absent in scanner metadata."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied possible duplicates or variant keys."
+      },
+      "reader_title": "Space investment and the politics of orbital expansion",
+      "reader_what": "A DIIS brief places increased Danish space research spending within disputes over private space power and governance.",
+      "reader_why": "International space rules and corporate control shape the conditions for Denmark’s growing research and industrial capacity.",
+      "reader_more": "The authors discuss private space companies, resource extraction and the unequal burdens of space infrastructure. The brief notes a Danish government plan for DKK 60 million annually in space research during 2025–2028. Its main recommendation is to take demands for equitable space governance seriously; it does not demonstrate the plan’s effects.",
+      "deep_analysis": {
+        "work_kind": "research institute policy brief",
+        "research_question": "How does commercial space expansion affect sovereignty and governance, including Danish space-sector choices?",
+        "main_finding": "Denmark’s planned research investment is unfolding amid disputes about space-commercialisation governance.",
+        "method_or_basis": "Short DIIS policy brief drawing on policy documents and arguments about space treaties and corporate practices.",
+        "qualification": "Short qualitative policy brief; cited Danish funding is a strategy commitment, not an independently audited disbursement or measured sector outcome.",
+        "radar_relevance": "Route-1 Danish member-state strategic space R&I investment and international governance connection, though most of the brief examines decolonisation politics.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.public_support",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Government of Denmark",
+            "class": "member_state"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2024",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "Denmark"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Short qualitative policy brief; cited Danish funding is a strategy commitment, not an independently audited disbursement or measured sector outcome.",
+          "text": "The DIIS brief reports Denmark’s 2024 space strategy providing for DKK 60 million annually in a new space research programme for 2025–2028.",
+          "confidence": "medium",
+          "status_date_precision": "year"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:a601d52daab65496",
+      "source_hash": "d29354c9",
+      "identity_hash": "e5915e74bdc17add",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "DOI resolver https://doi.org/10.47305/jlia2393577t was unavailable directly in web reader."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.47305/JLIA2393577t found in reproduced Journal of Liberty and International Affairs article."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact-title retrieval found open reproduced article and journal metadata."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Journal text reproduced at ResearchGate lists 26 December 2023 publication and journal issue 9(3)."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://www.researchgate.net/publication/376025099_SOUTH_KOREA_AND_THE_INDO-PACIFIC_STRATEGY_FROM_STRATEGIC_AMBIGUITY_TO_STRATEGIC_AUTONOMY",
+            "title": "South Korea and the Indo-Pacific Strategy: full reproduced journal text",
+            "evidence_used": true
+          },
+          {
+            "kind": "journal_metadata",
+            "url": "https://izvor.net.mk/article.php?id=43624",
+            "title": "Macedonian journal index for JLIA 9(3)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The verified article examines South Korean Indo-Pacific foreign policy and US/China relationships; Europe and European R&I are not substantive objects."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NO_SUBSTANTIVE_EU_RI",
+        "reason": "The verified article examines South Korean Indo-Pacific foreign policy and US/China relationships; Europe and European R&I are not substantive objects."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "Journal of Liberty and International Affairs",
+          "date": "2023-12-26",
+          "authors": "Pham Thi Yen",
+          "type": "journal article"
+        },
+        "unset": [],
+        "reason": "Journal reproduction and indexed journal record identify Journal of Liberty and International Affairs rather than International Affairs, and give publication 26 December 2023; byline is Pham Thi Yen."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied possible duplicates or variant keys."
+      },
+      "reader_title": "South Korea’s shift in Indo-Pacific positioning",
+      "reader_what": "Article argues that Seoul adopted a strategy to balance US-China pressure and strengthen foreign-policy autonomy.",
+      "reader_why": "",
+      "reader_more": "The study compares South Korea’s approach before and after its 2022 Indo-Pacific strategy. Its subject is Korean strategic positioning, not the European research or innovation system. The existence of US-China rivalry does not supply a missing European R&I link.",
+      "deep_analysis": {
+        "work_kind": "international-relations review article",
+        "research_question": "Why did South Korea move from strategic ambiguity toward an Indo-Pacific strategy?",
+        "main_finding": "The author interprets South Korea’s shift as an attempt to strengthen strategic autonomy between major powers.",
+        "method_or_basis": "Comparative political analysis using strategic autonomy theory and policy chronology.",
+        "qualification": "Review article is substantive but analyses Korean foreign-policy autonomy, not European R&I or European technology capacity.",
+        "radar_relevance": "Fails EU scope and central R&I gates for Strand A.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:a09a5ff2672d4d27",
+      "source_hash": "9b3e0f44",
+      "identity_hash": "7a75bd9e7679678b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Direct doi.org/10.1007/978-981-19-8641-3_8 reader could not resolve."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Springer chapter /chapter/10.1007/978-981-19-8641-3_8 matches supplied DOI and author."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Springer chapter search identifies pages 101–116 and first-online 21 February 2023."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publisher chapter record provides substantial detailed thematic description but says full chapter is subscription access."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Springer parent-book table of contents independently confirms chapter 9 by Said Hajji."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_chapter",
+            "url": "https://link.springer.com/chapter/10.1007/978-981-19-8641-3_8",
+            "title": "Educational Sovereignty and Artificial Intelligence Challenges: The Case of Morocco",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_book",
+            "url": "https://link.springer.com/book/10.1007/978-981-19-8641-3",
+            "title": "Artificial Intelligence in Higher Education and Scientific Research",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Springer chapter addresses Morocco’s educational sovereignty and use of external education technology; it does not investigate European R&I mechanisms."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NO_SUBSTANTIVE_EU_RI",
+        "reason": "Springer chapter addresses Morocco’s educational sovereignty and use of external education technology; it does not investigate European R&I mechanisms."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "Springer Nature, Artificial Intelligence in Higher Education and Scientific Research",
+          "date": "2023-02-21",
+          "type": "book chapter"
+        },
+        "unset": [],
+        "reason": "Springer identifies this as chapter 9 (pages 101–116), first online 21 February 2023, rather than a journal titled Higher Education."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied possible duplicates or variant keys."
+      },
+      "reader_title": "AI tools and educational sovereignty in Morocco",
+      "reader_what": "Chapter surveys foreign educational platforms, languages and cloud infrastructure as challenges to Moroccan educational control.",
+      "reader_why": "",
+      "reader_more": "The author discusses Morocco’s reliance on foreign EdTech and data infrastructure. This is an education-policy case study outside Europe. EU digital policy citations do not transform it into evidence about the European research and innovation system.",
+      "deep_analysis": {
+        "work_kind": "academic book chapter",
+        "research_question": "What challenges do AI and foreign digital platforms pose to Morocco’s educational sovereignty?",
+        "main_finding": "The author identifies possible external dependencies and governance challenges in Moroccan education.",
+        "method_or_basis": "Publisher-provided detailed chapter synopsis and bibliographic context; full chapter is paywalled.",
+        "qualification": "Publisher preview limits detail; however the primary chapter description unequivocally places the analysis in Morocco’s education system.",
+        "radar_relevance": "Fails substantive European scope and R&I centrality for A; a geography-general analogy does not qualify.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:dd7feef75f937a9c",
+      "source_hash": "100c8a71",
+      "identity_hash": "e67c7ceb665a6d2f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "JRC138233 record matches all three authors and explicitly identifies Association of Professional Futurists as issuing organisation."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Author-uploaded full text at ResearchGate documents December 2024 guide and practical evaluation frameworks for foresight work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "author_uploaded_full_text",
+            "url": "https://www.researchgate.net/publication/387437846_APPLYING_EVALUATION_THINKING_AND_PRACTICE_TO_FORESIGHT",
+            "title": "Applying Evaluation Thinking and Practice to Foresight (December 2024)",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_catalogue",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC138233",
+            "title": "JRC138233 bibliographic record",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The full author-posted guide supplies a transferable evaluation-design toolkit specifically adapted to foresight settings."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_TRANSFERABLE_METHOD",
+        "reason": "The full author-posted guide supplies a transferable evaluation-design toolkit specifically adapted to foresight settings."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2024-12",
+          "source": "Association of Professional Futurists",
+          "type": "methods guide",
+          "title": "Applying Evaluation Thinking and Practice to Foresight"
+        },
+        "unset": [],
+        "reason": "Original author-posted guide is titled without final “Evaluation” and dated December 2024; JRC indexed it 12 August 2026, whereas APF is original issuer."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied possible duplicates or variant keys."
+      },
+      "reader_title": "Evaluating whether foresight activities work",
+      "reader_what": "Guide adapts evaluation designs and measures to uncertain, long-term and often intangible foresight outcomes.",
+      "reader_why": "A reusable design framework can strengthen scrutiny of horizon scanning, scenarios and futures-capability programmes.",
+      "reader_more": "The authors set out questions, designs and measures suitable for foresight initiatives. They compare theory-based approaches and explain when evaluation should focus on process, contribution or later outcomes. This is a practical methodological synthesis, not evidence that one universal evaluation method is superior.",
+      "deep_analysis": {
+        "work_kind": "professional methods guide",
+        "research_question": "How can evaluation theory be applied to foresight projects with long horizons and diffuse outcomes?",
+        "main_finding": "A structured, setting-sensitive framework helps select evaluation designs for different foresight products and programmes.",
+        "method_or_basis": "Full 2024 guide synthesising program-evaluation theory, measures, examples and adaptations for foresight.",
+        "qualification": "Practical synthesis/adaptation of existing evaluation approaches, not a validated experiment proving better foresight outcomes.",
+        "radar_relevance": "Transferable futures/foresight method guidance, independently of European geography.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.evaluation",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Association of Professional Futurists",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2024-12",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Practical synthesis/adaptation of existing evaluation approaches, not a validated experiment proving better foresight outcomes.",
+          "text": "The guide provides reusable evaluation designs and adapted measures for complex foresight initiatives with intangible and long-term outcomes.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "status_date_precision": "month"
+        }
+      ]
+    }
+  ]
+}
