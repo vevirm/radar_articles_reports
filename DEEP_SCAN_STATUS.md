@@ -6,27 +6,18 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2667** (Main **1260** + Historical **1407**)
-- Automatic queue still needing V2 verification: **281** (Main **110** + Historical **171**)
-- Currently assigned to workers: **52** (Main **10** + Historical **42**)
+- Authoritative V2 verified: **2671** (Main **1264** + Historical **1407**)
+- Automatic queue still needing V2 verification: **277** (Main **106** + Historical **171**)
+- Currently assigned to workers: **35** (Main **0** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **29**
-- Automatic queue pending and not yet assigned: **229**
+- Automatic queue pending and not yet assigned: **242**
 
 ## Worker lanes
 
 ### Worker A
 - Current package: `worker-a-20261009T082718Z-5ae189a1d2b9`
-- Assigned unresolved records: **17**
-  1. `link:https://doi.org/10.1007/s41781-026-00188-1` — ZaB–Zentrum am Berg: Research for New Underground Solutions
-  2. `link:https://doi.org/10.1007/s00168-026-01565-9` — Do firms conducting environmental projects funded by European Regional Development Funds perform better in Galicia (Spain)? The role of innovation
-  3. `link:https://doi.org/10.1016/j.trip.2026.102306` — Prioritizing decarbonization technologies for climate-neutral railway systems: A qualitative technology assessment of Korea’s rail sector
-  4. `link:https://doi.org/10.1186/s40309-026-00298-4` — A systematic review of foresight methods used in the formulation of futures scenarios: evidence from articles indexed in scopus and web of science (2014–2023)
-  5. `link:https://news.google.com/rss/articles/CBMisgFBVV95cUxNaXNMTkVYdUUxOWJNajFTMDNOM1E5RUM0c29zRzRNeVlZQWFvUkl4eGFBVTRlclFEUXdqcnlWbzNRS3gtYnlEcG9JMUpvaUNJa2YyWVZVSi1Qc3FqcUJHZzd5TFNlbjhfaVNEelBzWEt2eWhpc1ljWkVQdFBubEhtX1hZR3pLZm1Fbk9yVnp6eEg2ZEVEZVZHY0hYd2FiZm9qNEhYSFFtdGVMNVl2bTh5VnF3?oc=5` — Hungary plans renewable energy push to curb prices and import needs
-  6. `link:https://news.google.com/rss/articles/CBMiqAFBVV95cUxPa1FCNTBJNVFGY1ZjaS13R28ycjFrU2lLZy1DUXhiRG54TkE1c3dwbzY3c2g0R2xYdVVHT1p3dklqUXFGSExhemEzaGNmT1htWGZDSlFEY200QVI1TXNLd3FTYmx6MHFMUWRfWVlfekpXajcwS1ZSUFFjTHdiMkk3OEh6Z19lZFhBaWdzWlh4WjhwOG1rYWZNVkxnaG95NXl2cUhoaGRLMko?oc=5` — Finland’s Data Center Tally Tops €67 Billion on AI Boom
-  7. `link:https://news.google.com/rss/articles/CBMiuwFBVV95cUxOdXlTTzRaRzhldUwyV01BUWFubVFyNnlwaGRhVzZMNFVJSWtpZGM0Z0tTM3Nxam9Qb0hNYzFRenl5M1V6U0JBVGVRRUdTaFhkYmgzWi1hNjNDRGhhN0NONExTZlNNUkxfdlhUdnlwS1pUc3hRdWIxbEp3bTVwTGctWlgyaXFtc24yazJiQU4tcFhTcGNSVEhBUExZNFRKcTdyNDdvaUZzZVh6M2s4YVF1anQ2cUJIbVR4X2FV?oc=5` — EU-China talks enter critical phase as Šefčovič heads to Beijing
-  8. `link:https://news.google.com/rss/articles/CBMipgFBVV95cUxOcDlnaDRwekw3WXlmaTduR3VRVmxGbmQxbmJzU0poZnQyQ19YdWJ5anpaQW5OenNIYzRMVWZMMDBUd1U1UEl6OUZpellVNlNTdUk4ZVFoT3dwRnpGTEJ4MmRzdXBTcDBueEpHZlZGSzM2U1JJQ0lQUXVGLUFqQXc4aEF5UFIyUnFwMDNaOXZ0Zm94a0xVV191QThRVENuWElFMk4wVFFB?oc=5` — EU cyber and science researchers are testing Chinese AI models
-  - … plus 9 more in the package manifest
+- Assigned unresolved records: **0**
 
 ### Worker B
 - Current package: `worker-b-20261009T080214Z-5994737f044d`
