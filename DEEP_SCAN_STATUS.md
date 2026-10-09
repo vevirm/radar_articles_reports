@@ -6,27 +6,25 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2675** (Main **1264** + Historical **1411**)
-- Automatic queue still needing V2 verification: **291** (Main **118** + Historical **173**)
-- Currently assigned to workers: **49** (Main **12** + Historical **37**)
+- Authoritative V2 verified: **2680** (Main **1269** + Historical **1411**)
+- Automatic queue still needing V2 verification: **286** (Main **113** + Historical **173**)
+- Currently assigned to workers: **42** (Main **7** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **29**
-- Automatic queue pending and not yet assigned: **242**
+- Automatic queue pending and not yet assigned: **244**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261009T164449Z-37036ce5e9dd`
-- Assigned unresolved records: **14**
-  1. `link:https://doi.org/10.1177/23210230261483357` — Digital Sovereignty and India: Rhetoric and Reality
-  2. `link:https://www.atlanticcouncil.org/in-depth-research-reports/issue-brief/the-new-geoeconomics-of-bretton-woods/` — The new geoeconomics of Bretton Woods
-  3. `link:https://doi.org/10.1016/j.chbr.2026.101382` — Trust, Ethical Exposure, and AI Adoption Intention among Accounting Professionals: Incremental Explanatory Evidence Beyond UTAUT
-  4. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=1ec3c1c3-c388-11f1-bfcb-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — From research & innovation to deployment - Publications Office of the EU
-  5. `link:https://www.cesaer.org/content/5-operations/2026/investing-in-what-makes-europe-strong-event-report.pdf` — EU budget talks must protect what makes Europe strong
-  6. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=aa48c483-c388-11f1-bfcb-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — ESIR - Publications Office of the EU
-  7. `link:https://news.google.com/rss/articles/CBMixgFBVV95cUxOOUk2RnFEbjJ3U1VMdUdwTXNrT3VNT0FpcjBDMFVLVHVzSHVlLVJjZE8tRC15Y1I0aWN5ZzJJQlJZaldBVmJ0cy1FLUVZNGVVc0k2bzg5dDlQTFlabzFrSHgtQ0dMNXg2N21BSzhsZEhyTTRTUjlBa2JhSWh5RVU1UWs4bnlhZ3M5Z3RCMTBLSXVieTBwckZNTWR0MUhkYUk1NUp6STFSaGhZb3FFTE5hVlRodXVOdE9faFlDZklPdGRlaERDR2c?oc=5` — US, European telecom stocks slide as SpaceX spectrum deal rattles sector
-  8. `link:https://news.google.com/rss/articles/CBMiqAFBVV95cUxPRE85czRTdEdua3U2RlVVTkdvMHRuQlhvbXM5T1JpWkdyTmExZEc4dmdRbllKTWo3dVNucml3dVQwc1V2RlRpOG82QzVQc2lXVUxTREkzMHZtVHVWSEk1bmlfMHZjZU1saGo1SjFYTFFveXh6dGVTVVc1bTdVbndVNUZIalE1NWg0OEhPMTN1QTZ2SDdKSjdxeXNxMkVWVnBpNEU4cXhyMzU?oc=5` — EU’s new list of critical mineral projects focuses on clean energy metals
-  - … plus 6 more in the package manifest
+- Current package: `worker-a-20261009T170333Z-9e74b44d93b7`
+- Assigned unresolved records: **7**
+  1. `link:https://doi.org/10.1177/23210230261483357` — Digital Sovereignty and India: Rhetoric and Reality — recovery attempt 2/3
+  2. `link:https://news.google.com/rss/articles/CBMixgFBVV95cUxOOUk2RnFEbjJ3U1VMdUdwTXNrT3VNT0FpcjBDMFVLVHVzSHVlLVJjZE8tRC15Y1I0aWN5ZzJJQlJZaldBVmJ0cy1FLUVZNGVVc0k2bzg5dDlQTFlabzFrSHgtQ0dMNXg2N21BSzhsZEhyTTRTUjlBa2JhSWh5RVU1UWs4bnlhZ3M5Z3RCMTBLSXVieTBwckZNTWR0MUhkYUk1NUp6STFSaGhZb3FFTE5hVlRodXVOdE9faFlDZklPdGRlaERDR2c?oc=5` — US, European telecom stocks slide as SpaceX spectrum deal rattles sector
+  3. `link:https://news.google.com/rss/articles/CBMiqAFBVV95cUxPRE85czRTdEdua3U2RlVVTkdvMHRuQlhvbXM5T1JpWkdyTmExZEc4dmdRbllKTWo3dVNucml3dVQwc1V2RlRpOG82QzVQc2lXVUxTREkzMHZtVHVWSEk1bmlfMHZjZU1saGo1SjFYTFFveXh6dGVTVVc1bTdVbndVNUZIalE1NWg0OEhPMTN1QTZ2SDdKSjdxeXNxMkVWVnBpNEU4cXhyMzU?oc=5` — EU’s new list of critical mineral projects focuses on clean energy metals
+  4. `link:https://news.google.com/rss/articles/CBMiqwFBVV95cUxOVFc4c09MQnd2SzBWeHlyS09aYVhtQjc1U1VsakNNekFhekRKRlVDVEhmUi1zTnRFRFY4UlBQN0xfZnZTTlNzM2k3Y1Y0aTFtdzh3dGh0MmgtM1dFMkIyV1lpUVVjVDc0eUJFN0lldkRHMFlmUVRTUk8yY2dMcjJmUTNnbVU1S3RCZ01ST3JEZ1FFMHFyWGs2UFZIV3pxMEd5OFY5OXJfRFlLV1U?oc=5` — Watch Hinrich Foundation's Elms on EU-China Trade Tensions
+  5. `link:https://hadea.ec.europa.eu/news/horizon-europe-cluster-4-industry-2027-calls-now-published-2026-10-05_en` — Horizon Europe Cluster 4: Industry 2027 calls now published
+  6. `link:https://hadea.ec.europa.eu/news/horizon-europe-cluster-4-digital-2027-calls-now-published-2026-10-05_en` — Horizon Europe Cluster 4: Digital 2027 calls now published
+  7. `link:https://news.google.com/rss/articles/CBMijAJBVV95cUxQS0RoaW9Fa3pzMlRQSXVYYzJ6V1E1V0d2V1cxS1ZZemtpNi1OZjNybzRpS1ktc2pFeHdUN1o2d3BmYzVESW5pdmE5S0xlcDZuR1VaTlZ1TWJNUXVFZ2wySmVCN0ktcTlSN3lBYVRReGRveFAta0hYX1dqOHJRdXo3MlJTVUFqYklkX3J2OVBMT2RFTjVITWdaSldOWmpMbk9QZUdEa2IwUEl6bTN0UF9ETGpNMzdlbkUxVXFoVHFXM2RXQnlQa3drczgwS21qWWVxMUtDTThEdHVnZDFnWkpYV28zN2lRZzZyVTYwYmdMVWpPSGxhX1JNNUlodmFoSUxmRWhpUHlYZ0dqa1ZN?oc=5` — Research and Innovation at the Nucleus: Romania holds Enhanced dialogue with the European Commission - European Commission
 
 ### Worker B
 - Current package: `worker-b-20261009T080214Z-5994737f044d`
