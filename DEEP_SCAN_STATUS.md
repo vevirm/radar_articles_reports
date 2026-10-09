@@ -7,39 +7,32 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **2662** (Main **1257** + Historical **1405**)
-- Automatic queue still needing V2 verification: **266** (Main **100** + Historical **166**)
-- Currently assigned to workers: **107** (Main **45** + Historical **62**)
+- Automatic queue still needing V2 verification: **286** (Main **113** + Historical **173**)
+- Currently assigned to workers: **73** (Main **13** + Historical **60**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **29**
-- Automatic queue pending and not yet assigned: **159**
+- Automatic queue pending and not yet assigned: **213**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261008T134108Z-9e06f8398e6d`
+- Current package: `worker-a-20261009T080136Z-8cddc8c000de`
 - Assigned unresolved records: **36**
-  1. `link:https://news.google.com/rss/articles/CBMiwgFBVV95cUxPWmxzbkh0NkVNb3JibmJFOVJROXBKcC1rYjRmZ3NFVUlianUzYi1GUUNQVFloQm94cVMwMUdOSllPMmc1QUlyMXJRSFV4MmF1LXpYYXJGc2twSHhwaHZZVEVNVjEzaWp0RHNwVUxDRmxVcDZ2WFpFaEZlcHYtRUVzQWljY3J4S0hGWjFWaHZSODNlWTZVMXNvWTVGaXNld2N6R2hZQXV6OUNBSjRYR3Z5Y0NuR3FRS0hKM1BRcTdleHBsUQ?oc=5` — Germany’s most promising industries depend on China, clashing with Berlin’s derisking push, study finds
-  2. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxQLUwzMzRKWnpxQjNiX0tpdUxpd1Z5VjVzMXVULUhkNjFqTHV1Wk80bGw5N1VOVEdpOGF2azhxSG9LcXBEYW9YWGh4T0lCM2VjNEswWkd2MnVGejFJNTIxZnFSb01ab0RNUkMyUFM1TkRSdW5pY0NEVFI1bnNWaFRxd28tdVc?oc=5` — Norway lays down a line for EU on AI glasses
-  3. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTE1GNFNQODVUbk15ODIxYTBLek9lNFBkYUdrazNVa3QyS0N2TTZpRUJ5S0xnd0cyYXd1a2syMG5hcHFHbmFLU0ZKcFdkX1lrU3ItVDF0UFpUWHBDQnc3Z1h6Yzg0ZWtndlZ1RXV5Vk1DbmEwVDhTNjJFMGpDdjI0dw?oc=5` — Research for TRAN Committee - European Port Strategy
-  4. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxPbE0xOEpsajFJS09iaEJuNC11NEtBR3E1ME81TkZfMFhYQjVTOWtRQ2hqSGQ0a1duMFlRZWpJX2szSVJCNFNUYU5fbVRGM2ozM2R0U0pLREhnazR3NWhmbDBNdGxhNXJJVUtrVHFIUTRTMklJTlhsSE9fc0pCMWQxUUs0VUt0Z0N2QjM5WVd6dFJraVlGVWFadHMxQVVDYlFHcVlkTjNycmJwU1VZRnow?oc=5` — EU-China relations: MEPs defend dialogue, fair trade, and human rights | News
-  5. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxPc0hMY0o1X3RqSGNsaG5UZFZvMVlCTTNham5oUW91NXBBUkRjLW5PWElueEhQaEdoOGRkMzlia0UwSkEtWnNKemxvX0V0R1VvZkpzeFRwSUNyb1AzcnlMYlM4V2ZzdzFuVmRBUzNrWW9lLWhxR0pYSXdvQ2tjWDYzenFJbDA?oc=5` — Sleepy European telcos turn to data centre craze
-  6. `link:https://news.google.com/rss/articles/CBMiqgFBVV95cUxPSDUzTVl6SVNZdWVqX3BsUmJoZHdIczV5ZExVQ1dlWXgyTEFPRVVROHZzcUxlc2I4bVRkSS10aFFrVXlPS002WDNuS2tiWk8zczlyR25XN0xNbDhxNERJbks0b1J1dzhvNFhUY0w0a3hWZkp3eUxHYkFWTndyWGV0dVpOdzUxbHVYMEc4Y2U0dWZSWmR4OHppZmI2OW5zN0dOVEZjR25vSlVSUQ?oc=5` — Laws, pledges or an iron grip? How the EU, US and China are reining in AI
-  7. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxOTjJXaXJMMk1EY0hlaXBPQy1haFVKOEQtcjZMSjVNc2lHdnhILUVUZWN5cTJIT3ZTT0VDODB6NDlyNHh2MVRfb0swYXZhSU5UNUF2eEtxbi0xUFJsTGlpWlpuY3BCZFlIZDhqN0NmVWJqOFcyc1NYOXN5TEFNRElhekg1YzZvS0dNMWdSY1pmY2dhTXRfYW9oNjdHSy01X05qY1hheGNkcDhySmZWNXc?oc=5` — Finland orders pause on Google AI data centres over environmental concerns
-  8. `link:https://news.google.com/rss/articles/CBMipgFBVV95cUxNWTVKYXo4SUlia1FlR3VNM3FZZmQ1bjl0OUVkbGN5QUdSakU5V3p5bUNraU1UVDc3TlQ2Wm9IVUNLRnItREEwREdhZWxtZDVlT0lnbDZoR2ppcWYtb2puU0RyaFROUUxGUUJsUWVodUhoY01HTzVUUmJHUV9iVTBuMDExNEplQ3lVQ3JRMXIzSVdYZ2hhbU5Ucld0OUFJQVFmYmdYOGxR?oc=5` — An ambitious MFF 2028-2034 for a strong and resilient Europe: extracts from the debate - api.multimedia.europarl.europa.eu
+  1. `link:https://doi.org/10.1016/j.ijheh.2026.114907` — European joint programme HBM4EU - Bridging science and policy: experiences and lessons learned from the key partners in the scientific steering of the initiative
+  2. `link:https://doi.org/10.1007/s44274-026-01111-6` — Financial, innovation and fiscal drivers of ecological efficiency across Western and Eastern European Union member states
+  3. `link:https://doi.org/10.1177/21582440261489945` — Reading Literacy, Reading Habits, Democracy and Innovation: A Cross-National Analysis of Selected European Countries
+  4. `link:https://doi.org/10.1007/s41781-026-00188-1` — ZaB–Zentrum am Berg: Research for New Underground Solutions
+  5. `link:https://doi.org/10.1007/s00168-026-01565-9` — Do firms conducting environmental projects funded by European Regional Development Funds perform better in Galicia (Spain)? The role of innovation
+  6. `link:https://doi.org/10.1016/j.trip.2026.102306` — Prioritizing decarbonization technologies for climate-neutral railway systems: A qualitative technology assessment of Korea’s rail sector
+  7. `link:https://doi.org/10.1186/s40309-026-00298-4` — A systematic review of foresight methods used in the formulation of futures scenarios: evidence from articles indexed in scopus and web of science (2014–2023)
+  8. `link:https://news.google.com/rss/articles/CBMisgFBVV95cUxNaXNMTkVYdUUxOWJNajFTMDNOM1E5RUM0c29zRzRNeVlZQWFvUkl4eGFBVTRlclFEUXdqcnlWbzNRS3gtYnlEcG9JMUpvaUNJa2YyWVZVSi1Qc3FqcUJHZzd5TFNlbjhfaVNEelBzWEt2eWhpc1ljWkVQdFBubEhtX1hZR3pLZm1Fbk9yVnp6eEg2ZEVEZVZHY0hYd2FiZm9qNEhYSFFtdGVMNVl2bTh5VnF3?oc=5` — Hungary plans renewable energy push to curb prices and import needs
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261008T134144Z-5a619b6f0fa0`
-- Assigned unresolved records: **36**
-  1. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxPQTVhdGtDQ3ltbWRrWWxnSjE2TTF1R0szTjQ0OW5NSjJtRzJVN1ZtblJ1QjhQbUdHMzZMUmF0OTVlcGtmaUFhN2J3UXI2WkhlSVJxTWhpa205ckxkZHVudzBGcWxscHl5M21TSi11UmpZczF0bkZsYTlJekplbzQ0VTVWTVh5d3Rna09YbFZONUR0VmpSUEVudTluUkJoOG04alJZejNrUTM5cFNxRmdn?oc=5` — Former German spy chief arrested for treason and espionage
-  2. `link:https://news.google.com/rss/articles/CBMikAJBVV95cUxPWUJDemFBRS1vSFhhNk5EdGxXNmtwM3AzY3Z3aF9EMHpSNmV2ckxIVl9hQ1VtMm45dHdEemQ1YmZGaDhMaUJ1WFpINmhsNi1WOXhVSTJwcnc0QmVoeE5ySU01VEdKVElMOHZMQkN3ejMtb0xPcFBKSlhaX25yZVg4aDg3bWtzRzhOXzB2X2txOTNhUlE0Q2VZMXhWSXBIeXhvQlhrdTlWSmdIWUc2MUV0Tlk4WDlBSlZ0TWNhNzd1YnJWZ0hYc0dpcmVZYk1vWWh6TW91QlZUWUlPNEZfWWZUVGR3RUpTeF9iUHEtdWRBTWF6OU5tTXUyd0IwS0pJSTA3bWRsTXpzU0ZsR1NPN1ZGMA?oc=5` — Fourth EU-Faroe Islands Horizon Europe Joint Research and Innovation Committee meeting - European Commission
-  3. `link:https://news.google.com/rss/articles/CBMiwgFBVV95cUxOMVNCTWtQRkQ1cEFETTRrTzhjMWtFdGkyb2twbkpLMU1rblBVaUF6MHB4U0hXN2Y2TlAxRGZFTm91eGJsekxQWDhIYnJiZmZwOEU0Nk40SDM3aENZUm45ZFBPR0Z1U3RHLXo2S1piZ0VfNVR2Tm43WTdHOS10ZllyaDh1SThsakhaMnFobmlFeF9DQ0JxX0JqT3hWTUNGZ1FvNkIxLUhrMVRTclE1TS02TDVadko0Q25pZ2hwck9Nd0dnUQ?oc=5` — Fast-track permits turn Spain's Aragon into a $70 billion data centre magnet. At what cost?
-  4. `link:https://news.google.com/rss/articles/CBMimAFBVV95cUxNRmdhb3VwRE1ZWGhyRGI2RW5ZNURTRjFrYmJ2T0Z2ejdyVURwVGhoS2dESEdDYnVZZDJkb2NVN1Nuc2dJd0F4Z21KdjNTYzd5OWUxSkZQMGdJeThVd3NWM25xQi10ZDZYNm1KTUZSNzFYMFZTSFlfcHlFWW5ERlREMEVYZHJTQlNOQVpIMjBwQlpNNjNyb1BUeA?oc=5` — Europe’s AI policing plan stokes privacy concerns
-  5. `link:https://news.google.com/rss/articles/CBMioAFBVV95cUxQMWE0UWNBUWJqc0pGNUo4cUVPYkVzZHRvbVFMSGJDU0V3aHFnUTM5R2RaMFBFNkh2bGM5TUVKcVAzY1dka0tGRC1rbW84ckxKRlBLS2NOVVBWVk9sdi04M2VCLWxDM1phS3VCb3ZpenN0ODVFVjhzVmJNLS1vakFRYmxrdUt4d0JtdEdFenlhNzZvOWZYYmpRd1VXcjB1a2xn?oc=5` — EU rejects €26 million state aid to MAN truck manufacturer
-  6. `link:https://news.google.com/rss/articles/CBMiswFBVV95cUxOMXRYNUNxWFlxNHVBS3ljMWFpX1BOOWo0YzFJc0JvbzBWc3ByS29Ka2RBUUhLWlU4VDVaODFwQzlLWnRfY25LLVlTai1teTE4RkNEdFlaUGlPVmpqUkpvSjVYVlluNGdUQ25jVExTeFFqbENhM3c5Q1pmcWlWQzJ0Q0NQR1Uxc211NkFweEg0eU1JTUJ6UExCTFpPaW9ENmpLenkxaXJReWs3N01YQmVJM3Y2Yw?oc=5` — MSCA research career scheme gets €210M funding boost
-  7. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxNOEdpVjh0dUlLemVFaXJVREtGdGZBSzdpbWhoX2RxSXBEUzVCd2VQTFRocVNPNHNXSThuQUhLQy1tSlpYOEdKZXBDeHhENmZIUnFjWlZ1UWl4cERJTEZnLTlUb2NHOGhwVlZqQTVScUJkQzdMaE9hUjMwZk1na3VlaVdDdEswZGdjUWhsdUJJN0tEaU55NjJMV3JieEJWLTJCSzdPWmkzMVhKQW1QSFE?oc=5` — The Netherlands unveils its new innovation agency
-  8. `link:https://news.google.com/rss/articles/CBMizgFBVV95cUxPbmcwM1FMNHIwX2JMN3p0dlQ5LVFPdkZsdm1wSHlsZHBXaDNzVXdRa19RRUFBNHo0MUNGTXdiYmxrc1lfZ09MRWkzQS1kSGdFVko1TEIxSjBKTkV6UjNyTjJDb2NDbkx0YWlpMzVrN1RNSkh1UF9iNDlWdGNnUGpXWS13dzEzRlFwUDBOTlZYMHlBUHQ1ZU5FLVhaRjYyblV0M2hxZTdsVlZkYXY2TVp1ZTh4UXdmTHRkU0Z1Wi1VTnp6Y0h1emdSQV94bTlxQQ?oc=5` — EU innovation agency ‘must be reformed to be worth keeping’
-  - … plus 28 more in the package manifest
+- Current package: `worker-b-20261009T080214Z-5994737f044d`
+- Assigned unresolved records: **2**
+  1. `historical:id:b3d90de3674f53a5` — EARTO Analysis on EARTO Members’ Participation in Horizon Europe | EARTO
+  2. `historical:id:ec3ab153a1e522a8` — EARTO Analysis on Budget and Structure of Horizon Europe 2.0 | EARTO
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
