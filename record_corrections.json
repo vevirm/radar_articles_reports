@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-10-10T06:27:59Z",
+  "updated_at": "2026-10-10T08:54:40Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -14435,6 +14435,23 @@
       ],
       "updated_at": "2026-10-10T05:39:33Z",
       "deep_scan_package_id": "worker-a-20261010T052907Z-edf74b7e871c"
+    },
+    "link:https://www.aka.fi/en/research-funding/funding-opportunities2/programmes-and-other-funding-schemes/finnish-flagship-programme/": {
+      "fields": {
+        "type": "programme overview"
+      },
+      "unset": [
+        "date"
+      ],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Official page is an undated standing programme overview; supplied date rests on approximate sitemap update, not publication.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://www.aka.fi/en/research-funding/funding-opportunities2/programmes-and-other-funding-schemes/finnish-flagship-programme/"
+      ],
+      "updated_at": "2026-10-10T08:54:40Z",
+      "deep_scan_package_id": "worker-a-20261010T063733Z-14e1f6ed3674"
     }
   }
 }

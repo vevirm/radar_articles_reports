@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-10T06:27:59Z",
+  "generated_at": "2026-10-10T08:54:40Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -232593,8 +232593,76 @@
       "deep_scan_package_id": "worker-a-20261010T054655Z-385f49fff5a5",
       "claims": [],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.aka.fi/en/research-funding/funding-opportunities2/programmes-and-other-funding-schemes/finnish-flagship-programme/": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "b5e84d3f",
+      "identity_hash": "84a3664c97eca4fb",
+      "reader_title": "Finnish Flagship Programme overview",
+      "reader_what": "The Research Council of Finland profiles fourteen established long-term research flagships and their funding.",
+      "reader_why": "The scheme supports research–industry collaboration and commercialisation, but this page reports no new programme decision.",
+      "reader_more": "The council describes nearly €300 million of total programme funding and fourteen flagships. Their work spans 6G, quantum technologies, health, bioeconomy and other domains. The page is a standing programme directory, not a dated funding decision.",
+      "deep_analysis": {
+        "work_kind": "standing programme overview",
+        "research_question": "",
+        "main_finding": "The Research Council of Finland profiles fourteen established long-term research flagships and their funding.",
+        "method_or_basis": "Full official Research Council of Finland programme page",
+        "qualification": "The scanner date 2026-10-09 is an approximate sitemap modification, not an evidenced new action.",
+        "radar_relevance": "Real Finnish research infrastructure and capacity; fails Strand C news/development gate.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original package URL checked; primary publisher page independently recovered."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact title matched publisher page and substantive text."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Opened full primary source at https://www.aka.fi/en/research-funding/funding-opportunities2/programmes-and-other-funding-schemes/finnish-flagship-programme/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.aka.fi/en/research-funding/funding-opportunities2/programmes-and-other-funding-schemes/finnish-flagship-programme/",
+            "title": "Finnish Flagship Programme overview",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched original headline to primary publisher content and checked status and scope."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "C_STATIC_PROGRAMME_PAGE",
+        "reason": "Checked Strand C: official page describes an existing research funding scheme and its fourteen flagships; its linked 2025 news items and undated programme features do not make this page a discrete newly announced 9 October 2026 R&I development. The approximate sitemap date is not a publication/event date."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-10T08:54:40Z",
+      "deep_scan_package_id": "worker-a-20261010T063733Z-14e1f6ed3674",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-10T06:27:59Z"
+  "claims_updated_at": "2026-10-10T08:54:40Z"
 }

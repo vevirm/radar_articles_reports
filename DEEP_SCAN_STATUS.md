@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2687** (Main **1273** + Historical **1414**)
-- Automatic queue still needing V2 verification: **299** (Main **117** + Historical **182**)
-- Currently assigned to workers: **39** (Main **4** + Historical **35**)
+- Authoritative V2 verified: **2688** (Main **1274** + Historical **1414**)
+- Automatic queue still needing V2 verification: **309** (Main **116** + Historical **193**)
+- Currently assigned to workers: **49** (Main **3** + Historical **46**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **30**
 - Automatic queue pending and not yet assigned: **260**
@@ -16,12 +16,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261010T063733Z-14e1f6ed3674`
-- Assigned unresolved records: **4**
-  1. `link:https://www.aka.fi/en/research-funding/funding-opportunities2/programmes-and-other-funding-schemes/finnish-flagship-programme/` — Finnish Flagship Programme
-  2. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxNWGZLWC1wRXBCaktjWFEzbXA2VVBPbWZyTmd0WUVYRGNHMGJ1TmFwVUlnV3ZqZVlVTVpRY3V2aVNQd2hycktiTXd1WEhZdmV1bXFCR1NoRExuYVZiNTh6MXdrZ3lsUWhhU2tJX01DblpTX1pqdVFxMWpEZkJKcEtDdnFISFg?oc=5` — EU leads fight against fossil-fuel nations’ push to delay climate science reports
-  3. `link:https://news.google.com/rss/articles/CBMiwgFBVV95cUxOUzBCb1NsOUQ3akV1UHNIZnpPMmdOWENlTzlfbWtXMm9QSk5YQTJJSWx0cmdIdzZpbXAzQTZ3d2xqT2lyOGc1SEtNd2F0Y1BrMHUwdnBsZUt3UU5zY18xem9IY1luTjc4ZWEyZXpUVVZzVklELTgyak9La1Atd3dxWXlIQUl2VVZvT1FrNW01RGtmV3dfZUZsM0JPM1NLMUtSQVVCbzZUX3RQbGJyWktJLTdNclVZWVZ0enZBbnhGNHdJdw?oc=5` — Commission holds special meeting of Scientific panel on frontier AI safety and risks - Shaping Europe’s digital future
-  4. `link:https://news.google.com/rss/articles/CBMiqwFBVV95cUxNa01CaEYwNVB3V3dxelh1LXE2c3lMNFVFNm1OYmEzYXBSZjVVRFJPSnVjUFVaUEtMcjhBekF0RXlacTVTRWxOMzdLMHJvdzVRbWdaanQ3R2JNbzNxaS1heUxiNk5EenFLdy0yZnVCNlFPNWdLUUJLOWJwUXFrR1dZOFlXYXpNeDFRaW9qM1pkQlBtRHhBdEk4bkNTQ1BKbUpLVlNDbUhpQmJ5aUU?oc=5` — EU governments to debate a 19-partnership Horizon Europe portfolio
+- Current package: `worker-a-20261010T090146Z-3fc9e2bf49b2`
+- Assigned unresolved records: **14**
+  1. `historical:id:1ad905a4fb29f295` — Governance Implications of Synthetic Data in the Context of International Security → UNIDIR
+  2. `historical:id:7b0ac6827b9f031b` — Horizon Europe Calls 2024 - Destination 2. Increased autonomy in key strategic value chains for resilient industry
+  3. `historical:id:80a12da88a0545cd` — Horizon Europe Calls 2024 - Destination 1. Climate neutral, circular and digitised production (two-stage)
+  4. `historical:id:9169bcc11d1c0001` — Horizon Europe Calls 2024 - Destination 1. Climate neutral, circular and digitised production
+  5. `historical:id:81a4fd557d09c581` — Horizon Europe Calls 2023 - Destination 3. World-leading data and computing technologies
+  6. `historical:id:9318d2233d9c9c2b` — Horizon Europe Calls 2023 - Destination 2. Increased autonomy in key strategic value chains for resilient industry (two-stage)
+  7. `historical:id:f97b8ab8ff367f99` — Horizon Europe Calls 2023 - Destination 2. Increased autonomy in key strategic value chains for resilient industry
+  8. `historical:id:0800a03ac3376699` — Horizon Europe Calls 2023 - Destination 1. Climate neutral, circular and digitised production
+  - … plus 6 more in the package manifest
 
 ### Worker B
 - Current package: `worker-b-20261009T080214Z-5994737f044d`
