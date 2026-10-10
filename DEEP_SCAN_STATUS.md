@@ -6,27 +6,27 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2680** (Main **1269** + Historical **1411**)
-- Automatic queue still needing V2 verification: **303** (Main **118** + Historical **185**)
-- Currently assigned to workers: **59** (Main **12** + Historical **47**)
+- Authoritative V2 verified: **2684** (Main **1273** + Historical **1411**)
+- Automatic queue still needing V2 verification: **299** (Main **114** + Historical **185**)
+- Currently assigned to workers: **48** (Main **1** + Historical **47**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **29**
-- Automatic queue pending and not yet assigned: **244**
+- Automatic queue pending and not yet assigned: **251**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261010T052907Z-edf74b7e871c`
-- Assigned unresolved records: **24**
-  1. `link:https://doi.org/10.1093/polsoc/puag021` — Governing knowledge through program architecture: strategic valorization, infrastructural integration, and the autonomy-steering settlement in Horizon Europe after 2027
-  2. `link:https://www.cnrs.fr/sites/default/files/press_info/2026-10/2026_09_28_PEPR_TRANSFORM_EN.pdf` — France 2030: the CNRS and the IRD launch a national research programme on the habitability of the Earth | CNRS
-  3. `link:https://news.google.com/rss/articles/CBMipAFBVV95cUxNUlZ0bzBBQ1FybjVfRTRYQTlWejZRdndVOHZxMFpJWWJ3dEJNYzBHb2N1QmdFLURtOEZGRm1OUUV4dmJoYmxwMHVXM19uSndXTFNrcHU1SkNjWWtrRW5WQ0ZvSl85cmJJaVpGTVVpNHFHc1VYby1CRzRQLWJzUWQ0RkJOMFo0X29jNk5pa1Exa2J0Sy1IRUlpc2JIWlQtR3ZzejBudw?oc=5` — EU tech chief says bloc 'well equipped' to fend off rogue AI risk
-  4. `link:https://news.google.com/rss/articles/CBMixgFBVV95cUxObUF1S2Y0LTFHM0JDbXRLY05aMmVvUDJqOU1ZNjEtLVlDdFVMelgyTlN0d3BvY0lrLVJkZEc4VGI0eEMtWTVnbDBGQnNVSGx1bklCQkxiNEs3RzFlWklGSWtoMFpyLV9zb2N6Y1VlVjQ2b2pqMy1ld0IyZ2RQMGt3YmFRaWQyUFBrYnVua2VyWGdyQW4wU0xGWm91d2prUlRLSHZrZXNwZjl0MVBuQV9ZeFZmZi15Nmh1VGFvV25xeVJfYkNGWkE?oc=5` — EU aviation body widens Saudi airspace warning after Houthi strikes
-  5. `link:https://news.google.com/rss/articles/CBMiuAFBVV95cUxPd0dBSWE2X0ZwMnlRSG1fR3IzMGNpSzFVczQ3QS14dmNtQkl1aVFhUi15UnlfdkEtRWRyR3BHQ0o0U1lqUzlhSlM2VlZ5czhIcjFQUjN1R2duY0VScWpPcGtiT1JwZDdfSjRUWFZQTDRvU1haTTdnUzc4a3NVV2hJMnhoQ21UaU1VekxUb1A2Mi1DZ2ZuNFNORm5SUjJwOE5wQzU1TG1jai1zRTlMaUNXcDg0bWIwbXlP?oc=5` — Europe’s Billionaires Are Overshadowed By AI’s Gilded Age
-  6. `historical:id:501860af2f5b79e3` — Designing Horizon Europe for the post-2028 world – CEPS
-  7. `historical:id:f2229b403dfea7bd` — Space Science - ESF
-  8. `historical:id:eebf0f3753662e39` — From Brussels with leverage: How the EU is recalibrating its China strategy – European Council on Foreign Relations
-  - … plus 16 more in the package manifest
+- Current package: `worker-a-20261010T054403Z-385f49fff5a5`
+- Assigned unresolved records: **13**
+  1. `link:https://news.google.com/rss/articles/CBMiuAFBVV95cUxPd0dBSWE2X0ZwMnlRSG1fR3IzMGNpSzFVczQ3QS14dmNtQkl1aVFhUi15UnlfdkEtRWRyR3BHQ0o0U1lqUzlhSlM2VlZ5czhIcjFQUjN1R2duY0VScWpPcGtiT1JwZDdfSjRUWFZQTDRvU1haTTdnUzc4a3NVV2hJMnhoQ21UaU1VekxUb1A2Mi1DZ2ZuNFNORm5SUjJwOE5wQzU1TG1jai1zRTlMaUNXcDg0bWIwbXlP?oc=5` — Europe’s Billionaires Are Overshadowed By AI’s Gilded Age
+  2. `historical:id:501860af2f5b79e3` — Designing Horizon Europe for the post-2028 world – CEPS
+  3. `historical:id:f2229b403dfea7bd` — Space Science - ESF
+  4. `historical:id:eebf0f3753662e39` — From Brussels with leverage: How the EU is recalibrating its China strategy – European Council on Foreign Relations
+  5. `historical:id:3eada98b78739807` — From opportunity to risk: The changing economic security policies vis-à-vis China
+  6. `historical:id:be0356b437637dd3` — E-government and Covid-19: Digital China goes global
+  7. `historical:id:6ceb00e89d2522a7` — Scoping study for supporting the development of a code of practice for researchers on standardisation
+  8. `historical:id:0aa8a3329c4b8fce` — Germany’s new China policy – European Council on Foreign Relations
+  - … plus 5 more in the package manifest
 
 ### Worker B
 - Current package: `worker-b-20261009T080214Z-5994737f044d`

@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-09T16:56:27Z",
+  "generated_at": "2026-10-10T05:39:33Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -232054,8 +232054,347 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1093/polsoc/puag021": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "03d0765b",
+      "identity_hash": "3cd423a9e34364ac",
+      "reader_title": "Governing knowledge through program architecture: strategic valorization, infrastructural integration, and the auto",
+      "reader_what": "Analysis of Horizon Europe 2028–2034 proposes five shifts in programme governance.",
+      "reader_why": "Direct evidence about European research programme design, research-system mechanisms or strategic scientific inputs.",
+      "reader_more": "Analysis of Horizon Europe 2028–2034 proposes five shifts in programme governance. Interpretation of a legislative proposal, not the adopted programme. A Route 3: peer-reviewed document analysis directly studies Horizon Europe governance, funding architecture and research autonomy.",
+      "deep_analysis": {
+        "work_kind": "empirical or policy analysis",
+        "research_question": "How does the work characterize European research-system governance or performance?",
+        "main_finding": "Analysis of Horizon Europe 2028–2034 proposes five shifts in programme governance.",
+        "method_or_basis": "Recovered publisher/official work and associated substantive primary text.",
+        "qualification": "Interpretation of a legislative proposal, not the adopted programme.",
+        "radar_relevance": "A Route 3: peer-reviewed document analysis directly studies Horizon Europe governance, funding architecture and research autonomy.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "limited",
+            "note": "Reader-facing URL https://doi.org/10.1093/polsoc/puag021; no matching substantive page text provided; traced the named work through publisher/issuing body."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Resolved/searched DOI 10.1093/polsoc/puag021; journal identity matched."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered and inspected identified matching issuing-body/publisher source: https://academic.oup.com/policyandsociety/advance-article/doi/10.1093/polsoc/puag021/8898681."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact article title; Oxford Academic full text matched DOI, title, author and 9 October 2026 date: https://academic.oup.com/policyandsociety/advance-article/doi/10.1093/polsoc/puag021/8898681."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://academic.oup.com/policyandsociety/advance-article/doi/10.1093/polsoc/puag021/8898681",
+            "title": "Governing knowledge through program architecture: strategic valorization, infrastructural integration, and the autonomy-steering settlement in Horizon Europe after 2027",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching full or substantial issuing text was inspected; source identity and status separated from claimed consequences."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: peer-reviewed document analysis directly studies Horizon Europe governance, funding architecture and research autonomy."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied possible duplicate identifies the same work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-10T05:39:33Z",
+      "deep_scan_package_id": "worker-a-20261010T052907Z-edf74b7e871c",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Olena Cherniavska",
+            "class": "university_group"
+          },
+          "mechanism": "governs",
+          "direction": "becomes_conditional",
+          "status": "proposed",
+          "status_date": "2026-10-09",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Interpretation of a legislative proposal, not the adopted programme.",
+          "text": "Analysis of Horizon Europe 2028–2034 proposes five shifts in programme governance.",
+          "confidence": "high",
+          "record_key": "link:https://doi.org/10.1093/polsoc/puag021",
+          "merit": 91,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:3cd423a9e34364ac:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.cnrs.fr/sites/default/files/press_info/2026-10/2026_09_28_PEPR_TRANSFORM_EN.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "c1040444",
+      "identity_hash": "eccea017357e7696",
+      "reader_title": "France 2030: the CNRS and the IRD launch a national research programme on the habitability of the Earth",
+      "reader_what": "France announced TRANSFORM, a ten-year €50 million interdisciplinary research programme.",
+      "reader_why": "Newly specified research funding or strategic-input measures could affect European innovation capabilities.",
+      "reader_more": "France announced TRANSFORM, a ten-year €50 million interdisciplinary research programme. €50 million is the announced ten-year envelope; €15 million covers the first phase, not spent results. C: CNRS, IRD and France officially launched new publicly financed research programme TRANSFORM; a substantive national R&I funding development.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "France announced TRANSFORM, a ten-year €50 million interdisciplinary research programme.",
+        "method_or_basis": "Recovered publisher/official work and associated substantive primary text.",
+        "qualification": "€50 million is the announced ten-year envelope; €15 million covers the first phase, not spent results.",
+        "radar_relevance": "C: CNRS, IRD and France officially launched new publicly financed research programme TRANSFORM; a substantive national R&I funding development.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Reader-facing URL https://www.cnrs.fr/sites/default/files/press_info/2026-10/2026_09_28_PEPR_TRANSFORM_EN.pdf; matching substantive source content inspected."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Inspected scanner route https://www.cnrs.fr/sites/default/files/press_info/2026-10/2026_09_28_PEPR_TRANSFORM_EN.pdf; cached first-party text length 6923 characters, mode pdf_excerpt; matched supplied underlying work where substantive."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Inspected substantive pdf_excerpt material supplied from https://www.cnrs.fr/sites/default/files/press_info/2026-10/2026_09_28_PEPR_TRANSFORM_EN.pdf; cross-checked work identity with its header and the issuing source."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_announcement",
+            "url": "https://www.info.gouv.fr/actualite/france-2030-le-cnrs-et-l-ird-lancent-un-programme-national-de-recherche-sur-l-habitabilite-de-la-terre",
+            "title": "France 2030: the CNRS and the IRD launch a national research programme on the habitability of the Earth | CNRS",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_press_release_pdf",
+            "url": "https://www.cnrs.fr/sites/default/files/press_info/2026-10/2026_09_28_PEPR_TRANSFORM_EN.pdf",
+            "title": "CNRS–IRD TRANSFORM press release",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching full or substantial issuing text was inspected; source identity and status separated from claimed consequences."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "C: CNRS, IRD and France officially launched new publicly financed research programme TRANSFORM; a substantive national R&I funding development."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied possible duplicate identifies the same work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-10T05:39:33Z",
+      "deep_scan_package_id": "worker-a-20261010T052907Z-edf74b7e871c",
+      "claims": [
+        {
+          "object": "research.public_support",
+          "secondary_objects": [],
+          "actor": {
+            "name": "CNRS and IRD",
+            "class": "national_funder"
+          },
+          "mechanism": "launches",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-09-29",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "FR"
+            ]
+          },
+          "kind": "action",
+          "qualification": "€50 million is the announced ten-year envelope; €15 million covers the first phase, not spent results.",
+          "text": "France announced TRANSFORM, a ten-year €50 million interdisciplinary research programme.",
+          "confidence": "high",
+          "record_key": "link:https://www.cnrs.fr/sites/default/files/press_info/2026-10/2026_09_28_PEPR_TRANSFORM_EN.pdf",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:eccea017357e7696:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMipAFBVV95cUxNUlZ0bzBBQ1FybjVfRTRYQTlWejZRdndVOHZxMFpJWWJ3dEJNYzBHb2N1QmdFLURtOEZGRm1OUUV4dmJoYmxwMHVXM19uSndXTFNrcHU1SkNjWWtrRW5WQ0ZvSl85cmJJaVpGTVVpNHFHc1VYby1CRzRQLWJzUWQ0RkJOMFo0X29jNk5pa1Exa2J0Sy1IRUlpc2JIWlQtR3ZzejBudw?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "58fa6a4b",
+      "identity_hash": "5a1d1e727a90beff",
+      "reader_title": "EU tech chief says bloc 'well equipped' to fend off rogue AI risk",
+      "reader_what": "EU official defended existing AI Act against autonomous AI risks.",
+      "reader_more": "EU official defended existing AI Act against autonomous AI risks. Claim of regulatory preparedness is an official opinion, not evidence of effective AI safety. C: the recovered Reuters interview contains official reassurance and references to existing regulatory oversight, not a newly adopted EU R&I measure or independently verified change in research capacity.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "EU official defended existing AI Act against autonomous AI risks.",
+        "method_or_basis": "Recovered publisher/official work and associated substantive primary text.",
+        "qualification": "Claim of regulatory preparedness is an official opinion, not evidence of effective AI safety.",
+        "radar_relevance": "C: the recovered Reuters interview contains official reassurance and references to existing regulatory oversight, not a newly adopted EU R&I measure or independently verified change in research capacity.",
+        "confidence": "medium",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "limited",
+            "note": "Reader-facing URL https://news.google.com/rss/articles/CBMipAFBVV95cUxNUlZ0bzBBQ1FybjVfRTRYQTlWejZRdndVOHZxMFpJWWJ3dEJNYzBHb2N1QmdFLURtOEZGRm1OUUV4dmJoYmxwMHVXM19uSndXTFNrcHU1SkNjWWtrRW5WQ0ZvSl85cmJJaVpGTVVpNHFHc1VYby1CRzRQLWJzUWQ0RkJOMFo0X29jNk5pa1Exa2J0Sy1IRUlpc2JIWlQtR3ZzejBudw?oc=5; no matching substantive page text provided; traced the named work through publisher/issuing body."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered and inspected identified matching issuing-body/publisher source: https://www.reuters.com/world/eu-tech-chief-says-bloc-well-equipped-fend-off-rogue-ai-risk-2026-10-09/."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched original news headline with publisher and October 2026 date; matching primary reporting or Commission page recovered at https://www.reuters.com/world/eu-tech-chief-says-bloc-well-equipped-fend-off-rogue-ai-risk-2026-10-09/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "news_report",
+            "url": "https://www.reuters.com/world/eu-tech-chief-says-bloc-well-equipped-fend-off-rogue-ai-risk-2026-10-09/",
+            "title": "EU tech chief says bloc 'well equipped' to fend off rogue AI risk",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching full or substantial issuing text was inspected; source identity and status separated from claimed consequences."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C: the recovered Reuters interview contains official reassurance and references to existing regulatory oversight, not a newly adopted EU R&I measure or independently verified change in research capacity."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied possible duplicate identifies the same work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-10T05:39:33Z",
+      "deep_scan_package_id": "worker-a-20261010T052907Z-edf74b7e871c",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMixgFBVV95cUxObUF1S2Y0LTFHM0JDbXRLY05aMmVvUDJqOU1ZNjEtLVlDdFVMelgyTlN0d3BvY0lrLVJkZEc4VGI0eEMtWTVnbDBGQnNVSGx1bklCQkxiNEs3RzFlWklGSWtoMFpyLV9zb2N6Y1VlVjQ2b2pqMy1ld0IyZ2RQMGt3YmFRaWQyUFBrYnVua2VyWGdyQW4wU0xGWm91d2prUlRLSHZrZXNwZjl0MVBuQV9ZeFZmZi15Nmh1VGFvV25xeVJfYkNGWkE?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "7398e5cd",
+      "identity_hash": "95eabf671f9956fd",
+      "reader_title": "EU aviation body widens Saudi airspace warning after Houthi strikes",
+      "reader_what": "EU aviation safety agency expanded warning for Saudi Arabian airspace.",
+      "reader_more": "EU aviation safety agency expanded warning for Saudi Arabian airspace. Operational aviation safety notice; no demonstrated R&I linkage. C: official flight-safety alert on regional hostilities, without evidence of a European research, innovation, technological capability or research infrastructure consequence.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "EU aviation safety agency expanded warning for Saudi Arabian airspace.",
+        "method_or_basis": "Recovered publisher/official work and associated substantive primary text.",
+        "qualification": "Operational aviation safety notice; no demonstrated R&I linkage.",
+        "radar_relevance": "C: official flight-safety alert on regional hostilities, without evidence of a European research, innovation, technological capability or research infrastructure consequence.",
+        "confidence": "medium",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "limited",
+            "note": "Reader-facing URL https://news.google.com/rss/articles/CBMixgFBVV95cUxObUF1S2Y0LTFHM0JDbXRLY05aMmVvUDJqOU1ZNjEtLVlDdFVMelgyTlN0d3BvY0lrLVJkZEc4VGI0eEMtWTVnbDBGQnNVSGx1bklCQkxiNEs3RzFlWklGSWtoMFpyLV9zb2N6Y1VlVjQ2b2pqMy1ld0IyZ2RQMGt3YmFRaWQyUFBrYnVua2VyWGdyQW4wU0xGWm91d2prUlRLSHZrZXNwZjl0MVBuQV9ZeFZmZi15Nmh1VGFvV25xeVJfYkNGWkE?oc=5; no matching substantive page text provided; traced the named work through publisher/issuing body."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered and inspected identified matching issuing-body/publisher source: https://www.reuters.com/world/middle-east/eu-aviation-agency-widens-saudi-airspace-alert-citing-growing-risk-houthi-2026-10-09/."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched original news headline with publisher and October 2026 date; matching primary reporting or Commission page recovered at https://www.reuters.com/world/middle-east/eu-aviation-agency-widens-saudi-airspace-alert-citing-growing-risk-houthi-2026-10-09/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "news_report",
+            "url": "https://www.reuters.com/world/middle-east/eu-aviation-agency-widens-saudi-airspace-alert-citing-growing-risk-houthi-2026-10-09/",
+            "title": "EU aviation body widens Saudi airspace warning after Houthi strikes",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching full or substantial issuing text was inspected; source identity and status separated from claimed consequences."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C: official flight-safety alert on regional hostilities, without evidence of a European research, innovation, technological capability or research infrastructure consequence."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied possible duplicate identifies the same work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-10T05:39:33Z",
+      "deep_scan_package_id": "worker-a-20261010T052907Z-edf74b7e871c",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-09T16:56:27Z"
+  "claims_updated_at": "2026-10-10T05:39:33Z"
 }
