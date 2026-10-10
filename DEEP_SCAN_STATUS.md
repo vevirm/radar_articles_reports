@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261010T063507Z-14e1f6ed3674`
+- Current package: `worker-a-20261010T063733Z-14e1f6ed3674`
 - Assigned unresolved records: **4**
   1. `link:https://www.aka.fi/en/research-funding/funding-opportunities2/programmes-and-other-funding-schemes/finnish-flagship-programme/` — Finnish Flagship Programme
   2. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxNWGZLWC1wRXBCaktjWFEzbXA2VVBPbWZyTmd0WUVYRGNHMGJ1TmFwVUlnV3ZqZVlVTVpRY3V2aVNQd2hycktiTXd1WEhZdmV1bXFCR1NoRExuYVZiNTh6MXdrZ3lsUWhhU2tJX01DblpTX1pqdVFxMWpEZkJKcEtDdnFISFg?oc=5` — EU leads fight against fossil-fuel nations’ push to delay climate science reports
