@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-admission-v1",
-  "updated_at": "2026-10-10T05:39:33Z",
+  "updated_at": "2026-10-10T06:27:59Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "decision": "drop",
@@ -32060,6 +32060,54 @@
       "updated_at": "2026-10-10T05:39:33Z",
       "deep_scan_package_id": "worker-a-20261010T052907Z-edf74b7e871c",
       "verification_note": "Matching full or substantial issuing text was inspected; source identity and status separated from claimed consequences.",
+      "duplicate_of": ""
+    },
+    "link:https://news.google.com/rss/articles/CBMiuAFBVV95cUxPd0dBSWE2X0ZwMnlRSG1fR3IzMGNpSzFVczQ3QS14dmNtQkl1aVFhUi15UnlfdkEtRWRyR3BHQ0o0U1lqUzlhSlM2VlZ5czhIcjFQUjN1R2duY0VScWpPcGtiT1JwZDdfSjRUWFZQTDRvU1haTTdnUzc4a3NVV2hJMnhoQ21UaU1VekxUb1A2Mi1DZ2ZuNFNORm5SUjJwOE5wQzU1TG1jai1zRTlMaUNXcDg0bWIwbXlP?oc=5": {
+      "decision": "needs_manual_verification",
+      "target_strand": "",
+      "reason_code": "NEEDS_MANUAL_VERIFICATION",
+      "reason": "Identity is credible, but substantive evidence remained inaccessible after three validated Deep Scan recovery passes; excluded from active reasoning until hands-on verification supplies materially new access.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "updated_at": "2026-10-10T06:27:58Z",
+      "deep_scan_package_id": "worker-a-20261010T054655Z-385f49fff5a5",
+      "verification_note": "Third-attempt hard-final pass completed: all six recovery routes assessed; Bloomberg title and author verified from publisher indexes, but article content was not recovered; no speculative EU R&I significance inferred.",
+      "recovery_attempts": 3
+    },
+    "historical:id:501860af2f5b79e3": {
+      "decision": "keep",
+      "target_strand": "A",
+      "reason_code": "A_SUBSTANTIVE_EU_RI",
+      "reason": "The councils would coordinate programme investments, institutional responsibilities and deployment pathways.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "updated_at": "2026-10-10T06:27:58Z",
+      "deep_scan_package_id": "worker-a-20261010T054655Z-385f49fff5a5",
+      "verification_note": "Matching substantive first-party source text is included in the supplied package and was inspected; judgment rests on that source, not scanner summary.",
+      "duplicate_of": ""
+    },
+    "historical:id:f2229b403dfea7bd": {
+      "decision": "drop",
+      "target_strand": "A",
+      "reason_code": "A_NON_EVIDENCE_PAGE",
+      "reason": "The ESF page describes its standing space-science services, committees and collaborations rather than presenting a bounded research finding.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "updated_at": "2026-10-10T06:27:58Z",
+      "deep_scan_package_id": "worker-a-20261010T054655Z-385f49fff5a5",
+      "verification_note": "Matching substantive first-party source text is included in the supplied package and was inspected; judgment rests on that source, not scanner summary.",
+      "duplicate_of": ""
+    },
+    "historical:id:eebf0f3753662e39": {
+      "decision": "drop",
+      "target_strand": "A",
+      "reason_code": "A_RI_CONNECTION_NOT_SUBSTANTIVE",
+      "reason": "ECFR commentary interprets the EU’s 2024 tariffs on Chinese electric vehicles as a change in trade strategy and EU–China leverage.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "updated_at": "2026-10-10T06:27:58Z",
+      "deep_scan_package_id": "worker-a-20261010T054655Z-385f49fff5a5",
+      "verification_note": "Matching substantive first-party source text is included in the supplied package and was inspected; judgment rests on that source, not scanner summary.",
       "duplicate_of": ""
     }
   }

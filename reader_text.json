@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-10T05:39:33Z",
+  "generated_at": "2026-10-10T06:27:59Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -232393,8 +232393,208 @@
       "deep_scan_package_id": "worker-a-20261010T052907Z-edf74b7e871c",
       "claims": [],
       "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:501860af2f5b79e3": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "41980420",
+      "identity_hash": "5bf855b1ebfa1d03",
+      "reader_title": "Designing Horizon Europe for the post-2028 world – CEPS",
+      "reader_what": "CEPS argues the proposed 2028–2034 Horizon Europe programme needs more coherent mission governance and proposes distinct competitiveness/security and global-challenges councils.",
+      "reader_why": "The councils would coordinate programme investments, institutional responsibilities and deployment pathways.",
+      "reader_more": "This is a CEPS policy proposal, not an adopted Horizon Europe institutional design.",
+      "deep_analysis": {
+        "work_kind": "policy report",
+        "research_question": "",
+        "main_finding": "CEPS argues the proposed 2028–2034 Horizon Europe programme needs more coherent mission governance and proposes distinct competitiveness/security and global-challenges councils.",
+        "method_or_basis": "Review of matching primary text/PDF provided in package.",
+        "qualification": "This is a CEPS policy proposal, not an adopted Horizon Europe institutional design.",
+        "radar_relevance": "The councils would coordinate programme investments, institutional responsibilities and deployment pathways.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching pdf_excerpt source extract supplied in the package for https://cdn.ceps.eu/2025/11/251030-Operationalising-the-governance-of-Horizon-Europe-formatted-1.pdf; text reviewed for substance and identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_pdf_excerpt",
+            "url": "https://cdn.ceps.eu/2025/11/251030-Operationalising-the-governance-of-Horizon-Europe-formatted-1.pdf",
+            "title": "Designing Horizon Europe for the post-2028 world – CEPS",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching substantive first-party source text is included in the supplied package and was inspected; judgment rests on that source, not scanner summary."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The councils would coordinate programme investments, institutional responsibilities and deployment pathways."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-10T06:27:58Z",
+      "deep_scan_package_id": "worker-a-20261010T054655Z-385f49fff5a5",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Centre for European Policy Studies",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "advocates",
+          "direction": "becomes_contested",
+          "status": "proposed",
+          "status_date": "2025-11-04",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "This is a CEPS policy proposal, not an adopted Horizon Europe institutional design.",
+          "text": "CEPS argues the proposed 2028–2034 Horizon Europe programme needs more coherent mission governance and proposes distinct competitiveness/security and global-challenges councils.",
+          "confidence": "high",
+          "record_key": "historical:id:501860af2f5b79e3",
+          "merit": 71,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:5bf855b1ebfa1d03:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:f2229b403dfea7bd": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "32db9f3c",
+      "identity_hash": "1d5bb5449128d9d5",
+      "reader_title": "Space Science - ESF",
+      "reader_what": "The ESF page describes its standing space-science services, committees and collaborations rather than presenting a bounded research finding.",
+      "reader_more": "Organisational facts do not make this evergreen directory a substantive evidence report.",
+      "deep_analysis": {
+        "work_kind": "organisational information page",
+        "research_question": "",
+        "main_finding": "The ESF page describes its standing space-science services, committees and collaborations rather than presenting a bounded research finding.",
+        "method_or_basis": "Review of matching primary text/PDF provided in package.",
+        "qualification": "Organisational facts do not make this evergreen directory a substantive evidence report.",
+        "radar_relevance": "Does not meet evidence/admission requirements for the assigned strand.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching substantial_web_text source extract supplied in the package for https://www.esf.org/teams/space-science/; text reviewed for substance and identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.esf.org/teams/space-science/",
+            "title": "Space Science - ESF",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching substantive first-party source text is included in the supplied package and was inspected; judgment rests on that source, not scanner summary."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_EVIDENCE_PAGE",
+        "reason": "The ESF page describes its standing space-science services, committees and collaborations rather than presenting a bounded research finding."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-10T06:27:58Z",
+      "deep_scan_package_id": "worker-a-20261010T054655Z-385f49fff5a5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:eebf0f3753662e39": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "619d39f6",
+      "identity_hash": "28ec6e6747eeb08a",
+      "reader_title": "From Brussels with leverage: How the EU is recalibrating its China strategy – European Council on Foreign Relations",
+      "reader_what": "ECFR commentary interprets the EU’s 2024 tariffs on Chinese electric vehicles as a change in trade strategy and EU–China leverage.",
+      "reader_more": "A policy commentary is not independent evaluation of EV innovation outcomes.",
+      "deep_analysis": {
+        "work_kind": "policy commentary",
+        "research_question": "",
+        "main_finding": "ECFR commentary interprets the EU’s 2024 tariffs on Chinese electric vehicles as a change in trade strategy and EU–China leverage.",
+        "method_or_basis": "Review of matching primary text/PDF provided in package.",
+        "qualification": "A policy commentary is not independent evaluation of EV innovation outcomes.",
+        "radar_relevance": "Does not meet evidence/admission requirements for the assigned strand.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching substantial_web_text source extract supplied in the package for https://ecfr.eu/article/from-brussels-with-leverage-how-the-eu-is-recalibrating-its-china-strategy/; text reviewed for substance and identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://ecfr.eu/article/from-brussels-with-leverage-how-the-eu-is-recalibrating-its-china-strategy/",
+            "title": "From Brussels with leverage: How the EU is recalibrating its China strategy – European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching substantive first-party source text is included in the supplied package and was inspected; judgment rests on that source, not scanner summary."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_RI_CONNECTION_NOT_SUBSTANTIVE",
+        "reason": "ECFR commentary interprets the EU’s 2024 tariffs on Chinese electric vehicles as a change in trade strategy and EU–China leverage."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-10T06:27:58Z",
+      "deep_scan_package_id": "worker-a-20261010T054655Z-385f49fff5a5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-10T05:39:33Z"
+  "claims_updated_at": "2026-10-10T06:27:59Z"
 }

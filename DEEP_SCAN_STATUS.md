@@ -6,27 +6,22 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2684** (Main **1273** + Historical **1411**)
-- Automatic queue still needing V2 verification: **299** (Main **114** + Historical **185**)
-- Currently assigned to workers: **48** (Main **1** + Historical **47**)
+- Authoritative V2 verified: **2687** (Main **1273** + Historical **1414**)
+- Automatic queue still needing V2 verification: **299** (Main **117** + Historical **182**)
+- Currently assigned to workers: **39** (Main **4** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
-- Hands-on verification needed: **29**
-- Automatic queue pending and not yet assigned: **251**
+- Hands-on verification needed: **30**
+- Automatic queue pending and not yet assigned: **260**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261010T054655Z-385f49fff5a5`
-- Assigned unresolved records: **13**
-  1. `link:https://news.google.com/rss/articles/CBMiuAFBVV95cUxPd0dBSWE2X0ZwMnlRSG1fR3IzMGNpSzFVczQ3QS14dmNtQkl1aVFhUi15UnlfdkEtRWRyR3BHQ0o0U1lqUzlhSlM2VlZ5czhIcjFQUjN1R2duY0VScWpPcGtiT1JwZDdfSjRUWFZQTDRvU1haTTdnUzc4a3NVV2hJMnhoQ21UaU1VekxUb1A2Mi1DZ2ZuNFNORm5SUjJwOE5wQzU1TG1jai1zRTlMaUNXcDg0bWIwbXlP?oc=5` — Europe’s Billionaires Are Overshadowed By AI’s Gilded Age
-  2. `historical:id:501860af2f5b79e3` — Designing Horizon Europe for the post-2028 world – CEPS
-  3. `historical:id:f2229b403dfea7bd` — Space Science - ESF
-  4. `historical:id:eebf0f3753662e39` — From Brussels with leverage: How the EU is recalibrating its China strategy – European Council on Foreign Relations
-  5. `historical:id:3eada98b78739807` — From opportunity to risk: The changing economic security policies vis-à-vis China
-  6. `historical:id:be0356b437637dd3` — E-government and Covid-19: Digital China goes global
-  7. `historical:id:6ceb00e89d2522a7` — Scoping study for supporting the development of a code of practice for researchers on standardisation
-  8. `historical:id:0aa8a3329c4b8fce` — Germany’s new China policy – European Council on Foreign Relations
-  - … plus 5 more in the package manifest
+- Current package: `worker-a-20261010T063507Z-14e1f6ed3674`
+- Assigned unresolved records: **4**
+  1. `link:https://www.aka.fi/en/research-funding/funding-opportunities2/programmes-and-other-funding-schemes/finnish-flagship-programme/` — Finnish Flagship Programme
+  2. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxNWGZLWC1wRXBCaktjWFEzbXA2VVBPbWZyTmd0WUVYRGNHMGJ1TmFwVUlnV3ZqZVlVTVpRY3V2aVNQd2hycktiTXd1WEhZdmV1bXFCR1NoRExuYVZiNTh6MXdrZ3lsUWhhU2tJX01DblpTX1pqdVFxMWpEZkJKcEtDdnFISFg?oc=5` — EU leads fight against fossil-fuel nations’ push to delay climate science reports
+  3. `link:https://news.google.com/rss/articles/CBMiwgFBVV95cUxOUzBCb1NsOUQ3akV1UHNIZnpPMmdOWENlTzlfbWtXMm9QSk5YQTJJSWx0cmdIdzZpbXAzQTZ3d2xqT2lyOGc1SEtNd2F0Y1BrMHUwdnBsZUt3UU5zY18xem9IY1luTjc4ZWEyZXpUVVZzVklELTgyak9La1Atd3dxWXlIQUl2VVZvT1FrNW01RGtmV3dfZUZsM0JPM1NLMUtSQVVCbzZUX3RQbGJyWktJLTdNclVZWVZ0enZBbnhGNHdJdw?oc=5` — Commission holds special meeting of Scientific panel on frontier AI safety and risks - Shaping Europe’s digital future
+  4. `link:https://news.google.com/rss/articles/CBMiqwFBVV95cUxNa01CaEYwNVB3V3dxelh1LXE2c3lMNFVFNm1OYmEzYXBSZjVVRFJPSnVjUFVaUEtMcjhBekF0RXlacTVTRWxOMzdLMHJvdzVRbWdaanQ3R2JNbzNxaS1heUxiNk5EenFLdy0yZnVCNlFPNWdLUUJLOWJwUXFrR1dZOFlXYXpNeDFRaW9qM1pkQlBtRHhBdEk4bkNTQ1BKbUpLVlNDbUhpQmJ5aUU?oc=5` — EU governments to debate a 19-partnership Horizon Europe portfolio
 
 ### Worker B
 - Current package: `worker-b-20261009T080214Z-5994737f044d`
@@ -78,3 +73,4 @@ These works no longer consume automatic Deep Scan slots. Their identity is belie
 - `link:https://news.google.com/rss/articles/CBMiekFVX3lxTE1Pc1RnZW41ZU9YUUZqVHFjT0lTUWFKTldPaEZxVDQwMzg0OFgzR3djc0lZMlRnX2JYbmVEdHBEMTFOMWlzMDhxMFFuSmlzbmtjUW9vUmJXenljakFpNy1RQnNJTXlIZEFhRjJtUWtUNm5mT2dpQkZYYWtR?oc=5` — **THE HACK: EU weighs AI labs' safety plans** — attempts: 3/3 — Euractiv — 2026-09-18T06:47Z — Euractiv item identity is verified, but the substantive article is paywalled and accessible evidence is too thin for an authoritative event judgement. — https://news.google.com/rss/articles/CBMiekFVX3lxTE1Pc1RnZW41ZU9YUUZqVHFjT0lTUWFKTldPaEZxVDQwMzg0OFgzR3djc0lZMlRnX2JYbmVEdHBEMTFOMWlzMDhxMFFuSmlzbmtjUW9vUmJXenljakFpNy1RQnNJTXlIZEFhRjJtUWtUNm5mT2dpQkZYYWtR?oc=5
 - `historical:id:256f788e05840f94` — **Foresight and strategic decision-making framework from artificial intelligence technology development to utilization activities in small-and-medium-sized enterprises** — attempts: 3/3 — Foresight — 2023-10-24 — Identity is verified and the paper presents a foresight/decision framework, but full substantive evidence was not accessible. — https://doi.org/10.1108/fs-06-2022-0069
 - `link:https://doi.org/10.1016/j.iref.2026.105712` — **Strategic coherence as a signal in innovation grants: Unpacking how technological alignment and financial flexibility shape SME funding decisions** — attempts: 3/3 — International Review of Economics & Finance — 2026-08-06 — Identity and EU Horizon 2020 empirical basis are verified, but accessible evidence remained abstract-level only. — https://doi.org/10.1016/j.iref.2026.105712
+- `link:https://news.google.com/rss/articles/CBMiuAFBVV95cUxPd0dBSWE2X0ZwMnlRSG1fR3IzMGNpSzFVczQ3QS14dmNtQkl1aVFhUi15UnlfdkEtRWRyR3BHQ0o0U1lqUzlhSlM2VlZ5czhIcjFQUjN1R2duY0VScWpPcGtiT1JwZDdfSjRUWFZQTDRvU1haTTdnUzc4a3NVV2hJMnhoQ21UaU1VekxUb1A2Mi1DZ2ZuNFNORm5SUjJwOE5wQzU1TG1jai1zRTlMaUNXcDg0bWIwbXlP?oc=5` — **Europe’s Billionaires Are Overshadowed By AI’s Gilded Age** — attempts: 3/3 — Bloomberg — 2026-10-09T08:05Z — Bloomberg opinion article identity is corroborated but the article itself was not substantively recovered. — https://news.google.com/rss/articles/CBMiuAFBVV95cUxPd0dBSWE2X0ZwMnlRSG1fR3IzMGNpSzFVczQ3QS14dmNtQkl1aVFhUi15UnlfdkEtRWRyR3BHQ0o0U1lqUzlhSlM2VlZ5czhIcjFQUjN1R2duY0VScWpPcGtiT1JwZDdfSjRUWFZQTDRvU1haTTdnUzc4a3NVV2hJMnhoQ21UaU1VekxUb1A2Mi1DZ2ZuNFNORm5SUjJwOE5wQzU1TG1jai1zRTlMaUNXcDg0bWIwbXlP?oc=5
