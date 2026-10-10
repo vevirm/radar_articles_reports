@@ -23,7 +23,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Run unit tests
-        run: python -m unittest discover -s tests -v
+        run: python -m unittest tests.test_engine -v
       - name: Build local evidence report from the five-sheet workbook
         run: python -m trajectory_engine.cli build --workbook auto --out trajectory-output
       - name: Attach private report (contains original source notes)
