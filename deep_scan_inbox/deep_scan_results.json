@@ -1,0 +1,922 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-a-20261010T054655Z-385f49fff5a5",
+  "results": [
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiuAFBVV95cUxPd0dBSWE2X0ZwMnlRSG1fR3IzMGNpSzFVczQ3QS14dmNtQkl1aVFhUi15UnlfdkEtRWRyR3BHQ0o0U1lqUzlhSlM2VlZ5czhIcjFQUjN1R2duY0VScWpPcGtiT1JwZDdfSjRUWFZQTDRvU1haTTdnUzc4a3NVV2hJMnhoQ21UaU1VekxUb1A2Mi1DZ2ZuNFNORm5SUjJwOE5wQzU1TG1jai1zRTlMaUNXcDg0bWIwbXlP?oc=5",
+      "source_hash": "4b8cf28c",
+      "identity_hash": "d30914660dd95484",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "Google News RSS URL resolves to an aggregator pointer; no Bloomberg story body is in the package."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Not applicable: Bloomberg opinion column has no DOI."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "partial",
+            "note": "Exact-title web search did not return the article body."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Bloomberg 9 October 2026 and Lionel Laurent checked against Bloomberg Europe/UK index."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "partial",
+            "note": "Bloomberg Europe and Bloomberg UK pages list this exact Lionel Laurent column, but no substantive accessible article."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "partial",
+            "note": "Distinctive billionaire/AI/gilded-age search and Bloomberg Opinion social index corroborate listing, not body."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_listing",
+            "url": "https://www.bloomberg.com/europe",
+            "title": "Bloomberg Europe listing of Lionel Laurent column",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass completed: all six recovery routes assessed; Bloomberg title and author verified from publisher indexes, but article content was not recovered; no speculative EU R&I significance inferred."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "C",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Bloomberg opinion article identity is corroborated but the article itself was not substantively recovered."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:501860af2f5b79e3",
+      "source_hash": "41980420",
+      "identity_hash": "5bf855b1ebfa1d03",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching pdf_excerpt source extract supplied in the package for https://cdn.ceps.eu/2025/11/251030-Operationalising-the-governance-of-Horizon-Europe-formatted-1.pdf; text reviewed for substance and identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_pdf_excerpt",
+            "url": "https://cdn.ceps.eu/2025/11/251030-Operationalising-the-governance-of-Horizon-Europe-formatted-1.pdf",
+            "title": "Designing Horizon Europe for the post-2028 world – CEPS",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching substantive first-party source text is included in the supplied package and was inspected; judgment rests on that source, not scanner summary."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The councils would coordinate programme investments, institutional responsibilities and deployment pathways."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Designing Horizon Europe for the post-2028 world – CEPS",
+      "reader_what": "CEPS argues the proposed 2028–2034 Horizon Europe programme needs more coherent mission governance and proposes distinct competitiveness/security and global-challenges councils.",
+      "reader_why": "The councils would coordinate programme investments, institutional responsibilities and deployment pathways.",
+      "reader_more": "This is a CEPS policy proposal, not an adopted Horizon Europe institutional design.",
+      "deep_analysis": {
+        "work_kind": "policy report",
+        "research_question": "",
+        "main_finding": "CEPS argues the proposed 2028–2034 Horizon Europe programme needs more coherent mission governance and proposes distinct competitiveness/security and global-challenges councils.",
+        "method_or_basis": "Review of matching primary text/PDF provided in package.",
+        "qualification": "This is a CEPS policy proposal, not an adopted Horizon Europe institutional design.",
+        "radar_relevance": "The councils would coordinate programme investments, institutional responsibilities and deployment pathways.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Centre for European Policy Studies",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "advocates",
+          "direction": "becomes_contested",
+          "status": "proposed",
+          "status_date": "2025-11-04",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "This is a CEPS policy proposal, not an adopted Horizon Europe institutional design.",
+          "text": "CEPS argues the proposed 2028–2034 Horizon Europe programme needs more coherent mission governance and proposes distinct competitiveness/security and global-challenges councils.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:f2229b403dfea7bd",
+      "source_hash": "32db9f3c",
+      "identity_hash": "1d5bb5449128d9d5",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching substantial_web_text source extract supplied in the package for https://www.esf.org/teams/space-science/; text reviewed for substance and identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.esf.org/teams/space-science/",
+            "title": "Space Science - ESF",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching substantive first-party source text is included in the supplied package and was inspected; judgment rests on that source, not scanner summary."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_EVIDENCE_PAGE",
+        "reason": "The ESF page describes its standing space-science services, committees and collaborations rather than presenting a bounded research finding."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Space Science - ESF",
+      "reader_what": "The ESF page describes its standing space-science services, committees and collaborations rather than presenting a bounded research finding.",
+      "reader_why": "",
+      "reader_more": "Organisational facts do not make this evergreen directory a substantive evidence report.",
+      "deep_analysis": {
+        "work_kind": "organisational information page",
+        "research_question": "",
+        "main_finding": "The ESF page describes its standing space-science services, committees and collaborations rather than presenting a bounded research finding.",
+        "method_or_basis": "Review of matching primary text/PDF provided in package.",
+        "qualification": "Organisational facts do not make this evergreen directory a substantive evidence report.",
+        "radar_relevance": "Does not meet evidence/admission requirements for the assigned strand.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:eebf0f3753662e39",
+      "source_hash": "619d39f6",
+      "identity_hash": "28ec6e6747eeb08a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching substantial_web_text source extract supplied in the package for https://ecfr.eu/article/from-brussels-with-leverage-how-the-eu-is-recalibrating-its-china-strategy/; text reviewed for substance and identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://ecfr.eu/article/from-brussels-with-leverage-how-the-eu-is-recalibrating-its-china-strategy/",
+            "title": "From Brussels with leverage: How the EU is recalibrating its China strategy – European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching substantive first-party source text is included in the supplied package and was inspected; judgment rests on that source, not scanner summary."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_RI_CONNECTION_NOT_SUBSTANTIVE",
+        "reason": "ECFR commentary interprets the EU’s 2024 tariffs on Chinese electric vehicles as a change in trade strategy and EU–China leverage."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "From Brussels with leverage: How the EU is recalibrating its China strategy – European Council on Foreign Relations",
+      "reader_what": "ECFR commentary interprets the EU’s 2024 tariffs on Chinese electric vehicles as a change in trade strategy and EU–China leverage.",
+      "reader_why": "",
+      "reader_more": "A policy commentary is not independent evaluation of EV innovation outcomes.",
+      "deep_analysis": {
+        "work_kind": "policy commentary",
+        "research_question": "",
+        "main_finding": "ECFR commentary interprets the EU’s 2024 tariffs on Chinese electric vehicles as a change in trade strategy and EU–China leverage.",
+        "method_or_basis": "Review of matching primary text/PDF provided in package.",
+        "qualification": "A policy commentary is not independent evaluation of EV innovation outcomes.",
+        "radar_relevance": "Does not meet evidence/admission requirements for the assigned strand.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:3eada98b78739807",
+      "source_hash": "1ab4090b",
+      "identity_hash": "1baa181335d77f36",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching pdf_excerpt source extract supplied in the package for https://merics.org/sites/default/files/2023-02/merics-report-changing-economic-security-policies-2023.pdf; text reviewed for substance and identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_pdf_excerpt",
+            "url": "https://merics.org/sites/default/files/2023-02/merics-report-changing-economic-security-policies-2023.pdf",
+            "title": "From opportunity to risk: The changing economic security policies vis-à-vis China",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching substantive first-party source text is included in the supplied package and was inspected; judgment rests on that source, not scanner summary."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Screening, export-control and resilience measures change the conditions for internationally networked innovation and strategic technologies."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "From opportunity to risk: The changing economic security policies vis-à-vis China",
+      "reader_what": "MERICS compares the expansion of economic-security policy across seven jurisdictions and analyses the EU’s attempt to manage technology and supply-chain vulnerabilities.",
+      "reader_why": "Screening, export-control and resilience measures change the conditions for internationally networked innovation and strategic technologies.",
+      "reader_more": "This is comparative policy analysis with recommendations; it does not establish realised benefits of particular restrictions.",
+      "deep_analysis": {
+        "work_kind": "policy report",
+        "research_question": "",
+        "main_finding": "MERICS compares the expansion of economic-security policy across seven jurisdictions and analyses the EU’s attempt to manage technology and supply-chain vulnerabilities.",
+        "method_or_basis": "Review of matching primary text/PDF provided in package.",
+        "qualification": "This is comparative policy analysis with recommendations; it does not establish realised benefits of particular restrictions.",
+        "radar_relevance": "Screening, export-control and resilience measures change the conditions for internationally networked innovation and strategic technologies.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "goal.strategic_autonomy",
+          "secondary_objects": [],
+          "actor": {
+            "name": "MERICS",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2023-02-22",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "This is comparative policy analysis with recommendations; it does not establish realised benefits of particular restrictions.",
+          "text": "MERICS compares the expansion of economic-security policy across seven jurisdictions and analyses the EU’s attempt to manage technology and supply-chain vulnerabilities.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:be0356b437637dd3",
+      "source_hash": "fa9126e2",
+      "identity_hash": "cb178f377bb92028",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching pdf_excerpt source extract supplied in the package for https://merics.org/sites/default/files/2022-03/MERICS-Primer-Digital-Governance-2021_final.pdf; text reviewed for substance and identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_pdf_excerpt",
+            "url": "https://merics.org/sites/default/files/2022-03/MERICS-Primer-Digital-Governance-2021_final.pdf",
+            "title": "E-government and Covid-19: Digital China goes global",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching substantive first-party source text is included in the supplied package and was inspected; judgment rests on that source, not scanner summary."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_EU_STRATEGIC_TECH_ENVIRONMENT",
+        "reason": "Chinese digital platforms and governance approaches compete with EU regulatory and digital-cooperation models in third countries."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "China’s rise in digital governance: Deploying technology to deliver public goods at home and abroad"
+        },
+        "unset": [],
+        "reason": "The supplied MERICS PDF cover identifies this as the real work title; the scanner headline refers to a different framing."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "E-government and Covid-19: Digital China goes global",
+      "reader_what": "MERICS analyses China’s technology-enabled public governance and export of digital-governance models, including implications for EU digital partnerships.",
+      "reader_why": "Chinese digital platforms and governance approaches compete with EU regulatory and digital-cooperation models in third countries.",
+      "reader_more": "The report offers an analytical assessment, not proof that all anticipated global diffusion occurred.",
+      "deep_analysis": {
+        "work_kind": "policy report",
+        "research_question": "",
+        "main_finding": "MERICS analyses China’s technology-enabled public governance and export of digital-governance models, including implications for EU digital partnerships.",
+        "method_or_basis": "Review of matching primary text/PDF provided in package.",
+        "qualification": "The report offers an analytical assessment, not proof that all anticipated global diffusion occurred.",
+        "radar_relevance": "Chinese digital platforms and governance approaches compete with EU regulatory and digital-cooperation models in third countries.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "digital.international_partnerships",
+          "secondary_objects": [],
+          "actor": {
+            "name": "MERICS",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2022-03-17",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The report offers an analytical assessment, not proof that all anticipated global diffusion occurred.",
+          "text": "MERICS analyses China’s technology-enabled public governance and export of digital-governance models, including implications for EU digital partnerships.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:6ceb00e89d2522a7",
+      "source_hash": "173ca2e5",
+      "identity_hash": "134a586609290cb6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching abstract_or_landing_page source extract supplied in the package for https://research-and-innovation.ec.europa.eu/knowledge-publications-tools-and-data/publications/all-publications/scoping-study-supporting-development-code-practice-researchers-standardisation_en; text reviewed for substance and identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_report_summary",
+            "url": "https://research-and-innovation.ec.europa.eu/knowledge-publications-tools-and-data/publications/all-publications/scoping-study-supporting-development-code-practice-researchers-standardisation_en",
+            "title": "Scoping study for supporting the development of a code of practice for researchers on standardisation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching substantive first-party source text is included in the supplied package and was inspected; judgment rests on that source, not scanner summary."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Weak standardisation literacy and poor synchronisation between research projects and standards committees constrain research valorisation."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Scoping study for supporting the development of a code of practice for researchers on standardisation",
+      "reader_what": "The European Commission’s scoping study identifies recurring obstacles to involving Horizon 2020 researchers in standards development.",
+      "reader_why": "Weak standardisation literacy and poor synchronisation between research projects and standards committees constrain research valorisation.",
+      "reader_more": "The study identifies patterns and recommends action; its recommendations are not evidence of implemented reform.",
+      "deep_analysis": {
+        "work_kind": "policy report",
+        "research_question": "",
+        "main_finding": "The European Commission’s scoping study identifies recurring obstacles to involving Horizon 2020 researchers in standards development.",
+        "method_or_basis": "Review of matching primary text/PDF provided in package.",
+        "qualification": "The study identifies patterns and recommends action; its recommendations are not evidence of implemented reform.",
+        "radar_relevance": "Weak standardisation literacy and poor synchronisation between research projects and standards committees constrain research valorisation.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.knowledge_transfer",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission Directorate-General for Research and Innovation",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2022-03-15",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The study identifies patterns and recommends action; its recommendations are not evidence of implemented reform.",
+          "text": "The European Commission’s scoping study identifies recurring obstacles to involving Horizon 2020 researchers in standards development.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:0aa8a3329c4b8fce",
+      "source_hash": "e339fdd3",
+      "identity_hash": "f29ec08271f05ea7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching substantial_web_text source extract supplied in the package for https://ecfr.eu/article/germanys-new-china-policy/; text reviewed for substance and identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://ecfr.eu/article/germanys-new-china-policy/",
+            "title": "Germany’s new China policy – European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching substantive first-party source text is included in the supplied package and was inspected; judgment rests on that source, not scanner summary."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_RI_CONNECTION_NOT_SUBSTANTIVE",
+        "reason": "An ECFR interview discusses likely diplomatic and economic shifts in the new German coalition’s China policy."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Germany’s new China policy – European Council on Foreign Relations",
+      "reader_what": "An ECFR interview discusses likely diplomatic and economic shifts in the new German coalition’s China policy.",
+      "reader_why": "",
+      "reader_more": "Predictions of future policy are not verified decisions or R&I-system outcomes.",
+      "deep_analysis": {
+        "work_kind": "policy commentary",
+        "research_question": "",
+        "main_finding": "An ECFR interview discusses likely diplomatic and economic shifts in the new German coalition’s China policy.",
+        "method_or_basis": "Review of matching primary text/PDF provided in package.",
+        "qualification": "Predictions of future policy are not verified decisions or R&I-system outcomes.",
+        "radar_relevance": "Does not meet evidence/admission requirements for the assigned strand.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:c95e37d3794221e5",
+      "source_hash": "ebd14cd7",
+      "identity_hash": "205ee60eec1f1e4b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching substantial_web_text source extract supplied in the package for https://www.cost.eu/cost-at-msca-2021-addressing-political-challenges-and-fostering-balanced-mobility-flows/; text reviewed for substance and identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.cost.eu/cost-at-msca-2021-addressing-political-challenges-and-fostering-balanced-mobility-flows/",
+            "title": "COST at MSCA 2021: Addressing political challenges and fostering balanced mobility flows - COST",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching substantive first-party source text is included in the supplied package and was inspected; judgment rests on that source, not scanner summary."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_EVENT_COVERAGE_NOT_EVIDENCE",
+        "reason": "COST reports a 2021 MSCA conference speech concerning researcher mobility and academic networking."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "COST at MSCA 2021: Addressing political challenges and fostering balanced mobility flows - COST",
+      "reader_what": "COST reports a 2021 MSCA conference speech concerning researcher mobility and academic networking.",
+      "reader_why": "",
+      "reader_more": "COST’s general programme description does not turn conference coverage into empirical evidence.",
+      "deep_analysis": {
+        "work_kind": "conference news",
+        "research_question": "",
+        "main_finding": "COST reports a 2021 MSCA conference speech concerning researcher mobility and academic networking.",
+        "method_or_basis": "Review of matching primary text/PDF provided in package.",
+        "qualification": "COST’s general programme description does not turn conference coverage into empirical evidence.",
+        "radar_relevance": "Does not meet evidence/admission requirements for the assigned strand.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:ed6cc2fba8966310",
+      "source_hash": "ca88887c",
+      "identity_hash": "da99f65a44de7fe8",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching pdf_excerpt source extract supplied in the package for https://allea.org/wp-content/uploads/2021/09/ALLEA_Data_Act_Statement_2021.pdf; text reviewed for substance and identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_document",
+            "url": "https://allea.org/wp-content/uploads/2021/09/ALLEA_Data_Act_Statement_2021.pdf",
+            "title": "Refrain from Creating New IP Rights for Machine-Generated Data, ALLEA Asks EU Institutions - ALLEA",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching substantive first-party source text is included in the supplied package and was inspected; judgment rests on that source, not scanner summary."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Additional exclusive rights to scientific instrument outputs could restrict reuse and collaboration in data-intensive research."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Refrain from Creating New IP Rights for Machine-Generated Data, ALLEA Asks EU Institutions - ALLEA",
+      "reader_what": "ALLEA argues against creating new intellectual-property rights over machine-generated data in the proposed EU Data Act.",
+      "reader_why": "Additional exclusive rights to scientific instrument outputs could restrict reuse and collaboration in data-intensive research.",
+      "reader_more": "This is a stakeholder policy position on a prospective law, not proof of a law’s actual effects.",
+      "deep_analysis": {
+        "work_kind": "policy report",
+        "research_question": "",
+        "main_finding": "ALLEA argues against creating new intellectual-property rights over machine-generated data in the proposed EU Data Act.",
+        "method_or_basis": "Review of matching primary text/PDF provided in package.",
+        "qualification": "This is a stakeholder policy position on a prospective law, not proof of a law’s actual effects.",
+        "radar_relevance": "Additional exclusive rights to scientific instrument outputs could restrict reuse and collaboration in data-intensive research.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.openness",
+          "secondary_objects": [],
+          "actor": {
+            "name": "ALLEA",
+            "class": "university_group"
+          },
+          "mechanism": "advocates",
+          "direction": "becomes_contested",
+          "status": "proposed",
+          "status_date": "2021-09-02",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "This is a stakeholder policy position on a prospective law, not proof of a law’s actual effects.",
+          "text": "ALLEA argues against creating new intellectual-property rights over machine-generated data in the proposed EU Data Act.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:b2a0b71b62de5c54",
+      "source_hash": "f10e9a78",
+      "identity_hash": "8d1d4d9fbf5f64f6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching substantial_web_text source extract supplied in the package for https://doi.org/10.1186/s12961-020-0527-x; text reviewed for substance and identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://doi.org/10.1186/s12961-020-0527-x",
+            "title": "Understanding the Athena SWAN award scheme for gender equality as a complex social intervention in a complex system: analysis of Silver award action plans in a comparative European perspective",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_full_text",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7023775/",
+            "title": "Understanding the Athena SWAN award scheme for gender equality as a complex social intervention in a complex system: analysis of Silver award action plans in a comparative European perspective",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching substantive first-party source text is included in the supplied package and was inspected; judgment rests on that source, not scanner summary."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The comparative European research-area framing shows how institutional equality plans interact with structural and organisational conditions for research careers."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "Health Research Policy and Systems",
+          "date": "2020-02-14"
+        },
+        "unset": [],
+        "reason": "Publisher journal record and PubMed identify Health Research Policy and Systems, publication date 14 February 2020, not Research Policy / 1 December 2020."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Understanding the Athena SWAN award scheme for gender equality as a complex social intervention in a complex system: analysis of Silver award action plans in a comparative European perspective",
+      "reader_what": "Researchers analysed 16 Athena SWAN Silver action plans at Oxford, identifying 547 equality actions and examining how interventions operate in research institutions.",
+      "reader_why": "The comparative European research-area framing shows how institutional equality plans interact with structural and organisational conditions for research careers.",
+      "reader_more": "The evidence is based on one university’s action plans and cannot establish Europe-wide causal impact.",
+      "deep_analysis": {
+        "work_kind": "empirical study",
+        "research_question": "",
+        "main_finding": "Researchers analysed 16 Athena SWAN Silver action plans at Oxford, identifying 547 equality actions and examining how interventions operate in research institutions.",
+        "method_or_basis": "Review of matching primary text/PDF provided in package.",
+        "qualification": "The evidence is based on one university’s action plans and cannot establish Europe-wide causal impact.",
+        "radar_relevance": "The comparative European research-area framing shows how institutional equality plans interact with structural and organisational conditions for research careers.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "talent.career_structure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Kalpazidou Schmidt and coauthors",
+            "class": "university_group"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2020-02-14",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The evidence is based on one university’s action plans and cannot establish Europe-wide causal impact.",
+          "text": "Researchers analysed 16 Athena SWAN Silver action plans at Oxford, identifying 547 equality actions and examining how interventions operate in research institutions.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:c460fcc534149d32",
+      "source_hash": "8c4862e8",
+      "identity_hash": "6fe27e340c93caac",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching substantial_web_text source extract supplied in the package for https://ecfr.eu/article/commentary_digital_dilemmas_european_regulation_and_the_internet/; text reviewed for substance and identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://ecfr.eu/article/commentary_digital_dilemmas_european_regulation_and_the_internet/",
+            "title": "Digital dilemmas: European regulation and the internet – European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching substantive first-party source text is included in the supplied package and was inspected; judgment rests on that source, not scanner summary."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_RI_CONNECTION_NOT_SUBSTANTIVE",
+        "reason": "ECFR recounts a workshop debate on European internet regulation, platform responsibilities and regulatory approaches."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Digital dilemmas: European regulation and the internet – European Council on Foreign Relations",
+      "reader_what": "ECFR recounts a workshop debate on European internet regulation, platform responsibilities and regulatory approaches.",
+      "reader_why": "",
+      "reader_more": "Workshop conclusions are not independently established evidence of innovation-system change.",
+      "deep_analysis": {
+        "work_kind": "policy commentary",
+        "research_question": "",
+        "main_finding": "ECFR recounts a workshop debate on European internet regulation, platform responsibilities and regulatory approaches.",
+        "method_or_basis": "Review of matching primary text/PDF provided in package.",
+        "qualification": "Workshop conclusions are not independently established evidence of innovation-system change.",
+        "radar_relevance": "Does not meet evidence/admission requirements for the assigned strand.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:cea45d9a5899addd",
+      "source_hash": "bcd13f06",
+      "identity_hash": "2bf5214292b0d2d1",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "DOI resolves to Elsevier Futures article landing page with abstract, highlights and restricted full text."
+          },
+          {
+            "step": "doi",
+            "outcome": "partial",
+            "note": "DOI 10.1016/j.futures.2017.06.002 confirms authors, Futures 97 (2018), pages 6–17."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "partial",
+            "note": "Exact-title search recovered publisher abstract and journal identity."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Burrows and Gnad 2018 search corroborated article but not full methodology."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "partial",
+            "note": "ScienceDirect primary abstract available; full research article requires institutional access."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "partial",
+            "note": "ResearchGate and British Library records repeat abstract and citation but do not provide detailed methods."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_abstract",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0016328717300083",
+            "title": "Between ‘muddling through’ and ‘grand design’: Regaining political initiative – The role of strategic foresight",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Publisher abstract establishes the paper’s existence but does not reveal enough of the four-stage foresight procedure to establish a materially new transferable method."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "B",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "The Futures article is verified and the publisher abstract outlines a four-step Dahrendorf foresight pilot, but available full-text methodological detail is insufficient for a confident B contribution test."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    }
+  ]
+}
