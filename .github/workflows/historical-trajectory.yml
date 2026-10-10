@@ -1,14 +1,17 @@
 name: Build historical trajectory evidence review
+
 on:
   workflow_dispatch:
   push:
     paths:
-      - 'radar_all_publication_data.xlsx'
-      - '**/radar_all_publication_data.xlsx'
+      - 'stuff/source_merit_ranking.xlsx'
       - 'trajectory_engine/**'
+      - 'tests/test_engine.py'
       - '.github/workflows/historical-trajectory.yml'
+
 permissions:
   contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,11 +25,13 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Run unit tests
+      - name: Run trajectory engine tests only
         run: python -m unittest tests.test_engine -v
-      - name: Build local evidence report from the five-sheet workbook
-        run: python -m trajectory_engine.cli build --workbook auto --out trajectory-output
-      - name: Attach private report (contains original source notes)
+      - name: Confirm workbook from Stuff exists
+        run: test -f stuff/source_merit_ranking.xlsx
+      - name: Build historical trajectory review from Stuff workbook
+        run: python -m trajectory_engine.cli build --workbook stuff/source_merit_ranking.xlsx --out trajectory-output
+      - name: Attach historical review
         uses: actions/upload-artifact@v4
         with:
           name: historical-trajectory-review
