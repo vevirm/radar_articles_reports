@@ -16,22 +16,22 @@ from .storage import connect,add,rows,j
 
 STOP = set('the a an and of for in on to with by from as at into about that this using use study paper article research europe european eu new future policy project report analysis development towards toward through their its they are was were is have has within between among system systems approach approaches technology technologies innovation innovative based regarding potential evidence results findings implications perspective effects case review official information work how where why what 2026 2025 2024 2023'.split())
 COLUMN_ALIASES = {
- 'title':['title','publication title','source title','name','headline'],
- 'url':['original source','source url','url','link','doi','original url','publication link','source link'],
- 'pubdate':['publication date','published date','published','date published','publication year','year','date'],
+ 'title':['title','scanner.title','headline','publication title','source title','name'],
+ 'url':['original source','scanner.url','source url','url','link','doi','original url','publication link','source link'],
+ 'pubdate':['publication date','scanner.date','published date','published','date published','publication year','year','date'],
  'eventdate':['event date','historical event date','date of event','occurred on','occurred','year of event'],
- 'subject':['topic','themes','theme','subject','area','domain','field','category','keywords','tags','strand','focus'],
- 'claim':['structured claim','historical finding','finding','claim','key finding','summary','description','abstract','radar note','evidence','conclusion','main finding','finding text'],
+ 'subject':['topic','themes','theme','subject','area','domain','field','category','keywords','tags','focus'],
+ 'claim':['structured claim','historical finding','finding','claim','key finding','scanner.reader_point','deep_scan.reader_what','core_message','plain finding','summary','description','abstract','radar note','evidence','conclusion','main finding','finding text'],
  'type':['evidence type','claim type','statement type','record type'],
- 'verification':['verification status','verified','verification','source status','status'],
- 'quality':['source quality','quality','evidence strength','authority'],
- 'actors':['actors','stakeholders','organizations','organisations','who'],
+ 'verification':['verification status','Deep Scan status','verified','verification','source status','admission_status','status'],
+ 'quality':['source quality','deep_scan.verification.evidence_depth','quality','evidence strength','authority'],
+ 'actors':['actors','scanner.authors','stakeholders','organizations','organisations','who'],
  'mechanism':['mechanism','causal mechanism','reason','relationship'],
  'outcome':['observed outcome','measured outcome','outcome','impact measured'],
- 'qualification':['limitations','qualification','uncertainty','caveat','method note'],
+ 'qualification':['limitations','qualification','uncertainty','caveat','method note','deep_scan.reader_more'],
  'eventid':['historical event id','event id','development id','underlying event id'],
 }
-VERIFIED_WORDS=('verified','confirmed','audited','primary','official','validated')
+VERIFIED_WORDS=('verified','confirmed','audited','primary','official','validated','authoritative')
 PROVISIONAL_WORDS=('unverified','provisional','inferred','hypothetical','draft','needs verification','not verified')
 ALLOWED_TYPES={'observation','condition','event','proposed_action','announced_decision','implemented_action','measurable_outcome','prediction','warning','scenario','interpretation','unclassified'}
 
@@ -124,6 +124,25 @@ def import_workbook(db,workbook,synthetic=False):
                 continue
             seen[key]=eid
             etype,basis=classify(row,claim)
+            # Historical deep-scan has claim-level structures: preserve the original
+            # JSON, but do not equate the 'delivered' status of a diagnosis with
+            # proof that a promised intervention was delivered.
+            structured=[]
+            if sheet=='Historical findings' and row.get('deep_scan.claims'):
+                try:
+                    candidate=json.loads(str(row['deep_scan.claims']))
+                    if isinstance(candidate,list):
+                        structured=[z for z in candidate if isinstance(z,dict)][:20]
+                except (ValueError,TypeError): pass
+            if structured:
+                kinds={str(z.get('kind','')).lower() for z in structured}
+                states={str(z.get('status','')).lower() for z in structured}
+                if 'effect' in kinds: etype,basis='observation','structured_claim_kind_effect_not_independent_verification'
+                elif 'advocacy' in kinds or states.intersection({'proposed','intention','call_open','in_negotiation'}):
+                    etype,basis='proposed_action','structured_claim_type_not_independent_verification'
+                elif 'action' in kinds and states.intersection({'adopted','operating','in_force','delivered'}):
+                    etype,basis='implemented_action','structured_claim_kind_action_not_independent_verification'
+
             q,ver,qual=quality_assessment(row,sheet)
             event_id=first(row,COLUMN_ALIASES['eventid'])
             add(db,'evidence',dict(
@@ -135,7 +154,7 @@ def import_workbook(db,workbook,synthetic=False):
                 verification=ver,claim_text=claim,actors=first(row,COLUMN_ALIASES['actors']),
                 area=subject_text(row),mechanism=first(row,COLUMN_ALIASES['mechanism']),
                 outcome=first(row,COLUMN_ALIASES['outcome']),qualifications=first(row,COLUMN_ALIASES['qualification']),
-                metadata_json=j({'sheet':sheet,'raw_row':rownum,'quality_text':qual})
+                metadata_json=j({'sheet':sheet,'raw_row':rownum,'quality_text':qual,'structured_claims':structured})
             ))
             add(db,'evidence_occurrences',{'evidence_id':eid,'raw_id':rid})
     db.commit()

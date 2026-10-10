@@ -7,6 +7,9 @@ from .storage import connect
 from .engine import import_workbook,make_graph,evaluate_chains
 from .render import render
 from .llm import reason,synthesize
+from .storage import rows
+from .journeys import discover
+from .presentation import write_page
 
 def workbook_path(value):
     if value!='auto':
@@ -31,7 +34,14 @@ def build(args):
             print('Adversarial overall synthesis generated:',synthesize(db,snapshot,model=args.ollama,url=args.ollama_url))
         except Exception as ex:
             warnings.append('Optional local LLM failed: '+str(ex))
-    obj=render(db,snapshot,dest/'index.html')
+    # Preserve the audit output, but make the *first page* the requested
+    # automatically discovered expectation-to-outcome journeys.
+    obj=render(db,snapshot,dest/'evidence-audit.html')
+    evidence=[e for e in rows(db,'evidence') if e['snapshot_id']==snapshot]
+    journeys=discover(evidence,n_topics=args.topics,min_members=6 if args.synthetic else 12)
+    write_page(dest/'index.html',journeys,evidence)
+    (dest/'topic_journeys.json').write_text(json.dumps(journeys,indent=2,ensure_ascii=False),encoding='utf8')
+    print('Automatically discovered topic journeys:',len(journeys))
     obj['import_warnings']=warnings
     (dest/'report.json').write_text(json.dumps(obj,indent=2,ensure_ascii=False),encoding='utf-8')
     (dest/'import_log.json').write_text(json.dumps({'source':str(workbook),'snapshot':snapshot,'warnings':warnings,'sheet_rows':{k:len(v) for k,v in sheets.items()}},indent=2),encoding='utf8')
@@ -46,6 +56,7 @@ def main():
     b=sp.add_parser('build',help='Import workbook, build graph and make an offline HTML report')
     b.add_argument('--workbook',default='auto',help='Path, or auto finds the named xlsx in current repo')
     b.add_argument('--out',default='trajectory-output')
+    b.add_argument('--topics',type=int,default=20,help='Number of data-derived broad topics to discover')
     b.add_argument('--synthetic',action='store_true',help='Mark output clearly as a test fixture')
     b.add_argument('--ollama',default='',help='Optional local Ollama model, e.g. llama3.1')
     b.add_argument('--ollama-url',default='http://localhost:11434/api/generate')
