@@ -7,8 +7,8 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **2680** (Main **1269** + Historical **1411**)
-- Automatic queue still needing V2 verification: **286** (Main **113** + Historical **173**)
-- Currently assigned to workers: **42** (Main **7** + Historical **35**)
+- Automatic queue still needing V2 verification: **303** (Main **118** + Historical **185**)
+- Currently assigned to workers: **59** (Main **12** + Historical **47**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **29**
 - Automatic queue pending and not yet assigned: **244**
@@ -16,15 +16,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261009T170333Z-9e74b44d93b7`
-- Assigned unresolved records: **7**
-  1. `link:https://doi.org/10.1177/23210230261483357` — Digital Sovereignty and India: Rhetoric and Reality — recovery attempt 2/3
-  2. `link:https://news.google.com/rss/articles/CBMixgFBVV95cUxOOUk2RnFEbjJ3U1VMdUdwTXNrT3VNT0FpcjBDMFVLVHVzSHVlLVJjZE8tRC15Y1I0aWN5ZzJJQlJZaldBVmJ0cy1FLUVZNGVVc0k2bzg5dDlQTFlabzFrSHgtQ0dMNXg2N21BSzhsZEhyTTRTUjlBa2JhSWh5RVU1UWs4bnlhZ3M5Z3RCMTBLSXVieTBwckZNTWR0MUhkYUk1NUp6STFSaGhZb3FFTE5hVlRodXVOdE9faFlDZklPdGRlaERDR2c?oc=5` — US, European telecom stocks slide as SpaceX spectrum deal rattles sector
-  3. `link:https://news.google.com/rss/articles/CBMiqAFBVV95cUxPRE85czRTdEdua3U2RlVVTkdvMHRuQlhvbXM5T1JpWkdyTmExZEc4dmdRbllKTWo3dVNucml3dVQwc1V2RlRpOG82QzVQc2lXVUxTREkzMHZtVHVWSEk1bmlfMHZjZU1saGo1SjFYTFFveXh6dGVTVVc1bTdVbndVNUZIalE1NWg0OEhPMTN1QTZ2SDdKSjdxeXNxMkVWVnBpNEU4cXhyMzU?oc=5` — EU’s new list of critical mineral projects focuses on clean energy metals
-  4. `link:https://news.google.com/rss/articles/CBMiqwFBVV95cUxOVFc4c09MQnd2SzBWeHlyS09aYVhtQjc1U1VsakNNekFhekRKRlVDVEhmUi1zTnRFRFY4UlBQN0xfZnZTTlNzM2k3Y1Y0aTFtdzh3dGh0MmgtM1dFMkIyV1lpUVVjVDc0eUJFN0lldkRHMFlmUVRTUk8yY2dMcjJmUTNnbVU1S3RCZ01ST3JEZ1FFMHFyWGs2UFZIV3pxMEd5OFY5OXJfRFlLV1U?oc=5` — Watch Hinrich Foundation's Elms on EU-China Trade Tensions
-  5. `link:https://hadea.ec.europa.eu/news/horizon-europe-cluster-4-industry-2027-calls-now-published-2026-10-05_en` — Horizon Europe Cluster 4: Industry 2027 calls now published
-  6. `link:https://hadea.ec.europa.eu/news/horizon-europe-cluster-4-digital-2027-calls-now-published-2026-10-05_en` — Horizon Europe Cluster 4: Digital 2027 calls now published
-  7. `link:https://news.google.com/rss/articles/CBMijAJBVV95cUxQS0RoaW9Fa3pzMlRQSXVYYzJ6V1E1V0d2V1cxS1ZZemtpNi1OZjNybzRpS1ktc2pFeHdUN1o2d3BmYzVESW5pdmE5S0xlcDZuR1VaTlZ1TWJNUXVFZ2wySmVCN0ktcTlSN3lBYVRReGRveFAta0hYX1dqOHJRdXo3MlJTVUFqYklkX3J2OVBMT2RFTjVITWdaSldOWmpMbk9QZUdEa2IwUEl6bTN0UF9ETGpNMzdlbkUxVXFoVHFXM2RXQnlQa3drczgwS21qWWVxMUtDTThEdHVnZDFnWkpYV28zN2lRZzZyVTYwYmdMVWpPSGxhX1JNNUlodmFoSUxmRWhpUHlYZ0dqa1ZN?oc=5` — Research and Innovation at the Nucleus: Romania holds Enhanced dialogue with the European Commission - European Commission
+- Current package: `worker-a-20261010T052907Z-edf74b7e871c`
+- Assigned unresolved records: **24**
+  1. `link:https://doi.org/10.1093/polsoc/puag021` — Governing knowledge through program architecture: strategic valorization, infrastructural integration, and the autonomy-steering settlement in Horizon Europe after 2027
+  2. `link:https://www.cnrs.fr/sites/default/files/press_info/2026-10/2026_09_28_PEPR_TRANSFORM_EN.pdf` — France 2030: the CNRS and the IRD launch a national research programme on the habitability of the Earth | CNRS
+  3. `link:https://news.google.com/rss/articles/CBMipAFBVV95cUxNUlZ0bzBBQ1FybjVfRTRYQTlWejZRdndVOHZxMFpJWWJ3dEJNYzBHb2N1QmdFLURtOEZGRm1OUUV4dmJoYmxwMHVXM19uSndXTFNrcHU1SkNjWWtrRW5WQ0ZvSl85cmJJaVpGTVVpNHFHc1VYby1CRzRQLWJzUWQ0RkJOMFo0X29jNk5pa1Exa2J0Sy1IRUlpc2JIWlQtR3ZzejBudw?oc=5` — EU tech chief says bloc 'well equipped' to fend off rogue AI risk
+  4. `link:https://news.google.com/rss/articles/CBMixgFBVV95cUxObUF1S2Y0LTFHM0JDbXRLY05aMmVvUDJqOU1ZNjEtLVlDdFVMelgyTlN0d3BvY0lrLVJkZEc4VGI0eEMtWTVnbDBGQnNVSGx1bklCQkxiNEs3RzFlWklGSWtoMFpyLV9zb2N6Y1VlVjQ2b2pqMy1ld0IyZ2RQMGt3YmFRaWQyUFBrYnVua2VyWGdyQW4wU0xGWm91d2prUlRLSHZrZXNwZjl0MVBuQV9ZeFZmZi15Nmh1VGFvV25xeVJfYkNGWkE?oc=5` — EU aviation body widens Saudi airspace warning after Houthi strikes
+  5. `link:https://news.google.com/rss/articles/CBMiuAFBVV95cUxPd0dBSWE2X0ZwMnlRSG1fR3IzMGNpSzFVczQ3QS14dmNtQkl1aVFhUi15UnlfdkEtRWRyR3BHQ0o0U1lqUzlhSlM2VlZ5czhIcjFQUjN1R2duY0VScWpPcGtiT1JwZDdfSjRUWFZQTDRvU1haTTdnUzc4a3NVV2hJMnhoQ21UaU1VekxUb1A2Mi1DZ2ZuNFNORm5SUjJwOE5wQzU1TG1jai1zRTlMaUNXcDg0bWIwbXlP?oc=5` — Europe’s Billionaires Are Overshadowed By AI’s Gilded Age
+  6. `historical:id:501860af2f5b79e3` — Designing Horizon Europe for the post-2028 world – CEPS
+  7. `historical:id:f2229b403dfea7bd` — Space Science - ESF
+  8. `historical:id:eebf0f3753662e39` — From Brussels with leverage: How the EU is recalibrating its China strategy – European Council on Foreign Relations
+  - … plus 16 more in the package manifest
 
 ### Worker B
 - Current package: `worker-b-20261009T080214Z-5994737f044d`
