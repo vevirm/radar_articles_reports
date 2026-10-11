@@ -1,0 +1,2331 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-a-20261011T073553Z-e8b972156983",
+  "results": [
+    {
+      "record_key": "link:https://doi.org/10.1002/bcp.70875",
+      "source_hash": "46cdb76c",
+      "identity_hash": "cfb6ea7dfdf43137",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Opened https://doi.org/10.1002/bcp.70875; DOI resolver was inaccessible in web reader."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1002/bcp.70875 and bibliographic identity corroborated in British Journal of Clinical Pharmacology Early View."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Wiley journal listing corroborates 7 October 2026 publication; matching substantive OpenAlex-hosted article PDF was supplied."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://doi.org/10.1002/bcp.70875",
+            "title": "Defining a comprehensive set of value assessment criteria for funders of drug repurposing initiatives",
+            "evidence_used": true
+          },
+          {
+            "kind": "cached_primary_pdf",
+            "url": "https://content.openalex.org/works/W7220984848.pdf",
+            "title": "Defining a comprehensive set of value assessment criteria for funders of drug repurposing initiatives",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified against supplied matching source material and public evidence where specified; no claims based solely on search snippets."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_EU_SCOPE_INCIDENTAL",
+        "reason": "A Route 1 has no source-supported European strategic R&I relationship; Route 2 does not measure any European R&I-system state or trajectory; Route 3 fails because the subject is a generic drug-repurposing project-assessment checklist, not substantive analysis of the European research system. Horizon Europe funding and participation of European organisations are not sufficient."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Defining a comprehensive set of value assessment criteria for funders of drug repurposing initiatives",
+      "reader_what": "The authors derive 37 criteria across five domains for evaluating drug-repurposing proposals.",
+      "reader_why": "",
+      "reader_more": "The authors derive 37 criteria across five domains for evaluating drug-repurposing proposals. Proposed evaluation criteria have not been demonstrated to improve European R&I-system outcomes.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed methodology article",
+        "research_question": "",
+        "main_finding": "The authors derive 37 criteria across five domains for evaluating drug-repurposing proposals.",
+        "method_or_basis": "Review of funding documents, stakeholder consultation and targeted literature search; 330 candidate criteria reduced to 37.",
+        "qualification": "Proposed evaluation criteria have not been demonstrated to improve European R&I-system outcomes.",
+        "radar_relevance": "EU grant acknowledged but study does not research European R&I-system mechanisms.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1108/dprg-03-2026-0136",
+      "source_hash": "7b5c5906",
+      "identity_hash": "5d481c0091daa43d",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Opening https://doi.org/10.1108/dprg-03-2026-0136 returned an inaccessible DOI resolver in the browser."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_found",
+            "note": "Searched exact identifier \"10.1108/dprg-03-2026-0136\"; no matching publisher/registry publication surfaced."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "not_found",
+            "note": "Searched quoted exact title \"When digitalization fuels divergence: the Digital Matthew Effect and regional innovation divide in Europe\"; results did not substantiate this article."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "not_found",
+            "note": "Searched distinctive title with 2026 (Digital Matthew Effect Europe innovation); no author-linked corresponding article was found; author metadata unavailable in supplied record."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "not_found",
+            "note": "Searched site-specific Emerald publisher pages for distinctive title and identifier; no matching article found."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_found",
+            "note": "Searched DOI fragment, title fragments \"Digital Matthew Effect Europe innovation\", and indexed academic pages; returned unrelated publications."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Mandatory retrieval paths produced no matching identity-confirming publication; claimed DOI and title remain unsubstantiated."
+      },
+      "admission": {
+        "decision": "drop_unverifiable",
+        "target_strand": "A",
+        "reason_code": "IDENTITY_UNVERIFIABLE",
+        "reason": "Claimed work could not be substantiated after DOI, exact-title, publisher-site, and broader identity searches; cached package has no substantive source. A Routes 1–3 cannot be evaluated without an identifiable work."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "When digitalization fuels divergence: the Digital Matthew Effect and regional innovation divide in Europe",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/21568235.2026.2741429",
+      "source_hash": "09501e06",
+      "identity_hash": "24b1cda6beea089a",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Opening https://doi.org/10.1080/21568235.2026.2741429 returned an inaccessible DOI resolver in the browser."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_found",
+            "note": "Searched exact identifier \"10.1080/21568235.2026.2741429\"; no matching publisher/registry publication surfaced."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "not_found",
+            "note": "Searched quoted exact title \"The limits of multidimensional policy design: how research environments collapse into unified perceptions of early-stage researchers\"; results did not substantiate this article."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "not_found",
+            "note": "Searched distinctive title with 2026 (unified perceptions early-stage researchers 2026); no author-linked corresponding article was found; author metadata unavailable in supplied record."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "not_found",
+            "note": "Searched site-specific Taylor & Francis publisher pages for distinctive title and identifier; no matching article found."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "not_found",
+            "note": "Searched DOI fragment, title fragments \"unified perceptions early-stage researchers 2026\", and indexed academic pages; returned unrelated publications."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Mandatory retrieval paths produced no matching identity-confirming publication; claimed DOI and title remain unsubstantiated."
+      },
+      "admission": {
+        "decision": "drop_unverifiable",
+        "target_strand": "A",
+        "reason_code": "IDENTITY_UNVERIFIABLE",
+        "reason": "Claimed work could not be substantiated after DOI, exact-title, publisher-site, and broader identity searches; cached package has no substantive source. A Routes 1–3 cannot be evaluated without an identifiable work."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "The limits of multidimensional policy design: how research environments collapse into unified perceptions of early-stage researchers",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.heliyon.2026.e45501",
+      "source_hash": "5964deef",
+      "identity_hash": "fd957d6c4698cd7d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "DOI 10.1016/j.heliyon.2026.e45501 could not be opened by web reader."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Matching full scholarly paper in scanner-provided cached PDF excerpt; title, authors, Heliyon 12 (2026) e45501 and DOI match."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "cached_primary_pdf",
+            "url": "https://discovery.ucl.ac.uk/id/eprint/10231706/1/European_industrial_leagues.pdf",
+            "title": "Combining spatial and aspatial methods to identify European industrial leagues: Development perspectives",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified against supplied matching source material and public evidence where specified; no claims based solely on search snippets."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 2 is satisfied: European NUTS-2 regional comparisons directly measure technology readiness and R&D gaps across 320 regions, including research capacity and workforce skills. The industrial regional frame is not merely an EU comparator."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Combining spatial and aspatial methods to identify European industrial leagues: Development perspectives",
+      "reader_what": "Biclustering and spatial analyses group 320 European regions into seven Industry 4.0 readiness leagues, with some groups showing R&D and",
+      "reader_why": "Identifies differentiated European regional R&D and technological capability patterns relevant to innovation policy.",
+      "reader_more": "Biclustering and spatial analyses group 320 European regions into seven Industry 4.0 readiness leagues, with some groups showing R&D and workforce-skill weaknesses. Regional indicator associations are descriptive, not causal estimates of policy effectiveness.",
+      "deep_analysis": {
+        "work_kind": "empirical regional study",
+        "research_question": "",
+        "main_finding": "Biclustering and spatial analyses group 320 European regions into seven Industry 4.0 readiness leagues, with some groups showing R&D and workforce-skill weaknesses.",
+        "method_or_basis": "Biclustering of 71 indicators across 320 NUTS-2 regions combined with spatial autocorrelation analysis.",
+        "qualification": "Regional indicator associations are descriptive, not causal estimates of policy effectiveness.",
+        "radar_relevance": "European regional innovation capability and R&D disparities, A Route 2.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "innovation.regional_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Kosztyán and coauthors",
+            "class": "university_group"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026",
+          "status_date_precision": "year",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Regional indicator associations are descriptive, not causal estimates of policy effectiveness.",
+          "text": "Analysis of 320 European NUTS-2 regions reveals seven distinct groups with different Industry 4.0, research and skill readiness profiles.",
+          "confidence": "high",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://www.euronews.com/2026/10/08/astronaut-sophie-adenot-returns-to-earth-after-record-space-mission",
+      "source_hash": "1a2ad635",
+      "identity_hash": "918be64d18d75647",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Package contains matching full Euronews account of Sophie Adenot’s landing on 8 October 2026."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "news_article",
+            "url": "https://www.euronews.com/2026/10/08/astronaut-sophie-adenot-returns-to-earth-after-record-space-mission",
+            "title": "Astronaut Sophie Adenot returns to Earth after record space mission",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified against supplied matching source material and public evidence where specified; no claims based solely on search snippets."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "Strand C test fails: the account describes an astronaut returning from a completed ISS stay, without establishing a specific substantive change to EU research funding, governance, research infrastructure, capability or strategic technology position. A noteworthy individual flight milestone alone is not a verified EU R&I-system development."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Astronaut Sophie Adenot returns to Earth after record space mission",
+      "reader_what": "Euronews reports Sophie Adenot’s return after 235 days aboard the ISS.",
+      "reader_why": "",
+      "reader_more": "Euronews reports Sophie Adenot’s return after 235 days aboard the ISS. The article does not document a corresponding new European R&I policy or capability development.",
+      "deep_analysis": {
+        "work_kind": "news report",
+        "research_question": "",
+        "main_finding": "Euronews reports Sophie Adenot’s return after 235 days aboard the ISS.",
+        "method_or_basis": "News account of splashdown and mission duration.",
+        "qualification": "The article does not document a corresponding new European R&I policy or capability development.",
+        "radar_relevance": "No verified substantive EU R&I connection to a new event.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.futures.2026.103832",
+      "source_hash": "0fecddf3",
+      "identity_hash": "1a7b4ef3479d002c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Opening DOI 10.1016/j.futures.2026.103832 returned HTTP 403 in web reader."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Supplied Chalmers institutional repository PDF contains matching author manuscript, journal citation, complete abstract and article body."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "institutional_author_manuscript",
+            "url": "https://research.chalmers.se",
+            "title": "Walking together by asking questions: Combining backcasting and prefiguration to invite a hopeful approach to desirable futures",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified against supplied matching source material and public evidence where specified; no claims based solely on search snippets."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_TRANSFERABLE_METHOD",
+        "reason": "B qualifies because it proposes an explicit transferable prefigurative-backcasting framework connecting desirable futures, lived reality and prefigurative being, rather than merely applying established methods to one case."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Walking together by asking questions: Combining backcasting and prefiguration to invite a hopeful approach to desirable futures",
+      "reader_what": "The paper develops prefigurative backcasting around three connected spaces: desirable futures, lived reality and prefigurative being.",
+      "reader_why": "Provides a transferable foresight design to join systematic goal-directed backcasting with lived, experimental prefiguration.",
+      "reader_more": "The paper develops prefigurative backcasting around three connected spaces: desirable futures, lived reality and prefigurative being. The authors propose a conceptual framework; it is not demonstrated through a comparative effectiveness evaluation.",
+      "deep_analysis": {
+        "work_kind": "foresight methodology study",
+        "research_question": "",
+        "main_finding": "The paper develops prefigurative backcasting around three connected spaces: desirable futures, lived reality and prefigurative being.",
+        "method_or_basis": "Integrative literature review and comparative conceptual analysis of backcasting and prefiguration.",
+        "qualification": "The authors propose a conceptual framework; it is not demonstrated through a comparative effectiveness evaluation.",
+        "radar_relevance": "New transferable forward-looking futures methodology independent of geography.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Saglietti, Holmén and Holmberg",
+            "class": "university_group"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-04-16",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The authors propose a conceptual framework; it is not demonstrated through a comparative effectiveness evaluation.",
+          "text": "The study proposes prefigurative backcasting with three spaces: desirable futures, lived reality and prefigurative being.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMirwFBVV95cUxPTFMyMTFKQklNQXBvSEg5VjRta3NlRUFrTmtPSjFIV2tjVFBEY3M0RHRUdDdXMFdESG5FUXdTX3lpSjBFTVBUUTI2TG5ZR3I1enNxUFZjU3JxcU1KNGNUd3J1b0lzRGVxbk42Z2h5RGFXUzJYcDNOUldoUkM5TTBGb25GRVZRRnNjblQ3VTM4eUYyMGdNUmJuVm1WUTdVT2JWdDBRdmhoNTljbWFPQWRB?oc=5",
+      "source_hash": "026cc292",
+      "identity_hash": "b9ef8366badab835",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching named work from https://www.reuters.com/business/media-telecom/oil-relief-lifts-european-stocks-telecoms-weak-spot-2026-10-09/"
+          },
+          {
+            "step": "title_search",
+            "outcome": "success",
+            "note": "Matching dated source located at https://www.reuters.com/business/media-telecom/oil-relief-lifts-european-stocks-telecoms-weak-spot-2026-10-09/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article",
+            "url": "https://www.reuters.com/business/media-telecom/oil-relief-lifts-european-stocks-telecoms-weak-spot-2026-10-09/",
+            "title": "European stocks eke out weekly gain as oil, yields ease; SpaceX spectrum deal hits telecoms",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Judgement is limited to the matching supplied source text and identified source; scanner relevance assertions are not treated as evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_RI_EVENT",
+        "reason": "Strand C gate: dateable event and direct European R&I bridge not both met."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "European stocks eke out weekly gain as oil, yields ease; SpaceX spectrum deal hits telecoms",
+      "reader_what": "Reuters reports European share movements after oil and yield shifts, with telecom losses tied to a US spectrum deal.",
+      "reader_why": "",
+      "reader_more": "Reuters reports European share movements after oil and yield shifts, with telecom losses tied to a US spectrum deal. Stock movements do not establish a new European R&I or strategic-technology capacity development.",
+      "deep_analysis": {
+        "work_kind": "current news/development",
+        "research_question": "",
+        "main_finding": "Reuters reports European share movements after oil and yield shifts, with telecom losses tied to a US spectrum deal.",
+        "method_or_basis": "Contemporaneous Reuters market reporting.",
+        "qualification": "Stock movements do not establish a new European R&I or strategic-technology capacity development.",
+        "radar_relevance": "Strand C gate: dateable event and direct European R&I bridge not both met.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://op.europa.eu/en/publication-detail/-/publication/5fe1897d-c450-11f1-bfcb-01aa75ed71a1/language-en",
+      "source_hash": "4cb04a0a",
+      "identity_hash": "777d5e12f5f2025a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Supplied package contains matching abstract_or_landing_page first-party text; checked identity and topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_material",
+            "url": "https://op.europa.eu/en/publication-detail/-/publication/5fe1897d-c450-11f1-bfcb-01aa75ed71a1/language-en",
+            "title": "Industrial electrification and energy efficiency - Publications Office of the EU",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Judgement is limited to the matching supplied source text and identified source; scanner relevance assertions are not treated as evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_EU_TECH_CAPACITY",
+        "reason": "Real-world industrial demonstrations provide evidence on the European clean-technology deployment pathway. Source establishes a substantive qualifying development or evidence product."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Industrial electrification and energy efficiency - Publications Office of the EU",
+      "reader_what": "An EU publication assesses 189 clean-industrial-technology demonstrators across programmes worth around €1 billion.",
+      "reader_why": "Real-world industrial demonstrations provide evidence on the European clean-technology deployment pathway.",
+      "reader_more": "An EU publication assesses 189 clean-industrial-technology demonstrators across programmes worth around €1 billion. The claimed potential to halve fossil-fuel share by 2040 is a scenario, not an observed outcome.",
+      "deep_analysis": {
+        "work_kind": "current news/development",
+        "research_question": "",
+        "main_finding": "An EU publication assesses 189 clean-industrial-technology demonstrators across programmes worth around €1 billion.",
+        "method_or_basis": "EU Publications Office publication and technical programme synthesis.",
+        "qualification": "The claimed potential to halve fossil-fuel share by 2040 is a scenario, not an observed outcome.",
+        "radar_relevance": "Real-world industrial demonstrations provide evidence on the European clean-technology deployment pathway.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "innovation.green_technology",
+          "secondary_objects": [],
+          "actor": {
+            "name": "EU Publications Office",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-10-09",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The claimed potential to halve fossil-fuel share by 2040 is a scenario, not an observed outcome.",
+          "text": "An EU publication assesses 189 clean-industrial-technology demonstrators across programmes worth around €1 billion.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMivgFBVV95cUxNSy1rb2o0WjFGd0V5ZERHN3BRbC02YzFRcUtxdnVNMlV3SDUtc0dQQjN3enZyQ3gyQktPU0l0d3pQbGFVU2dXRFFzNm05d0Z3eDhxNVBlNDVNQWg4S0hpQUdWR0ktYnJwLXpwTC1oeGhoSjR2WWg5MXc0dFJqUmVpbGlaV1VlbHJpUjFxNUlFYUtfVWM0RmpCdmVVbUNiQXdfbU55bDBXam1oa0pHSmVrZGdtSWJPMlpTQlJoNWtn?oc=5",
+      "source_hash": "4f57f93b",
+      "identity_hash": "2da593f82e319906",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching named work from https://www.euronews.com/tag/china"
+          },
+          {
+            "step": "title_search",
+            "outcome": "success",
+            "note": "Matching dated source located at https://www.euronews.com/tag/china"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article",
+            "url": "https://www.euronews.com/tag/china",
+            "title": "5 things to know ahead of crunch EU-China talks",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Judgement is limited to the matching supplied source text and identified source; scanner relevance assertions are not treated as evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_RI_EVENT",
+        "reason": "Strand C gate: dateable event and direct European R&I bridge not both met."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "5 things to know ahead of crunch EU-China talks",
+      "reader_what": "Euronews previews EU–China trade negotiations and market-access disputes.",
+      "reader_why": "",
+      "reader_more": "Euronews previews EU–China trade negotiations and market-access disputes. The preview does not itself document a new research, innovation or strategic-technology measure.",
+      "deep_analysis": {
+        "work_kind": "current news/development",
+        "research_question": "",
+        "main_finding": "Euronews previews EU–China trade negotiations and market-access disputes.",
+        "method_or_basis": "Euronews reporting on planned negotiations.",
+        "qualification": "The preview does not itself document a new research, innovation or strategic-technology measure.",
+        "radar_relevance": "Strand C gate: dateable event and direct European R&I bridge not both met.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiX0FVX3lxTE5zN19oMnpfbEhYNTU2UUk1V3R1Ym9Ebk1IcDVkQ3FrRU9Tc3J0TEJGd3BGZ1dNTWduY3pnblB1bFQ1OFI1UXcydV9LYThhYW5PTEZwS0lKSkU2S1pXcktN?oc=5",
+      "source_hash": "4b2247ea",
+      "identity_hash": "1c2327a5b70c721b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching named work from https://www.nature.com/articles/s41599-026-09092-w"
+          },
+          {
+            "step": "title_search",
+            "outcome": "success",
+            "note": "Matching dated source located at https://www.nature.com/articles/s41599-026-09092-w"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.nature.com/articles/s41599-026-09092-w",
+            "title": "“Technology and science are, by definition, non-discriminatory”- narratives of the performance of sex and gender dimensions in European climate project proposals",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Judgement is limited to the matching supplied source text and identified source; scanner relevance assertions are not treated as evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "A_EU_RI_SYSTEM_EVIDENCE",
+        "reason": "Proposal-assessment practices can shape the substance of EU-funded research. Source establishes a substantive qualifying development or evidence product."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "“Technology and science are, by definition, non-discriminatory”- narratives of the performance of sex and gender dimensions in European",
+      "reader_what": "Analysis of 87 Horizon 2020 and Horizon Europe climate proposals finds uneven and often symbolic sex-and-gender integration.",
+      "reader_why": "Proposal-assessment practices can shape the substance of EU-funded research.",
+      "reader_more": "Analysis of 87 Horizon 2020 and Horizon Europe climate proposals finds uneven and often symbolic sex-and-gender integration. The purposive sample is not a census of all Horizon proposals.",
+      "deep_analysis": {
+        "work_kind": "current news/development",
+        "research_question": "",
+        "main_finding": "Analysis of 87 Horizon 2020 and Horizon Europe climate proposals finds uneven and often symbolic sex-and-gender integration.",
+        "method_or_basis": "Grounded-theory qualitative analysis of 87 funded and rejected proposals, 2014–2022.",
+        "qualification": "The purposive sample is not a census of all Horizon proposals.",
+        "radar_relevance": "Proposal-assessment practices can shape the substance of EU-funded research.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.assessment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Nature",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-10-10",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The purposive sample is not a census of all Horizon proposals.",
+          "text": "Analysis of 87 Horizon 2020 and Horizon Europe climate proposals finds uneven and often symbolic sex-and-gender integration.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMivgFBVV95cUxPMUdpdnVZWTI3ZjhQNGV1QzBHUFl2THJHYnNrZFEtUkstV1pONjdDR3RDNkZQYzhjenBveXF1Qi14WUhpYm9yQjlBX1E5UkNzamM4eGdKNmxlZTZ0X0R5T0NWQThhNjRQcDhBdzBienlqQXJrZzVLX29NSkVRTlAyWTRFSVlxb1dUUWFxQmVpeXd3RS0wZjd5Q21mM2ZfNlg2ZUVMNkRwcG1kSWxZM3BaZHIzNTdqYW1tWU83UDhR?oc=5",
+      "source_hash": "b503521b",
+      "identity_hash": "c09c7f5ce6a2ae19",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching named work from https://www.idaea.csic.es/newspost/river-salinisation-is-widespread-across-europe/"
+          },
+          {
+            "step": "title_search",
+            "outcome": "success",
+            "note": "Matching dated source located at https://www.idaea.csic.es/newspost/river-salinisation-is-widespread-across-europe/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article",
+            "url": "https://www.idaea.csic.es/newspost/river-salinisation-is-widespread-across-europe/",
+            "title": "River salinisation is widespread across Europe - EU Science Hub",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Judgement is limited to the matching supplied source text and identified source; scanner relevance assertions are not treated as evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_RESEARCH_FINDING_NO_RI_BRIDGE",
+        "reason": "Strand C gate: dateable event and direct European R&I bridge not both met."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "River salinisation is widespread across Europe - EU Science Hub",
+      "reader_what": "A pan-European river study estimates widespread freshwater salinisation, with major ecological implications.",
+      "reader_why": "",
+      "reader_more": "A pan-European river study estimates widespread freshwater salinisation, with major ecological implications. The JRC communication concerns environmental conditions rather than changes to European R&I capacity or governance.",
+      "deep_analysis": {
+        "work_kind": "current news/development",
+        "research_question": "",
+        "main_finding": "A pan-European river study estimates widespread freshwater salinisation, with major ecological implications.",
+        "method_or_basis": "Study of river quality observations across 35 countries.",
+        "qualification": "The JRC communication concerns environmental conditions rather than changes to European R&I capacity or governance.",
+        "radar_relevance": "Strand C gate: dateable event and direct European R&I bridge not both met.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiiAFBVV95cUxOMXUtRmE1dUk2MVNyd0N4em8tdWpua1p3bW9oVDI4WDFqQ3lGdmt4Q3I5ZTM3bTVXTE44WUNyUmNFNmY3eXpzTkVJb0FsMFZLaHJsRWljYVNMdDRuR3hhc2hSaFpHSFZqcHpjUXBITDE4X0RiSE52R3JTM2w2VXVkLUVMdXVicjlC?oc=5",
+      "source_hash": "9c686b45",
+      "identity_hash": "26d7e97ca5eb180d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching named work from https://sciencebusiness.net/news/council-floats-96-budget-cut-next-horizon-europe"
+          },
+          {
+            "step": "title_search",
+            "outcome": "success",
+            "note": "Matching dated source located at https://sciencebusiness.net/news/council-floats-96-budget-cut-next-horizon-europe"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article",
+            "url": "https://sciencebusiness.net/news/council-floats-96-budget-cut-next-horizon-europe",
+            "title": "Council floats 9.6% budget cut to next Horizon Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Judgement is limited to the matching supplied source text and identified source; scanner relevance assertions are not treated as evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_FUNDING_NEGOTIATION",
+        "reason": "Negotiating positions directly affect the possible scale of EU research and innovation funding. Source establishes a substantive qualifying development or evidence product."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Council floats 9.6% budget cut to next Horizon Europe",
+      "reader_what": "The Irish Council presidency floated a 9.6% reduction, or €16.8 billion, against the Commission’s proposed €175 billion Horizon budget.",
+      "reader_why": "Negotiating positions directly affect the possible scale of EU research and innovation funding.",
+      "reader_more": "The Irish Council presidency floated a 9.6% reduction, or €16.8 billion, against the Commission’s proposed €175 billion Horizon budget. This is a negotiation proposal, not an agreed final research budget.",
+      "deep_analysis": {
+        "work_kind": "current news/development",
+        "research_question": "",
+        "main_finding": "The Irish Council presidency floated a 9.6% reduction, or €16.8 billion, against the Commission’s proposed €175 billion Horizon budget.",
+        "method_or_basis": "Science|Business report of Council presidency negotiation plan.",
+        "qualification": "This is a negotiation proposal, not an agreed final research budget.",
+        "radar_relevance": "Negotiating positions directly affect the possible scale of EU research and innovation funding.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "horizon.budget_2028_34",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Science|Business",
+            "class": "other"
+          },
+          "mechanism": "proposes",
+          "direction": "contracts",
+          "status": "proposed",
+          "status_date": "2026-10-10",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "This is a negotiation proposal, not an agreed final research budget.",
+          "text": "The Irish Council presidency floated a 9.6% reduction, or €16.8 billion, against the Commission’s proposed €175 billion Horizon budget.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:c3843c354ef7c9f7",
+      "source_hash": "43206ace",
+      "identity_hash": "820b889cec837113",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Supplied package contains matching substantial_web_text first-party text; checked identity and topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_material",
+            "url": "https://health.ec.europa.eu/ehealth-digital-health-and-care/european-health-data-space-regulation-ehds_en",
+            "title": "European Health Data Space Regulation (EHDS)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Judgement is limited to the matching supplied source text and identified source; scanner relevance assertions are not treated as evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_EU_RI_SYSTEM_RULES",
+        "reason": "Shared access rules could change research-data availability and cross-border research workflows. Source establishes a substantive qualifying development or evidence product."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "European Health Data Space Regulation (EHDS)",
+      "reader_what": "The European Health Data Space establishes an EU framework for controlled secondary use of health data for research and innovation.",
+      "reader_why": "Shared access rules could change research-data availability and cross-border research workflows.",
+      "reader_more": "The European Health Data Space establishes an EU framework for controlled secondary use of health data for research and innovation. Implementation is phased; an EU framework is not proof of realised research benefits.",
+      "deep_analysis": {
+        "work_kind": "research or policy source",
+        "research_question": "",
+        "main_finding": "The European Health Data Space establishes an EU framework for controlled secondary use of health data for research and innovation.",
+        "method_or_basis": "European Commission explanation of EHDS regulation.",
+        "qualification": "Implementation is phased; an EU framework is not proof of realised research benefits.",
+        "radar_relevance": "Shared access rules could change research-data availability and cross-border research workflows.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission — ec.europa.eu",
+            "class": "eu_body"
+          },
+          "mechanism": "regulates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-03-26",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Implementation is phased; an EU framework is not proof of realised research benefits.",
+          "text": "The European Health Data Space establishes an EU framework for controlled secondary use of health data for research and innovation.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:db14277ca0b57443",
+      "source_hash": "101312aa",
+      "identity_hash": "d7ddc00677fed3d9",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered matching named work from https://shura.shu.ac.uk/37574/"
+          },
+          {
+            "step": "title_search",
+            "outcome": "success",
+            "note": "Matching dated source located at https://shura.shu.ac.uk/37574/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://shura.shu.ac.uk/37574/",
+            "title": "The MultiRATE Holistic Readiness Level framework for civil security technologies",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Judgement is limited to the matching supplied source text and identified source; scanner relevance assertions are not treated as evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_LOCAL_APPLICATION",
+        "reason": "Strand A routes 1–3 checked; central European R&I-system evidence gate not met."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "The MultiRATE Holistic Readiness Level framework for civil security technologies",
+      "reader_what": "MultiRATE proposes a seven-dimension readiness-assessment framework for civil security technologies.",
+      "reader_why": "",
+      "reader_more": "MultiRATE proposes a seven-dimension readiness-assessment framework for civil security technologies. The project-specific evaluation tool does not measure the European R&I system or its strategic capacity.",
+      "deep_analysis": {
+        "work_kind": "research or policy source",
+        "research_question": "",
+        "main_finding": "MultiRATE proposes a seven-dimension readiness-assessment framework for civil security technologies.",
+        "method_or_basis": "Framework development and external expert validation reported by authors.",
+        "qualification": "The project-specific evaluation tool does not measure the European R&I system or its strategic capacity.",
+        "radar_relevance": "Strand A routes 1–3 checked; central European R&I-system evidence gate not met.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:e449befa89857c2f",
+      "source_hash": "ca7ec5e1",
+      "identity_hash": "3bc05bada3f3990a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Supplied package contains matching abstract_or_landing_page first-party text; checked identity and topic."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "JRC record JRC146646 and EU Publications Office page confirmed bibliographic identity, method and substantive results."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_material",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC146646",
+            "title": "Navigating innovation gaps in the Western Balkans through the lenses of Economic Complexity",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publication_record",
+            "url": "https://op.europa.eu/en/publication-detail/-/publication/7feb7f38-b953-11f1-81de-01aa75ed71a1/language-en",
+            "title": "Navigating innovation gaps in the Western Balkans through the lenses of Economic Complexity",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Judgement is limited to the matching supplied source text and identified source; scanner relevance assertions are not treated as evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_EU_RI_SYSTEM_EVIDENCE",
+        "reason": "Evidence identifies capabilities and feasible diversification paths relevant to European innovation convergence. Source establishes a substantive qualifying development or evidence product."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-09-24"
+        },
+        "unset": [],
+        "reason": "JRC repository lists release/availability date 24 September 2026; scanner used placeholder 1 January."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Navigating innovation gaps in the Western Balkans through the lenses of Economic Complexity",
+      "reader_what": "JRC assesses productive complexity and regional innovation gaps across Western Balkan economies seeking alignment with European research systems.",
+      "reader_why": "Evidence identifies capabilities and feasible diversification paths relevant to European innovation convergence.",
+      "reader_more": "JRC assesses productive complexity and regional innovation gaps across Western Balkan economies seeking alignment with European research systems. Export-based complexity is a proxy and cannot by itself capture the whole research system.",
+      "deep_analysis": {
+        "work_kind": "research or policy source",
+        "research_question": "",
+        "main_finding": "JRC assesses productive complexity and regional innovation gaps across Western Balkan economies seeking alignment with European research systems.",
+        "method_or_basis": "JRC analysis of granular Western Balkans export data over the preceding decade.",
+        "qualification": "Export-based complexity is a proxy and cannot by itself capture the whole research system.",
+        "radar_relevance": "Evidence identifies capabilities and feasible diversification paths relevant to European innovation convergence.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "innovation.regional_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "JRC Publications Repository",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-09-24",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Export-based complexity is a proxy and cannot by itself capture the whole research system.",
+          "text": "JRC assesses productive complexity and regional innovation gaps across Western Balkan economies seeking alignment with European research systems.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:d4525dfbe43cfbe2",
+      "source_hash": "36efa767",
+      "identity_hash": "a0b74c6586169e21",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Supplied package contains matching abstract_or_landing_page first-party text; checked identity and topic."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Official JRC JRC146997 publication record corroborates the released eight-page policy brief; institutional copy also exists."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_material",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC146997",
+            "title": "Advancing EU Digital Sovereignty in Public Administrations",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publication_record",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC146997",
+            "title": "Advancing EU Digital Sovereignty in Public Administrations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Judgement is limited to the matching supplied source text and identified source; scanner relevance assertions are not treated as evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_EU_DIGITAL_STRATEGY",
+        "reason": "Public purchasing and standards can steer local innovation and technological dependency. Source establishes a substantive qualifying development or evidence product."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-07-31"
+        },
+        "unset": [],
+        "reason": "JRC repository identifies 31 July 2026 as the document publication date, not scanner 1 January placeholder."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Advancing EU Digital Sovereignty in Public Administrations",
+      "reader_what": "JRC identifies EU public administrations’ supplier dependencies and routes to digital autonomy in procurement, people and infrastructure.",
+      "reader_why": "Public purchasing and standards can steer local innovation and technological dependency.",
+      "reader_more": "JRC identifies EU public administrations’ supplier dependencies and routes to digital autonomy in procurement, people and infrastructure. The document recommends actions; it does not establish that proposed sovereignty gains have occurred.",
+      "deep_analysis": {
+        "work_kind": "research or policy source",
+        "research_question": "",
+        "main_finding": "JRC identifies EU public administrations’ supplier dependencies and routes to digital autonomy in procurement, people and infrastructure.",
+        "method_or_basis": "JRC policy analysis of four interdependent digital-sovereignty dimensions.",
+        "qualification": "The document recommends actions; it does not establish that proposed sovereignty gains have occurred.",
+        "radar_relevance": "Public purchasing and standards can steer local innovation and technological dependency.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "JRC Publications Repository",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-07-31",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The document recommends actions; it does not establish that proposed sovereignty gains have occurred.",
+          "text": "JRC identifies EU public administrations’ supplier dependencies and routes to digital autonomy in procurement, people and infrastructure.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:1ca4d7623a1140ec",
+      "source_hash": "25437929",
+      "identity_hash": "385088b2a9d371e7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Supplied package contains matching substantial_web_text first-party text; checked identity and topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_material",
+            "url": "https://www.vttresearch.com/en/news-and-ideas/dawn-new-era-unpacking-eus-groundbreaking-ai-act",
+            "title": "The dawn of a new era: unpacking the EU's groundbreaking AI Act | VTT",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Judgement is limited to the matching supplied source text and identified source; scanner relevance assertions are not treated as evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_GENERAL_TECH_REGULATION",
+        "reason": "Strand A routes 1–3 checked; central European R&I-system evidence gate not met."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "The dawn of a new era: unpacking the EU's groundbreaking AI Act | VTT",
+      "reader_what": "VTT explains the emerging EU AI Act risk-based regulatory regime.",
+      "reader_why": "",
+      "reader_more": "VTT explains the emerging EU AI Act risk-based regulatory regime. The commentary describes broad AI regulation, not a completed study of European R&I-system mechanisms or results.",
+      "deep_analysis": {
+        "work_kind": "research or policy source",
+        "research_question": "",
+        "main_finding": "VTT explains the emerging EU AI Act risk-based regulatory regime.",
+        "method_or_basis": "VTT explanatory article on European Parliament vote.",
+        "qualification": "The commentary describes broad AI regulation, not a completed study of European R&I-system mechanisms or results.",
+        "radar_relevance": "Strand A routes 1–3 checked; central European R&I-system evidence gate not met.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:f33ee50ee368dd05",
+      "source_hash": "c6c5aa55",
+      "identity_hash": "415f4b41e5d5387d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Supplied package contains matching substantial_web_text first-party text; checked identity and topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_material",
+            "url": "https://merics.org/en/scenario-descriptions",
+            "title": "Scenario descriptions",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Judgement is limited to the matching supplied source text and identified source; scanner relevance assertions are not treated as evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_EU_SCOPE_ABSENT",
+        "reason": "Strand A routes 1–3 checked; central European R&I-system evidence gate not met."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Scenario descriptions",
+      "reader_what": "MERICS describes five prospective trajectories for China under Xi Jinping.",
+      "reader_why": "",
+      "reader_more": "MERICS describes five prospective trajectories for China under Xi Jinping. The scenarios focus on China and do not substantively assess European research and innovation systems.",
+      "deep_analysis": {
+        "work_kind": "research or policy source",
+        "research_question": "",
+        "main_finding": "MERICS describes five prospective trajectories for China under Xi Jinping.",
+        "method_or_basis": "MERICS qualitative geopolitical scenario narratives.",
+        "qualification": "The scenarios focus on China and do not substantively assess European research and innovation systems.",
+        "radar_relevance": "Strand A routes 1–3 checked; central European R&I-system evidence gate not met.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:59d00a0196edeb91",
+      "source_hash": "96e763a4",
+      "identity_hash": "d878b2c29ed785f1",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Supplied package contains matching abstract_or_landing_page first-party text; checked identity and topic."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered full ALLEA institutional response PDF dated June 2022."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_material",
+            "url": "https://allea.org/alleas-response-to-council-conclusions-on-research-assessment-and-open-science/",
+            "title": "ALLEA Welcomes Council Conclusions on Research Assessment and Open Science - ALLEA",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_full_document",
+            "url": "https://allea.org/wp-content/uploads/2022/06/ALLEA-Response-to-Council-Conclusions.pdf",
+            "title": "ALLEA response to Council conclusions",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Judgement is limited to the matching supplied source text and identified source; scanner relevance assertions are not treated as evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_EU_RESEARCH_ASSESSMENT",
+        "reason": "Incentives for open science and research evaluation shape European research-system governance. Source establishes a substantive qualifying development or evidence product."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "ALLEA Welcomes Council Conclusions on Research Assessment and Open Science - ALLEA",
+      "reader_what": "ALLEA welcomes EU Council conclusions linking research assessment reform to open-science incentives.",
+      "reader_why": "Incentives for open science and research evaluation shape European research-system governance.",
+      "reader_more": "ALLEA welcomes EU Council conclusions linking research assessment reform to open-science incentives. This is an institutional response, not evidence that reforms were implemented or improved outcomes.",
+      "deep_analysis": {
+        "work_kind": "research or policy source",
+        "research_question": "",
+        "main_finding": "ALLEA welcomes EU Council conclusions linking research assessment reform to open-science incentives.",
+        "method_or_basis": "ALLEA formal response to Council conclusions issued 10 June 2022.",
+        "qualification": "This is an institutional response, not evidence that reforms were implemented or improved outcomes.",
+        "radar_relevance": "Incentives for open science and research evaluation shape European research-system governance.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.assessment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "ALLEA",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2022-06-14",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "This is an institutional response, not evidence that reforms were implemented or improved outcomes.",
+          "text": "ALLEA welcomes EU Council conclusions linking research assessment reform to open-science incentives.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:4388681e6285261b",
+      "source_hash": "4a7a9fa5",
+      "identity_hash": "c13a37bf73a4a206",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Supplied package contains matching pdf_excerpt first-party text; checked identity and topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_material",
+            "url": "https://www.ukri.org/wp-content/uploads/2021/10/EPSRC-201021-ImpactEnergyResearchProgrammeAggregateReport-V2.pdf",
+            "title": "Impact of the energy research programme",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Judgement is limited to the matching supplied source text and identified source; scanner relevance assertions are not treated as evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_RI_PROGRAMME_EVALUATION",
+        "reason": "The evaluation documents a major European-country research funder’s programme outputs and contribution pathways. Source establishes a substantive qualifying development or evidence product."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Impact of the energy research programme",
+      "reader_what": "EPSRC evaluates the aggregate impacts of its energy-research programme.",
+      "reader_why": "The evaluation documents a major European-country research funder’s programme outputs and contribution pathways.",
+      "reader_more": "EPSRC evaluates the aggregate impacts of its energy-research programme. The UK-specific evidence cannot establish EU-wide impacts or direct causality for each reported benefit.",
+      "deep_analysis": {
+        "work_kind": "research or policy source",
+        "research_question": "",
+        "main_finding": "EPSRC evaluates the aggregate impacts of its energy-research programme.",
+        "method_or_basis": "EPSRC commissioned aggregate evaluation, September 2020.",
+        "qualification": "The UK-specific evidence cannot establish EU-wide impacts or direct causality for each reported benefit.",
+        "radar_relevance": "The evaluation documents a major European-country research funder’s programme outputs and contribution pathways.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.system_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "UK Research and Innovation",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2020-09-01",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The UK-specific evidence cannot establish EU-wide impacts or direct causality for each reported benefit.",
+          "text": "EPSRC evaluates the aggregate impacts of its energy-research programme.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:8811266c6b6f5c08",
+      "source_hash": "4ff5cfaa",
+      "identity_hash": "300270a8661c36b6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Supplied package contains matching substantial_web_text first-party text; checked identity and topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_material",
+            "url": "https://researchportal.bath.ac.uk/en/publications/towards-a-novel-technology-transfer-office-typology-and-recommend/",
+            "title": "Towards a novel technology transfer office typology and recommendations for developing countries",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Judgement is limited to the matching supplied source text and identified source; scanner relevance assertions are not treated as evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_EU_COMPARATOR_ONLY",
+        "reason": "Strand A routes 1–3 checked; central European R&I-system evidence gate not met."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Towards a novel technology transfer office typology and recommendations for developing countries",
+      "reader_what": "The paper combines a survey of 54 European university technology-transfer offices with interviews to advise developing-country TTOs.",
+      "reader_why": "",
+      "reader_more": "The paper combines a survey of 54 European university technology-transfer offices with interviews to advise developing-country TTOs. Europe serves as a comparator; the substantive policy target is developing-country transfer offices.",
+      "deep_analysis": {
+        "work_kind": "research or policy source",
+        "research_question": "",
+        "main_finding": "The paper combines a survey of 54 European university technology-transfer offices with interviews to advise developing-country TTOs.",
+        "method_or_basis": "Questionnaires and qualitative interviews with TTO staff.",
+        "qualification": "Europe serves as a comparator; the substantive policy target is developing-country transfer offices.",
+        "radar_relevance": "Strand A routes 1–3 checked; central European R&I-system evidence gate not met.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:f0a1b7fb7120606b",
+      "source_hash": "26c2b622",
+      "identity_hash": "7530148ed6fc88f5",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Supplied package contains matching substantial_web_text first-party text; checked identity and topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_material",
+            "url": "https://link.springer.com/rwe/10.1007/978-981-10-5249-1_16",
+            "title": "Enabling Innovative Postgraduate Research: Critical Foresight and Strategic Considerations for University Leaders",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Judgement is limited to the matching supplied source text and identified source; scanner relevance assertions are not treated as evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_EU_SCOPE_ABSENT",
+        "reason": "Strand A routes 1–3 checked; central European R&I-system evidence gate not met."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Enabling Innovative Postgraduate Research: Critical Foresight and Strategic Considerations for University Leaders",
+      "reader_what": "The chapter discusses university-leadership assumptions and critical foresight for innovation in postgraduate research.",
+      "reader_why": "",
+      "reader_more": "The chapter discusses university-leadership assumptions and critical foresight for innovation in postgraduate research. It does not establish empirical evidence about European R&I-system structure or a distinct reusable analytical method.",
+      "deep_analysis": {
+        "work_kind": "research or policy source",
+        "research_question": "",
+        "main_finding": "The chapter discusses university-leadership assumptions and critical foresight for innovation in postgraduate research.",
+        "method_or_basis": "Conceptual leadership argument and selected higher-education examples.",
+        "qualification": "It does not establish empirical evidence about European R&I-system structure or a distinct reusable analytical method.",
+        "radar_relevance": "Strand A routes 1–3 checked; central European R&I-system evidence gate not met.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:f5ccff6700afcbfa",
+      "source_hash": "a8baff45",
+      "identity_hash": "9be0ff784789cd58",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Supplied package contains matching pdf_excerpt first-party text; checked identity and topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_material",
+            "url": "https://content.openalex.org/works/W3090630394.pdf",
+            "title": "Transformation or evolution?: Education 4.0, teaching and learning in the digital age",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Judgement is limited to the matching supplied source text and identified source; scanner relevance assertions are not treated as evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_METHOD_NOT_NOVEL",
+        "reason": "Strand B novel transferable methodological contribution gate not met."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Transformation or evolution?: Education 4.0, teaching and learning in the digital age",
+      "reader_what": "The article reviews Education 4.0 teaching and learning using cases and existing scenario-planning concepts.",
+      "reader_why": "",
+      "reader_more": "The article reviews Education 4.0 teaching and learning using cases and existing scenario-planning concepts. Use of existing scenario planning does not constitute a new or materially improved transferable foresight method.",
+      "deep_analysis": {
+        "work_kind": "methodology article",
+        "research_question": "",
+        "main_finding": "The article reviews Education 4.0 teaching and learning using cases and existing scenario-planning concepts.",
+        "method_or_basis": "Literature review and four educational case studies.",
+        "qualification": "Use of existing scenario planning does not constitute a new or materially improved transferable foresight method.",
+        "radar_relevance": "Strand B novel transferable methodological contribution gate not met.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:1ad905a4fb29f295",
+      "source_hash": "143835d5",
+      "identity_hash": "95665af0806be564",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Supplied package contains matching pdf_excerpt first-party text; checked identity and topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_material",
+            "url": "https://unidir.org/wp-content/uploads/2024/12/UNIDIR_Governance_Implications_Synthetic_Data.pdf",
+            "title": "Governance Implications of Synthetic Data in the Context of International Security → UNIDIR",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Judgement is limited to the matching supplied source text and identified source; scanner relevance assertions are not treated as evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_EU_SCOPE_INCIDENTAL",
+        "reason": "Strand A routes 1–3 checked; central European R&I-system evidence gate not met."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Governance Implications of Synthetic Data in the Context of International Security → UNIDIR",
+      "reader_what": "UNIDIR outlines governance and international-security issues raised by synthetic data.",
+      "reader_why": "",
+      "reader_more": "UNIDIR outlines governance and international-security issues raised by synthetic data. EU funding and mentions of EU AI legislation do not make international synthetic-data governance a European R&I-system study.",
+      "deep_analysis": {
+        "work_kind": "research or policy source",
+        "research_question": "",
+        "main_finding": "UNIDIR outlines governance and international-security issues raised by synthetic data.",
+        "method_or_basis": "UNIDIR security-and-technology seminar synthesis.",
+        "qualification": "EU funding and mentions of EU AI legislation do not make international synthetic-data governance a European R&I-system study.",
+        "radar_relevance": "Strand A routes 1–3 checked; central European R&I-system evidence gate not met.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:7b0ac6827b9f031b",
+      "source_hash": "e83b5df7",
+      "identity_hash": "49d9f753ea69a213",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Supplied package contains matching abstract_or_landing_page first-party text; checked identity and topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_material",
+            "url": "https://hadea.ec.europa.eu/calls-proposals/horizon-europe-calls-2024-destination-2-increased-autonomy-key-strategic-value-chains-resilient-0_en",
+            "title": "Horizon Europe Calls 2024 - Destination 2. Increased autonomy in key strategic value chains for resilient industry",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The supplied matching official HaDEA call page is evidence of a programme listing, not a completed study or verified delivered impact."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_PROGRAMME_LISTING",
+        "reason": "Strand A routes 1–3 checked; central European R&I-system evidence gate not met."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Horizon Europe Calls 2024 - Destination 2. Increased autonomy in key strategic value chains for resilient industry",
+      "reader_what": "HaDEA lists Horizon Europe 2024 Destination 2 industrial-resilience funding calls.",
+      "reader_why": "",
+      "reader_more": "HaDEA lists Horizon Europe 2024 Destination 2 industrial-resilience funding calls. A call listing is not a completed analytical evidence product about Europe’s research system.",
+      "deep_analysis": {
+        "work_kind": "research or policy source",
+        "research_question": "",
+        "main_finding": "HaDEA lists Horizon Europe 2024 Destination 2 industrial-resilience funding calls.",
+        "method_or_basis": "European Commission HaDEA call announcements.",
+        "qualification": "A call listing is not a completed analytical evidence product about Europe’s research system.",
+        "radar_relevance": "Strand A routes 1–3 checked; central European R&I-system evidence gate not met.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:80a12da88a0545cd",
+      "source_hash": "2823e868",
+      "identity_hash": "a259664ed43cb1cc",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Supplied package contains matching abstract_or_landing_page first-party text; checked identity and topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_material",
+            "url": "https://hadea.ec.europa.eu/calls-proposals/horizon-europe-calls-2024-destination-1-climate-neutral-circular-and-digitised-production-two-stage_en",
+            "title": "Horizon Europe Calls 2024 - Destination 1. Climate neutral, circular and digitised production (two-stage)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The supplied matching official HaDEA call page is evidence of a programme listing, not a completed study or verified delivered impact."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_PROGRAMME_LISTING",
+        "reason": "Strand A routes 1–3 checked; central European R&I-system evidence gate not met."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Horizon Europe Calls 2024 - Destination 1. Climate neutral, circular and digitised production (two-stage)",
+      "reader_what": "HaDEA lists two-stage Horizon Europe 2024 industrial decarbonisation and digitalisation calls.",
+      "reader_why": "",
+      "reader_more": "HaDEA lists two-stage Horizon Europe 2024 industrial decarbonisation and digitalisation calls. The page enumerates funding opportunities rather than examining R&I-system performance or effects.",
+      "deep_analysis": {
+        "work_kind": "research or policy source",
+        "research_question": "",
+        "main_finding": "HaDEA lists two-stage Horizon Europe 2024 industrial decarbonisation and digitalisation calls.",
+        "method_or_basis": "European Commission HaDEA call announcements.",
+        "qualification": "The page enumerates funding opportunities rather than examining R&I-system performance or effects.",
+        "radar_relevance": "Strand A routes 1–3 checked; central European R&I-system evidence gate not met.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:9169bcc11d1c0001",
+      "source_hash": "5581c24c",
+      "identity_hash": "2ad3a272da44e08e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Supplied package contains matching abstract_or_landing_page first-party text; checked identity and topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_material",
+            "url": "https://hadea.ec.europa.eu/calls-proposals/horizon-europe-calls-2024-destination-1-climate-neutral-circular-and-digitised-production_en",
+            "title": "Horizon Europe Calls 2024 - Destination 1. Climate neutral, circular and digitised production",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The supplied matching official HaDEA call page is evidence of a programme listing, not a completed study or verified delivered impact."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_PROGRAMME_LISTING",
+        "reason": "Strand A routes 1–3 checked; central European R&I-system evidence gate not met."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Horizon Europe Calls 2024 - Destination 1. Climate neutral, circular and digitised production",
+      "reader_what": "HaDEA lists one-stage Horizon Europe 2024 industrial transition research calls.",
+      "reader_why": "",
+      "reader_more": "HaDEA lists one-stage Horizon Europe 2024 industrial transition research calls. The page is a call directory, not a substantive evaluated study of European R&I.",
+      "deep_analysis": {
+        "work_kind": "research or policy source",
+        "research_question": "",
+        "main_finding": "HaDEA lists one-stage Horizon Europe 2024 industrial transition research calls.",
+        "method_or_basis": "European Commission HaDEA call announcements.",
+        "qualification": "The page is a call directory, not a substantive evaluated study of European R&I.",
+        "radar_relevance": "Strand A routes 1–3 checked; central European R&I-system evidence gate not met.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:81a4fd557d09c581",
+      "source_hash": "7f481ec0",
+      "identity_hash": "f5ded4e38c0dc65e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Supplied package contains matching abstract_or_landing_page first-party text; checked identity and topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_material",
+            "url": "https://hadea.ec.europa.eu/calls-proposals/horizon-europe-calls-2023-destination-3-world-leading-data-and-computing-technologies_en",
+            "title": "Horizon Europe Calls 2023 - Destination 3. World-leading data and computing technologies",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The supplied matching official HaDEA call page is evidence of a programme listing, not a completed study or verified delivered impact."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_PROGRAMME_LISTING",
+        "reason": "Strand A routes 1–3 checked; central European R&I-system evidence gate not met."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Horizon Europe Calls 2023 - Destination 3. World-leading data and computing technologies",
+      "reader_what": "HaDEA announces a Horizon Europe 2023 computing-continuum call.",
+      "reader_why": "",
+      "reader_more": "HaDEA announces a Horizon Europe 2023 computing-continuum call. The funding notice describes an opportunity, without completed evidence of European compute capability or system performance.",
+      "deep_analysis": {
+        "work_kind": "research or policy source",
+        "research_question": "",
+        "main_finding": "HaDEA announces a Horizon Europe 2023 computing-continuum call.",
+        "method_or_basis": "European Commission HaDEA call announcement.",
+        "qualification": "The funding notice describes an opportunity, without completed evidence of European compute capability or system performance.",
+        "radar_relevance": "Strand A routes 1–3 checked; central European R&I-system evidence gate not met.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:9318d2233d9c9c2b",
+      "source_hash": "d2fa2a3c",
+      "identity_hash": "ec2ef3bd27165fb1",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Supplied package contains matching abstract_or_landing_page first-party text; checked identity and topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_material",
+            "url": "https://hadea.ec.europa.eu/calls-proposals/horizon-europe-calls-2023-destination-2-increased-autonomy-key-strategic-value-chains-resilient-0_en",
+            "title": "Horizon Europe Calls 2023 - Destination 2. Increased autonomy in key strategic value chains for resilient industry (two-stage)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The supplied matching official HaDEA call page is evidence of a programme listing, not a completed study or verified delivered impact."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_PROGRAMME_LISTING",
+        "reason": "Strand A routes 1–3 checked; central European R&I-system evidence gate not met."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Horizon Europe Calls 2023 - Destination 2. Increased autonomy in key strategic value chains for resilient industry (two-stage)",
+      "reader_what": "HaDEA lists two-stage 2023 industrial-resilience materials research calls.",
+      "reader_why": "",
+      "reader_more": "HaDEA lists two-stage 2023 industrial-resilience materials research calls. A call-topic listing is not a completed substantive R&I-system evidence study.",
+      "deep_analysis": {
+        "work_kind": "research or policy source",
+        "research_question": "",
+        "main_finding": "HaDEA lists two-stage 2023 industrial-resilience materials research calls.",
+        "method_or_basis": "European Commission HaDEA call announcement.",
+        "qualification": "A call-topic listing is not a completed substantive R&I-system evidence study.",
+        "radar_relevance": "Strand A routes 1–3 checked; central European R&I-system evidence gate not met.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:f97b8ab8ff367f99",
+      "source_hash": "35cf6158",
+      "identity_hash": "b15f43a310aee11e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Supplied package contains matching substantial_web_text first-party text; checked identity and topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_material",
+            "url": "https://hadea.ec.europa.eu/calls-proposals/horizon-europe-calls-2023-destination-2-increased-autonomy-key-strategic-value-chains-resilient_en",
+            "title": "Horizon Europe Calls 2023 - Destination 2. Increased autonomy in key strategic value chains for resilient industry",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The supplied matching official HaDEA call page is evidence of a programme listing, not a completed study or verified delivered impact."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_PROGRAMME_LISTING",
+        "reason": "Strand A routes 1–3 checked; central European R&I-system evidence gate not met."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Horizon Europe Calls 2023 - Destination 2. Increased autonomy in key strategic value chains for resilient industry",
+      "reader_what": "HaDEA lists Horizon Europe 2023 calls to reduce critical-material and technology dependencies.",
+      "reader_why": "",
+      "reader_more": "HaDEA lists Horizon Europe 2023 calls to reduce critical-material and technology dependencies. Published call titles and objectives do not demonstrate delivered technological autonomy or system outcomes.",
+      "deep_analysis": {
+        "work_kind": "research or policy source",
+        "research_question": "",
+        "main_finding": "HaDEA lists Horizon Europe 2023 calls to reduce critical-material and technology dependencies.",
+        "method_or_basis": "European Commission HaDEA funding call listings.",
+        "qualification": "Published call titles and objectives do not demonstrate delivered technological autonomy or system outcomes.",
+        "radar_relevance": "Strand A routes 1–3 checked; central European R&I-system evidence gate not met.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:0800a03ac3376699",
+      "source_hash": "272863af",
+      "identity_hash": "bcce61f8a8ce9038",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Supplied package contains matching substantial_web_text first-party text; checked identity and topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_material",
+            "url": "https://hadea.ec.europa.eu/calls-proposals/horizon-europe-calls-2023-destination-1-climate-neutral-circular-and-digitised-production_en",
+            "title": "Horizon Europe Calls 2023 - Destination 1. Climate neutral, circular and digitised production",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The supplied matching official HaDEA call page is evidence of a programme listing, not a completed study or verified delivered impact."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_PROGRAMME_LISTING",
+        "reason": "Strand A routes 1–3 checked; central European R&I-system evidence gate not met."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Horizon Europe Calls 2023 - Destination 1. Climate neutral, circular and digitised production",
+      "reader_what": "HaDEA lists Horizon Europe 2023 industrial-production transition calls.",
+      "reader_why": "",
+      "reader_more": "HaDEA lists Horizon Europe 2023 industrial-production transition calls. Funding opportunity descriptions alone are promotional programme information, not an evidence-led system study.",
+      "deep_analysis": {
+        "work_kind": "research or policy source",
+        "research_question": "",
+        "main_finding": "HaDEA lists Horizon Europe 2023 industrial-production transition calls.",
+        "method_or_basis": "European Commission HaDEA funding call listings.",
+        "qualification": "Funding opportunity descriptions alone are promotional programme information, not an evidence-led system study.",
+        "radar_relevance": "Strand A routes 1–3 checked; central European R&I-system evidence gate not met.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:60c628dba33f8b32",
+      "source_hash": "29887c73",
+      "identity_hash": "9d440153bf91985f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Supplied package contains matching pdf_excerpt first-party text; checked identity and topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_material",
+            "url": "https://content.openalex.org/works/W4308510028.pdf",
+            "title": "Exploring Regional Innovation Policies and Regional Industrial Transformation from a Coevolutionary Perspective: The Case of Małopolska, Poland",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Judgement is limited to the matching supplied source text and identified source; scanner relevance assertions are not treated as evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_REGIONAL_INNOVATION_POLICY",
+        "reason": "It identifies mechanisms linking policy institutions and industrial change after EU accession. Source establishes a substantive qualifying development or evidence product."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Exploring Regional Innovation Policies and Regional Industrial Transformation from a Coevolutionary Perspective: The Case of Małopolska, Poland",
+      "reader_what": "Case analysis of Małopolska, Poland, examines interactions between regional innovation policy and industrial transformation.",
+      "reader_why": "It identifies mechanisms linking policy institutions and industrial change after EU accession.",
+      "reader_more": "Case analysis of Małopolska, Poland, examines interactions between regional innovation policy and industrial transformation. A single regional case cannot establish comparable dynamics across all EU regions.",
+      "deep_analysis": {
+        "work_kind": "research or policy source",
+        "research_question": "",
+        "main_finding": "Case analysis of Małopolska, Poland, examines interactions between regional innovation policy and industrial transformation.",
+        "method_or_basis": "Coevolutionary case study and interaction-mechanism framework.",
+        "qualification": "A single regional case cannot establish comparable dynamics across all EU regions.",
+        "radar_relevance": "It identifies mechanisms linking policy institutions and industrial change after EU accession.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "innovation.regional_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Economic Geography",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2022-11-08",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "A single regional case cannot establish comparable dynamics across all EU regions.",
+          "text": "Case analysis of Małopolska, Poland, examines interactions between regional innovation policy and industrial transformation.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:e8d95a4f9e1a17e6",
+      "source_hash": "ccfd779b",
+      "identity_hash": "66a1031b251c4080",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Supplied package contains matching substantial_web_text first-party text; checked identity and topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://foresight-journal.hse.ru/en/article/view/19240",
+            "title": "Repositioning People in Creative Futures: A Method to Create Sound Advice with Exploratory Scenarios",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Judgement is limited to the matching supplied source text and identified source; scanner relevance assertions are not treated as evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_NOVEL_FORESIGHT_METHOD",
+        "reason": "A transferable approach clarifies how foresight participants turn multiple futures into recommendations. Source establishes a substantive qualifying development or evidence product."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Repositioning People in Creative Futures: A Method to Create Sound Advice with Exploratory Scenarios",
+      "reader_what": "The study develops a procedure linking exploratory scenario workshops to actionable policy advice.",
+      "reader_why": "A transferable approach clarifies how foresight participants turn multiple futures into recommendations.",
+      "reader_more": "The study develops a procedure linking exploratory scenario workshops to actionable policy advice. Workshop-based method is context-sensitive and does not guarantee policy success.",
+      "deep_analysis": {
+        "work_kind": "methodology article",
+        "research_question": "",
+        "main_finding": "The study develops a procedure linking exploratory scenario workshops to actionable policy advice.",
+        "method_or_basis": "Methodological account of multiple repositioning workshops.",
+        "qualification": "Workshop-based method is context-sensitive and does not guarantee policy success.",
+        "radar_relevance": "A transferable approach clarifies how foresight participants turn multiple futures into recommendations.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.scenario",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Foresight",
+            "class": "other"
+          },
+          "mechanism": "proposes",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2021-06-25",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Workshop-based method is context-sensitive and does not guarantee policy success.",
+          "text": "The study develops a procedure linking exploratory scenario workshops to actionable policy advice.",
+          "confidence": "medium",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:11c959fa157485eb",
+      "source_hash": "312e8a38",
+      "identity_hash": "bd85bf5b146a37a7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Supplied package contains matching pdf_excerpt first-party text; checked identity and topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_material",
+            "url": "https://content.openalex.org/works/W3120251227.pdf",
+            "title": "Appraising research policy instrument mixes: a multicriteria mapping study in six European countries of diagnostic innovation to manage antimicrobial resistance",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Judgement is limited to the matching supplied source text and identified source; scanner relevance assertions are not treated as evidence."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_RESEARCH_POLICY_EVALUATION",
+        "reason": "Comparing policy-tool assessments illuminates European R&I funding and innovation-governance options. Source establishes a substantive qualifying development or evidence product."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Appraising research policy instrument mixes: a multicriteria mapping study in six European countries of diagnostic innovation to manage",
+      "reader_what": "Study maps expert appraisals of research-policy instrument mixes for antimicrobial-resistance diagnostics across six European countries.",
+      "reader_why": "Comparing policy-tool assessments illuminates European R&I funding and innovation-governance options.",
+      "reader_more": "Study maps expert appraisals of research-policy instrument mixes for antimicrobial-resistance diagnostics across six European countries. Expert judgements are contingent and do not measure realised effects of every instrument.",
+      "deep_analysis": {
+        "work_kind": "research or policy source",
+        "research_question": "",
+        "main_finding": "Study maps expert appraisals of research-policy instrument mixes for antimicrobial-resistance diagnostics across six European countries.",
+        "method_or_basis": "Multicriteria mapping research across six European countries.",
+        "qualification": "Expert judgements are contingent and do not measure realised effects of every instrument.",
+        "radar_relevance": "Comparing policy-tool assessments illuminates European R&I funding and innovation-governance options.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Research Policy",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2021-01-12",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Expert judgements are contingent and do not measure realised effects of every instrument.",
+          "text": "Study maps expert appraisals of research-policy instrument mixes for antimicrobial-resistance diagnostics across six European countries.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    }
+  ]
+}
