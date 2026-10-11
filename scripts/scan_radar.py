@@ -12677,6 +12677,11 @@ def _source_adapter_domain_jobs(
         max_pages = max(max_pages, int(CONFIG.get("op_publications_catalogue_max_pages", max_pages) or max_pages))
     max_depth = max(0, min(2, int(CONFIG.get("institution_source_adapter_crawl_depth", 2) or 2)))
     queue: list[tuple[str, int]] = [(u, 0) for u in hubs]
+    # Archive pagination is a discovery route, never a publication itself.
+    # Keep it source-local, bounded by the existing hub-fetch budget, and independent
+    # of the title/path heuristics used to admit candidate report pages.
+    listing_paths = {urlparse(u).path.rstrip("/").lower() for u in hubs}
+    max_archive_page = max(1, min(12, int(CONFIG.get("institution_source_adapter_max_archive_page", 4) or 4)))
     fetched: set[str] = set()
     discovered: dict[str, int] = {}
 
@@ -12699,6 +12704,34 @@ def _source_adapter_domain_jobs(
         if not r or "html" not in r.headers.get("content-type", "text/html"):
             continue
         soup = BeautifulSoup(r.text, "html.parser")
+        # Most publication archives expose older reports behind ?page=1/2/... or
+        # a rel=next link. Previously these links failed publication-path hints and
+        # the adapter repeatedly inspected only the first listing page.
+        # Queue *only* explicit next-page links from configured archive paths.
+        current_path = urlparse(r.url).path.rstrip("/").lower()
+        if current_path in listing_paths and depth <= max_depth:
+            from urllib.parse import parse_qs
+            for pager in soup.find_all("a", href=True):
+                label = normalized(pager.get_text(" ", strip=True))
+                rel = {normalized(str(x)) for x in (pager.get("rel") or [])}
+                is_next = "next" in rel or label in {"next", "next page", "older", "older posts", "›", "»", "→"}
+                candidate_url = urljoin(r.url, clean_text(pager.get("href", "")))
+                parts = urlparse(candidate_url)
+                host = (parts.hostname or "").lower().removeprefix("www.")
+                if parts.scheme not in {"http", "https"} or not (host == domain or host.endswith("." + domain)):
+                    continue
+                if parts.path.rstrip("/").lower() != current_path:
+                    continue
+                params = parse_qs(parts.query)
+                page_values = params.get("page", []) + params.get("paged", []) + params.get("pagenum", [])
+                page_number = int(page_values[0]) if page_values and page_values[0].isdigit() else None
+                if page_number is None or not 1 <= page_number <= max_archive_page:
+                    continue
+                if not is_next and not (label.isdigit() and int(label) == page_number):
+                    continue
+                if normalized_link(candidate_url) not in fetched:
+                    queue.append((candidate_url, depth))
+                    _diag_inc("institution_adapter_archive_pages_queued")
         for a in soup.find_all("a", href=True):
             u = urljoin(r.url, a.get("href", ""))
             pu = urlparse(u)
@@ -12709,6 +12742,11 @@ def _source_adapter_domain_jobs(
                 continue
             low = normalized(u)
             path_probe = normalized(f"{pu.path} {pu.query}")
+            # Listing pagination URLs are navigation, not standalone documents.
+            if pu.path.rstrip("/").lower() in listing_paths and any(
+                key in pu.query.lower() for key in ("page=", "paged=", "pagenum=")
+            ):
+                continue
             is_pdf = path_probe.endswith(".pdf")
             if any(path_probe.endswith(ext) for ext in (".doc", ".docx", ".xls", ".xlsx", ".zip")):
                 continue
