@@ -8,25 +8,24 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 
 - Authoritative V2 verified: **2691** (Main **1277** + Historical **1414**)
 - Automatic queue still needing V2 verification: **337** (Main **125** + Historical **212**)
-- Currently assigned to workers: **63** (Main **9** + Historical **54**)
+- Currently assigned to workers: **43** (Main **0** + Historical **43**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **30**
-- Automatic queue pending and not yet assigned: **274**
+- Automatic queue pending and not yet assigned: **294**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261011T123546Z-6f95ed01e862`
-- Assigned unresolved records: **28**
+- Current package: `worker-a-20261011T141247Z-a1cb40a233e1`
+- Assigned unresolved records: **8**
   1. `historical:id:191ee55eecce78ec` — Green competitiveness: Why Europe should rethink targets to outpace China – European Council on Foreign Relations
   2. `historical:id:81102f1b667d6a48` — In the web: How the EU can untangle global technology governance – European Council on Foreign Relations
   3. `historical:id:9f412c059f12bbed` — Referees don’t win games: Europe and the digital great game – European Council on Foreign Relations
-  4. `historical:id:209be39399443cff` — U.S. At Risk of Losing AI Leadership Without A National Strategy; FUTURE of AI Act Puts U.S. on Right Track
-  5. `historical:id:c35e6a3c184ed3da` — Scientific collaboration framework of BRICS countries: an analysis of international coauthorship
-  6. `historical:id:f6292a488daec6a8` — New forms of innovation: critical issues for future pathways
-  7. `historical:id:f66ae451afb39141` — Proximity dimensions and scientific collaboration among academic institutions in Europe: The closer, the better?
-  8. `historical:id:7d8d26d7a75a3cfa` — A note on the classification of future-related methods
-  - … plus 20 more in the package manifest
+  4. `historical:id:7d8d26d7a75a3cfa` — A note on the classification of future-related methods
+  5. `historical:id:209be39399443cff` — U.S. At Risk of Losing AI Leadership Without A National Strategy; FUTURE of AI Act Puts U.S. on Right Track
+  6. `historical:id:c35e6a3c184ed3da` — Scientific collaboration framework of BRICS countries: an analysis of international coauthorship
+  7. `historical:id:f6292a488daec6a8` — New forms of innovation: critical issues for future pathways
+  8. `historical:id:f66ae451afb39141` — Proximity dimensions and scientific collaboration among academic institutions in Europe: The closer, the better?
 
 ### Worker B
 - Current package: `worker-b-20261009T080214Z-5994737f044d`
