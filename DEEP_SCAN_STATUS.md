@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2688** (Main **1274** + Historical **1414**)
-- Automatic queue still needing V2 verification: **332** (Main **128** + Historical **204**)
-- Currently assigned to workers: **69** (Main **12** + Historical **57**)
+- Authoritative V2 verified: **2691** (Main **1277** + Historical **1414**)
+- Automatic queue still needing V2 verification: **329** (Main **125** + Historical **204**)
+- Currently assigned to workers: **66** (Main **9** + Historical **57**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **30**
 - Automatic queue pending and not yet assigned: **263**
@@ -16,17 +16,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261011T073553Z-e8b972156983`
-- Assigned unresolved records: **34**
-  1. `link:https://doi.org/10.1002/bcp.70875` — Defining a comprehensive set of value assessment criteria for funders of drug repurposing initiatives
-  2. `link:https://doi.org/10.1108/dprg-03-2026-0136` — When digitalization fuels divergence: the Digital Matthew Effect and regional innovation divide in Europe
-  3. `link:https://doi.org/10.1080/21568235.2026.2741429` — The limits of multidimensional policy design: how research environments collapse into unified perceptions of early-stage researchers
-  4. `link:https://doi.org/10.1016/j.heliyon.2026.e45501` — Combining spatial and aspatial methods to identify European industrial leagues: Development perspectives
-  5. `link:https://www.euronews.com/2026/10/08/astronaut-sophie-adenot-returns-to-earth-after-record-space-mission` — Astronaut Sophie Adenot returns to Earth after record space mission
-  6. `link:https://doi.org/10.1016/j.futures.2026.103832` — Walking together by asking questions: Combining backcasting and prefiguration to invite a hopeful approach to desirable futures
-  7. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxPTFMyMTFKQklNQXBvSEg5VjRta3NlRUFrTmtPSjFIV2tjVFBEY3M0RHRUdDdXMFdESG5FUXdTX3lpSjBFTVBUUTI2TG5ZR3I1enNxUFZjU3JxcU1KNGNUd3J1b0lzRGVxbk42Z2h5RGFXUzJYcDNOUldoUkM5TTBGb25GRVZRRnNjblQ3VTM4eUYyMGdNUmJuVm1WUTdVT2JWdDBRdmhoNTljbWFPQWRB?oc=5` — European stocks eke out weekly gain as oil, yields ease; SpaceX spectrum deal hits telecoms
-  8. `link:https://op.europa.eu/en/publication-detail/-/publication/5fe1897d-c450-11f1-bfcb-01aa75ed71a1/language-en` — Industrial electrification and energy efficiency - Publications Office of the EU
-  - … plus 26 more in the package manifest
+- Current package: `worker-a-20261011T081252Z-84fcf5689650`
+- Assigned unresolved records: **31**
+  1. `link:https://www.euronews.com/2026/10/08/astronaut-sophie-adenot-returns-to-earth-after-record-space-mission` — Astronaut Sophie Adenot returns to Earth after record space mission
+  2. `link:https://doi.org/10.1016/j.heliyon.2026.e45501` — Combining spatial and aspatial methods to identify European industrial leagues: Development perspectives
+  3. `link:https://doi.org/10.1016/j.futures.2026.103832` — Walking together by asking questions: Combining backcasting and prefiguration to invite a hopeful approach to desirable futures
+  4. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxPTFMyMTFKQklNQXBvSEg5VjRta3NlRUFrTmtPSjFIV2tjVFBEY3M0RHRUdDdXMFdESG5FUXdTX3lpSjBFTVBUUTI2TG5ZR3I1enNxUFZjU3JxcU1KNGNUd3J1b0lzRGVxbk42Z2h5RGFXUzJYcDNOUldoUkM5TTBGb25GRVZRRnNjblQ3VTM4eUYyMGdNUmJuVm1WUTdVT2JWdDBRdmhoNTljbWFPQWRB?oc=5` — European stocks eke out weekly gain as oil, yields ease; SpaceX spectrum deal hits telecoms
+  5. `link:https://op.europa.eu/en/publication-detail/-/publication/5fe1897d-c450-11f1-bfcb-01aa75ed71a1/language-en` — Industrial electrification and energy efficiency - Publications Office of the EU
+  6. `link:https://news.google.com/rss/articles/CBMivgFBVV95cUxNSy1rb2o0WjFGd0V5ZERHN3BRbC02YzFRcUtxdnVNMlV3SDUtc0dQQjN3enZyQ3gyQktPU0l0d3pQbGFVU2dXRFFzNm05d0Z3eDhxNVBlNDVNQWg4S0hpQUdWR0ktYnJwLXpwTC1oeGhoSjR2WWg5MXc0dFJqUmVpbGlaV1VlbHJpUjFxNUlFYUtfVWM0RmpCdmVVbUNiQXdfbU55bDBXam1oa0pHSmVrZGdtSWJPMlpTQlJoNWtn?oc=5` — 5 things to know ahead of crunch EU-China talks
+  7. `link:https://news.google.com/rss/articles/CBMiX0FVX3lxTE5zN19oMnpfbEhYNTU2UUk1V3R1Ym9Ebk1IcDVkQ3FrRU9Tc3J0TEJGd3BGZ1dNTWduY3pnblB1bFQ1OFI1UXcydV9LYThhYW5PTEZwS0lKSkU2S1pXcktN?oc=5` — “Technology and science are, by definition, non-discriminatory”- narratives of the performance of sex and gender dimensions in European climate project proposals
+  8. `link:https://news.google.com/rss/articles/CBMivgFBVV95cUxPMUdpdnVZWTI3ZjhQNGV1QzBHUFl2THJHYnNrZFEtUkstV1pONjdDR3RDNkZQYzhjenBveXF1Qi14WUhpYm9yQjlBX1E5UkNzamM4eGdKNmxlZTZ0X0R5T0NWQThhNjRQcDhBdzBienlqQXJrZzVLX29NSkVRTlAyWTRFSVlxb1dUUWFxQmVpeXd3RS0wZjd5Q21mM2ZfNlg2ZUVMNkRwcG1kSWxZM3BaZHIzNTdqYW1tWU83UDhR?oc=5` — River salinisation is widespread across Europe - EU Science Hub
+  - … plus 23 more in the package manifest
 
 ### Worker B
 - Current package: `worker-b-20261009T080214Z-5994737f044d`
