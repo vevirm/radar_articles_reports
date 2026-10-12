@@ -7,8 +7,8 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **2691** (Main **1277** + Historical **1414**)
-- Automatic queue still needing V2 verification: **337** (Main **125** + Historical **212**)
-- Currently assigned to workers: **43** (Main **0** + Historical **43**)
+- Automatic queue still needing V2 verification: **350** (Main **131** + Historical **219**)
+- Currently assigned to workers: **56** (Main **6** + Historical **50**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **30**
 - Automatic queue pending and not yet assigned: **294**
@@ -16,16 +16,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261011T141247Z-a1cb40a233e1`
-- Assigned unresolved records: **8**
-  1. `historical:id:191ee55eecce78ec` — Green competitiveness: Why Europe should rethink targets to outpace China – European Council on Foreign Relations
-  2. `historical:id:81102f1b667d6a48` — In the web: How the EU can untangle global technology governance – European Council on Foreign Relations
-  3. `historical:id:9f412c059f12bbed` — Referees don’t win games: Europe and the digital great game – European Council on Foreign Relations
-  4. `historical:id:7d8d26d7a75a3cfa` — A note on the classification of future-related methods
-  5. `historical:id:209be39399443cff` — U.S. At Risk of Losing AI Leadership Without A National Strategy; FUTURE of AI Act Puts U.S. on Right Track
-  6. `historical:id:c35e6a3c184ed3da` — Scientific collaboration framework of BRICS countries: an analysis of international coauthorship
-  7. `historical:id:f6292a488daec6a8` — New forms of innovation: critical issues for future pathways
-  8. `historical:id:f66ae451afb39141` — Proximity dimensions and scientific collaboration among academic institutions in Europe: The closer, the better?
+- Current package: `worker-a-20261012T064402Z-b39643c9f9d4`
+- Assigned unresolved records: **21**
+  1. `link:https://doi.org/10.1016/j.sftr.2026.102150` — The price of deception? Greenwashing and firm value through a bibliometric lens
+  2. `link:https://digital-strategy.ec.europa.eu/en/library/ai-office-publishes-frontier-ai-expert-findings-eu-competitiveness-sovereignty-and-security` — AI Office publishes frontier AI expert findings on EU competitiveness, sovereignty and security
+  3. `link:https://doi.org/10.1016/j.futures.2026.103883` — Artificial intelligence in strategic foresight: Evidence from a longitudinal case at Siemens Professional Education
+  4. `link:https://doi.org/10.1016/j.futures.2026.103904` — Analyzing blockchain entrepreneurial ecosystems with foresight: A data-driven approach
+  5. `link:https://news.google.com/rss/articles/CBMiuwFBVV95cUxNY3k2OUhTel9IWFNOcnAtelhqLXVkQnNCS3BFdUlrTnl3SWZQOV9CWTJldlV3NlRUamhPUW1jNTVCZ015NVRqOWhyN0JfOGpicHVPMUNwaTN6Q3ppLWdJMnBDN2c4N1FJTllqb2VHaTYxeVJxSGVQQVh2cjN6S25UX09qcmZHOUxDRzVtM2hHNXBXZHZOZTJYbzVOQXExRDdPQnlUV1d0NkdON0FnWlRKdUFGbXF3NHY5bF9n?oc=5` — AGILE: Parliament set to approve new EU defence innovation programme | 05-10-2026 | Nuacht | Parlaimint na hEorpa
+  6. `link:https://news.google.com/rss/articles/CBMi6wFBVV95cUxOZHZaWjZ5dTR1RzFVWGNKd1FnMHpoakdwcHFhc0ZhLWlsMEJnVEtuYVVSaE83b0FXWHh5LTJ6VGtRaXNES0FNa2Zuc2xyTHRxWE9feWVoYXFKR2NTcW5xcVh3d1BQWG5ObUF2dm1fcEozaUhVMldGM21rQUNjWi1BaFdJUDR4Q2J0M3NiNW91d3huckctdTdGVEozLVhyOGx1N1J0clVJdWpYNkdQSy14U2s4a1BfTVJoMFVkMXJ2eVprRk9NamYzYW5NOUcxRWhlYkpqLW1RUk5tdFhFTkh3MnVKSGY1UEdlY2RN?oc=5` — Reaping the economic benefits from AI: OECD Economic Surveys: Slovak Republic 2026
+  7. `historical:id:7fd90c3f68985ef4` — KIC Demand-driven Research by Consortia – XL | NWO
+  8. `historical:id:29a9978d3b0730cd` — Knowledge security: scientific research in a geopolitical context – Phase 2 | NWO
+  - … plus 13 more in the package manifest
 
 ### Worker B
 - Current package: `worker-b-20261009T080214Z-5994737f044d`
