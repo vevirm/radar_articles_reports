@@ -8,25 +8,16 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 
 - Authoritative V2 verified: **2693** (Main **1279** + Historical **1414**)
 - Automatic queue still needing V2 verification: **348** (Main **129** + Historical **219**)
-- Currently assigned to workers: **46** (Main **4** + Historical **42**)
+- Currently assigned to workers: **35** (Main **0** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **30**
-- Automatic queue pending and not yet assigned: **302**
+- Automatic queue pending and not yet assigned: **313**
 
 ## Worker lanes
 
 ### Worker A
 - Current package: `worker-a-20261012T071102Z-11059d3e5d44`
-- Assigned unresolved records: **11**
-  1. `link:https://doi.org/10.1016/j.futures.2026.103883` — Artificial intelligence in strategic foresight: Evidence from a longitudinal case at Siemens Professional Education
-  2. `link:https://doi.org/10.1016/j.futures.2026.103904` — Analyzing blockchain entrepreneurial ecosystems with foresight: A data-driven approach
-  3. `link:https://news.google.com/rss/articles/CBMiuwFBVV95cUxNY3k2OUhTel9IWFNOcnAtelhqLXVkQnNCS3BFdUlrTnl3SWZQOV9CWTJldlV3NlRUamhPUW1jNTVCZ015NVRqOWhyN0JfOGpicHVPMUNwaTN6Q3ppLWdJMnBDN2c4N1FJTllqb2VHaTYxeVJxSGVQQVh2cjN6S25UX09qcmZHOUxDRzVtM2hHNXBXZHZOZTJYbzVOQXExRDdPQnlUV1d0NkdON0FnWlRKdUFGbXF3NHY5bF9n?oc=5` — AGILE: Parliament set to approve new EU defence innovation programme | 05-10-2026 | Nuacht | Parlaimint na hEorpa
-  4. `link:https://news.google.com/rss/articles/CBMi6wFBVV95cUxOZHZaWjZ5dTR1RzFVWGNKd1FnMHpoakdwcHFhc0ZhLWlsMEJnVEtuYVVSaE83b0FXWHh5LTJ6VGtRaXNES0FNa2Zuc2xyTHRxWE9feWVoYXFKR2NTcW5xcVh3d1BQWG5ObUF2dm1fcEozaUhVMldGM21rQUNjWi1BaFdJUDR4Q2J0M3NiNW91d3huckctdTdGVEozLVhyOGx1N1J0clVJdWpYNkdQSy14U2s4a1BfTVJoMFVkMXJ2eVprRk9NamYzYW5NOUcxRWhlYkpqLW1RUk5tdFhFTkh3MnVKSGY1UEdlY2RN?oc=5` — Reaping the economic benefits from AI: OECD Economic Surveys: Slovak Republic 2026
-  5. `historical:id:7fd90c3f68985ef4` — KIC Demand-driven Research by Consortia – XL | NWO
-  6. `historical:id:29a9978d3b0730cd` — Knowledge security: scientific research in a geopolitical context – Phase 2 | NWO
-  7. `historical:id:696126c11d1ea1de` — Quantum Communication Infrastructure
-  8. `historical:id:10f5dbdb5d5b1ced` — AI an opportunity for the EU cyber crisis blueprint - Report | ENISA
-  - … plus 3 more in the package manifest
+- Assigned unresolved records: **0**
 
 ### Worker B
 - Current package: `worker-b-20261009T080214Z-5994737f044d`
