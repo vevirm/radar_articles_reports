@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261012T065620Z-11059d3e5d44`
+- Current package: `worker-a-20261012T071102Z-11059d3e5d44`
 - Assigned unresolved records: **11**
   1. `link:https://doi.org/10.1016/j.futures.2026.103883` — Artificial intelligence in strategic foresight: Evidence from a longitudinal case at Siemens Professional Education
   2. `link:https://doi.org/10.1016/j.futures.2026.103904` — Analyzing blockchain entrepreneurial ecosystems with foresight: A data-driven approach
