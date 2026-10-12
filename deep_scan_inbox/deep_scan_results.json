@@ -1,0 +1,1525 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-a-20261012T064402Z-b39643c9f9d4",
+  "results": [
+    {
+      "record_key": "link:https://doi.org/10.1016/j.sftr.2026.102150",
+      "source_hash": "b51a4f20",
+      "identity_hash": "abd2eaa8928ab785",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source linked to https://doi.org/10.1016/j.sftr.2026.102150. Matched substantial embedded source excerpt."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matching official/publisher source verified at https://content.openalex.org/works/W7213393809.pdf"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Publisher/repository bibliographic identity checked for DOI 10.1016/j.sftr.2026.102150"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://content.openalex.org/works/W7213393809.pdf",
+            "title": "The price of deception? Greenwashing and firm value through a bibliometric lens",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity matched article title and underlying publisher/official material; package source text assessed independently of scanner characterization."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A routes 1–3 fail: geographic publication counts mentioning European countries are incidental; substantive object is corporate greenwashing and firm value."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No sufficiently exact duplicate identity established."
+      },
+      "reader_title": "The price of deception? Greenwashing and firm value through a bibliometric lens",
+      "reader_what": "Bibliometric study maps research on greenwashing and firm valuation, not European research-system performance.",
+      "reader_why": "",
+      "reader_more": "Bibliometric study maps research on greenwashing and firm valuation, not European research-system performance. Bibliometric analysis of 297 Scopus articles and 15 selected papers; Europe is not the analytical subject.",
+      "deep_analysis": {
+        "work_kind": "empirical research article",
+        "research_question": "",
+        "main_finding": "Bibliometric study maps research on greenwashing and firm valuation, not European research-system performance.",
+        "method_or_basis": "Primary publisher/official text, supplemented by package PDF or web body where available.",
+        "qualification": "Bibliometric analysis of 297 Scopus articles and 15 selected papers; Europe is not the analytical subject.",
+        "radar_relevance": "A routes 1–3 fail: geographic publication counts mentioning European countries are incidental; substantive object is corporate greenwashing and firm value.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://digital-strategy.ec.europa.eu/en/library/ai-office-publishes-frontier-ai-expert-findings-eu-competitiveness-sovereignty-and-security",
+      "source_hash": "b68f34b6",
+      "identity_hash": "d7144eb44b9cf3a6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source linked to https://digital-strategy.ec.europa.eu/en/library/ai-office-publishes-frontier-ai-expert-findings-eu-competitiveness-sovereignty-and-security. Matched substantial embedded source excerpt."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://digital-strategy.ec.europa.eu/en/library/ai-office-publishes-frontier-ai-expert-findings-eu-competitiveness-sovereignty-and-security",
+            "title": "AI Office publishes frontier AI expert findings on EU competitiveness, sovereignty and security",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity matched article title and underlying publisher/official material; package source text assessed independently of scanner characterization."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 2: evidence-led EU frontier-AI capability and investment gap; Route 1 also concerns strategic technological dependence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No sufficiently exact duplicate identity established."
+      },
+      "reader_title": "AI Office publishes frontier AI expert findings on EU competitiveness, sovereignty and security",
+      "reader_what": "Expert forum reports a gap in European frontier-AI computing and growth-stage financing despite strong research and talent.",
+      "reader_why": "Supports an evidence-based reading of European research and technology capacity.",
+      "reader_more": "Expert forum reports a gap in European frontier-AI computing and growth-stage financing despite strong research and talent. Expert deliberations and recommendations, not an independent causal evaluation or the Commission’s formal position.",
+      "deep_analysis": {
+        "work_kind": "official expert report",
+        "research_question": "AI Office publishes frontier AI expert findings on EU competitiveness, sovereignty and security",
+        "main_finding": "Expert forum reports a gap in European frontier-AI computing and growth-stage financing despite strong research and talent.",
+        "method_or_basis": "Primary publisher/official text, supplemented by package PDF or web body where available.",
+        "qualification": "Expert deliberations and recommendations, not an independent causal evaluation or the Commission’s formal position.",
+        "radar_relevance": "A Route 2: evidence-led EU frontier-AI capability and investment gap; Route 1 also concerns strategic technological dependence.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "compute.capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission AI Office",
+            "class": "eu_body"
+          },
+          "mechanism": "evaluates",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-07-15",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Expert deliberations and recommendations, not an independent causal evaluation or the Commission’s formal position.",
+          "text": "Expert forum reports a gap in European frontier-AI computing and growth-stage financing despite strong research and talent.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.futures.2026.103883",
+      "source_hash": "304c4166",
+      "identity_hash": "baa368b2aceaa40d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source linked to https://doi.org/10.1016/j.futures.2026.103883. Scanner supplied no substantive page; matching official/publisher work recovered via https://www.sciencedirect.com/science/article/pii/S0016328726001254"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matching official/publisher source verified at https://www.sciencedirect.com/science/article/pii/S0016328726001254"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Publisher/repository bibliographic identity checked for DOI 10.1016/j.futures.2026.103883"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_substantive_page",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0016328726001254",
+            "title": "Artificial intelligence in strategic foresight: Evidence from a longitudinal case at Siemens Professional Education",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity matched article title and underlying publisher/official material; package source text assessed independently of scanner characterization. Publisher or institution provided substantive abstract/description, not an independently read full article."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_TRANSFERABLE_METHOD",
+        "reason": "B: transferable phase-specific governance framework and empirical evaluation of AI-augmented foresight, beyond a one-off AI application."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-07-05"
+        },
+        "unset": [],
+        "reason": "Publisher and first-page author record give 5 July 2026 online date rather than issue month."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No sufficiently exact duplicate identity established."
+      },
+      "reader_title": "Artificial intelligence in strategic foresight: Evidence from a longitudinal case at Siemens Professional Education",
+      "reader_what": "Longitudinal Siemens case develops a phase-specific human–AI division-of-labour model for strategic foresight.",
+      "reader_why": "Provides a transferable design for strategic-foresight analysis.",
+      "reader_more": "Longitudinal Siemens case develops a phase-specific human–AI division-of-labour model for strategic foresight. Single-organisational case comparing 2023 and 2025 processes; task-level gains cannot establish universal gains.",
+      "deep_analysis": {
+        "work_kind": "empirical research article",
+        "research_question": "Artificial intelligence in strategic foresight: Evidence from a longitudinal case at Siemens Professional Education",
+        "main_finding": "Longitudinal Siemens case develops a phase-specific human–AI division-of-labour model for strategic foresight.",
+        "method_or_basis": "Primary publisher/official text, supplemented by package PDF or web body where available.",
+        "qualification": "Single-organisational case comparing 2023 and 2025 processes; task-level gains cannot establish universal gains.",
+        "radar_relevance": "B: transferable phase-specific governance framework and empirical evaluation of AI-augmented foresight, beyond a one-off AI application.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Rohrbeck, Szuppa and Schmidt",
+            "class": "other"
+          },
+          "mechanism": "evaluates",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-07-05",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Single-organisational case comparing 2023 and 2025 processes; task-level gains cannot establish universal gains.",
+          "text": "Longitudinal Siemens case develops a phase-specific human–AI division-of-labour model for strategic foresight.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.futures.2026.103904",
+      "source_hash": "55fd824c",
+      "identity_hash": "7b386cb0a925424e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source linked to https://doi.org/10.1016/j.futures.2026.103904. Scanner supplied no substantive page; matching official/publisher work recovered via https://www.sciencedirect.com/science/article/pii/S0016328726001461"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matching official/publisher source verified at https://www.sciencedirect.com/science/article/pii/S0016328726001461"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Publisher/repository bibliographic identity checked for DOI 10.1016/j.futures.2026.103904"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_substantive_page",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0016328726001461",
+            "title": "Analyzing blockchain entrepreneurial ecosystems with foresight: A data-driven approach",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity matched article title and underlying publisher/official material; package source text assessed independently of scanner characterization. Publisher or institution provided substantive abstract/description, not an independently read full article."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_TRANSFERABLE_METHOD",
+        "reason": "B: proposed transferable data-driven entrepreneurial-ecosystem foresight indicators with out-of-period exploratory assessment."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-08-15"
+        },
+        "unset": [],
+        "reason": "Publisher marks 15 August 2026 as first online publication date."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No sufficiently exact duplicate identity established."
+      },
+      "reader_title": "Analyzing blockchain entrepreneurial ecosystems with foresight: A data-driven approach",
+      "reader_what": "Combines strong/weak-signal keyword indicators with entrepreneurship data and later venture outcomes to map ecosystem opportunities.",
+      "reader_why": "Provides a transferable design for strategic-foresight analysis.",
+      "reader_more": "Combines strong/weak-signal keyword indicators with entrepreneurship data and later venture outcomes to map ecosystem opportunities. Blockchain-focused illustration and observational relationships; no universal prediction claims.",
+      "deep_analysis": {
+        "work_kind": "empirical research article",
+        "research_question": "Analyzing blockchain entrepreneurial ecosystems with foresight: A data-driven approach",
+        "main_finding": "Combines strong/weak-signal keyword indicators with entrepreneurship data and later venture outcomes to map ecosystem opportunities.",
+        "method_or_basis": "Primary publisher/official text, supplemented by package PDF or web body where available.",
+        "qualification": "Blockchain-focused illustration and observational relationships; no universal prediction claims.",
+        "radar_relevance": "B: proposed transferable data-driven entrepreneurial-ecosystem foresight indicators with out-of-period exploratory assessment.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.horizon_scanning",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Bzhalava and colleagues",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-08-15",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Blockchain-focused illustration and observational relationships; no universal prediction claims.",
+          "text": "Combines strong/weak-signal keyword indicators with entrepreneurship data and later venture outcomes to map ecosystem opportunities.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiuwFBVV95cUxNY3k2OUhTel9IWFNOcnAtelhqLXVkQnNCS3BFdUlrTnl3SWZQOV9CWTJldlV3NlRUamhPUW1jNTVCZ015NVRqOWhyN0JfOGpicHVPMUNwaTN6Q3ppLWdJMnBDN2c4N1FJTllqb2VHaTYxeVJxSGVQQVh2cjN6S25UX09qcmZHOUxDRzVtM2hHNXBXZHZOZTJYbzVOQXExRDdPQnlUV1d0NkdON0FnWlRKdUFGbXF3NHY5bF9n?oc=5",
+      "source_hash": "f639ad9f",
+      "identity_hash": "19924a93a12a87a7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "RSS redirect URL did not supply readable underlying article; recovered matching official source https://www.europarl.europa.eu/thinktank/en/document/EPRS_ATA(2026)791511"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matching official/publisher source verified at https://www.europarl.europa.eu/thinktank/en/document/EPRS_ATA(2026)791511"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_substantive_page",
+            "url": "https://www.europarl.europa.eu/thinktank/en/document/EPRS_ATA(2026)791511",
+            "title": "AGILE: Parliament set to approve new EU defence innovation programme | 05-10-2026 | Nuacht | Parlaimint na hEorpa",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity matched article title and underlying publisher/official material; package source text assessed independently of scanner characterization."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_VERIFIED_RI_DEVELOPMENT",
+        "reason": "C: dateable parliamentary legislative milestone for an EU defence-technology innovation funding instrument."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "AGILE: Parliament set to approve new EU defence innovation programme"
+        },
+        "unset": [],
+        "reason": "EP article headline recovered from scanner metadata and official EP briefing."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No sufficiently exact duplicate identity established."
+      },
+      "reader_title": "AGILE: Parliament set to approve new EU defence innovation programme | 05-10-2026 | Nuacht | Parlaimint na hEorpa",
+      "reader_what": "Parliament announced an imminent plenary vote on the agreed AGILE defence-innovation programme.",
+      "reader_why": "A pending EU legislative step would set a defence innovation instrument.",
+      "reader_more": "Parliament announced an imminent plenary vote on the agreed AGILE defence-innovation programme. Ahead of the vote this is a planned parliamentary step, not evidence of enactment or disbursement.",
+      "deep_analysis": {
+        "work_kind": "official legislative announcement",
+        "research_question": "AGILE: Parliament set to approve new EU defence innovation programme | 05-10-2026 | Nuacht | Parlaimint na hEorpa",
+        "main_finding": "Parliament announced an imminent plenary vote on the agreed AGILE defence-innovation programme.",
+        "method_or_basis": "Primary publisher/official text, supplemented by package PDF or web body where available.",
+        "qualification": "Ahead of the vote this is a planned parliamentary step, not evidence of enactment or disbursement.",
+        "radar_relevance": "C: dateable parliamentary legislative milestone for an EU defence-technology innovation funding instrument.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "defence.innovation_funding",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Parliament",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "becomes_conditional",
+          "status": "announced",
+          "status_date": "2026-10-05",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Ahead of the vote this is a planned parliamentary step, not evidence of enactment or disbursement.",
+          "text": "Parliament announced an imminent plenary vote on the agreed AGILE defence-innovation programme.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMi6wFBVV95cUxOZHZaWjZ5dTR1RzFVWGNKd1FnMHpoakdwcHFhc0ZhLWlsMEJnVEtuYVVSaE83b0FXWHh5LTJ6VGtRaXNES0FNa2Zuc2xyTHRxWE9feWVoYXFKR2NTcW5xcVh3d1BQWG5ObUF2dm1fcEozaUhVMldGM21rQUNjWi1BaFdJUDR4Q2J0M3NiNW91d3huckctdTdGVEozLVhyOGx1N1J0clVJdWpYNkdQSy14U2s4a1BfTVJoMFVkMXJ2eVprRk9NamYzYW5NOUcxRWhlYkpqLW1RUk5tdFhFTkh3MnVKSGY1UEdlY2RN?oc=5",
+      "source_hash": "543cda10",
+      "identity_hash": "9aced4ce250fbcf7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "RSS redirect URL did not supply readable underlying article; recovered matching official source https://www.oecd.org/en/publications/oecd-economic-surveys-slovak-republic-2026_ada964c8-en/full-report/reaping-the-economic-benefits-from-ai_728bb5d0.html"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matching official/publisher source verified at https://www.oecd.org/en/publications/oecd-economic-surveys-slovak-republic-2026_ada964c8-en/full-report/reaping-the-economic-benefits-from-ai_728bb5d0.html"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_substantive_page",
+            "url": "https://www.oecd.org/en/publications/oecd-economic-surveys-slovak-republic-2026_ada964c8-en/full-report/reaping-the-economic-benefits-from-ai_728bb5d0.html",
+            "title": "Reaping the economic benefits from AI: OECD Economic Surveys: Slovak Republic 2026",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity matched article title and underlying publisher/official material; package source text assessed independently of scanner characterization."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Routes 2 and 3: substantive member-state evidence of R&I-system capacities and research-to-market conditions."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "Reaping the economic benefits from AI",
+          "source": "OECD Publishing",
+          "type": "report chapter",
+          "date": "2026-06-25"
+        },
+        "unset": [],
+        "reason": "OECD source identifies this as Chapter 3 of the June 25 economic survey, not a new September event."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No sufficiently exact duplicate identity established."
+      },
+      "reader_title": "Reaping the economic benefits from AI: OECD Economic Surveys: Slovak Republic 2026",
+      "reader_what": "OECD finds Slovakia trails EU peers in AI R&D capacity, investment, infrastructure and adoption.",
+      "reader_why": "Supports an evidence-based reading of European research and technology capacity.",
+      "reader_more": "OECD finds Slovakia trails EU peers in AI R&D capacity, investment, infrastructure and adoption. Report published 25 June 2026; AI productivity gains are estimates, not observed outcomes.",
+      "deep_analysis": {
+        "work_kind": "policy report",
+        "research_question": "Reaping the economic benefits from AI: OECD Economic Surveys: Slovak Republic 2026",
+        "main_finding": "OECD finds Slovakia trails EU peers in AI R&D capacity, investment, infrastructure and adoption.",
+        "method_or_basis": "Primary publisher/official text, supplemented by package PDF or web body where available.",
+        "qualification": "Report published 25 June 2026; AI productivity gains are estimates, not observed outcomes.",
+        "radar_relevance": "A Routes 2 and 3: substantive member-state evidence of R&I-system capacities and research-to-market conditions.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "ai.research_use",
+          "secondary_objects": [],
+          "actor": {
+            "name": "OECD",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-06-25",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "SK"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "Report published 25 June 2026; AI productivity gains are estimates, not observed outcomes.",
+          "text": "OECD finds Slovakia trails EU peers in AI R&D capacity, investment, infrastructure and adoption.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:7fd90c3f68985ef4",
+      "source_hash": "8bd393f1",
+      "identity_hash": "78e9db3f79ce4486",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source linked to https://www.nwo.nl/sites/nwo/files/media-files/KIC-V4C-XL_CfP_EN_v3_0.pdf. Matched substantial embedded source excerpt."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.nwo.nl/sites/nwo/files/media-files/KIC-V4C-XL_CfP_EN_v3_0.pdf",
+            "title": "KIC Demand-driven Research by Consortia – XL | NWO",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity matched article title and underlying publisher/official material; package source text assessed independently of scanner characterization."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Routes 1–3 fail: this is a call for proposals, not a completed analytical evidence product measuring Dutch or European R&I mechanisms."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No sufficiently exact duplicate identity established."
+      },
+      "reader_title": "KIC Demand-driven Research by Consortia – XL | NWO",
+      "reader_what": "NWO document sets out conditions, budget and eligibility for a Dutch public–private research consortium grant call.",
+      "reader_why": "",
+      "reader_more": "NWO document sets out conditions, budget and eligibility for a Dutch public–private research consortium grant call. Call conditions and targets do not demonstrate impacts or system performance.",
+      "deep_analysis": {
+        "work_kind": "official funding call",
+        "research_question": "",
+        "main_finding": "NWO document sets out conditions, budget and eligibility for a Dutch public–private research consortium grant call.",
+        "method_or_basis": "Primary publisher/official text, supplemented by package PDF or web body where available.",
+        "qualification": "Call conditions and targets do not demonstrate impacts or system performance.",
+        "radar_relevance": "A Routes 1–3 fail: this is a call for proposals, not a completed analytical evidence product measuring Dutch or European R&I mechanisms.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:29a9978d3b0730cd",
+      "source_hash": "2ff130c0",
+      "identity_hash": "0fbc113bc197f632",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source linked to https://www.nwo.nl/sites/nwo/files/media-files/Call_for_proposals_NWA_Knowledge_security_EN_nov25-1_0.pdf. Matched substantial embedded source excerpt."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.nwo.nl/sites/nwo/files/media-files/Call_for_proposals_NWA_Knowledge_security_EN_nov25-1_0.pdf",
+            "title": "Knowledge security: scientific research in a geopolitical context – Phase 2 | NWO",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity matched article title and underlying publisher/official material; package source text assessed independently of scanner characterization."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Routes 1–3 fail: research-security subject is substantive, but a call document is a funding solicitation rather than completed R&I evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No sufficiently exact duplicate identity established."
+      },
+      "reader_title": "Knowledge security: scientific research in a geopolitical context – Phase 2 | NWO",
+      "reader_what": "NWO knowledge-security call defines a funded research opportunity and eligibility rules.",
+      "reader_why": "",
+      "reader_more": "NWO knowledge-security call defines a funded research opportunity and eligibility rules. Programme intentions must not be misreported as observed knowledge-security outcomes.",
+      "deep_analysis": {
+        "work_kind": "official funding call",
+        "research_question": "",
+        "main_finding": "NWO knowledge-security call defines a funded research opportunity and eligibility rules.",
+        "method_or_basis": "Primary publisher/official text, supplemented by package PDF or web body where available.",
+        "qualification": "Programme intentions must not be misreported as observed knowledge-security outcomes.",
+        "radar_relevance": "A Routes 1–3 fail: research-security subject is substantive, but a call document is a funding solicitation rather than completed R&I evidence.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:696126c11d1ea1de",
+      "source_hash": "14b61d3b",
+      "identity_hash": "4bc5135363669ef7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source linked to https://hadea.ec.europa.eu/calls-proposals/quantum-communication-infrastructure_en. Matched substantial embedded source excerpt."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_substantive_page",
+            "url": "https://hadea.ec.europa.eu/calls-proposals/quantum-communication-infrastructure_en",
+            "title": "Quantum Communication Infrastructure",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity matched article title and underlying publisher/official material; package source text assessed independently of scanner characterization."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Routes 1–3 fail: topic/call page describes eligible infrastructure proposals, not substantive achieved evidence or an analytical study."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No sufficiently exact duplicate identity established."
+      },
+      "reader_title": "Quantum Communication Infrastructure",
+      "reader_what": "Commission call invites projects connecting national quantum communications segments across EU borders.",
+      "reader_why": "",
+      "reader_more": "Commission call invites projects connecting national quantum communications segments across EU borders. Infrastructure envisioned in calls is not evidence of deployed links.",
+      "deep_analysis": {
+        "work_kind": "official funding call",
+        "research_question": "",
+        "main_finding": "Commission call invites projects connecting national quantum communications segments across EU borders.",
+        "method_or_basis": "Primary publisher/official text, supplemented by package PDF or web body where available.",
+        "qualification": "Infrastructure envisioned in calls is not evidence of deployed links.",
+        "radar_relevance": "A Routes 1–3 fail: topic/call page describes eligible infrastructure proposals, not substantive achieved evidence or an analytical study.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:10f5dbdb5d5b1ced",
+      "source_hash": "281405d8",
+      "identity_hash": "da347bfdbc809292",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source linked to https://www.enisa.europa.eu/sites/default/files/publications/AI_an%20opportunity%20for%20the%20blueprint_report.pdf. Matched substantial embedded source excerpt."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.enisa.europa.eu/sites/default/files/publications/AI_an%20opportunity%20for%20the%20blueprint_report.pdf",
+            "title": "AI an opportunity for the EU cyber crisis blueprint - Report | ENISA",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity matched article title and underlying publisher/official material; package source text assessed independently of scanner characterization."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Routes 1–3 tested: source has a relevant EU security context but summarises a conference rather than a substantive evidence-led study of EU R&I system or technology capability."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2019-09-18",
+          "type": "conference report"
+        },
+        "unset": [],
+        "reason": "ENISA identifies publication date September 18, 2019, and conference-report format."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No sufficiently exact duplicate identity established."
+      },
+      "reader_title": "AI an opportunity for the EU cyber crisis blueprint - Report | ENISA",
+      "reader_what": "ENISA report records 2019 conference discussions of AI for EU cyber-crisis situational awareness.",
+      "reader_why": "",
+      "reader_more": "ENISA report records 2019 conference discussions of AI for EU cyber-crisis situational awareness. Its date is September 2019, not the scanner’s 2024 date; potential AI uses are not demonstrated results.",
+      "deep_analysis": {
+        "work_kind": "official conference report",
+        "research_question": "",
+        "main_finding": "ENISA report records 2019 conference discussions of AI for EU cyber-crisis situational awareness.",
+        "method_or_basis": "Primary publisher/official text, supplemented by package PDF or web body where available.",
+        "qualification": "Its date is September 2019, not the scanner’s 2024 date; potential AI uses are not demonstrated results.",
+        "radar_relevance": "A Routes 1–3 tested: source has a relevant EU security context but summarises a conference rather than a substantive evidence-led study of EU R&I system or technology capability.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:bc377ad0cd8055ba",
+      "source_hash": "1cde7951",
+      "identity_hash": "db82e7b11c3a070a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source linked to https://joint-research-centre.ec.europa.eu/jrc-news-and-updates/new-european-bauhaus-horizon-europe-eu-mission-pipeline-2023-07-19_en. Matched substantial embedded source excerpt."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://joint-research-centre.ec.europa.eu/jrc-news-and-updates/new-european-bauhaus-horizon-europe-eu-mission-pipeline-2023-07-19_en",
+            "title": "New European Bauhaus: Horizon Europe EU Mission in the pipeline",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity matched article title and underlying publisher/official material; package source text assessed independently of scanner characterization."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Routes 1–3 fail: the source is an announcement of a proposed programme, not an evidence-led R&I-system report; historical records cannot target C."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2023-07-19"
+        },
+        "unset": [],
+        "reason": "Date is in the official JRC news URL and story; scanner had 2023-11-23."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No sufficiently exact duplicate identity established."
+      },
+      "reader_title": "New European Bauhaus: Horizon Europe EU Mission in the pipeline",
+      "reader_what": "JRC news reported a proposal for a New European Bauhaus Horizon Europe mission.",
+      "reader_why": "",
+      "reader_more": "JRC news reported a proposal for a New European Bauhaus Horizon Europe mission. Proposal should not be treated as an approved mission or demonstrated impact.",
+      "deep_analysis": {
+        "work_kind": "official programme announcement",
+        "research_question": "",
+        "main_finding": "JRC news reported a proposal for a New European Bauhaus Horizon Europe mission.",
+        "method_or_basis": "Primary publisher/official text, supplemented by package PDF or web body where available.",
+        "qualification": "Proposal should not be treated as an approved mission or demonstrated impact.",
+        "radar_relevance": "A Routes 1–3 fail: the source is an announcement of a proposed programme, not an evidence-led R&I-system report; historical records cannot target C.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:834e853d4ffbcb7a",
+      "source_hash": "72c8c25f",
+      "identity_hash": "0c9e5f0e0c0f1991",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source linked to https://doi.org/10.1080/09654313.2018.1500528. Matched substantial embedded source excerpt."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matching official/publisher source verified at https://pureportal.coventry.ac.uk/en/publications/science-and-technology-cooperation-in-cross-border-regions-a-prox/"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Publisher/repository bibliographic identity checked for DOI 10.1080/09654313.2018.1500528"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://pureportal.coventry.ac.uk/en/publications/science-and-technology-cooperation-in-cross-border-regions-a-prox/",
+            "title": "Science and technology cooperation in cross-border regions: a proximity approach with evidence for Northern Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity matched article title and underlying publisher/official material; package source text assessed independently of scanner characterization."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: peer-reviewed empirical study of European cross-border research collaboration system; Route 2 networks also apply."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No sufficiently exact duplicate identity established."
+      },
+      "reader_title": "Science and technology cooperation in cross-border regions: a proximity approach with evidence for Northern Europe",
+      "reader_what": "Study measures how cross-border proximity relates to scientific cooperation in Northern European regions.",
+      "reader_why": "Supports an evidence-based reading of European research and technology capacity.",
+      "reader_more": "Study measures how cross-border proximity relates to scientific cooperation in Northern European regions. Associations of proximity and co-publications do not alone establish causality.",
+      "deep_analysis": {
+        "work_kind": "empirical research article",
+        "research_question": "Science and technology cooperation in cross-border regions: a proximity approach with evidence for Northern Europe",
+        "main_finding": "Study measures how cross-border proximity relates to scientific cooperation in Northern European regions.",
+        "method_or_basis": "Primary publisher/official text, supplemented by package PDF or web body where available.",
+        "qualification": "Associations of proximity and co-publications do not alone establish causality.",
+        "radar_relevance": "A Route 3: peer-reviewed empirical study of European cross-border research collaboration system; Route 2 networks also apply.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Makkonen, Williams, Mitze and Weidenfeld",
+            "class": "university_group"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2018-10-03",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Associations of proximity and co-publications do not alone establish causality.",
+          "text": "Study measures how cross-border proximity relates to scientific cooperation in Northern European regions.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:4c5d39a4e8bd0291",
+      "source_hash": "04c3573b",
+      "identity_hash": "83ec509ae599dbce",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source linked to https://doi.org/10.1108/fs-07-2017-0029. Scanner supplied no substantive page; matching official/publisher work recovered via https://www.emerald.com/fs/article-abstract/19/5/441/89219/Russian-S-amp-T-Foresight-2030-identifying-new"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matching official/publisher source verified at https://www.emerald.com/fs/article-abstract/19/5/441/89219/Russian-S-amp-T-Foresight-2030-identifying-new"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Publisher/repository bibliographic identity checked for DOI 10.1108/fs-07-2017-0029"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_substantive_page",
+            "url": "https://www.emerald.com/fs/article-abstract/19/5/441/89219/Russian-S-amp-T-Foresight-2030-identifying-new",
+            "title": "Russian S&T Foresight 2030: identifying new drivers of growth",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity matched article title and underlying publisher/official material; package source text assessed independently of scanner characterization. Publisher or institution provided substantive abstract/description, not an independently read full article."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "B fails: substantial national foresight exercise, but source describes adapting established technology-push, market-pull and stakeholder methods, not a materially new transferable method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No sufficiently exact duplicate identity established."
+      },
+      "reader_title": "Russian S&T Foresight 2030: identifying new drivers of growth",
+      "reader_what": "Study documents Russian national S&T foresight using a mix of established expert and quantitative approaches.",
+      "reader_why": "",
+      "reader_more": "Study documents Russian national S&T foresight using a mix of established expert and quantitative approaches. Russian national priorities and context do not constitute EU-system evidence; B needs innovation in method.",
+      "deep_analysis": {
+        "work_kind": "scholarly foresight case study",
+        "research_question": "",
+        "main_finding": "Study documents Russian national S&T foresight using a mix of established expert and quantitative approaches.",
+        "method_or_basis": "Primary publisher/official text, supplemented by package PDF or web body where available.",
+        "qualification": "Russian national priorities and context do not constitute EU-system evidence; B needs innovation in method.",
+        "radar_relevance": "B fails: substantial national foresight exercise, but source describes adapting established technology-push, market-pull and stakeholder methods, not a materially new transferable method.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:191ee55eecce78ec",
+      "source_hash": "8f6704b0",
+      "identity_hash": "523bfc7227e1b3e3",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source linked to https://ecfr.eu/article/green-competitiveness-why-europe-should-rethink-targets-to-outpace-china/. Matched substantial embedded source excerpt."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://ecfr.eu/article/green-competitiveness-why-europe-should-rethink-targets-to-outpace-china/",
+            "title": "Green competitiveness: Why Europe should rethink targets to outpace China – European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity matched article title and underlying publisher/official material; package source text assessed independently of scanner characterization."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 1: direct Europe–China strategic technology and automotive innovation-capacity analysis; Route 2 industrial capability."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No sufficiently exact duplicate identity established."
+      },
+      "reader_title": "Green competitiveness: Why Europe should rethink targets to outpace China – European Council on Foreign Relations",
+      "reader_what": "Policy analysis links European EV competitiveness to Chinese competition, supply restrictions, R&D and industrial strategy.",
+      "reader_why": "Supports an evidence-based reading of European research and technology capacity.",
+      "reader_more": "Policy analysis links European EV competitiveness to Chinese competition, supply restrictions, R&D and industrial strategy. This is a policy argument with supporting sector evidence, not a causal evaluation of climate targets.",
+      "deep_analysis": {
+        "work_kind": "policy report",
+        "research_question": "Green competitiveness: Why Europe should rethink targets to outpace China – European Council on Foreign Relations",
+        "main_finding": "Policy analysis links European EV competitiveness to Chinese competition, supply restrictions, R&D and industrial strategy.",
+        "method_or_basis": "Primary publisher/official text, supplemented by package PDF or web body where available.",
+        "qualification": "This is a policy argument with supporting sector evidence, not a causal evaluation of climate targets.",
+        "radar_relevance": "A Route 1: direct Europe–China strategic technology and automotive innovation-capacity analysis; Route 2 industrial capability.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "industrial.ev_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Council on Foreign Relations",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "evaluates",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2025-10-31",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "This is a policy argument with supporting sector evidence, not a causal evaluation of climate targets.",
+          "text": "Policy analysis links European EV competitiveness to Chinese competition, supply restrictions, R&D and industrial strategy.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:81102f1b667d6a48",
+      "source_hash": "b5d9d045",
+      "identity_hash": "21b73598611e5430",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source linked to https://ecfr.eu/article/in-the-web-how-the-eu-can-untangle-global-technology-governance/. Matched substantial embedded source excerpt."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://ecfr.eu/article/in-the-web-how-the-eu-can-untangle-global-technology-governance/",
+            "title": "In the web: How the EU can untangle global technology governance – European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity matched article title and underlying publisher/official material; package source text assessed independently of scanner characterization."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Routes 1–3 fail as evidence product: mainly advocacy for an international governance position, not substantive completed European R&I system/capability research."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No sufficiently exact duplicate identity established."
+      },
+      "reader_title": "In the web: How the EU can untangle global technology governance – European Council on Foreign Relations",
+      "reader_what": "ECFR commentary urges the EU to advance multilateral digital governance via the UN Global Digital Compact.",
+      "reader_why": "",
+      "reader_more": "ECFR commentary urges the EU to advance multilateral digital governance via the UN Global Digital Compact. Geopolitical technology-policy relevance alone does not turn commentary into strong empirical evidence.",
+      "deep_analysis": {
+        "work_kind": "policy commentary",
+        "research_question": "",
+        "main_finding": "ECFR commentary urges the EU to advance multilateral digital governance via the UN Global Digital Compact.",
+        "method_or_basis": "Primary publisher/official text, supplemented by package PDF or web body where available.",
+        "qualification": "Geopolitical technology-policy relevance alone does not turn commentary into strong empirical evidence.",
+        "radar_relevance": "A Routes 1–3 fail as evidence product: mainly advocacy for an international governance position, not substantive completed European R&I system/capability research.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:9f412c059f12bbed",
+      "source_hash": "ac8f80cb",
+      "identity_hash": "a8ce94438e28c77e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source linked to https://ecfr.eu/article/referees-dont-win-games-europe-and-the-digital-great-game/. Matched substantial embedded source excerpt."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://ecfr.eu/article/referees-dont-win-games-europe-and-the-digital-great-game/",
+            "title": "Referees don’t win games: Europe and the digital great game – European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity matched article title and underlying publisher/official material; package source text assessed independently of scanner characterization."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Routes 1–3 fail on the substantive evidence-product gate: primarily strategic commentary and advocacy, not a documented research study of R&I mechanisms or capacities."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No sufficiently exact duplicate identity established."
+      },
+      "reader_title": "Referees don’t win games: Europe and the digital great game – European Council on Foreign Relations",
+      "reader_what": "ECFR opinion argues that European rule-making alone cannot offset US and Chinese digital technological strength.",
+      "reader_why": "",
+      "reader_more": "ECFR opinion argues that European rule-making alone cannot offset US and Chinese digital technological strength. Relevant thesis is not proof of quantified technology performance or policy effectiveness.",
+      "deep_analysis": {
+        "work_kind": "policy commentary",
+        "research_question": "",
+        "main_finding": "ECFR opinion argues that European rule-making alone cannot offset US and Chinese digital technological strength.",
+        "method_or_basis": "Primary publisher/official text, supplemented by package PDF or web body where available.",
+        "qualification": "Relevant thesis is not proof of quantified technology performance or policy effectiveness.",
+        "radar_relevance": "A Routes 1–3 fail on the substantive evidence-product gate: primarily strategic commentary and advocacy, not a documented research study of R&I mechanisms or capacities.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:7d8d26d7a75a3cfa",
+      "source_hash": "69b5e4cc",
+      "identity_hash": "1562d32e02803def",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source linked to https://doi.org/10.1186/s40309-018-0145-9. Matched substantial embedded source excerpt."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matching official/publisher source verified at https://link.springer.com/article/10.1186/s40309-018-0145-9"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Publisher/repository bibliographic identity checked for DOI 10.1186/s40309-018-0145-9"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1186/s40309-018-0145-9",
+            "title": "A note on the classification of future-related methods",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity matched article title and underlying publisher/official material; package source text assessed independently of scanner characterization."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_TRANSFERABLE_METHOD",
+        "reason": "B: explicit transferable methodological typology for futures research and method selection."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "European Journal of Futures Research"
+        },
+        "unset": [],
+        "reason": "Springer original paper identifies the journal as European Journal of Futures Research, not Futures."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No sufficiently exact duplicate identity established."
+      },
+      "reader_title": "A note on the classification of future-related methods",
+      "reader_what": "Introduces a future-specific classification of methods, distinguishing genuinely future-oriented techniques from generic borrowed tools.",
+      "reader_why": "Provides a transferable design for strategic-foresight analysis.",
+      "reader_more": "Introduces a future-specific classification of methods, distinguishing genuinely future-oriented techniques from generic borrowed tools. Conceptual taxonomy, not an empirical validation that one foresight method is more accurate.",
+      "deep_analysis": {
+        "work_kind": "foresight methods paper",
+        "research_question": "A note on the classification of future-related methods",
+        "main_finding": "Introduces a future-specific classification of methods, distinguishing genuinely future-oriented techniques from generic borrowed tools.",
+        "method_or_basis": "Primary publisher/official text, supplemented by package PDF or web body where available.",
+        "qualification": "Conceptual taxonomy, not an empirical validation that one foresight method is more accurate.",
+        "radar_relevance": "B: explicit transferable methodological typology for futures research and method selection.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Roberto Poli",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2018-09-15",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Conceptual taxonomy, not an empirical validation that one foresight method is more accurate.",
+          "text": "Introduces a future-specific classification of methods, distinguishing genuinely future-oriented techniques from generic borrowed tools.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:209be39399443cff",
+      "source_hash": "e46ce7c1",
+      "identity_hash": "5bed7a96bf13e4b9",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source linked to https://itif.org/publications/2017/12/12/us-risk-losing-ai-leadership-without-national-strategy-future-ai-act-puts-us/. Matched substantial embedded source excerpt."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://itif.org/publications/2017/12/12/us-risk-losing-ai-leadership-without-national-strategy-future-ai-act-puts-us/",
+            "title": "U.S. At Risk of Losing AI Leadership Without A National Strategy; FUTURE of AI Act Puts U.S. on Right Track",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified ITIF publication is a policy press statement about US legislation; package text includes publication description and the statement."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Routes 1–3 fail: US advocacy press release, not substantive European R&I evidence; references to global leadership do not create an EU connection."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No sufficiently exact duplicate identity established."
+      },
+      "reader_title": "U.S. At Risk of Losing AI Leadership Without A National Strategy; FUTURE of AI Act Puts U.S. on",
+      "reader_what": "ITIF statement welcomes a proposed US AI policy bill and calls for a national strategy.",
+      "reader_why": "",
+      "reader_more": "ITIF statement welcomes a proposed US AI policy bill and calls for a national strategy. The bill’s proposed status and claims of benefit cannot be turned into effects.",
+      "deep_analysis": {
+        "work_kind": "policy commentary",
+        "research_question": "",
+        "main_finding": "ITIF statement welcomes a proposed US AI policy bill and calls for a national strategy.",
+        "method_or_basis": "Primary publisher/official text, supplemented by package PDF or web body where available.",
+        "qualification": "The bill’s proposed status and claims of benefit cannot be turned into effects.",
+        "radar_relevance": "A Routes 1–3 fail: US advocacy press release, not substantive European R&I evidence; references to global leadership do not create an EU connection.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:c35e6a3c184ed3da",
+      "source_hash": "e37a35a0",
+      "identity_hash": "c4214bb465be45a6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source linked to https://doi.org/10.1007/s11192-016-1927-0. Matched substantial embedded source excerpt."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matching official/publisher source verified at https://link.springer.com/article/10.1007/s11192-016-1927-0"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Publisher/repository bibliographic identity checked for DOI 10.1007/s11192-016-1927-0"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s11192-016-1927-0",
+            "title": "Scientific collaboration framework of BRICS countries: an analysis of international coauthorship",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity matched article title and underlying publisher/official material; package source text assessed independently of scanner characterization."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Routes 1–3 fail substantive European scope: European countries feature in a broader BRICS network as collaborators or comparators, not as the research-system object."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No sufficiently exact duplicate identity established."
+      },
+      "reader_title": "Scientific collaboration framework of BRICS countries: an analysis of international coauthorship",
+      "reader_what": "Scientometric paper maps BRICS international coauthor networks using data from 70 countries.",
+      "reader_why": "",
+      "reader_more": "Scientometric paper maps BRICS international coauthor networks using data from 70 countries. This is genuine bibliometric research but not focused on the European R&I system.",
+      "deep_analysis": {
+        "work_kind": "empirical research article",
+        "research_question": "",
+        "main_finding": "Scientometric paper maps BRICS international coauthor networks using data from 70 countries.",
+        "method_or_basis": "Primary publisher/official text, supplemented by package PDF or web body where available.",
+        "qualification": "This is genuine bibliometric research but not focused on the European R&I system.",
+        "radar_relevance": "A Routes 1–3 fail substantive European scope: European countries feature in a broader BRICS network as collaborators or comparators, not as the research-system object.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:f6292a488daec6a8",
+      "source_hash": "9f08dee7",
+      "identity_hash": "0852807f9504cfdb",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source linked to https://doi.org/10.1108/fs-07-2014-0050. Scanner supplied no substantive page; matching official/publisher work recovered via https://publications.ait.ac.at/en/publications/new-forms-of-innovation-critical-issues-for-future-pathways"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matching official/publisher source verified at https://publications.ait.ac.at/en/publications/new-forms-of-innovation-critical-issues-for-future-pathways"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Publisher/repository bibliographic identity checked for DOI 10.1108/fs-07-2014-0050"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_substantive_page",
+            "url": "https://publications.ait.ac.at/en/publications/new-forms-of-innovation-critical-issues-for-future-pathways",
+            "title": "New forms of innovation: critical issues for future pathways",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "AIT institutional bibliographic record checked against published article abstract and DOI; full journal text not accessible; conclusion limited to evidenced innovation-policy framing. Publisher or institution provided substantive abstract/description, not an independently read full article."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: substantive analytical investigation rooted in a European foresight project of innovation-system governance and innovation-policy challenges."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2016"
+        },
+        "unset": [],
+        "reason": "Institutional source verifies publication year 2016 but not precise issue-day; avoids unconfirmed day."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No sufficiently exact duplicate identity established."
+      },
+      "reader_title": "New forms of innovation: critical issues for future pathways",
+      "reader_what": "European foresight-based policy study examines systemic consequences and governance challenges of open, user and crowd innovation.",
+      "reader_why": "Supports an evidence-based reading of European research and technology capacity.",
+      "reader_more": "European foresight-based policy study examines systemic consequences and governance challenges of open, user and crowd innovation. Conceptual and foresight-supported mechanisms, not quantified causal evidence of realised effects.",
+      "deep_analysis": {
+        "work_kind": "policy report",
+        "research_question": "New forms of innovation: critical issues for future pathways",
+        "main_finding": "European foresight-based policy study examines systemic consequences and governance challenges of open, user and crowd innovation.",
+        "method_or_basis": "Primary publisher/official text, supplemented by package PDF or web body where available.",
+        "qualification": "Conceptual and foresight-supported mechanisms, not quantified causal evidence of realised effects.",
+        "radar_relevance": "A Route 3: substantive analytical investigation rooted in a European foresight project of innovation-system governance and innovation-policy challenges.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "innovation.system_performance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Leitner, Warnke and Rhomberg",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2016",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Conceptual and foresight-supported mechanisms, not quantified causal evidence of realised effects.",
+          "text": "European foresight-based policy study examines systemic consequences and governance challenges of open, user and crowd innovation.",
+          "confidence": "medium",
+          "status_date_precision": "year"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:f66ae451afb39141",
+      "source_hash": "5d395054",
+      "identity_hash": "5a29cb8eb9272cae",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source linked to https://doi.org/10.1007/s11192-015-1819-8. Matched substantial embedded source excerpt."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matching official/publisher source verified at https://link.springer.com/article/10.1007/s11192-015-1819-8"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Publisher/repository bibliographic identity checked for DOI 10.1007/s11192-015-1819-8"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s11192-015-1819-8",
+            "title": "Proximity dimensions and scientific collaboration among academic institutions in Europe: The closer, the better?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity matched article title and underlying publisher/official material; package source text assessed independently of scanner characterization."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: major empirical European university collaboration-network study; Route 2 research-network capacity also applies."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No sufficiently exact duplicate identity established."
+      },
+      "reader_title": "Proximity dimensions and scientific collaboration among academic institutions in Europe: The closer, the better?",
+      "reader_what": "Analysis of EU-15 university coauthorship evaluates geographical, cognitive, institutional and other proximity effects on collaboration.",
+      "reader_why": "Supports an evidence-based reading of European research and technology capacity.",
+      "reader_more": "Analysis of EU-15 university coauthorship evaluates geographical, cognitive, institutional and other proximity effects on collaboration. Observational coauthorship analysis from 2006–2010; proximity associations do not demonstrate causality.",
+      "deep_analysis": {
+        "work_kind": "empirical research article",
+        "research_question": "Proximity dimensions and scientific collaboration among academic institutions in Europe: The closer, the better?",
+        "main_finding": "Analysis of EU-15 university coauthorship evaluates geographical, cognitive, institutional and other proximity effects on collaboration.",
+        "method_or_basis": "Primary publisher/official text, supplemented by package PDF or web body where available.",
+        "qualification": "Observational coauthorship analysis from 2006–2010; proximity associations do not demonstrate causality.",
+        "radar_relevance": "A Route 3: major empirical European university collaboration-network study; Route 2 research-network capacity also applies.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Fernández, Ferrándiz and León",
+            "class": "university_group"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2016-03-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Observational coauthorship analysis from 2006–2010; proximity associations do not demonstrate causality.",
+          "text": "Analysis of EU-15 university coauthorship evaluates geographical, cognitive, institutional and other proximity effects on collaboration.",
+          "confidence": "high"
+        }
+      ]
+    }
+  ]
+}
