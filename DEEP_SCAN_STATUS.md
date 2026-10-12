@@ -6,27 +6,27 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2691** (Main **1277** + Historical **1414**)
-- Automatic queue still needing V2 verification: **350** (Main **131** + Historical **219**)
-- Currently assigned to workers: **56** (Main **6** + Historical **50**)
+- Authoritative V2 verified: **2693** (Main **1279** + Historical **1414**)
+- Automatic queue still needing V2 verification: **348** (Main **129** + Historical **219**)
+- Currently assigned to workers: **46** (Main **4** + Historical **42**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **30**
-- Automatic queue pending and not yet assigned: **294**
+- Automatic queue pending and not yet assigned: **302**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261012T064402Z-b39643c9f9d4`
-- Assigned unresolved records: **21**
-  1. `link:https://doi.org/10.1016/j.sftr.2026.102150` — The price of deception? Greenwashing and firm value through a bibliometric lens
-  2. `link:https://digital-strategy.ec.europa.eu/en/library/ai-office-publishes-frontier-ai-expert-findings-eu-competitiveness-sovereignty-and-security` — AI Office publishes frontier AI expert findings on EU competitiveness, sovereignty and security
-  3. `link:https://doi.org/10.1016/j.futures.2026.103883` — Artificial intelligence in strategic foresight: Evidence from a longitudinal case at Siemens Professional Education
-  4. `link:https://doi.org/10.1016/j.futures.2026.103904` — Analyzing blockchain entrepreneurial ecosystems with foresight: A data-driven approach
-  5. `link:https://news.google.com/rss/articles/CBMiuwFBVV95cUxNY3k2OUhTel9IWFNOcnAtelhqLXVkQnNCS3BFdUlrTnl3SWZQOV9CWTJldlV3NlRUamhPUW1jNTVCZ015NVRqOWhyN0JfOGpicHVPMUNwaTN6Q3ppLWdJMnBDN2c4N1FJTllqb2VHaTYxeVJxSGVQQVh2cjN6S25UX09qcmZHOUxDRzVtM2hHNXBXZHZOZTJYbzVOQXExRDdPQnlUV1d0NkdON0FnWlRKdUFGbXF3NHY5bF9n?oc=5` — AGILE: Parliament set to approve new EU defence innovation programme | 05-10-2026 | Nuacht | Parlaimint na hEorpa
-  6. `link:https://news.google.com/rss/articles/CBMi6wFBVV95cUxOZHZaWjZ5dTR1RzFVWGNKd1FnMHpoakdwcHFhc0ZhLWlsMEJnVEtuYVVSaE83b0FXWHh5LTJ6VGtRaXNES0FNa2Zuc2xyTHRxWE9feWVoYXFKR2NTcW5xcVh3d1BQWG5ObUF2dm1fcEozaUhVMldGM21rQUNjWi1BaFdJUDR4Q2J0M3NiNW91d3huckctdTdGVEozLVhyOGx1N1J0clVJdWpYNkdQSy14U2s4a1BfTVJoMFVkMXJ2eVprRk9NamYzYW5NOUcxRWhlYkpqLW1RUk5tdFhFTkh3MnVKSGY1UEdlY2RN?oc=5` — Reaping the economic benefits from AI: OECD Economic Surveys: Slovak Republic 2026
-  7. `historical:id:7fd90c3f68985ef4` — KIC Demand-driven Research by Consortia – XL | NWO
-  8. `historical:id:29a9978d3b0730cd` — Knowledge security: scientific research in a geopolitical context – Phase 2 | NWO
-  - … plus 13 more in the package manifest
+- Current package: `worker-a-20261012T065620Z-11059d3e5d44`
+- Assigned unresolved records: **11**
+  1. `link:https://doi.org/10.1016/j.futures.2026.103883` — Artificial intelligence in strategic foresight: Evidence from a longitudinal case at Siemens Professional Education
+  2. `link:https://doi.org/10.1016/j.futures.2026.103904` — Analyzing blockchain entrepreneurial ecosystems with foresight: A data-driven approach
+  3. `link:https://news.google.com/rss/articles/CBMiuwFBVV95cUxNY3k2OUhTel9IWFNOcnAtelhqLXVkQnNCS3BFdUlrTnl3SWZQOV9CWTJldlV3NlRUamhPUW1jNTVCZ015NVRqOWhyN0JfOGpicHVPMUNwaTN6Q3ppLWdJMnBDN2c4N1FJTllqb2VHaTYxeVJxSGVQQVh2cjN6S25UX09qcmZHOUxDRzVtM2hHNXBXZHZOZTJYbzVOQXExRDdPQnlUV1d0NkdON0FnWlRKdUFGbXF3NHY5bF9n?oc=5` — AGILE: Parliament set to approve new EU defence innovation programme | 05-10-2026 | Nuacht | Parlaimint na hEorpa
+  4. `link:https://news.google.com/rss/articles/CBMi6wFBVV95cUxOZHZaWjZ5dTR1RzFVWGNKd1FnMHpoakdwcHFhc0ZhLWlsMEJnVEtuYVVSaE83b0FXWHh5LTJ6VGtRaXNES0FNa2Zuc2xyTHRxWE9feWVoYXFKR2NTcW5xcVh3d1BQWG5ObUF2dm1fcEozaUhVMldGM21rQUNjWi1BaFdJUDR4Q2J0M3NiNW91d3huckctdTdGVEozLVhyOGx1N1J0clVJdWpYNkdQSy14U2s4a1BfTVJoMFVkMXJ2eVprRk9NamYzYW5NOUcxRWhlYkpqLW1RUk5tdFhFTkh3MnVKSGY1UEdlY2RN?oc=5` — Reaping the economic benefits from AI: OECD Economic Surveys: Slovak Republic 2026
+  5. `historical:id:7fd90c3f68985ef4` — KIC Demand-driven Research by Consortia – XL | NWO
+  6. `historical:id:29a9978d3b0730cd` — Knowledge security: scientific research in a geopolitical context – Phase 2 | NWO
+  7. `historical:id:696126c11d1ea1de` — Quantum Communication Infrastructure
+  8. `historical:id:10f5dbdb5d5b1ced` — AI an opportunity for the EU cyber crisis blueprint - Report | ENISA
+  - … plus 3 more in the package manifest
 
 ### Worker B
 - Current package: `worker-b-20261009T080214Z-5994737f044d`

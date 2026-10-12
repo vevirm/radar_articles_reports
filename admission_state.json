@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-admission-v1",
-  "updated_at": "2026-10-11T08:05:44Z",
+  "updated_at": "2026-10-12T06:52:14Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "decision": "drop",
@@ -32156,6 +32156,30 @@
       "updated_at": "2026-10-11T08:05:44Z",
       "deep_scan_package_id": "worker-a-20261011T073553Z-e8b972156983",
       "verification_note": "Mandatory retrieval paths produced no matching identity-confirming publication; claimed DOI and title remain unsubstantiated.",
+      "duplicate_of": ""
+    },
+    "link:https://doi.org/10.1016/j.sftr.2026.102150": {
+      "decision": "drop",
+      "target_strand": "A",
+      "reason_code": "OUT_OF_SCOPE",
+      "reason": "A routes 1–3 fail: geographic publication counts mentioning European countries are incidental; substantive object is corporate greenwashing and firm value.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "updated_at": "2026-10-12T06:52:14Z",
+      "deep_scan_package_id": "worker-a-20261012T064402Z-b39643c9f9d4",
+      "verification_note": "Identity matched article title and underlying publisher/official material; package source text assessed independently of scanner characterization.",
+      "duplicate_of": ""
+    },
+    "link:https://digital-strategy.ec.europa.eu/en/library/ai-office-publishes-frontier-ai-expert-findings-eu-competitiveness-sovereignty-and-security": {
+      "decision": "keep",
+      "target_strand": "A",
+      "reason_code": "A_SUBSTANTIVE_EU_RI",
+      "reason": "A Route 2: evidence-led EU frontier-AI capability and investment gap; Route 1 also concerns strategic technological dependence.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "updated_at": "2026-10-12T06:52:14Z",
+      "deep_scan_package_id": "worker-a-20261012T064402Z-b39643c9f9d4",
+      "verification_note": "Identity matched article title and underlying publisher/official material; package source text assessed independently of scanner characterization.",
       "duplicate_of": ""
     }
   }

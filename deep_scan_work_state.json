@@ -1,13 +1,11 @@
 {
   "version": 1,
   "profile": "radar-deep-scan-work-state-v1",
-  "updated_at": "2026-10-12T06:44:46Z",
+  "updated_at": "2026-10-12T06:56:43Z",
   "lanes": {
     "A": {
       "target_size": 36,
       "assigned": [
-        "link:https://doi.org/10.1016/j.sftr.2026.102150",
-        "link:https://digital-strategy.ec.europa.eu/en/library/ai-office-publishes-frontier-ai-expert-findings-eu-competitiveness-sovereignty-and-security",
         "link:https://doi.org/10.1016/j.futures.2026.103883",
         "link:https://doi.org/10.1016/j.futures.2026.103904",
         "link:https://news.google.com/rss/articles/CBMiuwFBVV95cUxNY3k2OUhTel9IWFNOcnAtelhqLXVkQnNCS3BFdUlrTnl3SWZQOV9CWTJldlV3NlRUamhPUW1jNTVCZ015NVRqOWhyN0JfOGpicHVPMUNwaTN6Q3ppLWdJMnBDN2c4N1FJTllqb2VHaTYxeVJxSGVQQVh2cjN6S25UX09qcmZHOUxDRzVtM2hHNXBXZHZOZTJYbzVOQXExRDdPQnlUV1d0NkdON0FnWlRKdUFGbXF3NHY5bF9n?oc=5",
@@ -18,19 +16,10 @@
         "historical:id:10f5dbdb5d5b1ced",
         "historical:id:bc377ad0cd8055ba",
         "historical:id:834e853d4ffbcb7a",
-        "historical:id:4c5d39a4e8bd0291",
-        "historical:id:191ee55eecce78ec",
-        "historical:id:81102f1b667d6a48",
-        "historical:id:9f412c059f12bbed",
-        "historical:id:7d8d26d7a75a3cfa",
-        "historical:id:209be39399443cff",
-        "historical:id:c35e6a3c184ed3da",
-        "historical:id:f6292a488daec6a8",
-        "historical:id:f66ae451afb39141"
+        "historical:id:4c5d39a4e8bd0291"
       ],
-      "current_package_id": "worker-a-20261012T064402Z-b39643c9f9d4",
+      "current_package_id": "worker-a-20261012T065620Z-11059d3e5d44",
       "package_history": [
-        "worker-a-20261002T203930Z-9a8f6b785d7d",
         "worker-a-20261003T083501Z-9a8f6b785d7d",
         "worker-a-20261003T163612Z-bd0bb75fc561",
         "worker-a-20261003T165137Z-fbd2b6ec93ab",
@@ -69,7 +58,8 @@
         "worker-a-20261011T081252Z-84fcf5689650",
         "worker-a-20261011T123546Z-6f95ed01e862",
         "worker-a-20261011T141247Z-a1cb40a233e1",
-        "worker-a-20261012T064402Z-b39643c9f9d4"
+        "worker-a-20261012T064402Z-b39643c9f9d4",
+        "worker-a-20261012T065620Z-11059d3e5d44"
       ]
     },
     "B": {
@@ -16275,7 +16265,8 @@
       "last_package_id": "worker-a-20260914T123326Z-1a1bc3463fbc",
       "verified_at": "2026-09-14T12:41:51Z",
       "verified_package_id": "worker-a-20260914T121453Z-1a1bc3463fbc",
-      "scan_package_attempts": 3
+      "scan_package_attempts": 3,
+      "queue_priority": "strand_a"
     },
     "historical:id:2c73f035402f6771": {
       "title": "Why we have six months to regulate the AI that Europe isn’t building – CEPS",
@@ -68265,9 +68256,9 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-10-12T06:44:02Z",
-      "last_package_id": "worker-a-20261012T064402Z-b39643c9f9d4",
-      "scan_package_attempts": 1,
-      "last_scan_package_at": "2026-10-12T06:44:45Z"
+      "last_package_id": "worker-a-20261012T065620Z-11059d3e5d44",
+      "scan_package_attempts": 2,
+      "last_scan_package_at": "2026-10-12T06:56:42Z"
     },
     "link:https://doi.org/10.1016/j.futures.2026.103904": {
       "title": "Analyzing blockchain entrepreneurial ecosystems with foresight: A data-driven approach",
@@ -68278,9 +68269,9 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-10-12T06:44:02Z",
-      "last_package_id": "worker-a-20261012T064402Z-b39643c9f9d4",
-      "scan_package_attempts": 1,
-      "last_scan_package_at": "2026-10-12T06:44:45Z"
+      "last_package_id": "worker-a-20261012T065620Z-11059d3e5d44",
+      "scan_package_attempts": 2,
+      "last_scan_package_at": "2026-10-12T06:56:42Z"
     },
     "link:https://doi.org/10.1016/j.sftr.2026.102150": {
       "title": "The price of deception? Greenwashing and firm value through a bibliometric lens",
@@ -68289,12 +68280,14 @@
       "url": "https://doi.org/10.1016/j.sftr.2026.102150",
       "corpus_scope": "main",
       "queue_priority": "strand_a",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-10-12T06:44:02Z",
       "last_package_id": "worker-a-20261012T064402Z-b39643c9f9d4",
       "scan_package_attempts": 1,
-      "last_scan_package_at": "2026-10-12T06:44:45Z"
+      "last_scan_package_at": "2026-10-12T06:44:45Z",
+      "verified_at": "2026-10-12T06:52:14Z",
+      "verified_package_id": "worker-a-20261012T064402Z-b39643c9f9d4"
     },
     "link:https://digital-strategy.ec.europa.eu/en/library/ai-office-publishes-frontier-ai-expert-findings-eu-competitiveness-sovereignty-and-security": {
       "title": "AI Office publishes frontier AI expert findings on EU competitiveness, sovereignty and security",
@@ -68303,12 +68296,14 @@
       "url": "https://digital-strategy.ec.europa.eu/en/library/ai-office-publishes-frontier-ai-expert-findings-eu-competitiveness-sovereignty-and-security",
       "corpus_scope": "main",
       "queue_priority": "strand_a",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-10-12T06:44:02Z",
       "last_package_id": "worker-a-20261012T064402Z-b39643c9f9d4",
       "scan_package_attempts": 1,
-      "last_scan_package_at": "2026-10-12T06:44:45Z"
+      "last_scan_package_at": "2026-10-12T06:44:45Z",
+      "verified_at": "2026-10-12T06:52:14Z",
+      "verified_package_id": "worker-a-20261012T064402Z-b39643c9f9d4"
     },
     "link:https://news.google.com/rss/articles/CBMiuwFBVV95cUxNY3k2OUhTel9IWFNOcnAtelhqLXVkQnNCS3BFdUlrTnl3SWZQOV9CWTJldlV3NlRUamhPUW1jNTVCZ015NVRqOWhyN0JfOGpicHVPMUNwaTN6Q3ppLWdJMnBDN2c4N1FJTllqb2VHaTYxeVJxSGVQQVh2cjN6S25UX09qcmZHOUxDRzVtM2hHNXBXZHZOZTJYbzVOQXExRDdPQnlUV1d0NkdON0FnWlRKdUFGbXF3NHY5bF9n?oc=5": {
       "title": "AGILE: Parliament set to approve new EU defence innovation programme | 05-10-2026 | Nuacht | Parlaimint na hEorpa",
@@ -68319,9 +68314,9 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-10-12T06:44:02Z",
-      "last_package_id": "worker-a-20261012T064402Z-b39643c9f9d4",
-      "scan_package_attempts": 1,
-      "last_scan_package_at": "2026-10-12T06:44:45Z"
+      "last_package_id": "worker-a-20261012T065620Z-11059d3e5d44",
+      "scan_package_attempts": 2,
+      "last_scan_package_at": "2026-10-12T06:56:42Z"
     },
     "link:https://news.google.com/rss/articles/CBMi6wFBVV95cUxOZHZaWjZ5dTR1RzFVWGNKd1FnMHpoakdwcHFhc0ZhLWlsMEJnVEtuYVVSaE83b0FXWHh5LTJ6VGtRaXNES0FNa2Zuc2xyTHRxWE9feWVoYXFKR2NTcW5xcVh3d1BQWG5ObUF2dm1fcEozaUhVMldGM21rQUNjWi1BaFdJUDR4Q2J0M3NiNW91d3huckctdTdGVEozLVhyOGx1N1J0clVJdWpYNkdQSy14U2s4a1BfTVJoMFVkMXJ2eVprRk9NamYzYW5NOUcxRWhlYkpqLW1RUk5tdFhFTkh3MnVKSGY1UEdlY2RN?oc=5": {
       "title": "Reaping the economic benefits from AI: OECD Economic Surveys: Slovak Republic 2026",
@@ -68332,9 +68327,9 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-10-12T06:44:02Z",
-      "last_package_id": "worker-a-20261012T064402Z-b39643c9f9d4",
-      "scan_package_attempts": 1,
-      "last_scan_package_at": "2026-10-12T06:44:45Z"
+      "last_package_id": "worker-a-20261012T065620Z-11059d3e5d44",
+      "scan_package_attempts": 2,
+      "last_scan_package_at": "2026-10-12T06:56:42Z"
     },
     "historical:id:7fd90c3f68985ef4": {
       "title": "KIC Demand-driven Research by Consortia – XL | NWO",
@@ -68346,9 +68341,9 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-10-12T06:44:02Z",
-      "last_package_id": "worker-a-20261012T064402Z-b39643c9f9d4",
-      "scan_package_attempts": 1,
-      "last_scan_package_at": "2026-10-12T06:44:45Z"
+      "last_package_id": "worker-a-20261012T065620Z-11059d3e5d44",
+      "scan_package_attempts": 2,
+      "last_scan_package_at": "2026-10-12T06:56:42Z"
     },
     "historical:id:29a9978d3b0730cd": {
       "title": "Knowledge security: scientific research in a geopolitical context – Phase 2 | NWO",
@@ -68360,9 +68355,9 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-10-12T06:44:02Z",
-      "last_package_id": "worker-a-20261012T064402Z-b39643c9f9d4",
-      "scan_package_attempts": 1,
-      "last_scan_package_at": "2026-10-12T06:44:45Z"
+      "last_package_id": "worker-a-20261012T065620Z-11059d3e5d44",
+      "scan_package_attempts": 2,
+      "last_scan_package_at": "2026-10-12T06:56:42Z"
     },
     "historical:id:696126c11d1ea1de": {
       "title": "Quantum Communication Infrastructure",
@@ -68374,9 +68369,9 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-10-12T06:44:02Z",
-      "last_package_id": "worker-a-20261012T064402Z-b39643c9f9d4",
-      "scan_package_attempts": 1,
-      "last_scan_package_at": "2026-10-12T06:44:45Z"
+      "last_package_id": "worker-a-20261012T065620Z-11059d3e5d44",
+      "scan_package_attempts": 2,
+      "last_scan_package_at": "2026-10-12T06:56:42Z"
     },
     "historical:id:10f5dbdb5d5b1ced": {
       "title": "AI an opportunity for the EU cyber crisis blueprint - Report | ENISA",
@@ -68388,9 +68383,9 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-10-12T06:44:02Z",
-      "last_package_id": "worker-a-20261012T064402Z-b39643c9f9d4",
-      "scan_package_attempts": 1,
-      "last_scan_package_at": "2026-10-12T06:44:45Z"
+      "last_package_id": "worker-a-20261012T065620Z-11059d3e5d44",
+      "scan_package_attempts": 2,
+      "last_scan_package_at": "2026-10-12T06:56:42Z"
     },
     "historical:id:bc377ad0cd8055ba": {
       "title": "New European Bauhaus: Horizon Europe EU Mission in the pipeline",
@@ -68402,9 +68397,9 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-10-12T06:44:02Z",
-      "last_package_id": "worker-a-20261012T064402Z-b39643c9f9d4",
-      "scan_package_attempts": 1,
-      "last_scan_package_at": "2026-10-12T06:44:45Z"
+      "last_package_id": "worker-a-20261012T065620Z-11059d3e5d44",
+      "scan_package_attempts": 2,
+      "last_scan_package_at": "2026-10-12T06:56:42Z"
     },
     "historical:id:834e853d4ffbcb7a": {
       "title": "Science and technology cooperation in cross-border regions: a proximity approach with evidence for Northern Europe",
@@ -68416,9 +68411,9 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-10-12T06:44:02Z",
-      "last_package_id": "worker-a-20261012T064402Z-b39643c9f9d4",
-      "scan_package_attempts": 1,
-      "last_scan_package_at": "2026-10-12T06:44:45Z"
+      "last_package_id": "worker-a-20261012T065620Z-11059d3e5d44",
+      "scan_package_attempts": 2,
+      "last_scan_package_at": "2026-10-12T06:56:42Z"
     },
     "historical:id:4c5d39a4e8bd0291": {
       "title": "Russian S&T Foresight 2030: identifying new drivers of growth",
@@ -68429,9 +68424,9 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-10-12T06:44:02Z",
-      "last_package_id": "worker-a-20261012T064402Z-b39643c9f9d4",
-      "scan_package_attempts": 1,
-      "last_scan_package_at": "2026-10-12T06:44:45Z"
+      "last_package_id": "worker-a-20261012T065620Z-11059d3e5d44",
+      "scan_package_attempts": 2,
+      "last_scan_package_at": "2026-10-12T06:56:42Z"
     }
   },
   "packages": {
@@ -87720,6 +87715,23 @@
         "historical:id:c35e6a3c184ed3da",
         "historical:id:f6292a488daec6a8",
         "historical:id:f66ae451afb39141"
+      ]
+    },
+    "worker-a-20261012T065620Z-11059d3e5d44": {
+      "lane": "A",
+      "created_at": "2026-10-12T06:56:42Z",
+      "record_keys": [
+        "link:https://doi.org/10.1016/j.futures.2026.103883",
+        "link:https://doi.org/10.1016/j.futures.2026.103904",
+        "link:https://news.google.com/rss/articles/CBMiuwFBVV95cUxNY3k2OUhTel9IWFNOcnAtelhqLXVkQnNCS3BFdUlrTnl3SWZQOV9CWTJldlV3NlRUamhPUW1jNTVCZ015NVRqOWhyN0JfOGpicHVPMUNwaTN6Q3ppLWdJMnBDN2c4N1FJTllqb2VHaTYxeVJxSGVQQVh2cjN6S25UX09qcmZHOUxDRzVtM2hHNXBXZHZOZTJYbzVOQXExRDdPQnlUV1d0NkdON0FnWlRKdUFGbXF3NHY5bF9n?oc=5",
+        "link:https://news.google.com/rss/articles/CBMi6wFBVV95cUxOZHZaWjZ5dTR1RzFVWGNKd1FnMHpoakdwcHFhc0ZhLWlsMEJnVEtuYVVSaE83b0FXWHh5LTJ6VGtRaXNES0FNa2Zuc2xyTHRxWE9feWVoYXFKR2NTcW5xcVh3d1BQWG5ObUF2dm1fcEozaUhVMldGM21rQUNjWi1BaFdJUDR4Q2J0M3NiNW91d3huckctdTdGVEozLVhyOGx1N1J0clVJdWpYNkdQSy14U2s4a1BfTVJoMFVkMXJ2eVprRk9NamYzYW5NOUcxRWhlYkpqLW1RUk5tdFhFTkh3MnVKSGY1UEdlY2RN?oc=5",
+        "historical:id:7fd90c3f68985ef4",
+        "historical:id:29a9978d3b0730cd",
+        "historical:id:696126c11d1ea1de",
+        "historical:id:10f5dbdb5d5b1ced",
+        "historical:id:bc377ad0cd8055ba",
+        "historical:id:834e853d4ffbcb7a",
+        "historical:id:4c5d39a4e8bd0291"
       ]
     }
   }
