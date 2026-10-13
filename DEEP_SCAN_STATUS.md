@@ -8,25 +8,16 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 
 - Authoritative V2 verified: **2695** (Main **1281** + Historical **1414**)
 - Automatic queue still needing V2 verification: **376** (Main **140** + Historical **236**)
-- Currently assigned to workers: **63** (Main **11** + Historical **52**)
+- Currently assigned to workers: **35** (Main **0** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **30**
-- Automatic queue pending and not yet assigned: **313**
+- Automatic queue pending and not yet assigned: **341**
 
 ## Worker lanes
 
 ### Worker A
 - Current package: `worker-a-20261013T080555Z-7de787fdf3cf`
-- Assigned unresolved records: **28**
-  1. `link:https://doi.org/10.1016/j.futures.2026.103882` — Harnessing the potential of transdisciplinary practice for the transformation of agri-food systems: A review of methodological challenges in participatory scenario development
-  2. `link:https://news.google.com/rss/articles/CBMiyAFBVV95cUxPNzVoTnhfS2lEWDBid2NMYlNWT1RKOGNjVzhlVmp5MXEtZkNheWdvVDNfRDY0bnhjblZRYkJqOHVjaVFoUjEtaUlYT3hxZG5yS1JURF92bVlqeUpXaTBvY3pYWHNQLVh1Y0dwYVk1Ml8yQWtXZmJHME1NU2phWUZyVDR3QXROQ01WbDl2YVFfVGhWTnRJZ04zekRXWkMtZnRQSVFzYy1nZEZaaV84dVVQVHZaSGFIMUNwTnJ1UXoydTdyTi1ISWFIag?oc=5` — Funding Radar: Horizon Europe opens €225M call for advanced materials and manufacturing
-  3. `link:https://news.google.com/rss/articles/CBMixwFBVV95cUxQVDBWck9JVUdXWFNsd0ktN25VNnRtb1VpUEZIQm0wVzZQUlZZMGI3VWZlcmh2TjlHTDBXeTE1Z2U2eVhEREhoQk9QcWlzTWhzLUhHTmx0bHZRS0tRSjNMaGw2TWp1a2hwRDFaYUNjRENxMVdLbm1fakg4V201Q280VE9jS0JFQzBiMlpla1oyNi1QOVJ3Z2Z6ZzB6dERyb1pjMk0xY3JJMTlLcGhhYzc0RnZENGd6dmFmbi1LdFR0NW0zN2RrQkcw?oc=5` — Europe must have stable, long-term funding for ocean intelligence, say researchers
-  4. `link:https://news.google.com/rss/articles/CBMixwFBVV95cUxOU1hQZ19oVmQ0MVczTWd3X0JkRWZYYXI2cFpMUmwwVHJoeUpDaEFjY1o3ZlFraUNGdTFCV0xfYUt2ZWEzd0ZaS0JBdDRJTXo4VG5PclJRNWNYeUlfUHc5TFFRa05oVkJfNGNTTXUwaWZkNzVFdFBIeHVJZ0VhMl9mQmk0TW9RWk9ST3N1cTdCRWZRNXZEeWFkYS1SN2R5cGxPREZHeDhSekxxeUowMkZWUEF1clN1bmRPUW44alZBa2IzRmFNSnIw?oc=5` — Europe needs a more ‘systemic’ approach to innovation, says former ASML boss
-  5. `link:https://news.google.com/rss/articles/CBMi7gFBVV95cUxOM0lyZi00R1o2RkMwVVZwR0hmVk00RS02Z25oelBRcXA4Sm1VajlocU9iNmtscEZXQW1BU2lhS3lOTnBpaWpiNFk3c1ctU2VLVzlRa0Foa3pxOFlHaFk3VFVZOFFMVm5aeEY2anZMbnpIQkZ2TjNEanhWd1BTZkVuTXpTZkFMMlpnSS1hZnR3Ym91RlRWWDE0SGNPWGdQNW9xUWhxS092N1AzZjFZNm5pZ3ZzVTBXajdVV0s2S2xYV3BpbDhnNWc2TTd0S2NObDlXamlGWFdhSmluYmE3QjMxZ0g1LTlFZ1oxTFprMU93?oc=5` — Multilateralism: Council sets EU position ahead of climate change and biodiversity summits
-  6. `link:https://news.google.com/rss/articles/CBMiugFBVV95cUxPNjdhend3SVJHZEowVzd3YjVsQk9jUmpiTGQyQk4tRnFpZzJ6a0c3WkV0NnJlLXdycWhIZUJFTFNPcjJwcE1KQjljdUpiX3V1WmxoUXRGZlJjUzc4U0FXaE1aRlVUVk04SEdENEI1d21PZFZpUzBzM20wUTBFcEFMYktsdU1VbTIzV0ttNFJSQzNlZ1Q1dE9XZFJpaHRjMV9rc0ZTdzVqemxXTmJqQjhRVS03N1RLVmgtU3c?oc=5` — Ai Stratis, Greece’s pioneer in energy self-sufficiency with renewable
-  7. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTE9JSzN6VGdyLU9hbDExaEg0VGRyRjNFYmtWWFJHYkpaSTZ4WElvSWlaWEFqZkpJT2Z4OXlESkhMMk9KVjFtcThxTjc2NmZES1lCamFlSlI3eDkzejFER2cxallCdkJBMzJQdWpZSm9kUUhIWUUxWndGNi15QzN0UQ?oc=5` — Research for EMPL Committee - Skilled labour mobility in the EU: pathways, challenges, and strategies for attraction and retention
-  8. `link:https://news.google.com/rss/articles/CBMisgFBVV95cUxPblVTZ3pDRVFYTXluNkVjTXNOcUFDZ0ktT2huaEsyUWRoeFdSSVdOazh5TUVaU2ZTZ1hZNnZzQ0ViTm9sTVd6M01lbWN2TUVST080QWZKYW5yUWxHTXNXclN4blV6Q2R0eXZRczIybEFyUG5iWHFmOUNxekc0SURPT1prMDJQRnl4OFpDMTZ4UlE1WDNGQ001Wmo4YklIdFNfS0ZWSTRtV3hLNzFxNFMtMm1R?oc=5` — China Says Hybrid-Car Deal With Europe to Ensure ‘Export Space’
-  - … plus 20 more in the package manifest
+- Assigned unresolved records: **0**
 
 ### Worker B
 - Current package: `worker-b-20261009T080214Z-5994737f044d`
