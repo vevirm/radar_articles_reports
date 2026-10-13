@@ -7,8 +7,8 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **2693** (Main **1279** + Historical **1414**)
-- Automatic queue still needing V2 verification: **348** (Main **129** + Historical **219**)
-- Currently assigned to workers: **35** (Main **0** + Historical **35**)
+- Automatic queue still needing V2 verification: **378** (Main **142** + Historical **236**)
+- Currently assigned to workers: **65** (Main **13** + Historical **52**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **30**
 - Automatic queue pending and not yet assigned: **313**
@@ -16,8 +16,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261012T071102Z-11059d3e5d44`
-- Assigned unresolved records: **0**
+- Current package: `worker-a-20261013T074150Z-53ba77c1640b`
+- Assigned unresolved records: **30**
+  1. `link:https://www.businessfinland.fi/globalassets/julkaisut/3_2016_reaping-benefits-of-eu-framework-programmes.pdf` — Reaping Benefits of EU Framework Programmes - Evaluation of Teke's Safety and Security and Fuel Cell Programmes
+  2. `link:https://erc.europa.eu/sites/default/files/2023-12/Mapping-ERC-Frontier-Research-factsheet.pdf` — Frontier research for biodiversity
+  3. `link:https://era.gv.at/news-items/eu-report-highlights-science-strength-but-warns-of-innovation-gap/` — EU report highlights science strength but warns of innovation gap
+  4. `link:https://doi.org/10.1016/j.futures.2026.103882` — Harnessing the potential of transdisciplinary practice for the transformation of agri-food systems: A review of methodological challenges in participatory scenario development
+  5. `link:https://news.google.com/rss/articles/CBMiyAFBVV95cUxPNzVoTnhfS2lEWDBid2NMYlNWT1RKOGNjVzhlVmp5MXEtZkNheWdvVDNfRDY0bnhjblZRYkJqOHVjaVFoUjEtaUlYT3hxZG5yS1JURF92bVlqeUpXaTBvY3pYWHNQLVh1Y0dwYVk1Ml8yQWtXZmJHME1NU2phWUZyVDR3QXROQ01WbDl2YVFfVGhWTnRJZ04zekRXWkMtZnRQSVFzYy1nZEZaaV84dVVQVHZaSGFIMUNwTnJ1UXoydTdyTi1ISWFIag?oc=5` — Funding Radar: Horizon Europe opens €225M call for advanced materials and manufacturing
+  6. `link:https://news.google.com/rss/articles/CBMixwFBVV95cUxQVDBWck9JVUdXWFNsd0ktN25VNnRtb1VpUEZIQm0wVzZQUlZZMGI3VWZlcmh2TjlHTDBXeTE1Z2U2eVhEREhoQk9QcWlzTWhzLUhHTmx0bHZRS0tRSjNMaGw2TWp1a2hwRDFaYUNjRENxMVdLbm1fakg4V201Q280VE9jS0JFQzBiMlpla1oyNi1QOVJ3Z2Z6ZzB6dERyb1pjMk0xY3JJMTlLcGhhYzc0RnZENGd6dmFmbi1LdFR0NW0zN2RrQkcw?oc=5` — Europe must have stable, long-term funding for ocean intelligence, say researchers
+  7. `link:https://news.google.com/rss/articles/CBMixwFBVV95cUxOU1hQZ19oVmQ0MVczTWd3X0JkRWZYYXI2cFpMUmwwVHJoeUpDaEFjY1o3ZlFraUNGdTFCV0xfYUt2ZWEzd0ZaS0JBdDRJTXo4VG5PclJRNWNYeUlfUHc5TFFRa05oVkJfNGNTTXUwaWZkNzVFdFBIeHVJZ0VhMl9mQmk0TW9RWk9ST3N1cTdCRWZRNXZEeWFkYS1SN2R5cGxPREZHeDhSekxxeUowMkZWUEF1clN1bmRPUW44alZBa2IzRmFNSnIw?oc=5` — Europe needs a more ‘systemic’ approach to innovation, says former ASML boss
+  8. `link:https://news.google.com/rss/articles/CBMi7gFBVV95cUxOM0lyZi00R1o2RkMwVVZwR0hmVk00RS02Z25oelBRcXA4Sm1VajlocU9iNmtscEZXQW1BU2lhS3lOTnBpaWpiNFk3c1ctU2VLVzlRa0Foa3pxOFlHaFk3VFVZOFFMVm5aeEY2anZMbnpIQkZ2TjNEanhWd1BTZkVuTXpTZkFMMlpnSS1hZnR3Ym91RlRWWDE0SGNPWGdQNW9xUWhxS092N1AzZjFZNm5pZ3ZzVTBXajdVV0s2S2xYV3BpbDhnNWc2TTd0S2NObDlXamlGWFdhSmluYmE3QjMxZ0g1LTlFZ1oxTFprMU93?oc=5` — Multilateralism: Council sets EU position ahead of climate change and biodiversity summits
+  - … plus 22 more in the package manifest
 
 ### Worker B
 - Current package: `worker-b-20261009T080214Z-5994737f044d`
