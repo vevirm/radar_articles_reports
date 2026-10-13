@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-12T06:52:14Z",
+  "generated_at": "2026-10-13T07:49:34Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -233033,8 +233033,190 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.businessfinland.fi/globalassets/julkaisut/3_2016_reaping-benefits-of-eu-framework-programmes.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "fba46c7a",
+      "identity_hash": "ad4dccface8dabac",
+      "reader_title": "Reaping Benefits of EU Framework Programmes - Evaluation of Teke's Safety and Security and Fuel Cell Programmes",
+      "reader_what": "The commissioned evaluation assesses how two Finnish Tekes programmes interacted with EU framework research collaboration.",
+      "reader_why": "A Route 3: substantive, empirical assessment of European R&I programme participation and funding mechanisms.",
+      "reader_more": "The commissioned evaluation assesses how two Finnish Tekes programmes interacted with EU framework research collaboration. Programme participant evidence and case studies support evaluation conclusions, not experimental causal attribution.",
+      "deep_analysis": {
+        "work_kind": "European R&I analysis",
+        "research_question": "What does the original work establish for European research and innovation?",
+        "main_finding": "The commissioned evaluation assesses how two Finnish Tekes programmes interacted with EU framework research collaboration.",
+        "method_or_basis": "Substantive source text archived with the input work package, checked against its title and content.",
+        "qualification": "Programme participant evidence and case studies support evaluation conclusions, not experimental causal attribution.",
+        "radar_relevance": "A Route 3: substantive, empirical assessment of European R&I programme participation and funding mechanisms.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Reader-facing record URL: https://www.businessfinland.fi/globalassets/julkaisut/3_2016_reaping-benefits-of-eu-framework-programmes.pdf; matching substantive source content archived in package."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Archived source_material read_mode=pdf_excerpt; matching text from https://www.businessfinland.fi/globalassets/julkaisut/3_2016_reaping-benefits-of-eu-framework-programmes.pdf inspected for author/work identity and substance."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_evaluation_pdf_excerpt",
+            "url": "https://www.businessfinland.fi/globalassets/julkaisut/3_2016_reaping-benefits-of-eu-framework-programmes.pdf",
+            "title": "Reaping Benefits of EU Framework Programmes - Evaluation of Teke's Safety and Security and Fuel Cell Programmes",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching substantial source text supplied with the batch and checked against work identity."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: substantive, empirical assessment of European R&I programme participation and funding mechanisms."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied duplicate key was established to be the same work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-13T07:49:34Z",
+      "deep_scan_package_id": "worker-a-20261013T074150Z-53ba77c1640b",
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Tekes / external evaluators",
+            "class": "national_funder"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2026-10-12",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Programme participant evidence and case studies support evaluation conclusions, not experimental causal attribution.",
+          "text": "The commissioned evaluation assesses how two Finnish Tekes programmes interacted with EU framework research collaboration.",
+          "confidence": "high",
+          "record_key": "link:https://www.businessfinland.fi/globalassets/julkaisut/3_2016_reaping-benefits-of-eu-framework-programmes.pdf",
+          "merit": 66,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:ad4dccface8dabac:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://erc.europa.eu/sites/default/files/2023-12/Mapping-ERC-Frontier-Research-factsheet.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "f058daeb",
+      "identity_hash": "e233cce5665f16eb",
+      "reader_title": "Frontier research for biodiversity",
+      "reader_what": "The ERC mapped over 230 biodiversity projects, funded at about €469 million, to research-policy interfaces and biodiversity objectives.",
+      "reader_why": "A Route 3: substantive assessment of EU-funded research, knowledge translation and policy interface.",
+      "reader_more": "The ERC mapped over 230 biodiversity projects, funded at about €469 million, to research-policy interfaces and biodiversity objectives. This mapping is a selected portfolio and explicitly is not a policy-recommendation report.",
+      "deep_analysis": {
+        "work_kind": "European R&I analysis",
+        "research_question": "What does the original work establish for European research and innovation?",
+        "main_finding": "The ERC mapped over 230 biodiversity projects, funded at about €469 million, to research-policy interfaces and biodiversity objectives.",
+        "method_or_basis": "Substantive source text archived with the input work package, checked against its title and content.",
+        "qualification": "This mapping is a selected portfolio and explicitly is not a policy-recommendation report.",
+        "radar_relevance": "A Route 3: substantive assessment of EU-funded research, knowledge translation and policy interface.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Reader-facing record URL: https://erc.europa.eu/sites/default/files/2023-12/Mapping-ERC-Frontier-Research-factsheet.pdf; matching substantive source content archived in package."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Archived source_material read_mode=pdf_excerpt; matching text from https://erc.europa.eu/sites/default/files/2023-12/Mapping-ERC-Frontier-Research-factsheet.pdf inspected for author/work identity and substance."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "source_pdf_excerpt",
+            "url": "https://erc.europa.eu/sites/default/files/2023-12/Mapping-ERC-Frontier-Research-factsheet.pdf",
+            "title": "Frontier research for biodiversity",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching substantial source text supplied with the batch and checked against work identity."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: substantive assessment of EU-funded research, knowledge translation and policy interface."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No supplied duplicate key was established to be the same work."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-13T07:49:34Z",
+      "deep_scan_package_id": "worker-a-20261013T074150Z-53ba77c1640b",
+      "claims": [
+        {
+          "object": "research.knowledge_transfer",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Research Council",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2026-10-11",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "This mapping is a selected portfolio and explicitly is not a policy-recommendation report.",
+          "text": "The ERC mapped over 230 biodiversity projects, funded at about €469 million, to research-policy interfaces and biodiversity objectives.",
+          "confidence": "high",
+          "record_key": "link:https://erc.europa.eu/sites/default/files/2023-12/Mapping-ERC-Frontier-Research-factsheet.pdf",
+          "merit": 99,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:e233cce5665f16eb:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-12T06:52:14Z"
+  "claims_updated_at": "2026-10-13T07:49:34Z"
 }
