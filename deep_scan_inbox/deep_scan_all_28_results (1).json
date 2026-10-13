@@ -1,0 +1,2635 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-a-20261013T080555Z-7de787fdf3cf",
+  "results": [
+    {
+      "record_key": "link:https://doi.org/10.1016/j.futures.2026.103882",
+      "source_hash": "24de32dd",
+      "identity_hash": "7ef7d0176ffc3ddb",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected supplied https://doi.org/10.1016/j.futures.2026.103882; Identified matching publisher content."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI https://doi.org/10.1016/j.futures.2026.103882 matched the publisher and authors."
+          },
+          {
+            "step": "publisher_or_primary_recovery",
+            "outcome": "success",
+            "note": "Recovered substantive matching work at https://www.sciencedirect.com/science/article/pii/S0016328726001242"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0016328726001242",
+            "title": "Participatory scenario methods need clearer inclusion and reporting",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching source located and evaluated; supplied scanner event dates are not automatically publication dates."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_TRANSFERABLE_METHOD",
+        "reason": "A mixed-method systematic review of 49 cases generates transferable design and reporting guidance for participatory scenario development; geographical relevance is not a condition of B."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-07-03"
+        },
+        "unset": [],
+        "reason": "Corrects publisher-supported publication date where applicable."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate substantiated in supplied duplicate hints."
+      },
+      "reader_title": "Participatory scenario methods need clearer inclusion and reporting",
+      "reader_what": "A review of 49 peer-reviewed European agri-food cases finds consumers underrepresented and documents weaknesses in stakeholder integration, researcher-role clarity and",
+      "reader_why": "The reported process-design lessons can inform participatory foresight beyond the agri-food setting.",
+      "reader_more": "The review codes four hypotheses concerning stakeholder involvement, integration, researchers’ roles, and outcomes. It recommends greater transparency and reflexive documentation. It does not demonstrate that any specific intervention has already transformed food systems.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed systematic methodological review",
+        "research_question": "How can this work inform EU R&I or transferable foresight?",
+        "main_finding": "A review of 49 peer-reviewed European agri-food cases finds consumers underrepresented and documents weaknesses in stakeholder integration, researcher-role clarity and reporting.",
+        "method_or_basis": "Mixed-method coding of 49 peer-reviewed participatory scenario development studies from 2000 onward.",
+        "qualification": "Findings are a synthesis of published cases, not a prospective experimental validation of improved outcomes.",
+        "radar_relevance": "A mixed-method systematic review of 49 cases generates transferable design and reporting guidance for participatory scenario development; geographical relevance is not a condition of B.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.scenario",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Bücheler and coauthors",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-07",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Findings are a synthesis of published cases, not a prospective experimental validation of improved outcomes.",
+          "text": "A review of 49 peer-reviewed European agri-food cases finds consumers underrepresented and documents weaknesses in stakeholder integration, researcher-role clarity and reporting.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiyAFBVV95cUxPNzVoTnhfS2lEWDBid2NMYlNWT1RKOGNjVzhlVmp5MXEtZkNheWdvVDNfRDY0bnhjblZRYkJqOHVjaVFoUjEtaUlYT3hxZG5yS1JURF92bVlqeUpXaTBvY3pYWHNQLVh1Y0dwYVk1Ml8yQWtXZmJHME1NU2phWUZyVDR3QXROQ01WbDl2YVFfVGhWTnRJZ04zekRXWkMtZnRQSVFzYy1nZEZaaV84dVVQVHZaSGFIMUNwTnJ1UXoydTdyTi1ISWFIag?oc=5",
+      "source_hash": "a6759c29",
+      "identity_hash": "c2c20f258e357ae2",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Inspected supplied https://news.google.com/rss/articles/CBMiyAFBVV95cUxPNzVoTnhfS2lEWDBid2NMYlNWT1RKOGNjVzhlVmp5MXEtZkNheWdvVDNfRDY0bnhjblZRYkJqOHVjaVFoUjEtaUlYT3hxZG5yS1JURF92bVlqeUpXaTBvY3pYWHNQLVh1Y0dwYVk1Ml8yQWtXZmJHME1NU2phWUZyVDR3QXROQ01WbDl2YVFfVGhWTnRJZ04zekRXWkMtZnRQSVFzYy1nZEZaaV84dVVQVHZaSGFIMUNwTnJ1UXoydTdyTi1ISWFIag?oc=5; Google News wrapper did not expose substantive source directly."
+          },
+          {
+            "step": "publisher_or_primary_recovery",
+            "outcome": "success",
+            "note": "Recovered substantive matching work at https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details-tr/HORIZON-CL4-2027-01-MAT-PROD-22"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_funding_portal",
+            "url": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/topic-details-tr/HORIZON-CL4-2027-01-MAT-PROD-22",
+            "title": "Horizon Europe advanced-materials research call opens",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching source located and evaluated; supplied scanner event dates are not automatically publication dates."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_VERIFIED_EU_RI_CHANGE",
+        "reason": "A newly opened EU Horizon Europe collaborative R&I funding call is a concrete instrument; the Commission portal independently records its October 13 opening."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-10-13"
+        },
+        "unset": [],
+        "reason": "Corrects publisher-supported publication date where applicable."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate substantiated in supplied duplicate hints."
+      },
+      "reader_title": "Horizon Europe advanced-materials research call opens",
+      "reader_what": "Horizon Europe opened a collaborative research call concerning advanced materials, industrial production, chemicals and critical raw materials; the reporting gives",
+      "reader_why": "It directly affects access to EU research funding and support for industrial materials research.",
+      "reader_more": "Science|Business reports an approximately €225 million total call allocation. Commission portal topic pages independently show the relevant HORIZON-CL4-2027-01 topics and an opening date of 13 October 2026. Opening does not mean funds have been awarded.",
+      "deep_analysis": {
+        "work_kind": "current funding call",
+        "research_question": "",
+        "main_finding": "Horizon Europe opened a collaborative research call concerning advanced materials, industrial production, chemicals and critical raw materials; the reporting gives an indicative call envelope of €224.7 million.",
+        "method_or_basis": "Science|Business report cross-checked against the Commission Funding & Tenders Portal topic opening notice.",
+        "qualification": "€224.7 million is a reported total across topics, not verified grant disbursement.",
+        "radar_relevance": "A newly opened EU Horizon Europe collaborative R&I funding call is a concrete instrument; the Commission portal independently records its October 13 opening.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "funding.route",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "call_open",
+          "status_date": "2026-10-13",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "€224.7 million is a reported total across topics, not verified grant disbursement.",
+          "text": "Horizon Europe opened a collaborative research call concerning advanced materials, industrial production, chemicals and critical raw materials; the reporting gives an indicative call envelope of €224.7 million.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMixwFBVV95cUxQVDBWck9JVUdXWFNsd0ktN25VNnRtb1VpUEZIQm0wVzZQUlZZMGI3VWZlcmh2TjlHTDBXeTE1Z2U2eVhEREhoQk9QcWlzTWhzLUhHTmx0bHZRS0tRSjNMaGw2TWp1a2hwRDFaYUNjRENxMVdLbm1fakg4V201Q280VE9jS0JFQzBiMlpla1oyNi1QOVJ3Z2Z6ZzB6dERyb1pjMk0xY3JJMTlLcGhhYzc0RnZENGd6dmFmbi1LdFR0NW0zN2RrQkcw?oc=5",
+      "source_hash": "75dc0b65",
+      "identity_hash": "7e0a01fe04daad2f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Inspected supplied https://news.google.com/rss/articles/CBMixwFBVV95cUxQVDBWck9JVUdXWFNsd0ktN25VNnRtb1VpUEZIQm0wVzZQUlZZMGI3VWZlcmh2TjlHTDBXeTE1Z2U2eVhEREhoQk9QcWlzTWhzLUhHTmx0bHZRS0tRSjNMaGw2TWp1a2hwRDFaYUNjRENxMVdLbm1fakg4V201Q280VE9jS0JFQzBiMlpla1oyNi1QOVJ3Z2Z6ZzB6dERyb1pjMk0xY3JJMTlLcGhhYzc0RnZENGd6dmFmbi1LdFR0NW0zN2RrQkcw?oc=5; Google News wrapper did not expose substantive source directly."
+          },
+          {
+            "step": "publisher_or_primary_recovery",
+            "outcome": "success",
+            "note": "Recovered substantive matching work at https://sciencebusiness.net/news/r-d-funding/oceans/europe-must-have-stable-long-term-funding-ocean-intelligence-say-researchers"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "substantive_news_interview",
+            "url": "https://sciencebusiness.net/news/r-d-funding/oceans/europe-must-have-stable-long-term-funding-ocean-intelligence-say-researchers",
+            "title": "Researchers seek stable EU ocean-intelligence funding",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching source located and evaluated; supplied scanner event dates are not automatically publication dates."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_ADVOCACY_NOT_ACTION",
+        "reason": "The article verifies a demand for a dedicated budget line, not a newly enacted ocean-research funding allocation or binding EU policy. C requires a substantive new development; no such adoption is substantiated."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-10-13"
+        },
+        "unset": [],
+        "reason": "Corrects publisher-supported publication date where applicable."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate substantiated in supplied duplicate hints."
+      },
+      "reader_title": "Researchers seek stable EU ocean-intelligence funding",
+      "reader_what": "European marine research representatives advocated ring-fenced or long-term ocean-science support in the next EU research programme.",
+      "reader_why": "",
+      "reader_more": "The article presents concerns about uncertain placement of marine science funding within future programmes. The advocated budget line is not presented as approved.",
+      "deep_analysis": {
+        "work_kind": "news report on advocacy",
+        "research_question": "",
+        "main_finding": "European marine research representatives advocated ring-fenced or long-term ocean-science support in the next EU research programme.",
+        "method_or_basis": "Named interview with Niall McDonough, Marine Institute, about an unadopted budget idea.",
+        "qualification": "No new funding allocation or policy adoption is established by the interview.",
+        "radar_relevance": "The article verifies a demand for a dedicated budget line, not a newly enacted ocean-research funding allocation or binding EU policy. C requires a substantive new development; no such adoption is substantiated.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMixwFBVV95cUxOU1hQZ19oVmQ0MVczTWd3X0JkRWZYYXI2cFpMUmwwVHJoeUpDaEFjY1o3ZlFraUNGdTFCV0xfYUt2ZWEzd0ZaS0JBdDRJTXo4VG5PclJRNWNYeUlfUHc5TFFRa05oVkJfNGNTTXUwaWZkNzVFdFBIeHVJZ0VhMl9mQmk0TW9RWk9ST3N1cTdCRWZRNXZEeWFkYS1SN2R5cGxPREZHeDhSekxxeUowMkZWUEF1clN1bmRPUW44alZBa2IzRmFNSnIw?oc=5",
+      "source_hash": "2ca0957d",
+      "identity_hash": "bf873f65457fc860",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Inspected supplied https://news.google.com/rss/articles/CBMixwFBVV95cUxOU1hQZ19oVmQ0MVczTWd3X0JkRWZYYXI2cFpMUmwwVHJoeUpDaEFjY1o3ZlFraUNGdTFCV0xfYUt2ZWEzd0ZaS0JBdDRJTXo4VG5PclJRNWNYeUlfUHc5TFFRa05oVkJfNGNTTXUwaWZkNzVFdFBIeHVJZ0VhMl9mQmk0TW9RWk9ST3N1cTdCRWZRNXZEeWFkYS1SN2R5cGxPREZHeDhSekxxeUowMkZWUEF1clN1bmRPUW44alZBa2IzRmFNSnIw?oc=5; Google News wrapper did not expose substantive source directly."
+          },
+          {
+            "step": "publisher_or_primary_recovery",
+            "outcome": "success",
+            "note": "Recovered substantive matching work at https://sciencebusiness.net/news/r-d-funding/horizon-europe/europe-needs-more-systemic-approach-innovation-says-former-asml-boss"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "substantive_news_interview",
+            "url": "https://sciencebusiness.net/news/r-d-funding/horizon-europe/europe-needs-more-systemic-approach-innovation-says-former-asml-boss",
+            "title": "Former ASML chief urges end-to-end innovation support",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matching source located and evaluated; supplied scanner event dates are not automatically publication dates."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_COMMENTARY_NOT_CHANGE",
+        "reason": "The verified report documents a former executive’s recommendations for a systemic approach to European innovation; it does not substantiate a new EU policy decision, instrument, or implemented change."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-10-13"
+        },
+        "unset": [],
+        "reason": "Corrects publisher-supported publication date where applicable."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact duplicate substantiated in supplied duplicate hints."
+      },
+      "reader_title": "Former ASML chief urges end-to-end innovation support",
+      "reader_what": "Peter Wennink argued that Europe should support innovation across both early and later technology-readiness stages and encourage public-private collaboration.",
+      "reader_why": "",
+      "reader_more": "The interview is a substantive opinion about innovation-policy design but not itself an official action. It should not be mislabelled as completed EU reform.",
+      "deep_analysis": {
+        "work_kind": "policy interview",
+        "research_question": "",
+        "main_finding": "Peter Wennink argued that Europe should support innovation across both early and later technology-readiness stages and encourage public-private collaboration.",
+        "method_or_basis": "Direct interview with former ASML chief Peter Wennink reported by Science|Business.",
+        "qualification": "Normative policy recommendations are not evidence that European support or state-aid rules changed.",
+        "radar_relevance": "The verified report documents a former executive’s recommendations for a systemic approach to European innovation; it does not substantiate a new EU policy decision, instrument, or implemented change.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMi7gFBVV95cUxOM0lyZi00R1o2RkMwVVZwR0hmVk00RS02Z25oelBRcXA4Sm1VajlocU9iNmtscEZXQW1BU2lhS3lOTnBpaWpiNFk3c1ctU2VLVzlRa0Foa3pxOFlHaFk3VFVZOFFMVm5aeEY2anZMbnpIQkZ2TjNEanhWd1BTZkVuTXpTZkFMMlpnSS1hZnR3Ym91RlRWWDE0SGNPWGdQNW9xUWhxS092N1AzZjFZNm5pZ3ZzVTBXajdVV0s2S2xYV3BpbDhnNWc2TTd0S2NObDlXamlGWFdhSmluYmE3QjMxZ0g1LTlFZ1oxTFprMU93?oc=5",
+      "source_hash": "f123536e",
+      "identity_hash": "86c807a17277cee2",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied https://news.google.com/rss/articles/CBMi7gFBVV95cUxOM0lyZi00R1o2RkMwVVZwR0hmVk00RS02Z25oelBRcXA4Sm1VajlocU9iNmtscEZXQW1BU2lhS3lOTnBpaWpiNFk3c1ctU2VLVzlRa0Foa3pxOFlHaFk3VFVZOFFMVm5aeEY2anZMbnpIQkZ2TjNEanhWd1BTZkVuTXpTZkFMMlpnSS1hZnR3Ym91RlRWWDE0SGNPWGdQNW9xUWhxS092N1AzZjFZNm5pZ3ZzVTBXajdVV0s2S2xYV3BpbDhnNWc2TTd0S2NObDlXamlGWFdhSmluYmE3QjMxZ0g1LTlFZ1oxTFprMU93?oc=5; matching source material recovered."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "unavailable",
+            "note": "Scanner material mode=stored_only; recovered 0 characters at no final URL."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied for Multilateralism: Council sets EU position ahead of climate change and biodiversity summits"
+          },
+          {
+            "step": "publisher_or_primary_recovery",
+            "outcome": "success",
+            "note": "Examined matching https://www.consilium.europa.eu/en/press/press-releases/?topic=150276"
+          },
+          {
+            "step": "repository_or_institutional_recovery",
+            "outcome": "not_applicable",
+            "note": "Substantive publisher/first-party material recovered; repository recovery unnecessary."
+          },
+          {
+            "step": "title_author_exact_search",
+            "outcome": "success",
+            "note": "Exact work identity: Multilateralism: Council sets EU position ahead of climate change and biodiversity summits; matched source URL."
+          },
+          {
+            "step": "secondary_crosscheck",
+            "outcome": "not_applicable",
+            "note": "Primary material available; secondary substitution unnecessary."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_document",
+            "url": "https://www.consilium.europa.eu/en/press/press-releases/?topic=150276",
+            "title": "Multilateralism: Council sets EU position ahead of climate change and biodiversity summits",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Work identity and content compared to recovered institutional or publisher material."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_CLIMATE_DIPLOMACY_NOT_RI",
+        "reason": "This is diplomatic positioning; no specific new European research funding, instrument or technology-development mechanism is established."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identity-level duplication evident in supplied candidate list."
+      },
+      "reader_title": "Multilateralism: Council sets EU position ahead of climate change and biodiversity summits",
+      "reader_what": "The Council adopted its negotiating positions for forthcoming climate and biodiversity summits.",
+      "reader_why": "",
+      "reader_more": "The Council adopted its negotiating positions for forthcoming climate and biodiversity summits. This is diplomatic positioning; no specific new European research funding, instrument or technology-development mechanism is established. This finding is limited to the source material and its documented period.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "The Council adopted its negotiating positions for forthcoming climate and biodiversity summits.",
+        "method_or_basis": "Publication and official source examination",
+        "qualification": "This is diplomatic positioning; no specific new European research funding, instrument or technology-development mechanism is established.",
+        "radar_relevance": "This is diplomatic positioning; no specific new European research funding, instrument or technology-development mechanism is established.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiugFBVV95cUxPNjdhend3SVJHZEowVzd3YjVsQk9jUmpiTGQyQk4tRnFpZzJ6a0c3WkV0NnJlLXdycWhIZUJFTFNPcjJwcE1KQjljdUpiX3V1WmxoUXRGZlJjUzc4U0FXaE1aRlVUVk04SEdENEI1d21PZFZpUzBzM20wUTBFcEFMYktsdU1VbTIzV0ttNFJSQzNlZ1Q1dE9XZFJpaHRjMV9rc0ZTdzVqemxXTmJqQjhRVS03N1RLVmgtU3c?oc=5",
+      "source_hash": "3d6f904b",
+      "identity_hash": "57e580a05f245365",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied https://news.google.com/rss/articles/CBMiugFBVV95cUxPNjdhend3SVJHZEowVzd3YjVsQk9jUmpiTGQyQk4tRnFpZzJ6a0c3WkV0NnJlLXdycWhIZUJFTFNPcjJwcE1KQjljdUpiX3V1WmxoUXRGZlJjUzc4U0FXaE1aRlVUVk04SEdENEI1d21PZFZpUzBzM20wUTBFcEFMYktsdU1VbTIzV0ttNFJSQzNlZ1Q1dE9XZFJpaHRjMV9rc0ZTdzVqemxXTmJqQjhRVS03N1RLVmgtU3c?oc=5; matching source material recovered."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "unavailable",
+            "note": "Scanner material mode=stored_only; recovered 0 characters at no final URL."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied for Ai Stratis, Greece’s pioneer in energy self-sufficiency with renewable"
+          },
+          {
+            "step": "publisher_or_primary_recovery",
+            "outcome": "success",
+            "note": "Examined matching https://www.euronews.com/video/2026/10/12/agios-efstratios-the-first-greek-island-to-get-all-its-electricity-from-renewables"
+          },
+          {
+            "step": "repository_or_institutional_recovery",
+            "outcome": "not_applicable",
+            "note": "Substantive publisher/first-party material recovered; repository recovery unnecessary."
+          },
+          {
+            "step": "title_author_exact_search",
+            "outcome": "success",
+            "note": "Exact work identity: Ai Stratis, Greece’s pioneer in energy self-sufficiency with renewable; matched source URL."
+          },
+          {
+            "step": "secondary_crosscheck",
+            "outcome": "not_applicable",
+            "note": "Primary material available; secondary substitution unnecessary."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_publisher_article",
+            "url": "https://www.euronews.com/video/2026/10/12/agios-efstratios-the-first-greek-island-to-get-all-its-electricity-from-renewables",
+            "title": "Ai Stratis, Greece’s pioneer in energy self-sufficiency with renewable",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Work identity and content compared to recovered institutional or publisher material."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_LOCAL_DEPLOYMENT_NOT_SYSTEMIC_RI",
+        "reason": "The source describes local energy deployment, not a transferable new EU research instrument or substantiated wider R&I system change."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identity-level duplication evident in supplied candidate list."
+      },
+      "reader_title": "Ai Stratis, Greece’s pioneer in energy self-sufficiency with renewable",
+      "reader_what": "Agios Efstratios reports a transition to over 90% renewable electricity using an EU-funded installation.",
+      "reader_why": "",
+      "reader_more": "Agios Efstratios reports a transition to over 90% renewable electricity using an EU-funded installation. The source describes local energy deployment, not a transferable new EU research instrument or substantiated wider R&I system change. This finding is limited to the source material and its documented period.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "Agios Efstratios reports a transition to over 90% renewable electricity using an EU-funded installation.",
+        "method_or_basis": "Publication and official source examination",
+        "qualification": "The source describes local energy deployment, not a transferable new EU research instrument or substantiated wider R&I system change.",
+        "radar_relevance": "The source describes local energy deployment, not a transferable new EU research instrument or substantiated wider R&I system change.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMifkFVX3lxTE9JSzN6VGdyLU9hbDExaEg0VGRyRjNFYmtWWFJHYkpaSTZ4WElvSWlaWEFqZkpJT2Z4OXlESkhMMk9KVjFtcThxTjc2NmZES1lCamFlSlI3eDkzejFER2cxallCdkJBMzJQdWpZSm9kUUhIWUUxWndGNi15QzN0UQ?oc=5",
+      "source_hash": "29815bd9",
+      "identity_hash": "b74c88266c2c4154",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "unavailable",
+            "note": "Supplied https://news.google.com/rss/articles/CBMifkFVX3lxTE9JSzN6VGdyLU9hbDExaEg0VGRyRjNFYmtWWFJHYkpaSTZ4WElvSWlaWEFqZkpJT2Z4OXlESkhMMk9KVjFtcThxTjc2NmZES1lCamFlSlI3eDkzejFER2cxallCdkJBMzJQdWpZSm9kUUhIWUUxWndGNi15QzN0UQ?oc=5; RSS link carries no source article text in package."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "unavailable",
+            "note": "Scanner material mode=stored_only; recovered 0 characters at no final URL."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied for Research for EMPL Committee - Skilled labour mobility in the EU: pathways, challenges, and"
+          },
+          {
+            "step": "publisher_or_primary_recovery",
+            "outcome": "unavailable",
+            "note": "Examined matching publisher candidate not recovered"
+          },
+          {
+            "step": "repository_or_institutional_recovery",
+            "outcome": "unavailable",
+            "note": "No authenticated repository copy established for Research for EMPL Committee - Skilled labour mobility in the EU: pathways, challenges, and."
+          },
+          {
+            "step": "title_author_exact_search",
+            "outcome": "unavailable",
+            "note": "Exact work identity: Research for EMPL Committee - Skilled labour mobility in the EU: pathways, challenges, and strategies for attraction and; no corresponding substantive source recovered."
+          },
+          {
+            "step": "secondary_crosscheck",
+            "outcome": "unavailable",
+            "note": "No independent substantive confirmation of precise work Research for EMPL Committee - Skilled labour mobility in the EU: pathways, challenges, and."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Publication metadata recognizable; full evidentiary retrieval remains outstanding."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "C",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Publication identity tentatively identifiable from supplied news metadata, but substantive original source was not recovered. The item must not be admitted without article-level evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identity-level duplication evident in supplied candidate list."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "Publication and official source examination",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMisgFBVV95cUxPblVTZ3pDRVFYTXluNkVjTXNOcUFDZ0ktT2huaEsyUWRoeFdSSVdOazh5TUVaU2ZTZ1hZNnZzQ0ViTm9sTVd6M01lbWN2TUVST080QWZKYW5yUWxHTXNXclN4blV6Q2R0eXZRczIybEFyUG5iWHFmOUNxekc0SURPT1prMDJQRnl4OFpDMTZ4UlE1WDNGQ001Wmo4YklIdFNfS0ZWSTRtV3hLNzFxNFMtMm1R?oc=5",
+      "source_hash": "d31999a1",
+      "identity_hash": "a4ac12c9160971ca",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "unavailable",
+            "note": "Supplied https://news.google.com/rss/articles/CBMisgFBVV95cUxPblVTZ3pDRVFYTXluNkVjTXNOcUFDZ0ktT2huaEsyUWRoeFdSSVdOazh5TUVaU2ZTZ1hZNnZzQ0ViTm9sTVd6M01lbWN2TUVST080QWZKYW5yUWxHTXNXclN4blV6Q2R0eXZRczIybEFyUG5iWHFmOUNxekc0SURPT1prMDJQRnl4OFpDMTZ4UlE1WDNGQ001Wmo4YklIdFNfS0ZWSTRtV3hLNzFxNFMtMm1R?oc=5; RSS link carries no source article text in package."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "unavailable",
+            "note": "Scanner material mode=stored_only; recovered 0 characters at no final URL."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied for China Says Hybrid-Car Deal With Europe to Ensure ‘Export Space’"
+          },
+          {
+            "step": "publisher_or_primary_recovery",
+            "outcome": "unavailable",
+            "note": "Examined matching publisher candidate not recovered"
+          },
+          {
+            "step": "repository_or_institutional_recovery",
+            "outcome": "unavailable",
+            "note": "No authenticated repository copy established for China Says Hybrid-Car Deal With Europe to Ensure ‘Export Space’."
+          },
+          {
+            "step": "title_author_exact_search",
+            "outcome": "unavailable",
+            "note": "Exact work identity: China Says Hybrid-Car Deal With Europe to Ensure ‘Export Space’; no corresponding substantive source recovered."
+          },
+          {
+            "step": "secondary_crosscheck",
+            "outcome": "unavailable",
+            "note": "No independent substantive confirmation of precise work China Says Hybrid-Car Deal With Europe to Ensure ‘Export Space’."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Publication metadata recognizable; full evidentiary retrieval remains outstanding."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "C",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Publication identity tentatively identifiable from supplied news metadata, but substantive original source was not recovered. The item must not be admitted without article-level evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identity-level duplication evident in supplied candidate list."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "Publication and official source examination",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMi2gFBVV95cUxOZE5ZM3ZtTlpCRVZYM0QzQmV1cWxaWkh5ZUx0UHQ2NmFZR0dkZGYxZVR6RFFnRUVqdXUxS1dmY2JlQXdRUXdqdGQ0bnE3bDN4M0pxSmlTOFN0eFZTTDF6aGg5NXJoT2N6Rl91bEpZZ25GeHh5WnNNc2R3UjU2b05uLVJyYXRPLXF2dExrZVI2Y2FDbU53R25lMnVnczl1dG84SlEteUVQS2V4X1FxRDRiUFMxbE8wdDdRNFBwY05ON1hkd2w2eDFVaTBUWF9IdmJBNWZDWjJvdm5TQQ?oc=5",
+      "source_hash": "d3a44203",
+      "identity_hash": "e8903c41bf140747",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied https://news.google.com/rss/articles/CBMi2gFBVV95cUxOZE5ZM3ZtTlpCRVZYM0QzQmV1cWxaWkh5ZUx0UHQ2NmFZR0dkZGYxZVR6RFFnRUVqdXUxS1dmY2JlQXdRUXdqdGQ0bnE3bDN4M0pxSmlTOFN0eFZTTDF6aGg5NXJoT2N6Rl91bEpZZ25GeHh5WnNNc2R3UjU2b05uLVJyYXRPLXF2dExrZVI2Y2FDbU53R25lMnVnczl1dG84SlEteUVQS2V4X1FxRDRiUFMxbE8wdDdRNFBwY05ON1hkd2w2eDFVaTBUWF9IdmJBNWZDWjJvdm5TQQ?oc=5; matching source material recovered."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "unavailable",
+            "note": "Scanner material mode=stored_only; recovered 0 characters at no final URL."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied for Model blitz at Paris motor show as Europe-China rivalry heats up"
+          },
+          {
+            "step": "publisher_or_primary_recovery",
+            "outcome": "success",
+            "note": "Examined matching https://www.reuters.com/business/autos-transportation/european-chinese-automakers-launch-product-blitz-paris-car-show-fight-market-2026-10-12/"
+          },
+          {
+            "step": "repository_or_institutional_recovery",
+            "outcome": "not_applicable",
+            "note": "Substantive publisher/first-party material recovered; repository recovery unnecessary."
+          },
+          {
+            "step": "title_author_exact_search",
+            "outcome": "success",
+            "note": "Exact work identity: Model blitz at Paris motor show as Europe-China rivalry heats up; matched source URL."
+          },
+          {
+            "step": "secondary_crosscheck",
+            "outcome": "not_applicable",
+            "note": "Primary material available; secondary substitution unnecessary."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_publisher_article",
+            "url": "https://www.reuters.com/business/autos-transportation/european-chinese-automakers-launch-product-blitz-paris-car-show-fight-market-2026-10-12/",
+            "title": "Model blitz at Paris motor show as Europe-China rivalry heats up",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Work identity and content compared to recovered institutional or publisher material."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_AUTO_SHOW_NOT_RI_CHANGE",
+        "reason": "A product-launch event is not itself an evidenced change in European R&I programmes, research capacity, or strategic technology policy."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identity-level duplication evident in supplied candidate list."
+      },
+      "reader_title": "Model blitz at Paris motor show as Europe-China rivalry heats up",
+      "reader_what": "Automakers introduced models at the Paris motor show amid heightened European-Chinese competition.",
+      "reader_why": "",
+      "reader_more": "Automakers introduced models at the Paris motor show amid heightened European-Chinese competition. A product-launch event is not itself an evidenced change in European R&I programmes, research capacity, or strategic technology policy. This finding is limited to the source material and its documented period.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "Automakers introduced models at the Paris motor show amid heightened European-Chinese competition.",
+        "method_or_basis": "Publication and official source examination",
+        "qualification": "A product-launch event is not itself an evidenced change in European R&I programmes, research capacity, or strategic technology policy.",
+        "radar_relevance": "A product-launch event is not itself an evidenced change in European R&I programmes, research capacity, or strategic technology policy.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://era.gv.at/news-items/eu-report-highlights-science-strength-but-warns-of-innovation-gap/",
+      "source_hash": "1dc8f474",
+      "identity_hash": "6c1b8410ff26a7b6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied https://era.gv.at/news-items/eu-report-highlights-science-strength-but-warns-of-innovation-gap/; matching source material recovered."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Scanner material mode=abstract_or_landing_page; recovered 1404 characters at https://era.gv.at/news-items/eu-report-highlights-science-strength-but-warns-of-innovation-gap/."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied for EU report highlights science strength but warns of innovation gap"
+          },
+          {
+            "step": "publisher_or_primary_recovery",
+            "outcome": "success",
+            "note": "Examined matching https://era.gv.at/news-items/eu-report-highlights-science-strength-but-warns-of-innovation-gap/"
+          },
+          {
+            "step": "repository_or_institutional_recovery",
+            "outcome": "not_applicable",
+            "note": "Substantive publisher/first-party material recovered; repository recovery unnecessary."
+          },
+          {
+            "step": "title_author_exact_search",
+            "outcome": "success",
+            "note": "Exact work identity: EU report highlights science strength but warns of innovation gap; matched source URL."
+          },
+          {
+            "step": "secondary_crosscheck",
+            "outcome": "not_applicable",
+            "note": "Primary material available; secondary substitution unnecessary."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_document",
+            "url": "https://era.gv.at/news-items/eu-report-highlights-science-strength-but-warns-of-innovation-gap/",
+            "title": "EU report highlights science strength but warns of innovation gap",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Work identity and content compared to recovered institutional or publisher material."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The underlying report addresses European R&I investment, fragmentation and scale-up, independently qualifying under A Route 3."
+      },
+      "metadata_correction": {
+        "fields": {
+          "type": "research/policy report commentary"
+        },
+        "unset": [],
+        "reason": "The ERA Portal entry is a news summary of a Commission report, not itself the underlying report."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identity-level duplication evident in supplied candidate list."
+      },
+      "reader_title": "EU report highlights science strength but warns of innovation gap",
+      "reader_what": "The Commission’s 2026 assessment identifies EU strengths in scientific output and structural problems translating research into commercial technologies.",
+      "reader_why": "The underlying report addresses European R&I investment, fragmentation and scale-up, independently qualifying under A Route 3.",
+      "reader_more": "The Commission’s 2026 assessment identifies EU strengths in scientific output and structural problems translating research into commercial technologies. The underlying report addresses European R&I investment, fragmentation and scale-up, independently qualifying under A Route 3. This finding is limited to the source material and its documented period.",
+      "deep_analysis": {
+        "work_kind": "analytical publication",
+        "research_question": "",
+        "main_finding": "The Commission’s 2026 assessment identifies EU strengths in scientific output and structural problems translating research into commercial technologies.",
+        "method_or_basis": "Publication and official source examination",
+        "qualification": "The underlying report addresses European R&I investment, fragmentation and scale-up, independently qualifying under A Route 3.",
+        "radar_relevance": "The underlying report addresses European R&I investment, fragmentation and scale-up, independently qualifying under A Route 3.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "innovation.system_performance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "evaluates",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-10-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The underlying report addresses European R&I investment, fragmentation and scale-up, independently qualifying under A Route 3.",
+          "text": "The Commission’s 2026 assessment identifies EU strengths in scientific output and structural problems translating research into commercial technologies.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMirwFBVV95cUxObDA1Y2FUSDRTWG5LaVZpYWI0c1hEellEVUx2eFdtVTdoZmluYXNBdHdwLTl2dTJhbjJ6NF9BeWQ2S1pWQmFMUlhUX1FUWEtYbWlkTHpadWpOdjNXV3k4djVoSFhEaUdrXzdXaTAtMWphQkhxbzBGTG1RMTBOTmo2N0dvdDYxYnBEamVTOHg0T25IZTZDWDNYMk9wWHhnMkkweGdueC1PXzlxNGJxWHlv?oc=5",
+      "source_hash": "a10ded52",
+      "identity_hash": "3cbdc61d78da9718",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "unavailable",
+            "note": "Supplied https://news.google.com/rss/articles/CBMirwFBVV95cUxObDA1Y2FUSDRTWG5LaVZpYWI0c1hEellEVUx2eFdtVTdoZmluYXNBdHdwLTl2dTJhbjJ6NF9BeWQ2S1pWQmFMUlhUX1FUWEtYbWlkTHpadWpOdjNXV3k4djVoSFhEaUdrXzdXaTAtMWphQkhxbzBGTG1RMTBOTmo2N0dvdDYxYnBEamVTOHg0T25IZTZDWDNYMk9wWHhnMkkweGdueC1PXzlxNGJxWHlv?oc=5; RSS link carries no source article text in package."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "unavailable",
+            "note": "Scanner material mode=stored_only; recovered 0 characters at no final URL."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied for Von der Leyen pitches AI as solution to reduce reporting for European businesses"
+          },
+          {
+            "step": "publisher_or_primary_recovery",
+            "outcome": "unavailable",
+            "note": "Examined matching publisher candidate not recovered"
+          },
+          {
+            "step": "repository_or_institutional_recovery",
+            "outcome": "unavailable",
+            "note": "No authenticated repository copy established for Von der Leyen pitches AI as solution to reduce reporting for European businesses."
+          },
+          {
+            "step": "title_author_exact_search",
+            "outcome": "unavailable",
+            "note": "Exact work identity: Von der Leyen pitches AI as solution to reduce reporting for European businesses; no corresponding substantive source recovered."
+          },
+          {
+            "step": "secondary_crosscheck",
+            "outcome": "unavailable",
+            "note": "No independent substantive confirmation of precise work Von der Leyen pitches AI as solution to reduce reporting for European businesses."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Publication metadata recognizable; full evidentiary retrieval remains outstanding."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "C",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Publication identity tentatively identifiable from supplied news metadata, but substantive original source was not recovered. The item must not be admitted without article-level evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identity-level duplication evident in supplied candidate list."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "Publication and official source examination",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:6c16498cea210b70",
+      "source_hash": "8dcdef65",
+      "identity_hash": "9db133e590e6a88b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied historical:id:6c16498cea210b70; matching source material recovered."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Scanner material mode=substantial_web_text; recovered 16285 characters at https://www.vinnova.se:443/en/innovation/6g--a-national-mission-to-strengthen-basic-research-applied-research-and-innovation/."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied for 6G – Next generation of wireless technology | Vinnova"
+          },
+          {
+            "step": "publisher_or_primary_recovery",
+            "outcome": "success",
+            "note": "Examined matching https://www.vinnova.se:443/en/innovation/6g--a-national-mission-to-strengthen-basic-research-applied-research-and-innovation/"
+          },
+          {
+            "step": "repository_or_institutional_recovery",
+            "outcome": "not_applicable",
+            "note": "Substantive publisher/first-party material recovered; repository recovery unnecessary."
+          },
+          {
+            "step": "title_author_exact_search",
+            "outcome": "not_applicable",
+            "note": "Exact work identity: 6G – Next generation of wireless technology | Vinnova; matching scanner-retrieved primary text available."
+          },
+          {
+            "step": "secondary_crosscheck",
+            "outcome": "not_applicable",
+            "note": "Primary material available; secondary substitution unnecessary."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.vinnova.se:443/en/innovation/6g--a-national-mission-to-strengthen-basic-research-applied-research-and-innovation/",
+            "title": "6G – Next generation of wireless technology | Vinnova",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Work identity and content compared to recovered institutional or publisher material."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_STATIC_PROGRAMME_PAGE",
+        "reason": "This programme information page is not an independent analytical European R&I evidence product (A Routes 1–3); an instrument announcement should be considered under C, not mislabelled A."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identity-level duplication evident in supplied candidate list."
+      },
+      "reader_title": "6G – Next generation of wireless technology | Vinnova",
+      "reader_what": "Vinnova describes a Swedish 6G research and innovation mission and its strategic aims.",
+      "reader_why": "",
+      "reader_more": "Vinnova describes a Swedish 6G research and innovation mission and its strategic aims. This programme information page is not an independent analytical European R&I evidence product (A Routes 1–3); an instrument announcement should be considered under C, not mislabelled A. This finding is limited to the source material and its documented period.",
+      "deep_analysis": {
+        "work_kind": "analytical publication",
+        "research_question": "",
+        "main_finding": "Vinnova describes a Swedish 6G research and innovation mission and its strategic aims.",
+        "method_or_basis": "Recovered first-party document text, as captured in source_material within the package",
+        "qualification": "This programme information page is not an independent analytical European R&I evidence product (A Routes 1–3); an instrument announcement should be considered under C, not mislabelled A.",
+        "radar_relevance": "This programme information page is not an independent analytical European R&I evidence product (A Routes 1–3); an instrument announcement should be considered under C, not mislabelled A.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:32ada5fba4ef66a2",
+      "source_hash": "fd3461c9",
+      "identity_hash": "9a7f1dfced4edcf3",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied historical:id:32ada5fba4ef66a2; matching source material recovered."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Scanner material mode=substantial_web_text; recovered 4126 characters at https://itif.org/publications/2025/10/24/beyond-copycat-regulation-playbook-for-korea-digital-partnerships/."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied for Beyond Copycat Regulation: A Playbook for Korea’s Digital Partnerships"
+          },
+          {
+            "step": "publisher_or_primary_recovery",
+            "outcome": "success",
+            "note": "Examined matching https://itif.org/publications/2025/10/24/beyond-copycat-regulation-playbook-for-korea-digital-partnerships/"
+          },
+          {
+            "step": "repository_or_institutional_recovery",
+            "outcome": "not_applicable",
+            "note": "Substantive publisher/first-party material recovered; repository recovery unnecessary."
+          },
+          {
+            "step": "title_author_exact_search",
+            "outcome": "not_applicable",
+            "note": "Exact work identity: Beyond Copycat Regulation: A Playbook for Korea’s Digital Partnerships; matching scanner-retrieved primary text available."
+          },
+          {
+            "step": "secondary_crosscheck",
+            "outcome": "not_applicable",
+            "note": "Primary material available; secondary substitution unnecessary."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://itif.org/publications/2025/10/24/beyond-copycat-regulation-playbook-for-korea-digital-partnerships/",
+            "title": "Beyond Copycat Regulation: A Playbook for Korea’s Digital Partnerships",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Work identity and content compared to recovered institutional or publisher material."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_ADVOCACY_NOT_EU_RI_EVIDENCE",
+        "reason": "This opinion essay presents prescriptions for Korea; incidental EU regulatory comparison does not constitute substantive European R&I-system research under A Routes 1–3."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identity-level duplication evident in supplied candidate list."
+      },
+      "reader_title": "Beyond Copycat Regulation: A Playbook for Korea’s Digital Partnerships",
+      "reader_what": "ITIF argues for South Korea to cooperate with partners on technology standards, R&D and talent rather than importing European-style rules.",
+      "reader_why": "",
+      "reader_more": "ITIF argues for South Korea to cooperate with partners on technology standards, R&D and talent rather than importing European-style rules. This opinion essay presents prescriptions for Korea; incidental EU regulatory comparison does not constitute substantive European R&I-system research under A Routes 1–3. This finding is limited to the source material and its documented period.",
+      "deep_analysis": {
+        "work_kind": "analytical publication",
+        "research_question": "",
+        "main_finding": "ITIF argues for South Korea to cooperate with partners on technology standards, R&D and talent rather than importing European-style rules.",
+        "method_or_basis": "Recovered first-party document text, as captured in source_material within the package",
+        "qualification": "This opinion essay presents prescriptions for Korea; incidental EU regulatory comparison does not constitute substantive European R&I-system research under A Routes 1–3.",
+        "radar_relevance": "This opinion essay presents prescriptions for Korea; incidental EU regulatory comparison does not constitute substantive European R&I-system research under A Routes 1–3.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:c035a1c858e7bd8b",
+      "source_hash": "96a30fff",
+      "identity_hash": "6453dfccde161eb6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied historical:id:c035a1c858e7bd8b; matching source material recovered."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Scanner material mode=substantial_web_text; recovered 15234 characters at https://vgmu.hse.ru/ru/article/view/28454."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied for NETWORK GOVERNANCE OF SCIENTIFIC AND TECHNOLOGICAL DEVELOPMENT BASED ON S&T FORESIGHT: JAP"
+          },
+          {
+            "step": "publisher_or_primary_recovery",
+            "outcome": "success",
+            "note": "Examined matching https://vgmu.hse.ru/ru/article/view/28454"
+          },
+          {
+            "step": "repository_or_institutional_recovery",
+            "outcome": "not_applicable",
+            "note": "Substantive publisher/first-party material recovered; repository recovery unnecessary."
+          },
+          {
+            "step": "title_author_exact_search",
+            "outcome": "not_applicable",
+            "note": "Exact work identity: NETWORK GOVERNANCE OF SCIENTIFIC AND TECHNOLOGICAL DEVELOPMENT BASED ON S&T FORESIGHT: JAPAN`S EXPERIENCE; matching scanner-retrieved primary text available."
+          },
+          {
+            "step": "secondary_crosscheck",
+            "outcome": "not_applicable",
+            "note": "Primary material available; secondary substitution unnecessary."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://vgmu.hse.ru/ru/article/view/28454",
+            "title": "NETWORK GOVERNANCE OF SCIENTIFIC AND TECHNOLOGICAL DEVELOPMENT BASED ON S&T FORESIGHT: JAPAN`S EXPERIENCE",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Work identity and content compared to recovered institutional or publisher material."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "B",
+        "reason_code": "B_TRANSFERABILITY_UNCERTAIN",
+        "reason": "It offers potentially transferable governance arrangements but does not clearly demonstrate a newly validated foresight method beyond established national practice."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identity-level duplication evident in supplied candidate list."
+      },
+      "reader_title": "NETWORK GOVERNANCE OF SCIENTIFIC AND TECHNOLOGICAL DEVELOPMENT BASED ON S&T FORESIGHT: JAPAN`S EXPERIENCE",
+      "reader_what": "A historical analysis describes Japan’s integration of regular S&T foresight exercises into science-and-technology policy coordination.",
+      "reader_why": "It offers potentially transferable governance arrangements but does not clearly demonstrate a newly validated foresight method beyond establ",
+      "reader_more": "A historical analysis describes Japan’s integration of regular S&T foresight exercises into science-and-technology policy coordination. It offers potentially transferable governance arrangements but does not clearly demonstrate a newly validated foresight method beyond established national practice. This finding is limited to the source material and its documented period.",
+      "deep_analysis": {
+        "work_kind": "analytical publication",
+        "research_question": "",
+        "main_finding": "A historical analysis describes Japan’s integration of regular S&T foresight exercises into science-and-technology policy coordination.",
+        "method_or_basis": "Recovered first-party document text, as captured in source_material within the package",
+        "qualification": "It offers potentially transferable governance arrangements but does not clearly demonstrate a newly validated foresight method beyond established national practice.",
+        "radar_relevance": "It offers potentially transferable governance arrangements but does not clearly demonstrate a newly validated foresight method beyond established national practice.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Article authors",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2025-09-30",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "It offers potentially transferable governance arrangements but does not clearly demonstrate a newly validated foresight method beyond established national practice.",
+          "text": "A historical analysis describes Japan’s integration of regular S&T foresight exercises into science-and-technology policy coordination.",
+          "confidence": "medium",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:fd45ef9621126ae9",
+      "source_hash": "adab2b6f",
+      "identity_hash": "5fb6bd07a7082a0c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied historical:id:fd45ef9621126ae9; matching source material recovered."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Scanner material mode=substantial_web_text; recovered 15157 characters at https://foresight-journal.hse.ru/en/article/view/24753."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied for Towards a Sustainable Disruptive Growth Model: Integrating Foresight, Wild Cards and Weak "
+          },
+          {
+            "step": "publisher_or_primary_recovery",
+            "outcome": "success",
+            "note": "Examined matching https://foresight-journal.hse.ru/en/article/view/24753"
+          },
+          {
+            "step": "repository_or_institutional_recovery",
+            "outcome": "not_applicable",
+            "note": "Substantive publisher/first-party material recovered; repository recovery unnecessary."
+          },
+          {
+            "step": "title_author_exact_search",
+            "outcome": "not_applicable",
+            "note": "Exact work identity: Towards a Sustainable Disruptive Growth Model: Integrating Foresight, Wild Cards and Weak Signals Analysis; matching scanner-retrieved primary text available."
+          },
+          {
+            "step": "secondary_crosscheck",
+            "outcome": "not_applicable",
+            "note": "Primary material available; secondary substitution unnecessary."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://foresight-journal.hse.ru/en/article/view/24753",
+            "title": "Towards a Sustainable Disruptive Growth Model: Integrating Foresight, Wild Cards and Weak Signals Analysis",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Work identity and content compared to recovered institutional or publisher material."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_TRANSFERABLE_METHOD",
+        "reason": "A proposed integrated analytical framework is a methodological contribution, although independent practical validation remains unproven."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identity-level duplication evident in supplied candidate list."
+      },
+      "reader_title": "Towards a Sustainable Disruptive Growth Model: Integrating Foresight, Wild Cards and Weak Signals Analysis",
+      "reader_what": "The authors propose combining foresight, weak-signal scanning and wildcard analysis with indicators of evolutionary change and resilience.",
+      "reader_why": "A proposed integrated analytical framework is a methodological contribution, although independent practical validation remains unproven.",
+      "reader_more": "The authors propose combining foresight, weak-signal scanning and wildcard analysis with indicators of evolutionary change and resilience. A proposed integrated analytical framework is a methodological contribution, although independent practical validation remains unproven. This finding is limited to the source material and its documented period.",
+      "deep_analysis": {
+        "work_kind": "analytical publication",
+        "research_question": "",
+        "main_finding": "The authors propose combining foresight, weak-signal scanning and wildcard analysis with indicators of evolutionary change and resilience.",
+        "method_or_basis": "Recovered first-party document text, as captured in source_material within the package",
+        "qualification": "A proposed integrated analytical framework is a methodological contribution, although independent practical validation remains unproven.",
+        "radar_relevance": "A proposed integrated analytical framework is a methodological contribution, although independent practical validation remains unproven.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.system_modelling",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Article authors",
+            "class": "university_group"
+          },
+          "mechanism": "integrates",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2025-03-16",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "A proposed integrated analytical framework is a methodological contribution, although independent practical validation remains unproven.",
+          "text": "The authors propose combining foresight, weak-signal scanning and wildcard analysis with indicators of evolutionary change and resilience.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:116ff0e5261ce73b",
+      "source_hash": "a015ac0e",
+      "identity_hash": "5f3a74007a56ab5e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied historical:id:116ff0e5261ce73b; matching source material recovered."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Scanner material mode=substantial_web_text; recovered 18698 characters at https://www.cambridge.org/core/journals/european-review/article/lessons-from-a-first-decade-in-european-science-policy/33E6F9918B3611DE31B8BA25CB645FF8."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied for Lessons from a First Decade in European Science Policy"
+          },
+          {
+            "step": "publisher_or_primary_recovery",
+            "outcome": "success",
+            "note": "Examined matching https://www.cambridge.org/core/journals/european-review/article/lessons-from-a-first-decade-in-european-science-policy/33E6F9918B3611DE31B8BA25CB645FF8"
+          },
+          {
+            "step": "repository_or_institutional_recovery",
+            "outcome": "not_applicable",
+            "note": "Substantive publisher/first-party material recovered; repository recovery unnecessary."
+          },
+          {
+            "step": "title_author_exact_search",
+            "outcome": "not_applicable",
+            "note": "Exact work identity: Lessons from a First Decade in European Science Policy; matching scanner-retrieved primary text available."
+          },
+          {
+            "step": "secondary_crosscheck",
+            "outcome": "not_applicable",
+            "note": "Primary material available; secondary substitution unnecessary."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.cambridge.org/core/journals/european-review/article/lessons-from-a-first-decade-in-european-science-policy/33E6F9918B3611DE31B8BA25CB645FF8",
+            "title": "Lessons from a First Decade in European Science Policy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Work identity and content compared to recovered institutional or publisher material."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "This is explicitly European R&I-system analysis qualifying under A Route 3, though it is a perspective essay rather than quantitative evaluation."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identity-level duplication evident in supplied candidate list."
+      },
+      "reader_title": "Lessons from a First Decade in European Science Policy",
+      "reader_what": "An experienced science-policy participant diagnoses structural coordination and institutional issues in the European research-policy landscape.",
+      "reader_why": "This is explicitly European R&I-system analysis qualifying under A Route 3, though it is a perspective essay rather than quantitative",
+      "reader_more": "An experienced science-policy participant diagnoses structural coordination and institutional issues in the European research-policy landscape. This is explicitly European R&I-system analysis qualifying under A Route 3, though it is a perspective essay rather than quantitative evaluation. This finding is limited to the source material and its documented period.",
+      "deep_analysis": {
+        "work_kind": "analytical publication",
+        "research_question": "",
+        "main_finding": "An experienced science-policy participant diagnoses structural coordination and institutional issues in the European research-policy landscape.",
+        "method_or_basis": "Recovered first-party document text, as captured in source_material within the package",
+        "qualification": "This is explicitly European R&I-system analysis qualifying under A Route 3, though it is a perspective essay rather than quantitative evaluation.",
+        "radar_relevance": "This is explicitly European R&I-system analysis qualifying under A Route 3, though it is a perspective essay rather than quantitative evaluation.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Article author",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2024-08-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "This is explicitly European R&I-system analysis qualifying under A Route 3, though it is a perspective essay rather than quantitative evaluation.",
+          "text": "An experienced science-policy participant diagnoses structural coordination and institutional issues in the European research-policy landscape.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:4d6f49d57f8bd52c",
+      "source_hash": "13dc8ab1",
+      "identity_hash": "f0a5370923f32fe3",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied historical:id:4d6f49d57f8bd52c; matching source material recovered."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Scanner material mode=pdf_excerpt; recovered 24000 characters at https://content.openalex.org/works/W4399512839.pdf."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied for The European Path to Artificial Intelligence: The Innovation of the 21st Century"
+          },
+          {
+            "step": "publisher_or_primary_recovery",
+            "outcome": "success",
+            "note": "Examined matching https://content.openalex.org/works/W4399512839.pdf"
+          },
+          {
+            "step": "repository_or_institutional_recovery",
+            "outcome": "not_applicable",
+            "note": "Substantive publisher/first-party material recovered; repository recovery unnecessary."
+          },
+          {
+            "step": "title_author_exact_search",
+            "outcome": "not_applicable",
+            "note": "Exact work identity: The European Path to Artificial Intelligence: The Innovation of the 21st Century; matching scanner-retrieved primary text available."
+          },
+          {
+            "step": "secondary_crosscheck",
+            "outcome": "not_applicable",
+            "note": "Primary material available; secondary substitution unnecessary."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://content.openalex.org/works/W4399512839.pdf",
+            "title": "The European Path to Artificial Intelligence: The Innovation of the 21st Century",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Work identity and content compared to recovered institutional or publisher material."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "An EU AI R&I policy synthesis qualifies under A Route 3; it is descriptive, not causal impact evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identity-level duplication evident in supplied candidate list."
+      },
+      "reader_title": "The European Path to Artificial Intelligence: The Innovation of the 21st Century",
+      "reader_what": "The article surveys European AI governance, research-and-innovation initiatives and the tension between innovation and safeguards.",
+      "reader_why": "An EU AI R&I policy synthesis qualifies under A Route 3; it is descriptive, not causal impact evidence.",
+      "reader_more": "The article surveys European AI governance, research-and-innovation initiatives and the tension between innovation and safeguards. An EU AI R&I policy synthesis qualifies under A Route 3; it is descriptive, not causal impact evidence. This finding is limited to the source material and its documented period.",
+      "deep_analysis": {
+        "work_kind": "analytical publication",
+        "research_question": "",
+        "main_finding": "The article surveys European AI governance, research-and-innovation initiatives and the tension between innovation and safeguards.",
+        "method_or_basis": "Recovered first-party document text, as captured in source_material within the package",
+        "qualification": "An EU AI R&I policy synthesis qualifies under A Route 3; it is descriptive, not causal impact evidence.",
+        "radar_relevance": "An EU AI R&I policy synthesis qualifies under A Route 3; it is descriptive, not causal impact evidence.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "ai.governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Article author",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2024-06-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "An EU AI R&I policy synthesis qualifies under A Route 3; it is descriptive, not causal impact evidence.",
+          "text": "The article surveys European AI governance, research-and-innovation initiatives and the tension between innovation and safeguards.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:ada6f7b540b93eb1",
+      "source_hash": "aae38933",
+      "identity_hash": "43d4037bbab4c52d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied historical:id:ada6f7b540b93eb1; matching source material recovered."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Scanner material mode=substantial_web_text; recovered 23399 characters at https://link.springer.com/article/10.1007/s10961-024-10070-0."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied for Diverging or converging technology capabilities in the European Union?"
+          },
+          {
+            "step": "publisher_or_primary_recovery",
+            "outcome": "success",
+            "note": "Examined matching https://link.springer.com/article/10.1007/s10961-024-10070-0"
+          },
+          {
+            "step": "repository_or_institutional_recovery",
+            "outcome": "not_applicable",
+            "note": "Substantive publisher/first-party material recovered; repository recovery unnecessary."
+          },
+          {
+            "step": "title_author_exact_search",
+            "outcome": "not_applicable",
+            "note": "Exact work identity: Diverging or converging technology capabilities in the European Union?; matching scanner-retrieved primary text available."
+          },
+          {
+            "step": "secondary_crosscheck",
+            "outcome": "not_applicable",
+            "note": "Primary material available; secondary substitution unnecessary."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s10961-024-10070-0",
+            "title": "Diverging or converging technology capabilities in the European Union?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Work identity and content compared to recovered institutional or publisher material."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Cross-country evidence directly investigates the EU technological capability landscape under A Routes 2 and 3."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identity-level duplication evident in supplied candidate list."
+      },
+      "reader_title": "Diverging or converging technology capabilities in the European Union?",
+      "reader_what": "The study examines whether member-state technological capabilities converge or diverge and evaluates policy implications.",
+      "reader_why": "Cross-country evidence directly investigates the EU technological capability landscape under A Routes 2 and 3.",
+      "reader_more": "The study examines whether member-state technological capabilities converge or diverge and evaluates policy implications. Cross-country evidence directly investigates the EU technological capability landscape under A Routes 2 and 3. This finding is limited to the source material and its documented period.",
+      "deep_analysis": {
+        "work_kind": "analytical publication",
+        "research_question": "",
+        "main_finding": "The study examines whether member-state technological capabilities converge or diverge and evaluates policy implications.",
+        "method_or_basis": "Recovered first-party document text, as captured in source_material within the package",
+        "qualification": "Cross-country evidence directly investigates the EU technological capability landscape under A Routes 2 and 3.",
+        "radar_relevance": "Cross-country evidence directly investigates the EU technological capability landscape under A Routes 2 and 3.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "innovation.regional_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Study authors",
+            "class": "university_group"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2024-03-04",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Cross-country evidence directly investigates the EU technological capability landscape under A Routes 2 and 3.",
+          "text": "The study examines whether member-state technological capabilities converge or diverge and evaluates policy implications.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:99015488e9ad6f66",
+      "source_hash": "8dd3c7e0",
+      "identity_hash": "2754bca7370adb1f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied historical:id:99015488e9ad6f66; matching source material recovered."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Scanner material mode=substantial_web_text; recovered 10882 characters at https://ecfr.eu/article/multilateral-space-a-european-space-oddity/."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied for Multilateral space: A European space oddity – European Council on Foreign Relations"
+          },
+          {
+            "step": "publisher_or_primary_recovery",
+            "outcome": "success",
+            "note": "Examined matching https://ecfr.eu/article/multilateral-space-a-european-space-oddity/"
+          },
+          {
+            "step": "repository_or_institutional_recovery",
+            "outcome": "not_applicable",
+            "note": "Substantive publisher/first-party material recovered; repository recovery unnecessary."
+          },
+          {
+            "step": "title_author_exact_search",
+            "outcome": "not_applicable",
+            "note": "Exact work identity: Multilateral space: A European space oddity – European Council on Foreign Relations; matching scanner-retrieved primary text available."
+          },
+          {
+            "step": "secondary_crosscheck",
+            "outcome": "not_applicable",
+            "note": "Primary material available; secondary substitution unnecessary."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://ecfr.eu/article/multilateral-space-a-european-space-oddity/",
+            "title": "Multilateral space: A European space oddity – European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Work identity and content compared to recovered institutional or publisher material."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_STRATEGIC_RI_ENVIRONMENT",
+        "reason": "Space infrastructure and cooperation shape the strategic environment of European science and technology; the article is analytical, not proof of policy success."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identity-level duplication evident in supplied candidate list."
+      },
+      "reader_title": "Multilateral space: A European space oddity – European Council on Foreign Relations",
+      "reader_what": "ECFR analyses European participation in space governance, security risks from orbital debris and multilateral space policy.",
+      "reader_why": "Space infrastructure and cooperation shape the strategic environment of European science and technology; the article is analytical, not proo",
+      "reader_more": "ECFR analyses European participation in space governance, security risks from orbital debris and multilateral space policy. Space infrastructure and cooperation shape the strategic environment of European science and technology; the article is analytical, not proof of policy success. This finding is limited to the source material and its documented period.",
+      "deep_analysis": {
+        "work_kind": "analytical publication",
+        "research_question": "",
+        "main_finding": "ECFR analyses European participation in space governance, security risks from orbital debris and multilateral space policy.",
+        "method_or_basis": "Recovered first-party document text, as captured in source_material within the package",
+        "qualification": "Space infrastructure and cooperation shape the strategic environment of European science and technology; the article is analytical, not proof of policy success.",
+        "radar_relevance": "Space infrastructure and cooperation shape the strategic environment of European science and technology; the article is analytical, not proof of policy success.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Council on Foreign Relations",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "evaluates",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2023-04-28",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Space infrastructure and cooperation shape the strategic environment of European science and technology; the article is analytical, not proof of policy success.",
+          "text": "ECFR analyses European participation in space governance, security risks from orbital debris and multilateral space policy.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:93e1a10386196107",
+      "source_hash": "306c8099",
+      "identity_hash": "d9e6be86cc9cadc6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied historical:id:93e1a10386196107; matching source material recovered."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Scanner material mode=substantial_web_text; recovered 8061 characters at https://ecfr.eu/article/from-5g-hardware-to-apps-and-data-how-huawei-has-adapted-to-survive/."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied for From 5G hardware to apps and data: How Huawei has adapted to survive – European Council on"
+          },
+          {
+            "step": "publisher_or_primary_recovery",
+            "outcome": "success",
+            "note": "Examined matching https://ecfr.eu/article/from-5g-hardware-to-apps-and-data-how-huawei-has-adapted-to-survive/"
+          },
+          {
+            "step": "repository_or_institutional_recovery",
+            "outcome": "not_applicable",
+            "note": "Substantive publisher/first-party material recovered; repository recovery unnecessary."
+          },
+          {
+            "step": "title_author_exact_search",
+            "outcome": "not_applicable",
+            "note": "Exact work identity: From 5G hardware to apps and data: How Huawei has adapted to survive – European Council on Foreign Relations; matching scanner-retrieved primary text available."
+          },
+          {
+            "step": "secondary_crosscheck",
+            "outcome": "not_applicable",
+            "note": "Primary material available; secondary substitution unnecessary."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://ecfr.eu/article/from-5g-hardware-to-apps-and-data-how-huawei-has-adapted-to-survive/",
+            "title": "From 5G hardware to apps and data: How Huawei has adapted to survive – European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Work identity and content compared to recovered institutional or publisher material."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_STRATEGIC_RI_ENVIRONMENT",
+        "reason": "The analysis connects Chinese technology strategies and Western restrictions to European digital dependency and capability choices."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identity-level duplication evident in supplied candidate list."
+      },
+      "reader_title": "From 5G hardware to apps and data: How Huawei has adapted to survive – European Council on Foreign",
+      "reader_what": "ECFR describes Huawei’s adaptation away from vulnerable 5G hardware towards software, applications and data services.",
+      "reader_why": "The analysis connects Chinese technology strategies and Western restrictions to European digital dependency and capability choices.",
+      "reader_more": "ECFR describes Huawei’s adaptation away from vulnerable 5G hardware towards software, applications and data services. The analysis connects Chinese technology strategies and Western restrictions to European digital dependency and capability choices. This finding is limited to the source material and its documented period.",
+      "deep_analysis": {
+        "work_kind": "analytical publication",
+        "research_question": "",
+        "main_finding": "ECFR describes Huawei’s adaptation away from vulnerable 5G hardware towards software, applications and data services.",
+        "method_or_basis": "Recovered first-party document text, as captured in source_material within the package",
+        "qualification": "The analysis connects Chinese technology strategies and Western restrictions to European digital dependency and capability choices.",
+        "radar_relevance": "The analysis connects Chinese technology strategies and Western restrictions to European digital dependency and capability choices.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Council on Foreign Relations",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "evaluates",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2022-12-22",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The analysis connects Chinese technology strategies and Western restrictions to European digital dependency and capability choices.",
+          "text": "ECFR describes Huawei’s adaptation away from vulnerable 5G hardware towards software, applications and data services.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:1d6d0e414abb14e0",
+      "source_hash": "814d0ce6",
+      "identity_hash": "5c977276e93fc877",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied historical:id:1d6d0e414abb14e0; matching source material recovered."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Scanner material mode=substantial_web_text; recovered 16021 characters at https://demoshelsinki.fi/governing-with-cities-europes-overlooked-governance-infrastructure/."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied for Governing with cities: Europe's overlooked governance infrastructure | Demos Helsinki"
+          },
+          {
+            "step": "publisher_or_primary_recovery",
+            "outcome": "success",
+            "note": "Examined matching https://demoshelsinki.fi/governing-with-cities-europes-overlooked-governance-infrastructure/"
+          },
+          {
+            "step": "repository_or_institutional_recovery",
+            "outcome": "not_applicable",
+            "note": "Substantive publisher/first-party material recovered; repository recovery unnecessary."
+          },
+          {
+            "step": "title_author_exact_search",
+            "outcome": "not_applicable",
+            "note": "Exact work identity: Governing with cities: Europe's overlooked governance infrastructure | Demos Helsinki; matching scanner-retrieved primary text available."
+          },
+          {
+            "step": "secondary_crosscheck",
+            "outcome": "not_applicable",
+            "note": "Primary material available; secondary substitution unnecessary."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://demoshelsinki.fi/governing-with-cities-europes-overlooked-governance-infrastructure/",
+            "title": "Governing with cities: Europe's overlooked governance infrastructure | Demos Helsinki",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Work identity and content compared to recovered institutional or publisher material."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "A",
+        "reason_code": "A_EU_RI_MECHANISM_BORDERLINE",
+        "reason": "An EU innovation mission is a concrete reference, but the piece primarily advances a general governance argument; the R&I-system linkage is interpretive."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identity-level duplication evident in supplied candidate list."
+      },
+      "reader_title": "Governing with cities: Europe's overlooked governance infrastructure | Demos Helsinki",
+      "reader_what": "Demos Helsinki argues that cities create governance knowledge and proposes using it in European multi-level policy design.",
+      "reader_why": "An EU innovation mission is a concrete reference, but the piece primarily advances a general governance argument; the R&I-system linkage",
+      "reader_more": "Demos Helsinki argues that cities create governance knowledge and proposes using it in European multi-level policy design. An EU innovation mission is a concrete reference, but the piece primarily advances a general governance argument; the R&I-system linkage is interpretive. This finding is limited to the source material and its documented period.",
+      "deep_analysis": {
+        "work_kind": "analytical publication",
+        "research_question": "",
+        "main_finding": "Demos Helsinki argues that cities create governance knowledge and proposes using it in European multi-level policy design.",
+        "method_or_basis": "Recovered first-party document text, as captured in source_material within the package",
+        "qualification": "An EU innovation mission is a concrete reference, but the piece primarily advances a general governance argument; the R&I-system linkage is interpretive.",
+        "radar_relevance": "An EU innovation mission is a concrete reference, but the piece primarily advances a general governance argument; the R&I-system linkage is interpretive.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Demos Helsinki",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "advocates",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2022-10-26",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "An EU innovation mission is a concrete reference, but the piece primarily advances a general governance argument; the R&I-system linkage is interpretive.",
+          "text": "Demos Helsinki argues that cities create governance knowledge and proposes using it in European multi-level policy design.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:82fcdb0b727f8570",
+      "source_hash": "3dc4e9ad",
+      "identity_hash": "7b3cb99d83bb51e5",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied historical:id:82fcdb0b727f8570; matching source material recovered."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Scanner material mode=substantial_web_text; recovered 24000 characters at https://www.cidob.org/en/publications/cybersecurity-era-hypercompetitiveness-can-eu-meet-new-challenges."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied for Cybersecurity in the era of hypercompetitiveness: can the EU meet the new challenges?"
+          },
+          {
+            "step": "publisher_or_primary_recovery",
+            "outcome": "success",
+            "note": "Examined matching https://www.cidob.org/en/publications/cybersecurity-era-hypercompetitiveness-can-eu-meet-new-challenges"
+          },
+          {
+            "step": "repository_or_institutional_recovery",
+            "outcome": "not_applicable",
+            "note": "Substantive publisher/first-party material recovered; repository recovery unnecessary."
+          },
+          {
+            "step": "title_author_exact_search",
+            "outcome": "not_applicable",
+            "note": "Exact work identity: Cybersecurity in the era of hypercompetitiveness: can the EU meet the new challenges?; matching scanner-retrieved primary text available."
+          },
+          {
+            "step": "secondary_crosscheck",
+            "outcome": "not_applicable",
+            "note": "Primary material available; secondary substitution unnecessary."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.cidob.org/en/publications/cybersecurity-era-hypercompetitiveness-can-eu-meet-new-challenges",
+            "title": "Cybersecurity in the era of hypercompetitiveness: can the EU meet the new challenges?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Work identity and content compared to recovered institutional or publisher material."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_STRATEGIC_RI_ENVIRONMENT",
+        "reason": "Cybersecurity dependencies and capability development provide a documented European technology-strategy mechanism under A Route 1."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identity-level duplication evident in supplied candidate list."
+      },
+      "reader_title": "Cybersecurity in the era of hypercompetitiveness: can the EU meet the new challenges?",
+      "reader_what": "Researchers discuss how intensifying technological rivalry creates cybersecurity policy and capability challenges for the EU.",
+      "reader_why": "Cybersecurity dependencies and capability development provide a documented European technology-strategy mechanism under A Route 1.",
+      "reader_more": "Researchers discuss how intensifying technological rivalry creates cybersecurity policy and capability challenges for the EU. Cybersecurity dependencies and capability development provide a documented European technology-strategy mechanism under A Route 1. This finding is limited to the source material and its documented period.",
+      "deep_analysis": {
+        "work_kind": "analytical publication",
+        "research_question": "",
+        "main_finding": "Researchers discuss how intensifying technological rivalry creates cybersecurity policy and capability challenges for the EU.",
+        "method_or_basis": "Recovered first-party document text, as captured in source_material within the package",
+        "qualification": "Cybersecurity dependencies and capability development provide a documented European technology-strategy mechanism under A Route 1.",
+        "radar_relevance": "Cybersecurity dependencies and capability development provide a documented European technology-strategy mechanism under A Route 1.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "digital.infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Study authors",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2022-09-22",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Cybersecurity dependencies and capability development provide a documented European technology-strategy mechanism under A Route 1.",
+          "text": "Researchers discuss how intensifying technological rivalry creates cybersecurity policy and capability challenges for the EU.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:c7b8394d6b88d37f",
+      "source_hash": "9d843007",
+      "identity_hash": "0c2bae8a8e7d5589",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied historical:id:c7b8394d6b88d37f; matching source material recovered."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Scanner material mode=pdf_excerpt; recovered 24000 characters at https://content.openalex.org/works/W4200390909.pdf."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied for Regional Technological Capabilities and the Access to H2020 Funds"
+          },
+          {
+            "step": "publisher_or_primary_recovery",
+            "outcome": "success",
+            "note": "Examined matching https://content.openalex.org/works/W4200390909.pdf"
+          },
+          {
+            "step": "repository_or_institutional_recovery",
+            "outcome": "not_applicable",
+            "note": "Substantive publisher/first-party material recovered; repository recovery unnecessary."
+          },
+          {
+            "step": "title_author_exact_search",
+            "outcome": "not_applicable",
+            "note": "Exact work identity: Regional Technological Capabilities and the Access to H2020 Funds; matching scanner-retrieved primary text available."
+          },
+          {
+            "step": "secondary_crosscheck",
+            "outcome": "not_applicable",
+            "note": "Primary material available; secondary substitution unnecessary."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://content.openalex.org/works/W4200390909.pdf",
+            "title": "Regional Technological Capabilities and the Access to H2020 Funds",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Work identity and content compared to recovered institutional or publisher material."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "This is direct European R&I-system funding evidence under A Route 3; correlation cannot establish causal effects."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identity-level duplication evident in supplied candidate list."
+      },
+      "reader_title": "Regional Technological Capabilities and the Access to H2020 Funds",
+      "reader_what": "An empirical analysis studies how pre-existing technological capabilities correlate with EU regions’ access to Horizon 2020 funding.",
+      "reader_why": "This is direct European R&I-system funding evidence under A Route 3; correlation cannot establish causal effects.",
+      "reader_more": "An empirical analysis studies how pre-existing technological capabilities correlate with EU regions’ access to Horizon 2020 funding. This is direct European R&I-system funding evidence under A Route 3; correlation cannot establish causal effects. This finding is limited to the source material and its documented period.",
+      "deep_analysis": {
+        "work_kind": "analytical publication",
+        "research_question": "",
+        "main_finding": "An empirical analysis studies how pre-existing technological capabilities correlate with EU regions’ access to Horizon 2020 funding.",
+        "method_or_basis": "Recovered first-party document text, as captured in source_material within the package",
+        "qualification": "This is direct European R&I-system funding evidence under A Route 3; correlation cannot establish causal effects.",
+        "radar_relevance": "This is direct European R&I-system funding evidence under A Route 3; correlation cannot establish causal effects.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "horizon.access",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Archibugi, Evangelista and Vezzani",
+            "class": "university_group"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2022",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "This is direct European R&I-system funding evidence under A Route 3; correlation cannot establish causal effects.",
+          "text": "An empirical analysis studies how pre-existing technological capabilities correlate with EU regions’ access to Horizon 2020 funding.",
+          "confidence": "high",
+          "status_date_precision": "year"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:a3d01dc0d3be8f02",
+      "source_hash": "44c13ac4",
+      "identity_hash": "8f4a64321f38e7bd",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied historical:id:a3d01dc0d3be8f02; matching source material recovered."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Scanner material mode=substantial_web_text; recovered 4440 characters at https://ecipe.org/insights/digital-sovereignty-revisited/."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied for Digital Sovereignty Revisited"
+          },
+          {
+            "step": "publisher_or_primary_recovery",
+            "outcome": "success",
+            "note": "Examined matching https://ecipe.org/insights/digital-sovereignty-revisited/"
+          },
+          {
+            "step": "repository_or_institutional_recovery",
+            "outcome": "not_applicable",
+            "note": "Substantive publisher/first-party material recovered; repository recovery unnecessary."
+          },
+          {
+            "step": "title_author_exact_search",
+            "outcome": "not_applicable",
+            "note": "Exact work identity: Digital Sovereignty Revisited; matching scanner-retrieved primary text available."
+          },
+          {
+            "step": "secondary_crosscheck",
+            "outcome": "not_applicable",
+            "note": "Primary material available; secondary substitution unnecessary."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://ecipe.org/insights/digital-sovereignty-revisited/",
+            "title": "Digital Sovereignty Revisited",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Work identity and content compared to recovered institutional or publisher material."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_OPINION_NOT_SUBSTANTIVE",
+        "reason": "This short argumentative commentary lacks the substantive study of European R&I mechanisms needed for A Routes 1–3; trade-related claims alone do not qualify."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identity-level duplication evident in supplied candidate list."
+      },
+      "reader_title": "Digital Sovereignty Revisited",
+      "reader_what": "ECIPE questions digital sovereignty rhetoric by contrasting domestic digital value creation with international trade and services.",
+      "reader_why": "",
+      "reader_more": "ECIPE questions digital sovereignty rhetoric by contrasting domestic digital value creation with international trade and services. This short argumentative commentary lacks the substantive study of European R&I mechanisms needed for A Routes 1–3; trade-related claims alone do not qualify. This finding is limited to the source material and its documented period.",
+      "deep_analysis": {
+        "work_kind": "analytical publication",
+        "research_question": "",
+        "main_finding": "ECIPE questions digital sovereignty rhetoric by contrasting domestic digital value creation with international trade and services.",
+        "method_or_basis": "Recovered first-party document text, as captured in source_material within the package",
+        "qualification": "This short argumentative commentary lacks the substantive study of European R&I mechanisms needed for A Routes 1–3; trade-related claims alone do not qualify.",
+        "radar_relevance": "This short argumentative commentary lacks the substantive study of European R&I mechanisms needed for A Routes 1–3; trade-related claims alone do not qualify.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:67f06d5bbdb9c120",
+      "source_hash": "1eb296df",
+      "identity_hash": "17709e848ee74879",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied historical:id:67f06d5bbdb9c120; matching source material recovered."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Scanner material mode=pdf_excerpt; recovered 5874 characters at https://www.cnrs.fr/sites/default/files/press_info/2022-04/CP%20PEPR%20OneWater_EN.pdf."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied for OneWater, an exploratory Priority Research Programme and Infrastructure (PEPR) focused on "
+          },
+          {
+            "step": "publisher_or_primary_recovery",
+            "outcome": "success",
+            "note": "Examined matching https://www.cnrs.fr/sites/default/files/press_info/2022-04/CP%20PEPR%20OneWater_EN.pdf"
+          },
+          {
+            "step": "repository_or_institutional_recovery",
+            "outcome": "not_applicable",
+            "note": "Substantive publisher/first-party material recovered; repository recovery unnecessary."
+          },
+          {
+            "step": "title_author_exact_search",
+            "outcome": "not_applicable",
+            "note": "Exact work identity: OneWater, an exploratory Priority Research Programme and Infrastructure (PEPR) focused on a shared resource | CNRS; matching scanner-retrieved primary text available."
+          },
+          {
+            "step": "secondary_crosscheck",
+            "outcome": "not_applicable",
+            "note": "Primary material available; secondary substitution unnecessary."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_document",
+            "url": "https://www.cnrs.fr/sites/default/files/press_info/2022-04/CP%20PEPR%20OneWater_EN.pdf",
+            "title": "OneWater, an exploratory Priority Research Programme and Infrastructure (PEPR) focused on a shared resource | CNRS",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Work identity and content compared to recovered institutional or publisher material."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_NATIONAL_RI_PROGRAMME_LAUNCH",
+        "reason": "The first-party dated programme launch is a real research-infrastructure and research-funding development; recategorise from A to historical C."
+      },
+      "metadata_correction": {
+        "fields": {
+          "type": "research programme launch"
+        },
+        "unset": [],
+        "reason": "CNRS press announcement verifies the 16 March 2022 programme launch rather than an independent analytical paper."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identity-level duplication evident in supplied candidate list."
+      },
+      "reader_title": "OneWater, an exploratory Priority Research Programme and Infrastructure (PEPR) focused on a shared resource |",
+      "reader_what": "CNRS reports France launched the €53 million, ten-year OneWater exploratory priority research programme on 16 March 2022.",
+      "reader_why": "The first-party dated programme launch is a real research-infrastructure and research-funding development; recategorise from A to historical",
+      "reader_more": "CNRS reports France launched the €53 million, ten-year OneWater exploratory priority research programme on 16 March 2022. The first-party dated programme launch is a real research-infrastructure and research-funding development; recategorise from A to historical C. This finding is limited to the source material and its documented period.",
+      "deep_analysis": {
+        "work_kind": "analytical publication",
+        "research_question": "",
+        "main_finding": "CNRS reports France launched the €53 million, ten-year OneWater exploratory priority research programme on 16 March 2022.",
+        "method_or_basis": "Recovered first-party document text, as captured in source_material within the package",
+        "qualification": "The first-party dated programme launch is a real research-infrastructure and research-funding development; recategorise from A to historical C.",
+        "radar_relevance": "The first-party dated programme launch is a real research-infrastructure and research-funding development; recategorise from A to historical C.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.public_support",
+          "secondary_objects": [],
+          "actor": {
+            "name": "CNRS, BRGM and INRAE",
+            "class": "other"
+          },
+          "mechanism": "launches",
+          "direction": "expands",
+          "status": "operating",
+          "status_date": "2022-03-16",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "FR"
+            ]
+          },
+          "kind": "action",
+          "qualification": "The first-party dated programme launch is a real research-infrastructure and research-funding development; recategorise from A to historical C.",
+          "text": "CNRS reports France launched the €53 million, ten-year OneWater exploratory priority research programme on 16 March 2022.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:6d7cad20b8946722",
+      "source_hash": "4e5b680c",
+      "identity_hash": "5319687c3ba4da45",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied historical:id:6d7cad20b8946722; matching source material recovered."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Scanner material mode=substantial_web_text; recovered 18136 characters at https://www.journals.ac.za/index.php/sajhe/article/view/4649."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied for Review of research publications on postdoctoral research fellowship: Implications for Afri"
+          },
+          {
+            "step": "publisher_or_primary_recovery",
+            "outcome": "success",
+            "note": "Examined matching https://www.journals.ac.za/index.php/sajhe/article/view/4649"
+          },
+          {
+            "step": "repository_or_institutional_recovery",
+            "outcome": "not_applicable",
+            "note": "Substantive publisher/first-party material recovered; repository recovery unnecessary."
+          },
+          {
+            "step": "title_author_exact_search",
+            "outcome": "not_applicable",
+            "note": "Exact work identity: Review of research publications on postdoctoral research fellowship: Implications for African institutions; matching scanner-retrieved primary text available."
+          },
+          {
+            "step": "secondary_crosscheck",
+            "outcome": "not_applicable",
+            "note": "Primary material available; secondary substitution unnecessary."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.journals.ac.za/index.php/sajhe/article/view/4649",
+            "title": "Review of research publications on postdoctoral research fellowship: Implications for African institutions",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Work identity and content compared to recovered institutional or publisher material."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_EU_RI_RESEARCH",
+        "reason": "European publications are background comparators, not a substantive study of the European R&I system under A Routes 1–3."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identity-level duplication evident in supplied candidate list."
+      },
+      "reader_title": "Review of research publications on postdoctoral research fellowship: Implications for African institutions",
+      "reader_what": "A systematic review of 44 sources examines postdoctoral fellowships with emphasis on African institutions.",
+      "reader_why": "",
+      "reader_more": "A systematic review of 44 sources examines postdoctoral fellowships with emphasis on African institutions. European publications are background comparators, not a substantive study of the European R&I system under A Routes 1–3. This finding is limited to the source material and its documented period.",
+      "deep_analysis": {
+        "work_kind": "analytical publication",
+        "research_question": "",
+        "main_finding": "A systematic review of 44 sources examines postdoctoral fellowships with emphasis on African institutions.",
+        "method_or_basis": "Recovered first-party document text, as captured in source_material within the package",
+        "qualification": "European publications are background comparators, not a substantive study of the European R&I system under A Routes 1–3.",
+        "radar_relevance": "European publications are background comparators, not a substantive study of the European R&I system under A Routes 1–3.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:42c49f023d23a794",
+      "source_hash": "1bc68f5c",
+      "identity_hash": "4850a827e3013c11",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied historical:id:42c49f023d23a794; matching source material recovered."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Scanner material mode=substantial_web_text; recovered 6323 characters at https://ecfr.eu/article/commentary_digital_decolonisation_the_eus_new_ideas_on_data_and_artificial/."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied for Digital decolonisation: The EU’s new ideas on data and artificial intelligence – European "
+          },
+          {
+            "step": "publisher_or_primary_recovery",
+            "outcome": "success",
+            "note": "Examined matching https://ecfr.eu/article/commentary_digital_decolonisation_the_eus_new_ideas_on_data_and_artificial/"
+          },
+          {
+            "step": "repository_or_institutional_recovery",
+            "outcome": "not_applicable",
+            "note": "Substantive publisher/first-party material recovered; repository recovery unnecessary."
+          },
+          {
+            "step": "title_author_exact_search",
+            "outcome": "not_applicable",
+            "note": "Exact work identity: Digital decolonisation: The EU’s new ideas on data and artificial intelligence – European Council on Foreign Relations; matching scanner-retrieved primary text available."
+          },
+          {
+            "step": "secondary_crosscheck",
+            "outcome": "not_applicable",
+            "note": "Primary material available; secondary substitution unnecessary."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://ecfr.eu/article/commentary_digital_decolonisation_the_eus_new_ideas_on_data_and_artificial/",
+            "title": "Digital decolonisation: The EU’s new ideas on data and artificial intelligence – European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Work identity and content compared to recovered institutional or publisher material."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_STRATEGIC_RI_ENVIRONMENT",
+        "reason": "Direct EU research/technology capability and strategic-dependency analysis qualifies under A Route 1; ambitions are not outcomes."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identity-level duplication evident in supplied candidate list."
+      },
+      "reader_title": "Digital decolonisation: The EU’s new ideas on data and artificial intelligence – European Council on Foreign R",
+      "reader_what": "ECFR examines the EU’s data and AI strategies as responses to dependence on leading US and Chinese technology suppliers.",
+      "reader_why": "Direct EU research/technology capability and strategic-dependency analysis qualifies under A Route 1; ambitions are not outcomes.",
+      "reader_more": "ECFR examines the EU’s data and AI strategies as responses to dependence on leading US and Chinese technology suppliers. Direct EU research/technology capability and strategic-dependency analysis qualifies under A Route 1; ambitions are not outcomes. This finding is limited to the source material and its documented period.",
+      "deep_analysis": {
+        "work_kind": "analytical publication",
+        "research_question": "",
+        "main_finding": "ECFR examines the EU’s data and AI strategies as responses to dependence on leading US and Chinese technology suppliers.",
+        "method_or_basis": "Recovered first-party document text, as captured in source_material within the package",
+        "qualification": "Direct EU research/technology capability and strategic-dependency analysis qualifies under A Route 1; ambitions are not outcomes.",
+        "radar_relevance": "Direct EU research/technology capability and strategic-dependency analysis qualifies under A Route 1; ambitions are not outcomes.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Council on Foreign Relations",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "evaluates",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2020-02-25",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Direct EU research/technology capability and strategic-dependency analysis qualifies under A Route 1; ambitions are not outcomes.",
+          "text": "ECFR examines the EU’s data and AI strategies as responses to dependence on leading US and Chinese technology suppliers.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:bee7c891ecce4843",
+      "source_hash": "44c1d9cf",
+      "identity_hash": "385db4dd1054cc4d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied historical:id:bee7c891ecce4843; matching source material recovered."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Scanner material mode=substantial_web_text; recovered 13038 characters at https://www.vinnova.se/en/calls-for-proposals/bilateral-call-for-proposals-with-china-/research-development-and-innovation-in-the-fields-of-life-science-traffic-safety-and-applied-ICT-china-collaboration/."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied for Opportunities for bilateral collaboration with China | Vinnova"
+          },
+          {
+            "step": "publisher_or_primary_recovery",
+            "outcome": "success",
+            "note": "Examined matching https://www.vinnova.se/en/calls-for-proposals/bilateral-call-for-proposals-with-china-/research-development-and-innovation-in-the-fields-of-life-science-traffic-safety-and-applied-ICT-china-collaboration/"
+          },
+          {
+            "step": "repository_or_institutional_recovery",
+            "outcome": "not_applicable",
+            "note": "Substantive publisher/first-party material recovered; repository recovery unnecessary."
+          },
+          {
+            "step": "title_author_exact_search",
+            "outcome": "not_applicable",
+            "note": "Exact work identity: Opportunities for bilateral collaboration with China | Vinnova; matching scanner-retrieved primary text available."
+          },
+          {
+            "step": "secondary_crosscheck",
+            "outcome": "not_applicable",
+            "note": "Primary material available; secondary substitution unnecessary."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.vinnova.se/en/calls-for-proposals/bilateral-call-for-proposals-with-china-/research-development-and-innovation-in-the-fields-of-life-science-traffic-safety-and-applied-ICT-china-collaboration/",
+            "title": "Opportunities for bilateral collaboration with China | Vinnova",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Work identity and content compared to recovered institutional or publisher material."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_PROGRAMME_LISTING_NOT_ANALYSIS",
+        "reason": "This is an archived operational funding-call page, not European R&I-system evidence under A Routes 1–3; no new 2019 event can be inferred from the archive page."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identity-level duplication evident in supplied candidate list."
+      },
+      "reader_title": "Opportunities for bilateral collaboration with China | Vinnova",
+      "reader_what": "Vinnova presents a Sweden-China bilateral call for proposals covering life sciences, traffic safety and applied ICT.",
+      "reader_why": "",
+      "reader_more": "Vinnova presents a Sweden-China bilateral call for proposals covering life sciences, traffic safety and applied ICT. This is an archived operational funding-call page, not European R&I-system evidence under A Routes 1–3; no new 2019 event can be inferred from the archive page. This finding is limited to the source material and its documented period.",
+      "deep_analysis": {
+        "work_kind": "analytical publication",
+        "research_question": "",
+        "main_finding": "Vinnova presents a Sweden-China bilateral call for proposals covering life sciences, traffic safety and applied ICT.",
+        "method_or_basis": "Recovered first-party document text, as captured in source_material within the package",
+        "qualification": "This is an archived operational funding-call page, not European R&I-system evidence under A Routes 1–3; no new 2019 event can be inferred from the archive page.",
+        "radar_relevance": "This is an archived operational funding-call page, not European R&I-system evidence under A Routes 1–3; no new 2019 event can be inferred from the archive page.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    }
+  ]
+}
