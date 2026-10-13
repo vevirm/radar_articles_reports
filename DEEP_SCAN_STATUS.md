@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261013T075348Z-7de787fdf3cf`
+- Current package: `worker-a-20261013T080555Z-7de787fdf3cf`
 - Assigned unresolved records: **28**
   1. `link:https://doi.org/10.1016/j.futures.2026.103882` — Harnessing the potential of transdisciplinary practice for the transformation of agri-food systems: A review of methodological challenges in participatory scenario development
   2. `link:https://news.google.com/rss/articles/CBMiyAFBVV95cUxPNzVoTnhfS2lEWDBid2NMYlNWT1RKOGNjVzhlVmp5MXEtZkNheWdvVDNfRDY0bnhjblZRYkJqOHVjaVFoUjEtaUlYT3hxZG5yS1JURF92bVlqeUpXaTBvY3pYWHNQLVh1Y0dwYVk1Ml8yQWtXZmJHME1NU2phWUZyVDR3QXROQ01WbDl2YVFfVGhWTnRJZ04zekRXWkMtZnRQSVFzYy1nZEZaaV84dVVQVHZaSGFIMUNwTnJ1UXoydTdyTi1ISWFIag?oc=5` — Funding Radar: Horizon Europe opens €225M call for advanced materials and manufacturing
