@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2695** (Main **1281** + Historical **1414**)
-- Automatic queue still needing V2 verification: **399** (Main **156** + Historical **243**)
-- Currently assigned to workers: **58** (Main **16** + Historical **42**)
+- Authoritative V2 verified: **2717** (Main **1296** + Historical **1421**)
+- Automatic queue still needing V2 verification: **377** (Main **141** + Historical **236**)
+- Currently assigned to workers: **36** (Main **1** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **30**
 - Automatic queue pending and not yet assigned: **341**
@@ -16,17 +16,9 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261014T082301Z-65327ea42037`
-- Assigned unresolved records: **23**
-  1. `link:https://ecipe.org/publications/economic-impact-of-cada/#_ftnref1` — The Real-World Economic Impact of the Cloud and AI Development Act (CADA): What CADA Could Mean for Cloud Prices, Migration, Digitalisation and Europe’s Technology Supply Chain
-  2. `link:https://www.eea.europa.eu/en/analysis/publications/competitive-by-nature/competitive-by-nature-report-2026-1310.pdf/@@download/file` — Competitive by nature
-  3. `link:https://www.hertie-school.org/fileadmin/2_Research/2_Research_directory/Research_Centres/Centre_for_Digital_Governance/5_Papers/Implementing_Data_Access_Darius_Stockmann_2023.pdf` — Policy briefs | Centre for Digital Governance
-  4. `link:https://doi.org/10.1038/s41746-026-03290-1` — AEGIS: an operational infrastructure for post-market governance of adaptive medical AI under US and EU regulatory frameworks
-  5. `link:https://hadea.ec.europa.eu/calls-proposals/horizon-europe-digital-bridging-actions-2027_en` — Horizon Europe Digital: Bridging actions 2027
-  6. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxPZVFlaGxodDhwTlJlRDBueTJ5UEZWYmtSVV8zejBPbGZ6NWZnV3FYaEczYkh4XzFMOXNuRGpnN0ZUV1VOb1dCYW5paVZXSE9ia3VTbU5kaDk4ZXdFNmw2Mk1FZ3BqUmswdmlNVHZSYk9kRHdjWnpOOFEwVGhjQW84SkcxMlJHWkY2c3A0SnZsN0RGWFczTG9uS1ZTMGprbjRsZXZ4aE10MFl2UmNBMVE?oc=5` — Scaleway to build AMD-powered AI supercomputer in Sweden
-  7. `link:https://news.google.com/rss/articles/CBMingFBVV95cUxQOHAzRVdzNXBrOEhxQjJxZjBYSmc3cWV5ZVpaaGhmeE5CU3ZmOEttOHZnRHhwWDFXZXY4SERPc09GUDNqMEVUeE1xV2ZXNFFZRDFhMzZUMXBSMTBYQmQ4ekVFci14STB1UDgyUWptUjFtQnY5UVlfUHJFWlFvV3NqY01lTW45NURsSXZTUDJvcnh6RE9yekFHR1NfdDBJdw?oc=5` — Video. EU sovereignty is ‘a need’ in the space, Sateliot CEO says
-  8. `link:https://news.google.com/rss/articles/CBMiqwFBVV95cUxNeW9rSUNVajlJcGx3TDNmRzhjT2l3U3BrZTM0Mk93aHhsX0RENjhwaGNrRjlNZ1NpbXVwMmtyODFTTTJXUzFueE5oYlVhcmxINGNQOERoZ1p3cjZ6OG9Cc3NPNC1MVnU0a3ZBXy1XRmhhSHh1UWQwS1ZmNTdSaHlDRkVSR25MdWdZdVI2Yko3cS00WTl1bHhPdDZTNVhIc0JnODdPcVZ5VEhyN0E?oc=5` — This French AI stock is up 570% in 2026: Further gains ahead?
-  - … plus 15 more in the package manifest
+- Current package: `worker-a-20261014T084954Z-fd7d0d429219`
+- Assigned unresolved records: **1**
+  1. `link:https://news.google.com/rss/articles/CBMiggFBVV95cUxPUjZpbEJ4cVlUbk9SNEJnRGRBdDdJTUFZaG53T2kyTlN4ajNQLVFOZEViRUFxMDdBbjZIRGxNcS1CNmE4WmRkNUxGaDhnVm1WMFpyZDRmM2JPY3ZvSUY5MG02bWdRdGFJX2VUVnV5WkNkcUwwUmtoVjN2cG5RMk9rRnl3?oc=5` — Europe’s leaders abandon the race for frontier AI — recovery attempt 2/3
 
 ### Worker B
 - Current package: `worker-b-20261009T080214Z-5994737f044d`
