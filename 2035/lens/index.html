@@ -11,9 +11,9 @@
 </head>
 <body>
 <main class="wrap future-main">
-  <a class="scenario-back" href="../">← Choose another 2035 lens</a>
+  <a class="scenario-back" href="../">← Choose another pair of questions</a>
   <section class="frame-intro"><h2 id="frameTitle">2035</h2><p id="frameQuestion" class="future-lede"></p></section>
-  <div class="scenario-count"><strong>Four main worlds</strong><span>Each world then branches into four variants drawn from current findings.</span></div>
+  <div class="scenario-count"><strong>Four possible futures</strong><span>Each possible future has four variants based on current findings.</span></div>
   <section class="scenario-frame" aria-label="2035 scenario matrix">
     <div class="scenario-matrix-wrap">
       <div id="axisYHigh" class="axis-y-high"></div>
@@ -23,10 +23,10 @@
       <div class="axis-x"><span></span><b id="axisXTitle"></b><span></span></div>
       <div class="axis-x-labels"><span id="axisXLow"></span><span id="axisXHigh"></span></div>
     </div>
-    <p class="scenario-note"><strong>Choose a world to see what it would mean in practice.</strong> The four variants show how different developments could push the same world in different directions.</p>
+    <p class="scenario-note"><strong>Choose a possible future to explore what it would mean for Europe.</strong> The four variants show how different developments could push the same world in different directions.</p>
   </section>
   <section aria-labelledby="taxonomyTitle">
-    <div class="taxonomy-head"><div><p class="taxonomy-kicker">4 worlds × 4 variants</p><h2 id="taxonomyTitle">All 16 scenarios</h2></div><p>Each main world has four ways it could develop. The variants use current findings as evidence for the pressures that could shape that future.</p></div>
+    <div class="taxonomy-head"><div><p class="taxonomy-kicker">4 worlds × 4 variants</p><h2 id="taxonomyTitle">All 16 scenarios</h2></div><p>Each possible future has four ways it could develop. Each version reflects a different pressure supported by current findings.</p></div>
     <div id="scenarioTaxonomy" class="scenario-taxonomy"><p class="empty">Loading</p></div>
   </section>
 </main>
@@ -38,7 +38,7 @@ const esc=v=>clean(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 const pole=(axis,id)=>id===axis?.high?.id?axis.high:id===axis?.low?.id?axis.low:null;
 const coords=(frame,w)=>{const q=w.quadrant||{},x=frame.axes.horizontal,y=frame.axes.vertical;const xp=pole(x,q[x.key]||q.horizontal),yp=pole(y,q[y.key]||q.vertical);return `${yp?.label||''} · ${xp?.label||''}`;};
 const ordered=(frame)=>{const x=frame.axes.horizontal,y=frame.axes.vertical,target=[[y.high.id,x.low.id],[y.high.id,x.high.id],[y.low.id,x.low.id],[y.low.id,x.high.id]];return target.map(([vy,hx])=>(frame.scenarios||[]).find(w=>{const q=w.quadrant||{};return (q[y.key]||q.vertical)===vy&&(q[x.key]||q.horizontal)===hx;})).filter(Boolean);};
-const familyHtml=(frame,w)=>`<article class="tax-family"><div class="tax-family-top"><div><div class="cell-axis">${esc(coords(frame,w))}</div><h3>${esc(w.name)}</h3><p class="tagline">${esc(w.tagline)}</p><a class="tax-open" href="../scenario/?frame=${encodeURIComponent(frame.id)}&world=${encodeURIComponent(w.id)}">Open scenario →</a></div><div class="tax-variants">${(w.variants||[]).slice(0,4).map(v=>`<div class="tax-variant"><small>${esc(v.kind||'Variant')}</small><span>${esc(v.name)}</span></div>`).join('')}</div></div></article>`;
+const familyHtml=(frame,w)=>`<article class="tax-family"><div class="tax-family-top"><div><div class="cell-axis">${esc(coords(frame,w))}</div><h3>${esc(w.name)}</h3><p class="tagline">${esc(w.tagline)}</p><a class="tax-open" href="../scenario/?frame=${encodeURIComponent(frame.id)}&world=${encodeURIComponent(w.id)}">Explore scenario →</a></div><div class="tax-variants">${(w.variants||[]).slice(0,4).map(v=>`<div class="tax-variant"><small>${esc(v.kind||'Variant')}</small><span>${esc(v.name)}</span></div>`).join('')}</div></div></article>`;
 (async()=>{try{
  const data=await RadarData.load('../../radar.json','../../radar_seed.json');
  const sc=data?.high_order_inference?.scenarios_2035||{};
@@ -49,9 +49,10 @@ const familyHtml=(frame,w)=>`<article class="tax-family"><div class="tax-family-
  document.getElementById('frameTitle').textContent=frame.title;document.getElementById('frameQuestion').textContent=frame.question||'';
  const x=frame.axes.horizontal,y=frame.axes.vertical;document.getElementById('axisYHigh').textContent=y.high.label;document.getElementById('axisYLow').textContent=y.low.label;document.getElementById('axisYTitle').textContent=y.title;document.getElementById('axisXTitle').textContent=x.title;document.getElementById('axisXLow').textContent=x.low.label;document.getElementById('axisXHigh').textContent=x.high.label;
  const worlds=ordered(frame);
- document.getElementById('scenarioMatrix').innerHTML=worlds.map(w=>`<div class="scenario-cell"><a href="../scenario/?frame=${encodeURIComponent(frame.id)}&world=${encodeURIComponent(w.id)}"><div><div class="cell-axis">${esc(coords(frame,w))}</div><h2>${esc(w.name)}</h2><p>${esc(w.tagline)}</p></div><span class="open-cue">Open scenario →</span></a></div>`).join('');
+ document.getElementById('scenarioMatrix').innerHTML=worlds.map(w=>`<div class="scenario-cell"><a href="../scenario/?frame=${encodeURIComponent(frame.id)}&world=${encodeURIComponent(w.id)}"><div><div class="cell-axis">${esc(coords(frame,w))}</div><h2>${esc(w.name)}</h2><p>${esc(w.tagline)}</p></div><span class="open-cue">Explore scenario →</span></a></div>`).join('');
  document.getElementById('scenarioTaxonomy').innerHTML=worlds.map(w=>familyHtml(frame,w)).join('');
 }catch(e){console.error(e);document.getElementById('scenarioMatrix').innerHTML='<p class="empty">Scenarios are unavailable.</p>';document.getElementById('scenarioTaxonomy').innerHTML='';}})();
 </script>
+<script src="../../reader_language.js?v=5"></script>
 <script src="../../site-shell.js?v=28.1"></script>
 </body></html>
