@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-admission-v1",
-  "updated_at": "2026-10-15T08:09:02Z",
+  "updated_at": "2026-10-15T12:25:32Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "decision": "drop",
@@ -32517,6 +32517,18 @@
       "deep_scan_package_id": "worker-a-20261015T075536Z-fd383b0e7c5f",
       "verification_note": "Verified work identity and core substance against packaged first-party document text and a matching official publisher page; scanner interpretation independently assessed.",
       "duplicate_of": ""
+    },
+    "historical:id:fc5c2e50633d007d": {
+      "decision": "needs_manual_verification",
+      "target_strand": "",
+      "reason_code": "NEEDS_MANUAL_VERIFICATION",
+      "reason": "Identity is credible, but substantive evidence remained inaccessible after three validated Deep Scan recovery passes; excluded from active reasoning until hands-on verification supplies materially new access.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "updated_at": "2026-10-15T12:25:31Z",
+      "deep_scan_package_id": "worker-b-20261015T104406Z-465ddd0d799e",
+      "verification_note": "Historical work verified through DOI/publisher and institutional listing. First-party article details beyond abstract remain inaccessible; no finding or method novelty is asserted.",
+      "recovery_attempts": 3
     }
   }
 }
