@@ -7,8 +7,8 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **2721** (Main **1300** + Historical **1421**)
-- Automatic queue still needing V2 verification: **411** (Main **165** + Historical **246**)
-- Currently assigned to workers: **69** (Main **24** + Historical **45**)
+- Automatic queue still needing V2 verification: **412** (Main **166** + Historical **246**)
+- Currently assigned to workers: **70** (Main **25** + Historical **45**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **30**
 - Automatic queue pending and not yet assigned: **342**
@@ -16,20 +16,20 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261015T081622Z-3a5d7370cb76`
-- Assigned unresolved records: **32**
-  1. `link:https://news.google.com/rss/articles/CBMiwwFBVV95cUxQSEVyV204SVdrRERDVnF1dWJrVk00bGlLTmVSaHZ3cUpENXJRVkxzUUVzUGJaYlpTM1A0bmJfVk5tMDNsamRkLUFWanRJS0VnX3VMbERubS1vR0VDa19BUW4wSXZmYWl0aDdTOEVMUFVqMmw0amVLU3JKaGxnZjAyNDVqV1JVNmpaejU4SUxTQ3RHSy1ac0J3LUJGeldlUTRQZnZ4REFObjgyQUUzYUJwcXN2eWVuZ0YtN003UldIUmcyT3c?oc=5` — Lithuanian model could help Horizon Europe funds go further, says vice-minister
-  2. `link:https://news.google.com/rss/articles/CBMilAFBVV95cUxOempaTU94QWJmd043dk1TTElCQ2xQV3BvbjAyTDdYWHRBU1R1WjN3RHNEQ1JoajZZSkpHUUFDMEthVkx0a3A4dHZrQWxRUmM3WnN2UE43Ymh1ME5Hc0hTMEtxcVFfU3lsTGlxZ0QzZk5kZHpFYTdRU3RCb2hFamRNbEUtNl9aN2ItZTZmVHpYV1g0d19B?oc=5` — Climate change is putting Europe’s brain health at risk
-  3. `link:https://news.google.com/rss/articles/CBMivgFBVV95cUxPc1NFMUNzVk1sZ0RKYUJDSjZPdFh3eTRzMUhrSDVCR1NJM0dOWWlKWWJvUzhPem9YRHhNdWFDeFhKTmVFYXc4WXEtQ3E4OWxUZnlvanVRelloT3N6TUl0U2VheVBrYWVxOEZqLVI1WlRjbmlWQktJODJlLWN4dmZmcE12Q3dMeU1JYnZud0tvT0gtOG1YTTBWN3A1VGpjNGhIZFJXeUw4V3VwdzByLTBfUWRVQVVETzJGMEhSU2NB?oc=5` — EXCLUSIVE: EU seeks closer Vietnam ties on critical minerals in China hedge, documents show
-  4. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxPMGR0dmZnUmhCcUtEOWg3S0t2b3oyM050TEU2WXYtQ210ZFY0T1ZZNm13NVhrclEza3paQ0ZVS3BYREY4c0pEeVRPOVBpcDlqOVBoa1Z3OHRndkVXbHVkWGNSZXdOM3gzU3pKUGNVQ3NCUFEzT3dNczFlSzB3M1RCSUVrNzAteTZKUmZ3M1lzMEhudXozTF8tYloxdWs5OWxWWmc2ajQ4Q2NMeVloYlUw?oc=5` — Europe Today: Spanish FM on Euronews, Black Sea drone attacks, EU-China reset
-  5. `link:https://news.google.com/rss/articles/CBMiwwFBVV95cUxQd3Npakc0UFloQXV1TGtRSDRIVDdreGhyV296RFRNb1BOVFAtSFhIc3FGTE1NQWVvSlJSYXNpV3BGODZNS2NtX1J4UnZ6bDc0RjdhOEtSUFNTQlA5TnM0ZjJnQ1VEWmhKTWIxVDl3Rk13OVhoeXRtSVpRZGhaekNnMHJhY2c4bE04bXQ5aThmc1BPVTdZa2tzMlp6QUlFOWQ0anBwd2h4V19ub1U1NUJCUEVNbXFOcWZ4TmRCbG1Odm5ZdVk?oc=5` — Google DeepMind, Google Cloud to allow European researchers access to frontier models
-  6. `link:https://news.google.com/rss/articles/CBMixgFBVV95cUxNLUtjZ2w4Ul9VTC1ic2piZ3hwR3k2OEVmc3g5WVFBakZpZERRaWp6U2FXTEZNeWstSHV2d2cwdWdhQV9uN1FPbnNyanAyV1dTVzh0YWtfZllaRFUzLU13RWY0cFozeXJoTUtIbjZ5TzVzWE9JTlRvRE1iUGVQWjhQN1hLbHFnMXlfMDRNOUNGS1JFSWwzTlRiaUpNaV9SNHEzcWZqVF85bHNVVnVFNXJuQXpaa1pyUC15MXcyaGtpamRCanpTcXc?oc=5` — The ‘Transformative AI Strategy for Europe’ diagnoses the problem – but its solution is capitulation
-  7. `link:https://news.google.com/rss/articles/CBMikAFBVV95cUxQX2JYOWVyaVBHaG1sbjdkTXBuWkpDa25KSHV5aUxIWlNQNmpIU2ZqelVIcUNUVnl4MW9idWx3Q3VPaDIzOVk1bjJqSnJMcDRXbTEySDE4RmpLWkNmZjQ4MVY1RkNER0RHNUpCWm4yUzN5X3RvNlVWbnlGQkJFUE45N3VJVHc2bHhZSXYwMTNwLTM?oc=5` — EU’s cyber unit turns to AI to fend off ‘high-risk’ hacks
-  8. `link:https://news.google.com/rss/articles/CBMieEFVX3lxTE03eEVMSjFwb3NEc0tEQjNwdmo1MVVMZWxOTzhuQ2lHcURET1ZKRE0xcWdQVWg0Ykt3Ti1XVVVXWDBIZUNKM3lqaW1wVTRPb295dTUybmxDQXJmQnVPRjNCYTRib0ROOGsxYkJ3UzZ3MkhkSHpMUzd5Vg?oc=5` — AI Act Scientific Panel - Shaping Europe’s digital future
-  - … plus 24 more in the package manifest
+- Current package: `worker-a-20261015T104334Z-002b20e212b3`
+- Assigned unresolved records: **33**
+  1. `link:https://news.google.com/rss/articles/CBMiqwFBVV95cUxPeXF6dFVMTkZGWXFLcmYzYnV5bm0tWkNGODBLdUVvb1JjeUR0d2hsUUo2djR6QV92enJxZGgyVWtpWXlHRUpfUDRYaEZFdVVCdmQzV3dZLWJLb1V2RTMxQUJiOWdvQmhaVzE4aFFFZ1BWSzBoVjlRQnhULThQQ3JiajJBeGJYRE50a0xMXzk4SEUxa3Vldndxcm9iMDF2LXgtSzJid2U0SWppckE?oc=5` — Council agrees to restore Horizon Europe, Erasmus+ funds for Hungary
+  2. `link:https://news.google.com/rss/articles/CBMiwwFBVV95cUxQSEVyV204SVdrRERDVnF1dWJrVk00bGlLTmVSaHZ3cUpENXJRVkxzUUVzUGJaYlpTM1A0bmJfVk5tMDNsamRkLUFWanRJS0VnX3VMbERubS1vR0VDa19BUW4wSXZmYWl0aDdTOEVMUFVqMmw0amVLU3JKaGxnZjAyNDVqV1JVNmpaejU4SUxTQ3RHSy1ac0J3LUJGeldlUTRQZnZ4REFObjgyQUUzYUJwcXN2eWVuZ0YtN003UldIUmcyT3c?oc=5` — Lithuanian model could help Horizon Europe funds go further, says vice-minister
+  3. `link:https://news.google.com/rss/articles/CBMilAFBVV95cUxOempaTU94QWJmd043dk1TTElCQ2xQV3BvbjAyTDdYWHRBU1R1WjN3RHNEQ1JoajZZSkpHUUFDMEthVkx0a3A4dHZrQWxRUmM3WnN2UE43Ymh1ME5Hc0hTMEtxcVFfU3lsTGlxZ0QzZk5kZHpFYTdRU3RCb2hFamRNbEUtNl9aN2ItZTZmVHpYV1g0d19B?oc=5` — Climate change is putting Europe’s brain health at risk
+  4. `link:https://news.google.com/rss/articles/CBMivgFBVV95cUxPc1NFMUNzVk1sZ0RKYUJDSjZPdFh3eTRzMUhrSDVCR1NJM0dOWWlKWWJvUzhPem9YRHhNdWFDeFhKTmVFYXc4WXEtQ3E4OWxUZnlvanVRelloT3N6TUl0U2VheVBrYWVxOEZqLVI1WlRjbmlWQktJODJlLWN4dmZmcE12Q3dMeU1JYnZud0tvT0gtOG1YTTBWN3A1VGpjNGhIZFJXeUw4V3VwdzByLTBfUWRVQVVETzJGMEhSU2NB?oc=5` — EXCLUSIVE: EU seeks closer Vietnam ties on critical minerals in China hedge, documents show
+  5. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxPMGR0dmZnUmhCcUtEOWg3S0t2b3oyM050TEU2WXYtQ210ZFY0T1ZZNm13NVhrclEza3paQ0ZVS3BYREY4c0pEeVRPOVBpcDlqOVBoa1Z3OHRndkVXbHVkWGNSZXdOM3gzU3pKUGNVQ3NCUFEzT3dNczFlSzB3M1RCSUVrNzAteTZKUmZ3M1lzMEhudXozTF8tYloxdWs5OWxWWmc2ajQ4Q2NMeVloYlUw?oc=5` — Europe Today: Spanish FM on Euronews, Black Sea drone attacks, EU-China reset
+  6. `link:https://news.google.com/rss/articles/CBMiwwFBVV95cUxQd3Npakc0UFloQXV1TGtRSDRIVDdreGhyV296RFRNb1BOVFAtSFhIc3FGTE1NQWVvSlJSYXNpV3BGODZNS2NtX1J4UnZ6bDc0RjdhOEtSUFNTQlA5TnM0ZjJnQ1VEWmhKTWIxVDl3Rk13OVhoeXRtSVpRZGhaekNnMHJhY2c4bE04bXQ5aThmc1BPVTdZa2tzMlp6QUlFOWQ0anBwd2h4V19ub1U1NUJCUEVNbXFOcWZ4TmRCbG1Odm5ZdVk?oc=5` — Google DeepMind, Google Cloud to allow European researchers access to frontier models
+  7. `link:https://news.google.com/rss/articles/CBMixgFBVV95cUxNLUtjZ2w4Ul9VTC1ic2piZ3hwR3k2OEVmc3g5WVFBakZpZERRaWp6U2FXTEZNeWstSHV2d2cwdWdhQV9uN1FPbnNyanAyV1dTVzh0YWtfZllaRFUzLU13RWY0cFozeXJoTUtIbjZ5TzVzWE9JTlRvRE1iUGVQWjhQN1hLbHFnMXlfMDRNOUNGS1JFSWwzTlRiaUpNaV9SNHEzcWZqVF85bHNVVnVFNXJuQXpaa1pyUC15MXcyaGtpamRCanpTcXc?oc=5` — The ‘Transformative AI Strategy for Europe’ diagnoses the problem – but its solution is capitulation
+  8. `link:https://news.google.com/rss/articles/CBMikAFBVV95cUxQX2JYOWVyaVBHaG1sbjdkTXBuWkpDa25KSHV5aUxIWlNQNmpIU2ZqelVIcUNUVnl4MW9idWx3Q3VPaDIzOVk1bjJqSnJMcDRXbTEySDE4RmpLWkNmZjQ4MVY1RkNER0RHNUpCWm4yUzN5X3RvNlVWbnlGQkJFUE45N3VJVHc2bHhZSXYwMTNwLTM?oc=5` — EU’s cyber unit turns to AI to fend off ‘high-risk’ hacks
+  - … plus 25 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261015T081710Z-465ddd0d799e`
+- Current package: `worker-b-20261015T104406Z-465ddd0d799e`
 - Assigned unresolved records: **2**
   1. `historical:id:fc5c2e50633d007d` — Setting S&T perspective priorities in an era of complexity and uncertainty: a case for megacities
   2. `historical:id:a018a18dd894f57e` — Review of PhD training in biomedical research | Wellcome
