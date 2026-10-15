@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-14T08:42:38Z",
+  "generated_at": "2026-10-15T08:09:02Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -234896,8 +234896,309 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.bertelsmann-stiftung.de/fileadmin/files/BSt/Publikationen/GrauePublikationen/European_Business_Survey.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "da3836f0",
+      "identity_hash": "57febfe71dcb1efb",
+      "reader_title": "Corporate geopolitical risk survey",
+      "reader_what": "European companies report uneven preparation for geopolitical disruptions.",
+      "reader_more": "The pilot survey covers 228 companies, with roughly 130–150 answering most questions. It examines tariffs, supply-chain diversification and companies’ resilience preparations, rather than European R&I systems. The scanner date predates the report’s September 2026 release.",
+      "deep_analysis": {
+        "work_kind": "evidence-led policy analysis",
+        "research_question": "",
+        "main_finding": "European companies report uneven preparation for geopolitical disruptions.",
+        "method_or_basis": "Pilot business survey conducted November 2025–January 2026.",
+        "qualification": "Pilot sample is non-representative; most questions had fewer responses than the overall sample.",
+        "radar_relevance": "Fails central R&I gate despite substantive European economic-security evidence.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Examined the substantive first-party material in the worker package from https://www.bertelsmann-stiftung.de/fileadmin/files/BSt/Publikationen/GrauePublikationen/European_Business_Survey.pdf."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched the work against the issuing body at https://www.bertelsmann-stiftung.de/en/publications/publication/did/european-business-survey-bridging-the-gap-between-geopolitics-and-corporate-strategy."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.bertelsmann-stiftung.de/fileadmin/files/BSt/Publikationen/GrauePublikationen/European_Business_Survey.pdf",
+            "title": "European Business Survey — Bridging the Gap between Geopolitics and Corporate Strategy",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publisher_page",
+            "url": "https://www.bertelsmann-stiftung.de/en/publications/publication/did/european-business-survey-bridging-the-gap-between-geopolitics-and-corporate-strategy",
+            "title": "European Business Survey – Bertelsmann Stiftung",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified work identity and core substance against packaged first-party document text and a matching official publisher page; scanner interpretation independently assessed."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_RI_NOT_CENTRAL",
+        "reason": "Checked A Route 1: geopolitical risks and US–China rivalry are central, but the empirical object is general corporate risk management rather than research or innovation. Route 2: survey does not measure a European R&I capability, investment, talent or technology-transfer state. Route 3: not an analytical study of R&I-system mechanisms; technology is an incidental sectoral context."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-15T08:09:01Z",
+      "deep_scan_package_id": "worker-a-20261015T075536Z-fd383b0e7c5f",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.bertelsmann-stiftung.de/fileadmin/files/user_upload/EZ_PB_How_to_Revive_Europes_Stock_Markets2026_ENG.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "4fed26ff",
+      "identity_hash": "b3a2284dd33561d1",
+      "reader_title": "Europe’s IPO gap constrains innovative scale-ups",
+      "reader_what": "European firms make smaller public listings amid fragmented equity markets and weaker growth-financing pathways.",
+      "reader_why": "Public equity access affects whether innovative firms can scale, raise capital and retain decision-making in Europe.",
+      "reader_more": "The report compares European and US listing sizes and market structures using a dataset of IPOs from 2014 to 2025. It recommends deeper investor pools, less fragmented markets and more mature firms entering public listings. Its proposed reforms are not yet proven outcomes.",
+      "deep_analysis": {
+        "work_kind": "evidence-led policy analysis",
+        "research_question": "",
+        "main_finding": "European firms make smaller public listings amid fragmented equity markets and weaker growth-financing pathways.",
+        "method_or_basis": "Constructed dataset covering US and European listings 2014–2025, compared with venture backing, free-float values and market structure.",
+        "qualification": "The comparison combines a newly assembled IPO dataset with secondary figures; financing reforms are recommendations, not observed effects.",
+        "radar_relevance": "Direct empirical European innovation-financing and scale-up mechanism under A Route 2.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Examined the substantive first-party material in the worker package from https://www.bertelsmann-stiftung.de/fileadmin/files/user_upload/EZ_PB_How_to_Revive_Europes_Stock_Markets2026_ENG.pdf."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched the work against the issuing body at https://bst-europe.eu/competitiveness-innovation/how-to-revive-europes-stock-market-listings/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.bertelsmann-stiftung.de/fileadmin/files/user_upload/EZ_PB_How_to_Revive_Europes_Stock_Markets2026_ENG.pdf",
+            "title": "How to revive Europe’s stock market listings",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publisher_page",
+            "url": "https://bst-europe.eu/competitiveness-innovation/how-to-revive-europes-stock-market-listings/",
+            "title": "How to Revive Europe’s Stock Market Listings",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified work identity and core substance against packaged first-party document text and a matching official publisher page; scanner interpretation independently assessed."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 2 qualifies: the paper measures the fragmentation and low scale of European IPO markets and ties those capital-market features directly to innovative scale-ups’ ability to raise finance and retain strategic technology activity in Europe. Route 3 also applies as an analytical report on innovation finance."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-15T08:09:01Z",
+      "deep_scan_package_id": "worker-a-20261015T075536Z-fd383b0e7c5f",
+      "claims": [
+        {
+          "object": "finance.venture_capital",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Bertelsmann Stiftung",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-09-15",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The comparison combines a newly assembled IPO dataset with secondary figures; financing reforms are recommendations, not observed effects.",
+          "text": "Analysis finds European markets offer weaker public listing and venture-backed scale-up pathways than US markets.",
+          "confidence": "high",
+          "record_key": "link:https://www.bertelsmann-stiftung.de/fileadmin/files/user_upload/EZ_PB_How_to_Revive_Europes_Stock_Markets2026_ENG.pdf",
+          "merit": 70,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:b3a2284dd33561d1:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.cost.eu/uploads/2026/10/margistar_policy_brief.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "4b7f3a3d",
+      "identity_hash": "87a44e100510b389",
+      "reader_title": "Remote regions face overlapping territorial challenges",
+      "reader_what": "A mountain-region policy brief proposes integrated approaches to economic, ecological and governance problems.",
+      "reader_more": "Its polytrap concept describes reinforcing local depopulation, environmental exposure and institutional weaknesses. Although EU policy and technology infrastructure are mentioned, the research topic is regional territorial development, not the European research-and-innovation system.",
+      "deep_analysis": {
+        "work_kind": "evidence-led policy analysis",
+        "research_question": "",
+        "main_finding": "A mountain-region policy brief proposes integrated approaches to economic, ecological and governance problems.",
+        "method_or_basis": "MARGISTAR COST research network policy synthesis on territorial capacity and compounding rural challenges.",
+        "qualification": "Policy prescriptions and conceptual framing should not be mistaken for measured impacts.",
+        "radar_relevance": "Local/territorial policy outside A central R&I gate.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Examined the substantive first-party material in the worker package from https://www.cost.eu/uploads/2026/10/margistar_policy_brief.pdf."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched the work against the issuing body at https://margistar.eu/policy-brief-strengthening-territorial-capacity-in-europes-remote-mountainous-regions/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.cost.eu/uploads/2026/10/margistar_policy_brief.pdf",
+            "title": "Policy Brief: Strengthening Territorial Capacity in Europe’s Remote Mountainous Regions",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publisher_page",
+            "url": "https://margistar.eu/policy-brief-strengthening-territorial-capacity-in-europes-remote-mountainous-regions/",
+            "title": "MARGISTAR policy brief",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified work identity and core substance against packaged first-party document text and a matching official publisher page; scanner interpretation independently assessed."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_RI_NOT_CENTRAL",
+        "reason": "A Route 1: European policy and strategic-sector examples concern regional development but are not research-and-innovation relationships. Route 2: no European R&I-system capacity/finance/transfer variable is central. Route 3: substantive object is remote mountain regions’ local territorial governance, social resilience and depopulation, not European R&I-system mechanisms."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-15T08:09:01Z",
+      "deep_scan_package_id": "worker-a-20261015T075536Z-fd383b0e7c5f",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://cdn.ceps.eu/2026/10/2026-13-FMI-Digital-euro.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "1c0e30da",
+      "identity_hash": "a8d6e44c5bbe9d94",
+      "reader_title": "Digital euro governance and access rules",
+      "reader_what": "CEPS argues for coordinated digital euro standards and fair access to mobile functionality.",
+      "reader_more": "The paper analyses proposed Article 33, interoperability, certification and market-level wallet competition. Innovation is a desired quality of payment services, not the object of European R&I evidence. The draft regulation’s recommendations are not adopted legal changes.",
+      "deep_analysis": {
+        "work_kind": "evidence-led policy analysis",
+        "research_question": "",
+        "main_finding": "CEPS argues for coordinated digital euro standards and fair access to mobile functionality.",
+        "method_or_basis": "Legal-policy analysis of draft digital euro Regulation Article 33 and payment-system governance.",
+        "qualification": "Proposed governance architecture and recommendations, not realised outcomes or proof of innovation gains.",
+        "radar_relevance": "European digital-finance policy lacks central R&I-system subject.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Examined the substantive first-party material in the worker package from https://cdn.ceps.eu/2026/10/2026-13-FMI-Digital-euro.pdf."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched the work against the issuing body at https://www.ceps.eu/ceps-publications/governing-the-digital-euro-ecosystem/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://cdn.ceps.eu/2026/10/2026-13-FMI-Digital-euro.pdf",
+            "title": "Governing the digital euro ecosystem – CEPS",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publisher_page",
+            "url": "https://www.ceps.eu/ceps-publications/governing-the-digital-euro-ecosystem/",
+            "title": "Governing the digital euro ecosystem",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified work identity and core substance against packaged first-party document text and a matching official publisher page; scanner interpretation independently assessed."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_RI_NOT_CENTRAL",
+        "reason": "A Route 1: digital monetary sovereignty is substantively European, but the strategic relationship is payment-system governance rather than research and innovation. Route 2: does not measure European R&I investment, capacity, talent or technology-transfer trajectories. Route 3: examines regulatory access to wallet/mobile functionality and payment standards, not R&I-system mechanisms."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-15T08:09:01Z",
+      "deep_scan_package_id": "worker-a-20261015T075536Z-fd383b0e7c5f",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-14T08:42:38Z"
+  "claims_updated_at": "2026-10-15T08:09:02Z"
 }
