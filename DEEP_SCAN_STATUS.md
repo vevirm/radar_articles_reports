@@ -7,8 +7,8 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **2717** (Main **1296** + Historical **1421**)
-- Automatic queue still needing V2 verification: **377** (Main **141** + Historical **236**)
-- Currently assigned to workers: **36** (Main **1** + Historical **35**)
+- Automatic queue still needing V2 verification: **415** (Main **169** + Historical **246**)
+- Currently assigned to workers: **74** (Main **29** + Historical **45**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **30**
 - Automatic queue pending and not yet assigned: **341**
@@ -16,13 +16,24 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261014T084954Z-fd7d0d429219`
-- Assigned unresolved records: **1**
-  1. `link:https://news.google.com/rss/articles/CBMiggFBVV95cUxPUjZpbEJ4cVlUbk9SNEJnRGRBdDdJTUFZaG53T2kyTlN4ajNQLVFOZEViRUFxMDdBbjZIRGxNcS1CNmE4WmRkNUxGaDhnVm1WMFpyZDRmM2JPY3ZvSUY5MG02bWdRdGFJX2VUVnV5WkNkcUwwUmtoVjN2cG5RMk9rRnl3?oc=5` — Europe’s leaders abandon the race for frontier AI — recovery attempt 2/3
+- Current package: `worker-a-20261015T075536Z-fd383b0e7c5f`
+- Assigned unresolved records: **36**
+  1. `link:https://www.bertelsmann-stiftung.de/fileadmin/files/BSt/Publikationen/GrauePublikationen/European_Business_Survey.pdf` — European Business Survey — Bridging the Gap between Geopolitics and Corporate Strategy
+  2. `link:https://www.bertelsmann-stiftung.de/fileadmin/files/user_upload/EZ_PB_How_to_Revive_Europes_Stock_Markets2026_ENG.pdf` — How to revive Europe’s stock market listings
+  3. `link:https://www.cost.eu/uploads/2026/10/margistar_policy_brief.pdf` — Policy Brief: Strengthening Territorial Capacity in Europe’s Remote Mountainous Regions
+  4. `link:https://cdn.ceps.eu/2026/10/2026-13-FMI-Digital-euro.pdf` — Governing the digital euro ecosystem – CEPS
+  5. `link:https://doi.org/10.1016/j.cose.2026.105210` — Conceptualizations and Boundaries of EU Digital Sovereignty
+  6. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=5fe1897d-c450-11f1-bfcb-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Industrial electrification and energy efficiency - Publications Office of the EU
+  7. `link:https://doi.org/10.1080/23322969.2026.2747318` — When does peace matter? global crises and European higher education governance from 2000 to 2025
+  8. `link:https://news.google.com/rss/articles/CBMiwwFBVV95cUxQSEVyV204SVdrRERDVnF1dWJrVk00bGlLTmVSaHZ3cUpENXJRVkxzUUVzUGJaYlpTM1A0bmJfVk5tMDNsamRkLUFWanRJS0VnX3VMbERubS1vR0VDa19BUW4wSXZmYWl0aDdTOEVMUFVqMmw0amVLU3JKaGxnZjAyNDVqV1JVNmpaejU4SUxTQ3RHSy1ac0J3LUJGeldlUTRQZnZ4REFObjgyQUUzYUJwcXN2eWVuZ0YtN003UldIUmcyT3c?oc=5` — Lithuanian model could help Horizon Europe funds go further, says vice-minister
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261009T080214Z-5994737f044d`
-- Assigned unresolved records: **0**
+- Current package: `worker-b-20261015T075617Z-7d45540958fc`
+- Assigned unresolved records: **3**
+  1. `historical:id:a018a18dd894f57e` — Review of PhD training in biomedical research | Wellcome
+  2. `historical:id:fc5c2e50633d007d` — Setting S&T perspective priorities in an era of complexity and uncertainty: a case for megacities
+  3. `link:https://news.google.com/rss/articles/CBMiggFBVV95cUxPUjZpbEJ4cVlUbk9SNEJnRGRBdDdJTUFZaG53T2kyTlN4ajNQLVFOZEViRUFxMDdBbjZIRGxNcS1CNmE4WmRkNUxGaDhnVm1WMFpyZDRmM2JPY3ZvSUY5MG02bWdRdGFJX2VUVnV5WkNkcUwwUmtoVjN2cG5RMk9rRnl3?oc=5` — Europe’s leaders abandon the race for frontier AI — recovery attempt 2/3
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
