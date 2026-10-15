@@ -14,7 +14,7 @@
   <section class="axis-pair-intro" aria-labelledby="axisPairTitle">
     <p class="taxonomy-kicker">2035 scenario spaces</p>
     <h1 id="axisPairTitle">Four ways to think about Europe in 2035</h1>
-    <p class="future-lede">Each lens asks two big questions about Europe’s future. Their answers create four possible worlds. Open a lens to see what those worlds could mean for European research, technology and economic resilience.</p>
+    <p class="future-lede">Each pair of questions explores two uncertainties about Europe’s future. Together, they describe four possible worlds. Choose a pair to explore what each world could mean for European research, technology and economic resilience.</p>
   </section>
   <div id="axisLensGrid" class="axis-lens-grid"><p class="empty">Loading</p></div>
 </main>
@@ -36,12 +36,12 @@ const AXIS_PAIRS=[
   {
     id:'talent-scale-up',
     title:'Talent × Scale-up capacity',
-    question:'Can Europe attract and keep the people, and can it grow what they create?'
+    question:'Can Europe attract and retain skilled people, and can it grow what they create?'
   },
   {
     id:'scale-up-dependency',
     title:'Scale-up capacity × Strategic dependency',
-    question:'Can Europe turn innovation into scale, and whose capabilities make that scale possible?'
+    question:'Can Europe grow its innovations into businesses and industries, and whose capabilities would that growth depend on?'
   }
 ];
 
@@ -57,8 +57,8 @@ const AXIS_PAIRS=[
         <p class="lens-number">0${i+1}</p>
         <h2>${esc(f.title)}</h2>
         <p>${esc(f.question)}</p>
-        <div class="lens-meta"><span>4 scenarios</span><span>4 subscenarios each</span></div>
-        <strong>Explore these uncertainties →</strong>
+        <div class="lens-meta"><span>4 scenarios</span><span>4 variants each</span></div>
+        <strong>Explore these scenarios →</strong>
       </a>
     </article>`).join('');
  }catch(e){
@@ -69,12 +69,13 @@ const AXIS_PAIRS=[
         <p class="lens-number">0${i+1}</p>
         <h2>${esc(f.title)}</h2>
         <p>${esc(f.question)}</p>
-        <div class="lens-meta"><span>4 scenarios</span><span>4 subscenarios each</span></div>
-        <strong>Explore these uncertainties →</strong>
+        <div class="lens-meta"><span>4 scenarios</span><span>4 variants each</span></div>
+        <strong>Explore these scenarios →</strong>
       </a>
     </article>`).join('');
  }
 })();
 </script>
+<script src="../reader_language.js?v=5"></script>
 <script src="../site-shell.js?v=28.1"></script>
 </body></html>
