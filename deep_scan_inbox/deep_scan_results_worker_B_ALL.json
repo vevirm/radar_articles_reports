@@ -1,0 +1,206 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-b-20261015T075617Z-7d45540958fc",
+  "results": [
+    {
+      "record_key": "historical:id:a018a18dd894f57e",
+      "source_hash": "391ea4f3",
+      "identity_hash": "2fbfceae9bc93fa8",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Examined the substantive first-party material in the worker package from https://wellcome.org/sites/default/files/wellcome-review-of-phd-training-in-biomedical-research.pdf."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matched the work against the issuing body at https://wellcome.org/sites/default/files/wellcome-review-of-phd-training-in-biomedical-research.pdf."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://wellcome.org/sites/default/files/wellcome-review-of-phd-training-in-biomedical-research.pdf",
+            "title": "Review of PhD training in biomedical research | Wellcome",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publisher_page",
+            "url": "https://wellcome.org/sites/default/files/wellcome-review-of-phd-training-in-biomedical-research.pdf",
+            "title": "Wellcome review of PhD training in biomedical research",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified work identity and core substance against packaged first-party document text and a matching official publisher page; scanner interpretation independently assessed."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3 qualifies independently of geopolitical significance: this completed, evidence-led UK review studies research career training, doctoral researcher development and progression pathways in the biomedical R&I system. Route 2 also applies to talent and workforce retention evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "UK biomedical PhD training: evidence and reform",
+      "reader_what": "Wellcome’s UK review finds broadly positive training experiences alongside pressures and gaps in researcher support.",
+      "reader_why": "Doctoral training conditions influence the development and retention of the biomedical research workforce.",
+      "reader_more": "Wellcome reviewed biomedical PhD pathways using existing datasets, literature, interviews and a researcher survey. It reports encouraging outcomes for cohort-based programmes but also concerns around supervision, publication pressure and wellbeing. The findings concern UK doctoral research, not the whole European system.",
+      "deep_analysis": {
+        "work_kind": "evidence-led policy analysis",
+        "research_question": "",
+        "main_finding": "Wellcome’s UK review finds broadly positive training experiences alongside pressures and gaps in researcher support.",
+        "method_or_basis": "UK-wide and in-house datasets, literature review, interviews and online survey from Wellcome’s 2017 review, published November 2018.",
+        "qualification": "The review is UK-specific and reports self-reported experiences alongside administrative and literature evidence; association is not proof of programme causality.",
+        "radar_relevance": "UK is European geography; primary subject is PhD research-workforce development and training governance.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "talent.career_structure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Wellcome",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2018-11",
+          "scope": {
+            "level": "associated_country",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The review is UK-specific and reports self-reported experiences alongside administrative and literature evidence; association is not proof of programme causality.",
+          "text": "Wellcome review finds both positive outcomes and persistent pressures in UK biomedical PhD training.",
+          "confidence": "high",
+          "status_date_precision": "month"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:fc5c2e50633d007d",
+      "source_hash": "e920e63c",
+      "identity_hash": "1951dbf80707cbb3",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "published_source_or_abstract",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Package stored 0 characters, read mode stored_only."
+          },
+          {
+            "step": "publisher_or_reporting_source",
+            "outcome": "source_located",
+            "note": "https://www.emerald.com/fs/article/26/2/365/1227036"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_correspondent_page",
+            "url": "https://www.emerald.com/fs/article/26/2/365/1227036",
+            "title": "Setting S&T perspective priorities in an era of complexity and uncertainty: a case for megacities",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Classification limited by source access; full authoritative verification not established."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "SUBSTANTIVE_RI_OR_METHOD",
+        "reason": "B route met provisionally: peer-reviewed method combines horizon scanning, bibliometrics, expert elicitation and composite indicators as a reproducible priority-setting approach for cities."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unchecked",
+        "duplicate_of": "",
+        "reason": "Cross-record duplication not independently verified."
+      },
+      "reader_title": "Setting S&T perspective priorities in an era of complexity and uncertainty: a case for megacities",
+      "reader_what": "2024 study illustrates technology foresight priorities for Moscow.",
+      "reader_why": "B route met provisionally: peer-reviewed method combines horizon scanning, bibliometrics, expert elicitation and composite indicators as a reproducible priority-setting approach for cities.",
+      "reader_more": "2024 study illustrates technology foresight priorities for Moscow.",
+      "deep_analysis": {
+        "work_kind": "method paper",
+        "research_question": "",
+        "main_finding": "2024 study illustrates technology foresight priorities for Moscow.",
+        "method_or_basis": "Publisher/reporting abstract or headline; full text not verified",
+        "qualification": "Do not infer downstream impacts or successful implementation from the announcement.",
+        "radar_relevance": "B route met provisionally: peer-reviewed method combines horizon scanning, bibliometrics, expert elicitation and composite indicators as a reproducible priority-setting approach for cities.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiggFBVV95cUxPUjZpbEJ4cVlUbk9SNEJnRGRBdDdJTUFZaG53T2kyTlN4ajNQLVFOZEViRUFxMDdBbjZIRGxNcS1CNmE4WmRkNUxGaDhnVm1WMFpyZDRmM2JPY3ZvSUY5MG02bWdRdGFJX2VUVnV5WkNkcUwwUmtoVjN2cG5RMk9rRnl3?oc=5",
+      "source_hash": "bfc8b79f",
+      "identity_hash": "8cd4c8f55f280282",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "insufficient",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_substantive",
+            "note": "Package stored 0 characters, read mode stored_only."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Classification limited by source access; full authoritative verification not established."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE_OR_NON_EVENT",
+        "reason": "PROVISIONAL TRIAGE ONLY: C gate: opinion about European frontier-AI strategy has not been substantiated as a new implemented research/technology action; editorial claims cannot replace primary policy evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unchecked",
+        "duplicate_of": "",
+        "reason": "Cross-record duplication not independently verified."
+      },
+      "reader_title": "Europe’s leaders abandon the race for frontier AI",
+      "reader_what": "Europe’s leaders abandon the race for frontier AI",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "news or announcement",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "Publisher/reporting abstract or headline; full text not verified",
+        "qualification": "Do not infer downstream impacts or successful implementation from the announcement.",
+        "radar_relevance": "PROVISIONAL TRIAGE ONLY: C gate: opinion about European frontier-AI strategy has not been substantiated as a new implemented research/technology action; editorial claims cannot replace primary policy evidence.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    }
+  ]
+}
