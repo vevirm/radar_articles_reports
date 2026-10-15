@@ -1,0 +1,179 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-b-20261015T104406Z-465ddd0d799e",
+  "results": [
+    {
+      "record_key": "historical:id:fc5c2e50633d007d",
+      "source_hash": "e920e63c",
+      "identity_hash": "1951dbf80707cbb3",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "partial",
+            "note": "https://doi.org/10.1108/fs-10-2023-0215 resolves to Emerald Foresight article; full text restricted"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "10.1108/FS-10-2023-0215 identifies Foresight 26(2), 365–391, Chulok and colleagues"
+          },
+          {
+            "step": "exact_title",
+            "outcome": "partial",
+            "note": "Exact quoted title yielded the Emerald publisher abstract, not the 27-page full article"
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "partial",
+            "note": "Chulok Kotsemir 2024 megacities returned the matching journal and author pages; no full text"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "partial",
+            "note": "https://publications.hse.ru/articles/900938435 confirms journal metadata and exposes /pubs/share/direct/900935904.pdf; the PDF was inaccessible through the browsing route"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "partial",
+            "note": "Searched distinctive megacities priority-setting / HSE article identifier 900938435; accessible records reproduced publisher abstract only"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_abstract",
+            "url": "https://www.emerald.com/fs/article/26/2/365/1227036",
+            "title": "Setting S&T perspective priorities in an era of complexity and uncertainty: a case for megacities",
+            "evidence_used": false
+          },
+          {
+            "kind": "institutional_bibliography",
+            "url": "https://publications.hse.ru/articles/900938435",
+            "title": "Setting S&T perspective priorities in an era of complexity and uncertainty: a case for megacities",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Historical work verified through DOI/publisher and institutional listing. First-party article details beyond abstract remain inaccessible; no finding or method novelty is asserted."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "B",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Journal and DOI identify the article, but only the publisher abstract was recoverable; the methodological detail needed to establish transferable novelty cannot be scrutinised."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:a018a18dd894f57e",
+      "source_hash": "391ea4f3",
+      "identity_hash": "2fbfceae9bc93fa8",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original wellcome.org PDF redirects to cms.wellcome.org; matching 20-page original report recovered and read"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Wellcome-hosted November 2018 full review and methodology/findings pages confirm report identity and substance"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_report_pdf",
+            "url": "https://wellcome.org/sites/default/files/wellcome-review-of-phd-training-in-biomedical-research.pdf",
+            "title": "Wellcome Review of PhD Training in Biomedical Research",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "November 2018 report verified in full, including methodology, survey limitations, comparative career data and recommendations; bibliographic release month differs from some later webpage labels."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Route 3: substantive research on UK biomedical researcher training, career pipelines and institutional supervision; UK is European R&I evidence, not a generic UK mention."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Wellcome finds UK biomedical PhD support uneven",
+      "reader_what": "Wellcome reports good research retention alongside inconsistent supervision, mental-health concerns and pressure to publish.",
+      "reader_why": "Evidence informs European research-career funding and doctoral training design.",
+      "reader_more": "The 2018 review draws on UK and Wellcome datasets, a literature review, interviews and a 2017 online survey. It reports stronger research-career retention among Wellcome cohort graduates than the biomedical PhD average. Survey respondents flagged supervision quality, scientific enquiry time, training support and mental health. Findings are descriptive and self-reported in part.",
+      "deep_analysis": {
+        "work_kind": "funder evaluation report",
+        "research_question": "How effective and supportive is UK biomedical PhD training and what should Wellcome change?",
+        "main_finding": "Doctoral training has expanded but supervision, mental health, research culture and training support need improvement.",
+        "method_or_basis": "Literature review, HESA datasets (2012–16), Wellcome career tracking, interviews and survey (2017).",
+        "qualification": "The online survey was opt-in, so wellbeing responses should not be interpreted as UK-wide prevalence estimates; comparisons do not establish causal programme effects.",
+        "radar_relevance": "Substantive European research system evidence on doctoral careers and research funding.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "talent.career_structure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Wellcome",
+            "class": "national_funder"
+          },
+          "mechanism": "assesses",
+          "direction": "mixed",
+          "status": "observed",
+          "status_date": "2018-11",
+          "scope": {
+            "level": "country",
+            "countries": [
+              "GB"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "The online survey was opt-in, so wellbeing responses should not be interpreted as UK-wide prevalence estimates; comparisons do not establish causal programme effects.",
+          "text": "Wellcome identified uneven doctoral supervision and research-culture pressures in UK biomedical PhD training.",
+          "confidence": "high",
+          "status_date_precision": "month"
+        }
+      ]
+    }
+  ]
+}
