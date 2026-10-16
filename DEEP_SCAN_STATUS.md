@@ -6,40 +6,40 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2721** (Main **1300** + Historical **1421**)
-- Automatic queue still needing V2 verification: **478** (Main **219** + Historical **259**)
-- Currently assigned to workers: **103** (Main **54** + Historical **49**)
+- Authoritative V2 verified: **2731** (Main **1310** + Historical **1421**)
+- Automatic queue still needing V2 verification: **468** (Main **209** + Historical **259**)
+- Currently assigned to workers: **92** (Main **43** + Historical **49**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **31**
-- Automatic queue pending and not yet assigned: **375**
+- Automatic queue pending and not yet assigned: **376**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261016T073231Z-eea8b7c9ce99`
-- Assigned unresolved records: **36**
-  1. `link:https://doi.org/10.82135/tno-2026-18411` — Critical Components and Market Dynamics of Quantum Sensors: Towards European technology sovereignty in an emerging industry
-  2. `link:https://doi.org/10.82135/tno-2026-18412` — Mapping Quantum Supply Chains: Towards European technology sovereignty in an emerging industry
-  3. `link:https://era.gv.at/news-items/science-europe-publishes-response-to-ec-consultation-on-evaluation-of-the-dual-use-regulation/` — Science Europe publishes response to EC consultation on evaluation of the dual-use regulation
-  4. `link:https://merics.org/sites/default/files/2026-10/MER-Report-Cleantech-English-261015%20%281%29.pdf` — Germany and China in the cleantech sector: Between opportunities, competition and location policy
-  5. `link:https://eic.ec.europa.eu/document/download/52598755-1351-4b54-b46b-e2682d0a3aec_en?filename=EIC-Work-Programme-2026.pdf` — EIC Pathfinder Open 2026 call continues to attract strong interest from the research community
-  6. `link:https://doi.org/10.1007/s41207-026-01321-7` — Do green innovation investments improve corporate financial performance? A comparative analysis of EU and US companies
-  7. `link:https://www.hybridcoe.fi/wp-content/uploads/2026/10/Hybrid-CoE-Strategic-Analysis-36-Artificial-intelligence-in-hybrid-threat-operations.pdf` — Artificial intelligence in hybrid threat operations: How AI empowers the existing adversarial playbook - Hybrid CoE - The European Centre of Excellence for Countering Hybrid Threats
-  8. `link:https://defence-industry-space.ec.europa.eu/sustainable-finance-space-sector-2026-10-22_en` — Sustainable Finance for the Space Sector
-  - … plus 28 more in the package manifest
+- Current package: `worker-a-20261016T085929Z-2b2671f2b2de`
+- Assigned unresolved records: **28**
+  1. `link:https://www.eif.org/files/attachments/czech-fund-backs-ai-deep-tech-innovation-cz.pdf` — New Czech fund backs AI and deep-tech innovation with €50m for research commercialisation
+  2. `link:https://www.eif.org/files/publications/eif-equity-barometer-2026-q2.pdf` — EIF thought leadership | Inspiring progress for future funding
+  3. `link:https://ellis.eu/publication/2008-a-semantic-multimedia-analysis-approach-utilizing-a-region-thesaurus-a` — A Semantic Multimedia Analysis Approach Utilizing a Region Thesaurus and LSA
+  4. `link:https://ellis.eu/publication/2010-an-experimental-study-of-graph-connectivity-for-unsupervised-word-sens` — An Experimental Study of Graph Connectivity for Unsupervised Word Sense Disambiguation
+  5. `link:https://era.gv.at/news-items/business-europe-publishes-discussion-paper-on-ipceis/` — Business Europe publishes discussion paper on IPCEIs
+  6. `link:https://www.interface-eu.org/publications/cyber-threats-for-europe` — Cyber threats for Europe
+  7. `link:https://www.eif.org/press/all/eif-investments-leverage-more-than-eur400-million-boosting-the-deep-technology-and-cybersecurity-sector-in-portugal` — EIF leverages over €400m to boost deep-tech and cybersecurity in Portugal
+  8. `link:https://www.atlanticcouncil.org/in-depth-research-reports/issue-brief/enabling-natos-technological-transformation/` — Enabling NATO's technological transformation
+  - … plus 20 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261016T073301Z-3df0c67c702e`
-- Assigned unresolved records: **32**
-  1. `link:https://institutdelors.eu/content/uploads/2026/07/TEMPLATE-BLOGPOST-FIRST-EN.pdf` — Trade Rounds - Trade, Supply Chains and Geopolitics: Perspectives from Policy and Practice - Institut Jacques Delors
-  2. `link:https://doi.org/10.1007/s11192-026-05834-4` — When Acknowledgements Don’t Match: Evidence from Horizon 2020
-  3. `link:https://news.google.com/rss/articles/CBMiiAFBVV95cUxORVZaOElCQzd6QXNvbmswbmFKU21IQ1dLWjNKbVNoRE95TkhHVEF3NU82Y1l2aXdVd0JnQXB3QkxYdWI0WlNxcDJjOXhnTzFDWGZOSlJxT1ZnX3J3YURIbVB2bmxiUnlybHk3RGllRU9aMmttY19zbjllM09IOFgteUVmYmtxelRR?oc=5` — Is the EU research budget actually increasing?
-  4. `link:https://news.google.com/rss/articles/CBMipgFBVV95cUxOWDh4V0dJdl9HYTFsQTNoTDhWbVk3WmtTLVFrZ1JPVGUtZTBSNDFGTjRyaExNSFZCMXBDSXpraElQaGJNcWlmZG9UekxjMjlFWEhBREd3VGhNejV0SXItOG1lMUhTVS1waWsxSFlpLVJJd1Y2THd6TWhkLTFfcnhhSUU2b3pCekpJTnhsVFhVamNpeXgybm5TUUxlQmtOQTc2MTVqRjZ3?oc=5` — Elsevier commits to accelerate AI-driven science across Europe
-  5. `link:https://news.google.com/rss/articles/CBMinwFBVV95cUxOVXJjb1Z4ekU3VVU5QlpZcWs1WTU0Q3Y5bW5OLWlmVUpnTGZITlpXSlA2NTZuYU9nMGFYTlVjdEJLT3FFUzY1bnNYX01qTTFtVUgtMnpEVFdUN2gyQWlkbW1CTThiLUZCTmZ0Y2lLQmQwT1hXQVJnbjNFMU00OUhHVWNIOVVMamo5cnRQYk5CeGVNZm1qR1hjbEFpQTVsb1U?oc=5` — Pan-European pension scheme tackles barriers for researchers
-  6. `link:https://news.google.com/rss/articles/CBMioAFBVV95cUxPZ0RuNk1kbTJpWVVCZlhSd2JmbTVEcVpSTk9rc1libE5VcFBWTFVjcUNLMzkyTjZLdkFrSF9GOXp2bGFhTEUtMkJfVklZV2NxWFZxcDdaM0pkZndNRUZwenlzMU9JcDAxd215bXRRRVUwd0hnYVQzVTZacXdoYlJsRE1UUUR1ZjZrYmNMQVVqeENib284dkJEY2NNVzNyZmFB?oc=5` — European Startup Village Forum 2026 - EU Science Hub
-  7. `link:https://eic.ec.europa.eu/news/european-innovation-council-backs-43-projects-turn-breakthrough-research-prototypes-2026-10-14_en` — European Innovation Council backs 43 projects to turn breakthrough research into prototypes
-  8. `link:https://doi.org/10.1186/s40309-026-00302-x` — When synthetic Delphi panels work: a graph-native methodology for participatory foresight under structural complexity
-  - … plus 24 more in the package manifest
+- Current package: `worker-b-20261016T090004Z-1d922c541ff3`
+- Assigned unresolved records: **29**
+  1. `link:https://news.google.com/rss/articles/CBMiiAFBVV95cUxORVZaOElCQzd6QXNvbmswbmFKU21IQ1dLWjNKbVNoRE95TkhHVEF3NU82Y1l2aXdVd0JnQXB3QkxYdWI0WlNxcDJjOXhnTzFDWGZOSlJxT1ZnX3J3YURIbVB2bmxiUnlybHk3RGllRU9aMmttY19zbjllM09IOFgteUVmYmtxelRR?oc=5` — Is the EU research budget actually increasing?
+  2. `link:https://news.google.com/rss/articles/CBMipgFBVV95cUxOWDh4V0dJdl9HYTFsQTNoTDhWbVk3WmtTLVFrZ1JPVGUtZTBSNDFGTjRyaExNSFZCMXBDSXpraElQaGJNcWlmZG9UekxjMjlFWEhBREd3VGhNejV0SXItOG1lMUhTVS1waWsxSFlpLVJJd1Y2THd6TWhkLTFfcnhhSUU2b3pCekpJTnhsVFhVamNpeXgybm5TUUxlQmtOQTc2MTVqRjZ3?oc=5` — Elsevier commits to accelerate AI-driven science across Europe
+  3. `link:https://news.google.com/rss/articles/CBMinwFBVV95cUxOVXJjb1Z4ekU3VVU5QlpZcWs1WTU0Q3Y5bW5OLWlmVUpnTGZITlpXSlA2NTZuYU9nMGFYTlVjdEJLT3FFUzY1bnNYX01qTTFtVUgtMnpEVFdUN2gyQWlkbW1CTThiLUZCTmZ0Y2lLQmQwT1hXQVJnbjNFMU00OUhHVWNIOVVMamo5cnRQYk5CeGVNZm1qR1hjbEFpQTVsb1U?oc=5` — Pan-European pension scheme tackles barriers for researchers
+  4. `link:https://news.google.com/rss/articles/CBMioAFBVV95cUxPZ0RuNk1kbTJpWVVCZlhSd2JmbTVEcVpSTk9rc1libE5VcFBWTFVjcUNLMzkyTjZLdkFrSF9GOXp2bGFhTEUtMkJfVklZV2NxWFZxcDdaM0pkZndNRUZwenlzMU9JcDAxd215bXRRRVUwd0hnYVQzVTZacXdoYlJsRE1UUUR1ZjZrYmNMQVVqeENib284dkJEY2NNVzNyZmFB?oc=5` — European Startup Village Forum 2026 - EU Science Hub
+  5. `link:https://eic.ec.europa.eu/news/european-innovation-council-backs-43-projects-turn-breakthrough-research-prototypes-2026-10-14_en` — European Innovation Council backs 43 projects to turn breakthrough research into prototypes
+  6. `link:https://doi.org/10.1186/s40309-026-00302-x` — When synthetic Delphi panels work: a graph-native methodology for participatory foresight under structural complexity
+  7. `link:https://news.google.com/rss/articles/CBMirAFBVV95cUxPMENmUllvcDNtemJGTUdXYlh1UWRmNUVLTzNreFJOSWtKZVowMHk1WHMzNmwweHY2NVJZU2hxR0NOa3BVOG80YXN2SWN0U3J0R1RjYzc5blkzdVBsaTZhVDFCc3dyNUl0QVhpY0Q4OUdsZi05UU5xTEdCQXBVdGJWRVl3R0ZnTUhIeE5PdVItY0RvVHBWYXNsVlV5OGFQNGtCSkVYWFdXa0ttSWVf?oc=5` — Germany plans AI cooperation deal with Nvidia, Handelsblatt says
+  8. `link:https://news.google.com/rss/articles/CBMisAFBVV95cUxNR1ZTeUFnSUJVRG8xa0dhcEN4ZU1FT3dOOVJYbzFxTjdERHR0NGhfVTF5VW9jeGVady1GTnkwTDdobU9rajg4Nkkzc3dxeGFwZjBYY09JVy1uWkx3aFdPZXROcEZ0MEdWRXVWRXVJSDlHcDVrN1JIc1lBVF9yZ2NkZjVFRFVtNDNhS2t2UFpkRnBLY19MRzZUbjl0MnlNZFlscTdQT0lFTUVBeUg4bXZlaw?oc=5` — EU auditors urge greater focus on research commercialisation
+  - … plus 21 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`

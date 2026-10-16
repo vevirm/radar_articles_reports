@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-15T12:25:32Z",
+  "generated_at": "2026-10-16T08:53:53Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -235197,8 +235197,861 @@
       "deep_scan_package_id": "worker-a-20261015T075536Z-fd383b0e7c5f",
       "claims": [],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.82135/tno-2026-18411": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "43219dc1",
+      "identity_hash": "02c9bc9bd709dde1",
+      "reader_title": "European quantum sensors face component and market bottlenecks",
+      "reader_what": "The paper maps critical components and market dynamics for quantum sensing, identifying European industrial challenges.",
+      "reader_why": "Component substitution and supplier ecosystems shape European sovereignty in a developing quantum industry.",
+      "reader_more": "A qualitative market and component analysis by Quantum Delta NL and TNO identifies supplier and commercialization constraints. The author copy dates the report to September 2024, not 2026. Its conclusions are exploratory rather than a comprehensive quantitative census.",
+      "deep_analysis": {
+        "work_kind": "policy report",
+        "research_question": "",
+        "main_finding": "The paper maps critical components and market dynamics for quantum sensing, identifying European industrial challenges.",
+        "method_or_basis": "Source-supplied first-party document or substantive publisher text, checked against official publication identity.",
+        "qualification": "The component survey and market-force analysis are exploratory, not a comprehensive or predictive census.",
+        "radar_relevance": "The Quantum Delta NL/TNO white paper maps European quantum-sensing component dependencies and market forces, qualifying under A routes 1 and 2.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source content supplied in package at https://content.openalex.org/works/W7221514606.pdf; independently checked identity where possible."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publication or official context confirmed at https://quantumdelta.nl/news/white-paper-critical-components-and-market-dynamics-of-quantum-sensors"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_primary_document",
+            "url": "https://content.openalex.org/works/W7221514606.pdf",
+            "title": "Critical Components and Market Dynamics of Quantum Sensors: Towards European technology sovereignty in an emerging industry",
+            "evidence_used": true
+          },
+          {
+            "kind": "independent_official_identity_confirmation",
+            "url": "https://quantumdelta.nl/news/white-paper-critical-components-and-market-dynamics-of-quantum-sensors",
+            "title": "Critical Components and Market Dynamics of Quantum Sensors: Towards European technology sovereignty in an emerging industry",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantial matching material was provided by scanner; original publication identity and dates were cross-checked via publisher/official source where available. This is not a claim of independent external full-text download."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The Quantum Delta NL/TNO white paper maps European quantum-sensing component dependencies and market forces, qualifying under A routes 1 and 2."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate in assessed batch."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-16T08:53:51Z",
+      "deep_scan_package_id": "worker-a-20261016T073231Z-eea8b7c9ce99",
+      "claims": [
+        {
+          "object": "quantum.equipment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Quantum Delta NL",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2024-09",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The component survey and market-force analysis are exploratory, not a comprehensive or predictive census.",
+          "text": "The paper maps critical components and market dynamics for quantum sensing, identifying European industrial challenges.",
+          "confidence": "medium",
+          "status_date_precision": "month",
+          "record_key": "link:https://doi.org/10.82135/tno-2026-18411",
+          "merit": 77,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:02c9bc9bd709dde1:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.82135/tno-2026-18412": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "1d276009",
+      "identity_hash": "e750c1278d10c658",
+      "reader_title": "Mapping European quantum supply-chain vulnerabilities",
+      "reader_what": "A 2022 white paper identifies critical quantum-computing components and possible EU suppliers or substitutes.",
+      "reader_why": "Early supplier concentration can limit European strategic technology autonomy.",
+      "reader_more": "The paper maps components across quantum-computing hardware platforms using a qualitative supply-chain canvas. It notes realistic EU substitution for some inputs and risks around others, including helium-3. Findings predate 2026 and are not a current event.",
+      "deep_analysis": {
+        "work_kind": "policy report",
+        "research_question": "",
+        "main_finding": "A 2022 white paper identifies critical quantum-computing components and possible EU suppliers or substitutes.",
+        "method_or_basis": "Source-supplied first-party document or substantive publisher text, checked against official publication identity.",
+        "qualification": "The mapping is an initial qualitative assessment; expanded quantitative trade and supplier validation was proposed for future work.",
+        "radar_relevance": "The 2022 primary white paper maps quantum-computing component supply chains and European substitution possibilities; A routes 1 and 2 are directly supported.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source content supplied in package at https://content.openalex.org/works/W7221506493.pdf; independently checked identity where possible."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publication or official context confirmed at https://assets.quantum-delta.prod.verveagency.com/assets/mapping-quantum-supply-chains.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_primary_document",
+            "url": "https://content.openalex.org/works/W7221506493.pdf",
+            "title": "Mapping Quantum Supply Chains: Towards European technology sovereignty in an emerging industry",
+            "evidence_used": true
+          },
+          {
+            "kind": "independent_official_identity_confirmation",
+            "url": "https://assets.quantum-delta.prod.verveagency.com/assets/mapping-quantum-supply-chains.pdf",
+            "title": "Mapping Quantum Supply Chains: Towards European technology sovereignty in an emerging industry",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantial matching material was provided by scanner; original publication identity and dates were cross-checked via publisher/official source where available. This is not a claim of independent external full-text download."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The 2022 primary white paper maps quantum-computing component supply chains and European substitution possibilities; A routes 1 and 2 are directly supported."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate in assessed batch."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-16T08:53:51Z",
+      "deep_scan_package_id": "worker-a-20261016T073231Z-eea8b7c9ce99",
+      "claims": [
+        {
+          "object": "quantum.equipment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Quantum Delta NL",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2022-09-15",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The mapping is an initial qualitative assessment; expanded quantitative trade and supplier validation was proposed for future work.",
+          "text": "A 2022 white paper identifies critical quantum-computing components and possible EU suppliers or substitutes.",
+          "confidence": "medium",
+          "record_key": "link:https://doi.org/10.82135/tno-2026-18412",
+          "merit": 77,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:e750c1278d10c658:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://era.gv.at/news-items/science-europe-publishes-response-to-ec-consultation-on-evaluation-of-the-dual-use-regulation/": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "fce63650",
+      "identity_hash": "19fb3dc132f0dd2e",
+      "reader_title": "Science Europe requests proportionate dual-use research rules",
+      "reader_what": "Science Europe issued an October 2026 response to an EU consultation on dual-use controls and research cooperation.",
+      "reader_why": "Dual-use guidance can affect researchers’ international collaboration and compliance burdens.",
+      "reader_more": "The Austrian ERA Portal reproduces a substantive account of Science Europe’s 15 October consultation response. Science Europe calls for proportionate controls, coherent research-security guidance and training. This is an association position, not a Commission decision or proof of outcomes.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "Science Europe issued an October 2026 response to an EU consultation on dual-use controls and research cooperation.",
+        "method_or_basis": "Source-supplied first-party document or substantive publisher text, checked against official publication identity.",
+        "qualification": "An advocacy response to consultation; no legislative amendment or policy effect is established.",
+        "radar_relevance": "Science Europe submitted a dated position in an EU dual-use-regulation consultation with specific research-security, due-diligence and international-collaboration implications. This is an advocacy event, not adopted law.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source content supplied in package at https://era.gv.at/news-items/science-europe-publishes-response-to-ec-consultation-on-evaluation-of-the-dual-use-regulation/; independently checked identity where possible."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_substantive_web_text",
+            "url": "https://era.gv.at/news-items/science-europe-publishes-response-to-ec-consultation-on-evaluation-of-the-dual-use-regulation/",
+            "title": "Science Europe publishes response to EC consultation on evaluation of the dual-use regulation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantial matching material was provided by scanner; original publication identity and dates were cross-checked via publisher/official source where available. This is not a claim of independent external full-text download."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "Science Europe submitted a dated position in an EU dual-use-regulation consultation with specific research-security, due-diligence and international-collaboration implications. This is an advocacy event, not adopted law."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate in assessed batch."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-16T08:53:52Z",
+      "deep_scan_package_id": "worker-a-20261016T073231Z-eea8b7c9ce99",
+      "claims": [
+        {
+          "object": "export_control.regulation",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Science Europe",
+            "class": "university_group"
+          },
+          "mechanism": "advocates",
+          "direction": "becomes_conditional",
+          "status": "proposed",
+          "status_date": "2026-10-15",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "An advocacy response to consultation; no legislative amendment or policy effect is established.",
+          "text": "Science Europe issued an October 2026 response to an EU consultation on dual-use controls and research cooperation.",
+          "confidence": "medium",
+          "record_key": "link:https://era.gv.at/news-items/science-europe-publishes-response-to-ec-consultation-on-evaluation-of-the-dual-use-regulation/",
+          "merit": 66,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:19fb3dc132f0dd2e:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://merics.org/sites/default/files/2026-10/MER-Report-Cleantech-English-261015%20%281%29.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "e12bc6c2",
+      "identity_hash": "34b5493535c25e41",
+      "reader_title": "Germany faces competing cleantech priorities regarding China",
+      "reader_what": "MERICS documents trade-offs between decarbonisation, economic interests and security in German-Chinese cleantech relations.",
+      "reader_why": "Technology and industrial policy choices affect Europe’s clean-technology capabilities and dependencies.",
+      "reader_more": "The October 2026 MERICS study draws on stakeholder perspectives and analyses tensions in Germany–China cleantech relations. It recommends joining climate targets to coherent industrial and technology policy. Those recommendations are not policies already implemented.",
+      "deep_analysis": {
+        "work_kind": "policy report",
+        "research_question": "",
+        "main_finding": "MERICS documents trade-offs between decarbonisation, economic interests and security in German-Chinese cleantech relations.",
+        "method_or_basis": "Source-supplied first-party document or substantive publisher text, checked against official publication identity.",
+        "qualification": "Stakeholder views and policy recommendations are analytical findings, not proof that proposed industrial strategies have been adopted.",
+        "radar_relevance": "MERICS analyses German cleantech stakeholders, Chinese technological dependence and European industrial-policy trade-offs; A route 1 and route 2 apply.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source content supplied in package at https://merics.org/sites/default/files/2026-10/MER-Report-Cleantech-English-261015%20%281%29.pdf; independently checked identity where possible."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publication or official context confirmed at https://merics.org/en/report/germany-and-china-cleantech-sector-between-opportunities-competition-and-location-policy"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_primary_document",
+            "url": "https://merics.org/sites/default/files/2026-10/MER-Report-Cleantech-English-261015%20%281%29.pdf",
+            "title": "Germany and China in the cleantech sector: Between opportunities, competition and location policy",
+            "evidence_used": true
+          },
+          {
+            "kind": "independent_official_identity_confirmation",
+            "url": "https://merics.org/en/report/germany-and-china-cleantech-sector-between-opportunities-competition-and-location-policy",
+            "title": "Germany and China in the cleantech sector: Between opportunities, competition and location policy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantial matching material was provided by scanner; original publication identity and dates were cross-checked via publisher/official source where available. This is not a claim of independent external full-text download."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "MERICS analyses German cleantech stakeholders, Chinese technological dependence and European industrial-policy trade-offs; A route 1 and route 2 apply."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate in assessed batch."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-16T08:53:52Z",
+      "deep_scan_package_id": "worker-a-20261016T073231Z-eea8b7c9ce99",
+      "claims": [
+        {
+          "object": "innovation.green_technology",
+          "secondary_objects": [],
+          "actor": {
+            "name": "MERICS",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2026-10-15",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Stakeholder views and policy recommendations are analytical findings, not proof that proposed industrial strategies have been adopted.",
+          "text": "MERICS documents trade-offs between decarbonisation, economic interests and security in German-Chinese cleantech relations.",
+          "confidence": "medium",
+          "record_key": "link:https://merics.org/sites/default/files/2026-10/MER-Report-Cleantech-English-261015%20%281%29.pdf",
+          "merit": 87,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:34b5493535c25e41:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://eic.ec.europa.eu/document/download/52598755-1351-4b54-b46b-e2682d0a3aec_en?filename=EIC-Work-Programme-2026.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "a6c2e46f",
+      "identity_hash": "b3e711009c097fc2",
+      "reader_title": "EIC Pathfinder receives 2,103 proposals",
+      "reader_what": "The 2026 EU Pathfinder Open call attracted 2,103 proposals requesting over €8.2 billion against €166 million indicative funding.",
+      "reader_why": "Funding demand far exceeds budget, indicating selection pressure for EU breakthrough research grants.",
+      "reader_more": "An EIC agency news announcement dated 20 May 2026 reports submissions after the 12 May deadline. It describes applications, not funded projects or successful results. The scanner-linked EIC Work Programme is contextual but not itself the announcement.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "The 2026 EU Pathfinder Open call attracted 2,103 proposals requesting over €8.2 billion against €166 million indicative funding.",
+        "method_or_basis": "Source-supplied first-party document or substantive publisher text, checked against official publication identity.",
+        "qualification": "Proposal volume and requested grants are reported submissions, not awards; successful project selection was pending.",
+        "radar_relevance": "The EIC published specific 2026 Pathfinder Open applicant demand and funding figures; the authoritative first-party news provides a new quantitative development in EU R&I financing.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source content supplied in package at https://eic.ec.europa.eu/document/download/52598755-1351-4b54-b46b-e2682d0a3aec_en?filename=EIC-Work-Programme-2026.pdf; independently checked identity where possible."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publication or official context confirmed at https://eic.ec.europa.eu/news/eic-pathfinder-open-2026-call-continues-attract-strong-interest-research-community-2026-05-20_en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_primary_document",
+            "url": "https://eic.ec.europa.eu/document/download/52598755-1351-4b54-b46b-e2682d0a3aec_en?filename=EIC-Work-Programme-2026.pdf",
+            "title": "EIC Pathfinder Open 2026 call continues to attract strong interest from the research community",
+            "evidence_used": true
+          },
+          {
+            "kind": "independent_official_identity_confirmation",
+            "url": "https://eic.ec.europa.eu/news/eic-pathfinder-open-2026-call-continues-attract-strong-interest-research-community-2026-05-20_en",
+            "title": "EIC Pathfinder Open 2026 call continues to attract strong interest from the research community",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantial matching material was provided by scanner; original publication identity and dates were cross-checked via publisher/official source where available. This is not a claim of independent external full-text download."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "The EIC published specific 2026 Pathfinder Open applicant demand and funding figures; the authoritative first-party news provides a new quantitative development in EU R&I financing."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate in assessed batch."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-16T08:53:52Z",
+      "deep_scan_package_id": "worker-a-20261016T073231Z-eea8b7c9ce99",
+      "claims": [
+        {
+          "object": "funding.route",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Innovation Council",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_contested",
+          "status": "announced",
+          "status_date": "2026-05-20",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Proposal volume and requested grants are reported submissions, not awards; successful project selection was pending.",
+          "text": "The 2026 EU Pathfinder Open call attracted 2,103 proposals requesting over €8.2 billion against €166 million indicative funding.",
+          "confidence": "medium",
+          "record_key": "link:https://eic.ec.europa.eu/document/download/52598755-1351-4b54-b46b-e2682d0a3aec_en?filename=EIC-Work-Programme-2026.pdf",
+          "merit": 99,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:b3e711009c097fc2:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1007/s41207-026-01321-7": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "29789ea1",
+      "identity_hash": "dbf0e04771468a5a",
+      "reader_title": "EU and US green-innovation investment differ",
+      "reader_what": "A firm-year study associates green innovation with financial performance and compares EU mandatory versus US voluntary regimes.",
+      "reader_why": "Distinct rules may shape company incentives to invest in green innovation.",
+      "reader_more": "The published article uses longitudinal firm-level data for 2013–2023 and system GMM modelling. It reports stronger green-innovation scores and profitability for its EU sample, but cannot by itself establish that regulation caused those differences.",
+      "deep_analysis": {
+        "work_kind": "policy report",
+        "research_question": "",
+        "main_finding": "A firm-year study associates green innovation with financial performance and compares EU mandatory versus US voluntary regimes.",
+        "method_or_basis": "Source-supplied first-party document or substantive publisher text, checked against official publication identity.",
+        "qualification": "Econometric association in a selected EU-US large-cap firm sample is not definitive proof of regulatory causality.",
+        "radar_relevance": "A comparative EU-US corporate panel study assesses regulatory regimes, green-innovation investment and financial performance, supplying direct European innovation-finance evidence under A route 2.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source content supplied in package at https://link.springer.com/article/10.1007/s41207-026-01321-7; independently checked identity where possible."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publication or official context confirmed at https://doi.org/10.1007/s41207-026-01321-7"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_substantive_web_text",
+            "url": "https://link.springer.com/article/10.1007/s41207-026-01321-7",
+            "title": "Do green innovation investments improve corporate financial performance? A comparative analysis of EU and US companies",
+            "evidence_used": true
+          },
+          {
+            "kind": "independent_official_identity_confirmation",
+            "url": "https://doi.org/10.1007/s41207-026-01321-7",
+            "title": "Do green innovation investments improve corporate financial performance? A comparative analysis of EU and US companies",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantial matching material was provided by scanner; original publication identity and dates were cross-checked via publisher/official source where available. This is not a claim of independent external full-text download."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A comparative EU-US corporate panel study assesses regulatory regimes, green-innovation investment and financial performance, supplying direct European innovation-finance evidence under A route 2."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate in assessed batch."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-16T08:53:53Z",
+      "deep_scan_package_id": "worker-a-20261016T073231Z-eea8b7c9ce99",
+      "claims": [
+        {
+          "object": "innovation.green_technology",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Research authors",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Econometric association in a selected EU-US large-cap firm sample is not definitive proof of regulatory causality.",
+          "text": "A firm-year study associates green innovation with financial performance and compares EU mandatory versus US voluntary regimes.",
+          "confidence": "medium",
+          "status_date_precision": "year",
+          "record_key": "link:https://doi.org/10.1007/s41207-026-01321-7",
+          "merit": 77,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:dbf0e04771468a5a:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.hybridcoe.fi/wp-content/uploads/2026/10/Hybrid-CoE-Strategic-Analysis-36-Artificial-intelligence-in-hybrid-threat-operations.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "b1c589d9",
+      "identity_hash": "6d57db238180b418",
+      "reader_title": "AI changes hybrid-threat operations",
+      "reader_what": "The analysis organises adversarial uses of AI into perception, intrusion and targeting capability clusters.",
+      "reader_more": "The primary policy analysis treats AI as an amplifier of hybrid threats. European security is its institutional context, not a studied European R&I mechanism. It is not a transferable new foresight method for strand B.",
+      "deep_analysis": {
+        "work_kind": "source-screening assessment",
+        "research_question": "",
+        "main_finding": "The analysis organises adversarial uses of AI into perception, intrusion and targeting capability clusters.",
+        "method_or_basis": "Source-supplied first-party document or substantive publisher text, checked against official publication identity.",
+        "qualification": "A security-threat framework does not establish an EU research-system finding or an EU R&I policy change.",
+        "radar_relevance": "Verified Hybrid CoE analytical paper on AI-assisted hybrid threats, but its core subject is adversarial threat operations generally; A routes 1–3 lack substantive analysis of the European research and innovation system or technological capability.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source content supplied in package at https://www.hybridcoe.fi/wp-content/uploads/2026/10/Hybrid-CoE-Strategic-Analysis-36-Artificial-intelligence-in-hybrid-threat-operations.pdf; independently checked identity where possible."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_primary_document",
+            "url": "https://www.hybridcoe.fi/wp-content/uploads/2026/10/Hybrid-CoE-Strategic-Analysis-36-Artificial-intelligence-in-hybrid-threat-operations.pdf",
+            "title": "Artificial intelligence in hybrid threat operations: How AI empowers the existing adversarial playbook - Hybrid CoE - The European Centre of Excellence for Countering Hybrid Threats",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantial matching material was provided by scanner; original publication identity and dates were cross-checked via publisher/official source where available. This is not a claim of independent external full-text download."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_GATE_FAILED",
+        "reason": "Verified Hybrid CoE analytical paper on AI-assisted hybrid threats, but its core subject is adversarial threat operations generally; A routes 1–3 lack substantive analysis of the European research and innovation system or technological capability."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate in assessed batch."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-16T08:53:53Z",
+      "deep_scan_package_id": "worker-a-20261016T073231Z-eea8b7c9ce99",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://defence-industry-space.ec.europa.eu/sustainable-finance-space-sector-2026-10-22_en": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "5a4470c6",
+      "identity_hash": "36ee628299326319",
+      "reader_title": "Commission schedules space finance workshop",
+      "reader_what": "An October 2026 workshop plans discussions on investment conditions and sustainable finance for space.",
+      "reader_more": "The published agenda outlines discussion topics, invitees and programme timing. It does not establish outcomes from the event or announce adopted policy. It therefore fails the evidence-product and substantive-change gates.",
+      "deep_analysis": {
+        "work_kind": "source-screening assessment",
+        "research_question": "",
+        "main_finding": "An October 2026 workshop plans discussions on investment conditions and sustainable finance for space.",
+        "method_or_basis": "Source-supplied first-party document or substantive publisher text, checked against official publication identity.",
+        "qualification": "Workshop agenda only; no completed evidence product or enacted policy.",
+        "radar_relevance": "The identified European Commission page is an upcoming workshop agenda; A routes 1–3 fail because it contains no completed R&I evidence study. Strand C also fails: no new research funding instrument, decision or policy measure is announced.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source content supplied in package at https://defence-industry-space.ec.europa.eu/sustainable-finance-space-sector-2026-10-22_en; independently checked identity where possible."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_substantive_web_text",
+            "url": "https://defence-industry-space.ec.europa.eu/sustainable-finance-space-sector-2026-10-22_en",
+            "title": "Sustainable Finance for the Space Sector",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantial matching material was provided by scanner; original publication identity and dates were cross-checked via publisher/official source where available. This is not a claim of independent external full-text download."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_GATE_FAILED",
+        "reason": "The identified European Commission page is an upcoming workshop agenda; A routes 1–3 fail because it contains no completed R&I evidence study. Strand C also fails: no new research funding instrument, decision or policy measure is announced."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate in assessed batch."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-16T08:53:53Z",
+      "deep_scan_package_id": "worker-a-20261016T073231Z-eea8b7c9ce99",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://institutdelors.eu/content/uploads/2026/07/TEMPLATE-BLOGPOST-FIRST-EN.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "e990612d",
+      "identity_hash": "903653300c637ae2",
+      "reader_title": "Delors roundtable discusses trade and geopolitical dependencies",
+      "reader_what": "Speakers discuss European trade diplomacy, tariffs and supply-chain dependence in a 2025 roundtable.",
+      "reader_more": "This is a first-party blog report of a public lecture, not a completed EU R&I-system research study. Its trade-policy discussion may be useful for a separate economic-security radar, but R&I relevance here remains peripheral.",
+      "deep_analysis": {
+        "work_kind": "source-screening assessment",
+        "research_question": "",
+        "main_finding": "Speakers discuss European trade diplomacy, tariffs and supply-chain dependence in a 2025 roundtable.",
+        "method_or_basis": "Source-supplied first-party document or substantive publisher text, checked against official publication identity.",
+        "qualification": "A roundtable account and speakers’ positions, not a new European R&I policy or empirical R&I research.",
+        "radar_relevance": "Verified 2025 first-party event write-up mainly recounts trade diplomacy, tariffs and supply-chain diversification. A routes 1–3 fail the central EU research-and-innovation subject gate; technology transfer is only a passing trade-policy recommendation.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source content supplied in package at https://institutdelors.eu/content/uploads/2026/07/TEMPLATE-BLOGPOST-FIRST-EN.pdf; independently checked identity where possible."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publication or official context confirmed at https://institutdelors.eu/en/projets/trade-rounds-jacques-delors-institute-x-paris-school-of-international-affaires-trade-policy-series/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_primary_document",
+            "url": "https://institutdelors.eu/content/uploads/2026/07/TEMPLATE-BLOGPOST-FIRST-EN.pdf",
+            "title": "Trade Rounds - Trade, Supply Chains and Geopolitics: Perspectives from Policy and Practice - Institut Jacques Delors",
+            "evidence_used": true
+          },
+          {
+            "kind": "independent_official_identity_confirmation",
+            "url": "https://institutdelors.eu/en/projets/trade-rounds-jacques-delors-institute-x-paris-school-of-international-affaires-trade-policy-series/",
+            "title": "Trade Rounds - Trade, Supply Chains and Geopolitics: Perspectives from Policy and Practice - Institut Jacques Delors",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantial matching material was provided by scanner; original publication identity and dates were cross-checked via publisher/official source where available. This is not a claim of independent external full-text download."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_GATE_FAILED",
+        "reason": "Verified 2025 first-party event write-up mainly recounts trade diplomacy, tariffs and supply-chain diversification. A routes 1–3 fail the central EU research-and-innovation subject gate; technology transfer is only a passing trade-policy recommendation."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate in assessed batch."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-16T08:53:53Z",
+      "deep_scan_package_id": "worker-b-20261016T073301Z-3df0c67c702e",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1007/s11192-026-05834-4": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "24dfedc1",
+      "identity_hash": "bf01d70812aaeaaa",
+      "reader_title": "Horizon 2020 acknowledgements poorly match CORDIS",
+      "reader_what": "Only 52.5% of Scopus papers acknowledging Horizon 2020 in studied fields matched a CORDIS project record.",
+      "reader_why": "Acknowledgement metadata alone can distort interpretation of EU research funding and its outputs.",
+      "reader_more": "The article compares 66,758 Scopus records to reported CORDIS outputs in social-science-related disciplines using DOI and fuzzy-title matching. The divergence is persistent; matching failures and reporting differences remain possible explanations. The results concern measurement, not proof of funding misuse.",
+      "deep_analysis": {
+        "work_kind": "policy report",
+        "research_question": "",
+        "main_finding": "Only 52.5% of Scopus papers acknowledging Horizon 2020 in studied fields matched a CORDIS project record.",
+        "method_or_basis": "Source-supplied first-party document or substantive publisher text, checked against official publication identity.",
+        "qualification": "Social-science-related Scopus records are the analytical population; unmatched acknowledgement does not establish false funding claims.",
+        "radar_relevance": "The journal study cross-matches bibliometric Horizon 2020 acknowledgements and CORDIS outputs; this is direct completed evidence on EU research-funding measurement under A route 3.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source content supplied in package at https://link.springer.com/article/10.1007/s11192-026-05834-4; independently checked identity where possible."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publication or official context confirmed at https://doi.org/10.1007/s11192-026-05834-4"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_substantive_web_text",
+            "url": "https://link.springer.com/article/10.1007/s11192-026-05834-4",
+            "title": "When Acknowledgements Don’t Match: Evidence from Horizon 2020",
+            "evidence_used": true
+          },
+          {
+            "kind": "independent_official_identity_confirmation",
+            "url": "https://doi.org/10.1007/s11192-026-05834-4",
+            "title": "When Acknowledgements Don’t Match: Evidence from Horizon 2020",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantial matching material was provided by scanner; original publication identity and dates were cross-checked via publisher/official source where available. This is not a claim of independent external full-text download."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The journal study cross-matches bibliometric Horizon 2020 acknowledgements and CORDIS outputs; this is direct completed evidence on EU research-funding measurement under A route 3."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate in assessed batch."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-16T08:53:53Z",
+      "deep_scan_package_id": "worker-b-20261016T073301Z-3df0c67c702e",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Research authors",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2026",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Social-science-related Scopus records are the analytical population; unmatched acknowledgement does not establish false funding claims.",
+          "text": "Only 52.5% of Scopus papers acknowledging Horizon 2020 in studied fields matched a CORDIS project record.",
+          "confidence": "medium",
+          "status_date_precision": "year",
+          "record_key": "link:https://doi.org/10.1007/s11192-026-05834-4",
+          "merit": 77,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:bf01d70812aaeaaa:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-15T08:09:02Z"
+  "claims_updated_at": "2026-10-16T08:53:53Z"
 }
