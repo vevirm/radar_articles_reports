@@ -1,0 +1,2625 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-a-20261016T073231Z-eea8b7c9ce99",
+  "results": [
+    {
+      "record_key": "link:https://doi.org/10.82135/tno-2026-18411",
+      "source_hash": "43219dc1",
+      "identity_hash": "02c9bc9bd709dde1",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source content supplied in package at https://content.openalex.org/works/W7221514606.pdf; independently checked identity where possible."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publication or official context confirmed at https://quantumdelta.nl/news/white-paper-critical-components-and-market-dynamics-of-quantum-sensors"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_primary_document",
+            "url": "https://content.openalex.org/works/W7221514606.pdf",
+            "title": "Critical Components and Market Dynamics of Quantum Sensors: Towards European technology sovereignty in an emerging industry",
+            "evidence_used": true
+          },
+          {
+            "kind": "independent_official_identity_confirmation",
+            "url": "https://quantumdelta.nl/news/white-paper-critical-components-and-market-dynamics-of-quantum-sensors",
+            "title": "Critical Components and Market Dynamics of Quantum Sensors: Towards European technology sovereignty in an emerging industry",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantial matching material was provided by scanner; original publication identity and dates were cross-checked via publisher/official source where available. This is not a claim of independent external full-text download."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The Quantum Delta NL/TNO white paper maps European quantum-sensing component dependencies and market forces, qualifying under A routes 1 and 2."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2024-09"
+        },
+        "unset": [],
+        "reason": "Corrected using dated primary document or EIC official announcement, rather than scanner crawl date."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate in assessed batch."
+      },
+      "reader_title": "European quantum sensors face component and market bottlenecks",
+      "reader_what": "The paper maps critical components and market dynamics for quantum sensing, identifying European industrial challenges.",
+      "reader_why": "Component substitution and supplier ecosystems shape European sovereignty in a developing quantum industry.",
+      "reader_more": "A qualitative market and component analysis by Quantum Delta NL and TNO identifies supplier and commercialization constraints. The author copy dates the report to September 2024, not 2026. Its conclusions are exploratory rather than a comprehensive quantitative census.",
+      "deep_analysis": {
+        "work_kind": "policy report",
+        "research_question": "",
+        "main_finding": "The paper maps critical components and market dynamics for quantum sensing, identifying European industrial challenges.",
+        "method_or_basis": "Source-supplied first-party document or substantive publisher text, checked against official publication identity.",
+        "qualification": "The component survey and market-force analysis are exploratory, not a comprehensive or predictive census.",
+        "radar_relevance": "The Quantum Delta NL/TNO white paper maps European quantum-sensing component dependencies and market forces, qualifying under A routes 1 and 2.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "quantum.equipment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Quantum Delta NL",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2024-09",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The component survey and market-force analysis are exploratory, not a comprehensive or predictive census.",
+          "text": "The paper maps critical components and market dynamics for quantum sensing, identifying European industrial challenges.",
+          "confidence": "medium",
+          "status_date_precision": "month"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.82135/tno-2026-18412",
+      "source_hash": "1d276009",
+      "identity_hash": "e750c1278d10c658",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source content supplied in package at https://content.openalex.org/works/W7221506493.pdf; independently checked identity where possible."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publication or official context confirmed at https://assets.quantum-delta.prod.verveagency.com/assets/mapping-quantum-supply-chains.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_primary_document",
+            "url": "https://content.openalex.org/works/W7221506493.pdf",
+            "title": "Mapping Quantum Supply Chains: Towards European technology sovereignty in an emerging industry",
+            "evidence_used": true
+          },
+          {
+            "kind": "independent_official_identity_confirmation",
+            "url": "https://assets.quantum-delta.prod.verveagency.com/assets/mapping-quantum-supply-chains.pdf",
+            "title": "Mapping Quantum Supply Chains: Towards European technology sovereignty in an emerging industry",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantial matching material was provided by scanner; original publication identity and dates were cross-checked via publisher/official source where available. This is not a claim of independent external full-text download."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The 2022 primary white paper maps quantum-computing component supply chains and European substitution possibilities; A routes 1 and 2 are directly supported."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2022-09-15"
+        },
+        "unset": [],
+        "reason": "Corrected using dated primary document or EIC official announcement, rather than scanner crawl date."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate in assessed batch."
+      },
+      "reader_title": "Mapping European quantum supply-chain vulnerabilities",
+      "reader_what": "A 2022 white paper identifies critical quantum-computing components and possible EU suppliers or substitutes.",
+      "reader_why": "Early supplier concentration can limit European strategic technology autonomy.",
+      "reader_more": "The paper maps components across quantum-computing hardware platforms using a qualitative supply-chain canvas. It notes realistic EU substitution for some inputs and risks around others, including helium-3. Findings predate 2026 and are not a current event.",
+      "deep_analysis": {
+        "work_kind": "policy report",
+        "research_question": "",
+        "main_finding": "A 2022 white paper identifies critical quantum-computing components and possible EU suppliers or substitutes.",
+        "method_or_basis": "Source-supplied first-party document or substantive publisher text, checked against official publication identity.",
+        "qualification": "The mapping is an initial qualitative assessment; expanded quantitative trade and supplier validation was proposed for future work.",
+        "radar_relevance": "The 2022 primary white paper maps quantum-computing component supply chains and European substitution possibilities; A routes 1 and 2 are directly supported.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "quantum.equipment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Quantum Delta NL",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2022-09-15",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The mapping is an initial qualitative assessment; expanded quantitative trade and supplier validation was proposed for future work.",
+          "text": "A 2022 white paper identifies critical quantum-computing components and possible EU suppliers or substitutes.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://era.gv.at/news-items/science-europe-publishes-response-to-ec-consultation-on-evaluation-of-the-dual-use-regulation/",
+      "source_hash": "fce63650",
+      "identity_hash": "19fb3dc132f0dd2e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source content supplied in package at https://era.gv.at/news-items/science-europe-publishes-response-to-ec-consultation-on-evaluation-of-the-dual-use-regulation/; independently checked identity where possible."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_substantive_web_text",
+            "url": "https://era.gv.at/news-items/science-europe-publishes-response-to-ec-consultation-on-evaluation-of-the-dual-use-regulation/",
+            "title": "Science Europe publishes response to EC consultation on evaluation of the dual-use regulation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantial matching material was provided by scanner; original publication identity and dates were cross-checked via publisher/official source where available. This is not a claim of independent external full-text download."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "Science Europe submitted a dated position in an EU dual-use-regulation consultation with specific research-security, due-diligence and international-collaboration implications. This is an advocacy event, not adopted law."
+      },
+      "metadata_correction": {
+        "fields": {
+          "type": "consultation response news"
+        },
+        "unset": [],
+        "reason": "Source is a dated news description of a research-stakeholder consultation response."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate in assessed batch."
+      },
+      "reader_title": "Science Europe requests proportionate dual-use research rules",
+      "reader_what": "Science Europe issued an October 2026 response to an EU consultation on dual-use controls and research cooperation.",
+      "reader_why": "Dual-use guidance can affect researchers’ international collaboration and compliance burdens.",
+      "reader_more": "The Austrian ERA Portal reproduces a substantive account of Science Europe’s 15 October consultation response. Science Europe calls for proportionate controls, coherent research-security guidance and training. This is an association position, not a Commission decision or proof of outcomes.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "Science Europe issued an October 2026 response to an EU consultation on dual-use controls and research cooperation.",
+        "method_or_basis": "Source-supplied first-party document or substantive publisher text, checked against official publication identity.",
+        "qualification": "An advocacy response to consultation; no legislative amendment or policy effect is established.",
+        "radar_relevance": "Science Europe submitted a dated position in an EU dual-use-regulation consultation with specific research-security, due-diligence and international-collaboration implications. This is an advocacy event, not adopted law.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "export_control.regulation",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Science Europe",
+            "class": "university_group"
+          },
+          "mechanism": "advocates",
+          "direction": "becomes_conditional",
+          "status": "proposed",
+          "status_date": "2026-10-15",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "An advocacy response to consultation; no legislative amendment or policy effect is established.",
+          "text": "Science Europe issued an October 2026 response to an EU consultation on dual-use controls and research cooperation.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://merics.org/sites/default/files/2026-10/MER-Report-Cleantech-English-261015%20%281%29.pdf",
+      "source_hash": "e12bc6c2",
+      "identity_hash": "34b5493535c25e41",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source content supplied in package at https://merics.org/sites/default/files/2026-10/MER-Report-Cleantech-English-261015%20%281%29.pdf; independently checked identity where possible."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publication or official context confirmed at https://merics.org/en/report/germany-and-china-cleantech-sector-between-opportunities-competition-and-location-policy"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_primary_document",
+            "url": "https://merics.org/sites/default/files/2026-10/MER-Report-Cleantech-English-261015%20%281%29.pdf",
+            "title": "Germany and China in the cleantech sector: Between opportunities, competition and location policy",
+            "evidence_used": true
+          },
+          {
+            "kind": "independent_official_identity_confirmation",
+            "url": "https://merics.org/en/report/germany-and-china-cleantech-sector-between-opportunities-competition-and-location-policy",
+            "title": "Germany and China in the cleantech sector: Between opportunities, competition and location policy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantial matching material was provided by scanner; original publication identity and dates were cross-checked via publisher/official source where available. This is not a claim of independent external full-text download."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "MERICS analyses German cleantech stakeholders, Chinese technological dependence and European industrial-policy trade-offs; A route 1 and route 2 apply."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate in assessed batch."
+      },
+      "reader_title": "Germany faces competing cleantech priorities regarding China",
+      "reader_what": "MERICS documents trade-offs between decarbonisation, economic interests and security in German-Chinese cleantech relations.",
+      "reader_why": "Technology and industrial policy choices affect Europe’s clean-technology capabilities and dependencies.",
+      "reader_more": "The October 2026 MERICS study draws on stakeholder perspectives and analyses tensions in Germany–China cleantech relations. It recommends joining climate targets to coherent industrial and technology policy. Those recommendations are not policies already implemented.",
+      "deep_analysis": {
+        "work_kind": "policy report",
+        "research_question": "",
+        "main_finding": "MERICS documents trade-offs between decarbonisation, economic interests and security in German-Chinese cleantech relations.",
+        "method_or_basis": "Source-supplied first-party document or substantive publisher text, checked against official publication identity.",
+        "qualification": "Stakeholder views and policy recommendations are analytical findings, not proof that proposed industrial strategies have been adopted.",
+        "radar_relevance": "MERICS analyses German cleantech stakeholders, Chinese technological dependence and European industrial-policy trade-offs; A route 1 and route 2 apply.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "innovation.green_technology",
+          "secondary_objects": [],
+          "actor": {
+            "name": "MERICS",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2026-10-15",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Stakeholder views and policy recommendations are analytical findings, not proof that proposed industrial strategies have been adopted.",
+          "text": "MERICS documents trade-offs between decarbonisation, economic interests and security in German-Chinese cleantech relations.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://eic.ec.europa.eu/document/download/52598755-1351-4b54-b46b-e2682d0a3aec_en?filename=EIC-Work-Programme-2026.pdf",
+      "source_hash": "a6c2e46f",
+      "identity_hash": "b3e711009c097fc2",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source content supplied in package at https://eic.ec.europa.eu/document/download/52598755-1351-4b54-b46b-e2682d0a3aec_en?filename=EIC-Work-Programme-2026.pdf; independently checked identity where possible."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publication or official context confirmed at https://eic.ec.europa.eu/news/eic-pathfinder-open-2026-call-continues-attract-strong-interest-research-community-2026-05-20_en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_primary_document",
+            "url": "https://eic.ec.europa.eu/document/download/52598755-1351-4b54-b46b-e2682d0a3aec_en?filename=EIC-Work-Programme-2026.pdf",
+            "title": "EIC Pathfinder Open 2026 call continues to attract strong interest from the research community",
+            "evidence_used": true
+          },
+          {
+            "kind": "independent_official_identity_confirmation",
+            "url": "https://eic.ec.europa.eu/news/eic-pathfinder-open-2026-call-continues-attract-strong-interest-research-community-2026-05-20_en",
+            "title": "EIC Pathfinder Open 2026 call continues to attract strong interest from the research community",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantial matching material was provided by scanner; original publication identity and dates were cross-checked via publisher/official source where available. This is not a claim of independent external full-text download."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "The EIC published specific 2026 Pathfinder Open applicant demand and funding figures; the authoritative first-party news provides a new quantitative development in EU R&I financing."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-05-20",
+          "type": "official news announcement"
+        },
+        "unset": [],
+        "reason": "Corrected using dated primary document or EIC official announcement, rather than scanner crawl date."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate in assessed batch."
+      },
+      "reader_title": "EIC Pathfinder receives 2,103 proposals",
+      "reader_what": "The 2026 EU Pathfinder Open call attracted 2,103 proposals requesting over €8.2 billion against €166 million indicative funding.",
+      "reader_why": "Funding demand far exceeds budget, indicating selection pressure for EU breakthrough research grants.",
+      "reader_more": "An EIC agency news announcement dated 20 May 2026 reports submissions after the 12 May deadline. It describes applications, not funded projects or successful results. The scanner-linked EIC Work Programme is contextual but not itself the announcement.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "The 2026 EU Pathfinder Open call attracted 2,103 proposals requesting over €8.2 billion against €166 million indicative funding.",
+        "method_or_basis": "Source-supplied first-party document or substantive publisher text, checked against official publication identity.",
+        "qualification": "Proposal volume and requested grants are reported submissions, not awards; successful project selection was pending.",
+        "radar_relevance": "The EIC published specific 2026 Pathfinder Open applicant demand and funding figures; the authoritative first-party news provides a new quantitative development in EU R&I financing.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "funding.route",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Innovation Council",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_contested",
+          "status": "announced",
+          "status_date": "2026-05-20",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Proposal volume and requested grants are reported submissions, not awards; successful project selection was pending.",
+          "text": "The 2026 EU Pathfinder Open call attracted 2,103 proposals requesting over €8.2 billion against €166 million indicative funding.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1007/s41207-026-01321-7",
+      "source_hash": "29789ea1",
+      "identity_hash": "dbf0e04771468a5a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source content supplied in package at https://link.springer.com/article/10.1007/s41207-026-01321-7; independently checked identity where possible."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publication or official context confirmed at https://doi.org/10.1007/s41207-026-01321-7"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_substantive_web_text",
+            "url": "https://link.springer.com/article/10.1007/s41207-026-01321-7",
+            "title": "Do green innovation investments improve corporate financial performance? A comparative analysis of EU and US companies",
+            "evidence_used": true
+          },
+          {
+            "kind": "independent_official_identity_confirmation",
+            "url": "https://doi.org/10.1007/s41207-026-01321-7",
+            "title": "Do green innovation investments improve corporate financial performance? A comparative analysis of EU and US companies",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantial matching material was provided by scanner; original publication identity and dates were cross-checked via publisher/official source where available. This is not a claim of independent external full-text download."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A comparative EU-US corporate panel study assesses regulatory regimes, green-innovation investment and financial performance, supplying direct European innovation-finance evidence under A route 2."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate in assessed batch."
+      },
+      "reader_title": "EU and US green-innovation investment differ",
+      "reader_what": "A firm-year study associates green innovation with financial performance and compares EU mandatory versus US voluntary regimes.",
+      "reader_why": "Distinct rules may shape company incentives to invest in green innovation.",
+      "reader_more": "The published article uses longitudinal firm-level data for 2013–2023 and system GMM modelling. It reports stronger green-innovation scores and profitability for its EU sample, but cannot by itself establish that regulation caused those differences.",
+      "deep_analysis": {
+        "work_kind": "policy report",
+        "research_question": "",
+        "main_finding": "A firm-year study associates green innovation with financial performance and compares EU mandatory versus US voluntary regimes.",
+        "method_or_basis": "Source-supplied first-party document or substantive publisher text, checked against official publication identity.",
+        "qualification": "Econometric association in a selected EU-US large-cap firm sample is not definitive proof of regulatory causality.",
+        "radar_relevance": "A comparative EU-US corporate panel study assesses regulatory regimes, green-innovation investment and financial performance, supplying direct European innovation-finance evidence under A route 2.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "innovation.green_technology",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Research authors",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Econometric association in a selected EU-US large-cap firm sample is not definitive proof of regulatory causality.",
+          "text": "A firm-year study associates green innovation with financial performance and compares EU mandatory versus US voluntary regimes.",
+          "confidence": "medium",
+          "status_date_precision": "year"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://www.hybridcoe.fi/wp-content/uploads/2026/10/Hybrid-CoE-Strategic-Analysis-36-Artificial-intelligence-in-hybrid-threat-operations.pdf",
+      "source_hash": "b1c589d9",
+      "identity_hash": "6d57db238180b418",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source content supplied in package at https://www.hybridcoe.fi/wp-content/uploads/2026/10/Hybrid-CoE-Strategic-Analysis-36-Artificial-intelligence-in-hybrid-threat-operations.pdf; independently checked identity where possible."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_primary_document",
+            "url": "https://www.hybridcoe.fi/wp-content/uploads/2026/10/Hybrid-CoE-Strategic-Analysis-36-Artificial-intelligence-in-hybrid-threat-operations.pdf",
+            "title": "Artificial intelligence in hybrid threat operations: How AI empowers the existing adversarial playbook - Hybrid CoE - The European Centre of Excellence for Countering Hybrid Threats",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantial matching material was provided by scanner; original publication identity and dates were cross-checked via publisher/official source where available. This is not a claim of independent external full-text download."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_GATE_FAILED",
+        "reason": "Verified Hybrid CoE analytical paper on AI-assisted hybrid threats, but its core subject is adversarial threat operations generally; A routes 1–3 lack substantive analysis of the European research and innovation system or technological capability."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate in assessed batch."
+      },
+      "reader_title": "AI changes hybrid-threat operations",
+      "reader_what": "The analysis organises adversarial uses of AI into perception, intrusion and targeting capability clusters.",
+      "reader_why": "",
+      "reader_more": "The primary policy analysis treats AI as an amplifier of hybrid threats. European security is its institutional context, not a studied European R&I mechanism. It is not a transferable new foresight method for strand B.",
+      "deep_analysis": {
+        "work_kind": "source-screening assessment",
+        "research_question": "",
+        "main_finding": "The analysis organises adversarial uses of AI into perception, intrusion and targeting capability clusters.",
+        "method_or_basis": "Source-supplied first-party document or substantive publisher text, checked against official publication identity.",
+        "qualification": "A security-threat framework does not establish an EU research-system finding or an EU R&I policy change.",
+        "radar_relevance": "Verified Hybrid CoE analytical paper on AI-assisted hybrid threats, but its core subject is adversarial threat operations generally; A routes 1–3 lack substantive analysis of the European research and innovation system or technological capability.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://defence-industry-space.ec.europa.eu/sustainable-finance-space-sector-2026-10-22_en",
+      "source_hash": "5a4470c6",
+      "identity_hash": "36ee628299326319",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Source content supplied in package at https://defence-industry-space.ec.europa.eu/sustainable-finance-space-sector-2026-10-22_en; independently checked identity where possible."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_substantive_web_text",
+            "url": "https://defence-industry-space.ec.europa.eu/sustainable-finance-space-sector-2026-10-22_en",
+            "title": "Sustainable Finance for the Space Sector",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Substantial matching material was provided by scanner; original publication identity and dates were cross-checked via publisher/official source where available. This is not a claim of independent external full-text download."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_GATE_FAILED",
+        "reason": "The identified European Commission page is an upcoming workshop agenda; A routes 1–3 fail because it contains no completed R&I evidence study. Strand C also fails: no new research funding instrument, decision or policy measure is announced."
+      },
+      "metadata_correction": {
+        "fields": {
+          "type": "event/workshop announcement"
+        },
+        "unset": [],
+        "reason": "The first-party page is a workshop agenda, not a completed evidence report."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate in assessed batch."
+      },
+      "reader_title": "Commission schedules space finance workshop",
+      "reader_what": "An October 2026 workshop plans discussions on investment conditions and sustainable finance for space.",
+      "reader_why": "",
+      "reader_more": "The published agenda outlines discussion topics, invitees and programme timing. It does not establish outcomes from the event or announce adopted policy. It therefore fails the evidence-product and substantive-change gates.",
+      "deep_analysis": {
+        "work_kind": "source-screening assessment",
+        "research_question": "",
+        "main_finding": "An October 2026 workshop plans discussions on investment conditions and sustainable finance for space.",
+        "method_or_basis": "Source-supplied first-party document or substantive publisher text, checked against official publication identity.",
+        "qualification": "Workshop agenda only; no completed evidence product or enacted policy.",
+        "radar_relevance": "The identified European Commission page is an upcoming workshop agenda; A routes 1–3 fail because it contains no completed R&I evidence study. Strand C also fails: no new research funding instrument, decision or policy measure is announced.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1093/jel/eqag037",
+      "source_hash": "34b6b9c4",
+      "identity_hash": "aa53b60fcc92f941",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Original stored/crawl material incomplete at https://doi.org/10.1093/jel/eqag037"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching identity/finding via https://academic.oup.com/jel/advance-article/doi/10.1093/jel/eqag037/8918453"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "recovered_official_or_publisher_record",
+            "url": "https://academic.oup.com/jel/advance-article/doi/10.1093/jel/eqag037/8918453",
+            "title": "Algorithmic governance of carbon markets: the limits of EU climate law and AI as regulatory infrastructure",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Assessed matching text in supplied package, and checked a first-party/independent matching source at https://academic.oup.com/jel/advance-article/doi/10.1093/jel/eqag037/8918453 Claims distinguish statements/announcements from measured outcomes."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "A routes 1, 2 and 3 fail the central R&I-system gate; AI is proposed for carbon-market regulation, not assessed as European R&I capacity."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identical underlying source verified within assessed records."
+      },
+      "reader_title": "Algorithmic governance of carbon markets: the limits of EU climate law and AI as regulatory infrastructur",
+      "reader_what": "The paper examines legal and technical governance of carbon-market MRV rather than European research-system performance.",
+      "reader_why": "",
+      "reader_more": "The paper examines legal and technical governance of carbon-market MRV rather than European research-system performance. A routes 1, 2 and 3 fail the central R&I-system gate; AI is proposed for carbon-market regulation, not assessed as European R&I capacity.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "The paper examines legal and technical governance of carbon-market MRV rather than European research-system performance.",
+        "method_or_basis": "Supplied matching substantive text and/or matching publisher/official evidence: journal primary substantive.",
+        "qualification": "Source identity and scope are supported; the positive admission routes fail the central European R&I or methodological evidence gate.",
+        "radar_relevance": "A routes 1, 2 and 3 fail the central R&I-system gate; AI is proposed for carbon-market regulation, not assessed as European R&I capacity.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://publications.jrc.ec.europa.eu/repository/handle/JRC148682",
+      "source_hash": "140b7b84",
+      "identity_hash": "53a3185d0c8cf621",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Original stored/crawl material incomplete at https://publications.jrc.ec.europa.eu/repository/handle/JRC148682"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching identity/finding via https://publications.jrc.ec.europa.eu/repository/handle/JRC148682?mode=full"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "recovered_official_or_publisher_record",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC148682?mode=full",
+            "title": "Digital Sovereignty Metrics",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Assessed matching text in supplied package, and checked a first-party/independent matching source at https://publications.jrc.ec.europa.eu/repository/handle/JRC148682?mode=full Claims distinguish statements/announcements from measured outcomes."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Completed JRC dataset collection supports European technology-dependency measurements under A route 2 and is an analytical infrastructure under route 3."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identical underlying source verified within assessed records."
+      },
+      "reader_title": "Digital Sovereignty Metrics",
+      "reader_what": "The JRC releases a data collection supporting multidimensional EU digital-sovereignty analysis and strategic-dependency measurement.",
+      "reader_why": "Completed JRC dataset collection supports European technology-dependency measurements under A route 2 and is an analytical infrastructure under r",
+      "reader_more": "The JRC releases a data collection supporting multidimensional EU digital-sovereignty analysis and strategic-dependency measurement. Completed JRC dataset collection supports European technology-dependency measurements under A route 2 and is an analytical infrastructure under route 3.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "The JRC releases a data collection supporting multidimensional EU digital-sovereignty analysis and strategic-dependency measurement.",
+        "method_or_basis": "Supplied matching substantive text and/or matching publisher/official evidence: official dataset description.",
+        "qualification": "The work reports analysis or an actor position; it does not prove prospective outcomes.",
+        "radar_relevance": "Completed JRC dataset collection supports European technology-dependency measurements under A route 2 and is an analytical infrastructure under route 3.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "JRC",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-10-15",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The work reports analysis or an actor position; it does not prove prospective outcomes.",
+          "text": "The JRC releases a data collection supporting multidimensional EU digital-sovereignty analysis and strategic-dependency measurement.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://hadea.ec.europa.eu/calls-proposals/horizon-europe-industry-leadership-materials-and-production-europe_en",
+      "source_hash": "d93df2a7",
+      "identity_hash": "0f74eba9b90b624b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Original stored/crawl material incomplete at https://hadea.ec.europa.eu/calls-proposals/horizon-europe-industry-leadership-materials-and-production-europe_en"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching identity/finding via https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=intcom%3AC%282021%297804"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "recovered_official_or_publisher_record",
+            "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=intcom%3AC%282021%297804",
+            "title": "Horizon Europe Industry: Leadership in materials and production for Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Assessed matching text in supplied package, and checked a first-party/independent matching source at https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=intcom%3AC%282021%297804 Claims distinguish statements/announcements from measured outcomes."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "A routes 1–3 require completed substantive EU R&I research evidence; a static public call page is a funding opportunity, not a study."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identical underlying source verified within assessed records."
+      },
+      "reader_title": "Horizon Europe Industry: Leadership in materials and production for Europe",
+      "reader_what": "HaDEA lists Horizon Europe industrial-leadership funding calls for materials and production.",
+      "reader_why": "",
+      "reader_more": "HaDEA lists Horizon Europe industrial-leadership funding calls for materials and production. A routes 1–3 require completed substantive EU R&I research evidence; a static public call page is a funding opportunity, not a study.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "HaDEA lists Horizon Europe industrial-leadership funding calls for materials and production.",
+        "method_or_basis": "Supplied matching substantive text and/or matching publisher/official evidence: official horizon work programme.",
+        "qualification": "Source identity and scope are supported; the positive admission routes fail the central European R&I or methodological evidence gate.",
+        "radar_relevance": "A routes 1–3 require completed substantive EU R&I research evidence; a static public call page is a funding opportunity, not a study.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://www.eif.org/files/attachments/czech-fund-backs-ai-deep-tech-innovation-cz.pdf",
+      "source_hash": "f67745d4",
+      "identity_hash": "82bc2eca75f2baef",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching document text available in package at https://www.eif.org/files/attachments/czech-fund-backs-ai-deep-tech-innovation-cz.pdf"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching identity/finding via https://www.eif.org/press/all/first-czech-technology-transfer-fund-focused-on-ai-applications-to-invest-nearly-eur50-million-in-research-commercialisation"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_full_or_substantial_primary",
+            "url": "https://www.eif.org/press/all/first-czech-technology-transfer-fund-focused-on-ai-applications-to-invest-nearly-eur50-million-in-research-commercialisation",
+            "title": "New Czech fund backs AI and deep-tech innovation with €50m for research commercialisation",
+            "evidence_used": true
+          },
+          {
+            "kind": "independent_publisher_identity_confirmation",
+            "url": "https://www.eif.org/press/all/first-czech-technology-transfer-fund-focused-on-ai-applications-to-invest-nearly-eur50-million-in-research-commercialisation",
+            "title": "New Czech fund backs AI and deep-tech innovation with €50m for research commercialisation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Assessed matching text in supplied package, and checked a first-party/independent matching source at https://www.eif.org/press/all/first-czech-technology-transfer-fund-focused-on-ai-applications-to-invest-nearly-eur50-million-in-research-commercialisation Claims distinguish statements/announcements from measured outcomes."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "A new funded technology-transfer instrument with specific Czech university research-to-company bridge meets C."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-09-24"
+        },
+        "unset": [],
+        "reason": "Dated original publication or publisher report establishes date and corrects scanner metadata."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identical underlying source verified within assessed records."
+      },
+      "reader_title": "New Czech fund backs AI and deep-tech innovation with €50m for research commercialisation",
+      "reader_what": "EIF announced a Czech venture fund targeting roughly €50 million for AI and deep-tech research commercialisation.",
+      "reader_why": "A new funded technology-transfer instrument with specific Czech university research-to-company bridge meets C.",
+      "reader_more": "EIF announced a Czech venture fund targeting roughly €50 million for AI and deep-tech research commercialisation. A new funded technology-transfer instrument with specific Czech university research-to-company bridge meets C.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "EIF announced a Czech venture fund targeting roughly €50 million for AI and deep-tech research commercialisation.",
+        "method_or_basis": "Supplied matching substantive text and/or matching publisher/official evidence: official announcement.",
+        "qualification": "This records an announced, selected, or documented action and not independently measured downstream effects.",
+        "radar_relevance": "A new funded technology-transfer instrument with specific Czech university research-to-company bridge meets C.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.knowledge_transfer",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Investment Fund",
+            "class": "other"
+          },
+          "mechanism": "supports",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-09-24",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "This records an announced, selected, or documented action and not independently measured downstream effects.",
+          "text": "EIF announced a Czech venture fund targeting roughly €50 million for AI and deep-tech research commercialisation.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://www.eif.org/files/publications/eif-equity-barometer-2026-q2.pdf",
+      "source_hash": "16df78e3",
+      "identity_hash": "3fafe9016d997607",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching document text available in package at https://www.eif.org/files/publications/eif-equity-barometer-2026-q2.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_full_or_substantial_primary",
+            "url": "https://www.eif.org/files/publications/eif-equity-barometer-2026-q2.pdf",
+            "title": "EIF thought leadership | Inspiring progress for future funding",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Assessed matching text in supplied package. Claims distinguish statements/announcements from measured outcomes."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The supplied substantial official Q2 barometer PDF—not its incorrectly crawled thought-leadership landing title—is primary evidence on European innovation finance under A route 2."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "EIF Equity Barometer Survey Q2 2026",
+          "date": "2026-07",
+          "type": "research/policy paper",
+          "source": "European Investment Fund"
+        },
+        "unset": [],
+        "reason": "Full supplied first-party PDF title page identifies report, date and issuing institution; scanner title was a mismatched landing page."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identical underlying source verified within assessed records."
+      },
+      "reader_title": "EIF thought leadership | Inspiring progress for future funding",
+      "reader_what": "EIF Equity Barometer Q2 2026 surveys European venture/private-equity market sentiment and financing conditions.",
+      "reader_why": "The supplied substantial official Q2 barometer PDF—not its incorrectly crawled thought-leadership landing title—is primary evidence on European i",
+      "reader_more": "EIF Equity Barometer Q2 2026 surveys European venture/private-equity market sentiment and financing conditions. The supplied substantial official Q2 barometer PDF—not its incorrectly crawled thought-leadership landing title—is primary evidence on European innovation finance under A route 2.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "EIF Equity Barometer Q2 2026 surveys European venture/private-equity market sentiment and financing conditions.",
+        "method_or_basis": "Supplied matching substantive text and/or matching publisher/official evidence: provided primary pdf.",
+        "qualification": "The work reports analysis or an actor position; it does not prove prospective outcomes.",
+        "radar_relevance": "The supplied substantial official Q2 barometer PDF—not its incorrectly crawled thought-leadership landing title—is primary evidence on European innovation finance under A route 2.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "finance.venture_capital",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Investment Fund",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-07",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The work reports analysis or an actor position; it does not prove prospective outcomes.",
+          "text": "EIF Equity Barometer Q2 2026 surveys European venture/private-equity market sentiment and financing conditions.",
+          "confidence": "medium",
+          "status_date_precision": "month"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://ellis.eu/publication/2008-a-semantic-multimedia-analysis-approach-utilizing-a-region-thesaurus-a",
+      "source_hash": "2ea9d074",
+      "identity_hash": "867660c4da8487f3",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Original stored/crawl material incomplete at https://ellis.eu/publication/2008-a-semantic-multimedia-analysis-approach-utilizing-a-region-thesaurus-a"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching identity/finding via https://avrithis.net/data/pub/pdf/conf/C071.wiamis08.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "recovered_official_or_publisher_record",
+            "url": "https://avrithis.net/data/pub/pdf/conf/C071.wiamis08.pdf",
+            "title": "A Semantic Multimedia Analysis Approach Utilizing a Region Thesaurus and LSA",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Assessed matching text in supplied package, and checked a first-party/independent matching source at https://avrithis.net/data/pub/pdf/conf/C071.wiamis08.pdf Claims distinguish statements/announcements from measured outcomes."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "The substantive first-party paper concerns computer-vision feature extraction, not European R&I governance, performance or capacity: A routes 1–3 fail; not a new transferable B foresight method."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2008"
+        },
+        "unset": [],
+        "reason": "Dated original publication or publisher report establishes date and corrects scanner metadata."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identical underlying source verified within assessed records."
+      },
+      "reader_title": "A Semantic Multimedia Analysis Approach Utilizing a Region Thesaurus and LSA",
+      "reader_what": "The original 2008 paper presents a semantic-video annotation algorithm based on region thesauri and latent semantic analysis, tested on TRECVID",
+      "reader_why": "",
+      "reader_more": "The original 2008 paper presents a semantic-video annotation algorithm based on region thesauri and latent semantic analysis, tested on TRECVID video. The substantive first-party paper concerns computer-vision feature extraction, not European R&I governance, performance or capacity: A routes 1–3 fail; not a new transferable B foresight method.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "The original 2008 paper presents a semantic-video annotation algorithm based on region thesauri and latent semantic analysis, tested on TRECVID video.",
+        "method_or_basis": "Supplied matching substantive text and/or matching publisher/official evidence: author primary pdf.",
+        "qualification": "Source identity and scope are supported; the positive admission routes fail the central European R&I or methodological evidence gate.",
+        "radar_relevance": "The substantive first-party paper concerns computer-vision feature extraction, not European R&I governance, performance or capacity: A routes 1–3 fail; not a new transferable B foresight method.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://ellis.eu/publication/2010-an-experimental-study-of-graph-connectivity-for-unsupervised-word-sens",
+      "source_hash": "03996087",
+      "identity_hash": "09a960e3759f3721",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Original stored/crawl material incomplete at https://ellis.eu/publication/2010-an-experimental-study-of-graph-connectivity-for-unsupervised-word-sens"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching identity/finding via https://aclanthology.org/D07-1074/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "recovered_official_or_publisher_record",
+            "url": "https://aclanthology.org/D07-1074/",
+            "title": "An Experimental Study of Graph Connectivity for Unsupervised Word Sense Disambiguation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Assessed matching text in supplied package, and checked a first-party/independent matching source at https://aclanthology.org/D07-1074/ Claims distinguish statements/announcements from measured outcomes."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "Its scientific question is word-sense disambiguation accuracy, not European research-system evidence or B foresight and strategic intelligence methods."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2010"
+        },
+        "unset": [],
+        "reason": "Dated original publication or publisher report establishes date and corrects scanner metadata."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identical underlying source verified within assessed records."
+      },
+      "reader_title": "An Experimental Study of Graph Connectivity for Unsupervised Word Sense Disambiguation",
+      "reader_what": "The early graph-connectivity paper compares unsupervised word-sense disambiguation algorithms on lexical networks.",
+      "reader_why": "",
+      "reader_more": "The early graph-connectivity paper compares unsupervised word-sense disambiguation algorithms on lexical networks. Its scientific question is word-sense disambiguation accuracy, not European research-system evidence or B foresight and strategic intelligence methods.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "The early graph-connectivity paper compares unsupervised word-sense disambiguation algorithms on lexical networks.",
+        "method_or_basis": "Supplied matching substantive text and/or matching publisher/official evidence: original paper.",
+        "qualification": "Source identity and scope are supported; the positive admission routes fail the central European R&I or methodological evidence gate.",
+        "radar_relevance": "Its scientific question is word-sense disambiguation accuracy, not European research-system evidence or B foresight and strategic intelligence methods.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://era.gv.at/news-items/business-europe-publishes-discussion-paper-on-ipceis/",
+      "source_hash": "18b473ce",
+      "identity_hash": "2ba116e303ab598c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Original stored/crawl material incomplete at https://era.gv.at/news-items/business-europe-publishes-discussion-paper-on-ipceis/"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching identity/finding via https://era.gv.at/news-items/business-europe-publishes-discussion-paper-on-ipceis/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "recovered_official_or_publisher_record",
+            "url": "https://era.gv.at/news-items/business-europe-publishes-discussion-paper-on-ipceis/",
+            "title": "Business Europe publishes discussion paper on IPCEIs",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Assessed matching text in supplied package, and checked a first-party/independent matching source at https://era.gv.at/news-items/business-europe-publishes-discussion-paper-on-ipceis/ Claims distinguish statements/announcements from measured outcomes."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "Specific new innovation state-aid policy advocacy grounded in responses from over 50 companies is an evidenced policy proposal/recommendation, not enacted reform."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identical underlying source verified within assessed records."
+      },
+      "reader_title": "Business Europe publishes discussion paper on IPCEIs",
+      "reader_what": "BusinessEurope released a questionnaire-based October 2026 discussion paper recommending changes to IPCEI design.",
+      "reader_why": "Specific new innovation state-aid policy advocacy grounded in responses from over 50 companies is an evidenced policy proposal/recommendation, no",
+      "reader_more": "BusinessEurope released a questionnaire-based October 2026 discussion paper recommending changes to IPCEI design. Specific new innovation state-aid policy advocacy grounded in responses from over 50 companies is an evidenced policy proposal/recommendation, not enacted reform.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "BusinessEurope released a questionnaire-based October 2026 discussion paper recommending changes to IPCEI design.",
+        "method_or_basis": "Supplied matching substantive text and/or matching publisher/official evidence: official relay substantive.",
+        "qualification": "This is a proposed or reported development; not evidence of completed benefits or final adoption.",
+        "radar_relevance": "Specific new innovation state-aid policy advocacy grounded in responses from over 50 companies is an evidenced policy proposal/recommendation, not enacted reform.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "finance.strategic_investment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "ERA Portal Austria",
+            "class": "other"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-10-12",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "This is a proposed or reported development; not evidence of completed benefits or final adoption.",
+          "text": "BusinessEurope released a questionnaire-based October 2026 discussion paper recommending changes to IPCEI design.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://www.interface-eu.org/publications/cyber-threats-for-europe",
+      "source_hash": "e7eb06dc",
+      "identity_hash": "67c4c58b0e6fecf6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Original stored/crawl material incomplete at https://www.interface-eu.org/publications/cyber-threats-for-europe"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching identity/finding via https://www.interface-eu.org/publications/cyber-threats-for-europe"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "recovered_official_or_publisher_record",
+            "url": "https://www.interface-eu.org/publications/cyber-threats-for-europe",
+            "title": "Cyber threats for Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Assessed matching text in supplied package, and checked a first-party/independent matching source at https://www.interface-eu.org/publications/cyber-threats-for-europe Claims distinguish statements/announcements from measured outcomes."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "A routes 1–3 fail: neither completed EU R&I evidence nor research-system mechanisms established; forward-looking opinions are not a new Strand B method."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-07-15"
+        },
+        "unset": [],
+        "reason": "Dated original publication or publisher report establishes date and corrects scanner metadata."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identical underlying source verified within assessed records."
+      },
+      "reader_title": "Cyber threats for Europe",
+      "reader_what": "The interface page links to short-term cybersecurity forecasts by an external outlet.",
+      "reader_why": "",
+      "reader_more": "The interface page links to short-term cybersecurity forecasts by an external outlet. A routes 1–3 fail: neither completed EU R&I evidence nor research-system mechanisms established; forward-looking opinions are not a new Strand B method.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "The interface page links to short-term cybersecurity forecasts by an external outlet.",
+        "method_or_basis": "Supplied matching substantive text and/or matching publisher/official evidence: official landing.",
+        "qualification": "Source identity and scope are supported; the positive admission routes fail the central European R&I or methodological evidence gate.",
+        "radar_relevance": "A routes 1–3 fail: neither completed EU R&I evidence nor research-system mechanisms established; forward-looking opinions are not a new Strand B method.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://www.eif.org/press/all/eif-investments-leverage-more-than-eur400-million-boosting-the-deep-technology-and-cybersecurity-sector-in-portugal",
+      "source_hash": "624b60e0",
+      "identity_hash": "1fdabac4dbca556c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching document text available in package at https://www.eif.org/press/all/eif-investments-leverage-more-than-eur400-million-boosting-the-deep-technology-and-cybersecurity-sector-in-portugal"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching identity/finding via https://www.eif.org/press/all/eif-investments-leverage-more-than-eur400-million-boosting-the-deep-technology-and-cybersecurity-sector-in-portugal"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_full_or_substantial_primary",
+            "url": "https://www.eif.org/press/all/eif-investments-leverage-more-than-eur400-million-boosting-the-deep-technology-and-cybersecurity-sector-in-portugal",
+            "title": "EIF leverages over €400m to boost deep-tech and cybersecurity in Portugal",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Assessed matching text in supplied package, and checked a first-party/independent matching source at https://www.eif.org/press/all/eif-investments-leverage-more-than-eur400-million-boosting-the-deep-technology-and-cybersecurity-sector-in-portugal Claims distinguish statements/announcements from measured outcomes."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "Actual dated funding commitments for EU deep-tech firms establish a tangible innovation-finance development; it happened in 2024, not 2026."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2024-11-12"
+        },
+        "unset": [],
+        "reason": "Dated original publication or publisher report establishes date and corrects scanner metadata."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identical underlying source verified within assessed records."
+      },
+      "reader_title": "EIF leverages over €400m to boost deep-tech and cybersecurity in Portugal",
+      "reader_what": "EIF formally committed €90 million to three venture funds expected to leverage over €400 million in Portuguese deep-tech and cybersecurity.",
+      "reader_why": "Actual dated funding commitments for EU deep-tech firms establish a tangible innovation-finance development",
+      "reader_more": "EIF formally committed €90 million to three venture funds expected to leverage over €400 million in Portuguese deep-tech and cybersecurity. Actual dated funding commitments for EU deep-tech firms establish a tangible innovation-finance development; it happened in 2024, not 2026.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "EIF formally committed €90 million to three venture funds expected to leverage over €400 million in Portuguese deep-tech and cybersecurity.",
+        "method_or_basis": "Supplied matching substantive text and/or matching publisher/official evidence: official announcement.",
+        "qualification": "This records an announced, selected, or documented action and not independently measured downstream effects.",
+        "radar_relevance": "Actual dated funding commitments for EU deep-tech firms establish a tangible innovation-finance development; it happened in 2024, not 2026.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "finance.venture_capital",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Investment Fund",
+            "class": "other"
+          },
+          "mechanism": "supports",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2024-11-12",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "This records an announced, selected, or documented action and not independently measured downstream effects.",
+          "text": "EIF formally committed €90 million to three venture funds expected to leverage over €400 million in Portuguese deep-tech and cybersecurity.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://www.atlanticcouncil.org/in-depth-research-reports/issue-brief/enabling-natos-technological-transformation/",
+      "source_hash": "a0903648",
+      "identity_hash": "bcbabb6d96772afe",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching document text available in package at https://www.atlanticcouncil.org/in-depth-research-reports/issue-brief/enabling-natos-technological-transformation/"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching identity/finding via https://www.atlanticcouncil.org/in-depth-research-reports/issue-brief/enabling-natos-technological-transformation/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_full_or_substantial_primary",
+            "url": "https://www.atlanticcouncil.org/in-depth-research-reports/issue-brief/enabling-natos-technological-transformation/",
+            "title": "Enabling NATO's technological transformation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Assessed matching text in supplied package, and checked a first-party/independent matching source at https://www.atlanticcouncil.org/in-depth-research-reports/issue-brief/enabling-natos-technological-transformation/ Claims distinguish statements/announcements from measured outcomes."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "Despite technology mentions, A routes 1–3 fail the central European/EU R&I-system object: the report is about NATO defence operational procurement and interoperability."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identical underlying source verified within assessed records."
+      },
+      "reader_title": "Enabling NATO's technological transformation",
+      "reader_what": "Atlantic Council diagnoses NATO cloud and AI adoption bottlenecks in military capability delivery.",
+      "reader_why": "",
+      "reader_more": "Atlantic Council diagnoses NATO cloud and AI adoption bottlenecks in military capability delivery. Despite technology mentions, A routes 1–3 fail the central European/EU R&I-system object: the report is about NATO defence operational procurement and interoperability.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "Atlantic Council diagnoses NATO cloud and AI adoption bottlenecks in military capability delivery.",
+        "method_or_basis": "Supplied matching substantive text and/or matching publisher/official evidence: primary analytical report.",
+        "qualification": "Source identity and scope are supported; the positive admission routes fail the central European R&I or methodological evidence gate.",
+        "radar_relevance": "Despite technology mentions, A routes 1–3 fail the central European/EU R&I-system object: the report is about NATO defence operational procurement and interoperability.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://era.gv.at/news-items/european-court-of-auditors-announces-upcoming-audit-report-on-horizon-2020-funding/",
+      "source_hash": "d18b2126",
+      "identity_hash": "731de50ed3ab208f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Original stored/crawl material incomplete at https://era.gv.at/news-items/european-court-of-auditors-announces-upcoming-audit-report-on-horizon-2020-funding/"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching identity/finding via https://era.gv.at/news-items/european-court-of-auditors-announces-upcoming-audit-report-on-horizon-2020-funding/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "recovered_official_or_publisher_record",
+            "url": "https://era.gv.at/news-items/european-court-of-auditors-announces-upcoming-audit-report-on-horizon-2020-funding/",
+            "title": "European Court of Auditors announces upcoming audit report on Horizon 2020 funding",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Assessed matching text in supplied package, and checked a first-party/independent matching source at https://era.gv.at/news-items/european-court-of-auditors-announces-upcoming-audit-report-on-horizon-2020-funding/ Claims distinguish statements/announcements from measured outcomes."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "No completed independent audit findings are supplied by this earlier notice; this source is not an eligible A evidence product or C new R&I policy decision."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identical underlying source verified within assessed records."
+      },
+      "reader_title": "European Court of Auditors announces upcoming audit report on Horizon 2020 funding",
+      "reader_what": "ERA Austrian portal announces a forthcoming European Court of Auditors assessment of Horizon 2020 rather than reporting its findings.",
+      "reader_why": "",
+      "reader_more": "ERA Austrian portal announces a forthcoming European Court of Auditors assessment of Horizon 2020 rather than reporting its findings. No completed independent audit findings are supplied by this earlier notice; this source is not an eligible A evidence product or C new R&I policy decision.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "ERA Austrian portal announces a forthcoming European Court of Auditors assessment of Horizon 2020 rather than reporting its findings.",
+        "method_or_basis": "Supplied matching substantive text and/or matching publisher/official evidence: official notice full.",
+        "qualification": "Source identity and scope are supported; the positive admission routes fail the central European R&I or methodological evidence gate.",
+        "radar_relevance": "No completed independent audit findings are supplied by this earlier notice; this source is not an eligible A evidence product or C new R&I policy decision.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://ellis.eu/publication/2010-fabia-factor-analysis-for-bicluster-acquisition",
+      "source_hash": "be091e38",
+      "identity_hash": "55aa874619cf4014",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Original stored/crawl material incomplete at https://ellis.eu/publication/2010-fabia-factor-analysis-for-bicluster-acquisition"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching identity/finding via https://pmc.ncbi.nlm.nih.gov/articles/PMC2881408/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "recovered_official_or_publisher_record",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2881408/",
+            "title": "FABIA: factor analysis for bicluster acquisition",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Assessed matching text in supplied package, and checked a first-party/independent matching source at https://pmc.ncbi.nlm.nih.gov/articles/PMC2881408/ Claims distinguish statements/announcements from measured outcomes."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "Full-text primary biomedical-computing research is not a European R&I-system evaluation or transferable strategic-foresight method; A routes 1–3 fail."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2010"
+        },
+        "unset": [],
+        "reason": "Dated original publication or publisher report establishes date and corrects scanner metadata."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identical underlying source verified within assessed records."
+      },
+      "reader_title": "FABIA: factor analysis for bicluster acquisition",
+      "reader_what": "The 2010 FABIA article develops a factor-analysis method for identifying biclusters in gene-expression datasets.",
+      "reader_why": "",
+      "reader_more": "The 2010 FABIA article develops a factor-analysis method for identifying biclusters in gene-expression datasets. Full-text primary biomedical-computing research is not a European R&I-system evaluation or transferable strategic-foresight method; A routes 1–3 fail.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "The 2010 FABIA article develops a factor-analysis method for identifying biclusters in gene-expression datasets.",
+        "method_or_basis": "Supplied matching substantive text and/or matching publisher/official evidence: journal full text.",
+        "qualification": "Source identity and scope are supported; the positive admission routes fail the central European R&I or methodological evidence gate.",
+        "radar_relevance": "Full-text primary biomedical-computing research is not a European R&I-system evaluation or transferable strategic-foresight method; A routes 1–3 fail.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://ellis.eu/publication/2009-fast-dependent-components-for-fmri-analysis",
+      "source_hash": "1e1df938",
+      "identity_hash": "885ecb471a90023c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Original stored/crawl material incomplete at https://ellis.eu/publication/2009-fast-dependent-components-for-fmri-analysis"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching identity/finding via https://research.cs.aalto.fi/pml/online-papers/savia09icassp.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "recovered_official_or_publisher_record",
+            "url": "https://research.cs.aalto.fi/pml/online-papers/savia09icassp.pdf",
+            "title": "Fast dependent components for fMRI analysis",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Assessed matching text in supplied package, and checked a first-party/independent matching source at https://research.cs.aalto.fi/pml/online-papers/savia09icassp.pdf Claims distinguish statements/announcements from measured outcomes."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "Original technical paper concerns fMRI statistical inference, rather than EU research system, R&I technological positioning, or futures intelligence; A routes 1–3 fail."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2009"
+        },
+        "unset": [],
+        "reason": "Dated original publication or publisher report establishes date and corrects scanner metadata."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identical underlying source verified within assessed records."
+      },
+      "reader_title": "Fast dependent components for fMRI analysis",
+      "reader_what": "The 2009 ICASSP research investigates machine-learning approaches to functional MRI analysis.",
+      "reader_why": "",
+      "reader_more": "The 2009 ICASSP research investigates machine-learning approaches to functional MRI analysis. Original technical paper concerns fMRI statistical inference, rather than EU research system, R&I technological positioning, or futures intelligence; A routes 1–3 fail.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "The 2009 ICASSP research investigates machine-learning approaches to functional MRI analysis.",
+        "method_or_basis": "Supplied matching substantive text and/or matching publisher/official evidence: author primary pdf.",
+        "qualification": "Source identity and scope are supported; the positive admission routes fail the central European R&I or methodological evidence gate.",
+        "radar_relevance": "Original technical paper concerns fMRI statistical inference, rather than EU research system, R&I technological positioning, or futures intelligence; A routes 1–3 fail.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/19460171.2026.2743233",
+      "source_hash": "862a8a81",
+      "identity_hash": "b33c2914ad4f1359",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching document text available in package at https://content.openalex.org/works/W7221713539.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_full_or_substantial_primary",
+            "url": "https://content.openalex.org/works/W7221713539.pdf",
+            "title": "From bench to Brussels and back: co-producing personalized medicine in the European Union",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Assessed matching text in supplied package. Claims distinguish statements/announcements from measured outcomes."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The substantive original policy study examines a European research-policy governance mechanism itself, meeting A route 3."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identical underlying source verified within assessed records."
+      },
+      "reader_title": "From bench to Brussels and back: co-producing personalized medicine in the European Union",
+      "reader_what": "Qualitative policy research examines co-production of personalised medicine within EU science and health governance.",
+      "reader_why": "The substantive original policy study examines a European research-policy governance mechanism itself, meeting A route 3.",
+      "reader_more": "Qualitative policy research examines co-production of personalised medicine within EU science and health governance. The substantive original policy study examines a European research-policy governance mechanism itself, meeting A route 3.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "Qualitative policy research examines co-production of personalised medicine within EU science and health governance.",
+        "method_or_basis": "Supplied matching substantive text and/or matching publisher/official evidence: provided primary pdf.",
+        "qualification": "The work reports analysis or an actor position; it does not prove prospective outcomes.",
+        "radar_relevance": "The substantive original policy study examines a European research-policy governance mechanism itself, meeting A route 3.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Gerli Nimmerfeldt, Erle Rikmann",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-10-12",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The work reports analysis or an actor position; it does not prove prospective outcomes.",
+          "text": "Qualitative policy research examines co-production of personalised medicine within EU science and health governance.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://defence-industry-space.ec.europa.eu/future-forces-forum-prague-cz-2026-10-21_en",
+      "source_hash": "3c566638",
+      "identity_hash": "f5605c863f5c81c7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Original stored/crawl material incomplete at https://defence-industry-space.ec.europa.eu/future-forces-forum-prague-cz-2026-10-21_en"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching identity/finding via https://defence-industry-space.ec.europa.eu/future-forces-forum-prague-cz-2026-10-21_en?prefLang=ro"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "recovered_official_or_publisher_record",
+            "url": "https://defence-industry-space.ec.europa.eu/future-forces-forum-prague-cz-2026-10-21_en?prefLang=ro",
+            "title": "Future Forces Forum, Prague (CZ)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Assessed matching text in supplied package, and checked a first-party/independent matching source at https://defence-industry-space.ec.europa.eu/future-forces-forum-prague-cz-2026-10-21_en?prefLang=ro Claims distinguish statements/announcements from measured outcomes."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "The verified source describes a forthcoming event, not completed EU research-system evidence or a substantive new EU R&I action; A and C admission gates fail."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-10-21"
+        },
+        "unset": [],
+        "reason": "Dated original publication or publisher report establishes date and corrects scanner metadata."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identical underlying source verified within assessed records."
+      },
+      "reader_title": "Future Forces Forum, Prague (CZ)",
+      "reader_what": "The European Commission events listing provides dates and purpose for the Prague Future Forces Forum defence exhibition.",
+      "reader_why": "",
+      "reader_more": "The European Commission events listing provides dates and purpose for the Prague Future Forces Forum defence exhibition. The verified source describes a forthcoming event, not completed EU research-system evidence or a substantive new EU R&I action; A and C admission gates fail.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "The European Commission events listing provides dates and purpose for the Prague Future Forces Forum defence exhibition.",
+        "method_or_basis": "Supplied matching substantive text and/or matching publisher/official evidence: official event page.",
+        "qualification": "Source identity and scope are supported; the positive admission routes fail the central European R&I or methodological evidence gate.",
+        "radar_relevance": "The verified source describes a forthcoming event, not completed EU research-system evidence or a substantive new EU R&I action; A and C admission gates fail.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://ellis.eu/publication/2009-ieee-transactions-on-pattern-analysis-and-machine-intelligence-1-effic",
+      "source_hash": "f756947d",
+      "identity_hash": "3795ad2069d7c7c8",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Original stored/crawl material incomplete at https://ellis.eu/publication/2009-ieee-transactions-on-pattern-analysis-and-machine-intelligence-1-effic"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching identity/finding via https://people.ee.ethz.ch/~calvin/papers/LampertCVPR08.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "recovered_official_or_publisher_record",
+            "url": "https://people.ee.ethz.ch/~calvin/papers/LampertCVPR08.pdf",
+            "title": "Ieee Transactions on Pattern Analysis and Machine Intelligence 1 Efficient Subwindow Search: a Branch and Bound Framework for Object Localization",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Assessed matching text in supplied package, and checked a first-party/independent matching source at https://people.ee.ethz.ch/~calvin/papers/LampertCVPR08.pdf Claims distinguish statements/announcements from measured outcomes."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "The original method has no central EU R&I capacity, programme, or policy finding and does not introduce a futures methodology, failing A routes 1–3."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2009"
+        },
+        "unset": [],
+        "reason": "Dated original publication or publisher report establishes date and corrects scanner metadata."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identical underlying source verified within assessed records."
+      },
+      "reader_title": "Ieee Transactions on Pattern Analysis and Machine Intelligence 1 Efficient Subwindow Search: a Branch and",
+      "reader_what": "Efficient Subwindow Search is a 2009 branch-and-bound method to localise objects in computer vision.",
+      "reader_why": "",
+      "reader_more": "Efficient Subwindow Search is a 2009 branch-and-bound method to localise objects in computer vision. The original method has no central EU R&I capacity, programme, or policy finding and does not introduce a futures methodology, failing A routes 1–3.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "Efficient Subwindow Search is a 2009 branch-and-bound method to localise objects in computer vision.",
+        "method_or_basis": "Supplied matching substantive text and/or matching publisher/official evidence: author primary pdf.",
+        "qualification": "Source identity and scope are supported; the positive admission routes fail the central European R&I or methodological evidence gate.",
+        "radar_relevance": "The original method has no central EU R&I capacity, programme, or policy finding and does not introduce a futures methodology, failing A routes 1–3.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://www.cesaer.org/publications/joint-statement-investing-in-what-makes-europe-strong/",
+      "source_hash": "c1d4bc17",
+      "identity_hash": "2f5d1931a47d92e9",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Original stored/crawl material incomplete at https://www.cesaer.org/publications/joint-statement-investing-in-what-makes-europe-strong/"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching identity/finding via https://www.cesaer.org/news/investing-in-what-makes-europe-strong-2287/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "recovered_official_or_publisher_record",
+            "url": "https://www.cesaer.org/news/investing-in-what-makes-europe-strong-2287/",
+            "title": "Joint statement 'Investing in what makes Europe strong'",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Assessed matching text in supplied package, and checked a first-party/independent matching source at https://www.cesaer.org/news/investing-in-what-makes-europe-strong-2287/ Claims distinguish statements/announcements from measured outcomes."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "Dated joint Horizon Europe R&I funding advocacy is a real policy intervention, not an adopted budget."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identical underlying source verified within assessed records."
+      },
+      "reader_title": "Joint statement 'Investing in what makes Europe strong'",
+      "reader_what": "Seven European university and research organisations called for at least €200 billion for FP10 in 2028–2034.",
+      "reader_why": "Dated joint Horizon Europe R&I funding advocacy is a real policy intervention, not an adopted budget.",
+      "reader_more": "Seven European university and research organisations called for at least €200 billion for FP10 in 2028–2034. Dated joint Horizon Europe R&I funding advocacy is a real policy intervention, not an adopted budget.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "Seven European university and research organisations called for at least €200 billion for FP10 in 2028–2034.",
+        "method_or_basis": "Supplied matching substantive text and/or matching publisher/official evidence: first party announcement.",
+        "qualification": "This is a proposed or reported development; not evidence of completed benefits or final adoption.",
+        "radar_relevance": "Dated joint Horizon Europe R&I funding advocacy is a real policy intervention, not an adopted budget.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "horizon.budget_2028_34",
+          "secondary_objects": [],
+          "actor": {
+            "name": "CESAER",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-09-09",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "This is a proposed or reported development; not evidence of completed benefits or final adoption.",
+          "text": "Seven European university and research organisations called for at least €200 billion for FP10 in 2028–2034.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://cerre.eu/wp-content/uploads/2026/06/CERRE_Making-Data-Protection-Fit-for-the-Age-of-AI.pdf",
+      "source_hash": "3b2a8996",
+      "identity_hash": "9b7d6b865fbc2c65",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching document text available in package at https://cerre.eu/wp-content/uploads/2026/06/CERRE_Making-Data-Protection-Fit-for-the-Age-of-AI.pdf"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching identity/finding via https://cerre.eu/publications/making-data-protection-fit-for-the-age-of-ai/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_full_or_substantial_primary",
+            "url": "https://cerre.eu/publications/making-data-protection-fit-for-the-age-of-ai/",
+            "title": "Making Data Protection Fit for the Age of AI",
+            "evidence_used": true
+          },
+          {
+            "kind": "independent_publisher_identity_confirmation",
+            "url": "https://cerre.eu/publications/making-data-protection-fit-for-the-age-of-ai/",
+            "title": "Making Data Protection Fit for the Age of AI",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Assessed matching text in supplied package, and checked a first-party/independent matching source at https://cerre.eu/publications/making-data-protection-fit-for-the-age-of-ai/ Claims distinguish statements/announcements from measured outcomes."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Completed legal-economic policy analysis directly examines European AI-innovation regulatory constraints and competitiveness under A routes 1–2."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identical underlying source verified within assessed records."
+      },
+      "reader_title": "Making Data Protection Fit for the Age of AI",
+      "reader_what": "CERRE studies how the EU Digital Omnibus might alter data protection and AI innovation incentives.",
+      "reader_why": "Completed legal-economic policy analysis directly examines European AI-innovation regulatory constraints and competitiveness under A routes 1–2.",
+      "reader_more": "CERRE studies how the EU Digital Omnibus might alter data protection and AI innovation incentives. Completed legal-economic policy analysis directly examines European AI-innovation regulatory constraints and competitiveness under A routes 1–2.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "CERRE studies how the EU Digital Omnibus might alter data protection and AI innovation incentives.",
+        "method_or_basis": "Supplied matching substantive text and/or matching publisher/official evidence: provided primary pdf.",
+        "qualification": "The work reports analysis or an actor position; it does not prove prospective outcomes.",
+        "radar_relevance": "Completed legal-economic policy analysis directly examines European AI-innovation regulatory constraints and competitiveness under A routes 1–2.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "ai.governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "CERRE — Centre on Regulation in Europe",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-06-18",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The work reports analysis or an actor position; it does not prove prospective outcomes.",
+          "text": "CERRE studies how the EU Digital Omnibus might alter data protection and AI innovation incentives.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://www.interface-eu.org/publications/more-cybersecurity-for-germanys-federal-administration",
+      "source_hash": "e90cd341",
+      "identity_hash": "0ac763155f4080b5",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Original stored/crawl material incomplete at https://www.interface-eu.org/publications/more-cybersecurity-for-germanys-federal-administration"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching identity/finding via https://www.interface-eu.org/publications/more-cybersecurity-for-germanys-federal-administration"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "recovered_official_or_publisher_record",
+            "url": "https://www.interface-eu.org/publications/more-cybersecurity-for-germanys-federal-administration",
+            "title": "More Cybersecurity for Germany's Federal Administration?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Assessed matching text in supplied package, and checked a first-party/independent matching source at https://www.interface-eu.org/publications/more-cybersecurity-for-germanys-federal-administration Claims distinguish statements/announcements from measured outcomes."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "A routes 1–3 fail central EU research-system/technological capability study; ordinary government cyber operations commentary does not qualify."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-07-23"
+        },
+        "unset": [],
+        "reason": "Dated original publication or publisher report establishes date and corrects scanner metadata."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identical underlying source verified within assessed records."
+      },
+      "reader_title": "More Cybersecurity for Germany's Federal Administration?",
+      "reader_what": "Short commentary questions Germany’s CyberGovSecure federal-administration security programme.",
+      "reader_why": "",
+      "reader_more": "Short commentary questions Germany’s CyberGovSecure federal-administration security programme. A routes 1–3 fail central EU research-system/technological capability study; ordinary government cyber operations commentary does not qualify.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "Short commentary questions Germany’s CyberGovSecure federal-administration security programme.",
+        "method_or_basis": "Supplied matching substantive text and/or matching publisher/official evidence: official commentary.",
+        "qualification": "Source identity and scope are supported; the positive admission routes fail the central European R&I or methodological evidence gate.",
+        "radar_relevance": "A routes 1–3 fail central EU research-system/technological capability study; ordinary government cyber operations commentary does not qualify.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://ellis.eu/publication/2009-occlusive-components-analysis",
+      "source_hash": "7869df40",
+      "identity_hash": "bad97d667d2cdb51",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Original stored/crawl material incomplete at https://ellis.eu/publication/2009-occlusive-components-analysis"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching identity/finding via https://mlg.eng.cam.ac.uk/publications/index.html"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "recovered_official_or_publisher_record",
+            "url": "https://mlg.eng.cam.ac.uk/publications/index.html",
+            "title": "Occlusive Components Analysis",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Assessed matching text in supplied package, and checked a first-party/independent matching source at https://mlg.eng.cam.ac.uk/publications/index.html Claims distinguish statements/announcements from measured outcomes."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "Historical computer-vision technique paper lacks the required European R&I system object or a strategic foresight methodology; A routes 1–3 fail."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2009"
+        },
+        "unset": [],
+        "reason": "Dated original publication or publisher report establishes date and corrects scanner metadata."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identical underlying source verified within assessed records."
+      },
+      "reader_title": "Occlusive Components Analysis",
+      "reader_what": "Occlusive Components Analysis describes a visual object-representation method for recognising partially occluded images.",
+      "reader_why": "",
+      "reader_more": "Occlusive Components Analysis describes a visual object-representation method for recognising partially occluded images. Historical computer-vision technique paper lacks the required European R&I system object or a strategic foresight methodology; A routes 1–3 fail.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "Occlusive Components Analysis describes a visual object-representation method for recognising partially occluded images.",
+        "method_or_basis": "Supplied matching substantive text and/or matching publisher/official evidence: university publication record.",
+        "qualification": "Source identity and scope are supported; the positive admission routes fail the central European R&I or methodological evidence gate.",
+        "radar_relevance": "Historical computer-vision technique paper lacks the required European R&I system object or a strategic foresight methodology; A routes 1–3 fail.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://ellis.eu/publication/2007-oxford-trecvid-2007-u2013-notebook-paper",
+      "source_hash": "30f2e02f",
+      "identity_hash": "2ddef0776919e92c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Original stored/crawl material incomplete at https://ellis.eu/publication/2007-oxford-trecvid-2007-u2013-notebook-paper"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching identity/finding via https://www-nlpir.nist.gov/projects/tvpubs/tv.pubs.7.org.html"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "recovered_official_or_publisher_record",
+            "url": "https://www-nlpir.nist.gov/projects/tvpubs/tv.pubs.7.org.html",
+            "title": "Oxford TRECVid 2007 \\u2013 Notebook paper",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Assessed matching text in supplied package, and checked a first-party/independent matching source at https://www-nlpir.nist.gov/projects/tvpubs/tv.pubs.7.org.html Claims distinguish statements/announcements from measured outcomes."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "The historical technical benchmark submission is neither central European R&I system analysis nor strategic foresight methodology; A routes 1–3 fail."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2007"
+        },
+        "unset": [],
+        "reason": "Dated original publication or publisher report establishes date and corrects scanner metadata."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identical underlying source verified within assessed records."
+      },
+      "reader_title": "Oxford TRECVid 2007 \\u2013 Notebook paper",
+      "reader_what": "Oxford TRECVID 2007 is an evaluation-system notebook describing video search and automatic visual-concept detection.",
+      "reader_why": "",
+      "reader_more": "Oxford TRECVID 2007 is an evaluation-system notebook describing video search and automatic visual-concept detection. The historical technical benchmark submission is neither central European R&I system analysis nor strategic foresight methodology; A routes 1–3 fail.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "Oxford TRECVID 2007 is an evaluation-system notebook describing video search and automatic visual-concept detection.",
+        "method_or_basis": "Supplied matching substantive text and/or matching publisher/official evidence: nist original archive.",
+        "qualification": "Source identity and scope are supported; the positive admission routes fail the central European R&I or methodological evidence gate.",
+        "radar_relevance": "The historical technical benchmark submission is neither central European R&I system analysis nor strategic foresight methodology; A routes 1–3 fail.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.33231/j.ihe.2026.09",
+      "source_hash": "b6bbc545",
+      "identity_hash": "e41e7188de81fe30",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching document text available in package at https://recyt.fecyt.es/index.php/IHE/article/view/123474"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching identity/finding via https://recyt.fecyt.es/index.php/IHE/article/view/123474"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_full_or_substantial_primary",
+            "url": "https://recyt.fecyt.es/index.php/IHE/article/view/123474",
+            "title": "Public-Private Collaboration and Spaces for Innovation: The Evolution of the Digital District of the Valencian Community and its Precursors (1982-2024)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Assessed matching text in supplied package, and checked a first-party/independent matching source at https://recyt.fecyt.es/index.php/IHE/article/view/123474 Claims distinguish statements/announcements from measured outcomes."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Completed empirical analysis of Spanish innovation-policy governance and public-private collaboration meets A route 3, beyond mere local consumer uptake."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identical underlying source verified within assessed records."
+      },
+      "reader_title": "Public-Private Collaboration and Spaces for Innovation: The Evolution of the Digital District of the Vale",
+      "reader_what": "Historical case research finds Alicante’s Digital District operates more like an incubator than a fully consolidated innovation district.",
+      "reader_why": "Completed empirical analysis of Spanish innovation-policy governance and public-private collaboration meets A route 3, beyond mere local consumer",
+      "reader_more": "Historical case research finds Alicante’s Digital District operates more like an incubator than a fully consolidated innovation district. Completed empirical analysis of Spanish innovation-policy governance and public-private collaboration meets A route 3, beyond mere local consumer uptake.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "Historical case research finds Alicante’s Digital District operates more like an incubator than a fully consolidated innovation district.",
+        "method_or_basis": "Supplied matching substantive text and/or matching publisher/official evidence: substantive journal primary.",
+        "qualification": "The work reports analysis or an actor position; it does not prove prospective outcomes.",
+        "radar_relevance": "Completed empirical analysis of Spanish innovation-policy governance and public-private collaboration meets A route 3, beyond mere local consumer uptake.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "innovation.regional_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Pablo Algarrada Vera",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-10-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The work reports analysis or an actor position; it does not prove prospective outcomes.",
+          "text": "Historical case research finds Alicante’s Digital District operates more like an incubator than a fully consolidated innovation district.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://www.vttresearch.com/en/technology-infrastructures/quantum-computers",
+      "source_hash": "3a09ea5d",
+      "identity_hash": "d10b1b7e2028736c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching document text available in package at https://www.vttresearch.com/en/technology-infrastructures/quantum-computers"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching identity/finding via https://www.vttresearch.com/en/technology-infrastructures/quantum-computers"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_full_or_substantial_primary",
+            "url": "https://www.vttresearch.com/en/technology-infrastructures/quantum-computers",
+            "title": "Quantum computers | VTT",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Assessed matching text in supplied package, and checked a first-party/independent matching source at https://www.vttresearch.com/en/technology-infrastructures/quantum-computers Claims distinguish statements/announcements from measured outcomes."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "While real infrastructure is documented, A routes 1–3 require a substantive evidence product; this is a static institutional capability page, not a completed study or new C change."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026"
+        },
+        "unset": [],
+        "reason": "Dated original publication or publisher report establishes date and corrects scanner metadata."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identical underlying source verified within assessed records."
+      },
+      "reader_title": "Quantum computers | VTT",
+      "reader_what": "VTT describes its Finnish quantum computers and a planned progression from 50 to 150 and 300 qubits.",
+      "reader_why": "",
+      "reader_more": "VTT describes its Finnish quantum computers and a planned progression from 50 to 150 and 300 qubits. While real infrastructure is documented, A routes 1–3 require a substantive evidence product; this is a static institutional capability page, not a completed study or new C change.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "VTT describes its Finnish quantum computers and a planned progression from 50 to 150 and 300 qubits.",
+        "method_or_basis": "Supplied matching substantive text and/or matching publisher/official evidence: official listing.",
+        "qualification": "Source identity and scope are supported; the positive admission routes fail the central European R&I or methodological evidence gate.",
+        "radar_relevance": "While real infrastructure is documented, A routes 1–3 require a substantive evidence product; this is a static institutional capability page, not a completed study or new C change.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/10438599.2026.2732164",
+      "source_hash": "6e33af0f",
+      "identity_hash": "100547e37bf5498c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "insufficient",
+            "note": "Original stored/crawl material incomplete at https://doi.org/10.1080/10438599.2026.2732164"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching identity/finding via https://www.tandfonline.com/doi/full/10.1080/10438599.2026.2732164"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "recovered_official_or_publisher_record",
+            "url": "https://www.tandfonline.com/doi/full/10.1080/10438599.2026.2732164",
+            "title": "R&D tax credits across the EU: nonsense or common sense? A dynamic panel data approach",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Assessed matching text in supplied package, and checked a first-party/independent matching source at https://www.tandfonline.com/doi/full/10.1080/10438599.2026.2732164 Claims distinguish statements/announcements from measured outcomes."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Full substantive publisher article directly measures funding-policy mechanisms in eight EU countries under A route 3."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identical underlying source verified within assessed records."
+      },
+      "reader_title": "R&D tax credits across the EU: nonsense or common sense? A dynamic panel data approach",
+      "reader_what": "EU-country econometrics find uneven effects of R&D tax credits on innovation and productivity and question EU-wide harmonisation.",
+      "reader_why": "Full substantive publisher article directly measures funding-policy mechanisms in eight EU countries under A route 3.",
+      "reader_more": "EU-country econometrics find uneven effects of R&D tax credits on innovation and productivity and question EU-wide harmonisation. Full substantive publisher article directly measures funding-policy mechanisms in eight EU countries under A route 3.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "EU-country econometrics find uneven effects of R&D tax credits on innovation and productivity and question EU-wide harmonisation.",
+        "method_or_basis": "Supplied matching substantive text and/or matching publisher/official evidence: substantive publisher primary.",
+        "qualification": "The work reports analysis or an actor position; it does not prove prospective outcomes.",
+        "radar_relevance": "Full substantive publisher article directly measures funding-policy mechanisms in eight EU countries under A route 3.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.public_support",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Laurence Jacquet, Stéphane Robin",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2026-09-28",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The work reports analysis or an actor position; it does not prove prospective outcomes.",
+          "text": "EU-country econometrics find uneven effects of R&D tax credits on innovation and productivity and question EU-wide harmonisation.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.30525/2256-0742/2026-12-3-140-154",
+      "source_hash": "abd36c38",
+      "identity_hash": "b0ff36f4923b94dd",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching document text available in package at http://baltijapublishing.lv/index.php/issue/article/view/4072"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_full_or_substantial_primary",
+            "url": "http://baltijapublishing.lv/index.php/issue/article/view/4072",
+            "title": "SETTLEMENTS IN THE CONTEXT OF INTERNATIONAL DIGITALISATION OF THE ECONOMY: ASPECTS OF LEGAL REGULATION",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Assessed matching text in supplied package. Claims distinguish statements/announcements from measured outcomes."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "The primary article focuses on finance and settlements in Ukraine; A routes 1–3 lack central European R&I-system study."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identical underlying source verified within assessed records."
+      },
+      "reader_title": "SETTLEMENTS IN THE CONTEXT OF INTERNATIONAL DIGITALISATION OF THE ECONOMY: ASPECTS OF LEGAL REGULATION",
+      "reader_what": "The legal paper examines international digital payments and Ukrainian regulatory choices.",
+      "reader_why": "",
+      "reader_more": "The legal paper examines international digital payments and Ukrainian regulatory choices. The primary article focuses on finance and settlements in Ukraine; A routes 1–3 lack central European R&I-system study.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "The legal paper examines international digital payments and Ukrainian regulatory choices.",
+        "method_or_basis": "Supplied matching substantive text and/or matching publisher/official evidence: substantive primary web.",
+        "qualification": "Source identity and scope are supported; the positive admission routes fail the central European R&I or methodological evidence gate.",
+        "radar_relevance": "The primary article focuses on finance and settlements in Ukraine; A routes 1–3 lack central European R&I-system study.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:http://www.ihi.europa.eu/news-events/newsroom/patients-missing-clinical-research",
+      "source_hash": "8944b324",
+      "identity_hash": "23f385a535f34e29",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching document text available in package at https://www.ihi.europa.eu/news-events/newsroom/patients-missing-clinical-research"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching identity/finding via https://projects.research-and-innovation.ec.europa.eu/en/horizon-magazine/patients-missing-clinical-research"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_full_or_substantial_primary",
+            "url": "https://projects.research-and-innovation.ec.europa.eu/en/horizon-magazine/patients-missing-clinical-research",
+            "title": "The patients missing from clinical research",
+            "evidence_used": true
+          },
+          {
+            "kind": "independent_publisher_identity_confirmation",
+            "url": "https://projects.research-and-innovation.ec.europa.eu/en/horizon-magazine/patients-missing-clinical-research",
+            "title": "The patients missing from clinical research",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Assessed matching text in supplied package, and checked a first-party/independent matching source at https://projects.research-and-innovation.ec.europa.eu/en/horizon-magazine/patients-missing-clinical-research Claims distinguish statements/announcements from measured outcomes."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "An accessible research news feature about medical study participation is not completed evidence-led research on the European R&I system; EU grants and locations are insufficient under A routes 1–3."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-10-13"
+        },
+        "unset": [],
+        "reason": "Dated original publication or publisher report establishes date and corrects scanner metadata."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identical underlying source verified within assessed records."
+      },
+      "reader_title": "The patients missing from clinical research",
+      "reader_what": "Horizon Magazine features EU-funded efforts to improve inclusion in clinical trials.",
+      "reader_why": "",
+      "reader_more": "Horizon Magazine features EU-funded efforts to improve inclusion in clinical trials. An accessible research news feature about medical study participation is not completed evidence-led research on the European R&I system; EU grants and locations are insufficient under A routes 1–3.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "Horizon Magazine features EU-funded efforts to improve inclusion in clinical trials.",
+        "method_or_basis": "Supplied matching substantive text and/or matching publisher/official evidence: official feature.",
+        "qualification": "Source identity and scope are supported; the positive admission routes fail the central European R&I or methodological evidence gate.",
+        "radar_relevance": "An accessible research news feature about medical study participation is not completed evidence-led research on the European R&I system; EU grants and locations are insufficient under A routes 1–3.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.48550/arxiv.2610.11891",
+      "source_hash": "fd2ed26b",
+      "identity_hash": "1b20774469db2e17",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching document text available in package at https://arxiv.org/abs/2610.11891"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered substantive matching identity/finding via https://arxiv.org/abs/2610.11891"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_full_or_substantial_primary",
+            "url": "https://arxiv.org/abs/2610.11891",
+            "title": "Tracking High-Impact Researchers Through Highly Cited Tails",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Assessed matching text in supplied package, and checked a first-party/independent matching source at https://arxiv.org/abs/2610.11891 Claims distinguish statements/announcements from measured outcomes."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Completed evidence measures European R&I assessment and researcher-selection mechanisms directly, satisfying A route 3."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identical underlying source verified within assessed records."
+      },
+      "reader_title": "Tracking High-Impact Researchers Through Highly Cited Tails",
+      "reader_what": "A study of Irish publications compares highly cited researcher indicators with outcomes of research funding peer review.",
+      "reader_why": "Completed evidence measures European R&I assessment and researcher-selection mechanisms directly, satisfying A route 3.",
+      "reader_more": "A study of Irish publications compares highly cited researcher indicators with outcomes of research funding peer review. Completed evidence measures European R&I assessment and researcher-selection mechanisms directly, satisfying A route 3.",
+      "deep_analysis": {
+        "work_kind": "research/policy evidence",
+        "research_question": "",
+        "main_finding": "A study of Irish publications compares highly cited researcher indicators with outcomes of research funding peer review.",
+        "method_or_basis": "Supplied matching substantive text and/or matching publisher/official evidence: substantive preprint.",
+        "qualification": "The work reports analysis or an actor position; it does not prove prospective outcomes.",
+        "radar_relevance": "Completed evidence measures European R&I assessment and researcher-selection mechanisms directly, satisfying A route 3.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.assessment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Hirushan Sajindra, Eoin Ó Colgáin",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-10-08",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The work reports analysis or an actor position; it does not prove prospective outcomes.",
+          "text": "A study of Irish publications compares highly cited researcher indicators with outcomes of research funding peer review.",
+          "confidence": "medium"
+        }
+      ]
+    }
+  ]
+}
