@@ -106,8 +106,8 @@ jobs:
 
           # Persistent scanner outputs are raw radar.json plus the generated active
           # snapshot and active Excel. Sidecars are read-only during automatic scans.
-          tracked_unexpected="$(git diff --name-only -- . ':!radar.json' ':!radar_active.json' ':!stuff/source_merit_ranking.xlsx' || true)"
-          untracked_unexpected="$(git ls-files --others --exclude-standard | grep -Ev '^(radar_active\.json|stuff/source_merit_ranking\.xlsx)$' || true)"
+          tracked_unexpected="$(git diff --name-only -- . ':!radar.json' ':!radar_active.json' ':!stuff/source_merit_ranking.xlsx' ':!stuff/main_radar_stuff.xlsx' || true)"
+          untracked_unexpected="$(git ls-files --others --exclude-standard | grep -Ev '^(radar_active\.json|stuff/source_merit_ranking\.xlsx|stuff/main_radar_stuff\.xlsx)$' || true)"
 
           if [[ -n "$tracked_unexpected" ]]; then
             echo '::warning::Non-radar tracked working-tree changes detected; restoring them before save:'
@@ -128,7 +128,7 @@ jobs:
           fi
 
           # Hard assertion: only the three generated/persistent Radar products may change.
-          remaining="$({ git diff --name-only; git ls-files --others --exclude-standard; } | sort -u | grep -Ev '^(radar\.json|radar_active\.json|stuff/source_merit_ranking\.xlsx)$' || true)"
+          remaining="$({ git diff --name-only; git ls-files --others --exclude-standard; } | sort -u | grep -Ev '^(radar\.json|radar_active\.json|stuff/source_merit_ranking\.xlsx|stuff/main_radar_stuff\.xlsx)$' || true)"
           if [[ -n "$remaining" ]]; then
             echo '::error::Could not isolate scanner output safely. Refusing to save.'
             printf '%s\n' "$remaining"
@@ -361,7 +361,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- radar.json radar_active.json stuff/source_merit_ranking.xlsx
+          git add -- radar.json radar_active.json stuff/source_merit_ranking.xlsx stuff/main_radar_stuff.xlsx
 
           if git diff --cached --quiet; then
             echo "No radar data change to commit."
