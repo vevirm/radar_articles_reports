@@ -27,3 +27,8 @@ const bytes=Workbook.buildXlsx(data,Merit,extras);
 fs.writeFileSync(out,Buffer.from(bytes));
 const hist=Workbook.buildHistoricalTable(extras.historical,extras.reader,extras.admission,extras.corrections);
 console.log(`Wrote ${out} from ${path.basename(input)}: ${Workbook.buildRows(data,Merit).length} active ranked records + ${hist.total} historical scanner findings (${hist.deepScannedCount} Deep Scanned, ${hist.authoritativeCount} authoritative historical)`);
+
+// Same scanner lifecycle as source_merit_ranking.xlsx; no Historical worksheet.
+const mainOut=path.join(ROOT,'stuff','main_radar_stuff.xlsx');
+fs.writeFileSync(mainOut,Buffer.from(Workbook.buildXlsx(data,Merit,{}, {mainOnly:true})));
+console.log(`Wrote ${mainOut} (${Workbook.buildRows(data,Merit).length} active Radar records; no Historical tab)`);
