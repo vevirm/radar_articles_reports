@@ -215,7 +215,8 @@
     return 22;
   }
 
-  function buildXlsx(data,Merit,extras={}){
+  function buildXlsx(data,Merit,extras={},options={}){
+    const mainOnly=options.mainOnly===true;
     if(!Merit?.scoreFor||!Merit?.forItem||!Merit?.componentsFor)throw new Error('RadarSourceMerit unavailable');
     const raw=buildRawPublicationTable(data);
     const historical=buildHistoricalTable(extras?.historical||{},extras?.reader||{},extras?.admission||{},extras?.corrections||{});
@@ -253,9 +254,16 @@
       'xl/worksheets/sheet1.xml':sheetXml(raw.headers,raw.rows,raw.headers.map(widthFor)),
       'xl/worksheets/sheet2.xml':sheetXml(historical.headers,historical.rows,historical.headers.map(widthFor)),
       'xl/worksheets/sheet3.xml':sheetXml(h1,b1,widths),
-      'xl/worksheets/sheet4.xml':sheetXml(['Field','Explanation'],method,[28,110]),
+      'xl/worksheets/sheet4.xml':sheetXml(['Field','Explanation'],mainOnly?method.filter(row=>!/^Historical (findings|update lifecycle|data state|rows|fields)$/.test(row[0])):method,[28,110]),
       'xl/worksheets/sheet5.xml':sheetXml(shockHeaders,shockRows,shockWidths)
     };
+    if(mainOnly){
+      // Preserve the existing dynamic Radar builder, but remove Historical entirely.
+      files['xl/workbook.xml']=files['xl/workbook.xml'].replace(/<sheet name="Historical findings"[^>]*\/>/,'');
+      files['xl/_rels/workbook.xml.rels']=files['xl/_rels/workbook.xml.rels'].replace(/<Relationship Id="rId2"[^>]*\/>/,'');
+      files['[Content_Types].xml']=files['[Content_Types].xml'].replace(/<Override PartName="\/xl\/worksheets\/sheet2.xml"[^>]*\/>/,'');
+      delete files['xl/worksheets/sheet2.xml'];
+    }
     return zip(files);
   }
   return {buildRows,buildRawPublicationTable,buildHistoricalTable,buildShockRows,buildXlsx};
