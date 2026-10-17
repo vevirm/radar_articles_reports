@@ -7,39 +7,39 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **2731** (Main **1310** + Historical **1421**)
-- Automatic queue still needing V2 verification: **468** (Main **209** + Historical **259**)
-- Currently assigned to workers: **92** (Main **43** + Historical **49**)
+- Automatic queue still needing V2 verification: **505** (Main **224** + Historical **281**)
+- Currently assigned to workers: **107** (Main **50** + Historical **57**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **31**
-- Automatic queue pending and not yet assigned: **376**
+- Automatic queue pending and not yet assigned: **398**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261016T085929Z-2b2671f2b2de`
-- Assigned unresolved records: **28**
-  1. `link:https://www.eif.org/files/attachments/czech-fund-backs-ai-deep-tech-innovation-cz.pdf` — New Czech fund backs AI and deep-tech innovation with €50m for research commercialisation
-  2. `link:https://www.eif.org/files/publications/eif-equity-barometer-2026-q2.pdf` — EIF thought leadership | Inspiring progress for future funding
-  3. `link:https://ellis.eu/publication/2008-a-semantic-multimedia-analysis-approach-utilizing-a-region-thesaurus-a` — A Semantic Multimedia Analysis Approach Utilizing a Region Thesaurus and LSA
-  4. `link:https://ellis.eu/publication/2010-an-experimental-study-of-graph-connectivity-for-unsupervised-word-sens` — An Experimental Study of Graph Connectivity for Unsupervised Word Sense Disambiguation
-  5. `link:https://era.gv.at/news-items/business-europe-publishes-discussion-paper-on-ipceis/` — Business Europe publishes discussion paper on IPCEIs
-  6. `link:https://www.interface-eu.org/publications/cyber-threats-for-europe` — Cyber threats for Europe
-  7. `link:https://www.eif.org/press/all/eif-investments-leverage-more-than-eur400-million-boosting-the-deep-technology-and-cybersecurity-sector-in-portugal` — EIF leverages over €400m to boost deep-tech and cybersecurity in Portugal
-  8. `link:https://www.atlanticcouncil.org/in-depth-research-reports/issue-brief/enabling-natos-technological-transformation/` — Enabling NATO's technological transformation
-  - … plus 20 more in the package manifest
+- Current package: `worker-a-20261017T075918Z-32133f4d3f62`
+- Assigned unresolved records: **36**
+  1. `link:https://doi.org/10.1016/j.wpi.2026.102454` — Patent intelligence in the age of AI: Unlocking strategic insights through granular classification
+  2. `link:https://news.google.com/rss/articles/CBMi-AFBVV95cUxNSnd3VVhSRnJwRUJPU3FpQ1AtZTY5dFo3ZkFLVVBERjFQOTVyeElyS3FERHBLYkI2NUcwNGF5ajdKTDdEeUUwLUhyRWhsaVZmZV84dFZGYXRoRmJzOUlLY1ZfU1piVE9hb05CMnY2cmlkTEM2OXc2Nkw2LVZpYnRjeUstQUEwUmRkbTdoRHRfRC1xNTRVeTlfLTB3TGpMeEF4RkpxOVFzbDFTbUZROHZfQ0lQX1pEUDhSSGo3NVFaQm5RLWF2eWpPZGhCdUZMWFZTaC11WjAtMlQ5M0ZGZUFJRnBrc1lSY1FYX3lkWjBvc1lHckg5LUFieA?oc=5` — ERA Living Guidelines on the responsible use of Generative AI in research updated - European Commission
+  3. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxNRVF4bWtRUVRoMGtYV1hKSmhLNm1rU1hWYWVRY2UtNU50ZW1WeEwyWG5qZFVnbmtEdFVrSXAzbldBTEJJXzVtNzAxUGZaMEg3Y2IwTExQdUNyMHJMa3FQZWUtVVNLUkMtcW9YSmpjNG0xWmgwYnBkeVFqelk4QUpRUW5iZTJRRWNRZTZFamVoRFU4eHpxazZQR05VbktyNWpYSHVMTzM5RkdkSzdsT0E?oc=5` — Europe's answer to Starlink: Who is building IRIS² and what is Germany's role
+  4. `link:https://www.euronews.com/2026/10/16/europes-answer-to-starlink-who-is-building-iris-and-what-is-germanys-role` — Europe's answer to Starlink: Who is building IRIS² and Germany's role
+  5. `link:https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52026SA0024%2801%29` — Special report 24/2026 EU funding for innovation and competitiveness – Limited focus on close-to-market measures under Horizon 2020’s industrial leadership priority
+  6. `link:https://news.google.com/rss/articles/CBMimAFBVV95cUxPWEw3cTJSeFlBREN6a3NfWk5aSl9NcFlrY0t5NXYySzNYYVU4MzZ3bzRLaEVRcFJiTHBfcFBaRXhXTkdsTmNNUklOMmI2M0RMYVl3VTlaa2daRXJfQ3R4NmxRc2NJdGtmWUhaa1hjbGxXRThjQlkycmlMYWFoLTItSlhaNUVHN2pHclFraFUyZWtxWDVNa3VndQ?oc=5` — The EU is facing Big Tech pressure to revamp its AI law
+  7. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxPUHlUNEU5Z0lnenkzUi1PUWVxVFVCenQxMlg5U2dQaFJRLW1XVEtQdHU4YzgxWGRHdUIwaHE2Z2dXajRzYlpTbVVuUmJFdTFBTTNwVWJEcDZtUzlaZU9MZ0pWbUpBZHp6aFpOV25vS0p5M3RGeG1WZHM5YlNVNUhSUmw3RXFHelgzb3EydUJ5VmhRVElDd2xDVjBVOTUyaXpQMUgyQUh1TVFweGVaazln?oc=5` — In Europe’s tech capital, Irish labor unions are booming amid AI-driven layoffs
+  8. `link:https://news.google.com/rss/articles/CBMingFBVV95cUxNdHZwOGtZdkVDbkRsZVhTaEc4cWJJUzRaWWw0UXVHQ0xRb3NoWWZLblN6dmQwTkd6MTlYeldSdGw2UEt3dWJrRHRTbmNPcS1UV2Ztd2Y5MldWM0t6RDVvWUJRTmU4WEF1d0JfczJicWk4TEJqSU9NOW1DbmRQSk1OcGJZU29obU9MLS1jdmhuZ0tFdExleExnLWUxWUJ5UQ?oc=5` — Research for EMPL Committee - Strengthening the European Child Guarantee: an overview of lessons learnt and best practices from
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261016T090004Z-1d922c541ff3`
-- Assigned unresolved records: **29**
-  1. `link:https://news.google.com/rss/articles/CBMiiAFBVV95cUxORVZaOElCQzd6QXNvbmswbmFKU21IQ1dLWjNKbVNoRE95TkhHVEF3NU82Y1l2aXdVd0JnQXB3QkxYdWI0WlNxcDJjOXhnTzFDWGZOSlJxT1ZnX3J3YURIbVB2bmxiUnlybHk3RGllRU9aMmttY19zbjllM09IOFgteUVmYmtxelRR?oc=5` — Is the EU research budget actually increasing?
-  2. `link:https://news.google.com/rss/articles/CBMipgFBVV95cUxOWDh4V0dJdl9HYTFsQTNoTDhWbVk3WmtTLVFrZ1JPVGUtZTBSNDFGTjRyaExNSFZCMXBDSXpraElQaGJNcWlmZG9UekxjMjlFWEhBREd3VGhNejV0SXItOG1lMUhTVS1waWsxSFlpLVJJd1Y2THd6TWhkLTFfcnhhSUU2b3pCekpJTnhsVFhVamNpeXgybm5TUUxlQmtOQTc2MTVqRjZ3?oc=5` — Elsevier commits to accelerate AI-driven science across Europe
-  3. `link:https://news.google.com/rss/articles/CBMinwFBVV95cUxOVXJjb1Z4ekU3VVU5QlpZcWs1WTU0Q3Y5bW5OLWlmVUpnTGZITlpXSlA2NTZuYU9nMGFYTlVjdEJLT3FFUzY1bnNYX01qTTFtVUgtMnpEVFdUN2gyQWlkbW1CTThiLUZCTmZ0Y2lLQmQwT1hXQVJnbjNFMU00OUhHVWNIOVVMamo5cnRQYk5CeGVNZm1qR1hjbEFpQTVsb1U?oc=5` — Pan-European pension scheme tackles barriers for researchers
-  4. `link:https://news.google.com/rss/articles/CBMioAFBVV95cUxPZ0RuNk1kbTJpWVVCZlhSd2JmbTVEcVpSTk9rc1libE5VcFBWTFVjcUNLMzkyTjZLdkFrSF9GOXp2bGFhTEUtMkJfVklZV2NxWFZxcDdaM0pkZndNRUZwenlzMU9JcDAxd215bXRRRVUwd0hnYVQzVTZacXdoYlJsRE1UUUR1ZjZrYmNMQVVqeENib284dkJEY2NNVzNyZmFB?oc=5` — European Startup Village Forum 2026 - EU Science Hub
-  5. `link:https://eic.ec.europa.eu/news/european-innovation-council-backs-43-projects-turn-breakthrough-research-prototypes-2026-10-14_en` — European Innovation Council backs 43 projects to turn breakthrough research into prototypes
-  6. `link:https://doi.org/10.1186/s40309-026-00302-x` — When synthetic Delphi panels work: a graph-native methodology for participatory foresight under structural complexity
-  7. `link:https://news.google.com/rss/articles/CBMirAFBVV95cUxPMENmUllvcDNtemJGTUdXYlh1UWRmNUVLTzNreFJOSWtKZVowMHk1WHMzNmwweHY2NVJZU2hxR0NOa3BVOG80YXN2SWN0U3J0R1RjYzc5blkzdVBsaTZhVDFCc3dyNUl0QVhpY0Q4OUdsZi05UU5xTEdCQXBVdGJWRVl3R0ZnTUhIeE5PdVItY0RvVHBWYXNsVlV5OGFQNGtCSkVYWFdXa0ttSWVf?oc=5` — Germany plans AI cooperation deal with Nvidia, Handelsblatt says
-  8. `link:https://news.google.com/rss/articles/CBMisAFBVV95cUxNR1ZTeUFnSUJVRG8xa0dhcEN4ZU1FT3dOOVJYbzFxTjdERHR0NGhfVTF5VW9jeGVady1GTnkwTDdobU9rajg4Nkkzc3dxeGFwZjBYY09JVy1uWkx3aFdPZXROcEZ0MEdWRXVWRXVJSDlHcDVrN1JIc1lBVF9yZ2NkZjVFRFVtNDNhS2t2UFpkRnBLY19MRzZUbjl0MnlNZFlscTdQT0lFTUVBeUg4bXZlaw?oc=5` — EU auditors urge greater focus on research commercialisation
-  - … plus 21 more in the package manifest
+- Current package: `worker-b-20261017T080009Z-47a963f8a3c1`
+- Assigned unresolved records: **36**
+  1. `historical:id:3dc93cbcd32719ac` — A participatory Foresight for National Research and Education Networks
+  2. `historical:id:a9b9bc6510bdcb20` — Foresight and Strategic Thinking Enabling Valuable Strategy
+  3. `link:https://www.eif.org/files/publications/eif-equity-barometer-2026-q2.pdf` — EIF thought leadership | Inspiring progress for future funding
+  4. `link:https://ellis.eu/publication/2008-a-semantic-multimedia-analysis-approach-utilizing-a-region-thesaurus-a` — A Semantic Multimedia Analysis Approach Utilizing a Region Thesaurus and LSA
+  5. `link:https://ellis.eu/publication/2010-an-experimental-study-of-graph-connectivity-for-unsupervised-word-sens` — An Experimental Study of Graph Connectivity for Unsupervised Word Sense Disambiguation
+  6. `link:https://era.gv.at/news-items/business-europe-publishes-discussion-paper-on-ipceis/` — Business Europe publishes discussion paper on IPCEIs
+  7. `link:https://www.interface-eu.org/publications/cyber-threats-for-europe` — Cyber threats for Europe
+  8. `link:https://www.eif.org/press/all/eif-investments-leverage-more-than-eur400-million-boosting-the-deep-technology-and-cybersecurity-sector-in-portugal` — EIF leverages over €400m to boost deep-tech and cybersecurity in Portugal
+  - … plus 28 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
