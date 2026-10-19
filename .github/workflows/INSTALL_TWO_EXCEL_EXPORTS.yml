@@ -1,0 +1,146 @@
+name: INSTALL - Two Live Excel Exports
+
+on:
+  workflow_dispatch:
+  # Refresh the two Excel snapshots after any completed data-changing scan.
+  # This works even with older scanner workflows which commit only one filename.
+  workflow_run:
+    workflows:
+      - 'R&I Radar Scan'
+      - 'R&I Radar Quick Scan — 6 min'
+      - 'R&I Radar Focused Strand Scan — 20 min'
+      - 'Priority — Scan APA7 DOCX Now'
+      - 'Historical Top-Tier Scan'
+      - 'Deep Scan V2 — Import Returned Results'
+      - 'Deep Scan Recovery — Import PUSH HARDER Results'
+      - 'Strand A — Import LLM Research Discoveries'
+      - 'R&I Radar Strand A Wild Private Deep Discovery — 20 min'
+      - 'Radar V2 — Initialise, Validate & Prepare Deep Scan'
+      - 'Safety — Save / Restore'
+    types: [completed]
+
+permissions:
+  contents: write
+
+# Prevent commits from racing with scheduled Main/Historical scans.
+concurrency:
+  group: ri-radar-research-scanners
+  cancel-in-progress: false
+
+jobs:
+  install:
+    name: Install exports and regenerate both workbooks
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out main
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Check whether the patch is installed
+        id: installed
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == 'workflow_dispatch' ]] || grep -q 'downloadCombinedExcel' stuff/index.html; then
+            echo 'ready=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'ready=false' >> "$GITHUB_OUTPUT"
+            echo 'Two Excel exports are not installed yet; skipping automated refresh.'
+          fi
+
+      - name: Confirm extracted files (or install ZIP if provided)
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PYTHON'
+          from pathlib import Path
+          from zipfile import ZipFile
+          expected = {
+              'stuff/index.html',
+              'stuff/workbook.js',
+              'scripts/generate_stuff_workbook.js',
+              'tests/test_stuff_combined_workbook.py',
+          }
+          path = Path('RADAR_TWO_EXCEL_EXPORTS_PATCH.zip')
+          if path.is_file():
+              with ZipFile(path) as z:
+                  if set(z.namelist()) != expected:
+                      raise SystemExit('Unexpected ZIP contents. No files installed.')
+                  for name in sorted(expected):
+                      dest = Path(name)
+                      if not dest.parent.is_dir():
+                          raise SystemExit(f'Missing repository folder: {dest.parent}')
+                      dest.write_bytes(z.read(name))
+                      print(f'Updated {name} from ZIP')
+          else:
+              missing = sorted(name for name in expected if not Path(name).is_file())
+              if missing:
+                  raise SystemExit('Upload these extracted files to their matching paths first: ' + ', '.join(missing))
+              print('Using four extracted files already uploaded into their repository folders.')
+          PYTHON
+
+      - name: Verify Main-only and Main plus Historical exports
+        if: ${{ steps.installed.outputs.ready == 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check stuff/workbook.js
+          node --check scripts/generate_stuff_workbook.js
+          python3 -m unittest tests.test_stuff_combined_workbook -v
+          node scripts/generate_stuff_workbook.js
+          python3 - <<'PYTHON'
+          from pathlib import Path
+          from zipfile import ZipFile
+          from xml.etree import ElementTree as ET
+          ns = {'x': 'http://schemas.openxmlformats.org/spreadsheetml/2006/main'}
+          expected = {
+              'stuff/main_radar_stuff.xlsx': ['All publication data', 'Ranked sources', 'Method', 'Shock audit'],
+              'stuff/source_merit_ranking.xlsx': ['All publication data', 'Historical findings', 'Ranked sources', 'Method', 'Shock audit'],
+          }
+          for filepath, names in expected.items():
+              with ZipFile(filepath) as z:
+                  wb = ET.fromstring(z.read('xl/workbook.xml'))
+                  actual = [s.get('name') for s in wb.findall('x:sheets/x:sheet', ns)]
+                  if actual != names:
+                      raise SystemExit(f'{filepath}: unexpected worksheets {actual}')
+              print(f'Verified {filepath} ({Path(filepath).stat().st_size:,} bytes)')
+          PYTHON
+
+      - name: Save project changes and both regenerated Excel files
+        if: ${{ steps.installed.outputs.ready == 'true' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'radar-excel-installer'
+          git config user.email 'actions@github.com'
+          git add -- stuff/index.html stuff/workbook.js scripts/generate_stuff_workbook.js tests/test_stuff_combined_workbook.py stuff/main_radar_stuff.xlsx stuff/source_merit_ranking.xlsx
+          if [[ "${{ github.event_name }}" == 'workflow_dispatch' ]] && [[ -f RADAR_TWO_EXCEL_EXPORTS_PATCH.zip ]]; then
+            git rm -f -- RADAR_TWO_EXCEL_EXPORTS_PATCH.zip
+          fi
+          if git diff --cached --quiet; then
+            echo 'Two exports are already installed.'
+            exit 0
+          fi
+          git commit -m 'Maintain separate live Main-only and Main plus Historical Excel exports'
+          git push origin HEAD:main
+
+      - name: Installation paths
+        if: ${{ success() && steps.installed.outputs.ready == 'true' }}
+        shell: bash
+        run: |
+          cat >> "$GITHUB_STEP_SUMMARY" <<'EOF'
+          ## Two Excel exports installed
+
+          The **Stuff** page now has two buttons, each creating the latest download:
+
+          - `stuff/main_radar_stuff.xlsx` — current Main Radar only
+          - `stuff/source_merit_ranking.xlsx` — Main Radar + every Historical scanner finding
+
+          This installer also refreshes both Excel snapshots after successful
+          Main, Historical, Deep Scan and discovery workflows, including on
+          repositories where older workflows only committed one workbook.
+          EOF
