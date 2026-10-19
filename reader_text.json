@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-16T08:53:53Z",
+  "generated_at": "2026-10-19T09:09:23Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -236050,8 +236050,165 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiqgFBVV95cUxOWkR4ZHhRS3REM083T0VmaDRMTWtDUEdQVzc0LXNrTk1FdkVpb2lBY1RUeV9wcFV4V0pRSmFtOU81ckd4cTE5Q0tMYUJacU5oVlRxOXlyZTdBQ2VxZzBUVDJLYjhjcDdNR1B3dERxVWRTbGJZSllnY19IOVZqSjZuSkJIdklLbWRuMkVjYlR0cV84UXhhU0ZZY25qVjhpUUVtYkJrcUpiRzBWdw?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "8a9488a3",
+      "identity_hash": "6a51dbd73e361d00",
+      "deep_analysis": {
+        "work_kind": "opinion article",
+        "research_question": "",
+        "main_finding": "Markus Töns advocates changing the EU 2028–2034 budget allocation and strengthening innovation funding.",
+        "method_or_basis": "Opinion column expressly credited to Markus Töns, not a Commission/Council formal action record.",
+        "qualification": "Normative advocacy; the underlying MFF negotiations and Commission proposal predate publication.",
+        "radar_relevance": "Discusses funding priorities but reports no distinct newly verified action in Strand C.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "Supplied Google News RSS redirect did not provide article text in package."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact headline search found Euronews article dated 2026-10-16: https://www.euronews.com/2026/10/16/the-new-multiannual-financial-framework-mff-a-future-vision-for-the-eu"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euronews.com/2026/10/16/the-new-multiannual-financial-framework-mff-a-future-vision-for-the-eu",
+            "title": "Euroviews: The new multiannual financial framework (MFF): A future vision for the EU",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified underlying identity and content independently against the identified publisher/issuing organisation."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Strand C change gate fails: this 16 October 2026 Euroviews article is expressly an individual parliamentarian’s opinion urging budget priorities; it does not establish a new MFF decision, newly adopted funding change or distinct implemented R&I development."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identified exact duplicate in package metadata."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T09:09:22Z",
+      "deep_scan_package_id": "worker-a-20261019T081137Z-ab250ad19bfb",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1002/masy.70500": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "b3adea7c",
+      "identity_hash": "d92d5ddbc315955d",
+      "reader_title": "Institutional gaps shape nanomaterial commercialization",
+      "reader_what": "A comparative study links commercialization differences to regulatory validation, markets and ecosystem maturity.",
+      "reader_why": "Technology transfer depends on institutional alignment, not laboratory performance alone.",
+      "reader_more": "The authors compare the EU, United States and India using market structures, firm commercialization models, institutional configurations and behavioral evidence. They observe differences in scale, certification and business models. The study is sector-specific; its associations should not be taken as experimental proof of causation.",
+      "deep_analysis": {
+        "work_kind": "comparative innovation-systems research article",
+        "research_question": "",
+        "main_finding": "Commercialization outcomes for nanotechnology-enabled macromolecular materials differ across the EU, US and India, depending on validation infrastructure, institutions and market architecture.",
+        "method_or_basis": "Cross-region market and firm evidence, institutional configuration and consumer behavior; eleven-page first-party PDF text included in job package.",
+        "qualification": "Cross-regional comparison examines a limited nanomaterials commercialization domain; observational associations and reported survey gaps do not establish causal effects or represent all EU innovation sectors.",
+        "radar_relevance": "Direct comparative research on an EU R&I-system mechanism: transfer and scaling of scientific materials into commercial products.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI https://doi.org/10.1002/masy.70500 identifies Wiley Macromolecular Symposia research article; package contains eleven-page publisher PDF extract."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1002/masy.70500 and title/authors matched Wiley journal contents."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Wiley Macromolecular Symposia issue lists Punetha, Bhagat and Shah, first published 2026-10-15: https://onlinelibrary.wiley.com/journal/15213900"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_first_party_pdf_excerpt",
+            "url": "https://doi.org/10.1002/masy.70500",
+            "title": "Innovation Systems and Nano-Macromolecular Translation: Market Structures, Behavioral Gaps, and Regional Asymmetries",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified underlying identity and content independently against the identified publisher/issuing organisation."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Strand A Route 3: substantive comparative research directly measures and explains EU innovation-system commercialization, institutional validation and translation relative to the US and India. European scope and R&I mechanisms are central rather than incidental."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identified exact duplicate in package metadata."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T09:09:23Z",
+      "deep_scan_package_id": "worker-a-20261019T081137Z-ab250ad19bfb",
+      "claims": [
+        {
+          "object": "innovation.system_performance",
+          "secondary_objects": [
+            "research.knowledge_transfer"
+          ],
+          "actor": {
+            "name": "Mayank Punetha, Jainish Bhagat and Ankit Shah",
+            "class": "university_group"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-10-15",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Cross-regional comparison examines a limited nanomaterials commercialization domain; observational associations and reported survey gaps do not establish causal effects or represent all EU innovation sectors.",
+          "text": "Comparative analysis associates EU, US and Indian nanomaterial commercialization differences with institutional validation and ecosystem conditions.",
+          "confidence": "medium",
+          "record_key": "link:https://doi.org/10.1002/masy.70500",
+          "merit": 77,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:d92d5ddbc315955d:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-16T08:53:53Z"
+  "claims_updated_at": "2026-10-19T09:09:23Z"
 }

@@ -6,36 +6,22 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2731** (Main **1310** + Historical **1421**)
-- Automatic queue still needing V2 verification: **546** (Main **243** + Historical **303**)
-- Currently assigned to workers: **50** (Main **1** + Historical **49**)
+- Authoritative V2 verified: **2733** (Main **1312** + Historical **1421**)
+- Automatic queue still needing V2 verification: **544** (Main **241** + Historical **303**)
+- Currently assigned to workers: **35** (Main **0** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **31**
-- Automatic queue pending and not yet assigned: **496**
+- Automatic queue pending and not yet assigned: **509**
 
 ## Worker lanes
 
 ### Worker A
 - Current package: `worker-a-20261019T090146Z-fde7ab3b997c`
-- Assigned unresolved records: **5**
-  1. `link:https://news.google.com/rss/articles/CBMikgFBVV95cUxPMHZHaTJEYTVaZHl5RmhSZWlLWDFhcVpkUFJwOEtBNF9qSzdfZm9lWEIta3dXaDN1anBuUF9UM2tpenRoVE1ReGJWV0dfZ0hNa3d4UV95NDNrN0VNVmJUUktueFB5bm56WmlHMDkzc3lfc1dVS2F2TEJFZVVHTlNsb0o4dXQyUDdfdEhMdXlpZGpPZw?oc=5` — Cyberattack on French supermarkets tells us more about food security than AI safety
-  2. `historical:id:4afb03fa663569e2` — An Assessment of AI’s Impact on Contemporary Geopolitics | HCSS
-  3. `historical:id:9c842cdcafdebabe` — Joint Statement on the Implementation of the EU-China Cooperation on Energy
-  4. `historical:id:147496c851b6e66c` — Climate Barometer 2019: Finns wish to have solutions to climate crisis at the heart of policy-making | VTT
-  5. `historical:id:8879e7c6fecbe375` — Overview of ethics codes and principles for AI | Rathenau Instituut
+- Assigned unresolved records: **0**
 
 ### Worker B
 - Current package: `worker-b-20261019T090214Z-86f9a2cd8d42`
-- Assigned unresolved records: **10**
-  1. `historical:id:aece40fd90cde663` — Regional innovation governance and place-based policies: design, implementation and implications
-  2. `historical:id:a7b5fec456f646aa` — Combinostics: Faster diagnoses with artificial intelligence | VTT
-  3. `historical:id:28b4d2b73e2b008a` — Only one way to skin a cat? Heterogeneity and equifinality in European national innovation systems
-  4. `historical:id:78754371dbf139f3` — Technology entrepreneurship research opportunities: insights from across Europe
-  5. `historical:id:3dc93cbcd32719ac` — A participatory Foresight for National Research and Education Networks
-  6. `historical:id:918a347da0104729` — Digital Investments, Data and Growth in Europe: A Framework for Analysis
-  7. `historical:id:b9f7c46779f5b8a1` — Investigating the interplay between fundamentals of national research systems: Performance, investments and international collaborations
-  8. `historical:id:ee14eea7a83ff13c` — The impact of foresight on entrepreneurship: The Wales 2010 case study
-  - … plus 2 more in the package manifest
+- Assigned unresolved records: **0**
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
