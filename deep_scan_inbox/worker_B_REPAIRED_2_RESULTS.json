@@ -1,0 +1,124 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-b-20261019T081231Z-16929ebb6a8d",
+  "results": [
+    {
+      "record_key": "historical:id:ed654464fa2430f9",
+      "source_hash": "6379d00b",
+      "identity_hash": "e5fcf335ff8dbeb0",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Original CEPS CDN URL https://cdn.ceps.eu/wp-content/uploads/2024/05/Annual-Report-2023.pdf exceeded web reader size limit."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Retrieved matching full official CEPS annual report as publisher HTML at https://annualreport.ceps.eu/annual-report-2023/; alternate official PDF identified at https://annualreport.ceps.eu/wp-content/uploads/2024/04/Annual-Report-2023.pdf (web reader size limit)."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://annualreport.ceps.eu/annual-report-2023/",
+            "title": "CEPS Annual Report 2023",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official CEPS annual-report microsite identifies its 2023 institutional annual report; financial overview, project list, staff changes and publication highlights confirm publication identity and administrative content."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Tested A Route 1 (geopolitical R&I evidence), Route 2 (European R&I system trajectories), and Route 3 (research on European R&I-system mechanisms): this annual activity/accountability report lists CEPS programmes, outputs, members and finances. It does not itself supply a substantive analytical study of European R&I under any of those routes; links to separate studies do not convert the annual report into one."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "CEPS institutional annual report for 2023",
+      "reader_what": "CEPS reviews its 2023 research projects, publications, staffing, events, finances and institutional priorities.",
+      "reader_why": "",
+      "reader_more": "The report documents activities by a European policy think tank, including EU-funded research projects. It is primarily an institutional retrospective and catalogue. Individual analytical CEPS publications could be eligible separately, but this report is not itself substantive European R&I evidence.",
+      "deep_analysis": {
+        "work_kind": "institutional annual report",
+        "research_question": "",
+        "main_finding": "Describes CEPS operations, policy-research portfolio, annual highlights and organisational financing for 2023.",
+        "method_or_basis": "Institutional reporting, project and publication listings, activity counts and financial accounts.",
+        "qualification": "Annual activity reporting is not an independent analytical finding about Europe’s research and innovation system.",
+        "radar_relevance": "Indirect institutional context only; A Routes 1, 2 and 3 fail the substantive Europe/EU R&I evidence threshold.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:de7afaa58572f701",
+      "source_hash": "b9e3b59c",
+      "identity_hash": "a6957d6052e19a15",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Substantive source excerpt supplied by scanner for https://link.springer.com/chapter/10.1007/978-3-031-66196-9_11"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "provided_source_text",
+            "url": "https://link.springer.com/chapter/10.1007/978-3-031-66196-9_11",
+            "title": "The Enemy Within: The Human Side of Governance, Innovation, and National Security in the Age of Data-Driven Big Tech",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Assessment draws on provided scanner-retrieved matching source content; separate independent bibliographic cross-check not completed."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Routes 1–3 fail substantive European R&I gate: this chapter theorises Big Tech, security and governance broadly without substantive evidence about Europe’s research and innovation system."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No confirmed duplicate established."
+      },
+      "reader_title": "The Enemy Within: The Human Side of Governance, Innovation, and National Security in the Age of Data-Driven Big Tech",
+      "reader_what": "A chapter examines the human dimensions of Big Tech, public governance, innovation and national security.",
+      "reader_why": "",
+      "reader_more": "The chapter discusses technology firms and state governance in a security context. The supplied material does not establish a substantive study of Europe’s research and innovation system. The scope test therefore does not support Strand A admission.",
+      "deep_analysis": {
+        "work_kind": "analytical book chapter",
+        "research_question": "",
+        "main_finding": "The chapter examines governance, Big Tech and national security through human and institutional dimensions.",
+        "method_or_basis": "Substantial matching chapter excerpt supplied with scanner work material; independent full-text retrieval not established.",
+        "qualification": "The chapter does not provide a substantiated Europe-specific research-and-innovation-system analysis.",
+        "radar_relevance": "A Routes 1–3 fail substantive European R&I gate: this chapter theorises Big Tech, security and governance broadly without substantive evidence about Europe’s research and innovation system.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    }
+  ]
+}
