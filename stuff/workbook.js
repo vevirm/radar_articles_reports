@@ -216,54 +216,58 @@
   }
 
   function buildXlsx(data,Merit,extras={},options={}){
-    const mainOnly=options.mainOnly===true;
+    const includeHistorical=options?.includeHistorical!==false;
     if(!Merit?.scoreFor||!Merit?.forItem||!Merit?.componentsFor)throw new Error('RadarSourceMerit unavailable');
     const raw=buildRawPublicationTable(data);
-    const historical=buildHistoricalTable(extras?.historical||{},extras?.reader||{},extras?.admission||{},extras?.corrections||{});
+    const historical=includeHistorical?buildHistoricalTable(extras?.historical||{},extras?.reader||{},extras?.admission||{},extras?.corrections||{}):null;
     const rows=buildRows(data,Merit);
     const shockRows=buildShockRows(data);
     const h1=['Rank','Score / 100','Band','Source title','Plain reader title','Date','Product','Plain finding','Why it matters','Plain explanation','Deep confidence','Deep read depth','Source','Authors','Authority / 55','Authority basis','EU relevance / 25','EU relevance basis','Evidence / 15','Evidence basis','Author transparency / 5','Type','EU relevance code','EU evidence','R&I evidence','Strategic evidence','Core message','Relevance / admission note','Matrix auto cell','Strategic classification','Discovery provenance','Source tier','First seen','Source link'];
     const b1=rows.map(r=>[r.rank,r.score,r.band,r.title,r.readerTitle,r.date,r.product,r.readerWhat,r.readerWhy,r.readerMore,r.deepConfidence,r.deepReadMode,r.source,r.authors,r.authorityPoints,r.authority,r.relevancePoints,r.relevance,r.evidencePoints,r.evidence,r.authorPoints,r.type,r.euRelevance,r.euEvidence,r.riEvidence,r.geoEvidence,r.core,r.note,r.matrix,r.strategic,r.provenance,r.sourceTier,r.firstSeen,r.link]);
     const widths=[8,11,16,42,38,12,16,42,42,58,16,20,27,32,12,28,15,31,12,28,18,24,18,28,28,28,42,48,20,22,24,20,20,42];
-    const historicalArchiveUpdated=clean(extras?.historical?.last_updated);
+    const historicalArchiveUpdated=includeHistorical?clean(extras?.historical?.last_updated):'';
     const method=[
       ['WHAT THIS FILE IS','The technical data behind the Radar. Normal reader pages deliberately hide most of this.'],
       ['All publication data','Current live-Radar evidence only. One deduplicated publication/report per row. It contains scanner fields plus any currently valid Deep Scan reader fields for that publication. Nested fields use dot names; arrays and complex values are preserved as JSON. If the same publication has different stored values in different Radar products, both are retained with || between them.'],
-      ['Historical findings','Every finding that survived the Historical scanner is kept here, including records later reviewed or not retained by Deep Scan. Each row keeps the original scanner fields and joins the matching Deep Scan reader, admission and correction sidecars. “Authoritative historical = YES” means an authoritative Deep Scan profile plus a keep decision. Pending and non-kept records remain visible for audit.'],
-      ['Historical update lifecycle','A Historical scanner finding enters this workbook immediately. When Deep Scan later checks that same historical record key, the same row is regenerated with its Deep Scan decision, reader explanation, verification details and corrections. The raw historical archive remains unchanged.'],
+      ...(includeHistorical?[
+        ['Historical findings','Every finding that survived the Historical scanner is kept here, including records later reviewed or not retained by Deep Scan. Each row keeps the original scanner fields and joins the matching Deep Scan reader, admission and correction sidecars. “Authoritative historical = YES” means an authoritative Deep Scan profile plus a keep decision. Pending and non-kept records remain visible for audit.'],
+        ['Historical update lifecycle','A Historical scanner finding enters this workbook immediately. When Deep Scan later checks that same historical record key, the same row is regenerated with its Deep Scan decision, reader explanation, verification details and corrections. The raw historical archive remains unchanged.']
+      ]:[]),
       ['Ranked sources','A smaller audit view of the current active Radar corpus. Plain reader title/finding/why/explanation appear first when a valid Deep Scan exists, followed by the 0–100 source-merit audit fields.'],
       ['Shock audit','Technical assumptions, counter-evidence, prevention actions and indicators behind inferred shocks.'],
       ['Current data state',`${clean(data?.run_completed_at||data?.last_updated)} · A=${(data?.strand_a||[]).length} · B=${(data?.strand_b||[]).length} · C=${(data?.strand_c||[]).length} · Strategic pathways=${(data?.strategic_pathways||[]).length}`],
-      ['Historical data state',`${historicalArchiveUpdated||'unknown'} · Historical scanner findings=${historical.total} · Deep Scanned=${historical.deepScannedCount} · Authoritative historical=${historical.authoritativeCount}`],
+      ...(includeHistorical?[['Historical data state',`${historicalArchiveUpdated||'unknown'} · Historical scanner findings=${historical.total} · Deep Scanned=${historical.deepScannedCount} · Authoritative historical=${historical.authoritativeCount}`]]:[]),
       ['Publication rows',`${raw.rows.length} deduplicated current publication/report records`],
       ['Publication fields',`${raw.headers.length-2} stored current scanner fields exposed`],
-      ['Historical rows',`${historical.rows.length} historical scanner records exposed`],
-      ['Historical fields',`${Math.max(0,historical.headers.length-8)} scanner + Deep Scan/admission/correction fields exposed, in addition to 8 status columns`],
+      ...(includeHistorical?[
+        ['Historical rows',`${historical.rows.length} historical scanner records exposed`],
+        ['Historical fields',`${Math.max(0,historical.headers.length-8)} scanner + Deep Scan/admission/correction fields exposed, in addition to 8 status columns`]
+      ]:[]),
       ['Ranked rows',`${rows.length} deduplicated active evidence records`],
       ['Shock rows',`${shockRows.length} inferred shock records`]
     ];
     const shockHeaders=['Status','Inference score','Shock','Plain-language shock','Second-order effect','Conditions that must hold','Case against','What could prevent it','What to watch','Net assessment','Official trigger present','Evidence couplings','Evidence for','Prevention / counter evidence'];
     const shockWidths=[16,14,34,46,46,58,65,58,58,32,18,16,70,70];
     const styles=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><fonts count="2"><font><sz val="10"/><name val="Arial"/></font><font><b/><color rgb="FFFFFFFF"/><sz val="10"/><name val="Arial"/></font></fonts><fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FF111111"/><bgColor indexed="64"/></patternFill></fill></fills><borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="4"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFont="1" applyFill="1" applyAlignment="1"><alignment wrapText="1" vertical="center"/></xf><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0" applyAlignment="1"><alignment wrapText="1" vertical="top"/></xf><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0" applyAlignment="1"><alignment wrapText="1" vertical="top"/></xf></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>`;
+    // Keep names, relationships and worksheet IDs in sync for both workbook variants.
+    // Main-only has no historical sheet; combined retains every historical record.
+    const sheets=[
+      ['All publication data',sheetXml(raw.headers,raw.rows,raw.headers.map(widthFor))],
+      ...(includeHistorical?[['Historical findings',sheetXml(historical.headers,historical.rows,historical.headers.map(widthFor))]]:[]),
+      ['Ranked sources',sheetXml(h1,b1,widths)],
+      ['Method',sheetXml(['Field','Explanation'],method,[28,110])],
+      ['Shock audit',sheetXml(shockHeaders,shockRows,shockWidths)]
+    ];
+    const worksheetType='application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml';
+    const worksheetRel='http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet';
     const files={
-      '[Content_Types].xml':`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/worksheets/sheet2.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/worksheets/sheet3.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/worksheets/sheet4.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/worksheets/sheet5.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>`,
+      '[Content_Types].xml':`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>${sheets.map((_,i)=>`<Override PartName="/xl/worksheets/sheet${i+1}.xml" ContentType="${worksheetType}"/>`).join('')}<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>`,
       '_rels/.rels':`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`,
-      'xl/workbook.xml':`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="All publication data" sheetId="1" r:id="rId1"/><sheet name="Historical findings" sheetId="2" r:id="rId2"/><sheet name="Ranked sources" sheetId="3" r:id="rId3"/><sheet name="Method" sheetId="4" r:id="rId4"/><sheet name="Shock audit" sheetId="5" r:id="rId5"/></sheets></workbook>`,
-      'xl/_rels/workbook.xml.rels':`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet2.xml"/><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet3.xml"/><Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet4.xml"/><Relationship Id="rId5" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet5.xml"/><Relationship Id="rId6" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`,
-      'xl/styles.xml':styles,
-      'xl/worksheets/sheet1.xml':sheetXml(raw.headers,raw.rows,raw.headers.map(widthFor)),
-      'xl/worksheets/sheet2.xml':sheetXml(historical.headers,historical.rows,historical.headers.map(widthFor)),
-      'xl/worksheets/sheet3.xml':sheetXml(h1,b1,widths),
-      'xl/worksheets/sheet4.xml':sheetXml(['Field','Explanation'],mainOnly?method.filter(row=>!/^Historical (findings|update lifecycle|data state|rows|fields)$/.test(row[0])):method,[28,110]),
-      'xl/worksheets/sheet5.xml':sheetXml(shockHeaders,shockRows,shockWidths)
+      'xl/workbook.xml':`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>${sheets.map(([name],i)=>`<sheet name="${esc(name)}" sheetId="${i+1}" r:id="rId${i+1}"/>`).join('')}</sheets></workbook>`,
+      'xl/_rels/workbook.xml.rels':`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${sheets.map((_,i)=>`<Relationship Id="rId${i+1}" Type="${worksheetRel}" Target="worksheets/sheet${i+1}.xml"/>`).join('')}<Relationship Id="rId${sheets.length+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`,
+      'xl/styles.xml':styles
     };
-    if(mainOnly){
-      // Preserve the existing dynamic Radar builder, but remove Historical entirely.
-      files['xl/workbook.xml']=files['xl/workbook.xml'].replace(/<sheet name="Historical findings"[^>]*\/>/,'');
-      files['xl/_rels/workbook.xml.rels']=files['xl/_rels/workbook.xml.rels'].replace(/<Relationship Id="rId2"[^>]*\/>/,'');
-      files['[Content_Types].xml']=files['[Content_Types].xml'].replace(/<Override PartName="\/xl\/worksheets\/sheet2.xml"[^>]*\/>/,'');
-      delete files['xl/worksheets/sheet2.xml'];
-    }
+    sheets.forEach(([,xml],i)=>{files[`xl/worksheets/sheet${i+1}.xml`]=xml;});
     return zip(files);
   }
   return {buildRows,buildRawPublicationTable,buildHistoricalTable,buildShockRows,buildXlsx};

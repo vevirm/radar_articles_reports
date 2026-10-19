@@ -25,13 +25,17 @@
   <div id="pendingCandidateList" class="candidate-review-list"><div class="empty">Loading candidates…</div></div>
 </section>
 <section class="download-card">
-  <div><h2>Main Radar publication data</h2><p>The Excel opens on one row per publication or report. It includes the current Main Radar only, with live publication data, ranked sources, methodology and shock audit. It refreshes from the current Radar data whenever downloaded. Historical scanner findings are excluded.</p></div>
-  <div><button id="downloadExcel" class="btn red" type="button">Download Main Radar data (.xlsx)</button><div class="note"><a href="main_radar_stuff.xlsx" download>Automatically updated Main Radar snapshot</a></div></div>
+  <div><h2>Main Radar — all available information</h2><p>Current Main Radar findings only, with every available publication and scanner field, ranked sources, methodology and shock audit. Continuously regenerated when Radar data changes.</p></div>
+  <div><button id="downloadMainExcel" class="btn red" type="button">Download Main Radar Excel (.xlsx)</button><div class="note"><a href="main_radar_stuff.xlsx" download>Automatically updated Main-only snapshot</a></div></div>
+</section>
+<section class="download-card">
+  <div><h2>Main + Historical — all available information</h2><p>Everything in Main Radar, plus all Historical scanner findings and their available Deep Scan, admission and correction details, including pending and non-retained historical records. Updated automatically after Main, Historical and Deep Scan changes.</p></div>
+  <div><button id="downloadCombinedExcel" class="btn red" type="button">Download Main + Historical Excel (.xlsx)</button><div class="note"><a href="source_merit_ranking.xlsx" download>Automatically updated Main + Historical snapshot</a></div></div>
 </section>
 <section class="section"><h2>Other technical files</h2><div class="formats"><a class="btn secondary" href="radar_technical_grammar.xlsx" download>Scanner grammar</a><a class="btn secondary" href="eu_ri_radar_phrases_by_strand.xlsx" download>Search phrase rules</a><a class="btn secondary" href="../glossary/">Glossary</a></div></section>
 </main>
 <script src="../source_merit.js?v=17.19.25"></script>
-<script src="workbook.js?v=23.4"></script>
+<script src="workbook.js?v=23.6"></script>
 <script>
 let radarData=null,workbookExtras={historical:{items:[]},reader:{records:{}},admission:{records:{}},corrections:{records:{}}};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -40,8 +44,21 @@ function fmtAddedAt(v){if(!v)return 'Unknown';const d=new Date(v);if(Number.isNa
 function pendingCandidates(doc){const out=[];for(const [strand,key] of [['A','strand_a'],['B','strand_b'],['C','strand_c']])for(const row of Array.isArray(doc?.[key])?doc[key]:[])if(clean(row?.admission_status).toLowerCase()==='provisional')out.push({...row,_strand:strand});return out.sort((a,b)=>(Date.parse(b.first_seen||'')||0)-(Date.parse(a.first_seen||'')||0)||clean(a.title||a.headline).localeCompare(clean(b.title||b.headline)))}
 function renderPendingCandidates(doc){const rows=pendingCandidates(doc),host=document.getElementById('pendingCandidateList');document.getElementById('pendingCandidateCount').textContent=new Intl.NumberFormat('en-GB').format(rows.length);if(!rows.length){host.innerHTML='<div class="empty">No new candidates are awaiting review.</div>';return}host.innerHTML=rows.map(x=>{const title=clean(x.title||x.headline||'Untitled candidate'),source=clean(x.source||''),link=clean(x.link||x.url||''),added=fmtAddedAt(x.first_seen);return `<article class="candidate-review-row"><div class="candidate-review-meta"><span class="candidate-strand">${esc(x._strand)}</span><span>Added at ${esc(added)}</span></div><h3>${link?`<a href="${esc(link)}" target="_blank" rel="noopener">${esc(title)}</a>`:esc(title)}</h3>${source?`<div class="candidate-review-source">${esc(source)}</div>`:''}<div class="candidate-review-state">Awaiting Deep Scan review</div></article>`}).join('')}
 async function fetchJsonMaybe(path,fallback){try{const r=await fetch(path+(path.includes('?')?'&':'?')+'ts='+Date.now(),{cache:'no-store'});return r.ok?await r.json():fallback}catch(_){return fallback}}
-document.getElementById('downloadExcel').addEventListener('click',()=>{try{if(!radarData)throw new Error('Radar data is still loading');const bytes=globalThis.RadarStuffWorkbook?.buildXlsx?.(radarData,globalThis.RadarSourceMerit,{}, {mainOnly:true});if(!bytes)throw new Error('Workbook generator unavailable');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([bytes],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}));a.download='main_radar_stuff.xlsx';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000)}catch(e){console.error('Excel generation failed',e);alert('The current Excel could not be generated. Try the repository snapshot link.')}});
-(async()=>{try{const [active,historical,reader,admission,corrections]=await Promise.all([RadarData.load('../radar.json','../radar_seed.json'),fetchJsonMaybe('../historical/historical.json',{items:[]}),fetchJsonMaybe('../reader_text.json',{records:{}}),fetchJsonMaybe('../admission_state.json',{records:{}}),fetchJsonMaybe('../record_corrections.json',{records:{}})]);radarData=active;workbookExtras={historical,reader,admission,corrections};renderPendingCandidates(active)}catch(e){console.error(e);document.getElementById('pendingCandidateList').innerHTML='<div class="empty">Candidate queue unavailable.</div>';document.getElementById('downloadExcel').disabled=true;document.getElementById('downloadExcel').textContent='Radar data unavailable'}})();
+function downloadExcel(kind){
+  try{
+    if(!radarData)throw new Error('Radar data is still loading');
+    const mainOnly=kind==='main';
+    const bytes=globalThis.RadarStuffWorkbook?.buildXlsx?.(radarData,globalThis.RadarSourceMerit,workbookExtras,{includeHistorical:!mainOnly});
+    if(!bytes)throw new Error('Workbook generator unavailable');
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(new Blob([bytes],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}));
+    a.download=mainOnly?'main_radar_stuff.xlsx':'source_merit_ranking.xlsx';
+    document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000);
+  }catch(e){console.error('Excel generation failed',e);alert('The Excel could not be generated. Try the automatically updated snapshot link.');}
+}
+document.getElementById('downloadMainExcel').addEventListener('click',()=>downloadExcel('main'));
+document.getElementById('downloadCombinedExcel').addEventListener('click',()=>downloadExcel('combined'));
+(async()=>{try{const [active,historical,reader,admission,corrections]=await Promise.all([RadarData.load('../radar.json','../radar_seed.json'),fetchJsonMaybe('../historical/historical.json',{items:[]}),fetchJsonMaybe('../reader_text.json',{records:{}}),fetchJsonMaybe('../admission_state.json',{records:{}}),fetchJsonMaybe('../record_corrections.json',{records:{}})]);radarData=active;workbookExtras={historical,reader,admission,corrections};renderPendingCandidates(active)}catch(e){console.error(e);document.getElementById('pendingCandidateList').innerHTML='<div class="empty">Candidate queue unavailable.</div>';document.getElementById('downloadMainExcel').disabled=true;document.getElementById('downloadCombinedExcel').disabled=true}})();
 </script>
 <script src="../site-shell.js?v=28"></script>
 </body></html>
