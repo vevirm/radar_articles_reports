@@ -8,38 +8,38 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 
 - Authoritative V2 verified: **2731** (Main **1310** + Historical **1421**)
 - Automatic queue still needing V2 verification: **546** (Main **243** + Historical **303**)
-- Currently assigned to workers: **107** (Main **34** + Historical **73**)
+- Currently assigned to workers: **95** (Main **19** + Historical **76**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **31**
-- Automatic queue pending and not yet assigned: **439**
+- Automatic queue pending and not yet assigned: **451**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261019T061201Z-23008f7e3541`
+- Current package: `worker-a-20261019T081137Z-ab250ad19bfb`
 - Assigned unresolved records: **36**
-  1. `link:https://news.google.com/rss/articles/CBMikgFBVV95cUxPMHZHaTJEYTVaZHl5RmhSZWlLWDFhcVpkUFJwOEtBNF9qSzdfZm9lWEIta3dXaDN1anBuUF9UM2tpenRoVE1ReGJWV0dfZ0hNa3d4UV95NDNrN0VNVmJUUktueFB5bm56WmlHMDkzc3lfc1dVS2F2TEJFZVVHTlNsb0o4dXQyUDdfdEhMdXlpZGpPZw?oc=5` — Cyberattack on French supermarkets tells us more about food security than AI safety
-  2. `link:https://news.google.com/rss/articles/CBMiqgFBVV95cUxOWkR4ZHhRS3REM083T0VmaDRMTWtDUEdQVzc0LXNrTk1FdkVpb2lBY1RUeV9wcFV4V0pRSmFtOU81ckd4cTE5Q0tMYUJacU5oVlRxOXlyZTdBQ2VxZzBUVDJLYjhjcDdNR1B3dERxVWRTbGJZSllnY19IOVZqSjZuSkJIdklLbWRuMkVjYlR0cV84UXhhU0ZZY25qVjhpUUVtYkJrcUpiRzBWdw?oc=5` — Euroviews. The new multiannual financial framework (MFF): A future vision for the EU
-  3. `link:https://doi.org/10.1002/masy.70500` — Innovation Systems and Nano‐Macromolecular Translation: Market Structures, Behavioral Gaps, and Regional Asymmetries
-  4. `link:https://news.google.com/rss/articles/CBMivgFBVV95cUxOMXhzOTk3T0tyTWVCX0Q4VGZzNWVHcWdYTHMtVllXMVB5LUpXbWlMNVRNUnlrQWw1eGViNkhmeE9BZlpuRjJvbkNOeWxudHZDWXlpT2RGVlhyTnlkQTkycnVhcTBUWEllWlhiNGRJZTJqaUtqc1BwYVJXZ0xKZEVxcnB4SXVySDhSNHFlYzJGRnpVZ1FZMmQ1UzUxaEUxOWtWVXpScUtJYnJRUGVqejBHZ25UN3JhdGRQdkxIcjBR?oc=5` — Europe Is Racing China to Dominate Industrial AI
-  5. `link:https://research-and-innovation.ec.europa.eu/implementation-dialogues/implementation-dialogue-research-security-2026-11-10_en` — Implementation dialogue on research security
-  6. `link:https://doi.org/10.1177/09610006261491363` — Mapping the landscape of Library and Information Science in North Africa and Europe: A comparative bibliometric analysis using OpenAlex and DOAJ
-  7. `link:https://doi.org/10.1016/j.respol.2026.105641` — External collaboration and local knowledge divergence in regional knowledge spaces
-  8. `link:https://joint-research-centre.ec.europa.eu/research-updates_en` — Research updates
+  1. `link:https://news.google.com/rss/articles/CBMiqgFBVV95cUxOWkR4ZHhRS3REM083T0VmaDRMTWtDUEdQVzc0LXNrTk1FdkVpb2lBY1RUeV9wcFV4V0pRSmFtOU81ckd4cTE5Q0tMYUJacU5oVlRxOXlyZTdBQ2VxZzBUVDJLYjhjcDdNR1B3dERxVWRTbGJZSllnY19IOVZqSjZuSkJIdklLbWRuMkVjYlR0cV84UXhhU0ZZY25qVjhpUUVtYkJrcUpiRzBWdw?oc=5` — Euroviews. The new multiannual financial framework (MFF): A future vision for the EU
+  2. `link:https://doi.org/10.1002/masy.70500` — Innovation Systems and Nano‐Macromolecular Translation: Market Structures, Behavioral Gaps, and Regional Asymmetries
+  3. `link:https://news.google.com/rss/articles/CBMivgFBVV95cUxOMXhzOTk3T0tyTWVCX0Q4VGZzNWVHcWdYTHMtVllXMVB5LUpXbWlMNVRNUnlrQWw1eGViNkhmeE9BZlpuRjJvbkNOeWxudHZDWXlpT2RGVlhyTnlkQTkycnVhcTBUWEllWlhiNGRJZTJqaUtqc1BwYVJXZ0xKZEVxcnB4SXVySDhSNHFlYzJGRnpVZ1FZMmQ1UzUxaEUxOWtWVXpScUtJYnJRUGVqejBHZ25UN3JhdGRQdkxIcjBR?oc=5` — Europe Is Racing China to Dominate Industrial AI
+  4. `link:https://research-and-innovation.ec.europa.eu/implementation-dialogues/implementation-dialogue-research-security-2026-11-10_en` — Implementation dialogue on research security
+  5. `link:https://doi.org/10.1177/09610006261491363` — Mapping the landscape of Library and Information Science in North Africa and Europe: A comparative bibliometric analysis using OpenAlex and DOAJ
+  6. `link:https://doi.org/10.1016/j.respol.2026.105641` — External collaboration and local knowledge divergence in regional knowledge spaces
+  7. `link:https://joint-research-centre.ec.europa.eu/research-updates_en` — Research updates
+  8. `link:https://doi.org/10.1016/j.ssaho.2026.102795` — Strategic integration of digital innovation and sustainability: A foresight-driven framework for ESG transformation
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261019T061252Z-a6863c3790f4`
-- Assigned unresolved records: **36**
-  1. `link:https://news.google.com/rss/articles/CBMi-AFBVV95cUxNSnd3VVhSRnJwRUJPU3FpQ1AtZTY5dFo3ZkFLVVBERjFQOTVyeElyS3FERHBLYkI2NUcwNGF5ajdKTDdEeUUwLUhyRWhsaVZmZV84dFZGYXRoRmJzOUlLY1ZfU1piVE9hb05CMnY2cmlkTEM2OXc2Nkw2LVZpYnRjeUstQUEwUmRkbTdoRHRfRC1xNTRVeTlfLTB3TGpMeEF4RkpxOVFzbDFTbUZROHZfQ0lQX1pEUDhSSGo3NVFaQm5RLWF2eWpPZGhCdUZMWFZTaC11WjAtMlQ5M0ZGZUFJRnBrc1lSY1FYX3lkWjBvc1lHckg5LUFieA?oc=5` — ERA Living Guidelines on the responsible use of Generative AI in research updated - European Commission
-  2. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxNRVF4bWtRUVRoMGtYV1hKSmhLNm1rU1hWYWVRY2UtNU50ZW1WeEwyWG5qZFVnbmtEdFVrSXAzbldBTEJJXzVtNzAxUGZaMEg3Y2IwTExQdUNyMHJMa3FQZWUtVVNLUkMtcW9YSmpjNG0xWmgwYnBkeVFqelk4QUpRUW5iZTJRRWNRZTZFamVoRFU4eHpxazZQR05VbktyNWpYSHVMTzM5RkdkSzdsT0E?oc=5` — Europe's answer to Starlink: Who is building IRIS² and what is Germany's role
-  3. `link:https://www.euronews.com/2026/10/16/europes-answer-to-starlink-who-is-building-iris-and-what-is-germanys-role` — Europe's answer to Starlink: Who is building IRIS² and Germany's role
-  4. `link:https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52026SA0024%2801%29` — Special report 24/2026 EU funding for innovation and competitiveness – Limited focus on close-to-market measures under Horizon 2020’s industrial leadership priority
-  5. `link:https://news.google.com/rss/articles/CBMimAFBVV95cUxPWEw3cTJSeFlBREN6a3NfWk5aSl9NcFlrY0t5NXYySzNYYVU4MzZ3bzRLaEVRcFJiTHBfcFBaRXhXTkdsTmNNUklOMmI2M0RMYVl3VTlaa2daRXJfQ3R4NmxRc2NJdGtmWUhaa1hjbGxXRThjQlkycmlMYWFoLTItSlhaNUVHN2pHclFraFUyZWtxWDVNa3VndQ?oc=5` — The EU is facing Big Tech pressure to revamp its AI law
-  6. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxPUHlUNEU5Z0lnenkzUi1PUWVxVFVCenQxMlg5U2dQaFJRLW1XVEtQdHU4YzgxWGRHdUIwaHE2Z2dXajRzYlpTbVVuUmJFdTFBTTNwVWJEcDZtUzlaZU9MZ0pWbUpBZHp6aFpOV25vS0p5M3RGeG1WZHM5YlNVNUhSUmw3RXFHelgzb3EydUJ5VmhRVElDd2xDVjBVOTUyaXpQMUgyQUh1TVFweGVaazln?oc=5` — In Europe’s tech capital, Irish labor unions are booming amid AI-driven layoffs
-  7. `link:https://news.google.com/rss/articles/CBMingFBVV95cUxNdHZwOGtZdkVDbkRsZVhTaEc4cWJJUzRaWWw0UXVHQ0xRb3NoWWZLblN6dmQwTkd6MTlYeldSdGw2UEt3dWJrRHRTbmNPcS1UV2Ztd2Y5MldWM0t6RDVvWUJRTmU4WEF1d0JfczJicWk4TEJqSU9NOW1DbmRQSk1OcGJZU29obU9MLS1jdmhuZ0tFdExleExnLWUxWUJ5UQ?oc=5` — Research for EMPL Committee - Strengthening the European Child Guarantee: an overview of lessons learnt and best practices from
-  8. `link:https://news.google.com/rss/articles/CBMilAFBVV95cUxPMU9Mb212Sy1Rd0ZhLWZpZzhxQklDdW8xUy1OUFdRVDRPSTJUaWdXWEFzQTdOUVd2amVtTzhvREo5Vjdnc0V2bzZhRHFON05PQ2doc19QVWNzVjhKUF9zbVVPTEowTjF0d2hjNFVDSzFlUExiamhncDQtLUhfa3RXbEQ2dS1VUmVPdzZ0Z3lhTFVyN0Q5?oc=5` — The European innovation act
-  - … plus 28 more in the package manifest
+- Current package: `worker-b-20261019T081231Z-16929ebb6a8d`
+- Assigned unresolved records: **24**
+  1. `historical:id:ed654464fa2430f9` — Annual Report 2023 – CEPS
+  2. `historical:id:de7afaa58572f701` — The Enemy Within: The Human Side of Governance, Innovation, and National Security in the Age of Data-Driven Big Tech
+  3. `historical:id:f3a2dac9e7453ac7` — India’s Health Diplomacy: Rewards for Global Health Security
+  4. `historical:id:01542e166949263a` — Strengthening strategic planning and the role of PlanAPP in Portugal
+  5. `historical:id:3b3e96537c8dfe27` — ESRC research funding guide for the UKRI Funding Service
+  6. `historical:id:1c1b904642bf6f2c` — On the Role and Assessment of Research at European Universities of Applied Sciences
+  7. `historical:id:9b75a2b800248795` — Consultation on digital transformation now open! - ECAS
+  8. `historical:id:84378f8e071900a2` — Fact of the Week: International Research Cooperation via Co-patenting Yields Greater Innovations Than Co-patenting Between Domestic Firms
+  - … plus 16 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
