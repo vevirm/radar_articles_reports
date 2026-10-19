@@ -6,12 +6,12 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2733** (Main **1312** + Historical **1421**)
-- Automatic queue still needing V2 verification: **544** (Main **241** + Historical **303**)
+- Authoritative V2 verified: **2735** (Main **1312** + Historical **1423**)
+- Automatic queue still needing V2 verification: **542** (Main **241** + Historical **301**)
 - Currently assigned to workers: **35** (Main **0** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **31**
-- Automatic queue pending and not yet assigned: **509**
+- Automatic queue pending and not yet assigned: **507**
 
 ## Worker lanes
 
