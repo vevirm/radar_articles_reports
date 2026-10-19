@@ -503,6 +503,10 @@ def main() -> None:
     file_failures: list[str] = []
 
     for path in files:
+        # Remember errors per file so a partly/fully rejected worker response is
+        # never silently deleted from deep_scan_inbox.
+        rejected_before = rejected_count
+        stale_before = stale_count
         file_had_valid_doc = False
         try:
             docs = list(docs_from_file(path))
@@ -756,7 +760,13 @@ def main() -> None:
                 if prose_problems:
                     print(f"ACCEPT {label} result {idx} with prose safeguards: {'; '.join(prose_problems)}")
         if file_had_valid_doc:
-            imported_files.append(path)
+            if rejected_count > rejected_before or stale_count > stale_before:
+                print(
+                    f"PRESERVE {path.name}: worker response contains rejected/stale results; "
+                    "original file remains in deep_scan_inbox for correction."
+                )
+            else:
+                imported_files.append(path)
 
     if file_failures:
         print("Invalid result files:")

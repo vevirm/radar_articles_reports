@@ -479,6 +479,17 @@ This is an authoritative re-verification package. Give the entire ZIP to a brows
 The automatic scanner and any older Deep Scan text are provisional evidence only. V2 can correct metadata,
 change admission, and remove bad/unverifiable evidence from the active Radar after GitHub validation.
 Partial completion is safe; never fabricate unfinished records.
+
+FINAL OUTPUT CHECK — MANDATORY: Before returning results, check all outputs
+against INSTRUCTIONS.md. Keep the EXACT record order from the package; never
+skip a difficult earlier job to complete a later job. If a job cannot be
+completed, stop and return only the consecutive completed prefix. Every KEEP
+or REVIEW must include 1-3 complete claims using claims_vocabulary.json;
+DROP requires claims: []. Use only the EXACT accepted evidence_depth values
+from INSTRUCTIONS.md, NOT 'pdf_excerpt', 'substantive_primary_text', or
+'matching_publisher_page_or_abstract'. Record the exact successful recovery
+step if the supplied URL failed. Do not guess source verification, dates,
+claims or status just to pass technical checks. Never silently omit jobs.
 """
 
 
@@ -744,6 +755,18 @@ def main() -> None:
                 + START_HERE
             )
         (root / "START_HERE.txt").write_text(start_here, encoding="utf-8")
+        (root / "FINAL_CHECK.txt").write_text(
+            "BEFORE RETURNING deep_scan_results.json:\n"
+            "1. Return only a CONSECUTIVE PREFIX; NEVER skip an early job.\n"
+            "2. KEEP/REVIEW: 1-3 complete controlled-vocabulary claims.\n"
+            "3. DROP/DEFER/DROP_UNVERIFIABLE: claims: [].\n"
+            "4. EXACT evidence_depth values in INSTRUCTIONS.md; never invent synonyms.\n"
+            "5. Report the actual recovery ladder step if supplied_url failed.\n"
+            "6. Keep reader_title <=18 words and reader_what <=20 words.\n"
+            "7. No invented verification or metadata correction.\n"
+            "8. Return only finished results; remaining jobs stay assigned.\n",
+            encoding="utf-8",
+        )
 
         if args.no_fetch:
             fetched = [(*item, SourceRead("stored_only", "", note="source pre-retrieval disabled; LLM must use the retrieval ladder")) for item in todo]
