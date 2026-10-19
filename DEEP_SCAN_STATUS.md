@@ -6,39 +6,39 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2735** (Main **1312** + Historical **1423**)
-- Automatic queue still needing V2 verification: **542** (Main **241** + Historical **301**)
+- Authoritative V2 verified: **2751** (Main **1328** + Historical **1423**)
+- Automatic queue still needing V2 verification: **526** (Main **225** + Historical **301**)
 - Currently assigned to workers: **107** (Main **72** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **31**
-- Automatic queue pending and not yet assigned: **435**
+- Automatic queue pending and not yet assigned: **419**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261019T123843Z-c4a85e7a464c`
+- Current package: `worker-a-20261019T131018Z-50b05ae794a5`
 - Assigned unresolved records: **36**
-  1. `link:https://www.eif.org/files/attachments/czech-fund-backs-ai-deep-tech-innovation-cz.pdf` — New Czech fund backs AI and deep-tech innovation with €50m for research commercialisation
-  2. `link:https://doi.org/10.1016/j.iref.2026.105933` — AI and cloud adoption in European banking: Country-level evidence on the profitability-cyber risk trade-off
-  3. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxPdDhGbmhkQi1JRWZXcUNzZjNsVVdIcGQ3ckZFYkRCVHFWVDFsaDRKeUtPWXZuSkIyUG0xUjRYLUt1VWxqWWpPT19PN291VTRVZjJxbURUcFB1NTM4Z3JDek1HVnlyWW91N3VfaUtRRUhwVGZscXMyenRYb1hwaElJMmk4T0k4V1VRZGVQaV9FSEpRbzFjOXZROHRmbXEzR2pWbnFPczlIaTc3V0wxTmtF?oc=5` — Women MEPs targeted by AI ‘nudifier’ apps push EU leaders to enforce December ban
-  4. `link:https://news.google.com/rss/articles/CBMiyAFBVV95cUxOV3VXWGtPck1HLW4ydkZncTNLa1Bqdmx6RGhVRlQ1QWd2NWE0eUdnaDUwX0ZOUGZVbmV1Ni1fN09WODRtczZIVURqT3dTTHFnX0k0WF8zRlJsU3EwR1JIbHI0cFpzcDVIZDJ5emhiWEhWd2o0dXBFZ2Y2RDdaNnBXaHBNX1psa21Ka29ROG1UT05jY2FsQ0ZoeEhGVUllSHV5cGY4NVdLb19TOHFVNXJXUUZkUG81T1JMQkNMNnRYY1RfWXFWU1pnOQ?oc=5` — Funding Radar: Horizon Europe opens new €35M call for climate-related projects
-  5. `link:https://news.google.com/rss/articles/CBMiuAFBVV95cUxQekxyVUN1OFM5SWNqbmFGcVVySURrTVdjRnhKaDJ3elpRS2hlWUJTQzN3U2xibk51c3JkdXI4c2pQNTBKTWlMb25zR2E1SGwtZU1RUGtzUW0yQXF0X0tmRU9KTV9vNzkyWlRjQTUtN1BKcS01UG5kUzRFUGVROFB0WC1EM0V0RTlXZ05fQjJrcjFyWU45bUVwRDZzVnl1U3lTME5iNHFpWlBHSU5YSzVKZkhVOG9JeDds?oc=5` — Data Corner: The EU’s research and innovation performance in six charts
-  6. `link:https://news.google.com/rss/articles/CBMitAFBVV95cUxPX2xRcUZHLUJybUdWU0hwNHo4emp6NmhObVNRMlFoVE1oaXJCdXFIZEFYY1MxQ0U2dVNOVkV2b0o3dUpzQVYzSEwySFpHOGRmVnZlaVZxdHY3a256Q2gxcW93UHVNT2lSUUVfVmxZdEtHVk91UFh5MXlXWG54Qm5SaFZVcHF5OWJfSVRYSGs5dzh3TE5ybkVxdUJpM0ZVeU51UlRQYmdLTVVDakl6bXBZM3Jrc18?oc=5` — Italy PM Meloni seeks EU trademark for her voice amid AI deepfake risks
-  7. `link:https://news.google.com/rss/articles/CBMisAFBVV95cUxOaVJTMVNQWkE1TTNwWDlQdU9HcWtfaXVVNFQ5TGREVEpWZ0FfNlZYU0tYTHoyYklqNDlrMkoxcFBLVGxNa0hTdTdmdVFWRkhQSVRwbVpmc0owZWZTUzBhYkZTbG5aMkQ5WGpmQW8wWl9sNWVpUDZrc2JrWXZ6aFJXZEVOUm41a0J2OFNjaGtPeXRtZnNpYU4yU19EbmE4MUhFaDhuTHpVeXNBaTc0X01MRg?oc=5` — Slovenian glacier could disappear in days, researchers say
-  8. `link:https://news.google.com/rss/articles/CBMivAFBVV95cUxNcV9ZLUZYN2pKcXF5eVFlTEZQTEhRZTdiVmpxVUp2SmpQb1Z5SXl6QTlHTFhNS2k0Z2JTaUVZZVhqNEFxRmptQTBnc1hQWW5WWUE4Z0NSYk9oNnVETGhIaThZWWk5SFllajlTc2MwQ1k1NDh5WU42Q18tMlFER0RQM0JtLUxOdkpMV1FITEs2U05qOU1mallzZDlDTkRIMnN0ZjhtQ3U0blVoN2JUUDdWc2JNd1BNUWZqYjJSTQ?oc=5` — How is Europe sharpening migration rules? Ask the Euronews AI chatbot
+  1. `link:https://news.google.com/rss/articles/CBMiywFBVV95cUxPc1VtR2JJRVBuRUQ1elJQR3ZRUVpWMnh3aDlUaUh2Y0dHR0dJMzBGd2YwY2hGOHNQSEpraTZIcm5oTE9mOE5zMEdydVZIWUM3bjgwZ25oXzFjSlhEaTFOdTZEVGN4MVNNSHBwX2ZpcDRlSHE2cEJwdGtIV2FhVVc2VzctM2pVSHZuX3dsN2dVY1pkZERzRWFSWWtnNlRDSUdhN1BWVUhWb1N5UTFXTjk5YUpiR2lvb2xtQTgzbG13LVBsc0o3cXVBc3Rndw?oc=5` — EU and Canada held a Digital Dialogue to advance cooperation on digital policy and innovation - Shaping Europe’s digital future
+  2. `link:https://news.google.com/rss/articles/CBMikAFBVV95cUxPSDF2ckt6WU9KeG5sYXJYOUxWS1dvS1lPQ1A0MnJNajVicFBpY0h2Ykc2UWttYmFncG5KZ09RcW52Rkg0N1VDdXh2SEp6RE8xUF85dFhWT1dpc09LeWpfLUx1QTZjbXVDLWtJNFF0d0tyeVkwbWhweldOaDE2MkVPcTZUeWJpNjVIbWhFOVFqelg?oc=5` — Speed up EU health security prep, says NATO chief medic
+  3. `link:https://news.google.com/rss/articles/CBMivAFBVV95cUxON210SzFid0FYd1dnam9lZndYOUd3dE5yNHVZTGZoNUhTQ3V0eEREMG12OWRLNE5LcUhIbmVvZ2JZb2xWeDVERldSY0NKTndYMGFsdkxnVEdCTW9rekJnMExMMXotNzRZNjktTnFscTNTQ21VNFRjdE1jY09TTmVUSmRYN0tfSWFtaDNpa0NKUDRWOXQ1TlF6ZzNhRW5HYnFZUHFPbnE5TGtaV2hiQWZ5YWx0ZlBfVjFPV2E5Wg?oc=5` — Data centre hiring in Europe: Where is it growing and why pay more?
+  4. `link:https://news.google.com/rss/articles/CBMivAFBVV95cUxOd1lYLTBaRWJ2UHJuZXdhM3N4UUNGUEUwZDVGQXNrNHFYazJsOHpSdGhRU01YUlJBbmJ0WlM3NVVzRTV0Vkw0YU9xMVAyMy1WUExzVHBMYXNvcVJ4Rm5Lekg5WFZiV1pkZWg1dW9ySmNqSlg3UkdXa1BpcjJYU2otOENleUk3dU9jYlFScC1wTTRpaWFqUWVRTlRVNUlfMHo3el9DeDc4aXA3UkotVTZDekZTNUx3YlliUWdlWA?oc=5` — Swedish researchers build an ‘AI scientist’ that designs its own test
+  5. `link:https://news.google.com/rss/articles/CBMiogFBVV95cUxOdUd2R202dTUxUl9ydW9WSE9MMlFhUGxLS1lFa1BFQ0I3bGV4d1R5Z2d2UEYyeFFlSmdFOGViMFhzazFMVW1feGlITWUxTDh1UGZSb1ktMlc2R3d1S2hNVVNkckMwelVqZ25Pa2phaDVpMEFlU3NXR1RjVGI0VGlIYUxJVVNGSTN0RG5pVHVyNllCY0Z5eDVCV2FSMlJYSmtGekE?oc=5` — Breakingviews - COMMENTARY: Why Europe could be the real winner of the AI boom
+  6. `link:https://www.euronews.com/2026/10/02/inside-soitec-the-french-tech-company-powering-the-global-semiconductor-industry` — Inside Soitec, the French tech company powering the global semiconductor industry
+  7. `link:https://www.euronews.com/2026/10/02/eu-farmers-face-falling-produce-prices-as-fuel-and-fertiliser-costs-rise` — EU farmers face falling prices as fuel and fertiliser costs rise
+  8. `link:https://defence-industry-space.ec.europa.eu/record-number-proposals-submitted-under-european-defence-fund-2026-calls-612-project-proposals-apply-2026-10-02_en` — Record number of proposals submitted under the European Defence Fund 2026 calls: 612 project proposals apply for the €1 billion envelope
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261019T123847Z-2a02380c6a28`
+- Current package: `worker-b-20261019T131022Z-24c39e09d525`
 - Assigned unresolved records: **36**
-  1. `link:https://www.euronews.com/2026/10/05/intelligence-everywhere-inside-europes-next-technology-era` — Intelligence Everywhere: Inside Europe’s Next Technology Era
-  2. `link:https://www.researchprofessionalnews.com/rr-news-europe-innovation-2026-10-eu-innovation-agency-must-be-reformed-to-be-worth-keeping/` — EU innovation agency ‘must be reformed to be worth keeping’ - Research Professional News
-  3. `link:https://www.euronews.com/2026/10/05/ai-weiwei-we-are-losing-privacy-and-without-it-we-stop-being-individuals` — Ai Weiwei: "We are losing privacy and without it we stop being individuals"
-  4. `link:https://www.euronews.com/video/2026/10/05/googles-13bn-finland-push-transforms-and-divides-a-quiet-rural-town` — Video. Google’s €13bn Finland push transforms and divides a quiet rural town
-  5. `link:https://news.google.com/rss/articles/CBMinAFBVV95cUxNWVhpMFZyUmV3dmFZeHJHaGVobVNXd0hsd3d1cEN6RXpZaGp4c2d1VERvY3lka1IzNTN1TTZFb0pFb1RHNXdZVkxGcU1ERmpNV2RmX3MtUnkxSE5jVEpJTGxuTXc3NW5ZSnNtN2Y3a213bmZ3LWxvakVmZTc0emM1NW9Fc0E4c3ZRLThmWDljM2MydnRJTVZpcWhvOEo?oc=5` — Head of Third-Party Funding Staff Unit (f/m/d) job with Helmholtz Association of German Research Centres | 12865314
-  6. `link:https://news.google.com/rss/articles/CBMisgFBVV95cUxPeTJjaWFVN3hJdWk5MThTUzRpWDR4Rkl3LUtLaGRZZDV3akItQXZxX2N6Z2lramFndHVqRXN6TDRFVl93ektpRnhTUmpBT1dPT09QSW54Ty1VNEo1YjY2Z25HMlpnM042MlFQRmVlaFRyb0pRempfbENJNkZzdG9kS19EbW5hZDdiOW8tTENmalJkVDhxSkUtUnFsakw5MHhTbXYzQlI2eEJZbkphQy04WlVn?oc=5` — Seven EU countries push back against Brussels plans for military space
-  7. `link:https://news.google.com/rss/articles/CBMitwFBVV95cUxOaFgzNjBfRFBmMnd5SWNaODVBUlF5Z3RrbHNDZmtSa0lHUWxLOHZfWHhvWktIRnpRaXY1MVlQTVhTcGkwNTJyYmdsMzY4V0VFcl9kME9EM3lXcWpsUkVDYTVkcE9VY1JLclQ4U09jRml2RHFzelJxcUItMGhzZmd6SjI3Wmw5RkYxMndBS0M5QXJVeGNDOVRYWGcwSlp1MXJWNGU2bDBWdDZyX0t4ODNna0Z2enlXc3c?oc=5` — Inside Soitec, the French tech company powering the global semiconductor industry
-  8. `link:https://news.google.com/rss/articles/CBMi8gFBVV95cUxNVzJrbnB6clF0YzUzZmkxUUZ3V2hpV0xfN2lILXFyOGFoRExET1lvUzdKakhKR1NyS2pQdWVnSVhkWV9kM3U2NGtjaEhTeURmaXJNYmJqTDNzVUFiM0VDYnFhNW1pMmZlb3pHMkVqemkyNllRTW5OSDdPQjZwME1xODNzeHRjdDFuTF9qT0MtMWZwSWwxRC1UX25wRWxfLWUydDhITnVJcTYwQ1ptZ1JoX2lYdC0ta3l5NVBuYVN2Q1lwQndzUnZiSnJEbDhQenZVT3M4WUdvaWdmMlVQYlpwQ3N5X3NPTXNfRlhsc19DX0I5Zw?oc=5` — Horizon Europe launches a new research and innovation call on nature
+  1. `link:https://doi.org/10.48550/arxiv.2609.39285` — The Concentration of Artificial Intelligence in Big Tech and Its Implications for Human Rights in the European Union
+  2. `link:https://institutdelors.eu/en/publications/speech-by-e-moulin-strengthening-european-sovereignty-from-integration-to-competitiveness/` — Speech by E. Moulin: “Strengthening European sovereignty : from integration to competitiveness” - Institut Jacques Delors
+  3. `link:https://doi.org/10.1080/09654313.2026.2671213` — The geography of exclusion: cumulative causation and the persistence of lagging regions
+  4. `link:https://www.eif.org/news-and-publications/newsroom/latest-insights` — EIF thought leadership | Inspiring progress for future funding
+  5. `link:https://www.eif.org/files/publications/eif-equity-barometer-2026-q2.pdf` — EIF thought leadership | Inspiring progress for future funding
+  6. `link:https://institutdelors.eu/content/uploads/2026/06/Etude-CRIP_Revolution_IA_horizon_2035_Barichella_EN_2.pdf` — The Artificial Intelligence Revolution by 2035 - Institut Jacques Delors
+  7. `link:https://institutdelors.eu/content/uploads/2026/06/Etude-CRIP_Revolution_IA_horizon_2035_Barichella__Short_version_EN_2.pdf` — The Artificial Intelligence Revolution by 2035 (Short version) - Institut Jacques Delors
+  8. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=e7ce9d4e-c15e-11f1-988f-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Science, research and innovation performance of the EU 2026 - Publications Office of the EU
   - … plus 28 more in the package manifest
 
 ### Worker SINGLE

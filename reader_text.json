@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-19T10:18:28Z",
+  "generated_at": "2026-10-19T13:03:52Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -236325,8 +236325,1391 @@
       "deep_scan_package_id": "worker-b-20261019T081231Z-16929ebb6a8d",
       "claims": [],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.eif.org/files/attachments/czech-fund-backs-ai-deep-tech-innovation-cz.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "f67745d4",
+      "identity_hash": "82bc2eca75f2baef",
+      "reader_title": "EIF backs Czech research commercialisation fund",
+      "reader_what": "EIF announced €27 million for a Czech research spin-off fund seeking over €50 million in total capital.",
+      "reader_why": "The fund aims to finance commercialisation of university research in AI and other deep technologies.",
+      "reader_more": "The European Investment Fund announced a roughly €27 million commitment to IP Lab Ventures Fund I. The vehicle targets more than €50 million including additional private investment and aims to back around 40 projects. These are announced financing plans and objectives, not evidence of completed downstream commercialisation.",
+      "deep_analysis": {
+        "work_kind": "current funding development",
+        "research_question": "",
+        "main_finding": "The EIF committed approximately €27 million to IP Lab Ventures Fund I for Czech research technology transfer.",
+        "method_or_basis": "Official EIF 2026 press release and Czech ministry corroboration.",
+        "qualification": "EIF commitment was announced; the €50m target, roughly 40 investments and future commercialisation outcomes are not achieved results.",
+        "radar_relevance": "New EU-backed capital instrument supporting transfer of Czech university research into deep-technology startups.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "EIF Czech-language press release PDF recovered in package: https://www.eif.org/files/attachments/czech-fund-backs-ai-deep-tech-innovation-cz.pdf"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "EIF English counterpart corroborated fund identity, amount and status: https://www.eif.org/press/all/first-czech-technology-transfer-fund-focused-on-ai-applications-to-invest-nearly-eur50-million-in-research-commercialisation"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Czech Ministry of Industry and Trade corroborated announcement: https://mpo.gov.cz/cz/rozcestnik/pro-media/tiskove-zpravy/prvni-cesky-fond-na-transfer-technologii-zamereny-na-aplikace-ai-a-dalsi-pokrocile-technologie-_-do-komercionalizace-vyzkumu-investuje-temer-miliardu---294673/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_document",
+            "url": "https://www.eif.org/files/attachments/czech-fund-backs-ai-deep-tech-innovation-cz.pdf",
+            "title": "EIF Czech-language fund investment announcement",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publisher",
+            "url": "https://www.eif.org/press/all/first-czech-technology-transfer-fund-focused-on-ai-applications-to-invest-nearly-eur50-million-in-research-commercialisation",
+            "title": "EIF English fund announcement",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final: checked full supplied official PDF excerpt against English EIF release and Czech ministry release. Original is a funding announcement, not empirical research."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_VERIFIED_RI_INVESTMENT",
+        "reason": "EIF officially announced a €27m investment in a new Czech university technology-transfer venture fund targeting over €50m; a real European R&I commercialization financing instrument. Reclassify A to C because the source is a news release, not a completed study."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T13:03:50Z",
+      "deep_scan_package_id": "worker-a-20261019T111217Z-760f432f59f5",
+      "claims": [
+        {
+          "object": "research.knowledge_transfer",
+          "secondary_objects": [
+            "finance.venture_capital"
+          ],
+          "actor": {
+            "name": "European Investment Fund",
+            "class": "eu_body"
+          },
+          "mechanism": "invests",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-09-24",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "CZ"
+            ]
+          },
+          "kind": "action",
+          "qualification": "EIF commitment was announced; the €50m target, roughly 40 investments and future commercialisation outcomes are not achieved results.",
+          "text": "EIF announced approximately €27 million for a Czech technology-transfer fund targeting more than €50 million including private capital.",
+          "confidence": "high",
+          "record_key": "link:https://www.eif.org/files/attachments/czech-fund-backs-ai-deep-tech-innovation-cz.pdf",
+          "merit": 66,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:82bc2eca75f2baef:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1016/j.iref.2026.105933": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "e0875959",
+      "identity_hash": "4ae9f055ea99a85c",
+      "reader_title": "European banks’ AI and cyber-risk trade-off",
+      "reader_what": "Cross-sectional research associates AI adoption with lower bank returns and cloud computing with higher cyber risk.",
+      "reader_more": "The authors analyse EU-27 countries and Norway using hierarchical clustering and Bayesian model averaging. Their findings concern bank performance and cybersecurity, not R&I financing, research careers, infrastructure or other European research-system mechanisms. Associations are not proof of causality.",
+      "deep_analysis": {
+        "work_kind": "verified publication",
+        "research_question": "",
+        "main_finding": "Cross-sectional research associates AI adoption with lower bank returns and cloud computing with higher cyber risk.",
+        "method_or_basis": "Direct examination of source text.",
+        "qualification": "The source does not substantiate a qualifying EU research-and-innovation development or systemic evidence product.",
+        "radar_relevance": "A Routes 1–3 checked: a cross-country banking profitability/cyber-risk study is about financial-sector AI use, not European R&I strategic dependencies, R&I system capability, or the research-and-innovation system itself. It also does not introduce a transferable futures method.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Verified source text matching the supplied title and date: https://content.openalex.org/works/W7218837540.pdf"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1016/j.iref.2026.105933 resolves to same title and authors, with publisher journal identity corroborated by metadata."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://content.openalex.org/works/W7218837540.pdf",
+            "title": "AI and cloud adoption in European banking",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final: matching accepted journal pre-proof in supplied PDF text, verified DOI and publication metadata. Source covers European banks rather than R&I-system processes."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Routes 1–3 checked: a cross-country banking profitability/cyber-risk study is about financial-sector AI use, not European R&I strategic dependencies, R&I system capability, or the research-and-innovation system itself. It also does not introduce a transferable futures method."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T13:03:50Z",
+      "deep_scan_package_id": "worker-a-20261019T111217Z-760f432f59f5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMirwFBVV95cUxPdDhGbmhkQi1JRWZXcUNzZjNsVVdIcGQ3ckZFYkRCVHFWVDFsaDRKeUtPWXZuSkIyUG0xUjRYLUt1VWxqWWpPT19PN291VTRVZjJxbURUcFB1NTM4Z3JDek1HVnlyWW91N3VfaUtRRUhwVGZscXMyenRYb1hwaElJMmk4T0k4V1VRZGVQaV9FSEpRbzFjOXZROHRmbXEzR2pWbnFPczlIaTc3V0wxTmtF?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "5cb27708",
+      "identity_hash": "d0d13c2a839e7a16",
+      "reader_title": "MEPs call for action against nudifier apps",
+      "reader_what": "MEPs called for enforcement of rules targeting AI nudification applications.",
+      "reader_more": "MEPs called for enforcement of rules targeting AI nudification applications. The action concerns digital safety and abuse, not a demonstrated European R&I policy or capability change.",
+      "deep_analysis": {
+        "work_kind": "verified publication",
+        "research_question": "",
+        "main_finding": "MEPs called for enforcement of rules targeting AI nudification applications.",
+        "method_or_basis": "Published matching source: https://euobserver.com/241185/women-meps-targeted-by-ai-nudifier-apps-push-eu-leaders-to-enforce-december-ban",
+        "qualification": "The source does not substantiate a qualifying new European R&I development.",
+        "radar_relevance": "C gate: political enforcement advocacy against nonconsensual AI imagery does not change research funding, research practice, science governance, or European technology development as documented.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Reader-facing record https://news.google.com/rss/articles/CBMirwFBVV95cUxPdDhGbmhkQi1JRWZXcUNzZjNsVVdIcGQ3ckZFYkRCVHFWVDFsaDRKeUtPWXZuSkIyUG0xUjRYLUt1VWxqWWpPT19PN291VTRVZjJxbURUcFB1NTM4Z3JDek1HVnlyWW91N3VfaUtRRUhwVGZscXMyenRYb1hwaElJMmk4T0k4V1VRZGVQaV9FSEpRbzFjOXZROHRmbXEzR2pWbnFPczlIaTc3V0wxTmtF?oc=5; RSS wrapper carried no substantive article; recovered matching published work separately"
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI assigned to this news item."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact headline lookup: \"Women MEPs targeted by AI ‘nudifier’ apps push EU leaders to enforce December ban\"; located matching dated publication at https://euobserver.com/241185/women-meps-targeted-by-ai-nudifier-apps-push-eu-leaders-to-enforce-december-ban"
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Title/publisher/2026 cross-check of Women MEPs targeted by AI ‘nudifier’ apps push EU leaders to enforce December ban; publication identified at https://euobserver.com/241185/women-meps-targeted-by-ai-nudifier-apps-push-eu-leaders-to-enforce-december-ban"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Inspected the matching source at https://euobserver.com/241185/women-meps-targeted-by-ai-nudifier-apps-push-eu-leaders-to-enforce-december-ban"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Publication and institutional context checked against https://euobserver.com/241185/women-meps-targeted-by-ai-nudifier-apps-push-eu-leaders-to-enforce-december-ban; no substitute work used."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://euobserver.com/241185/women-meps-targeted-by-ai-nudifier-apps-push-eu-leaders-to-enforce-december-ban",
+            "title": "Women MEPs targeted by AI ‘nudifier’ apps push EU leaders to enforce December ban",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final: inspected package source and/or retrieved publisher text, checked identity and publication date, evaluated C connection; source limits are recorded. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C gate: political enforcement advocacy against nonconsensual AI imagery does not change research funding, research practice, science governance, or European technology development as documented."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T13:03:50Z",
+      "deep_scan_package_id": "worker-a-20261019T111217Z-760f432f59f5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiyAFBVV95cUxOV3VXWGtPck1HLW4ydkZncTNLa1Bqdmx6RGhVRlQ1QWd2NWE0eUdnaDUwX0ZOUGZVbmV1Ni1fN09WODRtczZIVURqT3dTTHFnX0k0WF8zRlJsU3EwR1JIbHI0cFpzcDVIZDJ5emhiWEhWd2o0dXBFZ2Y2RDdaNnBXaHBNX1psa21Ka29ROG1UT05jY2FsQ0ZoeEhGVUllSHV5cGY4NVdLb19TOHFVNXJXUUZkUG81T1JMQkNMNnRYY1RfWXFWU1pnOQ?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "41def295",
+      "identity_hash": "656392253dc1956d",
+      "reader_title": "Horizon Europe plans €35m climate calls",
+      "reader_what": "Three Horizon Europe climate-related funding calls worth €35 million were scheduled for 6 October.",
+      "reader_why": "New funding opportunities target climate readiness, solar radiation modification research and climate projections.",
+      "reader_more": "Three Horizon Europe climate-related funding calls worth €35 million were scheduled for 6 October. New funding opportunities target climate readiness, solar radiation modification research and climate projections. Calls were scheduled to open on 6 October; awards and project effects are not established.",
+      "deep_analysis": {
+        "work_kind": "reported institutional development",
+        "research_question": "",
+        "main_finding": "Three Horizon Europe climate-related funding calls worth €35 million were scheduled for 6 October.",
+        "method_or_basis": "Published matching source: https://sciencebusiness.net/r-d-funding/horizon-europe/funding-radar-horizon-europe-opens-new-eu35m-call-climate-related-projects",
+        "qualification": "Calls were scheduled to open on 6 October; awards and project effects are not established.",
+        "radar_relevance": "C verified funding calls with specified research objectives and amounts; announcement is not evidence of completed awards.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Reader-facing record https://news.google.com/rss/articles/CBMiyAFBVV95cUxOV3VXWGtPck1HLW4ydkZncTNLa1Bqdmx6RGhVRlQ1QWd2NWE0eUdnaDUwX0ZOUGZVbmV1Ni1fN09WODRtczZIVURqT3dTTHFnX0k0WF8zRlJsU3EwR1JIbHI0cFpzcDVIZDJ5emhiWEhWd2o0dXBFZ2Y2RDdaNnBXaHBNX1psa21Ka29ROG1UT05jY2FsQ0ZoeEhGVUllSHV5cGY4NVdLb19TOHFVNXJXUUZkUG81T1JMQkNMNnRYY1RfWXFWU1pnOQ?oc=5; RSS wrapper carried no substantive article; recovered matching published work separately"
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI assigned to this news item."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact headline lookup: \"Funding Radar: Horizon Europe opens new €35M call for climate-related projects\"; located matching dated publication at https://sciencebusiness.net/r-d-funding/horizon-europe/funding-radar-horizon-europe-opens-new-eu35m-call-climate-related-projects"
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Title/publisher/2026 cross-check of Funding Radar: Horizon Europe opens new €35M call for climate-related projects; publication identified at https://sciencebusiness.net/r-d-funding/horizon-europe/funding-radar-horizon-europe-opens-new-eu35m-call-climate-related-projects"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Inspected the matching source at https://sciencebusiness.net/r-d-funding/horizon-europe/funding-radar-horizon-europe-opens-new-eu35m-call-climate-related-projects"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Publication and institutional context checked against https://sciencebusiness.net/r-d-funding/horizon-europe/funding-radar-horizon-europe-opens-new-eu35m-call-climate-related-projects; no substitute work used."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://sciencebusiness.net/r-d-funding/horizon-europe/funding-radar-horizon-europe-opens-new-eu35m-call-climate-related-projects",
+            "title": "Funding Radar: Horizon Europe opens new €35M call for climate-related projects",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final: inspected package source and/or retrieved publisher text, checked identity and publication date, evaluated C connection; source limits are recorded. Calls were scheduled to open on 6 October; awards and project effects are not established."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_VERIFIED_RI_DEVELOPMENT",
+        "reason": "C verified funding calls with specified research objectives and amounts; announcement is not evidence of completed awards."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T13:03:51Z",
+      "deep_scan_package_id": "worker-a-20261019T111217Z-760f432f59f5",
+      "claims": [
+        {
+          "object": "funding.route",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "launches",
+          "direction": "expands",
+          "status": "call_open",
+          "status_date": "2026-10-05",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Calls were scheduled to open on 6 October; awards and project effects are not established.",
+          "text": "Three Horizon Europe climate-related funding calls worth €35 million were scheduled for 6 October.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMiyAFBVV95cUxOV3VXWGtPck1HLW4ydkZncTNLa1Bqdmx6RGhVRlQ1QWd2NWE0eUdnaDUwX0ZOUGZVbmV1Ni1fN09WODRtczZIVURqT3dTTHFnX0k0WF8zRlJsU3EwR1JIbHI0cFpzcDVIZDJ5emhiWEhWd2o0dXBFZ2Y2RDdaNnBXaHBNX1psa21Ka29ROG1UT05jY2FsQ0ZoeEhGVUllSHV5cGY4NVdLb19TOHFVNXJXUUZkUG81T1JMQkNMNnRYY1RfWXFWU1pnOQ?oc=5",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:656392253dc1956d:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiuAFBVV95cUxQekxyVUN1OFM5SWNqbmFGcVVySURrTVdjRnhKaDJ3elpRS2hlWUJTQzN3U2xibk51c3JkdXI4c2pQNTBKTWlMb25zR2E1SGwtZU1RUGtzUW0yQXF0X0tmRU9KTV9vNzkyWlRjQTUtN1BKcS01UG5kUzRFUGVROFB0WC1EM0V0RTlXZ05fQjJrcjFyWU45bUVwRDZzVnl1U3lTME5iNHFpWlBHSU5YSzVKZkhVOG9JeDds?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "02fac1f5",
+      "identity_hash": "b393042bcfecbbb0",
+      "reader_title": "Six charts of EU research performance",
+      "reader_what": "A news graphic summarizes EU research funding and innovation performance data from a Commission report.",
+      "reader_more": "A news graphic summarizes EU research funding and innovation performance data from a Commission report. The source is a secondary data digest, not a new R&I action or the underlying substantive analytical report.",
+      "deep_analysis": {
+        "work_kind": "verified publication",
+        "research_question": "",
+        "main_finding": "A news graphic summarizes EU research funding and innovation performance data from a Commission report.",
+        "method_or_basis": "Published matching source: https://sciencebusiness.net/news/r-d-funding/eu-budget/data-corner-eus-research-and-innovation-performance-six-charts",
+        "qualification": "The source does not substantiate a qualifying new European R&I development.",
+        "radar_relevance": "C gate: retrospective statistical reporting is not a newly enacted measure; reclassification to A would require examining and recording the primary Commission analytical work as that distinct publication.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Reader-facing record https://news.google.com/rss/articles/CBMiuAFBVV95cUxQekxyVUN1OFM5SWNqbmFGcVVySURrTVdjRnhKaDJ3elpRS2hlWUJTQzN3U2xibk51c3JkdXI4c2pQNTBKTWlMb25zR2E1SGwtZU1RUGtzUW0yQXF0X0tmRU9KTV9vNzkyWlRjQTUtN1BKcS01UG5kUzRFUGVROFB0WC1EM0V0RTlXZ05fQjJrcjFyWU45bUVwRDZzVnl1U3lTME5iNHFpWlBHSU5YSzVKZkhVOG9JeDds?oc=5; RSS wrapper carried no substantive article; recovered matching published work separately"
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI assigned to this news item."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact headline lookup: \"Data Corner: The EU’s research and innovation performance in six charts\"; located matching dated publication at https://sciencebusiness.net/news/r-d-funding/eu-budget/data-corner-eus-research-and-innovation-performance-six-charts"
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Title/publisher/2026 cross-check of Data Corner: The EU’s research and innovation performance in six charts; publication identified at https://sciencebusiness.net/news/r-d-funding/eu-budget/data-corner-eus-research-and-innovation-performance-six-charts"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Inspected the matching source at https://sciencebusiness.net/news/r-d-funding/eu-budget/data-corner-eus-research-and-innovation-performance-six-charts"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Publication and institutional context checked against https://sciencebusiness.net/news/r-d-funding/eu-budget/data-corner-eus-research-and-innovation-performance-six-charts; no substitute work used."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://sciencebusiness.net/news/r-d-funding/eu-budget/data-corner-eus-research-and-innovation-performance-six-charts",
+            "title": "Data Corner: The EU’s research and innovation performance in six charts",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final: inspected package source and/or retrieved publisher text, checked identity and publication date, evaluated C connection; source limits are recorded. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C gate: retrospective statistical reporting is not a newly enacted measure; reclassification to A would require examining and recording the primary Commission analytical work as that distinct publication."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T13:03:51Z",
+      "deep_scan_package_id": "worker-a-20261019T111217Z-760f432f59f5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMitAFBVV95cUxPX2xRcUZHLUJybUdWU0hwNHo4emp6NmhObVNRMlFoVE1oaXJCdXFIZEFYY1MxQ0U2dVNOVkV2b0o3dUpzQVYzSEwySFpHOGRmVnZlaVZxdHY3a256Q2gxcW93UHVNT2lSUUVfVmxZdEtHVk91UFh5MXlXWG54Qm5SaFZVcHF5OWJfSVRYSGs5dzh3TE5ybkVxdUJpM0ZVeU51UlRQYmdLTVVDakl6bXBZM3Jrc18?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "8e56e1cb",
+      "identity_hash": "a57387fc59266193",
+      "reader_title": "Meloni requests protection for her voice",
+      "reader_what": "Italy’s prime minister sought registration of an audio trademark to resist AI deepfakes.",
+      "reader_more": "Italy’s prime minister sought registration of an audio trademark to resist AI deepfakes. An individual intellectual-property filing does not establish systemic EU R&I or AI innovation effects.",
+      "deep_analysis": {
+        "work_kind": "verified publication",
+        "research_question": "",
+        "main_finding": "Italy’s prime minister sought registration of an audio trademark to resist AI deepfakes.",
+        "method_or_basis": "Published matching source: https://www.reuters.com/technology/italy-pm-meloni-seeks-eu-trademark-her-voice-amid-ai-deepfake-risks-2026-10-05/",
+        "qualification": "The source does not substantiate a qualifying new European R&I development.",
+        "radar_relevance": "C gate: a single personal EUIPO trademark application is neither a change in EU AI regulation nor a verified R&I-system development.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Reader-facing record https://news.google.com/rss/articles/CBMitAFBVV95cUxPX2xRcUZHLUJybUdWU0hwNHo4emp6NmhObVNRMlFoVE1oaXJCdXFIZEFYY1MxQ0U2dVNOVkV2b0o3dUpzQVYzSEwySFpHOGRmVnZlaVZxdHY3a256Q2gxcW93UHVNT2lSUUVfVmxZdEtHVk91UFh5MXlXWG54Qm5SaFZVcHF5OWJfSVRYSGs5dzh3TE5ybkVxdUJpM0ZVeU51UlRQYmdLTVVDakl6bXBZM3Jrc18?oc=5; RSS wrapper carried no substantive article; recovered matching published work separately"
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI assigned to this news item."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact headline lookup: \"Italy PM Meloni seeks EU trademark for her voice amid AI deepfake risks\"; located matching dated publication at https://www.reuters.com/technology/italy-pm-meloni-seeks-eu-trademark-her-voice-amid-ai-deepfake-risks-2026-10-05/"
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Title/publisher/2026 cross-check of Italy PM Meloni seeks EU trademark for her voice amid AI deepfake risks; publication identified at https://www.reuters.com/technology/italy-pm-meloni-seeks-eu-trademark-her-voice-amid-ai-deepfake-risks-2026-10-05/"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Inspected the matching source at https://www.reuters.com/technology/italy-pm-meloni-seeks-eu-trademark-her-voice-amid-ai-deepfake-risks-2026-10-05/"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Publication and institutional context checked against https://www.reuters.com/technology/italy-pm-meloni-seeks-eu-trademark-her-voice-amid-ai-deepfake-risks-2026-10-05/; no substitute work used."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.reuters.com/technology/italy-pm-meloni-seeks-eu-trademark-her-voice-amid-ai-deepfake-risks-2026-10-05/",
+            "title": "Italy PM Meloni seeks EU trademark for her voice amid AI deepfake risks",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final: inspected package source and/or retrieved publisher text, checked identity and publication date, evaluated C connection; source limits are recorded. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C gate: a single personal EUIPO trademark application is neither a change in EU AI regulation nor a verified R&I-system development."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T13:03:51Z",
+      "deep_scan_package_id": "worker-a-20261019T111217Z-760f432f59f5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMisAFBVV95cUxOaVJTMVNQWkE1TTNwWDlQdU9HcWtfaXVVNFQ5TGREVEpWZ0FfNlZYU0tYTHoyYklqNDlrMkoxcFBLVGxNa0hTdTdmdVFWRkhQSVRwbVpmc0owZWZTUzBhYkZTbG5aMkQ5WGpmQW8wWl9sNWVpUDZrc2JrWXZ6aFJXZEVOUm41a0J2OFNjaGtPeXRtZnNpYU4yU19EbmE4MUhFaDhuTHpVeXNBaTc0X01MRg?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "9779f5c5",
+      "identity_hash": "e078f00af5c0f04d",
+      "reader_title": "Slovenian glacier nears disappearance",
+      "reader_what": "Slovenian researchers documented near-total loss of the Triglav glacier.",
+      "reader_more": "Slovenian researchers documented near-total loss of the Triglav glacier. The observation is climate evidence, not evidence about the European research and innovation system.",
+      "deep_analysis": {
+        "work_kind": "verified publication",
+        "research_question": "",
+        "main_finding": "Slovenian researchers documented near-total loss of the Triglav glacier.",
+        "method_or_basis": "Published matching source: https://www.reuters.com/business/environment/slovenian-glacier-could-disappear-days-researchers-say-2026-10-05/",
+        "qualification": "The source does not substantiate a qualifying new European R&I development.",
+        "radar_relevance": "C gate: environmental observations and general climate consequences lack a demonstrated new EU R&I policy, infrastructure, science-programme or strategic technology development.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Reader-facing record https://news.google.com/rss/articles/CBMisAFBVV95cUxOaVJTMVNQWkE1TTNwWDlQdU9HcWtfaXVVNFQ5TGREVEpWZ0FfNlZYU0tYTHoyYklqNDlrMkoxcFBLVGxNa0hTdTdmdVFWRkhQSVRwbVpmc0owZWZTUzBhYkZTbG5aMkQ5WGpmQW8wWl9sNWVpUDZrc2JrWXZ6aFJXZEVOUm41a0J2OFNjaGtPeXRtZnNpYU4yU19EbmE4MUhFaDhuTHpVeXNBaTc0X01MRg?oc=5; RSS wrapper carried no substantive article; recovered matching published work separately"
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI assigned to this news item."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact headline lookup: \"Slovenian glacier could disappear in days, researchers say\"; located matching dated publication at https://www.reuters.com/business/environment/slovenian-glacier-could-disappear-days-researchers-say-2026-10-05/"
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Title/publisher/2026 cross-check of Slovenian glacier could disappear in days, researchers say; publication identified at https://www.reuters.com/business/environment/slovenian-glacier-could-disappear-days-researchers-say-2026-10-05/"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Inspected the matching source at https://www.reuters.com/business/environment/slovenian-glacier-could-disappear-days-researchers-say-2026-10-05/"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Publication and institutional context checked against https://www.reuters.com/business/environment/slovenian-glacier-could-disappear-days-researchers-say-2026-10-05/; no substitute work used."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.reuters.com/business/environment/slovenian-glacier-could-disappear-days-researchers-say-2026-10-05/",
+            "title": "Slovenian glacier could disappear in days, researchers say",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final: inspected package source and/or retrieved publisher text, checked identity and publication date, evaluated C connection; source limits are recorded. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C gate: environmental observations and general climate consequences lack a demonstrated new EU R&I policy, infrastructure, science-programme or strategic technology development."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T13:03:51Z",
+      "deep_scan_package_id": "worker-a-20261019T111217Z-760f432f59f5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMivAFBVV95cUxNcV9ZLUZYN2pKcXF5eVFlTEZQTEhRZTdiVmpxVUp2SmpQb1Z5SXl6QTlHTFhNS2k0Z2JTaUVZZVhqNEFxRmptQTBnc1hQWW5WWUE4Z0NSYk9oNnVETGhIaThZWWk5SFllajlTc2MwQ1k1NDh5WU42Q18tMlFER0RQM0JtLUxOdkpMV1FITEs2U05qOU1mallzZDlDTkRIMnN0ZjhtQ3U0blVoN2JUUDdWc2JNd1BNUWZqYjJSTQ?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "d4a1365b",
+      "identity_hash": "9cac3c7eed9e6c91",
+      "reader_title": "Euronews introduces migration chatbot",
+      "reader_what": "Euronews invites readers to ask its chatbot about recent EU migration policy.",
+      "reader_more": "Euronews invites readers to ask its chatbot about recent EU migration policy. This is explanatory migration coverage and a publisher chatbot feature, not a research/innovation development.",
+      "deep_analysis": {
+        "work_kind": "verified publication",
+        "research_question": "",
+        "main_finding": "Euronews invites readers to ask its chatbot about recent EU migration policy.",
+        "method_or_basis": "Published matching source: https://www.euronews.com/2026/10/05/how-is-europe-tightening-borders-and-speeding-up-returns-ask-the-euronews-ai-chatbot",
+        "qualification": "The source does not substantiate a qualifying new European R&I development.",
+        "radar_relevance": "C gate: media chatbot promotion and migration policy commentary have no substantiated EU research or innovation system connection.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Reader-facing record https://news.google.com/rss/articles/CBMivAFBVV95cUxNcV9ZLUZYN2pKcXF5eVFlTEZQTEhRZTdiVmpxVUp2SmpQb1Z5SXl6QTlHTFhNS2k0Z2JTaUVZZVhqNEFxRmptQTBnc1hQWW5WWUE4Z0NSYk9oNnVETGhIaThZWWk5SFllajlTc2MwQ1k1NDh5WU42Q18tMlFER0RQM0JtLUxOdkpMV1FITEs2U05qOU1mallzZDlDTkRIMnN0ZjhtQ3U0blVoN2JUUDdWc2JNd1BNUWZqYjJSTQ?oc=5; RSS wrapper carried no substantive article; recovered matching published work separately"
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI assigned to this news item."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact headline lookup: \"How is Europe sharpening migration rules? Ask the Euronews AI chatbot\"; located matching dated publication at https://www.euronews.com/2026/10/05/how-is-europe-tightening-borders-and-speeding-up-returns-ask-the-euronews-ai-chatbot"
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Title/publisher/2026 cross-check of How is Europe sharpening migration rules? Ask the Euronews AI chatbot; publication identified at https://www.euronews.com/2026/10/05/how-is-europe-tightening-borders-and-speeding-up-returns-ask-the-euronews-ai-chatbot"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Inspected the matching source at https://www.euronews.com/2026/10/05/how-is-europe-tightening-borders-and-speeding-up-returns-ask-the-euronews-ai-chatbot"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Publication and institutional context checked against https://www.euronews.com/2026/10/05/how-is-europe-tightening-borders-and-speeding-up-returns-ask-the-euronews-ai-chatbot; no substitute work used."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euronews.com/2026/10/05/how-is-europe-tightening-borders-and-speeding-up-returns-ask-the-euronews-ai-chatbot",
+            "title": "How is Europe sharpening migration rules? Ask the Euronews AI chatbot",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final: inspected package source and/or retrieved publisher text, checked identity and publication date, evaluated C connection; source limits are recorded. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C gate: media chatbot promotion and migration policy commentary have no substantiated EU research or innovation system connection."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T13:03:51Z",
+      "deep_scan_package_id": "worker-a-20261019T111217Z-760f432f59f5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.euronews.com/2026/10/05/intelligence-everywhere-inside-europes-next-technology-era": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "de02d1ad",
+      "identity_hash": "b56144816ba32552",
+      "reader_title": "Qualcomm-sponsored film on future AI",
+      "reader_what": "Sponsored documentary discusses possible future AI and 6G applications across European consumer and industrial devices.",
+      "reader_more": "The verified publication is labelled partner content presented by Qualcomm. It promotes a possible technological future, but does not report a new research funding decision, capability milestone or concrete European R&I action.",
+      "deep_analysis": {
+        "work_kind": "verified publication",
+        "research_question": "",
+        "main_finding": "Sponsored documentary discusses possible future AI and 6G applications across European consumer and industrial devices.",
+        "method_or_basis": "Direct examination of source text.",
+        "qualification": "The source does not substantiate a qualifying EU research-and-innovation development or systemic evidence product.",
+        "radar_relevance": "C gate tested: Qualcomm-branded partner documentary discusses potential uses of edge/hybrid AI and 6G, but provides no verified new dated policy decision, investment, technology capacity change, or other substantive European R&I event. Sponsored outlook is not independent proof of benefits.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Verified source text matching the supplied title and date: https://www.euronews.com/video/2026/10/05/intelligence-everywhere-inside-europes-next-technology-era"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euronews.com/video/2026/10/05/intelligence-everywhere-inside-europes-next-technology-era",
+            "title": "Intelligence Everywhere: Inside Europe’s Next Technology Era",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euronews.com/2026/10/05/intelligence-everywhere-inside-europes-next-technology-era",
+            "title": "Euronews sponsored feature",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final: original URL and published video counterpart compared with substantial cached article text; independently confirmed the item is branded partner material and lacks a discrete verified development."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C gate tested: Qualcomm-branded partner documentary discusses potential uses of edge/hybrid AI and 6G, but provides no verified new dated policy decision, investment, technology capacity change, or other substantive European R&I event. Sponsored outlook is not independent proof of benefits."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T13:03:51Z",
+      "deep_scan_package_id": "worker-b-20261019T111221Z-e08502a9ffa5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.researchprofessionalnews.com/rr-news-europe-innovation-2026-10-eu-innovation-agency-must-be-reformed-to-be-worth-keeping/": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "a5c9d6e6",
+      "identity_hash": "f689dee7eac2f29b",
+      "reader_title": "Universities seek EIT institutional reforms",
+      "reader_what": "University groups called for major changes to the European Institute of Innovation and Technology.",
+      "reader_why": "The requested changes concern governance of an EU institution linking research, higher education and technology transfer.",
+      "reader_more": "University groups called for major changes to the European Institute of Innovation and Technology. The requested changes concern governance of an EU institution linking research, higher education and technology transfer. Only the reported public reform advocacy is established; the requested changes have not been enacted.",
+      "deep_analysis": {
+        "work_kind": "reported institutional development",
+        "research_question": "",
+        "main_finding": "University groups called for major changes to the European Institute of Innovation and Technology.",
+        "method_or_basis": "Published matching source: https://www.researchprofessionalnews.com/rr-news-europe-innovation-2026-10-eu-innovation-agency-must-be-reformed-to-be-worth-keeping/",
+        "qualification": "Only the reported public reform advocacy is established; the requested changes have not been enacted.",
+        "radar_relevance": "C gate: documented fresh university-sector reform advocacy targets a specific EU research-and-innovation governance instrument during the EIT regulatory consultation. Not an adopted reform.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Reader-facing record https://www.researchprofessionalnews.com/rr-news-europe-innovation-2026-10-eu-innovation-agency-must-be-reformed-to-be-worth-keeping/; matching source material was supplied in the package"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.researchprofessionalnews.com/rr-news-europe-innovation-2026-10-eu-innovation-agency-must-be-reformed-to-be-worth-keeping/",
+            "title": "EU innovation agency ‘must be reformed to be worth keeping’ - Research Professional News",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final: inspected package source and/or retrieved publisher text, checked identity and publication date, evaluated C connection; source limits are recorded. Only the reported public reform advocacy is established; the requested changes have not been enacted."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_VERIFIED_RI_DEVELOPMENT",
+        "reason": "C gate: documented fresh university-sector reform advocacy targets a specific EU research-and-innovation governance instrument during the EIT regulatory consultation. Not an adopted reform."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T13:03:51Z",
+      "deep_scan_package_id": "worker-b-20261019T111221Z-e08502a9ffa5",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European university groups",
+            "class": "university_group"
+          },
+          "mechanism": "advocates",
+          "direction": "becomes_contested",
+          "status": "proposed",
+          "status_date": "2026-10-05",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "Only the reported public reform advocacy is established; the requested changes have not been enacted.",
+          "text": "University groups called for major changes to the European Institute of Innovation and Technology.",
+          "confidence": "medium",
+          "record_key": "link:https://www.researchprofessionalnews.com/rr-news-europe-innovation-2026-10-eu-innovation-agency-must-be-reformed-to-be-worth-keeping/",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:f689dee7eac2f29b:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.euronews.com/2026/10/05/ai-weiwei-we-are-losing-privacy-and-without-it-we-stop-being-individuals": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "cb3f8ead",
+      "identity_hash": "8485e2ac027e8f93",
+      "reader_title": "Ai Weiwei criticises AI censorship",
+      "reader_what": "Artist Ai Weiwei discussed threats to personal privacy and expression from AI.",
+      "reader_more": "Artist Ai Weiwei discussed threats to personal privacy and expression from AI. The interview documents an opinion, not a substantive European research or technology-policy change.",
+      "deep_analysis": {
+        "work_kind": "verified publication",
+        "research_question": "",
+        "main_finding": "Artist Ai Weiwei discussed threats to personal privacy and expression from AI.",
+        "method_or_basis": "Published matching source: https://www.euronews.com/2026/10/05/ai-weiwei-we-are-losing-privacy-and-without-it-we-stop-being-individuals",
+        "qualification": "The source does not substantiate a qualifying new European R&I development.",
+        "radar_relevance": "C gate: artist interview during a retrospective in Belgium offers no verified new EU R&I policy, investment, infrastructure, governance or strategic technology-capability event.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Reader-facing record https://www.euronews.com/2026/10/05/ai-weiwei-we-are-losing-privacy-and-without-it-we-stop-being-individuals; matching source material was supplied in the package"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euronews.com/2026/10/05/ai-weiwei-we-are-losing-privacy-and-without-it-we-stop-being-individuals",
+            "title": "Ai Weiwei: \"We are losing privacy and without it we stop being individuals\"",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final: inspected package source and/or retrieved publisher text, checked identity and publication date, evaluated C connection; source limits are recorded. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C gate: artist interview during a retrospective in Belgium offers no verified new EU R&I policy, investment, infrastructure, governance or strategic technology-capability event."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T13:03:51Z",
+      "deep_scan_package_id": "worker-b-20261019T111221Z-e08502a9ffa5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.euronews.com/video/2026/10/05/googles-13bn-finland-push-transforms-and-divides-a-quiet-rural-town": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "a1fe7cd9",
+      "identity_hash": "7297f42e7dd897a5",
+      "reader_title": "Google builds data centre capacity in Finland",
+      "reader_what": "A large Google data-centre development is under way near Muhos, amid environmental concerns.",
+      "reader_why": "Additional privately financed data-centre infrastructure could expand European computing capacity.",
+      "reader_more": "A large Google data-centre development is under way near Muhos, amid environmental concerns. Additional privately financed data-centre infrastructure could expand European computing capacity. €13bn over two years is a local official’s stated aggregate investment estimate, not a verified disbursement or delivered compute capacity.",
+      "deep_analysis": {
+        "work_kind": "reported institutional development",
+        "research_question": "",
+        "main_finding": "A large Google data-centre development is under way near Muhos, amid environmental concerns.",
+        "method_or_basis": "Published matching source: https://www.euronews.com/video/2026/10/05/googles-13bn-finland-push-transforms-and-divides-a-quiet-rural-town",
+        "qualification": "€13bn over two years is a local official’s stated aggregate investment estimate, not a verified disbursement or delivered compute capacity.",
+        "radar_relevance": "C gate: reported construction in Finland establishes a material capacity investment; the €13bn figure is attributed to the mayor, not independently audited expenditure.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Reader-facing record https://www.euronews.com/video/2026/10/05/googles-13bn-finland-push-transforms-and-divides-a-quiet-rural-town; matching source material was supplied in the package"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euronews.com/video/2026/10/05/googles-13bn-finland-push-transforms-and-divides-a-quiet-rural-town",
+            "title": "Video. Google’s €13bn Finland push transforms and divides a quiet rural town",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final: inspected package source and/or retrieved publisher text, checked identity and publication date, evaluated C connection; source limits are recorded. €13bn over two years is a local official’s stated aggregate investment estimate, not a verified disbursement or delivered compute capacity."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_VERIFIED_RI_DEVELOPMENT",
+        "reason": "C gate: reported construction in Finland establishes a material capacity investment; the €13bn figure is attributed to the mayor, not independently audited expenditure."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T13:03:52Z",
+      "deep_scan_package_id": "worker-b-20261019T111221Z-e08502a9ffa5",
+      "claims": [
+        {
+          "object": "datacentre.siting",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Google",
+            "class": "company"
+          },
+          "mechanism": "builds",
+          "direction": "expands",
+          "status": "operating",
+          "status_date": "2026-10-05",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "FI"
+            ]
+          },
+          "kind": "action",
+          "qualification": "€13bn over two years is a local official’s stated aggregate investment estimate, not a verified disbursement or delivered compute capacity.",
+          "text": "A large Google data-centre development is under way near Muhos, amid environmental concerns.",
+          "confidence": "medium",
+          "record_key": "link:https://www.euronews.com/video/2026/10/05/googles-13bn-finland-push-transforms-and-divides-a-quiet-rural-town",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:7297f42e7dd897a5:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMinAFBVV95cUxNWVhpMFZyUmV3dmFZeHJHaGVobVNXd0hsd3d1cEN6RXpZaGp4c2d1VERvY3lka1IzNTN1TTZFb0pFb1RHNXdZVkxGcU1ERmpNV2RmX3MtUnkxSE5jVEpJTGxuTXc3NW5ZSnNtN2Y3a213bmZ3LWxvakVmZTc0emM1NW9Fc0E4c3ZRLThmWDljM2MydnRJTVZpcWhvOEo?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "dd27edf4",
+      "identity_hash": "24117f9e90a841fb",
+      "reader_title": "Helmholtz research funding job vacancy",
+      "reader_what": "A German Helmholtz institute advertised a third-party funding unit management role.",
+      "reader_more": "A German Helmholtz institute advertised a third-party funding unit management role. An ordinary vacancy is not a newly established research programme or measured system-wide talent change.",
+      "deep_analysis": {
+        "work_kind": "verified publication",
+        "research_question": "",
+        "main_finding": "A German Helmholtz institute advertised a third-party funding unit management role.",
+        "method_or_basis": "Published matching source: https://euraxess.ec.europa.eu/jobs/470257",
+        "qualification": "The source does not substantiate a qualifying new European R&I development.",
+        "radar_relevance": "C gate: an administrative job advertisement is routine hiring, not verified substantive change in European R&I capability or funding.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Reader-facing record https://news.google.com/rss/articles/CBMinAFBVV95cUxNWVhpMFZyUmV3dmFZeHJHaGVobVNXd0hsd3d1cEN6RXpZaGp4c2d1VERvY3lka1IzNTN1TTZFb0pFb1RHNXdZVkxGcU1ERmpNV2RmX3MtUnkxSE5jVEpJTGxuTXc3NW5ZSnNtN2Y3a213bmZ3LWxvakVmZTc0emM1NW9Fc0E4c3ZRLThmWDljM2MydnRJTVZpcWhvOEo?oc=5; RSS wrapper carried no substantive article; recovered matching published work separately"
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI assigned to this news item."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact headline lookup: \"Head of Third-Party Funding Staff Unit (f/m/d) job with Helmholtz Association of German Research Centres | 12865314\"; located matching dated publication at https://euraxess.ec.europa.eu/jobs/470257"
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Title/publisher/2026 cross-check of Head of Third-Party Funding Staff Unit (f/m/d) job with Helmholtz Association of German Research Centres | 12865314; publication identified at https://euraxess.ec.europa.eu/jobs/470257"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Inspected the matching source at https://euraxess.ec.europa.eu/jobs/470257"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Publication and institutional context checked against https://euraxess.ec.europa.eu/jobs/470257; no substitute work used."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_publisher",
+            "url": "https://euraxess.ec.europa.eu/jobs/470257",
+            "title": "Head of Third-Party Funding Staff Unit (f/m/d) job with Helmholtz Association of German Research Centres | 12865314",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final: inspected package source and/or retrieved publisher text, checked identity and publication date, evaluated C connection; source limits are recorded. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C gate: an administrative job advertisement is routine hiring, not verified substantive change in European R&I capability or funding."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T13:03:52Z",
+      "deep_scan_package_id": "worker-b-20261019T111221Z-e08502a9ffa5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMisgFBVV95cUxPeTJjaWFVN3hJdWk5MThTUzRpWDR4Rkl3LUtLaGRZZDV3akItQXZxX2N6Z2lramFndHVqRXN6TDRFVl93ektpRnhTUmpBT1dPT09QSW54Ty1VNEo1YjY2Z25HMlpnM042MlFQRmVlaFRyb0pRempfbENJNkZzdG9kS19EbW5hZDdiOW8tTENmalJkVDhxSkUtUnFsakw5MHhTbXYzQlI2eEJZbkphQy04WlVn?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "7db38e5f",
+      "identity_hash": "1c17cfc0a7fa7383",
+      "reader_title": "Seven countries contest EU space shield",
+      "reader_what": "Seven EU governments called for narrowing the European Space Shield and retaining national control of military space capabilities.",
+      "reader_why": "The proposal would affect governance and coordination of dual-use space infrastructure and European technology capability.",
+      "reader_more": "Seven EU governments called for narrowing the European Space Shield and retaining national control of military space capabilities. The proposal would affect governance and coordination of dual-use space infrastructure and European technology capability. Position paper reported by Euronews and La Lettre; EU institutions have not adopted the seven-state proposal.",
+      "deep_analysis": {
+        "work_kind": "reported institutional development",
+        "research_question": "",
+        "main_finding": "Seven EU governments called for narrowing the European Space Shield and retaining national control of military space capabilities.",
+        "method_or_basis": "Published matching source: https://www.euronews.com/2026/10/02/france-and-germany-lead-push-to-keep-military-space-powers-in-national-hands",
+        "qualification": "Position paper reported by Euronews and La Lettre; EU institutions have not adopted the seven-state proposal.",
+        "radar_relevance": "C gate: substantive documented multi-country position contests the institutional architecture of EU space defence and associated technology infrastructure; advocacy is not adoption.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Reader-facing record https://news.google.com/rss/articles/CBMisgFBVV95cUxPeTJjaWFVN3hJdWk5MThTUzRpWDR4Rkl3LUtLaGRZZDV3akItQXZxX2N6Z2lramFndHVqRXN6TDRFVl93ektpRnhTUmpBT1dPT09QSW54Ty1VNEo1YjY2Z25HMlpnM042MlFQRmVlaFRyb0pRempfbENJNkZzdG9kS19EbW5hZDdiOW8tTENmalJkVDhxSkUtUnFsakw5MHhTbXYzQlI2eEJZbkphQy04WlVn?oc=5; RSS wrapper carried no substantive article; recovered matching published work separately"
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI assigned to this news item."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact headline lookup: \"Seven EU countries push back against Brussels plans for military space\"; located matching dated publication at https://www.euronews.com/2026/10/02/france-and-germany-lead-push-to-keep-military-space-powers-in-national-hands"
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Title/publisher/2026 cross-check of Seven EU countries push back against Brussels plans for military space; publication identified at https://www.euronews.com/2026/10/02/france-and-germany-lead-push-to-keep-military-space-powers-in-national-hands"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Inspected the matching source at https://www.euronews.com/2026/10/02/france-and-germany-lead-push-to-keep-military-space-powers-in-national-hands"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Publication and institutional context checked against https://www.euronews.com/2026/10/02/france-and-germany-lead-push-to-keep-military-space-powers-in-national-hands; no substitute work used."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euronews.com/2026/10/02/france-and-germany-lead-push-to-keep-military-space-powers-in-national-hands",
+            "title": "Seven EU countries push back against Brussels plans for military space",
+            "evidence_used": true
+          },
+          {
+            "kind": "independent_reporting",
+            "url": "https://www.lalettre.fr/fr/english-corner/2026/10/01/space-shield-germany-france-challenge-eu-commission-s-space-defence-ambitions%2C110888179-gra",
+            "title": "Independent report on seven-country space position paper",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final: inspected package source and/or retrieved publisher text, checked identity and publication date, evaluated C connection; source limits are recorded. Position paper reported by Euronews and La Lettre; EU institutions have not adopted the seven-state proposal."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_VERIFIED_RI_DEVELOPMENT",
+        "reason": "C gate: substantive documented multi-country position contests the institutional architecture of EU space defence and associated technology infrastructure; advocacy is not adoption."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T13:03:52Z",
+      "deep_scan_package_id": "worker-b-20261019T111221Z-e08502a9ffa5",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Seven EU member states",
+            "class": "member_state"
+          },
+          "mechanism": "advocates",
+          "direction": "becomes_contested",
+          "status": "proposed",
+          "status_date": "2026-10-02",
+          "scope": {
+            "level": "eu",
+            "countries": [
+              "DE",
+              "FR",
+              "AT",
+              "BE",
+              "ES",
+              "NL",
+              "SE"
+            ]
+          },
+          "kind": "advocacy",
+          "qualification": "Position paper reported by Euronews and La Lettre; EU institutions have not adopted the seven-state proposal.",
+          "text": "Seven EU governments called for narrowing the European Space Shield and retaining national control of military space capabilities.",
+          "confidence": "medium",
+          "record_key": "link:https://news.google.com/rss/articles/CBMisgFBVV95cUxPeTJjaWFVN3hJdWk5MThTUzRpWDR4Rkl3LUtLaGRZZDV3akItQXZxX2N6Z2lramFndHVqRXN6TDRFVl93ektpRnhTUmpBT1dPT09QSW54Ty1VNEo1YjY2Z25HMlpnM042MlFQRmVlaFRyb0pRempfbENJNkZzdG9kS19EbW5hZDdiOW8tTENmalJkVDhxSkUtUnFsakw5MHhTbXYzQlI2eEJZbkphQy04WlVn?oc=5",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:1c17cfc0a7fa7383:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMitwFBVV95cUxOaFgzNjBfRFBmMnd5SWNaODVBUlF5Z3RrbHNDZmtSa0lHUWxLOHZfWHhvWktIRnpRaXY1MVlQTVhTcGkwNTJyYmdsMzY4V0VFcl9kME9EM3lXcWpsUkVDYTVkcE9VY1JLclQ4U09jRml2RHFzelJxcUItMGhzZmd6SjI3Wmw5RkYxMndBS0M5QXJVeGNDOVRYWGcwSlp1MXJWNGU2bDBWdDZyX0t4ODNna0Z2enlXc3c?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "d83b3eb1",
+      "identity_hash": "844a5a154e5c015d",
+      "reader_title": "Profile of French semiconductor firm Soitec",
+      "reader_what": "Euronews profiled Soitec’s advanced silicon-wafer production and established research base.",
+      "reader_more": "Euronews profiled Soitec’s advanced silicon-wafer production and established research base. The report offers descriptive context but identifies no new dated investment or industrial-capability milestone.",
+      "deep_analysis": {
+        "work_kind": "verified publication",
+        "research_question": "",
+        "main_finding": "Euronews profiled Soitec’s advanced silicon-wafer production and established research base.",
+        "method_or_basis": "Published matching source: https://www.euronews.com/2026/10/02/inside-soitec-the-french-tech-company-powering-the-global-semiconductor-industry",
+        "qualification": "The source does not substantiate a qualifying new European R&I development.",
+        "radar_relevance": "C gate: the profile describes existing fab output, R&D spending and patents; no newly observed policy decision or change in European semiconductor capability is substantiated.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Reader-facing record https://news.google.com/rss/articles/CBMitwFBVV95cUxOaFgzNjBfRFBmMnd5SWNaODVBUlF5Z3RrbHNDZmtSa0lHUWxLOHZfWHhvWktIRnpRaXY1MVlQTVhTcGkwNTJyYmdsMzY4V0VFcl9kME9EM3lXcWpsUkVDYTVkcE9VY1JLclQ4U09jRml2RHFzelJxcUItMGhzZmd6SjI3Wmw5RkYxMndBS0M5QXJVeGNDOVRYWGcwSlp1MXJWNGU2bDBWdDZyX0t4ODNna0Z2enlXc3c?oc=5; RSS wrapper carried no substantive article; recovered matching published work separately"
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI assigned to this news item."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact headline lookup: \"Inside Soitec, the French tech company powering the global semiconductor industry\"; located matching dated publication at https://www.euronews.com/2026/10/02/inside-soitec-the-french-tech-company-powering-the-global-semiconductor-industry"
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Title/publisher/2026 cross-check of Inside Soitec, the French tech company powering the global semiconductor industry; publication identified at https://www.euronews.com/2026/10/02/inside-soitec-the-french-tech-company-powering-the-global-semiconductor-industry"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Inspected the matching source at https://www.euronews.com/2026/10/02/inside-soitec-the-french-tech-company-powering-the-global-semiconductor-industry"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Publication and institutional context checked against https://www.euronews.com/2026/10/02/inside-soitec-the-french-tech-company-powering-the-global-semiconductor-industry; no substitute work used."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euronews.com/2026/10/02/inside-soitec-the-french-tech-company-powering-the-global-semiconductor-industry",
+            "title": "Inside Soitec, the French tech company powering the global semiconductor industry",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final: inspected package source and/or retrieved publisher text, checked identity and publication date, evaluated C connection; source limits are recorded. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C gate: the profile describes existing fab output, R&D spending and patents; no newly observed policy decision or change in European semiconductor capability is substantiated."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T13:03:52Z",
+      "deep_scan_package_id": "worker-b-20261019T111221Z-e08502a9ffa5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMi8gFBVV95cUxNVzJrbnB6clF0YzUzZmkxUUZ3V2hpV0xfN2lILXFyOGFoRExET1lvUzdKakhKR1NyS2pQdWVnSVhkWV9kM3U2NGtjaEhTeURmaXJNYmJqTDNzVUFiM0VDYnFhNW1pMmZlb3pHMkVqemkyNllRTW5OSDdPQjZwME1xODNzeHRjdDFuTF9qT0MtMWZwSWwxRC1UX25wRWxfLWUydDhITnVJcTYwQ1ptZ1JoX2lYdC0ta3l5NVBuYVN2Q1lwQndzUnZiSnJEbDhQenZVT3M4WUdvaWdmMlVQYlpwQ3N5X3NPTXNfRlhsc19DX0I5Zw?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "71093dd1",
+      "identity_hash": "0bee96d272deec92",
+      "reader_title": "EU publishes €230m biodiversity research call",
+      "reader_what": "The Commission announced a €230 million Horizon Europe nature call covering ten biodiversity research topics.",
+      "reader_why": "The new call explicitly increases R&I funding for European biodiversity, monitoring and ecosystem restoration.",
+      "reader_more": "The Commission announced a €230 million Horizon Europe nature call covering ten biodiversity research topics. The new call explicitly increases R&I funding for European biodiversity, monitoring and ecosystem restoration. Publication confirms launch of the call, not eventual grantee selection or research outcomes.",
+      "deep_analysis": {
+        "work_kind": "reported institutional development",
+        "research_question": "",
+        "main_finding": "The Commission announced a €230 million Horizon Europe nature call covering ten biodiversity research topics.",
+        "method_or_basis": "Published matching source: https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/horizon-europe-launches-new-research-and-innovation-call-nature-2026-10-02_en",
+        "qualification": "Publication confirms launch of the call, not eventual grantee selection or research outcomes.",
+        "radar_relevance": "C verified: official DG RTD publication announces a substantial new research funding instrument with ten topics in Horizon Europe 2026–27.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Reader-facing record https://news.google.com/rss/articles/CBMi8gFBVV95cUxNVzJrbnB6clF0YzUzZmkxUUZ3V2hpV0xfN2lILXFyOGFoRExET1lvUzdKakhKR1NyS2pQdWVnSVhkWV9kM3U2NGtjaEhTeURmaXJNYmJqTDNzVUFiM0VDYnFhNW1pMmZlb3pHMkVqemkyNllRTW5OSDdPQjZwME1xODNzeHRjdDFuTF9qT0MtMWZwSWwxRC1UX25wRWxfLWUydDhITnVJcTYwQ1ptZ1JoX2lYdC0ta3l5NVBuYVN2Q1lwQndzUnZiSnJEbDhQenZVT3M4WUdvaWdmMlVQYlpwQ3N5X3NPTXNfRlhsc19DX0I5Zw?oc=5; RSS wrapper carried no substantive article; recovered matching published work separately"
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI assigned to this news item."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact headline lookup: \"Horizon Europe launches a new research and innovation call on nature\"; located matching dated publication at https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/horizon-europe-launches-new-research-and-innovation-call-nature-2026-10-02_en"
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Title/publisher/2026 cross-check of Horizon Europe launches a new research and innovation call on nature; publication identified at https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/horizon-europe-launches-new-research-and-innovation-call-nature-2026-10-02_en"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Inspected the matching source at https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/horizon-europe-launches-new-research-and-innovation-call-nature-2026-10-02_en"
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Publication and institutional context checked against https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/horizon-europe-launches-new-research-and-innovation-call-nature-2026-10-02_en; no substitute work used."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_publisher",
+            "url": "https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/horizon-europe-launches-new-research-and-innovation-call-nature-2026-10-02_en",
+            "title": "Horizon Europe launches a new research and innovation call on nature",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final: inspected package source and/or retrieved publisher text, checked identity and publication date, evaluated C connection; source limits are recorded. Publication confirms launch of the call, not eventual grantee selection or research outcomes."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_VERIFIED_RI_DEVELOPMENT",
+        "reason": "C verified: official DG RTD publication announces a substantial new research funding instrument with ten topics in Horizon Europe 2026–27."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T13:03:52Z",
+      "deep_scan_package_id": "worker-b-20261019T111221Z-e08502a9ffa5",
+      "claims": [
+        {
+          "object": "funding.route",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission DG RTD",
+            "class": "eu_body"
+          },
+          "mechanism": "launches",
+          "direction": "expands",
+          "status": "call_open",
+          "status_date": "2026-10-02",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Publication confirms launch of the call, not eventual grantee selection or research outcomes.",
+          "text": "The Commission announced a €230 million Horizon Europe nature call covering ten biodiversity research topics.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMi8gFBVV95cUxNVzJrbnB6clF0YzUzZmkxUUZ3V2hpV0xfN2lILXFyOGFoRExET1lvUzdKakhKR1NyS2pQdWVnSVhkWV9kM3U2NGtjaEhTeURmaXJNYmJqTDNzVUFiM0VDYnFhNW1pMmZlb3pHMkVqemkyNllRTW5OSDdPQjZwME1xODNzeHRjdDFuTF9qT0MtMWZwSWwxRC1UX25wRWxfLWUydDhITnVJcTYwQ1ptZ1JoX2lYdC0ta3l5NVBuYVN2Q1lwQndzUnZiSnJEbDhQenZVT3M4WUdvaWdmMlVQYlpwQ3N5X3NPTXNfRlhsc19DX0I5Zw?oc=5",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:0bee96d272deec92:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-19T10:18:28Z"
+  "claims_updated_at": "2026-10-19T13:03:52Z"
 }
