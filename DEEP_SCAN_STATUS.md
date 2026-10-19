@@ -7,38 +7,38 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **2731** (Main **1310** + Historical **1421**)
-- Automatic queue still needing V2 verification: **545** (Main **242** + Historical **303**)
-- Currently assigned to workers: **107** (Main **41** + Historical **66**)
+- Automatic queue still needing V2 verification: **546** (Main **243** + Historical **303**)
+- Currently assigned to workers: **107** (Main **34** + Historical **73**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **31**
-- Automatic queue pending and not yet assigned: **438**
+- Automatic queue pending and not yet assigned: **439**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261019T034540Z-2ce8d740f174`
+- Current package: `worker-a-20261019T061201Z-23008f7e3541`
 - Assigned unresolved records: **36**
-  1. `link:https://doi.org/10.1002/masy.70500` — Innovation Systems and Nano‐Macromolecular Translation: Market Structures, Behavioral Gaps, and Regional Asymmetries
-  2. `link:https://research-and-innovation.ec.europa.eu/implementation-dialogues/implementation-dialogue-research-security-2026-11-10_en` — Implementation dialogue on research security
-  3. `link:https://doi.org/10.1177/09610006261491363` — Mapping the landscape of Library and Information Science in North Africa and Europe: A comparative bibliometric analysis using OpenAlex and DOAJ
-  4. `link:https://doi.org/10.1016/j.respol.2026.105641` — External collaboration and local knowledge divergence in regional knowledge spaces
-  5. `link:https://joint-research-centre.ec.europa.eu/research-updates_en` — Research updates
-  6. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=f1acebae-ca97-11f1-8b4c-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — EU funding for innovation and competitiveness - Publications Office of the EU
-  7. `link:https://doi.org/10.1007/s10098-026-03613-6` — Integrating circular economy and policy synergies for cost-efficient lithium-ion battery supply chains
-  8. `link:https://news.google.com/rss/articles/CBMiqgFBVV95cUxOWkR4ZHhRS3REM083T0VmaDRMTWtDUEdQVzc0LXNrTk1FdkVpb2lBY1RUeV9wcFV4V0pRSmFtOU81ckd4cTE5Q0tMYUJacU5oVlRxOXlyZTdBQ2VxZzBUVDJLYjhjcDdNR1B3dERxVWRTbGJZSllnY19IOVZqSjZuSkJIdklLbWRuMkVjYlR0cV84UXhhU0ZZY25qVjhpUUVtYkJrcUpiRzBWdw?oc=5` — Euroviews. The new multiannual financial framework (MFF): A future vision for the EU
+  1. `link:https://news.google.com/rss/articles/CBMikgFBVV95cUxPMHZHaTJEYTVaZHl5RmhSZWlLWDFhcVpkUFJwOEtBNF9qSzdfZm9lWEIta3dXaDN1anBuUF9UM2tpenRoVE1ReGJWV0dfZ0hNa3d4UV95NDNrN0VNVmJUUktueFB5bm56WmlHMDkzc3lfc1dVS2F2TEJFZVVHTlNsb0o4dXQyUDdfdEhMdXlpZGpPZw?oc=5` — Cyberattack on French supermarkets tells us more about food security than AI safety
+  2. `link:https://news.google.com/rss/articles/CBMiqgFBVV95cUxOWkR4ZHhRS3REM083T0VmaDRMTWtDUEdQVzc0LXNrTk1FdkVpb2lBY1RUeV9wcFV4V0pRSmFtOU81ckd4cTE5Q0tMYUJacU5oVlRxOXlyZTdBQ2VxZzBUVDJLYjhjcDdNR1B3dERxVWRTbGJZSllnY19IOVZqSjZuSkJIdklLbWRuMkVjYlR0cV84UXhhU0ZZY25qVjhpUUVtYkJrcUpiRzBWdw?oc=5` — Euroviews. The new multiannual financial framework (MFF): A future vision for the EU
+  3. `link:https://doi.org/10.1002/masy.70500` — Innovation Systems and Nano‐Macromolecular Translation: Market Structures, Behavioral Gaps, and Regional Asymmetries
+  4. `link:https://news.google.com/rss/articles/CBMivgFBVV95cUxOMXhzOTk3T0tyTWVCX0Q4VGZzNWVHcWdYTHMtVllXMVB5LUpXbWlMNVRNUnlrQWw1eGViNkhmeE9BZlpuRjJvbkNOeWxudHZDWXlpT2RGVlhyTnlkQTkycnVhcTBUWEllWlhiNGRJZTJqaUtqc1BwYVJXZ0xKZEVxcnB4SXVySDhSNHFlYzJGRnpVZ1FZMmQ1UzUxaEUxOWtWVXpScUtJYnJRUGVqejBHZ25UN3JhdGRQdkxIcjBR?oc=5` — Europe Is Racing China to Dominate Industrial AI
+  5. `link:https://research-and-innovation.ec.europa.eu/implementation-dialogues/implementation-dialogue-research-security-2026-11-10_en` — Implementation dialogue on research security
+  6. `link:https://doi.org/10.1177/09610006261491363` — Mapping the landscape of Library and Information Science in North Africa and Europe: A comparative bibliometric analysis using OpenAlex and DOAJ
+  7. `link:https://doi.org/10.1016/j.respol.2026.105641` — External collaboration and local knowledge divergence in regional knowledge spaces
+  8. `link:https://joint-research-centre.ec.europa.eu/research-updates_en` — Research updates
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261019T034638Z-53b995eac853`
+- Current package: `worker-b-20261019T061252Z-a6863c3790f4`
 - Assigned unresolved records: **36**
-  1. `historical:id:918a347da0104729` — Digital Investments, Data and Growth in Europe: A Framework for Analysis
-  2. `historical:id:b9f7c46779f5b8a1` — Investigating the interplay between fundamentals of national research systems: Performance, investments and international collaborations
-  3. `historical:id:a7c79a88e54c0623` — Intelligent Energy-Europe II Programme within the Competitiveness and Innovation Framework Programme- file
-  4. `historical:id:01542e166949263a` — Strengthening strategic planning and the role of PlanAPP in Portugal
-  5. `historical:id:ee14eea7a83ff13c` — The impact of foresight on entrepreneurship: The Wales 2010 case study
-  6. `link:https://doi.org/10.1093/jel/eqag037` — Algorithmic governance of carbon markets: the limits of EU climate law and AI as regulatory infrastructure
-  7. `link:https://news.google.com/rss/articles/CBMi_wFBVV95cUxPVjB4aWNVdEJ5TjMzS1hzRmlUMk1kazJ6cEFub3R0SXp0dDVhZkpHTWZTdjRBWk9FcTVfX1lkWHBuMVUtRmRKT3lFX3VBRVp2M0p4bmZJZk1SbHJnXzE5RFdMZU54Rm9hWHEwUWxyeWlUaHhkMDhxU1N6UHp2c25lNFpSRjFFcjZ0ZExlQXlFdGJJc0NlWlJWclF2UHJ1TWc1Z0JfUTVrT1JKLWFGTlNpVU1LS2wyLVlMSVVsV05KZXBpeGFXUE1zQlFfWmdrdVE3RWVfVDJHc25kdG9XUFByRU1FaHFpbk5wS2RNMDdydktFMVdkZVI4S0ZYYmJDRkk?oc=5` — Strengthening climate change mitigation and adaption policies: OECD Economic Surveys: Latvia 2026
-  8. `link:https://news.google.com/rss/articles/CBMizAFBVV95cUxOTDgtQm43UnJJSGV6SVBMZFJKbElLbFhndzlZd1FNejNDQkFBYm5lVFRpUUNETWFZdXRoOXFlUW9pNTl4b3dYMXdBR3E1dDQzT3BfSE5Yd2k0TmNYWWJBRmtac3EtOHNfdXpTQ0Z0X1lUVDlxTXFpaFJnR2ZGdTNrWFBrRjNQdmc2VVUweFJyMFQ2bjJhcXRONC00RXExbVpackhGSzlvbWJQMEFRbHJRZDNfN3BFV1FUOUhrM3plUW9RdkhnQ2dIakhxSi0?oc=5` — Full Report: AI and Digitalisation for Employment Support in Belgium and Greece
+  1. `link:https://news.google.com/rss/articles/CBMi-AFBVV95cUxNSnd3VVhSRnJwRUJPU3FpQ1AtZTY5dFo3ZkFLVVBERjFQOTVyeElyS3FERHBLYkI2NUcwNGF5ajdKTDdEeUUwLUhyRWhsaVZmZV84dFZGYXRoRmJzOUlLY1ZfU1piVE9hb05CMnY2cmlkTEM2OXc2Nkw2LVZpYnRjeUstQUEwUmRkbTdoRHRfRC1xNTRVeTlfLTB3TGpMeEF4RkpxOVFzbDFTbUZROHZfQ0lQX1pEUDhSSGo3NVFaQm5RLWF2eWpPZGhCdUZMWFZTaC11WjAtMlQ5M0ZGZUFJRnBrc1lSY1FYX3lkWjBvc1lHckg5LUFieA?oc=5` — ERA Living Guidelines on the responsible use of Generative AI in research updated - European Commission
+  2. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxNRVF4bWtRUVRoMGtYV1hKSmhLNm1rU1hWYWVRY2UtNU50ZW1WeEwyWG5qZFVnbmtEdFVrSXAzbldBTEJJXzVtNzAxUGZaMEg3Y2IwTExQdUNyMHJMa3FQZWUtVVNLUkMtcW9YSmpjNG0xWmgwYnBkeVFqelk4QUpRUW5iZTJRRWNRZTZFamVoRFU4eHpxazZQR05VbktyNWpYSHVMTzM5RkdkSzdsT0E?oc=5` — Europe's answer to Starlink: Who is building IRIS² and what is Germany's role
+  3. `link:https://www.euronews.com/2026/10/16/europes-answer-to-starlink-who-is-building-iris-and-what-is-germanys-role` — Europe's answer to Starlink: Who is building IRIS² and Germany's role
+  4. `link:https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52026SA0024%2801%29` — Special report 24/2026 EU funding for innovation and competitiveness – Limited focus on close-to-market measures under Horizon 2020’s industrial leadership priority
+  5. `link:https://news.google.com/rss/articles/CBMimAFBVV95cUxPWEw3cTJSeFlBREN6a3NfWk5aSl9NcFlrY0t5NXYySzNYYVU4MzZ3bzRLaEVRcFJiTHBfcFBaRXhXTkdsTmNNUklOMmI2M0RMYVl3VTlaa2daRXJfQ3R4NmxRc2NJdGtmWUhaa1hjbGxXRThjQlkycmlMYWFoLTItSlhaNUVHN2pHclFraFUyZWtxWDVNa3VndQ?oc=5` — The EU is facing Big Tech pressure to revamp its AI law
+  6. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxPUHlUNEU5Z0lnenkzUi1PUWVxVFVCenQxMlg5U2dQaFJRLW1XVEtQdHU4YzgxWGRHdUIwaHE2Z2dXajRzYlpTbVVuUmJFdTFBTTNwVWJEcDZtUzlaZU9MZ0pWbUpBZHp6aFpOV25vS0p5M3RGeG1WZHM5YlNVNUhSUmw3RXFHelgzb3EydUJ5VmhRVElDd2xDVjBVOTUyaXpQMUgyQUh1TVFweGVaazln?oc=5` — In Europe’s tech capital, Irish labor unions are booming amid AI-driven layoffs
+  7. `link:https://news.google.com/rss/articles/CBMingFBVV95cUxNdHZwOGtZdkVDbkRsZVhTaEc4cWJJUzRaWWw0UXVHQ0xRb3NoWWZLblN6dmQwTkd6MTlYeldSdGw2UEt3dWJrRHRTbmNPcS1UV2Ztd2Y5MldWM0t6RDVvWUJRTmU4WEF1d0JfczJicWk4TEJqSU9NOW1DbmRQSk1OcGJZU29obU9MLS1jdmhuZ0tFdExleExnLWUxWUJ5UQ?oc=5` — Research for EMPL Committee - Strengthening the European Child Guarantee: an overview of lessons learnt and best practices from
+  8. `link:https://news.google.com/rss/articles/CBMilAFBVV95cUxPMU9Mb212Sy1Rd0ZhLWZpZzhxQklDdW8xUy1OUFdRVDRPSTJUaWdXWEFzQTdOUVd2amVtTzhvREo5Vjdnc0V2bzZhRHFON05PQ2doc19QVWNzVjhKUF9zbVVPTEowTjF0d2hjNFVDSzFlUExiamhncDQtLUhfa3RXbEQ2dS1VUmVPdzZ0Z3lhTFVyN0Q5?oc=5` — The European innovation act
   - … plus 28 more in the package manifest
 
 ### Worker SINGLE
