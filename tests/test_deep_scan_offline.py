@@ -114,7 +114,7 @@ def test_offline_import_accepts_current_hash_and_removes_inbox_file(tmp_path):
     assert not returned.exists()
 
 
-def test_offline_import_skips_stale_hash(tmp_path):
+def test_offline_import_preserves_stale_hash_for_correction(tmp_path):
     doc, row = _radar_doc()
     corpus = tmp_path / "radar.json"
     sidecar = tmp_path / "reader_text.json"
@@ -151,7 +151,11 @@ def test_offline_import_skips_stale_hash(tmp_path):
     )
     saved = json.loads(sidecar.read_text(encoding="utf-8"))
     assert saved["records"] == {}
-    assert not returned.exists()
+    # Rejected/stale results remain in the inbox for correction rather than
+    # being silently deleted; successful imports are still removed (test above).
+    assert returned.exists()
+    preserved = json.loads(returned.read_text(encoding="utf-8"))
+    assert preserved["results"][0]["source_hash"] == old_hash
 
 
 def test_offline_package_requeues_legacy_v1_once_for_authoritative_v2(tmp_path):
