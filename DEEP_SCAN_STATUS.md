@@ -6,21 +6,21 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2777** (Main **1354** + Historical **1423**)
-- Automatic queue still needing V2 verification: **500** (Main **199** + Historical **301**)
+- Authoritative V2 verified: **2779** (Main **1356** + Historical **1423**)
+- Automatic queue still needing V2 verification: **498** (Main **197** + Historical **301**)
 - Currently assigned to workers: **107** (Main **72** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **31**
-- Automatic queue pending and not yet assigned: **393**
+- Automatic queue pending and not yet assigned: **391**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261019T141448Z-4bbb0da5bd2c`
+- Current package: `worker-a-20261019T142750Z-4bbb0da5bd2c`
 - Assigned unresolved records: **36**
-  1. `link:https://news.google.com/rss/articles/CBMimAFBVV95cUxPWHhydk9EbXpOMEtuSlhlWlNDSVgweVJ3a0R3akxXX0FXT2dVMFRkcndmT0pXbUlUaDRGYl9UR0xKVU41TDFsYzlvM0ROSVpGaU9EN2JsUEc0Y3FvXzJ6Y0RRZjBPZVREZTJETC1iN3JQMXBnc3ZZOXozX1JzUktRNHg0R3VQYVdpUTVhTFdydTQ5c2gydURXdQ?oc=5` — Europe is fighting the wrong AI sovereignty battle — recovery attempt 2/3
-  2. `link:https://news.google.com/rss/articles/CBMilAFBVV95cUxOOERlTkZCc294UTNVa1JsU2hybDNkRjZfTXB5Qmc4T2hYTE5hR3oyb29Vcmp0ekItMGo4VGgzZEFOUEd5RWlybWhhLUNJRlloVDRJN2JqbllEX2VmcndpVm1fZGc1TG5UWThNTUxmeU1YeHdKRlFGcDJjOGpUQTVCNXRkSTljcElza004Q0ZHb3hibFFy?oc=5` — European telcos spy US role in satellite-to-phone coalition - rapporteur.com — recovery attempt 2/3
-  3. `link:https://news.google.com/rss/articles/CBMiqwFBVV95cUxNRWdQSkJPU1MwbjcxUnFOclBQVXgxZ2ktcDBjREZOVmNFTjlLZTJ5bW9KcG9FNGVIUWpfeEhNc0NTWFVlYVg1cjdYaE5EYkwySnhaazl2U3VIbld5SmNlandwNkpRSFRNWTRETUg5MFFfNUhzQjJJeFEwYVFJbV9LNU5UNXA2NmpWNVpscW40bDNVeEV6bzFya2F3NzFucUxSUGZPV29OOTNaWEE?oc=5` — European Companies Down But Not Out in AI Race — recovery attempt 2/3
+  1. `link:https://news.google.com/rss/articles/CBMimAFBVV95cUxPWHhydk9EbXpOMEtuSlhlWlNDSVgweVJ3a0R3akxXX0FXT2dVMFRkcndmT0pXbUlUaDRGYl9UR0xKVU41TDFsYzlvM0ROSVpGaU9EN2JsUEc0Y3FvXzJ6Y0RRZjBPZVREZTJETC1iN3JQMXBnc3ZZOXozX1JzUktRNHg0R3VQYVdpUTVhTFdydTQ5c2gydURXdQ?oc=5` — Europe is fighting the wrong AI sovereignty battle — recovery attempt 3/3
+  2. `link:https://news.google.com/rss/articles/CBMilAFBVV95cUxOOERlTkZCc294UTNVa1JsU2hybDNkRjZfTXB5Qmc4T2hYTE5hR3oyb29Vcmp0ekItMGo4VGgzZEFOUEd5RWlybWhhLUNJRlloVDRJN2JqbllEX2VmcndpVm1fZGc1TG5UWThNTUxmeU1YeHdKRlFGcDJjOGpUQTVCNXRkSTljcElza004Q0ZHb3hibFFy?oc=5` — European telcos spy US role in satellite-to-phone coalition - rapporteur.com — recovery attempt 3/3
+  3. `link:https://news.google.com/rss/articles/CBMiqwFBVV95cUxNRWdQSkJPU1MwbjcxUnFOclBQVXgxZ2ktcDBjREZOVmNFTjlLZTJ5bW9KcG9FNGVIUWpfeEhNc0NTWFVlYVg1cjdYaE5EYkwySnhaazl2U3VIbld5SmNlandwNkpRSFRNWTRETUg5MFFfNUhzQjJJeFEwYVFJbV9LNU5UNXA2NmpWNVpscW40bDNVeEV6bzFya2F3NzFucUxSUGZPV29OOTNaWEE?oc=5` — European Companies Down But Not Out in AI Race — recovery attempt 3/3
   4. `link:https://news.google.com/rss/articles/CBMiqwFBVV95cUxNcjVFRUV6ZzZmeXFiN3NIWmZwUTBGWTR3ZUx1UUhjLWRLMC0wZThtLW00a1FYNjloa3BiSTFveFdZZFkxWnd5d283Qi04MnU1UC1IUl9KdlBkX2o2X3JpQ0pUZVRZQzJ3Uk1fRzR5VnJIdGhwVGI3Q0JWc2RWOGtBZTZzek4tcWQxRTAxZnB3eWJyV2gzY2FlNjdYVk95b2lQX2UtLVNWandvMDA?oc=5` — France's Mistral launches AI model it says outperforms some Chinese rivals
   5. `link:https://news.google.com/rss/articles/CBMixwFBVV95cUxNX0ZPend6WDVibXdvSWM3NVFxY0hHUUd0RDNKSlBOQnBNNk9BWEs5M0h6X0pBTkhnVzkzNXJBSkpEdlA0LUF1NlRwV1cwUnFSQU1EVnhCeDNyc2I0Y2NyRTY3NVR0U095dlRSQW9NVE11TTVtLUxTOHN4NldKbE5zSlIyUENSOXlDdEttYmJxaG9RZ3RFMEhWTmt4aW0wYU80VzQzNU9Da2Z5V0NQWmZDbEswdHlPdUVlV0p0WDBqNEpqOWt0YWo0?oc=5` — New AGILE defence innovation programme approved by Parliament | Nieuws | Europees Parlement
   6. `link:https://news.google.com/rss/articles/CBMioAFBVV95cUxNQi1faEtDSHdFZkhNN2hZWG0tNTU3d05PaHBSVzV3VUFXNEhXMEhQXy1HZnhCZU9qaUFJMWF2OTUwNnJRS2RmcW9UZ1U4dVNETk9pSGJVTkR2QjBjaG9LTlREMXVFV3k0RFViSDdxU3haV1dYR25KOTRIUE8xOW43cDdteVJvNGhnX0xEOTRRLWtqcFIzQkJ0STVwa2hPOXY3?oc=5` — AI hopes, industrial malaise drive boom in German startups
@@ -29,16 +29,16 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261019T141451Z-24c39e09d525`
+- Current package: `worker-b-20261019T142753Z-e880025defb1`
 - Assigned unresolved records: **36**
-  1. `link:https://doi.org/10.48550/arxiv.2609.39285` — The Concentration of Artificial Intelligence in Big Tech and Its Implications for Human Rights in the European Union
-  2. `link:https://institutdelors.eu/en/publications/speech-by-e-moulin-strengthening-european-sovereignty-from-integration-to-competitiveness/` — Speech by E. Moulin: “Strengthening European sovereignty : from integration to competitiveness” - Institut Jacques Delors
-  3. `link:https://doi.org/10.1080/09654313.2026.2671213` — The geography of exclusion: cumulative causation and the persistence of lagging regions
-  4. `link:https://www.eif.org/news-and-publications/newsroom/latest-insights` — EIF thought leadership | Inspiring progress for future funding
-  5. `link:https://www.eif.org/files/publications/eif-equity-barometer-2026-q2.pdf` — EIF thought leadership | Inspiring progress for future funding
-  6. `link:https://institutdelors.eu/content/uploads/2026/06/Etude-CRIP_Revolution_IA_horizon_2035_Barichella_EN_2.pdf` — The Artificial Intelligence Revolution by 2035 - Institut Jacques Delors
-  7. `link:https://institutdelors.eu/content/uploads/2026/06/Etude-CRIP_Revolution_IA_horizon_2035_Barichella__Short_version_EN_2.pdf` — The Artificial Intelligence Revolution by 2035 (Short version) - Institut Jacques Delors
-  8. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=e7ce9d4e-c15e-11f1-988f-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Science, research and innovation performance of the EU 2026 - Publications Office of the EU
+  1. `link:https://doi.org/10.1080/09654313.2026.2671213` — The geography of exclusion: cumulative causation and the persistence of lagging regions
+  2. `link:https://www.eif.org/news-and-publications/newsroom/latest-insights` — EIF thought leadership | Inspiring progress for future funding
+  3. `link:https://www.eif.org/files/publications/eif-equity-barometer-2026-q2.pdf` — EIF thought leadership | Inspiring progress for future funding
+  4. `link:https://institutdelors.eu/content/uploads/2026/06/Etude-CRIP_Revolution_IA_horizon_2035_Barichella_EN_2.pdf` — The Artificial Intelligence Revolution by 2035 - Institut Jacques Delors
+  5. `link:https://institutdelors.eu/content/uploads/2026/06/Etude-CRIP_Revolution_IA_horizon_2035_Barichella__Short_version_EN_2.pdf` — The Artificial Intelligence Revolution by 2035 (Short version) - Institut Jacques Delors
+  6. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=e7ce9d4e-c15e-11f1-988f-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Science, research and innovation performance of the EU 2026 - Publications Office of the EU
+  7. `link:https://doi.org/10.1016/j.jik.2026.101139` — How do technical standards boost innovation quality? Evidence from new energy enterprises responding to European standards
+  8. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=b34947e9-c14e-11f1-988f-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Social and economic transformations - Publications Office of the EU
   - … plus 28 more in the package manifest
 
 ### Worker SINGLE

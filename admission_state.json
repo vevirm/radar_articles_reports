@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-admission-v1",
-  "updated_at": "2026-10-19T14:07:11Z",
+  "updated_at": "2026-10-19T14:20:09Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "decision": "drop",
@@ -33200,6 +33200,30 @@
       "updated_at": "2026-10-19T14:07:11Z",
       "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
       "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing.",
+      "duplicate_of": ""
+    },
+    "link:https://doi.org/10.48550/arxiv.2609.39285": {
+      "decision": "keep",
+      "target_strand": "A",
+      "reason_code": "A_SUBSTANTIVE_EU_RI",
+      "reason": "A Route 1/2: full paper relates vertically concentrated AI compute ownership to dependence of European public research and EU rights governance; mechanisms are substantive, though synthesis rather than original measurement.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "updated_at": "2026-10-19T14:20:08Z",
+      "deep_scan_package_id": "worker-b-20261019T134158Z-24c39e09d525",
+      "verification_note": "Third-attempt hard-final pass: inspected the matching original source and verified its identity; tested applicable A admission routes against the recovered substantive text.",
+      "duplicate_of": ""
+    },
+    "link:https://institutdelors.eu/en/publications/speech-by-e-moulin-strengthening-european-sovereignty-from-integration-to-competitiveness/": {
+      "decision": "drop",
+      "target_strand": "A",
+      "reason_code": "A_INSUFFICIENT_EVIDENCE_PRODUCT",
+      "reason": "A Route 1 identifies technological sovereignty; Route 2 identifies venture capital and claimed R&D-investment gaps; Route 3 would require a completed evidence-led EU R&I study. The source is a speech advocating capital-market reforms and citing other reports, not independently substantiating R&I-system findings.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "updated_at": "2026-10-19T14:20:09Z",
+      "deep_scan_package_id": "worker-b-20261019T134158Z-24c39e09d525",
+      "verification_note": "Third-attempt hard-final pass: inspected the matching original source and verified its identity; tested applicable A admission routes against the recovered substantive text.",
       "duplicate_of": ""
     }
   }
