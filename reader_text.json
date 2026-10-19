@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-19T13:03:52Z",
+  "generated_at": "2026-10-19T14:07:11Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -237708,8 +237708,2059 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiywFBVV95cUxPc1VtR2JJRVBuRUQ1elJQR3ZRUVpWMnh3aDlUaUh2Y0dHR0dJMzBGd2YwY2hGOHNQSEpraTZIcm5oTE9mOE5zMEdydVZIWUM3bjgwZ25oXzFjSlhEaTFOdTZEVGN4MVNNSHBwX2ZpcDRlSHE2cEJwdGtIV2FhVVc2VzctM2pVSHZuX3dsN2dVY1pkZERzRWFSWWtnNlRDSUdhN1BWVUhWb1N5UTFXTjk5YUpiR2lvb2xtQTgzbG13LVBsc0o3cXVBc3Rndw?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "db47cde0",
+      "identity_hash": "a8dca8f0a89ba709",
+      "reader_title": "EU and Canada discuss AI innovation and high-performance computing",
+      "reader_what": "EU and Canadian officials held a digital partnership dialogue covering AI innovation, supercomputing and connectivity.",
+      "reader_why": "Bilateral coordination creates an official channel for cooperation on strategically important digital research infrastructure.",
+      "reader_more": "The European Commission says it convened a Digital Dialogue with Canada on 1 October 2026. Topics included AI safety, regulation and innovation; high-performance computing; and Arctic connectivity. The announcement reports discussions, not a new binding accord or proven investment effects.",
+      "deep_analysis": {
+        "work_kind": "official current development",
+        "research_question": "",
+        "main_finding": "An EU–Canada Digital Dialogue on 1 October 2026 advanced discussion of cooperation in AI and high-performance computing.",
+        "method_or_basis": "European Commission DG CONNECT event announcement dated 1 October 2026.",
+        "qualification": "Dialogue took place; no new binding agreement, funding commitment or achieved technology outcome is established.",
+        "radar_relevance": "Documented international coordination on EU AI innovation, compute and strategic connectivity.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied Google News RSS article redirect does not expose substantive reader-facing text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact headline discovered DG CONNECT official item at https://digital-strategy.ec.europa.eu/en/news/eu-and-canada-held-digital-dialogue-advance-cooperation-digital-policy-and-innovation"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "European Commission DG CONNECT page gives 1 October 2026 event, named co-chairs, AI/HPC/connectivity discussion topics."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://digital-strategy.ec.europa.eu/en/news/eu-and-canada-held-digital-dialogue-advance-cooperation-digital-policy-and-innovation",
+            "title": "EU and Canada held a Digital Dialogue to advance cooperation on digital policy and innovation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_VERIFIED_RI_DEVELOPMENT",
+        "reason": "Official Commission notice verifies an EU–Canada Digital Dialogue held on 1 October addressing AI research/innovation, high-performance computing and Arctic connectivity; a new bilateral R&I-relevant coordination development, not evidence of delivered technical outcomes."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T14:07:07Z",
+      "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
+      "claims": [
+        {
+          "object": "digital.international_partnerships",
+          "secondary_objects": [
+            "compute.capacity"
+          ],
+          "actor": {
+            "name": "European Commission and Innovation, Science and Economic Development Canada",
+            "class": "eu_body"
+          },
+          "mechanism": "coordinates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-10-01",
+          "scope": {
+            "level": "eu",
+            "countries": [
+              "Canada"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Dialogue took place; no new binding agreement, funding commitment or achieved technology outcome is established.",
+          "text": "The EU and Canada held a Digital Dialogue on 1 October 2026 discussing AI innovation, high-performance computing and Arctic connectivity.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMiywFBVV95cUxPc1VtR2JJRVBuRUQ1elJQR3ZRUVpWMnh3aDlUaUh2Y0dHR0dJMzBGd2YwY2hGOHNQSEpraTZIcm5oTE9mOE5zMEdydVZIWUM3bjgwZ25oXzFjSlhEaTFOdTZEVGN4MVNNSHBwX2ZpcDRlSHE2cEJwdGtIV2FhVVc2VzctM2pVSHZuX3dsN2dVY1pkZERzRWFSWWtnNlRDSUdhN1BWVUhWb1N5UTFXTjk5YUpiR2lvb2xtQTgzbG13LVBsc0o3cXVBc3Rndw?oc=5",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:a8dca8f0a89ba709:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMikAFBVV95cUxPSDF2ckt6WU9KeG5sYXJYOUxWS1dvS1lPQ1A0MnJNajVicFBpY0h2Ykc2UWttYmFncG5KZ09RcW52Rkg0N1VDdXh2SEp6RE8xUF85dFhWT1dpc09LeWpfLUx1QTZjbXVDLWtJNFF0d0tyeVkwbWhweldOaDE2MkVPcTZUeWJpNjVIbWhFOVFqelg?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "3b17d76a",
+      "identity_hash": "33c9eee0de2be0cc",
+      "reader_title": "NATO military medic urges protection of European health facilities",
+      "reader_what": "A NATO medical official urged more resilient hospital infrastructure at a European health-security forum.",
+      "reader_more": "The published POLITICO Morning Health Care newsletter quotes Petter Iversen discussing dispersed facilities and underground hospital options in the context of Ukraine. This is preparedness advocacy, not a reported research or innovation system action. The originating publisher was blocked during recovery; substantive attributed syndicated text was available.",
+      "deep_analysis": {
+        "work_kind": "health-policy newsletter reporting",
+        "research_question": "",
+        "main_finding": "NATO military medical representative advocated infrastructure resilience against attacks.",
+        "method_or_basis": "Attributed POLITICO newsletter text republished by a third-party site; publisher attribution checked.",
+        "qualification": "Reported recommendations and remarks only; no new EU research or innovation decision demonstrated.",
+        "radar_relevance": "Health security is relevant in general but this item has no concrete European R&I development.",
+        "confidence": "medium",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Google News reader-facing RSS URL does not return article substance."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "News newsletter item has no stated DOI."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact title located attributed article at https://mingooland.com/2026/10/speed-up-eu-health-security-prep-says-nato-chief-medic/"
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Dominic Giannini Claudia Chiappa 2026 search matched archived/syndicated POLITICO newsletter attribution."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "blocked",
+            "note": "POLITICO Europe publisher domain access denied by robots; attributed full newsletter mirrored at Mingooland."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "NATO chief medic European Health Forum Gastein October 2026 located independent indexing and text of specific quoted Iversen remarks."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "attributed_syndicated_full_text",
+            "url": "https://mingooland.com/2026/10/speed-up-eu-health-security-prep-says-nato-chief-medic/",
+            "title": "Speed up EU health security prep, says NATO chief medic",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_RI_CHANGE",
+        "reason": "Verified POLITICO Morning Health Care newsletter is advocacy about protecting hospitals and civilian-military emergency readiness, not a substantive new European research/innovation programme, funding decision, research infrastructure change or technology-capability development. Strand C dateable R&I change and evidenced R&I bridge fail."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T14:07:07Z",
+      "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMivAFBVV95cUxON210SzFid0FYd1dnam9lZndYOUd3dE5yNHVZTGZoNUhTQ3V0eEREMG12OWRLNE5LcUhIbmVvZ2JZb2xWeDVERldSY0NKTndYMGFsdkxnVEdCTW9rekJnMExMMXotNzRZNjktTnFscTNTQ21VNFRjdE1jY09TTmVUSmRYN0tfSWFtaDNpa0NKUDRWOXQ1TlF6ZzNhRW5HYnFZUHFPbnE5TGtaV2hiQWZ5YWx0ZlBfVjFPV2E5Wg?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "3c981982",
+      "identity_hash": "00de265014013ad1",
+      "reader_title": "European data-centre vacancy advertising outpaces other technology hiring",
+      "reader_what": "Indeed vacancy data indicate stronger data-centre recruitment advertising, especially in Spain, Italy and Ireland.",
+      "reader_more": "Euronews reports that data-centre job advertisements outpaced their pre-pandemic levels across ten European markets by August 2026. Advertised pay exceeded comparable jobs in 28 of 29 country-occupation comparisons. Vacancy advertisements measure recruitment demand, not hires or completed computing-capacity investment. The article does not report a new policy or operational milestone.",
+      "deep_analysis": {
+        "work_kind": "journalistic data analysis",
+        "research_question": "Which European countries advertise growing data-centre vacancies and salary premiums?",
+        "main_finding": "Indeed advertisements increased for data-centre occupations in ten European economies versus pre-pandemic baseline.",
+        "method_or_basis": "Euronews synthesis of Indeed job-ad index, salary comparisons and interviews with Indeed economists.",
+        "qualification": "Advertisements are not hires or measures of completed AI compute capacity; no newly completed policy or infrastructure action is reported.",
+        "radar_relevance": "Descriptive workforce evidence could help contextualize compute expansion, but this reporting does not substantiate a Strand C change.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied Google News RSS article URL had no full article text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Publisher version recovered at https://www.euronews.com/2026/10/02/where-in-europe-is-data-centre-hiring-growing-fastest-and-why-do-these-jobs-pay-more"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Full 2 October Euronews story has Servet Yanatma byline, Indeed index and expert interviews."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euronews.com/2026/10/02/where-in-europe-is-data-centre-hiring-growing-fastest-and-why-do-these-jobs-pay-more",
+            "title": "Where in Europe is data centre hiring growing fastest – and why do these jobs pay more?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_RI_CHANGE",
+        "reason": "Euronews presents August 2026 job-ad and advertised-salary statistics from Indeed. These are workforce-market observations, not a newly enacted European R&I decision, new compute capacity or other dateable change under Strand C. It is also a journalistic summary, not the original completed research product for A Route 2/3."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T14:07:07Z",
+      "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMivAFBVV95cUxOd1lYLTBaRWJ2UHJuZXdhM3N4UUNGUEUwZDVGQXNrNHFYazJsOHpSdGhRU01YUlJBbmJ0WlM3NVVzRTV0Vkw0YU9xMVAyMy1WUExzVHBMYXNvcVJ4Rm5Lekg5WFZiV1pkZWg1dW9ySmNqSlg3UkdXa1BpcjJYU2otOENleUk3dU9jYlFScC1wTTRpaWFqUWVRTlRVNUlfMHo3el9DeDc4aXA3UkotVTZDekZTNUx3YlliUWdlWA?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "baa73757",
+      "identity_hash": "036b0ce173e82f05",
+      "reader_title": "Swedish AI-robotic system tests biological hypotheses in the lab",
+      "reader_what": "Researchers integrated AI reasoning, biological databases and laboratory robotics to test hypotheses about yeast.",
+      "reader_why": "The demonstration advances AI-supported laboratory research methods at Swedish research institutions.",
+      "reader_more": "A peer-reviewed 2026 Royal Society Interface study reports the integration of scientific knowledge with autonomous experimentation in systems biology. The system handled hypothesis generation and validation in a bounded yeast setting. The findings are about a specific laboratory demonstration, not replacement of human scientific supervision or verified acceleration across fields.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed research demonstration reported as news",
+        "research_question": "Can knowledge-grounded AI agents automate a practical hypothesis-test feedback loop in systems biology?",
+        "main_finding": "Integrated AI agents and laboratory robotics were used for experimental verification in yeast biology.",
+        "method_or_basis": "Royal Society Interface 23(240), 20260043; DOI 10.1098/rsif.2026.0043; Chalmers institutional publication list; Euronews reporting.",
+        "qualification": "Validation is confined to a specific systems-biology demonstration; wider transferability or speedup is not established.",
+        "radar_relevance": "New European research automation capability, with direct AI-for-science infrastructure implications.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Google News RSS link supplied without readable body."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact Euronews headline located https://www.euronews.com/2026/10/02/swedish-researchers-create-an-ai-scientist-that-designs-and-runs-its-own-experiments"
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Tiukova King 2026 research traced to Journal of the Royal Society Interface DOI 10.1098/rsif.2026.0043."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Peer-reviewed publication metadata and research team verified through https://pubmed.ncbi.nlm.nih.gov/42413936/ and Chalmers research listings."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "peer_reviewed_publication",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/42413936/",
+            "title": "Agentic AI integrated with scientific knowledge: laboratory validation in systems biology",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_VERIFIED_RI_DEVELOPMENT",
+        "reason": "Chalmers-linked peer-reviewed 2026 research verifies an integrated AI/robotic loop that forms and tests yeast biology hypotheses. Its public institutional announcement at end September documents a new European AI-enabled research-capability demonstration, but not general autonomy across scientific fields."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T14:07:07Z",
+      "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
+      "claims": [
+        {
+          "object": "ai.research_use",
+          "secondary_objects": [
+            "research.infrastructure"
+          ],
+          "actor": {
+            "name": "Chalmers University of Technology research team",
+            "class": "university_group"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-09-30",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "Sweden"
+            ]
+          },
+          "kind": "action",
+          "qualification": "Validation is confined to a specific systems-biology demonstration; wider transferability or speedup is not established.",
+          "text": "Swedish researchers demonstrated an AI-driven hypothesis and robotics loop for yeast systems biology in a peer-reviewed study publicised in September 2026.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMivAFBVV95cUxOd1lYLTBaRWJ2UHJuZXdhM3N4UUNGUEUwZDVGQXNrNHFYazJsOHpSdGhRU01YUlJBbmJ0WlM3NVVzRTV0Vkw0YU9xMVAyMy1WUExzVHBMYXNvcVJ4Rm5Lekg5WFZiV1pkZWg1dW9ySmNqSlg3UkdXa1BpcjJYU2otOENleUk3dU9jYlFScC1wTTRpaWFqUWVRTlRVNUlfMHo3el9DeDc4aXA3UkotVTZDekZTNUx3YlliUWdlWA?oc=5",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:036b0ce173e82f05:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiogFBVV95cUxOdUd2R202dTUxUl9ydW9WSE9MMlFhUGxLS1lFa1BFQ0I3bGV4d1R5Z2d2UEYyeFFlSmdFOGViMFhzazFMVW1feGlITWUxTDh1UGZSb1ktMlc2R3d1S2hNVVNkckMwelVqZ25Pa2phaDVpMEFlU3NXR1RjVGI0VGlIYUxJVVNGSTN0RG5pVHVyNllCY0Z5eDVCV2FSMlJYSmtGekE?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "7c463590",
+      "identity_hash": "9b4903b7bb1534dd",
+      "reader_title": "Commentator argues Europe could gain from AI diffusion",
+      "reader_what": "A Reuters opinion piece examines speculative risks to US AI investors and potential gains from European AI adoption.",
+      "reader_more": "Felix Martin compares scenarios in which the AI investment boom bursts or continues. The column argues that Europe could be relatively insulated from US AI financing risk while benefitting from wider adoption. These are forward-looking interpretations rather than independently demonstrated outcomes or a new EU research policy development.",
+      "deep_analysis": {
+        "work_kind": "financial commentary / opinion column",
+        "research_question": "",
+        "main_finding": "Author argues Europe may gain from AI adoption and relative insulation from US financing exposure.",
+        "method_or_basis": "Reuters Breakingviews 2 October 2026 interpretive commentary, citing third-party data and prior research.",
+        "qualification": "Scenario interpretation and opinion, not a newly observed EU R&I change or a complete evidence-led study.",
+        "radar_relevance": "Discusses AI strategic position but lacks Strand C action or Strand A qualifying substantive research product.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Google News RSS link does not provide recoverable article body."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Matching 2 October full opinion https://www.breakingviews.com/columns/big-view/why-europe-could-be-real-winner-ai-boom-2026-10-02/"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Reuters Breakingviews includes complete columnist analysis, verified byline and date."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.breakingviews.com/columns/big-view/why-europe-could-be-real-winner-ai-boom-2026-10-02/",
+            "title": "Why Europe could be the real winner of the AI boom",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_RI_CHANGE",
+        "reason": "A Reuters Breakingviews opinion column offers scenarios about Europe’s exposure to an AI investment bubble and benefits of AI adoption. It reports no new verifiable decision or substantive October 2 European R&I change. Forward-looking argument is not a completed European R&I-system study under A, and Strand C has no qualifying action."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T14:07:07Z",
+      "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.euronews.com/2026/10/02/inside-soitec-the-french-tech-company-powering-the-global-semiconductor-industry": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "6d7e37fc",
+      "identity_hash": "c1671e9479e7f28d",
+      "reader_title": "Profile of French advanced semiconductor substrate maker Soitec",
+      "reader_what": "An Euronews visit describes Soitec’s established wafer production, patents and research origins.",
+      "reader_more": "Euronews reports that Soitec produces advanced silicon substrates and traces the firm’s origins to CEA-Leti research near Grenoble. Its facilities, worldwide sales and patent stock are described as established activities. The report does not identify a newly enacted investment, breakthrough or programme change on 2 October.",
+      "deep_analysis": {
+        "work_kind": "industry company profile",
+        "research_question": "",
+        "main_finding": "Soitec maintains semiconductor-substrate manufacturing capabilities in France and abroad.",
+        "method_or_basis": "Euronews on-site company interview and production profile, 2 October 2026.",
+        "qualification": "Existing capability described; no distinct newly dateable R&I change established.",
+        "radar_relevance": "Strategic semiconductor industry is relevant context, but story itself lacks current Strand C development.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Provided Euronews URL matches the full substantive company profile at https://www.euronews.com/2026/10/02/inside-soitec-the-french-tech-company-powering-the-global-semiconductor-industry"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euronews.com/2026/10/02/inside-soitec-the-french-tech-company-powering-the-global-semiconductor-industry",
+            "title": "Inside Soitec, the French tech company powering the global semiconductor industry",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_RI_CHANGE",
+        "reason": "Euronews visits an established French semiconductor substrate producer and reports its historic origins, current output and patent stock. The dated piece is a company profile, with no dateable new R&I policy, funding change, production investment, material invention or industrial capability event established under Strand C."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T14:07:07Z",
+      "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.euronews.com/2026/10/02/eu-farmers-face-falling-produce-prices-as-fuel-and-fertiliser-costs-rise": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "adf9a9d8",
+      "identity_hash": "87fde5d5c31e198e",
+      "reader_title": "EU farmers face falling produce prices as fuel and fertiliser costs rise",
+      "reader_what": "Eurostat data report lower EU agricultural output prices and higher farm inputs during the second quarter of 2026.",
+      "reader_more": "Eurostat data report lower EU agricultural output prices and higher farm inputs during the second quarter of 2026. Agricultural market prices are not a newly documented R&I action or substantive technology-system change.",
+      "deep_analysis": {
+        "work_kind": "current reportage / static profile",
+        "research_question": "",
+        "main_finding": "Eurostat data report lower EU agricultural output prices and higher farm inputs during the second quarter of 2026.",
+        "method_or_basis": "Matching primary source https://www.euronews.com/2026/10/02/eu-farmers-face-falling-produce-prices-as-fuel-and-fertiliser-costs-rise",
+        "qualification": "Agricultural market prices are not a newly documented R&I action or substantive technology-system change.",
+        "radar_relevance": "The primary article establishes worsening agricultural prices and requests for farmer support, but no EU R&I research policy or innovation instrument; Strand C positive R&I bridge fails.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original source URL https://www.euronews.com/2026/10/02/eu-farmers-face-falling-produce-prices-as-fuel-and-fertiliser-costs-rise yields substantive matching text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Matching original item found: https://www.euronews.com/2026/10/02/eu-farmers-face-falling-produce-prices-as-fuel-and-fertiliser-costs-rise"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Verified issuing text and date at https://www.euronews.com/2026/10/02/eu-farmers-face-falling-produce-prices-as-fuel-and-fertiliser-costs-rise"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euronews.com/2026/10/02/eu-farmers-face-falling-produce-prices-as-fuel-and-fertiliser-costs-rise",
+            "title": "EU farmers face falling produce prices as fuel and fertiliser costs rise",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_RI_CHANGE",
+        "reason": "The primary article establishes worsening agricultural prices and requests for farmer support, but no EU R&I research policy or innovation instrument; Strand C positive R&I bridge fails."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T14:07:07Z",
+      "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://defence-industry-space.ec.europa.eu/record-number-proposals-submitted-under-european-defence-fund-2026-calls-612-project-proposals-apply-2026-10-02_en": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "982d6541",
+      "identity_hash": "51ee23d7e8226670",
+      "reader_title": "Record 612 project applications to the European Defence Fund in 2026",
+      "reader_what": "The Commission counted 612 submissions competing for approximately €1.006 billion in 2026 collaborative defence R&D calls.",
+      "reader_why": "The verified action affects European research, innovation or strategic technology capability.",
+      "reader_more": "The Commission counted 612 submissions competing for approximately €1.006 billion in 2026 collaborative defence R&D calls. Submissions were received; eligibility checks, evaluation and awards remained pending.",
+      "deep_analysis": {
+        "work_kind": "official development",
+        "research_question": "",
+        "main_finding": "The Commission counted 612 submissions competing for approximately €1.006 billion in 2026 collaborative defence R&D calls.",
+        "method_or_basis": "Matching primary source https://defence-industry-space.ec.europa.eu/record-number-proposals-submitted-under-european-defence-fund-2026-calls-612-project-proposals-apply-2026-10-02_en",
+        "qualification": "Submissions were received; eligibility checks, evaluation and awards remained pending.",
+        "radar_relevance": "DG DEFIS officially confirms 612 proposals submitted under the 2026 EDF R&D calls and €1.006 billion allocation; this is a new verifiable R&D funding-call milestone, not grants awarded.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original source URL https://defence-industry-space.ec.europa.eu/record-number-proposals-submitted-under-european-defence-fund-2026-calls-612-project-proposals-apply-2026-10-02_en yields substantive matching text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Matching original item found: https://defence-industry-space.ec.europa.eu/record-number-proposals-submitted-under-european-defence-fund-2026-calls-612-project-proposals-apply-2026-10-02_en"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Verified issuing text and date at https://defence-industry-space.ec.europa.eu/record-number-proposals-submitted-under-european-defence-fund-2026-calls-612-project-proposals-apply-2026-10-02_en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://defence-industry-space.ec.europa.eu/record-number-proposals-submitted-under-european-defence-fund-2026-calls-612-project-proposals-apply-2026-10-02_en",
+            "title": "Record 612 project applications to the European Defence Fund in 2026",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_VERIFIED_RI_DEVELOPMENT",
+        "reason": "DG DEFIS officially confirms 612 proposals submitted under the 2026 EDF R&D calls and €1.006 billion allocation; this is a new verifiable R&D funding-call milestone, not grants awarded."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T14:07:07Z",
+      "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
+      "claims": [
+        {
+          "object": "defence.innovation_funding",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "allocates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-10-02",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Submissions were received; eligibility checks, evaluation and awards remained pending.",
+          "text": "The Commission counted 612 submissions competing for approximately €1.006 billion in 2026 collaborative defence R&D calls.",
+          "confidence": "high",
+          "record_key": "link:https://defence-industry-space.ec.europa.eu/record-number-proposals-submitted-under-european-defence-fund-2026-calls-612-project-proposals-apply-2026-10-02_en",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:51ee23d7e8226670:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMivwFBVV95cUxOWWdhTm1wTi1qcGhMOXAxRWZhVHduWDM0ZDNBZjZNUlQ2bUZfbm12Z0ZReVNBX3BIS2o1VjRSZVNDeE04SUpVemxhN1hxWXhCOFlNMmVCU2VhbHc5T1RGS3Fkd21KcnZ6SVYyeWNRSDVyRmx2Nm42WElRUEFEWWdrUklmeGJWNW5FMWFTMW45X0ZxTmQyMFQ0c1FaQjdMSE9yVXBDNDVnbG8xR0MwSHpqTUE1c29zOGFTZTVTNTd4RQ?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "237a2725",
+      "identity_hash": "0f0ac96cacd06f7d",
+      "reader_title": "French supercomputer manufacturer Bull expands its Angers assembly capacity",
+      "reader_what": "Bull reopened an expanded Angers plant in October 2026, reporting assembly throughput growth from six to twelve racks monthly.",
+      "reader_more": "Bull reopened an expanded Angers plant in October 2026, reporting assembly throughput growth from six to twelve racks monthly. Production rate and planned further increases are company-reported; delivery of additional EU systems is not established.",
+      "deep_analysis": {
+        "work_kind": "official development",
+        "research_question": "",
+        "main_finding": "Bull reopened an expanded Angers plant in October 2026, reporting assembly throughput growth from six to twelve racks monthly.",
+        "method_or_basis": "Matching primary source https://live.euronext.com/en/financial-news/exclusive-french-supercomputer-maker-bull-doubles-output-boost-europes-ai-ambitions",
+        "qualification": "Production rate and planned further increases are company-reported; delivery of additional EU systems is not established.",
+        "radar_relevance": "Reuters documents reopening of Bull’s expanded Angers supercomputer assembly plant, doubling production from six to twelve racks monthly; this is a concrete EU-relevant compute supply capability change, based on company statements.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Original source URL https://news.google.com/rss/articles/CBMivwFBVV95cUxOWWdhTm1wTi1qcGhMOXAxRWZhVHduWDM0ZDNBZjZNUlQ2bUZfbm12Z0ZReVNBX3BIS2o1VjRSZVNDeE04SUpVemxhN1hxWXhCOFlNMmVCU2VhbHc5T1RGS3Fkd21KcnZ6SVYyeWNRSDVyRmx2Nm42WElRUEFEWWdrUklmeGJWNW5FMWFTMW45X0ZxTmQyMFQ0c1FaQjdMSE9yVXBDNDVnbG8xR0MwSHpqTUE1c29zOGFTZTVTNTd4RQ?oc=5 is an RSS redirect; no substantive text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Matching original item found: https://live.euronext.com/en/financial-news/exclusive-french-supercomputer-maker-bull-doubles-output-boost-europes-ai-ambitions"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Verified issuing text and date at https://live.euronext.com/en/financial-news/exclusive-french-supercomputer-maker-bull-doubles-output-boost-europes-ai-ambitions"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://live.euronext.com/en/financial-news/exclusive-french-supercomputer-maker-bull-doubles-output-boost-europes-ai-ambitions",
+            "title": "French supercomputer manufacturer Bull expands its Angers assembly capacity",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_VERIFIED_RI_DEVELOPMENT",
+        "reason": "Reuters documents reopening of Bull’s expanded Angers supercomputer assembly plant, doubling production from six to twelve racks monthly; this is a concrete EU-relevant compute supply capability change, based on company statements."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T14:07:08Z",
+      "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
+      "claims": [
+        {
+          "object": "compute.capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Bull",
+            "class": "company"
+          },
+          "mechanism": "adds_capacity",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-10-01",
+          "scope": {
+            "level": "company_in_eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Production rate and planned further increases are company-reported; delivery of additional EU systems is not established.",
+          "text": "Bull reopened an expanded Angers plant in October 2026, reporting assembly throughput growth from six to twelve racks monthly.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMivwFBVV95cUxOWWdhTm1wTi1qcGhMOXAxRWZhVHduWDM0ZDNBZjZNUlQ2bUZfbm12Z0ZReVNBX3BIS2o1VjRSZVNDeE04SUpVemxhN1hxWXhCOFlNMmVCU2VhbHc5T1RGS3Fkd21KcnZ6SVYyeWNRSDVyRmx2Nm42WElRUEFEWWdrUklmeGJWNW5FMWFTMW45X0ZxTmQyMFQ0c1FaQjdMSE9yVXBDNDVnbG8xR0MwSHpqTUE1c29zOGFTZTVTNTd4RQ?oc=5",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:0f0ac96cacd06f7d:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://eic.ec.europa.eu/impact/lynxes-innovation_en": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "03bb2c4c",
+      "identity_hash": "40b753f61be2ea6d",
+      "reader_title": "LynXes Innovation",
+      "reader_what": "The EIC profile promotes LynXes compact X-ray spectroscopy products for laboratory materials research.",
+      "reader_more": "The EIC profile promotes LynXes compact X-ray spectroscopy products for laboratory materials research. Page describes existing technology and future intentions, not a distinct completed new action.",
+      "deep_analysis": {
+        "work_kind": "current reportage / static profile",
+        "research_question": "",
+        "main_finding": "The EIC profile promotes LynXes compact X-ray spectroscopy products for laboratory materials research.",
+        "method_or_basis": "Matching primary source https://eic.ec.europa.eu/impact/lynxes-innovation_en",
+        "qualification": "Page describes existing technology and future intentions, not a distinct completed new action.",
+        "radar_relevance": "The EIC website is a company showcase featuring existing spectrometer technology, earlier EIC support and aspirations; it gives no dated fresh funding decision, technology milestone or new R&I development, so Strand C action gate fails.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original source URL https://eic.ec.europa.eu/impact/lynxes-innovation_en yields substantive matching text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Matching original item found: https://eic.ec.europa.eu/impact/lynxes-innovation_en"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Verified issuing text and date at https://eic.ec.europa.eu/impact/lynxes-innovation_en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://eic.ec.europa.eu/impact/lynxes-innovation_en",
+            "title": "LynXes Innovation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_RI_CHANGE",
+        "reason": "The EIC website is a company showcase featuring existing spectrometer technology, earlier EIC support and aspirations; it gives no dated fresh funding decision, technology milestone or new R&I development, so Strand C action gate fails."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T14:07:08Z",
+      "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.euronews.com/2026/09/30/no-more-radio-silence-eu-plans-cross-border-lifeline-for-emergency-services": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "b37e6446",
+      "identity_hash": "2e89126a7b8b5663",
+      "reader_title": "Commission proposes EU-wide cross-border emergency communication system",
+      "reader_what": "The European Commission proposed interoperable, secure EU emergency communications with industry and research-organisation innovation participation.",
+      "reader_more": "The European Commission proposed interoperable, secure EU emergency communications with industry and research-organisation innovation participation. Proposal only; Parliament and Council adoption remain outstanding; no system is yet deployed.",
+      "deep_analysis": {
+        "work_kind": "official development",
+        "research_question": "",
+        "main_finding": "The European Commission proposed interoperable, secure EU emergency communications with industry and research-organisation innovation participation.",
+        "method_or_basis": "Matching primary source https://home-affairs.ec.europa.eu/news/new-eu-critical-communication-system-first-responders-2026-09-30_en",
+        "qualification": "Proposal only; Parliament and Council adoption remain outstanding; no system is yet deployed.",
+        "radar_relevance": "Commission issued a new legislative proposal on 30 September 2026 for an interoperable EU secure first-responder communications system; its stated research-organisation and industry innovation link is explicit, and adoption has not occurred.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original source URL https://www.euronews.com/2026/09/30/no-more-radio-silence-eu-plans-cross-border-lifeline-for-emergency-services yields substantive matching text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Matching original item found: https://home-affairs.ec.europa.eu/news/new-eu-critical-communication-system-first-responders-2026-09-30_en"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Verified issuing text and date at https://home-affairs.ec.europa.eu/news/new-eu-critical-communication-system-first-responders-2026-09-30_en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://home-affairs.ec.europa.eu/news/new-eu-critical-communication-system-first-responders-2026-09-30_en",
+            "title": "Commission proposes EU-wide cross-border emergency communication system",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_VERIFIED_RI_DEVELOPMENT",
+        "reason": "Commission issued a new legislative proposal on 30 September 2026 for an interoperable EU secure first-responder communications system; its stated research-organisation and industry innovation link is explicit, and adoption has not occurred."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T14:07:08Z",
+      "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
+      "claims": [
+        {
+          "object": "critical_infrastructure.resilience",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-09-30",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Proposal only; Parliament and Council adoption remain outstanding; no system is yet deployed.",
+          "text": "The European Commission proposed interoperable, secure EU emergency communications with industry and research-organisation innovation participation.",
+          "confidence": "high",
+          "record_key": "link:https://www.euronews.com/2026/09/30/no-more-radio-silence-eu-plans-cross-border-lifeline-for-emergency-services",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:2e89126a7b8b5663:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMisAFBVV95cUxPeDExTDdZajJGWXM3TWRRR0xwRklnR2JuRUx1UHNwVUxmcjl1QlQ3SmlFY1Nzbk44U2JDQWV3VFZnZjRBSWRPV3BCSmE1YmxPNTBhQkhvVVQ2NTBsS3Bra0l5Q2FVdGtFUzJaX196eFBIcUdwMGtTbVlBeV92aVJEY1JBdmtXV2xIeTdoa3VBRnFxWG1pTzhHRXdRNElkRnVIUm44bk5qa3FEVUJkZDl2Rw?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "b7a4665b",
+      "identity_hash": "9d33c18bfb393e32",
+      "reader_title": "Three EU governments call for a 2040 renewable energy target",
+      "reader_what": "Spain, Portugal and Luxembourg urged the EU to set a renewable energy deployment target for 2040.",
+      "reader_more": "Spain, Portugal and Luxembourg urged the EU to set a renewable energy deployment target for 2040. A proposal by states, not an adopted target, research funding measure or R&I programme.",
+      "deep_analysis": {
+        "work_kind": "current reportage / static profile",
+        "research_question": "",
+        "main_finding": "Spain, Portugal and Luxembourg urged the EU to set a renewable energy deployment target for 2040.",
+        "method_or_basis": "Matching primary source https://wdez.com/2026/09/29/spain-portugal-luxembourg-push-for-2040-renewable-energy-target/",
+        "qualification": "A proposal by states, not an adopted target, research funding measure or R&I programme.",
+        "radar_relevance": "Reuters documents three governments proposing a 2040 renewable share target; the request concerns energy deployment and consumption, without concrete R&I programme, research capability or technology innovation decision. The Strand C evidenced R&I link fails.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Original source URL https://news.google.com/rss/articles/CBMisAFBVV95cUxPeDExTDdZajJGWXM3TWRRR0xwRklnR2JuRUx1UHNwVUxmcjl1QlQ3SmlFY1Nzbk44U2JDQWV3VFZnZjRBSWRPV3BCSmE1YmxPNTBhQkhvVVQ2NTBsS3Bra0l5Q2FVdGtFUzJaX196eFBIcUdwMGtTbVlBeV92aVJEY1JBdmtXV2xIeTdoa3VBRnFxWG1pTzhHRXdRNElkRnVIUm44bk5qa3FEVUJkZDl2Rw?oc=5 is an RSS redirect; no substantive text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Matching original item found: https://wdez.com/2026/09/29/spain-portugal-luxembourg-push-for-2040-renewable-energy-target/"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Verified issuing text and date at https://wdez.com/2026/09/29/spain-portugal-luxembourg-push-for-2040-renewable-energy-target/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://wdez.com/2026/09/29/spain-portugal-luxembourg-push-for-2040-renewable-energy-target/",
+            "title": "Three EU governments call for a 2040 renewable energy target",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_RI_CHANGE",
+        "reason": "Reuters documents three governments proposing a 2040 renewable share target; the request concerns energy deployment and consumption, without concrete R&I programme, research capability or technology innovation decision. The Strand C evidenced R&I link fails."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T14:07:08Z",
+      "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMihgFBVV95cUxPVWtOTjQ0dUZVQ2lLdTRONGI1dDhybC1Bc0w5aTRwd3VzUUlaZ0J0TWo5SFBINHBmcFNnSGNoblBRWElmenJCTC1EVThHU3VIMHlLdllVV1hZeEx1N2VzUjBlSFJMdWl1RlVZbFpCMlkxZkFPOFhJajBhLVMwTTBvWDI3Sl9HQQ?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "5ae91958",
+      "identity_hash": "0f7811af3488eae7",
+      "reader_title": "Politicization Dynamics in European Integration – Latest research and news",
+      "reader_what": "Nature indexes assorted older articles under a topical subject collection.",
+      "reader_more": "Nature indexes assorted older articles under a topical subject collection. No standalone new research finding or R&I development is stated.",
+      "deep_analysis": {
+        "work_kind": "current reportage / static profile",
+        "research_question": "",
+        "main_finding": "Nature indexes assorted older articles under a topical subject collection.",
+        "method_or_basis": "Matching primary source https://www.nature.com/subjects/politicization-dynamics-in-european-integration",
+        "qualification": "No standalone new research finding or R&I development is stated.",
+        "radar_relevance": "The Nature page is a continually updated topic-navigation page, not a dated substantive new development. It has no current programme change, R&I research release or specific qualifying C event.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Original source URL https://news.google.com/rss/articles/CBMihgFBVV95cUxPVWtOTjQ0dUZVQ2lLdTRONGI1dDhybC1Bc0w5aTRwd3VzUUlaZ0J0TWo5SFBINHBmcFNnSGNoblBRWElmenJCTC1EVThHU3VIMHlLdllVV1hZeEx1N2VzUjBlSFJMdWl1RlVZbFpCMlkxZkFPOFhJajBhLVMwTTBvWDI3Sl9HQQ?oc=5 is an RSS redirect; no substantive text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Matching original item found: https://www.nature.com/subjects/politicization-dynamics-in-european-integration"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Verified issuing text and date at https://www.nature.com/subjects/politicization-dynamics-in-european-integration"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.nature.com/subjects/politicization-dynamics-in-european-integration",
+            "title": "Politicization Dynamics in European Integration – Latest research and news",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_RI_CHANGE",
+        "reason": "The Nature page is a continually updated topic-navigation page, not a dated substantive new development. It has no current programme change, R&I research release or specific qualifying C event."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T14:07:08Z",
+      "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMirwFBVV95cUxQeFVPUnVib0ZyTGhNaF9CV3laZHp2a21SckpJckhJZXBwQVEwNXBPT3RxVUZqXzlsSG1sQ2FmWmR6QkVfNS1Id2RQUVJMSXZYSnVjaWdIZC1BRGdpOUFZTFFWdm5ETEpLY2I1eHFTMjNCWHRVLTU4a3JsVjZROGVIMzQyMmxfcXFOQXk2TFdZR2lFdG1EanBhRDRVWVhSSzd3d3RHZWhMam45ZzVJTXhj?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "c74590f0",
+      "identity_hash": "0dd0ac54555df81f",
+      "reader_title": "Europe Seen Spending More Than $500 Billion to Adapt to Climate Change",
+      "reader_what": "Bloomberg Intelligence estimated European adaptation outlays may reach roughly €500 billion through 2035.",
+      "reader_more": "Bloomberg Intelligence estimated European adaptation outlays may reach roughly €500 billion through 2035. A forward spending estimate, not observed expenditure or newly adopted R&I funding; sectors are general climate resilience.",
+      "deep_analysis": {
+        "work_kind": "current reportage / static profile",
+        "research_question": "",
+        "main_finding": "Bloomberg Intelligence estimated European adaptation outlays may reach roughly €500 billion through 2035.",
+        "method_or_basis": "Matching primary source https://amp.insurancejournal.com/news/international/2026/09/23/886508.htm",
+        "qualification": "A forward spending estimate, not observed expenditure or newly adopted R&I funding; sectors are general climate resilience.",
+        "radar_relevance": "This Bloomberg syndicated report summarizes a Bloomberg Intelligence projection of European spending on climate adaptation, largely infrastructure repairs and hazard defenses; no European R&I measure or innovation system change is identified for Strand C.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Original source URL https://news.google.com/rss/articles/CBMirwFBVV95cUxQeFVPUnVib0ZyTGhNaF9CV3laZHp2a21SckpJckhJZXBwQVEwNXBPT3RxVUZqXzlsSG1sQ2FmWmR6QkVfNS1Id2RQUVJMSXZYSnVjaWdIZC1BRGdpOUFZTFFWdm5ETEpLY2I1eHFTMjNCWHRVLTU4a3JsVjZROGVIMzQyMmxfcXFOQXk2TFdZR2lFdG1EanBhRDRVWVhSSzd3d3RHZWhMam45ZzVJTXhj?oc=5 is an RSS redirect; no substantive text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Matching original item found: https://amp.insurancejournal.com/news/international/2026/09/23/886508.htm"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Verified issuing text and date at https://amp.insurancejournal.com/news/international/2026/09/23/886508.htm"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://amp.insurancejournal.com/news/international/2026/09/23/886508.htm",
+            "title": "Europe Seen Spending More Than $500 Billion to Adapt to Climate Change",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_RI_CHANGE",
+        "reason": "This Bloomberg syndicated report summarizes a Bloomberg Intelligence projection of European spending on climate adaptation, largely infrastructure repairs and hazard defenses; no European R&I measure or innovation system change is identified for Strand C."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T14:07:08Z",
+      "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiX0FVX3lxTE9vd0hlSjJ2ZjBkLXAyckpJY1dWRHhrY2xVVHctakt3RnlqdlZYU1poNWg5QVYtbXBhdkdKRE9xR29xM1RvZmtzT19MQTR1ekQ5eWhZRk1yLUxNUlpPYmIw?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "8ecb03a4",
+      "identity_hash": "a753d67cbe01fb10",
+      "reader_title": "Barriers to women’s leadership in German global-health research",
+      "reader_what": "Interview and focus-group research identifies structural, workplace and social barriers to women’s advancement into academic research leadership.",
+      "reader_why": "Recruitment and progression structures affect leadership capacity and career equity in German research institutions.",
+      "reader_more": "Researchers studied twenty mid- to senior-level women across eight German universities and institutions through focus groups and follow-up interviews. Reported challenges include fixed-term contracts, international mobility demands and hierarchical workplaces. The authors recommend structural and institutional action, but the study reflects self-selected participants’ experiences rather than measuring causal effects.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed qualitative research on researcher careers",
+        "research_question": "Which institutional, sector-specific and social factors shape women’s advancement to leadership in German global-health research?",
+        "main_finding": "Research career pathways are affected by interacting institutional, workplace and societal barriers including fixed-term contracts and international-mobility requirements.",
+        "method_or_basis": "Five focus group discussions involving 20 research participants across eight German institutions plus eight follow-up interviews; qualitative coding.",
+        "qualification": "Self-selected, small sample; findings capture reported experiences and perceptions, not representative prevalence or causal estimates.",
+        "radar_relevance": "Direct evidence on researcher careers and governance in the German R&I system (Strand A Route 3).",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Original Google News RSS pointer had no substantive reader-facing text."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Publisher DOI https://doi.org/10.1038/s41598-026-72104-x resolves to the matching Scientific Reports study."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Title located at https://www.nature.com/articles/s41598-026-72104-x"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Full open-access primary research article reviewed at Nature Scientific Reports, including methods, results and limitations."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.nature.com/articles/s41598-026-72104-x",
+            "title": "Understanding the leaky pipeline for female leadership in global health research in Germany",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A completed peer-reviewed qualitative study directly examines career progression and structural barriers for women researchers in Germany’s global-health research institutions. This independently passes Strand A Route 3 (research careers and institutional workforce governance), regardless of geopolitical language."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T14:07:09Z",
+      "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
+      "claims": [
+        {
+          "object": "talent.career_structure",
+          "secondary_objects": [
+            "research.system_governance"
+          ],
+          "actor": {
+            "name": "Lorenz and co-authors",
+            "class": "university_group"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2026-09-22",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "Germany"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "Self-selected, small sample; findings capture reported experiences and perceptions, not representative prevalence or causal estimates.",
+          "text": "A qualitative study with German global-health researchers identifies workplace, institutional and sectoral barriers to women attaining research leadership roles.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMiX0FVX3lxTE9vd0hlSjJ2ZjBkLXAyckpJY1dWRHhrY2xVVHctakt3RnlqdlZYU1poNWg5QVYtbXBhdkdKRE9xR29xM1RvZmtzT19MQTR1ekQ5eWhZRk1yLUxNUlpPYmIw?oc=5",
+          "merit": 81,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:a753d67cbe01fb10:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=4fe7e0f5-b309-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "77d8a9cd",
+      "identity_hash": "1f706ae6de46f073",
+      "reader_title": "China’s cleantech industrial policy creates systemic pressure on European innovators",
+      "reader_what": "An EU Parliament briefing analyses China’s subsidy, localisation and industrial-clustering model and competitive implications for EU clean technologies.",
+      "reader_why": "Policy-enabled value chains and rapid R&D cycles shape Europe’s clean-technology innovation position and dependencies.",
+      "reader_more": "The briefing attributes Chinese cleantech competitiveness to coordinated investment incentives, temporary localisation requirements and support across industrial clusters. It describes how these structures permit companies to endure low initial returns and iterate quickly. The author argues that Europe needs to distinguish areas for affordable technology imports from those where industrial capabilities warrant protection. This is an analytical diagnosis and recommendation, not proof that a particular policy will succeed.",
+      "deep_analysis": {
+        "work_kind": "European Parliament commissioned policy briefing",
+        "research_question": "How has Chinese industrial support shaped cleantech innovation and competitive pressures on Europe?",
+        "main_finding": "China’s long-term industrial policy and clustered value chains generate system-wide competitive pressure on European cleantech industries and research/innovation investment.",
+        "method_or_basis": "European Parliament policy briefing, Johanna Krebs, PE 795.712; substantive matching PDF excerpt included in job package and official EU publication metadata/abstract.",
+        "qualification": "Comparative institutional analysis and policy interpretation; no experimental proof of individual subsidy causal effects or enacted EU policy change.",
+        "radar_relevance": "Direct European cleantech technology position, R&D and industrial dependency evidence, Strand A routes 1 and 2.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Official Publications Office PDF URL https://op.europa.eu/o/opportal-service/download-handler?identifier=4fe7e0f5-b309-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part= was already retrieved by scanner as 24,000 characters of substantive matching first-party PDF excerpt."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Scanner-supplied matching EU official PDF excerpt documents detailed policy mechanisms and EU competitive effects; the first-party route retained in source_material."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Official record DOI 10.2861/2519824 matches Johanna Krebs Focus on China briefing."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publication record https://op.europa.eu/en/publication-detail/-/publication/4fe7e0f5-b309-11f1-81de-01aa75ed71a1/language-en verifies full metadata, subject and substantive description."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_publisher_substantive_source",
+            "url": "https://op.europa.eu/en/publication-detail/-/publication/4fe7e0f5-b309-11f1-81de-01aa75ed71a1/language-en",
+            "title": "Cleantech innovation, industrial decarbonisation and global competition: Focus on China",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "European Parliament commissioned analysis documents mechanisms behind Chinese cleantech dominance and directly evaluates European companies’ technological capacity, R&D competition and dependencies. It qualifies under Strand A Routes 1 and 2, as a substantive published R&I policy evidence product, not a new Strand C policy act."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T14:07:09Z",
+      "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
+      "claims": [
+        {
+          "object": "innovation.green_technology",
+          "secondary_objects": [
+            "industrial.competitiveness"
+          ],
+          "actor": {
+            "name": "Johanna Krebs for the European Parliament",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2026-09-17",
+          "scope": {
+            "level": "eu",
+            "countries": [
+              "China"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "Comparative institutional analysis and policy interpretation; no experimental proof of individual subsidy causal effects or enacted EU policy change.",
+          "text": "A European Parliament briefing diagnoses policy-supported Chinese cleantech value chains and rapid R&D cycles as competitive pressure on European cleantech innovators.",
+          "confidence": "high",
+          "record_key": "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=4fe7e0f5-b309-11f1-81de-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:1f706ae6de46f073:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMimwFBVV95cUxQdUY4SVp6Q1hPcUtWT0drYWluMnIzOVNNOW53REVYUk9EZTZRcDBoY1BSZmJMRmJKY2FOTkFLVkpKeFV6cWZqb1EzWkFvSUxKdHZNeE5tU1N6SUlCS2V1LUx0OFRIdXdXR1RMU0NvQTkyaDJGQmtteEk2bGNleHhIdUgtVmFjaUJ4LUVLWGZ0b1o0RjFjNzZ3VE5Fcw?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "d4a6f881",
+      "identity_hash": "5b76b71d8a9bf2b8",
+      "reader_title": "Macron calls for European satellite-to-phone technology alliance",
+      "reader_what": "France’s president urged European telecom and satellite companies to create a direct-to-device connectivity alliance by 2030.",
+      "reader_why": "The proposal addresses Europe’s strategic satellite communications capability and dependence on external systems.",
+      "reader_more": "At the Paris Space Summit, Macron called for a consortium across European telecom operators, satellite companies and manufacturers. His goal was a European direct-to-device service offering by 2030. His remarks establish a political and industrial proposal, not the formation of an alliance, signed investment or delivered service.",
+      "deep_analysis": {
+        "work_kind": "official presidential industrial technology proposal",
+        "research_question": "",
+        "main_finding": "Macron publicly proposed a European D2D satellite-to-phone industrial alliance in September 2026.",
+        "method_or_basis": "Official Élysée transcript of the 8 September Paris Space Summit speech.",
+        "qualification": "The alliance was advocated, not announced as formed or funded; the 2030 milestone is an ambition.",
+        "radar_relevance": "Technology cooperation and future sovereign satellite-connectivity capability.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Google News RSS URL lacked matching substantive text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Matching Euractiv paywalled report located https://www.euractiv.com/news/macron-calls-on-european-telcos-to-forge-space-internet-alliance/"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Original French president statement recovered https://www.elysee.fr/emmanuel-macron/2026/09/08/sommet-international-sur-lespace-a-paris detailing proposed D2D alliance and 2030 ambition."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.elysee.fr/emmanuel-macron/2026/09/08/sommet-international-sur-lespace-a-paris",
+            "title": "International Space Summit in Paris: address by Emmanuel Macron",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_VERIFIED_RI_DEVELOPMENT",
+        "reason": "French presidential speech on 8 September 2026 explicitly calls for a European direct-to-device satellite/telecom industrial alliance by 2030. This is a source-supported new proposal for strategic European connectivity capability, not an alliance already formed."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T14:07:10Z",
+      "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
+      "claims": [
+        {
+          "object": "digital.infrastructure",
+          "secondary_objects": [
+            "digital.sovereignty"
+          ],
+          "actor": {
+            "name": "Emmanuel Macron",
+            "class": "member_state"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-09-08",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "France"
+            ]
+          },
+          "kind": "advocacy",
+          "qualification": "The alliance was advocated, not announced as formed or funded; the 2030 milestone is an ambition.",
+          "text": "At the Paris space summit, Macron called for a European direct-to-device satellite connectivity alliance capable of providing service by 2030.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMimwFBVV95cUxQdUY4SVp6Q1hPcUtWT0drYWluMnIzOVNNOW53REVYUk9EZTZRcDBoY1BSZmJMRmJKY2FOTkFLVkpKeFV6cWZqb1EzWkFvSUxKdHZNeE5tU1N6SUlCS2V1LUx0OFRIdXdXR1RMU0NvQTkyaDJGQmtteEk2bGNleHhIdUgtVmFjaUJ4LUVLWGZ0b1o0RjFjNzZ3VE5Fcw?oc=5",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:5b76b71d8a9bf2b8:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMickFVX3lxTE5zZmNYczFJMWRNNnZsZ21RenpjVFpXSGF5TTlTZXdnOUgxMG1VdzFIUUFCR2g4X05iU3NNWUd6TzYxR3RSQ0VXTmVLZ09IaTVBM00tcDlPMlNGRXhqWThHTnhWYm1oTnVoeDloSVhfVjM5dw?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "34fee1b1",
+      "identity_hash": "67625127ff2f4217",
+      "reader_title": "The French way of electrification",
+      "reader_what": "The feature analyses how France’s nuclear-heavy electricity system influences debates about expanding electrification.",
+      "reader_more": "The feature analyses how France’s nuclear-heavy electricity system influences debates about expanding electrification. A broad energy-policy analysis, not a research and innovation system decision or evidenced new technology milestone.",
+      "deep_analysis": {
+        "work_kind": "current reportage / static profile",
+        "research_question": "",
+        "main_finding": "The feature analyses how France’s nuclear-heavy electricity system influences debates about expanding electrification.",
+        "method_or_basis": "Matching primary source https://www.euractiv.com/news/the-french-way-of-electrification/",
+        "qualification": "A broad energy-policy analysis, not a research and innovation system decision or evidenced new technology milestone.",
+        "radar_relevance": "A reported explanatory feature about France’s electricity mix and electrification plans is not a fresh European R&I funding, technology research or capability event; it describes prior power-sector choices and policy aspirations.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Original source URL https://news.google.com/rss/articles/CBMickFVX3lxTE5zZmNYczFJMWRNNnZsZ21RenpjVFpXSGF5TTlTZXdnOUgxMG1VdzFIUUFCR2g4X05iU3NNWUd6TzYxR3RSQ0VXTmVLZ09IaTVBM00tcDlPMlNGRXhqWThHTnhWYm1oTnVoeDloSVhfVjM5dw?oc=5 is an RSS redirect; no substantive text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Matching original item found: https://www.euractiv.com/news/the-french-way-of-electrification/"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Verified issuing text and date at https://www.euractiv.com/news/the-french-way-of-electrification/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euractiv.com/news/the-french-way-of-electrification/",
+            "title": "The French way of electrification",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_RI_CHANGE",
+        "reason": "A reported explanatory feature about France’s electricity mix and electrification plans is not a fresh European R&I funding, technology research or capability event; it describes prior power-sector choices and policy aspirations."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T14:07:10Z",
+      "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMifkFVX3lxTE9TRExTdEZISFROa1psdjh4LVdkc1ExcUM4ekwybXlUNEIwbVJySW9IMTNxcmRYdzdGRTk5N3VpeDU4Q01naERzalowX0FBSV96dHQyZFB2cUFjQUN4QVhqM05zVGI3djZkQjlGYTJjSEJWTnFobVpnOWdtVDFaQQ?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "ee095163",
+      "identity_hash": "e66cde698831f354",
+      "reader_title": "European Parliament study assesses EU cleantech position against China and the US",
+      "reader_what": "Researchers compare EU cleantech innovation, industrial deployment and manufacturing capabilities with those of China and the US.",
+      "reader_why": "Evidence on innovation strengths, vulnerabilities and technology dependencies can inform European clean-industry policy.",
+      "reader_more": "The European Parliament commissioned a comparative study of cleantech investment, innovation, manufacturing and policy instruments in the EU, US and China. The authors describe EU strengths and exposure to dependencies and recommend measures to improve competitiveness and decarbonisation. The report is a completed analytical product, not confirmation that its recommendations were adopted.",
+      "deep_analysis": {
+        "work_kind": "commissioned comparative R&I policy study",
+        "research_question": "Where does European cleantech innovation and production stand relative to the US and China?",
+        "main_finding": "EU clean-technology advantages and vulnerabilities coexist with strategic manufacturing and value-chain dependencies on international competitors.",
+        "method_or_basis": "European Parliament 2026 comparative policy study of clean-technology investment, manufacturing, deployment and innovation systems; EU Publications Office record and substantive publisher description.",
+        "qualification": "Comparative study conclusions and recommendations do not establish that recommended policy measures were implemented or effective.",
+        "radar_relevance": "Direct assessment of EU cleantech innovation and competitive dependency mechanisms, Strand A Routes 1–3.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "News RSS article link lacked the report full text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact report title located European Parliament publication record https://op.europa.eu/en/publication-detail/-/publication/3f2032f4-a289-11f1-b25c-01aa75ed71a1/language-en"
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "EU publisher DOI 10.2861/7596996 matches comparative study and author list."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Official EU report description substantially identifies scope, analysis dimensions and evidence-based conclusions; 106-page report available for legal download."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://op.europa.eu/en/publication-detail/-/publication/3f2032f4-a289-11f1-b25c-01aa75ed71a1/language-en",
+            "title": "Cleantech innovation, industrial decarbonisation and global competition: where does the EU stand in the race towards net-zero compared to the US and China?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "European Parliament analytical study evaluates EU clean-technology innovation, manufacturing, strategic dependencies and competitiveness relative to the US and China. It is high-quality European R&I structural evidence qualifying A Routes 1, 2 and 3, not a recent Strand C decision."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T14:07:11Z",
+      "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
+      "claims": [
+        {
+          "object": "innovation.green_technology",
+          "secondary_objects": [
+            "industrial.competitiveness"
+          ],
+          "actor": {
+            "name": "Banfi and co-authors for the European Parliament",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2026-08-27",
+          "scope": {
+            "level": "eu",
+            "countries": [
+              "China",
+              "United States"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "Comparative study conclusions and recommendations do not establish that recommended policy measures were implemented or effective.",
+          "text": "A European Parliament study compares EU, Chinese and US cleantech innovation and manufacturing and identifies European vulnerabilities and dependencies.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMifkFVX3lxTE9TRExTdEZISFROa1psdjh4LVdkc1ExcUM4ekwybXlUNEIwbVJySW9IMTNxcmRYdzdGRTk5N3VpeDU4Q01naERzalowX0FBSV96dHQyZFB2cUFjQUN4QVhqM05zVGI3djZkQjlGYTJjSEJWTnFobVpnOWdtVDFaQQ?oc=5",
+          "merit": 64,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:e66cde698831f354:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMinwFBVV95cUxNSlJEX19pMXB1eXZFM1FGME51QVA5cGZwaTlCcUdCVk8xNlJOc0xKZXlsa08wa2VBTE5sNnRLR0dVR2lUV3pfY09zZ3hUYjJ5clhCUlV2aUFCcmNSZHpTdlVqTk1KUjFvdlVOWGgwdVlpZHlBbkVaT1dGZUJUbGNuc1daN1lVdFBjRjZjYnZsMWdSOXhtMjdTclkwMHpnLVk?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "675767a6",
+      "identity_hash": "f628dca5e9334a77",
+      "reader_title": "Europe’s wildfire devastation could almost triple, new research finds",
+      "reader_what": "A climate-model study projects substantially increased European burned areas under high-emissions scenarios.",
+      "reader_more": "A climate-model study projects substantially increased European burned areas under high-emissions scenarios. Model projections are not observed future losses, and the report does not establish a European R&I policy/capability event.",
+      "deep_analysis": {
+        "work_kind": "current reportage / static profile",
+        "research_question": "",
+        "main_finding": "A climate-model study projects substantially increased European burned areas under high-emissions scenarios.",
+        "method_or_basis": "Matching primary source https://euobserver.com/232936/europes-wildfire-devastation-could-almost-triple-new-research-finds/",
+        "qualification": "Model projections are not observed future losses, and the report does not establish a European R&I policy/capability event.",
+        "radar_relevance": "EUobserver reports Potsdam Institute climate-fire scenario research, but it models wildfire damage rather than Europe’s research system, R&I workforce, technology capabilities or substantive EU R&I policy change. C’s verifiable EU R&I development bridge fails.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Original source URL https://news.google.com/rss/articles/CBMinwFBVV95cUxNSlJEX19pMXB1eXZFM1FGME51QVA5cGZwaTlCcUdCVk8xNlJOc0xKZXlsa08wa2VBTE5sNnRLR0dVR2lUV3pfY09zZ3hUYjJ5clhCUlV2aUFCcmNSZHpTdlVqTk1KUjFvdlVOWGgwdVlpZHlBbkVaT1dGZUJUbGNuc1daN1lVdFBjRjZjYnZsMWdSOXhtMjdTclkwMHpnLVk?oc=5 is an RSS redirect; no substantive text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Matching original item found: https://euobserver.com/232936/europes-wildfire-devastation-could-almost-triple-new-research-finds/"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Verified issuing text and date at https://euobserver.com/232936/europes-wildfire-devastation-could-almost-triple-new-research-finds/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://euobserver.com/232936/europes-wildfire-devastation-could-almost-triple-new-research-finds/",
+            "title": "Europe’s wildfire devastation could almost triple, new research finds",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_RI_CHANGE",
+        "reason": "EUobserver reports Potsdam Institute climate-fire scenario research, but it models wildfire damage rather than Europe’s research system, R&I workforce, technology capabilities or substantive EU R&I policy change. C’s verifiable EU R&I development bridge fails."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T14:07:11Z",
+      "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiswFBVV95cUxPOEJFdzZ6Sl9fLW5fYTRmYnpfS080d3dzcEZQVFNNc1F2eHV4V2NDcWZJem9qYVFZdVNmeG9UeC1ua2lSeUNNa3hDd2NGd1kwMm5oenYwOWZmWDMxTWVQcWdKZG5JTVA2NWgzYzk0dkJIVWk2UXZwTzdYMk1HX0dqc1NCd002bTA5dUw4WVpldUxKaXZ4dDNKdmo3MUVBXzM1cW14TEJIbXh1UkZhMmNQd3NzVQ?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "e6ccdec3",
+      "identity_hash": "3aa3d4a0cef990b9",
+      "reader_title": "[Interview] Does copyright protect your AI-generated content in Europe? Let’s find out",
+      "reader_what": "Legal scholar Daniel Gervais discusses human authorship, copyright and liability in AI-produced work.",
+      "reader_more": "Legal scholar Daniel Gervais discusses human authorship, copyright and liability in AI-produced work. Interpretation of existing laws, not a new enacted instrument or substantive R&I development.",
+      "deep_analysis": {
+        "work_kind": "current reportage / static profile",
+        "research_question": "",
+        "main_finding": "Legal scholar Daniel Gervais discusses human authorship, copyright and liability in AI-produced work.",
+        "method_or_basis": "Matching primary source https://euobserver.com/232898/interview-does-copyright-protect-your-ai-generated-content-in-europe-lets-find-out/",
+        "qualification": "Interpretation of existing laws, not a new enacted instrument or substantive R&I development.",
+        "radar_relevance": "EUobserver interview explores existing copyright law and scholarly interpretations of AI-generated material. It does not announce a new AI law, research funding, policy change or technological development relevant to Strand C.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Original source URL https://news.google.com/rss/articles/CBMiswFBVV95cUxPOEJFdzZ6Sl9fLW5fYTRmYnpfS080d3dzcEZQVFNNc1F2eHV4V2NDcWZJem9qYVFZdVNmeG9UeC1ua2lSeUNNa3hDd2NGd1kwMm5oenYwOWZmWDMxTWVQcWdKZG5JTVA2NWgzYzk0dkJIVWk2UXZwTzdYMk1HX0dqc1NCd002bTA5dUw4WVpldUxKaXZ4dDNKdmo3MUVBXzM1cW14TEJIbXh1UkZhMmNQd3NzVQ?oc=5 is an RSS redirect; no substantive text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Matching original item found: https://euobserver.com/232898/interview-does-copyright-protect-your-ai-generated-content-in-europe-lets-find-out/"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Verified issuing text and date at https://euobserver.com/232898/interview-does-copyright-protect-your-ai-generated-content-in-europe-lets-find-out/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://euobserver.com/232898/interview-does-copyright-protect-your-ai-generated-content-in-europe-lets-find-out/",
+            "title": "[Interview] Does copyright protect your AI-generated content in Europe? Let’s find out",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_RI_CHANGE",
+        "reason": "EUobserver interview explores existing copyright law and scholarly interpretations of AI-generated material. It does not announce a new AI law, research funding, policy change or technological development relevant to Strand C."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T14:07:11Z",
+      "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMingFBVV95cUxQby1BRzAyc1pSay02cy0taWxfZlRLaS1CaU04RWlDZk9DN1AySUMyQlY4NUcxY3E2bGdBWVNjM29rWU9JQjNzVmY2YmZyRmtKWVkyR3lDNDIxRjVjMzVwaEszY2g4WmZFNHJiTmpPMmx5aE1PNkliQVpGUnhsQzhsV3M3Q3FnUEtkb3lQc1Y0WlNJNEtmTkVFQnJZaDc3QQ?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "caf98057",
+      "identity_hash": "9142b9f63f1f571f",
+      "reader_title": "Romania says Spanish fighter jet downs drone after airspace breach",
+      "reader_what": "Romania reported a NATO aircraft response to a drone entering national airspace.",
+      "reader_more": "Romania reported a NATO aircraft response to a drone entering national airspace. Operational military incident; no independently demonstrated R&I event.",
+      "deep_analysis": {
+        "work_kind": "current reportage / static profile",
+        "research_question": "",
+        "main_finding": "Romania reported a NATO aircraft response to a drone entering national airspace.",
+        "method_or_basis": "Matching primary source https://www.euractiv.com/news/romania-says-spanish-fighter-jet-downs-drone-after-airspace-breach/",
+        "qualification": "Operational military incident; no independently demonstrated R&I event.",
+        "radar_relevance": "This is an air-defence incident during a Russian drone incursion, not a European research programme, technology innovation result or R&I capability milestone.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Original source URL https://news.google.com/rss/articles/CBMingFBVV95cUxQby1BRzAyc1pSay02cy0taWxfZlRLaS1CaU04RWlDZk9DN1AySUMyQlY4NUcxY3E2bGdBWVNjM29rWU9JQjNzVmY2YmZyRmtKWVkyR3lDNDIxRjVjMzVwaEszY2g4WmZFNHJiTmpPMmx5aE1PNkliQVpGUnhsQzhsV3M3Q3FnUEtkb3lQc1Y0WlNJNEtmTkVFQnJZaDc3QQ?oc=5 is an RSS redirect; no substantive text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Matching original item found: https://www.euractiv.com/news/romania-says-spanish-fighter-jet-downs-drone-after-airspace-breach/"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Verified issuing text and date at https://www.euractiv.com/news/romania-says-spanish-fighter-jet-downs-drone-after-airspace-breach/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.euractiv.com/news/romania-says-spanish-fighter-jet-downs-drone-after-airspace-breach/",
+            "title": "Romania says Spanish fighter jet downs drone after airspace breach",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_RI_CHANGE",
+        "reason": "This is an air-defence incident during a Russian drone incursion, not a European research programme, technology innovation result or R&I capability milestone."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T14:07:11Z",
+      "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMifkFVX3lxTE9wQ3Q1U1htX1RJRHluUlR3eno2bEJ6WmNxR09vZUlielQ1ekFCcDlXMWF2Vnp0SjFJMndaQktNSFZfTnV4MGlra1FIdHMxd2NzcTNKSkJIQ25EOXBzVFBjSElNXzFXWU5CZUFqWG51ZzNiekpHSHdtZjBsUnZKZw?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "3db9ba93",
+      "identity_hash": "d0e46f8b486c1fdf",
+      "reader_title": "Allocation of fishing opportunities in the EU",
+      "reader_what": "Griffin Carpenter’s EU Parliament report examines how member states distribute fishing opportunities.",
+      "reader_more": "Griffin Carpenter’s EU Parliament report examines how member states distribute fishing opportunities. Original report released on 13 August 2026; its focus is fisheries allocation rules, not research policy.",
+      "deep_analysis": {
+        "work_kind": "current reportage / static profile",
+        "research_question": "",
+        "main_finding": "Griffin Carpenter’s EU Parliament report examines how member states distribute fishing opportunities.",
+        "method_or_basis": "Matching primary source https://op.europa.eu/en/publication-detail/-/publication/40b8fbc4-9787-11f1-9262-01aa75ed71a1/language-en",
+        "qualification": "Original report released on 13 August 2026; its focus is fisheries allocation rules, not research policy.",
+        "radar_relevance": "The official European Parliament study concerns fishing quota allocation and Common Fisheries Policy Article 17 compliance. Its completed report is a fisheries policy evidence product, not a study of Europe’s research and innovation system or a new Strand C R&I development.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Original source URL https://news.google.com/rss/articles/CBMifkFVX3lxTE9wQ3Q1U1htX1RJRHluUlR3eno2bEJ6WmNxR09vZUlielQ1ekFCcDlXMWF2Vnp0SjFJMndaQktNSFZfTnV4MGlra1FIdHMxd2NzcTNKSkJIQ25EOXBzVFBjSElNXzFXWU5CZUFqWG51ZzNiekpHSHdtZjBsUnZKZw?oc=5 is an RSS redirect; no substantive text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Matching original item found: https://op.europa.eu/en/publication-detail/-/publication/40b8fbc4-9787-11f1-9262-01aa75ed71a1/language-en"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Verified issuing text and date at https://op.europa.eu/en/publication-detail/-/publication/40b8fbc4-9787-11f1-9262-01aa75ed71a1/language-en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://op.europa.eu/en/publication-detail/-/publication/40b8fbc4-9787-11f1-9262-01aa75ed71a1/language-en",
+            "title": "Allocation of fishing opportunities in the EU",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_RI_CHANGE",
+        "reason": "The official European Parliament study concerns fishing quota allocation and Common Fisheries Policy Article 17 compliance. Its completed report is a fisheries policy evidence product, not a study of Europe’s research and innovation system or a new Strand C R&I development."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T14:07:11Z",
+      "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiZEFVX3lxTE9HUWR0c3BNLTV4bW54WmJ5elZleHZIUWdCNjBKNmtvMlZxc1FVQTl3VFBOa18xbVBtVjdmbWtmcS1TRXdSRkFmdXp5bnlZanJSVGRnOE1MYkFrX0hqaTNzTGdwN2Y?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "b5648c50",
+      "identity_hash": "1aa5c2ed6c9a9b70",
+      "reader_title": "The obstacles and changes in Sino-European trade routes in the twenty-first century due to climate c",
+      "reader_what": "Authors assess climate and geopolitical stresses on shipping routes between China and Europe.",
+      "reader_more": "Authors assess climate and geopolitical stresses on shipping routes between China and Europe. The study addresses transportation and trade geography, not a research and innovation system mechanism.",
+      "deep_analysis": {
+        "work_kind": "current reportage / static profile",
+        "research_question": "",
+        "main_finding": "Authors assess climate and geopolitical stresses on shipping routes between China and Europe.",
+        "method_or_basis": "Matching primary source https://www.nature.com/articles/s41599-026-08607-9",
+        "qualification": "The study addresses transportation and trade geography, not a research and innovation system mechanism.",
+        "radar_relevance": "The completed peer-reviewed study examines Sino-European maritime trade routes affected by climate and geopolitical risks, not Europe’s R&I system, innovation capability or an original new actionable European R&I programme. A methods framing alone does not make a foresight study under Strand B.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Original source URL https://news.google.com/rss/articles/CBMiZEFVX3lxTE9HUWR0c3BNLTV4bW54WmJ5elZleHZIUWdCNjBKNmtvMlZxc1FVQTl3VFBOa18xbVBtVjdmbWtmcS1TRXdSRkFmdXp5bnlZanJSVGRnOE1MYkFrX0hqaTNzTGdwN2Y?oc=5 is an RSS redirect; no substantive text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Matching original item found: https://www.nature.com/articles/s41599-026-08607-9"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Verified issuing text and date at https://www.nature.com/articles/s41599-026-08607-9"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.nature.com/articles/s41599-026-08607-9",
+            "title": "The obstacles and changes in Sino-European trade routes in the twenty-first century due to climate change and geopolitical risks",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_RI_CHANGE",
+        "reason": "The completed peer-reviewed study examines Sino-European maritime trade routes affected by climate and geopolitical risks, not Europe’s R&I system, innovation capability or an original new actionable European R&I programme. A methods framing alone does not make a foresight study under Strand B."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T14:07:11Z",
+      "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1108/dprg-06-2026-0347": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "2137d65e",
+      "identity_hash": "579f9498e9109807",
+      "reader_title": "Open source digital sovereignty: the case for a Canadian national Linux distribution",
+      "reader_what": "The author advocates a Canadian government-supported open-source Linux distribution.",
+      "reader_more": "The author advocates a Canadian government-supported open-source Linux distribution. European examples are supplementary comparisons, not the research object or a central European research-system claim.",
+      "deep_analysis": {
+        "work_kind": "current reportage / static profile",
+        "research_question": "",
+        "main_finding": "The author advocates a Canadian government-supported open-source Linux distribution.",
+        "method_or_basis": "Matching primary source https://www.emerald.com/dprg/article-abstract/doi/10.1108/DPRG-06-2026-0347/1400436/Open-source-digital-sovereignty-the-case-for-a",
+        "qualification": "European examples are supplementary comparisons, not the research object or a central European research-system claim.",
+        "radar_relevance": "The original academic article makes a Canadian national Linux distribution and Canadian digital-sovereignty procurement case. References to French or German precedents are comparators only: Strand A Route 1 lacks a central Europe-facing mechanism, Route 2 lacks an EU-focused evidence product, and Route 3 lacks substantive evidence about the European R&I system.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original source URL https://doi.org/10.1108/dprg-06-2026-0347 yields substantive matching text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Matching original item found: https://www.emerald.com/dprg/article-abstract/doi/10.1108/DPRG-06-2026-0347/1400436/Open-source-digital-sovereignty-the-case-for-a"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Verified issuing text and date at https://www.emerald.com/dprg/article-abstract/doi/10.1108/DPRG-06-2026-0347/1400436/Open-source-digital-sovereignty-the-case-for-a"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.emerald.com/dprg/article-abstract/doi/10.1108/DPRG-06-2026-0347/1400436/Open-source-digital-sovereignty-the-case-for-a",
+            "title": "Open source digital sovereignty: the case for a Canadian national Linux distribution",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_FAILURE",
+        "reason": "The original academic article makes a Canadian national Linux distribution and Canadian digital-sovereignty procurement case. References to French or German precedents are comparators only: Strand A Route 1 lacks a central Europe-facing mechanism, Route 2 lacks an EU-focused evidence product, and Route 3 lacks substantive evidence about the European R&I system."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T14:07:11Z",
+      "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMieEFVX3lxTFBETjBKV2kyaWE0VFJ2LVJWX1ZHZXN1anNidU8zd214V3A5UFZmd3o1aXdhN29Xd2Jjc2dRNUoxcWo1Rk5IaHJJZXZWTUxFZWozNkRDTmtVcmJxbGFjVkV4eGhUZ0c1NUhfem1LeVJzanRHVUtBTEtIOA?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "779edcce",
+      "identity_hash": "06dc36f0ee4b1996",
+      "reader_title": "EU-China trade talks zero in on cars",
+      "reader_what": "EU trade officials planned Beijing talks focusing on hybrid vehicles and trade imbalances.",
+      "reader_more": "EU trade officials planned Beijing talks focusing on hybrid vehicles and trade imbalances. As of this 6 October item, talks were prospective; a later agreement cannot be backdated to the report.",
+      "deep_analysis": {
+        "work_kind": "current reportage / static profile",
+        "research_question": "",
+        "main_finding": "EU trade officials planned Beijing talks focusing on hybrid vehicles and trade imbalances.",
+        "method_or_basis": "Matching primary source https://euagenda.eu/news/938481",
+        "qualification": "As of this 6 October item, talks were prospective; a later agreement cannot be backdated to the report.",
+        "radar_relevance": "POLITICO reports planned EU-China trade talks on Chinese hybrid-car shipments and imbalance. Negotiating market access for cars is not itself a change to research funding, the R&I system or newly achieved technology capability; no specific innovation mechanism is substantiated.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Original source URL https://news.google.com/rss/articles/CBMieEFVX3lxTFBETjBKV2kyaWE0VFJ2LVJWX1ZHZXN1anNidU8zd214V3A5UFZmd3o1aXdhN29Xd2Jjc2dRNUoxcWo1Rk5IaHJJZXZWTUxFZWozNkRDTmtVcmJxbGFjVkV4eGhUZ0c1NUhfem1LeVJzanRHVUtBTEtIOA?oc=5 is an RSS redirect; no substantive text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Matching original item found: https://euagenda.eu/news/938481"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Verified issuing text and date at https://euagenda.eu/news/938481"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://euagenda.eu/news/938481",
+            "title": "EU-China trade talks zero in on cars",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_RI_CHANGE",
+        "reason": "POLITICO reports planned EU-China trade talks on Chinese hybrid-car shipments and imbalance. Negotiating market access for cars is not itself a change to research funding, the R&I system or newly achieved technology capability; no specific innovation mechanism is substantiated."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-19T14:07:11Z",
+      "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-19T13:03:52Z"
+  "claims_updated_at": "2026-10-19T14:07:11Z"
 }

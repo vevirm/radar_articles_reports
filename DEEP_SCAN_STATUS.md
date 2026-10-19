@@ -6,30 +6,30 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2751** (Main **1328** + Historical **1423**)
-- Automatic queue still needing V2 verification: **526** (Main **225** + Historical **301**)
+- Authoritative V2 verified: **2777** (Main **1354** + Historical **1423**)
+- Automatic queue still needing V2 verification: **500** (Main **199** + Historical **301**)
 - Currently assigned to workers: **107** (Main **72** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **31**
-- Automatic queue pending and not yet assigned: **419**
+- Automatic queue pending and not yet assigned: **393**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261019T134154Z-50b05ae794a5`
+- Current package: `worker-a-20261019T141448Z-4bbb0da5bd2c`
 - Assigned unresolved records: **36**
-  1. `link:https://news.google.com/rss/articles/CBMiywFBVV95cUxPc1VtR2JJRVBuRUQ1elJQR3ZRUVpWMnh3aDlUaUh2Y0dHR0dJMzBGd2YwY2hGOHNQSEpraTZIcm5oTE9mOE5zMEdydVZIWUM3bjgwZ25oXzFjSlhEaTFOdTZEVGN4MVNNSHBwX2ZpcDRlSHE2cEJwdGtIV2FhVVc2VzctM2pVSHZuX3dsN2dVY1pkZERzRWFSWWtnNlRDSUdhN1BWVUhWb1N5UTFXTjk5YUpiR2lvb2xtQTgzbG13LVBsc0o3cXVBc3Rndw?oc=5` — EU and Canada held a Digital Dialogue to advance cooperation on digital policy and innovation - Shaping Europe’s digital future
-  2. `link:https://news.google.com/rss/articles/CBMikAFBVV95cUxPSDF2ckt6WU9KeG5sYXJYOUxWS1dvS1lPQ1A0MnJNajVicFBpY0h2Ykc2UWttYmFncG5KZ09RcW52Rkg0N1VDdXh2SEp6RE8xUF85dFhWT1dpc09LeWpfLUx1QTZjbXVDLWtJNFF0d0tyeVkwbWhweldOaDE2MkVPcTZUeWJpNjVIbWhFOVFqelg?oc=5` — Speed up EU health security prep, says NATO chief medic
-  3. `link:https://news.google.com/rss/articles/CBMivAFBVV95cUxON210SzFid0FYd1dnam9lZndYOUd3dE5yNHVZTGZoNUhTQ3V0eEREMG12OWRLNE5LcUhIbmVvZ2JZb2xWeDVERldSY0NKTndYMGFsdkxnVEdCTW9rekJnMExMMXotNzRZNjktTnFscTNTQ21VNFRjdE1jY09TTmVUSmRYN0tfSWFtaDNpa0NKUDRWOXQ1TlF6ZzNhRW5HYnFZUHFPbnE5TGtaV2hiQWZ5YWx0ZlBfVjFPV2E5Wg?oc=5` — Data centre hiring in Europe: Where is it growing and why pay more?
-  4. `link:https://news.google.com/rss/articles/CBMivAFBVV95cUxOd1lYLTBaRWJ2UHJuZXdhM3N4UUNGUEUwZDVGQXNrNHFYazJsOHpSdGhRU01YUlJBbmJ0WlM3NVVzRTV0Vkw0YU9xMVAyMy1WUExzVHBMYXNvcVJ4Rm5Lekg5WFZiV1pkZWg1dW9ySmNqSlg3UkdXa1BpcjJYU2otOENleUk3dU9jYlFScC1wTTRpaWFqUWVRTlRVNUlfMHo3el9DeDc4aXA3UkotVTZDekZTNUx3YlliUWdlWA?oc=5` — Swedish researchers build an ‘AI scientist’ that designs its own test
-  5. `link:https://news.google.com/rss/articles/CBMiogFBVV95cUxOdUd2R202dTUxUl9ydW9WSE9MMlFhUGxLS1lFa1BFQ0I3bGV4d1R5Z2d2UEYyeFFlSmdFOGViMFhzazFMVW1feGlITWUxTDh1UGZSb1ktMlc2R3d1S2hNVVNkckMwelVqZ25Pa2phaDVpMEFlU3NXR1RjVGI0VGlIYUxJVVNGSTN0RG5pVHVyNllCY0Z5eDVCV2FSMlJYSmtGekE?oc=5` — Breakingviews - COMMENTARY: Why Europe could be the real winner of the AI boom
-  6. `link:https://www.euronews.com/2026/10/02/inside-soitec-the-french-tech-company-powering-the-global-semiconductor-industry` — Inside Soitec, the French tech company powering the global semiconductor industry
-  7. `link:https://www.euronews.com/2026/10/02/eu-farmers-face-falling-produce-prices-as-fuel-and-fertiliser-costs-rise` — EU farmers face falling prices as fuel and fertiliser costs rise
-  8. `link:https://defence-industry-space.ec.europa.eu/record-number-proposals-submitted-under-european-defence-fund-2026-calls-612-project-proposals-apply-2026-10-02_en` — Record number of proposals submitted under the European Defence Fund 2026 calls: 612 project proposals apply for the €1 billion envelope
+  1. `link:https://news.google.com/rss/articles/CBMimAFBVV95cUxPWHhydk9EbXpOMEtuSlhlWlNDSVgweVJ3a0R3akxXX0FXT2dVMFRkcndmT0pXbUlUaDRGYl9UR0xKVU41TDFsYzlvM0ROSVpGaU9EN2JsUEc0Y3FvXzJ6Y0RRZjBPZVREZTJETC1iN3JQMXBnc3ZZOXozX1JzUktRNHg0R3VQYVdpUTVhTFdydTQ5c2gydURXdQ?oc=5` — Europe is fighting the wrong AI sovereignty battle — recovery attempt 2/3
+  2. `link:https://news.google.com/rss/articles/CBMilAFBVV95cUxOOERlTkZCc294UTNVa1JsU2hybDNkRjZfTXB5Qmc4T2hYTE5hR3oyb29Vcmp0ekItMGo4VGgzZEFOUEd5RWlybWhhLUNJRlloVDRJN2JqbllEX2VmcndpVm1fZGc1TG5UWThNTUxmeU1YeHdKRlFGcDJjOGpUQTVCNXRkSTljcElza004Q0ZHb3hibFFy?oc=5` — European telcos spy US role in satellite-to-phone coalition - rapporteur.com — recovery attempt 2/3
+  3. `link:https://news.google.com/rss/articles/CBMiqwFBVV95cUxNRWdQSkJPU1MwbjcxUnFOclBQVXgxZ2ktcDBjREZOVmNFTjlLZTJ5bW9KcG9FNGVIUWpfeEhNc0NTWFVlYVg1cjdYaE5EYkwySnhaazl2U3VIbld5SmNlandwNkpRSFRNWTRETUg5MFFfNUhzQjJJeFEwYVFJbV9LNU5UNXA2NmpWNVpscW40bDNVeEV6bzFya2F3NzFucUxSUGZPV29OOTNaWEE?oc=5` — European Companies Down But Not Out in AI Race — recovery attempt 2/3
+  4. `link:https://news.google.com/rss/articles/CBMiqwFBVV95cUxNcjVFRUV6ZzZmeXFiN3NIWmZwUTBGWTR3ZUx1UUhjLWRLMC0wZThtLW00a1FYNjloa3BiSTFveFdZZFkxWnd5d283Qi04MnU1UC1IUl9KdlBkX2o2X3JpQ0pUZVRZQzJ3Uk1fRzR5VnJIdGhwVGI3Q0JWc2RWOGtBZTZzek4tcWQxRTAxZnB3eWJyV2gzY2FlNjdYVk95b2lQX2UtLVNWandvMDA?oc=5` — France's Mistral launches AI model it says outperforms some Chinese rivals
+  5. `link:https://news.google.com/rss/articles/CBMixwFBVV95cUxNX0ZPend6WDVibXdvSWM3NVFxY0hHUUd0RDNKSlBOQnBNNk9BWEs5M0h6X0pBTkhnVzkzNXJBSkpEdlA0LUF1NlRwV1cwUnFSQU1EVnhCeDNyc2I0Y2NyRTY3NVR0U095dlRSQW9NVE11TTVtLUxTOHN4NldKbE5zSlIyUENSOXlDdEttYmJxaG9RZ3RFMEhWTmt4aW0wYU80VzQzNU9Da2Z5V0NQWmZDbEswdHlPdUVlV0p0WDBqNEpqOWt0YWo0?oc=5` — New AGILE defence innovation programme approved by Parliament | Nieuws | Europees Parlement
+  6. `link:https://news.google.com/rss/articles/CBMioAFBVV95cUxNQi1faEtDSHdFZkhNN2hZWG0tNTU3d05PaHBSVzV3VUFXNEhXMEhQXy1HZnhCZU9qaUFJMWF2OTUwNnJRS2RmcW9UZ1U4dVNETk9pSGJVTkR2QjBjaG9LTlREMXVFV3k0RFViSDdxU3haV1dYR25KOTRIUE8xOW43cDdteVJvNGhnX0xEOTRRLWtqcFIzQkJ0STVwa2hPOXY3?oc=5` — AI hopes, industrial malaise drive boom in German startups
+  7. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxPQTVhdGtDQ3ltbWRrWWxnSjE2TTF1R0szTjQ0OW5NSjJtRzJVN1ZtblJ1QjhQbUdHMzZMUmF0OTVlcGtmaUFhN2J3UXI2WkhlSVJxTWhpa205ckxkZHVudzBGcWxscHl5M21TSi11UmpZczF0bkZsYTlJekplbzQ0VTVWTVh5d3Rna09YbFZONUR0VmpSUEVudTluUkJoOG04alJZejNrUTM5cFNxRmdn?oc=5` — Former German spy chief arrested for treason and espionage
+  8. `link:https://news.google.com/rss/articles/CBMikAJBVV95cUxPWUJDemFBRS1vSFhhNk5EdGxXNmtwM3AzY3Z3aF9EMHpSNmV2ckxIVl9hQ1VtMm45dHdEemQ1YmZGaDhMaUJ1WFpINmhsNi1WOXhVSTJwcnc0QmVoeE5ySU01VEdKVElMOHZMQkN3ejMtb0xPcFBKSlhaX25yZVg4aDg3bWtzRzhOXzB2X2txOTNhUlE0Q2VZMXhWSXBIeXhvQlhrdTlWSmdIWUc2MUV0Tlk4WDlBSlZ0TWNhNzd1YnJWZ0hYc0dpcmVZYk1vWWh6TW91QlZUWUlPNEZfWWZUVGR3RUpTeF9iUHEtdWRBTWF6OU5tTXUyd0IwS0pJSTA3bWRsTXpzU0ZsR1NPN1ZGMA?oc=5` — Fourth EU-Faroe Islands Horizon Europe Joint Research and Innovation Committee meeting - European Commission
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261019T134158Z-24c39e09d525`
+- Current package: `worker-b-20261019T141451Z-24c39e09d525`
 - Assigned unresolved records: **36**
   1. `link:https://doi.org/10.48550/arxiv.2609.39285` — The Concentration of Artificial Intelligence in Big Tech and Its Implications for Human Rights in the European Union
   2. `link:https://institutdelors.eu/en/publications/speech-by-e-moulin-strengthening-european-sovereignty-from-integration-to-competitiveness/` — Speech by E. Moulin: “Strengthening European sovereignty : from integration to competitiveness” - Institut Jacques Delors
