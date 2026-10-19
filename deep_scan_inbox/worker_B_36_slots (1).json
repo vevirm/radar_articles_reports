@@ -1,0 +1,1467 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-b-20261019T081231Z-16929ebb6a8d",
+  "results": [
+    {
+      "record_key": "historical:id:ed654464fa2430f9",
+      "source_hash": "6379d00b",
+      "identity_hash": "e5fcf335ff8dbeb0",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failure",
+            "note": "Package reader PDF URL https://cdn.ceps.eu/wp-content/uploads/2024/05/Annual-Report-2023.pdf reported stream failure; web PDF exceeds viewing size limit."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "CEPS publication page https://www.ceps.eu/ceps-publications/annual-report-2023/ identifies annual report and describes 2023 organisation activities, projects and publications."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "issuer_description",
+            "url": "https://www.ceps.eu/ceps-publications/annual-report-2023/",
+            "title": "CEPS Annual Report 2023",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Verified underlying identity and content independently against the identified publisher/issuing organisation."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Strand A Routes 1–3 tested: the named work is a CEPS institutional annual activity and publications report, not itself a substantive analytical study of EU R&I geopolitical exposures, system states/trajectories or R&I-system mechanisms. Mentions of Horizon Europe and research priorities are incidental to organisational reporting."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2024-02-26"
+        },
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No identified exact duplicate in package metadata."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "organisation annual report",
+        "research_question": "",
+        "main_finding": "The issuing organisation describes its own research priorities, publications, activities and policy engagement during 2023.",
+        "method_or_basis": "CEPS institutional report and CEPS publisher description.",
+        "qualification": "Self-report of CEPS organisational activities; not an independent research finding about European R&I capacity.",
+        "radar_relevance": "Does not itself quantify or analyse an EU research and innovation system variable.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:de7afaa58572f701",
+      "source_hash": "b9e3b59c",
+      "identity_hash": "a6957d6052e19a15",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "substantial_web_text",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "package_material_available",
+            "note": "Supplied URL: https://doi.org/10.1007/978-3-031-66196-9_11; scanner package read_mode=substantial_web_text, text length=18463. The present pass used retained scanner material only; no claim of independently fetched full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_source_material",
+            "url": "https://link.springer.com/chapter/10.1007/978-3-031-66196-9_11",
+            "title": "The Enemy Within: The Human Side of Governance, Innovation, and National Security in the Age of Data-Driven Big Tech",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source text present in uploaded work package and assessed for relevance; bibliographic provenance has NOT been independently reverified online. Decision is provisional."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "PACKAGE_EVIDENCE_PROVISIONAL",
+        "reason": "A Routes 1–3: analysis of governance, big technology and national security is not substantively about European research and innovation systems."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "No independently confirmed metadata correction."
+      },
+      "duplicate": {
+        "status": "unverified",
+        "duplicate_of": "",
+        "reason": "Cross-record duplication not independently verified."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "book chapter",
+        "research_question": "",
+        "main_finding": "A book chapter discusses big technology, information, security and public governance.",
+        "method_or_basis": "Scanner-retained substantial_web_text; not independently fetched",
+        "qualification": "Interpretive assessment is provisional until original-source identity/provenance is reverified.",
+        "radar_relevance": "A Routes 1–3: analysis of governance, big technology and national security is not substantively about European research and innovation systems.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:f3a2dac9e7453ac7",
+      "source_hash": "bc7d1102",
+      "identity_hash": "cbc31118bfaeb69d",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "not_available",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_retrieved_in_this_pass",
+            "note": "Supplied URL: https://doi.org/10.1007/978-981-97-9096-8_6; scanner package read_mode=stored_only, text length=0. The present pass used retained scanner material only; no claim of independently fetched full text."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Not verified: missing substantive source material; do not treat as an authoritative completion."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "SOURCE_RECOVERY_REQUIRED",
+        "reason": "Insufficient substantive matching source material in this supplied package to reach a defensible admission decision; additional original-source recovery required."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "No independently confirmed metadata correction."
+      },
+      "duplicate": {
+        "status": "unverified",
+        "duplicate_of": "",
+        "reason": "Cross-record duplication not independently verified."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "not yet substantiated",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "Scanner-retained stored_only; not independently fetched",
+        "qualification": "Interpretive assessment is provisional until original-source identity/provenance is reverified.",
+        "radar_relevance": "Insufficient substantive matching source material in this supplied package to reach a defensible admission decision; additional original-source recovery required.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:01542e166949263a",
+      "source_hash": "b3d66200",
+      "identity_hash": "253afd1a42daa4df",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "pdf_excerpt",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "package_material_available",
+            "note": "Supplied URL: https://doi.org/10.1787/95f819e8-en; scanner package read_mode=pdf_excerpt, text length=17404. The present pass used retained scanner material only; no claim of independently fetched full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_source_material",
+            "url": "https://content.openalex.org/works/W4389272253.pdf",
+            "title": "Strengthening strategic planning and the role of PlanAPP in Portugal",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source text present in uploaded work package and assessed for relevance; bibliographic provenance has NOT been independently reverified online. Decision is provisional."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "PACKAGE_EVIDENCE_PROVISIONAL",
+        "reason": "B: OECD analysis of Portuguese strategic planning institutions is a governance-system assessment rather than a materially new transferable futures or R&I intelligence method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "No independently confirmed metadata correction."
+      },
+      "duplicate": {
+        "status": "unverified",
+        "duplicate_of": "",
+        "reason": "Cross-record duplication not independently verified."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "OECD public-governance report",
+        "research_question": "",
+        "main_finding": "OECD examines Portugal’s strategic planning and coordination capacity, including PlanAPP.",
+        "method_or_basis": "Scanner-retained pdf_excerpt; not independently fetched",
+        "qualification": "Interpretive assessment is provisional until original-source identity/provenance is reverified.",
+        "radar_relevance": "B: OECD analysis of Portuguese strategic planning institutions is a governance-system assessment rather than a materially new transferable futures or R&I intelligence method.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:3b3e96537c8dfe27",
+      "source_hash": "7d1112e6",
+      "identity_hash": "ec753a81b27a890d",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "substantial_web_text",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "package_material_available",
+            "note": "Supplied URL: https://www.ukri.org/publications/esrc-research-funding-guide/esrc-research-funding-guide-for-the-ukri-funding-service/; scanner package read_mode=substantial_web_text, text length=24000. The present pass used retained scanner material only; no claim of independently fetched full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_source_material",
+            "url": "https://www.ukri.org/publications/esrc-research-funding-guide/esrc-research-funding-guide-for-the-ukri-funding-service/",
+            "title": "ESRC research funding guide for the UKRI Funding Service",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source text present in uploaded work package and assessed for relevance; bibliographic provenance has NOT been independently reverified online. Decision is provisional."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "PACKAGE_EVIDENCE_PROVISIONAL",
+        "reason": "A Routes 1–3: UKRI administrative funding guide is rules and instructions, not substantive independent research on the R&I system."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "No independently confirmed metadata correction."
+      },
+      "duplicate": {
+        "status": "unverified",
+        "duplicate_of": "",
+        "reason": "Cross-record duplication not independently verified."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "funding guidance",
+        "research_question": "",
+        "main_finding": "UKRI gives applicants ESRC funding guidance and process instructions.",
+        "method_or_basis": "Scanner-retained substantial_web_text; not independently fetched",
+        "qualification": "Interpretive assessment is provisional until original-source identity/provenance is reverified.",
+        "radar_relevance": "A Routes 1–3: UKRI administrative funding guide is rules and instructions, not substantive independent research on the R&I system.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:1c1b904642bf6f2c",
+      "source_hash": "2fdfbd28",
+      "identity_hash": "0e04cac613ff7e34",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "substantial_web_text",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "package_material_available",
+            "note": "Supplied URL: https://doi.org/10.33423/jhetp.v22i14.5537; scanner package read_mode=substantial_web_text, text length=2511. The present pass used retained scanner material only; no claim of independently fetched full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_source_material",
+            "url": "https://articlegateway.com/journals/index.php/JHETP/article/view/5537",
+            "title": "On the Role and Assessment of Research at European Universities of Applied Sciences",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source text present in uploaded work package and assessed for relevance; bibliographic provenance has NOT been independently reverified online. Decision is provisional."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "PACKAGE_EVIDENCE_PROVISIONAL",
+        "reason": "A Route 3: scholarly analysis directly concerns research practices and assessment at European universities of applied sciences."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "No independently confirmed metadata correction."
+      },
+      "duplicate": {
+        "status": "unverified",
+        "duplicate_of": "",
+        "reason": "Cross-record duplication not independently verified."
+      },
+      "reader_title": "On the Role and Assessment of Research at European Universities of Applied Sciences",
+      "reader_what": "European university-of-applied-sciences researchers discuss the role, organisation and assessment of applied research.",
+      "reader_why": "Addresses European research and innovation; admission remains contingent on independent source verification.",
+      "reader_more": "Assessment based on 2511 characters of source material retained in the input ZIP; full identity/provenance verification is still outstanding.",
+      "deep_analysis": {
+        "work_kind": "research policy article",
+        "research_question": "",
+        "main_finding": "European university-of-applied-sciences researchers discuss the role, organisation and assessment of applied research.",
+        "method_or_basis": "Scanner-retained substantial_web_text; not independently fetched",
+        "qualification": "Interpretive assessment is provisional until original-source identity/provenance is reverified.",
+        "radar_relevance": "A Route 3: scholarly analysis directly concerns research practices and assessment at European universities of applied sciences.",
+        "why_supported": true,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:9b75a2b800248795",
+      "source_hash": "c338b1a6",
+      "identity_hash": "4caa0dae416e2380",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "substantial_web_text",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "package_material_available",
+            "note": "Supplied URL: https://ecas.org/publication/consultation-on-digital-transformation-now-open/; scanner package read_mode=substantial_web_text, text length=4730. The present pass used retained scanner material only; no claim of independently fetched full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_source_material",
+            "url": "https://ecas.org/publication/consultation-on-digital-transformation-now-open/",
+            "title": "Consultation on digital transformation now open! - ECAS",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source text present in uploaded work package and assessed for relevance; bibliographic provenance has NOT been independently reverified online. Decision is provisional."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "PACKAGE_EVIDENCE_PROVISIONAL",
+        "reason": "A Routes 1–3: digital-transformation civil-society consultation invitation does not deliver R&I-system evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "No independently confirmed metadata correction."
+      },
+      "duplicate": {
+        "status": "unverified",
+        "duplicate_of": "",
+        "reason": "Cross-record duplication not independently verified."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "consultation announcement",
+        "research_question": "",
+        "main_finding": "ECAS invites views in a public digital transformation consultation.",
+        "method_or_basis": "Scanner-retained substantial_web_text; not independently fetched",
+        "qualification": "Interpretive assessment is provisional until original-source identity/provenance is reverified.",
+        "radar_relevance": "A Routes 1–3: digital-transformation civil-society consultation invitation does not deliver R&I-system evidence.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:84378f8e071900a2",
+      "source_hash": "f37e2d52",
+      "identity_hash": "2526a2ac62b0dc02",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "substantial_web_text",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "package_material_available",
+            "note": "Supplied URL: https://itif.org/publications/2021/06/21/fact-week-international-research-cooperation-co-patenting-yields-greater/; scanner package read_mode=substantial_web_text, text length=3552. The present pass used retained scanner material only; no claim of independently fetched full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_source_material",
+            "url": "https://itif.org/publications/2021/06/21/fact-week-international-research-cooperation-co-patenting-yields-greater/",
+            "title": "Fact of the Week: International Research Cooperation via Co-patenting Yields Greater Innovations Than Co-patenting Between Domestic Firms",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source text present in uploaded work package and assessed for relevance; bibliographic provenance has NOT been independently reverified online. Decision is provisional."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "PACKAGE_EVIDENCE_PROVISIONAL",
+        "reason": "A Routes 1–3: ITIF short fact about global cross-country co-patenting lacks substantive European R&I-specific analysis."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "No independently confirmed metadata correction."
+      },
+      "duplicate": {
+        "status": "unverified",
+        "duplicate_of": "",
+        "reason": "Cross-record duplication not independently verified."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "fact of the week",
+        "research_question": "",
+        "main_finding": "ITIF comments on a cross-national co-patenting finding, without EU-specific research.",
+        "method_or_basis": "Scanner-retained substantial_web_text; not independently fetched",
+        "qualification": "Interpretive assessment is provisional until original-source identity/provenance is reverified.",
+        "radar_relevance": "A Routes 1–3: ITIF short fact about global cross-country co-patenting lacks substantive European R&I-specific analysis.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:b6c04f2c7aedd9fa",
+      "source_hash": "fa68871e",
+      "identity_hash": "71449b869da6ba9a",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "substantial_web_text",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "package_material_available",
+            "note": "Supplied URL: https://ecfr.eu/article/a-digital-agenda-for-the-eastern-partnership/; scanner package read_mode=substantial_web_text, text length=6963. The present pass used retained scanner material only; no claim of independently fetched full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_source_material",
+            "url": "https://ecfr.eu/article/a-digital-agenda-for-the-eastern-partnership/",
+            "title": "A digital agenda for the Eastern Partnership – European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source text present in uploaded work package and assessed for relevance; bibliographic provenance has NOT been independently reverified online. Decision is provisional."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "PACKAGE_EVIDENCE_PROVISIONAL",
+        "reason": "A Routes 1–3: proposal for wider Eastern Partnership digital cooperation is chiefly geopolitical/digital development policy, not analysis of European R&I system."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "No independently confirmed metadata correction."
+      },
+      "duplicate": {
+        "status": "unverified",
+        "duplicate_of": "",
+        "reason": "Cross-record duplication not independently verified."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "policy commentary",
+        "research_question": "",
+        "main_finding": "ECFR argues for digital cooperation policy under the EU Eastern Partnership.",
+        "method_or_basis": "Scanner-retained substantial_web_text; not independently fetched",
+        "qualification": "Interpretive assessment is provisional until original-source identity/provenance is reverified.",
+        "radar_relevance": "A Routes 1–3: proposal for wider Eastern Partnership digital cooperation is chiefly geopolitical/digital development policy, not analysis of European R&I system.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:dda08654e63e7c1d",
+      "source_hash": "0a1d95f0",
+      "identity_hash": "00b0222ceb76b438",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "substantial_web_text",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "package_material_available",
+            "note": "Supplied URL: https://allea.org/european-academy-networks-call-for-urgent-solution-to-health-data-transfer-barriers/; scanner package read_mode=substantial_web_text, text length=4824. The present pass used retained scanner material only; no claim of independently fetched full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_source_material",
+            "url": "https://allea.org/european-academy-networks-call-for-urgent-solution-to-health-data-transfer-barriers/",
+            "title": "European Academy Networks Call for Urgent Solution to Health Data Transfer Barriers - ALLEA",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source text present in uploaded work package and assessed for relevance; bibliographic provenance has NOT been independently reverified online. Decision is provisional."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "PACKAGE_EVIDENCE_PROVISIONAL",
+        "reason": "A Route 3: European science academies document cross-border health-research data barriers and their effects on research cooperation."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "No independently confirmed metadata correction."
+      },
+      "duplicate": {
+        "status": "unverified",
+        "duplicate_of": "",
+        "reason": "Cross-record duplication not independently verified."
+      },
+      "reader_title": "European Academy Networks Call for Urgent Solution to Health Data Transfer Barriers - ALLEA",
+      "reader_what": "European academies identify regulatory barriers to transferring personal health data for cross-border research.",
+      "reader_why": "Addresses European research and innovation; admission remains contingent on independent source verification.",
+      "reader_more": "Assessment based on 4824 characters of source material retained in the input ZIP; full identity/provenance verification is still outstanding.",
+      "deep_analysis": {
+        "work_kind": "science academy policy statement",
+        "research_question": "",
+        "main_finding": "European academies identify regulatory barriers to transferring personal health data for cross-border research.",
+        "method_or_basis": "Scanner-retained substantial_web_text; not independently fetched",
+        "qualification": "Interpretive assessment is provisional until original-source identity/provenance is reverified.",
+        "radar_relevance": "A Route 3: European science academies document cross-border health-research data barriers and their effects on research cooperation.",
+        "why_supported": true,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:6baa80d78189db38",
+      "source_hash": "d8c9e3f3",
+      "identity_hash": "5dda14f5b8395ed5",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "substantial_web_text",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "package_material_available",
+            "note": "Supplied URL: https://www.rathenau.nl/en/digitalisering/greatest-benefit-ai-human-machine-collaboration; scanner package read_mode=substantial_web_text, text length=13723. The present pass used retained scanner material only; no claim of independently fetched full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_source_material",
+            "url": "https://www.rathenau.nl/en/digitalisering/greatest-benefit-ai-human-machine-collaboration",
+            "title": "Greatest benefit of AI is the human-machine collaboration | Rathenau Instituut",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source text present in uploaded work package and assessed for relevance; bibliographic provenance has NOT been independently reverified online. Decision is provisional."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "PACKAGE_EVIDENCE_PROVISIONAL",
+        "reason": "A Routes 1–3: broad AI/human collaboration discussion lacks substantive European R&I-system study."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "No independently confirmed metadata correction."
+      },
+      "duplicate": {
+        "status": "unverified",
+        "duplicate_of": "",
+        "reason": "Cross-record duplication not independently verified."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "science communication",
+        "research_question": "",
+        "main_finding": "Rathenau discusses AI and human-machine collaboration in a public-facing article.",
+        "method_or_basis": "Scanner-retained substantial_web_text; not independently fetched",
+        "qualification": "Interpretive assessment is provisional until original-source identity/provenance is reverified.",
+        "radar_relevance": "A Routes 1–3: broad AI/human collaboration discussion lacks substantive European R&I-system study.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:8e5f718dec82569c",
+      "source_hash": "d114fde2",
+      "identity_hash": "68f0721feaf6cbad",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "abstract_or_landing_page",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "package_material_available",
+            "note": "Supplied URL: https://www.vttresearch.com/en/news-and-ideas/opens-access-young-researchers-and-experts-leading-energy-systems-research; scanner package read_mode=abstract_or_landing_page, text length=2179. The present pass used retained scanner material only; no claim of independently fetched full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_source_material",
+            "url": "https://www.vttresearch.com/en/news-and-ideas/opens-access-young-researchers-and-experts-leading-energy-systems-research",
+            "title": "Opens access for young researchers and experts to leading energy systems research infrastructures - ERIGrid 2.0 aims to connect the European smart grid infrastructures | VTT",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source text present in uploaded work package and assessed for relevance; bibliographic provenance has NOT been independently reverified online. Decision is provisional."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "A",
+        "reason_code": "PACKAGE_EVIDENCE_PROVISIONAL",
+        "reason": "A Route 3 borderline: ERIGrid research infrastructure access announcement establishes a collaboration instrument but not an independent analytical study."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "No independently confirmed metadata correction."
+      },
+      "duplicate": {
+        "status": "unverified",
+        "duplicate_of": "",
+        "reason": "Cross-record duplication not independently verified."
+      },
+      "reader_title": "Opens access for young researchers and experts to leading energy systems research infrastructures - ERIGrid 2.0 aims to connect the European smart grid infrastructures | VTT",
+      "reader_what": "ERIGrid 2.0 announces laboratory access for young researchers and industrial experts.",
+      "reader_why": "",
+      "reader_more": "Assessment based on 2179 characters of source material retained in the input ZIP; full identity/provenance verification is still outstanding.",
+      "deep_analysis": {
+        "work_kind": "research access announcement",
+        "research_question": "",
+        "main_finding": "ERIGrid 2.0 announces laboratory access for young researchers and industrial experts.",
+        "method_or_basis": "Scanner-retained abstract_or_landing_page; not independently fetched",
+        "qualification": "Interpretive assessment is provisional until original-source identity/provenance is reverified.",
+        "radar_relevance": "A Route 3 borderline: ERIGrid research infrastructure access announcement establishes a collaboration instrument but not an independent analytical study.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:aece40fd90cde663",
+      "source_hash": "7bc44188",
+      "identity_hash": "a0a217b37bde5d69",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "pdf_excerpt",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "package_material_available",
+            "note": "Supplied URL: https://doi.org/10.1080/21681376.2019.1578257; scanner package read_mode=pdf_excerpt, text length=24000. The present pass used retained scanner material only; no claim of independently fetched full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_source_material",
+            "url": "https://content.openalex.org/works/W2922391852.pdf",
+            "title": "Regional innovation governance and place-based policies: design, implementation and implications",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source text present in uploaded work package and assessed for relevance; bibliographic provenance has NOT been independently reverified online. Decision is provisional."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "PACKAGE_EVIDENCE_PROVISIONAL",
+        "reason": "A Route 3: peer-reviewed research analyses regional innovation governance and place-based policy mechanisms."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "No independently confirmed metadata correction."
+      },
+      "duplicate": {
+        "status": "unverified",
+        "duplicate_of": "",
+        "reason": "Cross-record duplication not independently verified."
+      },
+      "reader_title": "Regional innovation governance and place-based policies: design, implementation and implications",
+      "reader_what": "Regional innovation governance paper investigates design and implementation of place-based policy.",
+      "reader_why": "Addresses European research and innovation; admission remains contingent on independent source verification.",
+      "reader_more": "Assessment based on 24000 characters of source material retained in the input ZIP; full identity/provenance verification is still outstanding.",
+      "deep_analysis": {
+        "work_kind": "regional innovation governance study",
+        "research_question": "",
+        "main_finding": "Regional innovation governance paper investigates design and implementation of place-based policy.",
+        "method_or_basis": "Scanner-retained pdf_excerpt; not independently fetched",
+        "qualification": "Interpretive assessment is provisional until original-source identity/provenance is reverified.",
+        "radar_relevance": "A Route 3: peer-reviewed research analyses regional innovation governance and place-based policy mechanisms.",
+        "why_supported": true,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:a7b5fec456f646aa",
+      "source_hash": "2297191a",
+      "identity_hash": "130eefce5567fcad",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "substantial_web_text",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "package_material_available",
+            "note": "Supplied URL: https://www.vttresearch.com/en/news-and-ideas/combinostics-faster-diagnoses-artificial-intelligence; scanner package read_mode=substantial_web_text, text length=4518. The present pass used retained scanner material only; no claim of independently fetched full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_source_material",
+            "url": "https://www.vttresearch.com/en/news-and-ideas/combinostics-faster-diagnoses-artificial-intelligence",
+            "title": "Combinostics: Faster diagnoses with artificial intelligence | VTT",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source text present in uploaded work package and assessed for relevance; bibliographic provenance has NOT been independently reverified online. Decision is provisional."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "PACKAGE_EVIDENCE_PROVISIONAL",
+        "reason": "A Routes 1–3: single diagnostic AI company application is a local commercial technology case, not a European R&I system study."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "No independently confirmed metadata correction."
+      },
+      "duplicate": {
+        "status": "unverified",
+        "duplicate_of": "",
+        "reason": "Cross-record duplication not independently verified."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "company product profile",
+        "research_question": "",
+        "main_finding": "VTT highlights a specific AI diagnostic spin-off.",
+        "method_or_basis": "Scanner-retained substantial_web_text; not independently fetched",
+        "qualification": "Interpretive assessment is provisional until original-source identity/provenance is reverified.",
+        "radar_relevance": "A Routes 1–3: single diagnostic AI company application is a local commercial technology case, not a European R&I system study.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:28b4d2b73e2b008a",
+      "source_hash": "2b21a3f7",
+      "identity_hash": "10f2d226c705daa5",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "pdf_excerpt",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "package_material_available",
+            "note": "Supplied URL: https://doi.org/10.1016/j.respol.2018.10.012; scanner package read_mode=pdf_excerpt, text length=24000. The present pass used retained scanner material only; no claim of independently fetched full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_source_material",
+            "url": "https://content.openalex.org/works/W2895912764.pdf",
+            "title": "Only one way to skin a cat? Heterogeneity and equifinality in European national innovation systems",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source text present in uploaded work package and assessed for relevance; bibliographic provenance has NOT been independently reverified online. Decision is provisional."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "PACKAGE_EVIDENCE_PROVISIONAL",
+        "reason": "A Route 3: peer-reviewed study measures heterogeneity and equifinality across European national innovation systems."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "No independently confirmed metadata correction."
+      },
+      "duplicate": {
+        "status": "unverified",
+        "duplicate_of": "",
+        "reason": "Cross-record duplication not independently verified."
+      },
+      "reader_title": "Only one way to skin a cat? Heterogeneity and equifinality in European national innovation systems",
+      "reader_what": "Research Policy article compares national innovation system configurations across European countries.",
+      "reader_why": "Addresses European research and innovation; admission remains contingent on independent source verification.",
+      "reader_more": "Assessment based on 24000 characters of source material retained in the input ZIP; full identity/provenance verification is still outstanding.",
+      "deep_analysis": {
+        "work_kind": "European innovation systems research",
+        "research_question": "",
+        "main_finding": "Research Policy article compares national innovation system configurations across European countries.",
+        "method_or_basis": "Scanner-retained pdf_excerpt; not independently fetched",
+        "qualification": "Interpretive assessment is provisional until original-source identity/provenance is reverified.",
+        "radar_relevance": "A Route 3: peer-reviewed study measures heterogeneity and equifinality across European national innovation systems.",
+        "why_supported": true,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:418613ac9585eb67",
+      "source_hash": "d59f31dc",
+      "identity_hash": "5aa6ab283f862bbc",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "pdf_excerpt",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "package_material_available",
+            "note": "Supplied URL: https://hcss.nl/wp-content/uploads/2021/01/Cybersecurity-ensuring-awareness-and-resilience-of-the-private-sector-acrros-Europe-in-face-of-mounting-cyber-risks.pdf; scanner package read_mode=pdf_excerpt, text length=15232. The present pass used retained scanner material only; no claim of independently fetched full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_source_material",
+            "url": "https://hcss.nl/wp-content/uploads/2021/01/Cybersecurity-ensuring-awareness-and-resilience-of-the-private-sector-acrros-Europe-in-face-of-mounting-cyber-risks.pdf",
+            "title": "Cybersecurity: Ensuring awareness and resilience of the private sector | HCSS",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source text present in uploaded work package and assessed for relevance; bibliographic provenance has NOT been independently reverified online. Decision is provisional."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "PACKAGE_EVIDENCE_PROVISIONAL",
+        "reason": "A Routes 1–3: European private-sector cybersecurity awareness policy essay does not directly study the R&I system."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "No independently confirmed metadata correction."
+      },
+      "duplicate": {
+        "status": "unverified",
+        "duplicate_of": "",
+        "reason": "Cross-record duplication not independently verified."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "cyber policy report",
+        "research_question": "",
+        "main_finding": "HCSS discusses private-sector resilience to cyber threats.",
+        "method_or_basis": "Scanner-retained pdf_excerpt; not independently fetched",
+        "qualification": "Interpretive assessment is provisional until original-source identity/provenance is reverified.",
+        "radar_relevance": "A Routes 1–3: European private-sector cybersecurity awareness policy essay does not directly study the R&I system.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:cd6e26a1080a3e57",
+      "source_hash": "6df331f7",
+      "identity_hash": "6030085640082b43",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "pdf_excerpt",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "package_material_available",
+            "note": "Supplied URL: https://merics.org/sites/default/files/2020-04/171004_MPOC_05_Ideologies_0_web_1.pdf; scanner package read_mode=pdf_excerpt, text length=7096. The present pass used retained scanner material only; no claim of independently fetched full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_source_material",
+            "url": "https://merics.org/sites/default/files/2020-04/171004_MPOC_05_Ideologies_0_web_1.pdf",
+            "title": "Ideas and ideologies competing for China's political future",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source text present in uploaded work package and assessed for relevance; bibliographic provenance has NOT been independently reverified online. Decision is provisional."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "PACKAGE_EVIDENCE_PROVISIONAL",
+        "reason": "A Routes 1–3: Chinese ideology and political discourse report lacks substantive European R&I system relevance."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "No independently confirmed metadata correction."
+      },
+      "duplicate": {
+        "status": "unverified",
+        "duplicate_of": "",
+        "reason": "Cross-record duplication not independently verified."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "China politics report",
+        "research_question": "",
+        "main_finding": "MERICS paper analyses online ideological pluralism in China.",
+        "method_or_basis": "Scanner-retained pdf_excerpt; not independently fetched",
+        "qualification": "Interpretive assessment is provisional until original-source identity/provenance is reverified.",
+        "radar_relevance": "A Routes 1–3: Chinese ideology and political discourse report lacks substantive European R&I system relevance.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:78754371dbf139f3",
+      "source_hash": "25b54484",
+      "identity_hash": "607e8e0355da55d5",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "substantial_web_text",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "package_material_available",
+            "note": "Supplied URL: https://doi.org/10.1007/s10961-015-9462-3; scanner package read_mode=substantial_web_text, text length=21525. The present pass used retained scanner material only; no claim of independently fetched full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_source_material",
+            "url": "https://link.springer.com/article/10.1007/s10961-015-9462-3",
+            "title": "Technology entrepreneurship research opportunities: insights from across Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source text present in uploaded work package and assessed for relevance; bibliographic provenance has NOT been independently reverified online. Decision is provisional."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "PACKAGE_EVIDENCE_PROVISIONAL",
+        "reason": "A Route 3: scholarly review of technology entrepreneurship research across Europe addresses R&I commercialisation and entrepreneurship mechanisms."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "No independently confirmed metadata correction."
+      },
+      "duplicate": {
+        "status": "unverified",
+        "duplicate_of": "",
+        "reason": "Cross-record duplication not independently verified."
+      },
+      "reader_title": "Technology entrepreneurship research opportunities: insights from across Europe",
+      "reader_what": "The study surveys European technology entrepreneurship and research opportunities.",
+      "reader_why": "Addresses European research and innovation; admission remains contingent on independent source verification.",
+      "reader_more": "Assessment based on 21525 characters of source material retained in the input ZIP; full identity/provenance verification is still outstanding.",
+      "deep_analysis": {
+        "work_kind": "technology entrepreneurship study",
+        "research_question": "",
+        "main_finding": "The study surveys European technology entrepreneurship and research opportunities.",
+        "method_or_basis": "Scanner-retained substantial_web_text; not independently fetched",
+        "qualification": "Interpretive assessment is provisional until original-source identity/provenance is reverified.",
+        "radar_relevance": "A Route 3: scholarly review of technology entrepreneurship research across Europe addresses R&I commercialisation and entrepreneurship mechanisms.",
+        "why_supported": true,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:3dc93cbcd32719ac",
+      "source_hash": "92414744",
+      "identity_hash": "3c362ee45c673233",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "substantial_web_text",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "package_material_available",
+            "note": "Supplied URL: https://doi.org/10.1007/s40309-016-0101-5; scanner package read_mode=substantial_web_text, text length=20405. The present pass used retained scanner material only; no claim of independently fetched full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_source_material",
+            "url": "https://link.springer.com/article/10.1007/s40309-016-0101-5",
+            "title": "A participatory Foresight for National Research and Education Networks",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source text present in uploaded work package and assessed for relevance; bibliographic provenance has NOT been independently reverified online. Decision is provisional."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "PACKAGE_EVIDENCE_PROVISIONAL",
+        "reason": "B: peer-reviewed participatory foresight study presents a structured process for identifying future requirements of national research-and-education networks."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "No independently confirmed metadata correction."
+      },
+      "duplicate": {
+        "status": "unverified",
+        "duplicate_of": "",
+        "reason": "Cross-record duplication not independently verified."
+      },
+      "reader_title": "A participatory Foresight for National Research and Education Networks",
+      "reader_what": "A study applies a participatory foresight process to future national research and education network services.",
+      "reader_why": "Addresses transferable foresight methods; admission remains contingent on independent source verification.",
+      "reader_more": "Assessment based on 20405 characters of source material retained in the input ZIP; full identity/provenance verification is still outstanding.",
+      "deep_analysis": {
+        "work_kind": "foresight methodology study",
+        "research_question": "",
+        "main_finding": "A study applies a participatory foresight process to future national research and education network services.",
+        "method_or_basis": "Scanner-retained substantial_web_text; not independently fetched",
+        "qualification": "Interpretive assessment is provisional until original-source identity/provenance is reverified.",
+        "radar_relevance": "B: peer-reviewed participatory foresight study presents a structured process for identifying future requirements of national research-and-education networks.",
+        "why_supported": true,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:918a347da0104729",
+      "source_hash": "82f05f8e",
+      "identity_hash": "06bd77becbe93d70",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "substantial_web_text",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "package_material_available",
+            "note": "Supplied URL: https://ecipe.org/publications/digital-investments-data-and-growth-in-europe-a-framework-for-analysis/; scanner package read_mode=substantial_web_text, text length=19058. The present pass used retained scanner material only; no claim of independently fetched full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_source_material",
+            "url": "https://ecipe.org/publications/digital-investments-data-and-growth-in-europe-a-framework-for-analysis/",
+            "title": "Digital Investments, Data and Growth in Europe: A Framework for Analysis",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source text present in uploaded work package and assessed for relevance; bibliographic provenance has NOT been independently reverified online. Decision is provisional."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "PACKAGE_EVIDENCE_PROVISIONAL",
+        "reason": "A Route 2: European digital investment and growth framework analyses factors influencing European innovation and technology-economy performance."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "No independently confirmed metadata correction."
+      },
+      "duplicate": {
+        "status": "unverified",
+        "duplicate_of": "",
+        "reason": "Cross-record duplication not independently verified."
+      },
+      "reader_title": "Digital Investments, Data and Growth in Europe: A Framework for Analysis",
+      "reader_what": "ECIPE provides a framework for considering digital investment, data and European growth.",
+      "reader_why": "Addresses European research and innovation; admission remains contingent on independent source verification.",
+      "reader_more": "Assessment based on 19058 characters of source material retained in the input ZIP; full identity/provenance verification is still outstanding.",
+      "deep_analysis": {
+        "work_kind": "European digital economy policy study",
+        "research_question": "",
+        "main_finding": "ECIPE provides a framework for considering digital investment, data and European growth.",
+        "method_or_basis": "Scanner-retained substantial_web_text; not independently fetched",
+        "qualification": "Interpretive assessment is provisional until original-source identity/provenance is reverified.",
+        "radar_relevance": "A Route 2: European digital investment and growth framework analyses factors influencing European innovation and technology-economy performance.",
+        "why_supported": true,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:b9f7c46779f5b8a1",
+      "source_hash": "7535c61a",
+      "identity_hash": "d3ee6979e504499e",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "pdf_excerpt",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "package_material_available",
+            "note": "Supplied URL: https://doi.org/10.1016/j.joi.2016.01.002; scanner package read_mode=pdf_excerpt, text length=24000. The present pass used retained scanner material only; no claim of independently fetched full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_source_material",
+            "url": "https://content.openalex.org/works/W2264728004.pdf",
+            "title": "Investigating the interplay between fundamentals of national research systems: Performance, investments and international collaborations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source text present in uploaded work package and assessed for relevance; bibliographic provenance has NOT been independently reverified online. Decision is provisional."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "PACKAGE_EVIDENCE_PROVISIONAL",
+        "reason": "A Route 3: research investigates relationships among national research performance, funding and international collaboration."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "No independently confirmed metadata correction."
+      },
+      "duplicate": {
+        "status": "unverified",
+        "duplicate_of": "",
+        "reason": "Cross-record duplication not independently verified."
+      },
+      "reader_title": "Investigating the interplay between fundamentals of national research systems: Performance, investments and international collaborations",
+      "reader_what": "Research article analyses interactions between national research-system performance, investment and cooperation.",
+      "reader_why": "Addresses European research and innovation; admission remains contingent on independent source verification.",
+      "reader_more": "Assessment based on 24000 characters of source material retained in the input ZIP; full identity/provenance verification is still outstanding.",
+      "deep_analysis": {
+        "work_kind": "research-system bibliometrics",
+        "research_question": "",
+        "main_finding": "Research article analyses interactions between national research-system performance, investment and cooperation.",
+        "method_or_basis": "Scanner-retained pdf_excerpt; not independently fetched",
+        "qualification": "Interpretive assessment is provisional until original-source identity/provenance is reverified.",
+        "radar_relevance": "A Route 3: research investigates relationships among national research performance, funding and international collaboration.",
+        "why_supported": true,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:ee14eea7a83ff13c",
+      "source_hash": "fd99bf08",
+      "identity_hash": "7eb6fe119343269f",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "not_available",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_retrieved_in_this_pass",
+            "note": "Supplied URL: https://doi.org/10.1016/j.techfore.2015.03.010; scanner package read_mode=stored_only, text length=0. The present pass used retained scanner material only; no claim of independently fetched full text."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Not verified: missing substantive source material; do not treat as an authoritative completion."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "B",
+        "reason_code": "SOURCE_RECOVERY_REQUIRED",
+        "reason": "Insufficient substantive matching source material in this supplied package to reach a defensible admission decision; additional original-source recovery required."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "No independently confirmed metadata correction."
+      },
+      "duplicate": {
+        "status": "unverified",
+        "duplicate_of": "",
+        "reason": "Cross-record duplication not independently verified."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "not yet substantiated",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "Scanner-retained stored_only; not independently fetched",
+        "qualification": "Interpretive assessment is provisional until original-source identity/provenance is reverified.",
+        "radar_relevance": "Insufficient substantive matching source material in this supplied package to reach a defensible admission decision; additional original-source recovery required.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:a9b9bc6510bdcb20",
+      "source_hash": "8249cb6d",
+      "identity_hash": "9a8ca84b3806a093",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "substantial_web_text",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "package_material_available",
+            "note": "Supplied URL: https://doi.org/10.1007/978-981-287-597-6_5; scanner package read_mode=substantial_web_text, text length=20655. The present pass used retained scanner material only; no claim of independently fetched full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanner_supplied_source_material",
+            "url": "https://link.springer.com/chapter/10.1007/978-981-287-597-6_5",
+            "title": "Foresight and Strategic Thinking Enabling Valuable Strategy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source text present in uploaded work package and assessed for relevance; bibliographic provenance has NOT been independently reverified online. Decision is provisional."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "B",
+        "reason_code": "PACKAGE_EVIDENCE_PROVISIONAL",
+        "reason": "B: conceptual foresight/strategic-thinking synthesis; evidence of a materially new transferable method, rather than a general conceptual distinction, remains borderline."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "No independently confirmed metadata correction."
+      },
+      "duplicate": {
+        "status": "unverified",
+        "duplicate_of": "",
+        "reason": "Cross-record duplication not independently verified."
+      },
+      "reader_title": "Foresight and Strategic Thinking Enabling Valuable Strategy",
+      "reader_what": "Chapter differentiates strategic foresight and strategic thinking in organisational strategy.",
+      "reader_why": "",
+      "reader_more": "Assessment based on 20655 characters of source material retained in the input ZIP; full identity/provenance verification is still outstanding.",
+      "deep_analysis": {
+        "work_kind": "foresight conceptual chapter",
+        "research_question": "",
+        "main_finding": "Chapter differentiates strategic foresight and strategic thinking in organisational strategy.",
+        "method_or_basis": "Scanner-retained substantial_web_text; not independently fetched",
+        "qualification": "Interpretive assessment is provisional until original-source identity/provenance is reverified.",
+        "radar_relevance": "B: conceptual foresight/strategic-thinking synthesis; evidence of a materially new transferable method, rather than a general conceptual distinction, remains borderline.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:a7c79a88e54c0623",
+      "source_hash": "e0442fa4",
+      "identity_hash": "62e66f8bb3963b82",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "not_available",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_retrieved_in_this_pass",
+            "note": "Supplied URL: https://energy.ec.europa.eu/publications/intelligent-energy-europe-ii-programme-within-competitiveness-and-innovation-framework-programme_en; scanner package read_mode=stored_only, text length=0. The present pass used retained scanner material only; no claim of independently fetched full text."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Not verified: missing substantive source material; do not treat as an authoritative completion."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "SOURCE_RECOVERY_REQUIRED",
+        "reason": "Insufficient substantive matching source material in this supplied package to reach a defensible admission decision; additional original-source recovery required."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": "No independently confirmed metadata correction."
+      },
+      "duplicate": {
+        "status": "unverified",
+        "duplicate_of": "",
+        "reason": "Cross-record duplication not independently verified."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "not yet substantiated",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "Scanner-retained stored_only; not independently fetched",
+        "qualification": "Interpretive assessment is provisional until original-source identity/provenance is reverified.",
+        "radar_relevance": "Insufficient substantive matching source material in this supplied package to reach a defensible admission decision; additional original-source recovery required.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    }
+  ],
+  "coverage": {
+    "requested_total_across_workers": 72,
+    "worker_expected_slots": 36,
+    "actual_records_in_uploaded_package": 24,
+    "missing_records": 12,
+    "results_scope": "Only records actually present in uploaded package; many decisions provisional, not fully verified",
+    "missing_slots_are_not_verified_records": true
+  },
+  "missing_slots": [
+    {
+      "slot": 25,
+      "status": "NOT_SUPPLIED",
+      "record_key": null,
+      "source_hash": null,
+      "identity_hash": null,
+      "verified": false,
+      "decision": null,
+      "note": "No record supplied for this slot; cannot identify or verify."
+    },
+    {
+      "slot": 26,
+      "status": "NOT_SUPPLIED",
+      "record_key": null,
+      "source_hash": null,
+      "identity_hash": null,
+      "verified": false,
+      "decision": null,
+      "note": "No record supplied for this slot; cannot identify or verify."
+    },
+    {
+      "slot": 27,
+      "status": "NOT_SUPPLIED",
+      "record_key": null,
+      "source_hash": null,
+      "identity_hash": null,
+      "verified": false,
+      "decision": null,
+      "note": "No record supplied for this slot; cannot identify or verify."
+    },
+    {
+      "slot": 28,
+      "status": "NOT_SUPPLIED",
+      "record_key": null,
+      "source_hash": null,
+      "identity_hash": null,
+      "verified": false,
+      "decision": null,
+      "note": "No record supplied for this slot; cannot identify or verify."
+    },
+    {
+      "slot": 29,
+      "status": "NOT_SUPPLIED",
+      "record_key": null,
+      "source_hash": null,
+      "identity_hash": null,
+      "verified": false,
+      "decision": null,
+      "note": "No record supplied for this slot; cannot identify or verify."
+    },
+    {
+      "slot": 30,
+      "status": "NOT_SUPPLIED",
+      "record_key": null,
+      "source_hash": null,
+      "identity_hash": null,
+      "verified": false,
+      "decision": null,
+      "note": "No record supplied for this slot; cannot identify or verify."
+    },
+    {
+      "slot": 31,
+      "status": "NOT_SUPPLIED",
+      "record_key": null,
+      "source_hash": null,
+      "identity_hash": null,
+      "verified": false,
+      "decision": null,
+      "note": "No record supplied for this slot; cannot identify or verify."
+    },
+    {
+      "slot": 32,
+      "status": "NOT_SUPPLIED",
+      "record_key": null,
+      "source_hash": null,
+      "identity_hash": null,
+      "verified": false,
+      "decision": null,
+      "note": "No record supplied for this slot; cannot identify or verify."
+    },
+    {
+      "slot": 33,
+      "status": "NOT_SUPPLIED",
+      "record_key": null,
+      "source_hash": null,
+      "identity_hash": null,
+      "verified": false,
+      "decision": null,
+      "note": "No record supplied for this slot; cannot identify or verify."
+    },
+    {
+      "slot": 34,
+      "status": "NOT_SUPPLIED",
+      "record_key": null,
+      "source_hash": null,
+      "identity_hash": null,
+      "verified": false,
+      "decision": null,
+      "note": "No record supplied for this slot; cannot identify or verify."
+    },
+    {
+      "slot": 35,
+      "status": "NOT_SUPPLIED",
+      "record_key": null,
+      "source_hash": null,
+      "identity_hash": null,
+      "verified": false,
+      "decision": null,
+      "note": "No record supplied for this slot; cannot identify or verify."
+    },
+    {
+      "slot": 36,
+      "status": "NOT_SUPPLIED",
+      "record_key": null,
+      "source_hash": null,
+      "identity_hash": null,
+      "verified": false,
+      "decision": null,
+      "note": "No record supplied for this slot; cannot identify or verify."
+    }
+  ]
+}
