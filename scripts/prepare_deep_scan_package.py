@@ -524,29 +524,44 @@ def _doi(row: dict[str, Any]) -> str:
 
 
 def duplicate_index(doc: dict[str, Any]) -> dict[str, list[dict[str, str]]]:
+    """Find exact DOI/title duplicates without a quadratic full-corpus scan.
+
+    Preserve the old ordering, same-key exclusion, DOI-before-title reason and
+    eight-match cap; indexing only removes unrelated candidate comparisons.
+    """
     rows = [(strand, r) for strand, r in iter_records(doc)]
-    out: dict[str, list[dict[str, str]]] = {}
-    for i, (strand, row) in enumerate(rows):
-        key = record_key(row)
+    details = [(record_key(row), _doi(row), _norm_title(row.get("title") or row.get("headline")))
+               for _strand, row in rows]
+    by_doi: dict[str, list[int]] = {}
+    by_title: dict[str, list[int]] = {}
+    for i, (key, doi, title) in enumerate(details):
         if not key:
             continue
-        doi = _doi(row)
-        title = _norm_title(row.get("title") or row.get("headline"))
+        if doi:
+            by_doi.setdefault(doi, []).append(i)
+        if len(title) >= 24:
+            by_title.setdefault(title, []).append(i)
+
+    out: dict[str, list[dict[str, str]]] = {}
+    for i, (_strand, row) in enumerate(rows):
+        key, doi, title = details[i]
+        if not key:
+            continue
+        matching_positions = set(by_doi.get(doi, [])) if doi else set()
+        if title and len(title) >= 24:
+            matching_positions.update(by_title.get(title, []))
         matches: list[dict[str, str]] = []
-        for j, (other_strand, other) in enumerate(rows):
+        for j in sorted(matching_positions):
             if i == j:
                 continue
-            other_key = record_key(other)
+            other_key, other_doi, other_title = details[j]
             if not other_key or other_key == key:
                 continue
-            other_doi = _doi(other)
-            other_title = _norm_title(other.get("title") or other.get("headline"))
-            reason = ""
-            if doi and other_doi and doi == other_doi:
-                reason = "same_doi"
-            elif title and other_title and len(title) >= 24 and title == other_title:
-                reason = "exact_normalized_title"
+            reason = "same_doi" if doi and other_doi and doi == other_doi else (
+                "exact_normalized_title" if title and other_title and len(title) >= 24 and title == other_title else ""
+            )
             if reason:
+                other_strand, other = rows[j]
                 matches.append({
                     "record_key": other_key,
                     "strand": other_strand.replace("strand_", "").upper(),
@@ -554,11 +569,11 @@ def duplicate_index(doc: dict[str, Any]) -> dict[str, list[dict[str, str]]]:
                     "source": clean(other.get("source")),
                     "reason": reason,
                 })
+            if len(matches) >= 8:
+                break
         if matches:
-            out[key] = matches[:8]
+            out[key] = matches
     return out
-
-
 
 def same_key_variants(doc: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:
     out: dict[str, list[dict[str, Any]]] = {}

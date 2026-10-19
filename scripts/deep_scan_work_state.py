@@ -173,15 +173,19 @@ def deferred_keys(state: dict[str, Any]) -> set[str]:
 
 
 def assignment_blocked_keys(state: dict[str, Any]) -> set[str]:
-    """Unverified records already issued in the maximum number of packages.
+    """Block only records whose *validated recovery* budget is exhausted.
 
-    They remain importable from their final package, but cannot be issued again.
+    Appearing in a package does not mean that a worker returned a valid result.
+    Earlier versions counted ZIP issuance as a real attempt, permanently freezing
+    outstanding records after three package downloads despite no verified result.
+    Preserve scan_package_attempts for audit and hard-pass annotation, but never
+    use that counter alone to remove unfinished research from the worker queue.
     """
     return {
         key for key, row in state.get("records", {}).items()
         if isinstance(row, dict)
         and str(row.get("status") or "") != "verified"
-        and _scan_package_attempt_count(row) >= MAX_SCAN_PACKAGE_ATTEMPTS
+        and _attempt_count(row) >= MAX_RECOVERY_ATTEMPTS
     }
 
 
@@ -428,7 +432,9 @@ def mark_recovery_failure(
     max_attempts = max(1, int(max_attempts))
     rec = state.setdefault("records", {}).setdefault(key, {})
     lane = rec.get("lane")
-    attempts = min(max_attempts, max(_attempt_count(rec) + 1, _scan_package_attempt_count(rec)))
+    # Only a successfully validated defer consumes one of the three recovery
+    # passes.  Merely shipping a record inside a ZIP must not consume a pass.
+    attempts = min(max_attempts, _attempt_count(rec) + 1)
     history = rec.get("recovery_history") if isinstance(rec.get("recovery_history"), list) else []
     history = list(history)[-(max_attempts - 1):] if max_attempts > 1 else []
     history.append({
