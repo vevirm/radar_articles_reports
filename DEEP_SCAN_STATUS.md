@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261019T131018Z-50b05ae794a5`
+- Current package: `worker-a-20261019T134154Z-50b05ae794a5`
 - Assigned unresolved records: **36**
   1. `link:https://news.google.com/rss/articles/CBMiywFBVV95cUxPc1VtR2JJRVBuRUQ1elJQR3ZRUVpWMnh3aDlUaUh2Y0dHR0dJMzBGd2YwY2hGOHNQSEpraTZIcm5oTE9mOE5zMEdydVZIWUM3bjgwZ25oXzFjSlhEaTFOdTZEVGN4MVNNSHBwX2ZpcDRlSHE2cEJwdGtIV2FhVVc2VzctM2pVSHZuX3dsN2dVY1pkZERzRWFSWWtnNlRDSUdhN1BWVUhWb1N5UTFXTjk5YUpiR2lvb2xtQTgzbG13LVBsc0o3cXVBc3Rndw?oc=5` — EU and Canada held a Digital Dialogue to advance cooperation on digital policy and innovation - Shaping Europe’s digital future
   2. `link:https://news.google.com/rss/articles/CBMikAFBVV95cUxPSDF2ckt6WU9KeG5sYXJYOUxWS1dvS1lPQ1A0MnJNajVicFBpY0h2Ykc2UWttYmFncG5KZ09RcW52Rkg0N1VDdXh2SEp6RE8xUF85dFhWT1dpc09LeWpfLUx1QTZjbXVDLWtJNFF0d0tyeVkwbWhweldOaDE2MkVPcTZUeWJpNjVIbWhFOVFqelg?oc=5` — Speed up EU health security prep, says NATO chief medic
@@ -29,7 +29,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261019T131022Z-24c39e09d525`
+- Current package: `worker-b-20261019T134158Z-24c39e09d525`
 - Assigned unresolved records: **36**
   1. `link:https://doi.org/10.48550/arxiv.2609.39285` — The Concentration of Artificial Intelligence in Big Tech and Its Implications for Human Rights in the European Union
   2. `link:https://institutdelors.eu/en/publications/speech-by-e-moulin-strengthening-european-sovereignty-from-integration-to-competitiveness/` — Speech by E. Moulin: “Strengthening European sovereignty : from integration to competitiveness” - Institut Jacques Delors
