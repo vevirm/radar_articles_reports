@@ -8,16 +8,16 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 
 - Authoritative V2 verified: **2735** (Main **1312** + Historical **1423**)
 - Automatic queue still needing V2 verification: **542** (Main **241** + Historical **301**)
-- Currently assigned to workers: **51** (Main **16** + Historical **35**)
+- Currently assigned to workers: **107** (Main **72** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **31**
-- Automatic queue pending and not yet assigned: **491**
+- Automatic queue pending and not yet assigned: **435**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261019T111217Z-760f432f59f5`
-- Assigned unresolved records: **8**
+- Current package: `worker-a-20261019T123843Z-c4a85e7a464c`
+- Assigned unresolved records: **36**
   1. `link:https://www.eif.org/files/attachments/czech-fund-backs-ai-deep-tech-innovation-cz.pdf` — New Czech fund backs AI and deep-tech innovation with €50m for research commercialisation
   2. `link:https://doi.org/10.1016/j.iref.2026.105933` — AI and cloud adoption in European banking: Country-level evidence on the profitability-cyber risk trade-off
   3. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxPdDhGbmhkQi1JRWZXcUNzZjNsVVdIcGQ3ckZFYkRCVHFWVDFsaDRKeUtPWXZuSkIyUG0xUjRYLUt1VWxqWWpPT19PN291VTRVZjJxbURUcFB1NTM4Z3JDek1HVnlyWW91N3VfaUtRRUhwVGZscXMyenRYb1hwaElJMmk4T0k4V1VRZGVQaV9FSEpRbzFjOXZROHRmbXEzR2pWbnFPczlIaTc3V0wxTmtF?oc=5` — Women MEPs targeted by AI ‘nudifier’ apps push EU leaders to enforce December ban
@@ -26,10 +26,11 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `link:https://news.google.com/rss/articles/CBMitAFBVV95cUxPX2xRcUZHLUJybUdWU0hwNHo4emp6NmhObVNRMlFoVE1oaXJCdXFIZEFYY1MxQ0U2dVNOVkV2b0o3dUpzQVYzSEwySFpHOGRmVnZlaVZxdHY3a256Q2gxcW93UHVNT2lSUUVfVmxZdEtHVk91UFh5MXlXWG54Qm5SaFZVcHF5OWJfSVRYSGs5dzh3TE5ybkVxdUJpM0ZVeU51UlRQYmdLTVVDakl6bXBZM3Jrc18?oc=5` — Italy PM Meloni seeks EU trademark for her voice amid AI deepfake risks
   7. `link:https://news.google.com/rss/articles/CBMisAFBVV95cUxOaVJTMVNQWkE1TTNwWDlQdU9HcWtfaXVVNFQ5TGREVEpWZ0FfNlZYU0tYTHoyYklqNDlrMkoxcFBLVGxNa0hTdTdmdVFWRkhQSVRwbVpmc0owZWZTUzBhYkZTbG5aMkQ5WGpmQW8wWl9sNWVpUDZrc2JrWXZ6aFJXZEVOUm41a0J2OFNjaGtPeXRtZnNpYU4yU19EbmE4MUhFaDhuTHpVeXNBaTc0X01MRg?oc=5` — Slovenian glacier could disappear in days, researchers say
   8. `link:https://news.google.com/rss/articles/CBMivAFBVV95cUxNcV9ZLUZYN2pKcXF5eVFlTEZQTEhRZTdiVmpxVUp2SmpQb1Z5SXl6QTlHTFhNS2k0Z2JTaUVZZVhqNEFxRmptQTBnc1hQWW5WWUE4Z0NSYk9oNnVETGhIaThZWWk5SFllajlTc2MwQ1k1NDh5WU42Q18tMlFER0RQM0JtLUxOdkpMV1FITEs2U05qOU1mallzZDlDTkRIMnN0ZjhtQ3U0blVoN2JUUDdWc2JNd1BNUWZqYjJSTQ?oc=5` — How is Europe sharpening migration rules? Ask the Euronews AI chatbot
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261019T111221Z-e08502a9ffa5`
-- Assigned unresolved records: **8**
+- Current package: `worker-b-20261019T123847Z-2a02380c6a28`
+- Assigned unresolved records: **36**
   1. `link:https://www.euronews.com/2026/10/05/intelligence-everywhere-inside-europes-next-technology-era` — Intelligence Everywhere: Inside Europe’s Next Technology Era
   2. `link:https://www.researchprofessionalnews.com/rr-news-europe-innovation-2026-10-eu-innovation-agency-must-be-reformed-to-be-worth-keeping/` — EU innovation agency ‘must be reformed to be worth keeping’ - Research Professional News
   3. `link:https://www.euronews.com/2026/10/05/ai-weiwei-we-are-losing-privacy-and-without-it-we-stop-being-individuals` — Ai Weiwei: "We are losing privacy and without it we stop being individuals"
@@ -38,6 +39,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `link:https://news.google.com/rss/articles/CBMisgFBVV95cUxPeTJjaWFVN3hJdWk5MThTUzRpWDR4Rkl3LUtLaGRZZDV3akItQXZxX2N6Z2lramFndHVqRXN6TDRFVl93ektpRnhTUmpBT1dPT09QSW54Ty1VNEo1YjY2Z25HMlpnM042MlFQRmVlaFRyb0pRempfbENJNkZzdG9kS19EbW5hZDdiOW8tTENmalJkVDhxSkUtUnFsakw5MHhTbXYzQlI2eEJZbkphQy04WlVn?oc=5` — Seven EU countries push back against Brussels plans for military space
   7. `link:https://news.google.com/rss/articles/CBMitwFBVV95cUxOaFgzNjBfRFBmMnd5SWNaODVBUlF5Z3RrbHNDZmtSa0lHUWxLOHZfWHhvWktIRnpRaXY1MVlQTVhTcGkwNTJyYmdsMzY4V0VFcl9kME9EM3lXcWpsUkVDYTVkcE9VY1JLclQ4U09jRml2RHFzelJxcUItMGhzZmd6SjI3Wmw5RkYxMndBS0M5QXJVeGNDOVRYWGcwSlp1MXJWNGU2bDBWdDZyX0t4ODNna0Z2enlXc3c?oc=5` — Inside Soitec, the French tech company powering the global semiconductor industry
   8. `link:https://news.google.com/rss/articles/CBMi8gFBVV95cUxNVzJrbnB6clF0YzUzZmkxUUZ3V2hpV0xfN2lILXFyOGFoRExET1lvUzdKakhKR1NyS2pQdWVnSVhkWV9kM3U2NGtjaEhTeURmaXJNYmJqTDNzVUFiM0VDYnFhNW1pMmZlb3pHMkVqemkyNllRTW5OSDdPQjZwME1xODNzeHRjdDFuTF9qT0MtMWZwSWwxRC1UX25wRWxfLWUydDhITnVJcTYwQ1ptZ1JoX2lYdC0ta3l5NVBuYVN2Q1lwQndzUnZiSnJEbDhQenZVT3M4WUdvaWdmMlVQYlpwQ3N5X3NPTXNfRlhsc19DX0I5Zw?oc=5` — Horizon Europe launches a new research and innovation call on nature
+  - … plus 28 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
