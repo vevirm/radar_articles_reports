@@ -26,7 +26,7 @@ class DeepScanRetryRotation(unittest.TestCase):
         second = fill_lane(state, "A", pending, target_size=2)
         self.assertEqual(second, ["main:fresh1", "main:fresh2"])
 
-    def test_fourth_package_issuance_is_blocked(self):
+    def test_unanswered_package_issuance_does_not_block_fourth_attempt(self):
         state = empty_state()
         key = "main:stubborn"
         pending = [key]
@@ -34,10 +34,10 @@ class DeepScanRetryRotation(unittest.TestCase):
             assigned = fill_lane(state, "A", pending, target_size=1)
             self.assertEqual(assigned, [key])
             register_package(state, "A", f"pkg-{n}", assigned)
-        self.assertIn(key, assignment_blocked_keys(state))
-        self.assertEqual(fill_lane(state, "A", pending, target_size=1), [])
+        self.assertNotIn(key, assignment_blocked_keys(state))
+        self.assertEqual(fill_lane(state, "A", pending, target_size=1), [key])
 
-    def test_failure_from_third_issued_package_is_terminal(self):
+    def test_first_validated_failure_after_three_unanswered_packages_is_first_pass(self):
         state = empty_state()
         key = "main:stubborn"
         for n in range(1, 4):
@@ -45,10 +45,36 @@ class DeepScanRetryRotation(unittest.TestCase):
         status = mark_recovery_failure(
             state, key, "pkg-3", reason="still inaccessible", verification={}
         )
-        self.assertEqual(status, "needs_manual_verification")
-        self.assertEqual(state["records"][key]["recovery_attempts"], 3)
+        self.assertEqual(status, "recovery_retry")
+        self.assertEqual(state["records"][key]["recovery_attempts"], 1)
 
-    def test_old_ledger_backfills_distinct_package_memberships(self):
+    def test_saturated_backlog_refills_both_workers_without_overlap(self):
+        state = empty_state()
+        pending = [f"main:backlog-{n}" for n in range(22)]
+        # All candidates have been packaged several times, but none has a
+        # validated failed retrieval ladder or authoritative Deep Scan decision.
+        for key in pending:
+            state["records"][key] = {"status": "assigned", "scan_package_attempts": 6}
+        state["lanes"]["SINGLE"] = {"assigned": pending[:2]}
+        a = fill_lane(state, "A", pending, target_size=8)
+        b = fill_lane(state, "B", pending, target_size=8)
+        self.assertEqual(len(a), 8)
+        self.assertEqual(len(b), 8)
+        self.assertFalse(set(a) & set(b))
+        self.assertFalse(set(a + b) & set(pending[:2]))
+
+    def test_three_real_failed_recovery_passes_still_require_hands_on(self):
+        state = empty_state()
+        key = "main:needs-source"
+        for n in range(3):
+            status = mark_recovery_failure(
+                state, key, f"pkg-{n}", reason="audited recovery exhausted", verification={}
+            )
+        self.assertEqual(status, "needs_manual_verification")
+        self.assertIn(key, assignment_blocked_keys(state))
+        self.assertEqual(fill_lane(state, "A", [key], target_size=1), [])
+
+    def test_old_ledger_backfills_distinct_package_memberships_without_blocking(self):
         key = "historical:old"
         raw = empty_state()
         raw["records"][key] = {"status": "recovery_retry", "recovery_attempts": 1}
@@ -59,7 +85,7 @@ class DeepScanRetryRotation(unittest.TestCase):
             path.write_text(json.dumps(raw), encoding="utf-8")
             state = load_state(path)
         self.assertEqual(state["records"][key]["scan_package_attempts"], 3)
-        self.assertIn(key, assignment_blocked_keys(state))
+        self.assertNotIn(key, assignment_blocked_keys(state))
 
 
 if __name__ == "__main__":
