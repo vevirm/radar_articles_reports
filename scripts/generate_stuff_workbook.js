@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 'use strict';
-// Generate the repository snapshot from the authoritative active corpus plus the
-// complete Historical scanner archive. Historical rows are never filtered out:
-// Deep Scan/admission/correction sidecars are joined onto the matching archive row
-// so the workbook evolves from "scanner finding" to "deep-scanned finding" without
-// rewriting or deleting the original historical evidence.
+// Keep two distinct, continuously regenerated Excel snapshots:
+// main_radar_stuff.xlsx = Main Radar only (every available current field)
+// source_merit_ranking.xlsx = Main Radar + every Historical scanner finding.
+// The second name is retained for trajectory-engine and existing link compatibility.
+// Deep Scan/admission/correction details are joined without deleting historical rows.
 const fs=require('fs');
 const path=require('path');
 const Merit=require('../source_merit.js');
@@ -22,13 +22,12 @@ const extras={
   admission:readJson('admission_state.json',{records:{}}),
   corrections:readJson('record_corrections.json',{records:{}})
 };
-const out=path.join(ROOT,'stuff','source_merit_ranking.xlsx');
-const bytes=Workbook.buildXlsx(data,Merit,extras);
-fs.writeFileSync(out,Buffer.from(bytes));
-const hist=Workbook.buildHistoricalTable(extras.historical,extras.reader,extras.admission,extras.corrections);
-console.log(`Wrote ${out} from ${path.basename(input)}: ${Workbook.buildRows(data,Merit).length} active ranked records + ${hist.total} historical scanner findings (${hist.deepScannedCount} Deep Scanned, ${hist.authoritativeCount} authoritative historical)`);
-
-// Same scanner lifecycle as source_merit_ranking.xlsx; no Historical worksheet.
+const ranked=Workbook.buildRows(data,Merit).length;
 const mainOut=path.join(ROOT,'stuff','main_radar_stuff.xlsx');
-fs.writeFileSync(mainOut,Buffer.from(Workbook.buildXlsx(data,Merit,{}, {mainOnly:true})));
-console.log(`Wrote ${mainOut} (${Workbook.buildRows(data,Merit).length} active Radar records; no Historical tab)`);
+fs.writeFileSync(mainOut,Buffer.from(Workbook.buildXlsx(data,Merit,extras,{includeHistorical:false})));
+console.log(`Wrote ${mainOut} from ${path.basename(input)}: ${ranked} active ranked records, Main Radar only`);
+
+const bothOut=path.join(ROOT,'stuff','source_merit_ranking.xlsx');
+fs.writeFileSync(bothOut,Buffer.from(Workbook.buildXlsx(data,Merit,extras,{includeHistorical:true})));
+const hist=Workbook.buildHistoricalTable(extras.historical,extras.reader,extras.admission,extras.corrections);
+console.log(`Wrote ${bothOut} from ${path.basename(input)}: ${ranked} active ranked records + ${hist.total} historical scanner findings (${hist.deepScannedCount} Deep Scanned, ${hist.authoritativeCount} authoritative historical)`);
