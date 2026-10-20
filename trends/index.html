@@ -1,5 +1,21 @@
 <!doctype html>
 <html lang="en"><head>
+<style id="radar-gate-prehide">html:not(.radar-unlocked) body{visibility:hidden!important}</style>
+<script id="radar-password-gate">
+(function(){
+  const key='radar-visitor-unlocked-v1';
+  try{if(sessionStorage.getItem(key)==='yes'){document.documentElement.classList.add('radar-unlocked');return;}}catch(e){}
+  const show=()=>{
+    const style=document.createElement('style');style.textContent='#radar-lock{position:fixed;inset:0;z-index:2147483647;display:grid;place-items:center;background:#102a30;color:#f6fbfb;font:16px system-ui,-apple-system,sans-serif;visibility:visible!important;padding:20px}#radar-lock *{box-sizing:border-box}#radar-lock .panel{width:min(100%,390px);padding:32px;border:1px solid #46656b;border-radius:16px;background:#183a40;box-shadow:0 18px 60px #071a1e}#radar-lock h1{font-size:24px;margin:0 0 12px}#radar-lock p{line-height:1.5;color:#d1e0e2}#radar-lock input{width:100%;padding:13px;border-radius:8px;border:1px solid #a1b8bd;background:white;color:#14272a;font:inherit}#radar-lock button{margin-top:12px;width:100%;padding:13px;background:#9ce3d7;color:#102a30;border:0;border-radius:8px;font:inherit;font-weight:700;cursor:pointer}#radar-lock .error{color:#ffb7b7;min-height:24px;font-size:14px;margin:10px 0 0}';document.head.appendChild(style);
+    const overlay=document.createElement('div');overlay.id='radar-lock';overlay.innerHTML='<div class="panel"><h1>European Foresight Radar</h1><p>This page is password protected. Enter the access password to continue.</p><form><label for="radar-pass">Password</label><input id="radar-pass" type="password" autocomplete="current-password" required autofocus><button type="submit">Enter site</button><p class="error" role="alert" aria-live="polite"></p></form></div>';
+    document.body.appendChild(overlay);
+    const form=overlay.querySelector('form'),input=overlay.querySelector('input'),error=overlay.querySelector('.error');
+    form.addEventListener('submit',function(e){e.preventDefault();if(input.value==='TUTU?Scanner2026'){try{sessionStorage.setItem(key,'yes')}catch(e){}document.documentElement.classList.add('radar-unlocked');overlay.remove();style.remove();input.value='';}else{error.textContent='Incorrect password. Please try again.';input.value='';input.focus();}});
+    input.focus();
+  };
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',show,{once:true});else show();
+})();
+</script>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive">
 <title>EU research and innovation · Trends &amp; Counter-Trends</title>
