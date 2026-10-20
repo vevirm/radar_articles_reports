@@ -12,8 +12,10 @@
    historical/index.html so the whole site stays on one password.
    ===================================================================== */
 (function(){
+  // Pages with the HTML password gate must not get a second gate.
+  if(document.getElementById('radar-password-gate')) return;
   var KEY='radarUnlocked';
-  var HASH='8e1be4b8ade75bbd815f588e2fab5e8ce0bc9660530f856278d66909a8301eff';
+  var HASH='4b054b94dc77fa2b8aaef88524b2bf880dc9bc8d393f52e5391a7c53b6349207';
 
   // Already unlocked this session, or the page has its own gate: do nothing.
   try{ if(sessionStorage.getItem(KEY)==='1') return; }catch(e){}
