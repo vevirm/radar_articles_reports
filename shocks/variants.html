@@ -41,6 +41,6 @@ function render(v){const s=v.scenario;document.title=`EU research and innovation
 (async()=>{try{const id=new URLSearchParams(location.search).get('id')||'';const v=RadarShockVariants.build(await RadarData.load('../radar.json','../radar_seed.json'),id);if(!v)throw new Error('scenario unavailable');render(v)}catch(e){console.error(e);document.getElementById('content').innerHTML='<div class="empty">This shock variant is not available right now. Return to External Shocks and open one of the listed scenarios.</div>'}})();
 </script>
 <script src="../reader_language.js?v=5"></script>
-<script src="../site-shell.js?v=29"></script>
+<script src="../site-shell.js?v=20261020-single-gate-2"></script>
 </body>
 </html>

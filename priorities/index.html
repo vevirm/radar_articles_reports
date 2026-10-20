@@ -83,6 +83,6 @@ function render(view){const risks=shelf(view.risks),opps=shelf(view.opportunitie
 (async()=>{try{const data=await RadarData.load('../radar.json','../radar_seed.json');render(RadarPriorities.buildPriorityView(data))}catch(e){document.getElementById('risks').innerHTML='<li class="empty">Unavailable.</li>';document.getElementById('opportunities').innerHTML='<li class="empty">Unavailable.</li>'}})();
 </script>
 <script src="../reader_language.js?v=5"></script>
-<script src="../site-shell.js?v=29"></script>
+<script src="../site-shell.js?v=20261020-single-gate-2"></script>
 </body>
 </html>

@@ -76,5 +76,5 @@ document.getElementById('downloadMainExcel').addEventListener('click',()=>downlo
 document.getElementById('downloadCombinedExcel').addEventListener('click',()=>downloadExcel('combined'));
 (async()=>{try{const [active,historical,reader,admission,corrections]=await Promise.all([RadarData.load('../radar.json','../radar_seed.json'),fetchJsonMaybe('../historical/historical.json',{items:[]}),fetchJsonMaybe('../reader_text.json',{records:{}}),fetchJsonMaybe('../admission_state.json',{records:{}}),fetchJsonMaybe('../record_corrections.json',{records:{}})]);radarData=active;workbookExtras={historical,reader,admission,corrections};renderPendingCandidates(active)}catch(e){console.error(e);document.getElementById('pendingCandidateList').innerHTML='<div class="empty">Candidate queue unavailable.</div>';document.getElementById('downloadMainExcel').disabled=true;document.getElementById('downloadCombinedExcel').disabled=true}})();
 </script>
-<script src="../site-shell.js?v=28"></script>
+<script src="../site-shell.js?v=20261020-single-gate-2"></script>
 </body></html>
