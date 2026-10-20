@@ -69,5 +69,5 @@ let treeResizeTimer;addEventListener('resize',()=>{clearTimeout(treeResizeTimer)
 (async()=>{try{const d=await RadarData.load('../radar.json','../radar_seed.json');const items=[...(d.strand_a||[]),...(d.strand_c||[])];const trees=globalThis.RadarIssues?.buildTrees?RadarIssues.buildTrees(items,{count:8}):[];document.getElementById('trees').innerHTML=trees.length?trees.map(chart).join(''):'<div class="empty">No topic maps available.</div>';requestAnimationFrame(()=>requestAnimationFrame(drawAllTrees))}catch(e){console.error(e);document.getElementById('trees').innerHTML='<div class="empty">Topic maps unavailable.</div>'}})();
 </script>
 <script src="../reader_language.js?v=5"></script>
-<script src="../site-shell.js?v=20261020-single-gate-2"></script>
+<script src="../site-shell.js?v=20261020-no-nested-gate-3"></script>
 </body></html>

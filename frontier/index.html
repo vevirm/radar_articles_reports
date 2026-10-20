@@ -52,5 +52,5 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-expand]');
 (async()=>{try{const d=await RadarData.load('../radar.json','../radar_seed.json'),v=SovereigntyFrontier.buildFrontier(d);document.getElementById('matrixGrid').innerHTML=matrixHtml(v);document.getElementById('state').textContent=`Updated ${fmtDate(v.lastUpdated)}.`;}catch(e){console.error('Matrix load failed',e);document.getElementById('matrixGrid').innerHTML='<p class="empty">Matrix unavailable.</p>';document.getElementById('state').textContent='Radar data could not be loaded.'}})();
 </script>
 <script src="../reader_language.js?v=5"></script>
-<script src="../site-shell.js?v=20261020-single-gate-2"></script>
+<script src="../site-shell.js?v=20261020-no-nested-gate-3"></script>
 </body></html>
