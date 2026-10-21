@@ -1,0 +1,106 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-b-20261021T115333Z-e37400bb894e",
+  "results": [
+    {
+      "record_key": "link:https://institutdelors.eu/content/uploads/2026/06/Etude-CRIP_Revolution_IA_horizon_2035_Barichella__Short_version_EN_2.pdf",
+      "source_hash": "e0468f48",
+      "identity_hash": "be8286a48d48d866",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Direct browser retrieval of https://institutdelors.eu/content/uploads/2026/06/Etude-CRIP_Revolution_IA_horizon_2035_Barichella__Short_version_EN_2.pdf did not expose the PDF, although the supplied scanner package contains 77 numbered pages extracted from that exact first-party PDF."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Confirmed report identity, author, date, approach and survey numbers on the issuer’s official page https://institutdelors.eu/en/publications/fr-revolution-des-technologies-de-lintelligence-artificielle-a-lhorizon-2035/."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Inspected the package-provided 77-page extracted first-party short-version PDF at https://institutdelors.eu/content/uploads/2026/06/Etude-CRIP_Revolution_IA_horizon_2035_Barichella__Short_version_EN_2.pdf; title-page attribution and analysis match the issuer’s independently accessible official publication page."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://institutdelors.eu/content/uploads/2026/06/Etude-CRIP_Revolution_IA_horizon_2035_Barichella__Short_version_EN_2.pdf",
+            "title": "The Artificial Intelligence Revolution by 2035 (Short version)",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publisher_page",
+            "url": "https://institutdelors.eu/en/publications/fr-revolution-des-technologies-de-lintelligence-artificielle-a-lhorizon-2035/",
+            "title": "The Artificial Intelligence Revolution by 2035",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: examined cached first-party PDF text across 77 pages; independently cross-checked issuer, author and method on its official report and author pages. Browser did not directly re-fetch the PDF. No claim that proposed model law is enacted."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Substantive European AI-governance and strategic-technology-capability study, grounded in European-focused survey/interviews and explicit EU AI Act, research, industrial and digital autonomy analysis. Meets Strand A strategic-environment evidence route; predictions and advocacy are qualified."
+      },
+      "metadata_correction": {
+        "fields": {
+          "authors": "Arnault Barichella",
+          "date": "2026-06-03",
+          "title": "The Artificial Intelligence Revolution by 2035 (Short version)"
+        },
+        "unset": [],
+        "reason": "Official Jacques Delors Institute listing names Arnault Barichella and dates the publication 03/06/26; attached model legislation is a proposal, not an adopted legal instrument."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "European AI governance and strategic choices through 2035",
+      "reader_what": "A European-focused study combines 460 survey responses and 12 interviews to examine AI risks and governance options.",
+      "reader_why": "Relevant to Europe’s AI capabilities, digital dependencies and governance choices affecting research and innovation.",
+      "reader_more": "The Jacques Delors Institute and CRiP study examines AI development to 2028 and 2035. It combines three respondent groups, qualitative interviews and policy analysis with recommendations. Its proposed regulatory text is an author proposal rather than EU law. Survey responses and future trajectories should not be read as representative measurement or settled forecasts.",
+      "deep_analysis": {
+        "work_kind": "Policy research report, abridged version",
+        "research_question": "How may AI transform European society and technology capacity through 2035, and how should institutions maintain human oversight?",
+        "main_finding": "The study describes potentially transformative deployment of autonomous AI systems and proposes stronger human-control governance alongside European strategic-technology policy responses.",
+        "method_or_basis": "Three surveys of Jacques Delors Institute and CRiP networks (327+96+37 = 460 responses), 12 interviews and desk-based policy and technology assessment.",
+        "qualification": "The survey is a nonrepresentative set of 460 respondents and 12 interviews; 2035 trajectories and proposed governance measures are scenarios/recommendations, not observed outcomes or enacted law.",
+        "radar_relevance": "Strand A: substantive EU strategic AI and research/innovation governance evidence; not a Strand C new enacted-policy event.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "ai.governance",
+          "secondary_objects": [
+            "digital.sovereignty"
+          ],
+          "actor": {
+            "name": "Arnault Barichella / Jacques Delors Institute",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-06-03",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "The survey is a nonrepresentative set of 460 respondents and 12 interviews; 2035 trajectories and proposed governance measures are scenarios/recommendations, not observed outcomes or enacted law.",
+          "text": "The Jacques Delors Institute study recommends governance limits to preserve human oversight amid rapid AI adoption, in a European strategic technology context.",
+          "confidence": "high"
+        }
+      ]
+    }
+  ]
+}

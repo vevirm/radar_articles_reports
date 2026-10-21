@@ -1,0 +1,106 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-a-20261021T115329Z-9bec8e964aa7",
+  "results": [
+    {
+      "record_key": "link:https://doi.org/10.1016/j.futures.2026.103832",
+      "source_hash": "0fecddf3",
+      "identity_hash": "1a7b4ef3479d002c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "The supplied DOI redirect https://doi.org/10.1016/j.futures.2026.103832 returned HTTP 403 in direct web retrieval."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1016/j.futures.2026.103832 resolves in publisher indexing to the full-text article at https://www.sciencedirect.com/science/article/pii/S0016328726000741; title and authors match."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Read complete primary publisher article at https://www.sciencedirect.com/science/article/pii/S0016328726000741; cross-checked the publication identity at https://research.chalmers.se/en/publication/551803 and Chalmers-hosted full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0016328726000741",
+            "title": "Walking together by asking questions: Combining backcasting and prefiguration to invite a hopeful approach to desirable futures",
+            "evidence_used": true
+          },
+          {
+            "kind": "institutional_repository",
+            "url": "https://research.chalmers.se/publication/551731/file/551731_Fulltext.pdf",
+            "title": "Walking together by asking questions: Combining backcasting and prefiguration to invite a hopeful approach to desirable futures",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: publisher full text read and title/authors/DOI cross-checked against Chalmers university repository, including legitimate full-text copy. Direct DOI fetch was blocked, but alternative official primary routes succeeded."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_TRANSFERABLE_METHOD",
+        "reason": "A new conceptual three-space framework integrates prefiguration and backcasting into a transferable futures/transformative-planning method, explicitly developing methods rather than simply applying an existing technique."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Prefigurative backcasting combines practical experiments with future-oriented planning",
+      "reader_what": "A conceptual framework connects desirable futures, lived realities and present-day experimentation.",
+      "reader_why": "Offers a potentially reusable way to connect futures visions, structured planning and transformative action.",
+      "reader_more": "The authors compare backcasting and prefiguration through an integrative literature review. Their proposed framework has three spaces: desirable futures, lived reality and prefigurative being. They argue each approach can inform the other. The framework is proposed for experimentation, not established as effective by impact evaluation.",
+      "deep_analysis": {
+        "work_kind": "Peer-reviewed futures methods research article",
+        "research_question": "How do backcasting and prefiguration compare, and how might they complement one another in transformation practice?",
+        "main_finding": "The article proposes prefigurative backcasting, integrating desirable futures, lived reality and prefigurative being to connect futures-oriented reflection with enacted change.",
+        "method_or_basis": "Qualitative integrative scoping literature review, comparative conceptual analysis and framework synthesis; publisher reports 78 Scopus-screened selections plus 40 literature additions.",
+        "qualification": "This is a conceptual synthesis and proposed framework based on an integrative scoping review, not an empirically validated intervention or demonstrated policy outcome.",
+        "radar_relevance": "Strand B: new transferable futures/foresight method, geography-independent, suitable for anticipatory and transformative planning.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [
+            "methods.scenario"
+          ],
+          "actor": {
+            "name": "Clara Saglietti, Johan Holmén and John Holmberg",
+            "class": "university_group"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026",
+          "status_date_precision": "year",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "This is a conceptual synthesis and proposed framework based on an integrative scoping review, not an empirically validated intervention or demonstrated policy outcome.",
+          "text": "The authors propose a three-space prefigurative-backcasting framework integrating participatory future direction-setting, present reality and practical experimentation.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    }
+  ]
+}
