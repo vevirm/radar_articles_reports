@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-21T11:24:29Z",
+  "generated_at": "2026-10-21T12:09:07Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -247934,8 +247934,219 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1016/j.futures.2026.103832": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "corpus_scope": "main",
+      "source_hash": "0fecddf3",
+      "identity_hash": "1a7b4ef3479d002c",
+      "reader_title": "Prefigurative backcasting combines practical experiments with future-oriented planning",
+      "reader_what": "A conceptual framework connects desirable futures, lived realities and present-day experimentation.",
+      "reader_why": "Offers a potentially reusable way to connect futures visions, structured planning and transformative action.",
+      "reader_more": "The authors compare backcasting and prefiguration through an integrative literature review. Their proposed framework has three spaces: desirable futures, lived reality and prefigurative being. They argue each approach can inform the other. The framework is proposed for experimentation, not established as effective by impact evaluation.",
+      "deep_analysis": {
+        "work_kind": "Peer-reviewed futures methods research article",
+        "research_question": "How do backcasting and prefiguration compare, and how might they complement one another in transformation practice?",
+        "main_finding": "The article proposes prefigurative backcasting, integrating desirable futures, lived reality and prefigurative being to connect futures-oriented reflection with enacted change.",
+        "method_or_basis": "Qualitative integrative scoping literature review, comparative conceptual analysis and framework synthesis; publisher reports 78 Scopus-screened selections plus 40 literature additions.",
+        "qualification": "This is a conceptual synthesis and proposed framework based on an integrative scoping review, not an empirically validated intervention or demonstrated policy outcome.",
+        "radar_relevance": "Strand B: new transferable futures/foresight method, geography-independent, suitable for anticipatory and transformative planning.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "The supplied DOI redirect https://doi.org/10.1016/j.futures.2026.103832 returned HTTP 403 in direct web retrieval."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1016/j.futures.2026.103832 resolves in publisher indexing to the full-text article at https://www.sciencedirect.com/science/article/pii/S0016328726000741; title and authors match."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Read complete primary publisher article at https://www.sciencedirect.com/science/article/pii/S0016328726000741; cross-checked the publication identity at https://research.chalmers.se/en/publication/551803 and Chalmers-hosted full text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0016328726000741",
+            "title": "Walking together by asking questions: Combining backcasting and prefiguration to invite a hopeful approach to desirable futures",
+            "evidence_used": true
+          },
+          {
+            "kind": "institutional_repository",
+            "url": "https://research.chalmers.se/publication/551731/file/551731_Fulltext.pdf",
+            "title": "Walking together by asking questions: Combining backcasting and prefiguration to invite a hopeful approach to desirable futures",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: publisher full text read and title/authors/DOI cross-checked against Chalmers university repository, including legitimate full-text copy. Direct DOI fetch was blocked, but alternative official primary routes succeeded."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_TRANSFERABLE_METHOD",
+        "reason": "A new conceptual three-space framework integrates prefiguration and backcasting into a transferable futures/transformative-planning method, explicitly developing methods rather than simply applying an existing technique."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-21T12:09:07Z",
+      "deep_scan_package_id": "worker-a-20261021T115329Z-9bec8e964aa7",
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [
+            "methods.scenario"
+          ],
+          "actor": {
+            "name": "Clara Saglietti, Johan Holmén and John Holmberg",
+            "class": "university_group"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026",
+          "status_date_precision": "year",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "This is a conceptual synthesis and proposed framework based on an integrative scoping review, not an empirically validated intervention or demonstrated policy outcome.",
+          "text": "The authors propose a three-space prefigurative-backcasting framework integrating participatory future direction-setting, present reality and practical experimentation.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "link:https://doi.org/10.1016/j.futures.2026.103832",
+          "merit": 70,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:1a7b4ef3479d002c:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://institutdelors.eu/content/uploads/2026/06/Etude-CRIP_Revolution_IA_horizon_2035_Barichella__Short_version_EN_2.pdf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "e0468f48",
+      "identity_hash": "be8286a48d48d866",
+      "reader_title": "European AI governance and strategic choices through 2035",
+      "reader_what": "A European-focused study combines 460 survey responses and 12 interviews to examine AI risks and governance options.",
+      "reader_why": "Relevant to Europe’s AI capabilities, digital dependencies and governance choices affecting research and innovation.",
+      "reader_more": "The Jacques Delors Institute and CRiP study examines AI development to 2028 and 2035. It combines three respondent groups, qualitative interviews and policy analysis with recommendations. Its proposed regulatory text is an author proposal rather than EU law. Survey responses and future trajectories should not be read as representative measurement or settled forecasts.",
+      "deep_analysis": {
+        "work_kind": "Policy research report, abridged version",
+        "research_question": "How may AI transform European society and technology capacity through 2035, and how should institutions maintain human oversight?",
+        "main_finding": "The study describes potentially transformative deployment of autonomous AI systems and proposes stronger human-control governance alongside European strategic-technology policy responses.",
+        "method_or_basis": "Three surveys of Jacques Delors Institute and CRiP networks (327+96+37 = 460 responses), 12 interviews and desk-based policy and technology assessment.",
+        "qualification": "The survey is a nonrepresentative set of 460 respondents and 12 interviews; 2035 trajectories and proposed governance measures are scenarios/recommendations, not observed outcomes or enacted law.",
+        "radar_relevance": "Strand A: substantive EU strategic AI and research/innovation governance evidence; not a Strand C new enacted-policy event.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Direct browser retrieval of https://institutdelors.eu/content/uploads/2026/06/Etude-CRIP_Revolution_IA_horizon_2035_Barichella__Short_version_EN_2.pdf did not expose the PDF, although the supplied scanner package contains 77 numbered pages extracted from that exact first-party PDF."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Confirmed report identity, author, date, approach and survey numbers on the issuer’s official page https://institutdelors.eu/en/publications/fr-revolution-des-technologies-de-lintelligence-artificielle-a-lhorizon-2035/."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Inspected the package-provided 77-page extracted first-party short-version PDF at https://institutdelors.eu/content/uploads/2026/06/Etude-CRIP_Revolution_IA_horizon_2035_Barichella__Short_version_EN_2.pdf; title-page attribution and analysis match the issuer’s independently accessible official publication page."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://institutdelors.eu/content/uploads/2026/06/Etude-CRIP_Revolution_IA_horizon_2035_Barichella__Short_version_EN_2.pdf",
+            "title": "The Artificial Intelligence Revolution by 2035 (Short version)",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publisher_page",
+            "url": "https://institutdelors.eu/en/publications/fr-revolution-des-technologies-de-lintelligence-artificielle-a-lhorizon-2035/",
+            "title": "The Artificial Intelligence Revolution by 2035",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: examined cached first-party PDF text across 77 pages; independently cross-checked issuer, author and method on its official report and author pages. Browser did not directly re-fetch the PDF. No claim that proposed model law is enacted."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Substantive European AI-governance and strategic-technology-capability study, grounded in European-focused survey/interviews and explicit EU AI Act, research, industrial and digital autonomy analysis. Meets Strand A strategic-environment evidence route; predictions and advocacy are qualified."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-21T12:09:07Z",
+      "deep_scan_package_id": "worker-b-20261021T115333Z-e37400bb894e",
+      "claims": [
+        {
+          "object": "ai.governance",
+          "secondary_objects": [
+            "digital.sovereignty"
+          ],
+          "actor": {
+            "name": "Arnault Barichella / Jacques Delors Institute",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-06-03",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "The survey is a nonrepresentative set of 460 respondents and 12 interviews; 2035 trajectories and proposed governance measures are scenarios/recommendations, not observed outcomes or enacted law.",
+          "text": "The Jacques Delors Institute study recommends governance limits to preserve human oversight amid rapid AI adoption, in a European strategic technology context.",
+          "confidence": "high",
+          "record_key": "link:https://institutdelors.eu/content/uploads/2026/06/Etude-CRIP_Revolution_IA_horizon_2035_Barichella__Short_version_EN_2.pdf",
+          "merit": 87,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:be8286a48d48d866:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-21T10:14:09Z"
+  "claims_updated_at": "2026-10-21T12:09:07Z"
 }
