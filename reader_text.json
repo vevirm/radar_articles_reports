@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-21T07:47:20Z",
+  "generated_at": "2026-10-21T09:19:19Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -239910,8 +239910,344 @@
       "deep_scan_package_id": "worker-b-20261019T134158Z-24c39e09d525",
       "claims": [],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMirwFBVV95cUxPQTVhdGtDQ3ltbWRrWWxnSjE2TTF1R0szTjQ0OW5NSjJtRzJVN1ZtblJ1QjhQbUdHMzZMUmF0OTVlcGtmaUFhN2J3UXI2WkhlSVJxTWhpa205ckxkZHVudzBGcWxscHl5M21TSi11UmpZczF0bkZsYTlJekplbzQ0VTVWTVh5d3Rna09YbFZONUR0VmpSUEVudTluUkJoOG04alJZejNrUTM5cFNxRmdn?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "2d67f2aa",
+      "identity_hash": "90ecca9751565cdf",
+      "reader_title": "German ex-spy chief arrested, suspected of espionage and treason",
+      "reader_what": "German authorities arrested a former intelligence official on suspected espionage charges.",
+      "reader_more": "German authorities arrested a former intelligence official on suspected espionage charges. Criminal investigation and allegations are not proof of guilt or a new R&I security event.",
+      "deep_analysis": {
+        "work_kind": "current reportage / static profile",
+        "research_question": "",
+        "main_finding": "German authorities arrested a former intelligence official on suspected espionage charges.",
+        "method_or_basis": "Matching primary source https://www.afp.com/en/german-ex-spy-chief-arrested-suspected-espionage-treason",
+        "qualification": "Criminal investigation and allegations are not proof of guilt or a new R&I security event.",
+        "radar_relevance": "The AFP story covers alleged treason and espionage involving a former German intelligence chief, without any documented research-security, dual-use R&D theft, university or scientific-capability nexus. A general security event does not pass the Strand C research/innovation bridge.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Original source URL https://news.google.com/rss/articles/CBMirwFBVV95cUxPQTVhdGtDQ3ltbWRrWWxnSjE2TTF1R0szTjQ0OW5NSjJtRzJVN1ZtblJ1QjhQbUdHMzZMUmF0OTVlcGtmaUFhN2J3UXI2WkhlSVJxTWhpa205ckxkZHVudzBGcWxscHl5M21TSi11UmpZczF0bkZsYTlJekplbzQ0VTVWTVh5d3Rna09YbFZONUR0VmpSUEVudTluUkJoOG04alJZejNrUTM5cFNxRmdn?oc=5 is an RSS redirect; no substantive text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Matching original item found: https://www.afp.com/en/german-ex-spy-chief-arrested-suspected-espionage-treason"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Verified issuing text and date at https://www.afp.com/en/german-ex-spy-chief-arrested-suspected-espionage-treason"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.afp.com/en/german-ex-spy-chief-arrested-suspected-espionage-treason",
+            "title": "German ex-spy chief arrested, suspected of espionage and treason",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_RI_CHANGE",
+        "reason": "The AFP story covers alleged treason and espionage involving a former German intelligence chief, without any documented research-security, dual-use R&D theft, university or scientific-capability nexus. A general security event does not pass the Strand C research/innovation bridge."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-21T09:19:18Z",
+      "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMikAJBVV95cUxPWUJDemFBRS1vSFhhNk5EdGxXNmtwM3AzY3Z3aF9EMHpSNmV2ckxIVl9hQ1VtMm45dHdEemQ1YmZGaDhMaUJ1WFpINmhsNi1WOXhVSTJwcnc0QmVoeE5ySU01VEdKVElMOHZMQkN3ejMtb0xPcFBKSlhaX25yZVg4aDg3bWtzRzhOXzB2X2txOTNhUlE0Q2VZMXhWSXBIeXhvQlhrdTlWSmdIWUc2MUV0Tlk4WDlBSlZ0TWNhNzd1YnJWZ0hYc0dpcmVZYk1vWWh6TW91QlZUWUlPNEZfWWZUVGR3RUpTeF9iUHEtdWRBTWF6OU5tTXUyd0IwS0pJSTA3bWRsTXpzU0ZsR1NPN1ZGMA?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "b9aa1ce9",
+      "identity_hash": "fa2158a531e6c8bc",
+      "reader_title": "Fourth EU-Faroe Islands Horizon Europe Joint Research and Innovation Committee meeting",
+      "reader_what": "The EU and Faroe Islands reviewed participation under the pre-existing Horizon Europe association agreement.",
+      "reader_more": "The EU and Faroe Islands reviewed participation under the pre-existing Horizon Europe association agreement. Meeting occurred 30 September 2026; article published 6 October. No new instrument is established.",
+      "deep_analysis": {
+        "work_kind": "current reportage / static profile",
+        "research_question": "",
+        "main_finding": "The EU and Faroe Islands reviewed participation under the pre-existing Horizon Europe association agreement.",
+        "method_or_basis": "Matching primary source https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/fourth-eu-faroe-islands-horizon-europe-joint-research-and-innovation-committee-meeting-2026-10-06_en",
+        "qualification": "Meeting occurred 30 September 2026; article published 6 October. No new instrument is established.",
+        "radar_relevance": "The Commission recounts the fourth routine EU–Faroe Islands Horizon Europe joint committee meeting on 30 September. It reviews existing association implementation and participation, without recording a new agreement, programme, funding allocation or research capability change. A meeting alone fails Strand C substantive-change test.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Original source URL https://news.google.com/rss/articles/CBMikAJBVV95cUxPWUJDemFBRS1vSFhhNk5EdGxXNmtwM3AzY3Z3aF9EMHpSNmV2ckxIVl9hQ1VtMm45dHdEemQ1YmZGaDhMaUJ1WFpINmhsNi1WOXhVSTJwcnc0QmVoeE5ySU01VEdKVElMOHZMQkN3ejMtb0xPcFBKSlhaX25yZVg4aDg3bWtzRzhOXzB2X2txOTNhUlE0Q2VZMXhWSXBIeXhvQlhrdTlWSmdIWUc2MUV0Tlk4WDlBSlZ0TWNhNzd1YnJWZ0hYc0dpcmVZYk1vWWh6TW91QlZUWUlPNEZfWWZUVGR3RUpTeF9iUHEtdWRBTWF6OU5tTXUyd0IwS0pJSTA3bWRsTXpzU0ZsR1NPN1ZGMA?oc=5 is an RSS redirect; no substantive text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Matching original item found: https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/fourth-eu-faroe-islands-horizon-europe-joint-research-and-innovation-committee-meeting-2026-10-06_en"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Verified issuing text and date at https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/fourth-eu-faroe-islands-horizon-europe-joint-research-and-innovation-committee-meeting-2026-10-06_en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/fourth-eu-faroe-islands-horizon-europe-joint-research-and-innovation-committee-meeting-2026-10-06_en",
+            "title": "Fourth EU-Faroe Islands Horizon Europe Joint Research and Innovation Committee meeting",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_RI_CHANGE",
+        "reason": "The Commission recounts the fourth routine EU–Faroe Islands Horizon Europe joint committee meeting on 30 September. It reviews existing association implementation and participation, without recording a new agreement, programme, funding allocation or research capability change. A meeting alone fails Strand C substantive-change test."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-21T09:19:18Z",
+      "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMimAFBVV95cUxNRmdhb3VwRE1ZWGhyRGI2RW5ZNURTRjFrYmJ2T0Z2ejdyVURwVGhoS2dESEdDYnVZZDJkb2NVN1Nuc2dJd0F4Z21KdjNTYzd5OWUxSkZQMGdJeThVd3NWM25xQi10ZDZYNm1KTUZSNzFYMFZTSFlfcHlFWW5ERlREMEVYZHJTQlNOQVpIMjBwQlpNNjNyb1BUeA?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "283b49f2",
+      "identity_hash": "d7942328ee25b75f",
+      "reader_title": "New weapons, new risks: Europe’s AI policing plan stokes privacy concerns",
+      "reader_what": "EU policymakers and privacy officials debate AI-enabled Europol police powers and supervisory safeguards.",
+      "reader_more": "EU policymakers and privacy officials debate AI-enabled Europol police powers and supervisory safeguards. The Commission Europol regulation proposal dates to 24 June 2026; it had not been enacted on the article date.",
+      "deep_analysis": {
+        "work_kind": "current reportage / static profile",
+        "research_question": "",
+        "main_finding": "EU policymakers and privacy officials debate AI-enabled Europol police powers and supervisory safeguards.",
+        "method_or_basis": "Matching primary source https://www.politico.eu/article/europol-ai-new-weapons-new-privacy-risks-reboots-for-the-era/",
+        "qualification": "The Commission Europol regulation proposal dates to 24 June 2026; it had not been enacted on the article date.",
+        "radar_relevance": "POLITICO examines oversight and privacy criticism of a Europol expansion proposal already tabled by the Commission on 24 June 2026. The October article reports reactions to an existing policing mandate proposal rather than a newly enacted AI innovation policy, research programme, or substantive European R&I capability milestone.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Original source URL https://news.google.com/rss/articles/CBMimAFBVV95cUxNRmdhb3VwRE1ZWGhyRGI2RW5ZNURTRjFrYmJ2T0Z2ejdyVURwVGhoS2dESEdDYnVZZDJkb2NVN1Nuc2dJd0F4Z21KdjNTYzd5OWUxSkZQMGdJeThVd3NWM25xQi10ZDZYNm1KTUZSNzFYMFZTSFlfcHlFWW5ERlREMEVYZHJTQlNOQVpIMjBwQlpNNjNyb1BUeA?oc=5 is an RSS redirect; no substantive text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Matching original item found: https://www.politico.eu/article/europol-ai-new-weapons-new-privacy-risks-reboots-for-the-era/"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Verified issuing text and date at https://www.politico.eu/article/europol-ai-new-weapons-new-privacy-risks-reboots-for-the-era/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.politico.eu/article/europol-ai-new-weapons-new-privacy-risks-reboots-for-the-era/",
+            "title": "New weapons, new risks: Europe’s AI policing plan stokes privacy concerns",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: checked originating RSS identity against the actual issuer/byline and publication date, and looked for publisher and alternative corroborating indexing."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_RI_CHANGE",
+        "reason": "POLITICO examines oversight and privacy criticism of a Europol expansion proposal already tabled by the Commission on 24 June 2026. The October article reports reactions to an existing policing mandate proposal rather than a newly enacted AI innovation policy, research programme, or substantive European R&I capability milestone."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-21T09:19:18Z",
+      "deep_scan_package_id": "worker-a-20261019T134154Z-50b05ae794a5",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1080/09654313.2026.2671213": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "aa48fcb9",
+      "identity_hash": "42d98c35b8cb50b0",
+      "reader_title": "Why Europe’s lagging regions stay excluded",
+      "reader_what": "Three regional cases link persistent inequality to weak access to labour, knowledge, capital and markets.",
+      "reader_why": "Reinforcing territorial exclusion can leave peripheral regions unable to catch up.",
+      "reader_more": "The authors compare Alentejo, Epirus and Norra Mellansverige through a cumulative-causation framework. Their argument is primarily about regional inequality and cohesion policy. Innovation is considered as one of several interconnected dimensions of disadvantage, rather than the central object of inquiry.",
+      "deep_analysis": {
+        "work_kind": "qualitative comparative regional-development paper",
+        "research_question": "Why do inequalities persist across lagging European regions?",
+        "main_finding": "Excluded regions face mutually reinforcing weaknesses in market access, capital, migration and knowledge flows.",
+        "method_or_basis": "Multiple-case qualitative comparison of Alentejo, Epirus and Norra Mellansverige, framed by cumulative causation and economic geography.",
+        "qualification": "Innovation weakness is one facet of a broader regional-development argument, not the central research-system object.",
+        "radar_relevance": "A Routes 1/2/3 considered; geographically European and innovation-adjacent, but primarily broad regional inequality/cohesion rather than an evidence product centered on an R&I mechanism.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "https://doi.org/10.1080/09654313.2026.2671213 did not open in browser."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "success",
+            "note": "Package supplied a matching 24,000-character PDF extract beginning with author page, abstract, research question and substantive sections."
+          },
+          {
+            "step": "title_search",
+            "outcome": "success",
+            "note": "University of Eastern Finland author profile https://uefconnect.uef.fi/en/juha.halme/ corroborates article, journal, three authors and 19 May 2026 publication."
+          },
+          {
+            "step": "publisher",
+            "outcome": "success",
+            "note": "Taylor & Francis journal listings identify the same article as published online 19 May 2026, DOI 10.1080/09654313.2026.2671213."
+          },
+          {
+            "step": "repository",
+            "outcome": "success",
+            "note": "https://www.juhahalme.net/publications identifies exact work; author page does not offer full-text download."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "package_primary_pdf_excerpt",
+            "url": "https://doi.org/10.1080/09654313.2026.2671213",
+            "title": "The geography of exclusion: cumulative causation and the persistence of lagging regions",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: inspected the matching original source and verified its identity; tested applicable A admission routes against the recovered substantive text."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_RI_SUBJECT_NOT_CENTRAL",
+        "reason": "A Route 1 is not supported beyond general regional inequalities. Route 2 mentions low regional innovation capacity but treats it as one consequence among many; Route 3 fails because the paper chiefly analyses broad market integration, demographic decline and territorial cohesion, not Europe’s research/innovation system."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-21T09:19:19Z",
+      "deep_scan_package_id": "worker-b-20261019T134158Z-24c39e09d525",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://www.eif.org/news-and-publications/newsroom/latest-insights": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "16df78e3",
+      "identity_hash": "c533701c006dcd1f",
+      "reader_title": "EIF news and insights index",
+      "reader_what": "The page lists EIF announcements, opinions and links to financing research.",
+      "reader_more": "The official EIF newsroom provides links to many distinct items, including investment announcements and an equity-investor survey. It does not itself report a coherent research method, dataset or standalone conclusion. The separate Equity Barometer has its own record.",
+      "deep_analysis": {
+        "work_kind": "institutional newsroom and publication index",
+        "research_question": "Is this URL a single substantive research work?",
+        "main_finding": "The EIF page collects many news stories, opinion items and links to separate publications.",
+        "method_or_basis": "Inspection of the EIF original newsroom index.",
+        "qualification": "The listed Equity Barometer is a distinct publication with its own URL and separate record.",
+        "radar_relevance": "A Routes 1/2/3 fail for this URL: it is a dynamic publication index, not a single finished substantive European R&I evidence product.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened https://www.eif.org/news-and-publications/newsroom/latest-insights; original EIF page contains a rolling list of reports, headlines and opinions rather than one evidence study."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_text",
+            "url": "https://www.eif.org/news-and-publications/newsroom/latest-insights",
+            "title": "EIF thought leadership | Inspiring progress for future funding",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final pass: inspected the matching original source and verified its identity; tested applicable A admission routes against the recovered substantive text."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_NON_SUBSTANTIVE_INDEX",
+        "reason": "A Routes 1 and 2 are suggested by linked financing headlines but not evaluated substantively in this listing. Route 3 fails: the supplied work is an EIF newsroom index promoting multiple separate items, not a completed standalone analytical R&I study; a separately linked barometer is assessed under record 5."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-21T09:19:19Z",
+      "deep_scan_package_id": "worker-b-20261019T134158Z-24c39e09d525",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-19T14:20:09Z"
+  "claims_updated_at": "2026-10-21T09:19:19Z"
 }

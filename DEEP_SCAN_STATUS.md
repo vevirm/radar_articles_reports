@@ -6,17 +6,17 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2779** (Main **1356** + Historical **1423**)
-- Automatic queue still needing V2 verification: **566** (Main **240** + Historical **326**)
+- Authoritative V2 verified: **2784** (Main **1361** + Historical **1423**)
+- Automatic queue still needing V2 verification: **561** (Main **235** + Historical **326**)
 - Currently assigned to workers: **107** (Main **72** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **34**
-- Automatic queue pending and not yet assigned: **459**
+- Automatic queue pending and not yet assigned: **454**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261021T075937Z-73c388f52aad`
+- Current package: `worker-a-20261021T092703Z-039626ad2590`
 - Assigned unresolved records: **36**
   1. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxPbE0xOEpsajFJS09iaEJuNC11NEtBR3E1ME81TkZfMFhYQjVTOWtRQ2hqSGQ0a1duMFlRZWpJX2szSVJCNFNUYU5fbVRGM2ozM2R0U0pLREhnazR3NWhmbDBNdGxhNXJJVUtrVHFIUTRTMklJTlhsSE9fc0pCMWQxUUs0VUt0Z0N2QjM5WVd6dFJraVlGVWFadHMxQVVDYlFHcVlkTjNycmJwU1VZRnow?oc=5` — EU-China relations: MEPs defend dialogue, fair trade, and human rights | News
   2. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxPc0hMY0o1X3RqSGNsaG5UZFZvMVlCTTNham5oUW91NXBBUkRjLW5PWElueEhQaEdoOGRkMzlia0UwSkEtWnNKemxvX0V0R1VvZkpzeFRwSUNyb1AzcnlMYlM4V2ZzdzFuVmRBUzNrWW9lLWhxR0pYSXdvQ2tjWDYzenFJbDA?oc=5` — Sleepy European telcos turn to data centre craze
@@ -29,16 +29,16 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261021T080001Z-c2d58d700785`
+- Current package: `worker-b-20261021T092720Z-5a17a4d5d8c0`
 - Assigned unresolved records: **36**
-  1. `link:https://doi.org/10.1080/09654313.2026.2671213` — The geography of exclusion: cumulative causation and the persistence of lagging regions
-  2. `link:https://www.eif.org/news-and-publications/newsroom/latest-insights` — EIF thought leadership | Inspiring progress for future funding
-  3. `link:https://www.eif.org/files/publications/eif-equity-barometer-2026-q2.pdf` — EIF thought leadership | Inspiring progress for future funding
-  4. `link:https://institutdelors.eu/content/uploads/2026/06/Etude-CRIP_Revolution_IA_horizon_2035_Barichella_EN_2.pdf` — The Artificial Intelligence Revolution by 2035 - Institut Jacques Delors
-  5. `link:https://institutdelors.eu/content/uploads/2026/06/Etude-CRIP_Revolution_IA_horizon_2035_Barichella__Short_version_EN_2.pdf` — The Artificial Intelligence Revolution by 2035 (Short version) - Institut Jacques Delors
-  6. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=e7ce9d4e-c15e-11f1-988f-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Science, research and innovation performance of the EU 2026 - Publications Office of the EU
-  7. `link:https://doi.org/10.1016/j.jik.2026.101139` — How do technical standards boost innovation quality? Evidence from new energy enterprises responding to European standards
-  8. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=b34947e9-c14e-11f1-988f-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Social and economic transformations - Publications Office of the EU
+  1. `link:https://www.eif.org/files/publications/eif-equity-barometer-2026-q2.pdf` — EIF thought leadership | Inspiring progress for future funding
+  2. `link:https://institutdelors.eu/content/uploads/2026/06/Etude-CRIP_Revolution_IA_horizon_2035_Barichella_EN_2.pdf` — The Artificial Intelligence Revolution by 2035 - Institut Jacques Delors
+  3. `link:https://institutdelors.eu/content/uploads/2026/06/Etude-CRIP_Revolution_IA_horizon_2035_Barichella__Short_version_EN_2.pdf` — The Artificial Intelligence Revolution by 2035 (Short version) - Institut Jacques Delors
+  4. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=e7ce9d4e-c15e-11f1-988f-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Science, research and innovation performance of the EU 2026 - Publications Office of the EU
+  5. `link:https://doi.org/10.1016/j.jik.2026.101139` — How do technical standards boost innovation quality? Evidence from new energy enterprises responding to European standards
+  6. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=b34947e9-c14e-11f1-988f-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Social and economic transformations - Publications Office of the EU
+  7. `link:https://publications.jrc.ec.europa.eu/repository/handle/JRC147029?mode=full` — A pathway to Europe's competitiveness: the clean transition
+  8. `link:https://www.gmfus.org/programs/innovation-and-competitiveness` — Innovation and Competitiveness
   - … plus 28 more in the package manifest
 
 ### Worker SINGLE
