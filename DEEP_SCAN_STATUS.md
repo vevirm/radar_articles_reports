@@ -7,29 +7,29 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **2888** (Main **1440** + Historical **1448**)
-- Automatic queue still needing V2 verification: **458** (Main **157** + Historical **301**)
+- Automatic queue still needing V2 verification: **474** (Main **173** + Historical **301**)
 - Currently assigned to workers: **107** (Main **72** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **33**
-- Automatic queue pending and not yet assigned: **351**
+- Automatic queue pending and not yet assigned: **367**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261021T131856Z-eb161d6fd5fd`
+- Current package: `worker-a-20261021T142334Z-e3fa920dabe5`
 - Assigned unresolved records: **36**
-  1. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxPTFMyMTFKQklNQXBvSEg5VjRta3NlRUFrTmtPSjFIV2tjVFBEY3M0RHRUdDdXMFdESG5FUXdTX3lpSjBFTVBUUTI2TG5ZR3I1enNxUFZjU3JxcU1KNGNUd3J1b0lzRGVxbk42Z2h5RGFXUzJYcDNOUldoUkM5TTBGb25GRVZRRnNjblQ3VTM4eUYyMGdNUmJuVm1WUTdVT2JWdDBRdmhoNTljbWFPQWRB?oc=5` — European stocks eke out weekly gain as oil, yields ease; SpaceX spectrum deal hits telecoms
-  2. `link:https://op.europa.eu/en/publication-detail/-/publication/5fe1897d-c450-11f1-bfcb-01aa75ed71a1/language-en` — Industrial electrification and energy efficiency - Publications Office of the EU
-  3. `link:https://news.google.com/rss/articles/CBMivgFBVV95cUxPMUdpdnVZWTI3ZjhQNGV1QzBHUFl2THJHYnNrZFEtUkstV1pONjdDR3RDNkZQYzhjenBveXF1Qi14WUhpYm9yQjlBX1E5UkNzamM4eGdKNmxlZTZ0X0R5T0NWQThhNjRQcDhBdzBienlqQXJrZzVLX29NSkVRTlAyWTRFSVlxb1dUUWFxQmVpeXd3RS0wZjd5Q21mM2ZfNlg2ZUVMNkRwcG1kSWxZM3BaZHIzNTdqYW1tWU83UDhR?oc=5` — River salinisation is widespread across Europe - EU Science Hub
-  4. `link:https://news.google.com/rss/articles/CBMiiAFBVV95cUxOMXUtRmE1dUk2MVNyd0N4em8tdWpua1p3bW9oVDI4WDFqQ3lGdmt4Q3I5ZTM3bTVXTE44WUNyUmNFNmY3eXpzTkVJb0FsMFZLaHJsRWljYVNMdDRuR3hhc2hSaFpHSFZqcHpjUXBITDE4X0RiSE52R3JTM2w2VXVkLUVMdXVicjlC?oc=5` — Council floats 9.6% budget cut to next Horizon Europe
-  5. `link:https://doi.org/10.1016/j.futures.2026.103883` — Artificial intelligence in strategic foresight: Evidence from a longitudinal case at Siemens Professional Education
-  6. `link:https://doi.org/10.1016/j.futures.2026.103904` — Analyzing blockchain entrepreneurial ecosystems with foresight: A data-driven approach
-  7. `link:https://news.google.com/rss/articles/CBMiuwFBVV95cUxNY3k2OUhTel9IWFNOcnAtelhqLXVkQnNCS3BFdUlrTnl3SWZQOV9CWTJldlV3NlRUamhPUW1jNTVCZ015NVRqOWhyN0JfOGpicHVPMUNwaTN6Q3ppLWdJMnBDN2c4N1FJTllqb2VHaTYxeVJxSGVQQVh2cjN6S25UX09qcmZHOUxDRzVtM2hHNXBXZHZOZTJYbzVOQXExRDdPQnlUV1d0NkdON0FnWlRKdUFGbXF3NHY5bF9n?oc=5` — AGILE: Parliament set to approve new EU defence innovation programme | 05-10-2026 | Nuacht | Parlaimint na hEorpa
-  8. `link:https://news.google.com/rss/articles/CBMiyAFBVV95cUxPNzVoTnhfS2lEWDBid2NMYlNWT1RKOGNjVzhlVmp5MXEtZkNheWdvVDNfRDY0bnhjblZRYkJqOHVjaVFoUjEtaUlYT3hxZG5yS1JURF92bVlqeUpXaTBvY3pYWHNQLVh1Y0dwYVk1Ml8yQWtXZmJHME1NU2phWUZyVDR3QXROQ01WbDl2YVFfVGhWTnRJZ04zekRXWkMtZnRQSVFzYy1nZEZaaV84dVVQVHZaSGFIMUNwTnJ1UXoydTdyTi1ISWFIag?oc=5` — Funding Radar: Horizon Europe opens €225M call for advanced materials and manufacturing
+  1. `link:https://doi.org/10.56645/jmde.v22i53.1361` — Evaluation Through a Gender Lens: Foregrounding Global South Reflections and Experiences
+  2. `link:https://doi.org/10.56645/jmde.v22i53.1335` — Where Next for Evaluation? Navigating the Polycrisis Through Three Horizons
+  3. `link:https://doi.org/10.56645/jmde.v22i53.1309` — Rethinking Evaluation Competencies for the Transformational Imperative
+  4. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxOWk52Z0E0MS1Ic2hPdHJmSk55Zjh4YS1TZFJ3SnQtby1SY1kzSU5BaUdFV3pRRkdIdHVxRGZLZUU0WF9kMUFzWnNDNXRicGFtNmRSOGJRNnhUR3RyNk9VTk92SnhQSktLd19iMGVXOEJNNzVHUTUwdm9WTjh2MUdmbUQwSUM?oc=5` — Musk’s SpaceX ambitions may be ‘dangerous’ for Europe, warns EU lawmaker
+  5. `link:https://news.google.com/rss/articles/CBMi1wFBVV95cUxQSkEteldWeWM1SVBYRVJMQVQzd19BQVg1LW5WUENjX282STBBTmF0NVJiNDg2cGFLekVacGQ0UkhhRkhlNnpVNURrWVZEN3JzbTJORmFJUElwQWs1SkRHbm9nNlBmaURQSXlMYzRGMDJ1WlhfLW9aNkFqVDJsU0xxWGNVemRRcFU5SVV5TTl5UkQ2ckw5Rm5xbVZna2ZEeTA1TmNWVGJJb2NJRUU1dEFRbXVrWktBNkRKQkxqbU4yWmpsOUZwTkdiV3lwOHJYaXFsd1lpcmxUcw?oc=5` — 2027 EU budget: focus on transport, energy, research, climate and agriculture
+  6. `link:https://www.euronews.com/2026/10/21/this-country-aims-to-attract-18b-in-cleaner-energy-investment` — How is this country looking to mobilise €18B for cleaner energy?
+  7. `link:https://www.euronews.com/2026/10/21/angolan-portuguese-singer-iamddb-accuses-israel-of-stealing-her-identity-in-ai-video` — Angolan-Portuguese singer IAMDDB accuses Israel of stealing her identity in AI video
+  8. `link:https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52026M12298` — Prior notification of a concentration (Case M.12298 – SNOWHAWK / ARES / MACQUARIE / DATA REALTY GROUP / PRIME DATA CENTRES) – Candidate case for simplified procedure
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261021T131908Z-cc84b9fb33b5`
+- Current package: `worker-b-20261021T142402Z-71b77a30b4f2`
 - Assigned unresolved records: **36**
   1. `link:https://news.google.com/rss/articles/CBMizgFBVV95cUxPbmcwM1FMNHIwX2JMN3p0dlQ5LVFPdkZsdm1wSHlsZHBXaDNzVXdRa19RRUFBNHo0MUNGTXdiYmxrc1lfZ09MRWkzQS1kSGdFVko1TEIxSjBKTkV6UjNyTjJDb2NDbkx0YWlpMzVrN1RNSkh1UF9iNDlWdGNnUGpXWS13dzEzRlFwUDBOTlZYMHlBUHQ1ZU5FLVhaRjYyblV0M2hxZTdsVlZkYXY2TVp1ZTh4UXdmTHRkU0Z1Wi1VTnp6Y0h1emdSQV94bTlxQQ?oc=5` — EU innovation agency ‘must be reformed to be worth keeping’
   2. `link:https://news.google.com/rss/articles/CBMihAJBVV95cUxQcS1MTFQ3ZTYzeVB1WHV1MUZiZjlXYWo2UGJVMmVXWUlVS0pXVXBTOHpqSDdTRzZBVnBlMkdWNEd1UW9PUmFVZGpUbVdYVUxQdUt2bzVXTFBERkdISEFOQVFaS0hzc3pmZEdQZTNxZGQ4aHFibWJ0SmhEMkdWSGs5bVo2V1ZCTEllYS1nNWphbG1ZRk1lWFBYUjBabElabzRrN0lTV1YzbTRERmUtU0lrdGtaODJGMTVjUm45Mk80dkNWUW9kRUlVUUhJN3F3aHc3RGhhbHlkb0xXOGNQY0d6TlRrRFp5VzhoRF9LSDNFRnhKRV9WdXlZQnlSQmJYdTdUckNaVg?oc=5` — Science, Research and Innovation performance of the EU 2026 report
@@ -38,7 +38,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   5. `link:https://news.google.com/rss/articles/CBMiX0FVX3lxTE5zN19oMnpfbEhYNTU2UUk1V3R1Ym9Ebk1IcDVkQ3FrRU9Tc3J0TEJGd3BGZ1dNTWduY3pnblB1bFQ1OFI1UXcydV9LYThhYW5PTEZwS0lKSkU2S1pXcktN?oc=5` — “Technology and science are, by definition, non-discriminatory”- narratives of the performance of sex and gender dimensions in European climate project proposals
   6. `link:https://news.google.com/rss/articles/CBMi6wFBVV95cUxOZHZaWjZ5dTR1RzFVWGNKd1FnMHpoakdwcHFhc0ZhLWlsMEJnVEtuYVVSaE83b0FXWHh5LTJ6VGtRaXNES0FNa2Zuc2xyTHRxWE9feWVoYXFKR2NTcW5xcVh3d1BQWG5ObUF2dm1fcEozaUhVMldGM21rQUNjWi1BaFdJUDR4Q2J0M3NiNW91d3huckctdTdGVEozLVhyOGx1N1J0clVJdWpYNkdQSy14U2s4a1BfTVJoMFVkMXJ2eVprRk9NamYzYW5NOUcxRWhlYkpqLW1RUk5tdFhFTkh3MnVKSGY1UEdlY2RN?oc=5` — Reaping the economic benefits from AI: OECD Economic Surveys: Slovak Republic 2026
   7. `link:https://doi.org/10.1016/j.futures.2026.103882` — Harnessing the potential of transdisciplinary practice for the transformation of agri-food systems: A review of methodological challenges in participatory scenario development
-  8. `link:https://news.google.com/rss/articles/CBMiX0FVX3lxTE5UQTVuMHBRTS1sM01uamZVSXNyY3M2bmtWcm9PSW5iTUd3TDJmQzVEMDA1VndwNW92MmtyWExJWWtmTVl6UG5ENDVOWE9jTTFMeURoczllUWZ2djU1TElV?oc=5` — Heat-related urban mortality attributable to human-induced climate change in Europe from 2000 to 2025
+  8. `link:https://news.google.com/rss/articles/CBMivgFBVV95cUxPc1NFMUNzVk1sZ0RKYUJDSjZPdFh3eTRzMUhrSDVCR1NJM0dOWWlKWWJvUzhPem9YRHhNdWFDeFhKTmVFYXc4WXEtQ3E4OWxUZnlvanVRelloT3N6TUl0U2VheVBrYWVxOEZqLVI1WlRjbmlWQktJODJlLWN4dmZmcE12Q3dMeU1JYnZud0tvT0gtOG1YTTBWN3A1VGpjNGhIZFJXeUw4V3VwdzByLTBfUWRVQVVETzJGMEhSU2NB?oc=5` — EXCLUSIVE: EU seeks closer Vietnam ties on critical minerals in China hedge, documents show
   - … plus 28 more in the package manifest
 
 ### Worker SINGLE
