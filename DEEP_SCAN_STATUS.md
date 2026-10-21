@@ -16,20 +16,20 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261021T075322Z-e3468bda45db`
+- Current package: `worker-a-20261021T075937Z-73c388f52aad`
 - Assigned unresolved records: **36**
-  1. `link:https://allea.org/wp-content/uploads/2026/07/ALLEA-Statement-on-TDM-Exception_July-2026.pdf` — ALLEA Statement on the Importance of the Text and Data Mining Exception for Scientific Research - ALLEA
-  2. `link:https://cdn.ceps.eu/2026/10/cardiovascular-diseases-QG0126057ENN.pdf` — Cardiovascular diseases: regional prevention and detection policies – CEPS
-  3. `link:https://www.espi.eu/wp-content/uploads/2026/08/ESPI-Brief-77-Constellating-Compute.pdf` — Constellating compute: China’s domestic policy towards orbital data centre leadership - ESPI
-  4. `link:https://www.vinnova.se/en/p/coordination-of-strategic-support-communication-an-prestudies` — Coordination of strategic support, communication an prestudies | Vinnova
-  5. `link:https://doi.org/10.2903/j.efsa.2026.e240901` — EFSA needs for scientific excellence and regulatory readiness
-  6. `link:https://www.esf.org/fight-kids-cancer-2026-2027-call/` — FIGHT KIDS CANCER 2026-2027 Competitive Call Announcement - ESF
-  7. `link:https://www.esf.org/tag/funding-management/` — Funding Management - ESF
-  8. `link:https://doi.org/10.1016/j.telpol.2026.103336` — Institutional context and the employment effects of artificial intelligence in European SMEs
+  1. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxPbE0xOEpsajFJS09iaEJuNC11NEtBR3E1ME81TkZfMFhYQjVTOWtRQ2hqSGQ0a1duMFlRZWpJX2szSVJCNFNUYU5fbVRGM2ozM2R0U0pLREhnazR3NWhmbDBNdGxhNXJJVUtrVHFIUTRTMklJTlhsSE9fc0pCMWQxUUs0VUt0Z0N2QjM5WVd6dFJraVlGVWFadHMxQVVDYlFHcVlkTjNycmJwU1VZRnow?oc=5` — EU-China relations: MEPs defend dialogue, fair trade, and human rights | News
+  2. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxPc0hMY0o1X3RqSGNsaG5UZFZvMVlCTTNham5oUW91NXBBUkRjLW5PWElueEhQaEdoOGRkMzlia0UwSkEtWnNKemxvX0V0R1VvZkpzeFRwSUNyb1AzcnlMYlM4V2ZzdzFuVmRBUzNrWW9lLWhxR0pYSXdvQ2tjWDYzenFJbDA?oc=5` — Sleepy European telcos turn to data centre craze
+  3. `link:https://news.google.com/rss/articles/CBMiqgFBVV95cUxPSDUzTVl6SVNZdWVqX3BsUmJoZHdIczV5ZExVQ1dlWXgyTEFPRVVROHZzcUxlc2I4bVRkSS10aFFrVXlPS002WDNuS2tiWk8zczlyR25XN0xNbDhxNERJbks0b1J1dzhvNFhUY0w0a3hWZkp3eUxHYkFWTndyWGV0dVpOdzUxbHVYMEc4Y2U0dWZSWmR4OHppZmI2OW5zN0dOVEZjR25vSlVSUQ?oc=5` — Laws, pledges or an iron grip? How the EU, US and China are reining in AI
+  4. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxOTjJXaXJMMk1EY0hlaXBPQy1haFVKOEQtcjZMSjVNc2lHdnhILUVUZWN5cTJIT3ZTT0VDODB6NDlyNHh2MVRfb0swYXZhSU5UNUF2eEtxbi0xUFJsTGlpWlpuY3BCZFlIZDhqN0NmVWJqOFcyc1NYOXN5TEFNRElhekg1YzZvS0dNMWdSY1pmY2dhTXRfYW9oNjdHSy01X05qY1hheGNkcDhySmZWNXc?oc=5` — Finland orders pause on Google AI data centres over environmental concerns
+  5. `link:https://news.google.com/rss/articles/CBMipgFBVV95cUxNWTVKYXo4SUlia1FlR3VNM3FZZmQ1bjl0OUVkbGN5QUdSakU5V3p5bUNraU1UVDc3TlQ2Wm9IVUNLRnItREEwREdhZWxtZDVlT0lnbDZoR2ppcWYtb2puU0RyaFROUUxGUUJsUWVodUhoY01HTzVUUmJHUV9iVTBuMDExNEplQ3lVQ3JRMXIzSVdYZ2hhbU5Ucld0OUFJQVFmYmdYOGxR?oc=5` — An ambitious MFF 2028-2034 for a strong and resilient Europe: extracts from the debate - api.multimedia.europarl.europa.eu
+  6. `link:https://news.google.com/rss/articles/CBMilwFBVV95cUxPTTNHeFZMRExISzNEaU1BQUlCa0pwWjZ3MkhiRmdXX1NwQlk5bUNYd3RXRG5XYlFnRHdwTkZtV0xUeEdOUExJX2tiRGRvSUVXb05YZ1JGeWhHNm1CWWN3emZSWFI4YVhvWWNaaEI0cWV1UDZ2c3FMNHE4U25DSUk4bWFSLVF1UFJxUGYtYnpzb1owd3Q0MUdj?oc=5` — EU will need to tax AI ‘workers’ to keep funding human pensions
+  7. `link:https://news.google.com/rss/articles/CBMiqwFBVV95cUxOckhrTXN4Q0JCQ1NqN0FVV0tFZU1MVkdUN3VabmdEcnVBbGlWeGhkeDdfR29JemFzdGJvczcyN2NzRWh1T1RkYTlGWEt0SXhFTEVQY2NZYXRfc0RxZ2lfai1pOGtJUTlyaG5VRXIxd3puSlhIOExPNXF2X0FuVm50eVNfUWhoelJsUEJVNHRyQXYtaDh2S3phTDlwQXJ6N3VjcUtaSTVxci1lZTg?oc=5` — UBS only European bank in AI adoption top 10 led by JPMorgan Chase
+  8. `link:https://news.google.com/rss/articles/CBMixAFBVV95cUxNV2R2Q0ZnclZmZkUyVWxJcmZvSlkzcm05OERTckxROFMyYlVpaW9hTVVWX0tyUHBiNG1CbERzVkx2eVBoSzBkejFKbFJDNjVsWi1RLWl4ZEZxSDVCeU15aXZ1My1ZaVFLNHdXN1V0UEdDaUJTZlVVclN1VXlGNXQ0Q1lyUGQwVVN2aWVVV245RnJsejhTUEV4enFGcV9rVU1pYnRxZkI1a2lMUGdJQ0R6VHdJd0lMQUlZLXhjdjlTYlVFcVhC?oc=5` — Former German intelligence chief arrested on espionage charges
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261021T075328Z-c2d58d700785`
+- Current package: `worker-b-20261021T080001Z-c2d58d700785`
 - Assigned unresolved records: **36**
   1. `link:https://doi.org/10.1080/09654313.2026.2671213` — The geography of exclusion: cumulative causation and the persistence of lagging regions
   2. `link:https://www.eif.org/news-and-publications/newsroom/latest-insights` — EIF thought leadership | Inspiring progress for future funding
