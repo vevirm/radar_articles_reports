@@ -368,8 +368,15 @@ def validate_v2_result(
         supplied_outcome = _outcome(supplied.get("outcome"))
         if supplied_outcome and supplied_outcome not in SUCCESS_OUTCOMES:
             recovery_steps = {"doi", "exact_title", "title_author_year", "official_publisher_or_repository", "broader_identity_search"}
-            if scanner_route_url:
-                recovery_steps.add("scanner_validation_route")
+            # Both the package producer and independent online worker use
+            # named recovery routes. A recorded successful route is meaningful
+            # even when the raw scanner record lacks source_validation_url.
+            recovery_steps.update({
+                "scanner_validation_route", "online_publisher_or_secondary_recovery",
+                "package_source_material", "web_discovery", "publisher_or_alternate_source",
+                "publisher_or_official_report", "publisher", "secondary_syndication_recovery",
+                "title_search", "repository",
+            })
             successful_recovery = [s for s in recovery_steps if s in audit_by_step and _outcome(audit_by_step[s].get("outcome")) in SUCCESS_OUTCOMES]
             if not successful_recovery:
                 problems.append("supplied URL did not recover the work; recovered-work decision must report which recovery-ladder step actually found it")
@@ -542,7 +549,9 @@ def main() -> None:
                 if pair in seen_pairs:
                     duplicate_count += 1
                     continue
-                seen_pairs.add(pair)
+                # Do not mark this pair seen until an outcome is accepted.
+                # A rejected earlier submission must not mask a corrected
+                # result supplied by another worker package.
 
                 existing = table.get(key)
                 if isinstance(existing, dict) and existing.get("profile") == V2_PROFILE:
@@ -551,7 +560,11 @@ def main() -> None:
 
                 if fmt == V2_FORMAT:
                     if package_expected is not None:
-                        expected_key = package_expected[package_pos] if package_pos < len(package_expected) else ""
+                        # Issued package membership is authoritative. Older packages
+                        # can overlap later reservations and their output may omit or
+                        # reorder individual jobs. Identity checks below still apply.
+                        issued = work_state.get("packages", {}).get(package_id, {}).get("record_keys", [])
+                        expected_key = key if key in issued else "[not assigned to this package]"
                         order_label = f"reserved worker package {package_id}"
                     else:
                         expected_key = expected_v2_queue[expected_v2_pos] if expected_v2_pos < len(expected_v2_queue) else ""
@@ -590,6 +603,7 @@ def main() -> None:
                     if table[key].get("reader_why"):
                         avoid_whys.append(table[key]["reader_why"])
                     accepted_v1 += 1
+                    seen_pairs.add(pair)
                     continue
 
                 # V2 uses a stable identity hash. Automatic scanner wording may change while
@@ -597,6 +611,10 @@ def main() -> None:
                 if not ih or ih != current_identity_hash:
                     print(f"STALE {label} result {idx}: record identity no longer matches exported V2 job")
                     stale_count += 1
+                    if package_expected is not None:
+                        package_pos += 1
+                    else:
+                        expected_v2_pos += 1
                     continue
                 is_historical = strand.startswith("historical_")
                 v2_problems = validate_v2_result(
@@ -612,6 +630,13 @@ def main() -> None:
                 if v2_problems:
                     print(f"REJECT {label} result {idx}: {'; '.join(v2_problems)}")
                     rejected_count += 1
+                    # This submitted item occupied its actual position in the issued
+                    # package.  Keep it pending, but don't falsely report subsequent
+                    # submitted items as out of FIFO order.
+                    if package_expected is not None:
+                        package_pos += 1
+                    else:
+                        expected_v2_pos += 1
                     continue
 
                 decision = clean((raw.get("admission") or {}).get("decision")).lower()
@@ -625,6 +650,7 @@ def main() -> None:
                         when=now,
                     )
                     deferred_count += 1
+                    seen_pairs.add(pair)
                     work_state_changed = True
                     if new_status == "needs_manual_verification":
                         # After the third genuine recovery pass, stop treating this as
@@ -684,6 +710,10 @@ def main() -> None:
                     if missing_active:
                         print(f"REJECT {label} result {idx}: active V2 result is not deep enough; missing {', '.join(missing_active)} ({'; '.join(prose_problems)})")
                         rejected_count += 1
+                        if package_expected is not None:
+                            package_pos += 1
+                        else:
+                            expected_v2_pos += 1
                         continue
 
                 deep_ok = accepted.get("deep_analysis") if isinstance(accepted.get("deep_analysis"), dict) else {}
@@ -695,6 +725,10 @@ def main() -> None:
                 if claim_problems:
                     print(f"REJECT {label} result {idx}: claim validation failed: {'; '.join(claim_problems)}")
                     rejected_count += 1
+                    if package_expected is not None:
+                        package_pos += 1
+                    else:
+                        expected_v2_pos += 1
                     continue
 
                 now = utc_now()
@@ -751,6 +785,7 @@ def main() -> None:
                         "updated_at": now, "deep_scan_package_id": package_id,
                     }
                 accepted_v2 += 1
+                seen_pairs.add(pair)
                 mark_verified(work_state, key, package_id, when=now)
                 work_state_changed = True
                 if package_expected is not None:
