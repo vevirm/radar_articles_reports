@@ -6,39 +6,39 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2958** (Main **1510** + Historical **1448**)
-- Automatic queue still needing V2 verification: **405** (Main **103** + Historical **302**)
-- Currently assigned to workers: **107** (Main **72** + Historical **35**)
+- Authoritative V2 verified: **3014** (Main **1566** + Historical **1448**)
+- Automatic queue still needing V2 verification: **349** (Main **47** + Historical **302**)
+- Currently assigned to workers: **107** (Main **47** + Historical **60**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **33**
-- Automatic queue pending and not yet assigned: **298**
+- Automatic queue pending and not yet assigned: **242**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261021T171740Z-f1d3a2e94501`
+- Current package: `worker-a-20261021T175525Z-93399412ef3c`
 - Assigned unresolved records: **36**
-  1. `link:https://news.google.com/rss/articles/CBMizgFBVV95cUxPbmcwM1FMNHIwX2JMN3p0dlQ5LVFPdkZsdm1wSHlsZHBXaDNzVXdRa19RRUFBNHo0MUNGTXdiYmxrc1lfZ09MRWkzQS1kSGdFVko1TEIxSjBKTkV6UjNyTjJDb2NDbkx0YWlpMzVrN1RNSkh1UF9iNDlWdGNnUGpXWS13dzEzRlFwUDBOTlZYMHlBUHQ1ZU5FLVhaRjYyblV0M2hxZTdsVlZkYXY2TVp1ZTh4UXdmTHRkU0Z1Wi1VTnp6Y0h1emdSQV94bTlxQQ?oc=5` — EU innovation agency ‘must be reformed to be worth keeping’ — recovery attempt 2/3
-  2. `link:https://doi.org/10.1016/j.cose.2026.105210` — Conceptualizations and Boundaries of EU Digital Sovereignty — recovery attempt 2/3
-  3. `link:https://doi.org/10.48550/arxiv.2610.11891` — Tracking High-Impact Researchers Through Highly Cited Tails
-  4. `link:https://www.interface-eu.org/publications/download/eu-chips-act-cooperation` — Tech Sovereignty and the EU’s Chips Act 2.0 in Practice
-  5. `link:https://news.google.com/rss/articles/CBMiiAFBVV95cUxORVZaOElCQzd6QXNvbmswbmFKU21IQ1dLWjNKbVNoRE95TkhHVEF3NU82Y1l2aXdVd0JnQXB3QkxYdWI0WlNxcDJjOXhnTzFDWGZOSlJxT1ZnX3J3YURIbVB2bmxiUnlybHk3RGllRU9aMmttY19zbjllM09IOFgteUVmYmtxelRR?oc=5` — Is the EU research budget actually increasing?
-  6. `link:https://news.google.com/rss/articles/CBMipgFBVV95cUxOWDh4V0dJdl9HYTFsQTNoTDhWbVk3WmtTLVFrZ1JPVGUtZTBSNDFGTjRyaExNSFZCMXBDSXpraElQaGJNcWlmZG9UekxjMjlFWEhBREd3VGhNejV0SXItOG1lMUhTVS1waWsxSFlpLVJJd1Y2THd6TWhkLTFfcnhhSUU2b3pCekpJTnhsVFhVamNpeXgybm5TUUxlQmtOQTc2MTVqRjZ3?oc=5` — Elsevier commits to accelerate AI-driven science across Europe
-  7. `link:https://news.google.com/rss/articles/CBMinwFBVV95cUxOVXJjb1Z4ekU3VVU5QlpZcWs1WTU0Q3Y5bW5OLWlmVUpnTGZITlpXSlA2NTZuYU9nMGFYTlVjdEJLT3FFUzY1bnNYX01qTTFtVUgtMnpEVFdUN2gyQWlkbW1CTThiLUZCTmZ0Y2lLQmQwT1hXQVJnbjNFMU00OUhHVWNIOVVMamo5cnRQYk5CeGVNZm1qR1hjbEFpQTVsb1U?oc=5` — Pan-European pension scheme tackles barriers for researchers
-  8. `link:https://news.google.com/rss/articles/CBMioAFBVV95cUxPZ0RuNk1kbTJpWVVCZlhSd2JmbTVEcVpSTk9rc1libE5VcFBWTFVjcUNLMzkyTjZLdkFrSF9GOXp2bGFhTEUtMkJfVklZV2NxWFZxcDdaM0pkZndNRUZwenlzMU9JcDAxd215bXRRRVUwd0hnYVQzVTZacXdoYlJsRE1UUUR1ZjZrYmNMQVVqeENib284dkJEY2NNVzNyZmFB?oc=5` — European Startup Village Forum 2026 - EU Science Hub
+  1. `link:https://doi.org/10.1016/j.cose.2026.105210` — Conceptualizations and Boundaries of EU Digital Sovereignty — recovery attempt 3/3
+  2. `link:https://doi.org/10.48550/arxiv.2610.11891` — Tracking High-Impact Researchers Through Highly Cited Tails
+  3. `link:https://news.google.com/rss/articles/CBMirAFBVV95cUxPMENmUllvcDNtemJGTUdXYlh1UWRmNUVLTzNreFJOSWtKZVowMHk1WHMzNmwweHY2NVJZU2hxR0NOa3BVOG80YXN2SWN0U3J0R1RjYzc5blkzdVBsaTZhVDFCc3dyNUl0QVhpY0Q4OUdsZi05UU5xTEdCQXBVdGJWRVl3R0ZnTUhIeE5PdVItY0RvVHBWYXNsVlV5OGFQNGtCSkVYWFdXa0ttSWVf?oc=5` — Germany plans AI cooperation deal with Nvidia, Handelsblatt says
+  4. `link:https://www.euronews.com/2026/10/15/nvidia-to-open-stockholm-ai-hub-for-start-ups-tackling-health-and-climate-challenges` — Nvidia joins Klarna co-founder’s foundation to launch Stockholm AI hub
+  5. `link:https://www.euronews.com/2026/10/16/wind-sled-spanish-invention-to-cross-antarctica-without-emissions-unique-in-the-world` — Wind Sled, Spanish invention to cross Antarctica without emissions: 'Unique in the world'
+  6. `link:https://news.google.com/rss/articles/CBMimAFBVV95cUxPWEw3cTJSeFlBREN6a3NfWk5aSl9NcFlrY0t5NXYySzNYYVU4MzZ3bzRLaEVRcFJiTHBfcFBaRXhXTkdsTmNNUklOMmI2M0RMYVl3VTlaa2daRXJfQ3R4NmxRc2NJdGtmWUhaa1hjbGxXRThjQlkycmlMYWFoLTItSlhaNUVHN2pHclFraFUyZWtxWDVNa3VndQ?oc=5` — The EU is facing Big Tech pressure to revamp its AI law — recovery attempt 2/3
+  7. `link:https://news.google.com/rss/articles/CBMingFBVV95cUxNdHZwOGtZdkVDbkRsZVhTaEc4cWJJUzRaWWw0UXVHQ0xRb3NoWWZLblN6dmQwTkd6MTlYeldSdGw2UEt3dWJrRHRTbmNPcS1UV2Ztd2Y5MldWM0t6RDVvWUJRTmU4WEF1d0JfczJicWk4TEJqSU9NOW1DbmRQSk1OcGJZU29obU9MLS1jdmhuZ0tFdExleExnLWUxWUJ5UQ?oc=5` — Research for EMPL Committee - Strengthening the European Child Guarantee: an overview of lessons learnt and best practices from — recovery attempt 2/3
+  8. `link:https://news.google.com/rss/articles/CBMizwFBVV95cUxOLWw2MGNpMFBIbk5QM1pwR3NLbnJNNlh2ai1XX0R6eHV5akZRWGEzQ3FXb2t4Zm9MQi1tRGFPSzEtdmVkbFBVVFoxSUdoQW9iZUowcGYzS1ZDUkhaTml6azdQZWk0c0pBS1FVNno4SnlTbUFPNGUyVWd0MlRscTJJTmplYlg4c1JodF95ZExXaUVadThWdGpSRmlWckRHMjhia0Y0dzZqMExHdk55SFUxbk4xMS1FSEdGN3BkZWdkVWlWU3JsSENvM1lBTTdEaXM?oc=5` — Commission moves to let Hungary back into Horizon Europe
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261021T171746Z-e44da281e3bc`
+- Current package: `worker-b-20261021T175534Z-b30dbbb8348d`
 - Assigned unresolved records: **36**
-  1. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxOa1pfVVpLSWFMQUh5X18wNlpCd3dOUl9haGZQVmVkS0gzQm90QW9OMzJlQ3RRYlkyR3IwUGtsSm43emlUUTZMMXd2TERXTTZ1YWxjUWMwaTFsTlI4SEMyWkpEbF9BQ2tQMHN0Y1NDemFBUC1aTHMzc0VpYkN0bnFXdDBzeU5qVzRMOWx6b1lNZ2l4eEcwTGRlZTZvYWZNOENWNTdIUHpLRW9sLTYzWUE?oc=5` — Border Security Research Infrastructure - EU Science Hub
-  2. `link:https://news.google.com/rss/articles/CBMivgFBVV95cUxOMXhzOTk3T0tyTWVCX0Q4VGZzNWVHcWdYTHMtVllXMVB5LUpXbWlMNVRNUnlrQWw1eGViNkhmeE9BZlpuRjJvbkNOeWxudHZDWXlpT2RGVlhyTnlkQTkycnVhcTBUWEllWlhiNGRJZTJqaUtqc1BwYVJXZ0xKZEVxcnB4SXVySDhSNHFlYzJGRnpVZ1FZMmQ1UzUxaEUxOWtWVXpScUtJYnJRUGVqejBHZ25UN3JhdGRQdkxIcjBR?oc=5` — Europe Is Racing China to Dominate Industrial AI
-  3. `link:https://research-and-innovation.ec.europa.eu/implementation-dialogues/implementation-dialogue-research-security-2026-11-10_en` — Implementation dialogue on research security
-  4. `link:https://doi.org/10.1177/09610006261491363` — Mapping the landscape of Library and Information Science in North Africa and Europe: A comparative bibliometric analysis using OpenAlex and DOAJ
-  5. `link:https://doi.org/10.1016/j.respol.2026.105641` — External collaboration and local knowledge divergence in regional knowledge spaces
-  6. `link:https://joint-research-centre.ec.europa.eu/research-updates_en` — Research updates
-  7. `link:https://doi.org/10.1016/j.ssaho.2026.102795` — Strategic integration of digital innovation and sustainability: A foresight-driven framework for ESG transformation
-  8. `link:https://news.google.com/rss/articles/CBMizAFBVV95cUxNRGtNTUVvNXJmRU1fRDhvcjlEaHVhcTlpMzBScmZ1NV9SWkRWTUx4Qm5KbS15amYwTnJhR0c1eEh4Rm00S2xMbHRoMldiRHdfLVk0Mkc5OG55VTczcU9OX3BOMjlPOEQ3TWhSX0tRWGJrT3JRREF0NTF3UGs5SnBWNG1kNmZ3M0VPdFF6UjRRQlVBQ2VOaWpDZzV5ejF0YWt6TFNDLVVKUGsxN1BHTXJxeXI1UEtkR000bjIxd0d4dEVHNFd6ZnFSVFptTGg?oc=5` — EU research cut ‘wrong strategic choice’, ERC president warns
+  1. `link:https://news.google.com/rss/articles/CBMiswFBVV95cUxNaGFxUm93NXNFanpMQnpJU1NSeldmZUEyX3REOWdfckRZaVBFaHFBVl9uRS04UExUU1M4QlJXODdKbUxtOWNxTkpPNVJZRUhJZWZjX19qY25hZnlGMjNrN1F3MXVPeHpfZUw0SDhMQzhCMFl0YkMtR3pUZjN1VEIxMnVGLTViSlo2bGN3N3RHMlAzSVFiSGI0TnU0YmR5V3Nubm1nanJWNklQWmV3bUNreEpuSQ?oc=5` — Germany's Merz touts defence, AI and chip investment drive in pitch to investors
+  2. `link:https://www.eurohpc-ju.europa.eu/eurohpc-ju-and-grnet-inaugurate-daedalus-ranked-among-worlds-top-50-supercomputers-2026-10-19_en` — EuroHPC JU and GRNET Inaugurate DAEDALUS, , ranked among the World's Top 50 Supercomputers
+  3. `link:https://news.google.com/rss/articles/CBMioAFBVV95cUxQQkg1WHh6WTlCYXlHVVliZzc4Y0x2NlZZeFNtTmtpNEJqMnRDTG5ILXJsRDlJa2lPLXBZNXIxSzAwUnQyN1hiSG4zQllBbEJURzgzYzJlMFNmRkw4aW81WTAzZW13UDZTVWVjNExrMXg4QnJRNjhRRUNwRVdGUzhtU3VzSUJ1eWhXSVZwR1VUaFBXU3hLamotNWZwb19ySDRH?oc=5` — Investment summit: German government strikes AI deal with Nvidia
+  4. `link:https://news.google.com/rss/articles/CBMi0wFBVV95cUxNTlFrR1R3UDM5NzFXdnpldWQtVzhUZ1Y4NnZDMmhmN0g4ZjdZWFJDVy1xRDNtbWtyYVBmV1BCaHZDcWpJbFdrT0xtbzA1Q1pqS1V6Uy1tdUFBUkxHS2ttQjlGVlRib3ZtTU50RHZ0R3o3ZGZteWlqbldkeVRpSEhNYWt6NWFJRVR6dTA2dVpHb2JFbXM0Zk5Sb2l1UExZZi1yQUlST3ptVEVhSE5CZFg5M2FLZTBVVTFUaUQ4VUlULWxkbVhhX3o3am5rbUhIRTdncE1F?oc=5` — Critical Raw Materials: securing Europe’s supply and strategic autonomy | Atualidade | Parlamento Europeu
+  5. `link:https://news.google.com/rss/articles/CBMi0wFBVV95cUxPLXBnY1RMNnMwcFBiQjZibGxPc2xEa2ZhNGR1aHFUb3NOYW5RXzdod1JRNHhaT3R1NDRCYlItb19NX0dCcXhoRjBMSk5vY1J2amJLYnI1RXR5anZwVjNZTjNvY3RJRjB5UnA4dXp3cjU0SjFJMWFnQUk5VWEyOHZLMjVXREt1QTNJMHBZd2VqLUxGWnJNN2xfRUQ0VEE2aUcweDlFamdzZ0ROR2dVZGY1S0ZiS3MxQUZUeWlZLVVPQ05qNm12LXlzOVRkQ2ZfVnl6OWUw?oc=5` — Critical Raw Materials: securing Europe’s supply and strategic autonomy | Actualitate | Parlamentul European
+  6. `link:https://news.google.com/rss/articles/CBMi0wFBVV95cUxPdHFzcXhmdXJoZWJtckE4bUxUZ2RuS0sxNW0wMXhYVHlVYUh5V1VBVFAwbXJQam1XZ2J6Ml90eE0zclhIN1VjdTk1ckRJM0gtTEZOXzVuYmdtRkRTNlM1bUVCQTZwcG1Bc3FXX1BDVjNCcmV0b1B6YnBkaVFBS0lZQkE5R05XclFmdWZEd2FpR2hIN2Fydy1YUVRzNTV3b3VzaWNpV0VRMng4NFBXU0EzSHRvSFpGSU4wWG5oUTBCMDNQRHNPU1ZTMzRVNEhuNTNGbDBJ?oc=5` — Critical Raw Materials: securing Europe’s supply and strategic autonomy | Vijesti | Europski parlament
+  7. `link:https://news.google.com/rss/articles/CBMi0wFBVV95cUxOeWFmeDFHZEU5MFA3NTBWUDNyQVEwQ2ROV05CWkRqUnV0dkwwT2c4VVpGZmtvWjllTWxTX05LazZ6SHZFS1VYZmJSQzBRTlNsc0FjVUl2VGpqbUplNXNyY2ZsWmlibHg0aWJXNmd1Mi1vMDF4WlpZWWZYSzRsOGUteE9oNmJwcXpKZ0NzWVkzN05nNWVCS1VzbEp3Tk5zZFVnSUlIS3Q0dl9FVmFBSEp3bjFxYzYydGhjaUdlRG1tWjNRd080SzZrb1BpNUt2N3RKTEJF?oc=5` — Critical Raw Materials: securing Europe’s supply and strategic autonomy | Hírek | Európai Parlament
+  8. `link:https://news.google.com/rss/articles/CBMi0wFBVV95cUxNYmhnUnF6VEx3eXVfVklfQ2FIYXpzM2tGLWo4OTRvOXpvZ3Q1NVhfUVRWbm1OTTRIc0FCSjEyZjBvbGNpWTl2YnEwWnpFTTJJbDJtc3BFSkZ2dHBRQjJmdzJwT3gzM1UzN0oyTkVtM0wtMFNQV29zQ2xSSnFOdE9MU1RsQVJGUDlZQkR5ZkJNY2pOVDkxaE1MVXh0Y01PeVJIbW1ZalZ6cnFodHN0UFp6TkxRdDI2ZE5uUGItb21EOUJMRVpESlp2UkZsRUk5NDhSbWtF?oc=5` — Critical Raw Materials: securing Europe’s supply and strategic autonomy | Zpravodajství | Evropský parlament
   - … plus 28 more in the package manifest
 
 ### Worker SINGLE
