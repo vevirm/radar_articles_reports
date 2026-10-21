@@ -1,0 +1,2582 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-a-20261021T063819Z-9b142836f0bb",
+  "results": [
+    {
+      "record_key": "link:https://doi.org/10.1080/10438599.2026.2750888",
+      "source_hash": "f99ec9a8",
+      "identity_hash": "66b5b48c9511b8b8",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://doi.org/10.1080/10438599.2026.2750888. Prior online ledger: corroborated_previous_session_not_rechecked_this_session; Publisher bibliographic listing corroborates title; source substance not recovered.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "recovery_status",
+            "outcome": "not_fully_completed",
+            "note": "Previous online source-discovery pass exists in attached ledger; exhaustive per-job retrieval ladder not proven. Do not count as a completed defer or import as authoritative."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "first_party_package_text",
+            "url": "https://doi.org/10.1080/10438599.2026.2750888",
+            "title": "Cohesion funds and regional patenting: inventive capacity in innovation systems under construction",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand A. Available evidence is inadequate for a final evidence-based admission decision. Prior online check: Publisher bibliographic listing corroborates title; source substance not recovered.. Full mandatory six-step recovery and bibliographic verification are incomplete; this is NOT an import-ready defer."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand A. Available evidence is inadequate for a final evidence-based admission decision."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/20004508.2026.2736952",
+      "source_hash": "b99bf527",
+      "identity_hash": "3495d29a884badbd",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://researchportal.helsinki.fi/en/publications/the-geopolitics-of-the-bologna-process-framing-the-withdrawal-in-/. Prior online ledger: corroborated_previous_session_not_rechecked_this_session; Publisher and University of Helsinki corroborate the peer-reviewed Bologna Process paper; package holds substantive PDF excerpt.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "source_material",
+            "outcome": "package_text_examined",
+            "note": "Package first-party source excerpt/read mode pdf_excerpt; 24000 characters. Source route: https://content.openalex.org/works/W7214573420.pdf."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "first_party_package_text",
+            "url": "https://researchportal.helsinki.fi/en/publications/the-geopolitics-of-the-bologna-process-framing-the-withdrawal-in-/",
+            "title": "The geopolitics of the Bologna Process: framing the “withdrawal” in Russian academic discourse",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The package contains 24000 characters of matching source material; reviewed its stated object and central R&I relevance against strand A. It supplies substantive evidence about European research/innovation systems or research/foresight methods. Prior online check: Publisher and University of Helsinki corroborate the peer-reviewed Bologna Process paper; package holds substantive PDF excerpt.. Primary content is package-stored; source provenance should be rechecked before authoritative import."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The package contains 24000 characters of matching source material; reviewed its stated object and central R&I relevance against strand A. It supplies substantive evidence about European research/innovation systems or research/foresight methods."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "The geopolitics of the Bologna Process: framing the “withdrawal” in Russian academic discourse",
+      "reader_what": "Publisher and University of Helsinki corroborate the peer-reviewed Bologna Process paper; package holds substantive PDF excerpt.",
+      "reader_why": "",
+      "reader_more": "Publisher and University of Helsinki corroborate the peer-reviewed Bologna Process paper; package holds substantive PDF excerpt.",
+      "deep_analysis": {
+        "work_kind": "research or policy analysis",
+        "research_question": "What does the documented source establish?",
+        "main_finding": "Publisher and University of Helsinki corroborate the peer-reviewed Bologna Process paper; package holds substantive PDF excerpt.",
+        "method_or_basis": "Package-stored matching source content (pdf_excerpt); prior online source-recovery ledger.",
+        "qualification": "Evidence concerns the source’s reported analysis or announcement; it does not establish downstream causal effects.",
+        "radar_relevance": "The package contains 24000 characters of matching source material; reviewed its stated object and central R&I relevance against strand A. It supplies substantive evidence about European research/innovation systems or research/foresight methods.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Education Inquiry",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-09-28",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Evidence concerns the source’s reported analysis or announcement; it does not establish downstream causal effects.",
+          "text": "Publisher and University of Helsinki corroborate the peer-reviewed Bologna Process paper; package holds substantive PDF excerpt.",
+          "confidence": "low",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.techsoc.2026.103248",
+      "source_hash": "3d975711",
+      "identity_hash": "609ed67a853fc867",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://www.sciencedirect.com/science/article/pii/S0160791X26000370. Prior online ledger: online_source_recovered_this_session; Full publisher page confirms 2026 knowledge-transfer and absorptive-capacity firm innovation study; whether it concerns Europe R&I specifically needs geographic examination.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "live_source_page",
+            "outcome": "source_page_read",
+            "note": "https://www.sciencedirect.com/science/article/pii/S0160791X26000370 — original publisher/institutional report checked; Figueiredo, Fernandes and Abrantes use logistic regression on 100,058 observations from 14 countries in the Eurostat Community Innovation Survey. National and international knowledge transfer positively associate with product and process innovation; absorptive capacity negatively moderates the national relationship, with no significant international moderation. This is an empirical association, not proof of causal effect."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_institution_page",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0160791X26000370",
+            "title": "The moderating effect of absorptive capacity on the relationship between knowledge transfer and innovative capacity",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Online source recovery on 2026-10-21: Figueiredo, Fernandes and Abrantes use logistic regression on 100,058 observations from 14 countries in the Eurostat Community Innovation Survey. National and international knowledge transfer positively associate with product and process innovation; absorptive capacity negatively moderates the national relationship, with no significant international moderation. This is an empirical association, not proof of causal effect. Supplementary pages such as citing works are not misrepresented as original full text."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Figueiredo, Fernandes and Abrantes use logistic regression on 100,058 observations from 14 countries in the Eurostat Community Innovation Survey. National and international knowledge transfer positively associate with product and process innovation; absorptive capacity negatively moderates the national relationship, with no significant international moderation. This is an empirical association, not proof of causal effect."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "The moderating effect of absorptive capacity on the relationship between knowledge transfer and innovative capacity",
+      "reader_what": "Figueiredo, Fernandes and Abrantes use logistic regression on 100,058 observations from 14 countries in the Eurostat Community Innovation Survey. National",
+      "reader_why": "Evidence-based analysis of European research and innovation systems",
+      "reader_more": "Figueiredo, Fernandes and Abrantes use logistic regression on 100,058 observations from 14 countries in the Eurostat Community Innovation Survey. National and international knowledge transfer positively associate with product and process innovation; absorptive capacity negatively moderates the national relationship, with no significant international moderation. This is an empirical association, not proof of causal effect.",
+      "deep_analysis": {
+        "work_kind": "empirical scholarly study or source-grounded R&I institutional analysis",
+        "research_question": "What substantive evidence about European research and innovation does this work provide?",
+        "main_finding": "Figueiredo, Fernandes and Abrantes use logistic regression on 100,058 observations from 14 countries in the Eurostat Community Innovation Survey. National and international knowledge transfer positively associate with product and process innovation; absorptive capacity negatively moderates the national relationship, with no significant international moderation. This is an empirical association, not proof of causal effect.",
+        "method_or_basis": "Original publisher/institutional research abstract, substantive report webpage, or data-led research article recovered online and evaluated.",
+        "qualification": "Publication coverage, forecast/actual status, and association/causation limits as noted in main finding.",
+        "radar_relevance": "Figueiredo, Fernandes and Abrantes use logistic regression on 100,058 observations from 14 countries in the Eurostat Community Innovation Survey. National and international knowledge transfer positively associate with product and process innovation; absorptive capacity negatively moderates the national relationship, with no significant international moderation. This is an empirical association, not proof of causal effect.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Natália Figueiredo, Cristina I. Fernandes and José Luis Abrantes",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-06-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Publication coverage, forecast/actual status, and association/causation limits as noted in main finding.",
+          "text": "Figueiredo, Fernandes and Abrantes use logistic regression on 100,058 observations from 14 countries in the Eurostat Community Innovation Survey. National and international knowledge transfer positively associate with product and process innovation; absorptive capacity negatively moderates the national relationship, with no significant international moderation. This is an empirical association, not proof of causal effect.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/09654313.2026.2749575",
+      "source_hash": "409a20d6",
+      "identity_hash": "0cbdeb8ece3c43e8",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://easychair.org/smart-program/28thINFERAC23rdFIBA2026/2026-06-04.html. Prior online ledger: online_source_recovered_this_session; 2026 conference abstract reports patent-per-capita convergence clubs in EU regions 2000-2022, using Phillips-Sul club convergence; the exact published journal version must be verified independently.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "recovery_status",
+            "outcome": "not_fully_completed",
+            "note": "Previous online source-discovery pass exists in attached ledger; exhaustive per-job retrieval ladder not proven. Do not count as a completed defer or import as authoritative."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "first_party_package_text",
+            "url": "https://easychair.org/smart-program/28thINFERAC23rdFIBA2026/2026-06-04.html",
+            "title": "The innovation divide across EU regions: does EU funding shape distinct innovation transition paths?",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand A. Available evidence is inadequate for a final evidence-based admission decision. Prior online check: 2026 conference abstract reports patent-per-capita convergence clubs in EU regions 2000-2022, using Phillips-Sul club convergence; the exact published journal version must be verified independently.. Full mandatory six-step recovery and bibliographic verification are incomplete; this is NOT an import-ready defer."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand A. Available evidence is inadequate for a final evidence-based admission decision."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://publications.jrc.ec.europa.eu/repository/handle/JRC148105",
+      "source_hash": "1efe6907",
+      "identity_hash": "d05bc329c6f0ea49",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://publications.jrc.ec.europa.eu/repository/handle/JRC148105. Prior online ledger: online_source_recovered_this_session; EU JRC models 2030-2050 material-supply vulnerabilities for hydrogen technologies; iridium/platinum bottlenecks are scenario-based, not observations.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "source_material",
+            "outcome": "package_text_examined",
+            "note": "Package first-party source excerpt/read mode abstract_or_landing_page; 1684 characters. Source route: https://publications.jrc.ec.europa.eu/repository/handle/JRC148105."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "first_party_package_text",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC148105",
+            "title": "Deep dive on critical raw materials for hydrogen technologies in the EU",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The package contains 1684 characters of matching source material; reviewed its stated object and central R&I relevance against strand A. It supplies substantive evidence about European research/innovation systems or research/foresight methods. Prior online check: EU JRC models 2030-2050 material-supply vulnerabilities for hydrogen technologies; iridium/platinum bottlenecks are scenario-based, not observations.. Primary content is package-stored; source provenance should be rechecked before authoritative import."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The package contains 1684 characters of matching source material; reviewed its stated object and central R&I relevance against strand A. It supplies substantive evidence about European research/innovation systems or research/foresight methods."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Deep dive on critical raw materials for hydrogen technologies in the EU",
+      "reader_what": "EU JRC models 2030-2050 material-supply vulnerabilities for hydrogen technologies; iridium/platinum bottlenecks are scenario-based, not observations.",
+      "reader_why": "",
+      "reader_more": "EU JRC models 2030-2050 material-supply vulnerabilities for hydrogen technologies; iridium/platinum bottlenecks are scenario-based, not observations.",
+      "deep_analysis": {
+        "work_kind": "research or policy analysis",
+        "research_question": "What does the documented source establish?",
+        "main_finding": "EU JRC models 2030-2050 material-supply vulnerabilities for hydrogen technologies; iridium/platinum bottlenecks are scenario-based, not observations.",
+        "method_or_basis": "Package-stored matching source content (abstract_or_landing_page); prior online source-recovery ledger.",
+        "qualification": "Evidence concerns the source’s reported analysis or announcement; it does not establish downstream causal effects.",
+        "radar_relevance": "The package contains 1684 characters of matching source material; reviewed its stated object and central R&I relevance against strand A. It supplies substantive evidence about European research/innovation systems or research/foresight methods.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "JRC Publications Repository",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-10-20",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Evidence concerns the source’s reported analysis or announcement; it does not establish downstream causal effects.",
+          "text": "EU JRC models 2030-2050 material-supply vulnerabilities for hydrogen technologies; iridium/platinum bottlenecks are scenario-based, not observations.",
+          "confidence": "low",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMisgFBVV95cUxQUlU5YTRndU0zV01oS0JQbDh6ampPQ3UwNkZlcjRISTcwZlJvb1R5RGFQWGxBb1BwaWxYbVlZZGd4ekZudEIwQ0tkVkdQbExVQTBYbWJ6OHVjU2VmZE1vYUNsdWdDUFIwc2ZzUld5dGdDOGpZYkNsc1ZFRWFYU1JRRkRFcTM3R0l1VkRmVXROak9vWjZ6ekhRQkVuMFpwMFBSSnp4dFo3Ukl5YmRMYXEzUEZR?oc=5",
+      "source_hash": "f3aefe8b",
+      "identity_hash": "578d17b7ea02fdeb",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://www.euronews.com/2026/10/19/daedalus-greece-unveils-new-supercomputer-as-it-eyes-role-in-europes-ai-race | https://www.eurohpc-ju.europa.eu/two-new-eurohpc-systems-join-top500-jupiter-remains-among-worlds-fastest-supercomputers-2026-06-23_en. Prior online ledger: online_source_recovered_this_session; DAEDALUS inaugurated 19 October 2026; official EuroHPC documents corroborate the HPC infrastructure and ranking.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "live_source_page",
+            "outcome": "source_page_read",
+            "note": "https://www.eurohpc-ju.europa.eu/two-new-eurohpc-systems-join-top500-jupiter-remains-among-worlds-fastest-supercomputers-2026-06-23_en — original publisher/institutional report checked; EuroHPC confirms the DAEDALUS supercomputer entered the June 2026 TOP500 ranking at position 31, with 85.69 petaflops and research/AI applications. It was expected to become accessible to European users shortly; ranking and commissioning do not prove unrestricted general-user access as of June."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_institution_page",
+            "url": "https://www.eurohpc-ju.europa.eu/two-new-eurohpc-systems-join-top500-jupiter-remains-among-worlds-fastest-supercomputers-2026-06-23_en",
+            "title": "Daedalus: Greece unveils new supercomputer as it eyes role in Europe's AI race",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Online source recovery on 2026-10-21: EuroHPC confirms the DAEDALUS supercomputer entered the June 2026 TOP500 ranking at position 31, with 85.69 petaflops and research/AI applications. It was expected to become accessible to European users shortly; ranking and commissioning do not prove unrestricted general-user access as of June. Supplementary pages such as citing works are not misrepresented as original full text."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "EuroHPC confirms the DAEDALUS supercomputer entered the June 2026 TOP500 ranking at position 31, with 85.69 petaflops and research/AI applications. It was expected to become accessible to European users shortly; ranking and commissioning do not prove unrestricted general-user access as of June."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Daedalus: Greece unveils new supercomputer as it eyes role in Europe's AI race",
+      "reader_what": "EuroHPC confirms the DAEDALUS supercomputer entered the June 2026 TOP500 ranking at position 31, with 85.69 petaflops and research/AI applications.",
+      "reader_why": "Evidence-based analysis of European research and innovation systems",
+      "reader_more": "EuroHPC confirms the DAEDALUS supercomputer entered the June 2026 TOP500 ranking at position 31, with 85.69 petaflops and research/AI applications. It was expected to become accessible to European users shortly; ranking and commissioning do not prove unrestricted general-user access as of June.",
+      "deep_analysis": {
+        "work_kind": "empirical scholarly study or source-grounded R&I institutional analysis",
+        "research_question": "What substantive evidence about European research and innovation does this work provide?",
+        "main_finding": "EuroHPC confirms the DAEDALUS supercomputer entered the June 2026 TOP500 ranking at position 31, with 85.69 petaflops and research/AI applications. It was expected to become accessible to European users shortly; ranking and commissioning do not prove unrestricted general-user access as of June.",
+        "method_or_basis": "Original publisher/institutional research abstract, substantive report webpage, or data-led research article recovered online and evaluated.",
+        "qualification": "Publication coverage, forecast/actual status, and association/causation limits as noted in main finding.",
+        "radar_relevance": "EuroHPC confirms the DAEDALUS supercomputer entered the June 2026 TOP500 ranking at position 31, with 85.69 petaflops and research/AI applications. It was expected to become accessible to European users shortly; ranking and commissioning do not prove unrestricted general-user access as of June.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "EuroHPC Joint Undertaking",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-06-23",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Publication coverage, forecast/actual status, and association/causation limits as noted in main finding.",
+          "text": "EuroHPC confirms the DAEDALUS supercomputer entered the June 2026 TOP500 ranking at position 31, with 85.69 petaflops and research/AI applications. It was expected to become accessible to European users shortly; ranking and commissioning do not prove unrestricted general-user access as of June.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMitgFBVV95cUxPYXhLUE9Vd2NlR0EzMFhXUEViaDdzNGlBQWVYZ0ExQnhfMUIzZVB4bmpIdlZPQUluTEtzeHB3czdHVHBUTl92RlMyaVRHUGpMRzJBZFVWT3NjWGRSNnM3c0pOdExQMEp3dHZ5cXJ4UWc1eFdqTXNzVFc4OVpEaVpWSzd3NVVKRnR1RDVqck9oT0Q0MVNFak13TzNpelR2STlteTV2YlYzZ1ZMQkxsYmw0d2lTZUV2Zw?oc=5",
+      "source_hash": "cf955868",
+      "identity_hash": "bb736cf2946c8669",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://news.bloomberglaw.com/tech-and-telecom-law/europes-top-carriers-explore-satellite-group-to-fend-off-spacex. Prior online ledger: online_source_recovered_this_session; 19 October Bloomberg details telecom operator consortium exploring satellite spectrum; overlaps A8.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "recovery_status",
+            "outcome": "not_fully_completed",
+            "note": "Previous online source-discovery pass exists in attached ledger; exhaustive per-job retrieval ladder not proven. Do not count as a completed defer or import as authoritative."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "first_party_package_text",
+            "url": "https://news.bloomberglaw.com/tech-and-telecom-law/europes-top-carriers-explore-satellite-group-to-fend-off-spacex",
+            "title": "Europe’s Top Carriers Explore Satellite Group to Fend Off SpaceX",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision. Prior online check: 19 October Bloomberg details telecom operator consortium exploring satellite spectrum; overlaps A8.. Full mandatory six-step recovery and bibliographic verification are incomplete; this is NOT an import-ready defer."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "C",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "requires_check",
+        "duplicate_of": "",
+        "reason": "19 October Bloomberg details telecom operator consortium exploring satellite spectrum; overlaps A8."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMixgFBVV95cUxNNnNmbDd1eExiNFVESmhtZ0hkNXVxSzlqNWdfQUlVNXEzWHVheEZlWkszVlNHY2syWEU5T1dPTWVtbGgzTnEzOWowZXFlRUE1cHhSUjVGQnQ1eWtUbXR5TUw5M1kxSlFkVG1nSjNpamoyYXlZYy1jNm5nWWN3RE1GVU50aEdMQWxIS2JyZ2d4ZmhUYjJJbHN1ei11WWJ6UTczTEM3NzJqdkZLSS1JQThmc0ctUENEZWNJejN3MVBYcUNPZ01PUkE?oc=5",
+      "source_hash": "d9e9bf93",
+      "identity_hash": "621746a4f90c120e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://www.reuters.com/business/aerospace-defense/european-telecom-groups-mull-joint-bid-mobile-satellite-spectrum-2026-10-19/. Prior online ledger: online_source_recovered_this_session; Four operators are considering a joint spectrum bid, not yet making a completed bid.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "recovery_status",
+            "outcome": "not_fully_completed",
+            "note": "Previous online source-discovery pass exists in attached ledger; exhaustive per-job retrieval ladder not proven. Do not count as a completed defer or import as authoritative."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "first_party_package_text",
+            "url": "https://www.reuters.com/business/aerospace-defense/european-telecom-groups-mull-joint-bid-mobile-satellite-spectrum-2026-10-19/",
+            "title": "European telecom groups mull bid for mobile satellite spectrum",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision. Prior online check: Four operators are considering a joint spectrum bid, not yet making a completed bid.. Full mandatory six-step recovery and bibliographic verification are incomplete; this is NOT an import-ready defer."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "C",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMitAFBVV95cUxPWmpvaFl6RHdyUDQ0RjhMYmR2QVpBLTBMSi1NZ3dmSVljcWZqZFd0dXZVMUFEbjk4aEZVek9POE55MFVORWpPaEE0LVBkdVY5NGhmdmMtUWl3bXNwaUFEUl9Gd2FDaTVWc3lNQV9QQVUtRXF6ZWtpX1VIbmdOZkFHSkFyTFhkUzJTb1VuR19lZkFIUWxlVDUtZmxDa1RjUjlQeW9HUGtDQ3o5LW5ZejBwRHY4Y28?oc=5",
+      "source_hash": "348b0a22",
+      "identity_hash": "3365064c237c3e00",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://uk.finance.yahoo.com/news/data-centers-green-shift-reviving-081418855.html/. Prior online ledger: online_source_recovered_this_session; BloombergNEF analysis reports electricity demand trends, data centres one contributor; test direct R&I link versus general sector trend.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "recovery_status",
+            "outcome": "not_fully_completed",
+            "note": "Previous online source-discovery pass exists in attached ledger; exhaustive per-job retrieval ladder not proven. Do not count as a completed defer or import as authoritative."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "first_party_package_text",
+            "url": "https://uk.finance.yahoo.com/news/data-centers-green-shift-reviving-081418855.html/",
+            "title": "Data Centers and Green Shift Are Reviving Europe’s Power Demand",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision. Prior online check: BloombergNEF analysis reports electricity demand trends, data centres one contributor; test direct R&I link versus general sector trend.. Full mandatory six-step recovery and bibliographic verification are incomplete; this is NOT an import-ready defer."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "C",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMivAFBVV95cUxOT0VmWG5zU1ZGUGlrc1F4N2xadS0ybUJyc1JUTDV6eGdqTjBEcm56QkNHQjE4a2YyeWtFYWRqOFlZbms1dE5UTnRoaUthU0lpWVgxYnpmaEFoTmlvSVh5RWQ5eUxKWU0xWkhDRkN6cTM2TGpZakNwd3U3YV91ZUx5VU15V1pnZElLeUltUEloNm9UWVhlMXVTNktkOEV1ZzROXzRXbE14ckVtM2lIR2tzakxZd1hZWWxYNTJOMg?oc=5",
+      "source_hash": "16d446c5",
+      "identity_hash": "9417f2420ef9751f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://seldon.report/archive/2026-10-19. Prior online ledger: online_source_recovered_this_session; Norwegian Bulk Infrastructure seeks Canadian strategic investor for proposed transatlantic fibre cable; retrieve actual originating press/interview.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "recovery_status",
+            "outcome": "not_fully_completed",
+            "note": "Previous online source-discovery pass exists in attached ledger; exhaustive per-job retrieval ladder not proven. Do not count as a completed defer or import as authoritative."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "first_party_package_text",
+            "url": "https://seldon.report/archive/2026-10-19",
+            "title": "Norway Data Center Firm Hunts for Partner on Canada-Europe Fiber Link",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision. Prior online check: Norwegian Bulk Infrastructure seeks Canadian strategic investor for proposed transatlantic fibre cable; retrieve actual originating press/interview.. Full mandatory six-step recovery and bibliographic verification are incomplete; this is NOT an import-ready defer."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "C",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMigwFBVV95cUxOLVFWRVZxMkJLTnJJaThPRWdnNTFRbmc2V1FTYW1CbUNZc1hNYkZKd0xCbHJTeUpzYnNzYmx6RS1aZS1FNnBUcGx0VHY5bFZmY2xTMU1nZHlJNTNpWmliOE0tcmJ5d0JpeVJlZmw3Y1RuRnJvQWZSQXJraTNtN1pGOTJ4RQ?oc=5",
+      "source_hash": "85d21cab",
+      "identity_hash": "188c1f8148fb5a4c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://live.euronext.com/en/financial-news/us-futures-rebound-ai-earnings-test-looms-france-pressures-europe. Prior online ledger: online_source_recovered_this_session; 19 October 2026 Reuters market wrap on equities, oil and France fiscal risk has no source-evidenced change specific to European R&I.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "recovery_status",
+            "outcome": "not_fully_completed",
+            "note": "Previous online source-discovery pass exists in attached ledger; exhaustive per-job retrieval ladder not proven. Do not count as a completed defer or import as authoritative."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "first_party_package_text",
+            "url": "https://live.euronext.com/en/financial-news/us-futures-rebound-ai-earnings-test-looms-france-pressures-europe",
+            "title": "US futures rebound as AI earnings test looms; France pressures Europe",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision. Prior online check: 19 October 2026 Reuters market wrap on equities, oil and France fiscal risk has no source-evidenced change specific to European R&I.. Full mandatory six-step recovery and bibliographic verification are incomplete; this is NOT an import-ready defer."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "C",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://www.euronews.com/2026/10/19/polish-satellite-maker-creotech-instruments-plans-tenfold-capacity-boost-by-2029",
+      "source_hash": "07efc2d7",
+      "identity_hash": "1cc4b836f954aa79",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://live.euronext.com/en/financial-news/polish-satellite-maker-creotech-plans-tenfold-capacity-boost-warns-europes-us-rocket. Prior online ledger: online_source_recovered_this_session; Creotech CEO announced/planned 2029 factory capacity; cannot assert that capacity exists today.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "source_material",
+            "outcome": "package_text_examined",
+            "note": "Package first-party source excerpt/read mode substantial_web_text; 5268 characters. Source route: https://www.euronews.com/2026/10/19/polish-satellite-maker-creotech-instruments-plans-tenfold-capacity-boost-by-2029."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "first_party_package_text",
+            "url": "https://live.euronext.com/en/financial-news/polish-satellite-maker-creotech-plans-tenfold-capacity-boost-warns-europes-us-rocket",
+            "title": "Polish satellite maker Creotech plans tenfold capacity boost by 2029",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The package contains 5268 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. It supplies substantive evidence about European research/innovation systems or research/foresight methods. Prior online check: Creotech CEO announced/planned 2029 factory capacity; cannot assert that capacity exists today.. Primary content is package-stored; source provenance should be rechecked before authoritative import."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CHANGE",
+        "reason": "The package contains 5268 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. It supplies substantive evidence about European research/innovation systems or research/foresight methods."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Polish satellite maker Creotech plans tenfold capacity boost by 2029",
+      "reader_what": "Creotech CEO announced/planned 2029 factory capacity; cannot assert that capacity exists today.",
+      "reader_why": "",
+      "reader_more": "Creotech CEO announced/planned 2029 factory capacity; cannot assert that capacity exists today.",
+      "deep_analysis": {
+        "work_kind": "policy or infrastructure action",
+        "research_question": "What does the documented source establish?",
+        "main_finding": "Creotech CEO announced/planned 2029 factory capacity; cannot assert that capacity exists today.",
+        "method_or_basis": "Package-stored matching source content (substantial_web_text); prior online source-recovery ledger.",
+        "qualification": "Evidence concerns the source’s reported analysis or announcement; it does not establish downstream causal effects.",
+        "radar_relevance": "The package contains 5268 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. It supplies substantive evidence about European research/innovation systems or research/foresight methods.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": [
+        {
+          "object": "research.system_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Euronews",
+            "class": "other"
+          },
+          "mechanism": "launches",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-10-19",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Evidence concerns the source’s reported analysis or announcement; it does not establish downstream causal effects.",
+          "text": "Creotech CEO announced/planned 2029 factory capacity; cannot assert that capacity exists today.",
+          "confidence": "low",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMirgFBVV95cUxOT09KR2R3TjktZGltSk9PMGtKcGVMeFBuSmR5eTVkMERSbkVuc0d5bGhnanJ2WloyWUtULU1PTkFVQlNhaklmWmJESHF2cEV0Q01YQ3NBb3RxWklLQlNLelBEMzVBSF9nZ09Uc0FjLUhHUmhOeUF1Z0pObndUclVjT0s2Q3Fka2Z6dWltWC1MQ0g5cmo0V1dUeFY0M3hEOE5aSzV3RjdZZ2JFUTU4TEE?oc=5",
+      "source_hash": "b766d32f",
+      "identity_hash": "82c73f7d5965b6a9",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://www.investing.com/news/stock-market-news/germanys-merz-urges-ai-investment-ahead-of-nvidia-deal-4958229. Prior online ledger: online_source_recovered_this_session; 19 October Merz appealed for AI industrial adoption before expected Nvidia agreement; later results in A30 supersede the announcement stage.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "recovery_status",
+            "outcome": "not_fully_completed",
+            "note": "Previous online source-discovery pass exists in attached ledger; exhaustive per-job retrieval ladder not proven. Do not count as a completed defer or import as authoritative."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "first_party_package_text",
+            "url": "https://www.investing.com/news/stock-market-news/germanys-merz-urges-ai-investment-ahead-of-nvidia-deal-4958229",
+            "title": "Germany's Merz urges AI investment ahead of Nvidia deal",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision. Prior online check: 19 October Merz appealed for AI industrial adoption before expected Nvidia agreement; later results in A30 supersede the announcement stage.. Full mandatory six-step recovery and bibliographic verification are incomplete; this is NOT an import-ready defer."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "C",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMi0gFBVV95cUxOa0FkSmVSbVVWNjlSRjFmUDctTFYxRDJ5MlRNNGxtdU9MMXF4bnBRbjZTcTBaSzJnRUNqbVk0YVpibVRDOG5oT0FCc2YxWHRvY2x3OEpYLWY3WEdwVHBDVzdjdzFyRklhckU1V2FPYUpKbmJ6ZmpKWlNaTDc0RGpxdHJqU1hRSGZyQ0ZnM01IeldOcm9yZndrVUhxaXFTMVNteHVkYXAxbF9sSHhyZ1FTeFRtcmllNW5IdUtJNUZfakw5aFpuRTI3NTIwUXdsZlpkOVE?oc=5",
+      "source_hash": "a0cde7b7",
+      "identity_hash": "27430b0a9038f8ec",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://live.euronext.com/en/financial-news/polish-satellite-maker-creotech-plans-tenfold-capacity-boost-warns-europes-us-rocket. Prior online ledger: online_source_recovered_this_session; Likely duplicate coverage of the same Reuters reporting; determine Radar dedup identity before import.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "recovery_status",
+            "outcome": "not_fully_completed",
+            "note": "Previous online source-discovery pass exists in attached ledger; exhaustive per-job retrieval ladder not proven. Do not count as a completed defer or import as authoritative."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "first_party_package_text",
+            "url": "https://live.euronext.com/en/financial-news/polish-satellite-maker-creotech-plans-tenfold-capacity-boost-warns-europes-us-rocket",
+            "title": "Polish satellite maker Creotech plans tenfold capacity boost, warns of Europe’s US rocket reliance",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision. Prior online check: Likely duplicate coverage of the same Reuters reporting; determine Radar dedup identity before import.. Full mandatory six-step recovery and bibliographic verification are incomplete; this is NOT an import-ready defer."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "C",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "requires_check",
+        "duplicate_of": "",
+        "reason": "Likely duplicate coverage of the same Reuters reporting; determine Radar dedup identity before import."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMi2gFBVV95cUxNV25TdUhhYXBTczR1NlhodXZTc0xncTduYlVreTZkQjNBcmNjcG9rLS16TWQ5VklDc3NrYzNnOEVkd2NtdWlaZDVPUEEtZzFaNDB5aVZQcUpBVXFTNzNwbW9BTnpET0FtQlFsZWNtckFKT2hHZFRzeGx5d3NnUVEwRDJaRzZLNVBJUHhCcFdiMGZWVkM2R2xLdjJQTjRnMEFDZktmVWlrTTlrSjIxdkhFa0wtcTVuWW03c1FqTDhyMGMtSG16ejFrOVlIb3RLLVRQU3M4bzAxX3djUQ?oc=5",
+      "source_hash": "e091dc35",
+      "identity_hash": "bdf3330ce7604b5d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/experts-call-new-approach-neuro-ai-governance-2026-09-08_en. Prior online ledger: online_source_recovered_this_session; European Group on Ethics published a Neuro-AI governance statement 8 September 2026; this is a released statement, not implemented rules.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "live_primary_source",
+            "outcome": "source_content_read",
+            "note": "Source reviewed online on 2026-10-21: https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/experts-call-new-approach-neuro-ai-governance-2026-09-08_en. European Group on Ethics in Science and New Technologies issued an infrastructure-focused Neuro-AI governance statement on 8 September 2026. It recommends neurodata protections, responsible brain foundation-model development, rights safeguards, European public-interest governance capacity, and a regulatory fitness check."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_primary",
+            "url": "https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/experts-call-new-approach-neuro-ai-governance-2026-09-08_en",
+            "title": "Experts call for a new approach to Neuro-AI governance - European Commission",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "European Group on Ethics in Science and New Technologies issued an infrastructure-focused Neuro-AI governance statement on 8 September 2026. It recommends neurodata protections, responsible brain foundation-model development, rights safeguards, European public-interest governance capacity, and a regulatory fitness check. Verification based on identified primary text accessible online; not a claim that every attachment was downloaded."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CHANGE",
+        "reason": "European Group on Ethics in Science and New Technologies issued an infrastructure-focused Neuro-AI governance statement on 8 September 2026. It recommends neurodata protections, responsible brain foundation-model development, rights safeguards, European public-interest governance capacity, and a regulatory fitness check."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Experts call for a new approach to Neuro-AI governance - European Commission",
+      "reader_what": "European Group on Ethics in Science and New Technologies issued an infrastructure-focused Neuro-AI governance statement on 8 September 2026. It",
+      "reader_why": "",
+      "reader_more": "European Group on Ethics in Science and New Technologies issued an infrastructure-focused Neuro-AI governance statement on 8 September 2026. It recommends neurodata protections, responsible brain foundation-model development, rights safeguards, European public-interest governance capacity, and a regulatory fitness check.",
+      "deep_analysis": {
+        "work_kind": "primary research / official report",
+        "research_question": "What does this source document and does it qualify for Radar?",
+        "main_finding": "European Group on Ethics in Science and New Technologies issued an infrastructure-focused Neuro-AI governance statement on 8 September 2026. It recommends neurodata protections, responsible brain foundation-model development, rights safeguards, European public-interest governance capacity, and a regulatory fitness check.",
+        "method_or_basis": "Read official institutional source or publisher full-text page at recorded URL.",
+        "qualification": "Evidence supports the stated source-level findings, not downstream effectiveness or causal effects.",
+        "radar_relevance": "European Group on Ethics in Science and New Technologies issued an infrastructure-focused Neuro-AI governance statement on 8 September 2026. It recommends neurodata protections, responsible brain foundation-model development, rights safeguards, European public-interest governance capacity, and a regulatory fitness check.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "other"
+          },
+          "mechanism": "launches",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-09-08",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Evidence supports the stated source-level findings, not downstream effectiveness or causal effects.",
+          "text": "European Group on Ethics in Science and New Technologies issued an infrastructure-focused Neuro-AI governance statement on 8 September 2026. It recommends neurodata protections, responsible brain foundation-model development, rights safeguards, European public-interest governance capacity, and a regulatory fitness check.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMipAFBVV95cUxOV2dyWXBXVG95amEzSGNqMHl3ZUNaN1ZqLUJqVVJFVU9MNGx4RnpWNXFMQ3hYLVk0WGotWFltOUthV3k4cmN0anEyTmlFN2pSV2JlNUszT3BfNE45WXg2Z29TRFVxR3lYVDFoM0RwQm5mSTZ6RTNYeDVEREJwODlRYVlMRmxta2RFMVVDSnRMRE1XYXR2VHVKMXp5MlFxeXJxZEI2eg?oc=5",
+      "source_hash": "f4973807",
+      "identity_hash": "5fdc73197c179fb2",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://www.euronews.com/2026/10/19/nvidia-ceo-jensen-huang-warns-germany-is-falling-behind-in-ai-race. Prior online ledger: online_source_recovered_this_session; Nvidia CEO comments before Germany investment summit, not themselves substantive new programme; related A13/A30.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "recovery_status",
+            "outcome": "not_fully_completed",
+            "note": "Previous online source-discovery pass exists in attached ledger; exhaustive per-job retrieval ladder not proven. Do not count as a completed defer or import as authoritative."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "first_party_package_text",
+            "url": "https://www.euronews.com/2026/10/19/nvidia-ceo-jensen-huang-warns-germany-is-falling-behind-in-ai-race",
+            "title": "Nvidia CEO Jensen Huang warns Germany is falling behind in AI race",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision. Prior online check: Nvidia CEO comments before Germany investment summit, not themselves substantive new programme; related A13/A30.. Full mandatory six-step recovery and bibliographic verification are incomplete; this is NOT an import-ready defer."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "C",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiowFBVV95cUxNSU5PWnlQTmpsMkRHaGo3OTNBLUlDb1BrbVdwOEhkZ0NyWFdMcDR2QWZ3LTA4Y19NVHBKcTN3OGFMSHZpQlgxYWJCZWVVREJGNWJsdURWeGd4RFJQLXNyNUVVNTlfTl9iQk43YnVZYmNSOWtScUNSZTBmMWtfV01senNKV0VOVWFxUFA3YUQxVGFFSUJPelpBR0ZIQW8zMjhwMU9N?oc=5",
+      "source_hash": "cc7bbd28",
+      "identity_hash": "76e6b984365ea314",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://sciencebusiness.net/news/horizon-europe/parliament-rapporteurs-reach-deal-next-horizon-europe. Prior online ledger: online_source_recovered_this_session; Rapporteurs achieved a shadow-rapporteur agreement 19 October; committee vote planned for 10 November, not yet adopted law.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "live_source_page",
+            "outcome": "source_page_read",
+            "note": "https://sciencebusiness.net/news/horizon-europe/parliament-rapporteurs-reach-deal-next-horizon-europe — Science|Business reports that Parliament shadow rapporteurs reached a provisional agreement on next Horizon Europe rules on October 19, 2026 covering governance, dual-use research and longer term laboratory funding. The research committee vote was scheduled for November 10, so no enacted law is claimed."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_institution_page",
+            "url": "https://sciencebusiness.net/news/horizon-europe/parliament-rapporteurs-reach-deal-next-horizon-europe",
+            "title": "Parliament rapporteurs reach a deal on the next Horizon Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Read live source webpage 2026-10-21. Science|Business reports that Parliament shadow rapporteurs reached a provisional agreement on next Horizon Europe rules on October 19, 2026 covering governance, dual-use research and longer term laboratory funding. The research committee vote was scheduled for November 10, so no enacted law is claimed. Any linked PDF not independently read is not represented as reviewed."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Science|Business reports that Parliament shadow rapporteurs reached a provisional agreement on next Horizon Europe rules on October 19, 2026 covering governance, dual-use research and longer term laboratory funding. The research committee vote was scheduled for November 10, so no enacted law is claimed."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Parliament rapporteurs reach a deal on the next Horizon Europe",
+      "reader_what": "Science|Business reports that Parliament shadow rapporteurs reached a provisional agreement on next Horizon Europe rules on October 19, 2026",
+      "reader_why": "Source-backed R&I policy or system change",
+      "reader_more": "Science|Business reports that Parliament shadow rapporteurs reached a provisional agreement on next Horizon Europe rules on October 19, 2026 covering governance, dual-use research and longer term laboratory funding. The research committee vote was scheduled for November 10, so no enacted law is claimed.",
+      "deep_analysis": {
+        "work_kind": "source-backed R&I report",
+        "research_question": "What happened and does it substantively bear on European research and innovation systems?",
+        "main_finding": "Science|Business reports that Parliament shadow rapporteurs reached a provisional agreement on next Horizon Europe rules on October 19, 2026 covering governance, dual-use research and longer term laboratory funding. The research committee vote was scheduled for November 10, so no enacted law is claimed.",
+        "method_or_basis": "Substantive source page retrieved online; dates and details checked against the displayed publication.",
+        "qualification": "The source documents this statement or development; proposals and projections are not completed outcomes.",
+        "radar_relevance": "Science|Business reports that Parliament shadow rapporteurs reached a provisional agreement on next Horizon Europe rules on October 19, 2026 covering governance, dual-use research and longer term laboratory funding. The research committee vote was scheduled for November 10, so no enacted law is claimed.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Parliament rapporteurs",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-10-19",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The source documents this statement or development; proposals and projections are not completed outcomes.",
+          "text": "Science|Business reports that Parliament shadow rapporteurs reached a provisional agreement on next Horizon Europe rules on October 19, 2026 covering governance, dual-use research and longer term laboratory funding. The research committee vote was scheduled for November 10, so no enacted law is claimed.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMizwFBVV95cUxPZ1dlYUwzTHBWTWJaRU05bndFSVNzSjl3WE5ORWtfQ0k5a3Y4ajNuT3RDNjM5Qm5VSnYwRlR5VTFSWDN1LUpfNlFjcnBBY2ZIVmU3czRkS2NEZFI2MGxPbjljeDVrOHJTMXI2ejFrZWZKNjdlTXotR2pQM2V2cHFYaVBzYzhBNHk5SzRVU3dxTzA5VXItNGUxZy03a0ZVZ0lNQUxIVXZrWU1RRFdHVS16VTY4VjJ2bDBnQUR6b2c2V204aURzbW1ibmRSenBqdms?oc=5",
+      "source_hash": "c361f9b0",
+      "identity_hash": "6d3d1d2ad69d6c47",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://projects.research-and-innovation.ec.europa.eu/cs/node/15303. Prior online ledger: online_source_recovered_this_session; 20 October 2026 Horizon Magazine reports EU-funded critical material supply-chain early-warning research; announcement/news is not validation of predictive accuracy.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "recovery_status",
+            "outcome": "not_fully_completed",
+            "note": "Previous online source-discovery pass exists in attached ledger; exhaustive per-job retrieval ladder not proven. Do not count as a completed defer or import as authoritative."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "first_party_package_text",
+            "url": "https://projects.research-and-innovation.ec.europa.eu/cs/node/15303",
+            "title": "Building an early warning system for Europe’s critical raw materials - projects.research-and-innovation.ec.europa.eu",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision. Prior online check: 20 October 2026 Horizon Magazine reports EU-funded critical material supply-chain early-warning research; announcement/news is not validation of predictive accuracy.. Full mandatory six-step recovery and bibliographic verification are incomplete; this is NOT an import-ready defer."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "C",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiX0FVX3lxTE5QYkRoSFZDNXktTTQ2dFJOZEZETG1kNnlSSVRMajQ3ZzBQSFkxQzM2VXg3UE9KdVFFNFZJNUQySHVWTHpYMFFYNS1EcEtOVC1uUjZoQ1dhQXpwd3lvZERF?oc=5",
+      "source_hash": "c974b1b0",
+      "identity_hash": "343f4cc84618d522",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://www.nature.com/articles/d41586-026-03352-0. Prior online ledger: online_source_recovered_this_session; 20 October 2026 Nature correspondence urges international response to US science strategy; opinion only, no policy action proven.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "recovery_status",
+            "outcome": "not_fully_completed",
+            "note": "Previous online source-discovery pass exists in attached ledger; exhaustive per-job retrieval ladder not proven. Do not count as a completed defer or import as authoritative."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "first_party_package_text",
+            "url": "https://www.nature.com/articles/d41586-026-03352-0",
+            "title": "Europe and the rest of the world must come up with an answer to US science strategy",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision. Prior online check: 20 October 2026 Nature correspondence urges international response to US science strategy; opinion only, no policy action proven.. Full mandatory six-step recovery and bibliographic verification are incomplete; this is NOT an import-ready defer."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "C",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiswFBVV95cUxNaGFxUm93NXNFanpMQnpJU1NSeldmZUEyX3REOWdfckRZaVBFaHFBVl9uRS04UExUU1M4QlJXODdKbUxtOWNxTkpPNVJZRUhJZWZjX19qY25hZnlGMjNrN1F3MXVPeHpfZUw0SDhMQzhCMFl0YkMtR3pUZjN1VEIxMnVGLTViSlo2bGN3N3RHMlAzSVFiSGI0TnU0YmR5V3Nubm1nanJWNklQWmV3bUNreEpuSQ?oc=5",
+      "source_hash": "e995727b",
+      "identity_hash": "c83ea30d726730f1",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://live.euronext.com/en/financial-news/germanys-merz-touts-defence-ai-and-chip-investment-drive-pitch-investors. Prior online ledger: online_source_recovered_this_session; German government promoted 2026 investment commitments, planned quadrupling AI computing capacity by 2030; pledges are not realized outcomes.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "recovery_status",
+            "outcome": "not_fully_completed",
+            "note": "Previous online source-discovery pass exists in attached ledger; exhaustive per-job retrieval ladder not proven. Do not count as a completed defer or import as authoritative."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "first_party_package_text",
+            "url": "https://live.euronext.com/en/financial-news/germanys-merz-touts-defence-ai-and-chip-investment-drive-pitch-investors",
+            "title": "Germany's Merz touts defence, AI and chip investment drive in pitch to investors",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision. Prior online check: German government promoted 2026 investment commitments, planned quadrupling AI computing capacity by 2030; pledges are not realized outcomes.. Full mandatory six-step recovery and bibliographic verification are incomplete; this is NOT an import-ready defer."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "C",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiuAFBVV95cUxOX1RtekRHU3BlTnFRQ2JnZ1JFM1VlUTR1U3pZczhCTjNid3hyYVZiaUQ0YlFsQlZGQUpyYlhadEpxOW51c05MaFM5YnRjbEJsNnhBWW9fY0hkYjB1bkxTWkJZT1BKR1JwdVZNNEU3b09lb3FfSTViVl9CZGszVDdVQ3h5SURSaTdOZEM0bkktek5VNFR4N2ZmOEJ0aWk4bzBjWGN2Skpzbkc5SHBreW9YbU5hZ0ZJV3RU?oc=5",
+      "source_hash": "9f7ce1e1",
+      "identity_hash": "513ac2934c8105e9",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://sciencebusiness.net/news/r-d-funding/european-research-council/erc-starting-grant-success-rate-likely-fall-48. Prior online ledger: online_source_recovered_this_session; 7,710 ERC 2027 Starting Grant proposals; 4.8% is projected from planned 373 awards, not actual success rate.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "live_source_page",
+            "outcome": "source_page_read",
+            "note": "https://sciencebusiness.net/news/r-d-funding/european-research-council/erc-starting-grant-success-rate-likely-fall-48 — Science|Business reports 7,710 ERC Starting Grant applications for 2027, 60% above the preceding year. With a planned 373 awards from EUR 594m, the computed success ratio is around 4.8%, not a completed award outcome."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_institution_page",
+            "url": "https://sciencebusiness.net/news/r-d-funding/european-research-council/erc-starting-grant-success-rate-likely-fall-48",
+            "title": "ERC Starting Grant success rate likely to fall to 4.8%",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Read live source webpage 2026-10-21. Science|Business reports 7,710 ERC Starting Grant applications for 2027, 60% above the preceding year. With a planned 373 awards from EUR 594m, the computed success ratio is around 4.8%, not a completed award outcome. Any linked PDF not independently read is not represented as reviewed."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Science|Business reports 7,710 ERC Starting Grant applications for 2027, 60% above the preceding year. With a planned 373 awards from EUR 594m, the computed success ratio is around 4.8%, not a completed award outcome."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "ERC Starting Grant success rate likely to fall to 4.8%",
+      "reader_what": "Science|Business reports 7,710 ERC Starting Grant applications for 2027, 60% above the preceding year. With a planned 373 awards",
+      "reader_why": "Source-backed R&I policy or system change",
+      "reader_more": "Science|Business reports 7,710 ERC Starting Grant applications for 2027, 60% above the preceding year. With a planned 373 awards from EUR 594m, the computed success ratio is around 4.8%, not a completed award outcome.",
+      "deep_analysis": {
+        "work_kind": "source-backed R&I report",
+        "research_question": "What happened and does it substantively bear on European research and innovation systems?",
+        "main_finding": "Science|Business reports 7,710 ERC Starting Grant applications for 2027, 60% above the preceding year. With a planned 373 awards from EUR 594m, the computed success ratio is around 4.8%, not a completed award outcome.",
+        "method_or_basis": "Substantive source page retrieved online; dates and details checked against the displayed publication.",
+        "qualification": "The source documents this statement or development; proposals and projections are not completed outcomes.",
+        "radar_relevance": "Science|Business reports 7,710 ERC Starting Grant applications for 2027, 60% above the preceding year. With a planned 373 awards from EUR 594m, the computed success ratio is around 4.8%, not a completed award outcome.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Research Council",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-10-20",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The source documents this statement or development; proposals and projections are not completed outcomes.",
+          "text": "Science|Business reports 7,710 ERC Starting Grant applications for 2027, 60% above the preceding year. With a planned 373 awards from EUR 594m, the computed success ratio is around 4.8%, not a completed award outcome.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMinwFBVV95cUxOQ1JyMkRkWjBlbnZpSlhVTEZHczJ5UFpPdGJXWTdUQnhMSjM1cGNldnhlWWRJLUtNOEVtekMwUzU0bW40S0ZRYW1BbUV0UnB6bHI2NF80VGwyU1ZQbG1nTGhMRFlhYWNMUEN6azBIc1ZmajRQaFdXRTBDWUkzWXRpNnlBbk5weXVWTmdXUzFGTFhHTVhoVm96eWYwNHdWaFE?oc=5",
+      "source_hash": "eac98d93",
+      "identity_hash": "60990f6d08ce6d8f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://www.reuters.com/business/finance/europes-earnings-boom-widens-beyond-energy-ai-2026-10-20/. Prior online ledger: online_source_recovered_this_session; 20 October 2026 quarterly corporate-earnings estimates, not discrete EU R&I investment action or system-specific evidence.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "recovery_status",
+            "outcome": "not_fully_completed",
+            "note": "Previous online source-discovery pass exists in attached ledger; exhaustive per-job retrieval ladder not proven. Do not count as a completed defer or import as authoritative."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "first_party_package_text",
+            "url": "https://www.reuters.com/business/finance/europes-earnings-boom-widens-beyond-energy-ai-2026-10-20/",
+            "title": "Europe's earnings boom widens beyond energy and AI",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision. Prior online check: 20 October 2026 quarterly corporate-earnings estimates, not discrete EU R&I investment action or system-specific evidence.. Full mandatory six-step recovery and bibliographic verification are incomplete; this is NOT an import-ready defer."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "C",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMihAFBVV95cUxObUtxT0FZc0M5d295QWVWOGpaWTFXTWRxYXMzbUFmQ0JKZDF2SXZTSjc2LUZTbnctSjE0OXBqZVlqbHVmc0MwcTdNV0lWT1VfMmJnMjFNN0xfQ2RqdFhoRXRfMjJsaFhHR1NRYWFWems1dldrbTRQNHNhSVFfVnZ6M0ZFWEE?oc=5",
+      "source_hash": "39a7bbd0",
+      "identity_hash": "392bdffb836ce779",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://www.ft.com/content/2202b6a7-9645-4a0f-995b-40f3e939fbac. Prior online ledger: online_source_recovered_this_session; Google public-affairs executive argues AI adoption rather than EU frontier models; industry argument is not independently validated system evidence.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "recovery_status",
+            "outcome": "not_fully_completed",
+            "note": "Previous online source-discovery pass exists in attached ledger; exhaustive per-job retrieval ladder not proven. Do not count as a completed defer or import as authoritative."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "first_party_package_text",
+            "url": "https://www.ft.com/content/2202b6a7-9645-4a0f-995b-40f3e939fbac",
+            "title": "Google executive dismisses European fears over US dominance of AI",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision. Prior online check: Google public-affairs executive argues AI adoption rather than EU frontier models; industry argument is not independently validated system evidence.. Full mandatory six-step recovery and bibliographic verification are incomplete; this is NOT an import-ready defer."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "C",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://defence-industry-space.ec.europa.eu/eu-space/product-environmental-footprint-category-rules-pefcr-space-sector_en",
+      "source_hash": "7a545518",
+      "identity_hash": "1bf98eba0c17c95a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://defence-industry-space.ec.europa.eu/eu-space/product-environmental-footprint-category-rules-pefcr-space-sector_en. Prior online ledger: online_source_recovered_this_session; Commission space-PEFCR standards development is ongoing; 2027 consultation/final milestone, not an already-final rule.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "source_material",
+            "outcome": "package_text_examined",
+            "note": "Package first-party source excerpt/read mode substantial_web_text; 12051 characters. Source route: https://defence-industry-space.ec.europa.eu/eu-space/product-environmental-footprint-category-rules-pefcr-space-sector_en."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "first_party_package_text",
+            "url": "https://defence-industry-space.ec.europa.eu/eu-space/product-environmental-footprint-category-rules-pefcr-space-sector_en",
+            "title": "Product Environmental Footprint Category Rules (PEFCR) for the space sector",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The package contains 12051 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. It supplies substantive evidence about European research/innovation systems or research/foresight methods. Prior online check: Commission space-PEFCR standards development is ongoing; 2027 consultation/final milestone, not an already-final rule.. Primary content is package-stored; source provenance should be rechecked before authoritative import."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CHANGE",
+        "reason": "The package contains 12051 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. It supplies substantive evidence about European research/innovation systems or research/foresight methods."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Product Environmental Footprint Category Rules (PEFCR) for the space sector",
+      "reader_what": "Commission space-PEFCR standards development is ongoing; 2027 consultation/final milestone, not an already-final rule.",
+      "reader_why": "",
+      "reader_more": "Commission space-PEFCR standards development is ongoing; 2027 consultation/final milestone, not an already-final rule.",
+      "deep_analysis": {
+        "work_kind": "policy or infrastructure action",
+        "research_question": "What does the documented source establish?",
+        "main_finding": "Commission space-PEFCR standards development is ongoing; 2027 consultation/final milestone, not an already-final rule.",
+        "method_or_basis": "Package-stored matching source content (substantial_web_text); prior online source-recovery ledger.",
+        "qualification": "Evidence concerns the source’s reported analysis or announcement; it does not establish downstream causal effects.",
+        "radar_relevance": "The package contains 12051 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. It supplies substantive evidence about European research/innovation systems or research/foresight methods.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": [
+        {
+          "object": "research.system_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission — Defence Industry and Space",
+            "class": "other"
+          },
+          "mechanism": "launches",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-08-24",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Evidence concerns the source’s reported analysis or announcement; it does not establish downstream causal effects.",
+          "text": "Commission space-PEFCR standards development is ongoing; 2027 consultation/final milestone, not an already-final rule.",
+          "confidence": "low",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiogFBVV95cUxPZUNqTV9yY0lrcHNGZTBpLWtleHZka1N4OEdkVjVudXhXU1BCWktSZG1POGdIN2dNaElfTmduWGp6dmttWHdMNW1KWWhwSW80NzhLckNXSHpLVWY5SEtlY1hnQnZzdnA1T1VCSjFNMmY1LVJMeDN4Ujg5RGVOek5QN2VYYkRMUmZXaGI4OE5nOWdYMXZ5UUZLUmsyR2FSZm5oOFE?oc=5",
+      "source_hash": "cafe2227",
+      "identity_hash": "3d1570adcc04c08e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://www.hindustantimes.com/world-news/europes-dependence-on-america-in-space-is-hard-to-escape-101792552205363.html. Prior online ledger: online_source_recovered_this_session; 21 October 2026 Economist syndicated analysis considers European dependence on US space launch/communications; this is policy analysis not a newly executed action.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "recovery_status",
+            "outcome": "not_fully_completed",
+            "note": "Previous online source-discovery pass exists in attached ledger; exhaustive per-job retrieval ladder not proven. Do not count as a completed defer or import as authoritative."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "first_party_package_text",
+            "url": "https://www.hindustantimes.com/world-news/europes-dependence-on-america-in-space-is-hard-to-escape-101792552205363.html",
+            "title": "Europe’s dependence on America in space is hard to escape",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision. Prior online check: 21 October 2026 Economist syndicated analysis considers European dependence on US space launch/communications; this is policy analysis not a newly executed action.. Full mandatory six-step recovery and bibliographic verification are incomplete; this is NOT an import-ready defer."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "C",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMixwFBVV95cUxPMXlLMlNkWGlnbXo3RVhONHpXeWp5N1hjaVNrajdNazRud1FHcW9nN3N3TVFUS3pEaHlaMHJIQ21ING9NUXZxbjNUYnJNb2d5UHg1Y0VNT1RhR3Ntc0tJQVlYeWZXT1BhU1k0YVdCcmNRejkybzZnei1zRjRLRXBBZ2RUWm5aakJZNGVrb2hBcm9BTXFUaUFHd2JhdS1vT2hMWG1QN2YwZHV3SnBXQ3RlT000VzY2bHdxejhFMFhmcGMyREl5NE1j?oc=5",
+      "source_hash": "05f19612",
+      "identity_hash": "90d0f885784768fc",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://sciencebusiness.net/news/r-d-funding/horizon-europe/data-corner-number-collaborative-grants-falls-sharply-horizon-europe. Prior online ledger: online_source_recovered_this_session; Comparison of Horizon Europe Pillar II 5,271 projects and €32.9bn with Horizon 2020 13,580 projects and €39.2bn; programmes are at different completion stages.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "live_source_page",
+            "outcome": "source_page_read",
+            "note": "https://sciencebusiness.net/news/r-d-funding/horizon-europe/data-corner-number-collaborative-grants-falls-sharply-horizon-europe — original publisher/institutional report checked; Science|Business computes 5,271 collaborative Pillar 2 projects and EUR 32.9 billion from the European Commission dashboard in the first two-thirds of Horizon Europe, compared with 13,580 projects and EUR 39.2 billion in counterpart areas of Horizon 2020. Programme periods and coverage are not equivalent, so this is a reported descriptive comparison rather than an established final-programme effect."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_institution_page",
+            "url": "https://sciencebusiness.net/news/r-d-funding/horizon-europe/data-corner-number-collaborative-grants-falls-sharply-horizon-europe",
+            "title": "Data Corner: Number of collaborative grants falls sharply in Horizon Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Online source recovery on 2026-10-21: Science|Business computes 5,271 collaborative Pillar 2 projects and EUR 32.9 billion from the European Commission dashboard in the first two-thirds of Horizon Europe, compared with 13,580 projects and EUR 39.2 billion in counterpart areas of Horizon 2020. Programme periods and coverage are not equivalent, so this is a reported descriptive comparison rather than an established final-programme effect. Supplementary pages such as citing works are not misrepresented as original full text."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Science|Business computes 5,271 collaborative Pillar 2 projects and EUR 32.9 billion from the European Commission dashboard in the first two-thirds of Horizon Europe, compared with 13,580 projects and EUR 39.2 billion in counterpart areas of Horizon 2020. Programme periods and coverage are not equivalent, so this is a reported descriptive comparison rather than an established final-programme effect."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Data Corner: Number of collaborative grants falls sharply in Horizon Europe",
+      "reader_what": "Science|Business computes 5,271 collaborative Pillar 2 projects and EUR 32.9 billion from the European Commission dashboard in the first two-thirds",
+      "reader_why": "Evidence-based analysis of European research and innovation systems",
+      "reader_more": "Science|Business computes 5,271 collaborative Pillar 2 projects and EUR 32.9 billion from the European Commission dashboard in the first two-thirds of Horizon Europe, compared with 13,580 projects and EUR 39.2 billion in counterpart areas of Horizon 2020. Programme periods and coverage are not equivalent, so this is a reported descriptive comparison rather than an established final-programme effect.",
+      "deep_analysis": {
+        "work_kind": "empirical scholarly study or source-grounded R&I institutional analysis",
+        "research_question": "What substantive evidence about European research and innovation does this work provide?",
+        "main_finding": "Science|Business computes 5,271 collaborative Pillar 2 projects and EUR 32.9 billion from the European Commission dashboard in the first two-thirds of Horizon Europe, compared with 13,580 projects and EUR 39.2 billion in counterpart areas of Horizon 2020. Programme periods and coverage are not equivalent, so this is a reported descriptive comparison rather than an established final-programme effect.",
+        "method_or_basis": "Original publisher/institutional research abstract, substantive report webpage, or data-led research article recovered online and evaluated.",
+        "qualification": "Publication coverage, forecast/actual status, and association/causation limits as noted in main finding.",
+        "radar_relevance": "Science|Business computes 5,271 collaborative Pillar 2 projects and EUR 32.9 billion from the European Commission dashboard in the first two-thirds of Horizon Europe, compared with 13,580 projects and EUR 39.2 billion in counterpart areas of Horizon 2020. Programme periods and coverage are not equivalent, so this is a reported descriptive comparison rather than an established final-programme effect.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Science|Business / European Commission dashboard",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-10-20",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Publication coverage, forecast/actual status, and association/causation limits as noted in main finding.",
+          "text": "Science|Business computes 5,271 collaborative Pillar 2 projects and EUR 32.9 billion from the European Commission dashboard in the first two-thirds of Horizon Europe, compared with 13,580 projects and EUR 39.2 billion in counterpart areas of Horizon 2020. Programme periods and coverage are not equivalent, so this is a reported descriptive comparison rather than an established final-programme effect.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://www.eurohpc-ju.europa.eu/eurohpc-ju-and-grnet-inaugurate-daedalus-ranked-among-worlds-top-50-supercomputers-2026-10-19_en",
+      "source_hash": "659215a3",
+      "identity_hash": "06462408d19f7e81",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://www.eurohpc-ju.europa.eu/two-new-eurohpc-systems-join-top500-jupiter-remains-among-worlds-fastest-supercomputers-2026-06-23_en. Prior online ledger: online_source_recovered_this_session; Same DAEDALUS inauguration and computing resource; official nature makes A27 preferable if only one event is kept.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "source_material",
+            "outcome": "package_text_examined",
+            "note": "Package first-party source excerpt/read mode substantial_web_text; 7621 characters. Source route: https://www.eurohpc-ju.europa.eu/eurohpc-ju-and-grnet-inaugurate-daedalus-ranked-among-worlds-top-50-supercomputers-2026-10-19_en."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "first_party_package_text",
+            "url": "https://www.eurohpc-ju.europa.eu/two-new-eurohpc-systems-join-top500-jupiter-remains-among-worlds-fastest-supercomputers-2026-06-23_en",
+            "title": "EuroHPC JU and GRNET Inaugurate DAEDALUS, , ranked among the World's Top 50 Supercomputers",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The package contains 7621 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. It supplies substantive evidence about European research/innovation systems or research/foresight methods. Prior online check: Same DAEDALUS inauguration and computing resource; official nature makes A27 preferable if only one event is kept.. Primary content is package-stored; source provenance should be rechecked before authoritative import."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CHANGE",
+        "reason": "The package contains 7621 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. It supplies substantive evidence about European research/innovation systems or research/foresight methods."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "requires_check",
+        "duplicate_of": "",
+        "reason": "Same DAEDALUS inauguration and computing resource; official nature makes A27 preferable if only one event is kept."
+      },
+      "reader_title": "EuroHPC JU and GRNET Inaugurate DAEDALUS, , ranked among the World's Top 50 Supercomputers",
+      "reader_what": "Same DAEDALUS inauguration and computing resource; official nature makes A27 preferable if only one event is kept.",
+      "reader_why": "",
+      "reader_more": "Same DAEDALUS inauguration and computing resource; official nature makes A27 preferable if only one event is kept.",
+      "deep_analysis": {
+        "work_kind": "policy or infrastructure action",
+        "research_question": "What does the documented source establish?",
+        "main_finding": "Same DAEDALUS inauguration and computing resource; official nature makes A27 preferable if only one event is kept.",
+        "method_or_basis": "Package-stored matching source content (substantial_web_text); prior online source-recovery ledger.",
+        "qualification": "Evidence concerns the source’s reported analysis or announcement; it does not establish downstream causal effects.",
+        "radar_relevance": "The package contains 7621 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. It supplies substantive evidence about European research/innovation systems or research/foresight methods.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": [
+        {
+          "object": "research.system_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "EuroHPC Joint Undertaking",
+            "class": "other"
+          },
+          "mechanism": "launches",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-10-20",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Evidence concerns the source’s reported analysis or announcement; it does not establish downstream causal effects.",
+          "text": "Same DAEDALUS inauguration and computing resource; official nature makes A27 preferable if only one event is kept.",
+          "confidence": "low",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://www.nature.com/articles/d41586-026-03327-1",
+      "source_hash": "3486cfc4",
+      "identity_hash": "1ad6b55b028d7cf2",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://www.nature.com/nature/articles. Prior online ledger: online_source_recovered_this_session; 20 October 2026 Nature job-satisfaction international survey editorial; find underlying survey methods before drawing European scientific-career claims.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "source_material",
+            "outcome": "package_text_examined",
+            "note": "Package first-party source excerpt/read mode substantial_web_text; 8065 characters. Source route: https://www.nature.com/articles/d41586-026-03327-1."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "first_party_package_text",
+            "url": "https://www.nature.com/nature/articles",
+            "title": "Nature ’s job-satisfaction survey highlights the changing geography of science",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The package contains 8065 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. It is a landing page, commentary, routine meeting/sectoral item, duplicate version, or a case application without an independently qualifying R&I or methodological contribution. Prior online check: 20 October 2026 Nature job-satisfaction international survey editorial; find underlying survey methods before drawing European scientific-career claims.. Primary content is package-stored; source provenance should be rechecked before authoritative import."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "The package contains 8065 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. It is a landing page, commentary, routine meeting/sectoral item, duplicate version, or a case application without an independently qualifying R&I or methodological contribution."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Nature ’s job-satisfaction survey highlights the changing geography of science",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMimwJBVV95cUxQVHRETXgya0lSSmxSQXJxVmQyMndwR0V4ZTFhenhfMkt0NXlSOXdXQnVHQ00zNmFYOW1tcV9YMlRlOGtoOVgxN0ZWbC1zbnNSZ3VKVWRuZzlzSGh6VTZKeHkwSFpTNlhYVi16Q2sxSzF2LTdleFdxYUtkTmJxcFBuX19qWDQ5T2VnMEtrQ1NIUDF3RGZacFNIXzVPY0xFUm1JRTRHWllaLXYySzNhb0VMdk14QnpsVlhkS3ByUkVfd01ZMWdPUVNtSUpBc3BjbTlOYzlUdEI3b050OTNyWlpiNVVyTlVucF90M3VNYUU3ZFJyVFZiWUlrb1ZvLUFBRmE3VmxHS0xSa1NwcTdNVjg2X2lGYXJaemJ6NHBj?oc=5",
+      "source_hash": "bb55ab28",
+      "identity_hash": "8dd0060c3ba83cdb",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/europe-expands-access-sharing-and-use-research-data-and-digital-services-through-first-13-open-2026-10-16_en. Prior online ledger: online_source_recovered_this_session; First 13 EOSC Federation nodes began operating; link directly to European R&I data infrastructure.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "live_source_page",
+            "outcome": "source_page_read",
+            "note": "https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/europe-expands-access-sharing-and-use-research-data-and-digital-services-through-first-13-open-2026-10-16_en — Commission DG RTD confirms that the first 13 European Open Science Cloud federation nodes had begun operations by October 16, 2026, facilitating cross-border researcher access to data, tools, and digital services; 27 nodes are planned across two waves."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_institution_page",
+            "url": "https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/europe-expands-access-sharing-and-use-research-data-and-digital-services-through-first-13-open-2026-10-16_en",
+            "title": "Europe expands access, sharing and use of research data and digital services through first 13 Open Science Cloud hubs - European Commission",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Read live source webpage 2026-10-21. Commission DG RTD confirms that the first 13 European Open Science Cloud federation nodes had begun operations by October 16, 2026, facilitating cross-border researcher access to data, tools, and digital services; 27 nodes are planned across two waves. Any linked PDF not independently read is not represented as reviewed."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Commission DG RTD confirms that the first 13 European Open Science Cloud federation nodes had begun operations by October 16, 2026, facilitating cross-border researcher access to data, tools, and digital services; 27 nodes are planned across two waves."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Europe expands access, sharing and use of research data and digital services through first 13 Open Science Cloud",
+      "reader_what": "Commission DG RTD confirms that the first 13 European Open Science Cloud federation nodes had begun operations by October",
+      "reader_why": "Source-backed R&I policy or system change",
+      "reader_more": "Commission DG RTD confirms that the first 13 European Open Science Cloud federation nodes had begun operations by October 16, 2026, facilitating cross-border researcher access to data, tools, and digital services; 27 nodes are planned across two waves.",
+      "deep_analysis": {
+        "work_kind": "source-backed R&I report",
+        "research_question": "What happened and does it substantively bear on European research and innovation systems?",
+        "main_finding": "Commission DG RTD confirms that the first 13 European Open Science Cloud federation nodes had begun operations by October 16, 2026, facilitating cross-border researcher access to data, tools, and digital services; 27 nodes are planned across two waves.",
+        "method_or_basis": "Substantive source page retrieved online; dates and details checked against the displayed publication.",
+        "qualification": "The source documents this statement or development; proposals and projections are not completed outcomes.",
+        "radar_relevance": "Commission DG RTD confirms that the first 13 European Open Science Cloud federation nodes had begun operations by October 16, 2026, facilitating cross-border researcher access to data, tools, and digital services; 27 nodes are planned across two waves.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-10-16",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The source documents this statement or development; proposals and projections are not completed outcomes.",
+          "text": "Commission DG RTD confirms that the first 13 European Open Science Cloud federation nodes had begun operations by October 16, 2026, facilitating cross-border researcher access to data, tools, and digital services; 27 nodes are planned across two waves.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMioAFBVV95cUxQQkg1WHh6WTlCYXlHVVliZzc4Y0x2NlZZeFNtTmtpNEJqMnRDTG5ILXJsRDlJa2lPLXBZNXIxSzAwUnQyN1hiSG4zQllBbEJURzgzYzJlMFNmRkw4aW81WTAzZW13UDZTVWVjNExrMXg4QnJRNjhRRUNwRVdGUzhtU3VzSUJ1eWhXSVZwR1VUaFBXU3hLamotNWZwb19ySDRH?oc=5",
+      "source_hash": "3ede5e87",
+      "identity_hash": "8a215ad5be0e1d62",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://www.euronews.com/2026/10/20/investment-summit-german-government-strikes-ai-deal-with-nvidia. Prior online ledger: online_source_recovered_this_session; 20 October German government announced Nvidia AI partnership; distinguish reported agreement and investment promises from fully deployed capacity.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "recovery_status",
+            "outcome": "not_fully_completed",
+            "note": "Previous online source-discovery pass exists in attached ledger; exhaustive per-job retrieval ladder not proven. Do not count as a completed defer or import as authoritative."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "first_party_package_text",
+            "url": "https://www.euronews.com/2026/10/20/investment-summit-german-government-strikes-ai-deal-with-nvidia",
+            "title": "Investment summit: German government strikes AI deal with Nvidia",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision. Prior online check: 20 October German government announced Nvidia AI partnership; distinguish reported agreement and investment promises from fully deployed capacity.. Full mandatory six-step recovery and bibliographic verification are incomplete; this is NOT an import-ready defer."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "C",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "The package contains 0 characters of matching source material; reviewed its stated object and central R&I relevance against strand C. Available evidence is inadequate for a final evidence-based admission decision."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMi1gFBVV95cUxNTkFDcUJfcHRYNm1uR0p3bWpMOHBzanB6Mjd6UUxlY2U0MnVHcFhjaUVycEh6NlU4NUg4dHR4dkRrTzBfTmg3RVFDaFViS29uSnhtNllidW04MHV4SzNGZGUyRGN3M3h3MXRrcl92dExuVG1uaHJWd2NOZS1uNjFlQ1pNV1RhQm41R2l5MFNyQy0tbmlCODBpQThNUFM5LU9YUVRzQWdHUDVkelVIcHJzejdEdVpRT28yYXdic3BDMXc4WDUzcHQtb3VYc3FfVEtHTmVscnJn?oc=5",
+      "source_hash": "8ad192a8",
+      "identity_hash": "da13e39074437a15",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://www.eca.europa.eu/en/publications/SR-2026-24. Prior online ledger: online_source_recovered_this_session; European Court of Auditors report SR24/2026 audits commercialization support under H2020, published 16 October 2026; review exact official findings.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "live_source_page",
+            "outcome": "source_page_read",
+            "note": "https://www.eca.europa.eu/en/publications/SR-2026-24 — original publisher/institutional report checked; European Court of Auditors Special Report 24/2026 examined Horizon 2020 industrial leadership innovation support. It found weak links between programme design and participant needs, limited emphasis on close-to-market uptake and scale-up, and poor long-term monitoring of economic results. It recommends better market-transfer support and impact monitoring for future programmes."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_institution_page",
+            "url": "https://www.eca.europa.eu/en/publications/SR-2026-24",
+            "title": "Auditors criticise EU’s track record on supporting innovation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Online source recovery on 2026-10-21: European Court of Auditors Special Report 24/2026 examined Horizon 2020 industrial leadership innovation support. It found weak links between programme design and participant needs, limited emphasis on close-to-market uptake and scale-up, and poor long-term monitoring of economic results. It recommends better market-transfer support and impact monitoring for future programmes. Supplementary pages such as citing works are not misrepresented as original full text."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "European Court of Auditors Special Report 24/2026 examined Horizon 2020 industrial leadership innovation support. It found weak links between programme design and participant needs, limited emphasis on close-to-market uptake and scale-up, and poor long-term monitoring of economic results. It recommends better market-transfer support and impact monitoring for future programmes."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Auditors criticise EU’s track record on supporting innovation",
+      "reader_what": "European Court of Auditors Special Report 24/2026 examined Horizon 2020 industrial leadership innovation support. It found weak links between programme",
+      "reader_why": "Evidence-based analysis of European research and innovation systems",
+      "reader_more": "European Court of Auditors Special Report 24/2026 examined Horizon 2020 industrial leadership innovation support. It found weak links between programme design and participant needs, limited emphasis on close-to-market uptake and scale-up, and poor long-term monitoring of economic results. It recommends better market-transfer support and impact monitoring for future programmes.",
+      "deep_analysis": {
+        "work_kind": "empirical scholarly study or source-grounded R&I institutional analysis",
+        "research_question": "What substantive evidence about European research and innovation does this work provide?",
+        "main_finding": "European Court of Auditors Special Report 24/2026 examined Horizon 2020 industrial leadership innovation support. It found weak links between programme design and participant needs, limited emphasis on close-to-market uptake and scale-up, and poor long-term monitoring of economic results. It recommends better market-transfer support and impact monitoring for future programmes.",
+        "method_or_basis": "Original publisher/institutional research abstract, substantive report webpage, or data-led research article recovered online and evaluated.",
+        "qualification": "Publication coverage, forecast/actual status, and association/causation limits as noted in main finding.",
+        "radar_relevance": "European Court of Auditors Special Report 24/2026 examined Horizon 2020 industrial leadership innovation support. It found weak links between programme design and participant needs, limited emphasis on close-to-market uptake and scale-up, and poor long-term monitoring of economic results. It recommends better market-transfer support and impact monitoring for future programmes.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Court of Auditors",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-10-15",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Publication coverage, forecast/actual status, and association/causation limits as noted in main finding.",
+          "text": "European Court of Auditors Special Report 24/2026 examined Horizon 2020 industrial leadership innovation support. It found weak links between programme design and participant needs, limited emphasis on close-to-market uptake and scale-up, and poor long-term monitoring of economic results. It recommends better market-transfer support and impact monitoring for future programmes.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:7f70323583083f63",
+      "source_hash": "308f4541",
+      "identity_hash": "46a56ed18864fa79",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://link.springer.com/article/10.1007/s11948-026-00588-x. Prior online ledger: online_source_recovered_this_session; Peer-reviewed evidence: 36 focus groups, 172 researchers in seven European countries on temporal autonomy and research integrity.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "source_material",
+            "outcome": "package_text_examined",
+            "note": "Package first-party source excerpt/read mode substantial_web_text; 21638 characters. Source route: https://link.springer.com/article/10.1007/s11948-026-00588-x."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "first_party_package_text",
+            "url": "https://link.springer.com/article/10.1007/s11948-026-00588-x",
+            "title": "Time, Quality, and Integrity: Temporal Autonomy as a Missing Link in Research Assessment Reform",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The package contains 21638 characters of matching source material; reviewed its stated object and central R&I relevance against strand A. It supplies substantive evidence about European research/innovation systems or research/foresight methods. Prior online check: Peer-reviewed evidence: 36 focus groups, 172 researchers in seven European countries on temporal autonomy and research integrity.. Primary content is package-stored; source provenance should be rechecked before authoritative import."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The package contains 21638 characters of matching source material; reviewed its stated object and central R&I relevance against strand A. It supplies substantive evidence about European research/innovation systems or research/foresight methods."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Time, Quality, and Integrity: Temporal Autonomy as a Missing Link in Research Assessment Reform",
+      "reader_what": "Peer-reviewed evidence: 36 focus groups, 172 researchers in seven European countries on temporal autonomy and research integrity.",
+      "reader_why": "",
+      "reader_more": "Peer-reviewed evidence: 36 focus groups, 172 researchers in seven European countries on temporal autonomy and research integrity.",
+      "deep_analysis": {
+        "work_kind": "research or policy analysis",
+        "research_question": "What does the documented source establish?",
+        "main_finding": "Peer-reviewed evidence: 36 focus groups, 172 researchers in seven European countries on temporal autonomy and research integrity.",
+        "method_or_basis": "Package-stored matching source content (substantial_web_text); prior online source-recovery ledger.",
+        "qualification": "Evidence concerns the source’s reported analysis or announcement; it does not establish downstream causal effects.",
+        "radar_relevance": "The package contains 21638 characters of matching source material; reviewed its stated object and central R&I relevance against strand A. It supplies substantive evidence about European research/innovation systems or research/foresight methods.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Science and Engineering Ethics",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-02-27",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Evidence concerns the source’s reported analysis or announcement; it does not establish downstream causal effects.",
+          "text": "Peer-reviewed evidence: 36 focus groups, 172 researchers in seven European countries on temporal autonomy and research integrity.",
+          "confidence": "low",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:19f2d49289e7c3cd",
+      "source_hash": "21567a21",
+      "identity_hash": "ba8a98eab3cb4881",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://ecfr.eu/article/thrown-under-the-omnibus-how-the-eus-digital-deregulation-fuels-us-coercion. Prior online ledger: online_source_recovered_this_session; December 2025 ECFR analytical commentary critiques proposed digital omnibus and US coercion; distinguish commentary claims from official policy details.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "source_material",
+            "outcome": "package_text_examined",
+            "note": "Package first-party source excerpt/read mode substantial_web_text; 9182 characters. Source route: https://ecfr.eu/article/thrown-under-the-omnibus-how-the-eus-digital-deregulation-fuels-us-coercion/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "first_party_package_text",
+            "url": "https://ecfr.eu/article/thrown-under-the-omnibus-how-the-eus-digital-deregulation-fuels-us-coercion",
+            "title": "Thrown under the omnibus: How the EU’s digital deregulation fuels US coercion – European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The package contains 9182 characters of matching source material; reviewed its stated object and central R&I relevance against strand A. It is a landing page, commentary, routine meeting/sectoral item, duplicate version, or a case application without an independently qualifying R&I or methodological contribution. Prior online check: December 2025 ECFR analytical commentary critiques proposed digital omnibus and US coercion; distinguish commentary claims from official policy details.. Primary content is package-stored; source provenance should be rechecked before authoritative import."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "The package contains 9182 characters of matching source material; reviewed its stated object and central R&I relevance against strand A. It is a landing page, commentary, routine meeting/sectoral item, duplicate version, or a case application without an independently qualifying R&I or methodological contribution."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Thrown under the omnibus: How the EU’s digital deregulation fuels US coercion – European Council on Foreign Relations",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:7b5ef6757f17399c",
+      "source_hash": "84046abc",
+      "identity_hash": "eec61db38bb8f06a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://research-and-innovation.ec.europa.eu/knowledge-publications-tools-and-data/publications/all-publications/being-right-or-fair-portfolio-approach-research-funding_en. Prior online ledger: online_source_recovered_this_session; Commission 2023 working paper by Erik Canton discusses portfolio theory and R&I allocation; do not conflate with the 2025 Research Policy paper.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "source_material",
+            "outcome": "package_text_examined",
+            "note": "Package first-party source excerpt/read mode abstract_or_landing_page; 1412 characters. Source route: https://research-and-innovation.ec.europa.eu/knowledge-publications-tools-and-data/publications/all-publications/being-right-or-fair-portfolio-approach-research-funding_en."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "first_party_package_text",
+            "url": "https://research-and-innovation.ec.europa.eu/knowledge-publications-tools-and-data/publications/all-publications/being-right-or-fair-portfolio-approach-research-funding_en",
+            "title": "Being right or fair - A portfolio approach to research funding",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The package contains 1412 characters of matching source material; reviewed its stated object and central R&I relevance against strand A. It supplies substantive evidence about European research/innovation systems or research/foresight methods. Prior online check: Commission 2023 working paper by Erik Canton discusses portfolio theory and R&I allocation; do not conflate with the 2025 Research Policy paper.. Primary content is package-stored; source provenance should be rechecked before authoritative import."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The package contains 1412 characters of matching source material; reviewed its stated object and central R&I relevance against strand A. It supplies substantive evidence about European research/innovation systems or research/foresight methods."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Being right or fair - A portfolio approach to research funding",
+      "reader_what": "Commission 2023 working paper by Erik Canton discusses portfolio theory and R&I allocation; do not conflate with the 2025",
+      "reader_why": "",
+      "reader_more": "Commission 2023 working paper by Erik Canton discusses portfolio theory and R&I allocation; do not conflate with the 2025 Research Policy paper.",
+      "deep_analysis": {
+        "work_kind": "research or policy analysis",
+        "research_question": "What does the documented source establish?",
+        "main_finding": "Commission 2023 working paper by Erik Canton discusses portfolio theory and R&I allocation; do not conflate with the 2025 Research Policy paper.",
+        "method_or_basis": "Package-stored matching source content (abstract_or_landing_page); prior online source-recovery ledger.",
+        "qualification": "Evidence concerns the source’s reported analysis or announcement; it does not establish downstream causal effects.",
+        "radar_relevance": "The package contains 1412 characters of matching source material; reviewed its stated object and central R&I relevance against strand A. It supplies substantive evidence about European research/innovation systems or research/foresight methods.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission — Research & Innovation",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2023-11-21",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Evidence concerns the source’s reported analysis or announcement; it does not establish downstream causal effects.",
+          "text": "Commission 2023 working paper by Erik Canton discusses portfolio theory and R&I allocation; do not conflate with the 2025 Research Policy paper.",
+          "confidence": "low",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:152294e725ebfbd6",
+      "source_hash": "f6c4281b",
+      "identity_hash": "6a5769852930317e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://allea.org/news/page/7/. Prior online ledger: online_source_recovered_this_session; ALLEA 11 September 2023 piece on UK association; verify original specific story rather than conflating with 2021 open letter.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "source_material",
+            "outcome": "package_text_examined",
+            "note": "Package first-party source excerpt/read mode abstract_or_landing_page; 2412 characters. Source route: https://allea.org/building-bridges-dismantling-barriers-uk-association-to-horizon-europe/."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "first_party_package_text",
+            "url": "https://allea.org/news/page/7/",
+            "title": "Building Bridges, Dismantling Barriers: UK Association to Horizon Europe - ALLEA",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The package contains 2412 characters of matching source material; reviewed its stated object and central R&I relevance against strand A. It supplies substantive evidence about European research/innovation systems or research/foresight methods. Prior online check: ALLEA 11 September 2023 piece on UK association; verify original specific story rather than conflating with 2021 open letter.. Primary content is package-stored; source provenance should be rechecked before authoritative import."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The package contains 2412 characters of matching source material; reviewed its stated object and central R&I relevance against strand A. It supplies substantive evidence about European research/innovation systems or research/foresight methods."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Building Bridges, Dismantling Barriers: UK Association to Horizon Europe - ALLEA",
+      "reader_what": "ALLEA 11 September 2023 piece on UK association; verify original specific story rather than conflating with 2021 open letter.",
+      "reader_why": "",
+      "reader_more": "ALLEA 11 September 2023 piece on UK association; verify original specific story rather than conflating with 2021 open letter.",
+      "deep_analysis": {
+        "work_kind": "research or policy analysis",
+        "research_question": "What does the documented source establish?",
+        "main_finding": "ALLEA 11 September 2023 piece on UK association; verify original specific story rather than conflating with 2021 open letter.",
+        "method_or_basis": "Package-stored matching source content (abstract_or_landing_page); prior online source-recovery ledger.",
+        "qualification": "Evidence concerns the source’s reported analysis or announcement; it does not establish downstream causal effects.",
+        "radar_relevance": "The package contains 2412 characters of matching source material; reviewed its stated object and central R&I relevance against strand A. It supplies substantive evidence about European research/innovation systems or research/foresight methods.",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "ALLEA",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2023-09-11",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Evidence concerns the source’s reported analysis or announcement; it does not establish downstream causal effects.",
+          "text": "ALLEA 11 September 2023 piece on UK association; verify original specific story rather than conflating with 2021 open letter.",
+          "confidence": "low",
+          "attributes": {}
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:5cad36b3de37f9ae",
+      "source_hash": "a29d4f76",
+      "identity_hash": "1657ec2df0f9249a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "available_in_prior_research_ledger",
+            "note": "URL: https://research-and-innovation.ec.europa.eu/knowledge-publications-tools-and-data/publications/all-publications/food-systems-research-and-innovation-investment-gap-study_en. Prior online ledger: online_source_recovered_this_session; 2023 EU public/private food-system R&I investment mapping; check whether source is full policy report versus earlier 2022 summary.. This entry does not certify a fresh successful download."
+          },
+          {
+            "step": "source_material",
+            "outcome": "package_text_examined",
+            "note": "Package first-party source excerpt/read mode abstract_or_landing_page; 930 characters. Source route: https://research-and-innovation.ec.europa.eu/knowledge-publications-tools-and-data/publications/all-publications/food-systems-research-and-innovation-investment-gap-study_en."
+          },
+          {
+            "step": "live_primary_source",
+            "outcome": "source_content_read",
+            "note": "Source reviewed online on 2026-10-21: https://research-and-innovation.ec.europa.eu/knowledge-publications-tools-and-data/publications/all-publications/food-systems-research-and-innovation-investment-gap-study_en. The European Commission food-systems R&I investment-gap study compares European public and private research investment. Its evidence combines FP7/Horizon 2020 project reviews, national public-funding mapping, and estimates of private-sector R&I spending, organised against Food 2030 priorities."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_primary",
+            "url": "https://research-and-innovation.ec.europa.eu/knowledge-publications-tools-and-data/publications/all-publications/food-systems-research-and-innovation-investment-gap-study_en",
+            "title": "Food systems: Research and innovation investment gap study",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The European Commission food-systems R&I investment-gap study compares European public and private research investment. Its evidence combines FP7/Horizon 2020 project reviews, national public-funding mapping, and estimates of private-sector R&I spending, organised against Food 2030 priorities. Verification based on identified primary text accessible online; not a claim that every attachment was downloaded."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The European Commission food-systems R&I investment-gap study compares European public and private research investment. Its evidence combines FP7/Horizon 2020 project reviews, national public-funding mapping, and estimates of private-sector R&I spending, organised against Food 2030 priorities."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "reader_title": "Food systems: Research and innovation investment gap study",
+      "reader_what": "The European Commission food-systems R&I investment-gap study compares European public and private research investment. Its evidence combines FP7/Horizon 2020 project",
+      "reader_why": "",
+      "reader_more": "The European Commission food-systems R&I investment-gap study compares European public and private research investment. Its evidence combines FP7/Horizon 2020 project reviews, national public-funding mapping, and estimates of private-sector R&I spending, organised against Food 2030 priorities.",
+      "deep_analysis": {
+        "work_kind": "primary research / official report",
+        "research_question": "What does this source document and does it qualify for Radar?",
+        "main_finding": "The European Commission food-systems R&I investment-gap study compares European public and private research investment. Its evidence combines FP7/Horizon 2020 project reviews, national public-funding mapping, and estimates of private-sector R&I spending, organised against Food 2030 priorities.",
+        "method_or_basis": "Read official institutional source or publisher full-text page at recorded URL.",
+        "qualification": "Evidence supports the stated source-level findings, not downstream effectiveness or causal effects.",
+        "radar_relevance": "The European Commission food-systems R&I investment-gap study compares European public and private research investment. Its evidence combines FP7/Horizon 2020 project reviews, national public-funding mapping, and estimates of private-sector R&I spending, organised against Food 2030 priorities.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2023-03-10",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Evidence supports the stated source-level findings, not downstream effectiveness or causal effects.",
+          "text": "The European Commission food-systems R&I investment-gap study compares European public and private research investment. Its evidence combines FP7/Horizon 2020 project reviews, national public-funding mapping, and estimates of private-sector R&I spending, organised against Food 2030 priorities.",
+          "confidence": "medium",
+          "attributes": {}
+        }
+      ]
+    }
+  ]
+}
