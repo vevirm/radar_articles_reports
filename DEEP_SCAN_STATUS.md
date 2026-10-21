@@ -6,39 +6,39 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **2888** (Main **1440** + Historical **1448**)
-- Automatic queue still needing V2 verification: **475** (Main **173** + Historical **302**)
+- Authoritative V2 verified: **2958** (Main **1510** + Historical **1448**)
+- Automatic queue still needing V2 verification: **405** (Main **103** + Historical **302**)
 - Currently assigned to workers: **107** (Main **72** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **33**
-- Automatic queue pending and not yet assigned: **368**
+- Automatic queue pending and not yet assigned: **298**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261021T161005Z-6e4f89f1e742`
+- Current package: `worker-a-20261021T165952Z-f1d3a2e94501`
 - Assigned unresolved records: **36**
-  1. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxPTFMyMTFKQklNQXBvSEg5VjRta3NlRUFrTmtPSjFIV2tjVFBEY3M0RHRUdDdXMFdESG5FUXdTX3lpSjBFTVBUUTI2TG5ZR3I1enNxUFZjU3JxcU1KNGNUd3J1b0lzRGVxbk42Z2h5RGFXUzJYcDNOUldoUkM5TTBGb25GRVZRRnNjblQ3VTM4eUYyMGdNUmJuVm1WUTdVT2JWdDBRdmhoNTljbWFPQWRB?oc=5` — European stocks eke out weekly gain as oil, yields ease; SpaceX spectrum deal hits telecoms
-  2. `link:https://op.europa.eu/en/publication-detail/-/publication/5fe1897d-c450-11f1-bfcb-01aa75ed71a1/language-en` — Industrial electrification and energy efficiency - Publications Office of the EU
-  3. `link:https://news.google.com/rss/articles/CBMivgFBVV95cUxPMUdpdnVZWTI3ZjhQNGV1QzBHUFl2THJHYnNrZFEtUkstV1pONjdDR3RDNkZQYzhjenBveXF1Qi14WUhpYm9yQjlBX1E5UkNzamM4eGdKNmxlZTZ0X0R5T0NWQThhNjRQcDhBdzBienlqQXJrZzVLX29NSkVRTlAyWTRFSVlxb1dUUWFxQmVpeXd3RS0wZjd5Q21mM2ZfNlg2ZUVMNkRwcG1kSWxZM3BaZHIzNTdqYW1tWU83UDhR?oc=5` — River salinisation is widespread across Europe - EU Science Hub
-  4. `link:https://news.google.com/rss/articles/CBMiiAFBVV95cUxOMXUtRmE1dUk2MVNyd0N4em8tdWpua1p3bW9oVDI4WDFqQ3lGdmt4Q3I5ZTM3bTVXTE44WUNyUmNFNmY3eXpzTkVJb0FsMFZLaHJsRWljYVNMdDRuR3hhc2hSaFpHSFZqcHpjUXBITDE4X0RiSE52R3JTM2w2VXVkLUVMdXVicjlC?oc=5` — Council floats 9.6% budget cut to next Horizon Europe
-  5. `link:https://doi.org/10.1016/j.futures.2026.103883` — Artificial intelligence in strategic foresight: Evidence from a longitudinal case at Siemens Professional Education
-  6. `link:https://doi.org/10.1016/j.futures.2026.103904` — Analyzing blockchain entrepreneurial ecosystems with foresight: A data-driven approach
-  7. `link:https://news.google.com/rss/articles/CBMiuwFBVV95cUxNY3k2OUhTel9IWFNOcnAtelhqLXVkQnNCS3BFdUlrTnl3SWZQOV9CWTJldlV3NlRUamhPUW1jNTVCZ015NVRqOWhyN0JfOGpicHVPMUNwaTN6Q3ppLWdJMnBDN2c4N1FJTllqb2VHaTYxeVJxSGVQQVh2cjN6S25UX09qcmZHOUxDRzVtM2hHNXBXZHZOZTJYbzVOQXExRDdPQnlUV1d0NkdON0FnWlRKdUFGbXF3NHY5bF9n?oc=5` — AGILE: Parliament set to approve new EU defence innovation programme | 05-10-2026 | Nuacht | Parlaimint na hEorpa
-  8. `link:https://news.google.com/rss/articles/CBMiyAFBVV95cUxPNzVoTnhfS2lEWDBid2NMYlNWT1RKOGNjVzhlVmp5MXEtZkNheWdvVDNfRDY0bnhjblZRYkJqOHVjaVFoUjEtaUlYT3hxZG5yS1JURF92bVlqeUpXaTBvY3pYWHNQLVh1Y0dwYVk1Ml8yQWtXZmJHME1NU2phWUZyVDR3QXROQ01WbDl2YVFfVGhWTnRJZ04zekRXWkMtZnRQSVFzYy1nZEZaaV84dVVQVHZaSGFIMUNwTnJ1UXoydTdyTi1ISWFIag?oc=5` — Funding Radar: Horizon Europe opens €225M call for advanced materials and manufacturing
+  1. `link:https://news.google.com/rss/articles/CBMizgFBVV95cUxPbmcwM1FMNHIwX2JMN3p0dlQ5LVFPdkZsdm1wSHlsZHBXaDNzVXdRa19RRUFBNHo0MUNGTXdiYmxrc1lfZ09MRWkzQS1kSGdFVko1TEIxSjBKTkV6UjNyTjJDb2NDbkx0YWlpMzVrN1RNSkh1UF9iNDlWdGNnUGpXWS13dzEzRlFwUDBOTlZYMHlBUHQ1ZU5FLVhaRjYyblV0M2hxZTdsVlZkYXY2TVp1ZTh4UXdmTHRkU0Z1Wi1VTnp6Y0h1emdSQV94bTlxQQ?oc=5` — EU innovation agency ‘must be reformed to be worth keeping’ — recovery attempt 2/3
+  2. `link:https://doi.org/10.1016/j.cose.2026.105210` — Conceptualizations and Boundaries of EU Digital Sovereignty — recovery attempt 2/3
+  3. `link:https://doi.org/10.48550/arxiv.2610.11891` — Tracking High-Impact Researchers Through Highly Cited Tails
+  4. `link:https://www.interface-eu.org/publications/download/eu-chips-act-cooperation` — Tech Sovereignty and the EU’s Chips Act 2.0 in Practice
+  5. `link:https://news.google.com/rss/articles/CBMiiAFBVV95cUxORVZaOElCQzd6QXNvbmswbmFKU21IQ1dLWjNKbVNoRE95TkhHVEF3NU82Y1l2aXdVd0JnQXB3QkxYdWI0WlNxcDJjOXhnTzFDWGZOSlJxT1ZnX3J3YURIbVB2bmxiUnlybHk3RGllRU9aMmttY19zbjllM09IOFgteUVmYmtxelRR?oc=5` — Is the EU research budget actually increasing?
+  6. `link:https://news.google.com/rss/articles/CBMipgFBVV95cUxOWDh4V0dJdl9HYTFsQTNoTDhWbVk3WmtTLVFrZ1JPVGUtZTBSNDFGTjRyaExNSFZCMXBDSXpraElQaGJNcWlmZG9UekxjMjlFWEhBREd3VGhNejV0SXItOG1lMUhTVS1waWsxSFlpLVJJd1Y2THd6TWhkLTFfcnhhSUU2b3pCekpJTnhsVFhVamNpeXgybm5TUUxlQmtOQTc2MTVqRjZ3?oc=5` — Elsevier commits to accelerate AI-driven science across Europe
+  7. `link:https://news.google.com/rss/articles/CBMinwFBVV95cUxOVXJjb1Z4ekU3VVU5QlpZcWs1WTU0Q3Y5bW5OLWlmVUpnTGZITlpXSlA2NTZuYU9nMGFYTlVjdEJLT3FFUzY1bnNYX01qTTFtVUgtMnpEVFdUN2gyQWlkbW1CTThiLUZCTmZ0Y2lLQmQwT1hXQVJnbjNFMU00OUhHVWNIOVVMamo5cnRQYk5CeGVNZm1qR1hjbEFpQTVsb1U?oc=5` — Pan-European pension scheme tackles barriers for researchers
+  8. `link:https://news.google.com/rss/articles/CBMioAFBVV95cUxPZ0RuNk1kbTJpWVVCZlhSd2JmbTVEcVpSTk9rc1libE5VcFBWTFVjcUNLMzkyTjZLdkFrSF9GOXp2bGFhTEUtMkJfVklZV2NxWFZxcDdaM0pkZndNRUZwenlzMU9JcDAxd215bXRRRVUwd0hnYVQzVTZacXdoYlJsRE1UUUR1ZjZrYmNMQVVqeENib284dkJEY2NNVzNyZmFB?oc=5` — European Startup Village Forum 2026 - EU Science Hub
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261021T161011Z-71b77a30b4f2`
+- Current package: `worker-b-20261021T165957Z-e44da281e3bc`
 - Assigned unresolved records: **36**
-  1. `link:https://news.google.com/rss/articles/CBMizgFBVV95cUxPbmcwM1FMNHIwX2JMN3p0dlQ5LVFPdkZsdm1wSHlsZHBXaDNzVXdRa19RRUFBNHo0MUNGTXdiYmxrc1lfZ09MRWkzQS1kSGdFVko1TEIxSjBKTkV6UjNyTjJDb2NDbkx0YWlpMzVrN1RNSkh1UF9iNDlWdGNnUGpXWS13dzEzRlFwUDBOTlZYMHlBUHQ1ZU5FLVhaRjYyblV0M2hxZTdsVlZkYXY2TVp1ZTh4UXdmTHRkU0Z1Wi1VTnp6Y0h1emdSQV94bTlxQQ?oc=5` — EU innovation agency ‘must be reformed to be worth keeping’
-  2. `link:https://news.google.com/rss/articles/CBMihAJBVV95cUxQcS1MTFQ3ZTYzeVB1WHV1MUZiZjlXYWo2UGJVMmVXWUlVS0pXVXBTOHpqSDdTRzZBVnBlMkdWNEd1UW9PUmFVZGpUbVdYVUxQdUt2bzVXTFBERkdISEFOQVFaS0hzc3pmZEdQZTNxZGQ4aHFibWJ0SmhEMkdWSGs5bVo2V1ZCTEllYS1nNWphbG1ZRk1lWFBYUjBabElabzRrN0lTV1YzbTRERmUtU0lrdGtaODJGMTVjUm45Mk80dkNWUW9kRUlVUUhJN3F3aHc3RGhhbHlkb0xXOGNQY0d6TlRrRFp5VzhoRF9LSDNFRnhKRV9WdXlZQnlSQmJYdTdUckNaVg?oc=5` — Science, Research and Innovation performance of the EU 2026 report
-  3. `link:https://news.google.com/rss/articles/CBMizgFBVV95cUxPN1lqdDBIbzhfSDEwUFRwdVlCYlhzcWNRTjNKSkotNzRHRFlCdUN1a0RBdEpaLTNTc2hPSW9tN3hoR1dIcU92MEZsOV8tS1NxWlVNUzZwNmlmcmRhZlhobDVSWHdjaHZDLXhiOTd6UW9tcWFwcExlaEg1ZHhRS0Jzd0RXUDZaMk1LN2NBXzZRUjM2VmZEeDg4TEM3elk1TktXSzNCaHpIVVA5eWJGZlpxdEpBRkVXZ1JvQko5eTE1OHYzOFE4bWQxdjAzaWpIUQ?oc=5` — Europe must scale up research and innovation to remain competitive, new Commission report says - Shaping Europe’s digital future
-  4. `link:https://news.google.com/rss/articles/CBMivgFBVV95cUxNSy1rb2o0WjFGd0V5ZERHN3BRbC02YzFRcUtxdnVNMlV3SDUtc0dQQjN3enZyQ3gyQktPU0l0d3pQbGFVU2dXRFFzNm05d0Z3eDhxNVBlNDVNQWg4S0hpQUdWR0ktYnJwLXpwTC1oeGhoSjR2WWg5MXc0dFJqUmVpbGlaV1VlbHJpUjFxNUlFYUtfVWM0RmpCdmVVbUNiQXdfbU55bDBXam1oa0pHSmVrZGdtSWJPMlpTQlJoNWtn?oc=5` — 5 things to know ahead of crunch EU-China talks
-  5. `link:https://news.google.com/rss/articles/CBMiX0FVX3lxTE5zN19oMnpfbEhYNTU2UUk1V3R1Ym9Ebk1IcDVkQ3FrRU9Tc3J0TEJGd3BGZ1dNTWduY3pnblB1bFQ1OFI1UXcydV9LYThhYW5PTEZwS0lKSkU2S1pXcktN?oc=5` — “Technology and science are, by definition, non-discriminatory”- narratives of the performance of sex and gender dimensions in European climate project proposals
-  6. `link:https://news.google.com/rss/articles/CBMi6wFBVV95cUxOZHZaWjZ5dTR1RzFVWGNKd1FnMHpoakdwcHFhc0ZhLWlsMEJnVEtuYVVSaE83b0FXWHh5LTJ6VGtRaXNES0FNa2Zuc2xyTHRxWE9feWVoYXFKR2NTcW5xcVh3d1BQWG5ObUF2dm1fcEozaUhVMldGM21rQUNjWi1BaFdJUDR4Q2J0M3NiNW91d3huckctdTdGVEozLVhyOGx1N1J0clVJdWpYNkdQSy14U2s4a1BfTVJoMFVkMXJ2eVprRk9NamYzYW5NOUcxRWhlYkpqLW1RUk5tdFhFTkh3MnVKSGY1UEdlY2RN?oc=5` — Reaping the economic benefits from AI: OECD Economic Surveys: Slovak Republic 2026
-  7. `link:https://doi.org/10.1016/j.futures.2026.103882` — Harnessing the potential of transdisciplinary practice for the transformation of agri-food systems: A review of methodological challenges in participatory scenario development
-  8. `link:https://news.google.com/rss/articles/CBMivgFBVV95cUxPc1NFMUNzVk1sZ0RKYUJDSjZPdFh3eTRzMUhrSDVCR1NJM0dOWWlKWWJvUzhPem9YRHhNdWFDeFhKTmVFYXc4WXEtQ3E4OWxUZnlvanVRelloT3N6TUl0U2VheVBrYWVxOEZqLVI1WlRjbmlWQktJODJlLWN4dmZmcE12Q3dMeU1JYnZud0tvT0gtOG1YTTBWN3A1VGpjNGhIZFJXeUw4V3VwdzByLTBfUWRVQVVETzJGMEhSU2NB?oc=5` — EXCLUSIVE: EU seeks closer Vietnam ties on critical minerals in China hedge, documents show
+  1. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxOa1pfVVpLSWFMQUh5X18wNlpCd3dOUl9haGZQVmVkS0gzQm90QW9OMzJlQ3RRYlkyR3IwUGtsSm43emlUUTZMMXd2TERXTTZ1YWxjUWMwaTFsTlI4SEMyWkpEbF9BQ2tQMHN0Y1NDemFBUC1aTHMzc0VpYkN0bnFXdDBzeU5qVzRMOWx6b1lNZ2l4eEcwTGRlZTZvYWZNOENWNTdIUHpLRW9sLTYzWUE?oc=5` — Border Security Research Infrastructure - EU Science Hub
+  2. `link:https://news.google.com/rss/articles/CBMivgFBVV95cUxOMXhzOTk3T0tyTWVCX0Q4VGZzNWVHcWdYTHMtVllXMVB5LUpXbWlMNVRNUnlrQWw1eGViNkhmeE9BZlpuRjJvbkNOeWxudHZDWXlpT2RGVlhyTnlkQTkycnVhcTBUWEllWlhiNGRJZTJqaUtqc1BwYVJXZ0xKZEVxcnB4SXVySDhSNHFlYzJGRnpVZ1FZMmQ1UzUxaEUxOWtWVXpScUtJYnJRUGVqejBHZ25UN3JhdGRQdkxIcjBR?oc=5` — Europe Is Racing China to Dominate Industrial AI
+  3. `link:https://research-and-innovation.ec.europa.eu/implementation-dialogues/implementation-dialogue-research-security-2026-11-10_en` — Implementation dialogue on research security
+  4. `link:https://doi.org/10.1177/09610006261491363` — Mapping the landscape of Library and Information Science in North Africa and Europe: A comparative bibliometric analysis using OpenAlex and DOAJ
+  5. `link:https://doi.org/10.1016/j.respol.2026.105641` — External collaboration and local knowledge divergence in regional knowledge spaces
+  6. `link:https://joint-research-centre.ec.europa.eu/research-updates_en` — Research updates
+  7. `link:https://doi.org/10.1016/j.ssaho.2026.102795` — Strategic integration of digital innovation and sustainability: A foresight-driven framework for ESG transformation
+  8. `link:https://news.google.com/rss/articles/CBMizAFBVV95cUxNRGtNTUVvNXJmRU1fRDhvcjlEaHVhcTlpMzBScmZ1NV9SWkRWTUx4Qm5KbS15amYwTnJhR0c1eEh4Rm00S2xMbHRoMldiRHdfLVk0Mkc5OG55VTczcU9OX3BOMjlPOEQ3TWhSX0tRWGJrT3JRREF0NTF3UGs5SnBWNG1kNmZ3M0VPdFF6UjRRQlVBQ2VOaWpDZzV5ejF0YWt6TFNDLVVKUGsxN1BHTXJxeXI1UEtkR000bjIxd0d4dEVHNFd6ZnFSVFptTGg?oc=5` — EU research cut ‘wrong strategic choice’, ERC president warns
   - … plus 28 more in the package manifest
 
 ### Worker SINGLE
