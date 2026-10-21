@@ -589,9 +589,49 @@ Before returning, execute CHECK_RESULTS.py on the FINAL results file and indepen
 
 INSTRUCTIONS += r"""
 
+## PRIMARY MISSION — PRACTICAL RADAR QUALITY CHECK (READ FIRST)
+
+THIS ZIP IS A RESEARCH EXECUTION TASK, NOT AN INVENTORY OR ANOTHER HANDOFF.
+For EVERY assigned record, do your BEST reasonable verification of (1) bibliographic identity
+(title, author/issuer, year, publisher, DOI/URL when available), (2) whether the actual
+source content broadly supports its described topic, summary and important claims, and
+(3) whether it qualifies for Radar's relevant strand. This is APPROXIMATE, source-grounded
+quality control, NOT an exhaustive independent academic review of every work.
+
+Start from the scanner-supplied primary excerpts, official source pages, publisher
+abstracts, executive summaries and accessible full text. Use the strongest readily
+available matching evidence; cross-check identity against an independent official or
+publisher listing when practical. Read full text when easily available, but do not
+spend a whole assignment budget chasing every paywalled PDF. Use the 14 discovery
+routes as a TOOLBOX for difficult cases, not as mandatory searches for every item.
+Escalate only when identity, content or relevance cannot reasonably be judged.
+
+Make a truthful KEEP/DROP/REVIEW decision as soon as adequate substantive matching
+evidence supports it. Preserve limitations and label proposals as proposals.
+Do not invent citations, claims, full-text access, or completed searches. If evidence
+remains inadequate, use the strict DEFER/DROP_UNVERIFIABLE importer fields and required
+recovery audit, or save the assignment as unfinished for continuation. Do not pad counts.
+
+IMPORTANT IMPORTER REALITY: The importer still demands a matching substantive primary
+source and controlled claims for KEEP/REVIEW. A bare headline or unsupported abstract
+is not automatically sufficient for a KEEP; prefer meaningful abstract + substantive
+methods/findings or official summary, and record the actual evidence read accurately.
+The canonical evidence_depth enum and verification audit below remain binding.
+
+PROCESS ALL WORK, NOT JUST THE FIRST ARTICLE: finish each of the 6-record internal
+stages, save verified records, then immediately continue to the next stage. Each worker
+returns EXACTLY the assigned manifest count in one radar-deep-scan-results-v2 JSON
+with claims_format radar-claims-v1, correct job identities and order. Run CHECK_RESULTS.py
+before return. Worker A and Worker B process their distinct ZIPs simultaneously when
+external execution supports parallel work. A ZIP alone cannot run background agents.
+
+Older queued research is legitimate. The per-item three-attempt rule counts only real,
+documented substantive recovery attempts; ZIP issuance, skipped items and interrupted
+sessions do not count.
+
 ## NORMAL DEEP SCAN: EXPANDED SOURCE RECOVERY (inspired by PUSH HARDER)
 
-These legitimate discovery paths are part of NORMAL Worker A and Worker B research, not permission to stop at a title or a blocked URL. Use the first reliable, substantively sufficient matching primary source when available; do not waste effort on irrelevant routes after a source is verified. When primary evidence remains unavailable or too thin, pursue and document **every applicable** category below before a terminal access-limited decision. Record queries/URLs and real outcomes, including why a category cannot apply:
+These are FALLBACK recovery options for ordinary Worker A and Worker B research, not a per-item mandatory 14-search checklist. A meaningful matching primary excerpt, published abstract with substantive methods/findings, or official summary can support a proportionate decision when the importer evidence requirements are met. Use the first reliable, substantively sufficient matching primary source when available; do not waste effort on irrelevant routes after a source is verified. When primary evidence remains unavailable or too thin, pursue and document **every applicable** category below before a terminal access-limited decision. Record queries/URLs and real outcomes, including why a category cannot apply:
 
 1. `prior_attempt_audit`: inspect scanner-supplied text and previous research notes; distinguish real completed research from ZIP issuance or untouched queue entries.
 2. `supplied_url_redirects`: follow supplied URL, legitimate redirects, canonical URL, attachment, HTML/PDF links.
@@ -622,8 +662,8 @@ START_HERE = r"""RADAR DEEP SCAN V2 PACKAGE
 
 This is an authoritative re-verification package. Give the entire ZIP to a browsing-capable LLM and say:
 
-    Process this Deep Scan V2 package strictly according to INSTRUCTIONS.md. Go deeply and systematically,
-    process EVERY assigned record in supplied order, exhaust the mandatory recovery ladder for difficult records, and return
+    Process this Deep Scan V2 package strictly according to INSTRUCTIONS.md. Perform practical bibliographic and content quality checks using best available truthful evidence,
+    process EVERY assigned record in supplied order, use applicable recovery routes for difficult records, and return
     deep_scan_results.json containing EXACTLY manifest.json.works_in_package results (or a ZIP containing it). Do not cherry-pick and do not keep unverifiable records.
 
 The automatic scanner and any older Deep Scan text are provisional evidence only. V2 can correct metadata,
@@ -907,7 +947,6 @@ def main() -> None:
             instructions = (
                 f"# Worker lane {lane}\n\n"
                 "This is ONE of TWO ZIPs produced for concurrent Worker A + Worker B research. Start BOTH lanes at the same time in separate systems. "
-                "This is ONE of TWO ZIPs produced for concurrent Worker A + Worker B research. Start BOTH lanes at the same time in separate systems. "
                 "This ZIP is a reserved, non-overlapping worker lane from the Radar's persistent Deep Scan queue. "
                 "Process only the records in this ZIP, in their supplied order. Other worker lanes contain different records.\n\n"
                 + instructions
@@ -919,8 +958,8 @@ def main() -> None:
             "This lane has 36 assignments (or the exact manifest count), but work is executed in "
             "stages of up to SIX source-verified records. Worker A and B can operate concurrently.\n\n"
             "1. Run `python CHECKPOINT.py next` to write NEXT_STAGE.json.\n"
-            "2. RESEARCH each of its up-to-six records using all applicable normal Deep Scan "
-            "and PUSH HARDER-inspired discovery routes. A failed link alone is not a DEFER.\n"
+            "2. CHECK each record for approximately correct bibliography, content and Radar relevance using "
+            "substantive available source evidence. Escalate via applicable discovery routes only if needed; a failed link alone is not a DEFER.\n"
             "3. Write actual verified result JSON (one object, list, or package-style file). "
             "Run `python CHECKPOINT.py add STAGE_RESULTS.json`.\n"
             "4. Save WORK_PROGRESS.json; repeat `next` until no assignments remain. "
@@ -936,7 +975,7 @@ def main() -> None:
         if lane:
             start_here = (
                 f"RADAR DEEP SCAN V2 — WORKER {lane}\n\n"
-                "START BOTH Worker A and Worker B ZIPs SIMULTANEOUSLY in separate research agents; do not wait for the other lane. This package is already reserved to this worker lane in GitHub. It does not overlap the other active lane. Finish EVERY assignment (36 when 36 assigned); do not deliver one record as the whole batch.\n"
+                "START BOTH Worker A and Worker B ZIPs SIMULTANEOUSLY if the external system supports independent agents; do not wait for the other lane. This package is already reserved to this worker lane in GitHub. It does not overlap the other active lane. Finish EVERY assignment (36 when 36 assigned); do not deliver one record as the whole batch.\n"
                 "A new chat needs no prior conversation history: read INSTRUCTIONS.md and process this ZIP in order. If capacity/time runs short, save your partial work and CONTINUE; only the complete validated file is ready for inbox.\n\n"
                 + START_HERE
             )
