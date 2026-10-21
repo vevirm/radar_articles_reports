@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261021T165952Z-f1d3a2e94501`
+- Current package: `worker-a-20261021T171740Z-f1d3a2e94501`
 - Assigned unresolved records: **36**
   1. `link:https://news.google.com/rss/articles/CBMizgFBVV95cUxPbmcwM1FMNHIwX2JMN3p0dlQ5LVFPdkZsdm1wSHlsZHBXaDNzVXdRa19RRUFBNHo0MUNGTXdiYmxrc1lfZ09MRWkzQS1kSGdFVko1TEIxSjBKTkV6UjNyTjJDb2NDbkx0YWlpMzVrN1RNSkh1UF9iNDlWdGNnUGpXWS13dzEzRlFwUDBOTlZYMHlBUHQ1ZU5FLVhaRjYyblV0M2hxZTdsVlZkYXY2TVp1ZTh4UXdmTHRkU0Z1Wi1VTnp6Y0h1emdSQV94bTlxQQ?oc=5` — EU innovation agency ‘must be reformed to be worth keeping’ — recovery attempt 2/3
   2. `link:https://doi.org/10.1016/j.cose.2026.105210` — Conceptualizations and Boundaries of EU Digital Sovereignty — recovery attempt 2/3
@@ -29,7 +29,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261021T165957Z-e44da281e3bc`
+- Current package: `worker-b-20261021T171746Z-e44da281e3bc`
 - Assigned unresolved records: **36**
   1. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxOa1pfVVpLSWFMQUh5X18wNlpCd3dOUl9haGZQVmVkS0gzQm90QW9OMzJlQ3RRYlkyR3IwUGtsSm43emlUUTZMMXd2TERXTTZ1YWxjUWMwaTFsTlI4SEMyWkpEbF9BQ2tQMHN0Y1NDemFBUC1aTHMzc0VpYkN0bnFXdDBzeU5qVzRMOWx6b1lNZ2l4eEcwTGRlZTZvYWZNOENWNTdIUHpLRW9sLTYzWUE?oc=5` — Border Security Research Infrastructure - EU Science Hub
   2. `link:https://news.google.com/rss/articles/CBMivgFBVV95cUxOMXhzOTk3T0tyTWVCX0Q4VGZzNWVHcWdYTHMtVllXMVB5LUpXbWlMNVRNUnlrQWw1eGViNkhmeE9BZlpuRjJvbkNOeWxudHZDWXlpT2RGVlhyTnlkQTkycnVhcTBUWEllWlhiNGRJZTJqaUtqc1BwYVJXZ0xKZEVxcnB4SXVySDhSNHFlYzJGRnpVZ1FZMmQ1UzUxaEUxOWtWVXpScUtJYnJRUGVqejBHZ25UN3JhdGRQdkxIcjBR?oc=5` — Europe Is Racing China to Dominate Industrial AI
