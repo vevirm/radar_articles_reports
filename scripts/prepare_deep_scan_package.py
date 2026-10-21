@@ -498,6 +498,9 @@ def save(d):
 parser = argparse.ArgumentParser(description=__doc__)
 sub = parser.add_subparsers(dest="cmd", required=True)
 sub.add_parser("status")
+next_cmd = sub.add_parser("next", help="export only the next unfinished stage, up to six assigned items")
+next_cmd.add_argument("--size", type=int, default=6)
+next_cmd.add_argument("--output", default="NEXT_STAGE.json")
 a = sub.add_parser("add", help="save one completed structured result as JSON")
 a.add_argument("result_file")
 a = sub.add_parser("assemble", help="create final JSON only after all assignments accounted for")
@@ -535,6 +538,16 @@ try:
     for i, key in enumerate(expected):
         if key in missing:
             print(f"  remaining position {i+1}: {key}")
+    if args.cmd == "next":
+        if not 1 <= args.size <= 12:
+            raise ValueError("stage size must be between 1 and 12")
+        pending = [job for job in jobs if job["required_output"]["record_key"] in missing]
+        chosen = pending[:args.size]
+        stage = {"package_id":manifest["package_id"], "worker_lane":manifest.get("worker_lane"),
+                 "remaining_total":len(missing), "stage_size":len(chosen), "jobs":chosen,
+                 "instruction":"Research EVERY job in this stage using the original ZIP recovery rules. Return only real verified results, preserve identities, and add them to CHECKPOINT.py. This stage is NOT inbox-ready."}
+        (root / args.output).write_text(json.dumps(stage, ensure_ascii=False, indent=2)+"\n",encoding="utf-8")
+        print(f"Wrote {args.output}: {len(chosen)} assigned works; {len(missing)} remaining in lane")
     if args.cmd == "assemble":
         if missing:
             raise ValueError("Cannot assemble incomplete lane; retain WORK_PROGRESS.json and resume remaining records")
@@ -901,6 +914,24 @@ def main() -> None:
             )
         (root / "INSTRUCTIONS.md").write_text(instructions, encoding="utf-8")
         (root / "CHECKPOINT.py").write_text(CHECKPOINT_TOOL, encoding="utf-8")
+        (root / "STAGED_EXECUTION.md").write_text(
+            "# EXECUTE RESEARCH — NOT A HANDOFF INVENTORY\n\n"
+            "This lane has 36 assignments (or the exact manifest count), but work is executed in "
+            "stages of up to SIX source-verified records. Worker A and B can operate concurrently.\n\n"
+            "1. Run `python CHECKPOINT.py next` to write NEXT_STAGE.json.\n"
+            "2. RESEARCH each of its up-to-six records using all applicable normal Deep Scan "
+            "and PUSH HARDER-inspired discovery routes. A failed link alone is not a DEFER.\n"
+            "3. Write actual verified result JSON (one object, list, or package-style file). "
+            "Run `python CHECKPOINT.py add STAGE_RESULTS.json`.\n"
+            "4. Save WORK_PROGRESS.json; repeat `next` until no assignments remain. "
+            "If the session stops, carry the original ZIP and WORK_PROGRESS.json "
+            "into a new session and continue unfinished items.\n"
+            "5. Only when 36/36 are verified run `python CHECKPOINT.py assemble` and "
+            "`python CHECK_RESULTS.py deep_scan_results.json`.\n\n"
+            "Do not stop at a source inventory or claim autonomous background execution. "
+            "Do not fabricate outcomes to fill a stage. Package issuance and unstarted "
+            "items are not research attempts; preserve the per-item three-real-attempt rule. "
+            "The separate stage file never goes to the GitHub inbox.\n", encoding="utf-8")
         start_here = START_HERE
         if lane:
             start_here = (
@@ -909,6 +940,7 @@ def main() -> None:
                 "A new chat needs no prior conversation history: read INSTRUCTIONS.md and process this ZIP in order. If capacity/time runs short, save your partial work and CONTINUE; only the complete validated file is ready for inbox.\n\n"
                 + START_HERE
             )
+        start_here += "\nSTAGED EXECUTION (READ FIRST): Read STAGED_EXECUTION.md. Run python CHECKPOINT.py next for the next 6 unfinished assignments, research them fully, save via python CHECKPOINT.py add STAGE_RESULTS.json, then repeat. The original 36-assignment lane remains intact. Neither an inventory nor a six-record stage is an inbox submission.\n"
         start_here += (
             "\nCHECKPOINT / RESUME: When a record is genuinely verified, save its exact result as one_result.json and run python CHECKPOINT.py add one_result.json. "
             "Run python CHECKPOINT.py status to list missing assignments; continue those in future sessions using this SAME ZIP plus WORK_PROGRESS.json. "
@@ -1025,3 +1057,4 @@ if __name__ == "__main__":
 
 # Item-level retry budgets are enforced by deep_scan_work_state.py using validated
 # recovery_attempts. Never derive them from scan_package_attempts (ZIP issuance).
+
