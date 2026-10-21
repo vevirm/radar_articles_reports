@@ -7,38 +7,38 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **2779** (Main **1356** + Historical **1423**)
-- Automatic queue still needing V2 verification: **498** (Main **197** + Historical **301**)
-- Currently assigned to workers: **107** (Main **72** + Historical **35**)
+- Automatic queue still needing V2 verification: **554** (Main **228** + Historical **326**)
+- Currently assigned to workers: **107** (Main **47** + Historical **60**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **31**
-- Automatic queue pending and not yet assigned: **391**
+- Automatic queue pending and not yet assigned: **447**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261019T142750Z-4bbb0da5bd2c`
+- Current package: `worker-a-20261021T063819Z-9b142836f0bb`
 - Assigned unresolved records: **36**
-  1. `link:https://news.google.com/rss/articles/CBMimAFBVV95cUxPWHhydk9EbXpOMEtuSlhlWlNDSVgweVJ3a0R3akxXX0FXT2dVMFRkcndmT0pXbUlUaDRGYl9UR0xKVU41TDFsYzlvM0ROSVpGaU9EN2JsUEc0Y3FvXzJ6Y0RRZjBPZVREZTJETC1iN3JQMXBnc3ZZOXozX1JzUktRNHg0R3VQYVdpUTVhTFdydTQ5c2gydURXdQ?oc=5` — Europe is fighting the wrong AI sovereignty battle — recovery attempt 3/3
-  2. `link:https://news.google.com/rss/articles/CBMilAFBVV95cUxOOERlTkZCc294UTNVa1JsU2hybDNkRjZfTXB5Qmc4T2hYTE5hR3oyb29Vcmp0ekItMGo4VGgzZEFOUEd5RWlybWhhLUNJRlloVDRJN2JqbllEX2VmcndpVm1fZGc1TG5UWThNTUxmeU1YeHdKRlFGcDJjOGpUQTVCNXRkSTljcElza004Q0ZHb3hibFFy?oc=5` — European telcos spy US role in satellite-to-phone coalition - rapporteur.com — recovery attempt 3/3
-  3. `link:https://news.google.com/rss/articles/CBMiqwFBVV95cUxNRWdQSkJPU1MwbjcxUnFOclBQVXgxZ2ktcDBjREZOVmNFTjlLZTJ5bW9KcG9FNGVIUWpfeEhNc0NTWFVlYVg1cjdYaE5EYkwySnhaazl2U3VIbld5SmNlandwNkpRSFRNWTRETUg5MFFfNUhzQjJJeFEwYVFJbV9LNU5UNXA2NmpWNVpscW40bDNVeEV6bzFya2F3NzFucUxSUGZPV29OOTNaWEE?oc=5` — European Companies Down But Not Out in AI Race — recovery attempt 3/3
-  4. `link:https://news.google.com/rss/articles/CBMiqwFBVV95cUxNcjVFRUV6ZzZmeXFiN3NIWmZwUTBGWTR3ZUx1UUhjLWRLMC0wZThtLW00a1FYNjloa3BiSTFveFdZZFkxWnd5d283Qi04MnU1UC1IUl9KdlBkX2o2X3JpQ0pUZVRZQzJ3Uk1fRzR5VnJIdGhwVGI3Q0JWc2RWOGtBZTZzek4tcWQxRTAxZnB3eWJyV2gzY2FlNjdYVk95b2lQX2UtLVNWandvMDA?oc=5` — France's Mistral launches AI model it says outperforms some Chinese rivals
-  5. `link:https://news.google.com/rss/articles/CBMixwFBVV95cUxNX0ZPend6WDVibXdvSWM3NVFxY0hHUUd0RDNKSlBOQnBNNk9BWEs5M0h6X0pBTkhnVzkzNXJBSkpEdlA0LUF1NlRwV1cwUnFSQU1EVnhCeDNyc2I0Y2NyRTY3NVR0U095dlRSQW9NVE11TTVtLUxTOHN4NldKbE5zSlIyUENSOXlDdEttYmJxaG9RZ3RFMEhWTmt4aW0wYU80VzQzNU9Da2Z5V0NQWmZDbEswdHlPdUVlV0p0WDBqNEpqOWt0YWo0?oc=5` — New AGILE defence innovation programme approved by Parliament | Nieuws | Europees Parlement
-  6. `link:https://news.google.com/rss/articles/CBMioAFBVV95cUxNQi1faEtDSHdFZkhNN2hZWG0tNTU3d05PaHBSVzV3VUFXNEhXMEhQXy1HZnhCZU9qaUFJMWF2OTUwNnJRS2RmcW9UZ1U4dVNETk9pSGJVTkR2QjBjaG9LTlREMXVFV3k0RFViSDdxU3haV1dYR25KOTRIUE8xOW43cDdteVJvNGhnX0xEOTRRLWtqcFIzQkJ0STVwa2hPOXY3?oc=5` — AI hopes, industrial malaise drive boom in German startups
-  7. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxPQTVhdGtDQ3ltbWRrWWxnSjE2TTF1R0szTjQ0OW5NSjJtRzJVN1ZtblJ1QjhQbUdHMzZMUmF0OTVlcGtmaUFhN2J3UXI2WkhlSVJxTWhpa205ckxkZHVudzBGcWxscHl5M21TSi11UmpZczF0bkZsYTlJekplbzQ0VTVWTVh5d3Rna09YbFZONUR0VmpSUEVudTluUkJoOG04alJZejNrUTM5cFNxRmdn?oc=5` — Former German spy chief arrested for treason and espionage
-  8. `link:https://news.google.com/rss/articles/CBMikAJBVV95cUxPWUJDemFBRS1vSFhhNk5EdGxXNmtwM3AzY3Z3aF9EMHpSNmV2ckxIVl9hQ1VtMm45dHdEemQ1YmZGaDhMaUJ1WFpINmhsNi1WOXhVSTJwcnc0QmVoeE5ySU01VEdKVElMOHZMQkN3ejMtb0xPcFBKSlhaX25yZVg4aDg3bWtzRzhOXzB2X2txOTNhUlE0Q2VZMXhWSXBIeXhvQlhrdTlWSmdIWUc2MUV0Tlk4WDlBSlZ0TWNhNzd1YnJWZ0hYc0dpcmVZYk1vWWh6TW91QlZUWUlPNEZfWWZUVGR3RUpTeF9iUHEtdWRBTWF6OU5tTXUyd0IwS0pJSTA3bWRsTXpzU0ZsR1NPN1ZGMA?oc=5` — Fourth EU-Faroe Islands Horizon Europe Joint Research and Innovation Committee meeting - European Commission
+  1. `link:https://doi.org/10.1080/10438599.2026.2750888` — Cohesion funds and regional patenting: inventive capacity in innovation systems under construction
+  2. `link:https://doi.org/10.1080/20004508.2026.2736952` — The geopolitics of the Bologna Process: framing the “withdrawal” in Russian academic discourse
+  3. `link:https://doi.org/10.1016/j.techsoc.2026.103248` — The moderating effect of absorptive capacity on the relationship between knowledge transfer and innovative capacity
+  4. `link:https://doi.org/10.1080/09654313.2026.2749575` — The innovation divide across EU regions: does EU funding shape distinct innovation transition paths?
+  5. `link:https://publications.jrc.ec.europa.eu/repository/handle/JRC148105` — Deep dive on critical raw materials for hydrogen technologies in the EU
+  6. `link:https://news.google.com/rss/articles/CBMisgFBVV95cUxQUlU5YTRndU0zV01oS0JQbDh6ampPQ3UwNkZlcjRISTcwZlJvb1R5RGFQWGxBb1BwaWxYbVlZZGd4ekZudEIwQ0tkVkdQbExVQTBYbWJ6OHVjU2VmZE1vYUNsdWdDUFIwc2ZzUld5dGdDOGpZYkNsc1ZFRWFYU1JRRkRFcTM3R0l1VkRmVXROak9vWjZ6ekhRQkVuMFpwMFBSSnp4dFo3Ukl5YmRMYXEzUEZR?oc=5` — Daedalus: Greece unveils new supercomputer as it eyes role in Europe's AI race
+  7. `link:https://news.google.com/rss/articles/CBMitgFBVV95cUxPYXhLUE9Vd2NlR0EzMFhXUEViaDdzNGlBQWVYZ0ExQnhfMUIzZVB4bmpIdlZPQUluTEtzeHB3czdHVHBUTl92RlMyaVRHUGpMRzJBZFVWT3NjWGRSNnM3c0pOdExQMEp3dHZ5cXJ4UWc1eFdqTXNzVFc4OVpEaVpWSzd3NVVKRnR1RDVqck9oT0Q0MVNFak13TzNpelR2STlteTV2YlYzZ1ZMQkxsYmw0d2lTZUV2Zw?oc=5` — Europe’s Top Carriers Explore Satellite Group to Fend Off SpaceX
+  8. `link:https://news.google.com/rss/articles/CBMixgFBVV95cUxNNnNmbDd1eExiNFVESmhtZ0hkNXVxSzlqNWdfQUlVNXEzWHVheEZlWkszVlNHY2syWEU5T1dPTWVtbGgzTnEzOWowZXFlRUE1cHhSUjVGQnQ1eWtUbXR5TUw5M1kxSlFkVG1nSjNpamoyYXlZYy1jNm5nWWN3RE1GVU50aEdMQWxIS2JyZ2d4ZmhUYjJJbHN1ei11WWJ6UTczTEM3NzJqdkZLSS1JQThmc0ctUENEZWNJejN3MVBYcUNPZ01PUkE?oc=5` — European telecom groups mull bid for mobile satellite spectrum
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261019T142753Z-e880025defb1`
+- Current package: `worker-b-20261021T063824Z-cf52bbfe8941`
 - Assigned unresolved records: **36**
-  1. `link:https://doi.org/10.1080/09654313.2026.2671213` — The geography of exclusion: cumulative causation and the persistence of lagging regions
-  2. `link:https://www.eif.org/news-and-publications/newsroom/latest-insights` — EIF thought leadership | Inspiring progress for future funding
-  3. `link:https://www.eif.org/files/publications/eif-equity-barometer-2026-q2.pdf` — EIF thought leadership | Inspiring progress for future funding
-  4. `link:https://institutdelors.eu/content/uploads/2026/06/Etude-CRIP_Revolution_IA_horizon_2035_Barichella_EN_2.pdf` — The Artificial Intelligence Revolution by 2035 - Institut Jacques Delors
-  5. `link:https://institutdelors.eu/content/uploads/2026/06/Etude-CRIP_Revolution_IA_horizon_2035_Barichella__Short_version_EN_2.pdf` — The Artificial Intelligence Revolution by 2035 (Short version) - Institut Jacques Delors
-  6. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=e7ce9d4e-c15e-11f1-988f-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Science, research and innovation performance of the EU 2026 - Publications Office of the EU
-  7. `link:https://doi.org/10.1016/j.jik.2026.101139` — How do technical standards boost innovation quality? Evidence from new energy enterprises responding to European standards
-  8. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=b34947e9-c14e-11f1-988f-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Social and economic transformations - Publications Office of the EU
+  1. `historical:id:7291b37863287f3c` — Supply Chain Resilience Bulletin
+  2. `historical:id:fba354496656e7d6` — Commission launches stakeholder consultation on how data is collected around export controls
+  3. `historical:id:59a6fca9be7d20e2` — Supply Chain Resilience Bulletin - November 2022
+  4. `historical:id:5ae79c51d7ce9827` — Supply Chain Resilience Bulletin - October 2022
+  5. `historical:id:e5ed28857678e85e` — Supply Chain Resilience Bulletin - September 2022
+  6. `historical:id:ae55e9b8ca8be7d1` — Supply Chain Resilience Bulletin - June 2022
+  7. `historical:id:e60b8f82005c899b` — Key Technologies Shaping the Future: Foresight and strategic recommendations
+  8. `historical:id:48436f0ae60f0187` — The Impact of University Patenting on the Technological Specialization of European Regions: A Technology-Level Analysis
   - … plus 28 more in the package manifest
 
 ### Worker SINGLE
