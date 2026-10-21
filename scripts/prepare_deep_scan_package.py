@@ -471,7 +471,82 @@ follows A/B/C criteria, corrections are supported, and the JSON is valid.
 
 OFFLINE_CHECKER = '#!/usr/bin/env python3\n"""Offline preflight for a Radar Deep Scan V2 worker result; no network dependency.\nRun from the package root: python CHECK_RESULTS.py deep_scan_results.json\nRequires exactly one result for EVERY assigned job in the manifest/batches. Substantive evidence\nand claims remain subject to the authoritative GitHub importer.\n"""\nimport json,sys,pathlib\nroot=pathlib.Path(__file__).resolve().parent\nproblems=[]\ntry:\n    path=pathlib.Path(sys.argv[1])\n    d=json.loads(path.read_text(encoding="utf-8"))\n    m=json.loads((root/\'manifest.json\').read_text(encoding="utf-8"))\n    jobs=[]\n    for b in m[\'batches\']:\n        jobs+=json.loads((root/b[\'file\']).read_text(encoding="utf-8"))[\'jobs\']\n    rows=d.get(\'results\',[])\n    if d.get(\'format\')!=\'radar-deep-scan-results-v2\' or d.get(\'package_id\')!=m[\'package_id\']:\n        problems.append(\'format or package_id mismatch\')\n    if d.get(\'claims_format\')!=\'radar-claims-v1\':\n        problems.append(\'claims_format must be radar-claims-v1\')\n    if not isinstance(rows,list): problems.append(\'results must be an array\'); rows=[]\n    if len(rows)!=len(jobs): problems.append(f\'INCOMPLETE LANE: expected {len(jobs)} results, received {len(rows)}\')\n    for i,r in enumerate(rows):\n        job=jobs[i] if i<len(jobs) else {}\n        expected=job.get(\'required_output\',{})\n        prefix=f\'results[{i}]\'\n        for k in (\'record_key\',\'source_hash\',\'identity_hash\'):\n            if r.get(k)!=expected.get(k): problems.append(f\'{prefix}: incorrect {k} or nonconsecutive order\')\n        v=r.get(\'verification\') or {}; a=r.get(\'admission\') or {}; du=r.get(\'duplicate\') or {}\n        decision=a.get(\'decision\'); depth=v.get(\'evidence_depth\')\n        attempts={x.get(\'step\'):x for x in v.get(\'retrieval_attempts\',[]) if isinstance(x,dict)}\n        if \'supplied_url\' not in attempts: problems.append(f\'{prefix}: missing supplied_url audit\')\n        if decision not in (\'keep\',\'review\',\'drop\',\'defer\',\'drop_unverifiable\'): problems.append(f\'{prefix}: bad decision\')\n        sources=[x for x in v.get(\'recovered_sources\',[]) if isinstance(x,dict) and x.get(\'evidence_used\') is True and x.get(\'url\') and x.get(\'title\')]\n        if decision in (\'keep\',\'review\',\'drop\'):\n            if depth not in (\'full_text_primary\',\'full_text_repository_copy\',\'official_full_document\',\'full_text_or_substantive_primary\',\'substantive_primary_after_recovery\'):problems.append(f\'{prefix}: invalid recovered depth\')\n            if not v.get(\'identity_verified\') or not sources: problems.append(f\'{prefix}: missing identity or substantive recovered source\')\n        if decision in (\'defer\',\'drop_unverifiable\') or depth==\'substantive_primary_after_recovery\':\n            needed={\'supplied_url\',\'doi\',\'exact_title\',\'title_author_year\',\'official_publisher_or_repository\',\'broader_identity_search\'}\n            auto=job.get(\'automatic_scanner\') or {}\n            if auto.get(\'source_validation_url\') or auto.get(\'source_access\') or job.get(\'source_material\',{}).get(\'final_url\'):\n                # A final_url alone is not proof of an explicit scanner-specific route.\n                if auto.get(\'source_validation_url\') or auto.get(\'source_access\'): needed.add(\'scanner_validation_route\')\n            miss=needed-set(attempts)\n            if miss:problems.append(f\'{prefix}: incomplete recovery ladder {sorted(miss)}\')\n            for k in needed&set(attempts):\n                if len(str(attempts[k].get(\'note\',\'\')).strip())<12:problems.append(f\'{prefix}: thin audit note {k}\')\n        if decision==\'defer\':\n            if depth!=\'identity_only_after_recovery\' or not v.get(\'identity_verified\') or a.get(\'reason_code\')!=\'EVIDENCE_ACCESS_LIMITED\':problems.append(f\'{prefix}: invalid defer fields\')\n            if any(r.get(k) for k in (\'reader_title\',\'reader_what\',\'reader_why\',\'reader_more\')):problems.append(f\'{prefix}: defer must not contain reader content\')\n            if (r.get(\'metadata_correction\') or {}).get(\'fields\'):problems.append(f\'{prefix}: defer metadata change\')\n            if any((r.get(\'deep_analysis\') or {}).get(k) for k in (\'work_kind\',\'research_question\',\'main_finding\',\'method_or_basis\',\'qualification\',\'radar_relevance\')):problems.append(f\'{prefix}: defer contains analysis\')\n        if decision==\'drop_unverifiable\' and (v.get(\'identity_verified\') or sources):problems.append(f\'{prefix}: invalid unverifiable evidence\')\n        if du.get(\'status\') not in (\'unique\',\'duplicate\',\'review\'):problems.append(f\'{prefix}: invalid duplicate status\')\n        if du.get(\'status\')==\'duplicate\':\n            keys={x.get(\'record_key\') for x in job.get(\'possible_duplicates\',[]) if isinstance(x,dict)}\n            if decision!=\'drop\' or not du.get(\'duplicate_of\') or du.get(\'duplicate_of\') not in keys:problems.append(f\'{prefix}: invalid canonical duplicate relation\')\n        elif du.get(\'duplicate_of\'):problems.append(f\'{prefix}: duplicate_of must be empty\')\n        claims=r.get(\'claims\')\n        if decision in (\'keep\',\'review\') and (not isinstance(claims,list) or not 1<=len(claims)<=3): problems.append(f\'{prefix}: expected 1–3 claims\')\n        if decision in (\'drop\',\'defer\',\'drop_unverifiable\') and claims!=[]:problems.append(f\'{prefix}: claims must be []\')\n        supplied=attempts.get(\'supplied_url\',{})\n        if decision in (\'keep\',\'review\',\'drop\') and supplied.get(\'outcome\') not in (\'success\',\'found\',\'matched\',\'recovered\',\'resolved\'):\n            recover={\'doi\',\'exact_title\',\'title_author_year\',\'official_publisher_or_repository\',\'broader_identity_search\',\'scanner_validation_route\',\'online_publisher_or_secondary_recovery\',\'package_source_material\',\'web_discovery\',\'publisher_or_alternate_source\',\'publisher_or_official_report\',\'publisher\',\'secondary_syndication_recovery\',\'title_search\',\'repository\',\'source_material\',\'live_source_page\',\'live_primary_source\'}\n            good={\'success\',\'found\',\'matched\',\'recovered\',\'resolved\',\'package_text_examined\',\'source_page_read\',\'source_content_read\'}\n            if not any(x.get(\'step\') in recover and x.get(\'outcome\') in good for x in v.get(\'retrieval_attempts\',[]) if isinstance(x,dict)):\n                problems.append(f\'{prefix}: no successful alternate recovery reported\')\nexcept Exception as e:\n    problems.append(f\'could not validate: {type(e).__name__}: {e}\')\nif problems:\n    print(f\'FAIL: {len(problems)} issue(s)\')\n    for x in problems:print(\' -\',x)\n    sys.exit(1)\nprint(f\'PASS: ALL {len(jobs)} assigned jobs represented in correct order; structural preflight passed (substantive evidence still checked by GitHub).\')\n'
 
-INSTRUCTIONS += "\n\n## IMPORTER-COMPATIBILITY CONTRACT (MANDATORY, checked mechanically)\n\nThese constraints take precedence over informal examples in this ZIP. The GitHub importer\nrejects whole records that violate them, even when the source analysis is useful.\n\n1. Copy `record_key`, `source_hash`, `identity_hash` directly from each job's\n   `required_output`. Never recompute or replace them. Return ALL assigned `jobs` in the exact order across batches, with no gaps. A file containing fewer than `manifest.json.works_in_package` results FAILS validation.\n2. `verification.evidence_depth` for a recovered keep/drop/review must be EXACTLY one of:\n   `full_text_primary`, `full_text_repository_copy`, `official_full_document`,\n   `full_text_or_substantive_primary`, `substantive_primary_after_recovery`.\n   For `defer` use ONLY `identity_only_after_recovery`. For `drop_unverifiable`,\n   no invented successful recovery step or substantive recovered source is allowed.\n3. `retrieval_attempts` MUST contain `supplied_url` for every result. Every step has a\n   real `outcome` and a specific `note`. If supplied_url fails, record the ACTUAL\n   later successful step (use `success`, not ambiguous outcomes like `limited`,\n   `source_page_read`, `package_text_examined` or `available_in_prior_research_ledger`)\n   and its URL/query. An already retrieved first-party PDF is recorded under\n   `scanner_validation_route` with a truthful `success` only when actually inspected.\n   Also include at least one `recovered_sources` entry with `evidence_used: true`,\n   a non-empty true source URL and title. A bibliography-only page is not full text.\n4. For `defer` and `drop_unverifiable`, report all six steps: `supplied_url`, `doi`,\n   `exact_title`, `title_author_year`, `official_publisher_or_repository`,\n   `broader_identity_search`. If the job contains a scanner-specific validation route,\n   also report `scanner_validation_route`. Use `not_applicable` explicitly when\n   a route cannot apply (e.g. no DOI). Each attempt note must say specifically\n   what was tried and what happened; never invent steps merely to satisfy validation.\n   For `defer`: identity_verified=true, evidence_depth=identity_only_after_recovery,\n   reason_code=EVIDENCE_ACCESS_LIMITED, no corrections, no reader/deep_analysis\n   findings, and claims=[]. If a job cannot be verified, continue the evidence-recovery ladder honestly. Do not invent evidence or submit an incomplete file as complete. Preserve unfinished work locally and resume until ALL assigned jobs have a truthful decision.\n5. `duplicate.status` must be EXACTLY `unique`, `duplicate`, or `review`.\n   Use `duplicate` only with decision=`drop`, a nonempty `duplicate_of` equal to\n   an existing canonical key supplied in `possible_duplicates`, and the same DOI\n   or normalized exact title. Otherwise use `unique` with empty `duplicate_of`.\n   Do not label a record duplicate merely because its source_hash recurs or\n   two worker batches have overlapping themes.\n6. Every `keep`/`review` needs 1–3 substantive structured claims using\n   `claims_vocabulary.json`. Every `drop`/`defer`/`drop_unverifiable` must have\n   `claims: []`. Copy the first claim qualification from deep_analysis.qualification.\n7. Run the bundled offline `CHECK_RESULTS.py` against your final JSON before\n   returning it. If it fails, FIX the specified records and COMPLETE the missing assignments. Never shorten to a prefix and call that completion. Passing this structural preflight is necessary, not\n   sufficient: do not fabricate a citation or recovery attempt to get a pass.\n8. Previously processed records (including old packages 04/06) are not requests to\n   reprocess them. Only complete the current ZIP's current assigned jobs; GitHub\n   handles already-verified and duplicate identities during import.\n"
+CHECKPOINT_TOOL = r'''#!/usr/bin/env python3
+"""Durable, offline assignment checkpoint manager. Does NOT perform research."""
+import argparse, json, pathlib, sys
+root = pathlib.Path(__file__).resolve().parent
+manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
+jobs = []
+for b in manifest["batches"]:
+    jobs.extend(json.loads((root / b["file"]).read_text(encoding="utf-8"))["jobs"])
+expected = [j["required_output"]["record_key"] for j in jobs]
+state_path = root / "WORK_PROGRESS.json"
+
+def load():
+    if not state_path.exists():
+        return {"package_id": manifest["package_id"], "completed": {}}
+    d = json.loads(state_path.read_text(encoding="utf-8"))
+    if d.get("package_id") != manifest["package_id"]:
+        raise ValueError("checkpoint belongs to different package")
+    return d
+
+def save(d):
+    tmp = state_path.with_suffix(".tmp")
+    tmp.write_text(json.dumps(d, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
+    tmp.replace(state_path)
+
+parser = argparse.ArgumentParser(description=__doc__)
+sub = parser.add_subparsers(dest="cmd", required=True)
+sub.add_parser("status")
+a = sub.add_parser("add", help="save one completed structured result as JSON")
+a.add_argument("result_file")
+a = sub.add_parser("assemble", help="create final JSON only after all assignments accounted for")
+a.add_argument("output", nargs="?", default="deep_scan_results.json")
+args = parser.parse_args()
+try:
+    d = load()
+    if args.cmd == "add":
+        raw = json.loads(pathlib.Path(args.result_file).read_text(encoding="utf-8"))
+        if isinstance(raw, dict) and "results" in raw:
+            if raw.get("package_id") != manifest["package_id"]:
+                raise ValueError("input package_id does not match")
+            rows = raw["results"]
+        elif isinstance(raw, list):
+            rows = raw
+        else:
+            rows = [raw]
+        if not isinstance(rows, list):
+            raise ValueError("results must be an array")
+        for row in rows:
+            key = row.get("record_key")
+            if key not in expected:
+                raise ValueError(f"unassigned record_key: {key}")
+            job = jobs[expected.index(key)]
+            for field in ("record_key", "source_hash", "identity_hash"):
+                if row.get(field) != job["required_output"].get(field):
+                    raise ValueError(f"identity mismatch on {key}: {field}")
+            old = d["completed"].get(key)
+            if old is not None and old != row:
+                raise ValueError(f"already saved with different content: {key}")
+            d["completed"][key] = row
+        save(d)
+    missing = [key for key in expected if key not in d["completed"]]
+    print(f"Completed: {len(expected)-len(missing)}/{len(expected)}; remaining: {len(missing)}")
+    for i, key in enumerate(expected):
+        if key in missing:
+            print(f"  remaining position {i+1}: {key}")
+    if args.cmd == "assemble":
+        if missing:
+            raise ValueError("Cannot assemble incomplete lane; retain WORK_PROGRESS.json and resume remaining records")
+        out = {"format":"radar-deep-scan-results-v2", "claims_format":"radar-claims-v1", "package_id":manifest["package_id"], "results":[d["completed"][k] for k in expected]}
+        pathlib.Path(args.output).write_text(json.dumps(out, ensure_ascii=False, indent=2)+"\n",encoding="utf-8")
+        print(f"Assembled {args.output}. NEXT: python CHECK_RESULTS.py {args.output}")
+except (ValueError, KeyError, OSError, json.JSONDecodeError) as e:
+    print("FAIL:",e,file=sys.stderr)
+    sys.exit(1)
+'''
+
+INSTRUCTIONS += "\n\n## CONTINUATION IS MANDATORY, NOT A RESEARCH INVENTORY\n\nWork through EVERY assigned record, including older unresolved items. Never stop after counting or indexing the jobs and present an inventory as a completed scan. Save each real verified result with `python CHECKPOINT.py add one_result.json` and check remaining assignments with `python CHECKPOINT.py status`. If the execution budget ends, hand off `WORK_PROGRESS.json` and the original ZIP; a subsequent session resumes missing assignments only, with neither untouched jobs nor package creation counted as research attempts. Run `python CHECKPOINT.py assemble` ONLY after all assignments are represented. Then run `python CHECK_RESULTS.py deep_scan_results.json`. Both workers operate independently at the same time; the other lane is not an excuse to stop. Research may require several sessions: checkpoints cannot create autonomous background research.\n\n## IMPORTER-COMPATIBILITY CONTRACT (MANDATORY, checked mechanically)\n\nThese constraints take precedence over informal examples in this ZIP. The GitHub importer\nrejects whole records that violate them, even when the source analysis is useful.\n\n1. Copy `record_key`, `source_hash`, `identity_hash` directly from each job's\n   `required_output`. Never recompute or replace them. Return ALL assigned `jobs` in the exact order across batches, with no gaps. A file containing fewer than `manifest.json.works_in_package` results FAILS validation.\n2. `verification.evidence_depth` for a recovered keep/drop/review must be EXACTLY one of:\n   `full_text_primary`, `full_text_repository_copy`, `official_full_document`,\n   `full_text_or_substantive_primary`, `substantive_primary_after_recovery`.\n   For `defer` use ONLY `identity_only_after_recovery`. For `drop_unverifiable`,\n   no invented successful recovery step or substantive recovered source is allowed.\n3. `retrieval_attempts` MUST contain `supplied_url` for every result. Every step has a\n   real `outcome` and a specific `note`. If supplied_url fails, record the ACTUAL\n   later successful step (use `success`, not ambiguous outcomes like `limited`,\n   `source_page_read`, `package_text_examined` or `available_in_prior_research_ledger`)\n   and its URL/query. An already retrieved first-party PDF is recorded under\n   `scanner_validation_route` with a truthful `success` only when actually inspected.\n   Also include at least one `recovered_sources` entry with `evidence_used: true`,\n   a non-empty true source URL and title. A bibliography-only page is not full text.\n4. For `defer` and `drop_unverifiable`, report all six steps: `supplied_url`, `doi`,\n   `exact_title`, `title_author_year`, `official_publisher_or_repository`,\n   `broader_identity_search`. If the job contains a scanner-specific validation route,\n   also report `scanner_validation_route`. Use `not_applicable` explicitly when\n   a route cannot apply (e.g. no DOI). Each attempt note must say specifically\n   what was tried and what happened; never invent steps merely to satisfy validation.\n   For `defer`: identity_verified=true, evidence_depth=identity_only_after_recovery,\n   reason_code=EVIDENCE_ACCESS_LIMITED, no corrections, no reader/deep_analysis\n   findings, and claims=[]. If a job cannot be verified, continue the evidence-recovery ladder honestly. Do not invent evidence or submit an incomplete file as complete. Preserve unfinished work locally and resume until ALL assigned jobs have a truthful decision.\n5. `duplicate.status` must be EXACTLY `unique`, `duplicate`, or `review`.\n   Use `duplicate` only with decision=`drop`, a nonempty `duplicate_of` equal to\n   an existing canonical key supplied in `possible_duplicates`, and the same DOI\n   or normalized exact title. Otherwise use `unique` with empty `duplicate_of`.\n   Do not label a record duplicate merely because its source_hash recurs or\n   two worker batches have overlapping themes.\n6. Every `keep`/`review` needs 1–3 substantive structured claims using\n   `claims_vocabulary.json`. Every `drop`/`defer`/`drop_unverifiable` must have\n   `claims: []`. Copy the first claim qualification from deep_analysis.qualification.\n7. Run the bundled offline `CHECK_RESULTS.py` against your final JSON before\n   returning it. If it fails, FIX the specified records and COMPLETE the missing assignments. Never shorten to a prefix and call that completion. Passing this structural preflight is necessary, not\n   sufficient: do not fabricate a citation or recovery attempt to get a pass.\n8. Previously processed records (including old packages 04/06) are not requests to\n   reprocess them. Only complete the current ZIP's current assigned jobs; GitHub\n   handles already-verified and duplicate identities during import.\n"
 
 INSTRUCTIONS += """
 
@@ -825,6 +900,7 @@ def main() -> None:
                 + instructions
             )
         (root / "INSTRUCTIONS.md").write_text(instructions, encoding="utf-8")
+        (root / "CHECKPOINT.py").write_text(CHECKPOINT_TOOL, encoding="utf-8")
         start_here = START_HERE
         if lane:
             start_here = (
@@ -833,6 +909,12 @@ def main() -> None:
                 "A new chat needs no prior conversation history: read INSTRUCTIONS.md and process this ZIP in order. If capacity/time runs short, save your partial work and CONTINUE; only the complete validated file is ready for inbox.\n\n"
                 + START_HERE
             )
+        start_here += (
+            "\nCHECKPOINT / RESUME: When a record is genuinely verified, save its exact result as one_result.json and run python CHECKPOINT.py add one_result.json. "
+            "Run python CHECKPOINT.py status to list missing assignments; continue those in future sessions using this SAME ZIP plus WORK_PROGRESS.json. "
+            "Once 36/36 (or assigned count) is done run python CHECKPOINT.py assemble, THEN run CHECK_RESULTS.py. "
+            "Neither inventory nor a partial checkpoint is a completed scan. No fabricated decisions or scan-attempt counters.\n"
+        )
         start_here += "\nIMPORTANT: Run python CHECK_RESULTS.py deep_scan_results.json before upload. It MUST report ALL jobs complete (36/36 for a 36-job ZIP). Fix errors; never invent evidence.\n"
         (root / "START_HERE.txt").write_text(start_here, encoding="utf-8")
         (root / "FINAL_CHECK.txt").write_text(
@@ -846,7 +928,8 @@ def main() -> None:
             "7. No invented verification or metadata correction.\n"
             "8. Do NOT upload partial results as completed. Save and resume until all jobs are accounted for.\n"
             "9. RUN: python CHECK_RESULTS.py deep_scan_results.json before returning. An incomplete batch MUST FAIL.\n"
-            "10. The other worker lane must run SIMULTANEOUSLY from its own ZIP; BOTH full result files are required for the parallel run.\n",
+            "10. The other worker lane must run SIMULTANEOUSLY from its own ZIP; BOTH full result files are required for the parallel run.\n"
+            "11. RESUME: python CHECKPOINT.py add one_result.json after each verified record; python CHECKPOINT.py status shows pending identities; python CHECKPOINT.py assemble succeeds ONLY once all are complete. Save WORK_PROGRESS.json across sessions.\n",
             encoding="utf-8",
         )
 
