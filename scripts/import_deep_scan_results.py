@@ -377,7 +377,13 @@ def validate_v2_result(
                 "publisher_or_official_report", "publisher", "secondary_syndication_recovery",
                 "title_search", "repository",
             })
-            successful_recovery = [s for s in recovery_steps if s in audit_by_step and _outcome(audit_by_step[s].get("outcome")) in SUCCESS_OUTCOMES]
+            # Parallel workers use source-specific audit labels for real reads.
+            # These indicate successful recovery only when the result ALSO supplies
+            # an independently usable recovered source (checked above). A prior
+            # research ledger alone is deliberately not sufficient.
+            recovery_steps.update({"source_material", "live_source_page", "live_primary_source"})
+            recovery_outcomes = SUCCESS_OUTCOMES | {"package_text_examined", "source_page_read", "source_content_read"}
+            successful_recovery = [s for s in recovery_steps if s in audit_by_step and _outcome(audit_by_step[s].get("outcome")) in recovery_outcomes]
             if not successful_recovery:
                 problems.append("supplied URL did not recover the work; recovered-work decision must report which recovery-ladder step actually found it")
 
