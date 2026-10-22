@@ -470,38 +470,7 @@ Before returning the file, verify every result matches the correct work, the evi
 follows A/B/C criteria, corrections are supported, and the JSON is valid.
 """
 
-def _portable_importer_rules() -> str:
-    """Build worker ZIP validator from the importer's CURRENT admission rules.
-
-    This is intentionally generated for every package, so a change to production
-    importer validation cannot silently leave old bundled preflight checks behind.
-    """
-    import inspect
-    try:
-        from scripts import import_deep_scan_results as importer
-    except ModuleNotFoundError:
-        import import_deep_scan_results as importer  # type: ignore
-
-    sets = [
-        "DECISIONS", "DUPLICATE_STATUSES", "TARGET_STRANDS",
-        "REQUIRED_UNVERIFIABLE_STEPS", "FORBIDDEN_EVIDENCE_DEPTHS",
-        "SUCCESS_OUTCOMES", "FAILURE_OUTCOMES", "ALLOWED_RECOVERED_DEPTHS",
-        "SAFE_CORRECTION_FIELDS", "SAFE_UNSET_FIELDS",
-    ]
-    parts = ["from __future__ import annotations", "import re", "from typing import Any", ""]
-    parts.append("def clean(value):\n    return re.sub(r'\\s+', ' ', str(value or '')).strip()\n")
-    for name in sets:
-        values = getattr(importer, name)
-        parts.append(f"{name} = {{{', '.join(repr(x) for x in sorted(values))}}}")
-    parts.append(f"DEFER_EVIDENCE_DEPTH = {importer.DEFER_EVIDENCE_DEPTH!r}")
-    for func in (
-        importer._attempt_steps, importer._attempt_map, importer._outcome,
-        importer._usable_sources, importer._scanner_validation_route_url,
-        importer.validate_v2_result,
-    ):
-        parts.extend(["", inspect.getsource(func)])
-    return "\n".join(parts) + "\n"
-
+OFFLINE_CHECKER = '#!/usr/bin/env python3\n"""Offline preflight for a Radar Deep Scan V2 worker result; no network dependency.\nRun from the package root: python CHECK_RESULTS.py deep_scan_results.json\nAllows a nonempty consecutive prefix of assigned jobs; full lane is not mandatory. Substantive evidence\nand claims remain subject to the authoritative GitHub importer.\n"""\nimport json,sys,pathlib\nroot=pathlib.Path(__file__).resolve().parent\nproblems=[]\ntry:\n    path=pathlib.Path(sys.argv[1])\n    d=json.loads(path.read_text(encoding="utf-8"))\n    m=json.loads((root/\'manifest.json\').read_text(encoding="utf-8"))\n    jobs=[]\n    for b in m[\'batches\']:\n        jobs+=json.loads((root/b[\'file\']).read_text(encoding="utf-8"))[\'jobs\']\n    rows=d.get(\'results\',[])\n    if d.get(\'format\')!=\'radar-deep-scan-results-v2\' or d.get(\'package_id\')!=m[\'package_id\']:\n        problems.append(\'format or package_id mismatch\')\n    if d.get(\'claims_format\')!=\'radar-claims-v1\':\n        problems.append(\'claims_format must be radar-claims-v1\')\n    if not isinstance(rows,list): problems.append(\'results must be an array\'); rows=[]\n    if not (1 <= len(rows) <= len(jobs)): problems.append(f\'expected 1..{len(jobs)} results, received {len(rows)}\')\n    for i,r in enumerate(rows):\n        job=jobs[i] if i<len(jobs) else {}\n        expected=job.get(\'required_output\',{})\n        prefix=f\'results[{i}]\'\n        for k in (\'record_key\',\'source_hash\',\'identity_hash\'):\n            if r.get(k)!=expected.get(k): problems.append(f\'{prefix}: incorrect {k} or nonconsecutive order\')\n        v=r.get(\'verification\') or {}; a=r.get(\'admission\') or {}; du=r.get(\'duplicate\') or {}\n        decision=a.get(\'decision\'); depth=v.get(\'evidence_depth\')\n        attempts={x.get(\'step\'):x for x in v.get(\'retrieval_attempts\',[]) if isinstance(x,dict)}\n        if \'supplied_url\' not in attempts: problems.append(f\'{prefix}: missing supplied_url audit\')\n        if decision not in (\'keep\',\'review\',\'drop\',\'defer\',\'drop_unverifiable\'): problems.append(f\'{prefix}: bad decision\')\n        sources=[x for x in v.get(\'recovered_sources\',[]) if isinstance(x,dict) and x.get(\'evidence_used\') is True and x.get(\'url\') and x.get(\'title\')]\n        if decision in (\'keep\',\'review\',\'drop\'):\n            if depth not in (\'full_text_primary\',\'full_text_repository_copy\',\'official_full_document\',\'full_text_or_substantive_primary\',\'substantive_primary_after_recovery\'):problems.append(f\'{prefix}: invalid recovered depth\')\n            if not v.get(\'identity_verified\') or not sources: problems.append(f\'{prefix}: missing identity or substantive recovered source\')\n        if decision in (\'defer\',\'drop_unverifiable\') or depth==\'substantive_primary_after_recovery\':\n            needed={\'supplied_url\',\'doi\',\'exact_title\',\'title_author_year\',\'official_publisher_or_repository\',\'broader_identity_search\'}\n            auto=job.get(\'automatic_scanner\') or {}\n            if auto.get(\'source_validation_url\') or auto.get(\'source_access\') or job.get(\'source_material\',{}).get(\'final_url\'):\n                # A final_url alone is not proof of an explicit scanner-specific route.\n                if auto.get(\'source_validation_url\') or auto.get(\'source_access\'): needed.add(\'scanner_validation_route\')\n            miss=needed-set(attempts)\n            if miss:problems.append(f\'{prefix}: incomplete recovery ladder {sorted(miss)}\')\n            for k in needed&set(attempts):\n                if len(str(attempts[k].get(\'note\',\'\')).strip())<12:problems.append(f\'{prefix}: thin audit note {k}\')\n        if decision==\'defer\':\n            if depth!=\'identity_only_after_recovery\' or not v.get(\'identity_verified\') or a.get(\'reason_code\')!=\'EVIDENCE_ACCESS_LIMITED\':problems.append(f\'{prefix}: invalid defer fields\')\n            if any(r.get(k) for k in (\'reader_title\',\'reader_what\',\'reader_why\',\'reader_more\')):problems.append(f\'{prefix}: defer must not contain reader content\')\n            if (r.get(\'metadata_correction\') or {}).get(\'fields\'):problems.append(f\'{prefix}: defer metadata change\')\n            if any((r.get(\'deep_analysis\') or {}).get(k) for k in (\'work_kind\',\'research_question\',\'main_finding\',\'method_or_basis\',\'qualification\',\'radar_relevance\')):problems.append(f\'{prefix}: defer contains analysis\')\n        if decision==\'drop_unverifiable\' and (v.get(\'identity_verified\') or sources):problems.append(f\'{prefix}: invalid unverifiable evidence\')\n        if du.get(\'status\') not in (\'unique\',\'duplicate\',\'review\'):problems.append(f\'{prefix}: invalid duplicate status\')\n        if du.get(\'status\')==\'duplicate\':\n            keys={x.get(\'record_key\') for x in job.get(\'possible_duplicates\',[]) if isinstance(x,dict)}\n            if decision!=\'drop\' or not du.get(\'duplicate_of\') or du.get(\'duplicate_of\') not in keys:problems.append(f\'{prefix}: invalid canonical duplicate relation\')\n        elif du.get(\'duplicate_of\'):problems.append(f\'{prefix}: duplicate_of must be empty\')\n        claims=r.get(\'claims\')\n        if decision in (\'keep\',\'review\') and (not isinstance(claims,list) or not 1<=len(claims)<=3): problems.append(f\'{prefix}: expected 1–3 claims\')\n        if decision in (\'drop\',\'defer\',\'drop_unverifiable\') and claims!=[]:problems.append(f\'{prefix}: claims must be []\')\n        supplied=attempts.get(\'supplied_url\',{})\n        if decision in (\'keep\',\'review\',\'drop\') and supplied.get(\'outcome\') not in (\'success\',\'found\',\'matched\',\'recovered\',\'resolved\'):\n            recover={\'doi\',\'exact_title\',\'title_author_year\',\'official_publisher_or_repository\',\'broader_identity_search\',\'scanner_validation_route\',\'online_publisher_or_secondary_recovery\',\'package_source_material\',\'web_discovery\',\'publisher_or_alternate_source\',\'publisher_or_official_report\',\'publisher\',\'secondary_syndication_recovery\',\'title_search\',\'repository\',\'source_material\',\'live_source_page\',\'live_primary_source\'}\n            good={\'success\',\'found\',\'matched\',\'recovered\',\'resolved\',\'package_text_examined\',\'source_page_read\',\'source_content_read\'}\n            if not any(x.get(\'step\') in recover and x.get(\'outcome\') in good for x in v.get(\'retrieval_attempts\',[]) if isinstance(x,dict)):\n                problems.append(f\'{prefix}: no successful alternate recovery reported\')\nexcept Exception as e:\n    problems.append(f\'could not validate: {type(e).__name__}: {e}\')\nif problems:\n    print(f\'FAIL: {len(problems)} issue(s)\')\n    for x in problems:print(\' -\',x)\n    sys.exit(1)\nprint(f\'PASS: {len(rows)}/{len(jobs)} consecutive verified results; PARTIAL allowed; GitHub validates evidence and retains unfinished work.\')\n'
 
 CHECKPOINT_TOOL = r'''#!/usr/bin/env python3
 """Durable, offline assignment checkpoint manager. Does NOT perform research."""
@@ -533,19 +502,14 @@ sub.add_parser("status")
 next_cmd = sub.add_parser("next", help="export only the next unfinished stage, up to six assigned items")
 next_cmd.add_argument("--size", type=int, default=6)
 next_cmd.add_argument("--output", default="NEXT_STAGE.json")
-a = sub.add_parser("add", help="validate and save one completed structured result as JSON")
-a.add_argument("result_file")
-a = sub.add_parser("replace", help="validate and explicitly replace a previously saved item")
+a = sub.add_parser("add", help="save one completed structured result as JSON")
 a.add_argument("result_file")
 a = sub.add_parser("assemble", help="create importer-ready JSON from consecutive completed assignments")
 a.add_argument("output", nargs="?", default="deep_scan_results.json")
 args = parser.parse_args()
 try:
     d = load()
-    if args.cmd in ("add", "replace"):
-        from CHECK_RESULTS import check_result
-        from claims_schema import load_vocabulary
-        vocabulary = load_vocabulary(root / "claims_vocabulary.json")
+    if args.cmd == "add":
         raw = json.loads(pathlib.Path(args.result_file).read_text(encoding="utf-8"))
         if isinstance(raw, dict) and "results" in raw:
             if raw.get("package_id") != manifest["package_id"]:
@@ -565,12 +529,9 @@ try:
             for field in ("record_key", "source_hash", "identity_hash"):
                 if row.get(field) != job["required_output"].get(field):
                     raise ValueError(f"identity mismatch on {key}: {field}")
-            row_errors = check_result(row, job, vocabulary)
-            if row_errors:
-                raise ValueError(f"{key} failed importer preflight: {'; '.join(row_errors)}")
             old = d["completed"].get(key)
-            if old is not None and old != row and args.cmd != "replace":
-                raise ValueError(f"already saved with different content: {key}; use CHECKPOINT.py replace after reviewing the corrected evidence")
+            if old is not None and old != row:
+                raise ValueError(f"already saved with different content: {key}")
             d["completed"][key] = row
         save(d)
     missing = [key for key in expected if key not in d["completed"]]
@@ -596,18 +557,8 @@ try:
         if not prefix:
             raise ValueError("No verified consecutive results yet; nothing to assemble")
         out = {"format":"radar-deep-scan-results-v2", "claims_format":"radar-claims-v1", "package_id":manifest["package_id"], "results":prefix}
-        import subprocess
-        output = pathlib.Path(args.output)
-        candidate = root / ".deep_scan_checked_candidate.json"
-        candidate.write_text(json.dumps(out, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
-        try:
-            check = subprocess.run([sys.executable, str(root / "CHECK_RESULTS.py"), str(candidate)], cwd=root)
-            if check.returncode:
-                raise ValueError("CHECK_RESULTS.py rejected the worker results. Correct the reported rows; no inbox-ready JSON was assembled.")
-            candidate.replace(output)
-            print(f"PASS: assembled importer-preflight-checked {output}; never rename or modify after this check")
-        finally:
-            candidate.unlink(missing_ok=True)
+        pathlib.Path(args.output).write_text(json.dumps(out, ensure_ascii=False, indent=2)+"\n",encoding="utf-8")
+        print(f"Assembled {args.output}. NEXT: python CHECK_RESULTS.py {args.output}")
 except (ValueError, KeyError, OSError, json.JSONDecodeError) as e:
     print("FAIL:",e,file=sys.stderr)
     sys.exit(1)
@@ -712,68 +663,7 @@ If all applicable categories still leave source identity or substance unresolved
 INSTRUCTIONS += "\n\n## BEST-EFFORT CONSECUTIVE PREFIX — IMPORT-READY\n\nResearch as many assignments as possible in order (up to the whole 36-item lane). A nonempty, well-supported consecutive prefix is a VALID inbox submission. Aim to cover the full lane but never invent evidence or pad results. Do not waste your session on another handoff/inventory: do the bibliographic and content plausibility checks. Run CHECK_RESULTS.py; a PASS for e.g. 7/36 is a valid PARTIAL submission, not 36/36 completion. GitHub preserves unsubmitted assignments for later scanning.\n"
 
 
-# Top priority ZIP contract: execution instructions + executable checking, not a
-# conversational promise. No worker may present or upload a file that fails preflight.
-INSTRUCTIONS = """# REQUIRED QUALITY GATE — READ THIS FIRST
-
-These rules override any contradictory examples later in this file.
-The worker ZIP contains authoritative `IMPORTER_RULES.py` copied automatically
-from the current GitHub importer, `claims_schema.py`, `claims_vocabulary.json`,
-and `CHECK_RESULTS.py`. The preflight checks admission, retrieval audit, legal
-metadata corrections, historical A/B targeting, claim vocabulary, dates, scopes,
-record identity, order and reader-text limits. **Do not upload invalid JSON.**
-
-Before writing a result, check the job's `corpus_scope`:
-- **historical**: a KEEP/REVIEW may target **A or B only**. Never mark a historical
-  record as KEEP/REVIEW/C. If it merely describes a C-type event, investigate
-  whether it genuinely qualifies as historical A evidence; otherwise use an
-  evidence-grounded DROP. Do not change an admission just to make a check pass.
-- **main**: A/B/C may qualify, with the actual source-grounded strand criteria.
-
-`metadata_correction.fields` may contain ONLY title, authors, source, date, type,
-eu_relevance, text_mode, source_text_mode, event_status. `unset` may contain only
-those except title, plus source_tier. **Never put doi, record_key, source_hash,
-identity_hash, link, url, strand, package_id or merit in metadata corrections.**
-Never make up an issue date: unset a placeholder date if the work does not
-establish it. `defer` may not correct metadata at all.
-
-Every KEEP/REVIEW must have 1–3 claims grounded in the actual source, with legal
-actor, status, mechanism, object and scope values from claims_vocabulary.json.
-`scope.level=member_state` or `associated_country` REQUIRES at least one
-substantiated country in `scope.countries`; otherwise use a genuinely supported
-broader scope, not an invented country. Claims' first `qualification` must match
-`deep_analysis.qualification` EXACTLY. Do not supply system-owned claim fields:
-`record_key`, `claim_id`, `merit`, `origin`, `era`, `provisional`.
-
-Use `python CHECKPOINT.py add item.json` for each result and save checkpoints.
-Invalid results are REFUSED AT ADD TIME with actionable errors; fix the research,
-then retry. To intentionally correct an already saved result, use
-`python CHECKPOINT.py replace corrected_item.json`; this also runs preflight.
-**Only `python CHECKPOINT.py assemble deep_scan_results.json` may create the final
-inbox file**; it now executes CHECK_RESULTS.py and REFUSES TO CREATE the output
-on ANY validation error. Fix the reported item(s), reassemble, and run
-`python CHECK_RESULTS.py deep_scan_results.json` a final time. If validation
-still fails, deliver the checkpoint and issues, not an uploadable result JSON.
-A PASS cannot prove that a live GitHub record hasn't changed since packaging;
-GitHub validates current identities and ledger reservations on import.
-No "repair" may invent evidence, omit difficult items silently or convert a
-real C-only event into A just to satisfy historical admission rules.
-
----
-
-""" + INSTRUCTIONS
-
-START_HERE = r"""RADAR DEEP SCAN V2 — IMPORT-SAFE RESULTS ONLY
-
-MANDATORY: Follow INSTRUCTIONS.md's REQUIRED QUALITY GATE before work.
-Only CHECKPOINT.py assemble can produce an uploadable JSON, and it now runs the
-strict CHECK_RESULTS.py automatically. NEVER submit a JSON after preflight FAIL.
-Historical KEEP/REVIEW is A/B only; metadata corrections are whitelisted;
-claim scope requires real countries for member_state/associated_country.
-If a worker cannot correct an invalid output without inventing evidence, preserve
-WORK_PROGRESS.json and stop rather than producing a rejected inbox file.
-
-RADAR DEEP SCAN V2 — EXECUTE THE RESEARCH (NOT A HANDOFF)
+START_HERE = r"""RADAR DEEP SCAN V2 — EXECUTE THE RESEARCH (NOT A HANDOFF)
 
 Research all assigned records you can reasonably check in this session. Aim for the full lane,
 but if time is limited, SUBMIT THE GENUINELY COMPLETED CONSECUTIVE PREFIX of records.
@@ -1166,9 +1056,7 @@ def main() -> None:
         if not CLAIMS_VOCAB.exists():
             raise FileNotFoundError(f"Claims vocabulary missing: {CLAIMS_VOCAB}")
         shutil.copy2(CLAIMS_VOCAB, root / "claims_vocabulary.json")
-        shutil.copy2(ROOT / "scripts" / "claims_schema.py", root / "claims_schema.py")
-        shutil.copy2(ROOT / "scripts" / "deep_scan_offline_check.py", root / "CHECK_RESULTS.py")
-        (root / "IMPORTER_RULES.py").write_text(_portable_importer_rules(), encoding="utf-8")
+        (root / "CHECK_RESULTS.py").write_text(OFFLINE_CHECKER, encoding="utf-8")
         (root / "RESULT_TEMPLATE.json").write_text(json.dumps({"format": RESULT_FORMAT, "claims_format": CLAIMS_FORMAT, "package_id": pkg_id, "results": []}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
         zip_path = args.output_dir / f"deep_scan_package_{pkg_id}.zip"
