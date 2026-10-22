@@ -6,17 +6,17 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **3081** (Main **1620** + Historical **1461**)
-- Automatic queue still needing V2 verification: **296** (Main **3** + Historical **293**)
+- Authoritative V2 verified: **3082** (Main **1620** + Historical **1462**)
+- Automatic queue still needing V2 verification: **295** (Main **3** + Historical **292**)
 - Currently assigned to workers: **107** (Main **3** + Historical **104**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **34**
-- Automatic queue pending and not yet assigned: **189**
+- Automatic queue pending and not yet assigned: **188**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261022T141026Z-9fe093842203`
+- Current package: `worker-a-20261022T144810Z-9fe093842203`
 - Assigned unresolved records: **36**
   1. `link:https://doi.org/10.1080/10438599.2026.2750888` — Cohesion funds and regional patenting: inventive capacity in innovation systems under construction — recovery attempt 3/3
   2. `link:https://doi.org/10.1080/09654313.2026.2749575` — The innovation divide across EU regions: does EU funding shape distinct innovation transition paths? — recovery attempt 3/3
@@ -29,16 +29,16 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261022T141033Z-e0605f3349de`
+- Current package: `worker-b-20261022T144826Z-189c542e3b12`
 - Assigned unresolved records: **36**
-  1. `historical:id:db14277ca0b57443` — The MultiRATE Holistic Readiness Level framework for civil security technologies
-  2. `historical:id:5e54528012bb3517` — Advice: Sustainable breakthroughs – Towards system innovation in the energy transition | Adviesraad voor wetenschap, technologie en innovatie
-  3. `historical:id:d4525dfbe43cfbe2` — Advancing EU Digital Sovereignty in Public Administrations
-  4. `historical:id:d55de1a6f0ec29ec` — A new collaboration between academic research and business to create the rubber of the future | CNRS
-  5. `historical:id:f5d116d906852d87` — “The choice is none”: AI and the militarization of European research
-  6. `historical:id:fccc0bceefd8e0e2` — Assessing Europe’s Resilience and Preparedness in an Era of Strategic Risks - HCSS
-  7. `historical:id:74a3dadd9f256f0a` — Robust and resilient space infrastructure for a safe Netherlands | NWO
-  8. `historical:id:0d10162ea1a64c77` — Digitalising the EU energy system
+  1. `historical:id:5e54528012bb3517` — Advice: Sustainable breakthroughs – Towards system innovation in the energy transition | Adviesraad voor wetenschap, technologie en innovatie
+  2. `historical:id:d4525dfbe43cfbe2` — Advancing EU Digital Sovereignty in Public Administrations
+  3. `historical:id:d55de1a6f0ec29ec` — A new collaboration between academic research and business to create the rubber of the future | CNRS
+  4. `historical:id:f5d116d906852d87` — “The choice is none”: AI and the militarization of European research
+  5. `historical:id:fccc0bceefd8e0e2` — Assessing Europe’s Resilience and Preparedness in an Era of Strategic Risks - HCSS
+  6. `historical:id:74a3dadd9f256f0a` — Robust and resilient space infrastructure for a safe Netherlands | NWO
+  7. `historical:id:0d10162ea1a64c77` — Digitalising the EU energy system
+  8. `historical:id:a2d611e3a5ebd6fe` — Foresight Challenges | ENISA
   - … plus 28 more in the package manifest
 
 ### Worker SINGLE

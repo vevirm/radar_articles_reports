@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-22T14:02:14Z",
+  "generated_at": "2026-10-22T14:39:43Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -262450,8 +262450,101 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:db14277ca0b57443": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "101312aa",
+      "identity_hash": "d7ddc00677fed3d9",
+      "reader_title": "The MultiRATE Holistic Readiness Level framework for civil security technologies",
+      "reader_what": "The MultiRATE framework combines seven technological and societal readiness dimensions with a maturity-cost forecasting module.",
+      "reader_why": "Supports forward-looking R&D funding and transition-readiness decisions beyond a single TRL score.",
+      "reader_more": "The Design Science Research Methodology and outside expert review support feasibility for civil-security applications. The new readiness scoring tool is not proven universally predictive or superior in all sectors.",
+      "deep_analysis": {
+        "work_kind": "methods article",
+        "research_question": "",
+        "main_finding": "The MultiRATE framework combines seven technological and societal readiness dimensions with a maturity-cost forecasting module.",
+        "method_or_basis": "Design Science Research Methodology with structured external expert validation across seven readiness dimensions.",
+        "qualification": "Validated framework feasibility; no proof it prevents failed investments or generalises unchanged beyond security technologies.",
+        "radar_relevance": "Reassigned A to B: introduces and externally expert-validates a seven-dimension Holistic Readiness Level framework, including projected costs for maturity progression, as a transferable forward-looking technology-intelligence and investment evaluation tool.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "unavailable",
+            "note": "Original supplied URL https://doi.org/10.12688/openreseurope.22711.1 did not yield sufficient matching content; recovered the work through exact_title at https://shura.shu.ac.uk/37574/."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Located and read matching substantive material at https://shura.shu.ac.uk/37574/, verifying identity and work type: The MultiRATE Holistic Readiness Level framework for civil security technologies."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_official_source",
+            "url": "https://shura.shu.ac.uk/37574/",
+            "title": "The MultiRATE Holistic Readiness Level framework for civil security technologies",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Identity and relevant substance verified against The MultiRATE Holistic Readiness Level framework for civil security technologies at https://shura.shu.ac.uk/37574/; scoped conclusion limited to what the source actually establishes."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_REUSABLE_METHOD",
+        "reason": "Reassigned A to B: introduces and externally expert-validates a seven-dimension Holistic Readiness Level framework, including projected costs for maturity progression, as a transferable forward-looking technology-intelligence and investment evaluation tool."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T14:39:43Z",
+      "deep_scan_package_id": "worker-b-20261022T131339Z-0474bc3a2b79",
+      "claims": [
+        {
+          "object": "methods.technology_detection",
+          "secondary_objects": [],
+          "actor": {
+            "name": "EU MultiRATE research consortium",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "operating",
+          "status_date": "2026-02-13",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Validated framework feasibility; no proof it prevents failed investments or generalises unchanged beyond security technologies.",
+          "text": "The MultiRATE framework combines seven technological and societal readiness dimensions with a maturity-cost forecasting module.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "historical:id:db14277ca0b57443",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:d7ddc00677fed3d9:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-22T14:02:14Z"
+  "claims_updated_at": "2026-10-22T14:39:43Z"
 }
