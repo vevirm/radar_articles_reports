@@ -6,39 +6,39 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **3014** (Main **1566** + Historical **1448**)
-- Automatic queue still needing V2 verification: **364** (Main **58** + Historical **306**)
-- Currently assigned to workers: **107** (Main **58** + Historical **49**)
+- Authoritative V2 verified: **3081** (Main **1620** + Historical **1461**)
+- Automatic queue still needing V2 verification: **296** (Main **3** + Historical **293**)
+- Currently assigned to workers: **107** (Main **3** + Historical **104**)
 - Bounded access-recovery retries still eligible: **0**
-- Hands-on verification needed: **33**
-- Automatic queue pending and not yet assigned: **257**
+- Hands-on verification needed: **34**
+- Automatic queue pending and not yet assigned: **189**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261022T131330Z-865c9fca3d06`
+- Current package: `worker-a-20261022T141026Z-9fe093842203`
 - Assigned unresolved records: **36**
-  1. `link:https://www.vttresearch.com/en/technology-infrastructures/micro-nano-and-quantum-technology-infrastructure` — Micro-, nano- and quantum technology infrastructure | VTT
-  2. `link:https://doi.org/10.1080/09692290.2026.2748311` — Situational state capacity for transformative industrial policy in dependent market economies
-  3. `link:https://news.google.com/rss/articles/CBMixwFBVV95cUxQVWJZUkdwYVBBdlAyOEc2VHk4UEQwWENtb3dxbG9faEtvMDVNM0I5TllxSFg5QTNxRUNhanFRdy1VZDBVVnVOR1NzZV9SUkVPTS1DLUhXTU5VLWtlbzg2dnkyVzgyak1WRzJKaTlkMm16NmU2WG5mUWpLSTNreEVhRGNvRVFweE5ZMHozNWtxTFpFNkNJX2pTRFN6X0NLdjl1OVBPNkptTERSbVhBT01JQ2drbkl5WGZESWQyeXZMZXBMMjF1OXpF?oc=5` — New AGILE defence innovation programme approved by Parliament | Noticias | Parlamento Europeo
-  4. `link:https://news.google.com/rss/articles/CBMihgFBVV95cUxPMmRZdXVLSUxCRGNWSThvcnktWDNKV21MS2ZPY2ZOVklJak9KVjlpTHcwc25JTGJrVzdOalFKTktiZHZBVU90dDYydEthQVlVYnRMZHlXM0tBTE5PcWRqQ082aC10ODZGVVY2OGstcUE3cVNEX3BtdGNPRWl6S1NQVUg1YTF2UQ?oc=5` — Made with Europe: Advancing Europe’s Digital Sovereignty?
-  5. `link:https://news.google.com/rss/articles/CBMi0gFBVV95cUxNb0tLdUNJTmJ0V0hxc0ZiQ29odUNwNjFfOEpQTHZFS0gxWlQ1ejI1bUJWVW1SZlR1YTM0ckpkM0pYNU1WRnJqZnpOX05NWmNJeHdYZkJ2WUVIQU1vRHNlbGo4QnY1ZlhBZHkyYWlFZHFWRVU5R3IzeDEwN213UE9SWG0wYW9QNWM4M1RscFppZGJSdWdqaG80TDZNaFNLS2V6MW03MHNGWjc5SUoyak5YdTRqR3lVYVRWcjA5bThxbkxOMk1XcC1MS25aLUxtNERGa3c?oc=5` — Biological AI models: new paradigms to leverage the languages of life - European Commission
-  6. `link:https://news.google.com/rss/articles/CBMi2AFBVV95cUxQWlBCRzNNN1hVU0RydnVDdzB6MUtiWVlURnFsTHBMcXlhMWxjMnFvZHVfbmFzSmRPbEtlRlUzQVFxUUgwbEhDdHR5eFFOZXFxdWJ2M0tUTi1DRU4xa2lFMFBEVHdmc25KZUNlVGV2bVA1SnczQ3pCeGE1cjgzV1hVbk9hVjdOTmNOeFEtZEJsVHNpNllLWGtHSWZnd3UxMmFwa2pPVDdMTW8xUm42dmxXbmMxQS1HUDJHektqMnZ1bUJ6OFpFVF9DYzhUSHhIQ0VNTEVnRkdiWGg?oc=5` — Europe risks startup exodus as regulation, funding and skill gaps hamper AI adoption, AWS EMEA head says
-  7. `link:https://news.google.com/rss/articles/CBMisgFBVV95cUxOdFJFc2sxWnVYY250czdUd3hqaXlZWWlsVldMU3pwZDh5UENMRk1XdF96cG5XNmE5UTBRSlNnVFlsUnp1ZkF4WUpNMmFyNTdHdmwxVnJGU2Q1Y2d6VGZvejV5d0xHZ3hwSmNaZWs3OXVkSVVUWXRhR3czSWFIOGpDT0g4U2Qwbi00ajdsYzhPbVNFN3RXeTFkSnNWZWt0V1dNNDVpZWZSQ0VfT1dSVU5OQXh3?oc=5` — Nvidia CEO Huang Pushes Europe on All Industries Adopting AI
-  8. `link:https://doi.org/10.56645/jmde.v22i53.1315` — Foresight Insight for the Transformational Imperative: Toward a Futures-Oriented Evaluation Practice
+  1. `link:https://doi.org/10.1080/10438599.2026.2750888` — Cohesion funds and regional patenting: inventive capacity in innovation systems under construction — recovery attempt 3/3
+  2. `link:https://doi.org/10.1080/09654313.2026.2749575` — The innovation divide across EU regions: does EU funding shape distinct innovation transition paths? — recovery attempt 3/3
+  3. `link:https://doi.org/10.1080/09692290.2026.2748311` — Situational state capacity for transformative industrial policy in dependent market economies — recovery attempt 2/3
+  4. `historical:id:7b3b9b37c3aa631c` — University of the Future: AI-Enhanced Higher Education Between European Humanism and Chinese Innovation
+  5. `historical:id:e359fd8881a20c92` — Tracking country innovation performance: The Innovation Output Indicator 2025
+  6. `historical:id:75851b299e54ace6` — Towards a slowdown of European New Space Investment? - ESPI
+  7. `historical:id:2ecd9537efd7b69d` — The digital euro - anchoring Europe's strategic autonomy in a digital future | Bank for International Settlements
+  8. `historical:id:c074c6c002b42033` — Strengthening European Union’s Future Disaster Resilience
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261022T131339Z-0474bc3a2b79`
+- Current package: `worker-b-20261022T141033Z-e0605f3349de`
 - Assigned unresolved records: **36**
-  1. `link:https://news.google.com/rss/articles/CBMiswFBVV95cUxNaGFxUm93NXNFanpMQnpJU1NSeldmZUEyX3REOWdfckRZaVBFaHFBVl9uRS04UExUU1M4QlJXODdKbUxtOWNxTkpPNVJZRUhJZWZjX19qY25hZnlGMjNrN1F3MXVPeHpfZUw0SDhMQzhCMFl0YkMtR3pUZjN1VEIxMnVGLTViSlo2bGN3N3RHMlAzSVFiSGI0TnU0YmR5V3Nubm1nanJWNklQWmV3bUNreEpuSQ?oc=5` — Germany's Merz touts defence, AI and chip investment drive in pitch to investors
-  2. `link:https://www.eurohpc-ju.europa.eu/eurohpc-ju-and-grnet-inaugurate-daedalus-ranked-among-worlds-top-50-supercomputers-2026-10-19_en` — EuroHPC JU and GRNET Inaugurate DAEDALUS, , ranked among the World's Top 50 Supercomputers
-  3. `link:https://news.google.com/rss/articles/CBMioAFBVV95cUxQQkg1WHh6WTlCYXlHVVliZzc4Y0x2NlZZeFNtTmtpNEJqMnRDTG5ILXJsRDlJa2lPLXBZNXIxSzAwUnQyN1hiSG4zQllBbEJURzgzYzJlMFNmRkw4aW81WTAzZW13UDZTVWVjNExrMXg4QnJRNjhRRUNwRVdGUzhtU3VzSUJ1eWhXSVZwR1VUaFBXU3hLamotNWZwb19ySDRH?oc=5` — Investment summit: German government strikes AI deal with Nvidia
-  4. `link:https://www.imec-int.com/en/expertise/cmos-advanced/compute/quantum-computer` — Physical qubits for quantum computing | imec
-  5. `link:https://www.esf.org/tag/programme-management/` — Programme Management - ESF
-  6. `link:https://doi.org/10.1111/boer.70085` — R&D Efficiency and Business Sector Spending in European Regions: Lessons From the Conditional Efficiency Approach
-  7. `link:https://doi.org/10.1080/2156857x.2026.2748433` — Scoping review of academic research on Housing First in the Nordic countries
-  8. `link:https://arxiv.org/abs/2604.22340` — The Leiden/ESA Astrophysics Program for Summer Students (LEAPS)
+  1. `historical:id:db14277ca0b57443` — The MultiRATE Holistic Readiness Level framework for civil security technologies
+  2. `historical:id:5e54528012bb3517` — Advice: Sustainable breakthroughs – Towards system innovation in the energy transition | Adviesraad voor wetenschap, technologie en innovatie
+  3. `historical:id:d4525dfbe43cfbe2` — Advancing EU Digital Sovereignty in Public Administrations
+  4. `historical:id:d55de1a6f0ec29ec` — A new collaboration between academic research and business to create the rubber of the future | CNRS
+  5. `historical:id:f5d116d906852d87` — “The choice is none”: AI and the militarization of European research
+  6. `historical:id:fccc0bceefd8e0e2` — Assessing Europe’s Resilience and Preparedness in an Era of Strategic Risks - HCSS
+  7. `historical:id:74a3dadd9f256f0a` — Robust and resilient space infrastructure for a safe Netherlands | NWO
+  8. `historical:id:0d10162ea1a64c77` — Digitalising the EU energy system
   - … plus 28 more in the package manifest
 
 ### Worker SINGLE
@@ -91,3 +91,4 @@ These works no longer consume automatic Deep Scan slots. Their identity is belie
 - `historical:id:fc5c2e50633d007d` — **Setting S&T perspective priorities in an era of complexity and uncertainty: a case for megacities** — attempts: 3/3 — Foresight — 2024-02-26 — Journal and DOI identify the article, but only the publisher abstract was recoverable; the methodological detail needed to establish transferable novelty cannot be scrutinised. — https://doi.org/10.1108/fs-10-2023-0215
 - `link:https://news.google.com/rss/articles/CBMilAFBVV95cUxOOERlTkZCc294UTNVa1JsU2hybDNkRjZfTXB5Qmc4T2hYTE5hR3oyb29Vcmp0ekItMGo4VGgzZEFOUEd5RWlybWhhLUNJRlloVDRJN2JqbllEX2VmcndpVm1fZGc1TG5UWThNTUxmeU1YeHdKRlFGcDJjOGpUQTVCNXRkSTljcElza004Q0ZHb3hibFFy?oc=5` — **European telcos spy US role in satellite-to-phone coalition - rapporteur.com** — attempts: 3/3 — Euractiv — 2026-09-17T07:00Z — A paid publisher page identifies a satellite-to-phone telecom piece but restricts core reporting, so a new R&I capability or formal decision cannot be safely established. — https://news.google.com/rss/articles/CBMilAFBVV95cUxOOERlTkZCc294UTNVa1JsU2hybDNkRjZfTXB5Qmc4T2hYTE5hR3oyb29Vcmp0ekItMGo4VGgzZEFOUEd5RWlybWhhLUNJRlloVDRJN2JqbllEX2VmcndpVm1fZGc1TG5UWThNTUxmeU1YeHdKRlFGcDJjOGpUQTVCNXRkSTljcElza004Q0ZHb3hibFFy?oc=5
 - `link:https://news.google.com/rss/articles/CBMiqwFBVV95cUxNRWdQSkJPU1MwbjcxUnFOclBQVXgxZ2ktcDBjREZOVmNFTjlLZTJ5bW9KcG9FNGVIUWpfeEhNc0NTWFVlYVg1cjdYaE5EYkwySnhaazl2U3VIbld5SmNlandwNkpRSFRNWTRETUg5MFFfNUhzQjJJeFEwYVFJbV9LNU5UNXA2NmpWNVpscW40bDNVeEV6bzFya2F3NzFucUxSUGZPV29OOTNaWEE?oc=5` — **European Companies Down But Not Out in AI Race** — attempts: 3/3 — Bloomberg — 2026-09-08T07:00Z — A Bloomberg newsletter is indexed by headline and attributed September 8, but the full original article and its actual evidence cannot be recovered from accessible material. — https://news.google.com/rss/articles/CBMiqwFBVV95cUxNRWdQSkJPU1MwbjcxUnFOclBQVXgxZ2ktcDBjREZOVmNFTjlLZTJ5bW9KcG9FNGVIUWpfeEhNc0NTWFVlYVg1cjdYaE5EYkwySnhaazl2U3VIbld5SmNlandwNkpRSFRNWTRETUg5MFFfNUhzQjJJeFEwYVFJbV9LNU5UNXA2NmpWNVpscW40bDNVeEV6bzFya2F3NzFucUxSUGZPV29OOTNaWEE?oc=5
+- `link:https://doi.org/10.1016/j.cose.2026.105210` — **Conceptualizations and Boundaries of EU Digital Sovereignty** — attempts: 3/3 — Computers & Security — 2026-10-01 — The University of Augsburg repository and journal issue establish 2026 paper identity, authors Laura Macpherson and Daniel J. Veit, venue Computers & Security and matching DOI, but not its substantive conceptual framework, method or findings. No completed source text was readable; withholding an evidence claim. — https://doi.org/10.1016/j.cose.2026.105210
