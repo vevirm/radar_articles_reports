@@ -8,16 +8,16 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 
 - Authoritative V2 verified: **3082** (Main **1620** + Historical **1462**)
 - Automatic queue still needing V2 verification: **295** (Main **3** + Historical **292**)
-- Currently assigned to workers: **107** (Main **3** + Historical **104**)
+- Currently assigned to workers: **75** (Main **3** + Historical **72**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **34**
-- Automatic queue pending and not yet assigned: **188**
+- Automatic queue pending and not yet assigned: **220**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261022T144810Z-9fe093842203`
-- Assigned unresolved records: **36**
+- Current package: `worker-a-20261022T150057Z-e29d686b2383`
+- Assigned unresolved records: **20**
   1. `link:https://doi.org/10.1080/10438599.2026.2750888` — Cohesion funds and regional patenting: inventive capacity in innovation systems under construction — recovery attempt 3/3
   2. `link:https://doi.org/10.1080/09654313.2026.2749575` — The innovation divide across EU regions: does EU funding shape distinct innovation transition paths? — recovery attempt 3/3
   3. `link:https://doi.org/10.1080/09692290.2026.2748311` — Situational state capacity for transformative industrial policy in dependent market economies — recovery attempt 2/3
@@ -26,20 +26,20 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:75851b299e54ace6` — Towards a slowdown of European New Space Investment? - ESPI
   7. `historical:id:2ecd9537efd7b69d` — The digital euro - anchoring Europe's strategic autonomy in a digital future | Bank for International Settlements
   8. `historical:id:c074c6c002b42033` — Strengthening European Union’s Future Disaster Resilience
-  - … plus 28 more in the package manifest
+  - … plus 12 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261022T144826Z-189c542e3b12`
-- Assigned unresolved records: **36**
-  1. `historical:id:5e54528012bb3517` — Advice: Sustainable breakthroughs – Towards system innovation in the energy transition | Adviesraad voor wetenschap, technologie en innovatie
-  2. `historical:id:d4525dfbe43cfbe2` — Advancing EU Digital Sovereignty in Public Administrations
-  3. `historical:id:d55de1a6f0ec29ec` — A new collaboration between academic research and business to create the rubber of the future | CNRS
-  4. `historical:id:f5d116d906852d87` — “The choice is none”: AI and the militarization of European research
-  5. `historical:id:fccc0bceefd8e0e2` — Assessing Europe’s Resilience and Preparedness in an Era of Strategic Risks - HCSS
-  6. `historical:id:74a3dadd9f256f0a` — Robust and resilient space infrastructure for a safe Netherlands | NWO
-  7. `historical:id:0d10162ea1a64c77` — Digitalising the EU energy system
-  8. `historical:id:a2d611e3a5ebd6fe` — Foresight Challenges | ENISA
-  - … plus 28 more in the package manifest
+- Current package: `worker-b-20261022T150102Z-0d6dc40f18eb`
+- Assigned unresolved records: **20**
+  1. `historical:id:10d9732d90fda01c` — Final Report of the Study on “European Hydrogen Competitiveness and the Role of Innovation”
+  2. `historical:id:79ac10726e4a9896` — FMR, Fuels and Materials Research (ActUsLab) 2026-1-RD-ActUsLab-FMR
+  3. `historical:id:db0b87a794fd1871` — Ethical Frameworks for AI in Higher Education: Between European Regulation and Chinese Innovation
+  4. `historical:id:7430f92885685c0b` — ERA Portal Austria – Slovenian Presidency Conference “New European Research Area" - Report and recommendations
+  5. `historical:id:0b1ddd9d4712b596` — ERA Portal Austria – Science Europe calls for stronger minimum standards to improve research careers across Europe
+  6. `historical:id:185814c1da1ddaf3` — ERA Portal Austria – Research Security
+  7. `historical:id:3984604ee7b7a7c9` — ERA Portal Austria – Research Ministers discuss key elements of future Horizon Europe package and adopt EU framework for science diplomacy
+  8. `historical:id:5d17b716789ab12c` — ERA Portal Austria – GENDERACTIONplus policy briefs and Position Papers
+  - … plus 12 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
