@@ -852,6 +852,9 @@ def main() -> None:
         f"stale {stale_count}; rejected {rejected_count}; duplicates {duplicate_count}."
     )
     print("Raw radar.json and historical/historical.json evidence were not deleted. V2 admission/corrections are stored in sidecars for active-corpus rebuild.")
+    if stale_count:
+        print(f"Deep Scan import incomplete: {stale_count} stale results remain for correction ({rejected_count} other rejected).")
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":
