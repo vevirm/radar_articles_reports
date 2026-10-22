@@ -6,40 +6,40 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **3082** (Main **1620** + Historical **1462**)
-- Automatic queue still needing V2 verification: **295** (Main **3** + Historical **292**)
-- Currently assigned to workers: **75** (Main **3** + Historical **72**)
+- Authoritative V2 verified: **3116** (Main **1620** + Historical **1496**)
+- Automatic queue still needing V2 verification: **259** (Main **1** + Historical **258**)
+- Currently assigned to workers: **107** (Main **1** + Historical **106**)
 - Bounded access-recovery retries still eligible: **0**
-- Hands-on verification needed: **34**
-- Automatic queue pending and not yet assigned: **220**
+- Hands-on verification needed: **36**
+- Automatic queue pending and not yet assigned: **152**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261022T150057Z-e29d686b2383`
-- Assigned unresolved records: **20**
-  1. `link:https://doi.org/10.1080/10438599.2026.2750888` — Cohesion funds and regional patenting: inventive capacity in innovation systems under construction — recovery attempt 3/3
-  2. `link:https://doi.org/10.1080/09654313.2026.2749575` — The innovation divide across EU regions: does EU funding shape distinct innovation transition paths? — recovery attempt 3/3
-  3. `link:https://doi.org/10.1080/09692290.2026.2748311` — Situational state capacity for transformative industrial policy in dependent market economies — recovery attempt 2/3
-  4. `historical:id:7b3b9b37c3aa631c` — University of the Future: AI-Enhanced Higher Education Between European Humanism and Chinese Innovation
-  5. `historical:id:e359fd8881a20c92` — Tracking country innovation performance: The Innovation Output Indicator 2025
-  6. `historical:id:75851b299e54ace6` — Towards a slowdown of European New Space Investment? - ESPI
-  7. `historical:id:2ecd9537efd7b69d` — The digital euro - anchoring Europe's strategic autonomy in a digital future | Bank for International Settlements
-  8. `historical:id:c074c6c002b42033` — Strengthening European Union’s Future Disaster Resilience
-  - … plus 12 more in the package manifest
+- Current package: `worker-a-20261022T153439Z-b30cacd3a3ec`
+- Assigned unresolved records: **36**
+  1. `link:https://doi.org/10.1080/09692290.2026.2748311` — Situational state capacity for transformative industrial policy in dependent market economies — recovery attempt 3/3
+  2. `historical:id:e449befa89857c2f` — Navigating innovation gaps in the Western Balkans through the lenses of Economic Complexity
+  3. `historical:id:fccc0bceefd8e0e2` — Assessing Europe’s Resilience and Preparedness in an Era of Strategic Risks - HCSS
+  4. `historical:id:74a3dadd9f256f0a` — Robust and resilient space infrastructure for a safe Netherlands | NWO
+  5. `historical:id:0d10162ea1a64c77` — Digitalising the EU energy system
+  6. `historical:id:a2d611e3a5ebd6fe` — Foresight Challenges | ENISA
+  7. `historical:id:4d8f251256a52bf7` — Building a European AI Ecosystem of Excellence – CEPS
+  8. `historical:id:984826245d3a649f` — EU plans for AI (giga)factories: sanctuaries of innovation, or cathedrals in the desert? – CEPS
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261022T150102Z-0d6dc40f18eb`
-- Assigned unresolved records: **20**
-  1. `historical:id:10d9732d90fda01c` — Final Report of the Study on “European Hydrogen Competitiveness and the Role of Innovation”
-  2. `historical:id:79ac10726e4a9896` — FMR, Fuels and Materials Research (ActUsLab) 2026-1-RD-ActUsLab-FMR
-  3. `historical:id:db0b87a794fd1871` — Ethical Frameworks for AI in Higher Education: Between European Regulation and Chinese Innovation
-  4. `historical:id:7430f92885685c0b` — ERA Portal Austria – Slovenian Presidency Conference “New European Research Area" - Report and recommendations
-  5. `historical:id:0b1ddd9d4712b596` — ERA Portal Austria – Science Europe calls for stronger minimum standards to improve research careers across Europe
-  6. `historical:id:185814c1da1ddaf3` — ERA Portal Austria – Research Security
-  7. `historical:id:3984604ee7b7a7c9` — ERA Portal Austria – Research Ministers discuss key elements of future Horizon Europe package and adopt EU framework for science diplomacy
-  8. `historical:id:5d17b716789ab12c` — ERA Portal Austria – GENDERACTIONplus policy briefs and Position Papers
-  - … plus 12 more in the package manifest
+- Current package: `worker-b-20261022T153451Z-5b26e8d1749a`
+- Assigned unresolved records: **36**
+  1. `historical:id:a91f3c4f8b4f69c8` — ERA Portal Austria – EU showcases Atlantic ocean research cooperation at 2026 All-Atlantic Forum
+  2. `historical:id:d55de1a6f0ec29ec` — A new collaboration between academic research and business to create the rubber of the future | CNRS
+  3. `historical:id:0af6e4742029f243` — Government assignment that Vinnova reported on in 2018 | Vinnova
+  4. `historical:id:64c4f94ede1c3d8c` — Foresight review: Transformation of the security environment - Sitra
+  5. `historical:id:4f9db40f0f4a7b74` — Foresight review: The EU’s opportunities in a time of transformation - Sitra
+  6. `historical:id:252537eb118e001f` — Digital coffee for cluster 5 within Horizon Europe | Vinnova
+  7. `historical:id:4da07238c77d692a` — Digital coffee about the Horizon Europe research infrastructure | Vinnova
+  8. `historical:id:45b0f16d69feb127` — Built for Purpose?
+  - … plus 28 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
@@ -92,3 +92,5 @@ These works no longer consume automatic Deep Scan slots. Their identity is belie
 - `link:https://news.google.com/rss/articles/CBMilAFBVV95cUxOOERlTkZCc294UTNVa1JsU2hybDNkRjZfTXB5Qmc4T2hYTE5hR3oyb29Vcmp0ekItMGo4VGgzZEFOUEd5RWlybWhhLUNJRlloVDRJN2JqbllEX2VmcndpVm1fZGc1TG5UWThNTUxmeU1YeHdKRlFGcDJjOGpUQTVCNXRkSTljcElza004Q0ZHb3hibFFy?oc=5` — **European telcos spy US role in satellite-to-phone coalition - rapporteur.com** — attempts: 3/3 — Euractiv — 2026-09-17T07:00Z — A paid publisher page identifies a satellite-to-phone telecom piece but restricts core reporting, so a new R&I capability or formal decision cannot be safely established. — https://news.google.com/rss/articles/CBMilAFBVV95cUxOOERlTkZCc294UTNVa1JsU2hybDNkRjZfTXB5Qmc4T2hYTE5hR3oyb29Vcmp0ekItMGo4VGgzZEFOUEd5RWlybWhhLUNJRlloVDRJN2JqbllEX2VmcndpVm1fZGc1TG5UWThNTUxmeU1YeHdKRlFGcDJjOGpUQTVCNXRkSTljcElza004Q0ZHb3hibFFy?oc=5
 - `link:https://news.google.com/rss/articles/CBMiqwFBVV95cUxNRWdQSkJPU1MwbjcxUnFOclBQVXgxZ2ktcDBjREZOVmNFTjlLZTJ5bW9KcG9FNGVIUWpfeEhNc0NTWFVlYVg1cjdYaE5EYkwySnhaazl2U3VIbld5SmNlandwNkpRSFRNWTRETUg5MFFfNUhzQjJJeFEwYVFJbV9LNU5UNXA2NmpWNVpscW40bDNVeEV6bzFya2F3NzFucUxSUGZPV29OOTNaWEE?oc=5` — **European Companies Down But Not Out in AI Race** — attempts: 3/3 — Bloomberg — 2026-09-08T07:00Z — A Bloomberg newsletter is indexed by headline and attributed September 8, but the full original article and its actual evidence cannot be recovered from accessible material. — https://news.google.com/rss/articles/CBMiqwFBVV95cUxNRWdQSkJPU1MwbjcxUnFOclBQVXgxZ2ktcDBjREZOVmNFTjlLZTJ5bW9KcG9FNGVIUWpfeEhNc0NTWFVlYVg1cjdYaE5EYkwySnhaazl2U3VIbld5SmNlandwNkpRSFRNWTRETUg5MFFfNUhzQjJJeFEwYVFJbV9LNU5UNXA2NmpWNVpscW40bDNVeEV6bzFya2F3NzFucUxSUGZPV29OOTNaWEE?oc=5
 - `link:https://doi.org/10.1016/j.cose.2026.105210` — **Conceptualizations and Boundaries of EU Digital Sovereignty** — attempts: 3/3 — Computers & Security — 2026-10-01 — The University of Augsburg repository and journal issue establish 2026 paper identity, authors Laura Macpherson and Daniel J. Veit, venue Computers & Security and matching DOI, but not its substantive conceptual framework, method or findings. No completed source text was readable; withholding an evidence claim. — https://doi.org/10.1016/j.cose.2026.105210
+- `link:https://doi.org/10.1080/10438599.2026.2750888` — **Cohesion funds and regional patenting: inventive capacity in innovation systems under construction** — attempts: 3/3 — Economics of Innovation and New Technology — 2026-10-17 — Journal identity and DOI verified, but Taylor & Francis full text is access-restricted. Searches for the exact title, DOI, author/year and scholarly copies did not yield a substantive matching source; scanner abstract interpretation is not independent evidence. — https://doi.org/10.1080/10438599.2026.2750888
+- `link:https://doi.org/10.1080/09654313.2026.2749575` — **The innovation divide across EU regions: does EU funding shape distinct innovation transition paths?** — attempts: 3/3 — European Planning Studies — 2026-10-20 — Journal identity verified; the coauthors presented a substantively related June 2026 conference abstract, but the conference abstract is not the full journal publication and cannot rule out revisions to its results. No accessible substantive journal copy recovered. — https://doi.org/10.1080/09654313.2026.2749575

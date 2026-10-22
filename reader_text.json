@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-22T14:39:43Z",
+  "generated_at": "2026-10-22T15:26:12Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -262543,8 +262543,2832 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:7b3b9b37c3aa631c": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "ab99e3a1",
+      "identity_hash": "fa5ee1b46c47dd8e",
+      "reader_title": "Future universities and AI adoption",
+      "reader_what": "A book chapter proposes combining European academic autonomy and humanist values with Chinese educational AI deployment.",
+      "reader_why": "Comparative synthesis of higher-education practice and institutional models.",
+      "reader_more": "A book chapter proposes combining European academic autonomy and humanist values with Chinese educational AI deployment. Comparative synthesis of higher-education practice and institutional models. Normative higher-education argument, not evidence on EU R&I system outcomes.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "A book chapter proposes combining European academic autonomy and humanist values with Chinese educational AI deployment.",
+        "method_or_basis": "Comparative synthesis of higher-education practice and institutional models.",
+        "qualification": "Normative higher-education argument, not evidence on EU R&I system outcomes.",
+        "radar_relevance": "A Route 1: EU–China comparison concerns educational AI integration, not international R&I capacity. Route 2: no measured European research funding, technology capability or innovation-system trajectory. Route 3: the chapter discusses university teaching, AI-enabled learning and institutional models rather than a completed study of European research-system governance.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied record link https://doi.org/10.12906/9783865154392_010 yielded only abstract_or_landing_page; substantive primary work required separate source recovery."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered and read matching substantive first-party work at https://sciencenet.eu/9783865154392/?chapter=10&lang=en; work title, organisation, content and year were checked."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://sciencenet.eu/9783865154392/?chapter=10&lang=en",
+            "title": "University of the Future: AI-Enhanced Higher Education Between European Humanism and Chinese Innovation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://sciencenet.eu/9783865154392/?chapter=10&lang=en. 749 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Route 1: EU–China comparison concerns educational AI integration, not international R&I capacity. Route 2: no measured European research funding, technology capability or innovation-system trajectory. Route 3: the chapter discusses university teaching, AI-enabled learning and institutional models rather than a completed study of European research-system governance."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:25:55Z",
+      "deep_scan_package_id": "worker-a-20261022T150057Z-e29d686b2383",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:e359fd8881a20c92": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "f83d746e",
+      "identity_hash": "30f455bb9e85d40f",
+      "reader_title": "EU innovation-output performance remains uneven",
+      "reader_what": "EU innovation output outperforms China, Canada and Australia but trails the US, Japan and South Korea.",
+      "reader_why": "Comparative innovation-output data reveal persistent international and within-EU gaps.",
+      "reader_more": "EU innovation output outperforms China, Canada and Australia but trails the US, Japan and South Korea. A composite indicator compares 46 economies and explores links between innovation-output scores and national economic structures. Composite metrics describe innovation output and associations, not causal impacts of individual policy programmes.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "EU innovation output outperforms China, Canada and Australia but trails the US, Japan and South Korea.",
+        "method_or_basis": "A composite indicator compares 46 economies and explores links between innovation-output scores and national economic structures.",
+        "qualification": "Composite metrics describe innovation output and associations, not causal impacts of individual policy programmes.",
+        "radar_relevance": "A Route 2: EU innovation performance and relative technological position; Route 3: systematic EU benchmarking.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected publisher/official URL https://publications.jrc.ec.europa.eu/repository/handle/JRC145507; the package also carries 3476 characters of matching first-party substantial_web_text from https://publications.jrc.ec.europa.eu/repository/handle/JRC145507, independently cross-checked for identity and claims."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_institutional_primary",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC145507",
+            "title": "Tracking country innovation performance: The Innovation Output Indicator 2025",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://publications.jrc.ec.europa.eu/repository/handle/JRC145507. 3476 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 2: EU innovation performance and relative technological position; Route 3: systematic EU benchmarking."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:25:56Z",
+      "deep_scan_package_id": "worker-a-20261022T150057Z-e29d686b2383",
+      "claims": [
+        {
+          "object": "innovation.system_performance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Composite metrics describe innovation output and associations, not causal impacts of individual policy programmes.",
+          "text": "EU innovation output outperforms China, Canada and Australia but trails the US, Japan and South Korea.",
+          "confidence": "high",
+          "status_date_precision": "year",
+          "record_key": "historical:id:e359fd8881a20c92",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:30f455bb9e85d40f:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:75851b299e54ace6": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "14d7c7b9",
+      "identity_hash": "25863d0e4312c2e6",
+      "reader_title": "European space investment faces a financing slowdown",
+      "reader_what": "The European Space Policy Institute warns that private investment in European New Space may slow despite earlier strong growth.",
+      "reader_why": "Private capital availability influences the scale and continuity of European commercial-space innovation.",
+      "reader_more": "The European Space Policy Institute warns that private investment in European New Space may slow despite earlier strong growth. ESPI examines space start-up capital flows, funding cycles and financing conditions affecting European space firms. An August 2022 assessment and forward-looking warning, not proof of a subsequent investment collapse.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "The European Space Policy Institute warns that private investment in European New Space may slow despite earlier strong growth.",
+        "method_or_basis": "ESPI examines space start-up capital flows, funding cycles and financing conditions affecting European space firms.",
+        "qualification": "An August 2022 assessment and forward-looking warning, not proof of a subsequent investment collapse.",
+        "radar_relevance": "A Route 2: European space innovation finance and industrial capability.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected publisher/official URL https://www.espi.eu/wp-content/uploads/2022/08/ESPI-Brief-59-final.pdf; the package also carries 14232 characters of matching first-party pdf_excerpt from https://www.espi.eu/wp-content/uploads/2022/08/ESPI-Brief-59-final.pdf, independently cross-checked for identity and claims."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://www.espi.eu/wp-content/uploads/2022/08/ESPI-Brief-59-final.pdf",
+            "title": "Towards a slowdown of European New Space Investment? - ESPI",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://www.espi.eu/wp-content/uploads/2022/08/ESPI-Brief-59-final.pdf. 14232 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 2: European space innovation finance and industrial capability."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:25:56Z",
+      "deep_scan_package_id": "worker-a-20261022T150057Z-e29d686b2383",
+      "claims": [
+        {
+          "object": "finance.venture_capital",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Space Policy Institute",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2022-08",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "An August 2022 assessment and forward-looking warning, not proof of a subsequent investment collapse.",
+          "text": "The European Space Policy Institute warns that private investment in European New Space may slow despite earlier strong growth.",
+          "confidence": "high",
+          "status_date_precision": "month",
+          "record_key": "historical:id:75851b299e54ace6",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:25863d0e4312c2e6:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:2ecd9537efd7b69d": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "77c39d6f",
+      "identity_hash": "91e08cc568cec877",
+      "reader_title": "Digital-euro strategic-autonomy keynote",
+      "reader_what": "Bundesbank President Joachim Nagel argues that a digital euro would strengthen European payment autonomy.",
+      "reader_why": "Policy keynote explaining payments dependence and design.",
+      "reader_more": "Bundesbank President Joachim Nagel argues that a digital euro would strengthen European payment autonomy. Policy keynote explaining payments dependence and design. A prospective payments argument, not demonstrated R&I impacts.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "Bundesbank President Joachim Nagel argues that a digital euro would strengthen European payment autonomy.",
+        "method_or_basis": "Policy keynote explaining payments dependence and design.",
+        "qualification": "A prospective payments argument, not demonstrated R&I impacts.",
+        "radar_relevance": "A Route 1: the speech concerns strategic autonomy for retail payment systems, not research or industrial R&D. Route 2: no substantiated innovation-performance, research-capacity or technological-industrial trajectory. Route 3: a central-bank keynote is advocacy for digital payment infrastructure, not an evidence-led study of Europe’s R&I system.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected publisher/official URL https://www.bis.org/speeches/20260428-digital-euro-anchoring-europes-strategic-autonomy-digital-future.pdf; the package also carries 10459 characters of matching first-party pdf_excerpt from https://www.bis.org/speeches/20260428-digital-euro-anchoring-europes-strategic-autonomy-digital-future.pdf, independently cross-checked for identity and claims."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://www.bis.org/speeches/20260428-digital-euro-anchoring-europes-strategic-autonomy-digital-future.pdf",
+            "title": "The digital euro - anchoring Europe's strategic autonomy in a digital future | Bank for International Settlements",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://www.bis.org/speeches/20260428-digital-euro-anchoring-europes-strategic-autonomy-digital-future.pdf. 10459 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Route 1: the speech concerns strategic autonomy for retail payment systems, not research or industrial R&D. Route 2: no substantiated innovation-performance, research-capacity or technological-industrial trajectory. Route 3: a central-bank keynote is advocacy for digital payment infrastructure, not an evidence-led study of Europe’s R&I system."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:25:57Z",
+      "deep_scan_package_id": "worker-a-20261022T150057Z-e29d686b2383",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:c074c6c002b42033": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "acaacfde",
+      "identity_hash": "7452bf1b511fd265",
+      "reader_title": "EU disaster foresight identifies R&I priorities",
+      "reader_what": "JRC foresight identifies twelve disaster-resilience capabilities and twelve emerging technologies to guide EU research priorities toward 2040.",
+      "reader_why": "Technology and capability priorities can inform long-term EU disaster-resilience research allocation.",
+      "reader_more": "JRC foresight identifies twelve disaster-resilience capabilities and twelve emerging technologies to guide EU research priorities toward 2040. Literature review, horizon scanning, expert surveys, interviews and workshops triangulate potential investments. An application of established foresight methods, not a demonstrably new transferable method qualifying for Strand B.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "JRC foresight identifies twelve disaster-resilience capabilities and twelve emerging technologies to guide EU research priorities toward 2040.",
+        "method_or_basis": "Literature review, horizon scanning, expert surveys, interviews and workshops triangulate potential investments.",
+        "qualification": "An application of established foresight methods, not a demonstrably new transferable method qualifying for Strand B.",
+        "radar_relevance": "A Route 3: evidence-led EU R&I prioritisation; B fails novel-method test, so reclassify A.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected publisher/official URL https://publications.jrc.ec.europa.eu/repository/handle/JRC144571; the package also carries 2096 characters of matching first-party abstract_or_landing_page from https://publications.jrc.ec.europa.eu/repository/handle/JRC144571, independently cross-checked for identity and claims."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_institutional_primary",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC144571",
+            "title": "Strengthening European Union’s Future Disaster Resilience",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://publications.jrc.ec.europa.eu/repository/handle/JRC144571. 2096 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: evidence-led EU R&I prioritisation; B fails novel-method test, so reclassify A."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:25:57Z",
+      "deep_scan_package_id": "worker-a-20261022T150057Z-e29d686b2383",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "prioritises",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "An application of established foresight methods, not a demonstrably new transferable method qualifying for Strand B.",
+          "text": "JRC foresight identifies twelve disaster-resilience capabilities and twelve emerging technologies to guide EU research priorities toward 2040.",
+          "confidence": "medium",
+          "status_date_precision": "year",
+          "record_key": "historical:id:c074c6c002b42033",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:7452bf1b511fd265:1",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:9ba48558c609c100": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "9bf53034",
+      "identity_hash": "356b9d9d3626831a",
+      "reader_title": "Digital sovereignty in EU public governance",
+      "reader_what": "A JRC policy brief identifies digital dependencies and governance options for building more autonomous European public services.",
+      "reader_why": "External digital dependencies can limit Europe’s control over essential public technologies.",
+      "reader_more": "A JRC policy brief identifies digital dependencies and governance options for building more autonomous European public services. Policy synthesis assesses strategic dependencies, risks and institutional responses in EU public-sector technology. Recommendations and conceptual framing are not measured evidence that technology dependence has already fallen.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "A JRC policy brief identifies digital dependencies and governance options for building more autonomous European public services.",
+        "method_or_basis": "Policy synthesis assesses strategic dependencies, risks and institutional responses in EU public-sector technology.",
+        "qualification": "Recommendations and conceptual framing are not measured evidence that technology dependence has already fallen.",
+        "radar_relevance": "A Route 1: Europe’s strategic technology dependencies and autonomy; Route 2: institutional technological position.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected publisher/official URL https://publications.jrc.ec.europa.eu/repository/handle/JRC147599; the package also carries 983 characters of matching first-party abstract_or_landing_page from https://publications.jrc.ec.europa.eu/repository/handle/JRC147599, independently cross-checked for identity and claims."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_institutional_primary",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC147599",
+            "title": "Strengthening Digital Sovereignty in EU Public Governance",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://publications.jrc.ec.europa.eu/repository/handle/JRC147599. 983 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 1: Europe’s strategic technology dependencies and autonomy; Route 2: institutional technological position."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:25:58Z",
+      "deep_scan_package_id": "worker-a-20261022T150057Z-e29d686b2383",
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Recommendations and conceptual framing are not measured evidence that technology dependence has already fallen.",
+          "text": "A JRC policy brief identifies digital dependencies and governance options for building more autonomous European public services.",
+          "confidence": "medium",
+          "status_date_precision": "year",
+          "record_key": "historical:id:9ba48558c609c100",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:356b9d9d3626831a:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:0dc8f41078b4f1d1": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "74efca4d",
+      "identity_hash": "855abb094f768e3d",
+      "reader_title": "Swedish advanced therapies require coordinated innovation",
+      "reader_what": "The Royal Swedish Academy of Engineering Sciences finds that Sweden’s advanced-therapy research strength needs shared facilities, clinical integration and capital.",
+      "reader_why": "Shared clinical and industrial infrastructure can reduce barriers to translational biomedical research.",
+      "reader_more": "The Royal Swedish Academy of Engineering Sciences finds that Sweden’s advanced-therapy research strength needs shared facilities, clinical integration and capital. Sector assessment maps clinical and industrial strengths, funding barriers and international competition for gene and cell therapies. Recommendations and competitive potential, not demonstrated delivery of new clinical therapies.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "The Royal Swedish Academy of Engineering Sciences finds that Sweden’s advanced-therapy research strength needs shared facilities, clinical integration and capital.",
+        "method_or_basis": "Sector assessment maps clinical and industrial strengths, funding barriers and international competition for gene and cell therapies.",
+        "qualification": "Recommendations and competitive potential, not demonstrated delivery of new clinical therapies.",
+        "radar_relevance": "A Route 2: European biomedicine innovation, translational infrastructure and R&I capital.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected publisher/official URL https://www.iva.se/en/published/report-atmp/; the package also carries 2529 characters of matching first-party substantial_web_text from https://www.iva.se/en/published/report-atmp/, independently cross-checked for identity and claims."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_institutional_primary",
+            "url": "https://www.iva.se/en/published/report-atmp/",
+            "title": "Report: Advanced therapy medicinal products",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://www.iva.se/en/published/report-atmp/. 2529 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 2: European biomedicine innovation, translational infrastructure and R&I capital."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:25:58Z",
+      "deep_scan_package_id": "worker-a-20261022T150057Z-e29d686b2383",
+      "claims": [
+        {
+          "object": "research.knowledge_transfer",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Royal Swedish Academy of Engineering Sciences",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "SE"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "Recommendations and competitive potential, not demonstrated delivery of new clinical therapies.",
+          "text": "The Royal Swedish Academy of Engineering Sciences finds that Sweden’s advanced-therapy research strength needs shared facilities, clinical integration and capital.",
+          "confidence": "medium",
+          "status_date_precision": "year",
+          "record_key": "historical:id:0dc8f41078b4f1d1",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:855abb094f768e3d:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:b4b900e80122ec1f": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "d8aa4115",
+      "identity_hash": "ee854ae28279420d",
+      "reader_title": "Critical-material substitutions need European scale-up",
+      "reader_what": "A JRC screening finds promising alternatives for five critical materials used in electronics, but qualification and pilot capacity constrain deployment.",
+      "reader_why": "Industrial qualification and pilot facilities determine whether material alternatives are deployable.",
+      "reader_more": "A JRC screening finds promising alternatives for five critical materials used in electronics, but qualification and pilot capacity constrain deployment. 74 technology options assessed against performance, reliability, circularity, European capability and dependence shifts. Technical readiness does not equal qualified industrial substitution; alternatives may create new supply dependencies.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "A JRC screening finds promising alternatives for five critical materials used in electronics, but qualification and pilot capacity constrain deployment.",
+        "method_or_basis": "74 technology options assessed against performance, reliability, circularity, European capability and dependence shifts.",
+        "qualification": "Technical readiness does not equal qualified industrial substitution; alternatives may create new supply dependencies.",
+        "radar_relevance": "A Route 2: EU critical-material technological and industrial capability.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected publisher/official URL https://publications.jrc.ec.europa.eu/repository/handle/JRC147525; the package also carries 1593 characters of matching first-party abstract_or_landing_page from https://publications.jrc.ec.europa.eu/repository/handle/JRC147525, independently cross-checked for identity and claims."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_institutional_primary",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC147525",
+            "title": "R&I needs to reduce dependencies on critical raw materials through advanced materials in electronics",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://publications.jrc.ec.europa.eu/repository/handle/JRC147525. 1593 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 2: EU critical-material technological and industrial capability."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:25:59Z",
+      "deep_scan_package_id": "worker-a-20261022T150057Z-e29d686b2383",
+      "claims": [
+        {
+          "object": "materials.critical_raw",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Technical readiness does not equal qualified industrial substitution; alternatives may create new supply dependencies.",
+          "text": "A JRC screening finds promising alternatives for five critical materials used in electronics, but qualification and pilot capacity constrain deployment.",
+          "confidence": "medium",
+          "status_date_precision": "year",
+          "record_key": "historical:id:b4b900e80122ec1f",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:ee854ae28279420d:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:449115c52bf99d8e": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "276495a6",
+      "identity_hash": "dbacdfcd49080aad",
+      "reader_title": "Construction-material alternatives face qualification gaps",
+      "reader_what": "JRC identifies alternatives to critical raw materials in construction while stressing validation, testing and industrial integration bottlenecks.",
+      "reader_why": "European substitution capacity requires real-world verification, not just laboratory candidates.",
+      "reader_more": "JRC identifies alternatives to critical raw materials in construction while stressing validation, testing and industrial integration bottlenecks. Comparative screening of construction applications including antimony, boron and cerium against engineering requirements. Potential substitutions need performance and life-cycle verification before deployment.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "JRC identifies alternatives to critical raw materials in construction while stressing validation, testing and industrial integration bottlenecks.",
+        "method_or_basis": "Comparative screening of construction applications including antimony, boron and cerium against engineering requirements.",
+        "qualification": "Potential substitutions need performance and life-cycle verification before deployment.",
+        "radar_relevance": "A Route 2: European advanced-material innovation and critical-material supply chains.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected publisher/official URL https://publications.jrc.ec.europa.eu/repository/handle/JRC147428; the package also carries 1452 characters of matching first-party abstract_or_landing_page from https://publications.jrc.ec.europa.eu/repository/handle/JRC147428, independently cross-checked for identity and claims."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_institutional_primary",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC147428",
+            "title": "R&I needs to reduce critical raw materials through advanced materials in construction",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://publications.jrc.ec.europa.eu/repository/handle/JRC147428. 1452 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 2: European advanced-material innovation and critical-material supply chains."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:25:59Z",
+      "deep_scan_package_id": "worker-a-20261022T150057Z-e29d686b2383",
+      "claims": [
+        {
+          "object": "materials.advanced",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Potential substitutions need performance and life-cycle verification before deployment.",
+          "text": "JRC identifies alternatives to critical raw materials in construction while stressing validation, testing and industrial integration bottlenecks.",
+          "confidence": "medium",
+          "status_date_precision": "year",
+          "record_key": "historical:id:449115c52bf99d8e",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:dbacdfcd49080aad:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:b7c43a4111fd7dd6": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "d0bfe892",
+      "identity_hash": "7adc85a807f92487",
+      "reader_title": "EU clean-technology performance shows capability gaps",
+      "reader_what": "The Clean Energy Technology Observatory documents European clean-energy deployment and investment alongside persistent manufacturing and financing bottlenecks.",
+      "reader_why": "Finance and manufacturing bottlenecks affect Europe’s ability to scale clean-energy technologies.",
+      "reader_more": "The Clean Energy Technology Observatory documents European clean-energy deployment and investment alongside persistent manufacturing and financing bottlenecks. Sectoral indicators through 2024 cover renewable deployment, venture financing, supply chains and strategic technologies. Descriptive indicators cannot show that a particular policy caused observed sector changes.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "The Clean Energy Technology Observatory documents European clean-energy deployment and investment alongside persistent manufacturing and financing bottlenecks.",
+        "method_or_basis": "Sectoral indicators through 2024 cover renewable deployment, venture financing, supply chains and strategic technologies.",
+        "qualification": "Descriptive indicators cannot show that a particular policy caused observed sector changes.",
+        "radar_relevance": "A Route 2: European clean-technology innovation and industrial production trajectory.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected publisher/official URL https://publications.jrc.ec.europa.eu/repository/handle/JRC146873; the package also carries 2124 characters of matching first-party abstract_or_landing_page from https://publications.jrc.ec.europa.eu/repository/handle/JRC146873, independently cross-checked for identity and claims."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_institutional_primary",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC146873",
+            "title": "Overall Strategic Analysis of Clean Energy Technology in the European Union",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://publications.jrc.ec.europa.eu/repository/handle/JRC146873. 2124 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 2: European clean-technology innovation and industrial production trajectory."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:26:00Z",
+      "deep_scan_package_id": "worker-a-20261022T150057Z-e29d686b2383",
+      "claims": [
+        {
+          "object": "innovation.green_technology",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Descriptive indicators cannot show that a particular policy caused observed sector changes.",
+          "text": "The Clean Energy Technology Observatory documents European clean-energy deployment and investment alongside persistent manufacturing and financing bottlenecks.",
+          "confidence": "medium",
+          "status_date_precision": "year",
+          "record_key": "historical:id:b7c43a4111fd7dd6",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:7adc85a807f92487:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:a306f4fd96fe5aff": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "8b124178",
+      "identity_hash": "a04d2b72e71ccbb1",
+      "reader_title": "Ocean-observation foresight informs EU innovation support",
+      "reader_what": "A JRC technology-foresight exercise identifies promising ocean-observation technologies relevant to EU innovation prioritisation.",
+      "reader_why": "Scanning emerging technologies can help target public innovation support before widespread deployment.",
+      "reader_more": "A JRC technology-foresight exercise identifies promising ocean-observation technologies relevant to EU innovation prioritisation. FUTURINNOV horizon scanning and expert assessment link emerging sensing technologies to prospective EIC support. Prioritised technologies remain prospective; this does not demonstrate grant awards or commercial readiness.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "A JRC technology-foresight exercise identifies promising ocean-observation technologies relevant to EU innovation prioritisation.",
+        "method_or_basis": "FUTURINNOV horizon scanning and expert assessment link emerging sensing technologies to prospective EIC support.",
+        "qualification": "Prioritised technologies remain prospective; this does not demonstrate grant awards or commercial readiness.",
+        "radar_relevance": "A Route 3: evidence-led EU R&I technology priority setting; existing method application is not novel Strand B method.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected publisher/official URL https://publications.jrc.ec.europa.eu/repository/handle/JRC144401; the package also carries 2635 characters of matching first-party substantial_web_text from https://publications.jrc.ec.europa.eu/repository/handle/JRC144401, independently cross-checked for identity and claims."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_institutional_primary",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC144401",
+            "title": "Observing the Future",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://publications.jrc.ec.europa.eu/repository/handle/JRC144401. 2635 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: evidence-led EU R&I technology priority setting; existing method application is not novel Strand B method."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:26:00Z",
+      "deep_scan_package_id": "worker-a-20261022T150057Z-e29d686b2383",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "prioritises",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Prioritised technologies remain prospective; this does not demonstrate grant awards or commercial readiness.",
+          "text": "A JRC technology-foresight exercise identifies promising ocean-observation technologies relevant to EU innovation prioritisation.",
+          "confidence": "medium",
+          "status_date_precision": "year",
+          "record_key": "historical:id:a306f4fd96fe5aff",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:a04d2b72e71ccbb1:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:b75e72005b44deb2": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "c136d1c0",
+      "identity_hash": "40e10f975ca79507",
+      "reader_title": "European industrial AI offers transferable implementation lessons",
+      "reader_what": "A CEPS report prepared for UNIDO maps European industrial AI adoption cases and barriers relevant to manufacturing modernisation.",
+      "reader_why": "Case studies show where industrial skills, infrastructure and governance constrain AI uptake.",
+      "reader_more": "A CEPS report prepared for UNIDO maps European industrial AI adoption cases and barriers relevant to manufacturing modernisation. Cross-sector European case studies examine AI implementation, skills, infrastructure and organizational constraints. Case lessons describe practices and possible transfer; they do not establish measured economy-wide productivity gains.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "A CEPS report prepared for UNIDO maps European industrial AI adoption cases and barriers relevant to manufacturing modernisation.",
+        "method_or_basis": "Cross-sector European case studies examine AI implementation, skills, infrastructure and organizational constraints.",
+        "qualification": "Case lessons describe practices and possible transfer; they do not establish measured economy-wide productivity gains.",
+        "radar_relevance": "A Route 2: European industrial AI innovation capability and technology transfer.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected publisher/official URL https://cdn.ceps.eu/2026/06/EU-best-practices-in-AI.pdf; the package also carries 24000 characters of matching first-party pdf_excerpt from https://cdn.ceps.eu/2026/06/EU-best-practices-in-AI.pdf, independently cross-checked for identity and claims."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://cdn.ceps.eu/2026/06/EU-best-practices-in-AI.pdf",
+            "title": "Mapping European best practices for AI uptake in Industry – CEPS",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://cdn.ceps.eu/2026/06/EU-best-practices-in-AI.pdf. 24000 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 2: European industrial AI innovation capability and technology transfer."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:26:01Z",
+      "deep_scan_package_id": "worker-a-20261022T150057Z-e29d686b2383",
+      "claims": [
+        {
+          "object": "ai.adoption",
+          "secondary_objects": [],
+          "actor": {
+            "name": "United Nations Industrial Development Organization",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2026-05",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Case lessons describe practices and possible transfer; they do not establish measured economy-wide productivity gains.",
+          "text": "A CEPS report prepared for UNIDO maps European industrial AI adoption cases and barriers relevant to manufacturing modernisation.",
+          "confidence": "high",
+          "status_date_precision": "month",
+          "record_key": "historical:id:b75e72005b44deb2",
+          "merit": 71,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:40e10f975ca79507:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:f4fcfd879205f2db": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "392d7ba0",
+      "identity_hash": "750e2f179f2e9e3c",
+      "reader_title": "ESPI industry and workforce topic page",
+      "reader_what": "An ESPI website explains its research interests in space industry, financing, talent and innovation.",
+      "reader_why": "Static institute programme and promotional overview.",
+      "reader_more": "An ESPI website explains its research interests in space industry, financing, talent and innovation. Static institute programme and promotional overview. No specific completed analysis, research method or independently evidenced finding.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "An ESPI website explains its research interests in space industry, financing, talent and innovation.",
+        "method_or_basis": "Static institute programme and promotional overview.",
+        "qualification": "No specific completed analysis, research method or independently evidenced finding.",
+        "radar_relevance": "A Route 1: strategic space competitiveness is asserted but no underlying study or established cross-border R&I relationship is offered. Route 2: generic thematic descriptions provide no measurements of EU innovation capacity, finance or workforce change. Route 3: an ESPI subject-area landing page is not a completed evidence-led research product.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected publisher/official URL https://www.espi.eu/industry-innovation-finance-workforce/; the package also carries 3022 characters of matching first-party substantial_web_text from https://www.espi.eu/industry-innovation-finance-workforce/, independently cross-checked for identity and claims."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_institutional_primary",
+            "url": "https://www.espi.eu/industry-innovation-finance-workforce/",
+            "title": "Industry, Innovation, Finance & Workforce - ESPI",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://www.espi.eu/industry-innovation-finance-workforce/. 3022 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Route 1: strategic space competitiveness is asserted but no underlying study or established cross-border R&I relationship is offered. Route 2: generic thematic descriptions provide no measurements of EU innovation capacity, finance or workforce change. Route 3: an ESPI subject-area landing page is not a completed evidence-led research product."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:26:01Z",
+      "deep_scan_package_id": "worker-a-20261022T150057Z-e29d686b2383",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:521bbc68831c9ee4": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "cfc19c79",
+      "identity_hash": "a347434344144c68",
+      "reader_title": "US NSF Engineering Research Centers opportunity",
+      "reader_what": "The NSF lists eligibility and application arrangements for US Gen-4 Engineering Research Centers.",
+      "reader_why": "Funding opportunity requirements published by the US National Science Foundation.",
+      "reader_more": "The NSF lists eligibility and application arrangements for US Gen-4 Engineering Research Centers. Funding opportunity requirements published by the US National Science Foundation. A funding-call description, with no European R&I relationship established.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "The NSF lists eligibility and application arrangements for US Gen-4 Engineering Research Centers.",
+        "method_or_basis": "Funding opportunity requirements published by the US National Science Foundation.",
+        "qualification": "A funding-call description, with no European R&I relationship established.",
+        "radar_relevance": "A Route 1: this is a US National Science Foundation Engineering Research Centers call, not the European Research Council. Route 2: no measured European R&I trajectory or substantive EU technology bridge. Route 3: a United States domestic grant solicitation is not European R&I-system research.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected publisher/official URL https://www.nsf.gov/funding/opportunities/erc-gen-4-engineering-research-centers/505599/nsf24-576; the package also carries 2815 characters of matching first-party substantial_web_text from https://www.nsf.gov/funding/opportunities/erc-gen-4-engineering-research-centers/505599/nsf24-576, independently cross-checked for identity and claims."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_institutional_primary",
+            "url": "https://www.nsf.gov/funding/opportunities/erc-gen-4-engineering-research-centers/505599/nsf24-576",
+            "title": "Gen-4 Engineering Research Centers (ERC)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://www.nsf.gov/funding/opportunities/erc-gen-4-engineering-research-centers/505599/nsf24-576. 2815 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Route 1: this is a US National Science Foundation Engineering Research Centers call, not the European Research Council. Route 2: no measured European R&I trajectory or substantive EU technology bridge. Route 3: a United States domestic grant solicitation is not European R&I-system research."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:26:02Z",
+      "deep_scan_package_id": "worker-a-20261022T150057Z-e29d686b2383",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:93a9fb7f8fc38215": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "246a6ecb",
+      "identity_hash": "d43b55725d72c543",
+      "reader_title": "Three Seas gas infrastructure policy critique",
+      "reader_what": "ECFR argues that some Three Seas Initiative energy projects retain a gas focus inconsistent with clean-transition aims.",
+      "reader_why": "Policy commentary reviews regional interconnector project choices.",
+      "reader_more": "ECFR argues that some Three Seas Initiative energy projects retain a gas focus inconsistent with clean-transition aims. Policy commentary reviews regional interconnector project choices. Concerned with gas infrastructure investment, not research, innovation systems or technological industrial capability.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "ECFR argues that some Three Seas Initiative energy projects retain a gas focus inconsistent with clean-transition aims.",
+        "method_or_basis": "Policy commentary reviews regional interconnector project choices.",
+        "qualification": "Concerned with gas infrastructure investment, not research, innovation systems or technological industrial capability.",
+        "radar_relevance": "A Route 1: European gas-market security is discussed, but no evidence about research or technological innovation dependencies. Route 2: planned gas infrastructure is not EU R&I capacity or technology performance. Route 3: an energy-infrastructure opinion article is not an evidence-led analysis of Europe’s R&I system.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected publisher/official URL https://ecfr.eu/article/gas-lit-the-three-seas-initiative-is-out-of-step-with-a-clean-energy-future/; the package also carries 6288 characters of matching first-party substantial_web_text from https://ecfr.eu/article/gas-lit-the-three-seas-initiative-is-out-of-step-with-a-clean-energy-future/, independently cross-checked for identity and claims."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_institutional_primary",
+            "url": "https://ecfr.eu/article/gas-lit-the-three-seas-initiative-is-out-of-step-with-a-clean-energy-future/",
+            "title": "Gas-lit: The Three Seas Initiative is out of step with a clean-energy future – European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://ecfr.eu/article/gas-lit-the-three-seas-initiative-is-out-of-step-with-a-clean-energy-future/. 6288 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Route 1: European gas-market security is discussed, but no evidence about research or technological innovation dependencies. Route 2: planned gas infrastructure is not EU R&I capacity or technology performance. Route 3: an energy-infrastructure opinion article is not an evidence-led analysis of Europe’s R&I system."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:26:02Z",
+      "deep_scan_package_id": "worker-a-20261022T150057Z-e29d686b2383",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:9388940a33c925e3": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "c6895ab2",
+      "identity_hash": "368220491cafb4be",
+      "reader_title": "JRC outlines Europe’s technology-dependency risks",
+      "reader_what": "A JRC brief describes scientific inputs to an EU technological-sovereignty package and vulnerabilities in the digital technology ecosystem.",
+      "reader_why": "Dependence on external digital technology suppliers can constrain Europe’s strategic choices.",
+      "reader_more": "A JRC brief describes scientific inputs to an EU technological-sovereignty package and vulnerabilities in the digital technology ecosystem. JRC policy synthesis draws on research concerning technological dependencies and options for EU resilience. A policy-facing synthesis, not independent proof that the proposed package has reduced vulnerabilities.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "A JRC brief describes scientific inputs to an EU technological-sovereignty package and vulnerabilities in the digital technology ecosystem.",
+        "method_or_basis": "JRC policy synthesis draws on research concerning technological dependencies and options for EU resilience.",
+        "qualification": "A policy-facing synthesis, not independent proof that the proposed package has reduced vulnerabilities.",
+        "radar_relevance": "A Route 1: Europe’s international digital-technology dependencies and strategic research evidence.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied official source https://publications.jrc.ec.europa.eu/repository/handle/JRC147104 was inspected for the claimed document."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_institutional_primary",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC147104",
+            "title": "From dependency to resilience",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://publications.jrc.ec.europa.eu/repository/handle/JRC147104. 635 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 1: Europe’s international digital-technology dependencies and strategic research evidence."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:26:03Z",
+      "deep_scan_package_id": "worker-a-20261022T150057Z-e29d686b2383",
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "A policy-facing synthesis, not independent proof that the proposed package has reduced vulnerabilities.",
+          "text": "A JRC brief describes scientific inputs to an EU technological-sovereignty package and vulnerabilities in the digital technology ecosystem.",
+          "confidence": "medium",
+          "status_date_precision": "year",
+          "record_key": "historical:id:9388940a33c925e3",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:368220491cafb4be:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:10d9732d90fda01c": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "571d66ea",
+      "identity_hash": "aa79efc6663a28b6",
+      "reader_title": "EU hydrogen competitiveness faces scale-up barriers",
+      "reader_what": "A Clean Hydrogen Partnership study identifies cost, bankability and industrial deployment barriers to European hydrogen competitiveness.",
+      "reader_why": "Commercial bankability and production costs condition whether hydrogen innovations can reach industrial scale.",
+      "reader_more": "A Clean Hydrogen Partnership study identifies cost, bankability and industrial deployment barriers to European hydrogen competitiveness. ERM competitiveness study reviews hydrogen innovation themes, value chains and market-enabling conditions. Identified innovation opportunities and prospective costs are not proof of realised competitive deployment.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "A Clean Hydrogen Partnership study identifies cost, bankability and industrial deployment barriers to European hydrogen competitiveness.",
+        "method_or_basis": "ERM competitiveness study reviews hydrogen innovation themes, value chains and market-enabling conditions.",
+        "qualification": "Identified innovation opportunities and prospective costs are not proof of realised competitive deployment.",
+        "radar_relevance": "A Route 2: European hydrogen R&I investment and industrial technological capability.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected publisher/official URL https://www.clean-hydrogen.europa.eu/document/download/4b916055-fab5-4d27-a9ab-aba8c1fc94a8_en?filename=European%20hydrogen%20competitiveness%20-%20PublicReport.pdf; the package also carries 15122 characters of matching first-party pdf_excerpt from https://www.clean-hydrogen.europa.eu/document/download/4b916055-fab5-4d27-a9ab-aba8c1fc94a8_en?filename=European%20hydrogen%20competitiveness%20-%20PublicReport.pdf, independently cross-checked for identity and claims."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://www.clean-hydrogen.europa.eu/document/download/4b916055-fab5-4d27-a9ab-aba8c1fc94a8_en?filename=European%20hydrogen%20competitiveness%20-%20PublicReport.pdf",
+            "title": "Final Report of the Study on “European Hydrogen Competitiveness and the Role of Innovation”",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://www.clean-hydrogen.europa.eu/document/download/4b916055-fab5-4d27-a9ab-aba8c1fc94a8_en?filename=European%20hydrogen%20competitiveness%20-%20PublicReport.pdf. 15122 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 2: European hydrogen R&I investment and industrial technological capability."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:26:03Z",
+      "deep_scan_package_id": "worker-b-20261022T150102Z-0d6dc40f18eb",
+      "claims": [
+        {
+          "object": "industrial.competitiveness",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Clean Hydrogen Partnership",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2026-07-03",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Identified innovation opportunities and prospective costs are not proof of realised competitive deployment.",
+          "text": "A Clean Hydrogen Partnership study identifies cost, bankability and industrial deployment barriers to European hydrogen competitiveness.",
+          "confidence": "high",
+          "record_key": "historical:id:10d9732d90fda01c",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:aa79efc6663a28b6:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:79ac10726e4a9896": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "78c97573",
+      "identity_hash": "b403df83208e2f58",
+      "reader_title": "JRC nuclear-materials laboratory access call",
+      "reader_what": "The JRC describes its Karlsruhe actinide facility, access conditions and available laboratory operating days.",
+      "reader_why": "Official research-infrastructure call, equipment list and user-access conditions.",
+      "reader_more": "The JRC describes its Karlsruhe actinide facility, access conditions and available laboratory operating days. Official research-infrastructure call, equipment list and user-access conditions. This establishes a facility opportunity, not a completed evidence-led research-system finding.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "The JRC describes its Karlsruhe actinide facility, access conditions and available laboratory operating days.",
+        "method_or_basis": "Official research-infrastructure call, equipment list and user-access conditions.",
+        "qualification": "This establishes a facility opportunity, not a completed evidence-led research-system finding.",
+        "radar_relevance": "A Route 1: no demonstrated geopolitical R&I linkage beyond a facility description. Route 2: an available nuclear-materials laboratory is described, but no evaluated Europe-wide capacity or performance trajectory. Route 3: the 2026 ActUsLab FMR opportunity is a laboratory access listing, specifically excluded as mere programme information; it is not a completed analytical R&I-system report.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected publisher/official URL https://joint-research-centre.ec.europa.eu/calls-proposals/fmr-fuels-and-materials-research-actuslab-2026-1-rd-actuslab-fmr_en; the package also carries 9444 characters of matching first-party substantial_web_text from https://joint-research-centre.ec.europa.eu/calls-proposals/fmr-fuels-and-materials-research-actuslab-2026-1-rd-actuslab-fmr_en, independently cross-checked for identity and claims."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_institutional_primary",
+            "url": "https://joint-research-centre.ec.europa.eu/calls-proposals/fmr-fuels-and-materials-research-actuslab-2026-1-rd-actuslab-fmr_en",
+            "title": "FMR, Fuels and Materials Research (ActUsLab) 2026-1-RD-ActUsLab-FMR",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://joint-research-centre.ec.europa.eu/calls-proposals/fmr-fuels-and-materials-research-actuslab-2026-1-rd-actuslab-fmr_en. 9444 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Route 1: no demonstrated geopolitical R&I linkage beyond a facility description. Route 2: an available nuclear-materials laboratory is described, but no evaluated Europe-wide capacity or performance trajectory. Route 3: the 2026 ActUsLab FMR opportunity is a laboratory access listing, specifically excluded as mere programme information; it is not a completed analytical R&I-system report."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:26:04Z",
+      "deep_scan_package_id": "worker-b-20261022T150102Z-0d6dc40f18eb",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:db0b87a794fd1871": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "4ec834b6",
+      "identity_hash": "c8fc509cda36afc4",
+      "reader_title": "EU and Chinese approaches to educational AI governance",
+      "reader_what": "Martin Woesler compares EU AI Act constraints on educational AI applications with China’s sectoral approach.",
+      "reader_why": "Comparative legal and higher-education governance analysis drawing on education-technology surveys.",
+      "reader_more": "Martin Woesler compares EU AI Act constraints on educational AI applications with China’s sectoral approach. Comparative legal and higher-education governance analysis drawing on education-technology surveys. Author-hosted non-English translations are AI-generated; source concerns teaching uses and ethics rather than research-system outcomes.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "Martin Woesler compares EU AI Act constraints on educational AI applications with China’s sectoral approach.",
+        "method_or_basis": "Comparative legal and higher-education governance analysis drawing on education-technology surveys.",
+        "qualification": "Author-hosted non-English translations are AI-generated; source concerns teaching uses and ethics rather than research-system outcomes.",
+        "radar_relevance": "A Route 1: EU–China AI regulatory comparison is confined to educational tools and institutional education ethics. Route 2: the chapter does not measure European R&I capacity, finance, talent or knowledge transfer. Route 3: its surveyed practices concern higher-education teaching and student assessment, not research governance or European R&I-system performance.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied record link https://doi.org/10.12906/9783865154392_001 yielded only abstract_or_landing_page; substantive primary work required separate source recovery."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered and read matching substantive first-party work at https://sciencenet.eu/9783865154392/?chapter=1&lang=es; work title, organisation, content and year were checked."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://sciencenet.eu/9783865154392/?chapter=1&lang=es",
+            "title": "Ethical Frameworks for AI in Higher Education: Between European Regulation and Chinese Innovation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://sciencenet.eu/9783865154392/?chapter=1&lang=es. 733 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Route 1: EU–China AI regulatory comparison is confined to educational tools and institutional education ethics. Route 2: the chapter does not measure European R&I capacity, finance, talent or knowledge transfer. Route 3: its surveyed practices concern higher-education teaching and student assessment, not research governance or European R&I-system performance."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:26:04Z",
+      "deep_scan_package_id": "worker-b-20261022T150102Z-0d6dc40f18eb",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:7430f92885685c0b": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "4ad3d570",
+      "identity_hash": "c1032370945699a4",
+      "reader_title": "Slovenian ERA conference recommends institutional reform",
+      "reader_what": "A 2021 Slovenian Presidency conference report recommends better cross-border research-infrastructure funding, career structures and open science coordination.",
+      "reader_why": "Transnational coordination shapes research-infrastructure access, careers and open-science conditions.",
+      "reader_more": "A 2021 Slovenian Presidency conference report recommends better cross-border research-infrastructure funding, career structures and open science coordination. Thirty-six-page official report collates stakeholder deliberations and recommendations across four thematic ERA sessions. Recommendations from stakeholder consultation do not establish that institutional reforms were implemented.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "A 2021 Slovenian Presidency conference report recommends better cross-border research-infrastructure funding, career structures and open science coordination.",
+        "method_or_basis": "Thirty-six-page official report collates stakeholder deliberations and recommendations across four thematic ERA sessions.",
+        "qualification": "Recommendations from stakeholder consultation do not establish that institutional reforms were implemented.",
+        "radar_relevance": "A Route 3: substantive report directly addressing European Research Area funding, infrastructure and careers.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied record link https://era.gv.at/era/era-2000-2021/future-of-era/slovenian-presidency-conference-new-european-research-area-report-and-recommendations/ yielded only abstract_or_landing_page; substantive primary work required separate source recovery."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered and read matching substantive first-party work at https://www.gov.si/assets/ministrstva/MIZS/Dokumenti/ZNANOST/Predsedovanje/6.-newERA-Porocilo-210x260mm-Interactive.pdf; work title, organisation, content and year were checked."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Original matching first-party source excerpt (1887 characters) from https://era.gv.at/era/era-2000-2021/future-of-era/slovenian-presidency-conference-new-european-research-area-report-and-recommendations/ also cross-checked against recovered work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://www.gov.si/assets/ministrstva/MIZS/Dokumenti/ZNANOST/Predsedovanje/6.-newERA-Porocilo-210x260mm-Interactive.pdf",
+            "title": "ERA Portal Austria – Slovenian Presidency Conference “New European Research Area\" - Report and recommendations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://www.gov.si/assets/ministrstva/MIZS/Dokumenti/ZNANOST/Predsedovanje/6.-newERA-Porocilo-210x260mm-Interactive.pdf. 1887 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: substantive report directly addressing European Research Area funding, infrastructure and careers."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:26:05Z",
+      "deep_scan_package_id": "worker-b-20261022T150102Z-0d6dc40f18eb",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Slovenian Presidency of the Council of the EU",
+            "class": "other"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2021",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "Recommendations from stakeholder consultation do not establish that institutional reforms were implemented.",
+          "text": "A 2021 Slovenian Presidency conference report recommends better cross-border research-infrastructure funding, career structures and open science coordination.",
+          "confidence": "medium",
+          "status_date_precision": "year",
+          "record_key": "historical:id:7430f92885685c0b",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:c1032370945699a4:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:0b1ddd9d4712b596": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "da2a2b4c",
+      "identity_hash": "ee7d6ededd587291",
+      "reader_title": "Science Europe proposes common research-career standards",
+      "reader_what": "Science Europe recommends minimum standards for pay, job security, career pathways and professional support across European research organisations.",
+      "reader_why": "Employment security and career progression affect Europe’s capacity to retain researchers.",
+      "reader_more": "Science Europe recommends minimum standards for pay, job security, career pathways and professional support across European research organisations. An authored 2026 position document develops research-career recommendations and surveys good-practice examples. Advocacy by research organisations; standards are recommendations, not binding EU-wide employment law.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "Science Europe recommends minimum standards for pay, job security, career pathways and professional support across European research organisations.",
+        "method_or_basis": "An authored 2026 position document develops research-career recommendations and surveys good-practice examples.",
+        "qualification": "Advocacy by research organisations; standards are recommendations, not binding EU-wide employment law.",
+        "radar_relevance": "A Route 3: original research-profession governance recommendations and evidence on research careers.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied record link https://era.gv.at/news-items/science-europe-calls-for-stronger-minimum-standards-to-improve-research-careers-across-europe/ yielded only abstract_or_landing_page; substantive primary work required separate source recovery."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered and read matching substantive first-party work at https://www.scienceeurope.org/our-resources/minimum-standards-research-careers/; work title, organisation, content and year were checked."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Original matching first-party source excerpt (1733 characters) from https://era.gv.at/news-items/science-europe-calls-for-stronger-minimum-standards-to-improve-research-careers-across-europe/ also cross-checked against recovered work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.scienceeurope.org/our-resources/minimum-standards-research-careers/",
+            "title": "ERA Portal Austria – Science Europe calls for stronger minimum standards to improve research careers across Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://www.scienceeurope.org/our-resources/minimum-standards-research-careers/. 1733 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: original research-profession governance recommendations and evidence on research careers."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:26:05Z",
+      "deep_scan_package_id": "worker-b-20261022T150102Z-0d6dc40f18eb",
+      "claims": [
+        {
+          "object": "talent.career_structure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Science Europe",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-05-08",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "Advocacy by research organisations; standards are recommendations, not binding EU-wide employment law.",
+          "text": "Science Europe recommends minimum standards for pay, job security, career pathways and professional support across European research organisations.",
+          "confidence": "medium",
+          "record_key": "historical:id:0b1ddd9d4712b596",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:ee7d6ededd587291:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:185814c1da1ddaf3": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "9487ed0e",
+      "identity_hash": "786b1021101e411b",
+      "reader_title": "ERA research-security action coordinates safeguards",
+      "reader_what": "ERA Action 15 plans joint national and EU research-security guidance, monitoring and peer learning while protecting scientific openness.",
+      "reader_why": "Coordinated safeguards help research organisations manage cross-border risks while preserving openness.",
+      "reader_more": "ERA Action 15 plans joint national and EU research-security guidance, monitoring and peer learning while protecting scientific openness. Official ERA Policy Agenda 2025–2027 action specifications for international collaboration and institutional risk management. Planned outputs, including a possible centre of expertise, must not be treated as already operational.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "ERA Action 15 plans joint national and EU research-security guidance, monitoring and peer learning while protecting scientific openness.",
+        "method_or_basis": "Official ERA Policy Agenda 2025–2027 action specifications for international collaboration and institutional risk management.",
+        "qualification": "Planned outputs, including a possible centre of expertise, must not be treated as already operational.",
+        "radar_relevance": "A Route 3: formal European research-security governance and collaboration framework.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected publisher/official URL https://era.gv.at/era/era-policy-agenda/ongoing-era-actions/research-security/; the package also carries 4212 characters of matching first-party substantial_web_text from https://era.gv.at/era/era-policy-agenda/ongoing-era-actions/research-security/, independently cross-checked for identity and claims."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_source_page",
+            "url": "https://era.gv.at/era/era-policy-agenda/ongoing-era-actions/research-security/",
+            "title": "ERA Portal Austria – Research Security",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://era.gv.at/era/era-policy-agenda/ongoing-era-actions/research-security/. 4212 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: formal European research-security governance and collaboration framework."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:26:06Z",
+      "deep_scan_package_id": "worker-b-20261022T150102Z-0d6dc40f18eb",
+      "claims": [
+        {
+          "object": "research_security.self_assessment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Research Area",
+            "class": "eu_body"
+          },
+          "mechanism": "coordinates",
+          "direction": "expands",
+          "status": "adopted",
+          "status_date": "2025",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Planned outputs, including a possible centre of expertise, must not be treated as already operational.",
+          "text": "ERA Action 15 plans joint national and EU research-security guidance, monitoring and peer learning while protecting scientific openness.",
+          "confidence": "high",
+          "status_date_precision": "year",
+          "record_key": "historical:id:185814c1da1ddaf3",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:786b1021101e411b:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:3984604ee7b7a7c9": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "f548f442",
+      "identity_hash": "29db9ad578fc622c",
+      "reader_title": "EU ministers adopt a science-diplomacy framework",
+      "reader_what": "Research ministers adopted a nonbinding EU science-diplomacy recommendation while debating the design of the 2028–2034 Horizon programme.",
+      "reader_why": "Science diplomacy coordinates national research priorities and international technological cooperation.",
+      "reader_more": "Research ministers adopted a nonbinding EU science-diplomacy recommendation while debating the design of the 2028–2034 Horizon programme. Official Competitiveness Council meeting report distinguishes a completed recommendation from unresolved Horizon budget and widening issues. The science-diplomacy recommendation is nonbinding; future Horizon funding arrangements were not agreed.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "Research ministers adopted a nonbinding EU science-diplomacy recommendation while debating the design of the 2028–2034 Horizon programme.",
+        "method_or_basis": "Official Competitiveness Council meeting report distinguishes a completed recommendation from unresolved Horizon budget and widening issues.",
+        "qualification": "The science-diplomacy recommendation is nonbinding; future Horizon funding arrangements were not agreed.",
+        "radar_relevance": "A Route 3: formal EU R&I governance and international science cooperation.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected publisher/official URL https://era.gv.at/news-items/research-ministers-discuss-key-elements-of-future-horizon-europe-package-and-adopt-eu-framework-for-science-diplomacy/; the package also carries 3792 characters of matching first-party substantial_web_text from https://era.gv.at/news-items/research-ministers-discuss-key-elements-of-future-horizon-europe-package-and-adopt-eu-framework-for-science-diplomacy/, independently cross-checked for identity and claims."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_source_page",
+            "url": "https://era.gv.at/news-items/research-ministers-discuss-key-elements-of-future-horizon-europe-package-and-adopt-eu-framework-for-science-diplomacy/",
+            "title": "ERA Portal Austria – Research Ministers discuss key elements of future Horizon Europe package and adopt EU framework for science diplomacy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://era.gv.at/news-items/research-ministers-discuss-key-elements-of-future-horizon-europe-package-and-adopt-eu-framework-for-science-diplomacy/. 3792 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: formal EU R&I governance and international science cooperation."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:26:06Z",
+      "deep_scan_package_id": "worker-b-20261022T150102Z-0d6dc40f18eb",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Council of the European Union",
+            "class": "eu_body"
+          },
+          "mechanism": "adopts",
+          "direction": "expands",
+          "status": "adopted",
+          "status_date": "2026",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The science-diplomacy recommendation is nonbinding; future Horizon funding arrangements were not agreed.",
+          "text": "Research ministers adopted a nonbinding EU science-diplomacy recommendation while debating the design of the 2028–2034 Horizon programme.",
+          "confidence": "high",
+          "status_date_precision": "year",
+          "record_key": "historical:id:3984604ee7b7a7c9",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:29db9ad578fc622c:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:5d17b716789ab12c": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "8153f66b",
+      "identity_hash": "012a693347a6f2bb",
+      "reader_title": "European research equality plans face implementation gaps",
+      "reader_what": "GENDERACTIONplus finds inconsistent monitoring and incomplete integration of intersectionality in European research equality plans and funding.",
+      "reader_why": "Inconsistent evaluation makes it difficult to assess inclusive research policies across funding bodies.",
+      "reader_more": "GENDERACTIONplus finds inconsistent monitoring and incomplete integration of intersectionality in European research equality plans and funding. Position paper consolidates project benchmarking, funding-organisation policies and proposals for measuring inclusive institutional change. Policy recommendations and benchmark findings do not establish that proposed measures were later adopted.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "GENDERACTIONplus finds inconsistent monitoring and incomplete integration of intersectionality in European research equality plans and funding.",
+        "method_or_basis": "Position paper consolidates project benchmarking, funding-organisation policies and proposals for measuring inclusive institutional change.",
+        "qualification": "Policy recommendations and benchmark findings do not establish that proposed measures were later adopted.",
+        "radar_relevance": "A Route 3: European research-funder governance, eligibility and equality-plan monitoring.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied record link https://era.gv.at/era/era-policy-agenda/ongoing-era-actions/gender-equality-inclusiveness/genderactionplus-position-paper-on-the-future-of-gender-equality-in-the-european-research-area/ yielded only abstract_or_landing_page; substantive primary work required separate source recovery."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered and read matching substantive first-party work at https://genderaction.eu/wp-content/uploads/2024/01/GenderAction_Position-paper_ERA-of-Inclusive-Gender-Eq_2024_A5_dvoustrany.pdf; work title, organisation, content and year were checked."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Original matching first-party source excerpt (2365 characters) from https://era.gv.at/era/era-policy-agenda/ongoing-era-actions/gender-equality-inclusiveness/genderactionplus-position-paper-on-the-future-of-gender-equality-in-the-european-research-area/ also cross-checked against recovered work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://genderaction.eu/wp-content/uploads/2024/01/GenderAction_Position-paper_ERA-of-Inclusive-Gender-Eq_2024_A5_dvoustrany.pdf",
+            "title": "ERA Portal Austria – GENDERACTIONplus policy briefs and Position Papers",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://genderaction.eu/wp-content/uploads/2024/01/GenderAction_Position-paper_ERA-of-Inclusive-Gender-Eq_2024_A5_dvoustrany.pdf. 2365 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: European research-funder governance, eligibility and equality-plan monitoring."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:26:07Z",
+      "deep_scan_package_id": "worker-b-20261022T150102Z-0d6dc40f18eb",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "GENDERACTIONplus consortium",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2024-01-29",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Policy recommendations and benchmark findings do not establish that proposed measures were later adopted.",
+          "text": "GENDERACTIONplus finds inconsistent monitoring and incomplete integration of intersectionality in European research equality plans and funding.",
+          "confidence": "medium",
+          "record_key": "historical:id:5d17b716789ab12c",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:012a693347a6f2bb:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:5aa6f9b6def3d1b9": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "13195655",
+      "identity_hash": "3c7be76a6bb38d46",
+      "reader_title": "First ERA Policy Agenda defines voluntary joint actions",
+      "reader_what": "The European Research Area Policy Agenda established voluntary cross-border research-policy actions for 2022–2024.",
+      "reader_why": "Joint ERA actions establish the framework for coordinating reforms across member states.",
+      "reader_more": "The European Research Area Policy Agenda established voluntary cross-border research-policy actions for 2022–2024. The original ERA governance agenda lists coordinated implementation measures following the Council Pact for R&I. The agenda records planned coordination, not evidence that every voluntary action was completed.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "The European Research Area Policy Agenda established voluntary cross-border research-policy actions for 2022–2024.",
+        "method_or_basis": "The original ERA governance agenda lists coordinated implementation measures following the Council Pact for R&I.",
+        "qualification": "The agenda records planned coordination, not evidence that every voluntary action was completed.",
+        "radar_relevance": "A Route 3: authoritative European R&I-system governance policy instrument.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied record link https://era.gv.at/era/era-2000-2021/future-of-era/european-research-area-policy-agenda/ yielded only abstract_or_landing_page; substantive primary work required separate source recovery."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered and read matching substantive first-party work at https://commission.europa.eu/system/files/2021-11/ec_rtd_era-policy-agenda-2021.pdf; work title, organisation, content and year were checked."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Original matching first-party source excerpt (2065 characters) from https://era.gv.at/era/era-2000-2021/future-of-era/european-research-area-policy-agenda/ also cross-checked against recovered work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://commission.europa.eu/system/files/2021-11/ec_rtd_era-policy-agenda-2021.pdf",
+            "title": "ERA Portal Austria – European Research Area Policy Agenda",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://commission.europa.eu/system/files/2021-11/ec_rtd_era-policy-agenda-2021.pdf. 2065 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: authoritative European R&I-system governance policy instrument."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:26:07Z",
+      "deep_scan_package_id": "worker-b-20261022T150102Z-0d6dc40f18eb",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Council of the European Union",
+            "class": "eu_body"
+          },
+          "mechanism": "adopts",
+          "direction": "expands",
+          "status": "adopted",
+          "status_date": "2021-11-26",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The agenda records planned coordination, not evidence that every voluntary action was completed.",
+          "text": "The European Research Area Policy Agenda established voluntary cross-border research-policy actions for 2022–2024.",
+          "confidence": "medium",
+          "record_key": "historical:id:5aa6f9b6def3d1b9",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:3c7be76a6bb38d46:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:683308770edc3feb": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "c644de83",
+      "identity_hash": "88b15882447f3bdf",
+      "reader_title": "ERA Forum tracks legislative and research-governance plans",
+      "reader_what": "An ERA Forum account distinguishes proposed ERA Act, delayed next policy-agenda planning and ongoing work on AI research guidance.",
+      "reader_why": "Proposed research legislation and AI guidance would affect European research institutions and funders.",
+      "reader_more": "An ERA Forum account distinguishes proposed ERA Act, delayed next policy-agenda planning and ongoing work on AI research guidance. Original 2026 account of intergovernmental ERA governance coordination, working groups and implementation timelines. Draft legislation, planned research AI guidelines and future funding agendas are not enacted measures.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "An ERA Forum account distinguishes proposed ERA Act, delayed next policy-agenda planning and ongoing work on AI research guidance.",
+        "method_or_basis": "Original 2026 account of intergovernmental ERA governance coordination, working groups and implementation timelines.",
+        "qualification": "Draft legislation, planned research AI guidelines and future funding agendas are not enacted measures.",
+        "radar_relevance": "A Route 3: documented European R&I governance priorities and implementation mechanisms.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected publisher/official URL https://era.gv.at/news-items/era-forum-focuses-on-era-act-talent-attraction-and-era-policy-agenda-implementation/; the package also carries 5842 characters of matching first-party substantial_web_text from https://era.gv.at/news-items/era-forum-focuses-on-era-act-talent-attraction-and-era-policy-agenda-implementation/, independently cross-checked for identity and claims."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_source_page",
+            "url": "https://era.gv.at/news-items/era-forum-focuses-on-era-act-talent-attraction-and-era-policy-agenda-implementation/",
+            "title": "ERA Portal Austria – ERA Forum focuses on ERA Act, talent attraction and ERA Policy Agenda implementation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://era.gv.at/news-items/era-forum-focuses-on-era-act-talent-attraction-and-era-policy-agenda-implementation/. 5842 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: documented European R&I governance priorities and implementation mechanisms."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:26:08Z",
+      "deep_scan_package_id": "worker-b-20261022T150102Z-0d6dc40f18eb",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Research Area Forum",
+            "class": "eu_body"
+          },
+          "mechanism": "coordinates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Draft legislation, planned research AI guidelines and future funding agendas are not enacted measures.",
+          "text": "An ERA Forum account distinguishes proposed ERA Act, delayed next policy-agenda planning and ongoing work on AI research guidance.",
+          "confidence": "high",
+          "status_date_precision": "year",
+          "record_key": "historical:id:683308770edc3feb",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:88b15882447f3bdf:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:9f9bb8666f5173bd": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "22e3b55a",
+      "identity_hash": "d0736ff78d259681",
+      "reader_title": "Council formally endorsed a renewed European Research Area",
+      "reader_what": "The Council’s 1 December 2020 conclusions call for a joint ERA policy agenda and coordinated research reforms across member states.",
+      "reader_why": "The Council conclusions shape research governance and subsequent joint ERA policy actions.",
+      "reader_more": "The Council’s 1 December 2020 conclusions call for a joint ERA policy agenda and coordinated research reforms across member states. Twenty-two-page primary Council conclusions define research careers, investment, openness, R&I coordination and implementation priorities. Council conclusions are a political policy position and calls for follow-up, not a directly binding regulation.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "The Council’s 1 December 2020 conclusions call for a joint ERA policy agenda and coordinated research reforms across member states.",
+        "method_or_basis": "Twenty-two-page primary Council conclusions define research careers, investment, openness, R&I coordination and implementation priorities.",
+        "qualification": "Council conclusions are a political policy position and calls for follow-up, not a directly binding regulation.",
+        "radar_relevance": "A Route 3: authoritative EU research-governance primary instrument and system priorities.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied record link https://era.gv.at/era/era-2000-2021/future-of-era/council-conclusions-on-the-new-european-research-area-1-dec-2020/ yielded only abstract_or_landing_page; substantive primary work required separate source recovery."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered and read matching substantive first-party work at https://data.consilium.europa.eu/doc/document/ST-13567-2020-INIT/en/pdf; work title, organisation, content and year were checked."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Original matching first-party source excerpt (1766 characters) from https://era.gv.at/era/era-2000-2021/future-of-era/council-conclusions-on-the-new-european-research-area-1-dec-2020/ also cross-checked against recovered work."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://data.consilium.europa.eu/doc/document/ST-13567-2020-INIT/en/pdf",
+            "title": "Council conclusions on the New European Research Area",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://data.consilium.europa.eu/doc/document/ST-13567-2020-INIT/en/pdf. 1766 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: authoritative EU research-governance primary instrument and system priorities."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:26:08Z",
+      "deep_scan_package_id": "worker-b-20261022T150102Z-0d6dc40f18eb",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Council of the European Union",
+            "class": "eu_body"
+          },
+          "mechanism": "adopts",
+          "direction": "expands",
+          "status": "adopted",
+          "status_date": "2020-12-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Council conclusions are a political policy position and calls for follow-up, not a directly binding regulation.",
+          "text": "The Council’s 1 December 2020 conclusions call for a joint ERA policy agenda and coordinated research reforms across member states.",
+          "confidence": "medium",
+          "record_key": "historical:id:9f9bb8666f5173bd",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:d0736ff78d259681:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:53ec81ae66147522": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "8e4697ff",
+      "identity_hash": "4d726a686b233f9e",
+      "reader_title": "EU research-talent dialogue informs pending measures",
+      "reader_what": "A July 2026 dialogue reviewed European researcher attraction and retention measures and the planned ERA Talent Platform.",
+      "reader_why": "Research-career funding and institutional conditions influence Europe’s attraction and retention of scientific talent.",
+      "reader_more": "A July 2026 dialogue reviewed European researcher attraction and retention measures and the planned ERA Talent Platform. Commission-reported consultation with roughly thirty research stakeholders and a summary of existing funding initiatives. Feedback is intended to inform proposals; the meeting did not itself adopt new careers legislation.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "A July 2026 dialogue reviewed European researcher attraction and retention measures and the planned ERA Talent Platform.",
+        "method_or_basis": "Commission-reported consultation with roughly thirty research stakeholders and a summary of existing funding initiatives.",
+        "qualification": "Feedback is intended to inform proposals; the meeting did not itself adopt new careers legislation.",
+        "radar_relevance": "A Route 3: European research-career policy coordination and funding mechanisms.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected publisher/official URL https://era.gv.at/news-items/commissioner-zaharieva-leads-dialogue-on-how-to-attract-and-retain-research-talent-in-europe/; the package also carries 1764 characters of matching first-party abstract_or_landing_page from https://era.gv.at/news-items/commissioner-zaharieva-leads-dialogue-on-how-to-attract-and-retain-research-talent-in-europe/, independently cross-checked for identity and claims."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_source_page",
+            "url": "https://era.gv.at/news-items/commissioner-zaharieva-leads-dialogue-on-how-to-attract-and-retain-research-talent-in-europe/",
+            "title": "ERA Portal Austria – Commissioner Zaharieva leads dialogue on how to attract and retain research talent in Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://era.gv.at/news-items/commissioner-zaharieva-leads-dialogue-on-how-to-attract-and-retain-research-talent-in-europe/. 1764 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: European research-career policy coordination and funding mechanisms."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:26:09Z",
+      "deep_scan_package_id": "worker-b-20261022T150102Z-0d6dc40f18eb",
+      "claims": [
+        {
+          "object": "talent.retention",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "coordinates",
+          "direction": "expands",
+          "status": "operating",
+          "status_date": "2026-07-10",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Feedback is intended to inform proposals; the meeting did not itself adopt new careers legislation.",
+          "text": "A July 2026 dialogue reviewed European researcher attraction and retention measures and the planned ERA Talent Platform.",
+          "confidence": "medium",
+          "record_key": "historical:id:53ec81ae66147522",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:4d726a686b233f9e:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:bd3640327b5b1db5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "6e8b300d",
+      "identity_hash": "350975f02b899bfb",
+      "reader_title": "Commission diagnosis underpins the new European Research Area",
+      "reader_what": "A September 2020 Commission staff document analyses fragmentation and uneven performance in European research and innovation systems.",
+      "reader_why": "Diagnosed research-system fragmentation motivates coordination and funding-policy reform.",
+      "reader_more": "A September 2020 Commission staff document analyses fragmentation and uneven performance in European research and innovation systems. Commission staff working document accompanying COM(2020)628 analyses ERA priorities and research-policy reform. The staff assessment provides historical policy evidence, not proof that recommended reforms were delivered.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "A September 2020 Commission staff document analyses fragmentation and uneven performance in European research and innovation systems.",
+        "method_or_basis": "Commission staff working document accompanying COM(2020)628 analyses ERA priorities and research-policy reform.",
+        "qualification": "The staff assessment provides historical policy evidence, not proof that recommended reforms were delivered.",
+        "radar_relevance": "A Route 3: primary completed evidence review concerning EU R&I-system design and research governance.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied record link https://era.gv.at/public/documents/4336/ERA_Comm_Staff_WD.pdf yielded only pdf_excerpt; substantive primary work required separate source recovery."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered and read matching substantive first-party work at https://era.gv.at/public/documents/4336/ERA_Comm_Staff_WD.pdf; work title, organisation, content and year were checked."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://era.gv.at/public/documents/4336/ERA_Comm_Staff_WD.pdf",
+            "title": "ERA Portal Austria – A new ERA for Research and Innovation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://era.gv.at/public/documents/4336/ERA_Comm_Staff_WD.pdf. 24000 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: primary completed evidence review concerning EU R&I-system design and research governance."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:26:09Z",
+      "deep_scan_package_id": "worker-b-20261022T150102Z-0d6dc40f18eb",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2020-09-30",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The staff assessment provides historical policy evidence, not proof that recommended reforms were delivered.",
+          "text": "A September 2020 Commission staff document analyses fragmentation and uneven performance in European research and innovation systems.",
+          "confidence": "high",
+          "record_key": "historical:id:bd3640327b5b1db5",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:350975f02b899bfb:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:f3a379c12b4a0d68": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "3ff10393",
+      "identity_hash": "78e7d9d88922c402",
+      "reader_title": "Innovation-output benchmarking highlights EU performance gaps",
+      "reader_what": "A JRC brief ranks EU innovation output ahead of China but behind Japan, South Korea and the US.",
+      "reader_why": "Comparative innovation statistics identify persistent EU technology-performance gaps.",
+      "reader_more": "A JRC brief ranks EU innovation output ahead of China but behind Japan, South Korea and the US. JRC summarises country-level IOI trend comparisons and major EU technology-innovation policy responses. Composite country rankings do not identify causality; related to, but distinct from, the longer JRC indicator report.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "A JRC brief ranks EU innovation output ahead of China but behind Japan, South Korea and the US.",
+        "method_or_basis": "JRC summarises country-level IOI trend comparisons and major EU technology-innovation policy responses.",
+        "qualification": "Composite country rankings do not identify causality; related to, but distinct from, the longer JRC indicator report.",
+        "radar_relevance": "A Route 2: cross-country European innovation-system comparative performance.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected publisher/official URL https://publications.jrc.ec.europa.eu/repository/handle/JRC147646; the package also carries 1203 characters of matching first-party abstract_or_landing_page from https://publications.jrc.ec.europa.eu/repository/handle/JRC147646, independently cross-checked for identity and claims."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_institutional_primary",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC147646",
+            "title": "Benchmarking innovation to inform EU policy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://publications.jrc.ec.europa.eu/repository/handle/JRC147646. 1203 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 2: cross-country European innovation-system comparative performance."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:26:10Z",
+      "deep_scan_package_id": "worker-b-20261022T150102Z-0d6dc40f18eb",
+      "claims": [
+        {
+          "object": "innovation.system_performance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Composite country rankings do not identify causality; related to, but distinct from, the longer JRC indicator report.",
+          "text": "A JRC brief ranks EU innovation output ahead of China but behind Japan, South Korea and the US.",
+          "confidence": "medium",
+          "status_date_precision": "year",
+          "record_key": "historical:id:f3a379c12b4a0d68",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:78e7d9d88922c402:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:7675dd0e6d0ffa17": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "8c3d882c",
+      "identity_hash": "8c9637d1ffbf7e2e",
+      "reader_title": "Research-infrastructure funding practices differ internationally",
+      "reader_what": "The Swedish Research Council compares how eight countries and ESFRI prioritise and finance research infrastructures.",
+      "reader_why": "Infrastructure prioritisation practices determine which large-scale research facilities receive long-term support.",
+      "reader_more": "The Swedish Research Council compares how eight countries and ESFRI prioritise and finance research infrastructures. Comparative policy analysis by Taina Pihlajaniemi examines governance and funding approaches to large research facilities. Recommendations for Swedish policy are not evidence that the studied models are universally transferable.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "The Swedish Research Council compares how eight countries and ESFRI prioritise and finance research infrastructures.",
+        "method_or_basis": "Comparative policy analysis by Taina Pihlajaniemi examines governance and funding approaches to large research facilities.",
+        "qualification": "Recommendations for Swedish policy are not evidence that the studied models are universally transferable.",
+        "radar_relevance": "A Route 3: completed European research-infrastructure funding/governance analysis.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected publisher/official URL https://www.vr.se/english/analysis/reports/our-reports/2026-01-22-analysis-of-processes-for-prioritisation-and-funding-of-research-infrastructure.html; the package also carries 2653 characters of matching first-party substantial_web_text from https://www.vr.se/english/analysis/reports/our-reports/2026-01-22-analysis-of-processes-for-prioritisation-and-funding-of-research-infrastructure.html, independently cross-checked for identity and claims."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_institutional_primary",
+            "url": "https://www.vr.se/english/analysis/reports/our-reports/2026-01-22-analysis-of-processes-for-prioritisation-and-funding-of-research-infrastructure.html",
+            "title": "Analysis of processes for prioritisation and funding of research infrastructure",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://www.vr.se/english/analysis/reports/our-reports/2026-01-22-analysis-of-processes-for-prioritisation-and-funding-of-research-infrastructure.html. 2653 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: completed European research-infrastructure funding/governance analysis."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:26:10Z",
+      "deep_scan_package_id": "worker-b-20261022T150102Z-0d6dc40f18eb",
+      "claims": [
+        {
+          "object": "research.infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Swedish Research Council",
+            "class": "national_funder"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026-01-22",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "SE"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "Recommendations for Swedish policy are not evidence that the studied models are universally transferable.",
+          "text": "The Swedish Research Council compares how eight countries and ESFRI prioritise and finance research infrastructures.",
+          "confidence": "medium",
+          "record_key": "historical:id:7675dd0e6d0ffa17",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:8c9637d1ffbf7e2e:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:5e54528012bb3517": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "30d452bd",
+      "identity_hash": "9b08929b8430b87f",
+      "reader_title": "Dutch energy-transition report calls for systems innovation",
+      "reader_what": "The Dutch science and innovation advisory council urges coordinated cross-sector innovation to accelerate energy-system transformation.",
+      "reader_why": "Energy-transition innovation requires coordination across research institutions, firms and regulatory systems.",
+      "reader_more": "The Dutch science and innovation advisory council urges coordinated cross-sector innovation to accelerate energy-system transformation. AWTI advisory analysis synthesises systemic barriers and institutional changes needed across energy innovation. Recommendations are forward-looking; the report does not establish observed transition impacts.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "The Dutch science and innovation advisory council urges coordinated cross-sector innovation to accelerate energy-system transformation.",
+        "method_or_basis": "AWTI advisory analysis synthesises systemic barriers and institutional changes needed across energy innovation.",
+        "qualification": "Recommendations are forward-looking; the report does not establish observed transition impacts.",
+        "radar_relevance": "A Route 3: Dutch innovation-system coordination and policy reform; Route 2: European energy technology capability.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected publisher/official URL https://www.awti.nl/site/binaries/site-content/collections/documents/2026/06/02/sustainable-breakthroughs-towards-system-innovation-in-the-energy-transition/awti-sustainable-breakthroughs-2025.pdf; the package also carries 6431 characters of matching first-party pdf_excerpt from https://www.awti.nl/site/binaries/site-content/collections/documents/2026/06/02/sustainable-breakthroughs-towards-system-innovation-in-the-energy-transition/awti-sustainable-breakthroughs-2025.pdf, independently cross-checked for identity and claims."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://www.awti.nl/site/binaries/site-content/collections/documents/2026/06/02/sustainable-breakthroughs-towards-system-innovation-in-the-energy-transition/awti-sustainable-breakthroughs-2025.pdf",
+            "title": "Advice: Sustainable breakthroughs – Towards system innovation in the energy transition | Adviesraad voor wetenschap, technologie en innovatie",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://www.awti.nl/site/binaries/site-content/collections/documents/2026/06/02/sustainable-breakthroughs-towards-system-innovation-in-the-energy-transition/awti-sustainable-breakthroughs-2025.pdf. 6431 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: Dutch innovation-system coordination and policy reform; Route 2: European energy technology capability."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:26:11Z",
+      "deep_scan_package_id": "worker-b-20261022T150102Z-0d6dc40f18eb",
+      "claims": [
+        {
+          "object": "green.innovation",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Dutch Advisory Council for Science, Technology and Innovation",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2025",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "NL"
+            ]
+          },
+          "kind": "advocacy",
+          "qualification": "Recommendations are forward-looking; the report does not establish observed transition impacts.",
+          "text": "The Dutch science and innovation advisory council urges coordinated cross-sector innovation to accelerate energy-system transformation.",
+          "confidence": "high",
+          "status_date_precision": "year",
+          "record_key": "historical:id:5e54528012bb3517",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:9b08929b8430b87f:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:d4525dfbe43cfbe2": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "36efa767",
+      "identity_hash": "a0b74c6586169e21",
+      "reader_title": "EU administrations need coordinated digital capabilities",
+      "reader_what": "A JRC brief identifies EU public-sector digital dependence and proposes people, markets, infrastructure and governance responses.",
+      "reader_why": "Strategic public procurement and governance affect European digital-technology supplier dependence.",
+      "reader_more": "A JRC brief identifies EU public-sector digital dependence and proposes people, markets, infrastructure and governance responses. Analytical policy synthesis describes procurement, technological infrastructure and EU institutional coordination. An agenda and conceptual framework, not evidence that dependencies have already been removed.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "A JRC brief identifies EU public-sector digital dependence and proposes people, markets, infrastructure and governance responses.",
+        "method_or_basis": "Analytical policy synthesis describes procurement, technological infrastructure and EU institutional coordination.",
+        "qualification": "An agenda and conceptual framework, not evidence that dependencies have already been removed.",
+        "radar_relevance": "A Route 1: European technological dependence and strategic autonomy; Route 2: public digital-innovation capacity.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected publisher/official URL https://publications.jrc.ec.europa.eu/repository/handle/JRC146997; the package also carries 1735 characters of matching first-party abstract_or_landing_page from https://publications.jrc.ec.europa.eu/repository/handle/JRC146997, independently cross-checked for identity and claims."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_institutional_primary",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC146997",
+            "title": "Advancing EU Digital Sovereignty in Public Administrations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://publications.jrc.ec.europa.eu/repository/handle/JRC146997. 1735 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 1: European technological dependence and strategic autonomy; Route 2: public digital-innovation capacity."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:26:11Z",
+      "deep_scan_package_id": "worker-b-20261022T150102Z-0d6dc40f18eb",
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "An agenda and conceptual framework, not evidence that dependencies have already been removed.",
+          "text": "A JRC brief identifies EU public-sector digital dependence and proposes people, markets, infrastructure and governance responses.",
+          "confidence": "medium",
+          "status_date_precision": "year",
+          "record_key": "historical:id:d4525dfbe43cfbe2",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:a0b74c6586169e21:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:f5d116d906852d87": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "3fcdf183",
+      "identity_hash": "c69117869e70b6e0",
+      "reader_title": "Defence-oriented AI raises research autonomy concerns",
+      "reader_what": "A peer-reviewed critical article argues that military AI priorities in Europe can reshape research funding, governance and autonomy.",
+      "reader_why": "Military funding priorities may change which research questions universities can pursue independently.",
+      "reader_more": "A peer-reviewed critical article argues that military AI priorities in Europe can reshape research funding, governance and autonomy. Conceptual political-geography analysis reviews European military AI research and dual-use funding discourses. Interpretive argument without original empirical datasets; directional risks should not be mistaken for quantified effects.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "A peer-reviewed critical article argues that military AI priorities in Europe can reshape research funding, governance and autonomy.",
+        "method_or_basis": "Conceptual political-geography analysis reviews European military AI research and dual-use funding discourses.",
+        "qualification": "Interpretive argument without original empirical datasets; directional risks should not be mistaken for quantified effects.",
+        "radar_relevance": "A Route 3: documented scholarship on European research funding governance and institutional autonomy.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied record link https://doi.org/10.1016/j.polgeo.2025.103466 yielded only stored_only; substantive primary work required separate source recovery."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered and read matching substantive first-party work at https://pure.uva.nl/ws/files/306347843/_The_choice_is_none_.pdf; work title, organisation, content and year were checked."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "full_text_repository_copy",
+            "url": "https://pure.uva.nl/ws/files/306347843/_The_choice_is_none_.pdf",
+            "title": "“The choice is none”: AI and the militarization of European research",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://pure.uva.nl/ws/files/306347843/_The_choice_is_none_.pdf. 0 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: documented scholarship on European research funding governance and institutional autonomy."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T15:26:12Z",
+      "deep_scan_package_id": "worker-b-20261022T150102Z-0d6dc40f18eb",
+      "claims": [
+        {
+          "object": "defence.innovation_funding",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Valentina Carraro",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2025-12-02",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Interpretive argument without original empirical datasets; directional risks should not be mistaken for quantified effects.",
+          "text": "A peer-reviewed critical article argues that military AI priorities in Europe can reshape research funding, governance and autonomy.",
+          "confidence": "medium",
+          "record_key": "historical:id:f5d116d906852d87",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:c69117869e70b6e0:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-22T14:39:43Z"
+  "claims_updated_at": "2026-10-22T15:26:12Z"
 }
