@@ -750,10 +750,10 @@
         "verification_note": "Source matched to recorded identity; used https://era.gv.at/news-items/eu-showcases-atlantic-ocean-research-cooperation-at-2026-all-atlantic-forum/. 0 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
       },
       "admission": {
-        "decision": "keep",
-        "target_strand": "C",
-        "reason_code": "C_SUBSTANTIVE_CHANGE",
-        "reason": "C: dateable Horizon Europe cross-border research project announcement with a direct EU R&I funding link."
+        "decision": "drop",
+        "target_strand": "",
+        "reason_code": "HISTORICAL_A_B_OUT_OF_SCOPE",
+        "reason": "This is a Strand-C-style project or institutional announcement, not a qualifying evidence-led historical Strand A/B research study. Preserve original source and deep-analysis description for audit; do not present a C-only news event as Strand A or B research evidence."
       },
       "metadata_correction": {
         "fields": {
@@ -781,28 +781,7 @@
         "why_supported": true,
         "confidence": "medium"
       },
-      "claims": [
-        {
-          "object": "research.collaboration",
-          "secondary_objects": [],
-          "actor": {
-            "name": "European Commission",
-            "class": "eu_body"
-          },
-          "mechanism": "collaborates",
-          "direction": "expands",
-          "status": "announced",
-          "status_date": "2026-04-15",
-          "scope": {
-            "level": "eu",
-            "countries": []
-          },
-          "kind": "action",
-          "qualification": "The project was scheduled for summer 2026; the announcement does not prove launch or completed scientific outcomes.",
-          "text": "The EU reported 26 Atlantic coastal-resilience beacon sites and a planned €6 million Horizon Europe coastal-resilience project.",
-          "confidence": "medium"
-        }
-      ]
+      "claims": []
     },
     {
       "record_key": "historical:id:683308770edc3feb",
@@ -1485,10 +1464,10 @@
         "verification_note": "Source matched to recorded identity; used https://www.cnrs.fr/sites/default/files/press_info/2026-04/CP_LabCom_PolMixLab_VEN5.pdf. 13455 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
       },
       "admission": {
-        "decision": "keep",
-        "target_strand": "C",
-        "reason_code": "C_SUBSTANTIVE_CHANGE",
-        "reason": "C: substantive new academia–industry R&I facility with documented French and EU technological collaboration."
+        "decision": "drop",
+        "target_strand": "",
+        "reason_code": "HISTORICAL_A_B_OUT_OF_SCOPE",
+        "reason": "This is a Strand-C-style project or institutional announcement, not a qualifying evidence-led historical Strand A/B research study. Preserve original source and deep-analysis description for audit; do not present a C-only news event as Strand A or B research evidence."
       },
       "metadata_correction": {
         "fields": {
@@ -1516,28 +1495,7 @@
         "why_supported": true,
         "confidence": "high"
       },
-      "claims": [
-        {
-          "object": "research.collaboration",
-          "secondary_objects": [],
-          "actor": {
-            "name": "CNRS and Michelin",
-            "class": "university_group"
-          },
-          "mechanism": "collaborates",
-          "direction": "expands",
-          "status": "announced",
-          "status_date": "2026-04-22",
-          "scope": {
-            "level": "eu",
-            "countries": []
-          },
-          "kind": "action",
-          "qualification": "A laboratory inauguration proves a collaboration, not verified ecological or commercial performance of its future materials.",
-          "text": "CNRS, Michelin and three universities announced PolMixLab, a joint laboratory researching more sustainable polymer materials.",
-          "confidence": "high"
-        }
-      ]
+      "claims": []
     },
     {
       "record_key": "historical:id:f5d116d906852d87",
