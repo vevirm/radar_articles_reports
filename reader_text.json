@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-22T16:31:44Z",
+  "generated_at": "2026-10-22T17:30:40Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -265582,8 +265582,2677 @@
       "deep_scan_package_id": "worker-b-20261022T150102Z-0d6dc40f18eb",
       "claims": [],
       "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:fccc0bceefd8e0e2": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "34fdeb2c",
+      "identity_hash": "701d6a9e6d2fe580",
+      "reader_title": "Assessing Europe’s Resilience and Preparedness in an Era of Strategic Risks",
+      "reader_what": "Civil-military preparedness varies across ten European countries; military mobility depends on civilian energy, transport and digital systems.",
+      "reader_more": "Civil-military preparedness varies across ten European countries; military mobility depends on civilian energy, transport and digital systems. HCSS-CSDS comparative open-source assessment, interviews with national officials, and military-mobility case study. The document is verified, but its subject fails the historical A/B admission criteria.",
+      "deep_analysis": {
+        "work_kind": "defence preparedness report",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "Civil-military preparedness varies across ten European countries; military mobility depends on civilian energy, transport and digital systems.",
+        "method_or_basis": "HCSS-CSDS comparative open-source assessment, interviews with national officials, and military-mobility case study.",
+        "qualification": "The document is verified, but its subject fails the historical A/B admission criteria.",
+        "radar_relevance": "The 50-page HCSS report compares preparedness and military mobility across ten EU/NATO states, including energy, rail and 5G dependencies; its central object is civil-military crisis resilience, not the R&I system. A Route 1 fails the central-R&I test despite strategic technology examples; Routes 2 and 3 are also not established.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened matching 50-page HCSS/CSDS report PDF https://hcss.nl/wp-content/uploads/2025/12/Assessing-Europes-Resilience-and-Preparedness-in-an-Era-of-Strategic-Risks-HCSS-2025.pdf; executive summary and military mobility sections inspected."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://hcss.nl/wp-content/uploads/2025/12/Assessing-Europes-Resilience-and-Preparedness-in-an-Era-of-Strategic-Risks-HCSS-2025.pdf",
+            "title": "Assessing Europe’s Resilience and Preparedness in an Era of Strategic Risks",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected Assessing Europe’s Resilience and Preparedness in an Era of Strategic Risks. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "The 50-page HCSS report compares preparedness and military mobility across ten EU/NATO states, including energy, rail and 5G dependencies; its central object is civil-military crisis resilience, not the R&I system. A Route 1 fails the central-R&I test despite strategic technology examples; Routes 2 and 3 are also not established."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:33Z",
+      "deep_scan_package_id": "worker-a-20261022T170459Z-ea33d99e34b3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:74a3dadd9f256f0a": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "5250acaa",
+      "identity_hash": "1cb0276cc9695832",
+      "reader_title": "Robust and resilient space infrastructure for a safe Netherlands | NWO",
+      "reader_what": "NWO describes a national research grant programme for resilient space systems, with a seven-million-euro ceiling.",
+      "reader_more": "NWO describes a national research grant programme for resilient space systems, with a seven-million-euro ceiling. First-party NWO programme overview; lists calls, project durations and programme news. The document is verified, but its subject fails the historical A/B admission criteria.",
+      "deep_analysis": {
+        "work_kind": "research funding programme page",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "NWO describes a national research grant programme for resilient space systems, with a seven-million-euro ceiling.",
+        "method_or_basis": "First-party NWO programme overview; lists calls, project durations and programme news.",
+        "qualification": "The document is verified, but its subject fails the historical A/B admission criteria.",
+        "radar_relevance": "NWO describes a €7 million funding programme to develop secure Dutch space infrastructure; this is a programme landing and call listing, not completed Route 1-3 historical evidence about R&I states or governance. Its announced funding is a C-type development and there is no reusable B method.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Live opening https://www.nwo.nl/en/researchprogrammes/knowledge-and-innovation-covenant/kic-2024-2027/mission-2024-2027/robust-and-resilient-space-infrastructure-for-a-safe-netherlands returned HTTP 403; cannot recrawl the NWO programme page."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Inspected previous first-party NWO page extraction from https://www.nwo.nl/en/researchprogrammes/knowledge-and-innovation-covenant/kic-2024-2027/mission-2024-2027/robust-and-resilient-space-infrastructure-for-a-safe-netherlands, including amount, programme description and call listings."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_page",
+            "url": "https://www.nwo.nl/en/researchprogrammes/knowledge-and-innovation-covenant/kic-2024-2027/mission-2024-2027/robust-and-resilient-space-infrastructure-for-a-safe-netherlands",
+            "title": "Robust and resilient space infrastructure for a safe Netherlands | NWO",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected Robust and resilient space infrastructure for a safe Netherlands | NWO. Compared title, issuer and work type with the substantive first-party package extraction; Live re-fetch 403; matched first-party programme text supplied with the scanner package supports a limited negative admission finding."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "NWO describes a €7 million funding programme to develop secure Dutch space infrastructure; this is a programme landing and call listing, not completed Route 1-3 historical evidence about R&I states or governance. Its announced funding is a C-type development and there is no reusable B method."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:33Z",
+      "deep_scan_package_id": "worker-a-20261022T170459Z-ea33d99e34b3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:0d10162ea1a64c77": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "38781364",
+      "identity_hash": "99df2dd015b89b2c",
+      "reader_title": "Digitalising the EU energy system",
+      "reader_what": "The Commission outlines data, digitalisation and smart-grid priorities for the EU energy transition.",
+      "reader_more": "The Commission outlines data, digitalisation and smart-grid priorities for the EU energy transition. European Commission digital-strategy official policy overview, including stated renewable and demand targets. The document is verified, but its subject fails the historical A/B admission criteria.",
+      "deep_analysis": {
+        "work_kind": "policy information page",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "The Commission outlines data, digitalisation and smart-grid priorities for the EU energy transition.",
+        "method_or_basis": "European Commission digital-strategy official policy overview, including stated renewable and demand targets.",
+        "qualification": "The document is verified, but its subject fails the historical A/B admission criteria.",
+        "radar_relevance": "The Commission page describes ongoing policy objectives for EU energy-grid digitisation, interoperability and data sovereignty. It is a static policy overview with forward-looking targets, not a completed analytical A evidence product; it offers no B-method novelty. A Routes 1 and 2 have strategic subject matter but fail the substantive evidence-product gate; Route 3 does not apply.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened and read live Commission policy page https://digital-strategy.ec.europa.eu/en/policies/digitalisation-energy; first-party text confirms the static overview and strategic targets."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_page",
+            "url": "https://digital-strategy.ec.europa.eu/en/policies/digitalisation-energy",
+            "title": "Digitalising the EU energy system",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected Digitalising the EU energy system. Compared title, issuer and work type with the live first-party article; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "The Commission page describes ongoing policy objectives for EU energy-grid digitisation, interoperability and data sovereignty. It is a static policy overview with forward-looking targets, not a completed analytical A evidence product; it offers no B-method novelty. A Routes 1 and 2 have strategic subject matter but fail the substantive evidence-product gate; Route 3 does not apply."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:33Z",
+      "deep_scan_package_id": "worker-a-20261022T170459Z-ea33d99e34b3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:a2d611e3a5ebd6fe": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "10a516ba",
+      "identity_hash": "735ba4a306adfd43",
+      "reader_title": "Foresight Challenges: A study to enable foresight on emerging and future cybersecurity challenges",
+      "reader_what": "ENISA maps foresight techniques and selection criteria onto seven cybersecurity decision-use cases.",
+      "reader_why": "Its explicit selection criteria and use-case workflows can transfer to forward-looking technology and R&I analysis.",
+      "reader_more": "ENISA maps foresight techniques and selection criteria onto seven cybersecurity decision-use cases. First-party 2021 report with stakeholder analysis, method comparison matrices, tools, best practices and seven proposed foresight workflows. Frameworks and use cases are recommended approaches, not experimentally proven forecasting accuracy.",
+      "deep_analysis": {
+        "work_kind": "methods guidance report",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "ENISA maps foresight techniques and selection criteria onto seven cybersecurity decision-use cases.",
+        "method_or_basis": "First-party 2021 report with stakeholder analysis, method comparison matrices, tools, best practices and seven proposed foresight workflows.",
+        "qualification": "Frameworks and use cases are recommended approaches, not experimentally proven forecasting accuracy.",
+        "radar_relevance": "The ENISA report systematically compares methods, tools and selection criteria for cybersecurity foresight and translates them into seven reusable application approaches, including R&D priorities and threat evolution. This is a transferable structured methods resource, not simply a one-off forecast.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened 52-page ENISA report at https://www.enisa.europa.eu/sites/default/files/publications/ENISA%20Report%20-%20Foresight%20Challenges.pdf; checked 2021 imprint, method-selection comparison and foresight applications."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.enisa.europa.eu/sites/default/files/publications/ENISA%20Report%20-%20Foresight%20Challenges.pdf",
+            "title": "Foresight Challenges: A study to enable foresight on emerging and future cybersecurity challenges",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected Foresight Challenges: A study to enable foresight on emerging and future cybersecurity challenges. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_TRANSFERABLE_METHOD",
+        "reason": "The ENISA report systematically compares methods, tools and selection criteria for cybersecurity foresight and translates them into seven reusable application approaches, including R&D priorities and threat evolution. This is a transferable structured methods resource, not simply a one-off forecast."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:34Z",
+      "deep_scan_package_id": "worker-a-20261022T170459Z-ea33d99e34b3",
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [],
+          "actor": {
+            "name": "ENISA",
+            "class": "eu_body"
+          },
+          "mechanism": "evaluates",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2021-11",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Frameworks and use cases are recommended approaches, not experimentally proven forecasting accuracy.",
+          "text": "ENISA maps foresight techniques and selection criteria onto seven cybersecurity decision-use cases.",
+          "confidence": "high",
+          "status_date_precision": "month",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "historical:id:a2d611e3a5ebd6fe",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:735ba4a306adfd43:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:4d8f251256a52bf7": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "bbfc73f3",
+      "identity_hash": "bbc38723d8cc39f5",
+      "reader_title": "Building a European AI Ecosystem of Excellence: Foresight Report",
+      "reader_what": "Expert-built AI futures emphasize Europe’s innovation-governance capacity and labour-market distributional choices.",
+      "reader_why": "The study links EU AI R&D and innovation-system governance to future strategic capability.",
+      "reader_more": "Expert-built AI futures emphasize Europe’s innovation-governance capacity and labour-market distributional choices. CEPS November 2025 report: 21 experts used scenario building and backcasting to compare two integrated futures up to 2045. Both futures are scenario narratives and cannot establish how Europe will actually develop by 2045.",
+      "deep_analysis": {
+        "work_kind": "participatory foresight report",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "Expert-built AI futures emphasize Europe’s innovation-governance capacity and labour-market distributional choices.",
+        "method_or_basis": "CEPS November 2025 report: 21 experts used scenario building and backcasting to compare two integrated futures up to 2045.",
+        "qualification": "Both futures are scenario narratives and cannot establish how Europe will actually develop by 2045.",
+        "radar_relevance": "The CEPS foresight study specifically explores Europe’s AI innovation ecosystem and R&D governance through structured participatory scenarios. Route 1 and Route 3 support admission as European strategic R&I analysis; the scenarios are explorations rather than observed future outcomes.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened 42-page CEPS report https://cdn.ceps.eu/2025/11/2025-13_GRID-Google-project-Foresight-report.pdf, read summary and verified 21-expert scenario/backcasting basis."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://cdn.ceps.eu/2025/11/2025-13_GRID-Google-project-Foresight-report.pdf",
+            "title": "Building a European AI Ecosystem of Excellence: Foresight Report",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected Building a European AI Ecosystem of Excellence: Foresight Report. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The CEPS foresight study specifically explores Europe’s AI innovation ecosystem and R&D governance through structured participatory scenarios. Route 1 and Route 3 support admission as European strategic R&I analysis; the scenarios are explorations rather than observed future outcomes."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:34Z",
+      "deep_scan_package_id": "worker-a-20261022T170459Z-ea33d99e34b3",
+      "claims": [
+        {
+          "object": "ai.governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "CEPS",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2025-11",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Both futures are scenario narratives and cannot establish how Europe will actually develop by 2045.",
+          "text": "Expert-built AI futures emphasize Europe’s innovation-governance capacity and labour-market distributional choices.",
+          "confidence": "high",
+          "status_date_precision": "month",
+          "record_key": "historical:id:4d8f251256a52bf7",
+          "merit": 71,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:bbc38723d8cc39f5:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:984826245d3a649f": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "1858bae2",
+      "identity_hash": "d9bb018ac7f1d92a",
+      "reader_title": "EU Plans for AI (Giga)factories: Sanctuaries of Innovation, or Cathedrals in the Desert?",
+      "reader_what": "European AI factory locations often diverge from AI innovation hubs and favourable energy conditions.",
+      "reader_why": "Factory siting and compute supplier dependency can influence European AI research capability.",
+      "reader_more": "European AI factory locations often diverge from AI innovation hubs and favourable energy conditions. CEPS November 2025 55-page empirical analysis of planned AI facilities, patents, scientific output, AI vacancies, investment and electricity prices. Comparisons concern the selected/announced factory portfolio available to authors; later additions and realised performance are not measured.",
+      "deep_analysis": {
+        "work_kind": "empirical policy report",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "European AI factory locations often diverge from AI innovation hubs and favourable energy conditions.",
+        "method_or_basis": "CEPS November 2025 55-page empirical analysis of planned AI facilities, patents, scientific output, AI vacancies, investment and electricity prices.",
+        "qualification": "Comparisons concern the selected/announced factory portfolio available to authors; later additions and realised performance are not measured.",
+        "radar_relevance": "CEPS evaluates EU AI factory investment using location, patent, publication, startup-finance, vacancy and electricity-price evidence, directly measuring European AI research and innovation infrastructure (A Route 2 and Route 3).",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened 55-page CEPS analysis https://cdn.ceps.eu/2025/11/251027-Sanctuaries-or-Cathedrals.pdf, read summary and identified metrics used for AI-factory location assessment."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://cdn.ceps.eu/2025/11/251027-Sanctuaries-or-Cathedrals.pdf",
+            "title": "EU Plans for AI (Giga)factories: Sanctuaries of Innovation, or Cathedrals in the Desert?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected EU Plans for AI (Giga)factories: Sanctuaries of Innovation, or Cathedrals in the Desert?. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "CEPS evaluates EU AI factory investment using location, patent, publication, startup-finance, vacancy and electricity-price evidence, directly measuring European AI research and innovation infrastructure (A Route 2 and Route 3)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:35Z",
+      "deep_scan_package_id": "worker-a-20261022T170459Z-ea33d99e34b3",
+      "claims": [
+        {
+          "object": "compute.gigafactory",
+          "secondary_objects": [],
+          "actor": {
+            "name": "CEPS",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2025-11",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Comparisons concern the selected/announced factory portfolio available to authors; later additions and realised performance are not measured.",
+          "text": "European AI factory locations often diverge from AI innovation hubs and favourable energy conditions.",
+          "confidence": "high",
+          "status_date_precision": "month",
+          "record_key": "historical:id:984826245d3a649f",
+          "merit": 71,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:d9bb018ac7f1d92a:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:191ee55eecce78ec": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "8f6704b0",
+      "identity_hash": "523bfc7227e1b3e3",
+      "reader_title": "Green competitiveness: Why Europe should rethink targets to outpace China – European Council on Foreign Relations",
+      "reader_what": "ECFR argues that weakening EU clean-vehicle targets would not solve the structural challenges facing European carmakers.",
+      "reader_more": "ECFR argues that weakening EU clean-vehicle targets would not solve the structural challenges facing European carmakers. October 2025 ECFR commentary on electric vehicles, Chinese supply chains, battery support and EU emission-target proposals. Its automotive policy interpretation should not be relabelled as measured innovation-system performance.",
+      "deep_analysis": {
+        "work_kind": "sectoral opinion analysis",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "ECFR argues that weakening EU clean-vehicle targets would not solve the structural challenges facing European carmakers.",
+        "method_or_basis": "October 2025 ECFR commentary on electric vehicles, Chinese supply chains, battery support and EU emission-target proposals.",
+        "qualification": "Its automotive policy interpretation should not be relabelled as measured innovation-system performance.",
+        "radar_relevance": "ECFR offers strategic commentary on the EV industry, Chinese competition and EU vehicle-emission targets; the primary unit of analysis is sectoral competition and climate regulation. Although battery R&D is mentioned, Route 1 does not substantiate a central research/technology-innovation-system analysis, Route 2 offers no systematic European R&I evidence, and Route 3 has no research-system mechanism evaluation. No B method contribution.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching primary first-party page content from the package at the supplied URL: https://ecfr.eu/article/green-competitiveness-why-europe-should-rethink-targets-to-outpace-china/. Identity and substance matched title."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_page",
+            "url": "https://ecfr.eu/article/green-competitiveness-why-europe-should-rethink-targets-to-outpace-china/",
+            "title": "Green competitiveness: Why Europe should rethink targets to outpace China – European Council on Foreign Relations",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected Green competitiveness: Why Europe should rethink targets to outpace China – European Council on Foreign Relations. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "ECFR offers strategic commentary on the EV industry, Chinese competition and EU vehicle-emission targets; the primary unit of analysis is sectoral competition and climate regulation. Although battery R&D is mentioned, Route 1 does not substantiate a central research/technology-innovation-system analysis, Route 2 offers no systematic European R&I evidence, and Route 3 has no research-system mechanism evaluation. No B method contribution."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:35Z",
+      "deep_scan_package_id": "worker-a-20261022T170459Z-ea33d99e34b3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:32ada5fba4ef66a2": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "fd3461c9",
+      "identity_hash": "9a7f1dfced4edcf3",
+      "reader_title": "Beyond Copycat Regulation: A Playbook for Korea’s Digital Partnerships",
+      "reader_what": "ITIF advises South Korea to pursue digital partnerships instead of copying selected foreign technology regulations.",
+      "reader_more": "ITIF advises South Korea to pursue digital partnerships instead of copying selected foreign technology regulations. ITIF October 2025 digital-trade policy commentary comparing Korean, US and EU regulatory strategies. Recommendations are advocacy for Korea, not observed outcomes or EU R&I-system evidence.",
+      "deep_analysis": {
+        "work_kind": "digital-policy commentary",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "ITIF advises South Korea to pursue digital partnerships instead of copying selected foreign technology regulations.",
+        "method_or_basis": "ITIF October 2025 digital-trade policy commentary comparing Korean, US and EU regulatory strategies.",
+        "qualification": "Recommendations are advocacy for Korea, not observed outcomes or EU R&I-system evidence.",
+        "radar_relevance": "ITIF proposes South Korean approaches to digital trade agreements and AI/data regulation, treating the EU mainly as an external regulatory comparator. European research and innovation systems are not the central analytical object under A Routes 1, 2 or 3; this is regulatory advocacy rather than a new transferable B futures method.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching primary first-party page content from the package at the supplied URL: https://itif.org/publications/2025/10/24/beyond-copycat-regulation-playbook-for-korea-digital-partnerships/. Identity and substance matched title."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_page",
+            "url": "https://itif.org/publications/2025/10/24/beyond-copycat-regulation-playbook-for-korea-digital-partnerships/",
+            "title": "Beyond Copycat Regulation: A Playbook for Korea’s Digital Partnerships",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected Beyond Copycat Regulation: A Playbook for Korea’s Digital Partnerships. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "ITIF proposes South Korean approaches to digital trade agreements and AI/data regulation, treating the EU mainly as an external regulatory comparator. European research and innovation systems are not the central analytical object under A Routes 1, 2 or 3; this is regulatory advocacy rather than a new transferable B futures method."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:35Z",
+      "deep_scan_package_id": "worker-a-20261022T170459Z-ea33d99e34b3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:33f69dc95e37655a": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "088b566d",
+      "identity_hash": "6d262c2194dc4d01",
+      "reader_title": "China positions itself to lead in future technologies like photonic chips",
+      "reader_what": "MERICS reports a Chinese photonic-chip research production line and contrasts selected capabilities with those in Europe.",
+      "reader_more": "MERICS reports a Chinese photonic-chip research production line and contrasts selected capabilities with those in Europe. October 2025 MERICS short analysis of Shanghai Jiao Tong University integrated-photonics manufacturing and Chinese chip strategy. The stated wafer capacity is a cited research-line capability, not proof of commercial chip competitiveness.",
+      "deep_analysis": {
+        "work_kind": "China technology commentary",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "MERICS reports a Chinese photonic-chip research production line and contrasts selected capabilities with those in Europe.",
+        "method_or_basis": "October 2025 MERICS short analysis of Shanghai Jiao Tong University integrated-photonics manufacturing and Chinese chip strategy.",
+        "qualification": "The stated wafer capacity is a cited research-line capability, not proof of commercial chip competitiveness.",
+        "radar_relevance": "MERICS discusses Chinese photonic-chip fabrication and national technology policy, with European manufacturing capacity a comparator rather than the subject. It touches strategically important R&D but fails A Route 1 European centrality; Routes 2 and 3 lack a substantive analysis of European R&I trajectories or governance. No B methodological novelty.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching primary first-party page content from the package at the supplied URL: https://merics.org/en/comment/china-positions-itself-lead-future-technologies-photonic-chips. Identity and substance matched title."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_page",
+            "url": "https://merics.org/en/comment/china-positions-itself-lead-future-technologies-photonic-chips",
+            "title": "China positions itself to lead in future technologies like photonic chips",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected China positions itself to lead in future technologies like photonic chips. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "MERICS discusses Chinese photonic-chip fabrication and national technology policy, with European manufacturing capacity a comparator rather than the subject. It touches strategically important R&D but fails A Route 1 European centrality; Routes 2 and 3 lack a substantive analysis of European R&I trajectories or governance. No B methodological novelty."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:35Z",
+      "deep_scan_package_id": "worker-a-20261022T170459Z-ea33d99e34b3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:c035a1c858e7bd8b": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "96a30fff",
+      "identity_hash": "6453dfccde161eb6",
+      "reader_title": "NETWORK GOVERNANCE OF SCIENTIFIC AND TECHNOLOGICAL DEVELOPMENT BASED ON S&T FORESIGHT: JAPAN`S EXPERIENCE",
+      "reader_what": "Japan institutionalised repeated S&T foresight exercises and channels their findings into national science-policy planning.",
+      "reader_more": "Japan institutionalised repeated S&T foresight exercises and channels their findings into national science-policy planning. 2025 Foresight and STI Governance research article on Japanese government agencies, NISTEP and science/technology foresight history. Institutional experience may be instructive, but comparison is not a newly devised foresight method.",
+      "deep_analysis": {
+        "work_kind": "historical research-policy article",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "Japan institutionalised repeated S&T foresight exercises and channels their findings into national science-policy planning.",
+        "method_or_basis": "2025 Foresight and STI Governance research article on Japanese government agencies, NISTEP and science/technology foresight history.",
+        "qualification": "Institutional experience may be instructive, but comparison is not a newly devised foresight method.",
+        "radar_relevance": "The scholarly article retrospectively studies Japanese science-and-technology foresight institutions, policy coordination and five-year planning. It is not European R&I evidence under A Routes 1–3. Despite substantial S&T foresight content, it reconstructs an established Japanese governance practice rather than contributing or validating a materially new transferable B methodology.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Live DOI redirect https://doi.org/10.17323/1999-5431-2025-0-3-183-211 was not fetched by reader."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Opened matching 2025 journal issue article with title, author Daria Gribkova, pages 183–211 and the same DOI at https://journals.rcsi.science/1999-5431/article/view/440087; journal primary abstract and package first-party complete text examined."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "journal_full_text",
+            "url": "https://journals.rcsi.science/1999-5431/article/view/440087",
+            "title": "NETWORK GOVERNANCE OF SCIENTIFIC AND TECHNOLOGICAL DEVELOPMENT BASED ON S&T FORESIGHT: JAPAN`S EXPERIENCE",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected NETWORK GOVERNANCE OF SCIENTIFIC AND TECHNOLOGICAL DEVELOPMENT BASED ON S&T FORESIGHT: JAPAN`S EXPERIENCE. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "The scholarly article retrospectively studies Japanese science-and-technology foresight institutions, policy coordination and five-year planning. It is not European R&I evidence under A Routes 1–3. Despite substantial S&T foresight content, it reconstructs an established Japanese governance practice rather than contributing or validating a materially new transferable B methodology."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:35Z",
+      "deep_scan_package_id": "worker-a-20261022T170459Z-ea33d99e34b3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:13831bce0a1807c2": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "86f32f36",
+      "identity_hash": "d09288a3377ad426",
+      "reader_title": "Mission-oriented innovation policy: effects on regions and implications for place-based policy",
+      "reader_what": "The editors identify tensions between mission-oriented innovation, regional capabilities and place-sensitive policy design.",
+      "reader_more": "The editors identify tensions between mission-oriented innovation, regional capabilities and place-sensitive policy design. Oxford University Press 2025 special-issue editorial by Feldman, Kitson, Larsson, Tyler and Uyarra, reviewing international literature and introduced papers. The editorial sets research questions and synthesises existing work; its international policy examples are not an EU-specific completed evaluation.",
+      "deep_analysis": {
+        "work_kind": "journal special-issue editorial",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "The editors identify tensions between mission-oriented innovation, regional capabilities and place-sensitive policy design.",
+        "method_or_basis": "Oxford University Press 2025 special-issue editorial by Feldman, Kitson, Larsson, Tyler and Uyarra, reviewing international literature and introduced papers.",
+        "qualification": "The editorial sets research questions and synthesises existing work; its international policy examples are not an EU-specific completed evaluation.",
+        "radar_relevance": "The peer-reviewed journal editorial introduces a thematic issue on mission-oriented innovation policies and place-based regional development, with examples across the EU, Germany and the US. While its themes concern R&I policy, this particular work is an international issue-framing synthesis, not a substantive original empirical assessment of European R&I states (A Route 2), nor Europe-centred Route 1 evidence, nor a European-system Route 3 study. It presents no genuinely new B foresight method.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Direct DOI fetch https://doi.org/10.1093/cjres/rsaf032 was not accessible through reader."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Opened Oxford Academic publisher version at https://academic.oup.com/cjres/article/18/3/439/8275547; title, five authors and October 6 publication date matched the full first-party PDF excerpt in package."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "journal_full_text",
+            "url": "https://academic.oup.com/cjres/article/18/3/439/8275547",
+            "title": "Mission-oriented innovation policy: effects on regions and implications for place-based policy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected Mission-oriented innovation policy: effects on regions and implications for place-based policy. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "The peer-reviewed journal editorial introduces a thematic issue on mission-oriented innovation policies and place-based regional development, with examples across the EU, Germany and the US. While its themes concern R&I policy, this particular work is an international issue-framing synthesis, not a substantive original empirical assessment of European R&I states (A Route 2), nor Europe-centred Route 1 evidence, nor a European-system Route 3 study. It presents no genuinely new B foresight method."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:35Z",
+      "deep_scan_package_id": "worker-a-20261022T170459Z-ea33d99e34b3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:00aa62b7bdb15292": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "98e8e15e",
+      "identity_hash": "5aca826f1e4dc523",
+      "reader_title": "The top 20 digital laws that all digital policy experts should know – CEPS",
+      "reader_what": "CEPS compiles a ranked reference list of EU digital acts and a separate list of digital strategy texts.",
+      "reader_more": "CEPS compiles a ranked reference list of EU digital acts and a separate list of digital strategy texts. Six-page CEPS legislative dataset, including a status-as-of-September-2025 description, compiled by Kai Zenner and J. Scott Marcus. A curated expert ranking of laws is not measured evidence of their effects on European innovation.",
+      "deep_analysis": {
+        "work_kind": "policy reference dataset",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "CEPS compiles a ranked reference list of EU digital acts and a separate list of digital strategy texts.",
+        "method_or_basis": "Six-page CEPS legislative dataset, including a status-as-of-September-2025 description, compiled by Kai Zenner and J. Scott Marcus.",
+        "qualification": "A curated expert ranking of laws is not measured evidence of their effects on European innovation.",
+        "radar_relevance": "CEPS provides two curated tables of 20 notable EU digital laws and selected strategic documents. This useful policy reference is not a substantive assessment of how law affects European research and innovation (A Routes 1–3): it primarily catalogues legislation. Ranking legal documents is not a new futures-analysis methodology (B).",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching primary PDF extract from the package at the supplied URL: https://cdn.ceps.eu/2025/08/Dataset-3_Top20-digital-laws.pdf. Identity and substance matched title."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://cdn.ceps.eu/2025/08/Dataset-3_Top20-digital-laws.pdf",
+            "title": "The top 20 digital laws that all digital policy experts should know – CEPS",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected The top 20 digital laws that all digital policy experts should know – CEPS. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "CEPS provides two curated tables of 20 notable EU digital laws and selected strategic documents. This useful policy reference is not a substantive assessment of how law affects European research and innovation (A Routes 1–3): it primarily catalogues legislation. Ranking legal documents is not a new futures-analysis methodology (B)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:35Z",
+      "deep_scan_package_id": "worker-a-20261022T170459Z-ea33d99e34b3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:35ad7eae47a28540": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "3bbec25c",
+      "identity_hash": "c28d477b487f8c8f",
+      "reader_title": "Advancing AI adoption in EU public administrations: Future directions and opportunities under the Apply AI Strategy",
+      "reader_what": "JRC outlines an AI-adoption framework for EU public administrations based on legal principles, organisational capacity and public value.",
+      "reader_more": "JRC outlines an AI-adoption framework for EU public administrations based on legal principles, organisational capacity and public value. Commission JRC publication abstract explicitly refers to the Apply AI Strategy adopted on 8 October 2025 and describes three implementation activities. Its AI implementation recommendations should not be interpreted as research-system performance findings.",
+      "deep_analysis": {
+        "work_kind": "public-administration AI adoption report",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "JRC outlines an AI-adoption framework for EU public administrations based on legal principles, organisational capacity and public value.",
+        "method_or_basis": "Commission JRC publication abstract explicitly refers to the Apply AI Strategy adopted on 8 October 2025 and describes three implementation activities.",
+        "qualification": "Its AI implementation recommendations should not be interpreted as research-system performance findings.",
+        "radar_relevance": "The official JRC report proposes ways EU public administrations can procure, govern and adopt AI under the Apply AI Strategy. It concerns operational public-service transformation rather than European R&I capacities or science-policy mechanisms: A Route 1 is not its focus, Route 2 lacks Europe-wide innovation-system empirical evidence and Route 3 is absent. No newly contributed foresight method under B.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching primary first-party page content from the package at the supplied URL: https://publications.jrc.ec.europa.eu/repository/handle/JRC143539. Identity and substance matched title."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_page",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC143539",
+            "title": "Advancing AI adoption in EU public administrations: Future directions and opportunities under the Apply AI Strategy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected Advancing AI adoption in EU public administrations: Future directions and opportunities under the Apply AI Strategy. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "The official JRC report proposes ways EU public administrations can procure, govern and adopt AI under the Apply AI Strategy. It concerns operational public-service transformation rather than European R&I capacities or science-policy mechanisms: A Route 1 is not its focus, Route 2 lacks Europe-wide innovation-system empirical evidence and Route 3 is absent. No newly contributed foresight method under B."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:35Z",
+      "deep_scan_package_id": "worker-a-20261022T170459Z-ea33d99e34b3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:b0fb532fde04c788": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "3fb7d5ed",
+      "identity_hash": "4a03f328005d3094",
+      "reader_title": "NSF to invest in new national network of AI-programmable cloud laboratories",
+      "reader_what": "The US National Science Foundation announces funding for a network of AI-programmable cloud laboratories.",
+      "reader_more": "The US National Science Foundation announces funding for a network of AI-programmable cloud laboratories. NSF first-party funding news dated 6 August 2025, discussing remotely programmable research laboratory infrastructure. An announced investment does not establish laboratory operation or measurable R&I outcomes.",
+      "deep_analysis": {
+        "work_kind": "US programme announcement",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "The US National Science Foundation announces funding for a network of AI-programmable cloud laboratories.",
+        "method_or_basis": "NSF first-party funding news dated 6 August 2025, discussing remotely programmable research laboratory infrastructure.",
+        "qualification": "An announced investment does not establish laboratory operation or measurable R&I outcomes.",
+        "radar_relevance": "NSF announces an American AI-programmable cloud-laboratory investment network. It is substantively about US research infrastructure, with no source-supported European R&I connection under A Routes 1–3. As a funding announcement rather than completed system evidence it would be C-type, but this lane is historical A/B-only. There is no B methodology contribution.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching primary first-party page content from the package at the supplied URL: https://www.nsf.gov/tip/updates/nsf-invest-new-national-network-ai-programmable-cloud. Identity and substance matched title."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_page",
+            "url": "https://www.nsf.gov/tip/updates/nsf-invest-new-national-network-ai-programmable-cloud",
+            "title": "NSF to invest in new national network of AI-programmable cloud laboratories",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected NSF to invest in new national network of AI-programmable cloud laboratories. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "NSF announces an American AI-programmable cloud-laboratory investment network. It is substantively about US research infrastructure, with no source-supported European R&I connection under A Routes 1–3. As a funding announcement rather than completed system evidence it would be C-type, but this lane is historical A/B-only. There is no B methodology contribution."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:35Z",
+      "deep_scan_package_id": "worker-a-20261022T170459Z-ea33d99e34b3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:29f10bbc6f8fac21": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "f2c1282d",
+      "identity_hash": "3d9b9cd2b9195cff",
+      "reader_title": "Biorisk Governance: Advancing Biosecurity Education for Life Scientists → UNIDIR",
+      "reader_what": "UNIDIR evaluates ways to strengthen biosecurity education for researchers working with life-science risks.",
+      "reader_more": "UNIDIR evaluates ways to strengthen biosecurity education for researchers working with life-science risks. August 2025 UNIDIR report by Sarah Ruth Opatowski, presenting seven educational approaches and practical implementation challenges. The suggested approaches are educational and governance options, not demonstrated future incident reductions.",
+      "deep_analysis": {
+        "work_kind": "global biosecurity education report",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "UNIDIR evaluates ways to strengthen biosecurity education for researchers working with life-science risks.",
+        "method_or_basis": "August 2025 UNIDIR report by Sarah Ruth Opatowski, presenting seven educational approaches and practical implementation challenges.",
+        "qualification": "The suggested approaches are educational and governance options, not demonstrated future incident reductions.",
+        "radar_relevance": "UNIDIR supplies a substantive educational biosecurity and biorisk-governance roadmap aimed at life scientists worldwide. Its central object is responsible scientific conduct and disarmament education, not European R&I-system structures or trajectories under A Routes 1–3; references to European organisations are incidental. Its teaching options are not a novel foresight/R&I-intelligence method under B.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Live web PDF read https://unidir.org/wp-content/uploads/2025/08/UNIDIR_Biorisk_Governance_Advancing_Biosecurity_Education_for_Life_Scientists.pdf exceeded remote reader content-size limit."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Original UNIDIR publishing record at https://unidir.org/publication/biorisk-governance-advancing-biosecurity-education-for-life-scientists/ matched document and author."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Inspected 15k-character first-party PDF page extraction preserved in package, including seven educational approaches."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://unidir.org/publication/biorisk-governance-advancing-biosecurity-education-for-life-scientists/",
+            "title": "Biorisk Governance: Advancing Biosecurity Education for Life Scientists → UNIDIR",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected Biorisk Governance: Advancing Biosecurity Education for Life Scientists → UNIDIR. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "UNIDIR supplies a substantive educational biosecurity and biorisk-governance roadmap aimed at life scientists worldwide. Its central object is responsible scientific conduct and disarmament education, not European R&I-system structures or trajectories under A Routes 1–3; references to European organisations are incidental. Its teaching options are not a novel foresight/R&I-intelligence method under B."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:35Z",
+      "deep_scan_package_id": "worker-a-20261022T170459Z-ea33d99e34b3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:d5a511bb499c8787": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "af444d06",
+      "identity_hash": "e570800a2862c7a8",
+      "reader_title": "Policy Coherence in the Time of Economic Insecurity: Balancing the Sustainable Trade and Development Playbook of th",
+      "reader_what": "The authors identify tensions between EU external sustainability commitments and competitiveness/economic-security goals.",
+      "reader_more": "The authors identify tensions between EU external sustainability commitments and competitiveness/economic-security goals. Wiley Journal of Common Market Studies 2025 academic article on EU sustainable trade policy, development cooperation and critical-materials priorities. The paper discusses policy tension and early initiatives; it does not demonstrate their realised economic effects.",
+      "deep_analysis": {
+        "work_kind": "EU trade-policy journal article",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "The authors identify tensions between EU external sustainability commitments and competitiveness/economic-security goals.",
+        "method_or_basis": "Wiley Journal of Common Market Studies 2025 academic article on EU sustainable trade policy, development cooperation and critical-materials priorities.",
+        "qualification": "The paper discusses policy tension and early initiatives; it does not demonstrate their realised economic effects.",
+        "radar_relevance": "The research article investigates the EU Commission’s sustainable trade, development policy and economic-security coherence, not research and innovation institutions or technological capabilities. Its EU emphasis is real but A Routes 1–3 fail the central R&I subject criterion. It contributes no forward-looking innovation-intelligence methodology under B.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "DOI resolver https://doi.org/10.1111/jcms.70001 failed in initial web reader."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Opened Wiley full-text official journal article at https://onlinelibrary.wiley.com/doi/full/10.1111/jcms.70001; confirmed Stender, Vogel, Keijzer and 17 July 2025 first publication."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "journal_full_text",
+            "url": "https://onlinelibrary.wiley.com/doi/full/10.1111/jcms.70001",
+            "title": "Policy Coherence in the Time of Economic Insecurity: Balancing the Sustainable Trade and Development Playbook of the New European Commission",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected Policy Coherence in the Time of Economic Insecurity: Balancing the Sustainable Trade and Development Playbook of the New European Commission. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "The research article investigates the EU Commission’s sustainable trade, development policy and economic-security coherence, not research and innovation institutions or technological capabilities. Its EU emphasis is real but A Routes 1–3 fail the central R&I subject criterion. It contributes no forward-looking innovation-intelligence methodology under B."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:35Z",
+      "deep_scan_package_id": "worker-a-20261022T170459Z-ea33d99e34b3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:ed3e1fc916559e6b": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "65f5ecb3",
+      "identity_hash": "7c1c77d66f793d21",
+      "reader_title": "The Limits of Autonomy: Realigning Quantum Strategy",
+      "reader_what": "ECIPE argues that Europe should combine targeted quantum autonomy with international specialisation instead of pursuing self-sufficiency in every layer.",
+      "reader_why": "EU quantum-research strengths, scaling constraints and external component dependencies affect Europe’s R&I capability.",
+      "reader_more": "ECIPE argues that Europe should combine targeted quantum autonomy with international specialisation instead of pursuing self-sufficiency in every layer. Original ECIPE analysis of the EU Quantum Strategy’s research, infrastructure, commercialisation, skills and supply-chain pillars, with economic-complexity comparisons. This is a policy interpretation of uneven capability and strategic dependencies, not a quantitative forecast or evidence that an alternative EU plan has been adopted.",
+      "deep_analysis": {
+        "work_kind": "European quantum technology strategy analysis",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "ECIPE argues that Europe should combine targeted quantum autonomy with international specialisation instead of pursuing self-sufficiency in every layer.",
+        "method_or_basis": "Original ECIPE analysis of the EU Quantum Strategy’s research, infrastructure, commercialisation, skills and supply-chain pillars, with economic-complexity comparisons.",
+        "qualification": "This is a policy interpretation of uneven capability and strategic dependencies, not a quantitative forecast or evidence that an alternative EU plan has been adopted.",
+        "radar_relevance": "The ECIPE analysis directly examines EU quantum research, technological capability, supply-chain dependence and the Commission’s July 2025 quantum strategy. A Route 1 qualifies through European strategic R&I technology dependencies, independently supported by Route 2 technology capacity and Route 3 R&D ecosystem governance; it is a reasoned policy analysis rather than realised outcome evidence.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Live ECIPE article https://ecipe.org/insights/realigning-quantum-strategy/ timed out when reopened in web reader."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Examined 18k-character prior first-party ECIPE article extraction at same URL, corroborated by publisher-indexed searchable article with author Dyuti Pandya."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_page",
+            "url": "https://ecipe.org/insights/realigning-quantum-strategy/",
+            "title": "The Limits of Autonomy: Realigning Quantum Strategy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected The Limits of Autonomy: Realigning Quantum Strategy. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The ECIPE analysis directly examines EU quantum research, technological capability, supply-chain dependence and the Commission’s July 2025 quantum strategy. A Route 1 qualifies through European strategic R&I technology dependencies, independently supported by Route 2 technology capacity and Route 3 R&D ecosystem governance; it is a reasoned policy analysis rather than realised outcome evidence."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:36Z",
+      "deep_scan_package_id": "worker-a-20261022T170459Z-ea33d99e34b3",
+      "claims": [
+        {
+          "object": "quantum.governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "ECIPE",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2025-07-03",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "This is a policy interpretation of uneven capability and strategic dependencies, not a quantitative forecast or evidence that an alternative EU plan has been adopted.",
+          "text": "ECIPE argues that Europe should combine targeted quantum autonomy with international specialisation instead of pursuing self-sufficiency in every layer.",
+          "confidence": "high",
+          "record_key": "historical:id:ed3e1fc916559e6b",
+          "merit": 71,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:7c1c77d66f793d21:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:89622520ca8db180": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "9a0e3806",
+      "identity_hash": "b81341df08cca6bc",
+      "reader_title": "The EU’s new International Digital Strategy offers a promising start – but how it’s implemented will determine its",
+      "reader_what": "CEPS welcomes the EU International Digital Strategy but argues that priorities, partnerships and implementation will determine results.",
+      "reader_more": "CEPS welcomes the EU International Digital Strategy but argues that priorities, partnerships and implementation will determine results. CEPS June 2025 policy commentary assessing a newly announced EU international digital strategy and external technology partnerships. The prospective partnerships are strategic intentions rather than assessed research or innovation system effects.",
+      "deep_analysis": {
+        "work_kind": "international digital-policy commentary",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "CEPS welcomes the EU International Digital Strategy but argues that priorities, partnerships and implementation will determine results.",
+        "method_or_basis": "CEPS June 2025 policy commentary assessing a newly announced EU international digital strategy and external technology partnerships.",
+        "qualification": "The prospective partnerships are strategic intentions rather than assessed research or innovation system effects.",
+        "radar_relevance": "CEPS evaluates implementation prospects for the EU’s International Digital Strategy, a just-announced foreign digital cooperation policy. It discusses connectivity, standards and digital partnerships rather than supplying a substantive completed evaluation of European R&I capability, science-policy design or technology outcomes under A Routes 1–3. Its recommendations are commentary, and there is no B foresight method.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Live CEPS article URL https://www.ceps.eu/the-eus-new-international-digital-strategy-offers-a-promising-start-but-how-its-implemented-will-determine-its-ultimate-success/ timed out in direct reader."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Inspected 17k-character prior substantive CEPS first-party article extraction, matched publisher search-index record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_page",
+            "url": "https://www.ceps.eu/the-eus-new-international-digital-strategy-offers-a-promising-start-but-how-its-implemented-will-determine-its-ultimate-success/",
+            "title": "The EU’s new International Digital Strategy offers a promising start – but how it’s implemented will determine its ultimate success – CEPS",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected The EU’s new International Digital Strategy offers a promising start – but how it’s implemented will determine its ultimate success – CEPS. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "CEPS evaluates implementation prospects for the EU’s International Digital Strategy, a just-announced foreign digital cooperation policy. It discusses connectivity, standards and digital partnerships rather than supplying a substantive completed evaluation of European R&I capability, science-policy design or technology outcomes under A Routes 1–3. Its recommendations are commentary, and there is no B foresight method."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:36Z",
+      "deep_scan_package_id": "worker-a-20261022T170459Z-ea33d99e34b3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:766219a780b34f77": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "697bb7fe",
+      "identity_hash": "b937e0fd9701bdc4",
+      "reader_title": "Navigating Knowledge and Research Security in EU-China Relations: The Case of Hungary, Italy and the Netherlands",
+      "reader_what": "EU guidance on research security coexists with divergent national university cooperation approaches toward China.",
+      "reader_why": "Research security and international university partnerships are direct European research-system governance mechanisms.",
+      "reader_more": "EU guidance on research security coexists with divergent national university cooperation approaches toward China. Cristina Pinna’s Journal of Studies in International Education open-access comparative analysis of EU policy and the experiences of Hungary, Italy and the Netherlands. The three purposively compared member states illustrate governance variation; they do not quantify the prevalence of security incidents across all EU universities.",
+      "deep_analysis": {
+        "work_kind": "peer-reviewed comparative university research-policy study",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "EU guidance on research security coexists with divergent national university cooperation approaches toward China.",
+        "method_or_basis": "Cristina Pinna’s Journal of Studies in International Education open-access comparative analysis of EU policy and the experiences of Hungary, Italy and the Netherlands.",
+        "qualification": "The three purposively compared member states illustrate governance variation; they do not quantify the prevalence of security incidents across all EU universities.",
+        "radar_relevance": "This open-access peer-reviewed article directly studies European knowledge security in higher-education research cooperation with China across Hungary, Italy and the Netherlands. It qualifies under A Route 3 by analysing EU/member-state research-collaboration governance and Route 1 strategic technology-knowledge risk. It is not merely EU-China general diplomacy.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened DOI https://doi.org/10.1177/10283153241307970 via the publisher https://journals.sagepub.com/doi/10.1177/10283153241307970; verified SAGE peer-reviewed full text, author Cristina Pinna, first published 22 December 2024 and all three member-state research-security cases."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "journal_full_text",
+            "url": "https://journals.sagepub.com/doi/10.1177/10283153241307970",
+            "title": "Navigating Knowledge and Research Security in EU-China Relations: The Case of Hungary, Italy and the Netherlands",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected Navigating Knowledge and Research Security in EU-China Relations: The Case of Hungary, Italy and the Netherlands. Compared title, issuer and work type with the live first-party article; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "This open-access peer-reviewed article directly studies European knowledge security in higher-education research cooperation with China across Hungary, Italy and the Netherlands. It qualifies under A Route 3 by analysing EU/member-state research-collaboration governance and Route 1 strategic technology-knowledge risk. It is not merely EU-China general diplomacy."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:36Z",
+      "deep_scan_package_id": "worker-a-20261022T170459Z-ea33d99e34b3",
+      "claims": [
+        {
+          "object": "research_security.screening",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Cristina Pinna",
+            "class": "other"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2024-12-22",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The three purposively compared member states illustrate governance variation; they do not quantify the prevalence of security incidents across all EU universities.",
+          "text": "EU guidance on research security coexists with divergent national university cooperation approaches toward China.",
+          "confidence": "high",
+          "record_key": "historical:id:766219a780b34f77",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:b937e0fd9701bdc4:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:9747fec711259ae7": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "7db8dc94",
+      "identity_hash": "1116ad2de12896a2",
+      "reader_title": "Artificial Intelligence and Cybersecurity Governance: Comparative Insights into National Defense Strategies",
+      "reader_what": "A comparative review contrasts national AI cybersecurity policies and defence strategies across multiple jurisdictions.",
+      "reader_more": "A comparative review contrasts national AI cybersecurity policies and defence strategies across multiple jurisdictions. 2025 Politeia journal article examining defence cybersecurity strategy and governance in the US, UK, Singapore, parts of Africa and Europe. The article’s comparisons are literature-based policy interpretations, not evidence of EU R&I governance outcomes.",
+      "deep_analysis": {
+        "work_kind": "comparative defence governance journal article",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "A comparative review contrasts national AI cybersecurity policies and defence strategies across multiple jurisdictions.",
+        "method_or_basis": "2025 Politeia journal article examining defence cybersecurity strategy and governance in the US, UK, Singapore, parts of Africa and Europe.",
+        "qualification": "The article’s comparisons are literature-based policy interpretations, not evidence of EU R&I governance outcomes.",
+        "radar_relevance": "The article compares AI-enabled cybersecurity governance and national defence approaches across several non-EU jurisdictions and the EU. European policy appears as one comparator but the central evidence is broad defence/cybersecurity governance rather than European research and innovation (A Routes 1–3). It does not introduce a reusable B foresight or R&I-intelligence method.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Initial DOI browser resolution https://doi.org/10.61978/politeia.v3i2.830 failed."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publisher-indexed primary article at https://journal.idscipub.com/index.php/politeia/article/view/830 verified title, authors, DOI, 30 April 2025, country comparisons and detailed abstract; article substantive original text is in package."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "journal_full_text",
+            "url": "https://journal.idscipub.com/index.php/politeia/article/view/830",
+            "title": "Artificial Intelligence and Cybersecurity Governance: Comparative Insights into National Defense Strategies",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected Artificial Intelligence and Cybersecurity Governance: Comparative Insights into National Defense Strategies. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "The article compares AI-enabled cybersecurity governance and national defence approaches across several non-EU jurisdictions and the EU. European policy appears as one comparator but the central evidence is broad defence/cybersecurity governance rather than European research and innovation (A Routes 1–3). It does not introduce a reusable B foresight or R&I-intelligence method."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:36Z",
+      "deep_scan_package_id": "worker-a-20261022T170459Z-ea33d99e34b3",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:41fc0cd7ed2f6190": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "aa94efcc",
+      "identity_hash": "b361f34680aeb778",
+      "reader_title": "Doing resilience better, with less: The cornerstone of the EU’s Eastern policy needs rethinking",
+      "reader_what": "EUISS recommends a community-focused resilience approach to shrinking aid in the EU eastern neighbourhood.",
+      "reader_more": "EUISS recommends a community-focused resilience approach to shrinking aid in the EU eastern neighbourhood. First-party EUISS policy brief dated 1 April 2025; compares USAID assistance and conditions in Moldova, Georgia and Armenia. The document is verified, but its subject fails the historical A/B admission criteria.",
+      "deep_analysis": {
+        "work_kind": "foreign-policy analysis brief",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "EUISS recommends a community-focused resilience approach to shrinking aid in the EU eastern neighbourhood.",
+        "method_or_basis": "First-party EUISS policy brief dated 1 April 2025; compares USAID assistance and conditions in Moldova, Georgia and Armenia.",
+        "qualification": "The document is verified, but its subject fails the historical A/B admission criteria.",
+        "radar_relevance": "EUISS examines foreign aid reductions, democratic institutions, resilience and energy dependency in Moldova, Georgia and Armenia. Though relevant to EU foreign relations, it neither analyses European research/innovation as its main object (A Routes 1-3) nor contributes a transferable foresight method (B).",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened complete EUISS first-party brief, confirmed Ondrej Ditrych, 1 April 2025, and Eastern-neighbourhood foreign-aid emphasis: https://www.iss.europa.eu/publications/briefs/doing-resilience-better-less-cornerstone-eus-eastern-policy-needs-rethinking"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_page",
+            "url": "https://www.iss.europa.eu/publications/briefs/doing-resilience-better-less-cornerstone-eus-eastern-policy-needs-rethinking",
+            "title": "Doing resilience better, with less: The cornerstone of the EU’s Eastern policy needs rethinking",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected Doing resilience better, with less: The cornerstone of the EU’s Eastern policy needs rethinking. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "EUISS examines foreign aid reductions, democratic institutions, resilience and energy dependency in Moldova, Georgia and Armenia. Though relevant to EU foreign relations, it neither analyses European research/innovation as its main object (A Routes 1-3) nor contributes a transferable foresight method (B)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:36Z",
+      "deep_scan_package_id": "worker-b-20261022T170508Z-54f5b9a1e4fa",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:fd45ef9621126ae9": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "adab2b6f",
+      "identity_hash": "5fb6bd07a7082a0c",
+      "reader_title": "Towards a Sustainable Disruptive Growth Model: Integrating Foresight, Wild Cards and Weak Signals Analysis",
+      "reader_what": "A growth-and-resilience framework combines weak signals, wild cards and four dimensions to examine disruptive change.",
+      "reader_why": "The model is transferable to horizon scanning and technology or innovation futures.",
+      "reader_more": "A growth-and-resilience framework combines weak signals, wild cards and four dimensions to examine disruptive change. Foresight and STI Governance 19(1), pages 32–49; substantive publisher full-text and methods discussion, corroborated via journal DOI and issue listing. The methodological integration is proposed; demonstrated predictive reliability is not established.",
+      "deep_analysis": {
+        "work_kind": "methods research article",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "A growth-and-resilience framework combines weak signals, wild cards and four dimensions to examine disruptive change.",
+        "method_or_basis": "Foresight and STI Governance 19(1), pages 32–49; substantive publisher full-text and methods discussion, corroborated via journal DOI and issue listing.",
+        "qualification": "The methodological integration is proposed; demonstrated predictive reliability is not established.",
+        "radar_relevance": "The peer-reviewed methodology paper presents a Sustainable Disruptive Growth framework integrating wild cards, weak-signal monitoring and metrics across context, people, process and impact. This is a proposed transferable futures-analysis method, not merely a case application.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "DOI redirect https://doi.org/10.17323/fstig.2025.24753 was not accessible to the web reader."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Opened matching full journal article at https://foresight-journal.hse.ru/article/view/24753; DOI, 2025 date and all three authors checked."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "journal_full_text",
+            "url": "https://foresight-journal.hse.ru/article/view/24753",
+            "title": "Towards a Sustainable Disruptive Growth Model: Integrating Foresight, Wild Cards and Weak Signals Analysis",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected Towards a Sustainable Disruptive Growth Model: Integrating Foresight, Wild Cards and Weak Signals Analysis. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_TRANSFERABLE_METHOD",
+        "reason": "The peer-reviewed methodology paper presents a Sustainable Disruptive Growth framework integrating wild cards, weak-signal monitoring and metrics across context, people, process and impact. This is a proposed transferable futures-analysis method, not merely a case application."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:37Z",
+      "deep_scan_package_id": "worker-b-20261022T170508Z-54f5b9a1e4fa",
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Rafael Popper, Yuli Villarroel and Raimund Popper",
+            "class": "other"
+          },
+          "mechanism": "integrates",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2025-03-16",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The methodological integration is proposed; demonstrated predictive reliability is not established.",
+          "text": "A growth-and-resilience framework combines weak signals, wild cards and four dimensions to examine disruptive change.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "historical:id:fd45ef9621126ae9",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:5fb6bd07a7082a0c:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:2513853638fd175d": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "4949354c",
+      "identity_hash": "2264456a0dfd51a4",
+      "reader_title": "EuroStack – A European Alternative for Digital Sovereignty",
+      "reader_what": "EuroStack documents European digital-stack dependencies and proposes coordinated public investment and governance alternatives.",
+      "reader_why": "Control of cloud, chips, AI and networks affects Europe’s digital research and innovation independence.",
+      "reader_more": "EuroStack documents European digital-stack dependencies and proposes coordinated public investment and governance alternatives. Bertelsmann Stiftung February 2025 128-page policy report commissioned by the foundation, supported by CEPS, Mercator Stiftung and UCL IIPP. Its proposed EuroStack architecture is a policy vision, not an implemented European replacement stack.",
+      "deep_analysis": {
+        "work_kind": "strategic technology policy report",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "EuroStack documents European digital-stack dependencies and proposes coordinated public investment and governance alternatives.",
+        "method_or_basis": "Bertelsmann Stiftung February 2025 128-page policy report commissioned by the foundation, supported by CEPS, Mercator Stiftung and UCL IIPP.",
+        "qualification": "Its proposed EuroStack architecture is a policy vision, not an implemented European replacement stack.",
+        "radar_relevance": "The Bertelsmann Stiftung-led EuroStack report offers a detailed layer-by-layer analysis of Europe’s dependence on foreign digital infrastructure, cloud, chips, software and AI, including prospective governance options. This qualifies via European strategic R&I/technology-system Route 1 and Route 2.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened full report PDF https://cdn.ceps.eu/wp-content/uploads/2025/02/EuroStack_2025.pdf, including Bertelsmann legal/publisher notice and substantive digital-stack chapters."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://cdn.ceps.eu/wp-content/uploads/2025/02/EuroStack_2025.pdf",
+            "title": "EuroStack – A European Alternative for Digital Sovereignty",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected EuroStack – A European Alternative for Digital Sovereignty. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The Bertelsmann Stiftung-led EuroStack report offers a detailed layer-by-layer analysis of Europe’s dependence on foreign digital infrastructure, cloud, chips, software and AI, including prospective governance options. This qualifies via European strategic R&I/technology-system Route 1 and Route 2."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:37Z",
+      "deep_scan_package_id": "worker-b-20261022T170508Z-54f5b9a1e4fa",
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Bertelsmann Stiftung",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2025-02",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Its proposed EuroStack architecture is a policy vision, not an implemented European replacement stack.",
+          "text": "EuroStack documents European digital-stack dependencies and proposes coordinated public investment and governance alternatives.",
+          "confidence": "high",
+          "status_date_precision": "month",
+          "record_key": "historical:id:2513853638fd175d",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:2264456a0dfd51a4:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:35572becf209bda9": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "e433b4ae",
+      "identity_hash": "a50574126bb72388",
+      "reader_title": "Why Chief Sustainability Officers need to understand strategic foresight | VTT",
+      "reader_what": "VTT advocates foresight exercises for sustainability executives facing long-term uncertainty.",
+      "reader_more": "VTT advocates foresight exercises for sustainability executives facing long-term uncertainty. VTT first-party explanatory article describing scenario planning and anticipation in corporate sustainability leadership. The document is verified, but its subject fails the historical A/B admission criteria.",
+      "deep_analysis": {
+        "work_kind": "corporate practice commentary",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "VTT advocates foresight exercises for sustainability executives facing long-term uncertainty.",
+        "method_or_basis": "VTT first-party explanatory article describing scenario planning and anticipation in corporate sustainability leadership.",
+        "qualification": "The document is verified, but its subject fails the historical A/B admission criteria.",
+        "radar_relevance": "VTT argues that sustainability executives should use existing strategic-foresight tools, but its article introduces no materially new transferable method (B). Its corporate management advice provides no measured European R&I-system evidence under A Routes 1-3.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened VTT original advice article https://www.vttresearch.com/en/news-and-ideas/why-chief-sustainability-officers-need-understand-strategic-foresight; corporate foresight guidance, with no new research methodology."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_page",
+            "url": "https://www.vttresearch.com/en/news-and-ideas/why-chief-sustainability-officers-need-understand-strategic-foresight",
+            "title": "Why Chief Sustainability Officers need to understand strategic foresight | VTT",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected Why Chief Sustainability Officers need to understand strategic foresight | VTT. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "VTT argues that sustainability executives should use existing strategic-foresight tools, but its article introduces no materially new transferable method (B). Its corporate management advice provides no measured European R&I-system evidence under A Routes 1-3."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:37Z",
+      "deep_scan_package_id": "worker-b-20261022T170508Z-54f5b9a1e4fa",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:19488269c18248bf": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "b1fc16c6",
+      "identity_hash": "bfee1f8981ac3559",
+      "reader_title": "FMR, Fuels and Materials Research (ActUsLab) 2025-1-RD-ActUsLab-FMR",
+      "reader_what": "JRC offered access to an actinide fuel-and-materials research laboratory in Karlsruhe through a 2025 call.",
+      "reader_more": "JRC offered access to an actinide fuel-and-materials research laboratory in Karlsruhe through a 2025 call. European Commission JRC call page, reference 2025-1-RD-ActUsLab-FMR, published 31 January 2025. The document is verified, but its subject fails the historical A/B admission criteria.",
+      "deep_analysis": {
+        "work_kind": "research infrastructure call notice",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "JRC offered access to an actinide fuel-and-materials research laboratory in Karlsruhe through a 2025 call.",
+        "method_or_basis": "European Commission JRC call page, reference 2025-1-RD-ActUsLab-FMR, published 31 January 2025.",
+        "qualification": "The document is verified, but its subject fails the historical A/B admission criteria.",
+        "radar_relevance": "JRC page is a closed research-infrastructure call for proposals concerning actinide fuel/materials lab access. It lists facilities and application terms rather than completed analytical European R&I evidence (A Routes 1-3) or a novel reusable foresight method (B).",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened full JRC call description, verifying deadline, publication date, facilities and call type: https://joint-research-centre.ec.europa.eu/calls-proposals/fmr-fuels-and-materials-research-actuslab-2025-1-rd-actuslab-fmr_en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_page",
+            "url": "https://joint-research-centre.ec.europa.eu/calls-proposals/fmr-fuels-and-materials-research-actuslab-2025-1-rd-actuslab-fmr_en",
+            "title": "FMR, Fuels and Materials Research (ActUsLab) 2025-1-RD-ActUsLab-FMR",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected FMR, Fuels and Materials Research (ActUsLab) 2025-1-RD-ActUsLab-FMR. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "JRC page is a closed research-infrastructure call for proposals concerning actinide fuel/materials lab access. It lists facilities and application terms rather than completed analytical European R&I evidence (A Routes 1-3) or a novel reusable foresight method (B)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:37Z",
+      "deep_scan_package_id": "worker-b-20261022T170508Z-54f5b9a1e4fa",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:8c4dc1f80be40a21": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "4b0d1517",
+      "identity_hash": "b42dbf17907e813c",
+      "reader_title": "Protecting European AI-Related Innovations: Preventing Their Use in China’s Military Advancements",
+      "reader_what": "European AI-related technologies may enter Chinese defence supply chains beyond the most visible semiconductor components.",
+      "reader_why": "Technology transfer and export-screening choices affect European innovation security and research collaboration.",
+      "reader_more": "European AI-related technologies may enter Chinese defence supply chains beyond the most visible semiconductor components. HCSS-Datenna January 2025 mixed qualitative and open-source quantitative research on Chinese AI military technology and EU transfer-control scenarios. Research content was finalised 14 April 2024; assessed pathways and export-control scenarios are not evidence of subsequent outcomes.",
+      "deep_analysis": {
+        "work_kind": "strategic research-security report",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "European AI-related technologies may enter Chinese defence supply chains beyond the most visible semiconductor components.",
+        "method_or_basis": "HCSS-Datenna January 2025 mixed qualitative and open-source quantitative research on Chinese AI military technology and EU transfer-control scenarios.",
+        "qualification": "Research content was finalised 14 April 2024; assessed pathways and export-control scenarios are not evidence of subsequent outcomes.",
+        "radar_relevance": "The HCSS/Datenna collaborative research tracks technology components enabling Chinese military AI, considers European innovation spillovers and evaluates knowledge-transfer controls. This is substantive European R&I security/technology dependency evidence under A Route 1.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened matching 31-page HCSS/Datenna PDF https://hcss.nl/wp-content/uploads/2025/01/Final-Formatted-Version-Datenna-HCSS-200125.pdf, verified authors, January 2025 and published executive summary."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://hcss.nl/wp-content/uploads/2025/01/Final-Formatted-Version-Datenna-HCSS-200125.pdf",
+            "title": "Protecting European AI-Related Innovations: Preventing Their Use in China’s Military Advancements - HCSS",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected Protecting European AI-Related Innovations: Preventing Their Use in China’s Military Advancements - HCSS. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The HCSS/Datenna collaborative research tracks technology components enabling Chinese military AI, considers European innovation spillovers and evaluates knowledge-transfer controls. This is substantive European R&I security/technology dependency evidence under A Route 1."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:38Z",
+      "deep_scan_package_id": "worker-b-20261022T170508Z-54f5b9a1e4fa",
+      "claims": [
+        {
+          "object": "research_security.screening",
+          "secondary_objects": [],
+          "actor": {
+            "name": "HCSS and Datenna",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2025-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Research content was finalised 14 April 2024; assessed pathways and export-control scenarios are not evidence of subsequent outcomes.",
+          "text": "European AI-related technologies may enter Chinese defence supply chains beyond the most visible semiconductor components.",
+          "confidence": "high",
+          "status_date_precision": "month",
+          "record_key": "historical:id:8c4dc1f80be40a21",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:b42dbf17907e813c:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:9df98530c8e7c960": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "da15d895",
+      "identity_hash": "dde0010328f24944",
+      "reader_title": "Welcome to digital coffee about Horizon Europe cluster 3",
+      "reader_what": "The Vinnova national contact points explain Horizon Europe Cluster 3 topics and application opportunities.",
+      "reader_more": "The Vinnova national contact points explain Horizon Europe Cluster 3 topics and application opportunities. First-party Vinnova presentation for a digital coffee information session about EU civil-security research funding. Open or forthcoming research calls are opportunities rather than evidence of programme outcomes.",
+      "deep_analysis": {
+        "work_kind": "funding webinar presentation",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "The Vinnova national contact points explain Horizon Europe Cluster 3 topics and application opportunities.",
+        "method_or_basis": "First-party Vinnova presentation for a digital coffee information session about EU civil-security research funding.",
+        "qualification": "Open or forthcoming research calls are opportunities rather than evidence of programme outcomes.",
+        "radar_relevance": "Vinnova’s slide deck introduces Horizon Europe Cluster 3 security calls and project themes for prospective participants. It is a funding-information webinar, not completed European research or innovation system analysis under A Routes 1–3, and it offers no novel transferable foresight method under B.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching primary PDF extract from the package at the supplied URL: https://www.vinnova.se/contentassets/4be67bf221f14a66939aec5e7bf54284/fika-med-din-ncp--kluster-3.pdf. Identity and substance matched title."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.vinnova.se/contentassets/4be67bf221f14a66939aec5e7bf54284/fika-med-din-ncp--kluster-3.pdf",
+            "title": "Welcome to digital coffee about Horizon Europe cluster 3 | Vinnova",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected Welcome to digital coffee about Horizon Europe cluster 3 | Vinnova. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "Vinnova’s slide deck introduces Horizon Europe Cluster 3 security calls and project themes for prospective participants. It is a funding-information webinar, not completed European research or innovation system analysis under A Routes 1–3, and it offers no novel transferable foresight method under B."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:38Z",
+      "deep_scan_package_id": "worker-b-20261022T170508Z-54f5b9a1e4fa",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:d8644ec6784bcc45": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "3c8296cc",
+      "identity_hash": "0601ee24bb238ad6",
+      "reader_title": "User study and IPR analysis in preparation for EIC Accelerator - Strategic Health and Digital Technologies",
+      "reader_what": "Vinnova describes pre-application support to examine user needs and intellectual property for an EIC Accelerator proposal.",
+      "reader_more": "Vinnova describes pre-application support to examine user needs and intellectual property for an EIC Accelerator proposal. Official Swedish Vinnova project or call record with programme framing and beneficiary/financing metadata. The project description does not establish that the planned market research produced its stated benefits.",
+      "deep_analysis": {
+        "work_kind": "individual funding/project registry",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "Vinnova describes pre-application support to examine user needs and intellectual property for an EIC Accelerator proposal.",
+        "method_or_basis": "Official Swedish Vinnova project or call record with programme framing and beneficiary/financing metadata.",
+        "qualification": "The project description does not establish that the planned market research produced its stated benefits.",
+        "radar_relevance": "The Vinnova page is an administrative listing for applicant support: user studies and intellectual-property analyses before EIC Accelerator applications in strategic health and digital technologies. A Routes 1–3 fail because an individual project/funding listing is not a substantive evidence product about European innovation systems. There is no newly transferable B foresight method.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching primary first-party page content from the package at the supplied URL: https://www.vinnova.se/en/p/user-study-and-ipr-analysis-in-preparation-for-eic-accelerator---strategic-health-and-digital-technologies/. Identity and substance matched title."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_page",
+            "url": "https://www.vinnova.se/en/p/user-study-and-ipr-analysis-in-preparation-for-eic-accelerator---strategic-health-and-digital-technologies/",
+            "title": "User study and IPR analysis in preparation for EIC Accelerator - Strategic Health and Digital Technologies | Vinnova",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected User study and IPR analysis in preparation for EIC Accelerator - Strategic Health and Digital Technologies | Vinnova. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "The Vinnova page is an administrative listing for applicant support: user studies and intellectual-property analyses before EIC Accelerator applications in strategic health and digital technologies. A Routes 1–3 fail because an individual project/funding listing is not a substantive evidence product about European innovation systems. There is no newly transferable B foresight method."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:38Z",
+      "deep_scan_package_id": "worker-b-20261022T170508Z-54f5b9a1e4fa",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:065123cbb1bdf9fa": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "b9b3c4d3",
+      "identity_hash": "554c6acb2089face",
+      "reader_title": "The European Union’s AI Factories: Lessons for Public Investment in AI Infrastructure in Europe",
+      "reader_what": "Academic institutions dominate EU AI-factory consortia, while weak industry participation risks limiting uptake by startups and SMEs.",
+      "reader_why": "Factory research partnerships and user access are direct mechanisms of Europe’s AI-innovation infrastructure.",
+      "reader_more": "Academic institutions dominate EU AI-factory consortia, while weak industry participation risks limiting uptake by startups and SMEs. 30 October 2025 interface policy brief mapping the 13 EU AI Factories selected by October 2025, their partners, research users and technology specialisations. Only selected factories available for the mapping were studied; actual industrial utilisation and later operational impacts are not established.",
+      "deep_analysis": {
+        "work_kind": "empirical AI research infrastructure policy brief",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "Academic institutions dominate EU AI-factory consortia, while weak industry participation risks limiting uptake by startups and SMEs.",
+        "method_or_basis": "30 October 2025 interface policy brief mapping the 13 EU AI Factories selected by October 2025, their partners, research users and technology specialisations.",
+        "qualification": "Only selected factories available for the mapping were studied; actual industrial utilisation and later operational impacts are not established.",
+        "radar_relevance": "The original interface report closely examines the EU AI Factories’ consortium makeup, user access and regional innovation ecosystems before October 2025. It qualifies under A Route 2 as empirical European AI research infrastructure analysis and Route 3 as innovation-system implementation evidence. No need to infer future success from investment announcements.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching primary PDF extract from the package at the supplied URL: https://www.interface-eu.org/publications/downloadPdf/ai-factories. Identity and substance matched title."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.interface-eu.org/publications/downloadPdf/ai-factories",
+            "title": "The European Union’s AI Factories: Lessons for Public Investment in AI Infrastructure in Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected The European Union’s AI Factories: Lessons for Public Investment in AI Infrastructure in Europe. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The original interface report closely examines the EU AI Factories’ consortium makeup, user access and regional innovation ecosystems before October 2025. It qualifies under A Route 2 as empirical European AI research infrastructure analysis and Route 3 as innovation-system implementation evidence. No need to infer future success from investment announcements."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:38Z",
+      "deep_scan_package_id": "worker-b-20261022T170508Z-54f5b9a1e4fa",
+      "claims": [
+        {
+          "object": "research.infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "interface",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2025-10-30",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Only selected factories available for the mapping were studied; actual industrial utilisation and later operational impacts are not established.",
+          "text": "Academic institutions dominate EU AI-factory consortia, while weak industry participation risks limiting uptake by startups and SMEs.",
+          "confidence": "high",
+          "record_key": "historical:id:065123cbb1bdf9fa",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:554c6acb2089face:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:3c216e419acb7e46": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "f9ad6877",
+      "identity_hash": "fb19d8b1921a490e",
+      "reader_title": "Swedish Futures - Vision Reports",
+      "reader_what": "IVA describes a Swedish Futures exercise involving technology-specific sprints, synthesis, scenarios and planned visions.",
+      "reader_more": "IVA describes a Swedish Futures exercise involving technology-specific sprints, synthesis, scenarios and planned visions. Official IVA project webpage explaining planned workstreams and how stakeholders can participate. The site promises future reports rather than giving their completed analytical findings.",
+      "deep_analysis": {
+        "work_kind": "foresight project landing page",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "IVA describes a Swedish Futures exercise involving technology-specific sprints, synthesis, scenarios and planned visions.",
+        "method_or_basis": "Official IVA project webpage explaining planned workstreams and how stakeholders can participate.",
+        "qualification": "The site promises future reports rather than giving their completed analytical findings.",
+        "radar_relevance": "The Royal Swedish Academy of Engineering Sciences website introduces a Swedish Futures programme and lists anticipated vision outputs, rather than presenting one completed analytical research work. Despite plausible science/technology policy interest, A Routes 1–3 require substantive sourced evidence rather than a future-deliverables page. Its mention of scenarios is not a new B methodology.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching primary first-party page content from the package at the supplied URL: https://www.iva.se/en/Swedish-futures/Vision-Reports/. Identity and substance matched title."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_page",
+            "url": "https://www.iva.se/en/Swedish-futures/Vision-Reports/",
+            "title": "Swedish Futures - Vision Reports",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected Swedish Futures - Vision Reports. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "The Royal Swedish Academy of Engineering Sciences website introduces a Swedish Futures programme and lists anticipated vision outputs, rather than presenting one completed analytical research work. Despite plausible science/technology policy interest, A Routes 1–3 require substantive sourced evidence rather than a future-deliverables page. Its mention of scenarios is not a new B methodology."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:38Z",
+      "deep_scan_package_id": "worker-b-20261022T170508Z-54f5b9a1e4fa",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:9038452533515f40": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "b5a10d2d",
+      "identity_hash": "304ea62c142728d3",
+      "reader_title": "Interested in Horizon Europe Research Infrastructure Programme?",
+      "reader_what": "National contact points summarise Horizon Europe 2026 research-infrastructure calls and Swedish applicant support.",
+      "reader_more": "National contact points summarise Horizon Europe 2026 research-infrastructure calls and Swedish applicant support. Vinnova and Swedish Research Council slide deck explicitly dated 30 March 2026, with call topics and planning grant advice. Funding schedules and eligible topics are procedural information, not completed research results.",
+      "deep_analysis": {
+        "work_kind": "research-infrastructure call webinar slides",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "National contact points summarise Horizon Europe 2026 research-infrastructure calls and Swedish applicant support.",
+        "method_or_basis": "Vinnova and Swedish Research Council slide deck explicitly dated 30 March 2026, with call topics and planning grant advice.",
+        "qualification": "Funding schedules and eligible topics are procedural information, not completed research results.",
+        "radar_relevance": "Vinnova and Swedish Research Council present programme information about 2026 Horizon Europe research-infrastructure calls, NCP support, funding windows and events. As an application-information slide deck it does not evaluate past European R&I-system performance under A Routes 1–3, and it creates no transferable new B futures method.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened actual first-party 18-slide PDF https://www.vinnova.se/contentassets/8d7c1466ab0043d59815e7cd4d383f17/digital-fika-om-horisont-europas-forskningsinfrastrukturprogram_20260330.pdf, checked title, 30 March 2026 slide date, research-infrastructure calls and programme information."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.vinnova.se/contentassets/8d7c1466ab0043d59815e7cd4d383f17/digital-fika-om-horisont-europas-forskningsinfrastrukturprogram_20260330.pdf",
+            "title": "Interested in Horizon Europe Research Infrastructure Programme? | Vinnova",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected Interested in Horizon Europe Research Infrastructure Programme? | Vinnova. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "Vinnova and Swedish Research Council present programme information about 2026 Horizon Europe research-infrastructure calls, NCP support, funding windows and events. As an application-information slide deck it does not evaluate past European R&I-system performance under A Routes 1–3, and it creates no transferable new B futures method."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:38Z",
+      "deep_scan_package_id": "worker-b-20261022T170508Z-54f5b9a1e4fa",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:8946b1fda4509b28": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "8b39abb5",
+      "identity_hash": "28cc3f36e11ce3d7",
+      "reader_title": "Implementation Dialogue on the EU Defence Industry: Industrial Ramp-up and Supply Chain resilience",
+      "reader_what": "The Commission convenes an implementation dialogue on EU defence industrial production and supply-chain resilience.",
+      "reader_more": "The Commission convenes an implementation dialogue on EU defence industrial production and supply-chain resilience. Commission DG DEFIS first-party event description, covering the 2025 Defence White Paper, industry bottlenecks and June 2026 dialogue. Announcing a dialogue neither proves industrial expansion nor demonstrates R&D-system results.",
+      "deep_analysis": {
+        "work_kind": "European Commission event notice",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "The Commission convenes an implementation dialogue on EU defence industrial production and supply-chain resilience.",
+        "method_or_basis": "Commission DG DEFIS first-party event description, covering the 2025 Defence White Paper, industry bottlenecks and June 2026 dialogue.",
+        "qualification": "Announcing a dialogue neither proves industrial expansion nor demonstrates R&D-system results.",
+        "radar_relevance": "The Commission page invites industry stakeholders to a 2026 Defence Industrial Base implementation dialogue. It describes supply-chain resilience and scaling needs, but provides no completed study of European research or innovation systems under A Routes 1–3. It is an event announcement, not a B foresight method contribution.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Commission DG DEFIS page https://defence-industry-space.ec.europa.eu/implementation-dialogue-eu-defence-industry-industrial-ramp-and-supply-chain-resilience-2026-06-17_en rate-limited live re-fetch (429)."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "success",
+            "note": "Inspected 3,399-character first-party Commission event text at matching URL, identifying implementation dialogue and planned industry agenda."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_page",
+            "url": "https://defence-industry-space.ec.europa.eu/implementation-dialogue-eu-defence-industry-industrial-ramp-and-supply-chain-resilience-2026-06-17_en",
+            "title": "Implementation Dialogue on the EU Defence Industry: Industrial Ramp-up and Supply Chain resilience",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected Implementation Dialogue on the EU Defence Industry: Industrial Ramp-up and Supply Chain resilience. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "The Commission page invites industry stakeholders to a 2026 Defence Industrial Base implementation dialogue. It describes supply-chain resilience and scaling needs, but provides no completed study of European research or innovation systems under A Routes 1–3. It is an event announcement, not a B foresight method contribution."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:38Z",
+      "deep_scan_package_id": "worker-b-20261022T170508Z-54f5b9a1e4fa",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:d2dba3a6f8ae468f": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "159a8540",
+      "identity_hash": "e6fd88a00a7818dd",
+      "reader_title": "IVA's President: some thoughts on Swedish Futures",
+      "reader_what": "IVA leadership argues Sweden needs a shared long-term vision for prosperity, science and technology leadership.",
+      "reader_more": "IVA leadership argues Sweden needs a shared long-term vision for prosperity, science and technology leadership. IVA first-party 16 September 2025 presidential essay announcing and motivating its Swedish Futures project. The proposed vision process is an advocacy statement rather than a completed assessment of Swedish innovation capability.",
+      "deep_analysis": {
+        "work_kind": "academy president opinion essay",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "IVA leadership argues Sweden needs a shared long-term vision for prosperity, science and technology leadership.",
+        "method_or_basis": "IVA first-party 16 September 2025 presidential essay announcing and motivating its Swedish Futures project.",
+        "qualification": "The proposed vision process is an advocacy statement rather than a completed assessment of Swedish innovation capability.",
+        "radar_relevance": "The IVA president’s column calls for a shared national future vision through a newly launched Swedish Futures initiative. It contains no original European research/innovation evidence (A Route 2 or 3) or strategic technology evaluation (A Route 1), and proposes participatory visioning without materially new transferable foresight techniques (B).",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching primary first-party page content from the package at the supplied URL: https://www.iva.se/en/published/ivas-president-some-thoughts-on-swedish-futures/. Identity and substance matched title."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_page",
+            "url": "https://www.iva.se/en/published/ivas-president-some-thoughts-on-swedish-futures/",
+            "title": "IVA's President: some thoughts on Swedish Futures",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected IVA's President: some thoughts on Swedish Futures. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "The IVA president’s column calls for a shared national future vision through a newly launched Swedish Futures initiative. It contains no original European research/innovation evidence (A Route 2 or 3) or strategic technology evaluation (A Route 1), and proposes participatory visioning without materially new transferable foresight techniques (B)."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:38Z",
+      "deep_scan_package_id": "worker-b-20261022T170508Z-54f5b9a1e4fa",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:28ce9c6c35e6e205": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "4fcb0446",
+      "identity_hash": "af4c48e872c3f17f",
+      "reader_title": "How is generative AI impacting our economy, society and policy?",
+      "reader_what": "The EU produces about 21% of global generative-AI research papers but only about 2% of global generative-AI patents.",
+      "reader_why": "Publication-patent gaps and innovation finance are measurable dimensions of European generative-AI research and commercialisation capacity.",
+      "reader_more": "The EU produces about 21% of global generative-AI research papers but only about 2% of global generative-AI patents. JRC 13 June 2025 official analytical report summary, cross-checked with original 2025 JRC142598 Generative AI Outlook Report publication record. Different research, patent and activity denominators must not be conflated; these are reported historical shares, not causal explanations or forecasts.",
+      "deep_analysis": {
+        "work_kind": "official JRC study findings summary",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "The EU produces about 21% of global generative-AI research papers but only about 2% of global generative-AI patents.",
+        "method_or_basis": "JRC 13 June 2025 official analytical report summary, cross-checked with original 2025 JRC142598 Generative AI Outlook Report publication record.",
+        "qualification": "Different research, patent and activity denominators must not be conflated; these are reported historical shares, not causal explanations or forecasts.",
+        "radar_relevance": "The JRC first-party article presents quantitative findings from the completed Generative AI Outlook Report on EU research publication strength, weak patenting, venture investment and AI participation. The linked official report confirms the 2025 research synthesis. A Route 2 qualifies through measured European emerging-technology R&I states and Route 1 through strategic global positioning.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened first-party JRC June 13 2025 official findings article https://joint-research-centre.ec.europa.eu/jrc-news-and-updates/how-generative-ai-impacting-our-economy-society-and-policy-2025-06-13_en; followed its source link to original JRC Generative AI Outlook Report at https://publications.jrc.ec.europa.eu/repository/handle/JRC142598 (same date)."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_page",
+            "url": "https://joint-research-centre.ec.europa.eu/jrc-news-and-updates/how-generative-ai-impacting-our-economy-society-and-policy-2025-06-13_en",
+            "title": "How is generative AI impacting our economy, society and policy?",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_primary_page",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC142598",
+            "title": "Generative AI Outlook Report: Exploring the Intersection of Technology, Society and Policy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected How is generative AI impacting our economy, society and policy?. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The JRC first-party article presents quantitative findings from the completed Generative AI Outlook Report on EU research publication strength, weak patenting, venture investment and AI participation. The linked official report confirms the 2025 research synthesis. A Route 2 qualifies through measured European emerging-technology R&I states and Route 1 through strategic global positioning."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:39Z",
+      "deep_scan_package_id": "worker-b-20261022T170508Z-54f5b9a1e4fa",
+      "claims": [
+        {
+          "object": "innovation.system_performance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2025-06-13",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Different research, patent and activity denominators must not be conflated; these are reported historical shares, not causal explanations or forecasts.",
+          "text": "The EU produces about 21% of global generative-AI research papers but only about 2% of global generative-AI patents.",
+          "confidence": "high",
+          "record_key": "historical:id:28ce9c6c35e6e205",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:af4c48e872c3f17f:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:0af6e4742029f243": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "85c94375",
+      "identity_hash": "bde22ab98edb4fcf",
+      "reader_title": "Government assignment that Vinnova reported on in 2018",
+      "reader_what": "Vinnova lists and links to Swedish government assignments that it reported as completed during 2018.",
+      "reader_more": "Vinnova lists and links to Swedish government assignments that it reported as completed during 2018. Official agency archive/index describing 2018 assignments, categories and report links. Substantive findings would require treating each linked report as a separate work rather than assigning their conclusions to this index.",
+      "deep_analysis": {
+        "work_kind": "historical programme/report index",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "Vinnova lists and links to Swedish government assignments that it reported as completed during 2018.",
+        "method_or_basis": "Official agency archive/index describing 2018 assignments, categories and report links.",
+        "qualification": "Substantive findings would require treating each linked report as a separate work rather than assigning their conclusions to this index.",
+        "radar_relevance": "Vinnova’s page is an index of government assignments completed in 2018. The index contains links to multiple separate reports, but is not one identifiable analytical work itself; A Routes 1–3 cannot be adjudicated as European innovation-system evidence for this composite landing page. It presents no B method contribution.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching primary first-party page content from the package at the supplied URL: https://www.vinnova.se/en/about-us/our-mission/government-assignments/government-assignment-final-report-2018/. Identity and substance matched title."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_page",
+            "url": "https://www.vinnova.se/en/about-us/our-mission/government-assignments/government-assignment-final-report-2018/",
+            "title": "Government assignment that Vinnova reported on in 2018 | Vinnova",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected Government assignment that Vinnova reported on in 2018 | Vinnova. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "Vinnova’s page is an index of government assignments completed in 2018. The index contains links to multiple separate reports, but is not one identifiable analytical work itself; A Routes 1–3 cannot be adjudicated as European innovation-system evidence for this composite landing page. It presents no B method contribution."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:39Z",
+      "deep_scan_package_id": "worker-b-20261022T170508Z-54f5b9a1e4fa",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:64c4f94ede1c3d8c": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "02cef48a",
+      "identity_hash": "bdfc6fde615d80e6",
+      "reader_title": "Foresight review: Transformation of the security environment - Sitra",
+      "reader_what": "Sitra synthesises security-environment shifts to support discussions of future risks and resilience.",
+      "reader_more": "Sitra synthesises security-environment shifts to support discussions of future risks and resilience. Sitra September 2025 revised Foresight Review #3, on global security, international order and societal preparedness. The report is interpretive foresight rather than a measured forecast or an EU research-system study.",
+      "deep_analysis": {
+        "work_kind": "general security futures review",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "Sitra synthesises security-environment shifts to support discussions of future risks and resilience.",
+        "method_or_basis": "Sitra September 2025 revised Foresight Review #3, on global security, international order and societal preparedness.",
+        "qualification": "The report is interpretive foresight rather than a measured forecast or an EU research-system study.",
+        "radar_relevance": "Sitra provides an established strategic-foresight overview of global and Finnish security-environment trends and geopolitical uncertainty. Its central subject is broad societal security, not European R&I-system analysis under A Routes 1–3. It applies familiar foresight review and trend-framing methods without claiming or demonstrating a materially new transferable B method.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching primary PDF extract from the package at the supplied URL: https://www.sitra.fi/wp-content/uploads/2025/04/Ennakointikatsaus_turvallisuus_GB_9_2025_saavutettava-1-1.pdf. Identity and substance matched title."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.sitra.fi/wp-content/uploads/2025/04/Ennakointikatsaus_turvallisuus_GB_9_2025_saavutettava-1-1.pdf",
+            "title": "Foresight review: Transformation of the security environment - Sitra",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected Foresight review: Transformation of the security environment - Sitra. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "Sitra provides an established strategic-foresight overview of global and Finnish security-environment trends and geopolitical uncertainty. Its central subject is broad societal security, not European R&I-system analysis under A Routes 1–3. It applies familiar foresight review and trend-framing methods without claiming or demonstrating a materially new transferable B method."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:39Z",
+      "deep_scan_package_id": "worker-b-20261022T170508Z-54f5b9a1e4fa",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:4f9db40f0f4a7b74": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "84742a5f",
+      "identity_hash": "52dc4f355876c984",
+      "reader_title": "Foresight review: The EU’s opportunities in a time of transformation - Sitra",
+      "reader_what": "Sitra frames the EU’s possible future choices amid shifts in economics, security, nature and technology.",
+      "reader_more": "Sitra frames the EU’s possible future choices amid shifts in economics, security, nature and technology. Sitra September 2025 Foresight Review #5 employing trend synthesis, PESTE-style external environment analysis and future-triangle framing. Its future narratives are prospective synthesis, not evidence of policy adoption or an original futures methodology.",
+      "deep_analysis": {
+        "work_kind": "EU-wide general foresight review",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "Sitra frames the EU’s possible future choices amid shifts in economics, security, nature and technology.",
+        "method_or_basis": "Sitra September 2025 Foresight Review #5 employing trend synthesis, PESTE-style external environment analysis and future-triangle framing.",
+        "qualification": "Its future narratives are prospective synthesis, not evidence of policy adoption or an original futures methodology.",
+        "radar_relevance": "Sitra applies established foresight constructs to broad EU geopolitical, economic, democratic and technological futures. It does not introduce a new methodological tool or assess its transferability (B), and innovation/R&D is only one theme rather than the central substantive R&I system under A Routes 1–3. Geographic EU centrality alone does not suffice.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching primary PDF extract from the package at the supplied URL: https://www.sitra.fi/wp-content/uploads/2025/10/sitra_eu_foresight_review_2025-1.pdf. Identity and substance matched title."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.sitra.fi/wp-content/uploads/2025/10/sitra_eu_foresight_review_2025-1.pdf",
+            "title": "Foresight review: The EU’s opportunities in a time of transformation - Sitra",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected Foresight review: The EU’s opportunities in a time of transformation - Sitra. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "Sitra applies established foresight constructs to broad EU geopolitical, economic, democratic and technological futures. It does not introduce a new methodological tool or assess its transferability (B), and innovation/R&D is only one theme rather than the central substantive R&I system under A Routes 1–3. Geographic EU centrality alone does not suffice."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:39Z",
+      "deep_scan_package_id": "worker-b-20261022T170508Z-54f5b9a1e4fa",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:252537eb118e001f": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "d7a2c203",
+      "identity_hash": "e4af92a534855c99",
+      "reader_title": "Digital coffee for cluster 5 within Horizon Europe",
+      "reader_what": "National contact points describe Horizon Europe Cluster 5 calls, schedules and application topics.",
+      "reader_more": "National contact points describe Horizon Europe Cluster 5 calls, schedules and application topics. Original Vinnova presentation for its 5 February 2025 digital coffee information session. Information on funding opportunities does not establish funded research outputs or impacts.",
+      "deep_analysis": {
+        "work_kind": "programme information slide deck",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "National contact points describe Horizon Europe Cluster 5 calls, schedules and application topics.",
+        "method_or_basis": "Original Vinnova presentation for its 5 February 2025 digital coffee information session.",
+        "qualification": "Information on funding opportunities does not establish funded research outputs or impacts.",
+        "radar_relevance": "The Vinnova slides introduce Horizon Europe Cluster 5 climate-energy-mobility calls for Swedish prospective applicants. They contain programme lists and application information rather than completed A Route 1–3 European R&I evidence; no B-method innovation is offered.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching primary PDF extract from the package at the supplied URL: https://www.vinnova.se/contentassets/a53d31e05bd44321a549092259685c2d/kluster-5-fika-presentation.pdf. Identity and substance matched title."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.vinnova.se/contentassets/a53d31e05bd44321a549092259685c2d/kluster-5-fika-presentation.pdf",
+            "title": "Digital coffee for cluster 5 within Horizon Europe | Vinnova",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected Digital coffee for cluster 5 within Horizon Europe | Vinnova. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "The Vinnova slides introduce Horizon Europe Cluster 5 climate-energy-mobility calls for Swedish prospective applicants. They contain programme lists and application information rather than completed A Route 1–3 European R&I evidence; no B-method innovation is offered."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:39Z",
+      "deep_scan_package_id": "worker-b-20261022T170508Z-54f5b9a1e4fa",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:4da07238c77d692a": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "f463e758",
+      "identity_hash": "498d85ccb62c4f9c",
+      "reader_title": "Digital coffee about the Horizon Europe research infrastructure",
+      "reader_what": "Vinnova summarises EU research-infrastructure work programme calls and national support for applications.",
+      "reader_more": "Vinnova summarises EU research-infrastructure work programme calls and national support for applications. Official slides distributed for the Horizon Europe research-infrastructure digital coffee on 23 June 2025. A call information session does not measure infrastructure utilisation, funding effectiveness or future programme outcomes.",
+      "deep_analysis": {
+        "work_kind": "research infrastructure webinar slides",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "Vinnova summarises EU research-infrastructure work programme calls and national support for applications.",
+        "method_or_basis": "Official slides distributed for the Horizon Europe research-infrastructure digital coffee on 23 June 2025.",
+        "qualification": "A call information session does not measure infrastructure utilisation, funding effectiveness or future programme outcomes.",
+        "radar_relevance": "The Vinnova national-contact-point webinar summarises Horizon Europe research-infrastructure 2025 work programme and Swedish applicants’ opportunities. It is not an empirical analysis of European research infrastructure capacity under A Routes 1–3, and it supplies no new B foresight method.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matching primary PDF extract from the package at the supplied URL: https://www.vinnova.se/contentassets/b337de0896c04ecb9669fe4eccee34a4/ri-heu-wp2025-digital-fika-250623-utskick.pdf. Identity and substance matched title."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.vinnova.se/contentassets/b337de0896c04ecb9669fe4eccee34a4/ri-heu-wp2025-digital-fika-250623-utskick.pdf",
+            "title": "Digital coffee about the Horizon Europe research infrastructure | Vinnova",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected Digital coffee about the Horizon Europe research infrastructure | Vinnova. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "SCOPE_NOT_MET",
+        "reason": "The Vinnova national-contact-point webinar summarises Horizon Europe research-infrastructure 2025 work programme and Swedish applicants’ opportunities. It is not an empirical analysis of European research infrastructure capacity under A Routes 1–3, and it supplies no new B foresight method."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:39Z",
+      "deep_scan_package_id": "worker-b-20261022T170508Z-54f5b9a1e4fa",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:45b0f16d69feb127": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "37afc960",
+      "identity_hash": "c97cd57c5a92ac3b",
+      "reader_title": "Built for Purpose? Demand-Led Scenarios for Europe's AI Gigafactories",
+      "reader_what": "EU AI Gigafactories may struggle to secure single large AI customers; diversified multi-client service models better match current European demand.",
+      "reader_why": "Demand, user mix and provider economics determine whether planned European AI research compute can support innovation.",
+      "reader_more": "EU AI Gigafactories may struggle to secure single large AI customers; diversified multi-client service models better match current European demand. 22 October 2025 interface–Bertelsmann Stiftung report mapping datacentre buildouts, providers, AI labs and user demand, comparing anchor-customer and multi-client operating models. The two business models are reasoned demand scenarios, not observed AI Gigafactory utilisation or proof of programme outcomes.",
+      "deep_analysis": {
+        "work_kind": "demand-led EU AI compute infrastructure study",
+        "research_question": "What does this work establish about the European R&I system or transferable futures methods?",
+        "main_finding": "EU AI Gigafactories may struggle to secure single large AI customers; diversified multi-client service models better match current European demand.",
+        "method_or_basis": "22 October 2025 interface–Bertelsmann Stiftung report mapping datacentre buildouts, providers, AI labs and user demand, comparing anchor-customer and multi-client operating models.",
+        "qualification": "The two business models are reasoned demand scenarios, not observed AI Gigafactory utilisation or proof of programme outcomes.",
+        "radar_relevance": "The interface and Bertelsmann Stiftung policy brief empirically maps the EU AI compute demand-provider landscape and examines whether proposed AI Gigafactories can serve European researchers, innovators and firms. It directly qualifies under A Route 2 infrastructure-capability analysis and A Route 3 ecosystem investment governance.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened full first-party interface and Bertelsmann study text at https://www.interface-eu.org/publications/ai-gigafactories; checked original publisher names, publication date, method and anchor/multi-client demand findings."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary_page",
+            "url": "https://www.interface-eu.org/publications/ai-gigafactories",
+            "title": "Built for Purpose? Demand-Led Scenarios for Europe's AI Gigafactories",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected Built for Purpose? Demand-Led Scenarios for Europe's AI Gigafactories. Compared title, issuer and work type with the substantive first-party package extraction; admission based on actually evidenced content, not scanner keywords."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "The interface and Bertelsmann Stiftung policy brief empirically maps the EU AI compute demand-provider landscape and examines whether proposed AI Gigafactories can serve European researchers, innovators and firms. It directly qualifies under A Route 2 infrastructure-capability analysis and A Route 3 ecosystem investment governance."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T17:30:40Z",
+      "deep_scan_package_id": "worker-b-20261022T170508Z-54f5b9a1e4fa",
+      "claims": [
+        {
+          "object": "compute.gigafactory",
+          "secondary_objects": [],
+          "actor": {
+            "name": "interface and Bertelsmann Stiftung",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2025-10-22",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The two business models are reasoned demand scenarios, not observed AI Gigafactory utilisation or proof of programme outcomes.",
+          "text": "EU AI Gigafactories may struggle to secure single large AI customers; diversified multi-client service models better match current European demand.",
+          "confidence": "high",
+          "record_key": "historical:id:45b0f16d69feb127",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:c97cd57c5a92ac3b:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-22T16:31:44Z"
+  "claims_updated_at": "2026-10-22T17:30:40Z"
 }
