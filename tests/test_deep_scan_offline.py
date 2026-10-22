@@ -138,7 +138,7 @@ def test_offline_import_preserves_stale_hash_for_correction(tmp_path):
         }],
     }), encoding="utf-8")
 
-    subprocess.run(
+    result = subprocess.run(
         [
             sys.executable,
             str(ROOT / "scripts" / "import_deep_scan_results.py"),
@@ -147,8 +147,9 @@ def test_offline_import_preserves_stale_hash_for_correction(tmp_path):
             "--inbox", str(inbox),
         ],
         cwd=ROOT,
-        check=True,
+        capture_output=True, text=True,
     )
+    assert result.returncode != 0 and 'import incomplete' in result.stdout
     saved = json.loads(sidecar.read_text(encoding="utf-8"))
     assert saved["records"] == {}
     # Rejected/stale results remain in the inbox for correction rather than
