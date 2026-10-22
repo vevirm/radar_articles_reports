@@ -1,0 +1,82 @@
+name: Restore approved Deep Scan scripts
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: restore-approved-deep-scan-scripts
+  cancel-in-progress: false
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out full repository history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Recover exact baseline-approved script versions
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib
+          import json
+          import subprocess
+          import sys
+
+          baseline = json.loads(Path('reasoning-reform/baseline.json').read_text(encoding='utf-8'))
+          approved = baseline['protected_code_hashes']['deep_scan_hard_core']
+          files = (
+              'scripts/import_deep_scan_results.py',
+              'scripts/prepare_deep_scan_package.py',
+          )
+          recovered = {}
+          for filename in files:
+              expected = approved[filename].lower()
+              commits = subprocess.check_output(
+                  ['git', 'log', '--all', '--format=%H', '--', filename],
+                  text=True,
+              ).splitlines()
+              for commit in commits:
+                  result = subprocess.run(
+                      ['git', 'show', f'{commit}:{filename}'],
+                      stdout=subprocess.PIPE,
+                      stderr=subprocess.DEVNULL,
+                      check=False,
+                  )
+                  if result.returncode == 0 and hashlib.sha256(result.stdout).hexdigest() == expected:
+                      recovered[filename] = (result.stdout, commit)
+                      break
+              if filename not in recovered:
+                  print(f'ERROR: Cannot find approved original for {filename} in Git history.')
+                  print(f'Expected SHA-256: {expected}')
+                  print('No files will be committed. Restore an original backup instead.')
+                  sys.exit(1)
+
+          for filename, (data, commit) in recovered.items():
+              Path(filename).write_bytes(data)
+              print(f'Restored {filename} from {commit[:12]}')
+              print(f'  SHA-256: {hashlib.sha256(data).hexdigest()}')
+          PY
+
+      - name: Verify all protected files match the original baseline
+        run: python scripts/check_reasoning_reform_core_freeze.py
+
+      - name: Commit the two restored scripts
+        shell: bash
+        run: |
+          git add -- scripts/import_deep_scan_results.py scripts/prepare_deep_scan_package.py
+          if git diff --cached --quiet; then
+            echo 'Files already match their original approved versions.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Restore baseline-approved Deep Scan scripts'
+          git push origin "HEAD:${GITHUB_REF_NAME}"
