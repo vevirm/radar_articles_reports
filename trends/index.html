@@ -56,8 +56,16 @@ function pair(x){
 }
 async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});if(!r.ok)return {};return await r.json()}catch(_){return {}}}
 function wowCyclePairs(items){const buckets=new Map([5,4,3,2,1].map(w=>[w,[]]));for(const x of items||[]){const w=Math.max(1,Math.min(5,trendDistance(x)));buckets.get(w).push(x)}const out=[];for(let round=0;round<3;round++)for(const w of [5,4,3,2,1]){const x=buckets.get(w)[round];if(x)out.push(x)}return out}
+// Presentation-only: rotate already selected trend pairs once per UTC week.
+// The engine's choices, evidence and scores remain unchanged.
+function weeklyReaderOrder(items, now=Date.now()){
+  if(items.length<2)return items;
+  const week=Math.floor(now/604800000);
+  const offset=week%items.length;
+  return items.slice(offset).concat(items.slice(0,offset));
+}
 function stockWords(){return ''}
-(async()=>{try{const [data,rawHistory,admission,reader,corrections]=await Promise.all([RadarData.load('../radar.json','../radar_seed.json'),loadJson('../historical/historical.json'),loadJson('../admission_state.json'),loadJson('../reader_text.json'),loadJson('../record_corrections.json')]);const history=RadarHistoricalReasoning.build(rawHistory,admission,reader,corrections);for(const c of (data?.high_order_inference?.candidates||[])){if(c?.product==='trend')TREND_DISTANCE.set(String(c.id||'').trim(),Number(c.wow)||Number(c.inferential_distance)||3)}const all=RadarTrends.build(data,history),xs=wowCyclePairs(all).slice(0,15),sel=data?.high_order_inference?.selection?.trend||{};document.getElementById('corpusLine').textContent='';document.getElementById('pairs').innerHTML=xs.length?xs.map(pair).join(''):'<div class="empty">No trend and counter-trend pair is clear enough to show yet.</div>';document.querySelectorAll('.tug-track [data-pull]').forEach(el=>{el.style.flexGrow=String(Math.max(0,Number(el.dataset.pull)||0))})}catch(e){console.error(e);document.getElementById('pairs').innerHTML='<div class="empty">Trend evidence is unavailable.</div>'}})();
+(async()=>{try{const [data,rawHistory,admission,reader,corrections]=await Promise.all([RadarData.load('../radar.json','../radar_seed.json'),loadJson('../historical/historical.json'),loadJson('../admission_state.json'),loadJson('../reader_text.json'),loadJson('../record_corrections.json')]);const history=RadarHistoricalReasoning.build(rawHistory,admission,reader,corrections);for(const c of (data?.high_order_inference?.candidates||[])){if(c?.product==='trend')TREND_DISTANCE.set(String(c.id||'').trim(),Number(c.wow)||Number(c.inferential_distance)||3)}const all=RadarTrends.build(data,history),xs=weeklyReaderOrder(wowCyclePairs(all).slice(0,15)),sel=data?.high_order_inference?.selection?.trend||{};document.getElementById('corpusLine').textContent='';document.getElementById('pairs').innerHTML=xs.length?xs.map(pair).join(''):'<div class="empty">No trend and counter-trend pair is clear enough to show yet.</div>';document.querySelectorAll('.tug-track [data-pull]').forEach(el=>{el.style.flexGrow=String(Math.max(0,Number(el.dataset.pull)||0))})}catch(e){console.error(e);document.getElementById('pairs').innerHTML='<div class="empty">Trend evidence is unavailable.</div>'}})();
 </script><script src="../reader_language.js?v=5"></script>
 <script src="../site-shell.js?v=20261020-no-nested-gate-3"></script>
 </body></html>
