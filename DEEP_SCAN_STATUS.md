@@ -8,16 +8,16 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 
 - Authoritative V2 verified: **3119** (Main **1620** + Historical **1499**)
 - Automatic queue still needing V2 verification: **255** (Main **0** + Historical **255**)
-- Currently assigned to workers: **107** (Main **0** + Historical **107**)
+- Currently assigned to workers: **75** (Main **0** + Historical **75**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **37**
-- Automatic queue pending and not yet assigned: **148**
+- Automatic queue pending and not yet assigned: **180**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261022T164015Z-2d79eae7049c`
-- Assigned unresolved records: **36**
+- Current package: `worker-a-20261022T170459Z-ea33d99e34b3`
+- Assigned unresolved records: **20**
   1. `historical:id:fccc0bceefd8e0e2` — Assessing Europe’s Resilience and Preparedness in an Era of Strategic Risks - HCSS
   2. `historical:id:74a3dadd9f256f0a` — Robust and resilient space infrastructure for a safe Netherlands | NWO
   3. `historical:id:0d10162ea1a64c77` — Digitalising the EU energy system
@@ -26,20 +26,20 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:984826245d3a649f` — EU plans for AI (giga)factories: sanctuaries of innovation, or cathedrals in the desert? – CEPS
   7. `historical:id:191ee55eecce78ec` — Green competitiveness: Why Europe should rethink targets to outpace China – European Council on Foreign Relations
   8. `historical:id:32ada5fba4ef66a2` — Beyond Copycat Regulation: A Playbook for Korea’s Digital Partnerships
-  - … plus 28 more in the package manifest
+  - … plus 12 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261022T164026Z-eba06bf5fb02`
-- Assigned unresolved records: **36**
-  1. `historical:id:0af6e4742029f243` — Government assignment that Vinnova reported on in 2018 | Vinnova
-  2. `historical:id:64c4f94ede1c3d8c` — Foresight review: Transformation of the security environment - Sitra
-  3. `historical:id:4f9db40f0f4a7b74` — Foresight review: The EU’s opportunities in a time of transformation - Sitra
-  4. `historical:id:252537eb118e001f` — Digital coffee for cluster 5 within Horizon Europe | Vinnova
-  5. `historical:id:4da07238c77d692a` — Digital coffee about the Horizon Europe research infrastructure | Vinnova
-  6. `historical:id:45b0f16d69feb127` — Built for Purpose?
-  7. `historical:id:a785eed5f979e363` — Bottlenecks that delay the benefits of large-scale research infrastructure
-  8. `historical:id:ca7ae7a0c956d39c` — Artificial Intelligence (AI) in Science
-  - … plus 28 more in the package manifest
+- Current package: `worker-b-20261022T170508Z-54f5b9a1e4fa`
+- Assigned unresolved records: **20**
+  1. `historical:id:41fc0cd7ed2f6190` — Doing resilience better, with less: The cornerstone of the EU’s Eastern policy needs rethinking
+  2. `historical:id:fd45ef9621126ae9` — Towards a Sustainable Disruptive Growth Model: Integrating Foresight, Wild Cards and Weak Signals Analysis
+  3. `historical:id:2513853638fd175d` — EuroStack – A European alternative for digital sovereignty – CEPS
+  4. `historical:id:35572becf209bda9` — Why Chief Sustainability Officers need to understand strategic foresight | VTT
+  5. `historical:id:19488269c18248bf` — FMR, Fuels and Materials Research (ActUsLab) 2025-1-RD-ActUsLab-FMR
+  6. `historical:id:8c4dc1f80be40a21` — Protecting European AI-Related Innovations: Preventing Their Use in China’s Military Advancements - HCSS
+  7. `historical:id:9df98530c8e7c960` — Welcome to digital coffee about Horizon Europe cluster 3 | Vinnova
+  8. `historical:id:d8644ec6784bcc45` — User study and IPR analysis in preparation for EIC Accelerator - Strategic Health and Digital Technologies | Vinnova
+  - … plus 12 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
