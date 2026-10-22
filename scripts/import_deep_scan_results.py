@@ -852,6 +852,13 @@ def main() -> None:
         f"stale {stale_count}; rejected {rejected_count}; duplicates {duplicate_count}."
     )
     print("Raw radar.json and historical/historical.json evidence were not deleted. V2 admission/corrections are stored in sidecars for active-corpus rebuild.")
+    if rejected_count or stale_count or file_failures:
+        # A worker output left in the inbox is not a successful import. Make
+        # GitHub Actions report the failure instead of silently showing green.
+        print(f"::error::Deep Scan import incomplete: {rejected_count} rejected, "
+              f"{stale_count} stale, {len(file_failures)} unreadable file(s). "
+              "The original inbox files have been preserved for correction.")
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":
