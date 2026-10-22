@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-22T15:26:12Z",
+  "generated_at": "2026-10-22T16:31:44Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -265367,8 +265367,223 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:e449befa89857c2f": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "ca7ec5e1",
+      "identity_hash": "3bc05bada3f3990a",
+      "reader_title": "Western Balkan innovation gaps require targeted upgrading",
+      "reader_what": "A JRC analysis uses economic-complexity evidence to map innovation opportunities and structural constraints in Western Balkan economies.",
+      "reader_why": "Understanding productive capabilities helps identify realistic regional innovation-upgrading paths.",
+      "reader_more": "A JRC analysis uses economic-complexity evidence to map innovation opportunities and structural constraints in Western Balkan economies. Export-product complexity patterns and smart-specialisation policy evidence examine proximity to European research and industrial systems. Export complexity is a proxy for productive capability, not a direct patent or research-quality measure.",
+      "deep_analysis": {
+        "work_kind": "policy report or research publication",
+        "research_question": "What does this source establish about the European research and innovation system?",
+        "main_finding": "A JRC analysis uses economic-complexity evidence to map innovation opportunities and structural constraints in Western Balkan economies.",
+        "method_or_basis": "Export-product complexity patterns and smart-specialisation policy evidence examine proximity to European research and industrial systems.",
+        "qualification": "Export complexity is a proxy for productive capability, not a direct patent or research-quality measure.",
+        "radar_relevance": "A Route 2: European neighbourhood R&I-system upgrading and integration with European research frameworks.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected publisher/official URL https://publications.jrc.ec.europa.eu/repository/handle/JRC146646; the package also carries 1955 characters of matching first-party abstract_or_landing_page from https://publications.jrc.ec.europa.eu/repository/handle/JRC146646, independently cross-checked for identity and claims."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_institutional_primary",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC146646",
+            "title": "Navigating innovation gaps in the Western Balkans through the lenses of Economic Complexity",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://publications.jrc.ec.europa.eu/repository/handle/JRC146646. 1955 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 2: European neighbourhood R&I-system upgrading and integration with European research frameworks."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T16:31:43Z",
+      "deep_scan_package_id": "worker-a-20261022T150057Z-e29d686b2383",
+      "claims": [
+        {
+          "object": "industrial.technology_complexity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2026",
+          "scope": {
+            "level": "associated_country",
+            "countries": [
+              "Albania",
+              "Bosnia and Herzegovina",
+              "Kosovo",
+              "Montenegro",
+              "North Macedonia",
+              "Serbia"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "Export complexity is a proxy for productive capability, not a direct patent or research-quality measure.",
+          "text": "A JRC analysis uses economic-complexity evidence to map innovation opportunities and structural constraints in Western Balkan economies.",
+          "confidence": "medium",
+          "status_date_precision": "year",
+          "record_key": "historical:id:e449befa89857c2f",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:3bc05bada3f3990a:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:a91f3c4f8b4f69c8": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "ae9d2fdb",
+      "identity_hash": "e7150124d448d1ee",
+      "reader_title": "Atlantic research cooperation announces new EU project",
+      "reader_what": "The EU reported 26 Atlantic coastal-resilience beacon sites and a planned €6 million Horizon Europe coastal-resilience project.",
+      "reader_why": "Horizon Europe funds research collaboration on shared cross-border climate-resilience challenges.",
+      "reader_more": "The EU reported 26 Atlantic coastal-resilience beacon sites and a planned €6 million Horizon Europe coastal-resilience project. Official 15 April 2026 report of an existing international research alliance and a forthcoming funded R&I project. The project was scheduled for summer 2026; the announcement does not prove launch or completed scientific outcomes.",
+      "deep_analysis": {
+        "work_kind": "official development",
+        "research_question": "What substantive change does the source document?",
+        "main_finding": "The EU reported 26 Atlantic coastal-resilience beacon sites and a planned €6 million Horizon Europe coastal-resilience project.",
+        "method_or_basis": "Official 15 April 2026 report of an existing international research alliance and a forthcoming funded R&I project.",
+        "qualification": "The project was scheduled for summer 2026; the announcement does not prove launch or completed scientific outcomes.",
+        "radar_relevance": "C: dateable Horizon Europe cross-border research project announcement with a direct EU R&I funding link.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Supplied record link https://era.gv.at/news-items/eu-showcases-atlantic-ocean-research-cooperation-at-2026-all-atlantic-forum/ yielded only stored_only; substantive primary work required separate source recovery."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Recovered and read matching substantive first-party work at https://era.gv.at/news-items/eu-showcases-atlantic-ocean-research-cooperation-at-2026-all-atlantic-forum/; work title, organisation, content and year were checked."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_source_page",
+            "url": "https://era.gv.at/news-items/eu-showcases-atlantic-ocean-research-cooperation-at-2026-all-atlantic-forum/",
+            "title": "ERA Portal Austria – EU showcases Atlantic ocean research cooperation at 2026 All-Atlantic Forum",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://era.gv.at/news-items/eu-showcases-atlantic-ocean-research-cooperation-at-2026-all-atlantic-forum/. 0 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "",
+        "reason_code": "HISTORICAL_A_B_OUT_OF_SCOPE",
+        "reason": "This is a Strand-C-style project or institutional announcement, not a qualifying evidence-led historical Strand A/B research study. Preserve original source and deep-analysis description for audit; do not present a C-only news event as Strand A or B research evidence."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T16:31:43Z",
+      "deep_scan_package_id": "worker-b-20261022T150102Z-0d6dc40f18eb",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:d55de1a6f0ec29ec": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "4e8235e5",
+      "identity_hash": "267b852fd927e35b",
+      "reader_title": "French research and Michelin launch greener rubber laboratory",
+      "reader_what": "CNRS, Michelin and three universities announced PolMixLab, a joint laboratory researching more sustainable polymer materials.",
+      "reader_why": "A joint laboratory creates concrete research links between industry and universities.",
+      "reader_more": "CNRS, Michelin and three universities announced PolMixLab, a joint laboratory researching more sustainable polymer materials. CNRS press announcement dated 22 April 2026 names research partners and the laboratory’s applied scientific remit. A laboratory inauguration proves a collaboration, not verified ecological or commercial performance of its future materials.",
+      "deep_analysis": {
+        "work_kind": "official development",
+        "research_question": "What substantive change does the source document?",
+        "main_finding": "CNRS, Michelin and three universities announced PolMixLab, a joint laboratory researching more sustainable polymer materials.",
+        "method_or_basis": "CNRS press announcement dated 22 April 2026 names research partners and the laboratory’s applied scientific remit.",
+        "qualification": "A laboratory inauguration proves a collaboration, not verified ecological or commercial performance of its future materials.",
+        "radar_relevance": "C: substantive new academia–industry R&I facility with documented French and EU technological collaboration.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected publisher/official URL https://www.cnrs.fr/sites/default/files/press_info/2026-04/CP_LabCom_PolMixLab_VEN5.pdf; the package also carries 13455 characters of matching first-party pdf_excerpt from https://www.cnrs.fr/sites/default/files/press_info/2026-04/CP_LabCom_PolMixLab_VEN5.pdf, independently cross-checked for identity and claims."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://www.cnrs.fr/sites/default/files/press_info/2026-04/CP_LabCom_PolMixLab_VEN5.pdf",
+            "title": "A new collaboration between academic research and business to create the rubber of the future | CNRS",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source matched to recorded identity; used https://www.cnrs.fr/sites/default/files/press_info/2026-04/CP_LabCom_PolMixLab_VEN5.pdf. 13455 characters supplied by original first-party retrieval; external official or author primary corroboration where applicable. Distinguish analysis, policy proposals and announcements."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "",
+        "reason_code": "HISTORICAL_A_B_OUT_OF_SCOPE",
+        "reason": "This is a Strand-C-style project or institutional announcement, not a qualifying evidence-led historical Strand A/B research study. Preserve original source and deep-analysis description for audit; do not present a C-only news event as Strand A or B research evidence."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified exact-identity duplicate among the supplied possible duplicates."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-22T16:31:44Z",
+      "deep_scan_package_id": "worker-b-20261022T150102Z-0d6dc40f18eb",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-22T15:26:12Z"
+  "claims_updated_at": "2026-10-22T16:31:44Z"
 }

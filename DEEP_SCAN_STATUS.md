@@ -6,39 +6,39 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **3116** (Main **1620** + Historical **1496**)
-- Automatic queue still needing V2 verification: **259** (Main **1** + Historical **258**)
-- Currently assigned to workers: **107** (Main **1** + Historical **106**)
+- Authoritative V2 verified: **3119** (Main **1620** + Historical **1499**)
+- Automatic queue still needing V2 verification: **255** (Main **0** + Historical **255**)
+- Currently assigned to workers: **107** (Main **0** + Historical **107**)
 - Bounded access-recovery retries still eligible: **0**
-- Hands-on verification needed: **36**
-- Automatic queue pending and not yet assigned: **152**
+- Hands-on verification needed: **37**
+- Automatic queue pending and not yet assigned: **148**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261022T153439Z-b30cacd3a3ec`
+- Current package: `worker-a-20261022T164015Z-2d79eae7049c`
 - Assigned unresolved records: **36**
-  1. `link:https://doi.org/10.1080/09692290.2026.2748311` — Situational state capacity for transformative industrial policy in dependent market economies — recovery attempt 3/3
-  2. `historical:id:e449befa89857c2f` — Navigating innovation gaps in the Western Balkans through the lenses of Economic Complexity
-  3. `historical:id:fccc0bceefd8e0e2` — Assessing Europe’s Resilience and Preparedness in an Era of Strategic Risks - HCSS
-  4. `historical:id:74a3dadd9f256f0a` — Robust and resilient space infrastructure for a safe Netherlands | NWO
-  5. `historical:id:0d10162ea1a64c77` — Digitalising the EU energy system
-  6. `historical:id:a2d611e3a5ebd6fe` — Foresight Challenges | ENISA
-  7. `historical:id:4d8f251256a52bf7` — Building a European AI Ecosystem of Excellence – CEPS
-  8. `historical:id:984826245d3a649f` — EU plans for AI (giga)factories: sanctuaries of innovation, or cathedrals in the desert? – CEPS
+  1. `historical:id:fccc0bceefd8e0e2` — Assessing Europe’s Resilience and Preparedness in an Era of Strategic Risks - HCSS
+  2. `historical:id:74a3dadd9f256f0a` — Robust and resilient space infrastructure for a safe Netherlands | NWO
+  3. `historical:id:0d10162ea1a64c77` — Digitalising the EU energy system
+  4. `historical:id:a2d611e3a5ebd6fe` — Foresight Challenges | ENISA
+  5. `historical:id:4d8f251256a52bf7` — Building a European AI Ecosystem of Excellence – CEPS
+  6. `historical:id:984826245d3a649f` — EU plans for AI (giga)factories: sanctuaries of innovation, or cathedrals in the desert? – CEPS
+  7. `historical:id:191ee55eecce78ec` — Green competitiveness: Why Europe should rethink targets to outpace China – European Council on Foreign Relations
+  8. `historical:id:32ada5fba4ef66a2` — Beyond Copycat Regulation: A Playbook for Korea’s Digital Partnerships
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261022T153451Z-5b26e8d1749a`
+- Current package: `worker-b-20261022T164026Z-eba06bf5fb02`
 - Assigned unresolved records: **36**
-  1. `historical:id:a91f3c4f8b4f69c8` — ERA Portal Austria – EU showcases Atlantic ocean research cooperation at 2026 All-Atlantic Forum
-  2. `historical:id:d55de1a6f0ec29ec` — A new collaboration between academic research and business to create the rubber of the future | CNRS
-  3. `historical:id:0af6e4742029f243` — Government assignment that Vinnova reported on in 2018 | Vinnova
-  4. `historical:id:64c4f94ede1c3d8c` — Foresight review: Transformation of the security environment - Sitra
-  5. `historical:id:4f9db40f0f4a7b74` — Foresight review: The EU’s opportunities in a time of transformation - Sitra
-  6. `historical:id:252537eb118e001f` — Digital coffee for cluster 5 within Horizon Europe | Vinnova
-  7. `historical:id:4da07238c77d692a` — Digital coffee about the Horizon Europe research infrastructure | Vinnova
-  8. `historical:id:45b0f16d69feb127` — Built for Purpose?
+  1. `historical:id:0af6e4742029f243` — Government assignment that Vinnova reported on in 2018 | Vinnova
+  2. `historical:id:64c4f94ede1c3d8c` — Foresight review: Transformation of the security environment - Sitra
+  3. `historical:id:4f9db40f0f4a7b74` — Foresight review: The EU’s opportunities in a time of transformation - Sitra
+  4. `historical:id:252537eb118e001f` — Digital coffee for cluster 5 within Horizon Europe | Vinnova
+  5. `historical:id:4da07238c77d692a` — Digital coffee about the Horizon Europe research infrastructure | Vinnova
+  6. `historical:id:45b0f16d69feb127` — Built for Purpose?
+  7. `historical:id:a785eed5f979e363` — Bottlenecks that delay the benefits of large-scale research infrastructure
+  8. `historical:id:ca7ae7a0c956d39c` — Artificial Intelligence (AI) in Science
   - … plus 28 more in the package manifest
 
 ### Worker SINGLE
@@ -94,3 +94,4 @@ These works no longer consume automatic Deep Scan slots. Their identity is belie
 - `link:https://doi.org/10.1016/j.cose.2026.105210` — **Conceptualizations and Boundaries of EU Digital Sovereignty** — attempts: 3/3 — Computers & Security — 2026-10-01 — The University of Augsburg repository and journal issue establish 2026 paper identity, authors Laura Macpherson and Daniel J. Veit, venue Computers & Security and matching DOI, but not its substantive conceptual framework, method or findings. No completed source text was readable; withholding an evidence claim. — https://doi.org/10.1016/j.cose.2026.105210
 - `link:https://doi.org/10.1080/10438599.2026.2750888` — **Cohesion funds and regional patenting: inventive capacity in innovation systems under construction** — attempts: 3/3 — Economics of Innovation and New Technology — 2026-10-17 — Journal identity and DOI verified, but Taylor & Francis full text is access-restricted. Searches for the exact title, DOI, author/year and scholarly copies did not yield a substantive matching source; scanner abstract interpretation is not independent evidence. — https://doi.org/10.1080/10438599.2026.2750888
 - `link:https://doi.org/10.1080/09654313.2026.2749575` — **The innovation divide across EU regions: does EU funding shape distinct innovation transition paths?** — attempts: 3/3 — European Planning Studies — 2026-10-20 — Journal identity verified; the coauthors presented a substantively related June 2026 conference abstract, but the conference abstract is not the full journal publication and cannot rule out revisions to its results. No accessible substantive journal copy recovered. — https://doi.org/10.1080/09654313.2026.2749575
+- `link:https://doi.org/10.1080/09692290.2026.2748311` — **Situational state capacity for transformative industrial policy in dependent market economies** — attempts: 3/3 — Review of International Political Economy — 2026-10-20 — DOI and article identity verified; an earlier ECPR presentation concerns similar state-capacity research but is not proven to reproduce this paper, its Lithuanian semiconductor case evidence, or results. Substantive publisher/repository text remains inaccessible. — https://doi.org/10.1080/09692290.2026.2748311
