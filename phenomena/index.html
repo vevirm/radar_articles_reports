@@ -153,6 +153,31 @@ function publicPhenomenonSummary(summary,text){return phenomenonExplanation(text
 function fmtEvidenceDate(v){if(!v)return '';const d=new Date(v);return Number.isNaN(d.getTime())?clean(v):new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'short',year:'numeric'}).format(d)}
 function phenomenonEvidenceList(rows){return rows.map(r=>{const title=clean(r?.title||'Source'),source=clean(r?.source||''),date=fmtEvidenceDate(r?.date),link=clean(r?.link||'');const named=link?`<a href="${esc(link)}" target="_blank" rel="noopener">${esc(title)}</a>`:esc(title);const meta=[source,date].filter(Boolean).join(' — ');return `<li>${named}${meta?` <span>— ${esc(meta)}</span>`:''}</li>`}).join('')}
 function phenomenonEvidence(rows,history){rows=Array.isArray(rows)?rows:[];history=Array.isArray(history)?history:[];if(!rows.length&&!history.length)return '';let body='';if(rows.length)body+=`<p><strong>Current sources:</strong></p><ul>${phenomenonEvidenceList(rows)}</ul>`;if(history.length)body+=`<p><strong>Earlier sources:</strong></p><ul>${phenomenonEvidenceList(history)}</ul>`;return `<details><summary>Sources</summary>${body}</details>`}
+
+// Reader-only editorial wording for the 15 currently published continuity cards.
+// A rewrite applies only when the source card's original explanation still matches.
+// New or changed research keeps the research-generated wording.
+const CURRENT_PHENOMENA_EDITORIAL = new Map([["claim:named_continuity:a63d8a2e2c5ce6", "Research and production stay at risk when essential supplies come from a few outside suppliers.", "Advanced-materials ambitions remain exposed to concentrated supplies of essential inputs, making material access a recurring constraint on European research and production."], ["claim:named_continuity:1f96edadbea77f", "The same problem keeps returning: turning strong research into products, jobs and growth.", "Green-technology ambitions repeatedly face the challenge of converting research advances into deployable products and economic activity."], ["claim:national_convergence:68ca87db7f47ae", "National measures now exist next to an EU framework; the question is whether they will fit together.", "National AI-compute initiatives are multiplying alongside European-level coordination; their compatibility and shared access remain the recurring issue."], ["claim:national_convergence:dda14ec6b4cd1b", "Countries are moving before there is a common EU approach; 27 separate designs are harder to align later than one.", "Research-security rules are emerging nationally while common European practice is still taking shape, leaving institutions to manage divergent requirements."], ["claim:named_continuity:f90d074b81b245", "The same problem keeps returning: turning strong research into products, jobs and growth.", "The innovation gap persists because scientific achievements alone do not secure the financing, production and market pathways needed for scale."], ["claim:named_continuity:ba3a9a3ba808c6", "Europe is still balancing open research against protecting sensitive knowledge, data and partnerships.", "Open-science commitments remain in tension with safeguards for sensitive data, know-how and international research partnerships."], ["claim:common_driver:7b36aa928538ac", "Because one cause is behind all of them, one decision abroad could hit them all at once. Europe could also answer them together.", "China's position in several strategic industries creates a shared external dependency across otherwise distinct European sectors."], ["claim:national_convergence:4fad1245dd0727", "National measures now exist next to an EU framework; the question is whether they will fit together.", "National defence-research programmes are developing in parallel with EU efforts, making interoperability and programme coordination consequential."], ["claim:national_convergence:cc68b4a481fa8d", "Countries are moving before there is a common EU approach; 27 separate designs are harder to align later than one.", "National chipmaking initiatives are progressing alongside EU ambitions, but fragmented capacity and supply chains remain a coordination challenge."], ["claim:named_continuity:7676aa974076d6", "AI policy now ties together computing power, skills, research, industry and dependence on others.", "European AI ambitions continually reconnect questions of compute, skilled people, industrial adoption and reliance on non-European capabilities."], ["claim:named_continuity:7c1fbe5e1680f3", "Access to large computers decides which technologies European researchers and firms can develop on their own. What has changed: earlier sources mostly analyse it; recent ones mostly report action.", "Public AI-compute access remains a live issue: recent initiatives move beyond diagnosis, but the practical availability of resources still matters."], ["claim:named_continuity:e5517ddf2d5f77", "Europe still produces strong research, but it struggles to turn it into products, growing firms and factories.", "European research strengths continue to encounter difficulties on the path to commercial firms, scale-up investment and manufacturing capacity."], ["claim:named_continuity:c70556f3ee4223", "Strong research still does not automatically lead to strong firms or factories in Europe.", "Industrial competitiveness repeatedly exposes a gap between research capability and the firms, equipment and production capacity needed to use it."], ["claim:named_continuity:74c1183f8166b8", "Collaboration continues, but security, funding and strategic interests are reshaping how partnerships work.", "Cross-border research continues, while decisions about partners, data and funding increasingly reflect security and strategic concerns."], ["claim:named_continuity:044f853d38d919", "Digital policy now treats rules, infrastructure, security and industry together, not separately.", "Digital-policy choices now cut across technical rules, infrastructure, security and industrial strategy, making decisions in one area affect the others."]]);
+function applyCurrentPhenomenaWording(c){
+  const entry=CURRENT_PHENOMENA_EDITORIAL.get(clean(c?.id));
+  if(!entry || clean(c?.card?.lead)!==entry[0]) return c;
+  return {...c, card:{...c.card, lead:entry[1]}};
+}
+// Presentation-only: a stable UTC-week shuffle of the selected cards.
+function phenomenaWeekShuffle(items){
+  const now=new Date();
+  const day=(now.getUTCDay()+6)%7;
+  const monday=Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate()-day);
+  let seed=(Math.floor(monday/604800000)^0x51F15EED)>>>0;
+  const out=[...items];
+  for(let i=out.length-1;i>0;i--){
+    seed=(Math.imul(seed,1664525)+1013904223)>>>0;
+    const j=seed%(i+1);
+    [out[i],out[j]]=[out[j],out[i]];
+  }
+  return out;
+}
+
 function render(items){
   const el=document.getElementById('phenomena');
   const C=globalThis.RadarCards;
@@ -179,12 +204,12 @@ async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});ret
       // detectors remain available only as rollback readers; mixing them into the
       // claim-native shelf would recreate the pre-reform ranking system.
       const hids=Array.isArray(hi?.publications?.continuity)?hi.publications.continuity:[];
-      const hmap=new Map((Array.isArray(hi?.candidates)?hi.candidates:[]).filter(x=>x&&typeof x==='object').map(x=>[clean(x.id),x]));
+      const hmap=new Map((Array.isArray(hi?.candidates)?hi.candidates:[]).filter(x=>x&&typeof x==='object').map(x=>[clean(x.id),applyCurrentPhenomenaWording(x)]));
       const shown=hids.map(id=>hmap.get(clean(id))).filter(Boolean).map(c=>({text:clean(c.reader_title||c.topic_label),explanation:(c.card&&typeof c.card==='object')?clean(c.card.lead):(clean(c.reader_summary||'')||publicPhenomenonSummary(c.reader_summary||'',clean(c.reader_title||c.topic_label))),so:clean(c.reader_why||''),basis:clean(c.reader_basis||''),kindLabel:clean(c.reader_kind_label||''),wow:Number(c.wow)||0,records:Number(c.current_record_count)||Number(c.primary_records)||0,sources:Number(c.current_source_count)||Number(c.primary_sources)||0,distance:Number(c.wow)||Number(c.inferential_distance)||3,rankScore:Number(c.score)||0,groupLabel:c.grammar_id==='split_recurrence'?'Returning pattern':c.grammar_id==='era_conjunction'?'Changing pattern':'Recurring pattern',support:Array.isArray(c.support)?c.support:[],history:Array.isArray(c.continuity_history)?c.continuity_history:[]}));
       const sel=hi?.selection?.continuity||{};
       const reserve=Number(sel.reserve)||0,watch=Number(sel.watch)||0;
       // Keep the published Stage 7 order; re-bucketing would drop filled slots.
-      render(shown.slice(0,15));
+      render(phenomenaWeekShuffle(shown.slice(0,15)));
     }else{
       const established=RadarPhenomena.build(data,history,historyConfig);
       const patterns=RadarContinuity.build(data,history,historyConfig,RadarPhenomena.phenomena);
@@ -192,7 +217,7 @@ async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});ret
       const returning=unique(established.filter(x=>!x.autoDetected).map(x=>({text:returningStatement(x),records:Number(x.currentCount)||0,sources:Number(x.currentSources)||0,distance:1,rankScore:Math.min(99,(Number(x.score)||0)*4),group:'returning'})));
       const all=rankItems(unique([...changing,...returning]));
       const shown=wowCycle(all).slice(0,15);
-      render(shown);
+      render(phenomenaWeekShuffle(shown));
     }
   }catch(e){
     console.error(e);
