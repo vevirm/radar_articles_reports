@@ -7,38 +7,38 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **3159** (Main **1620** + Historical **1539**)
-- Automatic queue still needing V2 verification: **215** (Main **0** + Historical **215**)
-- Currently assigned to workers: **107** (Main **0** + Historical **107**)
+- Automatic queue still needing V2 verification: **257** (Main **32** + Historical **225**)
+- Currently assigned to workers: **107** (Main **32** + Historical **75**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **37**
-- Automatic queue pending and not yet assigned: **108**
+- Automatic queue pending and not yet assigned: **150**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261022T173922Z-ca65a5b62f97`
+- Current package: `worker-a-20261023T143958Z-f539ca680e0e`
 - Assigned unresolved records: **36**
-  1. `historical:id:a785eed5f979e363` — Bottlenecks that delay the benefits of large-scale research infrastructure
-  2. `historical:id:ca7ae7a0c956d39c` — Artificial Intelligence (AI) in Science
-  3. `historical:id:1ad905a4fb29f295` — Governance Implications of Synthetic Data in the Context of International Security → UNIDIR
-  4. `historical:id:becbd8e7ab17dea9` — Evaluation of the UK Research Partnership Investment Fund: interim report
-  5. `historical:id:8b37506bb11b5c0f` — Evaluation of the UK Research Partnership Investment Fund: interim findings infographic
-  6. `historical:id:3fb20b647fc6c966` — Evaluation of the UK Research Partnership Investment Fund: interim findings
-  7. `historical:id:000a30004d7bda12` — AI and credit: Addressing the still open questions to prevent innovation paralysis – CEPS
-  8. `historical:id:0a049db341f619ec` — The Europe-China Resilience Audit: Insights for advancing European resilience
+  1. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=5431f834-cdbd-11f1-8b4c-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Landscape analysis study of the biotechnology sector in the Union with a view to foster its competitiveness and innovation - Publications Office of the EU
+  2. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=6c2af18d-cdbe-11f1-8b4c-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Study to support the rapid assessment of policy scenarios to strengthen innovation and competitiveness in the field of biotechnology in the EU - Publications Office of the EU
+  3. `link:https://doi.org/10.1016/j.ejso.2026.112323` — Building mentorship infrastructure for cancer surgery training: a scoping review from COST Action CA24158 DISSECT
+  4. `link:https://era.gv.at/news-items/research-and-innovation-deepen-euwestern-balkans-cooperation/` — Research and innovation deepen EU–Western Balkans cooperation
+  5. `link:https://defence-industry-space.ec.europa.eu/ukraines-association-european-defence-fund-and-european-defence-industry-porgramme-funding-entered-2026-10-16_en` — Ukraine’s association with the European Defence Fund and European Defence Industry Porgramme funding entered into force
+  6. `link:https://doi.org/10.1007/s00330-026-12580-x` — Commercial AI for CT lung cancer screening: product capabilities, coverage of nodule management tasks and supporting evidence
+  7. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxOVW9JMll3ZWtXZHIxVkhWaS1pMGlpTDZuOFhzSXZFUElrbWNRV1FsUENVX2U4Z1pfWGFINnJEcDl6ODJZdmV2TVYxWEt1RFpndXkzZVgxZlFaSHhSbk1IbnFJYVZPUF90RVRMenRiT3owOHZ4OVk4bUFBa21GVHVwUFZ3VkY?oc=5` — Starlink saga shows why Europe must catch up in space
+  8. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTE9QcC1fVmdQazFBTlBSYndRcloyak4tblNHMmkzalE2cHN1SS16VTFzNUpuaEY4MkRWSmN2RnNJME42M0wwZkJFS3BqenRfWjVmNlFMcXQyQWRXdl9OeVpoR1pQelV6RjA5UWRfUEJ3M1B3el9FNllHR0VLVWRIdw?oc=5` — Electrification of European industry - Opportunities, economic barriers, and the role of flexibility
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261022T173942Z-5ee70021465d`
+- Current package: `worker-b-20261023T144003Z-41c1d68df139`
 - Assigned unresolved records: **36**
-  1. `historical:id:0c74ae0fab99be67` — The ‘AI Factories’ Amendment to the EuroHPC JU Regulation Enters Into Force
-  2. `historical:id:4c91665b1767439e` — The Weimar Triangle Should Lead on EU Industrial Policy
-  3. `historical:id:ff9a54d20dabce60` — The Swedish Research Council’s recommendations for the EU’s framework programme FP10
-  4. `historical:id:f3a2dac9e7453ac7` — India’s Health Diplomacy: Rewards for Global Health Security
-  5. `historical:id:55196f5a54029016` — How citizen science is shaping European technology policy around home-appliance repair
-  6. `historical:id:7efe8cb5bef255ac` — Gen-4 Engineering Research Centers
-  7. `historical:id:a6bf9f2cfd6c9517` — EU’s Global Gateway Initiative Unlocks New Opportunities for Education and Research in ASEAN
-  8. `historical:id:96d2b74807741141` — EU, ASEAN team up to boost educational and research ties with EUR 9.3 million initiative
+  1. `historical:id:987a1606b33607c9` — Open Science Fund | NWO
+  2. `historical:id:50a943bd264295e1` — What the EU list of critical technologies tells us about its de-risking plans – European Council on Foreign Relations
+  3. `historical:id:00d9cb5358c47a44` — New CHIPS Report Describes Metrology Grand Challenges for the Semiconductor Sector
+  4. `historical:id:90aa96d6c9f982e2` — After Merkel – The 2021 German Election and its Implications for European Union Politics
+  5. `historical:id:0820c7d958ca2b26` — IMPLEMENTATION OF THE PUBLIC OPEN SCIENCE POLICY IN THE EUROPEAN RESEARCH AREA COUNTRIES (EXAMPLE OF SWITZERLAND)
+  6. `historical:id:3a27598ab3203896` — Climate-adaptive technological change in a small region: A resource-based scenario approach
+  7. `historical:id:a785eed5f979e363` — Bottlenecks that delay the benefits of large-scale research infrastructure
+  8. `historical:id:ca7ae7a0c956d39c` — Artificial Intelligence (AI) in Science
   - … plus 28 more in the package manifest
 
 ### Worker SINGLE
