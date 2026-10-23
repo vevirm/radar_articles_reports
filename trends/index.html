@@ -681,7 +681,19 @@ function pair(x){
   return `<article class="pair" data-obviousness="${trendDistance(x)}">${head}<div class="tug-score" aria-label="Evidence pull ${x.left.pull} to ${x.right.pull}"><strong>${x.left.pull}</strong><div class="tug-track" aria-hidden="true"><span class="tug-left" data-pull="${x.left.pull}"></span><span class="tug-right" data-pull="${x.right.pull}"></span></div><strong>${x.right.pull}</strong></div><div class="axis"><section class="side"><h3>${esc(lt)}</h3>${sideBody(left,x.left)}</section><section class="side right"><h3>${esc(rt)}</h3>${sideBody(right,x.right)}</section></div>${composition}${flip}</article>`;
 }
 async function loadJson(url){try{const r=await fetch(url,{cache:'no-store'});if(!r.ok)return {};return await r.json()}catch(_){return {}}}
-function wowCyclePairs(items){const buckets=new Map([5,4,3,2,1].map(w=>[w,[]]));for(const x of items||[]){const w=Math.max(1,Math.min(5,trendDistance(x)));buckets.get(w).push(x)}const out=[];for(let round=0;round<3;round++)for(const w of [5,4,3,2,1]){const x=buckets.get(w)[round];if(x)out.push(x)}return out}
+function wowCyclePairs(items){
+  // Keep the original level-balanced first pass; fill vacant places from
+  // the existing eligible pool, preserving the engine's relative order.
+  const buckets=new Map([5,4,3,2,1].map(w=>[w,[]]));
+  for(const x of items||[]){const w=Math.max(1,Math.min(5,trendDistance(x)));buckets.get(w).push(x)}
+  const out=[];
+  for(let round=0;round<3;round++)for(const w of [5,4,3,2,1]){
+    const x=buckets.get(w)[round];if(x)out.push(x);
+  }
+  const selected=new Set(out.map(x=>x.id));
+  for(const x of items||[]){if(out.length>=15)break;if(!selected.has(x.id)){out.push(x);selected.add(x.id)}}
+  return out;
+}
 // Presentation-only: rotate already selected trend pairs once per UTC week.
 // The engine's choices, evidence and scores remain unchanged.
 function weeklyReaderOrder(items, now=Date.now()){
