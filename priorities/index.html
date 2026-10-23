@@ -31,7 +31,7 @@
 <body>
 <header><div class="wrap top"><div><div class="kicker">PATHWAYS</div><h1>Risks &amp; Opportunities</h1><p class="lede">How current developments could weaken or strengthen European research and innovation in the years ahead.</p></div><nav class="nav" aria-label="Primary site sections"><a href="../">Start</a><a href="../radar/">Main Radar</a><a href="../read/">Read At Least This</a><a href="../frontier/quick/">Matrix</a><a href="../trends/">Trends</a><a href="../phenomena/">Ongoing Phenomena</a><a class="primary" href="./" aria-current="page">Risks &amp; Opportunities</a><a href="../shocks/">External Shocks</a><a href="../historical/">Earlier Findings</a><a href="../literature/">Sources</a><a href="../stuff/">Stuff</a></nav></div></header>
 <section class="core-flow" aria-label="Core reader path"><div class="wrap flow"><a href="../radar/">1 · Radar</a><span>→</span><a href="../frontier/quick/">2 · Matrix</a><span>→</span><a href="../trends/">3 · Trends</a><span>→</span><a href="../phenomena/">4 · Ongoing phenomena</a><span>→</span><a class="current" href="./">5 · Risks &amp; opportunities</a><span>→</span><a href="../shocks/">6 · External shocks</a></div></section>
-<main class="wrap"><div class="grid">
+<main class="wrap"><p class="hint" id="weeklyOrderNote">Cards are presented in a different order each UTC week. The numbers retain their original selection positions; the underlying findings and evidence are unchanged.</p><div class="grid">
 <section class="panel"><div class="panel-head"><div><h2>Risks</h2><p class="hint">Ways current developments could create problems for European research and innovation.</p></div><span id="riskCount" class="panel-count">—</span></div><ol id="risks" class="list risk"><li class="empty">Loading</li></ol><p id="riskStock" class="hint"></p></section>
 <section class="panel"><div class="panel-head"><div><h2>Opportunities</h2><p class="hint">Ways current developments could strengthen European research and innovation.</p></div><span id="opportunityCount" class="panel-count">—</span></div><ol id="opportunities" class="list opportunity"><li class="empty">Loading</li></ol><p id="opportunityStock" class="hint"></p></section>
 </div></main>
@@ -48,16 +48,148 @@ function relatedEvidenceHtml(x){const rows=Array.isArray(x?.relatedPrimaryEviden
 function evidenceRowsHtml(rows){rows=Array.isArray(rows)?rows:[];return rows.map(c=>{const src=[c?.source,c?.date?fmtDate(c.date):''].filter(Boolean).join(' — ');const label=c?.title||'Source';const linked=c?.link?`<a href="${esc(c.link)}" target="_blank" rel="noopener">${esc(label)}</a>`:esc(label);return `<li>${linked}${src?` <span class="priority-meta">— ${esc(src)}</span>`:''}</li>`}).join('')}
 function highOrderEvidenceHtml(x){if(!x?.highOrder)return '';const support=Array.isArray(x?.supportEvidence)?x.supportEvidence:[],against=Array.isArray(x?.counterEvidence)?x.counterEvidence:[];let html='';if(support.length)html+=`<p><strong>Sources:</strong></p><ul>${evidenceRowsHtml(support)}</ul>`;if(against.length)html+=`<p><strong>Counterpoints:</strong></p><ul>${evidenceRowsHtml(against)}</ul>`;return html}
 function displayDistance(x){if(x?.highOrder)return Math.max(1,Math.min(5,Number(x?.wow)||3));if(['scanner_source_classification','deep_scan_v2_semantic_classification'].includes(x?.interpretationBasis))return 1;return 2}
-function item(x,kind,i){
+
+// Reader-only editorial wording for currently published October 2026 cards.
+// Apply only when both the existing candidate ID and original explanation match:
+// newly generated or materially updated analysis falls back to source wording.
+const priorityEditorial20261023 = {
+  "claim:magnitude_contrast:b969f3471207e1": [
+    "When a single plan comes close to a whole EU programme, the programme no longer sets the direction on its own.",
+    "In this comparison, one private investment approaches the scale of a public research programme. Its implications for direction depend on decisions outside that programme."
+  ],
+  "claim:magnitude_contrast:6de57969426a3e": [
+    "That is about 44 to one. At that ratio, research capacity sets the pace and recruiting researchers struggles to keep up.",
+    "The two cited programmes put far more money into research capacity than researcher recruitment. The figures alone do not measure all funding for either purpose."
+  ],
+  "claim:practice_before_doctrine:684daff9705ba8": [
+    "Research infrastructure was already happening in Sep 2026; the first rule covering it came the next day. What is built first usually sets the terms that later rules must accept.",
+    "Infrastructure activity preceded the cited rule. The risk is that later governance may have to adapt to choices already made."
+  ],
+  "claim:corroborated_claim:5ae76a416c9484": [
+    "At stake: whether European researchers and firms have enough computing power of their own.",
+    "European researchers and companies may remain constrained by the availability, location and ownership of computing capacity."
+  ],
+  "claim:corroborated_claim:15d65a86ac0fd9": [
+    "At stake: whether research done in Europe becomes companies and jobs in Europe.",
+    "Europe could lose the economic benefits of its research if discoveries do not turn into products, growing firms and buyers at home."
+  ],
+  "claim:magnitude_contrast:67bbb5fa16cc40": [
+    "When one project is bigger than a whole public programme, its owner, not the programme, decides where sites, power and people go.",
+    "The cited private project exceeds the compared public funding line, giving its sponsor substantial influence over where that investment goes."
+  ],
+  "claim:cross_pressure:4562e3c622e57a": [
+    "Compute plans move only as fast as the slowest permit, grid connection or local vote.",
+    "Announced data-centre expansion faces practical constraints from permits, electricity connections and local consent."
+  ],
+  "claim:dependency_pathway:68e228a6b0f9ef": [
+    "Strategic autonomy depends on industrial competitiveness, and three recent findings show industrial competitiveness is under strain. If industrial competitiveness fails, strategic autonomy is hit before Europe can find a replacement.",
+    "Weak industrial competitiveness could undermine the industries on which greater strategic autonomy depends."
+  ],
+  "claim:corroborated_claim:c469a6b11b080b": [
+    "At stake: whether Europe still makes the things it invents.",
+    "Persistent gaps in technological complexity raise questions about whether some European economies can capture higher-value manufacturing."
+  ],
+  "claim:corroborated_claim:b735e4769c38a2": [
+    "At stake: what Europe can afford to research, and with whom.",
+    "The cited early budget signal raises uncertainty over the next Horizon programme; further decisions are needed before the direction is settled."
+  ],
+  "claim:magnitude_contrast:ce26d1bbb76938": [
+    "When one project is bigger than a whole public programme, its owner, not the programme, decides where sites, power and people go.",
+    "The compared private project exceeds the cited EU pledge for AI gigafactories, showing how a single investor could shape location and capacity choices."
+  ],
+  "claim:dependency_pathway:3fcc54a3f38aea": [
+    "AI governance depends on public digital procurement, and two recent findings show public digital procurement is under strain. If public digital procurement fails, AI governance is hit before Europe can find a replacement.",
+    "If public digital purchasing cannot enforce effective requirements, a practical route for applying AI governance may be weakened."
+  ],
+  "claim:practice_before_doctrine:75ba10255c6148": [
+    "Research governance was already happening in Sep 2026; the first rule covering it came a week later, and it is still only a proposal. What is built first usually sets the terms that later rules must accept.",
+    "The cited research-governance practice began before a proposed rule. The unresolved question is whether regulation catches up with established practice."
+  ],
+  "claim:corroborated_claim:939b63da5aa69d": [
+    "A dedicated EU budget line for critical raw materials remained contested and had not been agreed. At stake: what Europe can build without outside suppliers.",
+    "Without agreement on dedicated support, dependence on outside supplies of critical raw materials could remain difficult to address."
+  ],
+  "claim:magnitude_contrast:45fdea17459c6f": [
+    "That is more than 3,000 to one. At that ratio, defence procurement sets the pace and strategic investment struggles to keep up.",
+    "The cited defence procurement and strategic investment amounts differ by several orders of magnitude; they cover different instruments and should not be read as total sector spending."
+  ],
+  "claim:latent_channel:1d71908d0bf569": [
+    "Sources show a gap in AI governance. Joint public purchasing of AI compute already exists. No source has yet suggested using one for the other. A buyer this large can set conditions for access. That is a way to improve AI governance without a new law.",
+    "Joint purchasing of AI computing could give public buyers leverage to require governance safeguards, though the cited sources do not establish that this use is planned."
+  ],
+  "claim:corroborated_claim:bb4ea8c553059e": [
+    "It will count only if the money turns into working facilities, teams and users.",
+    "Quantum pilot-line funding creates an opening for shared facilities; the practical test will be whether lines become operational and accessible."
+  ],
+  "claim:external_opening:05008e5b307674": [
+    "Europe can gain what others close off, but only if its offer is ready in time.",
+    "Restrictions in the United States may open a recruitment window for Europe, provided European institutions can act quickly enough."
+  ],
+  "claim:corroborated_claim:62d84d1af53b95": [
+    "It will count only if the money turns into working facilities, teams and users.",
+    "EU and national defence-innovation commitments could support complementary projects; the test is whether they translate into usable capability."
+  ],
+  "claim:corroborated_claim:37e3853c6e04e5": [
+    "It will count only if the investment stays and grows in Europe.",
+    "Public and private strategic investment could reinforce each other if capital is deployed and maintained in European activities."
+  ],
+  "claim:corroborated_claim:f0b834738d16c2": [
+    "It will count only if the money turns into working facilities, teams and users.",
+    "Dedicated support for open quantum testing could lower barriers to experimentation if the facilities become usable by outside teams."
+  ],
+  "claim:corroborated_claim:93a032e1461ae6": [
+    "It will count only if the support reaches the organisations that need it most.",
+    "New advanced-materials support could help research and development where it reaches the relevant laboratories and firms."
+  ],
+  "claim:corroborated_claim:307c8f218e0751": [
+    "It will count only if the purchases reach users on fair terms.",
+    "Growing joint purchasing of AI computing could expand user access if allocation and conditions are transparent and workable."
+  ],
+  "claim:corroborated_claim:79443c071a554f": [
+    "It will count only if the money turns into working facilities, teams and users.",
+    "Multiple funding moves could strengthen the research base, provided commitments become accessible grants, projects or sustained capacity."
+  ],
+  "claim:corroborated_claim:9c25a0e24fc1c6": [
+    "It will count only if the money turns into working facilities, teams and users.",
+    "Regional innovation funding could narrow local capacity gaps if it reaches organisations able to use and sustain the investment."
+  ],
+  "claim:corroborated_claim:7768160aa9de81": [
+    "It will count only if European work shapes the international standard.",
+    "Early European involvement in quantum standards could increase influence over shared rules, depending on the eventual international process."
+  ],
+  "claim:corroborated_claim:e374049b35d410": [
+    "It will count only if the new capacity reaches the researchers and firms who need it.",
+    "Public and private compute investment could expand European capacity; user access and actual delivery remain the key tests."
+  ],
+  "claim:corroborated_claim:d2eb071c9b0adb": [
+    "It will count only if the partnership lasts beyond its launch.",
+    "Drone partnerships could broaden European capability if participants sustain cooperation beyond the initial agreement."
+  ],
+  "claim:corroborated_claim:2ff903ccc3b7a2": [
+    "It will count only if people actually stay once the scheme runs.",
+    "New research-career schemes create an opportunity to retain talent, which ultimately depends on actual recruitment and retention."
+  ],
+  "claim:corroborated_claim:81506692132691": [
+    "It will count only if the new capacity reaches the researchers and firms who need it.",
+    "Additional European computing facilities could relieve capacity constraints if researchers and businesses can access them in practice."
+  ]
+};
+function editorialPriorityWhat(x, original){
+  const entry=priorityEditorial20261023[x?.candidateId];
+  return entry&&original===entry[0]?entry[1]:original;
+}
+
+function item(x,kind,i,rank=i+1){
   const id=`detail-${kind}-${i}`;
   const C=globalThis.RadarCards;
   if(x?.highOrder&&x?.readerAuthored&&C){
     // v26: engine-written card - kind of reasoning, finding, evidence, so-what.
     const R=globalThis.RadarReaderClarity;
     const r=R?R.priority(kind,{headline:x.title,lead:x.coreMessage,so:x.readerWhy,basis:x.readerBasis,topic:x.topicLabel||x.topic_label||''}):{headline:x.title,what:x.coreMessage,why:x.readerWhy,basis:x.readerBasis};
+    if(r.what)r.what=editorialPriorityWhat(x,x.coreMessage)===x.coreMessage?r.what:editorialPriorityWhat(x,x.coreMessage);
     const text=C.surface(r.headline);
     const body=`${r.what?`<p class="card-lead"><strong>What is happening:</strong> ${esc(C.surface(r.what))}</p>`:''}${r.why?`<p class="card-so"><strong>Why it matters:</strong> ${esc(C.surface(r.why))}</p>`:''}${r.basis?`<p class="card-basis">${esc(r.basis)}</p>`:''}`;
-    return `<li class="priority-card" data-obviousness="${displayDistance(x)}"><div class="priority-main"><span class="rank">${i+1}</span><div class="priority-copy">${C.chip(x.readerKindLabel,x.wow)}<div class="priority-title">${esc(text)}</div>${body}<div class="priority-actions"><button class="info-button" type="button" data-detail="${id}" aria-expanded="false">Sources</button></div></div></div><div id="${id}" class="detail" hidden>${highOrderEvidenceHtml(x)}${relatedEvidenceHtml(x)}${weakContextHtml(x)}</div></li>`;
+    return `<li class="priority-card" data-obviousness="${displayDistance(x)}"><div class="priority-main"><span class="rank" title="Original selection position">${rank}</span><div class="priority-copy">${C.chip(x.readerKindLabel,x.wow)}<div class="priority-title">${esc(text)}</div>${body}<div class="priority-actions"><button class="info-button" type="button" data-detail="${id}" aria-expanded="false">Sources</button></div></div></div><div id="${id}" class="detail" hidden>${highOrderEvidenceHtml(x)}${relatedEvidenceHtml(x)}${weakContextHtml(x)}</div></li>`;
   }
   const rawText=RadarPriorities.plainPriorityTitle(x);
   const text=globalThis.RadarReaderStyle?.displayTitle?.(rawText)||rawText;
@@ -67,9 +199,9 @@ function item(x,kind,i){
   const sourceTitle=x.title||'Source';
   const detailLead=evidence?`<p>${esc(evidence)}</p>`:'';
   const sourceLead=x.link?`<p class="priority-meta"><a href="${esc(x.link)}" target="_blank" rel="noopener">${esc(sourceTitle)}</a>${source?` — ${esc(source)}`:''}</p>`:(source?`<p class="priority-meta">${esc(source)}</p>`:'');
-  return `<li class="priority-card" data-obviousness="${displayDistance(x)}"><div class="priority-main"><span class="rank">${i+1}</span><div class="priority-copy"><div class="priority-title">${esc(text)}</div>${explanation?`<p class="priority-what">${esc(explanation)}</p>`:''}<div class="priority-actions"><button class="info-button" type="button" data-detail="${id}" aria-expanded="false">Sources</button></div></div></div><div id="${id}" class="detail" hidden>${detailLead}${sourceLead}${highOrderEvidenceHtml(x)}${relatedEvidenceHtml(x)}${weakContextHtml(x)}</div></li>`
+  return `<li class="priority-card" data-obviousness="${displayDistance(x)}"><div class="priority-main"><span class="rank" title="Original selection position">${rank}</span><div class="priority-copy"><div class="priority-title">${esc(text)}</div>${explanation?`<p class="priority-what">${esc(explanation)}</p>`:''}<div class="priority-actions"><button class="info-button" type="button" data-detail="${id}" aria-expanded="false">Sources</button></div></div></div><div id="${id}" class="detail" hidden>${detailLead}${sourceLead}${highOrderEvidenceHtml(x)}${relatedEvidenceHtml(x)}${weakContextHtml(x)}</div></li>`
 }
-function listHtml(items,kind){const label=kind==='risk'?'risk':'opportunity';return items.length?items.map((x,i)=>item(x,kind,i)).join(''):`<li class="empty">No current ${label} is clear enough to show here yet.</li>`}
+function listHtml(items,kind){const label=kind==='risk'?'risk':'opportunity';return items.length?items.map((entry,i)=>item(entry.x,kind,i,entry.rank)).join(''):`<li class="empty">No current ${label} is clear enough to show here yet.</li>`}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-detail]');if(!b)return;const box=document.getElementById(b.dataset.detail);if(!box)return;const opening=box.hidden;box.hidden=!opening;b.setAttribute('aria-expanded',String(opening));b.textContent=opening?'Close':'Sources';});
 function stockLine(){return '';}
 function wowCycle(items){
@@ -79,7 +211,15 @@ function wowCycle(items){
   return out;
 }
 function shelf(items){return (items||[]).some(x=>x&&x.highOrder)?(items||[]).slice(0,15):wowCycle(items).slice(0,15)}
-function render(view){const risks=shelf(view.risks),opps=shelf(view.opportunities);document.getElementById('risks').innerHTML=listHtml(risks,'risk');document.getElementById('opportunities').innerHTML=listHtml(opps,'opportunity');document.getElementById('riskCount').textContent='On the radar';document.getElementById('opportunityCount').textContent='On the radar';document.getElementById('riskStock').textContent=stockLine(view.stats.riskReserve,view.stats.riskWatch);document.getElementById('opportunityStock').textContent=stockLine(view.stats.opportunityReserve,view.stats.opportunityWatch);}
+// Presentation-only: preserve selection and original positions; rotate display once per UTC week.
+function weeklyReaderOrder(items, now=Date.now()){
+  const ranked=items.map((x,i)=>({x,rank:i+1}));
+  if(ranked.length<2)return ranked;
+  const week=Math.floor(now/604800000);
+  const offset=week%ranked.length;
+  return ranked.slice(offset).concat(ranked.slice(0,offset));
+}
+function render(view){const risks=weeklyReaderOrder(shelf(view.risks)),opps=weeklyReaderOrder(shelf(view.opportunities));document.getElementById('risks').innerHTML=listHtml(risks,'risk');document.getElementById('opportunities').innerHTML=listHtml(opps,'opportunity');document.getElementById('riskCount').textContent='On the radar';document.getElementById('opportunityCount').textContent='On the radar';document.getElementById('riskStock').textContent=stockLine(view.stats.riskReserve,view.stats.riskWatch);document.getElementById('opportunityStock').textContent=stockLine(view.stats.opportunityReserve,view.stats.opportunityWatch);}
 (async()=>{try{const data=await RadarData.load('../radar.json','../radar_seed.json');render(RadarPriorities.buildPriorityView(data))}catch(e){document.getElementById('risks').innerHTML='<li class="empty">Unavailable.</li>';document.getElementById('opportunities').innerHTML='<li class="empty">Unavailable.</li>'}})();
 </script>
 <script src="../reader_language.js?v=5"></script>
