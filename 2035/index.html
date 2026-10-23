@@ -30,7 +30,7 @@
   <section class="axis-pair-intro" aria-labelledby="axisPairTitle">
     <p class="taxonomy-kicker">2035 scenario spaces</p>
     <h1 id="axisPairTitle">Four ways to think about Europe in 2035</h1>
-    <p class="future-lede">Each pair of questions explores two uncertainties about Europe’s future. Together, they describe four possible worlds. Choose a pair to explore what each world could mean for European research, technology and economic resilience.</p>
+    <p class="future-lede">Each pair of questions explores two uncertainties about Europe’s future. Together, they describe four possible worlds. Choose a pair to explore what each world could mean for European research, technology and economic resilience. The four lenses appear in a new order each week; their scenarios and underlying analysis do not change.</p>
   </section>
   <div id="axisLensGrid" class="axis-lens-grid"><p class="empty">Loading</p></div>
 </main>
@@ -38,53 +38,70 @@
 const clean=v=>String(v||'').replace(/\s+/g,' ').trim();
 const esc=v=>clean(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
+// Four fixed analytical lenses; weekly display order affects navigation only.
 const AXIS_PAIRS=[
   {
     id:'resources-connectedness',
     title:'Resources × Global connectedness',
-    question:'Can Europe mobilise the resources it needs, and how connected is it to the world?'
+    question:'Can Europe mobilise the resources it needs, and how connected is it to the world?',
+    readerNote:'Explore how the availability of finance and capabilities interacts with international openness.'
   },
   {
     id:'integration-dependency',
     title:'European integration × Strategic dependency',
-    question:'Does Europe act together, and how much does it depend on capabilities outside Europe?'
+    question:'Does Europe act together, and how much does it depend on capabilities outside Europe?',
+    readerNote:'Compare coordinated European action with the consequences of relying on external suppliers and systems.'
   },
   {
     id:'talent-scale-up',
     title:'Talent × Scale-up capacity',
-    question:'Can Europe attract and retain skilled people, and can it grow what they create?'
+    question:'Can Europe attract and retain skilled people, and can it grow what they create?',
+    readerNote:'Follow the link between research talent, commercial growth and Europe’s ability to retain value.'
   },
   {
     id:'scale-up-dependency',
     title:'Scale-up capacity × Strategic dependency',
-    question:'Can Europe grow its innovations into businesses and industries, and whose capabilities would that growth depend on?'
+    question:'Can Europe grow its innovations into businesses and industries, and whose capabilities would that growth depend on?',
+    readerNote:'See how successful scale-up can still leave strategic dependencies unresolved.'
   }
 ];
+
+// Same order throughout each UTC week; changes automatically on the next week.
+const weeklyLensOrder=(items,date=new Date())=>{
+  const epoch=Date.UTC(2024,0,1);
+  const mondayOffset=(date.getUTCDay()+6)%7;
+  const thisMonday=Date.UTC(date.getUTCFullYear(),date.getUTCMonth(),date.getUTCDate()-mondayOffset);
+  const week=Math.floor((thisMonday-epoch)/604800000);
+  const offset=((week%items.length)+items.length)%items.length;
+  return [...items.slice(offset),...items.slice(0,offset)];
+};
 
 (async()=>{
  try{
   const data=await RadarData.load('../radar.json','../radar_seed.json');
   const generated=data?.high_order_inference?.scenarios_2035?.frames||[];
   const generatedById=new Map(generated.map(f=>[f.id,f]));
-  const frames=AXIS_PAIRS.map(base=>({...base,...(generatedById.get(base.id)||{})}));
+  const frames=weeklyLensOrder(AXIS_PAIRS.map(base=>({...base,...(generatedById.get(base.id)||{}),readerNote:base.readerNote})));
   document.getElementById('axisLensGrid').innerHTML=frames.map((f,i)=>`
     <article class="axis-lens-card">
       <a href="lens/?frame=${encodeURIComponent(f.id)}">
         <p class="lens-number">0${i+1}</p>
         <h2>${esc(f.title)}</h2>
         <p>${esc(f.question)}</p>
+        <p class="lens-reader-note">${esc(f.readerNote)}</p>
         <div class="lens-meta"><span>4 scenarios</span><span>4 variants each</span></div>
         <strong>Explore these scenarios →</strong>
       </a>
     </article>`).join('');
  }catch(e){
   console.error(e);
-  document.getElementById('axisLensGrid').innerHTML=AXIS_PAIRS.map((f,i)=>`
+  document.getElementById('axisLensGrid').innerHTML=weeklyLensOrder(AXIS_PAIRS).map((f,i)=>`
     <article class="axis-lens-card">
       <a href="lens/?frame=${encodeURIComponent(f.id)}">
         <p class="lens-number">0${i+1}</p>
         <h2>${esc(f.title)}</h2>
         <p>${esc(f.question)}</p>
+        <p class="lens-reader-note">${esc(f.readerNote)}</p>
         <div class="lens-meta"><span>4 scenarios</span><span>4 variants each</span></div>
         <strong>Explore these scenarios →</strong>
       </a>
