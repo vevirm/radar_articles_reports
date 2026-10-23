@@ -156,6 +156,14 @@ function shockDetailHtml(x,i){
 }
 document.addEventListener('click',e=>{const b=e.target.closest('[data-shock-detail]');if(!b)return;const box=document.getElementById(b.dataset.shockDetail);if(!box)return;const opening=box.hidden;box.hidden=!opening;b.setAttribute('aria-expanded',String(opening));b.textContent=opening?'Close':'Sources'});
 function visibleShockExplanation(title,text){return clean(text)||shockExplanation(title);}
+// Presentation-only: rotate the already selected shock cards once per UTC week.
+// Do not change the engine's selections, evidence, scores or source order.
+function weeklyReaderOrder(items, now=Date.now()){
+  if(items.length<2)return items;
+  const week=Math.floor(now/604800000);
+  const offset=week%items.length;
+  return items.slice(offset).concat(items.slice(0,offset));
+}
 
 
 (async()=>{
@@ -167,7 +175,7 @@ function visibleShockExplanation(title,text){return clean(text)||shockExplanatio
     const wowCycle=items=>{const buckets=new Map([5,4,3,2,1].map(w=>[w,[]]));for(const x of items||[]){const w=Math.max(1,Math.min(5,Number(x?.distance)||3));buckets.get(w).push(x)}const out=[];for(let round=0;round<3;round++)for(const w of [5,4,3,2,1]){const x=buckets.get(w)[round];if(x)out.push(x)}return out};
     // Stage 7 already publishes the 5-4-3-2-1 x3 shelf (with thin wow levels filled
     // from the nearest level). Keep that order; re-bucketing here dropped findings.
-    const items=all.slice(0,15);
+    const items=weeklyReaderOrder(all.slice(0,15));
     document.getElementById('shockSummary').textContent=items.length?'Outside events that could abruptly affect research and innovation in Europe.':'No possible shock is ready to show yet.';
     const C=globalThis.RadarCards;
     const R=globalThis.RadarReaderClarity;
