@@ -6,39 +6,39 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **3159** (Main **1620** + Historical **1539**)
-- Automatic queue still needing V2 verification: **257** (Main **32** + Historical **225**)
-- Currently assigned to workers: **107** (Main **32** + Historical **75**)
+- Authoritative V2 verified: **3221** (Main **1643** + Historical **1578**)
+- Automatic queue still needing V2 verification: **199** (Main **9** + Historical **190**)
+- Currently assigned to workers: **107** (Main **9** + Historical **98**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **37**
-- Automatic queue pending and not yet assigned: **150**
+- Automatic queue pending and not yet assigned: **92**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261023T143958Z-f539ca680e0e`
+- Current package: `worker-a-20261023T161447Z-03be523ad6ff`
 - Assigned unresolved records: **36**
-  1. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=5431f834-cdbd-11f1-8b4c-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Landscape analysis study of the biotechnology sector in the Union with a view to foster its competitiveness and innovation - Publications Office of the EU
-  2. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=6c2af18d-cdbe-11f1-8b4c-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Study to support the rapid assessment of policy scenarios to strengthen innovation and competitiveness in the field of biotechnology in the EU - Publications Office of the EU
-  3. `link:https://doi.org/10.1016/j.ejso.2026.112323` — Building mentorship infrastructure for cancer surgery training: a scoping review from COST Action CA24158 DISSECT
-  4. `link:https://era.gv.at/news-items/research-and-innovation-deepen-euwestern-balkans-cooperation/` — Research and innovation deepen EU–Western Balkans cooperation
-  5. `link:https://defence-industry-space.ec.europa.eu/ukraines-association-european-defence-fund-and-european-defence-industry-porgramme-funding-entered-2026-10-16_en` — Ukraine’s association with the European Defence Fund and European Defence Industry Porgramme funding entered into force
-  6. `link:https://doi.org/10.1007/s00330-026-12580-x` — Commercial AI for CT lung cancer screening: product capabilities, coverage of nodule management tasks and supporting evidence
-  7. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxOVW9JMll3ZWtXZHIxVkhWaS1pMGlpTDZuOFhzSXZFUElrbWNRV1FsUENVX2U4Z1pfWGFINnJEcDl6ODJZdmV2TVYxWEt1RFpndXkzZVgxZlFaSHhSbk1IbnFJYVZPUF90RVRMenRiT3owOHZ4OVk4bUFBa21GVHVwUFZ3VkY?oc=5` — Starlink saga shows why Europe must catch up in space
-  8. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTE9QcC1fVmdQazFBTlBSYndRcloyak4tblNHMmkzalE2cHN1SS16VTFzNUpuaEY4MkRWSmN2RnNJME42M0wwZkJFS3BqenRfWjVmNlFMcXQyQWRXdl9OeVpoR1pQelV6RjA5UWRfUEJ3M1B3el9FNllHR0VLVWRIdw?oc=5` — Electrification of European industry - Opportunities, economic barriers, and the role of flexibility
+  1. `historical:id:4cebbee4fa07360d` — The CNRS is defending the future of astronomy to the European Union
+  2. `historical:id:47cd2b232d968f0d` — The Rocky Road for Boosting Dual-use Research in Europe - How to support researchers and companies entering the Dual-use area? | VTT
+  3. `historical:id:9b08ebc46dad7759` — The European Parliament on Space: From Promoting Scientific Research to Supporting the Common Security and Defence Policy
+  4. `historical:id:e50a36394d118afc` — ITIF’s Center for Data Innovation Launches European Policy Program in Brussels
+  5. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxOVW9JMll3ZWtXZHIxVkhWaS1pMGlpTDZuOFhzSXZFUElrbWNRV1FsUENVX2U4Z1pfWGFINnJEcDl6ODJZdmV2TVYxWEt1RFpndXkzZVgxZlFaSHhSbk1IbnFJYVZPUF90RVRMenRiT3owOHZ4OVk4bUFBa21GVHVwUFZ3VkY?oc=5` — Starlink saga shows why Europe must catch up in space — recovery attempt 2/3
+  6. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTE9QcC1fVmdQazFBTlBSYndRcloyak4tblNHMmkzalE2cHN1SS16VTFzNUpuaEY4MkRWSmN2RnNJME42M0wwZkJFS3BqenRfWjVmNlFMcXQyQWRXdl9OeVpoR1pQelV6RjA5UWRfUEJ3M1B3el9FNllHR0VLVWRIdw?oc=5` — Electrification of European industry - Opportunities, economic barriers, and the role of flexibility — recovery attempt 2/3
+  7. `link:https://news.google.com/rss/articles/CBMisgFBVV95cUxNMGVld1N2QmdhVk5lMlZod0l5WldwVzFpUDlxUXUtOG8tZHZnY3dmUVFTYXNlWDltNmxKazQ1TWZBczVHVEx5MTBxZTNYcjdlVTc4Rm1vVzlJYkVnNEdNdVpjZXpOdzItVXJUcEl2aWR1cDNNMW1MMWRKaUV4UE9IUXlBQl8wMl9RUm9oUnl0QURCSndoaklfTTJzVHQzaFFvS1A1MmlFTVVvQUwySE9rTGVn?oc=5` — Germany’s Idle Nuclear Plants Eye New Life as AI Data Centers — recovery attempt 2/3
+  8. `link:https://news.google.com/rss/articles/CBMioAFBVV95cUxOOVZ4NDNoWW5yOXpfTlhXWHhHODY1T1dmdmNsUFhmd1N5akpxM0JGV0dWcnBqR0ZaQ25FOWhnM0FmVnVqZUNpT3JkV0xKYjdYbjF6aVdJNUJuaFcwZFhYMEJGbzk3VXdaLU9sZkM3aHZVellwNjVYUWdmUW5FblBEX29jRHhRcUthT01iVDc0ZldKVmpuMFU5NnUwVjNNZVFj?oc=5` — Europe must escape its reliance on American satellites — recovery attempt 2/3
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261023T144003Z-41c1d68df139`
+- Current package: `worker-b-20261023T161453Z-4ff4539ea36d`
 - Assigned unresolved records: **36**
-  1. `historical:id:987a1606b33607c9` — Open Science Fund | NWO
-  2. `historical:id:50a943bd264295e1` — What the EU list of critical technologies tells us about its de-risking plans – European Council on Foreign Relations
-  3. `historical:id:00d9cb5358c47a44` — New CHIPS Report Describes Metrology Grand Challenges for the Semiconductor Sector
-  4. `historical:id:90aa96d6c9f982e2` — After Merkel – The 2021 German Election and its Implications for European Union Politics
-  5. `historical:id:0820c7d958ca2b26` — IMPLEMENTATION OF THE PUBLIC OPEN SCIENCE POLICY IN THE EUROPEAN RESEARCH AREA COUNTRIES (EXAMPLE OF SWITZERLAND)
-  6. `historical:id:3a27598ab3203896` — Climate-adaptive technological change in a small region: A resource-based scenario approach
-  7. `historical:id:a785eed5f979e363` — Bottlenecks that delay the benefits of large-scale research infrastructure
-  8. `historical:id:ca7ae7a0c956d39c` — Artificial Intelligence (AI) in Science
+  1. `historical:id:bea9c72856f3b6e5` — Secure Network Intelligence – better resilience for critical infrastructure | VTT
+  2. `historical:id:c24945fd0580f2eb` — China looks to Europe for its forthcoming scientific collaboration initiatives
+  3. `historical:id:df3d4b9d119c82a9` — A more inclusive Europe through personal data sovereignty in cross-border digital public services
+  4. `historical:id:7d46803936809e94` — ESPI2040: Space for Prosperity, Peace and Future Generations - ESPI
+  5. `historical:id:7b0ac6827b9f031b` — Horizon Europe Calls 2024 - Destination 2. Increased autonomy in key strategic value chains for resilient industry
+  6. `historical:id:80a12da88a0545cd` — Horizon Europe Calls 2024 - Destination 1. Climate neutral, circular and digitised production (two-stage)
+  7. `historical:id:9169bcc11d1c0001` — Horizon Europe Calls 2024 - Destination 1. Climate neutral, circular and digitised production
+  8. `historical:id:f33ee50ee368dd05` — Scenario descriptions
   - … plus 28 more in the package manifest
 
 ### Worker SINGLE

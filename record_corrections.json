@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-10-22T17:30:40Z",
+  "updated_at": "2026-10-23T16:09:53Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -16125,6 +16125,52 @@
       ],
       "updated_at": "2026-10-22T17:30:40Z",
       "deep_scan_package_id": "worker-b-20261022T170508Z-54f5b9a1e4fa"
+    },
+    "historical:id:751d8f2eb99aff73": {
+      "fields": {
+        "title": "Study on the deployment of AI in healthcare – Final report"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Original scanner title contained web-page suffix “EUrep”; recovered 241-page final report cover, EU catalogue and DOI establish authentic title.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.rivista.ai/wp-content/uploads/2025/08/1755534928112.pdf"
+      ],
+      "updated_at": "2026-10-23T16:09:48Z",
+      "deep_scan_package_id": "worker-a-20261023T143958Z-f539ca680e0e"
+    },
+    "historical:id:987a1606b33607c9": {
+      "fields": {
+        "title": "Open Science Fund: Incentivizing and Rewarding Open Science. Applications submitted in 2021"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Inspected NWO original PDF cover; record headline was a shortened website label.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.nwo.nl/sites/nwo/files/media-files/Open%20Science%20Fund%20projects%20in%202021_0.pdf"
+      ],
+      "updated_at": "2026-10-23T16:09:48Z",
+      "deep_scan_package_id": "worker-b-20261023T144003Z-41c1d68df139"
+    },
+    "historical:id:00d9cb5358c47a44": {
+      "fields": {
+        "title": "Metrology Gaps in the Semiconductor Ecosystem",
+        "source": "National Institute of Standards and Technology"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Original linked NIST PDF is this report, not the news story indicated by the scanner headline.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.nist.gov/system/files/documents/2023/06/05/CHIPS_Metrology-Gaps-in-the-Semi-Ecosystem_0.pdf"
+      ],
+      "updated_at": "2026-10-23T16:09:48Z",
+      "deep_scan_package_id": "worker-b-20261023T144003Z-41c1d68df139"
     }
   }
 }
