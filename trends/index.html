@@ -42,7 +42,633 @@ function evidenceBlock(side){const older=side.history?.length?`<div class="older
 const TREND_DISTANCE=new Map();
 const TREND_DISPLAY_LIMIT=30;
 function trendDistance(x){return x?.emergent?(TREND_DISTANCE.get(String(x.id||'').trim())||4):2}
+// All currently complete trend cards (published and reserve): source-text-guarded, presentation-only.
+// When the analytical engine changes either original sentence, that original wins.
+const TREND_REWORDINGS = {
+  "claim:opposing_movements:887cb40bb906b2": {
+    "fromComposition": "The push forward rests mainly on a mix of measures and analysis; the pushback rests mainly on measures already under way.",
+    "fromFlip": "What could change the balance: three pending decisions on the side of limits; none on the other side.",
+    "fromLeft": "Three findings since September: new capacity, at EU level and in one member state.",
+    "fromRight": "Twelve findings since August: new rules, at EU level and in three member states.",
+    "fromTitle": "Data centres: money is arriving faster than the rules on how it can be used",
+    "composition": "Data-centre investment is adding capacity, while rules already in force constrain where and how that capacity may be used.",
+    "flip": "Three outstanding restrictions-side decisions could change the practical terms of data-centre expansion; none is recorded on the investment side."
+  },
+  "claim:opposing_movements:6473e94d5fc70f": {
+    "fromComposition": "The push forward rests mainly on plans and announcements; the pushback rests mainly on analysis.",
+    "fromFlip": "What could change the balance: three pending decisions on the side of growth; none on the other side.",
+    "fromLeft": "16 findings since January: new capacity, at EU level and in seven member states.",
+    "fromRight": "Two studies and the EU find dependence since August.",
+    "fromTitle": "European computing capacity: more money, same dependence",
+    "composition": "European computing investment is advancing through announced plans, but studies still identify reliance on outside capabilities. Announcements alone do not settle that gap.",
+    "flip": "Three expansion-side decisions remain pending. The key test is whether planned capacity becomes usable European-controlled capacity."
+  },
+  "claim:opposing_movements:d8da2f6695aa15": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "No decision is pending. Watch for the next binding decision on either side.",
+    "fromLeft": "Six findings since May: new money, at EU level and in three member states.",
+    "fromRight": "Three studies find limits since June.",
+    "fromTitle": "Venture capital: more money, but weak points remain: public listing, venture-backed and patents",
+    "composition": "Large venture-capital rounds show funding reaching some firms, while studies point to weaknesses in listings, venture-backed activity and patents. Individual rounds do not settle the wider scale-up gap.",
+    "flip": "No binding decision is pending. Watch whether funding rounds are followed by broader scale-up, listing and patent outcomes."
+  },
+  "claim:opposing_movements:4e54e754b4ebb3": {
+    "fromComposition": "The push forward rests mainly on analysis; the pushback rests mainly on plans and announcements.",
+    "fromFlip": "What could change the balance: a pending decision on the side of growth and five pending decisions on the side of limits.",
+    "fromLeft": "Two studies and the EU see momentum since May.",
+    "fromRight": "Six findings since May: new programmes and local opposition, at EU level and in two member states.",
+    "fromTitle": "The next Horizon budget: studies see momentum, but the terms are disputed",
+    "composition": "Studies describe stronger prospects for the next Horizon budget, while programme design and national objections leave its eventual terms unsettled.",
+    "flip": "The terms of the next Horizon budget remain the test: one expansion-side decision and five limiting-side decisions are still pending."
+  },
+  "claim:opposing_movements:3dbf19d1d2455f": {
+    "fromComposition": "The push forward rests mainly on a mix of measures and analysis; the pushback rests mainly on analysis.",
+    "fromFlip": "No decision is pending. Watch for the next binding decision on either side.",
+    "fromLeft": "Three findings since July: new programmes.",
+    "fromRight": "Two studies find limits since June.",
+    "fromTitle": "Access to research infrastructure: it grows, but studies warn of limits",
+    "composition": "Research-infrastructure access is being extended through programmes, while studies continue to document obstacles. New access schemes do not necessarily remove those obstacles.",
+    "flip": "No binding decision is recorded. Watch whether new programmes demonstrably improve access where studies identify constraints."
+  },
+  "claim:opposing_movements:776fcf6029811a": {
+    "fromComposition": "The push forward rests mainly on plans and announcements; the pushback rests mainly on analysis.",
+    "fromFlip": "What could change the balance: three pending decisions on the side of growth; none on the other side.",
+    "fromLeft": "Four findings since June: new programmes.",
+    "fromRight": "Five studies and the EU find limits since April.",
+    "fromTitle": "Digital regulation: measures are multiplying faster than evidence that they work",
+    "composition": "The number of digital regulatory measures is rising faster than the evidence available about their practical effectiveness.",
+    "flip": "Follow implementation outcomes, not just publication of another digital rule."
+  },
+  "claim:opposing_movements:5799545d82e7b6": {
+    "fromComposition": "The push forward rests mainly on plans and announcements; the pushback rests mainly on analysis.",
+    "fromFlip": "What could change the balance: four pending decisions on the side of growth; none on the other side.",
+    "fromLeft": "Six findings since June: new money and new partnerships.",
+    "fromRight": "Three studies and the EU find limits since May.",
+    "fromTitle": "Strategic investment: it grows, but studies warn of limits",
+    "composition": "Strategic investment commitments are increasing, while analyses caution that investment alone may not overcome identified limits.",
+    "flip": "See which announced strategic commitments become operating capabilities and whether the cited obstacles recede."
+  },
+  "claim:opposing_movements:298bbe798b13c4": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "No decision is pending. Watch for the next binding decision on either side.",
+    "fromLeft": "Six findings since July: new capacity and new money, at EU level and in two member states.",
+    "fromRight": "Three studies and the EU find limits since August.",
+    "fromTitle": "Green technology: more money, but weak points remain: risk capital for young firms, batteries and supply chains",
+    "composition": "Green-technology investment is building capacity, while research points to risk-capital, battery and supply-chain weaknesses. Investment totals alone do not show those bottlenecks are easing.",
+    "flip": "No binding decision is pending. Watch whether funded capacity also reduces young-firm finance and battery-supply constraints."
+  },
+  "claim:opposing_movements:e9b2526f787e75": {
+    "fromComposition": "Both sides rest mainly on analysis. The first binding decision will show which way this goes.",
+    "fromFlip": "No decision is pending. Watch for the next binding decision on either side.",
+    "fromLeft": "Four studies and the EU see momentum since July.",
+    "fromRight": "Six studies and the EU find dependence since May.",
+    "fromTitle": "Regional innovation capacity: the evidence points both ways",
+    "composition": "Studies disagree on regional innovation capacity: some report momentum, while others find continuing dependence. Neither side is established by implementation evidence in this comparison.",
+    "flip": "No binding decision is pending. The next implementation decision, and its effect on regional dependence, would help distinguish these readings."
+  },
+  "claim:opposing_movements:b03e21708afbd3": {
+    "fromComposition": "The push forward rests mainly on a mix of measures and analysis; the pushback rests mainly on analysis.",
+    "fromFlip": "What could change the balance: a pending decision on the side of growth and two pending decisions on the side of limits.",
+    "fromLeft": "Three findings since May: new capacity and new programmes, at EU level and in one member state.",
+    "fromRight": "Two studies and the EU find dependence since June.",
+    "fromTitle": "Critical raw materials: it grows, but studies keep finding dependence",
+    "composition": "More activity in critical raw materials does not by itself eliminate import, processing or supply concentration dependencies.",
+    "flip": "Look for concrete diversification of material supply and processing capacity."
+  },
+  "claim:opposing_movements:f9327506855d68": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "No decision is pending. Watch for the next binding decision on either side.",
+    "fromLeft": "Seven findings since May: new money, recruitment, new capacity and new partnerships, at EU level and in five member states.",
+    "fromRight": "Three studies and the EU find gaps since June.",
+    "fromTitle": "Research capacity: more measures, but weak points remain: eu representation",
+    "composition": "Governments are funding, recruiting for and expanding research capacity across Europe, while studies identify weaknesses in EU representation. Measures and performance evidence are not the same thing.",
+    "flip": "No pending binding decision is identified. Watch whether new research-capacity measures narrow the specific representation gaps reported in the studies."
+  },
+  "claim:opposing_movements:4726c8ed65d61c": {
+    "fromComposition": "Both sides rest mainly on analysis. The first binding decision will show which way this goes.",
+    "fromFlip": "No decision is pending. Watch for the next binding decision on either side.",
+    "fromLeft": "Three studies see momentum since April.",
+    "fromRight": "Five studies find limits since June.",
+    "fromTitle": "Research-security screening: the evidence points both ways",
+    "composition": "Research-security screening is advancing in some accounts, while others emphasize its limits and potential trade-offs.",
+    "flip": "Watch for evidence that screening actually reduces exposure without obstructing legitimate research."
+  },
+  "claim:opposing_movements:68df7c062638a5": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "What could change the balance: four pending decisions on the side of growth; none on the other side.",
+    "fromLeft": "14 findings since May: new money, at EU level and in three member states.",
+    "fromRight": "Seven studies and the EU find limits since May.",
+    "fromTitle": "Capital for European technology: more money, but weak points remain: public listing, venture-backed and patents",
+    "composition": "Technology investment is growing even as Europe's public-listing, venture-backed and patent weaknesses remain visible.",
+    "flip": "Check whether funded technology companies progress toward scaling, patents and viable exits."
+  },
+  "claim:opposing_movements:28b5643fdbb1e9": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "What could change the balance: seven pending decisions on the side of growth and a pending decision on the side of limits.",
+    "fromLeft": "24 findings since January: new capacity and new money, at EU level and in eight member states.",
+    "fromRight": "Two studies and the EU find dependence since August.",
+    "fromTitle": "AI and compute: more money, same dependence",
+    "composition": "Investment in AI and computing brings new resources, but studies continue to describe dependence on external systems.",
+    "flip": "Look for deployed AI-compute capacity that reduces the specific external dependencies identified."
+  },
+  "claim:opposing_movements:e9d3e7ed8d708a": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "What could change the balance: a pending decision on the side of growth and two pending decisions on the side of limits.",
+    "fromLeft": "Four findings since May: new programmes and new capacity, at EU level and in one member state.",
+    "fromRight": "Two studies and the EU find dependence since June.",
+    "fromTitle": "Materials and energy: more measures, same dependence",
+    "composition": "Materials and energy measures may strengthen Europe's options without yet changing persistent strategic dependencies.",
+    "flip": "Assess whether implemented measures meaningfully diversify materials and energy inputs."
+  },
+  "claim:opposing_movements:09cc346d3db3d1": {
+    "fromComposition": "The push forward rests mainly on plans and announcements; the pushback rests mainly on analysis.",
+    "fromFlip": "What could change the balance: seven pending decisions on the side of growth and a pending decision on the side of limits.",
+    "fromLeft": "26 findings since January: new capacity and new money, at EU level and in eight member states.",
+    "fromRight": "Two studies and the EU find dependence since August.",
+    "fromTitle": "AI compute: more money, same dependence",
+    "composition": "AI-compute capital commitments are not the same as independent access to the chips, infrastructure and services needed to use them.",
+    "flip": "Verify whether new investment yields accessible compute and lowers reliance on outside providers."
+  },
+  "claim:opposing_movements:c1c2ee9e9f4d70": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "What could change the balance: four pending decisions on the side of growth; none on the other side.",
+    "fromLeft": "Twelve findings since May: new money, at EU level and in three member states.",
+    "fromRight": "Seven studies and the EU find limits since May.",
+    "fromTitle": "Technology finance: more money, but weak points remain: public listing, venture-backed and patents",
+    "composition": "Technology-finance rounds are highly visible; weak listing markets, venture activity and patent performance may remain less visible.",
+    "flip": "Track whether the financed firms reach wider capital markets or generate scalable innovation outputs."
+  },
+  "claim:opposing_movements:865eaec8c65c08": {
+    "fromComposition": "The push forward rests mainly on a mix of measures and analysis; the pushback rests mainly on plans and announcements.",
+    "fromFlip": "What could change the balance: six pending decisions on the side of growth and five pending decisions on the side of limits.",
+    "fromLeft": "16 findings since May: new partnerships, new programmes, new money and new rules, at EU level and in one member state.",
+    "fromRight": "Ten findings since May: new programmes and local opposition, at EU level and in four member states.",
+    "fromTitle": "Horizon Europe: it grows, while limits show",
+    "composition": "Horizon Europe activity and access can expand while administrative and eligibility limits continue to constrain participants.",
+    "flip": "Watch the programme decisions that determine whether expansion improves practical participation."
+  },
+  "claim:opposing_movements:c8500fc56bf646": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "What could change the balance: a pending decision on the side of growth and two pending decisions on the side of limits.",
+    "fromLeft": "Four findings since May: new programmes and new capacity, at EU level and in one member state.",
+    "fromRight": "Two studies and the EU find dependence since June.",
+    "fromTitle": "Materials: more measures, same dependence",
+    "composition": "Materials initiatives are multiplying, but sourcing and production dependencies can survive programme launches.",
+    "flip": "Examine whether the next materials measure changes actual sourcing or industrial capability."
+  },
+  "claim:opposing_movements:4fa7578cbe0752": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "What could change the balance: four pending decisions on the side of growth; none on the other side.",
+    "fromLeft": "Nine findings since May: new money, joint purchasing and new capacity, at EU level and in one member state.",
+    "fromRight": "Three studies find limits since 2024.",
+    "fromTitle": "Quantum technology: it grows, but studies warn of limits",
+    "composition": "Quantum initiatives indicate growing engagement, while studies still identify technical and institutional limitations.",
+    "flip": "Follow deployment, access and demonstrable capability rather than the launch count of quantum programmes."
+  },
+  "claim:opposing_movements:4ba737a19c428f": {
+    "fromComposition": "The push forward rests mainly on plans and announcements; the pushback rests mainly on analysis.",
+    "fromFlip": "No decision is pending. Watch for the next binding decision on either side.",
+    "fromLeft": "One study, one national government, the EU and one company see momentum since September.",
+    "fromRight": "Four studies and the EU find limits since May.",
+    "fromTitle": "AI adoption: the evidence points both ways",
+    "composition": "Some evidence indicates more AI adoption while other evidence points to barriers that limit widespread effective use.",
+    "flip": "Compare actual organizational uptake with reported implementation constraints and outcomes."
+  },
+  "claim:opposing_movements:944e77f7cb2f65": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "What could change the balance: four pending decisions on the side of growth and three pending decisions on the side of limits.",
+    "fromLeft": "20 findings since April: new rules, new programmes and new partnerships.",
+    "fromRight": "Eleven studies and the EU find limits since May.",
+    "fromTitle": "AI governance: it grows, but studies warn of limits",
+    "composition": "New AI-governance rules, programmes and partnerships are advancing, while multiple studies question their limits. Expanding governance activity is not the same as demonstrating results.",
+    "flip": "Four expansion-side and three limits-side decisions are pending. Their implementation will help show whether governance capacity is keeping pace with the identified constraints."
+  },
+  "claim:opposing_movements:f29473cc988db8": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "No decision is pending. Watch for the next binding decision on either side.",
+    "fromLeft": "Five findings since September: new programmes, at EU level and in two member states.",
+    "fromRight": "Two studies and the EU find limits since June.",
+    "fromTitle": "AI in research: more rules, but the doubts remain",
+    "composition": "Practical use of AI in research is moving ahead while studies raise questions about validity, control and application limits.",
+    "flip": "Look for verified research practices that address the concerns rather than adoption alone."
+  },
+  "claim:opposing_movements:2c7cb4c27bf102": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "No decision is pending. Watch for the next binding decision on either side.",
+    "fromLeft": "Three studies, the EU and one company see momentum since June.",
+    "fromRight": "Two studies and the EU find limits since April.",
+    "fromTitle": "Digital sovereignty: the evidence points both ways",
+    "composition": "Digital-sovereignty progress is reported in some areas even as external dependence remains in others.",
+    "flip": "Distinguish sovereign control over critical digital layers from announcements or partial substitution."
+  },
+  "claim:opposing_movements:7aee0a078208e8": {
+    "fromComposition": "Both sides rest mainly on analysis. The first binding decision will show which way this goes.",
+    "fromFlip": "No decision is pending. Watch for the next binding decision on either side.",
+    "fromLeft": "Three studies and the EU see momentum since April.",
+    "fromRight": "Six studies find dependence since April.",
+    "fromTitle": "Strategic autonomy: the evidence points both ways",
+    "composition": "Strategic-autonomy initiatives can advance while patent and growth-capital shortfalls weaken the ability to sustain them.",
+    "flip": "Track whether autonomy claims coincide with improved innovation ownership and financing."
+  },
+  "claim:opposing_movements:975192d7e35c50": {
+    "fromComposition": "Both sides rest mainly on analysis. The first binding decision will show which way this goes.",
+    "fromFlip": "What could change the balance: two pending decisions on the side of growth and a pending decision on the side of limits.",
+    "fromLeft": "Two studies, one national government and the EU see momentum since 2025.",
+    "fromRight": "Six studies and the EU find dependence since June.",
+    "fromTitle": "Industrial competitiveness: the evidence points both ways",
+    "composition": "Industrial competitiveness measures are advancing, but some studies still find production and dependence constraints.",
+    "flip": "Watch whether the pending industrial decisions change real production performance and dependencies."
+  },
+  "claim:opposing_movements:6138117ac2e5d6": {
+    "fromComposition": "Both sides rest mainly on analysis. The first binding decision will show which way this goes.",
+    "fromFlip": "What could change the balance: a pending decision on the side of growth; none on the other side.",
+    "fromLeft": "Three studies and the EU see momentum since May.",
+    "fromRight": "Ten studies and the EU find weak spots since 2006.",
+    "fromTitle": "Innovation performance: the evidence points both ways",
+    "composition": "Improvement in innovation indicators need not resolve weaknesses in public procurement and commercialization of research.",
+    "flip": "Check whether the planned action translates research into purchased, deployed products."
+  },
+  "claim:opposing_movements:5122173294933d": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "What could change the balance: a pending decision on the side of growth and a pending decision on the side of limits.",
+    "fromLeft": "Nine studies, one national government, the EU and one company see momentum since 2019.",
+    "fromRight": "Eight studies and one national government find limits since May.",
+    "fromTitle": "Research collaboration: the evidence points both ways",
+    "composition": "Research collaboration has evidence of momentum, yet participation remains unequal. More cooperation does not by itself mean participants benefit equally.",
+    "flip": "One expansion-side and one limits-side decision are pending; their effect on who can actually participate is the relevant test."
+  },
+  "claim:opposing_movements:01db6ae7a8c922": {
+    "fromComposition": "Both sides rest mainly on analysis. The first binding decision will show which way this goes.",
+    "fromFlip": "No decision is pending. Watch for the next binding decision on either side.",
+    "fromLeft": "Three studies and the EU see momentum since May.",
+    "fromRight": "Four studies, the EU and one company find limits since May.",
+    "fromTitle": "Knowledge transfer: the evidence points both ways",
+    "composition": "Knowledge-transfer activity can increase without evidence that ideas are consistently converted into use outside research.",
+    "flip": "Look for demonstrable transfers into firms, public services or other applications."
+  },
+  "claim:opposing_movements:9b4db68a5bc0f4": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "What could change the balance: two pending decisions on the side of growth and a pending decision on the side of limits.",
+    "fromLeft": "17 findings since April: new programmes, new rules and new partnerships, at EU level and in one member state.",
+    "fromRight": "Eight studies, the EU and one company find limits since June.",
+    "fromTitle": "Research governance: it grows, but studies warn of limits",
+    "composition": "Research-governance programmes, rules and partnerships are expanding, while studies still identify limitations. Activity is increasing faster than its effectiveness has been demonstrated.",
+    "flip": "Two expansion-side and one limits-side decisions are pending. Their practical effects, rather than the number of initiatives, will test the competing accounts."
+  },
+  "claim:opposing_movements:c5be1d8223db66": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "What could change the balance: seven pending decisions on the side of growth; none on the other side.",
+    "fromLeft": "21 findings since April: new money, new partnerships, new programmes, new capacity and new rules, at EU level and in four member states.",
+    "fromRight": "Three studies find limits since July.",
+    "fromTitle": "Defence and dual-use R&I: more rules, but the doubts remain",
+    "composition": "Defence and dual-use research rules and programmes are increasing; research has not yet settled their effects.",
+    "flip": "Check whether the pending policy choices improve usable cooperation without creating new research barriers."
+  },
+  "claim:opposing_movements:463b038112d4c8": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on plans and announcements.",
+    "fromFlip": "What could change the balance: 14 pending decisions on the side of growth and eight pending decisions on the side of limits.",
+    "fromLeft": "41 findings since May: new partnerships, new money, new programmes and new rules, at EU level and in one member state.",
+    "fromRight": "13 findings since May: new programmes and local opposition, at EU level and in four member states.",
+    "fromTitle": "EU research funding: it grows, while limits show",
+    "composition": "EU research funding offers new opportunities, while conditions and access limits may still shape which teams can benefit.",
+    "flip": "Compare the pending funding decisions against participation, eligibility and funding continuity."
+  },
+  "claim:opposing_movements:9a7255b141d1e5": {
+    "fromComposition": "The push forward rests mainly on a mix of measures and analysis; the pushback rests mainly on analysis.",
+    "fromFlip": "No decision is pending. Watch for the next binding decision on either side.",
+    "fromLeft": "13 findings since June: new capacity and new money, at EU level and in three member states.",
+    "fromRight": "Five studies and the EU find limits since May.",
+    "fromTitle": "The green transition: more money, but weak points remain: risk capital for young firms, batteries and supply chains",
+    "composition": "Capital flowing toward the green transition does not guarantee relief for start-ups or vulnerable battery supply chains.",
+    "flip": "Look for financing reaching young green firms alongside stronger battery and input supply."
+  },
+  "claim:opposing_movements:ddcdc2bb571e7e": {
+    "fromComposition": "Both sides rest mainly on analysis. The first binding decision will show which way this goes.",
+    "fromFlip": "What could change the balance: a pending decision on the side of growth; none on the other side.",
+    "fromLeft": "17 findings since May: new capacity and new money, at EU level and in five member states.",
+    "fromRight": "16 studies and the EU find weak spots since 2006.",
+    "fromTitle": "Innovation: more money, but weak points remain: public buying of new solutions, turning research into products and growing small firms into large ones",
+    "composition": "Money entering innovation can coexist with weak public procurement and poor conversion of research into products.",
+    "flip": "Follow whether new financing links to procurement contracts and commercialized research."
+  },
+  "claim:opposing_movements:b312b9d30115b7": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "What could change the balance: two pending decisions on the side of growth; none on the other side.",
+    "fromLeft": "18 findings since March: new programmes and new capacity, at EU level and in four member states.",
+    "fromRight": "Four studies and the EU find limits since May.",
+    "fromTitle": "Research infrastructure: more rules, but the doubts remain",
+    "composition": "New research-infrastructure rules can coordinate access, but analysis questions how much friction they remove.",
+    "flip": "Observe whether the next infrastructure decisions improve actual cross-border facility use."
+  },
+  "claim:opposing_movements:e2c1a0dabaa443": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "What could change the balance: a pending decision on the side of growth; none on the other side.",
+    "fromLeft": "Six findings since 2025: new programmes and new rules, at EU level and in five member states.",
+    "fromRight": "Five studies and one national government find limits since June.",
+    "fromTitle": "Research security: measures are spreading before anyone knows if they work",
+    "composition": "Research-security safeguards are spreading, but their effectiveness and consequences still need evidence.",
+    "flip": "Check whether the next safeguards measurably protect research while keeping appropriate collaboration possible."
+  },
+  "claim:opposing_movements:28c6b8b5609701": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "What could change the balance: three pending decisions on the side of growth and two pending decisions on the side of limits.",
+    "fromLeft": "54 findings since 2019: new money, new partnerships, recruitment, new programmes, new rules and new capacity, at EU level and in seven member states.",
+    "fromRight": "26 studies, one national government, the EU and two companies find barriers since May.",
+    "fromTitle": "The research system: more measures, but weak points remain: equal participation and eu representation",
+    "composition": "System-wide research measures are increasing, while unequal participation and EU representation remain persistent concerns.",
+    "flip": "Test whether the pending reforms reach underrepresented groups and institutions."
+  },
+  "claim:opposing_movements:5cc2d35ebe1e04": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "What could change the balance: four pending decisions on the side of growth and four pending decisions on the side of limits.",
+    "fromLeft": "33 findings since April: new programmes, new rules and new partnerships, at EU level and in three member states.",
+    "fromRight": "18 studies and the EU find limits since May.",
+    "fromTitle": "AI: more rules, but the doubts remain",
+    "composition": "AI-related initiatives and business action are accelerating while studies continue to flag limits to their benefits.",
+    "flip": "Follow whether AI measures produce verifiable outcomes against the reported limitations."
+  },
+  "claim:opposing_movements:e82588c8c8ebc4": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "What could change the balance: three pending decisions on the side of growth; none on the other side.",
+    "fromLeft": "18 findings since June: new programmes, new partnerships and new capacity, at EU level and in one member state.",
+    "fromRight": "Ten studies and the EU find fragmentation since April.",
+    "fromTitle": "Digital policy: it grows, but studies keep finding fragmentation",
+    "composition": "Digital-policy initiatives are expanding even as incompatible rules and systems create fragmentation.",
+    "flip": "Watch whether new policy decisions create workable alignment across jurisdictions or deepen divergence."
+  },
+  "claim:opposing_movements:380b0373d3fdaa": {
+    "fromComposition": "The push forward rests mainly on a mix of measures and analysis; the pushback rests mainly on analysis.",
+    "fromFlip": "What could change the balance: two pending decisions on the side of growth and a pending decision on the side of limits.",
+    "fromLeft": "Seven findings since 2025: new programmes and new capacity, at EU level and in two member states.",
+    "fromRight": "Ten studies and the EU find dependence since May.",
+    "fromTitle": "Industrial capacity: more measures, but weak points remain: economies",
+    "composition": "Industrial-capacity efforts can increase activity without immediately overcoming the economic weaknesses highlighted by studies.",
+    "flip": "Track whether new industrial steps raise durable productive capability rather than announcements."
+  },
+  "claim:opposing_movements:d85735482e0d2d": {
+    "fromComposition": "Both sides rest mainly on analysis. The first binding decision will show which way this goes.",
+    "fromFlip": "What could change the balance: a pending decision on the side of growth; none on the other side.",
+    "fromLeft": "27 findings since May: new capacity and new money, at EU level and in seven member states.",
+    "fromRight": "22 studies and the EU find weak spots since 2006.",
+    "fromTitle": "Innovation: more money, but weak points remain: risk capital for young firms, batteries and supply chains",
+    "composition": "Innovation investment rises, yet growth capital for small firms and battery supply remain vulnerable links.",
+    "flip": "Check whether resources reach early-stage firms and alleviate green supply-chain constraints."
+  },
+  "claim:opposing_movements:bd5d3eebcba598": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "What could change the balance: five pending decisions on the side of growth and two pending decisions on the side of limits.",
+    "fromLeft": "74 findings since 2019: new programmes, new money, new partnerships, new rules, new capacity and recruitment, at EU level and in twelve member states.",
+    "fromRight": "34 studies, two national governments, the EU and two companies find barriers since May.",
+    "fromTitle": "The European research system: more measures, but weak points remain: equal participation and eu representation",
+    "composition": "European research reforms address the system as a whole, while participation and representation gaps persist beneath aggregate progress.",
+    "flip": "Assess whether the reforms narrow the measured disparities among researchers and institutions."
+  },
+  "claim:opposing_movements:70a7a51c2d49b5": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "No decision is pending. Watch for the next binding decision on either side.",
+    "fromLeft": "Five findings since 2025: new programmes and new rules, in five member states.",
+    "fromRight": "Five studies and one national government find limits since June.",
+    "fromTitle": "Research security: measures are spreading before anyone knows if they work",
+    "composition": "Research-security measures are spreading, but the current evidence does not establish how well they perform.",
+    "flip": "Seek documented effectiveness and unintended effects before judging the safeguards successful."
+  },
+  "claim:opposing_movements:d7290267606e16": {
+    "fromComposition": "Both sides rest mainly on plans and announcements. The first binding decision will show which way this goes.",
+    "fromFlip": "What could change the balance: three pending decisions on the side of limits; none on the other side.",
+    "fromLeft": "The EU and one company see momentum in September 2026.",
+    "fromRight": "Five findings since August: new rules, at EU level and in one member state.",
+    "fromTitle": "Power for data centres: money is arriving faster than the rules on how it can be used",
+    "composition": "New data-centre investment raises electricity demand just as supply and access conditions become more restrictive.",
+    "flip": "Watch the forthcoming power decisions and their effects on data-centre location and operation."
+  },
+  "claim:opposing_movements:db10123eddbc5e": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "No decision is pending. Watch for the next binding decision on either side.",
+    "fromLeft": "One finding in September 2026: new programmes.",
+    "fromRight": "The EU finds limits in September 2026.",
+    "fromTitle": "Advanced materials: measures are multiplying faster than evidence that they work",
+    "composition": "An advanced-materials programme has been introduced, while the EU also identifies limits. A new programme is not yet evidence that those limits have been resolved.",
+    "flip": "No binding decision is listed. The next useful evidence is whether the September programme produces observable progress against the EU-identified limits."
+  },
+  "claim:opposing_movements:da12e9d671a6a6": {
+    "fromComposition": "The push forward rests mainly on a mix of measures and analysis; the pushback rests mainly on analysis.",
+    "fromFlip": "No decision is pending. Watch for the next binding decision on either side.",
+    "fromLeft": "Three findings since July: new rules.",
+    "fromRight": "The EU finds limits in September 2026.",
+    "fromTitle": "Rules for AI in research: it grows, but studies warn of limits",
+    "composition": "AI-in-research rules are expanding as studies continue to question reliability, oversight and practical limits.",
+    "flip": "Check whether research teams can demonstrate compliant, reliable use rather than only rule adoption."
+  },
+  "claim:opposing_movements:85e0ccb434c219": {
+    "fromComposition": "The push forward rests mainly on analysis; the pushback rests mainly on plans and announcements.",
+    "fromFlip": "What could change the balance: a pending decision on the side of growth and a pending decision on the side of limits.",
+    "fromLeft": "Five findings since April: new money and new partnerships, at EU level and in two member states.",
+    "fromRight": "One finding in September 2026: new partnerships.",
+    "fromTitle": "International chip cooperation: measures are multiplying while their terms are still disputed",
+    "composition": "Chip-cooperation funding and partnerships are advancing, but their terms remain contested. Announced cooperation need not settle how access and obligations work in practice.",
+    "flip": "One decision on each side remains pending; the terms they set will determine whether cooperation expands on workable conditions."
+  },
+  "claim:opposing_movements:cf1a93768300ac": {
+    "fromComposition": "The push forward rests mainly on plans and announcements; the pushback rests mainly on measures already under way.",
+    "fromFlip": "What could change the balance: two pending decisions on the side of growth; none on the other side.",
+    "fromLeft": "Three findings in September 2026: new programmes, at EU level and in one member state.",
+    "fromRight": "One source finds limits in October 2026.",
+    "fromTitle": "Critical-infrastructure resilience: it grows, while limits show",
+    "composition": "Resilience initiatives for critical infrastructure are developing, while reported vulnerabilities still require attention.",
+    "flip": "Watch whether the next resilience steps demonstrably reduce the identified failure points."
+  },
+  "claim:opposing_movements:aeadbd9c445cc7": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "No decision is pending. Watch for the next binding decision on either side.",
+    "fromLeft": "Five findings since September: new partnerships.",
+    "fromRight": "Two studies find fragmentation since June.",
+    "fromTitle": "International digital partnerships: more partnerships, more fragmentation",
+    "composition": "Digital partnerships are multiplying, but existing studies still describe fragmentation. Additional agreements may coexist with incompatible arrangements.",
+    "flip": "No binding decision is pending. Watch whether new digital partnerships reduce the fragmentation reported by the studies."
+  },
+  "claim:opposing_movements:4b03b1a3f2b3cc": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "What could change the balance: a pending decision on the side of growth; none on the other side.",
+    "fromLeft": "Two findings since June: new rules.",
+    "fromRight": "Two studies and the EU find limits since July.",
+    "fromTitle": "Health-data infrastructure: more rules, but the doubts remain",
+    "composition": "Health-data governance is becoming more structured, but access, trust and operational limits remain in the research.",
+    "flip": "Track whether new rules enable safe, usable health-data exchange in practice."
+  },
+  "claim:opposing_movements:665b366e362359": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on a mix of measures and analysis.",
+    "fromFlip": "What could change the balance: a pending decision on the side of growth; none on the other side.",
+    "fromLeft": "Two findings since June: new programmes, at EU level and in one member state.",
+    "fromRight": "One study, one national government and the EU find limits since July.",
+    "fromTitle": "Access to Horizon Europe: measures are multiplying, but the limits persist",
+    "composition": "EU programmes are widening Horizon Europe access, yet institutional and national evidence still identifies exclusions or limitations. Formal measures and practical access can diverge.",
+    "flip": "One access-expansion decision is pending. The test is whether it changes access for those still facing restrictions."
+  },
+  "claim:opposing_movements:4bb8c6231bb731": {
+    "fromComposition": "The push forward rests mainly on plans and announcements; the pushback rests mainly on analysis.",
+    "fromFlip": "No decision is pending. Watch for the next binding decision on either side.",
+    "fromLeft": "Three findings in September 2026: new programmes and new capacity, in two member states.",
+    "fromRight": "Two studies find limits since June.",
+    "fromTitle": "Industrial sophistication: more measures, but weak points remain: economies",
+    "composition": "Firms are investing in more sophisticated industrial activity, yet economic conditions can constrain broad adoption.",
+    "flip": "Look for improved productive performance beyond isolated company initiatives."
+  },
+  "claim:opposing_movements:4ac203936a0402": {
+    "fromComposition": "Both sides rest mainly on analysis. The first binding decision will show which way this goes.",
+    "fromFlip": "No decision is pending. Watch for the next binding decision on either side.",
+    "fromLeft": "Two studies see momentum in July 2026.",
+    "fromRight": "One study finds limits in August 2026.",
+    "fromTitle": "Quantum governance: the evidence points both ways",
+    "composition": "Quantum-governance momentum is reported alongside concerns about capability, coordination and limits.",
+    "flip": "Measure whether governance changes enable usable quantum activity and resolve the cited constraints."
+  },
+  "claim:opposing_movements:50369c5fcbfab8": {
+    "fromComposition": "Both sides are backed by measures already in place: this is a real contest, not just a debate.",
+    "fromFlip": "No decision is pending. Watch for the next binding decision on either side.",
+    "fromLeft": "One study and the EU see momentum since August.",
+    "fromRight": "One company finds limits in September 2026.",
+    "fromTitle": "Small firms' cyber resilience: studies see momentum, while outside pressure grows",
+    "composition": "Studies find improvement in small-business cyber resilience, but increasing external threats can overwhelm incremental gains.",
+    "flip": "Compare the protection actually achieved by smaller firms with changes in threat exposure."
+  },
+  "claim:opposing_movements:8227d3d5f12306": {
+    "fromComposition": "Both sides are backed by measures already in place: this is a real contest, not just a debate.",
+    "fromFlip": "No decision is pending. Watch for the next binding decision on either side.",
+    "fromLeft": "Three findings since August: new capacity.",
+    "fromRight": "One finding in July 2026: new partnerships.",
+    "fromTitle": "Digital infrastructure: more capacity, but the doubts remain",
+    "composition": "Digital infrastructure is expanding, yet reliability, access or governance shortcomings continue to appear in assessments.",
+    "flip": "Check whether the added capacity resolves the specific infrastructure limitations reported."
+  },
+  "claim:opposing_movements:ffa6153cc59547": {
+    "fromComposition": "Both sides rest mainly on analysis. The first binding decision will show which way this goes.",
+    "fromFlip": "No decision is pending. Watch for the next binding decision on either side.",
+    "fromLeft": "One study, one national government and the EU see momentum since August.",
+    "fromRight": "Two studies find limits in October 2026.",
+    "fromTitle": "Dual-use innovation: the evidence points both ways",
+    "composition": "Dual-use innovation appears to be progressing in some evidence, while other assessments see unresolved barriers.",
+    "flip": "Look for usable civilian-defence applications and whether obstacles to transfer persist."
+  },
+  "claim:opposing_movements:f9f7fe7a0fbc3c": {
+    "fromComposition": "The push forward rests mainly on plans and announcements; the pushback rests mainly on analysis.",
+    "fromFlip": "No decision is pending. Watch for the next binding decision on either side.",
+    "fromLeft": "One finding in September 2026: new programmes, in one member state.",
+    "fromRight": "Two studies find limits since May.",
+    "fromTitle": "Public support for research: it grows, but studies warn of limits",
+    "composition": "Public research support is expanding, although studies question its reach and effectiveness.",
+    "flip": "Track measurable access and results among the researchers and institutions targeted."
+  },
+  "claim:opposing_movements:0bf9257390c287": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "What could change the balance: seven pending decisions on the side of growth; none on the other side.",
+    "fromLeft": "14 findings since April: new money, new programmes and new rules, at EU level and in three member states.",
+    "fromRight": "One study finds limits in July 2026.",
+    "fromTitle": "Defence innovation funding: more rules, but the doubts remain",
+    "composition": "Defence-innovation funding rules are proliferating before evidence clearly establishes their practical effects.",
+    "flip": "See whether decisions improve the financing path from promising ideas to deployable capabilities."
+  },
+  "claim:opposing_movements:fb0c6185c9340b": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "What could change the balance: seven pending decisions on the side of growth; none on the other side.",
+    "fromLeft": "17 findings since April: new money, new partnerships, new programmes, new capacity and new rules, at EU level and in four member states.",
+    "fromRight": "One study finds limits in July 2026.",
+    "fromTitle": "Defence R&I: governments are acting before the evidence says what works",
+    "composition": "Governments are taking action in defence research and innovation, but effectiveness remains uncertain.",
+    "flip": "Follow whether programmes produce supported research outcomes and workable cooperation."
+  },
+  "claim:opposing_movements:8a547b12af961c": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "No decision is pending. Watch for the next binding decision on either side.",
+    "fromLeft": "Six findings since June: new capacity and new money, at EU level and in two member states.",
+    "fromRight": "One study finds limits in May 2026.",
+    "fromTitle": "Green innovation: more money, but the warnings remain",
+    "composition": "Green-innovation investment signals demand and ambition; studies still identify constraints on implementation.",
+    "flip": "Look for green innovations moving beyond financed proposals into proven applications."
+  },
+  "claim:opposing_movements:dcf4218fb24340": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "No decision is pending. Watch for the next binding decision on either side.",
+    "fromLeft": "One finding in July 2026: new programmes.",
+    "fromRight": "One study and the EU find limits since June.",
+    "fromTitle": "Research assessment: governments are acting before the evidence says what works",
+    "composition": "Research-assessment reform is underway, but evidence is still needed about whether revised methods work as intended.",
+    "flip": "Check whether evaluation changes improve research practice without unintended distortions."
+  },
+  "claim:opposing_movements:72be43fe74f4d6": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "What could change the balance: two pending decisions on the side of growth; none on the other side.",
+    "fromLeft": "15 findings since March: new programmes and new capacity, at EU level and in three member states.",
+    "fromRight": "One study and the EU find limits in July 2026.",
+    "fromTitle": "Research infrastructure: more rules, but the doubts remain",
+    "composition": "Governments are changing research-infrastructure policy, while reported bottlenecks remain unresolved.",
+    "flip": "Observe whether new infrastructure governance expands usable equipment and service access."
+  },
+  "claim:opposing_movements:5c4a6f121b507d": {
+    "fromComposition": "The push forward rests mainly on plans and announcements; the pushback rests mainly on analysis.",
+    "fromFlip": "No decision is pending. Watch for the next binding decision on either side.",
+    "fromLeft": "Two findings since May: new money.",
+    "fromRight": "One study finds limits in September 2026.",
+    "fromTitle": "Research careers: more money, but the warnings remain",
+    "composition": "More funding for research careers is positive but cannot alone settle concerns about career stability and progression.",
+    "flip": "Track whether the funding leads to sustainable positions and better career conditions."
+  },
+  "claim:opposing_movements:88eb60dbdd1365": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "No decision is pending. Watch for the next binding decision on either side.",
+    "fromLeft": "Two findings since May: recruitment.",
+    "fromRight": "The EU finds limits.",
+    "fromTitle": "Research careers in Europe: studies see momentum, but studies warn of limits",
+    "composition": "Positive studies of European research careers coexist with warnings about persistent structural limits.",
+    "flip": "Compare career conditions and mobility over time, not just programme announcements."
+  },
+  "claim:opposing_movements:399c8dcaa412a6": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on plans and announcements.",
+    "fromFlip": "What could change the balance: two pending decisions on the side of growth and a pending decision on the side of limits.",
+    "fromLeft": "Eleven findings since April: new money, new partnerships, new capacity and new programmes, at EU level and in three member states.",
+    "fromRight": "One finding in September 2026: new partnerships.",
+    "fromTitle": "Semiconductors: measures are multiplying while their terms are still disputed",
+    "composition": "Semiconductor initiatives and cooperation are growing, but their conditions and division of benefits remain contested.",
+    "flip": "Follow the pending chip-policy decisions and resulting industrial access arrangements."
+  },
+  "claim:opposing_movements:12fc50fe524ce2": {
+    "fromComposition": "The push forward rests mainly on a mix of measures and analysis; the pushback rests mainly on analysis.",
+    "fromFlip": "No decision is pending. Watch for the next binding decision on either side.",
+    "fromLeft": "Seven findings since June: new capacity and new money, at EU level and in two member states.",
+    "fromRight": "Two studies find limits since May.",
+    "fromTitle": "Green innovation: more money, but the warnings remain",
+    "composition": "Green-innovation capital is increasing while studies question whether projects can clear deployment bottlenecks.",
+    "flip": "Look for proof that funded technologies scale and address the limitations identified."
+  },
+  "claim:opposing_movements:422fd754af5eb8": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on analysis. The warnings could still become rules.",
+    "fromFlip": "What could change the balance: a pending decision on the side of growth; none on the other side.",
+    "fromLeft": "Seven findings since May: new programmes, recruitment and new money.",
+    "fromRight": "One study and the EU find limits in September 2026.",
+    "fromTitle": "Research talent: it grows, but studies warn of limits",
+    "composition": "Research-talent measures can increase attraction without resolving the constraints on retaining and developing talent.",
+    "flip": "Monitor whether people can enter, progress and remain in research careers under the new measures."
+  },
+  "claim:opposing_movements:67463ef3a2705c": {
+    "fromComposition": "The push forward rests mainly on measures already under way; the pushback rests mainly on plans and announcements.",
+    "fromFlip": "What could change the balance: nine pending decisions on the side of growth and three pending decisions on the side of limits.",
+    "fromLeft": "26 findings since May: new money and new programmes.",
+    "fromRight": "The EU finds limits since August.",
+    "fromTitle": "Research funding: it grows, while conditions tighten",
+    "composition": "Research-funding opportunities may grow even as stricter conditions alter who can use them.",
+    "flip": "Track the pending decisions on eligibility and funding terms alongside headline allocations."
+  }
+};
+function readerWordedTrend(x){
+  const r=TREND_REWORDINGS[String(x.id||'')];
+  if(!r || x.left?.plain!==r.fromLeft || x.right?.plain!==r.fromRight || x.pairTitle!==r.fromTitle)return x;
+  return {...x,
+    composition:x.composition===r.fromComposition?r.composition:x.composition,
+    flip:x.flip===r.fromFlip?r.flip:x.flip
+  };
+}
+
 function pair(x){
+  x=readerWordedTrend(x);
   const C=globalThis.RadarCards;
   const R=globalThis.RadarReaderClarity;
   const left=R?R.trendSide({title:x.left.title,plain:x.left.plain,why:x.left.why,pairTitle:x.pairTitle}):{title:x.left.title,evidence:x.left.plain,why:x.left.why};
