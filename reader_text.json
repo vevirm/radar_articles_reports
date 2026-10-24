@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-24T12:36:23Z",
+  "generated_at": "2026-10-24T13:35:55Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -277154,8 +277154,276 @@
       "deep_scan_package_id": "worker-b-20261024T120229Z-7839af9576b7",
       "claims": [],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMisgFBVV95cUxNMGVld1N2QmdhVk5lMlZod0l5WldwVzFpUDlxUXUtOG8tZHZnY3dmUVFTYXNlWDltNmxKazQ1TWZBczVHVEx5MTBxZTNYcjdlVTc4Rm1vVzlJYkVnNEdNdVpjZXpOdzItVXJUcEl2aWR1cDNNMW1MMWRKaUV4UE9IUXlBQl8wMl9RUm9oUnl0QURCSndoaklfTTJzVHQzaFFvS1A1MmlFTVVvQUwySE9rTGVn?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "a229b60a",
+      "identity_hash": "3f871406b5d70144",
+      "reader_title": "Germany’s Idle Nuclear Plants Eye New Life as AI Data Centers",
+      "reader_what": "PreussenElektra and Nvidia were reported to be examining former German nuclear-power sites as possible AI data-centre locations.",
+      "reader_more": "PreussenElektra and Nvidia were reported to be examining former German nuclear-power sites as possible AI data-centre locations. The source reports an observed finding or formal statement, not proof of downstream effects.",
+      "deep_analysis": {
+        "work_kind": "dated institutional development",
+        "research_question": "",
+        "main_finding": "PreussenElektra and Nvidia were reported to be examining former German nuclear-power sites as possible AI data-centre locations.",
+        "method_or_basis": "Source analysis of the named issuer/publisher publication and its substantive statements.",
+        "qualification": "Reported site assessment only; no final location, data centre construction, operational GPU capacity or investment commitment verified.",
+        "radar_relevance": "C: a concrete announced site-feasibility exploration affects possible European AI compute siting; no data centre or investment was committed.",
+        "confidence": "medium",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_source_content",
+            "note": "Supplied Google News/reader URL https://news.google.com/rss/articles/CBMisgFBVV95cUxNMGVld1N2QmdhVk5lMlZod0l5WldwVzFpUDlxUXUtOG8tZHZnY3dmUVFTYXNlWDltNmx lacked substantive article text in the worker package."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Search for matching headline 'Germany’s Idle Nuclear Plants Eye New Life as AI Data Centers' recovered https://www.tagesschau.de/inland/regional/niedersachsen/ki-fabrik-statt-atomkraftwerk-nvidia-prueft-standorte-in-niedersachsen%2Cakw-ki-100.html; substantive source inspected."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_or_issuer_web_text",
+            "url": "https://www.tagesschau.de/inland/regional/niedersachsen/ki-fabrik-statt-atomkraftwerk-nvidia-prueft-standorte-in-niedersachsen%2Cakw-ki-100.html",
+            "title": "Germany’s Idle Nuclear Plants Eye New Life as AI Data Centers",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected substantive recovered original material. Matched the work's title and issuer; claims limited to observed source statements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_EU_RI_DEVELOPMENT",
+        "reason": "C: a concrete announced site-feasibility exploration affects possible European AI compute siting; no data centre or investment was committed."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-24T13:35:55Z",
+      "deep_scan_package_id": "worker-a-20261024T120222Z-bc3c07b63c70",
+      "claims": [
+        {
+          "object": "datacentre.siting",
+          "secondary_objects": [],
+          "actor": {
+            "name": "PreussenElektra and Nvidia",
+            "class": "company"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "announced",
+          "status_date": "2026-10-22",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "DE"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "Reported site assessment only; no final location, data centre construction, operational GPU capacity or investment commitment verified.",
+          "text": "PreussenElektra and Nvidia were reported to be examining former German nuclear-power sites as possible AI data-centre locations.",
+          "confidence": "medium",
+          "record_key": "link:https://news.google.com/rss/articles/CBMisgFBVV95cUxNMGVld1N2QmdhVk5lMlZod0l5WldwVzFpUDlxUXUtOG8tZHZnY3dmUVFTYXNlWDltNmxKazQ1TWZBczVHVEx5MTBxZTNYcjdlVTc4Rm1vVzlJYkVnNEdNdVpjZXpOdzItVXJUcEl2aWR1cDNNMW1MMWRKaUV4UE9IUXlBQl8wMl9RUm9oUnl0QURCSndoaklfTTJzVHQzaFFvS1A1MmlFTVVvQUwySE9rTGVn?oc=5",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:3f871406b5d70144:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:8ec142907edd198f": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "51aaa506",
+      "identity_hash": "55b1775f69c8bea0",
+      "reader_title": "Business Finland Technology Transfer Initiative, Final Report",
+      "reader_what": "An EIB Advisory assessment identifies gaps in Finland’s research-to-business funding, commercialization support and technology-transfer data.",
+      "reader_more": "An EIB Advisory assessment identifies gaps in Finland’s research-to-business funding, commercialization support and technology-transfer data. The source reports an observed finding or formal statement, not proof of downstream effects.",
+      "deep_analysis": {
+        "work_kind": "policy or institutional analysis",
+        "research_question": "",
+        "main_finding": "An EIB Advisory assessment identifies gaps in Finland’s research-to-business funding, commercialization support and technology-transfer data.",
+        "method_or_basis": "41-page original EIB Advisory report using international comparator cases, Finnish market/funding analysis, technology-transfer data and interviews.",
+        "qualification": "The available source does not support a causal effect beyond its direct observation.",
+        "radar_relevance": "A Route 3: primary, 41-page empirical report diagnoses Finnish university and research-institute technology-transfer mechanisms and investment needs.",
+        "confidence": "medium",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected scanner-captured abstract_or_landing_page matching reader URL https://www.businessfinland.fi/palvelut/tieto-ja-neuvonta/tietopankki/julkaisut/business-finland-technology-transfer-initiative-final-report/; checked substantive text and identity against its heading/provenance."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_pdf",
+            "url": "https://www.businessfinland.fi/globalassets/julkaisut/business-finland-technology-transfer-initiative_final_report.pdf",
+            "title": "Business Finland Technology Transfer Initiative, Final Report",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Opened and inspected May 2023 41-page original EIB Advisory report from Business Finland; verified authors, funding analyses and recommended investment/data models."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: primary, 41-page empirical report diagnoses Finnish university and research-institute technology-transfer mechanisms and investment needs."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-24T13:35:55Z",
+      "deep_scan_package_id": "worker-b-20261024T120229Z-7839af9576b7",
+      "claims": [
+        {
+          "object": "research.knowledge_transfer",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Investment Bank Advisory",
+            "class": "eu_body"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2023-05",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "FI"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "The available source does not support a causal effect beyond its direct observation.",
+          "text": "An EIB Advisory assessment identifies gaps in Finland’s research-to-business funding, commercialization support and technology-transfer data.",
+          "confidence": "medium",
+          "status_date_precision": "month",
+          "record_key": "historical:id:8ec142907edd198f",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:55b1775f69c8bea0:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:8cc870859cff2976": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "2fcd35fc",
+      "identity_hash": "691cd6d1eaf16fbf",
+      "reader_title": "Strategic interplay - Combine the strengths of the Netherlands and the EU for greater research and innovation impact",
+      "reader_what": "The Dutch advisory council evaluates how Dutch and EU research and innovation policy can complement each other strategically.",
+      "reader_more": "The Dutch advisory council evaluates how Dutch and EU research and innovation policy can complement each other strategically. The source reports an observed finding or formal statement, not proof of downstream effects.",
+      "deep_analysis": {
+        "work_kind": "policy or institutional analysis",
+        "research_question": "",
+        "main_finding": "The Dutch advisory council evaluates how Dutch and EU research and innovation policy can complement each other strategically.",
+        "method_or_basis": "Dutch AWTI advisory report assessing institutional allocation of European and national strategic R&I functions.",
+        "qualification": "The available source does not support a causal effect beyond its direct observation.",
+        "radar_relevance": "A Route 3: a completed national science-policy report assesses interplay and governance between Dutch and European R&I systems.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected scanner-captured pdf_excerpt matching reader URL https://www.awti.nl/site/binaries/site-content/collections/documents/2023/03/14/strategic-interplay---combine-the-strengths-of-the-netherlands-and-the-eu-for-greater-research-and-innovation-impact/20230626_AWTI_StrategicInterplay+web-DEF.pdf; checked substantive text and identity against its heading/provenance."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "scanned_pdf_excerpt",
+            "url": "https://www.awti.nl/site/binaries/site-content/collections/documents/2023/03/14/strategic-interplay---combine-the-strengths-of-the-netherlands-and-the-eu-for-greater-research-and-innovation-impact/20230626_AWTI_StrategicInterplay+web-DEF.pdf",
+            "title": "Strategic interplay - Combine the strengths of the Netherlands and the EU for greater research and innovation impact | Adviesraad voor wetenschap, technologie en innovatie",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Inspected substantive archived first-party material. Matched the work's title and issuer; claims limited to observed source statements."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: a completed national science-policy report assesses interplay and governance between Dutch and European R&I systems."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-24T13:35:55Z",
+      "deep_scan_package_id": "worker-b-20261024T120229Z-7839af9576b7",
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Dutch Advisory Council for Science Technology and Innovation",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2023-03",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "NL"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "The available source does not support a causal effect beyond its direct observation.",
+          "text": "The Dutch advisory council evaluates how Dutch and EU research and innovation policy can complement each other strategically.",
+          "confidence": "high",
+          "status_date_precision": "month",
+          "record_key": "historical:id:8cc870859cff2976",
+          "merit": 54,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:691cd6d1eaf16fbf:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-24T12:36:23Z"
+  "claims_updated_at": "2026-10-24T13:35:55Z"
 }
