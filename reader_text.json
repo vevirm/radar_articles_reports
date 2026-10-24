@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-24T13:35:55Z",
+  "generated_at": "2026-10-24T14:47:03Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -277422,8 +277422,1165 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:6519580514fcea99": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "d569dd49",
+      "identity_hash": "d04bba682f89215c",
+      "reader_title": "Why EU-funded SME innovation networks win support",
+      "reader_what": "EU funding success correlated with regional innovation strength, partner technological distance, and nonlinear organisational distance.",
+      "reader_why": "The observed associations identify regional and network-design factors that matter for EU innovation-funding selection.",
+      "reader_more": "Researchers analysed participant-level applications to Horizon 2020 Fast Track to Innovation in 2018–2021. Network composition and location were associated with award likelihood. The study identifies mixed effects of partner heterogeneity and cautions against assuming diversity always improves outcomes.",
+      "deep_analysis": {
+        "work_kind": "empirical innovation-policy study",
+        "research_question": "What predicts EU Fast Track to Innovation funding of SME-led open innovation networks?",
+        "main_finding": "Regional innovation performance and technological and organisational partner distance correlate with funding success.",
+        "method_or_basis": "Participant-level Horizon 2020 programme application data (2018–2021); comparative statistical analysis.",
+        "qualification": "Observational programme application data and noncausal associations; the study does not establish funding effects on firm performance.",
+        "radar_relevance": "European R&I research-funding allocation, networks and regional innovation disparities (A Route 3).",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI 10.1016/j.techfore.2024.123207 matched Elsevier article title, authors and 2024 publication."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1016/j.techfore.2024.123207 and publisher article 123207 identify the study."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Manchester Research Explorer provided detailed study design and conclusions; Elsevier publisher supplied highlights and abstract."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0040162524000039",
+            "title": "Marullo, Shapira and Di Minin, Technological Forecasting and Social Change 201 (2024) 123207",
+            "evidence_used": true
+          },
+          {
+            "kind": "institutional_repository",
+            "url": "https://research.manchester.ac.uk/en/publications/enhancing-sme-innovation-across-european-regions-success-factors-/",
+            "title": "University of Manchester institutional publication and substantive study abstract",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Cross-checked publisher DOI, 2024 journal volume and three institutional author identities; substantive abstract and highlights examined. The scanner appended an erroneous A to Shapira name."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "KEEP A Route 3: empirical analysis of Horizon 2020 Fast Track to Innovation applications across European regions directly measures EU innovation funding and network selection mechanisms."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical duplicate was supplied or substantiated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-24T14:46:59Z",
+      "deep_scan_package_id": "worker-a-20261024T143355Z-9354ea6ec99e",
+      "claims": [
+        {
+          "object": "innovation.regional_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Marullo, Shapira and Di Minin",
+            "class": "university_group"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2024-01-16",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Observational programme application data and noncausal associations; the study does not establish funding effects on firm performance.",
+          "text": "EU-funded SME open-innovation network success varied with regional innovation performance and partner characteristics.",
+          "confidence": "high",
+          "record_key": "historical:id:6519580514fcea99",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:d04bba682f89215c:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:3afc80dd79bf6210": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "9a6dfb3c",
+      "identity_hash": "84a7b01bbe1a7edf",
+      "reader_title": "US semiconductor funding notice",
+      "reader_what": "The US NSF invited engineering research proposals in microelectronics and semiconductor technology.",
+      "reader_more": "This archived Dear Colleague Letter lists US National Science Foundation research interests and proposal routes. It contains no analysis of European research and innovation capacity, mobility, funding or governance. Geopolitical semiconductor relevance alone cannot supply a supported EU connection.",
+      "deep_analysis": {
+        "work_kind": "US funding opportunity",
+        "research_question": "What engineering semiconductor research does the US NSF solicit?",
+        "main_finding": "NSF encouraged US-based semiconductor and microelectronics research proposals.",
+        "method_or_basis": "Official NSF Dear Colleague Letter 24-038, issued 28 December 2023.",
+        "qualification": "It is an invitation, not evidence of awards or research outcomes.",
+        "radar_relevance": "European relevance not substantive under A Routes 1–3.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original NSF.gov NSF 24-038 archived letter read directly; identifies ENG US proposal call."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary",
+            "url": "https://www.nsf.gov/funding/opportunities/dcl-funding-opportunities-engineering-research-microelectronics/nsf24-038",
+            "title": "NSF 24-038 Dear Colleague Letter, 28 December 2023",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Archived first-party 28 December 2023 NSF document read with subject areas and US CHIPS and Science Act framing."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_NOT_MET",
+        "reason": "DROP A: NSF 24-038 encourages US microelectronics engineering proposals. Checked A strategic Route 1, European R&I trajectory Route 2 and systemic Route 3: the letter documents a US domestic programme only, no substantive European system or collaboration evidence."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical duplicate was supplied or substantiated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-24T14:46:59Z",
+      "deep_scan_package_id": "worker-a-20261024T143355Z-9354ea6ec99e",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:b98b766a0e87c1c9": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "f6fc0492",
+      "identity_hash": "910e9d330c18c0c4",
+      "reader_title": "Cross-border R&D partnerships and patent quality",
+      "reader_what": "European joint-patent analysis associates cross-border collaboration with more highly cited patents and a U-shaped distance relationship.",
+      "reader_why": "Partner distance and knowledge recombination can inform European cross-border collaboration and innovation-policy design.",
+      "reader_more": "Using co-owned European Patent Office applications from 2000–2012, the paper tests patent quality against knowledge characteristics and geography. The author reports positive cross-country collaboration associations and a U-shaped relationship with physical distance. Alternative model specifications are reported, without establishing that distance causes outcomes.",
+      "deep_analysis": {
+        "work_kind": "empirical economics research",
+        "research_question": "How do cross-border co-invention and partner distance relate to quality of European joint patents?",
+        "main_finding": "Cross-border co-patenting and both very near and far partner distance associate with higher patent quality.",
+        "method_or_basis": "Econometric analysis of European Patent Office joint-patent applications, forward citations and robustness checks.",
+        "qualification": "Joint patent applications at the European Patent Office in 2000–2012; patent citations are a proxy for quality, not causal proof.",
+        "radar_relevance": "European R&I collaboration-network performance under A Route 3.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Springer open-access full article at DOI 10.1007/s00191-023-00831-9 examined, including econometric study of EPO co-patents."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Publisher confirms Guido Pialli, Journal of Evolutionary Economics 33, 1125–1169, published 14 August 2023."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s00191-023-00831-9",
+            "title": "Pialli (2023), Journal of Evolutionary Economics: full open-access article",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full peer-reviewed HTML text and methodological introduction reviewed; dated published 14 August 2023."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "KEEP A Route 3: peer-reviewed European patent co-ownership study measures cross-border research collaboration and how partner geography relates to innovation quality."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical duplicate was supplied or substantiated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-24T14:47:00Z",
+      "deep_scan_package_id": "worker-a-20261024T143355Z-9354ea6ec99e",
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Guido Pialli",
+            "class": "university_group"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2023-08-14",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Joint patent applications at the European Patent Office in 2000–2012; patent citations are a proxy for quality, not causal proof.",
+          "text": "European co-owned patents show higher citation-based quality with cross-country collaboration and a U-shaped distance pattern.",
+          "confidence": "high",
+          "record_key": "historical:id:b98b766a0e87c1c9",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:910e9d330c18c0c4:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:e20c0f7ad8269301": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "7a4c7735",
+      "identity_hash": "8611e4f12e6b5dad",
+      "reader_title": "Consultation on cyber-surveillance export guidance",
+      "reader_what": "The Commission sought stakeholder input on future Article 5 export guidance under the EU Dual-Use Regulation.",
+      "reader_more": "The webpage opens consultation on exporters’ duties for non-listed cyber-surveillance products. Academic and research institutions are named among invitees, but that does not make this an R&I research study. The underlying export-control consultation is not a substantive historical Strand A evidence product.",
+      "deep_analysis": {
+        "work_kind": "public consultation notice",
+        "research_question": "What exporter guidance should accompany Article 5 of EU Regulation 2021/821?",
+        "main_finding": "Commission opened a consultation, subsequently closed, on proposed export guidance.",
+        "method_or_basis": "Official European Commission consultation page, not a completed evidence report.",
+        "qualification": "Consultation status cannot be equated with adoption or impact of final guidelines.",
+        "radar_relevance": "Fails A Routes 1–3 systemic evidence-product gate.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "European Commission 31 March–9 June 2023 consultation page inspected; describes draft guidance and Article 5 notification."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary",
+            "url": "https://policy.trade.ec.europa.eu/consultations/guidelines-export-cyber-surveillance-items-under-article-5-regulation-eu-no-2021821_en",
+            "title": "EU Commission consultation on draft Article 5 cyber-surveillance export guidelines",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source is an official EU consultation about 2023 draft guidelines. It should not be relabelled a completed analytical report or an adopted legislative measure."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_NOT_MET",
+        "reason": "DROP A: official consultation is a procedural trade/export-control page, not a substantive analytical evidence product on European R&I. Checked A Route 1 technology-security relation and Routes 2–3 systemic research evidence; it contains no measured research or innovation-system findings. It was not an adopted guideline in 2023."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical duplicate was supplied or substantiated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-24T14:47:00Z",
+      "deep_scan_package_id": "worker-a-20261024T143355Z-9354ea6ec99e",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:9e4641a70c3fb8b6": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "8517b208",
+      "identity_hash": "f758477898bb0909",
+      "reader_title": "Polish COST networking event recap",
+      "reader_what": "COST described how researchers could join European collaboration networks at a Polish NCP meeting.",
+      "reader_more": "The brief 2017 item summarises presentations during a meeting in Brussels and promotional claims about COST participation. It contains no evaluation, dataset or systematic study of researcher networking and funding outcomes. Useful event history alone does not meet historical Strand A.",
+      "deep_analysis": {
+        "work_kind": "institutional event news",
+        "research_question": "What COST networking opportunities were presented to Polish National Contact Points?",
+        "main_finding": "COST reported a briefing and panel discussion about researcher networking and Framework Programme participation.",
+        "method_or_basis": "Official COST Association post and date corroborated by COST news listing.",
+        "qualification": "Promotional statements are not independent evidence of downstream participation or success.",
+        "radar_relevance": "Fails evidence-product gate for A Route 3; no substantive Route 1/2 analysis.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original COST news page matched in package first-party text and web indexed official body content; describes 21 November 2017 meeting."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "COST site indexed original official November 2017 article and dated news archive; direct interactive fetch was restricted, cached first-party text substantively inspected."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary",
+            "url": "https://www.cost.eu/towards-research-funding-polish-ncp-network-present-benefits-of-cost/",
+            "title": "COST Association news report on Polish NCP meeting, 23 November 2017",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Read 1,946-character scanner-preserved first-party source text and official index reproducing the actual recap; site direct fetch restricted."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_NOT_MET",
+        "reason": "DROP A: official COST event recap reports a presentation and benefits promotion, not a systematic empirical or analytical European R&I evidence product. A Routes 1–3 were checked: references to COST collaboration and widening are programme description, not verified study findings."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical duplicate was supplied or substantiated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-24T14:47:00Z",
+      "deep_scan_package_id": "worker-a-20261024T143355Z-9354ea6ec99e",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:607378999a5cda3b": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "2c5966eb",
+      "identity_hash": "641e175efcbbf2e8",
+      "reader_title": "Crisis learning as a futures-literacy method",
+      "reader_what": "Virtual workshops adapted causal layered analysis to question pandemic assumptions and explore alternative post-crisis futures.",
+      "reader_why": "Facilitators can use layered assumptions and crisis unlearning to support structured thinking about possible futures.",
+      "reader_more": "The authors designed online futures workshops during the COVID-19 pandemic. Participants reflected on crises through causal layered analysis and imagined a different normal. They propose integrating crisis learning into futures literacy, but do not establish that the method measurably improves preparedness.",
+      "deep_analysis": {
+        "work_kind": "futures-literacy methodological paper",
+        "research_question": "How can facilitators combine pandemic crisis learning with futures-literacy practice?",
+        "main_finding": "Causal-layered-analysis workshops provide an adapted way to surface and question crisis assumptions.",
+        "method_or_basis": "Experimental virtual workshops, adaptation of causal layered analysis and reflective discussion.",
+        "qualification": "Exploratory virtual workshops during COVID-19; authors propose an educational approach, not empirically validated crisis-response effectiveness.",
+        "radar_relevance": "Reusable facilitation method for foresight and futures literacy (B).",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI 10.1108/OTH-10-2021-0117 matched article and original 2022 institutional manuscript; package PDF excerpt (24,000 characters) examined."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Emerald and University of Turku both identify Karjalainen, Mwagiru, Salminen and Heinonen as authors and 2022 publication."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Open University of Turku author/institutional full article copy and publisher methods/findings verify content."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "institutional_repository",
+            "url": "https://www.utupub.fi/bitstream/handle/10024/161826/10-1108_OTH-10-2021-0117.pdf?isAllowed=y&sequence=1",
+            "title": "University of Turku hosted open-access Karjalainen et al. full article",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_article",
+            "url": "https://doi.org/10.1108/OTH-10-2021-0117",
+            "title": "Emerald Publishing, On the Horizon 30(2), pages 47–56, DOI 10.1108/OTH-10-2021-0117",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full author-deposited PDF excerpt read; independent Emerald publication confirms On the Horizon, NOT Futures. Emerald first published 11 April 2022."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_TRANSFERABLE_METHOD",
+        "reason": "KEEP B: adapts causal layered analysis into experimental online futures-literacy workshops and explicitly integrates crisis learning/unlearning as a transferable facilitation approach. Geographic scope is immaterial for B."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical duplicate was supplied or substantiated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-24T14:47:01Z",
+      "deep_scan_package_id": "worker-a-20261024T143355Z-9354ea6ec99e",
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Karjalainen, Mwagiru, Salminen and Heinonen",
+            "class": "university_group"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2022-04-11",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Exploratory virtual workshops during COVID-19; authors propose an educational approach, not empirically validated crisis-response effectiveness.",
+          "text": "The authors demonstrated virtual futures-literacy workshops combining crisis learning with adapted causal layered analysis.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "historical:id:607378999a5cda3b",
+          "merit": 57,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:641e175efcbbf2e8:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMijgFBVV95cUxNZDZMM19MRG1BSlIwUm5EeWVsQjRadFNOeXJadGdGRWlDZzd1QklOZDRjVFdxdTRoakZVLU9sOHNkUjNOUHNkdTZVWER1ZFE4Q0lpQjBvN3kyVUdJSzQ3OGNwcDRGVkJXb3Nua1JNTndDU3Bfa0pjOGNidkx4ckVhUFhjWERIMFdOQmhXTlhB?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "f7cc5c40",
+      "identity_hash": "a0ec56cdddde1dc3",
+      "reader_title": "Philosophy column on AI and being human",
+      "reader_what": "A Bloomberg columnist discusses Rüdiger Safranski’s argument about human identity in an age of intelligent AI.",
+      "reader_more": "The author describes a philosophical essay about what makes humans distinctive relative to artificial intelligence. This is not an announcement or evidence of a new European research or innovation policy, technological capability or funding action. The publisher article is restricted; the author’s own substantive synopsis grounds the exclusion.",
+      "deep_analysis": {
+        "work_kind": "opinion column",
+        "research_question": "How does German philosophy address the human meaning of advanced AI?",
+        "main_finding": "Column discusses Safranski and longstanding philosophical debates about scientific humiliation and human identity.",
+        "method_or_basis": "Author’s contemporaneous substantive first-person column synopsis and Bloomberg publisher headline confirmation.",
+        "qualification": "Article body paywalled; decision is limited to the author-verified topic, without asserting unseen arguments.",
+        "radar_relevance": "No dateable substantive EU R&I development or demonstrated European R&I bridge under C.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Google News RSS link supplied for Bloomberg opinion story provided no article text; publisher article is access-limited."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact title search found Bloomberg Opinion’s own 22 Oct post and author Andreas Kluth’s original column summary."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Search for Andreas Kluth, AI 0 German Philosophers 1, 2026 located Kluth author post describing philosopher Rüdiger Safranski."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Bloomberg Opinion official social account corroborated identity and dated column; author first-person text inspected as substantive excerpt."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Distinct phrase “ontological contest German philosophers” retrieved Bloomberg Opinion release and author context; unrelated AI policy events were not substituted."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "author_public_excerpt",
+            "url": "https://www.linkedin.com/posts/andreas-kluth-0b7822179_its-ai-0-german-philosophers-1-activity-7518980328548511744-PSXQ",
+            "title": "Author Andreas Kluth directly describes Bloomberg opinion column on AI and German philosophy",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_social",
+            "url": "https://x.com/opinion/status/2113212533750325381",
+            "title": "Bloomberg Opinion account confirms column and 22 October 2026 identity",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final identity work: Google News link, publisher’s dated account, Bloomberg exact title, author Andreas Kluth’s original synopsis, title fragments and gift-link discovery checked. Recovered first-party excerpt is sufficient to exclude a C policy signal."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "DROP C: source-grounded author/publisher accounts show an opinion reflection on AI and philosopher Rüdiger Safranski, not any real dateable EU research-funding, capability, policy, infrastructure or strategic-technology decision. The German nationality of a philosopher does not create a substantive R&I link."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical duplicate was supplied or substantiated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-24T14:47:01Z",
+      "deep_scan_package_id": "worker-a-20261024T143355Z-9354ea6ec99e",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiuAFBVV95cUxOYW51NDhUc0ltZ0ZxY2xXRUw5S0F6Mm01WVhLQk53ODRmZGlJd2VIVUlQb3BabVFZT25pSUozR1RKNDA0WnlHdTZUcHRHbDFKMUpzYVo0RW9wVmpudXRQYkxyd3FoeV92TmtHYVZUdnBxTXp5OGE3X3N0akdYaW94WXFYX2stQXJwMFJRQ0U4WHo3UDhhUUdCX1VCSzUyX1B2Z3R3OFRXbTBnUDNfbkFYb0VzNm1ncDBm?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "20f4442e",
+      "identity_hash": "69a9bd384e8eebd7",
+      "reader_title": "Finland’s rising data-centre electricity demand",
+      "reader_what": "Fingrid scenarios foresee sharply rising Finnish electricity use, led partly by data centres and industrial demand.",
+      "reader_more": "The underlying grid operator forecasts electricity needs through 2035, with significant uncertainty about which projects get built. The Bloomberg headline summarises power-system demand rather than a European R&I funding or research-infrastructure change. The primary forecast should not be repackaged as an implemented 40% increase.",
+      "deep_analysis": {
+        "work_kind": "energy forecast news",
+        "research_question": "How much might Finnish demand for electricity grow as data centres expand?",
+        "main_finding": "Fingrid gives alternative scenarios for electricity consumption and generating capacity.",
+        "method_or_basis": "First-party Fingrid Q3/2026 forecast and August 2026 project-connection explanation, supported by Bloomberg publisher identification.",
+        "qualification": "Forecast is conditional and not an observed 40% increase; datacentre build-out is uncertain.",
+        "radar_relevance": "No sufficient specific EU R&I connection or C-qualifying policy/development identified.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Google News RSS / Bloomberg reader link did not provide underlying article text."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Quoted 2026 Bloomberg headline located Bloomberg Business’ own distribution post and contemporaneous link."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Matching Fingrid Q3/2026 official forecast discusses data-centre electricity consumption and 2030/2035 ranges."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Distinct Finnish Grid 40 percent data centres headline cross-checked with Fingrid 18 Aug 2026 primary project-connection scenario and Q3/2026 forecast."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary",
+            "url": "https://www.fingrid.fi/en/grid/development/prospects-for-future-electricity-production-and-consumption-q3-2024/",
+            "title": "Fingrid 2026 Q3 electricity consumption forecast (page updated for Q3 2026)",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_social",
+            "url": "https://www.threads.com/@bloombergbusiness/post/De3HkRDjvtF/finlands-power-network-manager-fingrid-oyj-said-the-power-demand-in-the-country/",
+            "title": "Bloomberg Business confirms its Fingrid power-demand story",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bloomberg-owned social distribution established claimed headline and identity; substantive claim traced to contemporaneous grid-operator projections. Did not pretend to read inaccessible Bloomberg article."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "DROP C: Fingrid supplied a forecast of electricity consumption driven by data centres and industry. The record is a grid-demand projection, not a verified fresh EU R&I decision or source-supported connection specifically to research infrastructure, research capability or European technological R&I strategy. No such R&I bridge was substantiated."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical duplicate was supplied or substantiated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-24T14:47:01Z",
+      "deep_scan_package_id": "worker-b-20261024T143359Z-4f7978b7aa89",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:dd7feef75f937a9c": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "B",
+      "corpus_scope": "historical",
+      "source_hash": "100c8a71",
+      "identity_hash": "e67c7ceb665a6d2f",
+      "reader_title": "A practical guide to evaluating foresight",
+      "reader_what": "Authors provide a framework for planning foresight evaluation, selecting designs, assessing readiness, and measuring difficult long-term outcomes.",
+      "reader_why": "Makes horizon-scanning and scenario work more assessable by adapting evaluation designs to uncertainty and intangible outcomes.",
+      "reader_more": "The December 2024 guide synthesises evaluation approaches for different foresight products and activities. It covers evaluability, theory of change, design selection and measures tailored to long time horizons. These are proposed methods for practitioners, not evidence that any specific initiative achieved impact.",
+      "deep_analysis": {
+        "work_kind": "foresight evaluation practice guide",
+        "research_question": "How can evaluators adapt existing tools to foresight workshops, scanning and scenarios?",
+        "main_finding": "Presents a transferable decision process, evaluation theory and tools tailored to foresight complexity and uncertainty.",
+        "method_or_basis": "APF task force practitioner report drawing on evaluation literature and illustrative evaluation designs.",
+        "qualification": "Practical guide synthesises existing evaluation approaches; recommendations are methodological guidance, not controlled tests of effectiveness.",
+        "radar_relevance": "Reusable methods for evaluating foresight and future-oriented R&I intelligence (B).",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "JRC138233 official repository matches guide title, summary, authors and Association of Professional Futurists publisher."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact title recovered author-uploaded December 2024 full guide in ResearchGate HTML and Association of Professional Futurists resource listing."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "ResearchGate author-uploaded guide complete substantive body read; APF official publication list confirms free 2024 guide."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "author_repository_full_text",
+            "url": "https://www.researchgate.net/publication/387437846_APPLYING_EVALUATION_THINKING_AND_PRACTICE_TO_FORESIGHT",
+            "title": "Gardner, Barela and Bontoux, Applying Evaluation Thinking and Practice to Foresight, author-uploaded full report",
+            "evidence_used": true
+          },
+          {
+            "kind": "institutional_repository",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC138233",
+            "title": "European Commission JRC record JRC138233, 2024 foresight evaluation guide",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered author-uploaded full 2024 APF guide, read substantive methods sections and institutional JRC metadata; JRC 2026-08-12 is a later repository record date, not original publication date."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_TRANSFERABLE_METHOD",
+        "reason": "KEEP B: practical cross-sector method resource adapts evaluability assessment, theories of change, qualitative metrics and evaluation designs specifically to uncertain, long-horizon foresight work. It provides a transferable foresight-evaluation procedure, not a one-off application."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical duplicate was supplied or substantiated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-24T14:47:01Z",
+      "deep_scan_package_id": "worker-b-20261024T143359Z-4f7978b7aa89",
+      "claims": [
+        {
+          "object": "methods.evaluation",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Gardner, Bontoux and Barela",
+            "class": "other"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2024-12",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Practical guide synthesises existing evaluation approaches; recommendations are methodological guidance, not controlled tests of effectiveness.",
+          "text": "A practitioner guide maps evaluability checks, theories of change and tailored evaluation designs to foresight activities.",
+          "confidence": "high",
+          "status_date_precision": "month",
+          "attributes": {
+            "world_reasoning": false
+          },
+          "record_key": "historical:id:dd7feef75f937a9c",
+          "merit": 100,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:e67c7ceb665a6d2f:1"
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:93e1a10386196107": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "306c8099",
+      "identity_hash": "d9e6be86cc9cadc6",
+      "reader_title": "Huawei shifted from 5G equipment toward European research ties",
+      "reader_what": "ECFR traces Huawei’s expansion into European university collaborations, cloud and data activities after restrictions on 5G.",
+      "reader_why": "University partnerships link research access, talent and technology dependence to European research-security policy choices.",
+      "reader_more": "This 2022 ECFR commentary documents agreements with Bulgarian universities and wider Central/Eastern European institutions. It argues Huawei’s diversification may circumvent earlier infrastructure-focused restrictions. Because the analysis combines institutional references with the author’s judgement, alleged strategic effects should not be treated as measured outcomes.",
+      "deep_analysis": {
+        "work_kind": "think-tank strategic technology analysis",
+        "research_question": "How did Huawei adapt European engagement after Western telecom-equipment restrictions?",
+        "main_finding": "Huawei expanded university collaborations, talent programmes, software and data initiatives in Europe.",
+        "method_or_basis": "Full ECFR 2022 analysis by Vladimir Shopov referencing publicly reported agreements and company statements.",
+        "qualification": "Think-tank commentary based on public cooperation announcements; company claims and plans are not independent evidence of realised outcomes.",
+        "radar_relevance": "EU research partnerships and strategic technology/research-security ties (A Route 1).",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Full 2022 ECFR original commentary read; includes named university cooperation examples in Bulgaria, Poland and other European countries."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "thinktank_article",
+            "url": "https://ecfr.eu/article/from-5g-hardware-to-apps-and-data-how-huawei-has-adapted-to-survive/",
+            "title": "Vladimir Shopov, ECFR commentary, 22 December 2022",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full 2022 original ECFR analysis read. The piece is attributed commentary; empirical statistics from Huawei or third-party sources were not promoted to independently proven outcomes."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "KEEP A Route 1: substantive European strategic-technology analysis documents Huawei’s post-5G shift toward cloud, data and research collaboration with several EU universities, including concrete institutional partnership examples and governance/security implications."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical duplicate was supplied or substantiated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-24T14:47:02Z",
+      "deep_scan_package_id": "worker-b-20261024T143359Z-4f7978b7aa89",
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Huawei",
+            "class": "company"
+          },
+          "mechanism": "collaborates",
+          "direction": "expands",
+          "status": "operating",
+          "status_date": "2022-12-22",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Think-tank commentary based on public cooperation announcements; company claims and plans are not independent evidence of realised outcomes.",
+          "text": "ECFR reported Huawei university cooperation agreements and joint research or training initiatives across parts of the EU.",
+          "confidence": "medium",
+          "record_key": "historical:id:93e1a10386196107",
+          "merit": 74,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:d9e6be86cc9cadc6:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:d6350a1cf9d493cd": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "b79830e5",
+      "identity_hash": "b50f76a84a424505",
+      "reader_title": "Swedish innovation policy’s evaluation gap",
+      "reader_what": "New mission-oriented innovation goals have not been matched consistently by transformed Swedish funding-programme evaluation practices.",
+      "reader_why": "Evaluation rules influence whether challenge-oriented innovation programmes can learn from and adapt their interventions.",
+      "reader_more": "Through a Swedish policy case, the authors examine changes in innovation agencies and their monitoring tools. They find that largely retrospective and summative assessment persists despite ambitions for transformative missions. This is historical context on a European R&I governance mechanism, not a new 2026 development.",
+      "deep_analysis": {
+        "work_kind": "empirical innovation policy case study",
+        "research_question": "How do Swedish evaluators implement transformative and mission-oriented innovation policy?",
+        "main_finding": "Swedish monitoring and evaluation practices remain partly rooted in conventional summative models.",
+        "method_or_basis": "Peer-reviewed case analysis of policy discourses, implementation and monitoring/evaluation routines.",
+        "qualification": "Case study of Swedish innovation-policy implementation; findings are context-dependent and do not establish policy causal impacts.",
+        "radar_relevance": "Direct R&I policy implementation and assessment mechanism under A Route 3.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI 10.1093/scipol/scac071 resolved to original Oxford Academic article with substantive abstract and full discussion."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Cross-checked journal, three authors, publication 13 December 2022 and 2023 volume 50 issue 2."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Full 2022 article excerpt preserved from author institutional copy; original publisher HTML provides substantive policy analysis."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article",
+            "url": "https://academic.oup.com/spp/article/50/2/336/6889782",
+            "title": "Rohracher, Coenen and Kordas, Science and Public Policy 50(2): 336–349 (2023)",
+            "evidence_used": true
+          },
+          {
+            "kind": "institutional_repository",
+            "url": "https://liu.diva-portal.org/smash/get/diva2%3A1723192/FULLTEXT01.pdf",
+            "title": "Linköping University repository copy of full peer-reviewed article",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original Oxford Academic and institutionally deposited manuscript confirm the same peer-reviewed article, authors and analytical finding."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "KEEP A Route 3: peer-reviewed examination of Swedish transformative innovation-policy governance and monitoring reveals tensions between mission-oriented ambitions and continuing traditional evaluation practices."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical duplicate was supplied or substantiated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-24T14:47:03Z",
+      "deep_scan_package_id": "worker-b-20261024T143359Z-4f7978b7aa89",
+      "claims": [
+        {
+          "object": "research.assessment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Rohracher, Coenen and Kordas",
+            "class": "university_group"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_contested",
+          "status": "delivered",
+          "status_date": "2022-12-13",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "SE"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "Case study of Swedish innovation-policy implementation; findings are context-dependent and do not establish policy causal impacts.",
+          "text": "Study found tension between Swedish mission-oriented innovation ambitions and conventional evaluation practices.",
+          "confidence": "high",
+          "record_key": "historical:id:d6350a1cf9d493cd",
+          "merit": 77,
+          "origin": "deep_scan",
+          "era": "historical",
+          "provisional": false,
+          "claim_id": "c:b50f76a84a424505:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:81a4fd557d09c581": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "7f481ec0",
+      "identity_hash": "f5ded4e38c0dc65e",
+      "reader_title": "EU data-and-computing funding-call listing",
+      "reader_what": "A HaDEA call listing for cognitive computing and data infrastructure, rather than a research study.",
+      "reader_more": "One open call in Horizon Europe Destination 3. The source specifies reference HORIZON-CL4-2023-DATA-01-04, opening 8 December 2022, deadline 29 March 2023. The record is historical and must not be repackaged as a fresh Strand C action or evaluation finding.",
+      "deep_analysis": {
+        "work_kind": "official funding opportunity directory",
+        "research_question": "What Horizon Europe Cluster 4 topics were advertised in 2023?",
+        "main_finding": "A HaDEA call listing for cognitive computing and data infrastructure, rather than a research study.",
+        "method_or_basis": "EU Health and Digital Executive Agency call page and linked research-topic IDs.",
+        "qualification": "The calls being listed cannot prove that projects were funded or delivered outcomes.",
+        "radar_relevance": "Historical call directory fails Strand A evidence-product requirement across Routes 1–3.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original HaDEA Horizon Europe 2023 official DATA-01-04 page inspected; describes funding topics, publication and deadline."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary",
+            "url": "https://hadea.ec.europa.eu/calls-proposals/horizon-europe-calls-2023-destination-3-world-leading-data-and-computing-technologies_en",
+            "title": "HaDEA Horizon Europe Cluster 4 2023 DATA-01-04 official funding-call listing",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "First-party HaDEA page and date/milestones read; no completed analytic research output in this record."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_NOT_MET",
+        "reason": "DROP A: The source specifies reference HORIZON-CL4-2023-DATA-01-04, opening 8 December 2022, deadline 29 March 2023. Although it documents authentic EU R&I instruments, checked A Routes 1–3 and found no substantive analytical evidence product: the page is an administrative call list, not research into strategic states, trajectories or R&I-system mechanisms."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical duplicate was supplied or substantiated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-24T14:47:03Z",
+      "deep_scan_package_id": "worker-b-20261024T143359Z-4f7978b7aa89",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:9318d2233d9c9c2b": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "d2fa2a3c",
+      "identity_hash": "ec2ef3bd27165fb1",
+      "reader_title": "Two-stage strategic-materials call listing",
+      "reader_what": "HaDEA listed four two-stage Horizon Europe research topics on advanced materials.",
+      "reader_more": "Research funding call listing, not programme outcome evidence. Two-stage deadlines 7 March and 5 October 2023 are retrospective, not a current action. The record is historical and must not be repackaged as a fresh Strand C action or evaluation finding.",
+      "deep_analysis": {
+        "work_kind": "official funding opportunity directory",
+        "research_question": "What Horizon Europe Cluster 4 topics were advertised in 2023?",
+        "main_finding": "HaDEA listed four two-stage Horizon Europe research topics on advanced materials.",
+        "method_or_basis": "EU Health and Digital Executive Agency call page and linked research-topic IDs.",
+        "qualification": "The calls being listed cannot prove that projects were funded or delivered outcomes.",
+        "radar_relevance": "Historical call directory fails Strand A evidence-product requirement across Routes 1–3.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original HaDEA Horizon Europe 2023 official RESILIENCE-01-32 page inspected; describes funding topics, publication and deadline."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary",
+            "url": "https://hadea.ec.europa.eu/calls-proposals/horizon-europe-calls-2023-destination-2-increased-autonomy-key-strategic-value-chains-resilient-0_en",
+            "title": "HaDEA Horizon Europe Cluster 4 2023 RESILIENCE-01-32 official funding-call listing",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "First-party HaDEA page and date/milestones read. Web retrieval of the two-stage page briefly returned 429, but search-indexed official content and package first-party text provided a matching full description."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_NOT_MET",
+        "reason": "DROP A: Two-stage deadlines 7 March and 5 October 2023 are retrospective, not a current action. Although it documents authentic EU R&I instruments, checked A Routes 1–3 and found no substantive analytical evidence product: the page is an administrative call list, not research into strategic states, trajectories or R&I-system mechanisms."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical duplicate was supplied or substantiated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-24T14:47:03Z",
+      "deep_scan_package_id": "worker-b-20261024T143359Z-4f7978b7aa89",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:f97b8ab8ff367f99": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "35cf6158",
+      "identity_hash": "b15f43a310aee11e",
+      "reader_title": "Industrial resilience research-call listing",
+      "reader_what": "HaDEA listed 2023 research topics on EU SME advanced technology and critical materials.",
+      "reader_more": "Single-stage funding call menu, not a systematic study. Research-call deadline was 20 April 2023; content remains a call directory. The record is historical and must not be repackaged as a fresh Strand C action or evaluation finding.",
+      "deep_analysis": {
+        "work_kind": "official funding opportunity directory",
+        "research_question": "What Horizon Europe Cluster 4 topics were advertised in 2023?",
+        "main_finding": "HaDEA listed 2023 research topics on EU SME advanced technology and critical materials.",
+        "method_or_basis": "EU Health and Digital Executive Agency call page and linked research-topic IDs.",
+        "qualification": "The calls being listed cannot prove that projects were funded or delivered outcomes.",
+        "radar_relevance": "Historical call directory fails Strand A evidence-product requirement across Routes 1–3.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original HaDEA Horizon Europe 2023 official RESILIENCE-01-42 page inspected; describes funding topics, publication and deadline."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary",
+            "url": "https://hadea.ec.europa.eu/calls-proposals/horizon-europe-calls-2023-destination-2-increased-autonomy-key-strategic-value-chains-resilient_en",
+            "title": "HaDEA Horizon Europe Cluster 4 2023 RESILIENCE-01-42 official funding-call listing",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "First-party HaDEA page and date/milestones read; no completed analytic research output in this record."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_NOT_MET",
+        "reason": "DROP A: Research-call deadline was 20 April 2023; content remains a call directory. Although it documents authentic EU R&I instruments, checked A Routes 1–3 and found no substantive analytical evidence product: the page is an administrative call list, not research into strategic states, trajectories or R&I-system mechanisms."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical duplicate was supplied or substantiated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-24T14:47:03Z",
+      "deep_scan_package_id": "worker-b-20261024T143359Z-4f7978b7aa89",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:0800a03ac3376699": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "272863af",
+      "identity_hash": "bcce61f8a8ce9038",
+      "reader_title": "Climate-neutral manufacturing call listing",
+      "reader_what": "HaDEA listed 2023 projects on advanced manufacturing, remanufacturing and industrial climate technologies.",
+      "reader_more": "Research-call menu, not systematic evidence on R&I performance. Deadline was 20 April 2023; listing does not evaluate deployment or research effectiveness. The record is historical and must not be repackaged as a fresh Strand C action or evaluation finding.",
+      "deep_analysis": {
+        "work_kind": "official funding opportunity directory",
+        "research_question": "What Horizon Europe Cluster 4 topics were advertised in 2023?",
+        "main_finding": "HaDEA listed 2023 projects on advanced manufacturing, remanufacturing and industrial climate technologies.",
+        "method_or_basis": "EU Health and Digital Executive Agency call page and linked research-topic IDs.",
+        "qualification": "The calls being listed cannot prove that projects were funded or delivered outcomes.",
+        "radar_relevance": "Historical call directory fails Strand A evidence-product requirement across Routes 1–3.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original HaDEA Horizon Europe 2023 official TWIN-TRANSITION-01-02 page inspected; describes funding topics, publication and deadline."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary",
+            "url": "https://hadea.ec.europa.eu/calls-proposals/horizon-europe-calls-2023-destination-1-climate-neutral-circular-and-digitised-production_en",
+            "title": "HaDEA Horizon Europe Cluster 4 2023 TWIN-TRANSITION-01-02 official funding-call listing",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "First-party HaDEA page and date/milestones read; no completed analytic research output in this record."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_NOT_MET",
+        "reason": "DROP A: Deadline was 20 April 2023; listing does not evaluate deployment or research effectiveness. Although it documents authentic EU R&I instruments, checked A Routes 1–3 and found no substantive analytical evidence product: the page is an administrative call list, not research into strategic states, trajectories or R&I-system mechanisms."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical duplicate was supplied or substantiated."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-24T14:47:03Z",
+      "deep_scan_package_id": "worker-b-20261024T143359Z-4f7978b7aa89",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-24T13:35:55Z"
+  "claims_updated_at": "2026-10-24T14:47:03Z"
 }
