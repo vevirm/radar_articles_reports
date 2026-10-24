@@ -7,38 +7,38 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **3221** (Main **1643** + Historical **1578**)
-- Automatic queue still needing V2 verification: **199** (Main **9** + Historical **190**)
-- Currently assigned to workers: **107** (Main **9** + Historical **98**)
+- Automatic queue still needing V2 verification: **217** (Main **19** + Historical **198**)
+- Currently assigned to workers: **107** (Main **19** + Historical **88**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **37**
-- Automatic queue pending and not yet assigned: **92**
+- Automatic queue pending and not yet assigned: **110**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261023T161447Z-03be523ad6ff`
+- Current package: `worker-a-20261024T120222Z-bc3c07b63c70`
 - Assigned unresolved records: **36**
-  1. `historical:id:4cebbee4fa07360d` — The CNRS is defending the future of astronomy to the European Union
-  2. `historical:id:47cd2b232d968f0d` — The Rocky Road for Boosting Dual-use Research in Europe - How to support researchers and companies entering the Dual-use area? | VTT
-  3. `historical:id:9b08ebc46dad7759` — The European Parliament on Space: From Promoting Scientific Research to Supporting the Common Security and Defence Policy
-  4. `historical:id:e50a36394d118afc` — ITIF’s Center for Data Innovation Launches European Policy Program in Brussels
-  5. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxOVW9JMll3ZWtXZHIxVkhWaS1pMGlpTDZuOFhzSXZFUElrbWNRV1FsUENVX2U4Z1pfWGFINnJEcDl6ODJZdmV2TVYxWEt1RFpndXkzZVgxZlFaSHhSbk1IbnFJYVZPUF90RVRMenRiT3owOHZ4OVk4bUFBa21GVHVwUFZ3VkY?oc=5` — Starlink saga shows why Europe must catch up in space — recovery attempt 2/3
-  6. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTE9QcC1fVmdQazFBTlBSYndRcloyak4tblNHMmkzalE2cHN1SS16VTFzNUpuaEY4MkRWSmN2RnNJME42M0wwZkJFS3BqenRfWjVmNlFMcXQyQWRXdl9OeVpoR1pQelV6RjA5UWRfUEJ3M1B3el9FNllHR0VLVWRIdw?oc=5` — Electrification of European industry - Opportunities, economic barriers, and the role of flexibility — recovery attempt 2/3
-  7. `link:https://news.google.com/rss/articles/CBMisgFBVV95cUxNMGVld1N2QmdhVk5lMlZod0l5WldwVzFpUDlxUXUtOG8tZHZnY3dmUVFTYXNlWDltNmxKazQ1TWZBczVHVEx5MTBxZTNYcjdlVTc4Rm1vVzlJYkVnNEdNdVpjZXpOdzItVXJUcEl2aWR1cDNNMW1MMWRKaUV4UE9IUXlBQl8wMl9RUm9oUnl0QURCSndoaklfTTJzVHQzaFFvS1A1MmlFTVVvQUwySE9rTGVn?oc=5` — Germany’s Idle Nuclear Plants Eye New Life as AI Data Centers — recovery attempt 2/3
-  8. `link:https://news.google.com/rss/articles/CBMioAFBVV95cUxOOVZ4NDNoWW5yOXpfTlhXWHhHODY1T1dmdmNsUFhmd1N5akpxM0JGV0dWcnBqR0ZaQ25FOWhnM0FmVnVqZUNpT3JkV0xKYjdYbjF6aVdJNUJuaFcwZFhYMEJGbzk3VXdaLU9sZkM3aHZVellwNjVYUWdmUW5FblBEX29jRHhRcUthT01iVDc0ZldKVmpuMFU5NnUwVjNNZVFj?oc=5` — Europe must escape its reliance on American satellites — recovery attempt 2/3
+  1. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=0e822795-cf50-11f1-9458-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Landscape analysis study of the biotechnology sector in the Union with a view to foster its competitiveness and innovation - Publications Office of the EU
+  2. `link:https://www.tech-europe.org` — TECH by Handelsblatt
+  3. `link:https://news.google.com/rss/articles/CBMitgFBVV95cUxPblJWbEdVNU9RX3N6UEFuWGNnYVBTYWZTRnVxLWpBZVhkVThXNUJoaGxDZEZCS0ZxWkxFTXJnbkhLb0RnM2s1NTMtaW5TVjZBWkIzck1uZ3puekhPb0k3TFhfSk1aLWUyU2ZBblVqUnZYZEhYN3FlMldjOTRySXJIRWloVExKWHk5Zml5T3N0al82bHJiLV9ZcENJVjZXZ0FkQjB5TzdwZUVYcHRTRUV5RVBSNTc5dw?oc=5` — How can Europe counter hybrid warfare? - EU Science Hub
+  4. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxQb0JDQXk0MWt2T3ZkTmpLTzJvdkhwVV9DeEFob2p2RzFkQU1KdXV5cWN2YW9QTGNFZThMeE00N0l2TE4tYUtyTnlQWV8zc0VpRFpINmxoc1Y2ZG5TUlliTnlMSUV5MHJvVmVWZVdRSUViMjNsRzduYTlOTjFYQ1dNRW5XRWpDYnoxUlk4UkpkN0pZOFRPZmVHVUdWM3V2dURwOHBSb24ydU1SLVVIS2c?oc=5` — MEPs keep Horizon Europe deal under wraps ahead of November vote
+  5. `link:https://news.google.com/rss/articles/CBMijgFBVV95cUxNZDZMM19MRG1BSlIwUm5EeWVsQjRadFNOeXJadGdGRWlDZzd1QklOZDRjVFdxdTRoakZVLU9sOHNkUjNOUHNkdTZVWER1ZFE4Q0lpQjBvN3kyVUdJSzQ3OGNwcDRGVkJXb3Nua1JNTndDU3Bfa0pjOGNidkx4ckVhUFhjWERIMFdOQmhXTlhB?oc=5` — It’s AI 0, German Philosophers 1
+  6. `link:https://news.google.com/rss/articles/CBMitwFBVV95cUxQRmlDdXhrR2VhUFlYLXFkR3JtSzlGYTZ2Sng0SUNucWQ3bmt3bGtyLUNoYnFOR3luc1FhdFFTTG5NdVAzdm1nay1iSE1RU3FKd0pmZ2JrYURHcV9XYWJwd3h1cjZxUURqRXl3RWxZUkplOU9vWU1lQUY2ai1zOUc1T010V2oxak1xSmJLR1ZNRk9Sd1NtRFFfNWFQR214UF9TN1R5UDFNOWl4aF93T0kwRi1nbTFwUU0?oc=5` — US fines Air France, KLM over flights in prohibited Iraqi airspace
+  7. `link:https://hadea.ec.europa.eu/calls-proposals/advancing-interdisciplinary-data-driven-research-biodiversity-health-interface-under-one-health_en` — Advancing interdisciplinary, data-driven research at the biodiversity- health interface under a One Health approach
+  8. `link:https://news.google.com/rss/articles/CBMi1wFBVV95cUxPRzYwN19LT2VwY1NpRHgxUDVjQ3ZBZWRVNWZUOTVYYTdlVDNwcVVsUEQ2bmhUSDV1Wk44U3FvczlXVTVpYVdvOEotbGNlYlJpeG5LSmtreXFCLXhkY2l4SkRyZUdJSER6cl9VempLZzJtSXFoajlsQ3YtdmVjZ3ZuX2ltWHJGTGRJN1llaHpmQmNfOC0xNHZPYS1nWjBlcHdwalRZREd1czJtRU5UYVppMDRjV0NVUnl6VkFyb2FvWmRJRHZScHA5YmVtOWVyVlQ3TVdteU1RSQ?oc=5` — Working Student European Energy & Hydrogen Policy / Power-to-X for Applications (P2X4A) (m/f/d) - jobs.euractiv.com
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261023T161453Z-4ff4539ea36d`
+- Current package: `worker-b-20261024T120229Z-7839af9576b7`
 - Assigned unresolved records: **36**
   1. `historical:id:bea9c72856f3b6e5` — Secure Network Intelligence – better resilience for critical infrastructure | VTT
-  2. `historical:id:c24945fd0580f2eb` — China looks to Europe for its forthcoming scientific collaboration initiatives
-  3. `historical:id:df3d4b9d119c82a9` — A more inclusive Europe through personal data sovereignty in cross-border digital public services
-  4. `historical:id:7d46803936809e94` — ESPI2040: Space for Prosperity, Peace and Future Generations - ESPI
-  5. `historical:id:7b0ac6827b9f031b` — Horizon Europe Calls 2024 - Destination 2. Increased autonomy in key strategic value chains for resilient industry
-  6. `historical:id:80a12da88a0545cd` — Horizon Europe Calls 2024 - Destination 1. Climate neutral, circular and digitised production (two-stage)
-  7. `historical:id:9169bcc11d1c0001` — Horizon Europe Calls 2024 - Destination 1. Climate neutral, circular and digitised production
-  8. `historical:id:f33ee50ee368dd05` — Scenario descriptions
+  2. `historical:id:ff9a54d20dabce60` — The Swedish Research Council’s recommendations for the EU’s framework programme FP10
+  3. `historical:id:f3a2dac9e7453ac7` — India’s Health Diplomacy: Rewards for Global Health Security
+  4. `historical:id:55196f5a54029016` — How citizen science is shaping European technology policy around home-appliance repair
+  5. `historical:id:7efe8cb5bef255ac` — Gen-4 Engineering Research Centers
+  6. `historical:id:a6bf9f2cfd6c9517` — EU’s Global Gateway Initiative Unlocks New Opportunities for Education and Research in ASEAN
+  7. `historical:id:96d2b74807741141` — EU, ASEAN team up to boost educational and research ties with EUR 9.3 million initiative
+  8. `historical:id:7b2a05c067704832` — Cybersecurity AND Digital Sovereignty: an Analysis OF National Data Governance Capacity in the GLOBAL Platform Era: A Literature Review
   - … plus 28 more in the package manifest
 
 ### Worker SINGLE
