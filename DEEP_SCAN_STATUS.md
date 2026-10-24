@@ -6,39 +6,39 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **3221** (Main **1643** + Historical **1578**)
-- Automatic queue still needing V2 verification: **217** (Main **19** + Historical **198**)
-- Currently assigned to workers: **107** (Main **19** + Historical **88**)
+- Authoritative V2 verified: **3281** (Main **1653** + Historical **1628**)
+- Automatic queue still needing V2 verification: **157** (Main **9** + Historical **148**)
+- Currently assigned to workers: **107** (Main **9** + Historical **98**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **37**
-- Automatic queue pending and not yet assigned: **110**
+- Automatic queue pending and not yet assigned: **50**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261024T120222Z-bc3c07b63c70`
+- Current package: `worker-a-20261024T124123Z-15ebe0678d6c`
 - Assigned unresolved records: **36**
-  1. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=0e822795-cf50-11f1-9458-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Landscape analysis study of the biotechnology sector in the Union with a view to foster its competitiveness and innovation - Publications Office of the EU
-  2. `link:https://www.tech-europe.org` — TECH by Handelsblatt
-  3. `link:https://news.google.com/rss/articles/CBMitgFBVV95cUxPblJWbEdVNU9RX3N6UEFuWGNnYVBTYWZTRnVxLWpBZVhkVThXNUJoaGxDZEZCS0ZxWkxFTXJnbkhLb0RnM2s1NTMtaW5TVjZBWkIzck1uZ3puekhPb0k3TFhfSk1aLWUyU2ZBblVqUnZYZEhYN3FlMldjOTRySXJIRWloVExKWHk5Zml5T3N0al82bHJiLV9ZcENJVjZXZ0FkQjB5TzdwZUVYcHRTRUV5RVBSNTc5dw?oc=5` — How can Europe counter hybrid warfare? - EU Science Hub
-  4. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxQb0JDQXk0MWt2T3ZkTmpLTzJvdkhwVV9DeEFob2p2RzFkQU1KdXV5cWN2YW9QTGNFZThMeE00N0l2TE4tYUtyTnlQWV8zc0VpRFpINmxoc1Y2ZG5TUlliTnlMSUV5MHJvVmVWZVdRSUViMjNsRzduYTlOTjFYQ1dNRW5XRWpDYnoxUlk4UkpkN0pZOFRPZmVHVUdWM3V2dURwOHBSb24ydU1SLVVIS2c?oc=5` — MEPs keep Horizon Europe deal under wraps ahead of November vote
-  5. `link:https://news.google.com/rss/articles/CBMijgFBVV95cUxNZDZMM19MRG1BSlIwUm5EeWVsQjRadFNOeXJadGdGRWlDZzd1QklOZDRjVFdxdTRoakZVLU9sOHNkUjNOUHNkdTZVWER1ZFE4Q0lpQjBvN3kyVUdJSzQ3OGNwcDRGVkJXb3Nua1JNTndDU3Bfa0pjOGNidkx4ckVhUFhjWERIMFdOQmhXTlhB?oc=5` — It’s AI 0, German Philosophers 1
-  6. `link:https://news.google.com/rss/articles/CBMitwFBVV95cUxQRmlDdXhrR2VhUFlYLXFkR3JtSzlGYTZ2Sng0SUNucWQ3bmt3bGtyLUNoYnFOR3luc1FhdFFTTG5NdVAzdm1nay1iSE1RU3FKd0pmZ2JrYURHcV9XYWJwd3h1cjZxUURqRXl3RWxZUkplOU9vWU1lQUY2ai1zOUc1T010V2oxak1xSmJLR1ZNRk9Sd1NtRFFfNWFQR214UF9TN1R5UDFNOWl4aF93T0kwRi1nbTFwUU0?oc=5` — US fines Air France, KLM over flights in prohibited Iraqi airspace
-  7. `link:https://hadea.ec.europa.eu/calls-proposals/advancing-interdisciplinary-data-driven-research-biodiversity-health-interface-under-one-health_en` — Advancing interdisciplinary, data-driven research at the biodiversity- health interface under a One Health approach
-  8. `link:https://news.google.com/rss/articles/CBMi1wFBVV95cUxPRzYwN19LT2VwY1NpRHgxUDVjQ3ZBZWRVNWZUOTVYYTdlVDNwcVVsUEQ2bmhUSDV1Wk44U3FvczlXVTVpYVdvOEotbGNlYlJpeG5LSmtreXFCLXhkY2l4SkRyZUdJSER6cl9VempLZzJtSXFoajlsQ3YtdmVjZ3ZuX2ltWHJGTGRJN1llaHpmQmNfOC0xNHZPYS1nWjBlcHdwalRZREd1czJtRU5UYVppMDRjV0NVUnl6VkFyb2FvWmRJRHZScHA5YmVtOWVyVlQ3TVdteU1RSQ?oc=5` — Working Student European Energy & Hydrogen Policy / Power-to-X for Applications (P2X4A) (m/f/d) - jobs.euractiv.com
+  1. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxOVW9JMll3ZWtXZHIxVkhWaS1pMGlpTDZuOFhzSXZFUElrbWNRV1FsUENVX2U4Z1pfWGFINnJEcDl6ODJZdmV2TVYxWEt1RFpndXkzZVgxZlFaSHhSbk1IbnFJYVZPUF90RVRMenRiT3owOHZ4OVk4bUFBa21GVHVwUFZ3VkY?oc=5` — Starlink saga shows why Europe must catch up in space — recovery attempt 3/3
+  2. `link:https://news.google.com/rss/articles/CBMifkFVX3lxTE9QcC1fVmdQazFBTlBSYndRcloyak4tblNHMmkzalE2cHN1SS16VTFzNUpuaEY4MkRWSmN2RnNJME42M0wwZkJFS3BqenRfWjVmNlFMcXQyQWRXdl9OeVpoR1pQelV6RjA5UWRfUEJ3M1B3el9FNllHR0VLVWRIdw?oc=5` — Electrification of European industry - Opportunities, economic barriers, and the role of flexibility — recovery attempt 3/3
+  3. `link:https://news.google.com/rss/articles/CBMisgFBVV95cUxNMGVld1N2QmdhVk5lMlZod0l5WldwVzFpUDlxUXUtOG8tZHZnY3dmUVFTYXNlWDltNmxKazQ1TWZBczVHVEx5MTBxZTNYcjdlVTc4Rm1vVzlJYkVnNEdNdVpjZXpOdzItVXJUcEl2aWR1cDNNMW1MMWRKaUV4UE9IUXlBQl8wMl9RUm9oUnl0QURCSndoaklfTTJzVHQzaFFvS1A1MmlFTVVvQUwySE9rTGVn?oc=5` — Germany’s Idle Nuclear Plants Eye New Life as AI Data Centers — recovery attempt 2/3
+  4. `link:https://news.google.com/rss/articles/CBMioAFBVV95cUxOOVZ4NDNoWW5yOXpfTlhXWHhHODY1T1dmdmNsUFhmd1N5akpxM0JGV0dWcnBqR0ZaQ25FOWhnM0FmVnVqZUNpT3JkV0xKYjdYbjF6aVdJNUJuaFcwZFhYMEJGbzk3VXdaLU9sZkM3aHZVellwNjVYUWdmUW5FblBEX29jRHhRcUthT01iVDc0ZldKVmpuMFU5NnUwVjNNZVFj?oc=5` — Europe must escape its reliance on American satellites — recovery attempt 3/3
+  5. `link:https://news.google.com/rss/articles/CBMixAFBVV95cUxOaHI3NWcybGxrVURoVHVKRVNXQlNjQWd1bjdDNktPLUFMMG9PLVJMSUdheWpPYXZuS3hHRFZsQXMxU3h2amtidkVxekFQMVZpZ2ZWbVdnZWFOaVB0LXBUX045aEhfNlFTdEFMRXNXQ0ZqbnoyaHpxTXItMzZCRjZuTzB0T2luRmIyV0RaOGhrTktWdnBTbENJY2paZUg0UGdWbUwyUmQ1MmIyOUFXcnNTR0tnYk5TUHhJTTFFZkhOMWhrNXRF?oc=5` — EU budget rows create ‘real risk of research cuts’ — recovery attempt 3/3
+  6. `link:https://news.google.com/rss/articles/CBMi0gFBVV95cUxPS0RpTk9YLWhjLW5iekRUemJkY05UOExGUzhyVDM5Vi1aTW5xTmtYc0lueU5CSy1TR0FGdXZ4bUFNbmNMcVY1VVd6eTVHTmp4UUM4RzM1V0E3TVQxVHZsb0gwMEppeFVodTVkQ3AzbU5yZmR2aVhpUXdrY0c3bFBBVjNuSUhhYlJVMkgwUnRtQTcwUWFUOXVmZVdYUUlzLTNnejl3WkllWjZjLVNERldQeE9QbjVBZ1YxMGYyLTR6NTliMDhUV0VPRnY2MGtUc2l4ZWc?oc=5` — Research groups warn against oversized EU R&I partnerships — recovery attempt 3/3
+  7. `link:https://news.google.com/rss/articles/CBMiogFBVV95cUxNWXFqdkNNWHFLLTNFOXlPOU8xei11Q0ZENTNldXQ1cFNTcXZkYmUydlhqcV8xRXcwempVRlZyLWJBUEgtZFN0OWljX1RmNEsyNjZZakRObnRkZ0NCVGtnd3prT1dJYUw4Z0F6Z2Q5dlRDZmZsZThwb2txdXN1YU5LNnphU3AtLXZRazNUcUJJcVpiNkFNUGFvOVNCLTcza1dOZnc?oc=5` — European CEOs warn against surrendering frontier AI to US and China — recovery attempt 3/3
+  8. `link:https://news.google.com/rss/articles/CBMi0AFBVV95cUxQSmQwRDRsSWF2MlRVb01PdXB4ZE9MWUtNQnBJXzZzZTUySWFoS18xbXZXN18yMXlTU1pmTjIxRXlIa2kzZTd3MFhHZnI2T2NINEJ1MFN2YUxUSm03TkdUOE52TFdsbDMtSndtZ1hqUTRHb09ncUdQOFZUWWk4R1BCYW5tN3F6bEtjbWJKb29UX0pmdkVWcG5mUGp0RWtkU1hwQm5VLWZvaTJzWTNrb3B2NGh3bXdTUlc4UFJ1QnpSWjdlRkRIN0hDNEM0TDNUTUla?oc=5` — Should Europe be more regional in its research and innovation? — recovery attempt 3/3
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261024T120229Z-7839af9576b7`
+- Current package: `worker-b-20261024T124131Z-1cbe04c3fc2f`
 - Assigned unresolved records: **36**
-  1. `historical:id:bea9c72856f3b6e5` — Secure Network Intelligence – better resilience for critical infrastructure | VTT
-  2. `historical:id:ff9a54d20dabce60` — The Swedish Research Council’s recommendations for the EU’s framework programme FP10
-  3. `historical:id:f3a2dac9e7453ac7` — India’s Health Diplomacy: Rewards for Global Health Security
-  4. `historical:id:55196f5a54029016` — How citizen science is shaping European technology policy around home-appliance repair
-  5. `historical:id:7efe8cb5bef255ac` — Gen-4 Engineering Research Centers
-  6. `historical:id:a6bf9f2cfd6c9517` — EU’s Global Gateway Initiative Unlocks New Opportunities for Education and Research in ASEAN
-  7. `historical:id:96d2b74807741141` — EU, ASEAN team up to boost educational and research ties with EUR 9.3 million initiative
-  8. `historical:id:7b2a05c067704832` — Cybersecurity AND Digital Sovereignty: an Analysis OF National Data Governance Capacity in the GLOBAL Platform Era: A Literature Review
+  1. `historical:id:8ec142907edd198f` — Business Finland Technology Transfer Initiative, Final Report
+  2. `historical:id:8cc870859cff2976` — Strategic interplay - Combine the strengths of the Netherlands and the EU for greater research and innovation impact | Adviesraad voor wetenschap, technologie en innovatie
+  3. `historical:id:394dc6aa7b7dc130` — Promoting Gender Equality in Research Funding
+  4. `historical:id:cb50228671ac23cb` — France and Germany: Towards a Common Strategy on Digital Health
+  5. `historical:id:209cab6667c84237` — EU Space Strategy for Security and Defence
+  6. `historical:id:0aa8a3329c4b8fce` — Germany’s new China policy – European Council on Foreign Relations
+  7. `historical:id:c95e37d3794221e5` — COST at MSCA 2021: Addressing political challenges and fostering balanced mobility flows - COST
+  8. `historical:id:9b75a2b800248795` — Consultation on digital transformation now open! - ECAS
   - … plus 28 more in the package manifest
 
 ### Worker SINGLE
