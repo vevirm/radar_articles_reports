@@ -7,39 +7,37 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **3284** (Main **1654** + Historical **1630**)
-- Automatic queue still needing V2 verification: **149** (Main **3** + Historical **146**)
-- Currently assigned to workers: **107** (Main **3** + Historical **104**)
+- Automatic queue still needing V2 verification: **155** (Main **3** + Historical **152**)
+- Currently assigned to workers: **51** (Main **3** + Historical **48**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **44**
-- Automatic queue pending and not yet assigned: **42**
+- Automatic queue pending and not yet assigned: **104**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261024T134451Z-b75abd4f6d22`
-- Assigned unresolved records: **36**
-  1. `link:https://doi.org/10.1080/23322969.2026.2751120` — Emerging research security approaches: organisational arrangements at three European universities
-  2. `link:https://news.google.com/rss/articles/CBMiuAFBVV95cUxOYW51NDhUc0ltZ0ZxY2xXRUw5S0F6Mm01WVhLQk53ODRmZGlJd2VIVUlQb3BabVFZT25pSUozR1RKNDA0WnlHdTZUcHRHbDFKMUpzYVo0RW9wVmpudXRQYkxyd3FoeV92TmtHYVZUdnBxTXp5OGE3X3N0akdYaW94WXFYX2stQXJwMFJRQ0U4WHo3UDhhUUdCX1VCSzUyX1B2Z3R3OFRXbTBnUDNfbkFYb0VzNm1ncDBm?oc=5` — Finnish Grid Forecasts 40% Jump in Power Demand Led by Data Centers
-  3. `link:https://news.google.com/rss/articles/CBMijgFBVV95cUxNZDZMM19MRG1BSlIwUm5EeWVsQjRadFNOeXJadGdGRWlDZzd1QklOZDRjVFdxdTRoakZVLU9sOHNkUjNOUHNkdTZVWER1ZFE4Q0lpQjBvN3kyVUdJSzQ3OGNwcDRGVkJXb3Nua1JNTndDU3Bfa0pjOGNidkx4ckVhUFhjWERIMFdOQmhXTlhB?oc=5` — It’s AI 0, German Philosophers 1 — recovery attempt 3/3
-  4. `historical:id:dd7feef75f937a9c` — Applying Evaluation Thinking and Practice to Foresight Evaluation — recovery attempt 3/3
-  5. `historical:id:93e1a10386196107` — From 5G hardware to apps and data: How Huawei has adapted to survive – European Council on Foreign Relations
-  6. `historical:id:d6350a1cf9d493cd` — Mission incomplete: Layered practices of monitoring and evaluation in Swedish transformative innovation policy
-  7. `historical:id:81a4fd557d09c581` — Horizon Europe Calls 2023 - Destination 3. World-leading data and computing technologies
-  8. `historical:id:9318d2233d9c9c2b` — Horizon Europe Calls 2023 - Destination 2. Increased autonomy in key strategic value chains for resilient industry (two-stage)
-  - … plus 28 more in the package manifest
+- Current package: `worker-a-20261024T143355Z-9354ea6ec99e`
+- Assigned unresolved records: **8**
+  1. `historical:id:6519580514fcea99` — Enhancing SME innovation across European regions: Success factors in EU-funded open innovation networks
+  2. `historical:id:3afc80dd79bf6210` — Funding Opportunities for Engineering Research in Microelectronics and Semiconductors
+  3. `historical:id:b98b766a0e87c1c9` — The effects of limited exhaustibility of knowledge and geographical distance on the quality of R&D collaborations: The European evidence 2000–2012
+  4. `historical:id:e20c0f7ad8269301` — Guidelines on the export of cyber-surveillance items under Article 5 of Regulation (EU) No. 2021/821
+  5. `historical:id:9e4641a70c3fb8b6` — Towards research funding: Polish NCP Network present benefits of COST - COST
+  6. `historical:id:607378999a5cda3b` — Integrating crisis learning into futures literacy – exploring the “new normal” and imagining post-pandemic futures
+  7. `link:https://news.google.com/rss/articles/CBMijgFBVV95cUxNZDZMM19MRG1BSlIwUm5EeWVsQjRadFNOeXJadGdGRWlDZzd1QklOZDRjVFdxdTRoakZVLU9sOHNkUjNOUHNkdTZVWER1ZFE4Q0lpQjBvN3kyVUdJSzQ3OGNwcDRGVkJXb3Nua1JNTndDU3Bfa0pjOGNidkx4ckVhUFhjWERIMFdOQmhXTlhB?oc=5` — It’s AI 0, German Philosophers 1 — recovery attempt 3/3
+  8. `link:https://doi.org/10.1080/23322969.2026.2751120` — Emerging research security approaches: organisational arrangements at three European universities
 
 ### Worker B
-- Current package: `worker-b-20261024T134500Z-6cae55dc4731`
-- Assigned unresolved records: **36**
-  1. `historical:id:394dc6aa7b7dc130` — Promoting Gender Equality in Research Funding
-  2. `historical:id:cb50228671ac23cb` — France and Germany: Towards a Common Strategy on Digital Health
-  3. `historical:id:209cab6667c84237` — EU Space Strategy for Security and Defence
-  4. `historical:id:0aa8a3329c4b8fce` — Germany’s new China policy – European Council on Foreign Relations
-  5. `historical:id:c95e37d3794221e5` — COST at MSCA 2021: Addressing political challenges and fostering balanced mobility flows - COST
-  6. `historical:id:9b75a2b800248795` — Consultation on digital transformation now open! - ECAS
-  7. `historical:id:ed6cc2fba8966310` — Refrain from Creating New IP Rights for Machine-Generated Data, ALLEA Asks EU Institutions - ALLEA
-  8. `historical:id:e8d95a4f9e1a17e6` — Repositioning People in Creative Futures: A Method to Create Sound Advice with Exploratory Scenarios
-  - … plus 28 more in the package manifest
+- Current package: `worker-b-20261024T143359Z-4f7978b7aa89`
+- Assigned unresolved records: **8**
+  1. `link:https://news.google.com/rss/articles/CBMiuAFBVV95cUxOYW51NDhUc0ltZ0ZxY2xXRUw5S0F6Mm01WVhLQk53ODRmZGlJd2VIVUlQb3BabVFZT25pSUozR1RKNDA0WnlHdTZUcHRHbDFKMUpzYVo0RW9wVmpudXRQYkxyd3FoeV92TmtHYVZUdnBxTXp5OGE3X3N0akdYaW94WXFYX2stQXJwMFJRQ0U4WHo3UDhhUUdCX1VCSzUyX1B2Z3R3OFRXbTBnUDNfbkFYb0VzNm1ncDBm?oc=5` — Finnish Grid Forecasts 40% Jump in Power Demand Led by Data Centers
+  2. `historical:id:dd7feef75f937a9c` — Applying Evaluation Thinking and Practice to Foresight Evaluation — recovery attempt 3/3
+  3. `historical:id:93e1a10386196107` — From 5G hardware to apps and data: How Huawei has adapted to survive – European Council on Foreign Relations
+  4. `historical:id:d6350a1cf9d493cd` — Mission incomplete: Layered practices of monitoring and evaluation in Swedish transformative innovation policy
+  5. `historical:id:81a4fd557d09c581` — Horizon Europe Calls 2023 - Destination 3. World-leading data and computing technologies
+  6. `historical:id:9318d2233d9c9c2b` — Horizon Europe Calls 2023 - Destination 2. Increased autonomy in key strategic value chains for resilient industry (two-stage)
+  7. `historical:id:f97b8ab8ff367f99` — Horizon Europe Calls 2023 - Destination 2. Increased autonomy in key strategic value chains for resilient industry
+  8. `historical:id:0800a03ac3376699` — Horizon Europe Calls 2023 - Destination 1. Climate neutral, circular and digitised production
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
