@@ -568,6 +568,18 @@ INSTRUCTIONS += "\n\n## CONTINUATION IS MANDATORY, NOT A RESEARCH INVENTORY\n\nW
 
 INSTRUCTIONS += """
 
+## COUNTRY SCOPE VALIDATION (MANDATORY)
+
+Never use scope.level = national. For a named EU member country use
+scope.level = member_state AND a nonempty scope.countries containing the
+correct uppercase ISO 3166-1 alpha-2 code (e.g. DE, FI, NL).
+Associated-country scope likewise requires an identified country. Never
+invent a country code. Use only scopes in claims_vocabulary.json.
+
+"""
+
+INSTRUCTIONS += """
+
 ## TWO-LANE PARALLEL OPERATING CONTRACT — ALWAYS APPLIES
 
 The GitHub workflow prepares TWO independent worker ZIPs, Worker A and Worker B, for SIMULTANEOUS execution in separate research sessions/agents. A worker must NEVER wait for the other, never perform the other lane's assignments, and never claim the other lane is complete. The full run is only accounted for when BOTH lane submissions independently pass their checks. For the standard 36+36 run this means TWO validated JSON files, each containing exactly 36 results: 72 source-researched decisions in total. Each lane ZIP is self-contained; the other lane must receive its OWN ZIP.

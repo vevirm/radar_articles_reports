@@ -116,6 +116,33 @@ def _stable_claim_id(record_key_value: str, ordinal: int) -> str:
     return f"c:{digest}:{ordinal}"
 
 
+# Only this common, unambiguous legacy alias is repaired automatically.
+# Missing country codes are never inferred by the importer.
+EU_MEMBER_CODES = frozenset({
+    "AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE",
+    "GR", "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT",
+    "RO", "SK", "SI", "ES", "SE",
+})
+
+
+def normalize_claim_scope_alias(claim: dict[str, Any]) -> bool:
+    """Canonicalize 'national' only for explicitly identified EU members.
+
+    All other non-vocabulary scopes still fail normal claim validation. No
+    geographic identity is guessed from a headline or publication venue.
+    """
+    scope = claim.get("scope")
+    if not isinstance(scope, dict) or clean(scope.get("level")) != "national":
+        return False
+    countries = scope.get("countries")
+    if not isinstance(countries, list) or not countries:
+        return False
+    if any(not isinstance(country, str) or country not in EU_MEMBER_CODES for country in countries):
+        return False
+    scope["level"] = "member_state"
+    return True
+
+
 def normalize_v2_claims(
     raw: dict[str, Any], *, key: str, row: dict[str, Any], is_historical: bool,
     strand: str, decision: str, qualification: str, claims_required: bool,
@@ -150,6 +177,8 @@ def normalize_v2_claims(
             problems.append(f"claims[{idx-1}] must be an object")
             continue
         claim = copy.deepcopy(draft)
+        if normalize_claim_scope_alias(claim):
+            print(f"NORMALIZE claim scope for {key[:90]}: national -> member_state (explicit EU country code)")
         # Reject conflicting system-owned fields if a model supplies them anyway,
         # then overwrite with canonical repository values.
         expected_system = {
