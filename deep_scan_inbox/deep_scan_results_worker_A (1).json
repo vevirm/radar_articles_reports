@@ -1,0 +1,612 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-a-20261024T143355Z-9354ea6ec99e",
+  "results": [
+    {
+      "record_key": "historical:id:6519580514fcea99",
+      "source_hash": "d569dd49",
+      "identity_hash": "d04bba682f89215c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI 10.1016/j.techfore.2024.123207 matched Elsevier article title, authors and 2024 publication."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1016/j.techfore.2024.123207 and publisher article 123207 identify the study."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Manchester Research Explorer provided detailed study design and conclusions; Elsevier publisher supplied highlights and abstract."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0040162524000039",
+            "title": "Marullo, Shapira and Di Minin, Technological Forecasting and Social Change 201 (2024) 123207",
+            "evidence_used": true
+          },
+          {
+            "kind": "institutional_repository",
+            "url": "https://research.manchester.ac.uk/en/publications/enhancing-sme-innovation-across-european-regions-success-factors-/",
+            "title": "University of Manchester institutional publication and substantive study abstract",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Cross-checked publisher DOI, 2024 journal volume and three institutional author identities; substantive abstract and highlights examined. The scanner appended an erroneous A to Shapira name."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "KEEP A Route 3: empirical analysis of Horizon 2020 Fast Track to Innovation applications across European regions directly measures EU innovation funding and network selection mechanisms."
+      },
+      "metadata_correction": {
+        "fields": {
+          "authors": "Cristina Marullo; Philip Shapira; Alberto Di Minin"
+        },
+        "unset": [],
+        "reason": "Publisher and University of Manchester list Philip Shapira, not “Philip Shapira A”."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical duplicate was supplied or substantiated."
+      },
+      "reader_title": "Why EU-funded SME innovation networks win support",
+      "reader_what": "EU funding success correlated with regional innovation strength, partner technological distance, and nonlinear organisational distance.",
+      "reader_why": "The observed associations identify regional and network-design factors that matter for EU innovation-funding selection.",
+      "reader_more": "Researchers analysed participant-level applications to Horizon 2020 Fast Track to Innovation in 2018–2021. Network composition and location were associated with award likelihood. The study identifies mixed effects of partner heterogeneity and cautions against assuming diversity always improves outcomes.",
+      "deep_analysis": {
+        "work_kind": "empirical innovation-policy study",
+        "research_question": "What predicts EU Fast Track to Innovation funding of SME-led open innovation networks?",
+        "main_finding": "Regional innovation performance and technological and organisational partner distance correlate with funding success.",
+        "method_or_basis": "Participant-level Horizon 2020 programme application data (2018–2021); comparative statistical analysis. ",
+        "qualification": "Observational programme application data and noncausal associations; the study does not establish funding effects on firm performance.",
+        "radar_relevance": "European R&I research-funding allocation, networks and regional innovation disparities (A Route 3).",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "innovation.regional_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Marullo, Shapira and Di Minin",
+            "class": "university_group"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2024-01-16",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Observational programme application data and noncausal associations; the study does not establish funding effects on firm performance.",
+          "text": "EU-funded SME open-innovation network success varied with regional innovation performance and partner characteristics.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:3afc80dd79bf6210",
+      "source_hash": "9a6dfb3c",
+      "identity_hash": "84a7b01bbe1a7edf",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original NSF.gov NSF 24-038 archived letter read directly; identifies ENG US proposal call."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary",
+            "url": "https://www.nsf.gov/funding/opportunities/dcl-funding-opportunities-engineering-research-microelectronics/nsf24-038",
+            "title": "NSF 24-038 Dear Colleague Letter, 28 December 2023",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Archived first-party 28 December 2023 NSF document read with subject areas and US CHIPS and Science Act framing."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_NOT_MET",
+        "reason": "DROP A: NSF 24-038 encourages US microelectronics engineering proposals. Checked A strategic Route 1, European R&I trajectory Route 2 and systemic Route 3: the letter documents a US domestic programme only, no substantive European system or collaboration evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical duplicate was supplied or substantiated."
+      },
+      "reader_title": "US semiconductor funding notice",
+      "reader_what": "The US NSF invited engineering research proposals in microelectronics and semiconductor technology.",
+      "reader_why": "",
+      "reader_more": "This archived Dear Colleague Letter lists US National Science Foundation research interests and proposal routes. It contains no analysis of European research and innovation capacity, mobility, funding or governance. Geopolitical semiconductor relevance alone cannot supply a supported EU connection.",
+      "deep_analysis": {
+        "work_kind": "US funding opportunity",
+        "research_question": "What engineering semiconductor research does the US NSF solicit?",
+        "main_finding": "NSF encouraged US-based semiconductor and microelectronics research proposals.",
+        "method_or_basis": "Official NSF Dear Colleague Letter 24-038, issued 28 December 2023.",
+        "qualification": "It is an invitation, not evidence of awards or research outcomes.",
+        "radar_relevance": "European relevance not substantive under A Routes 1–3.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:b98b766a0e87c1c9",
+      "source_hash": "f6fc0492",
+      "identity_hash": "910e9d330c18c0c4",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Springer open-access full article at DOI 10.1007/s00191-023-00831-9 examined, including econometric study of EPO co-patents."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Publisher confirms Guido Pialli, Journal of Evolutionary Economics 33, 1125–1169, published 14 August 2023."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s00191-023-00831-9",
+            "title": "Pialli (2023), Journal of Evolutionary Economics: full open-access article",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full peer-reviewed HTML text and methodological introduction reviewed; dated published 14 August 2023."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "KEEP A Route 3: peer-reviewed European patent co-ownership study measures cross-border research collaboration and how partner geography relates to innovation quality."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical duplicate was supplied or substantiated."
+      },
+      "reader_title": "Cross-border R&D partnerships and patent quality",
+      "reader_what": "European joint-patent analysis associates cross-border collaboration with more highly cited patents and a U-shaped distance relationship.",
+      "reader_why": "Partner distance and knowledge recombination can inform European cross-border collaboration and innovation-policy design.",
+      "reader_more": "Using co-owned European Patent Office applications from 2000–2012, the paper tests patent quality against knowledge characteristics and geography. The author reports positive cross-country collaboration associations and a U-shaped relationship with physical distance. Alternative model specifications are reported, without establishing that distance causes outcomes.",
+      "deep_analysis": {
+        "work_kind": "empirical economics research",
+        "research_question": "How do cross-border co-invention and partner distance relate to quality of European joint patents?",
+        "main_finding": "Cross-border co-patenting and both very near and far partner distance associate with higher patent quality.",
+        "method_or_basis": "Econometric analysis of European Patent Office joint-patent applications, forward citations and robustness checks.",
+        "qualification": "Joint patent applications at the European Patent Office in 2000–2012; patent citations are a proxy for quality, not causal proof.",
+        "radar_relevance": "European R&I collaboration-network performance under A Route 3.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Guido Pialli",
+            "class": "university_group"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2023-08-14",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Joint patent applications at the European Patent Office in 2000–2012; patent citations are a proxy for quality, not causal proof.",
+          "text": "European co-owned patents show higher citation-based quality with cross-country collaboration and a U-shaped distance pattern.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:e20c0f7ad8269301",
+      "source_hash": "7a4c7735",
+      "identity_hash": "8611e4f12e6b5dad",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "European Commission 31 March–9 June 2023 consultation page inspected; describes draft guidance and Article 5 notification."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary",
+            "url": "https://policy.trade.ec.europa.eu/consultations/guidelines-export-cyber-surveillance-items-under-article-5-regulation-eu-no-2021821_en",
+            "title": "EU Commission consultation on draft Article 5 cyber-surveillance export guidelines",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source is an official EU consultation about 2023 draft guidelines. It should not be relabelled a completed analytical report or an adopted legislative measure."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_NOT_MET",
+        "reason": "DROP A: official consultation is a procedural trade/export-control page, not a substantive analytical evidence product on European R&I. Checked A Route 1 technology-security relation and Routes 2–3 systemic research evidence; it contains no measured research or innovation-system findings. It was not an adopted guideline in 2023."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical duplicate was supplied or substantiated."
+      },
+      "reader_title": "Consultation on cyber-surveillance export guidance",
+      "reader_what": "The Commission sought stakeholder input on future Article 5 export guidance under the EU Dual-Use Regulation.",
+      "reader_why": "",
+      "reader_more": "The webpage opens consultation on exporters’ duties for non-listed cyber-surveillance products. Academic and research institutions are named among invitees, but that does not make this an R&I research study. The underlying export-control consultation is not a substantive historical Strand A evidence product.",
+      "deep_analysis": {
+        "work_kind": "public consultation notice",
+        "research_question": "What exporter guidance should accompany Article 5 of EU Regulation 2021/821?",
+        "main_finding": "Commission opened a consultation, subsequently closed, on proposed export guidance.",
+        "method_or_basis": "Official European Commission consultation page, not a completed evidence report.",
+        "qualification": "Consultation status cannot be equated with adoption or impact of final guidelines.",
+        "radar_relevance": "Fails A Routes 1–3 systemic evidence-product gate.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:9e4641a70c3fb8b6",
+      "source_hash": "8517b208",
+      "identity_hash": "f758477898bb0909",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original COST news page matched in package first-party text and web indexed official body content; describes 21 November 2017 meeting."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "COST site indexed original official November 2017 article and dated news archive; direct interactive fetch was restricted, cached first-party text substantively inspected."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_primary",
+            "url": "https://www.cost.eu/towards-research-funding-polish-ncp-network-present-benefits-of-cost/",
+            "title": "COST Association news report on Polish NCP meeting, 23 November 2017",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Read 1,946-character scanner-preserved first-party source text and official index reproducing the actual recap; site direct fetch restricted."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SCOPE_NOT_MET",
+        "reason": "DROP A: official COST event recap reports a presentation and benefits promotion, not a systematic empirical or analytical European R&I evidence product. A Routes 1–3 were checked: references to COST collaboration and widening are programme description, not verified study findings."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical duplicate was supplied or substantiated."
+      },
+      "reader_title": "Polish COST networking event recap",
+      "reader_what": "COST described how researchers could join European collaboration networks at a Polish NCP meeting.",
+      "reader_why": "",
+      "reader_more": "The brief 2017 item summarises presentations during a meeting in Brussels and promotional claims about COST participation. It contains no evaluation, dataset or systematic study of researcher networking and funding outcomes. Useful event history alone does not meet historical Strand A.",
+      "deep_analysis": {
+        "work_kind": "institutional event news",
+        "research_question": "What COST networking opportunities were presented to Polish National Contact Points?",
+        "main_finding": "COST reported a briefing and panel discussion about researcher networking and Framework Programme participation.",
+        "method_or_basis": "Official COST Association post and date corroborated by COST news listing.",
+        "qualification": "Promotional statements are not independent evidence of downstream participation or success.",
+        "radar_relevance": "Fails evidence-product gate for A Route 3; no substantive Route 1/2 analysis.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:607378999a5cda3b",
+      "source_hash": "2c5966eb",
+      "identity_hash": "641e175efcbbf2e8",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "DOI 10.1108/OTH-10-2021-0117 matched article and original 2022 institutional manuscript; package PDF excerpt (24,000 characters) examined."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "Emerald and University of Turku both identify Karjalainen, Mwagiru, Salminen and Heinonen as authors and 2022 publication."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Open University of Turku author/institutional full article copy and publisher methods/findings verify content."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "institutional_repository",
+            "url": "https://www.utupub.fi/bitstream/handle/10024/161826/10-1108_OTH-10-2021-0117.pdf?isAllowed=y&sequence=1",
+            "title": "University of Turku hosted open-access Karjalainen et al. full article",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_article",
+            "url": "https://doi.org/10.1108/OTH-10-2021-0117",
+            "title": "Emerald Publishing, On the Horizon 30(2), pages 47–56, DOI 10.1108/OTH-10-2021-0117",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full author-deposited PDF excerpt read; independent Emerald publication confirms On the Horizon, NOT Futures. Emerald first published 11 April 2022."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_TRANSFERABLE_METHOD",
+        "reason": "KEEP B: adapts causal layered analysis into experimental online futures-literacy workshops and explicitly integrates crisis learning/unlearning as a transferable facilitation approach. Geographic scope is immaterial for B."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "On the Horizon",
+          "date": "2022-04-11"
+        },
+        "unset": [],
+        "reason": "Publisher Emerald identifies On the Horizon 30(2) and 11 April 2022 online article, whereas scanner called journal Futures and used 16 May."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical duplicate was supplied or substantiated."
+      },
+      "reader_title": "Crisis learning as a futures-literacy method",
+      "reader_what": "Virtual workshops adapted causal layered analysis to question pandemic assumptions and explore alternative post-crisis futures.",
+      "reader_why": "Facilitators can use layered assumptions and crisis unlearning to support structured thinking about possible futures.",
+      "reader_more": "The authors designed online futures workshops during the COVID-19 pandemic. Participants reflected on crises through causal layered analysis and imagined a different normal. They propose integrating crisis learning into futures literacy, but do not establish that the method measurably improves preparedness.",
+      "deep_analysis": {
+        "work_kind": "futures-literacy methodological paper",
+        "research_question": "How can facilitators combine pandemic crisis learning with futures-literacy practice?",
+        "main_finding": "Causal-layered-analysis workshops provide an adapted way to surface and question crisis assumptions.",
+        "method_or_basis": "Experimental virtual workshops, adaptation of causal layered analysis and reflective discussion.",
+        "qualification": "Exploratory virtual workshops during COVID-19; authors propose an educational approach, not empirically validated crisis-response effectiveness.",
+        "radar_relevance": "Reusable facilitation method for foresight and futures literacy (B).",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Karjalainen, Mwagiru, Salminen and Heinonen",
+            "class": "university_group"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2022-04-11",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Exploratory virtual workshops during COVID-19; authors propose an educational approach, not empirically validated crisis-response effectiveness.",
+          "text": "The authors demonstrated virtual futures-literacy workshops combining crisis learning with adapted causal layered analysis.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMijgFBVV95cUxNZDZMM19MRG1BSlIwUm5EeWVsQjRadFNOeXJadGdGRWlDZzd1QklOZDRjVFdxdTRoakZVLU9sOHNkUjNOUHNkdTZVWER1ZFE4Q0lpQjBvN3kyVUdJSzQ3OGNwcDRGVkJXb3Nua1JNTndDU3Bfa0pjOGNidkx4ckVhUFhjWERIMFdOQmhXTlhB?oc=5",
+      "source_hash": "f7cc5c40",
+      "identity_hash": "a0ec56cdddde1dc3",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Google News RSS link supplied for Bloomberg opinion story provided no article text; publisher article is access-limited."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Exact title search found Bloomberg Opinion’s own 22 Oct post and author Andreas Kluth’s original column summary."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Search for Andreas Kluth, AI 0 German Philosophers 1, 2026 located Kluth author post describing philosopher Rüdiger Safranski."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Bloomberg Opinion official social account corroborated identity and dated column; author first-person text inspected as substantive excerpt."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Distinct phrase “ontological contest German philosophers” retrieved Bloomberg Opinion release and author context; unrelated AI policy events were not substituted."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "author_public_excerpt",
+            "url": "https://www.linkedin.com/posts/andreas-kluth-0b7822179_its-ai-0-german-philosophers-1-activity-7518980328548511744-PSXQ",
+            "title": "Author Andreas Kluth directly describes Bloomberg opinion column on AI and German philosophy",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_social",
+            "url": "https://x.com/opinion/status/2113212533750325381",
+            "title": "Bloomberg Opinion account confirms column and 22 October 2026 identity",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final identity work: Google News link, publisher’s dated account, Bloomberg exact title, author Andreas Kluth’s original synopsis, title fragments and gift-link discovery checked. Recovered first-party excerpt is sufficient to exclude a C policy signal."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "C_NO_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "DROP C: source-grounded author/publisher accounts show an opinion reflection on AI and philosopher Rüdiger Safranski, not any real dateable EU research-funding, capability, policy, infrastructure or strategic-technology decision. The German nationality of a philosopher does not create a substantive R&I link."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical duplicate was supplied or substantiated."
+      },
+      "reader_title": "Philosophy column on AI and being human",
+      "reader_what": "A Bloomberg columnist discusses Rüdiger Safranski’s argument about human identity in an age of intelligent AI.",
+      "reader_why": "",
+      "reader_more": "The author describes a philosophical essay about what makes humans distinctive relative to artificial intelligence. This is not an announcement or evidence of a new European research or innovation policy, technological capability or funding action. The publisher article is restricted; the author’s own substantive synopsis grounds the exclusion.",
+      "deep_analysis": {
+        "work_kind": "opinion column",
+        "research_question": "How does German philosophy address the human meaning of advanced AI?",
+        "main_finding": "Column discusses Safranski and longstanding philosophical debates about scientific humiliation and human identity.",
+        "method_or_basis": "Author’s contemporaneous substantive first-person column synopsis and Bloomberg publisher headline confirmation.",
+        "qualification": "Article body paywalled; decision is limited to the author-verified topic, without asserting unseen arguments.",
+        "radar_relevance": "No dateable substantive EU R&I development or demonstrated European R&I bridge under C.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/23322969.2026.2751120",
+      "source_hash": "879505a7",
+      "identity_hash": "46ad6c03ec424775",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "DOI URL https://doi.org/10.1080/23322969.2026.2751120 led to blocked Taylor & Francis full-text access (403); no substantive article."
+          },
+          {
+            "step": "doi",
+            "outcome": "blocked",
+            "note": "10.1080/23322969.2026.2751120 DOI resolved in scanner metadata but public resolver and publisher full-text/abstract not accessible via browsing."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "limited",
+            "note": "Exact quoted title search “Emerging research security approaches: organisational arrangements at three European universities” returned Lund bibliographic records but no abstract/findings."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "limited",
+            "note": "Shih Sanchez Cobaleda Vella 2026 title/abstract searches found university author and publication listings only, no article substance."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "limited",
+            "note": "Checked Taylor & Francis current journal issue listing and Lund University research portal and LUP institutional repository; peer-reviewed in-press identity confirmed, article/abstract unavailable."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "limited",
+            "note": "Searched DOI fragment 2751120 and alternative research-security three-university arrangements phrases; retrieved unrelated security papers or bibliography, no matching substantive text."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "DOI publisher blocked (403). Lund portal author listing and institutional repository confirm title/authors and in-press publication; no abstract, methods or findings. Full recovery ladder attempted, and this record is DEFER, not inferred KEEP/DROP."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Identity verified by Lund University with title, three authors, journal and 2026 in-press status, but article body and methodological findings inaccessible after exact-title, author/year, DOI, publisher and repository searches. No defensible A Routes 1–3 judgement until substantive source is read."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No matching canonical duplicate was supplied or substantiated."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    }
+  ]
+}
