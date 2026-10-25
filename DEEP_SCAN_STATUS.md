@@ -7,8 +7,8 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **3369** (Main **1661** + Historical **1708**)
-- Automatic queue still needing V2 verification: **88** (Main **2** + Historical **86**)
-- Currently assigned to workers: **88** (Main **2** + Historical **86**)
+- Automatic queue still needing V2 verification: **106** (Main **18** + Historical **88**)
+- Currently assigned to workers: **106** (Main **18** + Historical **88**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **44**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,21 +16,21 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261025T090936Z-04774caf2baa`
-- Assigned unresolved records: **19**
-  1. `link:https://doi.org/10.1080/23322969.2026.2751120` — Emerging research security approaches: organisational arrangements at three European universities — recovery attempt 3/3
-  2. `link:https://doi.org/10.1093/9780191989117.003.0003` — Frontier Science and Technology — recovery attempt 2/3
-  3. `historical:id:42c49f023d23a794` — Digital decolonisation: The EU’s new ideas on data and artificial intelligence – European Council on Foreign Relations
-  4. `historical:id:f5ccff6700afcbfa` — Transformation or evolution?: Education 4.0, teaching and learning in the digital age
-  5. `historical:id:918a347da0104729` — Digital Investments, Data and Growth in Europe: A Framework for Analysis
-  6. `historical:id:28d6d5ebc62cd05b` — Assessing the desirability and feasibility of scenarios on eco-efficient transport: a heuristic for efficient stakeholder involvement during foresight processes
-  7. `historical:id:f66ae451afb39141` — Proximity dimensions and scientific collaboration among academic institutions in Europe: The closer, the better?
-  8. `historical:id:b9f7c46779f5b8a1` — Investigating the interplay between fundamentals of national research systems: Performance, investments and international collaborations
-  - … plus 11 more in the package manifest
+- Current package: `worker-a-20261025T180911Z-1edd5ad27ab7`
+- Assigned unresolved records: **36**
+  1. `link:https://allea.org/strategic-framework-for-ukraine-scientific-recovery-video-on-gdansk-declaration/` — A Strategic Framework for Ukraine's Scientific Recovery - Video on the Gdańsk Declaration and the Road Ahead - ALLEA
+  2. `link:https://www.interface-eu.org/publications/ai-and-national-security-australia-today-the-rest-of-the-world-tomorrow` — AI and national security: Australia today, the rest of the world tomorrow?
+  3. `link:https://allea.org/allea-leopoldina-podium-discussion-science-and-democracy/` — ALLEA Board Member Contributes to Leopoldina Podium Discussion on Science in Democracy - ALLEA
+  4. `link:https://www.interface-eu.org/publications/cn014-how-north-korean-it-workers-infiltrate-german-companies-and-espionage-financial-data-in-liechtenstein` — CN014: How North Korean IT workers infiltrate German companies and espionage financial data in Liechtenstein
+  5. `link:https://www.interface-eu.org/publications/cybersecurity-in-germany-a-240-page-hidden-object-picture` — Cybersecurity in Germany: A 240-page hidden object picture
+  6. `link:https://cerre.eu/wp-content/uploads/2026/02/CERRE_DMA@2-Towards-Stronger-Governance-and-Evaluation.pdf` — DMA@2: Towards Stronger Governance and Evaluation?
+  7. `link:https://era.gv.at/news-items/eit-launches-new-call-under-eit-higher-education-initiative-to-turn-research-into-innovation/` — EIT launches new call under EIT Higher Education Initiative to turn research into innovation
+  8. `link:https://doi.org/10.1016/j.egyr.2026.109800` — Emerging research topics on the role of innovation in the green transition in the EU
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261025T090941Z-c8f435ac17c4`
-- Assigned unresolved records: **34**
+- Current package: `worker-b-20261025T180919Z-77aa00ac9653`
+- Assigned unresolved records: **35**
   1. `historical:id:8dc382a7f4033b91` — European research development and deployment of AI
   2. `historical:id:4e342d23da20af7e` — EU-funded space R&I in previous EU Framework programmes for Research and Innovation
   3. `historical:id:ed1649ba113f82d0` — 'How Immigration is Shaping China':MERICS China Monitor
@@ -39,7 +39,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
   6. `historical:id:9c842cdcafdebabe` — Joint Statement on the Implementation of the EU-China Cooperation on Energy
   7. `historical:id:147496c851b6e66c` — Climate Barometer 2019: Finns wish to have solutions to climate crisis at the heart of policy-making | VTT
   8. `historical:id:8879e7c6fecbe375` — Overview of ethics codes and principles for AI | Rathenau Instituut
-  - … plus 26 more in the package manifest
+  - … plus 27 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
