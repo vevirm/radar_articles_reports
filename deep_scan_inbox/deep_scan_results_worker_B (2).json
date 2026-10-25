@@ -1,0 +1,2490 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-b-20261025T180919Z-77aa00ac9653",
+  "results": [
+    {
+      "record_key": "historical:id:8dc382a7f4033b91",
+      "source_hash": "b548a36c",
+      "identity_hash": "c9598a5534b39313",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Original linked record lacked sufficient matching substantive text in the supplied archive: https://digital-strategy.ec.europa.eu/en/policies/european-ai-research."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "recovered",
+            "note": "Recovered an identifiable work's publisher, official or institutional landing material at https://digital-strategy.ec.europa.eu/en/policies/european-ai-research; compared title, authors and subject."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_publisher_or_repository",
+            "url": "https://digital-strategy.ec.europa.eu/en/policies/european-ai-research",
+            "title": "European research development and deployment of AI",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered identifying publication from an external first-party publisher or research-institution record. Considered relevant strand admission tests and exclusions. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INADMISSIBLE_EVIDENCE_OR_SCOPE",
+        "reason": "A1–A3 fail completed substantive analysis gate: the page is a programme/policy inventory, not an evidence-led EU research-system finding; its newer updates cannot be backdated to 2020."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "European research development and deployment of AI",
+      "reader_what": "European Commission reference page describing EU AI research funding and initiatives",
+      "reader_why": "",
+      "reader_more": "European Commission reference page describing EU AI research funding and initiatives. Source category and scope were checked against the assigned Radar gate. A1–A3 fail completed substantive analysis gate: the page is a programme/policy inventory, not an evidence-led EU research-system finding; its newer updates cannot be backdated to 2020.",
+      "deep_analysis": {
+        "work_kind": "Publication or programme screening",
+        "research_question": "Does European research development and deployment of AI meet the assigned strand's positive admission routes?",
+        "main_finding": "European Commission reference page describing EU AI research funding and initiatives",
+        "method_or_basis": "First-party material for the named publication, report, event or programme, assessed against the assigned Radar admission routes.",
+        "qualification": "The recovered item does not independently substantiate European R&I-system evidence or a qualifying new foresight method/change.",
+        "radar_relevance": "A1–A3 fail completed substantive analysis gate: the page is a programme/policy inventory, not an evidence-led EU research-system finding; its newer updates cannot be backdated to 2020.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:4e342d23da20af7e",
+      "source_hash": "0fb6d304",
+      "identity_hash": "3f8d06cfc8bb6ce1",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary substantial_web_text captured in the package from https://defence-industry-space.ec.europa.eu/eu-space/research-development-and-innovation/eu-funded-space-ri-previous-eu-framework-programmes-research-and-innovation_en; reviewed source text (9492 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 9492 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://defence-industry-space.ec.europa.eu/eu-space/research-development-and-innovation/eu-funded-space-ri-previous-eu-framework-programmes-research-and-innovation_en",
+            "title": "EU-funded space R&I in previous EU Framework programmes for Research and Innovation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Considered relevant strand admission tests and exclusions. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INADMISSIBLE_EVIDENCE_OR_SCOPE",
+        "reason": "A1–A3 fail substantive evidence-product gate: historical programme descriptions and budgets are a funding catalogue, not an analytical study of research-system outcomes."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "EU-funded space R&I in previous EU Framework programmes for Research and Innovation",
+      "reader_what": "European Commission catalogue of previous EU space framework programmes",
+      "reader_why": "",
+      "reader_more": "European Commission catalogue of previous EU space framework programmes. Source category and scope were checked against the assigned Radar gate. A1–A3 fail substantive evidence-product gate: historical programme descriptions and budgets are a funding catalogue, not an analytical study of research-system outcomes.",
+      "deep_analysis": {
+        "work_kind": "Publication or programme screening",
+        "research_question": "Does EU-funded space R&I in previous EU Framework programmes for Research and Innovation meet the assigned strand's positive admission routes?",
+        "main_finding": "European Commission catalogue of previous EU space framework programmes",
+        "method_or_basis": "First-party material for the named publication, report, event or programme, assessed against the assigned Radar admission routes.",
+        "qualification": "The recovered item does not independently substantiate European R&I-system evidence or a qualifying new foresight method/change.",
+        "radar_relevance": "A1–A3 fail substantive evidence-product gate: historical programme descriptions and budgets are a funding catalogue, not an analytical study of research-system outcomes.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:ed1649ba113f82d0",
+      "source_hash": "3ee31a25",
+      "identity_hash": "351b32d201484d6d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary substantial_web_text captured in the package from https://merics.org/en/report/how-immigration-shaping-chinese-society; reviewed source text (24000 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 24000 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://merics.org/en/report/how-immigration-shaping-chinese-society",
+            "title": "'How Immigration is Shaping China':MERICS China Monitor",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Considered relevant strand admission tests and exclusions. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INADMISSIBLE_EVIDENCE_OR_SCOPE",
+        "reason": "A1–A3 fail substantive European scope: the study focuses on China's immigration system; European examples do not establish EU research-system evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "'How Immigration is Shaping China':MERICS China Monitor",
+      "reader_what": "MERICS report on immigration and talent trends in China",
+      "reader_why": "",
+      "reader_more": "MERICS report on immigration and talent trends in China. Source category and scope were checked against the assigned Radar gate. A1–A3 fail substantive European scope: the study focuses on China's immigration system; European examples do not establish EU research-system evidence.",
+      "deep_analysis": {
+        "work_kind": "Publication or programme screening",
+        "research_question": "Does 'How Immigration is Shaping China':MERICS China Monitor meet the assigned strand's positive admission routes?",
+        "main_finding": "MERICS report on immigration and talent trends in China",
+        "method_or_basis": "First-party material for the named publication, report, event or programme, assessed against the assigned Radar admission routes.",
+        "qualification": "The recovered item does not independently substantiate European R&I-system evidence or a qualifying new foresight method/change.",
+        "radar_relevance": "A1–A3 fail substantive European scope: the study focuses on China's immigration system; European examples do not establish EU research-system evidence.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:4afb03fa663569e2",
+      "source_hash": "b4ee5f28",
+      "identity_hash": "7cbeeead0f140f79",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary pdf_excerpt captured in the package from https://hcss.nl/wp-content/uploads/2021/01/Macro-Implications-of-Micro-Transformations-Final.pdf; reviewed source text (13408 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 13408 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://hcss.nl/wp-content/uploads/2021/01/Macro-Implications-of-Micro-Transformations-Final.pdf",
+            "title": "An Assessment of AI’s Impact on Contemporary Geopolitics | HCSS",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Evidence supports a source-grounded decision, not asserted programme outcomes. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Accepted: AI research and deployment capacity influence the EU's strategic technological position. Matched evidence: HCSS original report assesses national AI capacities, geopolitical competition and strategic response options."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "An Assessment of AI’s Impact on Contemporary Geopolitics | HCSS",
+      "reader_what": "A geopolitical technology assessment compares AI capabilities and security implications across major powers, including the European Union.",
+      "reader_why": "AI research and deployment capacity influence the EU's strategic technological position.",
+      "reader_more": "A geopolitical technology assessment compares AI capabilities and security implications across major powers, including the European Union. HCSS original report assesses national AI capacities, geopolitical competition and strategic response options. Comparisons and strategic scenarios do not demonstrate that predicted security consequences have materialised.",
+      "deep_analysis": {
+        "work_kind": "Research and innovation evidence",
+        "research_question": "What does the recovered work establish about An Assessment of AI’s Impact on Contemporary Geopolitics | HCSS?",
+        "main_finding": "A geopolitical technology assessment compares AI capabilities and security implications across major powers, including the European Union.",
+        "method_or_basis": "HCSS original report assesses national AI capacities, geopolitical competition and strategic response options.",
+        "qualification": "Comparisons and strategic scenarios do not demonstrate that predicted security consequences have materialised.",
+        "radar_relevance": "AI research and deployment capacity influence the EU's strategic technological position.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "ai.research_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "HCSS",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2019-08-20",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Comparisons and strategic scenarios do not demonstrate that predicted security consequences have materialised.",
+          "text": "A geopolitical technology assessment compares AI capabilities and security implications across major powers, including the European Union.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:bee7c891ecce4843",
+      "source_hash": "44c1d9cf",
+      "identity_hash": "385db4dd1054cc4d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary substantial_web_text captured in the package from https://www.vinnova.se/en/calls-for-proposals/bilateral-call-for-proposals-with-china-/research-development-and-innovation-in-the-fields-of-life-science-traffic-safety-and-applied-ICT-china-collaboration/; reviewed source text (13004 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 13004 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://www.vinnova.se/en/calls-for-proposals/bilateral-call-for-proposals-with-china-/research-development-and-innovation-in-the-fields-of-life-science-traffic-safety-and-applied-ICT-china-collaboration/",
+            "title": "Opportunities for bilateral collaboration with China | Vinnova",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Considered relevant strand admission tests and exclusions. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INADMISSIBLE_EVIDENCE_OR_SCOPE",
+        "reason": "A1–A3 fail evidence-product gate: the notice sets eligibility and application terms, rather than reporting outcomes or analysing a European innovation mechanism."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "Opportunities for bilateral collaboration with China | Vinnova",
+      "reader_what": "Vinnova bilateral Sweden–China collaboration funding call",
+      "reader_why": "",
+      "reader_more": "Vinnova bilateral Sweden–China collaboration funding call. Source category and scope were checked against the assigned Radar gate. A1–A3 fail evidence-product gate: the notice sets eligibility and application terms, rather than reporting outcomes or analysing a European innovation mechanism.",
+      "deep_analysis": {
+        "work_kind": "Publication or programme screening",
+        "research_question": "Does Opportunities for bilateral collaboration with China | Vinnova meet the assigned strand's positive admission routes?",
+        "main_finding": "Vinnova bilateral Sweden–China collaboration funding call",
+        "method_or_basis": "First-party material for the named publication, report, event or programme, assessed against the assigned Radar admission routes.",
+        "qualification": "The recovered item does not independently substantiate European R&I-system evidence or a qualifying new foresight method/change.",
+        "radar_relevance": "A1–A3 fail evidence-product gate: the notice sets eligibility and application terms, rather than reporting outcomes or analysing a European innovation mechanism.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:9c842cdcafdebabe",
+      "source_hash": "a59b8168",
+      "identity_hash": "b23b6d03a4661b83",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary pdf_excerpt captured in the package from https://webgate.ec.europa.eu/circabc-ewpp/d/d/workspace/SpacesStore/363c2093-a6d4-4eb6-8850-ddf3f367837c/download; reviewed source text (13035 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 13035 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://webgate.ec.europa.eu/circabc-ewpp/d/d/workspace/SpacesStore/363c2093-a6d4-4eb6-8850-ddf3f367837c/download",
+            "title": "Joint Statement on the Implementation of the EU-China Cooperation on Energy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Considered relevant strand admission tests and exclusions. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INADMISSIBLE_EVIDENCE_OR_SCOPE",
+        "reason": "A1–A3 fail the historical analytical-evidence requirement: a diplomatic cooperation intention is not a completed European R&I-system study or measured capacity result."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "Joint Statement on the Implementation of the EU-China Cooperation on Energy",
+      "reader_what": "EU–China joint statement on implementing energy cooperation",
+      "reader_why": "",
+      "reader_more": "EU–China joint statement on implementing energy cooperation. Source category and scope were checked against the assigned Radar gate. A1–A3 fail the historical analytical-evidence requirement: a diplomatic cooperation intention is not a completed European R&I-system study or measured capacity result.",
+      "deep_analysis": {
+        "work_kind": "Publication or programme screening",
+        "research_question": "Does Joint Statement on the Implementation of the EU-China Cooperation on Energy meet the assigned strand's positive admission routes?",
+        "main_finding": "EU–China joint statement on implementing energy cooperation",
+        "method_or_basis": "First-party material for the named publication, report, event or programme, assessed against the assigned Radar admission routes.",
+        "qualification": "The recovered item does not independently substantiate European R&I-system evidence or a qualifying new foresight method/change.",
+        "radar_relevance": "A1–A3 fail the historical analytical-evidence requirement: a diplomatic cooperation intention is not a completed European R&I-system study or measured capacity result.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:147496c851b6e66c",
+      "source_hash": "bc53691b",
+      "identity_hash": "4a1f2203b480301c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary substantial_web_text captured in the package from https://www.vttresearch.com/en/news-and-ideas/climate-barometer-2019-finns-wish-have-solutions-climate-crisis-heart-policy-making; reviewed source text (7707 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 7707 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://www.vttresearch.com/en/news-and-ideas/climate-barometer-2019-finns-wish-have-solutions-climate-crisis-heart-policy-making",
+            "title": "Climate Barometer 2019: Finns wish to have solutions to climate crisis at the heart of policy-making | VTT",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Considered relevant strand admission tests and exclusions. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INADMISSIBLE_EVIDENCE_OR_SCOPE",
+        "reason": "A1–A3 fail central R&I-system subject: the survey concerns public climate-policy preferences, not research capacity, science funding or European innovation systems."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "Climate Barometer 2019: Finns wish to have solutions to climate crisis at the heart of policy-making | VTT",
+      "reader_what": "Finnish public-opinion climate barometer",
+      "reader_why": "",
+      "reader_more": "Finnish public-opinion climate barometer. Source category and scope were checked against the assigned Radar gate. A1–A3 fail central R&I-system subject: the survey concerns public climate-policy preferences, not research capacity, science funding or European innovation systems.",
+      "deep_analysis": {
+        "work_kind": "Publication or programme screening",
+        "research_question": "Does Climate Barometer 2019: Finns wish to have solutions to climate crisis at the heart of policy-making | VTT meet the assigned strand's positive admission routes?",
+        "main_finding": "Finnish public-opinion climate barometer",
+        "method_or_basis": "First-party material for the named publication, report, event or programme, assessed against the assigned Radar admission routes.",
+        "qualification": "The recovered item does not independently substantiate European R&I-system evidence or a qualifying new foresight method/change.",
+        "radar_relevance": "A1–A3 fail central R&I-system subject: the survey concerns public climate-policy preferences, not research capacity, science funding or European innovation systems.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:8879e7c6fecbe375",
+      "source_hash": "f6324202",
+      "identity_hash": "c9d0582106900c32",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary substantial_web_text captured in the package from https://www.rathenau.nl/en/digitalisation/overview-ethics-codes-and-principles-ai; reviewed source text (4098 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 4098 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://www.rathenau.nl/en/digitalisation/overview-ethics-codes-and-principles-ai",
+            "title": "Overview of ethics codes and principles for AI | Rathenau Instituut",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Considered relevant strand admission tests and exclusions. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INADMISSIBLE_EVIDENCE_OR_SCOPE",
+        "reason": "A1–A3 fail substantive European R&I system analysis: a collection of AI ethics guidelines does not evaluate research-system governance or its outcomes."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "Overview of ethics codes and principles for AI | Rathenau Instituut",
+      "reader_what": "Rathenau inventory of ethical principles for artificial intelligence",
+      "reader_why": "",
+      "reader_more": "Rathenau inventory of ethical principles for artificial intelligence. Source category and scope were checked against the assigned Radar gate. A1–A3 fail substantive European R&I system analysis: a collection of AI ethics guidelines does not evaluate research-system governance or its outcomes.",
+      "deep_analysis": {
+        "work_kind": "Publication or programme screening",
+        "research_question": "Does Overview of ethics codes and principles for AI | Rathenau Instituut meet the assigned strand's positive admission routes?",
+        "main_finding": "Rathenau inventory of ethical principles for artificial intelligence",
+        "method_or_basis": "First-party material for the named publication, report, event or programme, assessed against the assigned Radar admission routes.",
+        "qualification": "The recovered item does not independently substantiate European R&I-system evidence or a qualifying new foresight method/change.",
+        "radar_relevance": "A1–A3 fail substantive European R&I system analysis: a collection of AI ethics guidelines does not evaluate research-system governance or its outcomes.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:2b76ab36d8107efa",
+      "source_hash": "6cd897a7",
+      "identity_hash": "64385bbc4d23a9cf",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary pdf_excerpt captured in the package from https://www.vr.se/download/18.ad27632166e0b1efab3e2d/1547544974353/Area%20descriptions%20INFRA%202019.pdf; reviewed source text (24000 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 24000 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://www.vr.se/download/18.ad27632166e0b1efab3e2d/1547544974353/Area%20descriptions%20INFRA%202019.pdf",
+            "title": "Research infrastructure of national interest",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Considered relevant strand admission tests and exclusions. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INADMISSIBLE_EVIDENCE_OR_SCOPE",
+        "reason": "A1–A3 fail substantive evidence-product gate: eligibility and call-category descriptions are administrative programme listings, not an infrastructure needs analysis."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "Research infrastructure of national interest",
+      "reader_what": "Swedish Research Council 2019 list of eligible research infrastructure areas",
+      "reader_why": "",
+      "reader_more": "Swedish Research Council 2019 list of eligible research infrastructure areas. Source category and scope were checked against the assigned Radar gate. A1–A3 fail substantive evidence-product gate: eligibility and call-category descriptions are administrative programme listings, not an infrastructure needs analysis.",
+      "deep_analysis": {
+        "work_kind": "Publication or programme screening",
+        "research_question": "Does Research infrastructure of national interest meet the assigned strand's positive admission routes?",
+        "main_finding": "Swedish Research Council 2019 list of eligible research infrastructure areas",
+        "method_or_basis": "First-party material for the named publication, report, event or programme, assessed against the assigned Radar admission routes.",
+        "qualification": "The recovered item does not independently substantiate European R&I-system evidence or a qualifying new foresight method/change.",
+        "radar_relevance": "A1–A3 fail substantive evidence-product gate: eligibility and call-category descriptions are administrative programme listings, not an infrastructure needs analysis.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:aece40fd90cde663",
+      "source_hash": "7bc44188",
+      "identity_hash": "a0a217b37bde5d69",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary pdf_excerpt captured in the package from https://content.openalex.org/works/W2922391852.pdf; reviewed source text (24000 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 24000 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://content.openalex.org/works/W2922391852.pdf",
+            "title": "Regional innovation governance and place-based policies: design, implementation and implications",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Evidence supports a source-grounded decision, not asserted programme outcomes. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Accepted: Governance differences help explain European regional innovation capacity and uneven development. Matched evidence: Research paper comparing European regional innovation governance and policy-implementation cases."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "Regional innovation governance and place-based policies: design, implementation and implications",
+      "reader_what": "Regional case comparisons identify institutional design and implementation factors affecting European place-based innovation policies.",
+      "reader_why": "Governance differences help explain European regional innovation capacity and uneven development.",
+      "reader_more": "Regional case comparisons identify institutional design and implementation factors affecting European place-based innovation policies. Research paper comparing European regional innovation governance and policy-implementation cases. Case evidence informs mechanisms but cannot establish universal causal effects across EU regions.",
+      "deep_analysis": {
+        "work_kind": "Research and innovation evidence",
+        "research_question": "What does the recovered work establish about Regional innovation governance and place-based policies: design, implementation and implications?",
+        "main_finding": "Regional case comparisons identify institutional design and implementation factors affecting European place-based innovation policies.",
+        "method_or_basis": "Research paper comparing European regional innovation governance and policy-implementation cases.",
+        "qualification": "Case evidence informs mechanisms but cannot establish universal causal effects across EU regions.",
+        "radar_relevance": "Governance differences help explain European regional innovation capacity and uneven development.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "innovation.regional_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Regional innovation policy researchers",
+            "class": "university_group"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2019",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Case evidence informs mechanisms but cannot establish universal causal effects across EU regions.",
+          "text": "Regional case comparisons identify institutional design and implementation factors affecting European place-based innovation policies.",
+          "confidence": "medium",
+          "status_date_precision": "year"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:8db3b3c0641afd7d",
+      "source_hash": "5a0a34d8",
+      "identity_hash": "f516246531a9b50f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary abstract_or_landing_page captured in the package from https://www.ecdc.europa.eu/en/news-events/dual-use-research-debates-and-public-health-better-integration-would-do-no-harm; reviewed source text (2264 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 2264 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://www.ecdc.europa.eu/en/news-events/dual-use-research-debates-and-public-health-better-integration-would-do-no-harm",
+            "title": "Dual-use research debates and public health: better integration would do no harm",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Considered relevant strand admission tests and exclusions. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INADMISSIBLE_EVIDENCE_OR_SCOPE",
+        "reason": "A1–A3 fail completed European-system evidence gate: the article argues for better policy dialogue without original analysis of European research-security institutions."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "Dual-use research debates and public health: better integration would do no harm",
+      "reader_what": "Discussion article advocating integration of dual-use research and public health",
+      "reader_why": "",
+      "reader_more": "Discussion article advocating integration of dual-use research and public health. Source category and scope were checked against the assigned Radar gate. A1–A3 fail completed European-system evidence gate: the article argues for better policy dialogue without original analysis of European research-security institutions.",
+      "deep_analysis": {
+        "work_kind": "Publication or programme screening",
+        "research_question": "Does Dual-use research debates and public health: better integration would do no harm meet the assigned strand's positive admission routes?",
+        "main_finding": "Discussion article advocating integration of dual-use research and public health",
+        "method_or_basis": "First-party material for the named publication, report, event or programme, assessed against the assigned Radar admission routes.",
+        "qualification": "The recovered item does not independently substantiate European R&I-system evidence or a qualifying new foresight method/change.",
+        "radar_relevance": "A1–A3 fail completed European-system evidence gate: the article argues for better policy dialogue without original analysis of European research-security institutions.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:a7b5fec456f646aa",
+      "source_hash": "2297191a",
+      "identity_hash": "130eefce5567fcad",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary substantial_web_text captured in the package from https://www.vttresearch.com/en/news-and-ideas/combinostics-faster-diagnoses-artificial-intelligence; reviewed source text (4518 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 4518 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://www.vttresearch.com/en/news-and-ideas/combinostics-faster-diagnoses-artificial-intelligence",
+            "title": "Combinostics: Faster diagnoses with artificial intelligence | VTT",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Considered relevant strand admission tests and exclusions. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INADMISSIBLE_EVIDENCE_OR_SCOPE",
+        "reason": "A1–A3 fail system-scope gate: a single product commercialisation case is not evidence-led analysis of a European innovation ecosystem."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "Combinostics: Faster diagnoses with artificial intelligence | VTT",
+      "reader_what": "VTT story about a medical AI spin-off and diagnostic product",
+      "reader_why": "",
+      "reader_more": "VTT story about a medical AI spin-off and diagnostic product. Source category and scope were checked against the assigned Radar gate. A1–A3 fail system-scope gate: a single product commercialisation case is not evidence-led analysis of a European innovation ecosystem.",
+      "deep_analysis": {
+        "work_kind": "Publication or programme screening",
+        "research_question": "Does Combinostics: Faster diagnoses with artificial intelligence | VTT meet the assigned strand's positive admission routes?",
+        "main_finding": "VTT story about a medical AI spin-off and diagnostic product",
+        "method_or_basis": "First-party material for the named publication, report, event or programme, assessed against the assigned Radar admission routes.",
+        "qualification": "The recovered item does not independently substantiate European R&I-system evidence or a qualifying new foresight method/change.",
+        "radar_relevance": "A1–A3 fail system-scope gate: a single product commercialisation case is not evidence-led analysis of a European innovation ecosystem.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:bbf36bc1e2dd244b",
+      "source_hash": "423da8d1",
+      "identity_hash": "cd2125d051e1663e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary substantial_web_text captured in the package from https://research.tilburguniversity.edu/en/publications/who-benefits-from-ex-ante-societal-impact-evaluation-in-the-europ-2/; reviewed source text (4820 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 4820 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://research.tilburguniversity.edu/en/publications/who-benefits-from-ex-ante-societal-impact-evaluation-in-the-europ-2/",
+            "title": "Who benefits from ex ante societal impact evaluation in the European funding arena? A cross-country comparison of societal impact capacity in the social sciences and humanities",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Evidence supports a source-grounded decision, not asserted programme outcomes. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Accepted: Assessment design affects incentives, public value and allocation within European research programmes. Matched evidence: Research Evaluation peer-reviewed comparative analysis of ex-ante societal-impact evaluation practices in Europe's funding arena."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "Who benefits from ex ante societal impact evaluation in the European funding arena? A cross-country comparison of societal…",
+      "reader_what": "A cross-country study examines whose interests are served by societal-impact assessment in European research funding.",
+      "reader_why": "Assessment design affects incentives, public value and allocation within European research programmes.",
+      "reader_more": "A cross-country study examines whose interests are served by societal-impact assessment in European research funding. Research Evaluation peer-reviewed comparative analysis of ex-ante societal-impact evaluation practices in Europe's funding arena. Findings describe evaluated arrangements and stakeholder experiences rather than proving which reforms would improve outcomes.",
+      "deep_analysis": {
+        "work_kind": "Research and innovation evidence",
+        "research_question": "What does the recovered work establish about Who benefits from ex ante societal impact evaluation in the European funding arena? A cross-country comparison of societal impact capacity in the social sciences and humanities?",
+        "main_finding": "A cross-country study examines whose interests are served by societal-impact assessment in European research funding.",
+        "method_or_basis": "Research Evaluation peer-reviewed comparative analysis of ex-ante societal-impact evaluation practices in Europe's funding arena.",
+        "qualification": "Findings describe evaluated arrangements and stakeholder experiences rather than proving which reforms would improve outcomes.",
+        "radar_relevance": "Assessment design affects incentives, public value and allocation within European research programmes.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.assessment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Study authors",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2018-11-02",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Findings describe evaluated arrangements and stakeholder experiences rather than proving which reforms would improve outcomes.",
+          "text": "A cross-country study examines whose interests are served by societal-impact assessment in European research funding.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:a018a18dd894f57e",
+      "source_hash": "391ea4f3",
+      "identity_hash": "2fbfceae9bc93fa8",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary pdf_excerpt captured in the package from https://cms.wellcome.org:443/sites/default/files/wellcome-review-of-phd-training-in-biomedical-research.pdf; reviewed source text (11024 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 11024 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://cms.wellcome.org:443/sites/default/files/wellcome-review-of-phd-training-in-biomedical-research.pdf",
+            "title": "Review of PhD training in biomedical research | Wellcome",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Evidence supports a source-grounded decision, not asserted programme outcomes. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Accepted: Research training practices affect the European biomedical research talent pipeline. Matched evidence: Original Wellcome review of biomedical PhD training and doctoral-system evidence, with stakeholder input."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "Review of PhD training in biomedical research | Wellcome",
+      "reader_what": "Wellcome's review identifies problems and reform options in UK biomedical doctoral training and researcher career preparation.",
+      "reader_why": "Research training practices affect the European biomedical research talent pipeline.",
+      "reader_more": "Wellcome's review identifies problems and reform options in UK biomedical doctoral training and researcher career preparation. Original Wellcome review of biomedical PhD training and doctoral-system evidence, with stakeholder input. Evidence concerns biomedical research training in its publication period, rather than all European disciplines or current programmes.",
+      "deep_analysis": {
+        "work_kind": "Research and innovation evidence",
+        "research_question": "What does the recovered work establish about Review of PhD training in biomedical research | Wellcome?",
+        "main_finding": "Wellcome's review identifies problems and reform options in UK biomedical doctoral training and researcher career preparation.",
+        "method_or_basis": "Original Wellcome review of biomedical PhD training and doctoral-system evidence, with stakeholder input.",
+        "qualification": "Evidence concerns biomedical research training in its publication period, rather than all European disciplines or current programmes.",
+        "radar_relevance": "Research training practices affect the European biomedical research talent pipeline.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "talent.career_structure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Wellcome",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "evaluates",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2018-11-01",
+          "scope": {
+            "level": "member_state",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Evidence concerns biomedical research training in its publication period, rather than all European disciplines or current programmes.",
+          "text": "Wellcome's review identifies problems and reform options in UK biomedical doctoral training and researcher career preparation.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:28b4d2b73e2b008a",
+      "source_hash": "2b21a3f7",
+      "identity_hash": "10f2d226c705daa5",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary pdf_excerpt captured in the package from https://content.openalex.org/works/W2895912764.pdf; reviewed source text (24000 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 24000 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://content.openalex.org/works/W2895912764.pdf",
+            "title": "Only one way to skin a cat? Heterogeneity and equifinality in European national innovation systems",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Evidence supports a source-grounded decision, not asserted programme outcomes. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Accepted: Different innovation-system arrangements can yield comparable outcomes, complicating one-size-fits-all EU policies. Matched evidence: Peer-reviewed comparative statistical study of national innovation systems and indicators across Europe."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "Only one way to skin a cat? Heterogeneity and equifinality in European national innovation systems",
+      "reader_what": "An empirical study finds multiple configurations of factors can support performance across European national innovation systems.",
+      "reader_why": "Different innovation-system arrangements can yield comparable outcomes, complicating one-size-fits-all EU policies.",
+      "reader_more": "An empirical study finds multiple configurations of factors can support performance across European national innovation systems. Peer-reviewed comparative statistical study of national innovation systems and indicators across Europe. Configurational associations do not establish that copying one country's institutions guarantees performance elsewhere.",
+      "deep_analysis": {
+        "work_kind": "Research and innovation evidence",
+        "research_question": "What does the recovered work establish about Only one way to skin a cat? Heterogeneity and equifinality in European national innovation systems?",
+        "main_finding": "An empirical study finds multiple configurations of factors can support performance across European national innovation systems.",
+        "method_or_basis": "Peer-reviewed comparative statistical study of national innovation systems and indicators across Europe.",
+        "qualification": "Configurational associations do not establish that copying one country's institutions guarantees performance elsewhere.",
+        "radar_relevance": "Different innovation-system arrangements can yield comparable outcomes, complicating one-size-fits-all EU policies.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "innovation.system_performance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Study authors",
+            "class": "university_group"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2018-10-22",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Configurational associations do not establish that copying one country's institutions guarantees performance elsewhere.",
+          "text": "An empirical study finds multiple configurations of factors can support performance across European national innovation systems.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:834e853d4ffbcb7a",
+      "source_hash": "72c8c25f",
+      "identity_hash": "0c9e5f0e0c0f1991",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary substantial_web_text captured in the package from https://pureportal.coventry.ac.uk/en/publications/science-and-technology-cooperation-in-cross-border-regions-a-prox/; reviewed source text (5157 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 5157 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://pureportal.coventry.ac.uk/en/publications/science-and-technology-cooperation-in-cross-border-regions-a-prox/",
+            "title": "Science and technology cooperation in cross-border regions: a proximity approach with evidence for Northern Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Evidence supports a source-grounded decision, not asserted programme outcomes. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Accepted: Cross-border networks and institutional distance influence how European research partnerships form. Matched evidence: Empirical research on scientific cooperation across 28 northern European cross-border regions."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "Science and technology cooperation in cross-border regions: a proximity approach with evidence for Northern Europe",
+      "reader_what": "A Northern European study connects geographic and institutional proximity to cross-border scientific collaboration patterns.",
+      "reader_why": "Cross-border networks and institutional distance influence how European research partnerships form.",
+      "reader_more": "A Northern European study connects geographic and institutional proximity to cross-border scientific collaboration patterns. Empirical research on scientific cooperation across 28 northern European cross-border regions. Observed links reflect a historic regional sample and do not fully isolate causal mechanisms.",
+      "deep_analysis": {
+        "work_kind": "Research and innovation evidence",
+        "research_question": "What does the recovered work establish about Science and technology cooperation in cross-border regions: a proximity approach with evidence for Northern Europe?",
+        "main_finding": "A Northern European study connects geographic and institutional proximity to cross-border scientific collaboration patterns.",
+        "method_or_basis": "Empirical research on scientific cooperation across 28 northern European cross-border regions.",
+        "qualification": "Observed links reflect a historic regional sample and do not fully isolate causal mechanisms.",
+        "radar_relevance": "Cross-border networks and institutional distance influence how European research partnerships form.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Study authors",
+            "class": "university_group"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2018-10-03",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Observed links reflect a historic regional sample and do not fully isolate causal mechanisms.",
+          "text": "A Northern European study connects geographic and institutional proximity to cross-border scientific collaboration patterns.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:7d8d26d7a75a3cfa",
+      "source_hash": "69b5e4cc",
+      "identity_hash": "1562d32e02803def",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary substantial_web_text captured in the package from https://link.springer.com/article/10.1186/s40309-018-0145-9; reviewed source text (22654 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 22654 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://link.springer.com/article/10.1186/s40309-018-0145-9",
+            "title": "A note on the classification of future-related methods",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Evidence supports a source-grounded decision, not asserted programme outcomes. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_TRANSFERABLE_METHOD",
+        "reason": "Accepted: A systematic typology supports transferable method choice in futures analysis. Matched evidence: Peer-reviewed original methods article setting out a taxonomy of approaches to the future."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "A note on the classification of future-related methods",
+      "reader_what": "Roberto Poli proposes a classification framework distinguishing future-related methods by their objects and analytical purposes.",
+      "reader_why": "A systematic typology supports transferable method choice in futures analysis.",
+      "reader_more": "Roberto Poli proposes a classification framework distinguishing future-related methods by their objects and analytical purposes. Peer-reviewed original methods article setting out a taxonomy of approaches to the future. The taxonomy is a conceptual contribution; comparative predictive validity is not demonstrated.",
+      "deep_analysis": {
+        "work_kind": "Methodological research",
+        "research_question": "What does the recovered work establish about A note on the classification of future-related methods?",
+        "main_finding": "Roberto Poli proposes a classification framework distinguishing future-related methods by their objects and analytical purposes.",
+        "method_or_basis": "Peer-reviewed original methods article setting out a taxonomy of approaches to the future.",
+        "qualification": "The taxonomy is a conceptual contribution; comparative predictive validity is not demonstrated.",
+        "radar_relevance": "A systematic typology supports transferable method choice in futures analysis.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Roberto Poli",
+            "class": "university_group"
+          },
+          "mechanism": "standardises",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2018-09-15",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The taxonomy is a conceptual contribution; comparative predictive validity is not demonstrated.",
+          "text": "Roberto Poli proposes a classification framework distinguishing future-related methods by their objects and analytical purposes.",
+          "confidence": "medium",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:85c44736f24add75",
+      "source_hash": "d4873765",
+      "identity_hash": "cf04674797eb6051",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary pdf_excerpt captured in the package from https://www.vr.se/download/18.7e981a991641c4e4ebe4f0/1529565439340/BEhovsinvetering_eng-GB.pdf; reviewed source text (4941 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 4941 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://www.vr.se/download/18.7e981a991641c4e4ebe4f0/1529565439340/BEhovsinvetering_eng-GB.pdf",
+            "title": "Needs inventory – inventory of needs for research infrastructure",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Evidence supports a source-grounded decision, not asserted programme outcomes. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Accepted: Infrastructure needs assessments show capacity constraints and research priorities in a European national system. Matched evidence: Swedish Research Council's completed needs inventory and supporting proposal assessment."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "Needs inventory – inventory of needs for research infrastructure",
+      "reader_what": "Sweden's research council inventories national research-infrastructure needs to inform future infrastructure funding decisions.",
+      "reader_why": "Infrastructure needs assessments show capacity constraints and research priorities in a European national system.",
+      "reader_more": "Sweden's research council inventories national research-infrastructure needs to inform future infrastructure funding decisions. Swedish Research Council's completed needs inventory and supporting proposal assessment. An inventory measures expressed research-community needs, not final construction decisions or proven returns.",
+      "deep_analysis": {
+        "work_kind": "Research and innovation evidence",
+        "research_question": "What does the recovered work establish about Needs inventory – inventory of needs for research infrastructure?",
+        "main_finding": "Sweden's research council inventories national research-infrastructure needs to inform future infrastructure funding decisions.",
+        "method_or_basis": "Swedish Research Council's completed needs inventory and supporting proposal assessment.",
+        "qualification": "An inventory measures expressed research-community needs, not final construction decisions or proven returns.",
+        "radar_relevance": "Infrastructure needs assessments show capacity constraints and research priorities in a European national system.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Swedish Research Council",
+            "class": "national_funder"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2018-06-21",
+          "scope": {
+            "level": "member_state",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "An inventory measures expressed research-community needs, not final construction decisions or proven returns.",
+          "text": "Sweden's research council inventories national research-infrastructure needs to inform future infrastructure funding decisions.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:8811266c6b6f5c08",
+      "source_hash": "4ff5cfaa",
+      "identity_hash": "300270a8661c36b6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary substantial_web_text captured in the package from https://researchportal.bath.ac.uk/en/publications/towards-a-novel-technology-transfer-office-typology-and-recommend/; reviewed source text (5978 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 5978 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://researchportal.bath.ac.uk/en/publications/towards-a-novel-technology-transfer-office-typology-and-recommend/",
+            "title": "Towards a novel technology transfer office typology and recommendations for developing countries",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Evidence supports a source-grounded decision, not asserted programme outcomes. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Accepted: Comparative evidence on European transfer offices identifies mechanisms for commercialising academic research. Matched evidence: Peer-reviewed study drawing on questionnaires and interviews with European technology-transfer organisations."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "Towards a novel technology transfer office typology and recommendations for developing countries",
+      "reader_what": "Research on European technology-transfer offices develops a typology linking organisational models to institutional conditions.",
+      "reader_why": "Comparative evidence on European transfer offices identifies mechanisms for commercialising academic research.",
+      "reader_more": "Research on European technology-transfer offices develops a typology linking organisational models to institutional conditions. Peer-reviewed study drawing on questionnaires and interviews with European technology-transfer organisations. European interview and survey samples are limited; recommendations also target developing-country institutions.",
+      "deep_analysis": {
+        "work_kind": "Research and innovation evidence",
+        "research_question": "What does the recovered work establish about Towards a novel technology transfer office typology and recommendations for developing countries?",
+        "main_finding": "Research on European technology-transfer offices develops a typology linking organisational models to institutional conditions.",
+        "method_or_basis": "Peer-reviewed study drawing on questionnaires and interviews with European technology-transfer organisations.",
+        "qualification": "European interview and survey samples are limited; recommendations also target developing-country institutions.",
+        "radar_relevance": "Comparative evidence on European transfer offices identifies mechanisms for commercialising academic research.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.knowledge_transfer",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Technology transfer study authors",
+            "class": "university_group"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2018-06-19",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "European interview and survey samples are limited; recommendations also target developing-country institutions.",
+          "text": "Research on European technology-transfer offices develops a typology linking organisational models to institutional conditions.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:418613ac9585eb67",
+      "source_hash": "d59f31dc",
+      "identity_hash": "5aa6ab283f862bbc",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary pdf_excerpt captured in the package from https://hcss.nl/wp-content/uploads/2021/01/Cybersecurity-ensuring-awareness-and-resilience-of-the-private-sector-acrros-Europe-in-face-of-mounting-cyber-risks.pdf; reviewed source text (15232 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 15232 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://hcss.nl/wp-content/uploads/2021/01/Cybersecurity-ensuring-awareness-and-resilience-of-the-private-sector-acrros-Europe-in-face-of-mounting-cyber-risks.pdf",
+            "title": "Cybersecurity: Ensuring awareness and resilience of the private sector | HCSS",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Considered relevant strand admission tests and exclusions. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INADMISSIBLE_EVIDENCE_OR_SCOPE",
+        "reason": "A1–A3 fail central R&I-system subject: cybersecurity risk for ordinary private-sector businesses does not constitute science/innovation capacity or research policy evidence."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "Cybersecurity: Ensuring awareness and resilience of the private sector | HCSS",
+      "reader_what": "European business cybersecurity awareness and resilience report",
+      "reader_why": "",
+      "reader_more": "European business cybersecurity awareness and resilience report. Source category and scope were checked against the assigned Radar gate. A1–A3 fail central R&I-system subject: cybersecurity risk for ordinary private-sector businesses does not constitute science/innovation capacity or research policy evidence.",
+      "deep_analysis": {
+        "work_kind": "Publication or programme screening",
+        "research_question": "Does Cybersecurity: Ensuring awareness and resilience of the private sector | HCSS meet the assigned strand's positive admission routes?",
+        "main_finding": "European business cybersecurity awareness and resilience report",
+        "method_or_basis": "First-party material for the named publication, report, event or programme, assessed against the assigned Radar admission routes.",
+        "qualification": "The recovered item does not independently substantiate European R&I-system evidence or a qualifying new foresight method/change.",
+        "radar_relevance": "A1–A3 fail central R&I-system subject: cybersecurity risk for ordinary private-sector businesses does not constitute science/innovation capacity or research policy evidence.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:cea45d9a5899addd",
+      "source_hash": "bcd13f06",
+      "identity_hash": "2bf5214292b0d2d1",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Original linked record lacked sufficient matching substantive text in the supplied archive: https://doi.org/10.1016/j.futures.2017.06.002."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "recovered",
+            "note": "Recovered an identifiable work's publisher, official or institutional landing material at https://www.sciencedirect.com/science/article/abs/pii/S0016328717300083; compared title, authors and subject."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_publisher_or_repository",
+            "url": "https://www.sciencedirect.com/science/article/abs/pii/S0016328717300083",
+            "title": "Between ‘muddling through’ and ‘grand design’: Regaining political initiative – The role of strategic foresight",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered identifying publication from an external first-party publisher or research-institution record. Evidence supports a source-grounded decision, not asserted programme outcomes. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_TRANSFERABLE_METHOD",
+        "reason": "Accepted: The framework offers transferable links between systematic foresight and policy choices. Matched evidence: Original Futures article integrating strategic foresight, early warning and decision-making in a reusable analytical approach."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "Between ‘muddling through’ and ‘grand design’: Regaining political initiative – The role of strategic foresight",
+      "reader_what": "A futures paper sets out ways to combine strategic foresight and political initiative between incremental and grand strategies.",
+      "reader_why": "The framework offers transferable links between systematic foresight and policy choices.",
+      "reader_more": "A futures paper sets out ways to combine strategic foresight and political initiative between incremental and grand strategies. Original Futures article integrating strategic foresight, early warning and decision-making in a reusable analytical approach. The scheme is argumentative and illustrative, not a proven forecast-accuracy improvement.",
+      "deep_analysis": {
+        "work_kind": "Methodological research",
+        "research_question": "What does the recovered work establish about Between ‘muddling through’ and ‘grand design’: Regaining political initiative – The role of strategic foresight?",
+        "main_finding": "A futures paper sets out ways to combine strategic foresight and political initiative between incremental and grand strategies.",
+        "method_or_basis": "Original Futures article integrating strategic foresight, early warning and decision-making in a reusable analytical approach.",
+        "qualification": "The scheme is argumentative and illustrative, not a proven forecast-accuracy improvement.",
+        "radar_relevance": "The framework offers transferable links between systematic foresight and policy choices.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "methods.anticipatory_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Burrows and Gnad",
+            "class": "university_group"
+          },
+          "mechanism": "integrates",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2018",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The scheme is argumentative and illustrative, not a proven forecast-accuracy improvement.",
+          "text": "A futures paper sets out ways to combine strategic foresight and political initiative between incremental and grand strategies.",
+          "confidence": "medium",
+          "status_date_precision": "year",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:9b08ebc46dad7759",
+      "source_hash": "fbcf56e2",
+      "identity_hash": "661363858d17246b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary substantial_web_text captured in the package from https://link.springer.com/chapter/10.1007/978-3-319-68807-7_13; reviewed source text (11031 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 11031 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://link.springer.com/chapter/10.1007/978-3-319-68807-7_13",
+            "title": "The European Parliament on Space: From Promoting Scientific Research to Supporting the Common Security and Defence Policy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Evidence supports a source-grounded decision, not asserted programme outcomes. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Accepted: European institutions' decisions influence research support and long-term space capability. Matched evidence: Scholarly chapter examining European Parliament space-policy positions, governance and research objectives over time."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "The European Parliament on Space: From Promoting Scientific Research to Supporting the Common Security and Defence Policy",
+      "reader_what": "A historical study traces the European Parliament's changing roles in space research and security policy.",
+      "reader_why": "European institutions' decisions influence research support and long-term space capability.",
+      "reader_more": "A historical study traces the European Parliament's changing roles in space research and security policy. Scholarly chapter examining European Parliament space-policy positions, governance and research objectives over time. Institutional analysis does not quantify direct effects on European space R&D outputs.",
+      "deep_analysis": {
+        "work_kind": "Research and innovation evidence",
+        "research_question": "What does the recovered work establish about The European Parliament on Space: From Promoting Scientific Research to Supporting the Common Security and Defence Policy?",
+        "main_finding": "A historical study traces the European Parliament's changing roles in space research and security policy.",
+        "method_or_basis": "Scholarly chapter examining European Parliament space-policy positions, governance and research objectives over time.",
+        "qualification": "Institutional analysis does not quantify direct effects on European space R&D outputs.",
+        "radar_relevance": "European institutions' decisions influence research support and long-term space capability.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European space policy study authors",
+            "class": "university_group"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2018",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Institutional analysis does not quantify direct effects on European space R&D outputs.",
+          "text": "A historical study traces the European Parliament's changing roles in space research and security policy.",
+          "confidence": "medium",
+          "status_date_precision": "year"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:fe11231763fa9656",
+      "source_hash": "6c9f717a",
+      "identity_hash": "999350e3407c258c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary substantial_web_text captured in the package from https://link.springer.com/book/10.1007/978-3-319-73105-6; reviewed source text (10239 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 10239 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://link.springer.com/book/10.1007/978-3-319-73105-6",
+            "title": "Governance and Sustainability of Responsible Research and Innovation Processes",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Evidence supports a source-grounded decision, not asserted programme outcomes. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Accepted: Rules of participation, responsibility and evaluation shape European research institutions. Matched evidence: Springer academic book surveying responsible research and innovation practices, governance mechanisms and European cases."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "Governance and Sustainability of Responsible Research and Innovation Processes",
+      "reader_what": "A scholarly volume analyses how responsible research and innovation governance can be organised and sustained.",
+      "reader_why": "Rules of participation, responsibility and evaluation shape European research institutions.",
+      "reader_more": "A scholarly volume analyses how responsible research and innovation governance can be organised and sustained. Springer academic book surveying responsible research and innovation practices, governance mechanisms and European cases. The book combines conceptual and case evidence; findings should not be generalised as a single measured EU-wide effect.",
+      "deep_analysis": {
+        "work_kind": "Research and innovation evidence",
+        "research_question": "What does the recovered work establish about Governance and Sustainability of Responsible Research and Innovation Processes?",
+        "main_finding": "A scholarly volume analyses how responsible research and innovation governance can be organised and sustained.",
+        "method_or_basis": "Springer academic book surveying responsible research and innovation practices, governance mechanisms and European cases.",
+        "qualification": "The book combines conceptual and case evidence; findings should not be generalised as a single measured EU-wide effect.",
+        "radar_relevance": "Rules of participation, responsibility and evaluation shape European research institutions.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Responsible research and innovation study authors",
+            "class": "university_group"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2018",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The book combines conceptual and case evidence; findings should not be generalised as a single measured EU-wide effect.",
+          "text": "A scholarly volume analyses how responsible research and innovation governance can be organised and sustained.",
+          "confidence": "medium",
+          "status_date_precision": "year"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:f0a1b7fb7120606b",
+      "source_hash": "26c2b622",
+      "identity_hash": "7530148ed6fc88f5",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary substantial_web_text captured in the package from https://link.springer.com/rwe/10.1007/978-981-10-5249-1_16; reviewed source text (21350 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 21350 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://link.springer.com/rwe/10.1007/978-981-10-5249-1_16",
+            "title": "Enabling Innovative Postgraduate Research: Critical Foresight and Strategic Considerations for University Leaders",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Considered relevant strand admission tests and exclusions. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INADMISSIBLE_EVIDENCE_OR_SCOPE",
+        "reason": "A1–A3 fail substantive European scope: the book treats generic leadership and educational practice without measuring European research careers or governance systems."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "Enabling Innovative Postgraduate Research: Critical Foresight and Strategic Considerations for University Leaders",
+      "reader_what": "Conceptual book on postgraduate research and foresight for university leaders",
+      "reader_why": "",
+      "reader_more": "Conceptual book on postgraduate research and foresight for university leaders. Source category and scope were checked against the assigned Radar gate. A1–A3 fail substantive European scope: the book treats generic leadership and educational practice without measuring European research careers or governance systems.",
+      "deep_analysis": {
+        "work_kind": "Publication or programme screening",
+        "research_question": "Does Enabling Innovative Postgraduate Research: Critical Foresight and Strategic Considerations for University Leaders meet the assigned strand's positive admission routes?",
+        "main_finding": "Conceptual book on postgraduate research and foresight for university leaders",
+        "method_or_basis": "First-party material for the named publication, report, event or programme, assessed against the assigned Radar admission routes.",
+        "qualification": "The recovered item does not independently substantiate European R&I-system evidence or a qualifying new foresight method/change.",
+        "radar_relevance": "A1–A3 fail substantive European scope: the book treats generic leadership and educational practice without measuring European research careers or governance systems.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:209be39399443cff",
+      "source_hash": "e46ce7c1",
+      "identity_hash": "5bed7a96bf13e4b9",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary substantial_web_text captured in the package from https://itif.org/publications/2017/12/12/us-risk-losing-ai-leadership-without-national-strategy-future-ai-act-puts-us/; reviewed source text (2524 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 2524 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://itif.org/publications/2017/12/12/us-risk-losing-ai-leadership-without-national-strategy-future-ai-act-puts-us/",
+            "title": "U.S. At Risk of Losing AI Leadership Without A National Strategy; FUTURE of AI Act Puts U.S. on Right Track",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Considered relevant strand admission tests and exclusions. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INADMISSIBLE_EVIDENCE_OR_SCOPE",
+        "reason": "A1–A3 fail substantive European scope: the article is entirely about US policy advocacy and not a European research-system study."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "U.S. At Risk of Losing AI Leadership Without A National Strategy; FUTURE of AI Act Puts U.S. on…",
+      "reader_what": "US think-tank announcement advocating US national AI strategy",
+      "reader_why": "",
+      "reader_more": "US think-tank announcement advocating US national AI strategy. Source category and scope were checked against the assigned Radar gate. A1–A3 fail substantive European scope: the article is entirely about US policy advocacy and not a European research-system study.",
+      "deep_analysis": {
+        "work_kind": "Publication or programme screening",
+        "research_question": "Does U.S. At Risk of Losing AI Leadership Without A National Strategy; FUTURE of AI Act Puts U.S. on Right Track meet the assigned strand's positive admission routes?",
+        "main_finding": "US think-tank announcement advocating US national AI strategy",
+        "method_or_basis": "First-party material for the named publication, report, event or programme, assessed against the assigned Radar admission routes.",
+        "qualification": "The recovered item does not independently substantiate European R&I-system evidence or a qualifying new foresight method/change.",
+        "radar_relevance": "A1–A3 fail substantive European scope: the article is entirely about US policy advocacy and not a European research-system study.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:cd6e26a1080a3e57",
+      "source_hash": "6df331f7",
+      "identity_hash": "6030085640082b43",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary pdf_excerpt captured in the package from https://merics.org/sites/default/files/2020-04/171004_MPOC_05_Ideologies_0_web_1.pdf; reviewed source text (7096 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 7096 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://merics.org/sites/default/files/2020-04/171004_MPOC_05_Ideologies_0_web_1.pdf",
+            "title": "Ideas and ideologies competing for China's political future",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Considered relevant strand admission tests and exclusions. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INADMISSIBLE_EVIDENCE_OR_SCOPE",
+        "reason": "A1–A3 fail European R&I object: Chinese domestic ideology is not evidence about European scientific institutions, innovation or technological capability."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "Ideas and ideologies competing for China's political future",
+      "reader_what": "MERICS overview of competing political ideas within China",
+      "reader_why": "",
+      "reader_more": "MERICS overview of competing political ideas within China. Source category and scope were checked against the assigned Radar gate. A1–A3 fail European R&I object: Chinese domestic ideology is not evidence about European scientific institutions, innovation or technological capability.",
+      "deep_analysis": {
+        "work_kind": "Publication or programme screening",
+        "research_question": "Does Ideas and ideologies competing for China's political future meet the assigned strand's positive admission routes?",
+        "main_finding": "MERICS overview of competing political ideas within China",
+        "method_or_basis": "First-party material for the named publication, report, event or programme, assessed against the assigned Radar admission routes.",
+        "qualification": "The recovered item does not independently substantiate European R&I-system evidence or a qualifying new foresight method/change.",
+        "radar_relevance": "A1–A3 fail European R&I object: Chinese domestic ideology is not evidence about European scientific institutions, innovation or technological capability.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:8007807b8c91b262",
+      "source_hash": "9d86e0cd",
+      "identity_hash": "8aad1b2f13b799bf",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary pdf_excerpt captured in the package from https://www.vr.se/download/18.514d156f1639984ae0760212/1529480565591/Decision-on-research-infrastructure-2017.pdf; reviewed source text (4257 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 4257 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://www.vr.se/download/18.514d156f1639984ae0760212/1529480565591/Decision-on-research-infrastructure-2017.pdf",
+            "title": "Decision on research infrastructure 2017.pdf",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Considered relevant strand admission tests and exclusions. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INADMISSIBLE_EVIDENCE_OR_SCOPE",
+        "reason": "A1–A3 fail evidence-product gate: an administrative award list supplies decisions but no completed capacity or governance assessment."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "Decision on research infrastructure 2017.pdf",
+      "reader_what": "Swedish Research Council funding decision list for research infrastructure",
+      "reader_why": "",
+      "reader_more": "Swedish Research Council funding decision list for research infrastructure. Source category and scope were checked against the assigned Radar gate. A1–A3 fail evidence-product gate: an administrative award list supplies decisions but no completed capacity or governance assessment.",
+      "deep_analysis": {
+        "work_kind": "Publication or programme screening",
+        "research_question": "Does Decision on research infrastructure 2017.pdf meet the assigned strand's positive admission routes?",
+        "main_finding": "Swedish Research Council funding decision list for research infrastructure",
+        "method_or_basis": "First-party material for the named publication, report, event or programme, assessed against the assigned Radar admission routes.",
+        "qualification": "The recovered item does not independently substantiate European R&I-system evidence or a qualifying new foresight method/change.",
+        "radar_relevance": "A1–A3 fail evidence-product gate: an administrative award list supplies decisions but no completed capacity or governance assessment.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:4c5d39a4e8bd0291",
+      "source_hash": "04c3573b",
+      "identity_hash": "83ec509ae599dbce",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Original linked record lacked sufficient matching substantive text in the supplied archive: https://doi.org/10.1108/fs-07-2017-0029."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "recovered",
+            "note": "Recovered an identifiable work's publisher, official or institutional landing material at https://publications.hse.ru/en/articles/210840658; compared title, authors and subject."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_publisher_or_repository",
+            "url": "https://publications.hse.ru/en/articles/210840658",
+            "title": "Russian S&T Foresight 2030: identifying new drivers of growth",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered identifying publication from an external first-party publisher or research-institution record. Considered relevant strand admission tests and exclusions. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_NO_NEW_TRANSFERABLE_METHOD",
+        "reason": "B fails new transferable method gate: the publication reports application of established expert and technology foresight techniques to Russia, without establishing a distinct general technique."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "Russian S&T Foresight 2030: identifying new drivers of growth",
+      "reader_what": "Russian S&T Foresight 2030 project case study",
+      "reader_why": "",
+      "reader_more": "Russian S&T Foresight 2030 project case study. Source category and scope were checked against the assigned Radar gate. B fails new transferable method gate: the publication reports application of established expert and technology foresight techniques to Russia, without establishing a distinct general technique.",
+      "deep_analysis": {
+        "work_kind": "Publication or programme screening",
+        "research_question": "Does Russian S&T Foresight 2030: identifying new drivers of growth meet the assigned strand's positive admission routes?",
+        "main_finding": "Russian S&T Foresight 2030 project case study",
+        "method_or_basis": "First-party material for the named publication, report, event or programme, assessed against the assigned Radar admission routes.",
+        "qualification": "The recovered item does not independently substantiate European R&I-system evidence or a qualifying new foresight method/change.",
+        "radar_relevance": "B fails new transferable method gate: the publication reports application of established expert and technology foresight techniques to Russia, without establishing a distinct general technique.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:99b23c68114f031f",
+      "source_hash": "eeb1a39e",
+      "identity_hash": "93dc3d0c1bafeb14",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary pdf_excerpt captured in the package from https://content.openalex.org/works/W2604912110.pdf; reviewed source text (24000 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 24000 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://content.openalex.org/works/W2604912110.pdf",
+            "title": "Who sets up the bridge? Tracking scientific collaborations between China and the European Union",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Evidence supports a source-grounded decision, not asserted programme outcomes. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Accepted: Cross-border collaborations are an important component of European science capacity and international position. Matched evidence: Original coauthorship/network study of EU–China publications and researcher roles."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "Who sets up the bridge? Tracking scientific collaborations between China and the European Union",
+      "reader_what": "Bibliometric research maps China–EU scientific partnerships and who initiates cross-border research collaboration.",
+      "reader_why": "Cross-border collaborations are an important component of European science capacity and international position.",
+      "reader_more": "Bibliometric research maps China–EU scientific partnerships and who initiates cross-border research collaboration. Original coauthorship/network study of EU–China publications and researcher roles. Publication authorship is only a proxy for scientific leadership and collaboration quality; data are historical.",
+      "deep_analysis": {
+        "work_kind": "Research and innovation evidence",
+        "research_question": "What does the recovered work establish about Who sets up the bridge? Tracking scientific collaborations between China and the European Union?",
+        "main_finding": "Bibliometric research maps China–EU scientific partnerships and who initiates cross-border research collaboration.",
+        "method_or_basis": "Original coauthorship/network study of EU–China publications and researcher roles.",
+        "qualification": "Publication authorship is only a proxy for scientific leadership and collaboration quality; data are historical.",
+        "radar_relevance": "Cross-border collaborations are an important component of European science capacity and international position.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Study authors",
+            "class": "university_group"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2017-04-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Publication authorship is only a proxy for scientific leadership and collaboration quality; data are historical.",
+          "text": "Bibliometric research maps China–EU scientific partnerships and who initiates cross-border research collaboration.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:78754371dbf139f3",
+      "source_hash": "25b54484",
+      "identity_hash": "607e8e0355da55d5",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary substantial_web_text captured in the package from https://link.springer.com/article/10.1007/s10961-015-9462-3; reviewed source text (21525 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 21525 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://link.springer.com/article/10.1007/s10961-015-9462-3",
+            "title": "Technology entrepreneurship research opportunities: insights from across Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Evidence supports a source-grounded decision, not asserted programme outcomes. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Accepted: Entrepreneurial ecosystem mechanisms affect the translation of European research into firms. Matched evidence: Peer-reviewed study reviewing European technology-entrepreneurship findings, including multiple regional or country settings."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "Technology entrepreneurship research opportunities: insights from across Europe",
+      "reader_what": "A comparative paper synthesises technology entrepreneurship research and innovation-system conditions across European settings.",
+      "reader_why": "Entrepreneurial ecosystem mechanisms affect the translation of European research into firms.",
+      "reader_more": "A comparative paper synthesises technology entrepreneurship research and innovation-system conditions across European settings. Peer-reviewed study reviewing European technology-entrepreneurship findings, including multiple regional or country settings. Case evidence is heterogeneous and cannot be treated as an EU-wide causal estimate.",
+      "deep_analysis": {
+        "work_kind": "Research and innovation evidence",
+        "research_question": "What does the recovered work establish about Technology entrepreneurship research opportunities: insights from across Europe?",
+        "main_finding": "A comparative paper synthesises technology entrepreneurship research and innovation-system conditions across European settings.",
+        "method_or_basis": "Peer-reviewed study reviewing European technology-entrepreneurship findings, including multiple regional or country settings.",
+        "qualification": "Case evidence is heterogeneous and cannot be treated as an EU-wide causal estimate.",
+        "radar_relevance": "Entrepreneurial ecosystem mechanisms affect the translation of European research into firms.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "innovation.deep_tech_startups",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European technology entrepreneurship study authors",
+            "class": "university_group"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2017-02-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Case evidence is heterogeneous and cannot be treated as an EU-wide causal estimate.",
+          "text": "A comparative paper synthesises technology entrepreneurship research and innovation-system conditions across European settings.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:20b5da55489c1775",
+      "source_hash": "a5cf1bfa",
+      "identity_hash": "fb2440a3e617bf4a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary pdf_excerpt captured in the package from https://www.ifo.de/DocDL/CESifo-forum-2017-3-fagerberg-laestadius-martin-innovation%20policy-september.pdf; reviewed source text (24000 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 24000 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://www.ifo.de/DocDL/CESifo-forum-2017-3-fagerberg-laestadius-martin-innovation%20policy-september.pdf",
+            "title": "The Role of Innovation Policy in Simultaneously Addressing Economic, Environmental and Governance Challenges",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Evidence supports a source-grounded decision, not asserted programme outcomes. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Accepted: This historical analysis links innovation-policy governance with multiple European transformation objectives. Matched evidence: Original academic/working-paper analysis of innovation systems and policy design, with substantive European policy relevance."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "The Role of Innovation Policy in Simultaneously Addressing Economic, Environmental and Governance Challenges",
+      "reader_what": "An innovation-policy study examines how public policy can pursue economic performance alongside environmental and governance goals.",
+      "reader_why": "This historical analysis links innovation-policy governance with multiple European transformation objectives.",
+      "reader_more": "An innovation-policy study examines how public policy can pursue economic performance alongside environmental and governance goals. Original academic/working-paper analysis of innovation systems and policy design, with substantive European policy relevance. Recommendations and conceptual mechanisms do not guarantee identical impacts across European innovation systems.",
+      "deep_analysis": {
+        "work_kind": "Research and innovation evidence",
+        "research_question": "What does the recovered work establish about The Role of Innovation Policy in Simultaneously Addressing Economic, Environmental and Governance Challenges?",
+        "main_finding": "An innovation-policy study examines how public policy can pursue economic performance alongside environmental and governance goals.",
+        "method_or_basis": "Original academic/working-paper analysis of innovation systems and policy design, with substantive European policy relevance.",
+        "qualification": "Recommendations and conceptual mechanisms do not guarantee identical impacts across European innovation systems.",
+        "radar_relevance": "This historical analysis links innovation-policy governance with multiple European transformation objectives.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "green.innovation",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Fagerberg and co-authors",
+            "class": "university_group"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2017",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Recommendations and conceptual mechanisms do not guarantee identical impacts across European innovation systems.",
+          "text": "An innovation-policy study examines how public policy can pursue economic performance alongside environmental and governance goals.",
+          "confidence": "medium",
+          "status_date_precision": "year"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:3dc93cbcd32719ac",
+      "source_hash": "92414744",
+      "identity_hash": "3c362ee45c673233",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary substantial_web_text captured in the package from https://link.springer.com/article/10.1007/s40309-016-0101-5; reviewed source text (20405 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 20405 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://link.springer.com/article/10.1007/s40309-016-0101-5",
+            "title": "A participatory Foresight for National Research and Education Networks",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Considered relevant strand admission tests and exclusions. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "B_NO_NEW_TRANSFERABLE_METHOD",
+        "reason": "B fails novelty gate: it applies established expert consultation and scenarios to a national network, rather than developing a materially new reusable foresight method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "A participatory Foresight for National Research and Education Networks",
+      "reader_what": "Participatory foresight exercise for a Colombian research and education network",
+      "reader_why": "",
+      "reader_more": "Participatory foresight exercise for a Colombian research and education network. Source category and scope were checked against the assigned Radar gate. B fails novelty gate: it applies established expert consultation and scenarios to a national network, rather than developing a materially new reusable foresight method.",
+      "deep_analysis": {
+        "work_kind": "Publication or programme screening",
+        "research_question": "Does A participatory Foresight for National Research and Education Networks meet the assigned strand's positive admission routes?",
+        "main_finding": "Participatory foresight exercise for a Colombian research and education network",
+        "method_or_basis": "First-party material for the named publication, report, event or programme, assessed against the assigned Radar admission routes.",
+        "qualification": "The recovered item does not independently substantiate European R&I-system evidence or a qualifying new foresight method/change.",
+        "radar_relevance": "B fails novelty gate: it applies established expert consultation and scenarios to a national network, rather than developing a materially new reusable foresight method.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:c35e6a3c184ed3da",
+      "source_hash": "e37a35a0",
+      "identity_hash": "c4214bb465be45a6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary substantial_web_text captured in the package from https://link.springer.com/article/10.1007/s11192-016-1927-0; reviewed source text (14783 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 14783 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://link.springer.com/article/10.1007/s11192-016-1927-0",
+            "title": "Scientific collaboration framework of BRICS countries: an analysis of international coauthorship",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Considered relevant strand admission tests and exclusions. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INADMISSIBLE_EVIDENCE_OR_SCOPE",
+        "reason": "A1–A3 fail substantive European scope: the analysed research system is BRICS; Europe is an external comparator rather than the object of study."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "Scientific collaboration framework of BRICS countries: an analysis of international coauthorship",
+      "reader_what": "Bibliometric study of scientific coauthorship among BRICS countries",
+      "reader_why": "",
+      "reader_more": "Bibliometric study of scientific coauthorship among BRICS countries. Source category and scope were checked against the assigned Radar gate. A1–A3 fail substantive European scope: the analysed research system is BRICS; Europe is an external comparator rather than the object of study.",
+      "deep_analysis": {
+        "work_kind": "Publication or programme screening",
+        "research_question": "Does Scientific collaboration framework of BRICS countries: an analysis of international coauthorship meet the assigned strand's positive admission routes?",
+        "main_finding": "Bibliometric study of scientific coauthorship among BRICS countries",
+        "method_or_basis": "First-party material for the named publication, report, event or programme, assessed against the assigned Radar admission routes.",
+        "qualification": "The recovered item does not independently substantiate European R&I-system evidence or a qualifying new foresight method/change.",
+        "radar_relevance": "A1–A3 fail substantive European scope: the analysed research system is BRICS; Europe is an external comparator rather than the object of study.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:f6292a488daec6a8",
+      "source_hash": "9f08dee7",
+      "identity_hash": "0852807f9504cfdb",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Original linked record lacked sufficient matching substantive text in the supplied archive: https://doi.org/10.1108/fs-07-2014-0050."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "recovered",
+            "note": "Recovered an identifiable work's publisher, official or institutional landing material at https://publications.ait.ac.at/en/publications/new-forms-of-innovation-critical-issues-for-future-pathways; compared title, authors and subject."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_publisher_or_repository",
+            "url": "https://publications.ait.ac.at/en/publications/new-forms-of-innovation-critical-issues-for-future-pathways",
+            "title": "New forms of innovation: critical issues for future pathways",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Recovered identifying publication from an external first-party publisher or research-institution record. Evidence supports a source-grounded decision, not asserted programme outcomes. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Accepted: European innovation governance must account for data, intellectual property and uneven effects of participation. Matched evidence: Peer-reviewed Foresight article based on European expert assessments of international innovation practice examples."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "New forms of innovation: critical issues for future pathways",
+      "reader_what": "A European foresight study finds both benefits and drawbacks in open, networked and user-driven innovation models.",
+      "reader_why": "European innovation governance must account for data, intellectual property and uneven effects of participation.",
+      "reader_more": "A European foresight study finds both benefits and drawbacks in open, networked and user-driven innovation models. Peer-reviewed Foresight article based on European expert assessments of international innovation practice examples. This is a study of innovation-policy implications; the foresight project does not establish causal performance of every model.",
+      "deep_analysis": {
+        "work_kind": "Research and innovation evidence",
+        "research_question": "What does the recovered work establish about New forms of innovation: critical issues for future pathways?",
+        "main_finding": "A European foresight study finds both benefits and drawbacks in open, networked and user-driven innovation models.",
+        "method_or_basis": "Peer-reviewed Foresight article based on European expert assessments of international innovation practice examples.",
+        "qualification": "This is a study of innovation-policy implications; the foresight project does not establish causal performance of every model.",
+        "radar_relevance": "European innovation governance must account for data, intellectual property and uneven effects of participation.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "innovation.system_performance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Leitner, Warnke and Rhomberg",
+            "class": "university_group"
+          },
+          "mechanism": "assesses",
+          "direction": "unchanged",
+          "status": "delivered",
+          "status_date": "2016",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "This is a study of innovation-policy implications; the foresight project does not establish causal performance of every model.",
+          "text": "A European foresight study finds both benefits and drawbacks in open, networked and user-driven innovation models.",
+          "confidence": "medium",
+          "status_date_precision": "year"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:4a8d494ca1aeaa44",
+      "source_hash": "c76f2eca",
+      "identity_hash": "99d6145757e8935a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching primary substantial_web_text captured in the package from https://www.nsf.gov/funding/opportunities/erc-engineering-research-centers/5502/nsf15-589/solicitation; reviewed source text (23568 characters), not the scanner headline."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "source_content_read",
+            "note": "Read captured source document for its actual evidence and scope; 23568 characters available."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_source_content",
+            "url": "https://www.nsf.gov/funding/opportunities/erc-engineering-research-centers/5502/nsf15-589/solicitation",
+            "title": "Gen-3 Engineering Research Centers (ERC)",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original primary text or publication excerpt preserved in source_material and matched to the named work.Considered relevant strand admission tests and exclusions. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_INADMISSIBLE_EVIDENCE_OR_SCOPE",
+        "reason": "A1–A3 fail substantive European scope and evidence-product gate: this is a US funding solicitation, not an analysis of European research infrastructure."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title identity duplicate substantiated in the assigned candidate set."
+      },
+      "reader_title": "Gen-3 Engineering Research Centers (ERC)",
+      "reader_what": "US National Science Foundation Gen-3 ERC programme description",
+      "reader_why": "",
+      "reader_more": "US National Science Foundation Gen-3 ERC programme description. Source category and scope were checked against the assigned Radar gate. A1–A3 fail substantive European scope and evidence-product gate: this is a US funding solicitation, not an analysis of European research infrastructure.",
+      "deep_analysis": {
+        "work_kind": "Publication or programme screening",
+        "research_question": "Does Gen-3 Engineering Research Centers (ERC) meet the assigned strand's positive admission routes?",
+        "main_finding": "US National Science Foundation Gen-3 ERC programme description",
+        "method_or_basis": "First-party material for the named publication, report, event or programme, assessed against the assigned Radar admission routes.",
+        "qualification": "The recovered item does not independently substantiate European R&I-system evidence or a qualifying new foresight method/change.",
+        "radar_relevance": "A1–A3 fail substantive European scope and evidence-product gate: this is a US funding solicitation, not an analysis of European research infrastructure.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    }
+  ]
+}
