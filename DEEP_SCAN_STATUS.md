@@ -6,40 +6,40 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **3335** (Main **1656** + Historical **1679**)
-- Automatic queue still needing V2 verification: **122** (Main **7** + Historical **115**)
-- Currently assigned to workers: **107** (Main **7** + Historical **100**)
+- Authoritative V2 verified: **3369** (Main **1661** + Historical **1708**)
+- Automatic queue still needing V2 verification: **88** (Main **2** + Historical **86**)
+- Currently assigned to workers: **88** (Main **2** + Historical **86**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **44**
-- Automatic queue pending and not yet assigned: **15**
+- Automatic queue pending and not yet assigned: **0**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261025T085906Z-4eac244b4b2e`
-- Assigned unresolved records: **36**
-  1. `link:https://doi.org/10.1080/23322969.2026.2751120` — Emerging research security approaches: organisational arrangements at three European universities — recovery attempt 2/3
-  2. `link:https://doi.org/10.1098/rsos.261323` — Optimizing for happiness in EU technology policy to repay public subsidies for AI
-  3. `link:https://doi.org/10.1093/9780191989117.003.0003` — Frontier Science and Technology
-  4. `link:https://news.google.com/rss/articles/CBMiqAFBVV95cUxQTVJJcXNlTE81VmcxZ095ZnNoS3FvTFdvQXJmYVQ4cVdZZTB6TFlPMnV4dlBkdEI3UTlCN1JGWlQzdVRLMzloRnZEX25rTlBMNVpUa1dSNnc2NnpkdHZvWFZVTlBYYm1RZldCQ1pjVWRiWkFxOTdpY0Y1Y1R3aDZJQ0VKRzc1QVZ4SnhnMkJJYkl6X2o4SXNRZDZyRzVLMWVYVmw1Y09zVVg?oc=5` — Commission proposes unlocking Hungary’s Horizon Europe funds
-  5. `link:https://news.google.com/rss/articles/CBMi1gFBVV95cUxQaVl4eEt4Z25aZ2tWTVlYb2tGa0RjN2ZSVjRzN1N1S1RWNXVJTzhDZnNjQ0JzUzdSWXRjNmh2RVFCbUhUQ3NCUllvY1M3QnVfQllPMGpfRjJjZjNvNlBzMVlSdlFBczV1Q0hqX1FiNFh5ZGF4bUMzWU92UTUtYXktRlRaemNUdUNMVDI3VnlKQ0ZyMW9XSEszc2dKYkhURUh0anEwRnBTVUVLR1NCeThuMEZHU3hKcks3a0pONGUweXN2Y0hpVTN2OHVic3NPaVh1TVJKcjRn?oc=5` — Building bridges through science diplomacy - European Commission
-  6. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxOdUI3QU5iX211d3BmcjFoa3dpWXROZjd4bm5rZ0ZaVkRQaEtlVmdUdkhoWlVTQzd4NkJ3Y1NBQWF0WXBtRklveXBhNzRuUHlsdnVCXzNGVzR4MG9TRU5QMUoyTzUtc0UtZEZJdVl6VGpKY05ZV2tBbEJwc0o2M2VnUHVaR1dlOE5pcU5pNWUweHZHMFkweDNXTUpzUWtJUDkwTmhqZ2dqRjZ2blhTMlE?oc=5` — Nvidia's Huang hails Europe's AI potential, flanked by robot ducks
-  7. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxNSlFLeW03Q0twcjRURGM4akhEOThDVG5aQ3cxREFneTU2Tkh3U0w0TFRKZElBS0dvVGVlelloMXhuLThCU1BHMEp1TjN5dnIyaTg3SnZNWllITHhxcEJza2JKM2RPYnlHRGNWWDlTTERpdUg4UzA3clc1VmpiOUtEUVY2dmcxdXdOU3E1NWxrZjNwcjhGQksyYlZ2Wl9lZXJtSzBBSFBSbms5S0dNN2w0?oc=5` — Horizon Europe: How are Ukraine and Moldova faring?
-  8. `historical:id:56be269c1ae80dcb` — Feeding the beast: Energy security as a precondition for the EU's AI power
-  - … plus 28 more in the package manifest
+- Current package: `worker-a-20261025T090936Z-04774caf2baa`
+- Assigned unresolved records: **19**
+  1. `link:https://doi.org/10.1080/23322969.2026.2751120` — Emerging research security approaches: organisational arrangements at three European universities — recovery attempt 3/3
+  2. `link:https://doi.org/10.1093/9780191989117.003.0003` — Frontier Science and Technology — recovery attempt 2/3
+  3. `historical:id:42c49f023d23a794` — Digital decolonisation: The EU’s new ideas on data and artificial intelligence – European Council on Foreign Relations
+  4. `historical:id:f5ccff6700afcbfa` — Transformation or evolution?: Education 4.0, teaching and learning in the digital age
+  5. `historical:id:918a347da0104729` — Digital Investments, Data and Growth in Europe: A Framework for Analysis
+  6. `historical:id:28d6d5ebc62cd05b` — Assessing the desirability and feasibility of scenarios on eco-efficient transport: a heuristic for efficient stakeholder involvement during foresight processes
+  7. `historical:id:f66ae451afb39141` — Proximity dimensions and scientific collaboration among academic institutions in Europe: The closer, the better?
+  8. `historical:id:b9f7c46779f5b8a1` — Investigating the interplay between fundamentals of national research systems: Performance, investments and international collaborations
+  - … plus 11 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261025T085915Z-623537e72de2`
-- Assigned unresolved records: **36**
+- Current package: `worker-b-20261025T090941Z-c8f435ac17c4`
+- Assigned unresolved records: **34**
   1. `historical:id:8dc382a7f4033b91` — European research development and deployment of AI
   2. `historical:id:4e342d23da20af7e` — EU-funded space R&I in previous EU Framework programmes for Research and Innovation
   3. `historical:id:ed1649ba113f82d0` — 'How Immigration is Shaping China':MERICS China Monitor
   4. `historical:id:4afb03fa663569e2` — An Assessment of AI’s Impact on Contemporary Geopolitics | HCSS
-  5. `historical:id:4232e3a0c6f8cbfb` — Health in the Horizon Europe programme
-  6. `historical:id:bee7c891ecce4843` — Opportunities for bilateral collaboration with China | Vinnova
-  7. `historical:id:9c842cdcafdebabe` — Joint Statement on the Implementation of the EU-China Cooperation on Energy
-  8. `historical:id:147496c851b6e66c` — Climate Barometer 2019: Finns wish to have solutions to climate crisis at the heart of policy-making | VTT
-  - … plus 28 more in the package manifest
+  5. `historical:id:bee7c891ecce4843` — Opportunities for bilateral collaboration with China | Vinnova
+  6. `historical:id:9c842cdcafdebabe` — Joint Statement on the Implementation of the EU-China Cooperation on Energy
+  7. `historical:id:147496c851b6e66c` — Climate Barometer 2019: Finns wish to have solutions to climate crisis at the heart of policy-making | VTT
+  8. `historical:id:8879e7c6fecbe375` — Overview of ethics codes and principles for AI | Rathenau Instituut
+  - … plus 26 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
