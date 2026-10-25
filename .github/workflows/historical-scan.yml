@@ -225,7 +225,7 @@ jobs:
             auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
             git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${auth}"
             trap 'git config --local --unset-all http.https://github.com/.extraheader >/dev/null 2>&1 || true' EXIT
-            # Generated files outside the committed archive must not block rebase.
+            # Set aside uncommitted generated files so rebase can run cleanly.
             git stash push --include-untracked -m "Temporary historical scan changes"
             git pull --rebase origin main
             git push origin HEAD:main
