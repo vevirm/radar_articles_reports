@@ -7,38 +7,38 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **3299** (Main **1656** + Historical **1643**)
-- Automatic queue still needing V2 verification: **140** (Main **1** + Historical **139**)
-- Currently assigned to workers: **107** (Main **1** + Historical **106**)
+- Automatic queue still needing V2 verification: **158** (Main **7** + Historical **151**)
+- Currently assigned to workers: **107** (Main **7** + Historical **100**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **44**
-- Automatic queue pending and not yet assigned: **33**
+- Automatic queue pending and not yet assigned: **51**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261024T145556Z-add028e99c8a`
+- Current package: `worker-a-20261025T082639Z-921062400e03`
 - Assigned unresolved records: **36**
-  1. `link:https://doi.org/10.1080/23322969.2026.2751120` — Emerging research security approaches: organisational arrangements at three European universities — recovery attempt 2/3
-  2. `historical:id:1c1b904642bf6f2c` — On the Role and Assessment of Research at European Universities of Applied Sciences
-  3. `historical:id:60c628dba33f8b32` — Exploring Regional Innovation Policies and Regional Industrial Transformation from a Coevolutionary Perspective: The Case of Małopolska, Poland
-  4. `historical:id:1d6d0e414abb14e0` — Governing with cities: Europe's overlooked governance infrastructure | Demos Helsinki
-  5. `historical:id:e047b7113bf0175f` — Cobalt mining in the EU: Securing supplies and ensuring energy justice - HCSS
-  6. `historical:id:82fcdb0b727f8570` — Cybersecurity in the era of hypercompetitiveness: can the EU meet the new challenges?
-  7. `historical:id:a0b667d2695e9dda` — Can the Chips Act Put the U.S. Back in the Game?
-  8. `historical:id:c7b8394d6b88d37f` — Regional Technological Capabilities and the Access to H2020 Funds
+  1. `link:https://doi.org/10.1098/rsos.261323` — Optimizing for happiness in EU technology policy to repay public subsidies for AI
+  2. `link:https://doi.org/10.1093/9780191989117.003.0003` — Frontier Science and Technology
+  3. `link:https://news.google.com/rss/articles/CBMiqAFBVV95cUxQTVJJcXNlTE81VmcxZ095ZnNoS3FvTFdvQXJmYVQ4cVdZZTB6TFlPMnV4dlBkdEI3UTlCN1JGWlQzdVRLMzloRnZEX25rTlBMNVpUa1dSNnc2NnpkdHZvWFZVTlBYYm1RZldCQ1pjVWRiWkFxOTdpY0Y1Y1R3aDZJQ0VKRzc1QVZ4SnhnMkJJYkl6X2o4SXNRZDZyRzVLMWVYVmw1Y09zVVg?oc=5` — Commission proposes unlocking Hungary’s Horizon Europe funds
+  4. `link:https://news.google.com/rss/articles/CBMi1gFBVV95cUxQaVl4eEt4Z25aZ2tWTVlYb2tGa0RjN2ZSVjRzN1N1S1RWNXVJTzhDZnNjQ0JzUzdSWXRjNmh2RVFCbUhUQ3NCUllvY1M3QnVfQllPMGpfRjJjZjNvNlBzMVlSdlFBczV1Q0hqX1FiNFh5ZGF4bUMzWU92UTUtYXktRlRaemNUdUNMVDI3VnlKQ0ZyMW9XSEszc2dKYkhURUh0anEwRnBTVUVLR1NCeThuMEZHU3hKcks3a0pONGUweXN2Y0hpVTN2OHVic3NPaVh1TVJKcjRn?oc=5` — Building bridges through science diplomacy - European Commission
+  5. `link:https://news.google.com/rss/articles/CBMirgFBVV95cUxOdUI3QU5iX211d3BmcjFoa3dpWXROZjd4bm5rZ0ZaVkRQaEtlVmdUdkhoWlVTQzd4NkJ3Y1NBQWF0WXBtRklveXBhNzRuUHlsdnVCXzNGVzR4MG9TRU5QMUoyTzUtc0UtZEZJdVl6VGpKY05ZV2tBbEJwc0o2M2VnUHVaR1dlOE5pcU5pNWUweHZHMFkweDNXTUpzUWtJUDkwTmhqZ2dqRjZ2blhTMlE?oc=5` — Nvidia's Huang hails Europe's AI potential, flanked by robot ducks
+  6. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxNSlFLeW03Q0twcjRURGM4akhEOThDVG5aQ3cxREFneTU2Tkh3U0w0TFRKZElBS0dvVGVlelloMXhuLThCU1BHMEp1TjN5dnIyaTg3SnZNWllITHhxcEJza2JKM2RPYnlHRGNWWDlTTERpdUg4UzA3clc1VmpiOUtEUVY2dmcxdXdOU3E1NWxrZjNwcjhGQksyYlZ2Wl9lZXJtSzBBSFBSbms5S0dNN2w0?oc=5` — Horizon Europe: How are Ukraine and Moldova faring?
+  7. `historical:id:56be269c1ae80dcb` — Feeding the beast: Energy security as a precondition for the EU's AI power
+  8. `historical:id:9c5bc42896cec418` — The Road to a New European Automotive Strategy: Trade and Industrial Policy Options - Institut Jacques Delors
   - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261024T145608Z-cc6ed9e8f7be`
+- Current package: `worker-b-20261025T082647Z-7932c5884442`
 - Assigned unresolved records: **36**
-  1. `historical:id:48e268204c448631` — The Application of the Science Diplomacy Model: the Russian and International Experience
-  2. `historical:id:9f412c059f12bbed` — Referees don’t win games: Europe and the digital great game – European Council on Foreign Relations
-  3. `historical:id:5e640ca14007f2bb` — Operationalizing urban resilience: insights from the science-policy interface in the European Union
-  4. `historical:id:11c959fa157485eb` — Appraising research policy instrument mixes: a multicriteria mapping study in six European countries of diagnostic innovation to manage antimicrobial resistance
-  5. `historical:id:b80ec7105f47ec2b` — Public digital infrastructure should be at the core of Europe’s tech sovereignty strategy
-  6. `historical:id:578d2c4025f15d85` — Green Deal Reloaded - Towards a New Green Industrial Policy in Europe
-  7. `historical:id:660dbc2f524a1b35` — Gathering Forces for Horizon Europe
-  8. `historical:id:64e514c08980fe9c` — EU Civil security research funds
+  1. `historical:id:9b3b40c028b87fc7` — Supply Chain Resilience Bulletin - July 2022
+  2. `historical:id:11664eb797f54dfa` — Supply Chain Resilience Bulletin - December 2022
+  3. `historical:id:6d7cad20b8946722` — Review of research publications on postdoctoral research fellowship: Implications for African institutions
+  4. `historical:id:394dc6aa7b7dc130` — Promoting Gender Equality in Research Funding
+  5. `historical:id:cb50228671ac23cb` — France and Germany: Towards a Common Strategy on Digital Health
+  6. `historical:id:209cab6667c84237` — EU Space Strategy for Security and Defence
+  7. `historical:id:0aa8a3329c4b8fce` — Germany’s new China policy – European Council on Foreign Relations
+  8. `historical:id:c95e37d3794221e5` — COST at MSCA 2021: Addressing political challenges and fostering balanced mobility flows - COST
   - … plus 28 more in the package manifest
 
 ### Worker SINGLE
