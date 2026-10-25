@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **3369** (Main **1661** + Historical **1708**)
-- Automatic queue still needing V2 verification: **106** (Main **18** + Historical **88**)
-- Currently assigned to workers: **106** (Main **18** + Historical **88**)
+- Authoritative V2 verified: **3434** (Main **1678** + Historical **1756**)
+- Automatic queue still needing V2 verification: **41** (Main **1** + Historical **40**)
+- Currently assigned to workers: **41** (Main **1** + Historical **40**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **44**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,30 +16,18 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261025T180911Z-1edd5ad27ab7`
-- Assigned unresolved records: **36**
+- Current package: `worker-a-20261025T185919Z-abb8c2b8cafb`
+- Assigned unresolved records: **4**
   1. `link:https://allea.org/strategic-framework-for-ukraine-scientific-recovery-video-on-gdansk-declaration/` — A Strategic Framework for Ukraine's Scientific Recovery - Video on the Gdańsk Declaration and the Road Ahead - ALLEA
-  2. `link:https://www.interface-eu.org/publications/ai-and-national-security-australia-today-the-rest-of-the-world-tomorrow` — AI and national security: Australia today, the rest of the world tomorrow?
-  3. `link:https://allea.org/allea-leopoldina-podium-discussion-science-and-democracy/` — ALLEA Board Member Contributes to Leopoldina Podium Discussion on Science in Democracy - ALLEA
-  4. `link:https://www.interface-eu.org/publications/cn014-how-north-korean-it-workers-infiltrate-german-companies-and-espionage-financial-data-in-liechtenstein` — CN014: How North Korean IT workers infiltrate German companies and espionage financial data in Liechtenstein
-  5. `link:https://www.interface-eu.org/publications/cybersecurity-in-germany-a-240-page-hidden-object-picture` — Cybersecurity in Germany: A 240-page hidden object picture
-  6. `link:https://cerre.eu/wp-content/uploads/2026/02/CERRE_DMA@2-Towards-Stronger-Governance-and-Evaluation.pdf` — DMA@2: Towards Stronger Governance and Evaluation?
-  7. `link:https://era.gv.at/news-items/eit-launches-new-call-under-eit-higher-education-initiative-to-turn-research-into-innovation/` — EIT launches new call under EIT Higher Education Initiative to turn research into innovation
-  8. `link:https://doi.org/10.1016/j.egyr.2026.109800` — Emerging research topics on the role of innovation in the green transition in the EU
-  - … plus 28 more in the package manifest
+  2. `historical:id:fcab74327db94145` — The Finnish health sector growth and competitiveness vision 2030 - Sitra
+  3. `historical:id:9c45514ea2021c19` — Summary: Grasp the challenge - Daring to go for energy innovation | Adviesraad voor wetenschap, technologie en innovatie
+  4. `historical:id:61deaf307b884e50` — Knowledge Transfer 2015
 
 ### Worker B
-- Current package: `worker-b-20261025T180919Z-77aa00ac9653`
-- Assigned unresolved records: **35**
-  1. `historical:id:8dc382a7f4033b91` — European research development and deployment of AI
-  2. `historical:id:4e342d23da20af7e` — EU-funded space R&I in previous EU Framework programmes for Research and Innovation
-  3. `historical:id:ed1649ba113f82d0` — 'How Immigration is Shaping China':MERICS China Monitor
-  4. `historical:id:4afb03fa663569e2` — An Assessment of AI’s Impact on Contemporary Geopolitics | HCSS
-  5. `historical:id:bee7c891ecce4843` — Opportunities for bilateral collaboration with China | Vinnova
-  6. `historical:id:9c842cdcafdebabe` — Joint Statement on the Implementation of the EU-China Cooperation on Energy
-  7. `historical:id:147496c851b6e66c` — Climate Barometer 2019: Finns wish to have solutions to climate crisis at the heart of policy-making | VTT
-  8. `historical:id:8879e7c6fecbe375` — Overview of ethics codes and principles for AI | Rathenau Instituut
-  - … plus 27 more in the package manifest
+- Current package: `worker-b-20261025T185925Z-aad8f2b323c0`
+- Assigned unresolved records: **2**
+  1. `historical:id:a018a18dd894f57e` — Review of PhD training in biomedical research | Wellcome
+  2. `historical:id:85c44736f24add75` — Needs inventory – inventory of needs for research infrastructure
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
