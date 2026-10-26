@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-deep-scan-work-state-v1",
-  "updated_at": "2026-10-26T10:55:19Z",
+  "updated_at": "2026-10-26T11:45:44Z",
   "lanes": {
     "A": {
       "target_size": 36,
@@ -9,9 +9,8 @@
         "link:https://news.google.com/rss/articles/CBMi5AFBVV95cUxQNkh5Wm1UelFkX2VPaU96cEZyeEpjbWRTc09SRlhlY1p6d1lEVGUzZTA2T2Z2clVWQ0ZLNFFGVHlMZWtRcU1CenlQdDJiVENFVlhjMXJtT2VRVG13Rk5QeTRtSUZnS3VtR2JYWldBcTBnMUJOeGwyY3pBOGZCaTY3VkpLUmViRTY2dGdmSmFncUw0T1Q4UG5mMy1ldHdzQVZZMDB6ZXh3eFJRSGFUeDVDSDRjUkJiSnhjSTI2c0pTcEk2VGZzT0ZsaThEbFM4QXVIaXpFVF9DNG10WC16STlxQy14d18?oc=5",
         "historical:id:799fc0cdcf9732ee"
       ],
-      "current_package_id": "worker-a-20261026T105517Z-82e7d197ab46",
+      "current_package_id": "worker-a-20261026T114541Z-82e7d197ab46",
       "package_history": [
-        "worker-a-20261021T075322Z-e3468bda45db",
         "worker-a-20261021T075937Z-73c388f52aad",
         "worker-a-20261021T092703Z-039626ad2590",
         "worker-a-20261021T102144Z-ba80399f6c1e",
@@ -50,7 +49,8 @@
         "worker-a-20261025T180911Z-1edd5ad27ab7",
         "worker-a-20261025T185919Z-abb8c2b8cafb",
         "worker-a-20261026T095744Z-8c91ad198223",
-        "worker-a-20261026T105517Z-82e7d197ab46"
+        "worker-a-20261026T105517Z-82e7d197ab46",
+        "worker-a-20261026T114541Z-82e7d197ab46"
       ]
     },
     "B": {
@@ -80336,9 +80336,9 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-10-26T09:57:44Z",
-      "last_package_id": "worker-a-20261026T105517Z-82e7d197ab46",
-      "scan_package_attempts": 2,
-      "last_scan_package_at": "2026-10-26T10:55:18Z",
+      "last_package_id": "worker-a-20261026T114541Z-82e7d197ab46",
+      "scan_package_attempts": 3,
+      "last_scan_package_at": "2026-10-26T11:45:43Z",
       "recovery_attempts": 1,
       "last_recovery_at": "2026-10-26T10:47:46Z",
       "last_recovery_package_id": "worker-a-20261026T095744Z-8c91ad198223",
@@ -80516,9 +80516,9 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-10-26T09:57:44Z",
-      "last_package_id": "worker-a-20261026T105517Z-82e7d197ab46",
-      "scan_package_attempts": 2,
-      "last_scan_package_at": "2026-10-26T10:55:18Z",
+      "last_package_id": "worker-a-20261026T114541Z-82e7d197ab46",
+      "scan_package_attempts": 3,
+      "last_scan_package_at": "2026-10-26T11:45:43Z",
       "recovery_attempts": 1,
       "last_recovery_at": "2026-10-26T10:47:47Z",
       "last_recovery_package_id": "worker-a-20261026T095744Z-8c91ad198223",
@@ -104324,6 +104324,14 @@
     "worker-a-20261026T105517Z-82e7d197ab46": {
       "lane": "A",
       "created_at": "2026-10-26T10:55:18Z",
+      "record_keys": [
+        "link:https://news.google.com/rss/articles/CBMi5AFBVV95cUxQNkh5Wm1UelFkX2VPaU96cEZyeEpjbWRTc09SRlhlY1p6d1lEVGUzZTA2T2Z2clVWQ0ZLNFFGVHlMZWtRcU1CenlQdDJiVENFVlhjMXJtT2VRVG13Rk5QeTRtSUZnS3VtR2JYWldBcTBnMUJOeGwyY3pBOGZCaTY3VkpLUmViRTY2dGdmSmFncUw0T1Q4UG5mMy1ldHdzQVZZMDB6ZXh3eFJRSGFUeDVDSDRjUkJiSnhjSTI2c0pTcEk2VGZzT0ZsaThEbFM4QXVIaXpFVF9DNG10WC16STlxQy14d18?oc=5",
+        "historical:id:799fc0cdcf9732ee"
+      ]
+    },
+    "worker-a-20261026T114541Z-82e7d197ab46": {
+      "lane": "A",
+      "created_at": "2026-10-26T11:45:43Z",
       "record_keys": [
         "link:https://news.google.com/rss/articles/CBMi5AFBVV95cUxQNkh5Wm1UelFkX2VPaU96cEZyeEpjbWRTc09SRlhlY1p6d1lEVGUzZTA2T2Z2clVWQ0ZLNFFGVHlMZWtRcU1CenlQdDJiVENFVlhjMXJtT2VRVG13Rk5QeTRtSUZnS3VtR2JYWldBcTBnMUJOeGwyY3pBOGZCaTY3VkpLUmViRTY2dGdmSmFncUw0T1Q4UG5mMy1ldHdzQVZZMDB6ZXh3eFJRSGFUeDVDSDRjUkJiSnhjSTI2c0pTcEk2VGZzT0ZsaThEbFM4QXVIaXpFVF9DNG10WC16STlxQy14d18?oc=5",
         "historical:id:799fc0cdcf9732ee"

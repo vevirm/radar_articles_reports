@@ -16,7 +16,7 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261026T105517Z-82e7d197ab46`
+- Current package: `worker-a-20261026T114541Z-82e7d197ab46`
 - Assigned unresolved records: **2**
   1. `link:https://news.google.com/rss/articles/CBMi5AFBVV95cUxQNkh5Wm1UelFkX2VPaU96cEZyeEpjbWRTc09SRlhlY1p6d1lEVGUzZTA2T2Z2clVWQ0ZLNFFGVHlMZWtRcU1CenlQdDJiVENFVlhjMXJtT2VRVG13Rk5QeTRtSUZnS3VtR2JYWldBcTBnMUJOeGwyY3pBOGZCaTY3VkpLUmViRTY2dGdmSmFncUw0T1Q4UG5mMy1ldHdzQVZZMDB6ZXh3eFJRSGFUeDVDSDRjUkJiSnhjSTI2c0pTcEk2VGZzT0ZsaThEbFM4QXVIaXpFVF9DNG10WC16STlxQy14d18?oc=5` — Threats to EU R&I budget may warrant a rethink on regional investment — recovery attempt 2/3
   2. `historical:id:799fc0cdcf9732ee` — Europe must avoid new green supply chain dependencies — recovery attempt 2/3
