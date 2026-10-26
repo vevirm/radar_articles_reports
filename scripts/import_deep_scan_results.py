@@ -542,6 +542,7 @@ def main() -> None:
     admission_changed = False
     seen_pairs: set[tuple[str, str, str]] = set()
     imported_files: list[Path] = []
+    quarantine_files: list[Path] = []
     file_failures: list[str] = []
 
     for path in files:
@@ -554,6 +555,7 @@ def main() -> None:
             docs = list(docs_from_file(path))
         except Exception as exc:
             file_failures.append(f"{path.name}: {clean(exc)}")
+            quarantine_files.append(path)
             continue
         for label, result_doc in docs:
             file_had_valid_doc = True
@@ -832,9 +834,10 @@ def main() -> None:
         if file_had_valid_doc:
             if rejected_count > rejected_before or stale_count > stale_before:
                 print(
-                    f"PRESERVE {path.name}: worker response contains rejected/stale results; "
-                    "original file remains in deep_scan_inbox for correction."
+                    f"QUARANTINE {path.name}: rejected/stale entries require a corrected worker response; "
+                    "original input is retained outside the delivery inbox."
                 )
+                quarantine_files.append(path)
             else:
                 imported_files.append(path)
 
@@ -842,7 +845,7 @@ def main() -> None:
         print("Invalid result files:")
         for x in file_failures:
             print(" -", x)
-        raise SystemExit(2)
+        print("Malformed submissions will be retained in deep_scan_review; remaining valid files continue.")
 
     total_accepted = accepted_v1 + accepted_v2
     if total_accepted or admission_changed:
@@ -869,6 +872,19 @@ def main() -> None:
     if work_state_changed:
         save_state(work_state, args.work_state)
 
+    # A processed inbox is a delivery queue, not a permanent error log. Preserve
+    # problematic originals losslessly in a tracked review folder for human/LLM
+    # correction, but do not reprocess their accepted rows on every push.
+    review_dir = args.inbox.parent / "deep_scan_review"
+    for path in quarantine_files:
+        review_dir.mkdir(parents=True, exist_ok=True)
+        destination = review_dir / path.name
+        if destination.exists():
+            digest = hashlib.sha256(path.read_bytes()).hexdigest()[:12]
+            destination = review_dir / f"{path.stem}.{digest}{path.suffix}"
+        path.rename(destination)
+        print(f"REVIEW_REQUIRED {destination}: original retained; submit corrected results as a NEW inbox file")
+
     for path in imported_files:
         try:
             path.unlink()
@@ -881,9 +897,9 @@ def main() -> None:
         f"stale {stale_count}; rejected {rejected_count}; duplicates {duplicate_count}."
     )
     print("Raw radar.json and historical/historical.json evidence were not deleted. V2 admission/corrections are stored in sidecars for active-corpus rebuild.")
-    if stale_count:
-        print(f"Deep Scan import incomplete: {stale_count} stale results remain for correction ({rejected_count} other rejected).")
-        raise SystemExit(1)
+    if stale_count or rejected_count:
+        print(f"Deep Scan review queue: {stale_count} stale, {rejected_count} rejected; "
+              "isolated originals require correction, not repeated automatic ingestion.")
 
 
 if __name__ == "__main__":
