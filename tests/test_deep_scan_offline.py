@@ -149,14 +149,17 @@ def test_offline_import_preserves_stale_hash_for_correction(tmp_path):
         cwd=ROOT,
         capture_output=True, text=True,
     )
-    assert result.returncode != 0 and 'import incomplete' in result.stdout
+    # Stale evidence must never be admitted, but it must not jam the delivery inbox.
+    assert result.returncode == 0, result.stderr
+    assert "REVIEW_REQUIRED" in result.stdout
     saved = json.loads(sidecar.read_text(encoding="utf-8"))
     assert saved["records"] == {}
-    # Rejected/stale results remain in the inbox for correction rather than
-    # being silently deleted; successful imports are still removed (test above).
-    assert returned.exists()
-    preserved = json.loads(returned.read_text(encoding="utf-8"))
+    assert not returned.exists()
+    reviewed = inbox.parent / "deep_scan_review" / returned.name
+    assert reviewed.exists()
+    preserved = json.loads(reviewed.read_text(encoding="utf-8"))
     assert preserved["results"][0]["source_hash"] == old_hash
+    assert preserved["results"][0]["reader_what"] == "An interpretation based on the older package evidence."
 
 
 def test_offline_package_requeues_legacy_v1_once_for_authoritative_v2(tmp_path):
