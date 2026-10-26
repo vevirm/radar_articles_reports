@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **3434** (Main **1678** + Historical **1756**)
-- Automatic queue still needing V2 verification: **65** (Main **16** + Historical **49**)
-- Currently assigned to workers: **65** (Main **16** + Historical **49**)
+- Authoritative V2 verified: **3462** (Main **1693** + Historical **1769**)
+- Automatic queue still needing V2 verification: **37** (Main **1** + Historical **36**)
+- Currently assigned to workers: **37** (Main **1** + Historical **36**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **44**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,23 +16,14 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261026T095744Z-8c91ad198223`
-- Assigned unresolved records: **28**
-  1. `link:https://doi.org/10.1080/23337486.2026.2748103` — Artificial intelligence and human factors: European Defence Agency and humans as defence infrastructure
-  2. `link:https://doi.org/10.1016/j.clsr.2026.106357` — Mind the competitiveness gap: Measuring the AI Act’s extraterritorial reach
-  3. `link:https://news.google.com/rss/articles/CBMiwgFBVV95cUxOOFAzaUduVlVpTnAxRm9jWXhHbDdaZEZXQm5KNzhmSEh6eTZoM1Z6b2xHUW1qb3ZxeGZOOFlLYzRhTzFmNV9BLTYtZWZVNi1rVkhNWllZbzZyV3pEU25tSEtZT2VwTXBIRDRKZ1hwYmR6ZTVmaFV5WHFqUjlpcE5rY2lSWGp4bXlneVlwY2N2a2JYcUpVZWV5VlE0UjRseHR0V1RvWFJZLUxna09BcG1hNHVDVVdWa3p0MWZHcXhuQjlkZw?oc=5` — Tensions flare over cull of EU R&I partnerships
-  4. `link:https://doi.org/10.1111/puar.70048` — Human–Machine Collaboration for Strategy Foresight: The Case of Generative AI
-  5. `link:https://doi.org/10.1002/ffo2.70034` — Leveraging Organizational Ambidexterity for Sustained Growth in Agri‐Food Born Global Firms: A Strategic Foresight Approach
-  6. `link:https://doi.org/10.1002/ffo2.32` — Scenario planning as strategic activity: A practice‐orientated approach
-  7. `link:https://doi.org/10.1177/1946756719862115` — A Three-Level Evaluation Process of Cultural Readiness for Strategic Foresight Projects
-  8. `link:https://doi.org/10.1177/19467567241262951` — Organizing Foresight Tools
-  - … plus 20 more in the package manifest
+- Current package: `worker-a-20261026T105517Z-82e7d197ab46`
+- Assigned unresolved records: **2**
+  1. `link:https://news.google.com/rss/articles/CBMi5AFBVV95cUxQNkh5Wm1UelFkX2VPaU96cEZyeEpjbWRTc09SRlhlY1p6d1lEVGUzZTA2T2Z2clVWQ0ZLNFFGVHlMZWtRcU1CenlQdDJiVENFVlhjMXJtT2VRVG13Rk5QeTRtSUZnS3VtR2JYWldBcTBnMUJOeGwyY3pBOGZCaTY3VkpLUmViRTY2dGdmSmFncUw0T1Q4UG5mMy1ldHdzQVZZMDB6ZXh3eFJRSGFUeDVDSDRjUkJiSnhjSTI2c0pTcEk2VGZzT0ZsaThEbFM4QXVIaXpFVF9DNG10WC16STlxQy14d18?oc=5` — Threats to EU R&I budget may warrant a rethink on regional investment — recovery attempt 2/3
+  2. `historical:id:799fc0cdcf9732ee` — Europe must avoid new green supply chain dependencies — recovery attempt 2/3
 
 ### Worker B
 - Current package: `worker-b-20261026T095752Z-aad8f2b323c0`
-- Assigned unresolved records: **2**
-  1. `historical:id:a018a18dd894f57e` — Review of PhD training in biomedical research | Wellcome
-  2. `historical:id:85c44736f24add75` — Needs inventory – inventory of needs for research infrastructure
+- Assigned unresolved records: **0**
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
