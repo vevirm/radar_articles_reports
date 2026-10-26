@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-10-26T12:28:45Z",
+  "generated_at": "2026-10-26T13:44:14Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -291303,8 +291303,125 @@
         }
       ],
       "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMi5AFBVV95cUxQNkh5Wm1UelFkX2VPaU96cEZyeEpjbWRTc09SRlhlY1p6d1lEVGUzZTA2T2Z2clVWQ0ZLNFFGVHlMZWtRcU1CenlQdDJiVENFVlhjMXJtT2VRVG13Rk5QeTRtSUZnS3VtR2JYWldBcTBnMUJOeGwyY3pBOGZCaTY3VkpLUmViRTY2dGdmSmFncUw0T1Q4UG5mMy1ldHdzQVZZMDB6ZXh3eFJRSGFUeDVDSDRjUkJiSnhjSTI2c0pTcEk2VGZzT0ZsaThEbFM4QXVIaXpFVF9DNG10WC16STlxQy14d18?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "2fe607cc",
+      "identity_hash": "466f8c82cb6ad042",
+      "reader_title": "EU Council budget draft puts Horizon Europe funding under pressure",
+      "reader_what": "An October Council negotiating draft proposes €140 billion for Horizon Europe in 2028–2034, below the Commission proposal.",
+      "reader_why": "The proposed funding level and widening rules could shape EU research capacity and the geographic distribution of opportunities.",
+      "reader_more": "The Irish Council presidency’s 10 October 2026 negotiating box proposes €140 billion for Horizon Europe in 2028–2034, compared with €154.882 billion in the Commission proposal. It also includes provisions for widening and transition countries and a proposed €4.31 billion for widening participation. The editorial frames this funding pressure as an issue for regional investment, but its full text was not available for independent reading. The budget remains under negotiation; no final reduction or realised impact is established.",
+      "deep_analysis": {
+        "work_kind": "Current EU policy negotiating development discussed in editorial analysis",
+        "research_question": "What does the newly proposed EU multiannual budget imply for Horizon Europe and geographically uneven R&I investment?",
+        "main_finding": "The 10 October 2026 EU Council negotiating box proposes €140bn for Horizon Europe in 2028–2034, below the Commission’s €154.882bn baseline, and retains widening-capacity provisions.",
+        "method_or_basis": "Read the Council of the EU primary budget negotiating document ST 13922/26, especially sections 97–100 and its final comparison table; matched the headline, author, date and topic to official publisher-indexed article/issue listings.",
+        "qualification": "This is a Council negotiating proposal, not an agreed 2028–2034 budget; the complete Research Professional News commentary was inaccessible.",
+        "radar_relevance": "A concrete, dated EU research-policy negotiation about the future Framework Programme budget, research capacity-building in widening/transition countries, and regional distribution of EU R&I support.",
+        "confidence": "medium",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "substantive_primary_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Opened the supplied Google News RSS /articles/CBMi5AFB... URL (oc=5); web reader reported inaccessible. Located the matching publisher URL, but direct open returned HTTP 403."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "The 22 October 2026 Research Europe editorial/news-comment article has no DOI in the supplied record or located publisher metadata; no DOI identifier could be resolved."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched the quoted exact title “Threats to EU R&I budget may warrant a rethink on regional investment”; results matched the publisher URL, headline, date 22 October 2026 and its regional/place-based subtitle, but not article full text."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Searched article title plus Sarah Richardson, Research Europe and 2026; publisher-indexed listing identifies “By Sarah Richardson, editor-in-chief”, 22 October 2026, in Research Europe issue 660."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publisher article, publisher Europe/Opinion archive and publisher /feed/ could not be fully read (403/inaccessible); independently retrieved and substantively read official Council of the EU negotiating-box document ST 13922/26 dated 10 October 2026 (pp. 36–37, 51), verifying the policy proposal discussed by the article."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Ran distinct searches using “Writing off place-based approaches could store up more problems for future funding” and “Sarah Richardson” + regional investment, finding the publisher issue/article listings but no licensed full-text mirror. Separately searched Irish Presidency October 2026 MFF proposal and Council identifier ST 13922/26; found the official budget document and corroborated the €140bn proposed Horizon figure and Commission comparison."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://data.consilium.europa.eu/doc/document/ST-13922-2026-INIT/en/pdf",
+            "title": "Council of the European Union, Multiannual Financial Framework (MFF) 2028–2034 — Negotiating Box, ST 13922/26 (10 October 2026)",
+            "evidence_used": true
+          },
+          {
+            "kind": "publisher_bibliographic_listing",
+            "url": "https://www.researchprofessionalnews.com/rr-news-europe-views-of-europe-2026-10-threats-to-eu-r-i-budget-may-warrant-a-rethink-on-regional-investment/",
+            "title": "Sarah Richardson, “Threats to EU R&I budget may warrant a rethink on regional investment,” Research Europe / Research Professional News, 22 October 2026",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Third-attempt hard-final recovery performed. Article identity corroborated by two publisher listings (the indexed article and Research Europe issue 660); publisher article full text remained inaccessible (403). Two distinct broader searches and the publisher/feed/issue and legitimate official Council-document route were tried. The Council’s complete 10 October 2026 ST 13922/26 matches the identifiable underlying budget-development subject and directly supports the only substantive factual admission claim below. The journalistic/editorial analysis of place-based investment is not asserted as verified full-text content."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_CURRENT_EU_RI_DEVELOPMENT",
+        "reason": "A new, dateable and substantive EU research-funding negotiating development: the Council’s 10 October 2026 negotiating box proposes €140bn for 2028–2034 Horizon Europe versus €154.882bn in the Commission baseline (Council doc ST 13922/26, pp. 37, 51). Research Professional News identifies and discusses this proposal; EU research-system budget relevance is explicit. A proposed negotiating position is not a budget adoption or realised cut."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No possible duplicate records were supplied in this job."
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-10-26T13:44:14Z",
+      "deep_scan_package_id": "worker-a-20261026T124538Z-7d407dc7c1c3",
+      "claims": [
+        {
+          "object": "horizon.budget_2028_34",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Irish Presidency of the Council of the European Union",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "contracts",
+          "status": "in_negotiation",
+          "status_date": "2026-10-10",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "This is a Council negotiating proposal, not an agreed 2028–2034 budget; the complete Research Professional News commentary was inaccessible.",
+          "text": "The 10 October 2026 Council MFF negotiating box proposes €140bn for Horizon Europe in 2028–2034, below the Commission’s prior €154.882bn proposal; it does not adopt that budget.",
+          "confidence": "high",
+          "record_key": "link:https://news.google.com/rss/articles/CBMi5AFBVV95cUxQNkh5Wm1UelFkX2VPaU96cEZyeEpjbWRTc09SRlhlY1p6d1lEVGUzZTA2T2Z2clVWQ0ZLNFFGVHlMZWtRcU1CenlQdDJiVENFVlhjMXJtT2VRVG13Rk5QeTRtSUZnS3VtR2JYWldBcTBnMUJOeGwyY3pBOGZCaTY3VkpLUmViRTY2dGdmSmFncUw0T1Q4UG5mMy1ldHdzQVZZMDB6ZXh3eFJRSGFUeDVDSDRjUkJiSnhjSTI2c0pTcEk2VGZzT0ZsaThEbFM4QXVIaXpFVF9DNG10WC16STlxQy14d18?oc=5",
+          "merit": 61,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:466f8c82cb6ad042:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-10-26T12:28:45Z"
+  "claims_updated_at": "2026-10-26T13:44:14Z"
 }
