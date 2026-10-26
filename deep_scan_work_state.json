@@ -1,17 +1,15 @@
 {
   "version": 1,
   "profile": "radar-deep-scan-work-state-v1",
-  "updated_at": "2026-10-26T11:45:44Z",
+  "updated_at": "2026-10-26T12:38:27Z",
   "lanes": {
     "A": {
       "target_size": 36,
       "assigned": [
-        "link:https://news.google.com/rss/articles/CBMi5AFBVV95cUxQNkh5Wm1UelFkX2VPaU96cEZyeEpjbWRTc09SRlhlY1p6d1lEVGUzZTA2T2Z2clVWQ0ZLNFFGVHlMZWtRcU1CenlQdDJiVENFVlhjMXJtT2VRVG13Rk5QeTRtSUZnS3VtR2JYWldBcTBnMUJOeGwyY3pBOGZCaTY3VkpLUmViRTY2dGdmSmFncUw0T1Q4UG5mMy1ldHdzQVZZMDB6ZXh3eFJRSGFUeDVDSDRjUkJiSnhjSTI2c0pTcEk2VGZzT0ZsaThEbFM4QXVIaXpFVF9DNG10WC16STlxQy14d18?oc=5",
-        "historical:id:799fc0cdcf9732ee"
+        "link:https://news.google.com/rss/articles/CBMi5AFBVV95cUxQNkh5Wm1UelFkX2VPaU96cEZyeEpjbWRTc09SRlhlY1p6d1lEVGUzZTA2T2Z2clVWQ0ZLNFFGVHlMZWtRcU1CenlQdDJiVENFVlhjMXJtT2VRVG13Rk5QeTRtSUZnS3VtR2JYWldBcTBnMUJOeGwyY3pBOGZCaTY3VkpLUmViRTY2dGdmSmFncUw0T1Q4UG5mMy1ldHdzQVZZMDB6ZXh3eFJRSGFUeDVDSDRjUkJiSnhjSTI2c0pTcEk2VGZzT0ZsaThEbFM4QXVIaXpFVF9DNG10WC16STlxQy14d18?oc=5"
       ],
-      "current_package_id": "worker-a-20261026T114541Z-82e7d197ab46",
+      "current_package_id": "worker-a-20261026T123825Z-7d407dc7c1c3",
       "package_history": [
-        "worker-a-20261021T075937Z-73c388f52aad",
         "worker-a-20261021T092703Z-039626ad2590",
         "worker-a-20261021T102144Z-ba80399f6c1e",
         "worker-a-20261021T110614Z-ba80399f6c1e",
@@ -50,7 +48,8 @@
         "worker-a-20261025T185919Z-abb8c2b8cafb",
         "worker-a-20261026T095744Z-8c91ad198223",
         "worker-a-20261026T105517Z-82e7d197ab46",
-        "worker-a-20261026T114541Z-82e7d197ab46"
+        "worker-a-20261026T114541Z-82e7d197ab46",
+        "worker-a-20261026T123825Z-7d407dc7c1c3"
       ]
     },
     "B": {
@@ -80336,50 +80335,50 @@
       "status": "assigned",
       "lane": "A",
       "assigned_at": "2026-10-26T09:57:44Z",
-      "last_package_id": "worker-a-20261026T114541Z-82e7d197ab46",
-      "scan_package_attempts": 3,
-      "last_scan_package_at": "2026-10-26T11:45:43Z",
-      "recovery_attempts": 1,
-      "last_recovery_at": "2026-10-26T10:47:46Z",
-      "last_recovery_package_id": "worker-a-20261026T095744Z-8c91ad198223",
-      "recovery_reason": "Publisher confirms an opinion article but full argument and any underlying policy action were inaccessible; could not substantively judge whether it presents a new C development or only commentary.",
+      "last_package_id": "worker-a-20261026T123825Z-7d407dc7c1c3",
+      "scan_package_attempts": 4,
+      "last_scan_package_at": "2026-10-26T12:38:26Z",
+      "recovery_attempts": 2,
+      "last_recovery_at": "2026-10-26T12:28:44Z",
+      "last_recovery_package_id": "worker-a-20261026T114541Z-82e7d197ab46",
+      "recovery_reason": "Matching publisher story exists but is not substantively accessible; cannot determine whether it describes a qualifying new EU R&I action rather than opinion.",
       "verification": {
         "identity_verified": true,
         "evidence_depth": "identity_only_after_recovery",
         "retrieval_attempts": [
           {
             "step": "supplied_url",
-            "outcome": "not_resolved",
-            "note": "Job's Google News RSS redirect for 'Threats to EU R&I budget may warrant a rethink on regional investment' is opaque; resolved identity by searching the headline against the original publisher."
+            "outcome": "access_limited",
+            "note": "Supplied Google News RSS article link did not provide substantive article text in the package; searched for its underlying Research Professional News URL."
           },
           {
             "step": "doi",
             "outcome": "not_applicable",
-            "note": "No scholarly DOI was supplied for news item 'Threats to EU R&I budget may warrant a rethink on regio'."
+            "note": "This is an editorial/news opinion by Sarah Richardson dated 22 October 2026; no DOI is stated or found."
           },
           {
             "step": "exact_title",
             "outcome": "success",
-            "note": "Exact headline search located the publisher article at https://www.researchprofessionalnews.com/rr-news-europe-views-of-europe-2026-10-threats-to-eu-r-i-budget-may-warrant-a-rethink-on-regional-investment/; only teaser/metadata available."
+            "note": "Exact headline search located Research Professional News publication entry for 22 October 2026, but only its headline, byline and short teaser were accessible."
           },
           {
             "step": "title_author_year",
             "outcome": "success",
-            "note": "Searched 'Threats to EU R&I budget may warrant a rethink on regional investment' with 2026 and publisher; matched dated publisher page, not full substantive body."
+            "note": "Exact-title search plus Sarah Richardson and 2026 confirms Research Europe publication identity and date; no substantive matching republication surfaced."
           },
           {
             "step": "official_publisher_or_repository",
-            "outcome": "blocked",
-            "note": "Publisher https://www.researchprofessionalnews.com/rr-news-europe-views-of-europe-2026-10-threats-to-eu-r-i-budget-may-warrant-a-rethink-on-regional-investment/ returned access restriction or brief index teaser rather than full article."
+            "outcome": "access_limited",
+            "note": "Opening the matching original Research Professional News article returned HTTP 403 through the browsing tool; its full substantive text was unavailable."
           },
           {
             "step": "broader_identity_search",
-            "outcome": "no_substantive_text",
-            "note": "Broader topical search on 'Threats to EU R&I budget may warrant a ret' found related EU policy commentary but no legitimate copy of this exact argument."
+            "outcome": "insufficient",
+            "note": "Broader searches for headline fragments, regional investment, Sarah Richardson and October 2026 found publication listings, but no accessible copy of this specific article; unrelated EU policy sources were not substituted."
           }
         ],
         "recovered_sources": [],
-        "verification_note": "Identity confirmed by dated publisher listing, but after normal search and alternate-publication checks the work's actual argument remained inaccessible; no admission conclusion fabricated."
+        "verification_note": "Identity verified against the publisher listing, date and byline, but only a teaser is accessible. No substantive source from which to adjudicate article-specific claims. The source is not judged false or irrelevant."
       },
       "recovery_history": [
         {
@@ -80424,6 +80423,50 @@
             ],
             "recovered_sources": [],
             "verification_note": "Identity confirmed by dated publisher listing, but after normal search and alternate-publication checks the work's actual argument remained inaccessible; no admission conclusion fabricated."
+          }
+        },
+        {
+          "attempt": 2,
+          "package_id": "worker-a-20261026T114541Z-82e7d197ab46",
+          "at": "2026-10-26T12:28:44Z",
+          "reason": "Matching publisher story exists but is not substantively accessible; cannot determine whether it describes a qualifying new EU R&I action rather than opinion.",
+          "verification": {
+            "identity_verified": true,
+            "evidence_depth": "identity_only_after_recovery",
+            "retrieval_attempts": [
+              {
+                "step": "supplied_url",
+                "outcome": "access_limited",
+                "note": "Supplied Google News RSS article link did not provide substantive article text in the package; searched for its underlying Research Professional News URL."
+              },
+              {
+                "step": "doi",
+                "outcome": "not_applicable",
+                "note": "This is an editorial/news opinion by Sarah Richardson dated 22 October 2026; no DOI is stated or found."
+              },
+              {
+                "step": "exact_title",
+                "outcome": "success",
+                "note": "Exact headline search located Research Professional News publication entry for 22 October 2026, but only its headline, byline and short teaser were accessible."
+              },
+              {
+                "step": "title_author_year",
+                "outcome": "success",
+                "note": "Exact-title search plus Sarah Richardson and 2026 confirms Research Europe publication identity and date; no substantive matching republication surfaced."
+              },
+              {
+                "step": "official_publisher_or_repository",
+                "outcome": "access_limited",
+                "note": "Opening the matching original Research Professional News article returned HTTP 403 through the browsing tool; its full substantive text was unavailable."
+              },
+              {
+                "step": "broader_identity_search",
+                "outcome": "insufficient",
+                "note": "Broader searches for headline fragments, regional investment, Sarah Richardson and October 2026 found publication listings, but no accessible copy of this specific article; unrelated EU policy sources were not substituted."
+              }
+            ],
+            "recovered_sources": [],
+            "verification_note": "Identity verified against the publisher listing, date and byline, but only a teaser is accessible. No substantive source from which to adjudicate article-specific claims. The source is not judged false or irrelevant."
           }
         }
       ]
@@ -80513,7 +80556,7 @@
       "url": "https://www.diis.dk/en/research/europe-must-avoid-new-green-supply-chain-dependencies",
       "corpus_scope": "historical",
       "queue_priority": "strand_a",
-      "status": "assigned",
+      "status": "verified",
       "lane": "A",
       "assigned_at": "2026-10-26T09:57:44Z",
       "last_package_id": "worker-a-20261026T114541Z-82e7d197ab46",
@@ -80606,7 +80649,9 @@
             "verification_note": "Identity confirmed by dated publisher listing, but after normal search and alternate-publication checks the work's actual argument remained inaccessible; no admission conclusion fabricated."
           }
         }
-      ]
+      ],
+      "verified_at": "2026-10-26T12:28:45Z",
+      "verified_package_id": "worker-a-20261026T114541Z-82e7d197ab46"
     },
     "historical:id:6a7e28295109cca8": {
       "title": "A scenario approach to stimulate digitalisation and inclusive economic growth",
@@ -104335,6 +104380,13 @@
       "record_keys": [
         "link:https://news.google.com/rss/articles/CBMi5AFBVV95cUxQNkh5Wm1UelFkX2VPaU96cEZyeEpjbWRTc09SRlhlY1p6d1lEVGUzZTA2T2Z2clVWQ0ZLNFFGVHlMZWtRcU1CenlQdDJiVENFVlhjMXJtT2VRVG13Rk5QeTRtSUZnS3VtR2JYWldBcTBnMUJOeGwyY3pBOGZCaTY3VkpLUmViRTY2dGdmSmFncUw0T1Q4UG5mMy1ldHdzQVZZMDB6ZXh3eFJRSGFUeDVDSDRjUkJiSnhjSTI2c0pTcEk2VGZzT0ZsaThEbFM4QXVIaXpFVF9DNG10WC16STlxQy14d18?oc=5",
         "historical:id:799fc0cdcf9732ee"
+      ]
+    },
+    "worker-a-20261026T123825Z-7d407dc7c1c3": {
+      "lane": "A",
+      "created_at": "2026-10-26T12:38:26Z",
+      "record_keys": [
+        "link:https://news.google.com/rss/articles/CBMi5AFBVV95cUxQNkh5Wm1UelFkX2VPaU96cEZyeEpjbWRTc09SRlhlY1p6d1lEVGUzZTA2T2Z2clVWQ0ZLNFFGVHlMZWtRcU1CenlQdDJiVENFVlhjMXJtT2VRVG13Rk5QeTRtSUZnS3VtR2JYWldBcTBnMUJOeGwyY3pBOGZCaTY3VkpLUmViRTY2dGdmSmFncUw0T1Q4UG5mMy1ldHdzQVZZMDB6ZXh3eFJRSGFUeDVDSDRjUkJiSnhjSTI2c0pTcEk2VGZzT0ZsaThEbFM4QXVIaXpFVF9DNG10WC16STlxQy14d18?oc=5"
       ]
     }
   }

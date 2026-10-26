@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **3462** (Main **1693** + Historical **1769**)
-- Automatic queue still needing V2 verification: **37** (Main **1** + Historical **36**)
-- Currently assigned to workers: **37** (Main **1** + Historical **36**)
+- Authoritative V2 verified: **3463** (Main **1693** + Historical **1770**)
+- Automatic queue still needing V2 verification: **36** (Main **1** + Historical **35**)
+- Currently assigned to workers: **36** (Main **1** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **44**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,10 +16,9 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261026T114541Z-82e7d197ab46`
-- Assigned unresolved records: **2**
-  1. `link:https://news.google.com/rss/articles/CBMi5AFBVV95cUxQNkh5Wm1UelFkX2VPaU96cEZyeEpjbWRTc09SRlhlY1p6d1lEVGUzZTA2T2Z2clVWQ0ZLNFFGVHlMZWtRcU1CenlQdDJiVENFVlhjMXJtT2VRVG13Rk5QeTRtSUZnS3VtR2JYWldBcTBnMUJOeGwyY3pBOGZCaTY3VkpLUmViRTY2dGdmSmFncUw0T1Q4UG5mMy1ldHdzQVZZMDB6ZXh3eFJRSGFUeDVDSDRjUkJiSnhjSTI2c0pTcEk2VGZzT0ZsaThEbFM4QXVIaXpFVF9DNG10WC16STlxQy14d18?oc=5` — Threats to EU R&I budget may warrant a rethink on regional investment — recovery attempt 2/3
-  2. `historical:id:799fc0cdcf9732ee` — Europe must avoid new green supply chain dependencies — recovery attempt 2/3
+- Current package: `worker-a-20261026T123825Z-7d407dc7c1c3`
+- Assigned unresolved records: **1**
+  1. `link:https://news.google.com/rss/articles/CBMi5AFBVV95cUxQNkh5Wm1UelFkX2VPaU96cEZyeEpjbWRTc09SRlhlY1p6d1lEVGUzZTA2T2Z2clVWQ0ZLNFFGVHlMZWtRcU1CenlQdDJiVENFVlhjMXJtT2VRVG13Rk5QeTRtSUZnS3VtR2JYWldBcTBnMUJOeGwyY3pBOGZCaTY3VkpLUmViRTY2dGdmSmFncUw0T1Q4UG5mMy1ldHdzQVZZMDB6ZXh3eFJRSGFUeDVDSDRjUkJiSnhjSTI2c0pTcEk2VGZzT0ZsaThEbFM4QXVIaXpFVF9DNG10WC16STlxQy14d18?oc=5` — Threats to EU R&I budget may warrant a rethink on regional investment — recovery attempt 3/3
 
 ### Worker B
 - Current package: `worker-b-20261026T095752Z-aad8f2b323c0`
