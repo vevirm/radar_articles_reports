@@ -175,6 +175,17 @@
       ],
       "purpose": "Bounded first-party European institutional-report recovery: improve Tier-1 publication hub discovery and retrieve title-matched official PDF evidence for undated institutional landing pages before no-date rejection; require explicit PDF publication date and keep original A/B scope, source, deadline, dedupe and Deep Scan verification rules.",
       "stage": "post-stage8-strand-a-institutional-document-recovery"
+    },
+    {
+      "stage": "post-stage8-deep-scan-inbox-transaction-repair-2026-10-26",
+      "approved_files": [
+        "scripts/import_deep_scan_results.py",
+        ".github/workflows/deep-scan-import.yml",
+        "scripts/run_deep_scan_import_transaction.sh",
+        "deep_scan_review/.gitkeep",
+        "reasoning-reform/baseline.json"
+      ],
+      "purpose": "Approve tested Deep Scan inbox import transaction repair: retry stale Git pushes by re-importing on fresh main; move completed/rejected deliveries out of inbox to preserve recoverability; retain V2 authority, claims validation, and three-attempt recovery policy. Update only importer protected-code fingerprint; retain scanner and active boundary fingerprints unchanged."
     }
   ],
   "captured_for_repository_version": "v25.1.0-evidence-linked-reader",
@@ -197,7 +208,7 @@
     },
     "deep_scan_hard_core": {
       "scripts/deep_read_works.py": "61984f3c6afb7e464505476ca966281c13857a52e34f7a068fd49ad2674330e8",
-      "scripts/import_deep_scan_results.py": "181deae0ad4c5ae9e569f3a5bf39755036727f6eb62bf7f5ce04ba08ff10ec69",
+      "scripts/import_deep_scan_results.py": "9ddd51ea355f24cd6b40c2ccc9e68ffccfd9299d2e706ceb33dab6b757a3662b",
       "scripts/prepare_deep_scan_package.py": "7829fa1803281ad76be2cf4ed89a33e52c3bc87997521a854f1bda6ce9f0fc00"
     },
     "scanner_hard_core": {
