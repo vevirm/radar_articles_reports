@@ -34,7 +34,7 @@ class Response:
         self.url = url
         self.text = html
         self.content = html.encode()
-        self.headers = {'content-type':'text/html'}
+        self.headers = {'content-type': 'application/rss+xml' if html.lstrip().startswith('<rss') else 'text/html'}
     def __bool__(self):return True
 
 
