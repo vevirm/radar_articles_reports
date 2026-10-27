@@ -7,8 +7,8 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **3464** (Main **1694** + Historical **1770**)
-- Automatic queue still needing V2 verification: **35** (Main **0** + Historical **35**)
-- Currently assigned to workers: **35** (Main **0** + Historical **35**)
+- Automatic queue still needing V2 verification: **93** (Main **32** + Historical **61**)
+- Currently assigned to workers: **93** (Main **32** + Historical **61**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **44**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,12 +16,30 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261026T124538Z-7d407dc7c1c3`
-- Assigned unresolved records: **0**
+- Current package: `worker-a-20261027T143535Z-8b0e8b1f6594`
+- Assigned unresolved records: **36**
+  1. `link:https://ecipe.org/publications/forward-looking-agenda-for-eu-quantum-policy/#_ftnref5` — From Sovereignty to Managed Interdependence: A Forward-Looking Agenda for EU Quantum Policy
+  2. `link:https://doi.org/10.2478/bjes-2026-0028` — Protecting dual-use technological innovation through trade secret law: institutional limits and cybersecurity challenges
+  3. `link:https://doi.org/10.1016/j.telpol.2026.103334` — A quantitative framework for assessing digital sovereignty
+  4. `link:https://www.hybridcoe.fi/publications/western-balkans-domestic-regional-and-international-trends-hybrid-threat-potential/` — Western Balkans: Trends creating hybrid threat potential - Hybrid CoE - The European Centre of Excellence for Countering Hybrid Threats
+  5. `link:https://doi.org/10.1093/eurpub/ckag169.654` — X.1.PK.1. Promoting Health in Changing Work Environments: Results from 5 Horizon Europe WISEWORK-C projects
+  6. `link:https://doi.org/10.1093/eurpub/ckag169.764` — Y.11.PK.2. From Evidence to Action: EU studies on occupational risk and diseases
+  7. `link:https://cordis.europa.eu/article/id/466833-horizon-is-powering-the-eu-s-biotechnology-industry-from-innovation-to-investment` — Horizon is powering the EU’s biotechnology industry, from innovation to investment
+  8. `link:https://news.google.com/rss/articles/CBMiywFBVV95cUxPVWwzNDkzQ0x4Sl9PZmV5OXp3dTZBRTJDcWdRVFgxTmZPckNJZjVqQVpXUzVVQUpVelFvRmdOZmw2bHgzZGI1bkIxUzdZUVdqZ0V0ZnQ5RFhTZFdadDB0U2FjZ0NyRDZZZUlURlBKZ28zeFJBMHdLQjJJcFFtb0k5YUJEWUVrNkdCQ0VxNk82Q3VkTDRtUmVURnAxS1h6QWFpU0djQ3hhOVllZG5uYW43TW9ScFVvQll6T19NX0N6U3pwSVlGNE95NFh0SQ?oc=5` — Poland eyes more cooperation with Germany in space, Polish minister says
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261026T095752Z-aad8f2b323c0`
-- Assigned unresolved records: **0**
+- Current package: `worker-b-20261027T143543Z-1301c69e86ac`
+- Assigned unresolved records: **22**
+  1. `historical:id:f02acd0d552c7d2c` — The TIM Dual-Use Dashboard
+  2. `historical:id:bc796baab98a40f7` — Territories: Competitiveness, defence and preparedness
+  3. `historical:id:d84c6f2439ecc661` — Environmentally Sustainable Digital Sovereignty
+  4. `historical:id:b6b472929605096c` — Digital Sovereignty as a Geopolitical Strategy
+  5. `historical:id:703862cf5417a037` — A Geopolitical Shift: The European Union’s Strategic Wake-Up Call
+  6. `historical:id:8dc4bb0cae51158f` — Beyond confrontation? Comparing the determinants of Chinese and the European Union’s development finance to Africa
+  7. `historical:id:4407edfd94b259bd` — Novel Business Model Canvas for Research Infrastructures: A Design Science Approach
+  8. `historical:id:59a2bc5a53c0ad59` — China starts exporting quantum computers as its systems become more competitive
+  - … plus 14 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
@@ -73,7 +91,7 @@ These works no longer consume automatic Deep Scan slots. Their identity is belie
 - `historical:id:fc5c2e50633d007d` — **Setting S&T perspective priorities in an era of complexity and uncertainty: a case for megacities** — attempts: 3/3 — Foresight — 2024-02-26 — Journal and DOI identify the article, but only the publisher abstract was recoverable; the methodological detail needed to establish transferable novelty cannot be scrutinised. — https://doi.org/10.1108/fs-10-2023-0215
 - `link:https://news.google.com/rss/articles/CBMilAFBVV95cUxOOERlTkZCc294UTNVa1JsU2hybDNkRjZfTXB5Qmc4T2hYTE5hR3oyb29Vcmp0ekItMGo4VGgzZEFOUEd5RWlybWhhLUNJRlloVDRJN2JqbllEX2VmcndpVm1fZGc1TG5UWThNTUxmeU1YeHdKRlFGcDJjOGpUQTVCNXRkSTljcElza004Q0ZHb3hibFFy?oc=5` — **European telcos spy US role in satellite-to-phone coalition - rapporteur.com** — attempts: 3/3 — Euractiv — 2026-09-17T07:00Z — A paid publisher page identifies a satellite-to-phone telecom piece but restricts core reporting, so a new R&I capability or formal decision cannot be safely established. — https://news.google.com/rss/articles/CBMilAFBVV95cUxOOERlTkZCc294UTNVa1JsU2hybDNkRjZfTXB5Qmc4T2hYTE5hR3oyb29Vcmp0ekItMGo4VGgzZEFOUEd5RWlybWhhLUNJRlloVDRJN2JqbllEX2VmcndpVm1fZGc1TG5UWThNTUxmeU1YeHdKRlFGcDJjOGpUQTVCNXRkSTljcElza004Q0ZHb3hibFFy?oc=5
 - `link:https://news.google.com/rss/articles/CBMiqwFBVV95cUxNRWdQSkJPU1MwbjcxUnFOclBQVXgxZ2ktcDBjREZOVmNFTjlLZTJ5bW9KcG9FNGVIUWpfeEhNc0NTWFVlYVg1cjdYaE5EYkwySnhaazl2U3VIbld5SmNlandwNkpRSFRNWTRETUg5MFFfNUhzQjJJeFEwYVFJbV9LNU5UNXA2NmpWNVpscW40bDNVeEV6bzFya2F3NzFucUxSUGZPV29OOTNaWEE?oc=5` — **European Companies Down But Not Out in AI Race** — attempts: 3/3 — Bloomberg — 2026-09-08T07:00Z — A Bloomberg newsletter is indexed by headline and attributed September 8, but the full original article and its actual evidence cannot be recovered from accessible material. — https://news.google.com/rss/articles/CBMiqwFBVV95cUxNRWdQSkJPU1MwbjcxUnFOclBQVXgxZ2ktcDBjREZOVmNFTjlLZTJ5bW9KcG9FNGVIUWpfeEhNc0NTWFVlYVg1cjdYaE5EYkwySnhaazl2U3VIbld5SmNlandwNkpRSFRNWTRETUg5MFFfNUhzQjJJeFEwYVFJbV9LNU5UNXA2NmpWNVpscW40bDNVeEV6bzFya2F3NzFucUxSUGZPV29OOTNaWEE?oc=5
-- `link:https://doi.org/10.1016/j.cose.2026.105210` — **Conceptualizations and Boundaries of EU Digital Sovereignty** — attempts: 3/3 — Computers & Security — 2026-10-01 — The University of Augsburg repository and journal issue establish 2026 paper identity, authors Laura Macpherson and Daniel J. Veit, venue Computers & Security and matching DOI, but not its substantive conceptual framework, method or findings. No completed source text was readable; withholding an evidence claim. — https://doi.org/10.1016/j.cose.2026.105210
+- `link:https://doi.org/10.1016/j.cose.2026.105210` — **Conceptualizations and boundaries of EU digital sovereignty** — attempts: 3/3 — Computers & Security — 2026-10-14 — The University of Augsburg repository and journal issue establish 2026 paper identity, authors Laura Macpherson and Daniel J. Veit, venue Computers & Security and matching DOI, but not its substantive conceptual framework, method or findings. No completed source text was readable; withholding an evidence claim. — https://doi.org/10.1016/j.cose.2026.105210
 - `link:https://doi.org/10.1080/10438599.2026.2750888` — **Cohesion funds and regional patenting: inventive capacity in innovation systems under construction** — attempts: 3/3 — Economics of Innovation and New Technology — 2026-10-17 — Journal identity and DOI verified, but Taylor & Francis full text is access-restricted. Searches for the exact title, DOI, author/year and scholarly copies did not yield a substantive matching source; scanner abstract interpretation is not independent evidence. — https://doi.org/10.1080/10438599.2026.2750888
 - `link:https://doi.org/10.1080/09654313.2026.2749575` — **The innovation divide across EU regions: does EU funding shape distinct innovation transition paths?** — attempts: 3/3 — European Planning Studies — 2026-10-20 — Journal identity verified; the coauthors presented a substantively related June 2026 conference abstract, but the conference abstract is not the full journal publication and cannot rule out revisions to its results. No accessible substantive journal copy recovered. — https://doi.org/10.1080/09654313.2026.2749575
 - `link:https://doi.org/10.1080/09692290.2026.2748311` — **Situational state capacity for transformative industrial policy in dependent market economies** — attempts: 3/3 — Review of International Political Economy — 2026-10-20 — DOI and article identity verified; an earlier ECPR presentation concerns similar state-capacity research but is not proven to reproduce this paper, its Lithuanian semiconductor case evidence, or results. Substantive publisher/repository text remains inaccessible. — https://doi.org/10.1080/09692290.2026.2748311
