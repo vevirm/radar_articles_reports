@@ -691,6 +691,12 @@ def validate(obj: dict[str, Any], avoid_whys: list[str]) -> tuple[dict[str, Any]
     why = clean(obj.get("why") if obj.get("why") is not None else obj.get("reader_why"))
     more = clean(obj.get("more") if obj.get("more") is not None else obj.get("reader_more"))
 
+    # Keep public reader copy free of this jargon before it enters the sidecar.
+    # Evidence, analysis and the original returned work are not altered.
+    title = re.sub(r"\btechnology intelligence\b", "technology monitoring", title, flags=re.I)
+    what = re.sub(r"\btechnology intelligence\b", "technology monitoring", what, flags=re.I)
+    why = re.sub(r"\btechnology intelligence\b", "technology monitoring", why, flags=re.I)
+
     if title:
         if _words(title) <= WORD_CAP["title"] and not title.endswith(("...", "…")):
             out["reader_title"] = title
