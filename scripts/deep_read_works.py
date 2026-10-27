@@ -26,7 +26,7 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urljoin
 
 import requests
 from bs4 import BeautifulSoup
@@ -237,6 +237,12 @@ class SourceRead:
     text: str
     final_url: str = ""
     note: str = ""
+    # Retrieval hints, not Deep Scan verification or authoritative admission.
+    primary_links: tuple[str, ...] = ()
+    document_title: str = ""
+    document_doi: str = ""
+    identity_status: str = "unverified"
+    identity_note: str = ""
 
 
 def _safe_url(url: str) -> bool:
@@ -311,6 +317,77 @@ def _html_text(payload: bytes, encoding: str | None = None) -> str:
     return "\n".join(dict.fromkeys(preferred + body_parts))[:SOURCE_CHAR_CAP]
 
 
+def _normalize_doi(value: str) -> str:
+    return re.sub(r"^https?://(?:dx\.)?doi\.org/", "", clean(value), flags=re.I).strip().rstrip("/").lower()
+
+
+def _document_metadata_and_links(payload: bytes, base_url: str) -> tuple[str, str, tuple[str, ...]]:
+    """Extract bounded source-owned full-document leads from this *same* HTML response."""
+    soup=BeautifulSoup(payload,"html.parser")
+    def meta(*names: str) -> str:
+        for tag in soup.find_all("meta",limit=75):
+            key=clean(tag.get("name") or tag.get("property") or tag.get("itemprop")).lower()
+            if key in names and clean(tag.get("content")):
+                return clean(tag.get("content"))
+        return ""
+    title=meta("citation_title","dc.title","dcterms.title","og:title")
+    doi=_normalize_doi(meta("citation_doi","dc.identifier.doi","prism.doi"))
+    if not title:
+        heading=soup.find("h1")
+        title=clean(heading.get_text(" ",strip=True)) if heading else ""
+    origin=(urlparse(base_url).hostname or "").lower().removeprefix("www.")
+    leads: list[tuple[int,str]]=[]; seen=set()
+    def add(href: str,score: int) -> None:
+        candidate=urljoin(base_url,clean(href)); p=urlparse(candidate)
+        host=(p.hostname or "").lower().removeprefix("www.")
+        # Don't chase arbitrary mirrors, third-party file hosts or cross-publisher links.
+        if not host or not origin or not (host==origin or host.endswith("."+origin) or origin.endswith("."+host)):
+            return
+        if p.scheme not in ("http","https") or candidate==base_url or candidate in seen: return
+        if re.search(r"(?:supplement|appendix|figures|slides|poster|presentation)",candidate,re.I): return
+        seen.add(candidate); leads.append((score,candidate))
+    for tag in soup.find_all("meta",limit=100):
+        if clean(tag.get("name")).lower() in {"citation_pdf_url","pdf_url","dc.relation"}:
+            add(clean(tag.get("content")),15)
+    for tag in soup.find_all("link",href=True):
+        if "pdf" in clean(tag.get("type")).lower(): add(tag.get("href"),14)
+    for a in soup.find_all("a",href=True)[:350]:
+        label=clean(a.get_text(" ",strip=True)).lower(); href=clean(a.get("href"))
+        path=urlparse(urljoin(base_url,href)).path.lower()
+        if path.endswith(".pdf") or re.search(r"(?:/download/|/downloads/|/download-handler|/pdf/)",path):
+            add(href,10 if ("full" in label or "report" in label or "pdf" in label) else 7)
+        elif re.search(r"\b(full (?:text|report|paper)|download (?:report|study|publication))\b",label):
+            add(href,5)
+    return title,doi,tuple(u for _,u in sorted(leads,key=lambda x:-x[0])[:3])
+
+
+def _title_tokens(value: str) -> set[str]:
+    stop={"the","and","for","from","with","about","study","report","paper","research","policy","analysis","new","into","towards","using","between","european","europe","union","eu"}
+    return {w for w in re.findall(r"[a-z0-9]{3,}",clean(value).lower()) if w not in stop}
+
+
+def _source_identity(r: dict[str, Any], source: SourceRead) -> tuple[str,str]:
+    """Flag contradictory titles/DOIs; never convert a retrieval into KEEP automatically."""
+    expected_doi=_record_doi(r).lower()
+    observed_doi=_normalize_doi(source.document_doi)
+    if expected_doi and observed_doi:
+        if expected_doi != observed_doi: return "mismatch","document metadata DOI contradicts scanner DOI"
+        return "matched","publisher DOI matches scanner DOI"
+    title=clean(r.get("title") or r.get("headline"))
+    expected=_title_tokens(title)
+    observed=_title_tokens(source.document_title)
+    if len(expected)>=3 and len(observed)>=3:
+        overlap=len(expected & observed)
+        ratio=overlap/max(1,min(len(expected),len(observed)))
+        if overlap>=3 and ratio>=0.55: return "matched","publisher title substantially matches scanner title"
+        if overlap<2 and ratio<0.2: return "mismatch","publisher title contradicts scanner title"
+    # A PDF may lack publisher metadata; its cover text is a clue, not proof.
+    pdf_tokens=_title_tokens(source.text[:3000]) if source.mode=="pdf_excerpt" else set()
+    if expected and len(expected & pdf_tokens)>=max(2,min(4,len(expected))):
+        return "plausible","document excerpt contains distinctive scanner title terms; manual identity check required"
+    return "unverified","no independently matching DOI/title metadata; manual primary-source verification required"
+
+
 def fetch_source(url: str, *, extra_headers: dict[str, str] | None = None) -> SourceRead:
     """Best-effort source retrieval. Failure never blocks package creation."""
     if not _safe_url(url):
@@ -337,6 +414,7 @@ def fetch_source(url: str, *, extra_headers: dict[str, str] | None = None) -> So
             if "pdf" in ctype or final_url.lower().split("?", 1)[0].endswith(".pdf") or payload[:5] == b"%PDF-":
                 text = _pdf_text(payload)
                 return SourceRead("pdf_excerpt" if len(text) >= 300 else "stored_only", text, final_url, "")
+            title,doi,primary_links = _document_metadata_and_links(payload,final_url)
             text = _html_text(payload, resp.encoding)
             if len(text) >= 2500:
                 mode = "substantial_web_text"
@@ -344,7 +422,7 @@ def fetch_source(url: str, *, extra_headers: dict[str, str] | None = None) -> So
                 mode = "abstract_or_landing_page"
             else:
                 mode = "stored_only"
-            return SourceRead(mode, text, final_url, "")
+            return SourceRead(mode, text, final_url, "",primary_links=primary_links,document_title=title,document_doi=doi)
     except Exception as exc:
         return SourceRead("stored_only", "", note=f"source retrieval failed: {clean(exc)[:180]}")
 
@@ -391,6 +469,9 @@ def _openalex_work_for_record(r: dict[str, Any]) -> tuple[dict[str, Any] | None,
         work = rows[0] if rows and isinstance(rows[0], dict) else None
         if not work:
             return None, f"OpenAlex authenticated DOI lookup found no work for {doi}"
+        returned_doi=_normalize_doi(work.get("doi"))
+        if returned_doi and returned_doi!=_normalize_doi(doi):
+            return None, "OpenAlex lookup returned a different DOI; refusing cross-work recovery"
         work_id = clean(work.get("id")).rsplit("/", 1)[-1]
         return work, f"OpenAlex authenticated DOI lookup matched {work_id or doi}"
     except Exception as exc:
@@ -405,10 +486,13 @@ def _openalex_recovery_candidates(work: dict[str, Any]) -> list[tuple[str, dict[
     content_urls = work.get("content_urls") if isinstance(work.get("content_urls"), dict) else {}
     pdf_url = clean(content_urls.get("pdf"))
     xml_url = clean(content_urls.get("grobid_xml"))
-    if pdf_url:
-        candidates.append((pdf_url, auth, "OpenAlex cached full-text PDF"))
-    if xml_url:
-        candidates.append((xml_url, auth, "OpenAlex cached full-text XML"))
+    def cached_headers(url: str) -> dict[str,str] | None:
+        host=(urlparse(url).hostname or "").lower()
+        return auth if (host=="openalex.org" or host.endswith(".openalex.org")) else None
+    if _safe_url(pdf_url):
+        candidates.append((pdf_url, cached_headers(pdf_url), "OpenAlex cached full-text PDF"))
+    if _safe_url(xml_url):
+        candidates.append((xml_url, cached_headers(xml_url), "OpenAlex cached full-text XML"))
 
     locations: list[dict[str, Any]] = []
     for loc in [work.get("best_oa_location"), work.get("primary_location")]:
@@ -471,24 +555,55 @@ def fetch_source_for_record(r: dict[str, Any]) -> SourceRead:
     failures: list[str] = []
     best: SourceRead | None = None
     best_label = ""
+    # Hard bound on extra first-party full-document requests per work.
+    document_followups=0
 
     def try_candidates(routes: list[tuple[str, dict[str, str] | None, str]]) -> SourceRead | None:
-        nonlocal best, best_label
+        nonlocal best, best_label, document_followups
         for url, headers, label in routes:
             if not _safe_url(url) or url in seen:
                 continue
             seen.add(url)
             src = fetch_source(url, extra_headers=headers)
-            if src.mode in {"substantial_web_text", "pdf_excerpt"} and clean(src.text):
-                note = f"retrieved via {label}"
-                if src.note:
-                    note += f"; {src.note}"
-                return SourceRead(src.mode, src.text, src.final_url or url, note)
+            status,reason=_source_identity(r,src) if clean(src.text) else ("unverified","no readable document")
+            src.identity_status=status; src.identity_note=reason
+            if status=="mismatch":
+                failures.append(f"{label}: rejected identity mismatch ({reason})")
+                continue
+            # A publisher's explicit PDF/primary-document link is stronger than
+            # scraped landing-page text. Only follow source-owned leads, max 3/work.
+            if src.primary_links and document_followups<3:
+                for link in src.primary_links[:2]:
+                    if document_followups>=3: break
+                    if link in seen or not _safe_url(link): continue
+                    document_followups+=1; seen.add(link)
+                    doc=fetch_source(link)
+                    landing_host=(urlparse(src.final_url or url).hostname or "").lower().removeprefix("www.")
+                    document_host=(urlparse(doc.final_url or link).hostname or "").lower().removeprefix("www.")
+                    if not document_host or not landing_host or not (document_host==landing_host or document_host.endswith("."+landing_host) or landing_host.endswith("."+document_host)):
+                        failures.append(f"{label} document link: redirected outside source-owned domain")
+                        continue
+                    doc_status,doc_reason=_source_identity(r,doc) if clean(doc.text) else ("unverified","no readable document")
+                    doc.identity_status=doc_status; doc.identity_note=doc_reason
+                    if doc_status=="mismatch":
+                        failures.append(f"{label} linked document: rejected identity mismatch")
+                        continue
+                    if doc.mode in {"pdf_excerpt","substantial_web_text"} and clean(doc.text) and doc_status in {"matched","plausible"}:
+                        doc.note=f"retrieved via {label} -> source-owned document link; {doc_reason}"
+                        return doc
+                    if doc.mode!="stored_only" and clean(doc.text):
+                        if best is None or len(doc.text)>len(best.text): best=doc; best_label=f"{label} document link"
+            if src.mode in {"substantial_web_text", "pdf_excerpt"} and clean(src.text) and (status in {"matched","plausible"} or (status=="unverified" and label in {"scanner validation route", "EUR-Lex/Cellar first-party route", "European Parliament first-party document route"})):
+                note = f"retrieved via {label}; {reason}"
+                if status=="unverified": note += "; NOT independently identity verified"
+                if src.note: note += f"; {src.note}"
+                src.note=note
+                return src
             if src.mode != "stored_only" and clean(src.text):
                 if best is None or len(clean(src.text)) > len(clean(best.text)):
                     best = src
                     best_label = label
-                failures.append(f"{label}: only {src.mode}")
+                failures.append(f"{label}: {src.mode}; {reason}")
             else:
                 failures.append(f"{label}: {src.note or 'no substantive text'}")
         return None
@@ -511,10 +626,11 @@ def fetch_source_for_record(r: dict[str, Any]) -> SourceRead:
         failures.append(oa_note)
 
     if best is not None and clean(best.text):
-        note = f"retrieved via {best_label}; strongest available package material was {best.mode}"
+        note = f"retrieved via {best_label}; strongest available package material was {best.mode}; {best.identity_note}; NOT independently verified"
         if work is not None:
             note = f"{oa_note}; {note}"
-        return SourceRead(best.mode, best.text, best.final_url, note)
+        best.note=note
+        return best
     note = "; ".join(failures)[:900] if failures else "no usable scanner, public, or OpenAlex recovery route"
     return SourceRead("stored_only", "", (best.final_url if best else ""), note=note)
 

@@ -126,7 +126,12 @@ pass recovery/terminal-unverifiable policy. Do not park unverified items in REVI
    document URL, or another scanner source route, inspect that material as evidence. Deep Scan judges the work; it does
    not require the work to win a second discovery contest. Independently verify identity/provenance.
 4. Verify bibliographic identity: title, authors/organisation, publication/outlet, year/date, DOI when present,
-   and the relationship between the supplied URL and the underlying work.
+   and the relationship between the supplied URL and the underlying work. The package's
+   `source_material.identity_status` and `identity_note` are **transport-stage clues**, never
+   authoritative verification. Even a `matched` DOI/title requires checking that the recovered
+   body is the correct primary work. A `plausible` or `unverified` excerpt must be verified
+   independently before using it for KEEP, REVIEW, or substantive DROP. A mismatch is a
+   recovery warning, not a verdict about the original record.
 5. Search snippets are navigation clues only. They are never substantive evidence.
 6. Never substitute a related paper, programme page, or secondary story for the claimed work.
 7. Preserve uncertainty. Do not turn proposals into outcomes, modelled scenarios into observed facts,
@@ -821,6 +826,8 @@ def build_job(row, ordinal: int, sidecar: dict[str, Any], dupes: dict[str, list[
             "read_mode": src.mode,
             "final_url": src.final_url,
             "retrieval_note": src.note,
+            "identity_status": src.identity_status,
+            "identity_note": src.identity_note,
             "text": src.text,
         },
         "required_output": {
