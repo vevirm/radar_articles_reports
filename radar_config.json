@@ -619,7 +619,11 @@
     {
       "name": "European Council / Council of the EU",
       "domain": "consilium.europa.eu",
-      "tier": 1
+      "tier": 1,
+      "feeds": [
+        "https://www.consilium.europa.eu/en/register/rss/THMCOM.xml",
+        "https://www.consilium.europa.eu/en/rss/pressreleases.ashx"
+      ]
     },
     {
       "name": "European External Action Service",
@@ -919,7 +923,10 @@
     {
       "name": "European Patent Office",
       "domain": "epo.org",
-      "tier": 1
+      "tier": 1,
+      "feeds": [
+        "https://www.epo.org/en/news-events/news/feed"
+      ]
     },
     {
       "name": "World Intellectual Property Organization",
@@ -3120,7 +3127,19 @@
         "competitiveness",
         "economic-security",
         "digital",
-        "science"
+        "science",
+        "publication",
+        "report",
+        "study",
+        "trade",
+        "investment",
+        "supply",
+        "raw-materials",
+        "sanctions",
+        "export",
+        "industry",
+        "energy",
+        "security"
       ]
     },
     "erc.europa.eu": {
@@ -3257,7 +3276,10 @@
         "industry",
         "digital",
         "artificial-intelligence",
-        "indicators"
+        "indicators",
+        "trade",
+        "supply",
+        "security"
       ],
       "dated_publication_hubs": [
         "/en/publications/reports.html",
@@ -3368,6 +3390,62 @@
       "dated_publication_hubs": [
         "/ideas.html",
         "/horizon.html"
+      ]
+    },
+    "cordis.europa.eu": {
+      "seed_urls": [
+        "https://cordis.europa.eu/news/en",
+        "https://cordis.europa.eu/thematic-packs/en"
+      ],
+      "path_hints": [
+        "research",
+        "result",
+        "publication",
+        "study",
+        "report",
+        "project",
+        "innovation",
+        "security",
+        "energy",
+        "industry",
+        "digital",
+        "resilien",
+        "strategic"
+      ]
+    },
+    "epo.org": {
+      "hub_paths": [
+        "/en/about-us/observatory-patents-and-technology",
+        "/en/news-events/news"
+      ],
+      "path_hints": [
+        "study",
+        "report",
+        "research",
+        "publication",
+        "observatory",
+        "innovation",
+        "patent",
+        "industrial",
+        "technology",
+        "strategic"
+      ]
+    },
+    "chathamhouse.org": {
+      "hub_paths": [
+        "/publications/research-publications"
+      ],
+      "path_hints": [
+        "research",
+        "report",
+        "policy-paper",
+        "publication",
+        "industrial",
+        "economic",
+        "technology",
+        "trade",
+        "europe",
+        "security"
       ]
     }
   },
