@@ -89,6 +89,11 @@ jobs:
           RADAR_RESCUE_MODE: ${{ github.event.inputs.rescue_mode || 'false' }}
         run: python scripts/scan_radar.py
 
+      - name: Audit institutional discovery coverage (read-only)
+        if: steps.due.outputs.run == 'true'
+        continue-on-error: true
+        run: python scripts/audit_source_coverage.py
+
       - name: Rebuild authoritative active corpus and Excel
         if: steps.due.outputs.run == 'true'
         shell: bash
