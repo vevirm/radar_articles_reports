@@ -186,6 +186,15 @@
         "reasoning-reform/baseline.json"
       ],
       "purpose": "Approve tested Deep Scan inbox import transaction repair: retry stale Git pushes by re-importing on fresh main; move completed/rejected deliveries out of inbox to preserve recoverability; retain V2 authority, claims validation, and three-attempt recovery policy. Update only importer protected-code fingerprint; retain scanner and active boundary fingerprints unchanged."
+    },
+    {
+      "stage": "post-stage8-reasoning-reform-freeze-reconciliation-2026-10-27",
+      "approved_files": [
+        "scripts/deep_read_works.py",
+        "scripts/prepare_deep_scan_package.py",
+        "reasoning-reform/baseline.json"
+      ],
+      "purpose": "Reconcile two protected Deep Scan fingerprints after review: validated reader-text hotfix and current package preparer. Freeze guard remains enforced; scanner, importer and active boundary hashes unchanged. Verify protected code diffs before approving."
     }
   ],
   "captured_for_repository_version": "v25.1.0-evidence-linked-reader",
@@ -207,9 +216,9 @@
       "scripts/rebuild_active_radar.py": "3e77545a932113686237f43a23a2a0db5225902ee4e2ed31f2c8b19951829f4a"
     },
     "deep_scan_hard_core": {
-      "scripts/deep_read_works.py": "61984f3c6afb7e464505476ca966281c13857a52e34f7a068fd49ad2674330e8",
+      "scripts/deep_read_works.py": "107af77e37f5db5ee2cf73f53ec2b774c852d269e16f568fae8a59df600ff8f4",
       "scripts/import_deep_scan_results.py": "9ddd51ea355f24cd6b40c2ccc9e68ffccfd9299d2e706ceb33dab6b757a3662b",
-      "scripts/prepare_deep_scan_package.py": "7829fa1803281ad76be2cf4ed89a33e52c3bc87997521a854f1bda6ce9f0fc00"
+      "scripts/prepare_deep_scan_package.py": "6effedf133c332e1bf582fe6e652b26b65a542ebf5c9b8f86c7cdec5ebd9a200"
     },
     "scanner_hard_core": {
       "scripts/scan_radar.py": "685e134b92160b3a589c8dce28dfdc0d17b639bad60e92f2ff1bd18e8852b465"
