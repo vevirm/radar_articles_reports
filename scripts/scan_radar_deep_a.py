@@ -9182,6 +9182,19 @@ def doi_landing_abstract(doi_raw: str, timeout: int = 8) -> str:
                 desc = clean_text(obj.get("abstract") or obj.get("description")) if isinstance(obj, dict) else ""
                 if len(desc.split()) >= 20:
                     return desc[:12000]
+        # Publisher landing pages often present the abstract visibly rather than in
+        # citation/JSON-LD metadata. Use the already downloaded HTML; never fetch
+        # additional publisher pages or mistake a whole article for an abstract.
+        for node in soup.select(
+            'section#abstract, section.abstract, div#abstract, div.abstract, '
+            'section[aria-label="Abstract"], section[aria-label="abstract"], '
+            'section[id^="Abs"], div[id^="Abs"]'
+        )[:5]:
+            abstract = clean_text(node.get_text(" ", strip=True))
+            words = len(abstract.split())
+            if 40 <= words <= 1500:
+                _diag_inc("doi_visible_abstract_recovered")
+                return abstract[:12000]
     except Exception:
         return ""
     return ""
@@ -11285,7 +11298,8 @@ def sitemap_entries(url: str, depth: int = 0, child_budget: int | None = None) -
             if loc:
                 low = normalized(loc)
                 pr = 0
-                if any(k in low for k in ["publication", "research", "report", "paper", "2026", "article"]): pr += 3
+                if any(k in low for k in ["publication", "research", "report", "paper", "article"]): pr += 3
+                if any(str(y) in low for y in range(DATE_FLOOR.year, dt.date.today().year + 1)): pr += 1
                 if last and last >= DATE_FLOOR: pr += 2
                 children.append((pr, last or dt.date.min, loc))
         children.sort(reverse=True)
@@ -12754,6 +12768,7 @@ def _source_adapter_domain_jobs(
     from_date: dt.date,
     stage_deadline: float | None = None,
     reconsider_seen: bool = False,
+    transport: dict[str, Any] | None = None,
 ) -> list[tuple[str, str, int, str]]:
     """Bounded source-specific publication-hub discovery for the hardest EU/elite sites.
 
@@ -12763,6 +12778,8 @@ def _source_adapter_domain_jobs(
     layers and still feed every discovered page through the ordinary parser/admission gates.
     This is not a search-engine shortcut and cannot directly admit anything.
     """
+    if transport is not None:
+        transport.update(hub_attempted=0, hub_successful=0)
     if not bool(CONFIG.get("institution_source_adapter_enabled", True)):
         return []
     domain = clean_text(src.get("domain", "")).lower().removeprefix("www.")
@@ -12786,7 +12803,12 @@ def _source_adapter_domain_jobs(
         if raw:
             hubs.append(raw if raw.startswith("http") else urljoin(base + "/", raw.lstrip("/")))
     hubs.extend(clean_text(x) for x in raw_seeds if clean_text(x))
-    hubs = list(dict.fromkeys(hubs))
+    hubs = list(dict.fromkeys(
+        u for u in hubs
+        if urlparse(u).scheme in {"http", "https"}
+        and ((urlparse(u).hostname or "").lower().removeprefix("www.") == domain
+             or (urlparse(u).hostname or "").lower().removeprefix("www.").endswith("." + domain))
+    ))
     if not hubs and domain != "op.europa.eu":
         return []
 
@@ -12815,9 +12837,18 @@ def _source_adapter_domain_jobs(
         if not nh or nh in fetched:
             continue
         fetched.add(nh)
+        if transport is not None:
+            transport["hub_attempted"] += 1
         r = get(hub, timeout=int(CONFIG.get("institution_page_timeout_seconds", 12)))
         if not r or "html" not in r.headers.get("content-type", "text/html"):
             continue
+        # A redirect outside the configured source is not a successful source-owned hub.
+        response_host = (urlparse(getattr(r, "url", None) or hub).hostname or "").lower().removeprefix("www.")
+        if not (response_host == domain or response_host.endswith("." + domain)):
+            _diag_inc("institution_adapter_cross_domain_redirect_rejected")
+            continue
+        if transport is not None:
+            transport["hub_successful"] += 1
         soup = BeautifulSoup(r.text, "html.parser")
         for a in soup.find_all("a", href=True):
             u = urljoin(r.url, a.get("href", ""))
@@ -12838,7 +12869,10 @@ def _source_adapter_domain_jobs(
             # link look like a research publication.
             semantic_hits = sum(1 for hint in path_hints if hint and (hint in path_probe or hint in label))
             generic_score = institution_url_score(u, None, from_date)
-            year_hit = bool(re.search(r"/(?:2025|2026)(?:/|-)" , path_probe))
+            year_hit = any(
+                re.search(rf"/{year}(?:/|-)", path_probe)
+                for year in range(from_date.year, dt.date.today().year + 1)
+            )
             # Links from an explicitly configured publication hub get a modest trust
             # bonus, but generic navigation still needs a content/path signal.
             score = generic_score + min(12, semantic_hits * 4) + (3 if year_hit else 0) + (4 if is_pdf else 0)
@@ -12862,14 +12896,43 @@ def _source_adapter_domain_jobs(
     return out
 
 
+def _valid_institution_feed_response(content: bytes, parsed: Any, content_type: str = "") -> bool:
+    """Reject successful HTTP responses containing HTML block/error pages, not RSS.
+
+    A valid but empty XML feed is healthy. A parser with bozo=1 and no entries
+    is invalid; some test parsers omit `bozo`, so XML validation handles that case.
+    """
+    payload = content or b""
+    prefix = payload[:1024].lstrip().lower()
+    mime = (content_type or "").lower()
+    if "text/html" in mime or b"<html" in prefix or b"<!doctype html" in prefix:
+        return False
+    entries = getattr(parsed, "entries", []) or []
+    if getattr(parsed, "bozo", False) and not entries:
+        return False
+    if entries:
+        return True
+    # Keep compatibility with lightweight/offline parsed feeds without bozo.
+    if not getattr(parsed, "bozo", False) and not prefix.startswith(b"<"):
+        return not mime or any(x in mime for x in ("rss", "atom", "xml"))
+    try:
+        root = ET.fromstring(payload)
+        return localname(root.tag).lower() in {"rss", "feed", "rdf"}
+    except Exception:
+        return False
+
+
 def _institution_feed_jobs(
     src: dict[str, Any],
     from_date: dt.date,
     stage_deadline: float | None = None,
     reconsider_seen: bool = False,
+    transport: dict[str, Any] | None = None,
 ) -> list[tuple[str, str, int, str]]:
     """Queue explicitly configured institution RSS/Atom entries through normal page parsing."""
     feeds = [clean_text(x) for x in (src.get("feeds") or []) if clean_text(x)]
+    if transport is not None:
+        transport.update(feed_configured=bool(feeds), feed_attempted=0, feed_successful=0, feed_entries_seen=0)
     if not feeds:
         return []
     domain = clean_text(src.get("domain", "")).lower().removeprefix("www.")
@@ -12880,15 +12943,31 @@ def _institution_feed_jobs(
     today = dt.date.today()
     out: list[tuple[str, str, int, str]] = []
     for feed_url in feeds:
+        feed_host = (urlparse(feed_url).hostname or "").lower().removeprefix("www.")
+        if urlparse(feed_url).scheme not in {"https", "http"} or not (
+            feed_host == domain or feed_host.endswith("." + domain)
+        ):
+            _diag_inc("institution_feed_foreign_host_rejected")
+            continue
         if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
             break
+        if transport is not None:
+            transport["feed_attempted"] += 1
         fr = get(feed_url, timeout=timeout)
         if not fr:
             continue
         try:
-            entries = list(getattr(feedparser.parse(fr.content), "entries", []) or [])[:max_entries]
+            parsed = feedparser.parse(fr.content)
+            if not _valid_institution_feed_response(fr.content, parsed, getattr(fr, "headers", {}).get("content-type", "")):
+                _diag_inc("institution_invalid_feed_responses")
+                continue
+            entries = list(getattr(parsed, "entries", []) or [])[:max_entries]
         except Exception:
+            _diag_inc("institution_invalid_feed_responses")
             continue
+        if transport is not None:
+            transport["feed_successful"] += 1
+            transport["feed_entries_seen"] += len(entries)
         for entry in entries:
             link = clean_text(getattr(entry, "link", "") or (entry.get("link", "") if isinstance(entry, dict) else ""))
             if not link:
@@ -12915,8 +12994,10 @@ def _institution_feed_jobs(
 
 def _discover_domain(src: dict[str, Any], from_date: dt.date, bootstrap: bool = False, stage_deadline: float | None = None, reconsider_seen: bool = False) -> tuple[list[tuple[str, str, int, str]], str | None]:
     domain = src["domain"]
-    adapter_jobs = _source_adapter_domain_jobs(src, from_date, stage_deadline, reconsider_seen)
-    adapter_jobs.extend(_institution_feed_jobs(src, from_date, stage_deadline, reconsider_seen))
+    feed_transport: dict[str, Any] = {}
+    hub_transport: dict[str, Any] = {}
+    adapter_jobs = _source_adapter_domain_jobs(src, from_date, stage_deadline, reconsider_seen, hub_transport)
+    adapter_jobs.extend(_institution_feed_jobs(src, from_date, stage_deadline, reconsider_seen, feed_transport))
     entries = []
     max_entries = int(CONFIG.get("sitemap_max_entries", 800))
     if stage_deadline_reached(stage_deadline, int(CONFIG.get("network_reserve_seconds", 90))):
@@ -12930,6 +13011,9 @@ def _discover_domain(src: dict[str, Any], from_date: dt.date, bootstrap: bool = 
     if not entries:
         if adapter_jobs:
             return adapter_jobs, f"No usable sitemap: {domain}; using source-specific publication adapter ({len(adapter_jobs)} page(s))"
+        if int(feed_transport.get("feed_successful", 0) or 0) > 0 or int(hub_transport.get("hub_successful", 0) or 0) > 0:
+            # Quiet but reachable source-owned feeds/hubs are not transport failures.
+            return [], None
         # Trusted institutional sources without usable sitemaps still deserve bounded
         # source-local discovery. This follows only same-domain links from a few hubs;
         # it is not a global crawler or search-engine dependency.
@@ -12937,7 +13021,12 @@ def _discover_domain(src: dict[str, Any], from_date: dt.date, bootstrap: bool = 
         if fallback:
             return fallback, f"No usable sitemap: {domain}; using bounded institutional HTML fallback ({len(fallback)} page(s))"
         return [], f"No usable sitemap: {domain}"
-    seen = {normalized_link(u) for u, *_ in adapter_jobs}; jobs = list(adapter_jobs)
+    seen: set[str] = set(); jobs = []
+    for job in adapter_jobs:
+        key = normalized_link(job[0])
+        if key and key not in seen:
+            seen.add(key)
+            jobs.append(job)
     limit_key = "institution_pages_per_domain_bootstrap" if bootstrap else "institution_pages_per_domain"
     limit = int(CONFIG.get(limit_key, CONFIG.get("institution_pages_per_domain", 24)))
     ranked = sorted(entries, key=lambda x: (institution_url_score(x[0], x[1], from_date), x[1] or dt.date.min), reverse=True)

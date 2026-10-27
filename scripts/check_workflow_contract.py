@@ -10,7 +10,7 @@ checks=[
  ("cron: '17 2,6,10,14,18,22 * * *'" in hist,'Historical runs every four hours, exactly two hours after Main'),
  ('group: ri-radar-research-scanners' in main and 'group: ri-radar-research-scanners' in hist,'Shared scanner concurrency lock'),
  ('cancel-in-progress: false' in main and 'cancel-in-progress: false' in hist,'Neither scanner cancels the other; the later run waits'),
- ('Run scanner regression tests' in main,'Main regression gate retained'),
+ ('Run scanner regression tests' in main or 'Run production-safe scanner preflight tests' in main,'Main regression gate retained'),
  ('Run historical scanner tests' in hist,'Historical regression gate retained'),
  ("HISTORICAL_SCAN_BUDGET_SECONDS: '1200'" in hist,'Historical research budget is twenty minutes'),
  ("HISTORICAL_MIN_RUNTIME_SECONDS: '1080'" in hist,'Historical minimum research runtime is eighteen minutes'),

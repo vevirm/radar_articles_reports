@@ -35,6 +35,7 @@ PRODUCTION_TEST_FILES = (
     "test_scanner_features.py",
     "test_source_route_parity.py",
     "test_source_transport_repair.py",
+    "test_europe_discovery_reuse.py",
     "test_deferred_metadata_fair_retries.py",
     "test_eu_ri_recall_and_publication_repair.py",
     "test_v172020_scanner_serialization.py",
