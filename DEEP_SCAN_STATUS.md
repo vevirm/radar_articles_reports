@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **3464** (Main **1694** + Historical **1770**)
-- Automatic queue still needing V2 verification: **93** (Main **32** + Historical **61**)
-- Currently assigned to workers: **93** (Main **32** + Historical **61**)
+- Authoritative V2 verified: **3511** (Main **1718** + Historical **1793**)
+- Automatic queue still needing V2 verification: **50** (Main **8** + Historical **42**)
+- Currently assigned to workers: **50** (Main **8** + Historical **42**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **44**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,30 +16,21 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261027T143535Z-8b0e8b1f6594`
-- Assigned unresolved records: **36**
-  1. `link:https://ecipe.org/publications/forward-looking-agenda-for-eu-quantum-policy/#_ftnref5` — From Sovereignty to Managed Interdependence: A Forward-Looking Agenda for EU Quantum Policy
-  2. `link:https://doi.org/10.2478/bjes-2026-0028` — Protecting dual-use technological innovation through trade secret law: institutional limits and cybersecurity challenges
-  3. `link:https://doi.org/10.1016/j.telpol.2026.103334` — A quantitative framework for assessing digital sovereignty
-  4. `link:https://www.hybridcoe.fi/publications/western-balkans-domestic-regional-and-international-trends-hybrid-threat-potential/` — Western Balkans: Trends creating hybrid threat potential - Hybrid CoE - The European Centre of Excellence for Countering Hybrid Threats
-  5. `link:https://doi.org/10.1093/eurpub/ckag169.654` — X.1.PK.1. Promoting Health in Changing Work Environments: Results from 5 Horizon Europe WISEWORK-C projects
-  6. `link:https://doi.org/10.1093/eurpub/ckag169.764` — Y.11.PK.2. From Evidence to Action: EU studies on occupational risk and diseases
-  7. `link:https://cordis.europa.eu/article/id/466833-horizon-is-powering-the-eu-s-biotechnology-industry-from-innovation-to-investment` — Horizon is powering the EU’s biotechnology industry, from innovation to investment
-  8. `link:https://news.google.com/rss/articles/CBMiywFBVV95cUxPVWwzNDkzQ0x4Sl9PZmV5OXp3dTZBRTJDcWdRVFgxTmZPckNJZjVqQVpXUzVVQUpVelFvRmdOZmw2bHgzZGI1bkIxUzdZUVdqZ0V0ZnQ5RFhTZFdadDB0U2FjZ0NyRDZZZUlURlBKZ28zeFJBMHdLQjJJcFFtb0k5YUJEWUVrNkdCQ0VxNk82Q3VkTDRtUmVURnAxS1h6QWFpU0djQ3hhOVllZG5uYW43TW9ScFVvQll6T19NX0N6U3pwSVlGNE95NFh0SQ?oc=5` — Poland eyes more cooperation with Germany in space, Polish minister says
-  - … plus 28 more in the package manifest
+- Current package: `worker-a-20261027T165133Z-60e48d98abb0`
+- Assigned unresolved records: **15**
+  1. `historical:id:f8e6efd54b794d71` — Position paper | Economic security risks to Dutch and European competitiveness - Parliamentary expert testimony - HCSS
+  2. `historical:id:479a5f9f90cb2d32` — BBC Business Daily "The Great Semiconductor Shortage"
+  3. `historical:id:d3b5c11fd9940f4c` — "Going Digital" - Launch of ALLEA E-Humanities Working Group report - ALLEA
+  4. `historical:id:3a83c8187654e4a5` — Case study as a methodological foundation for Technology Roadmapping (TRM): Literature review and future research agenda
+  5. `link:https://doi.org/10.1016/j.telpol.2026.103334` — A quantitative framework for assessing digital sovereignty — recovery attempt 2/3
+  6. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxPTkh2ek1Gc3lfdzhmdi1xc25PbEt1UHVLMjdXeHN1V1BuLTR3RHhLVDhhWFAxZXdCM3ZrYXA1c05CX1hrTkZabEt2eGUxSGRfQXRZWGdCTFNIZl9iMnVNT3c4UTFoMTZyZmRoTlMxZHJRSzFRSlo4dzV4UkhPRHNtekZGS3I?oc=5` — EU weighs mirroring Donald Trump in securing critical minerals — recovery attempt 2/3
+  7. `link:https://news.google.com/rss/articles/CBMiswFBVV95cUxPRVNYd3p4LWZvSkxDVkJHUVlYQXFTSXVWYlpWTHlYdXp0TzdCd1c0QmplelNUOHVQV1ZrOXVaVnlKZnVDYUFJVHRkZ1Naa1BVSGptQl9Zd0k0Y2paZVhXOXlkRmRSY1BVSkNlcWdsR2d1czJGSHowVVpOVUpVZjdSeTBZa09aNklRTExwOUNqVmFRWmVGTTF2d09mN3RXWUxhMktRX2hnMEhNTEgtME1WUTJtcw?oc=5` — Europe’s satellite merger tests drive for space independence — recovery attempt 2/3
+  8. `link:https://doi.org/10.1093/eurpub/ckag169.654` — X.1.PK.1. Promoting Health in Changing Work Environments: Results from 5 Horizon Europe WISEWORK-C projects — recovery attempt 2/3
+  - … plus 7 more in the package manifest
 
 ### Worker B
 - Current package: `worker-b-20261027T143543Z-1301c69e86ac`
-- Assigned unresolved records: **22**
-  1. `historical:id:f02acd0d552c7d2c` — The TIM Dual-Use Dashboard
-  2. `historical:id:bc796baab98a40f7` — Territories: Competitiveness, defence and preparedness
-  3. `historical:id:d84c6f2439ecc661` — Environmentally Sustainable Digital Sovereignty
-  4. `historical:id:b6b472929605096c` — Digital Sovereignty as a Geopolitical Strategy
-  5. `historical:id:703862cf5417a037` — A Geopolitical Shift: The European Union’s Strategic Wake-Up Call
-  6. `historical:id:8dc4bb0cae51158f` — Beyond confrontation? Comparing the determinants of Chinese and the European Union’s development finance to Africa
-  7. `historical:id:4407edfd94b259bd` — Novel Business Model Canvas for Research Infrastructures: A Design Science Approach
-  8. `historical:id:59a2bc5a53c0ad59` — China starts exporting quantum computers as its systems become more competitive
-  - … plus 14 more in the package manifest
+- Assigned unresolved records: **0**
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
