@@ -764,6 +764,77 @@ def source_adapter_candidates(src: dict[str, Any], active_topics: list[dict[str,
     return [u for u,_ in sorted(scored.items(),key=lambda kv:(-kv[1],kv[0]))[:max_pages]]
 
 
+def historical_archive_candidates(src: dict[str, Any], active_topics: list[dict[str, Any]], warnings: list[str]) -> list[str]:
+    """Bounded, archive-aware same-publisher navigation, never a date/admission shortcut.
+
+    Historical catalogue pages often hide older works behind year/archive/pagination
+    links. Explore at most two such steps. URL years influence *priority only*;
+    publication dates must still be verified by fetch_page_candidate/admit.
+    """
+    domain=domain_of("https://" + clean(src.get("domain")))
+    hubs=(CONFIG.get("historical_archive_hubs") or {}).get(domain, [])
+    if not domain or not isinstance(hubs,list) or not hubs: return []
+    max_fetches=max(1,min(10,int(CONFIG.get("historical_archive_max_hub_fetches",6))))
+    max_candidates=max(1,min(60,int(CONFIG.get("historical_archive_max_candidates",36))))
+    max_pages=max(1,min(4,int(CONFIG.get("historical_archive_max_listing_pages",4))))
+    queue=[]; queued=set(); seen=set(); scored:dict[str,int]={}; listing_pages=0
+    def same_host(url: str) -> bool:
+        host=domain_of(url)
+        return bool(host and (host==domain or host.endswith("."+domain)))
+    def add_listing(url: str,depth: int) -> None:
+        if url not in queued and same_host(url) and url.startswith(("https://","http://")):
+            queued.add(url); queue.append((url,depth))
+    for path in hubs[:max_fetches]:
+        path=clean(path)
+        add_listing(path if path.startswith(("https://","http://")) else urljoin("https://"+domain+"/",path.lstrip("/")),0)
+    while queue and len(seen)<max_fetches and budget_ok(90):
+        url,depth=queue.pop(0)
+        if url in seen: continue
+        seen.add(url)
+        try:
+            r=SESSION.get(url,timeout=REQUEST_TIMEOUT,allow_redirects=True)
+            if not r.ok or not same_host(r.url):
+                _diag("historical_archive_transport_failure"); continue
+            if "pdf" in (r.headers.get("Content-Type") or "").lower(): continue
+            soup=BeautifulSoup(r.text,"html.parser")
+        except Exception:
+            _diag("historical_archive_transport_failure"); continue
+        _diag("historical_archive_hub_success")
+        for a in soup.find_all("a",href=True)[:650]:
+            href=urljoin(r.url,clean(a.get("href")))
+            if not href.startswith(("https://","http://")) or not same_host(href): continue
+            parsed=urlparse(href)
+            if parsed.fragment and parsed._replace(fragment="").geturl()==r.url: continue
+            if re.search(r"\.(?:jpg|png|gif|css|js|zip|xlsx|docx)(?:$|\?)",parsed.path,re.I): continue
+            label=clean(a.get_text(" ",strip=True)); path=parsed.path.lower()
+            score=topic_score(f"{path} {label}",active_topics)
+            research=bool(re.search(r"(?:publication|research|report|paper|study|analysis|working-paper|policy-brief|foresight|download|\.pdf)",f"{path} {label}",re.I))
+            archive=bool(re.search(r"(?:archive|publication|research|report|studies|papers|page[=/]|[?&]page=)",f"{path} {label} {parsed.query}",re.I))
+            years=[int(y) for y in re.findall(r"(?<!\d)(20\d{2})(?!\d)",f"{path} {label}")]
+            historic_year=any(DATE_FROM.year<=y<=DATE_TO.year for y in years)
+            # Years in titles often describe foresight horizons, not publication dates.
+            # Do not reject on year hints: only date evidence at the admission gate counts.
+            future_archive=bool(re.search(r"/(?:archive|publications|reports)/(20\d{2})(?:/|$)",path)) and any(y>DATE_TO.year for y in years)
+            if score>0 and (research or historic_year):
+                score+=4 if research else 0
+                score+=5 if historic_year else 0
+                if future_archive: score-=6  # Deprioritize, never turn URL-year into date evidence.
+                hint=_historical_listing_hint(a,r.url,href)
+                if hint:
+                    HIST_OFFICIAL_LISTING_HINTS[href.lower().rstrip("/")]=hint
+                    score+=9; _diag("historical_official_listing_dates_discovered")
+                scored[href]=max(scored.get(href,0),score)
+            # Discover pagination/archive catalogues, never crawl arbitrary news pages.
+            is_numbered_page=bool(re.search(r"(?:[?&]page=\d+|/page/\d+|/page-\d+)",href,re.I))
+            if depth<2 and not future_archive and (archive or historic_year) and (score>0 or historic_year):
+                if is_numbered_page:
+                    if listing_pages>=max_pages: continue
+                    listing_pages+=1
+                add_listing(href,depth+1)
+    if scored: _diag("historical_archive_candidate_links",len(scored))
+    return [url for url,_ in sorted(scored.items(),key=lambda kv:(-kv[1],kv[0]))[:max_candidates]]
+
+
 def sitemap_candidates(domain: str, active_topics: list[dict[str, Any]], warnings: list[str]) -> list[str]:
     roots=[f"https://{domain}/sitemap.xml",f"https://{domain}/sitemap_index.xml"]; queue=list(roots); seen_maps=set(); urls=[]
     while queue and len(seen_maps)<12 and budget_ok(90):
@@ -956,9 +1027,9 @@ def collect_direct_sources(active_sources: list[dict[str, Any]], active_topics: 
         if not budget_ok(120): break
         domain=clean(src.get("domain"));
         if not domain: continue
-        adapter=source_adapter_candidates(src,active_topics,warnings); sitemap=sitemap_candidates(domain,active_topics,warnings)
+        adapter=source_adapter_candidates(src,active_topics,warnings); archive=historical_archive_candidates(src,active_topics,warnings); sitemap=sitemap_candidates(domain,active_topics,warnings)
         urls=[]; seen=set()
-        for u in adapter+sitemap:
+        for u in archive+adapter+sitemap:
             k=u.lower().rstrip("/")
             if k not in seen: urls.append(u); seen.add(k)
         admitted=0
