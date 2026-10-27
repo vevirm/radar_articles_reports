@@ -1,0 +1,1868 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-b-20261027T143543Z-1301c69e86ac",
+  "results": [
+    {
+      "record_key": "historical:id:f02acd0d552c7d2c",
+      "source_hash": "690b7ae4",
+      "identity_hash": "7b509068006afd60",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened exact JRC reader-facing URL https://publications.jrc.ec.europa.eu/repository/handle/JRC147738; repository matches title, five authors, JRC147738 and DOI 10.2760/9049833."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Opened original JRC public PDF at https://publications.jrc.ec.europa.eu/repository/bitstream/JRC147738/JRC147738_01.pdf; verified the cover, abstract, method, dataset and full annex catalogue; checked matching publisher bibliographic record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://publications.jrc.ec.europa.eu/repository/bitstream/JRC147738/JRC147738_01.pdf",
+            "title": "JRC147738 — The TIM Dual-Use Dashboard",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_repository",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC147738",
+            "title": "JRC Publications record JRC147738",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official JRC publication JRC147738 by Sevini, Caponetti, Ferretti, Arnes Novau and Grabowska, DOI 10.2760/9049833, published 19 October 2026. Verified title, cover, EU publication record and substantive report on TIM Dual-Use mapping. Scanner date 2026-01-01 was a placeholder inconsistent with official repository publication date."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Route 3: a substantive European Commission JRC technical research report describes the design and application of a Europe-facing research/innovation-security intelligence instrument, explicitly mapping scientific publications, patents and EU-funded research with dual-use relevance. Route 1 is also supported by its export-control and strategic technology governance purpose."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-10-19"
+        },
+        "unset": [],
+        "reason": "The JRC publication repository supplies 2026-10-19; 2026-01-01 in the historical scanner was an assumed start-of-year date."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact-title or DOI duplicate identified among the assigned possible duplicates."
+      },
+      "reader_title": "JRC TIM Dual-Use Dashboard maps research with potential export-control relevance",
+      "reader_what": "A JRC technical report documents search methods linking scientific publications, patents and EU research projects to dual-use technology.",
+      "reader_why": "European research organisations can explore technology-transfer risks, cross-border collaboration and possible export-control exposure with systematic evidence.",
+      "reader_more": "The report describes a web-based analytical dashboard, including more than 380 query algorithms and a dataset aggregating Scopus, PATSTAT and CORDIS material. It covers technology categories in the EU dual-use regulation and selected emerging technologies. A tagged record indicates potential relevance, not that an export licence is legally required.",
+      "deep_analysis": {
+        "work_kind": "Official JRC technical-methodology report",
+        "research_question": "How does the TIM Dual-Use analytical platform map scientific outputs potentially relevant to EU dual-use controls?",
+        "main_finding": "The JRC describes a dashboard that maps R&I records through more than 380 thematic queries and supports monitoring of dual-use technologies, institutional research networks and knowledge-transfer compliance risks.",
+        "method_or_basis": "Official 249-page JRC report JRC147738, including methodology, taxonomy and queries; repositories Scopus, PATSTAT and CORDIS; dated EU JRC catalogue.",
+        "qualification": "Search-matched papers or patents have potential dual-use content only. They are not automatically controlled items, and actual export-authorisation questions require separate legal assessment. The dataset was updated in June 2026.",
+        "radar_relevance": "Evidence about European R&I security and technology-intelligence infrastructure and the interaction of research outputs with EU export controls.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "innovation.dual_use",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "unchanged",
+          "status": "operating",
+          "status_date": "2026-10-19",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Search-matched papers or patents have potential dual-use content only. They are not automatically controlled items, and actual export-authorisation questions require separate legal assessment. The dataset was updated in June 2026.",
+          "text": "The JRC TIM Dual-Use system maps published research, patents and EU-funded projects against dual-use technology categories using over 380 search algorithms.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:bc796baab98a40f7",
+      "source_hash": "66e1c956",
+      "identity_hash": "bfd4726fb1e75ec9",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Opened the official JRC catalogue https://publications.jrc.ec.europa.eu/repository/handle/JRC147349, which gives Carmen Sillero Illanes, publication date 2026-08-12, JRC147349 and DOI 10.2760/8535462."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Read primary full 10-page PDF https://publications.jrc.ec.europa.eu/repository/bitstream/JRC147349/JRC147349_01.pdf, including territorial case-study methodology, findings, and 19 recommendations."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://publications.jrc.ec.europa.eu/repository/bitstream/JRC147349/JRC147349_01.pdf",
+            "title": "JRC147349 — Territories: Competitiveness, defence and preparedness",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_repository",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC147349",
+            "title": "JRC Publications record JRC147349",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Official JRC report JRC147349 authored by Carmen Sillero Illanes, public catalogue dated 12 August 2026; independently matched original 10-page Commission PDF and official publication announcements. Scanner 2026-01-01 is a date placeholder and must be corrected."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Strand A Routes 1 and 2: a JRC study of three EU territorial R&I ecosystems measures dual-use industrial innovation capacity, reveals structural obstacles (skills, market access and interfaces to defence planning), and connects these mechanisms explicitly to European strategic autonomy. Also Route 3: completed evidence-led EU regional innovation policy research."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-08-12",
+          "authors": "Carmen Sillero Illanes"
+        },
+        "unset": [],
+        "reason": "The JRC catalogue gives publication date 2026-08-12 and named author Carmen Sillero Illanes, replacing historical scanner placeholder 2026-01-01."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact-title or DOI duplicate identified among the assigned possible duplicates."
+      },
+      "reader_title": "EU dual-use innovation hubs need stronger regional coordination and research links",
+      "reader_what": "JRC case studies find skills shortages, limited SME defence-market access and weak civil–defence innovation interfaces.",
+      "reader_why": "These bottlenecks can constrain Europe’s regional ability to develop and scale strategically important technologies.",
+      "reader_more": "The JRC examined cybersecurity in Estonia, unmanned aerial systems in Poland’s Podkarpackie region, and space technologies in Andalusia. Its brief identifies place-based coordination, shared test facilities and access to funding as potentially useful levers. The recommendations for regional and EU programmes are proposals, not enacted measures.",
+      "deep_analysis": {
+        "work_kind": "Official EU JRC policy research brief based on three territorial case studies",
+        "research_question": "How can EU place-based innovation policies strengthen regional dual-use and defence ecosystems?",
+        "main_finding": "Three EU case studies reveal mismatches between civilian innovation ecosystems and defence procurement or planning, alongside skills and scaling weaknesses; JRC proposes territorial coordination and cross-regional infrastructure.",
+        "method_or_basis": "REGDUALOSA exploratory study (2024–2026), desk research, expert interviews and structured stakeholder consultations using an adapted POINT methodology across Estonia, Podkarpackie and Andalusia.",
+        "qualification": "Qualitative evidence from three selected territories is not a representative estimate of all EU regions. Proposed reforms and suggested synergies are not evidence that policies were implemented or produced measurable outcomes.",
+        "radar_relevance": "Substantive EU regional R&I capability, research–industry linkages, security, funding access and strategic-technology ecosystems.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "innovation.regional_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-08-12",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Qualitative evidence from three selected territories is not a representative estimate of all EU regions. Proposed reforms and suggested synergies are not evidence that policies were implemented or produced measurable outcomes.",
+          "text": "JRC case studies in Estonia, Poland and Spain find EU regional dual-use innovation capacity constrained by skills shortages, SME procurement access and weak civil–defence planning interfaces.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:d84c6f2439ecc661",
+      "source_hash": "26eabae4",
+      "identity_hash": "61b09271e5280f90",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied route https://publications.jrc.ec.europa.eu/repository/handle/JRC147383 located in the package; matched primary publisher/repository content."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "recovered",
+            "note": "Inspected 24000 characters of matching pdf_excerpt from scanner-extracted https://publications.jrc.ec.europa.eu/repository/bitstream/JRC147383/JRC147383_01.pdf; compared its bibliographic cover, substance and methods with the official identity record https://publications.jrc.ec.europa.eu/repository/handle/JRC147383."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "found",
+            "note": "Searched exact title \"Environmentally Sustainable Digital Sovereignty\" and inspected the corresponding publisher, official page or catalogue at https://publications.jrc.ec.europa.eu/repository/handle/JRC147383; no substitute work was used."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "recovered",
+            "note": "Checked institution/publisher document route https://publications.jrc.ec.europa.eu/repository/handle/JRC147383 for identity and main argument; compared with any supplied 24000-character primary text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_scanner_source_document",
+            "url": "https://publications.jrc.ec.europa.eu/repository/bitstream/JRC147383/JRC147383_01.pdf",
+            "title": "Environmentally Sustainable Digital Sovereignty",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publisher_identity",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC147383",
+            "title": "Environmentally Sustainable Digital Sovereignty",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Matched Environmentally Sustainable Digital Sovereignty to official/publisher route https://publications.jrc.ec.europa.eu/repository/handle/JRC147383. Inspected supplied original source material (24000 chars). Science-for-policy recommendations, not an adopted comprehensive EU digital-sovereignty reform."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Evidence-based A admission: EU strategic digital R&I and technical governance includes low-resource research, metrics and procurement levers. Science-for-policy recommendations, not an adopted comprehensive EU digital-sovereignty reform."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-07-09"
+        },
+        "unset": [],
+        "reason": "Publisher institutional record and original text correct scanner metadata."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title match with the possible duplicates listed in the assignment was independently established."
+      },
+      "reader_title": "Environmentally Sustainable Digital Sovereignty",
+      "reader_what": "JRC recommends aligning EU digital autonomy with energy, material-resource and e-waste sustainability constraints.",
+      "reader_why": "EU strategic digital R&I and technical governance includes low-resource research, metrics and procurement levers.",
+      "reader_more": "JRC recommends aligning EU digital autonomy with energy, material-resource and e-waste sustainability constraints. Science-for-policy recommendations, not an adopted comprehensive EU digital-sovereignty reform.",
+      "deep_analysis": {
+        "work_kind": "study",
+        "research_question": "What does Environmentally Sustainable Digital Sovereignty establish for the A research-intelligence mission?",
+        "main_finding": "JRC recommends aligning EU digital autonomy with energy, material-resource and e-waste sustainability constraints.",
+        "method_or_basis": "Official document/research publisher and scanner primary text where available: https://publications.jrc.ec.europa.eu/repository/handle/JRC147383",
+        "qualification": "Science-for-policy recommendations, not an adopted comprehensive EU digital-sovereignty reform.",
+        "radar_relevance": "EU strategic digital R&I and technical governance includes low-resource research, metrics and procurement levers.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "COLOM Anna; Julia Pohle; THABIT GONZALEZ Sara; Manlio Bacco; DI MARCO Diletta; Fabrice Mathieux",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-07-09",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Science-for-policy recommendations, not an adopted comprehensive EU digital-sovereignty reform.",
+          "text": "JRC recommends aligning EU digital autonomy with energy, material-resource and e-waste sustainability constraints.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:b6b472929605096c",
+      "source_hash": "6ac944d4",
+      "identity_hash": "c90bc41e2b486b65",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied route https://publications.jrc.ec.europa.eu/repository/handle/JRC146878 located in the package; matched primary publisher/repository content."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "recovered",
+            "note": "Inspected 24000 characters of matching pdf_excerpt from scanner-extracted https://publications.jrc.ec.europa.eu/repository/bitstream/JRC146878/JRC146878_01.pdf; compared its bibliographic cover, substance and methods with the official identity record https://publications.jrc.ec.europa.eu/repository/handle/JRC146878."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "found",
+            "note": "Searched exact title \"Digital Sovereignty as a Geopolitical Strategy\" and inspected the corresponding publisher, official page or catalogue at https://publications.jrc.ec.europa.eu/repository/handle/JRC146878; no substitute work was used."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "recovered",
+            "note": "Checked institution/publisher document route https://publications.jrc.ec.europa.eu/repository/handle/JRC146878 for identity and main argument; compared with any supplied 24000-character primary text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_scanner_source_document",
+            "url": "https://publications.jrc.ec.europa.eu/repository/bitstream/JRC146878/JRC146878_01.pdf",
+            "title": "Digital Sovereignty as a Geopolitical Strategy",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publisher_identity",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC146878",
+            "title": "Digital Sovereignty as a Geopolitical Strategy",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Matched Digital Sovereignty as a Geopolitical Strategy to official/publisher route https://publications.jrc.ec.europa.eu/repository/handle/JRC146878. Inspected supplied original source material (24000 chars). A conceptual policy brief: its proposals are not outcomes, and the mapped dilemmas are not quantified causal effects."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Evidence-based A admission: Substantive EU digital R&I and strategic capability-policy analysis. A conceptual policy brief: its proposals are not outcomes, and the mapped dilemmas are not quantified causal effects."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-05-08"
+        },
+        "unset": [],
+        "reason": "Publisher institutional record and original text correct scanner metadata."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title match with the possible duplicates listed in the assignment was independently established."
+      },
+      "reader_title": "Digital Sovereignty as a Geopolitical Strategy",
+      "reader_what": "JRC maps strategic dependencies across EU digital layers and proposes four priorities for governance and security.",
+      "reader_why": "Substantive EU digital R&I and strategic capability-policy analysis.",
+      "reader_more": "JRC maps strategic dependencies across EU digital layers and proposes four priorities for governance and security. A conceptual policy brief: its proposals are not outcomes, and the mapped dilemmas are not quantified causal effects.",
+      "deep_analysis": {
+        "work_kind": "study",
+        "research_question": "What does Digital Sovereignty as a Geopolitical Strategy establish for the A research-intelligence mission?",
+        "main_finding": "JRC maps strategic dependencies across EU digital layers and proposes four priorities for governance and security.",
+        "method_or_basis": "Official document/research publisher and scanner primary text where available: https://publications.jrc.ec.europa.eu/repository/handle/JRC146878",
+        "qualification": "A conceptual policy brief: its proposals are not outcomes, and the mapped dilemmas are not quantified causal effects.",
+        "radar_relevance": "Substantive EU digital R&I and strategic capability-policy analysis.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Samuele Fratini; Julia Pohle; DI MARCO Diletta; THABIT GONZALEZ Sara; Gianluca Sgueo",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-05-08",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "A conceptual policy brief: its proposals are not outcomes, and the mapped dilemmas are not quantified causal effects.",
+          "text": "JRC maps strategic dependencies across EU digital layers and proposes four priorities for governance and security.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:703862cf5417a037",
+      "source_hash": "ebf9d5ad",
+      "identity_hash": "29340b32d4293b8d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Supplied reader link https://doi.org/10.1007/978-3-032-20210-9_2 was a news relay or could not supply independently accessible full original text; pursued publisher identity lookup."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "recovered",
+            "note": "Inspected 13729 characters of matching substantial_web_text from scanner-extracted https://link.springer.com/chapter/10.1007/978-3-032-20210-9_2; compared its bibliographic cover, substance and methods with the official identity record https://link.springer.com/book/10.1007/978-3-032-20210-9."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "found",
+            "note": "Searched exact title \"A Geopolitical Shift: The European Union’s Strategic Wake-Up Call\" and inspected the corresponding publisher, official page or catalogue at https://link.springer.com/book/10.1007/978-3-032-20210-9; no substitute work was used."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "recovered",
+            "note": "Checked institution/publisher document route https://link.springer.com/book/10.1007/978-3-032-20210-9 for identity and main argument; compared with any supplied 13729-character primary text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_scanner_source_document",
+            "url": "https://link.springer.com/chapter/10.1007/978-3-032-20210-9_2",
+            "title": "A Geopolitical Shift: The European Union’s Strategic Wake-Up Call",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publisher_identity",
+            "url": "https://link.springer.com/book/10.1007/978-3-032-20210-9",
+            "title": "A Geopolitical Shift: The European Union’s Strategic Wake-Up Call",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Matched A Geopolitical Shift: The European Union’s Strategic Wake-Up Call to official/publisher route https://link.springer.com/book/10.1007/978-3-032-20210-9. Inspected supplied original source material (13729 chars). Technology references do not substitute for an R&I focus."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Tested A Route 1 geopolitical R&I linkage, Route 2 European R&I states/trajectories, and Route 3 system-level institutional R&I evidence. None establishes admissible substantive European R&I analysis: Political-diplomatic geopolitical account does not substantively examine European research or innovation systems. Technology references do not substitute for an R&I focus."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title match with the possible duplicates listed in the assignment was independently established."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "chapter",
+        "research_question": "What is this record actually reporting?",
+        "main_finding": "Book chapter addresses Europe’s geopolitical alignment and strategic autonomy in an unstable international order.",
+        "method_or_basis": "Publisher/official source and supplied primary material at https://link.springer.com/book/10.1007/978-3-032-20210-9",
+        "qualification": "Technology references do not substitute for an R&I focus.",
+        "radar_relevance": "Political-diplomatic geopolitical account does not substantively examine European research or innovation systems.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:8dc4bb0cae51158f",
+      "source_hash": "88d3cef6",
+      "identity_hash": "279ba9e7e9a52324",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Supplied reader link https://doi.org/10.1007/s10308-025-00771-y was a news relay or could not supply independently accessible full original text; pursued publisher identity lookup."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "recovered",
+            "note": "Inspected 24000 characters of matching pdf_excerpt from scanner-extracted https://content.openalex.org/works/W7116727567.pdf; compared its bibliographic cover, substance and methods with the official identity record https://cris.maastrichtuniversity.nl/en/publications/beyond-confrontation-comparing-the-determinants-of-chinese-and-th/."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "found",
+            "note": "Searched exact title \"Beyond confrontation? Comparing the determinants of Chinese and the European Union’s development finance to Africa\" and inspected the corresponding publisher, official page or catalogue at https://cris.maastrichtuniversity.nl/en/publications/beyond-confrontation-comparing-the-determinants-of-chinese-and-th/; no substitute work was used."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "recovered",
+            "note": "Checked institution/publisher document route https://cris.maastrichtuniversity.nl/en/publications/beyond-confrontation-comparing-the-determinants-of-chinese-and-th/ for identity and main argument; compared with any supplied 24000-character primary text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_scanner_source_document",
+            "url": "https://content.openalex.org/works/W7116727567.pdf",
+            "title": "Beyond confrontation? Comparing the determinants of Chinese and the European Union’s development finance to Africa",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publisher_identity",
+            "url": "https://cris.maastrichtuniversity.nl/en/publications/beyond-confrontation-comparing-the-determinants-of-chinese-and-th/",
+            "title": "Beyond confrontation? Comparing the determinants of Chinese and the European Union’s development finance to Africa",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Matched Beyond confrontation? Comparing the determinants of Chinese and the European Union’s development finance to Africa to official/publisher route https://cris.maastrichtuniversity.nl/en/publications/beyond-confrontation-comparing-the-determinants-of-chinese-and-th/. Inspected supplied original source material (24000 chars). Economic infrastructure finance is not automatically R&I capacity."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Tested A Route 1 geopolitical R&I linkage, Route 2 European R&I states/trajectories, and Route 3 system-level institutional R&I evidence. None establishes admissible substantive European R&I analysis: Research is about development aid distribution and political economy, not EU research or innovation investment. Economic infrastructure finance is not automatically R&I capacity."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title match with the possible duplicates listed in the assignment was independently established."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "study",
+        "research_question": "What is this record actually reporting?",
+        "main_finding": "Study compares allocation of Chinese and EU official development finance to Africa using 2000–2017 data.",
+        "method_or_basis": "Publisher/official source and supplied primary material at https://cris.maastrichtuniversity.nl/en/publications/beyond-confrontation-comparing-the-determinants-of-chinese-and-th/",
+        "qualification": "Economic infrastructure finance is not automatically R&I capacity.",
+        "radar_relevance": "Research is about development aid distribution and political economy, not EU research or innovation investment.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:4407edfd94b259bd",
+      "source_hash": "4d6613e9",
+      "identity_hash": "d6272e0df5176b59",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied route https://e-publishing.cern.ch/index.php/CIJ/article/view/1785 located in the package; matched primary publisher/repository content."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "recovered",
+            "note": "Inspected 24000 characters of matching pdf_excerpt from scanner-extracted https://e-publishing.cern.ch/index.php/CIJ/article/download/1785/1458; compared its bibliographic cover, substance and methods with the official identity record https://e-publishing.cern.ch/index.php/CIJ/article/view/1785."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "found",
+            "note": "Searched exact title \"Novel Business Model Canvas for Research Infrastructures: A Design Science Approach\" and inspected the corresponding publisher, official page or catalogue at https://e-publishing.cern.ch/index.php/CIJ/article/view/1785; no substitute work was used."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "recovered",
+            "note": "Checked institution/publisher document route https://e-publishing.cern.ch/index.php/CIJ/article/view/1785 for identity and main argument; compared with any supplied 24000-character primary text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_scanner_source_document",
+            "url": "https://e-publishing.cern.ch/index.php/CIJ/article/download/1785/1458",
+            "title": "Novel Business Model Canvas for Research Infrastructures: A Design Science Approach",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publisher_identity",
+            "url": "https://e-publishing.cern.ch/index.php/CIJ/article/view/1785",
+            "title": "Novel Business Model Canvas for Research Infrastructures: A Design Science Approach",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Matched Novel Business Model Canvas for Research Infrastructures: A Design Science Approach to official/publisher route https://e-publishing.cern.ch/index.php/CIJ/article/view/1785. Inspected supplied original source material (24000 chars). Design-science illustration is not proof the canvas will improve financial outcomes at all research facilities."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Evidence-based A admission: Substantive European research-infrastructure management and sustainability mechanisms. Design-science illustration is not proof the canvas will improve financial outcomes at all research facilities."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2025-12-31"
+        },
+        "unset": [],
+        "reason": "Publisher institutional record and original text correct scanner metadata."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title match with the possible duplicates listed in the assignment was independently established."
+      },
+      "reader_title": "Novel Business Model Canvas for Research Infrastructures: A Design Science Approach",
+      "reader_what": "Design-science research develops a public-value and multi-stakeholder business model canvas for large research infrastructures.",
+      "reader_why": "Substantive European research-infrastructure management and sustainability mechanisms.",
+      "reader_more": "Design-science research develops a public-value and multi-stakeholder business model canvas for large research infrastructures. Design-science illustration is not proof the canvas will improve financial outcomes at all research facilities.",
+      "deep_analysis": {
+        "work_kind": "study",
+        "research_question": "What does Novel Business Model Canvas for Research Infrastructures: A Design Science Approach establish for the A research-intelligence mission?",
+        "main_finding": "Design-science research develops a public-value and multi-stakeholder business model canvas for large research infrastructures.",
+        "method_or_basis": "Official document/research publisher and scanner primary text where available: https://e-publishing.cern.ch/index.php/CIJ/article/view/1785",
+        "qualification": "Design-science illustration is not proof the canvas will improve financial outcomes at all research facilities.",
+        "radar_relevance": "Substantive European research-infrastructure management and sustainability mechanisms.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Giulio Ecchia; Enrico Elefante; Matteo Vignoli",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2025-12-31",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Design-science illustration is not proof the canvas will improve financial outcomes at all research facilities.",
+          "text": "Design-science research develops a public-value and multi-stakeholder business model canvas for large research infrastructures.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:59a2bc5a53c0ad59",
+      "source_hash": "429a724e",
+      "identity_hash": "0793343a426f9a50",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied route https://merics.org/en/comment/china-starts-exporting-quantum-computers-its-systems-become-more-competitive located in the package; matched primary publisher/repository content."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "found",
+            "note": "Searched exact title \"China starts exporting quantum computers as its systems become more competitive\" and inspected the corresponding publisher, official page or catalogue at https://merics.org/en/comment/china-starts-exporting-quantum-computers-its-systems-become-more-competitive; no substitute work was used."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "recovered",
+            "note": "Checked institution/publisher document route https://merics.org/en/comment/china-starts-exporting-quantum-computers-its-systems-become-more-competitive for identity and main argument; compared with any supplied 0-character primary text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_or_publisher_publication",
+            "url": "https://merics.org/en/comment/china-starts-exporting-quantum-computers-its-systems-become-more-competitive",
+            "title": "China starts exporting quantum computers as its systems become more competitive",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Matched China starts exporting quantum computers as its systems become more competitive to official/publisher route https://merics.org/en/comment/china-starts-exporting-quantum-computers-its-systems-become-more-competitive. Relied only on original substantive source-owned article/report or institution statement; no search snippet was used as substantive research evidence. Several hardware details were undisclosed; commentary raises risks rather than demonstrates technology transfer effects."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Tested A Route 1 geopolitical R&I linkage, Route 2 European R&I states/trajectories, and Route 3 system-level institutional R&I evidence. None establishes admissible substantive European R&I analysis: Useful technology-dependency lead but not sufficiently substantive analytical original R&I research for Strand A. Several hardware details were undisclosed; commentary raises risks rather than demonstrates technology transfer effects."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title match with the possible duplicates listed in the assignment was independently established."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "comment",
+        "research_question": "What is this record actually reporting?",
+        "main_finding": "MERICS short commentary describes Chinese quantum access agreements involving Spanish and Italian institutions.",
+        "method_or_basis": "Publisher/official source and supplied primary material at https://merics.org/en/comment/china-starts-exporting-quantum-computers-its-systems-become-more-competitive",
+        "qualification": "Several hardware details were undisclosed; commentary raises risks rather than demonstrates technology transfer effects.",
+        "radar_relevance": "Useful technology-dependency lead but not sufficiently substantive analytical original R&I research for Strand A.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:6fabad748b192607",
+      "source_hash": "d12ecd18",
+      "identity_hash": "b88ab635852efe85",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied route https://policy.trade.ec.europa.eu/consultations/targeted-consultation-overall-evaluation-dual-use-regulation_en located in the package; matched primary publisher/repository content."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "recovered",
+            "note": "Inspected 3126 characters of matching substantial_web_text from scanner-extracted https://policy.trade.ec.europa.eu/consultations/targeted-consultation-overall-evaluation-dual-use-regulation_en; compared its bibliographic cover, substance and methods with the official identity record https://policy.trade.ec.europa.eu/consultations/targeted-consultation-overall-evaluation-dual-use-regulation_en."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "found",
+            "note": "Searched exact title \"Targeted consultation on the overall evaluation of the Dual-Use Regulation\" and inspected the corresponding publisher, official page or catalogue at https://policy.trade.ec.europa.eu/consultations/targeted-consultation-overall-evaluation-dual-use-regulation_en; no substitute work was used."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "recovered",
+            "note": "Checked institution/publisher document route https://policy.trade.ec.europa.eu/consultations/targeted-consultation-overall-evaluation-dual-use-regulation_en for identity and main argument; compared with any supplied 3126-character primary text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_scanner_source_document",
+            "url": "https://policy.trade.ec.europa.eu/consultations/targeted-consultation-overall-evaluation-dual-use-regulation_en",
+            "title": "Targeted consultation on the overall evaluation of the Dual-Use Regulation",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publisher_identity",
+            "url": "https://policy.trade.ec.europa.eu/consultations/targeted-consultation-overall-evaluation-dual-use-regulation_en",
+            "title": "Targeted consultation on the overall evaluation of the Dual-Use Regulation",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Matched Targeted consultation on the overall evaluation of the Dual-Use Regulation to official/publisher route https://policy.trade.ec.europa.eu/consultations/targeted-consultation-overall-evaluation-dual-use-regulation_en. Inspected supplied original source material (3126 chars). Should not be misrepresented as a completed evaluation or adopted revision."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Tested A Route 1 geopolitical R&I linkage, Route 2 European R&I states/trajectories, and Route 3 system-level institutional R&I evidence. None establishes admissible substantive European R&I analysis: Consultation invitation is not an evidence-backed R&I-system research product for Strand A. Should not be misrepresented as a completed evaluation or adopted revision."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title match with the possible duplicates listed in the assignment was independently established."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "consultation",
+        "research_question": "What is this record actually reporting?",
+        "main_finding": "European Commission invited views on evaluation of the dual-use export-control regulation in July–September 2026.",
+        "method_or_basis": "Publisher/official source and supplied primary material at https://policy.trade.ec.europa.eu/consultations/targeted-consultation-overall-evaluation-dual-use-regulation_en",
+        "qualification": "Should not be misrepresented as a completed evaluation or adopted revision.",
+        "radar_relevance": "Consultation invitation is not an evidence-backed R&I-system research product for Strand A.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:a0c4cfabbe43f8d9",
+      "source_hash": "e93c4fbb",
+      "identity_hash": "dbc2364f2c8328ef",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Supplied reader link https://doi.org/10.17645/pag.9736 was a news relay or could not supply independently accessible full original text; pursued publisher identity lookup."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "recovered",
+            "note": "Inspected 24000 characters of matching pdf_excerpt from scanner-extracted https://www.cogitatiopress.com/politicsandgovernance/article/download/9736/4500; compared its bibliographic cover, substance and methods with the official identity record https://www.cogitatiopress.com/politicsandgovernance/article/view/9736."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "found",
+            "note": "Searched exact title \"At the Conceptual Crossroads of Politics and Technology: An Exploration Into EU Digital Policy\" and inspected the corresponding publisher, official page or catalogue at https://www.cogitatiopress.com/politicsandgovernance/article/view/9736; no substitute work was used."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "recovered",
+            "note": "Checked institution/publisher document route https://www.cogitatiopress.com/politicsandgovernance/article/view/9736 for identity and main argument; compared with any supplied 24000-character primary text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_scanner_source_document",
+            "url": "https://www.cogitatiopress.com/politicsandgovernance/article/download/9736/4500",
+            "title": "At the Conceptual Crossroads of Politics and Technology: An Exploration Into EU Digital Policy",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publisher_identity",
+            "url": "https://www.cogitatiopress.com/politicsandgovernance/article/view/9736",
+            "title": "At the Conceptual Crossroads of Politics and Technology: An Exploration Into EU Digital Policy",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Matched At the Conceptual Crossroads of Politics and Technology: An Exploration Into EU Digital Policy to official/publisher route https://www.cogitatiopress.com/politicsandgovernance/article/view/9736. Inspected supplied original source material (24000 chars). Interpretive policy document analysis, not a causal estimate of technological innovation outcomes."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Evidence-based A admission: Detailed evidence-based study of European technology governance and its implications for innovation direction. Interpretive policy document analysis, not a causal estimate of technological innovation outcomes."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title match with the possible duplicates listed in the assignment was independently established."
+      },
+      "reader_title": "At the Conceptual Crossroads of Politics and Technology: An Exploration Into EU Digital Policy",
+      "reader_what": "EU digital-rights and blockchain policy analysis finds future-oriented governance discourse can narrow political choices.",
+      "reader_why": "Detailed evidence-based study of European technology governance and its implications for innovation direction.",
+      "reader_more": "EU digital-rights and blockchain policy analysis finds future-oriented governance discourse can narrow political choices. Interpretive policy document analysis, not a causal estimate of technological innovation outcomes.",
+      "deep_analysis": {
+        "work_kind": "study",
+        "research_question": "What does At the Conceptual Crossroads of Politics and Technology: An Exploration Into EU Digital Policy establish for the A research-intelligence mission?",
+        "main_finding": "EU digital-rights and blockchain policy analysis finds future-oriented governance discourse can narrow political choices.",
+        "method_or_basis": "Official document/research publisher and scanner primary text where available: https://www.cogitatiopress.com/politicsandgovernance/article/view/9736",
+        "qualification": "Interpretive policy document analysis, not a causal estimate of technological innovation outcomes.",
+        "radar_relevance": "Detailed evidence-based study of European technology governance and its implications for innovation direction.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "digital.governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Anna Björk; Atte Ojanen; Johannes Anttila; Johannes Mikkonen",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2025-07-29",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Interpretive policy document analysis, not a causal estimate of technological innovation outcomes.",
+          "text": "EU digital-rights and blockchain policy analysis finds future-oriented governance discourse can narrow political choices.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:0c296ae66cb757e9",
+      "source_hash": "29ab7a14",
+      "identity_hash": "c7de43640370688e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Supplied reader link https://doi.org/10.51408/issi2025_031 was a news relay or could not supply independently accessible full original text; pursued publisher identity lookup."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "recovered",
+            "note": "Inspected 24000 characters of matching pdf_excerpt from scanner-extracted https://issi2025.iiap.sci.am/wp-content/uploads/2025/07/72.-Kesoyan_fp_issi2025_271.pdf; compared its bibliographic cover, substance and methods with the official identity record https://issi2025.iiap.sci.am/program/."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "found",
+            "note": "Searched exact title \"Science-Policy Tendencies in Armenia Towards the International Collaboration\" and inspected the corresponding publisher, official page or catalogue at https://issi2025.iiap.sci.am/program/; no substitute work was used."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "recovered",
+            "note": "Checked institution/publisher document route https://issi2025.iiap.sci.am/program/ for identity and main argument; compared with any supplied 24000-character primary text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_scanner_source_document",
+            "url": "https://issi2025.iiap.sci.am/wp-content/uploads/2025/07/72.-Kesoyan_fp_issi2025_271.pdf",
+            "title": "Science-Policy Tendencies in Armenia Towards the International Collaboration",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publisher_identity",
+            "url": "https://issi2025.iiap.sci.am/program/",
+            "title": "Science-Policy Tendencies in Armenia Towards the International Collaboration",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Matched Science-Policy Tendencies in Armenia Towards the International Collaboration to official/publisher route https://issi2025.iiap.sci.am/program/. Inspected supplied original source material (24000 chars). European institutions appearing as research partners do not suffice as the central European focus."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Tested A Route 1 geopolitical R&I linkage, Route 2 European R&I states/trajectories, and Route 3 system-level institutional R&I evidence. None establishes admissible substantive European R&I analysis: The primary subject is Armenia’s national research-policy trajectory; EU R&I system is not independently central. European institutions appearing as research partners do not suffice as the central European focus."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title match with the possible duplicates listed in the assignment was independently established."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "study",
+        "research_question": "What is this record actually reporting?",
+        "main_finding": "Conference paper studies Armenia’s science cooperation policy through scientometric indicators.",
+        "method_or_basis": "Publisher/official source and supplied primary material at https://issi2025.iiap.sci.am/program/",
+        "qualification": "European institutions appearing as research partners do not suffice as the central European focus.",
+        "radar_relevance": "The primary subject is Armenia’s national research-policy trajectory; EU R&I system is not independently central.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:24c4f6cc128888c1",
+      "source_hash": "a2758bfe",
+      "identity_hash": "99260b95cb7aaf7b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied route https://doi.org/10.1007/s43508-025-00118-8 located in the package; matched primary publisher/repository content."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "recovered",
+            "note": "Inspected 9689 characters of matching pdf_excerpt from scanner-extracted https://content.openalex.org/works/W4411328842.pdf; compared its bibliographic cover, substance and methods with the official identity record https://doi.org/10.1007/s43508-025-00118-8."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "found",
+            "note": "Searched exact title \"From fragmentation to polycentricity: a comparative synthesis on AI governance and global policy coordination\" and inspected the corresponding publisher, official page or catalogue at https://doi.org/10.1007/s43508-025-00118-8; no substitute work was used."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "recovered",
+            "note": "Checked institution/publisher document route https://doi.org/10.1007/s43508-025-00118-8 for identity and main argument; compared with any supplied 9689-character primary text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_scanner_source_document",
+            "url": "https://content.openalex.org/works/W4411328842.pdf",
+            "title": "From fragmentation to polycentricity: a comparative synthesis on AI governance and global policy coordination",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publisher_identity",
+            "url": "https://doi.org/10.1007/s43508-025-00118-8",
+            "title": "From fragmentation to polycentricity: a comparative synthesis on AI governance and global policy coordination",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Matched From fragmentation to polycentricity: a comparative synthesis on AI governance and global policy coordination to official/publisher route https://doi.org/10.1007/s43508-025-00118-8. Inspected supplied original source material (9689 chars). Editorial cross-jurisdiction commentary does not provide EU-specific analytical research."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Tested A Route 1 geopolitical R&I linkage, Route 2 European R&I states/trajectories, and Route 3 system-level institutional R&I evidence. None establishes admissible substantive European R&I analysis: EU is only one illustrative jurisdiction and European R&I systems are not the object of analysis. Editorial cross-jurisdiction commentary does not provide EU-specific analytical research."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title match with the possible duplicates listed in the assignment was independently established."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "editorial",
+        "research_question": "What is this record actually reporting?",
+        "main_finding": "Editorial synthesizes articles on global AI policy coordination and polycentric governance.",
+        "method_or_basis": "Publisher/official source and supplied primary material at https://doi.org/10.1007/s43508-025-00118-8",
+        "qualification": "Editorial cross-jurisdiction commentary does not provide EU-specific analytical research.",
+        "radar_relevance": "EU is only one illustrative jurisdiction and European R&I systems are not the object of analysis.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:0d9ca799ca016a7e",
+      "source_hash": "83822133",
+      "identity_hash": "e2d8d665c75f5f53",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Supplied reader link https://doi.org/10.1016/j.resconrec.2024.108060 was a news relay or could not supply independently accessible full original text; pursued publisher identity lookup."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "blocked",
+            "note": "Exact-title lookup for \"Critical raw materials, circular economy, sustainable development: EU policy reflections for future research and innovation\" did not recover the substantive original text (catalogue only: https://publications.jrc.ec.europa.eu/repository/handle/JRC138454)."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "blocked",
+            "note": "Checked publisher/repository pathway https://publications.jrc.ec.europa.eu/repository/handle/JRC138454; no substantive matching original text available."
+          },
+          {
+            "step": "doi",
+            "outcome": "blocked",
+            "note": "DOI 10.1016/j.resconrec.2024.108060 resolution not available in retrieved material."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "blocked",
+            "note": "Looked for Critical raw materials, circular economy, sustainable development: EU policy reflections for future research and innovation with Brian Baldassarre; Samuel Carrara and 2025; only catalogue/title-level evidence was obtained."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "blocked",
+            "note": "Examined distinctive title fragments and author/publisher/issue clues against https://publications.jrc.ec.europa.eu/repository/handle/JRC138454; no full or substantive original was returned."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity supported at catalogue level (https://publications.jrc.ec.europa.eu/repository/handle/JRC138454); original substantive body unavailable. Defer leaves the existing record provisional; neither evidence nor merits inferred."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Publisher/catalogue identity recorded, but full primary text was not recovered; no defensible A determination. Original paper is identifiable but only a brief abstract/citation was recovered; the substantive article was unavailable."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact shared identity among assigned possible duplicates was established."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:40a74d0dfdd7e2e9",
+      "source_hash": "33e168d8",
+      "identity_hash": "8fbfac0cc6e0acc2",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied route https://ecipe.org/publications/quantum-technology-eu-policy-primer/ located in the package; matched primary publisher/repository content."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "recovered",
+            "note": "Inspected 24000 characters of matching pdf_excerpt from scanner-extracted https://ecipe.org/wp-content/uploads/2025/01/ECI_25_PolicyBrief_03-2025_LY02.pdf; compared its bibliographic cover, substance and methods with the official identity record https://ecipe.org/publications/quantum-technology-eu-policy-primer/."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "found",
+            "note": "Searched exact title \"Quantum Technology: A Policy Primer for EU Policymakers\" and inspected the corresponding publisher, official page or catalogue at https://ecipe.org/publications/quantum-technology-eu-policy-primer/; no substitute work was used."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "recovered",
+            "note": "Checked institution/publisher document route https://ecipe.org/publications/quantum-technology-eu-policy-primer/ for identity and main argument; compared with any supplied 24000-character primary text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_scanner_source_document",
+            "url": "https://ecipe.org/wp-content/uploads/2025/01/ECI_25_PolicyBrief_03-2025_LY02.pdf",
+            "title": "Quantum Technology: A Policy Primer for EU Policymakers",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publisher_identity",
+            "url": "https://ecipe.org/publications/quantum-technology-eu-policy-primer/",
+            "title": "Quantum Technology: A Policy Primer for EU Policymakers",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Matched Quantum Technology: A Policy Primer for EU Policymakers to official/publisher route https://ecipe.org/publications/quantum-technology-eu-policy-primer/. Inspected supplied original source material (24000 chars). Nonprobability announcements-based collaboration sample; policy position not adopted legislation."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Evidence-based A admission: EU quantum research networks, industrial specialization, and tech policy are core subjects. Nonprobability announcements-based collaboration sample; policy position not adopted legislation."
+      },
+      "metadata_correction": {
+        "fields": {
+          "authors": "Oscar Guinea; Dyuti Pandya; Oscar du Roy; Andrea Dugo"
+        },
+        "unset": [],
+        "reason": "Publisher institutional record and original text correct scanner metadata."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title match with the possible duplicates listed in the assignment was independently established."
+      },
+      "reader_title": "Quantum Technology: A Policy Primer for EU Policymakers",
+      "reader_what": "ECIPE maps 1,053 company quantum collaborations and advocates cross-border R&D partnerships instead of complete autonomy.",
+      "reader_why": "EU quantum research networks, industrial specialization, and tech policy are core subjects.",
+      "reader_more": "ECIPE maps 1,053 company quantum collaborations and advocates cross-border R&D partnerships instead of complete autonomy. Nonprobability announcements-based collaboration sample; policy position not adopted legislation.",
+      "deep_analysis": {
+        "work_kind": "study",
+        "research_question": "What does Quantum Technology: A Policy Primer for EU Policymakers establish for the A research-intelligence mission?",
+        "main_finding": "ECIPE maps 1,053 company quantum collaborations and advocates cross-border R&D partnerships instead of complete autonomy.",
+        "method_or_basis": "Official document/research publisher and scanner primary text where available: https://ecipe.org/publications/quantum-technology-eu-policy-primer/",
+        "qualification": "Nonprobability announcements-based collaboration sample; policy position not adopted legislation.",
+        "radar_relevance": "EU quantum research networks, industrial specialization, and tech policy are core subjects.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "quantum.governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "ECIPE",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2025-01-30",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Nonprobability announcements-based collaboration sample; policy position not adopted legislation.",
+          "text": "ECIPE maps 1,053 company quantum collaborations and advocates cross-border R&D partnerships instead of complete autonomy.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:5476f60080281439",
+      "source_hash": "e905cf39",
+      "identity_hash": "3c24f55d01da7c48",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied route https://merics.org/en/report/chinas-long-view-quantum-tech-has-us-and-eu-playing-catch located in the package; matched primary publisher/repository content."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "recovered",
+            "note": "Inspected 24000 characters of matching pdf_excerpt from scanner-extracted https://merics.org/sites/default/files/2024-12/MERICS%20China%20Tech%20Observatory%20Quantum%20Report%202024.pdf; compared its bibliographic cover, substance and methods with the official identity record https://merics.org/en/report/chinas-long-view-quantum-tech-has-us-and-eu-playing-catch."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "found",
+            "note": "Searched exact title \"China’s long view on quantum tech has the US and EU playing catch-up\" and inspected the corresponding publisher, official page or catalogue at https://merics.org/en/report/chinas-long-view-quantum-tech-has-us-and-eu-playing-catch; no substitute work was used."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "recovered",
+            "note": "Checked institution/publisher document route https://merics.org/en/report/chinas-long-view-quantum-tech-has-us-and-eu-playing-catch for identity and main argument; compared with any supplied 24000-character primary text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_scanner_source_document",
+            "url": "https://merics.org/sites/default/files/2024-12/MERICS%20China%20Tech%20Observatory%20Quantum%20Report%202024.pdf",
+            "title": "China’s long view on quantum tech has the US and EU playing catch-up",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publisher_identity",
+            "url": "https://merics.org/en/report/chinas-long-view-quantum-tech-has-us-and-eu-playing-catch",
+            "title": "China’s long view on quantum tech has the US and EU playing catch-up",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Matched China’s long view on quantum tech has the US and EU playing catch-up to official/publisher route https://merics.org/en/report/chinas-long-view-quantum-tech-has-us-and-eu-playing-catch. Inspected supplied original source material (24000 chars). Chinese spending estimates and classified technical capability cannot always be independently verified."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Evidence-based A admission: Systematic strategic EU technology capacity and research-security evidence. Chinese spending estimates and classified technical capability cannot always be independently verified."
+      },
+      "metadata_correction": {
+        "fields": {
+          "authors": "Jeroen Groenewegen-Lau; Antonia Hmaidi"
+        },
+        "unset": [],
+        "reason": "Publisher institutional record and original text correct scanner metadata."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title match with the possible duplicates listed in the assignment was independently established."
+      },
+      "reader_title": "China’s long view on quantum tech has the US and EU playing catch-up",
+      "reader_what": "MERICS compares Chinese, US and European quantum research and industrial development, highlighting Europe’s commercialisation gap.",
+      "reader_why": "Systematic strategic EU technology capacity and research-security evidence.",
+      "reader_more": "MERICS compares Chinese, US and European quantum research and industrial development, highlighting Europe’s commercialisation gap. Chinese spending estimates and classified technical capability cannot always be independently verified.",
+      "deep_analysis": {
+        "work_kind": "study",
+        "research_question": "What does China’s long view on quantum tech has the US and EU playing catch-up establish for the A research-intelligence mission?",
+        "main_finding": "MERICS compares Chinese, US and European quantum research and industrial development, highlighting Europe’s commercialisation gap.",
+        "method_or_basis": "Official document/research publisher and scanner primary text where available: https://merics.org/en/report/chinas-long-view-quantum-tech-has-us-and-eu-playing-catch",
+        "qualification": "Chinese spending estimates and classified technical capability cannot always be independently verified.",
+        "radar_relevance": "Systematic strategic EU technology capacity and research-security evidence.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "quantum.governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "MERICS",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2024-12-12",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Chinese spending estimates and classified technical capability cannot always be independently verified.",
+          "text": "MERICS compares Chinese, US and European quantum research and industrial development, highlighting Europe’s commercialisation gap.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:7490417c91259455",
+      "source_hash": "18bf6ec5",
+      "identity_hash": "7c068cdbdd08fcfd",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied route https://merics.org/en/comment/china-activates-data-national-interest located in the package; matched primary publisher/repository content."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "recovered",
+            "note": "Inspected 15544 characters of matching substantial_web_text from scanner-extracted https://merics.org/en/comment/china-activates-data-national-interest; compared its bibliographic cover, substance and methods with the official identity record https://merics.org/en/comment/china-activates-data-national-interest."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "found",
+            "note": "Searched exact title \"China activates data in the national interest\" and inspected the corresponding publisher, official page or catalogue at https://merics.org/en/comment/china-activates-data-national-interest; no substitute work was used."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "recovered",
+            "note": "Checked institution/publisher document route https://merics.org/en/comment/china-activates-data-national-interest for identity and main argument; compared with any supplied 15544-character primary text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_scanner_source_document",
+            "url": "https://merics.org/en/comment/china-activates-data-national-interest",
+            "title": "China activates data in the national interest",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publisher_identity",
+            "url": "https://merics.org/en/comment/china-activates-data-national-interest",
+            "title": "China activates data in the national interest",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Matched China activates data in the national interest to official/publisher route https://merics.org/en/comment/china-activates-data-national-interest. Inspected supplied original source material (15544 chars). Potential EU implications cannot be invented from an analysis primarily of China."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Tested A Route 1 geopolitical R&I linkage, Route 2 European R&I states/trajectories, and Route 3 system-level institutional R&I evidence. None establishes admissible substantive European R&I analysis: The EU appears principally as an external comparator, not substantive European R&I-system analysis. Potential EU implications cannot be invented from an analysis primarily of China."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title match with the possible duplicates listed in the assignment was independently established."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "comment",
+        "research_question": "What is this record actually reporting?",
+        "main_finding": "MERICS commentary describes domestic Chinese state-directed data marketplaces and governance.",
+        "method_or_basis": "Publisher/official source and supplied primary material at https://merics.org/en/comment/china-activates-data-national-interest",
+        "qualification": "Potential EU implications cannot be invented from an analysis primarily of China.",
+        "radar_relevance": "The EU appears principally as an external comparator, not substantive European R&I-system analysis.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:5e90a535ae883e3f",
+      "source_hash": "d11469db",
+      "identity_hash": "6a49416b31808fce",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Supplied reader link https://doi.org/10.1007/s00146-020-01034-7 was a news relay or could not supply independently accessible full original text; pursued publisher identity lookup."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "blocked",
+            "note": "Exact-title lookup for \"Role of ruler or intruder? Patient’s right to autonomy in the age of innovation and technologies\" did not recover the substantive original text (catalogue only: https://openalex.org/W3048895603)."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "blocked",
+            "note": "Checked publisher/repository pathway https://openalex.org/W3048895603; no substantive matching original text available."
+          },
+          {
+            "step": "doi",
+            "outcome": "blocked",
+            "note": "DOI 10.1007/s00146-020-01034-7 resolution not available in retrieved material."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "blocked",
+            "note": "Looked for Role of ruler or intruder? Patient’s right to autonomy in the age of innovation and technologies with Milda Žaliauskaitė and 2021; only catalogue/title-level evidence was obtained."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "blocked",
+            "note": "Examined distinctive title fragments and author/publisher/issue clues against https://openalex.org/W3048895603; no full or substantive original was returned."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity supported at catalogue level (https://openalex.org/W3048895603); original substantive body unavailable. Defer leaves the existing record provisional; neither evidence nor merits inferred."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "A",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Publisher/catalogue identity recorded, but full primary text was not recovered; no defensible A determination. Original paper is identifiable but only a brief abstract/citation was recovered; the substantive article was unavailable."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact shared identity among assigned possible duplicates was established."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:4eb7d42f86907037",
+      "source_hash": "795c0e49",
+      "identity_hash": "9a81afea0cac99ed",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied route https://www.nwo.nl/en/researchprogrammes/open-competition-enw/weave-research-funding-for-international-collaboration located in the package; matched primary publisher/repository content."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "recovered",
+            "note": "Inspected 10494 characters of matching substantial_web_text from scanner-extracted https://www.nwo.nl/en/researchprogrammes/open-competition-enw/weave-research-funding-for-international-collaboration; compared its bibliographic cover, substance and methods with the official identity record https://www.nwo.nl/en/researchprogrammes/open-competition-enw/weave-research-funding-for-international-collaboration."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "found",
+            "note": "Searched exact title \"Weave: research funding for international collaboration | NWO\" and inspected the corresponding publisher, official page or catalogue at https://www.nwo.nl/en/researchprogrammes/open-competition-enw/weave-research-funding-for-international-collaboration; no substitute work was used."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "recovered",
+            "note": "Checked institution/publisher document route https://www.nwo.nl/en/researchprogrammes/open-competition-enw/weave-research-funding-for-international-collaboration for identity and main argument; compared with any supplied 10494-character primary text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_scanner_source_document",
+            "url": "https://www.nwo.nl/en/researchprogrammes/open-competition-enw/weave-research-funding-for-international-collaboration",
+            "title": "Weave: research funding for international collaboration | NWO",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publisher_identity",
+            "url": "https://www.nwo.nl/en/researchprogrammes/open-competition-enw/weave-research-funding-for-international-collaboration",
+            "title": "Weave: research funding for international collaboration | NWO",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Matched Weave: research funding for international collaboration | NWO to official/publisher route https://www.nwo.nl/en/researchprogrammes/open-competition-enw/weave-research-funding-for-international-collaboration. Inspected supplied original source material (10494 chars). Funding mechanism is real; should not be mistaken for measured impact."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Tested A Route 1 geopolitical R&I linkage, Route 2 European R&I states/trajectories, and Route 3 system-level institutional R&I evidence. None establishes admissible substantive European R&I analysis: Programme description, not analytical research evidence of results or institutional effectiveness for Strand A. Funding mechanism is real; should not be mistaken for measured impact."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title match with the possible duplicates listed in the assignment was independently established."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "static",
+        "research_question": "What is this record actually reporting?",
+        "main_finding": "NWO information page explains Weave cross-border research-funding lead-agency procedures.",
+        "method_or_basis": "Publisher/official source and supplied primary material at https://www.nwo.nl/en/researchprogrammes/open-competition-enw/weave-research-funding-for-international-collaboration",
+        "qualification": "Funding mechanism is real; should not be mistaken for measured impact.",
+        "radar_relevance": "Programme description, not analytical research evidence of results or institutional effectiveness for Strand A.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:0b86615253c61521",
+      "source_hash": "6c2f80f3",
+      "identity_hash": "6ccbda6e8e5ed30e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original supplied route https://www.ceps.eu/ceps-publications/access-electronic-data-third-country-law-enforcement-authorities-challenges-eu-rule-law/ located in the package; matched primary publisher/repository content."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "recovered",
+            "note": "Inspected 5992 characters of matching substantial_web_text from scanner-extracted https://www.ceps.eu/ceps-publications/access-electronic-data-third-country-law-enforcement-authorities-challenges-eu-rule-law/; compared its bibliographic cover, substance and methods with the official identity record https://www.ceps.eu/ceps-publications/access-electronic-data-third-country-law-enforcement-authorities-challenges-eu-rule-law/."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "found",
+            "note": "Searched exact title \"Access to Electronic Data by Third-Country Law Enforcement Authorities – CEPS\" and inspected the corresponding publisher, official page or catalogue at https://www.ceps.eu/ceps-publications/access-electronic-data-third-country-law-enforcement-authorities-challenges-eu-rule-law/; no substitute work was used."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "recovered",
+            "note": "Checked institution/publisher document route https://www.ceps.eu/ceps-publications/access-electronic-data-third-country-law-enforcement-authorities-challenges-eu-rule-law/ for identity and main argument; compared with any supplied 5992-character primary text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_scanner_source_document",
+            "url": "https://www.ceps.eu/ceps-publications/access-electronic-data-third-country-law-enforcement-authorities-challenges-eu-rule-law/",
+            "title": "Access to Electronic Data by Third-Country Law Enforcement Authorities – CEPS",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publisher_identity",
+            "url": "https://www.ceps.eu/ceps-publications/access-electronic-data-third-country-law-enforcement-authorities-challenges-eu-rule-law/",
+            "title": "Access to Electronic Data by Third-Country Law Enforcement Authorities – CEPS",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Matched Access to Electronic Data by Third-Country Law Enforcement Authorities – CEPS to official/publisher route https://www.ceps.eu/ceps-publications/access-electronic-data-third-country-law-enforcement-authorities-challenges-eu-rule-law/. Inspected supplied original source material (5992 chars). Any cybersecurity/research impact is conjectural absent source-grounded analysis."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Tested A Route 1 geopolitical R&I linkage, Route 2 European R&I states/trajectories, and Route 3 system-level institutional R&I evidence. None establishes admissible substantive European R&I analysis: Legal protection and surveillance governance, not a substantive study of Europe’s research or innovation system. Any cybersecurity/research impact is conjectural absent source-grounded analysis."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title match with the possible duplicates listed in the assignment was independently established."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "study",
+        "research_question": "What is this record actually reporting?",
+        "main_finding": "CEPS examines extraterritorial access to privately held electronic data and European rule-of-law issues.",
+        "method_or_basis": "Publisher/official source and supplied primary material at https://www.ceps.eu/ceps-publications/access-electronic-data-third-country-law-enforcement-authorities-challenges-eu-rule-law/",
+        "qualification": "Any cybersecurity/research impact is conjectural absent source-grounded analysis.",
+        "radar_relevance": "Legal protection and surveillance governance, not a substantive study of Europe’s research or innovation system.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:7589278795934e70",
+      "source_hash": "9231bff4",
+      "identity_hash": "293376e8e21ef5e9",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Supplied reader link https://doi.org/10.56042/sd.v8i4.34525 was a news relay or could not supply independently accessible full original text; pursued publisher identity lookup."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "recovered",
+            "note": "Inspected 11197 characters of matching pdf_excerpt from scanner-extracted https://content.openalex.org/works/W7220891468.pdf; compared its bibliographic cover, substance and methods with the official identity record https://scm.niscair.res.in/handle/123456789/66096."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "found",
+            "note": "Searched exact title \"Towards a New Paradigm of Science Diplomacy through Strategic Anticipation and Foresight\" and inspected the corresponding publisher, official page or catalogue at https://scm.niscair.res.in/handle/123456789/66096; no substitute work was used."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "recovered",
+            "note": "Checked institution/publisher document route https://scm.niscair.res.in/handle/123456789/66096 for identity and main argument; compared with any supplied 11197-character primary text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_scanner_source_document",
+            "url": "https://content.openalex.org/works/W7220891468.pdf",
+            "title": "Towards a New Paradigm of Science Diplomacy through Strategic Anticipation and Foresight",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publisher_identity",
+            "url": "https://scm.niscair.res.in/handle/123456789/66096",
+            "title": "Towards a New Paradigm of Science Diplomacy through Strategic Anticipation and Foresight",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Matched Towards a New Paradigm of Science Diplomacy through Strategic Anticipation and Foresight to official/publisher route https://scm.niscair.res.in/handle/123456789/66096. Inspected supplied original source material (11197 chars). Advocacy for the use of existing foresight differs from methodological innovation."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Tested transferable futures/foresight/technology-intelligence method contribution. It does not develop, scrutinize or validate a new transferable futures intelligence method. Advocacy for the use of existing foresight differs from methodological innovation."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title match with the possible duplicates listed in the assignment was independently established."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "essay",
+        "research_question": "What is this record actually reporting?",
+        "main_finding": "Science Diplomacy essay advocates strategic anticipation as an approach to science diplomacy and resilient international collaboration.",
+        "method_or_basis": "Publisher/official source and supplied primary material at https://scm.niscair.res.in/handle/123456789/66096",
+        "qualification": "Advocacy for the use of existing foresight differs from methodological innovation.",
+        "radar_relevance": "It does not develop, scrutinize or validate a new transferable futures intelligence method.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:3c4f8db2dbc64203",
+      "source_hash": "0479835c",
+      "identity_hash": "0af8ead5a60252aa",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "identity_only_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Supplied reader link https://doi.org/10.1108/fs-01-2023-0001 was a news relay or could not supply independently accessible full original text; pursued publisher identity lookup."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "blocked",
+            "note": "Exact-title lookup for \"How foresight has evolved since 1999? Understanding its themes, scope and focus\" did not recover the substantive original text (catalogue only: https://ouci.dntb.gov.ua/en/works/7XyVWgX4/)."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "blocked",
+            "note": "Checked publisher/repository pathway https://ouci.dntb.gov.ua/en/works/7XyVWgX4/; no substantive matching original text available."
+          },
+          {
+            "step": "doi",
+            "outcome": "blocked",
+            "note": "DOI 10.1108/fs-01-2023-0001 resolution not available in retrieved material."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "blocked",
+            "note": "Looked for How foresight has evolved since 1999? Understanding its themes, scope and focus with Vaishali Dhiman; Manpreet Arora and 2023; only catalogue/title-level evidence was obtained."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "blocked",
+            "note": "Examined distinctive title fragments and author/publisher/issue clues against https://ouci.dntb.gov.ua/en/works/7XyVWgX4/; no full or substantive original was returned."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Identity supported at catalogue level (https://ouci.dntb.gov.ua/en/works/7XyVWgX4/); original substantive body unavailable. Defer leaves the existing record provisional; neither evidence nor merits inferred."
+      },
+      "admission": {
+        "decision": "defer",
+        "target_strand": "B",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Publisher/catalogue identity recorded, but full primary text was not recovered; no defensible B determination. A secondary indexing abstract is insufficient for a substantive KEEP or DROP verdict under the package rules."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact shared identity among assigned possible duplicates was established."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:1db42b6b9453fa4f",
+      "source_hash": "63070487",
+      "identity_hash": "e9c02216364b5628",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "blocked",
+            "note": "Supplied reader link https://doi.org/10.1016/j.techfore.2023.122525 was a news relay or could not supply independently accessible full original text; pursued publisher identity lookup."
+          },
+          {
+            "step": "package_source_material",
+            "outcome": "recovered",
+            "note": "Inspected 24000 characters of matching pdf_excerpt from scanner-extracted https://content.openalex.org/works/W4361266098.pdf; compared its bibliographic cover, substance and methods with the official identity record https://www.repository.cam.ac.uk/items/1a1f5915-0ce2-4f44-9bf8-837393c22bcf."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "found",
+            "note": "Searched exact title \"Development of a maturity model for technology intelligence\" and inspected the corresponding publisher, official page or catalogue at https://www.repository.cam.ac.uk/items/1a1f5915-0ce2-4f44-9bf8-837393c22bcf; no substitute work was used."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "recovered",
+            "note": "Checked institution/publisher document route https://www.repository.cam.ac.uk/items/1a1f5915-0ce2-4f44-9bf8-837393c22bcf for identity and main argument; compared with any supplied 24000-character primary text."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "matching_scanner_source_document",
+            "url": "https://content.openalex.org/works/W4361266098.pdf",
+            "title": "Development of a maturity model for technology intelligence",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_publisher_identity",
+            "url": "https://www.repository.cam.ac.uk/items/1a1f5915-0ce2-4f44-9bf8-837393c22bcf",
+            "title": "Development of a maturity model for technology intelligence",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Matched Development of a maturity model for technology intelligence to official/publisher route https://www.repository.cam.ac.uk/items/1a1f5915-0ce2-4f44-9bf8-837393c22bcf. Inspected supplied original source material (24000 chars). Exploratory eight-firm validation is not proof of general performance gains."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_TRANSFERABLE_METHOD",
+        "reason": "Evidence-based B admission: Transferable, scrutinised framework for assessing and improving forward-looking technology intelligence processes. Exploratory eight-firm validation is not proof of general performance gains."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No exact DOI/title match with the possible duplicates listed in the assignment was independently established."
+      },
+      "reader_title": "Development of a maturity model for technology intelligence",
+      "reader_what": "Article develops a capability maturity model for technology intelligence using literature review and interviews with eight firms.",
+      "reader_why": "Transferable, scrutinised framework for assessing and improving forward-looking technology intelligence processes.",
+      "reader_more": "Article develops a capability maturity model for technology intelligence using literature review and interviews with eight firms. Exploratory eight-firm validation is not proof of general performance gains.",
+      "deep_analysis": {
+        "work_kind": "study",
+        "research_question": "What does Development of a maturity model for technology intelligence establish for the B research-intelligence mission?",
+        "main_finding": "Article develops a capability maturity model for technology intelligence using literature review and interviews with eight firms.",
+        "method_or_basis": "Official document/research publisher and scanner primary text where available: https://www.repository.cam.ac.uk/items/1a1f5915-0ce2-4f44-9bf8-837393c22bcf",
+        "qualification": "Exploratory eight-firm validation is not proof of general performance gains.",
+        "radar_relevance": "Transferable, scrutinised framework for assessing and improving forward-looking technology intelligence processes.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.technology_detection",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Heeyong Noh; Letizia Mortara; Sungjoo Lee",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2023-03-30",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Exploratory eight-firm validation is not proof of general performance gains.",
+          "text": "Article develops a capability maturity model for technology intelligence using literature review and interviews with eight firms.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    }
+  ]
+}
