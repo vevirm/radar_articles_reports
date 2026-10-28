@@ -1,0 +1,52 @@
+name: Update 2026 Stuff
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows:
+      - R&I Radar Scan
+      - Historical Top-Tier Scan
+      - Deep Scan V2 — Import Returned Results
+    types: [completed]
+permissions:
+  contents: write
+concurrency:
+  group: update-2026-stuff
+  cancel-in-progress: false
+jobs:
+  refresh:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Rebuild annual register and Excel
+        run: python scripts/generate_2026_stuff.py
+      - name: Verify workbook and catalogue
+        run: |
+          python - <<'PY'
+          import json, zipfile
+          from pathlib import Path
+          j=json.loads(Path('2026-stuff/publications.json').read_text(encoding='utf-8'))
+          assert j['count'] == len(j['records']) and j['count']>0
+          assert all('2026-01-01'<=r['date']<='2026-12-31' for r in j['records'])
+          with zipfile.ZipFile('2026-stuff/2026_publications.xlsx') as z:
+              assert z.testzip() is None
+              assert 'xl/worksheets/sheet3.xml' in z.namelist()
+          print('Validated',j['count'],'records')
+          PY
+      - name: Commit updated catalogue if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 2026-stuff/publications.json 2026-stuff/2026_publications.xlsx
+          if ! git diff --cached --quiet; then
+            git commit -m "Refresh 2026 publication register"
+            git push
+          fi
