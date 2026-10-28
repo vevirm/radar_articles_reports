@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **3511** (Main **1718** + Historical **1793**)
-- Automatic queue still needing V2 verification: **75** (Main **18** + Historical **57**)
-- Currently assigned to workers: **75** (Main **18** + Historical **57**)
+- Authoritative V2 verified: **3551** (Main **1736** + Historical **1815**)
+- Automatic queue still needing V2 verification: **35** (Main **0** + Historical **35**)
+- Currently assigned to workers: **35** (Main **0** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **44**
 - Automatic queue pending and not yet assigned: **0**
@@ -17,24 +17,11 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 
 ### Worker A
 - Current package: `worker-a-20261028T124131Z-6ab6d841b916`
-- Assigned unresolved records: **36**
-  1. `link:https://doi.org/10.1186/s12544-026-00854-w` — Enhancing transport innovation knowledge management workflows using artificial intelligence: a TRIMIS database case study
-  2. `link:https://news.google.com/rss/articles/CBMiwAFBVV95cUxQeGVhdWpXUGQ1UlhybjFLX0dqQjlXZF9LYTU3ejdnRWdZd1pqQUtiT0ZTb1A4bmFZVzYyeUpfVk9Gc1pyTy11UkwzRHJvQ1lBb2RCRmxYaHp5OFhrOFF6SHg0NGw5bEUwVG9aYjF1cW4yMlpWUkxRUlk4V2t5clltdmFZc3NNdzI0Q2hVX0x5akJJU2RYaTFfZVp6TXhCekx1VUlGUExCMUFfYVFTajRMcWR5aWczVjItVU5pNU1NbF8?oc=5` — Can AI Replace Government Jobs? The World Is Watching the Dutch
-  3. `link:https://news.google.com/rss/articles/CBMiywFBVV95cUxNa25CZXpqVTAxc2JCOUVqTV9WNVlGWDFMSS1sVkRDdVdINkVvREoyWnNxeFJfUXJFeTdZT3ZYZ3hSWTcwWmlmd1cwZE5Qa2xzSzVDVk45cU95NWpOd3U0eU9KZFZob0R0WjJ3UVJ4Z2JlYWtmTGdLMi05d0NGR2IxYjBsaE50dGx0N3ZsTFZZemptSngwWlZZak9yUmw4YWRnX2dwdGJUdzJJaDRoX3dYLXp2bnFmQ05EajUwNzZhamdvRENEQkh2bnR5TQ?oc=5` — Poland and UK support strong transatlantic alliance, Polish minister says
-  4. `link:https://www.euronews.com/2026/10/27/why-should-big-tech-know-what-youre-working-on-scale-ai-accused-of-spying-on-ai-trainers` — Why should Big Tech see your tasks? Scale AI accused of spying
-  5. `link:https://www.researchprofessionalnews.com/rr-news-europe-innovation-2026-10-cnrs-and-max-planck-join-up-with-patent-office-on-innovation/` — CNRS and Max Planck join up with patent office on innovation - Research Professional News
-  6. `link:https://news.google.com/rss/articles/CBMiX0FVX3lxTE1qcVZXeF9xS2t5cWFtaWJwdndNS3hEb2hQQmZhSU1vZndiel81Y0FnemhlclVxVjJBaTFrQWh5TE1VVzJkTjJWRXY5c3cwdjNzaXJucVo5ZHMwb3paRGxB?oc=5` — Biodiversity is a key motivation for European urban green space planning and management
-  7. `link:https://news.google.com/rss/articles/CBMipAFBVV95cUxQZ0VZVkpaeHVCUTFDLWFkaWFuQ2VDMmFuUDBaQ3k3NHg4Z3ZhMW54MkNqRlJEQjBMUlpNeTN4UVpfVXF4MXJEcnlVUnNhY096Q05hS0MyTGF6M0JhMHVVUE5jQ1A5Sy1WNS1TWkJmNEl1MGxkaVpyOWlwbGc2dmY5bDVYenVyT00wQWNxLXFsRGV5NXY5QmctcGNIOXdERjBzdDZqSQ?oc=5` — Horizon Europe Work Programme 2026-2027: 8. Climate, Energy and Mobility
-  8. `link:https://news.google.com/rss/articles/CBMi9gFBVV95cUxNbUFMbFB0TjN0c3ZLNnpGd2Vwb2NERS1aZ1pkbURxZm4yY0d4djQ5ZkI1T2k1T1VNMnJOejJCNV9MaW4wSjJncXhITGFKU0xmTFJESEtmaHh0SDV2UjN0X1dIZFlveE1Wa2ZWVmV2RG8zQjBfVFBDcHJaZkZUUlJGMG1JSXI4WXJ2XzNmYXgyTUs5RlRfY0FRQWE0YlNYYWtpMWtjQmhEVTUtMDMxQ2lhSlV4NWdqVWUxYjRLQ3ItMjROVDNFbGhxOWM0dFZRQlBSRThtTm5ZbmlWVXF1YmZKRkRqczRPUjF1UElkeGFSSmlHamRtb1E?oc=5` — EU-Central Asia Innovation Forum: join the discussion online on 28 October - European Commission
-  - … plus 28 more in the package manifest
+- Assigned unresolved records: **0**
 
 ### Worker B
 - Current package: `worker-b-20261028T124142Z-3356515b936a`
-- Assigned unresolved records: **4**
-  1. `historical:id:3a83c8187654e4a5` — Case study as a methodological foundation for Technology Roadmapping (TRM): Literature review and future research agenda
-  2. `historical:id:5e90a535ae883e3f` — Role of ruler or intruder? Patient’s right to autonomy in the age of innovation and technologies — recovery attempt 2/3
-  3. `historical:id:479a5f9f90cb2d32` — BBC Business Daily "The Great Semiconductor Shortage"
-  4. `historical:id:d3b5c11fd9940f4c` — "Going Digital" - Launch of ALLEA E-Humanities Working Group report - ALLEA
+- Assigned unresolved records: **0**
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
