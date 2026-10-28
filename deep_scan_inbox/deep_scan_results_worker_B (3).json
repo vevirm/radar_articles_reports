@@ -1,0 +1,302 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-b-20261028T124142Z-3356515b936a",
+  "results": [
+    {
+      "record_key": "historical:id:3a83c8187654e4a5",
+      "source_hash": "73067b37",
+      "identity_hash": "979fc4260aa342ef",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matched source or its canonical article https://www.sciencedirect.com/science/article/pii/S0923474823000012; source topic and identity verified."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Elsevier Journal of Engineering and Technology Management volume 67, article 101731 identifies both authors and reports 79 case-study review and five research directions. Source: https://www.sciencedirect.com/science/article/pii/S0923474823000012"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0923474823000012",
+            "title": "Case study as a methodological foundation for Technology Roadmapping (TRM): Literature review and future research agenda",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Elsevier Journal of Engineering and Technology Management volume 67, article 101731 identifies both authors and reports 79 case-study review and five research directions."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_TRANSFERABLE_METHOD",
+        "reason": "Strand B: substantive transferable methods critique of case-based technology roadmapping, including methodological limitations and future improvement directions."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "Evaluating case studies in technology roadmapping",
+      "reader_what": "A review of 79 roadmapping case studies identifies methodological weaknesses and five directions for improving future research.",
+      "reader_why": "Comparative assessment can improve the quality and transferability of long-term technology roadmapping research.",
+      "reader_more": "A review of 79 roadmapping case studies identifies methodological weaknesses and five directions for improving future research. Systematic review of 79 technology roadmapping case studies published between 2003 and 2020. The paper evaluates published case-study practice and proposes directions; it does not experimentally validate a new roadmapping protocol.",
+      "deep_analysis": {
+        "work_kind": "publisher article",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "A review of 79 roadmapping case studies identifies methodological weaknesses and five directions for improving future research.",
+        "method_or_basis": "Systematic review of 79 technology roadmapping case studies published between 2003 and 2020.",
+        "qualification": "The paper evaluates published case-study practice and proposes directions; it does not experimentally validate a new roadmapping protocol.",
+        "radar_relevance": "Strand B: substantive transferable methods critique of case-based technology roadmapping, including methodological limitations and future improvement directions.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.roadmapping",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Bingjie Ding and Xavier Ferràs Hernández",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2023",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The paper evaluates published case-study practice and proposes directions; it does not experimentally validate a new roadmapping protocol.",
+          "text": "A review of 79 roadmapping case studies identifies methodological weaknesses and five directions for improving future research.",
+          "confidence": "high",
+          "status_date_precision": "year",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:5e90a535ae883e3f",
+      "source_hash": "d11469db",
+      "identity_hash": "6a49416b31808fce",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matched source or its canonical article https://link.springer.com/article/10.1007/s00146-020-01034-7; source topic and identity verified."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Springer publisher article published online 12 Aug 2020 in 2021 volume; the medical-ethics abstract confirms topic and no substantive European R&I analysis. Source: https://link.springer.com/article/10.1007/s00146-020-01034-7"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article",
+            "url": "https://link.springer.com/article/10.1007/s00146-020-01034-7",
+            "title": "Role of ruler or intruder? Patient’s right to autonomy in the age of innovation and technologies",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Springer publisher article published online 12 Aug 2020 in 2021 volume; the medical-ethics abstract confirms topic and no substantive European R&I analysis."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Routes 1–3 checked: the article concerns generic patient autonomy and health law, not European R&I strategy, capacity, or the European research/innovation system; European references do not remedy the missing central scope."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2020-08-12"
+        },
+        "unset": [],
+        "reason": "Springer records online publication 12 August 2020; 2021 is the journal volume year."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "Patient autonomy amid emerging health technology",
+      "reader_what": "An ethics discussion calls for reconsidering informed consent and advance directives as medical technologies evolve.",
+      "reader_why": "",
+      "reader_more": "An ethics discussion calls for reconsidering informed consent and advance directives as medical technologies evolve. Normative medical ethics and legal discussion published in AI & Society; Springer confirms Milda Žaliauskaitė and DOI. No specific European research-system mechanism or European R&I capability is evaluated.",
+      "deep_analysis": {
+        "work_kind": "publisher article",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "An ethics discussion calls for reconsidering informed consent and advance directives as medical technologies evolve.",
+        "method_or_basis": "Normative medical ethics and legal discussion published in AI & Society; Springer confirms Milda Žaliauskaitė and DOI.",
+        "qualification": "No specific European research-system mechanism or European R&I capability is evaluated.",
+        "radar_relevance": "A Routes 1–3 checked: the article concerns generic patient autonomy and health law, not European R&I strategy, capacity, or the European research/innovation system; European references do not remedy the missing central scope.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:479a5f9f90cb2d32",
+      "source_hash": "7f2364b3",
+      "identity_hash": "33f96a8841ba6135",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matched source or its canonical article https://www.interface-eu.org/publications/bbc-business-daily-great-semiconductor-shortage; source topic and identity verified."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Interface page confirms BBC World Service episode 17 February 2021 and its Taiwan/global-semiconductor subject matter. Source: https://www.interface-eu.org/publications/bbc-business-daily-great-semiconductor-shortage"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "issuer_listing",
+            "url": "https://www.interface-eu.org/publications/bbc-business-daily-great-semiconductor-shortage",
+            "title": "BBC Business Daily \"The Great Semiconductor Shortage\"",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Interface page confirms BBC World Service episode 17 February 2021 and its Taiwan/global-semiconductor subject matter."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Routes 1–3 checked: although Taiwan-linked chip dependencies may matter to Europe, this BBC podcast listing is not substantive European R&I research or a verified European capability assessment."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "BBC World Service"
+        },
+        "unset": [],
+        "reason": "The Interface site explicitly lists BBC World Service as the publisher of the recorded interview."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "Podcast listing on the 2021 chip shortage",
+      "reader_what": "A BBC episode introduces Taiwan semiconductor supply chains, vehicle shortages and US–China technology rivalry.",
+      "reader_why": "",
+      "reader_more": "A BBC episode introduces Taiwan semiconductor supply chains, vehicle shortages and US–China technology rivalry. Programme description published on the participating think tank’s website; BBC World Service is the actual broadcaster. The entry is a media-appearance listing, not an evidence-led study of the European R&I system.",
+      "deep_analysis": {
+        "work_kind": "issuer listing",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "A BBC episode introduces Taiwan semiconductor supply chains, vehicle shortages and US–China technology rivalry.",
+        "method_or_basis": "Programme description published on the participating think tank’s website; BBC World Service is the actual broadcaster.",
+        "qualification": "The entry is a media-appearance listing, not an evidence-led study of the European R&I system.",
+        "radar_relevance": "A Routes 1–3 checked: although Taiwan-linked chip dependencies may matter to Europe, this BBC podcast listing is not substantive European R&I research or a verified European capability assessment.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:d3b5c11fd9940f4c",
+      "source_hash": "0348a565",
+      "identity_hash": "aacf3e326d908c02",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Reader-facing source http://allea.org/wp-content/uploads/2015/07/Going-Digital_digital-version.pdf identified the title; substantive source body supplied separately or recovered at https://allea.org/portfolio-item/going-digital-creating-change-in-the-humanities/"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "ALLEA report title, 2015 ISBN 978-3-00-049483-3 and original 2015 PDF excerpt agree; official ALLEA page lists its three substantive recommendations. Source: https://allea.org/portfolio-item/going-digital-creating-change-in-the-humanities/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_report",
+            "url": "https://allea.org/portfolio-item/going-digital-creating-change-in-the-humanities/",
+            "title": "\"Going Digital\" - Launch of ALLEA E-Humanities Working Group report - ALLEA",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "ALLEA report title, 2015 ISBN 978-3-00-049483-3 and original 2015 PDF excerpt agree; official ALLEA page lists its three substantive recommendations."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Strand A Routes 2 and 3: substantive European research-infrastructure and open-science governance recommendations supported by the ALLEA working-group report."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "European digital humanities need infrastructure, open data and skills",
+      "reader_what": "ALLEA recommends preserving research archives, improving open access and investing in digital-humanities research careers and data skills.",
+      "reader_why": "The report directly addresses European research infrastructure, data governance and researcher capabilities.",
+      "reader_more": "ALLEA recommends preserving research archives, improving open access and investing in digital-humanities research careers and data skills. ALLEA E-Humanities Working Group policy review with research-system recommendations; original report text is included in the package. Recommendations describe 2015 infrastructure and workforce needs; they are advocacy, not measured implementation effects.",
+      "deep_analysis": {
+        "work_kind": "official report",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "ALLEA recommends preserving research archives, improving open access and investing in digital-humanities research careers and data skills.",
+        "method_or_basis": "ALLEA E-Humanities Working Group policy review with research-system recommendations; original report text is included in the package.",
+        "qualification": "Recommendations describe 2015 infrastructure and workforce needs; they are advocacy, not measured implementation effects.",
+        "radar_relevance": "Strand A Routes 2 and 3: substantive European research-infrastructure and open-science governance recommendations supported by the ALLEA working-group report.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "ALLEA E-Humanities Working Group",
+            "class": "university_group"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2015",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "Recommendations describe 2015 infrastructure and workforce needs; they are advocacy, not measured implementation effects.",
+          "text": "ALLEA recommends preserving research archives, improving open access and investing in digital-humanities research careers and data skills.",
+          "confidence": "high",
+          "status_date_precision": "year"
+        }
+      ]
+    }
+  ]
+}

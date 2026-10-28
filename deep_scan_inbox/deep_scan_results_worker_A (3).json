@@ -1,0 +1,2683 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-a-20261028T124131Z-6ab6d841b916",
+  "results": [
+    {
+      "record_key": "link:https://doi.org/10.1186/s12544-026-00854-w",
+      "source_hash": "2b0ad446",
+      "identity_hash": "62bb87712d9b6198",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Reader-facing source https://doi.org/10.1186/s12544-026-00854-w identified the title; substantive source body supplied separately or recovered at https://link.springer.com/article/10.1186/s12544-026-00854-w"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Springer primary article gives DOI 10.1186/s12544-026-00854-w and eight authors; body describes 52,923 projects, validation design and uncertainty. Source: https://link.springer.com/article/10.1186/s12544-026-00854-w"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1186/s12544-026-00854-w",
+            "title": "Enhancing transport innovation knowledge management workflows using artificial intelligence: a TRIMIS database case study",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Springer primary article gives DOI 10.1186/s12544-026-00854-w and eight authors; body describes 52,923 projects, validation design and uncertainty."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Strand A Route 3: evaluated evidence-led improvement to the European Commission’s operational transport research monitoring and classification system."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "AI-assisted screening improves EU transport research intelligence",
+      "reader_what": "An evaluated LLM workflow classified 52,923 EU-funded projects and identified 6,986 as relevant to TRIMIS.",
+      "reader_why": "It improves how European research funding portfolios are monitored and categorised for policy analysis.",
+      "reader_more": "An evaluated LLM workflow classified 52,923 EU-funded projects and identified 6,986 as relevant to TRIMIS. Human-calibrated prompt comparisons and two-model ensemble applied to Horizon 2020 and Horizon Europe CORDIS project descriptions. Accuracy depends on expert taxonomies and calibration; authors call for continued human validation of ambiguous cases.",
+      "deep_analysis": {
+        "work_kind": "publisher full text",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "An evaluated LLM workflow classified 52,923 EU-funded projects and identified 6,986 as relevant to TRIMIS.",
+        "method_or_basis": "Human-calibrated prompt comparisons and two-model ensemble applied to Horizon 2020 and Horizon Europe CORDIS project descriptions.",
+        "qualification": "Accuracy depends on expert taxonomies and calibration; authors call for continued human validation of ambiguous cases.",
+        "radar_relevance": "Strand A Route 3: evaluated evidence-led improvement to the European Commission’s operational transport research monitoring and classification system.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.system_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Joint Research Centre TRIMIS researchers",
+            "class": "eu_body"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-10-26",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Accuracy depends on expert taxonomies and calibration; authors call for continued human validation of ambiguous cases.",
+          "text": "An evaluated LLM workflow classified 52,923 EU-funded projects and identified 6,986 as relevant to TRIMIS.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiwAFBVV95cUxQeGVhdWpXUGQ1UlhybjFLX0dqQjlXZF9LYTU3ejdnRWdZd1pqQUtiT0ZTb1A4bmFZVzYyeUpfVk9Gc1pyTy11UkwzRHJvQ1lBb2RCRmxYaHp5OFhrOFF6SHg0NGw5bEUwVG9aYjF1cW4yMlpWUkxRUlk4V2t5clltdmFZc3NNdzI0Q2hVX0x5akJJU2RYaTFfZVp6TXhCekx1VUlGUExCMUFfYVFTajRMcWR5aWczVjItVU5pNU1NbF8?oc=5",
+      "source_hash": "7be9826e",
+      "identity_hash": "58d9c64e0ea70cca",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Opaque Google News RSS link https://news.google.com/rss/articles/CBMiwAFBVV95cUxQeGVhdWpXUGQ1UlhybjFLX0dqQjlXZF9LYTU3ejdnRWdZd1pqQUtiT0ZTb1A4bmFZVzYyeUpfVk9Gc1pyTy11UkwzRHJvQ1lBb2RCRmxYaHp5OFhrOFF6SHg0NG had no substantive source text in supplied package."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Recovered named underlying work by exact headline search: https://www.moneycontrol.com/artificial-intelligence/can-ai-replace-government-jobs-world-is-watching-the-dutch-article-14061531.html"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Bloomberg story on 27 October cites a 26 October cabinet plan; Reuters separately confirms a 25,000-job target and a future AI implementation plan. Source: https://www.moneycontrol.com/artificial-intelligence/can-ai-replace-government-jobs-world-is-watching-the-dutch-article-14061531.html"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "syndicated_original_reporting",
+            "url": "https://www.moneycontrol.com/artificial-intelligence/can-ai-replace-government-jobs-world-is-watching-the-dutch-article-14061531.html",
+            "title": "Can AI Replace Government Jobs? The World Is Watching the Dutch",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Bloomberg story on 27 October cites a 26 October cabinet plan; Reuters separately confirms a 25,000-job target and a future AI implementation plan."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "Strand C: dated Dutch government AI-adoption and supplier-preference plans relate directly to EU digital capability and procurement, not merely ordinary budget news."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "Dutch government announces AI-led public-sector reorganisation",
+      "reader_what": "The Netherlands proposes cutting about 25,000 government jobs while developing AI adoption plans and favouring European technology suppliers.",
+      "reader_why": "Public procurement choices could shape domestic and European AI adoption, although implementation remains uncertain.",
+      "reader_more": "The Netherlands proposes cutting about 25,000 government jobs while developing AI adoption plans and favouring European technology suppliers. Bloomberg article corroborated by DutchNews and Reuters coverage of the government’s 26 October plan. The workforce target is a plan, not a realised AI productivity gain; detailed AI implementation was still pending.",
+      "deep_analysis": {
+        "work_kind": "syndicated original reporting",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "The Netherlands proposes cutting about 25,000 government jobs while developing AI adoption plans and favouring European technology suppliers.",
+        "method_or_basis": "Bloomberg article corroborated by DutchNews and Reuters coverage of the government’s 26 October plan.",
+        "qualification": "The workforce target is a plan, not a realised AI productivity gain; detailed AI implementation was still pending.",
+        "radar_relevance": "Strand C: dated Dutch government AI-adoption and supplier-preference plans relate directly to EU digital capability and procurement, not merely ordinary budget news.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "ai.public_sector_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Government of the Netherlands",
+            "class": "member_state"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-10-26",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "NL"
+            ]
+          },
+          "kind": "action",
+          "qualification": "The workforce target is a plan, not a realised AI productivity gain; detailed AI implementation was still pending.",
+          "text": "The Netherlands proposes cutting about 25,000 government jobs while developing AI adoption plans and favouring European technology suppliers.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiywFBVV95cUxNa25CZXpqVTAxc2JCOUVqTV9WNVlGWDFMSS1sVkRDdVdINkVvREoyWnNxeFJfUXJFeTdZT3ZYZ3hSWTcwWmlmd1cwZE5Qa2xzSzVDVk45cU95NWpOd3U0eU9KZFZob0R0WjJ3UVJ4Z2JlYWtmTGdLMi05d0NGR2IxYjBsaE50dGx0N3ZsTFZZemptSngwWlZZak9yUmw4YWRnX2dwdGJUdzJJaDRoX3dYLXp2bnFmQ05EajUwNzZhamdvRENEQkh2bnR5TQ?oc=5",
+      "source_hash": "b0903c07",
+      "identity_hash": "b81e51c544303c8e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Opaque Google News RSS link https://news.google.com/rss/articles/CBMiywFBVV95cUxNa25CZXpqVTAxc2JCOUVqTV9WNVlGWDFMSS1sVkRDdVdINkVvREoyWnNxeFJfUXJFeTdZT3ZYZ3hSWTcwWmlmd1cwZE5Qa2xzSzVDVk45cU95NWpOd3U0eU9KZF had no substantive source text in supplied package."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Recovered named underlying work by exact headline search: https://www.reuters.com/business/aerospace-defense/poland-uk-support-strong-transatlantic-alliance-polish-minister-says-2026-10-27/"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Reuters contemporaneous article confirms the ministerial statements and three-year plan, but gives no concrete R&I programme or technology-research component. Source: https://www.reuters.com/business/aerospace-defense/poland-uk-support-strong-transatlantic-alliance-polish-minister-says-2026-10-27/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "original_reporting",
+            "url": "https://www.reuters.com/business/aerospace-defense/poland-uk-support-strong-transatlantic-alliance-polish-minister-says-2026-10-27/",
+            "title": "Poland and UK support strong transatlantic alliance, Polish minister says",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Reuters contemporaneous article confirms the ministerial statements and three-year plan, but gives no concrete R&I programme or technology-research component."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Strand C: a dateable defence cooperation announcement exists, but the reported military exercises and capabilities plan lacks a source-supported EU research/innovation or technological-capability instrument."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "UK–Poland defence cooperation and transatlantic alliance",
+      "reader_what": "Polish and British ministers backed NATO ties and signed a three-year defence-cooperation plan.",
+      "reader_why": "",
+      "reader_more": "Polish and British ministers backed NATO ties and signed a three-year defence-cooperation plan. Reuters 27 October report on Polish and British defence minister remarks and the cooperation plan. The article does not establish a particular R&I, research-technology funding, infrastructure or innovation-policy change.",
+      "deep_analysis": {
+        "work_kind": "original reporting",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "Polish and British ministers backed NATO ties and signed a three-year defence-cooperation plan.",
+        "method_or_basis": "Reuters 27 October report on Polish and British defence minister remarks and the cooperation plan.",
+        "qualification": "The article does not establish a particular R&I, research-technology funding, infrastructure or innovation-policy change.",
+        "radar_relevance": "Strand C: a dateable defence cooperation announcement exists, but the reported military exercises and capabilities plan lacks a source-supported EU research/innovation or technological-capability instrument.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://www.euronews.com/2026/10/27/why-should-big-tech-know-what-youre-working-on-scale-ai-accused-of-spying-on-ai-trainers",
+      "source_hash": "2a1627b7",
+      "identity_hash": "06a861d344ebe676",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Reader-facing source https://www.euronews.com/2026/10/27/why-should-big-tech-know-what-youre-working-on-scale-ai-accused-of-spying-on-ai-trainers identified the title; substantive source body supplied separately or recovered at https://noyb.eu/en/ai-training-platform-outlier-illegally-surveils-european-platform-workers"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Primary noyb release confirms five complaints in France, Italy, Netherlands and Austria on 27 October; Reuters and Euronews confirm they are allegations, not findings. Source: https://noyb.eu/en/ai-training-platform-outlier-illegally-surveils-european-platform-workers"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_ngo_action",
+            "url": "https://noyb.eu/en/ai-training-platform-outlier-illegally-surveils-european-platform-workers",
+            "title": "Why should Big Tech see your tasks? Scale AI accused of spying",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Primary noyb release confirms five complaints in France, Italy, Netherlands and Austria on 27 October; Reuters and Euronews confirm they are allegations, not findings."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "Strand C borderline: a verified new GDPR complaint implicates the model-training production chain, but the evidence does not yet establish a change to EU R&I capability; human admission judgment warranted."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "EU complaints challenge surveillance on an AI training platform",
+      "reader_what": "Noyb lodged five European complaints alleging excessive tracking of people supplying AI training and evaluation work.",
+      "reader_why": "EU privacy enforcement could affect the labour and data-collection practices underpinning AI model training.",
+      "reader_more": "Noyb lodged five European complaints alleging excessive tracking of people supplying AI training and evaluation work. Noyb’s dated first-party complaint announcement, cross-checked against the matching Euronews article and Reuters. Complaints are allegations, not regulator findings; their impact on AI research capacity is not yet established.",
+      "deep_analysis": {
+        "work_kind": "official ngo action",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "Noyb lodged five European complaints alleging excessive tracking of people supplying AI training and evaluation work.",
+        "method_or_basis": "Noyb’s dated first-party complaint announcement, cross-checked against the matching Euronews article and Reuters.",
+        "qualification": "Complaints are allegations, not regulator findings; their impact on AI research capacity is not yet established.",
+        "radar_relevance": "Strand C borderline: a verified new GDPR complaint implicates the model-training production chain, but the evidence does not yet establish a change to EU R&I capability; human admission judgment warranted.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "ai.governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "noyb",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "refers",
+          "direction": "becomes_contested",
+          "status": "announced",
+          "status_date": "2026-10-27",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Complaints are allegations, not regulator findings; their impact on AI research capacity is not yet established.",
+          "text": "Noyb lodged five European complaints alleging excessive tracking of people supplying AI training and evaluation work.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://www.researchprofessionalnews.com/rr-news-europe-innovation-2026-10-cnrs-and-max-planck-join-up-with-patent-office-on-innovation/",
+      "source_hash": "640e1d17",
+      "identity_hash": "ec0258c1b6c0e21e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Reader-facing source https://www.researchprofessionalnews.com/rr-news-europe-innovation-2026-10-cnrs-and-max-planck-join-up-with-patent-office-on-innovation/ identified the title; substantive source body supplied separately or recovered at https://www.epo.org/en/news-events/news/epo-signs-letter-intent-cnrs-innovation-and-max-planck-innovation"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "EPO release dated 26 October 2026 identifies the three parties and scope: IP mapping, evaluation and commercialisation. Source: https://www.epo.org/en/news-events/news/epo-signs-letter-intent-cnrs-innovation-and-max-planck-innovation"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_announcement",
+            "url": "https://www.epo.org/en/news-events/news/epo-signs-letter-intent-cnrs-innovation-and-max-planck-innovation",
+            "title": "CNRS and Max Planck join up with patent office on innovation - Research Professional News",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "EPO release dated 26 October 2026 identifies the three parties and scope: IP mapping, evaluation and commercialisation."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "Strand C: a new substantive European public-research technology transfer cooperation agreement with clear R&I connection."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "EPO, CNRS and Max Planck agree to improve technology transfer",
+      "reader_what": "The European Patent Office signed a cooperation letter with French and German research-commercialisation organisations.",
+      "reader_why": "It links public research commercialisation to European patent data, expertise and intellectual-property evaluation.",
+      "reader_more": "The European Patent Office signed a cooperation letter with French and German research-commercialisation organisations. 26 October first-party European Patent Office release corroborating Research Professional News coverage. A letter of intent establishes cooperation plans, not increased commercialisation outcomes.",
+      "deep_analysis": {
+        "work_kind": "official announcement",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "The European Patent Office signed a cooperation letter with French and German research-commercialisation organisations.",
+        "method_or_basis": "26 October first-party European Patent Office release corroborating Research Professional News coverage.",
+        "qualification": "A letter of intent establishes cooperation plans, not increased commercialisation outcomes.",
+        "radar_relevance": "Strand C: a new substantive European public-research technology transfer cooperation agreement with clear R&I connection.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.knowledge_transfer",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Patent Office, CNRS Innovation and Max Planck Innovation",
+            "class": "other"
+          },
+          "mechanism": "collaborates",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-10-26",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "A letter of intent establishes cooperation plans, not increased commercialisation outcomes.",
+          "text": "The European Patent Office signed a cooperation letter with French and German research-commercialisation organisations.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiX0FVX3lxTE1qcVZXeF9xS2t5cWFtaWJwdndNS3hEb2hQQmZhSU1vZndiel81Y0FnemhlclVxVjJBaTFrQWh5TE1VVzJkTjJWRXY5c3cwdjNzaXJucVo5ZHMwb3paRGxB?oc=5",
+      "source_hash": "a88c4d9f",
+      "identity_hash": "a86877de9813bfe3",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Opaque Google News RSS link https://news.google.com/rss/articles/CBMiX0FVX3lxTE1qcVZXeF9xS2t5cWFtaWJwdndNS3hEb2hQQmZhSU1vZndiel81Y0FnemhlclVxVjJBaTFrQWh5TE1VVzJkTjJWRXY5c3cwdjNzaXJucVo5ZHMwb3paRGxB?oc=5 had no substantive source text in supplied package."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Recovered named underlying work by exact headline search: https://www.nature.com/articles/s44284-026-00537-6"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Nature Cities full text published 23 October 2026 reports 574 municipalities, 18 countries, local biodiversity-governance findings. Source: https://www.nature.com/articles/s44284-026-00537-6"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.nature.com/articles/s44284-026-00537-6",
+            "title": "Biodiversity is a key motivation for European urban green space planning and management",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Nature Cities full text published 23 October 2026 reports 574 municipalities, 18 countries, local biodiversity-governance findings."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Strand C lacks a dateable new policy/programme/technology-capability change; even under A Routes 1–3 the paper studies municipal park management, not European R&I mechanisms."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "Survey of biodiversity goals in European urban parks",
+      "reader_what": "Researchers surveyed 574 municipalities in 18 European countries and found biodiversity was a major green-space motivation.",
+      "reader_why": "",
+      "reader_more": "Researchers surveyed 574 municipalities in 18 European countries and found biodiversity was a major green-space motivation. Peer-reviewed Nature Cities survey with municipal questionnaire and statistical analyses. It is a completed environmental/local-management study, not a new event or EU R&I system analysis.",
+      "deep_analysis": {
+        "work_kind": "publisher full text",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "Researchers surveyed 574 municipalities in 18 European countries and found biodiversity was a major green-space motivation.",
+        "method_or_basis": "Peer-reviewed Nature Cities survey with municipal questionnaire and statistical analyses.",
+        "qualification": "It is a completed environmental/local-management study, not a new event or EU R&I system analysis.",
+        "radar_relevance": "Strand C lacks a dateable new policy/programme/technology-capability change; even under A Routes 1–3 the paper studies municipal park management, not European R&I mechanisms.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMipAFBVV95cUxQZ0VZVkpaeHVCUTFDLWFkaWFuQ2VDMmFuUDBaQ3k3NHg4Z3ZhMW54MkNqRlJEQjBMUlpNeTN4UVpfVXF4MXJEcnlVUnNhY096Q05hS0MyTGF6M0JhMHVVUE5jQ1A5Sy1WNS1TWkJmNEl1MGxkaVpyOWlwbGc2dmY5bDVYenVyT00wQWNxLXFsRGV5NXY5QmctcGNIOXdERjBzdDZqSQ?oc=5",
+      "source_hash": "65476cd0",
+      "identity_hash": "2951d30dbd51154d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Opaque Google News RSS link https://news.google.com/rss/articles/CBMipAFBVV95cUxQZ0VZVkpaeHVCUTFDLWFkaWFuQ2VDMmFuUDBaQ3k3NHg4Z3ZhMW54MkNqRlJEQjBMUlpNeTN4UVpfVXF4MXJEcnlVUnNhY096Q05hS0MyTGF6M0JhMHVVUE5jQ1 had no substantive source text in supplied package."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Recovered named underlying work by exact headline search: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=intcom%3AC%282025%298493"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "EUR-Lex Commission Implementing Decision 11 December 2025 explicitly covers Part 8, Climate, Energy and Mobility; Commission release confirms adoption and scope. Source: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=intcom%3AC%282025%298493"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_decision",
+            "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=intcom%3AC%282025%298493",
+            "title": "Horizon Europe Work Programme 2026-2027: 8. Climate, Energy and Mobility",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "EUR-Lex Commission Implementing Decision 11 December 2025 explicitly covers Part 8, Climate, Energy and Mobility; Commission release confirms adoption and scope."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Strand C: static programme text last adopted 11 December 2025; the 2026 feed link is not a distinct 2026 funding decision. It is a programme listing, not new news."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "Previously adopted Horizon Europe climate and mobility work programme",
+      "reader_what": "The 2026–2027 Horizon Europe climate, energy and mobility work programme was adopted in December 2025.",
+      "reader_why": "",
+      "reader_more": "The 2026–2027 Horizon Europe climate, energy and mobility work programme was adopted in December 2025. Commission implementing decision C(2025)8493 and DG Climate Action announcement confirming the programme chronology. The linked work-programme document is substantive funding documentation, but it is not a newly dated 2026 development.",
+      "deep_analysis": {
+        "work_kind": "official decision",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "The 2026–2027 Horizon Europe climate, energy and mobility work programme was adopted in December 2025.",
+        "method_or_basis": "Commission implementing decision C(2025)8493 and DG Climate Action announcement confirming the programme chronology.",
+        "qualification": "The linked work-programme document is substantive funding documentation, but it is not a newly dated 2026 development.",
+        "radar_relevance": "Strand C: static programme text last adopted 11 December 2025; the 2026 feed link is not a distinct 2026 funding decision. It is a programme listing, not new news.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMi9gFBVV95cUxNbUFMbFB0TjN0c3ZLNnpGd2Vwb2NERS1aZ1pkbURxZm4yY0d4djQ5ZkI1T2k1T1VNMnJOejJCNV9MaW4wSjJncXhITGFKU0xmTFJESEtmaHh0SDV2UjN0X1dIZFlveE1Wa2ZWVmV2RG8zQjBfVFBDcHJaZkZUUlJGMG1JSXI4WXJ2XzNmYXgyTUs5RlRfY0FRQWE0YlNYYWtpMWtjQmhEVTUtMDMxQ2lhSlV4NWdqVWUxYjRLQ3ItMjROVDNFbGhxOWM0dFZRQlBSRThtTm5ZbmlWVXF1YmZKRkRqczRPUjF1UElkeGFSSmlHamRtb1E?oc=5",
+      "source_hash": "eaccfcc5",
+      "identity_hash": "f7d338ec9b1cc212",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Opaque Google News RSS link https://news.google.com/rss/articles/CBMi9gFBVV95cUxNbUFMbFB0TjN0c3ZLNnpGd2Vwb2NERS1aZ1pkbURxZm4yY0d4djQ5ZkI1T2k1T1VNMnJOejJCNV9MaW4wSjJncXhITGFKU0xmTFJESEtmaHh0SDV2UjN0X1dIZF had no substantive source text in supplied package."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Recovered named underlying work by exact headline search: https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/eu-central-asia-innovation-forum-join-discussion-online-28-october-2026-10-27_en"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Commission 27 October event news links to 28 October Uzbekistan forum programme and describes prospective talks only. Source: https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/eu-central-asia-innovation-forum-join-discussion-online-28-october-2026-10-27_en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_event_notice",
+            "url": "https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/eu-central-asia-innovation-forum-join-discussion-online-28-october-2026-10-27_en",
+            "title": "EU-Central Asia Innovation Forum: join the discussion online on 28 October - European Commission",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Commission 27 October event news links to 28 October Uzbekistan forum programme and describes prospective talks only."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Strand C: promotional event-registration article, not a verified new cooperation instrument or substantive European R&I policy change."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "Invitation to EU–Central Asia innovation forum",
+      "reader_what": "Commission publicity invited participants to a 28 October forum discussing EU–Central Asia research collaboration.",
+      "reader_why": "",
+      "reader_more": "Commission publicity invited participants to a 28 October forum discussing EU–Central Asia research collaboration. European Commission first-party notice and event programme. The notice announces an event and possible discussions; no new agreement or R&I funding action is reported.",
+      "deep_analysis": {
+        "work_kind": "official event notice",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "Commission publicity invited participants to a 28 October forum discussing EU–Central Asia research collaboration.",
+        "method_or_basis": "European Commission first-party notice and event programme.",
+        "qualification": "The notice announces an event and possible discussions; no new agreement or R&I funding action is reported.",
+        "radar_relevance": "Strand C: promotional event-registration article, not a verified new cooperation instrument or substantive European R&I policy change.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiqAFBVV95cUxOaEZuQ2p5d0RBLWg1SW02bHFuME1xZDdLZ0ZEUXhLQ1hrYzlnUzVJSnJ2ejBzRW1Tb3lOWU11bFI4UjBMNVpyTm1pM0h0aFJhZUtQRy1YYXNTMnVaeS1NRW8za2NXRER2MkpieWtpMUxlLWctZTNRQUdzZ0o1aXNRa1ZycXZwQVdSVXkteURONEEtaDdIYUFRUDdKam1paGxISFF5TzhKTFY?oc=5",
+      "source_hash": "4b257cac",
+      "identity_hash": "a937b017eefe9c1f",
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "unverifiable_after_recovery",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Tried the exact Google News RSS URL from the scanner; browser could not retrieve or resolve the issue page."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "Research Europe – 22 October 2026 is a periodical issue headline and the scanner supplies no article DOI or identifier to resolve."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "failed",
+            "note": "Searched exact phrase \"Research Europe – 22 October 2026\" and the alternative hyphenated form; no matching issue or contents appeared."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "failed",
+            "note": "Searched \"Research Europe\" \"22 October 2026\" \"Research Professional News\"; no matching first-party issue entry or identified author."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Tried publisher homepage https://www.researchprofessionalnews.com/ ; it returned HTTP 403 and no verifiable issue or original contents."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "Searched site:researchprofessionalnews.com with date and Research Europe, plus broader issue/date search; results matched other organisations, not this exact issue."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "The scanner supplies an unresolvable Google News issue title and timestamp only. No trustworthy matching primary issue was accessible. No substantive work is inferred from an unverifiable headline."
+      },
+      "admission": {
+        "decision": "drop_unverifiable",
+        "target_strand": "C",
+        "reason_code": "EVIDENCE_ACCESS_LIMITED",
+        "reason": "Full recovery ladder failed to verify the exact 22 October 2026 Research Europe issue or its substantive contents. Without the original work no dated R&I development can be admitted."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "",
+      "reader_what": "",
+      "reader_why": "",
+      "reader_more": "",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "why_supported": false,
+        "confidence": "low"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMivAFBVV95cUxPRWhBUjdaRzg2RlgzTzFyNXp6M0RLTkZnRXM5ZWlZaHZGYlo0X05keHVYcnhHb2ZfNGx4VlgxNXJJUVhOd3p2UENJOUc4MW9vYlRnTGw5cTVhY1dyZ1ZLQXZ0dGl0ckhDanREN3QzM0V4clpvZW43YnRVMGJUZWFBUVJtZXA0WjR3NGl2U2hlRmNnZ2FKSEtMLUhCd2dfdlNWMGZiZUNsT3RUUHhKWk9CVFFVRy0wRFNTMFoxeQ?oc=5",
+      "source_hash": "284090a7",
+      "identity_hash": "d895c1d52db1cebb",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Opaque Google News RSS link https://news.google.com/rss/articles/CBMivAFBVV95cUxPRWhBUjdaRzg2RlgzTzFyNXp6M0RLTkZnRXM5ZWlZaHZGYlo0X05keHVYcnhHb2ZfNGx4VlgxNXJJUVhOd3p2UENJOUc4MW9vYlRnTGw5cTVhY1dyZ1ZLQXZ0dG had no substantive source text in supplied package."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Recovered named underlying work by exact headline search: https://sciencebusiness.net/news/r-d-funding/horizon-europe/explained-how-2025-prices-turn-current-prices-horizon-europe"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Original Science|Business page dated 20 October 2026 explains proposed €140bn in 2025 prices versus €158.2bn in current prices. Source: https://sciencebusiness.net/news/r-d-funding/horizon-europe/explained-how-2025-prices-turn-current-prices-horizon-europe"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_article",
+            "url": "https://sciencebusiness.net/news/r-d-funding/horizon-europe/explained-how-2025-prices-turn-current-prices-horizon-europe",
+            "title": "Explained: How 2025 prices turn into current prices in Horizon Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original Science|Business page dated 20 October 2026 explains proposed €140bn in 2025 prices versus €158.2bn in current prices."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Strand C: the item is a clarifying background explainer, not a new funding or legislative development, despite substantive Horizon Europe context."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "Explainer on inflation-adjusted EU research budgets",
+      "reader_what": "Science|Business explains the distinction between 2025-price and current-price Horizon Europe funding estimates.",
+      "reader_why": "",
+      "reader_more": "Science|Business explains the distinction between 2025-price and current-price Horizon Europe funding estimates. 20 October Science|Business finance explainer; discusses budget calculations and an already-reported presidency proposal. The article explains accounting conventions; it does not report a separate newly adopted R&I budget decision.",
+      "deep_analysis": {
+        "work_kind": "publisher article",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "Science|Business explains the distinction between 2025-price and current-price Horizon Europe funding estimates.",
+        "method_or_basis": "20 October Science|Business finance explainer; discusses budget calculations and an already-reported presidency proposal.",
+        "qualification": "The article explains accounting conventions; it does not report a separate newly adopted R&I budget decision.",
+        "radar_relevance": "Strand C: the item is a clarifying background explainer, not a new funding or legislative development, despite substantive Horizon Europe context.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:9ae1c73e73715533",
+      "source_hash": "f3cbddec",
+      "identity_hash": "93d6dbcfacda9ffc",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matched source or its canonical article https://publications.jrc.ec.europa.eu/repository/handle/JRC146131; source topic and identity verified."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Original JRC Working Papers on Territorial Modelling and Analysis 02/2026, JRC146131, by Pietro Santoleri, Francesco Rentocchini and Francesco Lelli. Supplied original PDF pp. 1–6 includes design and contrasting correlation/within-proposal findings. Source: https://publications.jrc.ec.europa.eu/repository/handle/JRC146131"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC146131",
+            "title": "LLM-assisted proposal writing in competitive R&D funding: Evidence from Horizon Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original JRC Working Papers on Territorial Modelling and Analysis 02/2026, JRC146131, by Pietro Santoleri, Francesco Rentocchini and Francesco Lelli. Supplied original PDF pp. 1–6 includes design and contrasting correlation/within-proposal findings."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Strand A Route 3: completed empirical research about access, applicant inequalities and expert evaluation in Horizon Europe itself; also informs R&I funding trajectories under Route 2."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "LLM-written proposals spread across Horizon Europe without clear scoring penalties",
+      "reader_what": "A JRC analysis finds detectable LLM writing in about 40% of firms’ Horizon Europe proposal abstracts by late 2024.",
+      "reader_why": "The study directly measures changes in participation and assessment within an EU competitive R&D funding programme.",
+      "reader_more": "A JRC analysis finds detectable LLM writing in about 40% of firms’ Horizon Europe proposal abstracts by late 2024. Confidential administrative records of all firm applications in 2021–2024, text analysis, regressions and repeated-proposal comparisons. Cross-sectional negative associations with scoring are not causal; within-proposal comparisons detect no scoring effect from LLM adoption.",
+      "deep_analysis": {
+        "work_kind": "official full document",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "A JRC analysis finds detectable LLM writing in about 40% of firms’ Horizon Europe proposal abstracts by late 2024.",
+        "method_or_basis": "Confidential administrative records of all firm applications in 2021–2024, text analysis, regressions and repeated-proposal comparisons.",
+        "qualification": "Cross-sectional negative associations with scoring are not causal; within-proposal comparisons detect no scoring effect from LLM adoption.",
+        "radar_relevance": "Strand A Route 3: completed empirical research about access, applicant inequalities and expert evaluation in Horizon Europe itself; also informs R&I funding trajectories under Route 2.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.assessment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Cross-sectional negative associations with scoring are not causal; within-proposal comparisons detect no scoring effect from LLM adoption.",
+          "text": "A JRC analysis finds detectable LLM writing in about 40% of firms’ Horizon Europe proposal abstracts by late 2024.",
+          "confidence": "high",
+          "status_date_precision": "year"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:24543533d2940356",
+      "source_hash": "a209c49d",
+      "identity_hash": "8fa82a949f1ae5b9",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matched source or its canonical article https://digital-strategy.ec.europa.eu/en/news/thematic-roadmap-open-source-and-inputs-common-trust-principles; source topic and identity verified."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Original report title and cochair TNO confirmed by TNO repository record, European Alliance cloud-edge document listing, and Commission 8 July 2025 original release; Commission summarises specific trust-component gaps. Source: https://digital-strategy.ec.europa.eu/en/news/thematic-roadmap-open-source-and-inputs-common-trust-principles"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_issuer_summary",
+            "url": "https://digital-strategy.ec.europa.eu/en/news/thematic-roadmap-open-source-and-inputs-common-trust-principles",
+            "title": "Inputs to the European Data Innovation Board: common trust principles for interconnections in and between cloud–edge ecosystems, including data spaces",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original report title and cochair TNO confirmed by TNO repository record, European Alliance cloud-edge document listing, and Commission 8 July 2025 original release; Commission summarises specific trust-component gaps."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Strand A Route 2 borderline: source-grounded European standards and digital-infrastructure capability assessment, but its full technical underlying report was not independently examined and recommendations are not outcomes."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2025-07-08"
+        },
+        "unset": [],
+        "reason": "Commission first-party coverage of this specific Alliance input is dated 8 July 2025; source catalogue lists July 2025, not scanner placeholder 1 January 2026."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "European cloud-edge group identifies gaps in trusted data-sharing standards",
+      "reader_what": "A European cloud-edge industry group identifies unresolved trust and interoperability issues across cloud-edge ecosystems and EU data spaces.",
+      "reader_why": "These proposals concern European technological infrastructure and rule-setting needed for interoperable innovation data spaces.",
+      "reader_more": "A European cloud-edge industry group identifies unresolved trust and interoperability issues across cloud-edge ecosystems and EU data spaces. Alliance expert-group input on technical, organisational, regulatory and ethical trust components, officially described by the European Commission. Only the issuing body’s substantive synopsis and report identity were verified; evidence does not establish implemented standards or their effectiveness.",
+      "deep_analysis": {
+        "work_kind": "official issuer summary",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "A European cloud-edge industry group identifies unresolved trust and interoperability issues across cloud-edge ecosystems and EU data spaces.",
+        "method_or_basis": "Alliance expert-group input on technical, organisational, regulatory and ethical trust components, officially described by the European Commission.",
+        "qualification": "Only the issuing body’s substantive synopsis and report identity were verified; evidence does not establish implemented standards or their effectiveness.",
+        "radar_relevance": "Strand A Route 2 borderline: source-grounded European standards and digital-infrastructure capability assessment, but its full technical underlying report was not independently examined and recommendations are not outcomes.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "digital.governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Alliance for Industrial Data, Edge and Cloud",
+            "class": "other"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2025",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "Only the issuing body’s substantive synopsis and report identity were verified; evidence does not establish implemented standards or their effectiveness.",
+          "text": "A European cloud-edge industry group identifies unresolved trust and interoperability issues across cloud-edge ecosystems and EU data spaces.",
+          "confidence": "medium",
+          "status_date_precision": "year"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:c151ffc3c0aebf95",
+      "source_hash": "1d161315",
+      "identity_hash": "2339564b0c634919",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matched source or its canonical article https://or.niscpr.res.in/index.php/SD/article/download/34478/6275; source topic and identity verified."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "First-party Science Diplomacy/CSIR PDF pages identify the essay, Clara Solé and January–March 2026. Text is an Insight reflection on conference debates, not an empirical or systematic review. Source: https://or.niscpr.res.in/index.php/SD/article/download/34478/6275"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "primary_journal_essay",
+            "url": "https://or.niscpr.res.in/index.php/SD/article/download/34478/6275",
+            "title": "European Science Diplomacy at a Moment of Strategic Reckoning",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "First-party Science Diplomacy/CSIR PDF pages identify the essay, Clara Solé and January–March 2026. Text is an Insight reflection on conference debates, not an empirical or systematic review."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Strand A Routes 1–3 checked: European research diplomacy and openness are central themes, but the source is a conference-reflection Insight without a completed evidence-led study or assessed research-system trajectory."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "Conference reflection on European science diplomacy",
+      "reader_what": "An Insight essay reflects on strategic openness, research security and the 2026 European science-diplomacy conference.",
+      "reader_why": "",
+      "reader_more": "An Insight essay reflects on strategic openness, research security and the 2026 European science-diplomacy conference. Authorial commentary on the second European Science Diplomacy Conference, published in Science Diplomacy January–March 2026. The source reports conference impressions and policy assertions, not an independently documented systematic assessment of a European R&I mechanism.",
+      "deep_analysis": {
+        "work_kind": "primary journal essay",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "An Insight essay reflects on strategic openness, research security and the 2026 European science-diplomacy conference.",
+        "method_or_basis": "Authorial commentary on the second European Science Diplomacy Conference, published in Science Diplomacy January–March 2026.",
+        "qualification": "The source reports conference impressions and policy assertions, not an independently documented systematic assessment of a European R&I mechanism.",
+        "radar_relevance": "Strand A Routes 1–3 checked: European research diplomacy and openness are central themes, but the source is a conference-reflection Insight without a completed evidence-led study or assessed research-system trajectory.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:a552b2353ccf0472",
+      "source_hash": "00d3e65b",
+      "identity_hash": "06981a364aa15694",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Reader-facing source https://doi.org/10.64153/iqne5739 identified the title; substantive source body supplied separately or recovered at https://www.bruegel.org/analysis/chinas-artificial-intelligence-goals-and-strategic-choices-europe"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Exact Bruegel Analysis 24/2026 title, coauthors and 10 September 2026 date verified via Bruegel research references, independent research bulletins and lead-author contemporaneous commentary; cached EDA defence report does not match and was excluded. Source: https://www.bruegel.org/analysis/chinas-artificial-intelligence-goals-and-strategic-choices-europe"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_analysis",
+            "url": "https://www.bruegel.org/analysis/chinas-artificial-intelligence-goals-and-strategic-choices-europe",
+            "title": "China’s artificial intelligence goals and strategic choices for Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Exact Bruegel Analysis 24/2026 title, coauthors and 10 September 2026 date verified via Bruegel research references, independent research bulletins and lead-author contemporaneous commentary; cached EDA defence report does not match and was excluded. Earlier scanner cache is not used for this decision."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Strand A Routes 1 and 2: substantive technology-competitiveness, AI infrastructure dependence and international standard-setting analysis for Europe; the scanner cache was an unrelated defence document and was discarded."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-09-10"
+        },
+        "unset": [],
+        "reason": "Actual Bruegel analysis appeared 10 September 2026, not the scanner placeholder January 1."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "Chinese AI models and standards could create new European dependencies",
+      "reader_what": "Bruegel examines China’s open-model expansion, computing constraints and standards strategy, recommending European governance participation and supplier flexibility.",
+      "reader_why": "The analysis directly evaluates emerging Chinese model, compute and standards dependencies affecting Europe’s AI technology position.",
+      "reader_more": "Bruegel examines China’s open-model expansion, computing constraints and standards strategy, recommending European governance participation and supplier flexibility. Bruegel Analysis 24/2026 policy evidence synthesis by Alicia García-Herrero and Théo Storella, supplemented by the lead author’s summary. The proposed EU responses are research recommendations; predicted Chinese influence or supplier lock-in is not yet a measured EU outcome.",
+      "deep_analysis": {
+        "work_kind": "publisher analysis",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "Bruegel examines China’s open-model expansion, computing constraints and standards strategy, recommending European governance participation and supplier flexibility.",
+        "method_or_basis": "Bruegel Analysis 24/2026 policy evidence synthesis by Alicia García-Herrero and Théo Storella, supplemented by the lead author’s summary.",
+        "qualification": "The proposed EU responses are research recommendations; predicted Chinese influence or supplier lock-in is not yet a measured EU outcome.",
+        "radar_relevance": "Strand A Routes 1 and 2: substantive technology-competitiveness, AI infrastructure dependence and international standard-setting analysis for Europe; the scanner cache was an unrelated defence document and was discarded.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Bruegel",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-09-10",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The proposed EU responses are research recommendations; predicted Chinese influence or supplier lock-in is not yet a measured EU outcome.",
+          "text": "Bruegel examines China’s open-model expansion, computing constraints and standards strategy, recommending European governance participation and supplier flexibility.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:75bc7ce09de60523",
+      "source_hash": "e48bca7b",
+      "identity_hash": "8a69b158226f1b48",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Reader-facing source https://doi.org/10.1007/978-3-032-23622-7_5 identified the title; substantive source body supplied separately or recovered at https://link.springer.com/chapter/10.1007/978-3-032-23622-7_5"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Original Springer chapter DOI 10.1007/978-3-032-23622-7_5 and substantial chapter excerpt confirm regional scope and focus. Source: https://link.springer.com/chapter/10.1007/978-3-032-23622-7_5"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_book_chapter",
+            "url": "https://link.springer.com/chapter/10.1007/978-3-032-23622-7_5",
+            "title": "AI Governance in Defence Policy: A Singaporean and ASEAN Perspective on Ethical Frameworks and Regional Cooperation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original Springer chapter DOI 10.1007/978-3-032-23622-7_5 and substantial chapter excerpt confirm regional scope and focus."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Strand A Routes 1–3 checked: the governance analysis is centrally Singaporean/ASEAN rather than a European R&I system or Europe’s strategic technology position; incidental EU comparisons do not qualify."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "Singapore and ASEAN defence AI ethics chapter",
+      "reader_what": "A book chapter discusses AI in defence governance from Singaporean and ASEAN military, ethical and regulatory perspectives.",
+      "reader_why": "",
+      "reader_more": "A book chapter discusses AI in defence governance from Singaporean and ASEAN military, ethical and regulatory perspectives. Publisher-linked academic book chapter on Asia-Pacific defence policy with original PDF excerpt provided in the package. European policies are possible comparators, not the research subject or a measured European capability relation.",
+      "deep_analysis": {
+        "work_kind": "publisher book chapter",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "A book chapter discusses AI in defence governance from Singaporean and ASEAN military, ethical and regulatory perspectives.",
+        "method_or_basis": "Publisher-linked academic book chapter on Asia-Pacific defence policy with original PDF excerpt provided in the package.",
+        "qualification": "European policies are possible comparators, not the research subject or a measured European capability relation.",
+        "radar_relevance": "Strand A Routes 1–3 checked: the governance analysis is centrally Singaporean/ASEAN rather than a European R&I system or Europe’s strategic technology position; incidental EU comparisons do not qualify.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:bf7859630395e4ed",
+      "source_hash": "ed55311a",
+      "identity_hash": "c152eefc10d89b15",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Reader-facing source https://doi.org/10.1007/s11192-025-05469-x identified the title; substantive source body supplied separately or recovered at https://link.springer.com/article/10.1007/s11192-025-05469-x"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Full open-access Springer Scientometrics original text, DOI 10.1007/s11192-025-05469-x, published 12 November 2025; original PDF excerpt and publisher agree on authors and conditional efficiency design. Source: https://link.springer.com/article/10.1007/s11192-025-05469-x"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://link.springer.com/article/10.1007/s11192-025-05469-x",
+            "title": "Research and third mission efficiency in UK universities: assessing the role of European Framework Programmes",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Full open-access Springer Scientometrics original text, DOI 10.1007/s11192-025-05469-x, published 12 November 2025; original PDF excerpt and publisher agree on authors and conditional efficiency design."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Strand A Route 3: empirical research about European framework research funding, university effectiveness and knowledge-transfer performance; no strategic prediction required."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2025-11-12"
+        },
+        "unset": [],
+        "reason": "Springer original article has online publication date 12 November 2025, not scanner month 1 December 2025."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "European Framework funding is associated with UK university research efficiency",
+      "reader_what": "A study of UK universities in 2014–2021 assesses the association of EU Framework Programme participation with research and knowledge-transfer efficiency.",
+      "reader_why": "European framework participation and university research/third-mission performance are directly measured R&I-system mechanisms.",
+      "reader_more": "A study of UK universities in 2014–2021 assesses the association of EU Framework Programme participation with research and knowledge-transfer efficiency. Robust conditional nonparametric efficiency frontier analysis of universities’ research and third-mission inputs and outputs. Associations should not be interpreted as a causal effect of EU funding; study concerns UK universities in a historical period.",
+      "deep_analysis": {
+        "work_kind": "publisher full text",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "A study of UK universities in 2014–2021 assesses the association of EU Framework Programme participation with research and knowledge-transfer efficiency.",
+        "method_or_basis": "Robust conditional nonparametric efficiency frontier analysis of universities’ research and third-mission inputs and outputs.",
+        "qualification": "Associations should not be interpreted as a causal effect of EU funding; study concerns UK universities in a historical period.",
+        "radar_relevance": "Strand A Route 3: empirical research about European framework research funding, university effectiveness and knowledge-transfer performance; no strategic prediction required.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.system_efficiency",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Anna Rita Dipierro and Pierluigi Toma",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2025-11-12",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Associations should not be interpreted as a causal effect of EU funding; study concerns UK universities in a historical period.",
+          "text": "A study of UK universities in 2014–2021 assesses the association of EU Framework Programme participation with research and knowledge-transfer efficiency.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:a44ae4459fc945ab",
+      "source_hash": "97a4fcc3",
+      "identity_hash": "9db75879055b552e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matched source or its canonical article https://www.adjuris.ro/revista/articole/An14nr1/1.pdf; source topic and identity verified."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Journal PDF supplied with bibliographic title and substantive text; central subject is insolvency law and practice, not European research-system mechanisms. Source: https://www.adjuris.ro/revista/articole/An14nr1/1.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "original_journal_full_text",
+            "url": "https://www.adjuris.ro/revista/articole/An14nr1/1.pdf",
+            "title": "At the Intersection of Technological Innovations and Geopolitical and Economic Turmoil. Echoes of Insolvency Law and Practice",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Journal PDF supplied with bibliographic title and substantive text; central subject is insolvency law and practice, not European research-system mechanisms."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Strand A Routes 1–3 checked: broad legal-business responses to technological disruption do not amount to European R&I-system research, strategic tech-capability evidence or measured R&I policy trajectory."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "General insolvency-law discussion of technological change",
+      "reader_what": "A law journal article examines interactions of insolvency law, technology and geopolitical economic turbulence.",
+      "reader_why": "",
+      "reader_more": "A law journal article examines interactions of insolvency law, technology and geopolitical economic turbulence. Legal doctrinal analysis using examples of technological change and business distress in the original article text. No central European research funding, science governance, innovation capability or R&I system evidence is supplied.",
+      "deep_analysis": {
+        "work_kind": "original journal full text",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "A law journal article examines interactions of insolvency law, technology and geopolitical economic turbulence.",
+        "method_or_basis": "Legal doctrinal analysis using examples of technological change and business distress in the original article text.",
+        "qualification": "No central European research funding, science governance, innovation capability or R&I system evidence is supplied.",
+        "radar_relevance": "Strand A Routes 1–3 checked: broad legal-business responses to technological disruption do not amount to European R&I-system research, strategic tech-capability evidence or measured R&I policy trajectory.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:1504d805ca57af92",
+      "source_hash": "a66c2293",
+      "identity_hash": "5f65f4a421317e46",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matched source or its canonical article https://ecipe.org/insights/cloud-services-and-export-performance/; source topic and identity verified."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "ECIPE September 2024 original article and supplied full text include Swedish firm comparisons, 40% vs 15% exporter rates and export-market correlations; not causal research-ecosystem evidence. Source: https://ecipe.org/insights/cloud-services-and-export-performance/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "research_institution_full_text",
+            "url": "https://ecipe.org/insights/cloud-services-and-export-performance/",
+            "title": "Cloud Services and Export Performance: Evidence and Implications for EU Policy",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "ECIPE September 2024 original article and supplied full text include Swedish firm comparisons, 40% vs 15% exporter rates and export-market correlations; not causal research-ecosystem evidence."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Strand A Routes 1–3 checked: European company cloud uptake and exporting are business/trade outcomes; no central R&I funding, research system, indigenous cloud capability or technology dependence is evaluated."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "Swedish companies’ cloud adoption and export performance",
+      "reader_what": "A trade-policy discussion finds Swedish firms using cloud services tend to export to more destinations and with greater intensity.",
+      "reader_why": "",
+      "reader_more": "A trade-policy discussion finds Swedish firms using cloud services tend to export to more destinations and with greater intensity. National Board of Trade firm-level statistical analysis summarised in the first-party ECIPE article by Hannes Berggren. The study observes firm digital adoption and trade, not Europe’s research-system performance or domestic technological development capacity.",
+      "deep_analysis": {
+        "work_kind": "research institution full text",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "A trade-policy discussion finds Swedish firms using cloud services tend to export to more destinations and with greater intensity.",
+        "method_or_basis": "National Board of Trade firm-level statistical analysis summarised in the first-party ECIPE article by Hannes Berggren.",
+        "qualification": "The study observes firm digital adoption and trade, not Europe’s research-system performance or domestic technological development capacity.",
+        "radar_relevance": "Strand A Routes 1–3 checked: European company cloud uptake and exporting are business/trade outcomes; no central R&I funding, research system, indigenous cloud capability or technology dependence is evaluated.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:e8e473d485840e68",
+      "source_hash": "8546fed9",
+      "identity_hash": "bc8d482bd8ac00ea",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matched source or its canonical article https://cdn.ceps.eu/wp-content/uploads/2024/08/AI_Ukraine_v_1.1-pages-lr.pdf; source topic and identity verified."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Original August 2024 PDF front matter identifies UNIDO as commissioning publisher and CEPS as preparer; foreword explicitly cites publications, patents, VC data, Kyiv/Manchester/Brussels comparison and EU accession relevance. Source: https://cdn.ceps.eu/wp-content/uploads/2024/08/AI_Ukraine_v_1.1-pages-lr.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_report",
+            "url": "https://cdn.ceps.eu/wp-content/uploads/2024/08/AI_Ukraine_v_1.1-pages-lr.pdf",
+            "title": "Mapping the use of artificial intelligence in priority sectors and the competitiveness of Ukraine – CEPS",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original August 2024 PDF front matter identifies UNIDO as commissioning publisher and CEPS as preparer; foreword explicitly cites publications, patents, VC data, Kyiv/Manchester/Brussels comparison and EU accession relevance."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Strand A Routes 1 and 2: substantive research and investment indicators for Ukrainian AI capability directly compared with EU hubs and linked by authors to EU enlargement and strategic technology position."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "United Nations Industrial Development Organization (UNIDO)"
+        },
+        "unset": [],
+        "reason": "The official original report copyright, foreword and acknowledgement identify UNIDO as issuing publisher and CEPS as the research contractor."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "Ukraine’s AI innovation capacity matters for prospective EU integration",
+      "reader_what": "UNIDO and CEPS map Ukrainian AI publications, patents and startup investment, identifying Kyiv as a significant European AI hub.",
+      "reader_why": "The evidence assesses a prospective EU member’s AI innovation capability and its possible integration into European technology capacity.",
+      "reader_more": "UNIDO and CEPS map Ukrainian AI publications, patents and startup investment, identifying Kyiv as a significant European AI hub. UNIDO-commissioned CEPS analysis of publications, patents, venture capital and priority sectors, supported by original report text. The report describes Ukrainian potential and accession-related opportunity, not realised EU integration or causally estimated gains.",
+      "deep_analysis": {
+        "work_kind": "official report",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "UNIDO and CEPS map Ukrainian AI publications, patents and startup investment, identifying Kyiv as a significant European AI hub.",
+        "method_or_basis": "UNIDO-commissioned CEPS analysis of publications, patents, venture capital and priority sectors, supported by original report text.",
+        "qualification": "The report describes Ukrainian potential and accession-related opportunity, not realised EU integration or causally estimated gains.",
+        "radar_relevance": "Strand A Routes 1 and 2: substantive research and investment indicators for Ukrainian AI capability directly compared with EU hubs and linked by authors to EU enlargement and strategic technology position.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "innovation.regional_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "UNIDO with CEPS research team",
+            "class": "other"
+          },
+          "mechanism": "evaluates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2024-08-27",
+          "scope": {
+            "level": "associated_country",
+            "countries": [
+              "UA"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "The report describes Ukrainian potential and accession-related opportunity, not realised EU integration or causally estimated gains.",
+          "text": "UNIDO and CEPS map Ukrainian AI publications, patents and startup investment, identifying Kyiv as a significant European AI hub.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:fd1db7c44471a569",
+      "source_hash": "5fcc2b50",
+      "identity_hash": "760ec1d766f8b6fb",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Reader-facing source https://cdn.ceps.eu/wp-content/uploads/2024/07/2024-10_ID-A_Towards-a-European-large-scale-initiative-on-Artificial-Intelligence.pdf identified the title; substantive source body supplied separately or recovered at https://www.ceps.eu/ceps-publications/towards-a-european-large-scale-initiative-on-artificial-intelligence/"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Original CEPS In-depth Analysis July 2024 by Andrea Renda, with 17,944-character original PDF excerpt documenting AI investment gaps and research initiative design. Source: https://www.ceps.eu/ceps-publications/towards-a-european-large-scale-initiative-on-artificial-intelligence/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "research_institution_full_text",
+            "url": "https://www.ceps.eu/ceps-publications/towards-a-european-large-scale-initiative-on-artificial-intelligence/",
+            "title": "Towards a European large-scale initiative on Artificial Intelligence – CEPS",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original CEPS In-depth Analysis July 2024 by Andrea Renda, with 17,944-character original PDF excerpt documenting AI investment gaps and research initiative design."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Strand A Routes 1, 2 and 3: completed analysis of EU AI research-system capacity, innovation financing and prospective infrastructure/governance mechanisms."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "CEPS analyses a proposed pan-European AI research and infrastructure initiative",
+      "reader_what": "CEPS compares CERN-for-AI, AI moonshot and digital infrastructure fund proposals, assessing a common European AI research initiative.",
+      "reader_why": "The report examines Europe’s AI investment gap, research infrastructure and governance options for improving domestic technology capacity.",
+      "reader_more": "CEPS compares CERN-for-AI, AI moonshot and digital infrastructure fund proposals, assessing a common European AI research initiative. Detailed CEPS evidence synthesis and design analysis by Andrea Renda, drawing on AI investment statistics and 2024 institutional proposals. A proposed initiative, not a delivered EU funding programme or proof of future benefits; investment comparisons are historical.",
+      "deep_analysis": {
+        "work_kind": "research institution full text",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "CEPS compares CERN-for-AI, AI moonshot and digital infrastructure fund proposals, assessing a common European AI research initiative.",
+        "method_or_basis": "Detailed CEPS evidence synthesis and design analysis by Andrea Renda, drawing on AI investment statistics and 2024 institutional proposals.",
+        "qualification": "A proposed initiative, not a delivered EU funding programme or proof of future benefits; investment comparisons are historical.",
+        "radar_relevance": "Strand A Routes 1, 2 and 3: completed analysis of EU AI research-system capacity, innovation financing and prospective infrastructure/governance mechanisms.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "CEPS",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "advocates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2024-07-11",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "A proposed initiative, not a delivered EU funding programme or proof of future benefits; investment comparisons are historical.",
+          "text": "CEPS compares CERN-for-AI, AI moonshot and digital infrastructure fund proposals, assessing a common European AI research initiative.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:6b762358ffa446d6",
+      "source_hash": "542ec3c9",
+      "identity_hash": "697646c7d557befc",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Reader-facing source https://merics.org/sites/default/files/2024-04/Hmaidi-Huawei%20Supply%20Chain-04.05.24.pdf identified the title; substantive source body supplied separately or recovered at https://merics.org/en/report/huawei-quietly-dominating-chinas-semiconductor-supply-chain"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "MERICS Antonia Hmaidi April 2024 original report examines Huawei’s Chinese supply-chain control, domestic chip makers and US restrictions; European references are sparse in supplied full excerpt. Source: https://merics.org/en/report/huawei-quietly-dominating-chinas-semiconductor-supply-chain"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "research_institution_full_text",
+            "url": "https://merics.org/en/report/huawei-quietly-dominating-chinas-semiconductor-supply-chain",
+            "title": "Huawei is quietly dominating China’s semiconductor supply chain",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "MERICS Antonia Hmaidi April 2024 original report examines Huawei’s Chinese supply-chain control, domestic chip makers and US restrictions; European references are sparse in supplied full excerpt."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Strand A Routes 1–3 checked: while the China chip report touches EU technology dependencies, Europe’s research/innovation capability or EU supply-chain relationship is not its substantive analytical object; relevant European references are peripheral."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "China’s Huawei-led semiconductor supply-chain buildout",
+      "reader_what": "MERICS investigates Huawei’s domestic Chinese semiconductor production network and policy-backed push for chip self-sufficiency.",
+      "reader_why": "",
+      "reader_more": "MERICS investigates Huawei’s domestic Chinese semiconductor production network and policy-backed push for chip self-sufficiency. Original April 2024 MERICS research report and referenced supply-chain research; substantial original PDF excerpt supplied. Europe is mentioned in export-control and EU risk-screening context, but the study primarily documents China’s domestic ecosystem.",
+      "deep_analysis": {
+        "work_kind": "research institution full text",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "MERICS investigates Huawei’s domestic Chinese semiconductor production network and policy-backed push for chip self-sufficiency.",
+        "method_or_basis": "Original April 2024 MERICS research report and referenced supply-chain research; substantial original PDF excerpt supplied.",
+        "qualification": "Europe is mentioned in export-control and EU risk-screening context, but the study primarily documents China’s domestic ecosystem.",
+        "radar_relevance": "Strand A Routes 1–3 checked: while the China chip report touches EU technology dependencies, Europe’s research/innovation capability or EU supply-chain relationship is not its substantive analytical object; relevant European references are peripheral.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.telpol.2026.103334",
+      "source_hash": "664a47a7",
+      "identity_hash": "98c0626626956ee6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Original publisher DOI can be bibliographically confirmed, but access to exact 2026 journal full text was blocked. Examined the authors’ 2025 institutional preprint for underlying framework, without substituting its results for journal findings. Original: https://doi.org/10.1016/j.telpol.2026.103334"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Telecommunications Policy exact title/date/three coauthors independently matched in current journal indexes; University Politécnica de Madrid repository https://oa.upm.es/92000/ contains earlier framework by same authors. Journal-specific numbers withheld because paper body not verified. Source: https://doi.org/10.1016/j.telpol.2026.103334"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_bibliography_plus_author_preprint",
+            "url": "https://doi.org/10.1016/j.telpol.2026.103334",
+            "title": "A quantitative framework for assessing digital sovereignty",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Telecommunications Policy exact title/date/three coauthors independently matched in current journal indexes; University Politécnica de Madrid repository https://oa.upm.es/92000/ contains earlier framework by same authors. Journal-specific numbers withheld because paper body not verified."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Strand A Route 2 borderline evidence-depth case: a matching peer-reviewed work and author preprint concern comparative EU technology capability, but only the prior first-party framework was accessible in substance."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "Digital-sovereignty measurement exposes Europe’s technology-capacity gap",
+      "reader_what": "A digital-sovereignty index contrasts technology capabilities and institutional control, finding different US, Chinese and EU strengths.",
+      "reader_why": "Directly concerns Europe’s indigenous technological capabilities and its institutional capacity to control digital systems.",
+      "reader_more": "A digital-sovereignty index contrasts technology capabilities and institutional control, finding different US, Chinese and EU strengths. Cross-country multidimensional digital-sovereignty assessment; a 2025 open university preprint by the identical three authors describes the underlying framework. The 2026 journal text was not independently available; exact numeric results from scanner abstracts remain unverified across versions.",
+      "deep_analysis": {
+        "work_kind": "publisher bibliography plus author preprint",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "A digital-sovereignty index contrasts technology capabilities and institutional control, finding different US, Chinese and EU strengths.",
+        "method_or_basis": "Cross-country multidimensional digital-sovereignty assessment; a 2025 open university preprint by the identical three authors describes the underlying framework.",
+        "qualification": "The 2026 journal text was not independently available; exact numeric results from scanner abstracts remain unverified across versions.",
+        "radar_relevance": "Strand A Route 2 borderline evidence-depth case: a matching peer-reviewed work and author preprint concern comparative EU technology capability, but only the prior first-party framework was accessible in substance.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "digital.sovereignty",
+          "secondary_objects": [],
+          "actor": {
+            "name": "María del Pilar Rodríguez Pita and coauthors",
+            "class": "university_group"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-10-23",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The 2026 journal text was not independently available; exact numeric results from scanner abstracts remain unverified across versions.",
+          "text": "A digital-sovereignty index contrasts technology capabilities and institutional control, finding different US, Chinese and EU strengths.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:9dd163184902d639",
+      "source_hash": "16d820c0",
+      "identity_hash": "dd3131add510cbf7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matched source or its canonical article https://www.nsf.gov/funding/opportunities/dcl-opportunity-active-efri-erc-awardees-apply-supplemental/nsf17-141; source topic and identity verified."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "NSF original 2017 DCL details EFRI/Engineering Research Centers support and no European Council counterpart; recovered full canonical NSF 17-141 URL from incomplete source link. Source: https://www.nsf.gov/funding/opportunities/dcl-opportunity-active-efri-erc-awardees-apply-supplemental/nsf17-141"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_funding_notice",
+            "url": "https://www.nsf.gov/funding/opportunities/dcl-opportunity-active-efri-erc-awardees-apply-supplemental/nsf17-141",
+            "title": "Opportunity for Active EFRI and ERC Awardees to Apply for Supplemental Funding through the Research Experience and Mentoring (REM) Program",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "NSF original 2017 DCL details EFRI/Engineering Research Centers support and no European Council counterpart; recovered full canonical NSF 17-141 URL from incomplete source link."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Strand A Routes 1–3 checked: US domestic US-NSF research grants, without European R&I scope or funding relationship; the apparent ERC European cue is a misleading acronym match."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "NSF supplemental funding for US EFRI and Engineering Research Centers",
+      "reader_what": "The US National Science Foundation invites existing EFRI and US Engineering Research Center awardees to seek supplemental funding.",
+      "reader_why": "",
+      "reader_more": "The US National Science Foundation invites existing EFRI and US Engineering Research Center awardees to seek supplemental funding. First-party NSF Dear Colleague Letter NSF 17-141 and original call text from 2017. Here ERC means US Engineering Research Centers, not the EU European Research Council.",
+      "deep_analysis": {
+        "work_kind": "official funding notice",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "The US National Science Foundation invites existing EFRI and US Engineering Research Center awardees to seek supplemental funding.",
+        "method_or_basis": "First-party NSF Dear Colleague Letter NSF 17-141 and original call text from 2017.",
+        "qualification": "Here ERC means US Engineering Research Centers, not the EU European Research Council.",
+        "radar_relevance": "Strand A Routes 1–3 checked: US domestic US-NSF research grants, without European R&I scope or funding relationship; the apparent ERC European cue is a misleading acronym match.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:14b7cd87d2690542",
+      "source_hash": "bb342546",
+      "identity_hash": "03ae85cd9c8460b6",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Reader-facing source https://doi.org/10.1007/s11187-016-9757-2 identified the title; substantive source body supplied separately or recovered at https://openaccess.city.ac.uk/17927/"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "City University London original accepted manuscript, publisher DOI 10.1007/s11187-016-9757-2, journal Small Business Economics 47:589–607, describes sample of researchers at 24 European universities and specific TTO-awareness outcome. Source: https://openaccess.city.ac.uk/17927/"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "institutional_full_text",
+            "url": "https://openaccess.city.ac.uk/17927/",
+            "title": "Are researchers deliberately bypassing the technology transfer office? An analysis of TTO awareness",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "City University London original accepted manuscript, publisher DOI 10.1007/s11187-016-9757-2, journal Small Business Economics 47:589–607, describes sample of researchers at 24 European universities and specific TTO-awareness outcome."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Strand A Route 3: empirical work on researchers’ awareness of university TTOs, a recognised European R&I transfer and institutional-governance mechanism."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "European university technology-transfer offices are often unknown to researchers",
+      "reader_what": "A study of researchers at 24 European universities examines awareness of technology-transfer offices and explains apparent office bypassing.",
+      "reader_why": "Measures an operational European research-to-market transfer mechanism, qualifying as R&I-system evidence independent of geopolitical framing.",
+      "reader_more": "A study of researchers at 24 European universities examines awareness of technology-transfer offices and explains apparent office bypassing. University researcher survey and multivariate analysis of TTO awareness, documented in the authors’ accepted manuscript. Cross-sectional associations cannot establish that greater TTO awareness necessarily improves commercialisation outcomes.",
+      "deep_analysis": {
+        "work_kind": "institutional full text",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "A study of researchers at 24 European universities examines awareness of technology-transfer offices and explains apparent office bypassing.",
+        "method_or_basis": "University researcher survey and multivariate analysis of TTO awareness, documented in the authors’ accepted manuscript.",
+        "qualification": "Cross-sectional associations cannot establish that greater TTO awareness necessarily improves commercialisation outcomes.",
+        "radar_relevance": "Strand A Route 3: empirical work on researchers’ awareness of university TTOs, a recognised European R&I transfer and institutional-governance mechanism.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.knowledge_transfer",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Annelore Huyghe, Mirjam Knockaert, Evila Piva and Mike Wright",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2016-06-28",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Cross-sectional associations cannot establish that greater TTO awareness necessarily improves commercialisation outcomes.",
+          "text": "A study of researchers at 24 European universities examines awareness of technology-transfer offices and explains apparent office bypassing.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:26ef42c0c7215f90",
+      "source_hash": "641ea39d",
+      "identity_hash": "aed192a46c0b728d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matched source or its canonical article https://link.springer.com/chapter/10.1007/978-94-017-9573-9_11; source topic and identity verified."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Springer original chapter DOI 10.1007/978-94-017-9573-9_11, publisher substantive preview and source package text identify European BBMRI-ERIC governance, biobanking withdrawal conditions, harmonisation and partner states. Source: https://link.springer.com/chapter/10.1007/978-94-017-9573-9_11"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_substantive_chapter",
+            "url": "https://link.springer.com/chapter/10.1007/978-94-017-9573-9_11",
+            "title": "Governing Biobanks Through a European Infrastructure",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Springer original chapter DOI 10.1007/978-94-017-9573-9_11, publisher substantive preview and source package text identify European BBMRI-ERIC governance, biobanking withdrawal conditions, harmonisation and partner states."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Strand A Routes 2 and 3: substantive analysis of an identifiable pan-European research infrastructure and its cross-border data, ethical and institutional rules."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "European biobank research infrastructure requires shared legal governance",
+      "reader_what": "A research chapter examines governance of the pan-European BBMRI biobank infrastructure, including consent, data withdrawal and national coordination.",
+      "reader_why": "The BBMRI infrastructure directly organises European biomedical research resources and cross-border governance.",
+      "reader_more": "A research chapter examines governance of the pan-European BBMRI biobank infrastructure, including consent, data withdrawal and national coordination. Legal and institutional case analysis of BBMRI preparatory work, ERIC governance arrangements and ethical/legal/societal challenges. Chapter describes infrastructure arrangements and issues circa 2015; it cannot establish later success or Europe-wide harmonisation.",
+      "deep_analysis": {
+        "work_kind": "publisher substantive chapter",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "A research chapter examines governance of the pan-European BBMRI biobank infrastructure, including consent, data withdrawal and national coordination.",
+        "method_or_basis": "Legal and institutional case analysis of BBMRI preparatory work, ERIC governance arrangements and ethical/legal/societal challenges.",
+        "qualification": "Chapter describes infrastructure arrangements and issues circa 2015; it cannot establish later success or Europe-wide harmonisation.",
+        "radar_relevance": "Strand A Routes 2 and 3: substantive analysis of an identifiable pan-European research infrastructure and its cross-border data, ethical and institutional rules.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Emmanuelle Rial-Sebbag and Anne Cambon-Thomsen",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2015",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Chapter describes infrastructure arrangements and issues circa 2015; it cannot establish later success or Europe-wide harmonisation.",
+          "text": "A research chapter examines governance of the pan-European BBMRI biobank infrastructure, including consent, data withdrawal and national coordination.",
+          "confidence": "high",
+          "status_date_precision": "year"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:c29d70c5d07e16e4",
+      "source_hash": "8b217699",
+      "identity_hash": "27bf3f47490f364d",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matched source or its canonical article https://www.sciencedirect.com/science/article/pii/S0160791X24003063; source topic and identity verified."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Elsevier Technology in Society volume 80 (March 2025), 102758, DOI 10.1016/j.techsoc.2024.102758; publisher full text and highlights describe literature review, 53 recovered studies and seven design dimensions. Source: https://www.sciencedirect.com/science/article/pii/S0160791X24003063"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_full_text",
+            "url": "https://www.sciencedirect.com/science/article/pii/S0160791X24003063",
+            "title": "Theoretical dimensions for integrating research on anticipatory governance, scientific foresight and sustainable S&T public policy design",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Elsevier Technology in Society volume 80 (March 2025), 102758, DOI 10.1016/j.techsoc.2024.102758; publisher full text and highlights describe literature review, 53 recovered studies and seven design dimensions."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_TRANSFERABLE_METHOD",
+        "reason": "Strand B: genuinely constructed transferable integration framework connecting foresight and policy design, rather than a domain-specific reuse of existing forecasting tools."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "Seven dimensions integrate scientific foresight with anticipatory policy governance",
+      "reader_what": "A systematic review of 53 articles develops seven dimensions linking scientific foresight, anticipatory governance and S&T policy design.",
+      "reader_why": "It offers a reusable conceptual architecture for forward-looking research and technology policy intelligence.",
+      "reader_more": "A systematic review of 53 articles develops seven dimensions linking scientific foresight, anticipatory governance and S&T policy design. Systematic literature review and qualitative category development from 53 articles, yielding an emerging seven-dimension governance design framework. The framework’s building blocks are proposed for further testing; no demonstrated implementation impact or predictive accuracy is claimed.",
+      "deep_analysis": {
+        "work_kind": "publisher full text",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "A systematic review of 53 articles develops seven dimensions linking scientific foresight, anticipatory governance and S&T policy design.",
+        "method_or_basis": "Systematic literature review and qualitative category development from 53 articles, yielding an emerging seven-dimension governance design framework.",
+        "qualification": "The framework’s building blocks are proposed for further testing; no demonstrated implementation impact or predictive accuracy is claimed.",
+        "radar_relevance": "Strand B: genuinely constructed transferable integration framework connecting foresight and policy design, rather than a domain-specific reuse of existing forecasting tools.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.anticipatory_governance",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Mateus Panizzon and Raquel Janissek-Muniz",
+            "class": "university_group"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2025-03-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The framework’s building blocks are proposed for further testing; no demonstrated implementation impact or predictive accuracy is claimed.",
+          "text": "A systematic review of 53 articles develops seven dimensions linking scientific foresight, anticipatory governance and S&T policy design.",
+          "confidence": "high",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMihAFBVV95cUxPTkh2ek1Gc3lfdzhmdi1xc25PbEt1UHVLMjdXeHN1V1BuLTR3RHhLVDhhWFAxZXdCM3ZrYXA1c05CX1hrTkZabEt2eGUxSGRfQXRZWGdCTFNIZl9iMnVNT3c4UTFoMTZyZmRoTlMxZHJRSzFRSlo4dzV4UkhPRHNtekZGS3I?oc=5",
+      "source_hash": "ac3738df",
+      "identity_hash": "edbb0f940fddd2a0",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Opaque Google News RSS link https://news.google.com/rss/articles/CBMihAFBVV95cUxPTkh2ek1Gc3lfdzhmdi1xc25PbEt1UHVLMjdXeHN1V1BuLTR3RHhLVDhhWFAxZXdCM3ZrYXA1c05CX1hrTkZabEt2eGUxSGRfQXRZWGdCTFNIZl9iMnVNT3c4UT had no substantive source text in supplied package."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Recovered named underlying work by exact headline search: https://www.ft.com/content/cfb2e934-0000-42e6-93a4-4dffa56f11a8"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Financial Times original article by Ian Johnston dated 26 October 2026 identifies MEP vote, €2bn proposed centre, exceptional equity stakes, stockpiles and outstanding Council/member-state approval. Source: https://www.ft.com/content/cfb2e934-0000-42e6-93a4-4dffa56f11a8"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "original_reporting",
+            "url": "https://www.ft.com/content/cfb2e934-0000-42e6-93a4-4dffa56f11a8",
+            "title": "EU weighs mirroring Donald Trump in securing critical minerals",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Financial Times original article by Ian Johnston dated 26 October 2026 identifies MEP vote, €2bn proposed centre, exceptional equity stakes, stockpiles and outstanding Council/member-state approval."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "Strand C: dated parliamentary action would establish new EU strategic-capability finance and raw-materials security instruments, if enacted; the materials dependence for technology is explicitly evidenced."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "EU lawmakers propose a €2 billion critical-minerals investment centre",
+      "reader_what": "European lawmakers backed a proposed Critical Raw Materials Centre able to acquire stakes in mineral projects and coordinate stockpiles.",
+      "reader_why": "Proposed investment and stockpiling instruments would address strategic material inputs for European clean technology, batteries and defence innovation.",
+      "reader_more": "European lawmakers backed a proposed Critical Raw Materials Centre able to acquire stakes in mineral projects and coordinate stockpiles. Financial Times 26 October report on the preceding European Parliament vote and draft Critical Raw Materials Act changes. Parliament’s position is not adopted EU law; member-state agreement and the proposed budget are outstanding.",
+      "deep_analysis": {
+        "work_kind": "original reporting",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "European lawmakers backed a proposed Critical Raw Materials Centre able to acquire stakes in mineral projects and coordinate stockpiles.",
+        "method_or_basis": "Financial Times 26 October report on the preceding European Parliament vote and draft Critical Raw Materials Act changes.",
+        "qualification": "Parliament’s position is not adopted EU law; member-state agreement and the proposed budget are outstanding.",
+        "radar_relevance": "Strand C: dated parliamentary action would establish new EU strategic-capability finance and raw-materials security instruments, if enacted; the materials dependence for technology is explicitly evidenced.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "materials.critical_raw",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Parliament",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-10-26",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "Parliament’s position is not adopted EU law; member-state agreement and the proposed budget are outstanding.",
+          "text": "European lawmakers backed a proposed Critical Raw Materials Centre able to acquire stakes in mineral projects and coordinate stockpiles.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiswFBVV95cUxPRVNYd3p4LWZvSkxDVkJHUVlYQXFTSXVWYlpWTHlYdXp0TzdCd1c0QmplelNUOHVQV1ZrOXVaVnlKZnVDYUFJVHRkZ1Naa1BVSGptQl9Zd0k0Y2paZVhXOXlkRmRSY1BVSkNlcWdsR2d1czJGSHowVVpOVUpVZjdSeTBZa09aNklRTExwOUNqVmFRWmVGTTF2d09mN3RXWUxhMktRX2hnMEhNTEgtME1WUTJtcw?oc=5",
+      "source_hash": "38dac87e",
+      "identity_hash": "37ca794a638b6878",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Opaque Google News RSS link https://news.google.com/rss/articles/CBMiswFBVV95cUxPRVNYd3p4LWZvSkxDVkJHUVlYQXFTSXVWYlpWTHlYdXp0TzdCd1c0QmplelNUOHVQV1ZrOXVaVnlKZnVDYUFJVHRkZ1Naa1BVSGptQl9Zd0k0Y2paZVhXOXlkRm had no substantive source text in supplied package."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Recovered named underlying work by exact headline search: https://euagenda.eu/news/943759"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "EU Agenda preserves the matching 23 October 2026 POLITICO title and supplier/IRIS² tradeoffs; original joint Airbus/Leonardo/Thales MoU is explicitly dated 23 October 2025, with closing conditional and 2027 proposed operation. Source: https://euagenda.eu/news/943759"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_syndicated_summary_and_company_release",
+            "url": "https://euagenda.eu/news/943759",
+            "title": "Europe’s satellite merger tests drive for space independence",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "EU Agenda preserves the matching 23 October 2026 POLITICO title and supplier/IRIS² tradeoffs; original joint Airbus/Leonardo/Thales MoU is explicitly dated 23 October 2025, with closing conditional and 2027 proposed operation."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Strand C: a substantive potential European space-capability change, but the purported new announcement actually occurred 23 October 2025. The October 2026 discussion provides no independently verified fresh decision or completion."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "Satellite-merger coverage revisits a deal first announced in 2025",
+      "reader_what": "A 2026 article discusses the proposed Airbus, Leonardo and Thales space-business combination and implications for EU satellite procurement.",
+      "reader_why": "",
+      "reader_more": "A 2026 article discusses the proposed Airbus, Leonardo and Thales space-business combination and implications for EU satellite procurement. POLITICO article identity and synopsis cross-checked with the three companies’ original 23 October 2025 joint announcement. Original merger MoU was announced in October 2025 and was subject to regulatory approval; article supplies no newly completed 2026 merger milestone.",
+      "deep_analysis": {
+        "work_kind": "publisher syndicated summary and company release",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "A 2026 article discusses the proposed Airbus, Leonardo and Thales space-business combination and implications for EU satellite procurement.",
+        "method_or_basis": "POLITICO article identity and synopsis cross-checked with the three companies’ original 23 October 2025 joint announcement.",
+        "qualification": "Original merger MoU was announced in October 2025 and was subject to regulatory approval; article supplies no newly completed 2026 merger milestone.",
+        "radar_relevance": "Strand C: a substantive potential European space-capability change, but the purported new announcement actually occurred 23 October 2025. The October 2026 discussion provides no independently verified fresh decision or completion.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1093/eurpub/ckag169.654",
+      "source_hash": "4b37cafc",
+      "identity_hash": "040adc0412a6ff75",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matched source or its canonical article https://doi.org/10.1093/eurpub/ckag169.654; source topic and identity verified."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Indexed Oxford University Press European Journal of Public Health 36 Supplement 5, DOI 10.1093/eurpub/ckag169.654, describes five funded studies but no research-system findings. Source: https://doi.org/10.1093/eurpub/ckag169.654"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_conference_abstract",
+            "url": "https://doi.org/10.1093/eurpub/ckag169.654",
+            "title": "X.1.PK.1. Promoting Health in Changing Work Environments: Results from 5 Horizon Europe WISEWORK-C projects",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Indexed Oxford University Press European Journal of Public Health 36 Supplement 5, DOI 10.1093/eurpub/ckag169.654, describes five funded studies but no research-system findings."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Strand A Routes 1–3 checked: workplace interventions and public-health questions are the actual subject, not funding performance, European R&I-system capacity or a strategic technology relationship."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "Conference session on five Horizon Europe workplace-health projects",
+      "reader_what": "A public-health conference contribution describes ongoing projects studying work environments and psychosocial or physical health.",
+      "reader_why": "",
+      "reader_more": "A public-health conference contribution describes ongoing projects studying work environments and psychosocial or physical health. European Journal of Public Health conference supplement abstract; five Horizon Europe funded workplace-health studies are introduced. Horizon funding is the origin of projects, not an analysis of EU R&I funding governance or European research capabilities.",
+      "deep_analysis": {
+        "work_kind": "publisher conference abstract",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "A public-health conference contribution describes ongoing projects studying work environments and psychosocial or physical health.",
+        "method_or_basis": "European Journal of Public Health conference supplement abstract; five Horizon Europe funded workplace-health studies are introduced.",
+        "qualification": "Horizon funding is the origin of projects, not an analysis of EU R&I funding governance or European research capabilities.",
+        "radar_relevance": "Strand A Routes 1–3 checked: workplace interventions and public-health questions are the actual subject, not funding performance, European R&I-system capacity or a strategic technology relationship.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1093/eurpub/ckag169.092",
+      "source_hash": "1affe5d6",
+      "identity_hash": "c4e27d528e88fea4",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matched source or its canonical article https://academic.oup.com/eurpub/article/36/Supplement_5/ckag169.092/8995144; source topic and identity verified."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Oxford European Journal of Public Health Supplement 5 primary abstract DOI 10.1093/eurpub/ckag169.092 identifies RAND Europe and its application of standard Delphi rounds. Source: https://academic.oup.com/eurpub/article/36/Supplement_5/ckag169.092/8995144"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_conference_abstract",
+            "url": "https://academic.oup.com/eurpub/article/36/Supplement_5/ckag169.092/8995144",
+            "title": "The Delphi method in foresight: Building consensus for an ‘ideal’ early cancer care policy framework",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Oxford European Journal of Public Health Supplement 5 primary abstract DOI 10.1093/eurpub/ckag169.092 identifies RAND Europe and its application of standard Delphi rounds."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Strand B: an application of existing Delphi expert elicitation to a cancer-healthcare policy case, not a new or materially improved transferable futures method."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "Existing Delphi technique applied to early-cancer-care policy consensus",
+      "reader_what": "RAND Europe uses a Delphi panel to build policy components for improving early cancer-care pathways.",
+      "reader_why": "",
+      "reader_more": "RAND Europe uses a Delphi panel to build policy components for improving early cancer-care pathways. Expert-consensus Delphi exercise involving professionals across 11 countries; reported in a conference abstract. The methodological instrument is established Delphi consensus, with no demonstrated generalisable methodological enhancement.",
+      "deep_analysis": {
+        "work_kind": "publisher conference abstract",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "RAND Europe uses a Delphi panel to build policy components for improving early cancer-care pathways.",
+        "method_or_basis": "Expert-consensus Delphi exercise involving professionals across 11 countries; reported in a conference abstract.",
+        "qualification": "The methodological instrument is established Delphi consensus, with no demonstrated generalisable methodological enhancement.",
+        "radar_relevance": "Strand B: an application of existing Delphi expert elicitation to a cancer-healthcare policy case, not a new or materially improved transferable futures method.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1093/eurpub/ckag169.1562",
+      "source_hash": "34837c25",
+      "identity_hash": "555c0b8ecf1b870e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Verified the known Oxford supplement DOI and available original abstract excerpt, not a fully tested method article. Do not treat the proposed framework as empirically validated. Original: https://doi.org/10.1093/eurpub/ckag169.1562"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Publisher DOI 10.1093/eurpub/ckag169.1562, original European Journal of Public Health 2026 supplement scanner abstract and matched authors; abstract specifies four pillars, FED-SCAN and readiness decision tree. Direct full publisher body was unavailable. Source: https://doi.org/10.1093/eurpub/ckag169.1562"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_conference_abstract",
+            "url": "https://doi.org/10.1093/eurpub/ckag169.1562",
+            "title": "Making Context Count: Assessing Needs and Implementation Readiness for Health Technology Innovation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Publisher DOI 10.1093/eurpub/ckag169.1562, original European Journal of Public Health 2026 supplement scanner abstract and matched authors; abstract specifies four pillars, FED-SCAN and readiness decision tree. Direct full publisher body was unavailable."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "B",
+        "reason_code": "B_TRANSFERABLE_METHOD",
+        "reason": "Strand B borderline: a potentially new and transferable technology-assessment and implementation-readiness design, but its validation and novelty are not substantiated beyond the original supplement abstract."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "Four-pillar health-technology horizon-scanning readiness framework proposed",
+      "reader_what": "A conference abstract proposes a four-pillar assessment linking unmet needs, context mapping, implementation readiness and equity-sensitive value.",
+      "reader_why": "The integrated decision framework may transfer across technologies and improve the assessment of horizon-scanned innovations before adoption.",
+      "reader_more": "A conference abstract proposes a four-pillar assessment linking unmet needs, context mapping, implementation readiness and equity-sensitive value. Combines FED-SCAN horizon scanning, WHO/EU health equity assessment and a Listen/Learn/Limit/Lean readiness decision tree. A short conference abstract proposes rather than validates the framework; methodological novelty beyond combining familiar elements remains uncertain.",
+      "deep_analysis": {
+        "work_kind": "publisher conference abstract",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "A conference abstract proposes a four-pillar assessment linking unmet needs, context mapping, implementation readiness and equity-sensitive value.",
+        "method_or_basis": "Combines FED-SCAN horizon scanning, WHO/EU health equity assessment and a Listen/Learn/Limit/Lean readiness decision tree.",
+        "qualification": "A short conference abstract proposes rather than validates the framework; methodological novelty beyond combining familiar elements remains uncertain.",
+        "radar_relevance": "Strand B borderline: a potentially new and transferable technology-assessment and implementation-readiness design, but its validation and novelty are not substantiated beyond the original supplement abstract.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.evaluation",
+          "secondary_objects": [],
+          "actor": {
+            "name": "M Otte and coauthors",
+            "class": "university_group"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "proposed",
+          "status_date": "2026-10-26",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "advocacy",
+          "qualification": "A short conference abstract proposes rather than validates the framework; methodological novelty beyond combining familiar elements remains uncertain.",
+          "text": "A conference abstract proposes a four-pillar assessment linking unmet needs, context mapping, implementation readiness and equity-sensitive value.",
+          "confidence": "medium",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1093/eurpub/ckag169.764",
+      "source_hash": "d2820d29",
+      "identity_hash": "78f131af9e8225be",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matched source or its canonical article https://doi.org/10.1093/eurpub/ckag169.764; source topic and identity verified."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "OUP European Journal of Public Health DOI 10.1093/eurpub/ckag169.764, title and Oxford conference overview describe public-health presentations rather than a research-system study. Source: https://doi.org/10.1093/eurpub/ckag169.764"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_conference_abstract",
+            "url": "https://doi.org/10.1093/eurpub/ckag169.764",
+            "title": "Y.11.PK.2. From Evidence to Action: EU studies on occupational risk and diseases",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "OUP European Journal of Public Health DOI 10.1093/eurpub/ckag169.764, title and Oxford conference overview describe public-health presentations rather than a research-system study."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Strand A Routes 1–3 checked: employment/occupational-health studies and evidence-use pathways do not directly measure European R&I governance, research careers, research funding or strategic technological capacity."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "Occupational-health research conference session overview",
+      "reader_what": "A session abstract introduces studies on occupational risks, diseases and European evidence-to-practice approaches.",
+      "reader_why": "",
+      "reader_more": "A session abstract introduces studies on occupational risks, diseases and European evidence-to-practice approaches. European Journal of Public Health conference supplement symposium overview, describing a series of speaker presentations. It reports a health-focused conference programme, not substantive new European research-system evidence.",
+      "deep_analysis": {
+        "work_kind": "publisher conference abstract",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "A session abstract introduces studies on occupational risks, diseases and European evidence-to-practice approaches.",
+        "method_or_basis": "European Journal of Public Health conference supplement symposium overview, describing a series of speaker presentations.",
+        "qualification": "It reports a health-focused conference programme, not substantive new European research-system evidence.",
+        "radar_relevance": "Strand A Routes 1–3 checked: employment/occupational-health studies and evidence-use pathways do not directly measure European R&I governance, research careers, research funding or strategic technological capacity.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiggJBVV95cUxOVFNFelU3V3hQekZpemJxNkplQXpvSjMxZkVxdXlyWjhiaFlQSVh1dzNQUDdCSGJTR0NJNy16YnRrdGNDZkIyZHNsdlpfT3JTdnZlRFFTWktKTU5Gcy0tUnNENEw3WjJGWl9YaGk0WTd6T2YzN1dCZ0FfbndUWUpGdGNyMkdweEY1RW1HN2hJVjI2bDVYaUkwc0xxWlZFV1J5S3NHSXIwVnNEekkya2R1dDR1X2UtQ2kzZ3lpNV85VTRnNXVVQTcxLUpnLWNRekZncFhJN0dVamtsX3FFQnR3VFVsSS1jNVpjVE8zSXhndk4zdVBVdVY4YmFGeGN2NTRoOGc?oc=5",
+      "source_hash": "760e50c5",
+      "identity_hash": "5a5cf295d8832806",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Opaque Google News RSS link https://news.google.com/rss/articles/CBMiggJBVV95cUxOVFNFelU3V3hQekZpemJxNkplQXpvSjMxZkVxdXlyWjhiaFlQSVh1dzNQUDdCSGJTR0NJNy16YnRrdGNDZkIyZHNsdlpfT3JTdnZlRFFTWktKTU5Gcy0tUnNENE had no substantive source text in supplied package."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Recovered named underlying work by exact headline search: https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/eu-research-and-innovation-support-europes-new-framework-climate-resilience-2026-10-27_en"
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Original DG R&I 27 October 2026 article lists 225+ Horizon projects and Mission infrastructure; parallel Commission 27 October release confirms new framework, climate-resilience law proposal and novel public tools. Funding totals predate launch. Source: https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/eu-research-and-innovation-support-europes-new-framework-climate-resilience-2026-10-27_en"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_announcement",
+            "url": "https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/eu-research-and-innovation-support-europes-new-framework-climate-resilience-2026-10-27_en",
+            "title": "EU research and innovation support Europe’s new Framework for Climate Resilience",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Original DG R&I 27 October 2026 article lists 225+ Horizon projects and Mission infrastructure; parallel Commission 27 October release confirms new framework, climate-resilience law proposal and novel public tools. Funding totals predate launch."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_CHANGE",
+        "reason": "Strand C: the Commission actually unveiled the EU climate-resilience framework on 27 October, with new tools and a legislative proposal; contemporaneous official sources explicitly identify EU research and innovation implementation mechanisms."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "Commission launches climate-resilience framework with research-to-market tools",
+      "reader_what": "The Commission presents a new EU climate-resilience framework linking a proposed law, research-backed adaptation tools and innovation uptake.",
+      "reader_why": "The 27 October initiative explicitly links European research investments and Mission tools to new climate innovation and infrastructure capabilities.",
+      "reader_more": "The Commission presents a new EU climate-resilience framework linking a proposed law, research-backed adaptation tools and innovation uptake. Commission DG Research and Innovation first-party release, confirmed by parallel DG Climate Action and Commission climate-law announcement. The proposed climate-resilience regulation is not yet adopted; existing Horizon programme investment figures are cumulative, not new grants.",
+      "deep_analysis": {
+        "work_kind": "official announcement",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "The Commission presents a new EU climate-resilience framework linking a proposed law, research-backed adaptation tools and innovation uptake.",
+        "method_or_basis": "Commission DG Research and Innovation first-party release, confirmed by parallel DG Climate Action and Commission climate-law announcement.",
+        "qualification": "The proposed climate-resilience regulation is not yet adopted; existing Horizon programme investment figures are cumulative, not new grants.",
+        "radar_relevance": "Strand C: the Commission actually unveiled the EU climate-resilience framework on 27 October, with new tools and a legislative proposal; contemporaneous official sources explicitly identify EU research and innovation implementation mechanisms.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "green.innovation",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-10-27",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "The proposed climate-resilience regulation is not yet adopted; existing Horizon programme investment figures are cumulative, not new grants.",
+          "text": "The Commission presents a new EU climate-resilience framework linking a proposed law, research-backed adaptation tools and innovation uptake.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:0d9ca799ca016a7e",
+      "source_hash": "83822133",
+      "identity_hash": "e2d8d665c75f5f53",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matched source or its canonical article https://publications.jrc.ec.europa.eu/repository/handle/JRC138454; source topic and identity verified."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "JRC138454 official publisher record with 23 January 2025 release, authors, journal Resources Conservation and Recycling, DOI 10.1016/j.resconrec.2024.108060; summary addresses critical-material circularity and future R&I. Source: https://publications.jrc.ec.europa.eu/repository/handle/JRC138454"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_jrc_publication_summary",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC138454",
+            "title": "Critical raw materials, circular economy, sustainable development: EU policy reflections for future research and innovation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "JRC138454 official publisher record with 23 January 2025 release, authors, journal Resources Conservation and Recycling, DOI 10.1016/j.resconrec.2024.108060; summary addresses critical-material circularity and future R&I."
+      },
+      "admission": {
+        "decision": "review",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Strand A Route 2 borderline: EU strategic technology material dependencies and innovation priorities are central, but a short perspective synopsis alone does not prove substantial completed evidence-led analysis."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2025-01-23"
+        },
+        "unset": [],
+        "reason": "JRC first-party bibliographic record dates publication 23 January 2025; scanner date 1 April 2025 is a placeholder/issue date."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "JRC researchers assess circularity priorities for EU critical raw materials",
+      "reader_what": "A JRC perspective evaluates EU circular-economy policy and critical-material recycling needs in strategic technologies.",
+      "reader_why": "EU innovation research priorities, material dependencies and circularity of strategic technologies are the focus of the analysis.",
+      "reader_more": "A JRC perspective evaluates EU circular-economy policy and critical-material recycling needs in strategic technologies. Short peer-reviewed policy perspective interpreting the EU Critical Raw Materials Act and current circularity conditions. The accessible first-party summary describes a perspective rather than an original empirical investigation; strength of its evidence synthesis is uncertain.",
+      "deep_analysis": {
+        "work_kind": "official jrc publication summary",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "A JRC perspective evaluates EU circular-economy policy and critical-material recycling needs in strategic technologies.",
+        "method_or_basis": "Short peer-reviewed policy perspective interpreting the EU Critical Raw Materials Act and current circularity conditions.",
+        "qualification": "The accessible first-party summary describes a perspective rather than an original empirical investigation; strength of its evidence synthesis is uncertain.",
+        "radar_relevance": "Strand A Route 2 borderline: EU strategic technology material dependencies and innovation priorities are central, but a short perspective synopsis alone does not prove substantial completed evidence-led analysis.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "materials.critical_raw",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Brian Baldassarre and Samuel Carrara",
+            "class": "university_group"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2025-01-23",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The accessible first-party summary describes a perspective rather than an original empirical investigation; strength of its evidence synthesis is uncertain.",
+          "text": "A JRC perspective evaluates EU circular-economy policy and critical-material recycling needs in strategic technologies.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:f8e6efd54b794d71",
+      "source_hash": "f83ceb9b",
+      "identity_hash": "f2588e4864dd1ca0",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matched source or its canonical article https://hcss.nl/wp-content/uploads/2024/12/Patrahau-Position-paper-Economic-Security-Risks-HCSS-204.pdf; source topic and identity verified."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "First-party December 2024 original HCSS PDF 6,931-character excerpt identifies author Irina Patrahau; documents Dutch reliance on processed inputs, EU critical-tech vulnerabilities and supply-chain opacity. Source: https://hcss.nl/wp-content/uploads/2024/12/Patrahau-Position-paper-Economic-Security-Risks-HCSS-204.pdf"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "research_institution_full_text",
+            "url": "https://hcss.nl/wp-content/uploads/2024/12/Patrahau-Position-paper-Economic-Security-Risks-HCSS-204.pdf",
+            "title": "Position paper | Economic security risks to Dutch and European competitiveness - Parliamentary expert testimony - HCSS",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "First-party December 2024 original HCSS PDF 6,931-character excerpt identifies author Irina Patrahau; documents Dutch reliance on processed inputs, EU critical-tech vulnerabilities and supply-chain opacity."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "Strand A Routes 1 and 2: substantive Europe-centred study of components, advanced-tech dependencies and strategic supply-chain concentration affecting technological competitiveness."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "Dutch and EU tech supply-chain dependencies expose economic-security vulnerabilities",
+      "reader_what": "HCSS maps Dutch and European dependence on foreign processed materials and advanced components used in clean and digital technologies.",
+      "reader_why": "The analysis directly concerns Europe’s strategic-technology dependencies and constraints on maintaining domestic innovation capacity.",
+      "reader_more": "HCSS maps Dutch and European dependence on foreign processed materials and advanced components used in clean and digital technologies. Parliamentary expert analysis by Irina Patrahau, drawing on EU Chips and Critical Raw Materials policies and supply-chain evidence. Expert testimony provides interpretive supply-chain diagnosis, not a new quantitative causal estimate or newly adopted policy.",
+      "deep_analysis": {
+        "work_kind": "research institution full text",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "HCSS maps Dutch and European dependence on foreign processed materials and advanced components used in clean and digital technologies.",
+        "method_or_basis": "Parliamentary expert analysis by Irina Patrahau, drawing on EU Chips and Critical Raw Materials policies and supply-chain evidence.",
+        "qualification": "Expert testimony provides interpretive supply-chain diagnosis, not a new quantitative causal estimate or newly adopted policy.",
+        "radar_relevance": "Strand A Routes 1 and 2: substantive Europe-centred study of components, advanced-tech dependencies and strategic supply-chain concentration affecting technological competitiveness.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "materials.critical_raw",
+          "secondary_objects": [],
+          "actor": {
+            "name": "The Hague Centre for Strategic Studies",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2024-12-12",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Expert testimony provides interpretive supply-chain diagnosis, not a new quantitative causal estimate or newly adopted policy.",
+          "text": "HCSS maps Dutch and European dependence on foreign processed materials and advanced components used in clean and digital technologies.",
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:3c4f8db2dbc64203",
+      "source_hash": "0479835c",
+      "identity_hash": "0af8ead5a60252aa",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Inspected matched source or its canonical article https://doi.org/10.1108/FS-01-2023-0001; source topic and identity verified."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Emerald Foresight DOI 10.1108/FS-01-2023-0001 original title and author metadata identify review of foresight themes, scope and focus rather than a novel method. Source: https://doi.org/10.1108/FS-01-2023-0001"
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "publisher_journal_abstract",
+            "url": "https://doi.org/10.1108/FS-01-2023-0001",
+            "title": "How foresight has evolved since 1999? Understanding its themes, scope and focus",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Emerald Foresight DOI 10.1108/FS-01-2023-0001 original title and author metadata identify review of foresight themes, scope and focus rather than a novel method."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "B",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "Strand B: historical mapping of a field is not a method contribution; no new scenario technique, indicator system, foresight protocol or transferable assessment design is substantiated."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical record among the supplied candidates."
+      },
+      "reader_title": "Bibliometric review of foresight scholarship since 1999",
+      "reader_what": "A research article describes the themes, coverage and changing focus of foresight scholarship published since 1999.",
+      "reader_why": "",
+      "reader_more": "A research article describes the themes, coverage and changing focus of foresight scholarship published since 1999. Descriptive literature mapping and thematic/bibliometric analysis in the journal Foresight. It applies existing literature review and bibliometric techniques rather than offering a newly validated transferable foresight method.",
+      "deep_analysis": {
+        "work_kind": "publisher journal abstract",
+        "research_question": "What does this work substantiate for its claimed Radar strand?",
+        "main_finding": "A research article describes the themes, coverage and changing focus of foresight scholarship published since 1999.",
+        "method_or_basis": "Descriptive literature mapping and thematic/bibliometric analysis in the journal Foresight.",
+        "qualification": "It applies existing literature review and bibliometric techniques rather than offering a newly validated transferable foresight method.",
+        "radar_relevance": "Strand B: historical mapping of a field is not a method contribution; no new scenario technique, indicator system, foresight protocol or transferable assessment design is substantiated.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    }
+  ]
+}
