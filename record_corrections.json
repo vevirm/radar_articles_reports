@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-10-28T13:03:46Z",
+  "updated_at": "2026-10-29T09:22:52Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -16817,6 +16817,114 @@
       ],
       "updated_at": "2026-10-28T13:03:46Z",
       "deep_scan_package_id": "worker-b-20261028T124142Z-3356515b936a"
+    },
+    "link:https://www.nachrichtendienstreform-2026.de/publications/download/public-compute-applied-ai-startups": {
+      "fields": {
+        "authors": "Jan Króliński; Nicole Lemke"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Actual author bylines on Interface Europe original publisher page; scanner had credited the institution.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://www.interface-eu.org/publications/public-compute-applied-ai-startups"
+      ],
+      "updated_at": "2026-10-29T09:22:40Z",
+      "deep_scan_package_id": "worker-a-20261029T085840Z-569bd91e3ce8"
+    },
+    "link:https://www.nature.com/articles/d41586-026-03476-3": {
+      "fields": {
+        "authors": "Jonathan O’Callaghan"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Nature original article carries the named journalist’s byline, not Nature as author.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://www.nature.com/articles/d41586-026-03476-3"
+      ],
+      "updated_at": "2026-10-29T09:22:41Z",
+      "deep_scan_package_id": "worker-a-20261029T085840Z-569bd91e3ce8"
+    },
+    "link:https://doi.org/10.1016/j.lanplh.2026.101492": {
+      "fields": {
+        "date": "2026-07-29"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Publisher metadata gives online article date as 29 July 2026, not 1 July.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://www.sciencedirect.com/science/article/pii/S2542519626000653"
+      ],
+      "updated_at": "2026-10-29T09:22:41Z",
+      "deep_scan_package_id": "worker-a-20261029T085840Z-569bd91e3ce8"
+    },
+    "link:https://link.epo.org/web/publications/studies/en-europes-technology-transfer-landscape.pdf": {
+      "fields": {
+        "title": "Europe’s technology transfer landscape"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "The full EPO study has this title; supplied scanner title is the news announcement describing it.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://link.epo.org/web/publications/studies/en-europes-technology-transfer-landscape.pdf"
+      ],
+      "updated_at": "2026-10-29T09:22:41Z",
+      "deep_scan_package_id": "worker-a-20261029T085840Z-569bd91e3ce8"
+    },
+    "historical:id:bbd74983f1958e2a": {
+      "fields": {
+        "source": "ISSI 2025 conference proceedings",
+        "type": "conference opinion paper"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Matching primary PDF bears the ISSI 2025 DOI and conference pagination rather than Scientometrics journal metadata.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://issi2025.iiap.sci.am/wp-content/uploads/2025/07/71.-rev_kochetkov_fp_issi2025_167.pdf"
+      ],
+      "updated_at": "2026-10-29T09:22:49Z",
+      "deep_scan_package_id": "worker-a-20261029T085840Z-569bd91e3ce8"
+    },
+    "historical:id:488b791864066da4": {
+      "fields": {
+        "source": "International Collaboration in Ocean Science and Governance (Palgrave Macmillan)",
+        "date": "2025-04-11",
+        "type": "book chapter"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Springer original chapter metadata identifies the containing monograph, publisher and online date; it is not in a journal named Governance.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://link.springer.com/chapter/10.1007/978-3-031-85378-4_3"
+      ],
+      "updated_at": "2026-10-29T09:22:50Z",
+      "deep_scan_package_id": "worker-b-20261029T085853Z-64145a2dbff2"
+    },
+    "historical:id:b842d157afda279b": {
+      "fields": {
+        "source": "Economics of Science"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Journal landing page and RePEc record name Economics of Science, not Public Administration.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://ideas.repec.org/a/abz/journl/y2023id410.html"
+      ],
+      "updated_at": "2026-10-29T09:22:50Z",
+      "deep_scan_package_id": "worker-b-20261029T085853Z-64145a2dbff2"
     }
   }
 }
