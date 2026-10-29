@@ -1,0 +1,2525 @@
+{
+  "format": "radar-deep-scan-results-v2",
+  "claims_format": "radar-claims-v1",
+  "package_id": "worker-a-20261029T085840Z-569bd91e3ce8",
+  "results": [
+    {
+      "record_key": "link:https://www.nachrichtendienstreform-2026.de/publications/download/public-compute-applied-ai-startups",
+      "source_hash": "eda02ab9",
+      "identity_hash": "1d360aa45fd4e862",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "source_mismatch",
+            "note": "Package-supplied link and cached text point to noncanonical nachrichtendienstreform-2026.de domain https://www.nachrichtendienstreform-2026.de/publications/download/public-compute-applied-ai-startups; not the official Interface Europe domain, so source recovered from interface-eu.org."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Actual matching source recovered/inspected at https://www.interface-eu.org/publications/public-compute-applied-ai-startups; title and substance aligned to Making Public Compute Work for Applied AI Startups."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_page",
+            "url": "https://www.interface-eu.org/publications/public-compute-applied-ai-startups",
+            "title": "Making Public Compute Work for Applied AI Startups",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using Interface Europe policy brief based on ten semi-structured interviews with an AI factory host, four ecosystem bodies and five applied AI startups. Original link was not official; based decision on canonical publisher."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 2: directly measures European AI-factory infrastructure demand and innovation bottlenecks."
+      },
+      "metadata_correction": {
+        "fields": {
+          "authors": "Jan Króliński; Nicole Lemke"
+        },
+        "unset": [],
+        "reason": "Actual author bylines on Interface Europe original publisher page; scanner had credited the institution."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "Making Public Compute Work for Applied AI Startups",
+      "reader_what": "Ten Polish AI ecosystem interviews reveal practical demand for public compute, conditioned on access rules, usable data and interoperability.",
+      "reader_why": "A Route 2: directly measures European AI-factory infrastructure demand and innovation bottlenecks.",
+      "reader_more": "Ten Polish AI ecosystem interviews reveal practical demand for public compute, conditioned on access rules, usable data and interoperability. Interface Europe policy brief based on ten semi-structured interviews with an AI factory host, four ecosystem bodies and five applied AI startups. Single-country, small qualitative sample; projected scalability is conditional, not observed EU-wide.",
+      "deep_analysis": {
+        "work_kind": "policy or empirical research",
+        "research_question": "Assess the work’s central R&I mechanism against the Radar admission scope.",
+        "main_finding": "Ten Polish AI ecosystem interviews reveal practical demand for public compute, conditioned on access rules, usable data and interoperability.",
+        "method_or_basis": "Interface Europe policy brief based on ten semi-structured interviews with an AI factory host, four ecosystem bodies and five applied AI startups.",
+        "qualification": "Single-country, small qualitative sample; projected scalability is conditional, not observed EU-wide.",
+        "radar_relevance": "A Route 2: directly measures European AI-factory infrastructure demand and innovation bottlenecks.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "compute.capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Interface Europe",
+            "class": "ngo_thinktank"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-07-01",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "PL"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "Single-country, small qualitative sample; projected scalability is conditional, not observed EU-wide.",
+          "text": "Ten Polish AI ecosystem interviews reveal practical demand for public compute, conditioned on access rules, usable data and interoperability.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://www.nachrichtendienstreform-2026.de/focus-area/semiconductors-geopolitics-europe",
+      "source_hash": "601372b1",
+      "identity_hash": "bdd2cc7cf0554469",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "source_mismatch",
+            "note": "Package-supplied link and cached text point to noncanonical nachrichtendienstreform-2026.de domain https://www.nachrichtendienstreform-2026.de/focus-area/semiconductors-geopolitics-europe; not the official Interface Europe domain, so source recovered from interface-eu.org."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Actual matching source recovered/inspected at https://www.interface-eu.org/index.php/focus-area/semiconductors-geopolitics-europe; title and substance aligned to Semiconductors, Geopolitics and Europe."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_page",
+            "url": "https://www.interface-eu.org/index.php/focus-area/semiconductors-geopolitics-europe",
+            "title": "Semiconductors, Geopolitics and Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using Original Interface Europe focus-area page describes priorities and hyperlinks to distinct studies; no independent study or findings here. Original link was not official; based decision on canonical publisher."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Routes 1-3 fail the completed substantive work gate: a topical programme landing page is not evidence-led analysis."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "Semiconductors, Geopolitics and Europe",
+      "reader_what": "The Interface Europe page introduces an ongoing semiconductor policy workstream and lists separate publications.",
+      "reader_why": "",
+      "reader_more": "The Interface Europe page introduces an ongoing semiconductor policy workstream and lists separate publications. Original Interface Europe focus-area page describes priorities and hyperlinks to distinct studies; no independent study or findings here. Do not transfer findings of linked reports to this landing page.",
+      "deep_analysis": {
+        "work_kind": "publisher work / source assessment",
+        "research_question": "",
+        "main_finding": "The Interface Europe page introduces an ongoing semiconductor policy workstream and lists separate publications.",
+        "method_or_basis": "Original Interface Europe focus-area page describes priorities and hyperlinks to distinct studies; no independent study or findings here.",
+        "qualification": "Do not transfer findings of linked reports to this landing page.",
+        "radar_relevance": "A Routes 1-3 fail the completed substantive work gate: a topical programme landing page is not evidence-led analysis.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://era.gv.at/news-items/study-reveals-strengths-and-gaps-in-europes-technology-transfer/",
+      "source_hash": "fde74fe2",
+      "identity_hash": "36227523979fb6ba",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Checked named primary/source page or matching supplied excerpt: https://era.gv.at/news-items/study-reveals-strengths-and-gaps-in-europes-technology-transfer/; verified bibliographic identity and content."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Independently checked original institutional or publisher record https://www.era.gv.at/news-items/study-reveals-strengths-and-gaps-in-europes-technology-transfer/ to corroborate scanner-supplied content and work identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_page",
+            "url": "https://www.era.gv.at/news-items/study-reveals-strengths-and-gaps-in-europes-technology-transfer/",
+            "title": "Study reveals strengths and gaps in Europe’s technology transfer",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using ERA Portal news post of 28 October citing the 22 October EPO/ASTP/Fraunhofer study and its 809-office survey. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Routes 2 and 3: European R&I findings are genuine but belong to the separate underlying EPO research work, not this secondary news item."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "Study reveals strengths and gaps in Europe’s technology transfer",
+      "reader_what": "Austria’s ERA Portal summarises EPO technology-transfer findings rather than conducting a new study.",
+      "reader_why": "",
+      "reader_more": "Austria’s ERA Portal summarises EPO technology-transfer findings rather than conducting a new study. ERA Portal news post of 28 October citing the 22 October EPO/ASTP/Fraunhofer study and its 809-office survey. Avoid duplicating the EPO report by treating this bulletin as original analytical evidence.",
+      "deep_analysis": {
+        "work_kind": "publisher work / source assessment",
+        "research_question": "",
+        "main_finding": "Austria’s ERA Portal summarises EPO technology-transfer findings rather than conducting a new study.",
+        "method_or_basis": "ERA Portal news post of 28 October citing the 22 October EPO/ASTP/Fraunhofer study and its 809-office survey.",
+        "qualification": "Avoid duplicating the EPO report by treating this bulletin as original analytical evidence.",
+        "radar_relevance": "A Routes 2 and 3: European R&I findings are genuine but belong to the separate underlying EPO research work, not this secondary news item.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://www.nature.com/articles/d41586-026-03476-3",
+      "source_hash": "d1967cf7",
+      "identity_hash": "095f534e1b7edf93",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Checked named primary/source page or matching supplied excerpt: https://www.nature.com/articles/d41586-026-03476-3; verified bibliographic identity and content."
+          },
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Actual matching source recovered/inspected at https://www.nature.com/articles/d41586-026-03476-3; title and substance aligned to Is research funding now a lottery? Elite funder ERC swamped by applications."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "journal_article",
+            "url": "https://www.nature.com/articles/d41586-026-03476-3",
+            "title": "Is research funding now a lottery? Elite funder ERC swamped by applications",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using Nature investigation uses European Research Council application/call numbers and interviews with ERC leadership and funding researchers. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 2: quantitative evidence of the European grant-funding system’s pressure and talent-selection constraints."
+      },
+      "metadata_correction": {
+        "fields": {
+          "authors": "Jonathan O’Callaghan"
+        },
+        "unset": [],
+        "reason": "Nature original article carries the named journalist’s byline, not Nature as author."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "Is research funding now a lottery? Elite funder ERC swamped by applications",
+      "reader_what": "ERC Starting Grant applications rose from 4,807 to 7,710, making the 2027 call’s projected success rate below 5%.",
+      "reader_why": "A Route 2: quantitative evidence of the European grant-funding system’s pressure and talent-selection constraints.",
+      "reader_more": "ERC Starting Grant applications rose from 4,807 to 7,710, making the 2027 call’s projected success rate below 5%. Nature investigation uses European Research Council application/call numbers and interviews with ERC leadership and funding researchers. The success rate is a projection from call capacity; no causal proof that AI tools explain the increase.",
+      "deep_analysis": {
+        "work_kind": "policy or empirical research",
+        "research_question": "Assess the work’s central R&I mechanism against the Radar admission scope.",
+        "main_finding": "ERC Starting Grant applications rose from 4,807 to 7,710, making the 2027 call’s projected success rate below 5%.",
+        "method_or_basis": "Nature investigation uses European Research Council application/call numbers and interviews with ERC leadership and funding researchers.",
+        "qualification": "The success rate is a projection from call capacity; no causal proof that AI tools explain the increase.",
+        "radar_relevance": "A Route 2: quantitative evidence of the European grant-funding system’s pressure and talent-selection constraints.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "horizon.success_rate",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Research Council",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "contracts",
+          "status": "announced",
+          "status_date": "2026-10-28",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The success rate is a projection from call capacity; no causal proof that AI tools explain the increase.",
+          "text": "ERC Starting Grant applications rose from 4,807 to 7,710, making the 2027 call’s projected success rate below 5%.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1093/eurpub/ckag169.725",
+      "source_hash": "3f22429f",
+      "identity_hash": "0e67e81c01982ecd",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied https://doi.org/10.1093/eurpub/ckag169.725 linked to the named work; publisher identity was checked against matching content or original repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_page",
+            "url": "https://content.openalex.org/works/W7223687853.pdf",
+            "title": "Bridging the Implementation Gap: Enhancing Regulatory Efficiency for next EU Healthcare workers",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using European Journal of Public Health congress abstract ckag169.725, inspected in matching source-distributed first-page PDF. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Routes 1-3: central object is health regulation and healthcare operations; secondary health-data research potential does not make it a study of the European R&I system."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "Bridging the Implementation Gap: Enhancing Regulatory Efficiency for next EU Healthcare workers",
+      "reader_what": "The short conference abstract comments on the implementation of EU health laws and health-workforce readiness.",
+      "reader_why": "",
+      "reader_more": "The short conference abstract comments on the implementation of EU health laws and health-workforce readiness. European Journal of Public Health congress abstract ckag169.725, inspected in matching source-distributed first-page PDF. Abstract is a policy commentary, not measured R&I outcomes.",
+      "deep_analysis": {
+        "work_kind": "publisher work / source assessment",
+        "research_question": "",
+        "main_finding": "The short conference abstract comments on the implementation of EU health laws and health-workforce readiness.",
+        "method_or_basis": "European Journal of Public Health congress abstract ckag169.725, inspected in matching source-distributed first-page PDF.",
+        "qualification": "Abstract is a policy commentary, not measured R&I outcomes.",
+        "radar_relevance": "A Routes 1-3: central object is health regulation and healthcare operations; secondary health-data research potential does not make it a study of the European R&I system.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1093/eurpub/ckag169.429",
+      "source_hash": "83b06b34",
+      "identity_hash": "09c8e8efca9e2367",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied https://doi.org/10.1093/eurpub/ckag169.429 linked to the named work; publisher identity was checked against matching content or original repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_page",
+            "url": "https://content.openalex.org/works/W7223662293.pdf",
+            "title": "O.7. Round Table: The transformation of EU health policy: Health politics in a polycrisis",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using European Journal of Public Health conference roundtable abstract ckag169.429; inspected PDF excerpt with chair and agenda. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Routes 1-3: an event agenda on public-health politics has no original evidence-led analysis of research funding, infrastructure, knowledge transfer or scientific capability."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "O.7. Round Table: The transformation of EU health policy: Health politics in a polycrisis",
+      "reader_what": "Roundtable session announces discussion of EU health policy shifts under crises and strategic autonomy.",
+      "reader_why": "",
+      "reader_more": "Roundtable session announces discussion of EU health policy shifts under crises and strategic autonomy. European Journal of Public Health conference roundtable abstract ckag169.429; inspected PDF excerpt with chair and agenda. The roundtable should not be mistaken for an empirical journal article.",
+      "deep_analysis": {
+        "work_kind": "publisher work / source assessment",
+        "research_question": "",
+        "main_finding": "Roundtable session announces discussion of EU health policy shifts under crises and strategic autonomy.",
+        "method_or_basis": "European Journal of Public Health conference roundtable abstract ckag169.429; inspected PDF excerpt with chair and agenda.",
+        "qualification": "The roundtable should not be mistaken for an empirical journal article.",
+        "radar_relevance": "A Routes 1-3: an event agenda on public-health politics has no original evidence-led analysis of research funding, infrastructure, knowledge transfer or scientific capability.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.lanplh.2026.101492",
+      "source_hash": "534cb34f",
+      "identity_hash": "f39e3d658712a36a",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied https://doi.org/10.1016/j.lanplh.2026.101492 linked to the named work; publisher identity was checked against matching content or original repository record."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Actual matching source recovered/inspected at https://www.sciencedirect.com/science/article/pii/S2542519626000653; title and substance aligned to Food system contributions to future planetary boundary transgressions."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "journal_article",
+            "url": "https://www.sciencedirect.com/science/article/pii/S2542519626000653",
+            "title": "Food system contributions to future planetary boundary transgressions",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using Peer-reviewed Lancet Planetary Health study using IMAGE modelling under global food and climate scenarios. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Routes 1-3: Europe is not the substantive object; Horizon funding and Dutch institutional affiliations are incidental. Global environmental modelling alone is outside this strand."
+      },
+      "metadata_correction": {
+        "fields": {
+          "date": "2026-07-29"
+        },
+        "unset": [],
+        "reason": "Publisher metadata gives online article date as 29 July 2026, not 1 July."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "Food system contributions to future planetary boundary transgressions",
+      "reader_what": "Global food-system scenarios estimate future planetary-boundary pressures and local environmental trade-offs.",
+      "reader_why": "",
+      "reader_more": "Global food-system scenarios estimate future planetary-boundary pressures and local environmental trade-offs. Peer-reviewed Lancet Planetary Health study using IMAGE modelling under global food and climate scenarios. Modelled scenario reductions are not observed outcomes.",
+      "deep_analysis": {
+        "work_kind": "publisher work / source assessment",
+        "research_question": "",
+        "main_finding": "Global food-system scenarios estimate future planetary-boundary pressures and local environmental trade-offs.",
+        "method_or_basis": "Peer-reviewed Lancet Planetary Health study using IMAGE modelling under global food and climate scenarios.",
+        "qualification": "Modelled scenario reductions are not observed outcomes.",
+        "radar_relevance": "A Routes 1-3: Europe is not the substantive object; Horizon funding and Dutch institutional affiliations are incidental. Global environmental modelling alone is outside this strand.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://www.imec-int.com/en/expertise/cmos-advanced-and-beyond/compute/automotive-chiplet-program",
+      "source_hash": "d1f612e1",
+      "identity_hash": "b54aa7b2a6c33e5b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Checked named primary/source page or matching supplied excerpt: https://www.imec-int.com/en/expertise/cmos-advanced-and-beyond/compute/automotive-chiplet-program; verified bibliographic identity and content."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_page",
+            "url": "https://www.imec-int.com/en/expertise/cmos-advanced-and-beyond/compute/automotive-chiplet-program",
+            "title": "Autonomous edge chiplet program",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using Imec’s own research-programme webpage outlines reference architecture and physical testbeds; no evaluated findings or completed comparison. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Routes 1-3: EU-based R&D is central but the linked object is a programme/promotion page, excluded as a substantive analytical evidence product."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "Autonomous edge chiplet program",
+      "reader_what": "Imec describes a precompetitive automotive edge-chiplet research programme, its tracks and partner offering.",
+      "reader_why": "",
+      "reader_more": "Imec describes a precompetitive automotive edge-chiplet research programme, its tracks and partner offering. Imec’s own research-programme webpage outlines reference architecture and physical testbeds; no evaluated findings or completed comparison. Research ambitions and programme designs do not prove demonstrated technological outcomes.",
+      "deep_analysis": {
+        "work_kind": "publisher work / source assessment",
+        "research_question": "",
+        "main_finding": "Imec describes a precompetitive automotive edge-chiplet research programme, its tracks and partner offering.",
+        "method_or_basis": "Imec’s own research-programme webpage outlines reference architecture and physical testbeds; no evaluated findings or completed comparison.",
+        "qualification": "Research ambitions and programme designs do not prove demonstrated technological outcomes.",
+        "radar_relevance": "A Routes 1-3: EU-based R&D is central but the linked object is a programme/promotion page, excluded as a substantive analytical evidence product.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://op.europa.eu/en/publication-detail/-/publication/fc6f6967-ce88-11f1-9458-01aa75ed71a1/language-en",
+      "source_hash": "0d671ca2",
+      "identity_hash": "21c399cb2aac4ba1",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Checked named primary/source page or matching supplied excerpt: https://op.europa.eu/en/publication-detail/-/publication/fc6f6967-ce88-11f1-9458-01aa75ed71a1/language-en; verified bibliographic identity and content."
+          },
+          {
+            "step": "scanner_validation_route",
+            "outcome": "partial",
+            "note": "Inspected scanner-supplied EU Publications Office source route https://publications.europa.eu/resource/cellar/fc6f6967-ce88-11f1-9458-01aa75ed71a1 and bundled abstract_or_landing_page text; no unsupported claim of full PDF access."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Actual matching source recovered/inspected at https://european-research-area.ec.europa.eu/index.php/news/era-practice-guide-ri-community-published; title and substance aligned to ERA in practice: a guide for the research and innovation community."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_report",
+            "url": "https://european-research-area.ec.europa.eu/index.php/news/era-practice-guide-ri-community-published",
+            "title": "ERA in practice: a guide for the research and innovation community",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_programme_context",
+            "url": "https://european-research-area.ec.europa.eu/era-policy-agenda-2025-2027",
+            "title": "ERA Policy Agenda 2025–2027",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using Official European Research Area platform guide launch notice and its 2025–2027 Policy Agenda overview, with supplied EU Publications Office catalogue details. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Routes 2-3: this is an orientation/illustrative guide to existing measures, not a new completed evidence-led assessment or substantive analytical report."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "ERA in practice: a guide for the research and innovation community",
+      "reader_what": "Commission guide describes ERA policy agendas, participation, past achievements and example Horizon projects.",
+      "reader_why": "",
+      "reader_more": "Commission guide describes ERA policy agendas, participation, past achievements and example Horizon projects. Official European Research Area platform guide launch notice and its 2025–2027 Policy Agenda overview, with supplied EU Publications Office catalogue details. The guide itself was not fully recovered; the official programme summary clearly identifies its orientation and illustrative purpose, not an impact evaluation.",
+      "deep_analysis": {
+        "work_kind": "publisher work / source assessment",
+        "research_question": "",
+        "main_finding": "Commission guide describes ERA policy agendas, participation, past achievements and example Horizon projects.",
+        "method_or_basis": "Official European Research Area platform guide launch notice and its 2025–2027 Policy Agenda overview, with supplied EU Publications Office catalogue details.",
+        "qualification": "The guide itself was not fully recovered; the official programme summary clearly identifies its orientation and illustrative purpose, not an impact evaluation.",
+        "radar_relevance": "A Routes 2-3: this is an orientation/illustrative guide to existing measures, not a new completed evidence-led assessment or substantive analytical report.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://link.epo.org/web/publications/studies/en-europes-technology-transfer-landscape.pdf",
+      "source_hash": "a558bc4f",
+      "identity_hash": "ac8e1e6385bf44e5",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Checked named primary/source page or matching supplied excerpt: https://link.epo.org/web/publications/studies/en-europes-technology-transfer-landscape.pdf; verified bibliographic identity and content."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_page",
+            "url": "https://link.epo.org/web/publications/studies/en-europes-technology-transfer-landscape.pdf",
+            "title": "Europe’s technology transfer landscape",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using EPO Observatory study with ASTP and Fraunhofer ISI; combines patent records, TTO survey and 22 interviews; matching PDF excerpt read. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: large-scale original evidence on university–industry knowledge transfer in the European R&I system."
+      },
+      "metadata_correction": {
+        "fields": {
+          "title": "Europe’s technology transfer landscape"
+        },
+        "unset": [],
+        "reason": "The full EPO study has this title; supplied scanner title is the news announcement describing it."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "Europe’s technology transfer landscape",
+      "reader_what": "A study of 809 European technology-transfer offices finds large differences in resources, networks and academic-patent retention.",
+      "reader_why": "A Route 3: large-scale original evidence on university–industry knowledge transfer in the European R&I system.",
+      "reader_more": "A study of 809 European technology-transfer offices finds large differences in resources, networks and academic-patent retention. EPO Observatory study with ASTP and Fraunhofer ISI; combines patent records, TTO survey and 22 interviews; matching PDF excerpt read. Descriptive findings do not by themselves show that one office model causes better commercialisation.",
+      "deep_analysis": {
+        "work_kind": "policy or empirical research",
+        "research_question": "Assess the work’s central R&I mechanism against the Radar admission scope.",
+        "main_finding": "A study of 809 European technology-transfer offices finds large differences in resources, networks and academic-patent retention.",
+        "method_or_basis": "EPO Observatory study with ASTP and Fraunhofer ISI; combines patent records, TTO survey and 22 interviews; matching PDF excerpt read.",
+        "qualification": "Descriptive findings do not by themselves show that one office model causes better commercialisation.",
+        "radar_relevance": "A Route 3: large-scale original evidence on university–industry knowledge transfer in the European R&I system.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.knowledge_transfer",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Patent Office",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-10-22",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Descriptive findings do not by themselves show that one office model causes better commercialisation.",
+          "text": "A study of 809 European technology-transfer offices finds large differences in resources, networks and academic-patent retention.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://www.epo.org/en/about-us/observatory-patents-and-technology",
+      "source_hash": "8a928226",
+      "identity_hash": "c0bf5f8c1ed72462",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Checked named primary/source page or matching supplied excerpt: https://www.epo.org/en/about-us/observatory-patents-and-technology; verified bibliographic identity and content."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_page",
+            "url": "https://www.epo.org/en/about-us/observatory-patents-and-technology",
+            "title": "Observatory on Patents and Technology",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using EPO institutional programme overview with links to separate substantive studies and data desks. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Routes 2-3: a permanent institutional landing page is not a completed analysis or current evidence product."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "Observatory on Patents and Technology",
+      "reader_what": "EPO Observatory homepage describes its remit, products and tools for patents and technological intelligence.",
+      "reader_why": "",
+      "reader_more": "EPO Observatory homepage describes its remit, products and tools for patents and technological intelligence. EPO institutional programme overview with links to separate substantive studies and data desks. The Observatory’s research should be assessed via the specific reports rather than this index.",
+      "deep_analysis": {
+        "work_kind": "publisher work / source assessment",
+        "research_question": "",
+        "main_finding": "EPO Observatory homepage describes its remit, products and tools for patents and technological intelligence.",
+        "method_or_basis": "EPO institutional programme overview with links to separate substantive studies and data desks.",
+        "qualification": "The Observatory’s research should be assessed via the specific reports rather than this index.",
+        "radar_relevance": "A Routes 2-3: a permanent institutional landing page is not a completed analysis or current evidence product.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=c15592dd-cf50-11f1-9458-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+      "source_hash": "0442b7f2",
+      "identity_hash": "9178f252a57f7a51",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Checked named primary/source page or matching supplied excerpt: https://op.europa.eu/o/opportal-service/download-handler?identifier=c15592dd-cf50-11f1-9458-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=; verified bibliographic identity and content."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_report",
+            "url": "https://op.europa.eu/o/opportal-service/download-handler?identifier=c15592dd-cf50-11f1-9458-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+            "title": "Resilient democracies: Horizon Europe projects info pack",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using Inspected 48-page CORDIS project information pack, explicitly compiled from existing project factsheets. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Route 3 fails: an administrative project catalogue does not study European research-system funding mechanisms or outcomes; Route 1/2 links are incidental."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "Resilient democracies: Horizon Europe projects info pack",
+      "reader_what": "CORDIS information pack lists EU-funded projects selected under a Horizon Europe democracy research call.",
+      "reader_why": "",
+      "reader_more": "CORDIS information pack lists EU-funded projects selected under a Horizon Europe democracy research call. Inspected 48-page CORDIS project information pack, explicitly compiled from existing project factsheets. Selected projects and planned deliverables are not achieved societal effects.",
+      "deep_analysis": {
+        "work_kind": "publisher work / source assessment",
+        "research_question": "",
+        "main_finding": "CORDIS information pack lists EU-funded projects selected under a Horizon Europe democracy research call.",
+        "method_or_basis": "Inspected 48-page CORDIS project information pack, explicitly compiled from existing project factsheets.",
+        "qualification": "Selected projects and planned deliverables are not achieved societal effects.",
+        "radar_relevance": "A Route 3 fails: an administrative project catalogue does not study European research-system funding mechanisms or outcomes; Route 1/2 links are incidental.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=42dc2fbe-cdbf-11f1-8b4c-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+      "source_hash": "d9ff62c0",
+      "identity_hash": "dcd20f8ebd84d753",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Checked named primary/source page or matching supplied excerpt: https://op.europa.eu/o/opportal-service/download-handler?identifier=42dc2fbe-cdbf-11f1-8b4c-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=; verified bibliographic identity and content."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_report",
+            "url": "https://op.europa.eu/o/opportal-service/download-handler?identifier=42dc2fbe-cdbf-11f1-8b4c-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+            "title": "Western Balkans Success Stories",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using Inspected official publication excerpt describing selected historic project cases and programme support. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Route 3 fails the systematic evidence-led R&I-system analysis gate; Route 2 does not follow simply from funded-project impact stories."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "Western Balkans Success Stories",
+      "reader_what": "Commission publication compiles illustrative EU Framework Programme project success stories from the Western Balkans.",
+      "reader_why": "",
+      "reader_more": "Commission publication compiles illustrative EU Framework Programme project success stories from the Western Balkans. Inspected official publication excerpt describing selected historic project cases and programme support. Promotional cases are selected examples; not representative assessment of system-wide programme effects.",
+      "deep_analysis": {
+        "work_kind": "publisher work / source assessment",
+        "research_question": "",
+        "main_finding": "Commission publication compiles illustrative EU Framework Programme project success stories from the Western Balkans.",
+        "method_or_basis": "Inspected official publication excerpt describing selected historic project cases and programme support.",
+        "qualification": "Promotional cases are selected examples; not representative assessment of system-wide programme effects.",
+        "radar_relevance": "A Route 3 fails the systematic evidence-led R&I-system analysis gate; Route 2 does not follow simply from funded-project impact stories.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1080/00343404.2026.2702579",
+      "source_hash": "ea6da442",
+      "identity_hash": "0983ccc93ecc7a2f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied https://doi.org/10.1080/00343404.2026.2702579 linked to the named work; publisher identity was checked against matching content or original repository record."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Independently checked original institutional or publisher record https://www.tandfonline.com/doi/full/10.1080/00343404.2026.2702579 to corroborate scanner-supplied content and work identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "journal_article",
+            "url": "https://www.tandfonline.com/doi/full/10.1080/00343404.2026.2702579",
+            "title": "Mission-oriented innovation policies in practice",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using Regional Studies peer-reviewed comparative research using regional policy implementation evidence and institutional analysis; matching scholarly PDF examined. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 3: original research on governance and territorial distribution of European innovation policy."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "Mission-oriented innovation policies in practice",
+      "reader_what": "German regions respond differently to national mission-oriented innovation strategies, reflecting contrasting local institutions and capacities.",
+      "reader_why": "A Route 3: original research on governance and territorial distribution of European innovation policy.",
+      "reader_more": "German regions respond differently to national mission-oriented innovation strategies, reflecting contrasting local institutions and capacities. Regional Studies peer-reviewed comparative research using regional policy implementation evidence and institutional analysis; matching scholarly PDF examined. Comparative regional cases limit generalisation to all German or EU regions.",
+      "deep_analysis": {
+        "work_kind": "policy or empirical research",
+        "research_question": "Assess the work’s central R&I mechanism against the Radar admission scope.",
+        "main_finding": "German regions respond differently to national mission-oriented innovation strategies, reflecting contrasting local institutions and capacities.",
+        "method_or_basis": "Regional Studies peer-reviewed comparative research using regional policy implementation evidence and institutional analysis; matching scholarly PDF examined.",
+        "qualification": "Comparative regional cases limit generalisation to all German or EU regions.",
+        "radar_relevance": "A Route 3: original research on governance and territorial distribution of European innovation policy.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "innovation.regional_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "German regional innovation actors",
+            "class": "member_state"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-09-02",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "DE"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "Comparative regional cases limit generalisation to all German or EU regions.",
+          "text": "German regions respond differently to national mission-oriented innovation strategies, reflecting contrasting local institutions and capacities.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://doi.org/10.1093/haschl/qxag303",
+      "source_hash": "dc55806e",
+      "identity_hash": "aaad5aa9f35eac3b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied https://doi.org/10.1093/haschl/qxag303 linked to the named work; publisher identity was checked against matching content or original repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "journal_article",
+            "url": "https://academic.oup.com/healthaffairsscholar/advance-article/doi/10.1093/haschl/qxag303/9003323",
+            "title": "Tracking shifts in competitiveness: from scientific capability to medicine availability",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using Peer-reviewed Health Affairs Scholar study comparing public and industry-derived R&D, regulatory and medicine-access indicators across four regions. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 2: substantive evidence about Europe’s pharmaceutical research and innovation capacity trajectory."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "Tracking shifts in competitiveness: from scientific capability to medicine availability",
+      "reader_what": "Commercial clinical trial starts fell in the EEA in 2018–23 while availability and investment indicators diverged internationally.",
+      "reader_why": "A Route 2: substantive evidence about Europe’s pharmaceutical research and innovation capacity trajectory.",
+      "reader_more": "Commercial clinical trial starts fell in the EEA in 2018–23 while availability and investment indicators diverged internationally. Peer-reviewed Health Affairs Scholar study comparing public and industry-derived R&D, regulatory and medicine-access indicators across four regions. Cross-regional descriptive associations cannot establish policy effects or causal drivers.",
+      "deep_analysis": {
+        "work_kind": "policy or empirical research",
+        "research_question": "Assess the work’s central R&I mechanism against the Radar admission scope.",
+        "main_finding": "Commercial clinical trial starts fell in the EEA in 2018–23 while availability and investment indicators diverged internationally.",
+        "method_or_basis": "Peer-reviewed Health Affairs Scholar study comparing public and industry-derived R&D, regulatory and medicine-access indicators across four regions.",
+        "qualification": "Cross-regional descriptive associations cannot establish policy effects or causal drivers.",
+        "radar_relevance": "A Route 2: substantive evidence about Europe’s pharmaceutical research and innovation capacity trajectory.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.system_capacity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Tosin Adeyemo and Tim Wilsdon",
+            "class": "other"
+          },
+          "mechanism": "measures",
+          "direction": "contracts",
+          "status": "delivered",
+          "status_date": "2026-10-28",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Cross-regional descriptive associations cannot establish policy effects or causal drivers.",
+          "text": "Commercial clinical trial starts fell in the EEA in 2018–23 while availability and investment indicators diverged internationally.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMi0AFBVV95cUxOZWlHU1JmTnFYRWJrb1pJbUhnbG1sTlA4VnFidVl1TVB5Wl9DRWhMcDhlaFNjVDJwcmlnb0Mtbm1xUXVncVEtTDBCajJJeno4aklTemhBcGdLaWY2QlAwRldjUVV2aGhReXdmVElFZDFvRU1veFBpQU54Vy1MU08tZGJkdDA3R2hMTWktU0g4aGp5SWdYcjl4LXlUWXpTS2o4cVA4UzhZZ2FZSmRhMmstbmlUd0FTUm41YjA5bHE4REJzLWdDME1ZcmZFeWk4TE1S?oc=5",
+      "source_hash": "49a5ec61",
+      "identity_hash": "e82421e42afc4138",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_primary",
+            "note": "Supplied identity is Google News RSS aggregation tracking link, https://news.google.com/rss/articles/CBMi0AFBVV95cUxOZWlHU1JmTnFYRWJrb1pJbUhnbG1sTlA4VnFidVl1TVB5Wl9DRWhMcDhla; bypassed wrapper and located original news title via title/publisher search."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Actual matching source recovered/inspected at https://www.era.gv.at/news-items/commission-publishes-participant-survey-on-lump-sum-funding/; title and substance aligned to Commission publishes participant survey on lump sum funding."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_page",
+            "url": "https://www.era.gv.at/news-items/commission-publishes-participant-survey-on-lump-sum-funding/",
+            "title": "Commission publishes participant survey on lump sum funding",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using European Commission Q1 2026 participant survey: 17,462 responses; 78% agree administrative burden is reduced. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_DEVELOPMENT",
+        "reason": "C: publication of new direct evidence about EU grant-administration practice and its future programme implementation."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "Commission publishes participant survey on lump sum funding",
+      "reader_what": "Commission survey finds broad Horizon Europe participant support for lump-sum grants but reports budgeting burdens for coordinators.",
+      "reader_why": "C: publication of new direct evidence about EU grant-administration practice and its future programme implementation.",
+      "reader_more": "Commission survey finds broad Horizon Europe participant support for lump-sum grants but reports budgeting burdens for coordinators. European Commission Q1 2026 participant survey: 17,462 responses; 78% agree administrative burden is reduced. Self-selected participants are not a random sample; satisfaction is reported perception, not measured saved cost.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "Assess the work’s central R&I mechanism against the Radar admission scope.",
+        "main_finding": "Commission survey finds broad Horizon Europe participant support for lump-sum grants but reports budgeting burdens for coordinators.",
+        "method_or_basis": "European Commission Q1 2026 participant survey: 17,462 responses; 78% agree administrative burden is reduced.",
+        "qualification": "Self-selected participants are not a random sample; satisfaction is reported perception, not measured saved cost.",
+        "radar_relevance": "C: publication of new direct evidence about EU grant-administration practice and its future programme implementation.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "funding.route",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "evaluates",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-10-28",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Self-selected participants are not a random sample; satisfaction is reported perception, not measured saved cost.",
+          "text": "Commission survey finds broad Horizon Europe participant support for lump-sum grants but reports budgeting burdens for coordinators.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMinAFBVV95cUxQaFNOVm9pU3lmS3ZaZFd4bjdNVjhPZWdxb1hZMG5aQjBFdFpFM2wzbG9lZlRCcXFtdFBBWHNYY0FWdEpySWtlTWx1ajVxSzNYc3cxTFZTYUJFTkx3NFRrbm5PcVBRdHZxVlNNN3F4bmppb1h0czdDc2tpdERLS1ZVcXgzRzg3cktLMGFOaHlmU2FoTzdVWjA2UkhFZV8?oc=5",
+      "source_hash": "12216d5e",
+      "identity_hash": "c7ceddc962caabab",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_primary",
+            "note": "Supplied identity is Google News RSS aggregation tracking link, https://news.google.com/rss/articles/CBMinAFBVV95cUxQaFNOVm9pU3lmS3ZaZFd4bjdNVjhPZWdxb1hZMG5aQjBFdFpFM2wzbG9lZ; bypassed wrapper and located original news title via title/publisher search."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Actual matching source recovered/inspected at https://euobserver.com/245360/listen-is-the-european-commissions-climate-resilience-plan-enough/; title and substance aligned to Listen: is the European Commission’s climate resilience plan enough?."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_page",
+            "url": "https://euobserver.com/245360/listen-is-the-european-commissions-climate-resilience-plan-enough/",
+            "title": "Listen: is the European Commission’s climate resilience plan enough?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using EUobserver transcript of Europod podcast, including the shared climate reference scenario and national adaptation plans. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C gate: the policy development concerns general climate adaptation; Copernicus as a possible data input does not demonstrate a substantive new R&I-system action."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "Listen: is the European Commission’s climate resilience plan enough?",
+      "reader_what": "Podcast reviews European Commission climate-adaptation planning and its limited binding requirements.",
+      "reader_why": "",
+      "reader_more": "Podcast reviews European Commission climate-adaptation planning and its limited binding requirements. EUobserver transcript of Europod podcast, including the shared climate reference scenario and national adaptation plans. The plan is discussed as a proposal, not implemented adaptation outcomes.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "Podcast reviews European Commission climate-adaptation planning and its limited binding requirements.",
+        "method_or_basis": "EUobserver transcript of Europod podcast, including the shared climate reference scenario and national adaptation plans.",
+        "qualification": "The plan is discussed as a proposal, not implemented adaptation outcomes.",
+        "radar_relevance": "C gate: the policy development concerns general climate adaptation; Copernicus as a possible data input does not demonstrate a substantive new R&I-system action.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://www.euronews.com/2026/10/28/germany-and-japan-strengthen-economic-ties-as-global-tensions-rise",
+      "source_hash": "c436dd24",
+      "identity_hash": "e3703a6812aebd76",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Checked named primary/source page or matching supplied excerpt: https://www.euronews.com/2026/10/28/germany-and-japan-strengthen-economic-ties-as-global-tensions-rise; verified bibliographic identity and content."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_page",
+            "url": "https://www.euronews.com/2026/10/28/germany-and-japan-strengthen-economic-ties-as-global-tensions-rise",
+            "title": "Germany and Japan strengthen economic ties as global tensions rise",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using Euronews account of 28 October bilateral statements citing semiconductors, robotics, industrial AI and material diversification. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_DEVELOPMENT",
+        "reason": "C: dated bilateral technology-capability and supply-dependency coordination involving an EU member state."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "Germany and Japan strengthen economic ties as global tensions rise",
+      "reader_what": "Germany and Japan issued joint statements on economic security and future technologies and signed critical-materials cooperation intent.",
+      "reader_why": "C: dated bilateral technology-capability and supply-dependency coordination involving an EU member state.",
+      "reader_more": "Germany and Japan issued joint statements on economic security and future technologies and signed critical-materials cooperation intent. Euronews account of 28 October bilateral statements citing semiconductors, robotics, industrial AI and material diversification. Intent statements and exploration of sectoral cooperation do not prove new industrial capacity or delivery.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "Assess the work’s central R&I mechanism against the Radar admission scope.",
+        "main_finding": "Germany and Japan issued joint statements on economic security and future technologies and signed critical-materials cooperation intent.",
+        "method_or_basis": "Euronews account of 28 October bilateral statements citing semiconductors, robotics, industrial AI and material diversification.",
+        "qualification": "Intent statements and exploration of sectoral cooperation do not prove new industrial capacity or delivery.",
+        "radar_relevance": "C: dated bilateral technology-capability and supply-dependency coordination involving an EU member state.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "materials.critical_raw",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Government of Germany",
+            "class": "member_state"
+          },
+          "mechanism": "coordinates",
+          "direction": "becomes_conditional",
+          "status": "announced",
+          "status_date": "2026-10-28",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "DE"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "Intent statements and exploration of sectoral cooperation do not prove new industrial capacity or delivery.",
+          "text": "Germany and Japan issued joint statements on economic security and future technologies and signed critical-materials cooperation intent.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMisAFBVV95cUxNQnhJMGhYb01qVE1reXBGdHEzdmtiZTV6RWk3OXlCaDZsVUxhbTVHbG1GMHVFSkxBZU8tQUtCakQzVm9OdkM2TWxIQVA1ODIyMXZyYWlRREx1cjdKb2FjZ2VWY3J3cjRQbTkzTkFKOEFOMTlLTXRyRkpjZTI3Q3c4MHRLU2l0S2F2S2FENHdiRnpyaWZ6TmdfWDNfTGsyTGRZczEwRlpYbm85eGtyZEl2aw?oc=5",
+      "source_hash": "0391b87b",
+      "identity_hash": "2188f9490ae2692c",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_primary",
+            "note": "Supplied identity is Google News RSS aggregation tracking link, https://news.google.com/rss/articles/CBMisAFBVV95cUxNQnhJMGhYb01qVE1reXBGdHEzdmtiZTV6RWk3OXlCaDZsVUxhbTVHbG1GM; bypassed wrapper and located original news title via title/publisher search."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Actual matching source recovered/inspected at https://mezha.net/eng/news/mezha-2e3ac777e23ad01cf8a85f88_eib_to_sign/; title and substance aligned to EIB to sign framework deal with Canada on critical raw materials."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_page",
+            "url": "https://mezha.net/eng/news/mezha-2e3ac777e23ad01cf8a85f88_eib_to_sign/",
+            "title": "EIB to sign framework deal with Canada on critical raw materials",
+            "evidence_used": true
+          },
+          {
+            "kind": "original_article_locator",
+            "url": "https://www.politico.eu/article/eib-european-investment-bank-sign-framework-deal-canada-critical-raw-materials/",
+            "title": "EIB to sign framework deal with Canada on critical raw materials",
+            "evidence_used": false
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using Cross-checked Politico article identity in a publisher-news index and an independent 27 October account explicitly attributing its pre-signing claim to Politico; primary article access restricted.  Original Politico story is independently identified at https://www.politico.eu/article/eib-european-investment-bank-sign-framework-deal-canada-critical-raw-materials/ but was inaccessible directly; substantively read the attributed independent account."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C gate: imminent or exploratory materials cooperation is not yet the verified financial instrument or new R&I investment claimed."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "EIB to sign framework deal with Canada on critical raw materials",
+      "reader_what": "Politico reported a proposed EU–Canada EIB framework agreement ahead of the scheduled summit.",
+      "reader_why": "",
+      "reader_more": "Politico reported a proposed EU–Canada EIB framework agreement ahead of the scheduled summit. Cross-checked Politico article identity in a publisher-news index and an independent 27 October account explicitly attributing its pre-signing claim to Politico; primary article access restricted. Do not turn a pre-signing report into a completed agreement.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "Politico reported a proposed EU–Canada EIB framework agreement ahead of the scheduled summit.",
+        "method_or_basis": "Cross-checked Politico article identity in a publisher-news index and an independent 27 October account explicitly attributing its pre-signing claim to Politico; primary article access restricted.",
+        "qualification": "Do not turn a pre-signing report into a completed agreement.",
+        "radar_relevance": "C gate: imminent or exploratory materials cooperation is not yet the verified financial instrument or new R&I investment claimed.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://doi.org/10.1016/j.futures.2026.103960",
+      "source_hash": "32888d6a",
+      "identity_hash": "4431cdeda3988fe1",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied https://doi.org/10.1016/j.futures.2026.103960 linked to the named work; publisher identity was checked against matching content or original repository record."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Independently checked original institutional or publisher record https://doi.org/10.1016/j.futures.2026.103960 to corroborate scanner-supplied content and work identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "journal_article",
+            "url": "https://doi.org/10.1016/j.futures.2026.103960",
+            "title": "When foresight meets action research: A methodological approach to wicked problems",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using Futures article by Michel, Bootz, Boutinot, Lemaire and Yalenios; inspected substantive PDF section on foresight-informed problem framing. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_TRANSFERABLE_METHOD",
+        "reason": "B: explicit transferable original methodological integration of foresight and action research, not merely an application."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "When foresight meets action research: A methodological approach to wicked problems",
+      "reader_what": "Researchers propose a staged method integrating participatory foresight into action research’s diagnosis of wicked problems.",
+      "reader_why": "B: explicit transferable original methodological integration of foresight and action research, not merely an application.",
+      "reader_more": "Researchers propose a staged method integrating participatory foresight into action research’s diagnosis of wicked problems. Futures article by Michel, Bootz, Boutinot, Lemaire and Yalenios; inspected substantive PDF section on foresight-informed problem framing. Conceptual methodological proposal; evidence does not establish universal performance across contexts.",
+      "deep_analysis": {
+        "work_kind": "foresight-method research",
+        "research_question": "Assess the work’s central R&I mechanism against the Radar admission scope.",
+        "main_finding": "Researchers propose a staged method integrating participatory foresight into action research’s diagnosis of wicked problems.",
+        "method_or_basis": "Futures article by Michel, Bootz, Boutinot, Lemaire and Yalenios; inspected substantive PDF section on foresight-informed problem framing.",
+        "qualification": "Conceptual methodological proposal; evidence does not establish universal performance across contexts.",
+        "radar_relevance": "B: explicit transferable original methodological integration of foresight and action research, not merely an application.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "methods.foresight",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Sophie Michel and coauthors",
+            "class": "university_group"
+          },
+          "mechanism": "integrates",
+          "direction": "expands",
+          "status": "delivered",
+          "status_date": "2026-10-19",
+          "scope": {
+            "level": "external",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Conceptual methodological proposal; evidence does not establish universal performance across contexts.",
+          "text": "Researchers propose a staged method integrating participatory foresight into action research’s diagnosis of wicked problems.",
+          "confidence": "medium",
+          "attributes": {
+            "world_reasoning": false
+          }
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiwAFBVV95cUxNRG9aM25tclFVMTlqVjdsUkNkaWU3bTNOM29RLVQ5YW4xY3VNZ0s2ZVY5MUdKZC1jRXVwZ0l1VUtEd2F3cVA3MUd1ZTdKS2FIUHMtcjNodE1xaTkwVVdXdFdHRkNDaG5vRHlsZEJVejBraGliX084aWJ6QXBNMHJLRWdYc210b19hbXdoTVVySXhiY2ZUNkM0c3ZqOEdUeFVSX1UxZmMyc2pxeGw1MGZ2c0lFaDkzVzE5X0VTbkVuWjc?oc=5",
+      "source_hash": "5120204a",
+      "identity_hash": "58a9ba63f28f561f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_primary",
+            "note": "Supplied identity is Google News RSS aggregation tracking link, https://news.google.com/rss/articles/CBMiwAFBVV95cUxNRG9aM25tclFVMTlqVjdsUkNkaWU3bTNOM29RLVQ5YW4xY3VNZ0s2ZVY5M; bypassed wrapper and located original news title via title/publisher search."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Actual matching source recovered/inspected at https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/eu-and-western-balkan-partners-deepen-research-and-innovation-cooperation-support-eu-integration-2026-10-22_en; title and substance aligned to EU and Western Balkan partners deepen research and innovation cooperation."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_report",
+            "url": "https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/eu-and-western-balkan-partners-deepen-research-and-innovation-cooperation-support-eu-integration-2026-10-22_en",
+            "title": "EU and Western Balkan partners deepen research and innovation cooperation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using European Commission announcement dated 22 October plus Science|Business 28 October implementation analysis and interviews. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_DEVELOPMENT",
+        "reason": "C: actual new cross-border R&I cooperation framework covering research careers, innovation ecosystems and institutional capacity."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "EU and Western Balkan partners deepen research and innovation cooperation",
+      "reader_what": "EU and six Western Balkan partners endorsed a research-and-innovation cooperation declaration, with a joint action plan still ahead.",
+      "reader_why": "C: actual new cross-border R&I cooperation framework covering research careers, innovation ecosystems and institutional capacity.",
+      "reader_more": "EU and six Western Balkan partners endorsed a research-and-innovation cooperation declaration, with a joint action plan still ahead. European Commission announcement dated 22 October plus Science|Business 28 October implementation analysis and interviews. Declaration sets intentions; concrete joint action plan and strengthened institutions have not yet been delivered.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "Assess the work’s central R&I mechanism against the Radar admission scope.",
+        "main_finding": "EU and six Western Balkan partners endorsed a research-and-innovation cooperation declaration, with a joint action plan still ahead.",
+        "method_or_basis": "European Commission announcement dated 22 October plus Science|Business 28 October implementation analysis and interviews.",
+        "qualification": "Declaration sets intentions; concrete joint action plan and strengthened institutions have not yet been delivered.",
+        "radar_relevance": "C: actual new cross-border R&I cooperation framework covering research careers, innovation ecosystems and institutional capacity.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.collaboration",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "coordinates",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-10-28",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Declaration sets intentions; concrete joint action plan and strengthened institutions have not yet been delivered.",
+          "text": "EU and six Western Balkan partners endorsed a research-and-innovation cooperation declaration, with a joint action plan still ahead.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiuAFBVV95cUxPaUtpbXZwMGJ4ajJDaWVPU1dyek5uVVRYamx3TkVYTmpsSzFGRTJBaTJ0LTFpQ1ZqNVVOTXg3Mzk2M0g4S0lWN0RCTUs2Q1Y0QVI1WWZ5c1JyRzZybEw3TjJ3TzV0a2pMSTV2U09xSlRfSndkWmYwM3Q4WURDMGVXbEpZZzZLZF92OXJWTW0tbl9BMnJ6OVNuU1l4Z0hraklIRmRqT016bERvQ2lLeEdsTHEwT3BfZlht?oc=5",
+      "source_hash": "e3a21cff",
+      "identity_hash": "83c0c49662a72cd7",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_primary",
+            "note": "Supplied identity is Google News RSS aggregation tracking link, https://news.google.com/rss/articles/CBMiuAFBVV95cUxPaUtpbXZwMGJ4ajJDaWVPU1dyek5uVVRYamx3TkVYTmpsSzFGRTJBaTJ0L; bypassed wrapper and located original news title via title/publisher search."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Actual matching source recovered/inspected at https://www.nature.com/articles/d41586-026-03476-3; title and substance aligned to Is research funding now a lottery? Elite funder ERC swamped by applications."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "journal_article",
+            "url": "https://www.nature.com/articles/d41586-026-03476-3",
+            "title": "Is research funding now a lottery? Elite funder ERC swamped by applications",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using Nature’s 28 October 2026 article has the identical title, underlying URL, author and quantitative ERC figures. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "DUPLICATE_EXISTING",
+        "reason": "Duplicate of the already assigned direct Nature record, not another independent development."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "duplicate",
+        "duplicate_of": "link:https://www.nature.com/articles/d41586-026-03476-3",
+        "reason": "Same Nature article headline, publication date and underlying URL as the canonical direct-link record."
+      },
+      "reader_title": "Is research funding now a lottery? Elite funder ERC swamped by applications",
+      "reader_what": "The Google News item resolves to the same Nature ERC applications report already present as Worker A record 4.",
+      "reader_why": "",
+      "reader_more": "The Google News item resolves to the same Nature ERC applications report already present as Worker A record 4. Nature’s 28 October 2026 article has the identical title, underlying URL, author and quantitative ERC figures. No separate empirical work or distinct news event established.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "The Google News item resolves to the same Nature ERC applications report already present as Worker A record 4.",
+        "method_or_basis": "Nature’s 28 October 2026 article has the identical title, underlying URL, author and quantitative ERC figures.",
+        "qualification": "No separate empirical work or distinct news event established.",
+        "radar_relevance": "Duplicate of the already assigned direct Nature record, not another independent development.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://www.epo.org/en/news-events/news/epo-signs-letter-intent-cnrs-innovation-and-max-planck-innovation",
+      "source_hash": "fc6267ba",
+      "identity_hash": "4304fe978aaa6afa",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Checked named primary/source page or matching supplied excerpt: https://www.epo.org/en/news-events/news/epo-signs-letter-intent-cnrs-innovation-and-max-planck-innovation; verified bibliographic identity and content."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_page",
+            "url": "https://www.epo.org/en/news-events/news/epo-signs-letter-intent-cnrs-innovation-and-max-planck-innovation",
+            "title": "EPO signs Letter of Intent with CNRS Innovation and Max Planck Innovation",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using EPO official announcement with named signatories and proposed cooperation on portfolio mapping, valuation and commercialisation. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_DEVELOPMENT",
+        "reason": "C: dated institutional R&I collaboration agreement with directly evidenced European tech-transfer mechanism."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "EPO signs Letter of Intent with CNRS Innovation and Max Planck Innovation",
+      "reader_what": "EPO, CNRS Innovation and Max Planck Innovation signed a letter of intent on research technology transfer and IP analytics.",
+      "reader_why": "C: dated institutional R&I collaboration agreement with directly evidenced European tech-transfer mechanism.",
+      "reader_more": "EPO, CNRS Innovation and Max Planck Innovation signed a letter of intent on research technology transfer and IP analytics. EPO official announcement with named signatories and proposed cooperation on portfolio mapping, valuation and commercialisation. Letter of intent initiates exploration; no resulting extra licences, spinouts or transfers shown.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "Assess the work’s central R&I mechanism against the Radar admission scope.",
+        "main_finding": "EPO, CNRS Innovation and Max Planck Innovation signed a letter of intent on research technology transfer and IP analytics.",
+        "method_or_basis": "EPO official announcement with named signatories and proposed cooperation on portfolio mapping, valuation and commercialisation.",
+        "qualification": "Letter of intent initiates exploration; no resulting extra licences, spinouts or transfers shown.",
+        "radar_relevance": "C: dated institutional R&I collaboration agreement with directly evidenced European tech-transfer mechanism.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.knowledge_transfer",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Patent Office",
+            "class": "eu_body"
+          },
+          "mechanism": "collaborates",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-10-26",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Letter of intent initiates exploration; no resulting extra licences, spinouts or transfers shown.",
+          "text": "EPO, CNRS Innovation and Max Planck Innovation signed a letter of intent on research technology transfer and IP analytics.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://www.epo.org/en/news-events/news/epo-president-discusses-future-global-ip-system-aippi-world-congress",
+      "source_hash": "8c1f538b",
+      "identity_hash": "26b1ca4980e7260b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Checked named primary/source page or matching supplied excerpt: https://www.epo.org/en/news-events/news/epo-president-discusses-future-global-ip-system-aippi-world-congress; verified bibliographic identity and content."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_page",
+            "url": "https://www.epo.org/en/news-events/news/epo-president-discusses-future-global-ip-system-aippi-world-congress",
+            "title": "EPO President discusses future of global IP system at AIPPI World Congress",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using EPO original 12 October event account reports a policy roundtable and remarks by participants. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C gate: a speech and conference discussion without an enacted policy, new instrument or material IP-system decision is routine event coverage."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "EPO President discusses future of global IP system at AIPPI World Congress",
+      "reader_what": "EPO president spoke at an IP congress about AI, patent quality and future patent-system challenges.",
+      "reader_why": "",
+      "reader_more": "EPO president spoke at an IP congress about AI, patent quality and future patent-system challenges. EPO original 12 October event account reports a policy roundtable and remarks by participants. Speakers’ positions are not adopted patent rules.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "EPO president spoke at an IP congress about AI, patent quality and future patent-system challenges.",
+        "method_or_basis": "EPO original 12 October event account reports a policy roundtable and remarks by participants.",
+        "qualification": "Speakers’ positions are not adopted patent rules.",
+        "radar_relevance": "C gate: a speech and conference discussion without an enacted policy, new instrument or material IP-system decision is routine event coverage.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMivgFBVV95cUxPQkFDOVg0dTRuVTFVb0R1dmlMYjBWZ3dHekpEYmp5MjNvTmpJRFphUDZHRUlRdUN0ZVRHWU45d2ZqVk0wZ2RaT0Uwb2JhQTZmZ3ZDNzJhSmNHR3BoYnhTZ1lRWFpCaFdLcFN4VnB1N1pkaDZXWFY2U19TU1laZXNWeEt6WXJrNEh5aS1GQXo5STZLbW43eWRRYXhVcERyWUxEUGlDbmV4VGRyeVNjeXU0RUdYQ3k1bkQ2MzdsZGtn?oc=5",
+      "source_hash": "53e9b8c7",
+      "identity_hash": "5b32669423d42ad8",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_primary",
+            "note": "Supplied identity is Google News RSS aggregation tracking link, https://news.google.com/rss/articles/CBMivgFBVV95cUxPQkFDOVg0dTRuVTFVb0R1dmlMYjBWZ3dHekpEYmp5MjNvTmpJRFphUDZHR; bypassed wrapper and located original news title via title/publisher search."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Actual matching source recovered/inspected at https://www.reuters.com/technology/german-startup-nvision-shows-new-path-quantum-computing-chips-nature-paper-2026-10-28/; title and substance aligned to German startup NVision shows new path to quantum computing chips."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_page",
+            "url": "https://www.reuters.com/technology/german-startup-nvision-shows-new-path-quantum-computing-chips-nature-paper-2026-10-28/",
+            "title": "German startup NVision shows new path to quantum computing chips",
+            "evidence_used": true
+          },
+          {
+            "kind": "journal_article",
+            "url": "https://www.nature.com/articles/s41586-026-11147-6",
+            "title": "A single-molecule spin–photon interface",
+            "evidence_used": true
+          },
+          {
+            "kind": "company_primary_announcement",
+            "url": "https://www.nvision-quantum.com/blog/nvision-unveils-first-manufacturable-molecular-qubit",
+            "title": "NVision molecular qubit research and HyperLight partnership",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using Corrected 28 October Reuters original, peer-reviewed Nature study DOI 10.1038/s41586-026-11147-6, and official 28 October NVision HyperLight partnership announcement. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_DEVELOPMENT",
+        "reason": "C: dated research breakthrough and cross-border industrialisation initiative directly relevant to German quantum-hardware capability."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "German startup NVision shows new path to quantum computing chips",
+      "reader_what": "German NVision published a molecular quantum-chip approach and announced a partnership for first integrated chip development.",
+      "reader_why": "C: dated research breakthrough and cross-border industrialisation initiative directly relevant to German quantum-hardware capability.",
+      "reader_more": "German NVision published a molecular quantum-chip approach and announced a partnership for first integrated chip development. Corrected 28 October Reuters original, peer-reviewed Nature study DOI 10.1038/s41586-026-11147-6, and official 28 October NVision HyperLight partnership announcement. Laboratory molecular result and planned chips are not a demonstrated commercial quantum computer.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "Assess the work’s central R&I mechanism against the Radar admission scope.",
+        "main_finding": "German NVision published a molecular quantum-chip approach and announced a partnership for first integrated chip development.",
+        "method_or_basis": "Corrected 28 October Reuters original, peer-reviewed Nature study DOI 10.1038/s41586-026-11147-6, and official 28 October NVision HyperLight partnership announcement.",
+        "qualification": "Laboratory molecular result and planned chips are not a demonstrated commercial quantum computer.",
+        "radar_relevance": "C: dated research breakthrough and cross-border industrialisation initiative directly relevant to German quantum-hardware capability.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "quantum.equipment",
+          "secondary_objects": [],
+          "actor": {
+            "name": "NVision",
+            "class": "company"
+          },
+          "mechanism": "builds",
+          "direction": "becomes_conditional",
+          "status": "announced",
+          "status_date": "2026-10-28",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "DE"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "Laboratory molecular result and planned chips are not a demonstrated commercial quantum computer.",
+          "text": "German NVision published a molecular quantum-chip approach and announced a partnership for first integrated chip development.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMilAFBVV95cUxNTDlRTkVTOHJYT0VDekNLOERVZnNXLXBHcjFtTmoyb0pPemNvMTdOWFR0M0JIUnAwZm1CUHVIMWdlUU1yVldRc19IcHEzYll3OV9rLTl6S0VKb0JOYmhkRWxTOEcyOVB5NHpETUlBejB3U2xvMWp0UWtUUnZabHhVd1lSMC0tVjhVZzRRd1p1UnVkV2kx?oc=5",
+      "source_hash": "f7ac5379",
+      "identity_hash": "0310940d65585859",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_primary",
+            "note": "Supplied identity is Google News RSS aggregation tracking link, https://news.google.com/rss/articles/CBMilAFBVV95cUxNTDlRTkVTOHJYT0VDekNLOERVZnNXLXBHcjFtTmoyb0pPemNvMTdOWFR0M; bypassed wrapper and located original news title via title/publisher search."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Actual matching source recovered/inspected at https://research4committees.blog/2026/10/12/publication-skilled-labour-mobility-in-the-eu-pathways-challenges-and-strategies-for-attraction-and-retention/; title and substance aligned to Skilled labour mobility in the EU: pathways, challenges, and strategies for attraction and retention."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_page",
+            "url": "https://research4committees.blog/2026/10/12/publication-skilled-labour-mobility-in-the-eu-pathways-challenges-and-strategies-for-attraction-and-retention/",
+            "title": "Skilled labour mobility in the EU: pathways, challenges, and strategies for attraction and retention",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using Research4Committees substantive Parliament-commissioned study synopsis, with author list, cross-country analysis, regional talent taxonomy, and linked EU Parliament full study. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C gate: research publication is not a new rule or R&I talent programme; labour mobility is treated generally rather than measured research careers."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "Skilled labour mobility in the EU: pathways, challenges, and strategies for attraction and retention",
+      "reader_what": "European Parliament study analyses general skilled-labour migration, posting rules and recruitment barriers across EU member states.",
+      "reader_why": "",
+      "reader_more": "European Parliament study analyses general skilled-labour migration, posting rules and recruitment barriers across EU member states. Research4Committees substantive Parliament-commissioned study synopsis, with author list, cross-country analysis, regional talent taxonomy, and linked EU Parliament full study. Publication of parliamentary analysis is not legislative adoption or specific R&I development.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "European Parliament study analyses general skilled-labour migration, posting rules and recruitment barriers across EU member states.",
+        "method_or_basis": "Research4Committees substantive Parliament-commissioned study synopsis, with author list, cross-country analysis, regional talent taxonomy, and linked EU Parliament full study.",
+        "qualification": "Publication of parliamentary analysis is not legislative adoption or specific R&I development.",
+        "radar_relevance": "C gate: research publication is not a new rule or R&I talent programme; labour mobility is treated generally rather than measured research careers.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMixAFBVV95cUxNa0xFQ1h3ekNRS3BnSlJwNDYxVmlpT2xiN3c1ek1xbHVRc0pPblBCcWtNTUFWSVlfbkpVcmFKNEtWNUxnMkU1WkI0aFpFZG9jWTBuTlctazE2dllDa3pqaEJveVMxUEhKRERrRFBpbmVKZzlxeVBzNGhNM09rWGZhQW5DbGRNVU0tMndEY25NSlllblExVUx4dXZSSDRqbFV3NHZ1Q2h2NmtRcUZyWEJJTkctSnU2S2xXYkNoU3p3a2Rha3Bf?oc=5",
+      "source_hash": "504c72b7",
+      "identity_hash": "681ed94658c54a9b",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_primary",
+            "note": "Supplied identity is Google News RSS aggregation tracking link, https://news.google.com/rss/articles/CBMixAFBVV95cUxNa0xFQ1h3ekNRS3BnSlJwNDYxVmlpT2xiN3c1ek1xbHVRc0pPblBCcWtNT; bypassed wrapper and located original news title via title/publisher search."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Actual matching source recovered/inspected at https://www.euronews.com/2026/10/28/eu-approves-319-million-in-state-aid-to-austrian-first-of-a-kind-next-generation-semicondu; title and substance aligned to EU approves €319 million state aid to Austrian semiconductor factory."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_page",
+            "url": "https://www.euronews.com/2026/10/28/eu-approves-319-million-in-state-aid-to-austrian-first-of-a-kind-next-generation-semicondu",
+            "title": "EU approves €319 million state aid to Austrian semiconductor factory",
+            "evidence_used": true
+          },
+          {
+            "kind": "company_primary_announcement",
+            "url": "https://www.infineon.com/regional/austria/press-release/2026/infpr202610-021",
+            "title": "Infineon 300 mm GaN Villach project and €319 million State aid",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using Euronews 28 October original report corroborated by Infineon on 27 October official Villach investment announcement and European Commission State-aid decision coverage. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_DEVELOPMENT",
+        "reason": "C: substantive new aid decision and investment pathway directly affecting European semiconductor manufacturing capability."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "EU approves €319 million state aid to Austrian semiconductor factory",
+      "reader_what": "European Commission approved €319 million in Austrian aid for Infineon’s 300mm gallium-nitride semiconductor production upgrade.",
+      "reader_why": "C: substantive new aid decision and investment pathway directly affecting European semiconductor manufacturing capability.",
+      "reader_more": "European Commission approved €319 million in Austrian aid for Infineon’s 300mm gallium-nitride semiconductor production upgrade. Euronews 28 October original report corroborated by Infineon on 27 October official Villach investment announcement and European Commission State-aid decision coverage. Aid approval is not operational fab output; manufacturer indicated production targeted for late 2027.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "Assess the work’s central R&I mechanism against the Radar admission scope.",
+        "main_finding": "European Commission approved €319 million in Austrian aid for Infineon’s 300mm gallium-nitride semiconductor production upgrade.",
+        "method_or_basis": "Euronews 28 October original report corroborated by Infineon on 27 October official Villach investment announcement and European Commission State-aid decision coverage.",
+        "qualification": "Aid approval is not operational fab output; manufacturer indicated production targeted for late 2027.",
+        "radar_relevance": "C: substantive new aid decision and investment pathway directly affecting European semiconductor manufacturing capability.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "industrial.technology_complexity",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission",
+            "class": "eu_body"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "adopted",
+          "status_date": "2026-10-27",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "AT"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "Aid approval is not operational fab output; manufacturer indicated production targeted for late 2027.",
+          "text": "European Commission approved €319 million in Austrian aid for Infineon’s 300mm gallium-nitride semiconductor production upgrade.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMixAFBVV95cUxQeENKa1dwQklxcUNFZ0xyajhtSHhOX0s4V0NWRU9BeFZtUG8zZDFWNFk5Z3Z0MjBLMHg0c182US1qbl9xZUxkMXJFczVPOFZWVjhBMXVPemRTNTA1bkhITHhfZS1kbzczM0c4OTZYbTFsbEd5WVkwSFNzQ3hVNWFRakNtdl8yaUc4MWMyYjVLc3doaGxVRFhPRjdCbGJFdWFpbV8wOGVDVzJXQ1BwMnZvWGh5R1ktLW90Um53U1c2RWxYV1l5?oc=5",
+      "source_hash": "16448a9d",
+      "identity_hash": "74a9d1944c0242e0",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_primary",
+            "note": "Supplied identity is Google News RSS aggregation tracking link, https://news.google.com/rss/articles/CBMixAFBVV95cUxQeENKa1dwQklxcUNFZ0xyajhtSHhOX0s4V0NWRU9BeFZtUG8zZDFWNFk5Z; bypassed wrapper and located original news title via title/publisher search."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Actual matching source recovered/inspected at https://sciencebusiness.net/news/research-and-innovation-gap/poland-fund-final-research-centres-flagship-collaboration-germany; title and substance aligned to Poland to fund final research centres of flagship collaboration with Germany."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_page",
+            "url": "https://sciencebusiness.net/news/research-and-innovation-gap/poland-fund-final-research-centres-flagship-collaboration-germany",
+            "title": "Poland to fund final research centres of flagship collaboration with Germany",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using Science|Business original report with quotations from Polish and German science ministries and National Science Centre. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_EU_RI_DEVELOPMENT",
+        "reason": "C: specific national funding and cross-border research-centre development within European research excellence cooperation."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "Poland to fund final research centres of flagship collaboration with Germany",
+      "reader_what": "Poland agreed to fund two final Dioscuri research centres while Germany continues training and other programme support.",
+      "reader_why": "C: specific national funding and cross-border research-centre development within European research excellence cooperation.",
+      "reader_more": "Poland agreed to fund two final Dioscuri research centres while Germany continues training and other programme support. Science|Business original report with quotations from Polish and German science ministries and National Science Centre. Agreement concerns two future centres; continuation beyond them is not promised.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "Assess the work’s central R&I mechanism against the Radar admission scope.",
+        "main_finding": "Poland agreed to fund two final Dioscuri research centres while Germany continues training and other programme support.",
+        "method_or_basis": "Science|Business original report with quotations from Polish and German science ministries and National Science Centre.",
+        "qualification": "Agreement concerns two future centres; continuation beyond them is not promised.",
+        "radar_relevance": "C: specific national funding and cross-border research-centre development within European research excellence cooperation.",
+        "why_supported": true,
+        "confidence": "medium"
+      },
+      "claims": [
+        {
+          "object": "research.infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Polish government",
+            "class": "member_state"
+          },
+          "mechanism": "funds",
+          "direction": "expands",
+          "status": "announced",
+          "status_date": "2026-10-28",
+          "scope": {
+            "level": "member_state",
+            "countries": [
+              "PL"
+            ]
+          },
+          "kind": "diagnosis",
+          "qualification": "Agreement concerns two future centres; continuation beyond them is not promised.",
+          "text": "Poland agreed to fund two final Dioscuri research centres while Germany continues training and other programme support.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "link:https://news.google.com/rss/articles/CBMiwAFBVV95cUxQVWw1UFVIWTdPSExHTUt6TmNtM3lSY3diRE11SGR6WGtWZjNRa18yWW5zNGhrcFgyQUMzTmN0cUpwRGpURHplZ0ZjZmk2czBWTlBKTEVEN0dfVEhxRzZMcXVNWGtYV2hpR3JiZXEySjlDaWkwa2czd19laEpOelBvMGVVY1FaeUgwWGVtcUxoaXhMeDZCUVNKUUlIUEpnMmFVeC1jSU5TNVprUnRDU1RMb05yNGJtdndLMFdrQWY4Ujk?oc=5",
+      "source_hash": "b08bf266",
+      "identity_hash": "ad26a379c290ea2f",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "not_primary",
+            "note": "Supplied identity is Google News RSS aggregation tracking link, https://news.google.com/rss/articles/CBMiwAFBVV95cUxQVWw1UFVIWTdPSExHTUt6TmNtM3lSY3diRE11SGR6WGtWZjNRa18yWW5zN; bypassed wrapper and located original news title via title/publisher search."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Actual matching source recovered/inspected at https://www.reuters.com/legal/litigation/european-sovereign-ai-cloud-not-yet-ready-major-banks-temenos-ceo-says-2026-10-28/; title and substance aligned to European sovereign AI, cloud not yet ready for major banks, Temenos CEO says."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_page",
+            "url": "https://www.reuters.com/legal/litigation/european-sovereign-ai-cloud-not-yet-ready-major-banks-temenos-ceo-says-2026-10-28/",
+            "title": "European sovereign AI, cloud not yet ready for major banks, Temenos CEO says",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using Reuters interview, corroborated by independent reprints, reporting one executive’s commercial assessment. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C gate: a company executive’s opinion on adoption is not a new European R&I instrument, infrastructure launch or verified technological change."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "European sovereign AI, cloud not yet ready for major banks, Temenos CEO says",
+      "reader_what": "Temenos CEO says European sovereign cloud and AI offerings are not sufficiently mature for large banking deployments.",
+      "reader_why": "",
+      "reader_more": "Temenos CEO says European sovereign cloud and AI offerings are not sufficiently mature for large banking deployments. Reuters interview, corroborated by independent reprints, reporting one executive’s commercial assessment. A stakeholder forecast is not independent evidence of all providers’ technical readiness.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "Temenos CEO says European sovereign cloud and AI offerings are not sufficiently mature for large banking deployments.",
+        "method_or_basis": "Reuters interview, corroborated by independent reprints, reporting one executive’s commercial assessment.",
+        "qualification": "A stakeholder forecast is not independent evidence of all providers’ technical readiness.",
+        "radar_relevance": "C gate: a company executive’s opinion on adoption is not a new European R&I instrument, infrastructure launch or verified technological change.",
+        "why_supported": false,
+        "confidence": "medium"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://www.clean-hydrogen.europa.eu/european-hydrogen-week/european-hydrogen-week-2026/clean-hydrogen-partnership-awards-2026/european-hydrogen-week-2026-shortlisted-projects-innovations_en",
+      "source_hash": "edd96920",
+      "identity_hash": "2b26a028dafe9139",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Checked named primary/source page or matching supplied excerpt: https://www.clean-hydrogen.europa.eu/european-hydrogen-week/european-hydrogen-week-2026/clean-hydrogen-partnership-awards-2026/european-hydrogen-week-2026-shortlisted-projects-innovations_en; verified bibliographic identity and content."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_report",
+            "url": "https://www.clean-hydrogen.europa.eu/european-hydrogen-week/european-hydrogen-week-2026/clean-hydrogen-partnership-awards-2026/european-hydrogen-week-2026-shortlisted-projects-innovations_en",
+            "title": "European Hydrogen Week 2026: shortlisted innovation projects",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using Clean Hydrogen official awards page listing candidate projects HyCoFlex, HERAQCLES, SHIMMER, LH2CRAFT, PilotSOEL and HIGHLANDER. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C gate: a prize shortlist and existing project marketing is not a new funding instrument, deployed technology or substantive policy decision."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "European Hydrogen Week 2026: shortlisted innovation projects",
+      "reader_what": "Clean Hydrogen Partnership page markets six innovation-award shortlists and summarises their technology projects.",
+      "reader_why": "",
+      "reader_more": "Clean Hydrogen Partnership page markets six innovation-award shortlists and summarises their technology projects. Clean Hydrogen official awards page listing candidate projects HyCoFlex, HERAQCLES, SHIMMER, LH2CRAFT, PilotSOEL and HIGHLANDER. Project descriptions mix developments and ambitions and are not independent validation of claimed performance.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "Clean Hydrogen Partnership page markets six innovation-award shortlists and summarises their technology projects.",
+        "method_or_basis": "Clean Hydrogen official awards page listing candidate projects HyCoFlex, HERAQCLES, SHIMMER, LH2CRAFT, PilotSOEL and HIGHLANDER.",
+        "qualification": "Project descriptions mix developments and ambitions and are not independent validation of claimed performance.",
+        "radar_relevance": "C gate: a prize shortlist and existing project marketing is not a new funding instrument, deployed technology or substantive policy decision.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://www.clean-hydrogen.europa.eu/document/download/5b64fcd3-7eb7-46bf-9e99-8916eacfe095_en?filename=SS2.pdf",
+      "source_hash": "538c7b43",
+      "identity_hash": "fcc3ef830abbe248",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Checked named primary/source page or matching supplied excerpt: https://www.clean-hydrogen.europa.eu/document/download/5b64fcd3-7eb7-46bf-9e99-8916eacfe095_en?filename=SS2.pdf; verified bibliographic identity and content."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_report",
+            "url": "https://www.clean-hydrogen.europa.eu/document/download/5b64fcd3-7eb7-46bf-9e99-8916eacfe095_en?filename=SS2.pdf",
+            "title": "From research collaboration to industrial scale: Stargate Hydrogen’s growth story",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using Official Clean Hydrogen Partnership success-story PDF reviewed; reports €3.6 million allocated to firm and existing initial 140MW/year capacity. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C gate: this retrospective case study does not date a new October 2026 decision, project launch or newly realised scale-up event."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "From research collaboration to industrial scale: Stargate Hydrogen’s growth story",
+      "reader_what": "Clean Hydrogen profile recounts Stargate Hydrogen’s seven funded projects and an already-open Tallinn electrolyser factory.",
+      "reader_why": "",
+      "reader_more": "Clean Hydrogen profile recounts Stargate Hydrogen’s seven funded projects and an already-open Tallinn electrolyser factory. Official Clean Hydrogen Partnership success-story PDF reviewed; reports €3.6 million allocated to firm and existing initial 140MW/year capacity. Ex post success narrative cannot date all outcomes to publication day.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "Clean Hydrogen profile recounts Stargate Hydrogen’s seven funded projects and an already-open Tallinn electrolyser factory.",
+        "method_or_basis": "Official Clean Hydrogen Partnership success-story PDF reviewed; reports €3.6 million allocated to firm and existing initial 140MW/year capacity.",
+        "qualification": "Ex post success narrative cannot date all outcomes to publication day.",
+        "radar_relevance": "C gate: this retrospective case study does not date a new October 2026 decision, project launch or newly realised scale-up event.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "link:https://fusionforenergy.europa.eu/news/how-did-f4e-build-the-european-fusion-supply-chain/",
+      "source_hash": "4f1bbf7d",
+      "identity_hash": "3beab4b8dd47635e",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied https://fusionforenergy.europa.eu/news/how-did-f4e-build-the-european-fusion-supply-chain/ linked to the named work; publisher identity was checked against matching content or original repository record."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Independently checked original institutional or publisher record https://fusionforenergy.europa.eu/news/how-did-f4e-build-the-european-fusion-supply-chain/ to corroborate scanner-supplied content and work identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_report",
+            "url": "https://fusionforenergy.europa.eu/news/how-did-f4e-build-the-european-fusion-supply-chain/",
+            "title": "How did F4E build the European fusion supply chain?",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using F4E full report excerpt and October 2026 agency summary: at least 2,700 businesses, 75 R&D organisations and 1,400 contracts. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "C",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "C gate: release of retrospective structural evidence is not a new current action or supply-chain capacity addition; it could be A evidence if separately assigned."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "How did F4E build the European fusion supply chain?",
+      "reader_what": "Fusion for Energy report documents a long-running European fusion supply chain assembled through procurement since 2007.",
+      "reader_why": "",
+      "reader_more": "Fusion for Energy report documents a long-running European fusion supply chain assembled through procurement since 2007. F4E full report excerpt and October 2026 agency summary: at least 2,700 businesses, 75 R&D organisations and 1,400 contracts. Figures are reported F4E cumulative outputs, not all newly created in October 2026.",
+      "deep_analysis": {
+        "work_kind": "current development",
+        "research_question": "",
+        "main_finding": "Fusion for Energy report documents a long-running European fusion supply chain assembled through procurement since 2007.",
+        "method_or_basis": "F4E full report excerpt and October 2026 agency summary: at least 2,700 businesses, 75 R&D organisations and 1,400 contracts.",
+        "qualification": "Figures are reported F4E cumulative outputs, not all newly created in October 2026.",
+        "radar_relevance": "C gate: release of retrospective structural evidence is not a new current action or supply-chain capacity addition; it could be A evidence if separately assigned.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:5fe5581ac5081d4c",
+      "source_hash": "e671ba8f",
+      "identity_hash": "41ebba4374ac7718",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied https://publications.jrc.ec.europa.eu/repository/handle/JRC148105 linked to the named work; publisher identity was checked against matching content or original repository record."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Independently checked original institutional or publisher record https://publications.jrc.ec.europa.eu/repository/handle/JRC148105 to corroborate scanner-supplied content and work identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_report",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC148105",
+            "title": "Deep dive on critical raw materials for hydrogen technologies in the EU",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using Commission JRC report maps raw material chains and scenarios to 2050; official repository plus substantial PDF excerpt examined. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 2: EU industrial research and innovation capacity directly linked to critical materials dependencies."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "Deep dive on critical raw materials for hydrogen technologies in the EU",
+      "reader_what": "EU hydrogen supply scenarios identify iridium and platinum as likely bottlenecks for electrolyser and fuel-cell scale-up.",
+      "reader_why": "A Route 2: EU industrial research and innovation capacity directly linked to critical materials dependencies.",
+      "reader_more": "EU hydrogen supply scenarios identify iridium and platinum as likely bottlenecks for electrolyser and fuel-cell scale-up. Commission JRC report maps raw material chains and scenarios to 2050; official repository plus substantial PDF excerpt examined. 2050 demand projections depend on model scenarios and should not be treated as realised shortages.",
+      "deep_analysis": {
+        "work_kind": "policy or empirical research",
+        "research_question": "Assess the work’s central R&I mechanism against the Radar admission scope.",
+        "main_finding": "EU hydrogen supply scenarios identify iridium and platinum as likely bottlenecks for electrolyser and fuel-cell scale-up.",
+        "method_or_basis": "Commission JRC report maps raw material chains and scenarios to 2050; official repository plus substantial PDF excerpt examined.",
+        "qualification": "2050 demand projections depend on model scenarios and should not be treated as realised shortages.",
+        "radar_relevance": "A Route 2: EU industrial research and innovation capacity directly linked to critical materials dependencies.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "materials.critical_raw",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-01-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "2050 demand projections depend on model scenarios and should not be treated as realised shortages.",
+          "text": "EU hydrogen supply scenarios identify iridium and platinum as likely bottlenecks for electrolyser and fuel-cell scale-up.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:25c57a587c4ed8b7",
+      "source_hash": "b8e4e7f5",
+      "identity_hash": "1b9fd655721fc3df",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied https://publications.jrc.ec.europa.eu/repository/handle/JRC147549 linked to the named work; publisher identity was checked against matching content or original repository record."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Independently checked original institutional or publisher record https://publications.jrc.ec.europa.eu/repository/handle/JRC147549 to corroborate scanner-supplied content and work identity."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_report",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC147549",
+            "title": "Artificial Intelligence for Biology: Capabilities, Readiness, and Policy Implications",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using JRC report based on biological AI model dataset and literature, verified with official publication record and JRC scientific briefing. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 2: EU research capability, research computing and data governance measured in strategic biotechnology."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "Artificial Intelligence for Biology: Capabilities, Readiness, and Policy Implications",
+      "reader_what": "JRC review of 480 biological AI models identifies strengths in EU scientific capabilities and weaknesses in collaboration and data governance.",
+      "reader_why": "A Route 2: EU research capability, research computing and data governance measured in strategic biotechnology.",
+      "reader_more": "JRC review of 480 biological AI models identifies strengths in EU scientific capabilities and weaknesses in collaboration and data governance. JRC report based on biological AI model dataset and literature, verified with official publication record and JRC scientific briefing. Technical performance/readiness varies by model and biology domain; headline research potential is not realised market impact.",
+      "deep_analysis": {
+        "work_kind": "policy or empirical research",
+        "research_question": "Assess the work’s central R&I mechanism against the Radar admission scope.",
+        "main_finding": "JRC review of 480 biological AI models identifies strengths in EU scientific capabilities and weaknesses in collaboration and data governance.",
+        "method_or_basis": "JRC report based on biological AI model dataset and literature, verified with official publication record and JRC scientific briefing.",
+        "qualification": "Technical performance/readiness varies by model and biology domain; headline research potential is not realised market impact.",
+        "radar_relevance": "A Route 2: EU research capability, research computing and data governance measured in strategic biotechnology.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "ai.research_use",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-01-01",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "Technical performance/readiness varies by model and biology domain; headline research potential is not realised market impact.",
+          "text": "JRC review of 480 biological AI models identifies strengths in EU scientific capabilities and weaknesses in collaboration and data governance.",
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "record_key": "historical:id:bbd74983f1958e2a",
+      "source_hash": "af978763",
+      "identity_hash": "6b81697e22e9a470",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Supplied https://doi.org/10.51408/issi2025_047 linked to the named work; publisher identity was checked against matching content or original repository record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_page",
+            "url": "https://issi2025.iiap.sci.am/wp-content/uploads/2025/07/71.-rev_kochetkov_fp_issi2025_167.pdf",
+            "title": "Science and Artificial Intelligence: A Copyright Perspective",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using IS​SI 2025 conference paper by Dmitry Kochetkov; author-supplied PDF carries original conference DOI, not a Scientometrics journal issue. "
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "OUT_OF_SCOPE",
+        "reason": "A Routes 1-3: generic research-practice and copyright essay has Europe as one legal comparator, not evidence about a European R&I-system mechanism."
+      },
+      "metadata_correction": {
+        "fields": {
+          "source": "ISSI 2025 conference proceedings",
+          "type": "conference opinion paper"
+        },
+        "unset": [],
+        "reason": "Matching primary PDF bears the ISSI 2025 DOI and conference pagination rather than Scientometrics journal metadata."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "Science and Artificial Intelligence: A Copyright Perspective",
+      "reader_what": "Conference opinion essay surveys copyright, peer review and open-science challenges of generative AI across jurisdictions.",
+      "reader_why": "",
+      "reader_more": "Conference opinion essay surveys copyright, peer review and open-science challenges of generative AI across jurisdictions. IS​SI 2025 conference paper by Dmitry Kochetkov; author-supplied PDF carries original conference DOI, not a Scientometrics journal issue. Commentary and legal comparisons are not empirical Europe-specific impact estimates.",
+      "deep_analysis": {
+        "work_kind": "publisher work / source assessment",
+        "research_question": "",
+        "main_finding": "Conference opinion essay surveys copyright, peer review and open-science challenges of generative AI across jurisdictions.",
+        "method_or_basis": "IS​SI 2025 conference paper by Dmitry Kochetkov; author-supplied PDF carries original conference DOI, not a Scientometrics journal issue.",
+        "qualification": "Commentary and legal comparisons are not empirical Europe-specific impact estimates.",
+        "radar_relevance": "A Routes 1-3: generic research-practice and copyright essay has Europe as one legal comparator, not evidence about a European R&I-system mechanism.",
+        "why_supported": false,
+        "confidence": "high"
+      },
+      "claims": []
+    },
+    {
+      "record_key": "historical:id:1879a3486d25bebc",
+      "source_hash": "213a2950",
+      "identity_hash": "3a8de50fd6ba5fbe",
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Checked named primary/source page or matching supplied excerpt: https://www.ukri.org/who-we-are/how-we-are-doing/research-outcomes-and-impact/uniting-europes-life-science-data-for-a-fairer-future/; verified bibliographic identity and content."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_or_publisher_page",
+            "url": "https://www.ukri.org/who-we-are/how-we-are-doing/research-outcomes-and-impact/uniting-europes-life-science-data-for-a-fairer-future/",
+            "title": "Uniting Europe’s life science data for a FAIRer future",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Confirmed named source and its subject matter using UK Research and Innovation source-owned case account with documented network, funding and coordination history. "
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 2: substantive mapped European R&I research-infrastructure capacity and cross-border data access."
+      },
+      "metadata_correction": {
+        "fields": {},
+        "unset": [],
+        "reason": ""
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "No verified identical DOI/title against candidate keys in this assignment."
+      },
+      "reader_title": "Uniting Europe’s life science data for a FAIRer future",
+      "reader_what": "ELIXIR’s 22 European nodes and UK partnerships integrate FAIR life-science data services and shared research infrastructure.",
+      "reader_why": "A Route 2: substantive mapped European R&I research-infrastructure capacity and cross-border data access.",
+      "reader_more": "ELIXIR’s 22 European nodes and UK partnerships integrate FAIR life-science data services and shared research infrastructure. UK Research and Innovation source-owned case account with documented network, funding and coordination history. UKRI impact account is programme self-report, not independently measured causal impact of each investment.",
+      "deep_analysis": {
+        "work_kind": "policy or empirical research",
+        "research_question": "Assess the work’s central R&I mechanism against the Radar admission scope.",
+        "main_finding": "ELIXIR’s 22 European nodes and UK partnerships integrate FAIR life-science data services and shared research infrastructure.",
+        "method_or_basis": "UK Research and Innovation source-owned case account with documented network, funding and coordination history.",
+        "qualification": "UKRI impact account is programme self-report, not independently measured causal impact of each investment.",
+        "radar_relevance": "A Route 2: substantive mapped European R&I research-infrastructure capacity and cross-border data access.",
+        "why_supported": true,
+        "confidence": "high"
+      },
+      "claims": [
+        {
+          "object": "research.infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "ELIXIR",
+            "class": "other"
+          },
+          "mechanism": "coordinates",
+          "direction": "expands",
+          "status": "operating",
+          "status_date": "2025-05-06",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "UKRI impact account is programme self-report, not independently measured causal impact of each investment.",
+          "text": "ELIXIR’s 22 European nodes and UK partnerships integrate FAIR life-science data services and shared research infrastructure.",
+          "confidence": "medium"
+        }
+      ]
+    }
+  ]
+}
