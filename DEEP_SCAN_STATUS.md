@@ -7,8 +7,8 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **3551** (Main **1736** + Historical **1815**)
-- Automatic queue still needing V2 verification: **35** (Main **0** + Historical **35**)
-- Currently assigned to workers: **35** (Main **0** + Historical **35**)
+- Automatic queue still needing V2 verification: **80** (Main **32** + Historical **48**)
+- Currently assigned to workers: **80** (Main **32** + Historical **48**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **44**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,12 +16,30 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261028T124131Z-6ab6d841b916`
-- Assigned unresolved records: **0**
+- Current package: `worker-a-20261029T085840Z-569bd91e3ce8`
+- Assigned unresolved records: **36**
+  1. `link:https://www.nachrichtendienstreform-2026.de/publications/download/public-compute-applied-ai-startups` — Making Public Compute Work for Applied AI Startups
+  2. `link:https://www.nachrichtendienstreform-2026.de/focus-area/semiconductors-geopolitics-europe` — Semiconductors, Geopolitics and Europe
+  3. `link:https://era.gv.at/news-items/study-reveals-strengths-and-gaps-in-europes-technology-transfer/` — Study reveals strengths and gaps in Europe’s technology transfer
+  4. `link:https://www.nature.com/articles/d41586-026-03476-3` — Is research funding now a lottery? Elite funder ERC swamped by applications
+  5. `link:https://doi.org/10.1093/eurpub/ckag169.725` — Bridging the Implementation Gap: Enhancing Regulatory Efficiency for next EU Healthcare workers
+  6. `link:https://doi.org/10.1093/eurpub/ckag169.429` — O.7. Round Table: The transformation of EU health policy: Health politics in a polycrisis
+  7. `link:https://doi.org/10.1016/j.lanplh.2026.101492` — Food system contributions to future planetary boundary transgressions: a multiscale modelling assessment of scenarios
+  8. `link:https://www.imec-int.com/en/expertise/cmos-advanced-and-beyond/compute/automotive-chiplet-program` — Autonomous edge chiplet program | imec
+  - … plus 28 more in the package manifest
 
 ### Worker B
-- Current package: `worker-b-20261028T124142Z-3356515b936a`
-- Assigned unresolved records: **0**
+- Current package: `worker-b-20261029T085853Z-64145a2dbff2`
+- Assigned unresolved records: **9**
+  1. `historical:id:488b791864066da4` — Ontological Security and Ocean Science Collaboration
+  2. `historical:id:412e6523674557d2` — Embracing Digital Innovation — Perspectives on Advancing Humanities Scholarship - ALLEA
+  3. `historical:id:b842d157afda279b` — Measuring the level of technological sovereignty in foreign countries: the experience of the European Union
+  4. `historical:id:ca1f6be3993ea154` — University technology transfer and the evolution of regional specialization: the case of Turin
+  5. `historical:id:c65698aa40013acb` — EU science diplomacy in a contested space of multi-level governance: Ambitions, constraints and options for action
+  6. `historical:id:1acf14b2f0f3a7be` — European Academies call for Excellence, Fairness and Openness in the Implementation of Horizon Europe - ALLEA
+  7. `historical:id:52a0f7b0e131cd49` — Innovation through R&D activities in the European context: antecedents and consequences
+  8. `historical:id:5f515eab2087084d` — Embedding a long-term view | Demos Helsinki
+  - … plus 1 more in the package manifest
 
 ### Worker SINGLE
 - Current package: `20261003T075602Z-f1fd44dd82c0`
