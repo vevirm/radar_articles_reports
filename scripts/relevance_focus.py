@@ -467,20 +467,103 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
     print('Focused discovery complete:',len(candidates),'new candidates;',dict(stats),'->',path,flush=True)
 
 
-def scan(candidate_path:Path):
-    # Reuse the existing priority scanner + all existing admission and dedupe gates.
-    # Only time allocation is modified in memory for this one scan.
-    os.environ['RADAR_PRIORITY_SCAN']='true'
-    os.environ['RADAR_CURATOR_CANDIDATE_INPUTS']=str(candidate_path)
-    os.environ.setdefault('RADAR_SCAN_BUDGET_SECONDS','1500')
-    os.environ['RADAR_RESCUE_MODE']='false'
+def scan(candidate_path: Path):
+    """Admit the *already discovered* batch; do not launch a second discovery scan.
+
+    The Main Radar engine has no native candidate-only CLI. In this dedicated
+    process, its broad-source collectors are replaced with empty collection
+    results, while exact DOI/title resolution and all ordinary admission,
+    duplicate, selection and publication logic remain the Main Radar's own.
+    No change is made to scan_radar.py or to the normal scanner's workflows.
+    """
+    if not candidate_path.is_file():
+        raise FileNotFoundError(f'Missing focused candidate file: {candidate_path}')
+    batch = json.loads(candidate_path.read_text(encoding='utf8'))
+    if not isinstance(batch, dict) or not isinstance(batch.get('candidates'), list):
+        raise ValueError('Invalid relevance candidate batch; refusing broad Radar fallback')
+    candidates = batch['candidates']
+    if not candidates:
+        print('Focused discovery returned no novel candidates; admission stage skipped (no second scan).', flush=True)
+        return 0
+    if any(not isinstance(row, dict) or not clean(row.get('title')) for row in candidates):
+        raise ValueError('Invalid relevance candidate entry')
+
+    os.environ['RADAR_PRIORITY_SCAN'] = 'true'
+    os.environ['RADAR_CURATOR_CANDIDATE_INPUTS'] = str(candidate_path.resolve())
+    # 15 minutes is an UPPER LIMIT for candidate checking + publication, not a
+    # required scan duration. The discovery phase already ran for 1500 seconds.
+    os.environ['RADAR_SCAN_BUDGET_SECONDS'] = '900'
+    os.environ['RADAR_RESCUE_MODE'] = 'false'
     import scan_radar
-    seconds=int(os.environ['RADAR_SCAN_BUDGET_SECONDS'])
-    scan_radar.CONFIG['curator_candidate_tests_per_scan']=110
-    scan_radar.CONFIG['curator_candidate_testing_stage_seconds']=max(120,int(seconds*0.73))
-    # Main scanner still works on all normal sources with the remaining allocation.
-    print('Relevance priority scanner: standard gates; time budget',seconds,'seconds',flush=True)
-    return scan_radar.main()
+
+    # Reuse the exact existing source-derived tests and strict A/B/C admission.
+    # Allocate nearly all available work time to this batch, rather than other
+    # sources, and leave some time for corpus reconciliation and serialization.
+    cfg = scan_radar.CONFIG
+    cfg['curator_candidate_testing_enabled'] = True
+    cfg['curator_candidate_tests_per_scan'] = len(candidates)
+    cfg['curator_candidate_testing_stage_seconds'] = 750
+    cfg['network_reserve_seconds'] = 25
+    cfg['scan_finalize_reserve_seconds'] = 35
+
+    # No recall, secondary discovery, news rescue, Matrix expansion or journal
+    # rotation. These belong to ordinary Radar runs, which remain unaffected.
+    for flag in (
+        'priority_people_enabled', 'foresight_author_followup_enabled',
+        'quiet_scan_rescue_enabled', 'citation_snowball_enabled',
+        'source_failure_reallocation_enabled', 'legacy_a_recall_recovery_enabled',
+        'low_yield_fresh_rotation_enabled', 'low_yield_extended_fallback_enabled',
+        'low_yield_full_rescue_run_enabled', 'full_budget_continuation_enabled',
+        'weak_signal_evidence_followup_enabled', 'c_floor_rescue_enabled',
+        'c_floor_final_reserve_enabled', 'frontier_stubborn_recovery_enabled',
+        'journal_depth_enabled', 'crossref_full_source_census_each_scan',
+        'institution_full_census_each_scan', 'direct_top_journal_enabled',
+    ):
+        cfg[flag] = False
+    cfg['frontier_gap_deepening_max_waves'] = 0
+    cfg['frontier_gap_deepening_max_waves_no_empty'] = 0
+    cfg['low_yield_reserved_seconds'] = 0
+    cfg['c_min_new_per_successful_scan'] = 0
+
+    # Critical isolation: the Radar main pipeline otherwise ALWAYS starts broad
+    # collection even with the priority flag set. Stub just those collectors in
+    # memory, so final admissibility, cumulative deduplication and serialization
+    # still use unmodified Radar code. Never monkeypatch the actual exact-record
+    # resolver or its Crossref/OpenAlex gates.
+    blocked_calls = Counter()
+
+    def no_general_discovery(*args, **kwargs):
+        blocked_calls['broad_collector_invocations_skipped'] += 1
+        return []
+
+    def no_general_journal_discovery(*args, **kwargs):
+        blocked_calls['broad_journal_invocations_skipped'] += 1
+        return [], []
+
+    broad_collectors = (
+        'collect_news', 'collect_openalex', 'collect_crossref',
+        'collect_institutions', 'collect_must_not_miss_primary_evidence',
+        'collect_eurlex_cellar', 'collect_europarl_adopted_texts',
+        'collect_crossref_prefix_sources', 'collect_priority_news_references',
+        'collect_priority_people', 'collect_rule_fix_source_recovery',
+        'collect_manual_recovery', 'collect_weak_signal_evidence_followups',
+    )
+    # Fail loudly if the upstream Radar API changes. Silently failing to stub a
+    # renamed collector would bring back a second broad scanning phase.
+    for name in broad_collectors + ('collect_direct_top_journals',):
+        if not callable(getattr(scan_radar, name, None)):
+            raise RuntimeError(f'Candidate-only isolation needs updated Radar adapter: {name}')
+    for name in broad_collectors:
+        setattr(scan_radar, name, no_general_discovery)
+    scan_radar.collect_direct_top_journals = no_general_journal_discovery
+
+    print(f'Relevance ADMISSION-ONLY: {len(candidates)} exact candidates; '
+          'no broad Radar discovery; candidate processing budget up to 900s '
+          '(not a second 25-minute scan).', flush=True)
+    result = scan_radar.main()
+    print('Relevance admission complete; extra discovery collectors blocked:',
+          dict(blocked_calls), flush=True)
+    return result
 
 
 def main():
