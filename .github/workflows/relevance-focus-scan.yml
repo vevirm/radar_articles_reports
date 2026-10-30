@@ -1,0 +1,143 @@
+name: Relevance Focus — 25 min + one-hit backfill
+
+on:
+  schedule:
+    # Between the normal four-hour Radar slots; shared lock prevents overlap.
+    - cron: '47 2,6,10,14,18,22 * * *'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Scan (25-minute focused lane) or one-hit backfill of Deep Scanned material'
+        required: true
+        type: choice
+        options:
+          - scan
+          - backfill-only
+        default: scan
+  workflow_run:
+    workflows:
+      - R&I Radar Scan
+      - R&I Radar Quick Scan — 6 min
+      - R&I Radar Focused Strand Scan — 20 min
+      - Historical Top-Tier Scan
+      - Deep Scan V2 — Import Returned Results
+    types: [completed]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ri-radar-research-scanners
+  queue: max
+  cancel-in-progress: false
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+
+jobs:
+  relevance:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 38
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout main after any queued scanner work
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Install Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.12'
+      - name: Validate relevance matcher against deterministic fixtures
+        run: python -m unittest discover -s tests -p test_relevance_focus.py -q
+      - name: Install scanner requirements (scan runs only)
+        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'scan')
+        run: pip install -r requirements.txt
+      - name: Check scanner preflight (scan runs only)
+        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'scan')
+        run: python scripts/run_scan_preflight_tests.py
+      - name: Discover relevance-specific candidate works
+        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'scan')
+        env:
+          OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
+        run: python scripts/relevance_focus.py discover --output "$RUNNER_TEMP/relevance_candidates.json"
+      - name: Run 25-minute focus through ordinary Radar A/B/C admission
+        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'scan')
+        env:
+          OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
+          CROSSREF_MAILTO: ${{ secrets.CROSSREF_MAILTO }}
+          RADAR_SCAN_BUDGET_SECONDS: '1500'
+        shell: bash
+        run: |
+          set -euo pipefail
+          # No candidates means no synthetic scan or write of unrelated findings.
+          if python - "$RUNNER_TEMP/relevance_candidates.json" <<'PY'
+          import json,sys
+          sys.exit(0 if json.load(open(sys.argv[1]))['candidates'] else 1)
+          PY
+          then
+            python scripts/relevance_focus.py scan --candidates "$RUNNER_TEMP/relevance_candidates.json"
+            python scripts/validate_scanner_output.py
+            python scripts/rebuild_active_radar.py
+            python scripts/check_active_corpus.py
+            node scripts/generate_stuff_workbook.js
+          else
+            echo 'No new eligible relevance candidates this slot; updating existing Deep Scan workbook only.'
+          fi
+      - name: Generate focused Excel from authoritative and pending source material
+        run: |
+          python scripts/relevance_focus.py export-json --output "$RUNNER_TEMP/relevance_report.json"
+          node scripts/generate_relevance_stuff.js "$RUNNER_TEMP/relevance_report.json"
+      - name: Validate focus workbook
+        run: |
+          python - <<'PY'
+          import zipfile
+          p='Relevance Stuff/relevance_stuff.xlsx'
+          with zipfile.ZipFile(p) as z:
+              assert z.testzip() is None
+              for i in range(1,5):assert f'xl/worksheets/sheet{i}.xml' in z.namelist()
+          print('Focused workbook validated')
+          PY
+      - name: Isolate generated outputs (never commit unrelated scanner runtime files)
+        shell: bash
+        run: |
+          set -euo pipefail
+          tracked_unexpected="$(git diff --name-only -- . ':!radar.json' ':!radar_active.json' ':!stuff/main_radar_stuff.xlsx' ':!stuff/source_merit_ranking.xlsx' ':!Relevance Stuff/relevance_stuff.xlsx' || true)"
+          if [[ -n "$tracked_unexpected" ]]; then
+            printf 'Restoring unrelated tracked scanner changes:\n%s\n' "$tracked_unexpected"
+            while IFS= read -r file; do
+              [[ -z "$file" ]] && continue
+              git restore --worktree -- "$file"
+            done <<< "$tracked_unexpected"
+          fi
+          unexpected_untracked="$(git ls-files --others --exclude-standard | grep -v -x 'Relevance Stuff/relevance_stuff.xlsx' || true)"
+          if [[ -n "$unexpected_untracked" ]]; then
+            printf 'Removing unrelated untracked runtime files:\n%s\n' "$unexpected_untracked"
+            while IFS= read -r file; do
+              [[ -z "$file" ]] && continue
+              rm -rf -- "$file"
+            done <<< "$unexpected_untracked"
+          fi
+      - name: Commit only scanner outputs and focused workbook
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- 'Relevance Stuff/relevance_stuff.xlsx'
+          if [[ "${{ github.event_name }}" == 'schedule' || ( "${{ github.event_name }}" == 'workflow_dispatch' && "${{ inputs.mode }}" == 'scan' ) ]]; then
+            git add -- radar.json radar_active.json stuff/main_radar_stuff.xlsx stuff/source_merit_ranking.xlsx
+          fi
+          if git diff --cached --quiet; then echo 'No workbook or scanner output changes'; exit 0; fi
+          git commit -m 'Refresh relevance focus and Radar evidence'
+          auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
+          git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${auth}"
+          trap 'git config --local --unset-all http.https://github.com/.extraheader >/dev/null 2>&1 || true' EXIT
+          git pull --rebase origin main
+          git push origin HEAD:main
