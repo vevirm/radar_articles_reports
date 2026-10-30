@@ -270,5 +270,5 @@
     sheets.forEach(([,xml],i)=>{files[`xl/worksheets/sheet${i+1}.xml`]=xml;});
     return zip(files);
   }
-  return {buildRows,buildRawPublicationTable,buildHistoricalTable,buildShockRows,buildXlsx};
+  return {buildRows,buildRawPublicationTable,buildHistoricalTable,buildShockRows,buildXlsx,zip,sheetXml};
 });
