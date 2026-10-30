@@ -7,8 +7,8 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **3595** (Main **1767** + Historical **1828**)
-- Automatic queue still needing V2 verification: **36** (Main **1** + Historical **35**)
-- Currently assigned to workers: **36** (Main **1** + Historical **35**)
+- Automatic queue still needing V2 verification: **61** (Main **26** + Historical **35**)
+- Currently assigned to workers: **61** (Main **26** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **44**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,9 +16,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261029T093322Z-e28611d9149e`
-- Assigned unresolved records: **1**
-  1. `link:https://news.google.com/rss/articles/CBMiuAFBVV95cUxPaUtpbXZwMGJ4ajJDaWVPU1dyek5uVVRYamx3TkVYTmpsSzFGRTJBaTJ0LTFpQ1ZqNVVOTXg3Mzk2M0g4S0lWN0RCTUs2Q1Y0QVI1WWZ5c1JyRzZybEw3TjJ3TzV0a2pMSTV2U09xSlRfSndkWmYwM3Q4WURDMGVXbEpZZzZLZF92OXJWTW0tbl9BMnJ6OVNuU1l4Z0hraklIRmRqT016bERvQ2lLeEdsTHEwT3BfZlht?oc=5` — Is research funding now a lottery? Elite funder ERC swamped by applications
+- Current package: `worker-a-20261030T080533Z-f046f8f8fc03`
+- Assigned unresolved records: **26**
+  1. `link:https://era.gv.at/news-items/the-guild-position-paper-calls-for-smarter-state-aid-rules-to-strengthen-europes-innovation-capacity/` — The Guild position paper calls for smarter state aid rules to strengthen Europe’s innovation capacity
+  2. `link:https://publications.jrc.ec.europa.eu/repository/handle/JRC143503` — Between code and conscience: early-career researcher reflections on agroeconomic modelling and international research collaboration
+  3. `link:https://doi.org/10.1093/ejhf/xuag328` — DPP3-positive circulatory shock: from targetable ICU endotype to Horizon Europe precision-therapy trial
+  4. `link:https://cordis.europa.eu/project/id/101288808` — The European Union's Quest for a Relational Open Strategic Autonomy | QUEST | Project | Fact Sheet | HORIZON | CORDIS | European Commission
+  5. `link:https://cordis.europa.eu/project/id/101288288` — Redefining Economic Security for an Upgraded, Resilient and Geopolitical Europe | RESURGE | Project | Fact Sheet | HORIZON | CORDIS | European Commission
+  6. `link:https://doi.org/10.48550/arxiv.2607.27029` — Anticipatory Data Governance in the Age of AI: Emerging Signals in Data Access, Reuse, and Sovereignty
+  7. `link:https://news.google.com/rss/articles/CBMiywFBVV95cUxQZk1Mbjlqa3B2RFBxMXpXbTcwVjdMYVpwYkhDVmcyWkpKSEpDTDFzZG9QeHVWOERzNDRJYmNwRHFYWUY0dHV6RDRvaEl4QUYxVVZtOTFZNUNqa18zR2ZiVlJ5eTYtQ0hOcEswMGt3TzdCV0tJazJnMzlBZmZuWXdLZUhQRURmbEZfVTJFbUJKdUJGekNIY28zT182eFBlM2FnaWRJN0dRa3JhX0Exbm9xRTV5T1ptMl8tLUVYUFNmWUthLVQ0YVhMaFU1cw?oc=5` — Finland launches criminal probe into land clearance for Google data centre
+  8. `link:https://news.google.com/rss/articles/CBMiqAFBVV95cUxNUjhKcWFqaW0taTFybUFadXlDRE1TNDJNYnF0djIzMUt1Mnc4aEJPM3NxaWtvWDRCTlJZdmQ1RU5KckYxYm9GcE0wZTBkdmE1aUhlbUhVQ2xNSlY3SjdDQXVGdjBhTGN0RjZ4cTdzRGh5ajVYOTZOZEdrUVVMdGJZRWI1Vm5raUpGQTdvNHhDQTJKcU9tLXZpeTE1YVhfcm1vdEVGNEF2dDE?oc=5` — US vs China: As the world splits into AI blocs, where does Europe stand?
+  - … plus 18 more in the package manifest
 
 ### Worker B
 - Current package: `worker-b-20261029T085853Z-64145a2dbff2`
