@@ -67,18 +67,19 @@ jobs:
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
           CROSSREF_MAILTO: ${{ secrets.CROSSREF_MAILTO }}
         run: python scripts/relevance_focus.py discover --max-seconds 1500 --output "$RUNNER_TEMP/relevance_candidates.json"
-      - name: Admit discovered candidates through ordinary Radar A/B/C checks (after discovery)
+      - name: Admit ONLY focused candidates through Radar A/B/C checks (no second discovery)
         if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'scan')
         env:
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
           CROSSREF_MAILTO: ${{ secrets.CROSSREF_MAILTO }}
-          RADAR_SCAN_BUDGET_SECONDS: '1500'
+          RADAR_SCAN_BUDGET_SECONDS: '900'
         shell: bash
         run: |
           set -euo pipefail
           # A zero-match initial page must NOT cancel discovery or admission.
           # The dedicated research phase already spent its full 1500 seconds;
-          # Radar validation, dedupe, outputs and Deep Scan routing follow here.
+          # Radar exact-candidate admission, dedupe and publication follow here;
+          # normal broad collectors are disabled for THIS run only.
           python scripts/relevance_focus.py scan --candidates "$RUNNER_TEMP/relevance_candidates.json"
           python scripts/validate_scanner_output.py
           python scripts/rebuild_active_radar.py
