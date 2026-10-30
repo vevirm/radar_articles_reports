@@ -227,68 +227,244 @@ def openalex_abstract(index):
     return ' '.join(w for _,w in sorted(seq))[:5000]
 
 
-def discover(path: Path, max_seconds=125, max_searches=32, max_candidates=90):
-    import requests  # no network dependency required for one-hit/backfill-only
-    since='2025-01-01'
-    session=requests.Session()
-    session.headers.update({'User-Agent':'EU-RI-Relevance-Scanner/1.0 (public research discovery)'})
-    api_key=clean(os.environ.get('OPENALEX_API_KEY'))
-    now=datetime.now(timezone.utc)
-    # Four-hour slot rotating sequentially, stable on reruns within a slot.
-    slot=int(now.timestamp()//(4*3600))
-    grouped={}
-    for bucket, q in SEARCHES: grouped.setdefault(bucket,[]).append(q)
-    order=[]
-    for bucket, queries in grouped.items():
-        offset=(slot*3)%len(queries)
-        order.extend((bucket,queries[(offset+i)%len(queries)]) for i in range(min(5,len(queries))))
-    # Append more rotating issue queries whenever budget permits.
-    issue=grouped['Issue'];order += [('Issue',issue[(slot+ix)%len(issue)]) for ix in range(6)]
-    order=order[:max_searches]
-    known={clean(x.get('link') or x.get('url')).lower().rstrip('/') for area in ('strand_a','strand_b','strand_c') for x in load('radar.json',{}).get(area,[])}
-    known.update(clean(x.get('url')).lower().rstrip('/') for x in load('historical/historical.json',{}).get('items',[]))
-    picked={};stats=Counter();start=time.monotonic()
-    for bucket,q in order:
-        if time.monotonic()-start>max_seconds:break
+# Run a whole 25 minutes of *focused discovery*.  Candidate admission and the
+# workbook generation happen AFTER this period; neither is charged to it.
+FOCUSED_DISCOVERY_SECONDS = 25 * 60
+FOCUSED_REQUEST_PACING_SECONDS = 5.0   # polite API use, also avoids rate-limit bursts
+FOCUSED_PAGE_DEPTH = 24
+
+
+def focused_search_plan(slot: int):
+    """Interleave all regions and issues before going deeper (no repetitive page-1 loop)."""
+    buckets = {}
+    for bucket, query in SEARCHES:
+        buckets.setdefault(bucket, []).append(query)
+    for bucket, queries in buckets.items():
+        rotate = slot % len(queries)
+        buckets[bucket] = queries[rotate:] + queries[:rotate]
+    order = []
+    for position in range(max(map(len, buckets.values()))):
+        for bucket, queries in buckets.items():
+            if position < len(queries):
+                order.append((bucket, queries[position]))
+    # Unique endpoint/query/page combinations: search deeper instead of repeating
+    # the same 32 searches when the first results are old/already known.
+    for page in range(1, FOCUSED_PAGE_DEPTH + 1):
+        for bucket, query in order:
+            yield bucket, query, 'openalex', page
+            yield bucket, query, 'crossref', page
+
+
+def crossref_date(item):
+    for field in ('published', 'published-online', 'published-print', 'created'):
+        parts = (item.get(field) or {}).get('date-parts') or []
+        if parts and parts[0]:
+            try:
+                return '-'.join(f'{int(n):0{4 if i == 0 else 2}d}' for i, n in enumerate(parts[0][:3]))
+            except (TypeError, ValueError):
+                pass
+    return ''
+
+
+def relevance_work(source, work):
+    """Normalize locator metadata only; Main Radar alone judges source and admission."""
+    if source == 'openalex':
+        title = clean(work.get('display_name'))
+        abstract = openalex_abstract(work.get('abstract_inverted_index'))
+        doi = clean(work.get('doi'))
+        link = doi or clean(work.get('id'))
+        venue = clean(((work.get('primary_location') or {}).get('source') or {}).get('display_name'))
+        published = clean(work.get('publication_date'))
+    else:
+        title = clean((work.get('title') or [''])[0])
+        # Crossref abstracts can be JATS fragments; strip tags before matching.
+        abstract = re.sub(r'<[^>]+>', ' ', clean(work.get('abstract')))
+        doi = clean(work.get('DOI'))
+        link = clean(work.get('URL')) or ('https://doi.org/' + doi if doi else '')
+        venue = clean((work.get('container-title') or [''])[0])
+        published = crossref_date(work)
+    if not link or not title:
+        return None
+    match = matching(title, abstract)
+    if not match:
+        return None
+    canonical = doi.casefold().removeprefix('https://doi.org/') if doi else title.casefold()
+    candidate = {
+        'candidate_id':'REL-'+hashlib.sha256(canonical.encode()).hexdigest()[:14],
+        'group_id':'relevance-focus', 'role_in_group':'primary',
+        'candidate_kind':'substantive_publication', 'title':title, 'source':venue,
+        'date':published, 'doi':doi.removeprefix('https://doi.org/'),
+        'url':link, 'curator_note':'Relevance focus: '+match['match_reason'],
+    }
+    return canonical, match['score'], candidate
+
+
+def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=110,
+             *, session=None, clock=None, pause=None):
+    """Sustained focused search, not an optional two-minute preflight.
+
+    `max_seconds` bounds the research-discovery period, NOT validation, admission,
+    rebuilding the corpus, workbook generation or the GitHub job.  Empty candidate
+    sets do not terminate discovery.  If all providers fail, fail visibly rather
+    than reporting a green two-minute scan or idling to disguise the problem.
+    """
+    import requests  # no network dependency for backfill-only
+    if session is None:
+        session = requests.Session()
+    session.headers.update({'User-Agent':'EU-RI-Relevance-Scanner/2.0 (public research discovery)'})
+    clock = clock or time.monotonic
+    pause = pause or time.sleep
+    max_seconds = float(max_seconds)
+    if max_seconds <= 0:
+        raise ValueError('Focused discovery duration must be positive')
+    now = datetime.now(timezone.utc)
+    slot = int(now.timestamp() // (4*3600))
+    api_key = clean(os.environ.get('OPENALEX_API_KEY'))
+    crossref_mailto = clean(os.environ.get('CROSSREF_MAILTO'))
+    known = {clean(x.get('link') or x.get('url')).lower().rstrip('/')
+             for area in ('strand_a','strand_b','strand_c')
+             for x in load('radar.json',{}).get(area,[])}
+    known.update(clean(x.get('url')).lower().rstrip('/')
+                 for x in load('historical/historical.json',{}).get('items',[]))
+    picked = {}
+    per_bucket = {}
+    stats = Counter()
+    blocked = set()
+    cooldown_until = {'openalex': 0.0, 'crossref': 0.0}
+    failures = {'openalex': 0, 'crossref': 0}
+    start = clock()
+    deadline = start + max_seconds
+    last_progress = start
+    # Iterable covers far more distinct queries/pages than one 25-minute window
+    # can consume. Rotate region/issue focus and never reuse a completed search.
+    plan = iter(focused_search_plan(slot))
+    successful_requests = 0
+    while (remaining := deadline - clock()) > 0:
+        if len(blocked) == 2:
+            raise RuntimeError('Both focused discovery providers unavailable: '+str(dict(stats)))
         try:
-            params={
-             'search':q,'filter':f'from_publication_date:{since},to_publication_date:{now.date().isoformat()}',
-             'per-page':8,'select':'id,display_name,doi,publication_date,primary_location,abstract_inverted_index,authorships,type',
-            }
-            if api_key: params['api_key']=api_key
-            resp=session.get('https://api.openalex.org/works',params=params,timeout=12)
-            if resp.status_code==429:
-                stats['rate_limited']+=1;break
+            bucket, query, provider, page = next(plan)
+        except StopIteration:
+            raise RuntimeError('All focused searches exhausted before 25-minute window')
+        if provider in blocked:
+            continue
+        now_mono = clock()
+        if now_mono < cooldown_until[provider]:
+            # Do not spin past hundreds of distinct queries while both services
+            # are in a 429 cooldown. Back off before the next attempt.
+            pause(min(5.0, cooldown_until[provider] - now_mono,
+                      max(0.0, deadline - now_mono)))
+            continue
+        remaining = deadline - now_mono
+        if remaining <= 0:
+            break
+        # Every attempt has a bounded deadline so no one HTTP call extends the
+        # discovery window into the downstream processing time.
+        timeout = min(12.0, max(0.25, remaining - 0.2))
+        try:
+            if provider == 'openalex':
+                params = {
+                    'search':query,
+                    'filter':'from_publication_date:2024-01-01,to_publication_date:'+now.date().isoformat(),
+                    'per-page':25, 'page':page,
+                    'select':'id,display_name,doi,publication_date,primary_location,abstract_inverted_index',
+                }
+                if api_key: params['api_key'] = api_key
+                resp = session.get('https://api.openalex.org/works', params=params, timeout=timeout)
+            else:
+                params = {
+                    'query.bibliographic':query, 'rows':20, 'offset':(page-1)*20,
+                    'filter':'from-pub-date:2024-01-01,until-pub-date:'+now.date().isoformat(),
+                    'select':'DOI,title,published,published-online,published-print,created,container-title,abstract,URL',
+                }
+                if crossref_mailto: params['mailto'] = crossref_mailto
+                resp = session.get('https://api.crossref.org/works', params=params, timeout=timeout)
+            stats['requests'] += 1
+            if resp.status_code in (401, 403):
+                stats[provider+'_auth_or_access_error'] += 1
+                blocked.add(provider)
+                print('Focused search provider denied access:',provider,resp.status_code,flush=True)
+                continue
+            if resp.status_code == 429:
+                stats[provider+'_rate_limited'] += 1
+                # Switch providers for now; retry this one at a controlled pace.
+                cooldown_until[provider] = clock() + 90
+                failures[provider] += 1
+                if failures[provider] >= 6:
+                    blocked.add(provider)
+                continue
             if not resp.ok:
-                stats['http_error']+=1;continue
-            works=resp.json().get('results',[])
-            stats['queries_completed']+=1
-        except (requests.RequestException,ValueError):
-            stats['network_error']+=1;continue
-        for w in works:
-            title=clean(w.get('display_name')); doi=clean(w.get('doi'))
-            link=doi or clean(w.get('id'))
-            if not title or (link.lower().rstrip('/') in known):continue
-            matched=matching(title,openalex_abstract(w.get('abstract_inverted_index')))
-            if not matched:continue
-            canonical=doi.lower() if doi else title.casefold()
-            if canonical in picked:continue
-            source=(w.get('primary_location') or {}).get('source') or {}
-            picked[canonical]={'candidate_id':'REL-'+hashlib.sha256(canonical.encode()).hexdigest()[:14],
-             'group_id':'relevance-focus', 'role_in_group':'primary','candidate_kind':'substantive_publication',
-             'title':title,'source':clean(source.get('display_name')),
-             'date':clean(w.get('publication_date')),'doi':doi.removeprefix('https://doi.org/'),
-             'url':link,'curator_note':'Relevance focus: '+matched['match_reason'],
-             '_score':matched['score']}
-            stats['candidate_matches']+=1
-    candidates=sorted(picked.values(),key=lambda x:-x.pop('_score'))[:max_candidates]
-    out={'profile_version':'v1-relevance-priority-discovery','batch_id':'relevance-'+now.strftime('%Y%m%dT%H%M%SZ'),
-     'source_document':'OpenAlex focused literature discovery; candidate metadata only',
-     'compiled_at':now.isoformat(),'policy':{'admission':'Normal Radar A/B/C source and relevance gates are mandatory; no automatic admission'},
-     'candidates':candidates,'work_count':len(candidates),'discovery_stats':dict(stats)}
+                stats[provider+'_http_error'] += 1
+                failures[provider] += 1
+                if failures[provider] >= 6:
+                    blocked.add(provider)
+                continue
+            results = (resp.json().get('results',[]) if provider=='openalex'
+                       else resp.json().get('message',{}).get('items',[]))
+            successful_requests += 1
+            stats[provider+'_queries_completed'] += 1
+            failures[provider] = 0
+            if not results:
+                stats['empty_results'] += 1
+            for work in results:
+                if not isinstance(work, dict):
+                    stats['malformed_work'] += 1
+                    continue
+                try:
+                    rec = relevance_work(provider, work)
+                except (ValueError, TypeError, AttributeError):
+                    stats['malformed_work'] += 1
+                    continue
+                if rec is None:
+                    continue
+                canonical, score, candidate = rec
+                if canonical in picked or candidate['url'].lower().rstrip('/') in known:
+                    continue
+                picked[canonical] = (score, bucket, candidate)
+                per_bucket[bucket] = per_bucket.get(bucket, 0) + 1
+                stats['candidate_matches'] += 1
+        except (requests.RequestException, ValueError, KeyError, TypeError, AttributeError) as exc:
+            stats[provider+'_network_or_payload_error'] += 1
+            failures[provider] += 1
+            if failures[provider] >= 6:
+                blocked.add(provider)
+            print('Focused search retryable error:',provider,type(exc).__name__,flush=True)
+        if clock()-last_progress >= 60:
+            print(f'Focused discovery +{clock()-start:.0f}s / {max_seconds:.0f}s: '
+                  f'{successful_requests} successful queries, {len(picked)} relevance candidates',flush=True)
+            last_progress = clock()
+        # Per-request pacing is part of live discovery; it protects external APIs.
+        if deadline-clock() > 0:
+            pause(min(FOCUSED_REQUEST_PACING_SECONDS, deadline-clock()))
+    if not successful_requests:
+        raise RuntimeError('No successful focused discovery queries; no 25-minute scan can be claimed')
+    # Do not let China/US-heavy source volume crowd out countries/regions with
+    # smaller publishing systems; take best scores in interleaved geography buckets.
+    buckets = {}
+    for score, bucket, row in picked.values():
+        buckets.setdefault(bucket,[]).append((score,row))
+    for bucket in buckets:
+        buckets[bucket].sort(key=lambda pair: -pair[0])
+    candidates=[]
+    while len(candidates) < max_candidates and any(buckets.values()):
+        for bucket in list(buckets):
+            if buckets[bucket] and len(candidates) < max_candidates:
+                candidates.append(buckets[bucket].pop(0)[1])
+    stats['seconds_spent_discovering'] = round(clock()-start,2)
+    stats['successful_requests'] = successful_requests
+    stats['coverage_buckets'] = len(per_bucket)
+    out={'profile_version':'v2-relevance-sustained-25m',
+         'batch_id':'relevance-'+now.strftime('%Y%m%dT%H%M%SZ'),
+         'source_document':'OpenAlex and Crossref focused literature discovery; candidate metadata only',
+         'compiled_at':datetime.now(timezone.utc).isoformat(),
+         'policy':{'admission':'Normal Radar A/B/C source and relevance gates are mandatory; no automatic admission',
+                   'discovery_seconds_target':max_seconds,
+                   'processing_after_discovery':True},
+         'candidates':candidates,'work_count':len(candidates),
+         'discovery_stats':dict(stats)}
     path.parent.mkdir(parents=True,exist_ok=True)
     path.write_text(json.dumps(out,ensure_ascii=False,indent=2),encoding='utf8')
-    print('Relevance discovery:',len(candidates),'new exact candidates;',dict(stats),'->',path,flush=True)
+    print('Focused discovery complete:',len(candidates),'new candidates;',dict(stats),'->',path,flush=True)
 
 
 def scan(candidate_path:Path):
@@ -312,7 +488,7 @@ def main():
     p.add_argument('command',choices=['discover','scan','export-json'])
     p.add_argument('--output',type=Path,default=Path(os.getenv('RUNNER_TEMP','/tmp'))/'relevance_candidates.json')
     p.add_argument('--candidates',type=Path,default=Path(os.getenv('RUNNER_TEMP','/tmp'))/'relevance_candidates.json')
-    p.add_argument('--max-seconds',type=int,default=125)
+    p.add_argument('--max-seconds',type=int,default=FOCUSED_DISCOVERY_SECONDS)
     args=p.parse_args()
     if args.command=='discover': discover(args.output,max_seconds=args.max_seconds)
     elif args.command=='scan': return scan(args.candidates)
