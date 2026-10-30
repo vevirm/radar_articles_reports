@@ -16,16 +16,16 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261030T092251Z-3a073a70aae1`
+- Current package: `worker-a-20261030T093541Z-0dc1d16d9e57`
 - Assigned unresolved records: **13**
-  1. `historical:id:aa3fe4ee017c533e` — Chinese AI investments + Import expansion plan + Academic interference
-  2. `historical:id:1063c66252026bc0` — China-India relations + Exporting Chinese AI + Economic involution
-  3. `historical:id:3b7a10c3891e218b` — Europe’s hidden AI champions are vital in its quest to becoming a global tech leader – CEPS
-  4. `historical:id:ec27644c263cb785` — Stargate and the fight for AI supremacy – this is Europe’s wake-up call – CEPS
-  5. `historical:id:39f3f66ddd09b91f` — US-China AI competition + Deng Xiaoping's 120th birthday + South China Sea
-  6. `historical:id:027132829209b3a5` — Launching an ‘AI moonshot’ to develop a European large language model is the game changer that Europe needs – CEPS
-  7. `historical:id:c1c0f50aacedb9b2` — The Imperative of International Cooperation for EU Competitiveness and Resilience in Technology-Driven Industries
-  8. `historical:id:573507f1dde56f99` — The effects of university academic research on firm’s propensity to innovate at local level: evidence from Europe
+  1. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxNNE0tYWZuVElPc1pqVXdBNjFpX3AwcDM4SEpWangyang0ZlZsb21TR0EtVzAyZlBaNk9mVzRqdEgyMXRaS3Brd1ZIZnpvTHJONEd6dXBiWm1LakY3eXMzN3hXZ0szQ0w4UDZBTmFjTmc4UV9xWjlqMUFHZTdoSGZwSE5GVHk?oc=5` — EU can compete with US AI giants, says Brussels’ frontier-model champion
+  2. `link:https://news.google.com/rss/articles/CBMilgFBVV95cUxOUzBXVjBRYnM0Q1dqWE5ZeDBxblpZU2xRaUh3SGlzVW5lcV9ZYTFyUkhSamxXVTBPeU9jTzA0VFd5S1VIcVVMWHpCWXM3U3Vyd1V2UjBEQnJ0aUJ0NFpVSXN0aUdvZkJWbC1kMl8tb0pyeGJiQ3g0OGhqX2wtSlhzY2VzbThuVVpOaktkOFkzQjd2OWYxUmc?oc=5` — AI sell-off would rattle global economy, EU watchdog warns — recovery attempt 2/3
+  3. `link:https://doi.org/10.1093/ejhf/xuag328` — DPP3-positive circulatory shock: from targetable ICU endotype to Horizon Europe precision-therapy trial — recovery attempt 2/3
+  4. `historical:id:aa3fe4ee017c533e` — Chinese AI investments + Import expansion plan + Academic interference
+  5. `historical:id:1063c66252026bc0` — China-India relations + Exporting Chinese AI + Economic involution
+  6. `historical:id:3b7a10c3891e218b` — Europe’s hidden AI champions are vital in its quest to becoming a global tech leader – CEPS
+  7. `historical:id:ec27644c263cb785` — Stargate and the fight for AI supremacy – this is Europe’s wake-up call – CEPS
+  8. `historical:id:39f3f66ddd09b91f` — US-China AI competition + Deng Xiaoping's 120th birthday + South China Sea
   - … plus 5 more in the package manifest
 
 ### Worker B
