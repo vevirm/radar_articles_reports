@@ -1,0 +1,58 @@
+#!/usr/bin/env node
+'use strict';
+// Target-only Excel; uses the established no-dependency OOXML writer from stuff/workbook.js.
+const fs=require('fs'),path=require('path');
+const Workbook=require('../stuff/workbook.js');
+const root=path.resolve(__dirname,'..');
+const input=process.argv[2]||process.env.RELEVANCE_REPORT_JSON;
+if(!input)throw new Error('Usage: node scripts/generate_relevance_stuff.js <report.json> [output.xlsx]');
+const output=process.argv[3]||path.join(root,'Relevance Stuff','relevance_stuff.xlsx');
+const data=JSON.parse(fs.readFileSync(input,'utf8'));
+const verified=Array.isArray(data.verified)?data.verified:[];
+const pending=Array.isArray(data.pending)?data.pending:[];
+const headers=['Relevance score','Title','Date','Source','Source location','Strand','Countries / subregions','Geographic group','Matched emerging issues','Stakeholders','Why matched','What evidence says','Why it matters','Admission','Deep Scan status','Deep Scan checked at','Deep Scan package','Authors','Original source URL'];
+const keys=['score','title','date','source','source_location','strand','countries','regions','issues','stakeholders','match_reason','reader_what','reader_why','admission','verification','verified_at','deep_scan_package','authors','url'];
+const widths=[15,52,14,28,19,12,39,27,57,38,57,65,65,16,32,22,35,40,64];
+const toRows=arr=>arr.map(r=>keys.map(k=>k==='score'?Number(r[k]||0):String(r[k]??'')));
+const coverage=[];
+for(const [type,names] of Object.entries(data.catalogue||{})){
+  for(const name of names){
+    const inVerified=verified.filter(x=>x[type]&&x[type].split('; ').includes(name)).length;
+    const inPending=pending.filter(x=>x[type]&&x[type].split('; ').includes(name)).length;
+    coverage.push([type,name,inVerified,inPending]);
+  }
+}
+const notes=[
+  ['Purpose','Relevance-only evidence subset for the specified country/region, emerging-issue and stakeholder foresight priorities.'],
+  ['Created at (UTC)',String(data.generated_at||'')],
+  ['Verified / retained rows',verified.length],
+  ['Review / pending rows',pending.length],
+  ['Verified rule','Deep Scan work status=verified + authoritative reader identity verification + final admission KEEP.'],
+  ['Review rule','Relevant matches not yet meeting all three verified/retained conditions. Do NOT cite these as established evidence.'],
+  ['Source and scope','Main Radar A/B/C and Historical source corpus. Dropped, unverifiable or duplicate decisions are excluded.'],
+  ['Relevance rule','Explicit focus geography with R&I policy / transnational mechanism, OR a specific foregrounded emerging issue. Universities or businesses alone never qualify.'],
+  ['Score rule','A relevance-sorting signal, NOT an evidence-quality score or policy forecast.'],
+  ['Normal Radar output','Focused discovery candidates are sent through the existing priority-candidate adapter and all ordinary source, A/B/C, duplicate and admission gates.'],
+  ['One-time backfill','No internet calls and no new Deep Scan. Uses records already present on disk.'],
+  ['Limit','Keyword matching of titles and existing reader evidence can miss indirect references and can include some imperfect matches. Read original linked source before interpretation.'],
+];
+const specs=[
+  ['Verified and retained',headers,toRows(verified),widths],
+  ['Review queue',headers,toRows(pending),widths],
+  ['Focus coverage',['Dimension','Requested country / issue / stakeholder','Verified','Review'],coverage,[26,55,16,16]],
+  ['Read me',['Field','Notes'],notes,[26,110]],
+];
+const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const sheetType='application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml';
+const sheetRel='http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet';
+const files={
+ '[Content_Types].xml':`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>${specs.map((_,i)=>`<Override PartName="/xl/worksheets/sheet${i+1}.xml" ContentType="${sheetType}"/>`).join('')}<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>`,
+ '_rels/.rels':'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>',
+ 'xl/workbook.xml':`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>${specs.map(([n],i)=>`<sheet name="${esc(n)}" sheetId="${i+1}" r:id="rId${i+1}"/>`).join('')}</sheets></workbook>`,
+ 'xl/_rels/workbook.xml.rels':`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${specs.map((_,i)=>`<Relationship Id="rId${i+1}" Type="${sheetRel}" Target="worksheets/sheet${i+1}.xml"/>`).join('')}<Relationship Id="rId${specs.length+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`,
+ 'xl/styles.xml':'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><fonts count="2"><font><sz val="10"/><name val="Arial"/></font><font><b/><color rgb="FFFFFFFF"/><sz val="10"/><name val="Arial"/></font></fonts><fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FF193B40"/><bgColor indexed="64"/></patternFill></fill></fills><borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="4"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="2" borderId="0" applyFont="1" applyFill="1" applyAlignment="1"><alignment wrapText="1" vertical="center"/></xf><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0" applyAlignment="1"><alignment wrapText="1" vertical="top"/></xf><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0" applyAlignment="1"><alignment wrapText="1" vertical="top"/></xf></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>'
+};
+for(let i=0;i<specs.length;i++)files[`xl/worksheets/sheet${i+1}.xml`]=Workbook.sheetXml(specs[i][1],specs[i][2],specs[i][3]);
+fs.mkdirSync(path.dirname(output),{recursive:true});
+fs.writeFileSync(output,Buffer.from(Workbook.zip(files)));
+console.log(`Wrote ${output}: ${verified.length} Deep Scan verified + retained, ${pending.length} awaiting review. Coverage rows=${coverage.length}`);
