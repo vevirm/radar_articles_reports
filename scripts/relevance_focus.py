@@ -59,6 +59,9 @@ ISSUES = {
  'Science-based international organisations':r'\bUNESCO\b|\bIPCC\b|\bWorld\s+Health\s+Organi[sz]ation\b|\b(?-i:WHO)\b|\bintergovernmental\s+science\b|\bscience[ -]based\s+international\s+organi[sz]ations?\b',
  'Transnational R&I and innovation policy':r'\b(?:international|cross[ -]border|bilateral|multilateral|global)\s+(?:scientific\s+|science\s+|research\s+|innovation\s+|technolog\w*\s+)(?:collaboration|cooperation|partnership|policy|governance|diplomacy|networks?)\b|\b(?:research|science|technology|innovation)\s+(?:relations|partnerships|agreements|diplomacy|cooperation)\b|\bresearch\s+and\s+innovation\s+policy\b|\bR&I\s+policy\b',
  'Australia strategic reorientation to Europe':r'\baustrali(?:a|an)\b.{0,135}\b(?:europe|european|EU|UK|US|united\s+states)\b|\b(?:europe|european|EU)\b.{0,135}\baustrali(?:a|an)\b',
+ 'EU external R&I partnerships / enlargement':r'\b(?:horizon europe|framework programme|european research area|EU[–-](?:africa|india|asean|latin america|balkan|australia)|european union|european commission|european research|european innovation)\b.{0,170}\b(?:partner\w*|cooperat\w*|collaborat\w*|enlarg\w*|accession|integration|talent|research infrastructur\w*|digital ties|science|technology|innovation)\b|\b(?:partner\w*|cooperat\w*|collaborat\w*|enlarg\w*|accession|integration|talent|research infrastructur\w*|digital ties)\b.{0,170}\b(?:horizon europe|european union|european research|european innovation|EU[–-](?:africa|india|asean|latin america|balkan|australia))\b',
+ 'EU-facing technology standards / regulatory alignment':r'\b(?:european union|european|EU)\b.{0,145}\b(?:AI regulation|AI governance|digital regulation|standards|standardisation|standardization|cybersecurity|supply.chain resilience|technology governance)\b|\b(?:AI regulation|AI governance|digital regulation|standards|standardisation|standardization|cybersecurity|supply.chain resilience|technology governance)\b.{0,145}\b(?:european union|european|EU)\b',
+ 'Equitable international research partnerships':r'\b(?:african.european|european.african|europe.africa|EU.africa|global south)\b.{0,140}\b(?:research|science|epistemic|collaborat|partnership|infrastructur)\b|\b(?:research|science|epistemic|collaborat|partnership|infrastructur)\b.{0,140}\b(?:african.european|european.african|europe.africa|EU.africa|global south)\b',
 }
 STAKEHOLDERS = {
  'Universities / research institutions':r'\buniversit\w*\b|\bacademi(?:c|a)\b|\bresearch\s+institut\w*\b',
@@ -94,6 +97,10 @@ def matching(title: str, body: str) -> dict | None:
     tiss = [s for s in issues if re.search(ISSUES[s],title,re.I)]
     # On general US/China/EU material a country name alone is not a relevance claim.
     qualifying = bool(strong and (geo or any(s in tiss for s in strong))) or bool(geo and POLICY.search(text) and 'Transnational R&I and innovation policy' in issues)
+    eu_anchor = bool(re.search(r'\b(?:EU|Europe(?:an)?|Horizon Europe|European Research Area|Framework Programme)\b', text, re.I))
+    eu_facing = {'EU external R&I partnerships / enlargement', 'EU-facing technology standards / regulatory alignment', 'Equitable international research partnerships'}
+    if issues and set(issues).issubset(eu_facing) and not eu_anchor:
+        return None
     if not qualifying: return None
     if 'Science-based international organisations' in issues and not (geo or any(re.search(r'\b(?:withdraw\w*|future|scenario|reform|funding|governance|influence|multilateral|geopolit\w*|leadership|institutional|cooperation|diplomac\w*)\b',text,re.I) for _ in [0])) and len(issues)==1:
         return None
@@ -217,6 +224,41 @@ SEARCHES = [
   'Australia pivot UK US toward Europe science research',
  )
 ]
+
+
+# Mechanism-led, EU-anchored searches derived from missed verified Radar evidence.
+# These COMPLEMENT country coverage queries: neither search results nor geographic
+# mentions bypass Main Radar source/quality/Europe/admission/Deep Scan checks.
+EU_MECHANISM_SEARCHES = [
+ ('Europe — enlargement', 'EU Western Balkans innovation ecosystems economic complexity accession'),
+ ('Europe — enlargement', 'European Research Area enlargement candidates research integration'),
+ ('Europe — enlargement', 'Horizon Europe association Ukraine Moldova Georgia Western Balkans research'),
+ ('Europe — enlargement', 'EU enlargement partners digital cybersecurity research resilience'),
+ ('Africa', 'EU Africa research infrastructure digital science capacity partnerships'),
+ ('Africa', 'African European research collaboration epistemic inequalities equitable partnerships'),
+ ('Africa', 'European Union Africa China technology research infrastructure competition'),
+ ('Africa', 'EU Global Gateway Africa research innovation digital skills'),
+ ('Americas', 'EU Latin America Caribbean high performance computing AI research partnership'),
+ ('Americas', 'EU CELAC research infrastructures science technology cooperation'),
+ ('Americas', 'Europe Brazil Mexico Chile research diplomacy technology governance'),
+ ('Americas', 'EU Latin America China digital infrastructure innovation standards'),
+ ('Asia & Pacific', 'EU ASEAN technology standards artificial intelligence governance comparison'),
+ ('Asia & Pacific', 'European Union ASEAN research partnerships supply chain resilience'),
+ ('Asia & Pacific', 'EU India health science diplomacy research talent mobility'),
+ ('Asia & Pacific', 'EU Central Asia research connectivity critical minerals science diplomacy'),
+ ('Asia & Pacific', 'EU Australia Horizon Europe science cooperation strategic partnership'),
+ ('Middle East', 'European Union Gulf Saudi UAE Qatar research innovation universities partnerships'),
+ ('Middle East', 'EU Israel Palestine Jordan regional research cooperation science diplomacy'),
+ ('Middle East', 'EU Iran science technology diplomacy research restrictions'),
+ ('Issue', 'European Union science diplomacy UNESCO WHO IPCC multilateral governance reform'),
+ ('Issue', 'EU response US withdrawal global science organisations China influence'),
+ ('Issue', 'European research diplomacy high seas BBNJ marine science governance'),
+ ('Issue', 'Europe deep seabed mining critical minerals ocean science international regulation'),
+ ('Issue', 'EU critical raw materials external research partnerships knowledge security'),
+ ('Issue', 'EU science diplomacy faith based civil society universities industry ministries'),
+ ('Issue', 'EU foreign affairs trade ministries international science technology diplomacy'),
+]
+SEARCHES.extend(EU_MECHANISM_SEARCHES)
 
 
 def openalex_abstract(index):
