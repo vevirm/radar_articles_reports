@@ -38,7 +38,8 @@ jobs:
   relevance:
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
-    timeout-minutes: 38
+    # Dedicated 25-minute discovery PLUS normal Radar admission and publication.
+    timeout-minutes: 85
     permissions:
       contents: write
     steps:
@@ -60,12 +61,13 @@ jobs:
       - name: Check scanner preflight (scan runs only)
         if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'scan')
         run: python scripts/run_scan_preflight_tests.py
-      - name: Discover relevance-specific candidate works
+      - name: Discover relevance-specific candidate works (25 minutes minimum and maximum)
         if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'scan')
         env:
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
-        run: python scripts/relevance_focus.py discover --output "$RUNNER_TEMP/relevance_candidates.json"
-      - name: Run 25-minute focus through ordinary Radar A/B/C admission
+          CROSSREF_MAILTO: ${{ secrets.CROSSREF_MAILTO }}
+        run: python scripts/relevance_focus.py discover --max-seconds 1500 --output "$RUNNER_TEMP/relevance_candidates.json"
+      - name: Admit discovered candidates through ordinary Radar A/B/C checks (after discovery)
         if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'scan')
         env:
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
@@ -74,20 +76,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          # No candidates means no synthetic scan or write of unrelated findings.
-          if python - "$RUNNER_TEMP/relevance_candidates.json" <<'PY'
-          import json,sys
-          sys.exit(0 if json.load(open(sys.argv[1]))['candidates'] else 1)
-          PY
-          then
-            python scripts/relevance_focus.py scan --candidates "$RUNNER_TEMP/relevance_candidates.json"
-            python scripts/validate_scanner_output.py
-            python scripts/rebuild_active_radar.py
-            python scripts/check_active_corpus.py
-            node scripts/generate_stuff_workbook.js
-          else
-            echo 'No new eligible relevance candidates this slot; updating existing Deep Scan workbook only.'
-          fi
+          # A zero-match initial page must NOT cancel discovery or admission.
+          # The dedicated research phase already spent its full 1500 seconds;
+          # Radar validation, dedupe, outputs and Deep Scan routing follow here.
+          python scripts/relevance_focus.py scan --candidates "$RUNNER_TEMP/relevance_candidates.json"
+          python scripts/validate_scanner_output.py
+          python scripts/rebuild_active_radar.py
+          python scripts/check_active_corpus.py
+          node scripts/generate_stuff_workbook.js
       - name: Generate focused Excel from authoritative and pending source material
         run: |
           python scripts/relevance_focus.py export-json --output "$RUNNER_TEMP/relevance_report.json"
