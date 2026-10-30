@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-10-29T09:22:52Z",
+  "updated_at": "2026-10-30T09:12:07Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -16925,6 +16925,25 @@
       ],
       "updated_at": "2026-10-29T09:22:50Z",
       "deep_scan_package_id": "worker-b-20261029T085853Z-64145a2dbff2"
+    },
+    "link:https://publications.jrc.ec.europa.eu/repository/handle/JRC143503": {
+      "fields": {
+        "source": "The Lancet Planetary Health",
+        "date": "2025-10-01",
+        "type": "peer-reviewed journal Viewpoint",
+        "authors": "Ferike Thom; Felicitas Beier; Matthew Gibson; Marina Sundiang; David Chen; Thijs de Lange; Hermen Luchtenbelt; Gianmaria Tassinari; Abhijeet Mishra; Thais Diniz Oliveira"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Wageningen University research portal and PubMed establish the actual journal, 1 October 2025 publication date, peer-reviewed Viewpoint and author names. JRC was a repository host and one coauthor affiliation; supplied PDF excerpt was a JRC privacy statement, not the paper.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://research.wur.nl/en/publications/between-code-and-conscience-early-career-researcher-reflections-o/",
+        "https://pubmed.ncbi.nlm.nih.gov/41197647/"
+      ],
+      "updated_at": "2026-10-30T09:11:56Z",
+      "deep_scan_package_id": "worker-a-20261030T080533Z-f046f8f8fc03"
     }
   }
 }

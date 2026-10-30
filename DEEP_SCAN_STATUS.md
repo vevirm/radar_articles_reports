@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **3595** (Main **1767** + Historical **1828**)
-- Automatic queue still needing V2 verification: **61** (Main **26** + Historical **35**)
-- Currently assigned to workers: **61** (Main **26** + Historical **35**)
+- Authoritative V2 verified: **3618** (Main **1790** + Historical **1828**)
+- Automatic queue still needing V2 verification: **48** (Main **3** + Historical **45**)
+- Currently assigned to workers: **48** (Main **3** + Historical **45**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **44**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,17 +16,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261030T080533Z-f046f8f8fc03`
-- Assigned unresolved records: **26**
-  1. `link:https://era.gv.at/news-items/the-guild-position-paper-calls-for-smarter-state-aid-rules-to-strengthen-europes-innovation-capacity/` — The Guild position paper calls for smarter state aid rules to strengthen Europe’s innovation capacity
-  2. `link:https://publications.jrc.ec.europa.eu/repository/handle/JRC143503` — Between code and conscience: early-career researcher reflections on agroeconomic modelling and international research collaboration
-  3. `link:https://doi.org/10.1093/ejhf/xuag328` — DPP3-positive circulatory shock: from targetable ICU endotype to Horizon Europe precision-therapy trial
-  4. `link:https://cordis.europa.eu/project/id/101288808` — The European Union's Quest for a Relational Open Strategic Autonomy | QUEST | Project | Fact Sheet | HORIZON | CORDIS | European Commission
-  5. `link:https://cordis.europa.eu/project/id/101288288` — Redefining Economic Security for an Upgraded, Resilient and Geopolitical Europe | RESURGE | Project | Fact Sheet | HORIZON | CORDIS | European Commission
-  6. `link:https://doi.org/10.48550/arxiv.2607.27029` — Anticipatory Data Governance in the Age of AI: Emerging Signals in Data Access, Reuse, and Sovereignty
-  7. `link:https://news.google.com/rss/articles/CBMiywFBVV95cUxQZk1Mbjlqa3B2RFBxMXpXbTcwVjdMYVpwYkhDVmcyWkpKSEpDTDFzZG9QeHVWOERzNDRJYmNwRHFYWUY0dHV6RDRvaEl4QUYxVVZtOTFZNUNqa18zR2ZiVlJ5eTYtQ0hOcEswMGt3TzdCV0tJazJnMzlBZmZuWXdLZUhQRURmbEZfVTJFbUJKdUJGekNIY28zT182eFBlM2FnaWRJN0dRa3JhX0Exbm9xRTV5T1ptMl8tLUVYUFNmWUthLVQ0YVhMaFU1cw?oc=5` — Finland launches criminal probe into land clearance for Google data centre
-  8. `link:https://news.google.com/rss/articles/CBMiqAFBVV95cUxNUjhKcWFqaW0taTFybUFadXlDRE1TNDJNYnF0djIzMUt1Mnc4aEJPM3NxaWtvWDRCTlJZdmQ1RU5KckYxYm9GcE0wZTBkdmE1aUhlbUhVQ2xNSlY3SjdDQXVGdjBhTGN0RjZ4cTdzRGh5ajVYOTZOZEdrUVVMdGJZRWI1Vm5raUpGQTdvNHhDQTJKcU9tLXZpeTE1YVhfcm1vdEVGNEF2dDE?oc=5` — US vs China: As the world splits into AI blocs, where does Europe stand?
-  - … plus 18 more in the package manifest
+- Current package: `worker-a-20261030T092251Z-3a073a70aae1`
+- Assigned unresolved records: **13**
+  1. `historical:id:aa3fe4ee017c533e` — Chinese AI investments + Import expansion plan + Academic interference
+  2. `historical:id:1063c66252026bc0` — China-India relations + Exporting Chinese AI + Economic involution
+  3. `historical:id:3b7a10c3891e218b` — Europe’s hidden AI champions are vital in its quest to becoming a global tech leader – CEPS
+  4. `historical:id:ec27644c263cb785` — Stargate and the fight for AI supremacy – this is Europe’s wake-up call – CEPS
+  5. `historical:id:39f3f66ddd09b91f` — US-China AI competition + Deng Xiaoping's 120th birthday + South China Sea
+  6. `historical:id:027132829209b3a5` — Launching an ‘AI moonshot’ to develop a European large language model is the game changer that Europe needs – CEPS
+  7. `historical:id:c1c0f50aacedb9b2` — The Imperative of International Cooperation for EU Competitiveness and Resilience in Technology-Driven Industries
+  8. `historical:id:573507f1dde56f99` — The effects of university academic research on firm’s propensity to innovate at local level: evidence from Europe
+  - … plus 5 more in the package manifest
 
 ### Worker B
 - Current package: `worker-b-20261029T085853Z-64145a2dbff2`
