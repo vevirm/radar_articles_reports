@@ -10,25 +10,31 @@ const output=process.argv[3]||path.join(root,'Relevance Stuff','relevance_stuff.
 const data=JSON.parse(fs.readFileSync(input,'utf8'));
 const verified=Array.isArray(data.verified)?data.verified:[];
 const pending=Array.isArray(data.pending)?data.pending:[];
-const headers=['Relevance score','Title','Date','Source','Source location','Strand','Countries / subregions','Geographic group','Matched emerging issues','Stakeholders','Why matched','What evidence says','Why it matters','Admission','Deep Scan status','Deep Scan checked at','Deep Scan package','Authors','Original source URL'];
-const keys=['score','title','date','source','source_location','strand','countries','regions','issues','stakeholders','match_reason','reader_what','reader_why','admission','verification','verified_at','deep_scan_package','authors','url'];
-const widths=[15,52,14,28,19,12,39,27,57,38,57,65,65,16,32,22,35,40,64];
+const awaiting=pending.filter(r=>r.workflow_state==='Deep Scan not complete');
+const admissionReview=pending.filter(r=>r.workflow_state!=='Deep Scan not complete');
+const headers=['Relevance score','Title','Date','Source','Source location','Strand','Countries / subregions','Geographic group','Matched emerging issues','Stakeholders','Why matched','What evidence says','Why it matters','Admission','Workflow stage','Deep Scan status','Deep Scan checked at','Deep Scan package','Authors','Original source URL'];
+const keys=['score','title','date','source','source_location','strand','countries','regions','issues','stakeholders','match_reason','reader_what','reader_why','admission','workflow_state','verification','verified_at','deep_scan_package','authors','url'];
+const widths=[15,52,14,28,19,12,39,27,57,38,57,65,65,16,42,32,22,35,40,64];
 const toRows=arr=>arr.map(r=>keys.map(k=>k==='score'?Number(r[k]||0):String(r[k]??'')));
 const coverage=[];
 for(const [type,names] of Object.entries(data.catalogue||{})){
   for(const name of names){
     const inVerified=verified.filter(x=>x[type]&&x[type].split('; ').includes(name)).length;
-    const inPending=pending.filter(x=>x[type]&&x[type].split('; ').includes(name)).length;
-    coverage.push([type,name,inVerified,inPending]);
+    const inReview=admissionReview.filter(x=>x[type]&&x[type].split('; ').includes(name)).length;
+    const inAwaiting=awaiting.filter(x=>x[type]&&x[type].split('; ').includes(name)).length;
+    coverage.push([type,name,inVerified,inReview,inAwaiting]);
   }
 }
 const notes=[
   ['Purpose','Relevance-only evidence subset for the specified country/region, emerging-issue and stakeholder foresight priorities.'],
   ['Created at (UTC)',String(data.generated_at||'')],
   ['Verified / retained rows',verified.length],
-  ['Review / pending rows',pending.length],
+  ['Admission-review rows (Deep Scan completed)',admissionReview.length],
+  ['Awaiting Deep Scan / source recovery rows',awaiting.length],
   ['Verified rule','Deep Scan work status=verified + authoritative reader identity verification + final admission KEEP.'],
-  ['Review rule','Relevant matches not yet meeting all three verified/retained conditions. Do NOT cite these as established evidence.'],
+  ['Admission review rule','Deep Scan identity verified, but final Admission decision is REVIEW. Requires human admission decision, not another normal Deep Scan package.'],
+  ['Awaiting Deep Scan rule','Deep Scan not complete; items may already be assigned to existing packages or held for hands-on verification. Check DEEP_SCAN_STATUS.md before creating jobs.'],
+  ['Prior workbook correction','The earlier 125-review export was invalid: lowercasing case-sensitive Deep Scan URL keys hid stored KEEP and DROP decisions. Exact-key joins restore those decisions.'],
   ['Source and scope','Main Radar A/B/C (including inactive), Historical, and all stored Deep Scan/Reader decisions. Original provenance is shown per row; dropped/unverifiable/duplicate decisions are excluded.'],
   ['Relevance rule','Named emerging issue or substantive country/region R&I-policy focus in original title or leading Reader evidence. Stakeholder names alone never qualify.'],
   ['Score rule','A relevance-sorting signal, NOT an evidence-quality score or policy forecast.'],
@@ -45,7 +51,8 @@ const diagnostics=[
   ['Relevance extraction diagnostic','Value'],
   ['Distinct matching records',verified.length+pending.length],
   ['Deep Scan verified and KEEP',verified.length],
-  ['Review / pending',pending.length],
+  ['Admission REVIEW — Deep Scan complete',admissionReview.length],
+  ['Deep Scan not complete',awaiting.length],
   ['Unique works evaluated',data.statistics?.unique_works_evaluated||0],
   ['Stored Reader records evaluated',data.statistics?.stored_reader_records_evaluated||0],
   ['Missing focus geographies',gaps.length],
@@ -56,8 +63,9 @@ const diagnostics=[
 ];
 const specs=[
   ['Verified and retained',headers,toRows(verified),widths],
-  ['Review queue',headers,toRows(pending),widths],
-  ['Focus coverage',['Dimension','Requested country / issue / stakeholder','Verified','Review'],coverage,[26,55,16,16]],
+  ['Admission review',headers,toRows(admissionReview),widths],
+  ['Awaiting Deep Scan',headers,toRows(awaiting),widths],
+  ['Focus coverage',['Dimension','Requested country / issue / stakeholder','Verified','Admission review','Awaiting Deep Scan'],coverage,[26,55,16,18,20]],
   ['Read me',['Field','Notes'],notes,[26,110]],
   ['Coverage audit',['Metric','Count / value'],diagnostics,[56,25]],
 ];
@@ -74,4 +82,4 @@ const files={
 for(let i=0;i<specs.length;i++)files[`xl/worksheets/sheet${i+1}.xml`]=Workbook.sheetXml(specs[i][1],specs[i][2],specs[i][3]);
 fs.mkdirSync(path.dirname(output),{recursive:true});
 fs.writeFileSync(output,Buffer.from(Workbook.zip(files)));
-console.log(`Wrote ${output}: ${verified.length} Deep Scan verified + retained, ${pending.length} awaiting review. Coverage rows=${coverage.length}`);
+console.log(`Wrote ${output}: ${verified.length} Deep Scan verified + retained, ${admissionReview.length} admission review, ${awaiting.length} Deep Scan unfinished. Coverage rows=${coverage.length}`);

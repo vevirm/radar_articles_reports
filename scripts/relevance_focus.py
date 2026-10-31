@@ -135,10 +135,11 @@ def load(rel, default):
 
 
 def link_key(x):
+    # Deep Scan's record_key preserves the case of URL paths, query strings, and
+    # Google News opaque article identifiers. A lowercase URL is a DIFFERENT
+    # work-state key: never lowercase a lookup key for these stores.
     url=clean(x.get('link') or x.get('url') or x.get('landing_page_url'))
-    if url:
-        return 'link:'+url.lower().rstrip('/')
-    return ''
+    return 'link:'+url if url else ''
 
 
 def related_record_keys(x, historical=False):
@@ -147,7 +148,12 @@ def related_record_keys(x, historical=False):
     if historical and x.get('doi'):base.append('historical:doi:'+str(x['doi']).lower())
     if historical and x.get('url'):base.append('historical:link:'+str(x['url']))
     lk=link_key(x)
-    if lk:base.extend([lk,lk.replace('https://doi.org/','https://dx.doi.org/')])
+    if lk:
+        # Exact key first. Legacy canonical variants are fallbacks only; do
+        # not normalize case on the authoritative lookup path.
+        base.extend([lk,lk.replace('https://doi.org/','https://dx.doi.org/')])
+        if lk.rstrip('/') != lk:
+            base.append(lk.rstrip('/'))
     return list(dict.fromkeys(base))
 
 
@@ -251,7 +257,11 @@ def compile_records():
             'strand': clean(item.get('strand') or rt.get('strand') or source.removeprefix('Main ')),
             'reader_what': clean(rt.get('reader_what') or item.get('reader_what') or item.get('reader_point')),
             'reader_why': clean(rt.get('reader_why') or item.get('reader_why') or item.get('why_it_matters')),
-            'verification': 'Deep Scan verified — retained' if deep_ok and decision == 'keep' else 'Review / awaiting authoritative retention',
+            'verification': 'Deep Scan verified — retained' if deep_ok and decision == 'keep' else 'Not verified + retained',
+            'workflow_state': ('Verified + KEEP' if deep_ok and decision == 'keep'
+                               else 'Admission REVIEW — Deep Scan complete' if deep_ok and decision == 'review'
+                               else 'Admission decision pending — Deep Scan complete' if deep_ok
+                               else 'Deep Scan not complete'),
             'admission': decision or 'not yet checked', 'verified_at': clean(ds.get('verified_at')),
             'deep_scan_package': clean(ds.get('verified_package_id') or rt.get('deep_scan_package_id')),
             **match,
