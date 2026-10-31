@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-10-30T09:12:07Z",
+  "updated_at": "2026-10-31T10:09:00Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -16944,6 +16944,54 @@
       ],
       "updated_at": "2026-10-30T09:11:56Z",
       "deep_scan_package_id": "worker-a-20261030T080533Z-f046f8f8fc03"
+    },
+    "link:https://doi.org/10.1016/j.sbr.2026.100318": {
+      "fields": {
+        "date": "2026-10-26"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Elsevier publisher page states first available online 26 October 2026, not scanner date 1 October 2026.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://www.sciencedirect.com/science/article/pii/S3051064326002694",
+        "https://content.openalex.org/works/W7223680186.pdf"
+      ],
+      "updated_at": "2026-10-31T10:08:52Z",
+      "deep_scan_package_id": "worker-a-20261031T094030Z-e8df71da3ce0"
+    },
+    "historical:id:2851d50d981ca5c1": {
+      "fields": {
+        "date": "2023-12-29"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Original Economic and Regional Studies article page lists publication date 29 December 2023.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://www.ers.edu.pl/ZMIANY-W-STRUKTURZE-RDZEN-PERYFERIA-SIECI-REGIONALNEJ-PROGRAMU-RAMOWEGO%2C176104%2C0%2C2.html",
+        "https://reference-global.com/download/article/10.2478/ers-2023-0032.pdf"
+      ],
+      "updated_at": "2026-10-31T10:08:55Z",
+      "deep_scan_package_id": "worker-a-20261031T094030Z-e8df71da3ce0"
+    },
+    "historical:id:dd47f24e16d30e33": {
+      "fields": {
+        "date": "2017-07-08"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Oxford University Research Archive records 8 July 2017 as original publication date, distinguishing November 2017 volume issue.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://ora.ox.ac.uk/objects/uuid%3Abc601ab2-44d3-4c50-a5f0-ee2c9117afb0",
+        "https://ora.ox.ac.uk/objects/uuid%3Abc601ab2-44d3-4c50-a5f0-ee2c9117afb0/files/mbc9e2bb47f577c7d223d78bfc3d1c810"
+      ],
+      "updated_at": "2026-10-31T10:09:00Z",
+      "deep_scan_package_id": "worker-a-20261031T094030Z-e8df71da3ce0"
     }
   }
 }

@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **3618** (Main **1790** + Historical **1828**)
-- Automatic queue still needing V2 verification: **65** (Main **17** + Historical **48**)
-- Currently assigned to workers: **65** (Main **17** + Historical **48**)
+- Authoritative V2 verified: **3638** (Main **1797** + Historical **1841**)
+- Automatic queue still needing V2 verification: **45** (Main **10** + Historical **35**)
+- Currently assigned to workers: **45** (Main **10** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **44**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,17 +16,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261031T094030Z-e8df71da3ce0`
-- Assigned unresolved records: **30**
-  1. `link:https://fudm.dk/english/key-areas/research-and-innovation/research-and-innovation-system/` — Research and Innovation system
-  2. `link:https://doi.org/10.1016/j.dim.2026.100145` — A risk-based framework for dynamic data sovereignty governance and national readiness
-  3. `link:https://doi.org/10.1016/j.sbr.2026.100318` — Scaling Artificial Intelligence: Diffusion Speed and Enterprise-Size Polarisation Across Europe
-  4. `link:https://doi.org/10.1002/ppul.71888` — International Collaboration in Primary Ciliary Dyskinesia
-  5. `link:https://doi.org/10.1016/j.respol.2026.105657` — The effects of national security assessments in public procurement on competition, sustainability, innovation, and critical technology procurement
-  6. `link:https://publications.jrc.ec.europa.eu/repository/handle/JRC148552` — SET Plan Progress Report 2026
-  7. `link:https://news.google.com/rss/articles/CBMimAFBVV95cUxQLUU2cGstT1FNbHpBb09nZVJ3a0xSMmNENmhCMWJnMFh6MXI2Nkhld2ZSWU5uM2Rmd3ZVdGFPT1BKbmVKN1d2M0dLcFdQWm5mT2ZNNDAxdnozSkxCdDZSel9YUGMtdnRTeHNya3l4RmFHOGNCeXVHOW9uM1VPcUo1dUQtZFpnSzJGNlFjLUY0Q1RpcWh3ZFFEbw?oc=5` — Nvidia CEO sees Kazakhstan as potential AI hub for Europe
-  8. `link:https://news.google.com/rss/articles/CBMi1AFBVV95cUxOWmZfNjZvNng4bTlvMmZZRUVRc2RvUUZVbHFhSDRxN0xYaXJWaEFFNjUzai1PbnlkSTAtRnZMLVZwSTBYR3hOTlAwMjhEM2hFdkZmMWplNG5kTGdhTks3WEZ6X0k5VFN2VTIySDN4ZGVTTkZ2STNPaEV4SUI5YUxHOV9lQkRobHdrdkJGSWNwdE1JWFY3UFJLX3hpeXpXVDdQNTA4akNHcE9GS1lFR2VKQV9CZzg5NnZhOWhEckpDeWxqek1JLWxPVTRIakVhZFNNbUVsTw?oc=5` — Quantum: 12.9% of technology signals are already at operational level - EU Science Hub
-  - … plus 22 more in the package manifest
+- Current package: `worker-a-20261031T101949Z-90bb8df9ba3b`
+- Assigned unresolved records: **10**
+  1. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxNNE0tYWZuVElPc1pqVXdBNjFpX3AwcDM4SEpWangyang0ZlZsb21TR0EtVzAyZlBaNk9mVzRqdEgyMXRaS3Brd1ZIZnpvTHJONEd6dXBiWm1LakY3eXMzN3hXZ0szQ0w4UDZBTmFjTmc4UV9xWjlqMUFHZTdoSGZwSE5GVHk?oc=5` — EU can compete with US AI giants, says Brussels’ frontier-model champion — recovery attempt 2/3
+  2. `link:https://news.google.com/rss/articles/CBMilgFBVV95cUxOUzBXVjBRYnM0Q1dqWE5ZeDBxblpZU2xRaUh3SGlzVW5lcV9ZYTFyUkhSamxXVTBPeU9jTzA0VFd5S1VIcVVMWHpCWXM3U3Vyd1V2UjBEQnJ0aUJ0NFpVSXN0aUdvZkJWbC1kMl8tb0pyeGJiQ3g0OGhqX2wtSlhzY2VzbThuVVpOaktkOFkzQjd2OWYxUmc?oc=5` — AI sell-off would rattle global economy, EU watchdog warns — recovery attempt 3/3
+  3. `link:https://doi.org/10.1093/ejhf/xuag328` — DPP3-positive circulatory shock: from targetable ICU endotype to Horizon Europe precision-therapy trial — recovery attempt 3/3
+  4. `link:https://news.google.com/rss/articles/CBMimAFBVV95cUxQLUU2cGstT1FNbHpBb09nZVJ3a0xSMmNENmhCMWJnMFh6MXI2Nkhld2ZSWU5uM2Rmd3ZVdGFPT1BKbmVKN1d2M0dLcFdQWm5mT2ZNNDAxdnozSkxCdDZSel9YUGMtdnRTeHNya3l4RmFHOGNCeXVHOW9uM1VPcUo1dUQtZFpnSzJGNlFjLUY0Q1RpcWh3ZFFEbw?oc=5` — Nvidia CEO sees Kazakhstan as potential AI hub for Europe
+  5. `link:https://news.google.com/rss/articles/CBMi1AFBVV95cUxOWmZfNjZvNng4bTlvMmZZRUVRc2RvUUZVbHFhSDRxN0xYaXJWaEFFNjUzai1PbnlkSTAtRnZMLVZwSTBYR3hOTlAwMjhEM2hFdkZmMWplNG5kTGdhTks3WEZ6X0k5VFN2VTIySDN4ZGVTTkZ2STNPaEV4SUI5YUxHOV9lQkRobHdrdkJGSWNwdE1JWFY3UFJLX3hpeXpXVDdQNTA4akNHcE9GS1lFR2VKQV9CZzg5NnZhOWhEckpDeWxqek1JLWxPVTRIakVhZFNNbUVsTw?oc=5` — Quantum: 12.9% of technology signals are already at operational level - EU Science Hub
+  6. `link:https://news.google.com/rss/articles/CBMipgFBVV95cUxOUFV1dFd0bGpfc25nX2cxVjdpOEVSdDJtbWxfV3VERUhLaThhNm9nMktINHRYZEJnX3Brd2ZMVnI1a0MwaEp2NG55bFlobkdQdVpiLVJPQjBhMmJtcFhkbG9pekliZmdkX3RJQ1ZHdGwxZFlNaDFmQ0hFSC13TXB3WWw0bm1jcFNfdHNENmpoSkpiZng5VHBkNHhMQUFtakZ5bGJ6QUtn?oc=5` — German Firms Prioritize AWS Cloud Innovation, Data Sovereignty – Company Announcement
+  7. `link:https://news.google.com/rss/articles/CBMiigFBVV95cUxPZjRtYTlLZU4tRTU0S0VJdkZZZmZIR29PSFdzQUJPdWJnTGVNY2lmdHpRaUVqQzdrTFF2U0xpXzZZb0JLdDNUNkdUQllCZnJXX0tiLVc1VWJHd1lEMXpadHlXZGRWTTdDdGw1eWZmM3RUZjItV1BRbUNIZTJsdWRiZ0RUY25JODA4SWc?oc=5` — How Africa-Europe research is changing global health
+  8. `link:https://doi.org/10.1016/j.respol.2026.105657` — The effects of national security assessments in public procurement on competition, sustainability, innovation, and critical technology procurement — recovery attempt 2/3
+  - … plus 2 more in the package manifest
 
 ### Worker B
 - Current package: `worker-b-20261029T085853Z-64145a2dbff2`
