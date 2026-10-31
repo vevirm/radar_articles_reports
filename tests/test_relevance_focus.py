@@ -97,6 +97,45 @@ class RelevanceFocusTests(unittest.TestCase):
         self.assertEqual(out['verified'], [])
         self.assertEqual(out['pending'], [])
 
+    def test_mixed_case_url_uses_authoritative_keep_decision(self):
+        # Opaque Google News IDs and many publisher URL paths are case-sensitive.
+        url = 'https://news.google.com/rss/articles/CbMiAbC123?oc=5'
+        key = 'link:' + url
+        item = {'title': 'EU China research innovation policy and science diplomacy',
+                'url': url, 'summary': 'China research cooperation and European policy'}
+        data = {
+            'radar_active.json': {'strand_c': [item]}, 'radar.json': {'strand_c': [item]},
+            'historical/historical.json': {'items': []},
+            'deep_scan_work_state.json': {'records': {key: {'status': 'verified', 'title': item['title'], 'url': url}}},
+            'admission_state.json': {'records': {key: {'decision': 'keep'}}},
+            'reader_text.json': {'records': {key: {
+                'profile': 'deep-reader-v2-authoritative',
+                'verification': {'identity_verified': True}}}}
+        }
+        with patch('relevance_focus.load', side_effect=lambda name, default: data.get(name, default)):
+            out = compile_records()
+        self.assertEqual(len(out['verified']), 1)
+        self.assertEqual(len(out['pending']), 0)
+
+    def test_mixed_case_url_never_readmits_existing_drop(self):
+        url = 'https://news.google.com/rss/articles/CbMiAbC123?oc=5'
+        key = 'link:' + url
+        item = {'title': 'EU China research innovation policy and science diplomacy',
+                'url': url, 'summary': 'China research cooperation and European policy'}
+        data = {
+            'radar_active.json': {}, 'radar.json': {'strand_c': [item]},
+            'historical/historical.json': {'items': []},
+            'deep_scan_work_state.json': {'records': {key: {'status': 'verified', 'title': item['title'], 'url': url}}},
+            'admission_state.json': {'records': {key: {'decision': 'drop'}}},
+            'reader_text.json': {'records': {key: {
+                'profile': 'deep-reader-v2-authoritative',
+                'verification': {'identity_verified': True}}}}
+        }
+        with patch('relevance_focus.load', side_effect=lambda name, default: data.get(name, default)):
+            out = compile_records()
+        self.assertEqual(out['verified'], [])
+        self.assertEqual(out['pending'], [])
+
     def test_stakeholder_alone_not_backfilled(self):
         self.assertIsNone(matching('University research in Canada','A university laboratory upgraded its equipment.',backfill=True))
 
