@@ -26,17 +26,17 @@ DEEP_PROFILE = 'deep-reader-v2-authoritative'
 # match: this avoids filling the workbook with ordinary EU-only publications.
 GEOGRAPHY = {
  'Europe — enlargement': {
-  'Albania':r'\balbani(?:a|an)\b', 'Bosnia and Herzegovina':r'\bbosni(?:a|an)\b|\bherzegovin(?:a|ian)\b',
+  'Western Balkans':r'\bwestern\s+balkans?\b', 'Albania':r'\balbani(?:a|an)\b', 'Bosnia and Herzegovina':r'\bbosni(?:a|an)\b|\bherzegovin(?:a|ian)\b',
   'Georgia':r'\bgeorgi(?:a|an)\b(?!\s+tech)', 'Kosovo':r'\bkosov(?:o|ar)\b',
   'Moldova':r'\bmoldov(?:a|an)\b', 'Montenegro':r'\bmontenegr(?:o|in)\b',
   'North Macedonia':r'\bnorth\s+macedoni(?:a|an)\b', 'Serbia':r'\bserbi(?:a|an)\b',
   'Ukraine':r'\bukrain(?:e|ian)\b', 'Türkiye':r'\bt[üu]rkiy(?:e|an)\b|\bturk(?:ey|ish)\b'},
  'Americas': {
-  'United States':r'\bunited\s+states\b|\bU\.S\.A?\.?\b|\bUS[–-](?:China|EU|Europe)\b|\bamerican\b',
+  'United States':r'\bunited\s+states\b|\bU\.S\.A?\.?\b|(?-i:\bUS\b)|\bamerican\b',
   'Canada':r'\bcanad(?:a|ian)\b', 'Brazil':r'\bbrazil(?:ian)?\b', 'Argentina':r'\bargentin(?:a|ian)\b',
   'Chile':r'\bchil(?:e|ean)\b', 'Mexico':r'\bmexic(?:o|an)\b',
   'Latin America and Caribbean':r'\blatin\s+america(?:n)?\b|\bcaribbean\b|\bLAC\b'},
- 'Africa': {'Egypt':r'\begypt(?:ian)?\b', 'Ethiopia':r'\bethiopi(?:a|an)\b',
+ 'Africa': {'Africa (region)':r'\bafric(?:a|an)\b', 'Egypt':r'\begypt(?:ian)?\b', 'Ethiopia':r'\bethiopi(?:a|an)\b',
   'Kenya':r'\bkeny(?:a|an)\b', 'Morocco':r'\bmorocc(?:o|an)\b', 'Nigeria':r'\bnigeri(?:a|an)\b',
   'Rwanda':r'\brwand(?:a|an)\b', 'South Africa':r'\bsouth\s+afric(?:a|an)\b'},
  'Asia & Pacific': {'ASEAN':r'\bASEAN\b|\bsoutheast\s+asia(?:n)?\b', 'Indonesia':r'\bindonesi(?:a|an)\b',
@@ -46,7 +46,7 @@ GEOGRAPHY = {
   'China':r'\bchin(?:a|ese)\b', 'India':r'\bindi(?:a|an)\b'},
  'Middle East': {'Iran':r'\biran(?:ian)?\b','Israel':r'\bisrael(?:i)?\b',
   'Palestine':r'\bpalestin(?:e|ian)\b','Jordan':r'\bjordan(?:ian)?\b',
-  'Saudi Arabia':r'\bsaudi\b','UAE':r'\bUAE\b|\bunited\s+arab\s+emirates\b|\bemirati\b'},
+  'Arabian Peninsula':r'\barabian\s+peninsula\b|\bgulf\s+states?\b|\bGCC\b', 'Saudi Arabia':r'\bsaudi\b','UAE':r'\bUAE\b|\bunited\s+arab\s+emirates\b|\bemirati\b'},
 }
 
 ISSUES = {
@@ -57,7 +57,7 @@ ISSUES = {
  'Science diplomacy':r'\bscience\s+diplomac\w*\b|\bscientific\s+diplomac\w*\b|\bdiplomac\w*\s+(?:through\s+)?(?:science|research|innovation)\b|\bresearch\s+diplomac\w*\b',
  'Ocean / deep sea beyond national jurisdiction':r'\bbeyond\s+national\s+jurisdiction\b|\bBBNJ\b|\bdeep[ -]sea\b|\bdeep[ -]ocean\b|\bseabed\b|\bhigh\s+seas\b|\bocean\s+governance\b|\bmarine\s+biodiversity\b',
  'Science-based international organisations':r'\bUNESCO\b|\bIPCC\b|\bWorld\s+Health\s+Organi[sz]ation\b|\b(?-i:WHO)\b|\bintergovernmental\s+science\b|\bscience[ -]based\s+international\s+organi[sz]ations?\b',
- 'Transnational R&I and innovation policy':r'\b(?:international|cross[ -]border|bilateral|multilateral|global)\s+(?:scientific\s+|science\s+|research\s+|innovation\s+|technolog\w*\s+)(?:collaboration|cooperation|partnership|policy|governance|diplomacy|networks?)\b|\b(?:research|science|technology|innovation)\s+(?:relations|partnerships|agreements|diplomacy|cooperation)\b|\bresearch\s+and\s+innovation\s+policy\b|\bR&I\s+policy\b',
+ 'Transnational R&I and innovation policy':r'\b(?:international|cross[ -]border|bilateral|multilateral|global)\s+(?:scientific\s+|science\s+|research\s+|innovation\s+|technolog\w*\s+)(?:collaboration|cooperation|partnership|policy|governance|diplomacy|networks?)\b|\b(?:scientific|research|science|technology|innovation)\s+(?:relations|partnerships|agreements|diplomacy|cooperation|collaboration)\b|\bresearch\s+and\s+innovation\s+policy\b|\bR&I\s+policy\b',
  'Australia strategic reorientation to Europe':r'\baustrali(?:a|an)\b.{0,135}\b(?:europe|european|EU|UK|US|united\s+states)\b|\b(?:europe|european|EU)\b.{0,135}\baustrali(?:a|an)\b',
  'EU external R&I partnerships / enlargement':r'\b(?:horizon europe|framework programme|european research area|EU[–-](?:africa|india|asean|latin america|balkan|australia)|european union|european commission|european research|european innovation)\b.{0,170}\b(?:partner\w*|cooperat\w*|collaborat\w*|enlarg\w*|accession|integration|talent|research infrastructur\w*|digital ties|science|technology|innovation)\b|\b(?:partner\w*|cooperat\w*|collaborat\w*|enlarg\w*|accession|integration|talent|research infrastructur\w*|digital ties)\b.{0,170}\b(?:horizon europe|european union|european research|european innovation|EU[–-](?:africa|india|asean|latin america|balkan|australia))\b',
  'EU-facing technology standards / regulatory alignment':r'\b(?:european union|european|EU)\b.{0,145}\b(?:AI regulation|AI governance|digital regulation|standards|standardisation|standardization|cybersecurity|supply.chain resilience|technology governance)\b|\b(?:AI regulation|AI governance|digital regulation|standards|standardisation|standardization|cybersecurity|supply.chain resilience|technology governance)\b.{0,145}\b(?:european union|european|EU)\b',
@@ -73,6 +73,7 @@ STAKEHOLDERS = {
 RI = re.compile(r'\bresearch\b|\bscience\b|\bscientific\b|\binnovation\b|\btechnolog\w*\b|\bR&D\b|\bR&I\b|\bacademi\w*\b|\buniversit\w*\b|\bknowledge\b|\bforesight\b|\bsemiconductors?\b|\bAI\b',re.I)
 POLICY = re.compile(r'\bpolic\w*\b|\bstrateg\w*\b|\bgeopolit\w*\b|\bgovern\w*\b|\bdiplomac\w*\b|\bcooperat\w*\b|\bcollaborat\w*\b|\bsecurity\b|\bcompetition\b|\bpartnership\w*\b|\bsovereign\w*\b|\bdevelopment\b|\bforesight\b|\bgeoeconom\w*\b|\btransform\w*\b|\btransition\b|\bfuture\b',re.I)
 STRONG = set(ISSUES) - {'Transnational R&I and innovation policy','Australia strategic reorientation to Europe'}
+COUNTRY_POLICY_ISSUE = 'Country / regional R&I policy or strategic foresight'
 
 
 def hits(text: str, dictionary: dict) -> list[str]:
@@ -83,7 +84,7 @@ def clean(s):
     return re.sub(r'\s+',' ',str(s or '')).strip()
 
 
-def matching(title: str, body: str) -> dict | None:
+def matching(title: str, body: str, *, backfill: bool = False) -> dict | None:
     title, body = clean(title), clean(body)
     text = f'{title}. {body}'[:14000]
     if not title or not RI.search(text):
@@ -91,7 +92,9 @@ def matching(title: str, body: str) -> dict | None:
     geo = [(group,place) for group,patterns in GEOGRAPHY.items() for place,pat in patterns.items() if re.search(pat,text,re.I)]
     issues = hits(text,ISSUES)
     people = hits(text, STAKEHOLDERS)
-    if not issues: return None
+    # The backfill must be able to find policy relevance even without one of the
+    # 12 narrow emerging-issue phrases. Discovery retains its stricter filter.
+    if not issues and not backfill: return None
     strong = [s for s in issues if s in STRONG]
     tgeo = [(g,p) for g,p in geo if re.search(GEOGRAPHY[g][p],title,re.I)]
     tiss = [s for s in issues if re.search(ISSUES[s],title,re.I)]
@@ -101,6 +104,18 @@ def matching(title: str, body: str) -> dict | None:
     eu_facing = {'EU external R&I partnerships / enlargement', 'EU-facing technology standards / regulatory alignment', 'Equitable international research partnerships'}
     if issues and set(issues).issubset(eu_facing) and not eu_anchor:
         return None
+    if not qualifying and backfill and geo and POLICY.search(title + ' ' + body[:700]):
+        # Do not infer country-specific relevance from an incidental mention deep
+        # in a long summary. Require the location to feature in the original title
+        # or lead evidence; that is a defensible, human-auditable policy signal.
+        leading = title + ' ' + body[:400]
+        lead_geo = any(re.search(GEOGRAPHY[g][p], leading, re.I) for g,p in geo)
+        explicit_policy = bool(re.search(r'\b(?:research|science|innovation|technolog\w*|R&I|R&D|universit\w*|AI)\b', leading, re.I)
+                         and POLICY.search(leading))
+        if lead_geo and explicit_policy:
+            qualifying = True
+            if not issues:
+                issues = [COUNTRY_POLICY_ISSUE]
     if not qualifying: return None
     if 'Science-based international organisations' in issues and not (geo or any(re.search(r'\b(?:withdraw\w*|future|scenario|reform|funding|governance|influence|multilateral|geopolit\w*|leadership|institutional|cooperation|diplomac\w*)\b',text,re.I) for _ in [0])) and len(issues)==1:
         return None
@@ -137,55 +152,140 @@ def related_record_keys(x, historical=False):
 
 
 def compile_records():
-    active=load('radar_active.json',{})
-    if not active:active=load('radar.json',{})
-    historical=load('historical/historical.json',{})
-    deep=load('deep_scan_work_state.json',{}).get('records',{})
-    admissions=load('admission_state.json',{}).get('records',{})
-    reader=load('reader_text.json',{}).get('records',{})
-    verified=[]; pending=[]; seen=set(); stats=Counter()
-    collections=[(f'Main {letter}', active.get('strand_'+letter.lower(),[]),False) for letter in 'ABC']
-    collections.append(('Historical',historical.get('items',[]),True))
-    for source, items, is_hist in collections:
-        for item in items:
-            if not isinstance(item,dict):continue
-            keys=related_record_keys(item,is_hist)
-            rt=next((reader[k] for k in keys if k in reader),{})
-            ad=next((admissions[k] for k in keys if k in admissions),{})
-            ds=next((deep[k] for k in keys if k in deep),{})
-            link=clean(item.get('link') or item.get('url') or item.get('landing_page_url'))
-            title=clean(item.get('title') or item.get('headline'))
-            identity=link.lower().rstrip('/') or re.sub(r'[^a-z0-9]','',title.lower())
-            if not identity or identity in seen:continue
-            seen.add(identity)
-            analysis=rt.get('deep_analysis') if isinstance(rt.get('deep_analysis'),dict) else item.get('deep_analysis') or {}
-            body=' '.join(clean(x) for x in [item.get('summary'),item.get('core_message'),item.get('reader_point'),item.get('why_it_matters'),item.get('relevance_note'),item.get('reader_what'),item.get('reader_why'),item.get('reader_more'),rt.get('reader_what'),rt.get('reader_why'),rt.get('reader_more'),analysis.get('main_finding'),analysis.get('radar_relevance'),analysis.get('method_or_basis')])
-            match=matching(title, body)
-            if match is None:continue
-            decision=clean(ad.get('decision') or rt.get('admission',{}).get('decision') or item.get('admission_status')).lower()
-            deep_ok=(ds.get('status')=='verified' and rt.get('profile')==DEEP_PROFILE and bool(rt.get('verification',{}).get('identity_verified')))
-            # Deep Scan is an evidence status, not a free pass for rejected works.
-            if decision in {'drop','drop_unverifiable','duplicate','needs_manual_verification'}:
-                stats['excluded_not_retained']+=1
-                continue
-            record={'title':title,'date':clean(item.get('date')),'source':clean(item.get('source') or item.get('venue')),
-              'authors':clean(item.get('authors')),'source_location':source,'url':link,
-              'strand':clean(item.get('strand') or source.removeprefix('Main ')),
-              'reader_what':clean(rt.get('reader_what') or item.get('reader_what') or item.get('reader_point')),
-              'reader_why':clean(rt.get('reader_why') or item.get('reader_why') or item.get('why_it_matters')),
-              'verification': 'Deep Scan verified — retained' if deep_ok and decision=='keep' else 'Review / awaiting authoritative retention',
-              'admission':decision or 'not yet checked','verified_at':clean(ds.get('verified_at')),
-              'deep_scan_package':clean(ds.get('verified_package_id') or rt.get('deep_scan_package_id')),
-              **match}
-            if deep_ok and decision=='keep':verified.append(record)
-            else:pending.append(record)
-    verified.sort(key=lambda a:(-a['score'],a['date'],a['title']))
-    pending.sort(key=lambda a:(-a['score'],a['date'],a['title']))
-    return {'generated_at':datetime.now(timezone.utc).isoformat(timespec='seconds'),
-     'verified':verified,'pending':pending,'statistics':dict(stats),
-     'catalogue':{'countries':list(dict.fromkeys(k for group in GEOGRAPHY.values() for k in group)),
-                  'regions':list(GEOGRAPHY),'issues':list(ISSUES),'stakeholders':list(STAKEHOLDERS)},
-     'policy':'Matched by explicit requested geography and science-policy / issue context. Verified sheet requires Deep Scan identity verification and a KEEP admission decision. Other matches are separated for review; nothing is promoted by this workbook.'}
+    """Audit all previously scanned records, not just today's active Radar slice.
+
+    Priority is active > historical > inactive main > stored Deep Scan. Every
+    worksheet row still requires an original item or authoritative Deep Scan
+    evidence, and KEEP + verified identity for the verified worksheet. The
+    result is a *relevance view*, never a change to the admission/corpus gates.
+    """
+    active = load('radar_active.json', {}) or load('radar.json', {})
+    raw = load('radar.json', {})
+    historical = load('historical/historical.json', {})
+    deep = load('deep_scan_work_state.json', {}).get('records', {})
+    admissions = load('admission_state.json', {}).get('records', {})
+    reader = load('reader_text.json', {}).get('records', {})
+    verified, pending, stats = [], [], Counter()
+    historic_by_id = {str(x.get('id')): x for x in historical.get('items', []) if x.get('id')}
+    candidates = []
+    for letter in 'ABC':
+        candidates.extend((f'Main {letter} — active', i, False, '') for i in active.get('strand_' + letter.lower(), []))
+    candidates.extend(('Historical', i, True, '') for i in historical.get('items', []))
+    for letter in 'ABC':
+        candidates.extend((f'Main {letter} — outside active view', i, False, '')
+                          for i in raw.get('strand_' + letter.lower(), []))
+
+    # Deep Scan and Reader preserve verified material no longer enumerated in
+    # radar_active.json.  Their explicit record keys are the source of joins;
+    # never invent a verified status from text keywords or an old scan count.
+    for key, rt in reader.items():
+        if not isinstance(rt, dict):
+            continue
+        ds = deep.get(key, {})
+        if key.startswith('historical:id:') and key[14:] in historic_by_id:
+            item = historic_by_id[key[14:]]
+        else:
+            sources = (rt.get('verification') or {}).get('recovered_sources') or []
+            recovered = next((z.get('url') for z in sources if isinstance(z, dict) and z.get('url')), '')
+            url = clean(ds.get('url') or (key[5:] if key.startswith('link:') else '') or recovered)
+            item = {'title': clean(ds.get('title') or rt.get('reader_title')),
+                    'date': ds.get('date', ''), 'source': ds.get('source_name', ''),
+                    'url': url, 'strand': rt.get('strand', '')}
+        candidates.append(('Stored Deep Scan / Reader', item, key.startswith('historical:'), key))
+
+    selected = {}
+    scoped_keys = set()
+    for source, item, is_hist, direct_key in candidates:
+        if not isinstance(item, dict):
+            continue
+        stats['source_rows_' + source] += 1
+        keys = ([direct_key] if direct_key else []) + related_record_keys(item, is_hist)
+        keys = list(dict.fromkeys(keys))
+        rt = next((reader[k] for k in keys if k in reader), {})
+        ad = next((admissions[k] for k in keys if k in admissions), {})
+        ds = next((deep[k] for k in keys if k in deep), {})
+        link = clean(item.get('link') or item.get('url') or item.get('landing_page_url') or ds.get('url'))
+        title = clean(item.get('title') or item.get('headline') or ds.get('title') or rt.get('reader_title'))
+        if not title:
+            continue
+        identity = link.lower().rstrip('/') or 'title:' + re.sub(r'[^a-z0-9]', '', title.lower())
+        # Preserve single bibliographic identity for audited counts, including
+        # inactive/active/historical overlap.
+        scoped_keys.add(identity)
+        analysis = rt.get('deep_analysis') if isinstance(rt.get('deep_analysis'), dict) else item.get('deep_analysis') or {}
+        body = ' '.join(clean(x) for x in [
+            item.get('summary'), item.get('core_message'), item.get('reader_point'),
+            item.get('why_it_matters'), item.get('relevance_note'),
+            item.get('reader_what'), item.get('reader_why'), item.get('reader_more'),
+            rt.get('reader_title'), rt.get('reader_what'), rt.get('reader_why'), rt.get('reader_more'),
+            analysis.get('research_question'), analysis.get('main_finding'),
+            analysis.get('radar_relevance'), analysis.get('method_or_basis'),
+            analysis.get('qualification')])
+        decision = clean(ad.get('decision') or (rt.get('admission') or {}).get('decision')
+                         or item.get('admission_status')).lower()
+        deep_ok = (ds.get('status') == 'verified' and rt.get('profile') == DEEP_PROFILE
+                   and bool((rt.get('verification') or {}).get('identity_verified')))
+        if source == 'Stored Deep Scan / Reader':
+            stats['stored_reader_records_evaluated'] += 1
+            stats['stored_reader_decision_' + (decision or 'unknown')] += 1
+            if deep_ok:
+                stats['stored_reader_identity_verified'] += 1
+            if deep_ok and decision == 'keep':
+                stats['stored_reader_verified_and_kept'] += 1
+        if decision in {'drop', 'drop_unverifiable', 'duplicate', 'needs_manual_verification'}:
+            stats['source_rows_excluded_nonretained'] += 1
+            continue
+        match = matching(title, body, backfill=True)
+        if not match:
+            stats['source_rows_not_matching_focus'] += 1
+            continue
+        stats['source_rows_matched_focus'] += 1
+        if source == 'Stored Deep Scan / Reader':
+            stats['stored_reader_focus_matches'] += 1
+            if deep_ok and decision == 'keep':
+                stats['stored_reader_verified_kept_focus_matches'] += 1
+        record = {
+            'title': title, 'date': clean(item.get('date') or ds.get('date')),
+            'source': clean(item.get('source') or item.get('venue') or ds.get('source_name')),
+            'authors': clean(item.get('authors')), 'source_location': source, 'url': link,
+            'strand': clean(item.get('strand') or rt.get('strand') or source.removeprefix('Main ')),
+            'reader_what': clean(rt.get('reader_what') or item.get('reader_what') or item.get('reader_point')),
+            'reader_why': clean(rt.get('reader_why') or item.get('reader_why') or item.get('why_it_matters')),
+            'verification': 'Deep Scan verified — retained' if deep_ok and decision == 'keep' else 'Review / awaiting authoritative retention',
+            'admission': decision or 'not yet checked', 'verified_at': clean(ds.get('verified_at')),
+            'deep_scan_package': clean(ds.get('verified_package_id') or rt.get('deep_scan_package_id')),
+            **match,
+        }
+        is_verified = deep_ok and decision == 'keep'
+        # Prefer a verified copy, then authoritative primary active/historical
+        # records over inactive/stored versions; no duplicate output rows.
+        provenance = 4 if '— active' in source else 3 if source == 'Historical' else 2 if 'outside active view' in source else 1
+        rank = (int(is_verified), provenance, bool(link), match['score'])
+        if identity not in selected or rank > selected[identity][0]:
+            selected[identity] = (rank, record)
+    for _, record in selected.values():
+        if record['verification'] == 'Deep Scan verified — retained':
+            verified.append(record)
+        else:
+            pending.append(record)
+    verified.sort(key=lambda a: (-a['score'], a['date'], a['title']))
+    pending.sort(key=lambda a: (-a['score'], a['date'], a['title']))
+    stats['unique_works_evaluated'] = len(scoped_keys)
+    stats['unique_focus_matches'] = len(selected)
+    stats['verified_kept_focus_matches'] = len(verified)
+    stats['review_focus_matches'] = len(pending)
+    stats['stored_only_focus_matches'] = sum(x['source_location'] == 'Stored Deep Scan / Reader' for x in verified + pending)
+    return {
+        'generated_at': datetime.now(timezone.utc).isoformat(timespec='seconds'),
+        'verified': verified, 'pending': pending, 'statistics': dict(stats),
+        'catalogue': {'countries': list(dict.fromkeys(k for group in GEOGRAPHY.values() for k in group)),
+                      'regions': list(GEOGRAPHY), 'issues': list(ISSUES) + [COUNTRY_POLICY_ISSUE],
+                      'stakeholders': list(STAKEHOLDERS)},
+        'policy': 'Audited active, historical, inactive main and retained Deep Scan/Reader records. '
+                  'Verified requires Deep Scan identity verification and KEEP admission. '
+                  'A geography+explicit R&I-policy focus may also qualify without a named emerging issue. '
+                  'Archived records are labelled; this workbook never readmits dropped works.'
+    }
 
 
 # Round-robin coverage across the entire supplied list (rather than focusing on
@@ -259,6 +359,33 @@ EU_MECHANISM_SEARCHES = [
  ('Issue', 'EU foreign affairs trade ministries international science technology diplomacy'),
 ]
 SEARCHES.extend(EU_MECHANISM_SEARCHES)
+# Focused recovery searches for explicitly requested locations lacking retained
+# reader coverage in the 2026-10-31 repository snapshot. They remain ordinary
+# candidates subject to Main Radar admission; no synthetic records are created.
+COVERAGE_REPAIR_SEARCHES = [
+ ('Europe — enlargement', f'{country} European research innovation Horizon Europe')
+ for country in ('Kosovo','Montenegro','Bosnia Herzegovina','Albania','North Macedonia','Serbia')
+] + [
+ ('Americas', f'{country} EU science technology research cooperation')
+ for country in ('Argentina','Chile','Brazil','Mexico')
+] + [
+ ('Africa', f'{country} European Union research innovation partnership')
+ for country in ('Ethiopia','Morocco','Nigeria','Rwanda','South Africa','Egypt','Kenya')
+] + [
+ ('Middle East', f'{country} EU science diplomacy research cooperation')
+ for country in ('Palestine','Jordan','Iran','Saudi Arabia')
+] + [
+ ('Asia & Pacific', q) for q in (
+  'Central Asia European Union science diplomacy innovation',
+  'ASEAN Europe science technology governance',
+  'Australia Europe research partnership shift',
+ )
+] + [
+ ('Issue', 'UNESCO WHO IPCC US China science governance funding withdrawal'),
+ ('Issue', 'high seas BBNJ marine research EU science diplomacy policy'),
+]
+SEARCHES.extend(COVERAGE_REPAIR_SEARCHES)
+
 
 
 def openalex_abstract(index):
@@ -327,7 +454,9 @@ def relevance_work(source, work):
         published = crossref_date(work)
     if not link or not title:
         return None
-    match = matching(title, abstract)
+    # Discovery may propose policy-focused country works without a narrow issue
+    # phrase; the normal Main Radar source/quality/EU admission still decides.
+    match = matching(title, abstract, backfill=True)
     if not match:
         return None
     canonical = doi.casefold().removeprefix('https://doi.org/') if doi else title.casefold()
@@ -368,6 +497,14 @@ def discover(path: Path, max_seconds=FOCUSED_DISCOVERY_SECONDS, max_candidates=1
              for x in load('radar.json',{}).get(area,[])}
     known.update(clean(x.get('url')).lower().rstrip('/')
                  for x in load('historical/historical.json',{}).get('items',[]))
+    # The verified Deep Scan store can retain works absent from the current
+    # active/scanner lists. Avoid rediscovering an already evaluated URL.
+    for key, row in load('deep_scan_work_state.json', {}).get('records', {}).items():
+        if key.startswith('link:'):
+            known.add(key[5:].lower().rstrip('/'))
+        if isinstance(row, dict) and row.get('url'):
+            known.add(clean(row['url']).lower().rstrip('/'))
+    known.discard('')
     picked = {}
     per_bucket = {}
     stats = Counter()

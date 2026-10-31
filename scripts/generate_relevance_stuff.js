@@ -29,18 +29,37 @@ const notes=[
   ['Review / pending rows',pending.length],
   ['Verified rule','Deep Scan work status=verified + authoritative reader identity verification + final admission KEEP.'],
   ['Review rule','Relevant matches not yet meeting all three verified/retained conditions. Do NOT cite these as established evidence.'],
-  ['Source and scope','Main Radar A/B/C and Historical source corpus. Dropped, unverifiable or duplicate decisions are excluded.'],
-  ['Relevance rule','Explicit focus geography with R&I policy / transnational mechanism, OR a specific foregrounded emerging issue. Universities or businesses alone never qualify.'],
+  ['Source and scope','Main Radar A/B/C (including inactive), Historical, and all stored Deep Scan/Reader decisions. Original provenance is shown per row; dropped/unverifiable/duplicate decisions are excluded.'],
+  ['Relevance rule','Named emerging issue or substantive country/region R&I-policy focus in original title or leading Reader evidence. Stakeholder names alone never qualify.'],
   ['Score rule','A relevance-sorting signal, NOT an evidence-quality score or policy forecast.'],
   ['Normal Radar output','Focused discovery candidates are sent through the existing priority-candidate adapter and all ordinary source, A/B/C, duplicate and admission gates.'],
-  ['One-time backfill','No internet calls and no new Deep Scan. Uses records already present on disk.'],
+  ['Backfill','No internet calls or new Deep Scan. Examines existing stored evidence from all four source pools.'],
   ['Limit','Keyword matching of titles and existing reader evidence can miss indirect references and can include some imperfect matches. Read original linked source before interpretation.'],
+];
+const stats=Object.entries(data.statistics||{}).sort((a,b)=>a[0].localeCompare(b[0]));
+const gaps=[];
+for(const name of data.catalogue?.countries||[]){
+  if(!verified.concat(pending).some(x=>x.countries?.split('; ').includes(name)))gaps.push(['Missing retained evidence',name,0]);
+}
+const diagnostics=[
+  ['Relevance extraction diagnostic','Value'],
+  ['Distinct matching records',verified.length+pending.length],
+  ['Deep Scan verified and KEEP',verified.length],
+  ['Review / pending',pending.length],
+  ['Unique works evaluated',data.statistics?.unique_works_evaluated||0],
+  ['Stored Reader records evaluated',data.statistics?.stored_reader_records_evaluated||0],
+  ['Missing focus geographies',gaps.length],
+  ['',''],
+  ...stats.map(([k,v])=>[k,v]),
+  ['',''],
+  ...gaps.map(([,place,value])=>['Zero coverage: '+place,value]),
 ];
 const specs=[
   ['Verified and retained',headers,toRows(verified),widths],
   ['Review queue',headers,toRows(pending),widths],
   ['Focus coverage',['Dimension','Requested country / issue / stakeholder','Verified','Review'],coverage,[26,55,16,16]],
   ['Read me',['Field','Notes'],notes,[26,110]],
+  ['Coverage audit',['Metric','Count / value'],diagnostics,[56,25]],
 ];
 const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 const sheetType='application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml';
