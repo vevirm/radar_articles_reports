@@ -7,8 +7,8 @@ Scheduling policy: preserve existing worker reservations; fill new slots with fr
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
 - Authoritative V2 verified: **3638** (Main **1797** + Historical **1841**)
-- Automatic queue still needing V2 verification: **45** (Main **10** + Historical **35**)
-- Currently assigned to workers: **45** (Main **10** + Historical **35**)
+- Automatic queue still needing V2 verification: **69** (Main **21** + Historical **48**)
+- Currently assigned to workers: **69** (Main **21** + Historical **48**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **44**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,17 +16,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261031T101949Z-90bb8df9ba3b`
-- Assigned unresolved records: **10**
-  1. `link:https://news.google.com/rss/articles/CBMihAFBVV95cUxNNE0tYWZuVElPc1pqVXdBNjFpX3AwcDM4SEpWangyang0ZlZsb21TR0EtVzAyZlBaNk9mVzRqdEgyMXRaS3Brd1ZIZnpvTHJONEd6dXBiWm1LakY3eXMzN3hXZ0szQ0w4UDZBTmFjTmc4UV9xWjlqMUFHZTdoSGZwSE5GVHk?oc=5` — EU can compete with US AI giants, says Brussels’ frontier-model champion — recovery attempt 2/3
-  2. `link:https://news.google.com/rss/articles/CBMilgFBVV95cUxOUzBXVjBRYnM0Q1dqWE5ZeDBxblpZU2xRaUh3SGlzVW5lcV9ZYTFyUkhSamxXVTBPeU9jTzA0VFd5S1VIcVVMWHpCWXM3U3Vyd1V2UjBEQnJ0aUJ0NFpVSXN0aUdvZkJWbC1kMl8tb0pyeGJiQ3g0OGhqX2wtSlhzY2VzbThuVVpOaktkOFkzQjd2OWYxUmc?oc=5` — AI sell-off would rattle global economy, EU watchdog warns — recovery attempt 3/3
-  3. `link:https://doi.org/10.1093/ejhf/xuag328` — DPP3-positive circulatory shock: from targetable ICU endotype to Horizon Europe precision-therapy trial — recovery attempt 3/3
-  4. `link:https://news.google.com/rss/articles/CBMimAFBVV95cUxQLUU2cGstT1FNbHpBb09nZVJ3a0xSMmNENmhCMWJnMFh6MXI2Nkhld2ZSWU5uM2Rmd3ZVdGFPT1BKbmVKN1d2M0dLcFdQWm5mT2ZNNDAxdnozSkxCdDZSel9YUGMtdnRTeHNya3l4RmFHOGNCeXVHOW9uM1VPcUo1dUQtZFpnSzJGNlFjLUY0Q1RpcWh3ZFFEbw?oc=5` — Nvidia CEO sees Kazakhstan as potential AI hub for Europe
-  5. `link:https://news.google.com/rss/articles/CBMi1AFBVV95cUxOWmZfNjZvNng4bTlvMmZZRUVRc2RvUUZVbHFhSDRxN0xYaXJWaEFFNjUzai1PbnlkSTAtRnZMLVZwSTBYR3hOTlAwMjhEM2hFdkZmMWplNG5kTGdhTks3WEZ6X0k5VFN2VTIySDN4ZGVTTkZ2STNPaEV4SUI5YUxHOV9lQkRobHdrdkJGSWNwdE1JWFY3UFJLX3hpeXpXVDdQNTA4akNHcE9GS1lFR2VKQV9CZzg5NnZhOWhEckpDeWxqek1JLWxPVTRIakVhZFNNbUVsTw?oc=5` — Quantum: 12.9% of technology signals are already at operational level - EU Science Hub
-  6. `link:https://news.google.com/rss/articles/CBMipgFBVV95cUxOUFV1dFd0bGpfc25nX2cxVjdpOEVSdDJtbWxfV3VERUhLaThhNm9nMktINHRYZEJnX3Brd2ZMVnI1a0MwaEp2NG55bFlobkdQdVpiLVJPQjBhMmJtcFhkbG9pekliZmdkX3RJQ1ZHdGwxZFlNaDFmQ0hFSC13TXB3WWw0bm1jcFNfdHNENmpoSkpiZng5VHBkNHhMQUFtakZ5bGJ6QUtn?oc=5` — German Firms Prioritize AWS Cloud Innovation, Data Sovereignty – Company Announcement
-  7. `link:https://news.google.com/rss/articles/CBMiigFBVV95cUxPZjRtYTlLZU4tRTU0S0VJdkZZZmZIR29PSFdzQUJPdWJnTGVNY2lmdHpRaUVqQzdrTFF2U0xpXzZZb0JLdDNUNkdUQllCZnJXX0tiLVc1VWJHd1lEMXpadHlXZGRWTTdDdGw1eWZmM3RUZjItV1BRbUNIZTJsdWRiZ0RUY25JODA4SWc?oc=5` — How Africa-Europe research is changing global health
-  8. `link:https://doi.org/10.1016/j.respol.2026.105657` — The effects of national security assessments in public procurement on competition, sustainability, innovation, and critical technology procurement — recovery attempt 2/3
-  - … plus 2 more in the package manifest
+- Current package: `worker-a-20261101T102822Z-07b4e56a2b14`
+- Assigned unresolved records: **34**
+  1. `link:https://doi.org/10.1162/99608f92.dd11772c` — Recalibrating Artificial Intelligence Regulation: The EU AI Act, Data Network Effects, and the AI Safety Paradox
+  2. `link:https://doi.org/10.1111/jcms.70181` — The European Regulatory Mirage: Epistemic Dependence and the Limits of AI Governance
+  3. `link:https://doi.org/10.1080/02673843.2026.2754646` — Identity transformation through non-formal cultural education: negotiating belonging in Eastern European regional context
+  4. `link:https://doi.org/10.1080/21582041.2026.2747785` — Leading from the periphery? A Bourdieusian perspective on European SSH research
+  5. `link:https://doi.org/10.1016/j.technovation.2026.103520` — Bridging micro–macro dynamics in nanotechnology commercialisation: How governance and absorptive capacity shape innovation performance
+  6. `link:https://www.clean-hydrogen.europa.eu/document/download/e8fd2db6-3647-4d75-8a82-478ecf182ea2_en?filename=SS7_V2.pdf` — From research to regional ecosystems: the Clean Hydrogen Partnership powers Europe's energy transition
+  7. `link:https://news.google.com/rss/articles/CBMilgFBVV95cUxQQWdpRTZpY2tMenMwb3ltOFIycHd0MC1nWEpZMjFuR3VpWnBoVlg5anhZdDBqLVBCOThuOVEweWFRaU01Rjh2NGtLalhzbFBaU0d4WV9paWpQZmZfWlRGSEhnZmJhRkpPeFRmYUlvSkZHcmV4N3hOUnQyQVNmWW1qc3NSdzkzdi1UR3N6emdISmpnY3hXQUE?oc=5` — EU and Canada team up in supercomputing and quantum - Shaping Europe’s digital future
+  8. `link:https://news.google.com/rss/articles/CBMixwFBVV95cUxQay1YNkFYbEJlVTRwendLUzVibGFvS0lERDc3U1dqaG5BMTByQXVzMk9wS2t4c015VWlHM1NsSHVidzZUY0xiMWp4YzNYU1ZSV25rdzN5V0wzeGFHLUllWlhIb3pYWjhmZUI0ZjdjY1Y5OVAtd3d3b09JSGdqSGRQekx2aDQ0MHFOcV9KQWhMMzdveFhvUkhNNkl1anAzOTdvWXpPd1E4enVKbmpXNVc1NWtlTlg4VEdKTlJTTmlTWkd1cjJUTHBz?oc=5` — Six of the 16 major emitters reduced their emissions in 2025 - EU Science Hub
+  - … plus 26 more in the package manifest
 
 ### Worker B
 - Current package: `worker-b-20261029T085853Z-64145a2dbff2`
