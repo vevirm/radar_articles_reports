@@ -6,27 +6,19 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **3638** (Main **1797** + Historical **1841**)
-- Automatic queue still needing V2 verification: **69** (Main **21** + Historical **48**)
-- Currently assigned to workers: **69** (Main **21** + Historical **48**)
+- Authoritative V2 verified: **3670** (Main **1816** + Historical **1854**)
+- Automatic queue still needing V2 verification: **36** (Main **1** + Historical **35**)
+- Currently assigned to workers: **36** (Main **1** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
-- Hands-on verification needed: **44**
+- Hands-on verification needed: **45**
 - Automatic queue pending and not yet assigned: **0**
 
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261101T102822Z-07b4e56a2b14`
-- Assigned unresolved records: **34**
-  1. `link:https://doi.org/10.1162/99608f92.dd11772c` — Recalibrating Artificial Intelligence Regulation: The EU AI Act, Data Network Effects, and the AI Safety Paradox
-  2. `link:https://doi.org/10.1111/jcms.70181` — The European Regulatory Mirage: Epistemic Dependence and the Limits of AI Governance
-  3. `link:https://doi.org/10.1080/02673843.2026.2754646` — Identity transformation through non-formal cultural education: negotiating belonging in Eastern European regional context
-  4. `link:https://doi.org/10.1080/21582041.2026.2747785` — Leading from the periphery? A Bourdieusian perspective on European SSH research
-  5. `link:https://doi.org/10.1016/j.technovation.2026.103520` — Bridging micro–macro dynamics in nanotechnology commercialisation: How governance and absorptive capacity shape innovation performance
-  6. `link:https://www.clean-hydrogen.europa.eu/document/download/e8fd2db6-3647-4d75-8a82-478ecf182ea2_en?filename=SS7_V2.pdf` — From research to regional ecosystems: the Clean Hydrogen Partnership powers Europe's energy transition
-  7. `link:https://news.google.com/rss/articles/CBMilgFBVV95cUxQQWdpRTZpY2tMenMwb3ltOFIycHd0MC1nWEpZMjFuR3VpWnBoVlg5anhZdDBqLVBCOThuOVEweWFRaU01Rjh2NGtLalhzbFBaU0d4WV9paWpQZmZfWlRGSEhnZmJhRkpPeFRmYUlvSkZHcmV4N3hOUnQyQVNmWW1qc3NSdzkzdi1UR3N6emdISmpnY3hXQUE?oc=5` — EU and Canada team up in supercomputing and quantum - Shaping Europe’s digital future
-  8. `link:https://news.google.com/rss/articles/CBMixwFBVV95cUxQay1YNkFYbEJlVTRwendLUzVibGFvS0lERDc3U1dqaG5BMTByQXVzMk9wS2t4c015VWlHM1NsSHVidzZUY0xiMWp4YzNYU1ZSV25rdzN5V0wzeGFHLUllWlhIb3pYWjhmZUI0ZjdjY1Y5OVAtd3d3b09JSGdqSGRQekx2aDQ0MHFOcV9KQWhMMzdveFhvUkhNNkl1anAzOTdvWXpPd1E4enVKbmpXNVc1NWtlTlg4VEdKTlJTTmlTWkd1cjJUTHBz?oc=5` — Six of the 16 major emitters reduced their emissions in 2025 - EU Science Hub
-  - … plus 26 more in the package manifest
+- Current package: `worker-a-20261101T111005Z-2e06dd3044b2`
+- Assigned unresolved records: **1**
+  1. `link:https://doi.org/10.1016/j.respol.2026.105657` — The effects of national security assessments in public procurement on competition, sustainability, innovation, and critical technology procurement — recovery attempt 3/3
 
 ### Worker B
 - Current package: `worker-b-20261029T085853Z-64145a2dbff2`
@@ -93,3 +85,4 @@ These works no longer consume automatic Deep Scan slots. Their identity is belie
 - `link:https://news.google.com/rss/articles/CBMi0gFBVV95cUxPS0RpTk9YLWhjLW5iekRUemJkY05UOExGUzhyVDM5Vi1aTW5xTmtYc0lueU5CSy1TR0FGdXZ4bUFNbmNMcVY1VVd6eTVHTmp4UUM4RzM1V0E3TVQxVHZsb0gwMEppeFVodTVkQ3AzbU5yZmR2aVhpUXdrY0c3bFBBVjNuSUhhYlJVMkgwUnRtQTcwUWFUOXVmZVdYUUlzLTNnejl3WkllWjZjLVNERldQeE9QbjVBZ1YxMGYyLTR6NTliMDhUV0VPRnY2MGtUc2l4ZWc?oc=5` — **Research groups warn against oversized EU R&I partnerships** — attempts: 3/3 — Research Professional News — 2026-10-23T12:24Z — Primary substantive evidence remained inaccessible after documented recovery. — https://news.google.com/rss/articles/CBMi0gFBVV95cUxPS0RpTk9YLWhjLW5iekRUemJkY05UOExGUzhyVDM5Vi1aTW5xTmtYc0lueU5CSy1TR0FGdXZ4bUFNbmNMcVY1VVd6eTVHTmp4UUM4RzM1V0E3TVQxVHZsb0gwMEppeFVodTVkQ3AzbU5yZmR2aVhpUXdrY0c3bFBBVjNuSUhhYlJVMkgwUnRtQTcwUWFUOXVmZVdYUUlzLTNnejl3WkllWjZjLVNERldQeE9QbjVBZ1YxMGYyLTR6NTliMDhUV0VPRnY2MGtUc2l4ZWc?oc=5
 - `link:https://news.google.com/rss/articles/CBMiogFBVV95cUxNWXFqdkNNWHFLLTNFOXlPOU8xei11Q0ZENTNldXQ1cFNTcXZkYmUydlhqcV8xRXcwempVRlZyLWJBUEgtZFN0OWljX1RmNEsyNjZZakRObnRkZ0NCVGtnd3prT1dJYUw4Z0F6Z2Q5dlRDZmZsZThwb2txdXN1YU5LNnphU3AtLXZRazNUcUJJcVpiNkFNUGFvOVNCLTcza1dOZnc?oc=5` — **European CEOs warn against surrendering frontier AI to US and China** — attempts: 3/3 — Politico Europe — 2026-10-22T18:05Z — Primary substantive evidence remained inaccessible after documented recovery. — https://news.google.com/rss/articles/CBMiogFBVV95cUxNWXFqdkNNWHFLLTNFOXlPOU8xei11Q0ZENTNldXQ1cFNTcXZkYmUydlhqcV8xRXcwempVRlZyLWJBUEgtZFN0OWljX1RmNEsyNjZZakRObnRkZ0NCVGtnd3prT1dJYUw4Z0F6Z2Q5dlRDZmZsZThwb2txdXN1YU5LNnphU3AtLXZRazNUcUJJcVpiNkFNUGFvOVNCLTcza1dOZnc?oc=5
 - `link:https://news.google.com/rss/articles/CBMi0AFBVV95cUxQSmQwRDRsSWF2MlRVb01PdXB4ZE9MWUtNQnBJXzZzZTUySWFoS18xbXZXN18yMXlTU1pmTjIxRXlIa2kzZTd3MFhHZnI2T2NINEJ1MFN2YUxUSm03TkdUOE52TFdsbDMtSndtZ1hqUTRHb09ncUdQOFZUWWk4R1BCYW5tN3F6bEtjbWJKb29UX0pmdkVWcG5mUGp0RWtkU1hwQm5VLWZvaTJzWTNrb3B2NGh3bXdTUlc4UFJ1QnpSWjdlRkRIN0hDNEM0TDNUTUla?oc=5` — **Should Europe be more regional in its research and innovation?** — attempts: 3/3 — Research Professional News — 2026-10-22T12:04Z — Primary substantive evidence remained inaccessible after documented recovery. — https://news.google.com/rss/articles/CBMi0AFBVV95cUxQSmQwRDRsSWF2MlRVb01PdXB4ZE9MWUtNQnBJXzZzZTUySWFoS18xbXZXN18yMXlTU1pmTjIxRXlIa2kzZTd3MFhHZnI2T2NINEJ1MFN2YUxUSm03TkdUOE52TFdsbDMtSndtZ1hqUTRHb09ncUdQOFZUWWk4R1BCYW5tN3F6bEtjbWJKb29UX0pmdkVWcG5mUGp0RWtkU1hwQm5VLWZvaTJzWTNrb3B2NGh3bXdTUlc4UFJ1QnpSWjdlRkRIN0hDNEM0TDNUTUla?oc=5
+- `link:https://doi.org/10.1093/ejhf/xuag328` — **DPP3-positive circulatory shock: from targetable ICU endotype to Horizon Europe precision-therapy trial** — attempts: 3/3 — European Journal of Heart Failure — 2026-10-30 — Substantive text of the exact October 30 European Journal of Heart Failure research letter remains inaccessible despite the required third-pass recovery. The source article is confirmed by Oxford Academic, but a different October 7 European Heart Journal paper on CURE-SHOCK cannot substitute for its content. — https://doi.org/10.1093/ejhf/xuag328
