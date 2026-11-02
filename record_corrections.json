@@ -1,7 +1,7 @@
 {
   "version": 1,
   "profile": "radar-record-corrections-v1",
-  "updated_at": "2026-11-01T10:58:59Z",
+  "updated_at": "2026-11-02T15:33:23Z",
   "records": {
     "link:https://doi.org/10.55186/25876740_2026_69_3_373": {
       "fields": {
@@ -17082,6 +17082,53 @@
       ],
       "updated_at": "2026-11-01T10:58:58Z",
       "deep_scan_package_id": "worker-a-20261101T102822Z-07b4e56a2b14"
+    },
+    "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=44a532fb-d3be-11f1-9458-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=": {
+      "fields": {
+        "title": "Regulation on the safety, resilience and sustainability of space activities in the Union (EU Space Act) — Presidency compromise text — clean version"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Official 29 October 2026 Council covering note gives the previously missing document title and number.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "main",
+      "evidence": [
+        "https://op.europa.eu/o/opportal-service/download-handler?identifier=44a532fb-d3be-11f1-9458-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+        "https://www.parlament.gv.at/gegenstand/XXVIII/EU/100709"
+      ],
+      "updated_at": "2026-11-02T15:33:22Z",
+      "deep_scan_package_id": "worker-a-20261102T145416Z-afc970c83779"
+    },
+    "historical:id:0d1b57ded64af17f": {
+      "fields": {
+        "source": "Global Commission on Responsible Artificial Intelligence in the Military Domain"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "Report’s own requested citation names the Global Commission as issuer; HCSS is described in the primary document as its secretariat and host.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://hcss.nl/wp-content/uploads/2025/09/GC-REAIM-Strategic-Guidance-Report-Final-WEB.pdf"
+      ],
+      "updated_at": "2026-11-02T15:33:22Z",
+      "deep_scan_package_id": "worker-a-20261102T145416Z-afc970c83779"
+    },
+    "historical:id:8b513d6f4e4864e5": {
+      "fields": {
+        "source": "Acta Universitatis Sapientiae, European and Regional Studies"
+      },
+      "unset": [],
+      "reason_code": "DEEP_SCAN_V2_METADATA_CORRECTION",
+      "reason": "UvA institutional final-version first page and the journal issue identify Acta Universitatis Sapientiae, European and Regional Studies 9:23–29; Regional Studies alone is an incorrect journal title.",
+      "source": "deep_scan_v2",
+      "corpus_scope": "historical",
+      "evidence": [
+        "https://content.openalex.org/works/W2543302341.pdf",
+        "https://real-j.mtak.hu/23074/1/ACTA-EUstudies-Vol9-2016.pdf"
+      ],
+      "updated_at": "2026-11-02T15:33:22Z",
+      "deep_scan_package_id": "worker-a-20261102T145416Z-afc970c83779"
     }
   }
 }

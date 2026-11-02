@@ -1,7 +1,7 @@
 {
   "version": 3,
   "profile": "deep-reader-v2-authoritative",
-  "generated_at": "2026-11-01T10:58:59Z",
+  "generated_at": "2026-11-02T15:33:23Z",
   "records": {
     "link:https://doi.org/10.1057/s41599-026-08819-z": {
       "profile": "deep-reader-v2-authoritative",
@@ -308224,8 +308224,961 @@
       },
       "source_hash": "a39c023d",
       "identity_hash": "f10c46e254679a8b"
+    },
+    "link:https://joint-research-centre.ec.europa.eu/jrc-news-and-updates/quantum-129-technology-signals-are-already-operational-level-2026-10-30_en": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "33d48035",
+      "identity_hash": "6d714b1490cc52fb",
+      "reader_title": "Quantum technologies have very different levels of readiness",
+      "reader_what": "JRC assesses 195 quantum signals; 12.9% are operational and many remain experimental.",
+      "reader_why": "Different maturity levels call for staged investment, shared test facilities, standards and skills.",
+      "reader_more": "The Commission’s Joint Research Centre reports that nearly half the signals are at proof-of-concept stage and almost one-third at system demonstration. It identifies current and potential uses across twelve themes. The article argues that Europe needs preparation before quantum systems reach full commercial maturity.",
+      "deep_analysis": {
+        "work_kind": "official analytical report coverage",
+        "research_question": "What readiness profile do emerging quantum technologies display, and how should Europe prepare?",
+        "main_finding": "Among 195 foresight signals, 12.9% are operational, with substantially more at earlier readiness stages.",
+        "method_or_basis": "JRC Outlook Report on Quantum Technologies; literature-derived signals identified by text and data mining and assessed by readiness level.",
+        "qualification": "The 195 identified quantum foresight signals measure technology readiness, not market penetration, policy effects or a causal EU advantage.",
+        "radar_relevance": "A Route 2: quantifies emerging strategic-technology maturity and argues for differentiated European R&I infrastructure and skills investments.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Full original JRC article at https://joint-research-centre.ec.europa.eu/jrc-news-and-updates/quantum-129-technology-signals-are-already-operational-level-2026-10-30_en examined and matched 195-signal analysis and maturity percentages."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "JRC Publications Repository report JRC148269 corroborates underlying Outlook Report on Quantum Technologies."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_text",
+            "url": "https://joint-research-centre.ec.europa.eu/jrc-news-and-updates/quantum-129-technology-signals-are-already-operational-level-2026-10-30_en",
+            "title": "Quantum: 12.9% of technology signals are already at operational level",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_report_landing",
+            "url": "https://publications.jrc.ec.europa.eu/repository/handle/JRC148269",
+            "title": "Outlook Report on Quantum Technologies",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "The JRC news article is source-owned substantive explanation of a published JRC assessment; its readiness percentages concern foresight signals, not directly measured companies or investments."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 2: JRC presents a substantive European quantum capability/readiness assessment of 195 signals and readiness-stage policy implications. The assessment is source-grounded, not an observed outcome of proposed investments."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-02T15:33:21Z",
+      "deep_scan_package_id": "worker-a-20261102T145416Z-afc970c83779",
+      "claims": [
+        {
+          "object": "quantum.testing_infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "European Commission Joint Research Centre",
+            "class": "eu_body"
+          },
+          "mechanism": "measures",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-10-30",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The 195 identified quantum foresight signals measure technology readiness, not market penetration, policy effects or a causal EU advantage.",
+          "text": "The JRC assessment groups 195 quantum-technology foresight signals by maturity; 12.9% are operational and preparation needs differ across stages.",
+          "confidence": "high",
+          "record_key": "link:https://joint-research-centre.ec.europa.eu/jrc-news-and-updates/quantum-129-technology-signals-are-already-operational-level-2026-10-30_en",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:6d714b1490cc52fb:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.48550/arxiv.2610.40493": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "e5c20d06",
+      "identity_hash": "353e523079238cee",
+      "reader_title": "SPECTRUM maps European exascale research computing needs",
+      "reader_what": "Researchers identify data and computing gaps for European particle physics and radio astronomy.",
+      "reader_why": "Larger research datasets require coordinated infrastructure, technical standards and investment priorities.",
+      "reader_more": "The paper responds to projected data demand from the upgraded LHC, SKA and LOFAR 2.0. It synthesises a technical blueprint and research-and-deployment agenda covering eight action areas and thirteen priorities. These are proposed priorities and dependencies, not a record of completed deployment.",
+      "deep_analysis": {
+        "work_kind": "research infrastructure technical strategy",
+        "research_question": "What infrastructure capabilities will European data-intensive sciences require at exascale?",
+        "main_finding": "SPECTRUM offers a European data-and-compute capability map and strategic research and deployment priorities.",
+        "method_or_basis": "Technical blueprint and strategic agenda synthesising HEP/radio-astronomy use cases and consultation with stakeholders.",
+        "qualification": "This is a strategic and technical proposal based on use cases and stakeholder consultation, not evidence that recommended infrastructure has been funded or built.",
+        "radar_relevance": "A Routes 2 and 3: credible European R&I-system infrastructure planning and assessed capacity gaps.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "DOI gateway https://doi.org/10.48550/arxiv.2610.40493 did not yield usable text directly; official arXiv PDF recovered."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.48550/arxiv.2610.40493 corresponds to arXiv paper 2610.40493."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Inspected scholarly paper PDF https://arxiv.org/pdf/2610.40493; title and authors, eight technical areas and thirteen agenda priorities match original record."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://arxiv.org/pdf/2610.40493",
+            "title": "SPECTRUM: A Strategic Framework and Technical Blueprint for European Exascale Research Data and Compute Infrastructure",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Read substantial original arXiv paper including evidence from HEP/radio astronomy stakeholder consultation; it sets recommendations, not deployed EU capacity."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Routes 2 and 3: a verified substantive European research infrastructure study maps exascale data/compute gaps and identifies eight technical areas and thirteen investment priorities."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-02T15:33:22Z",
+      "deep_scan_package_id": "worker-a-20261102T145416Z-afc970c83779",
+      "claims": [
+        {
+          "object": "research.infrastructure",
+          "secondary_objects": [],
+          "actor": {
+            "name": "SPECTRUM research collaboration",
+            "class": "university_group"
+          },
+          "mechanism": "prioritises",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-10-29",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "This is a strategic and technical proposal based on use cases and stakeholder consultation, not evidence that recommended infrastructure has been funded or built.",
+          "text": "SPECTRUM maps European exascale infrastructure gaps and proposes eight technical action areas with thirteen strategic priorities.",
+          "confidence": "high",
+          "record_key": "link:https://doi.org/10.48550/arxiv.2610.40493",
+          "merit": 51,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:353e523079238cee:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMirwFBVV95cUxNTWFpNk9oa1hRa3pBWUtTS1JIRUhtQkYteFk4eEswTVQzTm94alRVQ2YyRXJFREpZTks2V0pwRmRPRmpKdEc3MFlOWTkyYjB6bUMwMWFUcHBSSFhJcTZvUVJUTk9SclFWSkpGa1dZVTNOdEJFSy0ydFNVVW1UR0tNY1FoMXBHZWc3MEZtMVJfM1g1ZFhady1RbC05YWhaRmJ1Ul9rVFVVWDM3cE44bEVZ?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "48167fd3",
+      "identity_hash": "08df9c152c47f128",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Opened original Google News RSS article token CBMirwFBVV95cUxNTWFpNk9oa1h… (https://news.google.com/rss/articles/CBMirwFBVV95cUxNTWFpNk9oa1hRa3pBWUtTS1JIRUhtQkYteFk4eEswTVQzTm94alRVQ2YyRXJFREpZTks2V0pwRmRPRmpKdEc3MFlOWTkyYjB6bUMwMWFUcHBSSFhJcTZvUVJUTk9SclFWSkpGa1dZVTNOdEJFSy0ydFNVVW1UR0tNY1FoMXBHZWc3MEZtMVJfM1g1ZFhady1RbC05YWhaRmJ1Ul9rVFVVWDM3cE44bEVZ?oc=5); reader could not resolve the underlying publisher article."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied for EUobserver article dated 2026-11-01T07:00Z; news RSS identifier is not a scholarly DOI."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "not_applicable",
+            "note": "Original scanner omitted headline; no verified exact-title string exists for EUobserver 2026-11-01T07:00Z, so title search cannot disambiguate it."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "not_applicable",
+            "note": "No byline or headline supplied; searched EUobserver and publication time 2026-11-01T07:00Z, but these cannot identify which RSS story this token represents."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Searched EUobserver official news coverage around 2026-11-01T07:00Z. An EUobserver opinion piece on women-led sovereign AI procurement on 1 November was found, but matching publication time alone does not prove it is this RSS item. No publisher URL was verified as an exact RSS-token match."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "Searched the distinctive Google News token prefix CBMirwFBVV95cUxNTWFpNk9oa1h and EUobserver 2026-11-01T07:00Z with Europe/R&I terms; no independently traceable identity match emerged."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Primary-identity recovery failed on the complete bounded six-step ladder. Candidate news articles, where found, were not substituted for the unidentified source record."
+      },
+      "admission": {
+        "decision": "drop_unverifiable",
+        "target_strand": "C",
+        "reason_code": "SOURCE_IDENTITY_UNVERIFIED",
+        "reason": "Record lacks a title or primary publisher URL. Google News RSS identifier cannot be resolved and no candidate article is sufficiently linked to that identifier to make a defensible admission decision."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-02T15:33:22Z",
+      "deep_scan_package_id": "worker-a-20261102T145416Z-afc970c83779",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=44a532fb-d3be-11f1-9458-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "b46dd80d",
+      "identity_hash": "119a9596dd5d78a1",
+      "reader_title": "EU Space Act compromise text circulated for negotiations",
+      "reader_what": "A new Council Presidency draft sets out proposed common requirements for space activities in the EU.",
+      "reader_why": "The proposed rules could affect European space-technology operations, regulatory conditions and service markets.",
+      "reader_more": "Council document 15118/26 was circulated on 29 October for a 3 November meeting. Its draft addresses safety, resilience and environmental sustainability of Union space activities. The cover note says delegations retain scrutiny reservations, so the provisions remain part of ongoing legislative negotiations.",
+      "deep_analysis": {
+        "work_kind": "legislative negotiating development",
+        "research_question": "What regulatory approach is now under negotiation for Union space activities?",
+        "main_finding": "The Council Presidency circulated a revised clean compromise text for the proposed EU Space Act.",
+        "method_or_basis": "EU Council Secretariat document 15118/26, 29 October 2026, official text with interinstitutional file 2025/0335(COD).",
+        "qualification": "This 29 October 2026 Council Presidency compromise is a negotiating document; it has not been adopted, agreed by all delegations or put into force.",
+        "radar_relevance": "C: dated proposed legal change bearing directly on EU space technology industrial and research-services capabilities.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching Council document 15118/26 retrieved as first-party PDF excerpt at https://op.europa.eu/o/opportal-service/download-handler?identifier=44a532fb-d3be-11f1-9458-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part= in the package; heading, dated covering note, and draft regulation inspected."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Austrian Parliament EU Council dossier 100709 independently registers Council file 15118/26 and legislative proposal 2025/0335(COD)."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_document_excerpt",
+            "url": "https://op.europa.eu/o/opportal-service/download-handler?identifier=44a532fb-d3be-11f1-9458-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+            "title": "Council document 15118/26: EU Space Act Presidency compromise text, clean version",
+            "evidence_used": true
+          },
+          {
+            "kind": "official_document_registry",
+            "url": "https://www.parlament.gv.at/gegenstand/XXVIII/EU/100709",
+            "title": "Council dossier 15118/26 registration",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Primary 17,116-character excerpt was available from scanner package. First page expressly identifies the instrument as a Presidency compromise for a 3 November 2026 meeting and states all delegations retained scrutiny reservations."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "C",
+        "reason_code": "C_SUBSTANTIVE_CHANGE",
+        "reason": "C substantive change: Council Secretariat circulated document 15118/26 on 29 October, a fresh Presidency compromise for the EU Space Act affecting the EU space-technology market and research-services environment. Draft is under negotiation, not legislation in force."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-02T15:33:22Z",
+      "deep_scan_package_id": "worker-a-20261102T145416Z-afc970c83779",
+      "claims": [
+        {
+          "object": "critical_infrastructure.resilience",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Council of the European Union Presidency",
+            "class": "eu_body"
+          },
+          "mechanism": "proposes",
+          "direction": "becomes_conditional",
+          "status": "in_negotiation",
+          "status_date": "2026-10-29",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "action",
+          "qualification": "This 29 October 2026 Council Presidency compromise is a negotiating document; it has not been adopted, agreed by all delegations or put into force.",
+          "text": "The Council Presidency circulated a compromise EU Space Act draft addressing safety, resilience and sustainability of space activities, with negotiations continuing.",
+          "confidence": "high",
+          "record_key": "link:https://op.europa.eu/o/opportal-service/download-handler?identifier=44a532fb-d3be-11f1-9458-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=",
+          "merit": 97,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:119a9596dd5d78a1:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMipAFBVV95cUxQY0hhdWRyUjBjTTcyeWhkbUh6M243MDV5dTE0dVJibXM5MW1QcGVXRzhjU2RKZS1qemNoakVVMDlmN1lqXzZKOFVZNm1qVjVMRkI2SHZtSUlOa2hqTWFWV3E5NlE2WkxSV2pGZGE2RFJDVnJ6TFVJNzNJSy1CbmNEeDY0ZkJuQURRblh2S1NZRWctc3V6bHk2TjVjZXhjejZSdnFhZw?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "932b135d",
+      "identity_hash": "338fd0f0fee0e6e9",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Opened original Google News RSS article token CBMipAFBVV95cUxQY0hhdWRyUjB… (https://news.google.com/rss/articles/CBMipAFBVV95cUxQY0hhdWRyUjBjTTcyeWhkbUh6M243MDV5dTE0dVJibXM5MW1QcGVXRzhjU2RKZS1qemNoakVVMDlmN1lqXzZKOFVZNm1qVjVMRkI2SHZtSUlOa2hqTWFWV3E5NlE2WkxSV2pGZGE2RFJDVnJ6TFVJNzNJSy1CbmNEeDY0ZkJuQURRblh2S1NZRWctc3V6bHk2TjVjZXhjejZSdnFhZw?oc=5); reader could not resolve the underlying publisher article."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied for EU Research & Innovation article dated 2026-09-29T07:00Z; news RSS identifier is not a scholarly DOI."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "not_applicable",
+            "note": "Original scanner omitted headline; no verified exact-title string exists for EU Research & Innovation 2026-09-29T07:00Z, so title search cannot disambiguate it."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "not_applicable",
+            "note": "No byline or headline supplied; searched EU Research & Innovation and publication time 2026-09-29T07:00Z, but these cannot identify which RSS story this token represents."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Searched EU Research & Innovation official news coverage around 2026-09-29T07:00Z. Multiple Commission R&I items were published on 29 September 2026, including cultural-heritage partnership news; this date cannot select the original story. No publisher URL was verified as an exact RSS-token match."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "Searched the distinctive Google News token prefix CBMipAFBVV95cUxQY0hhdWRyUjB and EU Research & Innovation 2026-09-29T07:00Z with Europe/R&I terms; no independently traceable identity match emerged."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Primary-identity recovery failed on the complete bounded six-step ladder. Candidate news articles, where found, were not substituted for the unidentified source record."
+      },
+      "admission": {
+        "decision": "drop_unverifiable",
+        "target_strand": "C",
+        "reason_code": "SOURCE_IDENTITY_UNVERIFIED",
+        "reason": "Record lacks a title or primary publisher URL. Google News RSS identifier cannot be resolved and no candidate article is sufficiently linked to that identifier to make a defensible admission decision."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-02T15:33:22Z",
+      "deep_scan_package_id": "worker-a-20261102T145416Z-afc970c83779",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMitgFBVV95cUxPalFzaXpKNGdZUTFndXFpbS1ZNm4tbElSbWRGMmVaVDdBcHpzTDVZb1ZiR2ttWWJMOUdDS2pwRi1MUEs5UW1feXRDejZtbmFNMF94QUN3WHgxWFRUakF6ZE1TX2lJVkQ4cVlVVVRIamNzT3FEb2IxY2tBaTI4ZE9sVXNZMmdJYnhNcGpiM2ZjRUhmcjA4bkRNT1dFZmJadGx2WGlvSXlCU25pTmUzT0NYN2tvVU1YZw?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "4eebb7e4",
+      "identity_hash": "b85540abc904cbe1",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Opened original Google News RSS article token CBMitgFBVV95cUxPalFzaXpKNGd… (https://news.google.com/rss/articles/CBMitgFBVV95cUxPalFzaXpKNGdZUTFndXFpbS1ZNm4tbElSbWRGMmVaVDdBcHpzTDVZb1ZiR2ttWWJMOUdDS2pwRi1MUEs5UW1feXRDejZtbmFNMF94QUN3WHgxWFRUakF6ZE1TX2lJVkQ4cVlVVVRIamNzT3FEb2IxY2tBaTI4ZE9sVXNZMmdJYnhNcGpiM2ZjRUhmcjA4bkRNT1dFZmJadGx2WGlvSXlCU25pTmUzT0NYN2tvVU1YZw?oc=5); reader could not resolve the underlying publisher article."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied for Bloomberg article dated 2026-10-30T09:11Z; news RSS identifier is not a scholarly DOI."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "not_applicable",
+            "note": "Original scanner omitted headline; no verified exact-title string exists for Bloomberg 2026-10-30T09:11Z, so title search cannot disambiguate it."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "not_applicable",
+            "note": "No byline or headline supplied; searched Bloomberg and publication time 2026-10-30T09:11Z, but these cannot identify which RSS story this token represents."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Searched Bloomberg official news coverage around 2026-10-30T09:11Z. A Bloomberg Eastern Europe AI investment/diversification piece had a similar timestamp, but neither its headline nor underlying Bloomberg URL was tied to this opaque token. No publisher URL was verified as an exact RSS-token match."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "Searched the distinctive Google News token prefix CBMitgFBVV95cUxPalFzaXpKNGd and Bloomberg 2026-10-30T09:11Z with Europe/R&I terms; no independently traceable identity match emerged."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Primary-identity recovery failed on the complete bounded six-step ladder. Candidate news articles, where found, were not substituted for the unidentified source record."
+      },
+      "admission": {
+        "decision": "drop_unverifiable",
+        "target_strand": "C",
+        "reason_code": "SOURCE_IDENTITY_UNVERIFIED",
+        "reason": "Record lacks a title or primary publisher URL. Google News RSS identifier cannot be resolved and no candidate article is sufficiently linked to that identifier to make a defensible admission decision."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-02T15:33:22Z",
+      "deep_scan_package_id": "worker-a-20261102T145416Z-afc970c83779",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMiswFBVV95cUxQT1lRdHB1dnpfemlpTnVZcmhEM1kzQWVCYWR2bHV1UjQzVFNURTZfa3laQThmLTVKSTdudVp2ZFBmN3FxZ3l3bWk2amUwNkgwODJnTVc5NFVSbWR0WUUtanloc1pEOHBlTm0wQU1kd1dGZ21KSHdmd2R5NW5DS1dfcmVkZ255RnNvZ2tHX25aM2pPSU5TMjB0WElNbVdRNEZScTRJeTlpVlVKNks3WUNLbnlpYw?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "3d8c52ff",
+      "identity_hash": "b4d6fc5a28844d96",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Opened original Google News RSS article token CBMiswFBVV95cUxQT1lRdHB1dnp… (https://news.google.com/rss/articles/CBMiswFBVV95cUxQT1lRdHB1dnpfemlpTnVZcmhEM1kzQWVCYWR2bHV1UjQzVFNURTZfa3laQThmLTVKSTdudVp2ZFBmN3FxZ3l3bWk2amUwNkgwODJnTVc5NFVSbWR0WUUtanloc1pEOHBlTm0wQU1kd1dGZ21KSHdmd2R5NW5DS1dfcmVkZ255RnNvZ2tHX25aM2pPSU5TMjB0WElNbVdRNEZScTRJeTlpVlVKNks3WUNLbnlpYw?oc=5); reader could not resolve the underlying publisher article."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied for Reuters article dated 2026-11-02T09:23Z; news RSS identifier is not a scholarly DOI."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "not_applicable",
+            "note": "Original scanner omitted headline; no verified exact-title string exists for Reuters 2026-11-02T09:23Z, so title search cannot disambiguate it."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "not_applicable",
+            "note": "No byline or headline supplied; searched Reuters and publication time 2026-11-02T09:23Z, but these cannot identify which RSS story this token represents."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Searched Reuters official news coverage around 2026-11-02T09:23Z. Reuters published numerous European/world news pieces on 2 November 2026; the exact story behind this token was not confirmed. No publisher URL was verified as an exact RSS-token match."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "Searched the distinctive Google News token prefix CBMiswFBVV95cUxQT1lRdHB1dnp and Reuters 2026-11-02T09:23Z with Europe/R&I terms; no independently traceable identity match emerged."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Primary-identity recovery failed on the complete bounded six-step ladder. Candidate news articles, where found, were not substituted for the unidentified source record."
+      },
+      "admission": {
+        "decision": "drop_unverifiable",
+        "target_strand": "C",
+        "reason_code": "SOURCE_IDENTITY_UNVERIFIED",
+        "reason": "Record lacks a title or primary publisher URL. Google News RSS identifier cannot be resolved and no candidate article is sufficiently linked to that identifier to make a defensible admission decision."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-02T15:33:22Z",
+      "deep_scan_package_id": "worker-a-20261102T145416Z-afc970c83779",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://news.google.com/rss/articles/CBMipAFBVV95cUxQQ0JmaVZtX09xUDBYUllEWDJBdGUySGFxUzFJYmRmVmJfeTBIdTRTVU5fZmVPWFh3NGE5alBQWU0yb1lnd2dCanV6RlBycGRyWWctbklYbXJsVk9CdlRYOHpLaVkzQzBKR2JxQW9aVWNnR2pGYzRQSmpoQ0hjZDE4SkNwUDJtM2t2dDgwSTRWUTNmb1c3NHo2MkRvem55bXpkb1ptbw?oc=5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_c",
+      "corpus_scope": "main",
+      "source_hash": "fffb7422",
+      "identity_hash": "de4156b17319360c",
+      "deep_analysis": {
+        "work_kind": "",
+        "research_question": "",
+        "main_finding": "",
+        "method_or_basis": "",
+        "qualification": "",
+        "radar_relevance": "",
+        "confidence": "low",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": false,
+        "evidence_depth": "",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "Opened original Google News RSS article token CBMipAFBVV95cUxQQ0JmaVZtX09… (https://news.google.com/rss/articles/CBMipAFBVV95cUxQQ0JmaVZtX09xUDBYUllEWDJBdGUySGFxUzFJYmRmVmJfeTBIdTRTVU5fZmVPWFh3NGE5alBQWU0yb1lnd2dCanV6RlBycGRyWWctbklYbXJsVk9CdlRYOHpLaVkzQzBKR2JxQW9aVWNnR2pGYzRQSmpoQ0hjZDE4SkNwUDJtM2t2dDgwSTRWUTNmb1c3NHo2MkRvem55bXpkb1ptbw?oc=5); reader could not resolve the underlying publisher article."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI supplied for EU Research & Innovation article dated 2026-09-29T07:00Z; news RSS identifier is not a scholarly DOI."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "not_applicable",
+            "note": "Original scanner omitted headline; no verified exact-title string exists for EU Research & Innovation 2026-09-29T07:00Z, so title search cannot disambiguate it."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "not_applicable",
+            "note": "No byline or headline supplied; searched EU Research & Innovation and publication time 2026-09-29T07:00Z, but these cannot identify which RSS story this token represents."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "failed",
+            "note": "Searched EU Research & Innovation official news coverage around 2026-09-29T07:00Z. Several same-date Commission research pages matched Horizon Europe terms, but the RSS token is distinct from job 7 and neither identity was resolved. No publisher URL was verified as an exact RSS-token match."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "failed",
+            "note": "Searched the distinctive Google News token prefix CBMipAFBVV95cUxQQ0JmaVZtX09 and EU Research & Innovation 2026-09-29T07:00Z with Europe/R&I terms; no independently traceable identity match emerged."
+          }
+        ],
+        "recovered_sources": [],
+        "verification_note": "Primary-identity recovery failed on the complete bounded six-step ladder. Candidate news articles, where found, were not substituted for the unidentified source record."
+      },
+      "admission": {
+        "decision": "drop_unverifiable",
+        "target_strand": "C",
+        "reason_code": "SOURCE_IDENTITY_UNVERIFIED",
+        "reason": "Record lacks a title or primary publisher URL. Google News RSS identifier cannot be resolved and no candidate article is sufficiently linked to that identifier to make a defensible admission decision."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-02T15:33:22Z",
+      "deep_scan_package_id": "worker-a-20261102T145416Z-afc970c83779",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:0d1b57ded64af17f": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "ef149b50",
+      "identity_hash": "acbb82884e3c7118",
+      "reader_title": "Global military AI commission issues governance guidance",
+      "reader_what": "An international commission recommends governance principles for responsible artificial intelligence in military applications.",
+      "reader_more": "The Global Commission on Responsible AI in the Military Domain issued its strategic guidance in September 2025. Its work focuses on safety, law, international coordination and risk in military systems. Although the Netherlands supported the commission, the report is not a study of European research funding, innovation capacity or R&I governance.",
+      "deep_analysis": {
+        "work_kind": "international strategic guidance report",
+        "research_question": "How should states and organisations manage the risks of military AI?",
+        "main_finding": "GC REAIM recommends governance measures for military artificial intelligence at the international level.",
+        "method_or_basis": "Original 2025 GC REAIM commission report, authored by global experts with HCSS as secretariat.",
+        "qualification": "The report is a guidance document about worldwide military AI risk and governance; European organisational involvement is not a substantive EU R&I-system finding.",
+        "radar_relevance": "Dropped from A after independent assessment of Routes 1–3 because EU R&I system evidence is absent.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Matching original GC REAIM report PDF text available at https://hcss.nl/wp-content/uploads/2025/09/GC-REAIM-Strategic-Guidance-Report-Responsible-By-Design-HCSS-2025.pdf in scanner package; title and commission author verified on pages 1–3."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Official HCSS alternative report PDF https://hcss.nl/wp-content/uploads/2025/09/GC-REAIM-Strategic-Guidance-Report-Final-WEB.pdf independently inspected; report title, publication and scope match."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_document",
+            "url": "https://hcss.nl/wp-content/uploads/2025/09/GC-REAIM-Strategic-Guidance-Report-Final-WEB.pdf",
+            "title": "Responsible by Design: Strategic Guidance Report on AI in the Military Domain",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Source-owned report identifies GC REAIM as author and HCSS as commission secretariat. It is a global military AI governance strategic guide, not an EU research system evidence product."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 1 tested: report discusses international military-AI governance and geopolitical risks, but does not analyse a European R&I strategic relationship. Routes 2 and 3 tested: no substantive measured EU research/innovation system or EU R&I study; a Dutch-funded global commission is not itself EU R&I evidence."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-02T15:33:22Z",
+      "deep_scan_package_id": "worker-a-20261102T145416Z-afc970c83779",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:e0b4cbe09854ae9b": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "ea40cd55",
+      "identity_hash": "a41dc07e4c6ae5ff",
+      "reader_title": "VTT announced coordination of the 6G-Cloud project",
+      "reader_what": "VTT said it would coordinate EU-backed research into AI-native, cloud-friendly sixth-generation mobile networks.",
+      "reader_more": "The article announces the start of 6G-Cloud in January 2024. It describes intended work on architecture, radio access, network management and efficiency. It does not report measured outcomes or a completed study of European research capabilities.",
+      "deep_analysis": {
+        "work_kind": "official project news / programme announcement",
+        "research_question": "What does the 6G-Cloud project plan to investigate?",
+        "main_finding": "VTT announced a multi-partner 6G research project starting in early 2024.",
+        "method_or_basis": "VTT project announcement summarising SNS JU project objectives and programme context, with no results reported.",
+        "qualification": "Announced project objectives and funding-portfolio membership do not demonstrate achieved technical innovation, research outputs or structural EU R&I performance.",
+        "radar_relevance": "Project entry belongs in a programme tracker but not as Strand A evidence under completed-study and demonstrated-capability gates.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "Full official VTT project news article at https://www.vttresearch.com/en/project_news/vtt-coordinates-6g-cloud-advance-6g-research-europe read; project launch and aims confirmed."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "official_full_text",
+            "url": "https://www.vttresearch.com/en/project_news/vtt-coordinates-6g-cloud-advance-6g-research-europe",
+            "title": "VTT coordinates 6G-Cloud to advance 6G research in Europe",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "VTT confirms 6G-Cloud beginning 1 January 2024 under SNS JU and prospective research aims, not realised 6G capabilities or a completed system-level analysis."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 1: a 6G initiative has potential strategic technology relevance, but no established geopolitical relationship is studied. Route 2: a press release states a new project and aims, not demonstrated European capability or trajectory. Route 3: it is a project launch and portfolio announcement, not a completed analytical study of EU R&I-system mechanisms."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-02T15:33:22Z",
+      "deep_scan_package_id": "worker-a-20261102T145416Z-afc970c83779",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "historical:id:8b513d6f4e4864e5": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "A",
+      "corpus_scope": "historical",
+      "source_hash": "2becafd9",
+      "identity_hash": "4180904182da0c95",
+      "reader_title": "Language use and skilled migration lack firm causal evidence",
+      "reader_what": "A 2016 paper questions whether permitting English in higher education would reduce high-skilled emigration.",
+      "reader_more": "Christopher Houtkamp examines theoretical claims about migration towards English-speaking countries. The concluding discussion stresses insufficient empirical research to establish the language-to-migration relationship. It recommends future surveys of migration motives but provides no measured European research workforce or innovation-system result.",
+      "deep_analysis": {
+        "work_kind": "conceptual language and migration article",
+        "research_question": "Does English-language access explain international skilled migration?",
+        "main_finding": "The article concludes that the causal relationship between English and skilled migration needs more empirical study.",
+        "method_or_basis": "Critical analysis of Van Parijs’s linguistic-justice theory and migration literature, not original EU research-workforce data.",
+        "qualification": "The paper is largely theoretical and says empirical evidence is insufficient; its reference to European higher education/research does not amount to measured R&I mobility.",
+        "radar_relevance": "Dropped from A: R&I-mechanism evidence is absent even though education and scientific research feature as examples.",
+        "confidence": "high",
+        "why_supported": false
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_repository_copy",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "DOI publisher https://doi.org/10.1515/auseur-2016-0004 did not yield full text in the reader."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "DOI 10.1515/auseur-2016-0004 matches University of Amsterdam author copy, final published article, 2016, journal volume 9 pages 23–29."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Inspected complete seven-page article in UvA-DARE final-version copy cached at https://content.openalex.org/works/W2543302341.pdf, and journal collection PDF indexed at real-j.mtak.hu/23074/1/ACTA-EUstudies-Vol9-2016.pdf."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text",
+            "url": "https://content.openalex.org/works/W2543302341.pdf",
+            "title": "English and the Brain Drain: an Uncertain Relationship (full UvA-DARE copy)",
+            "evidence_used": true
+          },
+          {
+            "kind": "journal_full_issue",
+            "url": "https://real-j.mtak.hu/23074/1/ACTA-EUstudies-Vol9-2016.pdf",
+            "title": "Acta Universitatis Sapientiae European and Regional Studies volume 9",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Read complete 2016 final text and conclusion. The study itself calls for better empirical evidence linking English and high-skilled migration, and does not report EU R&I workforce outcomes."
+      },
+      "admission": {
+        "decision": "drop",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Route 1: paper discusses language and high-skilled migration, not a supported strategic Europe R&I relationship. Route 2: speculative linguistic migration mechanisms without evidence on a European R&I workforce state or trajectory. Route 3: generic conceptual language policy critique, not completed empirical analysis of an EU R&I system mechanism; EU FP7 grant acknowledgement is incidental."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-02T15:33:22Z",
+      "deep_scan_package_id": "worker-a-20261102T145416Z-afc970c83779",
+      "claims": [],
+      "claims_profile": "radar-claims-v1"
+    },
+    "link:https://doi.org/10.1016/j.respol.2026.105657": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_a",
+      "corpus_scope": "main",
+      "source_hash": "88dd544a",
+      "identity_hash": "9fc843aa4c62bf75",
+      "reader_title": "Security screening may favor domestic innovation procurement",
+      "reader_what": "EU tender research links security assessments with innovation outcomes only among tenders awarded to domestic suppliers.",
+      "reader_why": "National security procedures can affect innovation procurement and may fragment the EU internal market.",
+      "reader_more": "The researchers combine a pan-European survey of 1,613 procurements with EU Tenders Electronic Daily information. They report positive associations between national security assessments and innovation or critical-technology purchasing in domestic-award cases, not uniformly across all tenders. They warn that uncoordinated national assessment practices may impede cross-border competition.",
+      "deep_analysis": {
+        "work_kind": "empirical EU innovation policy study",
+        "research_question": "How do national security assessments affect EU procurement, innovation and critical technologies?",
+        "main_finding": "Security assessments correlate with innovation and critical-technology procurement when domestic bidders win, producing a cross-border trade-off.",
+        "method_or_basis": "Observational analysis of 1,613 EU procurement projects linked to TED public tender data.",
+        "qualification": "The observational study reports conditional associations, not causal proof; innovation and critical-technology benefits were seen only when domestic suppliers won the tender.",
+        "radar_relevance": "A Route 2 directly measures European innovative procurement outcomes; Route 3 studies security-screening policy effects on EU research and innovation system.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "full_text_or_substantive_primary",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "failed",
+            "note": "DOI/ScienceDirect https://doi.org/10.1016/j.respol.2026.105657 did not deliver a readable complete article in the web reader."
+          },
+          {
+            "step": "doi",
+            "outcome": "success",
+            "note": "10.1016/j.respol.2026.105657 matches Research Policy volume 56 (2027), online 29 October 2026, and four author names in cached publisher-formatted article."
+          },
+          {
+            "step": "exact_title",
+            "outcome": "success",
+            "note": "Searched exact title \"The effects of national security assessments in public procurement on competition, sustainability, innovation, and critical technology procurement\"; identified Research Policy paper."
+          },
+          {
+            "step": "title_author_year",
+            "outcome": "success",
+            "note": "Berkhout Rainville Janssen Frenken 2026 security assessments innovation procurement search corroborated peer-reviewed research article metadata."
+          },
+          {
+            "step": "official_publisher_or_repository",
+            "outcome": "success",
+            "note": "Checked Research Policy/Elsevier DOI and separately retrieved/inspected original article PDF cached via OpenAlex at https://content.openalex.org/works/W7224333197.pdf, including article introduction and methodological overview."
+          },
+          {
+            "step": "broader_identity_search",
+            "outcome": "success",
+            "note": "Two distinct final-pass identity routes: searched Research Policy 2027 56 105657 procurement, and Berkhout Rainville NSA TED 1613 projects; both match document title, survey size and study topic."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "repository_full_text_excerpt",
+            "url": "https://content.openalex.org/works/W7224333197.pdf",
+            "title": "The effects of national security assessments in public procurement on competition, sustainability, innovation, and critical technology procurement",
+            "evidence_used": true
+          }
+        ],
+        "verification_note": "Third-attempt hard-final completed: tested DOI/publisher route, both author-and-topic and journal-volume identifiers, and cached OpenAlex article text as independent repository route. Article abstract and several substantive PDF pages substantiate methods and results; reported relationships are associations, not randomized causal effects."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "A",
+        "reason_code": "A_SUBSTANTIVE_EU_RI",
+        "reason": "A Routes 2 and 3: peer-reviewed pan-EU empirical analysis of procurement-security screening and innovation outcomes measures a European public innovation policy mechanism and its cross-border trade-off."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": ""
+      },
+      "deep_read_mode": "offline_llm_package_v2",
+      "reader_text_model": "user-provided-llm-subscription",
+      "reader_text_written_at": "2026-11-02T15:33:23Z",
+      "deep_scan_package_id": "worker-a-20261102T145416Z-afc970c83779",
+      "claims": [
+        {
+          "object": "digital.public_procurement",
+          "secondary_objects": [],
+          "actor": {
+            "name": "Berkhout, Rainville, Janssen and Frenken",
+            "class": "university_group"
+          },
+          "mechanism": "assesses",
+          "direction": "becomes_conditional",
+          "status": "delivered",
+          "status_date": "2026-10-29",
+          "scope": {
+            "level": "eu",
+            "countries": []
+          },
+          "kind": "diagnosis",
+          "qualification": "The observational study reports conditional associations, not causal proof; innovation and critical-technology benefits were seen only when domestic suppliers won the tender.",
+          "text": "A study of 1,613 EU procurement projects finds positive security-assessment associations with innovation and critical-technology outcomes only for domestic-award tenders.",
+          "confidence": "high",
+          "record_key": "link:https://doi.org/10.1016/j.respol.2026.105657",
+          "merit": 77,
+          "origin": "deep_scan",
+          "era": "current",
+          "provisional": false,
+          "claim_id": "c:9fc843aa4c62bf75:1",
+          "attributes": {}
+        }
+      ],
+      "claims_profile": "radar-claims-v1"
     }
   },
   "claims_profile": "radar-claims-v1",
-  "claims_updated_at": "2026-11-01T10:58:59Z"
+  "claims_updated_at": "2026-11-02T15:33:23Z"
 }
