@@ -308084,6 +308084,146 @@
       "deep_scan_package_id": "worker-a-20261101T102822Z-07b4e56a2b14",
       "claims": [],
       "claims_profile": "radar-claims-v1"
+    },
+    "id:edhec-genai-foresight-innovation-strategy-2026-10-20": {
+      "profile": "deep-reader-v2-authoritative",
+      "strand": "strand_b",
+      "reader_title": "AI foresight pilots expose weak-signal gaps and verification costs",
+      "reader_what": "Eight-organisation pilots assess AI in 25 foresight methods and document missed weak signals.",
+      "reader_why": "Stronger source governance and missed-signal checks can improve Europe-focused strategic R&I monitoring.",
+      "reader_more": "The EDHEC community-of-practice report tests GenAI-supported foresight, innovation and strategy workflows across participating organisations. Its 25-method matrix rates benefits against required human checking. A parallel human-only versus AI-assisted horizon-scanning pilot found blind spots on both sides, leading to an N−1 missed-signal search. It documents tiered data provenance, market-sizing hallucination risks and MACTOR validation limits. The Siemens case cites an already indexed longitudinal paper; its statistics are not a second independent study. This report changes the evidence about useful foresight methods, not the external European geopolitical situation.",
+      "deep_analysis": {
+        "work_kind": "multi-organisation institutional research report with piloted use cases",
+        "research_question": "Where do GenAI tools reliably strengthen foresight, innovation, strategic scanning and analytical workflows, and how much human checking is needed?",
+        "main_finding": "GenAI brings useful scanning and synthesis gains, but parallel human/AI scans each missed weak signals; a separate N−1 recovery pass, source qualification and method-specific review are required.",
+        "method_or_basis": "EDHEC Community of Practice, eight organisations; six-month pilots, 25 foresight-method ratings, case studies including MACTOR, market sizing and Siemens longitudinal comparison.",
+        "qualification": "Practice-based pilots and author assessments, not a representative controlled experiment or independently measured European geopolitical event. Reported gains are use-case specific; Siemens figures are derived from already indexed research.",
+        "radar_relevance": "Direct Strand B evidence for improving scanning, bias control, quality assurance and analyst workflows. High relevance to Strand A intelligence capability, but lacks an independent newly observed European R&I/geopolitical outcome.",
+        "confidence": "high",
+        "why_supported": true
+      },
+      "verification": {
+        "identity_verified": true,
+        "evidence_depth": "official_full_document",
+        "retrieval_attempts": [
+          {
+            "step": "supplied_url",
+            "outcome": "success",
+            "note": "User provided complete 60-page EDHEC PDF; full substantive document reviewed."
+          },
+          {
+            "step": "doi",
+            "outcome": "not_applicable",
+            "note": "No DOI asserted for this institutional report."
+          }
+        ],
+        "recovered_sources": [
+          {
+            "kind": "user_supplied_primary_pdf",
+            "url": "",
+            "title": "Gen AI for Foresight, Innovation & Strategy (20 October 2026)",
+            "evidence_used": true,
+            "sha256": "3d197bdb54aa5dfd9c32e9a31c08a0c0a5b0c416aa10cfbbe23679e3969da6a1"
+          }
+        ],
+        "verification_note": "Source identity read from EDHEC title page, report date 20 October 2026. Full user-provided document, pages 1–60 available. Substantive claims independently traced to printed pp. 4,12–15,18–22,25–27,33–35. Does not claim a publicly resolved publisher URL or DOI."
+      },
+      "admission": {
+        "decision": "keep",
+        "target_strand": "B",
+        "reason_code": "B_FORESIGHT_METHOD_PRIMARY_REPORT",
+        "reason": "Original substantive report directly assesses foresight methods and analytical evidence. Cross-strand A relevance is high as methodological enabling evidence but not a direct EU R&I/geopolitical change."
+      },
+      "duplicate": {
+        "status": "unique",
+        "duplicate_of": "",
+        "reason": "EDHEC 20 October 2026 report not already indexed; cited Siemens Futures study is already separately indexed and must not be re-ingested."
+      },
+      "deep_read_mode": "user_supplied_full_pdf_manual_v2",
+      "reader_text_model": "LLM_deep_document_review",
+      "deep_scan_package_id": "manual-edhec-pdf-20261102",
+      "cross_strand_assessment": {
+        "A": "85/100 user-requested manual cross-strand priority; indirect methodological link, not separately admitted as a geopolitical/policy event",
+        "B": "85/100 user-requested manual score; KEEP"
+      },
+      "findings": [
+        {
+          "id": "N_MINUS_1",
+          "title": "Both human and AI scans missed weak signals",
+          "type": "observed_pilot_and_workflow_change",
+          "report_page": 27,
+          "evidence": "Parallel human-only and AI-augmented scans each contained blind spots, motivating an N−1 missed-signal pass.",
+          "strand_B": "high",
+          "strand_A": "high_method_enabler"
+        },
+        {
+          "id": "METHOD_RUBRIC",
+          "title": "25-method AI benefit versus verification effort assessment",
+          "type": "authors_assessment",
+          "report_pages": "12–15",
+          "evidence": "High-benefit approaches include horizon scanning, expert interviews, scenario analysis, startup scanning, competitor analysis; trend audits, cross-impact, system dynamics, narrative and MACTOR need strong guardrails.",
+          "strand_B": "high",
+          "strand_A": "high_method_enabler"
+        },
+        {
+          "id": "SOURCE_GOVERNANCE",
+          "title": "Tiered source qualification and data provenance",
+          "type": "case_study",
+          "report_pages": "4,33–35",
+          "evidence": "Lufthansa Innovation Hub case describes source-tier governance, a relational database and agentic queries; separately distinguishes first-party data quality.",
+          "strand_B": "high",
+          "strand_A": "high_method_enabler"
+        },
+        {
+          "id": "SIEMENS_EXISTING",
+          "title": "Independent Siemens article already indexed: enrich, not duplicate",
+          "type": "reported_longitudinal_case",
+          "report_pages": "21–22",
+          "evidence": "Against the 2023 baseline, 2025 cycle was about 20% faster, used about 50% less expert time and was estimated 30% better in analytical quality. EDHEC cites existing Siemens Futures paper.",
+          "existing_doi": "10.1016/j.futures.2026.103883"
+        },
+        {
+          "id": "MACTOR",
+          "title": "MACTOR matrix validation must be sampled and workshop-checked",
+          "type": "observed_pilot_and_method_advice",
+          "report_page": 18,
+          "evidence": "About 60% analyst effort saved, with 100–200 cell matrices impractical to validate cell-by-cell without sampling and expert review."
+        },
+        {
+          "id": "MARKET_ANCHORS",
+          "title": "AI market sizing requires verified baselines",
+          "type": "observed_pilot_limitation",
+          "report_pages": "19–20",
+          "evidence": "Unanchored estimates in novel categories tended to invent starting values; pilots advise prevalidated baseline, primary-source auditing, sensitivity checks."
+        },
+        {
+          "id": "REVIEW_EFFORT",
+          "title": "Review/rework effort is a material AI adoption cost",
+          "type": "authors_framework",
+          "report_pages": "12–15",
+          "evidence": "Five-level benefit and cognitive effort/rework rubric distinguishes gains in coverage/speed from effort to make output decision-ready."
+        },
+        {
+          "id": "BIAS",
+          "title": "Dominant narrative and false-precision risk",
+          "type": "authors_warning",
+          "report_pages": "25–27",
+          "evidence": "Fluent model output can reinforce common narratives, mask contradictory weak signals, and present unchecked matrices as precise."
+        }
+      ],
+      "manual_source_merit_override": {
+        "score": 85,
+        "calculated_baseline": 63,
+        "provenance": "explicit_user_directed_override",
+        "date": "2026-11-02",
+        "scope": "this EDHEC source only",
+        "strand_scores": {
+          "A": 85,
+          "B": 85
+        }
+      },
+      "source_hash": "a39c023d",
+      "identity_hash": "f10c46e254679a8b"
     }
   },
   "claims_profile": "radar-claims-v1",

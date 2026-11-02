@@ -127,7 +127,12 @@
     return {code:'E',label:'Supporting',long:'Supporting / lower weight',tone:'supporting'};
   }
   function forItem(x){
-    const a=authority(x),r=relevance(x),e=evidence(x),ap=authorPoints(x),score=Math.max(0,Math.min(100,a.points+r.points+e.points+ap)),b=band(score);
+    const a=authority(x),r=relevance(x),e=evidence(x),ap=authorPoints(x);
+    const baseline=Math.max(0,Math.min(100,a.points+r.points+e.points+ap));
+    // User-directed, auditable, one-record editorial override; not general authority scoring.
+    const isEdhec=String(x?.id||'')==='edhec-genai-foresight-innovation-strategy-2026-10-20';
+    const manual=isEdhec && Number(x?.source_merit_manual_override)===85;
+    const score=manual?85:baseline,b=band(score);
     return {score,...b,authority:a.kind,relevance:r.kind,evidence:e.kind,authorPoints:ap};
   }
   function componentsFor(x){
