@@ -1,0 +1,35 @@
+name: Install EDHEC Deep Scan (A+B 85)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get scanner files
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Extract package
+        run: |
+          test -f EDHEC_deep_scanned_A_B_85_single_install.zip
+          mkdir -p /tmp/edhec-installer
+          unzip -q EDHEC_deep_scanned_A_B_85_single_install.zip -d /tmp/edhec-installer
+      - name: Check compatibility and admission
+        run: python /tmp/edhec-installer/apply_edhec_deep_patch.py .
+      - name: Install and rebuild active scanner products
+        run: python /tmp/edhec-installer/apply_edhec_deep_patch.py . --apply
+      - name: Commit only EDHEC source and scanner data
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add radar.json radar_active.json reader_text.json admission_state.json source_merit.js source_documents/EDHEC_GenAI_Foresight_2026-10-20.pdf
+          git diff --cached --quiet || (git commit -m 'Admit EDHEC Deep Scan B with A cross-reference and user-set 85 scores' && git push)
