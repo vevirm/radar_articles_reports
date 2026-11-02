@@ -161,6 +161,80 @@ def source_scan(source, deadline, per_source):
     return ranked,{'source':name,'routes_attempted':scanned,'failed_or_empty_routes':errors,'candidates':len(found)}
 
 
+
+# Strict publication identity gate. The alternate scanner must never submit a hub,
+# homepage, search result, or unverified URL as a publication candidate.
+BAD_PATH = re.compile(r'(?:^|/)(?:about|contact|news|events|research|projects?|topics?|people|team|press|search|privacy|en|de|publications?|publikationen|studies|studie|reports?|resources|fileadmin)(?:/)?$', re.I)
+BAD_TITLE = re.compile(r'^(?:home|publications?|research|news|reports?|studies|projects?|about us|read more|download|pdf|overview|latest news|search)(?:\s*[|–-].*)?$', re.I)
+DOCUMENT_WORDS = re.compile(r'\b(report|policy brief|briefing|working paper|discussion paper|research paper|study|survey|analysis|white paper|technical paper|position paper|publication)\b',re.I)
+RESEARCH_WORDS = re.compile(r'\b(europe|european|eu|digital|sovereignty|technology|innovation|research|science|artificial intelligence|\bai\b|industrial|competitiveness|semiconductor|quantum|security|infrastructure|strategic)\b',re.I)
+
+
+def publication_shape(row):
+    url = row.get('link','')
+    p = up.urlsplit(url)
+    path = up.unquote(p.path).rstrip('/')
+    title = re.sub(r'\s+',' ',row.get('title','')).strip()
+    if not path or path == '/' or BAD_PATH.search(path): return False
+    if any(x in path.lower() for x in ('/tag/','/category/','/author/','/search/','/events/','/people/','/team/')): return False
+    if BAD_TITLE.match(title): return False
+    if not (path.lower().endswith('.pdf') or DOCUMENT_WORDS.search(title+' '+path.replace('-',' '))): return False
+    return bool(RESEARCH_WORDS.search(title+' '+path.replace('-',' ')))
+
+
+def verify_publication(row, deadline):
+    if not publication_shape(row) or time.monotonic()>=deadline: return None
+    url=row['link']
+    body, final, typ=fetch(url,deadline,size=350000)
+    if not final: return None
+    if not domain_match(final,row['source_domain']): return None
+    if typ=='pdf':
+        verified_kind='pdf'
+        title=row['title']
+        if len(title)<18 or title.lower().endswith('.pdf'):
+            title=re.sub(r'[_-]+',' ',up.unquote(up.urlsplit(url).path.rsplit('/',1)[-1])).removesuffix('.pdf').strip()
+        if len(title)<18: return None
+    else:
+        if 'html' not in typ or not body: return None
+        soup=BeautifulSoup(body,'html.parser')
+        for node in soup(['script','style','nav','footer','header']):node.decompose()
+        main=soup.find('main') or soup.find('article') or soup
+        text=main.get_text(' ',strip=True)
+        if len(text)<900: return None
+        og=soup.find('meta',attrs={'property':'og:type'})
+        metatitle=soup.find('meta',attrs={'property':'og:title'})
+        heading=soup.find('h1')
+        title=(metatitle.get('content','') if metatitle else '') or (heading.get_text(' ',strip=True) if heading else '') or row['title']
+        if BAD_TITLE.match(title) or not DOCUMENT_WORDS.search(title+' '+up.unquote(up.urlsplit(final).path).replace('-',' ')):return None
+        if not RESEARCH_WORDS.search(title+' '+text[:5000]):return None
+        # Must carry publication-specific metadata, not just contain a list of documents.
+        metadata=soup.find('meta',attrs={'name':re.compile(r'citation_(?:title|date)|dc\.date|article:published_time',re.I)})
+        date=soup.find('time')
+        pdf=soup.find('a',href=re.compile(r'\.pdf(?:$|\?)',re.I))
+        if not (metadata or date or pdf or (main.name=='article' and len(text)>1800)):return None
+        verified_kind='publication_page'
+    checked=dict(row)
+    checked.update({'title':re.sub(r'\s+',' ',title).strip()[:250], 'link':normalize(final),
+                    'verification':'fetched_publication', 'document_type':verified_kind,
+                    'review_status':'requires_normal_radar_validation'})
+    return checked
+
+
+def select_quality(rows, deadline, max_results, previous):
+    keys=existing_keys({}, {'candidates':previous})
+    shortlist=[]
+    for row in sorted(rows,key=lambda r:(-r.get('discovery_score',0),r.get('link',''))):
+        if len(shortlist)>=max_results or time.monotonic()>=deadline:break
+        if not publication_shape(row):continue
+        checked=verify_publication(row,deadline)
+        if not checked:continue
+        key='url:'+normalize(checked['link'])
+        title='title:'+re.sub(r'\W+',' ',checked['title'].lower()).strip()
+        if key in keys or title in keys:continue
+        keys.update((key,title))
+        shortlist.append(checked)
+    return shortlist
+
 def run(args):
     config=load(ROOT/'radar_config.json',{})
     sources=[s for s in config.get('institution_sources',[]) if isinstance(s,dict) and s.get('domain')]
@@ -177,11 +251,12 @@ def run(args):
     minimum_end=started+args.min_seconds
     deadline=started+args.max_seconds
     existing=existing_keys(corpus,queue)
+    existing.update(existing_keys({}, {'candidates':load(Path(args.output),{'candidates':[]}).get('candidates',[])}))
     additions=[]; stats=[]
     batches=0
     # Continue actual discovery across rotating institutions until the minimum runtime.
     # Keep every request bound by the 16-minute hard deadline.
-    while time.monotonic()<minimum_end and time.monotonic()<deadline:
+    while time.monotonic()<minimum_end-45 and time.monotonic()<deadline-45:
         batch=(seeds+(other[offset:]+other[:offset])[:max(0,args.sources-len(seeds))])[:args.sources]
         with cf.ThreadPoolExecutor(max_workers=min(args.workers,len(batch))) as executor:
             futures=[executor.submit(source_scan,s,deadline,args.per_source) for s in batch]
@@ -194,22 +269,32 @@ def run(args):
                     key='url:'+normalize(row['link'])
                     title='title:'+re.sub(r'\W+',' ',row['title'].lower()).strip()
                     if key in existing or (len(row['title'])>=18 and title in existing):continue
-                    existing.add(key);existing.add(title);row['review_status']='unreviewed';additions.append(row)
+                    existing.add(key);existing.add(title);additions.append(row)
         batches+=1
         offset=(offset+max(1,len(batch)-len(seeds)))%max(len(other),1)
         # Do not repeatedly hammer institutions when all routes return quickly.
         if time.monotonic()<minimum_end:
-            time.sleep(min(20, max(0,minimum_end-time.monotonic())))
-    queue['version']=1;queue['profile']='alternate-discovery-private-v1';queue['updated_at']=dt.datetime.now(dt.timezone.utc).isoformat()
-    queue['candidates']=(queue.get('candidates',[])+additions)[-args.queue_limit:]
-    state['version']=1;state['cursor']=offset
-    state['last_scan_at']=queue['updated_at'];state['last_scan_sources']=[x['domain'] for x in selected]
-    state['last_scan_new']=len(additions);state['last_scan_diagnostics']=stats;state['last_scan_batches']=batches
+            time.sleep(min(20, max(0,minimum_end-45-time.monotonic())))
+    # Only verified, publication-shaped results go into the NEW review artifact.
+    # Previous noisy discovery queues never pass through automatically.
+    top=select_quality(additions,deadline,args.max_results,[])
+    if time.monotonic()<minimum_end:
+        time.sleep(max(0,minimum_end-time.monotonic()))
+    shortlist={'version':2,'profile':'alternate-verified-preview-only','updated_at':dt.datetime.now(dt.timezone.utc).isoformat(),
+               'candidates':top,'preview_only':True,'normal_radar_format':['title','link','source','source_domain']}
+    state['version']=2;state['cursor']=offset
+    state['last_scan_at']=shortlist['updated_at'];state['last_scan_sources']=[x['domain'] for x in selected]
+    state['last_scan_raw_links']=len(additions);state['last_scan_verified']=len(top)
+    state['last_scan_diagnostics']=stats;state['last_scan_batches']=batches
     if not args.dry_run:
-        queue_path.parent.mkdir(parents=True,exist_ok=True);state_path.parent.mkdir(parents=True,exist_ok=True)
-        for path,body in ((queue_path,queue),(state_path,state)):
+        state_path.parent.mkdir(parents=True,exist_ok=True)
+        for path,body in ((Path(args.output),shortlist),(state_path,state)):
+            path.parent.mkdir(parents=True,exist_ok=True)
             tmp=path.with_suffix(path.suffix+'.tmp');tmp.write_text(json.dumps(body,indent=2,ensure_ascii=False)+'\n');tmp.replace(path)
-    print(json.dumps({'sources_per_batch':len(selected),'batches':batches,'new_private_candidates':len(additions),'private_queue_total':len(queue['candidates']),'elapsed_seconds':round(time.monotonic()-started,1),'dry_run':args.dry_run,'sample_new':additions[:5]},indent=2))
+    print(json.dumps({'sources_per_batch':len(selected),'batches':batches,'raw_discoveries':len(additions),
+                      'verified_preview_candidates':len(top),'elapsed_seconds':round(time.monotonic()-started,1),
+                      'preview_only':True,'dry_run':args.dry_run,'sample_new':top[:5]},indent=2))
+
 
 
 if __name__=='__main__':
@@ -221,9 +306,11 @@ if __name__=='__main__':
     p.add_argument('--workers',type=int,default=5)
     p.add_argument('--queue-limit',type=int,default=3000)
     p.add_argument('--queue',default=str(ROOT/'alternate_discovery_candidates.json'))
+    p.add_argument('--output',default=str(ROOT/'alternate_verified_preview.json'))
+    p.add_argument('--max-results',type=int,default=10)
     p.add_argument('--state',default=str(ROOT/'alternate_discovery_state.json'))
     p.add_argument('--corpus',default=str(ROOT/'radar.json'))
     p.add_argument('--dry-run',action='store_true')
     a=p.parse_args()
-    if not 1<=a.min_seconds<=a.max_seconds<=960 or a.sources<1 or a.workers<1: p.error('invalid limits')
+    if not 1<=a.min_seconds<=a.max_seconds<=960 or a.sources<1 or a.workers<1 or not 1<=a.max_results<=20: p.error('invalid limits')
     run(a)
