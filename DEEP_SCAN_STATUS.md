@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **3670** (Main **1816** + Historical **1854**)
-- Automatic queue still needing V2 verification: **36** (Main **1** + Historical **35**)
-- Currently assigned to workers: **36** (Main **1** + Historical **35**)
+- Authoritative V2 verified: **3671** (Main **1817** + Historical **1854**)
+- Automatic queue still needing V2 verification: **51** (Main **12** + Historical **39**)
+- Currently assigned to workers: **51** (Main **12** + Historical **39**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **45**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,9 +16,17 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261101T111005Z-2e06dd3044b2`
-- Assigned unresolved records: **1**
-  1. `link:https://doi.org/10.1016/j.respol.2026.105657` — The effects of national security assessments in public procurement on competition, sustainability, innovation, and critical technology procurement — recovery attempt 3/3
+- Current package: `worker-a-20261102T145416Z-afc970c83779`
+- Assigned unresolved records: **16**
+  1. `link:https://doi.org/10.1080/13563467.2026.2751102` — Globalization unravelling? ASML and the geopolitics of Europe-China tech decoupling
+  2. `link:https://joint-research-centre.ec.europa.eu/jrc-news-and-updates/quantum-129-technology-signals-are-already-operational-level-2026-10-30_en` — Quantum: 12.9% of technology signals are already at operational level
+  3. `link:https://doi.org/10.48550/arxiv.2610.40493` — SPECTRUM: A Strategic Framework and Technical Blueprint for European Exascale Research Data and Compute Infrastructure
+  4. `link:https://doi.org/10.1002/kpm.70112` — Beyond Consumer Choice: Human AI Collaboration, Digital Nudging, and the Evolution of Employee Decision‐Making in Service Organizations
+  5. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxNTWFpNk9oa1hRa3pBWUtTS1JIRUhtQkYteFk4eEswTVQzTm94alRVQ2YyRXJFREpZTks2V0pwRmRPRmpKdEc3MFlOWTkyYjB6bUMwMWFUcHBSSFhJcTZvUVJUTk9SclFWSkpGa1dZVTNOdEJFSy0ydFNVVW1UR0tNY1FoMXBHZWc3MEZtMVJfM1g1ZFhady1RbC05YWhaRmJ1Ul9rVFVVWDM3cE44bEVZ?oc=5` — Sovereign AI, male-dominated by design: how EU procurement ignores women-led tech
+  6. `link:https://op.europa.eu/o/opportal-service/download-handler?identifier=44a532fb-d3be-11f1-9458-01aa75ed71a1&format=pdf&language=en&productionSystem=cellar&part=` — Regulation on the safety, resilience and sustainability of space activities in the Union (EU Space Act) - Presidency compromise text - clean version - Publications Office of the EU
+  7. `link:https://news.google.com/rss/articles/CBMipAFBVV95cUxQY0hhdWRyUjBjTTcyeWhkbUh6M243MDV5dTE0dVJibXM5MW1QcGVXRzhjU2RKZS1qemNoakVVMDlmN1lqXzZKOFVZNm1qVjVMRkI2SHZtSUlOa2hqTWFWV3E5NlE2WkxSV2pGZGE2RFJDVnJ6TFVJNzNJSy1CbmNEeDY0ZkJuQURRblh2S1NZRWctc3V6bHk2TjVjZXhjejZSdnFhZw?oc=5` — Horizon Europe Work Programme 2026-2027: 6. Civil Security for Society
+  8. `link:https://news.google.com/rss/articles/CBMitgFBVV95cUxPalFzaXpKNGdZUTFndXFpbS1ZNm4tbElSbWRGMmVaVDdBcHpzTDVZb1ZiR2ttWWJMOUdDS2pwRi1MUEs5UW1feXRDejZtbmFNMF94QUN3WHgxWFRUakF6ZE1TX2lJVkQ4cVlVVVRIamNzT3FEb2IxY2tBaTI4ZE9sVXNZMmdJYnhNcGpiM2ZjRUhmcjA4bkRNT1dFZmJadGx2WGlvSXlCU25pTmUzT0NYN2tvVU1YZw?oc=5` — Eastern Europe Is Top AI Diversifier for Morgan Stanley’s Psaila
+  - … plus 8 more in the package manifest
 
 ### Worker B
 - Current package: `worker-b-20261029T085853Z-64145a2dbff2`
