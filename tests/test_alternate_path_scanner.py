@@ -21,3 +21,16 @@ def test_existing_urls_and_titles():
     keys=m.existing_keys({'strand_a':[{'link':'http://www.example.org/a.pdf','title':'A Report'}]}, {'candidates':[]})
     assert 'url:https://example.org/a.pdf' in keys
     assert 'title:a report' in keys
+
+def test_reject_homepages_and_generic_hubs():
+    assert not m.publication_shape({'title':'Publications','link':'https://example.org/publications'})
+    assert not m.publication_shape({'title':'Digital innovation','link':'https://example.org/'})
+    assert not m.publication_shape({'title':'Europe research','link':'https://example.org/en/research'})
+
+def test_keep_strong_document_shape():
+    assert m.publication_shape({'title':'Digital sovereignty in Europe policy brief 2026', 'link':'https://example.org/files/digital-sovereignty-2026.pdf'})
+
+def test_verification_rejects_unreachable(monkeypatch):
+    monkeypatch.setattr(m,'fetch',lambda *a,**k: ('','',''))
+    import time
+    assert m.verify_publication({'title':'European technology policy report','link':'https://example.org/files/report.pdf','source_domain':'example.org'}, time.monotonic()+30) is None
