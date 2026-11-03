@@ -2,7 +2,7 @@ name: Global R&I Deep Scan — LLM Package / Import
 
 # This REPLACES the previously installed automatic-AI Deep Scan workflow.
 # Research discovery never runs on push. A push can only validate the reviewed
-# JSON file in the exact inbox path below.
+# JSON files with the supported prefix in the Global inbox below.
 on:
   workflow_dispatch:
     inputs:
@@ -22,7 +22,7 @@ on:
     branches:
       - main
     paths:
-      - 'Global R&I Blind Spots/deep_scan/inbox/global_deep_scan_results.json'
+      - 'Global R&I Blind Spots/deep_scan/inbox/global_deep_scan_results*.json'
 
 permissions:
   contents: read
@@ -77,12 +77,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test -f 'Global R&I Blind Spots/deep_scan/inbox/global_deep_scan_results.json' || {
-            echo '::error::Please upload the LLM result JSON to the Global deep_scan/inbox/ path first.'
-            exit 2
-          }
-          python scripts/global_blind_spots_deep_scan.py import \
-            --results 'Global R&I Blind Spots/deep_scan/inbox/global_deep_scan_results.json'
+          # All supported filenames are accepted, including Windows '(1)' duplicates.
+          # Package IDs are checked inside the JSON; previous imported files are
+          # archived and removed from inbox only after proof of a successful import.
+          python scripts/global_blind_spots_deep_scan.py import-inbox
       - name: Check outputs remain inside the separate Global folder
         shell: bash
         run: |
@@ -123,6 +121,10 @@ jobs:
             'Global R&I Blind Spots/deep_scan/verified_findings.csv' \
             'Global R&I Blind Spots/deep_scan/last_import.json' \
             'Global R&I Blind Spots/deep_scan/REVIEW_ARCHIVE.md'
+          git add -A -- 'Global R&I Blind Spots/deep_scan/inbox'
+          if [[ -d 'Global R&I Blind Spots/deep_scan/processed_inbox' ]]; then
+            git add -A -- 'Global R&I Blind Spots/deep_scan/processed_inbox'
+          fi
           if git diff --cached --quiet; then exit 0; fi
           git commit -m 'Import source-reviewed Global R&I Deep Scan findings'
           auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
@@ -146,11 +148,18 @@ jobs:
           ## Global R&I source-review package ready
           Download **global-ri-llm-review-package** from this run's Artifacts.
           Unzip once if needed, then give **global_ri_llm_package.zip** to a browsing-capable LLM.
-          Ask it to follow `INSTRUCTIONS.md` and return `global_deep_scan_results.json`.
-          Upload that JSON to `Global R&I Blind Spots/deep_scan/inbox/` on `main`.
+          Ask it to follow `INSTRUCTIONS.md` and return a JSON results file with the package ID in the filename.
+          Upload the JSON (preferably named `global_deep_scan_results_<package-id>.json`) to
+          `Global R&I Blind Spots/deep_scan/inbox/` on `main`. Windows `(1)` duplicate
+          filenames are also supported. Successfully processed inbox files are
+          moved automatically into `deep_scan/processed_inbox/`.
           The import runs automatically on that file upload, and accepts only evidence-backed `KEEP` records.
           EOF
           else
-            cat 'Global R&I Blind Spots/deep_scan/last_import.json' >> "$GITHUB_STEP_SUMMARY"
+            if [[ -f 'Global R&I Blind Spots/deep_scan/last_import.json' ]]; then
+              cat 'Global R&I Blind Spots/deep_scan/last_import.json' >> "$GITHUB_STEP_SUMMARY"
+            else
+              echo 'No import has completed yet.' >> "$GITHUB_STEP_SUMMARY"
+            fi
             echo 'Reviewed KEEP findings: Global R&I Blind Spots/deep_scan/VERIFIED_FINDINGS.md. All decisions: REVIEW_ARCHIVE.md' >> "$GITHUB_STEP_SUMMARY"
           fi
