@@ -386,8 +386,12 @@ content, authors/issuing organisation and date match the assigned work.
 A DOI redirect or new publisher URL is acceptable ONLY when its identity
 is independently established in that field.
 
-**Output:** a JSON file named `global_deep_scan_results.json` with the SAME
+**Output:** a JSON file named `global_deep_scan_results_<package_id>.json` with the SAME
 `package_id` and candidate IDs as `manifest.json`, shaped as `RESULT_TEMPLATE.json`.
+Use the package ID literally in the filename so later reviews never collide.
+The inbox also accepts the legacy name `global_deep_scan_results.json` and
+Windows duplicate names such as `global_deep_scan_results (1).json`; the importer
+checks IDs inside the file, never infers the package from its filename.
 Use only exact source URLs that you actually opened. Include an independent
 corroborating URL, evidence page/section/table, concrete finding, mechanism,
 limitations, regional R&I significance and a sober EU comparison. If you lack
@@ -465,8 +469,11 @@ def prepare(base=BASE, deep=DEEP, radar_file=ROOT / 'radar_active.json', config_
             candidates.append('')
         z.writestr('CANDIDATES.md', '\n'.join(candidates))
         z.writestr('HOW_TO_RETURN.md', 'Complete actual source checks as required by INSTRUCTIONS.md.\n'
-                   'Upload `global_deep_scan_results.json` to `Global R&I Blind Spots/deep_scan/inbox/` '
-                   'in the main branch. The import then runs automatically, or use the Deep Scan action with operation `import`.\n'
+                   f'Preferred results filename: `global_deep_scan_results_{package_id}.json`.\n'
+                   'Upload the single result JSON to `Global R&I Blind Spots/deep_scan/inbox/` '
+                   'in the main branch. The importer accepts legacy and Windows (1) filenames too, '
+                   'checks the package ID inside each file, and archives inputs after a successful import.\n'
+                   'The import runs automatically, or use the Deep Scan action with operation `import`.\n'
                    'Do not present the package or template as verified findings.\n')
     return manifest, path
 
@@ -638,6 +645,136 @@ def import_results(results_path, deep=DEEP):
     return {'processed': len(checked), 'verified_keep': len(kept)}
 
 
+def is_inbox_result_file(path):
+    """Accept legacy filenames, Windows duplicates and package-specific names.
+
+    Filename is never trusted as a package identifier; the JSON package_id
+    must match the pending manifest or a completed/archived review.
+    """
+    name = path.name
+    return (path.is_file() and len(name) <= 180
+            and name.startswith('global_deep_scan_results') and name.endswith('.json'))
+
+
+def reviewed_input_already_stored(results, deep):
+    """Legacy safety: recognise an earlier successfully imported batch.
+
+    Versions before this fix left inputs in the inbox, including KEEP/REVIEW/
+    DROP decisions. Compare *every* candidate and decision to stored records
+    before moving any old upload out of the inbox.
+    """
+    archive_path = deep / 'verified_findings.json'
+    if not archive_path.exists() or results.get('schema') != SCHEMA:
+        return False
+    rows = results.get('results')
+    if not isinstance(rows, list) or not rows:
+        return False
+    saved = g.load_json(archive_path)
+    index = {(r.get('package_id'), r.get('candidate_id')): r
+             for r in saved.get('items', []) if isinstance(r, dict)}
+    package = results.get('package_id')
+    if not isinstance(package, str) or not package:
+        return False
+    return all(isinstance(r, dict) and
+               (stored := index.get((package, r.get('candidate_id')))) is not None and
+               stored.get('decision') == r.get('decision')
+               for r in rows)
+
+
+def processed_copy_path(results, deep):
+    package_id = results.get('package_id')
+    if not isinstance(package_id, str) or not package_id:
+        raise ValueError('Result JSON is missing package_id')
+    safe_package = re.sub(r'[^a-zA-Z0-9_-]', '-', package_id)[:90]
+    canonical = json.dumps(results, ensure_ascii=False, sort_keys=True,
+                           separators=(',', ':')).encode('utf-8')
+    digest = hashlib.sha256(canonical).hexdigest()[:16]
+    return deep / 'processed_inbox' / f'{safe_package}_{digest}.json'
+
+
+def archive_imported_upload(path, results, deep):
+    """Keep an immutable copy in Git, then remove only this uploaded inbox file."""
+    target = processed_copy_path(results, deep)
+    # Never silently replace an existing archived package with different data.
+    if target.exists():
+        prior = g.load_json(target)
+        if prior != results:
+            raise ValueError(f'Archive collision for {target.name}; upload preserved')
+    else:
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(json.dumps(results, ensure_ascii=False, indent=2) + '\n',
+                          encoding='utf-8')
+    path.unlink()
+    print(f'Archived processed input: {target.relative_to(deep)} (removed {path.name} from inbox)')
+
+
+def import_inbox(deep=DEEP):
+    """Import newest pending package from ANY matching inbox filename.
+
+    1. Old, already-imported uploads are moved to processed_inbox safely.
+    2. A current-package result is validated and imported before being moved.
+    3. Unknown-package, corrupt and conflicting files remain in the inbox;
+       they cannot contaminate the verified archive or block an otherwise
+       valid current package. No manual rename or overwrite is required.
+    """
+    inbox = deep / 'inbox'
+    files = sorted((p for p in inbox.glob('*.json') if is_inbox_result_file(p))) if inbox.exists() else []
+    if not files:
+        print('No Global LLM result JSON files in inbox; nothing to import.')
+        return {'imported': 0, 'archived_old': 0, 'unmatched': 0}
+    manifest_path = deep / 'pending_manifest.json'
+    pending = g.load_json(manifest_path) if manifest_path.exists() else {}
+    current = pending.get('package_id')
+    candidate_files = []
+    previous = []
+    unmatched = []
+    for path in files:
+        try:
+            if path.stat().st_size > 2_000_000:
+                raise ValueError('file is larger than 2 MB')
+            result = g.load_json(path)
+            if not isinstance(result, dict) or result.get('schema') != SCHEMA:
+                raise ValueError('unexpected JSON schema')
+            if not isinstance(result.get('results'), list):
+                raise ValueError('missing results array')
+            pkg = result.get('package_id')
+            archived_path = processed_copy_path(result, deep)
+            if archived_path.exists() and g.load_json(archived_path) == result:
+                previous.append((path, result))
+            elif reviewed_input_already_stored(result, deep):
+                previous.append((path, result))
+            elif pkg == current:
+                candidate_files.append((path, result))
+            else:
+                print(f'NOTICE: Keeping {path.name} in inbox: package {pkg!r} '
+                      f'does not match current pending package {current!r} and is not proven imported.')
+                unmatched.append(path)
+        except (ValueError, KeyError, json.JSONDecodeError, OSError) as exc:
+            print(f'NOTICE: Keeping {path.name} in inbox: {exc}')
+            unmatched.append(path)
+
+    # Do not touch the existing verified archive if two different responses
+    # claim to be for the same pending package. Identical copies are safe.
+    if candidate_files:
+        reference = candidate_files[0][1]
+        if any(response != reference for _, response in candidate_files[1:]):
+            raise ValueError('Different files claim the same pending package. '
+                             'No import performed; check the two results before continuing.')
+        source = candidate_files[0][0]
+        result = import_results(source, deep=deep)  # validates BEFORE moving inputs
+        print(f'Imported current package {current}: {result}')
+        for path, doc in candidate_files:
+            archive_imported_upload(path, doc, deep)
+    # Prior batch uploads are cleaned only when every decision is already
+    # recorded, or the identical reviewed JSON has already been archived.
+    for path, result in previous:
+        archive_imported_upload(path, result, deep)
+    print(f'Inbox summary: imported_current={len(candidate_files) > 0}, '
+          f'archived_prior={len(previous)}, unmatched_left={len(unmatched)}')
+    return {'imported': int(bool(candidate_files)),
+            'archived_old': len(previous), 'unmatched': len(unmatched)}
+
+
 def cli(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest='command', required=True)
@@ -650,6 +787,8 @@ def cli(argv=None):
     imp = sub.add_parser('import')
     imp.add_argument('--results', type=Path, default=DEEP / 'inbox' / 'global_deep_scan_results.json')
     imp.add_argument('--deep', type=Path, default=DEEP)
+    inbox = sub.add_parser('import-inbox', help='Import pending package and archive old imports without renaming')
+    inbox.add_argument('--deep', type=Path, default=DEEP)
     args = parser.parse_args(argv)
     try:
         if args.command == 'prepare':
@@ -657,8 +796,10 @@ def cli(argv=None):
                                      batch_size=args.batch_size, artifact=args.artifact)
             print(f'Prepared {len(manifest["items"])} actual linked candidates, package={manifest["package_id"]}, artifact={path}')
             print('Source-review package only: zero new verified findings.')
-        else:
+        elif args.command == 'import':
             print('Global deep scan import:', import_results(args.results, deep=args.deep))
+        else:
+            print('Global deep scan inbox:', import_inbox(deep=args.deep))
         return 0
     except (ValueError, KeyError, OSError, json.JSONDecodeError) as exc:
         print(f'GLOBAL DEEP SCAN FAILED: {exc}', file=sys.stderr)
