@@ -32,6 +32,7 @@ env:
 
 concurrency:
   group: ri-radar-research-scanners
+  queue: max
   cancel-in-progress: false
 
 jobs:
@@ -120,7 +121,8 @@ jobs:
           git add -- 'Global R&I Blind Spots/deep_scan/verified_findings.json' \
             'Global R&I Blind Spots/deep_scan/VERIFIED_FINDINGS.md' \
             'Global R&I Blind Spots/deep_scan/verified_findings.csv' \
-            'Global R&I Blind Spots/deep_scan/last_import.json'
+            'Global R&I Blind Spots/deep_scan/last_import.json' \
+            'Global R&I Blind Spots/deep_scan/REVIEW_ARCHIVE.md'
           if git diff --cached --quiet; then exit 0; fi
           git commit -m 'Import source-reviewed Global R&I Deep Scan findings'
           auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
@@ -150,5 +152,5 @@ jobs:
           EOF
           else
             cat 'Global R&I Blind Spots/deep_scan/last_import.json' >> "$GITHUB_STEP_SUMMARY"
-            echo 'Reviewed KEEP findings: Global R&I Blind Spots/deep_scan/VERIFIED_FINDINGS.md' >> "$GITHUB_STEP_SUMMARY"
+            echo 'Reviewed KEEP findings: Global R&I Blind Spots/deep_scan/VERIFIED_FINDINGS.md. All decisions: REVIEW_ARCHIVE.md' >> "$GITHUB_STEP_SUMMARY"
           fi

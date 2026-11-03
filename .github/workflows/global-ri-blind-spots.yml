@@ -11,6 +11,7 @@ env:
 
 concurrency:
   group: ri-radar-research-scanners
+  queue: max
   cancel-in-progress: false
 
 jobs:
@@ -33,7 +34,7 @@ jobs:
           python-version: '3.12'
       - name: Run independent tests
         run: python -m unittest discover -s tests -p 'test_global_blind_spots.py' -v
-      - name: Scan three global areas (separate outputs only)
+      - name: Scan rotating global regions for approximately 20–24 minutes (isolated outputs)
         env:
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
         run: python scripts/global_blind_spots.py
@@ -47,9 +48,11 @@ jobs:
           base=Path('Global R&I Blind Spots')
           d=json.loads((base/'latest.json').read_text())
           assert d['mode']=='manual only'
-          assert set(d['regions'])=={'United States','China','Russia'}
+          assert len(d['regions']) >= 20
+          assert len(d['countries_scheduled_this_run']) >= 10
+          assert d['regions'] == list(json.loads(Path('global_blind_spots_config.json').read_text())['regions'])
           assert all(x['review_status'] in ('needs_review','needs_article_review','accepted','rejected','investigate') for x in d['items'])
-          for name in ('archive.json','latest.json','latest.csv','LATEST.md'):
+          for name in ('archive.json','latest.json','latest.csv','LATEST.md','scan_state.json'):
               assert (base/name).is_file(), name
           PY
           unexpected="$(git diff --name-only -- . ':!Global R&I Blind Spots/' || true)"
