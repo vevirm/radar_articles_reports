@@ -1,6 +1,6 @@
 # Global R&I Blind Spots — latest manual scan
 
-Generated: 2026-11-03T13:27:15.675403+00:00. New: **3**. Found: **3**. Archive: **3**.
+Generated: 2026-11-03T13:47:53.949742+00:00. New: **0**. Found: **3**. Archive: **3**.
 
 Candidates are **not verified** and have **not been admitted to the main Radar**. Official source = evidence of an official statement, not proof of the outcome.
 
