@@ -32,8 +32,8 @@ Results are committed to `Global R&I Blind Spots/` (never into `radar.json` or `
 1. **Actions → Global R&I Deep Scan — LLM Package / Import**.
 2. **Run workflow**, `operation=prepare`, `batch_size=12` (12 assigned source documents; adjust 1–24).
 3. In the completed action run, scroll to **Artifacts** and download `global-ri-llm-review-package`.
-4. Give the ZIP package to a browsing-capable LLM and ask it to follow the bundled `INSTRUCTIONS.md`. It examines primary documents and independent sources, then returns **`global_deep_scan_results.json`**. All assigned IDs should get KEEP/REVIEW/DROP; it must not fabricate information to create KEEP findings.
-5. Upload only `global_deep_scan_results.json` to **`Global R&I Blind Spots/deep_scan/inbox/`** in GitHub on `main`. GitHub's import workflow automatically checks and saves accepted findings. Do not overwrite any other files.
+4. Give the ZIP to a browsing-capable LLM and ask it to follow `INSTRUCTIONS.md`. It should return **`global_deep_scan_results_<package-id>.json`**, matching the package ID in `manifest.json`. All assigned IDs should get KEEP/REVIEW/DROP; it must not fabricate information to create KEEP findings.
+5. Upload the resulting JSON to **`Global R&I Blind Spots/deep_scan/inbox/`** on `main`. Both the historical fixed filename and Windows `(1)` versions are accepted, so **do not replace, rename or delete old inbox files**. The importer checks the package ID inside each file and automatically moves successfully imported inputs to `deep_scan/processed_inbox/`.
 6. Find results in **`Global R&I Blind Spots/deep_scan/VERIFIED_FINDINGS.md`**. A separate **`REVIEW_ARCHIVE.md`** stores all review decisions, including drops/uncertain ones. Structured history: `verified_findings.json`.
 
 The scanner never automatically sends the package to a paid LLM. Its input is the current Radar plus curated source discovery. Previously covered Radar items remain eligible, and the Deep Scan explicitly identifies whether an item confirms, extends or changes an existing Radar finding.
@@ -46,7 +46,7 @@ The scanner never automatically sends the package to a paid LLM. Its input is th
 - Academic country attribution based only on an author's affiliation is downgraded and never described as national research policy evidence.
 - Candidates must be source-reviewed by the LLM to appear in `VERIFIED_FINDINGS.md`. Imports check for substantive evidence fields and independent-domain citations, but these structural checks cannot themselves prove truth.
 
-The two **discovery** and **package preparation** workflows have no cron schedules; only an explicit result upload triggers automatic **import**.
+The **discovery** and **package preparation** workflows have no cron schedules; only a result JSON upload triggers automatic **import**. You can also run `operation=import` manually to process files already in the inbox after a code update.
 
 ## Discovery-quality update: programme pages and trends
 
