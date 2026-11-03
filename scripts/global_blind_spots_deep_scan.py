@@ -230,7 +230,7 @@ def load_completed(deep):
     if not path.exists():
         return set()
     doc = g.load_json(path)
-    return {row['document_key'] for row in doc.get('items', [])
+    return {(row['document_key'], row.get('region', '')) for row in doc.get('items', [])
             if row.get('decision') in ('KEEP', 'DROP', 'REVIEW') and row.get('document_key')}
 
 
@@ -243,7 +243,7 @@ def plan_queue(radar, config, base=BASE, deep=DEEP, batch_size=12):
     # package item with both provenances, never a 'new finding' by default.
     merged = {}
     for row in curated + new + main:
-        doc = row['document_key']
+        doc = (row['document_key'], row['region'])
         if doc in completed:
             continue
         prev = merged.get(doc)
@@ -354,16 +354,29 @@ def prepare(base=BASE, deep=DEEP, radar_file=ROOT / 'radar_active.json', config_
     if not 1 <= batch_size <= 24:
         raise ValueError('batch size must be from 1 to 24')
     radar, config = g.load_json(radar_file), g.load_json(config_file)
-    selected, diagnostics = plan_queue(radar, config, base, deep, batch_size)
-    if not selected:
-        raise ValueError('No eligible source-backed candidate documents available; run Global discovery or inspect Radar data.')
-    batch_key = '|'.join(x['candidate_id'] for x in selected)
-    package_id = 'gri-' + text_id(batch_key)
-    manifest = {'schema': SCHEMA, 'package_id': package_id,
-                'created_at': datetime.now(timezone.utc).isoformat(),
-                'mission': 'Verify global R&I developments and compare them with actual main Radar coverage',
-                'review_protocol': 'source_grounded_with_independent_corroboration',
-                'items': selected, 'diagnostics': diagnostics}
+    # Reuse any pending work so an accidental second Prepare cannot invalidate
+    # the JSON a reviewer is already preparing for a previous package.
+    pending_path = deep / 'pending_manifest.json'
+    completed = load_completed(deep)
+    prior = g.load_json(pending_path) if pending_path.exists() else None
+    unfinished = [x for x in (prior or {}).get('items', [])
+                  if (x['document_key'], x.get('region', '')) not in completed]
+    if prior and prior.get('schema') == SCHEMA and unfinished:
+        manifest = prior
+        selected = prior['items']
+        package_id = prior['package_id']
+        print(f'Reusing pending package {package_id}: {len(unfinished)} records still awaiting review.')
+    else:
+        selected, diagnostics = plan_queue(radar, config, base, deep, batch_size)
+        if not selected:
+            raise ValueError('No eligible source-backed candidate documents available; run Global discovery or inspect Radar data.')
+        batch_key = '|'.join(x['candidate_id'] for x in selected)
+        package_id = 'gri-' + text_id(batch_key)
+        manifest = {'schema': SCHEMA, 'package_id': package_id,
+                    'created_at': datetime.now(timezone.utc).isoformat(),
+                    'mission': 'Verify global R&I developments and compare them with actual main Radar coverage',
+                    'review_protocol': 'source_grounded_with_independent_corroboration',
+                    'items': selected, 'diagnostics': diagnostics}
     deep.mkdir(parents=True, exist_ok=True)
     (deep / 'pending_manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     (deep / 'QUEUE.md').write_text('# Global R&I Deep Scan — pending verification\n\n'
@@ -379,7 +392,7 @@ def prepare(base=BASE, deep=DEEP, radar_file=ROOT / 'radar_active.json', config_
         z.writestr('RESULT_TEMPLATE.json', json.dumps(result_template(manifest), ensure_ascii=False, indent=2) + '\n')
         z.writestr('HOW_TO_RETURN.md', 'Complete actual source checks as required by INSTRUCTIONS.md.\n'
                    'Upload `global_deep_scan_results.json` to `Global R&I Blind Spots/deep_scan/inbox/` '
-                   'and start the **Global R&I Deep Scan — Import Reviewed Results** action manually.\n'
+                   'in the main branch. The import then runs automatically, or use the Deep Scan action with operation `import`.\n'
                    'Do not present the package or template as verified findings.\n')
     return manifest, path
 
@@ -481,14 +494,14 @@ def import_results(results_path, deep=DEEP):
         raise ValueError('Import REJECTED, nothing changed:\n' + '\n'.join(failures))
     existing_path = deep / 'verified_findings.json'
     existing = g.load_json(existing_path) if existing_path.exists() else {'schema': SCHEMA, 'items': []}
-    archived = {r['document_key']: r for r in existing.get('items', [])}
+    archived = {(r['document_key'], r.get('region', '')): r for r in existing.get('items', [])}
     timestamp = datetime.now(timezone.utc).isoformat()
     for c, result in checked:
         # Reject the false notion that merely 'REVIEW' is a verified finding.
         row = {**c, **result, 'package_id': manifest['package_id'],
                'reviewed_at': timestamp,
                'verification_status': 'verified_with_reported_sources' if result['decision'] == 'KEEP' else 'unverified_or_excluded'}
-        archived[c['document_key']] = row
+        archived[(c['document_key'], c['region'])] = row
     archive = {'schema': SCHEMA, 'updated_at': timestamp,
                'items': sorted(archived.values(), key=lambda x: (x.get('reviewed_at') or '', x['document_key']), reverse=True)}
     kept = [r for r in archive['items'] if r.get('decision') == 'KEEP']
