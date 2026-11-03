@@ -16,9 +16,11 @@
 
 1. GitHub Actions → **Global R&I Deep Scan — LLM Package / Import** → `operation = prepare`.
 2. Open the completed run → **Artifacts** → download **global-ri-llm-review-package**.
-3. Supply the package to a browsing-capable LLM, requesting a complete `global_deep_scan_results.json` that follows `INSTRUCTIONS.md`.
-4. Upload the returned JSON to [`deep_scan/inbox/`](deep_scan/inbox/) with exact filename `global_deep_scan_results.json` on branch `main`. The JSON is **one file** produced by your LLM; no manual selection of source documents is required.
-5. Uploading triggers validation and import. Check **[deep_scan/VERIFIED_FINDINGS.md](deep_scan/VERIFIED_FINDINGS.md)** for accepted KEEP findings.
+3. Give the package to a browsing-capable LLM. Ask for a JSON results file named `global_deep_scan_results_<package-id>.json`, following `INSTRUCTIONS.md`. The package ID appears in `manifest.json`.
+4. Upload the returned JSON to [`deep_scan/inbox/`](deep_scan/inbox/) on branch `main`. **Do not rename, delete or replace earlier files.** Both the historical `global_deep_scan_results.json` and Windows duplicate filenames such as `global_deep_scan_results (1).json` are supported. The importer checks the actual package ID in the file.
+5. Uploading triggers validation and import. Accepted KEEP findings accumulate in **[deep_scan/VERIFIED_FINDINGS.md](deep_scan/VERIFIED_FINDINGS.md)**. After validation, imported inbox JSON files are moved automatically to `deep_scan/processed_inbox/` as a historical record. If an older file cannot be confirmed as previously imported, it remains in the inbox for safety, but it does not block a correctly matched new package.
+
+**Already uploaded `global_deep_scan_results (1).json` while the previous file is still there?** Install the inbox update, go to Actions → **Global R&I Deep Scan — LLM Package / Import** → Run workflow → `operation=import`. This processes the files already on GitHub; no re-upload and no GitHub pencil icon are needed.
 
 - **[deep_scan/QUEUE.md](deep_scan/QUEUE.md)** — package awaiting LLM review.
 - **[deep_scan/REVIEW_ARCHIVE.md](deep_scan/REVIEW_ARCHIVE.md)** — retained KEEP, REVIEW and DROP decisions with reasons.
@@ -32,4 +34,4 @@ The current configuration rotates **28 countries across 10 world regions**. Each
 
 Discovery uses OpenAlex (with the repository's `OPENALEX_API_KEY`), journals from the main Radar's trusted list, selected independent editorial RSS and official/institutional source portals. Official announcements are labelled as uncorroborated claims; affiliation-only academic papers are labelled separately. The scanner is *not* a full web crawler or a substitute for the LLM source reading. Strict source review happens at the package stage.
 
-The global scan is manual-only. The review **import** reacts to an explicit upload to the exact inbox filename; that is not an automated discovery run.
+The global scan is manual-only. The review **import** reacts to an explicit upload of a `global_deep_scan_results*.json` file in the inbox; that is not an automated discovery run.
