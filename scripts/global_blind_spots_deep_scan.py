@@ -265,26 +265,37 @@ def plan_queue(radar, config, base=BASE, deep=DEEP, batch_size=12):
                         'both_main_radar_and_global_discovery': 31}.get(x['provenance'], 12)
         return origin_bonus + (10 if x.get('region_in_title') else 0) + (5 if x['radar_overlap'] == 'exact' else 0)
     rows.sort(key=lambda r: (-score(r), r['region'], r['theme'], r.get('date', ''), r['document_key']))
-    # Balanced country × theme rotation; do not invent an empty cell.
-    cells = [(region, theme) for region in config['regions'] for theme in config['themes']]
-    by_cell = {(r, t): [] for r, t in cells}
+    # Balance by actual world group, then country. Never fill one 12-item
+    # package with two or three example countries when more are available.
+    groups = {}
     for row in rows:
-        by_cell[(row['region'], row['theme'])].append(row)
+        group = config.get('country_groups', {}).get(row['region'], 'Other')
+        groups.setdefault(group, {}).setdefault(row['region'], []).append(row)
+    # Group rotation starts with regions that have useful fresh evidence rather
+    # than always privileging the country's insertion order.
+    order = sorted(groups, key=lambda group: -sum(len(x) for x in groups[group].values()))
     selected = []
-    while len(selected) < batch_size and any(by_cell.values()):
-        for cell in cells:
-            if by_cell[cell] and len(selected) < batch_size:
-                selected.append(by_cell[cell].pop(0))
-    return selected, {'main_radar_eligible': len(main), 'global_discovery_eligible': len(new), 'curated_source_eligible': len(curated),
+    while len(selected) < batch_size and any(groups[group] for group in order):
+        for group in order:
+            if not groups[group] or len(selected) >= batch_size:
+                continue
+            country = max(groups[group], key=lambda name: len(groups[group][name]))
+            selected.append(groups[group][country].pop(0))
+            if not groups[group][country]:
+                del groups[group][country]
+    return selected, {'main_radar_eligible': len(main), 'global_discovery_eligible': len(new),
+                      'curated_source_eligible': len(curated),
                       'distinct_pending_documents': len(rows), 'previously_reviewed_documents': len(completed),
-                      'selected': len(selected),
-                      'by_region': dict(Counter(r['region'] for r in selected))}
+                      'selected': len(selected), 'by_region': dict(Counter(r['region'] for r in selected)),
+                      'by_world_group': dict(Counter(config.get('country_groups', {}).get(r['region'],'Other') for r in selected))}
 
 
 INSTRUCTIONS = r'''# Global R&I Deep Scan — source-grounded verification
 
-**Mission:** Find what an EU-focused Radar might have missed in US, China or
-Russia R&I. A finding can ALREADY be present in the main Radar. Never drop a
+**Mission:** Investigate what an EU-focused Radar may have missed anywhere
+outside the European Union. The United States, China and Russia were examples,
+not the limits of the assignment. Candidate countries rotate across global
+regions. A finding can ALREADY be present in the main Radar. Never drop a
 relevant work merely because it is covered, and never fabricate an omitted one.
 
 This GitHub action PREPARES candidate documents. The substantive deep reading
@@ -316,7 +327,9 @@ For each item, choose:
 Check any existing main Radar entry independently. Record whether the new
 analysis **confirms**, **changes**, or **extends** that entry. If not in main
 Radar, label **not_in_main_radar**. This is a *coverage comparison*, not a
-validity verdict. The only `verified_findings` are source-grounded `KEEP`s.
+validity verdict. Only `KEEP` items appear in the verified-findings reading report. REVIEW and
+DROP decisions are retained separately in the review archive with reasons.
+Do not force a quota of KEEP findings; zero well-supported findings is valid.
 
 The `source_identity_basis` field must explain how the opened primary-source
 content, authors/issuing organisation and date match the assigned work.
@@ -374,7 +387,7 @@ def prepare(base=BASE, deep=DEEP, radar_file=ROOT / 'radar_active.json', config_
         package_id = 'gri-' + text_id(batch_key)
         manifest = {'schema': SCHEMA, 'package_id': package_id,
                     'created_at': datetime.now(timezone.utc).isoformat(),
-                    'mission': 'Verify global R&I developments and compare them with actual main Radar coverage',
+                    'mission': 'Verify global non-EU R&I developments (all world regions) and compare with main Radar',
                     'review_protocol': 'source_grounded_with_independent_corroboration',
                     'items': selected, 'diagnostics': diagnostics}
     deep.mkdir(parents=True, exist_ok=True)
@@ -390,6 +403,10 @@ def prepare(base=BASE, deep=DEEP, radar_file=ROOT / 'radar_active.json', config_
         z.writestr('INSTRUCTIONS.md', INSTRUCTIONS)
         z.writestr('manifest.json', json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
         z.writestr('RESULT_TEMPLATE.json', json.dumps(result_template(manifest), ensure_ascii=False, indent=2) + '\n')
+        z.writestr('CANDIDATES.md', '# Source documents assigned to this Global Deep Scan\n\n'
+          + '\n'.join(f'- **{row["region"]} / {row["theme"]}** — [{row["title"]}]({row["url"]}) '
+                      f'({row["source"]}; Radar overlap: {row["radar_overlap"]})'
+                      for row in selected) + '\n')
         z.writestr('HOW_TO_RETURN.md', 'Complete actual source checks as required by INSTRUCTIONS.md.\n'
                    'Upload `global_deep_scan_results.json` to `Global R&I Blind Spots/deep_scan/inbox/` '
                    'in the main branch. The import then runs automatically, or use the Deep Scan action with operation `import`.\n'
@@ -545,6 +562,17 @@ def import_results(results_path, deep=DEEP):
     existing_path.write_text(json.dumps(archive, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     (deep / 'VERIFIED_FINDINGS.md').write_text('\n'.join(lines), encoding='utf-8')
     (deep / 'verified_findings.csv').write_text('\ufeff' + buffer.getvalue(), encoding='utf-8')
+    review_lines = ['# Global R&I Deep Scan — review archive', '',
+                    'All reviewed package items are retained here; only KEEP appears in VERIFIED_FINDINGS.md.', '']
+    for row in archive['items']:
+        label = row.get('decision', 'REVIEW')
+        review_lines += [f'## {safe_markdown(row["title"])}', '',
+                         f'**{label}** — {safe_markdown(row["region"])} / {safe_markdown(row["theme"])}',
+                         f'Package `{row["package_id"]}`; {row["reviewed_at"]}.', '',
+                         f'Source: {row["url"]}', '',
+                         safe_markdown(row.get('reason_for_review_or_drop')) if label != 'KEEP' else
+                         safe_markdown(row.get('specific_finding')), '']
+    (deep / 'REVIEW_ARCHIVE.md').write_text('\n'.join(review_lines), encoding='utf-8')
     (deep / 'last_import.json').write_text(json.dumps({'schema': SCHEMA, 'package_id': manifest['package_id'],
                                 'processed': len(checked), 'kept_this_import': sum(x['decision'] == 'KEEP' for _, x in checked),
                                 'review_this_import': sum(x['decision'] == 'REVIEW' for _, x in checked),

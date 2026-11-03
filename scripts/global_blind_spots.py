@@ -16,6 +16,7 @@ import hashlib
 import html
 import json
 import os
+import time
 from pathlib import Path
 import re
 import sys
@@ -141,7 +142,7 @@ def source_quality(work, config):
             'note': 'Journal appears on the main Radar trusted-venue list; article-level peer review and claims require checking.'}
 
 
-def candidate_from_openalex(work, region, theme, config, anchors, query):
+def candidate_from_openalex(work, region, theme, config, anchors, query, allow_affiliation=False):
     quality = source_quality(work, config)
     if not quality:
         return None
@@ -149,7 +150,12 @@ def candidate_from_openalex(work, region, theme, config, anchors, query):
     abstract = openalex_abstract(work.get('abstract_inverted_index'))
     text = f'{title} {abstract}'
     terms = find_terms(text, config['themes'][theme]['terms'])
-    if not terms or not find_terms(text, config['regions'][region]):
+    if not terms:
+        return None
+    explicit_geo = bool(find_terms(text, config['regions'][region]))
+    country_code = config.get('country_codes', {}).get(region, '')
+    inferred_affiliation = bool(allow_affiliation and country_code and affiliation_match(work, country_code))
+    if not explicit_geo and not inferred_affiliation:
         return None
     # Avoid a primarily EU-centred record that merely mentions a foreign country
     # somewhere in the abstract; comparative work naming both is still eligible.
@@ -167,55 +173,114 @@ def candidate_from_openalex(work, region, theme, config, anchors, query):
             'evidence_note': quality['note'], 'abstract_or_context': abstract[:650],
             'issue_terms': terms[:5], 'query': query,
             'matched_main_radar_titles': [a['title'] for a in anchors[:3]],
-            'review_status': 'needs_review', 'discovery_method': 'OpenAlex metadata'}
+            'review_status': 'needs_review', 'discovery_method': 'OpenAlex metadata',
+            'geographic_evidence': 'explicit_country_content' if explicit_geo else 'affiliation_only_not_country_policy_evidence'}
 
 
-def discover_openalex(config, anchors, diagnostics, now, http_get=get_bytes):
+def select_rotating_countries(config, run_index=0):
+    """Every run crosses all ten world groups; successive runs rotate countries."""
+    by_group = {}
+    for country, group in config['country_groups'].items():
+        by_group.setdefault(group, []).append(country)
+    selected = []
+    for group, members in by_group.items():
+        selected.append(members[run_index % len(members)])
+    # The extra two slots change from run to run instead of always preferring US/China.
+    available = [name for name in config['regions'] if name not in selected]
+    if available:
+        start = (run_index * 5) % len(available)
+        rotated = available[start:] + available[:start]
+        selected.extend(rotated[:max(0, config.get('countries_per_run', 12) - len(selected))])
+    return selected[:config.get('countries_per_run', 12)]
+
+
+def plan_queries(config, anchors, chosen_countries, run_index=0):
+    """One country/policy lane plus one affiliation/research-output lane per theme."""
+    rows = []
+    themes = list(config['themes'])
+    for country in chosen_countries:
+        for offset in range(len(themes)):
+            theme = themes[(offset + run_index) % len(themes)]
+            detail = config['themes'][theme]
+            anchor_terms = list(dict.fromkeys(
+                t for a in anchors.get(theme, []) for t in a.get('matched_terms', [])))
+            fallback = detail.get('queries', []) or [theme]
+            # Rotate actual Radar terminology and carefully written fallback searches.
+            t1 = anchor_terms[run_index % len(anchor_terms)] if anchor_terms else fallback[run_index % len(fallback)]
+            t2 = fallback[(run_index + 1) % len(fallback)]
+            native = config.get('native_searches', {}).get(country, {}).get(theme, [])
+            if native and run_index % 2 == 1:
+                geo_query = native[run_index % len(native)]
+            else:
+                geo_query = f'{country} {t1}'
+            rows.append({'country': country, 'theme': theme, 'query': geo_query, 'mode': 'country_text'})
+            rows.append({'country': country, 'theme': theme, 'query': t2, 'mode': 'affiliation'})
+    return rows
+
+
+def affiliation_match(work, country_code):
+    return any(country_code in (auth.get('countries') or [])
+               for auth in (work.get('authorships') or []) if isinstance(auth, dict))
+
+
+def discover_openalex(config, anchors, diagnostics, now, http_get=get_bytes,
+                       selected_countries=None, run_index=0, deadline=None, pace_seconds=0):
     results = []
+    chosen = selected_countries or list(config['regions'])
+    planned = plan_queries(config, anchors, chosen, run_index)
+    diagnostics['planned_openalex_queries'] = len(planned)
     date_min = (now - timedelta(days=config['max_days_old'])).date().isoformat()
     api_key = os.environ.get('OPENALEX_API_KEY', '').strip()
-    for region in config['regions']:
-        for theme, detail in config['themes'].items():
-            if not anchors[theme]:
-                diagnostics['skipped_no_main_radar_anchor'] += 1
-                continue
-            # Single theme-specific query/region, with the requested main Radar
-            # terminology. Two rotations are used so smaller signals can surface.
-            # Search topics are chosen from the *actual current Radar anchors*,
-            # not only the static theme names. Fallback queries preserve recall.
-            ranked_terms = Counter(t for a in anchors[theme] for t in a['matched_terms'])
-            dynamic = [term for term, _ in ranked_terms.most_common(2)]
-            query_phrases = [f'{term} research innovation' for term in dynamic]
-            for fallback in detail['queries']:
-                if len(query_phrases) >= 2:
-                    break
-                query_phrases.append(fallback)
-            searches = [f'{region} {p}' for p in query_phrases]
-            searches += config.get('native_searches', {}).get(region, {}).get(theme, [])
-            for query in searches:
-                params = {'search': query, 'filter': f'from_publication_date:{date_min}',
-                          'per-page': min(50, int(config['max_results_per_search'])),
-                          'select': 'id,doi,display_name,publication_date,primary_location,abstract_inverted_index,type',
-                          'sort': 'publication_date:desc'}
-                if api_key:
-                    params['api_key'] = api_key
-                url = 'https://api.openalex.org/works?' + urlencode(params)
-                try:
-                    response = json.loads(http_get(url, timeout=config['search_timeout_seconds']))
-                    works = response.get('results', [])
-                    diagnostics['openalex_requests_ok'] += 1
-                    diagnostics['openalex_items_considered'] += len(works)
-                    for work in works:
-                        found = candidate_from_openalex(work, region, theme, config, anchors[theme], query)
-                        if found:
-                            results.append(found)
-                        else:
-                            diagnostics['scholarly_filtered_out'] += 1
-                except (ValueError, RuntimeError, HTTPError, URLError, TimeoutError, OSError) as exc:
-                    diagnostics['openalex_requests_failed'] += 1
-                    diagnostics.setdefault('errors', []).append(f'OpenAlex {region}/{theme}: {type(exc).__name__}: {str(exc)[:120]}')
+    last_request = None
+    consecutive_failures = 0
+    max_queries = int(config.get('max_requests_per_run', 156))
+    for index, q in enumerate(planned[:max_queries]):
+        if deadline is not None and time.monotonic() + config['search_timeout_seconds'] > deadline:
+            diagnostics['stopped_time_budget'] += 1
+            break
+        if last_request is not None and pace_seconds:
+            interval = max(0.0, last_request + pace_seconds - time.monotonic())
+            if interval:
+                time.sleep(min(interval, max(0.0, (deadline - time.monotonic())) if deadline is not None else interval))
+        country, theme, query, mode = q['country'], q['theme'], q['query'], q['mode']
+        filters = [f'from_publication_date:{date_min}']
+        if mode == 'affiliation':
+            filters.append(f'authorships.countries:{config["country_codes"][country].lower()}')
+        params = {'search': query, 'filter': ','.join(filters),
+                  'per-page': min(50, int(config['max_results_per_search'])),
+                  'select': 'id,doi,display_name,publication_date,primary_location,abstract_inverted_index,type,authorships',
+                  'sort': 'publication_date:desc'}
+        if api_key:
+            params['api_key'] = api_key
+        url = 'https://api.openalex.org/works?' + urlencode(params)
+        last_request = time.monotonic()
+        try:
+            response = json.loads(http_get(url, timeout=config['search_timeout_seconds']))
+            works = response.get('results', [])
+            if not isinstance(works, list):
+                raise ValueError('Invalid OpenAlex response')
+            consecutive_failures = 0
+            diagnostics['openalex_requests_ok'] += 1
+            diagnostics['openalex_items_considered'] += len(works)
+            for work in works:
+                found = candidate_from_openalex(work, country, theme, config, anchors.get(theme, []), query,
+                                                allow_affiliation=(mode == 'affiliation'))
+                if found:
+                    results.append(found)
+                else:
+                    diagnostics['scholarly_filtered_out'] += 1
+        except (ValueError, RuntimeError, HTTPError, URLError, TimeoutError, OSError) as exc:
+            consecutive_failures += 1
+            diagnostics['openalex_requests_failed'] += 1
+            diagnostics.setdefault('errors', []).append(f'OpenAlex {country}/{theme}/{mode}: {type(exc).__name__}: {str(exc)[:120]}')
+            if consecutive_failures >= 8:
+                diagnostics['stopped_repeated_source_failures'] += 1
+                break
+        if (index + 1) % 12 == 0:
+            print(f'Global discovery: {index+1}/{len(planned[:max_queries])} OpenAlex searches; '
+                  f'{len(results)} candidates so far.', flush=True)
+    diagnostics['countries_scanned'] = chosen
     return results
-
 
 def xml_local_tag(tag):
     return tag.split('}', 1)[-1].lower()
@@ -252,7 +317,7 @@ def classify_feed_entry(entry, feed, config, anchors):
             continue
         for theme, detail in config['themes'].items():
             matched = find_terms(text, detail['terms'])
-            if not matched or not anchors[theme]:
+            if not matched:
                 continue
             results.append({'title': norm(entry['title']), 'date': entry.get('date', '')[:32],
                 'region': region, 'theme': theme, 'url': entry['link'], 'source': feed['name'],
@@ -314,7 +379,7 @@ class HubLinksParser(__import__('html.parser', fromlist=['HTMLParser']).HTMLPars
 
 
 def discover_hubs(config, anchors, diagnostics, http_get=get_bytes):
-    """Curated institutional link discovery, not unsupervised external crawling."""
+    """Curated source portals, including global OECD/UNESCO/WIPO evidence."""
     from urllib.parse import urljoin
     result = []
     for hub in config['trusted_hubs']:
@@ -329,25 +394,29 @@ def discover_hubs(config, anchors, diagnostics, http_get=get_bytes):
                 if not valid_domain(link, hub['allowed_domain']) or not (22 <= len(title) <= 200) or link in seen:
                     continue
                 seen.add(link)
-                for theme, detail in config['themes'].items():
-                    matched = find_terms(title, detail['terms'])
-                    if not matched or not anchors[theme]:
+                regions = (config['regions'] if hub.get('region_scope') == 'global'
+                           else {hub['region']: config['regions'][hub['region']]})
+                for region, aliases in regions.items():
+                    if hub.get('region_scope') == 'global' and not find_terms(title, aliases):
                         continue
-                    # Hub label is guaranteed geographical; linked article is NOT yet verified.
-                    result.append({'title': title, 'date': '', 'region': hub['region'], 'theme': theme,
-                        'url': link, 'source': hub['name'], 'source_kind': hub['kind'],
-                        'evidence_status': 'official_claim_unverified' if hub['kind'] == 'official_primary' else 'institutional_claim_unverified',
-                        'evidence_note': 'Hub headline only, article content and date have NOT been verified.',
-                        'abstract_or_context': '', 'issue_terms': matched[:5], 'query': hub['url'],
-                        'matched_main_radar_titles': [a['title'] for a in anchors[theme][:3]],
-                        'review_status': 'needs_article_review', 'discovery_method': 'trusted institutional hub'})
+                    for theme, detail in config['themes'].items():
+                        matched = find_terms(title, detail['terms'])
+                        if not matched:
+                            continue
+                        result.append({'title': title, 'date': '', 'region': region, 'theme': theme,
+                          'url': link, 'source': hub['name'], 'source_kind': hub['kind'],
+                          'evidence_status': 'official_claim_unverified' if hub['kind'] == 'official_primary' else 'institutional_claim_unverified',
+                          'evidence_note': 'Hub headline only; underlying document and date are NOT independently verified.',
+                          'abstract_or_context': '', 'issue_terms': matched[:5], 'query': hub['url'],
+                          'matched_main_radar_titles': [a['title'] for a in anchors.get(theme, [])[:3]],
+                          'review_status': 'needs_article_review', 'discovery_method': 'trusted institutional hub',
+                          'geographic_evidence':'country_scoped_institution' if hub.get('region') else 'explicit_country_content'})
                 if len(seen) >= config['max_source_entries_per_hub']:
                     break
         except (ValueError, RuntimeError, HTTPError, URLError, TimeoutError, OSError) as exc:
             diagnostics['hub_requests_failed'] += 1
             diagnostics.setdefault('errors', []).append(f'Hub {hub["name"]}: {type(exc).__name__}: {str(exc)[:120]}')
     return result
-
 
 def stable_key(item):
     # Exact URL path/case is preserved. DOI aliases normalized, but no lowercased URL paths.
@@ -359,30 +428,39 @@ def stable_key(item):
 
 def rank_and_dedupe(items, coverage, config):
     retained = {}
-    priority = {'trusted_scholarly_venue': 3, 'independent_editorial': 2,
-                'institutional_statistics': 1, 'official_primary': 1}
+    priority = {'trusted_scholarly_venue': 3, 'independent_editorial': 4,
+                'institutional_statistics': 2, 'official_primary': 1}
     for item in items:
         item['id'] = stable_key(item)
         cov = coverage.get(f'{item["region"]} | {item["theme"]}', 0)
         item['main_radar_existing_matches'] = cov
         item['blind_spot_priority'] = ('higher' if cov < 3 else 'normal')
-        item['score'] = (70 if cov == 0 else 60 if cov < 3 else 40) + 3 * len(item['issue_terms']) + 5 * priority.get(item['source_kind'], 0)
+        item['score'] = (70 if cov == 0 else 60 if cov < 3 else 40) + 3 * len(item['issue_terms']) \
+                        + 5 * priority.get(item['source_kind'], 0) \
+                        - (18 if item.get('geographic_evidence') == 'affiliation_only_not_country_policy_evidence' else 0)
         prev = retained.get(item['id'])
         if prev is None or (item['score'], len(item.get('abstract_or_context', ''))) > (prev['score'], len(prev.get('abstract_or_context', ''))):
             retained[item['id']] = item
-    output = sorted(retained.values(), key=lambda x: (-x['score'], x['region'], x['theme'], x['title']))
+    ranked = sorted(retained.values(), key=lambda x: (-x['score'], x['region'], x['theme'], x['title']))
+    # Stage 1: quality filter and per-country/theme cap; no long article dump.
     seen = Counter()
-    bounded = []
-    for item in output:
+    cells = {}
+    for item in ranked:
         key = (item['region'], item['theme'])
         if seen[key] >= config['max_candidates_per_region_theme']:
             continue
         seen[key] += 1
-        bounded.append(item)
-    return bounded
+        cells.setdefault(key, []).append(item)
+    # Stage 2: fairness across countries, rather than allowing one country to flood the report.
+    output = []
+    max_total = config.get('max_items_in_latest', 120)
+    while len(output) < max_total and any(cells.values()):
+        for cell in sorted(cells):
+            if cells[cell] and len(output) < max_total:
+                output.append(cells[cell].pop(0))
+    return output
 
-
-def write_results(outdir, config, anchors, coverage, items, diagnostics, now, offline=False):
+def write_results(outdir, config, anchors, coverage, items, diagnostics, now, offline=False, selected=None, run_index=0):
     outdir.mkdir(parents=True, exist_ok=True)
     archive_path = outdir / 'archive.json'
     previous = {}
@@ -406,7 +484,7 @@ def write_results(outdir, config, anchors, coverage, items, diagnostics, now, of
     archive_path.write_text(json.dumps({'schema_version': 1, 'items': archived}, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     summary = {'generated_at': now_iso, 'mode': 'offline_baseline_no_discovery' if offline else 'manual only', 'new_this_run': sum(x['new_this_run'] for x in items),
         'found_this_run': len(items), 'total_archive': len(archived), 'regions': list(config['regions']),
-        'themes': list(config['themes']), 'existing_main_radar_coverage': coverage,
+        'themes': list(config['themes']), 'run_index': run_index, 'countries_scheduled_this_run': selected or [], 'existing_main_radar_coverage': coverage,
         'main_radar_anchors': anchors, 'diagnostics': dict(diagnostics), 'items': items}
     (outdir / 'latest.json').write_text(json.dumps(summary, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     keys = ['new_this_run', 'region', 'theme', 'title', 'date', 'source', 'source_kind', 'evidence_status',
@@ -429,11 +507,11 @@ def write_results(outdir, config, anchors, coverage, items, diagnostics, now, of
              'Candidates are **not verified** and have **not been admitted to the main Radar**. Official source = evidence of an official statement, not proof of the outcome.', '',
              '## Existing main Radar issue × region coverage', '',
              '| Region | Theme | Main Radar matches | Newly discovered leads |', '|---|---|---:|---:|']
-    for region in config['regions']:
+    for region in (selected or config['regions']):
         for theme in config['themes']:
             n = sum(x['region'] == region and x['theme'] == theme for x in items)
             lines.append(f'| {region} | {theme} | {coverage[f"{region} | {theme}"]} | {n} |')
-    lines += ['', '## Highest priority leads', '']
+    lines += ['', '## Selected discovery candidates (not yet verified findings)', '']
     for x in items[:40]:
         clean_title = x['title'].replace('|', ' ')
         lines += [f'- **{x["region"]} · {x["theme"]}** — [{clean_title}]({x["url"]}) ({x["source"]}; {x["evidence_status"]}).',
@@ -447,7 +525,9 @@ def write_results(outdir, config, anchors, coverage, items, diagnostics, now, of
               '- Source admission: only main Radar trusted journals, explicitly allowlisted RSS and official/institutional websites.',
               '- All links require a substantive issue match and a specific external geographic lens (or explicitly country-scoped institutional feed).',
               '- Institutional homepage links can be unverified headlines; no claim is treated as confirmed without reading the source.',
-              '- No LLM summarisation, translation, social media, press aggregation, automatic promotion, or change to the normal scanner.',
+              '- No LLM summarisation, social media, press aggregation, automatic promotion, or change to normal Radar.',
+              '- OpenAlex affiliation-only papers are explicitly labelled: publication location is NOT evidence of a national research policy change.',
+              '- Coverage rotates across all non-EU world groups over successive manual runs; look at scan_state.json for current rotation.',
               '- If sources cannot be reached, errors are reported; zero results must not be mistaken for zero activity.', '']
     (outdir / 'LATEST.md').write_text('\n'.join(lines), encoding='utf-8')
     return summary
@@ -455,7 +535,8 @@ def write_results(outdir, config, anchors, coverage, items, diagnostics, now, of
 
 def main(argv=None):
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--offline', action='store_true', help='Generate a baseline coverage report without network or fabricated leads')
+    p.add_argument('--offline', action='store_true', help='Generate a baseline report without network discovery')
+    p.add_argument('--fast-test', action='store_true', help='Exercise a short rotation without the 20–24-minute pacing')
     p.add_argument('--output-dir', type=Path, default=DEFAULT_OUTPUT)
     p.add_argument('--radar', type=Path, default=ROOT / 'radar_active.json')
     p.add_argument('--config', type=Path, default=ROOT / 'global_blind_spots_config.json')
@@ -464,24 +545,49 @@ def main(argv=None):
     radar = load_json(args.radar)
     radar_sources = load_json(ROOT / 'radar_config.json')
     config['_journal_allowlist'] = list(radar_sources['tier2_journals']) + list(radar_sources['tier2_comparable_journals'])
+    state_path = args.output_dir / 'scan_state.json'
+    state = load_json(state_path) if state_path.exists() else {}
+    run_index = int(state.get('completed_runs', 0))
+    selected = select_rotating_countries(config, run_index)
     anchors = extract_radar_anchors(radar, config)
     coverage = existing_coverage(radar, config)
     diagnostics = Counter()
     diagnostics['main_radar_items_considered'] = sum(len(radar.get(s, [])) for s in ('strand_a', 'strand_b', 'strand_c'))
+    diagnostics['planned_world_countries'] = len(config['regions'])
     now = datetime.now(timezone.utc)
     leads = []
     if not args.offline:
-        leads += discover_openalex(config, anchors, diagnostics, now)
+        start = time.monotonic()
+        budget_seconds = float(config.get('search_duration_minutes', 22)) * 60
+        deadline = start + budget_seconds
+        if args.fast_test:
+            selected = selected[:2]
+        # Existing independent feeds + institutional sources are checked once each.
         leads += discover_feeds(config, anchors, diagnostics, now)
         leads += discover_hubs(config, anchors, diagnostics)
+        pace = 0.0 if args.fast_test else float(config.get('minimum_seconds_between_queries', 8.4))
+        leads += discover_openalex(config, anchors, diagnostics, now,
+                                  selected_countries=selected, run_index=run_index,
+                                  deadline=None if args.fast_test else deadline,
+                                  pace_seconds=pace)
+        diagnostics['elapsed_scan_seconds'] = round(time.monotonic()-start, 1)
         if diagnostics['openalex_requests_ok'] + diagnostics['rss_requests_ok'] + diagnostics['hub_requests_ok'] == 0:
-            print('FAIL: Every configured discovery source failed. Refusing to overwrite latest report.', file=sys.stderr)
+            print('FAIL: All configured discovery sources failed. Preserving the last successful report.', file=sys.stderr)
             for err in diagnostics.get('errors', [])[:8]:
                 print(err, file=sys.stderr)
             return 2
     items = rank_and_dedupe(leads, coverage, config)
-    report = write_results(args.output_dir, config, anchors, coverage, items, diagnostics, now, offline=args.offline)
-    print(f'Global blind spots: {report["found_this_run"]} leads; {report["new_this_run"]} new; output={args.output_dir}')
+    report = write_results(args.output_dir, config, anchors, coverage, items,
+                           diagnostics, now, offline=args.offline, selected=selected, run_index=run_index)
+    if not args.offline:
+        state_path.write_text(json.dumps({'schema':2,'completed_runs':run_index+1,
+                           'last_run_at':now.isoformat(), 'countries_scanned': selected,
+                           'world_countries_configured':len(config['regions']),
+                           'themes_configured':list(config['themes']),
+                           'openalex_requests_ok':diagnostics['openalex_requests_ok'],
+                           'discovery_candidates':len(items)},ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    print(f'Global blind spots: {report["found_this_run"]} leads; {report["new_this_run"]} new; '
+          f'{len(selected)}/{len(config["regions"])} countries per rotation; output={args.output_dir}')
     return 0
 
 
