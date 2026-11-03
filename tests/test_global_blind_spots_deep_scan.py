@@ -47,10 +47,32 @@ class GlobalDeepScanTests(unittest.TestCase):
 
     def test_dedupe_shared_china_russia_source(self):
         prepared, diag = d.plan_queue(self.radar, self.config, self.base, self.deep, 24)
-        self.assertEqual(len({x['document_key'] for x in prepared}), len(prepared))
+        self.assertEqual(len({(x['document_key'], x['region']) for x in prepared}), len(prepared))
         self.assertGreaterEqual(diag['curated_source_eligible'], 4)
         self.assertTrue(any(x['region'] == 'Russia' for x in prepared))
         self.assertTrue(any(x['region'] == 'United States' for x in prepared))
+
+    def test_shared_international_source_keeps_country_specific_assignments(self):
+        selected, diag = d.plan_queue(self.radar, self.config, self.base, self.deep, 24)
+        # Intergovernmental reports can supply leads for more than one country.
+        # Neither country's lead may be silently collapsed into the other.
+        family = {}
+        for row in selected:
+            family.setdefault(row['document_key'], set()).add(row['region'])
+        self.assertTrue(any(len(regions) > 1 for regions in family.values()))
+
+    def test_repeated_prepare_reuses_package_without_invalidating_review(self):
+        radarfile = Path(self.tmp.name) / 'radar.json'
+        radarfile.write_text(json.dumps(self.radar))
+        manifest1, _ = d.prepare(self.base, self.deep, radarfile, batch_size=8,
+                                 artifact=Path(self.tmp.name) / 'first.zip')
+        # A second click, even with another batch size, retains IDs and queue.
+        manifest2, path = d.prepare(self.base, self.deep, radarfile, batch_size=2,
+                                    artifact=Path(self.tmp.name) / 'second.zip')
+        self.assertEqual(manifest1['package_id'], manifest2['package_id'])
+        self.assertEqual(manifest1['items'], manifest2['items'])
+        with zipfile.ZipFile(path) as z:
+            self.assertEqual(json.loads(z.read('manifest.json'))['package_id'], manifest1['package_id'])
 
     def test_untrusted_discovery_record_has_to_have_https(self):
         self.base.mkdir(exist_ok=True)
@@ -147,13 +169,19 @@ class GlobalDeepScanTests(unittest.TestCase):
             d.import_results(path, deep=self.deep)
         self.assertFalse((self.deep / 'verified_findings.json').exists())
 
-    def test_actions_have_only_explicit_manual_trigger(self):
-        for workflow in ('global-ri-blind-spots.yml', 'global-ri-deep-scan-auto.yml'):
-            text = (ROOT / '.github' / 'workflows' / workflow).read_text()
+    def test_scanner_manual_only_deep_scan_push_is_import_only(self):
+        scan = (ROOT / '.github/workflows/global-ri-blind-spots.yml').read_text()
+        deep = (ROOT / '.github/workflows/global-ri-deep-scan-auto.yml').read_text()
+        for text in (scan, deep):
             self.assertIn('workflow_dispatch', text)
             self.assertNotIn('  schedule:', text)
-            self.assertNotIn('  push:', text)
             self.assertNotIn('  workflow_run:', text)
+        self.assertNotIn('  push:', scan)
+        self.assertIn("'Global R&I Blind Spots/deep_scan/inbox/global_deep_scan_results.json'", deep)
+        self.assertNotIn('copilot-requests:', deep)
+        self.assertNotIn('OPENAI_API_KEY', deep)
+        self.assertIn("inputs.operation == 'prepare'", deep)
+        self.assertIn("inputs.operation == 'import'", deep)
 
 
 if __name__ == '__main__':
