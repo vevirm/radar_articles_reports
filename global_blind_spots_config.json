@@ -1,15 +1,68 @@
 {
-  "version": "1.0",
-  "purpose": "Outside-EU R&I blind-spot watch; discoveries are leads, not automatically verified Radar evidence.",
+  "version": "2.0",
+  "purpose": "Global non-EU research and innovation blind-spot discovery, anchored to current Radar; all outputs remain unverified until LLM review.",
   "regions": {
     "United States": [
       "united states",
       "u.s.",
-      "u.s.a.",
-      "american",
       "usa",
+      "american",
+      "u.s.a.",
       "美国",
       "сша"
+    ],
+    "Canada": [
+      "canada",
+      "canadian"
+    ],
+    "Mexico": [
+      "mexico",
+      "mexican",
+      "méxico"
+    ],
+    "Brazil": [
+      "brazil",
+      "brazilian",
+      "brasil",
+      "brasileiro"
+    ],
+    "Argentina": [
+      "argentina",
+      "argentine",
+      "argentino"
+    ],
+    "United Kingdom": [
+      "united kingdom",
+      "britain",
+      "british",
+      "ukri",
+      "u.k."
+    ],
+    "Switzerland": [
+      "switzerland",
+      "swiss"
+    ],
+    "Norway": [
+      "norway",
+      "norwegian"
+    ],
+    "Russia": [
+      "russia",
+      "russian",
+      "россия",
+      "российский",
+      "российская",
+      "russian federation"
+    ],
+    "Ukraine": [
+      "ukraine",
+      "ukrainian",
+      "україна"
+    ],
+    "Turkey": [
+      "turkey",
+      "türkiye",
+      "turkish"
     ],
     "China": [
       "china",
@@ -18,13 +71,77 @@
       "中国",
       "中华人民共和国"
     ],
-    "Russia": [
-      "russia",
-      "russian",
-      "russian federation",
-      "россия",
-      "российский",
-      "российская"
+    "Japan": [
+      "japan",
+      "japanese",
+      "日本"
+    ],
+    "South Korea": [
+      "south korea",
+      "republic of korea",
+      "korean",
+      "대한민국"
+    ],
+    "Taiwan": [
+      "taiwan",
+      "taiwanese",
+      "臺灣",
+      "台湾"
+    ],
+    "India": [
+      "india",
+      "indian",
+      "भारत"
+    ],
+    "Pakistan": [
+      "pakistan",
+      "pakistani"
+    ],
+    "Singapore": [
+      "singapore",
+      "singaporean"
+    ],
+    "Indonesia": [
+      "indonesia",
+      "indonesian"
+    ],
+    "Vietnam": [
+      "vietnam",
+      "vietnamese",
+      "việt nam"
+    ],
+    "Israel": [
+      "israel",
+      "israeli"
+    ],
+    "Saudi Arabia": [
+      "saudi arabia",
+      "saudi"
+    ],
+    "United Arab Emirates": [
+      "united arab emirates",
+      "emirati",
+      "uae"
+    ],
+    "South Africa": [
+      "south africa",
+      "south african"
+    ],
+    "Nigeria": [
+      "nigeria",
+      "nigerian"
+    ],
+    "Kenya": [
+      "kenya",
+      "kenyan"
+    ],
+    "Australia": [
+      "australia",
+      "australian"
+    ],
+    "New Zealand": [
+      "new zealand",
+      "new zealander"
     ]
   },
   "themes": {
@@ -110,6 +227,70 @@
         "research security international collaboration",
         "science diplomacy export controls"
       ]
+    },
+    "Climate, energy and environmental research": {
+      "terms": [
+        "climate research",
+        "climate science",
+        "energy research",
+        "energy transition",
+        "renewable energy",
+        "hydrogen research",
+        "battery research",
+        "fusion research",
+        "clean energy",
+        "carbon capture",
+        "environmental science",
+        "climate technology",
+        "green innovation",
+        "climate adaptation"
+      ],
+      "queries": [
+        "energy transition research",
+        "climate technology innovation"
+      ]
+    },
+    "Health, biotechnology and life sciences": {
+      "terms": [
+        "biomedical research",
+        "medical innovation",
+        "biotechnology",
+        "genomics",
+        "vaccine research",
+        "clinical research",
+        "drug discovery",
+        "health research",
+        "life sciences",
+        "synthetic biology",
+        "public health research",
+        "biopharmaceutical"
+      ],
+      "queries": [
+        "biotechnology medical innovation",
+        "biomedical research policy"
+      ]
+    },
+    "Innovation systems, infrastructure and knowledge transfer": {
+      "terms": [
+        "innovation ecosystem",
+        "research infrastructure",
+        "technology transfer",
+        "research commercialisation",
+        "research commercialization",
+        "public private partnerships",
+        "research universities",
+        "science innovation",
+        "industrial research",
+        "innovation policy",
+        "patent landscape",
+        "scientific infrastructure",
+        "research capacity",
+        "open science"
+      ],
+      "queries": [
+        "innovation research infrastructure",
+        "technology transfer research policy"
+      ]
     }
   },
   "feeds": [
@@ -149,12 +330,75 @@
       "allowed_domain": "hse.ru",
       "kind": "institutional_statistics",
       "region": "Russia"
+    },
+    {
+      "name": "UK Research and Innovation",
+      "url": "https://www.ukri.org/news/",
+      "allowed_domain": "ukri.org",
+      "kind": "official_primary",
+      "region": "United Kingdom"
+    },
+    {
+      "name": "Australian CSIRO",
+      "url": "https://www.csiro.au/en/news/all/news",
+      "allowed_domain": "csiro.au",
+      "kind": "official_primary",
+      "region": "Australia"
+    },
+    {
+      "name": "Japan RIKEN",
+      "url": "https://www.riken.jp/en/news_pubs/",
+      "allowed_domain": "riken.jp",
+      "kind": "institutional_statistics",
+      "region": "Japan"
+    },
+    {
+      "name": "India Department of Science and Technology",
+      "url": "https://dst.gov.in/pressrelease",
+      "allowed_domain": "dst.gov.in",
+      "kind": "official_primary",
+      "region": "India"
+    },
+    {
+      "name": "South Africa National Research Foundation",
+      "url": "https://www.nrf.ac.za/news/",
+      "allowed_domain": "nrf.ac.za",
+      "kind": "official_primary",
+      "region": "South Africa"
+    },
+    {
+      "name": "Brazil FAPESP science agency",
+      "url": "https://agencia.fapesp.br/en/",
+      "allowed_domain": "fapesp.br",
+      "kind": "institutional_statistics",
+      "region": "Brazil"
+    },
+    {
+      "name": "OECD STI reports",
+      "url": "https://www.oecd.org/en/topics/science-technology-and-innovation.html",
+      "allowed_domain": "oecd.org",
+      "kind": "institutional_statistics",
+      "region_scope": "global"
+    },
+    {
+      "name": "UNESCO science",
+      "url": "https://www.unesco.org/en/science",
+      "allowed_domain": "unesco.org",
+      "kind": "institutional_statistics",
+      "region_scope": "global"
+    },
+    {
+      "name": "WIPO research and innovation",
+      "url": "https://www.wipo.int/en/web/global-innovation-index",
+      "allowed_domain": "wipo.int",
+      "kind": "institutional_statistics",
+      "region_scope": "global"
     }
   ],
-  "max_days_old": 365,
-  "max_results_per_search": 20,
-  "max_candidates_per_region_theme": 12,
-  "max_source_entries_per_hub": 35,
+  "max_days_old": 540,
+  "max_results_per_search": 25,
+  "max_candidates_per_region_theme": 5,
+  "max_source_entries_per_hub": 60,
   "max_stored_items": 1500,
   "search_timeout_seconds": 18,
   "native_searches": {
@@ -190,6 +434,102 @@
       "Research security and international cooperation": [
         "US international research collaborations"
       ]
+    },
+    "Japan": {
+      "Technology leadership and industrial capacity": [
+        "日本 半導体 量子技術"
+      ]
+    },
+    "India": {
+      "Research funding, institutions and talent": [
+        "India scientific research investment"
+      ]
+    },
+    "Brazil": {
+      "Research funding, institutions and talent": [
+        "Brasil pesquisa investimento inovação"
+      ]
+    },
+    "South Korea": {
+      "Technology leadership and industrial capacity": [
+        "한국 반도체 연구 혁신"
+      ]
+    },
+    "United Kingdom": {
+      "Research security and international cooperation": [
+        "UK international research collaboration"
+      ]
+    },
+    "South Africa": {
+      "Research funding, institutions and talent": [
+        "South Africa research funding science"
+      ]
     }
-  }
+  },
+  "country_codes": {
+    "United States": "US",
+    "Canada": "CA",
+    "Mexico": "MX",
+    "Brazil": "BR",
+    "Argentina": "AR",
+    "United Kingdom": "GB",
+    "Switzerland": "CH",
+    "Norway": "NO",
+    "Russia": "RU",
+    "Ukraine": "UA",
+    "Turkey": "TR",
+    "China": "CN",
+    "Japan": "JP",
+    "South Korea": "KR",
+    "Taiwan": "TW",
+    "India": "IN",
+    "Pakistan": "PK",
+    "Singapore": "SG",
+    "Indonesia": "ID",
+    "Vietnam": "VN",
+    "Israel": "IL",
+    "Saudi Arabia": "SA",
+    "United Arab Emirates": "AE",
+    "South Africa": "ZA",
+    "Nigeria": "NG",
+    "Kenya": "KE",
+    "Australia": "AU",
+    "New Zealand": "NZ"
+  },
+  "country_groups": {
+    "United States": "North America",
+    "Canada": "North America",
+    "Mexico": "Latin America",
+    "Brazil": "Latin America",
+    "Argentina": "Latin America",
+    "United Kingdom": "Non-EU Europe",
+    "Switzerland": "Non-EU Europe",
+    "Norway": "Non-EU Europe",
+    "Russia": "Eurasia",
+    "Ukraine": "Eurasia",
+    "Turkey": "Eurasia",
+    "China": "East Asia",
+    "Japan": "East Asia",
+    "South Korea": "East Asia",
+    "Taiwan": "East Asia",
+    "India": "South Asia",
+    "Pakistan": "South Asia",
+    "Singapore": "Southeast Asia",
+    "Indonesia": "Southeast Asia",
+    "Vietnam": "Southeast Asia",
+    "Israel": "Middle East",
+    "Saudi Arabia": "Middle East",
+    "United Arab Emirates": "Middle East",
+    "South Africa": "Africa",
+    "Nigeria": "Africa",
+    "Kenya": "Africa",
+    "Australia": "Oceania",
+    "New Zealand": "Oceania"
+  },
+  "search_duration_minutes": 22,
+  "search_max_minutes": 24,
+  "countries_per_run": 12,
+  "max_requests_per_run": 156,
+  "minimum_seconds_between_queries": 8.4,
+  "max_items_in_latest": 120
 }
