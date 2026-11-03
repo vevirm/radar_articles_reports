@@ -198,6 +198,111 @@ class GlobalDeepScanTests(unittest.TestCase):
             d.import_results(path, deep=self.deep)
         self.assertFalse((self.deep / 'verified_findings.json').exists())
 
+    def _sample_manifest(self, package_id, candidate_id, doc_key, region):
+        return {'schema': d.SCHEMA, 'package_id': package_id, 'items': [{
+            'candidate_id': candidate_id, 'document_key': doc_key,
+            'region': region, 'theme': 'Technology leadership and industrial capacity',
+            'title': f'{region} science and innovation evidence',
+            'url': f'https://original.example.net/{doc_key}',
+            'source': 'Independent research', 'date': '2026-09-12',
+            'main_radar_links': [], 'radar_overlap': 'not_identified'}]}
+
+    def _sample_results(self, package_id, candidate_id):
+        item = dict(self.good_keep())
+        item['candidate_id'] = candidate_id
+        item['comparison_type'] = 'not_in_main_radar'
+        return {'schema': d.SCHEMA, 'package_id': package_id, 'results': [item]}
+
+    def test_recover_old_package_and_windows_duplicate_without_manual_rename(self):
+        # The actual user case: imported Package 1 remains in inbox;
+        # new Package 2 is uploaded as Windows' ' (1).json'.
+        inbox = self.deep / 'inbox'
+        inbox.mkdir()
+        (inbox / 'README.txt').write_text('Leave this file alone')
+        first = self._sample_manifest('gri-first', 'a', 'doc1', 'China')
+        second = self._sample_manifest('gri-second', 'b', 'doc2', 'Australia')
+        (self.deep / 'pending_manifest.json').write_text(json.dumps(first))
+        old = inbox / 'global_deep_scan_results.json'
+        old.write_text(json.dumps(self._sample_results('gri-first', 'a')))
+        self.assertEqual(d.import_results(old, deep=self.deep)['verified_keep'], 1)
+        # The old importer did NOT remove the inbox file.
+        self.assertTrue(old.exists())
+        (self.deep / 'pending_manifest.json').write_text(json.dumps(second))
+        new = inbox / 'global_deep_scan_results (1).json'
+        new.write_text(json.dumps(self._sample_results('gri-second', 'b')))
+        result = d.import_inbox(self.deep)
+        self.assertEqual(result, {'imported': 1, 'archived_old': 1, 'unmatched': 0})
+        self.assertFalse(old.exists())
+        self.assertFalse(new.exists())
+        self.assertTrue((inbox / 'README.txt').exists())
+        archived = list((self.deep / 'processed_inbox').glob('*.json'))
+        self.assertEqual(len(archived), 2)
+        records = d.g.load_json(self.deep / 'verified_findings.json')['items']
+        self.assertEqual({x['package_id'] for x in records}, {'gri-first', 'gri-second'})
+        self.assertEqual(sum(x['decision'] == 'KEEP' for x in records), 2)
+        self.assertEqual(d.g.load_json(self.deep / 'last_import.json')['package_id'], 'gri-second')
+
+    def test_inbox_reupload_identical_package_does_not_reimport(self):
+        inbox = self.deep / 'inbox'
+        inbox.mkdir()
+        manifest = self._sample_manifest('gri-repeat', 'a', 'doc1', 'China')
+        (self.deep / 'pending_manifest.json').write_text(json.dumps(manifest))
+        new = inbox / 'global_deep_scan_results_gri-repeat.json'
+        results = self._sample_results('gri-repeat', 'a')
+        new.write_text(json.dumps(results))
+        self.assertEqual(d.import_inbox(self.deep)['imported'], 1)
+        first = d.g.load_json(self.deep / 'verified_findings.json')['items']
+        first_reviewed_at = first[0]['reviewed_at']
+        new.write_text(json.dumps(results))
+        self.assertEqual(d.import_inbox(self.deep), {'imported': 0, 'archived_old': 1, 'unmatched': 0})
+        second = d.g.load_json(self.deep / 'verified_findings.json')['items']
+        self.assertEqual(second[0]['reviewed_at'], first_reviewed_at)
+        self.assertFalse(new.exists())
+        self.assertEqual(len(list((self.deep / 'processed_inbox').glob('*.json'))), 1)
+
+    def test_unrecognised_previous_package_does_not_block_current(self):
+        inbox = self.deep / 'inbox'
+        inbox.mkdir()
+        (self.deep / 'pending_manifest.json').write_text(json.dumps(
+            self._sample_manifest('gri-current', 'a', 'docA', 'China')))
+        unmatched = inbox / 'global_deep_scan_results_old.json'
+        unmatched.write_text(json.dumps(self._sample_results('gri-other', 'b')))
+        current = inbox / 'global_deep_scan_results_gri-current.json'
+        current.write_text(json.dumps(self._sample_results('gri-current', 'a')))
+        result = d.import_inbox(self.deep)
+        self.assertEqual(result, {'imported': 1, 'archived_old': 0, 'unmatched': 1})
+        self.assertTrue(unmatched.exists())
+        self.assertFalse(current.exists())
+
+    def test_invalid_package_remains_in_inbox_and_archive_unchanged(self):
+        inbox = self.deep / 'inbox'
+        inbox.mkdir()
+        (self.deep / 'pending_manifest.json').write_text(json.dumps(
+            self._sample_manifest('gri-invalid', 'a', 'docA', 'China')))
+        current = inbox / 'global_deep_scan_results (3).json'
+        current.write_text(json.dumps({'schema': d.SCHEMA, 'package_id': 'gri-invalid',
+                                       'results': [{'candidate_id': 'a', 'decision': 'KEEP'}]}))
+        with self.assertRaisesRegex(ValueError, 'REJECTED'):
+            d.import_inbox(self.deep)
+        self.assertTrue(current.exists())
+        self.assertFalse((self.deep / 'verified_findings.json').exists())
+        self.assertFalse((self.deep / 'processed_inbox').exists())
+
+    def test_different_replies_same_package_do_not_clobber_one_another(self):
+        inbox = self.deep / 'inbox'
+        inbox.mkdir()
+        (self.deep / 'pending_manifest.json').write_text(json.dumps(
+            self._sample_manifest('gri-dupe', 'a', 'docA', 'China')))
+        one = self._sample_results('gri-dupe', 'a')
+        two = self._sample_results('gri-dupe', 'a')
+        two['results'][0]['specific_finding'] += ' A materially different claim.'
+        (inbox / 'global_deep_scan_results.json').write_text(json.dumps(one))
+        (inbox / 'global_deep_scan_results (1).json').write_text(json.dumps(two))
+        with self.assertRaisesRegex(ValueError, 'Different files'):
+            d.import_inbox(self.deep)
+        self.assertFalse((self.deep / 'verified_findings.json').exists())
+        self.assertEqual(len(list(inbox.glob('*.json'))), 2)
+
     def test_scanner_manual_only_deep_scan_push_is_import_only(self):
         scan = (ROOT / '.github/workflows/global-ri-blind-spots.yml').read_text()
         deep = (ROOT / '.github/workflows/global-ri-deep-scan-auto.yml').read_text()
@@ -206,7 +311,9 @@ class GlobalDeepScanTests(unittest.TestCase):
             self.assertNotIn('  schedule:', text)
             self.assertNotIn('  workflow_run:', text)
         self.assertNotIn('  push:', scan)
-        self.assertIn("'Global R&I Blind Spots/deep_scan/inbox/global_deep_scan_results.json'", deep)
+        self.assertIn("'Global R&I Blind Spots/deep_scan/inbox/global_deep_scan_results*.json'", deep)
+        self.assertIn('import-inbox', deep)
+        self.assertIn('processed_inbox', deep)
         self.assertNotIn('copilot-requests:', deep)
         self.assertNotIn('OPENAI_API_KEY', deep)
         self.assertIn("inputs.operation == 'prepare'", deep)
