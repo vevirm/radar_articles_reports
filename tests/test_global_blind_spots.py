@@ -96,6 +96,52 @@ class BlindSpotTests(unittest.TestCase):
         self.assertEqual(found['geographic_evidence'], 'affiliation_only_not_country_policy_evidence')
         self.assertIsNone(g.candidate_from_openalex(work, 'Japan', theme, self.config, [], 'test'))
 
+    def test_ignores_other_country_subject_from_affiliation_only(self):
+        theme = 'Climate, energy and environmental research'
+        work = self.oa('India renewable energy policy and research investment',
+                       'India energy and climate research priorities')
+        work['authorships'] = [{'countries': ['AU']}]
+        self.assertIsNone(g.candidate_from_openalex(work, 'Australia', theme,
+                            self.config, [], 'query', allow_affiliation=True))
+        # An explicit Australia comparative topic is not rejected.
+        work['display_name'] = 'India and Australia renewable energy research investment'
+        self.assertIsNotNone(g.candidate_from_openalex(work, 'Australia', theme,
+                            self.config, [], 'query', allow_affiliation=True))
+
+    def test_structural_pages_are_preserved_as_questions_not_trends(self):
+        structural = {'title': 'Quantum computing research programme',
+                      'source_kind': 'official_primary', 'date': '',
+                      'region': 'Japan', 'theme': 'Technology leadership and industrial capacity'}
+        self.assertEqual(g.signal_role(structural), 'structural_context')
+        self.assertIn('what independent evidence', g.question_for_signal(structural))
+        dated = {**structural, 'title': 'Agency announces new quantum computing programme',
+                 'date': '2026-10-03'}
+        self.assertEqual(g.signal_role(dated), 'development_candidate')
+        trend = {**structural, 'title': 'National research statistics and performance report'}
+        self.assertEqual(g.signal_role(trend), 'trend_evidence')
+
+    def test_related_leads_are_unverified_and_structural_items_capped(self):
+        theme = list(self.config['themes'])[1]
+        def item(title, url, source, role):
+            return {'title': title, 'url': url, 'region': 'Japan', 'theme': theme,
+                    'source': source, 'source_kind': 'official_primary',
+                    'signal_role': role, 'issue_terms': ['quantum'],
+                    'matched_main_radar_titles': [], 'review_status': 'needs_review',
+                    'evidence_status': 'official_claim_unverified',
+                    'abstract_or_context': '', 'geographic_evidence': 'country_scoped_institution'}
+        values = [item(f'Japan institutional research programme {i}',
+                       f'https://institute.jp/program-{i}', 'Institute', 'structural_context') for i in range(5)]
+        values += [item('Japan announces quantum research laboratory',
+                        'https://other.jp/lab', 'Other', 'development_candidate')]
+        values[-1]['date'] = '2026-10-12'
+        coverage = {'Japan | ' + theme: 0}
+        result = g.rank_and_dedupe(values, coverage, self.config)
+        self.assertEqual(len(result), 3)
+        self.assertEqual(sum(x['signal_role'] == 'structural_context' for x in result), 2)
+        linked = g.add_evidence_trails(result)
+        self.assertTrue(linked[0]['investigation_question'])
+        self.assertTrue(all(x['related_unverified_leads'] for x in linked))
+
     def test_date_filter_drops_stale_feed_and_keeps_unknown_for_review(self):
         from datetime import datetime, timezone
         now = datetime(2026, 11, 3, tzinfo=timezone.utc)

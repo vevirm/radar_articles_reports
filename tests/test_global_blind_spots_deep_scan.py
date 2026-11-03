@@ -100,6 +100,35 @@ class GlobalDeepScanTests(unittest.TestCase):
             self.assertIn('ALREADY be present in the main Radar', txt)
         self.assertFalse((self.deep / 'verified_findings.json').exists())
 
+    def test_package_has_structural_questions_and_source_trails(self):
+        self.base.mkdir(exist_ok=True)
+        theme = 'Technology leadership and industrial capacity'
+        rows = [{'title': 'Japan advanced semiconductor research programme',
+                 'url': 'https://example.jp/program', 'region': 'Japan', 'theme': theme,
+                 'source': 'Institution', 'source_kind': 'official_primary',
+                 'signal_role': 'structural_context', 'date': '',
+                 'investigation_question': 'What capability has been established and what is its measurable effect?'},
+                {'title': 'Japan semiconductor research output statistics and indicators',
+                 'url': 'https://different.jp/indicators', 'region': 'Japan', 'theme': theme,
+                 'source': 'Statistics', 'source_kind': 'institutional_statistics',
+                 'signal_role': 'trend_evidence', 'date': '2026-10-10'}]
+        (self.base / 'latest.json').write_text(json.dumps({'items': rows}))
+        selected, _ = d.plan_queue({'strand_a': [], 'strand_b': [], 'strand_c': []},
+                                   self.config, self.base, self.deep, 24)
+        first = next(x for x in selected if x['title'] == rows[0]['title'])
+        self.assertEqual(first['signal_role'], 'structural_context')
+        self.assertTrue(first['related_unverified_leads'])
+        radarfile = Path(self.tmp.name) / 'radar.json'
+        radarfile.write_text(json.dumps({'strand_a': [], 'strand_b': [], 'strand_c': []}))
+        package, path = d.prepare(self.base, self.deep, radarfile,
+                                  artifact=Path(self.tmp.name) / 'review.zip', batch_size=24)
+        with zipfile.ZipFile(path) as archive:
+            self.assertIn('programme page', archive.read('INSTRUCTIONS.md').decode())
+            candidates = archive.read('CANDIDATES.md').decode()
+            self.assertIn('Investigation:', candidates)
+            self.assertIn('Related lead to check:', candidates)
+            self.assertTrue(any(x.get('signal_role') for x in package['items']))
+
     def test_validate_rejects_false_keep_unverified_claim(self):
         candidate = {'candidate_id': 'a', 'radar_overlap': 'not_identified'}
         self.assertTrue(d.validate_result({'candidate_id': 'a', 'decision': 'KEEP',
