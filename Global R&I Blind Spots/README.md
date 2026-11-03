@@ -8,13 +8,16 @@
 - **[latest.csv](latest.csv)** — spreadsheet-friendly current candidate list.
 - **[archive.json](archive.json)** — persistent candidate history, including previously seen material.
 - **[scan_state.json](scan_state.json)** — what countries were covered this run and which countries rotate next.
+- Discovery candidates are grouped as **potential developments**, **trend evidence**, **structural context**, or **individual research outputs**. This is automated triage, not a verification verdict.
+- Institutional programme pages remain useful as structural leads. They do **not** prove a trend on their own; `LATEST.md` supplies a specific follow-up question and, where available, related unverified leads.
+- A source may be connected to more than one country or theme, but researcher affiliation alone is not proof a paper concerns that country's R&I system.
 
 ## After a manual LLM Deep Scan
 
 1. GitHub Actions → **Global R&I Deep Scan — LLM Package / Import** → `operation = prepare`.
 2. Open the completed run → **Artifacts** → download **global-ri-llm-review-package**.
 3. Supply the package to a browsing-capable LLM, requesting a complete `global_deep_scan_results.json` that follows `INSTRUCTIONS.md`.
-4. Upload the returned JSON to [`deep_scan/inbox/`](deep_scan/inbox/) with exact filename `global_deep_scan_results.json` on branch `main`.
+4. Upload the returned JSON to [`deep_scan/inbox/`](deep_scan/inbox/) with exact filename `global_deep_scan_results.json` on branch `main`. The JSON is **one file** produced by your LLM; no manual selection of source documents is required.
 5. Uploading triggers validation and import. Check **[deep_scan/VERIFIED_FINDINGS.md](deep_scan/VERIFIED_FINDINGS.md)** for accepted KEEP findings.
 
 - **[deep_scan/QUEUE.md](deep_scan/QUEUE.md)** — package awaiting LLM review.
