@@ -17,9 +17,12 @@ class BlindSpotTests(unittest.TestCase):
                       'strand_c': [{'title': 'Research security and scientific collaboration', 'date': '2026-10-10'}]}
         self.anchors = g.extract_radar_anchors(self.radar, self.config)
 
-    def test_all_nine_cells_anchor_in_real_radar_titles(self):
-        self.assertTrue(all(self.anchors.values()))
-        self.assertEqual(len(g.existing_coverage(self.radar, self.config)), 9)
+    def test_global_coverage_and_anchors(self):
+        self.assertTrue(all(self.anchors.get(t) for t in list(self.config['themes'])[:3]))
+        self.assertGreaterEqual(len(self.config['regions']), 20)
+        self.assertGreaterEqual(len(self.config['themes']), 6)
+        self.assertEqual(len(g.existing_coverage(self.radar, self.config)),
+                         len(self.config['regions']) * len(self.config['themes']))
 
     def test_never_leak_eu_region_without_non_eu_subject(self):
         x = self.oa('EU quantum computing research priorities', 'European Union research and innovation')
@@ -68,11 +71,30 @@ class BlindSpotTests(unittest.TestCase):
         def fake_get(url, timeout):
             urls.append(url)
             return b'{"results": []}'
+        chosen = ['United States', 'China', 'Russia', 'Brazil']
         g.discover_openalex(self.config, self.anchors, Counter(),
-                            datetime(2026, 11, 3, tzinfo=timezone.utc), http_get=fake_get)
-        self.assertEqual(len(urls), 27)  # 3 countries × 3 themes × (2 Radar issues + 1 additional/native-language query)
-        self.assertTrue(any('quantum' in url for url in urls))
-        self.assertTrue(any('research+funding' in url for url in urls))
+                            datetime(2026, 11, 3, tzinfo=timezone.utc), http_get=fake_get,
+                            selected_countries=chosen)
+        self.assertEqual(len(urls), 4 * len(self.config['themes']) * 2)
+        self.assertTrue(any('authorships.countries' in url for url in urls))
+        self.assertTrue(any('United+States' in url for url in urls))
+
+    def test_global_rotation_coverage_not_fixed_to_examples(self):
+        groups = set(self.config['country_groups'].values())
+        runs = [g.select_rotating_countries(self.config, i) for i in range(14)]
+        self.assertTrue(all(len(x) == 12 for x in runs))
+        self.assertTrue(all({self.config['country_groups'][country] for country in x} == groups for x in runs))
+        self.assertEqual(set(country for x in runs for country in x), set(self.config['regions']))
+
+    def test_affiliation_only_item_is_explicitly_labeled(self):
+        theme = 'Technology leadership and industrial capacity'
+        work = self.oa('Novel quantum computing architecture improves error correction',
+                       'quantum research semiconductor hardware investigation')
+        work['authorships'] = [{'countries': ['JP']}]
+        found = g.candidate_from_openalex(work, 'Japan', theme, self.config, [], 'test', allow_affiliation=True)
+        self.assertIsNotNone(found)
+        self.assertEqual(found['geographic_evidence'], 'affiliation_only_not_country_policy_evidence')
+        self.assertIsNone(g.candidate_from_openalex(work, 'Japan', theme, self.config, [], 'test'))
 
     def test_date_filter_drops_stale_feed_and_keeps_unknown_for_review(self):
         from datetime import datetime, timezone
