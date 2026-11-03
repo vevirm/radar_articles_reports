@@ -1,8 +1,147 @@
 # Global R&I Deep Scan — verified findings
 
-Imported: 2026-11-03T16:21:05.177099+00:00. **7 verified KEEP** findings, **4 REVIEW**, **1 DROP**.
+Imported: 2026-11-03T17:41:04.642495+00:00. **15 verified KEEP** findings, **6 REVIEW**, **3 DROP**.
 
 A KEEP records a source-checked reviewer assessment; the GitHub importer validates evidence structure but does not itself browse or certify truth.
+
+## EU and Vietnam deepen cooperation in science, technology and innovation
+
+**Vietnam · Research security and international cooperation** | 2026-05-27 | confidence high
+
+**Verified finding:** The European Commission and Vietnam’s Ministry of Science and Technology signed a Letter of Intent on 27 May 2026 to increase research, researcher-mobility, technology-transfer and university–industry cooperation. The Commission reports 32 Vietnamese participations in 29 signed Horizon Europe grants, giving a concrete baseline for wider scientific integration.
+
+**Evidence:** [Vietnam and EU establish a more structured science and innovation cooperation channel](https://era.gv.at/news-items/eu-and-vietnam-deepen-cooperation-in-science-and-innovation/) — ERA Portal: agreement on joint research and mobility, Horizon Europe participation; European Commission DG RTD 27 May 2026 news release on signed Letter of Intent; Vietnam Ministry of Science and Technology 28 May report on cooperative mechanism and research institutions..
+
+**Independent check:** The European Commission and Vietnam Ministry of Science and Technology directly confirm the bilateral administrative decision on separate domains. Both are parties to the agreement, so this validates the signed intent but not later increases in research mobility, funded grants or commercial results. [1](https://research-and-innovation.ec.europa.eu/news/all-research-and-innovation-news/eu-and-vietnam-deepen-partnership-science-technology-and-innovation-2026-05-27_en) [2](https://english.mst.gov.vn/viet-nam-eu-spur-cooperation-in-science-technology-innovation-197260528084645571.htm)
+
+**Why global R&I matters:** Vietnam is growing as an international collaborator and research-innovation partner, suggesting a more reciprocal model for European engagement with Southeast Asian talent, universities and firms. Horizon participation provides an initial observable baseline.
+
+**Main Radar comparison (extends_main_radar):** The precise ERA Portal summary is already in the main Radar. This confirms it independently with statements from the signatories and adds the grant-participation baseline; it does not claim a previously unseen event.
+
+**Limitations:** A Letter of Intent is a commitment to seek cooperation, not a funded programme or realised exchange. The 32 participations/29 grants are baseline totals reported by the EU and not causal outcomes of the 2026 letter. Both signatories have promotional incentives.
+
+- Existing main Radar C: [EU and Vietnam deepen cooperation in science, technology and innovation](https://era.gv.at/news-items/eu-and-vietnam-deepen-cooperation-in-science-and-innovation/)
+
+## Cold comfort: What China can teach Europe about adaptation – European Council on Foreign Relations
+
+**China · Climate, energy and environmental research** | 2026-08-18 | confidence medium
+
+**Verified finding:** China’s large-scale cooling-equipment manufacturing and supply chains are a strategically relevant technological capability for adaptation to rising heat demand: IEA estimates roughly 170 million Chinese AC units manufactured and 60 million exported per year, while ECFR documents the resulting European sourcing dependencies and Chinese firms’ product localisation.
+
+**Evidence:** [China’s cooling-equipment industrial capacity and its implications for European climate adaptation](https://ecfr.eu/article/cold-comfort-what-china-can-teach-europe-about-adaptation/) — ECFR sections “China leads on AC,” “Saying no to adaptation,” and “What Europeans should do”; International Energy Agency (IEA), 10 July 2026, sections “More air conditioners are being sold” and Chinese manufacturing capacity..
+
+**Independent check:** IEA is a separate international analytical institution and provides quantitative manufacturing/export scale and global cooling-demand evidence. Its analysis corroborates structural exposure, not all ECFR forecasts, trade-share percentages or policy prescriptions. [1](https://www.iea.org/commentaries/cooling-a-hotter-world-el-nino-meets-strong-growth-in-global-electricity-demand) [2](https://www.iea.org/reports/state-of-energy-policy-2026/energy-efficiency-and-fuel-switching-regulations)
+
+**Why global R&I matters:** Cooling is becoming essential energy infrastructure; supply concentration shapes access to efficient appliances, adaptation technology, product standards and research-to-manufacturing scale-up. European resilience depends on efficiency innovation, diversified supply chains and careful technology-transfer choices.
+
+**Main Radar comparison (extends_main_radar):** The exact ECFR commentary is already in the main Radar. This verification extends it with IEA’s independent manufacturing and electricity-demand data, and reframes it as structural innovation and industrial capability rather than evidence of a new laboratory breakthrough.
+
+**Limitations:** ECFR is an opinionated strategic interpretation; it does not measure Chinese R&D quality or prove policy causality. IEA numbers are rounded estimates for manufacturing and markets, not a quality audit. China-specific AC export percentages in ECFR were not separately verified here.
+
+- Existing main Radar A: [Cold comfort: What China can teach Europe about adaptation – European Council on Foreign Relations](https://ecfr.eu/article/cold-comfort-what-china-can-teach-europe-about-adaptation/)
+
+## WIPO Global Innovation Index 2026 country profile and innovation indicators — India
+
+**India · Innovation systems, infrastructure and knowledge transfer** | 2026-09-29 | confidence medium
+
+**Verified finding:** India ranked 38th in the Global Innovation Index 2026, with innovation outputs 25th versus inputs 49th. WIPO describes sustained long-term innovation gains and an unusually strong position in ICT services exports. India’s Economic Survey independently reports R&D spending around 0.64% of GDP and a business-sector share around 41%, indicating that select high-performing output domains coexist with a relatively thin R&D resource base.
+
+**Evidence:** [India converts selected innovation capabilities into outputs despite constrained R&D intensity](https://www.wipo.int/en/web/global-innovation-index/2026/index) — WIPO 2026 GII Results: middle-income economies and innovation-input/output performance; India country profile (2026 input rank 49, output rank 25); India Economic Survey 2025–26 sections 8.48–8.49 on gross R&D expenditure and business contribution..
+
+**Independent check:** The Indian Economic Survey provides separately produced national R&D spending and institutional-policy evidence, not an independent re-ranking of WIPO scores. The Government of India document corroborates constraints and the policy response, while WIPO supplies the international comparative index. [1](https://www.indiabudget.gov.in/economicsurvey/doc/echapter.pdf) [2](https://www.pib.gov.in/PressReleasePage.aspx?PRID=2219992&lang=2&reg=3)
+
+**Why global R&I matters:** India is an instructive case of the separation between aggregate research investment and specialised innovation outputs. European R&I comparisons should examine digital services, commercial linkages and innovation-finance mechanisms rather than assuming spending rank equals output rank.
+
+**Main Radar comparison (not_in_main_radar):** No exact main Radar India 2026 GII entry was identified. This adds a structural input-output pattern and national funding context, not a claim that India exceeds EU economies in aggregate R&D performance.
+
+**Limitations:** GII rankings are composites and ordinal positions, not causal productivity measures. Indicators have different reference years (mostly 2024–26); the Indian Economic Survey’s R&D intensity series is older than GII publication and uses national definitions. Changes in rank also reflect changes in other countries.
+
+
+## WIPO Global Innovation Index 2026 country profile and innovation indicators — Australia
+
+**Australia · Innovation systems, infrastructure and knowledge transfer** | 2026-09-29 | confidence medium
+
+**Verified finding:** Australia rose to 20th in WIPO’s 2026 innovation index (from 22nd in 2025), with inputs ranked 13th but outputs 24th. WIPO cites stronger university–industry collaboration and clusters; separately, Australia’s statistics bureau reports business R&D expenditure of A$24.41 billion in 2023–24, up 18% from 2021–22 in current prices.
+
+**Evidence:** [Australia returns to the global innovation top 20 as research links and business R&D strengthen](https://www.wipo.int/en/web/global-innovation-index/2026/index) — WIPO 2026 GII results section “Australia, Canada and New Zealand regain ground”; Australian Bureau of Statistics “Research and Experimental Development, Businesses, Australia, 2023–24” key statistics and annual expenditure comparison..
+
+**Independent check:** ABS is a different institution and domain and corroborates the business R&D input trend using national survey data. Parliament’s earlier research review provides independent context on Australia’s historical gap between innovation inputs and outputs; neither independently reconstructs WIPO’s composite 2026 rank. [1](https://www.abs.gov.au/statistics/industry/technology-and-innovation/research-and-experimental-development-businesses-australia/latest-release) [2](https://www.aph.gov.au/About_Parliament/Parliamentary_departments/Parliamentary_Library/Research/Research_Papers/2024-25/RandD_and_innovation_in_Australia_2024_update)
+
+**Why global R&I matters:** Australia combines strong universities with a longstanding challenge in translation to outputs. Its renewed R&D spending and collaboration infrastructure are relevant comparators for EU industry–university knowledge transfer and innovation-system benchmarking.
+
+**Main Radar comparison (not_in_main_radar):** No exact main Radar match for this 2026 Australia GII assessment was identified. It adds an Oceania structural comparison to an otherwise EU-centred picture.
+
+**Limitations:** GII year-to-year ranking changes can reflect methodology and other economies; the ABS 2023–24 expenditure data predate the 2026 index and are nominal, not proof of innovation outputs. A 2026 rank is a composite benchmark, not an observed causal result.
+
+
+## China’s dual circulation strategy and its impact on European industry: the case of the electric vehicle
+
+**China · Innovation systems, infrastructure and knowledge transfer** | 2026-08-26 | confidence high
+
+**Verified finding:** The study argues China’s dual-circulation approach reinforces industrial scaling and control of strategic inputs despite weak domestic consumption. Independent IEA 2026 data show China manufactured nearly 75% of electric cars globally in 2025, accounted for over 80% of battery-cell production, and more than doubled EV exports to over 2.5 million, demonstrating the scale of the industrial-technology ecosystem.
+
+**Evidence:** [China’s electric-vehicle industry exemplifies investment-led technological scaling under dual circulation](https://link.springer.com/article/10.1007/s10308-026-00785-0) — Asia Europe Journal abstract, introduction, “State of play” and “Impact on Europe” sections; IEA Global EV Outlook 2026 executive summary and “Manufacturing and trade” chapters, covering 2025 Chinese output, exports and battery production..
+
+**Independent check:** IEA’s independently assembled international sales and manufacturing series corroborate the sector’s massive scale and 2025 export expansion. They do not independently validate the authors’ political-economy causal interpretation, which remains an analytic argument. [1](https://www.iea.org/reports/global-ev-outlook-2026/manufacturing-and-trade) [2](https://www.iea.org/reports/global-ev-outlook-2026/executive-summary)
+
+**Why global R&I matters:** A strategy of scaling production capacity, embedded supply chains, battery inputs and indigenous innovation can turn research capabilities into globally competitive systems. EU industrial policy should distinguish research inventions, process learning, integration and supply chain control.
+
+**Main Radar comparison (extends_main_radar):** The exact DOI is already present in the main Radar; this review confirms the real peer-reviewed work, adds IEA market evidence and explicitly separates empirical manufacturing scale from causal interpretation.
+
+**Limitations:** The paper primarily synthesises literature and stakeholder interviews rather than causal experiments. The authors’ claim that domestic weakness drives external advantage is contestable; IEA volume figures do not identify causality. Production share is not equivalent to research quality or innovation originality.
+
+- Existing main Radar A: [China’s dual circulation strategy and its impact on European industry: the case of the electric vehicle](https://doi.org/10.1007/s10308-026-00785-0)
+
+## 21 October 2026 UKRI-backed fellowships support emerging research talent EPSRC
+
+**United Kingdom · Research funding, institutions and talent** | 2026-10-21 | confidence high
+
+**Verified finding:** UKRI backed 11 UK Intelligence Community postdoctoral fellowships in 2026 within a wider 24-person early-career researcher announcement. The scheme funds unclassified fundamental research relevant to security, defence, AI, quantum sensing and communications, with government-linked technical mentoring and end-user connections.
+
+**Evidence:** [United Kingdom funds early-career research at the security–fundamental-science interface](https://www.ukri.org/news/ukri-backed-fellowships-support-emerging-research-talent/) — UKRI 21 October 2026 release: 11 fellowships, 24-person Royal Academy of Engineering wider cohort, topic list and Industrial Strategy National Security and Defence link; Royal Academy of Engineering joint research/ICRF awardee announcement, UK IC fellowship notes..
+
+**Independent check:** Royal Academy of Engineering is the fellowship delivery body on another domain and confirms awardees and scheme structure. This is strong independent-publisher confirmation of an administrative decision, but not independent evaluation of later research results. [1](https://raeng.org.uk/news/joint-rficrf-announcement-2026)
+
+**Why global R&I matters:** The programme illustrates a UK institutional method for aligning early-career research capacity with security-relevant long-term challenges without classifying the funded fundamental research. It can matter to European research-talent policy and science–security partnerships.
+
+**Main Radar comparison (not_in_main_radar):** No exact main Radar match was identified for these UKRI 2026 fellowships. Distinct from the earlier verified UK innovation-ranking and university spin-out findings: this one concerns targeted research talent and mission-linked fellowships.
+
+**Limitations:** Awards and programme design are documented, not achievements in research output, national security or commercialisation. Fellowship ceilings are maximum grant values; cohort sizes and programme components must not be conflated.
+
+
+## OECD Main Science and Technology Indicators — international R&D funding and personnel
+
+**United States · Research funding, institutions and talent** | 2026-03-31 | confidence high
+
+**Verified finding:** The OECD reports US inflation-adjusted total R&D spending grew 3.4% in 2024, much faster than the EU’s 0.4%, but government budget allocations for R&D were tightening; OECD reports a 7.9% real reduction in US 2025 government R&D allocations among the comparable countries then reporting. Private and government R&D trajectories therefore should not be conflated.
+
+**Evidence:** [US total R&D growth diverges from contracting government research budgets in 2024–25](https://www.oecd.org/en/data/datasets/main-science-and-technology-indicators.html) — OECD MSTI “MSTI release cycle and highlights”; OECD 31 March 2026 briefing, sections on 2024 total R&D growth and government budget allocations; US NCSES FY2024–25 survey federal R&D obligations section..
+
+**Independent check:** NCSES is a different publishing institution and domain, supporting the direction of the federal public R&D slowdown using a distinct obligations measure; it does not independently calculate the OECD all-sector growth rate. Some OECD country inputs originate from national survey data, an important independence limit. [1](https://www.ncses.nsf.gov/surveys/federal-funds-research-development/2024-2025) [2](https://ncses.nsf.gov/pubs/nsf26317)
+
+**Why global R&I matters:** The divergence between growing aggregate research expenditure and weakening public budgets can affect basic research, public infrastructure and universities even in innovation-leading countries. It invites careful US–EU comparison of funding composition and scientific workforce resilience, beyond league-table spending totals.
+
+**Main Radar comparison (not_in_main_radar):** The OECD dataset was not an exact main Radar match in the assigned package. Unlike the FY2024–25 NCSES item in this same package, this finding concerns the contrast between economy-wide R&D growth and the government funding stream, not the absolute size of federal obligations.
+
+**Limitations:** The 2024 total-R&D growth and 2025 GBARD refer to different years, sectors and accounting definitions; they cannot be subtracted or interpreted as a single causal trajectory. OECD 2025 GBARD estimates include few reporting countries and remain subject to revision.
+
+
+## Survey of Federal Funds for Research and Development 2024–2025 (Volume 74)
+
+**United States · Research funding, institutions and talent** | 2026-05-04 | confidence high
+
+**Verified finding:** US federal agency R&D obligations rose from $186.1 billion in FY2023 to $194.2 billion in FY2024 (+4.4% nominal), but preliminary FY2025 obligations were $194.1 billion (−0.1% nominal and approximately −2.3% inflation-adjusted). Defence R&D obligations increased by about $12.3 billion from FY2023 to FY2024 as research-budget composition shifted.
+
+**Evidence:** [US federal R&D obligations flattened in FY2025 as defence priorities expanded](https://www.ncses.nsf.gov/surveys/federal-funds-research-development/2024-2025) — NCSES Data Highlights and 4 May 2026 Featured Survey Analysis NSF 26-317; federal obligation tables for FY2024 and FY2025; OECD 31 March 2026 R&D statistical release, government R&D budget section..
+
+**Independent check:** OECD provides a different cross-country budget-allocation series, reporting 2025 US government budget allocations for R&D fell 7.9% in real terms among available comparable reporting countries. This independently supports tightening public budgets, but the OECD budget series is NOT the same measure as NCSES obligations. [1](https://www.oecd.org/en/data/insights/statistical-releases/2026/03/oecd-overall-rd-growth-stable-government-rd-budgets-decline-and-reorient-towards-defence.html)
+
+**Why global R&I matters:** Changes in funding composition affect US universities, early-career researchers, federal laboratories and transatlantic scientific partnerships. Priority shifts towards security and defence may alter research opportunities and availability of openly collaborative work.
+
+**Main Radar comparison (not_in_main_radar):** No exact main Radar record for the 2024–25 NCSES survey was identified in the package. This adds verified US funding and defence-prioritisation evidence to an EU-centred discussion; other topical Radar coverage is possible.
+
+**Limitations:** FY2025 values are provisional agency estimates; obligations differ from approved budgets and actual expenditures. Nominal and real comparisons cannot be merged. OECD and NCSES definitions differ; a subsequent fiscal settlement can revise the trend.
+
 
 ## Event Report: Supporting the Ukrainian Research Ecosystem through International Exchange and Collaboration
 

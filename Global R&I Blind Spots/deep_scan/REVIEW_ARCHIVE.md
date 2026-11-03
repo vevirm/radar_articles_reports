@@ -2,6 +2,114 @@
 
 All reviewed package items are retained here; only KEEP appears in VERIFIED_FINDINGS.md.
 
+## EU and Vietnam deepen cooperation in science, technology and innovation
+
+**KEEP** — Vietnam / Research security and international cooperation
+Package `gri-36192e872b91170a386fa2c8`; 2026-11-03T17:41:04.642495+00:00.
+
+Source: https://era.gv.at/news-items/eu-and-vietnam-deepen-cooperation-in-science-and-innovation/
+
+The European Commission and Vietnam’s Ministry of Science and Technology signed a Letter of Intent on 27 May 2026 to increase research, researcher-mobility, technology-transfer and university–industry cooperation. The Commission reports 32 Vietnamese participations in 29 signed Horizon Europe grants, giving a concrete baseline for wider scientific integration.
+
+## Cold comfort: What China can teach Europe about adaptation – European Council on Foreign Relations
+
+**KEEP** — China / Climate, energy and environmental research
+Package `gri-36192e872b91170a386fa2c8`; 2026-11-03T17:41:04.642495+00:00.
+
+Source: https://ecfr.eu/article/cold-comfort-what-china-can-teach-europe-about-adaptation/
+
+China’s large-scale cooling-equipment manufacturing and supply chains are a strategically relevant technological capability for adaptation to rising heat demand: IEA estimates roughly 170 million Chinese AC units manufactured and 60 million exported per year, while ECFR documents the resulting European sourcing dependencies and Chinese firms’ product localisation.
+
+## WIPO Global Innovation Index 2026 country profile and innovation indicators — India
+
+**KEEP** — India / Innovation systems, infrastructure and knowledge transfer
+Package `gri-36192e872b91170a386fa2c8`; 2026-11-03T17:41:04.642495+00:00.
+
+Source: https://www.wipo.int/en/web/global-innovation-index/2026/index
+
+India ranked 38th in the Global Innovation Index 2026, with innovation outputs 25th versus inputs 49th. WIPO describes sustained long-term innovation gains and an unusually strong position in ICT services exports. India’s Economic Survey independently reports R&D spending around 0.64% of GDP and a business-sector share around 41%, indicating that select high-performing output domains coexist with a relatively thin R&D resource base.
+
+## WIPO Global Innovation Index 2026 country profile and innovation indicators — Australia
+
+**KEEP** — Australia / Innovation systems, infrastructure and knowledge transfer
+Package `gri-36192e872b91170a386fa2c8`; 2026-11-03T17:41:04.642495+00:00.
+
+Source: https://www.wipo.int/en/web/global-innovation-index/2026/index
+
+Australia rose to 20th in WIPO’s 2026 innovation index (from 22nd in 2025), with inputs ranked 13th but outputs 24th. WIPO cites stronger university–industry collaboration and clusters; separately, Australia’s statistics bureau reports business R&D expenditure of A$24.41 billion in 2023–24, up 18% from 2021–22 in current prices.
+
+## China’s dual circulation strategy and its impact on European industry: the case of the electric vehicle
+
+**KEEP** — China / Innovation systems, infrastructure and knowledge transfer
+Package `gri-36192e872b91170a386fa2c8`; 2026-11-03T17:41:04.642495+00:00.
+
+Source: https://doi.org/10.1007/s10308-026-00785-0
+
+The study argues China’s dual-circulation approach reinforces industrial scaling and control of strategic inputs despite weak domestic consumption. Independent IEA 2026 data show China manufactured nearly 75% of electric cars globally in 2025, accounted for over 80% of battery-cell production, and more than doubled EV exports to over 2.5 million, demonstrating the scale of the industrial-technology ecosystem.
+
+## 21 October 2026 UKRI-backed fellowships support emerging research talent EPSRC
+
+**KEEP** — United Kingdom / Research funding, institutions and talent
+Package `gri-36192e872b91170a386fa2c8`; 2026-11-03T17:41:04.642495+00:00.
+
+Source: https://www.ukri.org/news/ukri-backed-fellowships-support-emerging-research-talent/
+
+UKRI backed 11 UK Intelligence Community postdoctoral fellowships in 2026 within a wider 24-person early-career researcher announcement. The scheme funds unclassified fundamental research relevant to security, defence, AI, quantum sensing and communications, with government-linked technical mentoring and end-user connections.
+
+## UNESCO Institute for Statistics 2026 global R&D data release
+
+**REVIEW** — Russia / Research funding, institutions and talent
+Package `gri-36192e872b91170a386fa2c8`; 2026-11-03T17:41:04.642495+00:00.
+
+Source: https://www.uis.unesco.org/en/news/2026-rd-data-release
+
+The assigned UNESCO Institute for Statistics release exists and was opened, but it provides global and regional indicators rather than a Russia-specific multi-year R&D funding or researcher series. HSE’s 2026 Russian data book and 2024 national figures are possible leads, not independent confirmation that the UIS release establishes a Russian trend.
+
+## OECD Main Science and Technology Indicators — international R&D funding and personnel
+
+**KEEP** — United States / Research funding, institutions and talent
+Package `gri-36192e872b91170a386fa2c8`; 2026-11-03T17:41:04.642495+00:00.
+
+Source: https://www.oecd.org/en/data/datasets/main-science-and-technology-indicators.html
+
+The OECD reports US inflation-adjusted total R&D spending grew 3.4% in 2024, much faster than the EU’s 0.4%, but government budget allocations for R&D were tightening; OECD reports a 7.9% real reduction in US 2025 government R&D allocations among the comparable countries then reporting. Private and government R&D trajectories therefore should not be conflated.
+
+## ALLEA Contributes to High-Level Discussions on the Role of Science in Ukraine’s Recovery
+
+**DROP** — Ukraine / Innovation systems, infrastructure and knowledge transfer
+Package `gri-36192e872b91170a386fa2c8`; 2026-11-03T17:41:04.642495+00:00.
+
+Source: https://allea.org/allea-contributes-to-high-level-discussions-on-the-role-of-science-in-ukraines-recovery/
+
+The assigned 27 June 2026 ALLEA article and July 2026 European Commission account accurately document the Gdańsk Declaration and the shift toward longer-term Ukrainian research-system recovery. But this is substantively the same research-capacity recovery signal already accepted into the previous Global Deep Scan batch; importing it again would create a duplicate verified finding.
+
+## FAPESP Week highlights increased scientific collaboration between Brazil and the Netherlands in recent years
+
+**REVIEW** — Brazil / Research security and international cooperation
+Package `gri-36192e872b91170a386fa2c8`; 2026-11-03T17:41:04.642495+00:00.
+
+Source: https://agencia.fapesp.br/fapesp-week-highlights-increased-scientific-collaboration-between-brazil-and-the-netherlands-in-recent-years/59498
+
+The assigned 30 October FAPESP story and a related FAPESP agency report credibly describe the Netherlands symposium, reported bilateral amendment, and a claim of over 1,000 São Paulo–Netherlands joint publications per year. However, I did not independently verify the newly signed agreement or the bibliometric claim from a Dutch institutional publication or underlying publication dataset; the event programme is issued by FAPESP itself.
+
+## NRF-SAASTA Amplifies Health Research Through Digital Media
+
+**DROP** — South Africa / Health, biotechnology and life sciences
+Package `gri-36192e872b91170a386fa2c8`; 2026-11-03T17:41:04.642495+00:00.
+
+Source: https://www.nrf.ac.za/nrf-saasta-amplifies-health-research-through-digital-media/
+
+The 2 October 2026 NRF-SAASTA article primarily reports photographing, filming and livestreaming a local health-research conference. It does not establish a substantive new biomedical research result, healthcare innovation capability, funding change or evidence-based trend; publicity reach is not evidence of research impact.
+
+## Survey of Federal Funds for Research and Development 2024–2025 (Volume 74)
+
+**KEEP** — United States / Research funding, institutions and talent
+Package `gri-36192e872b91170a386fa2c8`; 2026-11-03T17:41:04.642495+00:00.
+
+Source: https://www.ncses.nsf.gov/surveys/federal-funds-research-development/2024-2025
+
+US federal agency R&D obligations rose from $186.1 billion in FY2023 to $194.2 billion in FY2024 (+4.4% nominal), but preliminary FY2025 obligations were $194.1 billion (−0.1% nominal and approximately −2.3% inflation-adjusted). Defence R&D obligations increased by about $12.3 billion from FY2023 to FY2024 as research-budget composition shifted.
+
 ## Event Report: Supporting the Ukrainian Research Ecosystem through International Exchange and Collaboration
 
 **KEEP** — Ukraine / Innovation systems, infrastructure and knowledge transfer
