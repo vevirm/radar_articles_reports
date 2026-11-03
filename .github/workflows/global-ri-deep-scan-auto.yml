@@ -1,0 +1,104 @@
+name: Global R&I Deep Scan — Automatic (Manual Trigger)
+
+on:
+  workflow_dispatch:
+    inputs:
+      max_documents:
+        description: 'Maximum source documents to read (8–40)'
+        required: false
+        default: '24'
+      max_pairs:
+        description: 'Maximum independently sourced evidence pairs to investigate (4–20)'
+        required: false
+        default: '12'
+
+permissions:
+  contents: read
+  copilot-requests: write
+
+concurrency:
+  group: ri-radar-research-scanners
+  cancel-in-progress: false
+
+jobs:
+  auto-global-deep-scan:
+    name: Self-contained international R&I investigation
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    permissions:
+      contents: write
+      copilot-requests: write
+    steps:
+      - name: Check out Radar main branch
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.12'
+      - name: Install supported Copilot CLI
+        run: npm install -g @github/copilot
+      - name: Source extraction dependencies
+        run: pip install --disable-pip-version-check 'beautifulsoup4>=4.12,<5' 'pypdf>=5,<7'
+      - name: Run scanner tests
+        run: |
+          python -m unittest discover -s tests -p 'test_global_blind_spots.py' -v
+          python -m unittest discover -s tests -p 'test_global_blind_spots_deep_scan.py' -v
+          python -m unittest discover -s tests -p 'test_global_blind_spots_auto.py' -v
+      - name: Automatically discover leads from existing Radar and international sources
+        env:
+          OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
+        run: python scripts/global_blind_spots.py
+      - name: Retrieve sources, compare independent evidence, investigate, write findings
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          MAX_DOCUMENTS: ${{ inputs.max_documents }}
+          MAX_PAIRS: ${{ inputs.max_pairs }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          docs="${MAX_DOCUMENTS:-24}"
+          pairs="${MAX_PAIRS:-12}"
+          [[ "$docs" =~ ^[0-9]+$ ]] && (( docs >= 8 && docs <= 40 )) || { echo 'Invalid max_documents'; exit 2; }
+          [[ "$pairs" =~ ^[0-9]+$ ]] && (( pairs >= 4 && pairs <= 20 )) || { echo 'Invalid max_pairs'; exit 2; }
+          python scripts/global_blind_spots_auto.py --max-docs "$docs" --max-pairs "$pairs"
+      - name: Validate output isolation and conservative admission
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          base=Path('Global R&I Blind Spots/deep_scan')
+          data=json.loads((base/'AUTO_FINDINGS.json').read_text())
+          assert data['schema']=='global-ri-auto-deep-v1'
+          assert all(x['status']=='automatically_evidence_screened_not_human_verified' for x in data['items'])
+          assert all(x['primary_url'] != x['corroboration_url'] for x in data['items'])
+          assert (base/'audit.json').is_file()
+          PY
+          outside="$(git diff --name-only -- . ':!Global R&I Blind Spots/' || true)"
+          if [[ -n "$outside" ]]; then echo "Unexpected change outside output folder: $outside"; exit 2; fi
+      - name: Publish only the Global folder
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- 'Global R&I Blind Spots/'
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Refresh independent global R&I evidence and automatic deep scan'
+          auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
+          git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${auth}"
+          trap 'git config --local --unset-all http.https://github.com/.extraheader >/dev/null 2>&1 || true' EXIT
+          git pull --rebase origin main
+          git push origin HEAD:main
+      - name: Summary
+        shell: bash
+        run: |
+          cat 'Global R&I Blind Spots/deep_scan/AUTO_FINDINGS.md' >> "$GITHUB_STEP_SUMMARY"

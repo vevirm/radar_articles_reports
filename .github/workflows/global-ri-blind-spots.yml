@@ -1,0 +1,83 @@
+name: Global R&I Blind Spots — Manual Scan
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+
+concurrency:
+  group: ri-radar-research-scanners
+  cancel-in-progress: false
+
+jobs:
+  global-blind-spots:
+    name: Global outside-EU R&I discovery
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    steps:
+      - name: Check out latest main
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.12'
+      - name: Run independent tests
+        run: python -m unittest discover -s tests -p 'test_global_blind_spots.py' -v
+      - name: Scan three global areas (separate outputs only)
+        env:
+          OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
+        run: python scripts/global_blind_spots.py
+      - name: Validate isolated outputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          base=Path('Global R&I Blind Spots')
+          d=json.loads((base/'latest.json').read_text())
+          assert d['mode']=='manual only'
+          assert set(d['regions'])=={'United States','China','Russia'}
+          assert all(x['review_status'] in ('needs_review','needs_article_review','accepted','rejected','investigate') for x in d['items'])
+          for name in ('archive.json','latest.json','latest.csv','LATEST.md'):
+              assert (base/name).is_file(), name
+          PY
+          unexpected="$(git diff --name-only -- . ':!Global R&I Blind Spots/' || true)"
+          if [[ -n "$unexpected" ]]; then
+            echo "Unexpected modified file(s): $unexpected"
+            exit 1
+          fi
+          untracked="$(git ls-files --others --exclude-standard | grep -v '^Global R&I Blind Spots/' || true)"
+          if [[ -n "$untracked" ]]; then
+            echo "Unexpected untracked file(s): $untracked"
+            exit 1
+          fi
+      - name: Commit only the Global Blind Spots folder
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- 'Global R&I Blind Spots/'
+          if git diff --cached --quiet; then
+            echo 'No Global R&I Blind Spots changes'
+            exit 0
+          fi
+          git commit -m 'Refresh manual global R&I blind-spot evidence leads'
+          auth="$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 | tr -d '\n')"
+          git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ${auth}"
+          trap 'git config --local --unset-all http.https://github.com/.extraheader >/dev/null 2>&1 || true' EXIT
+          git pull --rebase origin main
+          git push origin HEAD:main
