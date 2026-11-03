@@ -47,3 +47,11 @@ The scanner never automatically sends the package to a paid LLM. Its input is th
 - Candidates must be source-reviewed by the LLM to appear in `VERIFIED_FINDINGS.md`. Imports check for substantive evidence fields and independent-domain citations, but these structural checks cannot themselves prove truth.
 
 The two **discovery** and **package preparation** workflows have no cron schedules; only an explicit result upload triggers automatic **import**.
+
+## Discovery-quality update: programme pages and trends
+
+The discovery report now groups leads into dated developments, multi-year evidence leads, institutional/structural context, and research outputs. Institutional programme pages are **retained**, not blanket rejected. Each lead gets an investigation question and, where available, related sources to check. No links are counted as independently corroborating evidence until Deep Scan has opened them.
+
+The scanner caps undated structural leads and country-affiliation-only scholarly leads in each country/theme cell so they cannot dominate the report. A paper explicitly about a different country is excluded from affiliation-only country matching. Deep Scan packages include the questions and cross-source leads and favour current discoveries without excluding good existing Radar records.
+
+**What 144 means:** 12 countries selected per run × six R&I themes × two OpenAlex query approaches = 144 requests, each allowing up to 25 returned records. Pacing produces much of the ~20-minute runtime; this is source *discovery*, not full-document reading. The separate LLM package is the deep-reading stage.
