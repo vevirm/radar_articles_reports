@@ -1,110 +1,84 @@
-# Global R&I blind spots — automatic scanner and Deep Scan
+# Global R&I: discovery scanner + LLM Deep Scan packages
 
-## What to install
+This is a **correction patch** for the Global scanner you already uploaded to GitHub.
+You do **not** need `OPENAI_API_KEY`, GitHub Copilot, or paid GitHub inference.
+You do **not** need to upload research material to feed the discovery scanner.
 
-Copy the contents of this install package into the root of your EXISTING Radar GitHub
-repository. Keep the `.github/workflows/` paths unchanged. No existing Radar scan,
-report, or cron must be replaced. Commit to `main`.
+## Install these five files
 
-You will see two **manually triggered** actions:
+Open your existing GitHub Radar repository on `main`, and upload each file at its matching destination. **Replace the existing file with the same name** rather than adding a second copy.
 
-1. **Global R&I Blind Spots — Manual Scan** — gathers tightly filtered leads,
-   anchored in the existing `radar_active.json` without any user-uploaded input.
-2. **Global R&I Deep Scan — Automatic (Manual Trigger)** — runs discovery first,
-   then reads retrieved source documents, seeks independent evidence, and attempts
-   to produce a short evidence-screened report. **Use this action for the full run.**
+| File in this patch | Destination in your current GitHub repository |
+| --- | --- |
+| `.github/workflows/global-ri-deep-scan-auto.yml` | `.github/workflows/global-ri-deep-scan-auto.yml` (replace) |
+| `scripts/global_blind_spots_deep_scan.py` | `scripts/global_blind_spots_deep_scan.py` (replace) |
+| `tests/test_global_blind_spots_deep_scan.py` | `tests/test_global_blind_spots_deep_scan.py` (replace) |
+| `GLOBAL_AUTO_SCANNER_START_HERE.md` | `GLOBAL_AUTO_SCANNER_START_HERE.md` (replace outdated instructions) |
+| `Global R&I Blind Spots/deep_scan/inbox/README.txt` | `Global R&I Blind Spots/deep_scan/inbox/README.txt` (new folder marker) |
 
-Neither runs on a timer, on a push, or after normal Radar scans.
+The existing **Global R&I Blind Spots — Manual Scan** action, your discovery script,
+configuration, main Radar, and all their normal workflows stay unchanged.
+The old automatic-AI workflow is **replaced in place**, so no obsolete action
+will attempt to use Copilot or OpenAI tokens.
 
-## How the AI verification step works (IMPORTANT)
+## Your actual workflow
 
-GitHub Models was **retired in July 2026**. This package does **not** use it.
-Instead it uses the supported GitHub Copilot CLI, called from a manual GitHub
-Action with `copilot-requests: write`. For eligible organization-owned GitHub
-repos with Copilot CLI billing allowed, the built-in `GITHUB_TOKEN` is enough;
-no API key needs adding. **Access and possible usage charges depend on your
-GitHub organization subscription and policy.**
+1. In GitHub Actions run **Global R&I Blind Spots — Manual Scan**. It reads
+   `radar_active.json`, uses `OPENALEX_API_KEY` if present, and retrieves trusted
+   international discovery leads. Review only `Global R&I Blind Spots/LATEST.md`
+   if you want to see what it found. Research input uploads are not needed.
+2. In GitHub Actions run **Global R&I Deep Scan — LLM Package / Import** with
+   `operation=prepare`, `batch_size=12` (or 6 for a first test).
+3. Open that workflow run > **Artifacts** > download
+   `global-ri-llm-review-package`. GitHub downloads an artifact ZIP containing
+   `global_ri_llm_package.zip` (the inner ZIP is the review package).
+4. **Upload the inner ZIP to a browsing-capable LLM** and ask:
 
-If your repository does not have that Copilot entitlement, you can instead add
-**one** secret to the repository: `OPENAI_API_KEY` under Settings → Secrets and
-variables → Actions. The scanner detects it and uses OpenAI API inference
-instead of Copilot CLI (API billing applies). There is no repeated data upload,
-JSON import, or reviewer-package cycle.
+   > Read `INSTRUCTIONS.md` in the attached package. Verify the real source
+   > material for each item, seek independent corroboration, compare against
+   > existing Radar coverage, and return the complete
+   > `global_deep_scan_results.json` matching the supplied template.
+   > Where evidence is insufficient use REVIEW or DROP, not KEEP.
 
-If neither Copilot access nor an OpenAI API key is available, the action will
-still collect discovery leads and document availability, but **cannot honestly
-produce AI-checked findings**. It reports zero findings and an audit, rather
-than filling the report with unverified guesses. It does not automatically
-upgrade source metadata or generic article titles into verified evidence.
+5. Download the returned `global_deep_scan_results.json`. In the repository,
+   upload it to exactly:
+   `Global R&I Blind Spots/deep_scan/inbox/global_deep_scan_results.json`.
+   The **same Deep Scan workflow** automatically runs **import only** because
+   that one exact file changed. It does not scan on a push.
+   If automatic import is disabled, manually run **Global R&I Deep Scan — LLM Package / Import** with `operation=import`.
+6. Read `Global R&I Blind Spots/deep_scan/VERIFIED_FINDINGS.md` and
+   `verified_findings.csv`. The report includes only accepted KEEP findings;
+   reviewed but unresolved records are not presented as established facts.
+7. To get the next batch, run `operation=prepare` again. Unfinished packages
+   are reused, so an accidental duplicate click does not invalidate an LLM
+   review that is already underway.
 
-## What is gathered
+## What the numbers mean
 
-Existing Radar A, B, C records in `radar_active.json` are read on each run:
-these supply themes, actual Radar overlap comparisons and starting sources.
-Independent discovery then consults: OpenAlex (using the existing Radar
-trusted-journal lists), curated Nature and NIH feeds, explicitly allowed
-US NSF / Chinese Statistics / Russian HSE institution pages, and a maintained
-set of identifiable public OECD, UNESCO UIS, WIPO, NSF/NCSES, Chinese R&D
-statistics, HSE, Nature Index and scientific-publication starting documents.
-Some OpenAlex searches additionally use Chinese and Russian phrases.
+`batch_size=12` means **12 candidate source records per LLM review package**.
+It is **not** a discovery limit; OpenAlex can return more candidates. This
+manual review version does **not** use the old automatic settings of 24 documents
+and 12 AI evidence pairs.
 
-Country regions: **United States, China, Russia**.
-Themes: **funding/institutions/talent; technological capacity; research
-security/collaboration**. No arbitrary web-wide news crawls, opinion
-aggregators, social media or unapproved publishers.
+## Sources and reliability
 
-Every proposed Deep Scan finding must have substantive retrieved source text,
-a second document from a distinct publisher group, a model assessment about
-THE SAME specific R&I change, and **literal excerpts verified against both
-retrieved documents**. Official source documents are primary claims, not
-independent validation of their accuracy. Weak or uncorroborated candidates
-are rejected/held in an audit rather than shown as findings. Pairing by
-similarity does not prove corroboration; the model must assess that too.
+Discovery uses curated journals through OpenAlex, the main Radar findings,
+selected institutional sites and feeds, and international source leads
+covering the US, China and Russia. It produces *candidate records*, not
+verified conclusions. The review package contains source URLs, summaries,
+current Radar links, exact IDs, instructions and a JSON result template;
+**it does not contain full-text PDFs of the linked works**. The browsing-capable
+reviewer must open the primary content and an independent corroboration
+source before using KEEP.
 
-Existing Radar items are eligible (they are not excluded), and each admitted
-finding states whether it was **already covered / partially covered / not
-identified by the automated comparison**. A claim of 'not identified' is not
-proof that no related Radar work exists. Results remain completely separate
-from the original Radar findings and downstream Excel reports.
+A KEEP requires substantial evidence fields, a dated primary HTTPS source,
+a distinct corroborating source, documented limitations and a main Radar
+comparison. Validation checks format and source separation; it cannot by
+itself prove that a remote webpage or an LLM's assessment is factually true.
 
-## Result folder after pressing Run
+## Nothing to clean up
 
-- `Global R&I Blind Spots/LATEST.md` — all discovery statistics and candidate leads
-- `Global R&I Blind Spots/deep_scan/AUTO_FINDINGS.md` — **only evidence-screened findings**, 0–10, with two source URLs, excerpts, context, limits, relationship to main Radar
-- `Global R&I Blind Spots/deep_scan/AUTO_FINDINGS.json` — same structured report
-- `Global R&I Blind Spots/deep_scan/audit.json` — short machine-check decisions, failed source reads, and model errors
-- `Global R&I Blind Spots/deep_scan/auto_archive.json` — bounded cross-run archive
-
-If no finding satisfies all safeguards, the report says so explicitly rather
-than inventing filler. Source access, model quality, cross-publisher agreement
-and AI judgements can all fail; this is an **automatic evidence-screening
-system, not a human-certified fact checker**. The actual first GitHub run has
-not been performed by the developer; test mocks are not live validation.
-
-## Fixed limits and costs
-
-Deep Scan reads at most **24** selected documents and investigates at most
-**12 evidence pairs** by default, with no more than 10 report findings. The
-manual Action inputs allow 8–40 documents and 4–20 pairs. Individual document
-fetches are bounded; sources that block access are excluded with an audit
-reason. The program won't require you to repair URLs manually to proceed.
-
-## First run
-
-Actions → **Global R&I Deep Scan — Automatic (Manual Trigger)** → Run workflow
-→ keep the default limits. Read `AUTO_FINDINGS.md` after the action succeeds.
-There is no second Import action and no separate package to upload.
-
-## Files and tests
-
-Scanner scripts: `scripts/global_blind_spots.py`,
-`scripts/global_blind_spots_deep_scan.py` (shared Radar-overlap utilities),
-`scripts/global_blind_spots_auto.py` (automatic source/deep assessment).
-Configuration: `global_blind_spots_config.json` and
-`global_deep_scan_source_leads.json`. Tests: `tests/test_global_blind_spots*.py`.
-
-Run tests with `python -m unittest discover -s tests -p 'test_global_*.py'`.
-Requires Python 3.12, beautifulsoup4 and pypdf. The workflow installs these
-itself. It also installs the GitHub Copilot CLI; eligibility is determined by
-GitHub at runtime. The scanner does not modify the original Radar Python
-scripts, schedules, root findings, or Excel exports.
+You can leave the old empty `AUTO_FINDINGS.md`, `AUTO_FINDINGS.json`,
+`audit.json` and `auto_archive.json` files in the Global folder; they are not
+used by this manual workflow. Do not upload earlier installation ZIPs or
+replace the full repository while other Radar scans are running.
