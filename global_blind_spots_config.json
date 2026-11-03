@@ -1,0 +1,195 @@
+{
+  "version": "1.0",
+  "purpose": "Outside-EU R&I blind-spot watch; discoveries are leads, not automatically verified Radar evidence.",
+  "regions": {
+    "United States": [
+      "united states",
+      "u.s.",
+      "u.s.a.",
+      "american",
+      "usa",
+      "美国",
+      "сша"
+    ],
+    "China": [
+      "china",
+      "chinese",
+      "prc",
+      "中国",
+      "中华人民共和国"
+    ],
+    "Russia": [
+      "russia",
+      "russian",
+      "russian federation",
+      "россия",
+      "российский",
+      "российская"
+    ]
+  },
+  "themes": {
+    "Research funding, institutions and talent": {
+      "terms": [
+        "research funding",
+        "scientific workforce",
+        "research talent",
+        "research investment",
+        "science policy",
+        "university research",
+        "r&d spending",
+        "research careers",
+        "brain drain",
+        "research and development",
+        "r&d expenditure",
+        "r&d investment",
+        "basic research",
+        "science and technology indicators",
+        "expenditures on science",
+        "scientific talent",
+        "研究开发",
+        "科研经费",
+        "研发投入",
+        "научные исследования",
+        "расходы на науку"
+      ],
+      "queries": [
+        "research funding science policy",
+        "research talent universities"
+      ]
+    },
+    "Technology leadership and industrial capacity": {
+      "terms": [
+        "artificial intelligence",
+        "quantum",
+        "semiconductor",
+        "biotechnology",
+        "critical technologies",
+        "technology transfer",
+        "industrial policy",
+        "research infrastructure",
+        "advanced manufacturing",
+        "ai research",
+        "microelectronics",
+        "advanced chips",
+        "patents",
+        "strategic technologies",
+        "人工智能",
+        "量子技术",
+        "半导体",
+        "технологические исследования",
+        "полупроводники"
+      ],
+      "queries": [
+        "quantum semiconductor technology policy",
+        "artificial intelligence research innovation"
+      ]
+    },
+    "Research security and international cooperation": {
+      "terms": [
+        "research security",
+        "scientific collaboration",
+        "international research",
+        "science diplomacy",
+        "export controls",
+        "technology sanctions",
+        "research integrity",
+        "research cooperation",
+        "scientific cooperation",
+        "dual-use",
+        "academic freedom",
+        "scientific partnerships",
+        "international scientific cooperation",
+        "international research partnerships",
+        "academic cooperation",
+        "国际科研合作",
+        "科研安全",
+        "международное научное сотрудничество",
+        "научное сотрудничество"
+      ],
+      "queries": [
+        "research security international collaboration",
+        "science diplomacy export controls"
+      ]
+    }
+  },
+  "feeds": [
+    {
+      "name": "Nature",
+      "url": "https://www.nature.com/nature.rss",
+      "allowed_domain": "nature.com",
+      "kind": "independent_editorial",
+      "region_scope": "global"
+    },
+    {
+      "name": "US National Institutes of Health",
+      "url": "https://www.nih.gov/news-releases/feed.xml",
+      "allowed_domain": "nih.gov",
+      "kind": "official_primary",
+      "region_scope": "United States"
+    }
+  ],
+  "trusted_hubs": [
+    {
+      "name": "US National Science Foundation",
+      "url": "https://www.nsf.gov/news",
+      "allowed_domain": "nsf.gov",
+      "kind": "official_primary",
+      "region": "United States"
+    },
+    {
+      "name": "China National Bureau of Statistics",
+      "url": "https://www.stats.gov.cn/english/PressRelease/",
+      "allowed_domain": "stats.gov.cn",
+      "kind": "official_primary",
+      "region": "China"
+    },
+    {
+      "name": "HSE University science and technology data",
+      "url": "https://www.hse.ru/en/primarydata/",
+      "allowed_domain": "hse.ru",
+      "kind": "institutional_statistics",
+      "region": "Russia"
+    }
+  ],
+  "max_days_old": 365,
+  "max_results_per_search": 20,
+  "max_candidates_per_region_theme": 12,
+  "max_source_entries_per_hub": 35,
+  "max_stored_items": 1500,
+  "search_timeout_seconds": 18,
+  "native_searches": {
+    "China": {
+      "Research funding, institutions and talent": [
+        "中国 研发投入 科学研究"
+      ],
+      "Technology leadership and industrial capacity": [
+        "中国 半导体 量子技术"
+      ],
+      "Research security and international cooperation": [
+        "中国 国际科研合作"
+      ]
+    },
+    "Russia": {
+      "Research funding, institutions and talent": [
+        "Россия финансирование науки"
+      ],
+      "Technology leadership and industrial capacity": [
+        "Россия полупроводники технологии"
+      ],
+      "Research security and international cooperation": [
+        "Россия международное научное сотрудничество"
+      ]
+    },
+    "United States": {
+      "Research funding, institutions and talent": [
+        "US science funding research"
+      ],
+      "Technology leadership and industrial capacity": [
+        "US quantum semiconductors industry"
+      ],
+      "Research security and international cooperation": [
+        "US international research collaborations"
+      ]
+    }
+  }
+}
