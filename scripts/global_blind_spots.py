@@ -51,6 +51,74 @@ def find_terms(text, terms):
     return [t for t in terms if (t.lower() in text if re.search(r'[\u4e00-\u9fff]', t) else re.search(r'(?<![\w])' + re.escape(t.lower()) + r'(?![\w])', text))]
 
 
+def signal_role(item):
+    """Conservative, metadata-only triage; NOT a verified finding or trend."""
+    if item.get('source_kind') == 'trusted_scholarly_venue':
+        if find_terms(item.get('title', '') + ' ' + item.get('abstract_or_context', ''),
+                      ['longitudinal', 'time series', 'trend', 'trends', 'over time',
+                       'evolution', 'trajectory', 'bibliometric', 'decadal']):
+            return 'trend_evidence'
+        return 'research_output'
+    title = norm(item.get('title', ''))
+    # A named institution or a programme description is valuable context,
+    # but an undated directory link is not evidence of an event.
+    action_terms = ['announces', 'announced', 'launches', 'launched', 'approves',
+                    'approved', 'awards', 'awarded', 'funding increase', 'invests',
+                    'new report', 'new data', 'cuts funding', 'signed', 'establishes']
+    if item.get('date') and find_terms(title, action_terms):
+        return 'development_candidate'
+    if find_terms(title, ['statistics', 'indicators', 'report', 'survey', 'trends',
+                          'monitor', 'outlook', 'investment', 'expenditure',
+                          'performance', 'comparative', 'evidence']):
+        return 'trend_evidence'
+    return 'structural_context'
+
+
+def question_for_signal(item):
+    """A question for Deep Scan, never a generated claim."""
+    region, theme = item.get('region', 'this country'), item.get('theme', 'research and innovation').lower()
+    role = item.get('signal_role') or signal_role(item)
+    if role == 'structural_context':
+        return (f'What R&I approach or capability does this source document in {region}, '
+                f'and what independent evidence over time shows whether it matters for {theme}?')
+    if role == 'trend_evidence':
+        return (f'What is the direction and magnitude of change in {region} for {theme}, '
+                'across multiple years and independently sourced indicators?')
+    if role == 'development_candidate':
+        return (f'What specifically changed in {region}, when, and what source-backed '
+                f'consequences for {theme} can be established?')
+    return (f'Does this research output reveal a broader {region} pattern in {theme}, '
+            'or is it a single isolated publication? Seek independent evidence.')
+
+
+def add_evidence_trails(items, archived=(), max_links=3):
+    """Related leads are research leads, never independent corroboration."""
+    pool = list(items) + list(archived)
+    for item in items:
+        same = []
+        seen_urls = {item.get('url', '')}
+        for other in pool:
+            if (other.get('region'), other.get('theme')) != (item['region'], item['theme']):
+                continue
+            url = other.get('url', '')
+            if not url or url in seen_urls:
+                continue
+            seen_urls.add(url)
+            same.append(other)
+        # Prefer more distinct source names and different provenance; avoid
+        # describing these URLs as corroborating until LLM verification.
+        same.sort(key=lambda x: (x.get('source') == item.get('source'),
+                                 x.get('signal_role') == 'structural_context',
+                                 -(len(x.get('abstract_or_context', '')))))
+        item['related_unverified_leads'] = [
+            {'title': x['title'], 'url': x['url'], 'source': x.get('source', ''),
+             'signal_role': x.get('signal_role') or signal_role(x)}
+            for x in same[:max_links]]
+        item['signal_role'] = item.get('signal_role') or signal_role(item)
+        item['investigation_question'] = question_for_signal(item)
+    return items
+
+
 def load_json(path):
     return json.loads(Path(path).read_text(encoding='utf-8'))
 
@@ -157,6 +225,14 @@ def candidate_from_openalex(work, region, theme, config, anchors, query, allow_a
     inferred_affiliation = bool(allow_affiliation and country_code and affiliation_match(work, country_code))
     if not explicit_geo and not inferred_affiliation:
         return None
+    # Do not turn an India-focused study into an Australia-focused discovery
+    # merely because one co-author has an Australian affiliation. Comparative
+    # studies mentioning the target country remain eligible through explicit_geo.
+    if inferred_affiliation and not explicit_geo:
+        other_title_countries = [c for c, aliases in config['regions'].items()
+                                 if c != region and find_terms(title, aliases)]
+        if other_title_countries:
+            return None
     # Avoid a primarily EU-centred record that merely mentions a foreign country
     # somewhere in the abstract; comparative work naming both is still eligible.
     if find_terms(title, ['european union', 'european', 'europe', 'eu']) and not find_terms(title, config['regions'][region]):
@@ -432,24 +508,39 @@ def rank_and_dedupe(items, coverage, config):
                 'institutional_statistics': 2, 'official_primary': 1}
     for item in items:
         item['id'] = stable_key(item)
+        item['signal_role'] = signal_role(item)
+        item['investigation_question'] = question_for_signal(item)
         cov = coverage.get(f'{item["region"]} | {item["theme"]}', 0)
         item['main_radar_existing_matches'] = cov
         item['blind_spot_priority'] = ('higher' if cov < 3 else 'normal')
         item['score'] = (70 if cov == 0 else 60 if cov < 3 else 40) + 3 * len(item['issue_terms']) \
                         + 5 * priority.get(item['source_kind'], 0) \
-                        - (18 if item.get('geographic_evidence') == 'affiliation_only_not_country_policy_evidence' else 0)
+                        - (18 if item.get('geographic_evidence') == 'affiliation_only_not_country_policy_evidence' else 0) \
+                        - (8 if item['signal_role'] == 'structural_context' else 0) \
+                        + (6 if item['signal_role'] == 'trend_evidence' else 0) \
+                        + (8 if item['signal_role'] == 'development_candidate' else 0)
         prev = retained.get(item['id'])
         if prev is None or (item['score'], len(item.get('abstract_or_context', ''))) > (prev['score'], len(prev.get('abstract_or_context', ''))):
             retained[item['id']] = item
     ranked = sorted(retained.values(), key=lambda x: (-x['score'], x['region'], x['theme'], x['title']))
     # Stage 1: quality filter and per-country/theme cap; no long article dump.
     seen = Counter()
+    roles = Counter()
     cells = {}
     for item in ranked:
         key = (item['region'], item['theme'])
         if seen[key] >= config['max_candidates_per_region_theme']:
             continue
+        # Don't let unverified static pages or affiliation-only papers crowd
+        # out more substantial country-specific evidence; retain some context.
+        if item['signal_role'] == 'structural_context' and roles[key, 'structural_context'] >= config.get('max_structural_per_region_theme', 2):
+            continue
+        if item.get('geographic_evidence') == 'affiliation_only_not_country_policy_evidence' and roles[key, 'affiliation_only'] >= config.get('max_affiliation_per_region_theme', 1):
+            continue
         seen[key] += 1
+        roles[key, item['signal_role']] += 1
+        if item.get('geographic_evidence') == 'affiliation_only_not_country_policy_evidence':
+            roles[key, 'affiliation_only'] += 1
         cells.setdefault(key, []).append(item)
     # Stage 2: fairness across countries, rather than allowing one country to flood the report.
     output = []
@@ -468,6 +559,9 @@ def write_results(outdir, config, anchors, coverage, items, diagnostics, now, of
         old = load_json(archive_path)
         if isinstance(old, dict):
             previous = {x['id']: x for x in old.get('items', []) if isinstance(x, dict) and x.get('id')}
+    # Connect current discoveries with earlier leads in this country/theme.
+    # A cluster suggests an investigation, NOT proof of a trend.
+    add_evidence_trails(items, previous.values())
     now_iso = now.isoformat()
     for row in items:
         old = previous.get(row['id'], {})
@@ -487,9 +581,10 @@ def write_results(outdir, config, anchors, coverage, items, diagnostics, now, of
         'themes': list(config['themes']), 'run_index': run_index, 'countries_scheduled_this_run': selected or [], 'existing_main_radar_coverage': coverage,
         'main_radar_anchors': anchors, 'diagnostics': dict(diagnostics), 'items': items}
     (outdir / 'latest.json').write_text(json.dumps(summary, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-    keys = ['new_this_run', 'region', 'theme', 'title', 'date', 'source', 'source_kind', 'evidence_status',
-            'review_status', 'blind_spot_priority', 'main_radar_existing_matches', 'issue_terms',
-            'matched_main_radar_titles', 'evidence_note', 'abstract_or_context', 'url']
+    keys = ['new_this_run', 'region', 'theme', 'title', 'date', 'source', 'source_kind', 'signal_role',
+            'investigation_question', 'evidence_status', 'review_status', 'blind_spot_priority',
+            'main_radar_existing_matches', 'issue_terms', 'matched_main_radar_titles',
+            'evidence_note', 'abstract_or_context', 'url']
     with (outdir / 'latest.csv').open('w', encoding='utf-8-sig', newline='') as handle:
         writer = csv.DictWriter(handle, fieldnames=keys, extrasaction='ignore')
         writer.writeheader()
@@ -511,11 +606,26 @@ def write_results(outdir, config, anchors, coverage, items, diagnostics, now, of
         for theme in config['themes']:
             n = sum(x['region'] == region and x['theme'] == theme for x in items)
             lines.append(f'| {region} | {theme} | {coverage[f"{region} | {theme}"]} | {n} |')
-    lines += ['', '## Selected discovery candidates (not yet verified findings)', '']
-    for x in items[:40]:
-        clean_title = x['title'].replace('|', ' ')
-        lines += [f'- **{x["region"]} · {x["theme"]}** — [{clean_title}]({x["url"]}) ({x["source"]}; {x["evidence_status"]}).',
-                  f'  - Radar connection: {x["matched_main_radar_titles"][0] if x["matched_main_radar_titles"] else "none"}. Review: {x["review_status"]}.']
+    lines += ['', '## Discovery leads grouped by evidence role (not verified findings)', '',
+              'Institutional background can be analytically important, but a programme page alone does not establish a trend.',
+              'Related links below are unverified investigation leads, not independent corroboration.', '']
+    roles_in_order = [('development_candidate','Potential developments'),
+                      ('trend_evidence','Evidence of trends and changes'),
+                      ('structural_context','Institutional and structural context'),
+                      ('research_output','Research outputs to interpret')]
+    for role, heading in roles_in_order:
+        matching = [x for x in items if x['signal_role'] == role]
+        lines += [f'### {heading} ({len(matching)})', '']
+        for x in matching[:30]:
+            clean_title = x['title'].replace('|', ' ')
+            date = x.get('date') or 'date not established'
+            lines += [f'- **{x["region"]} · {x["theme"]}** — [{clean_title}]({x["url"]}) ({x["source"]}; {date}; {x["evidence_status"]}).',
+                      f'  - Question: {x["investigation_question"]}',
+                      f'  - Radar connection: {x["matched_main_radar_titles"][0] if x["matched_main_radar_titles"] else "none"}. Review: {x["review_status"]}.']
+            links = x.get('related_unverified_leads') or []
+            if links:
+                lines.append('  - Related unverified leads: ' + '; '.join(f'[{v["title"].replace("|", " ")}]({v["url"]})' for v in links[:2]))
+        lines.append('')
     lines += ['', '## Discovery diagnostics', '']
     for key in sorted(k for k in diagnostics if k != 'errors'):
         lines.append(f'- {key}: {diagnostics[key]}')
@@ -524,6 +634,8 @@ def write_results(outdir, config, anchors, coverage, items, diagnostics, now, of
     lines += ['', '## Method and limitations', '',
               '- Source admission: only main Radar trusted journals, explicitly allowlisted RSS and official/institutional websites.',
               '- All links require a substantive issue match and a specific external geographic lens (or explicitly country-scoped institutional feed).',
+              '- Institutional programme and infrastructure pages are retained as structural leads; cross-source comparisons and changes over time are Deep Scan questions, not verified trends.',
+              '- Category labels are rule-based triage, not source reading or verified findings.',
               '- Institutional homepage links can be unverified headlines; no claim is treated as confirmed without reading the source.',
               '- No LLM summarisation, social media, press aggregation, automatic promotion, or change to normal Radar.',
               '- OpenAlex affiliation-only papers are explicitly labelled: publication location is NOT evidence of a national research policy change.',

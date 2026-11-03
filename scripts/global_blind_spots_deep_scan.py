@@ -126,7 +126,10 @@ def main_radar_matches(radar, config):
                               'original_context': g.norm(item.get('core_message') or item.get('reader_what') or item.get('summary'))[:1100],
                               'radar_overlap': 'exact',
                               'assessment_status': 'not_independently_verified_by_global_deep_scan',
-                              'theme_terms': matched[:5], 'region_in_title': named}
+                              'theme_terms': matched[:5], 'region_in_title': named,
+                              'signal_role': 'research_output',
+                              'investigation_question': g.question_for_signal({
+                                  'region': region, 'theme': theme, 'signal_role': 'research_output'})}
                     # One document can be relevant to more than one theme, but
                     # deep reading is once per document/region. Keep the better match.
                     pair = (key, region)
@@ -193,7 +196,9 @@ def discoverable_candidates(base, config, radar_candidates, radar=None):
                           'radar_overlap': 'exact' if exact else 'not_identified',
                           'assessment_status': 'discovery_candidate_not_verified',
                           'theme_terms': original.get('issue_terms') or [],
-                          'region_in_title': bool(g.find_terms(title, config['regions'][region]))})
+                          'region_in_title': bool(g.find_terms(title, config['regions'][region])),
+                          'signal_role': original.get('signal_role') or g.signal_role(original),
+                          'investigation_question': original.get('investigation_question') or g.question_for_signal(original)})
     return items
 
 
@@ -221,7 +226,9 @@ def curated_source_candidates(config, radar_candidates, path=ROOT / 'global_deep
                        'original_context': row.get('context') or '',
                        'radar_overlap': 'exact' if exact else 'not_identified',
                        'assessment_status': 'verified_source_identity_not_yet_verified_finding',
-                       'theme_terms': [], 'region_in_title': True})
+                       'theme_terms': [], 'region_in_title': True,
+                       'signal_role': g.signal_role({**row, 'title': title, 'region': region, 'theme': theme}),
+                       'investigation_question': g.question_for_signal({**row, 'title': title, 'region': region, 'theme': theme})})
     return result
 
 
@@ -261,9 +268,15 @@ def plan_queue(radar, config, base=BASE, deep=DEEP, batch_size=12):
         # Prefer distinct country subject rather than generic comparative prose.
     rows = list(merged.values())
     def score(x):
-        origin_bonus = {'curated_high_quality_source': 40, 'global_discovery': 30,
-                        'both_main_radar_and_global_discovery': 31}.get(x['provenance'], 12)
-        return origin_bonus + (10 if x.get('region_in_title') else 0) + (5 if x['radar_overlap'] == 'exact' else 0)
+        # Genuine fresh discoveries should not be displaced by fixed, older
+        # curated programme pages on every batch. Existing Radar remains eligible.
+        origin_bonus = {'curated_high_quality_source': 30, 'global_discovery': 46,
+                        'both_main_radar_and_global_discovery': 48}.get(x['provenance'], 18)
+        role_bonus = {'development_candidate': 12, 'trend_evidence': 10,
+                      'research_output': 5, 'structural_context': -8}.get(x.get('signal_role'), 0)
+        return (origin_bonus + role_bonus + (8 if x.get('region_in_title') else 0)
+                + (5 if x['radar_overlap'] == 'exact' else 0)
+                + (3 if x.get('date') else 0))
     rows.sort(key=lambda r: (-score(r), r['region'], r['theme'], r.get('date', ''), r['document_key']))
     # Balance by actual world group, then country. Never fill one 12-item
     # package with two or three example countries when more are available.
@@ -283,6 +296,26 @@ def plan_queue(radar, config, base=BASE, deep=DEEP, batch_size=12):
             selected.append(groups[group][country].pop(0))
             if not groups[group][country]:
                 del groups[group][country]
+    # Give the reviewer related documents in the same country/theme as
+    # prompts for corroboration or contradiction, not as automatically verified
+    # sources. These do NOT consume package slots and cannot be cited unread.
+    for entry in selected:
+        related = [r for r in rows if r['region'] == entry['region'] and r['theme'] == entry['theme']
+                   and r['document_key'] != entry['document_key']]
+        related.sort(key=lambda r: (r.get('source') == entry.get('source'), -score(r)))
+        seen_urls = {entry['url']}
+        entry['related_unverified_leads'] = []
+        for r in related:
+            if r['url'] in seen_urls:
+                continue
+            seen_urls.add(r['url'])
+            entry['related_unverified_leads'].append({
+                'title': r['title'], 'url': r['url'], 'source': r.get('source', ''),
+                'signal_role': r.get('signal_role', '')})
+            if len(entry['related_unverified_leads']) >= 3:
+                break
+        entry['signal_role'] = entry.get('signal_role') or g.signal_role(entry)
+        entry['investigation_question'] = entry.get('investigation_question') or g.question_for_signal(entry)
     return selected, {'main_radar_eligible': len(main), 'global_discovery_eligible': len(new),
                       'curated_source_eligible': len(curated),
                       'distinct_pending_documents': len(rows), 'previously_reviewed_documents': len(completed),
@@ -314,6 +347,23 @@ archival editions. No guessing from headlines, snippets or metadata. A related
 work is not a substitute for the assigned one. For contested national
 performance claims (particularly China and Russia), identify independent
 verification or explicitly return REVIEW and describe what remains uncertain.
+
+**Three legitimate finding types:** (1) a dated new development, (2) a
+trend established from multiple observations over time, (3) a meaningful
+structural difference in national research/innovation institutions or
+capabilities supported by independent evidence. A programme page, a national
+claim, and a single paper can be valuable *leads*, but none alone establishes
+an actual trend or an achieved outcome. Do not demand a fresh announcement
+for a meaningful structural finding, and do not invent a trend just because
+an institution has existed for years. Ask what has changed, how the approach
+works in practice, and what measurable or independent evidence exists.
+
+The manifest contains a `signal_role`, an `investigation_question`, and
+`related_unverified_leads` where available. These are research prompts ONLY.
+They are not verified statements, not necessarily independent sources, and
+must not be cited without opening and checking the underlying documents.
+Avoid treating an author's affiliation as evidence about the subject country's
+policy or as evidence that a study specifically concerns that country.
 
 For each item, choose:
 - `KEEP`: verified substantive R&I development, evidence-based trend or
@@ -403,10 +453,17 @@ def prepare(base=BASE, deep=DEEP, radar_file=ROOT / 'radar_active.json', config_
         z.writestr('INSTRUCTIONS.md', INSTRUCTIONS)
         z.writestr('manifest.json', json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
         z.writestr('RESULT_TEMPLATE.json', json.dumps(result_template(manifest), ensure_ascii=False, indent=2) + '\n')
-        z.writestr('CANDIDATES.md', '# Source documents assigned to this Global Deep Scan\n\n'
-          + '\n'.join(f'- **{row["region"]} / {row["theme"]}** — [{row["title"]}]({row["url"]}) '
-                      f'({row["source"]}; Radar overlap: {row["radar_overlap"]})'
-                      for row in selected) + '\n')
+        candidates = ['# Source documents assigned to this Global Deep Scan', '',
+                      'The accompanying leads are NOT corroboration until opened and checked.', '']
+        for row in selected:
+            candidates += [f'## {row["region"]} / {row["theme"]}', '',
+                f'- Assigned: [{row["title"]}]({row["url"]}) ({row["source"]}; Radar overlap: {row["radar_overlap"]})',
+                f'- Evidence role (unverified): {row.get("signal_role", "unclassified")}',
+                f'- Investigation: {row.get("investigation_question", "Investigate original evidence and independent support.")}', '']
+            for related in row.get('related_unverified_leads', []):
+                candidates.append(f'  - Related lead to check: [{related["title"]}]({related["url"]}) ({related["source"]})')
+            candidates.append('')
+        z.writestr('CANDIDATES.md', '\n'.join(candidates))
         z.writestr('HOW_TO_RETURN.md', 'Complete actual source checks as required by INSTRUCTIONS.md.\n'
                    'Upload `global_deep_scan_results.json` to `Global R&I Blind Spots/deep_scan/inbox/` '
                    'in the main branch. The import then runs automatically, or use the Deep Scan action with operation `import`.\n'
