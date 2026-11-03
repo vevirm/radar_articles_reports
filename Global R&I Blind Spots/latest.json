@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-11-03T11:30:01.062455+00:00",
-  "mode": "offline_baseline_no_discovery",
-  "new_this_run": 0,
-  "found_this_run": 0,
-  "total_archive": 0,
+  "generated_at": "2026-11-03T13:27:15.675403+00:00",
+  "mode": "manual only",
+  "new_this_run": 3,
+  "found_this_run": 3,
+  "total_archive": 3,
   "regions": [
     "United States",
     "China",
@@ -29,6 +29,15 @@
     "Research funding, institutions and talent": [
       {
         "title": "Is research funding now a lottery? Elite funder ERC swamped by applications",
+        "date": "2026-10-28",
+        "strand": "A",
+        "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1Lbm16RmZYUGk3UVk0ZlY3ZlQwZTRWNjlqOENJYVJoVXNINEc5RTY0OTl2YTN2bFVYMWw1ZXlvSjhVWjVjc0Y2NUFvM3ZjTnNlMnFRYmQ1Qi1fMGhzb29J?oc=5",
+        "matched_terms": [
+          "research funding"
+        ]
+      },
+      {
+        "title": "Is research funding now a lottery? Elite funder ERC swamped by applications A marked rise in submissions for the European Research Council’s grants is pushing down success rates. News | 28 OCT 2026",
         "date": "2026-10-28",
         "strand": "A",
         "url": "https://www.nature.com/articles/d41586-026-03476-3",
@@ -88,15 +97,6 @@
         "url": "https://doi.org/10.2478/eoik-2026-0051",
         "matched_terms": [
           "r&d investment"
-        ]
-      },
-      {
-        "title": "Which job offers may mitigate brain drain? An analysis of Italian PhD students",
-        "date": "2026-08-16",
-        "strand": "A",
-        "url": "https://doi.org/10.1177/09504222261478187",
-        "matched_terms": [
-          "brain drain"
         ]
       }
     ],
@@ -251,7 +251,103 @@
     ]
   },
   "diagnostics": {
-    "main_radar_items_considered": 1118
+    "main_radar_items_considered": 1127,
+    "openalex_requests_ok": 27,
+    "openalex_items_considered": 540,
+    "scholarly_filtered_out": 538,
+    "rss_requests_ok": 2,
+    "hub_requests_ok": 3
   },
-  "items": []
+  "items": [
+    {
+      "title": "Science and Technology Indicators",
+      "date": "",
+      "region": "Russia",
+      "theme": "Research funding, institutions and talent",
+      "url": "https://www.hse.ru/en/primarydata/in",
+      "source": "HSE University science and technology data",
+      "source_kind": "institutional_statistics",
+      "evidence_status": "institutional_claim_unverified",
+      "evidence_note": "Hub headline only, article content and date have NOT been verified.",
+      "abstract_or_context": "",
+      "issue_terms": [
+        "science and technology indicators"
+      ],
+      "query": "https://www.hse.ru/en/primarydata/",
+      "matched_main_radar_titles": [
+        "Is research funding now a lottery? Elite funder ERC swamped by applications",
+        "Is research funding now a lottery? Elite funder ERC swamped by applications A marked rise in submissions for the European Research Council’s grants is pushing down success rates. News | 28 OCT 2026",
+        "Technology transfer and innovation dynamics through clustering analysis of European Union countries"
+      ],
+      "review_status": "needs_article_review",
+      "discovery_method": "trusted institutional hub",
+      "id": "d541f354e3f9c114c697",
+      "main_radar_existing_matches": 0,
+      "blind_spot_priority": "higher",
+      "score": 78,
+      "first_seen": "2026-11-03T13:27:15.675403+00:00",
+      "last_seen": "2026-11-03T13:27:15.675403+00:00",
+      "new_this_run": true
+    },
+    {
+      "title": "Vulnerabilities and agency of small technologically advanced states: Finland navigating Sino-US strategic technology competition",
+      "date": "2026-11-01",
+      "region": "United States",
+      "theme": "Technology leadership and industrial capacity",
+      "url": "https://doi.org/10.1080/09512748.2026.2749553",
+      "source": "The Pacific Review",
+      "source_kind": "trusted_scholarly_venue",
+      "evidence_status": "candidate_not_peer_review_verified",
+      "evidence_note": "Journal appears on the main Radar trusted-venue list; article-level peer review and claims require checking.",
+      "abstract_or_context": "This article explores how a small technologically advanced state, exemplified by Finland, seeks to maintain agency and manage security risks in Sino-US strategic technology competition, and what future options experts envision for it. The US and China are presently the only ‘geoeconomic great powers’ with competences across four dimensions: investment leverage, supply chains, critical technologies, and technology standards. Given its close security ties to the United States, Finland is expected to align with it when faced with a choice between technological ecosystems. However, Finland has also been a strong proponent of open markets, and mai",
+      "issue_terms": [
+        "critical technologies"
+      ],
+      "query": "United States quantum research innovation",
+      "matched_main_radar_titles": [
+        "Quantum: 12.9% of technology signals are already at operational level",
+        "From Sovereignty to Managed Interdependence: A Forward-Looking Agenda for EU Quantum Policy",
+        "Scaling artificial intelligence: Diffusion speed and enterprise-size polarisation across europe"
+      ],
+      "review_status": "needs_review",
+      "discovery_method": "OpenAlex metadata",
+      "id": "6e82afc59fad131a6d5a",
+      "main_radar_existing_matches": 11,
+      "blind_spot_priority": "normal",
+      "score": 58,
+      "first_seen": "2026-11-03T13:27:15.675403+00:00",
+      "last_seen": "2026-11-03T13:27:15.675403+00:00",
+      "new_this_run": true
+    },
+    {
+      "title": "Podcast: New quantum-enabled materials",
+      "date": "",
+      "region": "United States",
+      "theme": "Technology leadership and industrial capacity",
+      "url": "https://www.nsf.gov/news/podcast-new-quantum-enabled-materials",
+      "source": "US National Science Foundation",
+      "source_kind": "official_primary",
+      "evidence_status": "official_claim_unverified",
+      "evidence_note": "Hub headline only, article content and date have NOT been verified.",
+      "abstract_or_context": "",
+      "issue_terms": [
+        "quantum"
+      ],
+      "query": "https://www.nsf.gov/news",
+      "matched_main_radar_titles": [
+        "Quantum: 12.9% of technology signals are already at operational level",
+        "From Sovereignty to Managed Interdependence: A Forward-Looking Agenda for EU Quantum Policy",
+        "Scaling artificial intelligence: Diffusion speed and enterprise-size polarisation across europe"
+      ],
+      "review_status": "needs_article_review",
+      "discovery_method": "trusted institutional hub",
+      "id": "8f814739bc2ef075d1c3",
+      "main_radar_existing_matches": 11,
+      "blind_spot_priority": "normal",
+      "score": 48,
+      "first_seen": "2026-11-03T13:27:15.675403+00:00",
+      "last_seen": "2026-11-03T13:27:15.675403+00:00",
+      "new_this_run": true
+    }
+  ]
 }
