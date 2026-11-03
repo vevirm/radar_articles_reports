@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **3683** (Main **1826** + Historical **1857**)
-- Automatic queue still needing V2 verification: **58** (Main **19** + Historical **39**)
-- Currently assigned to workers: **58** (Main **19** + Historical **39**)
+- Authoritative V2 verified: **3704** (Main **1843** + Historical **1861**)
+- Automatic queue still needing V2 verification: **37** (Main **2** + Historical **35**)
+- Currently assigned to workers: **37** (Main **2** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **45**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,17 +16,10 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261103T081028Z-d065bf921a52`
-- Assigned unresolved records: **23**
-  1. `link:https://era.gv.at/news-items/ep-itre-draft-report-on-horizon-europe-2028-2034-is-published/` — EP ITRE Draft Report on Horizon Europe (2028-2034) is published
-  2. `link:https://www.ri.se/en/cybersecurity/story/the-cybersecurity-act-requires-more-than-just-knowledge-on-paper` — The Cybersecurity Act requires more than just knowledge on paper | RISE
-  3. `link:https://doi.org/10.1007/s13563-026-00720-0` — From global rare earth resources to the EU supply security: An overview on primary and alternative resources and strategic pathways
-  4. `link:https://doi.org/10.1093/eurpub/ckag169.088` — H.2. Scientific session: Looking beyond tomorrow: Recent Applications of Public Health Foresight to Inform Policy in Europe
-  5. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxPNXlwTzh4X1FnVEk2OWt2aTlqQlo0eU9BeFlQY1hwQkJOcXliLWtFMl9XZHM4LTl1NzZiZElySXZMc0F0TVhVNV9sWGdfanJSWXBUbEZkSlYyUHl6WjJ0YXF1SC1HMW0xS0NiT0VRLS00RVlIUmgwZE5nZU9hcktWZUJRZldRaGZsUHJzVlZHMFBJaWNrVDFZZzVnM0l3a0MxVlRCNl8zRUJiTElsQXZZ?oc=5` — Top Horizon Europe adviser calls out EU leaders’ contradictions
-  6. `link:https://news.google.com/rss/articles/CBMiwAFBVV95cUxORUVoUGZwSlh2a2RkeTFJSTRya1gzSmg1YnJ4WDFwZ0E5OUljbTQwQUd5S2hxZV94Tjl1ZkNOc0dlLVlUMHI5NlNRalYwb2JRZUp5dlJXbURyallKbmdMSC1QOURrVjdrbVpCQTFacVgybjlQSHRKM3ZCei1sZHBKYTAxeVQtYWMtOHkwZWRYOVczS0tsNm1ENXVvcENlOXItQ2RzajdhNlByVkJ1TFVnZWpMYi1TODVPTXhKTU45Vk0?oc=5` — Funding Radar: Five Horizon Europe partnership calls open this November
-  7. `link:https://news.google.com/rss/articles/CBMizAFBVV95cUxOUDhCYl90VEJBbHVRaFI5ai1wTDJwNm5Ra1plN1AzU1dVYmpiaDNXUmpRRnNWc0dMYzl5c0Z1WDE5TTFJZ2xmS2V3RUFSb2xnUjVIV2ZvTDhNRzhVdVZLM29BSmtWNTVqVmFMV0R1bkZmcGNnN0pGN2xyOXhjSGlUdjNMbDIwdW5Ld3RNTlFzZEg4el9mc2JKSVkzbGxNekdZcXpTUnhBcjl4cnFMbHNkcV9zQnR1akEwalBhcDV1aTJFVV9pS0VhT3VaaWs?oc=5` — Data Corner: The relentless decline in EIC Pathfinder success rates
-  8. `link:https://news.google.com/rss/articles/CBMivgFBVV95cUxOQ3lYUEhVdzVwaGpuVmlIamNiNlpVbzNPVDV0LTl3cnFBaFJSUWpYVWFUM3BmazZJYWJ4cE5WanVNMVotNERCN0h4YURlS090a1VsWmhaa2VUaFMwREV6XzZ4am9aZi1sTkFjVEViXzBUdExiLVlXd2tvRWNtaVRKTTVZOXNXUHpNNjZvQ2xkV1VGdzZJeXlmTEc2Wkc4SG1QWkQ0aTV6ZkdvdVVoTG54dERNZmR4N2gyck0wRk93?oc=5` — Scandal-hit EU innovation agency disputes auditors’ finding that €8.7m may be unrecoverable
-  - … plus 15 more in the package manifest
+- Current package: `worker-a-20261103T084427Z-8f3ee9bc572e`
+- Assigned unresolved records: **2**
+  1. `link:https://doi.org/10.1080/13563467.2026.2751102` — Globalization unravelling? ASML and the geopolitics of Europe-China tech decoupling — recovery attempt 2/3
+  2. `link:https://news.google.com/rss/articles/CBMi0AFBVV95cUxNaWNQQXpwbEFZYTU1emZVbnJaeFl5Z3VwQnhWOVVIV1hlYmRkQzNjRC1WcG5RMGJDYnl4a2ZfRENsUE9QUlhVRTRLMThMOU1KRzU4ZXFyRGxKeU1nT2lTb3k4NGg1SXdsdUtLZ0k0Mkt6M3Zhc1ZpRDNOUzRWOXZZVzMwVjd3UGxWX2l0UkgtYlAwYlJPNEVVU0RreG9oemZ3a1BwMFBaNl9LX1FaS1VtQjRLaTI0V3Z6Rlo4MzVhZEFmN3V2WGFCcll0Mmh1WkQ3?oc=5` — Research leaders welcome ‘strong’ Parliament stance on FP10 — recovery attempt 2/3
 
 ### Worker B
 - Current package: `worker-b-20261029T085853Z-64145a2dbff2`
