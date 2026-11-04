@@ -303,6 +303,31 @@ class GlobalDeepScanTests(unittest.TestCase):
         self.assertFalse((self.deep / 'verified_findings.json').exists())
         self.assertEqual(len(list(inbox.glob('*.json'))), 2)
 
+    def test_arbitrary_filename_imports_by_json_package_id(self):
+        inbox = self.deep / 'inbox'
+        inbox.mkdir()
+        (self.deep / 'pending_manifest.json').write_text(json.dumps(
+            self._sample_manifest('gri-arbitrary', 'a', 'docA', 'China')))
+        arbitrary = inbox / 'deep_scan_results (16).json'
+        arbitrary.write_text(json.dumps(self._sample_results('gri-arbitrary', 'a')))
+        self.assertEqual(d.import_inbox(self.deep)['imported'], 1)
+        self.assertFalse(arbitrary.exists())
+        self.assertEqual(len(list((self.deep / 'processed_inbox').glob('*.json'))), 1)
+        self.assertEqual(d.g.load_json(self.deep / 'last_import.json')['package_id'], 'gri-arbitrary')
+
+    def test_unrelated_json_does_not_block_valid_filename_agnostic_result(self):
+        inbox = self.deep / 'inbox'
+        inbox.mkdir()
+        (self.deep / 'pending_manifest.json').write_text(json.dumps(
+            self._sample_manifest('gri-arbitrary', 'a', 'docA', 'China')))
+        unrelated = inbox / 'notes.json'
+        unrelated.write_text(json.dumps({'kind': 'some-other-document'}))
+        result = inbox / 'anything.JSON'
+        result.write_text(json.dumps(self._sample_results('gri-arbitrary', 'a')))
+        self.assertEqual(d.import_inbox(self.deep), {'imported': 1, 'archived_old': 0, 'unmatched': 1})
+        self.assertTrue(unrelated.exists())
+        self.assertFalse(result.exists())
+
     def test_scanner_manual_only_deep_scan_push_is_import_only(self):
         scan = (ROOT / '.github/workflows/global-ri-blind-spots.yml').read_text()
         deep = (ROOT / '.github/workflows/global-ri-deep-scan-auto.yml').read_text()
@@ -311,7 +336,7 @@ class GlobalDeepScanTests(unittest.TestCase):
             self.assertNotIn('  schedule:', text)
             self.assertNotIn('  workflow_run:', text)
         self.assertNotIn('  push:', scan)
-        self.assertIn("'Global R&I Blind Spots/deep_scan/inbox/global_deep_scan_results*.json'", deep)
+        self.assertIn("'Global R&I Blind Spots/deep_scan/inbox/*.json'", deep)
         self.assertIn('import-inbox', deep)
         self.assertIn('processed_inbox', deep)
         self.assertNotIn('copilot-requests:', deep)
