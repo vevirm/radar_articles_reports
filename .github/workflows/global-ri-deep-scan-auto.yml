@@ -2,7 +2,7 @@ name: Global R&I Deep Scan — LLM Package / Import
 
 # This REPLACES the previously installed automatic-AI Deep Scan workflow.
 # Research discovery never runs on push. A push can only validate the reviewed
-# JSON files with the supported prefix in the Global inbox below.
+# JSON results placed in the separate Global inbox below.
 on:
   workflow_dispatch:
     inputs:
@@ -22,7 +22,7 @@ on:
     branches:
       - main
     paths:
-      - 'Global R&I Blind Spots/deep_scan/inbox/global_deep_scan_results*.json'
+      - 'Global R&I Blind Spots/deep_scan/inbox/*.json'
 
 permissions:
   contents: read
@@ -77,7 +77,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          # All supported filenames are accepted, including Windows '(1)' duplicates.
+          # Any JSON filename is accepted; schema and package ID are checked inside.
           # Package IDs are checked inside the JSON; previous imported files are
           # archived and removed from inbox only after proof of a successful import.
           python scripts/global_blind_spots_deep_scan.py import-inbox
@@ -148,12 +148,12 @@ jobs:
           ## Global R&I source-review package ready
           Download **global-ri-llm-review-package** from this run's Artifacts.
           Unzip once if needed, then give **global_ri_llm_package.zip** to a browsing-capable LLM.
-          Ask it to follow `INSTRUCTIONS.md` and return a JSON results file with the package ID in the filename.
-          Upload the JSON (preferably named `global_deep_scan_results_<package-id>.json`) to
+          Ask it to follow `INSTRUCTIONS.md` and return a JSON results file with the package ID inside the JSON.
+          Upload the JSON (any filename) to
           `Global R&I Blind Spots/deep_scan/inbox/` on `main`. Windows `(1)` duplicate
           filenames are also supported. Successfully processed inbox files are
           moved automatically into `deep_scan/processed_inbox/`.
-          The import runs automatically on that file upload, and accepts only evidence-backed `KEEP` records.
+          The import runs automatically on any JSON upload to the Global inbox, and accepts only evidence-backed `KEEP` records.
           EOF
           else
             if [[ -f 'Global R&I Blind Spots/deep_scan/last_import.json' ]]; then
