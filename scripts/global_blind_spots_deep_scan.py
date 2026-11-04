@@ -646,14 +646,12 @@ def import_results(results_path, deep=DEEP):
 
 
 def is_inbox_result_file(path):
-    """Accept legacy filenames, Windows duplicates and package-specific names.
+    """Any regular JSON file in the dedicated Global inbox is a potential result.
 
-    Filename is never trusted as a package identifier; the JSON package_id
-    must match the pending manifest or a completed/archived review.
+    Its filename has no bearing on acceptance. The JSON schema, package ID,
+    candidate IDs and source-review validation govern actual import instead.
     """
-    name = path.name
-    return (path.is_file() and len(name) <= 180
-            and name.startswith('global_deep_scan_results') and name.endswith('.json'))
+    return path.is_file() and path.suffix.lower() == '.json'
 
 
 def reviewed_input_already_stored(results, deep):
@@ -709,7 +707,7 @@ def archive_imported_upload(path, results, deep):
 
 
 def import_inbox(deep=DEEP):
-    """Import newest pending package from ANY matching inbox filename.
+    """Import newest pending package from ANY JSON filename in the Global inbox.
 
     1. Old, already-imported uploads are moved to processed_inbox safely.
     2. A current-package result is validated and imported before being moved.
@@ -718,9 +716,9 @@ def import_inbox(deep=DEEP):
        valid current package. No manual rename or overwrite is required.
     """
     inbox = deep / 'inbox'
-    files = sorted((p for p in inbox.glob('*.json') if is_inbox_result_file(p))) if inbox.exists() else []
+    files = sorted((p for p in inbox.iterdir() if is_inbox_result_file(p))) if inbox.exists() else []
     if not files:
-        print('No Global LLM result JSON files in inbox; nothing to import.')
+        print('No JSON files in Global LLM inbox; nothing to import.')
         return {'imported': 0, 'archived_old': 0, 'unmatched': 0}
     manifest_path = deep / 'pending_manifest.json'
     pending = g.load_json(manifest_path) if manifest_path.exists() else {}
