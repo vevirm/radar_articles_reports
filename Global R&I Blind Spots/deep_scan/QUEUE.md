@@ -1,18 +1,18 @@
 # Global R&I Deep Scan — pending verification
 
-Package: `gri-36192e872b91170a386fa2c8`. 12 documents. **These are unverified candidates**, not confirmed findings.
+Package: `gri-4c158a4e11269884a660951e`. 12 documents. **These are unverified candidates**, not confirmed findings.
 
 | Country | Theme | Work | Already in Radar? |
 |---|---|---|---|
-| China | Climate, energy and environmental research | [Cold comfort: What China can teach Europe about adaptation – European Council on Foreign Relations](https://ecfr.eu/article/cold-comfort-what-china-can-teach-europe-about-adaptation/) | Yes |
-| Russia | Research funding, institutions and talent | [UNESCO Institute for Statistics 2026 global R&D data release](https://www.uis.unesco.org/en/news/2026-rd-data-release) | Not identified |
-| United States | Research funding, institutions and talent | [Survey of Federal Funds for Research and Development 2024–2025 (Volume 74)](https://www.ncses.nsf.gov/surveys/federal-funds-research-development/2024-2025) | Not identified |
-| United Kingdom | Research funding, institutions and talent | [21 October 2026 UKRI-backed fellowships support emerging research talent EPSRC](https://www.ukri.org/news/ukri-backed-fellowships-support-emerging-research-talent/) | Not identified |
-| Brazil | Research security and international cooperation | [FAPESP Week highlights increased scientific collaboration between Brazil and the Netherlands in recent years](https://agencia.fapesp.br/fapesp-week-highlights-increased-scientific-collaboration-between-brazil-and-the-netherlands-in-recent-years/59498) | Not identified |
-| South Africa | Health, biotechnology and life sciences | [NRF-SAASTA Amplifies Health Research Through Digital Media](https://www.nrf.ac.za/nrf-saasta-amplifies-health-research-through-digital-media/) | Not identified |
-| India | Innovation systems, infrastructure and knowledge transfer | [WIPO Global Innovation Index 2026 country profile and innovation indicators — India](https://www.wipo.int/en/web/global-innovation-index/2026/index) | Not identified |
-| Australia | Innovation systems, infrastructure and knowledge transfer | [WIPO Global Innovation Index 2026 country profile and innovation indicators — Australia](https://www.wipo.int/en/web/global-innovation-index/2026/index) | Not identified |
-| Vietnam | Research security and international cooperation | [EU and Vietnam deepen cooperation in science, technology and innovation](https://era.gv.at/news-items/eu-and-vietnam-deepen-cooperation-in-science-and-innovation/) | Yes |
-| China | Innovation systems, infrastructure and knowledge transfer | [China’s dual circulation strategy and its impact on European industry: the case of the electric vehicle](https://doi.org/10.1007/s10308-026-00785-0) | Yes |
-| Ukraine | Innovation systems, infrastructure and knowledge transfer | [ALLEA Contributes to High-Level Discussions on the Role of Science in Ukraine’s Recovery](https://allea.org/allea-contributes-to-high-level-discussions-on-the-role-of-science-in-ukraines-recovery/) | Yes |
-| United States | Research funding, institutions and talent | [OECD Main Science and Technology Indicators — international R&D funding and personnel](https://www.oecd.org/en/data/datasets/main-science-and-technology-indicators.html) | Not identified |
+| China | Research funding, institutions and talent | [Governing the de-risking agenda: policy instrument mixes in Scandinavian research collaboration with China](https://doi.org/10.1080/20004508.2026.2648883) | Yes |
+| Russia | Technology leadership and industrial capacity | [Artificial Intelligence and Foreign Information Manipulation: Chinese and Russian approaches](https://www.hybridcoe.fi/wp-content/uploads/2026/03/Artificial-Intelligence-and-Foreign-Information-Manipulation-Hybrid-CoE-Paper-29.pdf) | Yes |
+| United States | Technology leadership and industrial capacity | [WIPO Global Innovation Index 2026 — US innovation inputs and output indicators](https://www.wipo.int/en/web/global-innovation-index/2026/index) | Not identified |
+| United Kingdom | Technology leadership and industrial capacity | [16 October 2026 UKRI backs quantum breakthroughs supported by training Innovate UK](https://www.ukri.org/news/ukri-backs-quantum-breakthroughs-supported-by-training/) | Not identified |
+| Brazil | Research security and international cooperation | [FAPESP and NWO renew agreement and plan to expand scientific cooperation](https://agencia.fapesp.br/fapesp-and-nwo-renew-agreement-and-plan-to-expand-scientific-cooperation/59496) | Not identified |
+| South Africa | Research funding, institutions and talent | [Capacity-building workshops are broadening participation in biodiversity research funding](https://www.nrf.ac.za/capacity-building-workshops-are-broadening-participation-in-biodiversity-research-funding/) | Not identified |
+| India | Technology leadership and industrial capacity | [No one builds alone: The geopolitics of AI chips](https://doi.org/10.38105/spr.vf5ks0gobi) | Yes |
+| China | Research funding, institutions and talent | [Between Weltoffenheit and securitisation: Germany’s partial securitisation of science policy towards the People’s Republic of China](https://doi.org/10.1080/23745118.2026.2726796) | Yes |
+| Ukraine | Innovation systems, infrastructure and knowledge transfer | [Digital architecture of information governance for education and research in Ukraine](https://doi.org/10.46299/j.isjea.20260504.07) | Yes |
+| United States | Technology leadership and industrial capacity | [Global Fusion Energy Trends — Report from the F4E Fusion Observatory: Funding • Performance • Research • Innovation — A comparative Analysis of China, EU, Japan, UK, and the USA](https://fusionforenergy.europa.eu/wp-content/uploads/2026/07/F4E_Observatory-Global_Fusion_Energy_Trends_1st_Edition.pdf) | Yes |
+| Norway | Research funding, institutions and talent | [Governing the de-risking agenda: policy instrument mixes in Scandinavian research collaboration with China](https://doi.org/10.1080/20004508.2026.2648883) | Yes |
+| Mexico | Research security and international cooperation | [The Fourth Dimension of Science Diplomacy](https://doi.org/10.56042/sd.v10i1.37423) | Not identified |
