@@ -6,9 +6,9 @@ It exists so a new chat or operator can see what has already been verified, what
 Scheduling policy: preserve existing worker reservations; fill new slots with fresh **Main Radar first**; then use spare capacity for **Historical Radar**. Access-recovery retries are bounded and throttled so difficult works cannot consume every run.
 A validated `defer` counts as one genuine recovery pass. After **3** unsuccessful passes, the work leaves the automatic queue and enters **Hands-on verification needed**.
 
-- Authoritative V2 verified: **3704** (Main **1843** + Historical **1861**)
-- Automatic queue still needing V2 verification: **69** (Main **21** + Historical **48**)
-- Currently assigned to workers: **69** (Main **21** + Historical **48**)
+- Authoritative V2 verified: **3737** (Main **1863** + Historical **1874**)
+- Automatic queue still needing V2 verification: **36** (Main **1** + Historical **35**)
+- Currently assigned to workers: **36** (Main **1** + Historical **35**)
 - Bounded access-recovery retries still eligible: **0**
 - Hands-on verification needed: **45**
 - Automatic queue pending and not yet assigned: **0**
@@ -16,17 +16,9 @@ A validated `defer` counts as one genuine recovery pass. After **3** unsuccessfu
 ## Worker lanes
 
 ### Worker A
-- Current package: `worker-a-20261104T071058Z-6594f231a7b5`
-- Assigned unresolved records: **34**
-  1. `link:https://news.google.com/rss/articles/CBMiX0FVX3lxTE1Lbm16RmZYUGk3UVk0ZlY3ZlQwZTRWNjlqOENJYVJoVXNINEc5RTY0OTl2YTN2bFVYMWw1ZXlvSjhVWjVjc0Y2NUFvM3ZjTnNlMnFRYmQ1Qi1fMGhzb29J?oc=5` — Is research funding now a lottery? Elite funder ERC swamped by applications
-  2. `link:https://doi.org/10.1016/j.iref.2026.105868` — Navigating the interdependence of structural constraints in European growth (1995-2024)
-  3. `link:https://ecfr.eu/wp-content/uploads/2026/11/Pulling-together-A-European-partnership-model-for-decarbonisation.pdf` — Pulling together: A European partnership model for decarbonisation – European Council on Foreign Relations
-  4. `link:https://www.earto.eu/publication/joint-declaration-for-a-bold-fp10/` — Joint Declaration for a Bold FP10
-  5. `link:https://www.earto.eu/publication/earto-position-paper-on-accelerating-ai-adoption-in-healthcare/` — EARTO Position Paper on Accelerating AI Adoption in Healthcare
-  6. `link:https://www.unesco.org/en/articles/number-students-higher-education-triples-across-arab-states-graduate-employability-remains-challenge` — Number of students in higher education triples across the Arab States
-  7. `link:https://doi.org/10.1016/j.futures.2026.103934` — Machines, minds, and the future of work: GenAI and future work imaginaries
-  8. `link:https://news.google.com/rss/articles/CBMiuwFBVV95cUxPS3A5SlVKWVF6XzVHRldMWS1qd1FqWV9sVnF6RFJiMTIzd18wZUgtc1VtOXJabjY3LThCR045bFBrVzcyUmxJUDFWajYtX1l4RkVxY0xHTUZlRUFlR2dkcmtqOXI5MzIxMS16VEVBSE1JcExxbkJrVkk1S3NGa2g5WjhVZEJXczA3S0NUOVFudElESjBaMExucVBLQzRCLUJrVU9icU9fSkkyb1FoR2NfT29hT2JSbmhaMW9Z?oc=5` — Google AI chatbot's use of press items may infringe copyright rules, EU court adviser says
-  - … plus 26 more in the package manifest
+- Current package: `worker-a-20261104T080154Z-b5e2a5c92ec1`
+- Assigned unresolved records: **1**
+  1. `link:https://news.google.com/rss/articles/CBMirwFBVV95cUxQR2QtbGZUX3dUM0h5a2hVaWNWLXhfTXYxSlJxMDN5aVFUY1FnWjRFMDFxenZ3YjZ0bWJYamVYWEFkQW5RLUN6M3huWkp1LVg5UkViMXlVTjQtU3FEb2Z5MExoS0lnVFo3LVVSVk5GZlJIT3J2a242M3dCUl9fZHVyWXgybS1jZzlaWVNwdy1ZbWRlb3V5bzJfMnpINlBmOWNKYjBMblZ5R3VuR2g0SUJj?oc=5` — European scientists face uncertainty as pandemic recovery fund winds down - Science | AAAS — recovery attempt 2/3
 
 ### Worker B
 - Current package: `worker-b-20261029T085853Z-64145a2dbff2`
