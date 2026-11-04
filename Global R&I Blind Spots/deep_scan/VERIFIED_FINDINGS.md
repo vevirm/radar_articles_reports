@@ -1,8 +1,112 @@
 # Global R&I Deep Scan — verified findings
 
-Imported: 2026-11-03T17:41:04.642495+00:00. **15 verified KEEP** findings, **6 REVIEW**, **3 DROP**.
+Imported: 2026-11-04T09:58:48.237980+00:00. **21 verified KEEP** findings, **9 REVIEW**, **6 DROP**.
 
 A KEEP records a source-checked reviewer assessment; the GitHub importer validates evidence structure but does not itself browse or certify truth.
+
+## Governing the de-risking agenda: policy instrument mixes in Scandinavian research collaboration with China
+
+**Norway · Research funding, institutions and talent** | 2026-03-28 | confidence high
+
+**Verified finding:** Norway has a layered/negotiated research-security governance model balancing cooperation with China and risk mitigation. National guidelines, a China Round Table and specialised export-licensing body DEKSA coexist rather than imposing a single university rulebook.
+
+**Evidence:** [Governing the de-risking agenda: policy instrument mixes in Scandinavian research collaboration with China — Norway case](https://doi.org/10.1080/20004508.2026.2648883) — Full publisher-indexed content: §§4.1–4.2 methods; §5.2 Norway (enabling instruments, replacement, reinforcement, layering); §6 Discussion; §7 Conclusions..
+
+**Independent check:** Norwegian Directorate for Higher Education and Skills independently documents qualitative researcher/institutional experiences under geopolitical tensions and provides operational guidance on export control and responsible cooperation. This corroborates actual national institutional practice, not numerical effectiveness. [1](https://hkdir.no/en/reports-ongoing-surveys-and-statistics/geopolitical-tension-and-international-knowledge-collaboration-a-qualitative-study-of-experiences-in-norwegian-higher-education-and-research) [2](https://hkdir.no/en/guidelines-and-tools-for-responsible-international-knowledge-cooperation/international-research-and-innovation-cooperation/export-control-of-technology-transfer-and-international-sanctions)
+
+**Why global R&I matters:** A meaningful non-EU European research-security governance difference: negotiated, sector-linked steering can preserve academic flexibility yet create local uncertainty and unequal burden. Relevant comparator for EU member states designing China-related research safeguards.
+
+**Main Radar comparison (extends_main_radar):** Confirms and extends the main Radar interpretation with named Norwegian operational mechanisms and independent national institution evidence; the same DOI also appears under China but should not be treated as Chinese domestic R&I policy.
+
+**Limitations:** Comparative policy-instrument analysis using documents and stakeholder interviews is illustrative, not causally identified; only three Scandinavian countries studied, and expert responses may not capture all HEIs. Some official documents are implementation guidance rather than audited outcomes.
+
+- Existing main Radar A: [Governing the de-risking agenda: policy instrument mixes in Scandinavian research collaboration with China](https://doi.org/10.1080/20004508.2026.2648883)
+
+## Capacity-building workshops are broadening participation in biodiversity research funding
+
+**South Africa · Research funding, institutions and talent** | 2026-10-30 | confidence medium
+
+**Verified finding:** Historically disadvantaged institution (HDI) share of applications to the biodiversity FBIP second funding call rose from 3.7% in 2025 to 19.1% in 2026, while all applications increased 27→47 (+74.1%). This is a measurable one-year participation shift, not a proven long-term trend or funding-success effect.
+
+**Evidence:** [Capacity-building workshops are broadening participation in biodiversity research funding](https://www.nrf.ac.za/capacity-building-workshops-are-broadening-participation-in-biodiversity-research-funding/?hilite=Education+Research+South+Africa) — NRF article 30 October 2026: introduction, Responding to a participation gap, A regional approach to reach more researchers; official government NRF-awards speech 3 September 2026..
+
+**Independent check:** Different government domain corroborates the existence and salience of research-participation inequity, not the exact FBIP application counts or causal effect of workshops. Treat 3.7% and 19.1% as first-party programme counts, unindependently audited. [1](https://www.gov.za/news/speeches/minister-blade-nzimande-2026-national-research-foundation-awards-03-sep-2026)
+
+**Why global R&I matters:** Targeted application-support workshops may lower institutional application barriers in a nationally unequal research-funding system. The finding is an early programme participation outcome and a testable inclusion mechanism.
+
+**Main Radar comparison (not_in_main_radar):** Not identified in main Radar. Adds a measurable South African research-participation policy signal without claiming systemic funding equality has been achieved.
+
+**Limitations:** Small sample (27 to 47 total proposals), share shifts from a very low base, only two annual second-call observations and no comparison group; applications are not successful funding awards.
+
+
+## WIPO Global Innovation Index 2026 — US innovation inputs and output indicators
+
+**United States · Technology leadership and industrial capacity** | 2026-09-29 | confidence high
+
+**Verified finding:** The United States ranks 3rd in WIPO GII 2026 (also 3rd in 2024 and 2025), while its independently measured business R&D rose to US$765.1bn in 2024 (+6.0% from 2023). This supports a durable high-investment innovation system, not an improving overall GII rank.
+
+**Evidence:** [WIPO Global Innovation Index 2026 — United States indicators and innovation position](https://www.wipo.int/en/web/global-innovation-index/2026/index) — WIPO GII 2026 landing page, top-10 rank and country profile; WIPO GII 2024/2025 rank; NCSES BERD 2024 Table 1 and survey-description section..
+
+**Independent check:** NCSES is independent of WIPO and uses actual US enterprise-survey spending rather than composite country ranks; it corroborates the scale and business orientation, not WIPO’s ranking methodology. WIPO 2025 verifies that overall rank did not improve. [1](https://www.ncses.nsf.gov/pubs/nsf27301) [2](https://www.ncses.nsf.gov/pubs/nsbsep20261/overview)
+
+**Why global R&I matters:** Large commercial R&D investment and deep private-sector financing create industrial translation capacity; the GII composite captures multiple system pillars but cannot establish causation or single-technology superiority.
+
+**Main Radar comparison (not_in_main_radar):** Not identified in the supplied main Radar. Adds independently measured innovation-system context, correcting any narrative that 2026 represents a US upward move in overall GII placement.
+
+**Limitations:** Composite rank sensitive to definitions, missing data and changing indicators; year-to-year ordinal rank is not causal. 2024 business R&D is historical data released October 2026, not 2026 R&D spending, and US dollars are nominal.
+
+
+## FAPESP and NWO renew agreement and plan to expand scientific cooperation
+
+**Brazil · Research security and international cooperation** | 2026-10-30 | confidence medium
+
+**Verified finding:** São Paulo’s FAPESP and the Netherlands’ NWO reported signing an extension on 26 October 2026 to maintain joint calls through 2028. The underlying bilateral co-funding mechanism is independently documented by NWO; planned international centres and a possible new 2028 memorandum are not yet executed.
+
+**Evidence:** [FAPESP and NWO renew agreement and plan to expand scientific cooperation](https://agencia.fapesp.br/fapesp-and-nwo-renew-agreement-and-plan-to-expand-scientific-cooperation/59496) — FAPESP article 30 October: first three paragraphs and Long-term partnership; NWO governing board minutes 24 May 2023, agenda h, allocation of €1.5m for Bilateraal Partnerschap Nederland–Brazilië; NWO DUT Call 2024 national annex pp. 61–62..
+
+**Independent check:** Strong independent confirmation of a substantive historical FAPESP–NWO bilateral budget and a standing São Paulo international cofunding mechanism on nwo.nl. 2026 amendment date and terms are still asserted by one party and remain unaudited; independent NWO 2026 amendment text was not located. [1](https://www.nwo.nl/sites/nwo/files/media-files/notulen_rvb_2023_2024-1_0.pdf) [2](https://www.nwo.nl/sites/nwo/files/media-files/dut-2024-call-text-version-1.1.pdf)
+
+**Why global R&I matters:** Subnational Brazilian research funder extends a functioning bilateral co-funding channel into future years, enabling internationally reviewed calls across energy, biodiversity, AI and health; relevant to Europe–Latin America science diplomacy and thematic funding interoperability.
+
+**Main Radar comparison (not_in_main_radar):** Not identified in main Radar. Adds Brazil/São Paulo–Netherlands structural research-funding cooperation; potential research centres remain proposals, not achieved new institutions.
+
+**Limitations:** 2026 extension sourced to FAPESP self-report; NWO independent 2023/2024 records support the established funding mechanism, not the exact 2026 signed wording. São Paulo is not representative of all Brazilian federal research funding.
+
+
+## Artificial Intelligence and Foreign Information Manipulation: Chinese and Russian approaches
+
+**Russia · Technology leadership and industrial capacity** | 2026-03-31 | confidence high
+
+**Verified finding:** Russia-linked influence operators are using commercially available generative-AI tools to lower production costs and scale workflows, while indigenous frontier AI capabilities remain comparatively constrained; observed adoption is not proof of AI-technology leadership.
+
+**Evidence:** [Artificial Intelligence and Foreign Information Manipulation: Chinese and Russian approaches](https://www.hybridcoe.fi/wp-content/uploads/2026/03/Artificial-Intelligence-and-Foreign-Information-Manipulation-Hybrid-CoE-Paper-29.pdf) — PDF page 5 Summary; Russia-specific analysis pp. approximately 19–26; conclusions. Cross-check OpenAI 8 October 2026 observed Russian operation..
+
+**Independent check:** Independent OpenAI first-hand platform enforcement dated 8 October 2026 confirms concrete Russian AI-assisted workflows; EEAS 2026 threat reporting supports broader hybrid-threat context. Neither document measures Russian domestic model-training capacity, and EEAS cross-country aggregate figures must not be assigned solely to Russia. [1](https://openai.com/index/disrupting-ai-enabled-false-front-operations/) [2](https://www.eeas.europa.eu/sites/default/files/2026/documents/EEAS%204th%20Threat%20Report_web%20version_1.pdf)
+
+**Why global R&I matters:** A distinctive asymmetric R&I pattern: operational adoption of externally available AI can advance despite frontier computing, model-development and hardware constraints. A technology-adoption / security capability finding, NOT proof Russia leads AI R&D.
+
+**Main Radar comparison (confirms_main_radar):** Confirms the Radar’s documented divergence between Russian AI-enabled influence operations and technical-industrial AI capacity; refines claims about operational scale and validation.
+
+**Limitations:** Hybrid CoE blends case-study literature and documented incidents; evidence is incomplete and covert operations are selected for detection; outcome/reach estimates are not population-wide. OpenAI observes activity on its own platform, not total Russian ecosystem.
+
+- Existing main Radar A: [Artificial Intelligence and Foreign Information Manipulation: Chinese and Russian approaches](https://www.hybridcoe.fi/wp-content/uploads/2026/03/Artificial-Intelligence-and-Foreign-Information-Manipulation-Hybrid-CoE-Paper-29.pdf)
+
+## 16 October 2026 UKRI backs quantum breakthroughs supported by training Innovate UK
+
+**United Kingdom · Technology leadership and industrial capacity** | 2026-10-16 | confidence high
+
+**Verified finding:** The UK announced a £50m commercial quantum-use project package, a separate £20m quantum-network capability programme and an £8m QuEST-apprenticeship expansion; these are 2026 public commitments, NOT independently demonstrated deployed capabilities.
+
+**Evidence:** [UKRI backs quantum breakthroughs supported by training](https://www.ukri.org/news/ukri-backs-quantum-breakthroughs-supported-by-training/) — UKRI 16 October 2026: sections Supporting next generation systems; World-leading quantum sensing; Increasing quantum apprenticeship support. GOV.UK 17 March 2026 quantum package..
+
+**Independent check:** March UK quantum policy and October UK quantum-for-space technology roadmap independently show a longer-term national translation and skills strategy. They DO NOT independently audit UKRI award disbursements or field performance of the named products. [1](https://www.gov.uk/government/news/uks-quantum-leap-tohelp-beat-diseasedeliver-high-paid-jobs-and-strengthen-national-security-as-first-country-in-the-world-to-roll-out-quantum) [2](https://www.gov.uk/government/publications/quantum-technology-roadmap-for-space/quantum-technology-roadmap-for-space)
+
+**Why global R&I matters:** Distinctive combined instrument mix targeting prototypes, domestic quantum-network supply chains and technical apprenticeships, moving R&I beyond foundational research toward industrial translation.
+
+**Main Radar comparison (not_in_main_radar):** Not identified in main Radar: an actionable October 2026 UK industrial quantum and workforce commitment. Compare with EU quantum industrialisation only as parallel strategic approaches; do not presume completed UK advantage.
+
+**Limitations:** Official plans and award descriptions provide evidence of commitments but not product deployment, measured impact or completion of apprentice targets; budget categories must not be double-counted against headline national multi-year package.
+
 
 ## EU and Vietnam deepen cooperation in science, technology and innovation
 

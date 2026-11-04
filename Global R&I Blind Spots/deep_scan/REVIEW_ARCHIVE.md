@@ -2,6 +2,114 @@
 
 All reviewed package items are retained here; only KEEP appears in VERIFIED_FINDINGS.md.
 
+## Digital architecture of information governance for education and research in Ukraine
+
+**REVIEW** — Ukraine / Innovation systems, infrastructure and knowledge transfer
+Package `gri-4c158a4e11269884a660951e`; 2026-11-04T09:58:48.237980+00:00.
+
+Source: https://doi.org/10.46299/j.isjea.20260504.07
+
+Independent operational evidence for the model and representative measurement of national data fragmentation is missing.
+
+## Governing the de-risking agenda: policy instrument mixes in Scandinavian research collaboration with China
+
+**DROP** — China / Research funding, institutions and talent
+Package `gri-4c158a4e11269884a660951e`; 2026-11-04T09:58:48.237980+00:00.
+
+Source: https://doi.org/10.1080/20004508.2026.2648883
+
+Country attribution fails the assigned China domestic research-institutions question. Duplicate document_key d940ce4b89c6375ba52a003f is also assigned under Norway (different country reading).
+
+## Governing the de-risking agenda: policy instrument mixes in Scandinavian research collaboration with China
+
+**KEEP** — Norway / Research funding, institutions and talent
+Package `gri-4c158a4e11269884a660951e`; 2026-11-04T09:58:48.237980+00:00.
+
+Source: https://doi.org/10.1080/20004508.2026.2648883
+
+Norway has a layered/negotiated research-security governance model balancing cooperation with China and risk mitigation. National guidelines, a China Round Table and specialised export-licensing body DEKSA coexist rather than imposing a single university rulebook.
+
+## Capacity-building workshops are broadening participation in biodiversity research funding
+
+**KEEP** — South Africa / Research funding, institutions and talent
+Package `gri-4c158a4e11269884a660951e`; 2026-11-04T09:58:48.237980+00:00.
+
+Source: https://www.nrf.ac.za/capacity-building-workshops-are-broadening-participation-in-biodiversity-research-funding/
+
+Historically disadvantaged institution (HDI) share of applications to the biodiversity FBIP second funding call rose from 3.7% in 2025 to 19.1% in 2026, while all applications increased 27→47 (+74.1%). This is a measurable one-year participation shift, not a proven long-term trend or funding-success effect.
+
+## WIPO Global Innovation Index 2026 — US innovation inputs and output indicators
+
+**KEEP** — United States / Technology leadership and industrial capacity
+Package `gri-4c158a4e11269884a660951e`; 2026-11-04T09:58:48.237980+00:00.
+
+Source: https://www.wipo.int/en/web/global-innovation-index/2026/index
+
+The United States ranks 3rd in WIPO GII 2026 (also 3rd in 2024 and 2025), while its independently measured business R&D rose to US$765.1bn in 2024 (+6.0% from 2023). This supports a durable high-investment innovation system, not an improving overall GII rank.
+
+## No one builds alone: The geopolitics of AI chips
+
+**REVIEW** — India / Technology leadership and industrial capacity
+Package `gri-4c158a4e11269884a660951e`; 2026-11-04T09:58:48.237980+00:00.
+
+Source: https://doi.org/10.38105/spr.vf5ks0gobi
+
+Specific claimed structural improvement remains a proposal; independent evidence of operational shared PDKs/foundries and funded national rollout is missing.
+
+## FAPESP and NWO renew agreement and plan to expand scientific cooperation
+
+**KEEP** — Brazil / Research security and international cooperation
+Package `gri-4c158a4e11269884a660951e`; 2026-11-04T09:58:48.237980+00:00.
+
+Source: https://agencia.fapesp.br/fapesp-and-nwo-renew-agreement-and-plan-to-expand-scientific-cooperation/59496
+
+São Paulo’s FAPESP and the Netherlands’ NWO reported signing an extension on 26 October 2026 to maintain joint calls through 2028. The underlying bilateral co-funding mechanism is independently documented by NWO; planned international centres and a possible new 2028 memorandum are not yet executed.
+
+## Artificial Intelligence and Foreign Information Manipulation: Chinese and Russian approaches
+
+**KEEP** — Russia / Technology leadership and industrial capacity
+Package `gri-4c158a4e11269884a660951e`; 2026-11-04T09:58:48.237980+00:00.
+
+Source: https://www.hybridcoe.fi/wp-content/uploads/2026/03/Artificial-Intelligence-and-Foreign-Information-Manipulation-Hybrid-CoE-Paper-29.pdf
+
+Russia-linked influence operators are using commercially available generative-AI tools to lower production costs and scale workflows, while indigenous frontier AI capabilities remain comparatively constrained; observed adoption is not proof of AI-technology leadership.
+
+## Global Fusion Energy Trends — Report from the F4E Fusion Observatory: Funding • Performance • Research • Innovation — A comparative Analysis of China, EU, Japan, UK, and the USA
+
+**REVIEW** — United States / Technology leadership and industrial capacity
+Package `gri-4c158a4e11269884a660951e`; 2026-11-04T09:58:48.237980+00:00.
+
+Source: https://fusionforenergy.europa.eu/wp-content/uploads/2026/07/F4E_Observatory-Global_Fusion_Energy_Trends_1st_Edition.pdf
+
+Substantive assigned source was not actually opened; fails mandatory full/substantive-section evidence check against original report, so REVIEW despite plausible corroborated industry context.
+
+## The Fourth Dimension of Science Diplomacy
+
+**DROP** — Mexico / Research security and international cooperation
+Package `gri-4c158a4e11269884a660951e`; 2026-11-04T09:58:48.237980+00:00.
+
+Source: https://doi.org/10.56042/sd.v10i1.37423
+
+Country inference appears to have come from author affiliation, not article subject. Manifest 2026-01-01 bibliographic date inconsistent with Volume 10(1) July–September 2026.
+
+## 16 October 2026 UKRI backs quantum breakthroughs supported by training Innovate UK
+
+**KEEP** — United Kingdom / Technology leadership and industrial capacity
+Package `gri-4c158a4e11269884a660951e`; 2026-11-04T09:58:48.237980+00:00.
+
+Source: https://www.ukri.org/news/ukri-backs-quantum-breakthroughs-supported-by-training/
+
+The UK announced a £50m commercial quantum-use project package, a separate £20m quantum-network capability programme and an £8m QuEST-apprenticeship expansion; these are 2026 public commitments, NOT independently demonstrated deployed capabilities.
+
+## Between Weltoffenheit and securitisation: Germany’s partial securitisation of science policy towards the People’s Republic of China
+
+**DROP** — China / Research funding, institutions and talent
+Package `gri-4c158a4e11269884a660951e`; 2026-11-04T09:58:48.237980+00:00.
+
+Source: https://doi.org/10.1080/23745118.2026.2726796
+
+Misassigned to China as a national R&I change; study explicitly centres Germany’s policy. Regional mismatch is substantive, not a source-quality complaint.
+
 ## EU and Vietnam deepen cooperation in science, technology and innovation
 
 **KEEP** — Vietnam / Research security and international cooperation
